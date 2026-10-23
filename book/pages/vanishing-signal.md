@@ -9,7 +9,7 @@ Glorot and Bengio 2010).
 
 ## The gain of one layer
 
-Take one hidden layer of Graph of Life's brain ([Chapter 4](the-brain.md)):
+Take one hidden layer of Graph of Life's brain ([The brain](the-brain.md)):
 
 $$
 a = \sigma(W x + b), \qquad \sigma(z) = \frac{1}{1 + e^{-z}} .
@@ -56,7 +56,7 @@ something. It just computes nearly the same thing for every input.
 Selection can only favour a brain that reacts to its situation if its
 reactions differ enough to matter. Two candidates whose scores differ by a
 thousandth of a token's worth are, for every decision of
-[Chapter 3](one-iteration.md), the same candidate. A mutation
+[One iteration, step by step](one-iteration.md), the same candidate. A mutation
 that makes a brain attend to a neighbour's wealth has almost no effect to be
 selected for. Only mutations that move what the brain does *whatever it sees*
 have any.
@@ -75,8 +75,8 @@ three remedies:
   √(2/*k*) for rectifiers (He et al. 2015), and for sigmoids about four times
   what suits tanh, since the sigmoid's slope is a quarter of tanh's.
 
-[Chapter 19](what-the-brains-are-like.md) measures the gain of
-Graph of Life's brains. Chapter 53 (planned, see [the contents](../README.md))
+[What the brains are like](what-the-brains-are-like.md) measures the gain of
+Graph of Life's brains. *How big should a brain be?* (planned, see [the contents](../README.md))
 is to try the remedies.
 
 ## References

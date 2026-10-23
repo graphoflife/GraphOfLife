@@ -4,7 +4,7 @@ For every candidate it looks at — itself and each neighbour — a brain
 produces one column of **45 numbers** (in the baseline). Each group of rows
 has one job. This note lists them, rows counted from 0 as in the code, and
 says how each is used. The decisions themselves are explained in
-[Chapter 3](one-iteration.md).
+[One iteration, step by step](one-iteration.md).
 
 ## The outputs
 
@@ -37,13 +37,13 @@ decisions are about one candidate each and use that candidate's column.
 The hidden layers pass their sums through the sigmoid function, but the last
 layer does not: an output can be any real number, positive or negative. Only
 the message rows are squashed afterwards, by tanh, so a message is always 30
-numbers between −1 and 1. See [Chapter 4](the-brain.md).
+numbers between −1 and 1. See [The brain](the-brain.md).
 
 ## When some mechanics are off
 
 The layout shrinks with the rules: without revolutions there are no rows
 9–10, without handovers no rows 11–14, and the rows after them move up. In
-every run of this book both are on and the layout is the one above.
+every run of this notebook both are on and the layout is the one above.
 
 <!-- turns -->
 ---

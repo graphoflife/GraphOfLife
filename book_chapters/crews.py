@@ -1,5 +1,5 @@
 """
-Chapter 102 · A crew of raiders (Experiment 33).
+A crew of raiders (Experiment 33).
 
 Crew raiders, which pool their stakes as revolution tokens on the weakest
 stranger next door, planted as 5% of B2's five worlds played on at 2,000,
@@ -29,7 +29,7 @@ T = 300
 RUNS = ("Experiment 33's 135 invasions (`python3 gol_lab.py run E33`): B2's worlds of Experiment 16 played on "
         "to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … "
         "`s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the crew's rule, "
-        "the lone raider's (Chapter 51's) or frozen copies of one patch member's brain (the control); the lone "
+        "the lone raider's ([Strategies written by hand](strategies-written-by-hand.md)'s) or frozen copies of one patch member's brain (the control); the lone "
         "raiders' and the controls' plantings are Experiment 30's own.")
 MOB_RUNS = ("No world is played: the worlds and places of Experiment 33's crews, read as they were planted — B2's "
             "worlds played on (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`) at iterations 2,000, 5,000 and "

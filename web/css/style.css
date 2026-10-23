@@ -258,6 +258,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   border-radius: var(--radius);
   cursor: pointer;
   font-size: 13px;
+  white-space: nowrap;
 }
 .tab:hover { color: var(--text); border-color: var(--border); background: var(--panel-2); }
 /* The tab you are on, said plainly. A border the same grey as every other

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, the life of a world: Chapters 10 to 14 — a world's life, its youth,
+the study of the baseline, the life of a world: Pages 10 to 14 — a world's life, its youth,
 births and deaths, and how much the seed decides.
 """
 from __future__ import annotations
@@ -17,7 +17,7 @@ from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GRE
                                   VIOLET, WORLDS as W, YELLOW, ceiling, count_word, listed)
 
 # ---------------------------------------------------------------------------
-# Chapter 10 · A world's life
+# A world's life
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -156,7 +156,7 @@ def life(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 11 · The first hundred iterations
+# The first hundred iterations
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -314,7 +314,7 @@ def youth(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 12 · Births, deaths and ages
+# Births, deaths and ages
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -341,7 +341,7 @@ def births(ch: F.Chapter) -> None:
         series=out,
         caption="Each line is the median over the worlds, in stretches of 25 iterations, of a "
                 "count divided by the agents present when the phase began, times 100. The first "
-                "iterations run far above the top of the axis (Chapter 11).",
+                "iterations run far above the top of the axis ([The first hundred iterations](the-first-hundred-iterations.md)).",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["For every row, divide the count (`births` or `orphaned` in rows with "
                        "`phase` = 1; `starved` or `orphaned` in rows with `phase` = 2) by the "
@@ -408,7 +408,7 @@ def births(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 14 · How much does the seed decide?
+# How much does the seed decide?
 # ---------------------------------------------------------------------------
 
 SEED_STATS = [("nodes", 2, "agents"), ("edges", 2, "connections"), (("births"), 1, "births"),

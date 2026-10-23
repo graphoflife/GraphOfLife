@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 71 · Flow modules: groups that outlast their members, measured in every
+Flow modules: groups that outlast their members, measured in every
 world by the page's own arithmetic (web/js/flowmodules.js through
 tools/flowmodules_cli.js).
 

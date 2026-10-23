@@ -1,6 +1,6 @@
 # The search's best world, in new seeds
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - The random search over settings found one world that met every mark,
 >   with agents more diverse than any other world's. Was it the settings, or
 >   the luck of one draw?
@@ -15,7 +15,7 @@ and kept the values that did not make worlds worse
 (`research/oee/search.md`). In its second round one world stood out,
 `Z/r2-25`:
 - At iteration 1,000 it met every mark of the health bar.
-- Its agents were more diverse than in any world the book had measured, a
+- Its agents were more diverse than in any world the notebook had measured, a
   diversity score of 0.90 against 0.49 for B2's median world.
 - It was a space, twice as wide as its random twin.
 
@@ -30,7 +30,7 @@ It plays with:
 - a walk to find strangers.
 
 The best of 63 draws is also the luckiest. In
-[Chapter 93](five-more-seeds-for-the-rules-that-held.md), rules whose
+[Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md), rules whose
 single world had held over 10,000 iterations held no more often than mixing
 alone when they were given new seeds. Only new seeds can tell a
 configuration from a lucky draw.
@@ -40,10 +40,10 @@ play them until now. It now hands a run that asks for them to the prototype
 itself, frozen beside the engine (`gol_pilot.py`), so the world of seed 2025
 should be the pilot's again, game for game.
 
-Read by Meta X's clarified test
-([Meta X](healthy-and-rich.md)), the world is more even than
+Read by [Healthy and rich](healthy-and-rich.md)'s clarified test
+([Healthy and rich](healthy-and-rich.md)), the world is more even than
 any of B2's, with a Gini of 0.44 against 0.49 and more. So even if the
-configuration holds, it is not yet the author's picture. This chapter
+configuration holds, it is not yet the author's picture. This page
 reports how even each new world is.
 
 ## The thesis
@@ -52,23 +52,25 @@ reports how even each new world is.
 > [!quote] The thesis of Experiment 24, written down before any of its runs existed
 > **The claim.** The random search's best world was a configuration, not a winner's curse. Played from five new seeds, at least three of the five worlds meet every mark of the health bar at iteration 1,000, have a diversity score above that of B2's median world (0.49) and are spaces: a typical agent reaches half the world in at least 1.5 times the steps its random twin needs. And the lab plays the search's own world, seed 2025, as the pilot did: its agents and links after every game match the pilot's to iteration 1,000.
 >
-> **Why it would be so.** In the search's second round, the world of Z/r2-25 met every mark at iteration 1,000 with a diversity score of 0.90 and was twice as wide as its random twin: the most promising of 63 worlds whose every setting was drawn at random. It plays with brains that can grow, a lottery for each node, stakes pooled by genotype, an input that tells an agent where its brain came from, no mending, every unused link lapsing, no old age, gifts and a walk to find strangers. The best of 63 draws is also the luckiest, and in Chapter 93 rules whose single world held did not hold in new seeds; only new seeds can tell. The lab now plays the pilots' rules with the prototype itself, frozen beside the engine, so its world of seed 2025 should be the pilot's again. Read by Meta X's clarified test the world is more even than any of B2's (a Gini of 0.44 against 0.49 and more): even a configuration that holds would not yet be the author's picture, and the chapter says how even each new world is.
+> **Why it would be so.** In the search's second round, the world of Z/r2-25 met every mark at iteration 1,000 with a diversity score of 0.90 and was twice as wide as its random twin: the most promising of 63 worlds whose every setting was drawn at random. It plays with brains that can grow, a lottery for each node, stakes pooled by genotype, an input that tells an agent where its brain came from, no mending, every unused link lapsing, no old age, gifts and a walk to find strangers. The best of 63 draws is also the luckiest, and in Chapter [93](five-more-seeds-for-the-rules-that-held.md) rules whose single world held did not hold in new seeds; only new seeds can tell. The lab now plays the pilots' rules with the prototype itself, frozen beside the engine, so its world of seed 2025 should be the pilot's again. Read by [Meta X](healthy-and-rich.md)'s clarified test the world is more even than any of B2's (a Gini of 0.44 against 0.49 and more): even a configuration that holds would not yet be the author's picture, and the chapter says how even each new world is.
 >
 > **It holds if:** At least three of the five new worlds (seeds 1 to 5) pass at iteration 1,000 — every mark, a diversity score above 0.49, a typical distance at least 1.5 times the twin's — and the world of seed 2025 matches the pilot's agents and links after every game to iteration 1,000.
 >
 > **It fails if:** Two or fewer of the five pass, or the world of seed 2025 differs from the pilot's.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The runs
 
 <!-- runs E24 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **6 runs.** Every condition below is run once for each of its seeds, for 2,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **the search's configuration** — changes `hidden_layers` = 32, `random_input_amount` = 0, `message_prepass` = on, `allow_gifting` = on, `prune_after` = reproduction, `inactive_window` = iteration, `incumbency` = 1.0, `birth_links` = 0, `mend_on_death` = off, `prune_needs` = 0, `keep_home` = 0.0, `max_age` = 0, `link_search` = walk, `mutation_probability` = 0.4, `extinction_threshold` = 0, `proto` = came_from, contest = lottery, grow, pool = genotype; 10,000 tokens; seeds 1 to 5. Runs `B2-10000-d2b0d2-s001` … `B2-10000-d2b0d2-s005`.
 > - **the search's own world** — changes `hidden_layers` = 32, `random_input_amount` = 0, `message_prepass` = on, `allow_gifting` = on, `prune_after` = reproduction, `inactive_window` = iteration, `incumbency` = 1.0, `birth_links` = 0, `mend_on_death` = off, `prune_needs` = 0, `keep_home` = 0.0, `max_age` = 0, `link_search` = walk, `mutation_probability` = 0.4, `extinction_threshold` = 0, `proto` = came_from, contest = lottery, grow, pool = genotype; 10,000 tokens; seeds 2025. Runs `B2-10000-d2b0d2-s2025` … `B2-10000-d2b0d2-s2025`.
 >
-> To make these runs again: `python3 gol_lab.py run E24`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E24`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 >
 > Runs that ask for the pilots' rules are played by the research prototype, frozen beside the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics every iteration (`series.jsonl`) and a whole world at every checkpoint.
 
@@ -149,7 +151,7 @@ been.
 **The new worlds are what the search's world was, except for its marks.**
 At iteration 1,000 every one of the five new worlds was:
 - **diverse,** with diversity scores of 0.80 to 0.89 against B2's 0.49,
-  among the highest the book has measured;
+  among the highest the notebook has measured;
 - **a wide space,** 2.6 to 2.75 times as wide as its random twin;
 - **rich,** with 11 to 17 tokens per agent.
 
@@ -186,15 +188,15 @@ game.
 - **These settings give exactly what Experiment 19's world lacks.** The
   world of mixing with parents as mates is healthy, diverse and uneven, but
   folded. This one is a wide space, but thin and even. Among its settings,
-  every unused link lapsing is the one Meta XII found to make worlds rich,
+  every unused link lapsing is the one [Rules in company](rules-in-company.md) found to make worlds rich,
   about two-dimensional and short of marks
-  ([Meta XII](rules-in-company.md)). That is where the two
-  configurations meet, and where [Chapter 100](room-for-the-steadiest-world.md)
+  ([Rules in company](rules-in-company.md)). That is where the two
+  configurations meet, and where [Room for the steadiest world](room-for-the-steadiest-world.md)
   looks for room.
 - **The lab now plays the pilots' rules.** Rules that so far lived only in
   the prototype — a lottery for each node, stakes pooled by genotype,
   brains that grow, an input of where a brain came from — can be put to
-  the test like any other, beside the chapters that ask for them.
+  the test like any other, beside the pages that ask for them.
 
 
 <!-- turns -->

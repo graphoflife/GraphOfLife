@@ -138,7 +138,7 @@
     "tokens",
     "iterations",
     "runs on disk",
-    "chapter"
+    "page"
    ],
    "rows": [
     [
@@ -152,7 +152,7 @@
      "12",
      [
       {
-       "text": "8",
+       "text": "Is a run reproducible?",
        "href": "pages/is-a-run-reproducible.md"
       }
      ]
@@ -168,7 +168,7 @@
      "30",
      [
       {
-       "text": "10",
+       "text": "A world's life",
        "href": "pages/a-worlds-life.md"
       }
      ]
@@ -184,7 +184,7 @@
      "30",
      [
       {
-       "text": "14",
+       "text": "How much does the seed decide?",
        "href": "pages/how-much-does-the-seed-decide.md"
       }
      ]
@@ -200,7 +200,7 @@
      "30",
      [
       {
-       "text": "15",
+       "text": "Where do the tokens go?",
        "href": "pages/where-do-the-tokens-go.md"
       }
      ]
@@ -216,7 +216,7 @@
      "30",
      [
       {
-       "text": "17",
+       "text": "What shape does the network take?",
        "href": "pages/what-shape-does-the-network-take.md"
       }
      ]
@@ -232,7 +232,7 @@
      "30",
      [
       {
-       "text": "18",
+       "text": "Genotypes and lineages",
        "href": "pages/genotypes-and-lineages.md"
       }
      ]
@@ -248,7 +248,7 @@
      "90",
      [
       {
-       "text": "41",
+       "text": "Do the brains matter?",
        "href": "pages/do-the-brains-matter.md"
       }
      ]
@@ -264,7 +264,7 @@
      "42",
      [
       {
-       "text": "42",
+       "text": "How does a world's size follow its tokens?",
        "href": "pages/how-does-a-worlds-size-follow-its-tokens.md"
       }
      ]
@@ -280,7 +280,7 @@
      "50",
      [
       {
-       "text": "52",
+       "text": "How fast should brains change?",
        "href": "pages/how-fast-should-brains-change.md"
       }
      ]
@@ -296,7 +296,7 @@
      "30",
      [
       {
-       "text": "60",
+       "text": "Worlds of 100,000 tokens",
        "href": "pages/worlds-of-100000-tokens.md"
       }
      ]
@@ -312,7 +312,7 @@
      "10",
      [
       {
-       "text": "46",
+       "text": "How to tell a world that keeps evolving",
        "href": "pages/how-to-tell-a-world-that-keeps-evolving.md"
       }
      ]
@@ -328,7 +328,7 @@
      "30",
      [
       {
-       "text": "47",
+       "text": "Brains that see, and worlds that break",
        "href": "pages/brains-that-see-and-worlds-that-break.md"
       }
      ]
@@ -344,7 +344,7 @@
      "60",
      [
       {
-       "text": "48",
+       "text": "A world that cannot break",
        "href": "pages/a-world-that-cannot-break.md"
       }
      ]
@@ -360,7 +360,7 @@
      "60",
      [
       {
-       "text": "49",
+       "text": "Who dies, and why",
        "href": "pages/who-dies-and-why.md"
       }
      ]
@@ -376,7 +376,7 @@
      "20",
      [
       {
-       "text": "50",
+       "text": "Why evolution stops",
        "href": "pages/why-evolution-stops.md"
       }
      ]
@@ -392,7 +392,7 @@
      "10",
      [
       {
-       "text": "80",
+       "text": "Mixed at birth: ten long worlds",
        "href": "pages/mixed-at-birth-ten-long-worlds.md"
       }
      ]
@@ -408,7 +408,7 @@
      "5",
      [
       {
-       "text": "81",
+       "text": "Five mixed worlds, fifty thousand iterations",
        "href": "pages/five-mixed-worlds-fifty-thousand-iterations.md"
       }
      ]
@@ -424,7 +424,7 @@
      "10",
      [
       {
-       "text": "85",
+       "text": "Mixed at birth, with parents as mates",
        "href": "pages/mixed-at-birth-with-parents-as-mates.md"
       }
      ]
@@ -440,7 +440,7 @@
      "2",
      [
       {
-       "text": "92",
+       "text": "The candidates, played on",
        "href": "pages/the-candidates-played-on.md"
       }
      ]
@@ -456,7 +456,7 @@
      "20",
      [
       {
-       "text": "93",
+       "text": "Five more seeds for the rules that held",
        "href": "pages/five-more-seeds-for-the-rules-that-held.md"
       }
      ]
@@ -472,12 +472,12 @@
     "tokens",
     "iterations",
     "status",
-    "chapter"
+    "page"
    ],
    "rows": [
     [
      "A3k",
-     "Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the book's worlds have at least 10,000 tokens since)",
+     "Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the notebook's worlds have at least 10,000 tokens since)",
      "4",
      "8",
      "3,000",
@@ -485,7 +485,7 @@
      "5 done, 3 stopped early",
      [
       {
-       "text": "56",
+       "text": "Alliances",
        "href": "pages/alliances.md"
       }
      ]
@@ -500,7 +500,7 @@
      "done",
      [
       {
-       "text": "56",
+       "text": "Alliances",
        "href": "pages/alliances.md"
       }
      ]
@@ -515,7 +515,7 @@
      "done",
      [
       {
-       "text": "56",
+       "text": "Alliances",
        "href": "pages/alliances.md"
       }
      ]
@@ -530,11 +530,11 @@
      "done",
      [
       {
-       "text": "56",
+       "text": "Alliances",
        "href": "pages/alliances.md"
       },
       {
-       "text": "57",
+       "text": "Rules without numbers",
        "href": "pages/rules-without-numbers.md"
       }
      ]
@@ -549,11 +549,11 @@
      "done",
      [
       {
-       "text": "54",
+       "text": "The switches the world was built with",
        "href": "pages/the-switches-the-world-was-built-with.md"
       },
       {
-       "text": "55",
+       "text": "Another game",
        "href": "pages/another-game.md"
       }
      ]
@@ -568,11 +568,11 @@
      "10 done, 3 stopped early",
      [
       {
-       "text": "50",
+       "text": "Why evolution stops",
        "href": "pages/why-evolution-stops.md"
       },
       {
-       "text": "69",
+       "text": "A hundred thousand iterations",
        "href": "pages/a-hundred-thousand-iterations.md"
       }
      ]
@@ -587,11 +587,11 @@
      "done",
      [
       {
-       "text": "57",
+       "text": "Rules without numbers",
        "href": "pages/rules-without-numbers.md"
       },
       {
-       "text": "58",
+       "text": "Gliders, and who helps whom",
        "href": "pages/gliders-and-who-helps-whom.md"
       }
      ]
@@ -606,7 +606,7 @@
      "done",
      [
       {
-       "text": "78",
+       "text": "Brains mixed at birth, units that cost, an eye for raids on kin",
        "href": "pages/mixed-brains-costly-units.md"
       }
      ]
@@ -621,7 +621,7 @@
      "done",
      [
       {
-       "text": "73",
+       "text": "Who inherits?",
        "href": "pages/who-inherits.md"
       }
      ]
@@ -636,7 +636,7 @@
      "done",
      [
       {
-       "text": "90",
+       "text": "Gifts, with every other rule",
        "href": "pages/gifts-with-every-other-rule.md"
       }
      ]
@@ -651,7 +651,7 @@
      "done",
      [
       {
-       "text": "86",
+       "text": "Eight switches at once",
        "href": "pages/eight-switches-at-once.md"
       }
      ]
@@ -666,7 +666,7 @@
      "done",
      [
       {
-       "text": "86",
+       "text": "Eight switches at once",
        "href": "pages/eight-switches-at-once.md"
       }
      ]
@@ -681,7 +681,7 @@
      "done",
      [
       {
-       "text": "88",
+       "text": "Revolutions, with every other rule",
        "href": "pages/revolutions-with-every-other-rule.md"
       }
      ]
@@ -696,7 +696,7 @@
      "done",
      [
       {
-       "text": "89",
+       "text": "Handover, with every other rule",
        "href": "pages/handover-with-every-other-rule.md"
       }
      ]
@@ -711,7 +711,7 @@
      "done",
      [
       {
-       "text": "82",
+       "text": "Brains mixed at birth, with every other rule",
        "href": "pages/mixing-with-every-other-rule.md"
       }
      ]
@@ -726,14 +726,14 @@
      "done",
      [
       {
-       "text": "83",
+       "text": "Links to strangers",
        "href": "pages/links-to-strangers.md"
       }
      ]
     ],
     [
      "Z",
-     "Settings drawn at random from every value the book has used, the values that make worlds worse dropped round after round (research/oee/search.md)",
+     "Settings drawn at random from every value the notebook has used, the values that make worlds worse dropped round after round (research/oee/search.md)",
      "64",
      "64",
      "10,000",
@@ -751,11 +751,11 @@
      "23 done, 2 stopped early",
      [
       {
-       "text": "79",
+       "text": "Healthy and rich",
        "href": "pages/healthy-and-rich.md"
       },
       {
-       "text": "92",
+       "text": "The candidates, played on",
        "href": "pages/the-candidates-played-on.md"
       }
      ]
@@ -770,7 +770,7 @@
      "done",
      [
       {
-       "text": "80",
+       "text": "Mixed at birth: ten long worlds",
        "href": "pages/mixed-at-birth-ten-long-worlds.md"
       }
      ]
@@ -785,11 +785,11 @@
      "24 done, 2 queued, 2 stopped early",
      [
       {
-       "text": "84",
+       "text": "What holds a world's size",
        "href": "pages/what-holds-a-worlds-size.md"
       },
       {
-       "text": "85",
+       "text": "Mixed at birth, with parents as mates",
        "href": "pages/mixed-at-birth-with-parents-as-mates.md"
       }
      ]
@@ -804,7 +804,7 @@
      "done",
      [
       {
-       "text": "87",
+       "text": "What folds a world",
        "href": "pages/what-folds-a-world.md"
       }
      ]
@@ -819,7 +819,7 @@
      "done",
      [
       {
-       "text": "87",
+       "text": "What folds a world",
        "href": "pages/what-folds-a-world.md"
       }
      ]
@@ -2344,7 +2344,7 @@
      "Z",
      "every world its own",
      "B2",
-     "each world its settings drawn at random from the values the book has used (research/oee/search.md)",
+     "each world its settings drawn at random from the values the notebook has used (research/oee/search.md)",
      "1001 to 2032",
      "1,000"
     ],

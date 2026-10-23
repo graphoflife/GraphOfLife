@@ -1,23 +1,23 @@
-# Meta XII · Rules in company
+# Rules in company
 
-> [!question] Questions of this chapter
-> - Part V threw the book's rules into B2 one at a time. What does a rule do
+> [!question] Questions of this page
+> - Most experiments threw the notebook's rules into B2 one at a time. What does a rule do
 >   when other rules are thrown with it?
 > - Which rules matter whatever their company, and which only alone?
 > - Does any combination come nearer to a world that keeps evolving?
 
-Most chapters of Part V asked what one rule does to B2. In October 2026 the
+Most experiments on B2 asked what one rule does to it. In October 2026 the
 author asked for the rules in combination, and six pilot batches answered:
 four played one rule together with each of the others in turn — brains mixed
-at birth (batch Y, [Chapter 82](mixing-with-every-other-rule.md)), no
-revolutions (W, [Chapter 88](revolutions-with-every-other-rule.md)),
-handover (X, [Chapter 89](handover-with-every-other-rule.md)) and gifts
-(T, [Chapter 90](gifts-with-every-other-rule.md)) — and two threw eight
+at birth (batch Y, [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)), no
+revolutions (W, [Revolutions, with every other rule](revolutions-with-every-other-rule.md)),
+handover (X, [Handover, with every other rule](handover-with-every-other-rule.md)) and gifts
+(T, [Gifts, with every other rule](gifts-with-every-other-rule.md)) — and two threw eight
 rules at once, in sixteen worlds each, on B2 and on B1 (batches U and V,
-[Chapter 86](eight-switches-at-once.md)). Every world is a pilot of 10,000
+[Eight switches at once](eight-switches-at-once.md)). Every world is a pilot of 10,000
 tokens played for 1,000 iterations — the four batches of pairs in two seeds,
 the two of eight switches in one — and every one read the same way at
-iteration 1,000. This chapter gathers what they say together.
+iteration 1,000. This page gathers what they say together.
 
 ## Alone is not in company
 
@@ -26,16 +26,16 @@ what it does among other rules.**
 
 - **Mixing's riches.** Alone, brains mixed at birth take a third to a half of
   B2's agents out of poverty. Paired with one other rule they survive sixteen
-  of 23 (Chapter 82); among the sixteen worlds of batch U, with four rules on
+  of 23 ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)); among the sixteen worlds of batch U, with four rules on
   in most, they all but vanish — 0.07 off the share of the poor on average
-  (Chapter 86). Among the companions that undo them are the estate to the
+  ([Eight switches at once](eight-switches-at-once.md)). Among the companions that undo them are the estate to the
   newborns or the parents, which pays for births; handover (48 and 32 more
-  poor in every hundred, Chapter 89); and, a little, gifts (11 and 17,
-  Chapter 90). And one companion they need: without revolutions, mixed
-  worlds grow and grow poor (Chapter 88).
+  poor in every hundred, [Handover, with every other rule](handover-with-every-other-rule.md)); and, a little, gifts (11 and 17,
+  [Gifts, with every other rule](gifts-with-every-other-rule.md)). And one companion they need: without revolutions, mixed
+  worlds grow and grow poor ([Revolutions, with every other rule](revolutions-with-every-other-rule.md)).
 - **Gifts' speed.** Alone, gifts made B2's brains of 1,000 beat those of 500
   more clearly than in B2 itself; with another rule as well, no more than B2
-  does (Chapter 90).
+  does ([Gifts, with every other rule](gifts-with-every-other-rule.md)).
 - **Links that hold a token** take 0.29 and 0.33 off B2's share of the poor
   alone, and 0.06 among the sixteen; **every unused link lapsing** halves its
   fall in dimension; **no revolutions** on B1 does not do in company what it
@@ -43,7 +43,7 @@ what it does among other rules.**
 
 The reason is that rules act together. Batch U's chains of pairs — the
 effects of two rules acting jointly, which its sixteen worlds can measure in
-sums of four — are as large as most single rules' effects (Chapter 86). A
+sums of four — are as large as most single rules' effects ([Eight switches at once](eight-switches-at-once.md)). A
 rule measured alone tells what it does in B2; to know what it does, it has to
 be met in company.
 
@@ -60,18 +60,18 @@ times as common and hold the world small.
 
 **Rules that reshape the network do so everywhere.** Handover costs two marks
 of the health bar with nearly every companion, thinning the network into
-trees on single links, and unfolds it a little (Chapter 89). Every unused
+trees on single links, and unfolds it a little ([Handover, with every other rule](handover-with-every-other-rule.md)). Every unused
 link lapsing makes worlds rich, small and about two-dimensional, and costs
-marks too (Chapters 86 and 87).
+marks too ([Eight switches at once](eight-switches-at-once.md) and [What folds a world](what-folds-a-world.md)).
 
 **Rules that set a world's size set it in any company.** The estate of the
 dead paid to the newborns or the parents fills a world — about 1,000 agents
 more among the sixteen on B2, 1,400 on B1 — and makes it poorer and more
-alike, on both baselines, alone and in company (Chapters 73 and 86). Links
+alike, on both baselines, alone and in company ([Who inherits?](who-inherits.md) and [Eight switches at once](eight-switches-at-once.md)). Links
 that hold a token shrink it. Who mates sets it too: with only parents as
 mates, all ten mixed worlds of Experiment 19 settled at about 2,000 agents
-([Chapter 85](mixed-at-birth-with-parents-as-mates.md)). A world's size,
-Meta XI found, is set by how eagerly its agents breed; these are the rules
+([Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md)). A world's size,
+[What holds a world's size](what-holds-a-worlds-size.md) found, is set by how eagerly its agents breed; these are the rules
 that change that.
 
 ## Does evolution go on?
@@ -88,22 +88,22 @@ outright; none made it run away.
 **On B1, no combination starts it again.** Among the sixteen worlds of batch V
 the later brains won in six of the fourteen that lived, with a median of
 0.46 — as in B1 itself, whose brains of 1,000 held a median of 0.49 against
-those of 500 ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)).
+those of 500 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 No switch moved that beyond the wide spread of the chains of pairs — not
 even two of B2's own rules, brains that change only when copied and parents
-that keep their links (Chapter 86).
+that keep their links ([Eight switches at once](eight-switches-at-once.md)).
 
 ## Nearer the author's picture?
 
 The author's picture is a world that is a space of about three dimensions,
 whose network no single loss can cut, and whose agents are many-sided — not
-all of them holding one to three tokens ([Meta X](healthy-and-rich.md)).
+all of them holding one to three tokens ([Healthy and rich](healthy-and-rich.md)).
 None of these combinations is all of that. The best of the sixteen on B2 —
 no revolutions, no random inputs, links that hold a token and mixing — meets
 every mark of the health bar with a quarter of its agents poor and a
 diversity score of 0.68, but its network is folded: a typical agent reaches
 half the world in 1.19 times the steps its random twin needs, as in nearly
-every B2 world ([Chapter 87](what-folds-a-world.md)).
+every B2 world ([What folds a world](what-folds-a-world.md)).
 
 Read together at iteration 1,000, 161 of the 466 worlds measured then are
 spaces at least half again as wide as their random twins
@@ -142,7 +142,7 @@ waits its turn.
 > [!info] Added later (19 October 2026): too even, not too poor
 > The author's worry was a world whose agents hold their tokens too evenly —
 > almost everyone the same few — and the share at three tokens or fewer only
-> stood in for it ([Meta X](healthy-and-rich.md)). Read with the
+> stood in for it ([Healthy and rich](healthy-and-rich.md)). Read with the
 > [Gini coefficient](gini-coefficient.md) of the agents' tokens, the census turns round.
 > - **The spaces that "pay with poverty" hold their tokens unevenly.** Their
 >   median Gini is 0.45 with the estate paid to births, 0.58 without old age
@@ -159,7 +159,7 @@ waits its turn.
 > So room costs evenness only where links lapse. What the spaces of births,
 > no old age and handover still miss is diversity, or marks. At 10,000
 > iterations it is the small rich worlds that grew even
-> ([Chapter 92](the-candidates-played-on.md)), the second seed without
+> ([The candidates, played on](the-candidates-played-on.md)), the second seed without
 > random inputs among them (291 agents, 34 tokens per agent and a Gini of
 > 0.39 already at 1,000).
 
@@ -179,19 +179,19 @@ waits its turn.
   or cuts, and the mixed worlds that were spaces, healthy and half rich at
   iteration 1,000 did not stay so. When Experiment 19 took mixing's free mate
   away, every world lived to 20,000 iterations, at about 2,000 agents, six in
-  ten of them poor. What is still missing is the pull Meta XI asked for:
+  ten of them poor. What is still missing is the pull [What holds a world's size](what-holds-a-worlds-size.md) asked for:
   births that pay more when few are born and less when many are.
 
-**Related notes:** [Chapter 82 · Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
-[Chapter 86 · Eight switches at once](eight-switches-at-once.md) ·
-[Chapter 87 · What folds a world](what-folds-a-world.md) ·
-[Chapter 88 · Revolutions, with every other rule](revolutions-with-every-other-rule.md) ·
-[Chapter 89 · Handover, with every other rule](handover-with-every-other-rule.md) ·
-[Chapter 90 · Gifts, with every other rule](gifts-with-every-other-rule.md) ·
-[Meta X · Healthy and rich](healthy-and-rich.md) ·
-[Meta XI · What holds a world's size](what-holds-a-worlds-size.md) ·
-[Chapter 85 · Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) ·
-[Chapter 46 · How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
+**Related notes:** [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
+[Eight switches at once](eight-switches-at-once.md) ·
+[What folds a world](what-folds-a-world.md) ·
+[Revolutions, with every other rule](revolutions-with-every-other-rule.md) ·
+[Handover, with every other rule](handover-with-every-other-rule.md) ·
+[Gifts, with every other rule](gifts-with-every-other-rule.md) ·
+[Healthy and rich](healthy-and-rich.md) ·
+[What holds a world's size](what-holds-a-worlds-size.md) ·
+[Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) ·
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
 [Many switches in few worlds](fractional-factorial.md)
 
 <!-- turns -->

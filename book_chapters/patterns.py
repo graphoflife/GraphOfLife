@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 58 · Gliders, and who helps whom: the patterns in the record of play,
+Gliders, and who helps whom: the patterns in the record of play,
 and help as the rules define it.
 
 The worlds are the ten B2 worlds of Experiment 16 and the first ten B1 worlds
 of the baseline set, read over their recorded games 1,000 to 2,000, and pilot
-worlds with and without alliances (Chapter 56), whose games are recorded by
+worlds with and without alliances (Alliances), whose games are recorded by
 going on from a checkpoint for 200 iterations. The scripts of
 research/oee/checks compute everything and keep it in GraphOfLifeRuns/.pilots,
 one JSON file per check and set of worlds; this module draws it.
@@ -38,7 +38,7 @@ ENOUGH_PAIRS = 100
 LAB_RUNS = ("The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of the "
             "baseline set, `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every "
             "game with every agent's stakes; read are the games of iterations 1,000 to 2,000.")
-PILOT_RUNS = ("Pilot worlds of Chapter 56 (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and "
+PILOT_RUNS = ("Pilot worlds of [Alliances](alliances.md) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and "
               "`-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, "
               "`A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 "
               "iterations with every game recorded in the lab's form "

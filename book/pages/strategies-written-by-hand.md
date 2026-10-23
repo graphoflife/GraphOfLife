@@ -1,6 +1,6 @@
 # Strategies written by hand
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Is the play evolution found the best there is, or only the best it could
 >   reach?
 > - Can a strategy written by hand, for one agent or for a team, beat evolved
@@ -9,7 +9,7 @@
 
 ## Why ask
 
-[Chapter 50](why-evolution-stops.md) read the end of evolution as the end of
+[Why evolution stops](why-evolution-stops.md) read the end of evolution as the end of
 the game: a Colonel Blotto contest has a best way to play, to be
 unpredictable, and once evolution has found it there is nothing better left
 to find. That reading makes a prediction that can be tested without waiting
@@ -152,7 +152,7 @@ worlds out of ten, a plain rule took half or more of the world from brains
 that evolution had shaped for 2,000 iterations, and the residents' own brains
 did nothing of the kind from the same places. The evolved play is not the best
 there is. That answers the question of
-[Chapter 50](why-evolution-stops.md#what-the-probes-say-about-why): the game
+[Why evolution stops](why-evolution-stops.md#what-the-probes-say-about-why): the game
 had more to give, and evolution had not taken it. Whether the factory or the
 raider won depended on the world; the pipeline is no advantage in general.
 What the two share is what matters, and the next two tests take it apart.
@@ -211,11 +211,11 @@ valley evolution cannot cross. This is the old problem of the **green
 beard**, a gene that would have to make its bearers both show a sign and
 favour those who show it.
 
-**What would let evolution get there** is what the following chapters try: a
+**What would let evolution get there** is what the following pages try: a
 sense of one's own given for free, stakes that count together by lineage,
 families that carry a password of their own
-([Chapter 55](another-game.md)), and alliances, where knowing one's own is
-a decision two agents make together ([Chapter 56](alliances.md)). None of
+([Another game](another-game.md)), and alliances, where knowing one's own is
+a decision two agents make together ([Alliances](alliances.md)). None of
 them made evolution find the raiders' play, or go on improving.
 
 <!-- turns -->

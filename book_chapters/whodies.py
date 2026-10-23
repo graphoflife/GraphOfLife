@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 49 · Who dies, and why: what Experiment 15's sixty worlds did.
+Who dies, and why: what Experiment 15's sixty worlds did.
 
 The worlds through time (agents, births, the median agent's tokens: bands of the
 ten worlds of each condition that lived, from their stats); the measure the

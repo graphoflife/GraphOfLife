@@ -1,6 +1,6 @@
 # Another game
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Is it the Colonel Blotto contest that makes evolution stop, or would any
 >   contest for nodes?
 > - What changes when chance decides who takes a node, so that being
@@ -10,7 +10,7 @@
 
 ## Why ask
 
-[Chapter 50](why-evolution-stops.md) blamed the contest. A node goes to
+[Why evolution stops](why-evolution-stops.md) blamed the contest. A node goes to
 whoever stakes most on it, which makes the agents' game a Colonel Blotto game,
 and the best play in such a game is to be unpredictable. Evolution finds that
 quickly, through the random inputs every brain reads, and then nothing better
@@ -18,8 +18,8 @@ is left to select.
 
 If that is the reason, changing the contest should change the outcome, and
 two changes are worth making first. Neither adds a number to the rules, which
-since this chapter's predecessors is a rule of its own
-([Chapter 57](rules-without-numbers.md)).
+since this page's predecessors is a rule of its own
+([Rules without numbers](rules-without-numbers.md)).
 
 **A contest without a mixed answer.** Let chance decide instead of the largest
 stake. In a **lottery contest** every staked token is a ticket: the node goes
@@ -42,10 +42,10 @@ a won node, and changes with probability 0.2 when it is. So a lineage lives as
 a patch of identical agents with mutants at its edges. With stakes pooled by
 genotype, such a patch is one body: a stake on a clone's node defends it, and
 the clones' stakes on a stranger's node are added together. This is the rule
-the factories of [Chapter 51](strategies-written-by-hand.md) would need,
+the factories of [Strategies written by hand](strategies-written-by-hand.md) would need,
 since in the engine as it is a stake on a teammate's node counts against the
 teammate. It is also kin pooling at its narrowest
-([Chapter 56](alliances.md)): no alliance to agree, and no threshold of
+([Alliances](alliances.md)): no alliance to agree, and no threshold of
 relatedness to choose.
 
 ## The worlds
@@ -54,7 +54,7 @@ Pilots in the engine's own code (`--proto engine=true`, see
 [Pilot worlds](pilot-worlds.md)): B2 at 10,000 tokens, revolutions
 off, 1,000 iterations, two seeds, with a whole world kept every 100
 iterations. The control is B2 without revolutions from the pilots of
-[Chapter 54](the-switches-the-world-was-built-with.md). Revolutions are off
+[The switches the world was built with](the-switches-the-world-was-built-with.md). Revolutions are off
 in all three because a revolution is itself a rule about who takes a node, and
 would mix with the rule under test.
 
@@ -65,7 +65,7 @@ would mix with the rule under test.
 - **kin sense** (`kin_sense=true`): the input row alone, with no pooling. An
   agent can tell its clones, and nothing in the rules makes it matter. This is
   the free version of the raiders' password in
-  [Chapter 51](strategies-written-by-hand.md).
+  [Strategies written by hand](strategies-written-by-hand.md).
 
 ## What the contests did
 
@@ -128,7 +128,7 @@ And the dice stayed. Redrawing the random inputs of brains evolved under the
 lottery changed 48 to 67% of their divisions of stakes. Under Blotto it was
 59%, in the same world without revolutions. Randomising is worthless under a
 lottery, and the brains roll the dice all the same. So the lottery confirms
-one half of [Chapter 50](why-evolution-stops.md) and refutes the other.
+one half of [Why evolution stops](why-evolution-stops.md) and refutes the other.
 Evolution stops under a lottery too, sooner and lower, but not because brains
 learn to roll dice: they roll them anyway.
 
@@ -152,7 +152,7 @@ not better.
 
 **A sense of one's clones made no groups.** With the kin sense alone, groups
 of clones stayed at 3, as under Blotto. In one world the brains improved
-slowly to the end, the only steady climb in this chapter. Its steps were 0.70,
+slowly to the end, the only steady climb in this page. Its steps were 0.70,
 0.57, 0.54 and 0.53, and the brains of iteration 1,000 held 0.67 against those
 of iteration 100, against 0.54 and 0.55 under Blotto. In the other world they
 stopped as under Blotto, with steps of 0.69, 0.55, 0.48 and 0.50. The brains
@@ -161,7 +161,7 @@ to 16% of their divisions, less than it changed the founders' (26%).
 
 ## A password and a crowd, for free
 
-The raiders of [Chapter 51](strategies-written-by-hand.md) needed a
+The raiders of [Strategies written by hand](strategies-written-by-hand.md) needed a
 password and a crowd that knew it. A sense of one's clones gives the password,
 but clones seldom sit together, so it brings no crowd. The last pilots give
 both. Every brain carries a **family tag**. A copy keeps its parent's tag; a
@@ -188,18 +188,18 @@ than one alliance holding the world.
 But the brains did not keep improving. Iteration 1,000 against 500 scored
 0.48 and 0.54 with the family sense, and 0.43 and 0.52 pooled by family. The
 steps after iteration 200 were 0.43 to 0.54. A password and a crowd for free
-were not enough. The raiders of [Chapter 51](strategies-written-by-hand.md) also had their play written for
+were not enough. The raiders of [Strategies written by hand](strategies-written-by-hand.md) also had their play written for
 them, and that is the part evolution would still have to find.
 
 ## What it teaches
 
 > [!warning] Added later: these contests were 20 iterations long
-> Every tournament in this chapter was played with contests of 20 iterations.
+> Every tournament in this page was played with contests of 20 iterations.
 > In B2's worlds such contests miss what pays off over an agent's life of 100
 > iterations: in contests of 100 the brains of iteration 2,000 beat those of
 > 500 (0.73) where in contests of 20 they tied
-> ([Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
-> this chapter says that evolution stops, read: it stops *as far as a short
+> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
 > The longer contests have since been played, 100 iterations each, once in
@@ -227,12 +227,12 @@ the brains have found the one unbeatable way to play.
 clones gather into bodies two to three times larger, which keep growing
 slowly in one world. But a body of clones whose members do not divide the
 work among themselves is only a crowd. The factory of
-[Chapter 51](strategies-written-by-hand.md) is what an organism would be:
+[Strategies written by hand](strategies-written-by-hand.md) is what an organism would be:
 the frontier fights, the inside feeds it. Under pooling the inside's tokens
 already defend the frontier, yet nothing better evolved.
 
 **A password and a crowd given for free are not enough.** The raiders of
-[Chapter 51](strategies-written-by-hand.md) won with a password and a crowd that already used it. Given the
+[Strategies written by hand](strategies-written-by-hand.md) won with a password and a crowd that already used it. Given the
 password as a sense of clones, evolving brains find no crowd to use it with:
 one copy in five is a new genotype, so clones seldom sit together. Given
 families large enough to be a crowd, they still did not find the raiders'
@@ -240,7 +240,7 @@ play, and stopped improving where the others did. What evolution cannot find
 is not the parts but the play itself. A slower rate of change makes larger
 families of clones too, eight agents strong at one copy in twenty changed,
 and finds no better play either
-([Chapter 52](how-fast-should-brains-change.md)).
+([How fast should brains change?](how-fast-should-brains-change.md)).
 
 <!-- turns -->
 ---

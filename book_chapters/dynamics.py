@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Part II, agents and connections over time: Chapter 21 — do the rich stay rich? —
-and Chapter 22 — how the network grows.
+the study of the baseline, agents and connections over time: Do the rich stay rich? — do the rich stay rich? —
+and How the network grows — how the network grows.
 
 Both follow single agents and single connections from frame to frame, so they read
 the frames themselves, at regular moments of every world's settled life, and keep
@@ -95,7 +95,7 @@ def mobility(run_id: str) -> Dict[str, Any]:
                     for k, v in top.items()}}
 
 
-#: Coarser than the book's DEGREE_CLASSES: there are few of the richest hundredth to share out.
+#: Coarser than the notebook's DEGREE_CLASSES: there are few of the richest hundredth to share out.
 COARSE_DEGREE_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 9, "3–9"), (10, 49, "10–49"),
                                 (50, 10 ** 9, "50+"))
 
@@ -236,11 +236,11 @@ def rich(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 22 · How the network grows
+# How the network grows
 # ---------------------------------------------------------------------------
 
 GROWTH_STARTS = range(W.settled, W.until, 25)
-#: Finer than the book's DEGREE_CLASSES, for a rate fitted as a power of the connections.
+#: Finer than the notebook's DEGREE_CLASSES, for a rate fitted as a power of the connections.
 FINE_DEGREE_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 19, "10–19"),
                               (20, 49, "20–49"), (50, 99, "50–99"), (100, 10 ** 6, "100+"))
 

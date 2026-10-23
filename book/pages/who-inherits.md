@@ -1,6 +1,6 @@
 # Who inherits?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - When an agent dies, its tokens go back to the world. Does it matter who
 >   gets them?
 > - What happens if the estate goes to the poorest, to the children just
@@ -11,7 +11,7 @@
 When an agent dies — of age in B2, or in B1 when it loses its node or the
 piece of the world it is on is cut off — its tokens do not vanish: the
 cleanup pools them and shares them out among the survivors. Until now every
-world of this book shared them out **evenly**: every survivor had the same
+world of this notebook shared them out **evenly**: every survivor had the same
 chance at every token ([`redistribution`](settings.md#redistribution)
 = `uniform`). The author asked for other ways, and each has a reading of its
 own:
@@ -38,7 +38,7 @@ last two share the pool out evenly, as before.
 ## The worlds
 
 Each rule was played in pilot worlds of 10,000 tokens for 2,000 iterations,
-two seeds each (batch R), on both of the book's baselines: B2, the world that
+two seeds each (batch R), on both of the notebook's baselines: B2, the world that
 cannot break, with Experiment 16's settings, and B1, where worlds break and
 cut-off pieces are culled. The controls are the same settings and seeds with
 the estate shared evenly: for B2 the pilot worlds `P/B2-s1` and `-s2` (the
@@ -133,7 +133,7 @@ almost as fast as they come.
 <!-- /figure -->
 
 Lifetime contests (T = 100, as in
-[Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on)): the
+[Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)): the
 brains of a later moment against those of an earlier one, once in each
 moment's world.
 
@@ -145,7 +145,7 @@ moment's world.
   later brains take 37% to 57% — no better, at both steps, in all four worlds.
 - **B1's worlds tie or swing**, with the estate shared any way: from 13% to
   88% for one world and one step. B1 stops learning after its first hundred
-  iterations ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)),
+  iterations ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)),
   and a contest of a stopped world is a coin toss.
 
 Why should evolution stop in B2 when the estate goes to the newborns or the
@@ -158,7 +158,7 @@ what its brain does, so the brains that spread are not the better ones.
 ## Healthy, and diverse?
 
 Each world at iteration 2,000, read as
-[Meta X](healthy-and-rich.md) reads every world (16 October
+[Healthy and rich](healthy-and-rich.md) reads every world (16 October
 2026):
 
 | world | agents | marks of the health bar (of 7) | dimension | agents with 3 tokens or fewer | diversity score |
@@ -181,9 +181,9 @@ Each world at iteration 2,000, read as
 > 2,000 it holds 2,351 agents and meets 4 marks, at a dimension of 3.20, with
 > 58% poor and a score of 0.60. The table now reads every world from one file
 > (`research/atlas/at.py --at 2000`); three diversity scores moved by 0.01, as
-> Meta X's set of worlds that ranks them had grown, one share was rounded the
+> [Healthy and rich](healthy-and-rich.md)'s set of worlds that ranks them had grown, one share was rounded the
 > wrong way (70.496% is 70%, not 71%), and B1's controls and the fourth rule
-> were added. Nothing the chapter concludes changes.
+> were added. Nothing the page concludes changes.
 
 The B2 worlds whose estate goes to the newborns or the parents meet every
 mark, at a dimension well under 4 although they hold more than 5,000 agents —
@@ -209,7 +209,7 @@ parents filled the world because they reach agents the moment they breed; a
 dead agent's children are of every age, and the estate comes to them whether
 or not they breed. Their parents are 26 iterations old at a birth (a median),
 as in B2, against two or three where the estate goes to the newborns or the
-parents ([Chapter 87](what-folds-a-world.md#a-world-through-its-life)).
+parents ([What folds a world](what-folds-a-world.md#a-world-through-its-life)).
 
 **In B1 the worlds grow larger and younger, less than with the safety net.**
 1,800 and 1,300 agents over iterations 1,500 to 2,000 (the controls 1,370 and
@@ -248,17 +248,17 @@ other worlds tie or swing.
   worlds stay near B2's size and poverty and keep evolving at least as fast;
   B1's grow larger, poorer and younger than its controls.
 - **With mixing, too.** Batch M combines each rule with brains mixed at birth
-  ([Chapter 80](mixed-at-birth-ten-long-worlds.md)), to see whether one of
+  ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)), to see whether one of
   them holds a mixed world's drifting size. The estates to the newborns and to
   the parents fill those worlds as well — past 5,000 agents in the first seeds
   played.
 
 **Related notes:** [Every setting](settings.md#redistribution) ·
-[Chapter 49 · Who dies, and why](who-dies-and-why.md) ·
-[Chapter 80 · Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
-[Meta X · Healthy and rich](healthy-and-rich.md) ·
-[Chapter 50 · Why evolution stops](why-evolution-stops.md) ·
-[Chapter 87 · What folds a world](what-folds-a-world.md)
+[Who dies, and why](who-dies-and-why.md) ·
+[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
+[Healthy and rich](healthy-and-rich.md) ·
+[Why evolution stops](why-evolution-stops.md) ·
+[What folds a world](what-folds-a-world.md)
 
 <!-- turns -->
 ---

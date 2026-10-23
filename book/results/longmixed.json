@@ -100,7 +100,7 @@
   },
   "health": {
    "title": "Health and riches, every 500 iterations",
-   "caption": "Each world read as Meta X reads every world, from the whole worlds the lab kept every 500 iterations from 10,500 on, while it lived. Left: how many of the seven marks of Chapter 46's health bar it meets (the dots of each world are set a little apart so that they do not hide each other). Right: the share of its agents holding three tokens or fewer.",
+   "caption": "Each world read as [Healthy and rich](healthy-and-rich.md) reads every world, from the whole worlds the lab kept every 500 iterations from 10,500 on, while it lived. Left: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets (the dots of each world are set a little apart so that they do not hide each other). Right: the share of its agents holding three tokens or fewer.",
    "recipe": "**Runs.** The five runs of Experiment 18 \u2014 Experiment 17's worlds of seeds 2, 4, 5, 6 and 10 (B2 at 10,000 tokens with brains mixed at birth), played on by the lab from iteration 10,000 to 50,000 or until they died out (`python3 gol_lab.py run E18`); their first 10,000 iterations are Experiment 17's.\n\n**Data.** From Each run's `archive/world_<iteration>.npz` (`research/oee/checks/e17_health.py --seeds 2,4,5,6,10 --from 10500 --to 50000`).\n\n1. Read each whole world as `research/atlas/profile.py` reads every world.\n2. Count the marks it meets and its agents at three tokens or fewer.\n\n**To make it again:** `python3 book_figures.py longmixed`."
   },
   "collapse": {

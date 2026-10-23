@@ -1,7 +1,7 @@
 """
-Chapter 94 · What a brain can compute.
+What a brain can compute.
 
-Chapter 51's raider, set by hand into the weights of a B2 brain (research/oee/strategies/handset.py),
+Strategies written by hand's raider, set by hand into the weights of a B2 brain (research/oee/strategies/handset.py),
 checked against the raider's rule on every situation a planted raider met, and planted in its place.
 """
 from __future__ import annotations
@@ -20,7 +20,7 @@ WORLDS = ["B2-10000-s001", "B2-10000-s002", "B2-10000-s003"]
 REPLAYS = ["replay_s001.json", "replay_s002_s003_seed1.json", "replay_s002_s003_seed2.json"]
 RUNS = ("Three B2 worlds of Experiment 16, `B2-10000-s001` … `-s003`, as their archives keep them at "
         "iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`), each with a patch of raiders planted as in "
-        "[Chapter 51](strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on "
+        "[Strategies written by hand](strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on "
         "seed *s* and its nearest neighbours, step by step, until the patch holds 5% of the world).")
 
 
@@ -62,7 +62,7 @@ def computable(ch: F.Chapter) -> None:
               x={"label": "iterations after planting"}, y={"label": "share of the agents", "min": 0},
               series=series,
               caption=("One line per planting: three evolved worlds, two seeds each (seed 1 solid, seed 2 "
-                       "dashed). Orange: a patch of raiders that follow the rule of Chapter 51; blue: the same "
+                       "dashed). Orange: a patch of raiders that follow the rule of [Strategies written by hand](strategies-written-by-hand.md); blue: the same "
                        "patch given a B2 brain whose weights were set by hand to play the same rule. Neither "
                        "ever mutates. A line that stops early is a patch that died out."),
               recipe=recipe(RUNS, "the worlds the archives keep",

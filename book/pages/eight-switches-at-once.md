@@ -1,13 +1,13 @@
 # Eight switches at once
 
-> [!question] Questions of this chapter
-> - The book has thrown its switches into B2 one at a time. What does each
+> [!question] Questions of this page
+> - The notebook has thrown its switches into B2 one at a time. What does each
 >   do when several are thrown together?
 > - Which switches move a world's riches, its diversity, its size and its
 >   network the most?
 > - Do their effects add up, or does one switch change what another does?
 
-Most chapters of Part V threw one switch into B2 and compared the world with
+Most experiments on B2 threw one switch into it and compared the world with
 B2 itself. That tells what a switch does *in B2*. Whether it does the same
 once other switches are thrown as well — whether the effects add up — it
 cannot tell. The author asked for the existing settings tested in
@@ -19,24 +19,24 @@ meets in all four ways equally often
 
 ## The sixteen worlds
 
-The eight switches, each one the book has played alone in B2 before:
+The eight switches, each one the notebook has played alone in B2 before:
 
 | | switch | the setting | alone in |
 |---|---|---|---|
-| A | gifts | [`allow_gifting`](settings.md#allow_gifting), with unused links cut after reproduction once unused for an iteration | batch S ([Chapter 54](the-switches-the-world-was-built-with.md)) |
-| B | no revolutions | [`allow_revolutions`](settings.md#allow_revolutions) off | batch S (Chapter 54) |
-| C | every unused link lapses | [`prune_needs`](settings.md#prune_needs) = 0 | batch S (Chapter 54) |
-| D | no random inputs | [`random_input_amount`](settings.md#random_input_amount) = 0 | Experiment 16 ([Chapter 50](why-evolution-stops.md)) |
-| E | estates to the newborns | [`redistribution`](settings.md#redistribution) = `newborns` | [Chapter 73](who-inherits.md) |
-| F | links hold a token | a link costs a token to keep, with no cap on links | batch P ([Chapter 57](rules-without-numbers.md)) |
-| G | brains mixed at birth | a newborn's brain mixed from its parent's and a neighbour's | [Chapter 78](mixed-brains-costly-units.md) |
+| A | gifts | [`allow_gifting`](settings.md#allow_gifting), with unused links cut after reproduction once unused for an iteration | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
+| B | no revolutions | [`allow_revolutions`](settings.md#allow_revolutions) off | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
+| C | every unused link lapses | [`prune_needs`](settings.md#prune_needs) = 0 | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
+| D | no random inputs | [`random_input_amount`](settings.md#random_input_amount) = 0 | Experiment 16 ([Why evolution stops](why-evolution-stops.md)) |
+| E | estates to the newborns | [`redistribution`](settings.md#redistribution) = `newborns` | [Who inherits?](who-inherits.md) |
+| F | links hold a token | a link costs a token to keep, with no cap on links | batch P ([Rules without numbers](rules-without-numbers.md)) |
+| G | brains mixed at birth | a newborn's brain mixed from its parent's and a neighbour's | [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) |
 | H | handover | [`allow_handover`](settings.md#allow_handover): a parent may pass links to its newborn | batch T's control (`T/handover`) |
 
 A, B, C and D are on and off in all sixteen combinations; E, F, G and H are
 set from them (E = BCD, F = ACD, G = ABC, H = ABD — on where the product of
 the three is +1). Each world is B2 at 10,000 tokens, seed 1, played for
 1,000 iterations (pilot batch U), and read at iteration 1,000 as
-[Meta X](healthy-and-rich.md) reads every world. The world with
+[Healthy and rich](healthy-and-rich.md) reads every world. The world with
 no switch on is B2's own world of seed 1, game for game.
 
 | switches on | agents | agents with 3 tokens or fewer | diversity score | marks (of 7) | dimension | links per agent |
@@ -107,7 +107,7 @@ The grey dots of the same figure are the switches thrown alone into B2, two
 seeds each. For several switches the two disagree:
 
 - **Mixing** alone takes about 2,600 agents off B2's world and 0.36 to 0.49
-  off its share of poor agents ([Chapter 82](mixing-with-every-other-rule.md));
+  off its share of poor agents ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md));
   among the sixteen, it takes 40 agents *on* and 0.07 off. Its rise in
   diversity is the same alone (0.18 and 0.20) as among the sixteen (0.21),
   and so, nearly, is its gain in marks (one alone, 0.75 among the sixteen).
@@ -160,7 +160,7 @@ rule alone, say it for two of them:
   9% are poor; with mixing as well, 6% and 4%. A world already rich is not
   made richer.
 
-So mixing's riches, which Chapter 82 found surviving sixteen of 23 other
+So mixing's riches, which [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) found surviving sixteen of 23 other
 rules one at a time, mostly vanish among the sixteen, where most worlds have
 four switches on: of the eight mixed worlds, four hold the estate to the
 newborns, which cancels it, and four the lapse, which leaves nothing to add.
@@ -168,7 +168,7 @@ newborns, which cancels it, and four the lapse, which leaves nothing to add.
 ## Does evolution go on?
 
 > [!info] Added later (17 October 2026)
-> The contests below were played after this chapter was first published.
+> The contests below were played after this page was first published.
 
 <!-- figure eightswitches/evolution -->
 ![Do the brains of 1,000 beat those of 500?](../figures/eightswitches/evolution.svg)
@@ -199,7 +199,7 @@ act together here too: three chains add 0.11 to 0.14.
 
 > [!info] Added later (17 October 2026)
 > Diversity scores are now ranked among a frozen set of worlds
-> ([Meta X](healthy-and-rich.md#two-halves)), so that they stay put
+> ([Healthy and rich](healthy-and-rich.md#two-halves)), so that they stay put
 > as worlds are added; two figures above moved by 0.01 (no random inputs: 0.08
 > to 0.09; mixing alone: 0.17 and 0.19 to 0.18 and 0.20).
 
@@ -210,7 +210,7 @@ act together here too: three chains add 0.11 to 0.14.
 
 B1 is the world that can break: its revolutions take most of the nodes that
 change hands, a parent may pass links to its newborn, and pieces cut off are
-culled ([Chapter 54](the-switches-the-world-was-built-with.md)). Batch V
+culled ([The switches the world was built with](the-switches-the-world-was-built-with.md)). Batch V
 plays the same design on it, sixteen worlds of 10,000 tokens, seed 1, 1,000
 iterations, with eight switches that mean something there: A gifts, B no
 revolutions, C no handover, D no random inputs, E estates to the newborns,
@@ -246,10 +246,10 @@ can no longer be told apart from the rest — no fit can recover it.
 <!-- figure eightswitches/b1effects -->
 ![The same eight switches on B1](../figures/eightswitches/b1effects.svg)
 
-**The same eight switches on B1.** Orange: each switch's main effect among the worlds of batch V that lived to iteration 1,000 (14 of 16; V-AFGH-s1 and V-BCDE-s1 died out, and are each other's mirror, so every switch keeps seven worlds on and seven off): the mean of the seven with it on, minus the mean of the seven with it off. Grey dots: the switch thrown alone in B1, the world with it minus its twin without it, seeds 1 and 2, where the book has them. The grey band round zero is twice the spread of the seven chains of pairs, read the same way: what a main effect would scatter by if pairs of switches did not act together.
+**The same eight switches on B1.** Orange: each switch's main effect among the worlds of batch V that lived to iteration 1,000 (14 of 16; V-AFGH-s1 and V-BCDE-s1 died out, and are each other's mirror, so every switch keeps seven worlds on and seven off): the mean of the seven with it on, minus the mean of the seven with it off. Grey dots: the switch thrown alone in B1, the world with it minus its twin without it, seeds 1 and 2, where the notebook has them. The grey band round zero is twice the spread of the seven chains of pairs, read the same way: what a main effect would scatter by if pairs of switches did not act together.
 
 > [!example]- How to make this figure
-> **Runs.** Batch V's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/V/`): B1 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`): gifts, no revolutions, no handover, no random inputs, estates to the newborns, brains that change only when copied, brains mixed at birth, links that hold a token; and the switches the book has played alone in B1, seeds 1 and 2 (batches S, T and R).
+> **Runs.** Batch V's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/V/`): B1 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`): gifts, no revolutions, no handover, no random inputs, estates to the newborns, brains that change only when copied, brains mixed at birth, links that hold a token; and the switches the notebook has played alone in B1, seeds 1 and 2 (batches S, T and R).
 >
 > **Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
 >
@@ -269,10 +269,10 @@ switches stand out:
 
 - **The estate to the newborns moves B1 as it moves B2**: 1,410 more agents,
   0.33 more of them at three tokens or fewer, a diversity score 0.29 lower —
-  as when thrown alone in B1 ([Chapter 73](who-inherits.md)).
+  as when thrown alone in B1 ([Who inherits?](who-inherits.md)).
 - **Without handover, a world keeps more links** — two more per agent — the
   other side of what handover did in B2
-  ([Chapter 89](handover-with-every-other-rule.md)).
+  ([Handover, with every other rule](handover-with-every-other-rule.md)).
 - **Gifts make B1 larger and poorer** (1,040 more agents, 0.25 more of them
   poor), and links that hold a token make it smaller (1,310 fewer).
 - **No revolutions does not do in company what it did alone.** Thrown alone,
@@ -305,7 +305,7 @@ switches stand out:
 brains of iteration 500 for a lifetime, the brains of 1,000 hold more than
 half of a contested world in six of the fourteen worlds that lived, with a
 median of 0.46 — as in B1, whose ten lab worlds of 5,000 tokens gave a
-median of 0.49 ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md))
+median of 0.49 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md))
 and whose two pilots of 10,000 tokens 0.37 and 0.68. But the fourteen scatter
 far more: from nothing at all — in two worlds the brains of 500 took the
 whole world in both eras' worlds, one of them the world with all eight
@@ -329,7 +329,7 @@ change only when copied — and neither does it either (−0.02 and +0.14).
   mixing. It meets all seven marks at a dimension of 3.7, holds a quarter of
   its 652 agents at three tokens or fewer, with a diversity score of 0.68.
   It is one world of one seed, and among the candidates that are being
-  played on to 10,000 iterations ([Meta X](healthy-and-rich.md)).
+  played on to 10,000 iterations ([Healthy and rich](healthy-and-rich.md)).
 - **Evolution goes on** in fifteen of the sixteen worlds, in most of them
   more slowly than in B2 itself; four switches speed it a little.
 - **On B1** (added later) few switches stand out against how much pairs of
@@ -342,11 +342,11 @@ change only when copied — and neither does it either (−0.02 and +0.14).
 
 **Related notes:** [Many switches in few worlds](fractional-factorial.md) ·
 [Every setting](settings.md) ·
-[Chapter 82 · Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
-[Chapter 73 · Who inherits?](who-inherits.md) ·
-[Chapter 57 · Rules without numbers](rules-without-numbers.md) ·
-[Meta X · Healthy and rich](healthy-and-rich.md) ·
-[Meta XI · What holds a world's size](what-holds-a-worlds-size.md)
+[Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
+[Who inherits?](who-inherits.md) ·
+[Rules without numbers](rules-without-numbers.md) ·
+[Healthy and rich](healthy-and-rich.md) ·
+[What holds a world's size](what-holds-a-worlds-size.md)
 
 <!-- turns -->
 ---

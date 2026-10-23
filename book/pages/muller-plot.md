@@ -4,7 +4,7 @@ How do lines of descent grow, shrink and replace each other over time? A
 **Muller plot** — named after the geneticist H. J. Muller, who drew such
 pictures in 1932 — shows it as stacked layers.
 
-## How the book draws one
+## How the notebook draws one
 
 1. **Choose the lines.** Fix a moment *t*₀ and a set of ancestors: the 100
    founders at iteration 0, or every genotype alive after the game of some
@@ -29,14 +29,14 @@ pictures in 1932 — shows it as stacked layers.
 
 A line spreads in two ways in Graph of Life: by births, and — far more often
 — by winning nodes in the game, which copies its brain onto the conquered
-node ([Chapter 16](how-the-game-is-played.md)). A Muller plot
+node ([How the game is played](how-the-game-is-played.md)). A Muller plot
 does not tell them apart.
 
-## In this book
+## In this notebook
 
-- [Chapter 11](the-first-hundred-iterations.md): the lines of
+- [The first hundred iterations](the-first-hundred-iterations.md): the lines of
   the 100 founders in the first 300 iterations of the world with seed 1.
-- [Chapter 18](genotypes-and-lineages.md): the families of
+- [Genotypes and lineages](genotypes-and-lineages.md): the families of
   the genotypes alive at a later moment, in two worlds.
 
 <!-- turns -->

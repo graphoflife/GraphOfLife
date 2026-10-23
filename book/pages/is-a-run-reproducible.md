@@ -1,12 +1,12 @@
 # Is a run reproducible?
 
-Every later chapter compares worlds: many seeds against many, one setting
+Every later page compares worlds: many seeds against many, one setting
 against another. That only means something if a world is decided by its
 settings and its seed and by **nothing else** — not by when it was stopped
 and continued, not by a crash, not by which computer or how many processor
 cores ran it.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Does the same seed always give the same world, frame for frame?
 > - Does stopping a run and continuing it later, in a new process, change it?
 > - Does a crash, after which the run is resumed from its last save, change it?
@@ -45,7 +45,7 @@ uses.
 ## The experiment
 
 <!-- runs E01 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **12 runs.** Every condition below is run once for every seed (1 to 3), for 30 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **straight** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001-straight` … `B1-10000-s003-straight`.
@@ -53,7 +53,7 @@ uses.
 > - **cut off at 15** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001-cut-off-at-15` … `B1-10000-s003-cut-off-at-15`.
 > - **all BLAS threads** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001-all-blas-threads` … `B1-10000-s003-all-blas-threads`.
 >
-> To make these runs again: `python3 gol_lab.py run E01`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E01`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | straight | stopped at 10 | cut off at 15 | all BLAS threads | what it is |
@@ -116,7 +116,7 @@ Each of three seeds is run four ways, each to iteration 30:
   as if the power went. Its last checkpoint is from iteration 10, so it
   resumes from there and lives iterations 10 to 15 a second time.
 - **all BLAS threads** — the matrix library may use every core. Every other
-  run in this book uses exactly one.
+  run in this notebook uses exactly one.
 
 Each variant is compared with the straight run of the same seed: all 60
 frames, written out as text with their keys sorted so that two identical
@@ -179,9 +179,9 @@ continuing and crashing it holds exactly.
 ## What this means
 
 A run is decided by its settings and its seed — given one thread for the
-matrix library, which every run in this book uses. Stopping it, continuing it
+matrix library, which every run in this notebook uses. Stopping it, continuing it
 or crashing it changes nothing, so the lab can pause and resume runs freely,
-and every difference between two runs in later chapters comes from what was
+and every difference between two runs in later pages comes from what was
 changed, not from how they were run.
 
 The limits that remain:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Meta IX · How alike the agents are: the measures of Chapter 70
+How alike the agents are: the measures of How different are the agents?
 (research/oee/checks/diversity.py) in every kind of world — three seeds of
 every lab condition at the end of its run, and both seeds of every pilot
 condition (research/oee/checks/diversity_across.sh, diversity_more.sh; results
@@ -65,11 +65,11 @@ NO_DICE = "B2-10000-bad270"
 SHORT = {"kinsense": "kin", "familysense": "family", "familypool": "fam. pool", "giftslapse": "g.+lapse",
          "bytokens": "by tok."}
 #: The pilot batches measured, in the order of the panels, and what each tried.
-PILOT_BATCHES = [("A3k", "Alliances at 3,000 tokens (A3k; Chapter 56)"), ("A10k", "Alliances at 10,000 tokens (A10k; Chapter 56)"),
-                 ("N", "Rules without numbers (N; Chapters 56, 57)"),
+PILOT_BATCHES = [("A3k", "Alliances at 3,000 tokens (A3k)"), ("A10k", "Alliances at 10,000 tokens (A10k)"),
+                 ("N", "Rules without numbers (N)"),
                  ("S", "The switches and contests (S; B1 and B2 underneath)"),
-                 ("P", "Two inputs, links that hold a token (P; Chapters 57, 58)"),
-                 ("Q", "Mixed brains, units that cost, an eye for raids on kin (Q; Chapter 78)")]
+                 ("P", "Two inputs, links that hold a token (P)"),
+                 ("Q", "Mixed brains, units that cost, an eye for raids on kin (Q)")]
 RUNS = ("Three seeds of every condition of the lab's experiments at the end of their runs (Experiments 7 to 16; "
         "B2 itself from Experiment 16 at 2,000 iterations and B1 from Experiment 2 at 3,000), and both seeds of "
         "every pilot condition at its checkpoint of 1,000 or 2,000 iterations.")
@@ -103,7 +103,7 @@ def _relative(w: Dict[str, Any]) -> Optional[float]:
 
 
 def _worlds() -> Dict[str, List[Dict[str, Any]]]:
-    """Every measured world by family: B1 and B2 themselves from Chapter 70's measures, the rest from the sweep."""
+    """Every measured world by family: B1 and B2 themselves from How different are the agents?'s measures, the rest from the sweep."""
     out: Dict[str, List[Dict[str, Any]]] = {}
     for w in _load("B1"):
         out.setdefault("B1-10000", []).append(w)
@@ -154,7 +154,7 @@ def how_alike(ch: F.Chapter) -> None:
                      "green: B2 with lapsing links. B2 without random inputs is left out of both: without noise "
                      "every difference counts, and its kinds cannot be compared. " + NAMES),
             recipe=recipe(RUNS, f"`GraphOfLifeRuns/.pilots/diversity/across_lab.json`, `B1.json`, `B2.json` (`{CHECK}`)",
-                          METHOD + ["Count the kinds of staking as in Chapter 70; divide the agents' total "
+                          METHOD + ["Count the kinds of staking as in [How different are the agents?](how-different-are-the-agents.md); divide the agents' total "
                                     "variation by the founders'."]))
 
     # 2. The rate of change: more mutation, more genotypes, more kinds.
@@ -211,7 +211,7 @@ def how_alike(ch: F.Chapter) -> None:
         ch.grid("pilots", charts, columns=1, title="Kinds of staking in the pilot worlds",
                 caption=("Each dot is a pilot world at its checkpoint of 1,000 iterations (batches A, N and S) or "
                          "2,000 (batches P and Q), the bar the median; orange: B1's rules underneath, blue: B2's. "
-                         "The chapters that ran each batch say what its conditions change. Batch S: lottery, genotype, "
+                         "The pages that ran each batch say what its conditions change. Batch S: lottery, genotype, "
                          "kin, family, fam. pool — contests by lottery, sides pooled by genotype, an eye for kin, an "
                          "eye for a family tag, sides pooled by family (all without revolutions); B2, norev, gifts, "
                          "g.+lapse, lapse, by tok. — B2 itself, without revolutions, with gifts, with gifts and "

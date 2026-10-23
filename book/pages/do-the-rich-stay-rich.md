@@ -1,29 +1,29 @@
 # Do the rich stay rich?
 
-[Chapter 15](where-do-the-tokens-go.md) found the tokens of a world held
+[Where do the tokens go?](where-do-the-tokens-go.md) found the tokens of a world held
 unequally, with a Gini coefficient that hardly moves over a world's settled
 life. But an unchanging inequality can hide two very different worlds. In
 one, the same agents are rich game after game. In the other, wealth is as
-unequal at every moment, but who holds it keeps changing. This chapter
+unequal at every moment, but who holds it keeps changing. This page
 follows single agents through time to tell which world Graph of Life is.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - If an agent is rich now, how likely is it to be rich ten, a hundred,
 >   two hundred games later?
 > - How far does an agent move up or down the order of wealth?
 > - What becomes of the very richest?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -89,7 +89,7 @@ alike the two orders are, from 1 (exactly the same) through 0 (unrelated)
 **How long wealth lasts.** Left: the agents alive after the game of an iteration t, and the same agents k games later, if they are still alive: Spearman's rank correlation of their tokens then and later ([Correlation](correlation.md)) — 1 if every agent kept its place in the order of wealth, 0 if the later order has nothing to do with the earlier. Right: the share of the agents still alive k games later. For each world, the mean over 8 moments t = 500, 600, …, 1,200 (leaving out, for the correlation, the few moments after which fewer than three of the agents were alive); the line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -113,7 +113,7 @@ the worlds, instead, **ρ falls by about 0.1 every time the lag doubles**:
 0.07 from 10 to 20 games, 0.11 from 50 to 100 and 0.13 from 100 to 200.
 That is how memory fades when it is held by many things that last for very
 different times. Here the likely holders are the connections. An agent's tokens follow its number of
-connections plus one ([Chapter 34](how-properties-scale-together.md)),
+connections plus one ([How properties scale together](how-properties-scale-together.md)),
 and a hub's connections outlast many games, while a leaf's change all the
 time.
 
@@ -124,7 +124,7 @@ order is *closer* to the first than after one: ρ = 0.88 against 0.86. The
 richest show it too (below): 76% of the richest hundredth are still in the
 richest tenth two games later, but only 73% one game later.
 
-[Chapter 29](where-the-tokens-flow.md) shows that the brains move tokens
+[Where the tokens flow](where-the-tokens-flow.md) shows that the brains move tokens
 almost as an even split would: each agent stakes the same share on itself
 and on each of its neighbours. Take a hub with *k* neighbours that have no
 other connections. The hub keeps 1/(*k* + 1) of its tokens and gives each
@@ -150,7 +150,7 @@ departure every game. A hub above its resting share falls below it in the
 next game and comes back above it in the one after, each time by less than
 half as much. Tokens slosh between hubs and leaves, and the order of wealth
 swings with a period of two games. The even split is the step of a diffusion
-([Chapter 7](physical-inspiration.md)), and this rhythm is its overshoot
+([Physical inspiration](physical-inspiration.md)), and this rhythm is its overshoot
 on the star-shaped parts of the network.
 
 ## Moving up and down
@@ -161,7 +161,7 @@ on the star-shaped parts of the network.
 **From one fifth to another, ten games later.** All agents alive after the game of t = 500, 600, …, 1,200 in the 30 worlds, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the share of its row.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -179,7 +179,7 @@ Ten games on, where are the agents of each fifth of the order of wealth?
   others are one fifth up or down.
 - Of the **poorest fifth**, 34% are still in it, 24% have risen one fifth,
   and **29% are dead**. Poverty is where agents die:
-  [Chapter 36](how-a-world-breaks.md) shows why — a region too poor to
+  [How a world breaks](how-a-world-breaks.md) shows why — a region too poor to
   keep its connections in use is cut off whole.
 
 Among those still alive, the **Shorrocks index** of the moves — 0 for a
@@ -197,7 +197,7 @@ most connections to hold it there.
 **The fate of the richest.** The agents in the richest hundredth of their world after the game of t = 500, 600, …, 1,200 (36,656 in all, pooled over the 30 worlds), followed k games on. Left: the share of them still in the richest tenth of their world, and the share dead. Right: for those alive, their tokens then divided by their tokens at t — the median in each world, and the median of the worlds.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -223,7 +223,7 @@ of them die?
 **Which of the richest die.** The agents alive after the game of t = 500, 600, …, 1,200 in the 30 worlds, in classes of their connections at t: the share no longer alive ten games later, for the richest hundredth of their world (red) and for every agent (grey). Pooled over moments and worlds: 7,069 of the richest and 1,367,720 in all with 1, 3,674 of the richest and 818,555 in all with 2, 8,721 of the richest and 1,223,956 in all with 3–9, 11,114 of the richest and 148,486 in all with 10–49, 6,078 of the richest and 6,405 in all with 50+ connections.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -262,7 +262,7 @@ connectedness is taxed away in this manner, a little at a time.
 - **Tokens move like a diffusion, overshoot included.** The two-game rhythm
   is what an even split does on a network of hubs and leaves. It is one more
   sign that the game, as the brains play it, is close to a random walk of
-  tokens ([Chapter 29](where-the-tokens-flow.md)). The rich are those
+  tokens ([Where the tokens flow](where-the-tokens-flow.md)). The rich are those
   that the walk's resting state favours, not those that played well.
 - **For open-ended evolution**, this world rewards position, not strategy.
   A lineage cannot bank an advantage as tokens for long. Wealth drains back
@@ -270,7 +270,7 @@ connectedness is taxed away in this manner, a little at a time.
   Selection can only act on what persists: connections, and the brains that
   sit on them.
 
-To make every figure of this chapter: `python3 book_figures.py rich`.
+To make every figure of this page: `python3 book_figures.py rich`.
 
 <!-- turns -->
 ---

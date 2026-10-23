@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Is a world a space? Chapter 24's rulers — how balls grow, against a random
+Is a world a space? How many dimensions does a world have?'s rulers — how balls grow, against a random
 twin with the same links at every agent — on worlds of every kind
 (research/atlas/space.py): B1 and B2 side by side, every world read at
 iteration 1,000, and a few worlds through their lives.
 
-    spaces   Chapter 87 · What folds a world
+    spaces   What folds a world
 """
 from __future__ import annotations
 
@@ -160,7 +160,7 @@ def spaces(ch: F.Chapter) -> None:
                           ["Measure each world as in the figure above, at each moment.",
                            "Divide the radius at which its typical ball holds half the world by its twin's."]))
 
-    # Does a world fold the same way at every size? B1 at three sizes (Chapter 24's readings), B2 at three.
+    # Does a world fold the same way at every size? B1 at three sizes (How many dimensions does a world have?'s readings), B2 at three.
     big = [r for r in side if r["group"] == "B2 at 100,000 tokens (pilot)"]
     if big:
         b1 = []
@@ -194,14 +194,14 @@ def spaces(ch: F.Chapter) -> None:
                   guides=[{"axis": "y", "at": 1.0, "label": "as the twin"}],
                   caption=("Each dot is a world: its typical distance over its random twin's, against the agents in "
                            "its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and "
-                           "409,600 tokens after their last game (Chapter 24's readings). Grey: B2's worlds of 5,000 "
+                           "409,600 tokens after their last game ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)'s readings). Grey: B2's worlds of 5,000 "
                            "tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and "
                            "one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than "
                            "its twin as it grows; a small world stays as near."),
                   recipe=recipe("B1: Experiments 2, 10 and 8 (`B1-10000-…`, `B1-100000-…`, `B1-409600-…`); B2: "
                                 "Experiments 14 and 16, and the pilot world `GraphOfLifeRuns/.pilots/BIG/"
                                 "B2-100000-s1` (B2's settings at 100,000 tokens, seed 1, 1,000 iterations).",
-                                "Chapter 24's readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and "
+                                "[How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)'s readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and "
                                 "`research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`)",
                                 ["Measure each world and its random twin as in the first figure.",
                                  "Divide the radius at which its typical ball holds half the world by its twin's."]))
@@ -265,7 +265,7 @@ def spaces(ch: F.Chapter) -> None:
                         "rank_correlation": {k: rank_corr(k) for k in ("links_per_agent", "share_at_most_three",
                                                                        "agents", "tokens_per_agent")}})
     ch.grid("every", charts, columns=1, title="Every world at iteration 1,000",
-            caption=("Each dot is a world of the book read at iteration 1,000 — the pilot batches, the search by "
+            caption=("Each dot is a world of the notebook read at iteration 1,000 — the pilot batches, the search by "
                      "elimination and the lab's B2 families at 10,000 tokens — its typical distance over its random "
                      "twin's (logarithmic). "
                      "Top, for the worlds whose agents die of age and are mended round: against the number of "

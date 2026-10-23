@@ -16,7 +16,7 @@ Two consequences:
 
 - A quantity that grows by the same **factor** every step — doubling every
   three iterations, say — is a **straight line** against time on a
-  logarithmic value axis ([Chapter 11](the-first-hundred-iterations.md)).
+  logarithmic value axis ([The first hundred iterations](the-first-hundred-iterations.md)).
 - Zero and negative numbers cannot be drawn: log 0 does not exist. Figures
   with log axes leave such values out, and say so.
 
@@ -38,7 +38,7 @@ a line with **slope** *b*. So a power law is recognised by a straight line on
 log–log axes, and its exponent read off as the slope. Examples:
 
 - *b* = 1: *y* grows in proportion to *x* (twice the tokens, twice the
-  agents) — the question of [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md).
+  agents) — the question of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md).
 - *b* = −1: *y* halves when *x* doubles.
 - A curve that **bends** downward on log–log axes is not a power law: it falls
   faster and faster, as an exponential tail does.
@@ -46,7 +46,7 @@ log–log axes, and its exponent read off as the slope. Examples:
 ## Distributions on log–log axes
 
 To see the shape of a wide distribution — of degrees, tokens or lifetimes —
-the book draws its **complementary cumulative distribution**: the share of
+the notebook draws its **complementary cumulative distribution**: the share of
 values at least *x*, against *x*, both axes logarithmic. If the share of
 values equal to *x* follows a power law with exponent −γ, the share at least
 *x* follows one with exponent −(γ − 1), and is a straight line. A survival
@@ -55,7 +55,7 @@ lifetimes.
 
 A caution, from Clauset, Shalizi and Newman (2009): a stretch of a curve that
 looks straight on log–log axes is weak evidence of a power law. Many
-distributions look straight over a decade or two. The book calls something a
+distributions look straight over a decade or two. The notebook calls something a
 power law only when it holds over a wide range and a bent alternative fits
 no better.
 

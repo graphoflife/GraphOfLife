@@ -1,6 +1,6 @@
 # Births as rich as the neighbours
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - The estates of the dead paid to births make a world a healthy space but
 >   fill it with paupers. Can a rule of birth keep the space and stop the
 >   paupers?
@@ -11,7 +11,7 @@
 
 ## Why ask
 
-[Chapter 100](room-for-the-steadiest-world.md) gave Experiment 19's
+[Room for the steadiest world](room-for-the-steadiest-world.md) gave Experiment 19's
 world each rule that keeps a world's room. The estates of the dead, paid to
 the newborns or to the parents, came nearest the network the author's
 picture asks for:
@@ -25,7 +25,7 @@ diversity score fell from Experiment 19's 0.54 to 0.75 to 0.32 to 0.41.
 
 An estate paid to births makes a birth cheap, and nothing stops a world
 from making paupers.
-[Meta XI](what-holds-a-worlds-size.md) asked for a pull: births
+[What holds a world's size](what-holds-a-worlds-size.md) asked for a pull: births
 that cost more when they would make the world poorer. The rule tried here
 is that pull, with no number of its own. A child must start with at least
 the median holding of its parent's neighbours
@@ -52,14 +52,14 @@ The world can grow only as rich as it is.
 ## The runs
 
 <!-- runs E32 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **6 runs.** Every condition below is run once for every seed (1 to 2), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **estate to the newborns, a child as rich as its neighbours** — changes `mix_at_birth` = on, `mix_mates` = parents, `redistribution` = newborns, `child_floor` = neighbours; 10,000 tokens. Runs `B2-10000-12215f-s001` … `B2-10000-12215f-s002`.
 > - **estate to the parents, a child as rich as its neighbours** — changes `mix_at_birth` = on, `mix_mates` = parents, `redistribution` = parents, `child_floor` = neighbours; 10,000 tokens. Runs `B2-10000-86df9e-s001` … `B2-10000-86df9e-s002`.
 > - **a child as rich as its neighbours** — changes `mix_at_birth` = on, `mix_mates` = parents, `child_floor` = neighbours; 10,000 tokens. Runs `B2-10000-b289dd-s001` … `B2-10000-b289dd-s002`.
 >
-> To make these runs again: `python3 gol_lab.py run E32`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E32`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | estate to the newborns, a child as rich as its neighbours | estate to the parents, a child as rich as its neighbours | a child as rich as its neighbours | what it is |
@@ -130,10 +130,10 @@ The world can grow only as rich as it is.
 <!-- /figure -->
 
 **The floor changed nothing the measures can see.** At iteration 3,000:
-- **With an estate,** the four worlds with the floor are Chapter 100's
+- **With an estate,** the four worlds with the floor are [Room for the steadiest world](room-for-the-steadiest-world.md)'s
   estate worlds again:
 
-  | | with the floor | without it (Chapter 100) |
+  | | with the floor | without it ([Room for the steadiest world](room-for-the-steadiest-world.md)) |
   |---|---|---|
   | marks of the health bar | 7 | 7 |
   | width over the twin | 2.2 to 2.85 | 2.0 to 2.65 |
@@ -198,7 +198,7 @@ the others, at 3,000:
 In a world where most agents hold a token or two, the only agents rich
 enough are those just born, with their ten tokens or more, and those just
 paid by the estate, and the game takes it from them within twenty
-iterations. [Chapter 87](what-folds-a-world.md) found why young parents
+iterations. [What folds a world](what-folds-a-world.md) found why young parents
 make a space: a death closes a ring round the gap it leaves, and the ring
 is largest where the old do the breeding. Here the young do, so the rings
 stay small and the world keeps its room.
@@ -206,7 +206,7 @@ stay small and the world keeps its room.
 **A world's size is its births.** Every world here held 99 to 102 agents for
 each birth an iteration, averaged over iterations 2,000 to 3,000. Its
 agents live out their hundred iterations and almost none die sooner, as
-[Meta XI](what-holds-a-worlds-size.md) found in 454 moments of
+[What holds a world's size](what-holds-a-worlds-size.md) found in 454 moments of
 other worlds. So:
 - a world's size is a hundred times its births an iteration;
 - its riches are its 10,000 tokens shared among them.
@@ -227,12 +227,12 @@ against 0.47). The floor changed nothing measurable, because in a world of
 paupers a child's neighbours are paupers too.
 
 > [!info] What these results cover (added 2026-10-21)
-> Every world of this chapter was played under B2's rules, with brains mixed
+> Every world of this page was played under B2's rules, with brains mixed
 > at birth and parents as mates, at 10,000 tokens, two seeds each. The floor
 > failed because of one of those rules: every B2 child already starts with
 > ten tokens (`min_child`), more than a poor world's neighbours hold. A world
 > whose least child is a single token, such as B1, is another matter;
-> [Chapter 105](the-floor-in-plain-b2-and-in-b1.md) plays the same floor
+> [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) plays the same floor
 > in plain B2 and in B1. The ledger of births, a hundred agents for each birth
 > an iteration, holds only where every agent dies at a fixed age, as in B2.
 
@@ -254,7 +254,7 @@ paupers a child's neighbours are paupers too.
   for births, and paying for births fills it with paupers. A world that is both a space and rich
   needs its young to breed without the world filling up. Or it needs deaths
   that do not fold it when the old breed: the open question of
-  [Chapter 87](what-folds-a-world.md), mending without folding.
+  [What folds a world](what-folds-a-world.md), mending without folding.
 
 <!-- turns -->
 ---

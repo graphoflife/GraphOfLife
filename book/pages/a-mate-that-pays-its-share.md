@@ -1,6 +1,6 @@
 # A mate that pays its share
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - When brains are mixed at birth, does a mate that pays for the child hold
 >   a world's size steadier?
 > - Does the lab play the pilots stopped on 18 October as they went?
@@ -13,18 +13,18 @@ Brains mixed at birth make worlds rich and diverse and then let them drift:
 - their size wanders;
 - many shrink to a few hundred agents;
 - some die out
-  ([Chapter 81](five-mixed-worlds-fifty-thousand-iterations.md)).
+  ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)).
 
-[Meta XI](what-holds-a-worlds-size.md) traced it to the price of
+[What holds a world's size](what-holds-a-worlds-size.md) traced it to the price of
 a child. A world's size is set by how eagerly its agents breed, and in a
 mixed world being a mate is free. An agent that never breeds still spreads
 half its brain through other agents' children.
 
-Meta XI proposed two ways to end the free ride:
+[What holds a world's size](what-holds-a-worlds-size.md) proposed two ways to end the free ride:
 - **Mates only among the parents.** In
   [Experiment 19](mixed-at-birth-with-parents-as-mates.md) every world
   lived and held about 2,000 agents.
-- **A mate that pays its share**, the rule this chapter tests. The mate
+- **A mate that pays its share**, the rule this page tests. The mate
   gives the child as many tokens as the parent does, as far as it can and
   never its last. A child that two pay for is cheaper to each, which pushes
   the other way.
@@ -41,22 +41,24 @@ again, game for game.
 > [!quote] The thesis of Experiment 22, written down before any of its runs existed
 > **The claim.** A mate that pays its share holds a mixed world's size more steadily. In four worlds of B2 with brains mixed at birth, where the mate pays the child as many tokens as the parent gives, as far as it can and never its last, the spread of the logarithm of the number of agents from iteration 500 to 5,000 is smaller than in Experiment 17's world of the same seed, where the mate pays nothing, in at least three of the four, and no world falls to 20 agents. And the lab plays the two pilots of this rule that were stopped on 18 October 2026 as they went, game for game, as far as they got.
 >
-> **Why it would be so.** A mixed world's size drifts, because being a mate is free: an agent that never breeds still spreads half its brain through other agents' children, and how eagerly agents breed sets a world's size (Meta XI). A mate that pays ends the free ride, though a child that two pay for is cheaper to each, which pushes the other way. Meta XI proposed it and nothing tested it: its pilots (batch MPay) were stopped at iterations 1,000 and 1,500 when the computer was restarted. Mates among the parents only, the other way to end the free ride, held four pilot worlds steadier than Experiment 17's and kept all ten worlds of Experiment 19 alive.
+> **Why it would be so.** A mixed world's size drifts, because being a mate is free: an agent that never breeds still spreads half its brain through other agents' children, and how eagerly agents breed sets a world's size ([Meta XI](what-holds-a-worlds-size.md)). A mate that pays ends the free ride, though a child that two pay for is cheaper to each, which pushes the other way. [Meta XI](what-holds-a-worlds-size.md) proposed it and nothing tested it: its pilots (batch MPay) were stopped at iterations 1,000 and 1,500 when the computer was restarted. Mates among the parents only, the other way to end the free ride, held four pilot worlds steadier than Experiment 17's and kept all ten worlds of Experiment 19 alive.
 >
 > **It holds if:** In at least three of the four seeds the standard deviation of the logarithm of the agents after each game, from 500 to 5,000, is below that of Experiment 17's world of the same seed; no world falls to 20 agents or fewer; and the worlds of seeds 1 and 2 match the pilots' agents and links after every game to 1,000 and 1,500.
 >
 > **It fails if:** Two or fewer are steadier than their Experiment 17 world, a world falls to 20 agents or fewer, or a world differs from its pilot.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The runs
 
 <!-- runs E22 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **4 runs.** Every condition below is run once for every seed (1 to 4), for 5,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **mixed at birth, the mate pays** — changes `mix_at_birth` = on, `extinction_threshold` = 0, `proto` = mate_pays; 10,000 tokens. Runs `B2-10000-8ff8c5-s001` … `B2-10000-8ff8c5-s004`.
 >
-> To make these runs again: `python3 gol_lab.py run E22`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E22`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 >
 > Runs that ask for the pilots' rules are played by the research prototype, frozen beside the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics every iteration (`series.jsonl`) and a whole world at every checkpoint.
 
@@ -168,7 +170,7 @@ world is read:
 
 - **A mate that pays is the second rule that steadies a mixed world**,
   beside mates among the parents
-  ([Experiment 19](mixed-at-birth-with-parents-as-mates.md)). Meta XI
+  ([Experiment 19](mixed-at-birth-with-parents-as-mates.md)). [What holds a world's size](what-holds-a-worlds-size.md)
   traced the drift of a mixed world's size to a free ride: a mate passes
   half its brain into a child it pays nothing for. Both ways of ending the
   free ride steady the world. The free ride was the cause.
@@ -178,7 +180,7 @@ world is read:
   children there are; it does not lower it.
 - **Steady is not yet a space.** Like Experiment 19's, these worlds are
   folded. Room is the one thing the steadiest mixed worlds still lack
-  ([Chapter 100](room-for-the-steadiest-world.md)).
+  ([Room for the steadiest world](room-for-the-steadiest-world.md)).
 
 
 <!-- turns -->

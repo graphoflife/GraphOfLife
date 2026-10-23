@@ -52,7 +52,7 @@ disassortative even if it is wired at random given its degrees. A negative
 
 The viewer's `assortativity` is *r* over the frame's connections. A settled
 baseline world has about −0.07 at 100,000 tokens and −0.11 at 10,000
-([Chapter 34](how-properties-scale-together.md)).
+([How properties scale together](how-properties-scale-together.md)).
 
 <!-- turns -->
 ---

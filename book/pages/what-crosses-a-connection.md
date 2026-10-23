@@ -2,25 +2,25 @@
 
 In every game each agent stakes all its tokens on itself and its neighbours,
 and whatever two agents stake on each other crosses the connection between
-them. [Chapter 29](where-the-tokens-flow.md) followed the tokens through a
-whole world. This chapter looks at the connections one at a time: how much
+them. [Where the tokens flow](where-the-tokens-flow.md) followed the tokens through a
+whole world. This page looks at the connections one at a time: how much
 crosses each one, how much of that is cancelled by what comes back, how far
 tokens travel in loops — the viewer's **lightning** — and which connections
 carry nothing at all.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How many tokens cross a connection in a game, and how unevenly?
 > - How much of it comes straight back the other way?
 > - How long are the loops in which tokens go round?
 > - Which connections carry nothing, and so are cut?
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -83,7 +83,7 @@ standing. A connection that carries nothing for one game is gone, and with
 it, perhaps, the only path between two parts of a world.
 
 > [!info] Added later: links that may not lapse
-> [Chapter 48](a-world-that-cannot-break.md) changes this rule for the
+> [A world that cannot break](a-world-that-cannot-break.md) changes this rule for the
 > second baseline, B2: there an unused connection lapses only if its two ends
 > share at least two neighbours
 > ([`prune_needs`](settings.md#prune_needs)), so no lapse can cut a
@@ -109,7 +109,7 @@ direction is cancelled against the larger:
 **Tokens across one connection in one game.** Every connection at the start of the games of every 25th iteration from 500 on, in the 30 worlds, pooled: how many tokens its two agents staked on each other in that game, both directions added (blue), and what is left when the smaller direction is cancelled against the larger (cyan; [Token flow](token-flow.md)). A connection in the first class carried nothing and is cut at the end of the game.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames every 25 iterations from 500 on, read by `book_chapters.connections.edge_flow`: the connections of frame `2·t` (the start of the game of t), `decisions.allocations` and the connections of frame `2·t + 1` (after it).
 >
@@ -131,7 +131,7 @@ connections — two thirds of those that carried anything — the two directions
 cancel exactly: as many tokens went each way. Almost all of the connections
 that carried two tokens carried one each way. Where something is left, it is
 mostly a single token: 28% of the connections moved one token net, and only
-2% moved more. This is what [Chapter 38](do-agents-cooperate.md) will call
+2% moved more. This is what [Do agents cooperate?](do-agents-cooperate.md) will call
 a **handshake**, seen here from the connections: two neighbours, each
 splitting a few tokens evenly over a few candidates, put one token on each
 other.
@@ -151,7 +151,7 @@ left out). Which connections are the empty ones?
 **The connections a game cuts.** Left: at the start of the game of every 25th iteration from 500 on, the share of the connections across which no token was staked in that game — the ones the game cuts; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). Right: the same share, pooled over the games and worlds, for connections sorted by the number of connections of their less connected end.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames every 25 iterations from 500 on, read by `book_chapters.connections.edge_flow`: the connections of frame `2·t` (the start of the game of t), `decisions.allocations` and the connections of frame `2·t + 1` (after it).
 >
@@ -170,7 +170,7 @@ A leaf stakes on its only neighbour or keeps everything at home, and its
 neighbour almost always stakes back on it; an agent with many connections
 and few tokens cannot send a token across each, and if its neighbour does not
 either, the connection is gone. Every connection costs a token a game, from
-one side or the other — what [Chapter 36](how-a-world-breaks.md) will call
+one side or the other — what [How a world breaks](how-a-world-breaks.md) will call
 the price of a connection, paid here connection by connection.
 
 The viewer counts the cut connections after every game as `prunedEdges`:
@@ -189,7 +189,7 @@ game:
 **Flow on the connections, and the loops it makes.** After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](lightning.md) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -213,7 +213,7 @@ game:
   that goes round, though, goes round in loops of two — the equal exchanges
   above — and the greedy search, which hunts for long loops, places only 13%
   of the flow in the loops it finds
-  ([Chapter 29](where-the-tokens-flow.md)). After cancelling each pair's
+  ([Where the tokens flow](where-the-tokens-flow.md)). After cancelling each pair's
   two directions, no loop of two is left: the longest loop found is 5 or 6
   agents in the median world, and 0.3% of the net flow goes round. (At
   10,000 tokens the longest averages 2.2 over the games: a loop left after
@@ -237,7 +237,7 @@ not circulate.
   pay for all their connections, and leaves almost always can.
 - **Big flows are rare.** A few connections carry hundreds or thousands of
   tokens in a game; only an agent holding that many can send them, and the
-  rich are the well connected ([Chapter 34](how-properties-scale-together.md)).
+  rich are the well connected ([How properties scale together](how-properties-scale-together.md)).
 - **No circulation.** Tokens do not go round: what is not exchanged moves
   downhill. For open-ended evolution this means the connections carry no
   economy of their own — nothing like a trade route along which one part of a
@@ -245,11 +245,11 @@ not circulate.
   let a connection store what crosses it, would be a way to give them one.
 
 > [!info] Added later: a yield on exchanges
-> [Chapter 50](why-evolution-stops.md) pilots a rule of this kind: a yield
+> [Why evolution stops](why-evolution-stops.md) pilots a rule of this kind: a yield
 > on stakes that are returned across a connection. The yield went to whoever
 > had the most partners, and it built stars rather than partnerships.
 
-To make every figure of this chapter: `python3 book_figures.py connections`.
+To make every figure of this page: `python3 book_figures.py connections`.
 
 <!-- turns -->
 ---

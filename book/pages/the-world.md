@@ -1,10 +1,10 @@
 # The world: tokens, agents and a network
 
-This chapter describes what a world is made of and how it begins.
-[Chapter 3](one-iteration.md) describes how it changes, and
-[Chapter 4](the-brain.md) how its agents decide.
+This page describes what a world is made of and how it begins.
+[One iteration, step by step](one-iteration.md) describes how it changes, and
+[The brain](the-brain.md) how its agents decide.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What exactly is a world: what does it consist of, and what stays fixed?
 > - How is a world built at the start, from its settings and its seed?
 > - What is written down about it as it runs?
@@ -38,14 +38,14 @@ smaller id means an older agent.
 
 ## Agents and tokens
 
-On every node lives one **agent**; in this book "agent" and "node" mean the
+On every node lives one **agent**; in this notebook "agent" and "node" mean the
 same thing. An agent has:
 
 - a number of **tokens** τ(*u*), a whole number. After every phase every
   living agent holds at least one: an agent left with none dies
-  ([Chapter 3](one-iteration.md));
+  ([One iteration, step by step](one-iteration.md));
 - a **brain** *B*(*u*): a neural network that takes all its decisions
-  ([Chapter 4](the-brain.md));
+  ([The brain](the-brain.md));
 - an **age**: the number of iterations since it was born
   ([Age and lifetime](age-and-lifetime.md));
 - a **genotype**, the identity of its brain. An agent can lose its genotype:
@@ -59,7 +59,7 @@ $$
 \sum_{u \in V} \tau(u) = T .
 $$
 
-[Chapter 3](one-iteration.md) checks that every rule keeps this sum.
+[One iteration, step by step](one-iteration.md) checks that every rule keeps this sum.
 Tokens are the only thing of value: an agent needs them to have a child, and
 in the game they are what it fights with. Since every living agent holds at
 least one token, a world can never hold more than *T* agents.
@@ -68,15 +68,15 @@ least one token, a world can never hold more than *T* agents.
 
 A world is fixed by its **settings** and its **seed**. The settings are 32
 numbers and switches; [Every setting](settings.md) lists them all,
-with the values of the baseline **B1**. Nine of them, added for Part V, keep
-their old rule in B1, so the rules are exactly as this part describes them.
+with the values of the baseline **B1**. Nine of them, added for open-ended evolution, keep
+their old rule in B1, so the rules are exactly as these pages describe them.
 The ones that shape the start are the number of tokens *T*, the number of
-founders and their ring. This part of the book teaches with worlds of
-*T* = 10,000 tokens. Parts II and III study the same baseline at
+founders and their ring. These pages teach with worlds of
+*T* = 10,000 tokens. The study of the baseline reads the same baseline at
 *T* = 100,000: ten times as many founders of 100 tokens each, on a denser
 ring — with 1,000 founders the rule for the ring gives every founder 10
 neighbours, not 4 ([Every setting](settings.md#k_neighbors);
-[Chapter 16](how-the-game-is-played.md) shows what that changes in the
+[How the game is played](how-the-game-is-played.md) shows what that changes in the
 first game).
 
 From them the world is built in three steps.
@@ -90,7 +90,7 @@ $$
 agents, the **founders** — one for every hundred tokens (⌊*x*⌋ is *x*
 rounded down). With *T* = 10,000 there are 100 founders, with ids 0 to 99.
 Each gets ⌊*T* / *n*⌋ tokens, here exactly 100. Each founder gets a brain whose
-weights are drawn at random ([Chapter 4](the-brain.md)), so every founder
+weights are drawn at random ([The brain](the-brain.md)), so every founder
 starts with a genotype of its own, numbered 1 to 100.
 
 **2. The ring.** The founders are joined into a **small-world ring**, the
@@ -139,7 +139,7 @@ every random input of a brain, every share-out of tokens — is drawn from one
 stream of pseudo-random numbers, started from the same seed. A run therefore
 depends on its settings and its seed and on nothing else
 ([Seeds and the random stream](random-numbers.md));
-[Chapter 8](is-a-run-reproducible.md) tests this.
+[Is a run reproducible?](is-a-run-reproducible.md) tests this.
 
 ## What is recorded
 

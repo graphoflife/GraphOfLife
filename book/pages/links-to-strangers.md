@@ -1,12 +1,12 @@
 # Links to strangers
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - If an agent can reach past its neighbours and propose a link to someone it
 >   does not know, does it?
 > - Who does it reach, and what does that do to the network, to the riches of
 >   the world, to evolution?
 
-In every world of the book so far an agent could only link to agents it was
+In every world of the notebook so far an agent could only link to agents it was
 already near: its parent and its parent's neighbours at birth, and the
 neighbours of its neighbours when it chose links of its own. A world built that
 way grows like a crystal, outward from where it began. The author asked for a
@@ -136,7 +136,7 @@ with the reach 83%. And it hardly matters how much the agents searched: the
 worlds of the paid searches, whose agents almost never propose a link, evolve
 as fast as those of the free one. What every searching world has is a smaller
 size and two more outputs for its brains to set. The mixed worlds of
-[Chapter 80](mixed-at-birth-ten-long-worlds.md#does-evolution-go-on),
+[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#does-evolution-go-on),
 smaller still, took 84%; whether smaller worlds evolve faster, or a contest in
 a smaller world gives a later brain more room to win, this batch cannot say.
 
@@ -149,8 +149,8 @@ a smaller world gives a later brain more room to win, this batch cannot say.
   length of evolution. The free one is used, and changes the network locally.
 - **Every searching world evolves faster than B2**, whether its agents search
   or not; what they share is a smaller world and more for a brain to set.
-- **Locality survives.** For the book's other aim, a network that behaves like
-  space ([Chapter 24](how-many-dimensions-does-a-world-have.md), Part VI),
+- **Locality survives.** For the notebook's other aim, a network that behaves like
+  space ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)),
   far links would be the danger: a few shortcuts make a world small and its
   dimension high. Searching agents do not make them, and their worlds keep
   B2's dimension. A search that goes further than a walk from home — to an
@@ -158,9 +158,9 @@ a smaller world gives a later brain more room to win, this batch cannot say.
   game itself keeps space local; no setting offers one yet.
 
 **Related notes:** [Every setting](settings.md#link_search) ·
-[Chapter 24 · How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) ·
-[Chapter 80 · Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
-[Meta X · Healthy and rich](healthy-and-rich.md)
+[How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) ·
+[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
+[Healthy and rich](healthy-and-rich.md)
 
 <!-- turns -->
 ---

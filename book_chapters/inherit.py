@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 73 · Who inherits? The estate of the dead shared out three new ways —
+Who inherits? The estate of the dead shared out three new ways —
 to the poorest, to the newborns, to their parents — in B1 and B2 worlds of
 10,000 tokens (pilot batch R), beside controls of the same settings and seeds,
-and each world among every world the book has made. A fourth way, added on
+and each world among every world the notebook has made. A fourth way, added on
 2026-10-17: each estate to the dead agent's own living children (batch H, the
 same worlds' form, in GraphOfLifeRuns/.pilots/R/ as well).
 

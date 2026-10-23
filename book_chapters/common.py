@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-What every chapter's figures share: the palette's colours by what they stand for,
-how a band is said and made, and the worlds Parts II and III read.
+What every page's figures share: the palette's colours by what they stand for,
+how a band is said and made, and the worlds the study of the baseline read.
 """
 from __future__ import annotations
 
@@ -23,18 +23,18 @@ BAND_WORDS = ("The line is the median of the worlds at each iteration, the darke
 
 class Worlds:
     """
-    The worlds Parts II and III read — one condition of one experiment's plan —
-    and the stretches of their lives every chapter measures them over.
+    The worlds the study of the baseline read — one condition of one experiment's plan —
+    and the stretches of their lives every page measures them over.
 
-    Every chapter of the two parts reads the same worlds, so they are named here
+    Every page of the two parts reads the same worlds, so they are named here
     and nowhere else: the 30 worlds of 10,000 tokens of Experiment 2 at first,
-    the 30 of 100,000 tokens of Experiment 10 since. A chapter asks for the
+    the 30 of 100,000 tokens of Experiment 10 since. A page asks for the
     worlds, their survivors, their last iteration or their settled stretch, and
     says them in its captions through the same names.
     """
 
     #: From this iteration on a world counts as settled: its boom is long over
-    #: (Chapter 10). Equal to book_figures.SETTLED, which the cached passes use.
+    #: (A world's life). Equal to book_figures.SETTLED, which the cached passes use.
     settled = 500
 
     def __init__(self, experiment: str, lineage: str, condition: str = "baseline") -> None:
@@ -118,14 +118,14 @@ class Worlds:
         return f"{self.settled}–{self.last:,}"
 
 
-#: The worlds of Parts II and III. GOL_BOOK_WORLDS=E02 draws them from the
-#: worlds of 10,000 tokens instead, which is how the chapters were first made.
+#: The worlds of the study of the baseline. GOL_BOOK_WORLDS=E02 draws them from the
+#: worlds of 10,000 tokens instead, which is how the pages were first made.
 WORLD_SETS = {"E02": Worlds("E02", lineage="E06"), "E10": Worlds("E10", lineage="E10")}
 WORLDS = WORLD_SETS[os.environ.get("GOL_BOOK_WORLDS", "E10")]
 
 
 #: A world whose best-connected agent is joined, on average over its settled life, to this share of
-#: all its agents or more is a star: one held together by a single hub (Chapter 33).
+#: all its agents or more is a star: one held together by a single hub (The largest and the smallest).
 STAR = 0.1
 
 

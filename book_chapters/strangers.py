@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 83 · Links to strangers — what batch K's worlds did with a search.
+Links to strangers — what batch K's worlds did with a search.
 
 Batch K (2026-10-16): B2 at 10,000 tokens with each search the engine knows
 (link_search = jump, walk or reach), each steering (random, looking) and each

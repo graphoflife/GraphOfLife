@@ -47,10 +47,10 @@ would understate the long lives too.
 
 ## Drawing it
 
-The curve *S*(*L*) starts at 1 and falls in steps. The book draws it on
+The curve *S*(*L*) starts at 1 and falls in steps. The notebook draws it on
 [logarithmic axes](logarithmic-axes.md), so that both the many short lives
-and the few long ones are visible ([Chapter 12](births-deaths-and-ages.md),
-[Chapter 18](genotypes-and-lineages.md)).
+and the few long ones are visible ([Births, deaths and ages](births-deaths-and-ages.md),
+[Genotypes and lineages](genotypes-and-lineages.md)).
 
 ## The median lifetime
 

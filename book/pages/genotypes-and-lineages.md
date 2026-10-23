@@ -7,22 +7,22 @@ change gives a new **genotype**, and every genotype remembers the one it came
 from, so the genotypes of a world form one family tree
 ([Genotypes and the family tree](genotype.md)).
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How long does a genotype last? How long does an agent?
 > - Does any single genotype ever hold a large part of the world?
 > - Does any *line of descent* take the world over — and how often?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-the thirty of 10,000 tokens this chapter was first written from are given
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+the thirty of 10,000 tokens this page was first written from are given
 beside them.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -82,13 +82,13 @@ beside them.
 **How long genotypes and agents last.** Of all genotypes that appeared, and all agents born, at iteration 500 or later in the 30 worlds, the share that lasted at least L iterations. A genotype lasts from the first game after which some agent carries it to the last; an agent from its birth to the last game it is alive after. Lives still going at the end are counted as far as they went (Kaplan–Meier).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read every frame with `phase` = 2; for every genotype (brain id in `brain_ids`) and every agent (id in `ids`) note the first and last iteration it appears.
 > 2. Keep those first seen at iteration 500 or later; one still present in the last frame is censored.
-> 3. Kaplan–Meier as in [Chapter 12](births-deaths-and-ages.md).
+> 3. Kaplan–Meier as in [Births, deaths and ages](births-deaths-and-ages.md).
 >
 > **To make it again:** `python3 book_figures.py lineage`.
 <!-- /figure -->
@@ -103,14 +103,14 @@ the share that lasted at least *L* iterations.
   None reached 100 — exactly as at 10,000 tokens.
 - **Agents** (blue) last far longer: 48% at least 10 iterations, 13% at least
   100 — of the agents that lived through their first game, as in
-  [Chapter 12](births-deaths-and-ages.md), where nearly a third of all
+  [Births, deaths and ages](births-deaths-and-ages.md), where nearly a third of all
   newborns do not.
 
 Why the difference? An agent keeps its node, its id and its age when its
 brain changes or is replaced by a conqueror's; a genotype ends when the last
 agent carrying it either mutates, dies, or has its node won by another
 genotype. With a change in one brain of five after every game, and half of
-all nodes changing hands in every game ([Chapter 16](how-the-game-is-played.md)),
+all nodes changing hands in every game ([How the game is played](how-the-game-is-played.md)),
 a genotype has little time.
 
 At any moment, a settled world holds about one genotype for every 1.6
@@ -126,7 +126,7 @@ in the median world, between 0.61 and 0.66 across the thirty — and 0.63 at
 **The most common genotype's share of the world.** After every game, the share of the living that carry the most common genotype. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). The yellow line is the single world with seed 28.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -143,8 +143,8 @@ After iteration 100, a single genotype held more than a tenth of the world at
 some moment in 10 of the 30 worlds, more than a fifth in 7, more than a third
 in 2, and more than half in one — 56% of all agents, at iteration 1,408 in
 the world with seed 28 (the yellow line), the star of
-[Chapter 33](the-largest-and-the-smallest.md), when its collapse
-([Chapter 10](a-worlds-life.md)) had left it some 2,100 agents. At 10,000
+[The largest and the smallest](the-largest-and-the-smallest.md), when its collapse
+([A world's life](a-worlds-life.md)) had left it some 2,100 agents. At 10,000
 tokens it was more common: a tenth in 21 of 26 worlds, a fifth in 17. Since
 no genotype lasts long, a long stretch of one large share is several
 genotypes in turn, each changed from the one before: a **line** spreading.
@@ -175,7 +175,7 @@ Each line is one world. It starts by rising with the age of the world: the
 living still descend from more than one founder. The first drop is the
 moment everyone alive descends from one founder — in the median world at
 iteration 1,000 among the 27 that got there, and never in three
-([Chapter 60](worlds-of-100000-tokens.md) counts it, and finds it 5.9
+([Worlds of 100,000 tokens](worlds-of-100000-tokens.md) counts it, and finds it 5.9
 times as late as in the worlds of 10,000 tokens). After that the line rises
 steadily, one iteration per iteration, while the common ancestor stays the
 same and grows older, and drops whenever one branch of the family tree has
@@ -243,7 +243,7 @@ with many others beside it.
 **How often one branch replaces all others.** One dot per world: how many times, between iteration 100 and the end, the newest common ancestor of all the living moved forward to a younger genotype (one of the drops in the figure above). The bar is the median.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From the lineage analysis of Experiment 10 (`python3 gol_lab.py analyse E10`), in `book/results/E10.json` (`ancestor.moves` of every run).
 >
@@ -265,14 +265,14 @@ whole run lasts.
 Before the runs of 10,000 tokens, as Experiment 6:
 
 <!-- runs E06 -->
-> [!info] The runs behind this chapter
-> These are the runs of Experiment 2; nothing new was run for this chapter.
+> [!info] The runs behind this page
+> These are the runs of Experiment 2; nothing new was run for this page.
 >
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -332,7 +332,9 @@ Before the runs of 10,000 tokens, as Experiment 6:
 >
 > **It holds if:** From iteration 100 on, the median number of distinct genotypes across the thirty runs is above a fifth of the population, the number of families stays above ten, and no single genotype ever holds more than a tenth of the agents in more than one run in ten.
 >
-> **It fails if:** One lineage takes over: the families fall to a handful, or a single genotype holds a large share of the world for hundreds of iterations. Then selection has something to work on even at this rate of change, which would change what Part II has to fix first.
+> **It fails if:** One lineage takes over: the families fall to a handful, or a single genotype holds a large share of the world for hundreds of iterations. Then selection has something to work on even at this rate of change, which would change what [Part II](../README.md#does-evolution-keep-going) has to fix first.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 The thesis is **refuted**. Its first part holds: there are always hundreds
@@ -358,32 +360,32 @@ a single founder by iteration 1,500 — but slowly, about once a run.
 - **The unit of evolution here is the line, not the genotype.** A genotype
   lasts a couple of iterations, far too short for selection to act on it. A
   line that takes over the world lasts hundreds. The first rung of the ladder
-  in [Chapter 1](what-this-notebook-is-about.md) — lineages lasting long
+  in [What this notebook is about](what-this-notebook-is-about.md) — lineages lasting long
   enough for selection to act — can only be met by lines.
 - **Is it selection, or chance?** In any population that reproduces, all
   lines but one die out sooner or later by chance alone (the
   [coalescent](the-ideas-this-builds-on.md)). Whether lines take over
   here *faster than chance would make them*, because some brains do better,
   needs a world in which no brain is better than another.
-  [Chapter 41](do-the-brains-matter.md) builds worlds whose brains never
+  [Do the brains matter?](do-the-brains-matter.md) builds worlds whose brains never
   change, and finds that how often chance alone sweeps a world depends on how
   often agents are born and die.
 
 > [!info] Added later: no better brains
-> None of the worlds of [Chapter 41](do-the-brains-matter.md) is born and dies as the baseline does, so
+> None of the worlds of [Do the brains matter?](do-the-brains-matter.md) is born and dies as the baseline does, so
 > they could not settle the question.
-> [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) asked the
+> [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) asked the
 > brains themselves, playing the brains of different eras of ten worlds of
 > 5,000 tokens against each other: the brains of iteration 50 already beat
 > their founders' (+361 Elo), and every later era ties with the one before
 > it (iteration 1,000 against 300: 0.483). The lines that take a settled
 > world over do not carry brains that play better.
-> [Chapter 60](worlds-of-100000-tokens.md) times the takeovers in worlds of
+> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) times the takeovers in worlds of
 > two sizes: the time to a single founder grows as the tokens to the power
 > 0.77 — between what a front (0.30) and chance (1) would give — and a line
 > spreads through a world as a random walk does.
 
-To make every figure of this chapter: `python3 book_figures.py lineage`.
+To make every figure of this page: `python3 book_figures.py lineage`.
 
 <!-- turns -->
 ---

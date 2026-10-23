@@ -1,13 +1,13 @@
 # Lightning in every world
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - When agents stake tokens on their neighbours, do the tokens go round in
 >   closed loops, or do they run one way, from some agents to others?
-> - Is that the same in every world the book has made: both rule sets, every
+> - Is that the same in every world the notebook has made: both rule sets, every
 >   size, every setting an experiment changed?
 > - How long are the loops, and do they grow with the world?
 > - The loops are counted with a quick, greedy search, game by game. Does it
->   agree with the exact decomposition of [Chapter 58](gliders-and-who-helps-whom.md)?
+>   agree with the exact decomposition of [Gliders, and who helps whom](gliders-and-who-helps-whom.md)?
 
 ## What a lightning is
 
@@ -27,7 +27,7 @@ explains the definition with a worked example. Why it matters:
   way end up somewhere and stop; tokens that go round can circulate for ever.
   In physics a current that closes on itself (a vortex, a loop of current) is
   a different thing from one that runs downhill; in an economy, a cycle of
-  trade is a different thing from a transfer. [Chapter 7](physical-inspiration.md)
+  trade is a different thing from a transfer. [Physical inspiration](physical-inspiration.md)
   hoped for both kinds of flow to appear in these worlds.
 - **Two agents that stake on each other already form a loop of length two.**
   A token from A to B and a token from B back to A *cancel*: nothing has
@@ -53,11 +53,11 @@ iteration:
 | `netLightningLongest`, `netLightningScore` | the longest net loop, and the score of the net loops |
 | `flowImbalance` | half the sum over agents of (flow in − flow out), over the total: how much of the flow *must* run one way, whatever the loops are |
 
-[Chapter 29](where-the-tokens-flow.md) measured these in the thirty
-baseline worlds; [Chapter 30](what-crosses-a-connection.md) looked at single
-connections. This chapter measures them in **every world the book has made**,
+[Where the tokens flow](where-the-tokens-flow.md) measured these in the thirty
+baseline worlds; [What crosses a connection](what-crosses-a-connection.md) looked at single
+connections. This page measures them in **every world the notebook has made**,
 using the table of every world (research/atlas/across.py; see
-[Meta VI · Every world side by side](every-world-side-by-side.md)).
+[Every world side by side](every-world-side-by-side.md)).
 
 ## Every world
 
@@ -82,8 +82,8 @@ Three things stand out.
 
 **The two rule sets are opposites.** In the B1 worlds a sixth of the staked
 flow can be put on loops (median 0.17 at 10,000 tokens), and three quarters
-of it cancels: the net flow is a quarter of the staked flow. In the B2 worlds
-of [Part V](a-world-that-cannot-break.md), at every setting an experiment
+of it cancels: the net flow is a quarter of the staked flow. In the worlds of
+[B2](a-world-that-cannot-break.md), at every setting an experiment
 changed, the loops hold about a twentieth (0.045), and almost nothing cancels:
 the net flow is 95% of the flow. B1's flow is mostly agents staking on each
 other; B2's is mostly agents staking on others who do not stake back.
@@ -99,7 +99,7 @@ way. Nothing in the brains changed: one of the rules that make B2's network
 unbreakable also made its economy run one way. The pilot worlds say the same
 independently: of all the B2 pilots, the three whose flow goes round
 (0.21–0.28 of it on loops, a tenth left after cancelling) are exactly those in
-which unused links lapse ([Chapter 54](the-switches-the-world-was-built-with.md)).
+which unused links lapse ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
 
 **Little goes round once the cancelling is done.** In every kind of world the
 net flow on loops is a fraction of a percent (bottom right). Within one game,
@@ -108,7 +108,7 @@ loops are there, but they carry little.
 
 The B1 worlds whose brains never change (yellow) spread over the whole range:
 some put 70% of their flow on loops, others almost nothing. Each of those
-worlds is frozen in whatever play its founders had ([Chapter 41](do-the-brains-matter.md)),
+worlds is frozen in whatever play its founders had ([Do the brains matter?](do-the-brains-matter.md)),
 and the founders differ.
 
 ## The longest loop grows with the world
@@ -131,9 +131,9 @@ and the founders differ.
 
 The longest loop grows with the size of the world as the tokens to the power
 0.31. That number is not new. The distances across these worlds grow as the
-number of agents to the power 0.25–0.30 ([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)),
+number of agents to the power 0.25–0.30 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)),
 and agents are proportional to tokens. A dimension of about 3.3
-([Chapter 24](how-many-dimensions-does-a-world-have.md)) means a world's
+([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)) means a world's
 width grows as its size to the power 1/3.3 = 0.30. **So the longest loop is as
 long as the world is wide**: the greedy search finds loops that go across the
 world, and they lengthen exactly as the world widens. After cancelling (blue)
@@ -166,7 +166,7 @@ it evolves.
 
 ## A greedy count and an exact one
 
-The greedy count looks at one game at a time. [Chapter 58](gliders-and-who-helps-whom.md)
+The greedy count looks at one game at a time. [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 took the net flow of fifty games together and split it exactly, by the
 Helmholtz–Hodge decomposition (the note [Flows that go round](circulation.md)),
 into a part that runs downhill and a part that circulates.
@@ -174,7 +174,7 @@ into a part that runs downhill and a part that circulates.
 <!-- figure lightning/exact -->
 ![A greedy count and an exact one](../figures/lightning/exact.svg)
 
-**A greedy count and an exact one.** Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz–Hodge decomposition of [Chapter 58](gliders-and-who-helps-whom.md)); up, the greedy loop count of a single game, averaged over the same thousand iterations.
+**A greedy count and an exact one.** Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz–Hodge decomposition of [Gliders, and who helps whom](gliders-and-who-helps-whom.md)); up, the greedy loop count of a single game, averaged over the same thousand iterations.
 
 > [!example]- How to make this figure
 > **Runs.** The ten B2 worlds of Experiment 16 and the first ten B1 worlds of Experiment 2, iterations 1,000 to 2,000.
@@ -200,7 +200,7 @@ next; no single game closes the loop.
 
 That is a warning about both numbers. Random flow on the same network would
 circulate too: 59–60% in B1 and 50–53% in B2, by the two null models of
-[Chapter 58](gliders-and-who-helps-whom.md). The real excess over chance is
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md). The real excess over chance is
 about 0.2 in B1 and less than 0.1 in B2. B1's agents keep tokens going round
 more than chance would; B2's barely do.
 
@@ -222,17 +222,16 @@ The pilot worlds that play the engine's game are in the figures too (each was
 played on from its checkpoints and recorded as a lab run is): B2's pilots flow
 as B2 does (0.046 on loops, 0.95 left after cancelling), B1's as B1 does (0.20,
 0.26). Measures of
-the same flow from other angles are in [Chapter 71](flow-modules.md), *Flow modules: the groups
-tokens stay in* (who trades with whom, and for how long), and in
-[Chapter 75](where-tokens-go.md), *Meta VII · Where tokens go*,
-which gathers what the book knows about flow.
+the same flow from other angles are in [Flow modules: the groups tokens stay in](flow-modules.md) (who trades with whom, and for how long), and in
+[Where tokens go](where-tokens-go.md), *[Where tokens go](where-tokens-go.md) · Where tokens go*,
+which gathers what the notebook knows about flow.
 
 **Related notes:** [Lightning](lightning.md) ·
 [Token flow](token-flow.md) · [Flows that go round](circulation.md) ·
 [Logarithmic axes](logarithmic-axes.md) ·
-[Chapter 29 · Where the tokens flow](where-the-tokens-flow.md) ·
-[Chapter 30 · What crosses a connection](what-crosses-a-connection.md) ·
-[Chapter 58 · Gliders, and who helps whom](gliders-and-who-helps-whom.md)
+[Where the tokens flow](where-the-tokens-flow.md) ·
+[What crosses a connection](what-crosses-a-connection.md) ·
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 
 <!-- turns -->
 ---

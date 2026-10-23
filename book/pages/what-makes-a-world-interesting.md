@@ -73,7 +73,7 @@ Each criterion stands for one part of the picture.
 ## Healthy, and interesting
 
 A world that meets all six criteria is healthy. That is a high bar: in the
-worlds of the book's first experiments, few met it.
+worlds of the notebook's first experiments, few met it.
 
 A world that is alive and misses at most one of criteria 2 to 6 is
 **interesting**. Worlds made with the same settings but different seeds

@@ -1,8 +1,8 @@
-# Meta X · Healthy and rich
+# Healthy and rich
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What would a world that might keep evolving look like from the outside?
-> - How close does every world the book has made come to that picture?
+> - How close does every world the notebook has made come to that picture?
 > - Which worlds come closest, and what do the others miss?
 
 A world in which every agent holds one, two or three tokens does not look like
@@ -12,14 +12,14 @@ is **decentralised, resilient and almost three-dimensional**, and agents that
 **differ in almost every statistic** — in wealth, in links, in age, in their
 genes and in what they do.
 
-This chapter turns that picture into measurements and reads every world the
-book has made against them: 424 worlds when this was last counted, the lab's
+This page turns that picture into measurements and reads every world the
+notebook has made against them: 424 worlds when this was last counted, the lab's
 runs at their end and the pilot worlds at their last checkpoint, each counted
 once.
 
 ## Two halves
 
-**The network.** The health bar of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)
+**The network.** The health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 already says what a decentralised, resilient network is, in seven marks: one
 piece; a 2-core holding at least 0.8 of the agents; no agent whose loss cuts
 off more than 2% of the others, and no link more than 1%; no agent joined to
@@ -38,7 +38,7 @@ worlds on these four.
 
 > [!info] Added later (17 October 2026)
 > Ranked among all worlds, a score moves whenever worlds are added — by up to
-> 0.01 between this chapter and the batches read since. The scores are now
+> 0.01 between this page and the batches read since. The scores are now
 > ranked among a frozen set instead: the 653 worlds of the profile on 17
 > October 2026 (`book/results/diversity_reference.json`, made by
 > `research/atlas/profile.py --freeze`). A later world gets the percentile its
@@ -50,10 +50,10 @@ worlds on these four.
 <!-- figure healthy/map -->
 ![Healthy, and diverse?](../figures/healthy/map.svg)
 
-**Healthy, and diverse?** Each dot is a world at its last checkpoint. Across: how many of the seven marks of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets — one piece, a 2-core of at least 0.8, no agent whose loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways within each count only so that they do not hide each other). Up: how widely its agents spread over tokens, links, ages and genotypes, as the mean of its percentiles among all worlds. The author's picture of a world that might keep evolving is the top right. B1: B1 at every size and its variants (Experiments 2, 8, 10, 12, 13); brains fixed: Experiment 7; B2: B2 and its variants (Experiments 9, 14, 15, 16), except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pilots: the other pilot worlds, by the rule set they start from.
+**Healthy, and diverse?** Each dot is a world at its last checkpoint. Across: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets — one piece, a 2-core of at least 0.8, no agent whose loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways within each count only so that they do not hide each other). Up: how widely its agents spread over tokens, links, ages and genotypes, as the mean of its percentiles among all worlds. The author's picture of a world that might keep evolving is the top right. B1: B1 at every size and its variants (Experiments 2, 8, 10, 12, 13); brains fixed: Experiment 7; B2: B2 and its variants (Experiments 9, 14, 15, 16), except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pilots: the other pilot worlds, by the rule set they start from.
 
 > [!example]- How to make this figure
-> **Runs.** Every world the book has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
+> **Runs.** Every world the notebook has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/atlas/profile.json`.
 >
@@ -74,7 +74,7 @@ agents most diverse — is empty.
   But their networks meet two to four of the seven marks: only half the agents
   are in the 2-core, and in the median world one agent's loss cuts off 13% to
   35% of the others. Where tokens move along every link and unused links are
-  cut ([Chapter 30](what-crosses-a-connection.md)), the network is a tree of
+  cut ([What crosses a connection](what-crosses-a-connection.md)), the network is a tree of
   blobs held together by single agents.
 - **B2's worlds are healthy but poor.** Their networks meet six or seven marks
   — one piece, the whole world in the 2-core, nothing that one loss could cut
@@ -83,7 +83,7 @@ agents most diverse — is empty.
   to 7, since every agent dies at 100. And at 10,000 tokens B2 misses the one
   mark B1 meets: its dimension is 4.5, above the bar and far from three.
 
-> [!info] Added later (2026-10-16, Chapter 80)
+> [!info] Added later (2026-10-16, [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md))
 > B2's dimension is a matter of its size. In B2's kind of network the
 > dimension shown by ball growth rises with the number of agents: B2 at 5,000
 > tokens, with 1,200 to 1,800 agents, shows 3.6 to 4.1, and six of its ten
@@ -94,15 +94,15 @@ agents most diverse — is empty.
 > of size — the dimension fails a large world, the hub a small one, and worlds
 > of 600 to 1,000 agents met both at 98% of their moments. Health compared
 > between worlds of different sizes has to be read with that in mind
-> ([Chapter 80](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
+> ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
 
-> [!info] Added later (2026-10-17, Chapter 73)
+> [!info] Added later (2026-10-17, [Who inherits?](who-inherits.md))
 > The rise with size holds for B2 itself and for its mixed worlds, not for
 > every variant of B2: with the estate of the dead left to the newborns or to
 > the parents, B2's worlds hold more than 5,000 agents at a dimension of 3.4 to
-> 3.9 ([Chapter 73](who-inherits.md#healthy-and-diverse)).
+> 3.9 ([Who inherits?](who-inherits.md#healthy-and-diverse)).
 
-> [!info] Added later (2026-10-17, Chapter 87)
+> [!info] Added later (2026-10-17, [What folds a world](what-folds-a-world.md))
 > Why the dimension rises with size in B2's kind of network: those networks
 > are nearly small worlds, not spaces. A typical agent's ball grows four to
 > six times a step and holds a quarter of a world of 3,400 agents within
@@ -113,7 +113,7 @@ agents most diverse — is empty.
 > once their first generation dies, as each death is mended with a ring of
 > links; the worlds whose estate goes to the newborns or the parents stay
 > spaces, of about three dimensions
-> ([Chapter 87](what-folds-a-world.md)).
+> ([What folds a world](what-folds-a-world.md)).
 
 <!-- figure healthy/poor -->
 ![Agents with three tokens or fewer](../figures/healthy/poor.svg)
@@ -121,7 +121,7 @@ agents most diverse — is empty.
 **Agents with three tokens or fewer.** Each dot is a world: the share of its agents holding one, two or three tokens. B1 10k: B1 at 10,000 tokens (Experiment 2); 100k: Experiment 10; sizes: Experiment 8; 5k: Experiments 12 and 13; fixed: brains that never change (Experiment 7); B2 10k: Experiment 16; B2 var: B2 with one rule or rate changed (Experiments 9, 15, 16); B2 5k: Experiment 14, except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pil.: the other pilot worlds, by the rule set they start from.
 
 > [!example]- How to make this figure
-> **Runs.** Every world the book has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
+> **Runs.** Every world the notebook has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/atlas/profile.json`.
 >
@@ -155,12 +155,12 @@ agents most diverse — is empty.
 >   of 0.02;
 > - at 10,000 iterations, four of the five candidates that held: rich worlds
 >   with a Gini of 0.37 to 0.44
->   ([Chapter 92](the-candidates-played-on.md)).
+>   ([The candidates, played on](the-candidates-played-on.md)).
 >
 > From now on a thesis no longer counts a world's poor. It asks instead that
 > the world be **no more even than B2**: a Gini no lower than the least of
 > B2's worlds read at the same iteration. Old theses keep their wording;
-> Chapters 92 and 93 and Meta XII say what the clarified reading changes.
+> [The candidates, played on](the-candidates-played-on.md) and [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) and [Rules in company](rules-in-company.md) say what the clarified reading changes.
 
 <!-- figure healthy/spreads -->
 ![How widely the agents spread](../figures/healthy/spreads.svg)
@@ -168,7 +168,7 @@ agents most diverse — is empty.
 **How widely the agents spread.** Each dot is a world. Tokens, links, ages: the effective number of doubling classes its agents fill (1, 2–3, 4–7, …; for ages, age + 1) — 1 if every agent is in one class, k if they are spread evenly over k. Genotypes: the effective number of genotypes per agent (1 for every agent its own genotype, near 0 for one genotype everywhere).
 
 > [!example]- How to make this figure
-> **Runs.** Every world the book has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
+> **Runs.** Every world the notebook has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/atlas/profile.json`.
 >
@@ -184,7 +184,7 @@ B2 worlds at 5,000 tokens (smaller worlds, with a dimension of about 3.8);
 eleven of the lab's B2 worlds at 10,000, nine of them without old age
 (Experiment 15), one of B2 itself and one whose brains rarely change
 (Experiment 9); five alliance pilots, four of them at 3,000 tokens, below the
-book's rule of 10,000; and twenty-five pilot worlds built on B2, two of them
+notebook's rule of 10,000; and twenty-five pilot worlds built on B2, two of them
 long runs.
 
 > [!info] Added later (2026-10-17, counted again)
@@ -194,7 +194,7 @@ long runs.
 > B2 or its variants at 5,000 tokens, one of B2 itself, one whose brains
 > rarely change), 67 pilot worlds built on B2 — 28 of them with brains mixed
 > at birth and one other rule (batch Y,
-> [Chapter 82](mixing-with-every-other-rule.md)), 12 of batch W — five
+> [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)), 12 of batch W — five
 > alliance pilots of B1, four of them at 3,000 tokens, and one long run. The closest of all are now
 > brains mixed at birth with a faster change of brains (diversity 0.79 and 0.78,
 > about 40% of the agents at three tokens or fewer).
@@ -203,7 +203,7 @@ long runs.
 > This section first counted 34 worlds. A world's dimension was then taken from
 > the table of every world, as a mean over the stretch at its end; it is now
 > measured on the same checkpoint as the other six marks (the same measure, at
-> one moment, [Chapter 24](how-many-dimensions-does-a-world-have.md)). The
+> one moment, [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)). The
 > two agree for B2's worlds (half of them within 0.12) and swing for B1's,
 > whose networks change fast. Worlds that had no entry in the table, and the
 > batches finished since, are now counted too. And the genotypes of worlds
@@ -238,7 +238,7 @@ are:
 <!-- /table -->
 
 The closest are worlds whose **brains are mixed at birth**
-([Chapter 78](mixed-brains-costly-units.md)): five of the twelve at the top,
+([Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)): five of the twelve at the top,
 the first among them. The two of batch Q meet every mark at a dimension of 3.5,
 and their agents are
 richer and more varied than in any other healthy world: the median agent holds
@@ -292,7 +292,7 @@ a dimension of 4.3 has cost it a mark.
 > [!info] Added later (2026-10-17, the long runs at 10,000)
 > The two mixed worlds of batch Q are Experiment 17's worlds of seeds 1 and 2,
 > agent for agent, and are read there now
-> ([Chapter 80](mixed-at-birth-ten-long-worlds.md)): at 10,000 iterations
+> ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)): at 10,000 iterations
 > one held 2,221 agents, 65% at three tokens or fewer, and the other 744, 6%.
 > The four other candidates all reached 10,000, and none held everything it
 > had at 1,000: three lost a mark as they grew — their dimension rose above 4,
@@ -310,20 +310,20 @@ The long runs are planned in three steps:
    the start, to 10,000.
 3. **A pre-registered lab experiment** for what holds in most seeds: ten seeds
    to 10,000 iterations, and the best world on to a hundred thousand, as
-   [Chapter 69](a-hundred-thousand-iterations.md) plans for one world.
+   [A hundred thousand iterations](a-hundred-thousand-iterations.md) plans for one world.
    Mixing is now a setting of the engine,
    [`mix_at_birth`](settings.md#mix_at_birth), off unless a run turns
    it on, and its experiment is written and ready for the lab:
-   [Chapter 80](mixed-at-birth-ten-long-worlds.md), Experiment 17, ten worlds
+   [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md), Experiment 17, ten worlds
    of B2 with mixing for 10,000 iterations.
 
 > [!info] Added later (2026-10-16, Experiment 17)
 > Step 3 has run. The ten mixed worlds of Experiment 17
-> ([Chapter 80](mixed-at-birth-ten-long-worlds.md)) are rich — 11% of the
+> ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)) are rich — 11% of the
 > agents at three tokens or fewer in the median world at 10,000 iterations —
 > but only five of the ten met every mark, so its thesis is refuted; the five
 > that did are being played on to 50,000
-> ([Chapter 81](five-mixed-worlds-fifty-thousand-iterations.md), Experiment
+> ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md), Experiment
 > 18). Two of its worlds are the two mixed worlds of batch Q again, agent for
 > agent — the lab's engine and the prototype play a mixed world alike — so
 > `Q/mix-s1` and `s2` and their long runs count as Experiment 17's worlds s001
@@ -331,22 +331,22 @@ The long runs are planned in three steps:
 
 > [!info] Added later (19 October 2026): steps 1 and 2
 > Every candidate that can be read at 10,000 iterations now has been
-> ([Chapter 92](the-candidates-played-on.md)): of nineteen, five held,
+> ([The candidates, played on](the-candidates-played-on.md)): of nineteen, five held,
 > eleven fell back — most of them into B2's poverty — and three died out on
 > the way; four whose rules exist only in the pilots' prototype wait for
 > Experiment 23. Step 2 gave each rule that held five new seeds (Experiment 21,
-> [Chapter 93](five-more-seeds-for-the-rules-that-held.md)): none held more
+> [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md)): none held more
 > often than mixing alone, so step 3 has no rule to take up yet.
 
-The batches still running (T to Y, [Appendix C](every-simulation.md)) and the
+The batches still running (T to Y, [Every simulation: what was run, and what was measured](every-simulation.md)) and the
 search for settings by elimination (batch Z: worlds whose every setting is
 drawn at random, the values that make worlds worse dropped round after round,
 `research/oee/search.md`) add candidates as they finish.
 
-> [!info] Added later (2026-10-17, Chapter 87)
+> [!info] Added later (2026-10-17, [What folds a world](what-folds-a-world.md))
 > The bar's dimension mark does not tell a space from a small world: a B2
 > world of 600 to 1,500 agents passes it because it is small
-> ([Chapter 87](what-folds-a-world.md)). Read with Chapter 87's stronger
+> ([What folds a world](what-folds-a-world.md)). Read with [What folds a world](what-folds-a-world.md)'s stronger
 > test — the steps within which a typical agent's ball holds half the world,
 > over the same for its random twin — none of the 23 candidates is a space:
 > they read 1.13 to 1.92, most below 1.5, as folded as B2 (1.18), where B1
@@ -370,12 +370,12 @@ drawn at random, the values that make worlds worse dropped round after round,
   spread as B1's do. Without old age B2's worlds meet every mark of the bar and
   stop: hardly a birth, nearly every agent poor and of one age (Experiment 15;
   links that hold a token without old age did the same,
-  [Chapter 78](mixed-brains-costly-units.md)). Something between, a death
+  [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)). Something between, a death
   that depends on what an agent does rather than on a fixed age, would let ages
   spread without stopping the world.
 - **A healthy network is not yet a space** (added later): the candidates'
   networks are folded small worlds, and "almost three-dimensional" asks more
-  than the bar's mark does ([Chapter 87](what-folds-a-world.md)).
+  than the bar's mark does ([What folds a world](what-folds-a-world.md)).
 - **A world might be judged by this map** before it is judged by its evolution:
   a rule that moves worlds towards the top right is a candidate for the long
   runs and the lifetime contests. The batches now running will be placed on it
@@ -383,12 +383,12 @@ drawn at random, the values that make worlds worse dropped round after round,
 
 **Related notes:** [Effective numbers](effective-number.md) ·
 [Every setting](settings.md) ·
-[Chapter 46 · How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
-[Chapter 48 · A world that cannot break](a-world-that-cannot-break.md) ·
-[Chapter 70 · How different are the agents?](how-different-are-the-agents.md) ·
-[Chapter 78 · Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) ·
-[Meta VI · Every world side by side](every-world-side-by-side.md) ·
-[Chapter 87 · What folds a world](what-folds-a-world.md)
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
+[A world that cannot break](a-world-that-cannot-break.md) ·
+[How different are the agents?](how-different-are-the-agents.md) ·
+[Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) ·
+[Every world side by side](every-world-side-by-side.md) ·
+[What folds a world](what-folds-a-world.md)
 
 <!-- turns -->
 ---

@@ -748,7 +748,7 @@ class Handler(BaseHTTPRequestHandler):
             # one it was made with, and without the lab's record of it.
             if meta.get("lab"):
                 self._error("this run belongs to an experiment, which runs it on the engine "
-                            "it was made with: start it from the Book", 409)
+                            "it was made with: start it from the Research Notebook", 409)
                 return
             if not POOL.start(run_id):
                 self._error("run is already in progress", 409)
@@ -802,7 +802,7 @@ class Handler(BaseHTTPRequestHandler):
     def _held_elsewhere(run_id: str) -> str:
         """Why a run something else is advancing cannot be touched from here."""
         if store.load_meta(run_id).get("lab"):
-            return "an experiment is advancing this run: pause the lab from the Book first"
+            return "an experiment is advancing this run: pause the lab from the Research Notebook first"
         return "the run is being advanced by another process"
 
     @staticmethod

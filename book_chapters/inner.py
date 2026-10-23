@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Part II, the inside of a world: Chapter 19 — what the brains are like — and
-Chapter 20 — what agents say to each other.
+the study of the baseline, the inside of a world: What the brains are like — what the brains are like — and
+What agents say to each other — what agents say to each other.
 
 Both read the final checkpoint of every world that lived to the end, which holds
 every living agent's brain and every message in flight after its last iteration. The
@@ -306,7 +306,7 @@ def gain(run_id: str) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 19 · What the brains are like
+# What the brains are like
 # ---------------------------------------------------------------------------
 
 PROBE = ("For every agent of the world with at least one token, its inputs exactly as the engine builds "
@@ -413,7 +413,7 @@ def minds(ch: F.Chapter) -> None:
     ch.grid(
         "outputs", panels, columns=1, title="Where selection pushed",
         caption="One dot per world: the mean, over its agents and their columns, of each of the brain's outputs "
-                "that make decisions (Chapter 4). A founder's brain averages 0 on every one of them (the dashed "
+                "that make decisions ([The brain](the-brain.md)). A founder's brain averages 0 on every one of them (the dashed "
                 "line). A child's share is f(a, b), the share of the positive part of a in the positive parts "
                 "of a and b ([The share function](share-function.md)): a below 0 and b above it means no child. "
                 "Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two "
@@ -502,7 +502,7 @@ def minds(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 20 · What agents say to each other
+# What agents say to each other
 # ---------------------------------------------------------------------------
 
 @chapter

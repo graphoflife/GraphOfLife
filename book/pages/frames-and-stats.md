@@ -1,6 +1,6 @@
 # What a run records
 
-Everything the book shows is computed from two kinds of record that every
+Everything the notebook shows is computed from two kinds of record that every
 run writes into its folder, `GraphOfLifeRuns/<run>/`: **frames** and a
 **statistics file**. This note says what is in them and how to read them, so
 that every figure can be made again by hand.
@@ -66,7 +66,7 @@ the viewer charts, and every one has a note that says how it is computed.
 | `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on neighbours, and the connections they keep alive (phase 2) | [Token flow](token-flow.md) |
 | `revolutions` | nodes won by a coalition (phase 2) | [Revolution](revolution.md) |
 | `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup | [Cut risk](cut-risk.md) |
-| `gifts`, `giftTokens`, `giftShare` | gifts of tokens — `null` in every run of this book, which has no gifts ([`allow_gifting`](settings.md#allow_gifting)) | |
+| `gifts`, `giftTokens`, `giftShare` | gifts of tokens — `null` in every run of this notebook, which has no gifts ([`allow_gifting`](settings.md#allow_gifting)) | |
 
 **Graph statistics** cost far more to compute: they walk the whole network.
 They are filled in only on the rows of every 25th iteration (0, 25, 50, …);
@@ -90,7 +90,7 @@ on other rows they are `null`:
 | `assortativity` | whether hubs join hubs | [Assortativity](assortativity.md) |
 
 Fields beginning with `_` (`_seconds`, `_cpu`, `_peakMB`, …) are the costs of
-the run, not of the world ([Appendix A](what-a-simulation-costs.md)).
+the run, not of the world ([What a simulation costs](what-a-simulation-costs.md)).
 
 The file is read with `gol_record.read_stats(run)`, which returns the rows
 as a list of dictionaries, in frame order.

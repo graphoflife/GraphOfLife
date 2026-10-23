@@ -6,7 +6,7 @@ actually go**. A *flow module* is a group of the third kind: a set of agents a
 token, wandering the flow from agent to agent, tends to stay inside. This note
 explains how such groups are found, followed through time, and checked
 against chance. The Research tab's **Flow modules** view and
-[Chapter 71](flow-modules.md) use exactly this.
+[Flow modules: the groups tokens stay in](flow-modules.md) use exactly this.
 
 ## The flow of one game
 
@@ -71,7 +71,7 @@ decide "enough":
 A small module can be "followed" on very little: two modules of two agents
 that share one agent overlap by a third. On flows made mostly of pairs — as
 in B2's worlds, where an agent puts its whole stake on one neighbour — a
-matching at any overlap follows chance chains, so the book matches above the
+matching at any overlap follows chance chains, so the notebook matches above the
 floor and checks the result against chance (below).
 
 Because identity is carried by overlap and not by membership, a module can
@@ -114,7 +114,7 @@ Two more measures need no following at all, or ask what following finds:
 > An earlier version of this note said that the mutual matching needs no
 > floor and that real modules live longer than those of the rewired flow. The
 > first was not what the program did (it matched above the floor), and the
-> second is not a fair test. [Chapter 71](flow-modules.md) uses the nulls above.
+> second is not a fair test. [Flow modules: the groups tokens stay in](flow-modules.md) uses the nulls above.
 
 <!-- turns -->
 ---

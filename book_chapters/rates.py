@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part V, Chapter 52 · How fast should brains change? — Experiment 9.
+the work on open-ended evolution, How fast should brains change? — Experiment 9.
 
 B2 at five rates of change: a brain copied into a newborn or a won node
 changes with probability 0.05, 0.1, 0.2 (B2 itself), 0.4 or 0.8. Two kinds of

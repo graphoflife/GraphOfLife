@@ -37,7 +37,7 @@ $$
 
 A world of 1,300 agents with mean degree 3.3 has a density of 0.0025: of
 every 400 pairs of agents, one is joined. Density falls as a world grows even
-when every agent keeps the same number of connections, which is why the book
+when every agent keeps the same number of connections, which is why the notebook
 mostly uses the mean degree.
 
 ## The degree distribution
@@ -71,7 +71,7 @@ statistics). A **hub** is an agent of very high degree. A settled baseline world
 both. After the last game of the thirty baseline worlds of 100,000 tokens,
 35% of all agents had exactly one connection and 23% two; 4.7% had ten or
 more; and the largest hub had 10,735
-([Chapter 17](what-shape-does-the-network-take.md); at 10,000
+([What shape does the network take?](what-shape-does-the-network-take.md); at 10,000
 tokens, 37%, 23%, 4% and 1,399).
 
 <!-- turns -->

@@ -1,7 +1,7 @@
 # Room for the steadiest world
 
-> [!question] Questions of this chapter
-> - Which world the book has made comes closest to one that might keep
+> [!question] Questions of this page
+> - Which world the notebook has made comes closest to one that might keep
 >   evolving, and what does it still miss?
 > - Can a rule that keeps a world's room give it the one thing it misses,
 >   without taking what it has?
@@ -11,14 +11,14 @@
 ## Why ask
 
 The author's picture of a world that might keep evolving
-([Meta X](healthy-and-rich.md)) asks four things of it at
+([Healthy and rich](healthy-and-rich.md)) asks four things of it at
 once:
 - **Healthy:** it meets every mark of the health bar.
 - **Diverse:** its agents differ, more than B2's do.
 - **A space:** it is wide, at least half again as wide as a random network
-  with the same links ([Chapter 87](what-folds-a-world.md)).
+  with the same links ([What folds a world](what-folds-a-world.md)).
 - **Uneven:** its tokens are no more even than B2's
-  ([Meta X](healthy-and-rich.md), added later).
+  ([Healthy and rich](healthy-and-rich.md), added later).
 
 Read by all four, few worlds pass even for a moment:
 - **At 1,000 iterations:** three of the 466 worlds measured, each with
@@ -26,7 +26,7 @@ Read by all four, few worlds pass even for a moment:
 - **At 10,000:** one of 64. This is Experiment 21's world without random
   inputs, seed 6. The same rule's other worlds failed, and two of them died.
 
-The steadiest configuration the book has is
+The steadiest configuration the notebook has is
 [Experiment 19](mixed-at-birth-with-parents-as-mates.md)'s: brains mixed
 at birth, with only parents as mates.
 - **What it has:** all ten of its worlds lived to 20,000 iterations, at
@@ -38,14 +38,14 @@ at birth, with only parents as mates.
   dimension mark, which a folded world of 2,000 agents does. These are
   small worlds, not spaces.
 
-[Chapter 87](what-folds-a-world.md) found what folds a world: a death
+[What folds a world](what-folds-a-world.md) found what folds a world: a death
 mended with a ring of links. It also found what keeps a world's room:
 - the estate of the dead paid to births;
 - no old age;
 - no mending.
 
 Each pays for the room in its own coin
-([Meta XII](rules-in-company.md)):
+([Rules in company](rules-in-company.md)):
 - **The estates** fill a world with alike agents. With plain mixing they
   gave spaces of about 5,000 agents whose diversity scores fell to 0.35 to
   0.40.
@@ -66,17 +66,19 @@ Room has to come from a rule.
 > [!quote] The thesis of Experiment 31, written down before any of its runs existed
 > **The claim.** Experiment 19's world, brains mixed at birth with only parents as mates, is steady, diverse and uneven, but folded. One of the rules that keep a world's room unfolds it without costing the rest. For at least one of four rules (the estate of the dead paid to the newborns, or to the parents, no old age, or deaths not mended) both of its worlds, at iteration 3,000, meet every mark of the health bar, are more diverse than B2's median world, are at least 1.5 times as wide as their random twins, and are no more even than B2's least even world, B2's ten worlds played on being read at the same iteration.
 >
-> **Why it would be so.** All ten of Experiment 19's worlds lived to 20,000 iterations. At 10,000 they held 1,429 to 2,385 agents, with diversity scores of 0.55 to 0.65 against B2's median of 0.49 and Ginis of 0.47 to 0.57 against B2's least of 0.47. Yet a typical agent reached half its world in 1.13 to 1.31 times the steps its random twin needs, and nine of ten missed the dimension mark: they are folded small worlds, not spaces. Chapter 87 found what folds a world, a death mended with a ring of links, and what keeps a world's room: the estate paid to births (2.0 to 2.6 times the twin), no old age (1.8 to 1.9) and no mending (2.0). Each pays for the room in its own coin (Meta XII): estates fill a world with alike, poor agents, no old age all but stops births, and without mending one loss can cut a world. With plain mixing, the estates gave spaces of about 5,000 agents with diversity scores of only 0.35 to 0.40. With parents as mates a mixed world held its size, which may keep the diversity the estates cost.
+> **Why it would be so.** All ten of Experiment 19's worlds lived to 20,000 iterations. At 10,000 they held 1,429 to 2,385 agents, with diversity scores of 0.55 to 0.65 against B2's median of 0.49 and Ginis of 0.47 to 0.57 against B2's least of 0.47. Yet a typical agent reached half its world in 1.13 to 1.31 times the steps its random twin needs, and nine of ten missed the dimension mark: they are folded small worlds, not spaces. Chapter [87](what-folds-a-world.md) found what folds a world, a death mended with a ring of links, and what keeps a world's room: the estate paid to births (2.0 to 2.6 times the twin), no old age (1.8 to 1.9) and no mending (2.0). Each pays for the room in its own coin ([Meta XII](rules-in-company.md)): estates fill a world with alike, poor agents, no old age all but stops births, and without mending one loss can cut a world. With plain mixing, the estates gave spaces of about 5,000 agents with diversity scores of only 0.35 to 0.40. With parents as mates a mixed world held its size, which may keep the diversity the estates cost.
 >
 > **It holds if:** For at least one rule, both worlds (seeds 1 and 2) at iteration 3,000 meet every mark, have a diversity score above the median of B2's ten worlds played on and read at 3,000, a typical distance at least 1.5 times their twin's, and a Gini of their agents' tokens no lower than the least of those ten worlds'.
 >
 > **It fails if:** No rule has both its worlds pass all four at 3,000: the room and the rest pull apart even in the steadiest mixed world, and the chapter says what each rule cost.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The runs
 
 <!-- runs E31 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **8 runs.** Every condition below is run once for every seed (1 to 2), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **estate to the newborns** — changes `mix_at_birth` = on, `mix_mates` = parents, `redistribution` = newborns; 10,000 tokens. Runs `B2-10000-06b876-s001` … `B2-10000-06b876-s002`.
@@ -84,7 +86,7 @@ Room has to come from a rule.
 > - **no old age** — changes `mix_at_birth` = on, `mix_mates` = parents, `max_age` = 0; 10,000 tokens. Runs `B2-10000-89f5b1-s001` … `B2-10000-89f5b1-s002`.
 > - **deaths not mended** — changes `mix_at_birth` = on, `mix_mates` = parents, `mend_on_death` = off; 10,000 tokens. Runs `B2-10000-c58a16-s001` … `B2-10000-c58a16-s002`.
 >
-> To make these runs again: `python3 gol_lab.py run E31`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E31`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | estate to the newborns | estate to the parents | no old age | deaths not mended | what it is |
@@ -227,12 +229,12 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
   try keeps the estate but asks more of a birth, without a number: a child
   must be born with at least what its parent's neighbours hold, so a world
   can grow only as rich as it is. It is local, needs no constant, and is
-  Meta XI's missing pull — births that pay more when they would make the
+  [What holds a world's size](what-holds-a-worlds-size.md)'s missing pull — births that pay more when they would make the
   world poorer.
 
-> [!info] Added later (2026-10-21, Chapter 101)
+> [!info] Added later (2026-10-21, [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md))
 > The price of a child was not the cost. With the floor, the estate worlds
-> were the same ([Chapter 101](births-as-rich-as-the-neighbours.md)):
+> were the same ([Births as rich as the neighbours](births-as-rich-as-the-neighbours.md)):
 > in a world of paupers a parent's neighbours hold a token or two, so the
 > floor asked no more than the ten tokens every child already gets. The
 > paupers are not born poor. Children start with ten tokens or more, and
@@ -243,7 +245,7 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
 - **The nearest world is one without mending.** Seed 1 missed only a cut. A
   world whose deaths are not mended keeps its tokens and its room; what it
   needs is to stay whole. Mending without folding is a second rule to try
-  ([Chapter 87](what-folds-a-world.md) traced the folding to the rings a
+  ([What folds a world](what-folds-a-world.md) traced the folding to the rings a
   death closes).
 
 

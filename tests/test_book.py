@@ -242,6 +242,73 @@ def test_every_link_between_the_books_pages_arrives():
     assert not broken, "links to pages that are not there:\n  " + "\n  ".join(broken)
 
 
+def test_no_page_is_named_by_a_number():
+    # The notebook is read by topic and by link, from any page, so a page is
+    # named by what it is about: "Chapter 13", "Meta X", "Part V" or a link
+    # that reads "13" name a place in an order that is gone. A thesis keeps the
+    # numbers of its day, word for word, each linked to the page it meant
+    # (book/legacy.json); everything else a reader sees is held to this, and so
+    # is the code that writes captions, recipes and labels.
+    import glob
+    import io
+    import json
+    import re
+    import tokenize
+    import book_fill
+    numbered = re.compile(r"\bChapters? \d|\bMeta [IVXL]+\b|\bParts? [IVXL]+\b|\bAppendix [A-C]\b|\[\d{1,3}\]\(")
+    book = os.path.join(runner.ROOT, "book")
+    thesis = re.compile(r"^> \[!quote\] The thesis[^\n]*\n(?:>[^\n]*\n)+(?:\n\*Written while[^\n]*\n)?", re.M)
+    found = []
+
+    def check(where, text):
+        found.extend(f"{where}: …{text[max(0, m.start() - 40):m.end() + 20]}…" for m in numbered.finditer(text))
+
+    for page in glob.glob(os.path.join(book, "pages", "*.md")) + [os.path.join(book, "README.md")]:
+        with open(page, encoding="utf-8") as f:
+            text = f.read()
+        text = thesis.sub("", book_fill.BLOCK.sub(lambda m: "" if m.group(1) == "thesis" else m.group(0), text))
+        check(os.path.relpath(page, book), text)
+    with open(os.path.join(book, "book.json"), encoding="utf-8") as f:
+        index = json.load(f)
+    for page in index["pages"]:
+        check(f"book.json {page['id']}", page["title"] + " " + page["summary"])
+    for path in glob.glob(os.path.join(book, "results", "*.json")) + [os.path.join(book, "settings.json")]:
+        with open(path, encoding="utf-8") as f:
+            check(os.path.relpath(path, book), f.read())
+    for path in glob.glob(os.path.join(runner.ROOT, "book_chapters", "*.py")) + [
+            os.path.join(runner.ROOT, "book_figures.py"), os.path.join(runner.ROOT, "web", "index.html")]:
+        with open(path, encoding="utf-8") as f:
+            source = f.read()
+        if path.endswith(".py"):
+            kinds = {tokenize.STRING, getattr(tokenize, "FSTRING_MIDDLE", tokenize.STRING)}
+            source = "\n".join(t.string for t in tokenize.generate_tokens(io.StringIO(source).readline)
+                               if t.type in kinds and not t.string.startswith(('"""', "'''")))
+        check(os.path.relpath(path, runner.ROOT), source)
+    assert not found, "pages named by a number:\n  " + "\n  ".join(found[:40])
+
+
+def test_every_number_a_thesis_cites_has_its_page():
+    # A thesis keeps the chapter numbers of the day it was written; each must
+    # be mapped to the page it meant, or it would link nowhere.
+    import glob
+    import json
+    import re
+    import book_fill
+    with open(os.path.join(runner.ROOT, "book", "legacy.json"), encoding="utf-8") as f:
+        cited = json.load(f)["theses"]
+    missing = []
+    for path in glob.glob(os.path.join(runner.ROOT, "book", "experiments", "E*.json")):
+        name = os.path.basename(path)[:-5]
+        with open(path, encoding="utf-8") as f:
+            said = " ".join(str(v) for v in (json.load(f).get("thesis") or {}).values())
+        for m in re.finditer(r"\bChapters? (\d+(?:(?:, | and | or )\d+)*)|\b(?:Meta|Part) [IVXL]+\b", said):
+            words = [f"Chapter {n}" for n in re.findall(r"\d+", m.group(1))] if m.group(1) else [m.group(0)]
+            missing += [f"{name}: {w}" for w in words if w not in cited.get(name, {})]
+    assert not missing, "numbers in theses that lead nowhere: " + ", ".join(missing)
+    for name in cited:
+        book_fill.thesis(f"pages/{name}.md", name)          # every page it maps to exists
+
+
 def test_every_link_to_a_section_or_a_picture_arrives():
     # A link to a section (`settings.md#k_neighbors`, `#what-is-set-aside`) names
     # a heading by the id GitHub gives it, which the notebook's tab gives it too

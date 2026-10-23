@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Part III, the first half: Chapters 27 to 32 — entropy, gains and losses, the
+the measurements of the baseline, the first half: Pages 27 to 32 — entropy, gains and losses, the
 flow of tokens, how agents have children, and power laws.
 
-Most of what these chapters show is read from the statistics every run
+Most of what these pages show is read from the statistics every run
 records; what needs single agents comes from book_figures.sample_pass, which
 reads the frames every 25 iterations and keeps what it found beside the runs.
 """
@@ -49,7 +49,7 @@ def settled_rows(run_id: str, phase: int = 2) -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 27 · How even is a world?
+# How even is a world?
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -144,7 +144,7 @@ def entropy(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 28 · Gains and losses
+# Gains and losses
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -286,7 +286,7 @@ def gains(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 29 · Where the tokens flow
+# Where the tokens flow
 # ---------------------------------------------------------------------------
 
 def even_split(run_id: str, iterations) -> Tuple[np.ndarray, np.ndarray]:
@@ -425,7 +425,7 @@ def flow(ch: F.Chapter) -> None:
         predicted.append(p)
         real.append(r)
         per_world.append(float(np.polyfit(p, r, 1)[0]))
-        # The worlds held together by one hub (Chapter 33) apart: the even split misreads a star's centre.
+        # The worlds held together by one hub (The largest and the smallest) apart: the even split misreads a star's centre.
         if mean_over(s.run_id, "maxDegree/nodes", *W.window) < STAR:
             apart["predicted"].append(p)
             apart["real"].append(r)
@@ -461,8 +461,8 @@ def flow(ch: F.Chapter) -> None:
                 f"{len(predicted):,} agents (the games of every 250th iteration from 500 on, {len(alive)} worlds), "
                 f"the straight line fitted to the points has slope {slope:.2f}, and the even split accounts "
                 f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](least-squares.md))"
-                + (f"; over the {without['worlds']} worlds that are not held together by a single hub (Chapter "
-                   f"33), slope {without['slope']:.2f} and {100 * without['r2']:.0f}%."
+                + (f"; over the {without['worlds']} worlds that are not held together by a single hub "
+                   f"([The largest and the smallest](the-largest-and-the-smallest.md)), slope {without['slope']:.2f} and {100 * without['r2']:.0f}%."
                    if without["worlds"] < len(alive) else "."),
         recipe=recipe(W.surviving_text(), SAMPLE.replace("every 25 iterations by `book_figures.sample_pass` ", ""),
                       ["For every 250th iteration t from 500 on, read frame `2·t` (the start of the game): each "
@@ -523,7 +523,7 @@ def flow(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 31 · How agents have children
+# How agents have children
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -645,7 +645,7 @@ def children(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 32 · Power laws, real and apparent
+# Power laws, real and apparent
 # ---------------------------------------------------------------------------
 
 def ccdf(values: Sequence[float]) -> Tuple[np.ndarray, np.ndarray]:

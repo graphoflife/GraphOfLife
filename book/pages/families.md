@@ -44,7 +44,7 @@ eight iterations, so the climb usually goes a few steps.
 
 Before iteration 8, "eight iterations ago" is before the world began: the
 climb ends at the founders, and the count is how many of the founders still
-have descendants ([Chapter 11](the-first-hundred-iterations.md)).
+have descendants ([The first hundred iterations](the-first-hundred-iterations.md)).
 
 ## In the code
 

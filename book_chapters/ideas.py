@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 78 · Three more ideas: brains mixed at birth, units that hold a token,
+Three more ideas: brains mixed at birth, units that hold a token,
 an eye for raids on kin — and links that cost a token in a world without old
 age. Pilot batch Q (research/oee/pilots/jobs_Q.txt), B2's settings at 10,000
 tokens, two seeds each, 2,000 iterations; the control is batch P's B2 worlds of

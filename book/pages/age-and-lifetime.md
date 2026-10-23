@@ -46,7 +46,7 @@ lifetime** is 50. But look at the world at any moment: an agent of the
 second kind is alive at 99 times as many moments as one of the first, so 99 in
 100 of the agents you see are long-lived ones. The **living are a sample
 weighted by lifetime**. This is why, in
-[Chapter 12](births-deaths-and-ages.md), half of all agents
+[Births, deaths and ages](births-deaths-and-ages.md), half of all agents
 are gone within ten iterations, while the median age of the agents alive at
 the end is 54.
 
@@ -64,7 +64,7 @@ such agent is equally likely to be at any point of its life. This is the
 are not exactly in a steady state — their births slow down for over a
 thousand iterations — but the effect is the same in kind; those of 100,000
 tokens are in one from iteration 500 on,
-[Chapter 13](how-ages-change.md).)
+[How ages change over a world's life](how-ages-change.md).)
 
 ## The ages of a steady world
 
@@ -83,7 +83,7 @@ $$
 and in particular the newborns, of age 0, are a share 1/μ of the living. This
 is the **stationary population** of demography. Its ages follow from the
 lifetimes alone; a world whose living are older than its lifetimes say has
-had more births in the past than now. [Chapter 13](how-ages-change.md)
+had more births in the past than now. [How ages change over a world's life](how-ages-change.md)
 checks the worlds against it.
 
 ## The risk of dying at each age
@@ -121,7 +121,7 @@ cutting them short. To compare cohorts on equal terms, each is measured by
 how many of its first 100 iterations an agent lives on average, the
 **restricted mean lifetime** Σ *S*(*L*) for *L* = 1 to 100: every cohort born
 at least 100 iterations before the end can be measured by it in full
-([Chapter 13](how-ages-change.md)).
+([How ages change over a world's life](how-ages-change.md)).
 
 <!-- turns -->
 ---

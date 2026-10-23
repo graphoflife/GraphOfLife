@@ -1,6 +1,6 @@
 # Gliders, and who helps whom
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Does the game make patterns that last while the agents in them change, as
 >   Conway's Game of Life makes gliders out of cells that are born and die?
 > - Do tokens go round the network in rings, or run downhill?
@@ -10,8 +10,8 @@
 
 ## Why ask
 
-The measures of Part V look at agents one by one: what they hold, what they
-stake, how their brains do in a contest. [Chapter 50](why-evolution-stops.md)
+The measures of open-ended evolution so far look at agents one by one: what they hold, what they
+stake, how their brains do in a contest. [Why evolution stops](why-evolution-stops.md)
 found one blind spot in them, contests too short for what pays over a lifetime.
 The author suggested another: perhaps the worlds hold structures above the
 single agent that none of the measures can see, cyclic ones like the gliders of
@@ -36,13 +36,13 @@ since a world of 3,000 agents makes almost any small pattern somewhere by
 accident.
 
 Cooperation is the other thing such structure could hide.
-[Chapter 56](alliances.md) *gave* the agents a way to cooperate. It did not
+[Alliances](alliances.md) *gave* the agents a way to cooperate. It did not
 ask whether the worlds without alliances cooperate in some way of their own.
 
-This chapter reads the record of play. B2's ten worlds of Experiment 16 and the
+This page reads the record of play. B2's ten worlds of Experiment 16 and the
 first ten worlds of B1's baseline set record every game with every agent's
 stakes, and the games of iterations 1,000 to 2,000 are read: a settled world,
-long after the founders. For alliances, pilot worlds of [Chapter 56](alliances.md) are played
+long after the founders. For alliances, pilot worlds of [Alliances](alliances.md) are played
 on for 200 iterations from a checkpoint, recording their games in the same form
 (`research/oee/checks/pilot_frames.py`), together with the same pilots without
 alliances as their control. Every check is a script in `research/oee/checks/`.
@@ -166,7 +166,7 @@ distance in B2, 1.0 in B1). A glider in the Game of Life flies straight; these
 have no direction. Nothing an agent senses says from which neighbour it came:
 its inputs are its own and each neighbour's tokens and connections, messages
 and noise. Messages could carry it in principle, but the brains write the name
-of their genotype in them ([Chapter 20](what-agents-say-to-each-other.md)),
+of their genotype in them ([What agents say to each other](what-agents-say-to-each-other.md)),
 and along a puffer's trail every neighbour carries the same name.
 
 **Guns fire without a rhythm.** The nodes that launch chains launch them very
@@ -230,7 +230,7 @@ amount and throws its direction at random.
 **Where the tokens go.** One dot per world, the bar the median. The tokens each connection carried, net, over 50 games, split into the part that runs downhill and the part that goes round loops (the note *Flows that go round*). Top: how much more of the flow goes round than if each connection's net flow had a random direction; above zero it goes round, below it runs downhill. Gifts are stakes that did not take their target, takeovers stakes that did. Bottom: how much of each part comes back on the same connections in the next 50 games.
 
 > [!example]- How to make this figure
-> **Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000. Pilot worlds of [Chapter 56](alliances.md) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and `-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, `A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 iterations with every game recorded in the lab's form (`python3 research/oee/checks/pilot_frames.py <world> --at <iteration> --games 200`).
+> **Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000. Pilot worlds of [Alliances](alliances.md) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and `-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, `A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 iterations with every game recorded in the lab's form (`python3 research/oee/checks/pilot_frames.py <world> --at <iteration> --games 200`).
 >
 > **Data.** From the recorded games.
 >
@@ -252,7 +252,7 @@ with the next stretch's on the same connections, 0.20 in B2 and 0.50 in B1. In
 B1, whose agents spread their stakes over every neighbour, the gifts drain
 towards the best-connected agents (in two worlds checked, the rank correlation
 of an agent's height on the slope with its connections is −0.28 and −0.33):
-the even split of [Chapter 15](where-do-the-tokens-go.md) again, tokens
+the even split of [Where do the tokens go?](where-do-the-tokens-go.md) again, tokens
 settling in proportion to connections. In B2, whose gifts are failed raids,
 they drain weakly towards the richer (−0.16 in two worlds): tribute, paid by
 failed raids to whoever withstood them.
@@ -298,7 +298,7 @@ stake ever helped.
 **Who helps whom.** One dot per world, the bar the median. A stake on a neighbour's node helps if, without it, the neighbour would have been less likely to keep its node (the note *Help*). Top left: the nodes so saved, counted as the sum of those effects, per 100 agents and game; the pilots without alliances, in which no stake can help, are drawn at 0.001. Top right: the pairs in which help went both ways within a stretch of 50 games, summed over the stretches, divided by the number expected from how long each pair were neighbours; worlds in which chance expects fewer than one have no dot. Bottom: whether the net help between agents goes round loops more than chance (only where stretches have at least 100 helping pairs and their help closes loops), and whether help goes to agents carrying the helper's brain more than such agents are among its neighbours (only where at least 100 stakes helped).
 
 > [!example]- How to make this figure
-> **Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000. Pilot worlds of [Chapter 56](alliances.md) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and `-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, `A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 iterations with every game recorded in the lab's form (`python3 research/oee/checks/pilot_frames.py <world> --at <iteration> --games 200`).
+> **Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000. Pilot worlds of [Alliances](alliances.md) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and `-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, `A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 iterations with every game recorded in the lab's form (`python3 research/oee/checks/pilot_frames.py <world> --at <iteration> --games 200`).
 >
 > **Data.** From the recorded games.
 >
@@ -342,7 +342,7 @@ every world. It does not go round: less of the net
 help circulates than if each pair's had a random direction (0.08 less), in
 every world. And it does not stay in the family: clones get 1.03 times their
 share of neighbours. It is help by accident, the by-product of a habit, as
-[Chapter 19](what-the-brains-are-like.md) found the habit itself to be.
+[What the brains are like](what-the-brains-are-like.md) found the habit itself to be.
 Since iteration 100 it has doubled, from 0.9–1.4 nodes saved per 100 agents a
 game to 2.0–3.7 at iteration 1,000, and has gone no further since, rising in
 one world and falling in two by iteration 2,850.
@@ -386,7 +386,7 @@ None of them is in B2. B2's worlds are made of puffers, feuds and tribute:
 lineages copying themselves outward, pairs attacking each other, and failed
 raids feeding those who withstood them. B1 has rescue, as a by-product that
 nobody returns. Alliances bring peace and exchange, and with exchange the one
-ring of this chapter, gifts going round, though it does not last fifty games on
+ring of this page, gifts going round, though it does not last fifty games on
 the same connections. Where rescue is rare, in B2 and among allies, it passes
 both ways more often than chance; but the situations that allow it are the same
 seen from either side, and in B2 no agent could know whom to repay. Returned
@@ -414,11 +414,11 @@ can know. Two inputs would change that, and neither needs a number:
   back on purpose. Brains could then make gliders that travel instead of
   wander, and a signal could cross a world.
 - **A sense of who helped.** One more input per neighbour, *its stake saved my
-  node in the last game*, computed by the rules exactly as this chapter
-  computes help. [Chapter 56](alliances.md) found support given up because
+  node in the last game*, computed by the rules exactly as this page
+  computes help. [Alliances](alliances.md) found support given up because
   "whoever receives it owes nothing back"; an agent that can see who rescued it
   can owe something back. Rescue could then be returned on purpose, by revolution
-  in B1 or by support, without a pact, and the measures of this chapter would
+  in B1 or by support, without a pact, and the measures of this page would
   show whether it was.
 
 > [!info] Added later: both inputs, tested (batch P, 2026-10-16)
@@ -448,7 +448,7 @@ can know. Two inputs would change that, and neither needs a number:
 >   1,000 in 0.56–0.70 (control 0.65–0.80).
 >
 > So information alone does not make cooperation; the rules have to make it
-> pay. [Meta VIII · Who helps whom](who-helps-whom.md) puts this beside
+> pay. [Who helps whom](who-helps-whom.md) puts this beside
 > every other attempt.
 
 The measure itself is the third result. Help computed from the rules, nodes

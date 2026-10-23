@@ -42,7 +42,7 @@ candidate *v* and *f* is [the share function](share-function.md).
    hegemon wins.
 
 Whoever wins, node *v* gets a copy of the winner's brain and **all** the
-tokens staked on it ([Chapter 3](one-iteration.md)).
+tokens staked on it ([One iteration, step by step](one-iteration.md)).
 
 ## The simpler statement
 

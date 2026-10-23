@@ -1,6 +1,6 @@
 # Alliances
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Can cooperation pay in a game in which tokens are only ever moved, never
 >   made?
 > - What is an alliance here, and what does it change in the game?
@@ -9,7 +9,7 @@
 
 ## Why ask
 
-[Chapter 50](why-evolution-stops.md) ended on a diagnosis. The contest for
+[Why evolution stops](why-evolution-stops.md) ended on a diagnosis. The contest for
 nodes is a Colonel Blotto game, its best play is to be unpredictable, and
 evolution finds that in a few hundred iterations and then has nothing left to
 find. A game that does not run out of answers is one whose payoffs depend on
@@ -19,7 +19,7 @@ coordinate are questions whose answers change as the population changes.
 
 But cooperation needs a **surplus**. In this world tokens are never made;
 every token an agent gives away is a token it no longer has. The two kinds of
-help the pilots of [Chapter 50](why-evolution-stops.md) tried were both gifts without a return. Support
+help the pilots of [Why evolution stops](why-evolution-stops.md) tried were both gifts without a return. Support
 counted for less than a stake at home, and the yield on returned stakes went
 to whoever had most partners. Evolution gave both up.
 
@@ -28,12 +28,12 @@ that makes it a Blotto game: **a node goes to whoever stakes most on it.**
 That rule is *convex*: two stakes of 30 each lose against one of 40, but
 together, as 60, they win. A group whose members' stakes counted together
 could take nodes that none of them could take alone, and hold nodes that none
-of them could hold alone. That is the surplus this chapter gives the agents a
+of them could hold alone. That is the surplus this page gives the agents a
 way to reach.
 
 ## What an alliance is
 
-The pilots of this chapter add one decision and one thing to see
+The pilots of this page add one decision and one thing to see
 (`research/oee/pilots/proto.py`, `allies=true`).
 
 **The decision.** In every game, an agent says of each neighbour whether it
@@ -169,7 +169,7 @@ each defends the other.
 ### Without the home advantage
 
 An agent's own stake counts one and a half times in B2, a number chosen by
-hand ([Chapter 49](who-dies-and-why.md)). Do alliances need it? Not to
+hand ([Who dies, and why](who-dies-and-why.md)). Do alliances need it? Not to
 form. In two worlds where an agent's own stake counts once, the largest
 alliance held 37 and 71% of the world at iteration 1,000, against 83 and 44%
 in the two worlds of the same length with the home advantage; two seeds of
@@ -181,12 +181,12 @@ agents changed hands in a game from iteration 500 without it, against 2.2 and
 ## Does a world of allies keep evolving?
 
 > [!warning] Added later: these contests were 20 iterations long
-> Every tournament in this chapter was played with contests of 20 iterations.
+> Every tournament in this page was played with contests of 20 iterations.
 > In B2's worlds such contests miss what pays off over an agent's life of 100
 > iterations: in contests of 100 the brains of iteration 2,000 beat those of
 > 500 (0.73) where in contests of 20 they tied
-> ([Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
-> this chapter says that evolution stops, read: it stops *as far as a short
+> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
 > The longer contests have since been played, 100 iterations each, once in
@@ -217,7 +217,7 @@ agents changed hands in a game from iteration 500 without it, against 2.2 and
 > **To make it again:** `python3 book_figures.py allies`.
 <!-- /figure -->
 
-The tournaments of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)
+The tournaments of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 were played in one world of each kind:
 
 | world | rating of the eras against the founders | step scores, each era against the one before |
@@ -255,7 +255,7 @@ Whatever they had become, it was not better at war, alone or together.
 **A rising number is not open-ended evolution.** The share of the largest
 alliance rises for a thousand iterations and more, and its ceiling is the
 world, so a larger world has further to go. On paper that is the statistic
-this part of the book has been looking for. It is the wrong kind of rise. It
+this part of the notebook has been looking for. It is the wrong kind of rise. It
 is one convention, *say yes to your neighbours*, spreading through a
 population until it holds everywhere, as a single advantageous mutation
 would. When it has spread, nothing new follows. The population found the
@@ -268,7 +268,7 @@ come from the age limit: every agent dies at 100, so one agent in a hundred
 dies, and one is born, in every iteration. Whatever selection remains is on
 how an agent breeds, and the tournaments show it doing little.
 
-**Cooperation is now possible and pays.** It is the first rule of Part V that
+**Cooperation is now possible and pays.** It is the first rule added for open-ended evolution that
 evolution took up rather than gave up. The surplus it reaches is real: pooled
 stakes win contests that single stakes lose. What is missing is a reason for
 the cooperation to stay *contested*: a way to cheat an alliance that pays for
@@ -289,7 +289,7 @@ failed the health bar only on its last line: their ball dimension was 4.1 to
 > 720, in the other at 120. The cost of an alliance, cheating, and alliances
 > that stay many are where the next pilots go. So does the question the
 > author asked next: what is left of an alliance in a world whose rules have
-> no hand-chosen numbers at all ([Chapter 57](rules-without-numbers.md)).
+> no hand-chosen numbers at all ([Rules without numbers](rules-without-numbers.md)).
 
 <!-- turns -->
 ---

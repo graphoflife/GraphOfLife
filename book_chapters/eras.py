@@ -1,5 +1,5 @@
 """
-Chapter 95 · Every era against three (Experiment 28).
+Every era against three (Experiment 28).
 
 Before the contests: how much an agent could gain by its best reply to the rest, era by era, in every
 long world (research/oee/checks/exploitability.py): whether evolution closes in on an equilibrium.

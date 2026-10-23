@@ -1,34 +1,34 @@
 # Questioning the mechanics
 
-Every chapter so far has taken the rules as given and measured what they
+Every page so far has taken the rules as given and measured what they
 produce. This one turns around and examines the rules themselves. A rule can
-be questioned in three ways: **what does it do** (the measurements of Part III
+be questioned in three ways: **what does it do** (the measurements of the baseline
 say), **is that what was meant**, and **what would happen without it**. The
-last question is for experiments; this chapter prepares them. For each rule
+last question is for experiments; this page prepares them. For each rule
 it states the rule, what the data say about it, why it matters for the aim of
-the book — open-ended evolution — and what could be done instead.
+the notebook — open-ended evolution — and what could be done instead.
 
 Nothing here is a verdict. Several of these rules may be exactly right. But a
 rule that quietly decides most of what happens in a world deserves to be
 looked at in the open.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How do brains spread, and where do new ones come from?
 > - Which rules decide most of what a world does?
 > - Which of them stand in the way of open-ended evolution, and what could
 >   replace them?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -84,7 +84,7 @@ both are given.
 
 **The rule.** A brain is copied in two ways: into a child at birth, and into a
 neighbour's node when it wins that node in the game — the node's own brain is
-then erased ([Chapter 3](one-iteration.md)).
+then erased ([One iteration, step by step](one-iteration.md)).
 
 <!-- figure mechanics/where-brains-go -->
 ![How brains spread, and where new ones come from](../figures/mechanics/where-brains-go.svg)
@@ -92,7 +92,7 @@ then erased ([Chapter 3](one-iteration.md)).
 **How brains spread, and where new ones come from.** One dot per world: means over the iterations sampled every 25 from 500 on. From the left: children born in a reproduction phase; nodes won in a game by a neighbour, each of which takes on a copy of the winner's brain; genotypes that appear for the first time in the frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for the first time after a game (every brain is offered a change at its end). On a logarithmic axis.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -128,7 +128,7 @@ own agent's stake by a margin, so that holding a place is possible.
 > stake on its own node counts *h* times over. In pilots with brains that
 > see and *h* = 2, conquest fell to 15–25% of the nodes in a game and births
 > came back as the way brains spread; B2 uses 1.5
-> ([Chapter 49](who-dies-and-why.md)). (a) and (b) have not been tried.
+> ([Who dies, and why](who-dies-and-why.md)). (a) and (b) have not been tried.
 
 ## Variation in the living
 
@@ -146,12 +146,12 @@ genomes are copied; a body does not keep rewriting its own genes. Here,
 variation is mostly **somatic**: a brain that does well does not stay itself.
 Selection works on a target that moves under it, and a good brain is eroded in
 place, whether or not it is copied. This may be why genotypes last two
-iterations ([Chapter 18](genotypes-and-lineages.md)) and why the
-distinct-genotype count is set by the rules ([Chapter 27](how-even-is-a-world.md)).
+iterations ([Genotypes and lineages](genotypes-and-lineages.md)) and why the
+distinct-genotype count is set by the rules ([How even is a world?](how-even-is-a-world.md)).
 
 **Alternatives.** Change brains **only when they are copied** — at birth and at
-conquest — and never in place. Part V tries exactly this
-([Chapter 47](brains-that-see-and-worlds-that-break.md)).
+conquest — and never in place. B2 tries exactly this
+([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)).
 
 > [!info] Added later: tried, and harmful on its own
 > In Experiment 13, on ten worlds of 5,000 tokens, four worlds whose brains
@@ -160,8 +160,8 @@ conquest — and never in place. Part V tries exactly this
 > when it was copied into a newborn, froze a pilot world into one genotype
 > with no births at all. B2 keeps the rule all the same, inside rules that
 > stop worlds breaking and starving
-> ([Chapter 48](a-world-that-cannot-break.md),
-> [Chapter 49](who-dies-and-why.md)). How long a lineage now stays like
+> ([A world that cannot break](a-world-that-cannot-break.md),
+> [Who dies, and why](who-dies-and-why.md)). How long a lineage now stays like
 > its ancestor has not been measured.
 
 ## Hubs are places
@@ -171,11 +171,11 @@ ones; the agent living on it has no special claim.
 
 **What the data say.** The agent on a node with fifty or more connections keeps
 it in 2.0% of games; on a node with one connection, in 74%
-([Chapter 29](where-the-tokens-flow.md)). A pair of brains facing each
+([Where the tokens flow](where-the-tokens-flow.md)). A pair of brains facing each
 other across a connection survives one more game in 4% of cases
-([Chapter 38](do-agents-cooperate.md)). The centre of a star is the
+([Do agents cooperate?](do-agents-cooperate.md)). The centre of a star is the
 extreme: its node is taken by a coalition in every game, and it carries a new
-brain almost every game ([Chapter 33](the-largest-and-the-smallest.md)).
+brain almost every game ([The largest and the smallest](the-largest-and-the-smallest.md)).
 
 **Why it matters.** The most important positions of the world have no lasting
 occupant, so no brain can be selected for holding one, and no partnership
@@ -189,11 +189,11 @@ measure how long brains hold hubs, and whether partnerships appear.
 
 > [!info] Added later: incumbency, and no more hubs
 > The first alternative is now [`incumbency`](settings.md#incumbency)
-> ([Chapter 49](who-dies-and-why.md)). Part V also took the hubs away: no
+> ([Who dies, and why](who-dies-and-why.md)). B2 also took the hubs away: no
 > brain may choose more than 8 links
 > ([`valence`](settings.md#valence)), and in prototype worlds under
 > B2's rules the best-connected agent was joined to 1–5% of the others
-> ([Chapter 48](a-world-that-cannot-break.md)). How long brains hold their
+> ([A world that cannot break](a-world-that-cannot-break.md)). How long brains hold their
 > nodes, and whether partnerships appear, has not been measured.
 
 ## Decisions averaged over neighbours
@@ -201,10 +201,10 @@ measure how long brains hold hubs, and whether partnerships appear.
 **The rule.** A brain computes one column of outputs per candidate. Decisions
 that concern the agent as a whole — how much to give a child, whether to
 spread or go all in — use the **average** of those outputs over all its
-columns ([Chapter 3](one-iteration.md)).
+columns ([One iteration, step by step](one-iteration.md)).
 
 **What the data say.** The share of agents with a child rises from 2.1% at
-one connection to 10.5% at fifty or more ([Chapter 31](how-agents-have-children.md)),
+one connection to 10.5% at fifty or more ([How agents have children](how-agents-have-children.md)),
 only partly because the well connected are richer.
 
 **Why it matters.** The same brain behaves differently depending on how many
@@ -258,7 +258,7 @@ makes a small change of the share.
 > ([`keep_home`](settings.md#keep_home)) and a child gets at least
 > ten ([`min_child`](settings.md#min_child)), so a jump to "give
 > everything" no longer kills the parent
-> ([Chapter 49](who-dies-and-why.md)). The share function itself is
+> ([Who dies, and why](who-dies-and-why.md)). The share function itself is
 > unchanged; a smooth one has not been tried.
 
 ## Every token at stake, every game
@@ -267,8 +267,8 @@ makes a small change of the share.
 a node on which nobody stakes is left with nothing, and its agent dies.
 
 **What the data say.** 30% of agents holding one token die in a game
-([Chapter 28](gains-and-losses.md)); quiet borders of agents too poor to
-stake across their connections cost whole regions ([Chapter 36](how-a-world-breaks.md)).
+([Gains and losses](gains-and-losses.md)); quiet borders of agents too poor to
+stake across their connections cost whole regions ([How a world breaks](how-a-world-breaks.md)).
 
 **Why it matters.** There is no way to save, to wait, or to hold back. The
 poor live on a coin toss, and that toss kills a large share of the world's
@@ -280,10 +280,10 @@ selection has to work through.
 it keep its agent alive at zero, for one game.
 
 > [!info] Added later: a share kept at home
-> Part V tried a form of the first alternative:
+> B2 tried a form of the first alternative:
 > [`keep_home`](settings.md#keep_home) keeps a share of an agent's
 > tokens on its own node whatever its brain says — not out of the game, but
-> always defending it ([Chapter 49](who-dies-and-why.md)). Keeping only
+> always defending it ([Who dies, and why](who-dies-and-why.md)). Keeping only
 > the last token ended starvation but made an all-in attack free: three
 > agents in four were left with a single token. Keeping 30% is part of B2;
 > with nothing kept, pilot worlds of brains that see starved to a single
@@ -297,14 +297,14 @@ it keep its agent alive at zero, for one game.
 [`inactive_window`](settings.md#inactive_window)).
 
 **What the data say.** Most connections carry one or two tokens in a game
-([Chapter 30](what-crosses-a-connection.md));
-66% of mutual stakes are one token each way ([Chapter 38](do-agents-cooperate.md));
-regions of poor agents lose their connections and die ([Chapter 36](how-a-world-breaks.md)).
+([What crosses a connection](what-crosses-a-connection.md));
+66% of mutual stakes are one token each way ([Do agents cooperate?](do-agents-cooperate.md));
+regions of poor agents lose their connections and die ([How a world breaks](how-a-world-breaks.md)).
 
 **Why it matters.** Much of what agents stake on their neighbours is the rent
 of their connections. The rule ties the network to the tokens — every
 connection costs a token a game — which may be what sets a world's size
-([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)), and it makes
+([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)), and it makes
 the poor lose their place in the network first.
 
 **Alternatives.** The setting `inactive_window = iteration` already lets a
@@ -313,7 +313,7 @@ probability instead of at once, or connections that cost a small fixed fee
 instead of a stake.
 
 > [!info] Added later: only redundant links lapse
-> [Chapter 48](a-world-that-cannot-break.md) changes this rule for Part V:
+> [A world that cannot break](a-world-that-cannot-break.md) changes this rule for B2:
 > with [`prune_needs`](settings.md#prune_needs) = 2, an unused
 > connection lapses only if its two ends share at least two neighbours, so a
 > lapse can never split a world. A fee, or decay by chance, has not been
@@ -322,22 +322,22 @@ instead of a stake.
 ## One rule reaches across the world
 
 **The rule.** After every phase, only the **largest connected piece** of the
-network survives ([Chapter 3](one-iteration.md)).
+network survives ([One iteration, step by step](one-iteration.md)).
 
 **What the data say.** Three deaths in four are cut-offs
-([Chapter 12](births-deaths-and-ages.md)); a sixth of them happen in the one
+([Births, deaths and ages](births-deaths-and-ages.md)); a sixth of them happen in the one
 game in fifty that cuts off a thousand agents or more, and a single game has
-cut off half a world ([Chapter 36](how-a-world-breaks.md)).
+cut off half a world ([How a world breaks](how-a-world-breaks.md)).
 And the losses grow with the world: in worlds from 3,200 to 409,600 tokens, a
 single game has cut off a third to a half of all agents, at every size, so
 that a big world changes from game to game as much, relatively, as a small one
-([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)).
+([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 
 **Why it matters.** Every other rule is local: an agent stakes on its
 neighbours, has its children beside itself, dies when its own node is empty.
 This one is not: whether a region lives depends on its connection to the rest
 of the world, however well it is doing inside. The thesis of
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md) reasoned that
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) reasoned that
 "nothing in the rules reaches across the world" except the share-out; this
 rule does too. And it forbids a world from ever splitting into populations
 that go their own ways — the isolation that, in nature, is how most new species
@@ -348,17 +348,17 @@ holds. On its own that would make the split permanent, since births only join
 a child to its parent's neighbourhood; so pair it with an occasional
 long-range connection — a child joined, rarely, to an agent anywhere — which
 would let separated populations meet again, and would also shorten the world's
-distances ([Chapter 35](the-geometry-of-a-world.md)).
+distances ([The geometry of a world](the-geometry-of-a-world.md)).
 
 > [!info] Added later: a world that cannot split
-> Part V took the other road. [Chapter 48](a-world-that-cannot-break.md)
+> B2 took the other road. [A world that cannot break](a-world-that-cannot-break.md)
 > adds local rules — two links at birth, a death mended in a ring, only
 > redundant links lapsing — under which neither a death nor a lapsed link
 > can split a world. Letting a separated piece live on is planned for
-> Chapter 63, *Local rules only*. A child joined to an agent anywhere would
-> break the locality that Part V asks of every rule
-> ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md),
-> [Chapter 7](physical-inspiration.md)).
+> *Local rules only*. A child joined to an agent anywhere would
+> break the locality that the search for open-ended evolution asks of every rule
+> ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md),
+> [Physical inspiration](physical-inspiration.md)).
 
 ## The share-out lottery
 
@@ -366,7 +366,7 @@ distances ([Chapter 35](the-geometry-of-a-world.md)).
 uniformly at random.
 
 **What the data say.** About 1,300 tokens after a game, 0.10 per agent
-([Chapter 28](gains-and-losses.md)).
+([Gains and losses](gains-and-losses.md)).
 
 **Why it matters.** It is a transfer from the dead to everyone, unrelated to
 what anyone did — small, but it is the only income the poorest have besides
@@ -378,9 +378,9 @@ from the world.
 
 > [!info] Added later: not yet tried
 > Giving the tokens of the dead to their former neighbours is planned for
-> Chapter 63, *Local rules only*. Under B2's rules no one is cut off, and the
+> *Local rules only*. Under B2's rules no one is cut off, and the
 > share-out deals out the estates of agents that die of age
-> ([Chapter 49](who-dies-and-why.md)).
+> ([Who dies, and why](who-dies-and-why.md)).
 
 ## Numbers that mislead
 
@@ -388,7 +388,7 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
 
 - **A genotype is an event, not a difference.** A brain drawn to change gets a
   new number even if its weights did not change (with sparsity 0, as in
-  [Chapter 41](do-the-brains-matter.md)), and two brains a single tiny
+  [Do the brains matter?](do-the-brains-matter.md)), and two brains a single tiny
   change apart have different numbers. What lasts and spreads is a **line**,
   not a number.
 - **Age belongs to the node.** An agent's age counts from the birth of its
@@ -400,28 +400,28 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
 
 - **The rules, more than the brains, decide the measured world.** The even
   split's resting state, the stars of copying, the price of connections, the
-  global cull, the coin toss of the poor: most of Part III follows from rules
+  global cull, the coin toss of the poor: most of what the baseline's measurements found follows from rules
   that do not depend on what brains compute.
 - **Four rules stand most in the way of open-ended evolution**, in the reading
-  of this chapter: variation in the living, conquest that erases rather than
+  of this page: variation in the living, conquest that erases rather than
   mixes, positions that cannot be held, and the cull that forbids separate
   populations.
-- **Each can be tested one at a time**, against the baseline, with the methods
-  of Part IV. [Meta II](what-the-measurements-say-about-open-ended-evolution.md) sets out the order.
+- **Each can be tested one at a time**, against the baseline, as
+  [Do the brains matter?](do-the-brains-matter.md) tests one setting. [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) sets out the order.
 
 > [!info] Added later: what became of the four
-> Part V changed three of the four — not one at a time against the baseline,
+> B2 changed three of the four — not one at a time against the baseline,
 > but together, in a second baseline, B2
-> ([Chapter 48](a-world-that-cannot-break.md)). Brains change only when
-> copied ([Chapter 47](brains-that-see-and-worlds-that-break.md)), a home
-> stake counts 1.5 times ([Chapter 49](who-dies-and-why.md)), and a world
+> ([A world that cannot break](a-world-that-cannot-break.md)). Brains change only when
+> copied ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)), a home
+> stake counts 1.5 times ([Who dies, and why](who-dies-and-why.md)), and a world
 > can no longer split, so the cull has nothing left to cut — though
 > populations still cannot separate. Conquest still erases. Experiments 14
 > and 15 test the rules by changing them one at a time from B2, and in every
 > pilot evolution still stopped within a few hundred iterations
-> ([Chapter 50](why-evolution-stops.md)).
+> ([Why evolution stops](why-evolution-stops.md)).
 
-To make every figure of this chapter: `python3 book_figures.py mechanics`.
+To make every figure of this page: `python3 book_figures.py mechanics`.
 
 <!-- turns -->
 ---

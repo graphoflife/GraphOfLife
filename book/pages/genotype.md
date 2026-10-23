@@ -3,7 +3,7 @@
 Every brain carries a whole number, its **genotype**. Two agents with the
 same genotype have brains with exactly the same weights, because they hold
 copies of one brain. This note says how genotypes are numbered, how they form
-a family tree, and what the book counts with them.
+a family tree, and what the notebook counts with them.
 
 ## How genotypes are numbered
 
@@ -36,7 +36,7 @@ every living agent, its genotype and that genotype's parent, so the tree can
 be rebuilt from a run. Every genotype first appears in some frame; the
 iteration of that frame is the genotype's **birth**.
 
-The book uses the tree in three ways:
+The notebook uses the tree in three ways:
 
 - **Families** — how many different genotypes of eight iterations earlier the
   living descend from ([Families](families.md)).
@@ -49,7 +49,7 @@ The book uses the tree in three ways:
 
 A genotype is *alive* after a game if at least one living agent carries it.
 Its lifetime is from the first game after which it is alive to the last
-([Age and lifetime](age-and-lifetime.md); [Chapter 18](genotypes-and-lineages.md)).
+([Age and lifetime](age-and-lifetime.md); [Genotypes and lineages](genotypes-and-lineages.md)).
 
 <!-- turns -->
 ---

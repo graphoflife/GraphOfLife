@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-The parts of the book's text that are made rather than written.
+The parts of the notebook's text that are made rather than written.
 
     python3 book_fill.py          fills them in, in every Markdown file of book/
 
-The book is plain Markdown and SVG, so that it reads the same in the Book
-tab, in Obsidian (open book/ as a vault) and on GitHub. A few of its blocks
+The notebook is plain Markdown and SVG, so that it reads the same in the
+Research Notebook tab, in Obsidian (open book/ as a vault) and on GitHub. A few of its blocks
 are made from the runs, the plans and book.json rather than typed, so that
 they cannot drift from what they describe. Such a block sits between two
 comment lines, which no reader shows:
@@ -21,11 +21,11 @@ comment lines, which no reader shows:
     <!-- contents -->                 every page, under its topic, from book.json
     <!-- turns -->                    the page's topic, and the pages before and after it there
     <!-- costs -->                    what a simulation costs, as last fitted
-    <!-- table chapter/name -->       a table a chapter's code made from the records
+    <!-- table chapter/name -->       a table a page's code made from the records
 
 Everything between the opening and the closing line is replaced each time:
 write only outside them. An opening line alone is filled in the first time.
-book_figures.py fills the book after drawing its figures.
+book_figures.py fills the notebook after drawing its figures.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ import json
 import os
 import re
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 BOOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "book")
 
@@ -86,33 +86,48 @@ def anchors(md_text: str) -> List[str]:
 # The blocks
 # ---------------------------------------------------------------------------
 
-def linked(md: str, text: str) -> str:
-    """Every "Chapter 13" in a text made by code, as a link to the page that chapter became."""
-    became = read_json("legacy.json")["pages"]
-    files = {c["id"]: c["file"] for c in pages() if c.get("file")}
-
-    def to(match: "re.Match[str]") -> str:
-        target = files.get(became.get(match.group(1)) or "")
-        return f"[{match.group(0)}]({link(md, target)})" if target else match.group(0)
-    return re.sub(r"(?<!\[)\bChapter (\d+)\b(?!\]\()", to, text)
-
-
 def figure(md: str, name: str) -> str:
+    """A figure, its caption and how to make it; their links are written as from a page in book/pages/."""
     chapter, fig = name.split("/")
     made = read_json(f"results/{chapter}.json").get("figures", {}).get(fig)
     if made is None:
         raise KeyError(f"no figure {name}: run `python3 book_figures.py {chapter}`")
     return (f"![{made['title']}]({link(md, f'figures/{chapter}/{fig}.svg')})\n\n"
-            f"**{made['title']}{'' if made['title'][-1:] in '.?!' else '.'}** {linked(md, made['caption'])}\n\n"
-            + quote(linked(md, made["recipe"]), "[!example]- How to make this figure"))
+            f"**{made['title']}{'' if made['title'][-1:] in '.?!' else '.'}** {made['caption']}\n\n"
+            + quote(made["recipe"], "[!example]- How to make this figure"))
 
 
 def thesis(md: str, name: str) -> str:
+    """
+    An experiment's thesis, word for word. A thesis written while the notebook had
+    chapter numbers keeps them; each is a link to the page it meant that day
+    (book/legacy.json), and a line under the thesis says so.
+    """
     plan = read_json(f"experiments/{name}.json")
     said = plan.get("thesis") or {}
+    cited = read_json("legacy.json")["theses"].get(name, {})
+
+    def where(words: str) -> str:
+        target = cited[words]
+        if target.startswith("topic:"):
+            title = next(t["title"] for t in topics() if t["id"] == target[6:])
+            return f"{link(md, 'README.md')}#{slug(title)}"
+        return link(md, page_file(target))
+
+    def numbered(text: str) -> str:
+        def chapters(m: "re.Match[str]") -> str:
+            return m.group(1) + re.sub(r"\d+", lambda n: f"[{n.group(0)}]({where('Chapter ' + n.group(0))})",
+                                       m.group(2))
+        text = re.sub(r"\b(Chapters? )(\d+(?:(?:, | and | or )\d+)*)\b", chapters, text)
+        return re.sub(r"\b(?:Meta|Part) [IVXL]+\b", lambda m: f"[{m.group(0)}]({where(m.group(0))})", text)
+
     parts = [("claim", "The claim."), ("why", "Why it would be so."),
              ("confirm", "It holds if:"), ("refute", "It fails if:")]
-    text = "\n\n".join(f"**{label}** {said[key]}" for key, label in parts if said.get(key))
+    text = "\n\n".join(f"**{label}** {numbered(said[key]) if cited else said[key]}"
+                       for key, label in parts if said.get(key))
+    if cited:
+        text += ("\n\n*Written while the notebook still numbered its chapters: each number is a link to the "
+                 "page it meant that day.*")
     return quote(text, f"[!quote] The thesis of Experiment {int(name[1:])}, "
                        "written down before any of its runs existed")
 
@@ -148,7 +163,7 @@ def seeds_text(seeds: str) -> tuple:
 
 
 def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
-    """The trials behind a chapter: how many, of what kind, and what each set varies."""
+    """The trials behind a page: how many, of what kind, and what each set varies."""
     import gol_plan
     found = gol_plan.trials_of(name)
     kind, T = plan["trials"]["kind"], plan["trials"]["T"]
@@ -187,10 +202,10 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
                          for key, word in words if key in fields)
         lines.append(f"- **{label}** — {number(count)} trials: {said}.")
     lines.append("")
-    lines.append(f"To play these trials again: `python3 gol_lab.py run {name}`, or ▶ in the Book tab "
+    lines.append(f"To play these trials again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab "
                  "of a computer running `gol_server.py`. Each writes its settings and engine beside "
                  "its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.")
-    return quote("\n".join(lines), "[!info] The trials behind this chapter")
+    return quote("\n".join(lines), "[!info] The trials behind this page")
 
 
 def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
@@ -222,10 +237,10 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
         lines.append("- **Forced off in this round:** " + "; ".join(
             f"`{key}` = {', '.join(show(v) for v in values)}" for key, values in sorted(forced.items())) + ".")
     lines.append("")
-    lines.append(f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Book tab of a "
+    lines.append(f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab of a "
                  "computer running `gol_server.py`. Each run writes its settings, seed and engine version "
                  "beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
-    summary = quote("\n".join(lines), "[!info] The worlds behind this chapter")
+    summary = quote("\n".join(lines), "[!info] The worlds behind this page")
     rows = ["| world | seed | run | what differs from B1 |", "|---|---|---|---|"]
     for d in found:
         what = ", ".join(f"[`{k}`]({link(md, page_file('settings'))}#{k}) = {show(v)}"
@@ -265,7 +280,7 @@ def runs(md: str, name: str) -> str:
     lines = []
     if borrowed:
         lines.append(f"These are the runs of Experiment {int(borrowed[1:])}; nothing new was run for "
-                     "this chapter.\n")
+                     "this page.\n")
     worlds = sum(len(sizes(c)) * seeds_of(c)[1] for c in conditions)
     lines.append(f"**{number(worlds)} runs.** Every condition below is run once for "
                  + ("each of its seeds" if own else f"every seed ({seeds})")
@@ -282,7 +297,7 @@ def runs(md: str, name: str) -> str:
                      f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
     lines.append(f"To make these runs again: `python3 gol_lab.py run {borrowed or name}`, or ▶ in "
-                 "the Book tab of a computer running `gol_server.py`. Each run writes its "
+                 "the Research Notebook tab of a computer running `gol_server.py`. Each run writes its "
                  "settings, seed and engine version beside its frames, in "
                  "`GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
     if any((c.get("set") or {}).get("proto") for c in conditions):
@@ -290,7 +305,7 @@ def runs(md: str, name: str) -> str:
         lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "
                      "the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics "
                      "every iteration (`series.jsonl`) and a whole world at every checkpoint.")
-    summary = quote("\n".join(lines), "[!info] The runs behind this chapter")
+    summary = quote("\n".join(lines), "[!info] The runs behind this page")
 
     head = "| setting | " + " | ".join(c["name"] for c in conditions) + " | what it is |"
     rule = "|---" * (len(conditions) + 2) + "|"
@@ -398,8 +413,8 @@ def costs(md: str, _: str) -> str:
 
 def table(md: str, name: str) -> str:
     """
-    A table a chapter's code made from the records (`table chapter/name`): a head
-    and rows, each cell text or links to chapters ({text, href} relative to book/).
+    A table a page's code made from the records (`table chapter/name`): a head
+    and rows, each cell text or links to pages ({text, href} relative to book/).
     """
     chapter, key = name.split("/")
     made = read_json(f"results/{chapter}.json").get("numbers", {}).get(f"table:{key}")
@@ -431,6 +446,36 @@ BLOCK = re.compile(r"^<!-- (%s)((?: [^\n]*?)?) -->\n(?:(?:(?!<!-- ).)*?^<!-- /\1
 # Filling
 # ---------------------------------------------------------------------------
 
+def protected_spans(text: str, links: bool = True) -> List[Tuple[int, int]]:
+    """
+    The stretches of a page that a rewriting of its words must leave as they are:
+    the blocks made here, comments, code, formulas, and every link and picture whole
+    (or, with links=False, only where a link points, so that its words can change).
+    Sorted, and merged where they touch.
+    """
+    patterns = [r"<!--.*?-->", r"^```.*?^```", r"\$\$.*?\$\$", r"`[^`\n]*`", r"(?<![$\\])\$[^$\n]+\$",
+                r"!?\[[^\]]*\]\([^)\s]*\)" if links else r"\]\([^)\s]*\)"]
+    spans = [m.span() for m in BLOCK.finditer(text)]
+    for pattern in patterns:
+        spans += [m.span() for m in re.finditer(pattern, text, re.S | re.M)]
+    merged: List[Tuple[int, int]] = []
+    for start, end in sorted(spans):
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+    return merged
+
+
+def outside(text: str, change: Callable[[str], str], links: bool = True) -> str:
+    """The text with `change` applied to every stretch outside protected_spans."""
+    out, at = [], 0
+    for start, end in protected_spans(text, links):
+        out += [change(text[at:start]), text[start:end]]
+        at = end
+    return "".join(out + [change(text[at:])])
+
+
 def fill_text(md: str, text: str) -> str:
     def made(match: "re.Match[str]") -> str:
         kind, arg = match.group(1), match.group(2).strip()
@@ -450,8 +495,8 @@ def markdown_files() -> List[str]:
 
 def fill(only: Optional[List[str]] = None) -> int:
     """
-    Fill every Markdown file of the book, or those named; the number changed.
-    Filling them all also checks that every figure a chapter drew is shown
+    Fill every Markdown file of the notebook, or those named; the number changed.
+    Filling them all also checks that every figure a page drew is shown
     somewhere: one that is not was drawn for nothing, or forgotten.
     """
     changed = 0
@@ -475,7 +520,7 @@ def fill(only: Optional[List[str]] = None) -> int:
 
 
 def drawn() -> List[str]:
-    """Every figure the chapters' results say was drawn, as chapter/name."""
+    """Every figure the pages' results say was drawn, as chapter/name."""
     out = []
     for name in sorted(os.listdir(os.path.join(BOOK, "results"))):
         figures = read_json(f"results/{name}").get("figures")

@@ -1,12 +1,12 @@
 # Gains and losses
 
 In every game every agent stakes **all** of its tokens, on its own node and on
-its neighbours' ([Chapter 3](one-iteration.md)), and every node ends the
+its neighbours' ([One iteration, step by step](one-iteration.md)), and every node ends the
 game holding exactly the tokens staked on it. So a game reshuffles every token
-of the world, every iteration. This chapter asks what that does to the agents
+of the world, every iteration. This page asks what that does to the agents
 one by one: who gains, who loses, who dies — and whether there is a law to it.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What does one game do to the agents: how many die, lose, keep exactly what
 >   they had, or gain?
 > - Does that depend on how rich an agent is?
@@ -14,17 +14,17 @@ one by one: who gains, who loses, who dies — and whether there is a law to it.
 >   agents poorer than them?
 > - How large is the lottery in which the tokens of the dead are dealt out?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -98,7 +98,7 @@ goes out comes back.
 
 Who *wins* a node — whose brain it takes — is a separate matter
 ([How a coalition takes a node](revolution.md)): the tokens are the
-node's whoever wins it. This chapter is about the tokens; the identity of an
+node's whoever wins it. This page is about the tokens; the identity of an
 agent here is its node, as in the frames.
 
 ## What one game does
@@ -109,7 +109,7 @@ agent here is its node, as in the frames.
 **What one game does to the agents.** Every agent alive at the start of a game ends it in one of five ways: it starved (no one staked on its node), it was cut off from the largest piece of the network, or it survived holding fewer tokens, exactly as many, or more than before. Left: the game of iteration 0 in all 30 worlds. Right: every game from iteration 500 on in the 30 worlds, pooled.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -131,9 +131,9 @@ Settled games are calm. 0.7% starve and 2.1% are cut off; 24% lose and 26%
 gain; and **47% of the agents end the game with exactly the tokens they began
 with**. Nearly half the world is, in tokens, untouched by a game in which every
 token was staked. That is not because they stake nothing on their neighbours —
-71% of staked tokens go to neighbours ([Chapter 16](how-the-game-is-played.md)) —
+71% of staked tokens go to neighbours ([How the game is played](how-the-game-is-played.md)) —
 but because what they send out comes back in equal measure
-([Chapter 29](where-the-tokens-flow.md) counts how much of the flow is
+([Where the tokens flow](where-the-tokens-flow.md) counts how much of the flow is
 returned).
 
 In numbers per game in a settled world of about 14,400: some 3,800 agents
@@ -149,7 +149,7 @@ largest loss about 1,400 — a hub's worth, changing hands in one game. (At
 **What a game does, by how rich an agent was.** Agents alive at the start of a game, sorted by the tokens they held then; for each class, the share that died in the game (starved or cut off), and of the rest the shares that lost tokens, kept exactly as many, or gained. From the games of every 100th iteration from 500 on, in the 30 worlds (4,520,044 agents in all).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -188,10 +188,10 @@ go with its branch, when a connection further in is cut and the part of the
 network it hangs on is no longer joined to the largest piece.
 
 If the rich lose 48% per game, why is there always a rich tenth holding 42%
-of the tokens ([Chapter 15](where-do-the-tokens-go.md))? Because the rich
+of the tokens ([Where do the tokens go?](where-do-the-tokens-go.md))? Because the rich
 are replaced as fast as they shrink: tokens pile up again wherever there are
 many connections. Who is rich is mostly a matter of **where** an agent is.
-[Chapter 29](where-the-tokens-flow.md) shows the law behind it.
+[Where the tokens flow](where-the-tokens-flow.md) shows the law behind it.
 
 ## Tokens run downhill
 
@@ -212,7 +212,7 @@ positive for one in a valley.
 **Tokens run downhill.** The token curvature of an agent is the sum, over its neighbours, of how many more tokens the neighbour holds than it does ([Token curvature](token-curvature.md)): negative for an agent richer than its neighbourhood, positive for one poorer. For each class of curvature, the mean change of an agent's tokens over the game divided by the tokens it held at the start, over the agents that survived the game. Yellow: all agents; cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the pattern. A class with fewer than 1,000 agents is left out (drawn at 0).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -246,7 +246,7 @@ The change would be **proportional to the curvature**: the discrete heat
 equation, in which heat flows from warm to cold in proportion to the
 difference. Real agents do not split exactly evenly, and degrees differ —
 which is why the relation is a tendency and not a law — but
-[Chapter 29](where-the-tokens-flow.md) shows how close to an even split the
+[Where the tokens flow](where-the-tokens-flow.md) shows how close to an even split the
 brains in fact play.
 
 ## The lottery
@@ -261,7 +261,7 @@ are pooled and dealt out, token by token, to survivors chosen at random
 **Tokens shared out among the survivors.** How many tokens the cleanup dealt out at random among the survivors — the tokens of the agents that were cut off — after each game (green) and after each reproduction phase (cyan), on a logarithmic axis. For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -289,12 +289,12 @@ matters only to the poor.
   neighbourhood within a few games, its wealth cannot record that its brain
   did well in the past. For evolution, that matters: selection needs
   differences in success that last long enough to be inherited
-  ([Meta II](what-the-measurements-say-about-open-ended-evolution.md)).
+  ([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)).
 - **The poor live on a knife's edge.** A third of 1-token agents die in every
   game; the survivors multiply their tokens. Being poor in this world is not a
   slow decline, it is a coin toss.
 
-To make every figure of this chapter: `python3 book_figures.py gains`.
+To make every figure of this page: `python3 book_figures.py gains`.
 
 <!-- turns -->
 ---

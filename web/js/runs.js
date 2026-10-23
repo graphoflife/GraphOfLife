@@ -670,8 +670,8 @@ const RunsView = {
     toggle.disabled = stopping;
     if (run.lab) {
       toggle.append(icon('<path d="M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 1-4-4Z"/>'),
-                    document.createTextNode('Book'));
-      toggle.title = 'This run belongs to an experiment: start or pause it from its chapter in the Book';
+                    document.createTextNode('Notebook'));
+      toggle.title = 'This run belongs to an experiment: start or pause it from its page in the Research Notebook';
     } else if (stopping) {
       toggle.append(Object.assign(document.createElement('span'), { className: 'spin' }),
                     document.createTextNode('Stopping'));

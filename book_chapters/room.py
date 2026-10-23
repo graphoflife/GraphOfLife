@@ -1,5 +1,5 @@
 """
-Chapter 100 · Room for the steadiest world (Experiment 31).
+Room for the steadiest world (Experiment 31).
 
 Experiment 19's world (brains mixed at birth, parents as mates) given each rule that keeps a world's room —
 the estate to the newborns, to the parents, no old age, no mending — two seeds each, read at iteration 3,000

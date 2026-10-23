@@ -1,7 +1,7 @@
 # A screen of random worlds
 
-> [!question] Questions of this chapter
-> - Is there a combination of the book's rules that makes a healthy world: a
+> [!question] Questions of this page
+> - Is there a combination of the notebook's rules that makes a healthy world: a
 >   resilient, decentralised network of about three dimensions, whose agents
 >   differ in almost everything?
 > - Which rules make a world unhealthy wherever they appear, so that they can
@@ -16,10 +16,10 @@ time, and each paid for one line with another:
 - the estates of the dead make spaces of paupers;
 - mixed brains make rich worlds that fold;
 - worlds without mending can be cut
-  ([Chapters 100](room-for-the-steadiest-world.md) and
-  [101](births-as-rich-as-the-neighbours.md)).
+  ([Room for the steadiest world](room-for-the-steadiest-world.md) and
+  [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md)).
 
-The settings decide what grows, and one at a time is slow. This chapter
+The settings decide what grows, and one at a time is slow. This page
 follows the author's plan of 22 October 2026 instead: rounds of fifty worlds
 whose settings are all drawn at random, each judged for health. After each
 round, a value that made every world it appeared in unhealthy is set aside
@@ -27,7 +27,7 @@ round, a value that made every world it appeared in unhealthy is set aside
 [What makes a world interesting](what-makes-a-world-interesting.md)),
 and the next fifty are drawn. Rounds go on until some configuration is
 healthy. Only then are strategies tested in it: hand-written ones, and the
-growth of groups ([Part IX](what-a-brain-can-compute.md)).
+growth of groups ([Strategies written by hand](../README.md#strategies-written-by-hand)).
 
 ### How a world's settings are drawn
 
@@ -54,7 +54,7 @@ The sampler is `gol_screen.py`.
 
 Each world has 20,000 tokens and plays 2,000 iterations: long enough for the
 first generation to die and the network to fold if it is going to
-([Chapter 87](what-folds-a-world.md)). A world that would take more than
+([What folds a world](what-folds-a-world.md)). A world that would take more than
 four hours stops as **too slow**, since a baseline that slow could never be
 played for long. Two worlds of B2, at 20,000 tokens, are played beside every
 round for reference.
@@ -64,7 +64,7 @@ round for reference.
 It meets five lines at iteration 2,000 (`research/screen/judge.py`):
 1. **Alive:** more than 20 agents, and not stopped as too slow.
 2. **Decentralised and resilient:** every mark of the health bar but the
-   dimension ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)).
+   dimension ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 3. **A true space:** a dimension of 2 to 4, and a typical distance at least
    1.5 times its random twin's. A folded small world reads three dimensions
    too, so both are asked.
@@ -73,7 +73,7 @@ It meets five lines at iteration 2,000 (`research/screen/judge.py`):
      in B2's median world;
    - its agents' decisions vary at least as much: more effective kinds of
      staking than B2's median world
-     ([Chapter 70](how-different-are-the-agents.md)), read from the world as
+     ([How different are the agents?](how-different-are-the-agents.md)), read from the world as
      kept with no game played.
 
    The kinds swing from one moment to the next, so they are averaged over
@@ -118,24 +118,26 @@ be by chance.
 > [!quote] The thesis of Experiment 38, written down before any of its runs existed
 > **The claim.** Among fifty worlds whose settings are drawn at random — every on/off rule on in half of them, every number at its default in three of four, messages and noise absent in one of ten — at least one is healthy at iteration 2,000: alive; decentralised and resilient by every mark of the health bar but the dimension; a true space, of 2 to 4 dimensions and at least 1.5 times as wide as its random twin; as diverse as B2's median world in its agents and in its decisions; and no more even than B2's least even world.
 >
-> **Why it would be so.** Every healthy-looking world so far was found by changing B2 one rule at a time, and each paid for one line with another: the estates make spaces of paupers, mixed brains rich worlds that fold, no mending worlds that can be cut (Chapters 100 and 101). Settings drawn together reach combinations no single change would, and the round is judged by every line at once. B2's own rules come together too rarely for a random draw to meet them, so two worlds of B2 at 20,000 tokens are played beside the fifty for reference. A healthy world is rare: of 45 worlds of B2's kind read at 2,000, ten met the health bar's marks at a dimension of 2 to 4, before width, diversity and evenness were asked for. The thesis asks for one in fifty.
+> **Why it would be so.** Every healthy-looking world so far was found by changing B2 one rule at a time, and each paid for one line with another: the estates make spaces of paupers, mixed brains rich worlds that fold, no mending worlds that can be cut (Chapters [100](room-for-the-steadiest-world.md) and [101](births-as-rich-as-the-neighbours.md)). Settings drawn together reach combinations no single change would, and the round is judged by every line at once. B2's own rules come together too rarely for a random draw to meet them, so two worlds of B2 at 20,000 tokens are played beside the fifty for reference. A healthy world is rare: of 45 worlds of B2's kind read at 2,000, ten met the health bar's marks at a dimension of 2 to 4, before width, diversity and evenness were asked for. The thesis asks for one in fifty.
 >
 > **It holds if:** At least one of the fifty drawn worlds meets all five lines at 2,000 (research/screen/judge.py, with B2's lines from Experiment 16's ten worlds).
 >
 > **It fails if:** None does: the chapter says which lines the worlds missed, and which values the next round forces off because every world they appeared in was unhealthy, beyond what chance would explain.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The worlds of round 1
 
 <!-- runs E38 -->
-> [!info] The worlds behind this chapter
+> [!info] The worlds behind this page
 > **50 worlds**, each with its settings drawn at random (sampler 1, round seed 1): B1's rules, changed as the draw says, at 20,000 tokens, played for 2,000 iterations — or until the world dies out, or until 4 hours of playing have gone by: a world that slow stops as too slow.
 >
 > - **How a setting is drawn:** an on/off switch is on in half the worlds, and a choice among several options takes each equally often; a number keeps its default in three worlds of four, and otherwise takes one of a few levels; the size of a message and the number of noise inputs are 0 in one world of ten (`gol_screen.py`).
 > - **Only where it can matter:** buying life only with old age, the mate's kind only with mixing, a search's steering and consent only with a search, messages before the game and the pooled self-message only with messages.
 > - **Beside them, for reference:** B2 at seed 1901 (`B2-20000-s1901`), B2 at seed 1902 (`B2-20000-s1902`).
 >
-> To make these worlds again: `python3 gol_lab.py run E38`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these worlds again: `python3 gol_lab.py run E38`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every world's settings
 > | world | seed | run | what differs from B1 |

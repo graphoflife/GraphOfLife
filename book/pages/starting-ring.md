@@ -29,7 +29,7 @@ Let *T* be the number of tokens ([`total_tokens`](settings.md#total_tokens)).
    multinomial draw in which every founder has the same chance at every
    token.
 5. **Brains.** Every founder gets a brain whose weights are drawn at random
-   ([Chapter 4](the-brain.md)), each a genotype of its own,
+   ([The brain](the-brain.md)), each a genotype of its own,
    numbered 1 to *n*.
 
 Steps 1–3 are done by the networkx function `watts_strogatz_graph(n, k, p,
@@ -58,7 +58,7 @@ A few random shortcuts change that. They destroy little of the clustering,
 but every shortcut joins two far-apart parts of the circle, and a handful are
 enough to make every distance short. In the real ring of the run with seed 1,
 37 of the 200 connections were rewired: the clustering fell to 0.27, the
-average distance to 4.4 steps ([Chapter 2](the-world.md)).
+average distance to 4.4 steps ([The world: tokens, agents and a network](the-world.md)).
 
 The first games of a world cut every connection that carries no tokens, so
 the ring is forgotten within a few iterations. It matters mainly as a fair,

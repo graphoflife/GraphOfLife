@@ -70,7 +70,7 @@ $$\sigma \sqrt{1/8 + 1/8} = \sigma / 2.$$
 An effect several times σ/2 is not the seed. The chains give a second check:
 if every pair added nothing, the seven chains would scatter like chance too.
 
-[Chapter 86](eight-switches-at-once.md), *Eight switches at once*, uses this design.
+[Eight switches at once](eight-switches-at-once.md) uses this design.
 
 <!-- turns -->
 ---

@@ -1,7 +1,7 @@
 # The floor in plain B2 and in B1
 
-> [!question] Questions of this chapter
-> - The floor of Chapter 101 never bound in B2's mixed worlds, because every
+> [!question] Questions of this page
+> - The floor of [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) never bound in B2's mixed worlds, because every
 >   B2 child already starts with ten tokens. Is it as idle in plain B2?
 > - In B1, where a child may start with a single token, does the floor bind,
 >   and does it make a world of fewer, richer agents?
@@ -12,7 +12,7 @@
 
 ## Why ask
 
-In [Chapter 101](births-as-rich-as-the-neighbours.md) the floor, a child
+In [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) the floor, a child
 never poorer than the median holding of its parent's neighbours
 ([`child_floor`](settings.md#child_floor) = `neighbours`), changed
 nothing in worlds of B2's rules with brains mixed at birth. In a world of
@@ -21,7 +21,7 @@ starts with ten ([`min_child`](settings.md#min_child)). That leaves
 two questions.
 - **Plain B2.** Is the floor as idle without mixed brains and estates? Plain
   B2 is poor too: about three agents in four hold three tokens or fewer
-  ([Chapter 73](who-inherits.md)). Its children start with 11.2 to 12.1
+  ([Who inherits?](who-inherits.md)). Its children start with 11.2 to 12.1
   tokens on average, in Experiment 16's ten worlds over iterations 1,000 to
   2,000.
 - **B1.** Its least child is a single token. Its children start with 2.0 to
@@ -30,7 +30,7 @@ two questions.
   agent of its long worlds holds 4 to 15. There the floor asks more than most
   parents give. If it binds, births should become fewer and larger, and the
   world smaller and richer: the pull
-  [Meta XI](what-holds-a-worlds-size.md) asked for.
+  [What holds a world's size](what-holds-a-worlds-size.md) asked for.
 
 ## The theses
 
@@ -38,33 +38,37 @@ two questions.
 > [!quote] The thesis of Experiment 36, written down before any of its runs existed
 > **The claim.** Where every child already starts with ten tokens, a floor at the neighbours' median changes nothing. In plain B2, with a child never poorer than the median holding of its parent's neighbours, the floor asks more than B2's ten tokens of fewer than one in twenty of the agents able to have a child, at iterations 1,000, 2,000 and 3,000, and over iterations 1,000 to 2,000 children start with 11 to 13 tokens on average, as in B2's ten worlds of Experiment 16 (11.2 to 12.1).
 >
-> **Why it would be so.** In Chapter 101 the floor changed nothing in the estate worlds and nothing beyond seed-to-seed scatter in Experiment 19's world: in a world of poor agents a parent's neighbours hold a token or two, and every B2 child already starts with ten (min_child). Plain B2 is such a world: three agents in four hold three tokens or fewer. If the floor cannot bind there either, its failure is B2's least child, not the estates or mixed brains; Experiment 37 plays the same floor in B1, whose least child is a single token.
+> **Why it would be so.** In Chapter [101](births-as-rich-as-the-neighbours.md) the floor changed nothing in the estate worlds and nothing beyond seed-to-seed scatter in Experiment 19's world: in a world of poor agents a parent's neighbours hold a token or two, and every B2 child already starts with ten (min_child). Plain B2 is such a world: three agents in four hold three tokens or fewer. If the floor cannot bind there either, its failure is B2's least child, not the estates or mixed brains; Experiment 37 plays the same floor in B1, whose least child is a single token.
 >
 > **It holds if:** In both worlds, at 1,000, 2,000 and 3,000, fewer than one in twenty of the agents holding eleven tokens or more have neighbours whose median holding is above ten; and over iterations 1,000 to 2,000 both worlds' children start with 11 to 13 tokens on average.
 >
 > **It fails if:** In either world the floor asks more than ten tokens of one in twenty able agents or more at one of those iterations, or its children start with fewer than 11 or more than 13 tokens on average: the floor binds in plain B2, and the chapter says what it changed.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 <!-- thesis E37 -->
 > [!quote] The thesis of Experiment 37, written down before any of its runs existed
 > **The claim.** Where a child may start with a single token, a floor at the neighbours' median binds and makes a world of fewer, richer agents. In B1, with a child never poorer than the median holding of its parent's neighbours, both worlds live to iteration 3,000; over iterations 2,000 to 3,000 their children start with more tokens on average than in any of B1's 26 worlds that lived to 3,000 (more than 5.1), and both hold fewer agents on average than B1's median world (1,462).
 >
-> **Why it would be so.** B1's children start with 2.0 to 5.1 tokens on average over iterations 2,000 to 3,000 (a median of 2.6, over the 26 of Experiment 2's 30 worlds that lived to 3,000), while the median agent of B1's long worlds holds 4 to 15 tokens. A floor at the neighbours' median asks more than most B1 parents give: births should become fewer and larger, and the world smaller and richer. In B2 every child already starts with ten tokens and the floor never bound (Chapter 101, Experiment 36).
+> **Why it would be so.** B1's children start with 2.0 to 5.1 tokens on average over iterations 2,000 to 3,000 (a median of 2.6, over the 26 of Experiment 2's 30 worlds that lived to 3,000), while the median agent of B1's long worlds holds 4 to 15 tokens. A floor at the neighbours' median asks more than most B1 parents give: births should become fewer and larger, and the world smaller and richer. In B2 every child already starts with ten tokens and the floor never bound (Chapter [101](births-as-rich-as-the-neighbours.md), Experiment 36).
 >
 > **It holds if:** Both worlds live to 3,000; over iterations 2,000 to 3,000 both worlds' children start with more than 5.1 tokens on average, and both worlds hold fewer than 1,462 agents on average.
 >
 > **It fails if:** Either world dies before 3,000, or its children start with 5.1 tokens or fewer on average, or it holds 1,462 agents or more on average: the floor does not bind in B1 either, or binding does not leave a smaller, richer world; the chapter says which.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The runs
 
 <!-- runs E36 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **2 runs.** Every condition below is run once for every seed (1 to 2), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **a child as rich as its neighbours** — changes `child_floor` = neighbours; 10,000 tokens. Runs `B2-10000-60e522-s001` … `B2-10000-60e522-s002`.
 >
-> To make these runs again: `python3 gol_lab.py run E36`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E36`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | a child as rich as its neighbours | what it is |
@@ -117,12 +121,12 @@ two questions.
 <!-- /runs -->
 
 <!-- runs E37 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **2 runs.** Every condition below is run once for every seed (1 to 2), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **a child as rich as its neighbours** — changes `child_floor` = neighbours; 10,000 tokens. Runs `B1-10000-60e522-s001` … `B1-10000-60e522-s002`.
 >
-> To make these runs again: `python3 gol_lab.py run E37`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E37`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | a child as rich as its neighbours | what it is |

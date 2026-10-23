@@ -1,6 +1,6 @@
 # How large a crowd a raider needs
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How many raiders must start together for the raid to take hold?
 > - Is it the world, or the place in it, that decides?
 
@@ -8,7 +8,7 @@
 
 ## Why ask
 
-The raider of [Chapter 51](strategies-written-by-hand.md) took half of
+The raider of [Strategies written by hand](strategies-written-by-hand.md) took half of
 two evolved worlds when 5% of a world started as raiders. Planted alone it
 died out every time, in all twenty tries. Its play pays only when three
 things come at once:
@@ -17,13 +17,13 @@ things come at once:
 - enough teammates who know the password.
 
 Evolution makes new play one agent at a time, and the raider is a brain B2
-can grow ([Chapter 94](what-a-brain-can-compute.md)). So how large a
+can grow ([What a brain can compute](what-a-brain-can-compute.md)). So how large a
 crowd it needs says how deep the valley is between the play evolution has
 and the raider's.
 
 Twenty failures of a single raider do not prove it never takes hold. With
 none in twenty, it could still take hold up to one time in seven. And
-Chapter 51 planted every size in one place per world, which mixes up what
+[Strategies written by hand](strategies-written-by-hand.md) planted every size in one place per world, which mixes up what
 the world allows with where the patch happened to land.
 
 This experiment plants patches of 1, 3, 10, 30 and 100 raiders, and of 5%
@@ -38,17 +38,19 @@ each of the other eight worlds.
 > [!quote] The thesis of Experiment 29, written down before any of its runs existed
 > **The claim.** A raider needs a crowd. In worlds 2 and 3 of Experiment 16 at iteration 2,000, the share of plantings in which a patch of raiders takes hold rises with the patch: none of the 20 single raiders takes hold, and at least half of the 20 patches of 5% do. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there: the same patch given frozen copies of one resident's brain.
 >
-> **Why it would be so.** In Chapter 51 a patch of 5% of raiders took 40% and 50% of world 2 and 62% of world 3, while a single raider died out in all 20 plantings in world 2, with peaks of up to 28 agents. Its play pays only with three things at once: the raid, the password and enough teammates (the green beard). Chapter 94's replay of the same patches lost one of four in worlds 2 and 3 to chance. Twenty plantings of each size, ten places in each world, bound how often a size could take hold and be missed: none in 20 still allows up to 14% at 95% confidence.
+> **Why it would be so.** In Chapter [51](strategies-written-by-hand.md) a patch of 5% of raiders took 40% and 50% of world 2 and 62% of world 3, while a single raider died out in all 20 plantings in world 2, with peaks of up to 28 agents. Its play pays only with three things at once: the raid, the password and enough teammates (the green beard). Chapter [94](what-a-brain-can-compute.md)'s replay of the same patches lost one of four in worlds 2 and 3 to chance. Twenty plantings of each size, ten places in each world, bound how often a size could take hold and be missed: none in 20 still allows up to 14% at 95% confidence.
 >
 > **It holds if:** No single raider of 20 takes hold, at least 10 of the 20 patches of 5% do, and no smaller patch takes hold in three or more plantings in twenty more than a larger one.
 >
 > **It fails if:** A single raider takes hold, fewer than 10 of the 20 patches of 5% do, or a smaller patch takes hold in three or more plantings in twenty more than a larger one.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The trials
 
-Each trial is [Chapter 51's invasion test](invasion-test.md),
-played by the lab:
+Each trial is an [invasion test](invasion-test.md), as in
+[Strategies written by hand](strategies-written-by-hand.md), played by the lab:
 - The world as it stood at iteration 2,000 is loaded.
 - A patch is chosen on the trial's place: an agent drawn at random, then
   its nearest neighbours, step by step, until the patch has its size.
@@ -57,7 +59,7 @@ played by the lab:
   agents and tokens are counted after every iteration.
 
 <!-- runs E29 -->
-> [!info] The trials behind this chapter
+> [!info] The trials behind this page
 > **320 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **raiders, worlds 2 and 3** — 120 trials: worlds `B2-10000-s002`, `B2-10000-s003`; at iteration 2,000; strategies raider; patches of 1, 3, 10, 30, 100 agents; 5% of the world; places 1 to 10, every 1.
@@ -65,7 +67,7 @@ played by the lab:
 > - **raiders, the other eight worlds** — 40 trials: worlds `B2-10000-s001`, `B2-10000-s004`, `B2-10000-s005`, `B2-10000-s006`, `B2-10000-s007`, `B2-10000-s008`, `B2-10000-s009`, `B2-10000-s010`; at iteration 2,000; strategies raider; patches of 5% of the world; places 1 to 5, every 1.
 > - **controls, the other eight worlds** — 40 trials: worlds `B2-10000-s001`, `B2-10000-s004`, `B2-10000-s005`, `B2-10000-s006`, `B2-10000-s007`, `B2-10000-s008`, `B2-10000-s009`, `B2-10000-s010`; at iteration 2,000; strategies resident; patches of 5% of the world; places 1 to 5, every 1.
 >
-> To play these trials again: `python3 gol_lab.py run E29`, or ▶ in the Book tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+> To play these trials again: `python3 gol_lab.py run E29`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
 
 ## What the raiders did
@@ -81,7 +83,7 @@ played by the lab:
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch has its size.
-> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
+> 2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
 > 3. Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.
 > 4. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there.
 >
@@ -95,7 +97,7 @@ played by the lab:
 - **A hundred raiders** took hold 4 times in 20.
 - **5% of the world,** about 175 agents, took hold 12 times in 20.
 
-Chapter 51's twenty single raiders in world 2 are ten of these plantings
+[Strategies written by hand](strategies-written-by-hand.md)'s twenty single raiders in world 2 are ten of these plantings
 again plus ten more, so 30 different single raiders have now died. If a
 single raider could take hold, it would do so less than one time in ten,
 or these 30 would very likely have shown it.
@@ -119,7 +121,7 @@ A raid is either joined by enough raiders or it dies.
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch has its size.
-> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
+> 2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
 > 3. Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.
 > 4. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there.
 >
@@ -151,12 +153,12 @@ A raid is either joined by enough raiders or it dies.
   takes hold. Mutation changes one brain at a time, and a hundred
   neighbours changing the same way at once does not happen. So evolution
   cannot reach the raider by mutation alone, though a B2 brain can play it
-  ([Chapter 94](what-a-brain-can-compute.md)). Chapter 51 named this the
+  ([What a brain can compute](what-a-brain-can-compute.md)). [Strategies written by hand](strategies-written-by-hand.md) named this the
   green beard's valley; here it is measured.
 - **A crowd can grow from one.** A brain's children carry it. A raider that
   bred before it died would grow its own crowd, if its first children lived
   long enough. The single raiders' lines grew to at most 28 agents
-  ([Chapter 51](strategies-written-by-hand.md)) before dying out, about a
+  ([Strategies written by hand](strategies-written-by-hand.md)) before dying out, about a
   quarter of the crowd they needed.
 - **Where a raid lands matters.** In most worlds most places beat it. What
   makes a place raidable is the next question for the ladder of strategies:

@@ -1,5 +1,5 @@
 """
-Chapter 101 · Births as rich as the neighbours (Experiment 32).
+Births as rich as the neighbours (Experiment 32).
 
 Experiment 19's world (brains mixed at birth, parents as mates) with the
 estate of the dead paid to the newborns or to the parents, and a child that

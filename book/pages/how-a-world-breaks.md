@@ -3,31 +3,31 @@
 At the end of every phase the cleanup keeps only the **largest connected
 piece** of the network; every agent outside it dies, however many tokens it
 holds, and its tokens are dealt out among the survivors
-([Chapter 3](one-iteration.md)). Three deaths in four are of this kind
-([Chapter 12](births-deaths-and-ages.md)), and [Chapter 32](power-laws-real-and-apparent.md)
+([One iteration, step by step](one-iteration.md)). Three deaths in four are of this kind
+([Births, deaths and ages](births-deaths-and-ages.md)), and [Power laws, real and apparent](power-laws-real-and-apparent.md)
 found that they come in lumps: half of them in games that cut off hundreds of
-agents at once. This chapter asks how fragile a world is, whether its breaks
+agents at once. This page asks how fragile a world is, whether its breaks
 can be foreseen, and what actually severs a region from the rest.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How much of a world hangs on single connections?
 > - Does a world in which a large part hangs on one connection lose more
 >   agents?
 > - When a game cuts off a thousand agents, what severed them — and why there?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given. A "big" cut is counted against the size of a world: a
 thousand agents or more here, a hundred in the worlds of 10,000 tokens — a
 hundredth of the world's tokens' worth.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -83,7 +83,7 @@ hundredth of the world's tokens' worth.
 
 A **bridge** is a connection on no loop: cut it, and the network falls in two
 ([Bridges](bridges.md)). A settled world has about 6,400 of them — 26%
-of its connections ([Chapter 17](what-shape-does-the-network-take.md)). Most
+of its connections ([What shape does the network take?](what-shape-does-the-network-take.md)). Most
 hold a single leaf. The **cut risk** asks about the worst one: the largest
 share of the world that one bridge holds to the rest ([Cut risk](cut-risk.md)).
 In the median world it is **11%** (12% at 10,000 tokens): somewhere, a single
@@ -99,7 +99,7 @@ If the worst bridge failed, the game would cut off that ninth. Does it?
 **Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](cut-risk.md)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -161,7 +161,7 @@ lost through it.
 **Where the cut-off deaths happen.** Of all agents cut off in games from iteration 500 on of the 30 worlds, the share that died in games which cut off at least n agents, for every n. Where the line is at 0.5, half of all such deaths happened in games at least that large.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -233,28 +233,27 @@ tokens handed out by lottery to the survivors.
 - **Connections have a price.** One token of flow per game, per connection,
   paid by one side or the other. That caps how many connections a world of
   *T* tokens can hold, which may be part of why a world's size follows its
-  tokens ([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)).
+  tokens ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 - **The cull is global, and blind.** A region that is cut off dies whatever its
   brains did, even if it was doing well inside. Selection here acts on regions
   through their borders, not on agents through what they do — and a world can
   never split into two populations that go their own ways, which in nature is
-  how new species begin. [Chapter 39](questioning-the-mechanics.md)
-  questions this rule, and [Meta II](what-the-measurements-say-about-open-ended-evolution.md) what changing it might do.
+  how new species begin. [Questioning the mechanics](questioning-the-mechanics.md)
+  questions this rule, and [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) what changing it might do.
 
 > [!info] Added later: worlds that cannot break
 > In the baseline's worlds of 5,000 tokens the cull removes about 2% of the
 > agents in every iteration, four times as many as starve, and no world
 > passes the health bar of
-> [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md), one of whose
+> [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md), one of whose
 > lines is a cut risk of at most 1%
-> ([Chapter 47](brains-that-see-and-worlds-that-break.md)).
-> [Chapter 48](a-world-that-cannot-break.md) answers with local rules —
+> ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)).
+> [A world that cannot break](a-world-that-cannot-break.md) answers with local rules —
 > two links at birth, a death mended in a ring, only redundant links
 > lapsing — under which neither a death nor a lapsed link can split a world.
-> Letting separated populations live on is planned for Chapter 63, *Local
-> rules only*.
+> Letting separated populations live on is planned for *Local rules only*.
 
-To make every figure of this chapter: `python3 book_figures.py breaking`.
+To make every figure of this page: `python3 book_figures.py breaking`.
 
 <!-- turns -->
 ---

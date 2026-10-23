@@ -9,24 +9,24 @@ classic setting for the evolution of signals, from Lewis's signalling games
 (Lewis 1969) to the evolution of meaning in populations of simple agents
 (Skyrms 2010). What do the agents of Graph of Life say?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Does an agent say different things to different neighbours?
 > - What does a message tell its reader: about the writer, about the
 >   reader, about the world?
 > - Do kin speak alike? Could an agent recognise its kin by what they say?
 > - How many of the 30 numbers are used?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -80,7 +80,7 @@ both are given.
 
 ## How the messages are read
 
-As in [Chapter 19](what-the-brains-are-like.md), every one of the thirty
+As in [What the brains are like](what-the-brains-are-like.md), every one of the thirty
 worlds is rebuilt exactly as its last game left it. Every agent looks at its
 candidates, and its brain writes a message to each, 30 outputs squeezed by
 tanh into −1 to 1. That gives between 32,000 and 79,000 messages per world,
@@ -112,7 +112,7 @@ root mean square of their 30 numbers, by **0.0005**. Two messages written by
 to itself, to a rich neighbour and to a poor one, to kin and to strangers. So
 a message tells its reader one thing, *who wrote it*. It is a name.
 
-This follows from [Chapter 19](what-the-brains-are-like.md). A brain's
+This follows from [What the brains are like](what-the-brains-are-like.md). A brain's
 outputs move by a thousandth of a change in its inputs, so the message it
 writes to one candidate is nearly the message it writes to the next. A
 founder's brain is no different (0.0002 against 0.60). The architecture
@@ -148,7 +148,7 @@ genotypes. Two agents of one genotype write the same message, but for a
 thousandth or so. With the genotypes shuffled among the writers the share is
 0.63. That much would lie "between genotypes" by chance, since most
 genotypes are carried by a single agent
-([Chapter 18](genotypes-and-lineages.md)). It is no wonder: one genotype
+([Genotypes and lineages](genotypes-and-lineages.md)). It is no wonder: one genotype
 is one brain, and a brain that hardly sees writes the same thing whoever it
 is in. A message is the name **of a genotype**.
 
@@ -156,12 +156,12 @@ is in. A message is the name **of a genotype**.
 only **15** independent directions in the median world (6 to 21), counted as
 a participation ratio ([How many directions a cloud of points uses](participation-ratio.md)).
 Founders' brains, independent of each other, use 30, all of them. A world's
-genotypes descend from a few lines ([Chapter 18](genotypes-and-lineages.md)),
+genotypes descend from a few lines ([Genotypes and lineages](genotypes-and-lineages.md)),
 and the messages of one line differ only where the line's changes moved
 them. So a world speaks a few dialects, each spoken by a line. The worlds of
 10,000 tokens used fewer directions, 8.8 in the median world: in a world ten
 times larger more lines live side by side, for longer
-([Chapter 60](worlds-of-100000-tokens.md)), and so do more dialects.
+([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)), and so do more dialects.
 
 **Nearly nothing about the world.** A straight-line fit of the messages on
 what a message could be about — the writer's and the reader's tokens and
@@ -192,19 +192,19 @@ Founders' messages pile up around 0, in a bell. Evolved messages are spread
 almost evenly from −0.7 to +0.7, with more numbers near the ends: 2.5% lie
 beyond ±0.9, against 0.4% for founders. Larger weights would do this. Mutation
 alone leaves the weights of an evolved brain larger than a founder's
-([Chapter 19](what-the-brains-are-like.md)), so nothing here needs
+([What the brains are like](what-the-brains-are-like.md)), so nothing here needs
 selection to explain it. The evolved values are no more informative for
 being spread wider. They are still the same for every reader.
 
 ## Could kin recognise each other?
 
-[Chapter 38](do-agents-cooperate.md) will find that kin live side by
+[Do agents cooperate?](do-agents-cooperate.md) will find that kin live side by
 side — a tenth of an agent's neighbours carry its own genotype — but are
 staked on exactly like strangers. It will note that a brain cannot see
 genotypes and could only tell kin through messages, if a lineage evolved a
 password, a **green beard** (Hamilton 1964; Dawkins 1976).
 
-This chapter shows that the password exists already, without any
+This page shows that the password exists already, without any
 evolution. When an agent *u* looks at a neighbour *v*, it reads, among other
 things, the message it wrote to itself and the message *v* wrote to it
 ([Messages](messages.md)). If the two share a genotype, the two
@@ -217,15 +217,15 @@ What is missing is a brain that can make it. A difference of 0.6 in 30
 inputs reaches the stakes at a thousandth of its size, and the stakes split
 evenly anyway. Kin recognition is one comparison away, and blocked by the
 same obstacle as everything else in the brain. The heritable tags that
-[Meta II](what-the-measurements-say-about-open-ended-evolution.md) proposes, so that kin can find each other, are
+[What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) proposes, so that kin can find each other, are
 already here: messages are heritable tags. A brain that can see is what
 it needs.
 
 > [!info] Added later: brains that see, and kin
-> [Chapter 47](brains-that-see-and-worlds-that-break.md) gave the brains
+> [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) gave the brains
 > sight: one hidden layer of 16, a founder's gain of about 0.2. Whether
 > seeing brains use the names to tell kin from strangers has not been
-> measured yet. In the pilots of Part V, groups of kin shrank over time in
+> measured yet. In the pilots for B2, groups of kin shrank over time in
 > every world, and kin cooperation by pooled stakes is now being piloted;
 > there are no results yet.
 
@@ -238,15 +238,15 @@ it needs.
   sent depends on something — the sender's state, the receiver, the
   situation — and what is done on receipt depends on what was sent. Neither
   holds here: messages ignore the situation, and decisions ignore the
-  messages ([Chapter 19](what-the-brains-are-like.md): setting every
+  messages ([What the brains are like](what-the-brains-are-like.md): setting every
   message to 0 changes the stakes of only 9% of agents at all).
 - **The raw material is there.** The names identify kin exactly. If brains
   could compare what they read, kin recognition, and with it Hamilton's kin
-  selection ([Chapter 38](do-agents-cooperate.md)), would be one
+  selection ([Do agents cooperate?](do-agents-cooperate.md)), would be one
   comparison away. That makes the gain of the brain, again, the first thing
   to change.
 
-To make every figure of this chapter: `python3 book_figures.py talk`.
+To make every figure of this page: `python3 book_figures.py talk`.
 
 <!-- turns -->
 ---

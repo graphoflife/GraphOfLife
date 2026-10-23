@@ -1,17 +1,17 @@
 # Flow modules: the groups tokens stay in
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - When agents stake tokens on one another, do the tokens stay inside
 >   groups? How large are the groups, and who belongs to one?
 > - Do the groups last from game to game — longer than chance would make them,
 >   and longer than the network alone would?
 > - Can a group outlast the agents it began with?
-> - Is it the same in every world the book has made?
+> - Is it the same in every world the notebook has made?
 
 ## What a flow module is
 
 In every game each agent splits its tokens over its own node and its
-neighbours' nodes ([Chapter 16](how-the-game-is-played.md)). A token staked
+neighbours' nodes ([How the game is played](how-the-game-is-played.md)). A token staked
 on a neighbour's node is a token that **flows** along that link. Add up, for
 each pair of neighbours, what crossed between them in either direction, and a
 game becomes a weighted network: the flow.
@@ -24,7 +24,7 @@ enters it. **Compression** says how much the groups shorten the description:
 0 for flow with no group structure, more the more the flow keeps to groups.
 The note [Flow modules and the map equation](map-equation.md)
 explains it with the formula; the Research tab's *Flow modules* view draws it
-for any run, and this chapter uses the same program
+for any run, and this page uses the same program
 (`web/js/flowmodules.js`, through `tools/flowmodules_cli.js`).
 
 A module of one game and a module of the next are **the same module** when
@@ -35,7 +35,7 @@ by membership, so a module can go on while its members change.
 
 Every world was read for fifty consecutive games: a lab run's from its
 record, from iteration 950; a pilot's played on from its checkpoint at 1,000 —
-183 worlds of every kind the book has made, each counted once. (Eighteen pilot
+183 worlds of every kind the notebook has made, each counted once. (Eighteen pilot
 worlds replay a lab world, with its settings and seed, game for game; they are
 left out.)
 
@@ -59,14 +59,14 @@ left out.)
 > **To make it again:** `python3 book_figures.py flowmodules`.
 <!-- /figure -->
 
-The worlds fall into the same two kinds as everywhere else in the book.
+The worlds fall into the same two kinds as everywhere else in the notebook.
 
 **In B1's worlds** — and in every world where unused links lapse — the flow is
 grouped, but loosely. The modules compress it by 0.36–0.48 (the medians of the
 groups of worlds), where the same flow rewired at random compresses by about
 0. A module holds about four agents, and every agent is in one: B1's agents
 spread their stake over all their neighbours
-([Chapter 16](how-the-game-is-played.md)), so every agent sends and
+([How the game is played](how-the-game-is-played.md)), so every agent sends and
 receives. From one game to the next a module changes about an eighth of its
 members (0.11–0.13).
 
@@ -74,7 +74,7 @@ members (0.11–0.13).
 0.82–0.85 and hold 2.3–2.4 agents, and only about three agents in ten are in a
 module at all. A B2 agent puts its whole stake on one node — its own in about
 two games of three — and half of B2's agents hold a single token, which stays
-at home ([Chapter 70](how-different-are-the-agents.md)). So in a game most
+at home ([How different are the agents?](how-different-are-the-agents.md)). So in a game most
 B2 agents send nothing, and those that do send it to one neighbour: the two are
 a module. Such flow compresses even when rewired at random (0.09–0.15), since
 pairs are groups of a kind. A module changes a third of its members every game.
@@ -83,16 +83,16 @@ Some worlds stand apart within their kind:
 
 - Where **brains never change** (Experiment 7), the modules never change
   either, in four worlds of five: these are the frozen worlds of
-  [Chapter 41](do-the-brains-matter.md), the same agents playing the same
+  [Do the brains matter?](do-the-brains-matter.md), the same agents playing the same
   game, game after game.
 - Two of Experiment 15's rules leave almost nobody in a module: **children of
   any size** (1% of the agents) and **no old age** (4–7%). So do the pilot
-  worlds of [Chapter 78](mixed-brains-costly-units.md) in which links cost a
+  worlds of [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) in which links cost a
   token and nobody dies of age (2–8%). In those worlds hardly anyone stakes on
   a neighbour.
 - Batch S's two pilot worlds with **lapsing links**, with and without gifts,
   are B1-like, as the lab's world with lapsing links is — the split
-  [Chapter 72](lightning-in-every-world.md) found for loops of flow.
+  [Lightning in every world](lightning-in-every-world.md) found for loops of flow.
 
 ## What the network makes, and what the agents make
 
@@ -156,7 +156,7 @@ sizes that game had — only the sizes kept.
   Experiment 16's two worlds of that kind measured, about two pairs in a
   hundred last ten games, eight to nine times as many as with partners dealt
   at random — the dice B2's brains read
-  ([Chapter 50](why-evolution-stops.md)) break up partnerships too.
+  ([Why evolution stops](why-evolution-stops.md)) break up partnerships too.
 - **Brains that never change**: in the frozen world every module lasts all
   fifty games — and with partners dealt at random only a quarter last ten. A
   world whose agents repeat the same moves forever keeps the same groups; the
@@ -268,11 +268,11 @@ fifths.
   change is what a higher level of individual would be built from — the step
   from single cells to organisms that Maynard Smith and Szathmáry call a major
   transition. These worlds make no such group beyond the regions of their
-  network. That fits what [Meta VIII](who-helps-whom.md) found for
+  network. That fits what [Who helps whom](who-helps-whom.md) found for
   help: nothing in the game rewards staying with a partner. A group of the
   agents' own needs a rule that does — a support stake that counts only if it
   is returned, or a share in what a partnership wins. Alliances
-  ([Chapter 56](alliances.md)) are such a rule, and were taken up at once;
+  ([Alliances](alliances.md)) are such a rule, and were taken up at once;
   this measure, run on worlds with alliances, would show whether their groups
   outlast the network's.
 
@@ -280,10 +280,10 @@ fifths.
 **Related notes:** [Flow modules and the map equation](map-equation.md) ·
 [Token flow](token-flow.md) · [Lightning](lightning.md) ·
 [Flows that go round](circulation.md) ·
-[Chapter 16 · How the game is played](how-the-game-is-played.md) ·
-[Chapter 29 · Where the tokens flow](where-the-tokens-flow.md) ·
-[Chapter 58 · Gliders, and who helps whom](gliders-and-who-helps-whom.md) ·
-[Chapter 72 · Lightning in every world](lightning-in-every-world.md)
+[How the game is played](how-the-game-is-played.md) ·
+[Where the tokens flow](where-the-tokens-flow.md) ·
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md) ·
+[Lightning in every world](lightning-in-every-world.md)
 
 <!-- turns -->
 ---

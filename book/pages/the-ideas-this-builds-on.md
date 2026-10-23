@@ -1,8 +1,8 @@
 # The ideas this builds on
 
 Graph of Life puts together ideas from several fields: artificial life, game
-theory, network science, population genetics and statistics. This chapter
-introduces each one far enough to read the rest of the book, and says where
+theory, network science, population genetics and statistics. This page
+introduces each one far enough to read the rest of the notebook, and says where
 it shows up in this world. Full references are at the end; the project's
 longer reading notes are in `research/Literature.md`.
 
@@ -19,13 +19,13 @@ will eventually have to face:
   three classes: no adaptive activity; unbounded new activity but bounded
   diversity; and both unbounded, which is what the fossil record shows. The
   lasting lesson is the **neutral shadow**: activity counts only above what an
-  identical system without adaptation produces. [Chapter 41](do-the-brains-matter.md) builds a shadow of
+  identical system without adaptation produces. [Do the brains matter?](do-the-brains-matter.md) builds a shadow of
   this kind for lineages, and finds it hard.
 - **MODES** (Dolson, Vostinar, Wiser and Ofria 2019) splits open-endedness
   into four measurable kinds of growth — change, novelty, complexity and
   ecology — and adds a **persistence filter**: count a component only once it
   has survived for a while, or random mutation will look like novelty. In
-  this world, where a genotype typically lasts two iterations ([Chapter 18](genotypes-and-lineages.md)),
+  this world, where a genotype typically lasts two iterations ([Genotypes and lineages](genotypes-and-lineages.md)),
   that filter decides almost everything.
 - **Three kinds of open-endedness** (Taylor 2019): *exploratory* — new
   combinations within a fixed space; *expansive* — new opportunities
@@ -47,7 +47,7 @@ will eventually have to face:
   state produced open-ended behaviour in a way that scaled.
 - **Size is not complexity** (Standish 2003): in a run of the Tierra system,
   organisms grew larger without becoming more complex. Growth in anything
-  this book measures will have to be checked against that.
+  this notebook measures will have to be checked against that.
 
 ## Artificial worlds that came before
 
@@ -72,7 +72,7 @@ battlefield goes to whoever sent more. Every fixed division can be beaten by
 one that gives up a little where it is strong and concentrates where the
 other is weak, so there is no single best division — only a mixture of
 divisions played at random can be optimal; Roberson (2006) worked out that
-mixture for two players. The game of [Chapter 3](one-iteration.md) is a Blotto game with three
+mixture for two players. The game of [One iteration, step by step](one-iteration.md) is a Blotto game with three
 differences that the theory does not cover: there are many players; each can
 reach only the battlefields of its neighbourhood, which change; and what is
 won — tokens — is next game's force, so success compounds.
@@ -90,14 +90,14 @@ fought over by neighbours is such a setting.
 > brains of earlier eras, the baseline's brains stop improving within their
 > first hundred iterations, and later eras neither beat the ones before them
 > nor run in place: they tie
-> ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)).
-> [Chapter 50](why-evolution-stops.md) proposed why: like Blotto, the
+> ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
+> [Why evolution stops](why-evolution-stops.md) proposed why: like Blotto, the
 > game has a mixed-strategy answer — be unpredictable — and evolution finds
 > it quickly, using the brains' random inputs as dice. Experiment 16 found
 > that evolution does stop in a world that cannot break, but the reason did
 > not survive the tests that followed. Random founder brains already roll
 > those dice, and a strategy written by hand took half of an evolved world
-> ([Chapter 51](strategies-written-by-hand.md)). The game is not solved;
+> ([Strategies written by hand](strategies-written-by-hand.md)). The game is not solved;
 > evolution stops short of better play that needs several agents acting
 > together.
 
@@ -105,7 +105,7 @@ fought over by neighbours is such a setting.
 
 - **Small worlds** (Watts and Strogatz 1998): a ring lattice with a few
   random shortcuts is both clustered and short — the founders' ring of
-  [Chapter 2](the-world.md).
+  [The world: tokens, agents and a network](the-world.md).
 - **Measures of a network** — degree, clustering, distances, bridges, the
   2-core — are standard (Newman 2003); the notes [Degree](degree.md),
   [Clustering](clustering.md), [Path length](path-length.md),
@@ -131,19 +131,19 @@ fought over by neighbours is such a setting.
 - **The coalescent** (Kingman 1982): followed backwards, the lineages of the
   living merge, two by two, until all meet in one **common ancestor**. In a
   population of fixed size *N* replaced by chance alone, that ancestor lived
-  a number of generations back proportional to *N*. [Chapter 18](genotypes-and-lineages.md) finds the
-  common ancestor of each world's living agents, and [Chapter 41](do-the-brains-matter.md) compares its
+  a number of generations back proportional to *N*. [Genotypes and lineages](genotypes-and-lineages.md) finds the
+  common ancestor of each world's living agents, and [Do the brains matter?](do-the-brains-matter.md) compares its
   movements with those of a world in which no brain is better than another.
 - **Muller plots** (after Muller 1932) draw the share of a population
   descending from each of several ancestors, stacked over time, so that a
   lineage taking over appears as a band that widens until it fills the
-  picture ([Chapter 11](the-first-hundred-iterations.md),
-  [Chapter 18](genotypes-and-lineages.md); [Muller plots](muller-plot.md)).
+  picture ([The first hundred iterations](the-first-hundred-iterations.md),
+  [Genotypes and lineages](genotypes-and-lineages.md); [Muller plots](muller-plot.md)).
 
 ## Measuring
 
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
-  coefficient** (Gini 1912): [Chapter 15](where-do-the-tokens-go.md) and
+  coefficient** (Gini 1912): [Where do the tokens go?](where-do-the-tokens-go.md) and
   [the note](gini-coefficient.md).
 - **Lifetimes with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
   1958): [Survival curves](kaplan-meier.md).
@@ -163,8 +163,8 @@ fought over by neighbours is such a setting.
   twelve *E. coli* populations followed for tens of thousands of generations
   with frozen samples of their ancestors, is the standing example (Lenski,
   Rose, Simpson and Tadler 1991; Blount, Borland and Lenski 2008). It is the
-  test for the second rung of the ladder in [Chapter 1](what-this-notebook-is-about.md);
-  [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) runs it on the
+  test for the second rung of the ladder in [What this notebook is about](what-this-notebook-is-about.md);
+  [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) runs it on the
   baseline.
 
 ## References
@@ -215,5 +215,5 @@ fought over by neighbours is such a setting.
 <!-- turns -->
 ---
 
-← [What this book is about](what-this-notebook-is-about.md) · [Start here](../README.md#start-here)
+← [What this notebook is about](what-this-notebook-is-about.md) · [Start here](../README.md#start-here)
 <!-- /turns -->

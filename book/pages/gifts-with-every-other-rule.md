@@ -1,6 +1,6 @@
 # Gifts, with every other rule
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - With gifts, an agent may hand tokens to its neighbours. What do gifts do
 >   to a world, whatever its other rules?
 > - Are gifts given much, to whom, and do they come back?
@@ -9,10 +9,10 @@ With [`allow_gifting`](settings.md#allow_gifting) an agent may, in
 the reproduction phase, hand some of what its child left it to its
 neighbours; with it here, as in batch S, unused links are cut after
 reproduction once unused for an iteration, so that a gift can keep a link
-alive ([Chapter 54](the-switches-the-world-was-built-with.md)). (These are
+alive ([The switches the world was built with](the-switches-the-world-was-built-with.md)). (These are
 gifts an agent chooses to make — not the failed stakes that
-[Chapter 58](gliders-and-who-helps-whom.md) calls gifts, which end up with
-a node's holder.) In B2 alone, Chapter 54 found gifts changing nothing the
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md) calls gifts, which end up with
+a node's holder.) In B2 alone, [The switches the world was built with](the-switches-the-world-was-built-with.md) found gifts changing nothing the
 network shows, and the author asked for gifts combined with every other
 mechanism (16 October 2026): batch T plays B2 with gifts together with each
 of 21 other rules — and B1 with gifts, with revolutions and without — two
@@ -71,7 +71,7 @@ kept (0.11 and 0.06). And gifts add a mark where they meet handover, in both
 seeds: a gift keeps alive some of the links handover thins.
 
 **On B1, gifts fill a world without revolutions.** B1 without revolutions is
-already a world of mayflies ([Chapter 54](the-switches-the-world-was-built-with.md));
+already a world of mayflies ([The switches the world was built with](the-switches-the-world-was-built-with.md));
 with gifts as well it held 4,500 and 5,900 agents at iteration 1,000 instead
 of 2,200 and 1,800, and 90% and 94% of them held three tokens or fewer,
 instead of 43% and 32%. With revolutions, gifts went one way in one seed and
@@ -91,8 +91,8 @@ gifts and revolutions, and 0.89 and 0.08 with gifts and no revolutions.
 
 - **Gifts are a detail in B2's kind of world**: they move a few thousandths
   of the tokens a game, mostly to the poorer, and change little whatever else
-  the rules are — as revolutions do ([Chapter 88](revolutions-with-every-other-rule.md)),
-  and unlike handover ([Chapter 89](handover-with-every-other-rule.md)).
+  the rules are — as revolutions do ([Revolutions, with every other rule](revolutions-with-every-other-rule.md)),
+  and unlike handover ([Handover, with every other rule](handover-with-every-other-rule.md)).
 - **What gifts did to evolution alone, they do not do in company**: their
   speed-up of B2's evolution vanishes among the other rules.
 - **Where births are cheap, gifts feed them**: with the estate paying for
@@ -100,12 +100,12 @@ gifts and revolutions, and 0.89 and 0.08 with gifts and no revolutions.
   and in B1 without revolutions they fill the world with the poor.
 
 **Related notes:** [Every setting](settings.md#allow_gifting) ·
-[Chapter 54 · The switches the world was built with](the-switches-the-world-was-built-with.md) ·
-[Chapter 58 · Gliders, and who helps whom](gliders-and-who-helps-whom.md) ·
-[Chapter 82 · Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
-[Chapter 86 · Eight switches at once](eight-switches-at-once.md) ·
-[Chapter 88 · Revolutions, with every other rule](revolutions-with-every-other-rule.md) ·
-[Chapter 89 · Handover, with every other rule](handover-with-every-other-rule.md)
+[The switches the world was built with](the-switches-the-world-was-built-with.md) ·
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md) ·
+[Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
+[Eight switches at once](eight-switches-at-once.md) ·
+[Revolutions, with every other rule](revolutions-with-every-other-rule.md) ·
+[Handover, with every other rule](handover-with-every-other-rule.md)
 
 <!-- turns -->
 ---

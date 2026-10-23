@@ -55,7 +55,7 @@ later made again starts with zeros.
 Of the 154 inputs of a baseline brain, 120 are messages, and of its 45
 outputs, 30 are. Most of a brain's first layer, 120 × 50 = 6,000 of its
 15,550 weights, reads messages. Whether the messages carry anything useful is
-an open question for this book.
+an open question for this notebook.
 
 <!-- turns -->
 ---

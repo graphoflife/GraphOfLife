@@ -14,7 +14,7 @@ genotypes ([Genotypes and the family tree](genotype.md)).
 - `brainDiversity` = 1 means no two agents share a genotype; a small value
   means a few genotypes have been copied over much of the world. A settled
   baseline world has about 0.63: on average a genotype is carried by about 1.6
-  agents ([Chapter 18](genotypes-and-lineages.md)).
+  agents ([Genotypes and lineages](genotypes-and-lineages.md)).
 - `distinctParents` looks one step up the family tree. It is deliberately
   shallow: it says nothing about how many separate lines there are, which is
   what [Families](families.md) and [the common ancestor](common-ancestor.md)
@@ -29,7 +29,7 @@ genotypes**, 2^H with *H* the entropy of the genotypes' shares, weighs the
 common ones more ([Entropy and evenness](entropy-and-evenness.md)). In a
 settled baseline world it is about 0.45 per agent at 100,000 tokens (0.49 at
 10,000), against 0.63 distinct genotypes per agent at both sizes
-([Chapter 27](how-even-is-a-world.md)).
+([How even is a world?](how-even-is-a-world.md)).
 
 ## A caution about names
 
@@ -37,7 +37,7 @@ A genotype number changes whenever a brain is offered a change and takes it
 ([How a brain changes](mutation.md)). With `mutation_sparsity` = 0 the change
 changes nothing, yet the number still changes. Counting genotypes counts
 names; whether different names are different brains has to be checked
-separately ([Chapter 41](do-the-brains-matter.md)).
+separately ([Do the brains matter?](do-the-brains-matter.md)).
 
 <!-- turns -->
 ---

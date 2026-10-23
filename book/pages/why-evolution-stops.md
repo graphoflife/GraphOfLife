@@ -1,6 +1,6 @@
 # Why evolution stops
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Does a world that cannot break keep evolving, now that its brains can see?
 > - Which of the changes that should give evolution more to work with —
 >   memory, larger brains, a reward for cooperating, hidden information — keep
@@ -13,15 +13,17 @@
 ## Why ask
 
 The baseline learns what it learns in its first fifty to a hundred iterations
-and then stops ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)).
+and then stops ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 Its brains are nearly blind, so that was no surprise: evolution could only set
-a few constants. Chapters [47](brains-that-see-and-worlds-that-break.md) to 49 then built a world in which brains can see
-without the world breaking — B2. The question now is the one Part V exists
+a few constants. [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md),
+[A world that cannot break](a-world-that-cannot-break.md) and [Who dies, and why](who-dies-and-why.md)
+then built a world in which brains can see
+without the world breaking — B2. The question now is the one B2 was built
 for: in such a world, does evolution keep going?
 
 ## What the pilots tried
 
-Every pilot below played its eras against each other as in [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) — the
+Every pilot below played its eras against each other as in [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) — the
 brains of iterations 0, 100, 200, 500 and 1,000, two contests per pair — and
 reports the rating of each era against the founders and the **step score**,
 each era against the one before it. A world still improving keeps its step
@@ -51,7 +53,7 @@ Two more things were measured along the way.
 **Brains that can grow did not grow for a reason.** A growable brain gains or
 loses a hidden unit by mutation, and carries a *shadow* — a size that is
 inherited and mutated exactly like the real one but used by nothing
-([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md#numbers-that-rise-and-mean-nothing)).
+([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#numbers-that-rise-and-mean-nothing)).
 In four worlds without handover, the real size followed its shadow: what
 rose, rose because a size cannot fall below its floor — the left wall — not
 because larger brains won.
@@ -65,7 +67,7 @@ up: support fell from 200–300 tokens a game to about 20 by iteration 600.
 ## The game has an answer
 
 Why should every world stop? Look at the game an agent plays
-([Chapter 16](how-the-game-is-played.md)): it divides its tokens between
+([How the game is played](how-the-game-is-played.md)): it divides its tokens between
 its own node and its neighbours', and each node goes to whoever stakes most on
 it. That is, very nearly, the oldest game in game theory with a name of its
 own — **Colonel Blotto** (Borel, 1921): two colonels divide their soldiers
@@ -98,7 +100,7 @@ its **random inputs** changed 25 to 58% of the divisions; its own state, 2 to
 memory of the last game's stakes, 11 to 24%. The evolved brains use their
 random inputs as dice. And once a population plays a good mixed strategy,
 there is nothing left to select: a better strategy against it does not exist.
-That is the reading this chapter proposes, and Experiment 16 tests: the game
+That is the reading this page proposes, and Experiment 16 tests: the game
 has an answer, evolution finds it in a few hundred iterations, and then it
 stops — not because the brains are too simple to do better, but because there
 is no better to do.
@@ -116,7 +118,7 @@ read randomness off a world that is noisy enough.
 > where dice are worthless, evolved brains use them as much. A strategy written by
 > hand took half of one of these worlds. See
 > [What the probes say about why](#what-the-probes-say-about-why) below and
-> [Chapter 51](strategies-written-by-hand.md).
+> [Strategies written by hand](strategies-written-by-hand.md).
 
 ## Room to go on
 
@@ -129,8 +131,8 @@ things the pilots tried were meant to be such games, and both lacked the one
 thing cooperation needs, a **surplus**: support counted less than a home
 stake, and the yield on returned stakes went to whoever had most partners, so
 it built stars rather than partnerships. What a surplus could look like is
-the subject of [Chapter 56](alliances.md), and other contests are that of
-[Chapter 55](another-game.md).
+the subject of [Alliances](alliances.md), and other contests are that of
+[Another game](another-game.md).
 
 ## The experiment
 
@@ -145,25 +147,26 @@ the same without random inputs. Its tournaments play the eras 0, 100, 200,
 > [!quote] The thesis of Experiment 16, written down before any of its runs existed
 > **The claim.** A world that cannot break still stops improving. In B2 the brains of iteration 2,000 hold between 45% and 55% of a contested world against those of iteration 500, in the median world of ten; and taking the random inputs away does not change that.
 >
-> **Why it would be so.** In every pilot the cross-time tournament of Chapter 49 flattened within a few hundred iterations: the baseline at +320 to +345 from iteration 200, a B2-like world at +160 to +170 from 200 to 1,000, one with 30% kept at home at +162 to +180 from 50 to 800. Redrawing an evolved agent's random inputs changed 25–58% of its stakes, its neighbour's state 4–23%, its own 2–7%: what evolution found is a way to be unpredictable, which is the best play in a Colonel Blotto contest and cannot be bettered. Without random inputs a pilot flattened all the same (+141 to +188 from 50 to 1,000).
+> **Why it would be so.** In every pilot the cross-time tournament of Chapter [49](how-to-tell-a-world-that-keeps-evolving.md) flattened within a few hundred iterations: the baseline at +320 to +345 from iteration 200, a B2-like world at +160 to +170 from 200 to 1,000, one with 30% kept at home at +162 to +180 from 50 to 800. Redrawing an evolved agent's random inputs changed 25–58% of its stakes, its neighbour's state 4–23%, its own 2–7%: what evolution found is a way to be unpredictable, which is the best play in a Colonel Blotto contest and cannot be bettered. Without random inputs a pilot flattened all the same (+141 to +188 from 50 to 1,000).
 >
 > **It holds if:** In the median world of the ten B2 worlds, and again of the ten without random inputs, the score of iteration 2,000 against iteration 500 — the mean of its two contests — lies between 0.45 and 0.55.
 >
 > **It fails if:** Above 0.55 in either condition's median world: evolution in that world does not stop by iteration 500.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
-("[Chapter 49](who-dies-and-why.md)" in the thesis is today's [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
 
 ## The runs
 
 <!-- runs E16 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **20 runs.** Every condition below is run once for every seed (1 to 10), for 2,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **B2** — changes nothing: B2 as it is; 10,000 tokens. Runs `B2-10000-s001` … `B2-10000-s010`.
 > - **no random inputs** — changes `random_input_amount` = 0; 10,000 tokens. Runs `B2-10000-bad270-s001` … `B2-10000-bad270-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E16`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E16`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | B2 | no random inputs | what it is |
@@ -262,7 +265,7 @@ at 1,000 and +120 at 1,500 and 2,000. Without random inputs it stood at +86,
 +121, +130, +162, +139 and +123.
 
 > [!info] Added later: the third colour
-> The green dots were added after the rest of this chapter was written: the
+> The green dots were added after the rest of this page was written: the
 > same steps in contests a lifetime long, 100 iterations. None of them is a
 > tie. See [Would we notice if it went on?](#would-we-notice-if-it-went-on)
 > below.
@@ -281,7 +284,7 @@ iteration 100, and one or two later eras in every world. The last era crowned
 was iteration 200 in four of the ten B2 worlds, 500 in three, 1,000 in two and
 2,000 in one. Without random inputs it was 100, 200, 500 or 1,000. Contests
 in worlds of 10,000 tokens are less noisy than those of
-[Chapter 46](how-to-tell-a-world-that-keeps-evolving.md). One contest's
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). One contest's
 share varies around its pair's mean by about 0.05, against 0.12 there. A
 tournament of these seven eras would crown 2.3 champions on average if every
 era after the founders were equally good, and the worlds crowned 3.2. The
@@ -345,7 +348,7 @@ those of 2,000.
 So the twenty worlds did not stop evolving at iteration 200 or 500. In a
 contest of 20 iterations the later brains start a little behind (0.48); over
 a life they overtake. What evolution kept improving pays off slowly, and the
-yardstick of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) was
+yardstick of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) was
 too short to see it.
 
 Played step by step, a lifetime long, every era beats the one before it in all
@@ -413,7 +416,7 @@ iteration 200 and 1.33 at 2,000.
 > senses holds for the brains as they are, but evolution goes on improving
 > them, more slowly as it goes.
 
-The thesis said *that* evolution stops, and it does. The reason this chapter
+The thesis said *that* evolution stops, and it does. The reason this page
 gave, that evolution finds the best play and the best play is to roll dice,
 did not survive the tests that came after it.
 
@@ -428,7 +431,7 @@ neighbour's state from 13–20% to 5–10%, and to messages from 34–48% to
 (`research/oee/pilots/sense.py`; `LOG.md`, *The dice were there from the
 start*). And in a contest where dice are worthless, a lottery, evolved brains
 roll them as much as under Blotto: 48 to 67%, against 59% in the same world
-under Blotto, both without revolutions ([Chapter 55](another-game.md)). The
+under Blotto, both without revolutions ([Another game](another-game.md)). The
 brains keep the founders' dice because nothing selects against them, not
 because the game rewards them.
 
@@ -436,18 +439,18 @@ because the game rewards them.
 can on the poorest neighbour it is sure to take and otherwise keeps
 everything at home, took half of the B2 world of seed 2 from a patch of 5% in
 300 iterations, and it or its cousin, the factory, took 40 to 62% of three of
-the ten worlds ([Chapter 51](strategies-written-by-hand.md)). The residents
+the ten worlds ([Strategies written by hand](strategies-written-by-hand.md)). The residents
 were the very brains of iteration 2,000 played here. So there is better play
 than the play these worlds end with, and evolution does not reach it, or does
 not keep it.
 
 That changes the question. Evolution stops in B2 not because the game has run
 out of answers, but because the search has. Whether the cause is how fast
-brains change ([Chapter 52](how-fast-should-brains-change.md)), how large
-they are (Chapter 53), what the game asks of them
-([Chapters 54](the-switches-the-world-was-built-with.md) and
-[55](another-game.md)) or what they could do together
-([Chapter 56](alliances.md)) is what the rest of Part V asks.
+brains change ([How fast should brains change?](how-fast-should-brains-change.md)), how large
+they are (*How big should a brain be?*), what the game asks of them
+([The switches the world was built with](the-switches-the-world-was-built-with.md) and
+[Another game](another-game.md)) or what they could do together
+([Alliances](alliances.md)) is what the pages after this one ask.
 
 <!-- turns -->
 ---

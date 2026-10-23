@@ -21,11 +21,11 @@ statistics — inequality, clustering, families — mean little. Stopping at 20
 also saves running a dying world to its end.
 
 But a world at 20 agents is not always dying.
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md) ran
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) ran
 small worlds with the threshold at 0: all six worlds of 800 and 1,600 tokens
 lived to iteration 600, and five of them were worlds the threshold had stopped
 after their first game; one fell to 4 agents and came back. So "extinct" in
-this book means exactly what the rule says — **fell to 20 agents or fewer** —
+this notebook means exactly what the rule says — **fell to 20 agents or fewer** —
 which is not always the same as dying. An experiment that cares about
 extinction should run a condition with the threshold at 0 beside it.
 
@@ -35,7 +35,7 @@ If a cleanup ever removes every agent, the program puts one new agent with a
 fresh random brain and all *T* tokens on a node of its own. With the
 threshold at 20, that world is extinct at once.
 
-## How the book counts the dead
+## How the notebook counts the dead
 
 A world that dies out did not end up anywhere: the last stretch of its life
 is its dying. So where the worlds of a setting end up is measured over the
@@ -43,7 +43,7 @@ worlds that lived to the end, and the dead are reported beside them, as an
 outcome of their own ([The settled life of a world](settled-life.md)). Of the
 30 baseline worlds of 10,000 tokens, four died: after 4, 313, 1,547 and 2,184
 iterations; of the 30 of 100,000 tokens, none
-([Chapter 10](a-worlds-life.md)).
+([A world's life](a-worlds-life.md)).
 
 "Died after *N* iterations" means: the iteration numbered *N* − 1 was the
 last to run, and it ended with 20 agents or fewer.

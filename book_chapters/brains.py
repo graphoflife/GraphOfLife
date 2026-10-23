@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part IV: Chapter 41 — do the brains matter?
+the experiments that change one setting: Do the brains matter? — do the brains matter?
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from book_figures import (STATS_FILE, chapter, describe, line, lived, mean_over,
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
 
 # ---------------------------------------------------------------------------
-# Chapter 41 · Do the brains matter at all?
+# Do the brains matter at all?
 # ---------------------------------------------------------------------------
 
 E07_RUNS = ("The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 "
@@ -22,7 +22,7 @@ E07_RUNS = ("The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30,
             "*brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and "
             "*decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). "
             "They are made with `python3 gol_lab.py run E07`; every setting is listed in the box at the "
-            "top of the chapter.")
+            "top of the page.")
 
 
 def kind_of(births_per_100: float) -> str:
@@ -223,7 +223,7 @@ def brains(ch: F.Chapter) -> None:
                 "that founder's line fills the world, so which branch wins is chance.",
         recipe=recipe(E07_RUNS, "the lineage analysis of Experiment 7, `book/results/E07.json` "
                       "(`lineage.<condition>.runs.<run>.ancestor.moves`)",
-                      ["As in Chapter 18, for every run."]))
+                      ["As in [Genotypes and lineages](genotypes-and-lineages.md), for every run."]))
     ch.number("moves", {c: describe(g) for c, g in zip(conds, groups)})
     by_kind = {}
     for run_id, v in lin["brains never change"]["runs"].items():

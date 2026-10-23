@@ -16,7 +16,7 @@ ones. If it is larger than almost all of them, "no difference" is hard to
 believe.
 
 The share of shuffles that give a difference at least as large (in size) as
-the real one is the **p-value**. The book computes it as
+the real one is the **p-value**. The notebook computes it as
 
 $$
 p = \frac{1 + \#\{\text{shuffles at least as extreme}\}}{1 + \text{number of shuffles}} ,
@@ -25,7 +25,7 @@ $$
 with 10,000 shuffles; the 1s count the real labelling as one of the
 possibilities, so *p* is never exactly 0.
 
-## Three versions in this book
+## Three versions in this notebook
 
 - **Two independent groups.** Pool the values of both conditions, deal them
   at random into two groups of the original sizes, and take the difference of
@@ -43,7 +43,7 @@ possibilities, so *p* is never exactly 0.
 ## Reading a p-value
 
 A *p*-value is not the probability that the difference is real. It is how
-surprising the data would be if it were not. The book reports it, together
+surprising the data would be if it were not. The notebook reports it, together
 with the size of the difference and its [bootstrap](bootstrap.md) interval,
 and calls a difference **indicative** rather than an effect when fewer than
 thirty seeds per condition went into it.

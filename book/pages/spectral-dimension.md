@@ -27,7 +27,7 @@ $$
 
 The name comes from the fact that *P*(*t*) is set by the spectrum of the
 network's Laplacian, the matrix behind diffusion on it (Alexander and Orbach
-1982). The heat equation of [Chapter 7](physical-inspiration.md)
+1982). The heat equation of [Physical inspiration](physical-inspiration.md)
 spreads heat exactly as the walker's probability spreads.
 
 ## The walk used here
@@ -37,11 +37,11 @@ spreads heat exactly as the walker's probability spreads.
   a walk on a network whose points fall into two alternating classes — a
   grid, a tree — could return only at even steps, and *P*(*t*) would jump
   between zero and twice its value.
-- **Exact:** instead of simulating walkers, the book propagates the whole
+- **Exact:** instead of simulating walkers, the notebook propagates the whole
   probability distribution, step by step, from a few dozen starting points.
 - **Minus the resting state:** in a finite world, the walker ends up spread
   over the whole world, at each point in proportion to its connections. The
-  book subtracts that resting probability from *P*(*t*), so that only the
+  notebook subtracts that resting probability from *P*(*t*), so that only the
   approach to rest is measured, and stops when what is left falls below 5/*n*
   for a world of *n* points.
 
@@ -65,7 +65,7 @@ same. On irregular spaces they differ, and how they differ is informative:
 
 ## Where it is used
 
-[Chapter 24](how-many-dimensions-does-a-world-have.md)
+[How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
 measures both dimensions on the worlds, after calibrating them on spaces
 whose dimension is known.
 

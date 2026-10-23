@@ -31,16 +31,16 @@ time proportional to agents plus connections.
 
 ## What is recorded
 
-`bridges`, the number of bridges, every 25 iterations. The book divides it by
+`bridges`, the number of bridges, every 25 iterations. The notebook divides it by
 the number of connections, `bridges/edges`: the share of all connections
 that are bridges. In a settled baseline world about a quarter of the
 connections are bridges at 100,000 tokens, 31% at 10,000
-([Chapter 17](what-shape-does-the-network-take.md)).
+([What shape does the network take?](what-shape-does-the-network-take.md)).
 
 A count of bridges does not say how much hangs on each. The program also
 works out, for every bridge, how many agents lie behind it; `cutRisk` is the
 largest share of the world a single cut can sever ([Cut risk](cut-risk.md)).
-[Chapter 36](how-a-world-breaks.md) asks whether that risk
+[How a world breaks](how-a-world-breaks.md) asks whether that risk
 foretells how many agents a game cuts off.
 
 <!-- turns -->

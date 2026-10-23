@@ -1,5 +1,5 @@
 """
-Chapter 98 · The search's best world, in new seeds (Experiment 24).
+The search's best world, in new seeds (Experiment 24).
 
 The settings of the random search's best world, Z/r2-25, played by the lab with the prototype from five
 new seeds and from its own: each world read at iterations 1,000 and 2,000 by the four measures of the
@@ -22,7 +22,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 READINGS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots", "atlas", "e24_readings.json")
 PILOT = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots", "Z", "r2-25-s2025", "series.jsonl")
 OWN = "B2-10000-d2b0d2-s2025"
-#: Meta X's lines: every mark, diversity above B2's median world, a space, no more even than B2.
+#: Healthy and rich's lines: every mark, diversity above B2's median world, a space, no more even than B2.
 LINES = {"marks": 7, "diversity": 0.49, "wide": 1.5, "gini_tokens": 0.47}
 RUNS = ("Experiment 24's six runs (`python3 gol_lab.py run E24`): the settings of `Z/r2-25` played by the "
         "research prototype in the lab (`gol_pilot.py`), seeds 1 to 5 (`B2-10000-d2b0d2-s001` … `-s005`) and "

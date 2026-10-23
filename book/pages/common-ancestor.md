@@ -14,7 +14,7 @@ $$
 c(g) \ge q \times (\text{number of living agents}).
 $$
 
-The book uses *q* = 1 (all of the living), 0.9 and 0.5. Its **depth** is
+The notebook uses *q* = 1 (all of the living), 0.9 and 0.5. Its **depth** is
 how many iterations back that genotype was born: *t* minus the iteration of
 the first frame it appears in.
 
@@ -39,7 +39,7 @@ line: one genotype, a few iterations ago, took over — a **sweep**. A deep one
 means several lines have coexisted for a long time. In the baseline the
 depth for all of the living rises and falls in a saw-tooth: it grows by one
 per iteration while no line takes over, and drops when one does
-([Chapter 18](genotypes-and-lineages.md)).
+([Genotypes and lineages](genotypes-and-lineages.md)).
 
 <!-- turns -->
 ---

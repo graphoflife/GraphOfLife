@@ -6,7 +6,9 @@ The Research Notebook without chapter numbers (the author's request of
 that says what it is about, and the index sorted by topic.
 
     python3 research/tools/unnumber.py          what it would do: every page's new name and topics
-    python3 research/tools/unnumber.py --move   do it, once
+    python3 research/tools/unnumber.py --move   do it, once (done on 2026-10-23)
+    python3 research/tools/unnumber.py --words  then the numbers out of the words
+    python3 research/tools/unnumber.py --code FILE ...   and out of the strings of the code that writes them
 
 What --move does:
 - `git mv` every chapter and note to book/pages/<name>.md;
@@ -27,6 +29,15 @@ What --move does:
 
 The pages planned as Meta III, IV and V are dropped: each topic's overview
 does what they were to do.
+
+What --words does, after the move: a link that reads "Chapter 13" or "13" is
+named by the title of the page it leads to; a plain "Chapter 13", "Meta X" or
+"Appendix C" becomes such a link (a page not written yet, its title in italics);
+"the book" becomes "the notebook" and "chapter" "page", never in a path, code
+or a formula, and never in a thesis. A heading whose words change takes its
+links with it. What it cannot word — the parts, ranges of chapters — it lists,
+and a person words them. --code does the same in the strings and comments of
+the figures' code, so that a figure drawn again says what its page says.
 """
 from __future__ import annotations
 
@@ -472,10 +483,256 @@ def legacy(old: Dict[str, Dict[str, Any]], ids: Dict[str, str]) -> Dict[str, Any
             "theses": {name: {words: page(t) for words, t in cited.items()} for name, cited in THESES.items()}}
 
 
+# ---------------------------------------------------------------------------
+# --words: the numbers out of the words
+# ---------------------------------------------------------------------------
+
+#: The words of a link that name a chapter by its number, not by what it is.
+NUMBERED = re.compile(r"(?:Chapters?\s+\d+|\d{1,3}|Meta\s+[IVXL]+|Appendix\s+[A-C])(?:\s*·.*)?", re.S)
+LINKED = re.compile(r"(?:\b(?:[Cc]hapters?|Meta|Appendix)\s+)?\[([^\[\]]+)\]\(([^)\s]+)\)")
+PLAIN = re.compile(r"\b[Cc]hapters?\s+(\d+(?:(?:,\s+|,?\s+and\s+|,?\s+or\s+)\d+)*)\b(?!\s*(?:to|–|-)\s*\d)"
+                   r"|\bMeta\s+([IVXL]+)\b|\bAppendix\s+([A-C])\b")
+#: What is left for a person to word: ranges of chapters, parts, and summaries never written.
+LEFT = re.compile(r"\b[Cc]hapters? \d+\s*(?:to|–|-)\s*\d+|\bParts? [IVXL]+(?:(?:, | and | to |–)[IVXL]+)*\b"
+                  r"|\bMeta (?:III|IV|V)\b|\bAppendices\b|\b[Cc]hapters? \d+|\b[Cc]hapters? \["
+                  r"|\]\([^)\s]*\)(?:,|,? and|,? or| to|–)\s*\d+\b")
+WORDS = [
+    (r"\b[Tt]he Book tab\b", "the Research Notebook tab"),
+    (r"\bBook tab\b", "Research Notebook tab"),
+    (r"\b([Tt]his|[Tt]he|[Ww]hole|[Aa])(\s+)book\b", r"\1\2notebook"),
+    (r"\bchapters\b", "pages"),
+    (r"\bChapters\b", "Pages"),
+    (r"\bchapter\b", "page"),
+    (r"\bChapter\b(?!\s+\d)", "Page"),
+]
+
+
+def by_file() -> Dict[str, Dict[str, Any]]:
+    with open(os.path.join(BOOK, "book.json"), encoding="utf-8") as f:
+        return {p["file"]: p for p in json.load(f)["pages"] if p.get("file")}
+
+
+def target(md: str, href: str, pages: Dict[str, Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    """The page a link written in book/<md> leads to, if it leads to one."""
+    path = href.partition("#")[0]
+    if re.match(r"^[a-z][a-z0-9+.-]*:", path, re.I):
+        return None
+    return pages.get(os.path.normpath(os.path.join(os.path.dirname(md), path)) if path else md)
+
+
+def named(md: str, page: Dict[str, Any], links: Optional[bool]) -> str:
+    """
+    A page, named by its title: a link from book/<md>, or the title in italics where
+    no link can go, or to a page not written yet; with links=None, the title alone.
+    """
+    if links is None:
+        return page["title"]
+    if not links or not page.get("file"):
+        return f"*{page['title']}*"
+    return f"[{page['title']}]({os.path.relpath(page['file'], os.path.dirname(md) or '.').replace(os.sep, '/')})"
+
+
+def retitle_links(text: str, md: str, pages: Dict[str, Dict[str, Any]]) -> str:
+    """Every link whose words are a chapter's number, named instead by the page it leads to."""
+    import book_fill
+    kept = book_fill.protected_spans(text, links=False)
+
+    def to(m: "re.Match[str]") -> str:
+        if any(a <= m.start(1) - 1 < b for a, b in kept) or not NUMBERED.fullmatch(m.group(1).strip()):
+            return m.group(0)
+        page = target(md, m.group(2), pages)
+        ranged = re.search(r"\d\s*(?:to|–)\s*\d", m.group(1)) or re.match(r"\s*(?:to|–)\s*\d", text[m.end():])
+        if page is None or ranged:
+            return m.group(0)                          # a range, or a page that is not one: left for a person
+        return f"[{page['title']}]({m.group(2)})"
+    return LINKED.sub(to, text)
+
+
+def name_numbers(text: str, md: str, pages: Dict[str, Dict[str, Any]], links: Optional[bool] = True) -> str:
+    """Every plain "Chapter 13", "Chapters 13 and 14", "Meta X", "Appendix C" as the pages they are."""
+    old = legacy_pages()
+    with open(os.path.join(BOOK, "book.json"), encoding="utf-8") as f:
+        every = {p["id"]: p for p in json.load(f)["pages"]}
+    number = {oid: every.get(pid) for oid, pid in old.items() if pid}
+
+    def to(m: "re.Match[str]") -> str:
+        if m.group(1):
+            ids = re.findall(r"\d+", m.group(1))
+            if not all(number.get(i) for i in ids):
+                return m.group(0)
+            out = m.group(1)
+            for i in ids:
+                out = re.sub(rf"\b{i}\b", lambda _: named(md, number[i], links), out, count=1)
+            return out
+        key = META.get(m.group(2)) if m.group(2) else m.group(3)
+        page = number.get(key) if key else None
+        return named(md, page, links) if page else m.group(0)
+
+    import book_fill
+    return book_fill.outside(text, lambda s: PLAIN.sub(to, s))
+
+
+#: The parts' summaries, by their numerals: the old chapter each was.
+META = {"I": "26", "II": "40", "VI": "74", "VII": "75", "VIII": "76", "IX": "77", "X": "79", "XI": "84",
+        "XII": "91"}
+
+
+def legacy_pages() -> Dict[str, Optional[str]]:
+    with open(os.path.join(BOOK, "legacy.json"), encoding="utf-8") as f:
+        return json.load(f)["pages"]
+
+
+def reword(text: str) -> str:
+    """"The book" and "chapter" in the words of a page, never in a path, code or a formula."""
+    import book_fill
+
+    def change(s: str) -> str:
+        for pattern, new in WORDS:
+            s = re.sub(pattern, new, s)
+        return s
+    return book_fill.outside(text, change, links=False)
+
+
+def words_of_page(text: str, md: str, pages: Dict[str, Dict[str, Any]]) -> str:
+    return reword(name_numbers(retitle_links(text, md, pages), md, pages))
+
+
+def words_of_result(value: Any, pages: Dict[str, Dict[str, Any]]) -> Any:
+    """A results file's text as words_of_page makes a page's, written as from a page in book/pages/."""
+    if isinstance(value, str):
+        return words_of_page(value, "pages/_.md", pages)
+    if isinstance(value, list):
+        return [words_of_result(v, pages) for v in value]
+    if isinstance(value, dict):
+        if set(value) == {"text", "href"} and NUMBERED.fullmatch(str(value["text"])) and value["href"] in pages:
+            return {"text": pages[value["href"]]["title"], "href": value["href"]}
+        return {k: words_of_result(v, pages) for k, v in value.items()}
+    return value
+
+
+def anchors_moved(before: str, after: str) -> Dict[str, str]:
+    """The ids of a page's headings that its rewording changed: old id -> new id."""
+    import book_fill
+    old, new = book_fill.anchors(before), book_fill.anchors(after)
+    return {a: b for a, b in zip(old, new) if a != b} if len(old) == len(new) else {}
+
+
+def words() -> None:
+    """Rewrite the words of every page, of the index and of the results; list what is left."""
+    pages = by_file()
+    texts = {}
+    for md in sorted(pages):
+        with open(os.path.join(BOOK, md), encoding="utf-8") as f:
+            texts[md] = f.read()
+    new = {md: words_of_page(t, md, pages) for md, t in texts.items()}
+    moved = {md: anchors_moved(texts[md], new[md]) for md in new}
+    for md, text in new.items():                      # links to a heading whose words changed
+        def fix(m: "re.Match[str]") -> str:
+            page = target(md, m.group(2), pages)
+            path, _, part = m.group(2).partition("#")
+            if page and part and part in moved.get(page["file"], {}):
+                return f"[{m.group(1)}]({path}#{moved[page['file']][part]})"
+            return m.group(0)
+        new[md] = re.sub(r"\[([^\]]*)\]\(([^)\s]+#[^)\s]+)\)", fix, text)
+    for md, text in new.items():
+        if text != texts[md]:
+            with open(os.path.join(BOOK, md), "w", encoding="utf-8") as f:
+                f.write(text)
+    for name in sorted(os.listdir(os.path.join(BOOK, "results"))):
+        if name.endswith(".json"):
+            path = os.path.join(BOOK, "results", name)
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+            out = words_of_result(data, pages)
+            if out != data:
+                with open(path, encoding="utf-8") as f:
+                    compact = not f.read(2).startswith("{\n")
+                with open(path, "w", encoding="utf-8") as f:   # as gol_stats.write_json wrote it
+                    json.dump(out, f, **({"separators": (",", ":")} if compact else {"indent": 1}))
+                    f.write("\n")
+    with open(os.path.join(BOOK, "book.json"), encoding="utf-8") as f:
+        index_ = json.load(f)
+    for page in index_["pages"]:
+        page["title"] = reword(page["title"])
+        page["summary"] = reword(name_numbers(page["summary"], "pages/_.md", pages, links=False))
+    with open(os.path.join(BOOK, "book.json"), "w", encoding="utf-8") as f:
+        json.dump(index_, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    import book_fill
+    left = []
+    for md in sorted(pages):
+        with open(os.path.join(BOOK, md), encoding="utf-8") as f:
+            text = " ".join(book_fill.BLOCK.sub("", f.read()).split())
+        left += [f"{md}: …{text[max(0, m.start() - 50):m.end() + 30]}…" for m in LEFT.finditer(text)]
+    print("\n".join(left))
+    print(f"{len(left)} left for a person")
+
+
+#: The parts, in code: what each was about, as a phrase that reads in a sentence.
+PARTS = [(r"\bParts II (?:and|to|–) (?:III|IV)\b", "the study of the baseline"),
+         (r"\bPart III\b", "the measurements of the baseline"), (r"\bPart II\b", "the study of the baseline"),
+         (r"\bPart IV\b", "the experiments that change one setting"),
+         (r"\bPart VII\b", "the long runs"), (r"\bPart VIII\b", "the overviews of every world"),
+         (r"\bPart VI\b", "the physics of space"), (r"\bPart IX\b", "the strategies written by hand"),
+         (r"\bPart V\b", "the work on open-ended evolution"), (r"\bPart X\b", "the screen of random worlds"),
+         (r"\bPart I\b", "how the simulation works")]
+
+
+def words_of_code(path: str) -> int:
+    """
+    The numbers out of a module's strings and comments, never its names: a caption or
+    a recipe names a page by a link (written as from a page in book/pages/), a
+    docstring or a comment by its title; a part by what it was about.
+    """
+    import io
+    import tokenize
+    pages = by_file()
+    with open(path, encoding="utf-8") as f:
+        source = f.read()
+    kinds = {tokenize.STRING, tokenize.COMMENT, getattr(tokenize, "FSTRING_MIDDLE", -1)}
+    tokens = [t for t in tokenize.generate_tokens(io.StringIO(source).readline) if t.type in kinds]
+    lines = source.split("\n")
+    offsets = [0]
+    for line in lines:
+        offsets.append(offsets[-1] + len(line) + 1)
+    edits = []
+    for t in tokens:
+        start = offsets[t.start[0] - 1] + t.start[1]
+        end = offsets[t.end[0] - 1] + t.end[1]
+        text = source[start:end]
+        prose = t.type == tokenize.COMMENT or " " in text
+        docstring = t.type == tokenize.COMMENT or text.startswith(('"""', "'''"))
+        new = re.sub(r"\b(?:Chapter \d+|Appendix [A-C]|Meta [IVXL]+) · ", "", text)
+        new = retitle_links(new, "pages/_.md", pages)
+        new = name_numbers(new, "pages/_.md", pages, links=None if docstring else True)
+        for pattern, phrase in PARTS:
+            new = re.sub(pattern, phrase, new)
+        if prose:
+            for pattern, word in WORDS:
+                new = re.sub(pattern, word, new)
+        if new != text:
+            edits.append((start, end, new))
+    for start, end, new in reversed(edits):
+        source = source[:start] + new + source[end:]
+    if edits:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(source)
+    return len(edits)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--move", action="store_true")
+    ap.add_argument("--words", action="store_true")
+    ap.add_argument("--code", nargs="*")
     a = ap.parse_args()
+    if a.words:
+        words()
+        return
+    if a.code is not None:
+        for path in a.code:
+            print(path, words_of_code(path))
+        return
     old = old_index()
     ids = new_ids(old)
     check(old, ids)

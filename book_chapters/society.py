@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, how a world is organised: Chapters 15 to 18 — wealth, the game, the
+the study of the baseline, how a world is organised: Pages 15 to 18 — wealth, the game, the
 shape of the network, genotypes and lineages.
 """
 from __future__ import annotations
@@ -29,7 +29,7 @@ EXAMPLES = {
 }[W.experiment]
 
 # ---------------------------------------------------------------------------
-# Chapter 15 · Where do the tokens go?
+# Where do the tokens go?
 # ---------------------------------------------------------------------------
 
 def lorenz(tokens: List[int], points: int = 101) -> np.ndarray:
@@ -166,7 +166,7 @@ def tokens(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 16 · How the game is played
+# How the game is played
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -310,7 +310,7 @@ def game(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 17 · What shape does the network take?
+# What shape does the network take?
 # ---------------------------------------------------------------------------
 
 #: A world with more agents than this is drawn a piece at a time: a layout of every agent
@@ -546,7 +546,7 @@ def shape(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 18 · Genotypes and lineages
+# Genotypes and lineages
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -581,7 +581,7 @@ def lineage(ch: F.Chapter) -> None:
                        "and every agent (id in `ids`) note the first and last iteration it appears.",
                        f"Keep those first seen at iteration {W.settled} or later; one still present in the "
                        "last frame is censored.",
-                       "Kaplan–Meier as in Chapter 12."]))
+                       "Kaplan–Meier as in [Births, deaths and ages](births-deaths-and-ages.md)."]))
 
     top_seed = EXAMPLES["top"]
     example = F.world_pass(W.run(top_seed))

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part VI, worlds at scale: Chapter 60 — how a line takes over a world ten
+the physics of space, worlds at scale: Worlds of 100,000 tokens — how a line takes over a world ten
 times the size of the baseline, the thesis of Experiment 10.
 
 When does every agent alive descend from one and the same founder? The lineage
@@ -24,7 +24,7 @@ from book_figures import FRAMES, STATS_FILE, chapter, describe, line, mean_over,
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLD_SETS, YELLOW
 
 E08_WORDS = ("the baseline worlds of Experiment 8, three seeds at each of ten sizes from 800 to 409,600 tokens, "
-             "600 iterations each (Chapter 42; `python3 gol_lab.py run E08`)")
+             "600 iterations each ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`)")
 
 
 @D.measure("lineage")
@@ -132,7 +132,7 @@ def takeover(ch: F.Chapter) -> None:
                 f"through the median of the worlds of {small.tokens:,} tokens, 175 — a front, whose time grows with "
                 "the width of the world (orange), and chance, whose time grows with the number of agents (red).",
         recipe=recipe(f"{E08_WORDS}; and the two sets of 30 worlds above.", FRAMES,
-                      ["For the runs of Experiment 8, `gol_analysis.lineage` of every run (kept as the book measure "
+                      ["For the runs of Experiment 8, `gol_analysis.lineage` of every run (kept as the notebook measure "
                        "`lineage`): its `ancestor.oneFounder`.",
                        "Plot it against the run's tokens; the two sets of 30 as in the figure above."]))
     slope = None
@@ -234,7 +234,7 @@ def reach(row: np.ndarray) -> float:
 
 
 def domain_figures(ch: F.Chapter) -> None:
-    """Chapter 60's figure of domains: how far a line of descent reaches in a world."""
+    """Worlds of 100,000 tokens's figure of domains: how far a line of descent reaches in a world."""
     large, small = WORLD_SETS["E10"], WORLD_SETS["E02"]
     sets = {"large": (large, [domains(s.run_id) for s in large.alive]),
             "small": (small, [domains(s.run_id) for s in small.alive])}
@@ -329,7 +329,7 @@ def ten_small(ch: F.Chapter) -> None:
                 "ran on to 2,999. On logarithmic axes, so that half as much and twice as much lie equally far from "
                 "1; each bar rises from 1 or falls from it. Blue: shares and rates per agent; green: the shape of the "
                 "network; orange: its distances; red: its largest single things; grey: totals. The dashed guides: no change; "
-                f"×{width:.1f}, the factor by which the width of a world grows (tokens^0.30, Chapter 42); and "
+                f"×{width:.1f}, the factor by which the width of a world grows (tokens^0.30, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)); and "
                 f"×{agents:.0f}, the ratio of the agents.",
         recipe=recipe(f"{large.runs_text()} {small.surviving_text()}", STATS_FILE,
                       [f"For every run and statistic, the mean over the rows of iterations {COMPARED_WINDOW[0]} to "

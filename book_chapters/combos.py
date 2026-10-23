@@ -4,17 +4,17 @@ One rule combined with every other (pilot batches T, W, X and Y, 2026-10-16).
 
 Each world of a batch is the fourth corner of a two-by-two: B2, B2 with the
 batch's rule, B2 with another rule, and B2 with both, at 10,000 tokens, seeds 1
-and 2. Every corner is read at iteration 1,000, as Meta X reads every world
+and 2. Every corner is read at iteration 1,000, as Healthy and rich reads every world
 (research/atlas/at.py → GraphOfLifeRuns/.pilots/atlas/at1000.json, diversity on
-Meta X's scale), so that worlds played for different lengths compare; and each
+Healthy and rich's scale), so that worlds played for different lengths compare; and each
 world's brains of 1,000 are played against those of 500 over a lifetime (T = 100;
 research/oee/checks/rejudge.py → GraphOfLifeRuns/.pilots/batch_TUV_T100.json,
 and rejudge_T100.json for batch S's worlds).
 
-    mixcombos   Chapter 82 · Brains mixed at birth, with every other rule (batch Y)
-    norevcombos Chapter 88 · Revolutions, with every other rule (batch W)
-    handovercombos  Chapter 89 · Handover, with every other rule (batch X)
-    giftcombos  Chapter 90 · Gifts, with every other rule (batch T)
+    mixcombos   Brains mixed at birth, with every other rule (batch Y)
+    norevcombos Revolutions, with every other rule (batch W)
+    handovercombos  Handover, with every other rule (batch X)
+    giftcombos  Gifts, with every other rule (batch T)
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
 AT = os.path.join(PILOTS, "atlas", "at1000.json")
 sys.path.insert(0, os.path.join(ROOT, "research", "oee", "pilots"))
 
-#: The rules, in the words of the chapters, by the names the batches give them.
+#: The rules, in the words of the pages, by the names the batches give them.
 WORDS = {"bytokens": "estates by wealth", "poorest": "estates to the poorest", "newborns": "estates to newborns",
          "parents": "estates to parents", "linktoken": "links hold a token", "helped": "input: who helped",
          "came": "input: came from", "handover": "handover", "nodice": "no random inputs", "noage": "no old age",
@@ -47,7 +47,7 @@ KEYS = ("share_at_most_three", "diversity", "marks", "agents")
 
 
 class Batch(NamedTuple):
-    """What a chapter on one rule in combination needs to know about its batch."""
+    """What a page on one rule in combination needs to know about its batch."""
     letter: str                              # the batch (its folder in GraphOfLifeRuns/.pilots)
     words: str                               # its rule, as the captions name it: "brains mixed at birth"
     alone: str                               # the reference line of the rule alone: "mixing alone"
@@ -137,7 +137,7 @@ def _combos(ch: F.Chapter, b: Batch) -> None:
     for key, label, fig, title in (
             ("share_at_most_three", "share of the agents with three tokens or fewer", "riches",
              "Agents holding three tokens or fewer"),
-            ("diversity", "diversity score (Meta X)", "diversity", "How much the agents differ")):
+            ("diversity", "diversity score", "diversity", "How much the agents differ")):
         charts = []
         for part in parts:
             cats = [WORDS[name] for name, _, _, _ in part]
@@ -160,7 +160,7 @@ def _combos(ch: F.Chapter, b: Batch) -> None:
                               "each world's checkpoint at iteration 1,000, or the lab's whole world kept then "
                               "(`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`)",
                               ["Read each world as `research/atlas/profile.py` reads every world.",
-                               "Rank its four spreads among Meta X's worlds; the diversity score is the mean."]))
+                               "Rank its four spreads among [Healthy and rich](healthy-and-rich.md)'s worlds; the diversity score is the mean."]))
     # Does evolution go on? The brains of 1,000 against those of 500, a lifetime long.
     contests = _contests()
     judged = [r for r in rows if any(f"{r[3]}-s{s}" in contests for s in (1, 2))]

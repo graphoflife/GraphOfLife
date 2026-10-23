@@ -40,16 +40,16 @@ when **at least two of three new worlds** pass all four parts below.
 3. **It keeps doing new things.** New kinds of behaviour appear faster than
    they would by mutation alone, and the old ones do not simply come back.
    - Kinds of behaviour means two things: kinds of staking
-     ([Chapter 70](how-different-are-the-agents.md)), and
+     ([How different are the agents?](how-different-are-the-agents.md)), and
      the signatures of the strategies written by hand. A signature is how
      a strategy answers a fixed set of situations
-     ([Chapter 94](what-a-brain-can-compute.md)).
+     ([What a brain can compute](what-a-brain-can-compute.md)).
    - "By mutation alone" is the same brains changed only by the random
      mutations their lineages collected over the same time, with no
      selection.
    - A world whose kinds come and go in a cycle does not pass.
 4. **It stays a world in which much can happen**
-   ([Meta X](healthy-and-rich.md)):
+   ([Healthy and rich](healthy-and-rich.md)):
    - it never falls to 20 agents;
    - it meets every mark of the health bar at every 10,000 iterations;
    - its agents are more diverse than those of B2's median world;
@@ -72,7 +72,7 @@ when **at least two of three new worlds** pass all four parts below.
 
 Each part closes a way to be fooled:
 - **Part 1** closes the circle. Later brains beat earlier ones in every
-  kind of world the book has played this long, but by less and less. A
+  kind of world the notebook has played this long, but by less and less. A
   game that only goes round would pass a test of the last step.
 - **Part 2** closes the plateau that still wins by a hair.
 - **Part 3** closes the arms race that only swaps two answers back and
@@ -80,9 +80,9 @@ Each part closes a way to be fooled:
 - **Part 4** closes worlds that evolve only because they are poor in
   everything else, such as a few hundred agents holding everything evenly.
 
-**Related notes:** [Chapter 46 · How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
-[Chapter 94 · What a brain can compute](what-a-brain-can-compute.md) ·
-[Meta X · Healthy and rich](healthy-and-rich.md)
+**Related notes:** [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
+[What a brain can compute](what-a-brain-can-compute.md) ·
+[Healthy and rich](healthy-and-rich.md)
 
 <!-- turns -->
 ---

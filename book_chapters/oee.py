@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part V: engineering open-ended evolution — Chapters 46 to 50, Experiments 12 to 16.
+the work on open-ended evolution: engineering open-ended evolution — Pages 46 to 50, Experiments 12 to 16.
 
 The yardstick is a cross-time tournament (gol_tournament): the brains of two
 moments of one world play each other in that world, with mutation switched off,
@@ -31,7 +31,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ERAS = (0, 50, 100, 200, 300, 500, 700, 1000)
 
 #: Iterations a contest lasts. Long enough for most of a contested world to
-#: change hands at least once (Chapter 16), short enough to play many.
+#: change hands at least once (How the game is played), short enough to play many.
 T = 20
 
 
@@ -189,7 +189,7 @@ def yardstick(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# What every chapter of the part reads off a world
+# What every page of the part reads off a world
 # ---------------------------------------------------------------------------
 
 from book_figures import band_series, line, series  # noqa: E402
@@ -197,7 +197,7 @@ from book_chapters.common import GREEN, ORANGE, RED, VIOLET, YELLOW  # noqa: E40
 
 COLOURS = (BLUE, RED, GREEN, VIOLET, ORANGE, YELLOW)
 
-#: The health bar of Chapter 46: statistic of the recorded rows, its words,
+#: The health bar of How to tell a world that keeps evolving: statistic of the recorded rows, its words,
 #: and the range it has to lie in.
 BAR = (("coreShare", "agents in the 2-core", 0.8, None),
        ("cutRisk", "largest share one connection cuts off", None, 0.01),
@@ -236,7 +236,7 @@ def dots(name: str, conditions: List[str], values: Dict[str, List[float]], *, ti
 
 
 # ---------------------------------------------------------------------------
-# Chapter 47 · Brains that see, and worlds that break (Experiment 13)
+# Brains that see, and worlds that break (Experiment 13)
 # ---------------------------------------------------------------------------
 
 E13_CONDITIONS = ["baseline", "one hidden layer", "one hidden layer, change only when copied"]
@@ -287,7 +287,7 @@ def seeing(ch: F.Chapter) -> None:
     ch.grid("health", panels, columns=1, title="How the network holds",
             caption=("One dot per world, at its median over iterations "
                      "200 to 1,500 while it lived; the bar is the median world and the dashed line the "
-                     "health bar of Chapter 46."),
+                     "health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)."),
             recipe=recipe(E13_RUNS, F.STATS_FILE, [
                 "Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 "
                 "and 200 ≤ `iteration` ≤ 1,500, and each world's median of each."]))
@@ -435,7 +435,7 @@ def children(run_id: str) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 48 · A world that cannot break (Experiment 14)
+# A world that cannot break (Experiment 14)
 # ---------------------------------------------------------------------------
 
 E14_CONDITIONS = ["all the rules", "no mending", "any unused link lapses", "no links at birth",
@@ -553,7 +553,7 @@ def _space_world(task):
 
 
 def space_alone(ch: F.Chapter) -> None:
-    """Chapter 48's model: every rule of space on its own, ten worlds each, and two pictures."""
+    """A world that cannot break's model: every rule of space on its own, ten worlds each, and two pictures."""
     from concurrent.futures import ProcessPoolExecutor
     tasks = [(k, seed) for k in range(len(SPACE_RULES)) for seed in SPACE_SEEDS]
     with ProcessPoolExecutor(_jobs()) as pool:
@@ -584,7 +584,7 @@ def space_alone(ch: F.Chapter) -> None:
                      "chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 "
                      "links or more nor a newborn's random link to one (mending still links past the "
                      "cap). The "
-                     "dashed lines are the health bar of Chapter 46. Cut shares and the "
+                     "dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the "
                      "best-connected agent's share are drawn on logarithmic axes, a cut of nothing "
                      "at 0.0001."),
             recipe=recipe("No runs: the worlds are made by the model itself, seeds 1 to 10 for every "
@@ -687,7 +687,7 @@ def unbreakable(ch: F.Chapter) -> None:
     ch.grid("bar", panels, columns=2, title="Each rule against the health bar",
             caption=("One dot per world, at its median over "
                      "iterations 200 to 1,000; the bar is the median world; dashed lines are the "
-                     "health bar of Chapter 46. *B2*: every rule; *no mending*: deaths not mended; "
+                     "health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *B2*: every rule; *no mending*: deaths not mended; "
                      "*all lapse*: any unused link lapses; *no birth links*: a newborn joined to its "
                      "parent alone; *no valence*: no cap on chosen links; *handover*: a parent may "
                      "hand its links to its child."),
@@ -703,7 +703,7 @@ def unbreakable(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 49 · Who dies, and why (Experiment 15)
+# Who dies, and why (Experiment 15)
 # ---------------------------------------------------------------------------
 
 E15_CONDITIONS = ["B2", "the last token kept", "nothing kept", "half kept", "children of any size",
@@ -768,7 +768,7 @@ def deaths(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 50 · Why evolution stops (Experiment 16)
+# Why evolution stops (Experiment 16)
 # ---------------------------------------------------------------------------
 
 E16_ERAS = (0, 100, 200, 500, 1000, 1500, 2000)

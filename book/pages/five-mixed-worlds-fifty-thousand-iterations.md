@@ -1,6 +1,6 @@
 # Five mixed worlds, fifty thousand iterations
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - A world whose brains are mixed at birth was healthy and rich for 10,000
 >   iterations. Is that a state it keeps, or one it passes through?
 > - What does such a world do over 50,000 iterations: does its size keep
@@ -12,13 +12,13 @@
 
 The author's picture of a world that might keep evolving is a decentralised,
 resilient, nearly three-dimensional network of agents that differ in almost
-every way ([Meta X](healthy-and-rich.md)). Whatever else such a
+every way ([Healthy and rich](healthy-and-rich.md)). Whatever else such a
 world does, it has to *last*: a world that meets the picture for 10,000
 iterations and then shrinks to nothing, or fills up with agents holding a
 token each, is not a world that keeps evolving. The author asked for the most
 promising settings to be run for a long time, and this is that run.
 
-[Chapter 80](mixed-at-birth-ten-long-worlds.md) ran B2 with brains mixed at
+[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ran B2 with brains mixed at
 birth in ten worlds for 10,000 iterations. It found three things that make
 the question open:
 
@@ -46,7 +46,7 @@ the health bar at iteration 10,000 — seeds 2, 4, 5, 6 and 10 — and plays the
 on to iteration 50,000. They are the same runs: the lab goes on from each
 one's checkpoint at 10,000 with the engine that made it, and records as
 before, the graph statistics every 25 iterations and a whole world every 500.
-Nothing is changed, so the first 10,000 iterations are Chapter 80's.
+Nothing is changed, so the first 10,000 iterations are [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)'s.
 
 When the plan was written (16 October 2026), the five worlds stood like this
 at iteration 10,000:
@@ -59,7 +59,7 @@ at iteration 10,000:
 | seed 6 | 1,302 | 4 | 42% | 11 | 188–1,688 |
 | seed 10 | 618 | 10 | 15% | 16 | 296–1,649 |
 
-The worlds are read as [Meta X](healthy-and-rich.md) reads every
+The worlds are read as [Healthy and rich](healthy-and-rich.md) reads every
 world, every 500 iterations, from the whole worlds the lab keeps. A run
 records every game, so the five runs will take about 16 GB more disk; on the
 lab's four workers, the panel's estimate says how long.
@@ -72,20 +72,22 @@ lab's four workers, the panel's estimate says how long.
 >
 > **Why it would be so.** Over Experiment 17's 10,000 iterations, these five worlds met every mark at 66 of the 100 moments they were kept whole (every 500 iterations from 500 on): 16, 17, 6, 11 and 16 of 20 each. A world that met every mark still did 500 iterations later four times in five (95 of 120 times, in all ten worlds), and one that missed a mark met them all again a third of the time (21 of 60): health comes back. At iteration 10,000 four of the five had fewer than half their agents at three tokens or fewer (6%, 20%, 42%, 15%) and one had 63%, where B2's worlds have 66% to 79% at every moment. But a mixed world's size drifts, and its health and its riches follow its size: worlds of 600 to 1,000 agents met every mark at 98% of their moments, worlds below 300 at 4% (their best-connected agent is joined to more than 5% of the others), worlds above 1,500 at 35% to 60% (their dimension rises above 4). And with 10,000 tokens, a world of 2,000 agents is a poor one. In ten worlds one shrank below 20 agents and died out, at iteration 5,376; two others fell below a hundred agents, to 40 and to 91, and came back. Forty thousand iterations more is time for every one of the five to drift through those sizes.
 >
-> **It holds if:** From iteration 10,500 to 50,000, each world read every 500 iterations from its archive as research/atlas/profile.py reads every world (Meta X): at half or more of the five worlds' 400 moments together, a world meets all seven marks of Chapter 46's health bar (a world that has died out misses them at every moment after); and at iteration 50,000, at most one of the five worlds has died out or has half its agents or more holding three tokens or fewer.
+> **It holds if:** From iteration 10,500 to 50,000, each world read every 500 iterations from its archive as research/atlas/profile.py reads every world ([Meta X](healthy-and-rich.md)): at half or more of the five worlds' 400 moments together, a world meets all seven marks of Chapter [46](how-to-tell-a-world-that-keeps-evolving.md)'s health bar (a world that has died out misses them at every moment after); and at iteration 50,000, at most one of the five worlds has died out or has half its agents or more holding three tokens or fewer.
 >
 > **It fails if:** Fewer than half the moments meet every mark, or two or more of the five worlds dead or with half their agents or more at three tokens or fewer at 50,000: the health and the riches of a mixed world do not last.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The runs
 
 <!-- runs E18 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **5 runs.** Every condition below is run once for every seed (2, 4, 5, 6, 10), for 50,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **mixed at birth** — changes `mix_at_birth` = on; 10,000 tokens. Runs `B2-10000-4af4a3-s002` … `B2-10000-4af4a3-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E18`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E18`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | mixed at birth | what it is |
@@ -185,7 +187,7 @@ seed 6, at 43%, ended alive and richer than half.
 <!-- figure longmixed/health -->
 ![Health and riches, every 500 iterations](../figures/longmixed/health.svg)
 
-**Health and riches, every 500 iterations.** Each world read as Meta X reads every world, from the whole worlds the lab kept every 500 iterations from 10,500 on, while it lived. Left: how many of the seven marks of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets (the dots of each world are set a little apart so that they do not hide each other). Right: the share of its agents holding three tokens or fewer.
+**Health and riches, every 500 iterations.** Each world read as [Healthy and rich](healthy-and-rich.md) reads every world, from the whole worlds the lab kept every 500 iterations from 10,500 on, while it lived. Left: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets (the dots of each world are set a little apart so that they do not hide each other). Right: the share of its agents holding three tokens or fewer.
 
 > [!example]- How to make this figure
 > **Runs.** The five runs of Experiment 18 — Experiment 17's worlds of seeds 2, 4, 5, 6 and 10 (B2 at 10,000 tokens with brains mixed at birth), played on by the lab from iteration 10,000 to 50,000 or until they died out (`python3 gol_lab.py run E18`); their first 10,000 iterations are Experiment 17's.
@@ -199,7 +201,7 @@ seed 6, at 43%, ended alive and richer than half.
 <!-- /figure -->
 
 The marks a world misses follow its size, as
-[Chapter 80](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)
+[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)
 found: the worlds that died missed the hub mark while they were small, and the
 two that lived missed only the dimension, at every one of their moments that
 missed a mark — 50 of 80 each — with 1,300 to 2,300 agents and a dimension of
@@ -226,7 +228,7 @@ end, the living ones poorer the larger they grew.
 
 Not by a sudden blow. Every agent of these worlds lives out its hundred
 iterations, and a world keeps its size only while one agent in a hundred is
-born every iteration ([Chapter 80](mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)).
+born every iteration ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)).
 The worlds that died had hovered near that line for thousands of iterations,
 and then fell below it and stayed below: in the last world kept before each
 end, births had fallen to 0.39, 0.51 and 0.47 per hundred agents an
@@ -258,7 +260,7 @@ generation dying at once, but a world that stopped replacing its dead.
 did no better in seed 4 (45%); the brains of 50,000 took 55% from those of
 25,000 in seed 5, and lost to them in seed 6 (42%). Over the first 10,000
 iterations the mixed worlds' later brains had won 84%, then 66%, then 54%
-([Chapter 80](mixed-at-birth-ten-long-worlds.md#does-evolution-go-on)):
+([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#does-evolution-go-on)):
 the steps shrink towards nothing, and in the long run a later era is as likely
 to lose as to win.
 
@@ -280,19 +282,19 @@ led to extinction by the very brains that win in it.
   dies.
 - **The survivors drift the other way.** The two worlds that lived ended
   larger and poorer, missing the dimension mark at most of their moments —
-  closer to B2 than to the worlds that came closest in Meta X.
+  closer to B2 than to the worlds that came closest in [Healthy and rich](healthy-and-rich.md).
 - **Evolution fades.** Later brains beat earlier ones by less and less, and by
   25,000 to 50,000 iterations an era is as likely to lose as to win against
   the one before it.
-- **What next.** [Meta XI](what-holds-a-worlds-size.md) gathers
+- **What next.** [What holds a world's size](what-holds-a-worlds-size.md) gathers
   what holds a world's size, and why mixing loosens it: a mate spreads its
   brain for free, so having children pays less. Taking that free ride away is
   [Experiment 19](mixed-at-birth-with-parents-as-mates.md)'s test.
 
-**Related notes:** [Chapter 80 · Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
-[Chapter 46 · How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
-[Meta X · Healthy and rich](healthy-and-rich.md) ·
-[Chapter 69 · A hundred thousand iterations](a-hundred-thousand-iterations.md) ·
+**Related notes:** [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
+[Healthy and rich](healthy-and-rich.md) ·
+[A hundred thousand iterations](a-hundred-thousand-iterations.md) ·
 [Every setting](settings.md#mix_at_birth)
 
 <!-- turns -->

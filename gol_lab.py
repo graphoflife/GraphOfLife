@@ -8,7 +8,7 @@ conditions that differ from the baseline one setting at a time, seeds and a
 length. The lab works out which runs that means, makes the ones that do not
 exist yet, and advances them, several at once, each in a process of its own,
 until every queued experiment has what it asked for. You can pause it and
-start it again at any point, from the Book tab or from here:
+start it again at any point, from the Research Notebook tab or from here:
 
     python3 gol_lab.py plan E02       what E02 needs, what exists, what it will cost
     python3 gol_lab.py run E02        queue it, and run the lab in this terminal

@@ -1,6 +1,6 @@
 # How different are the agents?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Put two agents in exactly the same place, with the same random inputs: do
 >   they do the same thing?
 > - How much of what an agent does comes from where it is, how much from who
@@ -10,16 +10,16 @@
 > - Do the kinds last, and do they live in different places?
 
 A world of 3,000 agents holds about a thousand genotypes
-([Chapter 18](genotypes-and-lineages.md)). But a genotype is a name: a brain
+([Genotypes and lineages](genotypes-and-lineages.md)). But a genotype is a name: a brain
 gets a new one whenever a mutation touches it, even when the change changes
 nothing the brain does ([Brain diversity](brain-diversity.md)).
-[Chapter 19](what-the-brains-are-like.md) opened the brains of B1's worlds
+[What the brains are like](what-the-brains-are-like.md) opened the brains of B1's worlds
 and found that selection had set **constants**: never have children, spread
 the stake, mark every token revolutionary — the same in every world. So is a
 world a thousand variations on one way of playing, or do several ways of
 playing live side by side?
 
-This chapter answers by experiment. It takes a world at one moment, and puts
+This page answers by experiment. It takes a world at one moment, and puts
 the brains of its agents into the same situations — exactly the same inputs,
 down to the random numbers — and compares what each one does.
 
@@ -30,7 +30,7 @@ down to the random numbers — and compares what each one does.
   tokens and links, its neighbours', the messages it holds
   ([What a brain sees](brain-inputs.md)). The messages are part of the
   situation; they are what the agent holds at that moment. A brain also reads a
-  few random numbers ([Chapter 4](the-brain.md)). Draw those 8 times for
+  few random numbers ([The brain](the-brain.md)). Draw those 8 times for
   each situation, and give every brain the same 8 draws.
 - **Brains.** Take 400 agents at random and put each one's brain into every
   situation and draw. A brain carried by many agents is drawn as often as it is
@@ -112,10 +112,10 @@ much of it is the rules.
   the random numbers decide which candidate wins, which is why chance is a
   larger part in B2 than among founders (29% against 17%).
 - **In B1** nearly every brain spreads its stake (94–99% of cases in the ten
-  worlds), and most split it evenly ([Chapter 19](what-the-brains-are-like.md)).
+  worlds), and most split it evenly ([What the brains are like](what-the-brains-are-like.md)).
   An even split puts 1/(*k* + 1) of the stake at home for an agent with *k*
   neighbours: again where the agent is, not what its brain makes of it. That
-  fits [Chapter 19](what-the-brains-are-like.md)'s finding that B1's brains are nearly blind; the situation
+  fits [What the brains are like](what-the-brains-are-like.md)'s finding that B1's brains are nearly blind; the situation
   reaches B1's stakes mostly through the rules.
 
 **Whether a child is born depends on the place in B2, on the brain in B1.** In
@@ -126,7 +126,7 @@ birth to a parent already at its [valence](settings.md#valence) of
 the parent is. B1 has neither rule, and there 92% is who the agent is. Almost
 every B1 brain would give a child nothing (the mean share is 0.2–2.7% of its
 tokens in the ten worlds); the few that would are particular brains — the near
-abolition of reproduction of [Chapter 19](what-the-brains-are-like.md).
+abolition of reproduction of [What the brains are like](what-the-brains-are-like.md).
 
 **Two decisions are pure traits, and were so before any selection.** Whether a
 brain spreads or goes all in, and how readily it links a newborn to its
@@ -203,7 +203,7 @@ that line, and the kinds are counted by their carriers as an **effective
 number** ([Effective numbers](effective-number.md)): ten equally
 common kinds count 10, one kind with nearly everyone counts close to 1.
 
-**The test checks itself.** [Chapter 19](what-the-brains-are-like.md) found that many B1 agents score every
+**The test checks itself.** [What the brains are like](what-the-brains-are-like.md) found that many B1 agents score every
 candidate zero or below, so that the rules split their stake exactly evenly
 ([Splitting tokens into whole numbers](largest-remainder.md)). Such
 agents all stake alike, and should be one kind. In nine of the ten B1 worlds
@@ -337,7 +337,7 @@ some variance by chance alone.
 Kinds do sit in somewhat different places: in B2 by how many links their
 carriers have, in B1 by how rich they are. That fits niches, but it fits
 kinship as well: relatives carry similar brains and live near one another
-([Chapter 23](like-next-to-like.md)), so a kind may share a place because it
+([Like next to like](like-next-to-like.md)), so a kind may share a place because it
 is a family, not because the place suits it. Telling the two apart needs an
 experiment: move a kind to another place and see whether it does worse there.
 
@@ -354,8 +354,8 @@ python3 research/oee/checks/diversity.py --persist B2-10000-s001:1000 B2-10000-s
 
 Two checks come with it. A world without random inputs (Experiment 16's second
 condition) must give chance a share of exactly 0, and does. And a kind the rules
-make — the even split — must come out as one kind, and does. [Chapter 77](how-alike-the-agents-are.md),
-*Meta IX · How alike the agents are*, applies the measure to every condition of
+make — the even split — must come out as one kind, and does. [How alike the agents are](how-alike-the-agents-are.md),
+*[How alike the agents are](how-alike-the-agents-are.md) · How alike the agents are*, applies the measure to every condition of
 every experiment and to the pilot worlds.
 
 ## What this says
@@ -385,7 +385,7 @@ every experiment and to the pilot worlds.
   kind to *stay*: a place where it does better than the others, so that new
   kinds are added to the old ones rather than replacing them. Whether the
   turnover is selection or drift is open. The lifetime contests of
-  [Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on) say
+  [Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on) say
   that later brains beat earlier ones in these worlds (0.73 for those of 2,000
   against those of 500), so at least some of it is selection. The next measure
   is to play each kind against the kinds that replaced it.
@@ -395,10 +395,10 @@ every experiment and to the pilot worlds.
 [Brain diversity](brain-diversity.md) ·
 [Genotypes and the family tree](genotype.md) ·
 [What a brain sees](brain-inputs.md) ·
-[Chapter 18 · Genotypes and lineages](genotypes-and-lineages.md) ·
-[Chapter 19 · What the brains are like](what-the-brains-are-like.md) ·
-[Chapter 23 · Like next to like](like-next-to-like.md) ·
-[Chapter 41 · Do the brains matter?](do-the-brains-matter.md)
+[Genotypes and lineages](genotypes-and-lineages.md) ·
+[What the brains are like](what-the-brains-are-like.md) ·
+[Like next to like](like-next-to-like.md) ·
+[Do the brains matter?](do-the-brains-matter.md)
 
 <!-- turns -->
 ---

@@ -1,5 +1,5 @@
 """
-Chapter 96 · How large a crowd a raider needs (Experiment 29).
+How large a crowd a raider needs (Experiment 29).
 
 Raider patches of 1 to 100 agents and of 5% of the world, ten places each in worlds 2 and 3 of
 Experiment 16 at iteration 2,000, and 5% in five places in the other eight, each with a control:
@@ -28,7 +28,7 @@ RUNS = ("Experiment 29's 320 invasions (`python3 gol_lab.py run E29`): the ten B
         "patch member's brain (`gol_strategies.plant`).")
 STEPS = ["Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, "
          "step by step, until the patch has its size.",
-         "Give the patch the raider (Chapter 51's rule), or the control; neither ever mutates.",
+         "Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.",
          "Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.",
          "A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began "
          "with, and more than the control holds there."]

@@ -1,10 +1,10 @@
 # How does a world's size follow its tokens?
 
-Parts II and III looked at worlds of two sizes, 10,000 and 100,000 tokens.
+The study of the baseline looked at worlds of two sizes, 10,000 and 100,000 tokens.
 This one runs the baseline at ten sizes, from 800 tokens to 409,600 — each
 double the one before — and asks what changes with size and what does not.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Does a world of twice the tokens hold twice the agents and twice the
 >   connections?
 > - Is a big world the same kind of world as a small one — as unequal, as
@@ -14,13 +14,13 @@ double the one before — and asks what changes with size and what does not.
 > - How small can a world be and still live?
 
 <!-- runs E08 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **42 runs.** Every condition below is run once for every seed (1 to 3) and every number of tokens it lists, for 600 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 800, 1,600, 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800, 409,600 tokens. Runs `B1-800-s001` … `B1-409600-s003`.
 > - **stopped only when empty** — changes `extinction_threshold` = 0; 800, 1,600, 3,200, 6,400 tokens. Runs `B1-800-57b358-s001` … `B1-6400-57b358-s003`.
 >
-> To make these runs again: `python3 gol_lab.py run E08`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E08`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | stopped only when empty | what it is |
@@ -74,7 +74,7 @@ double the one before — and asks what changes with size and what does not.
 
 ## Why ask
 
-Whether what the book has found holds at other sizes rests first on this
+Whether what the notebook has found holds at other sizes rests first on this
 question. If agents and connections grow in proportion to the tokens, a
 bigger world is more of the same, and the size of a world can be chosen for
 what an experiment can afford. If they do not, size changes what a world is,
@@ -88,7 +88,7 @@ founders go from 8 to 4,096.
 
 **What is measured.** For every run, the mean number of agents alive after
 the game, and of connections, over iterations 500 to 599 — well past the
-youth of [Chapter 11](the-first-hundred-iterations.md). The same means
+youth of [The first hundred iterations](the-first-hundred-iterations.md). The same means
 over iterations 400 to 499 say whether a world had settled.
 
 **How it is read.** On logarithmic axes, on both sides, a power law —
@@ -112,7 +112,7 @@ So the small worlds were also run a second way — *stopped only when empty*,
 `extinction_threshold` 0 — from 800 to 6,400 tokens. A world that never falls
 to twenty agents is then exactly the baseline's world of the same seed.
 
-**A check from elsewhere.** The 28 worlds of [Chapter 10](a-worlds-life.md)
+**A check from elsewhere.** The 28 worlds of [A world's life](a-worlds-life.md)
 that reached iteration 600, at 10,000 tokens, are drawn beside the new runs
 wherever they can be: a size the experiment did not run, measured the same
 way.
@@ -122,10 +122,10 @@ way.
 <!-- figure size/agents -->
 ![Agents against the tokens of the world](../figures/size/agents.svg)
 
-**Agents against the tokens of the world.** Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which a power law, agents = a · tokens^b, is a straight line of slope b ([Logarithmic axes](logarithmic-axes.md)). Blue: the baseline, three seeds per size (at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the orange one of the same world; at 800 none did). Orange: the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the baseline worlds of [Chapter 10](a-worlds-life.md), a check from another experiment. Red: the straight line fitted to the blue dots from 3,200 tokens on, exponent 1.00 (95% interval 0.95 to 1.06). Dashed: exponent exactly 1.
+**Agents against the tokens of the world.** Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which a power law, agents = a · tokens^b, is a straight line of slope b ([Logarithmic axes](logarithmic-axes.md)). Blue: the baseline, three seeds per size (at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the orange one of the same world; at 800 none did). Orange: the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the baseline worlds of [A world's life](a-worlds-life.md), a check from another experiment. Red: the straight line fitted to the blue dots from 3,200 tokens on, exponent 1.00 (95% interval 0.95 to 1.06). Dashed: exponent exactly 1.
 
 > [!example]- How to make this figure
-> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the chapter. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [Chapter 10](a-worlds-life.md)).
+> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -140,7 +140,7 @@ proportion, as closely as three seeds per size can tell: the fitted exponent
 is **1.00** (95% interval 0.95 to 1.06), the line explains 98% of the scatter,
 and the points do not bend away from it. A settled world holds about 0.14
 agents per token — a world of 409,600 tokens about 60,000 agents. The worlds
-of [Chapter 10](a-worlds-life.md) fall where the line says they should: 0.124 agents per token in
+of [A world's life](a-worlds-life.md) fall where the line says they should: 0.124 agents per token in
 the median world, against 0.140 predicted, well inside their own spread
 (0.06 to 0.25).
 
@@ -156,10 +156,10 @@ proportion the worlds are, divide by the tokens:
 <!-- figure size/per-token -->
 ![The same law, seen through a magnifying glass](../figures/size/per-token.svg)
 
-**The same law, seen through a magnifying glass.** The quantities of the figure above divided by what proportion would scale them by, so that growth in proportion is a flat line. Blue: every baseline run of 3,200 tokens and more that lived to iteration 600, its mean over iterations 500 to 599; grey: the 28 worlds of [Chapter 10](a-worlds-life.md) at 10,000 tokens; white: the median of the three runs of each size; dashed red: the power law fitted to the runs, divided by the tokens (for connections per agent, the law fitted to the connections per agent themselves, whose exponent says by how much they grow with size).
+**The same law, seen through a magnifying glass.** The quantities of the figure above divided by what proportion would scale them by, so that growth in proportion is a flat line. Blue: every baseline run of 3,200 tokens and more that lived to iteration 600, its mean over iterations 500 to 599; grey: the 28 worlds of [A world's life](a-worlds-life.md) at 10,000 tokens; white: the median of the three runs of each size; dashed red: the power law fitted to the runs, divided by the tokens (for connections per agent, the law fitted to the connections per agent themselves, whose exponent says by how much they grow with size).
 
 > [!example]- How to make this figure
-> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the chapter. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [Chapter 10](a-worlds-life.md)).
+> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -183,10 +183,10 @@ little more richly connected.
 <!-- figure size/lives -->
 ![Six hundred iterations, at nine sizes](../figures/size/lives.svg)
 
-**Six hundred iterations, at nine sizes.** The number of agents after every game, divided by the tokens of the world, over the 600 iterations of every baseline run of 3,200 tokens and more — one panel per size, one line per seed — and, in the third panel, the first three worlds of [Chapter 10](a-worlds-life.md) at 10,000 tokens, over their first 600 iterations. The same vertical scale in every panel.
+**Six hundred iterations, at nine sizes.** The number of agents after every game, divided by the tokens of the world, over the 600 iterations of every baseline run of 3,200 tokens and more — one panel per size, one line per seed — and, in the third panel, the first three worlds of [A world's life](a-worlds-life.md) at 10,000 tokens, over their first 600 iterations. The same vertical scale in every panel.
 
 > [!example]- How to make this figure
-> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the chapter. The runs of [Chapter 10](a-worlds-life.md) with seeds 1, 2 and 3.
+> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the page. The runs of [A world's life](a-worlds-life.md) with seeds 1, 2 and 3.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -216,10 +216,10 @@ a hundred times larger would change, relatively, ten times less.
 <!-- figure size/fluctuations -->
 ![Big worlds do not average out](../figures/size/fluctuations.svg)
 
-**Big worlds do not average out.** Over the last 300 iterations (300 to 599) of every baseline run of 3,200 tokens and more, and of the 28 worlds of [Chapter 10](a-worlds-life.md). Left: for each run, the standard deviation of the change in the number of agents from one game to the next, divided by the mean number of agents — against that mean, on logarithmic axes. If a world were made of independent parts, its relative changes would shrink as one over the square root of its size (dashed, drawn through the runs of 3,200 tokens); red is the line fitted to the runs. Right: for each run, the share of the agents alive at the start of a game that the game cut off from the network — the mean over the games (yellow) and the largest in any one game (red).
+**Big worlds do not average out.** Over the last 300 iterations (300 to 599) of every baseline run of 3,200 tokens and more, and of the 28 worlds of [A world's life](a-worlds-life.md). Left: for each run, the standard deviation of the change in the number of agents from one game to the next, divided by the mean number of agents — against that mean, on logarithmic axes. If a world were made of independent parts, its relative changes would shrink as one over the square root of its size (dashed, drawn through the runs of 3,200 tokens); red is the line fitted to the runs. Right: for each run, the share of the agents alive at the start of a game that the game cut off from the network — the mean over the games (yellow) and the largest in any one game (red).
 
 > [!example]- How to make this figure
-> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the chapter. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [Chapter 10](a-worlds-life.md)).
+> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -240,27 +240,27 @@ agents lived and died independently, it would be about 0.1%.
 The right panel shows why. On average a game cuts off about 2% of the agents
 of a world — between 1.5% and 3.9%, size by size, with no trend. And the
 largest single cut is a large part of the world at every size: 35% at 3,200
-tokens, 48% at 409,600, 71% in one world of [Chapter 10](a-worlds-life.md). In the biggest
-worlds, one game has cut off nearly thirty thousand agents at once. [Chapter 36](how-a-world-breaks.md) found how such cuts
+tokens, 48% at 409,600, 71% in one world of [A world's life](a-worlds-life.md). In the biggest
+worlds, one game has cut off nearly thirty thousand agents at once. [How a world breaks](how-a-world-breaks.md) found how such cuts
 happen — a whole border of poor agents going quiet — and
-[Chapter 39](questioning-the-mechanics.md) the rule that makes them fatal:
+[Questioning the mechanics](questioning-the-mechanics.md) the rule that makes them fatal:
 everything outside the largest connected piece dies. This experiment adds the
 scale: **the regions a world can lose grow with the world.** The cull couples
 every part of a world to every other, however big it is.
 
 ## Is a big world the same kind of world?
 
-Most of what Parts II and III measured is a share or a rate — the inequality
+Most of what the study of the baseline measured is a share or a rate — the inequality
 of tokens, the share staked at home, births per hundred agents. Such
 quantities do not grow with a world by definition. Do they change with it?
 
 <!-- figure size/same-world -->
 ![Is a big world the same kind of world?](../figures/size/same-world.svg)
 
-**Is a big world the same kind of world?** Nine properties of a world that do not grow with its size by definition — shares, rates per agent, a dimension. Blue: every baseline run of 3,200 tokens and more that lived to iteration 600, its mean over iterations 500 to 599; grey: the 28 worlds of [Chapter 10](a-worlds-life.md) at 10,000 tokens; white: the median of each size. A world that is the same kind of world at every size gives a flat cloud.
+**Is a big world the same kind of world?** Nine properties of a world that do not grow with its size by definition — shares, rates per agent, a dimension. Blue: every baseline run of 3,200 tokens and more that lived to iteration 600, its mean over iterations 500 to 599; grey: the 28 worlds of [A world's life](a-worlds-life.md) at 10,000 tokens; white: the median of each size. A world that is the same kind of world at every size gives a flat cloud.
 
 > [!example]- How to make this figure
-> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the chapter. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [Chapter 10](a-worlds-life.md)).
+> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -285,7 +285,7 @@ flat within what three seeds per size can see:
 | dimension from ball growth | −0.001 | −0.048 to 0.045 |
 
 Genotypes per agent are flatter than anything: 0.61 to 0.66 at every size —
-the balance of making and copying of [Chapter 27](how-even-is-a-world.md)
+the balance of making and copying of [How even is a world?](how-even-is-a-world.md)
 does not care how big the world is.
 
 Three properties of the network's shape do change, slowly:
@@ -301,21 +301,21 @@ Three properties of the network's shape do change, slowly:
 All three go with the slow rise in connections per agent: more connections,
 fewer leaves, more loops, more neighbours to lose one's node to. Over a
 128-fold range of sizes they shift by between a fifth and a half. The worlds
-of [Chapter 10](a-worlds-life.md) sit among the others in every panel: the numbers Parts II and
-III first found at 10,000 tokens hold, roughly, at other sizes — as the
+of [A world's life](a-worlds-life.md) sit among the others in every panel: the numbers the study of the
+baseline first found at 10,000 tokens hold, roughly, at other sizes — as the
 second edition of those parts, at 100,000 tokens, checks
-([Chapter 9](thirty-worlds.md)).
+([Thirty worlds](thirty-worlds.md)).
 
 > [!info] Added later: thirty worlds at each of two sizes
-> [Chapter 60](worlds-of-100000-tokens.md), written after this chapter,
+> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md), written after this page,
 > sets thirty worlds of 100,000 tokens beside thirty of 10,000, over
 > iterations 500 to 1,499. Inequality, the nodes kept by their own agent and
 > the genotypes per agent come out within 3% of each other — the nodes kept
 > do not fall with size after all. But at ten times the tokens the dimension
 > from ball growth is 15% higher (3.4 against 3.0,
-> [Chapter 35](the-geometry-of-a-world.md)), births and deaths per agent
-> run 13 to 21% higher (as [Chapter 12](births-deaths-and-ages.md) and
-> [Chapter 13](how-ages-change.md) find too), leaves are only 5% fewer,
+> [The geometry of a world](the-geometry-of-a-world.md)), births and deaths per agent
+> run 13 to 21% higher (as [Births, deaths and ages](births-deaths-and-ages.md) and
+> [How ages change over a world's life](how-ages-change.md) find too), leaves are only 5% fewer,
 > and clustering is less than half. Births, the rate of cutting and the
 > dimension do change with size, a little; and the shape changes more than
 > leaves and loops alone show.
@@ -325,10 +325,10 @@ second edition of those parts, at 100,000 tokens, checks
 <!-- figure size/distances -->
 ![How far apart agents are, as worlds grow](../figures/size/distances.svg)
 
-**How far apart agents are, as worlds grow.** Every baseline run of 3,200 tokens and more that lived to iteration 600, and the 28 worlds of [Chapter 10](a-worlds-life.md): the mean number of agents over iterations 500 to 599, and over the same iterations the mean distance between two agents (left) and the largest distance found (right), both estimated by the viewer from breadth-first searches out of 8 to 16 agents every 25 iterations ([Radius and diameter](radius-and-diameter.md)). Red: a power law fitted to the dots. Dashed: what a small world would do — distances growing in proportion to the logarithm of the number of agents — drawn through the runs of 3,200 tokens.
+**How far apart agents are, as worlds grow.** Every baseline run of 3,200 tokens and more that lived to iteration 600, and the 28 worlds of [A world's life](a-worlds-life.md): the mean number of agents over iterations 500 to 599, and over the same iterations the mean distance between two agents (left) and the largest distance found (right), both estimated by the viewer from breadth-first searches out of 8 to 16 agents every 25 iterations ([Radius and diameter](radius-and-diameter.md)). Red: a power law fitted to the dots. Dashed: what a small world would do — distances growing in proportion to the logarithm of the number of agents — drawn through the runs of 3,200 tokens.
 
 > [!example]- How to make this figure
-> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the chapter. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [Chapter 10](a-worlds-life.md)).
+> **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box at the top of the page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -353,7 +353,7 @@ a space of a fixed dimension *d*: a lump of *N* points has a width of about
 growth reads off every world, at every size (the last panel of the figure
 before). At large scales a world is less like a small world than like a
 three-dimensional body: grown locally, by children joined to their parents'
-neighbourhoods ([Chapter 35](the-geometry-of-a-world.md)), it never makes
+neighbourhoods ([The geometry of a world](the-geometry-of-a-world.md)), it never makes
 the long jumps that keep a random network small. The mean distances scatter
 widely between worlds of one size, and bend a little; the diameter is the
 cleaner of the two.
@@ -385,8 +385,8 @@ in all; the world of 1,600 tokens and seed 3 spent 78 iterations at twenty
 agents or fewer — down to 12 — and then grew to 255.
 
 So the stopping rule ends worlds that would have lived. That matters for how
-the book has counted extinction: "4 of 30 worlds die" in
-[Chapter 10](a-worlds-life.md) means "4 of 30 fell to twenty agents" — and
+the notebook has counted extinction: "4 of 30 worlds die" in
+[A world's life](a-worlds-life.md) means "4 of 30 fell to twenty agents" — and
 one of them did so at iteration 4, when worlds are small and fragile. Whether
 those worlds would have recovered, no run can now say.
 
@@ -398,14 +398,15 @@ Before the runs, as Experiment 8:
 > [!quote] The thesis of Experiment 8, written down before any of its runs existed
 > **The claim.** A world's size follows its tokens in proportion. From a few thousand tokens up to 409,600, a settled world holds about 0.13 agents and 0.2 connections for every token, whatever its size: agents and connections are each a power law of the tokens with exponent 1. A world of twice the tokens is two worlds of the same kind.
 >
-> **Why it would be so.** Everything an agent does is local. It plays the game with its neighbours, has its children beside itself, and dies when its own tokens run out; nothing in the rules reaches across the world except the sharing out of the tokens of the dead, which gives every survivor the same chance whatever the size of the world. So a bigger world should be more of the same, with as many agents per token and as many connections per agent. At 10,000 tokens the settled worlds of Chapter 3 held 0.13 agents and 0.20 connections per token, from iteration 500 on.
+> **Why it would be so.** Everything an agent does is local. It plays the game with its neighbours, has its children beside itself, and dies when its own tokens run out; nothing in the rules reaches across the world except the sharing out of the tokens of the dead, which gives every survivor the same chance whatever the size of the world. So a bigger world should be more of the same, with as many agents per token and as many connections per agent. At 10,000 tokens the settled worlds of Chapter [3](a-worlds-life.md) held 0.13 agents and 0.20 connections per token, from iteration 500 on.
 >
 > **It holds if:** For the baseline worlds of 3,200 to 409,600 tokens that live to iteration 600, each measured by its mean over iterations 500 to 599: the exponent fitted to agents against tokens lies between 0.9 and 1.1 and its 95% interval contains 1; the same holds for connections; and neither set of points bends away from a straight line on logarithmic axes — the interval of the bend contains 0.
 >
 > **It fails if:** The exponent's interval leaves out 1, so that bigger worlds hold clearly fewer or more agents (or connections) per token than smaller ones, or the points bend on logarithmic axes. Then a world's size is more than its tokens, something in the dynamics reaches across the whole world, and every result in this book belongs to the size it was found at.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
-("[Chapter 3](one-iteration.md)" in the thesis is today's [Chapter 10](a-worlds-life.md).)
 
 The thesis **holds**, on every count it set: the exponent for agents is 1.00
 with an interval from 0.95 to 1.06, for connections 1.04 with an interval from
@@ -437,7 +438,7 @@ lose half of itself in a game.
   world is not less noisy: in every world, at every size, a game can remove a
   third or half of everyone, whatever their brains — the noise comes from a
   rule, not from small numbers, and only a change of the rule removes it
-  ([Meta II](what-the-measurements-say-about-open-ended-evolution.md)). What size does give is room: a world of 60,000
+  ([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)). What size does give is room: a world of 60,000
   agents is 25 steps across on average and 80 at its widest, and keeps the
   same number of genotypes per agent — space in which regions could differ,
   if the rules let them stay apart.
@@ -446,11 +447,11 @@ lose half of itself in a game.
   a condition with the rule off, as this one did.
 
 > [!info] Added later: the rule, changed
-> [Chapter 48](a-world-that-cannot-break.md) makes the change of rule
+> [A world that cannot break](a-world-that-cannot-break.md) makes the change of rule
 > asked for above. When an agent dies, the groups its former neighbours fall
 > into are joined up in a ring, and a link that carried no tokens may lapse
 > only if its two ends share at least two neighbours. A death mended so
-> never splits a world — that chapter proves it — and such a lapse cannot
+> never splits a world — that page proves it — and such a lapse cannot
 > either, so under these rules the cull has nothing left to remove, however
 > large the world.
 

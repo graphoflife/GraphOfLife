@@ -1,28 +1,28 @@
 # What folds a world
 
-> [!question] Questions of this chapter
-> - [Chapter 24](how-many-dimensions-does-a-world-have.md) found B1's
+> [!question] Questions of this page
+> - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) found B1's
 >   worlds to be spaces, with a dimension of their own. Are B2's worlds, and
->   the others the book has made since, spaces too?
+>   the others the notebook has made since, spaces too?
 > - When does a world become a space, and when does it lose it?
 > - Which rules decide it?
 
-One aim of this book is a world that makes its own space: a network in which
+One aim of this notebook is a world that makes its own space: a network in which
 every agent has neighbours, the neighbours have neighbours, and the whole is
 a space of a few dimensions — three, if it can be
-([Chapter 7](physical-inspiration.md)). Chapter 24 measured B1's worlds
+([Physical inspiration](physical-inspiration.md)). [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) measured B1's worlds
 with two rulers and found them spaces: the number of agents within *r* steps
 of a typical agent grows as a power of *r*, about *r*² to *r*³, and a
 **random twin** of each world — exactly the same number of links at every
 agent, wired at random — does not: its balls grow by a factor every step,
 the mark of a small world, which has no dimension at all. B2, the world that
-cannot break ([Chapter 48](a-world-that-cannot-break.md)), has been the
+cannot break ([A world that cannot break](a-world-that-cannot-break.md)), has been the
 baseline of everything since. Its network has only been read through one
 number on the health bar, a dimension by ball growth over radii 1 to 5 —
 and that number rose with a world's size
-([Meta XI](what-holds-a-worlds-size.md)), as a small world's would.
+([What holds a world's size](what-holds-a-worlds-size.md)), as a small world's would.
 
-This chapter reads B2's worlds and the others with Chapter 24's full rulers
+This page reads B2's worlds and the others with [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)'s full rulers
 (`research/atlas/space.py`), and adds one number that sums a world up: its
 **typical distance** — the steps within which a typical agent's ball holds
 half the world — over its twin's. A small world is about as near as its
@@ -48,7 +48,7 @@ of its size, the twin's only as the logarithm.
 > **To make it again:** `python3 book_figures.py spaces`.
 <!-- /figure -->
 
-- **B1 is a space**, as Chapter 24 found: its local dimension holds between
+- **B1 is a space**, as [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) found: its local dimension holds between
   2.0 and 2.5 from radius 1 to 6, and a typical agent needs 10.5 steps to
   reach half of its world, where its twin needs 4.5 — a typical distance of
   2.3 times the twin's.
@@ -60,7 +60,7 @@ of its size, the twin's only as the logarithm.
 - **Brains mixed at birth do not change that**: Experiment 17's worlds read
   1.21, at 630 agents.
 - **But B2 with the estate of the dead going to the newborns or to the
-  parents** ([Chapter 73](who-inherits.md)) **is a space, and one of about
+  parents** ([Who inherits?](who-inherits.md)) **is a space, and one of about
   three dimensions.** Its local dimension rises to 3.1 at radius 3, 3.5 at 4
   to 5, and falls back to 2.7 by radius 7; a typical agent needs 11.2 steps
   to reach half of its 5,200 agents, its twin 4.7 — a typical distance of
@@ -69,12 +69,12 @@ of its size, the twin's only as the logarithm.
 ## A world nine times larger
 
 > [!info] Added later (17 October 2026)
-> The world of this section was still being played when the chapter was
+> The world of this section was still being played when the page was
 > first written.
 
 A small world's rulers run out of room within a few steps, and a space only
 shows its dimension where it has room
-([Chapter 24](how-many-dimensions-does-a-world-have.md)). So a B2 world of
+([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)). So a B2 world of
 100,000 tokens was played for 1,000 iterations (a pilot, seed 1,
 `GraphOfLifeRuns/.pilots/BIG/B2-100000-s1`): at the end it held 30,686
 agents, nine times B2's usual 3,400.
@@ -82,12 +82,12 @@ agents, nine times B2's usual 3,400.
 <!-- figure spaces/size -->
 ![Does a world fold the same way at every size?](../figures/spaces/size.svg)
 
-**Does a world fold the same way at every size?** Each dot is a world: its typical distance over its random twin's, against the agents in its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and 409,600 tokens after their last game ([Chapter 24](how-many-dimensions-does-a-world-have.md)'s readings). Grey: B2's worlds of 5,000 tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than its twin as it grows; a small world stays as near.
+**Does a world fold the same way at every size?** Each dot is a world: its typical distance over its random twin's, against the agents in its largest piece, both on logarithmic axes. Blue: B1's worlds of 10,000, 100,000 and 409,600 tokens after their last game ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)'s readings). Grey: B2's worlds of 5,000 tokens at iteration 1,000 (Experiment 14) and of 10,000 at 2,000 (Experiment 16), and one B2 world of 100,000 tokens at iteration 1,000 (a pilot). A space grows wider than its twin as it grows; a small world stays as near.
 
 > [!example]- How to make this figure
 > **Runs.** B1: Experiments 2, 10 and 8 (`B1-10000-…`, `B1-100000-…`, `B1-409600-…`); B2: Experiments 14 and 16, and the pilot world `GraphOfLifeRuns/.pilots/BIG/B2-100000-s1` (B2's settings at 100,000 tokens, seed 1, 1,000 iterations).
 >
-> **Data.** From [Chapter 24](how-many-dimensions-does-a-world-have.md)'s readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and `research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`).
+> **Data.** From [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)'s readings (`GraphOfLifeRuns/.book/<run>.dims2.json`) and `research/atlas/space.py` (`GraphOfLifeRuns/.pilots/atlas/space.json`).
 >
 > 1. Measure each world and its random twin as in the first figure.
 > 2. Divide the radius at which its typical ball holds half the world by its twin's.
@@ -143,7 +143,7 @@ what it is?
   its twin's distance from iteration 200 on.
 
 The lower panel holds the worlds of Experiment 14, at 5,000 tokens, each
-without one of B2's rules ([Chapter 48](a-world-that-cannot-break.md)).
+without one of B2's rules ([A world that cannot break](a-world-that-cannot-break.md)).
 B2 itself folds there too, from 1.54 to about 1.25. Without links at birth
 it folds a little less (1.35 to 1.45), without the cap on links a little
 more (1.13 to 1.28), and with handover it holds at about 1.5. **Without
@@ -190,7 +190,7 @@ worlds that differ in so much cannot say; worlds without brains can
 <!-- figure spaces/every -->
 ![Every world at iteration 1,000](../figures/spaces/every.svg)
 
-**Every world at iteration 1,000.** Each dot is a world of the book read at iteration 1,000 — the pilot batches, the search by elimination and the lab's B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into — groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.
+**Every world at iteration 1,000.** Each dot is a world of the notebook read at iteration 1,000 — the pilot batches, the search by elimination and the lab's B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into — groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.
 
 > [!example]- How to make this figure
 > **Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X, Y and YB, the search by elimination's worlds (Z), and the lab's B2 families of Experiments 15 to 17.
@@ -250,7 +250,7 @@ the cap on links, rings of 10 to 24 groups, and two of the three worlds read
 
 The worlds above differ in many things at once. To see whether who breeds is
 enough, the rules of space were played alone, as in
-[Chapter 48](a-world-that-cannot-break.md#space-alone):
+[A world that cannot break](a-world-that-cannot-break.md#space-alone):
 no brains, no tokens, a newborn joined to its parent and two of the parent's
 neighbours, every agent dying at age 100 as in B2, births balancing deaths at
 about 1,500 agents — and the one thing changed is who may have a child: any
@@ -263,7 +263,7 @@ the old (`research/oee/fold.py`, five seeds, 600 iterations each):
 | deaths mended in a ring, only the young breed | 1.71 (1.50 to 2.05) | 3.8 | 3% |
 | deaths mended in a ring, only the old breed | 1.02 (1.02 to 1.06) | 7.6 | 0.1% |
 | deaths not mended, anyone breeds | 2.36 (2.09 to 2.52) | 1.2 | 37% |
-| Chapter 48's own model: agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
+| [A world that cannot break](a-world-that-cannot-break.md)'s own model: agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
 | only the pieces a death would split joined, anyone breeds | 5.1 to 5.6 (two seeds of five: beyond reach) | 1.9 | 47% |
 | the same, only the young breed | 4.22 (3.62 to 4.83) | 2.0 | 48% |
 | the same, only the old breed | beyond reach in all five | 1.8 | 46% |
@@ -331,7 +331,7 @@ puts the line between folded and not.
   worlds are nearly small worlds — a typical agent is about as near to
   everyone as in a random network with the same links —
   which is why the health bar's dimension rose with their size and failed
-  the large ones (Meta XI): a small world has no dimension to find, and the
+  the large ones ([What holds a world's size](what-holds-a-worlds-size.md)): a small world has no dimension to find, and the
   number read off its first few steps grows with the room it has.
 - **Space is made and unmade by life and death.** Birth makes it, and every
   B2 world starts as one; death with mending folds it, once the first
@@ -348,9 +348,9 @@ puts the line between folded and not.
   can cut has to sit between the two.
 - **The three-dimensional worlds are the poor ones.** B2 with the estate to
   the newborns or the parents is a space of about three dimensions — the aim
-  of [Part VI](worlds-of-100000-tokens.md) — but nine in ten of its
+  of [the physics of space](../README.md#space-and-dimension) — but nine in ten of its
   agents hold three tokens or fewer, its agents are alike, and its evolution
-  stops ([Chapter 73](who-inherits.md)). A world that is a
+  stops ([Who inherits?](who-inherits.md)). A world that is a
   three-dimensional space and rich, and that keeps evolving, is still to be
   found.
 - **Open**: rules that would keep a world's dying
@@ -360,13 +360,13 @@ puts the line between folded and not.
   rule for unused links cuts exactly those triangles. Letting only the young
   breed is not enough with brains: B2's young already breed.
 
-**Related notes:** [Chapter 24 · How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) ·
-[Chapter 7 · Physical inspiration](physical-inspiration.md) ·
-[Chapter 48 · A world that cannot break](a-world-that-cannot-break.md) ·
-[Chapter 73 · Who inherits?](who-inherits.md) ·
-[Meta XI · What holds a world's size](what-holds-a-worlds-size.md) ·
-[Meta X · Healthy and rich](healthy-and-rich.md) ·
-[Chapter 80 · Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses) ·
+**Related notes:** [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) ·
+[Physical inspiration](physical-inspiration.md) ·
+[A world that cannot break](a-world-that-cannot-break.md) ·
+[Who inherits?](who-inherits.md) ·
+[What holds a world's size](what-holds-a-worlds-size.md) ·
+[Healthy and rich](healthy-and-rich.md) ·
+[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses) ·
 [Every setting](settings.md#mend_on_death)
 
 <!-- turns -->

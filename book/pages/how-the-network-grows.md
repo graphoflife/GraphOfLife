@@ -6,29 +6,29 @@ the reproduction phase, when a newborn child is joined to some of its
 parent's candidates and the parent may hand it some of its own connections.
 They are **lost** in two: after the game, when a connection that carried no
 tokens is cut, and whenever an agent dies, taking its connections with it
-([Chapter 3](one-iteration.md)). [Chapter 17](what-shape-does-the-network-take.md)
-described the shape that results. This chapter watches the making and the
+([One iteration, step by step](one-iteration.md)). [What shape does the network take?](what-shape-does-the-network-take.md)
+described the shape that results. This page watches the making and the
 unmaking, and asks the question that decides the shape: who gains
 connections, and who loses them?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Do the well connected gain more connections than the poorly connected?
 >   In proportion to what they have?
 > - Do they lose them in proportion too?
 > - Do agents gather connections as they grow old, so that the oldest are
 >   the hubs?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -85,7 +85,7 @@ both are given.
 Of 600,854 births in the reproduction phases of every 25th iteration from
 500 on, **80%** of the children were joined to their own parent. 12% were
 joined to no one, and are cut off at once
-([Chapter 31](how-agents-have-children.md)). Of all the children, 6% were
+([How agents have children](how-agents-have-children.md)). Of all the children, 6% were
 joined to just one of their parent's candidates, 56% to two to five, and 27%
 to six or more. A child is born into its parent's neighbourhood and nowhere
 else.
@@ -98,7 +98,7 @@ together**: two neighbours of a parent were at most two steps apart,
 through the parent, before the child arrived, and the child adds only
 another path of two steps. Distances in a world can grow, but new connections never shorten
 them. This is why a world keeps a shape in space at all
-([Chapter 24](how-many-dimensions-does-a-world-have.md)).
+([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
 
 ## Who gains and who loses
 
@@ -114,7 +114,7 @@ of the network ([Preferential attachment and its kernel](preferential-attachment
 **Who gains and who loses connections.** Agents sorted by their number of connections k at the start of a phase, in classes of growing width (dots at the middle of each class). Green: the new connections an agent alive before and after a reproduction phase gained in it, per agent — to its own newborn child, to a neighbour's child, or handed over. Red: the connections an agent had after the reproduction phase and no longer had after the game that followed — cut for carrying nothing, or gone with it if it died — per agent. Pooled over the reproduction phases and games of every 25th iteration from 500 on, in the 30 worlds. Dashed: straight lines fitted on these logarithmic axes; dotted: a line of slope 1, in proportion to k.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -149,7 +149,7 @@ agent go up and down by a random factor game after game, in a world whose
 total is held in place by its tokens. Growth by random factors, kept off
 zero from below, makes heavy tails (Gabaix 1999), and losses that grow
 faster than gains bend the tail down at the top. That fits what
-[Chapter 32](power-laws-real-and-apparent.md) will find: a power-law tail
+[Power laws, real and apparent](power-laws-real-and-apparent.md) will find: a power-law tail
 of exponent about 3 in the top hundredth of the connections (the top
 twentieth at 10,000 tokens), and nothing scale-free below it.
 
@@ -165,7 +165,7 @@ early. Is that so here?
 **Connections and age.** The agents alive after the last game of the 30 worlds, sorted by age — the iterations since their node was born — in classes doubling in width: the median number of connections of each class, with the band from its 25th to its 75th percentile, and the 99th percentile (dashed).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -186,11 +186,11 @@ agents of any age up to a hundred iterations have 16 to 22 connections. The
 best-connected hundredth of agents aged 362 have 40, and of agents aged 724,
 126. The great hubs are old. But this is mostly survival, not
 accumulation: a hub is far less likely to die than a leaf
-([Chapter 21](do-the-rich-stay-rich.md)), so among the old the hubs are
+([Do the rich stay rich?](do-the-rich-stay-rich.md)), so among the old the hubs are
 overrepresented. Age gives an agent no connections; connections give it
 age. (The very greatest hubs, the centres of a world's stars, are the
 exception the other way: they pass from parent to newborn child —
-[Chapter 33](the-largest-and-the-smallest.md).)
+[The largest and the smallest](the-largest-and-the-smallest.md).)
 
 ## What this means
 
@@ -201,16 +201,16 @@ exception the other way: they pass from parent to newborn child —
   than young ones, except that the best connected live longest.
 - **Growth is local.** A connection is only ever made inside a parent's
   neighbourhood, and never brings two agents closer together. That is what
-  lets a world keep a geometry ([Chapter 24](how-many-dimensions-does-a-world-have.md)).
+  lets a world keep a geometry ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
   A network that added connections between random agents would collapse
   into a small world in which everything is a few steps from everything.
 - **For open-ended evolution**, the network is a churn of proportional
-  gains and losses. Connections, which [Chapter 21](do-the-rich-stay-rich.md)
+  gains and losses. Connections, which [Do the rich stay rich?](do-the-rich-stay-rich.md)
   found to be the only lasting form of wealth, are themselves turned over at
   every scale. No structure is built up that lasts longer than the agents in
   it.
 
-To make every figure of this chapter: `python3 book_figures.py grows`.
+To make every figure of this page: `python3 book_figures.py grows`.
 
 <!-- turns -->
 ---

@@ -1,7 +1,7 @@
 # Every era against three
 
-> [!question] Questions of this chapter
-> - In the longest worlds the book has, do later brains still get better at
+> [!question] Questions of this page
+> - In the longest worlds the notebook has, do later brains still get better at
 >   the end, or had evolution stopped climbing?
 > - Do later brains lose again to early ones, as they would if evolution
 >   went round in circles?
@@ -10,10 +10,10 @@
 
 ## Why ask
 
-Every long world the book has played says the same thing in its contests:
+Every long world the notebook has played says the same thing in its contests:
 later brains beat earlier ones, by less and less. In Experiment 18's two
 longest worlds, brains mixed at birth and played to 50,000 iterations
-([Chapter 81](five-mixed-worlds-fifty-thousand-iterations.md)), the
+([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)), the
 brains of 25,000 beat those of 10,000, and those of 50,000 then scored
 0.54 and 0.42 against those of 25,000.
 
@@ -42,7 +42,7 @@ One thing can be measured before any contest: how far each era's play is
 from an equilibrium. At an equilibrium no agent could do better by playing
 differently while the rest keep their play. So the distance is how much an
 agent *would* gain by its best reply to the others, its **exploitability**
-([Chapter 50](why-evolution-stops.md)). A population that evolution
+([Why evolution stops](why-evolution-stops.md)). A population that evolution
 drives towards a top becomes less exploitable era after era.
 
 <!-- figure eras/room -->
@@ -92,17 +92,19 @@ know which draw comes. The true best reply can only gain more.
 > [!quote] The thesis of Experiment 28, written down before any of its runs existed
 > **The claim.** Evolution in Experiment 18's two longest worlds had stopped climbing by iteration 25,000. Against the brains of 25,000, the brains of the ten eras after it (27,500 to 50,000) do no better than a contest's own noise: their median score lies within the band an era scores against itself. Against the brains of 2,500, every era from 5,000 on still wins, beyond that band.
 >
-> **Why it would be so.** The two worlds' own contests (Chapter 81), 100 iterations each on both eras' worlds with two coins: in seed 5 the brains of 25,000 scored a median of 0.56 against those of 10,000, and those of 50,000 scored 0.54 against those of 25,000; in seed 6, 0.72 and then 0.42. Later brains beat earlier ones by less and less in every long world the book has played (Chapter 92; Experiment 19, 0.78 falling to 0.55). If the game these brains play still had room within their reach, the eras after 25,000 would pull ahead of 25,000 as the eras before it pulled ahead of 2,500.
+> **Why it would be so.** The two worlds' own contests (Chapter [81](five-mixed-worlds-fifty-thousand-iterations.md)), 100 iterations each on both eras' worlds with two coins: in seed 5 the brains of 25,000 scored a median of 0.56 against those of 10,000, and those of 50,000 scored 0.54 against those of 25,000; in seed 6, 0.72 and then 0.42. Later brains beat earlier ones by less and less in every long world the book has played (Chapter [92](the-candidates-played-on.md); Experiment 19, 0.78 falling to 0.55). If the game these brains play still had room within their reach, the eras after 25,000 would pull ahead of 25,000 as the eras before it pulled ahead of 2,500.
 >
 > **It holds if:** In both worlds the median score of the eras 27,500 to 50,000 against 25,000 (each era's score the mean of its two contests) lies within the noise band, 0.5 plus or minus twice the standard deviation of the world's twelve contests of an era against itself (2,500, 10,000 and 25,000, four coins each); and every era from 5,000 to 50,000 scores above that band against 2,500.
 >
 > **It fails if:** In either world the median score of the eras 27,500 to 50,000 against 25,000 lies above the band (evolution was still climbing) or below it (it went back), or some era from 5,000 on fails to score above the band against 2,500.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The trials
 
-Each contest is the book's lifetime contest
-([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)):
+Each contest is the notebook's lifetime contest
+([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)):
 - The world of one era is given brains drawn by coin from two eras.
 - Every mutation is off, so no brain changes and every copy keeps its era.
 - The world plays 100 iterations, and the later era's share of the agents
@@ -113,7 +115,7 @@ plays against itself four times. A score that differs from 0.5 by less than
 those self-contests do is noise.
 
 <!-- runs E28 -->
-> [!info] The trials behind this chapter
+> [!info] The trials behind this page
 > **240 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
 >
 > - **against 2,500** — 76 trials: worlds `B2-10000-4af4a3-s005`, `B2-10000-4af4a3-s006`; eras 2,500 to 50,000, every 2,500; coins 17.
@@ -121,7 +123,7 @@ those self-contests do is noise.
 > - **against 25,000** — 68 trials: worlds `B2-10000-4af4a3-s005`, `B2-10000-4af4a3-s006`; eras 5,000, 7,500, 12,500, 15,000, 17,500, 20,000, 22,500, 25,000, 27,500, 30,000, 32,500, 35,000, 37,500, 40,000, 42,500, 45,000, 47,500, 50,000; coins 17.
 > - **each against itself** — 24 trials: worlds `B2-10000-4af4a3-s005`, `B2-10000-4af4a3-s006`; eras 2,500, 10,000, 25,000; coins 17, 18, 19, 20.
 >
-> To play these trials again: `python3 gol_lab.py run E28`, or ▶ in the Book tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+> To play these trials again: `python3 gol_lab.py run E28`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
 
 ## What the contests said
@@ -216,10 +218,10 @@ little in one world, round a circle in the other.
   best reply would still gain about a node a game at every era. Better play
   is there and is not found, which is what a valley between the play
   evolution has and better play would do
-  ([Chapter 51](strategies-written-by-hand.md),
-  [Chapter 94](what-a-brain-can-compute.md)).
+  ([Strategies written by hand](strategies-written-by-hand.md),
+  [What a brain can compute](what-a-brain-can-compute.md)).
 - **A chain of contests hides circles.** Contests between neighbours in time
-  ([Chapter 81](five-mixed-worlds-fifty-thousand-iterations.md)) said
+  ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)) said
   later brains win by less and less. Fixed eras show that later brains can
   win against their parents and still lose ground against their ancestors.
   The test of open-ended evolution asks for wins against the best mix of
@@ -227,7 +229,7 @@ little in one world, round a circle in the other.
   ([What would count as open-ended evolution](open-ended-test.md)).
 - **What comes next.** A world that is to keep climbing needs a way across
   the valley: a crowd for a new strategy to start from
-  ([Chapter 96](how-large-a-crowd-a-raider-needs.md)), or a rule that
+  ([How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md)), or a rule that
   makes the better play reachable in small steps.
 
 <!-- turns -->

@@ -1,5 +1,5 @@
 """
-Chapter 99 · A mate that pays its share (Experiment 22).
+A mate that pays its share (Experiment 22).
 
 B2 with brains mixed at birth and a mate that pays the child as much as the parent, in four worlds to 5,000
 iterations, played by the prototype in the lab; against Experiment 17's worlds of the same seeds, whose mates

@@ -1,6 +1,6 @@
 # Mixed at birth, with parents as mates
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Mixed worlds die out because their agents stop having children. Is that
 >   because a mate spreads its brain for free?
 > - If only an agent that has a child of its own may be a mate, does a mixed
@@ -10,16 +10,16 @@
 
 ## Why ask
 
-Brains mixed at birth made the richest healthy worlds the book has found
-([Chapter 80](mixed-at-birth-ten-long-worlds.md)) — and mortal ones: three
+Brains mixed at birth made the richest healthy worlds the notebook has found
+([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)) — and mortal ones: three
 of the five that met every mark at 10,000 iterations died out before 40,000
-([Chapter 81](five-mixed-worlds-fifty-thousand-iterations.md)). Each died
+([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)). Each died
 the same way. Every agent lives its hundred iterations, a world has to see one
 birth per hundred agents every iteration to keep its size, and these worlds
 fell below that line and stayed below, though many of their agents could have
 afforded a child.
 
-[Meta XI](what-holds-a-worlds-size.md) offers a reason. A newborn's
+[What holds a world's size](what-holds-a-worlds-size.md) offers a reason. A newborn's
 mixed brain is half its parent's and half a mate's — a neighbour, drawn at
 random, who pays nothing for the child. So an agent that never breeds still
 spreads its brain through other agents' children, while the parent pays the
@@ -59,7 +59,7 @@ as mates, ten seeds, for 20,000 iterations each — twice as long as Experiment
 17, long enough for the deaths of Experiment 18 to have begun. It records as
 the lab records every run: the graph statistics every 25 iterations and a
 whole world every 500, so that each world can be read at any of those moments
-as Meta X reads every world, and its brains of one era played against those of
+as [Healthy and rich](healthy-and-rich.md) reads every world, and its brains of one era played against those of
 another. Experiment 17's ten worlds, with any neighbour as a mate, are the
 comparison.
 
@@ -69,22 +69,24 @@ comparison.
 > [!quote] The thesis of Experiment 19, written down before any of its runs existed
 > **The claim.** Mixed worlds die out because a mate spreads its brain for free. When only a neighbour with a living child of its own may be a mate, a world whose brains are mixed at birth does not breed itself to death: of ten worlds played for 20,000 iterations, none dies out, and the median world ends richer than any of B2's.
 >
-> **Why it would be so.** In Experiment 17 one mixed world of ten died out by iteration 10,000, and in Experiment 18 three of the five that had met every mark died out between 17,078 and 37,722: births fell below the one per hundred agents an iteration that replaces the dead, while a third to three quarters of the agents could have had a child. A mate passes half of its brain to a child it pays nothing for, so an agent that never breeds still spreads through other agents' children, and selection rewards keeping tokens over spending them on children (Meta XI). With only parents as mates (batch MP: four pilot worlds, seeds 1 to 4, 5,000 iterations), the agents that could have a child had one at 3.5 to 7.5 per hundred an iteration, against 2.1 to 4.3 in Experiment 17's worlds of the same seeds; each world held its size more steadily than its twin (the spread of the logarithm of its size over iterations 500 to 5,000: 0.09, 0.29, 0.25 and 0.12, against 0.19, 0.34, 0.63 and 0.47), at 760 to 2,200 agents, and 23% to 54% of its agents held three tokens or fewer at 5,000, against 66% to 79% in B2. But one pilot world fell from 2,000 agents to 900, the eagerness rose only a little, and three of the four ended poorer than their twins: the free mate may be one cause among others, and taking it away costs some riches.
+> **Why it would be so.** In Experiment 17 one mixed world of ten died out by iteration 10,000, and in Experiment 18 three of the five that had met every mark died out between 17,078 and 37,722: births fell below the one per hundred agents an iteration that replaces the dead, while a third to three quarters of the agents could have had a child. A mate passes half of its brain to a child it pays nothing for, so an agent that never breeds still spreads through other agents' children, and selection rewards keeping tokens over spending them on children ([Meta XI](what-holds-a-worlds-size.md)). With only parents as mates (batch MP: four pilot worlds, seeds 1 to 4, 5,000 iterations), the agents that could have a child had one at 3.5 to 7.5 per hundred an iteration, against 2.1 to 4.3 in Experiment 17's worlds of the same seeds; each world held its size more steadily than its twin (the spread of the logarithm of its size over iterations 500 to 5,000: 0.09, 0.29, 0.25 and 0.12, against 0.19, 0.34, 0.63 and 0.47), at 760 to 2,200 agents, and 23% to 54% of its agents held three tokens or fewer at 5,000, against 66% to 79% in B2. But one pilot world fell from 2,000 agents to 900, the eagerness rose only a little, and three of the four ended poorer than their twins: the free mate may be one cause among others, and taking it away costs some riches.
 >
 > **It holds if:** No world of the ten ends before iteration 20,000 (the lab stops a world when 20 agents or fewer are left), and at iteration 20,000 the median of the ten worlds' shares of agents holding three tokens or fewer is below 0.66 — the least of B2's ten worlds at 10,000 iterations.
 >
 > **It fails if:** A world dies out, or the median share is 0.66 or more: taking away the free mate does not keep a mixed world alive and rich.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The runs
 
 <!-- runs E19 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **10 runs.** Every condition below is run once for every seed (1 to 10), for 20,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **mixed at birth, parents as mates** — changes `mix_at_birth` = on, `mix_mates` = parents; 10,000 tokens. Runs `B2-10000-bcc1bc-s001` … `B2-10000-bcc1bc-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E19`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E19`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | mixed at birth, parents as mates | what it is |
@@ -191,7 +193,7 @@ and as poor as only the poorest two of them.
 the median (0.52 to 0.69) — as high as Experiment 17's worlds at 10,000
 (0.58), and above B2's ten worlds played on to 10,000 (0.49). Part of that is
 built in: every mixed birth makes a new genotype
-([Chapter 82](mixing-with-every-other-rule.md)).
+([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)).
 
 <!-- figure mixparents/breeding -->
 ![Who could have a child, and who has one](../figures/mixparents/breeding.svg)
@@ -215,7 +217,7 @@ afford a child had one 6.0 times per hundred an iteration over the first
 10,000 iterations (the median of every world and moment kept), against 3.0
 with any mate — the rise the pilots showed — and 6.5 over the next 10,000.
 And the eager fill their world: only a sixth of the agents could afford a
-child at the median moment, against a third with any mate. This is Meta XI's
+child at the median moment, against a third with any mate. This is [What holds a world's size](what-holds-a-worlds-size.md)'s
 rule at work: how eagerly agents breed sets how full a world becomes, and a
 full world is a poor one.
 
@@ -248,7 +250,7 @@ but not stopping.
 <!-- figure mixparents/verdict -->
 ![Experiment 19 at iteration 20,000](../figures/mixparents/verdict.svg)
 
-**Experiment 19 at iteration 20,000.** Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of its agents holding three tokens or fewer; the thesis asked that the median of the ten be below 0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each world meets.
+**Experiment 19 at iteration 20,000.** Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of its agents holding three tokens or fewer; the thesis asked that the median of the ten be below 0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each world meets.
 
 > [!example]- How to make this figure
 > **Runs.** The ten runs of Experiment 19 — B2 at 10,000 tokens with brains mixed at birth and the mate drawn only among neighbours with a living child (`mix_mates` = `parents`), seeds 1 to 10, 20,000 iterations (`python3 gol_lab.py run E19`) — beside Experiment 17's ten runs with any neighbour as mate, to 10,000 iterations, and the five of them Experiment 18 played on, read to 20,000.
@@ -285,14 +287,14 @@ riches, not mixing's: these worlds are richer than any of B2's, not rich.
   becomes B2's, with six marks of the bar and a dimension above four — though
   its agents still differ as much as in Experiment 17's worlds. Life and
   riches pull apart again.
-- **What Meta XI asked for is still missing**: a pull that makes having a
+- **What [What holds a world's size](what-holds-a-worlds-size.md) asked for is still missing**: a pull that makes having a
   child pay more when few have them and less when many do. Parents as mates
   raise eagerness everywhere, at every size, and so set the world at one size
   — larger than mixing's, smaller than B2's.
 
-**Related notes:** [Chapter 80 · Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
-[Chapter 81 · Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) ·
-[Meta XI · What holds a world's size](what-holds-a-worlds-size.md) ·
+**Related notes:** [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
+[Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) ·
+[What holds a world's size](what-holds-a-worlds-size.md) ·
 [Every setting](settings.md#mix_mates)
 
 <!-- turns -->

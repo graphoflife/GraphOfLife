@@ -9,7 +9,7 @@
 > - Which correlations are findings, and which are true by definition?
 
 This appendix is an atlas rather than an experiment. Nothing in it was
-predicted. It is a search: every quantity the book measures for an agent
+predicted. It is a search: every quantity the notebook measures for an agent
 against every other, on every combination of linear and logarithmic axes, in
 twenty worlds; and every statistic the lab records for a whole world against
 every other. A search of this size finds hundreds of correlations, and most of
@@ -108,7 +108,7 @@ where the tokens sit (rank correlations, B2 against B1):
 | age and still alive ten iterations later | −0.52 | +0.22 |
 
 In B1 the rich are the well-connected, the central and the old: the even
-split ([Chapter 29](where-the-tokens-flow.md)) pours tokens into whoever
+split ([Where the tokens flow](where-the-tokens-flow.md)) pours tokens into whoever
 has most neighbours, and nothing ages. They spread their stakes, and the
 nodes they take come from spreading. In B2 wealth has come loose from the
 network. Its links are capped at eight, its agents die at a hundred, and
@@ -146,7 +146,7 @@ temperature changes by its curvature, the sum of its neighbours'
 temperatures minus its own (the note [*Token curvature*](token-curvature.md)).
 An even split of every agent's stake over itself and its neighbours would
 move tokens the same way, by the curvature divided by connections plus one
-([Chapter 7](physical-inspiration.md)). Both worlds do run downhill. Peaks
+([Physical inspiration](physical-inspiration.md)). Both worlds do run downhill. Peaks
 lose and valleys gain: among the agents more than ten tokens richer than
 their neighbourhood, 13% to 21% more lost than gained, and among those 4 to
 100 tokens poorer, 7% to 11% more gained than lost. Most agents' tokens did
@@ -159,7 +159,7 @@ downhill at about a fifth of the pace of heat, with a correlation near 0.3.
 curvature still predicts the change in B2 (0.28), and does not in B1 (−0.01).
 In B1 the flow downhill is nodes changing hands: a peak keeps its node in only
 10% of games, an agent level with its neighbours in 56%. Those peaks are the
-rich nomads of [Chapter 58](gliders-and-who-helps-whom.md), which move
+rich nomads of [Gliders, and who helps whom](gliders-and-who-helps-whom.md), which move
 their wealth on and leave their node behind. In B2 nearly every agent keeps
 its node (88% to 98%), and the tokens move as stakes that fail. Over ten
 games the slope shows plainly in B2: curvature predicts the change at 0.44 on
@@ -254,7 +254,7 @@ holds 47%, and ordering the worlds along it orders them by their
 best-connected agent's share of the world, from 1% to 61%. The second
 component (18%) is how clustering and triangles grow with an agent's
 connections; the third (16%) is the population. The seven "star" worlds of
-[Chapter 60](worlds-of-100000-tokens.md) are the far end of the first:
+[Worlds of 100,000 tokens](worlds-of-100000-tokens.md) are the far end of the first:
 a world is first of all a world with or without a star.
 
 ## What it means
@@ -270,7 +270,7 @@ a world is first of all a world with or without a star.
 - **In B2, losing one's node is close to a lottery** as far as anything an
   agent is or does can tell. Selection can only act on traits that change the
   odds, and none of these does by much. That is one more reason, besides the
-  ones of [Chapter 50](why-evolution-stops.md), for evolution in B2 to be
+  ones of [Why evolution stops](why-evolution-stops.md), for evolution in B2 to be
   slow.
 - **A world is first of all a world with or without a star.** Half of the
   differences between thirty worlds of the same rules are the size of their

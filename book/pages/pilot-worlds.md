@@ -1,8 +1,8 @@
 # Pilot worlds
 
-Most chapters read **runs**: worlds the lab made for an experiment, ten or
+Most pages read **runs**: worlds the lab made for an experiment, ten or
 thirty seeds of every condition, with a thesis written before the first of
-them existed. Some chapters of Part V read **pilots** instead, worlds made by
+them existed. Some pages, most of them about B2, read **pilots** instead, worlds made by
 hand to find out whether an idea is worth an experiment at all. This note says
 what a pilot is, what it records and how far it can be trusted.
 
@@ -26,8 +26,8 @@ as which links a crowded newborn may still make. With `--proto engine=true`
 the prototype instead plays the engine's own phases unchanged and only keeps
 its books; `research/oee/pilots/equiv.py` checks that such a world stays
 identical to the engine's, iteration for iteration. The pilots of
-[Chapter 54](the-switches-the-world-was-built-with.md) and
-[Chapter 55](another-game.md) run this way.
+[The switches the world was built with](the-switches-the-world-was-built-with.md) and
+[Another game](another-game.md) run this way.
 
 ## What it records
 
@@ -40,7 +40,7 @@ identical to the engine's, iteration for iteration. The pilots of
   Every tenth row adds the network's health: the 2-core, the worst cut by one
   agent and by one connection, the best-connected agent's share, links per
   agent and the ball dimension
-  ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)).
+  ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
   It also adds the sizes of groups: clones (neighbours with the same brain),
   kin (brains within four mutations), and sides where the rules have them.
 - `ckpt_<iteration>.npz`: the whole world every `--ckpt` iterations, with
@@ -49,7 +49,7 @@ identical to the engine's, iteration for iteration. The pilots of
 ## Tournaments between its eras
 
 `research/oee/pilots/tourney.py` plays the cross-time tournament of
-[Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) on a
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) on a
 pilot's checkpoints. Each contest takes one era's world, its graph and tokens,
 and gives every agent a brain drawn from one era or the other. It switches
 mutation off and plays `--T` iterations; the later era's score is the share of
@@ -59,20 +59,20 @@ contests. `research/oee/pilots/elo.py` fits one rating per era.
 
 The brains can be dealt in two ways:
 
-- **coins** (the default): a coin per agent, as in [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md), so the two eras
+- **coins** (the default): a coin per agent, as in [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md), so the two eras
   are mixed agent by agent;
 - **halves** (`--layout halves`): era B gets the half of the agents nearest,
   in steps, to an agent drawn at random, and era A the rest. Each era then
   starts as one territory. This is the fairer contest for anything that
   depends on neighbours of one kind standing together, such as an alliance,
   which a coin per agent cuts through
-  ([Chapter 56](alliances.md));
+  ([Alliances](alliances.md));
 - **turf** (`--layout turf`): halves, and the era whose world the contest is
   played in keeps its own brains where they are on its half, so its clones
   still sit next to clones and its allies next to allies. Each era plays once
   at home in this way and once away, where its brains are drawn at random.
   It is the contest for what brains are as a group
-  ([Chapter 55](another-game.md)).
+  ([Another game](another-game.md)).
 
 Within an era a brain keeps its genotype's number in a contest, so clones
 are still clones, which matters where stakes are pooled by genotype.
@@ -83,12 +83,12 @@ A pilot has two seeds where an experiment has ten, and it was not announced
 with a thesis before it ran. So a pilot can show that something *can* happen,
 or give a number worth testing, but a difference between two pilots of two
 seeds each is a lead, not a finding
-([How many seeds an experiment needs](seeds-needed.md)). The chapters built
-on pilots say so where it matters. Whatever they find that the book relies on
+([How many seeds an experiment needs](seeds-needed.md)). The pages built
+on pilots say so where it matters. Whatever they find that the notebook relies on
 later is meant to be tested again as an experiment of the lab.
 
 Pilot worlds are kept in `GraphOfLifeRuns/.pilots`, outside the repository
-like every run. The command lines that made them are in each chapter's
+like every run. The command lines that made them are in each page's
 recipes and in `research/oee/pilots/LOG.md`.
 
 <!-- turns -->

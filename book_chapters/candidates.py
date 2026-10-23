@@ -1,14 +1,14 @@
 """
-Chapter 92 · The candidates, played on (Part VII).
+The candidates, played on (the long runs).
 
-Batch LC: every candidate of Meta X — a world that met every mark of the health bar with a
+Batch LC: every candidate of Healthy and rich — a world that met every mark of the health bar with a
 diversity score above the median of B2's worlds at iteration 1,000 — played on to 10,000
 iterations in a copy of its own (GraphOfLifeRuns/.pilots/LC/). Each is read at 1,000 and at
-10,000 as Meta X reads every world (research/atlas/at.py), its space as Chapter 87 reads it
+10,000 as Healthy and rich reads every world (research/atlas/at.py), its space as What folds a world reads it
 (research/atlas/space.py), and its brains of three moments against those of earlier ones, a
 lifetime long (research/oee/checks/rejudge.py). Experiment 17's ten mixed worlds and B2's ten
 worlds played on to 10,000 are the comparison. The two mixed worlds of batch Q are Experiment
-17's worlds of seeds 1 and 2, agent for agent, and are counted there (Meta X).
+17's worlds of seeds 1 and 2, agent for agent, and are counted there (Healthy and rich).
 
 The computer was restarted on 18 October 2026 with six long runs unfinished. Two use engine settings
 only and were played by the lab from iteration 0 (Experiment 20); they are the pilots' worlds game
@@ -46,7 +46,7 @@ REPLAYED = {"K-reach-random-forced-s1": "B2-10000-e10e0d-s001", "Y-mix-keepone-s
 PENDING = {"Y-mix-lottery-s2", "Y-mix-unittoken-s2", "Y-mix-came-s1", "Y-mix-familysense-s1"}
 #: The steps judged: the brains of the later moment against those of the earlier.
 STEPS = [((500, 1000), "1,000/500"), ((2000, 5000), "5,000/2,000"), ((5000, 10000), "10,000/5,000")]
-RUNS = ("Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of Meta X, B2 at 10,000 tokens with "
+RUNS = ("Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of [Healthy and rich](healthy-and-rich.md), B2 at 10,000 tokens with "
         "the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 "
         "iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 "
         "(Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds "
@@ -68,7 +68,7 @@ def source(name: str) -> str:
 
 
 def words(name: str) -> str:
-    """A long run's rules, in the chapters' words."""
+    """A long run's rules, in the pages' words."""
     rule = name.rsplit("-s", 1)[0]
     fixed = {"W-norev-mix": "mixing, no revolutions", "W-norev-linktoken": "links hold a token, no revolutions",
              "S-G4-familysense": "a sense of family, no revolutions",
@@ -149,7 +149,7 @@ def twin(name: str) -> Dict[str, Any]:
 
 
 def held(w: Dict[str, Any], b2: List[Dict[str, Any]], died: Optional[int]) -> bool:
-    """Meta X's test of a long run: it lived, meets every mark, is more diverse than B2's median world and
+    """Healthy and rich's test of a long run: it lived, meets every mark, is more diverse than B2's median world and
     poorer than none of B2's. A world that fell to the lab's extinction line has died, though a pilot plays on
     from its last agent."""
     return (died is None and w["marks"] == 7
@@ -210,7 +210,7 @@ def candidates(ch: F.Chapter) -> None:
               y={"label": "diversity score", "min": 0, "max": 1}, series=series,
               caption=("Each line is a candidate, from where it stood at iteration 1,000 (small grey dot) to where "
                        "it stood at 10,000 (large dot): green if it still met every mark of the health bar, was "
-                       "more diverse than B2's median world and poorer than none of B2's worlds — Meta X's test "
+                       "more diverse than B2's median world and poorer than none of B2's worlds — [Healthy and rich](healthy-and-rich.md)'s test "
                        "of a long run — violet if it fell back, red if it had died out on the way (20 agents or "
                        "fewer, the lab's line) and was refilled from its last agents. Yellow: B2's ten worlds "
                        "played on to 10,000; blue: Experiment 17's mixed worlds that lived to 10,000. The "
@@ -260,7 +260,7 @@ def candidates(ch: F.Chapter) -> None:
               y={"label": "typical distance over the random twin's", "min": 0.9}, series=space,
               guides=[{"axis": "y", "at": 1.0, "label": "as near as a random network"}],
               caption=("Each line is a candidate: the steps within which a typical agent's ball holds half its "
-                       "world, over the same for its random twin (Chapter 87), at iteration 1,000 and at 10,000. "
+                       "world, over the same for its random twin ([What folds a world](what-folds-a-world.md)), at iteration 1,000 and at 10,000. "
                        "Green: the candidates that held; violet: those that fell back; red: those that died out on "
                        "the way. Beside the right end: B2's ten worlds played on to 10,000 (yellow) and Experiment "
                        "17's (blue)."),

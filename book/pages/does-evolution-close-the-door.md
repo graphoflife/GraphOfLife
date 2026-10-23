@@ -1,6 +1,6 @@
 # Does evolution close the door?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - When a world has evolved for longer, can a raid that once took half of
 >   it still take hold?
 > - If evolution closes one door, does another open?
@@ -10,7 +10,7 @@
 ## Why ask
 
 A raid written by hand took half of some evolved B2 worlds at iteration
-2,000 ([Chapter 51](strategies-written-by-hand.md)). Those worlds had
+2,000 ([Strategies written by hand](strategies-written-by-hand.md)). Those worlds had
 never met a raider. Do worlds that evolve longer get harder to raid?
 
 Three answers are possible, and each says something different about
@@ -26,7 +26,7 @@ open-ended evolution:
   tried: a top, at least for these brains.
 
 The way evolution's own contests fade
-([Chapter 95](every-era-against-three.md)) says which of these to
+([Every era against three](every-era-against-three.md)) says which of these to
 expect. So does how much a single agent could gain by its best reply,
 which stays about one node a game at every era from 2,500 to 50,000 in
 every long world.
@@ -41,11 +41,13 @@ B2's five worlds played on to 10,000 iterations, at iterations 500,
 > [!quote] The thesis of Experiment 30, written down before any of its runs existed
 > **The claim.** Evolution in B2 does not learn to resist the raider. In B2's worlds played on to 10,000 iterations, patches of 5% of raiders take hold as often at iterations 5,000 and 10,000 as at 500 and 2,000: a one-sided Fisher exact test finds no fewer late than early at the 5% level. A planting takes hold as in Experiment 29: after 300 iterations its raiders are alive, more than the patch began with, and more than the control patch of residents holds there.
 >
-> **Why it would be so.** In every long world the book has, an agent's best reply to the rest would gain about one node a game, as much at 50,000 iterations as at 2,500 (Chapter 95): evolution does not close in on any equilibrium. The raider exploits what B2's brains do not do, and nothing in a world that has never met a raider selects against one. Later brains beat earlier ones by less and less, which a world learning to defend itself would not show.
+> **Why it would be so.** In every long world the book has, an agent's best reply to the rest would gain about one node a game, as much at 50,000 iterations as at 2,500 (Chapter [95](every-era-against-three.md)): evolution does not close in on any equilibrium. The raider exploits what B2's brains do not do, and nothing in a world that has never met a raider selects against one. Later brains beat earlier ones by less and less, which a world learning to defend itself would not show.
 >
 > **It holds if:** The plantings that take hold at 5,000 and 10,000 together (30, in five worlds at three places each) are not fewer than at 500 and 2,000 together by a one-sided Fisher exact test at the 5% level.
 >
 > **It fails if:** Fewer take hold late than early by that test: evolution closed the door. The chapter then asks what opened instead (other raids that later brains lose to) or whether nothing did.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The trials
@@ -53,16 +55,16 @@ B2's five worlds played on to 10,000 iterations, at iterations 500,
 The worlds are B2's own: Experiment 16's worlds, played on to 10,000
 iterations as pilots of the engine's own rules. Each trial plays from a
 pilot's checkpoint, which holds a whole world, as a run's archive does.
-The test is the invasion test of [Chapter 96](how-large-a-crowd-a-raider-needs.md).
+The test is the invasion test of [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md).
 
 <!-- runs E30 -->
-> [!info] The trials behind this chapter
+> [!info] The trials behind this page
 > **120 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **raiders** — 60 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 500, 2,000, 5,000, 10,000; strategies raider; patches of 5% of the world; places 1, 2, 3.
 > - **controls** — 60 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 500, 2,000, 5,000, 10,000; strategies resident; patches of 5% of the world; places 1, 2, 3.
 >
-> To play these trials again: `python3 gol_lab.py run E30`, or ▶ in the Book tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+> To play these trials again: `python3 gol_lab.py run E30`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
 
 ## What the raiders did
@@ -78,7 +80,7 @@ The test is the invasion test of [Chapter 96](how-large-a-crowd-a-raider-needs.m
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
+> 2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
 > 3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.
 > 4. A patch's wealth is its tokens over its agents when it is planted.
 >
@@ -89,7 +91,7 @@ The test is the invasion test of [Chapter 96](how-large-a-crowd-a-raider-needs.m
 - **At iteration 500,** all fifteen plantings took hold. The raiders held
   37% to 79% of their world 300 iterations later.
 - **At 2,000,** four of fifteen took hold: worlds 2 and 3 again, as in
-  [Chapter 96](how-large-a-crowd-a-raider-needs.md).
+  [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md).
 - **At 5,000 and at 10,000,** none of fifteen did. Every patch grew a
   little in its first five iterations, shrank from then on, and was gone by
   about iteration 150.
@@ -116,7 +118,7 @@ Over 120 iterations:
 > **Data.** From each trial's `result.json`.
 >
 > 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the raider ([Chapter 51](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
+> 2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
 > 3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.
 > 4. A patch's wealth is its tokens over its agents when it is planted.
 >
@@ -169,10 +171,10 @@ tokens a raider cannot start among agents that hold two.
   the ladder: a crew of raiders against a lone one, in worlds too poor for
   either alone.
 
-> [!info] Added later (2026-10-21, Chapter 102)
+> [!info] Added later (2026-10-21, [A crew of raiders](a-crew-of-raiders.md))
 > It shut out the group too. Crews planted in the same places took hold
 > nowhere, at 2,000, 5,000 or 10,000, and died before the lone raiders in
-> 42 of 45 places ([Chapter 102](a-crew-of-raiders.md)). Seven agents
+> 42 of 45 places ([A crew of raiders](a-crew-of-raiders.md)). Seven agents
 > in ten of a late patch hold a single token and can stake nothing, a
 > stranger borders 1.6 agents of a patch, and a stake that finds no partner
 > goes to the stranger. Neither raider can have a child in a late world:

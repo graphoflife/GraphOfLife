@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-The book's figures, made from the runs.
+The notebook's figures, made from the runs.
 
-    python3 book_figures.py                 every chapter's figures
-    python3 book_figures.py life youth      the figures of these chapters
+    python3 book_figures.py                 every page's figures
+    python3 book_figures.py life youth      the figures of these pages
 
-Every figure is drawn to book/figures/<chapter>/<name>.svg (book_svg.py), and
-two texts are kept for under it, in book/results/<chapter>.json:
+Every figure is drawn to book/figures/<page>/<name>.svg (book_svg.py), and
+two texts are kept for under it, in book/results/<page>.json:
 
     caption   what is visible: what every line, band, bar and dot is
     recipe    how to make it again by hand: which runs, which file, which
               statistic, how it is averaged, and the command that redoes it
 
-beside the numbers the chapter quotes, so the text can be checked against
+beside the numbers the page quotes, so the text can be checked against
 them. Then book_fill.py writes each figure, its caption and its recipe into
-the chapters that ask for it.
+the pages that ask for it.
 
 Everything is read from the runs folder (GraphOfLifeRuns/, or GOL_RUNS_DIR):
 the runs' `stats.jsonl` — one row of statistics per recorded phase — and,
@@ -41,7 +41,7 @@ import gol_plan
 import gol_record
 import gol_store as store
 from gol_series import NO_PARENT
-# The chapters read describe from here, with the rest of what they draw with.
+# The pages read describe from here, with the rest of what they draw with.
 from gol_stats import describe, write_json  # noqa: F401
 
 BOOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "book")
@@ -61,7 +61,7 @@ FRAMES = ("each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with "
 # ---------------------------------------------------------------------------
 
 class Chapter:
-    """The figures and numbers of one chapter, written as they are made."""
+    """The figures and numbers of one page, written as they are made."""
 
     def __init__(self, name: str) -> None:
         self.name = name
@@ -72,8 +72,8 @@ class Chapter:
              recipe: str, columns: int = 2) -> None:
         """
         A figure of several charts side by side, drawn to
-        book/figures/<chapter>/<name>.svg; its title, caption and recipe are
-        kept for the chapter's text (book_fill.py puts them under it).
+        book/figures/<page>/<name>.svg; its title, caption and recipe are
+        kept for the page's text (book_fill.py puts them under it).
         """
         path = os.path.join(BOOK, "figures", self.name, f"{name}.svg")
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -98,7 +98,7 @@ class Chapter:
     def save(self) -> None:
         write_json(os.path.join(BOOK, "results", f"{self.name}.json"),
                  {"chapter": self.name, "numbers": self.numbers, "figures": self.figures})
-        # A figure the chapter no longer draws would otherwise linger beside the ones it does.
+        # A figure the page no longer draws would otherwise linger beside the ones it does.
         folder = os.path.join(BOOK, "figures", self.name)
         for name in os.listdir(folder) if os.path.isdir(folder) else []:
             if name.endswith(".svg") and name[:-4] not in self.figures:
@@ -113,7 +113,7 @@ def recipe(runs: str, data: str, steps: Iterable[str]) -> str:
 
 # How a recipe names the runs it reads. Made from the experiment's plan and
 # from how far each run got, so a recipe cannot say thirty runs where the plan
-# says forty, or 26 survivors where 25 lived. Most of Parts II and III read the
+# says forty, or 26 survivors where 25 lived. Most of the study of the baseline read the
 # baseline runs of Experiment 2, which is what they default to.
 
 def _listed_in(experiment: str) -> str:
@@ -163,7 +163,7 @@ def surviving_text(experiment: str = "E02", condition: str = "baseline") -> str:
 def lived_text(experiment: str = "E02", condition: str = "baseline", short: bool = False) -> str:
     """
     'The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`,
-    Chapter 9; `python3 gol_lab.py run E02`).', or without the brackets.
+    Thirty worlds; `python3 gol_lab.py run E02`).', or without the brackets.
     """
     specs = runs_of(experiment, condition)
     head = f"The {len(survivors(specs))} {condition} worlds that lived to the end"
@@ -352,7 +352,7 @@ def dots(categories: List[str], groups: List[List[float]], colour_of: List[int],
 # One pass over a world's frames
 # ---------------------------------------------------------------------------
 
-#: From which iteration on a life counts as one of the settled world's (Chapter 10).
+#: From which iteration on a life counts as one of the settled world's (A world's life).
 SETTLED = 500
 #: Iterations between two looks at the common ancestor of the living.
 ANCESTRY_EVERY = 25
@@ -535,7 +535,7 @@ class Classes(tuple):
         return [(values >= lo) & (values <= hi) for lo, hi, _ in self]
 
 
-#: Nodes by how many connections they have, as Part III groups them.
+#: Nodes by how many connections they have, as the measurements of the baseline groups them.
 DEGREE_CLASSES = Classes((1, 1, "1"), (2, 2, "2"), (3, 4, "3–4"), (5, 9, "5–9"), (10, 49, "10–49"),
                          (50, 10 ** 9, "50+"))
 
@@ -557,7 +557,7 @@ KEPT_BY = slice(FR["staked_1"], FR["kept_50+"] + 1)
 @D.measure("sample", file="{run}.sample.npz")
 def sample_pass(run_id: str) -> Dict[str, Any]:
     """
-    What Part III needs from a world's frames, read every SAMPLE_EVERY
+    What the measurements of the baseline needs from a world's frames, read every SAMPLE_EVERY
     iterations. Its tables' columns are FRAME_COLUMNS, AGENT_COLUMNS and
     PARENT_COLUMNS.
 
@@ -686,16 +686,16 @@ def kaplan_meier(lives: List[List[Any]]) -> Tuple[np.ndarray, np.ndarray]:
 
 
 # ---------------------------------------------------------------------------
-# Chapters
+# Pages
 # ---------------------------------------------------------------------------
 
 CHAPTERS: Dict[str, Callable[[], None]] = {}
 
 
 def chapter(fn: Callable[[Chapter], None]) -> Callable[[Chapter], None]:
-    """Register a chapter's figures under its function's name, which no other chapter may have."""
+    """Register a page's figures under its function's name, which no other page may have."""
     if fn.__name__ in CHAPTERS:
-        raise ValueError(f"two chapters are called {fn.__name__}: their figures would share a folder")
+        raise ValueError(f"two pages are called {fn.__name__}: their figures would share a folder")
     CHAPTERS[fn.__name__] = lambda: _run(fn)
     return fn
 
@@ -708,11 +708,11 @@ def _run(fn: Callable[[Chapter], None]) -> None:
 
 
 def main(argv: List[str]) -> int:
-    """Make the figures of the chapters named, or of every chapter."""
+    """Make the figures of the pages named, or of every page."""
     names = argv or list(CHAPTERS)
     unknown = [n for n in names if n not in CHAPTERS]
     if unknown:
-        print(f"no chapter called {', '.join(unknown)}; there are {', '.join(CHAPTERS)}",
+        print(f"no page called {', '.join(unknown)}; there are {', '.join(CHAPTERS)}",
               file=sys.stderr)
         return 2
     for name in names:
@@ -723,7 +723,7 @@ def main(argv: List[str]) -> int:
 
 
 if __name__ == "__main__":
-    # The chapters live in the book_chapters package and register themselves
+    # The pages live in the book_chapters package and register themselves
     # with this module as it is imported there — under its own name, book_figures,
     # not as __main__, so it is that module's main that runs them.
     import book_chapters  # noqa: F401

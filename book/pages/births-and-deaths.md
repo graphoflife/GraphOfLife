@@ -8,14 +8,14 @@ note defines each, says how it is counted, and how counts are turned into
 
 In the reproduction phase, every agent with at least one token decides how
 many tokens to give a child; if that number is at least 1, a child is born
-([Chapter 3](one-iteration.md)). The phase-1 row of the
+([One iteration, step by step](one-iteration.md)). The phase-1 row of the
 statistics counts them as `births`.
 
 ## The four ways to die
 
 Every death happens in a **cleanup**, and the cleanup runs after both
 phases. It removes an agent for one of two reasons
-([Chapter 3](one-iteration.md)):
+([One iteration, step by step](one-iteration.md)):
 
 - **starved** — it holds no tokens;
 - **cut off** (the statistics call it `orphaned`) — it holds tokens, but it
@@ -50,12 +50,12 @@ and the same for each way of dying, in the rows of its phase. "3.1 births per
 hundred agents" means: of every hundred agents alive at the start of a
 reproduction phase, 3.1 have a child.
 
-## Where the book uses it
+## Where the notebook uses it
 
-[Chapter 3](one-iteration.md) shows what an average
+[One iteration, step by step](one-iteration.md) shows what an average
 iteration of a settled world does;
-[Chapter 11](the-first-hundred-iterations.md) the youth;
-[Chapter 12](births-deaths-and-ages.md) the rates over a
+[The first hundred iterations](the-first-hundred-iterations.md) the youth;
+[Births, deaths and ages](births-deaths-and-ages.md) the rates over a
 world's life.
 
 <!-- turns -->

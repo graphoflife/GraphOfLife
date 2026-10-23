@@ -47,7 +47,7 @@ leaves = {d, h, i}; tree = {g}.
 ## Why it matters here
 
 In the game, every connection that carries no tokens is cut
-([Chapter 3](one-iteration.md)). Cutting a connection on a
+([One iteration, step by step](one-iteration.md)). Cutting a connection on a
 loop never disconnects anything — there is always another way round the
 loop. Every other connection is a [bridge](bridges.md): one of a tree cuts
 off everything beyond it, and one on a path between two loops of the core
@@ -57,8 +57,8 @@ through a bridge of the core, part of the core too.
 
 In a settled baseline world of 100,000 tokens about 57% of agents are in the
 core, 35% are leaves and the rest in trees; at 10,000 tokens, 54% and 36%
-([Chapter 17](what-shape-does-the-network-take.md),
-[Chapter 25](the-core-of-a-world.md)).
+([What shape does the network take?](what-shape-does-the-network-take.md),
+[The core of a world](the-core-of-a-world.md)).
 
 ## How far a tree hangs
 
@@ -88,7 +88,7 @@ held together by many overlapping loops, not by single rings.
 
 The viewer records only the share of agents in the 2-core (`coreShare`);
 the deeper cores, the trees and the dimension of the core are measured in
-[Chapter 25](the-core-of-a-world.md).
+[The core of a world](the-core-of-a-world.md).
 
 <!-- turns -->
 ---

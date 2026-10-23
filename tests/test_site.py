@@ -316,7 +316,7 @@ def test_a_lab_run_shows_running_and_refuses_start():
                 request = Request(path)
                 route(request, path)
                 status, message = request.answered[0]
-                assert status == 409 and "Book" in message, (action, request.answered)
+                assert status == 409 and "Research Notebook" in message, (action, request.answered)
         assert os.path.isdir(gol_store.run_dir(run_id)), "a run held by the lab was deleted"
 
         request = Request(f"/api/runs/{run_id}/start")

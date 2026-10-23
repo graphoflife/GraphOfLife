@@ -1,14 +1,14 @@
 # What a brain can compute
 
-> [!question] Questions of this chapter
-> - Could an evolved brain play the raider of Chapter 51, or only a rule
+> [!question] Questions of this page
+> - Could an evolved brain play the raider of [Strategies written by hand](strategies-written-by-hand.md), or only a rule
 >   written in Python?
 > - What can no brain of B2 compute, whatever its size?
 > - What is the smallest change to the rules that would let it?
 
 ## Why ask
 
-[Chapter 51](strategies-written-by-hand.md) planted strategies written
+[Strategies written by hand](strategies-written-by-hand.md) planted strategies written
 by hand into evolved worlds, and a plain one, the **raider**, took half or
 more of three worlds in ten from brains that evolution had shaped for 2,000
 iterations. So the game had better play than evolution found. But the
@@ -22,7 +22,7 @@ will never find it, however long it runs. If it is within reach, evolution
 failed for another reason, the way there, and the question becomes how to
 open the way.
 
-This chapter answers for the raider by building it: a B2 brain whose
+This page answers for the raider by building it: a B2 brain whose
 weights are set by hand to play the raider's rule. It then proves what no
 B2 brain can compute, and names the smallest change to the rules that
 would let one.
@@ -61,7 +61,7 @@ The engine turns the outputs into decisions:
 
 ## A raider in a brain's weights
 
-The raider of Chapter 51 does three things:
+The raider of [Strategies written by hand](strategies-written-by-hand.md) does three things:
 - **It attacks.** It looks for the poorest neighbour that is not a
   teammate. If 70% of its own tokens are more than one and a half times
   that neighbour's, it stakes them all there; otherwise it keeps
@@ -117,7 +117,7 @@ Three details took more than the first try:
   0.33325, would give a parent of 30 tokens a child of 9, below B2's
   minimum of 10. The weight is the next float16 above a third.
 
-**The check.** Patches of raiders were planted as in Chapter 51, 5% of
+**The check.** Patches of raiders were planted as in [Strategies written by hand](strategies-written-by-hand.md), [How worlds are measured](how-worlds-are-measured.md)% of
 three of Experiment 16's B2 worlds at iteration 2,000, and every situation
 a raider met in their first 40 iterations was kept. Each kept situation is
 a column per candidate, as the raider read it. That gives 62,114
@@ -141,16 +141,16 @@ happened to match one of the password's four numbers, and the brain took
 the next weakest stranger instead.
 
 **Planted in its place**, the brain does what the rule did. The test of
-Chapter 51 was run again with the hand-set brain in place of the rule, on
+[Strategies written by hand](strategies-written-by-hand.md) was run again with the hand-set brain in place of the rule, on
 the same seeds and in the same places. Neither ever mutates.
 
 <!-- figure computable/replays -->
 ![The rule and the brain, planted in the same places](../figures/computable/replays.svg)
 
-**The rule and the brain, planted in the same places.** One line per planting: three evolved worlds, two seeds each (seed 1 solid, seed 2 dashed). Orange: a patch of raiders that follow the rule of [Chapter 51](strategies-written-by-hand.md); blue: the same patch given a B2 brain whose weights were set by hand to play the same rule. Neither ever mutates. A line that stops early is a patch that died out.
+**The rule and the brain, planted in the same places.** One line per planting: three evolved worlds, two seeds each (seed 1 solid, seed 2 dashed). Orange: a patch of raiders that follow the rule of [Strategies written by hand](strategies-written-by-hand.md); blue: the same patch given a B2 brain whose weights were set by hand to play the same rule. Neither ever mutates. A line that stops early is a patch that died out.
 
 > [!example]- How to make this figure
-> **Runs.** Three B2 worlds of Experiment 16, `B2-10000-s001` … `-s003`, as their archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`), each with a patch of raiders planted as in [Chapter 51](strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on seed *s* and its nearest neighbours, step by step, until the patch holds 5% of the world).
+> **Runs.** Three B2 worlds of Experiment 16, `B2-10000-s001` … `-s003`, as their archives keep them at iteration 2,000 (`GraphOfLifeRuns/<run>/archive/`), each with a patch of raiders planted as in [Strategies written by hand](strategies-written-by-hand.md) (`research/oee/pilots/manual.py`: the agent drawn on seed *s* and its nearest neighbours, step by step, until the patch holds 5% of the world).
 >
 > **Data.** From the worlds the archives keep.
 >
@@ -161,7 +161,7 @@ the same seeds and in the same places. Neither ever mutates.
 > **To make it again:** `python3 book_figures.py computable`.
 <!-- /figure -->
 
-In world 1 both died out on both seeds, as the rule had in Chapter 51. In
+In world 1 both died out on both seeds, as the rule had in [Strategies written by hand](strategies-written-by-hand.md). In
 world 2 both took about half of the world: the rule 40% and 50%, the brain
 47% and 50%. In world 3 the rule took 62% on seed 1, and the brain 63%. On
 seed 2 the rule died out after 143 iterations while the brain took 59%.
@@ -173,7 +173,7 @@ world.
 
 **So the raider is a B2 brain.** It takes 12 of the 16 units B2 gives
 every agent. Evolution did not fail to find it for lack of room in a
-brain. Chapter 51 said why it fails: the raid, the password and the crowd
+brain. [Strategies written by hand](strategies-written-by-hand.md) said why it fails: the raid, the password and the crowd
 pay only together.
 
 ## What no brain of B2 can compute
@@ -208,7 +208,7 @@ News of a third agent can leave an agent only through what it does: the
 tokens and links its decisions change, which its neighbours see. A
 message cannot carry it.
 
-**What this rules out.** Chapter 51's factory had every member write its
+**What this rules out.** [Strategies written by hand](strategies-written-by-hand.md)'s factory had every member write its
 distance to the team's frontier: 0 if a stranger is next door, otherwise
 one more than the nearest teammate's distance. To a teammate, whether *u*
 has a stranger next door is news of a third agent. No B2 brain, of any
@@ -266,7 +266,7 @@ changes the brain's shape.
 
 A field of nearness over a team is also a first local field on the graph:
 a quantity every agent holds, made only from its neighbours' values a
-step before. The book's [second aim](physical-inspiration.md), a
+step before. The notebook's [second aim](physical-inspiration.md), a
 physics, asks for exactly that kind of thing.
 
 ## What it teaches
@@ -285,9 +285,9 @@ physics, asks for exactly that kind of thing.
   ([what would count as open-ended evolution](open-ended-test.md)
   says how the long runs will be judged).
 
-**Related notes:** [Chapter 51 · Strategies written by hand](strategies-written-by-hand.md) ·
-[Chapter 50 · Why evolution stops](why-evolution-stops.md) ·
-[Chapter 55 · Another game](another-game.md) ·
+**Related notes:** [Strategies written by hand](strategies-written-by-hand.md) ·
+[Why evolution stops](why-evolution-stops.md) ·
+[Another game](another-game.md) ·
 [What a brain sees](brain-inputs.md) ·
 [What a brain says](brain-outputs.md) ·
 [The invasion test](invasion-test.md)

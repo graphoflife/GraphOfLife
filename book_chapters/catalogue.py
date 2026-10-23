@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Appendix C · Every simulation: what was run, with which settings, and what was
+Every simulation: what was run, with which settings, and what was
 measured on it. Made from the records themselves — the lab's plans
 (book/experiments/), every pilot world's config.json, the job lists, and the
 result files of every measure — so that it stays complete as worlds are added.
@@ -31,7 +31,7 @@ BOOKKEEPING = {"seed", "total_tokens", "extinction_threshold", "archive_every", 
 
 #: What each pilot batch asked, and the pages that answer it.
 BATCHES: Dict[str, Tuple[str, List[str]]] = {
-    "A3k": ("Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the book's "
+    "A3k": ("Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the notebook's "
             "worlds have at least 10,000 tokens since)", ["alliances"]),
     "A10k": ("Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts "
              "twice, against a control", ["alliances"]),
@@ -56,7 +56,7 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "Y": ("Brains mixed at birth together with each other switch, on B2", ["mixing-with-every-other-rule"]),
     "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent",
           ["links-to-strangers"]),
-    "Z": ("Settings drawn at random from every value the book has used, the values that make worlds worse "
+    "Z": ("Settings drawn at random from every value the notebook has used, the values that make worlds worse "
           "dropped round after round (research/oee/search.md)", []),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "
            "to 10,000 iterations", ["healthy-and-rich", "the-candidates-played-on"]),
@@ -70,7 +70,7 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["what-folds-a-world"]),
 }
 #: Batches whose every world draws settings of its own: one line in the table of conditions.
-DRAWN = {"Z": "each world its settings drawn at random from the values the book has used (research/oee/search.md)"}
+DRAWN = {"Z": "each world its settings drawn at random from the values the notebook has used (research/oee/search.md)"}
 #: The measures, by what to call them; each finds the worlds it was taken on.
 MEASURES = ["the record of every game", "lifetime contests (T = 100)", "games recorded and read again",
             "flow modules", "how different the agents are", "the table of every world"]

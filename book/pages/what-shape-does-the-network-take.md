@@ -1,30 +1,30 @@
 # What shape does the network take?
 
-The founders start on a small-world ring ([Chapter 2](the-world.md)). From
+The founders start on a small-world ring ([The world: tokens, agents and a network](the-world.md)). From
 then on the agents themselves make and lose every connection: a child is
 joined to some of its parent's candidates, a parent may hand connections to
 it, and every connection that carries no tokens in a game is cut at its end
-([Chapter 3](one-iteration.md)). Nothing in the rules aims at any shape.
+([One iteration, step by step](one-iteration.md)). Nothing in the rules aims at any shape.
 So what shape comes out?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What happens to the founders' ring?
 > - How many connections does an agent have, and how unequally are they
 >   spread?
 > - Is the network a tree, a web, or something in between?
 > - How far apart are two agents?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-the thirty of 10,000 tokens this chapter was first written from are given
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+the thirty of 10,000 tokens this page was first written from are given
 beside them.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -119,7 +119,7 @@ looks the same in kind: more than half of all agents in the core (58% and
 **How many connections agents have.** Of all agents alive after the last game of the 30 worlds, the share that have at least d connections, for every d. At the start a founder had 10 on average (the grey line) — every one of them exactly that many before the ring's rewiring ([The starting ring](starting-ring.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -135,7 +135,7 @@ for every *d*, the share of agents with at least *d* connections. After the
 last game of the thirty worlds, 35% of all agents have exactly one
 connection and 23% two; the mean is 3.5. But 4.7% have ten or more, and the
 curve reaches out to an agent with 10,735 — the centre of a star
-([Chapter 33](the-largest-and-the-smallest.md)). Every founder started
+([The largest and the smallest](the-largest-and-the-smallest.md)). Every founder started
 with ten. (At 10,000 tokens: 37% and 23%, a mean of 3.2, 4% with ten or
 more, the largest 1,399; the founders started with four.)
 
@@ -151,7 +151,7 @@ log–log axes rather than running straight, so it is not a clean power law.
 **Core, leaves and bridges.** Three shares, after every game of the 30 baseline worlds. Left: the share of agents in the core ([Core, trees and leaves](core-trees-leaves.md)), measured every 25 iterations. Middle: the share of agents with exactly one connection, after every game. Right: the share of connections that are bridges ([Bridges](bridges.md)), every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -174,7 +174,7 @@ Three shares settle within the first hundred or so iterations and then hold
 
 All three are counted after the game, when the connections that carried
 nothing have just been cut. Counted at the start of a game, as
-[Chapter 25](the-core-of-a-world.md) does, the core holds 60% of the
+[The core of a world](the-core-of-a-world.md) does, the core holds 60% of the
 agents and the leaves 32%.
 
 The worlds at the far ends of these ranges are the stars: in the world with
@@ -190,7 +190,7 @@ connections are bridges.
 **Clustering.** Three times the number of triangles divided by the number of connected triples ([Clustering](clustering.md)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -217,7 +217,7 @@ the moment it is born.
 **Steps between two agents.** For each world (blue): its mean number of agents and the mean number of steps along connections from one agent to another, both averaged over iterations 500–1,499. Grey: the rough distance in a random network with the same number of agents N and connections per agent k, ln N / ln k.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -245,14 +245,14 @@ others, for reasons other than size.
 Before the runs of 10,000 tokens, as Experiment 5:
 
 <!-- runs E05 -->
-> [!info] The runs behind this chapter
-> These are the runs of Experiment 2; nothing new was run for this chapter.
+> [!info] The runs behind this page
+> These are the runs of Experiment 2; nothing new was run for this page.
 >
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -342,26 +342,26 @@ size it was half tree and half web, and ten games across.
 
 For anything larger than an agent that might evolve — groups of agents that
 hold together while their members change (P3 in
-[Chapter 1](what-this-notebook-is-about.md)) — the core is where it can live:
+[What this notebook is about](what-this-notebook-is-about.md)) — the core is where it can live:
 the only part of the world where a group is joined by more than one path, so
 that losing one connection does not cut it in two.
 
-Part III found the mechanism behind this shape, and measured it against a
+The measurements of the baseline found the mechanism behind this shape, and measured it against a
 sharper null. A child is joined to part of its parent's neighbourhood, so the
 world grows only locally, by copying: that gives hubs whose connections grow
 with their connections, a triangle for nearly every connection a hub gains,
 and clustering that falls as one over the number of connections — a
 **hierarchy of stars**, with leaves hanging on hubs
-([Chapter 32](power-laws-real-and-apparent.md),
-[Chapter 34](how-properties-scale-together.md)). Against a random network
+([Power laws, real and apparent](power-laws-real-and-apparent.md),
+[How properties scale together](how-properties-scale-together.md)). Against a random network
 with exactly the same number of connections at every agent, the world is four
 and a half times as long (twice at 10,000 tokens), and its spectral gap —
 which says how hard a network is to cut into two large parts — is a
 thirty-third of the random network's: the world has bottlenecks
-([Chapter 35](the-geometry-of-a-world.md)). And it breaks, when it breaks,
-along its poorest regions ([Chapter 36](how-a-world-breaks.md)).
+([The geometry of a world](the-geometry-of-a-world.md)). And it breaks, when it breaks,
+along its poorest regions ([How a world breaks](how-a-world-breaks.md)).
 
-To make every figure of this chapter: `python3 book_figures.py shape`.
+To make every figure of this page: `python3 book_figures.py shape`.
 
 <!-- turns -->
 ---

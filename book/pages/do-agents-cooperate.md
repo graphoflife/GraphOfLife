@@ -8,13 +8,13 @@ organisms, organisms into colonies and societies — the "major transitions"
 (Maynard Smith and Szathmáry 1995), in which units that once competed came to
 reproduce as one. A world in which evolution keeps producing new kinds of
 things will, very likely, have to produce new kinds of **togetherness**. So for
-the aim of this book, open-ended evolution, cooperation is not a side topic.
+the aim of this notebook, open-ended evolution, cooperation is not a side topic.
 
-This chapter does three things: it says what cooperation would mean in Graph of
+This page does three things: it says what cooperation would mean in Graph of
 Life, measures what is there, and sets out how cooperation could be found and
-counted as the book goes on.
+counted as the notebook goes on.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What does an agent give in this world, at what cost, and to whom?
 > - Are neighbours related? Do agents treat their relatives differently?
 > - When a node changes hands, does it stay in the family?
@@ -22,17 +22,17 @@ counted as the book goes on.
 > - How long do the same two agents face each other — long enough for
 >   anything like trust?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -114,15 +114,15 @@ with its **cost** *C* to the helper.
 What can an agent of Graph of Life give, and at what cost?
 
 - **A stake on a neighbour's node.** Every token staked on a neighbour ends the
-  game on the neighbour's node ([Chapter 28](gains-and-losses.md)): a pure
+  game on the neighbour's node ([Gains and losses](gains-and-losses.md)): a pure
   gift of tokens, cost *C* to the staker, benefit *B* = *C* to the node. But a
   stake is also a **bid** for that node: if it wins, the node takes the
   staker's brain. For the brain, every gift is also an attack. This
   double meaning is built into the game.
 - **A child's endowment.** The tokens and connections a parent gives its child
-  ([Chapter 31](how-agents-have-children.md)).
+  ([How agents have children](how-agents-have-children.md)).
 - **Keeping a connection alive.** A connection survives only if a token crosses
-  it ([Chapter 36](how-a-world-breaks.md)). Paying that token keeps open a
+  it ([How a world breaks](how-a-world-breaks.md)). Paying that token keeps open a
   channel both sides need.
 - **Joining a coalition.** A stake marked revolutionary can join others to take
   a node from its largest staker ([How a coalition takes a node](revolution.md)).
@@ -139,7 +139,7 @@ Kin selection needs relatives to meet. Do they?
 **Are neighbours related?** One dot per world. For the pairs of agents joined by a connection ("neighbours"), and for pairs of agents drawn at random from the whole world (2,000 per look), the share that carry the same genotype, and the share that are close kin: the same genotype, or one's genotype the parent of the other's, or both with the same parent genotype. At the start of the games of every 100th iteration from 500 on.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -154,14 +154,14 @@ Yes, strongly. In the median world, **9.6%** of neighbours carry the same
 genotype, against **0.05%** of two agents drawn at random — 200 times as
 often (at 10,000 tokens, 10.6% against 0.28%: 38 times). Counted over all
 pairs of a world rather than a sample of them, chance is rarer still, 0.03%,
-and [Chapter 23](like-next-to-like.md) puts the ratio near 290. Counting
+and [Like next to like](like-next-to-like.md) puts the ratio near 290. Counting
 close kin too (one's genotype the parent of the other's, or both sharing a
 parent genotype): 20% of neighbours against 0.12% of random pairs. The share
 of kin among neighbours is the same at both sizes; what a larger world
 changes is how rare kin are far away.
-This is the picture of [Chapter 37](one-world-many-colours.md) in numbers:
+This is the picture of [One world, many colours](one-world-many-colours.md) in numbers:
 families live together. A brain's copies sit next to it — because a brain
-spreads by taking neighbouring nodes ([Chapter 29](where-the-tokens-flow.md))
+spreads by taking neighbouring nodes ([Where the tokens flow](where-the-tokens-flow.md))
 and children are joined to their parents.
 
 So the precondition of kin selection is met: *r* between neighbours is high.
@@ -174,7 +174,7 @@ So the precondition of kin selection is met: *r* between neighbours is high.
 **Does an agent treat its own kind differently?** Only agents that had at least one neighbour of their own genotype and at least one of another, in the games of every 100th iteration from 500 on; one dot per world. Left: the share of its tokens an agent staked on each neighbour, averaged over the neighbours of its own genotype (green) and over the others (grey), then over the agents. Right: of what it staked on a neighbour, the share it marked revolutionary.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -201,11 +201,11 @@ particular pattern and treat those who send it back differently, a
 this has happened.
 
 > [!info] Added later: the password exists
-> [Chapter 20](what-agents-say-to-each-other.md) found that every message
+> [What agents say to each other](what-agents-say-to-each-other.md) found that every message
 > already names its writer's genotype: two agents of one genotype write
 > exactly the same message. Kin could tell each other by it; what is missing
 > is a brain that compares what it reads, and the baseline's brains barely
-> see ([Chapter 19](what-the-brains-are-like.md)).
+> see ([What the brains are like](what-the-brains-are-like.md)).
 
 ## When a node changes hands, does it stay in the family?
 
@@ -215,7 +215,7 @@ this has happened.
 **When a neighbour takes a node, is it the same kind?** Nodes won by a neighbour in the games of every 100th iteration from 500 on; one dot per world. Left: the share in which the winner carried the same genotype as the agent whose node it took — a takeover that changes nothing in the brain. Right: the same share if the winner had been drawn at random from the neighbours that staked on the node.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -239,7 +239,7 @@ staked on the node. Takeovers do not spare kin, nor seek them out.
 **What comes back for what is given.** Pairs of neighbours that both staked on each other in a game: how many tokens each staked on the other (12,000 pairs, up to 400 drawn at random per world, from the games of every 100th iteration from 500 on). A cell's colour is how many pairs fall in it; the diagonal is an even exchange. In the median world 82% of the pairs staked exactly the same on each other.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -256,7 +256,7 @@ two stakes is 0.57. (At 10,000 tokens: 79%, 58% and 0.63.)
 
 Is that reciprocity? Two observations say: not in the sense of the theory.
 An equal exchange cancels: it changes neither balance
-([Chapter 29](where-the-tokens-flow.md)). What it does is keep the
+([Where the tokens flow](where-the-tokens-flow.md)). What it does is keep the
 connection alive at its minimum price, paid by both. And it is what the even
 split gives: two poor agents splitting a few tokens evenly over a few
 candidates put one token on each other. It is a **handshake**, not a favour
@@ -274,7 +274,7 @@ connection?
 **How long partners last.** Of the connections at the start of a game, the share still there k games later (blue); still there with neither of its two nodes won by a neighbour in any of the k games in between, so that the same two brains face each other, changed at most by the small changes offered after every game (green); and still there with exactly the same two genotypes (yellow). Pooled over the 4,010,315 connections at the start of the games of every 200th iteration from 500 on, in the 30 worlds. Both axes are logarithmic.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -291,8 +291,8 @@ do not. In only **4%** of connections do the same two brains face each other
 one game later (neither end won by a neighbour in between); after two games,
 0.8%; after four, 0.2%. The stage stays; the actors change almost every game —
 because about half of all nodes, and nearly every hub, are taken over in every
-game ([Chapter 16](how-the-game-is-played.md),
-[Chapter 29](where-the-tokens-flow.md)).
+game ([How the game is played](how-the-game-is-played.md),
+[Where the tokens flow](where-the-tokens-flow.md)).
 
 With *w* ≈ 0.04, direct reciprocity would need a benefit twenty-five times
 its cost (twenty at 10,000 tokens, *w* ≈ 0.05). In this world, nobody meets
@@ -302,7 +302,7 @@ anybody twice.
 
 Nothing measured here shows cooperation beyond what the even split and kinship
 by proximity produce. But "not found" depends on where one looks. These are
-measures the book can use from here on, each computable from the frames
+measures the notebook can use from here on, each computable from the frames
 every run already writes:
 
 1. **Kin discrimination.** The ratio of stakes on kin to stakes on others,
@@ -323,14 +323,14 @@ every run already writes:
    nodes again and again.
 6. **Groups that win.** Whether regions held by one family grow, survive or
    split more than mixed regions — selection between groups, read from the
-   families of [Chapter 37](one-world-many-colours.md) and the breaks of
-   [Chapter 36](how-a-world-breaks.md).
+   families of [One world, many colours](one-world-many-colours.md) and the breaks of
+   [How a world breaks](how-a-world-breaks.md).
 
 > [!info] Added later: not yet used
-> None of the six has been computed since. Part V judged progress by playing
+> None of the six has been computed since. The work on open-ended evolution judged progress by playing
 > a world's eras against each other instead
-> ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md)). In the
-> pilots of Part V, connected groups of one genotype and of close kin shrank
+> ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)). In the
+> pilots for B2, connected groups of one genotype and of close kin shrank
 > over time in every world.
 
 ## What this means
@@ -343,25 +343,25 @@ every run already writes:
   cooperation, the rules close direct reciprocity almost completely.
 - **The equal exchanges are handshakes.** They keep connections alive, at the
   price the rules set, and need no cooperation to explain.
-- **For open-ended evolution** this chapter points at rules, not brains: an
+- **For open-ended evolution** this page points at rules, not brains: an
   agent that keeps its identity when its node is taken, a way to recognise
-  kin, a way to commit to a partner. [Chapter 39](questioning-the-mechanics.md)
-  examines the rules responsible, and [Meta II](what-the-measurements-say-about-open-ended-evolution.md) proposes
+  kin, a way to commit to a partner. [Questioning the mechanics](questioning-the-mechanics.md)
+  examines the rules responsible, and [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) proposes
   changes.
 
-> [!info] Added later: what Part V tried
-> Part V has given an incumbent an advantage, so that a brain keeps its node
-> longer ([Chapter 49](who-dies-and-why.md)), and given agents brains that
+> [!info] Added later: what was tried for B2
+> B2 gives an incumbent an advantage, so that a brain keeps its node
+> longer ([Who dies, and why](who-dies-and-why.md)), and given agents brains that
 > see, which could read the names of their kin
-> ([Chapter 47](brains-that-see-and-worlds-that-break.md)). A memory of
+> ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)). A memory of
 > what each neighbour staked in the last game was tried too: it changed 11 to
 > 24% of decisions, and evolution stopped all the same. Two attempts to make
 > helping pay failed: stakes that support a neighbour's defence were given up
 > by evolution, and a yield on stakes returned built stars rather than
-> partnerships ([Chapter 50](why-evolution-stops.md)). Alliances by mutual
+> partnerships ([Why evolution stops](why-evolution-stops.md)). Alliances by mutual
 > consent — a way to commit to a partner — are still to be tested.
 
-To make every figure of this chapter: `python3 book_figures.py cooperation`.
+To make every figure of this page: `python3 book_figures.py cooperation`.
 
 <!-- turns -->
 ---

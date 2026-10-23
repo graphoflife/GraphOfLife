@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Meta X · Healthy and rich: every world against the author's picture of one that
+Healthy and rich: every world against the author's picture of one that
 might keep evolving (2026-10-16) — a decentralised, resilient, nearly
 three-dimensional network, and agents that differ in almost every statistic.
 
 The measures are research/atlas/profile.py's (GraphOfLifeRuns/.pilots/atlas/
-profile.json): the health bar of Chapter 46 read from each world's checkpoint,
+profile.json): the health bar of How to tell a world that keeps evolving read from each world's checkpoint,
 and how widely the agents spread over doubling classes of tokens, links and
 ages, and over genotypes. A world's diversity score is the mean of its
 percentiles on those four among the worlds of the profile frozen on 17 October
@@ -31,7 +31,7 @@ PROFILE = os.path.join(PILOTS, "atlas", "profile.json")
 SPREADS = [("spread_tokens", "tokens"), ("spread_links", "links"), ("spread_ages", "ages"),
            ("effective_genotypes_per_agent", "genotypes")]
 MARKS = ["one piece", "2-core", "agent cut", "link cut", "no hub", "links", "dimension"]
-#: Groups of worlds, as the chapters on every world draw them.
+#: Groups of worlds, as the pages on every world draw them.
 GROUPS = [("B1 10k", ORANGE), ("B1 100k", RED), ("B1 sizes", GREY), ("B1 5k", YELLOW), ("B1 fixed", YELLOW),
           ("B2 10k", BLUE), ("B2 var", CYAN), ("B2 5k", VIOLET), ("lapse", GREEN), ("long runs", BLUE),
           ("B1 pil.", ORANGE), ("B2 pil.", CYAN)]
@@ -40,7 +40,7 @@ MAP = [("B1", ["B1 10k", "B1 100k", "B1 sizes", "B1 5k"], ORANGE), ("B1, brains 
        ("B2", ["B2 10k", "B2 var", "B2 5k"], BLUE), ("lapse", ["lapse"], GREEN), ("long runs", ["long runs"], VIOLET),
        ("B1 pilots", ["B1 pil."], RED), ("B2 pilots", ["B2 pil."], CYAN)]
 SIZES = re.compile(r"^B1-(800|1600|3200|6400|12800|25600|51200|102400|204800|409600)(-57b358)?$")
-RUNS = ("Every world the book has made that settled (500 iterations or more), each once, at its last checkpoint: "
+RUNS = ("Every world the notebook has made that settled (500 iterations or more), each once, at its last checkpoint: "
         "the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots "
         "that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).")
 
@@ -121,7 +121,7 @@ def healthy(ch: F.Chapter) -> None:
               y={"label": "diversity score (mean percentile of the four spreads)", "min": 0, "max": 1},
               series=series,
               caption=("Each dot is a world at its last checkpoint. Across: how many of the seven marks of "
-                       "Chapter 46's health bar it meets — one piece, a 2-core of at least 0.8, no agent whose "
+                       "[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets — one piece, a 2-core of at least 0.8, no agent whose "
                        "loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the "
                        "others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways "
                        "within each count only so that they do not hide each other). Up: how widely its agents "

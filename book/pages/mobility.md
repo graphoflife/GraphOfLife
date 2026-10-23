@@ -6,7 +6,7 @@ moment, but who holds it keeps changing. The Gini coefficient
 ([The Gini coefficient](gini-coefficient.md)) cannot tell the two apart,
 because it looks at one moment. **Mobility** compares two moments. Economists
 measure it for incomes across years and generations (Shorrocks 1978; Chetty
-et al. 2014); this note gives the three measures the book uses.
+et al. 2014); this note gives the three measures the notebook uses.
 
 ## Rank correlation over time
 
@@ -51,7 +51,7 @@ order tends to reverse.
 
 ## Where it is used
 
-[Chapter 21](do-the-rich-stay-rich.md) measures all three in
+[Do the rich stay rich?](do-the-rich-stay-rich.md) measures all three in
 the baseline worlds.
 
 ## References

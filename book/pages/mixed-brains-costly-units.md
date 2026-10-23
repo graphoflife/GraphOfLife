@@ -1,6 +1,6 @@
 # Brains mixed at birth, units that cost, an eye for raids on kin
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - If a newborn's brain is mixed from its parent's and a neighbour's, the way
 >   sexual reproduction mixes genes, does evolution find more?
 > - If every unit of a brain has to hold one of its agent's tokens, how large do
@@ -10,10 +10,10 @@
 > - And what becomes of a world where every link holds a token and nobody dies
 >   of age?
 
-[Chapter 50](why-evolution-stops.md) asked why evolution slows down in these
-worlds, and the lifetime contests of [Part V](the-switches-the-world-was-built-with.md)
-showed that in B2's family of worlds it does not quite stop: brains of 1,000
-iterations still beat those of 500 two times out of three. This chapter tries
+[Why evolution stops](why-evolution-stops.md) asked why evolution slows down in these
+worlds, and the lifetime contests of
+[The switches the world was built with](the-switches-the-world-was-built-with.md) showed that in B2's family of worlds it does not quite stop: brains of 1,000
+iterations still beat those of 500 two times out of three. This page tries
 three more changes, each aimed at a different part of how evolution works:
 
 - **how variation is made** — brains mixed at birth;
@@ -33,7 +33,7 @@ Every world is B2 at 10,000 tokens (Experiment 16's settings), played for
 | `unit_token` | Brains that can grow (up to 32 hidden units, switched on and off by mutation), where every active unit holds one of its agent's tokens. A unit switched on is paid for, one switched off pays its token back, and what an agent cannot pay for stays off. | the same growable brains with units free |
 | `link_token`, no old age | Every link holds a token, paid by whoever makes it; no cap on links (valence 0) and no age limit. | — |
 
-Each is judged as [Chapter 54](the-switches-the-world-was-built-with.md)
+Each is judged as [The switches the world was built with](the-switches-the-world-was-built-with.md)
 judged the switches, by **lifetime contests**: the brains of a later moment
 against those of an earlier one, half and half on the same world, for 100
 iterations, once in each moment's world. If the later brains hold more than
@@ -61,7 +61,7 @@ Mixing changes the worlds first. They are a quarter of B2's size (750–980
 agents against 3,200–3,650), with twice B2's conquest (10–13 nodes taken per
 100 agents a game against about 6), and more of what is taken goes round:
 the circulating share of the takeovers' flow over fifty games
-([Chapter 58](gliders-and-who-helps-whom.md)) is 0.63–0.64 against
+([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) is 0.63–0.64 against
 0.49–0.51 for its sign-flip null, where B2 has 0.39–0.42 against 0.34–0.35.
 
 And evolution goes on, in one world strongly. In the first world the brains of
@@ -133,7 +133,7 @@ The input changed nothing that was measured. The worlds are B2's size
 (3,540–3,560 agents), evolution goes on at B2's pace (0.65–0.74 from 500 to
 1,000, 0.60–0.61 from 1,000 to 2,000, against 0.67–0.69 and 0.65–0.76), and
 help between neighbours stays at B2's level. Like the inputs of
-[Chapter 58](gliders-and-who-helps-whom.md), it tells an agent something its
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md), it tells an agent something its
 rules give it no reason to act on.
 
 ## Links that hold a token, and nobody dies of age
@@ -148,21 +148,21 @@ spread is to take a node. The network is fine — one piece, nothing cut off,
 6.1–6.9 links per agent — but little happens in it. With the age limit, the same
 rule keeps a healthy world whose evolution goes on more strongly than B2's
 (the brains of 1,000 hold 0.83 and 0.93 of the nodes against those of 500;
-[Chapter 57](rules-without-numbers.md)).
+[Rules without numbers](rules-without-numbers.md)).
 
 ## What this says
 
 - **Three changes gave the largest steps of evolution yet: mixing brains at
   birth (in one of two worlds, at every step), making units cost a token (in
   both worlds, from 500 to 1,000), and making links hold a token (in both
-  worlds, at both steps; [Chapter 57](rules-without-numbers.md)).** All three
+  worlds, at both steps; [Rules without numbers](rules-without-numbers.md)).** All three
   change how variation is made or what structure costs — what a mutation can
   reach, what a unit or a link has to earn — not what agents see. None is yet
   shown to keep evolution going longer than B2 does.
 - **A cost turns size into a choice.** Free units grow beyond their neutral
   drift; units that cost a token shrink to almost nothing. Neither rule needs a
   number for the size of a brain.
-- **Information alone changes nothing**, here as in [Chapter 58](gliders-and-who-helps-whom.md): an input is
+- **Information alone changes nothing**, here as in [Gliders, and who helps whom](gliders-and-who-helps-whom.md): an input is
   only as useful as the rules make acting on it.
 - **A world without death freezes**, even with a healthy network: turnover is
   what selection works on.
@@ -172,9 +172,9 @@ rule keeps a healthy world whose evolution goes on more strongly than B2's
 **Related notes:** [How a brain changes](mutation.md) ·
 [Genotypes and the family tree](genotype.md) ·
 [The invasion test](invasion-test.md) ·
-[Chapter 19 · What the brains are like](what-the-brains-are-like.md) ·
-[Chapter 50 · Why evolution stops](why-evolution-stops.md) ·
-[Chapter 54 · The switches the world was built with](the-switches-the-world-was-built-with.md)
+[What the brains are like](what-the-brains-are-like.md) ·
+[Why evolution stops](why-evolution-stops.md) ·
+[The switches the world was built with](the-switches-the-world-was-built-with.md)
 
 <!-- turns -->
 ---

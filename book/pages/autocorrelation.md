@@ -6,7 +6,7 @@ world is crowded now, is it still crowded 100 iterations later? 500? The
 **autocorrelation** answers: the [correlation](correlation.md) of a world
 with itself, some time later.
 
-## How the book measures it
+## How the notebook measures it
 
 1. **Levels.** Cut each world's life from iteration 100 to 2,999 into 29
    stretches of 100 iterations, and take the mean of the statistic in each:
@@ -29,7 +29,7 @@ throughout would look like a world with a long memory.
 - In the baseline: 0.61 for the number of agents after 100 iterations in
   the worlds of 100,000 tokens (0.68 in those of 10,000), about a third of that
   after 200, nothing after 300
-  ([Chapter 14](how-much-does-the-seed-decide.md)).
+  ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 
 ## Why it dips below zero
 
@@ -55,7 +55,7 @@ Levels 500 iterations apart are nearly independent. A mean over *k*
 correlated levels is about as precise as a mean over *k*/*S* independent
 ones. A world's settled life, iterations 500 to 2,999, is 25 stretches of
 100; with *S* ≈ 3.5 that is worth about seven independent looks — against
-one look for a single stretch at the end. That is why the book measures
+one look for a single stretch at the end. That is why the notebook measures
 worlds over their settled life ([The settled life of a world](settled-life.md)).
 
 <!-- turns -->

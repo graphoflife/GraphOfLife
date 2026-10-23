@@ -1,7 +1,7 @@
 # Bands: many worlds in one figure
 
 Thirty worlds, each with a value at each of 3,000 iterations, drawn as
-thirty lines, are a tangle nobody can read. The book draws them as a **band**
+thirty lines, are a tangle nobody can read. The notebook draws them as a **band**
 instead: a line for the typical world, and shaded regions for how far the
 others spread around it.
 
@@ -37,8 +37,8 @@ In the code: `bands` in `gol_analysis.py`.
   they differ.
 - A band says nothing about how a single world moves through time. A world
   near the top of the band at one moment can be near the bottom later. To see
-  single worlds, the book draws them separately, as in
-  [Chapter 10](a-worlds-life.md).
+  single worlds, the notebook draws them separately, as in
+  [A world's life](a-worlds-life.md).
 - After a world dies, the band is made of fewer worlds. In the baseline of
   10,000 tokens four of thirty died, and its last thousand iterations are bands
   of 26; in the baseline of 100,000 tokens none died.

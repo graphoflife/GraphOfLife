@@ -4,11 +4,11 @@ A typical agent of a settled world holds a few tokens and has two or three
 connections. The viewer also reports the extremes: the richest agent and the
 poorest, the best-connected and the least, the largest gain and the largest
 loss of a game (`maxTokens`, `minTokens`, `maxDegree`, `minDegree`,
-`medianDegree`, `maxTokenAdded`, `maxTokenLost`). This chapter asks what they
+`medianDegree`, `maxTokenAdded`, `maxTokenLost`). This page asks what they
 are, who holds them, for how long, and how they grow with the size of a
 world.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How rich is the richest agent, and how well connected the best-connected?
 > - Who comes first, and for how long?
 > - Why is the largest gain of a game about as large as the largest loss?
@@ -16,12 +16,12 @@ world.
 > - How do the extremes grow when a world grows?
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -82,8 +82,8 @@ agents depend on what it does in every game. And extremes are where scale
 shows first: in a larger world there is more room for one agent to become very
 large — or the rules may hold every agent below some size, whatever the size
 of the world. Which of the two happens is a question about the rules, and
-[Chapter 32](power-laws-real-and-apparent.md) asked it of the whole
-distribution; this chapter asks it of the top.
+[Power laws, real and apparent](power-laws-real-and-apparent.md) asked it of the whole
+distribution; this page asks it of the top.
 
 
 ## The largest, over a world's life
@@ -98,7 +98,7 @@ best-connected agent, beside the mean and the median:
 **The largest, over a world's life.** After every game of the 30 worlds. Left: the tokens of the richest agent, the largest gain and the largest loss of one agent in that game, and the tokens of the mean agent, each as a share of all 100,000 tokens. Right: the connections of the best-connected agent, of the mean agent and of the median one. Both on logarithmic axes; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -139,7 +139,7 @@ world. In some it is joined to much more:
 **Worlds held together by one agent.** Left: after every game, the connections of the best-connected agent divided by the agents alive, in the worlds whose best-connected agent held, on average over iterations 500–1,499, a tenth of the world or more (one line each), and in the other worlds (the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th)). Right: one dot per world, its mean over the settled life of that share and of the share of agents in the core ([Core, trees and leaves](core-trees-leaves.md)), for the worlds of 100,000 tokens (blue) and of 10,000 (yellow, over iterations 500–2,999).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -173,14 +173,14 @@ In the game, the centre stakes **exactly one token** on 98% of its
 neighbours and nothing on its own node: it holds fewer tokens than it has
 neighbours, and spreads them one by one. Its leaves stake 41% of their few
 tokens on the centre's node and keep the rest at home
-([Chapter 16](how-the-game-is-played.md)): two tokens at home outbid the
+([How the game is played](how-the-game-is-played.md)): two tokens at home outbid the
 centre's single token and keep the leaf its node, and one ties it, which a
 coin then settles ([How a coalition takes a node](revolution.md)).
 So across nearly every one of the twenty thousand connections about one token
 goes out and about one comes back, every game: the centre is a clearing
 house, and its tokens are, almost to the token, the number of its
 connections — the resting state of an even split
-([Chapter 29](where-the-tokens-flow.md)) at its most extreme.
+([Where the tokens flow](where-the-tokens-flow.md)) at its most extreme.
 
 The centre's own node is won by a coalition of its neighbours in every game —
 in all of the hundred games from iteration 1,122 on. Its own agent, spreading
@@ -195,7 +195,7 @@ flow through them.
 
 And the place is inherited. Every so often the agent at the centre has a
 child and hands it nearly all its connections
-([Chapter 31](how-agents-have-children.md)): at iteration 1,153 the centre
+([How agents have children](how-agents-have-children.md)): at iteration 1,153 the centre
 of seed 28 went from 18,913 connections to 219, and its child, of age 0,
 took 18,865. Over the settled life, first place in that world changed hands
 ten times, and eight times in ten the new centre was a newborn child of the
@@ -217,7 +217,7 @@ often: 4% of its 18,103 changes went to a child.
 **How long first place is held.** After every game from iteration 500 on, in the 30 worlds, which agent holds the most tokens and which the most connections. A reign is a stretch of consecutive iterations with the same agent first; for every L, the share of the reigns that lasted at least L iterations, pooled over the worlds. Dashed: the same for dynasties — a dynasty goes on while every new first agent is a child of the one before it, and ends when first place passes to anyone else — pooled over the worlds. A reign still going at the end of a run is counted as far as it went.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -232,7 +232,7 @@ the settled life, 89% lasted a single iteration and only 1.5% ten or more;
 the longest lasted 304. The best-connected holds on far longer: a median
 reign of 6 iterations, 42% of reigns ten or more, 5% a hundred or more, the
 longest 592. Wealth is a flicker — a pile that crosses a connection and
-spreads out again ([Chapter 28](gains-and-losses.md)); connections last,
+spreads out again ([Gains and losses](gains-and-losses.md)); connections last,
 and first place in them lasts with them.
 
 Who are they? The richest agent of the median world has 7 connections and is
@@ -243,7 +243,7 @@ almost never to 91% of the time in a star, where the centre is both.
 ## The largest, by the size of a world
 
 The worlds of Experiment 8, which
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md) describes — ten
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) describes — ten
 sizes from 800 to 409,600 tokens, each double the one before, three seeds
 each — say how the extremes grow with a world:
 
@@ -253,7 +253,7 @@ each — say how the extremes grow with a world:
 **The largest, by the size of a world.** For every world of Experiment 8 that lived to its end, from 800 to 409,600 tokens, its mean over iterations 300–599 of the number of agents (x), and of the richest agent's share of all tokens (left) or the best-connected agent's connections (right); and the same for the 30 worlds of 100,000 tokens over iterations 500–1,499 (yellow). Both axes logarithmic; grey: the straight line least squares fits through the worlds of Experiment 8.
 
 > [!example]- How to make this figure
-> **Runs.** The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations ([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`); The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`); The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -271,11 +271,11 @@ their stars far above the second. So a world ten times larger has a richest
 agent about three times as rich and a best-connected agent about four times
 as connected — faster than the width of a world grows (×2: its diameter
 grows about as agents^0.30,
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)) and slower
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)) and slower
 than its agents (×11). Measured directly against the worlds of 10,000
 tokens, the richest is 3.1 times as rich and the best-connected, stars
 included, 7.7 times as connected
-([Chapter 60](worlds-of-100000-tokens.md)). No agent becomes a fixed share
+([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)). No agent becomes a fixed share
 of the world as it grows; but there is more room at the top in a large world,
 and the stars show what it can be used for.
 
@@ -284,7 +284,7 @@ and the stars show what it can be used for.
 - **The top is a place.** The best-connected agent of a world sits on a node
   whose brain changes every game; what lasts is its connections, and they
   are handed from parent to newborn child. A star is the clearest case of
-  what [Chapter 29](where-the-tokens-flow.md) called a hub: a place, not
+  what [Where the tokens flow](where-the-tokens-flow.md) called a hub: a place, not
   an individual.
 - **Wealth flickers, connections last.** First place in tokens changes in
   three games out of five; first place in connections lasts tens to hundreds
@@ -295,18 +295,18 @@ and the stars show what it can be used for.
   hundreds of iterations. If brains could hold what they inherit, a dynasty
   would be the obvious unit of selection; as the rules stand, it carries
   nothing a brain did. A rule that let the centre's brain keep its node — an
-  incumbent's advantage ([Chapter 39](questioning-the-mechanics.md)) — would
+  incumbent's advantage ([Questioning the mechanics](questioning-the-mechanics.md)) — would
   turn the dynasty of a place into a dynasty of a line.
 
 > [!info] Added later: incumbency tried
-> Part V weighs an agent's stake on its own node more than anyone else's.
+> B2 weighs an agent's stake on its own node more than anyone else's.
 > Counted twice, it let one agent gather 57% of all tokens behind a home stake
 > nobody could outbid; counted one and a half times, it is part of the second
-> baseline, B2 ([Chapter 49](who-dies-and-why.md)). B2 also switches
+> baseline, B2 ([Who dies, and why](who-dies-and-why.md)). B2 also switches
 > handover off, so a place can no longer be handed to a newborn child as it
-> is here ([Chapter 48](a-world-that-cannot-break.md)).
+> is here ([A world that cannot break](a-world-that-cannot-break.md)).
 
-To make every figure of this chapter: `python3 book_figures.py extremes`.
+To make every figure of this page: `python3 book_figures.py extremes`.
 
 <!-- turns -->
 ---

@@ -39,7 +39,7 @@ The **share between** is *B* / (*B* + *W*).
 In the baseline worlds of 100,000 tokens the share between is a fifth to a
 quarter for most statistics — 21% for the number of agents — and half for
 the share of agents in the core; at 10,000 tokens, a tenth to a quarter, 17%
-for the number of agents ([Chapter 14](how-much-does-the-seed-decide.md)).
+for the number of agents ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 So most of the variation is time, not seed.
 
 ## A caution

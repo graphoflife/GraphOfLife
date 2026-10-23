@@ -1,7 +1,7 @@
 # How a brain changes
 
 Brains change — this is the **variation** evolution needs
-([Chapter 1](what-this-notebook-is-about.md)). This note gives the
+([What this notebook is about](what-this-notebook-is-about.md)). This note gives the
 exact rule, with the baseline's numbers.
 
 ## When
@@ -25,7 +25,7 @@ that a given brain is changed at least once in an iteration is
 ## What a change does
 
 A brain is a list of **weight matrices** *W* and **bias vectors** *b*, one of
-each per layer ([Chapter 4](the-brain.md)). Every one of them
+each per layer ([The brain](the-brain.md)). Every one of them
 is changed separately, in two steps. Let *s* = 0.1
 ([`mutation_sparsity`](settings.md#mutation_sparsity)), σ = 0.2
 ([`mutation_noise_std`](settings.md#mutation_noise_std)), and let *k* be the
@@ -64,7 +64,7 @@ A brain that changed gets a **new genotype number**, and records the
 genotype it came from as its parent ([Genotypes and the family tree](genotype.md)).
 A brain that was offered a change and did not change keeps its number.
 
-One special case matters in [Chapter 41](do-the-brains-matter.md):
+One special case matters in [Do the brains matter?](do-the-brains-matter.md):
 with *s* = 0, step 1 and step 2 change nothing — but a brain drawn to change
 (with probability *p*) still gets a new genotype number. Its weights are
 those of its parent exactly.

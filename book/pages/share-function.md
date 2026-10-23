@@ -44,13 +44,13 @@ is one half.
   10,000 tokens, of
   the 2,241 founders that had a child, 33% gave it every token they had (and
   died for it, holding none), and another 33% gave exactly half
-  ([Chapter 4](the-brain.md)).
+  ([The brain](the-brain.md)).
 
 ## Where it is used
 
 - **The child's tokens.** A parent with τ tokens gives its child
   ⌊*f*(*ā*, *b̄*) · τ⌋, where *ā* and *b̄* are its two reproduction outputs
-  averaged over all its candidates ([Chapter 3](one-iteration.md)).
+  averaged over all its candidates ([One iteration, step by step](one-iteration.md)).
 - **The revolutionary part of a stake.** Of *a* tokens staked on a node,
   ⌊*f* · *a*⌋ are marked revolutionary ([How a coalition takes a node](revolution.md)).
 - **A probability.** A yes-or-no decision read as a probability says yes

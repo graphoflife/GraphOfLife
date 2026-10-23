@@ -1,28 +1,31 @@
-# Graph of Life — the research book
+# Graph of Life — the Research Notebook
 
-This book is a research programme, written down while it is carried out. It
-asks what the Graph of Life algorithm actually does — and, later, whether it
-can be made to keep producing new things without end, which is what
-*open-ended evolution* means. [Chapter 1](pages/what-this-notebook-is-about.md)
-says why, and where to start.
+This notebook is a research programme, written down while it is carried out. It
+asks what the Graph of Life algorithm actually does — and whether it can be
+made to keep producing new things without end, which is what *open-ended
+evolution* means. [What this notebook is about](pages/what-this-notebook-is-about.md)
+says why.
 
-It is written to be **read on its own**. Part I explains the algorithm
-completely, rule by rule. Every measurement, statistic and method the book
-uses has a short note of its own that defines it exactly and works an example
+It is written to be **read on its own**, from any page. The pages are sorted
+by topic, and a word that needs explaining links to the page that explains it.
+[How the simulation works](#how-the-simulation-works) explains the algorithm
+completely, rule by rule. Every measurement, statistic and method the notebook
+uses has a short page of its own that defines it exactly and works an example
 by hand. Every figure says what it shows and, folded under it, how to make it
 again from the runs. Nothing needs the program to be understood — and
 everything can be checked with it.
 
 ## How to read it
 
-- **In order**, from [Chapter 1](pages/what-this-notebook-is-about.md): each
-  chapter ends with a link to the next.
-- **By question**: every chapter starts with the questions it asks.
-- **By idea**: the notes below are short and linked from wherever they are
-  used; each can be read on its own.
+- **By topic**: the contents below list every page under its topic, in the
+  order that reads best; every page ends with the pages before and after it
+  in its topic.
+- **From anywhere**: start with any page and follow a link whenever a word
+  is new.
+- **By question**: every page starts with the questions it asks.
 - **In Obsidian**: open the folder `book/` as a vault. Every link, figure
-  and formula works there, and the graph view shows how the chapters and
-  notes hang together. The same files read in the Book tab of the Graph of
+  and formula works there, and the graph view shows how the pages hang
+  together. The same files read in the Research Notebook tab of the Graph of
   Life app and on GitHub.
 
 ## Contents
@@ -32,7 +35,7 @@ everything can be checked with it.
 
 What this notebook is about, how to read it, and the question behind it: can evolution in a simulated world go on without end?
 
-- [What this book is about](pages/what-this-notebook-is-about.md)
+- [What this notebook is about](pages/what-this-notebook-is-about.md)
 - [The ideas this builds on](pages/the-ideas-this-builds-on.md)
 
 ### How the simulation works
@@ -299,19 +302,19 @@ Three steps, over and over.
 1. **A plan.** An experiment's plan (`book/experiments/E…json`) fixes the
    settings, the size of the world, the seeds and how long each run goes —
    and a **thesis**: what is expected, why, and what would show it wrong. The
-   thesis is written down before any of its runs exist, and the chapter
+   thesis is written down before any of its runs exist, and the page
    quotes it from the plan, so it cannot be reworded once the results are
    in.
-2. **The runs.** On a computer running `gol_server.py`, the chapter has a ▶
-   button in the Book tab. The lab then runs the experiment's simulations,
+2. **The runs.** On a computer running `gol_server.py`, the page has a ▶
+   button in the Research Notebook tab. The lab then runs the experiment's simulations,
    several at a time, each in a process of its own, and says how long is
    left. It can be paused and continued at any time.
 3. **The results.** The finished runs are analysed, the figures drawn, and
-   the chapter written: what was found, whether the thesis held, and what to
+   the page written: what was found, whether the thesis held, and what to
    try next.
 
-Some chapters of Part II only ask, without a thesis: they look at runs that
-already exist from another side.
+Some pages only ask, without a thesis: they look at runs that already exist
+from another side.
 
 ## The rules
 
@@ -327,7 +330,7 @@ already exist from another side.
 - **Every run can be made again.** Each simulation records its seed, the
   frozen copy of the engine it ran on and the commit it came from, and the
   versions of Python, numpy and networkx, beside it in `provenance.json`
-  ([Chapter 8](pages/is-a-run-reproducible.md)).
+  ([Is a run reproducible?](pages/is-a-run-reproducible.md)).
 - **The dead are counted apart.** A world that dies out did not end up
   anywhere, so where the worlds of a condition end up is measured over the
   worlds that lived to the end, and the dead are reported beside them as an
@@ -340,24 +343,25 @@ already exist from another side.
 
 ## Making a result again
 
-Every chapter that reads runs says, in a box at its top, which runs they are,
+Every page that reads runs says, in a box at its top, which runs they are,
 every setting they were made with, and the command that makes them:
 `python3 gol_lab.py run E…`. `python3 gol_lab.py verify E…` checks a few of
 them against what was recorded; `python3 gol_lab.py analyse E…` computes an
 experiment's results; `python3 book_figures.py` draws every figure again and
-writes it, with its caption and recipe, into the chapters. On the same kind
+writes it, with its caption and recipe, into the pages. On the same kind
 of machine with the same libraries everything comes out identical.
 
 ## Where things are
 
-- `book/chapters/` — the chapters;
-- `book/notes/` — one note per rule, measurement or method;
+- `book/pages/` — every page, named by what it is about;
 - `book/figures/`, `book/diagrams/` — every figure and diagram, as SVG;
-- `book/results/` — every number a chapter quotes, written by the analysis;
+- `book/results/` — every number a page quotes, written by the analysis;
 - `book/experiments/` — the baseline and each experiment's plan;
-- `book/book.json` — the order of the chapters and notes, from which the
-  contents above are made;
+- `book/book.json` — the topics, and every page with its topics, kind and
+  summary, from which the contents above are made;
+- `book/legacy.json` — the chapter numbers the notebook had until
+  23 October 2026, and the page each became;
 - `GraphOfLifeRuns/` — the runs themselves, on the machine that ran them.
 
-The programme the book follows, and what is already known, is in
+The programme the notebook follows, and what is already known, is in
 `research/Research.md` — the *Findings* page under Research.

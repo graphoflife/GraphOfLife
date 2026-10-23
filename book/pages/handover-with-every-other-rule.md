@@ -1,6 +1,6 @@
 # Handover, with every other rule
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - A parent may pass some of its own links to its newborn — B1's rule,
 >   switched off in B2. What does it do to a world, whatever its other rules?
 > - Does it cost the same health with every rule, and does it buy anything?
@@ -9,11 +9,11 @@ With **handover**
 ([`allow_handover`](settings.md#allow_handover)) a parent moves some
 of its links to its newborn, and a parent that hands over all but one hangs
 on that one. B1 has it; B2 was built without it, because in
-[Chapter 48](a-world-that-cannot-break.md) handover left 40% of a world's
+[A world that cannot break](a-world-that-cannot-break.md) handover left 40% of a world's
 agents in trees outside its core, and one link's loss could cut off 4% of it.
 The author asked for handover in combination (16 October 2026): batch X plays
 B2 with handover together with each of 23 other rules — the switches of
-[Chapter 88](revolutions-with-every-other-rule.md) and batch S's other ways
+[Revolutions, with every other rule](revolutions-with-every-other-rule.md) and batch S's other ways
 of deciding a node — two seeds each, 1,000 iterations, every world the fourth
 corner of a two-by-two whose other corners are B2, B2 with handover alone,
 and B2 with the other rule alone.
@@ -53,16 +53,16 @@ diversity score by 0.08.
 **It cancels the riches of mixing.** B2 with brains mixed at birth holds 28%
 and 40% of its agents at three tokens or fewer at iteration 1,000; with
 handover as well, 48 and 32 more of every hundred are that poor — handover is one of the rules
-[Chapter 82](mixing-with-every-other-rule.md) found to cancel mixing's
+[Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) found to cancel mixing's
 riches. It costs riches too where links or brain units hold a token (14 to 22
 more of every hundred poor).
 
 **It unfolds a world a little.** A parent that passes links on does not
 gather them till it dies, and the dying leave rings of 3.7 groups fewer
-([Chapter 87](what-folds-a-world.md)): a typical agent is further from
+([What folds a world](what-folds-a-world.md)): a typical agent is further from
 everyone than in B2 — the typical distance over the random twin's rises by
 0.24 at the median, in 41 of 46 worlds. The room is bought with the trees and
-bridges above: room and resilience pull apart, as Chapter 87 found.
+bridges above: room and resilience pull apart, as [What folds a world](what-folds-a-world.md) found.
 
 **Evolution goes on, more slowly.** In lifetime contests the brains of 1,000
 take more than half of a contested world from those of 500 in 35 of the 46
@@ -83,11 +83,11 @@ and 0.75) and brains that grow (0.60 and 0.72).
 - **Evolution slows with it**, to a median of 0.57 against B2's 0.68.
 
 **Related notes:** [Every setting](settings.md#allow_handover) ·
-[Chapter 48 · A world that cannot break](a-world-that-cannot-break.md) ·
-[Chapter 82 · Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
-[Chapter 86 · Eight switches at once](eight-switches-at-once.md) ·
-[Chapter 87 · What folds a world](what-folds-a-world.md) ·
-[Chapter 88 · Revolutions, with every other rule](revolutions-with-every-other-rule.md)
+[A world that cannot break](a-world-that-cannot-break.md) ·
+[Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
+[Eight switches at once](eight-switches-at-once.md) ·
+[What folds a world](what-folds-a-world.md) ·
+[Revolutions, with every other rule](revolutions-with-every-other-rule.md)
 
 <!-- turns -->
 ---

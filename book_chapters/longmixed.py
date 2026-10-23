@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 81 · Five mixed worlds, fifty thousand iterations — what Experiment 18's worlds did.
+Five mixed worlds, fifty thousand iterations — what Experiment 18's worlds did.
 
 Experiment 18 played five worlds of Experiment 17 (B2 with brains mixed at
 birth, seeds 2, 4, 5, 6 and 10) on from iteration 10,000 to 50,000, or until
@@ -113,8 +113,8 @@ def longmixed(ch: F.Chapter) -> None:
              "y": {"label": "share of the agents", "min": 0, "max": 1}, "series": poor,
              "guides": [{"axis": "y", "at": 0.5, "label": "half"}]}],
             columns=2, title="Health and riches, every 500 iterations",
-            caption=("Each world read as Meta X reads every world, from the whole worlds the lab kept every 500 "
-                     "iterations from 10,500 on, while it lived. Left: how many of the seven marks of Chapter 46's "
+            caption=("Each world read as [Healthy and rich](healthy-and-rich.md) reads every world, from the whole worlds the lab kept every 500 "
+                     "iterations from 10,500 on, while it lived. Left: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s "
                      "health bar it meets (the dots of each world are set a little apart so that they do not hide each other). "
                      "Right: the share of its agents holding three tokens or fewer."),
             recipe=recipe(RUNS, "Each run's `archive/world_<iteration>.npz` "

@@ -1,41 +1,41 @@
 # Worlds of 100,000 tokens
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How does a line take over a world ten times the size: ten times slower,
 >   as chance would, about as fast, as a better brain in a well-mixed world
 >   would, or at the pace of a front that has twice as far to go?
 > - Is a world of 100,000 tokens ten copies of a world of 10,000, or does
 >   anything appear only at size: longer-lived regions, coexisting lines,
 >   structure that a small world has no room for?
-> - Do the measures of space of Part II — dimension, correlation length,
+> - Do the measures of space of the baseline's study — dimension, correlation length,
 >   the width of a world — read the same at ten times the size?
 
 <!-- experiment E10 -->
 
 ## Why ask
 
-When this experiment was planned, every finding of Parts II and III had
+When this experiment was planned, every finding about the baseline had
 been made on worlds of 10,000 tokens, about 1,300 agents each. That is
 small. A world of 1,300 agents is some 30 steps across
-([Chapter 35](the-geometry-of-a-world.md)), and its structure fades
-within three ([Chapter 23](like-next-to-like.md)): there is room for a
+([The geometry of a world](the-geometry-of-a-world.md)), and its structure fades
+within three ([Like next to like](like-next-to-like.md)): there is room for a
 dozen regions side by side, no more. Questions about space, about scale,
 and about whether different kinds of agents can live side by side need
 worlds with more room.
 
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md) showed that a
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) showed that a
 bigger world is, on average, more of the same: agents, connections and
 births all follow the tokens in proportion. It ran only three worlds of each
 size, for 600 iterations. This experiment makes a **second set of baseline
 worlds** — of B1 itself, not of the second baseline B2 of
-[Chapter 48](a-world-that-cannot-break.md): thirty worlds of 100,000
-tokens, ten times the first, each run for 1,500 iterations. Part VI builds
-on it — Chapter 61 is to measure its dimensions at scale, and Chapter 62 to
+[A world that cannot break](a-world-that-cannot-break.md): thirty worlds of 100,000
+tokens, ten times the first, each run for 1,500 iterations. The physics of space builds
+on it — *Dimensions at scale* is to measure its dimensions at scale, and *Which properties have no scale?* to
 look for properties without a scale (both planned, see
 [the contents](../README.md)) — and it answers one question of its own: how
 a line takes over a world.
 
-**How a line takes over.** [Chapter 18](genotypes-and-lineages.md) found
+**How a line takes over.** [Genotypes and lineages](genotypes-and-lineages.md) found
 that whole lines of descent take the worlds of 10,000 tokens over again and
 again, about once every 350 iterations. Is that chance or merit? Three
 answers give three different paces, and the size of the world tells them
@@ -44,7 +44,7 @@ apart:
 1. **Chance.** If no line is better than another, all but one die out by
    chance in the end, in a time that grows in proportion to the number of
    agents: ten times the agents, ten times as long (the coalescent,
-   [Chapter 6](the-ideas-this-builds-on.md)).
+   [The ideas this builds on](the-ideas-this-builds-on.md)).
 2. **Merit, in a well-mixed world.** A better line grows by a fixed factor
    every generation, and needs only a time that grows with the logarithm of
    the number of agents: ten times the agents, about a third longer.
@@ -53,18 +53,18 @@ apart:
    of the world.
 
 A world is a space: it has a finite dimension
-([Chapter 24](how-many-dimensions-does-a-world-have.md)), new connections
+([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)), new connections
 are only ever made inside a neighbourhood
-([Chapter 22](how-the-network-grows.md)), and a node can only be taken by
+([How the network grows](how-the-network-grows.md)), and a node can only be taken by
 a neighbour. Ten times the agents make a world only about twice as wide: its
-diameter grows as agents^0.30 ([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)).
+diameter grows as agents^0.30 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 So the third answer predicts two to three times as long, the first ten, the
 second barely longer.
 
-[Chapter 19](what-the-brains-are-like.md) gives a reason to expect the
+[What the brains are like](what-the-brains-are-like.md) gives a reason to expect the
 first answer: the brains are nearly blind and agree on every decision that
 matters, which leaves little for one line to be better at. The worlds of
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md) point to the third: at 102,400 tokens, all three came from a
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) point to the third: at 102,400 tokens, all three came from a
 single founder by iterations 400, 400 and 525, where the median baseline
 world needed 175.
 
@@ -74,24 +74,25 @@ world needed 175.
 > [!quote] The thesis of Experiment 10, written down before any of its runs existed
 > **The claim.** A line takes a world over the way a front crosses a country: at a steady pace, so that the time it needs grows with the world's width, not with its number of agents. A world of 100,000 tokens holds ten times the agents of the baseline but is only about twice as wide, so a line takes it over in two to five times as long as at 10,000 tokens — not ten times, as chance alone would need, and not about as fast, as a better brain spreading through a well-mixed world would.
 >
-> **Why it would be so.** Three paces are possible. If no line is better than another, all but one die out by chance, in a time that grows in proportion to the number of agents (the coalescent, Chapter 6). If a better line spreads through a well-mixed population, it grows by a fixed factor every generation, and the time grows only with the logarithm of the number of agents. If it spreads through space, it does so as a front at a steady speed (Fisher 1937), and the time grows with the width of the world. The worlds are spaces: they have a finite dimension (Chapter 23), their diameter grows as agents^0.30 (Chapter 38), and a node can only be taken by a neighbour (Chapter 3). At 10,000 tokens (Experiment 2) the living of the median world all came from a single founder by iteration 175, and of every world by 750. The worlds of Experiment 8 point to the front: at 102,400 tokens, all three worlds got there by iterations 400, 400 and 525.
+> **Why it would be so.** Three paces are possible. If no line is better than another, all but one die out by chance, in a time that grows in proportion to the number of agents (the coalescent, Chapter [6](the-ideas-this-builds-on.md)). If a better line spreads through a well-mixed population, it grows by a fixed factor every generation, and the time grows only with the logarithm of the number of agents. If it spreads through space, it does so as a front at a steady speed (Fisher 1937), and the time grows with the width of the world. The worlds are spaces: they have a finite dimension (Chapter [23](how-many-dimensions-does-a-world-have.md)), their diameter grows as agents^0.30 (Chapter [38](how-does-a-worlds-size-follow-its-tokens.md)), and a node can only be taken by a neighbour (Chapter [3](one-iteration.md)). At 10,000 tokens (Experiment 2) the living of the median world all came from a single founder by iteration 175, and of every world by 750. The worlds of Experiment 8 point to the front: at 102,400 tokens, all three worlds got there by iterations 400, 400 and 525.
 >
 > **It holds if:** Counting each world of 100,000 tokens that reaches iteration 1,500 by the first iteration at which all its living descend from a single founder — and a world that never gets there as later than all of them — the median lies between 350 and 875: two to five times the baseline's 175.
 >
 > **It fails if:** The median is below 350: a large world is taken over about as fast as a small one, as a better brain spreading through a well-mixed population would take it. Or it is above 875, or most worlds never get there by iteration 1,500: then the pace is set by the number of agents, as chance alone would set it.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
-("[Chapter 23](like-next-to-like.md)" and "[Chapter 38](do-agents-cooperate.md)" in the thesis are today's [Chapter 24](how-many-dimensions-does-a-world-have.md) and [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md).)
 
 ## Method
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -154,12 +155,12 @@ starts with 1,000 founders in a ring and settles at about 13,000 agents.
   descend from a single founder ([The common ancestor](common-ancestor.md)):
   the thesis. Against the baseline's 30 worlds over the same iterations, and
   against the time a front would need, from the worlds' diameters.
-- **Everything Parts II and III measure**, over the settled life from
+- **Everything the study of the baseline measures**, over the settled life from
   iteration 500 to 1,499: agents, connections, births, deaths, inequality, genotypes and
   families, each per token or per agent and set beside the baseline.
 - **Space**, in the frames of iterations 500, 1,000 and 1,499: the two
-  rulers of [Chapter 24](how-many-dimensions-does-a-world-have.md), the
-  correlation functions of [Chapter 23](like-next-to-like.md), the
+  rulers of [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md), the
+  correlation functions of [Like next to like](like-next-to-like.md), the
   domains of lines — how far apart two agents can be that share an ancestor
   of 25, 50 and 100 iterations back — and the widths of the worlds.
 
@@ -172,11 +173,11 @@ five hours. Together with Experiment 9 (48 GB), it fits on the disk as it is now
 ## Results
 
 All thirty worlds lived through their 1,500 iterations
-([Chapter 10](a-worlds-life.md)), and settled at about 14,400 agents each.
+([A world's life](a-worlds-life.md)), and settled at about 14,400 agents each.
 They took 211 hours of computing — a world of this size needs about 17
 seconds per iteration — and fill 58 GB. Being the largest set of worlds of
-the book, they became the worlds Parts II and III are written from
-([Chapter 9](thirty-worlds.md)); this chapter answers the questions of its
+the notebook, they became the worlds the study of the baseline is written from
+([Thirty worlds](thirty-worlds.md)); this page answers the questions of its
 own.
 
 ### The thesis
@@ -187,7 +188,7 @@ own.
 **Worlds not yet taken over by one founder's line.** For every iteration, the share of the worlds whose living, at the check after that iteration's game (every 25 iterations), still descend from more than one founder. Yellow: the 30 worlds of 10,000 tokens; blue: the 30 of 100,000. A world that died, or never got there, stays in the share. Where a line crosses one half is its median; the thesis of Experiment 10 expected the blue one to cross between the two grey lines.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From the lineage analyses of Experiments 10 and 6 (`book/results/E10.json`, `book/results/E06.json`, `oneFounder` of every run).
 >
@@ -222,17 +223,17 @@ power 1. A takeover here is neither a front nor pure chance.
 **How long a takeover takes, by the size of the world.** For every world of Experiment 8 that lived to its end (green, or grey if all its living still came from more than one founder at its last check, at iteration 600, drawn there), and for the median of each set of 30 worlds (blue): the first iteration at which every living agent descends from a single founder. Both axes logarithmic. Dashed: what the two paces of the thesis predict, drawn through the median of the worlds of 10,000 tokens, 175 — a front, whose time grows with the width of the world (orange), and chance, whose time grows with the number of agents (red).
 
 > [!example]- How to make this figure
-> **Runs.** the baseline worlds of Experiment 8, three seeds at each of ten sizes from 800 to 409,600 tokens, 600 iterations each ([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`); and the two sets of 30 worlds above.
+> **Runs.** the baseline worlds of Experiment 8, three seeds at each of ten sizes from 800 to 409,600 tokens, 600 iterations each ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`); and the two sets of 30 worlds above.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
-> 1. For the runs of Experiment 8, `gol_analysis.lineage` of every run (kept as the book measure `lineage`): its `ancestor.oneFounder`.
+> 1. For the runs of Experiment 8, `gol_analysis.lineage` of every run (kept as the notebook measure `lineage`): its `ancestor.oneFounder`.
 > 2. Plot it against the run's tokens; the two sets of 30 as in the figure above.
 >
 > **To make it again:** `python3 book_figures.py takeover`.
 <!-- /figure -->
 
-The worlds of [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)
+The worlds of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
 ran for only 600 iterations, three at each size, and say less. Up to 6,400
 tokens all came from one founder by iteration 300. From 12,800 tokens on, at
 every size but one, at least one world did not by iteration 600, and of the
@@ -259,7 +260,7 @@ two agents drawn anywhere in the world they belong to the same family:
 **Do lines of descent hold regions?** An agent's family at lag k is the genotype alive k iterations earlier from which its own genotype descends. For pairs of agents r steps apart — from breadth-first searches out of 100 agents drawn at random, at five moments of each world's settled life — the share that belong to the same family, divided by the share among any two agents of the world, for four lags; each line is the median over the worlds. Left: the 30 worlds of 100,000 tokens; right: the 26 of 10,000. Above 1, neighbours are kin more often than chance; where a line falls to 1 is how far a family reaches.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -282,8 +283,8 @@ to 12, 1.7 times over an eightfold time. A front moving at a fixed speed
 would widen it eightfold. A random walk on a grid would widen it about
 threefold (as the square root of time); on these worlds, where a walker is
 slowed by dead ends and its distance grows only as about *t*^0.34
-([Chapter 24](how-many-dimensions-does-a-world-have.md)), about twofold —
-close to what is measured. The light cone of [Chapter 7](physical-inspiration.md)
+([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)), about twofold —
+close to what is measured. The light cone of [Physical inspiration](physical-inspiration.md)
 allows a step per iteration; a line's region advances about a step every
 thirty-five. In the worlds of 10,000 tokens the patches were smaller (6 to 8
 steps for the same lags) and less marked (13 times chance at one step, for
@@ -294,7 +295,7 @@ as a front: locally, as the rules require, but with no steady speed, slower
 and slower as its patch grows. A rough estimate follows. If a patch widens
 as *t*^0.34, reaching across a world of width *D* takes a time growing as
 *D*^(1/0.34) ≈ *D*^2.9; and with the width growing as agents^0.30
-([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)), as
+([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)), as
 agents^0.88. The takeovers measured above grow as tokens^0.77 — near that,
 and between the front's 0.30 and chance's 1, where the thesis had found no
 place to put them.
@@ -308,10 +309,10 @@ tokens, over the same iterations:
 <!-- figure takeover/ten-small -->
 ![One world of 100,000 tokens beside one of 10,000](../figures/takeover/ten-small.svg)
 
-**One world of 100,000 tokens beside one of 10,000.** For each of 24 of the viewer's statistics, its mean over iterations 500–1,499 in each world that lived to the end; the median of the 30 worlds of 100,000 tokens divided by the median of the 26 worlds of 10,000 — over the same iterations, though the small worlds ran on to 2,999. On logarithmic axes, so that half as much and twice as much lie equally far from 1; each bar rises from 1 or falls from it. Blue: shares and rates per agent; green: the shape of the network; orange: its distances; red: its largest single things; grey: totals. The dashed guides: no change; ×2.0, the factor by which the width of a world grows (tokens^0.30, [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)); and ×11, the ratio of the agents.
+**One world of 100,000 tokens beside one of 10,000.** For each of 24 of the viewer's statistics, its mean over iterations 500–1,499 in each world that lived to the end; the median of the 30 worlds of 100,000 tokens divided by the median of the 26 worlds of 10,000 — over the same iterations, though the small worlds ran on to 2,999. On logarithmic axes, so that half as much and twice as much lie equally far from 1; each bar rises from 1 or falls from it. Blue: shares and rates per agent; green: the shape of the network; orange: its distances; red: its largest single things; grey: totals. The dashed guides: no change; ×2.0, the factor by which the width of a world grows (tokens^0.30, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)); and ×11, the ratio of the agents.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -325,7 +326,7 @@ Per agent, almost nothing changes. The Gini coefficient, the richest tenth's
 share, the share of nodes taken by coalitions or kept by their own agent and
 the genotypes per agent are within 3% of their values at 10,000 tokens; there
 are 8% more connections per agent and 5% fewer leaves; births and deaths per
-agent are 13 to 21% higher ([Chapter 13](how-ages-change.md) finds the
+agent are 13 to 21% higher ([How ages change over a world's life](how-ages-change.md) finds the
 old dying more often too). A large world is made of the same kind of agents,
 living the same kind of lives, a little faster.
 
@@ -337,7 +338,7 @@ large worlds have 23% more loops per agent, 18% fewer bridges, a 9% larger
 core, and a ball dimension 15% higher. Their distances grow as the width of a
 world does: the
 mean distance between two agents is 1.8 times as long, the diameter 2.0 times
-— the 10^0.30 = 2.0 of [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md).
+— the 10^0.30 = 2.0 of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md).
 And the largest things are larger: the richest agent holds 3.1 times the
 tokens, the largest gain of a game is 2.9 times as large, the best-connected
 agent has 7.7 times the connections. Only the totals — agents, and families
@@ -345,7 +346,7 @@ of genotypes — grow with the tokens, eleven times.
 
 So a large world is ten small ones in what its agents do and hold, but not in
 how they are arranged: it is wider, more meshed, less clustered, and its
-extremes are rarer and larger. Parts II and III say where each of these
+extremes are rarer and larger. The pages on the baseline say where each of these
 matters.
 
 ## What this means
@@ -369,12 +370,12 @@ matters.
   world from iteration 175 on; here the median world was still shared by
   several until iteration 1,000. That is time and room for lines to differ —
   if anything in the brains could make them differ
-  ([Chapter 19](what-the-brains-are-like.md)). Part VI builds on these
-  worlds: Chapter 61 is to follow their dimension to larger sizes, and the
-  long run of [Chapter 69](a-hundred-thousand-iterations.md) a single
+  ([What the brains are like](what-the-brains-are-like.md)). The physics of space builds on these
+  worlds: *Dimensions at scale* is to follow their dimension to larger sizes, and the
+  long run of [A hundred thousand iterations](a-hundred-thousand-iterations.md) a single
   world of twice this size for a hundred thousand iterations.
 
-To make every figure of this chapter: `python3 book_figures.py takeover`.
+To make every figure of this page: `python3 book_figures.py takeover`.
 
 <!-- turns -->
 ---

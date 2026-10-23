@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 80 · Mixed at birth: ten long worlds — what Experiment 17's worlds did.
+Mixed at birth: ten long worlds — what Experiment 17's worlds did.
 
 Experiment 17 ran B2 with brains mixed at birth for 10,000 iterations, ten seeds
 (runs B2-10000-4af4a3-s001 … s010). B2 itself beside it: Experiment 16's ten
@@ -38,7 +38,7 @@ RUNS_DIR = os.path.join(ROOT, "GraphOfLifeRuns")
 PILOTS = os.path.join(RUNS_DIR, ".pilots")
 MIXED = [f"B2-10000-4af4a3-s{s:03d}" for s in range(1, 11)]
 B2 = [f"B2-10000-s{s:03d}" for s in range(1, 11)]
-#: Experiment 17's span. Its runs may be carried further by a later experiment; this chapter reads them to here.
+#: Experiment 17's span. Its runs may be carried further by a later experiment; this page reads them to here.
 END = 10000
 RUNS = ("The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 "
         "iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations "
@@ -152,9 +152,9 @@ def mixedlong(ch: F.Chapter) -> None:
          "series": F.dots(["mixed at birth"], [marks], [ORANGE]),
          "guides": [{"axis": "y", "at": 7, "label": "every mark"}]}],
         columns=2, title="Experiment 17 at iteration 10,000",
-        caption=("Each dot is a world at its last checkpoint, read as Meta X reads every world. Left: the share of "
+        caption=("Each dot is a world at its last checkpoint, read as [Healthy and rich](healthy-and-rich.md) reads every world. Left: the share of "
                  "its agents holding three tokens or fewer, B2's ten worlds at 10,000 iterations beside the mixed "
-                 "ones. Right: how many of the seven marks of Chapter 46's health bar each mixed world meets; the "
+                 "ones. Right: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each mixed world meets; the "
                  "world that died out is read at its last checkpoint, with 20 agents."),
         recipe=recipe(RUNS, "Each run's last checkpoint (`checkpoint.npz`; B2's continuations' `ckpt_010000.npz`) "
                             "(`GraphOfLifeRuns/.pilots/e17_profile.json`)",

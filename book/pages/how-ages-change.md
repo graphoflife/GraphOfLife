@@ -1,12 +1,12 @@
 # How ages change over a world's life
 
-[Chapter 12](births-deaths-and-ages.md) measured how long agents live and
-how old the living are at the end of a run. This chapter follows ages and
+[Births, deaths and ages](births-deaths-and-ages.md) measured how long agents live and
+how old the living are at the end of a run. This page follows ages and
 lifetimes through a world's whole life: how old the living are at each
 moment, how long the agents born at each moment live, and at which age an
 agent is most at risk.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How old are the living, iteration by iteration — the typical agent and the
 >   oldest?
 > - Do agents born late in a world's life live longer than agents born early?
@@ -15,12 +15,12 @@ agent is most at risk.
 > - Do ages behave the same in a world a tenth the size?
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -77,7 +77,7 @@ agent is most at risk.
 A world whose size holds still is not necessarily in a steady state. If births
 slow while deaths slow too, the population can stay the same size while it
 grows older — births do slow, over a world's first few hundred iterations
-([Chapter 10](a-worlds-life.md)) — and an older population is a
+([A world's life](a-worlds-life.md)) — and an older population is a
 different one: older agents have had more time to gather connections and
 tokens, and their brains have survived more games. For evolution, what matters
 is how long a brain lasts and what it does in that time; for a picture of a
@@ -102,7 +102,7 @@ agent alive:
 **How old the living are.** After every game of the 30 worlds. Left: the median age of the agents alive, and the age that nine in ten of them are below (the 90th percentile). Right: the age of the oldest agent alive; the dashed diagonal is the age of an agent alive since iteration 0, which only the oldest can follow. For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -136,10 +136,10 @@ section on the risk of dying, below, finds no sign of that. It is a matter of
 numbers. A settled world has about 500 births in every iteration (3.5 per
 hundred agents, of some 14,400), but nearly a third of the newborns die in
 the iteration they are born in
-([Chapter 12](births-deaths-and-ages.md)), so about *B* = 345 in every
+([Births, deaths and ages](births-deaths-and-ages.md)), so about *B* = 345 in every
 iteration live through their first game — 2.4 per hundred agents. A share
 *S*(100) = 0.13 of these live to an age of 100 iterations (the curves of
-[Chapter 12](births-deaths-and-ages.md) count exactly these agents); and from then on about *h* = 1% of
+[Births, deaths and ages](births-deaths-and-ages.md) count exactly these agents); and from then on about *h* = 1% of
 those left die in every game, whatever their age. The number of agents alive
 that are older than *L* is then about
 
@@ -168,7 +168,7 @@ structure at a few moments:
 **The living, by age, at six moments.** All agents alive after the games of 100, 250, 500, 750, 1,000 and 1,475, pooled over the 30 worlds and sorted by age in classes that widen fourfold: born in that very iteration (age 0), 1 to 3, 4 to 15, 16 to 63, 64 to 255, and 256 iterations or more. Each column adds up to 1.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -180,7 +180,7 @@ structure at a few moments:
 
 At iteration 100, half of the living (51%) are 16 to 63 iterations old: they
 were born in iterations 37 to 84, as the boom of
-[Chapter 11](the-first-hundred-iterations.md) turned into its crash, and
+[The first hundred iterations](the-first-hundred-iterations.md) turned into its crash, and
 few agents born since have lasted. At iteration 250 that generation has
 moved on, and 39% of the living are 64 to 255 iterations old. From iteration
 500 on, the columns hardly change: about 2.5% of the living were born in that
@@ -192,17 +192,17 @@ of the population is set by iteration 500 and holds.
 
 Ages of the living mix agents born at many times. Lifetimes separate them:
 group the agents that lived through their first game, as in
-[Chapter 12](births-deaths-and-ages.md), by the period in which they were
+[Births, deaths and ages](births-deaths-and-ages.md), by the period in which they were
 born — a **cohort** ([Age and lifetime](age-and-lifetime.md)) — and
 follow each group to its end:
 
 <!-- figure ages/cohorts -->
 ![How long agents live, by when they were born](../figures/ages/cohorts.svg)
 
-**How long agents live, by when they were born.** Of all agents born in each period of the 30 worlds' lives that took part in at least one game, the share that lived at least L iterations. A life is counted from the iteration of birth to the last iteration after whose game the agent was alive, both included; lives still going at the end of a run are counted as far as they went (Kaplan–Meier, as in [Chapter 12](births-deaths-and-ages.md)). A period's line stops at the longest life its agents could have had before the run ended. Both axes logarithmic.
+**How long agents live, by when they were born.** Of all agents born in each period of the 30 worlds' lives that took part in at least one game, the share that lived at least L iterations. A life is counted from the iteration of birth to the last iteration after whose game the agent was alive, both included; lives still going at the end of a run are counted as far as they went (Kaplan–Meier, as in [Births, deaths and ages](births-deaths-and-ages.md)). A period's line stops at the longest life its agents could have had before the run ended. Both axes logarithmic.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -235,7 +235,7 @@ least 100 iterations before the end can be measured by in full:
 **Life expectancy over a world's life.** Agents born in each stretch of 25 iterations (those born at iteration 0, the founders and their first children, left out). Left: how many of their first 100 iterations they live on average — the sum of the Kaplan–Meier curve up to L = 100, a mean that every stretch born at least 100 iterations before the end can be measured by in full. Right: the median lifetime, the longest L that more than half of them live. For each world separately; the line is the median of the 30 worlds, the darker band the middle half and the paler band nine in ten.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -251,8 +251,8 @@ iteration 250 the expectancy is 27, and from iteration 500 on it hovers
 between 28 and 31 for the rest of the run. The median lifetime does the same,
 from 2 iterations to between 8 and 11. Life expectancy rises through a
 world's first five hundred iterations — its youth
-([Chapter 11](the-first-hundred-iterations.md)) and the slowing of its
-turnover after it ([Chapter 10](a-worlds-life.md)) — and then it holds
+([The first hundred iterations](the-first-hundred-iterations.md)) and the slowing of its
+turnover after it ([A world's life](a-worlds-life.md)) — and then it holds
 still.
 
 ## The risk of dying at each age
@@ -268,7 +268,7 @@ were *a* iterations old, the share gone after the next
 **The risk of dying, by age.** Of the agents alive after the game at which they were a given age, the share that is gone after the next game — the agent's chance of dying at that age, pooled over the worlds, for agents born early in a world's life (orange) and in its settled life (blue). An age is drawn only where at least 200 agents reached it.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -311,7 +311,7 @@ mean number of connections:
 **Who the old are.** Every 25 iterations, the agents alive after the game in each age class: their mean tokens (left) and mean number of connections (right); each line is the median over the 30 worlds of the class's mean.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -323,26 +323,26 @@ mean number of connections:
 
 At the last iteration, in the median world, a newborn holds 5.9 tokens and
 has 3.6 connections — what its parent gave it at birth
-([Chapter 31](how-agents-have-children.md)). A few iterations later the
+([How agents have children](how-agents-have-children.md)). A few iterations later the
 young hold less: 4.7 tokens at ages 1 to 3, 4.9 at 4 to 15, with three
 connections. From then on the older the class, the richer: 6.0 tokens at 16
 to 63, 8.5 at 64 to 255, **15.3** at 256 and over — three times what the
 young hold — and 5.5 connections. On average, the old are the rich and the
 well connected. Whether they became rich by living long, or lived long
 because they were rich, is the same question as above;
-[Chapter 21](do-the-rich-stay-rich.md) follows single agents' tokens from
+[Do the rich stay rich?](do-the-rich-stay-rich.md) follows single agents' tokens from
 game to game.
 
 > [!info] Added later: connections give age
-> [Chapter 22](how-the-network-grows.md) sorts the living by age and looks
+> [How the network grows](how-the-network-grows.md) sorts the living by age and looks
 > at the median instead of the mean: the median agent has 2 connections at
 > every age, from a few iterations to over 700. The old classes' higher means
 > come from the hubs among them, which die far less often than leaves
-> ([Chapter 21](do-the-rich-stay-rich.md)), and an agent's tokens follow
-> its connections ([Chapter 34](how-properties-scale-together.md)).
+> ([Do the rich stay rich?](do-the-rich-stay-rich.md)), and an agent's tokens follow
+> its connections ([How properties scale together](how-properties-scale-together.md)).
 > Connections give an agent age, not age connections. And an agent's age is
 > its node's, not its brain's, which may have arrived in the last game
-> ([Chapter 39](questioning-the-mechanics.md)).
+> ([Questioning the mechanics](questioning-the-mechanics.md)).
 
 ## The ages of a steady world
 
@@ -372,7 +372,7 @@ curve.
 
 ## Two sizes
 
-The worlds of 10,000 tokens, which first made Parts II and III, ran for 3,000
+The worlds of 10,000 tokens, which the study of the baseline was first written from, ran for 3,000
 iterations. Their ages, beside these:
 
 <!-- figure ages/two-sizes -->
@@ -381,7 +381,7 @@ iterations. Their ages, beside these:
 **Ages in worlds of two sizes.** The median age and the oldest agent after every game, in the 30 worlds of 100,000 tokens (blue, 1,500 iterations) and in the 30 worlds of 10,000 tokens of the first edition, Experiment 2 (yellow, 3,000 iterations). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th); a world that died is no longer counted.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -411,11 +411,11 @@ from iteration 1,250 on, so their living grew older than a steady state with
 those lives would be — while the large worlds' births held still. Why old
 agents die less often in a small world is open. One candidate is the cuts:
 an agent is cut off in a game about a fifth more often in a world of 100,000
-tokens than in one of 10,000 ([Chapter 12](births-deaths-and-ages.md)),
+tokens than in one of 10,000 ([Births, deaths and ages](births-deaths-and-ages.md)),
 and being old is no protection when every connection between an agent's
 region and the rest of the world carries no tokens in the same game, so that
 all of them are cut together and the region dies
-([Chapter 36](how-a-world-breaks.md) calls it a border going quiet).
+([How a world breaks](how-a-world-breaks.md) calls it a border going quiet).
 
 ## What this means
 
@@ -424,8 +424,8 @@ structure, the same life expectancy and the same risk at every age that it
 will have at iteration 1,500: about 2.4% of its agents are newborns, half are
 younger than 55, and an agent that lives through its first game can expect
 some 41 iterations. Its first five hundred iterations — the youth of
-[Chapter 11](the-first-hundred-iterations.md) and the slowing of its
-turnover after it ([Chapter 10](a-worlds-life.md)) — are the only time the
+[The first hundred iterations](the-first-hundred-iterations.md) and the slowing of its
+turnover after it ([A world's life](a-worlds-life.md)) — are the only time the
 ages change. The ages of its living follow from its lifetimes, as those of a
 stationary population do.
 
@@ -438,18 +438,18 @@ For open-ended evolution this is a world whose demography is finished early:
 from iteration 500 on nothing about who lives how long changes. Evolution, if
 it acts, would have to act inside that steady turnover — through which brains
 the 2.4% of newborns carry, and which brains take over nodes in the games
-([Chapter 18](genotypes-and-lineages.md)) — not through how long agents
+([Genotypes and lineages](genotypes-and-lineages.md)) — not through how long agents
 last.
 
 > [!info] Added later: the brains settle even earlier
-> [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) played the
+> [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) played the
 > brains of different eras of ten worlds of 5,000 tokens against each other.
 > The baseline's brains improve over their first 50 to 100 iterations and
 > not after: from then on every era ties with the one before it. Inside this
 > steady turnover, the brains stop improving even before the ages stop
 > changing.
 
-To make every figure of this chapter: `python3 book_figures.py ages`.
+To make every figure of this page: `python3 book_figures.py ages`.
 
 <!-- turns -->
 ---

@@ -143,7 +143,7 @@ const Book = {
     try {
       this.index = await this.json('book.json');
     } catch (err) {
-      this.page.innerHTML = `<p class="md-status">Could not read the book: ${
+      this.page.innerHTML = `<p class="md-status">Could not read the notebook: ${
         Markdown.escape(String(err.message))}</p>`;
       return false;
     }

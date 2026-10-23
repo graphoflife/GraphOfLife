@@ -3,7 +3,7 @@
 What would cooperation be in a game whose only act is to stake tokens on
 nodes? This note defines **help** from the rules of the game alone, without
 asking what an agent meant, and the three signs by which help becomes
-**cooperation**. [Chapter 58](gliders-and-who-helps-whom.md) measures both.
+**cooperation**. [Gliders, and who helps whom](gliders-and-who-helps-whom.md) measures both.
 
 ## A stake that saves a node
 
@@ -19,12 +19,12 @@ at all, because the node would have gone the same way without them.
 
 Both probabilities come from the world's own rule for deciding a node, counted
 exactly, nothing sampled (`research/oee/checks/decisive.py`). Under the
-engine's rule ([Chapter 3](one-iteration.md)) the largest stake
+engine's rule ([One iteration, step by step](one-iteration.md)) the largest stake
 wins, the owner's own stake counting one and a half times in B2, ties drawn at
 random, unless a crowd of revolutionary stakes outweighs the largest staker and
 everyone above the crowd, in which case the winner is drawn from the step of the
 crowd that tipped it. Under the pilots' alliances
-([Chapter 56](alliances.md)) the side with the largest total
+([Alliances](alliances.md)) the side with the largest total
 wins. A tie between $k$ stakers gives each a probability $1/k$. In both cases
 the probability is what the rule would give if the game were played many
 times, so the effect is a fraction of a node: a stake that turns a lost node

@@ -18,7 +18,7 @@ triples. Every triangle closes three triples, one at each corner.
 
 ## Transitivity
 
-The clustering this book uses is the **transitivity**: the share of all
+The clustering this notebook uses is the **transitivity**: the share of all
 connected triples in the network that are closed into triangles,
 
 $$
@@ -52,7 +52,7 @@ connection has a way round it. A tree-like network, with few triangles,
 falls apart when a connection is cut. A settled baseline world is in
 between: clustered far above a random network, but with long tree-like
 stretches hanging off its clustered core
-([Chapter 17](what-shape-does-the-network-take.md)).
+([What shape does the network take?](what-shape-does-the-network-take.md)).
 
 <!-- turns -->
 ---

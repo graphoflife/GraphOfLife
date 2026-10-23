@@ -1,28 +1,28 @@
 # Thirty worlds
 
-Part II looks at one kind of world, the baseline B1, from every side. It does
-so with thirty worlds that differ only in their seed. This chapter introduces
-them: every chapter up to [Chapter 26](what-the-baseline-world-is.md), and every chapter of
-Part III up to [Chapter 40](what-the-measurements-say-about-open-ended-evolution.md), reads these same thirty runs.
+The study of the baseline looks at one kind of world, the baseline B1, from every side. It does
+so with thirty worlds that differ only in their seed. This page introduces
+them: the pages summed up in [What the baseline world is](what-the-baseline-world-is.md), and the
+measurements summed up in [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md), read these same thirty runs.
 
-> [!info] The second edition of Parts II and III
-> Parts II and III were first written from thirty worlds of 10,000 tokens,
+> [!info] The second edition of the baseline's study
+> The study of the baseline was first written from thirty worlds of 10,000 tokens,
 > about 1,300 agents each (Experiment 2). They are written here from thirty
 > worlds of 100,000 tokens, about 14,000 agents each (Experiment 10,
-> [Chapter 60](worlds-of-100000-tokens.md)): worlds big enough for space, for
-> scale and for rare events to show. Where the two sizes differ, the chapters
-> give both. The worlds of 10,000 tokens remain the ones Part I teaches with and
-> the baseline the experiments of Part IV compare against.
+> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)): worlds big enough for space, for
+> scale and for rare events to show. Where the two sizes differ, the pages
+> give both. The worlds of 10,000 tokens remain the ones the pages on how the simulation
+> works teach with, and the baseline the experiments that change one setting compare against.
 
 ## The runs
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -84,16 +84,16 @@ core, clustering, distances, the flow's loops) every 25 iterations
 Together they took 211 hours of computing, done in a little over two days on
 four processor cores, and fill 58 GB. All thirty worlds lived to the end:
 where four of the thirty smaller worlds died, none of these did
-([Chapter 10](a-worlds-life.md)).
+([A world's life](a-worlds-life.md)).
 
-To replicate a figure of Parts II and III, these are the runs you need: on a
+To replicate a figure of the baseline's study, these are the runs you need: on a
 computer with Python 3, numpy and networkx and a copy of this repository,
 `python3 gol_lab.py run E10` makes them into the folder `GraphOfLifeRuns/`,
 and `python3 book_figures.py` then redraws the figures from them. The few
-figures that set worlds of different sizes side by side — in Chapters [13](how-ages-change.md),
+figures that set worlds of different sizes side by side — in [How ages change over a world's life](how-ages-change.md),
 24, 25 and 33 — also read the thirty worlds of 10,000 tokens
 (`python3 gol_lab.py run E02`) or the worlds of every size of
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
 (`python3 gol_lab.py run E08`). Each figure says, folded beneath it, which of
 the runs it reads and how. A run of 1,500 iterations at this size takes about
 seven hours on one core; the thirty worlds of 10,000 tokens take an eighth of
@@ -124,46 +124,46 @@ every agent within a few steps of the world's oldest agent.
 > **To make it again:** `python3 book_figures.py shape`.
 <!-- /figure -->
 
-The thousand founders on their ring ([Chapter 2](the-world.md)) have become
+The thousand founders on their ring ([The world: tokens, agents and a network](the-world.md)) have become
 a network of dense clusters joined by thin paths, with many agents that hang
-on by a single connection. [Chapter 17](what-shape-does-the-network-take.md)
-takes this shape apart, and [Chapter 25](the-core-of-a-world.md) its core.
+on by a single connection. [What shape does the network take?](what-shape-does-the-network-take.md)
+takes this shape apart, and [The core of a world](the-core-of-a-world.md) its core.
 
 Any of the thirty can be opened in the **Viewer** of the Graph of Life app,
 which replays a run frame by frame.
 
-## The questions of Part II
+## The questions of the baseline's study
 
-- [Chapter 10](a-worlds-life.md) — What does a world do over 1,500
+- [A world's life](a-worlds-life.md) — What does a world do over 1,500
   iterations? Does it settle?
-- [Chapter 11](the-first-hundred-iterations.md) — What happens in its first
+- [The first hundred iterations](the-first-hundred-iterations.md) — What happens in its first
   hundred iterations?
-- [Chapter 12](births-deaths-and-ages.md) — How often are agents born and
+- [Births, deaths and ages](births-deaths-and-ages.md) — How often are agents born and
   how do they die? How old do they get?
-- [Chapter 13](how-ages-change.md) — How do ages and lifespans change over a
+- [How ages change over a world's life](how-ages-change.md) — How do ages and lifespans change over a
   world's life?
-- [Chapter 14](how-much-does-the-seed-decide.md) — How much of what a world
+- [How much does the seed decide?](how-much-does-the-seed-decide.md) — How much of what a world
   does is decided by its seed?
-- [Chapter 15](where-do-the-tokens-go.md) — Where do the tokens go — how
+- [Where do the tokens go?](where-do-the-tokens-go.md) — Where do the tokens go — how
   unequal does a world become?
-- [Chapter 16](how-the-game-is-played.md) — How is the game played: where
+- [How the game is played](how-the-game-is-played.md) — How is the game played: where
   do agents stake, who wins the nodes?
-- [Chapter 17](what-shape-does-the-network-take.md) — What shape does the
+- [What shape does the network take?](what-shape-does-the-network-take.md) — What shape does the
   network take?
-- [Chapter 18](genotypes-and-lineages.md) — How long do genotypes last, and
+- [Genotypes and lineages](genotypes-and-lineages.md) — How long do genotypes last, and
   do lineages take over?
-- [Chapter 19](what-the-brains-are-like.md) and
-  [Chapter 20](what-agents-say-to-each-other.md) — What are the brains like,
+- [What the brains are like](what-the-brains-are-like.md) and
+  [What agents say to each other](what-agents-say-to-each-other.md) — What are the brains like,
   and what do agents say to each other?
-- [Chapter 21](do-the-rich-stay-rich.md) — Do the rich stay rich?
-- [Chapter 22](how-the-network-grows.md) — How does the network grow?
-- [Chapter 23](like-next-to-like.md) — Are neighbours alike?
-- [Chapter 24](how-many-dimensions-does-a-world-have.md) and
-  [Chapter 25](the-core-of-a-world.md) — How many dimensions does a world
+- [Do the rich stay rich?](do-the-rich-stay-rich.md) — Do the rich stay rich?
+- [How the network grows](how-the-network-grows.md) — How does the network grow?
+- [Like next to like](like-next-to-like.md) — Are neighbours alike?
+- [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) and
+  [The core of a world](the-core-of-a-world.md) — How many dimensions does a world
   have, and its core?
-- [Chapter 26](what-the-baseline-world-is.md) — What the baseline world is, in sum.
+- [What the baseline world is](what-the-baseline-world-is.md) — What the baseline world is, in sum.
 
-Five of these chapters (10, 14, 15, 17 and 18) were planned as experiments,
+Five of these pages (10, 14, 15, 17 and 18) were planned as experiments,
 with a thesis written down before the runs of 10,000 tokens; they quote it,
 say whether it held there, and test it again on these worlds. The others only
 ask.

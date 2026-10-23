@@ -1,6 +1,6 @@
 # The switches the world was built with
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - The original algorithm came with switches of its own. Does any of them
 >   keep evolution going?
 > - What do revolutions do, in a world of nearly blind brains and in one of
@@ -10,14 +10,14 @@
 
 ## Why ask
 
-Part V has judged its own rules by the tournaments of
-[Chapter 46](how-to-tell-a-world-that-keeps-evolving.md): does a world keep
+The rules made for B2 have been judged by the tournaments of
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md): does a world keep
 beating its own past? The switches the algorithm was built with were never
 judged that way. Some were set for other reasons. Handover was taken out
-because it breaks the network ([Chapter 48](a-world-that-cannot-break.md)).
+because it breaks the network ([A world that cannot break](a-world-that-cannot-break.md)).
 Revolutions are planned in
-Chapter 44, for what they do to wealth.
-Gifts have been off in every run of the book. The author asked whether they
+*What keeps wealth spread?*, for what they do to wealth.
+Gifts have been off in every run of the notebook. The author asked whether they
 had been tested for open-ended evolution. They had not, and each has a reason
 it might matter.
 
@@ -25,7 +25,7 @@ it might matter.
 the one form of collective action the original game has. Stakers who mark
 part of their stakes as revolutionary can, together, take a node from the
 single largest staker if they outweigh it. A rule that rewards standing
-together is the kind of rule [Chapter 50](why-evolution-stops.md) said
+together is the kind of rule [Why evolution stops](why-evolution-stops.md) said
 evolution needs, and B2 has had it on all along.
 
 **Gifts** let an agent hand tokens to a neighbour during reproduction, as a
@@ -41,7 +41,7 @@ lapses only if its two ends share two other neighbours (`prune_needs = 2`).
 That rule has a number in it. Gifts with every unused link lapsing
 (`prune_needs = 0`) would put the network's shape in the brains' hands, which
 is the kind of replacement for a number that
-[Chapter 57](rules-without-numbers.md) looks for.
+[Rules without numbers](rules-without-numbers.md) looks for.
 
 **Sharing the estate by wealth** (`redistribution = by_tokens`) gives the
 tokens of the dead to the survivors in proportion to what they hold, which
@@ -56,9 +56,9 @@ iterations, with a whole world kept every 100 iterations:
 
 | world | what it changes |
 |---|---|
-| B1 | the baseline of Parts II and III: brains of five layers, revolutions on |
+| B1 | the baseline: brains of five layers, revolutions on |
 | B1, no revolutions | `allow_revolutions = false` |
-| B2 | a world that cannot break ([Chapter 48](a-world-that-cannot-break.md)), revolutions on |
+| B2 | a world that cannot break ([A world that cannot break](a-world-that-cannot-break.md)), revolutions on |
 | B2, no revolutions | `allow_revolutions = false` |
 | B2 with gifts | `allow_gifting`, `prune_after = reproduction`, `inactive_window = iteration` |
 | B2 with gifts, every unused link lapsing | the same, and `prune_needs = 0` |
@@ -77,7 +77,7 @@ token: the pilots in the engine's code reproduce the lab exactly.
 **How each switch changes a world's life.** One dot per world, the mean or median over iterations 500 to 1,000; the bar is the median of the two. Labels as in the figure below.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of Parts II and III), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of the study of the baseline), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
 >
 > **Data.** From each world's `series.jsonl`.
 >
@@ -89,10 +89,10 @@ token: the pilots in the engine's code reproduce the lab exactly.
 <!-- figure switches/bar -->
 ![Each switch against the health bar](../figures/switches/bar.svg)
 
-**Each switch against the health bar.** One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are the health bar of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md). *−rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
+**Each switch against the health bar.** One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *−rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of Parts II and III), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of the study of the baseline), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
 >
 > **Data.** From each world's `series.jsonl`.
 >
@@ -131,12 +131,12 @@ against 3,400, and otherwise left it as it was.
 ## Does any switch keep evolution going?
 
 > [!warning] Added later: these contests were 20 iterations long
-> Every tournament in this chapter was played with contests of 20 iterations.
+> Every tournament in this page was played with contests of 20 iterations.
 > In B2's worlds such contests miss what pays off over an agent's life of 100
 > iterations: in contests of 100 the brains of iteration 2,000 beat those of
 > 500 (0.73) where in contests of 20 they tied
-> ([Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
-> this chapter says that evolution stops, read: it stops *as far as a short
+> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
 > The longer contests have since been played, 100 iterations each, once in
@@ -157,7 +157,7 @@ against 3,400, and otherwise left it as it was.
 **Does any switch keep evolution going?** One dot per world. Top: the rating of the brains of iteration 1,000 against the founders'. Bottom: their share of a world contested with the brains of iteration 500 of the same world.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of Parts II and III), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
+> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of the study of the baseline), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
 >
 > **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.
 >
@@ -219,7 +219,7 @@ lasts in can also die, as the world of 3,000 iterations nearly did.
 an agent could pay to keep a connection it values. With every unused link
 lapsing, the brains did not pay for the links that held their world together,
 and the network broke as it does without gifts. So the candidate of
-[Chapter 57](rules-without-numbers.md), links that cost, does not replace
+[Rules without numbers](rules-without-numbers.md), links that cost, does not replace
 B2's rule for lapsing links, at least not as gifts stand.
 
 

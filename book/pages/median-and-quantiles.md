@@ -1,6 +1,6 @@
 # Median and quantiles
 
-The book describes sets of numbers — thirty worlds' sizes, a million
+The notebook describes sets of numbers — thirty worlds' sizes, a million
 lifetimes — by a few **quantiles** rather than by their mean alone. This note
 says what they are and exactly how they are computed.
 
@@ -9,7 +9,7 @@ says what they are and exactly how they are computed.
 Sort the numbers. The **median** is the one in the middle: half of the
 numbers are at or below it, half at or above. With an even count it is the
 average of the two middle ones. The median of 3, 9, 1, 4 and 100 is 4 — the
-mean is 23.4, pulled up by the single 100. That is why the book prefers the
+mean is 23.4, pulled up by the single 100. That is why the notebook prefers the
 median for "the typical world": one extreme world cannot move it far.
 
 ## Quantiles
@@ -31,7 +31,7 @@ Q(q) = x_{\lfloor h \rfloor} + \bigl(h - \lfloor h \rfloor\bigr)\,\bigl(x_{\lflo
 $$
 
 This is the default of numpy's `quantile` (statisticians call it "type 7"),
-and it is what every quantile in this book uses. The brain's six
+and it is what every quantile in this notebook uses. The brain's six
 neighbourhood quantiles are computed the same way
 ([What a brain sees](brain-inputs.md)).
 

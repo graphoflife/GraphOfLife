@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 Eight switches at once (pilot batch U, 2026-10-16): a two-level fractional
-factorial design of resolution IV over eight of the book's switches on B2,
+factorial design of resolution IV over eight of the notebook's switches on B2,
 sixteen worlds of 10,000 tokens, seed 1, 1,000 iterations
 (research/oee/pilots/make_jobs_TU.py; the design in book/pages/
 fractional-factorial.md).
 
-Every world is read at iteration 1,000 as Meta X reads every world
+Every world is read at iteration 1,000 as Healthy and rich reads every world
 (research/atlas/at.py → GraphOfLifeRuns/.pilots/atlas/at1000.json); its brains
 of 1,000 are played against those of 500 over a lifetime (T = 100;
 research/oee/checks/rejudge.py → GraphOfLifeRuns/.pilots/batch_TUV_T100.json).
@@ -14,7 +14,7 @@ Each switch's main effect is set beside the same switch thrown alone in B2
 (the batch or lab worlds that made it, seeds 1 and 2), and beside the seed's
 own noise: the spread of the lab's ten B2 worlds at 1,000.
 
-    eightswitches   Chapter 86 · Eight switches at once (batch U), and the same design on B1 (batch V)
+    eightswitches   Eight switches at once (batch U), and the same design on B1 (batch V)
 """
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ U = {
     "H": ("handover", ("T/handover-s{s}", "P/B2-s{s}")),
 }
 #: The switches of batch V, on B1 (make_jobs_TU.V_SWITCHES), and the worlds that have each alone in B1 and their
-#: twins without it, where the book has them.
+#: twins without it, where the notebook has them.
 V = {
     "A": ("gifts", ("T/gifts-B1-s{s}", "S/S6-B1-s{s}")),
     "B": ("no revolutions", ("S/S7-B1norev-s{s}", "S/S6-B1-s{s}")),
@@ -56,14 +56,14 @@ EXTINCT = 20
 #: The seven chains of pairs the sixteen worlds cannot tell apart (book/pages/fractional-factorial.md).
 CHAINS = [("AB", "CG", "DH", "EF"), ("AC", "BG", "DF", "EH"), ("AD", "BH", "CF", "EG"), ("BC", "AG", "DE", "FH"),
           ("BD", "AH", "CE", "FG"), ("CD", "AF", "BE", "GH"), ("AE", "BF", "CH", "DG")]
-#: What is read, its axis label, and how many decimals the chapter quotes.
+#: What is read, its axis label, and how many decimals the page quotes.
 MEASURES = [("agents", "agents"), ("share_at_most_three", "share with three tokens or fewer"),
-            ("diversity", "diversity score (Meta X)"), ("dimension", "dimension by ball growth"),
+            ("diversity", "diversity score"), ("dimension", "dimension by ball growth"),
             ("links_per_agent", "links per agent"), ("marks", "marks of the health bar (of 7)")]
 RUNS_V = ("Batch V's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/V/`): B1 at 10,000 tokens, seed 1, 1,000 "
           "iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`): gifts, "
           "no revolutions, no handover, no random inputs, estates to the newborns, brains that change only when "
-          "copied, brains mixed at birth, links that hold a token; and the switches the book has played alone in B1, "
+          "copied, brains mixed at birth, links that hold a token; and the switches the notebook has played alone in B1, "
           "seeds 1 and 2 (batches S, T and R).")
 RUNS = ("Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 "
         "iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each "
@@ -242,7 +242,7 @@ def _b1_screen(ch: F.Chapter, measured: Dict[str, Dict[str, Any]]) -> None:
                      f"({len(alive)} of 16; {' and '.join(w.split('/')[-1] for w in dead)} died out, and are each "
                      f"other's mirror, so every switch keeps seven worlds on and seven off): the mean of the seven "
                      f"with it on, minus the mean of the seven with it off. Grey dots: the switch thrown alone in B1, "
-                     f"the world with it minus its twin without it, seeds 1 and 2, where the book has them. The grey "
+                     f"the world with it minus its twin without it, seeds 1 and 2, where the notebook has them. The grey "
                      f"band round zero is twice the spread of the seven chains of pairs, read the same way: what a "
                      f"main effect would scatter by if pairs of switches did not act together."),
             recipe=recipe(RUNS_V, "each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, "

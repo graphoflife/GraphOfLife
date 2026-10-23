@@ -44,7 +44,7 @@ length), then once more from the furthest agent any of them reached — the
 
 In a settled baseline world of 100,000 tokens the diameter is about 60
 steps, the radius about 36 and the mean path length about 18; in one of
-10,000 tokens, 29, 17 and 10 ([Chapter 35](the-geometry-of-a-world.md)).
+10,000 tokens, 29, 17 and 10 ([The geometry of a world](the-geometry-of-a-world.md)).
 
 <!-- turns -->
 ---

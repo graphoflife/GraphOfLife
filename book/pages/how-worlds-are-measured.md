@@ -2,15 +2,15 @@
 
 A world of 10,000 tokens holds about 1,300 agents and lives 3,000
 iterations: some four million agent-moments, recorded twice per iteration.
-(The worlds of Parts II and III, of 100,000 tokens, hold about 14,000 agents
-for 1,500 iterations: some twenty million.) This chapter teaches with the
+(The baseline worlds of 100,000 tokens hold about 14,000 agents
+for 1,500 iterations: some twenty million.) This page teaches with the
 smaller worlds.
-This chapter explains, step by step, how that becomes the numbers and figures
-of the rest of the book — and, because a single world depends on chance, how
+This page explains, step by step, how that becomes the numbers and figures
+of the rest of the notebook — and, because a single world depends on chance, how
 worlds are compared with each other. Each step links to a note that defines
 it exactly and works an example.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What is measured in a world, and when?
 > - How is one world summed up in a number?
 > - How are thirty worlds drawn in one figure?
@@ -23,7 +23,7 @@ After every phase the world is recorded as a frame, and from every frame a
 unequal the tokens are, how many agents starved, and so on
 ([What a run records](frames-and-stats.md)). A row with `phase` = 1
 describes the world just after a reproduction phase, one with `phase` = 2
-just after a game. Unless a figure says otherwise, the book reads the rows of
+just after a game. Unless a figure says otherwise, the notebook reads the rows of
 phase 2: the world **at the end of each iteration**. Births are the
 exception: they are counted in the rows of phase 1, where they happen.
 
@@ -34,7 +34,7 @@ every 25 iterations.
 ## Step 2 · One world: means over stretches
 
 A statistic jumps about from one iteration to the next. To say where a world
-*is* at some time, the book takes its **mean over a stretch** of iterations
+*is* at some time, the notebook takes its **mean over a stretch** of iterations
 *a* to *b*, both included:
 
 $$
@@ -46,7 +46,7 @@ where *m* is the number of rows in the stretch that hold the statistic.
 <!-- figure measure/stretches -->
 ![One world, and its stretches of 100 iterations](../figures/measure/stretches.svg)
 
-**One world, and its stretches of 100 iterations.** The world with seed 1: its number of agents after every game (blue), and its mean over each of the 29 stretches of 100 iterations from iteration 100 to 2,999 (yellow). Many measurements in this book are means over such stretches.
+**One world, and its stretches of 100 iterations.** The world with seed 1: its number of agents after every game (blue), and its mean over each of the 29 stretches of 100 iterations from iteration 100 to 2,999 (yellow). Many measurements in this notebook are means over such stretches.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001`.
@@ -60,19 +60,19 @@ where *m* is the number of rows in the stretch that hold the statistic.
 <!-- /figure -->
 
 A world spends its first hundred iterations or so in a **youth** unlike the
-rest of its life ([Chapter 11](the-first-hundred-iterations.md)), and then
-**wanders** ([Chapter 10](a-worlds-life.md)). So when the book asks where a
+rest of its life ([The first hundred iterations](the-first-hundred-iterations.md)), and then
+**wanders** ([A world's life](a-worlds-life.md)). So when the notebook asks where a
 world **settles**, it takes the mean from iteration 500 to its end — its
 [settled life](settled-life.md).
 
 ## Step 3 · Many worlds: lines, bands and dots
 
 Every world is a matter of chance: the seed decides the starting ring, the
-founders' brains and every random decision after. So the book makes many
-worlds — thirty for each setting, with seeds 1, 2, …, 30, unless a chapter
+founders' brains and every random decision after. So the notebook makes many
+worlds — thirty for each setting, with seeds 1, 2, …, 30, unless a page
 says otherwise (three per size in
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md), ten per
-condition in Part V). Drawn one line per world, they look like this:
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md), ten per
+condition for B2). Drawn one line per world, they look like this:
 
 <!-- figure measure/thirty -->
 ![30 worlds, each a line](../figures/measure/thirty.svg)
@@ -80,7 +80,7 @@ condition in Part V). Drawn one line per world, they look like this:
 **30 worlds, each a line.** The number of agents of each of the 30 baseline worlds, every line one world, averaged over stretches of 25 iterations so that the lines stay legible.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -89,7 +89,7 @@ condition in Part V). Drawn one line per world, they look like this:
 > **To make it again:** `python3 book_figures.py measure`.
 <!-- /figure -->
 
-Thirty lines are hard to read. The book usually draws them as a **band**: in
+Thirty lines are hard to read. The notebook usually draws them as a **band**: in
 each short stretch of iterations, the median of the worlds is the line, the
 middle half of the worlds the darker band, and nine worlds in ten the paler
 band ([Bands](bands.md); [Median and quantiles](median-and-quantiles.md)).
@@ -100,7 +100,7 @@ band ([Bands](bands.md); [Median and quantiles](median-and-quantiles.md)).
 **The same 30 worlds, as a band.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -112,14 +112,14 @@ band ([Bands](bands.md); [Median and quantiles](median-and-quantiles.md)).
 <!-- /figure -->
 
 A band shows the **typical** world and the spread around it at each moment.
-It does not show how any single world moves; for that, the book draws single
+It does not show how any single world moves; for that, the notebook draws single
 worlds.
 
-When the question is not *when* but *where*, the book draws a **dot plot**:
+When the question is not *when* but *where*, the notebook draws a **dot plot**:
 one dot per world, at its mean over a stretch, with a short bar at the
 median. The dots are spread sideways at random only so that they do not hide
-each other; their sideways position means nothing. [Chapter 14](how-much-does-the-seed-decide.md)
-and [Chapter 41](do-the-brains-matter.md) are full of them.
+each other; their sideways position means nothing. [How much does the seed decide?](how-much-does-the-seed-decide.md)
+and [Do the brains matter?](do-the-brains-matter.md) are full of them.
 
 ## Step 4 · How different are worlds?
 
@@ -159,7 +159,7 @@ that died.
 
 ## Step 6 · How long things last
 
-For lifetimes — of agents, of genotypes — the book draws the share that
+For lifetimes — of agents, of genotypes — the notebook draws the share that
 lasted **at least** *L* iterations, for every *L*, as a
 [Kaplan–Meier survival curve](kaplan-meier.md), which counts lives
 still going at the end of a run correctly. Such curves, and many
@@ -169,8 +169,8 @@ distributions, are drawn on [logarithmic axes](logarithmic-axes.md).
 
 Under every figure, folded away, is **how to make this figure**: the runs,
 the file and fields it reads, each step of the calculation in the words of
-this chapter, and the command that makes it from the runs — `python3
-book_figures.py` followed by the chapter's short name. The program that makes
+this page, and the command that makes it from the runs — `python3
+book_figures.py` followed by the page's short name. The program that makes
 the figures (`book_figures.py`, with the package `book_chapters/`, drawing with
 `book_svg.py`) does nothing the recipe does not say.
 

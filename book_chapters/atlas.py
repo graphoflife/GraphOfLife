@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Appendix B · What goes with what: correlations among the statistics of agents
+What goes with what: correlations among the statistics of agents
 and of whole worlds.
 
 The numbers are computed by research/atlas/correlations.py (agents) and

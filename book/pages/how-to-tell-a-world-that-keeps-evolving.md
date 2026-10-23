@@ -1,6 +1,6 @@
 # How to tell a world that keeps evolving
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What would open-ended evolution look like in a Graph of Life world —
 >   which number would keep rising?
 > - Why are most rising numbers no evidence at all, and what does a rising
@@ -13,10 +13,10 @@
 
 <!-- experiment E12 -->
 
-## The goal of Part V
+## The goal: evolution that keeps going
 
-Parts II to IV watched the baseline and changed it one rule at a time. Part V
-turns the question round: instead of asking what the rules do, it asks which
+The pages before this one watched the baseline and changed it one rule at a time. From here on the
+notebook turns the question round: instead of asking what the rules do, it asks which
 rules would make evolution **open-ended** — and builds them. The goal, as the
 author put it when the part began:
 
@@ -37,7 +37,7 @@ author put it when the part began:
   an agent reach further — to look for a new partner, say — only at a price
   that limits how far, paid in tokens.
 
-This chapter is about the first two: how to know when we are there. The rest
+This page is about the first two: how to know when we are there. The rest
 of the part builds.
 
 ## Numbers that rise and mean nothing
@@ -62,7 +62,7 @@ warning, because each looks like the thing we want.
    Gould's drunkard, who cannot fall through the wall he leans on, ends up
    in the gutter anyway.
 4. **The first boom.** Everything a world does in its first hundred
-   iterations is a world settling ([Chapter 11](the-first-hundred-iterations.md)):
+   iterations is a world settling ([The first hundred iterations](the-first-hundred-iterations.md)):
    numbers climb because the founders were unlike what the world becomes, and
    stop.
 
@@ -72,7 +72,7 @@ the world: a **shadow** trait, inherited and changed exactly as the real one,
 read by nothing. Whatever the real trait does beyond its shadow, selection
 did ([Bedau and Packard](the-ideas-this-builds-on.md) built whole worlds
 of shadows for this). For a world as a whole, the null is harder; that is
-what the rest of this chapter is about.
+what the rest of this page is about.
 
 ## Playing against the past
 
@@ -123,11 +123,11 @@ the settled world against its own past rather than against its boom.
 > in contests of 20 iterations (0.48), and beat them in contests of 100 (0.73,
 > in all ten worlds; brains against themselves 0.48, the labels swapped 0.26).
 > What evolution improved there pays off slowly, over a life, and a short
-> contest cannot see it. The tournaments of this book were played with 20
-> iterations until 2026-10-15; [Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on)
+> contest cannot see it. The tournaments of this notebook were played with 20
+> iterations until 2026-10-15; [Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)
 > shows what longer ones find.
 >
-> For B1, this chapter's world, the longer contests agree with the short ones.
+> For B1, this page's world, the longer contests agree with the short ones.
 > In contests of 100 iterations, once in each era's world, the brains of
 > iteration 1,000 held a median 0.49 of the world against those of 500 in this
 > experiment's ten worlds, and 0.56 against those of 300. They scatter more than
@@ -190,12 +190,12 @@ iterations and then stops. Experiment 12 asks ten.
 ## The runs
 
 <!-- runs E12 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **10 runs.** Every condition below is run once for every seed (1 to 10), for 1,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 5,000 tokens. Runs `B1-5000-s001` … `B1-5000-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E12`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E12`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -275,7 +275,7 @@ every world beat their founders: a rating of +207 to +465, +361 in the median
 world — the brains of iteration 50 hold about nine-tenths of a world contested
 with the founders' (0.90 in the median world) — and by iteration 100 the
 median world stood at +400. That is the first boom of
-[Chapter 11](the-first-hundred-iterations.md), seen from the brains' side:
+[The first hundred iterations](the-first-hundred-iterations.md), seen from the brains' side:
 whatever the founders do that does not pay, the first few dozen games remove.
 
 **And then nothing.** From iteration 50 to iteration 1,000 the median world's
@@ -359,21 +359,21 @@ better than its iteration 50 by more than chance can make it look.
 > standard normal draw, kept between 0 and 1; count the champions with
 > `gol_tournament.dominance`. The script is `research/oee/champion_null.py`.
 
-## What it means for Part V
+## What it means for the search
 
 The yardstick works: it separates the first boom, which every world has, from
 what comes after, which the baseline does not have. Elo against the founders
 alone would have shown a rise; the eras against each other show that the rise
 was all in the first fifty iterations.
 
-Why does the baseline stop so soon? Part II answered half of it: its brains
-are nearly blind ([Chapter 19](what-the-brains-are-like.md)), so evolution
+Why does the baseline stop so soon? The study of the baseline answered half of it: its brains
+are nearly blind ([What the brains are like](what-the-brains-are-like.md)), so evolution
 can only set constants, and a few constants are quickly set. Brains that see
 are the obvious next step, and they are what
-[Chapter 47](brains-that-see-and-worlds-that-break.md) tries — with
+[Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) tries — with
 consequences for the world itself that have to be dealt with first. Whether
 evolution then keeps going is the subject of
-[Chapter 50](why-evolution-stops.md).
+[Why evolution stops](why-evolution-stops.md).
 
 <!-- turns -->
 ---

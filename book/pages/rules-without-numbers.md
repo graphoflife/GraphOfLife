@@ -1,6 +1,6 @@
 # Rules without numbers
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Which numbers in B2's rules were chosen by hand, and what does each do?
 > - What is left of a world when all of them are taken away at once?
 > - Which numbers can be replaced by something the world decides for itself,
@@ -16,33 +16,33 @@ what is not wanted.
 
 B2, the world that cannot break, has seven such numbers. Each was chosen to
 stop one way a world was seen to fail, and each was tested in
-[Chapters 48](a-world-that-cannot-break.md) and
-[49](who-dies-and-why.md):
+[A world that cannot break](a-world-that-cannot-break.md) and
+[Who dies, and why](who-dies-and-why.md):
 
 | number | in B2 | what it stops | shown in |
 |---|---|---|---|
-| `incumbency` | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking | [Chapter 49](who-dies-and-why.md) |
-| `birth_links` | 2 | a newborn is joined to its parent and two of the parent's neighbours: no world grows as a tree | [Chapter 48](a-world-that-cannot-break.md) |
-| `prune_needs` | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [Chapter 48](a-world-that-cannot-break.md) |
-| `valence` | 8 | a brain may choose at most 8 links: no hubs | [Chapter 48](a-world-that-cannot-break.md) |
-| `keep_home` | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | [Chapter 49](who-dies-and-why.md) |
-| `max_age` | 100 | every agent dies at 100: no hoarding queen, and room for the young | [Chapter 49](who-dies-and-why.md) |
-| `min_child` | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Chapter 49](who-dies-and-why.md) |
+| `incumbency` | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking | [Who dies, and why](who-dies-and-why.md) |
+| `birth_links` | 2 | a newborn is joined to its parent and two of the parent's neighbours: no world grows as a tree | [A world that cannot break](a-world-that-cannot-break.md) |
+| `prune_needs` | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [A world that cannot break](a-world-that-cannot-break.md) |
+| `valence` | 8 | a brain may choose at most 8 links: no hubs | [A world that cannot break](a-world-that-cannot-break.md) |
+| `keep_home` | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | [Who dies, and why](who-dies-and-why.md) |
+| `max_age` | 100 | every agent dies at 100: no hoarding queen, and room for the young | [Who dies, and why](who-dies-and-why.md) |
+| `min_child` | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Who dies, and why](who-dies-and-why.md) |
 
 Two more rules of B2 have no number in them: a death is mended by joining the
 dead agent's neighbours in a ring, and a brain changes only when it is
 copied. They stay. The brain itself has sizes too, one hidden layer of 16 and
-messages of 8 numbers. Those are the subject of Chapter 53 and are left
+messages of 8 numbers. Those are the subject of *How big should a brain be?* and are left
 alone here.
 
 Experiments 14 and 15 take six of B2's numbers away **one at a time**, all
-but the owner's one and a half, to show what each prevents. This chapter does the opposite. It takes all seven away at once
+but the owner's one and a half, to show what each prevents. This page does the opposite. It takes all seven away at once
 and asks what a world does with none of them. Then it asks which of them can
 be replaced by a rule with no number in it.
 
 ## B3: B2 without its numbers
 
-The pilots of this chapter (batch N in `research/oee/pilots/LOG.md`) run B1's
+The pilots of this page (batch N in `research/oee/pilots/LOG.md`) run B1's
 game with every number at its original value. An owner's stake counts once.
 A newborn has only the links its brain chooses. Any connection that carries
 no tokens lapses. No agent has a cap on its links, none keeps anything at
@@ -52,7 +52,7 @@ of 16 that change only when copied, deaths mended in a ring, and a memory of
 the last game's stakes. Revolutions are off. Three variants, two seeds each,
 at 10,000 tokens:
 
-- **B3a**: with alliances ([Chapter 56](alliances.md));
+- **B3a**: with alliances ([Alliances](alliances.md));
 - **B3b**: with alliances, and a newborn also joined to every neighbour its
   parent was allied with in the last game (`birth_allies`), which builds
   space from the alliances, with no number;
@@ -80,7 +80,7 @@ iteration 102 and the other at 432. Before they did, nearly every node
 changed hands in every game: 88 to 91 per hundred agents. In the
 longer-lived world, 96 agents in a hundred were born and 77 starved in every
 iteration from 100 to 400, so the average agent was one and a half iterations
-old. This is the world [Chapter 49](who-dies-and-why.md) warns of. Children
+old. This is the world [Who dies, and why](who-dies-and-why.md) warns of. Children
 of a token or two stake everything and lose it, and nothing holds the
 population up but births, until they fall short.
 
@@ -121,14 +121,14 @@ world:
 <!-- /figure -->
 
 None of the six passes the health bar of
-[Chapter 46](how-to-tell-a-world-that-keeps-evolving.md), and none is a
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md), and none is a
 world in which evolution could work for long. The three that lived ended the
 fighting, and with it nearly all selection but that between who has children
 and who does not.
 
 ## What each number was doing
 
-Every failure above was already named in Chapters [48](a-world-that-cannot-break.md) and [49](who-dies-and-why.md), one number at a
+Every failure above was already named in [A world that cannot break](a-world-that-cannot-break.md) and [Who dies, and why](who-dies-and-why.md), one number at a
 time. Here they come all at once:
 
 | without | what happened |
@@ -138,7 +138,7 @@ time. Here they come all at once:
 | a cap on links | a star, one agent joined to 98% of the world |
 | links at birth, and with every unused link lapsing | a tree: 2.2 links per agent, and a cut of 39% by one loss |
 | an age limit | in the tree, agents live for hundreds of iterations and births nearly stop |
-| the home advantage | the alliances do its work, as in [Chapter 56](alliances.md) |
+| the home advantage | the alliances do its work, as in [Alliances](alliances.md) |
 
 Alliances made the difference between dying and living: both worlds without
 them died, and three of the four with them lived. They did not make the
@@ -146,7 +146,7 @@ difference between living and evolving.
 
 > [!info] Added later: contests a lifetime long
 > Played in contests of 100 iterations, once in each era's world
-> ([Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on)), the
+> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)), the
 > three worlds that lived answer three ways. In B3a, seed 1, the brains of
 > iteration 1,000 tied with those of 500 (0.50 and 0.46). In seed 2 they took
 > 0.84 of their own world and the whole of 500's. In B3b, seed 2, the brains of
@@ -172,7 +172,7 @@ replacement must prevent. These are candidates, and the pilots that test them
 come next:
 
 - **The owner's one and a half → none.** Alliances form without it
-  ([Chapter 56](alliances.md)), and what defends a node is then whoever
+  ([Alliances](alliances.md)), and what defends a node is then whoever
   stands with its owner.
 - **The share kept at home and the smallest child → birth by division.** An
   agent decides only *when* to have a child, and a child always takes half of
@@ -181,7 +181,7 @@ come next:
   child may be.
 - **The cap on links → links that cost.** In the original algorithm a link
   lives only while tokens cross it, and with gifts
-  ([Chapter 54](the-switches-the-world-was-built-with.md)) an agent can pay
+  ([The switches the world was built with](the-switches-the-world-was-built-with.md)) an agent can pay
   to keep the links it wants. How many links an agent holds is then set by
   what it can pay for.
 - **The links at birth → all of them.** A newborn joined to its parent and to
@@ -196,7 +196,7 @@ come next:
 > Two of these candidates have been tried since, briefly. **Links that cost**
 > fail as gifts stand: with every unused link lapsing, the brains do not pay
 > for the links that hold their world together, and the network breaks as it
-> does without gifts ([Chapter 54](the-switches-the-world-was-built-with.md)).
+> does without gifts ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
 > **Birth by division** stops the missiles but not the starving: alone, a world
 > of 3,000 tokens starved out in 60 iterations. With half of every agent's
 > tokens kept at home, a world lived, but most of its agents held a single
@@ -229,7 +229,7 @@ come next:
 >   0.65–0.76.
 > - **The age limit is still needed.** With links that hold a token and no age
 >   limit, births and deaths nearly stopped and the worlds froze
->   ([Chapter 78](mixed-brains-costly-units.md)).
+>   ([Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)).
 >
 > So the cap on links can be replaced: a link that holds a token is a rule
 > without a number, and the worlds that use it are healthier in the ways the cap

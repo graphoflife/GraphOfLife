@@ -1,6 +1,6 @@
 # How fast should brains change?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Does the rate at which brains change decide where evolution stops, or
 >   only how soon it gets there?
 > - Is there a rate past which selection can no longer keep what it has found?
@@ -11,14 +11,14 @@
 
 ## Why ask
 
-Evolution needs **variation** ([Chapter 1](what-this-notebook-is-about.md)).
+Evolution needs **variation** ([What this notebook is about](what-this-notebook-is-about.md)).
 In B2 a brain changes only when it is copied — into a newborn, or into a node
 its owner has just won — and then with probability *p* = 0.2
 ([How a brain changes](mutation.md);
 [`mutate_on_replication`](settings.md#mutate_on_replication)). One
 copy in five is a new genotype. Is that a lot or a little?
 
-[Chapter 50](why-evolution-stops.md) proposed that evolution stops because
+[Why evolution stops](why-evolution-stops.md) proposed that evolution stops because
 the game has an answer: a contest for nodes is best played at random, and
 once a population plays it well, nothing better exists to be selected. That
 reading makes a prediction about *p*. Theory offers three pictures of what the
@@ -43,9 +43,9 @@ repair — the second or third should.
 > [!info] Added later: the game is not solved
 > Since this was written, Experiment 16 showed that the brains of iteration
 > 2,000 are a little *worse* than those of iteration 500 in nine of ten B2
-> worlds ([Chapter 50](why-evolution-stops.md#what-the-twenty-worlds-did)),
+> worlds ([Why evolution stops](why-evolution-stops.md#what-the-twenty-worlds-did)),
 > and a strategy written by hand took half of one of those worlds
-> ([Chapter 51](strategies-written-by-hand.md)). Both speak against the
+> ([Strategies written by hand](strategies-written-by-hand.md)). Both speak against the
 > first picture and for the second: what the brains could do is not what they
 > end up doing, and damage seems to keep pace with repair. The thesis below
 > was written before either result and is kept as it was.
@@ -61,9 +61,9 @@ mutation–selection balance, in a world whose brains are nearly blind.
 
 In B2 that test is gone. Every agent dies at age 100, so births are held at
 one in a hundred agents per iteration whatever the brains want
-([Chapter 49](who-dies-and-why.md)). What the rate of change can still
-move is how good the brains become — and that is the question Part V needs
-answered.
+([Who dies, and why](who-dies-and-why.md)). What the rate of change can still
+move is how good the brains become — and that is the question the work on
+open-ended evolution needs answered.
 
 ## How the rates are compared
 
@@ -75,7 +75,7 @@ and the same ring; they part at the first copy one of them changes and the
 other does not.
 
 Two kinds of contest are played, both as in
-[Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) — a world whose
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) — a world whose
 agents each get a brain from one side or the other by a coin, mutation off,
 twenty iterations, and the share each side holds at the end:
 
@@ -85,7 +85,7 @@ twenty iterations, and the share each side holds at the end:
   Under the first picture every pair ties; under the second the slower rate
   wins, the more the further apart; under the third the fastest rate loses to
   all the others.
-- **Within a rate.** Each world plays its own eras, as in [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) — to see
+- **Within a rate.** Each world plays its own eras, as in [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) — to see
   when each rate stops, and whether the slowest has stopped at all by
   iteration 1,500.
 
@@ -98,19 +98,20 @@ agent, and the share of nodes kept by their own agent in a game.
 > [!quote] The thesis of Experiment 9, written down before any of its runs existed
 > **The claim.** How fast brains change decides how soon evolution stops, not where. In B2 at 10,000 tokens, with brains changed only when they are copied, the brains of iteration 1,500 tie whatever the rate of change they evolved under: for every pair of the mutation probabilities 0.05, 0.1, 0.2, 0.4 and 0.8, the brains of one rate hold between 45% and 55% of a world contested with the other's, in the median seed. And every rate has stopped by then: the brains of iteration 1,500 hold between 45% and 55% against those of iteration 1,000 of the same world.
 >
-> **Why it would be so.** Chapter 53 reads the end of evolution as the end of a game: a contest for nodes has a best way to play — be unpredictable — and once a population plays it, nothing better exists to be selected. If that is right, every world that varies enough to find it ends in the same place, and the rate of change only sets how fast it gets there (selection finds the answer). The two other pictures of Chapter 43 predict otherwise: in a mutation-selection balance (Haldane 1927) the brains of a faster-changing world carry more damage at any moment and lose to those of a slower one, the more the faster; past an error threshold (Eigen 1971) the fastest world loses what it learned altogether. No pilot has varied the rate in B2. In B1 two pilots at 10,000 tokens (seed 1, 600 iterations) found births of 2.0, 2.9 and 8.0 per hundred agents at 0.05, 0.2 and 0.8 — a balance in a world whose brains are nearly blind. In B2 births are held at one in a hundred by old age (Chapter 52), so the question moves from how often agents breed to how good their brains become.
+> **Why it would be so.** Chapter [53](why-evolution-stops.md) reads the end of evolution as the end of a game: a contest for nodes has a best way to play — be unpredictable — and once a population plays it, nothing better exists to be selected. If that is right, every world that varies enough to find it ends in the same place, and the rate of change only sets how fast it gets there (selection finds the answer). The two other pictures of Chapter [43](how-fast-should-brains-change.md) predict otherwise: in a mutation-selection balance (Haldane 1927) the brains of a faster-changing world carry more damage at any moment and lose to those of a slower one, the more the faster; past an error threshold (Eigen 1971) the fastest world loses what it learned altogether. No pilot has varied the rate in B2. In B1 two pilots at 10,000 tokens (seed 1, 600 iterations) found births of 2.0, 2.9 and 8.0 per hundred agents at 0.05, 0.2 and 0.8 — a balance in a world whose brains are nearly blind. In B2 births are held at one in a hundred by old age (Chapter [52](who-dies-and-why.md)), so the question moves from how often agents breed to how good their brains become.
 >
 > **It holds if:** For each of the ten pairs of rates, in each seed, the brains of iteration 1,500 of one rate play those of the other twice — once in each rate's world of that seed at iteration 1,500 (gol_tournament.contest); a pair's score is the mean share of the second rate's brains; the median over the ten seeds lies between 0.45 and 0.55 for all ten pairs. And in each of the five conditions, the median world's score of iteration 1,500 against iteration 1,000 (two contests) lies between 0.45 and 0.55.
 >
 > **It fails if:** A pair of rates outside 0.45 to 0.55 in the median seed: the rate of change decides how good the brains become — by damage that grows with the rate if the slower rate wins, by too little variation if the faster wins. Or a condition still improving after iteration 1,000 (above 0.55): that rate has not stopped.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
-("Chapter 53", "Chapter 43" and "Chapter 52" in the thesis are today's [Chapter 50](why-evolution-stops.md), this chapter, and [Chapter 49](who-dies-and-why.md): the chapters were renumbered on 2026-10-14 and again on 2026-10-15.)
 
 ## The runs
 
 <!-- runs E09 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **50 runs.** Every condition below is run once for every seed (1 to 10), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **mutation 0.05** — changes `mutation_probability` = 0.05; 10,000 tokens. Runs `B2-10000-bf74a9-s001` … `B2-10000-bf74a9-s010`.
@@ -119,7 +120,7 @@ agent, and the share of nodes kept by their own agent in a game.
 > - **mutation 0.4** — changes `mutation_probability` = 0.4; 10,000 tokens. Runs `B2-10000-56c74d-s001` … `B2-10000-56c74d-s010`.
 > - **mutation 0.8** — changes `mutation_probability` = 0.8; 10,000 tokens. Runs `B2-10000-fe3009-s001` … `B2-10000-fe3009-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E09`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E09`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | mutation 0.05 | mutation 0.1 | B2 | mutation 0.4 | mutation 0.8 | what it is |
@@ -258,12 +259,12 @@ any single seed was 0.57.
 ## The verdict
 
 > [!warning] Added later: these contests were 20 iterations long
-> Every tournament in this chapter was played with contests of 20 iterations.
+> Every tournament in this page was played with contests of 20 iterations.
 > In B2's worlds such contests miss what pays off over an agent's life of 100
 > iterations: in contests of 100 the brains of iteration 2,000 beat those of
 > 500 (0.73) where in contests of 20 they tied
-> ([Chapter 50](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
-> this chapter says that evolution stops, read: it stops *as far as a short
+> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
 > Played a lifetime long (T = 100, once in each era's world; five seeds of each
@@ -292,7 +293,7 @@ lose all it had learned, and at four copies in five changed it lost nothing.
 Every rate ended in the same place, as picture 1 says a world does when
 selection finds the answer.
 
-**But the place is not the answer.** [Chapter 51](strategies-written-by-hand.md)
+**But the place is not the answer.** [Strategies written by hand](strategies-written-by-hand.md)
 showed that better play exists in these very worlds. So what every rate
 reaches is the best that this search can find, not the best there is. That is
 a statement about the search, and the rate of change is the first thing about
@@ -303,10 +304,9 @@ offers evolution many more variants to choose from; a slow rate makes groups
 of clones eight agents strong, a crowd of the kind the raiders needed. Neither
 found better play. The limit is not the supply of variation. It is that the
 better play needs several new things at once, which no single change makes
-([Chapter 51](strategies-written-by-hand.md#what-it-teaches)).
+([Strategies written by hand](strategies-written-by-hand.md#what-it-teaches)).
 
-**The thesis was right for the wrong reason.** It was written to test Chapter
-50's reading, that the game has an answer and evolution finds it. The ties it
+**The thesis was right for the wrong reason.** It was written to test [Why evolution stops](why-evolution-stops.md)'s reading, that the game has an answer and evolution finds it. The ties it
 predicted came, but the reading has since fallen: the brains roll dice no game
 asks for, and hand-written teams beat them. The rate of change is not what
 keeps evolution from going on.

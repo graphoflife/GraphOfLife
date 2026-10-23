@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part III, the largest and the smallest: the richest agent and the
+the measurements of the baseline, the largest and the smallest: the richest agent and the
 best-connected, the poorest and the least connected, and the largest gain and
 loss of a game — how they move over a world's life, how long anyone holds
 first place, and how they grow with the size of a world.
@@ -138,7 +138,7 @@ def runs_of_reign(ids: np.ndarray) -> List[int]:
 
 #: The worlds of Experiment 8, from 800 to 409,600 tokens, run for 600 iterations each.
 SIZES = ("The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations "
-         "(Chapter 42; `python3 gol_lab.py run E08`)")
+         "([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`)")
 SIZE_WINDOW = (300, 599)
 
 

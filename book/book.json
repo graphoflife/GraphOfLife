@@ -85,7 +85,7 @@
   "pages": [
     {
       "id": "README",
-      "title": "How to read this book",
+      "title": "How to read this notebook",
       "file": "README.md",
       "topics": [
         "start"
@@ -93,11 +93,11 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-02",
-      "summary": "This book is a research programme, written down while it is carried out."
+      "summary": "This notebook is a research programme, written down while it is carried out."
     },
     {
       "id": "what-this-notebook-is-about",
-      "title": "What this book is about",
+      "title": "What this notebook is about",
       "file": "pages/what-this-notebook-is-about.md",
       "topics": [
         "start"
@@ -154,7 +154,7 @@
       "kind": "explanation",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What does a brain see, and what does it compute from it? How do its outputs become the decisions of [Chapter 3](03-one-iteration.md)? How is a brain inherited, and how does it change?"
+      "summary": "What does a brain see, and what does it compute from it? How do its outputs become the decisions of One iteration, step by step? How is a brain inherited, and how does it change?"
     },
     {
       "id": "questioning-the-mechanics",
@@ -318,7 +318,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Brains change — this is the **variation** evolution needs (Chapter 1)."
+      "summary": "Brains change — this is the **variation** evolution needs (What this notebook is about)."
     },
     {
       "id": "extinction",
@@ -342,7 +342,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What is a settled baseline world, in numbers? What do the chapters of Part II, taken together, suggest about how it works? What changes when a world is ten times larger, and what does not?"
+      "summary": "What is a settled baseline world, in numbers? What do the pages on the baseline, taken together, suggest about how it works? What changes when a world is ten times larger, and what does not?"
     },
     {
       "id": "thirty-worlds",
@@ -354,7 +354,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Part II looks at one kind of world, the baseline B1, from every side."
+      "summary": "The study of the baseline looks at one kind of world, the baseline B1, from every side."
     },
     {
       "id": "a-worlds-life",
@@ -430,7 +430,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-14",
-      "summary": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of Chapter 46."
+      "summary": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of *How to tell a world that keeps evolving*."
     },
     {
       "id": "who-dies-and-why",
@@ -520,7 +520,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Every reproduction phase records every birth: the parent, the tokens it held, the tokens it gave, the candidates the child was joined to, and the connections the parent handed over (Chapter 3)."
+      "summary": "Every reproduction phase records every birth: the parent, the tokens it held, the tokens it gave, the candidates the child was joined to, and the connections the parent handed over (One iteration, step by step)."
     },
     {
       "id": "where-do-the-tokens-go",
@@ -596,7 +596,7 @@
       "kind": "experiment",
       "status": "planned",
       "added": "2026-10-03",
-      "summary": "No coalitions: allow_revolutions off, against the baseline runs of Chapter 10."
+      "summary": "No coalitions: allow_revolutions off, against the baseline runs of *A world's life*."
     },
     {
       "id": "gini-coefficient",
@@ -669,7 +669,7 @@
       "kind": "overview",
       "status": "analysed",
       "added": "2026-10-17",
-      "summary": "What the book knows about where tokens go: the budget of a game, the even split and where tokens come to rest, the downhill drain, how little goes round beyond chance, the groups tokens stay in, and the estate of the dead."
+      "summary": "What the notebook knows about where tokens go: the budget of a game, the even split and where tokens come to rest, the downhill drain, how little goes round beyond chance, the groups tokens stay in, and the estate of the dead."
     },
     {
       "id": "how-the-game-is-played",
@@ -730,7 +730,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "Loops of flow measured in every world the book has made: B1's flow goes round and B2's runs one way, decided by whether unused links lapse; the longest loop is as long as the world is wide."
+      "summary": "Loops of flow measured in every world the notebook has made: B1's flow goes round and B2's runs one way, decided by whether unused links lapse; the longest loop is as long as the world is wide."
     },
     {
       "id": "home-stake",
@@ -743,7 +743,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "In the game every agent stakes all its tokens on its **candidates**: its own node and its neighbours' nodes (Chapter 3)."
+      "summary": "In the game every agent stakes all its tokens on its **candidates**: its own node and its neighbours' nodes (One iteration, step by step)."
     },
     {
       "id": "token-flow",
@@ -755,7 +755,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "In every game every agent stakes all its tokens on itself and its neighbours (Chapter 3)."
+      "summary": "In every game every agent stakes all its tokens on itself and its neighbours (One iteration, step by step)."
     },
     {
       "id": "lightning",
@@ -869,7 +869,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How do an agent's tokens grow with its connections? Is that the resting state of the even split ([Chapter 29](29-where-the-tokens-flow.md))? How closely knit is the neighbourhood of a well-connected agent? To whom are the well-connected joined?"
+      "summary": "How do an agent's tokens grow with its connections? Is that the resting state of the even split (Where the tokens flow)? How closely knit is the neighbourhood of a well-connected agent? To whom are the well-connected joined?"
     },
     {
       "id": "the-geometry-of-a-world",
@@ -1095,7 +1095,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-09",
-      "summary": "How does a line take over a world ten times the size: ten times slower, as chance would, about as fast, as a better brain in a well-mixed world would, or at the pace of a front that has twice as far to go? Is a world of 100,000 tokens ten copies of a world of 10,000, or does anything appear only at size: longer-lived regions, coexisting lines, structure that a small world has no room for? Do the measures of space of Part II — dimension, correlation length, the width of a world — read the same at ten times the size?"
+      "summary": "How does a line take over a world ten times the size: ten times slower, as chance would, about as fast, as a better brain in a well-mixed world would, or at the pace of a front that has twice as far to go? Is a world of 100,000 tokens ten copies of a world of 10,000, or does anything appear only at size: longer-lived regions, coexisting lines, structure that a small world has no room for? Do the measures of space of the baseline's study — dimension, correlation length, the width of a world — read the same at ten times the size?"
     },
     {
       "id": "what-folds-a-world",
@@ -1108,7 +1108,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-17",
-      "summary": "Chapter 24's rulers on B2 and every world since: B2 is nearly a small world; every B2 world starts as a space and folds when its first generation dies, because death with mending folds it; without old age or mending, or with lapsing links, worlds keep their room, and the estates to the newborns or the parents make a space of about three dimensions."
+      "summary": "*How many dimensions does a world have?*'s rulers on B2 and every world since: B2 is nearly a small world; every B2 world starts as a space and folds when its first generation dies, because death with mending folds it; without old age or mending, or with lapsing links, worlds keep their room, and the estates to the newborns or the parents make a space of about three dimensions."
     },
     {
       "id": "dimensions-at-scale",
@@ -1119,7 +1119,7 @@
       "kind": "study",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "The measures of Chapter 24 on the worlds of 100,000 tokens (Chapter 60): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (Chapter 42)."
+      "summary": "The measures of *How many dimensions does a world have?* on the worlds of 100,000 tokens (*Worlds of 100,000 tokens*): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (*How does a world's size follow its tokens?*)."
     },
     {
       "id": "which-properties-have-no-scale",
@@ -1130,7 +1130,7 @@
       "kind": "study",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of Chapter 42, whose share of a world has the same distribution at every size."
+      "summary": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of *How does a world's size follow its tokens?*, whose share of a world has the same distribution at every size."
     },
     {
       "id": "local-rules-only",
@@ -1141,7 +1141,7 @@
       "kind": "experiment",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "The three rules that reach across a world, each made local: a piece that separates lives on, the tokens of the dead go to their former neighbours, and every agent draws its random numbers from a stream of its own (Chapter 7)."
+      "summary": "The three rules that reach across a world, each made local: a piece that separates lives on, the tokens of the dead go to their former neighbours, and every agent draws its random numbers from a stream of its own (*Physical inspiration*)."
     },
     {
       "id": "how-far-does-a-difference-travel",
@@ -1152,7 +1152,7 @@
       "kind": "experiment",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of Chapter 7, measured. Needs the local random numbers of Chapter 63."
+      "summary": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of *Physical inspiration*, measured. Needs the local random numbers of *Local rules only*."
     },
     {
       "id": "a-source-and-a-sink",
@@ -1163,7 +1163,7 @@
       "kind": "experiment",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "A world with a flow running through it: tokens that are spent when used and slowly renewed, or a few nodes that release tokens and a way for tokens to leave. What forms in the flow? (Chapter 7; research/Research.md §4.3.)"
+      "summary": "A world with a flow running through it: tokens that are spent when used and slowly renewed, or a few nodes that release tokens and a way for tokens to leave. What forms in the flow? (*Physical inspiration*; research/Research.md §4.3.)"
     },
     {
       "id": "particles",
@@ -1174,7 +1174,7 @@
       "kind": "experiment",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "Patterns that persist while what carries them changes: tokens bound in loops, groups that outlast their members, local beats in the flow of tokens (Chapter 7)."
+      "summary": "Patterns that persist while what carries them changes: tokens bound in loops, groups that outlast their members, local beats in the flow of tokens (*Physical inspiration*)."
     },
     {
       "id": "correlation-function",
@@ -1283,7 +1283,7 @@
       ],
       "status": "ready",
       "added": "2026-10-21",
-      "summary": "Experiments 36 and 37: the floor of Chapter 101 (a child never poorer than its parent's neighbours' median) in plain B2, whose least child is ten tokens, and in B1, whose least child is one: idle in one, binding in the other?"
+      "summary": "Experiments 36 and 37: the floor of *Births as rich as the neighbours* (a child never poorer than its parent's neighbours' median) in plain B2, whose least child is ten tokens, and in B1, whose least child is one: idle in one, binding in the other?"
     },
     {
       "id": "how-alike-the-agents-are",
@@ -1361,7 +1361,7 @@
       "kind": "experiment",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "A better control than decisions by chance (Chapter 41): every decision drawn at random from the distribution of that decision in the settled baseline worlds — first unconditionally, then given the agent's own tokens and connections. If a world of such agents looks like the baseline, what the brains add is their average, not what they respond to."
+      "summary": "A better control than decisions by chance (*Do the brains matter?*): every decision drawn at random from the distribution of that decision in the settled baseline worlds — first unconditionally, then given the agent's own tokens and connections. If a world of such agents looks like the baseline, what the brains add is their average, not what they respond to."
     },
     {
       "id": "how-different-are-the-agents",
@@ -1461,7 +1461,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What is the baseline world, now that it has been measured every way? Where does it stand on the ladder of [Chapter 1](01-what-this-book-is-about.md)? What stands in the way of open-ended evolution, and which changes to the rules could remove it?"
+      "summary": "What is the baseline world, now that it has been measured every way? Where does it stand on the ladder of What this notebook is about? What stands in the way of open-ended evolution, and which changes to the rules could remove it?"
     },
     {
       "id": "how-to-tell-a-world-that-keeps-evolving",
@@ -1539,7 +1539,7 @@
       ],
       "status": "draft",
       "added": "2026-10-09",
-      "summary": "Have the agents simply not had the time to learn to cooperate? What does a world do over a hundred thousand iterations, thirty times longer than any world of this book has lived? Does a world settle, or does it keep wandering? Does anything appear late that was not there early? How can a run that lasts a month be watched, so that it stops when something goes wrong and says so when something stands out?"
+      "summary": "Have the agents simply not had the time to learn to cooperate? What does a world do over a hundred thousand iterations, thirty times longer than any world of this notebook has lived? Does a world settle, or does it keep wandering? Does anything appear late that was not there early? How can a run that lasts a month be watched, so that it stops when something goes wrong and says so when something stands out?"
     },
     {
       "id": "open-ended-test",
@@ -1565,7 +1565,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-15",
-      "summary": "A cross-time tournament (Chapter 46) compares a world's brains with its own past."
+      "summary": "A cross-time tournament (How to tell a world that keeps evolving) compares a world's brains with its own past."
     },
     {
       "id": "strategies-written-by-hand",
@@ -1590,7 +1590,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-19",
-      "summary": "Chapter 51's raider set by hand into the weights of a B2 brain: 12 of its 16 units play the rule in every decision of 62,114 situations but eight, and planted in the raider's place the brain takes the same worlds. A proof that no B2 brain of any size can pass news of a third agent in a message, so the factory's pipeline is out of reach, and the smallest change that would open it: a message to itself that pools what it says to everyone."
+      "summary": "*Strategies written by hand*'s raider set by hand into the weights of a B2 brain: 12 of its 16 units play the rule in every decision of 62,114 situations but eight, and planted in the raider's place the brain takes the same worlds. A proof that no B2 brain of any size can pass news of a third agent in a message, so the factory's pipeline is out of reach, and the smallest change that would open it: a message to itself that pools what it says to everyone."
     },
     {
       "id": "how-large-a-crowd-a-raider-needs",
@@ -1621,7 +1621,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-19",
-      "summary": "Experiment 30: raiders planted in B2's five worlds played on, at 500, 2,000, 5,000 and 10,000. The door closed (15, 4, 0 and 0 of 15 took hold) but not by a defence: residents hardly fought the late raiders, which could not raid at all, because the patches they started from had grown poorer than the three tokens a raid needs. A world of many small agents shuts out lone raiders (and, Chapter 102 found later, crews too)."
+      "summary": "Experiment 30: raiders planted in B2's five worlds played on, at 500, 2,000, 5,000 and 10,000. The door closed (15, 4, 0 and 0 of 15 took hold) but not by a defence: residents hardly fought the late raiders, which could not raid at all, because the patches they started from had grown poorer than the three tokens a raid needs. A world of many small agents shuts out lone raiders (and, *A crew of raiders* found later, crews too)."
     },
     {
       "id": "a-crew-of-raiders",
@@ -1680,7 +1680,7 @@
       "kind": "experiment",
       "status": "planned",
       "added": "2026-10-09",
-      "summary": "A large world of agents that decide as the average evolved agent does (Chapter 43), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
+      "summary": "A large world of agents that decide as the average evolved agent does (*Brains replaced by their average*), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
     },
     {
       "id": "invasion-test",
@@ -1693,7 +1693,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-15",
-      "summary": "A cross-time tournament (Chapter 46) asks whether a world's later brains beat its earlier ones."
+      "summary": "A cross-time tournament (How to tell a world that keeps evolving) asks whether a world's later brains beat its earlier ones."
     },
     {
       "id": "who-helps-whom",
@@ -1705,7 +1705,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "Every chapter that looked for cooperation, side by side: where help exists, why so little, what was tried to make it pay, and what would have to change."
+      "summary": "Every page that looked for cooperation, side by side: where help exists, why so little, what was tried to make it pay, and what would have to change."
     },
     {
       "id": "do-agents-cooperate",
@@ -1780,7 +1780,7 @@
       "kind": "overview",
       "status": "analysed",
       "added": "2026-10-18",
-      "summary": "What the book's rules do together rather than alone (batches Y, W, X, T, U and V): many rules change sign or size in company; revolutions and gifts are details in B2, handover and lapsing links reshape the network everywhere, the rules of birth set a world's size; evolution goes on in nearly every combination on B2, and no switch makes it go on in B1; and the worlds that are spaces pay for the room with poverty, flatness or cuts."
+      "summary": "What the notebook's rules do together rather than alone (batches Y, W, X, T, U and V): many rules change sign or size in company; revolutions and gifts are details in B2, handover and lapsing links reshape the network everywhere, the rules of birth set a world's size; evolution goes on in nearly every combination on B2, and no switch makes it go on in B1; and the worlds that are spaces pay for the room with poverty, flatness or cuts."
     },
     {
       "id": "the-switches-the-world-was-built-with",
@@ -1792,7 +1792,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-15",
-      "summary": "The original algorithm's own switches, judged for open-ended evolution with the tournaments of Chapter 46: revolutions on and off, gifts, connections that must be used, estates shared by wealth — in B1 and in B2."
+      "summary": "The original algorithm's own switches, judged for open-ended evolution with the tournaments of *How to tell a world that keeps evolving*: revolutions on and off, gifts, connections that must be used, estates shared by wealth — in B1 and in B2."
     },
     {
       "id": "rules-without-numbers",
@@ -1868,7 +1868,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-17",
-      "summary": "Eight of the book's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2. On B1 (batch V) few switches stand out against the pairs, and none makes its evolution go on."
+      "summary": "Eight of the notebook's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2. On B1 (batch V) few switches stand out against the pairs, and none makes its evolution go on."
     },
     {
       "id": "revolutions-with-every-other-rule",
@@ -2004,7 +2004,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-18",
-      "summary": "Meta X's candidates — worlds that met every mark with diverse agents at iteration 1,000 — played on to 10,000: five of nineteen held, eleven fell back (most into B2's poverty), three died out on the way; diversity wore off, no rich world stayed a space, evolution slowed. Experiment 20 shows the lab plays a pilot's world game for game."
+      "summary": "*Healthy and rich*'s candidates — worlds that met every mark with diverse agents at iteration 1,000 — played on to 10,000: five of nineteen held, eleven fell back (most into B2's poverty), three died out on the way; diversity wore off, no rich world stayed a space, evolution slowed. Experiment 20 shows the lab plays a pilot's world game for game."
     },
     {
       "id": "five-more-seeds-for-the-rules-that-held",
@@ -2113,7 +2113,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-02",
-      "summary": "Every experiment in this book is sized by what it costs: the hours a computer spends on it, the memory a run needs, and the disk its frames take."
+      "summary": "Every experiment in this notebook is sized by what it costs: the hours a computer spends on it, the memory a run needs, and the disk its frames take."
     },
     {
       "id": "what-goes-with-what",
@@ -2137,7 +2137,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "Every lab experiment and pilot batch with its settings, how far it ran, the chapter that reports it, and which measures have been taken on it — made from the records."
+      "summary": "Every lab experiment and pilot batch with its settings, how far it ran, the page that reports it, and which measures have been taken on it — made from the records."
     },
     {
       "id": "frames-and-stats",
@@ -2150,7 +2150,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Everything the book shows is computed from two kinds of record that every run writes into its folder, `GraphOfLifeRuns/<run>/`: **frames** and a **statistics file**."
+      "summary": "Everything the notebook shows is computed from two kinds of record that every run writes into its folder, `GraphOfLifeRuns/<run>/`: **frames** and a **statistics file**."
     },
     {
       "id": "viewer-colours",
@@ -2174,7 +2174,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-15",
-      "summary": "Most chapters read **runs**: worlds the lab made for an experiment, ten or thirty seeds of every condition, with a thesis written before the first of them existed."
+      "summary": "Most pages read **runs**: worlds the lab made for an experiment, ten or thirty seeds of every condition, with a thesis written before the first of them existed."
     },
     {
       "id": "median-and-quantiles",
@@ -2186,7 +2186,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "The book describes sets of numbers — thirty worlds' sizes, a million lifetimes — by a few **quantiles** rather than by their mean alone."
+      "summary": "The notebook describes sets of numbers — thirty worlds' sizes, a million lifetimes — by a few **quantiles** rather than by their mean alone."
     },
     {
       "id": "bands",
@@ -2210,7 +2210,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "To compare worlds — thirty seeds, or two conditions — each world has to be summed up in one number per statistic: *where does it settle?* This note gives the rule the book uses and why."
+      "summary": "To compare worlds — thirty seeds, or two conditions — each world has to be summed up in one number per statistic: *where does it settle?* This note gives the rule the notebook uses and why."
     },
     {
       "id": "spread-between-worlds",
@@ -2381,7 +2381,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Many figures in this book draw a straight line through a cloud of points, and many statistics of the viewer are the slope of such a line."
+      "summary": "Many figures in this notebook draw a straight line through a cloud of points, and many statistics of the viewer are the slope of such a line."
     },
     {
       "id": "power-law-fit",

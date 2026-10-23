@@ -5,27 +5,27 @@ and a poor one, an old town and new suburbs, the territory of one family
 and of another? In physics the question is answered by asking how far the
 state of one place reaches: whether two places some distance apart are more
 alike than two places drawn at random, and up to what distance. This
-chapter asks it of the worlds of Graph of Life, with distance counted in
+page asks it of the worlds of Graph of Life, with distance counted in
 steps along connections.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Are neighbours alike in their tokens, their age, their connections?
 > - How far does likeness reach — two steps, ten, across the world?
 > - How much of it comes from an agent's place in the network, and how much
 >   from closeness itself?
 > - Do kin live together, and in territories?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -87,10 +87,10 @@ means like beside like, a negative one unlike beside unlike.
 <!-- figure alike/neighbours -->
 ![Are neighbours alike?](../figures/alike/neighbours.svg)
 
-**Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world, the mean over five moments (after the games of iterations 500, 750, 1,000, 1,250 and 1,499); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero; the last column is the assortativity of [Chapter 34](how-properties-scale-together.md), taken of ln k instead of k.
+**Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world, the mean over five moments (after the games of iterations 500, 750, 1,000, 1,250 and 1,499); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero; the last column is the assortativity of [How properties scale together](how-properties-scale-together.md), taken of ln k instead of k.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -105,19 +105,19 @@ means like beside like, a negative one unlike beside unlike.
 - **Age: like.** **+0.14** (+0.15). The old sit among the old, the young among
   the young.
 - **Connections: unlike.** **−0.20** (−0.19): hubs sit among agents with few
-  connections, the assortativity of [Chapter 34](how-properties-scale-together.md).
+  connections, the assortativity of [How properties scale together](how-properties-scale-together.md).
 
 All three are small in the median world. Neighbours are alike or unlike only
 a little, and the worlds differ: the age correlation ranges from −0.09 to
 0.30 between them, and the worlds with a giant hub
-([Chapter 14](how-much-does-the-seed-decide.md)) reach −0.57 for tokens
+([How much does the seed decide?](how-much-does-the-seed-decide.md)) reach −0.57 for tokens
 and −0.65 for connections — a star is one rich, connected agent among
 thousands of poor leaves.
 
 ## Place, or closeness?
 
 A correlation between neighbours need not mean that neighbours influence
-each other. Tokens follow connections ([Chapter 34](how-properties-scale-together.md)),
+each other. Tokens follow connections ([How properties scale together](how-properties-scale-together.md)),
 and hubs sit among leaves. Then a rich hub will have poor leaves around it,
 and neighbours' tokens will be unlike without any agent doing anything to
 another. How much of the likeness is just **place**?
@@ -135,8 +135,8 @@ keeps how tokens follow connections and destroys everything else.
 
 Why would the old sit beside the old? A likely reason: agents die
 together, when a piece of the world is cut off
-([Chapter 36](how-a-world-breaks.md)), and they are born into their
-parents' neighbourhoods ([Chapter 22](how-the-network-grows.md)), so
+([How a world breaks](how-a-world-breaks.md)), and they are born into their
+parents' neighbourhoods ([How the network grows](how-the-network-grows.md)), so
 the young arrive where the old are gone, side by side. Agents that arrived
 together live together, as cohorts.
 
@@ -151,7 +151,7 @@ Now measure the same correlations between agents 2, 3, … 15 steps apart, the
 **How alike, how far apart.** For pairs of agents r steps apart, the correlation of their tokens, ages and connections (as in the figure above), for r = 1 to 15. For each world, pairs from breadth-first searches out of 150 agents drawn at random at each of the five moments; the coloured line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. Grey dashes: the median when each agent's tokens (or age) are first shuffled among the agents with about as many connections (1, 2, 3–4, 5–9, 10–49, 50 and more) — what an agent's place in the network explains without any closeness of its own.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -189,7 +189,7 @@ together?
 **Kin, near and far.** For pairs of agents r steps apart (as in the figure above), the share that carry the same genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: a straight falling line would be a relatedness that halves over a fixed number of steps. The line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. From 9 steps on, most worlds have no such pair at all, and none has a twentieth of what chance would give.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Chapter 9](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -201,7 +201,7 @@ together?
 
 Among agents one step apart, **9.2%** carry the same genotype, 290 times as
 many as among any two agents of the world (0.03%).
-[Chapter 38](do-agents-cooperate.md) will find the same, counting
+[Do agents cooperate?](do-agents-cooperate.md) will find the same, counting
 neighbours along connections rather than from agents drawn at random. Two
 steps apart it is 4.1% (100 times chance), three steps 0.5% (12 times), four
 steps 0.09% (2.6 times), and from **five steps on, fewer than chance would
@@ -219,22 +219,22 @@ the nodes it has just conquered, within two or three steps. There are no
 territories of genotypes. A genotype is a few agents, not a region.
 
 Two reasons keep it so. A genotype lasts about two iterations before a
-change renames it ([Chapter 18](genotypes-and-lineages.md)), so a
+change renames it ([Genotypes and lineages](genotypes-and-lineages.md)), so a
 cluster of one genotype has little time to grow. And more than half of all
-nodes change hands in every game ([Chapter 16](how-the-game-is-played.md)),
+nodes change hands in every game ([How the game is played](how-the-game-is-played.md)),
 so any territory is broken up as soon as it forms. Lines, which last much
 longer than genotypes, might well hold larger domains.
-[Chapter 60](worlds-of-100000-tokens.md) measures them, asking the same
+[Worlds of 100,000 tokens](worlds-of-100000-tokens.md) measures them, asking the same
 question of agents that share an ancestor some tens or hundreds of
 iterations back.
 
 > [!info] Added later: lines do hold regions
-> [Chapter 60](worlds-of-100000-tokens.md) measured them. Two neighbours
+> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) measured them. Two neighbours
 > share a family of 25 iterations back 99 times as often as chance would have
 > them, and the excess reaches about 7 steps; for families of 200 iterations
 > back, about 12 (4 to 17 across the worlds). A line's patch widens as a
 > walker spreads on these worlds, about as *t*^0.34, not as a front.
-> [Chapter 37](one-world-many-colours.md) draws such families in colour.
+> [One world, many colours](one-world-many-colours.md) draws such families in colour.
 > So a world has territories after all: of lines, not of genotypes.
 
 ## What this means
@@ -249,19 +249,19 @@ iterations back.
 - **A world is far from critical.** At a critical point the correlation
   length grows without bound and likeness falls off with distance only as a
   power. Here it is gone within three steps. That fits
-  [Chapter 32](power-laws-real-and-apparent.md), which finds no
+  [Power laws, real and apparent](power-laws-real-and-apparent.md), which finds no
   avalanches of every size and no 1/*f* noise. Whatever has no scale in
-  these worlds — and [Chapter 24](how-many-dimensions-does-a-world-have.md)
+  these worlds — and [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
   finds something — it is not what the agents hold, which is alike only
   within three steps.
 - **For open-ended evolution, there is no room for a second kind of world
   to form inside the first.** Matter in a vacuum, a cell in its medium, a
   species in its habitat: each is a region that differs from its
   surroundings and keeps differing. A world whose correlations die within
-  three steps has no such regions. Part VI looks for rules that would let
-  them form.
+  three steps has no such regions. [The physics of space](../README.md#space-and-dimension)
+  looks for rules that would let them form.
 
-To make every figure of this chapter: `python3 book_figures.py alike`.
+To make every figure of this page: `python3 book_figures.py alike`.
 
 <!-- turns -->
 ---

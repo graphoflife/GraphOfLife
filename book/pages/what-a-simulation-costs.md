@@ -1,6 +1,6 @@
 # What a simulation costs
 
-Every experiment in this book is sized by what it costs: the hours a
+Every experiment in this notebook is sized by what it costs: the hours a
 computer spends on it, the memory a run needs, and the disk its frames take.
 Those are measured, not guessed. Every iteration a run records carries its
 own wall-clock seconds, its processor seconds and the most memory its process
@@ -57,13 +57,13 @@ what the estimates assume. The figure is redrawn by `python3 gol_lab.py costs`.
 ## What the baseline set cost
 
 The thirty runs of Experiment 2 — 10,000 tokens, 3,000 iterations each, the
-worlds Parts II and III were first written from
-([Chapter 10](a-worlds-life.md) lists their settings) — took
+worlds the study of the baseline was first written from
+([A world's life](a-worlds-life.md) lists their settings) — took
 26 hours of computing, done in 7.2 hours on four workers, and fill 7.8 GB.
 No run needed more than 651 MB of memory. That is the unit the experiments
-of Parts II and III are sized in: one condition of thirty seeds at 10,000 tokens is
+on the baseline are sized in: one condition of thirty seeds at 10,000 tokens is
 about seven hours. The thirty worlds of 100,000 tokens that
-[Chapter 9](thirty-worlds.md) introduces, 1,500 iterations each, took
+[Thirty worlds](thirty-worlds.md) introduces, 1,500 iterations each, took
 211 hours and fill 58 GB.
 
 ## The rules for sizing an experiment
@@ -77,14 +77,14 @@ about seven hours. The thirty worlds of 100,000 tokens that
   1.1 seconds per iteration. If the number of agents grows in step with the
   tokens, 200,000 tokens cost about 22 — and it does: agents grow as the
   tokens to the power 1.00
-  ([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)).
+  ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 - Memory limits big worlds before time does: the lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
 - Disk is about 65 bytes per agent per iteration with every frame kept. The
   lab will not start a run the disk cannot hold.
 - The workers default to four, the machine's fast cores. More are possible
-  from the Book tab; the slower cores add less than a fast one each.
+  from the Research Notebook tab; the slower cores add less than a fast one each.
 
 <!-- turns -->
 ---

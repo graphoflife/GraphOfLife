@@ -47,7 +47,7 @@ Split τ = 11 tokens by the scores (2.0, 1.0, −0.5, 0.5):
 ## Where it is used
 
 In the game, when an agent **spreads** its stake: its τ tokens are split
-over its candidates by their stake scores ([Chapter 3](one-iteration.md)).
+over its candidates by their stake scores ([One iteration, step by step](one-iteration.md)).
 In the code it is `_apportion(weights, total)` in `GraphOfLifeSimple.py`.
 
 <!-- turns -->

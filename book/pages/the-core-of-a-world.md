@@ -3,12 +3,12 @@
 Peel away every agent with one connection or none, again and again, and what
 is left is a world's **core**: the agents that lie on a loop, or on a path
 between loops ([Core, trees and leaves](core-trees-leaves.md)).
-Everything peeled hangs off the core in trees. [Chapter 17](what-shape-does-the-network-take.md)
+Everything peeled hangs off the core in trees. [What shape does the network take?](what-shape-does-the-network-take.md)
 found that the core holds more than half the agents, and
-[Chapter 24](how-many-dimensions-does-a-world-have.md) measured how many
-dimensions a whole world has. This chapter asks the same of the core.
+[How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) measured how many
+dimensions a whole world has. This page asks the same of the core.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How much of a world is core — of its agents, and of its tokens?
 > - How many dimensions does the core have, by the same two rulers that
 >   measured the whole world? Is the core a space of its own, with the trees as
@@ -18,12 +18,12 @@ dimensions a whole world has. This chapter asks the same of the core.
 > - Who lives in the core, and who on the trees — and where do agents die?
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -81,14 +81,14 @@ The core is where a world can hold anything together. Every connection in it
 lies on a loop or on a path between loops. Cutting one on a loop splits
 nothing — there is another way round — but one on a path between loops is a
 bridge, and its loss splits the core in two ([Bridges](bridges.md)):
-in one world of [Chapter 36](how-a-world-breaks.md), a third to almost
+in one world of [How a world breaks](how-a-world-breaks.md), a third to almost
 half of the world hung on a single connection for 140 iterations. A tree is
 cut off whole by the loss of the one connection that holds it. Anything
 larger than an agent that might persist and evolve — a group of agents that
 holds together while its members come and go — can only live in the core.
 
 And the core is the better candidate for a **space**, in the sense of
-[Chapter 7](physical-inspiration.md). The trees branch: a tree of depth *d*
+[Physical inspiration](physical-inspiration.md). The trees branch: a tree of depth *d*
 can hold a number of agents that grows exponentially with *d*, and a ball of
 radius *r* around an agent swells with every tree it meets. Such growth makes a
 network look higher-dimensional than the space it hangs from. So if the worlds
@@ -108,7 +108,7 @@ agents and tokens are counted in the three parts:
 **Core, trees and leaves.** At the start of the game of every 25th iteration of the 30 worlds: the share of the agents (left) and of the tokens (right) in the core, on the hanging trees (agents with two connections or more that the peeling removes), and on leaves (agents with one connection). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2·t` (the start of the game of t) and frame `2·t + 1` (after it), `gol_store.read_frame`.
 >
@@ -121,7 +121,7 @@ agents and tokens are counted in the three parts:
 Over the settled stretch the core holds **60%** of the agents in the median
 world (the middle half of the worlds between 56% and 63%), the hanging trees
 7.5% and the leaves 32%. These are counted at the start of a game, just after
-the births; [Chapter 17](what-shape-does-the-network-take.md) counts after
+the births; [What shape does the network take?](what-shape-does-the-network-take.md) counts after
 the game, when the core holds 57% and the leaves 35%. The core holds more of
 the tokens than of the agents — **73%** — and the leaves less: 20% of the
 tokens on 32% of the agents. The shares settle within the first hundred
@@ -139,7 +139,7 @@ from:
 **The trees that hang off the core.** Left: of all agents off the core at the start of the games of every 25th iteration from 500 on, pooled over the worlds, the share at each number of steps from the core, on a logarithmic axis: a straight falling line is a share that shrinks by the same factor with every step. Right: every 25 iterations, the number of agents hanging from the core agent that holds the most, the steps from the core to the farthest agent, and the mean number hanging from a core agent that holds any. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2·t` (the start of the game of t) and frame `2·t + 1` (after it), `gol_store.read_frame`.
 >
@@ -174,7 +174,7 @@ core that the 3-core no longer holds, and so on — a world as an onion:
 **A world as an onion.** An agent's core number is the largest k such that it belongs to the k-core: what is left when every agent with fewer than k connections is removed, again and again. Core number 1 is everything peeled to reach the 2-core (trees and leaves), 2 the agents of the 2-core that the 3-core no longer holds, and so on. Left: the share of agents with each core number, at the start of every 25th game from 500 on, pooled over the worlds. Right: the deepest core number in a world every 25 iterations; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2·t` (the start of the game of t) and frame `2·t + 1` (after it), `gol_store.read_frame`.
 >
@@ -203,7 +203,7 @@ more than a tree. All of those loops are in the core:
 **Loops, per agent and per core agent.** Every 25 iterations at the start of the game: the number of independent loops of a world — connections minus agents plus one, its cycle rank ([Loops](loops.md)) — divided by its agents and by the agents of its core, which holds every loop; and the mean number of connections a core agent has to other core agents. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2·t` (the start of the game of t) and frame `2·t + 1` (after it), `gol_store.read_frame`.
 >
@@ -230,7 +230,7 @@ Which part an agent is in at the start of a game, and what it has:
 **Who lives where.** At the start of the games of every 25th iteration from 500 on: for the agents of the core, of the trees and the leaves, the share no longer alive after that game, their mean tokens, and their mean age. One dot per world; the bar is the median.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2·t` (the start of the game of t) and frame `2·t + 1` (after it), `gol_store.read_frame`.
 >
@@ -248,11 +248,11 @@ the tree agents and 2.7% of the leaves. Hanging from the world by a single
 connection does not make a leaf more likely to die. A tree is cut off whole
 by the loss of one connection, but agents in the core are lost in other ways
 just as often: by starving, and by whole parts of the core going quiet at
-once ([Chapter 36](how-a-world-breaks.md)).
+once ([How a world breaks](how-a-world-breaks.md)).
 
 ## How many dimensions the core has
 
-The two rulers of [Chapter 24](how-many-dimensions-does-a-world-have.md)
+The two rulers of [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
 measure a network's dimension: from how the number of agents within *r*
 steps grows with *r* (balls), and from how often a random walk is back where
 it started after *t* steps (walks). Both, on the whole world, on its core
@@ -262,15 +262,15 @@ connections per agent:
 <!-- figure core/dimension -->
 ![How many dimensions the core has](../figures/core/dimension.svg)
 
-**How many dimensions the core has.** The two rulers of [Chapter 24](how-many-dimensions-does-a-world-have.md) — the local dimension from how balls grow, and the spectral dimension from how a random walk spreads — on the 30 worlds after their last game (blue), on their cores alone (green), and on their random twins (red); each line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. Yellow: the cores of the three worlds of 409,600 tokens of [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md).
+**How many dimensions the core has.** The two rulers of [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) — the local dimension from how balls grow, and the spectral dimension from how a random walk spreads — on the 30 worlds after their last game (blue), on their cores alone (green), and on their random twins (red); each line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. Yellow: the cores of the three worlds of 409,600 tokens of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`. The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read each run's last frame; build its network from `edges`; its core by peeling; its random twin by `book_graph.degree_preserving` (seed 23).
-> 2. Each network's largest piece, measured as in [Chapter 24](how-many-dimensions-does-a-world-have.md) (`book_chapters.space.measure`).
+> 2. Each network's largest piece, measured as in [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) (`book_chapters.space.measure`).
 >
 > **To make it again:** `python3 book_figures.py core`.
 <!-- /figure -->
@@ -282,16 +282,16 @@ the sense of a space, since a random network's balls grow exponentially and
 their reading only rises with *r*. The core of a world is a space as the
 world is — between two and three dimensions by balls, a little under two by
 walks — and a little lower by balls than the world: the trees inflate how
-fast a ball grows, by about 0.3 dimensions, as this chapter supposed — they
+fast a ball grows, by about 0.3 dimensions, as this page supposed — they
 add agents to every ball without adding a direction to move in. The random
 walk is hardly affected: it spends a few steps in a tree and comes back.
 
 The size of a world matters more than its trees. In the worlds of 10,000
 tokens the core reads 2.0 by balls (the whole world 2.3), and in the three
-worlds of 409,600 tokens of [Chapter 42](how-does-a-worlds-size-follow-its-tokens.md),
+worlds of 409,600 tokens of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md),
 about 42,000 core agents each, 2.7 over radii 3 to 14 (the whole world 3.3),
 and 3.1 at radii 3 to 6. By walks the cores read 1.6, 1.9 and 1.5. The core's dimension by balls grows with the world, as
-the world's does, and has not settled at any of these sizes. Chapter 61,
+the world's does, and has not settled at any of these sizes. *Dimensions at scale*,
 planned (see [the contents](../README.md)), is to follow it further.
 
 ## Over a world's life
@@ -302,10 +302,10 @@ the whole world, its core and its 3-core:
 <!-- figure core/over-life -->
 ![The core's dimension over a world's life](../figures/core/over-life.svg)
 
-**The core's dimension over a world's life.** After the games of iterations 500, 750, 1,000, 1,250 and 1,499 of the 30 worlds: each ruler's typical reading — the median of its values over the scales of [Chapter 24](how-many-dimensions-does-a-world-have.md)'s plateau — on the whole world, on its 2-core and on its 3-core (what is left when agents with fewer than three connections inside the core are peeled away too). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**The core's dimension over a world's life.** After the games of iterations 500, 750, 1,000, 1,250 and 1,499 of the 30 worlds: each ruler's typical reading — the median of its values over the scales of [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)'s plateau — on the whole world, on its 2-core and on its 3-core (what is left when agents with fewer than three connections inside the core are peeled away too). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2·t` (the start of the game of t) and frame `2·t + 1` (after it), `gol_store.read_frame`.
 >
@@ -343,11 +343,11 @@ all in the core. That the core dies as fast as the leaves — 2.7% in every
 game — means the core as a whole is not protected either. A part of the
 world that lasted would show as agents of the core that die less often than
 the rest; in these worlds there is none but the hubs, which die about half as
-often as other agents ([Chapter 21](do-the-rich-stay-rich.md)) — and a
+often as other agents ([Do the rich stay rich?](do-the-rich-stay-rich.md)) — and a
 hub is a place, not an individual: the brain on it changes in nearly every
-game ([Chapter 16](how-the-game-is-played.md)).
+game ([How the game is played](how-the-game-is-played.md)).
 
-To make every figure of this chapter: `python3 book_figures.py core`.
+To make every figure of this page: `python3 book_figures.py core`.
 
 <!-- turns -->
 ---

@@ -1,30 +1,30 @@
 # What the brains are like
 
-Every chapter so far has watched what the worlds do. This one opens the
+Every page so far has watched what the worlds do. This one opens the
 agents' heads. Each agent decides with a brain of 15,795 numbers
-([Chapter 4](the-brain.md)), and by the end of a run those numbers have
+([The brain](the-brain.md)), and by the end of a run those numbers have
 been copied, changed and selected for 1,500 iterations. What has that made
 of them? Do the brains react to what they see? What did selection change,
 and what did it leave alone?
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Does what a brain sees reach what it does?
 > - Which decisions did evolution change, and in which direction?
 > - Which of its inputs does a brain listen to — its own wealth, its
 >   neighbour's, the messages, or the noise?
 > - How different are the brains of one world from each other?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -81,7 +81,7 @@ both are given.
 A brain cannot be read like a text. Its 15,795 numbers mean nothing one by
 one. What it *does* can be tested, though, the way a physiologist tests a
 nerve: give it an input and measure the response. For every one of the
-thirty worlds, this chapter takes the world exactly as its last game left it, rebuilds every agent's view exactly as the engine does
+thirty worlds, this page takes the world exactly as its last game left it, rebuilds every agent's view exactly as the engine does
 (one column of 154 inputs per candidate, [What a brain sees](brain-inputs.md)),
 and runs the agent's own brain on it. Then it changes the inputs, or the
 brain, and runs it again.
@@ -134,7 +134,7 @@ of a thousandth raised 2.4 times is still a thousandth.
 
 What a nearly blind brain computes is set by its biases and by the average
 activity of its layers. It computes almost the same thing for every
-candidate and every situation. The rest of the chapter shows what that
+candidate and every situation. The rest of the page shows what that
 means for its decisions.
 
 ## What evolution changed
@@ -161,12 +161,12 @@ differently:
 - **Children.** A founder's brain would have a child in 69% of cases. An
   evolved brain would in **3.6%** (the worlds: 0.5% to 9%; 2.6% at 10,000
   tokens). That fits the 3.5 births per hundred agents per reproduction phase
-  of [Chapter 12](births-deaths-and-ages.md). Reproduction has been
+  of [Births, deaths and ages](births-deaths-and-ages.md). Reproduction has been
   selected nearly away.
 - **Spreading the stake.** A founder's brain spreads its tokens over its
   candidates half the time and goes all in on one the other half. An evolved
   brain spreads in **98%** of cases. That fits the 98% of
-  [Chapter 16](how-the-game-is-played.md).
+  [How the game is played](how-the-game-is-played.md).
 - **Splitting evenly.** In the median world, **42%** of agents give every
   candidate a score of zero or below (the founders' brains, on the same
   inputs, 49%: this is not something selection made). The rules then split their tokens
@@ -180,7 +180,7 @@ The outputs behind these decisions show where selection pushed:
 <!-- figure minds/outputs -->
 ![Where selection pushed](../figures/minds/outputs.svg)
 
-**Where selection pushed.** One dot per world: the mean, over its agents and their columns, of each of the brain's outputs that make decisions ([Chapter 4](the-brain.md)). A founder's brain averages 0 on every one of them (the dashed line). A child's share is f(a, b), the share of the positive part of a in the positive parts of a and b ([The share function](share-function.md)): a below 0 and b above it means no child. Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two outputs is larger.
+**Where selection pushed.** One dot per world: the mean, over its agents and their columns, of each of the brain's outputs that make decisions ([The brain](the-brain.md)). A founder's brain averages 0 on every one of them (the dashed line). A child's share is f(a, b), the share of the positive part of a in the positive parts of a and b ([The share function](share-function.md)): a below 0 and b above it means no child. Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two outputs is larger.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline worlds that lived to the end.
@@ -194,7 +194,7 @@ The outputs behind these decisions show where selection pushed:
 <!-- /figure -->
 
 Each decision of a brain is read from a pair of outputs, or from one
-([Chapter 4](the-brain.md)). A founder's brain averages 0 on every one
+([The brain](the-brain.md)). A founder's brain averages 0 on every one
 of them. In the evolved worlds:
 
 - the two outputs of **a child's share**, *a* and *b*, sit at −0.53 and
@@ -204,7 +204,7 @@ of them. In the evolved worlds:
 - **spread** beats **all in**, +0.61 against −0.45;
 - the two outputs of the **revolutionary share** sit at +0.64 and −0.61,
   the first above 0 and the second below it in every world, so nearly every
-  staked token is marked revolutionary (97%, [Chapter 16](how-the-game-is-played.md));
+  staked token is marked revolutionary (97%, [How the game is played](how-the-game-is-played.md));
 - the outputs for joining a child to a candidate and for handing it
   connections lean, in most worlds, towards joining and keeping, but many
   worlds lean the other way. They are used only when a child is born, which
@@ -328,7 +328,7 @@ spread every number out to √1.40 times the founders' spread (the section
 above), and two brains drawn independently with that spread would be
 √1.40 × 0.176 = 0.21 apart. In the worlds of 10,000 tokens two agents of one
 world were 0.18 apart: in a smaller world two agents share an ancestor more
-recently ([Chapter 60](worlds-of-100000-tokens.md)).
+recently ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)).
 
 So the brains of one world are, in their numbers, nearly as different from
 each other as brains drawn independently. Yet they agree on every decision
@@ -355,31 +355,31 @@ depends on it.
   coming needs behaviour that depends on circumstances. A brain that reacts
   to who its neighbour is can find a new way to treat a new kind of
   neighbour, and that creates a new niche for someone else. A brain that
-  cannot see has only its constants to vary. [Meta II](what-the-measurements-say-about-open-ended-evolution.md) lists
+  cannot see has only its constants to vary. [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) lists
   the obstacles; this one comes first, because it limits all the others.
 - **The remedy is in the architecture.** Fewer layers, a squashing with a
   steeper slope, or larger starting weights would each give the brains a
   gain near 1 ([How a signal fades through layers](vanishing-signal.md)).
-  Chapter 53, *How big should a brain be?*, is planned for that and should
-  come early. [Chapter 41](do-the-brains-matter.md), which replaces the
+  *How big should a brain be?* is planned for that and should
+  come early. [Do the brains matter?](do-the-brains-matter.md), which replaces the
   brains by chance, should be read in this light: its brains do matter, but
   as constants.
 
 > [!info] Added later: brains that see
-> The remedy was tried in Part V, not in Chapter 53, which is still to come.
-> [Chapter 47](brains-that-see-and-worlds-that-break.md) gave the brains
+> The remedy was tried in B2, not in *How big should a brain be?*, which is still to come.
+> [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) gave the brains
 > one hidden layer of 16 — a founder's gain of about 0.2 — and the worlds
 > broke: at 5,000 tokens four of ten died out, and eight of ten when brains
 > change only when copied, against none of the baseline's.
-> [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md) confirmed that
+> [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) confirmed that
 > the blind brains' evolution is soon over: by iteration 50 they beat their
 > founders, and after that no era beats the one before. And
-> [Chapter 50](why-evolution-stops.md) finds that seeing brains, in worlds
+> [Why evolution stops](why-evolution-stops.md) finds that seeing brains, in worlds
 > that cannot break, stop improving within a few hundred iterations too; it
 > proposes that the limit lies in the game rather than in the brain, a
 > reading Experiment 16 is to test.
 
-To make every figure of this chapter: `python3 book_figures.py minds`.
+To make every figure of this page: `python3 book_figures.py minds`.
 
 <!-- turns -->
 ---

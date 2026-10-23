@@ -94,12 +94,12 @@ downhill more than chance: tokens running from some agents to others.
 A ring that is there in one stretch of games and gone in the next is an
 accident of those games. A ring that **persists** is a structure. Split the
 flow of two consecutive stretches (50 games each in
-[Chapter 58](gliders-and-who-helps-whom.md)), and over the connections both used
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md)), and over the connections both used
 take the correlation of their circulations, and of their gradient parts. A
 correlation near zero means each stretch's rings are new; a positive one,
 rings or slopes that come back on the same connections.
 
-## In this book
+## In this notebook
 
 `research/oee/checks/circulation.py` does all of the above for a lab run's
 recorded games, for the whole flow and separately for **gifts** (stakes that
@@ -107,8 +107,8 @@ did not take their target, so their tokens went to whoever held it) and
 **takeovers** (stakes that took it). Gifts going round would be generalised
 reciprocity: every agent gives to one and receives from another, like the
 armshells and necklaces of the Kula ring that Bronisław Malinowski described
-in *Argonauts of the Western Pacific* (1922). What the worlds of this book do
-instead is in [Chapter 58](gliders-and-who-helps-whom.md).
+in *Argonauts of the Western Pacific* (1922). What the worlds of this notebook do
+instead is in [Gliders, and who helps whom](gliders-and-who-helps-whom.md).
 
 ## What it can and cannot say
 

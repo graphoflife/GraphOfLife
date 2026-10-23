@@ -1,6 +1,6 @@
 # A crew of raiders
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Where the world is too poor for any lone raider, can raiders that pool
 >   their stakes take hold?
 > - Does the game itself reward groups, and the poorer the world, the more?
@@ -9,9 +9,9 @@
 
 ## Why ask
 
-The raider of [Chapter 51](strategies-written-by-hand.md) took half of
+The raider of [Strategies written by hand](strategies-written-by-hand.md) took half of
 some evolved worlds. In B2's worlds played on, its door then closed
-([Chapter 97](does-evolution-close-the-door.md)).
+([Does evolution close the door?](does-evolution-close-the-door.md)).
 - **Early:** at iteration 500 every patch of 5% took hold.
 - **Late:** at 5,000 and 10,000 none did, in 30 plantings.
 
@@ -38,7 +38,7 @@ be a reason for larger and larger groups that comes from the rules, not
 from anything added to them.
 
 This experiment plants crews of 5% where the lone raiders were planted in
-Chapter 97, in the same places, beside the lone raiders' and the controls'
+[Does evolution close the door?](does-evolution-close-the-door.md), in the same places, beside the lone raiders' and the controls'
 plantings, which it shares with that experiment.
 
 ## The thesis
@@ -57,14 +57,14 @@ plantings, which it shares with that experiment.
 ## The trials
 
 <!-- runs E33 -->
-> [!info] The trials behind this chapter
+> [!info] The trials behind this page
 > **135 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 300 iterations, from a world another run kept in its archive.
 >
 > - **crews** — 45 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 2,000, 5,000, 10,000; strategies crew; patches of 5% of the world; places 1, 2, 3.
 > - **lone raiders** — 45 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 2,000, 5,000, 10,000; strategies raider; patches of 5% of the world; places 1, 2, 3.
 > - **controls** — 45 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 2,000, 5,000, 10,000; strategies resident; patches of 5% of the world; places 1, 2, 3.
 >
-> To play these trials again: `python3 gol_lab.py run E33`, or ▶ in the Book tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+> To play these trials again: `python3 gol_lab.py run E33`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
 
 ## What the crews did
@@ -75,7 +75,7 @@ plantings, which it shares with that experiment.
 **Crews and lone raiders, planted in the same places.** Left: of the fifteen plantings at each era (five worlds, three places), how many took hold, lone raiders (violet) and crews (orange). Right: each place once, by the iteration the lone raiders' last agent died in and the crew's (300: still alive at the end). Below the dashed line the crew died first.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 33's 135 invasions (`python3 gol_lab.py run E33`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the crew's rule, the lone raider's ([Chapter 51](strategies-written-by-hand.md)'s) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are Experiment 30's own.
+> **Runs.** Experiment 33's 135 invasions (`python3 gol_lab.py run E33`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the crew's rule, the lone raider's ([Strategies written by hand](strategies-written-by-hand.md)'s) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are Experiment 30's own.
 >
 > **Data.** From each trial's `result.json`.
 >
@@ -89,7 +89,7 @@ plantings, which it shares with that experiment.
 **No crew took hold, at any era.**
 - **At 2,000,** where four of the fifteen lone raiders' plantings took hold
   (worlds 2 and 3, as in
-  [Chapter 97](does-evolution-close-the-door.md)), no crew did, not even
+  [Does evolution close the door?](does-evolution-close-the-door.md)), no crew did, not even
   in those places.
 - **At 5,000 and 10,000,** none of thirty did, as for the lone raiders.
 
@@ -109,7 +109,7 @@ before the lone raiders planted there: in 15 of 15 at 2,000, 14 at 5,000,
 **What became of the patches planted at 5,000 and 10,000.** The median over the thirty plantings at 5,000 and 10,000 of each kind: crews (orange), lone raiders (violet), controls (grey). Left: the patch's strategy's agents as a share of the patch planted (0 once it has died out). Right: their tokens per agent, over the plantings still alive.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 33's 135 invasions (`python3 gol_lab.py run E33`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the crew's rule, the lone raider's ([Chapter 51](strategies-written-by-hand.md)'s) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are Experiment 30's own.
+> **Runs.** Experiment 33's 135 invasions (`python3 gol_lab.py run E33`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, given the crew's rule, the lone raider's ([Strategies written by hand](strategies-written-by-hand.md)'s) or frozen copies of one patch member's brain (the control); the lone raiders' and the controls' plantings are Experiment 30's own.
 >
 > **Data.** From each trial's `result.json`.
 >
@@ -196,14 +196,14 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
 - and a stake that found no partner went to the stranger.
 
 > [!info] What these results cover (added 2026-10-21)
-> Every planting of this chapter was in B2's worlds, and three of the
+> Every planting of this page was in B2's worlds, and three of the
 > reasons the crews failed are B2's own rules: a home share that keeps a
 > one-token agent from staking (`keep_home`), a holder's stake that counts
 > one and a half times (`incumbency`), and old age at 100 (`max_age`), with
 > which a patch that cannot breed dies with its founders. The raiders also
 > carried B2's numbers, staking 70% and asking more than one and a half times
-> their target's tokens, until Chapter 104 made them read each world's own.
-> [Chapter 104](hand-written-strategies-in-b1.md) plants the same
+> their target's tokens, until [Hand-written strategies in B1](hand-written-strategies-in-b1.md) made them read each world's own.
+> [Hand-written strategies in B1](hand-written-strategies-in-b1.md) plants the same
 > strategies in B1, which has none of those rules.
 
 ## What it teaches
@@ -213,13 +213,13 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
   each raider choosing alone, about one stranger in ten drew a mob. A crew
   that pools its stakes would have to choose its target together, and that
   needs news about a third agent, which no message of a B2 brain carries
-  ([Chapter 94](what-a-brain-can-compute.md)).
+  ([What a brain can compute](what-a-brain-can-compute.md)).
 - **A raider written by hand is barren in a poor world.** Its rule asks for
   30 tokens before a child, and almost no agent of a late world holds that
-  many. [Chapter 97](does-evolution-close-the-door.md) saw the same in
+  many. [Does evolution close the door?](does-evolution-close-the-door.md) saw the same in
   its replays. A planted strategy that cannot breed lives only by taking
   nodes, each of which dies of age within a hundred iterations. So the
-  closed door of Chapter 97 says as much about the raider's own rule as
+  closed door of [Does evolution close the door?](does-evolution-close-the-door.md) says as much about the raider's own rule as
   about the world.
 - **The next rungs must breed as the world's own agents do.** That means a
   child as soon as an agent can give it the least child the world allows,

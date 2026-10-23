@@ -12,7 +12,7 @@ their neighbours not yet reached at distance 2; and so on, until every agent
 is reached. It takes time proportional to the number of agents plus the
 number of connections.
 
-## The estimate the book uses
+## The estimate the notebook uses
 
 The exact mean over every pair of agents needs a search from every agent:
 too slow for worlds of thousands of agents, every 25 iterations. So
@@ -37,7 +37,7 @@ Averaged over the settled life of each baseline world (iterations 500 to
 13.0 across the 26 worlds that lived to the end. A random network with the
 same number of agents *N* and mean degree *k̄* would have, by the usual rough
 estimate ln *N* / ln *k̄*, about 6.0
-([Chapter 17](what-shape-does-the-network-take.md)). The
+([What shape does the network take?](what-shape-does-the-network-take.md)). The
 founders' ring of seed 1 started at 4.4 ([The starting ring](starting-ring.md)).
 
 Since an agent can only stake on its neighbours, a token needs about ten

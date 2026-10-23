@@ -32,7 +32,7 @@ three picks the 2) to 9, and the middle 95% of them form the interval.
 
 ## For a difference
 
-To compare two conditions, the book bootstraps the **difference** of their
+To compare two conditions, the notebook bootstraps the **difference** of their
 means. If the runs are paired by seed, it resamples the paired differences
 *dᵢ* = *yᵢ* − *xᵢ*; otherwise it resamples each condition separately and
 subtracts. An interval that does not contain 0 means the data are hard to

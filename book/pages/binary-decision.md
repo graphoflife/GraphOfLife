@@ -42,7 +42,7 @@ erratic.
 
 The same idea is used for the stake: a pair of mode outputs decides whether
 an agent spreads its tokens over its candidates or puts them all on one
-([Chapter 3](one-iteration.md)).
+([One iteration, step by step](one-iteration.md)).
 
 ## Where it is used
 

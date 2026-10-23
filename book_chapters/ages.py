@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, the ages of a world: how old its agents are, how long they live, and
+the study of the baseline, the ages of a world: how old its agents are, how long they live, and
 how both change over a world's life.
 
 A frame lists every living agent's age — the iterations since it was born —
@@ -109,7 +109,7 @@ def hazard(birth: np.ndarray, last: np.ndarray, censored: np.ndarray, horizon: i
 
 
 # ---------------------------------------------------------------------------
-# The chapter: how ages and lifespans change over a world's life
+# The page: how ages and lifespans change over a world's life
 # ---------------------------------------------------------------------------
 
 LIFELINES = ("each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order "
@@ -257,7 +257,7 @@ def ages(ch: F.Chapter) -> None:
         caption=f"Of all agents born in each period of the {n} worlds' lives that were alive after at least one "
                 "game, the share that lived at least L iterations. A life is counted from the iteration of birth to the "
                 "last iteration after whose game the agent was alive, both included; lives still going at the end "
-                "of a run are counted as far as they went (Kaplan–Meier, as in Chapter 12). A period's line stops "
+                "of a run are counted as far as they went (Kaplan–Meier, as in [Births, deaths and ages](births-deaths-and-ages.md)). A period's line stops "
                 "at the longest life its agents could have had before the run ended. Both axes logarithmic.",
         recipe=recipe(W.runs_text(), LIFELINES,
                       ["For every agent, its birth iteration b and its last iteration alive d; d − b + 1 iterations "

@@ -1,20 +1,20 @@
-# Meta VI · Every world side by side
+# Every world side by side
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What does every simulation made so far look like when all of them are
 >   measured the same way?
 > - Along which directions do the worlds differ most?
 > - Which statistics do the settings decide, and which does the seed — the
 >   chance a world is born with?
-> - Which measures has the book applied to which kinds of world, and which
+> - Which measures has the notebook applied to which kinds of world, and which
 >   not yet?
 
-Until now each chapter measured the worlds of one experiment, or of a few. That
-is how experiments are read: one change against its control. But the book has
+Until now each page measured the worlds of one experiment, or of a few. That
+is how experiments are read: one change against its control. But the notebook has
 by now made **369 lab worlds** in fifteen experiments, and about a hundred
-pilot worlds besides, and each was measured only for what its own chapter
-asked. This chapter puts them all in one table and looks at them together. It
-is a meta chapter: it builds nothing new into the worlds, it gathers what is
+pilot worlds besides, and each was measured only for what its own page
+asked. This page puts them all in one table and looks at them together. It
+is a meta page: it builds nothing new into the worlds, it gathers what is
 there.
 
 ## One table for every world
@@ -89,7 +89,7 @@ The second component (14%) is how much a world breeds: births, the share of
 tokens given to children, handovers, and the long tail of degrees that
 breeding builds. It is spread wide only in one kind of world: the B1 worlds
 whose brains never change (yellow), some of which breed every agent every
-iteration and others not at all ([Chapter 41](do-the-brains-matter.md)).
+iteration and others not at all ([Do the brains matter?](do-the-brains-matter.md)).
 
 ## What the settings decide, and what the seed does
 
@@ -135,7 +135,7 @@ the tokens are spread over** (tokens per agent, the poorest, the cut-off and
 the starved) and how much a world breeds. Two worlds of the same rules can
 differ in these as much as two worlds of different rules, because they are
 set by what happens early and by chance. The same was seen inside one
-condition in [Appendix B](what-goes-with-what.md): half the differences
+condition in [What goes with what](what-goes-with-what.md): half the differences
 between thirty baseline worlds are the size of their largest hub.
 
 For open-ended evolution this is worth keeping in mind. The things
@@ -144,22 +144,22 @@ things left free are decided by chance, early, and then stay.
 
 ## What has been measured where
 
-The book's measures were each made for one question and applied to the worlds
+The notebook's measures were each made for one question and applied to the worlds
 that question was about. Gathered:
 
 | measure | lab worlds | pilot worlds |
 |---|---|---|
 | the ~95 recorded statistics, lightning among them | every run | the engine's pilots, from recorded games (new); the prototype's, their series |
-| flow modules ([Chapter 71](flow-modules.md)) | up to five seeds of every condition (new) | the engine's pilots (new) |
-| loops and the exact circulation, chains, help ([Chapter 58](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
-| lifetime contests between eras ([Chapter 50](why-evolution-stops.md)) | B2, through the long runs that go on from its worlds | every pilot batch |
-| correlations among agents ([Appendix B](what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab (new) | any run made on the server or in the browser (new) |
-| how different the agents are ([Chapter 70](how-different-are-the-agents.md)) | B1 and B2, over a world's life (new) | the long runs (new) |
-| exploitability ([Chapter 50](why-evolution-stops.md)) | Experiment 16 | — |
+| flow modules ([Flow modules: the groups tokens stay in](flow-modules.md)) | up to five seeds of every condition (new) | the engine's pilots (new) |
+| loops and the exact circulation, chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
+| lifetime contests between eras ([Why evolution stops](why-evolution-stops.md)) | B2, through the long runs that go on from its worlds | every pilot batch |
+| correlations among agents ([What goes with what](what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab (new) | any run made on the server or in the browser (new) |
+| how different the agents are ([How different are the agents?](how-different-are-the-agents.md)) | B1 and B2, over a world's life (new) | the long runs (new) |
+| exploitability ([Why evolution stops](why-evolution-stops.md)) | Experiment 16 | — |
 
 What is still missing: the lifetime contests for the lab's B1 worlds, whose
 runs keep no archives of their brains, and every measure for the worlds of
-the many experiments that ran at 5,000 tokens or fewer, which the book no
+the many experiments that ran at 5,000 tokens or fewer, which the notebook no
 longer makes.
 
 ## What this says
@@ -170,15 +170,15 @@ longer makes.
 - **The rules pin the play; the seed sets the population.** How agents stake is
   decided by the settings; how many agents the tokens are spread over, how
   much a world breeds and how many are cut off are decided by chance, early.
-- **Every measure the book has can now be taken of every world** that plays
+- **Every measure the notebook has can now be taken of every world** that plays
   the engine's game, lab or pilot, and the table that holds them is in the
-  book and in the Research tab.
+  notebook and in the Research tab.
 
 **Related notes:** [What a run records](frames-and-stats.md) ·
 [Between worlds and within them](between-and-within.md) ·
 [How many directions a cloud has](participation-ratio.md) ·
 [Spread between worlds](spread-between-worlds.md) ·
-[Appendix B · What goes with what](what-goes-with-what.md) ·
+[What goes with what](what-goes-with-what.md) ·
 [Lightning in every world](lightning-in-every-world.md)
 
 <!-- turns -->

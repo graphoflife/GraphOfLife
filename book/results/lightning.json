@@ -76,7 +76,7 @@
   },
   "exact": {
    "title": "A greedy count and an exact one",
-   "caption": "Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz\u2013Hodge decomposition of Chapter 58); up, the greedy loop count of a single game, averaged over the same thousand iterations.",
+   "caption": "Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz\u2013Hodge decomposition of [Gliders, and who helps whom](gliders-and-who-helps-whom.md)); up, the greedy loop count of a single game, averaged over the same thousand iterations.",
    "recipe": "**Runs.** The ten B2 worlds of Experiment 16 and the first ten B1 worlds of Experiment 2, iterations 1,000 to 2,000.\n\n**Data.** From `GraphOfLifeRuns/.pilots/circulation_20.json` (research/oee/checks/circulation.py) and each world's `cyclingShare`.\n\n1. Take each world's circulating share, the median over its twenty windows of 50 games.\n2. Take its mean greedy loop share over the same iterations.\n3. Draw one against the other.\n\n**To make it again:** `python3 book_figures.py lightning`."
   }
  }

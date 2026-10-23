@@ -1,6 +1,6 @@
 # Revolutions, with every other rule
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - In a game, smaller stakers may band together and take a node from its
 >   largest staker — a revolution. What becomes of a world without them,
 >   whatever its other rules?
@@ -14,8 +14,8 @@ largest single staker would otherwise win
 revolutions take most of the nodes that change hands, and without them B1
 becomes a world of mayflies; in B2 they won about one node in three hundred a
 game, and B2 with and without them were the same world
-([Chapter 54](the-switches-the-world-was-built-with.md)). But B2 itself is
-one world among many the book now plays. The author asked for revolutions in
+([The switches the world was built with](the-switches-the-world-was-built-with.md)). But B2 itself is
+one world among many the notebook now plays. The author asked for revolutions in
 combination (16 October 2026): batch W plays B2 without revolutions together
 with each of the other switches, two seeds each, 1,000 iterations — every
 world the fourth corner of a two-by-two whose other corners are B2, B2
@@ -81,7 +81,7 @@ change and brains that grow (0.72 and 0.85 each), half kept at home (0.72 and
 
 - **In B2's kind of world, revolutions are a detail** — with one exception:
   they are what keeps brains mixed at birth from filling their world. That
-  fits [Chapter 86](eight-switches-at-once.md), where no revolutions moved
+  fits [Eight switches at once](eight-switches-at-once.md), where no revolutions moved
   the share of poor agents by only 0.03 on average over sixteen worlds.
 - **Evolution does not need them**: without revolutions the later brains
   win in 42 of 48 worlds, about as often as in B2.
@@ -93,9 +93,9 @@ change and brains that grow (0.72 and 0.85 each), half kept at home (0.72 and
 
 **Related notes:** [How a coalition takes a node](revolution.md) ·
 [Every setting](settings.md#allow_revolutions) ·
-[Chapter 54 · The switches the world was built with](the-switches-the-world-was-built-with.md) ·
-[Chapter 82 · Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
-[Chapter 86 · Eight switches at once](eight-switches-at-once.md)
+[The switches the world was built with](the-switches-the-world-was-built-with.md) ·
+[Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
+[Eight switches at once](eight-switches-at-once.md)
 
 <!-- turns -->
 ---

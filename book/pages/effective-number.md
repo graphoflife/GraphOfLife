@@ -29,7 +29,7 @@ one, of order 2, weighs the common kinds most).
 
 Two genotypes one mutation apart may act exactly alike. Counting them as two
 kinds overstates diversity. That is why
-[Chapter 70](how-different-are-the-agents.md), *How different are the agents?*, groups brains into kinds **by what they do**, not by their weights: brains
+[How different are the agents?](how-different-are-the-agents.md) groups brains into kinds **by what they do**, not by their weights: brains
 whose decisions, in the same situations, differ no more than a brain differs
 from itself between two sets of random inputs, are one kind. The effective
 number of kinds of behaviour is then set beside the effective number of
@@ -42,7 +42,7 @@ nothing an agent does.
 the entropy of the shares — the Hill number of order 1, which weighs rare kinds
 a little more than the one above (order 2) does. Both are 1 for a single kind
 and n for n equally common ones; on a population with many rare kinds, 2^H is
-the larger. Where the book gives an effective number it says which.
+the larger. Where the notebook gives an effective number it says which.
 
 <!-- turns -->
 ---

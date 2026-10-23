@@ -51,7 +51,7 @@ $$
 so 46 seeds per condition. Turned around, with 30 seeds the smallest change
 found four times in five is Δ = (*z*₁ + *z*₂)·*c*·√(2/30) ≈ 0.12: 12%. In the
 worlds of 100,000 tokens, measured over their settled life, *c* is about 0.10,
-and 19 seeds are enough ([Chapter 14](how-much-does-the-seed-decide.md)).
+and 19 seeds are enough ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 
 ## Two lessons
 
@@ -64,7 +64,7 @@ and 19 seeds are enough ([Chapter 14](how-much-does-the-seed-decide.md)).
 ## In the code
 
 `seeds_needed` in `gol_analysis.py`;
-[Chapter 14](how-much-does-the-seed-decide.md) draws *n* against Δ.
+[How much does the seed decide?](how-much-does-the-seed-decide.md) draws *n* against Δ.
 
 <!-- turns -->
 ---

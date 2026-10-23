@@ -38,8 +38,8 @@ from vanishing.
 
 ## Where it is used
 
-[Chapter 22](how-the-network-grows.md) measures both kernels
-in the baseline worlds. [Chapter 32](power-laws-real-and-apparent.md)
+[How the network grows](how-the-network-grows.md) measures both kernels
+in the baseline worlds. [Power laws, real and apparent](power-laws-real-and-apparent.md)
 had proposed preferential attachment, reached by copying, as the source of
 the heavy tail of the connections.
 

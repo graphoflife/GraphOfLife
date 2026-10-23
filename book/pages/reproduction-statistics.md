@@ -2,7 +2,7 @@
 
 Every reproduction phase records every birth: the parent, the tokens it held,
 the tokens it gave, the candidates the child was joined to, and the
-connections the parent handed over ([Chapter 3](one-iteration.md)).
+connections the parent handed over ([One iteration, step by step](one-iteration.md)).
 The statistics of a phase-1 row summarise them.
 
 ## The fields
@@ -14,7 +14,7 @@ The statistics of a phase-1 row summarise them.
 | `reproTokenShare` | all tokens given to children ÷ all tokens in the world |
 | `meanChildLinks` | the mean number of candidates a child was joined to |
 | `handovers` | the number of connections parents handed to children |
-| `gifts`, `giftTokens`, `giftShare` | gifts of tokens — absent, since gifting is off in every run of this book |
+| `gifts`, `giftTokens`, `giftShare` | gifts of tokens — absent, since gifting is off in every run of this notebook |
 
 ## Two shares that answer different questions
 

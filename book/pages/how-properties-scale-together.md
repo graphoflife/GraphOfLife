@@ -5,28 +5,28 @@ triangles it is a corner of, how closely knit its neighbourhood is, how much
 its tokens change in a game. How does one grow with another? Every 25
 iterations, the viewer fits four **scaling relations** of the form *y* ≈ *a xᵇ*
 by least squares on the logarithms of all agents
-([Scaling relations](scaling-relations.md)). This chapter shows the
+([Scaling relations](scaling-relations.md)). This page shows the
 agents behind the four fits — and finds that one of the exponents means
 something quite different from what it seems to say.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - How do an agent's tokens grow with its connections? Is that the resting
->   state of the even split ([Chapter 29](where-the-tokens-flow.md))?
+>   state of the even split ([Where the tokens flow](where-the-tokens-flow.md))?
 > - How closely knit is the neighbourhood of a well-connected agent?
 > - To whom are the well-connected joined?
 > - Does the size of an agent's gains and losses grow with its wealth?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-where the thirty of 10,000 tokens this chapter was first written from differ,
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -83,10 +83,10 @@ both are given.
 <!-- figure scaling/tokens-degree -->
 ![Tokens against connections](../figures/scaling/tokens-degree.svg)
 
-**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Chapter 29](where-the-tokens-flow.md)).
+**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](where-the-tokens-flow.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -131,7 +131,7 @@ would report an exponent of **0.73**. The remaining gap, to 0.58, is the
 poorly connected holding a little more than their share (1.5 tokens per
 candidate at one connection, against 1.0 from five on).
 
-This is the most useful lesson of the chapter: **an exponent fitted to a
+This is the most useful lesson of the page: **an exponent fitted to a
 relation that is not a power law reports where most of the points are**, not
 a law. Here the law is simple — tokens proportional to connections plus one —
 and the exponent 0.6 is what it looks like through a log–log fit.
@@ -149,7 +149,7 @@ joined pairs.
 **How an agent's neighbourhood closes, by its connections.** Agents alive after the last game of the 30 worlds, in classes of their connections k. Left: the geometric mean (the mean of the logarithms, turned back) of the clustering coefficient — the share of pairs of an agent's neighbours that are joined to each other — of the agents with k ≥ 2 and clustering above 0. Right: the geometric mean of the number of triangles an agent is a corner of, over the agents in at least one. Red: least squares on the logarithms of all those agents (not of the class means); grey: the slopes −1 and 2 for comparison.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -170,7 +170,7 @@ share of joined neighbour pairs is a few in a thousand.
 A falling *C*(*k*) ∝ 1/*k* is the signature Ravasz and Barabási (2003) gave
 for **hierarchical** networks: small, tight groups inside larger, looser ones.
 The rules suggest how it comes about here. A hub gains connections through
-the children of its neighbours ([Chapter 32](power-laws-real-and-apparent.md)):
+the children of its neighbours ([Power laws, real and apparent](power-laws-real-and-apparent.md)):
 a child born to a neighbour *v* of the hub *h* and joined to both *v* and *h*
 closes the triangle (child, *v*, *h*). So each connection a hub gains this way
 comes with about one triangle — triangles in proportion to connections, and
@@ -184,7 +184,7 @@ clustering falling as 1/*k*.
 **Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](assortativity.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -199,7 +199,7 @@ An agent with one connection is, on average, joined to an agent with about
 average; with three, 140; from four to fifty, about 25 to 65; and the
 neighbours of hubs with a hundred connections or more have 7 to 8. The very
 large averages of the leaves come from the stars, whose centres hold
-thousands of leaves each ([Chapter 33](the-largest-and-the-smallest.md));
+thousands of leaves each ([The largest and the smallest](the-largest-and-the-smallest.md));
 at 10,000 tokens a leaf's neighbour had 163 connections on average. **Leaves
 hang on hubs, and hubs are surrounded by leaves**: the world is built of
 stars.
@@ -224,7 +224,7 @@ fraction of its wealth, |Δ| ∝ τ — Gibrat's law of proportionate growth
 **Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](scaling-relations.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -259,9 +259,9 @@ world's history.
   world, and they follow from two mechanisms — splitting stakes evenly and
   joining children to their parents' neighbours — that say nothing about what
   a brain computes. Structure that the rules alone fix is not where to look
-  for evolution; [Meta II](what-the-measurements-say-about-open-ended-evolution.md) asks where to look instead.
+  for evolution; [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) asks where to look instead.
 
-To make every figure of this chapter: `python3 book_figures.py scaling`.
+To make every figure of this page: `python3 book_figures.py scaling`.
 
 <!-- turns -->
 ---

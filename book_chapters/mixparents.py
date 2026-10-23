@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Chapter 85 · Mixed at birth, with parents as mates — what Experiment 19's worlds did.
+Mixed at birth, with parents as mates — what Experiment 19's worlds did.
 
 Experiment 19 ran B2 with brains mixed at birth, the mate drawn only among
 neighbours with a living child (mix_mates = parents), for 20,000 iterations, ten
@@ -145,7 +145,7 @@ def mixparents(ch: F.Chapter) -> None:
         caption=("Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of "
                  "its agents holding three tokens or fewer; the thesis asked that the median of the ten be below "
                  "0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of "
-                 "Chapter 46's health bar each world meets."),
+                 "[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each world meets."),
         recipe=recipe(RUNS, "each run's whole world kept at 20,000 (`archive/world_020000.npz`) and "
                             "`GraphOfLifeRuns/.pilots/e19_health.json` (`research/oee/checks/e17_health.py --family "
                             "B2-10000-bcc1bc`)",

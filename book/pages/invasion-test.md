@@ -1,6 +1,6 @@
 # The invasion test
 
-A cross-time tournament ([Chapter 46](how-to-tell-a-world-that-keeps-evolving.md))
+A cross-time tournament ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md))
 asks whether a world's later brains beat its earlier ones. The **invasion
 test** asks something else: is there play *better* than what a world has
 evolved? It plants a strategy in the evolved world and watches whether it
@@ -12,7 +12,7 @@ spreads.
    its brains (`GraphOfLife.from_checkpoint`).
 2. Choose a **patch**: an agent drawn at random, then the agents nearest to
    it, step by step through the network, until the patch holds the share of
-   the world asked for (5% in [Chapter 51](strategies-written-by-hand.md)),
+   the world asked for (5% in [Strategies written by hand](strategies-written-by-hand.md)),
    or a single agent.
 3. Give every agent of the patch the strategy in place of its brain. A
    strategy is a function of exactly the inputs a brain reads, and it writes
@@ -41,7 +41,7 @@ same place on the same seed.
   agent has an **Allee effect**, and evolution, which tries one agent at a
   time, can miss it although it is better.
 - A strategy's parts can be tested one at a time by dropping them: the raider
-  without its password ([Chapter 51](strategies-written-by-hand.md))
+  without its password ([Strategies written by hand](strategies-written-by-hand.md))
   shows which part wins.
 
 A strategy that dies out says only that *this* strategy is worse, never that

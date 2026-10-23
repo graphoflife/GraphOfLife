@@ -3,22 +3,22 @@
 Tokens are the only thing of value in a world, and the only thing conserved.
 The founders start exactly equal: a hundred tokens each.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - Who holds the tokens later? How unequal does a world become?
 > - Does inequality keep growing, or does it settle?
 > - Are the rich agents special in some way we can see?
 
-The worlds are the thirty of 100,000 tokens of [Chapter 9](thirty-worlds.md);
-the thirty of 10,000 tokens this chapter was first written from are given
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+the thirty of 10,000 tokens this page was first written from are given
 beside them.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -98,10 +98,10 @@ shows why, and works an example by hand.
 <!-- figure tokens/lorenz -->
 ![Lorenz curves at iteration 1,499](../figures/tokens/lorenz.svg)
 
-**Lorenz curves at iteration 1,499.** For each of the 30 worlds (thin blue lines), after its last game: the poorest share x of its agents holds the share y of all tokens. The yellow line is the median over the worlds at each x; the dashed diagonal is a world where everyone holds the same. The further a curve sags below the diagonal, the more unequal the world ([Chapter 5](how-worlds-are-measured.md), and the diagram there).
+**Lorenz curves at iteration 1,499.** For each of the 30 worlds (thin blue lines), after its last game: the poorest share x of its agents holds the share y of all tokens. The yellow line is the median over the worlds at each x; the dashed diagonal is a world where everyone holds the same. The further a curve sags below the diagonal, the more unequal the world ([How worlds are measured](how-worlds-are-measured.md), and the diagram there).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -126,7 +126,7 @@ and 39%).
 **How many tokens agents hold.** Of all agents alive after the last game of the 30 worlds, the share that hold at least x tokens, for every x. Both axes are logarithmic: a straight falling line here would be a power law.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -143,7 +143,7 @@ the first ten or twenty tokens and then falls almost straight, over two powers
 of ten, to the richest agents. At 10,000 tokens it kept bending and showed no
 straight stretch; with ten times the agents there is room for a long tail.
 Whether it is a power law is the question of
-[Chapter 32](power-laws-real-and-apparent.md).
+[Power laws, real and apparent](power-laws-real-and-apparent.md).
 
 ## Inequality over time
 
@@ -153,7 +153,7 @@ Whether it is a power law is the question of
 **Inequality of wealth (Gini).** After every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -179,7 +179,7 @@ shrinks.
 **Share of all tokens held by the richest tenth.** After every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -196,7 +196,7 @@ shrinks.
 **The richest agent's share of all tokens.** After every game, the tokens of the richest agent divided by all 100,000. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -214,8 +214,8 @@ worlds; 44% at 10,000 tokens). The single richest agent holds about 2% — some
 about 690 tokens over the same iterations, 7% of all (820 over the small
 worlds' longer settled life, to iteration 2,999): in a world ten times larger
 the richest agent holds three times as many tokens, about a third of the
-share ([Chapter 60](worlds-of-100000-tokens.md);
-[Chapter 33](the-largest-and-the-smallest.md) follows the richest).
+share ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md);
+[The largest and the smallest](the-largest-and-the-smallest.md) follows the richest).
 
 <!-- figure tokens/typical -->
 ![What a typical agent holds](../figures/tokens/typical.svg)
@@ -223,7 +223,7 @@ share ([Chapter 60](worlds-of-100000-tokens.md);
 **What a typical agent holds.** After every game: the mean number of tokens per agent, which is 100,000 divided by the number of agents (blue), and the median agent's tokens (green). The median lies below the mean because a few agents hold a lot. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -266,14 +266,14 @@ direction of this: an agent gets every token staked on its node, and an agent
 with more neighbours can be staked on by more of them. Whether connections
 make agents rich, or rich agents attract connections, this figure cannot say.
 
-Part III found the law behind it. Agents spread their stakes nearly evenly
-over their own node and their neighbours' ([Chapter 29](where-the-tokens-flow.md)),
+The measurements of the baseline found the law behind it. Agents spread their stakes nearly evenly
+over their own node and their neighbours' ([Where the tokens flow](where-the-tokens-flow.md)),
 and stakes spread that way move tokens like a random walk, which comes to rest
 when every agent holds tokens in proportion to its connections **plus one**.
 The median agent of every class of connections holds close to that resting
-share ([Chapter 34](how-properties-scale-together.md)). So, in the main,
+share ([How properties scale together](how-properties-scale-together.md)). So, in the main,
 connections make agents rich — and a rich agent with few connections drains
-back to its share within a few games ([Chapter 28](gains-and-losses.md)).
+back to its share within a few games ([Gains and losses](gains-and-losses.md)).
 
 ## The tokens of the dead
 
@@ -283,7 +283,7 @@ back to its share within a few games ([Chapter 28](gains-and-losses.md)).
 **Tokens of the dead, shared out in each game.** In the cleanup of every game, the tokens of the agents removed — those cut off from the largest piece; agents that starved hold none — which are shared out at random among the survivors. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -303,14 +303,14 @@ tokens (1.1% at 10,000 tokens), handed out at random, one token at a time.
 Before the runs of 10,000 tokens, as Experiment 4:
 
 <!-- runs E04 -->
-> [!info] The runs behind this chapter
-> These are the runs of Experiment 2; nothing new was run for this chapter.
+> [!info] The runs behind this page
+> These are the runs of Experiment 2; nothing new was run for this page.
 >
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -385,10 +385,10 @@ because agents defend their own nodes.
 is refuted again, on the same two counts. The median world's average Gini is
 0.485 (7 of the 30 worlds above 0.5); the richest tenth hold 43% (26 of 30
 above 40%) — that part holds again; and agents put a median 29% of what they
-stake on their own node, in no world more than 42%. [Chapter 16](how-the-game-is-played.md)
+stake on their own node, in no world more than 42%. [How the game is played](how-the-game-is-played.md)
 looks at how the game is played instead.
 
-To make every figure of this chapter: `python3 book_figures.py tokens`.
+To make every figure of this page: `python3 book_figures.py tokens`.
 
 <!-- turns -->
 ---

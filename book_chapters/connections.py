@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part III, what crosses a connection: how many tokens cross each connection in
+the measurements of the baseline, what crosses a connection: how many tokens cross each connection in
 a game, how much of that is cancelled by what comes back, how much goes round
 in loops — the viewer's lightning — and which connections carry nothing and
 are cut.

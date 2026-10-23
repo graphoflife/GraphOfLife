@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part II, the core of a world: what is left when its hanging trees are peeled
+the study of the baseline, the core of a world: what is left when its hanging trees are peeled
 away, how many dimensions that core has, and how it holds a world's loops.
 
 Peeling removes every agent with one connection or none, again and again, until
@@ -33,7 +33,7 @@ SHELLS = 8
 
 
 def peel(adj: Dict[int, set]) -> Dict[int, int]:
-    """0 for an agent of the 2-core, 1 for one on a hanging tree, 2 for a leaf (as Chapter 17 colours them)."""
+    """0 for an agent of the 2-core, 1 for one on a hanging tree, 2 for a leaf (as What shape does the network take? colours them)."""
     degree = {u: len(v) for u, v in adj.items()}
     peeled, queue = set(), [u for u, k in degree.items() if k <= 1]
     while queue:
@@ -145,7 +145,7 @@ def core_shape(run_id: str) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# The chapter: the core of a world
+# The page: the core of a world
 # ---------------------------------------------------------------------------
 
 CORE_DATA = ("each run's frames, read every 25 iterations by `book_chapters.core.core_shape`: frame `2·t` (the "
@@ -211,15 +211,15 @@ def core(ch: F.Chapter) -> None:
                            series=series_, guides=[{"axis": "y", "at": d, "label": ""} for d in (1, 2, 3)]))
     ch.grid(
         "dimension", panels, columns=2, title="How many dimensions the core has",
-        caption="The two rulers of Chapter 24 — the local dimension from how balls grow, and the spectral dimension "
+        caption="The two rulers of [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) — the local dimension from how balls grow, and the spectral dimension "
                 f"from how a random walk spreads — on {W.lived} after their last game (blue), on their cores alone "
                 "(green), and on their random twins (red); each line is the median of the worlds, the darker band "
                 "the middle half of them and the paler band nine in ten. Yellow: the cores of the three worlds of "
-                "409,600 tokens of Chapter 42.",
+                "409,600 tokens of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md).",
         recipe=recipe(W.runs_text() + " " + BIG, FRAMES,
                       ["Read each run's last frame; build its network from `edges`; its core by peeling; its random "
                        "twin by `book_graph.degree_preserving` (seed 23).",
-                       "Each network's largest piece, measured as in Chapter 24 (`book_chapters.space.measure`)."]))
+                       "Each network's largest piece, measured as in [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) (`book_chapters.space.measure`)."]))
 
     def plateaus(rows, ball, walk):
         return {"ball": describe([plateau(d["ball_r"], d["ball_d"], *ball) for d in rows if d]),
@@ -249,7 +249,7 @@ def core(ch: F.Chapter) -> None:
     ch.grid(
         "over-life", panels, columns=2, title="The core's dimension over a world's life",
         caption=f"After the games of iterations {listed(times)} of the {n} worlds: each ruler's typical reading — the "
-                "median of its values over the scales of Chapter 24's plateau — on the whole world, on its 2-core "
+                "median of its values over the scales of [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)'s plateau — on the whole world, on its 2-core "
                 "and on its 3-core (what is left when agents with fewer than three connections inside the core are "
                 f"peeled away too). {BAND_WORDS}.",
         recipe=recipe(W.runs_text(), CORE_DATA,

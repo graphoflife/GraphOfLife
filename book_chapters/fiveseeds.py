@@ -1,10 +1,10 @@
 """
-Chapter 93 · Five more seeds for the rules that held (Experiment 21).
+Five more seeds for the rules that held (Experiment 21).
 
-Meta X's second step for the long runs: each rule whose candidate held over 10,000 iterations —
+Healthy and rich's second step for the long runs: each rule whose candidate held over 10,000 iterations —
 mixing with a fast change of brains, with no random inputs, with no revolutions — in five new
 worlds (seeds 3 to 7), beside Experiment 17's mixed worlds of the same seeds. Each world is read at
-10,000 as Meta X reads every world (research/atlas/at.py) and judged by Meta X's test of a long
+10,000 as Healthy and rich reads every world (research/atlas/at.py) and judged by Healthy and rich's test of a long
 run: it lives, meets every mark of the health bar, is more diverse than B2's median world at
 10,000 and poorer than none of B2's ten worlds there (B2 played on to 10,000, batch L).
 """
@@ -140,7 +140,7 @@ def fiveseeds(ch: F.Chapter) -> None:
         panel("Marks of the health bar met", "marks", "marks (of 7)", 7, lo=0, hi=7.5, guide_label="every mark")],
         columns=1, title="Experiment 21 at iteration 10,000",
         caption=("Each dot is a world at iteration 10,000, seeds 3 to 7 from left to right within each rule: green if "
-                 "it passed Meta X's test of a long run — alive, every mark of the health bar met, more diverse than "
+                 "it passed [Healthy and rich](healthy-and-rich.md)'s test of a long run — alive, every mark of the health bar met, more diverse than "
                  "B2's median world and poorer than none of B2's ten worlds played on to 10,000 — violet if it failed "
                  "it, red, at the top, if it died out before 10,000. Grey column: plain mixing, Experiment 17's worlds "
                  "of the same seeds."),

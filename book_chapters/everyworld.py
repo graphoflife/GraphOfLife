@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-One statistic, every world: the chapters that take a quantity and measure it in
+One statistic, every world: the pages that take a quantity and measure it in
 every simulation made so far — lab runs of every experiment and pilot worlds.
 
 The numbers come from research/atlas/across.py (book/results/worlds.json: every
@@ -286,10 +286,10 @@ def lightning(ch: F.Chapter) -> None:
     if pairs:
         ch.number("hodge_vs_greedy_r", round(float(np.corrcoef(*zip(*pairs))[0, 1]), 3))
     ch.figure("exact", title="A greedy count and an exact one",
-              x={"label": "circulating share of the net flow over 50 games (Hodge, Chapter 58)", "min": 0},
+              x={"label": "circulating share of the net flow over 50 games (Hodge)", "min": 0},
               y={"label": "flow in loops, greedy, per game", "min": 0}, series=series,
               caption=("Each dot is a world: across, the exact share of the flow over 50 games that circulates "
-                       "(the Helmholtz–Hodge decomposition of Chapter 58); up, the greedy loop count of a "
+                       "(the Helmholtz–Hodge decomposition of [Gliders, and who helps whom](gliders-and-who-helps-whom.md)); up, the greedy loop count of a "
                        "single game, averaged over the same thousand iterations."),
               recipe=recipe("The ten B2 worlds of Experiment 16 and the first ten B1 worlds of Experiment 2, "
                             "iterations 1,000 to 2,000.",
@@ -301,7 +301,7 @@ def lightning(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Every world side by side (Meta VI)
+# Every world side by side (Every world side by side)
 # ---------------------------------------------------------------------------
 
 #: The counts of agents among the statistics that grow with a world, which the

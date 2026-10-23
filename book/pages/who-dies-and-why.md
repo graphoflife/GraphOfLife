@@ -1,6 +1,6 @@
 # Who dies, and why
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - In how many ways can an agent die, and which of them does a world need?
 > - What happens when agents can stake themselves to death — and when they
 >   cannot?
@@ -11,9 +11,9 @@
 
 ## Why ask
 
-[Chapter 47](brains-that-see-and-worlds-that-break.md) found that a world
+[Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) found that a world
 lives as long as its births replace its deaths, and that most of its deaths
-were agents cut off by the cull. [Chapter 48](a-world-that-cannot-break.md)
+were agents cut off by the cull. [A world that cannot break](a-world-that-cannot-break.md)
 built rules under which nobody is cut off. What is left is the other way to
 die — starving, by staking one's last token away — and a question the
 baseline never had to ask: which deaths does a world *need*?
@@ -23,7 +23,7 @@ only where old ones have gone. And they are where selection can act on whole
 agents rather than on the brains they carry. But a death can also carry no
 information at all — an agent that dies because a link lapsed somewhere, or
 because it was born with one token and spent it — and such deaths only add
-noise. This chapter asks what each rule of death does, using the pilots that
+noise. This page asks what each rule of death does, using the pilots that
 led to B2, and plans Experiment 15 to test it.
 
 ## Ways to die
@@ -35,12 +35,12 @@ after either of the two phases. B2 adds a fifth: it dies of **age**, when it
 has lived [`max_age`](settings.md#max_age) iterations. Winning a
 node does not kill anyone. It replaces the node's brain; the agent, its age
 and its links stay
-([Chapter 39](questioning-the-mechanics.md#two-roads-of-inheritance) calls
+([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance) calls
 agents bodies and brains what moves between them).
 
 ## Children as missiles
 
-The first pilots of [Chapter 48](a-world-that-cannot-break.md)'s rules joined every newborn to its parent and
+The first pilots of [A world that cannot break](a-world-that-cannot-break.md)'s rules joined every newborn to its parent and
 two of its neighbours and mended every death. The worlds never split — and
 still shrank, with 30 to 60% of their agents starving in a single game. The
 starving were children: 46% of them were born that very iteration, 83% at
@@ -97,9 +97,9 @@ A parent keeps at least one token too, so a birth can never starve it.
 A brain dies too — when the node it sits on is won. In the baseline that
 happens to 40 to 90% of the nodes in every game: a brain lasts a game or two
 wherever it is, and an agent's body outlives a long series of brains
-([Chapter 39](questioning-the-mechanics.md#two-roads-of-inheritance)). Meta II
+([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)). [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 counted it among the obstacles — conquest erases, and nothing can be held
-([Chapter 40](what-the-measurements-say-about-open-ended-evolution.md#what-stands-in-the-way)).
+([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md#what-stands-in-the-way)).
 
 [`incumbency`](settings.md#incumbency) weighs an agent's stake on its
 own node more than anyone else's: with *h* = 2 an attacker must stake more
@@ -114,7 +114,7 @@ between a few and about ten per cent of the nodes a game.
 
 ## Old age
 
-With a share kept at home and the rules of [Chapter 48](a-world-that-cannot-break.md), nothing kills an agent
+With a share kept at home and the rules of [A world that cannot break](a-world-that-cannot-break.md), nothing kills an agent
 any more: it cannot starve, it cannot be cut off, and winning its node changes
 only its brain. An agent that cannot die holds its place forever — and in a
 world of fixed tokens, a world without deaths has no room for births.
@@ -129,7 +129,7 @@ to 1.05 per hundred agents and iteration, while not one agent starved or was
 cut off. The population, 800 to 1,800 agents at 5,000 tokens, settles where
 enough agents are rich enough to give a child ten tokens.
 
-Old age also answers what [Chapter 47](brains-that-see-and-worlds-that-break.md)
+Old age also answers what [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)
 left open: there, seeing brains could give up having children, and a world
 whose births fell short of its losses drained slowly. Under old age a line
 that stops having children loses a body every time one of its agents turns
@@ -167,7 +167,7 @@ nothing kept, half kept, children of any size, and no old age.
 ## The runs
 
 <!-- runs E15 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **60 runs.** Every condition below is run once for every seed (1 to 10), for 1,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **B2** — changes nothing: B2 as it is; 10,000 tokens. Runs `B2-10000-s001` … `B2-10000-s010`.
@@ -177,7 +177,7 @@ nothing kept, half kept, children of any size, and no old age.
 > - **children of any size** — changes `min_child` = 1; 10,000 tokens. Runs `B2-10000-185eb7-s001` … `B2-10000-185eb7-s010`.
 > - **no old age** — changes `max_age` = 0; 10,000 tokens. Runs `B2-10000-3ec24f-s001` … `B2-10000-3ec24f-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E15`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E15`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | B2 | the last token kept | nothing kept | half kept | children of any size | no old age | what it is |
@@ -372,11 +372,11 @@ the last token is kept (0.54) or nobody dies of age (0.52).
   strongest evolution of the five rules; keeping only the last token makes
   more agents (3,688, 77% of them holding just that token), and evolution all
   but stops. A world of paupers is a world where little happens — the author's
-  reading of B2 ([Meta X](healthy-and-rich.md)), seen here in the
+  reading of B2 ([Healthy and rich](healthy-and-rich.md)), seen here in the
   contests.
 - **Every agent has to die.** Without old age the founders keep their places,
   births stop, and so does evolution — while the network stays as healthy as
-  any (Meta X's frozen worlds).
+  any ([Healthy and rich](healthy-and-rich.md)'s frozen worlds).
 - **A child has to be worth having.** With children of any size the world
   fills with 9,543 agents, nearly all of one token (a Gini of 0.04: all
   equally poor), born and dying in cohorts, and evolution is weaker than in
@@ -386,8 +386,8 @@ the last token is kept (0.54) or nobody dies of age (0.52).
 
 B2's own choices hold up — but keeping half at home did better on both counts
 that matter here, richer agents and evolution that goes on. It is the first
-rule of death to try together with the rules that came closest in Meta X, such
-as brains mixed at birth ([Chapter 80](mixed-at-birth-ten-long-worlds.md)).
+rule of death to try together with the rules that came closest in [Healthy and rich](healthy-and-rich.md), such
+as brains mixed at birth ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)).
 
 <!-- turns -->
 ---

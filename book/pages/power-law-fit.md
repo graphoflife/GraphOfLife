@@ -69,7 +69,7 @@ further checks would be needed:
   often fits as well over the range one has.
 
 And a tail of 5% of a world — or, at 100,000 tokens, of 1% — is a small part
-of it: a power law there says nothing about the rest. [Chapter 32](power-laws-real-and-apparent.md)
+of it: a power law there says nothing about the rest. [Power laws, real and apparent](power-laws-real-and-apparent.md)
 fits both methods to the baseline worlds.
 
 <!-- turns -->

@@ -1,12 +1,12 @@
 # One iteration, step by step
 
 Time in a world advances in **iterations**, *t* = 0, 1, 2, …. Every iteration
-has two phases: first **reproduction**, then **the game**. This chapter goes
+has two phases: first **reproduction**, then **the game**. This page goes
 through both in the exact order the program runs them. Where the brain is
-asked for a decision, this chapter only says *which* decision and how its
-answer is used; [Chapter 4](the-brain.md) says how the brain arrives at it.
+asked for a decision, this page only says *which* decision and how its
+answer is used; [The brain](the-brain.md) says how the brain arrives at it.
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - In what order does everything happen in one iteration?
 > - How exactly does a decision of the brain turn into tokens moved,
 >   children born and nodes won?
@@ -41,7 +41,7 @@ outright, and an exact tie is decided by a fair coin
 **Splitting whole tokens.** When τ tokens are split in proportion to scores,
 negative scores count as zero, and if no score is above zero the tokens are
 split evenly over all the candidates — in a settled world, about half of all
-agents stake that way ([Chapter 19](what-the-brains-are-like.md)). Every
+agents stake that way ([What the brains are like](what-the-brains-are-like.md)). Every
 candidate first gets its exact share rounded down, and the tokens left over
 go one each to the candidates that lost the most in the rounding — the
 *largest-remainder* method. No token is lost or made
@@ -146,7 +146,7 @@ The game is a version of **Colonel Blotto** (Borel 1921): players spread a
 fixed force over several battlefields, and each battlefield goes to whoever
 committed more to it. Here every node is a battlefield and every agent a
 player who can only reach its own neighbourhood; winning a battlefield wins
-its tokens and plants the winner's brain there. [Chapter 6](the-ideas-this-builds-on.md)
+its tokens and plants the winner's brain there. [The ideas this builds on](the-ideas-this-builds-on.md)
 says more.
 
 ![A coalition taking a node](../diagrams/revolution.svg)
@@ -185,7 +185,7 @@ So after every phase Σ τ(*u*) = *T*.
 
 ## What an iteration does, on average
 
-Once a world has settled ([Chapter 10](a-worlds-life.md)), how many agents
+Once a world has settled ([A world's life](a-worlds-life.md)), how many agents
 does one iteration add and remove? Here is the average over iterations 500
 to 2,999 of the 26 baseline worlds that lived that long, per hundred agents
 alive at the start of the phase:
@@ -196,7 +196,7 @@ alive at the start of the phase:
 **What one iteration does to a settled world.** Agents added (above zero) and removed (below), per 100 agents alive at the start of an iteration, averaged over iterations 500 to 2,999 of the 26 worlds that lived to the end, pooled: every iteration of every world counts once. The bars add up to 0.00: the population hardly changes from one iteration to the next, while about three in a hundred agents are replaced.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [Chapter 10](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -217,7 +217,7 @@ members are replaced.
 
 But the game changes far more than that: in a settled baseline world only
 about 45% of agents keep their node through a game; the rest take on another
-agent's brain ([Chapter 16](how-the-game-is-played.md)). The members of a
+agent's brain ([How the game is played](how-the-game-is-played.md)). The members of a
 world stay; their brains are replaced all the time.
 
 > [!summary] In short

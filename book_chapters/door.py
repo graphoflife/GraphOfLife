@@ -1,5 +1,5 @@
 """
-Chapter 97 · Does evolution close the door? (Experiment 30)
+Does evolution close the door? (Experiment 30)
 
 Raiders planted, 5% of the world in three places, in B2's five worlds played on to 10,000 iterations, at
 500, 2,000, 5,000 and 10,000, each with a control; and what a planting's starting wealth says about
@@ -27,7 +27,7 @@ RUNS = ("Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worl
         "(Experiment 16's ten worlds at 2,000).")
 STEPS = ["Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by "
          "step, until the patch holds 5% of the world.",
-         "Give the patch the raider (Chapter 51's rule), or the control, frozen copies of one patch member's brain.",
+         "Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.",
          "Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, "
          "more than the patch began with, and more than the control holds.",
          "A patch's wealth is its tokens over its agents when it is planted."]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part III, the second half: Chapters 34 to 37 — how agents' properties scale
+the measurements of the baseline, the second half: Pages 34 to 37 — how agents' properties scale
 together, the geometry of a world, how it breaks, and one world drawn in the
 colours the viewer offers.
 """
@@ -21,7 +21,7 @@ from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GRE
 from book_chapters.measures import settled_rows
 
 LAST = W.last
-#: The stretch of one world's life Chapter 36 draws game by game: one with big cuts in it.
+#: The stretch of one world's life How a world breaks draws game by game: one with big cuts in it.
 ONE_WORLD = {"E02": (1, (1000, 1600)), "E10": (26, (600, 1200))}[W.experiment]
 #: A cut this large is taken apart agent by agent: one agent per hundred tokens, as 100 was at 10,000.
 BIG_CUT = W.tokens // 100
@@ -45,7 +45,7 @@ def last_frames() -> List[Tuple[Any, Dict[str, Any]]]:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 34 · How properties scale together
+# How properties scale together
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -98,7 +98,7 @@ def scaling(ch: F.Chapter) -> None:
                 "against ln(k) over all agents ([Scaling relations](scaling-relations.md)). Cyan: "
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
-                "([Chapter 29](where-the-tokens-flow.md)).",
+                "([Where the tokens flow](where-the-tokens-flow.md)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read frame `{W.frame(LAST)}` of every run: each agent's tokens and its connections in `edges`.",
                        "Count the agents in each cell of the classes shown; colour by the count.",
@@ -210,7 +210,7 @@ def scaling(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 35 · The geometry of a world
+# The geometry of a world
 # ---------------------------------------------------------------------------
 
 def exact_geometry(adj: Dict[int, set]) -> Dict[str, float]:
@@ -455,7 +455,7 @@ def geometry(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 36 · How a world breaks
+# How a world breaks
 # ---------------------------------------------------------------------------
 
 def cut_anatomy(run_id: str, t: int) -> Dict[str, float]:
@@ -600,7 +600,7 @@ def breaking(ch: F.Chapter) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Chapter 37 · One world, many colours
+# One world, many colours
 # ---------------------------------------------------------------------------
 
 @chapter
@@ -698,8 +698,8 @@ def colours(ch: F.Chapter) -> None:
                        f"Families: read frames {W.frame(LAST - 100)} to {W.frame(LAST)}, note each genotype's parent, "
                        "and climb from each "
                        f"living genotype to one alive after the game of iteration {LAST - 100:,}.",
-                       "Loops: as in [Chapter 35](the-geometry-of-a-world.md).",
-                       "Which agents are drawn: as in Chapter 17 (`book_chapters.society.shown`).",
+                       "Loops: as in [The geometry of a world](the-geometry-of-a-world.md).",
+                       "Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
     ch.number("six_views", {"agents": len(ids), "drawn": len(drawn), "piece": info,
                             "families": {str(k): v for k, v in shares.items()},

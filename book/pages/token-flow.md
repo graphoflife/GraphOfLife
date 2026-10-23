@@ -1,7 +1,7 @@
 # Token flow
 
 In every game every agent stakes all its tokens on itself and its neighbours
-([Chapter 3](one-iteration.md)). A stake of agent *u* on a
+([One iteration, step by step](one-iteration.md)). A stake of agent *u* on a
 neighbour *v*'s node is a **flow** of tokens from *u* to *v*: whatever happens
 to the node, those tokens end the game at *v*'s node. These statistics, in the
 viewer's *Game (Blotto)* section, describe that flow. A stake on one's own
@@ -46,7 +46,7 @@ Two rules make flow the life of a connection:
 - a node's tokens after the game are **exactly** the tokens staked on it.
 
 So the flow decides which connections survive and how the tokens are
-reshuffled. [Chapter 29](where-the-tokens-flow.md) shows where
+reshuffled. [Where the tokens flow](where-the-tokens-flow.md) shows where
 it goes.
 
 <!-- turns -->

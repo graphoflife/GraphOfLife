@@ -1,6 +1,6 @@
 # Brains that see, and worlds that break
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What happens to a world when its agents' decisions follow what they see?
 > - Why does a world of seeing agents fall apart — what, exactly, breaks?
 > - What does that teach about the rules a world needs before evolution can
@@ -12,7 +12,7 @@
 
 The baseline's brains barely see. A change in what one of them sees reaches
 what it does reduced about a thousandfold — a **gain** of 0.0015 in the
-evolved worlds and 0.0006 in a founder ([Chapter 19](what-the-brains-are-like.md)).
+evolved worlds and 0.0006 in a founder ([What the brains are like](what-the-brains-are-like.md)).
 Each of the brain's five hidden layers ends in a sigmoid that passes on about
 a quarter of a change, and five quarters multiply to a thousandth
 ([How a signal fades through layers](vanishing-signal.md)). Whatever
@@ -20,7 +20,7 @@ evolution has done in the baseline, it has done to a brain that responds to
 almost nothing; its decisions are near enough constants.
 
 Open-ended evolution needs agents whose behaviour can depend on their world:
-kin recognised, partners answered, threats met. The first step of Part V is
+kin recognised, partners answered, threats met. The first step towards open-ended evolution is
 therefore to give the brains sight, and the cheapest way is to take layers
 away. With one hidden layer of 16 units, a founder's gain is about 0.2 — some
 three hundred times the baseline founders' 0.0006 — and with no hidden layer
@@ -55,7 +55,7 @@ and dwindled to 25 by the end, the other to a single agent for good.
 
 **What breaks is the network.** An agent whose stake follows what it sees
 puts it where it matters — on one neighbour, or two — and a connection that
-carries no tokens in a game is cut at its end ([Chapter 3](one-iteration.md)).
+carries no tokens in a game is cut at its end ([One iteration, step by step](one-iteration.md)).
 So the seeing worlds kept few connections: as few as 1.3 to 1.9 per agent in
 the worlds that crashed, against 3.2 in the baseline, and only 27–39% of
 their agents in the [2-core](core-trees-leaves.md), against 54–55%.
@@ -68,7 +68,7 @@ agents — that iteration's newborns among them — and left 562.
 world was joined to 15–35% of the others — more than in the baseline's two
 pilot worlds (9–12%), though the ten worlds below show that the baseline can
 grow such hubs too (one of its worlds 55%; the stars of
-[Chapter 33](the-largest-and-the-smallest.md)).
+[The largest and the smallest](the-largest-and-the-smallest.md)).
 
 **Change only when copied made it worse, not better** — its two worlds were
 the two that fell furthest. And a stricter variant of it, which changed a
@@ -93,24 +93,26 @@ and the results below say what, exactly, kills them.
 > [!quote] The thesis of Experiment 13, written down before any of its runs existed
 > **The claim.** Brains that see break worlds. With one hidden layer of 16 instead of five, and every brain changed only when it is copied, at least six of ten worlds of 5,000 tokens fall below 50 agents — or die out — at some time after iteration 50 within 1,500 iterations; of the baseline's ten, at most two do.
 >
-> **Why it would be so.** One hidden layer passes about a fifth of a change in what a brain sees on to what it does (a gain of 0.2 for a founder, against 0.0006 through the baseline's five sigmoid layers: Chapter 19), so agents stake on one neighbour rather than evenly on all. Pilots of two seeds each, 5,000 tokens, 1,500 iterations: the baseline's worlds never fell below 74 and 397 agents; with one hidden layer, to 1 (and regrown from it) and 84; with one hidden layer and change only when copied, to 15 and 1. In the worlds that see, fewer agents sat in the 2-core (0.27 to 0.62, against 0.54 and 0.55) and the best-connected agent was joined to 15–35% of the others (9–12%).
+> **Why it would be so.** One hidden layer passes about a fifth of a change in what a brain sees on to what it does (a gain of 0.2 for a founder, against 0.0006 through the baseline's five sigmoid layers: Chapter [19](what-the-brains-are-like.md)), so agents stake on one neighbour rather than evenly on all. Pilots of two seeds each, 5,000 tokens, 1,500 iterations: the baseline's worlds never fell below 74 and 397 agents; with one hidden layer, to 1 (and regrown from it) and 84; with one hidden layer and change only when copied, to 15 and 1. In the worlds that see, fewer agents sat in the 2-core (0.27 to 0.62, against 0.54 and 0.55) and the best-connected agent was joined to 15–35% of the others (9–12%).
 >
 > **It holds if:** At least 6 of the 10 worlds of the condition 'one hidden layer, change only when copied' have fewer than 50 agents after the game of some iteration from 50 on, or die out; and at most 2 of the baseline's 10 do.
 >
 > **It fails if:** Fewer than 6 of the 10 worlds that see fall below 50 agents: seeing does not break worlds. Or more than 2 of the baseline's do: worlds of 5,000 tokens break anyway, and seeing is not the reason.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ## The runs
 
 <!-- runs E13 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 10), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 5,000 tokens. Runs `B1-5000-s001` … `B1-5000-s010`.
 > - **one hidden layer** — changes `hidden_layers` = 16; 5,000 tokens. Runs `B1-5000-f7c30b-s001` … `B1-5000-f7c30b-s010`.
 > - **one hidden layer, change only when copied** — changes `hidden_layers` = 16, `mutate_on_replication` = on; 5,000 tokens. Runs `B1-5000-4802b8-s001` … `B1-5000-4802b8-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E13`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E13`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | one hidden layer | one hidden layer, change only when copied | what it is |
@@ -191,7 +193,7 @@ change only when copied, eight of ten died out, at iterations 219, 292, 415,
 
 "Died out" here means fell to twenty agents, where the lab stops a run — a
 rule that ends some worlds that would have lived
-([Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)). The pilot of
+([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)). The pilot of
 the world with one hidden layer and seed 1, run on without the rule, fell to a
 single agent at iteration 547 and grew back from it.
 
@@ -228,12 +230,12 @@ say that this is only half of it.
 **Not one big cut.** The largest single cull of a world — the most agents ever
 cut off at once — came in its first fifty iterations in seven of the
 baseline's worlds, when 400 to 1,250 agents at a time were lost as the first
-boom ended ([Chapter 11](the-first-hundred-iterations.md)). The seeing
+boom ended ([The first hundred iterations](the-first-hundred-iterations.md)). The seeing
 worlds had such early culls too. But the worlds that died out did not die of
 one of them: each shrank over a hundred iterations or more.
 
 **The network kills every iteration — in every world.** By the health bar of
-[Chapter 46](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
 no world of any condition holds. The baseline's median world had 51% of its
 agents in the 2-core and a link whose loss cut off 8% of it; the seeing worlds
 had 55% and 11%, and with change only when copied 46% and 6%, and there the
@@ -247,7 +249,7 @@ one hidden layer.
 <!-- figure seeing/health -->
 ![How the network holds](../figures/seeing/health.svg)
 
-**How the network holds.** One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md).
+**How the network holds.** One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
@@ -285,7 +287,7 @@ shrinks to a few dozen agents is a few unlucky games from the end.
 
 **And seeing brains can stop having children.** In the baseline, whether an
 agent has a child is close to a constant of its brain — the brains barely see
-([Chapter 19](what-the-brains-are-like.md)). With one hidden layer it is a
+([What the brains are like](what-the-brains-are-like.md)). With one hidden layer it is a
 decision that depends on what the agent sees, and evolution can change it a
 great deal. To see what it did, every era's brains were put back into the same
 world — their own run's founders' world, 50 agents with 100 tokens each — and
@@ -316,7 +318,7 @@ median, against 3 for the baseline's last brains (0 to 13).
 <!-- /figure -->
 
 A brain spreads mostly by winning nodes, not by having children — seventeen
-times more in the baseline ([Chapter 39](questioning-the-mechanics.md#two-roads-of-inheritance))
+times more in the baseline ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance))
 — and tokens given to a child are tokens not staked. Whether that is why some worlds' brains gave up their
 children — selected, as a lineage gains from keeping its tokens while the world
 it lives in drains — or whether a decision that has become easy to change simply
@@ -341,9 +343,9 @@ losses dies.
 Two things follow for the rules a world needs before anything can evolve in
 it. Its network must stop killing — no agent should be lost because a link or
 a neighbour vanished, which is what the rules of the
-[next chapter](a-world-that-cannot-break.md) do. And its births must keep
+[next page](a-world-that-cannot-break.md) do. And its births must keep
 up with its deaths whatever its brains decide — which depends on who dies, and
-why: the subject of [Chapter 49](who-dies-and-why.md).
+why: the subject of [Who dies, and why](who-dies-and-why.md).
 
 <!-- turns -->
 ---

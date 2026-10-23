@@ -1,6 +1,6 @@
 # A world that cannot break
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What network do births and deaths make by themselves, with no brains at
 >   all — and why is it fragile?
 > - Which rules, each acting on one agent and its neighbours, make a network
@@ -13,7 +13,7 @@
 
 ## Why ask
 
-[Chapter 47](brains-that-see-and-worlds-that-break.md) gave the brains
+[Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) gave the brains
 sight, and the worlds broke — not in one great cut, but by bleeding. Every
 world of 5,000 tokens, blind or seeing, lost agents to the cull in every
 iteration — 1.9 in a hundred without sight, 5.3 with it — and a seeing world
@@ -21,10 +21,10 @@ died when its births stopped keeping up. Nothing can evolve for long in a
 world that bleeds like that, and a world that holds only while its brains
 keep breeding is at the mercy of what evolution does to their breeding.
 
-So before asking evolution to build anything, Part V builds the ground it
+So before asking evolution to build anything, this page builds the ground it
 stands on: rules that keep the network whole *however the agents play*. The
 target is the health bar of
-[Chapter 46](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers):
+[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers):
 one piece, at least 80% of agents in the 2-core, no agent whose loss cuts off
 more than 2% of the others and no connection whose loss cuts off more than
 1%, no agent joined to more than 5% of the others, 3 to 12 connections per
@@ -35,7 +35,7 @@ it may only look at an agent and its neighbours.
 
 A world's network is made by three things: births add an agent and its links,
 deaths take an agent and its links away, and the cull keeps only the largest
-piece ([Chapter 3](one-iteration.md)). The brains decide who has a child,
+piece ([One iteration, step by step](one-iteration.md)). The brains decide who has a child,
 who dies and which links are kept — but before asking what brains do to the
 network, it pays to ask what the three forces do on their own.
 
@@ -51,7 +51,7 @@ each set of rules below was run with ten seeds.
 <!-- figure unbreakable/space -->
 ![What the rules of space make, with no brains](../figures/unbreakable/space.svg)
 
-**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 links or more nor a newborn's random link to one (mending still links past the cap). The dashed lines are the health bar of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
+**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 links or more nor a newborn's random link to one (mending still links past the cap). The dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
 > **Runs.** No runs: the worlds are made by the model itself, seeds 1 to 10 for every set of rules.
@@ -205,11 +205,11 @@ Put the brains back, and three things the model did not have start cutting
 the network.
 
 **Unused links lapse.** At the end of a game a link that carried no tokens is
-cut ([Chapter 3](one-iteration.md)). A blind brain spreads its stake over
+cut ([One iteration, step by step](one-iteration.md)). A blind brain spreads its stake over
 everyone and every link carries something; a seeing brain stakes on one
 neighbour or two, and most of its links lapse. Every lapse that leaves a part
 of the world hanging on nothing hands that part to the cull — the steady toll
-that, in [Chapter 47](brains-that-see-and-worlds-that-break.md), every world
+that, in [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md), every world
 of 5,000 tokens paid, blind or seeing. The rule
 [`prune_needs`](settings.md#prune_needs)
 lets an unused link lapse only if its two ends share at least that many
@@ -239,15 +239,15 @@ lost.
 its links to its newborn, and a parent that hands over all but one hangs on
 that one. Switched off.
 
-**B2** is the second baseline of Part V: B1 with brains of one hidden layer of
-16 that change only when copied ([Chapter 47](brains-that-see-and-worlds-that-break.md)), shorter messages (8 numbers, no
+**B2** is the second baseline, built for open-ended evolution: B1 with brains of one hidden layer of
+16 that change only when copied ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)), shorter messages (8 numbers, no
 extra look before acting), an agent's stake on its own node counting 1.5
 times ([`incumbency`](settings.md#incumbency)), the rules of this
-chapter — links at birth 2, mending in a ring, `prune_needs` 2, valence 8, no
-handover — and the rules of [Chapter 49](who-dies-and-why.md) on who
+page — links at birth 2, mending in a ring, `prune_needs` 2, valence 8, no
+handover — and the rules of [Who dies, and why](who-dies-and-why.md) on who
 dies: 30% of an agent's tokens kept at home, so that nobody stakes itself to
 death; children of at least 10 tokens; and death at age 100. It keeps change
-only when copied although [Chapter 47](brains-that-see-and-worlds-that-break.md) found it harmful: it is what heredity
+only when copied although [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) found it harmful: it is what heredity
 means — a brain that is not copied stays itself — and the harm it did there
 was the drain of worlds whose births fell short of the cull, which B2's other
 rules remove. Every setting is listed in the box under the thesis.
@@ -286,21 +286,22 @@ handover, put one back — to see whether every rule is needed.
 
 <!-- thesis E14 -->
 > [!quote] The thesis of Experiment 14, written down before any of its runs existed
-> **The claim.** Under all the rules of B2 every world keeps a network that holds: from iteration 200 to 1,000 every one of ten worlds of 5,000 tokens has all its agents in one piece in every frame, and its medians over those frames pass every line of the health bar of Chapter 49 — at least 80% of agents in the 2-core, no connection whose loss cuts off more than 1% of them, no agent joined to more than 5% of the others, 3 to 12 connections per agent, a ball dimension between 2.3 and 4. Each rule taken away on its own breaks some line of it in at least half of the worlds.
+> **The claim.** Under all the rules of B2 every world keeps a network that holds: from iteration 200 to 1,000 every one of ten worlds of 5,000 tokens has all its agents in one piece in every frame, and its medians over those frames pass every line of the health bar of Chapter [49](how-to-tell-a-world-that-keeps-evolving.md) — at least 80% of agents in the 2-core, no connection whose loss cuts off more than 1% of them, no agent joined to more than 5% of the others, 3 to 12 connections per agent, a ball dimension between 2.3 and 4. Each rule taken away on its own breaks some line of it in at least half of the worlds.
 >
 > **Why it would be so.** Births by themselves grow a tree of blobs, and random deaths cut its necks: in the space-only model of research/oee/space.py (1,500 agents, no brains) one agent's loss could cut off 40% of the world. A newborn joined to its parent and two of its neighbours, and deaths mended in a ring, bring that to 1.1–1.3% with a dimension of 3.4–3.6. Under the game, unused links lapsing cut what mending saves unless only redundant links may lapse; a brain's liking for well-connected neighbours makes hubs unless their number is capped; and a parent handing its links to its child leaves itself hanging. In the engine, B2's seed 1 at 5,000 tokens kept everyone in the 2-core with no single cut at all, 5.1–5.3 connections per agent and a dimension of 3.1–3.7 through iteration 400.
 >
 > **It holds if:** All ten B2 worlds: no agent cut off in any cull from iteration 200 on, and median coreShare ≥ 0.8, cutRisk ≤ 0.01, maxDegree/nodes ≤ 0.05, meanDegree in 3–12 and dimension in 2.3–4 over iterations 200 to 1,000. And for each of the five conditions that take one rule away, at least five of its ten worlds fail at least one of these.
 >
 > **It fails if:** A B2 world fails a line of the bar: the rules do not make a network that holds. Or a condition without one of the rules has fewer than five failing worlds: that rule is not needed.
+>
+> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
-("[Chapter 49](who-dies-and-why.md)" in the thesis is today's [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md): the chapters were renumbered on 2026-10-14.)
 
 ## The runs
 
 <!-- runs E14 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **60 runs.** Every condition below is run once for every seed (1 to 10), for 1,000 iterations — or until its world dies out. Every setting is that of the baseline **B2** (a world that cannot break) unless the condition changes it.
 >
 > - **all the rules** — changes nothing: B2 as it is; 5,000 tokens. Runs `B2-5000-s001` … `B2-5000-s010`.
@@ -310,7 +311,7 @@ handover, put one back — to see whether every rule is needed.
 > - **no valence** — changes `valence` = 0; 5,000 tokens. Runs `B2-5000-5c8c75-s001` … `B2-5000-5c8c75-s010`.
 > - **handover** — changes `allow_handover` = on; 5,000 tokens. Runs `B2-5000-894419-s001` … `B2-5000-894419-s010`.
 >
-> To make these runs again: `python3 gol_lab.py run E14`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E14`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | all the rules | no mending | any unused link lapses | no links at birth | no valence | handover | what it is |
@@ -398,7 +399,7 @@ the median world.
 <!-- figure unbreakable/bar -->
 ![Each rule against the health bar](../figures/unbreakable/bar.svg)
 
-**Each rule against the health bar.** One dot per world, at its median over iterations 200 to 1,000; the bar is the median world; dashed lines are the health bar of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md). *B2*: every rule; *no mending*: deaths not mended; *all lapse*: any unused link lapses; *no birth links*: a newborn joined to its parent alone; *no valence*: no cap on chosen links; *handover*: a parent may hand its links to its child.
+**Each rule against the health bar.** One dot per world, at its median over iterations 200 to 1,000; the bar is the median world; dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *B2*: every rule; *no mending*: deaths not mended; *all lapse*: any unused link lapses; *no birth links*: a newborn joined to its parent alone; *no valence*: no cap on chosen links; *handover*: a parent may hand its links to its child.
 
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
@@ -488,7 +489,7 @@ fewer links at birth or sparser mending — and the model says what that costs:
 with one link at birth, cuts of 2% instead of 1.4%. The next experiments keep
 B2 as it is: a world in which no agent is ever lost to a cut, so that every
 death that remains is a death of age, and every change in a population is
-evolution's — [Chapter 49](who-dies-and-why.md) asks who dies, and why.
+evolution's — [Who dies, and why](who-dies-and-why.md) asks who dies, and why.
 
 <!-- turns -->
 ---

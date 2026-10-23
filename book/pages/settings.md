@@ -3,7 +3,7 @@
 A run of Graph of Life is fixed by two things: its **settings** and its
 **seed** ([Seeds and the random stream](random-numbers.md)). This note lists
 every setting, says what it does, and gives its value in the **baseline B1**
-— the settings every experiment in this book starts from, and changes one at
+— the settings every experiment in this notebook starts from, and changes one at
 a time. The plan that defines B1 is the file `book/experiments/B1.json`.
 
 | setting | B1 | in one line |
@@ -54,10 +54,10 @@ number of neighbours in the starting ring.
 
 The number of tokens in the world, *T*. Tokens are never made or destroyed
 (unless [`tokens_created_per_phase`](#tokens_created_per_phase) is above 0,
-which it never is in this book), so the sum of all agents' tokens is *T*
-after every phase of every iteration. Part I teaches with *T* = 10,000,
-Parts II and III use *T* = 100,000, and
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md)
+which it never is in this notebook), so the sum of all agents' tokens is *T*
+after every phase of every iteration. The pages on how the simulation works teach with *T* = 10,000,
+the study of the baseline uses *T* = 100,000, and
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
 varies it from 800 to 409,600. Since every living agent holds at least one
 token, a world can never hold more than *T* agents.
 
@@ -101,7 +101,7 @@ Strogatz (1998). Baseline 0.2. See [The starting ring](starting-ring.md).
 The widths of the brain's hidden layers, from input to output. The baseline
 brain has five: 50, 45, 40, 35 and 30 neurons. With the 154 inputs and 45
 outputs of the baseline that gives 15,550 weights and 245 biases, 15,795
-numbers in all ([Chapter 4](the-brain.md)).
+numbers in all ([The brain](the-brain.md)).
 
 ### brain_kind
 
@@ -109,7 +109,7 @@ How a brain's numbers are stored. `float` keeps them as 64-bit floating-point
 numbers, `float16` as 16-bit ones (about three significant decimal digits),
 `binary` as −1, 0 or +1. The baseline uses `float16`: the weights are
 *stored* in 16 bits, which takes a quarter of the memory, but every
-calculation is done in 64 bits. Every result in this book is for `float16`.
+calculation is done in 64 bits. Every result in this notebook is for `float16`.
 
 ### brain_bits
 
@@ -159,7 +159,7 @@ See [How a coalition takes a node](revolution.md).
 ### allow_gifting
 
 Whether agents may give tokens to neighbours during reproduction. Off in
-every run of this book; with it off, the brain has neither the gift inputs
+every run of this notebook; with it off, the brain has neither the gift inputs
 nor the gift outputs.
 
 ### random_decisions
@@ -169,7 +169,7 @@ replaced by an independent draw from the standard normal distribution
 (mean 0, standard deviation 1), and every decision is taken from those
 numbers by exactly the same rules. The brains still exist, are still copied,
 and still mutate — they are just never asked. Used in
-[Chapter 41](do-the-brains-matter.md).
+[Do the brains matter?](do-the-brains-matter.md).
 
 ### prune_after
 
@@ -210,11 +210,11 @@ the dead. Baseline 0: the supply is fixed.
 
 ## Open-ended evolution
 
-Nine rules added for Part V, each the answer to one way a world was seen to
+Nine rules added for open-ended evolution, each the answer to one way a world was seen to
 fail once its brains could see, and a tenth, `mix_at_birth`, that came later
-from the pilots of [Chapter 78](mixed-brains-costly-units.md).
-Every one is off in the baseline B1 and in every run before Part V, so the
-runs of Parts II–IV are unchanged by them. All are local: they read an agent,
+from the pilots of [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md).
+Every one is off in the baseline B1 and in every run made before B2, so the
+baseline's runs are unchanged by them. All are local: they read an agent,
 its connections and its neighbours, and nothing further away.
 
 ### mutate_on_replication
@@ -302,7 +302,7 @@ neighbours, at the moment of the birth; a parent that would give less has no
 child. Where births are cheap — the estate of the dead paid to the newborns,
 say — a world fills with children, each with a token or two, until almost
 every agent holds the same few
-([Chapter 100](room-for-the-steadiest-world.md)). Under
+([Room for the steadiest world](room-for-the-steadiest-world.md)). Under
 `neighbours` a child is never poorer than the agents it is born among, so a
 world can grow only as rich as it is. It reads the parent's neighbourhood and
 nothing further, and has no number of its own. Baseline `fixed`.
@@ -319,9 +319,9 @@ of the brain it arose in. The mixture is a new genotype unless it is the
 parent's brain again, as it is when the mate is of the parent's genotype; a
 parent without a neighbour has a copy. Baseline off: a newborn has a copy of
 its parent's brain. In the pilots of
-[Chapter 78](mixed-brains-costly-units.md) and the batches
+[Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) and the batches
 after it, worlds with it came closest to a healthy and diverse world
-([Meta X](healthy-and-rich.md)).
+([Healthy and rich](healthy-and-rich.md)).
 
 ### mix_mates
 
@@ -342,7 +342,7 @@ its candidates, itself included. A brain scores each candidate from that
 candidate's column alone, so under `own` no message can carry news of a
 third agent: whether a stranger is next door reaches a teammate only through
 what the agent does
-([Chapter 94](what-a-brain-can-compute.md)). Under `largest` a
+([What a brain can compute](what-a-brain-can-compute.md)). Under `largest` a
 mark one column makes ("this neighbour is a stranger") reaches every
 neighbour a phase later, and over a few phases a team can hold a field such
 as each member's nearness to its frontier. It adds no weights and no inputs,
@@ -353,7 +353,7 @@ neighbour. Baseline `own`.
 
 Every link an agent makes otherwise is to its own neighbourhood: a newborn's,
 to its parent's neighbours. These three let an agent reach further, at a
-price, and are off in every run of the book until they are turned on.
+price, and are off in every run of the notebook until they are turned on.
 
 ### link_search
 
@@ -399,7 +399,7 @@ enough. Either way no link is made to or from an agent at its
 Rules the pilot worlds played before the engine had them
 ([pilot worlds](pilot-worlds.md)), carried into the engine so that the lab can
 play them where they can be seen. Each is switched on by name; a run that names
-none — every run of the book's experiments until October 2026 — plays none.
+none — every run of the notebook's experiments until October 2026 — plays none.
 
 - **came_from** — one input row for each candidate: is this the node my brain
   came from, the node whose holder took mine, or my parent if I was born here?
@@ -451,7 +451,7 @@ probability of a rarer **reset**, which redraws a share *s* of a weight
 matrix from scratch. Each weight matrix and each bias vector is treated
 separately. Baseline 0.1. With *s* = 0 a "change" changes nothing — but the
 brain is still given a new genotype number
-([Chapter 41](do-the-brains-matter.md) uses exactly this).
+([Do the brains matter?](do-the-brains-matter.md) uses exactly this).
 
 ### extinction_threshold
 
@@ -469,7 +469,7 @@ Every how many iterations a run keeps a whole world — its network, tokens,
 ages and every brain — in `archive/` beside its frames; 0 keeps none. The
 rolling checkpoint is overwritten and is for resuming; these are kept, for
 anything that needs the brains of more than one moment, above all the
-cross-time tournament of [Chapter 46](how-to-tell-a-world-that-keeps-evolving.md).
+cross-time tournament of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md).
 A plan asks for it in its `record` block.
 
 <!-- turns -->

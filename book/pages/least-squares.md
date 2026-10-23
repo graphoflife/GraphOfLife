@@ -1,6 +1,6 @@
 # Fitting a straight line, and R²
 
-Many figures in this book draw a straight line through a cloud of points, and
+Many figures in this notebook draw a straight line through a cloud of points, and
 many statistics of the viewer are the slope of such a line. This note says
 which line, and what its R² means.
 
@@ -52,7 +52,7 @@ of *y*: −2, −1, 3. *S*_xx = 2, *S*_yy = 14, *S*_xy = 2 + 0 + 3 = 5. So
 
 A power law *y* = *A x*^*b* becomes a straight line in the logarithms,
 ln *y* = ln *A* + *b* ln *x* ([Logarithmic axes](logarithmic-axes.md)). So the
-book and the viewer fit power laws by least squares on (ln *x*, ln *y*). The
+notebook and the viewer fit power laws by least squares on (ln *x*, ln *y*). The
 program (`_power_fit` in `gol_series.py`) keeps only the points with both
 values positive — a zero cannot be logged and is a real observation, not a
 small one — and wants at least 8 of them.

@@ -1,23 +1,23 @@
 # A world's life
 
-> [!question] Questions of this chapter
+> [!question] Questions of this page
 > - What does a world do over its 1,500 iterations? Does it grow to some size
 >   and stay there, or does it keep changing?
 > - Is "the" baseline world even a thing — do thirty worlds do the same?
 > - Do worlds die, and how close do they come?
 
-The worlds are the thirty of [Chapter 9](thirty-worlds.md): the baseline
+The worlds are the thirty of [Thirty worlds](thirty-worlds.md): the baseline
 B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each. Where the thirty
-worlds of 10,000 tokens that this chapter was first written from behave
+worlds of 10,000 tokens that this page was first written from behave
 differently, both are given.
 
 <!-- runs E10 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -80,7 +80,7 @@ the same scale. Each line is the number of agents alive after every game.
 **Six worlds, one at a time.** The number of agents alive after every game in the worlds with seeds 1 to 6, each in a chart of its own and all on the same scale (0 to 25,000 agents, iterations 0 to 1,500). Each line has one point per iteration.
 
 > [!example]- How to make this figure
-> **Runs.** `B1-100000-s001` … `B1-100000-s006`, six of the 30 baseline runs (their settings are listed in [Chapter 9](thirty-worlds.md)).
+> **Runs.** `B1-100000-s001` … `B1-100000-s006`, six of the 30 baseline runs (their settings are listed in [Thirty worlds](thirty-worlds.md)).
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -95,7 +95,7 @@ Three things are visible in every one of them:
 - **A youth.** Within the first twenty or so iterations, the 1,000 founders
   become well over ten thousand agents — the median of the thirty worlds peaks
   at about 17,400 around iteration 39 — and the line jumps up and down before
-  it settles into a calmer motion. [Chapter 11](the-first-hundred-iterations.md)
+  it settles into a calmer motion. [The first hundred iterations](the-first-hundred-iterations.md)
   zooms in on this.
 - **No fixed level.** After the youth, no world stays at one size. Each
   drifts, over hundreds of iterations, between roughly 10,000 and 20,000
@@ -115,7 +115,7 @@ at each moment, the shading how far the others spread around it.
 **Agents alive, 30 worlds.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). All 30 live to the end.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -133,7 +133,7 @@ wanders, the **typical** world hardly changes after its youth. From iteration
 worlds of 10,000 tokens stayed within 15% of theirs (1,070 to 1,450 agents).
 Ten times the tokens hold eleven times the agents — 0.14 agents per token,
 where the smaller worlds held 0.13, a little more than the strict proportion
-[Chapter 42](how-does-a-worlds-size-follow-its-tokens.md) found over a
+[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) found over a
 shorter life — and the typical world holds stiller.
 
 ## Each world, early and late
@@ -148,7 +148,7 @@ over iterations 1,300 to 1,499, at its end — and join the two:
 **Each world early and late.** One line per world, from its mean number of agents over iterations 100–200 (left) to its mean over iterations 1,300–1,499 (right). Green: the late mean is more than 1.2 times the early one; red: less than 0.8 times; grey: in between. The thick blue line joins the medians of the 30 worlds.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -169,7 +169,7 @@ between 0.38 and 4.6 times theirs, and only 8 of 26 within a fifth. Some of
 the difference is the shorter run — a wander has less time to go far — and
 some is size: the same number of games moves a large world by a smaller share
 of itself. **A typical world exists, and at this size a single world stays
-closer to it** — but not close. [Chapter 14](how-much-does-the-seed-decide.md)
+closer to it** — but not close. [How much does the seed decide?](how-much-does-the-seed-decide.md)
 measures the wandering and asks how much of it the seed decides.
 
 ## Connections
@@ -180,7 +180,7 @@ measures the wandering and asks how much of it the seed decides.
 **Connections, 30 worlds.** The number of connections after every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Chapter 9](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -193,7 +193,7 @@ measures the wandering and asks how much of it the seed decides.
 
 The number of connections follows the number of agents, at about 1.7
 connections per agent (a mean degree of 3.5: every agent is joined to three or
-four others on average, [Chapter 17](what-shape-does-the-network-take.md)).
+four others on average, [What shape does the network take?](what-shape-does-the-network-take.md)).
 Its median over iterations 100 to 200 was 24,730, over the last two hundred
 22,570 — 9% fewer, where the worlds of 10,000 tokens had 6% more.
 
@@ -209,7 +209,7 @@ older.
 But the slowing is over early. From iteration 500 on, the median world has
 between 3.3 and 3.6 births per hundred agents in every stretch of 250
 iterations, and the ages of the living stop changing too
-([Chapter 13](how-ages-change.md)): most of the 28% fell before iteration
+([How ages change over a world's life](how-ages-change.md)): most of the 28% fell before iteration
 500. At 10,000 tokens the slowing went on far longer — births per hundred
 agents kept falling until about iteration 1,250, and the number of births fell
 by 41% from iterations 100–200 to 2,800–2,999.
@@ -230,7 +230,7 @@ threatened a seventh to a third of the world
 day. Births fell from 499 per iteration to 26. Ten games after the first cut,
 2,137 agents were left; at iteration 1,416 one more cut took it to 1,405, the
 smallest any of the thirty worlds was after its youth. Then it grew again, to
-7,400 by the end. [Chapter 36](how-a-world-breaks.md) takes such
+7,400 by the end. [How a world breaks](how-a-world-breaks.md) takes such
 breakdowns apart. The next-smallest low of any world was 5,070.
 
 ## What was expected
@@ -239,12 +239,12 @@ Before the runs of 10,000 tokens, this was written down as Experiment 2. It was
 tested on those thirty worlds:
 
 <!-- runs E02 -->
-> [!info] The runs behind this chapter
+> [!info] The runs behind this page
 > **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
 >
 > - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Book tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 
 > [!info]- Every setting of these runs
 > | setting | baseline | what it is |
@@ -331,17 +331,17 @@ falling: it can lose nine tenths of itself in ten games and live.
 
 ## What follows from this
 
-- **The youth is set apart.** Wherever the book asks where a world settles,
+- **The youth is set apart.** Wherever the notebook asks where a world settles,
   it measures from iteration 500 on ([The settled life](settled-life.md)).
 - **The end of a run is a moment in a wander.** Where a world stands at
   iteration 1,500 is not where it "settled"; a world's mean over a long
-  stretch says more ([Chapter 14](how-much-does-the-seed-decide.md)).
+  stretch says more ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 - **Turnover settles late.** Births and deaths slow down long after a world's
   size has settled — until about iteration 500 at this size, until about
   1,250 at 10,000 tokens. Whatever depends on them, such as the ages of the
-  living ([Chapter 13](how-ages-change.md)), settles only then.
+  living ([How ages change over a world's life](how-ages-change.md)), settles only then.
 
-To make every figure of this chapter: `python3 book_figures.py life`.
+To make every figure of this page: `python3 book_figures.py life`.
 
 <!-- turns -->
 ---

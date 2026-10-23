@@ -1,7 +1,7 @@
-# Meta VIII · Who helps whom
+# Who helps whom
 
-> [!question] Questions of this chapter
-> - What has the book found about cooperation, in every chapter that looked
+> [!question] Questions of this page
+> - What has the notebook found about cooperation, in every page that looked
 >   for it?
 > - Where does help exist in these worlds, and why so little of it?
 > - What has been tried to make helping pay, and what happened?
@@ -12,15 +12,15 @@ that costs the one who does it, and benefits another, be selected? There are
 five known answers — kin selection, direct reciprocity (I help you, you help
 me later), indirect reciprocity (I help whoever has a good name), groups
 competing as groups, and the network keeping helpers together
-([Chapter 38](do-agents-cooperate.md) explains each). Several chapters of
-this book have looked for one of them. This chapter puts what they found
+([Do agents cooperate?](do-agents-cooperate.md) explains each). Several pages of
+this notebook have looked for one of them. This page puts what they found
 side by side.
 
 ## What helping is, here
 
-A world of this book has one game: every agent stakes tokens on its own node
+A world of this notebook has one game: every agent stakes tokens on its own node
 and its neighbours' nodes, and whoever stakes most on a node takes it. So what
-could helping be? [Chapter 58](gliders-and-who-helps-whom.md) answered by
+could helping be? [Gliders, and who helps whom](gliders-and-who-helps-whom.md) answered by
 the rules, not by guessing from outcomes: **a stake helps** the holder of a
 node if, without it, the holder would have lost the node. That is counted
 exactly, for every stake of every game (the note [Help](help.md)).
@@ -29,17 +29,17 @@ those in danger, so the comparison measures need, not benefit.
 
 ## What was found
 
-| where | what the agents do | chapter |
+| where | what the agents do | page |
 |---|---|---|
-| B1, the baseline | Kin live next to kin, but brains cannot see kinship and stake as evenly on kin as on strangers. Stakes are returned as often as chance has it. Lasting equal exchanges are handshakes that keep a link alive, at the price the rules set. | [38](do-agents-cooperate.md) |
-| B1 | Help by the rules exists — 2.4 nodes saved per 100 agents a game — but as a by-product of revolutions: it is returned *less* than chance (0.76 of it), runs one way, and goes to clones no more than to strangers. | [58](gliders-and-who-helps-whom.md) |
-| B2, the world of Part V | Almost none: about 0.01 nodes saved per 100 agents a game, falling as the world evolves. Without revolutions or pooled sides the rules give no stake that defends another's node. | [58](gliders-and-who-helps-whom.md) |
-| B2 with stakes that support a neighbour's defence | Evolution gave them up: at face value a gift without surplus is a loss. | [50](why-evolution-stops.md) |
-| B2 with a yield on stakes returned | Built stars, not partnerships. | [50](why-evolution-stops.md) |
-| B2 with stakes pooled by genotype | Fighting cut to a third; clone groups of 8–11 agents. Pooled family tags made families of hundreds that rose and fell like empires. | [55](another-game.md) |
-| B2 with kin sense alone | No groups formed; the sense was used less than founders use it. | [55](another-game.md) |
-| B2 with alliances by mutual consent | Taken up: one alliance held 99% of the world by 2,000 iterations. It spread as a habit (say yes to every neighbour), not as a family, and brought peace: conquest fell from 8 to 0.3 per 100 agents a game. It protects by peace and exchange (gifts go round), not by rescue. | [56](alliances.md), [58](gliders-and-who-helps-whom.md) |
-| B2 with an input saying where an agent's brain came from, or what each neighbour's stake did for it in the last game | The sense of direction was used to go back: chains of takeovers returned to where they came from more often. The sense of who helped changed nothing: help stayed at 0.006–0.012 nodes per 100 agents a game (control 0.009), none was returned, gifts still ran downhill, and evolution went on at the control's pace. | [58](gliders-and-who-helps-whom.md) |
+| B1, the baseline | Kin live next to kin, but brains cannot see kinship and stake as evenly on kin as on strangers. Stakes are returned as often as chance has it. Lasting equal exchanges are handshakes that keep a link alive, at the price the rules set. | [Do agents cooperate?](do-agents-cooperate.md) |
+| B1 | Help by the rules exists — 2.4 nodes saved per 100 agents a game — but as a by-product of revolutions: it is returned *less* than chance (0.76 of it), runs one way, and goes to clones no more than to strangers. | [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
+| B2 | Almost none: about 0.01 nodes saved per 100 agents a game, falling as the world evolves. Without revolutions or pooled sides the rules give no stake that defends another's node. | [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
+| B2 with stakes that support a neighbour's defence | Evolution gave them up: at face value a gift without surplus is a loss. | [Why evolution stops](why-evolution-stops.md) |
+| B2 with a yield on stakes returned | Built stars, not partnerships. | [Why evolution stops](why-evolution-stops.md) |
+| B2 with stakes pooled by genotype | Fighting cut to a third; clone groups of 8–11 agents. Pooled family tags made families of hundreds that rose and fell like empires. | [Another game](another-game.md) |
+| B2 with kin sense alone | No groups formed; the sense was used less than founders use it. | [Another game](another-game.md) |
+| B2 with alliances by mutual consent | Taken up: one alliance held 99% of the world by 2,000 iterations. It spread as a habit (say yes to every neighbour), not as a family, and brought peace: conquest fell from 8 to 0.3 per 100 agents a game. It protects by peace and exchange (gifts go round), not by rescue. | [Alliances](alliances.md), [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
+| B2 with an input saying where an agent's brain came from, or what each neighbour's stake did for it in the last game | The sense of direction was used to go back: chains of takeovers returned to where they came from more often. The sense of who helped changed nothing: help stayed at 0.006–0.012 nodes per 100 agents a game (control 0.009), none was returned, gifts still ran downhill, and evolution went on at the control's pace. | [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
 
 ## Why so little
 
@@ -55,9 +55,9 @@ these worlds, a rule made it possible: revolutions, pooled sides, alliances.
 **There is no future to reciprocate in.** Reciprocity needs the same two
 agents to meet again. In these worlds a node changes hands constantly, and the
 brain that was helped is often gone before it could return the favour
-([Chapter 38](do-agents-cooperate.md)). Even where a pair lasts, a lasting
+([Do agents cooperate?](do-agents-cooperate.md)). Even where a pair lasts, a lasting
 mutual stake is more often a feud than a partnership
-([Chapter 58](gliders-and-who-helps-whom.md)).
+([Gliders, and who helps whom](gliders-and-who-helps-whom.md)).
 
 **Seeing is not enough.** Giving brains the information — kin sense, who
 helped me, where my brain came from — did not by itself create help. A brain
@@ -90,10 +90,10 @@ competition between groups goes on.
 
 **Related notes:** [Help](help.md) · [Flows that go round](circulation.md) ·
 [Families](families.md) ·
-[Chapter 38 · Do agents cooperate?](do-agents-cooperate.md) ·
-[Chapter 55 · Another game](another-game.md) ·
-[Chapter 56 · Alliances](alliances.md) ·
-[Chapter 58 · Gliders, and who helps whom](gliders-and-who-helps-whom.md)
+[Do agents cooperate?](do-agents-cooperate.md) ·
+[Another game](another-game.md) ·
+[Alliances](alliances.md) ·
+[Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 
 <!-- turns -->
 ---

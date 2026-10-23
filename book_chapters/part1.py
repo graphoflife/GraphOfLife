@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Part I: the illustrations of Chapters 2 to 5 — the starting ring, what one
+how the simulation works: the illustrations of Pages 2 to 5 — the starting ring, what one
 iteration does, one decision of the brain, and how worlds are measured.
 """
 from __future__ import annotations
@@ -12,18 +12,18 @@ from book_figures import (FRAMES, STATS_FILE, band_series, chapter, describe, li
                           runs_text, series, surviving_text, survivors)
 from book_chapters.common import BAND_WORDS, BLUE, GREY, WORLD_SETS, YELLOW, band_steps
 
-#: Part I teaches with the worlds of 10,000 tokens, whatever worlds Parts II and III read.
+#: how the simulation works teaches with the worlds of 10,000 tokens, whatever worlds the study of the baseline read.
 PART_ONE = WORLD_SETS["E02"]
 BAND_STEPS = band_steps(PART_ONE)
 
 
 # ---------------------------------------------------------------------------
-# Part I · the illustrations
+# how the simulation works · the illustrations
 # ---------------------------------------------------------------------------
 
 @chapter
 def world(ch: F.Chapter) -> None:
-    """Chapter 2: the founders' starting ring of one real run."""
+    """The world: tokens, agents and a network: the founders' starting ring of one real run."""
     import networkx as nx
     from GraphOfLifeSimple import new_world
     from gol_config import SimConfig
@@ -56,7 +56,7 @@ def world(ch: F.Chapter) -> None:
 
 @chapter
 def iteration(ch: F.Chapter) -> None:
-    """Chapter 3: what one iteration does, on average, in a settled world."""
+    """One iteration, step by step: what one iteration does, on average, in a settled world."""
     alive = survivors(PART_ONE.specs)
     sums = {k: 0.0 for k in ("births", "orphaned1", "starved1", "starved2", "orphaned2", "start")}
     for s in alive:
@@ -97,7 +97,7 @@ def iteration(ch: F.Chapter) -> None:
 
 @chapter
 def brain(ch: F.Chapter) -> None:
-    """Chapter 4: one decision a brain makes, before and after selection."""
+    """The brain: one decision a brain makes, before and after selection."""
     specs = PART_ONE.specs
     first, last = [], []
     for s in specs:
@@ -133,7 +133,7 @@ def brain(ch: F.Chapter) -> None:
 
 @chapter
 def measure(ch: F.Chapter) -> None:
-    """Chapter 5: how a band is made from the worlds."""
+    """How worlds are measured: how a band is made from the worlds."""
     specs = PART_ONE.specs
     thin_lines = []
     for s in specs:
@@ -167,7 +167,7 @@ def measure(ch: F.Chapter) -> None:
                 {"label": "mean of each stretch of 100", "x": steps_x, "y": steps_y, "colour": YELLOW, "width": 2.5}],
         caption="The world with seed 1: its number of agents after every game (blue), and its mean "
                 "over each of the 29 stretches of 100 iterations from iteration 100 to 2,999 "
-                "(yellow). Many measurements in this book are means over such stretches.",
+                "(yellow). Many measurements in this notebook are means over such stretches.",
         recipe=recipe("`B1-10000-s001`.", STATS_FILE,
                       ["Plot `nodes` of the rows with `phase` = 2.",
                        "For a = 100, 200, …, 2,900, average `nodes` over a ≤ `iteration` ≤ a + 99."]))
