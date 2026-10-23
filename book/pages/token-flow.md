@@ -54,6 +54,6 @@ it goes.
 
 ← [Staking at home, and keeping one's node](home-stake.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Lightning: tokens that go round](lightning.md) →
 
-> [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Lightning: tokens that go round](lightning.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning: tokens that go round](lightning.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

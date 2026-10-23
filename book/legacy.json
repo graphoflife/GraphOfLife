@@ -31,7 +31,7 @@
   "27": "where-do-the-tokens-go#how-even-is-a-world",
   "28": "gains-and-losses",
   "29": "where-the-tokens-flow",
-  "30": "what-crosses-a-connection",
+  "30": "where-the-tokens-flow#what-crosses-a-connection",
   "31": "how-agents-have-children",
   "32": "power-laws-real-and-apparent",
   "33": "the-largest-and-the-smallest",
@@ -44,7 +44,7 @@
   "40": "what-the-baseline-world-is#what-the-measurements-say-about-open-ended-evolution",
   "70": "how-different-are-the-agents",
   "71": "flow-modules",
-  "72": "lightning-in-every-world",
+  "72": "where-the-tokens-flow#lightning-in-every-world",
   "41": "do-the-brains-matter",
   "42": "how-does-a-worlds-size-follow-its-tokens",
   "43": "brains-replaced-by-their-average",
@@ -294,6 +294,8 @@
   "how-the-network-grows": "how-agents-have-children#how-the-network-grows",
   "how-even-is-a-world": "where-do-the-tokens-go#how-even-is-a-world",
   "do-the-rich-stay-rich": "where-do-the-tokens-go#do-the-rich-stay-rich",
-  "how-ages-change": "births-deaths-and-ages#how-ages-change-over-a-worlds-life"
+  "how-ages-change": "births-deaths-and-ages#how-ages-change-over-a-worlds-life",
+  "what-crosses-a-connection": "where-the-tokens-flow#what-crosses-a-connection",
+  "lightning-in-every-world": "where-the-tokens-flow#lightning-in-every-world"
  }
 }

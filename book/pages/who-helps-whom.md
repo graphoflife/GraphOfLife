@@ -78,7 +78,7 @@ than brains:
    an agent whose brain survives being conquered (a "came from" input was a
    first, insufficient step).
 3. **A reason to stay**: in B2 the flow runs one way because links do not have
-   to be used ([Lightning in every world](lightning-in-every-world.md)).
+   to be used ([Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)).
    Where links must carry tokens to survive, agents stake on each other — the
    raw material of exchange is already there.
 

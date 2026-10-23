@@ -662,7 +662,7 @@
     },
     {
       "id": "where-the-tokens-flow",
-      "title": "Where the tokens flow",
+      "title": "Where tokens flow",
       "file": "pages/where-the-tokens-flow.md",
       "topics": [
         "game"
@@ -670,19 +670,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Of all the tokens staked in a game, how many stay at home, how many cross a connection and are matched by a stake coming back, and how many go one way only? How widely do agents spread their stakes, and how close is that to splitting them evenly? Can a game be described as a random walk of tokens? What would that predict about who is rich?"
-    },
-    {
-      "id": "what-crosses-a-connection",
-      "title": "What crosses a connection",
-      "file": "pages/what-crosses-a-connection.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-11",
-      "summary": "How many tokens cross a connection in a game, and how unevenly? How much of it comes straight back the other way? How long are the loops in which tokens go round?"
+      "summary": "In every game, each agent stakes all its tokens on itself and its neighbours, and whoever wins a node keeps what was staked on it. In a settled B1 world, 30% of the tokens stay home, 51% are matched by a stake coming back, and only 20% move one way."
     },
     {
       "id": "flow-modules",
@@ -696,18 +684,6 @@
       "status": "written",
       "added": "2026-10-16",
       "summary": "The groups a token tends to stay inside (the map equation), in every world, set beside the same flow with every agent's partners dealt among its neighbours: B1's groups are its network's, B2's flow is pairs, and only B2's agents keep a partner longer than chance."
-    },
-    {
-      "id": "lightning-in-every-world",
-      "title": "Lightning in every world",
-      "file": "pages/lightning-in-every-world.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Loops of flow measured in every world the notebook has made: B1's flow goes round and B2's runs one way, decided by whether unused links lapse; the longest loop is as long as the world is wide."
     },
     {
       "id": "home-stake",

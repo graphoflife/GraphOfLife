@@ -174,7 +174,7 @@ or two tokens**, both directions together; 1,812 carried 3 to 9; 7 carried 10
 to 49; 9 carried 50 or more. Almost every connection of the world is kept
 alive at a low price, a few tokens a game
 ([How a world breaks](how-a-world-breaks.md)). (In the world of 10,000 tokens drawn
-in the first edition, 2,145 of 2,447 carried one or two; [What crosses a connection](what-crosses-a-connection.md)
+in the first edition, 2,145 of 2,447 carried one or two; [What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)
 counts every connection of every world.) The traffic of a world is thin and
 everywhere, not heavy on a few roads.
 

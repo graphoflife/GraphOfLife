@@ -343,7 +343,7 @@ and *How big should a brain be?* is still to come.
 
 The pages on B1 measured its world in every way the viewer can, and a few
 more. In the second edition they read thirty worlds of 100,000 tokens, with
-two new pages: [What crosses a connection](what-crosses-a-connection.md) and
+two new pages: [What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection) and
 [The largest and the smallest](the-largest-and-the-smallest.md). This section
 steps back and asks what all of it means for the question the notebook
 exists for: **can open-ended evolution happen in Graph of Life, and what
@@ -395,7 +395,7 @@ and never circulate. **Connections** have a price. Two connections in three
 carry one or two tokens a game, most of them one each way: an equal exchange
 that keeps the connection alive at its price of a token a game. Every
 connection that carries nothing is cut
-([What crosses a connection](what-crosses-a-connection.md),
+([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection),
 [Do agents cooperate?](do-agents-cooperate.md)). **The network** is a
 stretched web of stars, grown locally by children joining their parents'
 neighbourhoods. It is four and a half times as long as a random network with
@@ -970,5 +970,5 @@ the rule changes of both aims will be tested together where they coincide.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

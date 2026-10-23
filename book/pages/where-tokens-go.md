@@ -33,7 +33,7 @@ then split their tokens evenly for them
 On a link, a game is small change: 52% of links carry exactly two tokens,
 and on 70% the two directions cancel exactly — a stake for a stake. A link
 that carries nothing is cut, every one of 1,650,222 of them in B1's worlds
-([What crosses a connection](what-crosses-a-connection.md#how-much-crosses-a-connection)).
+([What crosses a connection](where-the-tokens-flow.md#how-much-crosses-a-connection)).
 
 ## Where tokens come to rest
 
@@ -83,23 +83,23 @@ Within one game almost nothing goes round. After the returned stakes are
 cancelled, a greedy search finds 0.3% of the [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") in loops, and the
 conservation of tokens allows at most 16%: the net flow of a game runs downhill
 ([Where the tokens flow](where-the-tokens-flow.md#do-tokens-go-round),
-[What crosses a connection](what-crosses-a-connection.md#the-flow-in-round-figures)).
+[What crosses a connection](where-the-tokens-flow.md#the-flow-in-round-figures)).
 The gross loops are as long as the world is wide — the longest grows as the
 tokens to the power 0.31 — and after cancelling they are five or six agents
-long ([Lightning in every world](lightning-in-every-world.md#the-longest-loop-grows-with-the-world)).
+long ([Lightning in every world](where-the-tokens-flow.md#the-longest-loop-grows-with-the-world)).
 
 Over fifty games, the exact decomposition of the flow into a part that runs
 downhill and a part that circulates finds 80% of B1's net flow circulating
 and 59% of B2's. **But random flow on the same networks circulates 59% to 60%
 and 50% to 53%**: the excess the agents add is about 0.2 in B1 and under 0.1
-in B2 ([Lightning in every world](lightning-in-every-world.md#a-greedy-count-and-an-exact-one)).
+in B2 ([Lightning in every world](where-the-tokens-flow.md#a-greedy-count-and-an-exact-one)).
 How the one-game count and the fifty-game count fit together is still open.
 
 One rule decides how much goes round in the first place: **whether a link must
 carry tokens to survive.** Where it must — B1, and B2 with every unused link
 lapsing — 17% to 28% of the staked flow is on loops; in B2, whose links survive
 unused if their ends share two neighbours, 4.5%, and the share falls over a
-world's life ([Lightning in every world](lightning-in-every-world.md#every-world)).
+world's life ([Lightning in every world](where-the-tokens-flow.md#every-world)).
 
 ## Gifts, takeovers and groups
 
@@ -151,10 +151,10 @@ births fills a world**, to half as many agents again and poorer
 
 **Related notes:** [Where do the tokens go?](where-do-the-tokens-go.md) ·
 [Where the tokens flow](where-the-tokens-flow.md) ·
-[What crosses a connection](what-crosses-a-connection.md) ·
+[What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection) ·
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md) ·
 [Flow modules: the groups tokens stay in](flow-modules.md) ·
-[Lightning in every world](lightning-in-every-world.md) ·
+[Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world) ·
 [What goes with what](what-goes-with-what.md) ·
 [Who inherits?](who-inherits.md) ·
 [What holds a world's size](what-holds-a-worlds-size.md)
@@ -165,5 +165,5 @@ births fills a world**, to half as many agents again and poorer
 [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [How the game is played](how-the-game-is-played.md) →
 
 > [!info]- Pages that link here (2)
-> [The estate of the dead](estate.md) · [Lightning in every world](lightning-in-every-world.md)
+> [The estate of the dead](estate.md) · [Where tokens flow](where-the-tokens-flow.md)
 <!-- /turns -->

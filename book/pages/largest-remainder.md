@@ -111,5 +111,5 @@ In the code it is `_apportion(weights, total)` in `GraphOfLifeSimple.py`.
 ← [A yes-or-no decision](binary-decision.md) · [How the simulation works](../README.md#how-the-simulation-works) · [What a brain sees](brain-inputs.md) →
 
 > [!info]- Pages that link here (9)
-> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md)
 <!-- /turns -->

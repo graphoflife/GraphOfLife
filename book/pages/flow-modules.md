@@ -92,7 +92,7 @@ Some worlds stand apart within their kind:
   a neighbour.
 - Batch S's two pilot worlds with **lapsing links**, with and without gifts,
   are B1-like, as the lab's world with lapsing links is — the split
-  [Lightning in every world](lightning-in-every-world.md) found for [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") of flow.
+  [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world) found for [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") of flow.
 
 ## What the network makes, and what the agents make
 
@@ -283,15 +283,15 @@ fifths.
 [How the game is played](how-the-game-is-played.md) ·
 [Where the tokens flow](where-the-tokens-flow.md) ·
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md) ·
-[Lightning in every world](lightning-in-every-world.md)
+[Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)
 
 <!-- turns -->
 ---
 
-← [What crosses a connection](what-crosses-a-connection.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Lightning in every world](lightning-in-every-world.md) →
+← [Where tokens flow](where-the-tokens-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Staking at home, and keeping one's node](home-stake.md) →
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
 > [!info]- Pages that link here (8)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where tokens go](where-tokens-go.md) · [Lightning in every world](lightning-in-every-world.md) · [Flow modules and the map equation](map-equation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules and the map equation](map-equation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

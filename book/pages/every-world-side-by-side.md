@@ -81,7 +81,7 @@ what a parent keeps, old age, random inputs, valence, mending, links at birth,
 handing links over — moved its worlds only within the left cloud. Without
 mending, and with handover, the worlds moved furthest, about a third of the way
 towards the middle. One setting crossed over: the worlds of Experiment 14 in
-which **any unused link lapses** (green) sit with B1. [Lightning in every world](lightning-in-every-world.md) found the same
+which **any unused link lapses** (green) sit with B1. [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world) found the same
 in the flow: where a link must carry [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") to survive, agents stake on each
 other and play the way B1's agents play.
 
@@ -179,7 +179,7 @@ longer makes.
 [How many directions a cloud has](participation-ratio.md) ·
 [Spread between worlds](spread-between-worlds.md) ·
 [What goes with what](what-goes-with-what.md) ·
-[Lightning in every world](lightning-in-every-world.md)
+[Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)
 
 <!-- turns -->
 ---
@@ -187,5 +187,5 @@ longer makes.
 [Methods and statistics](../README.md#methods-and-statistics) · [The lab, the engine and pilots](the-lab.md) →
 
 > [!info]- Pages that link here (3)
-> [Lightning in every world](lightning-in-every-world.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Where tokens flow](where-the-tokens-flow.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

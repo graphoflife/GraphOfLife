@@ -400,7 +400,7 @@ cut ([`prune_after`](settings.md#prune_after),
 [`inactive_window`](settings.md#inactive_window)).
 
 **What the data say.** Two connections in three carry one or two tokens in a
-game ([What crosses a connection](what-crosses-a-connection.md)). 66% of mutual
+game ([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)). 66% of mutual
 stakes are one token each way, 58% at 10,000 tokens
 ([Do agents cooperate?](do-agents-cooperate.md)). Regions of poor agents lose
 their connections and die ([How a world breaks](how-a-world-breaks.md)).
@@ -596,5 +596,5 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
 > [!info]- Pages that link here (13)
-> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Age and lifetime](age-and-lifetime.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Age and lifetime](age-and-lifetime.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

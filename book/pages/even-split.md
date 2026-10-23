@@ -118,7 +118,7 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 <!-- turns -->
 ---
 
-← [How the game is played](how-the-game-is-played.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Where the tokens flow](where-the-tokens-flow.md) →
+← [How the game is played](how-the-game-is-played.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Where tokens flow](where-the-tokens-flow.md) →
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
