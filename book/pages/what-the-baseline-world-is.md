@@ -33,7 +33,7 @@ measures.
 It was first written after Experiments 1 to 5, on worlds of 10,000 tokens,
 and kept up to date as more pages were written. Its second edition reads
 thirty worlds of 100,000 tokens. Two pages are new with it:
-[How ages change over a world's life](how-ages-change.md) and
+[How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) and
 [The core of a world](the-core-of-a-world.md).
 
 ### The record
@@ -84,7 +84,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
   to about one game in a hundred: there is no ageing. The ages of the living
   follow from the [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), as in a stationary population, one whose make-up
   holds still while its members come and go
-  ([How ages change over a world's life](how-ages-change.md)).
+  ([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
 - **A Gini coefficient of wealth of 0.47** (0.49), with the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.")
   holding **42%** of the tokens (44%)
   ([Where do the tokens go?](where-do-the-tokens-go.md)).
@@ -184,7 +184,7 @@ Births fall long after a world's size has settled: by 28% from iterations
 the ages of the living rise. In a large world the change is over by
 iteration 500. From then on its births per agent, its lifetimes and its ages
 hold still, as a stationary population's do
-([How ages change over a world's life](how-ages-change.md)). The small worlds
+([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)). The small worlds
 went on slowing until about iteration 1,250, and their living grew older than
 their lifetimes alone would make them.
 

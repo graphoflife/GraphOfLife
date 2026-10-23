@@ -123,6 +123,6 @@ the founders make of it.
 
 ← [Every setting](settings.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Seeds and the random stream](random-numbers.md) →
 
-> [!info]- Pages that link here (12)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (13)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [Births and the four ways to die](births-and-deaths.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

@@ -316,8 +316,8 @@ def ages(ch: F.Chapter) -> None:
         x={"label": "age, iterations (logarithmic)", "log": True, "min": 1},
         y={"label": "share of those alive at that age who die in the next game (logarithmic)", "log": True},
         series=hz,
-        caption="Of the agents alive after the game at which they were a given age, the share that is gone after "
-                "the next game — the agent's chance of dying at that age, pooled over the worlds, for agents born "
+        caption="At each age a: of the agents alive after the game at age a − 1, the share that is gone after the "
+                "game at age a — the agent's chance of dying at that age, pooled over the worlds, for agents born "
                 f"early in a world's life (orange) and in its settled life (blue). An age is drawn only where at "
                 "least 200 agents reached it.",
         recipe=recipe(W.runs_text(), LIFELINES,

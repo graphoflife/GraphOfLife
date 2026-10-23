@@ -333,7 +333,7 @@ But at ten times the tokens, the dimension from ball growth is 15% higher
 (3.4 against 3.0, [The geometry of a world](the-geometry-of-a-world.md)).
 Births and deaths per agent run 13 to 21% higher, as
 [Births, deaths and ages](births-deaths-and-ages.md) and
-[How ages change over a world's life](how-ages-change.md) find too. Leaves
+[How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) find too. Leaves
 are only 5% fewer, and [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") is less than half. So births, the rate of
 cutting and the dimension do change with size, a little. And the shape
 changes more than leaves and loops alone show.
@@ -712,7 +712,7 @@ share and the genotypes per agent are all within 3% of their values at 10,000
 tokens. So are the shares of nodes taken by [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") and kept by their own
 agent. There are 8% more connections per agent and 5% fewer leaves. Births
 and deaths per agent are 13 to 21% higher
-([How ages change over a world's life](how-ages-change.md) finds the old
+([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) finds the old
 dying more often too). A large world is made of the same kind of agents,
 living the same kind of lives, a little faster.
 

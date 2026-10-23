@@ -14,7 +14,7 @@
   "10": "a-worlds-life",
   "11": "a-worlds-life#the-first-hundred-iterations",
   "12": "births-deaths-and-ages",
-  "13": "how-ages-change",
+  "13": "births-deaths-and-ages#how-ages-change-over-a-worlds-life",
   "14": "how-much-does-the-seed-decide",
   "15": "where-do-the-tokens-go",
   "16": "how-the-game-is-played",
@@ -293,6 +293,7 @@
   "worlds-of-100000-tokens": "how-does-a-worlds-size-follow-its-tokens#worlds-of-100000-tokens",
   "how-the-network-grows": "how-agents-have-children#how-the-network-grows",
   "how-even-is-a-world": "where-do-the-tokens-go#how-even-is-a-world",
-  "do-the-rich-stay-rich": "where-do-the-tokens-go#do-the-rich-stay-rich"
+  "do-the-rich-stay-rich": "where-do-the-tokens-go#do-the-rich-stay-rich",
+  "how-ages-change": "births-deaths-and-ages#how-ages-change-over-a-worlds-life"
  }
 }

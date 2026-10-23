@@ -71,7 +71,6 @@ The two standard worlds every experiment starts from: B1, the original rules, an
 Who is born, who dies and when, how old agents get, and how a world's ages change.
 
 - [Births, deaths and ages](pages/births-deaths-and-ages.md)
-- [How ages change over a world's life](pages/how-ages-change.md)
 - [How births build the network](pages/how-agents-have-children.md)
 - [Births and the four ways to die](pages/births-and-deaths.md)
 - [The estate of the dead](pages/estate.md)

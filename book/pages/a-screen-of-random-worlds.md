@@ -399,6 +399,6 @@ round.
 
 ← [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world)
 
-> [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
+> [!info]- Pages that link here (8)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Reproduction statistics](reproduction-statistics.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
 <!-- /turns -->

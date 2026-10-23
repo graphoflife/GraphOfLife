@@ -445,19 +445,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How often is an agent born? How do agents die, and which way of dying is the most common? How long do agents live?"
-    },
-    {
-      "id": "how-ages-change",
-      "title": "How ages change over a world's life",
-      "file": "pages/how-ages-change.md",
-      "topics": [
-        "lives"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-11",
-      "summary": "How old are the living, iteration by iteration — the typical agent and the oldest? Do agents born late in a world's life live longer than agents born early? At which age is an agent most likely to die, and does that change?"
+      "summary": "From iteration 500 on, a world of 100,000 tokens keeps about 14,400 agents, but replaces about 3.5 in a hundred of them in every iteration. Three in four of those that die are cut off from the network, and the rest starve."
     },
     {
       "id": "how-agents-have-children",
@@ -483,7 +471,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "An agent comes into a world in one way and leaves it in one of four."
+      "summary": "After a world's founders, every agent enters it the same way: a parent gives it tokens in a reproduction phase, and it is born. In B1 it leaves in one of four ways: it starves or it is cut off, after reproduction or after the game."
     },
     {
       "id": "estate",
@@ -508,7 +496,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Two different questions: *how old are the agents alive now?* and *how long does an agent live?* They have different answers, and the difference is worth understanding."
+      "summary": "An agent's age is how many iterations ago it was born; its lifetime is how many games it lives through. They answer two different questions: how old are the agents alive now, and how long does an agent live?"
     },
     {
       "id": "reproduction-statistics",
@@ -520,7 +508,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Every reproduction phase records every birth: the parent, the tokens it held, the tokens it gave, the candidates the child was joined to, and the connections the parent handed over (One iteration, step by step)."
+      "summary": "Every reproduction phase records each birth. It notes the parent, the tokens it held and gave, whom the child was joined to, and the connections the parent handed over. The row of statistics written after the phase sums these up in a few numbers."
     },
     {
       "id": "where-do-the-tokens-go",

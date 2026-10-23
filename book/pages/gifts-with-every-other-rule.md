@@ -112,6 +112,6 @@ gifts and revolutions, and 0.89 and 0.08 with gifts and no revolutions.
 
 ← [Handover, with every other rule](handover-with-every-other-rule.md) · [Changing the rules](../README.md#changing-the-rules)
 
-> [!info]- Pages that link here (3)
-> [Every setting](settings.md) · [Rules in company](rules-in-company.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (4)
+> [Every setting](settings.md) · [Reproduction statistics](reproduction-statistics.md) · [Rules in company](rules-in-company.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
