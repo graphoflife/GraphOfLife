@@ -367,4 +367,7 @@ To make every figure of this page: `python3 book_figures.py cooperation`.
 ---
 
 ← [Who helps whom](who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Another game](another-game.md) →
+
+> [!info]- Pages that link here (11)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Like next to like](like-next-to-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Who helps whom](who-helps-whom.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

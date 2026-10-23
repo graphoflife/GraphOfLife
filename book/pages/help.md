@@ -100,4 +100,7 @@ it did, not what it was for.
 ---
 
 ← [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation)
+
+> [!info]- Pages that link here (2)
+> [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 <!-- /turns -->

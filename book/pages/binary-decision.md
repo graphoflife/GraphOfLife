@@ -59,4 +59,7 @@ stream ([Seeds and the random stream](random-numbers.md)).
 ---
 
 ← [The share function f(a, b)](share-function.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Splitting tokens into whole numbers](largest-remainder.md) →
+
+> [!info]- Pages that link here (5)
+> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md)
 <!-- /turns -->

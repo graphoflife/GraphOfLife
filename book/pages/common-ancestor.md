@@ -45,4 +45,9 @@ per iteration while no line takes over, and drops when one does
 ---
 
 ← [Families](families.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
+
+> [!info]- Pages that link here (6)
+> [The first hundred iterations](the-first-hundred-iterations.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md)
 <!-- /turns -->

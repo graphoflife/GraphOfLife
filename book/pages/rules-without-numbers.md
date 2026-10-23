@@ -239,4 +239,9 @@ come next:
 ---
 
 ← [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Changing the rules](../README.md#changing-the-rules) · [Who inherits?](who-inherits.md) →
+
+**Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
+
+> [!info]- Pages that link here (6)
+> [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

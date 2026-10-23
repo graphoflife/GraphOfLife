@@ -43,4 +43,7 @@ mean is five times the median.
 ---
 
 ← [The richest tenth's share](richest-tenth.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Entropy and evenness](entropy-and-evenness.md) →
+
+> [!info]- Pages that link here (1)
+> [What a run records](frames-and-stats.md)
 <!-- /turns -->

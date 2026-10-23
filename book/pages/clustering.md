@@ -58,4 +58,7 @@ stretches hanging off its clustered core
 ---
 
 ← [Preferential attachment and its kernel](preferential-attachment.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Path length](path-length.md) →
+
+> [!info]- Pages that link here (7)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

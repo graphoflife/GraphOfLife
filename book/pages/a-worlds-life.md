@@ -347,4 +347,9 @@ To make every figure of this page: `python3 book_figures.py life`.
 ---
 
 ← [Thirty worlds](thirty-worlds.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [The first hundred iterations](the-first-hundred-iterations.md) →
+
+**Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
+
+> [!info]- Pages that link here (23)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [What a simulation costs](what-a-simulation-costs.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Bands: many worlds in one figure](bands.md) · [The settled life of a world](settled-life.md)
 <!-- /turns -->

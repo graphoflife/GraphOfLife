@@ -52,4 +52,7 @@ average world, and a column's height shows the spread
 ---
 
 ← [The settled life of a world](settled-life.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Correlation](correlation.md) →
+
+> [!info]- Pages that link here (5)
+> [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Do the brains matter?](do-the-brains-matter.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [How many seeds an experiment needs](seeds-needed.md)
 <!-- /turns -->

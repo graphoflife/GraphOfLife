@@ -66,4 +66,7 @@ when a run had last been paused.
 ---
 
 ← [Brain diversity](brain-diversity.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [The common ancestor of the living](common-ancestor.md) →
+
+> [!info]- Pages that link here (7)
+> [The first hundred iterations](the-first-hundred-iterations.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Who helps whom](who-helps-whom.md) · [One world, many colours](one-world-many-colours.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

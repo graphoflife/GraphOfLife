@@ -272,4 +272,7 @@ windows of cooperation and the gains, and decides the thesis.
 ---
 
 ← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [What would count as open-ended evolution](open-ended-test.md) →
+
+> [!info]- Pages that link here (5)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Healthy and rich](healthy-and-rich.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

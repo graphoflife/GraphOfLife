@@ -62,4 +62,7 @@ worlds over their settled life ([The settled life of a world](settled-life.md)).
 ---
 
 ← [Correlation](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Mobility](mobility.md) →
+
+> [!info]- Pages that link here (6)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How worlds are measured](how-worlds-are-measured.md) · [Between worlds and within them](between-and-within.md) · [The power spectrum of a time series](power-spectrum.md)
 <!-- /turns -->

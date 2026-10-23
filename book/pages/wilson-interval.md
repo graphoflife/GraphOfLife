@@ -35,4 +35,7 @@ the true share about as often as it promises.
 ---
 
 ← [How many seeds an experiment needs](seeds-needed.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Logarithmic axes and power laws](logarithmic-axes.md) →
+
+> [!info]- Pages that link here (1)
+> [How worlds are measured](how-worlds-are-measured.md)
 <!-- /turns -->

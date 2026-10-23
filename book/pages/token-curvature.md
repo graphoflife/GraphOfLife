@@ -48,4 +48,7 @@ a peak and red a valley.
 ---
 
 ← [Lightning: tokens that go round](lightning.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flows that go round](circulation.md) →
+
+> [!info]- Pages that link here (4)
+> [Gains and losses](gains-and-losses.md) · [Physical inspiration](physical-inspiration.md) · [What goes with what](what-goes-with-what.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

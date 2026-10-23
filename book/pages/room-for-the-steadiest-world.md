@@ -253,4 +253,9 @@ apart, even in the steadiest mixed world. What each rule pays is now known:
 ---
 
 ← [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [A screen of random worlds](a-screen-of-random-worlds.md) →
+
+**Also about:** [Space and dimension](../README.md#space-and-dimension).
+
+> [!info]- Pages that link here (5)
+> [Every setting](settings.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

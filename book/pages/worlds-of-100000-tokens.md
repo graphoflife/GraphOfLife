@@ -381,4 +381,9 @@ To make every figure of this page: `python3 book_figures.py takeover`.
 ---
 
 ← [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [What folds a world](what-folds-a-world.md) →
+
+**Also about:** [Size and riches of a world](../README.md#size-and-riches-of-a-world).
+
+> [!info]- Pages that link here (19)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One world, many colours](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

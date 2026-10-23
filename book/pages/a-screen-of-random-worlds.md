@@ -198,4 +198,7 @@ be by chance.
 ---
 
 ← [Room for the steadiest world](room-for-the-steadiest-world.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world)
+
+> [!info]- Pages that link here (2)
+> [What this notebook is about](what-this-notebook-is-about.md) · [What makes a world interesting](what-makes-a-world-interesting.md)
 <!-- /turns -->

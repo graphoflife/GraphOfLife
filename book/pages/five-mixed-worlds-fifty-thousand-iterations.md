@@ -301,4 +301,9 @@ led to extinction by the very brains that win in it.
 ---
 
 ← [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) →
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
+
+> [!info]- Pages that link here (9)
+> [What holds a world's size](what-holds-a-worlds-size.md) · [Every era against three](every-era-against-three.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -54,4 +54,7 @@ dimension to mean something, but not sufficient.
 ---
 
 ← [The spectral dimension](spectral-dimension.md) · [Space and dimension](../README.md#space-and-dimension)
+
+> [!info]- Pages that link here (3)
+> [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

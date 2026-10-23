@@ -53,4 +53,7 @@ a tree ([Core, trees and leaves](core-trees-leaves.md)).
 ---
 
 ← [Bridges](bridges.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Cut risk](cut-risk.md) →
+
+> [!info]- Pages that link here (4)
+> [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

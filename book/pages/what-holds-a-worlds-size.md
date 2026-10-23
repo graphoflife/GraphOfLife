@@ -183,4 +183,9 @@ Ways to build the pull, and the first of them tried:
 ---
 
 [Size and riches of a world](../README.md#size-and-riches-of-a-world) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) →
+
+**Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
+
+> [!info]- Pages that link here (13)
+> [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

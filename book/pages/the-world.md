@@ -166,4 +166,7 @@ about 300 megabytes on disk; one of 100,000 tokens and 1,500 iterations writes
 ---
 
 [How the simulation works](../README.md#how-the-simulation-works) · [One iteration, step by step](one-iteration.md) →
+
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The starting ring](starting-ring.md) · [Thirty worlds](thirty-worlds.md) · [How the game is played](how-the-game-is-played.md) · [What shape does the network take?](what-shape-does-the-network-take.md)
 <!-- /turns -->

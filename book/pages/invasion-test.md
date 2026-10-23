@@ -52,4 +52,9 @@ but not that it is.
 ---
 
 ← [Hand-written strategies in B1](hand-written-strategies-in-b1.md) · [Strategies written by hand](../README.md#strategies-written-by-hand)
+
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (4)
+> [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
 <!-- /turns -->

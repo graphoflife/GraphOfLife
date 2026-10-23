@@ -190,4 +190,9 @@ tokens a raider cannot start among agents that hold two.
 ---
 
 ← [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [A crew of raiders](a-crew-of-raiders.md) →
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
+
+> [!info]- Pages that link here (3)
+> [A crew of raiders](a-crew-of-raiders.md) · [Raiders that breed](raiders-that-breed.md) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md)
 <!-- /turns -->

@@ -319,4 +319,7 @@ size.
 ---
 
 [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Thirty worlds](thirty-worlds.md) →
+
+> [!info]- Pages that link here (3)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Thirty worlds](thirty-worlds.md) · [Do the brains matter?](do-the-brains-matter.md)
 <!-- /turns -->

@@ -355,4 +355,7 @@ To make every figure of this page: `python3 book_figures.py dimensions`.
 ---
 
 ← [Like next to like](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) →
+
+> [!info]- Pages that link here (14)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

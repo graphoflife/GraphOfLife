@@ -260,4 +260,9 @@ paupers a child's neighbours are paupers too.
 ---
 
 ← [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Size and riches of a world](../README.md#size-and-riches-of-a-world) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) →
+
+**Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
+
+> [!info]- Pages that link here (3)
+> [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

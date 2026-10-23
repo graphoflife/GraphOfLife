@@ -287,6 +287,16 @@ def test_no_page_is_named_by_a_number():
     assert not found, "pages named by a number:\n  " + "\n  ".join(found[:40])
 
 
+def test_every_page_is_filled_as_the_notebook_says():
+    # The blocks of a page — figures, theses, runs, contents, and the foot that
+    # names its topic and the pages that link to it — are made from book.json,
+    # the plans and the results. A page edited without `python3 book_fill.py`
+    # after it shows a foot, a list or a link that no longer holds.
+    import book_fill
+    stale = book_fill.fill(write=False)
+    assert stale == 0, f"{stale} pages are not filled as book_fill would fill them: run python3 book_fill.py"
+
+
 def test_every_number_a_thesis_cites_has_its_page():
     # A thesis keeps the chapter numbers of the day it was written; each must
     # be mapped to the page it meant, or it would link nowhere.

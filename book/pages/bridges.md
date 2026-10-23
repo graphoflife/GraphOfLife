@@ -47,4 +47,7 @@ foretells how many agents a game cuts off.
 ---
 
 ← [Core, trees and leaves](core-trees-leaves.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Loops](loops.md) →
+
+> [!info]- Pages that link here (8)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Core, trees and leaves](core-trees-leaves.md) · [Cut risk](cut-risk.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

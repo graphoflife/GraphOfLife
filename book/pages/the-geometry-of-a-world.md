@@ -304,4 +304,9 @@ To make every figure of this page: `python3 book_figures.py geometry`.
 ---
 
 ← [How properties scale together](how-properties-scale-together.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
+
+**Also about:** [Space and dimension](../README.md#space-and-dimension).
+
+> [!info]- Pages that link here (13)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

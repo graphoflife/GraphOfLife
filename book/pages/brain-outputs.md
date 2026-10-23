@@ -49,4 +49,9 @@ every run of this notebook both are on and the layout is the one above.
 ---
 
 ← [What a brain sees](brain-inputs.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Messages](messages.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (7)
+> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [A yes-or-no decision](binary-decision.md) · [What a brain sees](brain-inputs.md) · [Messages](messages.md) · [How the game is played](how-the-game-is-played.md) · [What a brain can compute](what-a-brain-can-compute.md)
 <!-- /turns -->

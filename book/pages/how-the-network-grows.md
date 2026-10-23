@@ -216,4 +216,9 @@ To make every figure of this page: `python3 book_figures.py grows`.
 ---
 
 ← [What shape does the network take?](what-shape-does-the-network-take.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The core of a world](the-core-of-a-world.md) →
+
+**Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
+
+> [!info]- Pages that link here (8)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [How ages change over a world's life](how-ages-change.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
 <!-- /turns -->

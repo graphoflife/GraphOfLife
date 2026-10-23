@@ -276,4 +276,7 @@ To make every figure of this page: `python3 book_figures.py rich`.
 ---
 
 ← [How even is a world?](how-even-is-a-world.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains and losses](gains-and-losses.md) →
+
+> [!info]- Pages that link here (7)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [How ages change over a world's life](how-ages-change.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Mobility](mobility.md)
 <!-- /turns -->

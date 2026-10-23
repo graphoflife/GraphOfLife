@@ -352,4 +352,7 @@ change only when copied — and neither does it either (−0.02 and +0.14).
 ---
 
 ← [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Changing the rules](../README.md#changing-the-rules) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) →
+
+> [!info]- Pages that link here (6)
+> [Rules in company](rules-in-company.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md)
 <!-- /turns -->

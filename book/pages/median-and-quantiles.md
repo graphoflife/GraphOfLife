@@ -54,4 +54,7 @@ highest one or two. See [Bands](bands.md) for how this is drawn over time.
 ---
 
 ← [Pilot worlds](pilot-worlds.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Bands: many worlds in one figure](bands.md) →
+
+> [!info]- Pages that link here (7)
+> [What this notebook is about](what-this-notebook-is-about.md) · [What a brain sees](brain-inputs.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Degree](degree.md) · [How worlds are measured](how-worlds-are-measured.md) · [Bands: many worlds in one figure](bands.md) · [The bootstrap](bootstrap.md)
 <!-- /turns -->

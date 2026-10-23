@@ -41,4 +41,7 @@ loses them, the child gains them. They never add a connection to the world.
 ---
 
 ← [Age and lifetime](age-and-lifetime.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages)
+
+> [!info]- Pages that link here (2)
+> [How agents have children](how-agents-have-children.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

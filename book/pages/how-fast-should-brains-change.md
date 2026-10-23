@@ -315,4 +315,9 @@ keeps evolution from going on.
 ---
 
 ← [Why evolution stops](why-evolution-stops.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [Every era against three](every-era-against-three.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (5)
+> [How even is a world?](how-even-is-a-world.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Another game](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

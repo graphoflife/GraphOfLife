@@ -294,4 +294,7 @@ eleven of sixteen (0.55); Experiment 17's mixed worlds held 0.84, 0.66 and
 ---
 
 ← [A mate that pays its share](a-mate-that-pays-its-share.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) →
+
+> [!info]- Pages that link here (5)
+> [Every era against three](every-era-against-three.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

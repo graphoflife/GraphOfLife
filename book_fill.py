@@ -33,7 +33,7 @@ import json
 import os
 import re
 import sys
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
 BOOK = os.path.join(os.path.dirname(os.path.abspath(__file__)), "book")
 
@@ -378,21 +378,64 @@ def contents(md: str, _: str) -> str:
     return "\n".join(out).strip("\n")
 
 
+#: The pages that link to each page, by file, in reading order: what a page says,
+#: not how it is found, so the links of the navigation, the contents and the
+#: tables of settings are left out. fill() works it out once the other blocks
+#: are filled, and the navigation shows it.
+BACKLINKS: Dict[str, List[str]] = {}
+NAVIGATION = ("turns", "contents", "runs")
+
+
+def links_from(md: str, text: str) -> Set[str]:
+    """The pages a page links to, as files under book/, its navigation aside."""
+    text = BLOCK.sub(lambda m: "" if m.group(1) in NAVIGATION else m.group(0), text)
+    out = set()
+    for href in re.findall(r"\]\(([^)\s#:]+\.md)(?:#[^)\s]*)?\)", text):
+        target = os.path.normpath(os.path.join(os.path.dirname(md), href)).replace(os.sep, "/")
+        if target != md:
+            out.add(target)
+    return out
+
+
+def backlinks(texts: Dict[str, str]) -> Dict[str, List[str]]:
+    """For every page, the pages that link to it, in reading order."""
+    order = {c["file"]: i for i, c in enumerate(pages()) if c.get("file")}
+    into: Dict[str, List[str]] = {}
+    for md, text in texts.items():
+        for target in links_from(md, text):
+            into.setdefault(target, []).append(md)
+    return {target: sorted(sources, key=lambda m: (order.get(m, len(order)), m)) for target, sources in into.items()}
+
+
 def turns(md: str, _: str) -> str:
-    """The page's home topic, with the pages before and after it there."""
+    """
+    The foot of a page: its home topic with the pages before and after it there,
+    the other topics it is about, and the pages that link to it.
+    """
     here = next((c for c in pages() if c.get("file") == md), None)
     if here is None or md == "README.md":
         return f"[Contents]({link(md, 'README.md')})"
-    topic = next(t for t in topics() if t["id"] == here["topics"][0])
+    by_id = {t["id"]: t for t in topics()}
+    topic = by_id[here["topics"][0]]
     written = [c for c in at_home(topic["id"]) if c.get("file")]
     at = written.index(here)
-    parts = []
+    steps = []
     if at > 0:
-        parts.append(f"← [{written[at - 1]['title']}]({link(md, written[at - 1]['file'])})")
-    parts.append(f"[{topic['title']}]({link(md, 'README.md')}#{slug(topic['title'])})")
+        steps.append(f"← [{written[at - 1]['title']}]({link(md, written[at - 1]['file'])})")
+    steps.append(f"[{topic['title']}]({link(md, 'README.md')}#{slug(topic['title'])})")
     if at + 1 < len(written):
-        parts.append(f"[{written[at + 1]['title']}]({link(md, written[at + 1]['file'])}) →")
-    return "---\n\n" + " · ".join(parts)
+        steps.append(f"[{written[at + 1]['title']}]({link(md, written[at + 1]['file'])}) →")
+    lines = ["---", "", " · ".join(steps)]
+    also = [by_id[t] for t in here["topics"][1:]]
+    if also:
+        lines += ["", "**Also about:** " + ", ".join(
+            f"[{t['title']}]({link(md, 'README.md')}#{slug(t['title'])})" for t in also) + "."]
+    sources = BACKLINKS.get(md, [])
+    if sources:
+        titles = {c["file"]: c["title"] for c in pages() if c.get("file")}
+        lines += ["", quote(" · ".join(f"[{titles.get(s, s)}]({link(md, s)})" for s in sources),
+                            f"[!info]- Pages that link here ({len(sources)})")]
+    return "\n".join(lines)
 
 
 def costs(md: str, _: str) -> str:
@@ -476,9 +519,12 @@ def outside(text: str, change: Callable[[str], str], links: bool = True) -> str:
     return "".join(out + [change(text[at:])])
 
 
-def fill_text(md: str, text: str) -> str:
+def fill_text(md: str, text: str, kinds: Tuple[str, ...] = KINDS) -> str:
+    """A page with its blocks of these kinds made anew; the others as they are."""
     def made(match: "re.Match[str]") -> str:
         kind, arg = match.group(1), match.group(2).strip()
+        if kind not in kinds:
+            return match.group(0)
         body = MAKERS[kind](md, arg)
         return f"<!-- {kind}{' ' + arg if arg else ''} -->\n{body}\n<!-- /{kind} -->\n"
     return BLOCK.sub(made, text)
@@ -493,25 +539,36 @@ def markdown_files() -> List[str]:
     return sorted(out)
 
 
-def fill(only: Optional[List[str]] = None) -> int:
+def fill(only: Optional[List[str]] = None, write: bool = True) -> int:
     """
-    Fill every Markdown file of the notebook, or those named; the number changed.
-    Filling them all also checks that every figure a page drew is shown
-    somewhere: one that is not was drawn for nothing, or forgotten.
+    Fill every Markdown file of the notebook, or those named; the number changed
+    (or, with write=False, that would change). Two passes: every block but the
+    navigation, then the navigation, which shows the pages that link to a page
+    and so needs every other block filled first. Filling them all also checks
+    that every figure a page drew is shown somewhere: one that is not was drawn
+    for nothing, or forgotten.
     """
+    texts = {}
+    for md in markdown_files():
+        with open(os.path.join(BOOK, md), encoding="utf-8") as f:
+            texts[md] = f.read()
+    asked = only or list(texts)
+    after = dict(texts)
+    for md in asked:
+        after[md] = fill_text(md, texts[md], tuple(k for k in KINDS if k != "turns"))
+    BACKLINKS.clear()
+    BACKLINKS.update(backlinks(after))
     changed = 0
     placed = set()
-    for md in only or markdown_files():
-        path = os.path.join(BOOK, md)
-        with open(path, encoding="utf-8") as f:
-            before = f.read()
-        after = fill_text(md, before)
-        placed |= {arg.strip() for kind, arg in re.findall(r"^<!-- (\w+)((?: [^\n]*?)?) -->$", after, re.M)
+    for md in asked:
+        after[md] = fill_text(md, after[md], ("turns",))
+        placed |= {arg.strip() for kind, arg in re.findall(r"^<!-- (\w+)((?: [^\n]*?)?) -->$", after[md], re.M)
                    if kind == "figure"}
-        if after != before:
-            with open(path, "w", encoding="utf-8") as f:
-                f.write(after)
+        if after[md] != texts[md]:
             changed += 1
+            if write:
+                with open(os.path.join(BOOK, md), "w", encoding="utf-8") as f:
+                    f.write(after[md])
     if only is None:
         unplaced = sorted(set(drawn()) - placed)
         if unplaced:

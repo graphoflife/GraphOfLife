@@ -295,10 +295,10 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
 .byline a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
 .byline a:hover { color: var(--text); border-bottom-color: var(--text); }
 /* In two short lines when the bar is crowded: beside a loading bar, and on
-   narrower windows. */
+   windows too narrow for the tabs and the byline in one line. */
 .job-bar:not([hidden]) ~ .byline { white-space: normal; text-align: right; font-size: 11px; line-height: 1.3; }
 .job-bar:not([hidden]) ~ .byline > span { display: block; }
-@media (max-width: 1000px) {
+@media (max-width: 1120px) {
   .byline { white-space: normal; text-align: right; font-size: 11px; line-height: 1.3; }
   .byline > span { display: block; }
 }
@@ -1105,7 +1105,22 @@ details.control-group > summary:hover h3 { color: var(--text); }
   font-size: 13px;
   padding-right: 4px;
 }
-.book-title { font-weight: 600; font-size: 14px; color: var(--text); margin: 4px 0 14px; }
+.book-title { font-weight: 600; font-size: 14px; color: var(--text); margin: 4px 0 10px; }
+.book-toc-controls { display: grid; gap: 6px; margin: 0 0 16px; }
+.book-search {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 8px;
+  border-radius: 6px;
+  font: inherit;
+}
+.book-search:focus { outline: none; border-color: var(--accent-dim); }
+.book-toc-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.book-toc-filters select { min-width: 0; padding: 4px 6px; font-size: 12px; }
+.book-toc-date { color: var(--muted); font-size: 11px; }
+.book-toc-empty { color: var(--muted); margin: 4px 8px; }
 .book-part { margin-bottom: 18px; }
 .book-part h3 { margin: 0 0 6px; }
 .book-toc-item {
@@ -1146,6 +1161,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
   color: var(--muted);
   margin: 4px 0 6px !important;
 }
+.book-kicker a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+.book-kicker a:hover { color: var(--text); border-bottom-color: var(--text); }
 .book-note { color: var(--muted); font-size: 12.5px; }
 .book-reason { color: var(--warn); font-size: 12.5px; }
 

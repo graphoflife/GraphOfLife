@@ -48,4 +48,9 @@ the larger. Where the notebook gives an effective number it says which.
 ---
 
 ← [Where, who and chance: splitting a decision's variance](variance-split.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (3)
+> [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

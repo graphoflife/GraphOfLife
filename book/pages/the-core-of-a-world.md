@@ -353,4 +353,7 @@ To make every figure of this page: `python3 book_figures.py core`.
 ---
 
 ← [How the network grows](how-the-network-grows.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Power laws, real and apparent](power-laws-real-and-apparent.md) →
+
+> [!info]- Pages that link here (6)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Core, trees and leaves](core-trees-leaves.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 <!-- /turns -->

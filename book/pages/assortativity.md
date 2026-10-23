@@ -58,4 +58,7 @@ baseline world has about −0.07 at 100,000 tokens and −0.11 at 10,000
 ---
 
 ← [The spectral gap](spectral-gap.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Scaling relations between agents' properties](scaling-relations.md) →
+
+> [!info]- Pages that link here (3)
+> [How properties scale together](how-properties-scale-together.md) · [How alike at a distance](correlation-function.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

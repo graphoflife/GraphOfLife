@@ -69,4 +69,7 @@ iterations or more, and 0.4% at periods shorter than 10.
 ---
 
 ← [Fitting a power law properly](power-law-fit.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Where, who and chance: splitting a decision's variance](variance-split.md) →
+
+> [!info]- Pages that link here (2)
+> [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md)
 <!-- /turns -->

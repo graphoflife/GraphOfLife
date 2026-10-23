@@ -89,4 +89,7 @@ rearranged. It is recorded as `gini` after every phase.
 ---
 
 ← [The largest and the smallest](the-largest-and-the-smallest.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [The richest tenth's share](richest-tenth.md) →
+
+> [!info]- Pages that link here (13)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [The richest tenth's share](richest-tenth.md) · [Entropy and evenness](entropy-and-evenness.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [What a run records](frames-and-stats.md) · [Mobility](mobility.md)
 <!-- /turns -->

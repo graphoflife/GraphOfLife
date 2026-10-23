@@ -93,4 +93,7 @@ and 0.75) and brains that grow (0.60 and 0.72).
 ---
 
 ← [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Changing the rules](../README.md#changing-the-rules) · [Gifts, with every other rule](gifts-with-every-other-rule.md) →
+
+> [!info]- Pages that link here (4)
+> [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

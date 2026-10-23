@@ -427,4 +427,9 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 ---
 
 ← [The brain](the-brain.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Is a run reproducible?](is-a-run-reproducible.md) →
+
+**Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
+
+> [!info]- Pages that link here (12)
+> [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [Who dies, and why](who-dies-and-why.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [How even is a world?](how-even-is-a-world.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

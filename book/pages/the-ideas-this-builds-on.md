@@ -216,4 +216,9 @@ fought over by neighbours is such a setting.
 ---
 
 ← [What this notebook is about](what-this-notebook-is-about.md) · [Start here](../README.md#start-here)
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
+
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 <!-- /turns -->

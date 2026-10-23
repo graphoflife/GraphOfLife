@@ -228,4 +228,7 @@ they only differ, it is drift, and variety without direction.
 ---
 
 [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Genotypes and lineages](genotypes-and-lineages.md) →
+
+> [!info]- Pages that link here (1)
+> [How different are the agents?](how-different-are-the-agents.md)
 <!-- /turns -->

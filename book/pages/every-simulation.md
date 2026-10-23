@@ -436,4 +436,7 @@ in the Research tab).
 ---
 
 ← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a run records](frames-and-stats.md) →
+
+> [!info]- Pages that link here (1)
+> [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

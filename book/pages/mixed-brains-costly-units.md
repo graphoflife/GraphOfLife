@@ -180,4 +180,9 @@ rule keeps a healthy world whose evolution goes on more strongly than B2's
 ---
 
 ← [Who inherits?](who-inherits.md) · [Changing the rules](../README.md#changing-the-rules) · [Links to strangers](links-to-strangers.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (9)
+> [Every setting](settings.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -127,4 +127,7 @@ at least 100 iterations before the end can be measured by it in full
 ---
 
 ← [Births and the four ways to die](births-and-deaths.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Reproduction statistics](reproduction-statistics.md) →
+
+> [!info]- Pages that link here (5)
+> [The world: tokens, agents and a network](the-world.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How ages change over a world's life](how-ages-change.md) · [Genotypes and the family tree](genotype.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

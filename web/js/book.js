@@ -31,6 +31,19 @@ const Book = {
   EMBEDS: ['experiment'],
   POLL_MS: 5000,
   STORE: 'gol.book.chapter',
+  LISTING: 'gol.book.listing',
+
+  // How the contents can be listed: the orders, the kinds of page and the states
+  // a page can be in, each with the words the reader chooses it by.
+  SORTS: [['topic', 'By topic'], ['newest', 'Newest first'], ['oldest', 'Oldest first'],
+          ['title', 'A to Z'], ['kind', 'By kind']],
+  KINDS: [['overview', 'Overviews', 'Overview'], ['explanation', 'Explanations', 'Explanation'],
+          ['experiment', 'Experiments', 'Experiment'], ['study', 'Studies', 'Study'], ['term', 'Terms', 'Term'],
+          ['method', 'Methods and statistics', 'Method']],
+  STATUSES: [['analysed', 'Analysed'], ['ready', 'Ready to run'], ['draft', 'Drafts'],
+             ['written', 'Written'], ['planned', 'Not written yet']],
+  /** How the reader asked for the contents: an order, three filters and words to look for. */
+  view: { sort: 'topic', topic: '', kind: '', status: '', query: '' },
 
   index: null,
   lab: null,
@@ -43,7 +56,21 @@ const Book = {
 
   init() {
     this.toc = document.getElementById('bookToc');
+    this.list = document.getElementById('bookTocList');
     this.page = document.getElementById('bookPage');
+    this.choices = { query: document.getElementById('bookSearch'), sort: document.getElementById('bookSort'),
+                     topic: document.getElementById('bookTopic'), kind: document.getElementById('bookKind'),
+                     status: document.getElementById('bookStatus') };
+    this.offer(this.choices.sort, this.SORTS);
+    this.offer(this.choices.kind, [['', 'Every kind'], ...this.KINDS.map(([id, kinds]) => [id, kinds])]);
+    this.offer(this.choices.status, [['', 'Any status'], ...this.STATUSES]);
+    for (const [key, el] of Object.entries(this.choices)) {
+      el.addEventListener(key === 'query' ? 'input' : 'change', () => {
+        this.view = { ...this.view, [key]: el.value };
+        try { localStorage.setItem(this.LISTING, JSON.stringify(this.view)); } catch (err) { /* private window */ }
+        this.renderToc();
+      });
+    }
     this.toc.addEventListener('click', event => {
       const link = event.target.closest('[data-chapter]');
       if (!link) return;
@@ -147,6 +174,10 @@ const Book = {
         Markdown.escape(String(err.message))}</p>`;
       return false;
     }
+    document.getElementById('bookTitle').textContent = this.index.title;
+    this.offer(this.choices.topic, [['', 'Every topic'], ...this.index.topics.map(t => [t.id, t.title])]);
+    try { this.view = this.chosen(JSON.parse(localStorage.getItem(this.LISTING))); } catch (err) { /* none kept */ }
+    for (const [key, el] of Object.entries(this.choices)) el.value = this.view[key];
     let remembered = null;
     try { remembered = localStorage.getItem(this.STORE); } catch (err) { /* private window */ }
     const first = this.pages().find(c => c.file);
@@ -245,13 +276,19 @@ const Book = {
     return text;
   },
 
-  /** Where a page belongs, above its title: its topic, and the experiments it reports. */
+  /**
+   * Where a page belongs, above its title: its topic, which opens the topic's list
+   * in the contents, and the experiments it reports, or else what kind of page it is.
+   */
   kicker(chapter) {
-    const numbers = (chapter.experiments || []).map(name => Number(name.slice(1)));
-    const what = numbers.length ? ` · Experiment${numbers.length > 1 ? 's' : ''} ${
-      numbers.length > 1 ? `${numbers.slice(0, -1).join(', ')} and ${numbers.at(-1)}` : numbers[0]}` : '';
     const topic = this.topic((chapter.topics || [])[0]);
-    return topic ? `<p class="book-kicker">${Markdown.escape(topic.title)}${what}</p>` : '';
+    if (!topic) return '';
+    const numbers = (chapter.experiments || []).map(name => Number(name.slice(1)));
+    const kind = (this.KINDS.find(([id]) => id === chapter.kind) || [])[2];
+    const what = numbers.length ? `Experiment${numbers.length > 1 ? 's' : ''} ${
+      numbers.length > 1 ? `${numbers.slice(0, -1).join(', ')} and ${numbers.at(-1)}` : numbers[0]}` : kind;
+    return `<p class="book-kicker"><a href="#" data-topic="${Markdown.escape(topic.id)}">${
+      Markdown.escape(topic.title)}</a>${what ? ` · ${what}` : ''}</p>`;
   },
 
   // ---- the chapter list -------------------------------------------------
@@ -277,22 +314,69 @@ const Book = {
     text.textContent = chapter.title.replace(/[*_`]/g, '');
   },
 
-  /** The contents: every page under its home topic, in reading order. */
+  /** A select's options, as [value, words] pairs. */
+  offer(select, options) {
+    select.innerHTML = options.map(([value, words]) =>
+      `<option value="${Markdown.escape(value)}">${Markdown.escape(words)}</option>`).join('');
+  },
+
+  /** A kept view, with anything this index no longer offers put back to its default. */
+  chosen(kept) {
+    const view = { sort: 'topic', topic: '', kind: '', status: '', query: '' };
+    if (!kept || typeof kept !== 'object') return view;
+    const offered = { sort: this.SORTS, kind: this.KINDS, status: this.STATUSES,
+                      topic: ((this.index && this.index.topics) || []).map(t => [t.id]) };
+    for (const [key, options] of Object.entries(offered)) {
+      if (options.some(([value]) => value === kept[key])) view[key] = kept[key];
+    }
+    if (typeof kept.query === 'string') view.query = kept.query;
+    return view;
+  },
+
+  /**
+   * The contents as the reader asked for them, as [[heading, pages], …]: by topic
+   * (each page under its home topic, in reading order) or by kind, in groups; by
+   * the day a page was added or by title, in one list without a heading. A page
+   * shows if any of its topics is the one asked for, its kind and status are, and
+   * every word looked for is in its title or summary.
+   */
+  listing(view = this.view) {
+    const words = view.query.toLowerCase().split(/\s+/).filter(Boolean);
+    const shown = this.pages().filter(p => (!view.topic || p.topics.includes(view.topic))
+      && (!view.kind || p.kind === view.kind) && (!view.status || p.status === view.status)
+      && words.every(w => `${p.title} ${p.summary || ''}`.toLowerCase().includes(w)));
+    const grouped = (groups, inGroup) => groups.map(([key, heading]) => [heading, shown.filter(p => inGroup(p, key))])
+      .filter(([, list]) => list.length);
+    if (view.sort === 'topic') return grouped(this.index.topics.map(t => [t.id, t.title]), (p, id) => p.topics[0] === id);
+    if (view.sort === 'kind') return grouped(this.KINDS.map(([id, kinds]) => [id, kinds]), (p, kind) => p.kind === kind);
+    const order = new Map(this.pages().map((p, i) => [p.id, i]));
+    const plain = p => p.title.replace(/^(the|a|an)\s+/i, '').replace(/[*_`]/g, '');
+    const by = {
+      newest: (a, b) => (b.added || '').localeCompare(a.added || '') || order.get(a.id) - order.get(b.id),
+      oldest: (a, b) => (a.added || '').localeCompare(b.added || '') || order.get(a.id) - order.get(b.id),
+      title: (a, b) => plain(a).localeCompare(plain(b), 'en', { sensitivity: 'base' }),
+    }[view.sort];
+    return shown.length ? [['', [...shown].sort(by)]] : [];
+  },
+
+  /** The contents, as listing() orders and filters them. */
   renderToc() {
     if (!this.index) return;
     this.labelToggle();
-    const topics = this.index.topics.map(topic => {
-      const items = this.pages().filter(c => c.topics[0] === topic.id).map(c => {
+    const dated = ['newest', 'oldest'].includes(this.view.sort);
+    const groups = this.listing().map(([heading, list]) => {
+      const items = list.map(c => {
         const state = this.describe(c);
         return `<a href="#" data-chapter="${c.id}" class="book-toc-item${
           c.id === this.current ? ' active' : ''}${c.file ? '' : ' unwritten'}">`
           + `<span class="book-toc-title">${Markdown.inline(c.title)}</span>`
+          + (dated && c.added ? `<span class="book-toc-date">${Markdown.escape(c.added)}</span>` : '')
           + (state.label ? `<span class="book-chip book-chip-${state.state}">${state.label}</span>` : '')
           + '</a>';
       }).join('');
-      return `<div class="book-part"><h3>${Markdown.inline(topic.title)}</h3>${items}</div>`;
+      return `<div class="book-part">${heading ? `<h3>${Markdown.inline(heading)}</h3>` : ''}${items}</div>`;
     }).join('');
-    this.toc.innerHTML = `<div class="book-title">${Markdown.inline(this.index.title)}</div>${topics}`;
+    this.list.innerHTML = groups || '<p class="book-toc-empty">No page matches.</p>';
   },
 
   /**
@@ -366,6 +450,13 @@ const Book = {
   },
 
   onClick(event) {
+    const topic = event.target.closest('[data-topic]');
+    if (topic) {
+      event.preventDefault();
+      const found = this.topic(topic.dataset.topic);
+      if (found) this.show('README.md', Markdown.slug(found.title));
+      return;
+    }
     const chapter = event.target.closest('[data-chapter]');
     if (chapter) {
       event.preventDefault();

@@ -78,4 +78,7 @@ tokens, 37%, 23%, 4% and 1,399).
 ---
 
 ← [How a world breaks](how-a-world-breaks.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Preferential attachment and its kernel](preferential-attachment.md) →
+
+> [!info]- Pages that link here (6)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Assortativity](assortativity.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

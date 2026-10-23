@@ -50,4 +50,9 @@ steps, the radius about 36 and the mean path length about 18; in one of
 ---
 
 ← [Cut risk](cut-risk.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The spectral gap](spectral-gap.md) →
+
+**Also about:** [Space and dimension](../README.md#space-and-dimension).
+
+> [!info]- Pages that link here (3)
+> [The geometry of a world](the-geometry-of-a-world.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

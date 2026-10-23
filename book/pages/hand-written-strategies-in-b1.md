@@ -93,4 +93,9 @@ The plantings are those of [Does evolution close the door?](does-evolution-close
 ---
 
 ← [Raiders that breed](raiders-that-breed.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [The invasion test](invasion-test.md) →
+
+**Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
+
+> [!info]- Pages that link here (2)
+> [A crew of raiders](a-crew-of-raiders.md) · [Raiders that breed](raiders-that-breed.md)
 <!-- /turns -->

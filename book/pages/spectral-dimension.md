@@ -84,4 +84,7 @@ whose dimension is known.
 ---
 
 ← [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Space and dimension](../README.md#space-and-dimension) · [Box dimension](box-dimension.md) →
+
+> [!info]- Pages that link here (1)
+> [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
 <!-- /turns -->

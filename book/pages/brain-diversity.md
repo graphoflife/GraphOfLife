@@ -43,4 +43,7 @@ separately ([Do the brains matter?](do-the-brains-matter.md)).
 ---
 
 ← [How a signal fades through layers](vanishing-signal.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Families](families.md) →
+
+> [!info]- Pages that link here (4)
+> [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [What a run records](frames-and-stats.md) · [Effective numbers: how many kinds there really are](effective-number.md)
 <!-- /turns -->

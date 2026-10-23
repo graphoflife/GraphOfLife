@@ -271,4 +271,9 @@ To make every figure of this page: `python3 book_figures.py children`.
 ---
 
 ← [How ages change over a world's life](how-ages-change.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Births and the four ways to die](births-and-deaths.md) →
+
+**Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
+
+> [!info]- Pages that link here (9)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [How ages change over a world's life](how-ages-change.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the network grows](how-the-network-grows.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Do the brains matter?](do-the-brains-matter.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

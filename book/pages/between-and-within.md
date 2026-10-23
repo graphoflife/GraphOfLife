@@ -54,4 +54,7 @@ second half, across worlds ([Correlation](correlation.md)).
 ---
 
 ← [Mobility](mobility.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How many directions a cloud of points uses](participation-ratio.md) →
+
+> [!info]- Pages that link here (4)
+> [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Do the brains matter?](do-the-brains-matter.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md)
 <!-- /turns -->

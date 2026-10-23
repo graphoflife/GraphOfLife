@@ -301,4 +301,7 @@ riches, not mixing's: these worlds are richer than any of B2's, not rich.
 ---
 
 ← [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [A mate that pays its share](a-mate-that-pays-its-share.md) →
+
+> [!info]- Pages that link here (6)
+> [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

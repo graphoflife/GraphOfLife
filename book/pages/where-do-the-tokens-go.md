@@ -394,4 +394,7 @@ To make every figure of this page: `python3 book_figures.py tokens`.
 ---
 
 [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [How even is a world?](how-even-is-a-world.md) →
+
+> [!info]- Pages that link here (15)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [How even is a world?](how-even-is-a-world.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Gains and losses](gains-and-losses.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Correlation](correlation.md)
 <!-- /turns -->

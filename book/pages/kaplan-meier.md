@@ -66,4 +66,9 @@ iteration, last iteration, still going).
 ---
 
 ← [How many directions a cloud of points uses](participation-ratio.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The bootstrap](bootstrap.md) →
+
+**Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
+
+> [!info]- Pages that link here (7)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age and lifetime](age-and-lifetime.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How worlds are measured](how-worlds-are-measured.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
 <!-- /turns -->

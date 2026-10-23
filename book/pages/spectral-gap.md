@@ -66,4 +66,7 @@ more than its last digit.
 ---
 
 ← [Radius and diameter](radius-and-diameter.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Assortativity](assortativity.md) →
+
+> [!info]- Pages that link here (4)
+> [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

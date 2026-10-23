@@ -56,4 +56,7 @@ thirty seeds per condition went into it.
 ---
 
 ← [The bootstrap](bootstrap.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How many seeds an experiment needs](seeds-needed.md) →
+
+> [!info]- Pages that link here (6)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Correlation](correlation.md) · [The bootstrap](bootstrap.md)
 <!-- /turns -->

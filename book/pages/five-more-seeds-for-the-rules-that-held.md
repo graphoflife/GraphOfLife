@@ -264,4 +264,7 @@ held by their seed's luck as much as by their rule's.
 ---
 
 ← [The candidates, played on](the-candidates-played-on.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) →
+
+> [!info]- Pages that link here (4)
+> [Healthy and rich](healthy-and-rich.md) · [The candidates, played on](the-candidates-played-on.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

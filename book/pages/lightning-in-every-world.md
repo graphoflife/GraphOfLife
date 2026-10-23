@@ -237,4 +237,7 @@ which gathers what the notebook knows about flow.
 ---
 
 ← [Flow modules: the groups tokens stay in](flow-modules.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Staking at home, and keeping one's node](home-stake.md) →
+
+> [!info]- Pages that link here (4)
+> [Where tokens go](where-tokens-go.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Who helps whom](who-helps-whom.md) · [Every world side by side](every-world-side-by-side.md)
 <!-- /turns -->

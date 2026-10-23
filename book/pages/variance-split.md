@@ -63,4 +63,9 @@ from itself over the draws.
 ---
 
 ← [The power spectrum of a time series](power-spectrum.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Effective numbers: how many kinds there really are](effective-number.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (2)
+> [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md)
 <!-- /turns -->

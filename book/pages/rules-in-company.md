@@ -198,4 +198,7 @@ waits its turn.
 ---
 
 [Changing the rules](../README.md#changing-the-rules) · [The switches the world was built with](the-switches-the-world-was-built-with.md) →
+
+> [!info]- Pages that link here (5)
+> [What this notebook is about](what-this-notebook-is-about.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Room for the steadiest world](room-for-the-steadiest-world.md)
 <!-- /turns -->

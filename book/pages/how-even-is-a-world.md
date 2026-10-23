@@ -265,4 +265,7 @@ To make every figure of this page: `python3 book_figures.py entropy`.
 ---
 
 ← [Where do the tokens go?](where-do-the-tokens-go.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Do the rich stay rich?](do-the-rich-stay-rich.md) →
+
+> [!info]- Pages that link here (5)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Entropy and evenness](entropy-and-evenness.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brain diversity](brain-diversity.md)
 <!-- /turns -->

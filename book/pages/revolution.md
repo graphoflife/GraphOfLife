@@ -111,4 +111,7 @@ anything revolutionary and the hegemon always wins.
 ---
 
 ← [Messages](messages.md) · [How the simulation works](../README.md#how-the-simulation-works) · [How a brain changes](mutation.md) →
+
+> [!info]- Pages that link here (15)
+> [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Staking at home, and keeping one's node](home-stake.md) · [How different are the agents?](how-different-are-the-agents.md) · [A crew of raiders](a-crew-of-raiders.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

@@ -208,4 +208,7 @@ tab of the Graph of Life app, on GitHub, and in **Obsidian**: open the folder
 ---
 
 ← [How to read this notebook](../README.md) · [Start here](../README.md#start-here) · [The ideas this builds on](the-ideas-this-builds-on.md) →
+
+> [!info]- Pages that link here (11)
+> [How to read this notebook](../README.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How a brain changes](mutation.md) · [What the baseline world is](what-the-baseline-world-is.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md)
 <!-- /turns -->

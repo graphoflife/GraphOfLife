@@ -63,4 +63,9 @@ the heavy tail of the connections.
 ---
 
 ← [Degree](degree.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Clustering](clustering.md) →
+
+**Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
+
+> [!info]- Pages that link here (2)
+> [A world that cannot break](a-world-that-cannot-break.md) · [How the network grows](how-the-network-grows.md)
 <!-- /turns -->

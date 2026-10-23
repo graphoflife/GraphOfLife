@@ -413,4 +413,9 @@ To make every figure of this page: `python3 book_figures.py seed`.
 ---
 
 ← [The first hundred iterations](the-first-hundred-iterations.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) →
+
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (15)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [A world's life](a-worlds-life.md) · [How the game is played](how-the-game-is-played.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Like next to like](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [The settled life of a world](settled-life.md) · [Spread between worlds](spread-between-worlds.md) · [Correlation](correlation.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Between worlds and within them](between-and-within.md) · [How many seeds an experiment needs](seeds-needed.md)
 <!-- /turns -->

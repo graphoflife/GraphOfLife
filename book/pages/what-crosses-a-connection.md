@@ -255,4 +255,7 @@ To make every figure of this page: `python3 book_figures.py connections`.
 ---
 
 ← [Where the tokens flow](where-the-tokens-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flow modules: the groups tokens stay in](flow-modules.md) →
+
+> [!info]- Pages that link here (7)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Where tokens go](where-tokens-go.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Lightning in every world](lightning-in-every-world.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

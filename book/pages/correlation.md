@@ -52,4 +52,7 @@ brings both.
 ---
 
 ← [Spread between worlds](spread-between-worlds.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Autocorrelation: how long a world remembers](autocorrelation.md) →
+
+> [!info]- Pages that link here (12)
+> [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Assortativity](assortativity.md) · [How alike at a distance](correlation-function.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Mobility](mobility.md) · [Between worlds and within them](between-and-within.md) · [Permutation tests](permutation-test.md) · [Fitting a straight line, and R²](least-squares.md)
 <!-- /turns -->

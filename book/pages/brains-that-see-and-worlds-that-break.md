@@ -351,4 +351,9 @@ why: the subject of [Who dies, and why](who-dies-and-why.md).
 ---
 
 ← [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [A world that cannot break](a-world-that-cannot-break.md) →
+
+**Also about:** [Changing the rules](../README.md#changing-the-rules).
+
+> [!info]- Pages that link here (15)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world that cannot break](a-world-that-cannot-break.md) · [Who dies, and why](who-dies-and-why.md) · [How agents have children](how-agents-have-children.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [Why evolution stops](why-evolution-stops.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

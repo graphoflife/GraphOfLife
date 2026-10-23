@@ -461,4 +461,9 @@ where it is, and in B2 it falls.
 ---
 
 ← [Alliances](alliances.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Help](help.md) →
+
+**Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
+
+> [!info]- Pages that link here (12)
+> [Where tokens go](where-tokens-go.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Flows that go round](circulation.md) · [Who helps whom](who-helps-whom.md) · [Help](help.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

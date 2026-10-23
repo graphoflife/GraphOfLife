@@ -61,4 +61,7 @@ an open question for this notebook.
 ---
 
 ← [What a brain says](brain-outputs.md) · [How the simulation works](../README.md#how-the-simulation-works) · [How a coalition takes a node](revolution.md) →
+
+> [!info]- Pages that link here (6)
+> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [What a brain sees](brain-inputs.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

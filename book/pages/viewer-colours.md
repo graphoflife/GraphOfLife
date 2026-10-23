@@ -81,4 +81,7 @@ colour by family instead, as [One world, many colours](one-world-many-colours.md
 ---
 
 ← [What a run records](frames-and-stats.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Pilot worlds](pilot-worlds.md) →
+
+> [!info]- Pages that link here (1)
+> [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

@@ -76,4 +76,7 @@ fits both methods to the baseline worlds.
 ---
 
 ← [Fitting a straight line, and R²](least-squares.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The power spectrum of a time series](power-spectrum.md) →
+
+> [!info]- Pages that link here (3)
+> [Power laws, real and apparent](power-laws-real-and-apparent.md) · [What a run records](frames-and-stats.md) · [Fitting a straight line, and R²](least-squares.md)
 <!-- /turns -->

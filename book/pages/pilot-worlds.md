@@ -95,4 +95,7 @@ recipes and in `research/oee/pilots/LOG.md`.
 ---
 
 ← [What the viewer can colour by](viewer-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Median and quantiles](median-and-quantiles.md) →
+
+> [!info]- Pages that link here (5)
+> [Every setting](settings.md) · [How different are the agents?](how-different-are-the-agents.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md)
 <!-- /turns -->

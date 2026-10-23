@@ -163,4 +163,7 @@ births fills a world**, to half as many agents again and poorer
 ---
 
 [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [How the game is played](how-the-game-is-played.md) →
+
+> [!info]- Pages that link here (1)
+> [Lightning in every world](lightning-in-every-world.md)
 <!-- /turns -->

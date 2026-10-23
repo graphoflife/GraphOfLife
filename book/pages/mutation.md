@@ -85,4 +85,9 @@ from the world's random stream ([Seeds and the random stream](random-numbers.md)
 ---
 
 ← [How a coalition takes a node](revolution.md) · [How the simulation works](../README.md#how-the-simulation-works) · [When a world ends](extinction.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (13)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How even is a world?](how-even-is-a-world.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
 <!-- /turns -->

@@ -120,4 +120,9 @@ Two more measures need no following at all, or ask what following finds:
 ---
 
 ← [Flows that go round](circulation.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens)
+
+**Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
+
+> [!info]- Pages that link here (1)
+> [Flow modules: the groups tokens stay in](flow-modules.md)
 <!-- /turns -->

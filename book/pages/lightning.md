@@ -76,4 +76,7 @@ ceiling 9/11 — the greedy peel found everything there was.
 ---
 
 ← [Token flow](token-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token curvature](token-curvature.md) →
+
+> [!info]- Pages that link here (7)
+> [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Lightning in every world](lightning-in-every-world.md) · [Token flow](token-flow.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

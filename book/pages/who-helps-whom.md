@@ -99,4 +99,7 @@ competition between groups goes on.
 ---
 
 [Groups and cooperation](../README.md#groups-and-cooperation) · [Do agents cooperate?](do-agents-cooperate.md) →
+
+> [!info]- Pages that link here (4)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 <!-- /turns -->

@@ -295,4 +295,9 @@ failed the health bar only on its last line: their ball dimension was 4.1 to
 ---
 
 ← [Another game](another-game.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) →
+
+**Also about:** [Changing the rules](../README.md#changing-the-rules).
+
+> [!info]- Pages that link here (11)
+> [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Strategies written by hand](strategies-written-by-hand.md) · [Who helps whom](who-helps-whom.md) · [Another game](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Rules without numbers](rules-without-numbers.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

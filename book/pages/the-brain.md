@@ -219,4 +219,7 @@ what becomes of a world run that way.
 ---
 
 ← [One iteration, step by step](one-iteration.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Questioning the mechanics](questioning-the-mechanics.md) →
+
+> [!info]- Pages that link here (12)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [How a signal fades through layers](vanishing-signal.md)
 <!-- /turns -->

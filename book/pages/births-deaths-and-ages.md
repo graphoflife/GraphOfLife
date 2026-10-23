@@ -222,4 +222,7 @@ To make every figure of this page: `python3 book_figures.py births`.
 ---
 
 [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [How ages change over a world's life](how-ages-change.md) →
+
+> [!info]- Pages that link here (15)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [Age and lifetime](age-and-lifetime.md) · [How the game is played](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [The settled life of a world](settled-life.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md)
 <!-- /turns -->

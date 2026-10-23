@@ -231,4 +231,9 @@ raiders, and the poorer the world, the less a mob was worth, not the more:
 ---
 
 ← [Does evolution close the door?](does-evolution-close-the-door.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [Raiders that breed](raiders-that-breed.md) →
+
+**Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
+
+> [!info]- Pages that link here (3)
+> [Does evolution close the door?](does-evolution-close-the-door.md) · [Raiders that breed](raiders-that-breed.md) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md)
 <!-- /turns -->

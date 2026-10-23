@@ -373,4 +373,9 @@ puts the line between folded and not.
 ---
 
 ← [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Space and dimension](../README.md#space-and-dimension) · [How alike at a distance](correlation-function.md) →
+
+**Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
+
+> [!info]- Pages that link here (13)
+> [What holds a world's size](what-holds-a-worlds-size.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [Rules in company](rules-in-company.md) · [Who inherits?](who-inherits.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

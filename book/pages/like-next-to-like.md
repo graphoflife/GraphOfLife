@@ -267,4 +267,9 @@ To make every figure of this page: `python3 book_figures.py alike`.
 ---
 
 ← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) →
+
+**Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
+
+> [!info]- Pages that link here (10)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How alike at a distance](correlation-function.md) · [How different are the agents?](how-different-are-the-agents.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

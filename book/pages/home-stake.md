@@ -49,4 +49,9 @@ coalition rather than by their largest staker ([How the game is played](how-the-
 ---
 
 ← [Lightning in every world](lightning-in-every-world.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token flow](token-flow.md) →
+
+**Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
+
+> [!info]- Pages that link here (3)
+> [How the game is played](how-the-game-is-played.md) · [How different are the agents?](how-different-are-the-agents.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

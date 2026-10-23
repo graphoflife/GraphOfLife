@@ -87,4 +87,7 @@ histogram of degrees.
 ---
 
 ← [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) →
+
+> [!info]- Pages that link here (4)
+> [How even is a world?](how-even-is-a-world.md) · [Brain diversity](brain-diversity.md) · [What a run records](frames-and-stats.md) · [How many directions a cloud of points uses](participation-ratio.md)
 <!-- /turns -->

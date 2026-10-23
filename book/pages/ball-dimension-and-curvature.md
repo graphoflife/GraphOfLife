@@ -65,4 +65,7 @@ the baseline worlds, beside a picture of the ball growth itself.
 ---
 
 ← [How alike at a distance](correlation-function.md) · [Space and dimension](../README.md#space-and-dimension) · [The spectral dimension](spectral-dimension.md) →
+
+> [!info]- Pages that link here (6)
+> [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The spectral dimension](spectral-dimension.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

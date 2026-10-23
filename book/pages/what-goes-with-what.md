@@ -287,4 +287,7 @@ whole worlds; the tables are in `GraphOfLifeRuns/.pilots/atlas/`.
 ---
 
 ← [What a simulation costs](what-a-simulation-costs.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
+
+> [!info]- Pages that link here (3)
+> [Where tokens go](where-tokens-go.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

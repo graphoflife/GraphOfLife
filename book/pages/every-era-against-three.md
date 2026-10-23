@@ -236,4 +236,9 @@ little in one world, round a circle in the other.
 ---
 
 ← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) →
+
+**Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
+
+> [!info]- Pages that link here (1)
+> [Does evolution close the door?](does-evolution-close-the-door.md)
 <!-- /turns -->

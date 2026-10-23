@@ -66,4 +66,9 @@ the baseline worlds.
 ---
 
 ← [Autocorrelation: how long a world remembers](autocorrelation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Between worlds and within them](between-and-within.md) →
+
+**Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
+
+> [!info]- Pages that link here (1)
+> [Do the rich stay rich?](do-the-rich-stay-rich.md)
 <!-- /turns -->

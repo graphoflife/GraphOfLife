@@ -68,4 +68,7 @@ connected start: every founder can reach every other.
 ---
 
 ← [Every setting](settings.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Seeds and the random stream](random-numbers.md) →
+
+> [!info]- Pages that link here (7)
+> [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
 <!-- /turns -->

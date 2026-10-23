@@ -77,4 +77,7 @@ plants the same strategies in B1, whose least child is a single token.
 ---
 
 ← [A crew of raiders](a-crew-of-raiders.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md) →
+
+> [!info]- Pages that link here (1)
+> [Hand-written strategies in B1](hand-written-strategies-in-b1.md)
 <!-- /turns -->

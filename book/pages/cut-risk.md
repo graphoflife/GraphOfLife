@@ -47,4 +47,7 @@ every bridge costs nothing extra (`bridge_splits` and `worst_cut_share` in
 ---
 
 ← [Loops](loops.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Radius and diameter](radius-and-diameter.md) →
+
+> [!info]- Pages that link here (6)
+> [A world's life](a-worlds-life.md) · [How a world breaks](how-a-world-breaks.md) · [Bridges](bridges.md) · [Physical inspiration](physical-inspiration.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

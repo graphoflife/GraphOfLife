@@ -215,4 +215,7 @@ To make every figure of this page: `python3 book_figures.py colours`.
 ---
 
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a simulation costs](what-a-simulation-costs.md) →
+
+> [!info]- Pages that link here (5)
+> [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

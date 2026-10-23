@@ -94,4 +94,7 @@ the deeper cores, the trees and the dimension of the core are measured in
 ---
 
 ← [Path length](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges](bridges.md) →
+
+> [!info]- Pages that link here (11)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [Thirty worlds](thirty-worlds.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [Bridges](bridges.md) · [Loops](loops.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

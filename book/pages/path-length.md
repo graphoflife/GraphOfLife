@@ -51,4 +51,9 @@ is: in a lattice they grow like a power of the number of agents, in a
 ---
 
 ← [Clustering](clustering.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Core, trees and leaves](core-trees-leaves.md) →
+
+**Also about:** [Space and dimension](../README.md#space-and-dimension).
+
+> [!info]- Pages that link here (8)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Radius and diameter](radius-and-diameter.md) · [Physical inspiration](physical-inspiration.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

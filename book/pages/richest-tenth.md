@@ -39,4 +39,7 @@ point of it, the one people most often ask about.
 ---
 
 ← [The Gini coefficient and the Lorenz curve](gini-coefficient.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) →
+
+> [!info]- Pages that link here (2)
+> [Where do the tokens go?](where-do-the-tokens-go.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

@@ -54,4 +54,9 @@ cleanup report of each frame.
 ---
 
 ← [Entropy and evenness](entropy-and-evenness.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
+
+**Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
+
+> [!info]- Pages that link here (2)
+> [Gains and losses](gains-and-losses.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

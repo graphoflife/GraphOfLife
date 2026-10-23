@@ -182,4 +182,7 @@ two questions.
 ---
 
 ← [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [Size and riches of a world](../README.md#size-and-riches-of-a-world)
+
+> [!info]- Pages that link here (1)
+> [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md)
 <!-- /turns -->

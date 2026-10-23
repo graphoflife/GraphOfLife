@@ -353,4 +353,9 @@ To make every figure of this page: `python3 book_figures.py powerlaws`.
 ---
 
 ← [The core of a world](the-core-of-a-world.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How properties scale together](how-properties-scale-together.md) →
+
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (11)
+> [Where do the tokens go?](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How the network grows](how-the-network-grows.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Fitting a power law properly](power-law-fit.md) · [The power spectrum of a time series](power-spectrum.md)
 <!-- /turns -->

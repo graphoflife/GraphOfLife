@@ -1356,14 +1356,48 @@ function test_book_progress_of_an_experiment() {
   // Above its title a page says where it belongs: its topic, and what it reports.
   Book.index = { topics: [{ id: 'size', title: 'Size and riches of a world' }], pages: [] };
   const floor = { id: 'the-floor', topics: ['size'], experiments: ['E36', 'E37'] };
-  assert(Book.kicker(floor) === '<p class="book-kicker">Size and riches of a world · Experiments 36 and 37</p>',
-    Book.kicker(floor));
+  assert(Book.kicker(floor) === '<p class="book-kicker"><a href="#" data-topic="size">Size and riches of a world</a>'
+    + ' · Experiments 36 and 37</p>', Book.kicker(floor));
+  assert(Book.kicker({ id: 'x', topics: ['size'], kind: 'term' }).endsWith('</a> · Term</p>'),
+    'a page without an experiment did not say what kind of page it is');
 
   assert(Book.eta(30) === 'under 2 min left');
   assert(Book.eta(600) === 'about 10 min left');
   assert(Book.eta(7200) === 'about 2.0 h left', Book.eta(7200));
   assert(Book.eta(3 * 86400) === 'about 3.0 days left');
   assert(Book.eta(7200, '') === 'about 2.0 h');
+}
+
+function test_the_notebook_lists_its_pages_as_the_reader_asks() {
+  // By topic (each page under its home topic only), by kind, by the day it was
+  // added, or A to Z; filtered by any of its topics, its kind, its status and
+  // words of its title or summary. A choice the index no longer offers falls back.
+  const Book = bookWith();
+  Book.index = {
+    topics: [{ id: 'wealth', title: 'Wealth' }, { id: 'game', title: 'The game' }],
+    pages: [
+      { id: 'gini', title: 'The Gini coefficient', topics: ['wealth'], kind: 'term', status: 'written',
+        added: '2026-10-08', summary: 'How unequal is the wealth of a world?' },
+      { id: 'flow', title: 'Where the tokens flow', topics: ['game', 'wealth'], kind: 'study', status: 'written',
+        added: '2026-10-11', summary: 'Who gains from a game.' },
+      { id: 'even', title: 'An even split', topics: ['game'], kind: 'term', status: 'planned',
+        added: '2026-10-20', summary: '' },
+    ] };
+  const ids = groups => groups.map(([heading, list]) => `${heading}: ${list.map(p => p.id).join(' ')}`);
+  const view = { sort: 'topic', topic: '', kind: '', status: '', query: '' };
+  assert(ids(Book.listing(view)).join(' | ') === 'Wealth: gini | The game: flow even', ids(Book.listing(view)));
+  assert(ids(Book.listing({ ...view, topic: 'wealth' })).join(' | ') === 'Wealth: gini | The game: flow',
+    'a page about a topic beside its home was left out of that topic');
+  assert(ids(Book.listing({ ...view, sort: 'kind' })).join(' | ') === 'Studies: flow | Terms: gini even');
+  assert(ids(Book.listing({ ...view, sort: 'newest' })).join() === ': even flow gini');
+  assert(ids(Book.listing({ ...view, sort: 'oldest', status: 'written' })).join() === ': gini flow');
+  assert(ids(Book.listing({ ...view, sort: 'title' })).join() === ': even gini flow',
+    'A to Z read the articles: ' + ids(Book.listing({ ...view, sort: 'title' })));
+  assert(ids(Book.listing({ ...view, query: 'WEALTH world' })).join() === 'Wealth: gini');
+  assert(Book.listing({ ...view, query: 'nothing like this' }).length === 0);
+  assert(JSON.stringify(Book.chosen({ sort: 'title', topic: 'gone', kind: 'term', status: 'x', query: 'gini' }))
+    === JSON.stringify({ sort: 'title', topic: '', kind: 'term', status: '', query: 'gini' }));
+  assert(Book.chosen(null).sort === 'topic');
 }
 
 function test_a_run_that_died_out_says_so() {

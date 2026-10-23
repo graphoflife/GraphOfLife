@@ -957,8 +957,8 @@
      it is read from book/ by book.js: the chapter list on the left, the
      chapter on the right. -->
 <main id="view-book" class="view">
-  <!-- On a narrow screen the chapter list is a drawer: this opens it, and says
-       which chapter is open. On a wide one the list stands beside the page and
+  <!-- On a narrow screen the contents are a drawer: this opens it, and says
+       which page is open. On a wide one the list stands beside the page and
        the button is not shown. -->
   <button class="book-toc-toggle" id="bookTocToggle" aria-expanded="false" aria-controls="bookToc">
     <span class="book-toc-toggle-icon" aria-hidden="true"></span>
@@ -966,7 +966,22 @@
   </button>
   <div class="book-scrim" id="bookScrim" hidden></div>
   <div class="book-layout">
-    <nav class="book-toc" id="bookToc" aria-label="Chapters"></nav>
+    <!-- The contents, sorted and filtered as the reader asks: book.js fills the
+         list and the choices, and keeps them from one visit to the next. -->
+    <nav class="book-toc" id="bookToc" aria-label="Pages">
+      <div class="book-title" id="bookTitle">Research Notebook</div>
+      <div class="book-toc-controls">
+        <input type="search" id="bookSearch" class="book-search" placeholder="Search titles and summaries"
+               aria-label="Search the pages' titles and summaries" autocomplete="off">
+        <div class="book-toc-filters">
+          <select id="bookSort" aria-label="Sort the pages"></select>
+          <select id="bookTopic" aria-label="Only pages about a topic"></select>
+          <select id="bookKind" aria-label="Only pages of a kind"></select>
+          <select id="bookStatus" aria-label="Only pages of a status"></select>
+        </div>
+      </div>
+      <div id="bookTocList"></div>
+    </nav>
     <article class="book-page md" id="bookPage"><p class="md-status">Reading…</p></article>
   </div>
 </main>

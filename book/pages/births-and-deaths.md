@@ -62,4 +62,9 @@ world's life.
 ---
 
 ← [How agents have children](how-agents-have-children.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Age and lifetime](age-and-lifetime.md) →
+
+**Also about:** [How the simulation works](../README.md#how-the-simulation-works).
+
+> [!info]- Pages that link here (7)
+> [One iteration, step by step](one-iteration.md) · [Who dies, and why](who-dies-and-why.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Reproduction statistics](reproduction-statistics.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

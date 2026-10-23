@@ -296,4 +296,9 @@ physics, asks for exactly that kind of thing.
 ---
 
 ← [Strategies written by hand](strategies-written-by-hand.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (5)
+> [Every setting](settings.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [A crew of raiders](a-crew-of-raiders.md)
 <!-- /turns -->

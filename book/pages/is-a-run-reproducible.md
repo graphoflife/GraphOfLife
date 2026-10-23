@@ -212,4 +212,9 @@ The limits that remain:
 ---
 
 ← [Questioning the mechanics](questioning-the-mechanics.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Every setting](settings.md) →
+
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (7)
+> [How to read this notebook](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [The world: tokens, agents and a network](the-world.md) · [Seeds and the random stream](random-numbers.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -393,4 +393,9 @@ as brains mixed at birth ([Mixed at birth: ten long worlds](mixed-at-birth-ten-l
 ---
 
 ← [A world that cannot break](a-world-that-cannot-break.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2)
+
+**Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
+
+> [!info]- Pages that link here (14)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

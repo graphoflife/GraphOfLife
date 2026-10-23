@@ -178,4 +178,7 @@ the figures (`book_figures.py`, with the package `book_chapters/`, drawing with
 ---
 
 ← [Every world side by side](every-world-side-by-side.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours](one-world-many-colours.md) →
+
+> [!info]- Pages that link here (2)
+> [Where do the tokens go?](where-do-the-tokens-go.md) · [What a brain can compute](what-a-brain-can-compute.md)
 <!-- /turns -->

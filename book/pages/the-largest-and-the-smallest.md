@@ -312,4 +312,9 @@ To make every figure of this page: `python3 book_figures.py extremes`.
 ---
 
 ← [Gains and losses](gains-and-losses.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [The Gini coefficient and the Lorenz curve](gini-coefficient.md) →
+
+**Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
+
+> [!info]- Pages that link here (14)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What the baseline world is](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How agents have children](how-agents-have-children.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How the network grows](how-the-network-grows.md) · [How properties scale together](how-properties-scale-together.md) · [Physical inspiration](physical-inspiration.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
 <!-- /turns -->

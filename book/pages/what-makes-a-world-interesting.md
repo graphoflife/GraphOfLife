@@ -127,4 +127,7 @@ page and the judge always agree.
 ---
 
 ← [Healthy and rich](healthy-and-rich.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) →
+
+> [!info]- Pages that link here (1)
+> [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

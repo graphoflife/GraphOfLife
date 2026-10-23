@@ -252,4 +252,7 @@ To make every figure of this page: `python3 book_figures.py talk`.
 ---
 
 ← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Do the brains matter?](do-the-brains-matter.md) →
+
+> [!info]- Pages that link here (6)
+> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [How many directions a cloud of points uses](participation-ratio.md)
 <!-- /turns -->

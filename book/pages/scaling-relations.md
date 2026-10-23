@@ -51,4 +51,7 @@ Each is reported with its R² (`tokensVsDegreeR2`, …).
 ---
 
 ← [Assortativity](assortativity.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
+
+> [!info]- Pages that link here (2)
+> [How properties scale together](how-properties-scale-together.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

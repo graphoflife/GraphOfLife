@@ -43,4 +43,9 @@ does not tell them apart.
 ---
 
 ← [Logarithmic axes and power laws](logarithmic-axes.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Fitting a straight line, and R²](least-squares.md) →
+
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (3)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Genotypes and the family tree](genotype.md)
 <!-- /turns -->

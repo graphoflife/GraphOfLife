@@ -518,4 +518,9 @@ part of the notebook (see [the contents](../README.md)):
 ---
 
 [Space and dimension](../README.md#space-and-dimension) · [Like next to like](like-next-to-like.md) →
+
+**Also about:** [Start here](../README.md#start-here).
+
+> [!info]- Pages that link here (13)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

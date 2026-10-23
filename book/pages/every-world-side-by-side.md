@@ -185,4 +185,7 @@ longer makes.
 ---
 
 [Methods and statistics](../README.md#methods-and-statistics) · [How worlds are measured](how-worlds-are-measured.md) →
+
+> [!info]- Pages that link here (3)
+> [Lightning in every world](lightning-in-every-world.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

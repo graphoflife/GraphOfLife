@@ -228,4 +228,7 @@ B2's rule for lapsing links, at least not as gifts stand.
 ---
 
 ← [Rules in company](rules-in-company.md) · [Changing the rules](../README.md#changing-the-rules) · [Rules without numbers](rules-without-numbers.md) →
+
+> [!info]- Pages that link here (10)
+> [Lightning in every world](lightning-in-every-world.md) · [Why evolution stops](why-evolution-stops.md) · [Another game](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

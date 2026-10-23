@@ -166,4 +166,9 @@ a smaller world gives a later brain more room to win, this batch cannot say.
 ---
 
 ← [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Changing the rules](../README.md#changing-the-rules) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) →
+
+**Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
+
+> [!info]- Pages that link here (2)
+> [The candidates, played on](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
