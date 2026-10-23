@@ -141,22 +141,29 @@ def situations(w, rng: np.random.RandomState, n: int) -> List[Dict[str, Any]]:
 # What a brain does in them
 # ---------------------------------------------------------------------------
 
-def decide(w, Y: np.ndarray, sit: Dict[str, Any]) -> Tuple[Dict[str, float], np.ndarray]:
-    """One brain's decisions from its outputs in one situation and draw, by the engine's rules."""
-    from GraphOfLifeSimple import _apportion, _share_of_first
-    from probe import p_yes
+def stake(w, Y: np.ndarray, sit: Dict[str, Any]) -> Tuple[np.ndarray, bool]:
+    """The tokens one brain stakes on each candidate in one situation and draw, and whether it spreads them."""
+    from GraphOfLifeSimple import _apportion
     H, cfg, t, cands = w.heads, w.cfg, sit["tokens"], sit["cands"]
     scores = np.asarray(Y[H["BLOTTO"], :], float)
     mode = np.mean(Y[H["BLOTTO_MODE"], :], axis=1)
     spread = bool(mode[0] > mode[1])
     kept = max(1, int(np.ceil(cfg.keep_home * t))) if cfg.keep_home > 0 else 0
-    stake = t - kept
     if spread:
-        alloc = _apportion(scores, stake)
+        alloc = _apportion(scores, t - kept)
     else:
         alloc = np.zeros(len(cands), dtype=int)
-        alloc[int(np.argmax(scores))] = stake
+        alloc[int(np.argmax(scores))] = t - kept
     alloc[0] += kept
+    return alloc, spread
+
+
+def decide(w, Y: np.ndarray, sit: Dict[str, Any]) -> Tuple[Dict[str, float], np.ndarray]:
+    """One brain's decisions from its outputs in one situation and draw, by the engine's rules."""
+    from GraphOfLifeSimple import _share_of_first
+    from probe import p_yes
+    H, cfg, t, cands = w.heads, w.cfg, sit["tokens"], sit["cands"]
+    alloc, spread = stake(w, Y, sit)
     frac = np.mean(Y[H["REPRO_FRACTION"], :], axis=1)
     wanted = int(np.floor(_share_of_first(frac[0], frac[1]) * t))
     child = w._endowment(sit["u"], t, max(0, min(t, wanted)))
@@ -174,12 +181,8 @@ def decide(w, Y: np.ndarray, sit: Dict[str, Any]) -> Tuple[Dict[str, float], np.
              "link": link, "revolt": revolt}, alloc / t)
 
 
-def play(w, brains: List[Any], sits: List[Dict[str, Any]]):
-    """
-    Every brain in every situation and draw: the scalar decisions as arrays of
-    brains x situations x draws, and the stakes as one array of brains x
-    candidates for each situation and draw.
-    """
+def _outputs(brains: List[Any], sits: List[Dict[str, Any]]):
+    """Each brain's outputs in every situation and draw at once: (brain, outputs, [(s, k, first, last column)])."""
     columns, segments = [], []
     at = 0
     for s, sit in enumerate(sits):
@@ -188,17 +191,35 @@ def play(w, brains: List[Any], sits: List[Dict[str, Any]]):
             segments.append((s, k, at, at + X.shape[1]))
             at += X.shape[1]
     X_all = np.concatenate(columns, axis=1)
+    for b, brain in enumerate(brains):
+        yield b, brain.forward(X_all), segments
+
+
+def play(w, brains: List[Any], sits: List[Dict[str, Any]]):
+    """
+    Every brain in every situation and draw: the scalar decisions as arrays of
+    brains x situations x draws, and the stakes as one array of brains x
+    candidates for each situation and draw.
+    """
     B, S = len(brains), len(sits)
     D = {d: np.zeros((B, S, DRAWS)) for d in DECISIONS}
     stakes = {(s, k): np.zeros((B, len(sits[s]["cands"]))) for s in range(S) for k in range(DRAWS)}
-    for b, brain in enumerate(brains):
-        Y_all = brain.forward(X_all)
+    for b, Y_all, segments in _outputs(brains, sits):
         for s, k, a, z in segments:
             got, shares = decide(w, Y_all[:, a:z], sits[s])
             for d in DECISIONS:
                 D[d][b, s, k] = got[d]
             stakes[(s, k)][b] = shares
     return D, stakes
+
+
+def stakes_only(w, brains: List[Any], sits: List[Dict[str, Any]]):
+    """The stakes of `play`, without the other decisions: an array of brains x candidates per situation and draw."""
+    stakes = {(s, k): np.zeros((len(brains), len(sits[s]["cands"]))) for s in range(len(sits)) for k in range(DRAWS)}
+    for b, Y_all, segments in _outputs(brains, sits):
+        for s, k, a, z in segments:
+            stakes[(s, k)][b] = stake(w, Y_all[:, a:z], sits[s])[0] / sits[s]["tokens"]
+    return stakes
 
 
 # ---------------------------------------------------------------------------
@@ -258,7 +279,8 @@ def profiles(D, stakes, S: int) -> Tuple[List[Dict[str, Any]], List[Dict[str, An
     out = []
     for draws in (range(0, half), range(half, DRAWS)):
         idx = list(draws)
-        out.append({"scalars": np.stack([D[d][:, :, idx].mean(axis=2) for d in DECISIONS], axis=2),
+        out.append({"scalars": None if D is None else np.stack([D[d][:, :, idx].mean(axis=2) for d in DECISIONS],
+                                                               axis=2),
                     "stakes": [np.mean([stakes[(s, k)] for k in idx], axis=0) for s in range(S)]})
     return out[0], out[1]
 
@@ -269,8 +291,7 @@ def distance(p: Dict[str, Any], q: Dict[str, Any], S: int, stake_only: bool = Fa
     over the situations, the mean of the stake's total variation and of the
     five decisions' absolute differences — or the stake's alone.
     """
-    B = p["scalars"].shape[0]
-    total = np.zeros((B, q["scalars"].shape[0]))
+    total = np.zeros((p["stakes"][0].shape[0], q["stakes"][0].shape[0]))
     for s in range(S):
         a, b = p["stakes"][s], q["stakes"][s]
         total += 0.5 * np.abs(a[:, None, :] - b[None, :, :]).sum(axis=2)
@@ -357,17 +378,13 @@ def niche(values: np.ndarray, label: np.ndarray, rng: np.random.RandomState, shu
             "above_shuffled": float(np.mean([observed > x for x in null]))}
 
 
-def measure(spec: str, seed: int = 7, game: bool = True) -> Dict[str, Any]:
-    from GraphOfLifeSimple import make_brain
-    w = load(spec, game)
-    rng = np.random.RandomState(seed)
-    sits = situations(w, rng, SITUATIONS)
-    S = len(sits)
+def drawn_brains(w, rng: np.random.RandomState):
+    """
+    The agents, each one's brain key, and AGENTS agents drawn at random: their
+    brains, each distinct brain once, with how many drawn agents carry it.
+    """
     agents = sorted(int(u) for u in w.G.nodes())
     keys = {u: brain_key(w.brains[u]) for u in agents}
-    carried = {}
-    for u in agents:
-        carried[keys[u]] = carried.get(keys[u], 0) + 1
     drawn = rng.choice(agents, size=min(AGENTS, len(agents)), replace=False)
     distinct, carriers, first = [], [], {}
     for u in sorted(int(x) for x in drawn):
@@ -377,7 +394,32 @@ def measure(spec: str, seed: int = 7, game: bool = True) -> Dict[str, Any]:
             distinct.append(w.brains[u])
             carriers.append(0)
         carriers[first[k]] += 1
-    carriers = np.array(carriers, dtype=float)
+    return agents, keys, drawn, distinct, np.array(carriers, dtype=float), first
+
+
+def stake_kinds(spec: str, seed: int = 7, game: bool = True) -> Dict[str, Any]:
+    """
+    measure(spec)["stake_kinds"] alone: the same situations, drawn brains and
+    grouping, with no other decision played and no founders, so it takes a
+    tenth of the time (the screen's judge reads only this).
+    """
+    w = load(spec, game)
+    rng = np.random.RandomState(seed)
+    sits = situations(w, rng, SITUATIONS)
+    _, _, _, distinct, carriers, _ = drawn_brains(w, rng)
+    return kinds_of(None, stakes_only(w, distinct, sits), len(sits), carriers, stake_only=True)[1]
+
+
+def measure(spec: str, seed: int = 7, game: bool = True) -> Dict[str, Any]:
+    from GraphOfLifeSimple import make_brain
+    w = load(spec, game)
+    rng = np.random.RandomState(seed)
+    sits = situations(w, rng, SITUATIONS)
+    S = len(sits)
+    agents, keys, drawn, distinct, carriers, first = drawn_brains(w, rng)
+    carried = {}
+    for u in agents:
+        carried[keys[u]] = carried.get(keys[u], 0) + 1
     # The decisions of the drawn agents' brains, each brain once and counted by its carriers.
     D, stakes = play(w, distinct, sits)
     weight = carriers.astype(int)

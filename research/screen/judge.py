@@ -79,7 +79,7 @@ def read(item: Tuple[str, int]) -> Dict[str, Any]:
         return {"id": run_id, "at": at, **r}
     if r.get("agents", 0) >= SMALL:
         diversity = _module("diversity_checks", os.path.join(ROOT, "research", "oee", "checks", "diversity.py"))
-        r["kinds"] = float(diversity.measure(f"{run_id}:{at}", game=False)["stake_kinds"]["effective"])
+        r["kinds"] = float(diversity.stake_kinds(f"{run_id}:{at}", game=False)["effective"])
     return r
 
 
