@@ -127,6 +127,6 @@ page and the judge always agree.
 
 ← [Healthy and rich](healthy-and-rich.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [The health bar](health-bar.md) →
 
-> [!info]- Pages that link here (6)
-> [Glossary](glossary.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (7)
+> [Glossary](glossary.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

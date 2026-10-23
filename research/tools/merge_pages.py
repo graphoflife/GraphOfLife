@@ -19,7 +19,8 @@ What --apply does, so that nothing that pointed at an old page points nowhere:
   to OLD#part leads to NEW#part when NEW has that section, else to NEW#section;
 - book/terms.json: a term explained on OLD is explained on NEW, at its section;
 - book/legacy.json: an old number or note id that became OLD, and every number
-  a thesis cites that meant OLD, now leads to NEW (theses keep their words);
+  a thesis cites that meant OLD, now leads to NEW, at OLD's section (theses
+  keep their words);
 - the figures' code that names OLD as a page id (the catalogue's batches) names NEW;
 - book.json: OLD's entry is gone; NEW reports OLD's experiments too, in reading
   order, and is about OLD's topics as well;
@@ -192,16 +193,24 @@ def main() -> None:
             term["page"] = a.new
             changes.append(f"terms.json: {term['name']}")
     legacy = load(os.path.join(BOOK, "legacy.json"))
+
+    def moved_to(pid: str) -> str:
+        """Where a page of the old maps (`page`, `page#part`, or none) leads after the merge."""
+        page, _, part = (pid or "").partition("#")
+        if page not in olds:
+            return pid
+        return f"{a.new}#{part if part in ids else dict(merged)[page]}"
+
     for oid, pid in legacy["pages"].items():
-        if pid in olds:
-            legacy["pages"][oid] = a.new
+        if moved_to(pid) != pid:
+            legacy["pages"][oid] = moved_to(pid)
             changes.append(f"legacy.json: {oid}")
     for old, section in merged:
         legacy.setdefault("merged", {})[old] = f"{a.new}#{section}"
     for name, cited in legacy["theses"].items():
         for words, pid in cited.items():
-            if pid in olds:
-                cited[words] = a.new
+            if moved_to(pid) != pid:
+                cited[words] = moved_to(pid)
                 changes.append(f"legacy.json: {name} {words}")
     index = load(os.path.join(BOOK, "book.json"))
     keep = next(p for p in index["pages"] if p["id"] == a.new)

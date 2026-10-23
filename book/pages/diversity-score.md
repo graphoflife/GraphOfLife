@@ -122,6 +122,6 @@ the kinds swing from moment to moment.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (2)
-> [Glossary](glossary.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->

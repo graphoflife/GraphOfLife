@@ -148,7 +148,7 @@ rhythm. Every 350 iterations or so, one branch of the family tree outlived
 all the others, and the whole world descended from it. Was the wander made by
 these sweeps? The large worlds answer no. They forget their level within
 three hundred iterations, as the small ones do, but a line needs about a
-thousand to take one over ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)).
+thousand to take one over ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
 The wander is faster than the sweeps, and so not made by them.
 [Do the brains matter?](do-the-brains-matter.md) finds the other half of the
 answer: a world whose brains never change hardly wanders at all.
@@ -246,7 +246,7 @@ three steps ([Like next to like](like-next-to-like.md)). Lines of descent,
 which last much longer than genotypes, do hold patches for a while. Two
 neighbours share a family of 25 iterations back 99 times as often as chance,
 and the excess reaches about 7 steps; for families of 200 iterations back,
-about 12 ([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)). But a patch
+about 12 ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). But a patch
 widens as a random walk on these worlds would, until one line holds the whole
 world. A world has room for regions that differ, and lines that make them for
 a while, but nothing that keeps them apart.
@@ -325,7 +325,7 @@ runs worlds whose brains never change, and worlds in which every decision is
 drawn at random.
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
 then asked, at the author's request, how a world's size follows its tokens.
-[Worlds of 100,000 tokens](worlds-of-100000-tokens.md) made the thirty worlds
+[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) made the thirty worlds
 this edition is written from, and asked of them the question they were made
 for: how a line takes over a world ten times the size.
 
@@ -807,7 +807,7 @@ Redoing the study of B1 on worlds ten times larger left most of it as it
 was, and that is itself a finding. Per agent, a world of 100,000 tokens does
 what a world of 10,000 does: the same births and deaths within a tenth, the
 same inequality, the same game, the same brains
-([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)). What changed is how
+([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). What changed is how
 the agents are arranged, and how fast anything crosses a world:
 
 - **The shape changes.** Half the [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), more loops per agent, fewer
@@ -822,7 +822,7 @@ the agents are arranged, and how fast anything crosses a world:
   long in a world ten times larger. So lines live side by side for most of a
   run, and the messages of a world speak more dialects
   ([What agents say to each other](what-agents-say-to-each-other.md),
-  [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)).
+  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
 - **Demography settles.** In a large world, ages, lifetimes and births per
   agent hold still from iteration 500 on
   ([A turnover that settles late](#a-turnover-that-settles-late)).
@@ -914,7 +914,7 @@ the rule changes of both aims will be tested together where they coincide.
   that respond to what is around them.
 - **11 October 2026.** The study of B1 said that a world has room for regions
   that differ, "and nothing to make them".
-  [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) found that lines of
+  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) found that lines of
   descent do make patches, for a while. What is missing is something to keep
   them apart.
 - **14 October 2026.** The study said that defence got better without agents
@@ -970,5 +970,5 @@ the rule changes of both aims will be tested together where they coincide.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How agents have children](how-agents-have-children.md) · [The estate of the dead](estate.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How agents have children](how-agents-have-children.md) · [The estate of the dead](estate.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

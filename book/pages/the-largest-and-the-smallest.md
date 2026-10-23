@@ -275,7 +275,7 @@ grows about as agents^0.30,
 than its agents (×11). Measured directly against the worlds of 10,000
 tokens, the richest is 3.1 times as rich and the best-connected, stars
 included, 7.7 times as connected
-([Worlds of 100,000 tokens](worlds-of-100000-tokens.md)). No agent becomes a fixed share
+([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). No agent becomes a fixed share
 of the world as it grows; but there is more room at the top in a large world,
 and the stars show what it can be used for.
 

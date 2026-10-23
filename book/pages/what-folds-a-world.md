@@ -372,7 +372,7 @@ puts the line between folded and not.
 <!-- turns -->
 ---
 
-← [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Space and dimension](../README.md#space-and-dimension) · [How alike at a distance](correlation-function.md) →
+← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [How alike at a distance](correlation-function.md) →
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 

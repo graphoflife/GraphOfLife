@@ -122,10 +122,10 @@ that made them. The line of 1.5 lies between the two.
 <!-- turns -->
 ---
 
-← [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) →
+← [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [What folds a world](what-folds-a-world.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->

@@ -1121,22 +1121,6 @@
       "summary": "A world's network wired again at random, with as many links per agent: what a world would be if it were no space, and how wide a world is beside it."
     },
     {
-      "id": "worlds-of-100000-tokens",
-      "title": "Worlds of 100,000 tokens",
-      "file": "pages/worlds-of-100000-tokens.md",
-      "topics": [
-        "space",
-        "size"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E10"
-      ],
-      "status": "analysed",
-      "added": "2026-10-09",
-      "summary": "How does a line take over a world ten times the size: ten times slower, as chance would, about as fast, as a better brain in a well-mixed world would, or at the pace of a front that has twice as far to go? Is a world of 100,000 tokens ten copies of a world of 10,000, or does anything appear only at size: longer-lived regions, coexisting lines, structure that a small world has no room for? Do the measures of space of the baseline's study — dimension, correlation length, the width of a world — read the same at ten times the size?"
-    },
-    {
       "id": "what-folds-a-world",
       "title": "What folds a world",
       "file": "pages/what-folds-a-world.md",
@@ -1275,22 +1259,24 @@
       "kind": "overview",
       "status": "analysed",
       "added": "2026-10-17",
-      "summary": "Why B2's worlds are poor and the mixed ones rich and mortal: births must match deaths, so how eagerly agents breed sets a world's size, and its riches and health with it; the rules tried to hold a world rich and steady, and what is left to try."
+      "summary": "Every agent of a B2 world dies at the age of 100, so a world keeps its size only if one agent in a hundred is born each iteration. How eagerly the agents breed decides how full the world gets; with its tokens fixed, a full world is a poor one."
     },
     {
       "id": "how-does-a-worlds-size-follow-its-tokens",
-      "title": "How does a world's size follow its tokens?",
+      "title": "Worlds of many sizes",
       "file": "pages/how-does-a-worlds-size-follow-its-tokens.md",
       "topics": [
-        "size"
+        "size",
+        "space"
       ],
       "kind": "experiment",
       "experiments": [
-        "E08"
+        "E08",
+        "E10"
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "Does a world of twice the tokens hold twice the agents and twice the connections? Is a big world the same kind of world as a small one — as unequal, as diverse, as well connected per agent? Do big worlds settle down, or do they wander as much as small ones?"
+      "summary": "Experiment 8 ran the first baseline, B1, at ten sizes, from 800 to 409,600 tokens. As its thesis said, agents and connections followed the tokens in proportion: about 0.14 agents per token."
     },
     {
       "id": "how-alike-the-agents-are",
@@ -1923,7 +1909,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "Every world against the author's picture of one that might keep evolving: a decentralised, resilient, nearly three-dimensional network and agents that differ in almost everything. B1's worlds are rich but fragile, B2's healthy but poor; brains mixed at birth come closest."
+      "summary": "The author's picture of a world that might keep evolving has two halves: a decentralised, resilient, almost three-dimensional network, and agents that differ in almost everything."
     },
     {
       "id": "what-makes-a-world-interesting",
@@ -2046,7 +2032,7 @@
       ],
       "status": "ready",
       "added": "2026-10-22",
-      "summary": "The author's plan of 22 October 2026: rounds of fifty worlds whose settings are all drawn at random (switches on in half, numbers at their default in three of four, messages and noise absent in one of ten), each judged by five lines of health at 2,000; values that made every world unhealthy, beyond chance, are set aside round by round, until a healthy configuration is found. Round 1 is Experiment 38."
+      "summary": "Rounds of fifty worlds with every setting drawn at random, each judged at iteration 2,000 by six criteria; a value is set aside once ten worlds with it all died or none was interesting."
     },
     {
       "id": "every-world-side-by-side",

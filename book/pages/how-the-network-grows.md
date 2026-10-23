@@ -220,5 +220,5 @@ To make every figure of this page: `python3 book_figures.py grows`.
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
 > [!info]- Pages that link here (9)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How ages change over a world's life](how-ages-change.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How ages change over a world's life](how-ages-change.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)
 <!-- /turns -->

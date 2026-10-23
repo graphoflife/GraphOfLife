@@ -21,8 +21,8 @@ E07_RUNS = ("The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30,
             "iterations — in three conditions: the 30 baseline runs `B1-10000-s001` … `-s030`; "
             "*brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and "
             "*decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). "
-            "They are made with `python3 gol_lab.py run E07`; every setting is listed in the box at the "
-            "top of the page.")
+            "They are made with `python3 gol_lab.py run E07`; every setting is listed in the box of the "
+            "runs behind this page.")
 
 
 def kind_of(births_per_100: float) -> str:

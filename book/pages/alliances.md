@@ -298,6 +298,6 @@ failed the [health bar](health-bar.md "The seven marks a world's network must me
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (12)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Strategies written by hand](strategies-written-by-hand.md) · [Who helps whom](who-helps-whom.md) · [Another game](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Rules without numbers](rules-without-numbers.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [!info]- Pages that link here (13)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Strategies written by hand](strategies-written-by-hand.md) · [Who helps whom](who-helps-whom.md) · [Another game](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

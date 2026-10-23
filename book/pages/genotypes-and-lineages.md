@@ -175,7 +175,7 @@ Each line is one world. It starts by rising with the age of the world: the
 living still descend from more than one [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). The first drop is the
 moment everyone alive descends from one founder — in the median world at
 iteration 1,000 among the 27 that got there, and never in three
-([Worlds of 100,000 tokens](worlds-of-100000-tokens.md) counts it, and finds it 5.9
+([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) counts it, and finds it 5.9
 times as late as in the worlds of 10,000 tokens). After that the line rises
 steadily, one iteration per iteration, while the common ancestor stays the
 same and grows older, and drops whenever one branch of the family tree has
@@ -380,7 +380,7 @@ a single founder by iteration 1,500 — but slowly, about once a run.
 > their founders' (+361 Elo), and every later era ties with the one before
 > it (iteration 1,000 against 300: 0.483). The lines that take a settled
 > world over do not carry brains that play better.
-> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) times the takeovers in worlds of
+> [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) times the takeovers in worlds of
 > two sizes: the time to a single founder grows as the tokens to the power
 > 0.77 — between what a front (0.30) and chance (1) would give — and a line
 > spreads through a world as a random walk does.
@@ -395,5 +395,5 @@ To make every figure of this page: `python3 book_figures.py lineage`.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (21)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How ages change over a world's life](how-ages-change.md) · [How even is a world?](how-even-is-a-world.md) · [Like next to like](like-next-to-like.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [The common ancestor of the living](common-ancestor.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Muller plots](muller-plot.md)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How ages change over a world's life](how-ages-change.md) · [How even is a world?](how-even-is-a-world.md) · [Like next to like](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [The common ancestor of the living](common-ancestor.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Muller plots](muller-plot.md)
 <!-- /turns -->

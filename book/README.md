@@ -145,7 +145,6 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 - [Like next to like](pages/like-next-to-like.md)
 - [How many dimensions does a world have?](pages/how-many-dimensions-does-a-world-have.md)
 - [The random twin: is a world a space?](pages/random-twin.md)
-- [Worlds of 100,000 tokens](pages/worlds-of-100000-tokens.md)
 - [What folds a world](pages/what-folds-a-world.md)
 - Dimensions at scale — *not written yet*
 - Which properties have no scale? — *not written yet*
@@ -163,7 +162,7 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 What sets how many agents a world holds, and how rich each is.
 
 - [What holds a world's size](pages/what-holds-a-worlds-size.md)
-- [How does a world's size follow its tokens?](pages/how-does-a-worlds-size-follow-its-tokens.md)
+- [Worlds of many sizes](pages/how-does-a-worlds-size-follow-its-tokens.md)
 
 ### Brains, and how alike agents are
 

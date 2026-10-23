@@ -343,7 +343,7 @@ balls and 1.6 to 1.9 by walks throughout.)
 > rises to meet the balls' there has not been measured yet.
 
 > [!info] Added later: lines hold patches
-> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) finds that lines of descent do
+> [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) finds that lines of descent do
 > hold regions: two agents share a family of 25 iterations back more often
 > than chance up to about 7 steps apart, and a family of 200 iterations back
 > up to about 12, the patches widening as a random walk on these worlds
@@ -357,5 +357,5 @@ To make every figure of this page: `python3 book_figures.py dimensions`.
 ← [Like next to like](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [The random twin: is a world a space?](random-twin.md) →
 
 > [!info]- Pages that link here (14)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

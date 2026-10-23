@@ -104,19 +104,20 @@ def figure(md: str, name: str) -> str:
 def thesis(md: str, name: str) -> str:
     """
     An experiment's thesis, word for word. A thesis written while the notebook had
-    chapter numbers keeps them; each is a link to the page it meant that day
-    (book/legacy.json), and a line under the thesis says so.
+    chapter numbers keeps them; each is a link to the page it meant that day, or
+    to its section where that page was merged into another (book/legacy.json),
+    and a line under the thesis says so.
     """
     plan = read_json(f"experiments/{name}.json")
     said = plan.get("thesis") or {}
     cited = read_json("legacy.json")["theses"].get(name, {})
 
     def where(words: str) -> str:
-        target = cited[words]
+        target, _, section = cited[words].partition("#")
         if target.startswith("topic:"):
             title = next(t["title"] for t in topics() if t["id"] == target[6:])
             return f"{link(md, 'README.md')}#{slug(title)}"
-        return link(md, page_file(target))
+        return link(md, page_file(target)) + (f"#{section}" if section else "")
 
     def numbered(text: str) -> str:
         def chapters(m: "re.Match[str]") -> str:

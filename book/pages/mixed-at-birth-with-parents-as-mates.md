@@ -179,8 +179,8 @@ arrived.
 **Six in ten are poor.** At iteration 20,000, 55% to 66% of each world's
 agents hold three tokens or fewer. That is richer than any of B2's worlds: the
 least poor of its ten held 66% at 10,000 iterations. But it is far poorer than
-Experiment 17's mixed worlds, whose median world held 15% at 10,000. Only the
-poorest two of those were as poor.
+Experiment 17's mixed worlds: at 10,000, the median of the nine that lived
+held 15%. Only the poorest two of those were as poor.
 
 **As diverse as mixed worlds.** The [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") says in one number, from
 0 to 1, how much a world's agents differ: in tokens, links, ages and

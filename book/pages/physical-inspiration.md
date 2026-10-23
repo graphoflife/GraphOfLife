@@ -302,7 +302,7 @@ one or two steps, and agents of one genotype within two or three; beyond
 that, every part of a world is like every other.
 
 > [!info] Added later: lines of descent reach further
-> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) found that lines of descent
+> [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) found that lines of descent
 > reach further than genotypes. Two agents belong to the same family of 25
 > iterations back more often than chance would have them out to about 7
 > steps, and of 200 iterations back out to about 12: a family is a patch of
@@ -398,7 +398,7 @@ What to look for:
 > parent to child — in the longest dynasties for hundreds of iterations —
 > while the brain on it changes nearly every game. It is a place that lasts,
 > kept by the rules, not yet a group that does anything together
-> ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)). And [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
+> ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)). And [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
 > found families holding patches of a world that widen as their lines age.
 
 ### Vacuum and matter
@@ -522,5 +522,5 @@ part of the notebook (see [the contents](../README.md)):
 **Also about:** [Start here](../README.md#start-here).
 
 > [!info]- Pages that link here (16)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

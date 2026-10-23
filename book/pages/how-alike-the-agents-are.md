@@ -34,7 +34,7 @@ dozen kinds. Most of what makes two genotypes two changes nothing they do.
 
 | finding | page |
 |---|---|
-| A genotype lasts a couple of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."); what lasts long enough for selection to act on is a line, a family that can take a world over in a few hundred iterations. | [Genotypes and lineages](genotypes-and-lineages.md), [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) |
+| A genotype lasts a couple of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."); what lasts long enough for selection to act on is a line, a family that can take a world over in a few hundred iterations. | [Genotypes and lineages](genotypes-and-lineages.md), [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) |
 | B1 keeps five genotypes for every eight agents, in every world and at every size: a balance of making and copying, which moves with the rate of change and nothing else. | [How even is a world?](how-even-is-a-world.md), [How fast should brains change?](how-fast-should-brains-change.md) |
 | Two brains of one B1 world are as far apart in their numbers as two brains drawn at random: nearly all of a brain is neutral, free to drift because nothing depends on it. | [What the brains are like](what-the-brains-are-like.md) |
 | Selection set B1's constants alike in every world: no children, the stake spread, every token revolutionary. | [How the game is played](how-the-game-is-played.md), [What the brains are like](what-the-brains-are-like.md) |

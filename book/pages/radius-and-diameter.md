@@ -54,5 +54,5 @@ steps, the radius about 36 and the mean path length about 18; in one of
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
+> [Glossary](glossary.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

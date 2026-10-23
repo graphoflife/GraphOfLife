@@ -49,5 +49,5 @@ per iteration while no line takes over, and drops when one does
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (7)
-> [Glossary](glossary.md) · [The life of a B1 world](a-worlds-life.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md)
+> [Glossary](glossary.md) · [The life of a B1 world](a-worlds-life.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md)
 <!-- /turns -->

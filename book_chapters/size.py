@@ -23,7 +23,7 @@ E08_RUNS = ("The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each s
             "seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … "
             "`B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 "
             "tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with "
-            "`python3 gol_lab.py run E08`; every setting is listed in the box at the top of the page.")
+            "`python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page.")
 WITH_E02 = (" As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 "
             "(`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).")
 WINDOW = (500, 599)          # the plan's window: a settled world

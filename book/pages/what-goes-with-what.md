@@ -254,7 +254,7 @@ holds 47%, and ordering the worlds along it orders them by their
 best-connected agent's share of the world, from 1% to 61%. The second
 component (18%) is how [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") and triangles grow with an agent's
 connections; the third (16%) is the population. The seven "star" worlds of
-[Worlds of 100,000 tokens](worlds-of-100000-tokens.md) are the far end of the first:
+[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) are the far end of the first:
 a world is first of all a world with or without a star.
 
 ## What it means

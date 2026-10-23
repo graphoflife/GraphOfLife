@@ -10,9 +10,9 @@
   "6": "the-ideas-this-builds-on",
   "7": "physical-inspiration",
   "8": "is-a-run-reproducible",
-  "9": "a-worlds-life",
+  "9": "a-worlds-life#thirty-worlds",
   "10": "a-worlds-life",
-  "11": "a-worlds-life",
+  "11": "a-worlds-life#the-first-hundred-iterations",
   "12": "births-deaths-and-ages",
   "13": "how-ages-change",
   "14": "how-much-does-the-seed-decide",
@@ -41,7 +41,7 @@
   "37": "one-world-many-colours",
   "38": "do-agents-cooperate",
   "39": "questioning-the-mechanics",
-  "40": "what-the-baseline-world-is",
+  "40": "what-the-baseline-world-is#what-the-measurements-say-about-open-ended-evolution",
   "70": "how-different-are-the-agents",
   "71": "flow-modules",
   "72": "lightning-in-every-world",
@@ -51,9 +51,9 @@
   "44": "what-keeps-wealth-spread",
   "45": null,
   "46": "how-to-tell-a-world-that-keeps-evolving",
-  "47": "a-world-that-cannot-break",
+  "47": "a-world-that-cannot-break#brains-that-see-and-worlds-that-break",
   "48": "a-world-that-cannot-break",
-  "49": "a-world-that-cannot-break",
+  "49": "a-world-that-cannot-break#who-dies-and-why",
   "50": "why-evolution-stops",
   "51": "strategies-written-by-hand",
   "52": "how-fast-should-brains-change",
@@ -74,12 +74,12 @@
   "88": "revolutions-with-every-other-rule",
   "89": "handover-with-every-other-rule",
   "90": "gifts-with-every-other-rule",
-  "98": "the-candidates-played-on",
-  "99": "mixed-at-birth-with-parents-as-mates",
+  "98": "the-candidates-played-on#the-searchs-best-world-in-new-seeds",
+  "99": "mixed-at-birth-with-parents-as-mates#a-mate-that-pays-its-share",
   "100": "room-for-the-steadiest-world",
-  "101": "room-for-the-steadiest-world",
-  "105": "room-for-the-steadiest-world",
-  "60": "worlds-of-100000-tokens",
+  "101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours",
+  "105": "room-for-the-steadiest-world#the-floor-in-plain-b2-and-in-b1",
+  "60": "how-does-a-worlds-size-follow-its-tokens#worlds-of-100000-tokens",
   "61": "dimensions-at-scale",
   "62": "which-properties-have-no-scale",
   "63": "local-rules-only",
@@ -90,9 +90,9 @@
   "68": null,
   "87": "what-folds-a-world",
   "69": "a-hundred-thousand-iterations",
-  "81": "mixed-at-birth-ten-long-worlds",
+  "81": "mixed-at-birth-ten-long-worlds#five-mixed-worlds-fifty-thousand-iterations",
   "92": "the-candidates-played-on",
-  "93": "the-candidates-played-on",
+  "93": "the-candidates-played-on#five-more-seeds-for-the-rules-that-held",
   "74": "every-world-side-by-side",
   "75": "where-tokens-go",
   "76": "who-helps-whom",
@@ -202,7 +202,7 @@
   "E09": {
    "Chapter 53": "why-evolution-stops",
    "Chapter 43": "how-fast-should-brains-change",
-   "Chapter 52": "a-world-that-cannot-break"
+   "Chapter 52": "a-world-that-cannot-break#who-dies-and-why"
   },
   "E10": {
    "Chapter 6": "the-ideas-this-builds-on",
@@ -241,11 +241,11 @@
    "Meta XI": "what-holds-a-worlds-size"
   },
   "E24": {
-   "Chapter 93": "the-candidates-played-on",
+   "Chapter 93": "the-candidates-played-on#five-more-seeds-for-the-rules-that-held",
    "Meta X": "healthy-and-rich"
   },
   "E28": {
-   "Chapter 81": "mixed-at-birth-ten-long-worlds",
+   "Chapter 81": "mixed-at-birth-ten-long-worlds#five-mixed-worlds-fifty-thousand-iterations",
    "Chapter 92": "the-candidates-played-on"
   },
   "E29": {
@@ -268,14 +268,14 @@
    "Chapter 103": "raiders-that-breed"
   },
   "E36": {
-   "Chapter 101": "room-for-the-steadiest-world"
+   "Chapter 101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours"
   },
   "E37": {
-   "Chapter 101": "room-for-the-steadiest-world"
+   "Chapter 101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours"
   },
   "E38": {
    "Chapter 100": "room-for-the-steadiest-world",
-   "Chapter 101": "room-for-the-steadiest-world"
+   "Chapter 101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours"
   }
  },
  "merged": {
@@ -289,6 +289,7 @@
   "five-more-seeds-for-the-rules-that-held": "the-candidates-played-on#five-more-seeds-for-the-rules-that-held",
   "the-searchs-best-world-in-new-seeds": "the-candidates-played-on#the-searchs-best-world-in-new-seeds",
   "births-as-rich-as-the-neighbours": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours",
-  "the-floor-in-plain-b2-and-in-b1": "room-for-the-steadiest-world#the-floor-in-plain-b2-and-in-b1"
+  "the-floor-in-plain-b2-and-in-b1": "room-for-the-steadiest-world#the-floor-in-plain-b2-and-in-b1",
+  "worlds-of-100000-tokens": "how-does-a-worlds-size-follow-its-tokens#worlds-of-100000-tokens"
  }
 }

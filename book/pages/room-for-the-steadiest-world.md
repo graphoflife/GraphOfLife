@@ -485,7 +485,7 @@ start with 11 to 13 tokens on average, as in Experiment 16's worlds.
 > [!quote] The thesis of Experiment 36, written down before any of its runs existed
 > **The claim.** Where every child already starts with ten tokens, a floor at the neighbours' median changes nothing. In plain B2, with a child never poorer than the median holding of its parent's neighbours, the floor asks more than B2's ten tokens of fewer than one in twenty of the agents able to have a child, at iterations 1,000, 2,000 and 3,000, and over iterations 1,000 to 2,000 children start with 11 to 13 tokens on average, as in B2's ten worlds of Experiment 16 (11.2 to 12.1).
 >
-> **Why it would be so.** In Chapter [101](room-for-the-steadiest-world.md) the floor changed nothing in the estate worlds and nothing beyond seed-to-seed scatter in Experiment 19's world: in a world of poor agents a parent's neighbours hold a token or two, and every B2 child already starts with ten (min_child). Plain B2 is such a world: three agents in four hold three tokens or fewer. If the floor cannot bind there either, its failure is B2's least child, not the estates or mixed brains; Experiment 37 plays the same floor in B1, whose least child is a single token.
+> **Why it would be so.** In Chapter [101](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours) the floor changed nothing in the estate worlds and nothing beyond seed-to-seed scatter in Experiment 19's world: in a world of poor agents a parent's neighbours hold a token or two, and every B2 child already starts with ten (min_child). Plain B2 is such a world: three agents in four hold three tokens or fewer. If the floor cannot bind there either, its failure is B2's least child, not the estates or mixed brains; Experiment 37 plays the same floor in B1, whose least child is a single token.
 >
 > **It holds if:** In both worlds, at 1,000, 2,000 and 3,000, fewer than one in twenty of the agents holding eleven tokens or more have neighbours whose median holding is above ten; and over iterations 1,000 to 2,000 both worlds' children start with 11 to 13 tokens on average.
 >
@@ -509,7 +509,7 @@ median world (1,462).
 > [!quote] The thesis of Experiment 37, written down before any of its runs existed
 > **The claim.** Where a child may start with a single token, a floor at the neighbours' median binds and makes a world of fewer, richer agents. In B1, with a child never poorer than the median holding of its parent's neighbours, both worlds live to iteration 3,000; over iterations 2,000 to 3,000 their children start with more tokens on average than in any of B1's 26 worlds that lived to 3,000 (more than 5.1), and both hold fewer agents on average than B1's median world (1,462).
 >
-> **Why it would be so.** B1's children start with 2.0 to 5.1 tokens on average over iterations 2,000 to 3,000 (a median of 2.6, over the 26 of Experiment 2's 30 worlds that lived to 3,000), while the median agent of B1's long worlds holds 4 to 15 tokens. A floor at the neighbours' median asks more than most B1 parents give: births should become fewer and larger, and the world smaller and richer. In B2 every child already starts with ten tokens and the floor never bound (Chapter [101](room-for-the-steadiest-world.md), Experiment 36).
+> **Why it would be so.** B1's children start with 2.0 to 5.1 tokens on average over iterations 2,000 to 3,000 (a median of 2.6, over the 26 of Experiment 2's 30 worlds that lived to 3,000), while the median agent of B1's long worlds holds 4 to 15 tokens. A floor at the neighbours' median asks more than most B1 parents give: births should become fewer and larger, and the world smaller and richer. In B2 every child already starts with ten tokens and the floor never bound (Chapter [101](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours), Experiment 36).
 >
 > **It holds if:** Both worlds live to 3,000; over iterations 2,000 to 3,000 both worlds' children start with more than 5.1 tokens on average, and both worlds hold fewer than 1,462 agents on average.
 >
@@ -833,6 +833,6 @@ the runs and every setting.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Size and riches of a world](../README.md#size-and-riches-of-a-world).
 
-> [!info]- Pages that link here (8)
-> [Every setting](settings.md) · [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (9)
+> [Every setting](settings.md) · [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

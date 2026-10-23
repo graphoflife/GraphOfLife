@@ -49,5 +49,5 @@ reconcile with "no difference" — which is then tested directly with a
 ← [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Permutation tests](permutation-test.md) →
 
 > [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Permutation tests](permutation-test.md)
+> [Glossary](glossary.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Permutation tests](permutation-test.md)
 <!-- /turns -->

@@ -85,14 +85,14 @@ tried in every iteration, and over 100,000 iterations some 500 million. In
 the worlds of 10,000 tokens one branch of the [family tree](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") replaced all
 others about every 350 iterations
 ([Genotypes and lineages](genotypes-and-lineages.md)); a world twenty times larger
-is slower, by a factor that [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) is
+is slower, by a factor that [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) is
 to measure. Even if it took ten times as long, one line would take the
 world over again and again, dozens of times. Whatever is one change away
 from what the brains do now would be found. What needs a rule changed
 would not.
 
 > [!info] Added later: the factor, measured
-> [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) has measured it: the time a
+> [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) has measured it: the time a
 > world needs to come down to a single [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s line grows as the tokens to
 > the power 0.77. If that holds to 204,800 tokens, a world of that size needs
 > about ten times as long as one of 10,000 — as much as this paragraph
@@ -150,7 +150,7 @@ something new is what this experiment is for. It is flagged instead.
 
 | the sentinel flags | when |
 |---|---|
-| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Worlds of 100,000 tokens](worlds-of-100000-tokens.md), for three blocks in a row |
+| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens), for three blocks in a row |
 | **a new level** | a statistic's block mean lies beyond the range of all its earlier blocks by more than half that range, for five blocks in a row |
 | **cooperation** | the kin ratio or the share of lasting partners leaves the baseline worlds' range, in a window (below) |
 | **brains that see** | the median gain at a kept checkpoint passes 0.005 |
@@ -207,7 +207,7 @@ frame that was not kept is a frame that has not been made again yet.
   and how much.
 - **Everything of [Thirty worlds](a-worlds-life.md#thirty-worlds)**, as block means over
   the whole run, set beside the bands of the baseline worlds and of the
-  worlds of [Worlds of 100,000 tokens](worlds-of-100000-tokens.md).
+  worlds of [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens).
 - **Later, from the kept checkpoints:** the tournament across time of
   [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) — the brains of iteration 10,000 against those of
   iteration 90,000, in one world. A later population that beats an earlier
@@ -220,7 +220,7 @@ iterations on one worker. It keeps about 20 GB, where every frame would
 have needed over 200. The thesis can be decided from iteration 52,000,
 about two weeks in, and the run can be stopped after any block.
 
-The run should start once [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) is
+The run should start once [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) is
 analysed, because the sentinel's bands of the known come from its thirty
 worlds.
 
@@ -258,9 +258,9 @@ windows of cooperation and the gains, and decides the thesis.
 > fixed iterations, which is most of the third item; and the tournament
 > across time that the kept checkpoints were to serve is the yardstick of
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
-> (`gol_tournament.py`). [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) is
+> (`gol_tournament.py`). [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) is
 > analysed, so the sentinel's bands of the known exist. And the costs above
-> may be too low: the same cost model gave the worlds of [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) 12
+> may be too low: the same cost model gave the worlds of [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) 12
 > seconds an iteration, and they took 17. They are also B1's costs; a run on
 > B2, whose brains are smaller, would have to be costed again.
 
@@ -274,5 +274,5 @@ windows of cooperation and the gains, and decides the thesis.
 ← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [What would count as open-ended evolution](open-ended-test.md) →
 
 > [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
