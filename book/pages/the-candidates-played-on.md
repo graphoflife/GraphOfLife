@@ -222,13 +222,13 @@ where everyone is a few steps from everyone? Compare it with its [random
 twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all."): a network with the same agents and as many links each, wired at
 random. Count the steps within which a typical agent's ball holds half its
 world. Divide by the same count in the twin
-([What folds a world](what-folds-a-world.md)). The notebook calls a world a
+([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). The notebook calls a world a
 space when this ratio is at least 1.5.
 
 <!-- figure candidates/space -->
 ![Room, at 1,000 iterations and at 10,000](../figures/candidates/space.svg)
 
-**Room, at 1,000 iterations and at 10,000.** Each line is a candidate: the steps within which a typical agent's ball holds half its world, over the same for its random twin ([What folds a world](what-folds-a-world.md)), at iteration 1,000 and at 10,000. Green: the candidates that held; violet: those that fell back; red: those that died out on the way. Beside the right end: B2's ten worlds played on to 10,000 (yellow) and Experiment 17's (blue).
+**Room, at 1,000 iterations and at 10,000.** Each line is a candidate: the steps within which a typical agent's ball holds half its world, over the same for its random twin ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)), at iteration 1,000 and at 10,000. Green: the candidates that held; violet: those that fell back; red: those that died out on the way. Beside the right end: B2's ten worlds played on to 10,000 (yellow) and Experiment 17's (blue).
 
 > [!example]- How to make this figure
 > **Runs.** Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of [Healthy and rich](healthy-and-rich.md), B2 at 10,000 tokens with the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 (Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds (`B2-10000-4af4a3-s001` … `s010`) and B2's ten worlds played on to 10,000 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
@@ -449,7 +449,7 @@ worlds to their random twins: a typical distance of 1.09 to 1.29 times the
 twin's. The two that are wider, 1.68 and 1.40, are the worlds without
 random inputs and without revolutions that passed. They are two of the
 largest, half of their agents poor. Other worlds as large are as folded as
-the small ones ([What folds a world](what-folds-a-world.md)).
+the small ones ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 
 <!-- figure fiveseeds/evolution -->
 ![Do later brains beat earlier ones?](../figures/fiveseeds/evolution.svg)
@@ -901,6 +901,6 @@ was played with.
 
 ← [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) →
 
-> [!info]- Pages that link here (8)
-> [The random twin: is a world a space?](random-twin.md) · [Every era against three](every-era-against-three.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (9)
+> [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Every era against three](every-era-against-three.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

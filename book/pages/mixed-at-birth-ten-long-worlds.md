@@ -357,7 +357,7 @@ worlds of 5,000 tokens are as poor as those of 10,000.
 Why does a larger world read a larger dimension? The measure is not to blame.
 In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds, which are true spaces (the agents within *r* steps grow as a
 power of *r*), the dimension does not grow with size: from 40 agents to 70,000
-it stays between about 2.5 and 4. [What folds a world](what-folds-a-world.md)
+it stays between about 2.5 and 4. [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)
 found the reason in B2's network. It is nearly a small world, where every
 agent is a few steps from every other, with no dimension of its own to show.
 Every B2 world starts as a space and folds once its first generation dies,
@@ -661,7 +661,7 @@ world can be led to [extinction](extinction.md "A world's end before its last it
   mates](mixed-at-birth-with-parents-as-mates.md): Experiment 19 takes the
   mate's free ride away, by letting only parents be mates. Its ten worlds all
   lived to 20,000 iterations, richer than B2's but not rich.
-- [What folds a world](what-folds-a-world.md): why B2's network reads a larger
+- [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): why B2's network reads a larger
   dimension the larger it grows, and what keeps a world a space.
 - [Healthy and rich](healthy-and-rich.md): every world of the notebook against
   the author's picture of a world that might keep evolving.
@@ -805,7 +805,7 @@ iteration 10,000 with the engine that made them. So they keep their names.
 
 - **17 October 2026.** This page said that B2's worlds have the network of the
   author's picture, decentralised, resilient and nearly three-dimensional, and
-  lack only the agents. [What folds a world](what-folds-a-world.md) found that
+  lack only the agents. [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found that
   B2's network is nearly a small world, with no dimension of its own. It
   starts as a space, and folds once its first generation dies, each death
   mended with a ring of links. The dimension the health bar reads off its
@@ -833,5 +833,5 @@ iteration 10,000 with the engine that made them. So they keep their names.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (14)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Every era against three](every-era-against-three.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Every era against three](every-era-against-three.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

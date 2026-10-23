@@ -117,7 +117,7 @@ world has B1's brain.
 
 Each world has 20,000 tokens and plays 2,000 iterations. That is long enough
 for the first generation to die, and for the network to fold if it is going
-to ([What folds a world](what-folds-a-world.md)). A world that would take more
+to ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). A world that would take more
 than four hours stops as **too slow**, since a [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") that slow could never
 be played for long. B2's own rules almost never come together in a random
 draw. So two worlds of B2, at 20,000 tokens, are played beside every round

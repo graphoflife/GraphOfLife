@@ -741,7 +741,7 @@ What they do not make is a space of three dimensions. By the health bar's
 measure, B2's worlds sit at 3.4 to 4.2, at the top of the bar. The model shows
 why: every mending adds links where a neighbourhood was, and a world that is
 mended everywhere is drawn together. [What folds a
-world](what-folds-a-world.md) later read B2's worlds with fuller rulers. They
+world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) later read B2's worlds with fuller rulers. They
 are not spaces at all, but nearly small worlds: a typical agent is about as
 near to everyone as in a random network with the same links. Deaths mended in
 a ring fold a world once its first generation dies. And the dimension the bar
@@ -751,7 +751,7 @@ A world closer to three dimensions would need fewer links at birth, or sparser
 mending. The model says what fewer links cost: with one link at birth, cuts of
 2% instead of 1.4%. And in the model without brains, the sparsest mending that
 keeps a world whole stretches it into a line ([What folds a
-world](what-folds-a-world.md)). That mending joins only the pieces a death
+world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). That mending joins only the pieces a death
 would split the world into. A world that is a space of three dimensions, and
 that no single loss can cut, has to sit between the two.
 
@@ -1104,7 +1104,7 @@ held pilot worlds steady at about two thousand agents, six in ten of them poor
   one table.
 - [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): the question B2 was built
   for. Does evolution keep going in a world that cannot break?
-- [What folds a world](what-folds-a-world.md): why deaths mended in a ring
+- [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): why deaths mended in a ring
   fold B2 into nearly a small world, and what keeps a world a space.
 - [Healthy and rich](healthy-and-rich.md): B2 is healthy but poor; which
   worlds come closest to being both.
@@ -1319,7 +1319,7 @@ held pilot worlds steady at about two thousand agents, six in ten of them poor
   and the smallest](the-largest-and-the-smallest.md)).
 - **17 October 2026.** From 14 October, this page read B2's ball dimension,
   3.4 to 4.2, as the dimension of its space: near four, at the top of the bar.
-  [What folds a world](what-folds-a-world.md) found that B2's worlds are not
+  [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found that B2's worlds are not
   spaces at all, but nearly small worlds, folded by deaths mended in a ring.
   The dimension the bar reads off their first few steps grows with a world's
   size. It also found that sparser mending is no simple cure: in the model,
@@ -1332,6 +1332,6 @@ held pilot worlds steady at about two thousand agents, six in ten of them poor
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network), [Changing the rules](../README.md#changing-the-rules), [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (37)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [The estate of the dead](estate.md) · [Age and lifetime](age-and-lifetime.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What folds a world](what-folds-a-world.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (36)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [The estate of the dead](estate.md) · [Age and lifetime](age-and-lifetime.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

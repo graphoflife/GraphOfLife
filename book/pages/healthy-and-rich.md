@@ -255,7 +255,7 @@ single well-linked agent is already more than 5% of the world. Worlds of
 600 to 1,000 agents met both at 98% of their moments. Health compared
 between worlds of different sizes has to be read with that in mind.
 
-[What folds a world](what-folds-a-world.md) found why. B2's networks are
+[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found why. B2's networks are
 nearly small worlds, not spaces: everyone is a few steps from everyone. A
 typical agent's ball grows four to six times a step, and holds a quarter of
 a world of 3,400 agents within four steps. A typical agent is about as near
@@ -453,7 +453,7 @@ The same idea is now a lab experiment:
 
 The health bar's dimension mark does not tell a space from a small world. A
 B2 world of 600 to 1,500 agents passes it because it is small
-([What folds a world](what-folds-a-world.md)). A stronger test sets a world
+([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). A stronger test sets a world
 beside its [random twin](random-twin.md): the same agents, with as many
 links each, wired at random. Count the steps within which a typical
 agent's ball holds half the world, and divide by the same count in the
@@ -505,7 +505,7 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
   than on a fixed age, would let ages spread without stopping the world.
 - **A healthy network is not yet a space.** The candidate worlds' networks
   are folded small worlds, and "almost three-dimensional" asks more than
-  the bar's mark does ([What folds a world](what-folds-a-world.md)).
+  the bar's mark does ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 - **A good moment is not a good world.** Most candidate worlds did not hold
   over 10,000 iterations, and no rule held more often than mixing alone.
 - **A world might be judged by this map before it is judged by its
@@ -571,7 +571,7 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
   found that in B2's kind of network the dimension read by ball growth
   rises with the number of agents. So two marks of the bar are partly marks
   of size.
-- **17 October 2026.** [What folds a world](what-folds-a-world.md) found
+- **17 October 2026.** [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found
   why: B2's networks are folded small worlds, with no dimension to find.
   This page had taken the bar's dimension mark for the author's "almost
   three-dimensional". But the mark cannot tell a space from a small world,
@@ -612,5 +612,5 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
 [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [What makes a world interesting](what-makes-a-world-interesting.md) →
 
 > [!info]- Pages that link here (24)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -112,8 +112,8 @@ prototype's own code. What each batch asked:
 | LC | The candidates, the worlds closest to the author's picture of one that might keep evolving, played on to 10,000 iterations | 20 | 25 | 10,000 | 1,000, 10,000 | 23 done, 2 stopped early | [Healthy and rich](healthy-and-rich.md), [The candidates, played on](the-candidates-played-on.md) |
 | SW | Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on in five of B2's worlds, at 2,000 | 2 | 10 | 10,000 | 4,000, 7,000 | done | [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) |
 | M | Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as mates (MP) and a bought life (BL) | 11 | 28 | 10,000 | 5,000 | 24 done, 2 queued, 2 stopped early | [What holds a world's size](what-holds-a-worlds-size.md), [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) |
-| YB | Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth | 5 | 7 | 10,000 | 2,000 | done | [What folds a world](what-folds-a-world.md) |
-| BIG | B2 at 100,000 tokens, one world to 1,000 iterations | 1 | 1 | 100,000 | 1,000 | done | [What folds a world](what-folds-a-world.md) |
+| YB | Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth | 5 | 7 | 10,000 | 2,000 | done | [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) |
+| BIG | B2 at 100,000 tokens, one world to 1,000 iterations | 1 | 1 | 100,000 | 1,000 | done | [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) |
 <!-- /table -->
 
 Batch L's iterations are those each job ran: B2's worlds were played on from

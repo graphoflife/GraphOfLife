@@ -59,10 +59,10 @@ more of every hundred poor).
 
 **It unfolds a world a little.** A parent that passes links on does not
 gather them till it dies, and the dying leave rings of 3.7 groups fewer
-([What folds a world](what-folds-a-world.md)): a typical agent is further from
+([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)): a typical agent is further from
 everyone than in B2 — the typical distance over the [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s rises by
 0.24 at the median, in 41 of 46 worlds. The room is bought with the trees and
-[bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") above: room and resilience pull apart, as [What folds a world](what-folds-a-world.md) found.
+[bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") above: room and resilience pull apart, as [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found.
 
 **Evolution goes on, more slowly.** In lifetime contests the brains of 1,000
 take more than half of a contested world from those of 500 in 35 of the 46
@@ -86,7 +86,7 @@ and 0.75) and brains that grow (0.60 and 0.72).
 [A world that cannot break](a-world-that-cannot-break.md) ·
 [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
 [Eight switches at once](eight-switches-at-once.md) ·
-[What folds a world](what-folds-a-world.md) ·
+[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) ·
 [Revolutions, with every other rule](revolutions-with-every-other-rule.md)
 
 <!-- turns -->

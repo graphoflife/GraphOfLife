@@ -55,7 +55,7 @@ Each criterion stands for one part of the picture.
    so we ask a second thing: a typical distance between two agents at least
    1.5 times that in a *[random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")*, a network with the same number of links
    per agent wired at random. A folded world fails this; a true space passes
-   ([What folds a world](what-folds-a-world.md)).
+   ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 5. **Diverse.** Evolution needs differences to choose from. We ask that the
    agents' tokens, links, ages and [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") spread more widely than in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), our standard world, by the *[diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.")*
    ([Healthy and rich](healthy-and-rich.md)). And we

@@ -40,7 +40,7 @@ same moment:
 - **Diverse.** Its agents differ, more than B2's do: its [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") is
   above that of B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, read at the same [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.").
 - **A space.** It is wide, at least half again as wide as a random network
-  with the same links ([What folds a world](what-folds-a-world.md)).
+  with the same links ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 - **Uneven.** Its tokens are held no more evenly than B2's: their [Gini
   coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is no lower than that of B2's least even world. The author
   added this fourth wish later, on 19 October 2026
@@ -82,7 +82,7 @@ neighbour with a living child of its own.
 
 ### Rules that keep a world's room
 
-Why is the world folded? [What folds a world](what-folds-a-world.md) found
+Why is the world folded? [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found
 the answer in what B2 does at a death. When an agent dies, B2 *mends* the
 hole. The dead agent's neighbours are joined in a ring round the gap, as the
 edge of a hole closes. Each death joins agents that were two steps apart. In
@@ -124,7 +124,7 @@ estates might give room without filling the world.
 > [!quote] The thesis of Experiment 31, written down before any of its runs existed
 > **The claim.** Experiment 19's world, brains mixed at birth with only parents as mates, is steady, diverse and uneven, but folded. One of the rules that keep a world's room unfolds it without costing the rest. For at least one of four rules (the estate of the dead paid to the newborns, or to the parents, no old age, or deaths not mended) both of its worlds, at iteration 3,000, meet every mark of the health bar, are more diverse than B2's median world, are at least 1.5 times as wide as their random twins, and are no more even than B2's least even world, B2's ten worlds played on being read at the same iteration.
 >
-> **Why it would be so.** All ten of Experiment 19's worlds lived to 20,000 iterations. At 10,000 they held 1,429 to 2,385 agents, with diversity scores of 0.55 to 0.65 against B2's median of 0.49 and Ginis of 0.47 to 0.57 against B2's least of 0.47. Yet a typical agent reached half its world in 1.13 to 1.31 times the steps its random twin needs, and nine of ten missed the dimension mark: they are folded small worlds, not spaces. Chapter [87](what-folds-a-world.md) found what folds a world, a death mended with a ring of links, and what keeps a world's room: the estate paid to births (2.0 to 2.6 times the twin), no old age (1.8 to 1.9) and no mending (2.0). Each pays for the room in its own coin ([Meta XII](rules-in-company.md)): estates fill a world with alike, poor agents, no old age all but stops births, and without mending one loss can cut a world. With plain mixing, the estates gave spaces of about 5,000 agents with diversity scores of only 0.35 to 0.40. With parents as mates a mixed world held its size, which may keep the diversity the estates cost.
+> **Why it would be so.** All ten of Experiment 19's worlds lived to 20,000 iterations. At 10,000 they held 1,429 to 2,385 agents, with diversity scores of 0.55 to 0.65 against B2's median of 0.49 and Ginis of 0.47 to 0.57 against B2's least of 0.47. Yet a typical agent reached half its world in 1.13 to 1.31 times the steps its random twin needs, and nine of ten missed the dimension mark: they are folded small worlds, not spaces. Chapter [87](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found what folds a world, a death mended with a ring of links, and what keeps a world's room: the estate paid to births (2.0 to 2.6 times the twin), no old age (1.8 to 1.9) and no mending (2.0). Each pays for the room in its own coin ([Meta XII](rules-in-company.md)): estates fill a world with alike, poor agents, no old age all but stops births, and without mending one loss can cut a world. With plain mixing, the estates gave spaces of about 5,000 agents with diversity scores of only 0.35 to 0.40. With parents as mates a mixed world held its size, which may keep the diversity the estates cost.
 >
 > **It holds if:** For at least one rule, both worlds (seeds 1 and 2) at iteration 3,000 meet every mark, have a diversity score above the median of B2's ten worlds played on and read at 3,000, a typical distance at least 1.5 times their twin's, and a Gini of their agents' tokens no lower than the least of those ten worlds'.
 >
@@ -231,7 +231,7 @@ pays is now known:
 - **The nearest world is one without mending.** Seed 1 missed only a cut. A
   world whose deaths are not mended keeps its tokens and its room; what it
   needs is to stay whole. Mending without folding is a second rule to try
-  ([What folds a world](what-folds-a-world.md) traced the folding to the
+  ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) traced the folding to the
   rings a death closes).
 
 ## Births as rich as the neighbours
@@ -384,7 +384,7 @@ more, and those just paid by the estate. And the game takes it from them
 within twenty iterations.
 
 This is also why the estate worlds are spaces.
-[What folds a world](what-folds-a-world.md) found why young parents make a
+[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found why young parents make a
 space. A death closes a ring round the gap it leaves. The ring is largest
 where the old do the breeding, since an agent gathers links all its life,
 from its children and its neighbours' children. Here the young breed, so the
@@ -446,7 +446,7 @@ the same floor in both.
   births, and paying for births fills it with paupers. A world that is both a
   space and rich needs its young to breed without the world filling up. Or it
   needs deaths that do not fold it when the old breed: the open question of
-  [What folds a world](what-folds-a-world.md), mending without folding.
+  [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world), mending without folding.
 
 ## The floor in plain B2 and in B1
 
@@ -574,7 +574,7 @@ section. Until then its thesis is not judged.
 
 ## Where to go next
 
-- [What folds a world](what-folds-a-world.md): why a death mended in a ring
+- [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): why a death mended in a ring
   folds a world, and why young parents keep it a space.
 - [What holds a world's size](what-holds-a-worlds-size.md): the ledger of
   births, and the pull that is still missing.

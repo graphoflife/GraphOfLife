@@ -81,7 +81,7 @@ Earlier experiments read the same lines from a run's recorded statistics, as
   ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
 - **The dimension mark cannot tell a space from a small world.** A B2 world
   of 600 to 1,500 agents passes it because it is small
-  ([What folds a world](what-folds-a-world.md)). So the
+  ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). So the
   [screen of random worlds](a-screen-of-random-worlds.md) asks instead for a
   dimension of 2 to 4 and a typical distance at least 1.5 times its
   [random twin](random-twin.md)'s. Its criteria *decentralised* (no hub,
@@ -123,6 +123,6 @@ Earlier experiments read the same lines from a run's recorded statistics, as
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (8)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Stars and hubs](stars-and-hubs.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

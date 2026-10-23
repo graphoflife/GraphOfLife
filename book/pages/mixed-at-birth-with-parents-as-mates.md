@@ -271,7 +271,7 @@ network must meet to count as healthy. It did so at every moment kept from
 the one B2's own worlds miss: a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4. These worlds read
 4.1 to 4.3. Like B2's, they are folded: nearly small worlds, in which everyone
 is a few steps from everyone, not spaces
-([What folds a world](what-folds-a-world.md)).
+([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 
 Two things the thesis did not ask should be said beside it. Experiment 18's
 worlds died between iterations 17,078 and 37,722. So 20,000 iterations cover

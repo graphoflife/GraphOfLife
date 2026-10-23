@@ -55,6 +55,6 @@ dimension to mean something, but not sufficient.
 
 ← [The spectral dimension](spectral-dimension.md) · [Space and dimension](../README.md#space-and-dimension)
 
-> [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (5)
+> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

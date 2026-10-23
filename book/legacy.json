@@ -88,7 +88,7 @@
   "66": "particles",
   "67": "one-agent-in-a-sea-of-average-agents",
   "68": null,
-  "87": "what-folds-a-world",
+  "87": "how-many-dimensions-does-a-world-have#what-folds-a-world",
   "69": "a-hundred-thousand-iterations",
   "81": "mixed-at-birth-ten-long-worlds#five-mixed-worlds-fifty-thousand-iterations",
   "92": "the-candidates-played-on",
@@ -256,7 +256,7 @@
    "Chapter 95": "every-era-against-three"
   },
   "E31": {
-   "Chapter 87": "what-folds-a-world",
+   "Chapter 87": "how-many-dimensions-does-a-world-have#what-folds-a-world",
    "Meta XII": "rules-in-company"
   },
   "E34": {
@@ -299,6 +299,7 @@
   "lightning-in-every-world": "where-the-tokens-flow#lightning-in-every-world",
   "the-core-of-a-world": "what-shape-does-the-network-take#the-core-of-a-world",
   "the-geometry-of-a-world": "what-shape-does-the-network-take#the-geometry-of-a-world",
-  "why-evolution-stops": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops"
+  "why-evolution-stops": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops",
+  "what-folds-a-world": "how-many-dimensions-does-a-world-have#what-folds-a-world"
  }
 }

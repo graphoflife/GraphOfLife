@@ -266,10 +266,10 @@ To make every figure of this page: `python3 book_figures.py alike`.
 <!-- turns -->
 ---
 
-← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) →
+← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
 > [!info]- Pages that link here (9)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [How alike at a distance](correlation-function.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [How alike at a distance](correlation-function.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

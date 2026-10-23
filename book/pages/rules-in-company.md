@@ -62,7 +62,7 @@ times as common and hold the world small.
 of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") with nearly every companion, thinning the network into
 trees on single links, and unfolds it a little ([Handover, with every other rule](handover-with-every-other-rule.md)). Every unused
 link lapsing makes worlds rich, small and about two-dimensional, and costs
-marks too ([Eight switches at once](eight-switches-at-once.md) and [What folds a world](what-folds-a-world.md)).
+marks too ([Eight switches at once](eight-switches-at-once.md) and [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 
 **Rules that set a world's size set it in any company.** The estate of the
 dead paid to the newborns or the parents fills a world — about 1,000 agents
@@ -103,7 +103,7 @@ no revolutions, no random inputs, links that hold a token and mixing — meets
 every mark of the health bar with a quarter of its agents poor and a
 [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") of 0.68, but its network is folded: a typical agent reaches
 half the world in 1.19 times the steps its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs, as in nearly
-every B2 world ([What folds a world](what-folds-a-world.md)).
+every B2 world ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 
 Read together at iteration 1,000, 161 of the 466 worlds measured then are
 spaces at least half again as wide as their random twins
@@ -184,7 +184,7 @@ waits its turn.
 
 **Related notes:** [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
 [Eight switches at once](eight-switches-at-once.md) ·
-[What folds a world](what-folds-a-world.md) ·
+[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) ·
 [Revolutions, with every other rule](revolutions-with-every-other-rule.md) ·
 [Handover, with every other rule](handover-with-every-other-rule.md) ·
 [Gifts, with every other rule](gifts-with-every-other-rule.md) ·

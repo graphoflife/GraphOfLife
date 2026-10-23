@@ -1000,15 +1000,16 @@
     },
     {
       "id": "how-many-dimensions-does-a-world-have",
-      "title": "How many dimensions does a world have?",
+      "title": "Is a world a space? Dimension, and what folds it",
       "file": "pages/how-many-dimensions-does-a-world-have.md",
       "topics": [
-        "space"
+        "space",
+        "healthy"
       ],
       "kind": "study",
       "status": "written",
       "added": "2026-10-09",
-      "summary": "What does it mean for a network to have a dimension, and how is it measured? How many dimensions do the worlds have? Is the answer the same at every scale, and by every ruler? Is the dimension made by how the worlds are wired, or would any network with the same numbers of connections have it?"
+      "summary": "The notebook's second aim is a world that grows a space of its own, like a plane or a room, from simple local rules. The worlds of the first baseline, B1, are spaces: about three dimensions by the room they hold, and two by how a random walker spreads."
     },
     {
       "id": "random-twin",
@@ -1022,19 +1023,6 @@
       "status": "written",
       "added": "2026-10-23",
       "summary": "A world's network wired again at random, with as many links per agent: what a world would be if it were no space, and how wide a world is beside it."
-    },
-    {
-      "id": "what-folds-a-world",
-      "title": "What folds a world",
-      "file": "pages/what-folds-a-world.md",
-      "topics": [
-        "space",
-        "healthy"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "*How many dimensions does a world have?*'s rulers on B2 and every world since: B2 is nearly a small world; every B2 world starts as a space and folds when its first generation dies, because death with mending folds it; without old age or mending, or with lapsing links, worlds keep their room, and the estates to the newborns or the parents make a space of about three dimensions."
     },
     {
       "id": "dimensions-at-scale",

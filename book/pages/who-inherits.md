@@ -209,7 +209,7 @@ parents filled the world because they reach agents the moment they breed; a
 dead agent's children are of every age, and the estate comes to them whether
 or not they breed. Their parents are 26 iterations old at a birth (a median),
 as in B2, against two or three where the estate goes to the newborns or the
-parents ([What folds a world](what-folds-a-world.md#a-world-through-its-life)).
+parents ([What folds a world](how-many-dimensions-does-a-world-have.md#a-world-through-its-life)).
 
 **In B1 the worlds grow larger and younger, less than with the safety net.**
 1,800 and 1,300 agents over iterations 1,500 to 2,000 (the controls 1,370 and
@@ -258,7 +258,7 @@ other worlds tie or swing.
 [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
 [Healthy and rich](healthy-and-rich.md) ·
 [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) ·
-[What folds a world](what-folds-a-world.md)
+[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)
 
 <!-- turns -->
 ---
@@ -268,5 +268,5 @@ other worlds tie or swing.
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
 > [!info]- Pages that link here (13)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

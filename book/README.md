@@ -135,9 +135,8 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 
 - [Physical inspiration](pages/physical-inspiration.md)
 - [Like next to like](pages/like-next-to-like.md)
-- [How many dimensions does a world have?](pages/how-many-dimensions-does-a-world-have.md)
+- [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
 - [The random twin: is a world a space?](pages/random-twin.md)
-- [What folds a world](pages/what-folds-a-world.md)
 - Dimensions at scale — *not written yet*
 - Which properties have no scale? — *not written yet*
 - Local rules only — *not written yet*

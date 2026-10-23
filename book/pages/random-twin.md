@@ -52,7 +52,7 @@ largest piece (`research/atlas/space.py`).
 
 ## Examples
 
-From [What folds a world](what-folds-a-world.md#b1-and-b2-side-by-side), the
+From [What folds a world](how-many-dimensions-does-a-world-have.md#b1-and-b2-side-by-side), the
 [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of each kind of world:
 
 | worlds | typical distance | the twin's | width |
@@ -98,7 +98,7 @@ that made them. The line of 1.5 lies between the two.
 - [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world): a B1 world with a
   mean [path length](path-length.md) of 27.9 steps, against 6.0 when wired at
   random.
-- [What folds a world](what-folds-a-world.md): the width of every kind of
+- [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): the width of every kind of
   world, and what folds it.
 - [Healthy and rich](healthy-and-rich.md), [Rules in company](rules-in-company.md)
   and [The candidates, played on](the-candidates-played-on.md): which worlds
@@ -113,7 +113,7 @@ that made them. The line of 1.5 lies between the two.
 
 ## Where to go next
 
-- [What folds a world](what-folds-a-world.md): what makes and unmakes space.
+- [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): what makes and unmakes space.
 - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md):
   the two rulers of dimension.
 - [Path length](path-length.md): distances in a network.
@@ -122,10 +122,10 @@ that made them. The line of 1.5 lies between the two.
 <!-- turns -->
 ---
 
-← [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [What folds a world](what-folds-a-world.md) →
+← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [How alike at a distance](correlation-function.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->
