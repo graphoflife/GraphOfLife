@@ -35,7 +35,7 @@ import json
 import math
 import os
 import sys
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Any, Dict, List, Optional, Tuple
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -107,21 +107,34 @@ def wanted_readings(run_id: str, until: int) -> List[Tuple[str, int]]:
 
 
 def gather(items: List[Tuple[str, int]], jobs: int) -> Dict[Tuple[str, int], Dict[str, Any]]:
-    """Every reading asked for, the ones read before kept."""
+    """
+    Every reading asked for, the ones read before kept. Each new reading is kept
+    as soon as it is made, so a reading that fails loses no other; the failures
+    are raised once the rest are in.
+    """
     have = {}
     if os.path.exists(READINGS):
         for r in json.load(open(READINGS)):
             have[(r["id"], r["at"])] = r
     todo = [i for i in items if i not in have]
+    failed = []
     if todo:
-        with ProcessPoolExecutor(jobs) as pool:
-            for item, r in zip(todo, pool.map(read, todo)):
-                have[item] = r
-                print(f"read {item[0]} at {item[1]}", flush=True)
         os.makedirs(os.path.dirname(READINGS), exist_ok=True)
-        with open(READINGS + ".tmp", "w") as f:
-            json.dump(list(have.values()), f)
-        os.replace(READINGS + ".tmp", READINGS)
+        with ProcessPoolExecutor(jobs) as pool:
+            futures = {pool.submit(read, item): item for item in todo}
+            for future in as_completed(futures):
+                item = futures[future]
+                try:
+                    have[item] = future.result()
+                except Exception as e:  # noqa: BLE001 - raised below, after the others are kept
+                    failed.append((item, e))
+                    continue
+                with open(READINGS + ".tmp", "w") as f:
+                    json.dump(list(have.values()), f)
+                os.replace(READINGS + ".tmp", READINGS)
+                print(f"read {item[0]} at {item[1]}", flush=True)
+    if failed:
+        raise RuntimeError(f"{len(failed)} readings failed, the first {failed[0][0]}") from failed[0][1]
     return have
 
 

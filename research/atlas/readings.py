@@ -41,7 +41,9 @@ def read(item: Tuple[str, int, str]) -> Dict[str, Any]:
     r["bar"] = P.bar(r)
     r["marks"] = sum(1 for v in r["bar"].values() if v)
     r["diversity"] = P.diversity(r, P.reference())[1]
-    r["wide"] = float(S.typical_distance(S.one((family, "", run_id, path, at))))
+    # A world under a hundred agents has no width to read (space.one): it cannot count as a space.
+    row = S.one((family, "", run_id, path, at))
+    r["wide"] = float(S.typical_distance(row)) if row else None
     return r
 
 
