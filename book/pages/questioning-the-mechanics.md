@@ -547,7 +547,7 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
   the moment before, up to iteration 2,000, in all ten worlds of
   Experiment 16. In three worlds continued to 10,000 iterations, the gains
   all but stopped after iteration 5,000
-  ([Why evolution stops](why-evolution-stops.md)).
+  ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
 
 To make every figure of this page: `python3 book_figures.py mechanics`.
 
@@ -585,7 +585,7 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 - **15 October 2026.** A note added the day before said that under B2's rules
   evolution still stopped within a few hundred iterations, in every pilot.
   Contests an agent's lifetime long showed that it goes on, more slowly as it
-  goes ([Why evolution stops](why-evolution-stops.md)). The text above now
+  goes ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). The text above now
   says what is known.
 
 <!-- turns -->

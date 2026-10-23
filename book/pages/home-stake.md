@@ -52,6 +52,6 @@ coalition rather than by their largest staker ([How the game is played](how-the-
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [How a coalition takes a node](revolution.md) · [How the game is played](how-the-game-is-played.md) · [How different are the agents?](how-different-are-the-agents.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [How a coalition takes a node](revolution.md) · [How the game is played](how-the-game-is-played.md) · [How different are the agents?](how-different-are-the-agents.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

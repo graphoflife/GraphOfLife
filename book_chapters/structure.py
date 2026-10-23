@@ -698,7 +698,7 @@ def colours(ch: F.Chapter) -> None:
                        f"Families: read frames {W.frame(LAST - 100)} to {W.frame(LAST)}, note each genotype's parent, "
                        "and climb from each "
                        f"living genotype to one alive after the game of iteration {LAST - 100:,}.",
-                       "Loops: as in [The geometry of a world](the-geometry-of-a-world.md).",
+                       "Loops: as in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).",
                        "Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
     ch.number("six_views", {"agents": len(ids), "drawn": len(drawn), "piece": info,

@@ -177,7 +177,7 @@ more. What the notebook has measured over time:
   and one of the two long worlds settled on a single kind of staking for good.
 - **Better brains do keep coming in B2** — the brains of 2,000 iterations beat
   those of 500 over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
-  ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)) —
+  ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)) —
   but more and more slowly, towards a plateau from about 5,000 iterations on.
 
 So B2's variety is renewed, and some of the renewal is improvement. What is

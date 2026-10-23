@@ -9,7 +9,7 @@
 
 ## Why ask
 
-[Why evolution stops](why-evolution-stops.md) ended on a diagnosis. The contest for
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) ended on a diagnosis. The contest for
 [nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") is a Colonel Blotto game, its best play is to be unpredictable, and
 evolution finds that in a few hundred iterations and then has nothing left to
 find. A game that does not run out of answers is one whose payoffs depend on
@@ -19,7 +19,7 @@ coordinate are questions whose answers change as the population changes.
 
 But cooperation needs a **surplus**. In this world tokens are never made;
 every token an agent gives away is a token it no longer has. The two kinds of
-help the pilots of [Why evolution stops](why-evolution-stops.md) tried were both gifts without a return. Support
+help the pilots of [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) tried were both gifts without a return. Support
 counted for less than a stake at home, and the yield on returned stakes went
 to whoever had most partners. Evolution gave both up.
 
@@ -185,7 +185,7 @@ agents changed hands in a game from iteration 500 without it, against 2.2 and
 > In B2's worlds such contests miss what pays off over an agent's life of 100
 > iterations: in contests of 100 the brains of iteration 2,000 beat those of
 > 500 (0.73) where in contests of 20 they tied
-> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)). Where
 > this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
@@ -299,5 +299,5 @@ failed the [health bar](health-bar.md "The seven marks a world's network must me
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (13)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Strategies written by hand](strategies-written-by-hand.md) · [Who helps whom](who-helps-whom.md) · [Another game](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Strategies written by hand](strategies-written-by-hand.md) · [Who helps whom](who-helps-whom.md) · [Another game](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

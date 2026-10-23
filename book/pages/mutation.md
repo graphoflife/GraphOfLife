@@ -139,7 +139,7 @@ In the code it is `Brain.mutate` and `Brain._perturb` in
 - [The brain](the-brain.md): the network whose numbers change.
 - [Genotypes and lineages](genotypes-and-lineages.md): the family trees that
   the changes grow.
-- [Why evolution stops](why-evolution-stops.md): what changing brains find,
+- [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): what changing brains find,
   and where they stop.
 
 <!-- turns -->

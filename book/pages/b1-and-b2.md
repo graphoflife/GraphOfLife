@@ -104,7 +104,7 @@ B2's healthy but poor.
   introduces its study.
 - **B2**, the ground for open-ended evolution, is the start of Experiments 9
   and 14 to 21 and most later ones;
-  [Why evolution stops](why-evolution-stops.md) asks the question it was
+  [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) asks the question it was
   built for. [What would count as open-ended evolution](open-ended-test.md)
   asks a new world to be as diverse as B2's median world.
 - [Every simulation: what was run, and what was measured](every-simulation.md)

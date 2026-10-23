@@ -796,7 +796,7 @@ keep tokens going round more than chance would; B2's barely do.
   trade route along which one part of a world could feed another. A rule that
   made flows along loops pay, or let a connection store what crosses it, could
   give them one. One rule of this kind was tried:
-  [Why evolution stops](why-evolution-stops.md) pilots a yield on stakes that
+  [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) pilots a yield on stakes that
   are returned across a connection. The yield went to whoever had the most
   partners, and it built stars rather than partnerships.
 

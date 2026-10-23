@@ -123,6 +123,6 @@ Earlier experiments read the same lines from a run's recorded statistics, as
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [!info]- Pages that link here (8)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

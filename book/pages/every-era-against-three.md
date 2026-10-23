@@ -42,7 +42,7 @@ One thing can be measured before any contest: how far each era's play is
 from an equilibrium. At an equilibrium no [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") could do better by playing
 differently while the rest keep their play. So the distance is how much an
 agent *would* gain by its [best reply](exploitability.md "How much better than a world's brains the best reply to them would do: zero only at the top.") to the others, its **exploitability**
-([Why evolution stops](why-evolution-stops.md)). A population that evolution
+([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). A population that evolution
 drives towards a top becomes less exploitable era after era.
 
 <!-- figure eras/room -->
@@ -239,6 +239,6 @@ little in one world, round a circle in the other.
 
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 
-> [!info]- Pages that link here (2)
-> [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution close the door?](does-evolution-close-the-door.md)
+> [!info]- Pages that link here (3)
+> [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Does evolution close the door?](does-evolution-close-the-door.md)
 <!-- /turns -->

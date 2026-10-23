@@ -179,8 +179,7 @@ What the brains are and compute, the families they make, and how different agent
 How to tell whether evolution goes on, why it stops, and what would count as open-ended evolution.
 
 - [Eras and contests: does a world keep getting better?](pages/eras-and-contests.md)
-- [How to tell a world that keeps evolving](pages/how-to-tell-a-world-that-keeps-evolving.md)
-- [Why evolution stops](pages/why-evolution-stops.md)
+- [Does evolution keep going?](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
 - [Every era against three](pages/every-era-against-three.md)
 - [A hundred thousand iterations](pages/a-hundred-thousand-iterations.md)

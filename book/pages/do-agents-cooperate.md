@@ -358,7 +358,7 @@ every run already writes:
 > 24% of decisions, and evolution stopped all the same. Two attempts to make
 > helping pay failed: stakes that support a neighbour's defence were given up
 > by evolution, and a yield on stakes returned built stars rather than
-> partnerships ([Why evolution stops](why-evolution-stops.md)). Alliances by mutual
+> partnerships ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Alliances by mutual
 > consent — a way to commit to a partner — are still to be tested.
 
 To make every figure of this page: `python3 book_figures.py cooperation`.

@@ -139,7 +139,7 @@ one of them.
   [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 - **Does evolution keep going?** The yardstick
   ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)),
-  why evolution stops ([Why evolution stops](why-evolution-stops.md)), and one
+  why evolution stops ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)), and one
   world planned for a hundred thousand iterations
   ([A hundred thousand iterations](a-hundred-thousand-iterations.md)).
 - **Changing the rules, and looking for a healthy, rich world.** The rules

@@ -107,7 +107,7 @@ hundred iterations. Later brains neither beat the ones before them nor go round
 in a circle: they tie
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 Experiment 16 found the same in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), a world built so that it cannot break
-([Why evolution stops](why-evolution-stops.md)). Why is still open. It is not
+([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Why is still open. It is not
 that the game has been solved: a strategy written by hand took half of an
 evolved world ([Strategies written by hand](strategies-written-by-hand.md)).
 Evolution stops short of better play, and the better play found so far needs
@@ -190,7 +190,7 @@ several agents acting together.
   four claims these ideas are tested against.
 - [Eras and contests: does a world keep getting better?](eras-and-contests.md):
   the test of bringing ancestors back, as this notebook plays it.
-- [Why evolution stops](why-evolution-stops.md): what the game and the rules
+- [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): what the game and the rules
   do to evolution here.
 
 ## How our view changed
@@ -198,7 +198,7 @@ several agents acting together.
 - **14 October 2026.** A note added here said that, like Blotto, the game has
   an answer: play unpredictably. Evolution finds it quickly, the note said,
   using the brains' random inputs as dice, and that is why the baseline stops
-  improving ([Why evolution stops](why-evolution-stops.md)).
+  improving ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
 - **15 October 2026.** The reason did not survive the tests that followed.
   Random founder brains already roll those dice, and a strategy written by hand
   took half of an evolved world
@@ -258,5 +258,5 @@ several agents acting together.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
 <!-- /turns -->

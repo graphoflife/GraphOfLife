@@ -25,7 +25,7 @@ it might matter.
 the one form of collective action the original [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") has. Stakers who mark
 part of their stakes as revolutionary can, together, take a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") from the
 single largest staker if they outweigh it. A rule that rewards standing
-together is the kind of rule [Why evolution stops](why-evolution-stops.md) said
+together is the kind of rule [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) said
 evolution needs, and B2 has had it on all along.
 
 **Gifts** let an agent hand tokens to a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") during reproduction, as a
@@ -66,7 +66,7 @@ iterations, with a whole world kept every 100 iterations:
 | B2, estates by wealth | `redistribution = by_tokens` |
 
 B2's pilot of seed 1 is the same world as the lab's run `B2-10000-s001` of
-[Experiment 16](why-evolution-stops.md), agent for agent and token for
+[Experiment 16](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops), agent for agent and token for
 token: the pilots in the engine's code reproduce the lab exactly.
 
 ## What the switches did to the world
@@ -135,7 +135,7 @@ against 3,400, and otherwise left it as it was.
 > In B2's worlds such contests miss what pays off over an agent's life of 100
 > iterations: in contests of 100 the brains of iteration 2,000 beat those of
 > 500 (0.73) where in contests of 20 they tied
-> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)). Where
 > this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
@@ -230,5 +230,5 @@ B2's rule for lapsing links, at least not as gifts stand.
 ← [Rules in company](rules-in-company.md) · [Changing the rules](../README.md#changing-the-rules) · [Rules without numbers](rules-without-numbers.md) →
 
 > [!info]- Pages that link here (17)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a coalition takes a node](revolution.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Where tokens flow](where-the-tokens-flow.md) · [Why evolution stops](why-evolution-stops.md) · [Another game](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a coalition takes a node](revolution.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Where tokens flow](where-the-tokens-flow.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Another game](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

@@ -286,7 +286,7 @@ physics, asks for exactly that kind of thing.
   says how the long runs will be judged).
 
 **Related notes:** [Strategies written by hand](strategies-written-by-hand.md) ·
-[Why evolution stops](why-evolution-stops.md) ·
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) ·
 [Another game](another-game.md) ·
 [What a brain sees](brain-inputs.md) ·
 [What a brain says](brain-outputs.md) ·

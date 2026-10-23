@@ -54,7 +54,7 @@
   "47": "a-world-that-cannot-break#brains-that-see-and-worlds-that-break",
   "48": "a-world-that-cannot-break",
   "49": "a-world-that-cannot-break#who-dies-and-why",
-  "50": "why-evolution-stops",
+  "50": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops",
   "51": "strategies-written-by-hand",
   "52": "how-fast-should-brains-change",
   "53": "how-big-should-a-brain-be",
@@ -200,7 +200,7 @@
    "Chapter 3": "a-worlds-life"
   },
   "E09": {
-   "Chapter 53": "why-evolution-stops",
+   "Chapter 53": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops",
    "Chapter 43": "how-fast-should-brains-change",
    "Chapter 52": "a-world-that-cannot-break#who-dies-and-why"
   },
@@ -298,6 +298,7 @@
   "what-crosses-a-connection": "where-the-tokens-flow#what-crosses-a-connection",
   "lightning-in-every-world": "where-the-tokens-flow#lightning-in-every-world",
   "the-core-of-a-world": "what-shape-does-the-network-take#the-core-of-a-world",
-  "the-geometry-of-a-world": "what-shape-does-the-network-take#the-geometry-of-a-world"
+  "the-geometry-of-a-world": "what-shape-does-the-network-take#the-geometry-of-a-world",
+  "why-evolution-stops": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops"
  }
 }

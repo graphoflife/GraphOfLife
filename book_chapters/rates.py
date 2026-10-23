@@ -35,7 +35,7 @@ E09_RUNS = ("The 50 runs of Experiment 9 — B2 at 10,000 tokens, seeds 1 to 10,
             "that a brain changes when it is copied at 0.05, 0.1, 0.2 (B2 itself, `B2-10000-s001` … "
             "`-s010`, shared with Experiment 16), 0.4 and 0.8, run to iteration 1,500 at least with a "
             "whole world archived every 100. They are made with `python3 gol_lab.py run E09`; every "
-            "setting is listed in the box under the thesis.")
+            "setting is listed in the box of the runs behind this page.")
 ARCHIVE = ("each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`, kept every 100 "
            "iterations")
 

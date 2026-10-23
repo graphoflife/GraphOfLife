@@ -42,7 +42,7 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
           "contests (a lottery, sides pooled by genotype or family, kin and family senses)",
           ["the-switches-the-world-was-built-with", "another-game"]),
     "L": ("Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without "
-          "revolutions to 3,000", ["why-evolution-stops", "a-hundred-thousand-iterations"]),
+          "revolutions to 3,000", ["how-to-tell-a-world-that-keeps-evolving", "a-hundred-thousand-iterations"]),
     "P": ("Two inputs (where my brain came from, who helped me) and links that hold a token",
           ["rules-without-numbers", "gliders-and-who-helps-whom"]),
     "Q": ("Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a "

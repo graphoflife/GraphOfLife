@@ -107,6 +107,6 @@ at random, a brain may choose at most 8 links
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The even split](even-split.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The even split](even-split.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
 <!-- /turns -->

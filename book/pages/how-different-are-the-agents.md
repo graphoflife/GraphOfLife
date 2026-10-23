@@ -385,7 +385,7 @@ every experiment and to the pilot worlds.
   kind to *stay*: a place where it does better than the others, so that new
   kinds are added to the old ones rather than replacing them. Whether the
   turnover is selection or drift is open. The lifetime contests of
-  [Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on) say
+  [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on) say
   that later brains beat earlier ones in these worlds (0.73 for those of 2,000
   against those of 500), so at least some of it is selection. The next measure
   is to play each kind against the kinds that replaced it.

@@ -391,7 +391,7 @@ and meets every mark ([Who inherits?](who-inherits.md#healthy-and-diverse)).
 
 Yes, and at first faster than in B2. In each world, the brains of a later
 moment met those of an earlier one, as [Why evolution
-stops](why-evolution-stops.md#would-we-notice-if-it-went-on) did for B2. Each
+stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on) did for B2. Each
 contest lasts an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), 100 iterations, and is played once in each
 era's world. A newborn whose brain is mixed counts for its parent's era.
 

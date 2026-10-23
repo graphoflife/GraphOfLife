@@ -457,13 +457,13 @@ hundred iterations, and stops.
 
 In B2 it goes on longer. Judged by the same contests of 20 iterations, every
 pilot for B2 seemed to stop within a few hundred iterations too, whether its
-brains had a memory or could grow ([Why evolution stops](why-evolution-stops.md)).
+brains had a memory or could grow ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
 But a contest must last as long as what it judges, and a B2 agent lives 100
 iterations. Played a lifetime long, the brains of iteration 2,000 beat those
 of 500 in all ten worlds of Experiment 16. In the three worlds played on to
 10,000 iterations, the gains went on to about iteration 5,000, and then all
 but stopped
-([Would we notice if it went on?](why-evolution-stops.md#would-we-notice-if-it-went-on)).
+([Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)).
 
 **P3, organisations: not found.** The candidates exist: family regions, and
 hubs with their stars. But nothing shows a group that persists while its
@@ -537,7 +537,7 @@ The six rules:
    organisation can never be worth more than its parts, and there is no
    reason for one to form (`research/Research.md`, §3.3). *For B2* a yield on
    stakes returned, and support stakes, were tried and gave nothing that
-   lasted ([Why evolution stops](why-evolution-stops.md)). Alliances, in which
+   lasted ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Alliances, in which
    two neighbours that both want it count their stakes together, were taken
    up at once ([Alliances](alliances.md)).
 5. **Nobody can tell kin from stranger.** Kin selection, help given to
@@ -628,7 +628,7 @@ neighbour's ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md
 
 **What came of it.** A yield on stakes returned, paid for by a small tax on
 holdings, was tried in the pilots for B2
-([Why evolution stops](why-evolution-stops.md)). It went to whoever had the
+([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). It went to whoever had the
 most partners, and built stars rather than partnerships. Evolution stopped as
 in every other pilot judged by short contests. Cooperation needs a surplus
 that pairs, not hubs, can earn. The messages already serve as tags
@@ -676,7 +676,7 @@ only once the earlier steps hold.
 
 **What came of it.** In the pilots for B2 a brain could gain or lose hidden
 units by mutation, beside a "shadow" size that nothing reads
-([Why evolution stops](why-evolution-stops.md)). Where parents could not hand
+([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Where parents could not hand
 links to their children, as in B2, the real size followed its shadow. What
 rose, rose because a size cannot fall below its floor, the left wall, and not
 because selection favoured larger brains.
@@ -736,7 +736,7 @@ B2's yardstick, with a dominance tournament held against its chance null
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 It taught one lesson on the way: a contest must last as long as what it
 judges, in B2 an agent's lifetime. A neutral shadow judged brains that can
-grow ([Why evolution stops](why-evolution-stops.md)). Flow modules have been
+grow ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Flow modules have been
 read in worlds of every kind the notebook has made
 ([Flow modules: the groups tokens stay in](flow-modules.md)). The heredity
 half-life, selection ablation, the cooperation measures of
@@ -856,7 +856,7 @@ from staking or breeding themselves to death, with an incumbent's advantage
 of 1.5 ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). Together these rules are
 the second baseline, B2. In B2 evolution goes on for thousands of
 iterations, more slowly as it goes, and then levels off
-([Why evolution stops](why-evolution-stops.md)). What stops it is not that
+([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). What stops it is not that
 the game has no better play left: a strategy written by hand took half of a
 B2 world ([Strategies written by hand](strategies-written-by-hand.md)). The
 search runs out before the game does. What moved since is told in
@@ -900,7 +900,7 @@ the rule changes of both aims will be tested together where they coincide.
   at a time, and what B2 did about each.
 - [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md):
   the yardstick for evolution, and how B1 fared by it.
-- [Why evolution stops](why-evolution-stops.md): whether a world that cannot
+- [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): whether a world that cannot
   break keeps evolving.
 - [Thirty worlds](a-worlds-life.md#thirty-worlds): the thirty B1 worlds behind every number
   here.
@@ -939,7 +939,7 @@ the rule changes of both aims will be tested together where they coincide.
 - **14 October 2026.** A yield on mutual flow was proposed to make
   cooperation pay. A yield on stakes returned went to whoever had the most
   partners, and built stars, not partnerships
-  ([Why evolution stops](why-evolution-stops.md)).
+  ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
 - **14 October 2026.** The proposals would have opened the world: links to
   agents anywhere, and separated pieces that live on. B2 kept every rule local
   and made worlds that cannot split instead
@@ -947,7 +947,7 @@ the rule changes of both aims will be tested together where they coincide.
 - **14 October 2026.** Blind brains were called the first obstacle, sitting
   "in the architecture, not in the world". But sight was not enough: in pilot
   worlds that could not break, seeing brains stopped improving within a few
-  hundred iterations too. So [Why evolution stops](why-evolution-stops.md)
+  hundred iterations too. So [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
   proposed that the obstacle lay in the game, not in the brain: a contest
   best played unpredictably, which evolved brains play by using their random
   inputs as dice.
@@ -959,7 +959,7 @@ the rule changes of both aims will be tested together where they coincide.
   them as much in a contest where dice are worthless. A strategy written by
   hand took half of one world, so the game has better play left; the search
   runs out before the game does
-  ([Why evolution stops](why-evolution-stops.md),
+  ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops),
   [Strategies written by hand](strategies-written-by-hand.md)).
 
 <!-- turns -->

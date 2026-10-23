@@ -9,7 +9,7 @@
 
 ## Why ask
 
-[Why evolution stops](why-evolution-stops.md) read the end of evolution as the end of
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) read the end of evolution as the end of
 the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."): a Colonel Blotto contest has a best way to play, to be
 unpredictable, and once evolution has found it there is nothing better left
 to find. That reading makes a prediction that can be tested without waiting
@@ -33,7 +33,7 @@ could get there.
 
 The method has a note of its own ([The invasion test](invasion-test.md)).
 Take an evolved world: one of the [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") worlds of
-[Experiment 16](why-evolution-stops.md#the-runs), 10,000 tokens, as it
+[Experiment 16](how-to-tell-a-world-that-keeps-evolving.md#the-runs-of-experiment-16), 10,000 tokens, as it
 stood at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000. Choose a **patch**: an agent at random and the
 agents nearest to it, step by step, until the patch holds 5% of the world.
 Give every agent of the patch a strategy instead of its brain, and play on
@@ -152,7 +152,7 @@ worlds out of ten, a plain rule took half or more of the world from brains
 that evolution had shaped for 2,000 iterations, and the residents' own brains
 did nothing of the kind from the same places. The evolved play is not the best
 there is. That answers the question of
-[Why evolution stops](why-evolution-stops.md#what-the-probes-say-about-why): the game
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#what-the-probes-say-about-why): the game
 had more to give, and evolution had not taken it. Whether the factory or the
 raider won depended on the world; the pipeline is no advantage in general.
 What the two share is what matters, and the next two tests take it apart.
@@ -224,5 +224,5 @@ them made evolution find the raiders' play, or go on improving.
 [Strategies written by hand](../README.md#strategies-written-by-hand) · [What a brain can compute](what-a-brain-can-compute.md) →
 
 > [!info]- Pages that link here (15)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Does evolution close the door?](does-evolution-close-the-door.md) · [A crew of raiders](a-crew-of-raiders.md) · [Raiders that breed](raiders-that-breed.md) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md) · [The invasion test](invasion-test.md) · [Another game](another-game.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Does evolution close the door?](does-evolution-close-the-door.md) · [A crew of raiders](a-crew-of-raiders.md) · [Raiders that breed](raiders-that-breed.md) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md) · [The invasion test](invasion-test.md) · [Another game](another-game.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

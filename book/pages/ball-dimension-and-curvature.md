@@ -67,5 +67,5 @@ the [baseline](b1-and-b2.md "The stated rules an experiment starts from and chan
 ← [How alike at a distance](correlation-function.md) · [Space and dimension](../README.md#space-and-dimension) · [The spectral dimension](spectral-dimension.md) →
 
 > [!info]- Pages that link here (9)
-> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [The spectral dimension](spectral-dimension.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
+> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [The spectral dimension](spectral-dimension.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

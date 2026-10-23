@@ -554,7 +554,7 @@ def dimensions(ch: F.Chapter) -> None:
                 f"{W.lived}, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: "
                 "the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the "
                 "darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, "
-                "every 25 iterations, are drawn in [The geometry of a world](the-geometry-of-a-world.md).",
+                "every 25 iterations, are drawn in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).",
         recipe=recipe(W.lived_text(), FRAMES,
                       ["Read frame 2·t + 1 for each t; take the largest piece of its network.",
                        "The rulers as in the first figure, the walk run for 128 steps "

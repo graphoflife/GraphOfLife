@@ -10,7 +10,7 @@
 > - And what becomes of a world where every link holds a token and nobody dies
 >   of age?
 
-[Why evolution stops](why-evolution-stops.md) asked why evolution slows down in these
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) asked why evolution slows down in these
 worlds, and the lifetime contests of
 [The switches the world was built with](the-switches-the-world-was-built-with.md) showed that in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s family of worlds it does not quite stop: brains of 1,000
 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") still beat those of 500 two times out of three. This page tries
@@ -173,7 +173,7 @@ rule keeps a [healthy world](what-makes-a-world-interesting.md "A world that mee
 [Genotypes and the family tree](genotype.md) ·
 [The invasion test](invasion-test.md) ·
 [What the brains are like](what-the-brains-are-like.md) ·
-[Why evolution stops](why-evolution-stops.md) ·
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) ·
 [The switches the world was built with](the-switches-the-world-was-built-with.md)
 
 <!-- turns -->

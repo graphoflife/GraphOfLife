@@ -97,7 +97,7 @@ alone can go round in a circle.
 ## Where it is used
 
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
-builds the yardstick on B1; [Why evolution stops](why-evolution-stops.md)
+builds the yardstick on B1; [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
 applies it to B2; [Every era against three](every-era-against-three.md)
 plays fixed eras; [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) compares rules by
 their contests; [Pilot worlds](pilot-worlds.md) plays the eras of pilots.
@@ -112,10 +112,10 @@ their contests; [Pilot worlds](pilot-worlds.md) plays the eras of pilots.
 <!-- turns -->
 ---
 
-[Does evolution keep going?](../README.md#does-evolution-keep-going) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) →
+[Does evolution keep going?](../README.md#does-evolution-keep-going) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) →
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

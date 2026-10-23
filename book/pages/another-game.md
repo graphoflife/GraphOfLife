@@ -10,7 +10,7 @@
 
 ## Why ask
 
-[Why evolution stops](why-evolution-stops.md) blamed the contest. A node goes to
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) blamed the contest. A node goes to
 whoever stakes most on it, which makes the agents' [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") a Colonel Blotto game,
 and the best play in such a game is to be unpredictable. Evolution finds that
 quickly, through the random inputs every brain reads, and then nothing better
@@ -128,7 +128,7 @@ And the dice stayed. Redrawing the random inputs of brains evolved under the
 lottery changed 48 to 67% of their divisions of stakes. Under Blotto it was
 59%, in the same world without revolutions. Randomising is worthless under a
 lottery, and the brains roll the dice all the same. So the lottery confirms
-one half of [Why evolution stops](why-evolution-stops.md) and refutes the other.
+one half of [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) and refutes the other.
 Evolution stops under a lottery too, sooner and lower, but not because brains
 learn to roll dice: they roll them anyway.
 
@@ -198,7 +198,7 @@ them, and that is the part evolution would still have to find.
 > In B2's worlds such contests miss what pays off over an agent's life of 100
 > iterations: in contests of 100 the brains of iteration 2,000 beat those of
 > 500 (0.73) where in contests of 20 they tied
-> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)). Where
+> ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)). Where
 > this page says that evolution stops, read: it stops *as far as a short
 > contest can see*.
 >
@@ -250,5 +250,5 @@ and finds no better play either
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (8)
-> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Why evolution stops](why-evolution-stops.md) · [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

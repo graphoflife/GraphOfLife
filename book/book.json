@@ -1361,7 +1361,7 @@
     },
     {
       "id": "how-to-tell-a-world-that-keeps-evolving",
-      "title": "How to tell a world that keeps evolving",
+      "title": "Does evolution keep going?",
       "file": "pages/how-to-tell-a-world-that-keeps-evolving.md",
       "topics": [
         "evolution",
@@ -1369,26 +1369,12 @@
       ],
       "kind": "experiment",
       "experiments": [
-        "E12"
-      ],
-      "status": "analysed",
-      "added": "2026-10-12",
-      "summary": "What would open-ended evolution look like in a Graph of Life world — which number would keep rising? Why are most rising numbers no evidence at all, and what does a rising number have to be held against? How can a world that has stopped evolving be told from one that keeps evolving but stays in place, as in a race where everybody runs?"
-    },
-    {
-      "id": "why-evolution-stops",
-      "title": "Why evolution stops",
-      "file": "pages/why-evolution-stops.md",
-      "topics": [
-        "evolution"
-      ],
-      "kind": "experiment",
-      "experiments": [
+        "E12",
         "E16"
       ],
       "status": "analysed",
-      "added": "2026-10-14",
-      "summary": "Does a world that cannot break keep evolving, now that its brains can see? Which of the changes that should give evolution more to work with — memory, larger brains, a reward for cooperating, hidden information — keep it going? What is it about the game that lets evolution finish so soon?"
+      "added": "2026-10-12",
+      "summary": "Evolution keeps going if a world's brains keep beating their own past. So the notebook plays the brains of two moments of one world against each other, and holds the world's network to a health bar."
     },
     {
       "id": "how-fast-should-brains-change",

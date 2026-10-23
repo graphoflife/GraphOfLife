@@ -92,8 +92,8 @@ def score(played: Dict[str, Any], earlier: int, later: int) -> float:
 
 E12_RUNS = ("The 10 runs of Experiment 12 — B1 at 5,000 tokens, seeds 1 to 10, 1,000 "
             "iterations, a whole world archived every 50 — `B1-5000-s001` … `-s010`. They are made "
-            "with `python3 gol_lab.py run E12`; every setting is listed in the box under the "
-            "thesis.")
+            "with `python3 gol_lab.py run E12`; every setting is listed in the box of the "
+            "runs behind this page.")
 ARCHIVE = ("each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`: the whole "
            "world as a checkpoint writes it, kept every 50 iterations")
 HOW = (f"For every pair of the eras {', '.join(str(e) for e in ERAS)} play two contests, one in "

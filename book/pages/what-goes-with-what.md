@@ -270,7 +270,7 @@ a world is first of all a world with or without a star.
 - **In B2, losing one's node is close to a lottery** as far as anything an
   agent is or does can tell. Selection can only act on traits that change the
   odds, and none of these does by much. That is one more reason, besides the
-  ones of [Why evolution stops](why-evolution-stops.md), for evolution in B2 to be
+  ones of [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops), for evolution in B2 to be
   slow.
 - **A world is first of all a world with or without a star.** Half of the
   differences between thirty worlds of the same rules are the size of their

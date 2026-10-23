@@ -133,7 +133,7 @@ almost as fast as they come.
 <!-- /figure -->
 
 Lifetime contests (T = 100, as in
-[Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)): the
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)): the
 [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment against those of an earlier one, once in each
 moment's world.
 
@@ -257,7 +257,7 @@ other worlds tie or swing.
 [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) ·
 [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
 [Healthy and rich](healthy-and-rich.md) ·
-[Why evolution stops](why-evolution-stops.md) ·
+[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) ·
 [What folds a world](what-folds-a-world.md)
 
 <!-- turns -->

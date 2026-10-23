@@ -156,7 +156,7 @@ sizes that game had — only the sizes kept.
   Experiment 16's two worlds of that kind measured, about two pairs in a
   hundred last ten games, eight to nine times as many as with partners dealt
   at random — the dice B2's brains read
-  ([Why evolution stops](why-evolution-stops.md)) break up partnerships too.
+  ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)) break up partnerships too.
 - **Brains that never change**: in the frozen world every module lasts all
   fifty games — and with partners dealt at random only a quarter last ten. A
   world whose agents repeat the same moves forever keeps the same groups; the

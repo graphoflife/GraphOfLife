@@ -11,7 +11,7 @@
 ## Why ask
 
 The measures of [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") so far look at agents one by one: what they hold, what they
-stake, how their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") do in a contest. [Why evolution stops](why-evolution-stops.md)
+stake, how their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") do in a contest. [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
 found one blind spot in them, contests too short for what pays over a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.").
 The author suggested another: perhaps the worlds hold structures above the
 single agent that none of the measures can see, cyclic ones like the gliders of

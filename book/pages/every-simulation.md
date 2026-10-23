@@ -67,7 +67,7 @@ Experiment 2's).
 | E13 | Brains that see, and worlds that break | B1 | *baseline*; *one hidden layer* (hidden_layers = 16); *one hidden layer, change only when copied* (hidden_layers = 16, mutate_on_replication = on) | 1–10 | 5,000 | 1,500 | 30 | [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break) |
 | E14 | A world that cannot break | B2 | *all the rules*; *no mending* (mend_on_death = off); *any unused link lapses* (prune_needs = 0); *no links at birth* (birth_links = 0); *no valence* (valence = 0); *handover* (allow_handover = on) | 1–10 | 5,000 | 1,000 | 60 | [A world that cannot break](a-world-that-cannot-break.md) |
 | E15 | Who dies, and why | B2 | *B2*; *the last token kept* (keep_home = 0.01); *nothing kept* (keep_home = 0.0); *half kept* (keep_home = 0.5); *children of any size* (min_child = 1); *no old age* (max_age = 0) | 1–10 | 10,000 | 1,000 | 60 | [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) |
-| E16 | Why evolution stops | B2 | *B2*; *no random inputs* (random_input_amount = 0) | 1–10 | 10,000 | 2,000 | 20 | [Why evolution stops](why-evolution-stops.md) |
+| E16 | Why evolution stops | B2 | *B2*; *no random inputs* (random_input_amount = 0) | 1–10 | 10,000 | 2,000 | 20 | [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) |
 | E17 | Mixed at birth: ten long worlds | B2 | *mixed at birth* (mix_at_birth = on) | 1–10 | 10,000 | 10,000 | 10 | [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) |
 | E18 | Five mixed worlds, fifty thousand iterations | B2 | *mixed at birth* (mix_at_birth = on) | 2,4,5,6,10 | 10,000 | 50,000 | 5 | [Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations) |
 | E19 | Mixed at birth, with parents as mates | B2 | *mixed at birth, parents as mates* (mix_at_birth = on, mix_mates = parents) | 1–10 | 10,000 | 20,000 | 10 | [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) |
@@ -97,7 +97,7 @@ prototype's own code. What each batch asked:
 | AL | Alliances over a long time and at 20,000 tokens | 2 | 4 | 10,000, 20,000 | 2,000, 3,000 | done | [Alliances](alliances.md) |
 | N | Rules without numbers (B3, with and without allies) and alliances without the home advantage | 4 | 8 | 10,000 | 1,000 | done | [Alliances](alliances.md), [Rules without numbers](rules-without-numbers.md) |
 | S | The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other contests (a lottery, sides pooled by genotype or family, kin and family senses) | 13 | 26 | 10,000 | 1,000 | done | [The switches the world was built with](the-switches-the-world-was-built-with.md), [Another game](another-game.md) |
-| L | Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without revolutions to 3,000 | 3 | 13 | 10,000 | 3,000, 10,000, 50,000 | 10 done, 3 stopped early | [Why evolution stops](why-evolution-stops.md), [A hundred thousand iterations](a-hundred-thousand-iterations.md) |
+| L | Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without revolutions to 3,000 | 3 | 13 | 10,000 | 3,000, 10,000, 50,000 | 10 done, 3 stopped early | [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops), [A hundred thousand iterations](a-hundred-thousand-iterations.md) |
 | P | Two inputs (where my brain came from, who helped me) and links that hold a token | 6 | 12 | 10,000 | 2,000 | done | [Rules without numbers](rules-without-numbers.md), [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
 | Q | Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a token without old age | 5 | 10 | 10,000 | 2,000 | done | [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) |
 | R | Who inherits the estate of the dead: the poorest, the newborns, their parents | 9 | 18 | 10,000 | 2,000 | done | [Who inherits?](who-inherits.md) |
@@ -368,7 +368,7 @@ worlds of that experiment or batch the measure has been taken on:
   [What a run records](frames-and-stats.md));
 - **lifetime contests (T = 100)** — the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment against those
   of an earlier one, for an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
-  ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on));
+  ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on));
 - **games recorded and read again** — takeover chains, help, flows that go
   round ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) and, where there are
   gifts, who gives to whom;
@@ -437,6 +437,6 @@ in the Research tab).
 
 ← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a run records](frames-and-stats.md) →
 
-> [!info]- Pages that link here (4)
-> [B1 and B2: the two baselines](b1-and-b2.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (5)
+> [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

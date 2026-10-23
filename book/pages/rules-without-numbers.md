@@ -146,7 +146,7 @@ difference between living and evolving.
 
 > [!info] Added later: contests a lifetime long
 > Played in contests of 100 iterations, once in each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?")'s world
-> ([Why evolution stops](why-evolution-stops.md#would-we-notice-if-it-went-on)), the
+> ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)), the
 > three worlds that lived answer three ways. In B3a, seed 1, the brains of
 > iteration 1,000 tied with those of 500 (0.50 and 0.46). In seed 2 they took
 > 0.84 of their own world and the whole of 500's. In B3b, seed 2, the brains of
