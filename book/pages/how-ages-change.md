@@ -330,15 +330,15 @@ to 63, 8.5 at 64 to 255, **15.3** at 256 and over — three times what the
 young hold — and 5.5 connections. On average, the old are the rich and the
 well connected. Whether they became rich by living long, or lived long
 because they were rich, is the same question as above;
-[Do the rich stay rich?](do-the-rich-stay-rich.md) follows single agents' tokens from
+[Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich) follows single agents' tokens from
 game to game.
 
 > [!info] Added later: connections give age
-> [How the network grows](how-the-network-grows.md) sorts the living by age and looks
+> [How the network grows](how-agents-have-children.md#how-the-network-grows) sorts the living by age and looks
 > at the median instead of the mean: the median agent has 2 connections at
 > every age, from a few iterations to over 700. The old classes' higher means
 > come from the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") among them, which die far less often than leaves
-> ([Do the rich stay rich?](do-the-rich-stay-rich.md)), and an agent's tokens follow
+> ([Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)), and an agent's tokens follow
 > its connections ([How properties scale together](how-properties-scale-together.md)).
 > Connections give an agent age, not age connections. And an agent's age is
 > its node's, not its brain's, which may have arrived in the last game
@@ -454,7 +454,7 @@ To make every figure of this page: `python3 book_figures.py ages`.
 <!-- turns -->
 ---
 
-← [Births, deaths and ages](births-deaths-and-ages.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [How agents have children](how-agents-have-children.md) →
+← [Births, deaths and ages](births-deaths-and-ages.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [How births build the network](how-agents-have-children.md) →
 
 > [!info]- Pages that link here (5)
 > [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age and lifetime](age-and-lifetime.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)

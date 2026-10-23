@@ -21,7 +21,7 @@ different count.
 
 | what is counted | how | [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") (10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")) | [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") (10,000 tokens) | pages |
 |---|---|---|---|---|
-| **names** | genotypes: a brain gets a new one at every change | 0.65 per agent | 0.46 per agent | [Genotypes and lineages](genotypes-and-lineages.md), [How even is a world?](how-even-is-a-world.md) |
+| **names** | genotypes: a brain gets a new one at every change | 0.65 per agent | 0.46 per agent | [Genotypes and lineages](genotypes-and-lineages.md), [How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world) |
 | **numbers** | how far apart two brains' weights are | two agents of one world as far apart as two random brains | — | [What the brains are like](what-the-brains-are-like.md) |
 | **behaviour** | kinds of agent that act measurably differently in the same situations, counted by their carriers | 3.2 kinds of staking, 9 over every decision | 17.5 kinds of staking, 54 over every decision | [How different are the agents?](how-different-are-the-agents.md) |
 
@@ -35,7 +35,7 @@ dozen kinds. Most of what makes two genotypes two changes nothing they do.
 | finding | page |
 |---|---|
 | A genotype lasts a couple of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."); what lasts long enough for selection to act on is a line, a family that can take a world over in a few hundred iterations. | [Genotypes and lineages](genotypes-and-lineages.md), [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) |
-| B1 keeps five genotypes for every eight agents, in every world and at every size: a balance of making and copying, which moves with the rate of change and nothing else. | [How even is a world?](how-even-is-a-world.md), [How fast should brains change?](how-fast-should-brains-change.md) |
+| B1 keeps five genotypes for every eight agents, in every world and at every size: a balance of making and copying, which moves with the rate of change and nothing else. | [How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world), [How fast should brains change?](how-fast-should-brains-change.md) |
 | Two brains of one B1 world are as far apart in their numbers as two brains drawn at random: nearly all of a brain is neutral, free to drift because nothing depends on it. | [What the brains are like](what-the-brains-are-like.md) |
 | Selection set B1's constants alike in every world: no children, the stake spread, every token revolutionary. | [How the game is played](how-the-game-is-played.md), [What the brains are like](what-the-brains-are-like.md) |
 | Without evolution, worlds started from random brains end in very different places; with it, they all end alike. | [Do the brains matter?](do-the-brains-matter.md) |

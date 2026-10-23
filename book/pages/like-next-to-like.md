@@ -136,7 +136,7 @@ keeps how tokens follow connections and destroys everything else.
 Why would the old sit beside the old? A likely reason: agents die
 together, when a piece of the world is cut off
 ([How a world breaks](how-a-world-breaks.md)), and they are born into their
-parents' neighbourhoods ([How the network grows](how-the-network-grows.md)), so
+parents' neighbourhoods ([How the network grows](how-agents-have-children.md#how-the-network-grows)), so
 the young arrive where the old are gone, side by side. Agents that arrived
 together live together, as cohorts.
 

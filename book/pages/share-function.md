@@ -132,5 +132,5 @@ In the code it is `_share_of_first(a, b)` in `GraphOfLifeSimple.py`.
 ← [Seeds and the random stream](random-numbers.md) · [How the simulation works](../README.md#how-the-simulation-works) · [A yes-or-no decision](binary-decision.md) →
 
 > [!info]- Pages that link here (10)
-> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [A yes-or-no decision](binary-decision.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [How agents have children](how-agents-have-children.md) · [What the brains are like](what-the-brains-are-like.md)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [A yes-or-no decision](binary-decision.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [How births build the network](how-agents-have-children.md) · [What the brains are like](what-the-brains-are-like.md)
 <!-- /turns -->

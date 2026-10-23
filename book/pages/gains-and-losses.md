@@ -299,10 +299,10 @@ To make every figure of this page: `python3 book_figures.py gains`.
 <!-- turns -->
 ---
 
-← [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [The largest and the smallest](the-largest-and-the-smallest.md) →
+← [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [The largest and the smallest](the-largest-and-the-smallest.md) →
 
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
 > [!info]- Pages that link here (11)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Token curvature](token-curvature.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Token curvature](token-curvature.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

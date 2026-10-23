@@ -268,6 +268,6 @@ To make every figure of this page: `python3 book_figures.py scaling`.
 
 ← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The geometry of a world](the-geometry-of-a-world.md) →
 
-> [!info]- Pages that link here (12)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How ages change over a world's life](how-ages-change.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md)
+> [!info]- Pages that link here (11)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How ages change over a world's life](how-ages-change.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md)
 <!-- /turns -->

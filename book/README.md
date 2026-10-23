@@ -72,7 +72,7 @@ Who is born, who dies and when, how old agents get, and how a world's ages chang
 
 - [Births, deaths and ages](pages/births-deaths-and-ages.md)
 - [How ages change over a world's life](pages/how-ages-change.md)
-- [How agents have children](pages/how-agents-have-children.md)
+- [How births build the network](pages/how-agents-have-children.md)
 - [Births and the four ways to die](pages/births-and-deaths.md)
 - [The estate of the dead](pages/estate.md)
 - [Age and lifetime](pages/age-and-lifetime.md)
@@ -82,9 +82,7 @@ Who is born, who dies and when, how old agents get, and how a world's ages chang
 
 How unequal a world is, who stays rich, and how gains and losses are shared out.
 
-- [Where do the tokens go?](pages/where-do-the-tokens-go.md)
-- [How even is a world?](pages/how-even-is-a-world.md)
-- [Do the rich stay rich?](pages/do-the-rich-stay-rich.md)
+- [How unequal is a world, and who stays rich](pages/where-do-the-tokens-go.md)
 - [Gains and losses](pages/gains-and-losses.md)
 - [The largest and the smallest](pages/the-largest-and-the-smallest.md)
 - What keeps wealth spread? — *not written yet*
@@ -117,7 +115,6 @@ How the game is played, where tokens flow, which loops they go round, and the gr
 Degrees, cores, bridges, power laws and cuts: what shape the links take, and how a world breaks.
 
 - [What shape does the network take?](pages/what-shape-does-the-network-take.md)
-- [How the network grows](pages/how-the-network-grows.md)
 - [The core of a world](pages/the-core-of-a-world.md)
 - [Power laws, real and apparent](pages/power-laws-real-and-apparent.md)
 - [How properties scale together](pages/how-properties-scale-together.md)

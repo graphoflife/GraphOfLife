@@ -343,7 +343,7 @@ all in the core. That the core dies as fast as the leaves — 2.7% in every
 game — means the core as a whole is not protected either. A part of the
 world that lasted would show as agents of the core that die less often than
 the rest; in these worlds there is none but the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), which die about half as
-often as other agents ([Do the rich stay rich?](do-the-rich-stay-rich.md)) — and a
+often as other agents ([Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)) — and a
 hub is a place, not an individual: the [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") on it changes in nearly every
 game ([How the game is played](how-the-game-is-played.md)).
 
@@ -352,7 +352,7 @@ To make every figure of this page: `python3 book_figures.py core`.
 <!-- turns -->
 ---
 
-← [How the network grows](how-the-network-grows.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Power laws, real and apparent](power-laws-real-and-apparent.md) →
+← [What shape does the network take?](what-shape-does-the-network-take.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Power laws, real and apparent](power-laws-real-and-apparent.md) →
 
 > [!info]- Pages that link here (6)
 > [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Core, trees and leaves](core-trees-leaves.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md)

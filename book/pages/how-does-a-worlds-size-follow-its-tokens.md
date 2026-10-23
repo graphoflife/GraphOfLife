@@ -298,7 +298,7 @@ flat within what three seeds per size can see:
 
 Genotypes per agent are flatter than anything: 0.61 to 0.66 at every size.
 The balance of making and copying of
-[How even is a world?](how-even-is-a-world.md) does not care how big the
+[How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world) does not care how big the
 world is.
 
 Across these eight sizes, three properties of the network's shape seem to
@@ -487,7 +487,7 @@ different paces, and the size of the world tells them apart:
 A world is a space. It has a finite dimension
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
 New connections are only ever made inside a neighbourhood
-([How the network grows](how-the-network-grows.md)), and a node can only be
+([How the network grows](how-agents-have-children.md#how-the-network-grows)), and a node can only be
 taken by a neighbour. Ten times the agents make a world only about twice as
 wide: its diameter grows as agents^0.30
 ([Distances grow like a power](#distances-grow-like-a-power)). So the third
@@ -980,5 +980,5 @@ iterations each.
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (29)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
 <!-- /turns -->

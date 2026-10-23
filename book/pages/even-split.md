@@ -100,7 +100,7 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 - [Where the tokens flow](where-the-tokens-flow.md#who-keeps-their-node): an
   agent keeps its node about as often as one of *d* + 1 equal stakers would:
   in 74% of games with one connection, 2.0% with fifty or more.
-- [Do the rich stay rich?](do-the-rich-stay-rich.md#a-two-game-rhythm): on a hub
+- [Do the rich stay rich?](where-do-the-tokens-go.md#a-two-game-rhythm): on a hub
   and its leaves the even split overshoots, and wealth swings with a period of
   two games.
 - [Physical inspiration](physical-inspiration.md): an even split is one step of

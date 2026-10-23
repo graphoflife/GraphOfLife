@@ -29,7 +29,7 @@ genotypes**, 2^H with *H* the entropy of the genotypes' shares, weighs the
 common ones more ([Entropy and evenness](entropy-and-evenness.md)). In a
 settled baseline world it is about 0.45 per agent at 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") (0.49 at
 10,000), against 0.63 distinct genotypes per agent at both sizes
-([How even is a world?](how-even-is-a-world.md)).
+([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
 
 ## A caution about names
 

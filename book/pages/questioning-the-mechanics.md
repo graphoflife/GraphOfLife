@@ -204,7 +204,7 @@ moves under it, and a good brain is worn away in place, whether or not it is
 copied. This may be why genotypes last about two iterations
 ([Genotypes and lineages](genotypes-and-lineages.md)), and why the number of
 distinct genotypes is set by the rules
-([How even is a world?](how-even-is-a-world.md)).
+([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
 
 **What could replace it.** Change brains **only when they are copied** — at
 birth and at conquest — and never in place.
@@ -596,5 +596,5 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
 > [!info]- Pages that link here (12)
-> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [How even is a world?](how-even-is-a-world.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How ages change over a world's life](how-ages-change.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

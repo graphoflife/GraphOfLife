@@ -51,6 +51,6 @@ the larger. Where the notebook gives an effective number it says which.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

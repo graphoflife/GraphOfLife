@@ -39,7 +39,7 @@ $$
 |---|---|---|---|
 | tokens over agents | τᵢ / *T*, one per agent | `tokenEntropy` | log₂ *n* (*n* agents) |
 | agents over [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") | share of agents with exactly *d* connections, one per *d* that occurs | `degreeEntropy` | log₂ (number of distinct degrees) |
-| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [How even is a world?](how-even-is-a-world.md)) | log₂ *n* |
+| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)) | log₂ *n* |
 
 For tokens the question is: *if you pick one token at random, whose is it?*
 
@@ -76,7 +76,7 @@ Both measure how unequally tokens are held, but they weigh differently. The
 [Gini coefficient](gini-coefficient.md) is about differences between agents;
 entropy is about the logarithms of shares, so it is more sensitive to the many
 small holdings and less to the few large ones. Two worlds with the same Gini
-can have different evenness ([How even is a world?](how-even-is-a-world.md)).
+can have different evenness ([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
 
 ## In the code
 
@@ -89,5 +89,5 @@ histogram of degrees.
 ← [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) →
 
 > [!info]- Pages that link here (6)
-> [Glossary](glossary.md) · [How even is a world?](how-even-is-a-world.md) · [Brain diversity](brain-diversity.md) · [The diversity score](diversity-score.md) · [What a run records](frames-and-stats.md) · [How many directions a cloud of points uses](participation-ratio.md)
+> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Brain diversity](brain-diversity.md) · [The diversity score](diversity-score.md) · [What a run records](frames-and-stats.md) · [How many directions a cloud of points uses](participation-ratio.md)
 <!-- /turns -->

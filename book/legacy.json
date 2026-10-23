@@ -22,13 +22,13 @@
   "18": "genotypes-and-lineages",
   "19": "what-the-brains-are-like",
   "20": "what-agents-say-to-each-other",
-  "21": "do-the-rich-stay-rich",
-  "22": "how-the-network-grows",
+  "21": "where-do-the-tokens-go#do-the-rich-stay-rich",
+  "22": "how-agents-have-children#how-the-network-grows",
   "23": "like-next-to-like",
   "24": "how-many-dimensions-does-a-world-have",
   "25": "the-core-of-a-world",
   "26": "what-the-baseline-world-is",
-  "27": "how-even-is-a-world",
+  "27": "where-do-the-tokens-go#how-even-is-a-world",
   "28": "gains-and-losses",
   "29": "where-the-tokens-flow",
   "30": "what-crosses-a-connection",
@@ -290,6 +290,9 @@
   "the-searchs-best-world-in-new-seeds": "the-candidates-played-on#the-searchs-best-world-in-new-seeds",
   "births-as-rich-as-the-neighbours": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours",
   "the-floor-in-plain-b2-and-in-b1": "room-for-the-steadiest-world#the-floor-in-plain-b2-and-in-b1",
-  "worlds-of-100000-tokens": "how-does-a-worlds-size-follow-its-tokens#worlds-of-100000-tokens"
+  "worlds-of-100000-tokens": "how-does-a-worlds-size-follow-its-tokens#worlds-of-100000-tokens",
+  "how-the-network-grows": "how-agents-have-children#how-the-network-grows",
+  "how-even-is-a-world": "where-do-the-tokens-go#how-even-is-a-world",
+  "do-the-rich-stay-rich": "where-do-the-tokens-go#do-the-rich-stay-rich"
  }
 }

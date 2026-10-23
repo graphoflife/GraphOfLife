@@ -51,7 +51,7 @@ order tends to reverse.
 
 ## Where it is used
 
-[Do the rich stay rich?](do-the-rich-stay-rich.md) measures all three in
+[Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich) measures all three in
 the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.
 
 ## References
@@ -70,5 +70,5 @@ the [baseline](b1-and-b2.md "The stated rules an experiment starts from and chan
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
 > [!info]- Pages that link here (2)
-> [Glossary](glossary.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md)
+> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)
 <!-- /turns -->

@@ -61,10 +61,10 @@ world's life.
 <!-- turns -->
 ---
 
-← [How agents have children](how-agents-have-children.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [The estate of the dead](estate.md) →
+← [How births build the network](how-agents-have-children.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [The estate of the dead](estate.md) →
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
 > [!info]- Pages that link here (8)
-> [One iteration, step by step](one-iteration.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [What a run records](frames-and-stats.md)
+> [One iteration, step by step](one-iteration.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

@@ -49,7 +49,7 @@ on, and the node carried 78 different [genotypes](genotype.md "The identity of a
 An agent gains connections as its neighbours have children, about in
 proportion to those it has, but loses them a little faster, so the well
 connected drift back down
-([How the network grows](how-the-network-grows.md#who-gains-and-who-loses)).
+([How the network grows](how-agents-have-children.md#who-gains-and-who-loses)).
 
 A star's centre is kept another way. Now and then it has a child and hands it
 nearly all its connections ([How agents have children](how-agents-have-children.md)):

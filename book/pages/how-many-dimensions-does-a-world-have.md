@@ -305,7 +305,7 @@ balls and 1.6 to 1.9 by walks throughout.)
   plateau from radius 3 to 10–14 and over two decades of walking times.
   Their random twins, with the same connections per agent, have none. The
   dimension is made by how the worlds are wired. The reason is in
-  [How the network grows](how-the-network-grows.md): every new connection is made
+  [How the network grows](how-agents-have-children.md#how-the-network-grows): every new connection is made
   inside a neighbourhood and none ever brings two agents closer together, so
   a world can only grow like a body grows, outwards, never by shortcuts.
 - **About three dimensions of room.** At 14,000 agents the worlds hold
@@ -357,5 +357,5 @@ To make every figure of this page: `python3 book_figures.py dimensions`.
 ← [Like next to like](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [The random twin: is a world a space?](random-twin.md) →
 
 > [!info]- Pages that link here (14)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

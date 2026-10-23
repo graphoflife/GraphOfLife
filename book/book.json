@@ -461,7 +461,7 @@
     },
     {
       "id": "how-agents-have-children",
-      "title": "How agents have children",
+      "title": "How births build the network",
       "file": "pages/how-agents-have-children.md",
       "topics": [
         "lives",
@@ -470,7 +470,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Which agents have children: the rich, the well connected, anyone? How much of its tokens does a parent give, and why do some shares come up again and again? How is a child joined to the world, and how often is it born cut off?"
+      "summary": "In the first baseline, B1, every new node of a world's network is a newborn agent, and every new connection is made at a birth. Only three or four agents in a hundred have a child in an iteration, and connections raise the chance more than wealth does."
     },
     {
       "id": "births-and-deaths",
@@ -524,7 +524,7 @@
     },
     {
       "id": "where-do-the-tokens-go",
-      "title": "Where do the tokens go?",
+      "title": "How unequal is a world, and who stays rich",
       "file": "pages/where-do-the-tokens-go.md",
       "topics": [
         "wealth"
@@ -535,31 +535,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "Who holds the tokens later? How unequal does a world become? Does inequality keep growing, or does it settle? Are the rich agents special in some way we can see?"
-    },
-    {
-      "id": "how-even-is-a-world",
-      "title": "How even is a world?",
-      "file": "pages/how-even-is-a-world.md",
-      "topics": [
-        "wealth"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How evenly are tokens, connections and genotypes spread over the agents? How many agents would hold the tokens, if each held an equal share and the tokens were as even as they are? How many genotypes are there, in effect? Do entropy and the Gini coefficient say the same thing?"
-    },
-    {
-      "id": "do-the-rich-stay-rich",
-      "title": "Do the rich stay rich?",
-      "file": "pages/do-the-rich-stay-rich.md",
-      "topics": [
-        "wealth"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "If an agent is rich now, how likely is it to be rich ten, a hundred, two hundred games later? How far does an agent move up or down the order of wealth? What becomes of the very richest?"
+      "summary": "The founders of a world start equal, but the first births end that, and from then on a world is moderately unequal. Its Gini coefficient stays near 0.47, and the richest tenth of its agents hold about 42% of its tokens."
     },
     {
       "id": "gains-and-losses",
@@ -833,19 +809,6 @@
       "status": "analysed",
       "added": "2026-10-08",
       "summary": "What happens to the founders' ring? How many connections does an agent have, and how unequally are they spread? Is the network a tree, a web, or something in between?"
-    },
-    {
-      "id": "how-the-network-grows",
-      "title": "How the network grows",
-      "file": "pages/how-the-network-grows.md",
-      "topics": [
-        "network",
-        "lives"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "Do the well connected gain more connections than the poorly connected? In proportion to what they have? Do they lose them in proportion too? Do agents gather connections as they grow old, so that the oldest are the hubs?"
     },
     {
       "id": "the-core-of-a-world",

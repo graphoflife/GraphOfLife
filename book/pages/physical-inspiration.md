@@ -225,7 +225,7 @@ tokens, behaves almost like a computer solving the heat equation on its own
 network — down to a numerical artefact. An explicit step of the heat
 equation that moves more than half of a cell's content to its neighbours
 overshoots, and the solution flips about its resting value every step. A hub
-keeps only 1/(*d* + 1) of its tokens, and [Do the rich stay rich?](do-the-rich-stay-rich.md)
+keeps only 1/(*d* + 1) of its tokens, and [Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)
 found exactly that flip: wealth swings between hubs and leaves with a period
 of two games.
 
@@ -249,7 +249,7 @@ frequency would show as a peak in a power spectrum
 ([The power spectrum](power-spectrum.md)); the spectrum of the number
 of agents shows none, only the smooth slope of a random walk
 ([Power laws, real and apparent](power-laws-real-and-apparent.md)). The two-game swing of
-[Do the rich stay rich?](do-the-rich-stay-rich.md) is no such wave: it is the
+[Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich) is no such wave: it is the
 overshoot of a step that is too large, damped in every game, and it carries
 nothing from place to place. In physics a frequency is
 an energy (*E* = *hν*); whether the rate of an exchange could play that part
@@ -522,5 +522,5 @@ part of the notebook (see [the contents](../README.md)):
 **Also about:** [Start here](../README.md#start-here).
 
 > [!info]- Pages that link here (16)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The even split](even-split.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

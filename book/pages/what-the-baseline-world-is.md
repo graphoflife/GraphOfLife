@@ -109,11 +109,11 @@ worlds of 10,000 tokens are given in brackets where they differ.
   same ([What agents say to each other](what-agents-say-to-each-other.md)).
 - **An order of wealth that is half forgotten in fifty to a hundred games**,
   and rich agents with one connection that die three times as often as other
-  leaves ([Do the rich stay rich?](do-the-rich-stay-rich.md)).
+  leaves ([Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)).
 - **Connections gained in proportion to the connections an agent has**
   (as *k*^1.02) and lost faster (as *k*^1.20), and **no new connection ever
   bringing two agents closer**
-  ([How the network grows](how-the-network-grows.md)).
+  ([How the network grows](how-agents-have-children.md#how-the-network-grows)).
 - **Likeness that fades within two or three steps**: tokens, age,
   connections and kin alike ([Like next to like](like-next-to-like.md)).
 - **A finite [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")**: 2.8 by how the room within *r* steps grows (2.3 at
@@ -210,7 +210,7 @@ measurements after them, follows from that one number:
   walk would: as if each token stepped, game after game, to its agent or to a
   neighbour picked at random ([Where the tokens flow](where-the-tokens-flow.md)).
   It does so down to the two-game rhythm of wealth that a random walk shows on
-  [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") and leaves ([Do the rich stay rich?](do-the-rich-stay-rich.md)).
+  [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") and leaves ([Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)).
 - An agent's tokens are set by its place, its connections plus one, and not
   by how it plays ([How properties scale together](how-properties-scale-together.md)).
   In the long run such a walk visits each agent in proportion to its
@@ -232,7 +232,7 @@ the notebook changed. It was not enough: it broke the worlds, as
 #### A space, not a small world
 
 New connections are only ever made inside a neighbourhood, and none brings
-two agents closer ([How the network grows](how-the-network-grows.md)). So a
+two agents closer ([How the network grows](how-agents-have-children.md#how-the-network-grows)). So a
 world grows as a body does. It does not become a "small world", in which
 everyone is a few steps from everyone. It has a finite dimension
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)),
@@ -970,5 +970,5 @@ the rule changes of both aims will be tested together where they coincide.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How agents have children](how-agents-have-children.md) · [The estate of the dead](estate.md) · [How even is a world?](how-even-is-a-world.md) · [Gains and losses](gains-and-losses.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

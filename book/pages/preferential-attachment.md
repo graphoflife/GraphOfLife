@@ -38,7 +38,7 @@ from vanishing.
 
 ## Where it is used
 
-[How the network grows](how-the-network-grows.md) measures both kernels
+[How the network grows](how-agents-have-children.md#how-the-network-grows) measures both kernels
 in the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds. [Power laws, real and apparent](power-laws-real-and-apparent.md)
 had proposed preferential attachment, reached by copying, as the source of
 the heavy tail of the connections.
@@ -67,5 +67,5 @@ the heavy tail of the connections.
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
 > [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How the network grows](how-the-network-grows.md)
+> [Glossary](glossary.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md)
 <!-- /turns -->

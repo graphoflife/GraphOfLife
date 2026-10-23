@@ -186,7 +186,7 @@ The well connected gain connections in proportion to their connections:
 [preferential attachment](preferential-attachment.md "The well connected gaining new connections faster than the poorly connected.") (Barabási and Albert 1999), reached by copying, as in
 the "duplication" models of protein networks (Vázquez, Flammini, Maritan and
 Vespignani 2003; Chung, Lu, Dewey and Galas 2003). Preferential attachment on
-its own gives γ = 3. [How the network grows](how-the-network-grows.md) has measured
+its own gives γ = 3. [How the network grows](how-agents-have-children.md#how-the-network-grows) has measured
 it here: an agent gains connections in proportion to those it has (as
 *k*^1.02), and loses them a little faster (as *k*^1.20), which bends the tail
 down at the top. Whether this is what makes the tail is still a hypothesis:
@@ -357,5 +357,5 @@ To make every figure of this page: `python3 book_figures.py powerlaws`.
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (11)
-> [Where do the tokens go?](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How the network grows](how-the-network-grows.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Fitting a power law properly](power-law-fit.md) · [The power spectrum of a time series](power-spectrum.md)
+> [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Fitting a power law properly](power-law-fit.md) · [The power spectrum of a time series](power-spectrum.md)
 <!-- /turns -->

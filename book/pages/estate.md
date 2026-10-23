@@ -108,6 +108,6 @@ them had 12 to 23.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)
 <!-- /turns -->
