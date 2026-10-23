@@ -75,10 +75,10 @@ fewer.
 
 - [A world's life](a-worlds-life.md): the four [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 10,000 tokens that
   died out, one of them in its fourth iteration.
-- [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md):
+- [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
   four of ten worlds of 5,000 tokens died out when their brains could see, and
   eight of ten when those brains also changed only when copied.
-- [Who dies, and why](who-dies-and-why.md): all ten [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") worlds that kept
+- [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why): all ten [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") worlds that kept
   nothing at home died out, within 26 to 47 iterations.
 - [How this notebook is written](how-this-notebook-is-written.md): the rule
   that the dead are counted apart.
@@ -110,6 +110,6 @@ fewer.
 
 ← [How a brain changes](mutation.md) · [How the simulation works](../README.md#how-the-simulation-works)
 
-> [!info]- Pages that link here (10)
-> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [The settled life of a world](settled-life.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [The settled life of a world](settled-life.md)
 <!-- /turns -->

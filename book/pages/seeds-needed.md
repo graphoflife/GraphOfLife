@@ -72,5 +72,5 @@ and 19 seeds are enough ([How much does the seed decide?](how-much-does-the-seed
 ← [Permutation tests](permutation-test.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The Wilson interval](wilson-interval.md) →
 
 > [!info]- Pages that link here (7)
-> [How this notebook is written](how-this-notebook-is-written.md) · [Seeds and the random stream](random-numbers.md) · [What the baseline world is](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How worlds are measured](how-worlds-are-measured.md) · [Pilot worlds](pilot-worlds.md) · [Spread between worlds](spread-between-worlds.md)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How worlds are measured](how-worlds-are-measured.md) · [Pilot worlds](pilot-worlds.md) · [Spread between worlds](spread-between-worlds.md)
 <!-- /turns -->

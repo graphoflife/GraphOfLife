@@ -50,7 +50,7 @@ themselves to death, and with smaller brains that see. Several of its changes
 answer questions this page asked.
 
 **The worlds.** The numbers are those of the thirty B1 worlds of 100,000
-[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md). This page was first written from
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](a-worlds-life.md#thirty-worlds). This page was first written from
 thirty worlds of 10,000 tokens; where those differ, both are given.
 
 <!-- runs E10 -->
@@ -126,7 +126,7 @@ only its brain is replaced
 **How brains spread, and where new ones come from.** One dot per world: means over the iterations sampled every 25 from 500 on. From the left: children born in a reproduction phase; nodes won in a game by a neighbour, each of which takes on a copy of the winner's brain; genotypes that appear for the first time in the frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for the first time after a game (every brain is offered a change at its end). On a logarithmic axis.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -171,7 +171,7 @@ gathered 57% of all the tokens, staked them at home where nobody could outbid
 them, and had child after child: a *queen*. B2 uses *h* = 1.5, and keeps a
 share of every agent's tokens at home. Under these rules no queen formed in
 the pilots, and conquest settled between a few and about ten per cent of the
-nodes a game ([Who dies, and why](who-dies-and-why.md)).
+nodes a game ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
 
 Even so, a brain in B2 still spreads mostly by conquest. In B2's worlds of
 10,000 tokens, 5.6 nodes per hundred agents change hands in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
@@ -216,7 +216,7 @@ only when it is copied: into a newborn, or into a node its owner has just won.
 Tried first on its own, the rule did harm. Experiment 13 gave B1 worlds of
 5,000 tokens brains with one hidden layer of 16 units. Such brains respond to
 what they see far more than B1's five layers do
-([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)).
+([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
 Of ten such worlds, four died out — and eight of ten, when their brains also
 changed only when copied. None of the ten unchanged B1 worlds did. A stricter
 variant, which changed a brain only when it was copied into a newborn, froze a
@@ -227,7 +227,7 @@ that is not copied stays itself. What harmed the worlds of Experiment 13 was a
 drain: their births fell short of what the cull took. B2's other rules stop
 worlds from breaking and starving, and so remove the drain
 ([A world that cannot break](a-world-that-cannot-break.md),
-[Who dies, and why](who-dies-and-why.md)). How long a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") now stays like
+[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") now stays like
 its ancestor has not been measured.
 
 ## Hubs are places
@@ -351,7 +351,7 @@ parent always keeps at least one token
 ([`keep_home`](settings.md#keep_home)), and a child gets at least ten
 ([`min_child`](settings.md#min_child)): a parent that would give fewer has no
 child. So a jump to "give everything" no longer kills the parent
-([Who dies, and why](who-dies-and-why.md)). The share function itself is
+([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). The share function itself is
 unchanged, and a smooth one has not been tried.
 
 ## Every token at stake, every game
@@ -378,7 +378,7 @@ on it keep its agent alive at zero tokens, for one game.
 [`keep_home`](settings.md#keep_home). A share of an agent's tokens stays on
 its own node whatever its brain says — not out of the game, but always
 defending it. The share is rounded up, so at least one token stays home, and
-the brain stakes the rest ([Who dies, and why](who-dies-and-why.md)).
+the brain stakes the rest ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
 
 How much is kept turned out to matter. In pilot worlds of brains that see,
 agents that kept nothing staked themselves to death, and the worlds starved
@@ -557,9 +557,9 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
   one table.
 - [A world that cannot break](a-world-that-cannot-break.md): the local rules
   under which no world splits.
-- [Who dies, and why](who-dies-and-why.md): a home advantage, a share kept at
+- [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why): a home advantage, a share kept at
   home, and death by age.
-- [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md):
+- [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution):
   the obstacles to open-ended evolution, and what to change.
 
 ## How our view changed
@@ -567,7 +567,7 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 - **14 October 2026.** This page proposed that brains change only when they
   are copied, to end variation in the living. Tried on its own with brains
   that see, the rule did harm: eight worlds in ten died out instead of four
-  ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)).
+  ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
   B2 keeps it, but only beside rules that stop worlds breaking and starving.
 - **14 October 2026.** The page proposed letting separated pieces live on, with
   a child joined, rarely, to an agent anywhere, so that they could meet again.
@@ -578,7 +578,7 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
   against B1. B2 changed three of them together instead, and Experiments 14
   and 15 then changed B2's rules one at a time
   ([A world that cannot break](a-world-that-cannot-break.md),
-  [Who dies, and why](who-dies-and-why.md)).
+  [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
 - **14 October 2026.** From 11 October the page said that a single game had
   cut off two thirds of a world. It was half: 9,460 agents, the largest cut in
   the thirty worlds ([How a world breaks](how-a-world-breaks.md)).
@@ -595,6 +595,6 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (13)
-> [The brain](the-brain.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [Who dies, and why](who-dies-and-why.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [How even is a world?](how-even-is-a-world.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [!info]- Pages that link here (12)
+> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How ages change over a world's life](how-ages-change.md) · [How agents have children](how-agents-have-children.md) · [How even is a world?](how-even-is-a-world.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where the tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

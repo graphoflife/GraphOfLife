@@ -64,15 +64,15 @@ Experiment 2's).
 | E09 | How fast should brains change? | B2 | *mutation 0.05* (mutation_probability = 0.05); *mutation 0.1* (mutation_probability = 0.1); *B2*; *mutation 0.4* (mutation_probability = 0.4); *mutation 0.8* (mutation_probability = 0.8) | 1–10 | 10,000 | 1,500 | 50 | [How fast should brains change?](how-fast-should-brains-change.md) |
 | E10 | Worlds of 100,000 tokens | B1 | *baseline* | 1–30 | 100,000 | 1,500 | 30 | [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) |
 | E12 | Does the baseline keep improving? | B1 | *baseline* | 1–10 | 5,000 | 1,000 | 10 | [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) |
-| E13 | Brains that see, and worlds that break | B1 | *baseline*; *one hidden layer* (hidden_layers = 16); *one hidden layer, change only when copied* (hidden_layers = 16, mutate_on_replication = on) | 1–10 | 5,000 | 1,500 | 30 | [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) |
+| E13 | Brains that see, and worlds that break | B1 | *baseline*; *one hidden layer* (hidden_layers = 16); *one hidden layer, change only when copied* (hidden_layers = 16, mutate_on_replication = on) | 1–10 | 5,000 | 1,500 | 30 | [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break) |
 | E14 | A world that cannot break | B2 | *all the rules*; *no mending* (mend_on_death = off); *any unused link lapses* (prune_needs = 0); *no links at birth* (birth_links = 0); *no valence* (valence = 0); *handover* (allow_handover = on) | 1–10 | 5,000 | 1,000 | 60 | [A world that cannot break](a-world-that-cannot-break.md) |
-| E15 | Who dies, and why | B2 | *B2*; *the last token kept* (keep_home = 0.01); *nothing kept* (keep_home = 0.0); *half kept* (keep_home = 0.5); *children of any size* (min_child = 1); *no old age* (max_age = 0) | 1–10 | 10,000 | 1,000 | 60 | [Who dies, and why](who-dies-and-why.md) |
+| E15 | Who dies, and why | B2 | *B2*; *the last token kept* (keep_home = 0.01); *nothing kept* (keep_home = 0.0); *half kept* (keep_home = 0.5); *children of any size* (min_child = 1); *no old age* (max_age = 0) | 1–10 | 10,000 | 1,000 | 60 | [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) |
 | E16 | Why evolution stops | B2 | *B2*; *no random inputs* (random_input_amount = 0) | 1–10 | 10,000 | 2,000 | 20 | [Why evolution stops](why-evolution-stops.md) |
 | E17 | Mixed at birth: ten long worlds | B2 | *mixed at birth* (mix_at_birth = on) | 1–10 | 10,000 | 10,000 | 10 | [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) |
-| E18 | Five mixed worlds, fifty thousand iterations | B2 | *mixed at birth* (mix_at_birth = on) | 2,4,5,6,10 | 10,000 | 50,000 | 5 | [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) |
+| E18 | Five mixed worlds, fifty thousand iterations | B2 | *mixed at birth* (mix_at_birth = on) | 2,4,5,6,10 | 10,000 | 50,000 | 5 | [Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations) |
 | E19 | Mixed at birth, with parents as mates | B2 | *mixed at birth, parents as mates* (mix_at_birth = on, mix_mates = parents) | 1–10 | 10,000 | 20,000 | 10 | [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) |
 | E20 | The candidates, played on: two worlds of engine rules | B2 | *links to strangers, a free reach, forced* (link_search = reach, link_consent = forced); *mixed at birth, the last token kept* (mix_at_birth = on, keep_home = 0.01) | 1 | 10,000 | 10,000 | 2 | [The candidates, played on](the-candidates-played-on.md) |
-| E21 | Five more seeds for the rules that held | B2 | *mixed at birth* (mix_at_birth = on); *mixed at birth, fast brain change* (mix_at_birth = on, mutation_probability = 0.8); *mixed at birth, no random inputs* (mix_at_birth = on, random_input_amount = 0); *mixed at birth, no revolutions* (mix_at_birth = on, allow_revolutions = off) | 3–7 | 10,000 | 10,000 | 20 | [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) |
+| E21 | Five more seeds for the rules that held | B2 | *mixed at birth* (mix_at_birth = on); *mixed at birth, fast brain change* (mix_at_birth = on, mutation_probability = 0.8); *mixed at birth, no random inputs* (mix_at_birth = on, random_input_amount = 0); *mixed at birth, no revolutions* (mix_at_birth = on, allow_revolutions = off) | 3–7 | 10,000 | 10,000 | 20 | [Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held) |
 <!-- /table -->
 
 Experiment 11 — one world of 204,800 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") for 100,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
@@ -437,6 +437,6 @@ in the Research tab).
 
 ← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a run records](frames-and-stats.md) →
 
-> [!info]- Pages that link here (3)
-> [B1 and B2: the two baselines](b1-and-b2.md) · [Healthy and rich](healthy-and-rich.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (4)
+> [B1 and B2: the two baselines](b1-and-b2.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

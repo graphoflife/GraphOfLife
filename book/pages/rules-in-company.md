@@ -200,5 +200,5 @@ waits its turn.
 [Changing the rules](../README.md#changing-the-rules) · [The switches the world was built with](the-switches-the-world-was-built-with.md) →
 
 > [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The random twin: is a world a space?](random-twin.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Room for the steadiest world](room-for-the-steadiest-world.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
 <!-- /turns -->

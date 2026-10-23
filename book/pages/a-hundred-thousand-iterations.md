@@ -17,7 +17,7 @@
 
 ## Why ask
 
-[What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) ended by saying that measuring the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world in every way had turned a vague
+[What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) ended by saying that measuring the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world in every way had turned a vague
 hope — that interesting things might emerge if we watch long enough — into
 a list of rules that stand in the way. That is a claim about time, and it
 has never been tested. The longest any world of this notebook has lived is
@@ -56,7 +56,7 @@ And two things say that nothing will change.
 - **The obstacles are rules.** A node's brain is replaced almost every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."),
   so the same two brains rarely meet twice; brains cannot see who is kin;
   and nothing an agent does creates anything that was not there before
-  ([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)). Time does not change a rule.
+  ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)). Time does not change a rule.
 - **The brains' rise has a ceiling.** By iteration 3,000 their first-layer
   weights already sit at the balance between [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."), which spreads them,
   and the rarer resets, which draw them back ([What the brains are like](what-the-brains-are-like.md)).
@@ -103,7 +103,7 @@ would not.
 > [!quote] The thesis of Experiment 11, written down before any of its runs existed
 > **The claim.** Time is not what is missing. A world of 204,800 tokens left for 100,000 iterations, thirty times longer than any world of this book has lived, goes on wandering, but within bounds it reaches in its first few thousand iterations, and nothing appears late that was not there early. Its agents do not learn to cooperate: they stake on kin as they stake on strangers, the same two brains still rarely face each other twice, and the brains stay nearly blind.
 >
-> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-measurements-say-about-open-ended-evolution.md)): a node's brain is replaced almost every game, so nobody meets anybody twice ([Chapter 38](do-agents-cooperate.md)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations ([Chapter 18](genotypes-and-lineages.md)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
+> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)): a node's brain is replaced almost every game, so nobody meets anybody twice ([Chapter 38](do-agents-cooperate.md)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations ([Chapter 18](genotypes-and-lineages.md)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
 >
 > **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent; [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."); births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
 >
@@ -205,11 +205,11 @@ frame that was not kept is a frame that has not been made again yet.
 - **The brains**, at every kept checkpoint: the gain and the probes of
   [What the brains are like](what-the-brains-are-like.md) — what a brain responds to,
   and how much.
-- **Everything of [Thirty worlds](thirty-worlds.md)**, as block means over
+- **Everything of [Thirty worlds](a-worlds-life.md#thirty-worlds)**, as block means over
   the whole run, set beside the bands of the baseline worlds and of the
   worlds of [Worlds of 100,000 tokens](worlds-of-100000-tokens.md).
 - **Later, from the kept checkpoints:** the tournament across time of
-  [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) — the brains of iteration 10,000 against those of
+  [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) — the brains of iteration 10,000 against those of
   iteration 90,000, in one world. A later population that beats an earlier
   one is adaptation that accumulates (P2 on the ladder of
   [What this notebook is about](what-this-notebook-is-about.md)).
@@ -274,5 +274,5 @@ windows of cooperation and the gains, and decides the thesis.
 ← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [What would count as open-ended evolution](open-ended-test.md) →
 
 > [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Healthy and rich](healthy-and-rich.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

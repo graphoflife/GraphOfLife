@@ -341,7 +341,7 @@ def births(ch: F.Chapter) -> None:
         series=out,
         caption="Each line is the median over the worlds, in stretches of 25 iterations, of a "
                 "count divided by the agents present when the phase began, times 100. The first "
-                "iterations run far above the top of the axis ([The first hundred iterations](the-first-hundred-iterations.md)).",
+                "iterations run far above the top of the axis ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["For every row, divide the count (`births` or `orphaned` in rows with "
                        "`phase` = 1; `starved` or `orphaned` in rows with `phase` = 2) by the "

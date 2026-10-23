@@ -372,31 +372,20 @@
     },
     {
       "id": "what-the-baseline-world-is",
-      "title": "What the baseline world is",
+      "title": "What B1 is, and what stood in its way",
       "file": "pages/what-the-baseline-world-is.md",
       "topics": [
-        "baselines"
+        "baselines",
+        "evolution"
       ],
       "kind": "overview",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What is a settled baseline world, in numbers? What do the pages on the baseline, taken together, suggest about how it works? What changes when a world is ten times larger, and what does not?"
-    },
-    {
-      "id": "thirty-worlds",
-      "title": "Thirty worlds",
-      "file": "pages/thirty-worlds.md",
-      "topics": [
-        "baselines"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "The study of the baseline looks at one kind of world, the baseline B1, from every side."
+      "summary": "The first baseline, B1, has been measured from every side, in thirty worlds of 100,000 tokens. All six theses written before its runs failed, and each failure taught something new about the world."
     },
     {
       "id": "a-worlds-life",
-      "title": "A world's life",
+      "title": "The life of a B1 world",
       "file": "pages/a-worlds-life.md",
       "topics": [
         "baselines",
@@ -408,19 +397,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "What does a world do over its 1,500 iterations? Does it grow to some size and stay there, or does it keep changing? Is \"the\" baseline world even a thing — do thirty worlds do the same? Do worlds die, and how close do they come?"
-    },
-    {
-      "id": "the-first-hundred-iterations",
-      "title": "The first hundred iterations",
-      "file": "pages/the-first-hundred-iterations.md",
-      "topics": [
-        "baselines"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How do a thousand founders, each with a random brain and a hundred tokens, become a world of more than ten thousand agents? Where do the agents come from in the youth, and how do they die? Whose descendants are the agents of a settled world?"
+      "summary": "The first baseline, B1, is studied through thirty worlds that differ only in their seed, each run for 1,500 iterations. In its youth a world booms from 1,000 founders to well over ten thousand agents, then crashes as its network breaks apart."
     },
     {
       "id": "how-much-does-the-seed-decide",
@@ -436,55 +413,27 @@
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "How different do thirty such worlds end up? Is the difference something each seed fixes for good, or does it come and go? How many seeds does an experiment need to see that a change of setting changed something?"
-    },
-    {
-      "id": "brains-that-see-and-worlds-that-break",
-      "title": "Brains that see, and worlds that break",
-      "file": "pages/brains-that-see-and-worlds-that-break.md",
-      "topics": [
-        "baselines",
-        "rules"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E13"
-      ],
-      "status": "analysed",
-      "added": "2026-10-12",
-      "summary": "What happens to a world when its agents' decisions follow what they see? Why does a world of seeing agents fall apart — what, exactly, breaks? What does that teach about the rules a world needs before evolution can build anything in it?"
+      "summary": "Thirty baseline worlds that differ only in their seed end up alike: at 100,000 tokens, their sizes vary by about a tenth of the mean."
     },
     {
       "id": "a-world-that-cannot-break",
-      "title": "A world that cannot break",
+      "title": "Building B2: a world that cannot break",
       "file": "pages/a-world-that-cannot-break.md",
       "topics": [
         "baselines",
-        "network"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E14"
-      ],
-      "status": "analysed",
-      "added": "2026-10-14",
-      "summary": "The rules of space: a newborn joins its parent and two of its neighbours; a death is mended; only redundant links lapse; a brain may choose only so many links; no handover. Space alone (no brains) and space under the game: the health bar of *How to tell a world that keeps evolving*."
-    },
-    {
-      "id": "who-dies-and-why",
-      "title": "Who dies, and why",
-      "file": "pages/who-dies-and-why.md",
-      "topics": [
-        "baselines",
+        "network",
+        "rules",
         "lives"
       ],
       "kind": "experiment",
       "experiments": [
+        "E13",
+        "E14",
         "E15"
       ],
       "status": "analysed",
       "added": "2026-10-14",
-      "summary": "The rules of demography and the exploits they invite: children spent as missiles, a hoarding queen with half the tokens, worlds of one-token agents; the last token kept at home, a longest life, a smallest child, a home share."
+      "summary": "B2, the notebook's second baseline, was built in three steps, each tested by an experiment. First, brains that see broke their worlds: not in one great cut, but by a steady bleeding of cut-off agents that births did not always replace (Experiment 13)."
     },
     {
       "id": "births-deaths-and-ages",
@@ -1344,38 +1293,6 @@
       "summary": "Does a world of twice the tokens hold twice the agents and twice the connections? Is a big world the same kind of world as a small one — as unequal, as diverse, as well connected per agent? Do big worlds settle down, or do they wander as much as small ones?"
     },
     {
-      "id": "births-as-rich-as-the-neighbours",
-      "title": "Births as rich as the neighbours",
-      "file": "pages/births-as-rich-as-the-neighbours.md",
-      "topics": [
-        "size",
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E32"
-      ],
-      "status": "analysed",
-      "added": "2026-10-20",
-      "summary": "Experiment 32: Experiment 31's estate worlds with a child that must start with at least the median holding of its parent's neighbours. The floor changed nothing: in a world of paupers the neighbours hold a token, below the ten every child gets. The paupers are made by the game within twenty iterations, not at birth; a world's size is a hundred times its births; and the estate worlds are spaces because their young are the parents."
-    },
-    {
-      "id": "the-floor-in-plain-b2-and-in-b1",
-      "title": "The floor in plain B2 and in B1",
-      "file": "pages/the-floor-in-plain-b2-and-in-b1.md",
-      "topics": [
-        "size"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E36",
-        "E37"
-      ],
-      "status": "ready",
-      "added": "2026-10-21",
-      "summary": "Experiments 36 and 37: the floor of *Births as rich as the neighbours* (a child never poorer than its parent's neighbours' median) in plain B2, whose least child is ten tokens, and in B1, whose least child is one: idle in one, binding in the other?"
-    },
-    {
       "id": "how-alike-the-agents-are",
       "title": "How alike the agents are",
       "file": "pages/how-alike-the-agents-are.md",
@@ -1539,19 +1456,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Every living agent's genotype descends, through the family tree, from one of the founders (Genotypes)."
-    },
-    {
-      "id": "what-the-measurements-say-about-open-ended-evolution",
-      "title": "What the measurements say about open-ended evolution",
-      "file": "pages/what-the-measurements-say-about-open-ended-evolution.md",
-      "topics": [
-        "evolution",
-        "baselines"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "What is the baseline world, now that it has been measured every way? Where does it stand on the ladder of What this notebook is about? What stands in the way of open-ended evolution, and which changes to the rules could remove it?"
     },
     {
       "id": "eras-and-contests",
@@ -2061,125 +1965,73 @@
     },
     {
       "id": "mixed-at-birth-ten-long-worlds",
-      "title": "Mixed at birth: ten long worlds",
+      "title": "Brains mixed at birth, in long worlds",
       "file": "pages/mixed-at-birth-ten-long-worlds.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E17"
-      ],
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "Brains mixed at birth in ten worlds of B2 for 10,000 iterations: rich, because their agents put off having children, but only half of them healthy, since health follows a size that drifts; evolution goes on."
-    },
-    {
-      "id": "five-mixed-worlds-fifty-thousand-iterations",
-      "title": "Five mixed worlds, fifty thousand iterations",
-      "file": "pages/five-mixed-worlds-fifty-thousand-iterations.md",
       "topics": [
         "healthy",
         "evolution"
       ],
       "kind": "experiment",
       "experiments": [
+        "E17",
         "E18"
       ],
       "status": "analysed",
       "added": "2026-10-16",
-      "summary": "The five worlds of Experiment 17 that met every mark, played on to 50,000 iterations: three died out, the two that lived grew larger and poorer, and evolution faded — a mixed world is mortal."
+      "summary": "Mixing a newborn's brain from its parent's and a neighbour's makes a B2 world smaller, so each of its agents holds more tokens."
     },
     {
       "id": "mixed-at-birth-with-parents-as-mates",
-      "title": "Mixed at birth, with parents as mates",
+      "title": "Who may be a mate",
       "file": "pages/mixed-at-birth-with-parents-as-mates.md",
       "topics": [
         "healthy"
       ],
       "kind": "experiment",
       "experiments": [
-        "E19"
-      ],
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "Experiment 19: if only an agent with a living child may be a mate, does a mixed world stop breeding itself to death? All ten worlds lived to 20,000 iterations and settled at about 2,000 agents, six in ten of them poor: the agents breed twice as eagerly, the worlds keep mixing's diversity and B2's network, and evolution goes on."
-    },
-    {
-      "id": "a-mate-that-pays-its-share",
-      "title": "A mate that pays its share",
-      "file": "pages/a-mate-that-pays-its-share.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
+        "E19",
         "E22"
       ],
       "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "Experiment 22: brains mixed at birth with a mate that pays the child as much as the parent, in four worlds to 5,000. Every world held its size far steadier than Experiment 17's of the same seed (spread 0.09 to 0.16 against 0.19 to 0.63) and none came near dying; healthy and diverse, but folded. The lab played the stopped pilots game for game."
+      "added": "2026-10-16",
+      "summary": "When brains are mixed at birth, a child's brain is half its parent's and half a mate's, but only the parent pays for the child."
     },
     {
       "id": "the-candidates-played-on",
-      "title": "The candidates, played on",
+      "title": "The candidates, played on and played again",
       "file": "pages/the-candidates-played-on.md",
       "topics": [
         "healthy"
       ],
       "kind": "experiment",
       "experiments": [
-        "E20"
-      ],
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "*Healthy and rich*'s candidates — worlds that met every mark with diverse agents at iteration 1,000 — played on to 10,000: five of nineteen held, eleven fell back (most into B2's poverty), three died out on the way; diversity wore off, no rich world stayed a space, evolution slowed. Experiment 20 shows the lab plays a pilot's world game for game."
-    },
-    {
-      "id": "five-more-seeds-for-the-rules-that-held",
-      "title": "Five more seeds for the rules that held",
-      "file": "pages/five-more-seeds-for-the-rules-that-held.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E21"
-      ],
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "Experiment 21: the rules whose candidate held over 10,000 iterations, in five new worlds each. None held more often than mixing alone (fast brain change two of five, no random inputs and no revolutions one each, against three); without random inputs or revolutions, three worlds died out."
-    },
-    {
-      "id": "the-searchs-best-world-in-new-seeds",
-      "title": "The search's best world, in new seeds",
-      "file": "pages/the-searchs-best-world-in-new-seeds.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
+        "E20",
+        "E21",
         "E24"
       ],
       "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "Experiment 24: the random search's best settings (Z/r2-25) in five new seeds. Every world was diverse (0.80 to 0.89), a wide space (2.6 to 2.75 times its twin) and rich; none met more than four marks (cut by one loss, about two-dimensional) and all were too even. The search's own world, played again game for game, met every mark only at its lucky moment."
+      "added": "2026-10-18",
+      "summary": "A candidate world meets every mark of the health bar at iteration 1,000, and its agents are more diverse than B2's. Played on to 10,000 iterations, most did not stay there: of nineteen, five held, eleven fell back and three died out."
     },
     {
       "id": "room-for-the-steadiest-world",
-      "title": "Room for the steadiest world",
+      "title": "Room and riches for the steadiest world",
       "file": "pages/room-for-the-steadiest-world.md",
       "topics": [
         "healthy",
-        "space"
+        "space",
+        "size"
       ],
       "kind": "experiment",
       "experiments": [
-        "E31"
+        "E31",
+        "E32",
+        "E36",
+        "E37"
       ],
-      "status": "analysed",
+      "status": "ready",
       "added": "2026-10-19",
-      "summary": "Experiment 31: Experiment 19's world given each rule that keeps a world's room. Every rule unfolded it, and each paid in its own coin: the estates to births made healthy three-dimensional spaces of poor, alike agents; no old age made agents of one age; no mending kept the riches but left cuts (one world missed only that). Half the picture solved; the next rule asks more of a birth."
+      "summary": "The steadiest world the notebook has, Experiment 19's, lives long and its agents differ, but it is folded: a small world, not a space. Experiment 31 gave it, one at a time, four rules that keep a world's room; each gave room and took something else."
     },
     {
       "id": "a-screen-of-random-worlds",

@@ -121,7 +121,7 @@ mixing came: with every unused link lapsing, four or five marks; with handover,
 three.
 
 The marks hide a risk that [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) found and
-[Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) saw end in
+[Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations) saw end in
 death: a mixed world's size drifts. Several of the richest combinations are
 small at 1,000 iterations — 270 agents with a sense of family, 291 without
 random inputs, 325 with units that hold a token, 366 with brains that grow — and
@@ -177,7 +177,7 @@ it most where the agents stay rich.
   mark join the candidates of [Healthy and rich](healthy-and-rich.md) (`research/oee/candidates.md`).
 
 **Related notes:** [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
-[Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) ·
+[Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations) ·
 [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) ·
 [Who inherits?](who-inherits.md) ·
 [Healthy and rich](healthy-and-rich.md) ·
@@ -188,6 +188,6 @@ it most where the agents stay rich.
 
 ← [Links to strangers](links-to-strangers.md) · [Changing the rules](../README.md#changing-the-rules) · [Eight switches at once](eight-switches-at-once.md) →
 
-> [!info]- Pages that link here (11)
-> [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (10)
+> [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

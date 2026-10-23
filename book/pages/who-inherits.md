@@ -254,7 +254,7 @@ other worlds tie or swing.
   played.
 
 **Related notes:** [Every setting](settings.md#redistribution) ·
-[Who dies, and why](who-dies-and-why.md) ·
+[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) ·
 [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
 [Healthy and rich](healthy-and-rich.md) ·
 [Why evolution stops](why-evolution-stops.md) ·
@@ -268,5 +268,5 @@ other worlds tie or swing.
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
 > [!info]- Pages that link here (13)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Rules in company](rules-in-company.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

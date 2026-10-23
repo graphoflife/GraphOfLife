@@ -17,7 +17,7 @@ time, and each paid for one line with another:
 - mixed [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") make rich worlds that fold;
 - worlds without mending can be cut
   ([Room for the steadiest world](room-for-the-steadiest-world.md) and
-  [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md)).
+  [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours)).
 
 The [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") decide what grows, and one at a time is slow. This page
 follows the author's plan of 22 October 2026 instead: rounds of fifty worlds
@@ -117,7 +117,7 @@ be by chance.
 > [!quote] The thesis of Experiment 38, written down before any of its runs existed
 > **The claim.** Among fifty worlds whose settings are drawn at random — every on/off rule on in half of them, every number at its default in three of four, messages and noise absent in one of ten — at least one is healthy at iteration 2,000: alive; decentralised and resilient by every mark of the health bar but the dimension; a true space, of 2 to 4 dimensions and at least 1.5 times as wide as its random twin; as diverse as B2's median world in its agents and in its decisions; and no more even than B2's least even world.
 >
-> **Why it would be so.** Every healthy-looking world so far was found by changing B2 one rule at a time, and each paid for one line with another: the estates make spaces of paupers, mixed brains rich worlds that fold, no mending worlds that can be cut (Chapters [100](room-for-the-steadiest-world.md) and [101](births-as-rich-as-the-neighbours.md)). Settings drawn together reach combinations no single change would, and the round is judged by every line at once. B2's own rules come together too rarely for a random draw to meet them, so two worlds of B2 at 20,000 tokens are played beside the fifty for reference. A healthy world is rare: of 45 worlds of B2's kind read at 2,000, ten met the health bar's marks at a dimension of 2 to 4, before width, diversity and evenness were asked for. The thesis asks for one in fifty.
+> **Why it would be so.** Every healthy-looking world so far was found by changing B2 one rule at a time, and each paid for one line with another: the estates make spaces of paupers, mixed brains rich worlds that fold, no mending worlds that can be cut (Chapters [100](room-for-the-steadiest-world.md) and [101](room-for-the-steadiest-world.md)). Settings drawn together reach combinations no single change would, and the round is judged by every line at once. B2's own rules come together too rarely for a random draw to meet them, so two worlds of B2 at 20,000 tokens are played beside the fifty for reference. A healthy world is rare: of 45 worlds of B2's kind read at 2,000, ten met the health bar's marks at a dimension of 2 to 4, before width, diversity and evenness were asked for. The thesis asks for one in fifty.
 >
 > **It holds if:** At least one of the fifty drawn worlds meets all five lines at 2,000 (research/screen/judge.py, with B2's lines from Experiment 16's ten worlds).
 >
@@ -196,8 +196,8 @@ be by chance.
 <!-- turns -->
 ---
 
-← [Room for the steadiest world](room-for-the-steadiest-world.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world)
+← [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world)
 
-> [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The random twin: is a world a space?](random-twin.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md)
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The random twin: is a world a space?](random-twin.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
 <!-- /turns -->

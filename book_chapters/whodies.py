@@ -72,7 +72,7 @@ def whodies(ch: F.Chapter) -> None:
                        "median over iterations 300 to 1,000; the bar is the median world. The thesis asked B2's "
                        "worlds to stay below a half and the worlds keeping only the last token to rise above two "
                        "thirds, seven times in ten each."),
-              recipe=recipe(RUNS, "Each run's game frames, `GraphOfLifeRuns/<run>/frames/` "
+              recipe=recipe(RUNS, "each run's game frames, `GraphOfLifeRuns/<run>/frames/` "
                                   "(`research/oee/checks/e15_thesis.py`)",
                             ["For every iteration from 300 to 1,000, read the frame after the game (frame 2t + 1) "
                              "and count the agents holding exactly one token, as a share of all.",
@@ -98,7 +98,7 @@ def whodies(ch: F.Chapter) -> None:
                            "drawn." + (" A logarithmic axis: births fall a hundredfold without old age." if rate
                                        else " From iteration 100, once the founders' first riches are spent."
                                        if start else "")),
-                  recipe=recipe(RUNS, "From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded "
+                  recipe=recipe(RUNS, "each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded "
                                       "phase (see [What a run records](frames-and-stats.md))",
                                 [f"Read `{stat}` from the rows of phase {phase}"
                                  + (", divided by the agents that faced the phase (`nodes_before`), times 100"
@@ -112,7 +112,7 @@ def whodies(ch: F.Chapter) -> None:
               caption=("Each dot is a world: the share of a world its brains of iteration 1,000 hold after 100 "
                        "iterations against those of iteration 500, the mean of two contests, one in each era's world; "
                        "the bar is the median world. B2 from its ten worlds, each other rule from five."),
-              recipe=recipe(RUNS, "Each run's archive, `GraphOfLifeRuns/<run>/archive/` "
+              recipe=recipe(RUNS, "each run's archive, `GraphOfLifeRuns/<run>/archive/` "
                                   "(`GraphOfLifeRuns/.pilots/lab_rejudge_T100.json`, `long_steps.json`)",
                             ["Seat the brains of iteration 500 and of iteration 1,000 on alternate agents of each "
                              "era's world and play it on for 100 iterations, the length of an agent's life "

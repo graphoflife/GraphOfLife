@@ -14,7 +14,7 @@ So what shape comes out?
 > - Is the network a tree, a web, or something in between?
 > - How far apart are two agents?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 the thirty of 10,000 tokens this page was first written from are given
 beside them.
 
@@ -119,7 +119,7 @@ looks the same in kind: more than half of all agents in the core (58% and
 **How many connections agents have.** Of all agents alive after the last game of the 30 worlds, the share that have at least d connections, for every d. At the start a founder had 10 on average (the grey line) — every one of them exactly that many before the ring's rewiring ([The starting ring](starting-ring.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -151,7 +151,7 @@ log–log axes rather than running straight, so it is not a clean [power law](po
 **Core, leaves and bridges.** Three shares, after every game of the 30 baseline worlds. Left: the share of agents in the core ([Core, trees and leaves](core-trees-leaves.md)), measured every 25 iterations. Middle: the share of agents with exactly one connection, after every game. Right: the share of connections that are bridges ([Bridges](bridges.md)), every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -190,7 +190,7 @@ connections are bridges.
 **Clustering.** Three times the number of triangles divided by the number of connected triples ([Clustering](clustering.md)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -217,7 +217,7 @@ the moment it is born.
 **Steps between two agents.** For each world (blue): its mean number of agents and the mean number of steps along connections from one agent to another, both averaged over iterations 500–1,499. Grey: the rough distance in a random network with the same number of agents N and connections per agent k, ln N / ln k.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -368,6 +368,6 @@ To make every figure of this page: `python3 book_figures.py shape`.
 
 [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How the network grows](how-the-network-grows.md) →
 
-> [!info]- Pages that link here (17)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [A world's life](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How even is a world?](how-even-is-a-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges](bridges.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (15)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How even is a world?](how-even-is-a-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges](bridges.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

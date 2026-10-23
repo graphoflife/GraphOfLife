@@ -93,7 +93,7 @@ Earlier experiments read the same lines from a run's recorded statistics, as
 
 - [A world that cannot break](a-world-that-cannot-break.md): B2's rules were
   built to meet it.
-- [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md):
+- [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
   no world there held.
 - [Healthy and rich](healthy-and-rich.md): every world read against it; on
   17 October 2026, 99 of 624 met all seven marks.

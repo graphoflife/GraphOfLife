@@ -84,7 +84,7 @@ than brains:
 
 Alliances show that a rule which makes help mutual is adopted quickly. What
 they did not show is [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."): one convention spreads, the world
-becomes peaceful, and conquest — the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") of selection here — nearly stops.
+becomes peaceful, and conquest — the engine of selection here — nearly stops.
 The open question is a rule under which cooperation is adopted *and*
 competition between groups goes on.
 
@@ -100,6 +100,6 @@ competition between groups goes on.
 
 [Groups and cooperation](../README.md#groups-and-cooperation) · [Do agents cooperate?](do-agents-cooperate.md) →
 
-> [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 <!-- /turns -->

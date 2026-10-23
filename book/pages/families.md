@@ -44,7 +44,7 @@ eight iterations, so the climb usually goes a few steps.
 
 Before iteration 8, "eight iterations ago" is before the world began: the
 climb ends at the founders, and the count is how many of the founders still
-have descendants ([The first hundred iterations](the-first-hundred-iterations.md)).
+have descendants ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
 
 ## In the code
 
@@ -67,6 +67,6 @@ when a run had last been paused.
 
 ← [Brain diversity](brain-diversity.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [The common ancestor of the living](common-ancestor.md) →
 
-> [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Who helps whom](who-helps-whom.md) · [One world, many colours](one-world-many-colours.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (9)
+> [Glossary](glossary.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Who helps whom](who-helps-whom.md) · [One world, many colours](one-world-many-colours.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

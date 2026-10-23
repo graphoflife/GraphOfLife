@@ -214,7 +214,10 @@
         "engine"
       ],
       "page": "the-lab",
-      "says": "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."
+      "says": "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.",
+      "not": [
+        "engine of"
+      ]
     },
     {
       "name": "pilot",
@@ -548,6 +551,18 @@
     ],
     "power-laws-real-and-apparent": [
       "extinction"
+    ],
+    "healthy-and-rich": [
+      "candidate"
+    ],
+    "the-candidates-played-on": [
+      "candidate"
+    ],
+    "mixed-at-birth-ten-long-worlds": [
+      "candidate"
+    ],
+    "room-for-the-steadiest-world": [
+      "candidate"
     ]
   }
 }

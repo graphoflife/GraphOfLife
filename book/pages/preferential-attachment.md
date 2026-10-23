@@ -67,5 +67,5 @@ the heavy tail of the connections.
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
 > [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [A world that cannot break](a-world-that-cannot-break.md) · [How the network grows](how-the-network-grows.md)
+> [Glossary](glossary.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How the network grows](how-the-network-grows.md)
 <!-- /turns -->

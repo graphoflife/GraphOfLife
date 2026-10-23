@@ -15,7 +15,7 @@ steps along [connections](the-world.md#the-network "A link between two agents of
 >   from closeness itself?
 > - Do kin live together, and in territories?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -90,7 +90,7 @@ means like beside like, a negative one unlike beside unlike.
 **Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world, the mean over five moments (after the games of iterations 500, 750, 1,000, 1,250 and 1,499); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero; the last column is the assortativity of [How properties scale together](how-properties-scale-together.md), taken of ln k instead of k.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -151,7 +151,7 @@ Now measure the same correlations between agents 2, 3, … 15 steps apart, the
 **How alike, how far apart.** For pairs of agents r steps apart, the correlation of their tokens, ages and connections (as in the figure above), for r = 1 to 15. For each world, pairs from breadth-first searches out of 150 agents drawn at random at each of the five moments; the coloured line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. Grey dashes: the median when each agent's tokens (or age) are first shuffled among the agents with about as many connections (1, 2, 3–4, 5–9, 10–49, 50 and more) — what an agent's place in the network explains without any closeness of its own.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -189,7 +189,7 @@ together?
 **Kin, near and far.** For pairs of agents r steps apart (as in the figure above), the share that carry the same genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: a straight falling line would be a relatedness that halves over a fixed number of steps. The line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. From 9 steps on, most worlds have no such pair at all, and none has a twentieth of what chance would give.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -270,6 +270,6 @@ To make every figure of this page: `python3 book_figures.py alike`.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (10)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How alike at a distance](correlation-function.md) · [How different are the agents?](how-different-are-the-agents.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (9)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How alike at a distance](correlation-function.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

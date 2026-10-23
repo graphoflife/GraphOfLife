@@ -86,7 +86,7 @@ six links rarely leaves the neighbourhood.
 > [!example]- How to make this figure
 > **Runs.** Batch K's 24 pilot worlds — B2 at 10,000 tokens with `link_search` = jump, walk or reach, `link_steering` = random or looking and `link_consent` = mutual or forced, seeds 1 and 2, 1,000 iterations (`GraphOfLifeRuns/.pilots/K/`, `research/oee/pilots/make_jobs_TU.py`) — and B2 itself with the same seeds (`P/B2-s1`, `-s2`).
 >
-> **Data.** From Each world's `series.jsonl` and its checkpoint at 1,000 (`GraphOfLifeRuns/.pilots/k_links.json`).
+> **Data.** From each world's `series.jsonl` and its checkpoint at 1,000 (`GraphOfLifeRuns/.pilots/k_links.json`).
 >
 > 1. Average the network rows of iterations 500 to 1,000.
 > 2. Count the agents with three tokens or fewer in the checkpoint at 1,000.
@@ -169,6 +169,6 @@ a smaller world gives a later brain more room to win, this batch cannot say.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (4)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The candidates, played on](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (5)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

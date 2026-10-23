@@ -16,7 +16,7 @@ classic setting for the evolution of signals, from Lewis's signalling [games](on
 > - Do kin speak alike? Could an agent recognise its kin by what they say?
 > - How many of the 30 numbers are used?
 
-The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -217,12 +217,12 @@ What is missing is a brain that can make it. A difference of 0.6 in 30
 inputs reaches the stakes at a thousandth of its size, and the stakes split
 evenly anyway. Kin recognition is one comparison away, and blocked by the
 same obstacle as everything else in the brain. The heritable tags that
-[What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) proposes, so that kin can find each other, are
+[What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) proposes, so that kin can find each other, are
 already here: messages are heritable tags. A brain that can see is what
 it needs.
 
 > [!info] Added later: brains that see, and kin
-> [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) gave the brains
+> [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break) gave the brains
 > sight: one hidden layer of 16, a founder's gain of about 0.2. Whether
 > seeing brains use the names to tell kin from strangers has not been
 > measured yet. In the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), groups of kin shrank over time in
@@ -253,6 +253,6 @@ To make every figure of this page: `python3 book_figures.py talk`.
 
 ← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Do the brains matter?](do-the-brains-matter.md) →
 
-> [!info]- Pages that link here (7)
-> [Messages](messages.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [How many directions a cloud of points uses](participation-ratio.md)
+> [!info]- Pages that link here (6)
+> [Messages](messages.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [How many directions a cloud of points uses](participation-ratio.md)
 <!-- /turns -->

@@ -151,7 +151,7 @@ several agents acting together.
 - **Muller plots** (after Muller 1932) draw, stacked over time, the share of a
   population that descends from each of several ancestors. A lineage taking
   over appears as a band that widens until it fills the picture
-  ([The first hundred iterations](the-first-hundred-iterations.md),
+  ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations),
   [Genotypes and lineages](genotypes-and-lineages.md); [Muller plots](muller-plot.md)).
 
 ## Measuring
@@ -258,5 +258,5 @@ several agents acting together.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 <!-- /turns -->

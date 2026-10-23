@@ -16,7 +16,7 @@ something quite different from what it seems to say.
 > - To whom are the well-connected joined?
 > - Does the size of an agent's gains and losses grow with its wealth?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -86,7 +86,7 @@ both are given.
 **Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](where-the-tokens-flow.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -149,7 +149,7 @@ joined pairs.
 **How an agent's neighbourhood closes, by its connections.** Agents alive after the last game of the 30 worlds, in classes of their connections k. Left: the geometric mean (the mean of the logarithms, turned back) of the clustering coefficient — the share of pairs of an agent's neighbours that are joined to each other — of the agents with k ≥ 2 and clustering above 0. Right: the geometric mean of the number of triangles an agent is a corner of, over the agents in at least one. Red: least squares on the logarithms of all those agents (not of the class means); grey: the slopes −1 and 2 for comparison.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -184,7 +184,7 @@ clustering falling as 1/*k*.
 **Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](assortativity.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -224,7 +224,7 @@ fraction of its wealth, |Δ| ∝ τ — Gibrat's law of proportionate growth
 **Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](scaling-relations.md)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -259,7 +259,7 @@ world's history.
   world, and they follow from two mechanisms — splitting stakes evenly and
   joining children to their parents' neighbours — that say nothing about what
   a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") computes. Structure that the rules alone fix is not where to look
-  for evolution; [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) asks where to look instead.
+  for evolution; [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) asks where to look instead.
 
 To make every figure of this page: `python3 book_figures.py scaling`.
 
@@ -268,6 +268,6 @@ To make every figure of this page: `python3 book_figures.py scaling`.
 
 ← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The geometry of a world](the-geometry-of-a-world.md) →
 
-> [!info]- Pages that link here (13)
-> [What the baseline world is](what-the-baseline-world-is.md) · [How ages change over a world's life](how-ages-change.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
+> [!info]- Pages that link here (12)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How ages change over a world's life](how-ages-change.md) · [Where do the tokens go?](where-do-the-tokens-go.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md)
 <!-- /turns -->

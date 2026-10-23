@@ -18,7 +18,7 @@ connections, and who loses them?
 > - Do agents gather connections as they grow old, so that the oldest are
 >   the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -114,7 +114,7 @@ of the network ([Preferential attachment and its kernel](preferential-attachment
 **Who gains and who loses connections.** Agents sorted by their number of connections k at the start of a phase, in classes of growing width (dots at the middle of each class). Green: the new connections an agent alive before and after a reproduction phase gained in it, per agent — to its own newborn child, to a neighbour's child, or handed over. Red: the connections an agent had after the reproduction phase and no longer had after the game that followed — cut for carrying nothing, or gone with it if it died — per agent. Pooled over the reproduction phases and games of every 25th iteration from 500 on, in the 30 worlds. Dashed: straight lines fitted on these logarithmic axes; dotted: a line of slope 1, in proportion to k.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -165,7 +165,7 @@ early. Is that so here?
 **Connections and age.** The agents alive after the last game of the 30 worlds, sorted by age — the iterations since their node was born — in classes doubling in width: the median number of connections of each class, with the band from its 25th to its 75th percentile, and the 99th percentile (dashed).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -220,5 +220,5 @@ To make every figure of this page: `python3 book_figures.py grows`.
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
 > [!info]- Pages that link here (9)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [How ages change over a world's life](how-ages-change.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How ages change over a world's life](how-ages-change.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Preferential attachment and its kernel](preferential-attachment.md) · [Like next to like](like-next-to-like.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
 <!-- /turns -->

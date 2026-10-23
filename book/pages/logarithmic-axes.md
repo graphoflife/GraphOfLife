@@ -16,7 +16,7 @@ Two consequences:
 
 - A quantity that grows by the same **factor** every step — doubling every
   three iterations, say — is a **straight line** against time on a
-  logarithmic value axis ([The first hundred iterations](the-first-hundred-iterations.md)).
+  logarithmic value axis ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
 - Zero and negative numbers cannot be drawn: log 0 does not exist. Figures
   with log axes leave such values out, and say so.
 
@@ -64,6 +64,6 @@ no better.
 
 ← [The Wilson interval](wilson-interval.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Muller plots](muller-plot.md) →
 
-> [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Lightning in every world](lightning-in-every-world.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Degree](degree.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [How worlds are measured](how-worlds-are-measured.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Fitting a straight line, and R²](least-squares.md) · [Fitting a power law properly](power-law-fit.md)
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The life of a B1 world](a-worlds-life.md) · [Lightning in every world](lightning-in-every-world.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Degree](degree.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [How worlds are measured](how-worlds-are-measured.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Fitting a straight line, and R²](least-squares.md) · [Fitting a power law properly](power-law-fit.md)
 <!-- /turns -->

@@ -51,7 +51,7 @@ lists them), so the difference has more than one candidate cause:
 
 - **Brains.** B1's brains have five hidden layers and pass on a thousandth of
   a change in what they see ([What the brains are like](what-the-brains-are-like.md));
-  B2's have one, and see ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)).
+  B2's have one, and see ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
   A blind brain can differ from another only in its constants.
 - **How the stake is made.** B1's brains spread their stake, and a spread
   stake changes little when the scores change; B2's go all in, and an all-in

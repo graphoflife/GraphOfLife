@@ -54,7 +54,7 @@ reproduction phase, 3.1 have a child.
 
 [One iteration, step by step](one-iteration.md) shows what an average
 iteration of a settled world does;
-[The first hundred iterations](the-first-hundred-iterations.md) the youth;
+[The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations) the youth;
 [Births, deaths and ages](births-deaths-and-ages.md) the rates over a
 world's life.
 
@@ -66,5 +66,5 @@ world's life.
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
 > [!info]- Pages that link here (8)
-> [One iteration, step by step](one-iteration.md) · [Who dies, and why](who-dies-and-why.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [What a run records](frames-and-stats.md)
+> [One iteration, step by step](one-iteration.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

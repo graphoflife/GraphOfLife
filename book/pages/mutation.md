@@ -36,7 +36,7 @@ neighbour wins a node, the node takes on a copy of the winner's brain, and
 that copy is offered a change, as a newborn's is. A brain that stays where it
 is never changes. The reason: in B1, 97% of new genotypes are made in brains
 that are not being copied, so a successful brain is worn away where it sits
-([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)).
+([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)).
 
 Each time, the brain changes **with probability** *p* = 0.2
 ([`mutation_probability`](settings.md#mutation_probability)). A uniform
@@ -150,5 +150,5 @@ In the code it is `Brain.mutate` and `Brain._perturb` in
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (17)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How even is a world?](how-even-is-a-world.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How even is a world?](how-even-is-a-world.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes and the family tree](genotype.md) · [Brain diversity](brain-diversity.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
 <!-- /turns -->

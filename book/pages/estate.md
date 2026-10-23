@@ -22,7 +22,7 @@ Who leaves an estate depends on the rules. In B1 the starved hold nothing, so
 the estate is the tokens of the cut off, who make three deaths in four
 ([What the baseline world is](what-the-baseline-world-is.md)). In B2 no agent
 can starve or be cut off, and every agent dies at age 100, so the estate is the
-tokens of the old ([Who dies, and why](who-dies-and-why.md)).
+tokens of the old ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
 
 **The baseline rule**, `uniform`, deals the pool in one random draw, each token
 to a survivor drawn with equal chance. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") settled B1 world of
@@ -81,7 +81,7 @@ met every mark of the [health bar](health-bar.md) and were true spaces, 2.0 to
 2.65 times as wide as their [random twins](random-twin.md). But about 5,000
 agents shared the 10,000 tokens, 1.9 each, and the
 [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") fell from 0.54–0.75 to 0.32–0.41. Experiment 32 found the
-arithmetic ([Births as rich as the neighbours](births-as-rich-as-the-neighbours.md)):
+arithmetic ([Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours)):
 such a world holds about a hundred agents for every birth an iteration, and the
 estates paid for 51 to 53 births an iteration, where the same world without
 them had 12 to 23.
@@ -98,7 +98,7 @@ them had 12 to 23.
 
 - [Births and the four ways to die](births-and-deaths.md): who dies, and where.
 - [Who inherits?](who-inherits.md): the experiment behind most of this page.
-- [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md): why
+- [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours): why
   a world paid for its births fills with poor agents.
 
 <!-- turns -->

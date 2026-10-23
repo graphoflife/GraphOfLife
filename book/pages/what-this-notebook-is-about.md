@@ -115,7 +115,7 @@ So the notebook turned from watching the rules to building them. It made a
 yardstick for evolution that keeps going, and a [health bar](health-bar.md) for
 the network. Then it tried rules meant to pass both, starting from the
 obstacles that
-[What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)
+[What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)
 lists.
 
 ## How the notebook is organised
@@ -129,7 +129,7 @@ one of them.
 - **The baselines B1 and B2.** The two sets of rules every experiment starts
   from ([B1 and B2: the two baselines](b1-and-b2.md)). Thirty worlds of the
   first, about 14,000 agents each, are looked at from every side
-  ([Thirty worlds](thirty-worlds.md)). The second is built so that its network
+  ([Thirty worlds](a-worlds-life.md#thirty-worlds)). The second is built so that its network
   cannot break ([A world that cannot break](a-world-that-cannot-break.md)).
 - **Agents' lives, wealth, the game and the flow of tokens, the shape of the
   network, the size of a world, and brains.** The baseline measured every way,
@@ -211,6 +211,6 @@ formula works.
 
 ← [Welcome](../README.md) · [Start here](../README.md#start-here) · [Glossary](glossary.md) →
 
-> [!info]- Pages that link here (12)
-> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How a brain changes](mutation.md) · [What the baseline world is](what-the-baseline-world-is.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md)
+> [!info]- Pages that link here (11)
+> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md)
 <!-- /turns -->

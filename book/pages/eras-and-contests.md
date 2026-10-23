@@ -99,7 +99,7 @@ alone can go round in a circle.
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 builds the yardstick on B1; [Why evolution stops](why-evolution-stops.md)
 applies it to B2; [Every era against three](every-era-against-three.md)
-plays fixed eras; [Who dies, and why](who-dies-and-why.md) compares rules by
+plays fixed eras; [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) compares rules by
 their contests; [Pilot worlds](pilot-worlds.md) plays the eras of pilots.
 
 ## Where to go next
@@ -112,7 +112,7 @@ their contests; [Pilot worlds](pilot-worlds.md) plays the eras of pilots.
 <!-- turns -->
 ---
 
-← [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) →
+[Does evolution keep going?](../README.md#does-evolution-keep-going) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) →
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 

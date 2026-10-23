@@ -60,7 +60,7 @@ where *m* is the number of rows in the stretch that hold the statistic.
 <!-- /figure -->
 
 A world spends its first hundred iterations or so in a **youth** unlike the
-rest of its life ([The first hundred iterations](the-first-hundred-iterations.md)), and then
+rest of its life ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)), and then
 **wanders** ([A world's life](a-worlds-life.md)). So when the notebook asks where a
 world **settles**, it takes the mean from iteration 500 to its end — its
 [settled life](settled-life.md).

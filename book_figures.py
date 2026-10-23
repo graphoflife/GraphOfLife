@@ -106,7 +106,13 @@ class Chapter:
 
 
 def recipe(runs: str, data: str, steps: Iterable[str]) -> str:
-    """How a figure is made, in the same three parts every time."""
+    """
+    How a figure is made, in the same three parts every time. The data is named
+    after "From", so a description that begins "From …" or "Each run's …" reads
+    as one sentence.
+    """
+    data = data[5:] if data.startswith("From ") else data
+    data = "each" + data[4:] if data.startswith("Each ") else data
     return (f"**Runs.** {runs}\n\n**Data.** From {data}.\n\n"
             + "\n".join(f"{i}. {step}" for i, step in enumerate(steps, 1)))
 

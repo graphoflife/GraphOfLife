@@ -34,7 +34,7 @@ does not tell them apart.
 
 ## In this notebook
 
-- [The first hundred iterations](the-first-hundred-iterations.md): the lines of
+- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations): the lines of
   the 100 founders in the first 300 iterations of the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1.
 - [Genotypes and lineages](genotypes-and-lineages.md): the families of
   the genotypes alive at a later moment, in two worlds.

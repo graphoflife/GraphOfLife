@@ -18,7 +18,7 @@ into.
 >   with the same numbers of connections have it?
 > - Does it change as a world grows from its first [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")?
 
-The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md).
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](a-worlds-life.md#thirty-worlds).
 
 <!-- runs E10 -->
 > [!info]- The runs behind this page
@@ -165,7 +165,7 @@ rising is the mark of a network that is not a space at all.
 **The same rulers, on the worlds.** The two rulers of the figure above, on the largest piece of each world after its last game. Blue: the 30 worlds of 100,000 tokens (about 13,800 agents each) — the line is the median of the worlds, the darker band the middle half and the paler band nine in ten. Red: for each, its random twin, a network with exactly as many connections at every agent but wired at random. Yellow: the three worlds of 409,600 tokens of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) (about 60,000 agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their random twins. Green dots: the median of the 26 worlds of 10,000 tokens that lived to the end, read the same way.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`). The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`). The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md); `python3 gol_lab.py run E02`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -279,7 +279,7 @@ a random network.
 **Dimension over a world's life.** The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, 500, 750, 1,000 and 1,499 of the 30 worlds, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, every 25 iterations, are drawn in [The geometry of a world](the-geometry-of-a-world.md).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](thirty-worlds.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -356,6 +356,6 @@ To make every figure of this page: `python3 book_figures.py dimensions`.
 
 ← [Like next to like](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [The random twin: is a world a space?](random-twin.md) →
 
-> [!info]- Pages that link here (15)
-> [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
+> [!info]- Pages that link here (14)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Lightning in every world](lightning-in-every-world.md) · [How the network grows](how-the-network-grows.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md)
 <!-- /turns -->

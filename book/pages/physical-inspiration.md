@@ -157,13 +157,13 @@ agent could draw its random numbers from a stream of its own, fixed by the
 seed, its id and the iteration — "counter-based" generators do exactly this
 (Salmon, Moraes, Dror and Shaw 2011), and keep a run exactly repeatable. The
 first two changes were proposed for quite another reason in
-[Questioning the mechanics](questioning-the-mechanics.md) and [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md):
+[Questioning the mechanics](questioning-the-mechanics.md) and [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution):
 they stand in the way of open-ended evolution.
 Physics and evolution, asked separately, point at the same rules.
 
 ### A word of care about long-range connections
 
-[What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) also proposed letting distant agents connect, to renew
+[What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) also proposed letting distant agents connect, to renew
 the world's shortcuts. Locality argues for care: a connection between two
 agents that were a hundred steps apart is a message that travelled a hundred
 steps in an instant. Births already respect the speed limit — a child joins
@@ -271,7 +271,7 @@ per agent are read as a temperature. Then comes a crash and a bottleneck —
 the families fall from a hundred to about twenty, and every later brain
 descends from a single founder — and then structure: inequality, hubs, a
 settled world after about a hundred iterations. The worlds of 100,000 tokens
-of [The first hundred iterations](the-first-hundred-iterations.md) do the same ten times
+of [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations) do the same ten times
 over, a little faster; their bottleneck keeps about 400 of their 1,000
 founders' lines, and three of thirty still descended from more than one
 founder after 1,500 iterations.
@@ -398,7 +398,7 @@ What to look for:
 > parent to child — in the longest dynasties for hundreds of iterations —
 > while the brain on it changes nearly every game. It is a place that lasts,
 > kept by the rules, not yet a group that does anything together
-> ([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)). And [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
+> ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)). And [Worlds of 100,000 tokens](worlds-of-100000-tokens.md)
 > found families holding patches of a world that widen as their lines age.
 
 ### Vacuum and matter
@@ -522,5 +522,5 @@ part of the notebook (see [the contents](../README.md)):
 **Also about:** [Start here](../README.md#start-here).
 
 > [!info]- Pages that link here (16)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [The even split](even-split.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What folds a world](what-folds-a-world.md) · [The spectral dimension](spectral-dimension.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

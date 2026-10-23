@@ -104,7 +104,7 @@ clustering fell to 0.27: about half was lost, but it is still far above the
 In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") cuts the connections that carried no tokens in it, so the
 ring is forgotten within a few iterations. It matters mainly as a fair,
 connected start: every founder can reach every other.
-[The first hundred iterations](the-first-hundred-iterations.md) follows what
+[The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations) follows what
 the founders make of it.
 
 ## Where to go next
@@ -115,7 +115,7 @@ the founders make of it.
   comes from.
 - [Clustering](clustering.md) and [Path length](path-length.md): the two
   measures a small world is judged by.
-- [The first hundred iterations](the-first-hundred-iterations.md): how the
+- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations): how the
   founders become a world.
 
 <!-- turns -->
@@ -123,6 +123,6 @@ the founders make of it.
 
 ← [Every setting](settings.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Seeds and the random stream](random-numbers.md) →
 
-> [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

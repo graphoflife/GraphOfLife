@@ -61,14 +61,10 @@ The rules of a world, step by step: tokens, agents and links, the game, births a
 The two standard worlds every experiment starts from: B1, the original rules, and B2, a world that cannot break, and how it was built.
 
 - [B1 and B2: the two baselines](pages/b1-and-b2.md)
-- [What the baseline world is](pages/what-the-baseline-world-is.md)
-- [Thirty worlds](pages/thirty-worlds.md)
-- [A world's life](pages/a-worlds-life.md)
-- [The first hundred iterations](pages/the-first-hundred-iterations.md)
+- [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
+- [The life of a B1 world](pages/a-worlds-life.md)
 - [How much does the seed decide?](pages/how-much-does-the-seed-decide.md)
-- [Brains that see, and worlds that break](pages/brains-that-see-and-worlds-that-break.md)
-- [A world that cannot break](pages/a-world-that-cannot-break.md)
-- [Who dies, and why](pages/who-dies-and-why.md)
+- [Building B2: a world that cannot break](pages/a-world-that-cannot-break.md)
 
 ### Agents' lives: births, deaths, ages
 
@@ -168,8 +164,6 @@ What sets how many agents a world holds, and how rich each is.
 
 - [What holds a world's size](pages/what-holds-a-worlds-size.md)
 - [How does a world's size follow its tokens?](pages/how-does-a-worlds-size-follow-its-tokens.md)
-- [Births as rich as the neighbours](pages/births-as-rich-as-the-neighbours.md)
-- [The floor in plain B2 and in B1](pages/the-floor-in-plain-b2-and-in-b1.md)
 
 ### Brains, and how alike agents are
 
@@ -193,7 +187,6 @@ What the brains are and compute, the families they make, and how different agent
 
 How to tell whether evolution goes on, why it stops, and what would count as open-ended evolution.
 
-- [What the measurements say about open-ended evolution](pages/what-the-measurements-say-about-open-ended-evolution.md)
 - [Eras and contests: does a world keep getting better?](pages/eras-and-contests.md)
 - [How to tell a world that keeps evolving](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [Why evolution stops](pages/why-evolution-stops.md)
@@ -252,14 +245,10 @@ The search for a world that is decentralised, resilient, about three-dimensional
 - [What makes a world interesting](pages/what-makes-a-world-interesting.md)
 - [The health bar](pages/health-bar.md)
 - [The diversity score](pages/diversity-score.md)
-- [Mixed at birth: ten long worlds](pages/mixed-at-birth-ten-long-worlds.md)
-- [Five mixed worlds, fifty thousand iterations](pages/five-mixed-worlds-fifty-thousand-iterations.md)
-- [Mixed at birth, with parents as mates](pages/mixed-at-birth-with-parents-as-mates.md)
-- [A mate that pays its share](pages/a-mate-that-pays-its-share.md)
-- [The candidates, played on](pages/the-candidates-played-on.md)
-- [Five more seeds for the rules that held](pages/five-more-seeds-for-the-rules-that-held.md)
-- [The search's best world, in new seeds](pages/the-searchs-best-world-in-new-seeds.md)
-- [Room for the steadiest world](pages/room-for-the-steadiest-world.md)
+- [Brains mixed at birth, in long worlds](pages/mixed-at-birth-ten-long-worlds.md)
+- [Who may be a mate](pages/mixed-at-birth-with-parents-as-mates.md)
+- [The candidates, played on and played again](pages/the-candidates-played-on.md)
+- [Room and riches for the steadiest world](pages/room-for-the-steadiest-world.md)
 - [A screen of random worlds](pages/a-screen-of-random-worlds.md)
 
 ### Methods and statistics

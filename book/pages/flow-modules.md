@@ -292,6 +292,6 @@ fifths.
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (7)
-> [Where tokens go](where-tokens-go.md) · [Lightning in every world](lightning-in-every-world.md) · [Flow modules and the map equation](map-equation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (8)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where tokens go](where-tokens-go.md) · [Lightning in every world](lightning-in-every-world.md) · [Flow modules and the map equation](map-equation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

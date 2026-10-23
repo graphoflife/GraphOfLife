@@ -18,7 +18,7 @@ statistic measured every 25 iterations, over 100.
 
 Because a world's first few hundred iterations are unlike the rest of its
 life. It starts with a boom and a crash
-([The first hundred iterations](the-first-hundred-iterations.md)), and its
+([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)), and its
 births, deaths and structure take hundreds of iterations to settle into the
 ranges they keep ([Births, deaths and ages](births-deaths-and-ages.md)).
 Averaging the youth in would mix two different things.
@@ -52,5 +52,5 @@ when ([When a world ends](extinction.md)).
 ← [Bands: many worlds in one figure](bands.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Spread between worlds](spread-between-worlds.md) →
 
 > [!info]- Pages that link here (10)
-> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [A world's life](a-worlds-life.md) · [Stars and hubs](stars-and-hubs.md) · [How worlds are measured](how-worlds-are-measured.md) · [Spread between worlds](spread-between-worlds.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [How many seeds an experiment needs](seeds-needed.md)
+> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Stars and hubs](stars-and-hubs.md) · [How worlds are measured](how-worlds-are-measured.md) · [Spread between worlds](spread-between-worlds.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [How many seeds an experiment needs](seeds-needed.md)
 <!-- /turns -->

@@ -16,7 +16,7 @@ world has and the random network lacks is what the rules built.
 >   [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") — need to cross it?
 > - How many loops does it have, and where do they run?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -93,7 +93,7 @@ to reach to touch everyone.
 **Three distances.** Every 25 iterations, in the 30 baseline worlds: the diameter, the radius and the mean path length, all estimated from breadth-first searches out of 8 to 16 spread agents ([Radius and diameter](radius-and-diameter.md)). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -165,7 +165,7 @@ records every 25 [iterations](one-iteration.md "One step of a world's time: a ph
 **Four measures of a world's geometry.** Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how balls grow ([Dimension and curvature](ball-dimension-and-curvature.md)), the box dimension ([Box dimension](box-dimension.md)), and the spectral gap, on a logarithmic axis ([The spectral gap](spectral-gap.md)). In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -308,5 +308,5 @@ To make every figure of this page: `python3 book_figures.py geometry`.
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (14)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [One world, many colours](one-world-many-colours.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where the tokens flow](where-the-tokens-flow.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

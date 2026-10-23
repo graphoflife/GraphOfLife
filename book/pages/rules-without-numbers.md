@@ -17,17 +17,17 @@ what is not wanted.
 B2, the world that cannot break, has seven such numbers. Each was chosen to
 stop one way a world was seen to fail, and each was tested in
 [A world that cannot break](a-world-that-cannot-break.md) and
-[Who dies, and why](who-dies-and-why.md):
+[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why):
 
 | number | in B2 | what it stops | shown in |
 |---|---|---|---|
-| `incumbency` | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking | [Who dies, and why](who-dies-and-why.md) |
+| `incumbency` | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking | [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) |
 | `birth_links` | 2 | a newborn is joined to its parent and two of the parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."): no world grows as a tree | [A world that cannot break](a-world-that-cannot-break.md) |
 | `prune_needs` | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [A world that cannot break](a-world-that-cannot-break.md) |
 | `valence` | 8 | a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") may choose at most 8 links: no [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") | [A world that cannot break](a-world-that-cannot-break.md) |
-| `keep_home` | 0.3 | 30% of an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | [Who dies, and why](who-dies-and-why.md) |
-| `max_age` | 100 | every agent dies at 100: no hoarding queen, and room for the young | [Who dies, and why](who-dies-and-why.md) |
-| `min_child` | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Who dies, and why](who-dies-and-why.md) |
+| `keep_home` | 0.3 | 30% of an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s tokens stay at home: no agent stakes itself to death, and no world of one-token zombies | [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) |
+| `max_age` | 100 | every agent dies at 100: no hoarding queen, and room for the young | [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) |
+| `min_child` | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) |
 
 Two more rules of B2 have no number in them: a death is mended by joining the
 dead agent's neighbours in a ring, and a brain changes only when it is
@@ -80,7 +80,7 @@ at 10,000 tokens:
 changed hands in every game: 88 to 91 per hundred agents. In the
 longer-lived world, 96 agents in a hundred were born and 77 starved in every
 iteration from 100 to 400, so the average agent was one and a half iterations
-old. This is the world [Who dies, and why](who-dies-and-why.md) warns of. Children
+old. This is the world [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) warns of. Children
 of a token or two stake everything and lose it, and nothing holds the
 population up but births, until they fall short.
 
@@ -128,7 +128,7 @@ and who does not.
 
 ## What each number was doing
 
-Every failure above was already named in [A world that cannot break](a-world-that-cannot-break.md) and [Who dies, and why](who-dies-and-why.md), one number at a
+Every failure above was already named in [A world that cannot break](a-world-that-cannot-break.md) and [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why), one number at a
 time. Here they come all at once:
 
 | without | what happened |

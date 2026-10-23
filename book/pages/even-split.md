@@ -33,7 +33,7 @@ the τ tokens are split evenly
 With 3 tokens and one neighbour, an agent stakes 2 at home and 1 on the
 neighbour, so whole tokens tilt the split towards home. The share staked at
 home, by [degree](degree.md), in the thirty baseline worlds of 100,000 tokens of
-Experiment 10 ([Thirty worlds](thirty-worlds.md)):
+Experiment 10 ([Thirty worlds](a-worlds-life.md#thirty-worlds)):
 
 | connections | 1 | 2 | 3–4 | 5–9 | 10–49 | 50+ |
 |---|---|---|---|---|---|---|

@@ -7,6 +7,7 @@ as sections).
 
     python3 research/tools/merge_pages.py NEW OLD:section [OLD:section ...]           what it would change
     python3 research/tools/merge_pages.py NEW OLD:section [OLD:section ...] --apply   change it
+    python3 research/tools/merge_pages.py --relink                                    every merge again, links only
 
 NEW is the page that stays; its file must already hold the merged text, with a
 section for each page merged into it. OLD is a page merged into NEW, and
@@ -22,8 +23,11 @@ What --apply does, so that nothing that pointed at an old page points nowhere:
 - the figures' code that names OLD as a page id (the catalogue's batches) names NEW;
 - book.json: OLD's entry is gone; NEW reports OLD's experiments too, in reading
   order, and is about OLD's topics as well;
-- `git rm` OLD's file.
+- `git rm` OLD's file, and record the merge in book/legacy.json (`merged`).
 Then run `python3 book_fill.py` and the tests.
+
+--relink applies every recorded merge to the links again, wherever they are:
+for a page that someone rewrote from its old text while a merge was made.
 """
 from __future__ import annotations
 
@@ -53,6 +57,64 @@ def save(path: str, value: Any, compact: bool = False, indent: int = 2, ascii_: 
     with open(path, "w", encoding="utf-8") as f:
         json.dump(value, f, **({"separators": (",", ":")} if compact else {"indent": indent}), ensure_ascii=ascii_)
         f.write("\n")
+
+
+def relink() -> None:
+    """Every merge in book/legacy.json, applied again to the links of the pages, results and code."""
+    legacy = load(os.path.join(BOOK, "legacy.json"))
+    by_new: Dict[str, Dict[str, str]] = {}
+    for old, target in legacy.get("merged", {}).items():
+        new, _, section = target.partition("#")
+        by_new.setdefault(new, {})[f"pages/{old}.md"] = section
+    for new, moved in by_new.items():
+        with open(os.path.join(BOOK, "pages", f"{new}.md"), encoding="utf-8") as f:
+            ids = set(book_fill.anchors(f.read()))
+        for changed in relink_files(moved, new, ids, apply=True):
+            print(changed)
+
+
+def relink_files(moved: Dict[str, str], new: str, ids: set, apply: bool) -> List[str]:
+    """Links to the merged pages, led to NEW in the pages, the results and the figures' code."""
+    changes = []
+    for md in book_fill.markdown_files():
+        if md in moved:
+            continue
+        path = os.path.join(BOOK, md)
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        out = rewrite_links(text, md, moved, new, ids)
+        if out != text:
+            changes.append(md)
+            if apply:
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(out)
+    for name in sorted(os.listdir(os.path.join(BOOK, "results"))):
+        if not name.endswith(".json"):
+            continue
+        path = os.path.join(BOOK, "results", name)
+        with open(path, encoding="utf-8") as f:
+            raw = f.read()
+        data = json.loads(raw)
+        out = rewrite_value(data, moved, new, ids)
+        if out != data:
+            changes.append(f"results/{name}")
+            if apply:
+                save(path, out, compact=not raw.startswith("{\n"), indent=1, ascii_=True)
+    code = sorted(os.path.join(ROOT, "book_chapters", n) for n in os.listdir(os.path.join(ROOT, "book_chapters"))
+                  if n.endswith(".py")) + [os.path.join(ROOT, "book_figures.py")]
+    olds = {os.path.basename(m)[:-3] for m in moved}
+    for path in code:
+        with open(path, encoding="utf-8") as f:
+            text = f.read()
+        out = rewrite_links(text, "pages/_.md", moved, new, ids)
+        for old in olds:
+            out = out.replace(f'"{old}"', f'"{new}"')
+        if out != text:
+            changes.append(os.path.relpath(path, ROOT))
+            if apply:
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(out)
+    return changes
 
 
 def plan(new: str, merged: List[Tuple[str, str]]) -> Dict[str, str]:
@@ -105,59 +167,22 @@ def rewrite_value(value: Any, moved: Dict[str, str], new: str, ids: set) -> Any:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("new")
-    ap.add_argument("merged", nargs="+", help="OLD:section")
+    ap.add_argument("new", nargs="?")
+    ap.add_argument("merged", nargs="*", help="OLD:section")
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--relink", action="store_true")
     a = ap.parse_args()
+    if a.relink:
+        relink()
+        return
+    if not a.new or not a.merged:
+        ap.error("NEW and at least one OLD:section are needed")
     merged = [tuple(m.split(":", 1)) for m in a.merged]
     moved = plan(a.new, merged)
     olds = {old for old, _ in merged}
     with open(os.path.join(BOOK, "pages", f"{a.new}.md"), encoding="utf-8") as f:
         ids = set(book_fill.anchors(f.read()))
-    changes = []
-
-    # Pages and the front page.
-    for md in book_fill.markdown_files():
-        if md in moved:
-            continue
-        path = os.path.join(BOOK, md)
-        with open(path, encoding="utf-8") as f:
-            text = f.read()
-        out = rewrite_links(text, md, moved, a.new, ids)
-        if out != text:
-            changes.append(md)
-            if a.apply:
-                with open(path, "w", encoding="utf-8") as f:
-                    f.write(out)
-
-    # Results, written as from a page in book/pages/.
-    for name in sorted(os.listdir(os.path.join(BOOK, "results"))):
-        if not name.endswith(".json"):
-            continue
-        path = os.path.join(BOOK, "results", name)
-        with open(path, encoding="utf-8") as f:
-            raw = f.read()
-        data = json.loads(raw)
-        out = rewrite_value(data, moved, a.new, ids)
-        if out != data:
-            changes.append(f"results/{name}")
-            if a.apply:
-                save(path, out, compact=not raw.startswith("{\n"), indent=1, ascii_=True)
-
-    # The strings of the figures' code: links, and page ids in the catalogue.
-    code = sorted(os.path.join(ROOT, "book_chapters", n) for n in os.listdir(os.path.join(ROOT, "book_chapters"))
-                  if n.endswith(".py")) + [os.path.join(ROOT, "book_figures.py")]
-    for path in code:
-        with open(path, encoding="utf-8") as f:
-            text = f.read()
-        out = rewrite_links(text, "pages/_.md", moved, a.new, ids)
-        for old in olds:
-            out = out.replace(f'"{old}"', f'"{a.new}"')
-        if out != text:
-            changes.append(os.path.relpath(path, ROOT))
-            if a.apply:
-                with open(path, "w", encoding="utf-8") as f:
-                    f.write(out)
+    changes = relink_files(moved, a.new, ids, a.apply)
 
     # Terms, the old numbers, and the index.
     terms = load(os.path.join(BOOK, "terms.json"))
@@ -171,6 +196,8 @@ def main() -> None:
         if pid in olds:
             legacy["pages"][oid] = a.new
             changes.append(f"legacy.json: {oid}")
+    for old, section in merged:
+        legacy.setdefault("merged", {})[old] = f"{a.new}#{section}"
     for name, cited in legacy["theses"].items():
         for words, pid in cited.items():
             if pid in olds:
@@ -194,7 +221,7 @@ def main() -> None:
         save(os.path.join(BOOK, "legacy.json"), legacy, indent=1)
         save(os.path.join(BOOK, "book.json"), index)
         for old in sorted(olds):
-            subprocess.run(["git", "rm", "-q", f"book/pages/{old}.md"], cwd=ROOT, check=True)
+            subprocess.run(["git", "rm", "-qf", f"book/pages/{old}.md"], cwd=ROOT, check=True)
         print(f"merged {', '.join(sorted(olds))} into {a.new}; now run python3 book_fill.py")
 
 

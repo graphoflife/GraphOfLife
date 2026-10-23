@@ -13,7 +13,7 @@ births do for the world besides adding agents.
 > - How is a child joined to the world, and how often is it born cut off?
 > - What would the world look like without births?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -110,7 +110,7 @@ Two consequences follow from the arithmetic alone, before any data:
 **Children, by the wealth of the parent.** Agents alive at the start of the reproduction phases of every 100th iteration from 500 on, in the 30 worlds, sorted by the tokens they held. Left: the share of them that had a child. Right: for those that did, the share of their tokens they gave it — the white dot is the median, the cyan bar runs from the 25th to the 75th percentile.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -146,7 +146,7 @@ a child as one with 3 or 4. Connections help more:
 **Who has a child, by connections.** As the left panel of the figure above, with the agents sorted by their number of connections at the start of the reproduction phase instead of their tokens.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -171,7 +171,7 @@ value. [Questioning the mechanics](questioning-the-mechanics.md) comes back to i
 **How a child is joined to the world.** Every birth in the reproduction phases of every 100th iteration from 500 on, in the 30 worlds. Left: how many of its parent's candidates — the parent itself and its neighbours — the child was joined to at birth. Right: how many of its own connections the parent handed to the child. A child with no connection at all is cut off at once.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -204,7 +204,7 @@ connections to a newborn child ([The largest and the smallest](the-largest-and-t
 **Reproduction over a world's life.** After every reproduction phase of the 30 baseline worlds ([Reproduction statistics](reproduction-statistics.md)): the mean share of its tokens a parent gave its child (`meanInvestedShare`); the tokens given to all children as a share of all tokens (`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); and the connections handed over per birth (`handovers` / `births`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -241,7 +241,7 @@ without births could only lose connections, never gain one.
 > to five agents in a hundred to the cull in every iteration and live only
 > while their births keep up; brains that see can give up having children,
 > and then their worlds die out
-> ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)). And since a
+> ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)). And since a
 > newborn is joined only to agents at most two steps apart, a birth closes
 > only small [loops](loops.md "A path through the network that comes back to where it started without using a connection twice."): a network grown by births alone is, at large scale, a
 > tree of dense blobs joined by necks that one death can cut
@@ -262,7 +262,7 @@ without births could only lose connections, never gain one.
   game ([Questioning the mechanics](questioning-the-mechanics.md)). A brain spreads by
   conquest seventeen times more than by birth. In most models of evolution,
   reproduction is where heredity and variation happen; here, it is a side
-  road. [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) asks what that means for [open-ended
+  road. [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) asks what that means for [open-ended
   evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.").
 
 To make every figure of this page: `python3 book_figures.py children`.
@@ -275,5 +275,5 @@ To make every figure of this page: `python3 book_figures.py children`.
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
 > [!info]- Pages that link here (12)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [How ages change over a world's life](how-ages-change.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the network grows](how-the-network-grows.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Do the brains matter?](do-the-brains-matter.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How ages change over a world's life](how-ages-change.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the network grows](how-the-network-grows.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Stars and hubs](stars-and-hubs.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

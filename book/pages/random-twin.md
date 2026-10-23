@@ -104,8 +104,8 @@ that made them. The line of 1.5 lies between the two.
   and [The candidates, played on](the-candidates-played-on.md): which worlds
   are spaces.
 - [Room for the steadiest world](room-for-the-steadiest-world.md),
-  [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) and
-  [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md):
+  [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours) and
+  [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds):
   theses that ask for a width of at least 1.5.
 - [What makes a world interesting](what-makes-a-world-interesting.md) and
   [A screen of random worlds](a-screen-of-random-worlds.md): the criterion

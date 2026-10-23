@@ -62,7 +62,7 @@ warning, because each looks like the thing we want.
    Gould's drunkard, who cannot fall through the wall he leans on, ends up
    in the gutter anyway.
 4. **The first boom.** Everything a world does in its first hundred
-   iterations is a world settling ([The first hundred iterations](the-first-hundred-iterations.md)):
+   iterations is a world settling ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)):
    numbers climb because the founders were unlike what the world becomes, and
    stop.
 
@@ -275,7 +275,7 @@ every world beat their founders: a rating of +207 to +465, +361 in the median
 world — the brains of iteration 50 hold about nine-tenths of a world contested
 with the founders' (0.90 in the median world) — and by iteration 100 the
 median world stood at +400. That is the first boom of
-[The first hundred iterations](the-first-hundred-iterations.md), seen from the brains' side:
+[The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations), seen from the brains' side:
 whatever the founders do that does not pay, the first few dozen [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") remove.
 
 **And then nothing.** From iteration 50 to iteration 1,000 the median world's
@@ -370,7 +370,7 @@ Why does the baseline stop so soon? The study of the baseline answered half of i
 are nearly blind ([What the brains are like](what-the-brains-are-like.md)), so evolution
 can only set constants, and a few constants are quickly set. Brains that see
 are the obvious next step, and they are what
-[Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) tries — with
+[Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break) tries — with
 consequences for the world itself that have to be dealt with first. Whether
 evolution then keeps going is the subject of
 [Why evolution stops](why-evolution-stops.md).
@@ -382,6 +382,6 @@ evolution then keeps going is the subject of
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (41)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [What the baseline world is](what-the-baseline-world-is.md) · [The first hundred iterations](the-first-hundred-iterations.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [A world that cannot break](a-world-that-cannot-break.md) · [How ages change over a world's life](how-ages-change.md) · [How even is a world?](how-even-is-a-world.md) · [How the game is played](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What would count as open-ended evolution](open-ended-test.md) · [Exploitability](exploitability.md) · [The invasion test](invasion-test.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [Rules in company](rules-in-company.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [!info]- Pages that link here (38)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How ages change over a world's life](how-ages-change.md) · [How even is a world?](how-even-is-a-world.md) · [How the game is played](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Why evolution stops](why-evolution-stops.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What would count as open-ended evolution](open-ended-test.md) · [Exploitability](exploitability.md) · [The invasion test](invasion-test.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Alliances](alliances.md) · [Rules in company](rules-in-company.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

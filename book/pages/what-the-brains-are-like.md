@@ -14,7 +14,7 @@ and what did it leave alone?
 >   [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s, the [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), or the noise?
 > - How different are the brains of one world from each other?
 
-The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given.
 
@@ -355,7 +355,7 @@ depends on it.
   coming needs behaviour that depends on circumstances. A brain that reacts
   to who its neighbour is can find a new way to treat a new kind of
   neighbour, and that creates a new niche for someone else. A brain that
-  cannot see has only its constants to vary. [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) lists
+  cannot see has only its constants to vary. [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) lists
   the obstacles; this one comes first, because it limits all the others.
 - **The remedy is in the architecture.** Fewer layers, a squashing with a
   steeper slope, or larger starting weights would each give the brains a
@@ -367,7 +367,7 @@ depends on it.
 
 > [!info] Added later: brains that see
 > The remedy was tried in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), not in *How big should a brain be?*, which is still to come.
-> [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) gave the brains
+> [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break) gave the brains
 > one hidden layer of 16 — a founder's gain of about 0.2 — and the worlds
 > broke: at 5,000 tokens four of ten died out, and eight of ten when brains
 > change only when copied, against none of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s.
@@ -386,6 +386,6 @@ To make every figure of this page: `python3 book_figures.py minds`.
 
 ← [Genotypes and lineages](genotypes-and-lineages.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [What agents say to each other](what-agents-say-to-each-other.md) →
 
-> [!info]- Pages that link here (25)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How different are the agents?](how-different-are-the-agents.md) · [How a signal fades through layers](vanishing-signal.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
+> [!info]- Pages that link here (24)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Where the tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How different are the agents?](how-different-are-the-agents.md) · [How a signal fades through layers](vanishing-signal.md) · [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
 <!-- /turns -->

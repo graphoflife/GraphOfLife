@@ -80,12 +80,16 @@ def sentences(text: str) -> List[str]:
 
 
 def check(before: Dict[str, str], after: str, kind: str) -> List[str]:
+    """
+    What a rewrite lost or kept. Pages merged into one need each of their blocks
+    once (two pages may have shown the same one) and one navigation, not one each.
+    """
     report = []
     old_numbers = collections.Counter()
     old_blocks = collections.Counter()
     for text in before.values():
         old_numbers |= numbers(words(text))
-        old_blocks += blocks(text)
+        old_blocks = old_blocks | blocks(text) if len(before) > 1 else old_blocks + blocks(text)
     have = numbers(after)
     lost = sorted(n for n in old_numbers if n not in have)
     if lost:

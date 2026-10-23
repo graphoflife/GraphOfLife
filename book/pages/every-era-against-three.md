@@ -13,7 +13,7 @@
 Every long world the notebook has played says the same thing in its contests:
 later brains beat earlier ones, by less and less. In Experiment 18's two
 longest worlds, brains mixed at birth and played to 50,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
-([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)), the
+([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)), the
 brains of 25,000 beat those of 10,000, and those of 50,000 then scored
 0.54 and 0.42 against those of 25,000.
 
@@ -92,7 +92,7 @@ know which draw comes. The true best reply can only gain more.
 > [!quote] The thesis of Experiment 28, written down before any of its runs existed
 > **The claim.** Evolution in Experiment 18's two longest worlds had stopped climbing by iteration 25,000. Against the brains of 25,000, the brains of the ten eras after it (27,500 to 50,000) do no better than a contest's own noise: their median score lies within the band an era scores against itself. Against the brains of 2,500, every era from 5,000 on still wins, beyond that band.
 >
-> **Why it would be so.** The two worlds' own contests (Chapter [81](five-mixed-worlds-fifty-thousand-iterations.md)), 100 iterations each on both eras' worlds with two coins: in seed 5 the brains of 25,000 scored a median of 0.56 against those of 10,000, and those of 50,000 scored 0.54 against those of 25,000; in seed 6, 0.72 and then 0.42. Later brains beat earlier ones by less and less in every long world the book has played (Chapter [92](the-candidates-played-on.md); Experiment 19, 0.78 falling to 0.55). If the game these brains play still had room within their reach, the eras after 25,000 would pull ahead of 25,000 as the eras before it pulled ahead of 2,500.
+> **Why it would be so.** The two worlds' own contests (Chapter [81](mixed-at-birth-ten-long-worlds.md)), 100 iterations each on both eras' worlds with two coins: in seed 5 the brains of 25,000 scored a median of 0.56 against those of 10,000, and those of 50,000 scored 0.54 against those of 25,000; in seed 6, 0.72 and then 0.42. Later brains beat earlier ones by less and less in every long world the book has played (Chapter [92](the-candidates-played-on.md); Experiment 19, 0.78 falling to 0.55). If the game these brains play still had room within their reach, the eras after 25,000 would pull ahead of 25,000 as the eras before it pulled ahead of 2,500.
 >
 > **It holds if:** In both worlds the median score of the eras 27,500 to 50,000 against 25,000 (each era's score the mean of its two contests) lies within the noise band, 0.5 plus or minus twice the standard deviation of the world's twelve contests of an era against itself (2,500, 10,000 and 25,000, four coins each); and every era from 5,000 to 50,000 scores above that band against 2,500.
 >
@@ -221,7 +221,7 @@ little in one world, round a circle in the other.
   ([Strategies written by hand](strategies-written-by-hand.md),
   [What a brain can compute](what-a-brain-can-compute.md)).
 - **A chain of contests hides circles.** Contests between neighbours in time
-  ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)) said
+  ([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)) said
   later brains win by less and less. Fixed eras show that later brains can
   win against their parents and still lose ground against their ancestors.
   The test of open-ended evolution asks for wins against the best mix of

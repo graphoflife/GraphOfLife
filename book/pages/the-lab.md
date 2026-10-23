@@ -79,7 +79,7 @@ difference between pilots of two seeds each is a lead, not a finding. Pilots
 of two seeds suggested that [brains](the-brain.md) that see break worlds; Experiment 13 then
 ran ten seeds of each condition, and eight of the ten worlds whose brains
 see and change only when copied died out, against none of B1's
-([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)).
+([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
 
 ## Starting an experiment
 

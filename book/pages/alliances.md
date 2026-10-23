@@ -169,7 +169,7 @@ each defends the other.
 ### Without the home advantage
 
 An agent's own stake counts one and a half times in B2, a number chosen by
-hand ([Who dies, and why](who-dies-and-why.md)). Do alliances need it? Not to
+hand ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). Do alliances need it? Not to
 form. In two worlds where an agent's own stake counts once, the largest
 alliance held 37 and 71% of the world at iteration 1,000, against 83 and 44%
 in the two worlds of the same length with the home advantage; two seeds of
@@ -298,6 +298,6 @@ failed the [health bar](health-bar.md "The seven marks a world's network must me
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (11)
-> [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Strategies written by hand](strategies-written-by-hand.md) · [Who helps whom](who-helps-whom.md) · [Another game](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Rules without numbers](rules-without-numbers.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [!info]- Pages that link here (12)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Why evolution stops](why-evolution-stops.md) · [Strategies written by hand](strategies-written-by-hand.md) · [Who helps whom](who-helps-whom.md) · [Another game](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Rules without numbers](rules-without-numbers.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

@@ -76,7 +76,7 @@ In words, the changes fall into four groups:
 - **Death by age, and a home advantage.** 30% of an agent's tokens stay at
   home, so nobody stakes itself to death; a child gets at least 10 tokens;
   every agent dies at age 100; a stake on one's own node counts 1.5 times
-  ([Who dies, and why](who-dies-and-why.md)).
+  ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
 
 ## An example: ten worlds of each at 5,000 tokens
 
@@ -100,7 +100,7 @@ B2's healthy but poor.
 ## Where it is used
 
 - **B1**, the world the notebook first set out to understand, is the start
-  of Experiments 1 to 8, 10, 12, 13 and 37; [Thirty worlds](thirty-worlds.md)
+  of Experiments 1 to 8, 10, 12, 13 and 37; [Thirty worlds](a-worlds-life.md#thirty-worlds)
   introduces its study.
 - **B2**, the ground for open-ended evolution, is the start of Experiments 9
   and 14 to 21 and most later ones;
@@ -119,10 +119,10 @@ B2's healthy but poor.
 <!-- turns -->
 ---
 
-[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [What the baseline world is](what-the-baseline-world-is.md) →
+[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) →
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (13)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [The estate of the dead](estate.md) · [The even split](even-split.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (16)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [The even split](even-split.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

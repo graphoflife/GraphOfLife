@@ -15,7 +15,7 @@ can be foreseen, and what actually severs a region from the rest.
 >   agents?
 > - When a game cuts off a thousand agents, what severed them — and why there?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](thirty-worlds.md);
+The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
 where the thirty of 10,000 tokens this page was first written from differ,
 both are given. A "big" cut is counted against the size of a world: a
 thousand agents or more here, a hundred in the worlds of 10,000 tokens — a
@@ -99,7 +99,7 @@ If the worst bridge failed, the game would cut off that ninth. Does it?
 **Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](cut-risk.md)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -161,7 +161,7 @@ lost through it.
 **Where the cut-off deaths happen.** Of all agents cut off in games from iteration 500 on of the 30 worlds, the share that died in games which cut off at least n agents, for every n. Where the line is at 0.5, half of all such deaths happened in games at least that large.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](thirty-worlds.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
@@ -239,7 +239,7 @@ tokens handed out by lottery to the survivors.
   through their borders, not on agents through what they do — and a world can
   never split into two populations that go their own ways, which in nature is
   how new species begin. [Questioning the mechanics](questioning-the-mechanics.md)
-  questions this rule, and [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) what changing it might do.
+  questions this rule, and [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution) what changing it might do.
 
 > [!info] Added later: worlds that cannot break
 > In the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s worlds of 5,000 tokens the cull removes about 2% of the
@@ -247,7 +247,7 @@ tokens handed out by lottery to the survivors.
 > passes the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 > [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md), one of whose
 > lines is a cut risk of at most 1%
-> ([Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md)).
+> ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
 > [A world that cannot break](a-world-that-cannot-break.md) answers with local rules —
 > two links at birth, a death mended in a ring, only redundant links
 > lapsing — under which neither a death nor a lapsed link can split a world.
@@ -261,5 +261,5 @@ To make every figure of this page: `python3 book_figures.py breaking`.
 ← [The geometry of a world](the-geometry-of-a-world.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Degree](degree.md) →
 
 > [!info]- Pages that link here (17)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [A world's life](a-worlds-life.md) · [How ages change over a world's life](how-ages-change.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Bridges](bridges.md) · [Cut risk](cut-risk.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How ages change over a world's life](how-ages-change.md) · [Do the rich stay rich?](do-the-rich-stay-rich.md) · [What crosses a connection](what-crosses-a-connection.md) · [What shape does the network take?](what-shape-does-the-network-take.md) · [The core of a world](the-core-of-a-world.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The geometry of a world](the-geometry-of-a-world.md) · [Bridges](bridges.md) · [Cut risk](cut-risk.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

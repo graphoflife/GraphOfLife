@@ -97,13 +97,13 @@ the kinds swing from moment to moment.
   [A screen of random worlds](a-screen-of-random-worlds.md): the criterion
   *diverse*.
 - [The candidates, played on](the-candidates-played-on.md) and
-  [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md):
+  [Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held):
   a world must score above B2's median world to be played on, and again to
   hold.
 - [Room for the steadiest world](room-for-the-steadiest-world.md): what each
   rule cost of the four parts.
-- [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md),
-  [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md),
+- [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours),
+  [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds),
   [Who inherits?](who-inherits.md) and [Rules in company](rules-in-company.md):
   worlds scored by it.
 
@@ -118,7 +118,7 @@ the kinds swing from moment to moment.
 <!-- turns -->
 ---
 
-← [The health bar](health-bar.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) →
+← [The health bar](health-bar.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) →
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 

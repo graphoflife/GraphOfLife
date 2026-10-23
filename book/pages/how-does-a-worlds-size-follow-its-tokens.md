@@ -88,7 +88,7 @@ founders go from 8 to 4,096.
 
 **What is measured.** For every run, the mean number of agents alive after
 the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), and of connections, over iterations 500 to 599 — well past the
-youth of [The first hundred iterations](the-first-hundred-iterations.md). The same means
+youth of [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations). The same means
 over iterations 400 to 499 say whether a world had settled.
 
 **How it is read.** On logarithmic axes, on both sides, a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") —
@@ -304,7 +304,7 @@ fewer leaves, more loops, more [neighbours](the-world.md#the-network "An agent j
 of [A world's life](a-worlds-life.md) sit among the others in every panel: the numbers the study of the
 baseline first found at 10,000 tokens hold, roughly, at other sizes — as the
 second edition of those parts, at 100,000 tokens, checks
-([Thirty worlds](thirty-worlds.md)).
+([Thirty worlds](a-worlds-life.md#thirty-worlds)).
 
 > [!info] Added later: thirty worlds at each of two sizes
 > [Worlds of 100,000 tokens](worlds-of-100000-tokens.md), written after this page,
@@ -438,7 +438,7 @@ lose half of itself in a game.
   world is not less noisy: in every world, at every size, a game can remove a
   third or half of everyone, whatever their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") — the noise comes from a
   rule, not from small numbers, and only a change of the rule removes it
-  ([What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md)). What size does give is room: a world of 60,000
+  ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)). What size does give is room: a world of 60,000
   agents is 25 steps across on average and 80 at its widest, and keeps the
   same number of genotypes per agent — space in which regions could differ,
   if the rules let them stay apart.
@@ -473,8 +473,8 @@ lose half of itself in a game.
 <!-- turns -->
 ---
 
-← [What holds a world's size](what-holds-a-worlds-size.md) · [Size and riches of a world](../README.md#size-and-riches-of-a-world) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) →
+← [What holds a world's size](what-holds-a-worlds-size.md) · [Size and riches of a world](../README.md#size-and-riches-of-a-world)
 
-> [!info]- Pages that link here (22)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What the baseline world is](what-the-baseline-world-is.md) · [Thirty worlds](thirty-worlds.md) · [A world's life](a-worlds-life.md) · [Brains that see, and worlds that break](brains-that-see-and-worlds-that-break.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [What a simulation costs](what-a-simulation-costs.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
+> [!info]- Pages that link here (20)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Lightning in every world](lightning-in-every-world.md) · [The core of a world](the-core-of-a-world.md) · [The geometry of a world](the-geometry-of-a-world.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) · [Worlds of 100,000 tokens](worlds-of-100000-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [What a simulation costs](what-a-simulation-costs.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
 <!-- /turns -->

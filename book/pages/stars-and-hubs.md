@@ -88,7 +88,7 @@ at random, a brain may choose at most 8 links
 - [What goes with what](what-goes-with-what.md#between-worlds): the one
   component that orders the thirty worlds by their largest hub holds 47% of
   their differences.
-- [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md):
+- [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution):
   a dynasty is the nearest thing yet to a group that lasts while its members
   change.
 
@@ -107,6 +107,6 @@ at random, a brain may choose at most 8 links
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (2)
-> [Glossary](glossary.md) · [The even split](even-split.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The even split](even-split.md)
 <!-- /turns -->

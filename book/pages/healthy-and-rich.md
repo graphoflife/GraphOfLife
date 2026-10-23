@@ -160,7 +160,7 @@ agents most diverse — is empty.
 > From now on a thesis no longer counts a world's poor. It asks instead that
 > the world be **no more even than B2**: a Gini no lower than the least of
 > B2's worlds read at the same iteration. Old theses keep their wording;
-> [The candidates, played on](the-candidates-played-on.md) and [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) and [Rules in company](rules-in-company.md) say what the clarified reading changes.
+> [The candidates, played on](the-candidates-played-on.md) and [Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held) and [Rules in company](rules-in-company.md) say what the clarified reading changes.
 
 <!-- figure healthy/spreads -->
 ![How widely the agents spread](../figures/healthy/spreads.svg)
@@ -254,7 +254,7 @@ links and genotypes.
 
 ## Candidates and long runs
 
-A world that comes this close is a **[candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")**, and is played on to see
+A world that comes this close is a **candidate**, and is played on to see
 whether it stays. The rule, with no line of its own
 (`research/oee/pilots/candidates.py`, list in `research/oee/candidates.md`):
 every mark of the health bar met, a diversity score above the median of
@@ -323,7 +323,7 @@ The long runs are planned in three steps:
 > agents at three tokens or fewer in the median world at 10,000 iterations —
 > but only five of the ten met every mark, so its thesis is refuted; the five
 > that did are being played on to 50,000
-> ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md), Experiment
+> ([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations), Experiment
 > 18). Two of its worlds are the two mixed worlds of batch Q again, agent for
 > agent — the lab's engine and the prototype play a mixed world alike — so
 > `Q/mix-s1` and `s2` and their long runs count as Experiment 17's worlds s001
@@ -335,7 +335,7 @@ The long runs are planned in three steps:
 > eleven fell back — most of them into B2's poverty — and three died out on
 > the way; four whose rules exist only in the pilots' prototype wait for
 > Experiment 23. Step 2 gave each rule that held five new seeds (Experiment 21,
-> [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md)): none held more
+> [Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held)): none held more
 > often than mixing alone, so step 3 has no rule to take up yet.
 
 The batches still running (T to Y, [Every simulation: what was run, and what was measured](every-simulation.md)) and the
@@ -395,6 +395,6 @@ drawn at random, the values that make worlds worse dropped round after round,
 
 [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [What makes a world interesting](what-makes-a-world-interesting.md) →
 
-> [!info]- Pages that link here (26)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Who dies, and why](who-dies-and-why.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the measurements say about open-ended evolution](what-the-measurements-say-about-open-ended-evolution.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [The search's best world, in new seeds](the-searchs-best-world-in-new-seeds.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (23)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The random twin: is a world a space?](random-twin.md) · [What folds a world](what-folds-a-world.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once](eight-switches-at-once.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

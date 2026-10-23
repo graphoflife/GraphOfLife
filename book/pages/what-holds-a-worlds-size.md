@@ -60,7 +60,7 @@ size, and the size sets the riches.
   the eagerness falls far enough that even a world in which everyone can
   afford a child does not replace its dead, the world dies. Three of the five
   mixed worlds played to 50,000 iterations died so
-  ([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)): in the
+  ([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)): in the
   last world kept before each end, a third to three quarters of the agents
   could have had a child, and births had fallen to 0.4 to 0.5 per hundred
   agents an iteration, against the 1.0 that replaces the dead.
@@ -93,7 +93,7 @@ little by it.
 In one of the worlds that died, the brains of the world's last good years
 beat those of 5,000 iterations before in a lifetime contest, 86% to 14%: the
 brains that let it die out were winners
-([Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md)). Biologists
+([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)). Biologists
 call this **evolutionary suicide** — selection driving a trait to where the
 population cannot last. In another world, the last brains lost to their
 forebears; in a third, they tied. One world in three is not a law, but it is
@@ -186,6 +186,6 @@ Ways to build the pull, and the first of them tried:
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (14)
-> [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [Births as rich as the neighbours](births-as-rich-as-the-neighbours.md) · [The floor in plain B2 and in B1](the-floor-in-plain-b2-and-in-b1.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Five mixed worlds, fifty thousand iterations](five-mixed-worlds-fifty-thousand-iterations.md) · [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) · [A mate that pays its share](a-mate-that-pays-its-share.md) · [The candidates, played on](the-candidates-played-on.md) · [Five more seeds for the rules that held](five-more-seeds-for-the-rules-that-held.md) · [Room for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (11)
+> [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [What folds a world](what-folds-a-world.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

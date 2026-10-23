@@ -63,7 +63,7 @@ worlds the study of the baseline was first written from
 No run needed more than 651 MB of memory. That is the unit the experiments
 on the baseline are sized in: one condition of thirty seeds at 10,000 tokens is
 about seven hours. The thirty worlds of 100,000 tokens that
-[Thirty worlds](thirty-worlds.md) introduces, 1,500 iterations each, took
+[Thirty worlds](a-worlds-life.md#thirty-worlds) introduces, 1,500 iterations each, took
 211 hours and fill 58 GB.
 
 ## The rules for sizing an experiment
