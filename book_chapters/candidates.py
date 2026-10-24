@@ -260,7 +260,7 @@ def candidates(ch: F.Chapter) -> None:
               y={"label": "typical distance over the random twin's", "min": 0.9}, series=space,
               guides=[{"axis": "y", "at": 1.0, "label": "as near as a random network"}],
               caption=("Each line is a candidate: the steps within which a typical agent's ball holds half its "
-                       "world, over the same for its random twin ([What folds a world](what-folds-a-world.md)), at iteration 1,000 and at 10,000. "
+                       "world, over the same for its random twin ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)), at iteration 1,000 and at 10,000. "
                        "Green: the candidates that held; violet: those that fell back; red: those that died out on "
                        "the way. Beside the right end: B2's ten worlds played on to 10,000 (yellow) and Experiment "
                        "17's (blue)."),

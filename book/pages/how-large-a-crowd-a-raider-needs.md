@@ -168,8 +168,8 @@ A raid is either joined by enough raiders or it dies.
 <!-- turns -->
 ---
 
-← [What a brain can compute](what-a-brain-can-compute.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [Does evolution close the door?](does-evolution-close-the-door.md) →
+← [What a brain can compute](what-a-brain-can-compute.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [Why the raiders stopped winning](does-evolution-close-the-door.md) →
 
-> [!info]- Pages that link here (3)
-> [Every era against three](every-era-against-three.md) · [Does evolution close the door?](does-evolution-close-the-door.md) · [Hand-written strategies in B1](hand-written-strategies-in-b1.md)
+> [!info]- Pages that link here (2)
+> [Every era against three](every-era-against-three.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
 <!-- /turns -->

@@ -89,6 +89,28 @@
     "10000": 297.0
    }
   },
+  "grew": {
+   "breeding-raider": [
+    15,
+    15,
+    13
+   ],
+   "raider": [
+    15,
+    15,
+    14
+   ],
+   "breeding-turtle": [
+    0,
+    1,
+    1
+   ],
+   "resident": [
+    8,
+    9,
+    4
+   ]
+  },
   "peak": {
    "breeding-raider": {
     "2000": 1.502824858757062,

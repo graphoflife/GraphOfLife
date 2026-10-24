@@ -131,6 +131,9 @@ def _numbers(ch: F.Chapter, found, kinds) -> None:
     ch.number("alive", _counts(found, kinds, lambda pl, k: at_end(found[(pl[0], pl[1], k, pl[2])], "mine") > 0))
     ch.number("life", {kind: {str(e): float(np.median([life(found[(r, ee, kind, p)]) for r, ee, p in places
                                                        if ee == e])) for e in ERAS} for kind, _, _ in kinds})
+    # The median planting's largest size hides the few that grew: count them too.
+    ch.number("grew", _counts(found, kinds, lambda pl, k: max(x["mine"] for x in found[(pl[0], pl[1], k, pl[2])])
+                              > found[(pl[0], pl[1], k, pl[2])][0]["mine"]))
     ch.number("peak", {kind: {str(e): float(np.median([max(x["mine"] for x in found[(r, ee, kind, p)])
                                                        / found[(r, ee, kind, p)][0]["mine"]
                                                        for r, ee, p in places if ee == e])) for e in ERAS}

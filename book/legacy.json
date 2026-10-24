@@ -104,9 +104,9 @@
   "95": "every-era-against-three",
   "96": "how-large-a-crowd-a-raider-needs",
   "97": "does-evolution-close-the-door",
-  "102": "a-crew-of-raiders",
-  "103": "raiders-that-breed",
-  "104": "hand-written-strategies-in-b1",
+  "102": "does-evolution-close-the-door#a-crew-of-raiders",
+  "103": "does-evolution-close-the-door#raiders-that-breed",
+  "104": "does-evolution-close-the-door#hand-written-strategies-in-b1",
   "106": "a-screen-of-random-worlds",
   "n-settings": "settings",
   "n-starting-ring": "starting-ring",
@@ -264,8 +264,8 @@
   },
   "E35": {
    "Chapter 97": "does-evolution-close-the-door",
-   "Chapter 102": "a-crew-of-raiders",
-   "Chapter 103": "raiders-that-breed"
+   "Chapter 102": "does-evolution-close-the-door#a-crew-of-raiders",
+   "Chapter 103": "does-evolution-close-the-door#raiders-that-breed"
   },
   "E36": {
    "Chapter 101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours"
@@ -300,6 +300,9 @@
   "the-core-of-a-world": "what-shape-does-the-network-take#the-core-of-a-world",
   "the-geometry-of-a-world": "what-shape-does-the-network-take#the-geometry-of-a-world",
   "why-evolution-stops": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops",
-  "what-folds-a-world": "how-many-dimensions-does-a-world-have#what-folds-a-world"
+  "what-folds-a-world": "how-many-dimensions-does-a-world-have#what-folds-a-world",
+  "a-crew-of-raiders": "does-evolution-close-the-door#a-crew-of-raiders",
+  "raiders-that-breed": "does-evolution-close-the-door#raiders-that-breed",
+  "hand-written-strategies-in-b1": "does-evolution-close-the-door#hand-written-strategies-in-b1"
  }
 }

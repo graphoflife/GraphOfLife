@@ -192,10 +192,7 @@ Raiders, turtles and crews written by hand and planted in evolved worlds: is evo
 - [Strategies written by hand](pages/strategies-written-by-hand.md)
 - [What a brain can compute](pages/what-a-brain-can-compute.md)
 - [How large a crowd a raider needs](pages/how-large-a-crowd-a-raider-needs.md)
-- [Does evolution close the door?](pages/does-evolution-close-the-door.md)
-- [A crew of raiders](pages/a-crew-of-raiders.md)
-- [Raiders that breed](pages/raiders-that-breed.md)
-- [Hand-written strategies in B1](pages/hand-written-strategies-in-b1.md)
+- [Why the raiders stopped winning](pages/does-evolution-close-the-door.md)
 - One agent in a sea of average agents — *not written yet*
 - [The invasion test](pages/invasion-test.md)
 

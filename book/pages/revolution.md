@@ -151,7 +151,7 @@ with and without them was the same world in every measure
   whose agents are 7 to 13 iterations old on average.
 - [Revolutions, with every other rule](revolutions-with-every-other-rule.md):
   the worlds near B2 in which revolutions do matter.
-- [A crew of raiders](a-crew-of-raiders.md): two raiders of two tokens each
+- [A crew of raiders](does-evolution-close-the-door.md#a-crew-of-raiders): two raiders of two tokens each
   stake one on a stranger of one token. In B2 the stranger's home stake
   counts as 1.5, so neither raider can take the node alone, but together,
   with *R* = 2, they do.
@@ -187,5 +187,5 @@ anything revolutionary, and the hegemon always wins.
 ← [Messages](messages.md) · [How the simulation works](../README.md#how-the-simulation-works) · [How a brain changes](mutation.md) →
 
 > [!info]- Pages that link here (19)
-> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Staking at home, and keeping one's node](home-stake.md) · [How different are the agents?](how-different-are-the-agents.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A crew of raiders](a-crew-of-raiders.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [What a run records](frames-and-stats.md)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Staking at home, and keeping one's node](home-stake.md) · [How different are the agents?](how-different-are-the-agents.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Do agents cooperate?](do-agents-cooperate.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

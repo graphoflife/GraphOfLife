@@ -1479,66 +1479,24 @@
     },
     {
       "id": "does-evolution-close-the-door",
-      "title": "Does evolution close the door?",
+      "title": "Why the raiders stopped winning",
       "file": "pages/does-evolution-close-the-door.md",
       "topics": [
         "strategies",
-        "evolution"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E30"
-      ],
-      "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "Experiment 30: raiders planted in B2's five worlds played on, at 500, 2,000, 5,000 and 10,000. The door closed (15, 4, 0 and 0 of 15 took hold) but not by a defence: residents hardly fought the late raiders, which could not raid at all, because the patches they started from had grown poorer than the three tokens a raid needs. A world of many small agents shuts out lone raiders (and, *A crew of raiders* found later, crews too)."
-    },
-    {
-      "id": "a-crew-of-raiders",
-      "title": "A crew of raiders",
-      "file": "pages/a-crew-of-raiders.md",
-      "topics": [
-        "strategies",
-        "groups"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E33"
-      ],
-      "status": "analysed",
-      "added": "2026-10-20",
-      "summary": "Experiment 33: raiders that pool their stakes as revolution tokens, planted where lone raiders could no longer take hold. No crew took hold anywhere, and crews died before the lone raiders in 42 of 45 places: most of a late patch holds one token and cannot stake, a stranger borders 1.6 of its agents so mobs hardly form, and a stake without a partner goes to the stranger. Neither raider breeds in a poor world."
-    },
-    {
-      "id": "raiders-that-breed",
-      "title": "Raiders that breed",
-      "file": "pages/raiders-that-breed.md",
-      "topics": [
-        "strategies"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E34"
-      ],
-      "status": "analysed",
-      "added": "2026-10-21",
-      "summary": "Raiders that have a child whenever they can give it ten tokens, planted in B2's late worlds, took hold in none of 30 plantings: there, one agent in thirty can afford such a child."
-    },
-    {
-      "id": "hand-written-strategies-in-b1",
-      "title": "Hand-written strategies in B1",
-      "file": "pages/hand-written-strategies-in-b1.md",
-      "topics": [
-        "strategies",
+        "evolution",
+        "groups",
         "baselines"
       ],
       "kind": "experiment",
       "experiments": [
+        "E30",
+        "E33",
+        "E34",
         "E35"
       ],
       "status": "analysed",
-      "added": "2026-10-21",
-      "summary": "The hand-written strategies planted in B1, which has none of B2's rules against them, failed faster: none of 90 plantings took hold, partly because B1 cuts every link that carries no tokens."
+      "added": "2026-10-19",
+      "summary": "A raider written by hand took hold in young B2 worlds, but not in the same worlds grown older (Experiment 30). The worlds had not learned to defend themselves: their patches grew too poor, and a raider needs three tokens to take a neighbour of one."
     },
     {
       "id": "one-agent-in-a-sea-of-average-agents",

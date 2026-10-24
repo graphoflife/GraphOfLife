@@ -51,10 +51,10 @@ but not that it is.
 <!-- turns -->
 ---
 
-← [Hand-written strategies in B1](hand-written-strategies-in-b1.md) · [Strategies written by hand](../README.md#strategies-written-by-hand)
+← [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Strategies written by hand](../README.md#strategies-written-by-hand)
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (7)
-> [Glossary](glossary.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (8)
+> [Glossary](glossary.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

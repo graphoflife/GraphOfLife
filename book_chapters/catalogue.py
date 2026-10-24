@@ -66,8 +66,8 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
           "searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as "
           "mates (MP) and a bought life (BL)", ["what-holds-a-worlds-size", "mixed-at-birth-with-parents-as-mates"]),
     "YB": ("Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth",
-           ["what-folds-a-world"]),
-    "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["what-folds-a-world"]),
+           ["how-many-dimensions-does-a-world-have"]),
+    "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["how-many-dimensions-does-a-world-have"]),
 }
 #: Batches whose every world draws settings of its own: one line in the table of conditions.
 DRAWN = {"Z": "each world its settings drawn at random from the values the notebook has used (research/oee/search.md)"}

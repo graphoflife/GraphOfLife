@@ -240,5 +240,5 @@ little in one world, round a circle in the other.
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 
 > [!info]- Pages that link here (3)
-> [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Does evolution close the door?](does-evolution-close-the-door.md)
+> [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
 <!-- /turns -->
