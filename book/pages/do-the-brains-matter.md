@@ -262,7 +262,7 @@ interval 2.8 to 4.2). And its first half says almost everything about its
 second: the [correlation](correlation.md) across the thirty worlds
 is 0.96, against 0.12 in the baseline. Of all the variation in the number of
 agents, 96% lies between the worlds without change, and 17% between the
-baseline's ([Between and within](between-and-within.md)).
+baseline's ([Between and within](variance-split.md#between-worlds-and-within-them)).
 
 ## Lines by chance
 

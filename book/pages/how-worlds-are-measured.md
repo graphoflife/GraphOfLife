@@ -131,7 +131,7 @@ and [Do the brains matter?](do-the-brains-matter.md) are full of them.
 - How long a world **remembers** its level is the correlation of the world
   with itself some iterations later ([Autocorrelation](autocorrelation.md)).
 - How much of all variation lies **between** worlds and how much **within**
-  each over time is split by comparing two variances ([Between and within](between-and-within.md)).
+  each over time is split by comparing two variances ([Between and within](variance-split.md#between-worlds-and-within-them)).
 
 ## Step 5 · Comparing two kinds of world
 

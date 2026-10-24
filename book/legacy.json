@@ -170,7 +170,7 @@
   "n-correlation": "correlation",
   "n-autocorrelation": "autocorrelation",
   "n-mobility": "gini-coefficient#mobility",
-  "n-between-and-within": "between-and-within",
+  "n-between-and-within": "variance-split#between-worlds-and-within-them",
   "n-participation-ratio": "participation-ratio",
   "n-kaplan-meier": "kaplan-meier",
   "n-bootstrap": "bootstrap",
@@ -346,6 +346,7 @@
   "least-squares": "correlation#fitting-a-straight-line",
   "logarithmic-axes": "correlation#logarithmic-axes-and-power-laws",
   "power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series",
-  "mobility": "gini-coefficient#mobility"
+  "mobility": "gini-coefficient#mobility",
+  "between-and-within": "variance-split#between-worlds-and-within-them"
  }
 }

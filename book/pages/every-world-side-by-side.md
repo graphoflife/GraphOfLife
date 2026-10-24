@@ -96,7 +96,7 @@ iteration and others not at all ([Do the brains matter?](do-the-brains-matter.md
 For each statistic, how much of its spread between worlds lies *between*
 conditions rather than between seeds of one condition? That share is
 **eta squared**, the same split of variance the note [Between worlds and
-within them](between-and-within.md) explains; here the groups are the
+within them](variance-split.md#between-worlds-and-within-them) explains; here the groups are the
 35 conditions of the fifteen experiments.
 
 <!-- figure side_by_side/decided -->
@@ -175,7 +175,7 @@ longer makes.
   notebook and in the Research tab.
 
 **Related notes:** [What a run records](frames-and-stats.md) ·
-[Between worlds and within them](between-and-within.md) ·
+[Between worlds and within them](variance-split.md#between-worlds-and-within-them) ·
 [How many directions a cloud has](participation-ratio.md) ·
 [Spread between worlds](median-and-quantiles.md#spread-between-worlds) ·
 [What goes with what](what-goes-with-what.md) ·

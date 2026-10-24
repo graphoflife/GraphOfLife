@@ -55,7 +55,7 @@ neuroscience for the dimension of neural activity (Gao et al. 2017).
 <!-- turns -->
 ---
 
-← [Between worlds and within them](between-and-within.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) →
+← [How long a world remembers: autocorrelation and the power spectrum](autocorrelation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) →
 
 > [!info]- Pages that link here (3)
 > [Glossary](glossary.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Every world side by side](every-world-side-by-side.md)

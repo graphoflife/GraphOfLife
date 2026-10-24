@@ -47,7 +47,7 @@ the larger. Where the notebook gives an effective number it says which.
 <!-- turns -->
 ---
 
-← [Where, who and chance: splitting a decision's variance](variance-split.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md) →
+← [Splitting variation: where, who and chance, and between worlds and within them](variance-split.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md) →
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 

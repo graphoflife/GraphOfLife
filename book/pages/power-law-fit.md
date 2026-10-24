@@ -75,7 +75,7 @@ fits both methods to the [baseline](b1-and-b2.md "The stated rules an experiment
 <!-- turns -->
 ---
 
-← [Muller plots](muller-plot.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Where, who and chance: splitting a decision's variance](variance-split.md) →
+← [Muller plots](muller-plot.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Splitting variation: where, who and chance, and between worlds and within them](variance-split.md) →
 
 > [!info]- Pages that link here (4)
 > [Glossary](glossary.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [What a run records](frames-and-stats.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)

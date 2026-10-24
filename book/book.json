@@ -1628,18 +1628,6 @@
       "summary": "A world wanders: its size, its inequality and its births go up and down over hundreds of iterations. The autocorrelation says how long it remembers where it was: the correlation of a world with itself, some time later."
     },
     {
-      "id": "between-and-within",
-      "title": "Between worlds and within them",
-      "file": "pages/between-and-within.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "The worlds of thirty seeds differ, and each world also changes over time."
-    },
-    {
       "id": "participation-ratio",
       "title": "How many directions a cloud of points uses",
       "file": "pages/participation-ratio.md",
@@ -1703,7 +1691,7 @@
     },
     {
       "id": "variance-split",
-      "title": "Where, who and chance: splitting a decision's variance",
+      "title": "Splitting variation: where, who and chance, and between worlds and within them",
       "file": "pages/variance-split.md",
       "topics": [
         "methods",
@@ -1712,7 +1700,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "Agents decide differently from one another."
+      "summary": "A spread of numbers can often be split exactly into parts with different causes. The notebook does it twice. For a decision, put every brain into every situation with the same random draws."
     },
     {
       "id": "effective-number",
