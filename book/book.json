@@ -635,7 +635,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "The groups a token tends to stay inside (the map equation), in every world, set beside the same flow with every agent's partners dealt among its neighbours: B1's groups are its network's, B2's flow is pairs, and only B2's agents keep a partner longer than chance."
+      "summary": "When an agent stakes tokens on a neighbour's node, the tokens flow along the connection between them. A flow module is a group of agents that a token wandering this flow tends to stay inside, and the map equation finds such groups."
     },
     {
       "id": "token-flow",
@@ -648,19 +648,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "In every game, the tokens an agent stakes on a neighbour's node flow along the connection between them: that is the token flow. Once each pair's two directions cancel, what is left is the net flow."
-    },
-    {
-      "id": "map-equation",
-      "title": "Flow modules and the map equation",
-      "file": "pages/map-equation.md",
-      "topics": [
-        "game",
-        "groups"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Which agents form groups?"
     },
     {
       "id": "what-shape-does-the-network-take",

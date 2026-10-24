@@ -97,7 +97,6 @@ How the game is played, where tokens flow, which loops they go round, and the gr
 - [Where tokens flow](pages/where-the-tokens-flow.md)
 - [Flow modules: the groups tokens stay in](pages/flow-modules.md)
 - [Measuring the flow: token flow, lightning and circulation](pages/token-flow.md)
-- [Flow modules and the map equation](pages/map-equation.md)
 
 ### The shape and health of the network
 

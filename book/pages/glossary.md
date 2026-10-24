@@ -45,7 +45,7 @@ there.
 - **[even split](even-split.md)** — What the rules do when a brain scores no candidate above zero: the stake is spread evenly.
 - **[exploitability](exploitability.md)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
 - **[extinction](extinction.md)** (also extinct) — A world's end before its last iteration: it has dropped to its threshold of agents or fewer.
-- **[flow module](map-equation.md)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
+- **[flow module](flow-modules.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
 - **[founder](starting-ring.md)** — One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.
 - **[fractional factorial](fractional-factorial.md)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
 - **[frame](frames-and-stats.md)** — A whole world as a run records it after one phase: every agent, its tokens and connections.

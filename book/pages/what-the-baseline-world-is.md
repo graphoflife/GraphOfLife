@@ -478,7 +478,7 @@ brain holds a position.
 
 None has been found since. In the pilots for B2, connected groups of one
 genotype and of close kin shrank over time in every world. In B1 the groups
-that tokens keep to, the [flow modules](map-equation.md "A group of agents that a token, following the flow, tends to stay inside."), are the network's own regions. They
+that tokens keep to, the flow modules, are the network's own regions. They
 last nearly as long when every agent's partners are dealt at random among its
 neighbours, and they outlast their first members only as a region outlasts
 its occupants. B2's agents add one thing of their own: pairs of partners

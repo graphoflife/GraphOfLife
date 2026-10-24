@@ -211,6 +211,6 @@ births fills a world**, to half as many agents again, and poorer ones
 
 [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) →
 
-> [!info]- Pages that link here (3)
-> [The estate of the dead](estate.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md)
+> [!info]- Pages that link here (4)
+> [The estate of the dead](estate.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md)
 <!-- /turns -->

@@ -86,7 +86,7 @@ that [Gliders, and who helps whom](gliders-and-who-helps-whom.md) measures:
 the part of the flow of tokens that goes round in [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice."). Three things have not
 yet been read in the long worlds of this page: that circulation, the kinds of
 behaviour of [How different are the agents?](how-different-are-the-agents.md),
-and the [flow modules](map-equation.md "A group of agents that a token, following the flow, tends to stay inside.") of [Flow modules: the groups tokens stay
+and the flow modules of [Flow modules: the groups tokens stay
 in](flow-modules.md).
 
 ### Ten worlds, ten thousand iterations

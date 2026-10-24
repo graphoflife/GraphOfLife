@@ -426,8 +426,9 @@
       "also": [
         "map equation"
       ],
-      "page": "map-equation",
-      "says": "A group of agents that a token, following the flow, tends to stay inside."
+      "page": "flow-modules",
+      "says": "A group of agents that a token, following the flow, tends to stay inside.",
+      "anchor": "flow-modules-and-the-map-equation"
     },
     {
       "name": "lineage",

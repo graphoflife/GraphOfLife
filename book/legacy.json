@@ -160,7 +160,7 @@
   "n-exploitability": "exploitability",
   "n-circulation": "token-flow#flows-that-go-round",
   "n-help": "help",
-  "n-map-equation": "map-equation",
+  "n-map-equation": "flow-modules#flow-modules-and-the-map-equation",
   "n-what-makes-a-world-interesting": "what-makes-a-world-interesting",
   "n-open-ended-test": "open-ended-test",
   "n-median-and-quantiles": "median-and-quantiles",
@@ -334,6 +334,7 @@
   "core-trees-leaves": "bridges#core-trees-and-leaves",
   "bands": "median-and-quantiles#bands-many-worlds-in-one-figure",
   "settled-life": "median-and-quantiles#the-settled-life-of-a-world",
-  "spread-between-worlds": "median-and-quantiles#spread-between-worlds"
+  "spread-between-worlds": "median-and-quantiles#spread-between-worlds",
+  "map-equation": "flow-modules#flow-modules-and-the-map-equation"
  }
 }

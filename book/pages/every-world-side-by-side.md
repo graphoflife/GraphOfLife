@@ -150,7 +150,7 @@ that question was about. Gathered:
 | measure | lab worlds | pilot worlds |
 |---|---|---|
 | the ~95 recorded statistics, [lightning](token-flow.md#lightning-tokens-that-go-round "A closed loop of the flow of a game: tokens that go round and come back where they started.") among them | every run | the engine's pilots, from recorded games (new); the prototype's, their series |
-| [flow modules](map-equation.md "A group of agents that a token, following the flow, tends to stay inside.") ([Flow modules: the groups tokens stay in](flow-modules.md)) | up to five seeds of every condition (new) | the engine's pilots (new) |
+| flow modules ([Flow modules: the groups tokens stay in](flow-modules.md)) | up to five seeds of every condition (new) | the engine's pilots (new) |
 | loops and the exact [circulation](token-flow.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
 | lifetime contests between [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)) | B2, through the long runs that go on from its worlds | every pilot batch |
 | correlations among agents ([What goes with what](what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab (new) | any run made on the server or in the browser (new) |
