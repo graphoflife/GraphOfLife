@@ -1325,15 +1325,16 @@
     },
     {
       "id": "eight-switches-at-once",
-      "title": "Eight switches at once",
+      "title": "Eight switches at once, and how sixteen worlds can test them",
       "file": "pages/eight-switches-at-once.md",
       "topics": [
-        "rules"
+        "rules",
+        "methods"
       ],
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-17",
-      "summary": "Eight of the notebook's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2. On B1 (batch V) few switches stand out against the pairs, and none makes its evolution go on."
+      "summary": "Most experiments threw one switch at a time into B2, the baseline whose network cannot break. Batch U threw eight together in sixteen worlds, chosen by a fractional factorial design so that each switch's effect can still be read."
     },
     {
       "id": "healthy-and-rich",
@@ -1654,19 +1655,6 @@
       "status": "written",
       "added": "2026-10-16",
       "summary": "Counting kinds can mislead: one kind may hold half the agents and the rest one agent each. An effective number counts kinds by how much of the population they hold. It is the number of equally common kinds that would be as diverse."
-    },
-    {
-      "id": "fractional-factorial",
-      "title": "Many switches in few worlds: fractional factorial designs",
-      "file": "pages/fractional-factorial.md",
-      "topics": [
-        "methods",
-        "rules"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-17",
-      "summary": "A world has many switches."
     }
   ]
 }

@@ -150,7 +150,7 @@ neuroscience it measures the dimension of neural activity (Gao and others
 <!-- turns -->
 ---
 
-← [Splitting variation: where, who and chance, and between worlds and within them](variance-split.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md) →
+← [Splitting variation: where, who and chance, and between worlds and within them](variance-split.md) · [Methods and statistics](../README.md#methods-and-statistics)
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 

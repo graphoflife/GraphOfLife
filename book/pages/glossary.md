@@ -47,7 +47,7 @@ there.
 - **[extinction](extinction.md)** (also extinct) — A world's end before its last iteration: it has dropped to its threshold of agents or fewer.
 - **[flow module](flow-modules.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
 - **[founder](starting-ring.md)** — One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.
-- **[fractional factorial](fractional-factorial.md)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
+- **[fractional factorial](eight-switches-at-once.md#many-switches-in-few-worlds-fractional-factorial-designs)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
 - **[frame](frames-and-stats.md)** — A whole world as a run records it after one phase: every agent, its tokens and connections.
 - **[game](one-iteration.md#phase-2-the-game)** — The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.
 - **[genotype](genotype.md)** (also family tree) — The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.

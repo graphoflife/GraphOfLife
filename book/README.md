@@ -188,7 +188,7 @@ The switches of the engine, alone and in company: what each rule does to a world
 - [Brains mixed at birth, units that cost, an eye for raids on kin](pages/mixed-brains-costly-units.md)
 - [Links to strangers](pages/links-to-strangers.md)
 - [Brains mixed at birth, with every other rule](pages/mixing-with-every-other-rule.md)
-- [Eight switches at once](pages/eight-switches-at-once.md)
+- [Eight switches at once, and how sixteen worlds can test them](pages/eight-switches-at-once.md)
 
 ### Looking for a healthy, rich world
 
@@ -223,5 +223,4 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 - [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](pages/bootstrap.md)
 - [Splitting variation: where, who and chance, and between worlds and within them](pages/variance-split.md)
 - [Effective numbers: how many kinds, and how many directions](pages/effective-number.md)
-- [Many switches in few worlds: fractional factorial designs](pages/fractional-factorial.md)
 <!-- /contents -->

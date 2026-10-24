@@ -192,13 +192,13 @@ waits its turn.
 [What holds a world's size](what-holds-a-worlds-size.md) ·
 [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) ·
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md) ·
-[Many switches in few worlds](fractional-factorial.md)
+[Many switches in few worlds](eight-switches-at-once.md#many-switches-in-few-worlds-fractional-factorial-designs)
 
 <!-- turns -->
 ---
 
 [Changing the rules](../README.md#changing-the-rules) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) →
 
-> [!info]- Pages that link here (8)
-> [What this notebook is about](what-this-notebook-is-about.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The random twin: is a world a space?](random-twin.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The random twin: is a world a space?](random-twin.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
 <!-- /turns -->

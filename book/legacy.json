@@ -184,7 +184,7 @@
   "n-power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series",
   "n-variance-split": "variance-split",
   "n-effective-number": "effective-number",
-  "n-fractional-factorial": "fractional-factorial",
+  "n-fractional-factorial": "eight-switches-at-once#many-switches-in-few-worlds-fractional-factorial-designs",
   "A": "what-a-simulation-costs",
   "B": "what-goes-with-what",
   "C": "every-simulation"
@@ -352,6 +352,7 @@
   "kaplan-meier": "age-and-lifetime#survival-curves-kaplanmeier",
   "muller-plot": "genotype#muller-plots",
   "pilot-worlds": "the-lab#pilot-worlds",
-  "power-law-fit": "power-laws-real-and-apparent#fitting-a-power-law-properly"
+  "power-law-fit": "power-laws-real-and-apparent#fitting-a-power-law-properly",
+  "fractional-factorial": "eight-switches-at-once#many-switches-in-few-worlds-fractional-factorial-designs"
  }
 }

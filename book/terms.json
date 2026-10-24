@@ -561,8 +561,9 @@
     },
     {
       "name": "fractional factorial",
-      "page": "fractional-factorial",
-      "says": "A design that tests many switches together in few worlds, so that each one's effect can still be told apart."
+      "page": "eight-switches-at-once",
+      "says": "A design that tests many switches together in few worlds, so that each one's effect can still be told apart.",
+      "anchor": "many-switches-in-few-worlds-fractional-factorial-designs"
     }
   ],
   "skip": {
