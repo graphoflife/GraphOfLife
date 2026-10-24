@@ -24,7 +24,7 @@ wins, the owner's own stake counting one and a half times in [B2](b1-and-b2.md "
 random, unless a crowd of revolutionary stakes outweighs the largest staker and
 everyone above the crowd, in which case the winner is drawn from the step of the
 crowd that tipped it. Under the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' alliances
-([Alliances](alliances.md)) the side with the largest total
+([Alliances](another-game.md#alliances)) the side with the largest total
 wins. A tie between $k$ stakers gives each a probability $1/k$. In both cases
 the probability is what the rule would give if the game were played many
 times, so the effect is a fraction of a node: a stake that turns a lost node

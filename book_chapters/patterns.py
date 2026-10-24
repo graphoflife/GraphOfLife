@@ -30,7 +30,7 @@ B2 = [f"B2-10000-s{i:03d}" for i in range(1, 11)]
 B1 = [f"B1-10000-s{i:03d}" for i in range(1, 11)]
 ALLIES = ["A10k_allies-s1_500", "A10k_allies-s2_500", "AL_allies10k-s3_2000", "AL_allies10k-s4_2000"]
 CONTROLS = ["A10k_ctrl-s1_500", "A10k_ctrl-s2_500"]
-COLOURS = {"B2": BLUE, "B1": ORANGE, "alliances": VIOLET, "no alliances": GREY}
+COLOURS = {"B2": BLUE, "B1": ORANGE, "another-game": VIOLET, "no alliances": GREY}
 #: Helping pairs a stretch of 50 games needs before the share of them returned, going round or
 #: kept in the family means anything.
 ENOUGH_PAIRS = 100
@@ -38,7 +38,7 @@ ENOUGH_PAIRS = 100
 LAB_RUNS = ("The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of the "
             "baseline set, `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every "
             "game with every agent's stakes; read are the games of iterations 1,000 to 2,000.")
-PILOT_RUNS = ("Pilot worlds of [Alliances](alliances.md) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and "
+PILOT_RUNS = ("Pilot worlds of [Alliances](another-game.md#alliances) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and "
               "`-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, "
               "`A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 "
               "iterations with every game recorded in the lab's form "
@@ -258,7 +258,7 @@ def patterns(ch: F.Chapter) -> None:
         def flows(kind, key):
             g = {"B2": [circ[w][kind][key] for w in B2], "B1": [circ[w][kind][key] for w in B1]}
             if allies:
-                g["alliances"] = [p["circulation"][kind][key] for p in allies]
+                g["another-game"] = [p["circulation"][kind][key] for p in allies]
             if controls:
                 g["no alliances"] = [p["circulation"][kind][key] for p in controls]
             return g
@@ -306,7 +306,7 @@ def patterns(ch: F.Chapter) -> None:
         def helped(f):
             g = {"B2": [f(dec[w]) for w in B2], "B1": [f(dec[w]) for w in B1]}
             if allies and all("decisive" in p for p in allies):
-                g["alliances"] = [f(p["decisive"]) for p in allies]
+                g["another-game"] = [f(p["decisive"]) for p in allies]
             if controls and all("decisive" in p for p in controls):
                 g["no alliances"] = [f(p["decisive"]) for p in controls]
             return g
@@ -375,7 +375,7 @@ def patterns(ch: F.Chapter) -> None:
 
     # --- The alliance pilots, what their labels say ---------------------------
     if allies:
-        ch.number("alliance_labels", {p["pilot"]: p["alliances"] for p in allies})
+        ch.number("alliance_labels", {p["pilot"]: p["another-game"] for p in allies})
         ch.number("alliance_partnerships", {p["pilot"]: {"kept_in": p["structures"]["kept_in_partnership"],
                                                          "kept_otherwise": p["structures"]["kept_otherwise"]}
                                             for p in allies + controls})

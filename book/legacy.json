@@ -60,7 +60,7 @@
   "53": "how-big-should-a-brain-be",
   "54": "the-switches-the-world-was-built-with",
   "55": "another-game",
-  "56": "alliances",
+  "56": "another-game#alliances",
   "57": "rules-without-numbers",
   "58": "gliders-and-who-helps-whom",
   "59": null,
@@ -303,6 +303,7 @@
   "what-folds-a-world": "how-many-dimensions-does-a-world-have#what-folds-a-world",
   "a-crew-of-raiders": "does-evolution-close-the-door#a-crew-of-raiders",
   "raiders-that-breed": "does-evolution-close-the-door#raiders-that-breed",
-  "hand-written-strategies-in-b1": "does-evolution-close-the-door#hand-written-strategies-in-b1"
+  "hand-written-strategies-in-b1": "does-evolution-close-the-door#hand-written-strategies-in-b1",
+  "alliances": "another-game#alliances"
  }
 }

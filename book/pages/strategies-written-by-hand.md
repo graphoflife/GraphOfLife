@@ -215,7 +215,7 @@ favour those who show it.
 sense of one's own given for free, stakes that count together by [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor."),
 families that carry a password of their own
 ([Another game](another-game.md)), and alliances, where knowing one's own is
-a decision two agents make together ([Alliances](alliances.md)). None of
+a decision two agents make together ([Alliances](another-game.md#alliances)). None of
 them made evolution find the raiders' play, or go on improving.
 
 <!-- turns -->
@@ -224,5 +224,5 @@ them made evolution find the raiders' play, or go on improving.
 [Strategies written by hand](../README.md#strategies-written-by-hand) · [What a brain can compute](what-a-brain-can-compute.md) →
 
 > [!info]- Pages that link here (12)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [The invasion test](invasion-test.md) · [Another game](another-game.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [The invasion test](invasion-test.md) · [Other contests: a lottery, and alliances](another-game.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

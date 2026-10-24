@@ -66,7 +66,7 @@ The brains can be dealt in two ways:
   starts as one territory. This is the fairer contest for anything that
   depends on neighbours of one kind standing together, such as an alliance,
   which a coin per agent cuts through
-  ([Alliances](alliances.md));
+  ([Alliances](another-game.md#alliances));
 - **turf** (`--layout turf`): halves, and the era whose world the contest is
   played in keeps its own brains where they are on its half, so its clones
   still sit next to clones and its allies next to allies. Each era plays once
@@ -96,6 +96,6 @@ recipes and in `research/oee/pilots/LOG.md`.
 
 ← [What the viewer can colour by](viewer-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Median and quantiles](median-and-quantiles.md) →
 
-> [!info]- Pages that link here (12)
-> [Glossary](glossary.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The estate of the dead](estate.md) · [How different are the agents?](how-different-are-the-agents.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The estate of the dead](estate.md) · [How different are the agents?](how-different-are-the-agents.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

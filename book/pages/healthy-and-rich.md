@@ -283,7 +283,7 @@ counted, on 17 October 2026, 99 worlds of 624 met all seven marks:
   at birth with one other rule
   ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)),
   and 12 of batch W;
-- five alliance pilots of B1 ([Alliances](alliances.md)), four of them at
+- five alliance pilots of B1 ([Alliances](another-game.md#alliances)), four of them at
   3,000 tokens, below the notebook's rule of 10,000;
 - and one long run.
 

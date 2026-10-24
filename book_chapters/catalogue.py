@@ -32,12 +32,12 @@ BOOKKEEPING = {"seed", "total_tokens", "extinction_threshold", "archive_every", 
 #: What each pilot batch asked, and the pages that answer it.
 BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "A3k": ("Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the notebook's "
-            "worlds have at least 10,000 tokens since)", ["alliances"]),
+            "worlds have at least 10,000 tokens since)", ["another-game"]),
     "A10k": ("Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts "
-             "twice, against a control", ["alliances"]),
-    "AL": ("Alliances over a long time and at 20,000 tokens", ["alliances"]),
+             "twice, against a control", ["another-game"]),
+    "AL": ("Alliances over a long time and at 20,000 tokens", ["another-game"]),
     "N": ("Rules without numbers (B3, with and without allies) and alliances without the home advantage",
-          ["alliances", "rules-without-numbers"]),
+          ["another-game", "rules-without-numbers"]),
     "S": ("The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other "
           "contests (a lottery, sides pooled by genotype or family, kin and family senses)",
           ["the-switches-the-world-was-built-with", "another-game"]),

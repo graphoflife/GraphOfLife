@@ -202,8 +202,7 @@ Help, alliances, other contests and patterns that outlast their agents: do agent
 
 - [Who helps whom](pages/who-helps-whom.md)
 - [Do agents cooperate?](pages/do-agents-cooperate.md)
-- [Another game](pages/another-game.md)
-- [Alliances](pages/alliances.md)
+- [Other contests: a lottery, and alliances](pages/another-game.md)
 - [Gliders, and who helps whom](pages/gliders-and-who-helps-whom.md)
 - [Help](pages/help.md)
 

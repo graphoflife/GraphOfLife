@@ -92,10 +92,10 @@ prototype's own code. What each batch asked:
 <!-- table catalogue/pilots -->
 | batch | what it asks | conditions | worlds | tokens | iterations | status | page |
 |---|---|---|---|---|---|---|---|
-| A3k | Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the notebook's worlds have at least 10,000 tokens since) | 4 | 8 | 3,000 | 1,000 | 5 done, 3 stopped early | [Alliances](alliances.md) |
-| A10k | Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts twice, against a control | 4 | 8 | 10,000 | 1,000 | done | [Alliances](alliances.md) |
-| AL | Alliances over a long time and at 20,000 tokens | 2 | 4 | 10,000, 20,000 | 2,000, 3,000 | done | [Alliances](alliances.md) |
-| N | Rules without numbers (B3, with and without allies) and alliances without the home advantage | 4 | 8 | 10,000 | 1,000 | done | [Alliances](alliances.md), [Rules without numbers](rules-without-numbers.md) |
+| A3k | Alliances, kin pooling and a stake gain, first tried at 3,000 tokens (kept only as hints: the notebook's worlds have at least 10,000 tokens since) | 4 | 8 | 3,000 | 1,000 | 5 done, 3 stopped early | [Alliances](another-game.md#alliances) |
+| A10k | Cooperation with a surplus: alliances by mutual consent, sides pooled by kinship, support that counts twice, against a control | 4 | 8 | 10,000 | 1,000 | done | [Alliances](another-game.md#alliances) |
+| AL | Alliances over a long time and at 20,000 tokens | 2 | 4 | 10,000, 20,000 | 2,000, 3,000 | done | [Alliances](another-game.md#alliances) |
+| N | Rules without numbers (B3, with and without allies) and alliances without the home advantage | 4 | 8 | 10,000 | 1,000 | done | [Alliances](another-game.md#alliances), [Rules without numbers](rules-without-numbers.md) |
 | S | The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other contests (a lottery, sides pooled by genotype or family, kin and family senses) | 13 | 26 | 10,000 | 1,000 | done | [The switches the world was built with](the-switches-the-world-was-built-with.md), [Another game](another-game.md) |
 | L | Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without revolutions to 3,000 | 3 | 13 | 10,000 | 3,000, 10,000, 50,000 | 10 done, 3 stopped early | [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops), [A hundred thousand iterations](a-hundred-thousand-iterations.md) |
 | P | Two inputs (where my brain came from, who helped me) and links that hold a token | 6 | 12 | 10,000 | 2,000 | done | [Rules without numbers](rules-without-numbers.md), [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |

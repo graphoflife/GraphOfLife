@@ -539,7 +539,7 @@ The six rules:
    stakes returned, and support stakes, were tried and gave nothing that
    lasted ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Alliances, in which
    two neighbours that both want it count their stakes together, were taken
-   up at once ([Alliances](alliances.md)).
+   up at once ([Alliances](another-game.md#alliances)).
 5. **Nobody can tell kin from stranger.** Kin selection, help given to
    relatives who carry the same genes, has its precondition: relatives live
    together. But brains cannot see relatedness

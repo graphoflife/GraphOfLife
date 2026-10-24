@@ -52,7 +52,7 @@ of 16 that change only when copied, deaths mended in a ring, and a memory of
 the last game's stakes. [Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") are off. Three variants, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
 at 10,000 tokens:
 
-- **B3a**: with alliances ([Alliances](alliances.md));
+- **B3a**: with alliances ([Alliances](another-game.md#alliances));
 - **B3b**: with alliances, and a newborn also joined to every neighbour its
   parent was allied with in the last game (`birth_allies`), which builds
   space from the alliances, with no number;
@@ -138,7 +138,7 @@ time. Here they come all at once:
 | a cap on links | a star, one agent joined to 98% of the world |
 | links at birth, and with every unused link lapsing | a tree: 2.2 links per agent, and a cut of 39% by one loss |
 | an age limit | in the tree, agents live for hundreds of iterations and births nearly stop |
-| the home advantage | the alliances do its work, as in [Alliances](alliances.md) |
+| the home advantage | the alliances do its work, as in [Alliances](another-game.md#alliances) |
 
 Alliances made the difference between dying and living: both worlds without
 them died, and three of the four with them lived. They did not make the
@@ -172,7 +172,7 @@ replacement must prevent. These are [candidates](one-iteration.md#phase-1-reprod
 come next:
 
 - **The owner's one and a half → none.** Alliances form without it
-  ([Alliances](alliances.md)), and what defends a node is then whoever
+  ([Alliances](another-game.md#alliances)), and what defends a node is then whoever
   stands with its owner.
 - **The share kept at home and the smallest child → birth by division.** An
   agent decides only *when* to have a child, and a child always takes half of
@@ -242,6 +242,6 @@ come next:
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (7)
-> [How this notebook is written](how-this-notebook-is-written.md) · [Another game](another-game.md) · [Alliances](alliances.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (6)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Other contests: a lottery, and alliances](another-game.md) · [The switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

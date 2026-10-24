@@ -1549,7 +1549,7 @@
     },
     {
       "id": "another-game",
-      "title": "Another game",
+      "title": "Other contests: a lottery, and alliances",
       "file": "pages/another-game.md",
       "topics": [
         "groups",
@@ -1558,20 +1558,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-15",
-      "summary": "Two contests other than Colonel Blotto's, with no number in them: a lottery, in which every staked token is a ticket, and stakes pooled by genotype, in which agents with one brain fight as one side."
-    },
-    {
-      "id": "alliances",
-      "title": "Alliances",
-      "file": "pages/alliances.md",
-      "topics": [
-        "groups",
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-15",
-      "summary": "Cooperation with a surplus: two neighbours that both want it are allied, and their stakes on a node count together. One alliance grows until it holds the whole world, and with it the fighting ends."
+      "summary": "In the game of Graph of Life, a node goes to whoever stakes most on it. This page changes that contest in pilot worlds, two seeds each, and asks whether evolution then goes on."
     },
     {
       "id": "gliders-and-who-helps-whom",

@@ -272,7 +272,7 @@ fifths.
   help: nothing in the game rewards staying with a partner. A group of the
   agents' own needs a rule that does — a support stake that counts only if it
   is returned, or a share in what a partnership wins. Alliances
-  ([Alliances](alliances.md)) are such a rule, and were taken up at once;
+  ([Alliances](another-game.md#alliances)) are such a rule, and were taken up at once;
   this measure, run on worlds with alliances, would show whether their groups
   outlast the network's.
 

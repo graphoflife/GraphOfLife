@@ -197,7 +197,7 @@ points to four directions, none of them needing a tuned number:
 2. **Payoffs that depend on how common a kind is**, so that a rare kind has an
    edge. Nothing in the game does this now; alliances, where a convention pays
    most when shared, did the opposite and made one kind win
-   ([Alliances](alliances.md)).
+   ([Alliances](another-game.md#alliances)).
 3. **Heredity of whole parts.** Brains mixed at birth from a parent and a mate
    gave, in one of two worlds, some of the largest steps of evolution of any
    pilot ([Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)): a unit that works can
