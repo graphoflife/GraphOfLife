@@ -10,9 +10,9 @@ Most experiments on B2 asked what one rule does to it. In October 2026 the
 author asked for the rules in combination, and six [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batches answered:
 four played one rule together with each of the others in turn — [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed
 at birth (batch Y, [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)), no
-[revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") (W, [Revolutions, with every other rule](revolutions-with-every-other-rule.md)),
-handover (X, [Handover, with every other rule](handover-with-every-other-rule.md)) and gifts
-(T, [Gifts, with every other rule](gifts-with-every-other-rule.md)) — and two threw eight
+[revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") (W, [Revolutions, with every other rule](the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule)),
+handover (X, [Handover, with every other rule](the-switches-the-world-was-built-with.md#handover-with-every-other-rule)) and gifts
+(T, [Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule)) — and two threw eight
 rules at once, in sixteen worlds each, on B2 and on [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") (batches U and V,
 [Eight switches at once](eight-switches-at-once.md)). Every world is a pilot of 10,000
 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") played for 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") — the four batches of pairs in two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."),
@@ -30,12 +30,12 @@ what it does among other rules.**
   in most, they all but vanish — 0.07 off the share of the poor on average
   ([Eight switches at once](eight-switches-at-once.md)). Among the companions that undo them are the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") to the
   newborns or the parents, which pays for births; handover (48 and 32 more
-  poor in every hundred, [Handover, with every other rule](handover-with-every-other-rule.md)); and, a little, gifts (11 and 17,
-  [Gifts, with every other rule](gifts-with-every-other-rule.md)). And one companion they need: without revolutions, mixed
-  worlds grow and grow poor ([Revolutions, with every other rule](revolutions-with-every-other-rule.md)).
+  poor in every hundred, [Handover, with every other rule](the-switches-the-world-was-built-with.md#handover-with-every-other-rule)); and, a little, gifts (11 and 17,
+  [Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule)). And one companion they need: without revolutions, mixed
+  worlds grow and grow poor ([Revolutions, with every other rule](the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule)).
 - **Gifts' speed.** Alone, gifts made B2's brains of 1,000 beat those of 500
   more clearly than in B2 itself; with another rule as well, no more than B2
-  does ([Gifts, with every other rule](gifts-with-every-other-rule.md)).
+  does ([Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule)).
 - **Links that hold a token** take 0.29 and 0.33 off B2's share of the poor
   alone, and 0.06 among the sixteen; **every unused link lapsing** halves its
   fall in [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."); **no revolutions** on B1 does not do in company what it
@@ -60,7 +60,7 @@ times as common and hold the world small.
 
 **Rules that reshape the network do so everywhere.** Handover costs two marks
 of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") with nearly every companion, thinning the network into
-trees on single links, and unfolds it a little ([Handover, with every other rule](handover-with-every-other-rule.md)). Every unused
+trees on single links, and unfolds it a little ([Handover, with every other rule](the-switches-the-world-was-built-with.md#handover-with-every-other-rule)). Every unused
 link lapsing makes worlds rich, small and about two-dimensional, and costs
 marks too ([Eight switches at once](eight-switches-at-once.md) and [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 
@@ -185,9 +185,9 @@ waits its turn.
 **Related notes:** [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) ·
 [Eight switches at once](eight-switches-at-once.md) ·
 [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) ·
-[Revolutions, with every other rule](revolutions-with-every-other-rule.md) ·
-[Handover, with every other rule](handover-with-every-other-rule.md) ·
-[Gifts, with every other rule](gifts-with-every-other-rule.md) ·
+[Revolutions, with every other rule](the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule) ·
+[Handover, with every other rule](the-switches-the-world-was-built-with.md#handover-with-every-other-rule) ·
+[Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule) ·
 [Healthy and rich](healthy-and-rich.md) ·
 [What holds a world's size](what-holds-a-worlds-size.md) ·
 [Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md) ·
@@ -197,8 +197,8 @@ waits its turn.
 <!-- turns -->
 ---
 
-[Changing the rules](../README.md#changing-the-rules) · [The switches the world was built with](the-switches-the-world-was-built-with.md) →
+[Changing the rules](../README.md#changing-the-rules) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) →
 
-> [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
+> [!info]- Pages that link here (8)
+> [What this notebook is about](what-this-notebook-is-about.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The random twin: is a world a space?](random-twin.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md)
 <!-- /turns -->

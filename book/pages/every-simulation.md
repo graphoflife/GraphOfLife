@@ -101,11 +101,11 @@ prototype's own code. What each batch asked:
 | P | Two inputs (where my brain came from, who helped me) and links that hold a token | 6 | 12 | 10,000 | 2,000 | done | [Rules without numbers](rules-without-numbers.md), [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
 | Q | Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a token without old age | 5 | 10 | 10,000 | 2,000 | done | [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) |
 | R | Who inherits the estate of the dead: the poorest, the newborns, their parents | 9 | 18 | 10,000 | 2,000 | done | [Who inherits?](who-inherits.md) |
-| T | Gifts together with each other switch | 24 | 48 | 10,000 | 1,000 | done | [Gifts, with every other rule](gifts-with-every-other-rule.md) |
+| T | Gifts together with each other switch | 24 | 48 | 10,000 | 1,000 | done | [Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule) |
 | U | Eight switches in combination on B2: a fractional factorial design | 16 | 16 | 10,000 | 1,000 | done | [Eight switches at once](eight-switches-at-once.md) |
 | V | Eight switches in combination on B1: a fractional factorial design | 16 | 16 | 10,000 | 1,000 | done | [Eight switches at once](eight-switches-at-once.md) |
-| W | No revolutions together with each other switch, on B2 | 24 | 48 | 10,000 | 1,000 | done | [Revolutions, with every other rule](revolutions-with-every-other-rule.md) |
-| X | Handover together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [Handover, with every other rule](handover-with-every-other-rule.md) |
+| W | No revolutions together with each other switch, on B2 | 24 | 48 | 10,000 | 1,000 | done | [Revolutions, with every other rule](the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule) |
+| X | Handover together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [Handover, with every other rule](the-switches-the-world-was-built-with.md#handover-with-every-other-rule) |
 | Y | Brains mixed at birth together with each other switch, on B2 | 23 | 46 | 10,000 | 1,000 | done | [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) |
 | K | Links to strangers on B2: every search (jump, walk, reach) with every steering and consent | 12 | 24 | 10,000 | 1,000 | done | [Links to strangers](links-to-strangers.md) |
 | Z | Settings drawn at random from every value the notebook has used, the values that make worlds worse dropped round after round (research/oee/search.md) | 64 | 64 | 10,000 | 1,000 | 62 done, 2 stopped early | — |

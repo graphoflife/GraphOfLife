@@ -55,6 +55,6 @@ but not that it is.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Strategies written by hand](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (7)
+> [Glossary](glossary.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

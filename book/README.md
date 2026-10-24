@@ -189,9 +189,8 @@ How to tell whether evolution goes on, why it stops, and what would count as ope
 
 Raiders, turtles and crews written by hand and planted in evolved worlds: is evolution's play the best?
 
-- [Strategies written by hand](pages/strategies-written-by-hand.md)
+- [Can a strategy written by hand beat evolution?](pages/strategies-written-by-hand.md)
 - [What a brain can compute](pages/what-a-brain-can-compute.md)
-- [How large a crowd a raider needs](pages/how-large-a-crowd-a-raider-needs.md)
 - [Why the raiders stopped winning](pages/does-evolution-close-the-door.md)
 - One agent in a sea of average agents — *not written yet*
 - [The invasion test](pages/invasion-test.md)
@@ -211,16 +210,13 @@ Help, alliances, other contests and patterns that outlast their agents: do agent
 The switches of the engine, alone and in company: what each rule does to a world.
 
 - [Rules in company](pages/rules-in-company.md)
-- [The switches the world was built with](pages/the-switches-the-world-was-built-with.md)
+- [Revolutions, handover and gifts: the switches the world was built with](pages/the-switches-the-world-was-built-with.md)
 - [Rules without numbers](pages/rules-without-numbers.md)
 - [Who inherits?](pages/who-inherits.md)
 - [Brains mixed at birth, units that cost, an eye for raids on kin](pages/mixed-brains-costly-units.md)
 - [Links to strangers](pages/links-to-strangers.md)
 - [Brains mixed at birth, with every other rule](pages/mixing-with-every-other-rule.md)
 - [Eight switches at once](pages/eight-switches-at-once.md)
-- [Revolutions, with every other rule](pages/revolutions-with-every-other-rule.md)
-- [Handover, with every other rule](pages/handover-with-every-other-rule.md)
-- [Gifts, with every other rule](pages/gifts-with-every-other-rule.md)
 
 ### Looking for a healthy, rich world
 

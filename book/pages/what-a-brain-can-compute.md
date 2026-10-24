@@ -295,10 +295,10 @@ physics, asks for exactly that kind of thing.
 <!-- turns -->
 ---
 
-← [Strategies written by hand](strategies-written-by-hand.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) →
+← [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [Why the raiders stopped winning](does-evolution-close-the-door.md) →
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (8)
-> [Every setting](settings.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
+> [Every setting](settings.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
 <!-- /turns -->

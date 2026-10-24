@@ -188,6 +188,6 @@ it most where the agents stay rich.
 
 ← [Links to strangers](links-to-strangers.md) · [Changing the rules](../README.md#changing-the-rules) · [Eight switches at once](eight-switches-at-once.md) →
 
-> [!info]- Pages that link here (10)
-> [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (8)
+> [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Eight switches at once](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

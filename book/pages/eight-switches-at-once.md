@@ -272,7 +272,7 @@ switches stand out:
   as when thrown alone in B1 ([Who inherits?](who-inherits.md)).
 - **Without handover, a world keeps more links** — two more per agent — the
   other side of what handover did in B2
-  ([Handover, with every other rule](handover-with-every-other-rule.md)).
+  ([Handover, with every other rule](the-switches-the-world-was-built-with.md#handover-with-every-other-rule)).
 - **Gifts make B1 larger and poorer** (1,040 more agents, 0.25 more of them
   poor), and links that hold a token make it smaller (1,310 fewer).
 - **No revolutions does not do in company what it did alone.** Thrown alone,
@@ -351,8 +351,8 @@ change only when copied — and neither does it either (−0.02 and +0.14).
 <!-- turns -->
 ---
 
-← [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Changing the rules](../README.md#changing-the-rules) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) →
+← [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Changing the rules](../README.md#changing-the-rules)
 
-> [!info]- Pages that link here (6)
-> [Rules in company](rules-in-company.md) · [Revolutions, with every other rule](revolutions-with-every-other-rule.md) · [Handover, with every other rule](handover-with-every-other-rule.md) · [Gifts, with every other rule](gifts-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md)
+> [!info]- Pages that link here (4)
+> [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Many switches in few worlds: fractional factorial designs](fractional-factorial.md)
 <!-- /turns -->

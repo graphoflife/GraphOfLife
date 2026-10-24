@@ -94,7 +94,7 @@ field `gifts` counts the gifts paid, one for each giver and neighbour. The
 field `giftTokens` counts the tokens they carried, and `giftShare` is those
 tokens as a share of all tokens. Gifting is off in both baselines, so there
 all three are 0. It is on in some [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
-([Gifts, with every other rule](gifts-with-every-other-rule.md)), in
+([Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule)), in
 Experiment 24 and in half the worlds of
 [A screen of random worlds](a-screen-of-random-worlds.md).
 

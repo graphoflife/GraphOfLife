@@ -71,9 +71,9 @@
   "82": "mixing-with-every-other-rule",
   "85": "mixed-at-birth-with-parents-as-mates",
   "86": "eight-switches-at-once",
-  "88": "revolutions-with-every-other-rule",
-  "89": "handover-with-every-other-rule",
-  "90": "gifts-with-every-other-rule",
+  "88": "the-switches-the-world-was-built-with#revolutions-with-every-other-rule",
+  "89": "the-switches-the-world-was-built-with#handover-with-every-other-rule",
+  "90": "the-switches-the-world-was-built-with#gifts-with-every-other-rule",
   "98": "the-candidates-played-on#the-searchs-best-world-in-new-seeds",
   "99": "mixed-at-birth-with-parents-as-mates#a-mate-that-pays-its-share",
   "100": "room-for-the-steadiest-world",
@@ -102,7 +102,7 @@
   "91": "rules-in-company",
   "94": "what-a-brain-can-compute",
   "95": "every-era-against-three",
-  "96": "how-large-a-crowd-a-raider-needs",
+  "96": "strategies-written-by-hand#how-large-a-crowd-a-raider-needs",
   "97": "does-evolution-close-the-door",
   "102": "does-evolution-close-the-door#a-crew-of-raiders",
   "103": "does-evolution-close-the-door#raiders-that-breed",
@@ -304,6 +304,10 @@
   "a-crew-of-raiders": "does-evolution-close-the-door#a-crew-of-raiders",
   "raiders-that-breed": "does-evolution-close-the-door#raiders-that-breed",
   "hand-written-strategies-in-b1": "does-evolution-close-the-door#hand-written-strategies-in-b1",
-  "alliances": "another-game#alliances"
+  "alliances": "another-game#alliances",
+  "how-large-a-crowd-a-raider-needs": "strategies-written-by-hand#how-large-a-crowd-a-raider-needs",
+  "revolutions-with-every-other-rule": "the-switches-the-world-was-built-with#revolutions-with-every-other-rule",
+  "handover-with-every-other-rule": "the-switches-the-world-was-built-with#handover-with-every-other-rule",
+  "gifts-with-every-other-rule": "the-switches-the-world-was-built-with#gifts-with-every-other-rule"
  }
 }

@@ -229,7 +229,7 @@ little in one world, round a circle in the other.
   ([What would count as open-ended evolution](open-ended-test.md)).
 - **What comes next.** A world that is to keep climbing needs a way across
   the valley: a crowd for a new strategy to start from
-  ([How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md)), or a rule that
+  ([How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs)), or a rule that
   makes the better play reachable in small steps.
 
 <!-- turns -->

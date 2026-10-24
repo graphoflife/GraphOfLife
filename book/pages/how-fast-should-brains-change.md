@@ -304,7 +304,7 @@ offers evolution many more variants to choose from; a slow rate makes groups
 of clones eight agents strong, a crowd of the kind the raiders needed. Neither
 found better play. The limit is not the supply of variation. It is that the
 better play needs several new things at once, which no single change makes
-([Strategies written by hand](strategies-written-by-hand.md#what-it-teaches)).
+([Strategies written by hand](strategies-written-by-hand.md#how-deep-is-the-valley)).
 
 **The thesis was right for the wrong reason.** It was written to test [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)'s reading, that the game has an answer and evolution finds it. The ties it
 predicted came, but the reading has since fallen: the brains roll dice no game

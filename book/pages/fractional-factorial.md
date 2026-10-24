@@ -79,6 +79,6 @@ if every pair added nothing, the seven chains would scatter like chance too.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [Rules in company](rules-in-company.md) · [Eight switches at once](eight-switches-at-once.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Eight switches at once](eight-switches-at-once.md)
 <!-- /turns -->

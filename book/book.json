@@ -1439,7 +1439,7 @@
     },
     {
       "id": "strategies-written-by-hand",
-      "title": "Strategies written by hand",
+      "title": "Can a strategy written by hand beat evolution?",
       "file": "pages/strategies-written-by-hand.md",
       "topics": [
         "strategies"
@@ -1447,7 +1447,10 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-15",
-      "summary": "Is the evolved play the best there is? Strategies written by hand — a turtle that only defends, a raider, and a factory whose members pump tokens to their frontier — planted as a patch in evolved worlds, against a patch of the residents' own brains."
+      "summary": "Evolution in B2's worlds slows down as they age: is the play it has found the best there is? To find out, we planted rules written by hand as a patch in evolved B2 worlds.",
+      "experiments": [
+        "E29"
+      ]
     },
     {
       "id": "what-a-brain-can-compute",
@@ -1461,21 +1464,6 @@
       "status": "analysed",
       "added": "2026-10-19",
       "summary": "*Strategies written by hand*'s raider set by hand into the weights of a B2 brain: 12 of its 16 units play the rule in every decision of 62,114 situations but eight, and planted in the raider's place the brain takes the same worlds. A proof that no B2 brain of any size can pass news of a third agent in a message, so the factory's pipeline is out of reach, and the smallest change that would open it: a message to itself that pools what it says to everyone."
-    },
-    {
-      "id": "how-large-a-crowd-a-raider-needs",
-      "title": "How large a crowd a raider needs",
-      "file": "pages/how-large-a-crowd-a-raider-needs.md",
-      "topics": [
-        "strategies"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E29"
-      ],
-      "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "Experiment 29: raider patches of 1 to 100 agents and of 5% in two evolved worlds, and 5% in all ten, each with a control. No patch of up to 30 raiders took hold; 100 did in 4 of 20 and 5% in 12 of 20. The valley evolution would have to cross is about a hundred agents wide; and the world decides as much as the crowd (13 of 50 places across ten worlds)."
     },
     {
       "id": "does-evolution-close-the-door",
@@ -1599,7 +1587,7 @@
     },
     {
       "id": "the-switches-the-world-was-built-with",
-      "title": "The switches the world was built with",
+      "title": "Revolutions, handover and gifts: the switches the world was built with",
       "file": "pages/the-switches-the-world-was-built-with.md",
       "topics": [
         "rules"
@@ -1607,7 +1595,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-15",
-      "summary": "The original algorithm's own switches, judged for open-ended evolution with the tournaments of *How to tell a world that keeps evolving*: revolutions on and off, gifts, connections that must be used, estates shared by wealth — in B1 and in B2."
+      "summary": "The engine of Graph of Life came with three switches of its own. Revolutions let small stakers unite against the largest, handover lets a parent pass links to its child, and gifts let an agent pay a neighbour."
     },
     {
       "id": "rules-without-numbers",
@@ -1684,42 +1672,6 @@
       "status": "analysed",
       "added": "2026-10-17",
       "summary": "Eight of the notebook's switches thrown together on B2 in sixteen worlds (batch U, a fractional factorial design): every unused link lapsing is the strongest switch, the estate to the newborns fills a world, mixing raises diversity; pairs of switches act together, and several switches do far less among the sixteen than alone in B2. On B1 (batch V) few switches stand out against the pairs, and none makes its evolution go on."
-    },
-    {
-      "id": "revolutions-with-every-other-rule",
-      "title": "Revolutions, with every other rule",
-      "file": "pages/revolutions-with-every-other-rule.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "B2 without revolutions together with each of 24 other rules (batch W): for nearly every rule nothing changes, as revolutions are rare in B2's kind of world; with brains mixed at birth, where they are common, they keep a world small and rich."
-    },
-    {
-      "id": "handover-with-every-other-rule",
-      "title": "Handover, with every other rule",
-      "file": "pages/handover-with-every-other-rule.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "B2 with handover together with each of 23 other rules (batch X): it costs two marks of the health bar with nearly every rule, thinning the network into trees; it cancels mixing's riches; it unfolds a world a little, since parents pass their links on."
-    },
-    {
-      "id": "gifts-with-every-other-rule",
-      "title": "Gifts, with every other rule",
-      "file": "pages/gifts-with-every-other-rule.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "B2 with gifts together with each of 21 other rules, and B1 with gifts (batch T): gifts move a few thousandths of the tokens a game, mostly to the poorer, and change little whatever else the rules are; they cost mixing some of its riches, and in B1 without revolutions they fill the world with the poor."
     },
     {
       "id": "healthy-and-rich",

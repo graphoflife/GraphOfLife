@@ -82,7 +82,7 @@ five worlds played on to 10,000 iterations. These are Experiment 16's worlds,
 played on as [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules. The raiders are planted at
 iterations 500, 2,000, 5,000 and 10,000, and each planting has its control.
 The test is the one of
-[How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md).
+[How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs).
 
 <!-- thesis E30 -->
 > [!quote] The thesis of Experiment 30, written down before any of its runs existed
@@ -121,7 +121,7 @@ The test is the one of
 - **At iteration 500,** all fifteen plantings took hold. The raiders held
   37% to 79% of their world 300 iterations later.
 - **At 2,000,** four of fifteen took hold, in worlds 2 and 3 again, as in
-  [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md).
+  [How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs).
   These fifteen are fifteen of that experiment's plantings, in the same
   worlds and places, and they played out exactly alike.
 - **At 5,000 and at 10,000,** none of fifteen did. Nearly every patch grew a
@@ -540,7 +540,7 @@ raider can no more afford the world's least child than its own.
 Every strategy written by hand so far was planted in B2's worlds only. That
 holds for the raider's first plantings
 ([Strategies written by hand](strategies-written-by-hand.md),
-[How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md)) and
+[How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs)) and
 for all those above. And the reasons they failed there are B2's own rules:
 - **A home share.** B2 keeps 30% of an agent's tokens at home, and at least
   one ([`keep_home`](settings.md#keep_home)). Seven in ten agents of a late
@@ -730,7 +730,7 @@ partly by a rule of B1's own.
 
 - [Strategies written by hand](strategies-written-by-hand.md): the raider,
   the turtle and the factory, and the worlds they first took half of.
-- [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md):
+- [How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs):
   about a hundred raiders must start together, and the world decides as much
   as the crowd.
 - [What holds a world's size](what-holds-a-worlds-size.md): why B2's agents
@@ -861,10 +861,10 @@ section to `book/results/b1raiders.json`.
 <!-- turns -->
 ---
 
-← [How large a crowd a raider needs](how-large-a-crowd-a-raider-needs.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [The invasion test](invasion-test.md) →
+← [What a brain can compute](what-a-brain-can-compute.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [The invasion test](invasion-test.md) →
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going), [Groups and cooperation](../README.md#groups-and-cooperation), [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (1)
-> [How a coalition takes a node](revolution.md)
+> [!info]- Pages that link here (2)
+> [How a coalition takes a node](revolution.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
 <!-- /turns -->
