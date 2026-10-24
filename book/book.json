@@ -1233,7 +1233,7 @@
     },
     {
       "id": "do-agents-cooperate",
-      "title": "Do agents cooperate?",
+      "title": "Do agents cooperate? Help, kin and partners",
       "file": "pages/do-agents-cooperate.md",
       "topics": [
         "groups"
@@ -1241,7 +1241,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What does an agent give in this world, at what cost, and to whom? Are neighbours related? Do agents treat their relatives differently? When a node changes hands, does it stay in the family?"
+      "summary": "Cooperation means paying a cost so that someone else gains. In Graph of Life the only act is a stake. A stake on a neighbour's node helps if, without it, the neighbour would have been more likely to lose that node."
     },
     {
       "id": "another-game",
@@ -1268,18 +1268,6 @@
       "status": "analysed",
       "added": "2026-10-15",
       "summary": "Patterns that outlast the agents in them, after Conway's Game of Life: puffers, gliders, blinkers and guns made of takeovers, and tokens that run downhill or go round. Then help, defined by the rules: a stake without which a neighbour would have lost its node."
-    },
-    {
-      "id": "help",
-      "title": "Help",
-      "file": "pages/help.md",
-      "topics": [
-        "groups"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-15",
-      "summary": "What would cooperation be in a game whose only act is to stake tokens on nodes?"
     },
     {
       "id": "rules-in-company",

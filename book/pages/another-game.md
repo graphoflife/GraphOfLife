@@ -707,10 +707,10 @@ that made the worlds are in `research/oee/pilots/LOG.md`.
 <!-- turns -->
 ---
 
-← [Do agents cooperate?](do-agents-cooperate.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) →
+← [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) →
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (16)
-> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
 <!-- /turns -->

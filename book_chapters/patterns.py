@@ -329,7 +329,7 @@ def patterns(ch: F.Chapter) -> None:
         rounds = helped(lambda d: d["help_round"] - d["help_round_flip"]
                         if enough(d) and max(abs(d["help_round"] or 0), abs(d["help_round_flip"] or 0)) > 1e-9
                         else None)
-        ch.grid("help", [
+        ch.grid("do-agents-cooperate", [
             _panel("Nodes saved by others' stakes", "per 100 agents a game (logarithmic)",
                    {c: [max(x, 1e-3) for x in v] for c, v in saved.items()}, None, log=True, min=1e-3, max=100),
             _panel("Help returned", "returned pairs ÷ chance (logarithmic)", back, 1, log=True, min=0.3, max=30),

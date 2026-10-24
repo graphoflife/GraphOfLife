@@ -176,10 +176,9 @@ Raiders, turtles and crews written by hand and planted in evolved worlds: is evo
 Help, alliances, other contests and patterns that outlast their agents: do agents work together?
 
 - [Who helps whom](pages/who-helps-whom.md)
-- [Do agents cooperate?](pages/do-agents-cooperate.md)
+- [Do agents cooperate? Help, kin and partners](pages/do-agents-cooperate.md)
 - [Other contests: a lottery, and alliances](pages/another-game.md)
 - [Gliders, and who helps whom](pages/gliders-and-who-helps-whom.md)
-- [Help](pages/help.md)
 
 ### Changing the rules
 

@@ -345,5 +345,5 @@ that lived to the end of their 3,000 iterations were read the same way.
 ← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Do the brains matter?](do-the-brains-matter.md) →
 
 > [!info]- Pages that link here (7)
-> [Messages](messages.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [What the brains are like](what-the-brains-are-like.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [How many directions a cloud of points uses](participation-ratio.md)
+> [Messages](messages.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [What the brains are like](what-the-brains-are-like.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [How many directions a cloud of points uses](participation-ratio.md)
 <!-- /turns -->

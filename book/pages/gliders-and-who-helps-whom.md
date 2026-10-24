@@ -277,7 +277,7 @@ the circulation of gifts come back much: 0.02 in B2, 0.09 in B1.
 
 Cooperation needs an act that helps. In this game every act is a stake, so
 what helps must be a stake, and whether a stake helped can be read from the
-rules (the note [*Help*](help.md)). Take any stake that agent *u* put
+rules (the note [*Help*](do-agents-cooperate.md#help)). Take any stake that agent *u* put
 on a neighbour *v*'s node, and ask how likely *v* was to keep its node, first
 with every stake as it was and then without *u*'s, everyone else's unchanged.
 Both chances follow from the world's own rule for deciding a node, counted
@@ -460,10 +460,10 @@ where it is, and in B2 it falls.
 <!-- turns -->
 ---
 
-← [Other contests: a lottery, and alliances](another-game.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Help](help.md) →
+← [Other contests: a lottery, and alliances](another-game.md) · [Groups and cooperation](../README.md#groups-and-cooperation)
 
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
 > [!info]- Pages that link here (11)
-> [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Who helps whom](who-helps-whom.md) · [Help](help.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -23,7 +23,7 @@ and its [neighbours](the-world.md#the-network "An agent joined to another by a c
 could helping be? [Gliders, and who helps whom](gliders-and-who-helps-whom.md) answered by
 the rules, not by guessing from outcomes: **a stake helps** the holder of a
 node if, without it, the holder would have lost the node. That is counted
-exactly, for every stake of every game (the note [Help](help.md)).
+exactly, for every stake of every game (the note [Help](do-agents-cooperate.md#help)).
 Comparing the helped with the rest does not work: those who are helped are
 those in danger, so the comparison measures need, not benefit.
 
@@ -88,7 +88,7 @@ becomes peaceful, and conquest — the engine of selection here — nearly stops
 The open question is a rule under which cooperation is adopted *and*
 competition between groups goes on.
 
-**Related notes:** [Help](help.md) · [Flows that go round](token-flow.md#flows-that-go-round) ·
+**Related notes:** [Help](do-agents-cooperate.md#help) · [Flows that go round](token-flow.md#flows-that-go-round) ·
 [Families](genotype.md#families) ·
 [Do agents cooperate?](do-agents-cooperate.md) ·
 [Another game](another-game.md) ·
@@ -98,8 +98,8 @@ competition between groups goes on.
 <!-- turns -->
 ---
 
-[Groups and cooperation](../README.md#groups-and-cooperation) · [Do agents cooperate?](do-agents-cooperate.md) →
+[Groups and cooperation](../README.md#groups-and-cooperation) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) →
 
-> [!info]- Pages that link here (8)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 <!-- /turns -->
