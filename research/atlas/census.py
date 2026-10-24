@@ -10,8 +10,8 @@ again its random twin's (B2's own worlds read about 1.2, B1's 2.3). The spaces a
 sorted by the rule that sets them apart, in this order: deaths not mended (B1, and
 worlds built on it), every unused link lapsing, the estate paid to births, no old age,
 handover, anything else; for each, the medians of the share of agents with three tokens
-or fewer, the marks of the health bar and the dimension. The worlds of no such rule are
-listed one by one.
+or fewer, the Gini coefficient of their tokens, the marks of the health bar, the dimension
+and the diversity score. The worlds of no such rule are listed one by one.
 
     python3 research/atlas/census.py
 """
@@ -75,7 +75,8 @@ def worlds() -> List[Dict[str, Any]]:
             continue
         seen.add((w["agents"], round(wide, 6)))
         out.append({"id": row["id"], "wide": wide, "kind": kind(space.settings(row["id"])), "agents": w["agents"],
-                    "poor": w["share_at_most_three"], "marks": w["marks"], "dimension": w["dimension"],
+                    "poor": w["share_at_most_three"], "gini": w["gini_tokens"], "marks": w["marks"],
+                    "dimension": w["dimension"],
                     "diversity": profile.diversity(w, ref)[1]})
     return out
 
@@ -87,13 +88,16 @@ def main() -> None:
     for k in KINDS:
         mine = [w for w in spaces if w["kind"] == k]
         if mine:
-            print(f"  {k:11s} {len(mine):3d}  poor {np.median([w['poor'] for w in mine]):.2f}  "
-                  f"marks {np.median([w['marks'] for w in mine]):.1f}  dimension {np.median([w['dimension'] for w in mine]):.2f}  "
-                  f"fewer than half poor: {sum(w['poor'] < 0.5 for w in mine)}")
+            median = {key: np.median([w[key] for w in mine]) for key in ("poor", "gini", "marks", "dimension",
+                                                                         "diversity")}
+            print(f"  {k:11s} {len(mine):3d}  poor {median['poor']:.2f}  Gini {median['gini']:.2f}  "
+                  f"marks {median['marks']:.1f}  dimension {median['dimension']:.2f}  "
+                  f"diversity {median['diversity']:.2f}  fewer than half poor: {sum(w['poor'] < 0.5 for w in mine)}")
     print("of no such rule:")
     for w in sorted((w for w in spaces if w["kind"] == "other"), key=lambda w: -w["wide"]):
         print(f"  {w['id']:26s} {w['wide']:.2f} times its twin's, {w['agents']} agents, {w['poor']:.0%} poor, "
-              f"{w['marks']} marks, dimension {w['dimension']:.2f}, diversity {w['diversity']:.2f}")
+              f"Gini {w['gini']:.2f}, {w['marks']} marks, dimension {w['dimension']:.2f}, "
+              f"diversity {w['diversity']:.2f}")
 
 
 if __name__ == "__main__":
