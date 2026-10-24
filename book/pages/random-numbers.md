@@ -85,7 +85,7 @@ Three kinds of draw appear in the rules:
 - **a uniform number** *U* between 0 and 1. A yes-or-no decision read as a
   probability *q* says yes when *U* < *q*, which happens with probability
   exactly *q* ([A yes-or-no decision](binary-decision.md)).
-- **a uniform choice** among several equal [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."). It breaks a tie for
+- **a uniform choice** among several equal candidates. It breaks a tie for
   the largest stake. It also picks which of the equal stakers that tipped a
   coalition takes the node ([How a coalition takes a node](revolution.md)).
 - **a multinomial draw**: *P* tokens dealt out among *N* agents, each token

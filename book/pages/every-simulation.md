@@ -460,6 +460,6 @@ Older yardsticks are not counted here:
 
 ← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a run records](frames-and-stats.md) →
 
-> [!info]- Pages that link here (8)
-> [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Every world side by side](every-world-side-by-side.md) · [The lab, the engine and pilots](the-lab.md) · [What a simulation costs](what-a-simulation-costs.md)
+> [!info]- Pages that link here (9)
+> [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Every world side by side](every-world-side-by-side.md) · [The lab, the engine and pilots](the-lab.md) · [What a simulation costs](what-a-simulation-costs.md)
 <!-- /turns -->

@@ -665,6 +665,6 @@ prototype keys go with `--proto`.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

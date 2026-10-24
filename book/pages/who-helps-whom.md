@@ -203,7 +203,7 @@ about who takes a node.
 | **family tags**, sensed or pooled | sensed, the fighting stayed as it was; pooled, families of hundreds rose and fell like empires; no better play either way | [A password and a crowd, for free](another-game.md#a-password-and-a-crowd-for-free) |
 | **kin pooled**: sides made by descent, within two [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") | peace, sooner, with nobody deciding anything; but small sides, 2 to 14% of the world | [One alliance takes the world](another-game.md#one-alliance-takes-the-world) |
 | **alliances** by mutual consent | taken up at once: one alliance held 99% of the world by iteration 2,000 | [Alliances](another-game.md#alliances) |
-| alliances in worlds without B2's hand-set numbers | they made the difference between dying and living, not between living and evolving | [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did) |
+| alliances in worlds without B2's hand-set numbers | they made the difference between dying and living; whether also between living and evolving, two seeds cannot say | [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did) |
 | **crews**: raiders written by hand whose revolutionary stakes join against one stranger (Experiment 33) | no crew took hold, planted at iteration 2,000, 5,000 or 10,000 | [Raiders that pool their stakes](does-evolution-close-the-door.md#raiders-that-pool-their-stakes) |
 | a **sense of direction** and a **sense of who helped** | no gliders, and no more help | [Both inputs, tested](gliders-and-who-helps-whom.md#both-inputs-tested) |
 
@@ -231,8 +231,9 @@ as brains do without alliances
 ([Does a world of allies keep evolving?](another-game.md#does-a-world-of-allies-keep-evolving)).
 Where all of B2's hand-set numbers were taken away, alliances kept worlds
 alive. Both worlds without them died, and three of the four with them lived.
-Each became one alliance, and none could evolve for long
-([Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did)).
+Each became one alliance. Played against their own past, they gave a tie, a
+win for the later brains and a win for the earlier ones
+([Did the worlds that lived keep evolving?](rules-without-numbers.md#did-the-worlds-that-lived-keep-evolving)).
 
 **Groups written by hand did no better.** Crews of raiders, whose
 revolutionary stakes join against the same weak stranger, were planted in

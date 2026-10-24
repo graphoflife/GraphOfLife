@@ -132,6 +132,6 @@ and the page that changed it. Nothing is quietly deleted.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (3)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [When a world ends](extinction.md)
+> [!info]- Pages that link here (4)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [When a world ends](extinction.md) · [Rules without numbers](rules-without-numbers.md)
 <!-- /turns -->

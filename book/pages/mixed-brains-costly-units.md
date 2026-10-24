@@ -150,8 +150,8 @@ near a tie or a little above: 0.49–0.63, the mean of each pair of moments.
 The only way a brain can spread is to take a node.
 
 The network is fine: one piece, nothing cut off, 6.1–6.9 links per agent.
-But little happens in it. With the age limit, the same rule keeps a [healthy
-world](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.") whose evolution goes on more strongly than B2's. There the brains of
+But little happens in it. With the age limit, the same rule keeps a world as
+whole and resilient as B2's, whose evolution goes on more strongly. There the brains of
 1,000 hold 0.83 and 0.93 of the nodes against those of 500
 ([Rules without numbers](rules-without-numbers.md)).
 
@@ -172,9 +172,9 @@ world](what-makes-a-world-interesting.md "A world that meets the six criteria of
 - **Information alone changes nothing**, here as in
   [Gliders, and who helps whom](gliders-and-who-helps-whom.md). An input is
   only as useful as the rules make acting on it.
-- **A world without death freezes**, even with a healthy network: turnover is
+- **A world without death freezes**, even with a network that holds together: turnover is
   what selection works on.
-- Two seeds each are pilots. Mixing and costly units are [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") for an
+- Two seeds each are pilots. Mixing and costly units are candidates for an
   experiment of ten worlds, run longer, beside B2.
 
 ## Where to go next
@@ -203,8 +203,19 @@ their parent's side. But a mixed brain is a new genotype and draws a fresh
 number, which in these worlds is always below a million. So every child born
 during a contest was counted for the *earlier* side, whoever its parent was.
 The contest, `tourney.contest`, now follows a new brain's ancestry back to
-the brain it was copied from. All of the mixed worlds were judged again. No other contest was touched: without mutation, mixing is the only way
-a new number appears during one.
+the brain it was copied from. All of the mixed worlds were judged again. No
+other contest was touched: without mutation, mixing is the only way a new
+number appears during one.
+
+## How our view changed
+
+- **24 October 2026.** From 23 October, this page called the worlds whose
+  links hold a token, with the age limit, a [healthy world](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one."), and linked the
+  words to the six criteria of the screen of random worlds. Their [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
+  of 4.1 to 4.2 is above the screen's 4, as B2's own 4.4 is
+  ([Links that hold a token](rules-without-numbers.md#links-that-hold-a-token)).
+  They are as whole and resilient as B2's worlds, but not healthy in the
+  screen's sense.
 
 <!-- turns -->
 ---
