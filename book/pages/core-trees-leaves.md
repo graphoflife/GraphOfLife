@@ -1,7 +1,7 @@
 # Core, trees and leaves
 
 Every connected network can be cut into two kinds of part: a **core**, where
-every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") lies on a [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") or on a path between loops, and **trees** that hang
+every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") lies on a loop or on a path between loops, and **trees** that hang
 off it. This note says how the cut is made and why it matters for Graph of
 Life.
 
@@ -93,8 +93,8 @@ the deeper cores, the trees and the [dimension](ball-dimension-and-curvature.md 
 <!-- turns -->
 ---
 
-← [Path length](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges](bridges.md) →
+← [Path length](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) →
 
-> [!info]- Pages that link here (14)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges](bridges.md) · [Loops](loops.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (13)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

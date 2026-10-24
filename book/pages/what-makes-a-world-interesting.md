@@ -43,7 +43,7 @@ Each criterion stands for one part of the picture.
    links each, as a network that is neither a tree nor a tangle.
 3. **Resilient.** A healthy world does not break apart when one agent or one
    link disappears. We ask that the world is one piece, that most agents (80%)
-   sit on [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") (the *[2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.")*), and that no single loss cuts off more than 2%
+   sit on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") (the *[2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.")*), and that no single loss cuts off more than 2%
    of the agents, or 1% for a single link. These are the marks of the
    [health bar](how-to-tell-a-world-that-keeps-evolving.md)
    other than its dimension.

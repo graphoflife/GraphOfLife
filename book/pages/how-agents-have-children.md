@@ -268,7 +268,7 @@ world can grow, but new connections never shorten them. This is why a world
 keeps a shape in space at all
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
 
-The same rule limits what births can build. Every [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") a birth closes is
+The same rule limits what births can build. Every [loop](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") a birth closes is
 small, through agents at most two steps apart. Nothing closes a large loop,
 through distant parts of the world. So a network grown by births alone is, at
 large scale, a tree: a network without loops, whose nodes are dense blobs of

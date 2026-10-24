@@ -9,7 +9,7 @@
 >   who keeps their node?
 > - How many tokens cross one connection in a game, and which connections
 >   carry nothing, and so are cut?
-> - Do tokens go round in closed [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.")? How long are the loops, and does a
+> - Do tokens go round in closed [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.")? How long are the loops, and does a
 >   quick count, game by game, agree with an exact one?
 > - Is that the same in every world the notebook has made: both rule sets,
 >   every size, every setting an experiment changed?

@@ -853,7 +853,7 @@
     },
     {
       "id": "bridges",
-      "title": "Bridges",
+      "title": "Bridges, cut risk and loops: how a network can be cut",
       "file": "pages/bridges.md",
       "topics": [
         "network"
@@ -861,31 +861,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "A **bridge** is a connection that lies on no loop."
-    },
-    {
-      "id": "loops",
-      "title": "Loops",
-      "file": "pages/loops.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A **loop** (cycle) is a path through the network that returns to where it started without using a connection twice."
-    },
-    {
-      "id": "cut-risk",
-      "title": "Cut risk",
-      "file": "pages/cut-risk.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Counting bridges says how many connections lie on no loop."
+      "summary": "A bridge is a connection on no loop: cut it, and the network falls into two pieces. In a settled B1 world of 100,000 tokens, a quarter of the connections are bridges."
     },
     {
       "id": "radius-and-diameter",

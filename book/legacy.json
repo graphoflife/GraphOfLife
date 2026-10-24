@@ -144,8 +144,8 @@
   "n-token-flow": "token-flow",
   "n-lightning": "lightning",
   "n-token-curvature": "token-curvature",
-  "n-loops": "loops",
-  "n-cut-risk": "cut-risk",
+  "n-loops": "bridges#loops",
+  "n-cut-risk": "bridges#cut-risk",
   "n-radius-and-diameter": "radius-and-diameter",
   "n-spectral-gap": "spectral-gap",
   "n-ball-dimension-and-curvature": "ball-dimension-and-curvature",
@@ -313,6 +313,8 @@
   "box-dimension": "ball-dimension-and-curvature#box-dimension",
   "richest-tenth": "gini-coefficient#the-richest-tenths-share",
   "tokens-per-agent": "gini-coefficient#tokens-per-agent-mean-median-extremes",
-  "entropy-and-evenness": "gini-coefficient#entropy-and-evenness"
+  "entropy-and-evenness": "gini-coefficient#entropy-and-evenness",
+  "cut-risk": "bridges#cut-risk",
+  "loops": "bridges#loops"
  }
 }

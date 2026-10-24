@@ -91,7 +91,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
 - **44%** of agents keep their node in a game (45%), and [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") win
   **half** of all nodes ([How the game is played](how-the-game-is-played.md)).
 - **26%** of connections are [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") (31%), **35%** of agents are leaves
-  (36%), **57%** sit in a core of [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") (54%), and two agents are **18
+  (36%), **57%** sit in a core of [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") (54%), and two agents are **18
   steps** apart (10)
   ([What shape does the network take?](what-shape-does-the-network-take.md)).
 - **A genotype for every 1.6 agents**, each lasting a couple of iterations,

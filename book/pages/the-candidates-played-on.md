@@ -37,7 +37,7 @@ once ([Healthy and rich](healthy-and-rich.md)). A world that comes close at
 iteration 1,000 is a **candidate world**. First, it meets every mark of the
 health bar, the seven marks of a sound network:
 - one piece;
-- at least 80% of its agents on [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") or between them (the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."));
+- at least 80% of its agents on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") or between them (the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."));
 - no agent whose loss cuts off more than 2% of the others, and no link
   whose loss cuts off more than 1%;
 - no agent joined to more than 5% of the others;

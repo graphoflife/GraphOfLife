@@ -307,7 +307,7 @@ lies on a loop or on a path between loops. Cutting one on a loop splits
 nothing: there is another way round. But a connection on a path between loops
 is a bridge, and its loss splits the core in two ([Bridges](bridges.md)). The
 **cut risk** of a world is the largest share of it that one bridge holds to
-the rest ([Cut risk](cut-risk.md)). In one world of
+the rest ([Cut risk](bridges.md#cut-risk)). In one world of
 [How a world breaks](how-a-world-breaks.md), a third to almost half of the
 world hung on a single connection, for 140 iterations. A tree is cut off whole
 by the loss of the one connection that holds it. So anything larger than an
@@ -428,13 +428,13 @@ tree of its connections that reaches every agent, a **spanning tree**. It has
 one connection fewer than the world has agents. Every other connection closes
 one loop with it, and none of these loops is a combination of the others. So a
 world has connections − agents + 1 **independent loops**, its **cycle rank**
-([Loops](loops.md)). That many connections, the right ones, could be cut
+([Loops](bridges.md#loops)). That many connections, the right ones, could be cut
 without splitting the world. All of those loops are in the core:
 
 <!-- figure core/loops -->
 ![Loops, per agent and per core agent](../figures/core/loops.svg)
 
-**Loops, per agent and per core agent.** Every 25 iterations at the start of the game: the number of independent loops of a world — connections minus agents plus one, its cycle rank ([Loops](loops.md)) — divided by its agents and by the agents of its core, which holds every loop; and the mean number of connections a core agent has to other core agents. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Loops, per agent and per core agent.** Every 25 iterations at the start of the game: the number of independent loops of a world — connections minus agents plus one, its cycle rank ([Loops](bridges.md#loops)) — divided by its agents and by the agents of its core, which holds every loop; and the mean number of connections a core agent has to other core agents. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -790,7 +790,7 @@ do the loops run?
 <!-- figure geometry/loops -->
 ![How many loops pass through an agent](../figures/geometry/loops.svg)
 
-**How many loops pass through an agent.** A breadth-first spanning tree of the world with seed 1 after its last game leaves 11,297 connections over, each closing one loop of a cycle basis ([Loops](loops.md)). For every count x, the share of agents that at least x of those loops pass through. 37% of the agents lie on none of them.
+**How many loops pass through an agent.** A breadth-first spanning tree of the world with seed 1 after its last game leaves 11,297 connections over, each closing one loop of a cycle basis ([Loops](bridges.md#loops)). For every count x, the share of agents that at least x of those loops pass through. 37% of the agents lie on none of them.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -1076,5 +1076,5 @@ checks it again.
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (23)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges](bridges.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

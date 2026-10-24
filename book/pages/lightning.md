@@ -2,7 +2,7 @@
 
 Does the flow of a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") ([Token flow](token-flow.md)) go round in circles —
 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") leaving an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), crossing several [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and arriving back
-where they started? The viewer calls such a closed [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") of flow a
+where they started? The viewer calls such a closed [loop](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") of flow a
 **lightning**. Ecologists measure the same thing in food webs as a *cycling
 index* (Finn 1976). This note explains what is measured and why only bounds
 can be given.

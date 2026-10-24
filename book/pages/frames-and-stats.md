@@ -65,7 +65,7 @@ the viewer charts, and every one has a note that says how it is computed.
 | `selfAllocationShare`, `heldHomeShare` | staking on one's own node, and keeping it (phase 2) | [Staking at home](home-stake.md) |
 | `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on [neighbours](the-world.md#the-network "An agent joined to another by a connection."), and the connections they keep alive (phase 2) | [Token flow](token-flow.md) |
 | `revolutions` | nodes won by a coalition (phase 2) | [Revolution](revolution.md) |
-| `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup | [Cut risk](cut-risk.md) |
+| `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup (in a game's row, after its unused connections are cut) | [Cut risk](bridges.md#cut-risk) |
 | `gifts`, `giftTokens`, `giftShare` | gifts of tokens (phase 1): 0 in a run without gifts, `null` in the game's rows ([`allow_gifting`](settings.md#allow_gifting)) | [Reproduction statistics](reproduction-statistics.md) |
 
 > [!note] Corrected on 23 October 2026
@@ -86,8 +86,8 @@ on other rows they are `null`:
 | `radius`, `diameter` | the smallest and largest eccentricity | [Radius and diameter](radius-and-diameter.md) |
 | `coreShare` | share of agents in the 2-core | [Core, trees and leaves](core-trees-leaves.md) |
 | `bridges` | connections whose removal would split the network | [Bridges](bridges.md) |
-| `cutRisk` | the largest share of the world one cut could sever | [Cut risk](cut-risk.md) |
-| `cycleRank`, `loopDensity`, `components` | independent loops, loops per connection, separate pieces | [Loops](loops.md) |
+| `cutRisk` | the largest share of the world one cut could sever | [Cut risk](bridges.md#cut-risk) |
+| `cycleRank`, `loopDensity`, `components` | independent loops, loops per connection, separate pieces | [Loops](bridges.md#loops) |
 | `spectralGap` | how hard the network is to cut in two; how fast a random walk forgets | [The spectral gap](spectral-gap.md) |
 | `dimension`, `ricciCurvature` | dimension and curvature from how balls grow | [Dimension and curvature](ball-dimension-and-curvature.md) |
 | `boxDimension`, `boxDimensionR2` | dimension from covering the network with boxes | [Box dimension](ball-dimension-and-curvature.md#box-dimension) |

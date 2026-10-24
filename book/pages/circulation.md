@@ -18,7 +18,7 @@ agent:
 
 $$F_{uv} = \varphi_u - \varphi_v .$$
 
-Tokens leave the high agents and arrive at the low ones. Round any [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") of the
+Tokens leave the high agents and arrive at the low ones. Round any [loop](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") of the
 network a gradient flow adds up to nothing, since the differences cancel:
 $(\varphi_a - \varphi_b) + (\varphi_b - \varphi_c) + (\varphi_c - \varphi_a) = 0$.
 

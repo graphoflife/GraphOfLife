@@ -50,7 +50,7 @@ every hundred tokens of the world.
 
 ## Bridges and the worst cut
 
-A **bridge** is a connection that lies on no [loop](loops.md "A path through the network that comes back to where it started without using a connection twice."): cut it, and the network
+A **bridge** is a connection that lies on no loop: cut it, and the network
 falls in two ([Bridges](bridges.md)). A settled world has about 6,400 of them,
 26% of its connections
 ([Core, leaves and bridges](what-shape-does-the-network-take.md#core-leaves-and-bridges)).
@@ -59,7 +59,7 @@ Most hold a single leaf, an agent with one connection.
 How much hangs on the worst of them? Take away one bridge, and the network
 falls into two pieces; the smaller piece is what the bridge holds to the rest.
 The **cut risk** is the largest such piece, over all bridges, as a share of
-all agents ([Cut risk](cut-risk.md)). It is 0 when there is no bridge, and at
+all agents ([Cut risk](bridges.md#cut-risk)). It is 0 when there is no bridge, and at
 most a half.
 
 In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world the cut risk is **11%** (12% at 10,000 tokens). Somewhere,
@@ -72,7 +72,7 @@ If the worst bridge failed, the game would cut off that ninth. Does it?
 <!-- figure breaking/risk -->
 ![Does a fragile world lose more?](../figures/breaking/risk.svg)
 
-**Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](cut-risk.md)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
+**Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -384,6 +384,6 @@ and how.
 
 ← [How properties scale together](how-properties-scale-together.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Degree](degree.md) →
 
-> [!info]- Pages that link here (15)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Bridges](bridges.md) · [Cut risk](cut-risk.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (14)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

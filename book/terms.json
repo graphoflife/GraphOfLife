@@ -327,13 +327,15 @@
     },
     {
       "name": "loop",
-      "page": "loops",
-      "says": "A path through the network that comes back to where it started without using a connection twice."
+      "page": "bridges",
+      "says": "A path through the network that comes back to where it started without using a connection twice.",
+      "anchor": "loops"
     },
     {
       "name": "cut risk",
-      "page": "cut-risk",
-      "says": "The share of a world that the worst single cut, of one agent or one connection, would cut off."
+      "page": "bridges",
+      "says": "The largest share of a world that cutting one connection would cut off.",
+      "anchor": "cut-risk"
     },
     {
       "name": "diameter",

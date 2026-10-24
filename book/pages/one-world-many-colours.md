@@ -146,7 +146,7 @@ same places in every picture. What each colouring shows:
   belongs to many smaller families. A family is a region — a small one in a
   large world, where many more lines live side by side
   ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
-- **[Loops](loops.md "A path through the network that comes back to where it started without using a connection twice.").** The clumps around hubs carry the loops — up to 1,012 of the
+- **[Loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.").** The clumps around hubs carry the loops — up to 1,012 of the
   world's 11,297 independent loops pass through one agent — and the arms carry
   none ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
 

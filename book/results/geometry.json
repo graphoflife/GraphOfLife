@@ -193,7 +193,7 @@
   },
   "loops": {
    "title": "How many loops pass through an agent",
-   "caption": "A breadth-first spanning tree of the world with seed 1 after its last game leaves 11,297 connections over, each closing one loop of a cycle basis ([Loops](loops.md)). For every count x, the share of agents that at least x of those loops pass through. 37% of the agents lie on none of them.",
+   "caption": "A breadth-first spanning tree of the world with seed 1 after its last game leaves 11,297 connections over, each closing one loop of a cycle basis ([Loops](bridges.md#loops)). For every count x, the share of agents that at least x of those loops pass through. 37% of the agents lie on none of them.",
    "recipe": "**Runs.** `B1-100000-s001`.\n\n**Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2\u00b7t` is iteration *t* after reproduction and frame `2\u00b7t + 1` after the game.\n\n1. Read frame `2999`; build a breadth-first spanning tree.\n2. For every connection not in the tree, walk both ends up the tree to where they meet; every agent on the way, and the meeting point, lies on that loop.\n3. Count the loops per agent; draw the share with at least x.\n\n**To make it again:** `python3 book_figures.py geometry`."
   }
  }

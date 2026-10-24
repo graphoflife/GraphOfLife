@@ -179,7 +179,7 @@ off steadily from a single game; there is no period at which a gun fires.
 by an agent whose own node is taken in the same game: everyone moves up a seat.
 Two agents taking each other's nodes in one game, a swap, happens as often as it
 would if every taker had picked its targets at random among its neighbours
-(1.02 times as often, 0.99 to 1.04 in the ten worlds). [Loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") of three agents or
+(1.02 times as often, 0.99 to 1.04 in the ten worlds). [Loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") of three agents or
 more, each taking the next one's node in the same game, happen 1,500 to 4,800
 times in a world's 1,000 games, up to fourteen agents round one loop; how many
 chance would make is not known. In B2 swaps are rarer than chance (0.54 to

@@ -56,7 +56,7 @@ every piece of the network cut off from the largest
 
 Nothing was thrown away. Every frame was kept, with every decision, and every
 statistic was recorded for every frame. The statistics that walk the whole
-network — [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the core, [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), distances, the flow's [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") — were
+network — bridges, the core, [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), distances, the flow's loops — were
 recorded every 25 iterations ([What a run records](frames-and-stats.md)).
 
 ### Two sizes of world
@@ -354,7 +354,7 @@ single cut: the network broke in one place, and the piece beyond the break
 died. Then, game after game, it lost another large piece: 901 agents, 1,730,
 4,060, 2,868, 1,344, 960. Before most of these games, the worst single cut of
 the network threatened a seventh to a third of the world
-([Cut risk](cut-risk.md)), against a hundredth or two on an ordinary day.
+([Cut risk](bridges.md#cut-risk)), against a hundredth or two on an ordinary day.
 Births fell from 499 per iteration to 26.
 
 Ten games after the first cut, 2,137 agents were left. At iteration 1,416 one

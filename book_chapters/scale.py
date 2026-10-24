@@ -283,7 +283,7 @@ COMPARED = (
         ("revolutions/nodes_before", 2, "nodes taken", BLUE), ("heldHomeShare", 2, "nodes kept", BLUE),
         ("gini", 2, "Gini", BLUE), ("topDecileShare", 2, "richest tenth", BLUE))),
     ("Shape and distances", (0.3, 3), (
-        ("coreShare", 2, "core", GREEN), ("cycleRank/nodes", 2, "loops", GREEN),
+        ("coreShare", 2, "core", GREEN), ("cycleRank/nodes", 2, "bridges", GREEN),
         ("bridges/edges", 2, "bridges", GREEN), ("transitivity", 2, "clustering", GREEN),
         ("assortativity", 2, "assortativity", GREEN), ("spectralGap", 2, "spectral gap", GREEN),
         ("dimension", 2, "dimension", ORANGE), ("meanPathLength", 2, "mean distance", ORANGE),

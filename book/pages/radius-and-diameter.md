@@ -49,7 +49,7 @@ steps, the radius about 36 and the mean path length about 18; in one of
 <!-- turns -->
 ---
 
-← [Cut risk](cut-risk.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The spectral gap](spectral-gap.md) →
+← [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [The spectral gap](spectral-gap.md) →
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 

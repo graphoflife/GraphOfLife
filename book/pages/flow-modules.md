@@ -92,7 +92,7 @@ Some worlds stand apart within their kind:
   a neighbour.
 - Batch S's two pilot worlds with **lapsing links**, with and without gifts,
   are B1-like, as the lab's world with lapsing links is — the split
-  [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world) found for [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") of flow.
+  [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world) found for [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") of flow.
 
 ## What the network makes, and what the agents make
 

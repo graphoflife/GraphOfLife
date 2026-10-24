@@ -307,7 +307,7 @@ change, slowly:
 - **Leaves**, the share of agents with a single connection, fall with an
   exponent of −0.08 (−0.12 to −0.04). Their median falls from 0.44 at 3,200
   tokens to 0.28 at 409,600.
-- **[Loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") per connection** rise with an exponent of 0.08 (0.02 to 0.14): from
+- **[Loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") per connection** rise with an exponent of 0.08 (0.02 to 0.14): from
   0.28 to 0.45.
 - **Nodes kept by their own agent** fall with an exponent of −0.03 (−0.06 to
   −0.01): from 0.51 to 0.40.

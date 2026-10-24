@@ -244,7 +244,7 @@ agents. In these worlds the core reads 2.5 by balls and 1.9 by walks, against
 2.8 and 1.9 for the whole world. The trees that hang off the core add room,
 not ways round. The core of the worlds of 409,600 tokens reads 3.1 by balls
 and 2.0 by walks at short range. That is over radii 3 to 6, and walks of up to
-64 steps. Over the whole range of scales it reads 2.7 and 1.5. Its [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") close
+64 steps. Over the whole range of scales it reads 2.7 and 1.5. Its [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") close
 at short range, and over long distances it seems to branch more than it
 meshes.
 [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)

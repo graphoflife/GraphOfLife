@@ -434,13 +434,13 @@ def geometry(ch: F.Chapter) -> None:
     lx = np.unique(through[through > 0])
     ly = [(through >= x).mean() for x in lx]
     ch.figure(
-        "loops", title="How many loops pass through an agent",
+        "bridges", title="How many loops pass through an agent",
         x={"label": "loops of the cycle basis through the agent (logarithmic)", "log": True},
         y={"label": "share of agents with at least that many (logarithmic)", "log": True, "max": 1},
         series=[line(lx, ly, "the world of seed 1 after its last game", GREEN, width=2)],
         caption="A breadth-first spanning tree of the world with seed 1 after its last game leaves "
                 f"{int(len(frame['edges']) - n + 1):,} connections over, each closing one loop of a cycle basis "
-                "([Loops](loops.md)). For every count x, the share of agents that at least x of those "
+                "([Loops](bridges.md#loops)). For every count x, the share of agents that at least x of those "
                 f"loops pass through. {100 * np.mean(through == 0):.0f}% of the agents lie on none of them.",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read frame `{W.frame(LAST)}`; build a breadth-first spanning tree.",
@@ -523,7 +523,7 @@ def breaking(ch: F.Chapter) -> None:
                 line([0, 0.5], [0, 0.5], "the whole worst cut lost", BLUE, width=1, dash=[4, 4])],
         caption=f"Every game from iteration 500 on of {W.lived}. x: before the game, "
                 "the largest share of the world that one bridge held to the rest — if that one connection were "
-                "cut, that many would be cut off ([Cut risk](cut-risk.md)). y: the share of agents the "
+                "cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the "
                 "game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       [f"Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ {LAST:,}: `cutRiskBefore`, and "

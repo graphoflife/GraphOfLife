@@ -33,7 +33,7 @@ there.
 - **[correlation](correlation.md)** — Whether two quantities go up and down together, from −1 to 1.
 - **[correlation length](correlation-function.md)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
 - **[cross-time tournament](eras-and-contests.md)** (also era) — Brains of a world at two moments, its eras, played against each other: do the later ones win?
-- **[cut risk](cut-risk.md)** — The share of a world that the worst single cut, of one agent or one connection, would cut off.
+- **[cut risk](bridges.md#cut-risk)** — The largest share of a world that cutting one connection would cut off.
 - **[degree](degree.md)** — The number of an agent's connections: how many neighbours it has.
 - **[diameter](radius-and-diameter.md)** — The longest of the shortest paths between two agents of a world.
 - **[dimension](ball-dimension-and-curvature.md)** (also ball dimension) — How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.
@@ -66,7 +66,7 @@ there.
 - **[lightning](lightning.md)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
 - **[lineage](families.md)** — A line of descent: the agents whose genotypes go back to one ancestor.
 - **[logarithmic axis](logarithmic-axes.md)** — An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.
-- **[loop](loops.md)** — A path through the network that comes back to where it started without using a connection twice.
+- **[loop](bridges.md#loops)** — A path through the network that comes back to where it started without using a connection twice.
 - **[median](median-and-quantiles.md)** (also quantile) — The middle value: half of the numbers lie below it and half above.
 - **[message](messages.md)** — Numbers an agent writes to itself and to each neighbour every phase, which their brains read.
 - **[mobility](mobility.md)** — Whether the rich stay rich, or who holds the wealth keeps changing.

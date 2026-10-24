@@ -75,7 +75,7 @@ hundred agents to sixty thousand
 grows as *N*^0.30 — as a body of 3.3 dimensions would. That is a surprise
 worth taking seriously, and also with care: by box covering they measure
 about 1.9; they are full of stars and trees; and about a quarter of their
-connections (a third at 10,000 tokens) are **[bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.")**, some of which hold
+connections (a third at 10,000 tokens) are **bridges**, some of which hold
 half a world to the rest ([How a world breaks](how-a-world-breaks.md)). A
 three-dimensional lattice has no bridges at all: to cut a cube of *N* points
 in two, you must cut about *N*^(2/3) connections — a whole cross-section.
@@ -91,10 +91,10 @@ So the aim can be put precisely. Find rules under which a world grows into a
 network that is three-dimensional by every measure at large scales and **well
 knit**: bridges will always exist, but they should hold twigs, not half the
 world. The tools are ready — the dimensions above, the cut risk
-([Cut risk](cut-risk.md)), and the spectral gap, which for a
+([Cut risk](bridges.md#cut-risk)), and the spectral gap, which for a
 *d*-dimensional body shrinks as *N*^(−2/*d*) and for a network with cheap cuts
 is tiny ([The spectral gap](spectral-gap.md)). One hint is already in:
-bigger worlds have more [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") per connection and fewer leaves
+bigger worlds have more loops per connection and fewer leaves
 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 
 > [!info] Added later: rules for a well-knit world

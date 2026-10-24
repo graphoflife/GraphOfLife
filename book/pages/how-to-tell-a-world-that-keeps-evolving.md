@@ -64,7 +64,7 @@ Many numbers rise in any world, evolving or not. Four kinds deserve a warning,
 because each looks like the thing we want.
 
 1. **Records.** Think of the longest life ever lived, the largest family ever
-   seen, or the longest [loop](loops.md "A path through the network that comes back to where it started without using a connection twice.") of tokens ever peeled. Each is the largest value
+   seen, or the longest loop of tokens ever peeled. Each is the largest value
    a fluctuating number has taken so far. A record keeps rising in a world that
    does not change at all, simply because the world keeps drawing new values.
    When a number keeps being drawn from the same distribution, and very large
@@ -160,7 +160,7 @@ to meet. [The health bar](health-bar.md) explains why each one is there.
 | one world | the pieces the cull leaves | always one |
 | not a tree | share of agents in the [2-core](core-trees-leaves.md) — on a loop, or between loops | 0.8 or more |
 | few single points of failure | the largest share of the agents one agent's loss would cut off (`worst_node_cut_share`) | 2% or less |
-| | the same for one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") ([cut risk](cut-risk.md)) | 1% or less |
+| | the same for one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") ([cut risk](bridges.md#cut-risk)) | 1% or less |
 | decentralised | the share of the others the best-connected agent is joined to | 5% or less |
 | neither a tree nor complete | connections per agent | 3 to 12 |
 | about three-dimensional | the [dimension of ball growth](ball-dimension-and-curvature.md) | 2.3 to 4 |

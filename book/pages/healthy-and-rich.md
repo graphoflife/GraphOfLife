@@ -51,7 +51,7 @@ already says what a decentralised, resilient network is. It has seven
 marks, each checked on a world at one moment:
 
 1. one piece;
-2. a [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the agents on [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") or between them, holding at least 0.8 of
+2. a [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the agents on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") or between them, holding at least 0.8 of
    the agents;
 3. no agent whose loss cuts off more than 2% of the others;
 4. no link whose loss cuts off more than 1%;

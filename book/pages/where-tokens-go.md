@@ -4,7 +4,7 @@
 > - Every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), every [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") is staked somewhere. Where does it go, and does
 >   anything come back?
 > - What do the notebook's measures of flow say together: the budget of a
->   game, the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), the [loops](loops.md "A path through the network that comes back to where it started without using a connection twice."), the [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), the groups, the estate
+>   game, the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), the [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice."), the [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), the groups, the estate
 >   of the dead?
 
 ## In short

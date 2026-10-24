@@ -4,7 +4,7 @@
 
 A world can only evolve for a long time if its network holds together. The
 **health bar** says what that means, in seven marks that can be checked on a
-world at one moment: one piece, made mostly of [loops](loops.md), with no
+world at one moment: one piece, made mostly of [loops](bridges.md#loops), with no
 [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") or link whose loss cuts off much of it, no [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), a few links per agent,
 and a dimension near three. A world that meets all seven has a healthy
 network. The bar says nothing about the agents themselves: how much they
@@ -20,7 +20,7 @@ The bar was set in
 | one piece | how many pieces the network falls into | one |
 | 2-core | the share of agents in the [2-core](core-trees-leaves.md): on a loop, or between loops | at least 80% |
 | agent cut | the largest share of the world that one agent's loss would cut off | at most 2% |
-| link cut | the same for one link: the [cut risk](cut-risk.md) | at most 1% |
+| link cut | the same for one link: the [cut risk](bridges.md#cut-risk) | at most 1% |
 | no hub | the share of the other agents that the best-connected agent is linked to | at most 5% |
 | links per agent | the mean [degree](degree.md) | 3 to 12 |
 | dimension | how fast balls grow ([Dimension and curvature from ball growth](ball-dimension-and-curvature.md)) | 2.3 to 4 |
@@ -123,6 +123,6 @@ Earlier experiments read the same lines from a run's recorded statistics, as
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (10)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Stars and hubs](stars-and-hubs.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [!info]- Pages that link here (11)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->
