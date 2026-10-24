@@ -283,7 +283,8 @@ B2:
 
 So evolution does not stop at any rate, and the rate does not decide whether
 it goes on. But the slowest change keeps the largest late steps: the opposite
-of what more variation to choose from would give. The brains of different
+of what more variation to choose from would give. With five worlds at each
+rate, that difference is a hint, not yet a finding. The brains of different
 rates were not played against each other a lifetime long. So whether slowly
 changed brains end up better than fast ones, over a whole life, is still open.
 

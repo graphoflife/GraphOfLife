@@ -206,38 +206,21 @@ By its own rule — anything differing anywhere refutes it — the thesis is
 last bits of numbers that had changed no decision in 150 iterations. For
 stopping, continuing and crashing, it holds exactly.
 
-## What this means
+## What we learned
 
-A run is decided by its settings and its seed, given one thread for the
-matrix library, which every run in this notebook uses. Stopping it,
-continuing it or crashing it changes nothing. So the lab can pause and resume
-runs freely. And every difference between two runs in later pages comes from
-what was changed, not from how they were run.
-
-Two limits remain:
-
-- **Other machines.** A different processor or library version can round a
-  sum differently, just as a different number of threads does. So every run
-  records its Python, numpy, networkx and BLAS versions, its processor and
-  its instruction set. The lab refuses to continue a run under different
-  ones.
-- **The browser.** The version of the program that runs in a web page uses
-  other builds of numpy and networkx. It is not expected to give the same
-  runs.
-
-> [!info] Where everything came from
-> - **Runs:** 12 — `B1-10000-s001-straight` … `-s003-straight`, each also as
->   `-stopped-at-10`, `-cut-off-at-15` and `-all-blas-threads`.
-> - **Engine:** snapshot `f39288e90b003df0`, commit `ccba58f`.
-> - **Made again:** all 12, with `python3 gol_lab.py verify E01 --runs 12 --iterations 30`,
->   on engines `f39288e90b003df0` and `f820369a1583af53`: identical.
-> - **Environment:** Python 3.12.3, numpy 2.5.1, networkx 3.6.1, OpenBLAS
->   (scipy-openblas 0.3.33), Intel Core Ultra 7 258V, numpy dispatch AVX2.
-> - **Results:** `book/results/E01.json`, made with `python3 gol_lab.py analyse E01`.
-> - **Tests:** `tests/test_engine.py` and `tests/test_lab.py` hold these
->   checks: two worlds in turn, two runs in two threads, a stop and resume, a
->   run cut between checkpoints, a worker terminated mid-run, and the server
->   keeping the matrix library to one thread.
+- **A run is decided by its settings and its seed**, given one thread for the
+  matrix library, which every run in this notebook uses.
+- **Stopping it, continuing it or crashing it changes nothing.** So the lab
+  can pause and resume runs freely. And every difference between two runs in
+  later pages comes from what was changed, not from how they were run.
+- **Other machines may round differently.** A different processor or library
+  version can round a sum differently, just as a different number of threads
+  does. So every run records its Python, numpy, networkx and BLAS versions,
+  its processor and its instruction set. The lab refuses to continue a run
+  under different ones.
+- **The browser is not expected to agree.** The version of the program that
+  runs in a web page uses other builds of numpy and networkx. It is not
+  expected to give the same runs.
 
 ## Where to go next
 
@@ -247,6 +230,21 @@ Two limits remain:
   resumed.
 - [Every setting](settings.md): the numbers and switches that, with the seed,
   fix a run.
+
+## How this was made
+
+- **Runs:** 12 — `B1-10000-s001-straight` … `-s003-straight`, each also as
+  `-stopped-at-10`, `-cut-off-at-15` and `-all-blas-threads`.
+- **Engine:** snapshot `f39288e90b003df0`, commit `ccba58f`.
+- **Made again:** all 12, with `python3 gol_lab.py verify E01 --runs 12 --iterations 30`,
+  on engines `f39288e90b003df0` and `f820369a1583af53`: identical.
+- **Environment:** Python 3.12.3, numpy 2.5.1, networkx 3.6.1, OpenBLAS
+  (scipy-openblas 0.3.33), Intel Core Ultra 7 258V, numpy dispatch AVX2.
+- **Results:** `book/results/E01.json`, made with `python3 gol_lab.py analyse E01`.
+- **Tests:** `tests/test_engine.py` and `tests/test_lab.py` hold these
+  checks: two worlds in turn, two runs in two threads, and a stop and resume.
+  They also hold a run cut between checkpoints, a worker terminated mid-run,
+  and the server keeping the matrix library to one thread.
 
 <!-- turns -->
 ---
