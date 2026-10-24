@@ -27,7 +27,7 @@ COLOURS = {"B2": BLUE, "B1": ORANGE}
 
 #: The quantities known before the game, and what happened after it.
 BEFORE = ["tokens", "age", "clones", "degree", "curvature", "nbr_tokens", "nbr_max", "poorer_nbrs", "nbr_degree",
-          "kin_nbrs", "tokens_per_link", "degree", "triangles", "core", "forman", "pagerank", "betweenness",
+          "kin_nbrs", "tokens_per_link", "clustering", "triangles", "core", "forman", "pagerank", "betweenness",
           "home_share", "targets", "max_share", "rev_share"]
 AFTER = ["change", "rel_change", "kept", "took", "alive_10", "change_10", "degree_change_10", "child_next"]
 #: The outcomes as the heatmap's columns name them.

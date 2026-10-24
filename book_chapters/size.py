@@ -256,7 +256,7 @@ def size(ch: F.Chapter) -> None:
         ("Births per 100 agents", rate("births", 1), "births"),
         ("Cut off per 100 agents", rate("orphaned", 2), "cut"),
         ("Leaves, share of agents", ratio("leaves", "nodes"), "leaves"),
-        ("Loops per connection", lambda s: settled(s, "loopDensity"), "bridges"),
+        ("Loops per connection", lambda s: settled(s, "loopDensity"), "loops"),
         ("Dimension from ball growth", lambda s: settled(s, "dimension"), "dimension")]
     panels, flat = [], {}
     for k, (title, value, key) in enumerate(intensive):

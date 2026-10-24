@@ -121,7 +121,7 @@ def core_shape(run_id: str) -> Dict[str, Any]:
         shells = Counter(min(k, SHELLS) for k in number.values())
         edges = sum(len(v) for v in adj.values()) // 2
         core_edges = sum(1 for u in adj for v in adj[u] if u < v and role[u] == 0 and role[v] == 0)
-        looks.append({"t": t, "agents": len(adj), "edges": edges, "bridges": edges - len(adj) + 1,
+        looks.append({"t": t, "agents": len(adj), "edges": edges, "loops": edges - len(adj) + 1,
                       "core_edges": core_edges, "parts": parts,
                       "trees": {"count": int(len(sizes)), "mean": float(sizes.mean()) if sizes.size else None,
                                 "median": float(np.median(sizes)) if sizes.size else None,
@@ -329,11 +329,11 @@ def core(ch: F.Chapter) -> None:
     ch.number("deepest_shell_settled", describe([float(np.mean(v[t >= W.settled])) for t, v in deepest_shell]))
 
     # ---- the loops live in the core ----
-    loops = _looks(kept, lambda x: x["bridges"] / x["agents"])
-    per_core = _looks(kept, lambda x: x["bridges"] / max(1, x["parts"]["core"]["agents"]))
+    loops = _looks(kept, lambda x: x["loops"] / x["agents"])
+    per_core = _looks(kept, lambda x: x["loops"] / max(1, x["parts"]["core"]["agents"]))
     core_degree = _looks(kept, lambda x: 2 * x["core_edges"] / max(1, x["parts"]["core"]["agents"]))
     ch.figure(
-        "bridges", title="Loops, per agent and per core agent", x={"label": "iteration"},
+        "loops", title="Loops, per agent and per core agent", x={"label": "iteration"},
         y={"label": "per agent", "min": 0},
         series=[F.band_series(loops, "independent loops per agent", GREEN),
                 F.band_series(per_core, "independent loops per core agent", BLUE),

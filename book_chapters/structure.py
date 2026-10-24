@@ -165,7 +165,7 @@ def scaling(ch: F.Chapter) -> None:
     ch.number("triangles_slope", float(s2))
 
     n = classes_mean(knn_k, knn, positive=False)
-    assort = [mean_over(s.run_id, "degree", *W.window) for s in alive]
+    assort = [mean_over(s.run_id, "assortativity", *W.window) for s in alive]
     ch.figure(
         "neighbours", title="Whom the well-connected are joined to",
         x={"label": "connections k of an agent (logarithmic)", "log": True},
@@ -434,7 +434,7 @@ def geometry(ch: F.Chapter) -> None:
     lx = np.unique(through[through > 0])
     ly = [(through >= x).mean() for x in lx]
     ch.figure(
-        "bridges", title="How many loops pass through an agent",
+        "loops", title="How many loops pass through an agent",
         x={"label": "loops of the cycle basis through the agent (logarithmic)", "log": True},
         y={"label": "share of agents with at least that many (logarithmic)", "log": True, "max": 1},
         series=[line(lx, ly, "the world of seed 1 after its last game", GREEN, width=2)],
@@ -702,7 +702,7 @@ def colours(ch: F.Chapter) -> None:
                        "Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
     ch.number("six_views", {"agents": len(ids), "drawn": len(drawn), "piece": info,
-                            "genotype": {str(k): v for k, v in shares.items()},
+                            "families": {str(k): v for k, v in shares.items()},
                             "max_tokens": float(tokens.max()), "max_age": float(ages.max() - 1)})
 
     flow = Counter()

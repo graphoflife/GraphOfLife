@@ -103,11 +103,11 @@ ALLY_WORLDS = {
 }
 FIGHT_WORLDS = {
     "no alliances": (["A10k/ctrl-s1", "A10k/ctrl-s2"], GREY),
-    "another-game": (["A10k/allies-s1", "A10k/allies-s2", "AL/allies10k-s3", "AL/allies10k-s4"], BLUE),
+    "alliances": (["A10k/allies-s1", "A10k/allies-s2", "AL/allies10k-s3", "AL/allies10k-s4"], BLUE),
     "kin pooled": (["A10k/kin-s1", "A10k/kin-s2"], VIOLET),
     "alliances, no home advantage": (["N/N0-s1", "N/N0-s2"], GREEN),
 }
-TOURNEYS = {"no alliances": "A10k/ctrl-s1", "another-game": "A10k/allies-s1", "kin pooled": "A10k/kin-s1",
+TOURNEYS = {"no alliances": "A10k/ctrl-s1", "alliances": "A10k/allies-s1", "kin pooled": "A10k/kin-s1",
             "support counted twice": "A10k/gain-s1", "alliances, 3,000 iterations": "AL/allies10k-s3"}
 ALLY_RUNS = ("Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in "
              "`GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances "

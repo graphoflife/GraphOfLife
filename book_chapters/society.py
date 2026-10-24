@@ -24,8 +24,8 @@ from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GRE
 #: common genotype held the largest share, a world one family took over within the window and one no
 #: family took over, and three for the common ancestor.
 EXAMPLES = {
-    "E02": {"top": 12, "genotype": ((12, (2550, 2999)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
-    "E10": {"top": 28, "genotype": ((12, (550, 1499)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
+    "E02": {"top": 12, "families": ((12, (2550, 2999)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
+    "E10": {"top": 28, "families": ((12, (550, 1499)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
 }[W.experiment]
 
 # ---------------------------------------------------------------------------
@@ -189,7 +189,7 @@ def game(ch: F.Chapter) -> None:
     h0, h1 = hist(first), hist(last)
     k = np.arange(len(labels))
     ch.figure(
-        "how-the-game-is-played", title="How much of its stake an agent puts on its own node",
+        "home-stake", title="How much of its stake an agent puts on its own node",
         x={"label": "share of the agent's tokens staked on its own node", "categories": labels},
         y={"label": "share of agents", "min": 0},
         series=[{"label": f"the first game: {len(first):,} agents of {len(specs)} worlds", "kind": "bars",
@@ -496,7 +496,7 @@ def shape(ch: F.Chapter) -> None:
                        "For `coreShare` and `bridges/edges`, which are measured every 25 iterations, "
                        "use stretches of 25."]))
     clus = band_series([series(s.run_id, "transitivity") for s in specs], "clustering (transitivity)", GREEN)
-    ch.figure("degree", title="Clustering", x={"label": "iteration"}, y={"label": "transitivity", "min": 0},
+    ch.figure("clustering", title="Clustering", x={"label": "iteration"}, y={"label": "transitivity", "min": 0},
               series=[clus],
               caption="Three times the number of triangles divided by the number of connected triples "
                       "([Clustering](degree.md#clustering)), every 25 iterations. The founders' ring starts at "
@@ -614,7 +614,7 @@ def lineage(ch: F.Chapter) -> None:
         lowest.append(float(np.nanmin(v[its >= 100])))
     ch.number("thesis_E06", {
         "distinct_per_agent": describe([mean_over(s.run_id, "distinctBrains/nodes", 100, W.last) for s in alive]),
-        "genotype": describe([mean_over(s.run_id, "cladesInWindow", 100, W.last) for s in alive]),
+        "families": describe([mean_over(s.run_id, "cladesInWindow", 100, W.last) for s in alive]),
         "families_lowest": describe(lowest), "worlds_ever_ten_or_fewer": int(sum(x <= 10 for x in lowest)),
         "worlds_with_a_tenth": int(sum(v > 0.1 for _, v in peaks.values()))})
 
@@ -646,7 +646,7 @@ def lineage(ch: F.Chapter) -> None:
                              "The first genotype reached that carries all agents is their newest common "
                              "ancestor; plot the iterations since it first appeared."]))
 
-    for seed, window in EXAMPLES["genotype"]:
+    for seed, window in EXAMPLES["families"]:
         w = F.world_pass(W.run(seed), window)
         m = w["muller"]
         xs = [t for t, n, _ in m["series"]]

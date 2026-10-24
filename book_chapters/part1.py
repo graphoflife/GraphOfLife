@@ -50,7 +50,7 @@ def world(ch: F.Chapter) -> None:
                        "networkx joins every node to ⌊5/2⌋ = 2 neighbours on either side.",
                        "Place node i at angle 2πi / 100 on a circle and draw every connection."]))
     ch.number("ring", {"founders": n, "connections": len(edges), "shortcuts": shortcuts,
-                       "degree": float(nx.transitivity(w.G)),
+                       "clustering": float(nx.transitivity(w.G)),
                        "mean_distance": float(nx.average_shortest_path_length(w.G))})
 
 
@@ -148,7 +148,7 @@ def measure(ch: F.Chapter) -> None:
                       ["Take every run's rows with `phase` = 2 and `nodes`; average them in stretches "
                        "of 25 iterations; draw one line per run."]))
     ch.figure(
-        "median-and-quantiles", title="The same 30 worlds, as a band", x={"label": "iteration"}, y={"label": "agents", "min": 0},
+        "bands", title="The same 30 worlds, as a band", x={"label": "iteration"}, y={"label": "agents", "min": 0},
         series=[band_series([series(s.run_id, "nodes") for s in specs], "median, middle half, nine in ten", BLUE)],
         caption=f"{BAND_WORDS}.",
         recipe=recipe(runs_text(), STATS_FILE, ["Take every run's rows with `phase` = 2 and `nodes`.",

@@ -38,7 +38,7 @@ import os
 import re
 import subprocess
 import sys
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, Iterable, List, Tuple
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 BOOK = os.path.join(ROOT, "book")
@@ -112,14 +112,32 @@ def relink_files(moved: Dict[str, str], new: str, ids: set, apply: bool) -> List
         # A link split over two string literals ("[words]" "(page.md)") has no
         # `](` for LINK to find; in the code, a page in parentheses is a link.
         out = BARE.sub(lambda m: f"({retarget(m.group(1), 'pages/_.md', moved, new, ids)})", out)
-        for old in olds:
-            out = out.replace(f'"{old}"', f'"{new}"')
+        out = lead_batch_pages(out, olds, new)
         if out != text:
             changes.append(os.path.relpath(path, ROOT))
             if apply:
                 with open(path, "w", encoding="utf-8") as f:
                     f.write(out)
     return changes
+
+
+def lead_batch_pages(text: str, olds: Iterable[str], new: str) -> str:
+    """
+    The page ids that catalogue.BATCHES lists for each pilot batch, led to NEW.
+
+    Only there does the figures' code name pages by id. Anywhere else a quoted
+    word such as "alliances" or "clustering" is a data key, a figure's name or a
+    label, and renaming it breaks the figure the next time it is drawn.
+    """
+    table = re.search(r"^BATCHES\b", text, re.M)
+    if not table:
+        return text
+    start = table.start()
+    end = text.index("\n}\n", start)
+    block = text[start:end]
+    for old in olds:
+        block = block.replace(f'"{old}"', f'"{new}"')
+    return text[:start] + block + text[end:]
 
 
 def plan(new: str, merged: List[Tuple[str, str]]) -> Dict[str, str]:

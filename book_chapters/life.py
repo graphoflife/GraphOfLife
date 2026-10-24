@@ -231,8 +231,8 @@ def youth(ch: F.Chapter) -> None:
     fam = F.A.bands([early(*series(s.run_id, "cladesInWindow")) for s in specs], points=151)
     fam.update(label=f"{len(specs)} worlds: median, middle half, nine in ten", colour=GREEN)
     ch.figure(
-        "genotype", title="Families: distinct ancestors eight iterations back",
-        x={"label": "iteration", "min": 0, "max": 150}, y={"label": "genotype", "min": 0},
+        "families", title="Families: distinct ancestors eight iterations back",
+        x={"label": "iteration", "min": 0, "max": 150}, y={"label": "families", "min": 0},
         series=[fam],
         caption="After every game, how many different genotypes of eight iterations earlier the "
                 "living descend from (before iteration 8: how many founders). "
@@ -412,10 +412,10 @@ def births(ch: F.Chapter) -> None:
 # ---------------------------------------------------------------------------
 
 SEED_STATS = [("nodes", 2, "agents"), ("edges", 2, "connections"), (("births"), 1, "births"),
-              ("cladesInWindow", 2, "genotype"), ("gini", 2, "Gini"), ("topDecileShare", 2, "richest tenth"),
+              ("cladesInWindow", 2, "families"), ("gini", 2, "Gini"), ("topDecileShare", 2, "richest tenth"),
               ("meanDegree", 2, "connections per agent"), ("leaves/nodes", 2, "leaf share"),
               ("bridges/edges", 2, "bridge share"), ("coreShare", 2, "core share"),
-              ("transitivity", 2, "degree"), ("distinctBrains/nodes", 2, "genotypes per agent")]
+              ("transitivity", 2, "clustering"), ("distinctBrains/nodes", 2, "genotypes per agent")]
 
 
 def stretches(run_id: str, stat: str, phase: int, start: int = 100, stop: int = None,
@@ -590,7 +590,7 @@ def seed(ch: F.Chapter) -> None:
             needed.append(line(100 * changes, np.ceil(n_needed), f"{label}, {how} (spread {cv:.2f})", k * 2,
                                width=2, **({"dash": dash} if dash else {})))
     ch.figure(
-        "bootstrap", title="Seeds a condition needs",
+        "seeds-needed", title="Seeds a condition needs",
         x={"label": "the change to be seen, % of the mean"},
         y={"label": "seeds per condition (logarithmic)", "log": True, "min": 1},
         series=needed, guides=[{"axis": "y", "at": 30}],

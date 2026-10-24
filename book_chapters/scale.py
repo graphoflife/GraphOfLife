@@ -206,7 +206,7 @@ def domains(run_id: str) -> Dict[str, Any]:
             families[str(k)] = int(counts.size)
         out.append({"t": t, "agents": len(ids), "pairs": pairs.tolist(),
                     "same": {str(k): v.tolist() for k, v in same.items()},
-                    "chance": chance, "largest": largest, "genotype": families})
+                    "chance": chance, "largest": largest, "families": families})
     return {"moments": out}
 
 
@@ -283,15 +283,15 @@ COMPARED = (
         ("revolutions/nodes_before", 2, "nodes taken", BLUE), ("heldHomeShare", 2, "nodes kept", BLUE),
         ("gini", 2, "Gini", BLUE), ("topDecileShare", 2, "richest tenth", BLUE))),
     ("Shape and distances", (0.3, 3), (
-        ("coreShare", 2, "core", GREEN), ("cycleRank/nodes", 2, "bridges", GREEN),
-        ("bridges/edges", 2, "bridges", GREEN), ("transitivity", 2, "degree", GREEN),
-        ("degree", 2, "degree", GREEN), ("spectralGap", 2, "spectral gap", GREEN),
+        ("coreShare", 2, "core", GREEN), ("cycleRank/nodes", 2, "loops", GREEN),
+        ("bridges/edges", 2, "bridges", GREEN), ("transitivity", 2, "clustering", GREEN),
+        ("assortativity", 2, "assortativity", GREEN), ("spectralGap", 2, "spectral gap", GREEN),
         ("dimension", 2, "dimension", ORANGE), ("meanPathLength", 2, "mean distance", ORANGE),
         ("diameter", 2, "diameter", ORANGE))),
     ("The largest, and totals", (1, 20), (
         ("maxTokenAdded", 2, "largest gain", RED), ("maxTokens", 2, "richest", RED),
         ("maxDegree", 2, "best-connected", RED), ("nodes", 2, "agents", GREY),
-        ("cladesInWindow", 2, "genotype", GREY))),
+        ("cladesInWindow", 2, "families", GREY))),
 )
 #: Both sets of worlds are compared over the same iterations.
 COMPARED_WINDOW = (500, 1499)

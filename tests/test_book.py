@@ -267,6 +267,25 @@ def test_every_page_the_figures_code_links_to_is_there():
     assert not broken, "the figures' code links to pages that are not there:\n  " + "\n  ".join(broken)
 
 
+def test_a_merge_leads_page_ids_only_where_the_code_lists_pages():
+    # A merge once renamed every quoted word in the figures' code that matched a
+    # merged page's id, so data keys and figure names ("alliances", "clustering")
+    # became page ids, and the next drawing would have broken. Only the pilot
+    # batches' table names pages by id, and every page it names must be there.
+    sys.path.insert(0, os.path.join(runner.ROOT, "research", "tools"))
+    import json
+    import merge_pages
+    from book_chapters import catalogue
+    code = 'BATCHES = {\n    "A": ("a batch", ["alliances"]),\n}\ng["alliances"] = 1\n'
+    assert merge_pages.lead_batch_pages(code, ["alliances"], "another-game") == (
+        'BATCHES = {\n    "A": ("a batch", ["another-game"]),\n}\ng["alliances"] = 1\n')
+    with open(os.path.join(runner.ROOT, "book", "book.json"), encoding="utf-8") as f:
+        written = {p["id"] for p in json.load(f)["pages"] if p.get("file")}
+    unknown = [f"{batch}: {page}" for batch, (_, pages) in catalogue.BATCHES.items() for page in pages
+               if page not in written]
+    assert not unknown, "pilot batches name pages that are not there:\n  " + "\n  ".join(unknown)
+
+
 def test_no_page_is_named_by_a_number():
     # The notebook is read by topic and by link, from any page, so a page is
     # named by what it is about: "Chapter 13", "Meta X", "Part V" or a link

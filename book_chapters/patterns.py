@@ -30,7 +30,7 @@ B2 = [f"B2-10000-s{i:03d}" for i in range(1, 11)]
 B1 = [f"B1-10000-s{i:03d}" for i in range(1, 11)]
 ALLIES = ["A10k_allies-s1_500", "A10k_allies-s2_500", "AL_allies10k-s3_2000", "AL_allies10k-s4_2000"]
 CONTROLS = ["A10k_ctrl-s1_500", "A10k_ctrl-s2_500"]
-COLOURS = {"B2": BLUE, "B1": ORANGE, "another-game": VIOLET, "no alliances": GREY}
+COLOURS = {"B2": BLUE, "B1": ORANGE, "alliances": VIOLET, "no alliances": GREY}
 #: Helping pairs a stretch of 50 games needs before the share of them returned, going round or
 #: kept in the family means anything.
 ENOUGH_PAIRS = 100
@@ -258,9 +258,9 @@ def patterns(ch: F.Chapter) -> None:
         def flows(kind, key):
             g = {"B2": [circ[w][kind][key] for w in B2], "B1": [circ[w][kind][key] for w in B1]}
             if allies:
-                g["another-game"] = [p["token-flow"][kind][key] for p in allies]
+                g["alliances"] = [p["circulation"][kind][key] for p in allies]
             if controls:
-                g["no alliances"] = [p["token-flow"][kind][key] for p in controls]
+                g["no alliances"] = [p["circulation"][kind][key] for p in controls]
             return g
 
         def excess(kind):
@@ -306,7 +306,7 @@ def patterns(ch: F.Chapter) -> None:
         def helped(f):
             g = {"B2": [f(dec[w]) for w in B2], "B1": [f(dec[w]) for w in B1]}
             if allies and all("decisive" in p for p in allies):
-                g["another-game"] = [f(p["decisive"]) for p in allies]
+                g["alliances"] = [f(p["decisive"]) for p in allies]
             if controls and all("decisive" in p for p in controls):
                 g["no alliances"] = [f(p["decisive"]) for p in controls]
             return g
@@ -329,7 +329,7 @@ def patterns(ch: F.Chapter) -> None:
         rounds = helped(lambda d: d["help_round"] - d["help_round_flip"]
                         if enough(d) and max(abs(d["help_round"] or 0), abs(d["help_round_flip"] or 0)) > 1e-9
                         else None)
-        ch.grid("do-agents-cooperate", [
+        ch.grid("help", [
             _panel("Nodes saved by others' stakes", "per 100 agents a game (logarithmic)",
                    {c: [max(x, 1e-3) for x in v] for c, v in saved.items()}, None, log=True, min=1e-3, max=100),
             _panel("Help returned", "returned pairs ÷ chance (logarithmic)", back, 1, log=True, min=0.3, max=30),
@@ -375,7 +375,7 @@ def patterns(ch: F.Chapter) -> None:
 
     # --- The alliance pilots, what their labels say ---------------------------
     if allies:
-        ch.number("alliance_labels", {p["pilot"]: p["another-game"] for p in allies})
+        ch.number("alliance_labels", {p["pilot"]: p["alliances"] for p in allies})
         ch.number("alliance_partnerships", {p["pilot"]: {"kept_in": p["structures"]["kept_in_partnership"],
                                                          "kept_otherwise": p["structures"]["kept_otherwise"]}
                                             for p in allies + controls})
