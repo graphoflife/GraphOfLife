@@ -110,8 +110,7 @@ Degrees, cores, bridges, power laws and cuts: what shape the links take, and how
 - [An agent's connections: degree, clustering, assortativity, attachment and scaling](pages/degree.md)
 - [Stars and hubs](pages/stars-and-hubs.md)
 - [Distances in a network: path length, radius and diameter, the spectral gap](pages/path-length.md)
-- [Core, trees and leaves](pages/core-trees-leaves.md)
-- [Bridges, cut risk and loops: how a network can be cut](pages/bridges.md)
+- [Bridges, cut risk, loops and the core: how a network can be cut](pages/bridges.md)
 
 ### Space and dimension
 

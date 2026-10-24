@@ -486,7 +486,7 @@ the two says that clearly, and the other does not.
 ### The network of a world of allies
 
 The network holds. In the last 500 iterations of every world of alliances,
-every agent was in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."): on a [loop](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice."), or between loops. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
+every agent was in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."): on a [loop](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice."), or between loops. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
 [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), no agent or connection could cut off anyone at all. No agent was linked
 to more than 2% of the others, and an agent had about five connections (4.9 to
 5.5). The worlds failed the health bar only on its last line. Their ball

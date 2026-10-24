@@ -37,7 +37,7 @@ identical to the engine's, [iteration](one-iteration.md "One step of a world's t
   It also counts what happened in the iteration: births, nodes taken (and how
   many by kin), deaths (and of them, how many starved and how many were cut
   off), [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.").
-  Every tenth row adds the network's health: the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the worst cut by one
+  Every tenth row adds the network's health: the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the worst cut by one
   agent and by one connection, the best-connected agent's share, links per
   agent and the [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
   ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).

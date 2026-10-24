@@ -348,7 +348,7 @@ def roles(ids: List[int], edges: List[List[int]]) -> Dict[int, int]:
 
 ROLE_WORDS = ("Blue: agents in the core, which is what is left when agents with one connection or "
               "none are removed again and again until none remains ([Core, trees and leaves]"
-              "(core-trees-leaves.md)); yellow: the rest of the hanging trees; red: leaves, "
+              "(bridges.md#core-trees-and-leaves)); yellow: the rest of the hanging trees; red: leaves, "
               "agents with a single connection. Where a dot is drawn means nothing in itself: a "
               "layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the "
               "rest apart.")
@@ -484,7 +484,7 @@ def shape(ch: F.Chapter) -> None:
     ch.grid(
         "structure", panels, columns=3, title="Core, leaves and bridges",
         caption=f"Three shares, after every game of the {len(specs)} baseline worlds. Left: the share of agents "
-                "in the core ([Core, trees and leaves](core-trees-leaves.md)), measured every "
+                "in the core ([Core, trees and leaves](bridges.md#core-trees-and-leaves)), measured every "
                 "25 iterations. Middle: the share of agents with exactly one connection, after every "
                 "game. Right: the share of connections that are bridges ([Bridges](bridges.md)), "
                 f"every 25 iterations. In each, {BAND_WORDS[0].lower()}{BAND_WORDS[1:]}.",

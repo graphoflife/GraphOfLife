@@ -12,7 +12,7 @@ The list is made from `book/terms.json`; a word that is missing can be added
 there.
 
 <!-- glossary -->
-- **[2-core](core-trees-leaves.md)** (also hanging tree) — What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.
+- **[2-core](bridges.md#core-trees-and-leaves)** (also hanging tree) — What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.
 - **[agent](the-world.md#agents-and-tokens)** (also node) — One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.
 - **[assortativity](degree.md#assortativity)** — Whether agents tend to be joined to agents like them: the well connected to the well connected.
 - **[autocorrelation](autocorrelation.md)** — How much a world's value now still says about its value some iterations later.

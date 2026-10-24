@@ -94,7 +94,7 @@ world:
   agent was joined to between 58 and 98% of all the others. Nothing stopped
   brains from joining their children to the best-connected neighbour. When
   the star went, the world grew back as a tree: at the end, 2.2 links per
-  agent, 42% of agents with a single link, a third in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), and one
+  agent, 42% of agents with a single link, a third in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), and one
   agent or one link whose loss would cut off 39% of the world. It was a tree
   of old agents, with a mean age of 206. There were 3.5 births per hundred
   agents an iteration, and as many agents cut off.

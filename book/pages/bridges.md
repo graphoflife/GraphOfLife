@@ -1,4 +1,4 @@
-# Bridges, cut risk and loops: how a network can be cut
+# Bridges, cut risk, loops and the core: how a network can be cut
 
 ## In short
 
@@ -7,7 +7,9 @@ two pieces. In a settled [B1](b1-and-b2.md "The first baseline: the algorithm ex
 connections are bridges. The **cut risk** is the largest share of the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
 that one bridge holds to the rest: a ninth, in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world. The **cycle
 rank** counts the independent **loops**: how many connections, the right
-ones, a network could lose and still be one piece.
+ones, a network could lose and still be one piece. Peel away every agent with
+a single connection, again and again, and the **core** is left. Every loop
+lies in it, and **trees** of agents hang off it.
 
 ## Bridges
 
@@ -25,11 +27,11 @@ to *v*.
 
 Three rules follow. Every connection of a tree is a bridge, and so is every
 leaf's single connection. In the 2-core, every agent lies on a loop or on a
-path between loops ([Core, trees and leaves](core-trees-leaves.md)). There,
+path between loops ([Core, trees and leaves](#core-trees-and-leaves)). There,
 only the connections on a path that joins two loops are bridges.
 
-**Example.** This network of 9 agents and 9 connections is the one drawn in
-[Core, trees and leaves](core-trees-leaves.md):
+**Example.** This network of 9 agents and 9 connections is the example of
+the whole page:
 
 ```
   a — b — c — d
@@ -80,9 +82,9 @@ connection.
 ### Bridges in the worlds
 
 A run records `bridges`, the number of bridges, in its statistics file, on the
-rows of every 25th [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). The notebook divides it by the number of
+rows of every 25th iteration. The notebook divides it by the number of
 connections, `bridges/edges`: the share of all connections that are bridges.
-Count them after the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), over a B1 world's [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."). At 100,000 tokens
+Count them after the game, over a B1 world's [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."). At 100,000 tokens
 about a quarter of the connections are bridges: 26%, some 6,400 of them. At
 10,000 tokens it is 31%
 ([Core, leaves and bridges](what-shape-does-the-network-take.md#core-leaves-and-bridges)).
@@ -124,7 +126,7 @@ bridge, and at most ½ — a network split down the middle by one connection.
 each hold one agent of 9. The bridge f–g holds three: g, h and i. So the cut
 risk is 3/9, a third.
 
-The formula assumes a network in one piece, as a world is after every [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.").
+The formula assumes a network in one piece, as a world is after every cleanup.
 Read before the cleanup, the network can be in several pieces. The program
 then takes *A*ₑ to be the agents the walk reached through the bridge. *B*ₑ is
 every other agent of the world, in the same piece or not.
@@ -258,11 +260,108 @@ tree would give a different basis, so this is a fair sample of where the
 loops run rather than a canonical count.
 
 An agent on no loop at all hangs on a tree, or lies in the core on a path
-between loops ([Core, trees and leaves](core-trees-leaves.md)). In the world
+between loops ([Core, trees and leaves](#core-trees-and-leaves)). In the world
 of seed 1, after its last game, 37% of the agents lie on none of its 11,297
 loops. Only 36% are off its core, so 114 agents lie in the core, on paths
 between loops. One agent, a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), lies on 1,012 of the loops: about a tenth of
 them.
+
+## Core, trees and leaves
+
+Every connected network can be cut into two kinds of part. There is a
+**core**, where every agent lies on a loop or on a path between loops. And
+there are **trees** that hang off it. This section says how the cut is made,
+and why it matters for Graph of Life.
+
+### Peeling
+
+Take the network and repeat:
+
+> remove every agent that has one connection or none,
+
+until no such agent is left. Removing a leaf can make its neighbour a leaf,
+so the peeling goes on until it stops by itself. What is left is the
+**2-core**: the largest part of the network in which every agent has at least
+two connections *within that part*. It can be empty: a tree peels away
+completely.
+
+Every agent then has one of three **roles**:
+
+- **core**: it is in the 2-core;
+- **leaf**: it has exactly one connection;
+- **tree**: neither. It was peeled away, but it has two or more connections.
+  It lies on a tree hanging off the core, between the core and the leaves.
+
+A run records `coreShare`, the share of agents in the 2-core, every 25
+iterations. It also records `leaves`, the number of agents with exactly one
+connection, after every phase.
+
+### An example of peeling
+
+Take the network of [What a bridge is](#what-a-bridge-is) again:
+
+```
+  a — b — c — d
+  |       |
+  e ——————f — g — h
+              |
+              i
+```
+
+The loop a–b–c–f–e–a is the core, with its members' connections among
+themselves. Peeling removes d, h and i, which have one connection each, in
+the first round. Then it removes g, which has only f left. So the core is
+{a, b, c, e, f}, the leaves are {d, h, i}, and the tree is {g}.
+
+### Why the core matters
+
+In B1's game, every connection that carries no tokens is cut
+([One iteration, step by step](one-iteration.md)). Cutting a connection on a
+loop never disconnects anything: there is always another way round the loop.
+Every other connection is a [bridge](#bridges). A bridge of a tree cuts off
+everything beyond it. A bridge on a path between two loops of the core cuts
+the core itself in two. The cleanup then removes whatever is no longer joined
+to the largest piece. So a single cut can lose any tree whole, and, through a
+bridge of the core, part of the core too. B2 cuts an unused connection only
+where its two ends share two neighbours, so it never cuts a bridge
+([`prune_needs`](settings.md#prune_needs)).
+
+In a settled B1 world of 100,000 tokens, about 57% of the agents are in the
+core, and 35% are leaves. The rest lie in trees. At 10,000 tokens it is 54%
+and 36%
+([The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
+
+### How far a tree hangs
+
+Every agent off the core belongs to exactly one tree. And every tree joins
+the core at exactly one core agent. Two ways into the core would close a
+loop, and the agent would then be in the core. So each agent off the core has a
+**depth**, its number of steps to the core. It also has a **root**, the core
+agent its tree hangs from.
+
+In the example, d hangs from c at depth 1. g hangs from f at depth 1, and h
+and i at depth 2. The tree hanging from f holds three agents (g, h and i),
+and the one hanging from c holds one (d). A breadth-first search out of every
+core agent at once finds both for every agent.
+
+### Deeper cores: the onion
+
+The peeling can go further. Remove every agent with fewer than **three**
+connections, again and again, and what is left is the **3-core**. With fewer
+than *k*, it is the ***k*-core**. Each *k*-core lies inside the one before,
+like the layers of an onion. An agent's **core number** is the largest *k*
+whose *k*-core still holds it (Seidman 1983). An agent on a tree or a leaf
+has core number 1. An agent of the 2-core that the 3-core no longer holds has
+core number 2, and so on.
+
+In the example, every core agent has two connections inside the core, so the
+3-core is empty. So a, b, c, e and f have core number 2, and d, g, h and i
+core number 1. A network in which many agents have high core numbers is held
+together by many overlapping loops, not by single rings.
+
+A run records only the share of agents in the 2-core (`coreShare`). The
+deeper cores, the trees and the [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of the core are measured in
+[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world).
 
 ## Where to go next
 
@@ -270,8 +369,8 @@ them.
   way, and what severs a region instead.
 - [The shape of the network](what-shape-does-the-network-take.md): the core,
   the bridges and the loops of the thirty worlds.
-- [Core, trees and leaves](core-trees-leaves.md): the peeling that finds the
-  core, where every loop lies.
+- [Distances in a network](path-length.md#the-spectral-gap): the spectral
+  gap, which weighs every way of cutting a network in two at once.
 - [The health bar](health-bar.md): the two cuts a world must keep small to
   pass it.
 
@@ -290,11 +389,18 @@ them.
     It may also lie in the core, on a path between loops. In the world of
     seed 1 after its last game, 114 agents do.
 
+## References
+
+- Seidman, S. B. (1983). Network structure and minimum degree. *Social
+  Networks* 5, 269–287.
+- Tarjan, R. E. (1974). A note on finding the bridges of a graph.
+  *Information Processing Letters* 2, 160–161.
+
 <!-- turns -->
 ---
 
-← [Core, trees and leaves](core-trees-leaves.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
+← [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
 
-> [!info]- Pages that link here (14)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The life of a B1 world](a-worlds-life.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Physical inspiration](physical-inspiration.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (18)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

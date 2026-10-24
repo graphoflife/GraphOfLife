@@ -353,10 +353,10 @@ last digit.
 <!-- turns -->
 ---
 
-← [Stars and hubs](stars-and-hubs.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Core, trees and leaves](core-trees-leaves.md) →
+← [Stars and hubs](stars-and-hubs.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) →
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (10)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

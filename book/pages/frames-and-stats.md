@@ -55,7 +55,7 @@ the viewer charts, and every one has a note that says how it is computed.
 | `topDecileShare` | share of all tokens held by the richest tenth | [The richest tenth](gini-coefficient.md#the-richest-tenths-share) |
 | `tokenEntropy`, `tokenEvenness`, `degreeEntropy`, `degreeEvenness` | how evenly tokens and connections are spread, in bits and as a share of the most even | [Entropy and evenness](gini-coefficient.md#entropy-and-evenness) |
 | `meanDegree`, `medianDegree`, `minDegree`, `maxDegree`, `density` | connections per agent; `density` is the share of all possible pairs that are joined | [Degree](degree.md) |
-| `leaves` | agents with exactly one connection | [Core, trees and leaves](core-trees-leaves.md) |
+| `leaves` | agents with exactly one connection | [Core, trees and leaves](bridges.md#core-trees-and-leaves) |
 | `distinctBrains`, `distinctParents`, `brainDiversity` | genotypes among the living, their parent genotypes, genotypes per agent | [Brain diversity](genotype.md#brain-diversity) |
 | `cladesInWindow` | families: ancestors eight iterations back | [Families](genotype.md#families) |
 | `births` | children born (phase 1 rows) | [Births and deaths](births-and-deaths.md) |
@@ -84,7 +84,7 @@ on other rows they are `null`:
 | `transitivity`, `triangles` | clustering, and the number of triangles | [Clustering](degree.md#clustering) |
 | `meanPathLength` | average distance between agents | [Path length](path-length.md) |
 | `radius`, `diameter` | the smallest and largest eccentricity | [Radius and diameter](path-length.md#radius-and-diameter) |
-| `coreShare` | share of agents in the 2-core | [Core, trees and leaves](core-trees-leaves.md) |
+| `coreShare` | share of agents in the 2-core | [Core, trees and leaves](bridges.md#core-trees-and-leaves) |
 | `bridges` | connections whose removal would split the network | [Bridges](bridges.md) |
 | `cutRisk` | the largest share of the world one cut could sever | [Cut risk](bridges.md#cut-risk) |
 | `cycleRank`, `loopDensity`, `components` | independent loops, loops per connection, separate pieces | [Loops](bridges.md#loops) |

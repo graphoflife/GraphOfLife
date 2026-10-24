@@ -84,7 +84,7 @@ In B1 (the baseline of Experiment 13), the [cull](one-iteration.md#cleanup)
 of the [median](median-and-quantiles.md) world removed 1.9% of its agents in
 every iteration from
 iteration 500 on, and only 51% of its agents sat in the
-[2-core](core-trees-leaves.md).
+[2-core](bridges.md#core-trees-and-leaves).
 
 In B2 (Experiment 14), not one agent of the ten worlds was cut off from
 iteration 200 to 1,000, and every agent sat in the 2-core. Every agent lives

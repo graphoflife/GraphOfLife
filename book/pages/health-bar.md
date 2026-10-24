@@ -18,7 +18,7 @@ The bar was set in
 | mark | what is measured | the line |
 |---|---|---|
 | one piece | how many pieces the network falls into | one |
-| 2-core | the share of agents in the [2-core](core-trees-leaves.md): on a loop, or between loops | at least 80% |
+| 2-core | the share of agents in the [2-core](bridges.md#core-trees-and-leaves): on a loop, or between loops | at least 80% |
 | agent cut | the largest share of the world that one agent's loss would cut off | at most 2% |
 | link cut | the same for one link: the [cut risk](bridges.md#cut-risk) | at most 1% |
 | no hub | the share of the other agents that the best-connected agent is linked to | at most 5% |
@@ -124,5 +124,5 @@ Earlier experiments read the same lines from a run's recorded statistics, as
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
 > [!info]- Pages that link here (12)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

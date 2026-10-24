@@ -755,20 +755,8 @@
       "summary": "The distance between two agents is the fewest connections on a path from one to the other. The mean path length is its average over pairs, the diameter its largest value, and the radius the reach of the most central agent."
     },
     {
-      "id": "core-trees-leaves",
-      "title": "Core, trees and leaves",
-      "file": "pages/core-trees-leaves.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every connected network can be cut into two kinds of part: a **core**, where every agent lies on a loop or on a path between loops, and **trees** that hang off it."
-    },
-    {
       "id": "bridges",
-      "title": "Bridges, cut risk and loops: how a network can be cut",
+      "title": "Bridges, cut risk, loops and the core: how a network can be cut",
       "file": "pages/bridges.md",
       "topics": [
         "network"

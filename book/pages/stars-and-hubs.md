@@ -32,7 +32,7 @@ alive (in the code, `STAR = 0.1` in `book_chapters/common.py`). By this measure
 7 of the 30 worlds of Experiment 10, at 100,000 tokens, were stars, and 10 of
 the 26 surviving worlds of 10,000 tokens of Experiment 2. In the large worlds a star sets the
 shape: across the thirty, the share of agents in the
-[2-core](core-trees-leaves.md) falls as the share joined to the largest hub
+[2-core](bridges.md#core-trees-and-leaves) falls as the share joined to the largest hub
 rises, with a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of −0.96
 ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 

@@ -457,7 +457,7 @@ alone.
 **It costs health with nearly every rule.** Handover costs two marks of the
 health bar at the median, and up to four; in five of the 46 worlds, none.
 The marks it costs are the network's. With handover, 38 of the 46 worlds
-have less than 0.8 of their agents in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). In 42 of the 46, a link's
+have less than 0.8 of their agents in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). In 42 of the 46, a link's
 loss would cut off more than 1% of the world. In 36, an agent's loss would
 cut off more than 2%. Without handover, none, two and three do. A parent that gives
 its links away thins the network into trees, with 1.8 links fewer per agent

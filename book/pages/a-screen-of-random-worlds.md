@@ -140,7 +140,7 @@ criteria, read at iteration 2,000:
 1. **Alive:** more than 20 agents, and not stopped as too slow.
 2. **Decentralised:** no agent linked to more than 5% of the others, and 3 to
    12 links per agent.
-3. **Resilient:** one piece, with at least 80% of the agents in the [2-core](core-trees-leaves.md "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). No
+3. **Resilient:** one piece, with at least 80% of the agents in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). No
    single agent's loss cuts off more than 2% of the world, and no single
    link's loss more than 1%.
 4. **Almost three-dimensional:** a dimension of 2 to 4, and a typical

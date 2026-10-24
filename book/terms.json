@@ -321,8 +321,9 @@
       "also": [
         "hanging tree"
       ],
-      "page": "core-trees-leaves",
-      "says": "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."
+      "page": "bridges",
+      "says": "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.",
+      "anchor": "core-trees-and-leaves"
     },
     {
       "name": "bridge",

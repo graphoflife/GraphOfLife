@@ -143,7 +143,7 @@ world. In some it is joined to much more:
 <!-- figure extremes/stars -->
 ![Worlds held together by one agent](../figures/extremes/stars.svg)
 
-**Worlds held together by one agent.** Left: after every game, the connections of the best-connected agent divided by the agents alive, in the worlds whose best-connected agent held, on average over iterations 500–1,499, a tenth of the world or more (one line each), and in the other worlds (the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th)). Right: one dot per world, its mean over the settled life of that share and of the share of agents in the core ([Core, trees and leaves](core-trees-leaves.md)), for the worlds of 100,000 tokens (blue) and of 10,000 (yellow, over iterations 500–2,999).
+**Worlds held together by one agent.** Left: after every game, the connections of the best-connected agent divided by the agents alive, in the worlds whose best-connected agent held, on average over iterations 500–1,499, a tenth of the world or more (one line each), and in the other worlds (the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th)). Right: one dot per world, its mean over the settled life of that share and of the share of agents in the core ([Core, trees and leaves](bridges.md#core-trees-and-leaves)), for the worlds of 100,000 tokens (blue) and of 10,000 (yellow, over iterations 500–2,999).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
@@ -165,7 +165,7 @@ leaves around it. A leaf is an agent with a single connection
 
 A star sets the shape of its world. The core of a world is what is left when
 agents with a single connection are peeled away, again and again
-([Core, trees and leaves](core-trees-leaves.md)). Across the thirty worlds,
+([Core, trees and leaves](bridges.md#core-trees-and-leaves)). Across the thirty worlds,
 the share of agents in the core falls as the share joined to the largest hub
 rises. Their [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") is **−0.96** (right panel). At 10,000 tokens stars
 were no rarer. Ten of the 26 worlds had one by the same measure, the largest

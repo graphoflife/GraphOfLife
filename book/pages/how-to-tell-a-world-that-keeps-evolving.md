@@ -158,7 +158,7 @@ to meet. [The health bar](health-bar.md) explains why each one is there.
 | what is asked | measured as | bar |
 |---|---|---|
 | one world | the pieces the cull leaves | always one |
-| not a tree | share of agents in the [2-core](core-trees-leaves.md) — on a loop, or between loops | 0.8 or more |
+| not a tree | share of agents in the [2-core](bridges.md#core-trees-and-leaves) — on a loop, or between loops | 0.8 or more |
 | few single points of failure | the largest share of the agents one agent's loss would cut off (`worst_node_cut_share`) | 2% or less |
 | | the same for one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") ([cut risk](bridges.md#cut-risk)) | 1% or less |
 | decentralised | the share of the others the best-connected agent is joined to | 5% or less |

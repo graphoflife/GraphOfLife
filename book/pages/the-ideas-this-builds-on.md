@@ -121,7 +121,7 @@ several agents acting together.
 - **Measures of a network** — degree, clustering, distances, bridges, the
   2-core — are standard (Newman 2003). [Degree](degree.md),
   [Clustering](degree.md#clustering), [Path length](path-length.md),
-  [Bridges](bridges.md) and [Core, trees and leaves](core-trees-leaves.md)
+  [Bridges](bridges.md) and [Core, trees and leaves](bridges.md#core-trees-and-leaves)
   define each. The bridges are found by depth-first search (Tarjan 1974), the
   core by peeling (Seidman 1983).
 - **Evolution on graphs.** Where individuals sit in a network changes what

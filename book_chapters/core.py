@@ -4,7 +4,7 @@ the study of the baseline, the core of a world: what is left when its hanging tr
 away, how many dimensions that core has, and how it holds a world's loops.
 
 Peeling removes every agent with one connection or none, again and again, until
-none is left ([Core, trees and leaves](core-trees-leaves.md)). What
+none is left ([Core, trees and leaves](bridges.md#core-trees-and-leaves)). What
 remains is the 2-core: every agent on it lies on a loop or on a path between
 loops. Everything peeled hangs off the core in trees, each joined to it at one
 agent. Peeling the core again, now removing agents with fewer than three

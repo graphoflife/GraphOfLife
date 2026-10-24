@@ -129,7 +129,7 @@
   "n-preferential-attachment": "degree#preferential-attachment-and-its-kernel",
   "n-clustering": "degree#clustering",
   "n-path-length": "path-length",
-  "n-core-trees-leaves": "core-trees-leaves",
+  "n-core-trees-leaves": "bridges#core-trees-and-leaves",
   "n-bridges": "bridges",
   "n-gini-coefficient": "gini-coefficient",
   "n-richest-tenth": "gini-coefficient#the-richest-tenths-share",
@@ -330,6 +330,7 @@
   "correlation-function": "like-next-to-like#how-alike-at-a-distance",
   "home-stake": "how-the-game-is-played#staking-at-home-and-keeping-ones-node",
   "gains-losses-and-the-share-out": "gains-and-losses#gains-losses-and-the-share-out",
-  "token-curvature": "gains-and-losses#token-curvature"
+  "token-curvature": "gains-and-losses#token-curvature",
+  "core-trees-leaves": "bridges#core-trees-and-leaves"
  }
 }
