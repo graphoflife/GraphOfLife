@@ -130,7 +130,7 @@ An agent's **degree** is its number of connections ([Degree](degree.md)). The
 figure shows, for every *d*, the share of agents with at least *d* connections
 (a complementary cumulative distribution). Both axes are logarithmic: each
 step along them multiplies by the same factor
-([Logarithmic axes](logarithmic-axes.md)). After the last game of the thirty
+([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)). After the last game of the thirty
 worlds, 35% of all agents have exactly one connection and 23% have two. The
 mean is 3.5. But 4.7% have ten or more, and the curve reaches out to an agent
 with 10,735. That agent is the centre of a star, a world held together by a
@@ -697,7 +697,7 @@ thirty worlds in brackets:
 - **Box dimension**, from how many boxes it takes to cover the world
   ([Covering a world with boxes](#covering-a-world-with-boxes)). It is 1.88
   (1.66 to 2.58; 1.85 at 10,000 tokens), from 2.48 in the ring. A straight
-  line fits the counts well, with [R²](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.") = 0.96.
+  line fits the counts well, with R² = 0.96.
 - **Spectral gap**, which says how hard the world is to cut in two
   ([How easily a world could be cut](#how-easily-a-world-could-be-cut)). It is
   0.0012 (0.0010 to 0.0019), half that of the worlds of 10,000 tokens

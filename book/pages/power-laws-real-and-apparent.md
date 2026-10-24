@@ -92,11 +92,11 @@ as *k*^−γ. It has **no typical scale**: doubling *k* always divides the share
 by the same factor, 2^γ, whether *k* is 2 or 2,000. The share of values **at
 least** *k* — the complementary cumulative distribution — then falls as
 *k*^−(γ−1), a straight line of slope 1 − γ on log–log axes
-([Logarithmic axes](logarithmic-axes.md)).
+([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)).
 
 The viewer offers two ways of finding γ ([Fitting a power law](power-law-fit.md)):
 
-- **[Least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.")** through the whole cumulative distribution on log–log
+- **Least squares** through the whole cumulative distribution on log–log
   axes (`degreeExponent`, `tokenExponent`): the obvious method, and a biased
   one.
 - **Maximum likelihood** on the tail, from the *k*_min whose fitted law sits

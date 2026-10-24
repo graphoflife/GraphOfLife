@@ -268,7 +268,7 @@ Lim, Yao and Ye (2011) use it to rank from pairwise comparisons. Candogan,
 Menache, Ozdaglar and Parrilo (2011) use it to split games into their
 potential and cyclic parts.
 
-The gradient part is found by [least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains."): the pressure that explains as
+The gradient part is found by [least squares](correlation.md#fitting-a-straight-line "The straight line that fits a cloud of points best, and how much of their spread it explains."): the pressure that explains as
 much of the flow as possible. That means solving one linear system with the
 network's Laplacian. That matrix holds each agent's number of connections on
 its diagonal, and −1 wherever two agents are joined. The circulation is what

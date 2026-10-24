@@ -61,12 +61,12 @@ The same means over iterations 400 to 499 say whether a world had settled.
 agents = *a* × tokens^*b*, some number *a* times the tokens to the power *b*.
 On logarithmic axes, on both sides, such a law is a straight line. Its slope
 is the exponent *b*
-([Logarithmic axes and power laws](logarithmic-axes.md)). An exponent of 1
+([Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws)). An exponent of 1
 means in proportion: twice the tokens, twice the agents. Below 1, bigger
 worlds hold fewer agents per token; above 1, more.
 
 The line is fitted by least squares to the baseline worlds of 3,200 tokens
-and more, every run a point ([Fitting a straight line](least-squares.md)).
+and more, every run a point ([Fitting a straight line](correlation.md#fitting-a-straight-line)).
 Its interval comes from resampling the runs within each size 10,000 times
 ([The bootstrap](bootstrap.md)). A second fit, with a squared term, says
 whether the points bend away from a straight line.
@@ -114,7 +114,7 @@ as many agents and connections per token as at 10,000 tokens.
 <!-- figure size/agents -->
 ![Agents against the tokens of the world](../figures/size/agents.svg)
 
-**Agents against the tokens of the world.** Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which a power law, agents = a · tokens^b, is a straight line of slope b ([Logarithmic axes](logarithmic-axes.md)). Blue: the baseline, three seeds per size (at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the orange one of the same world; at 800 none did). Orange: the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the baseline worlds of [A world's life](a-worlds-life.md), a check from another experiment. Red: the straight line fitted to the blue dots from 3,200 tokens on, exponent 1.00 (95% interval 0.95 to 1.06). Dashed: exponent exactly 1.
+**Agents against the tokens of the world.** Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which a power law, agents = a · tokens^b, is a straight line of slope b ([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)). Blue: the baseline, three seeds per size (at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the orange one of the same world; at 800 none did). Orange: the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the baseline worlds of [A world's life](a-worlds-life.md), a check from another experiment. Red: the straight line fitted to the blue dots from 3,200 tokens on, exponent 1.00 (95% interval 0.95 to 1.06). Dashed: exponent exactly 1.
 
 > [!example]- How to make this figure
 > **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
@@ -543,7 +543,7 @@ agents.
 - **Space**, in the frames of iterations 500, 1,000 and 1,499. That means
   the two rulers of
   [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") functions of [Like next to like](like-next-to-like.md).
+  and the correlation functions of [Like next to like](like-next-to-like.md).
   It also means the domains of lines, and the widths of the worlds. The
   domain of a line is how far apart two agents can be that share an ancestor
   of 25, 50 and 100 iterations back.
@@ -808,7 +808,7 @@ The four smallest sizes run once more with the stopping rule switched off.
   and 28 GB on disk. The largest run, at 409,600 tokens, needed at most
   11.0 GB of memory.
 - **Fits:** least squares on logarithmic axes
-  ([Fitting a straight line](least-squares.md)). Intervals come from
+  ([Fitting a straight line](correlation.md#fitting-a-straight-line)). Intervals come from
   resampling the runs within each size, 10,000 times
   ([The bootstrap](bootstrap.md)). Bends come from a fit with a squared term.
 - **Results:** `book/results/E08.json`, made with
@@ -980,5 +980,5 @@ iterations each.
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (29)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
 <!-- /turns -->

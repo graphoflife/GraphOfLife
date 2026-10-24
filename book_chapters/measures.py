@@ -460,7 +460,7 @@ def flow(ch: F.Chapter) -> None:
                 "half. The dashed line is y = x. Over all "
                 f"{len(predicted):,} agents (the games of every 250th iteration from 500 on, {len(alive)} worlds), "
                 f"the straight line fitted to the points has slope {slope:.2f}, and the even split accounts "
-                f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](least-squares.md))"
+                f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](correlation.md#fitting-a-straight-line))"
                 + (f"; over the {without['worlds']} worlds that are not held together by a single hub "
                    f"([The largest and the smallest](the-largest-and-the-smallest.md)), slope {without['slope']:.2f} and {100 * without['r2']:.0f}%."
                    if without["worlds"] < len(alive) else "."),

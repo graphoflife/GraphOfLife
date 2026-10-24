@@ -145,7 +145,7 @@ $$
 
 If the hazard is the same at every age, an agent's past says nothing about its
 future: lives are **memoryless**. Then *S*(*L*) falls along a straight line
-when *S* is drawn on a [logarithmic axis](logarithmic-axes.md "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") against a plain axis of *L*.
+when *S* is drawn on a [logarithmic axis](correlation.md#logarithmic-axes-and-power-laws "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") against a plain axis of *L*.
 
 A hazard that falls with age means that those who survive are safer than the
 young. The young die most, as in a population with high infant mortality.

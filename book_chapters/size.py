@@ -92,7 +92,7 @@ def size(ch: F.Chapter) -> None:
         caption="Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents "
                 "alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which "
                 "a power law, agents = a · tokens^b, is a straight line of slope b "
-                "([Logarithmic axes](logarithmic-axes.md)). Blue: the baseline, three seeds per size "
+                "([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)). Blue: the baseline, three seeds per size "
                 "(at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the "
                 "orange one of the same world; at 800 none did). Orange: "
                 "the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the "

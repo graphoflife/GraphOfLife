@@ -61,11 +61,11 @@ there.
 - **[iteration](one-iteration.md)** — One step of a world's time: a phase of reproduction, then a phase of the game.
 - **[lab](the-lab.md)** (also engine) — The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.
 - **[largest remainder](largest-remainder.md)** — How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions.
-- **[least squares](least-squares.md)** (also R²) — The straight line that fits a cloud of points best, and how much of their spread it explains.
+- **[least squares](correlation.md#fitting-a-straight-line)** (also R²) — The straight line that fits a cloud of points best, and how much of their spread it explains.
 - **[lifetime](age-and-lifetime.md)** — How many iterations an agent lives, from its birth to its death.
 - **[lightning](token-flow.md#lightning-tokens-that-go-round)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
 - **[lineage](genotype.md#families)** — A line of descent: the agents whose genotypes go back to one ancestor.
-- **[logarithmic axis](logarithmic-axes.md)** — An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.
+- **[logarithmic axis](correlation.md#logarithmic-axes-and-power-laws)** — An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.
 - **[loop](bridges.md#loops)** — A path through the network that comes back to where it started without using a connection twice.
 - **[median](median-and-quantiles.md)** (also quantile) — The middle value: half of the numbers lie below it and half above.
 - **[message](messages.md)** — Numbers an agent writes to itself and to each neighbour every phase, which their brains read.

@@ -23,7 +23,7 @@ What is measured, and how each figure is estimated:
   decisions kept;
 - **memory** — the most a run holds: a base, plus a multiple of every byte of
   every brain, since the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") copies them and a checkpoint stacks them. The
-  multiple is fitted by [least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.") over runs of every size, and the base
+  multiple is fitted by [least squares](correlation.md#fitting-a-straight-line "The straight line that fits a cloud of points best, and how much of their spread it explains.") over runs of every size, and the base
   is then raised until no recorded run lies above the line, so that the
   estimate bounds a run's peak rather than averaging it. (Read off small runs
   alone, whose memory is nearly all fixed overhead, the multiple came out

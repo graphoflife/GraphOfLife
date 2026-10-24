@@ -198,7 +198,7 @@ with.
 <!-- figure flow/random-walk -->
 ![The game as a random walk of tokens](../figures/flow/random-walk.svg)
 
-**The game as a random walk of tokens.** For every agent at the start of a game: x is the balance it would end the stakes with — the tokens staked on its node minus the tokens it held — if every agent split its tokens evenly over itself and its neighbours; y is the balance it really ended them with. Agents are binned by x in steps of 2; the line is the mean of y in each bin and the band its middle half. The dashed line is y = x. Over all 1,798,806 agents (the games of every 250th iteration from 500 on, 30 worlds), the straight line fitted to the points has slope 0.65, and the even split accounts for 34% of the variance (R², [Fitting a straight line](least-squares.md)); over the 23 worlds that are not held together by a single hub ([The largest and the smallest](the-largest-and-the-smallest.md)), slope 0.94 and 45%.
+**The game as a random walk of tokens.** For every agent at the start of a game: x is the balance it would end the stakes with — the tokens staked on its node minus the tokens it held — if every agent split its tokens evenly over itself and its neighbours; y is the balance it really ended them with. Agents are binned by x in steps of 2; the line is the mean of y in each bin and the band its middle half. The dashed line is y = x. Over all 1,798,806 agents (the games of every 250th iteration from 500 on, 30 worlds), the straight line fitted to the points has slope 0.65, and the even split accounts for 34% of the variance (R², [Fitting a straight line](correlation.md#fitting-a-straight-line)); over the 23 worlds that are not held together by a single hub ([The largest and the smallest](the-largest-and-the-smallest.md)), slope 0.94 and 45%.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -734,7 +734,7 @@ decomposition (the note [Flows that go round](token-flow.md#flows-that-go-round)
 <!-- /figure -->
 
 Across the twenty worlds, the two counts agree on which worlds circulate more.
-Their [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") is r = 0.88, carried by the difference between the rule
+Their correlation is r = 0.88, carried by the difference between the rule
 sets. Within a rule set they agree loosely in B1 (r = 0.46 over ten worlds),
 and not at all in B2 (0.01).
 
@@ -836,7 +836,7 @@ figure says, folded beneath it, which runs it reads and how.
 The measures are explained in the notes
 [Lightning: tokens that go round](token-flow.md#lightning-tokens-that-go-round),
 [Token flow](token-flow.md), [Flows that go round](token-flow.md#flows-that-go-round) and
-[Logarithmic axes and power laws](logarithmic-axes.md).
+[Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws).
 
 ### The runs of Experiment 10
 

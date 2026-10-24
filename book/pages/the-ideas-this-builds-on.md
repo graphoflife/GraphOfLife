@@ -163,12 +163,12 @@ several agents acting together.
   1958): [Survival curves](kaplan-meier.md).
 - **Intervals by resampling**: the bootstrap (Efron 1979). **Intervals for
   proportions**: Wilson (1927).
-- **[Correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of a series with itself**, and the bias of measuring them
+- **Correlations of a series with itself**, and the bias of measuring them
   against the series' own mean: Bartlett (1946), Marriott and Pope (1954),
   Kendall (1954). See [Autocorrelation](autocorrelation.md).
 - **[Power laws](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**, and why a straight stretch on log–log axes is weak evidence
   of one: Clauset, Shalizi and Newman (2009). See
-  [Logarithmic axes](logarithmic-axes.md).
+  [Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws).
 - **Testing by shuffling**: the permutation test goes back to Fisher (1935).
   See [Permutation tests](bootstrap.md#permutation-tests).
 - **Pictures of networks**: the ForceAtlas2 layout (Jacomy, Venturini, Heymann

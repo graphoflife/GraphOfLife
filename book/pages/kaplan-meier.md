@@ -48,7 +48,7 @@ would understate the long lives too.
 ## Drawing it
 
 The curve *S*(*L*) starts at 1 and falls in steps. The notebook draws it on
-[logarithmic axes](logarithmic-axes.md), so that both the many short lives
+[logarithmic axes](correlation.md#logarithmic-axes-and-power-laws), so that both the many short lives
 and the few long ones are visible ([Births, deaths and ages](births-deaths-and-ages.md),
 [Genotypes and lineages](genotypes-and-lineages.md)).
 
@@ -70,5 +70,5 @@ iteration, last iteration, still going).
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
 > [!info]- Pages that link here (8)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age and lifetime](age-and-lifetime.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How worlds are measured](how-worlds-are-measured.md) · [Logarithmic axes and power laws](logarithmic-axes.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age and lifetime](age-and-lifetime.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How worlds are measured](how-worlds-are-measured.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
 <!-- /turns -->

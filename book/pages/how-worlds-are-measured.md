@@ -163,7 +163,7 @@ For [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from it
 lasted **at least** *L* iterations, for every *L*, as a
 [Kaplan–Meier survival curve](kaplan-meier.md), which counts lives
 still going at the end of a run correctly. Such curves, and many
-distributions, are drawn on [logarithmic axes](logarithmic-axes.md).
+distributions, are drawn on [logarithmic axes](correlation.md#logarithmic-axes-and-power-laws).
 
 ## Every figure can be made again
 

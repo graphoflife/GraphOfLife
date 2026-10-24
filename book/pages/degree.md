@@ -93,7 +93,7 @@ In the small example, the shares with at least 1, 2 and 3 connections are 1,
 
 The CCDF is the better picture for wide distributions. It needs no choice of
 bins, it is smooth where the histogram is noisy, and on
-[logarithmic axes](logarithmic-axes.md) it shows the shape of the tail.
+[logarithmic axes](correlation.md#logarithmic-axes-and-power-laws) it shows the shape of the tail.
 Suppose the share of agents with degree *d* falls like *d*^−γ, a
 [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones."). Then the CCDF falls like *d*^−(γ−1). On log–log axes it is
 a straight line, with slope −(γ − 1).
@@ -393,7 +393,7 @@ $$
 
 It fits them by least squares on the logarithms of all agents of the frame.
 That is, it fits the straight line ln *y* = ln *a* + *b* ln *x*
-([Fitting a straight line](least-squares.md)). In words: drawn on
+([Fitting a straight line](correlation.md#fitting-a-straight-line)). In words: drawn on
 logarithmic axes, the agents form a cloud, and the fit is the straight line
 through it. Its slope, the **exponent** *b*, says how *y* grows with *x*. R²
 says how tightly the agents follow the line. Agents with *x* = 0 or *y* = 0

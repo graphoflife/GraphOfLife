@@ -65,7 +65,7 @@ each, it counts the shells out to *r* = 5, and it averages the shell sizes
 *S*(*r*) over the agents. It drops every radius at which the ball already
 holds half the world. Beyond that, the growth measures the edge of the network,
 not its shape. Then it fits a straight line to ln *S*(*r*) against
-ln *r* by [least squares](least-squares.md). A shell that grows like
+ln *r* by [least squares](correlation.md#fitting-a-straight-line). A shell that grows like
 *r*^(*d*−1) gives a line of slope *d* − 1, so
 
 $$

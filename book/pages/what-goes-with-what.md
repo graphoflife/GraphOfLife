@@ -118,7 +118,7 @@ shows as plainly as a rule can: in B2 the old are the ones about to die.
 
 **In B2, nothing here says who will lose its node.** In B1 an agent's node is
 kept by agents that stake at home (+0.47) and lost by the well-connected
-(−0.43 on a [logarithmic axis](logarithmic-axes.md "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") for connections). In B2 the strongest of all 21
+(−0.43 on a [logarithmic axis](correlation.md#logarithmic-axes-and-power-laws "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.") for connections). In B2 the strongest of all 21
 quantities known before the game predicts keeping one's node at 0.16. As far
 as anything measured here can tell, losing one's node in B2 is a lottery.
 Having a child next is hardly predictable in either world (at most 0.18).

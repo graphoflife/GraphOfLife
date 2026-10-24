@@ -1604,7 +1604,7 @@
     },
     {
       "id": "correlation",
-      "title": "Correlation",
+      "title": "Two numbers together: correlation, a fitted line and logarithmic axes",
       "file": "pages/correlation.md",
       "topics": [
         "methods"
@@ -1612,7 +1612,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Do two quantities go up and down together?"
+      "summary": "Much of the notebook asks how one number goes with another. The correlation r says, from −1 to 1, how closely two quantities rise and fall together along a straight line. The least-squares line is the straight line that misses a cloud of points least."
     },
     {
       "id": "autocorrelation",
@@ -1689,18 +1689,6 @@
       "summary": "Every number the notebook reports comes from a few dozen worlds, and another few dozen would give a somewhat different number. Four tools say how much that matters. The bootstrap redraws the worlds we have, many times, to show how much a mean could vary."
     },
     {
-      "id": "logarithmic-axes",
-      "title": "Logarithmic axes and power laws",
-      "file": "pages/logarithmic-axes.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Many quantities in Graph of Life range over several orders of magnitude: an agent may hold 1 token or 3,000; a life may last 1 iteration or 1,500."
-    },
-    {
       "id": "muller-plot",
       "title": "Muller plots",
       "file": "pages/muller-plot.md",
@@ -1712,18 +1700,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "How do lines of descent grow, shrink and replace each other over time?"
-    },
-    {
-      "id": "least-squares",
-      "title": "Fitting a straight line, and R²",
-      "file": "pages/least-squares.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Many figures in this notebook draw a straight line through a cloud of points, and many statistics of the viewer are the slope of such a line."
     },
     {
       "id": "power-law-fit",

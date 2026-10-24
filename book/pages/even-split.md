@@ -69,7 +69,7 @@ compares, agent by agent, the balance an exact even split would give with the
 real one. In the 23 worlds without a
 [star](stars-and-hubs.md), the real balances follow the even split's with a
 slope of 0.94, and it accounts for 45% of their variance
-([Fitting a straight line, and R²](least-squares.md)); at 10,000 tokens, 0.94
+([Fitting a straight line, and R²](correlation.md#fitting-a-straight-line)); at 10,000 tokens, 0.94
 and 46%. With the seven stars, 0.65 and 34%: the rounding of whole tokens,
 small at one leaf, piles up at a star's centre.
 

@@ -519,8 +519,9 @@
     },
     {
       "name": "logarithmic axis",
-      "page": "logarithmic-axes",
-      "says": "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart."
+      "page": "correlation",
+      "says": "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.",
+      "anchor": "logarithmic-axes-and-power-laws"
     },
     {
       "name": "Muller plot",
@@ -532,8 +533,9 @@
       "also": [
         "R²"
       ],
-      "page": "least-squares",
-      "says": "The straight line that fits a cloud of points best, and how much of their spread it explains."
+      "page": "correlation",
+      "says": "The straight line that fits a cloud of points best, and how much of their spread it explains.",
+      "anchor": "fitting-a-straight-line"
     },
     {
       "name": "power law",

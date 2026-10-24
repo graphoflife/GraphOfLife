@@ -156,7 +156,7 @@ least *L* iterations:
 <!-- /figure -->
 
 Both axes are logarithmic: each step along them multiplies by the same factor
-([Logarithmic axes and power laws](logarithmic-axes.md)). On them, the curve
+([Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws)). On them, the curve
 shows several things at once:
 
 - 79% of these agents live at least 2 iterations, 58% at least 5, and 48% at

@@ -10,9 +10,9 @@ how the viewer uses both.
 
 The complementary cumulative distribution — the share *P*(≥ *k*) of values at
 least *k* — falls as *k*^−(γ−1) for a power law, so a straight line through it
-on log–log axes has slope 1 − γ ([Logarithmic axes](logarithmic-axes.md)).
+on log–log axes has slope 1 − γ ([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)).
 The viewer's `degreeExponent` and `tokenExponent` are exactly that:
-[least squares](least-squares.md) of ln *P*(≥ *k*) on ln *k* over the distinct
+[least squares](correlation.md#fitting-a-straight-line) of ln *P*(≥ *k*) on ln *k* over the distinct
 values, exponent = 1 − slope.
 
 The trouble: neighbouring points of a cumulative distribution are not
@@ -75,8 +75,8 @@ fits both methods to the [baseline](b1-and-b2.md "The stated rules an experiment
 <!-- turns -->
 ---
 
-← [Fitting a straight line, and R²](least-squares.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The power spectrum of a time series](power-spectrum.md) →
+← [Muller plots](muller-plot.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The power spectrum of a time series](power-spectrum.md) →
 
 > [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [What a run records](frames-and-stats.md) · [Fitting a straight line, and R²](least-squares.md)
+> [Glossary](glossary.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [What a run records](frames-and-stats.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
 <!-- /turns -->

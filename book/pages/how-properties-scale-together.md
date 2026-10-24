@@ -11,7 +11,7 @@
 ## In short
 
 On average, agents hold tokens in proportion to their connections plus one:
-the resting state of the even split. The exponent that [least squares](least-squares.md "The straight line that fits a cloud of points best, and how much of their spread it explains.") fits to
+the resting state of the even split. The exponent that least squares fits to
 this, 0.58, is no law; it says only that most agents have one or two
 connections. Triangles grow in proportion to connections, and leaves hang on
 [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."): the network is a hierarchy of stars, built by children joining their
@@ -24,7 +24,7 @@ they belong to the rules, not to what the [brains](the-brain.md "The neural netw
 Does an agent with ten times the connections hold ten times the tokens? Plot
 every agent as a dot, its connections across and its tokens up. Use
 logarithmic axes, on which each step multiplies by the same factor
-([Logarithmic axes and power laws](logarithmic-axes.md)). If tokens grew as a
+([Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws)). If tokens grew as a
 power of connections, *y* ≈ *a xᵇ*, the dots would gather around a straight
 line of slope *b*. That slope is the **exponent**. An exponent of 1 means in
 proportion; one of 0.5 means that ten times the connections bring about three
@@ -206,7 +206,7 @@ leaves each ([Stars](the-largest-and-the-smallest.md#stars)). At 10,000 tokens
 a leaf's neighbour had 163 connections on average. **Leaves hang on hubs, and
 hubs are surrounded by leaves**: the world is built of stars.
 
-There is a single number for this, the **assortativity** *r*: the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.")
+There is a single number for this, the **assortativity** *r*: the correlation
 of the connections at the two ends of a connection
 ([Assortativity](degree.md#assortativity)). It is −0.07 in the median world, and from
 −0.47 to +0.02 across the thirty (−0.11 at 10,000 tokens). That is mildly
@@ -375,6 +375,6 @@ folded beneath it, which runs it reads and how.
 
 ← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
 
-> [!info]- Pages that link here (9)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md)
+> [!info]- Pages that link here (10)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
 <!-- /turns -->

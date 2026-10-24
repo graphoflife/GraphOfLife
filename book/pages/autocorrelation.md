@@ -61,8 +61,8 @@ worlds over their settled life ([The settled life of a world](median-and-quantil
 <!-- turns -->
 ---
 
-← [Correlation](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Mobility](mobility.md) →
+← [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Mobility](mobility.md) →
 
-> [!info]- Pages that link here (7)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How worlds are measured](how-worlds-are-measured.md) · [Between worlds and within them](between-and-within.md) · [The power spectrum of a time series](power-spectrum.md)
+> [!info]- Pages that link here (8)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How worlds are measured](how-worlds-are-measured.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Between worlds and within them](between-and-within.md) · [The power spectrum of a time series](power-spectrum.md)
 <!-- /turns -->

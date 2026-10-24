@@ -46,7 +46,7 @@ at home.
 
 Playing every pair of a set of eras is a **cross-time tournament**. A score
 *p* can be read as odds. One **rating** *r* per era is fitted to every
-contest at once by [least squares](least-squares.md), with one era, usually
+contest at once by [least squares](correlation.md#fitting-a-straight-line), with one era, usually
 the founders, at 0:
 
 $$

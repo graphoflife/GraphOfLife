@@ -42,7 +42,7 @@ does not tell them apart.
 <!-- turns -->
 ---
 
-← [Logarithmic axes and power laws](logarithmic-axes.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Fitting a straight line, and R²](least-squares.md) →
+← [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Fitting a power law properly](power-law-fit.md) →
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
