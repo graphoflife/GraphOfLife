@@ -47,6 +47,7 @@ sys.path.insert(0, ROOT)
 import book_fill  # noqa: E402
 
 LINK = re.compile(r"\]\(([^)\s]+)((?: \"[^\"]*\")?)\)")
+BARE = re.compile(r"\(([\w-]+\.md(?:#[\w-]*)?)\)")
 
 
 def load(path: str) -> Any:
@@ -108,6 +109,9 @@ def relink_files(moved: Dict[str, str], new: str, ids: set, apply: bool) -> List
         with open(path, encoding="utf-8") as f:
             text = f.read()
         out = rewrite_links(text, "pages/_.md", moved, new, ids)
+        # A link split over two string literals ("[words]" "(page.md)") has no
+        # `](` for LINK to find; in the code, a page in parentheses is a link.
+        out = BARE.sub(lambda m: f"({retarget(m.group(1), 'pages/_.md', moved, new, ids)})", out)
         for old in olds:
             out = out.replace(f'"{old}"', f'"{new}"')
         if out != text:

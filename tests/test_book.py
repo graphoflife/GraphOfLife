@@ -242,6 +242,31 @@ def test_every_link_between_the_books_pages_arrives():
     assert not broken, "links to pages that are not there:\n  " + "\n  ".join(broken)
 
 
+def test_every_page_the_figures_code_links_to_is_there():
+    # Captions and recipes are written by code and kept in book/results/; a
+    # figure drawn again writes them anew. So a link in the code to a page that
+    # was merged away would come back with the next drawing, even after the
+    # results were relinked. A link may be split over two string literals
+    # ("[words]" "(page.md)"), so every page name in parentheses counts.
+    import glob
+    import io
+    import re
+    import tokenize
+    pages = os.path.join(runner.ROOT, "book", "pages")
+    kinds = {tokenize.STRING, getattr(tokenize, "FSTRING_MIDDLE", tokenize.STRING)}
+    broken = []
+    for path in glob.glob(os.path.join(runner.ROOT, "book_chapters", "*.py")) + [
+            os.path.join(runner.ROOT, "book_figures.py")]:
+        with open(path, encoding="utf-8") as f:
+            source = f.read()
+        for token in tokenize.generate_tokens(io.StringIO(source).readline):
+            if token.type in kinds:
+                broken += [f"{os.path.relpath(path, runner.ROOT)}:{token.start[0]} -> {name}"
+                           for name in re.findall(r"\(([\w-]+\.md)(?:#[\w-]*)?\)", token.string)
+                           if not os.path.exists(os.path.join(pages, name))]
+    assert not broken, "the figures' code links to pages that are not there:\n  " + "\n  ".join(broken)
+
+
 def test_no_page_is_named_by_a_number():
     # The notebook is read by topic and by link, from any page, so a page is
     # named by what it is about: "Chapter 13", "Meta X", "Part V" or a link
