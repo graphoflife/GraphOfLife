@@ -1554,7 +1554,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "Every lab experiment and pilot batch with its settings, how far it ran, the page that reports it, and which measures have been taken on it — made from the records."
+      "summary": "This page lists every world the notebook has made. The lab's experiments were planned before they ran, and are judged against a thesis. The pilot batches are smaller sets of worlds that try an idea quickly."
     },
     {
       "id": "frames-and-stats",
