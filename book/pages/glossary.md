@@ -92,7 +92,7 @@ there.
 - **[share-out](gains-and-losses.md#gains-losses-and-the-share-out)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
 - **[spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.
 - **[spectral gap](path-length.md#the-spectral-gap)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
-- **[survival curve](kaplan-meier.md)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.
+- **[survival curve](age-and-lifetime.md#survival-curves-kaplanmeier)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.
 - **[token](the-world.md#agents-and-tokens)** — The one thing of value in a world: every agent holds a whole number of them, and their total never changes.
 - **[token curvature](gains-and-losses.md#token-curvature)** — How much richer an agent's neighbourhood is than the agent itself.
 - **[token flow](token-flow.md)** (also net flow) — The tokens a game moves along each connection, from the agent who stakes to the node staked on.

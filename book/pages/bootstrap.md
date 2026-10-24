@@ -252,7 +252,7 @@ against Δ.
 <!-- turns -->
 ---
 
-← [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Muller plots](muller-plot.md) →
+← [How long a world remembers: autocorrelation and the power spectrum](autocorrelation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Muller plots](muller-plot.md) →
 
 > [!info]- Pages that link here (14)
 > [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [What would count as open-ended evolution](open-ended-test.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [How worlds are measured](how-worlds-are-measured.md) · [Pilot worlds](pilot-worlds.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)

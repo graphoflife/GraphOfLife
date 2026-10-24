@@ -499,8 +499,9 @@
       "also": [
         "Kaplan–Meier"
       ],
-      "page": "kaplan-meier",
-      "says": "The share of lives that last at least so long, counted fairly when some are cut short by the end of a run."
+      "page": "age-and-lifetime",
+      "says": "The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.",
+      "anchor": "survival-curves-kaplanmeier"
     },
     {
       "name": "bootstrap",

@@ -489,10 +489,11 @@
     },
     {
       "id": "age-and-lifetime",
-      "title": "Age and lifetime",
+      "title": "Age, lifetime and survival curves",
       "file": "pages/age-and-lifetime.md",
       "topics": [
-        "lives"
+        "lives",
+        "methods"
       ],
       "kind": "term",
       "status": "written",
@@ -1626,19 +1627,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "A world wanders: its size, its inequality and its births go up and down over hundreds of iterations. The autocorrelation says how long it remembers where it was: the correlation of a world with itself, some time later."
-    },
-    {
-      "id": "kaplan-meier",
-      "title": "Survival curves (Kaplan–Meier)",
-      "file": "pages/kaplan-meier.md",
-      "topics": [
-        "methods",
-        "lives"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "To live at least *L* + 1 iterations, a life must first live at least *L*, and then not end at *L*."
     },
     {
       "id": "bootstrap",

@@ -156,7 +156,7 @@ one of them.
 - **Methods and statistics.** Short pages, one per idea. They define every
   measurement and statistical method the notebook uses, with worked examples:
   [The Gini coefficient and the Lorenz curve](gini-coefficient.md),
-  [Survival curves (Kaplan–Meier)](kaplan-meier.md) and many more. And what a
+  [Survival curves (Kaplan–Meier)](age-and-lifetime.md#survival-curves-kaplanmeier) and many more. And what a
   simulation costs ([What a simulation costs](what-a-simulation-costs.md)).
 
 Many pages only **ask**: what does a world do, how often, how fast? A page that

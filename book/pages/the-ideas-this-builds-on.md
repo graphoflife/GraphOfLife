@@ -159,8 +159,8 @@ several agents acting together.
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
   coefficient** (Gini 1912): [Where do the tokens go?](where-do-the-tokens-go.md)
   and [The Gini coefficient and the Lorenz curve](gini-coefficient.md).
-- **[Lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
-  1958): [Survival curves](kaplan-meier.md).
+- **Lifetimes with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
+  1958): [Survival curves](age-and-lifetime.md#survival-curves-kaplanmeier).
 - **Intervals by resampling**: the bootstrap (Efron 1979). **Intervals for
   proportions**: Wilson (1927).
 - **Correlations of a series with itself**, and the bias of measuring them

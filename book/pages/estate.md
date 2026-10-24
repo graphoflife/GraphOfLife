@@ -104,7 +104,7 @@ them had 12 to 23.
 <!-- turns -->
 ---
 
-← [Births and the four ways to die](births-and-deaths.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Age and lifetime](age-and-lifetime.md) →
+← [Births and the four ways to die](births-and-deaths.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Age, lifetime and survival curves](age-and-lifetime.md) →
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 

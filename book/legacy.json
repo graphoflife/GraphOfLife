@@ -172,7 +172,7 @@
   "n-mobility": "gini-coefficient#mobility",
   "n-between-and-within": "variance-split#between-worlds-and-within-them",
   "n-participation-ratio": "effective-number#how-many-directions-a-cloud-of-points-uses",
-  "n-kaplan-meier": "kaplan-meier",
+  "n-kaplan-meier": "age-and-lifetime#survival-curves-kaplanmeier",
   "n-bootstrap": "bootstrap",
   "n-permutation-test": "bootstrap#permutation-tests",
   "n-seeds-needed": "bootstrap#how-many-seeds-an-experiment-needs",
@@ -348,6 +348,7 @@
   "power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series",
   "mobility": "gini-coefficient#mobility",
   "between-and-within": "variance-split#between-worlds-and-within-them",
-  "participation-ratio": "effective-number#how-many-directions-a-cloud-of-points-uses"
+  "participation-ratio": "effective-number#how-many-directions-a-cloud-of-points-uses",
+  "kaplan-meier": "age-and-lifetime#survival-curves-kaplanmeier"
  }
 }

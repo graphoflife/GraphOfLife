@@ -135,7 +135,7 @@ are all the agents born at iteration 500 or later that were still alive after
 the game of their birth iteration. Some were still alive when their run ended.
 Their lives are counted as having lasted *at least* that long. The Kaplan–Meier
 estimate does this: it uses what is known of an unfinished life, and no more
-([Survival curves (Kaplan–Meier)](kaplan-meier.md)). The share that lived at
+([Survival curves (Kaplan–Meier)](age-and-lifetime.md#survival-curves-kaplanmeier)). The share that lived at
 least *L* iterations:
 
 <!-- figure births/lifetimes -->
@@ -764,6 +764,6 @@ it, which runs it reads and how.
 
 [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [How births build the network](how-agents-have-children.md) →
 
-> [!info]- Pages that link here (13)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [Age and lifetime](age-and-lifetime.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md)
+> [!info]- Pages that link here (12)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md)
 <!-- /turns -->

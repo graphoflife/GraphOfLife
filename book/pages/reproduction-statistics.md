@@ -130,7 +130,7 @@ Experiment 24 and in half the worlds of
 <!-- turns -->
 ---
 
-← [Age and lifetime](age-and-lifetime.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages)
+← [Age, lifetime and survival curves](age-and-lifetime.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages)
 
 > [!info]- Pages that link here (3)
 > [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [What a run records](frames-and-stats.md)

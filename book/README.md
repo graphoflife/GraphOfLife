@@ -74,7 +74,7 @@ Who is born, who dies and when, how old agents get, and how a world's ages chang
 - [How births build the network](pages/how-agents-have-children.md)
 - [Births and the four ways to die](pages/births-and-deaths.md)
 - [The estate of the dead](pages/estate.md)
-- [Age and lifetime](pages/age-and-lifetime.md)
+- [Age, lifetime and survival curves](pages/age-and-lifetime.md)
 - [Reproduction statistics](pages/reproduction-statistics.md)
 
 ### Wealth: who holds the tokens
@@ -221,7 +221,6 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 - [Many worlds at once: the median, bands, the settled life and the spread](pages/median-and-quantiles.md)
 - [Two numbers together: correlation, a fitted line and logarithmic axes](pages/correlation.md)
 - [How long a world remembers: autocorrelation and the power spectrum](pages/autocorrelation.md)
-- [Survival curves (Kaplan–Meier)](pages/kaplan-meier.md)
 - [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](pages/bootstrap.md)
 - [Muller plots](pages/muller-plot.md)
 - [Fitting a power law properly](pages/power-law-fit.md)

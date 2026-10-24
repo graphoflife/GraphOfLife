@@ -100,7 +100,7 @@ from its birth to the last game it is alive after.
 > **To make it again:** `python3 book_figures.py lineage`.
 <!-- /figure -->
 
-The two curves are [survival curves](kaplan-meier.md) on logarithmic axes.
+The two curves are [survival curves](age-and-lifetime.md#survival-curves-kaplanmeier) on logarithmic axes.
 They follow every genotype and every agent that appeared from iteration 500
 on in the thirty worlds, if it was there after a game. Each curve gives the
 share that lasted at least *L* iterations.
@@ -579,5 +579,5 @@ iterations.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (19)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Muller plots](muller-plot.md)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Muller plots](muller-plot.md)
 <!-- /turns -->

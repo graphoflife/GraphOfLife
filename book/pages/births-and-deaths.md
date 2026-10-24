@@ -165,5 +165,5 @@ agent in a hundred has a child in each iteration. In the ten B2 worlds of
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
 > [!info]- Pages that link here (9)
-> [One iteration, step by step](one-iteration.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [The estate of the dead](estate.md) · [Age and lifetime](age-and-lifetime.md) · [Reproduction statistics](reproduction-statistics.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [What a run records](frames-and-stats.md)
+> [One iteration, step by step](one-iteration.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [The estate of the dead](estate.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [Reproduction statistics](reproduction-statistics.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->
