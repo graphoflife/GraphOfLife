@@ -246,7 +246,7 @@ forwards. Diffusion appears in physics only when many particles are averaged.
 So a question: **can rules make tokens move like waves** — slosh back and
 forth with a characteristic frequency — rather than spread like heat? A
 frequency would show as a peak in a power spectrum
-([The power spectrum](power-spectrum.md)); the spectrum of the number
+([The power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)); the spectrum of the number
 of agents shows none, only the smooth slope of a random walk
 ([Power laws, real and apparent](power-laws-real-and-apparent.md)). The two-game swing of
 [Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich) is no such wave: it is the

@@ -859,7 +859,7 @@ def powerlaws(ch: F.Chapter) -> None:
         series=[line(fx, fy, f"number of agents, {len(alive)} worlds", BLUE, width=2),
                 line(fx[fitm], np.exp(a1) * fx[fitm] ** b1, f"a power law, slope {b1:.2f}", RED, width=1.5,
                      dash=[5, 4])],
-        caption="The power spectrum of the number of agents ([The power spectrum](power-spectrum.md)): "
+        caption="The power spectrum of the number of agents ([The power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)): "
                 "for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow "
                 "wanders on the left, iteration-to-iteration jitter on the right. Each world's series from "
                 f"iteration {W.stretch}, with its straight-line trend removed and a Hann window applied, "

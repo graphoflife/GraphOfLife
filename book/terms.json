@@ -544,8 +544,9 @@
     },
     {
       "name": "power spectrum",
-      "page": "power-spectrum",
-      "says": "How much of a series' wandering comes at each speed, from slow to fast."
+      "page": "autocorrelation",
+      "says": "How much of a series' wandering comes at each speed, from slow to fast.",
+      "anchor": "the-power-spectrum-of-a-time-series"
     },
     {
       "name": "effective number",

@@ -292,12 +292,12 @@ whether they can be foreseen.
 
 How does a world's number of agents move over time? The **power spectrum**
 splits the movement into rhythms and says how much of it happens at each
-([The power spectrum](power-spectrum.md)).
+([The power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)).
 
 <!-- figure powerlaws/spectrum -->
 ![The rhythm of the wander](../figures/powerlaws/spectrum.svg)
 
-**The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](power-spectrum.md)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 1,499, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 30 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
+**The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 1,499, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 30 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -357,5 +357,5 @@ To make every figure of this page: `python3 book_figures.py powerlaws`.
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (12)
-> [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Fitting a power law properly](power-law-fit.md) · [The power spectrum of a time series](power-spectrum.md)
+> [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [How long a world remembers: autocorrelation and the power spectrum](autocorrelation.md) · [Fitting a power law properly](power-law-fit.md)
 <!-- /turns -->

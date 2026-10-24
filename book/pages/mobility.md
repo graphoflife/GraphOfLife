@@ -65,7 +65,7 @@ the [baseline](b1-and-b2.md "The stated rules an experiment starts from and chan
 <!-- turns -->
 ---
 
-← [Autocorrelation: how long a world remembers](autocorrelation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Between worlds and within them](between-and-within.md) →
+← [How long a world remembers: autocorrelation and the power spectrum](autocorrelation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Between worlds and within them](between-and-within.md) →
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 

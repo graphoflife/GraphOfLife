@@ -79,7 +79,7 @@ there.
 - **[permutation test](bootstrap.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](pilot-worlds.md)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
 - **[power law](power-law-fit.md)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
-- **[power spectrum](power-spectrum.md)** — How much of a series' wandering comes at each speed, from slow to fast.
+- **[power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)** — How much of a series' wandering comes at each speed, from slow to fast.
 - **[preferential attachment](degree.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](random-twin.md)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.
 - **[revolution](revolution.md)** (also coalition) — A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.

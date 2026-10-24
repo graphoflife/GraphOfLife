@@ -181,7 +181,7 @@
   "n-muller-plot": "muller-plot",
   "n-least-squares": "correlation#fitting-a-straight-line",
   "n-power-law-fit": "power-law-fit",
-  "n-power-spectrum": "power-spectrum",
+  "n-power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series",
   "n-variance-split": "variance-split",
   "n-effective-number": "effective-number",
   "n-fractional-factorial": "fractional-factorial",
@@ -344,6 +344,7 @@
   "invasion-test": "eras-and-contests#the-invasion-test",
   "vanishing-signal": "the-brain#how-a-signal-fades-through-layers",
   "least-squares": "correlation#fitting-a-straight-line",
-  "logarithmic-axes": "correlation#logarithmic-axes-and-power-laws"
+  "logarithmic-axes": "correlation#logarithmic-axes-and-power-laws",
+  "power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series"
  }
 }
