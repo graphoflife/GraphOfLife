@@ -1567,7 +1567,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Everything the notebook shows is computed from two kinds of record that every run writes into its folder, `GraphOfLifeRuns/<run>/`: **frames** and a **statistics file**."
+      "summary": "Everything the notebook shows is computed from two kinds of record that every run writes into its folder, GraphOfLifeRuns/<run>/. A frame is the whole world, written down after every phase."
     },
     {
       "id": "viewer-colours",

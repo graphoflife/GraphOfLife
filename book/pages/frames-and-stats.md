@@ -1,13 +1,25 @@
 # What a run records
 
+> [!question] Questions of this page
+> - What does a run keep of the worlds it plays?
+> - Which statistics are recorded after every phase, and which only every 25
+>   [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")?
+> - How can a figure be made again by hand?
+
+## In short
+
 Everything the notebook shows is computed from two kinds of record that every
-run writes into its folder, `GraphOfLifeRuns/<run>/`: **frames** and a
-**statistics file**. This note says what is in them and how to read them, so
-that every figure can be made again by hand.
+run writes into its folder, `GraphOfLifeRuns/<run>/`. A **frame** is the
+whole world, written down after every phase. It holds every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") with its
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), genotype, parent and age, every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and every decision of the
+phase. The **statistics file** holds a row of about ninety numbers computed
+from each frame. The costly ones, which walk the whole network, are computed
+only every 25 iterations. Every statistic can be computed again from the frames, so every
+figure can be made again by hand.
 
 ## Frames
 
-After every phase of every [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), the whole world is written down as a
+After every phase of every iteration, the whole world is written down as a
 **frame**. Iteration *t* has two:
 
 | frame | when | `phase` |
@@ -15,23 +27,26 @@ After every phase of every [iteration](one-iteration.md "One step of a world's t
 | 2*t* | after the reproduction phase of iteration *t* (and its [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.")) | 1 |
 | 2*t* + 1 | after the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") of iteration *t* (and its cleanup) | 2 |
 
-A run of 3,000 iterations has 6,000 frames. A frame holds, for every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
+A run of 3,000 iterations has 6,000 frames. A frame holds, for every agent
 alive, in increasing order of id:
 
 - `ids` — its id;
-- `tokens` — its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.");
+- `tokens` — its tokens;
 - `brain_ids` and `parent_brain_ids` — its genotype and that genotype's
   parent ([Genotypes](genotype.md));
 - `parent_ids` — the id of the agent it was born to (−1 for a [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."));
 - `ages` — iterations since it was born (0 in the iteration of its birth);
 - `delta` — how many tokens it gained (+) or lost (−) in this phase;
 
-and, for the world: `edges`, every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") as a pair of ids;
-`nodes_before`, how many agents there were when the phase began; `cleanup`,
-how many the cleanup removed and why; and `decisions`, every decision of the
-phase — every birth with the tokens given, the links and the handovers, and
-every stake in the game with its targets, amounts and revolutionary parts,
-and who won each node.
+For the world as a whole, a frame holds:
+
+- `edges`: every connection, as a pair of ids;
+- `nodes_before`: how many agents there were when the phase began;
+- `cleanup`: how many agents the cleanup removed, and why;
+- `decisions`: every decision of the phase. That is every birth, with the
+  tokens given, the links and the handovers. And it is every stake in the
+  game, with its targets, amounts and revolutionary parts, and who won each
+  node.
 
 Frames are read with `gol_store.read_frame(run, index)`.
 
@@ -68,13 +83,6 @@ the viewer charts, and every one has a note that says how it is computed.
 | `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup (in a game's row, after its unused connections are cut) | [Cut risk](bridges.md#cut-risk) |
 | `gifts`, `giftTokens`, `giftShare` | gifts of tokens (phase 1): 0 in a run without gifts, `null` in the game's rows ([`allow_gifting`](settings.md#allow_gifting)) | [Reproduction statistics](reproduction-statistics.md) |
 
-> [!note] Corrected on 23 October 2026
-> This table said the gift fields are `null` in every run of this notebook, which had no gifts. In a run
-> without gifts they are 0 in every reproduction row, and gifts have been switched on in [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") since
-> 15 October 2026, in Experiment 24 and in half the worlds of
-> [A screen of random worlds](a-screen-of-random-worlds.md). The table also did not say where deaths of
-> age are counted.
-
 **Graph statistics** cost far more to compute: they walk the whole network.
 They are filled in only on the rows of every 25th iteration (0, 25, 50, …);
 on other rows they are `null`:
@@ -99,16 +107,36 @@ on other rows they are `null`:
 Fields beginning with `_` (`_seconds`, `_cpu`, `_peakMB`, …) are the costs of
 the run, not of the world ([What a simulation costs](what-a-simulation-costs.md)).
 
-The file is read with `gol_record.read_stats(run)`, which returns the rows
-as a list of dictionaries, in frame order.
+The file is read with `gol_record.read_stats(run)`. It returns the rows as a
+list of dictionaries, in frame order.
 
 ## Recomputing a statistic
 
-Every statistic is a function of one frame (and, for a few, the frame
-before), computed by `gol_series.frame_stats(frame, previous, heavy)`. The
+Every statistic is a function of one frame, and for a few of the frame
+before. The function is `gol_series.frame_stats(frame, previous, heavy)`. The
 families need every iteration's frame in order. So a statistic can always be
-recomputed from the frames, and `python3 -c "import gol_record;
+recomputed from the frames. The command `python3 -c "import gol_record;
 gol_record.record_stored('<run>')"` rebuilds a run's whole statistics file.
+
+## Where to go next
+
+- [The lab, the engine and pilots](the-lab.md): how runs are made, and what
+  else they keep beside their frames.
+- [Many worlds at once](median-and-quantiles.md): how the rows of thirty runs
+  become one figure.
+- [What a simulation costs](what-a-simulation-costs.md): the costs the fields
+  beginning with `_` record.
+- [Every setting](settings.md): what a run was asked to play.
+
+## How our view changed
+
+- **23 October 2026.** This page said that the gift fields are `null` in
+  every run of the notebook, since no run had gifts. In a run without gifts
+  they are 0 in every reproduction row. Gifts have been switched on since
+  15 October 2026. They are on in [pilots](the-lab.md#pilot-worlds), in
+  Experiment 24, and in half the worlds of
+  [A screen of random worlds](a-screen-of-random-worlds.md). The table also
+  did not say where deaths of age are counted. It does now.
 
 <!-- turns -->
 ---
