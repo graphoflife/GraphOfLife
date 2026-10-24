@@ -120,7 +120,7 @@ several agents acting together.
   It is the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring of [The world: tokens, agents and a network](the-world.md).
 - **Measures of a network** — degree, clustering, distances, bridges, the
   2-core — are standard (Newman 2003). [Degree](degree.md),
-  [Clustering](clustering.md), [Path length](path-length.md),
+  [Clustering](degree.md#clustering), [Path length](path-length.md),
   [Bridges](bridges.md) and [Core, trees and leaves](core-trees-leaves.md)
   define each. The bridges are found by depth-first search (Tarjan 1974), the
   core by peeling (Seidman 1983).

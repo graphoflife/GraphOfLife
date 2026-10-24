@@ -34,7 +34,7 @@ line. It still plays one whole iteration before its agents are counted.
 ## Why 20 and not 0?
 
 A world of a handful of agents is not a population any more, and its
-statistics — inequality, [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), families — mean little. Stopping at 20
+statistics — inequality, [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours."), families — mean little. Stopping at 20
 also saves running a dying world to its end.
 
 But a world at 20 agents is not always dying.

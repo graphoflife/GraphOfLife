@@ -415,7 +415,7 @@ SEED_STATS = [("nodes", 2, "agents"), ("edges", 2, "connections"), (("births"), 
               ("cladesInWindow", 2, "genotype"), ("gini", 2, "Gini"), ("topDecileShare", 2, "richest tenth"),
               ("meanDegree", 2, "connections per agent"), ("leaves/nodes", 2, "leaf share"),
               ("bridges/edges", 2, "bridge share"), ("coreShare", 2, "core share"),
-              ("transitivity", 2, "clustering"), ("distinctBrains/nodes", 2, "genotypes per agent")]
+              ("transitivity", 2, "degree"), ("distinctBrains/nodes", 2, "genotypes per agent")]
 
 
 def stretches(run_id: str, stat: str, phase: int, start: int = 100, stop: int = None,

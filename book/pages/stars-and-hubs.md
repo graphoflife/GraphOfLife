@@ -103,10 +103,10 @@ at random, a brain may choose at most 8 links
 <!-- turns -->
 ---
 
-← [Degree](degree.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Preferential attachment and its kernel](preferential-attachment.md) →
+← [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) →
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
 <!-- /turns -->

@@ -123,6 +123,6 @@ Earlier experiments read the same lines from a run's recorded statistics, as
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (11)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [!info]- Pages that link here (12)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The estate of the dead](estate.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

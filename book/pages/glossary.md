@@ -14,7 +14,7 @@ there.
 <!-- glossary -->
 - **[2-core](core-trees-leaves.md)** (also hanging tree) — What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.
 - **[agent](the-world.md#agents-and-tokens)** (also node) — One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.
-- **[assortativity](assortativity.md)** — Whether agents tend to be joined to agents like them: the well connected to the well connected.
+- **[assortativity](degree.md#assortativity)** — Whether agents tend to be joined to agents like them: the well connected to the well connected.
 - **[autocorrelation](autocorrelation.md)** — How much a world's value now still says about its value some iterations later.
 - **[B1](b1-and-b2.md)** — The first baseline: the algorithm exactly as a new run is offered it.
 - **[B2](b1-and-b2.md)** — The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.
@@ -27,7 +27,7 @@ there.
 - **[candidate](one-iteration.md#phase-1-reproduction)** — An agent itself and each of its neighbours, the ones its brain looks at when it decides.
 - **[circulation](token-flow.md#flows-that-go-round)** — The part of a flow that goes round in loops, as against the part that runs from sources to sinks.
 - **[cleanup](one-iteration.md#cleanup)** — The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.
-- **[clustering](clustering.md)** — How often an agent's neighbours are also each other's neighbours.
+- **[clustering](degree.md#clustering)** — How often an agent's neighbours are also each other's neighbours.
 - **[common ancestor](genotype.md#the-common-ancestor-of-the-living)** — The genotype every living agent descends from, and how far back it lies.
 - **[connection](the-world.md#the-network)** — A link between two agents of the network: they are neighbours, and can stake on each other's nodes.
 - **[correlation](correlation.md)** — Whether two quantities go up and down together, from −1 to 1.
@@ -80,11 +80,11 @@ there.
 - **[pilot](pilot-worlds.md)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
 - **[power law](power-law-fit.md)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
 - **[power spectrum](power-spectrum.md)** — How much of a series' wandering comes at each speed, from slow to fast.
-- **[preferential attachment](preferential-attachment.md)** — The well connected gaining new connections faster than the poorly connected.
+- **[preferential attachment](degree.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](random-twin.md)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.
 - **[revolution](revolution.md)** (also coalition) — A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.
 - **[richest tenth](gini-coefficient.md#the-richest-tenths-share)** — The share of all tokens held by the richest tenth of the agents.
-- **[scaling relation](scaling-relations.md)** — How one property of an agent grows with another, as a power.
+- **[scaling relation](degree.md#scaling-relations-between-agents-properties)** — How one property of an agent grows with another, as a power.
 - **[seed](random-numbers.md)** — The number that fixes every random choice of a run: the same settings and the same seed make the same world.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
 - **[settled life](settled-life.md)** — A world from iteration 500 to its end, after its youth, where it is measured.

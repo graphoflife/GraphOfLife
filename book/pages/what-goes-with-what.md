@@ -227,7 +227,7 @@ and a larger core (+0.65).
 Thirty worlds of B1 at 100,000 tokens (Experiment 10), each described by the
 means of its statistics over iterations 500 to 1,500. Thirty pairs of numbers
 make a correlation above 0.36 unlikely by chance, and dozens of pairs reach
-0.95 and more: the largest hub, the richest agent, [assortativity](assortativity.md "Whether agents tend to be joined to agents like them: the well connected to the well connected."), the core,
+0.95 and more: the largest hub, the richest agent, [assortativity](degree.md#assortativity "Whether agents tend to be joined to agents like them: the well connected to the well connected."), the core,
 the flows and the [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") all move together from world to world. That many
 correlations that strong mean fewer things than there are statistics.
 
@@ -252,7 +252,7 @@ correlations that strong mean fewer things than there are statistics.
 variance of their 79 standardised statistics, the first principal component
 holds 47%, and ordering the worlds along it orders them by their
 best-connected agent's share of the world, from 1% to 61%. The second
-component (18%) is how [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") and triangles grow with an agent's
+component (18%) is how [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours.") and triangles grow with an agent's
 connections; the third (16%) is the population. The seven "star" worlds of
 [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) are the far end of the first:
 a world is first of all a world with or without a star.
@@ -288,6 +288,6 @@ whole worlds; the tables are in `GraphOfLifeRuns/.pilots/atlas/`.
 
 ← [What a simulation costs](what-a-simulation-costs.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
 
-> [!info]- Pages that link here (6)
-> [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [The even split](even-split.md) · [Stars and hubs](stars-and-hubs.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (7)
+> [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [The even split](even-split.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

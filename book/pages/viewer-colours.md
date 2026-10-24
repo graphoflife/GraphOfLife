@@ -41,7 +41,7 @@ rainbow; *grayscale* is black to white.
 | Token curvature (signed) | Σ over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of (their tokens − its tokens) ([Token curvature](token-curvature.md)) |
 | Token curvature (before phase) | the same, on the network as it stood before the phase; newborns have none |
 | Loops through it | fundamental cycles of a breadth-first spanning tree through it ([Loops](bridges.md#loops)) |
-| Triangles | the triangles it is a corner of ([Clustering](clustering.md)) |
+| Triangles | the triangles it is a corner of ([Clustering](degree.md#clustering)) |
 | Share of total tokens | its tokens divided by all tokens |
 | [Brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") id | its genotype ([Genotypes](genotype.md)) |
 | Parent brain id | its genotype's parent genotype |

@@ -25,7 +25,7 @@ $$
 
 *C*(1), over all connected pairs, is the assortativity of the value; for
 the connections themselves, it is the assortativity of the network
-([Assortativity](assortativity.md)).
+([Assortativity](degree.md#assortativity)).
 
 Pairs at distance *r* are found by breadth-first search from agents drawn at
 random. Standardising each moment's values on their own keeps moments with
@@ -74,6 +74,6 @@ tokens, age and connections, and the share of kin at each distance.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (2)
-> [Glossary](glossary.md) · [Like next to like](like-next-to-like.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like](like-next-to-like.md)
 <!-- /turns -->

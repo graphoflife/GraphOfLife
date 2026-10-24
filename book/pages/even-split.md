@@ -122,6 +122,6 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [Where tokens go](where-tokens-go.md) · [Stars and hubs](stars-and-hubs.md)
+> [!info]- Pages that link here (5)
+> [Glossary](glossary.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [Where tokens go](where-tokens-go.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md)
 <!-- /turns -->

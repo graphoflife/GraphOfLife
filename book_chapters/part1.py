@@ -50,7 +50,7 @@ def world(ch: F.Chapter) -> None:
                        "networkx joins every node to ⌊5/2⌋ = 2 neighbours on either side.",
                        "Place node i at angle 2πi / 100 on a circle and draw every connection."]))
     ch.number("ring", {"founders": n, "connections": len(edges), "shortcuts": shortcuts,
-                       "clustering": float(nx.transitivity(w.G)),
+                       "degree": float(nx.transitivity(w.G)),
                        "mean_distance": float(nx.average_shortest_path_length(w.G))})
 
 

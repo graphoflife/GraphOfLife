@@ -56,5 +56,5 @@ highest one or two. See [Bands](bands.md) for how this is drawn over time.
 ← [Pilot worlds](pilot-worlds.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Bands: many worlds in one figure](bands.md) →
 
 > [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [What a brain sees](brain-inputs.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Degree](degree.md) · [How worlds are measured](how-worlds-are-measured.md) · [Bands: many worlds in one figure](bands.md) · [The bootstrap](bootstrap.md)
+> [Glossary](glossary.md) · [What a brain sees](brain-inputs.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [How worlds are measured](how-worlds-are-measured.md) · [Bands: many worlds in one figure](bands.md) · [The bootstrap](bootstrap.md)
 <!-- /turns -->

@@ -53,7 +53,7 @@ and a world should become a tree of families.
 How tree-like is a network? Three measures say. A **bridge** is a connection
 on no loop: cut it, and the world falls in two ([Bridges](bridges.md)).
 **Clustering** says how often two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of an agent are neighbours of
-each other too; in a tree, never ([Clustering](clustering.md)). And the
+each other too; in a tree, never ([Clustering](degree.md#clustering)). And the
 **core** is what is left when agents with one connection or none are peeled
 away, again and again. In it, every agent lies on a loop or on a path between
 loops ([Core, trees and leaves](core-trees-leaves.md)); a tree has no core at
@@ -184,7 +184,7 @@ bridges.
 <!-- figure shape/clustering -->
 ![Clustering](../figures/shape/clustering.svg)
 
-**Clustering.** Three times the number of triangles divided by the number of connected triples ([Clustering](clustering.md)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Clustering.** Three times the number of triangles divided by the number of connected triples ([Clustering](degree.md#clustering)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -200,7 +200,7 @@ bridges.
 Clustering is taken over the whole world. Of all the pairs of neighbours that
 agents have, it is the share that are joined to each other. A triangle closes
 three such pairs, so it is three times the number of triangles over the number
-of pairs ([Clustering](clustering.md)).
+of pairs ([Clustering](degree.md#clustering)).
 
 In the founders' ring, about a third of the pairs of neighbours of a founder
 are neighbours themselves (0.34). Within the first game that halves (0.17). In
@@ -1075,6 +1075,6 @@ checks it again.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (21)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (20)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

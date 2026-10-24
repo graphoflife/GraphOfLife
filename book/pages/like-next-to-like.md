@@ -105,7 +105,7 @@ means like beside like, a negative one unlike beside unlike.
 - **Age: like.** **+0.14** (+0.15). The old sit among the old, the young among
   the young.
 - **Connections: unlike.** **−0.20** (−0.19): [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") sit among agents with few
-  connections, the [assortativity](assortativity.md "Whether agents tend to be joined to agents like them: the well connected to the well connected.") of [How properties scale together](how-properties-scale-together.md).
+  connections, the [assortativity](degree.md#assortativity "Whether agents tend to be joined to agents like them: the well connected to the well connected.") of [How properties scale together](how-properties-scale-together.md).
 
 All three are small in the median world. Neighbours are alike or unlike only
 a little, and the worlds differ: the age correlation ranges from −0.09 to
@@ -270,6 +270,6 @@ To make every figure of this page: `python3 book_figures.py alike`.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (9)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [How alike at a distance](correlation-function.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (10)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [How alike at a distance](correlation-function.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

@@ -232,7 +232,7 @@ without change are coloured by their kind:
 
 The same holds for every other statistic of the baseline's study: the share of stakes put
 at home (30% in both, 4% to 51% without change), the nodes taken by
-[coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), the core, the [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."). On average a world without
+[coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), the core, the [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours."). On average a world without
 change looks much like an evolving one. But the evolving worlds sit close
 together, and the worlds without change spread over almost everything each
 statistic can be.

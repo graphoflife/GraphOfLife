@@ -496,10 +496,10 @@ def shape(ch: F.Chapter) -> None:
                        "For `coreShare` and `bridges/edges`, which are measured every 25 iterations, "
                        "use stretches of 25."]))
     clus = band_series([series(s.run_id, "transitivity") for s in specs], "clustering (transitivity)", GREEN)
-    ch.figure("clustering", title="Clustering", x={"label": "iteration"}, y={"label": "transitivity", "min": 0},
+    ch.figure("degree", title="Clustering", x={"label": "iteration"}, y={"label": "transitivity", "min": 0},
               series=[clus],
               caption="Three times the number of triangles divided by the number of connected triples "
-                      "([Clustering](clustering.md)), every 25 iterations. The founders' ring starts at "
+                      "([Clustering](degree.md#clustering)), every 25 iterations. The founders' ring starts at "
                       f"{ch.numbers['ring']['transitivity']['median']:.2f} in the median world. {BAND_WORDS}.",
               recipe=recipe(W.runs_text(), STATS_FILE,
                             ["Take the rows with `phase` = 2 and the statistic `transitivity`.",

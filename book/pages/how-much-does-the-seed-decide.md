@@ -140,7 +140,7 @@ brackets:
   network: 0.35 (0.24);
 - the share of agents in the [core](core-trees-leaves.md), on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") or
   between them: 0.17 (0.13);
-- [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), how often two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of an agent are neighbours of each
+- [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours."), how often two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of an agent are neighbours of each
   other: 0.62 (0.34).
 
 And these columns are not one even spread. Most worlds sit together, and a

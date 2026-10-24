@@ -353,7 +353,7 @@ last digit.
 <!-- turns -->
 ---
 
-← [Clustering](clustering.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Core, trees and leaves](core-trees-leaves.md) →
+← [Stars and hubs](stars-and-hubs.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Core, trees and leaves](core-trees-leaves.md) →
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 

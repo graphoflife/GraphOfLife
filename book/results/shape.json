@@ -238,7 +238,7 @@
   },
   "clustering": {
    "title": "Clustering",
-   "caption": "Three times the number of triangles divided by the number of connected triples ([Clustering](clustering.md)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "caption": "Three times the number of triangles divided by the number of connected triples ([Clustering](degree.md#clustering)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
    "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 and the statistic `transitivity`.\n2. Bands as above, in stretches of 25.\n\n**To make it again:** `python3 book_figures.py shape`."
   },
   "distance": {

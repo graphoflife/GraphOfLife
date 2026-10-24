@@ -146,6 +146,6 @@ changes only 1.5% ([What the brains are like](what-the-brains-are-like.md)).
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (11)
-> [The brain](the-brain.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Median and quantiles](median-and-quantiles.md)
+> [!info]- Pages that link here (12)
+> [The brain](the-brain.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Median and quantiles](median-and-quantiles.md)
 <!-- /turns -->

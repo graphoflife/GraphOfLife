@@ -110,15 +110,11 @@ Degrees, cores, bridges, power laws and cuts: what shape the links take, and how
 - [Power laws, real and apparent](pages/power-laws-real-and-apparent.md)
 - [How properties scale together](pages/how-properties-scale-together.md)
 - [How a world breaks](pages/how-a-world-breaks.md)
-- [Degree](pages/degree.md)
+- [An agent's connections: degree, clustering, assortativity, attachment and scaling](pages/degree.md)
 - [Stars and hubs](pages/stars-and-hubs.md)
-- [Preferential attachment and its kernel](pages/preferential-attachment.md)
-- [Clustering](pages/clustering.md)
 - [Distances in a network: path length, radius and diameter, the spectral gap](pages/path-length.md)
 - [Core, trees and leaves](pages/core-trees-leaves.md)
 - [Bridges, cut risk and loops: how a network can be cut](pages/bridges.md)
-- [Assortativity](pages/assortativity.md)
-- [Scaling relations between agents' properties](pages/scaling-relations.md)
 
 ### Space and dimension
 

@@ -56,7 +56,7 @@ every piece of the network cut off from the largest
 
 Nothing was thrown away. Every frame was kept, with every decision, and every
 statistic was recorded for every frame. The statistics that walk the whole
-network — bridges, the core, [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), distances, the flow's loops — were
+network — bridges, the core, [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours."), distances, the flow's loops — were
 recorded every 25 iterations ([What a run records](frames-and-stats.md)).
 
 ### Two sizes of world

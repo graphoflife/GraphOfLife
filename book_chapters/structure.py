@@ -95,7 +95,7 @@ def scaling(ch: F.Chapter) -> None:
                 f"({len(deg):,} agents), counted in cells of connections k and tokens, both in classes of "
                 "growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the "
                 "median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) "
-                "against ln(k) over all agents ([Scaling relations](scaling-relations.md)). Cyan: "
+                "against ln(k) over all agents ([Scaling relations](degree.md#scaling-relations-between-agents-properties)). Cyan: "
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
                 "([Where the tokens flow](where-the-tokens-flow.md)).",
@@ -165,7 +165,7 @@ def scaling(ch: F.Chapter) -> None:
     ch.number("triangles_slope", float(s2))
 
     n = classes_mean(knn_k, knn, positive=False)
-    assort = [mean_over(s.run_id, "assortativity", *W.window) for s in alive]
+    assort = [mean_over(s.run_id, "degree", *W.window) for s in alive]
     ch.figure(
         "neighbours", title="Whom the well-connected are joined to",
         x={"label": "connections k of an agent (logarithmic)", "log": True},
@@ -176,7 +176,7 @@ def scaling(ch: F.Chapter) -> None:
         caption=f"For the agents alive after the last game of {W.lived}, in classes of "
                 "their connections k: the mean, over the class, of the average number of connections of an "
                 "agent's neighbours. A falling line means the well-connected are joined mostly to the poorly "
-                "connected ([Assortativity](assortativity.md)).",
+                "connected ([Assortativity](degree.md#assortativity)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read frame `{W.frame(LAST)}` of every run; for every agent, the mean degree of its neighbours.",
                        "Average by class of the agent's own degree."]))
@@ -200,7 +200,7 @@ def scaling(ch: F.Chapter) -> None:
                 "from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, "
                 "and of their R². Tokens and triangles against connections, clustering against connections, and "
                 "the size of an agent's change in tokens over the game against the tokens it holds "
-                "([Scaling relations](scaling-relations.md)).",
+                "([Scaling relations](degree.md#scaling-relations-between-agents-properties)).",
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       ["Average `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree` and "
                        "`changeVsTokens`, and the same with `R2` appended, over the rows with `phase` = 2 and "

@@ -293,8 +293,8 @@ them.
 <!-- turns -->
 ---
 
-← [Core, trees and leaves](core-trees-leaves.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Assortativity](assortativity.md) →
+← [Core, trees and leaves](core-trees-leaves.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
 
-> [!info]- Pages that link here (13)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The life of a B1 world](a-worlds-life.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Physical inspiration](physical-inspiration.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (14)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The life of a B1 world](a-worlds-life.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Physical inspiration](physical-inspiration.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

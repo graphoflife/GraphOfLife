@@ -28,7 +28,7 @@ phase 2: the world **at the end of each iteration**. Births are the
 exception: they are counted in the rows of phase 1, where they happen.
 
 Most statistics are computed for every row. Those that need a walk through
-the whole network — [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the core, [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), distances — are computed
+the whole network — [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the core, [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours."), distances — are computed
 every 25 iterations.
 
 ## Step 2 · One world: means over stretches

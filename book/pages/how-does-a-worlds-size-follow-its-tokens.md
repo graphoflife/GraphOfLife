@@ -334,7 +334,7 @@ But at ten times the tokens, the dimension from ball growth is 15% higher
 Births and deaths per agent run 13 to 21% higher, as
 [Births, deaths and ages](births-deaths-and-ages.md) and
 [How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) find too. Leaves
-are only 5% fewer, and [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours.") is less than half. So births, the rate of
+are only 5% fewer, and [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours.") is less than half. So births, the rate of
 cutting and the dimension do change with size, a little. And the shape
 changes more than leaves and loops alone show.
 

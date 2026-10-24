@@ -810,7 +810,7 @@ same inequality, the same game, the same brains
 ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). What changed is how
 the agents are arranged, and how fast anything crosses a world:
 
-- **The shape changes.** Half the [clustering](clustering.md "How often an agent's neighbours are also each other's neighbours."), more loops per agent, fewer
+- **The shape changes.** Half the [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours."), more loops per agent, fewer
   bridges, distances twice as long, and a ball dimension that rises with size
   ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md),
   [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).

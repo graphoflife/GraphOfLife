@@ -34,7 +34,7 @@ An agent has more such properties. Besides tokens and connections, there are
 its triangles, how closely knit its neighbourhood is, and how much its tokens
 change in a game. Every 25 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), the viewer fits four **scaling
 relations** between them by least squares on the logarithms of all agents
-([Scaling relations](scaling-relations.md)). This page shows the agents behind
+([Scaling relations](degree.md#scaling-relations-between-agents-properties)). This page shows the agents behind
 the four fits. And it finds that one of the exponents means something quite
 different from what it seems to say.
 
@@ -50,7 +50,7 @@ given beside.
 <!-- figure scaling/tokens-degree -->
 ![Tokens against connections](../figures/scaling/tokens-degree.svg)
 
-**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](scaling-relations.md)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](where-the-tokens-flow.md)).
+**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](degree.md#scaling-relations-between-agents-properties)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](where-the-tokens-flow.md)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -130,7 +130,7 @@ exponent 0.6 is what it looks like through a log–log fit.
 Among your friends, how many are friends with each other? In a village, most;
 in a big city, few. The **clustering coefficient** of an agent with *k* ≥ 2
 neighbours asks the same. It is the share of the *k*(*k* − 1)/2 pairs of its
-neighbours that are joined to each other ([Clustering](clustering.md)). Each
+neighbours that are joined to each other ([Clustering](degree.md#clustering)). Each
 joined pair makes a triangle with the agent, and these are its **triangles**.
 
 <!-- figure scaling/clustering-triangles -->
@@ -184,7 +184,7 @@ one connection each. How close are the worlds to that?
 <!-- figure scaling/neighbours -->
 ![Whom the well-connected are joined to](../figures/scaling/neighbours.svg)
 
-**Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](assortativity.md)).
+**Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](degree.md#assortativity)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -208,7 +208,7 @@ hubs are surrounded by leaves**: the world is built of stars.
 
 There is a single number for this, the **assortativity** *r*: the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.")
 of the connections at the two ends of a connection
-([Assortativity](assortativity.md)). It is −0.07 in the median world, and from
+([Assortativity](degree.md#assortativity)). It is −0.07 in the median world, and from
 −0.47 to +0.02 across the thirty (−0.11 at 10,000 tokens). That is mildly
 negative. And as the note explains, a world with a few large hubs comes out
 negative anyway. It has too few hubs for its hubs to be joined to. The curve
@@ -226,7 +226,7 @@ against what they hold after it.
 <!-- figure scaling/exponents -->
 ![Four scaling relations in the 30 worlds](../figures/scaling/exponents.svg)
 
-**Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](scaling-relations.md)).
+**Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](degree.md#scaling-relations-between-agents-properties)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -375,6 +375,6 @@ folded beneath it, which runs it reads and how.
 
 ← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
 
-> [!info]- Pages that link here (10)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Assortativity](assortativity.md) · [Scaling relations between agents' properties](scaling-relations.md) · [Like next to like](like-next-to-like.md)
+> [!info]- Pages that link here (9)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like](like-next-to-like.md)
 <!-- /turns -->

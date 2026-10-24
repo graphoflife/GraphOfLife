@@ -126,8 +126,8 @@
   "n-births-and-deaths": "births-and-deaths",
   "n-age-and-lifetime": "age-and-lifetime",
   "n-degree": "degree",
-  "n-preferential-attachment": "preferential-attachment",
-  "n-clustering": "clustering",
+  "n-preferential-attachment": "degree#preferential-attachment-and-its-kernel",
+  "n-clustering": "degree#clustering",
   "n-path-length": "path-length",
   "n-core-trees-leaves": "core-trees-leaves",
   "n-bridges": "bridges",
@@ -151,8 +151,8 @@
   "n-ball-dimension-and-curvature": "ball-dimension-and-curvature",
   "n-spectral-dimension": "ball-dimension-and-curvature#the-spectral-dimension",
   "n-box-dimension": "ball-dimension-and-curvature#box-dimension",
-  "n-scaling-relations": "scaling-relations",
-  "n-assortativity": "assortativity",
+  "n-scaling-relations": "degree#scaling-relations-between-agents-properties",
+  "n-assortativity": "degree#assortativity",
   "n-correlation-function": "correlation-function",
   "n-viewer-colours": "viewer-colours",
   "n-pilot-worlds": "pilot-worlds",
@@ -322,6 +322,10 @@
   "lightning": "token-flow#lightning-tokens-that-go-round",
   "circulation": "token-flow#flows-that-go-round",
   "radius-and-diameter": "path-length#radius-and-diameter",
-  "spectral-gap": "path-length#the-spectral-gap"
+  "spectral-gap": "path-length#the-spectral-gap",
+  "clustering": "degree#clustering",
+  "assortativity": "degree#assortativity",
+  "preferential-attachment": "degree#preferential-attachment-and-its-kernel",
+  "scaling-relations": "degree#scaling-relations-between-agents-properties"
  }
 }

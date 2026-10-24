@@ -284,8 +284,8 @@ COMPARED = (
         ("gini", 2, "Gini", BLUE), ("topDecileShare", 2, "richest tenth", BLUE))),
     ("Shape and distances", (0.3, 3), (
         ("coreShare", 2, "core", GREEN), ("cycleRank/nodes", 2, "bridges", GREEN),
-        ("bridges/edges", 2, "bridges", GREEN), ("transitivity", 2, "clustering", GREEN),
-        ("assortativity", 2, "assortativity", GREEN), ("spectralGap", 2, "spectral gap", GREEN),
+        ("bridges/edges", 2, "bridges", GREEN), ("transitivity", 2, "degree", GREEN),
+        ("degree", 2, "degree", GREEN), ("spectralGap", 2, "spectral gap", GREEN),
         ("dimension", 2, "dimension", ORANGE), ("meanPathLength", 2, "mean distance", ORANGE),
         ("diameter", 2, "diameter", ORANGE))),
     ("The largest, and totals", (1, 20), (

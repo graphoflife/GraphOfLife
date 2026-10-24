@@ -81,7 +81,7 @@ on other rows they are `null`:
 
 | field | what it is | note |
 |---|---|---|
-| `transitivity`, `triangles` | clustering, and the number of triangles | [Clustering](clustering.md) |
+| `transitivity`, `triangles` | clustering, and the number of triangles | [Clustering](degree.md#clustering) |
 | `meanPathLength` | average distance between agents | [Path length](path-length.md) |
 | `radius`, `diameter` | the smallest and largest eccentricity | [Radius and diameter](path-length.md#radius-and-diameter) |
 | `coreShare` | share of agents in the 2-core | [Core, trees and leaves](core-trees-leaves.md) |
@@ -93,8 +93,8 @@ on other rows they are `null`:
 | `boxDimension`, `boxDimensionR2` | dimension from covering the network with boxes | [Box dimension](ball-dimension-and-curvature.md#box-dimension) |
 | `lightningScore`, `cyclingShare`, `lightningLongest`, `flowImbalance`, and the `net…` versions, `netFlowShare` | tokens that go round in loops (phase 2) | [Lightning](token-flow.md#lightning-tokens-that-go-round) |
 | `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](power-law-fit.md) |
-| `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree`, `changeVsTokens`, and their `…R2` | how one property of agents grows with another | [Scaling relations](scaling-relations.md) |
-| `assortativity` | whether [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") join hubs | [Assortativity](assortativity.md) |
+| `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree`, `changeVsTokens`, and their `…R2` | how one property of agents grows with another | [Scaling relations](degree.md#scaling-relations-between-agents-properties) |
+| `assortativity` | whether [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") join hubs | [Assortativity](degree.md#assortativity) |
 
 Fields beginning with `_` (`_seconds`, `_cpu`, `_peakMB`, …) are the costs of
 the run, not of the world ([What a simulation costs](what-a-simulation-costs.md)).

@@ -299,13 +299,15 @@
     },
     {
       "name": "preferential attachment",
-      "page": "preferential-attachment",
-      "says": "The well connected gaining new connections faster than the poorly connected."
+      "page": "degree",
+      "says": "The well connected gaining new connections faster than the poorly connected.",
+      "anchor": "preferential-attachment-and-its-kernel"
     },
     {
       "name": "clustering",
-      "page": "clustering",
-      "says": "How often an agent's neighbours are also each other's neighbours."
+      "page": "degree",
+      "says": "How often an agent's neighbours are also each other's neighbours.",
+      "anchor": "clustering"
     },
     {
       "name": "path length",
@@ -371,13 +373,15 @@
     },
     {
       "name": "scaling relation",
-      "page": "scaling-relations",
-      "says": "How one property of an agent grows with another, as a power."
+      "page": "degree",
+      "says": "How one property of an agent grows with another, as a power.",
+      "anchor": "scaling-relations-between-agents-properties"
     },
     {
       "name": "assortativity",
-      "page": "assortativity",
-      "says": "Whether agents tend to be joined to agents like them: the well connected to the well connected."
+      "page": "degree",
+      "says": "Whether agents tend to be joined to agents like them: the well connected to the well connected.",
+      "anchor": "assortativity"
     },
     {
       "name": "correlation length",

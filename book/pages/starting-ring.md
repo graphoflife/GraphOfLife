@@ -73,7 +73,7 @@ tokens.
 ## The baseline's ring
 
 With *T* = 10,000: *n* = 100 founders of 100 tokens each, and *k* = 5. So
-every founder is joined to 2 founders on each side — [degree](degree.md "The number of an agent's connections: how many neighbours it has.") 4 — and the ring
+every founder is joined to 2 founders on each side — degree 4 — and the ring
 has 100 · 2 = 200 connections. On average 0.2 · 200 = 40 of them are
 rewired.
 
@@ -82,7 +82,7 @@ rewired.
 A plain ring is **clustered**: two neighbours of a founder are often
 neighbours of each other. With 2 neighbours on each side, a founder's 4
 neighbours make 6 pairs, and 3 of these pairs are joined. So the clustering is
-3/6 = 0.5 ([Clustering](clustering.md)). Had the same 200 connections joined
+3/6 = 0.5 ([Clustering](degree.md#clustering)). Had the same 200 connections joined
 founders at random, the clustering would be near 0.04. Two neighbours of a
 founder would then be joined with a chance of only 4 in 99.
 
@@ -113,7 +113,7 @@ the founders make of it.
   ring starts, with the real ring of seed 1 drawn.
 - [Seeds and the random stream](random-numbers.md): where the ring's chance
   comes from.
-- [Clustering](clustering.md) and [Path length](path-length.md): the two
+- [Clustering](degree.md#clustering) and [Path length](path-length.md): the two
   measures a small world is judged by.
 - [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations): how the
   founders become a world.
@@ -124,5 +124,5 @@ the founders make of it.
 ← [Every setting](settings.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Seeds and the random stream](random-numbers.md) →
 
 > [!info]- Pages that link here (13)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [Births and the four ways to die](births-and-deaths.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Clustering](clustering.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [Births and the four ways to die](births-and-deaths.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

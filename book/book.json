@@ -754,15 +754,16 @@
     },
     {
       "id": "degree",
-      "title": "Degree",
+      "title": "An agent's connections: degree, clustering, assortativity, attachment and scaling",
       "file": "pages/degree.md",
       "topics": [
-        "network"
+        "network",
+        "lives"
       ],
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "The **degree** of an agent is the number of connections it has — the number of its neighbours."
+      "summary": "An agent's degree is the number of its connections; in a settled B1 world of 100,000 tokens, the mean is about 3.5. Most agents have one or two, and a few hubs hundreds or thousands."
     },
     {
       "id": "stars-and-hubs",
@@ -776,31 +777,6 @@
       "status": "written",
       "added": "2026-10-23",
       "summary": "Agents joined to far more agents than most, and worlds held together by a single one of them."
-    },
-    {
-      "id": "preferential-attachment",
-      "title": "Preferential attachment and its kernel",
-      "file": "pages/preferential-attachment.md",
-      "topics": [
-        "network",
-        "lives"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "In many growing networks the well connected gain new connections faster than the poorly connected: popular web pages are linked to more, much-cited papers are cited more."
-    },
-    {
-      "id": "clustering",
-      "title": "Clustering",
-      "file": "pages/clustering.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Are the neighbours of an agent also neighbours of each other?"
     },
     {
       "id": "path-length",
@@ -838,30 +814,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "A bridge is a connection on no loop: cut it, and the network falls into two pieces. In a settled B1 world of 100,000 tokens, a quarter of the connections are bridges."
-    },
-    {
-      "id": "assortativity",
-      "title": "Assortativity",
-      "file": "pages/assortativity.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Do well-connected agents connect to other well-connected agents, or to poorly connected ones?"
-    },
-    {
-      "id": "scaling-relations",
-      "title": "Scaling relations between agents' properties",
-      "file": "pages/scaling-relations.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How does one property of an agent grow with another — its tokens with its connections, say?"
     },
     {
       "id": "physical-inspiration",
