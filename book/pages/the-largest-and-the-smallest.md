@@ -260,7 +260,7 @@ their stars far above the second.
 So a world of ten times the tokens, which holds about eleven times the agents,
 has a richest agent about three times as rich. Its best-connected agent is
 about four times as connected. That is faster than the width of a world grows:
-×2, since its [diameter](radius-and-diameter.md "The longest of the shortest paths between two agents of a world.") grows about as agents^0.30
+×2, since its [diameter](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") grows about as agents^0.30
 ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
 And it is slower than its agents (×11). Measured directly against the worlds
 of 10,000 tokens, the richest agent is 3.1 times as rich. The best-connected,

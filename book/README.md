@@ -114,11 +114,9 @@ Degrees, cores, bridges, power laws and cuts: what shape the links take, and how
 - [Stars and hubs](pages/stars-and-hubs.md)
 - [Preferential attachment and its kernel](pages/preferential-attachment.md)
 - [Clustering](pages/clustering.md)
-- [Path length](pages/path-length.md)
+- [Distances in a network: path length, radius and diameter, the spectral gap](pages/path-length.md)
 - [Core, trees and leaves](pages/core-trees-leaves.md)
 - [Bridges, cut risk and loops: how a network can be cut](pages/bridges.md)
-- [Radius and diameter](pages/radius-and-diameter.md)
-- [The spectral gap](pages/spectral-gap.md)
 - [Assortativity](pages/assortativity.md)
 - [Scaling relations between agents' properties](pages/scaling-relations.md)
 

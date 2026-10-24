@@ -383,7 +383,7 @@ def geometry(ch: F.Chapter) -> None:
         caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the dimension and the curvature read off how "
                 "balls grow ([Dimension and curvature](ball-dimension-and-curvature.md)), the box "
                 "dimension ([Box dimension](ball-dimension-and-curvature.md#box-dimension)), and the spectral gap, on a logarithmic "
-                f"axis ([The spectral gap](spectral-gap.md)). In each, {BAND_WORDS[0].lower()}"
+                f"axis ([The spectral gap](path-length.md#the-spectral-gap)). In each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `dimension`, `ricciCurvature`, `boxDimension` and `spectralGap` of the rows with "
@@ -423,7 +423,7 @@ def geometry(ch: F.Chapter) -> None:
         series=lines_,
         caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the diameter, the radius and the mean path "
                 "length, all estimated from breadth-first searches out of 8 to 16 spread agents "
-                f"([Radius and diameter](radius-and-diameter.md)). For each, {BAND_WORDS[0].lower()}"
+                f"([Radius and diameter](path-length.md#radius-and-diameter)). For each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take `diameter`, `radius` and `meanPathLength` of the rows with `phase` = 2.",

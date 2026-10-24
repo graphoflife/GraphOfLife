@@ -646,7 +646,7 @@ the line between folded and not.
 - **About three dimensions of room.** At 14,000 agents the worlds hold about
   as much within *r* steps as a three-dimensional body does, from 5 to 10
   steps. At 60,000 agents they hold somewhat more, 3.3, steady from 3 to 14
-  steps. Their [diameters](radius-and-diameter.md "The longest of the shortest paths between two agents of a world.") grow as agents^0.30
+  steps. Their [diameters](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") grow as agents^0.30
   ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
   It is the first sign that something like three-dimensional space can emerge
   from these rules, with no geometry put in.

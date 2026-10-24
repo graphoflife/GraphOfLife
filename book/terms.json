@@ -339,13 +339,15 @@
     },
     {
       "name": "diameter",
-      "page": "radius-and-diameter",
-      "says": "The longest of the shortest paths between two agents of a world."
+      "page": "path-length",
+      "says": "The longest of the shortest paths between two agents of a world.",
+      "anchor": "radius-and-diameter"
     },
     {
       "name": "spectral gap",
-      "page": "spectral-gap",
-      "says": "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began."
+      "page": "path-length",
+      "says": "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.",
+      "anchor": "the-spectral-gap"
     },
     {
       "name": "dimension",

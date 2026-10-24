@@ -57,7 +57,7 @@ The viewer's `assortativity` is *r* over the [frame](frames-and-stats.md "A whol
 <!-- turns -->
 ---
 
-← [The spectral gap](spectral-gap.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Scaling relations between agents' properties](scaling-relations.md) →
+← [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Scaling relations between agents' properties](scaling-relations.md) →
 
 > [!info]- Pages that link here (4)
 > [Glossary](glossary.md) · [How properties scale together](how-properties-scale-together.md) · [How alike at a distance](correlation-function.md) · [What a run records](frames-and-stats.md)

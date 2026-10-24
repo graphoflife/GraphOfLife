@@ -35,7 +35,7 @@ there.
 - **[cross-time tournament](eras-and-contests.md)** (also era) — Brains of a world at two moments, its eras, played against each other: do the later ones win?
 - **[cut risk](bridges.md#cut-risk)** — The largest share of a world that cutting one connection would cut off.
 - **[degree](degree.md)** — The number of an agent's connections: how many neighbours it has.
-- **[diameter](radius-and-diameter.md)** — The longest of the shortest paths between two agents of a world.
+- **[diameter](path-length.md#radius-and-diameter)** — The longest of the shortest paths between two agents of a world.
 - **[dimension](ball-dimension-and-curvature.md)** (also ball dimension) — How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.
 - **[diversity score](diversity-score.md)** — How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.
 - **[effective kinds of staking](how-different-are-the-agents.md)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
@@ -91,7 +91,7 @@ there.
 - **[share function](share-function.md)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
 - **[share-out](gains-losses-and-the-share-out.md)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
 - **[spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.
-- **[spectral gap](spectral-gap.md)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
+- **[spectral gap](path-length.md#the-spectral-gap)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
 - **[survival curve](kaplan-meier.md)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.
 - **[token](the-world.md#agents-and-tokens)** — The one thing of value in a world: every agent holds a whole number of them, and their total never changes.
 - **[token curvature](token-curvature.md)** — How much richer an agent's neighbourhood is than the agent itself.

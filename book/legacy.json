@@ -146,8 +146,8 @@
   "n-token-curvature": "token-curvature",
   "n-loops": "bridges#loops",
   "n-cut-risk": "bridges#cut-risk",
-  "n-radius-and-diameter": "radius-and-diameter",
-  "n-spectral-gap": "spectral-gap",
+  "n-radius-and-diameter": "path-length#radius-and-diameter",
+  "n-spectral-gap": "path-length#the-spectral-gap",
   "n-ball-dimension-and-curvature": "ball-dimension-and-curvature",
   "n-spectral-dimension": "ball-dimension-and-curvature#the-spectral-dimension",
   "n-box-dimension": "ball-dimension-and-curvature#box-dimension",
@@ -320,6 +320,8 @@
   "common-ancestor": "genotype#the-common-ancestor-of-the-living",
   "brain-diversity": "genotype#brain-diversity",
   "lightning": "token-flow#lightning-tokens-that-go-round",
-  "circulation": "token-flow#flows-that-go-round"
+  "circulation": "token-flow#flows-that-go-round",
+  "radius-and-diameter": "path-length#radius-and-diameter",
+  "spectral-gap": "path-length#the-spectral-gap"
  }
 }

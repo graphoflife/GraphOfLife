@@ -399,7 +399,7 @@ connection that carries nothing is cut
 [Do agents cooperate?](do-agents-cooperate.md)). **The network** is a
 stretched web of stars, grown locally by children joining their parents'
 neighbourhoods. It is four and a half times as long as a random network with
-the same connections, with a thirty-third of its [spectral gap](spectral-gap.md "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.")
+the same connections, with a thirty-third of its [spectral gap](path-length.md#the-spectral-gap "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.")
 ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)). It breaks along its
 poor regions, whose borders go quiet. Then the [cull](one-iteration.md#cleanup),
 the rule that only the largest piece of the network lives on, kills whatever

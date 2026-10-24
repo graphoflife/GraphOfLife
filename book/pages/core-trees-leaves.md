@@ -93,7 +93,7 @@ the deeper cores, the trees and the [dimension](ball-dimension-and-curvature.md 
 <!-- turns -->
 ---
 
-← [Path length](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) →
+← [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) →
 
 > [!info]- Pages that link here (13)
 > [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)

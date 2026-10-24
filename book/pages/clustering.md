@@ -57,7 +57,7 @@ stretches hanging off its clustered core
 <!-- turns -->
 ---
 
-← [Preferential attachment and its kernel](preferential-attachment.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Path length](path-length.md) →
+← [Preferential attachment and its kernel](preferential-attachment.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) →
 
 > [!info]- Pages that link here (8)
 > [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)

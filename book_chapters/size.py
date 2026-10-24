@@ -319,7 +319,7 @@ def size(ch: F.Chapter) -> None:
                 "[A world's life](a-worlds-life.md): the mean number of agents over iterations 500 to 599, and over the same iterations "
                 "the mean distance between two agents (left) and the largest distance found (right), both "
                 "estimated by the viewer from breadth-first searches out of 8 to 16 agents every 25 iterations "
-                "([Radius and diameter](radius-and-diameter.md)). Red: a power law fitted to the "
+                "([Radius and diameter](path-length.md#radius-and-diameter)). Red: a power law fitted to the "
                 "dots. Dashed: what a small world would do — distances growing in proportion to the logarithm "
                 "of the number of agents — drawn through the runs of 3,200 tokens.",
         recipe=recipe(E08_RUNS + WITH_E02, STATS_FILE,

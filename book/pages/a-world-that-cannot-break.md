@@ -476,7 +476,7 @@ agents, because the cull has nothing left to do.
 Mending in a **chain**, the same rule without the link back to the first
 group, keeps the world in one piece just as well, by the same argument. But
 the network it makes is different: its dimension falls to 2.3, and its
-[diameter](radius-and-diameter.md "The longest of the shortest paths between two agents of a world.") doubles to 38 steps. Every death replaces a star (*u* at the centre,
+[diameter](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") doubles to 38 steps. Every death replaces a star (*u* at the centre,
 its groups around it) with a path through the groups. A world in which stars
 keep turning into paths is stretched thin, towards a line. The ring replaces
 the star with a cycle instead: every two groups are at most half the ring

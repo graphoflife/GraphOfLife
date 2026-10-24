@@ -804,7 +804,7 @@
     },
     {
       "id": "path-length",
-      "title": "Path length",
+      "title": "Distances in a network: path length, radius and diameter, the spectral gap",
       "file": "pages/path-length.md",
       "topics": [
         "network",
@@ -813,7 +813,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How far apart are the agents of a world?"
+      "summary": "The distance between two agents is the fewest connections on a path from one to the other. The mean path length is its average over pairs, the diameter its largest value, and the radius the reach of the most central agent."
     },
     {
       "id": "core-trees-leaves",
@@ -838,31 +838,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "A bridge is a connection on no loop: cut it, and the network falls into two pieces. In a settled B1 world of 100,000 tokens, a quarter of the connections are bridges."
-    },
-    {
-      "id": "radius-and-diameter",
-      "title": "Radius and diameter",
-      "file": "pages/radius-and-diameter.md",
-      "topics": [
-        "network",
-        "space"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Three numbers describe how far apart the agents of a world are."
-    },
-    {
-      "id": "spectral-gap",
-      "title": "The spectral gap",
-      "file": "pages/spectral-gap.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How hard is a network to cut into two halves?"
     },
     {
       "id": "assortativity",
