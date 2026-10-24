@@ -144,9 +144,7 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 - A source and a sink — *not written yet*
 - Particles — *not written yet*
 - [How alike at a distance](pages/correlation-function.md)
-- [Dimension and curvature from ball growth](pages/ball-dimension-and-curvature.md)
-- [The spectral dimension](pages/spectral-dimension.md)
-- [Box dimension](pages/box-dimension.md)
+- [Three ways to measure a network's dimension](pages/ball-dimension-and-curvature.md)
 
 ### Size and riches of a world
 

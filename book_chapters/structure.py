@@ -382,7 +382,7 @@ def geometry(ch: F.Chapter) -> None:
         "measures", panels, columns=2, title="Four measures of a world's geometry",
         caption=f"Every 25 iterations, in the {len(specs)} baseline worlds: the dimension and the curvature read off how "
                 "balls grow ([Dimension and curvature](ball-dimension-and-curvature.md)), the box "
-                "dimension ([Box dimension](box-dimension.md)), and the spectral gap, on a logarithmic "
+                "dimension ([Box dimension](ball-dimension-and-curvature.md#box-dimension)), and the spectral gap, on a logarithmic "
                 f"axis ([The spectral gap](spectral-gap.md)). In each, {BAND_WORDS[0].lower()}"
                 f"{BAND_WORDS[1:]}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
@@ -406,7 +406,7 @@ def geometry(ch: F.Chapter) -> None:
                 "within (ℓ − 1)/2 steps of a centre, and centres are taken greedily, best-connected first, among "
                 "the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: "
                 "the least-squares line on logarithmic axes, whose slope is minus the box dimension "
-                "([Box dimension](box-dimension.md)).",
+                "([Box dimension](ball-dimension-and-curvature.md#box-dimension)).",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read frame `{W.frame(LAST)}`; order the agents by degree, highest first.",
                        "For each ℓ: go down the order; every agent not yet in a box starts a new box, which takes "

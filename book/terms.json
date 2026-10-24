@@ -353,13 +353,15 @@
     },
     {
       "name": "spectral dimension",
-      "page": "spectral-dimension",
-      "says": "A network's dimension read from how a random walker spreads over it."
+      "page": "ball-dimension-and-curvature",
+      "says": "A network's dimension read from how a random walker spreads over it.",
+      "anchor": "the-spectral-dimension"
     },
     {
       "name": "box dimension",
-      "page": "box-dimension",
-      "says": "A network's dimension read from how many boxes of a given size it takes to cover it."
+      "page": "ball-dimension-and-curvature",
+      "says": "A network's dimension read from how many boxes of a given size it takes to cover it.",
+      "anchor": "box-dimension"
     },
     {
       "name": "scaling relation",

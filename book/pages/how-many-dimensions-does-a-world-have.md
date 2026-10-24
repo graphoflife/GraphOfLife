@@ -78,7 +78,7 @@ explains the idea in full.
 space of *d* dimensions has, after *t* steps, spread over a region of about
 *t*^(*d*/2) points. So the chance that it is back where it started falls like
 *t*^(−*d*/2). The exponent read off that chance is the **spectral dimension**
-([The spectral dimension](spectral-dimension.md)). It measures how easily
+([The spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)). It measures how easily
 things spread through a space, where the first ruler measures how much room
 there is.
 
@@ -215,7 +215,7 @@ how much lies around the average agent, and how much around a typical one.
 The viewer also records a **box dimension**. It covers a world with boxes,
 each holding the agents within a few steps of its centre, and counts how many
 it takes. In *d* dimensions, boxes half as wide take 2^*d* times as many
-([Box dimension](box-dimension.md)). It reads 1.88 in the median world, for at
+([Box dimension](ball-dimension-and-curvature.md#box-dimension)). It reads 1.88 in the median world, for at
 large sizes it counts the long, thin branches
 ([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
 
@@ -830,5 +830,5 @@ iterations each.
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
 > [!info]- Pages that link here (25)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [The spectral dimension](spectral-dimension.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

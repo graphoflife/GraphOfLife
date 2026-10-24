@@ -493,7 +493,7 @@ dimensions, their number grows like *r*^*d*
 ([Dimension and curvature](ball-dimension-and-curvature.md)). The second
 releases a walker that steps at random. It asks how often the walker is back
 where it started after *t* steps: the more dimensions, the rarer
-([The spectral dimension](spectral-dimension.md)). Both rulers are laid on the
+([The spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)). Both rulers are laid on the
 whole world, on its core alone, and on its **random twin**
 ([The random twin: is a world a space?](random-twin.md)). The twin has the
 same agents, each with as many connections, wired at random.
@@ -671,7 +671,7 @@ thirty worlds in brackets:
 <!-- figure geometry/measures -->
 ![Four measures of a world's geometry](../figures/geometry/measures.svg)
 
-**Four measures of a world's geometry.** Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how balls grow ([Dimension and curvature](ball-dimension-and-curvature.md)), the box dimension ([Box dimension](box-dimension.md)), and the spectral gap, on a logarithmic axis ([The spectral gap](spectral-gap.md)). In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Four measures of a world's geometry.** Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how balls grow ([Dimension and curvature](ball-dimension-and-curvature.md)), the box dimension ([Box dimension](ball-dimension-and-curvature.md#box-dimension)), and the spectral gap, on a logarithmic axis ([The spectral gap](spectral-gap.md)). In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -721,12 +721,12 @@ Cover the world with boxes. A box of size ℓ is every agent within (ℓ − 1)/
 steps of a centre. The larger the boxes, the fewer are needed: in a space of
 *d* dimensions, their number falls like ℓ^−*d*. Halve the size of the boxes,
 and a line needs twice as many, a sheet four times as many
-([Box dimension](box-dimension.md)).
+([Box dimension](ball-dimension-and-curvature.md#box-dimension)).
 
 <!-- figure geometry/boxes -->
 ![Covering one world with boxes](../figures/geometry/boxes.svg)
 
-**Covering one world with boxes.** The world with seed 1 after its last game, covered by boxes: a box of size ℓ is every agent within (ℓ − 1)/2 steps of a centre, and centres are taken greedily, best-connected first, among the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: the least-squares line on logarithmic axes, whose slope is minus the box dimension ([Box dimension](box-dimension.md)).
+**Covering one world with boxes.** The world with seed 1 after its last game, covered by boxes: a box of size ℓ is every agent within (ℓ − 1)/2 steps of a centre, and centres are taken greedily, best-connected first, among the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: the least-squares line on logarithmic axes, whose slope is minus the box dimension ([Box dimension](ball-dimension-and-curvature.md#box-dimension)).
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -1075,6 +1075,6 @@ checks it again.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (24)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges](bridges.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) · [Box dimension](box-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (23)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Degree](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Clustering](clustering.md) · [Path length](path-length.md) · [Core, trees and leaves](core-trees-leaves.md) · [Bridges](bridges.md) · [Radius and diameter](radius-and-diameter.md) · [The spectral gap](spectral-gap.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

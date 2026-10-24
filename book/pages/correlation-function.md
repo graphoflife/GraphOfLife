@@ -70,7 +70,7 @@ tokens, age and connections, and the share of kin at each distance.
 <!-- turns -->
 ---
 
-← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [Dimension and curvature from ball growth](ball-dimension-and-curvature.md) →
+← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 

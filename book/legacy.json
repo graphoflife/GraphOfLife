@@ -149,8 +149,8 @@
   "n-radius-and-diameter": "radius-and-diameter",
   "n-spectral-gap": "spectral-gap",
   "n-ball-dimension-and-curvature": "ball-dimension-and-curvature",
-  "n-spectral-dimension": "spectral-dimension",
-  "n-box-dimension": "box-dimension",
+  "n-spectral-dimension": "ball-dimension-and-curvature#the-spectral-dimension",
+  "n-box-dimension": "ball-dimension-and-curvature#box-dimension",
   "n-scaling-relations": "scaling-relations",
   "n-assortativity": "assortativity",
   "n-correlation-function": "correlation-function",
@@ -308,6 +308,8 @@
   "how-large-a-crowd-a-raider-needs": "strategies-written-by-hand#how-large-a-crowd-a-raider-needs",
   "revolutions-with-every-other-rule": "the-switches-the-world-was-built-with#revolutions-with-every-other-rule",
   "handover-with-every-other-rule": "the-switches-the-world-was-built-with#handover-with-every-other-rule",
-  "gifts-with-every-other-rule": "the-switches-the-world-was-built-with#gifts-with-every-other-rule"
+  "gifts-with-every-other-rule": "the-switches-the-world-was-built-with#gifts-with-every-other-rule",
+  "spectral-dimension": "ball-dimension-and-curvature#the-spectral-dimension",
+  "box-dimension": "ball-dimension-and-curvature#box-dimension"
  }
 }

@@ -1105,7 +1105,7 @@
     },
     {
       "id": "ball-dimension-and-curvature",
-      "title": "Dimension and curvature from ball growth",
+      "title": "Three ways to measure a network's dimension",
       "file": "pages/ball-dimension-and-curvature.md",
       "topics": [
         "space"
@@ -1113,31 +1113,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How many agents are within *r* steps of a given agent?"
-    },
-    {
-      "id": "spectral-dimension",
-      "title": "The spectral dimension",
-      "file": "pages/spectral-dimension.md",
-      "topics": [
-        "space"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "How many dimensions does a space have?"
-    },
-    {
-      "id": "box-dimension",
-      "title": "Box dimension",
-      "file": "pages/box-dimension.md",
-      "topics": [
-        "space"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A second way to give a network a dimension: cover it with boxes and count them (Song, Havlin and Makse 2005)."
+      "summary": "A network has no coordinates, only links, yet it can be shaped like a line, a sheet or a solid. Three rulers read its dimension: the room within a few steps, how a random walker spreads, and how many boxes it takes to cover it."
     },
     {
       "id": "what-holds-a-worlds-size",

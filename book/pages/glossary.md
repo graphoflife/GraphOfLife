@@ -20,7 +20,7 @@ there.
 - **[B2](b1-and-b2.md)** — The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.
 - **[baseline](b1-and-b2.md)** — The stated rules an experiment starts from and changes one thing of: B1 or B2.
 - **[bootstrap](bootstrap.md)** — How sure a number is, found by redrawing the worlds it came from many times.
-- **[box dimension](box-dimension.md)** — A network's dimension read from how many boxes of a given size it takes to cover it.
+- **[box dimension](ball-dimension-and-curvature.md#box-dimension)** — A network's dimension read from how many boxes of a given size it takes to cover it.
 - **[brain](the-brain.md)** — The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.
 - **[brain diversity](brain-diversity.md)** — How many different brains, or genotypes, a world holds.
 - **[bridge](bridges.md)** — A connection that lies on no loop: cut it and the network falls into two pieces.
@@ -90,7 +90,7 @@ there.
 - **[settled life](settled-life.md)** — A world from iteration 500 to its end, after its youth, where it is measured.
 - **[share function](share-function.md)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
 - **[share-out](gains-losses-and-the-share-out.md)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
-- **[spectral dimension](spectral-dimension.md)** — A network's dimension read from how a random walker spreads over it.
+- **[spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.
 - **[spectral gap](spectral-gap.md)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
 - **[survival curve](kaplan-meier.md)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.
 - **[token](the-world.md#agents-and-tokens)** — The one thing of value in a world: every agent holds a whole number of them, and their total never changes.

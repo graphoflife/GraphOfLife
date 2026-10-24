@@ -55,10 +55,10 @@ Four ways of measuring a dimension, each exact on a lattice:
   steps grows as *r*^*d* ([Dimension and curvature](ball-dimension-and-curvature.md)).
 - **How wide a lump is.** *N* agents packed into *d* dimensions span about
   *N*^(1/*d*) steps.
-- **How many boxes cover it** ([Box dimension](box-dimension.md)).
+- **How many boxes cover it** ([Box dimension](ball-dimension-and-curvature.md#box-dimension)).
 - **How a random walk returns.** A walker that wanders at random is back where
   it started after *t* steps with a probability that falls as *t*^(−*d*/2) —
-  the **[spectral dimension](spectral-dimension.md "A network's dimension read from how a random walker spreads over it.")**, the one quantum-gravity models measure. (In
+  the **spectral dimension**, the one quantum-gravity models measure. (In
   causal dynamical triangulations it is about 4 at large scales and about 2 at
   the smallest: Ambjørn, Jurkiewicz and Loll 2005.)
 
@@ -522,5 +522,5 @@ part of the notebook (see [the contents](../README.md)):
 **Also about:** [Start here](../README.md#start-here).
 
 > [!info]- Pages that link here (16)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The spectral dimension](spectral-dimension.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->
