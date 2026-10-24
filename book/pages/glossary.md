@@ -74,7 +74,7 @@ there.
 - **[mutation](mutation.md)** — A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.
 - **[neighbour](the-world.md#the-network)** — An agent joined to another by a connection.
 - **[open-ended evolution](open-ended-test.md)** — Evolution that keeps producing new things without end, not only up to a plateau.
-- **[participation ratio](participation-ratio.md)** — How many directions a cloud of points really uses.
+- **[participation ratio](effective-number.md#how-many-directions-a-cloud-of-points-uses)** — How many directions a cloud of points really uses.
 - **[path length](path-length.md)** — How many connections the shortest way between two agents crosses.
 - **[permutation test](bootstrap.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](pilot-worlds.md)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.

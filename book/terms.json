@@ -490,8 +490,9 @@
     },
     {
       "name": "participation ratio",
-      "page": "participation-ratio",
-      "says": "How many directions a cloud of points really uses."
+      "page": "effective-number",
+      "says": "How many directions a cloud of points really uses.",
+      "anchor": "how-many-directions-a-cloud-of-points-uses"
     },
     {
       "name": "survival curve",

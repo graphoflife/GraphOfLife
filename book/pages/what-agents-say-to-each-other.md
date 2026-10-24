@@ -125,7 +125,7 @@ numbers as coordinates. If the points spread along only a few directions, the
 messages use only a few numbers' worth of freedom. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, the
 messages vary along only **15** independent directions (6 to 21). They are
 counted as a participation ratio
-([How many directions a cloud of points uses](participation-ratio.md)).
+([How many directions a cloud of points uses](effective-number.md#how-many-directions-a-cloud-of-points-uses)).
 Founders' brains, independent of each other, use 30, all of them.
 
 Why so few? A world's genotypes descend from a few lines
@@ -345,5 +345,5 @@ that lived to the end of their 3,000 iterations were read the same way.
 ← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Do the brains matter?](do-the-brains-matter.md) →
 
 > [!info]- Pages that link here (7)
-> [Messages](messages.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [What the brains are like](what-the-brains-are-like.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [How many directions a cloud of points uses](participation-ratio.md)
+> [Messages](messages.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [What the brains are like](what-the-brains-are-like.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Effective numbers: how many kinds, and how many directions](effective-number.md)
 <!-- /turns -->

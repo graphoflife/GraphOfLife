@@ -1628,18 +1628,6 @@
       "summary": "A world wanders: its size, its inequality and its births go up and down over hundreds of iterations. The autocorrelation says how long it remembers where it was: the correlation of a world with itself, some time later."
     },
     {
-      "id": "participation-ratio",
-      "title": "How many directions a cloud of points uses",
-      "file": "pages/participation-ratio.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "A message has 30 numbers, so the messages of a world are points in a space of 30 dimensions."
-    },
-    {
       "id": "kaplan-meier",
       "title": "Survival curves (Kaplan–Meier)",
       "file": "pages/kaplan-meier.md",
@@ -1704,7 +1692,7 @@
     },
     {
       "id": "effective-number",
-      "title": "Effective numbers: how many kinds there really are",
+      "title": "Effective numbers: how many kinds, and how many directions",
       "file": "pages/effective-number.md",
       "topics": [
         "methods",
@@ -1713,7 +1701,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-16",
-      "summary": "A world has 1,600 genotypes."
+      "summary": "Counting kinds can mislead: one kind may hold half the agents and the rest one agent each. An effective number counts kinds by how much of the population they hold. It is the number of equally common kinds that would be as diverse."
     },
     {
       "id": "fractional-factorial",

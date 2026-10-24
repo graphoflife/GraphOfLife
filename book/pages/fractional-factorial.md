@@ -75,7 +75,7 @@ if every pair added nothing, the seven chains would scatter like chance too.
 <!-- turns -->
 ---
 
-← [Effective numbers: how many kinds there really are](effective-number.md) · [Methods and statistics](../README.md#methods-and-statistics)
+← [Effective numbers: how many kinds, and how many directions](effective-number.md) · [Methods and statistics](../README.md#methods-and-statistics)
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 

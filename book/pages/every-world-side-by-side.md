@@ -45,7 +45,7 @@ Which directions do the worlds differ in most? Take the statistics that do
 not grow with the size of a world (shares, means, ratios; the counts of
 births, deaths and [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") divided by the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")), standardise each, and
 find the principal components: the directions along which the cloud of
-worlds is longest. (The note [How many directions a cloud has](participation-ratio.md)
+worlds is longest. (The note [How many directions a cloud has](effective-number.md#how-many-directions-a-cloud-of-points-uses)
 explains the idea.)
 
 <!-- figure side_by_side/components -->
@@ -176,7 +176,7 @@ longer makes.
 
 **Related notes:** [What a run records](frames-and-stats.md) ·
 [Between worlds and within them](variance-split.md#between-worlds-and-within-them) ·
-[How many directions a cloud has](participation-ratio.md) ·
+[How many directions a cloud has](effective-number.md#how-many-directions-a-cloud-of-points-uses) ·
 [Spread between worlds](median-and-quantiles.md#spread-between-worlds) ·
 [What goes with what](what-goes-with-what.md) ·
 [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)

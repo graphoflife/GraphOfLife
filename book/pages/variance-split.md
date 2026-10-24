@@ -155,7 +155,7 @@ worlds ([Is a correlation real?](correlation.md#is-a-correlation-real)).
 <!-- turns -->
 ---
 
-← [Fitting a power law properly](power-law-fit.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Effective numbers: how many kinds there really are](effective-number.md) →
+← [Fitting a power law properly](power-law-fit.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Effective numbers: how many kinds, and how many directions](effective-number.md) →
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 

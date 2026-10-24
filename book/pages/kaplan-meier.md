@@ -65,7 +65,7 @@ iteration, last iteration, still going).
 <!-- turns -->
 ---
 
-← [How many directions a cloud of points uses](participation-ratio.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md) →
+← [How long a world remembers: autocorrelation and the power spectrum](autocorrelation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md) →
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
