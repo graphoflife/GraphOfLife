@@ -528,8 +528,9 @@
     },
     {
       "name": "Muller plot",
-      "page": "muller-plot",
-      "says": "A chart of how lines of descent grow, shrink and replace each other over time."
+      "page": "genotype",
+      "says": "A chart of how lines of descent grow, shrink and replace each other over time.",
+      "anchor": "muller-plots"
     },
     {
       "name": "least squares",

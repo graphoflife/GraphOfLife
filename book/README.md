@@ -222,7 +222,6 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 - [Two numbers together: correlation, a fitted line and logarithmic axes](pages/correlation.md)
 - [How long a world remembers: autocorrelation and the power spectrum](pages/autocorrelation.md)
 - [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](pages/bootstrap.md)
-- [Muller plots](pages/muller-plot.md)
 - [Fitting a power law properly](pages/power-law-fit.md)
 - [Splitting variation: where, who and chance, and between worlds and within them](pages/variance-split.md)
 - [Effective numbers: how many kinds, and how many directions](pages/effective-number.md)

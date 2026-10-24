@@ -70,7 +70,7 @@ there.
 - **[median](median-and-quantiles.md)** (also quantile) — The middle value: half of the numbers lie below it and half above.
 - **[message](messages.md)** — Numbers an agent writes to itself and to each neighbour every phase, which their brains read.
 - **[mobility](gini-coefficient.md#mobility)** — Whether the rich stay rich, or who holds the wealth keeps changing.
-- **[Muller plot](muller-plot.md)** — A chart of how lines of descent grow, shrink and replace each other over time.
+- **[Muller plot](genotype.md#muller-plots)** — A chart of how lines of descent grow, shrink and replace each other over time.
 - **[mutation](mutation.md)** — A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.
 - **[neighbour](the-world.md#the-network)** — An agent joined to another by a connection.
 - **[open-ended evolution](open-ended-test.md)** — Evolution that keeps producing new things without end, not only up to a plateau.

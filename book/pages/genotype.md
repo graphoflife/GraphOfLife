@@ -6,7 +6,8 @@ Every [brain](the-brain.md "The neural network each agent decides with: inputs a
 a change replaces. The new number remembers the old one as its parent, so the
 genotypes of a world form one family tree. On it the notebook counts
 **families**, or lines of descent, and finds the **common ancestor** of the
-living. It also counts how many different genotypes a world holds, its
+living. A **Muller plot** draws the lines of descent as they grow and replace each
+other. The notebook also counts how many different genotypes a world holds, its
 **brain diversity**: in a settled [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world, five for every eight [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.").
 
 ## Genotypes and the family tree
@@ -104,7 +105,7 @@ The notebook uses the tree in three ways:
   — the newest genotype that all of them descend from, or nine in ten, or
   half.
 - **Founder lines** — how many of the living descend from each founder,
-  drawn as a [Muller plot](muller-plot.md).
+  drawn as a [Muller plot](#muller-plots).
 
 ### Lifetimes of genotypes
 
@@ -169,7 +170,7 @@ Other pages fix the ancestors at another moment, with the same idea:
   ([One world, many colours](one-world-many-colours.md));
 - those alive at one chosen iteration
   ([Genotypes and lineages](genotypes-and-lineages.md));
-- the founders ([Muller plots](muller-plot.md)).
+- the founders ([Muller plots](#muller-plots)).
 
 ### Early in a run
 
@@ -192,6 +193,47 @@ family tree is a chain. So it is computed while a run records, for the rows of
 both phases. A run that keeps only some of its frames has no families count.
 It keeps a genotype's place in the tree for sixteen iterations after it first
 appears. A genotype still alive keeps its place for as long as it lives.
+
+## Muller plots
+
+How do lines of descent grow, shrink and replace each other over time? A
+**Muller plot** shows it as stacked layers. It is named after the geneticist
+H. J. Muller, who drew such pictures in 1932.
+
+### How the notebook draws one
+
+1. **Choose the lines.** Fix a moment *t*₀ and a set of ancestors. They may
+   be the 100 founders at iteration 0, or every genotype alive after the game
+   of some iteration *t*₀. Each ancestor starts a **line**: itself and every genotype
+   descended from it ([The family tree](#the-family-tree)).
+2. **Count.** After every later game, follow each living agent's genotype up
+   the family tree until one of the chosen ancestors is reached. Count the
+   agents in each line, and divide by the number of living agents. That is
+   each line's **share** of the living, and the shares add up to 1.
+3. **Stack.** Draw the shares as layers stacked one on another, so that the
+   top of the stack is always at 1. The lines that ever held the largest share
+   are drawn in colour, at the bottom; all the others together in grey on top.
+
+### How to read a Muller plot
+
+- The **height** of a layer at a moment is that line's share of the world.
+- A layer that **swells** is a line spreading. One that **thins out** and
+  vanishes is a line dying out.
+- A layer that fills the **whole height** means that everyone alive descends
+  from that one ancestor: the line has **swept** the world.
+
+A line spreads in two ways in Graph of Life. One is births. The other, far
+more often, is winning nodes in the game, which copies its brain onto the
+conquered node ([How the game is played](how-the-game-is-played.md)). A
+Muller plot does not tell the two apart.
+
+### Where Muller plots are used
+
+- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations):
+  the lines of the 100 founders in the first 300 iterations of the world with
+  [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1.
+- [Genotypes and lineages](genotypes-and-lineages.md): the families of the
+  genotypes alive at a later moment, in two worlds.
 
 ## The common ancestor of the living
 
@@ -345,8 +387,8 @@ of behaviour instead, and compares them with the genotypes.
   the B1 worlds — how long genotypes last, and how lines take worlds over.
 - [How a brain changes](mutation.md): when a brain changes in B1 and in B2,
   and what a change does to it.
-- [Muller plots](muller-plot.md): lines of descent drawn as they grow and
-  replace each other.
+- [One world, many colours](one-world-many-colours.md): families drawn in
+  colour on the network itself.
 - [What a run records](frames-and-stats.md): the frames and statistics that
   all these counts are read from.
 
@@ -358,7 +400,7 @@ of behaviour instead, and compares them with the genotypes.
   iterations was counted into its parent's family. So runs recorded before
   2026-10-09 carry counts that are slightly low. Over the 3,000 iterations of
   `B1-10000-s001`, they were low by 0.2% on average, and by 2% at most. That
-  is small beside the differences between [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), but it also made the count
+  is small beside the differences between seeds, but it also made the count
   depend on when a run had last been paused. Since then, a living genotype
   keeps its place for as long as it lives.
 - **24 October 2026.** These notes were written on 8 October 2026, when B1 was
@@ -378,13 +420,18 @@ of behaviour instead, and compares them with the genotypes.
   living. While a founder's genotype lives, the code also counts its missing
   parent as one.
 
+## References
+
+- Muller, H. J. (1932). Some genetic aspects of sex. *The American
+  Naturalist* 66, 118–138.
+
 <!-- turns -->
 ---
 
 ← [How different are the agents?](how-different-are-the-agents.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
 
-**Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Does evolution keep going?](../README.md#does-evolution-keep-going).
+**Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Does evolution keep going?](../README.md#does-evolution-keep-going), [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (21)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Who helps whom](who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The diversity score](diversity-score.md) · [One world, many colours](one-world-many-colours.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md) · [Muller plots](muller-plot.md) · [Effective numbers: how many kinds, and how many directions](effective-number.md)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [How a brain changes](mutation.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Who helps whom](who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [The diversity score](diversity-score.md) · [One world, many colours](one-world-many-colours.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md) · [Effective numbers: how many kinds, and how many directions](effective-number.md)
 <!-- /turns -->
