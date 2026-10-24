@@ -179,6 +179,6 @@ the figures (`book_figures.py`, with the package `book_chapters/`, drawing with
 
 ← [The lab, the engine and pilots](the-lab.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours](one-world-many-colours.md) →
 
-> [!info]- Pages that link here (2)
-> [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [What a brain can compute](what-a-brain-can-compute.md)
+> [!info]- Pages that link here (1)
+> [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)
 <!-- /turns -->

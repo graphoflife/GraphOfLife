@@ -1159,7 +1159,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-19",
-      "summary": "*Strategies written by hand*'s raider set by hand into the weights of a B2 brain: 12 of its 16 units play the rule in every decision of 62,114 situations but eight, and planted in the raider's place the brain takes the same worlds. A proof that no B2 brain of any size can pass news of a third agent in a message, so the factory's pipeline is out of reach, and the smallest change that would open it: a message to itself that pools what it says to everyone."
+      "summary": "A raider written in Python took 40% and 62% of two evolved B2 worlds, with play that evolution had never found. Yet 12 units of a B2 brain, with weights set by hand, decide as the rule does in all but eight of 62,114 situations."
     },
     {
       "id": "does-evolution-close-the-door",
