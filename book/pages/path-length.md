@@ -103,7 +103,7 @@ apart ([The starting ring](starting-ring.md)).
 ### Where path length is used
 
 - **How stretched a world is.** Take B1's thirty worlds of 100,000 tokens
-  (Experiment 10), over their [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), iterations 500 to 1,499. Two
+  (Experiment 10), over their [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), iterations 500 to 1,499. Two
   agents are a median 17.7 steps apart. A random network with the
   same *N* and *k̄* would have about 7.8. So the agents are 2.3 times as far
   apart

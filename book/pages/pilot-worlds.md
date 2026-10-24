@@ -94,7 +94,7 @@ recipes and in `research/oee/pilots/LOG.md`.
 <!-- turns -->
 ---
 
-← [What the viewer can colour by](viewer-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Median and quantiles](median-and-quantiles.md) →
+← [What the viewer can colour by](viewer-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) →
 
 > [!info]- Pages that link here (11)
 > [Glossary](glossary.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The estate of the dead](estate.md) · [How different are the agents?](how-different-are-the-agents.md) · [Eras and contests: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [The health bar](health-bar.md) · [The lab, the engine and pilots](the-lab.md)

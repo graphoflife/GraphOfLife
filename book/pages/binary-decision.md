@@ -75,7 +75,7 @@ an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a 
 ## Where it is used
 
 - **Linking a newborn**: one decision per candidate of the parent, the
-  parent itself included — outputs 2–3 with mode 4–5. In the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.") of
+  parent itself included — outputs 2–3 with mode 4–5. In the [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.") of
   the 30 [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 100,000 tokens, 11.5% of children are joined to none of
   their parent's candidates at birth
   ([How agents have children](how-agents-have-children.md)). In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") a newborn

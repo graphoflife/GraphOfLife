@@ -49,7 +49,7 @@ the whole distribution; this page asks it of the top.
 
 The worlds are the thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)). They are read over their
-[settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to their end.
+[settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to their end.
 
 ## The largest, over a world's life
 

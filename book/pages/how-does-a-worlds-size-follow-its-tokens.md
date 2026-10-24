@@ -536,7 +536,7 @@ agents.
   this is what the thesis counts. It is set against the baseline's 30 worlds
   of 10,000 tokens over the same iterations. And it is set against the time a
   front would need, from the worlds' diameters.
-- **Everything the study of the baseline measures**, over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.")
+- **Everything the study of the baseline measures**, over the [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.")
   from iteration 500 to 1,499: agents, connections, births, deaths,
   inequality, genotypes and families. Each is taken per token or per agent,
   and set beside the baseline.

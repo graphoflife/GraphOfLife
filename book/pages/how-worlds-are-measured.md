@@ -63,7 +63,7 @@ A world spends its first hundred iterations or so in a **youth** unlike the
 rest of its life ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)), and then
 **wanders** ([A world's life](a-worlds-life.md)). So when the notebook asks where a
 world **settles**, it takes the mean from iteration 500 to its end — its
-[settled life](settled-life.md).
+[settled life](median-and-quantiles.md#the-settled-life-of-a-world).
 
 ## Step 3 · Many worlds: lines, bands and dots
 
@@ -92,7 +92,7 @@ condition for [B2](b1-and-b2.md "The second baseline: B1 with the rules that kee
 Thirty lines are hard to read. The notebook usually draws them as a **band**: in
 each short stretch of iterations, the median of the worlds is the line, the
 middle half of the worlds the darker band, and nine worlds in ten the paler
-band ([Bands](bands.md); [Median and quantiles](median-and-quantiles.md)).
+band ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure); [Median and quantiles](median-and-quantiles.md)).
 
 <!-- figure measure/bands -->
 ![The same 30 worlds, as a band](../figures/measure/bands.svg)
@@ -125,7 +125,7 @@ and [Do the brains matter?](do-the-brains-matter.md) are full of them.
 
 - The **spread** of worlds is the standard deviation of their levels divided
   by their mean, *c* = *s*/*x̄*: a spread of 0.17 means worlds typically lie
-  about a sixth of the mean away from it ([Spread between worlds](spread-between-worlds.md)).
+  about a sixth of the mean away from it ([Spread between worlds](median-and-quantiles.md#spread-between-worlds)).
 - Whether two quantities go together is their **correlation** *r*, between −1
   and 1 ([Correlation](correlation.md)).
 - How long a world **remembers** its level is the correlation of the world

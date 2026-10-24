@@ -122,7 +122,7 @@ change hands in every game
 ([How the game is played](how-the-game-is-played.md)). So a genotype has
 little time.
 
-In its [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on, a world holds about one genotype
+In its [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on, a world holds about one genotype
 for every 1.6 agents. That is five genotypes for every eight agents: a world
 of some 14,400 agents holds about 9,000 different genotypes at once. The
 measure is the number of distinct genotypes divided by the number of agents

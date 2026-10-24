@@ -202,7 +202,7 @@ can be followed through a world's whole life:
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-Over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), the median world's parents give 36% of what they
+Over the [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), the median world's parents give 36% of what they
 hold. All the tokens given to children in one phase are 1.3% of the world's
 tokens. And in the median world, a child is joined at birth to 4.8 of its
 parent's candidates on average. Births move little wealth.

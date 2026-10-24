@@ -61,7 +61,7 @@ always holds at least this one.
 A world that dies out did not end up anywhere: the last stretch of its life is
 its dying. So where the worlds of a setting end up is measured over the worlds
 that lived to the end. The dead are reported beside them, as an outcome of
-their own ([The settled life of a world](settled-life.md)).
+their own ([The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world)).
 
 Of the 30 baseline worlds of 10,000 tokens, four died: after 4, 313, 1,547
 and 2,184 iterations. Of the 30 of 100,000 tokens, none did
@@ -87,7 +87,7 @@ fewer.
 
 - [One iteration, step by step](one-iteration.md): the cleanup after which the
   agents are counted.
-- [The settled life of a world](settled-life.md): why the dead are measured
+- [The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world): why the dead are measured
   apart from the living.
 - [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md):
   small worlds near the line, and below it.
@@ -111,5 +111,5 @@ fewer.
 ← [How a brain changes](mutation.md) · [How the simulation works](../README.md#how-the-simulation-works)
 
 > [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [The settled life of a world](settled-life.md)
+> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md)
 <!-- /turns -->

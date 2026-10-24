@@ -457,8 +457,9 @@
     },
     {
       "name": "settled life",
-      "page": "settled-life",
-      "says": "A world from iteration 500 to its end, after its youth, where it is measured."
+      "page": "median-and-quantiles",
+      "says": "A world from iteration 500 to its end, after its youth, where it is measured.",
+      "anchor": "the-settled-life-of-a-world"
     },
     {
       "name": "median",

@@ -165,7 +165,7 @@ The founders are equal, but the first reproduction phase ends that: a child
 gets only part of its parent's tokens. Over the first five [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") the
 median world's Gini is already 0.59, higher than it will be again. It falls
 back within a few more (at 10,000 tokens it was 0.48 from the start). Over the
-[settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), iterations 500 to 1,499, the median world's average is 0.47
+[settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), iterations 500 to 1,499, the median world's average is 0.47
 (0.49 at 10,000 tokens). The thirty worlds lie between 0.40 and 0.55.
 Inequality appears at once. After its first jolt, it neither grows nor
 shrinks.

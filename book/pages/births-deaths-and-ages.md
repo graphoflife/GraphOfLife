@@ -61,7 +61,7 @@ The worlds of this page are the thirty of 100,000 tokens of [Thirty
 worlds](a-worlds-life.md#thirty-worlds). They are the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), run
 with the [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30 for 1,500 iterations each: Experiment 10. A settled
 world holds about 14,400 agents. Unless a passage says otherwise, a number is
-measured over a world's [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The typical world
+measured over a world's [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The typical world
 is the median of the thirty. This page was first written from the thirty worlds
 of 10,000 tokens; [Two sizes](#two-sizes) sets them beside the large ones.
 
@@ -765,5 +765,5 @@ it, which runs it reads and how.
 [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [How births build the network](how-agents-have-children.md) →
 
 > [!info]- Pages that link here (13)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [Age and lifetime](age-and-lifetime.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [The settled life of a world](settled-life.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [Age and lifetime](age-and-lifetime.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md)
 <!-- /turns -->

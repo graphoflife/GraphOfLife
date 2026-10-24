@@ -14,7 +14,7 @@ Thirty [baseline](b1-and-b2.md "The stated rules an experiment starts from and c
 difference is not the seed's doing: each world wanders, and forgets its level
 within about three hundred [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). Only the shape of their network sets a
 few worlds apart: in those, one [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") is joined to a sixth of all agents or
-more. With each world measured over its [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), 19 seeds per condition
+more. With each world measured over its settled life, 19 seeds per condition
 reveal a change of a tenth in its number of agents. Experiment 3 had expected
 thirty seeds to be enough with worlds measured at the end of their runs; it
 was narrowly refuted.
@@ -113,7 +113,7 @@ settle alike:
 <!-- /figure -->
 
 How tall a column is can be put in one number, the
-[spread](spread-between-worlds.md): the standard deviation of the thirty
+[spread](median-and-quantiles.md#spread-between-worlds): the standard deviation of the thirty
 worlds' means, divided by their mean. A spread of 0.1 says that a typical
 world lies about a tenth of the mean away from the mean.
 
@@ -591,6 +591,6 @@ written by `python3 gol_lab.py analyse E03`.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (16)
-> [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [The settled life of a world](settled-life.md) · [Spread between worlds](spread-between-worlds.md) · [Correlation](correlation.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Between worlds and within them](between-and-within.md) · [How many seeds an experiment needs](seeds-needed.md)
+> [!info]- Pages that link here (15)
+> [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Correlation](correlation.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Between worlds and within them](between-and-within.md) · [How many seeds an experiment needs](seeds-needed.md)
 <!-- /turns -->

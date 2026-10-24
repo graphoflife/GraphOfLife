@@ -148,7 +148,7 @@ def measure(ch: F.Chapter) -> None:
                       ["Take every run's rows with `phase` = 2 and `nodes`; average them in stretches "
                        "of 25 iterations; draw one line per run."]))
     ch.figure(
-        "bands", title="The same 30 worlds, as a band", x={"label": "iteration"}, y={"label": "agents", "min": 0},
+        "median-and-quantiles", title="The same 30 worlds, as a band", x={"label": "iteration"}, y={"label": "agents", "min": 0},
         series=[band_series([series(s.run_id, "nodes") for s in specs], "median, middle half, nine in ten", BLUE)],
         caption=f"{BAND_WORDS}.",
         recipe=recipe(runs_text(), STATS_FILE, ["Take every run's rows with `phase` = 2 and `nodes`.",

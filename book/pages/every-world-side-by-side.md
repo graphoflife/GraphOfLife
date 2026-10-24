@@ -120,7 +120,7 @@ within them](between-and-within.md) explains; here the groups are the
 | spread or all in (`spreadShare`) | 0.99 | tokens given to children (`reproTokenShare`) | 0.29 |
 | the fewest links (`minDegree`) | 0.96 | agents cut off (`orphaned`) | 0.27 |
 | kept at home (`selfAllocationShare`) | 0.95 | tokens per agent (`meanTokens`) | 0.24 |
-| brains per agent (`brainDiversity`) | 0.94 | its [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") (`medianTokens`) | 0.22 |
+| brains per agent (`brainDiversity`) | 0.94 | its median (`medianTokens`) | 0.22 |
 | own node held (`heldHomeShare`) | 0.91 | curvature of the network (`ricciCurvature`) | 0.22 |
 | flow that runs one way (`flowImbalance`) | 0.88 | flow per link (`meanEdgeFlow`) | 0.19 |
 | net ÷ staked flow (`netFlowShare`) | 0.87 | [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") (`netCyclingShare`) | 0.16 |
@@ -177,7 +177,7 @@ longer makes.
 **Related notes:** [What a run records](frames-and-stats.md) ·
 [Between worlds and within them](between-and-within.md) ·
 [How many directions a cloud has](participation-ratio.md) ·
-[Spread between worlds](spread-between-worlds.md) ·
+[Spread between worlds](median-and-quantiles.md#spread-between-worlds) ·
 [What goes with what](what-goes-with-what.md) ·
 [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)
 

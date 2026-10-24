@@ -12,7 +12,7 @@ nearly every [game](one-iteration.md#phase-2-the-game "The second phase of an it
 ## Hubs
 
 An agent's [degree](degree.md) is its number of connections. In a settled
-baseline world of 100,000 tokens the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent has 2 and the mean is 3.5, but
+baseline world of 100,000 tokens the median agent has 2 and the mean is 3.5, but
 the best-connected agent of the median world has 640 (from 130 to 11,000
 between worlds; [The largest and the smallest](the-largest-and-the-smallest.md)).
 An agent that far above the rest is a **hub**. There is no exact line for a hub;
@@ -27,7 +27,7 @@ in 2.0% of games
 ## Stars
 
 A world is a **star** when its best-connected agent is joined, on average over
-the world's [settled life](settled-life.md), to at least a tenth of the agents
+the world's [settled life](median-and-quantiles.md#the-settled-life-of-a-world), to at least a tenth of the agents
 alive (in the code, `STAR = 0.1` in `book_chapters/common.py`). By this measure
 7 of the 30 worlds of Experiment 10, at 100,000 tokens, were stars, and 10 of
 the 26 surviving worlds of 10,000 tokens of Experiment 2. In the large worlds a star sets the

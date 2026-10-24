@@ -210,7 +210,7 @@ values.
 - **The richest** is a reading of how far concentration goes. In a settled
   B1 world of 100,000 tokens the richest agent holds about 2% of all tokens,
   some 2,100. At 10,000 tokens it holds about 7%, some 690, over the same
-  iterations, 500 to 1,499. Over those worlds' longer [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), to
+  iterations, 500 to 1,499. Over those worlds' longer settled life, to
   iteration 2,999, it holds about 8%, some 800
   ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
 - **The poorest is almost always 1.** An agent left with 0 tokens is removed

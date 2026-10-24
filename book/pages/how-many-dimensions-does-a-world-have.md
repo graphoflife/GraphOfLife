@@ -50,7 +50,7 @@ their end. Besides them, it measures the three worlds of 409,600 tokens of
 (`B1-409600-s001` … `-s003`, `python3 gol_lab.py run E08`). They held about
 60,000 agents each after 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). And it measures the worlds of 10,000
 tokens it was first written from: the 26 of thirty that lived to the end. They
-held about 1,500 agents each at their end (1,300 over their [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.")).
+held about 1,500 agents each at their end (1,300 over their [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.")).
 That makes three sizes, each four to ten times the one before.
 [How this was made](#how-this-was-made) lists every run.
 

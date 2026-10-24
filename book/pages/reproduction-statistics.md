@@ -54,7 +54,7 @@ gives a share of what it holds, ½, ½ and ⅒, and their mean is
 a world of 10,000 tokens, `reproTokenShare` = 13/10,000 = 0.0013.
 
 The baseline's worlds show the same gap. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000
-tokens, over its [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), parents give 36% of what they hold. Yet all the
+tokens, over its [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), parents give 36% of what they hold. Yet all the
 tokens given to children in one phase are 1.3% of the world's
 ([How births build the network](how-agents-have-children.md)).
 

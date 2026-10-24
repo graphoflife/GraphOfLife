@@ -86,7 +86,7 @@ it again.
   own, not a world that ended up somewhere
   ([When a world ends](extinction.md)).
 - **A run is measured over its settled life**, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to its end
-  ([The settled life of a world](settled-life.md)).
+  ([The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world)).
 - **Runs are shared.** A run is named for what it is — baseline, world size,
   what differs, seed — so an experiment that needs runs which already exist
   uses them.

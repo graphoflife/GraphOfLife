@@ -161,7 +161,7 @@ of this world. What it does not say is anything about the other 99%.
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-Across the worlds, over their [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."):
+Across the worlds, over their [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."):
 
 - maximum likelihood finds the tail from about 21 connections, holding 1.1%
   of the agents (0.7% to 1.6%), with γ = 3.04 (2.40 to 4.11);

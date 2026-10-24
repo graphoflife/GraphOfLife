@@ -84,7 +84,7 @@ connection.
 A run records `bridges`, the number of bridges, in its statistics file, on the
 rows of every 25th iteration. The notebook divides it by the number of
 connections, `bridges/edges`: the share of all connections that are bridges.
-Count them after the game, over a B1 world's [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."). At 100,000 tokens
+Count them after the game, over a B1 world's [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."). At 100,000 tokens
 about a quarter of the connections are bridges: 26%, some 6,400 of them. At
 10,000 tokens it is 31%
 ([Core, leaves and bridges](what-shape-does-the-network-take.md#core-leaves-and-bridges)).

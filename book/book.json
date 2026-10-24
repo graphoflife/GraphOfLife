@@ -1654,7 +1654,7 @@
     },
     {
       "id": "median-and-quantiles",
-      "title": "Median and quantiles",
+      "title": "Many worlds at once: the median, bands, the settled life and the spread",
       "file": "pages/median-and-quantiles.md",
       "topics": [
         "methods"
@@ -1662,43 +1662,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "The notebook describes sets of numbers — thirty worlds' sizes, a million lifetimes — by a few **quantiles** rather than by their mean alone."
-    },
-    {
-      "id": "bands",
-      "title": "Bands: many worlds in one figure",
-      "file": "pages/bands.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Thirty worlds, each with a value at each of 3,000 iterations, drawn as thirty lines, are a tangle nobody can read."
-    },
-    {
-      "id": "settled-life",
-      "title": "The settled life of a world",
-      "file": "pages/settled-life.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "To compare worlds — thirty seeds, or two conditions — each world has to be summed up in one number per statistic: *where does it settle?* This note gives the rule the notebook uses and why."
-    },
-    {
-      "id": "spread-between-worlds",
-      "title": "Spread between worlds",
-      "file": "pages/spread-between-worlds.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How different are worlds that differ only in their seed?"
+      "summary": "The notebook rarely looks at one world. It runs thirty, with different seeds, and sums them up in four steps. The median and other quantiles describe a set of numbers without letting one extreme decide."
     },
     {
       "id": "correlation",

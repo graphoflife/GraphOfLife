@@ -41,7 +41,7 @@ different from what it seems to say.
 The worlds are the thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)). The pictures show every
 agent alive after the last game of each world. Single worlds are measured
-every 25 iterations over their [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."). The page was first written from
+every 25 iterations over their [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."). The page was first written from
 the thirty worlds of 10,000 tokens; where those differ, their numbers are
 given beside.
 

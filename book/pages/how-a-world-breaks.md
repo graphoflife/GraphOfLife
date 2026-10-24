@@ -42,7 +42,7 @@ what actually severs a region from the rest.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)), read over their [settled
-life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The page was first written from the thirty worlds
+life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The page was first written from the thirty worlds
 of 10,000 tokens; where those differ, their numbers are given beside. A
 **big** cut is counted against the size of a world: a thousand agents or more
 here, a hundred in the worlds of 10,000 tokens. In both, that is one agent for

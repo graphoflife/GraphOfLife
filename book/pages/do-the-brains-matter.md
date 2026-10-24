@@ -110,7 +110,7 @@ Each changes one setting of the baseline [B1](b1-and-b2.md "The first baseline: 
 <!-- /figure -->
 
 All thirty worlds deciding by chance died: 25 after their second iteration,
-5 after their third. In the last game of the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") one, 62% of the agents
+5 after their third. In the last game of the median one, 62% of the agents
 were cut off and another 15% starved. Random stakes leave [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")
 without tokens; a connection that carries no tokens in a game is cut at its
 end, and anything no longer joined to the largest piece of the world is
@@ -219,7 +219,7 @@ without change are coloured by their kind:
 
 - **Agents.** The worlds without change have a median of 1,574 agents
   against 1,309, but they range from 183 to 2,928, against 819 to 1,626.
-  Their [spread](spread-between-worlds.md) is 0.45, against 0.17.
+  Their [spread](median-and-quantiles.md#spread-between-worlds) is 0.45, against 0.17.
 - **Births.** The evolving worlds all sit near 3 per hundred agents (between
   2.3 and 4.3); the worlds without change range from none at all to one per
   agent — a spread of 1.33, against 0.15.

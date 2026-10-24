@@ -140,7 +140,7 @@ simple fractions.
 <!-- figure game/doctrine -->
 ![How agents stake, over a world's life](../figures/game/doctrine.svg)
 
-**How agents stake, over a world's life.** After every game of the 30 baseline worlds. Blue: the share of the agents that staked who spread their tokens over several candidates rather than putting all on one (`spreadShare`). Yellow: of all tokens staked, the share staked by agents on their own node (`selfAllocationShare`). Red: of all tokens staked, the share marked revolutionary (`revoltShare`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](bands.md)).
+**How agents stake, over a world's life.** After every game of the 30 baseline worlds. Blue: the share of the agents that staked who spread their tokens over several candidates rather than putting all on one (`spreadShare`). Yellow: of all tokens staked, the share staked by agents on their own node (`selfAllocationShare`). Red: of all tokens staked, the share marked revolutionary (`revoltShare`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -157,7 +157,7 @@ simple fractions.
 Three shares change over the life of the worlds:
 
 - **Spreading becomes the rule.** In the first game, 50% of the agents that
-  staked spread their tokens over several candidates, in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world.
+  staked spread their tokens over several candidates, in the median world.
   That is about what random brains give, since the choice turns on which of
   two random outputs is larger. From iteration 500 on, it is 98%.
 - **Nearly every token is revolutionary.** The share of staked tokens marked
@@ -210,7 +210,7 @@ of all nodes** (12% + 40%), as at 10,000 tokens.
 <!-- figure game/kept-taken -->
 ![Who wins the nodes, over a world's life](../figures/game/kept-taken.svg)
 
-**Who wins the nodes, over a world's life.** After every game of the 30 baseline worlds. Green: of all nodes on which anyone staked, the share won by the agent living on it (`heldHomeShare`). Violet: the number of nodes won by a coalition, divided by the number of agents at the start of the game (`revolutions/nodes_before`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](bands.md)).
+**Who wins the nodes, over a world's life.** After every game of the 30 baseline worlds. Green: of all nodes on which anyone staked, the share won by the agent living on it (`heldHomeShare`). Violet: the number of nodes won by a coalition, divided by the number of agents at the start of the game (`revolutions/nodes_before`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -256,7 +256,7 @@ not individuals**: the brain on a hub is replaced in nearly every game.
 > **To make it again:** `python3 book_figures.py game`.
 <!-- /figure -->
 
-Remarkably well, with one kind of exception. Over the [settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), 23 of the
+Remarkably well, with one kind of exception. Over the settled life, 23 of the
 30 worlds have between 96% and 99% of their stakers spreading. Their agents
 keep their node in 37% to 48% of games. Coalitions win nodes numbering 47% to
 61% of the agents, and 26% to 31% of the staked tokens go home.

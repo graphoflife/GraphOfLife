@@ -280,7 +280,7 @@ def game(ch: F.Chapter) -> None:
         ch.figure(name, title=title, x={"label": "iteration"}, y={"label": ylabel, "min": 0, "max": 1},
                   series=out,
                   caption=f"After every game of the {len(specs)} baseline worlds. {words} For each, "
-                          f"{BAND_WORDS[0].lower()}{BAND_WORDS[1:]} ([Bands](bands.md)).",
+                          f"{BAND_WORDS[0].lower()}{BAND_WORDS[1:]} ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)).",
                   recipe=recipe(W.runs_text(), STATS_FILE,
                                 ["Take the rows with `phase` = 2 and the statistics "
                                  + ", ".join(f"`{s}`" for s, _ in stats)
@@ -492,7 +492,7 @@ def shape(ch: F.Chapter) -> None:
                       ["Take the rows with `phase` = 2 and the statistics `coreShare`, `leaves/nodes` and "
                        "`bridges/edges` (`a/b` is the row's `a` divided by its `b`).",
                        "For `leaves/nodes`, make the band as for every other band "
-                       f"([Bands](bands.md)): {BAND_STEPS[0][0].lower()}{BAND_STEPS[0][1:]}",
+                       f"([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)): {BAND_STEPS[0][0].lower()}{BAND_STEPS[0][1:]}",
                        "For `coreShare` and `bridges/edges`, which are measured every 25 iterations, "
                        "use stretches of 25."]))
     clus = band_series([series(s.run_id, "transitivity") for s in specs], "clustering (transitivity)", GREEN)

@@ -156,7 +156,7 @@ bends downward instead of running straight, so it is not a clean [power law](pow
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `coreShare`, `leaves/nodes` and `bridges/edges` (`a/b` is the row's `a` divided by its `b`).
-> 2. For `leaves/nodes`, make the band as for every other band ([Bands](bands.md)): cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
+> 2. For `leaves/nodes`, make the band as for every other band ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)): cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
 > 3. For `coreShare` and `bridges/edges`, which are measured every 25 iterations, use stretches of 25.
 >
 > **To make it again:** `python3 book_figures.py shape`.
@@ -164,8 +164,8 @@ bends downward instead of running straight, so it is not a clean [power law](pow
 
 Three shares settle within the first hundred or so iterations, and then hold:
 
-- **The core** holds 97% of the agents after the first game. Over the [settled
-  life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured."), iterations 500 to 1,499, it settles near 57% in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world (54%
+- **The core** holds 97% of the agents after the first game. Over the settled
+  life, iterations 500 to 1,499, it settles near 57% in the median world (54%
   at 10,000 tokens). Across the thirty worlds it lies between 19% and 64%.
 - **Leaves** rise from 3% to about 35% of all agents (36% at 10,000 tokens).
 - **Bridges** rise from 1% to about 26% of all connections (31%).

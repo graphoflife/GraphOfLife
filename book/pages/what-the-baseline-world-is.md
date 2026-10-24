@@ -69,7 +69,7 @@ something about the world that was not known before.
 
 ### The baseline world in numbers
 
-Here is a settled B1 world of 100,000 tokens. Each number is the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") over
+Here is a settled B1 world of 100,000 tokens. Each number is the median over
 the thirty worlds of each world's mean over iterations 500 to 1,499. The
 worlds of 10,000 tokens are given in brackets where they differ.
 
@@ -280,7 +280,7 @@ may choose at most 8 links.
 
 - **The youth is left out.** Every thesis from here on is checked from
   iteration 500 on, the settled life of a run
-  ([The settled life of a world](settled-life.md)).
+  ([The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world)).
 - **Long stretches, not the last fifth.** A run's mean over its settled life
   varies across seeds by much less than its last fifth does. For the number
   of agents it varies by 0.10 of the mean instead of 0.17 at 100,000 tokens,

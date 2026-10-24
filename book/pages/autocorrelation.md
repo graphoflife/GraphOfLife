@@ -56,7 +56,7 @@ correlated levels is about as precise as a mean over *k*/*S* independent
 ones. A world's settled life, iterations 500 to 2,999, is 25 stretches of
 100; with *S* ≈ 3.5 that is worth about seven independent looks — against
 one look for a single stretch at the end. That is why the notebook measures
-worlds over their settled life ([The settled life of a world](settled-life.md)).
+worlds over their settled life ([The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world)).
 
 <!-- turns -->
 ---

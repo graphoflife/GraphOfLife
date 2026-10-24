@@ -8,7 +8,7 @@ worlds — [seeds](random-numbers.md "The number that fixes every random choice 
 ## The formula
 
 Suppose each condition runs *n* worlds, the worlds of a condition vary with a
-[spread](spread-between-worlds.md) *c* (standard deviation divided by mean),
+[spread](median-and-quantiles.md#spread-between-worlds) *c* (standard deviation divided by mean),
 and the setting changes the mean by a share Δ (Δ = 0.1 for a change of 10%).
 To find such a change with a two-sided test at the 5% level, four times in
 five, each condition needs about
@@ -56,7 +56,7 @@ and 19 seeds are enough ([How much does the seed decide?](how-much-does-the-seed
 ## Two lessons
 
 - *n* grows with the **square** of the spread: halving *c* — by measuring
-  worlds over a longer stretch ([The settled life of a world](settled-life.md)) —
+  worlds over a longer stretch ([The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world)) —
   quarters the seeds needed.
 - *n* grows with one over the **square** of the change: a change half as
   big needs four times the seeds.
@@ -72,5 +72,5 @@ and 19 seeds are enough ([How much does the seed decide?](how-much-does-the-seed
 ← [Permutation tests](permutation-test.md) · [Methods and statistics](../README.md#methods-and-statistics) · [The Wilson interval](wilson-interval.md) →
 
 > [!info]- Pages that link here (8)
-> [How this notebook is written](how-this-notebook-is-written.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [How worlds are measured](how-worlds-are-measured.md) · [Pilot worlds](pilot-worlds.md) · [Spread between worlds](spread-between-worlds.md)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [How worlds are measured](how-worlds-are-measured.md) · [Pilot worlds](pilot-worlds.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md)
 <!-- /turns -->

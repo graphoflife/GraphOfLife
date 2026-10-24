@@ -87,7 +87,7 @@ there.
 - **[scaling relation](degree.md#scaling-relations-between-agents-properties)** — How one property of an agent grows with another, as a power.
 - **[seed](random-numbers.md)** — The number that fixes every random choice of a run: the same settings and the same seed make the same world.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
-- **[settled life](settled-life.md)** — A world from iteration 500 to its end, after its youth, where it is measured.
+- **[settled life](median-and-quantiles.md#the-settled-life-of-a-world)** — A world from iteration 500 to its end, after its youth, where it is measured.
 - **[share function](share-function.md)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
 - **[share-out](gains-and-losses.md#gains-losses-and-the-share-out)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
 - **[spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.

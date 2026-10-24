@@ -113,7 +113,7 @@ The worlds are the thirty of 100,000 tokens of
 This page was first written from the worlds of 10,000 tokens, the 26 of
 thirty that lived to the end, about 1,300 agents each. Where the two sizes
 differ, both are given. Every value is read at five moments of each world's
-[settled life](settled-life.md "A world from iteration 500 to its end, after its youth, where it is measured.").
+[settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.").
 
 ### Neighbours
 
