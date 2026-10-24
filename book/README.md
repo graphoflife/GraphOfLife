@@ -147,7 +147,6 @@ What the brains are and compute, the families they make, and how different agent
 - [How different are the agents?](pages/how-different-are-the-agents.md)
 - How big should a brain be? — *not written yet*
 - [Genotypes, families and the common ancestor](pages/genotype.md)
-- [How a signal fades through layers](pages/vanishing-signal.md)
 
 ### Does evolution keep going?
 

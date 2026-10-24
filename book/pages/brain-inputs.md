@@ -2,7 +2,7 @@
 
 ## In short
 
-Every time an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") decides anything, its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") looks at its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."): the
+Every time an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") decides anything, its brain looks at its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."): the
 agent itself first, then each of its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") in increasing order of id.
 For each candidate it gets one column of numbers, **154** in B1 and 66 in B2,
 and computes one column of outputs from it
@@ -122,7 +122,7 @@ changes only 1.5% ([What the brains are like](what-the-brains-are-like.md)).
   brain hears every group of inputs equally loudly. Each input is read by a
   column of 50 first-layer weights, and that column's length is 0.67 for
   every group, the random numbers included (0.57 in a [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")).
-- [How a signal fades through layers](vanishing-signal.md): seeing is not
+- [How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers): seeing is not
   using. A change in these inputs reaches a B1 founder's outputs at a gain of
   only 0.0006, and a B2 founder's at about 0.2
   ([B1 and B2: the two baselines](b1-and-b2.md)).

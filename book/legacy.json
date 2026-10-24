@@ -116,7 +116,7 @@
   "n-largest-remainder": "largest-remainder",
   "n-brain-inputs": "brain-inputs",
   "n-brain-outputs": "brain-outputs",
-  "n-vanishing-signal": "vanishing-signal",
+  "n-vanishing-signal": "the-brain#how-a-signal-fades-through-layers",
   "n-messages": "messages",
   "n-revolution": "revolution",
   "n-mutation": "mutation",
@@ -341,6 +341,7 @@
   "wilson-interval": "bootstrap#the-wilson-interval",
   "seeds-needed": "bootstrap#how-many-seeds-an-experiment-needs",
   "exploitability": "eras-and-contests#exploitability",
-  "invasion-test": "eras-and-contests#the-invasion-test"
+  "invasion-test": "eras-and-contests#the-invasion-test",
+  "vanishing-signal": "the-brain#how-a-signal-fades-through-layers"
  }
 }

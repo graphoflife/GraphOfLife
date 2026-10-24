@@ -381,7 +381,7 @@ of behaviour instead, and compares them with the genotypes.
 <!-- turns -->
 ---
 
-← [How different are the agents?](how-different-are-the-agents.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [How a signal fades through layers](vanishing-signal.md) →
+← [How different are the agents?](how-different-are-the-agents.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 

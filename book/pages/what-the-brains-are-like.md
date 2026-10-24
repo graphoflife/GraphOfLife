@@ -93,7 +93,7 @@ hidden layer ends in a sigmoid, an S-shaped squashing whose slope is at most
 layer to layer, not to make them larger. A five-layer sigmoid network started
 that way is close to blind. Deep learning met this problem when its networks
 first grew deep, and called it the **vanishing gradient**
-([How a signal fades through layers](vanishing-signal.md)).
+([How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers)).
 
 After 1,500 iterations the gain is 2.4 times a founder's; whether selection
 or mutation alone raised it, these brains cannot tell. But a gain of a
@@ -346,7 +346,7 @@ nothing depends on it.
 
 If blindness is built into the brain, the remedy is in the architecture too.
 Three changes would each give a brain a gain near 1
-([How a signal fades through layers](vanishing-signal.md)). They are fewer
+([How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers)). They are fewer
 layers, a squashing with a steeper slope, and larger starting weights.
 
 The first of these was tried on the way to [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").
@@ -401,7 +401,7 @@ The other remedies await a page still to come, *How big should a brain be?*
 
 - [What agents say to each other](what-agents-say-to-each-other.md): why the
   messages of a nearly blind brain are names, not news.
-- [How a signal fades through layers](vanishing-signal.md): why a deep network
+- [How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers): why a deep network
   of sigmoids is nearly blind, and the usual remedies.
 - [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
   what happened when the brains were given sight.
@@ -511,6 +511,6 @@ that lived to the end of their 3,000 iterations were read the same way.
 
 ← [Genotypes and lineages](genotypes-and-lineages.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [What agents say to each other](what-agents-say-to-each-other.md) →
 
-> [!info]- Pages that link here (25)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How different are the agents?](how-different-are-the-agents.md) · [How a signal fades through layers](vanishing-signal.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
+> [!info]- Pages that link here (24)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How different are the agents?](how-different-are-the-agents.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
 <!-- /turns -->

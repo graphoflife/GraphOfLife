@@ -174,7 +174,8 @@
       "title": "The brain",
       "file": "pages/the-brain.md",
       "topics": [
-        "simulation"
+        "simulation",
+        "brains"
       ],
       "kind": "explanation",
       "status": "written",
@@ -1028,19 +1029,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Every brain carries a whole number, its genotype, which a copy keeps and a change replaces. The new number remembers the old one as its parent, so the genotypes of a world form one family tree."
-    },
-    {
-      "id": "vanishing-signal",
-      "title": "How a signal fades through layers",
-      "file": "pages/vanishing-signal.md",
-      "topics": [
-        "brains",
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "A brain's inputs reach its outputs only by passing through every layer in between."
     },
     {
       "id": "eras-and-contests",

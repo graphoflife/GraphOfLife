@@ -129,6 +129,93 @@ input.
 with them in 64-bit arithmetic. A brain then takes a quarter of the memory of
 one stored in 64 bits.
 
+## How a signal fades through layers
+
+A brain's inputs reach its outputs only by passing through every layer in
+between. Each layer can let a change through larger or smaller. When every
+layer lets it through smaller, a deep network ends up nearly blind: its
+outputs barely move, whatever its inputs do. This is called the **vanishing
+signal**. In training by gradients it is the *vanishing gradient*
+(Hochreiter 1991; Glorot and Bengio 2010).
+
+### The gain of one layer
+
+Take one hidden layer of the brain:
+
+$$
+a = \sigma(W x + b), \qquad \sigma(z) = \frac{1}{1 + e^{-z}} .
+$$
+
+Move the input *x* by a small amount δ*x*. Each sum *z* moves by *W* δ*x*.
+Each output moves by the slope of the sigmoid at that sum, times that:
+
+$$
+\delta a_i = \sigma'(z_i) \, (W \delta x)_i , \qquad \sigma'(z) = \sigma(z)\,\bigl(1 - \sigma(z)\bigr) \le \tfrac14 .
+$$
+
+The slope of the sigmoid is at most ¼, at *z* = 0. It falls off on both
+sides: it is 0.10 at *z* = ±2 and 0.018 at *z* = ±4.
+
+A founder's weights have the standard deviation 1/√*k* for a fan-in of *k*
+([The neural network](#the-neural-network)). So the product *W* δ*x* is about
+as large as δ*x* itself: that is what the scale 1/√*k* is chosen for. One
+sigmoid layer then passes a change on at most about **a quarter** as large.
+This ratio is the layer's **gain**:
+
+$$
+g = \frac{\lVert \delta a \rVert / \sqrt{\text{outputs}}}{\lVert \delta x \rVert / \sqrt{\text{inputs}}} .
+$$
+
+In words: the root-mean-square change out, over the root-mean-square change
+in.
+
+### Layers multiply
+
+Gains multiply through the layers. Five sigmoid layers, each passing about a
+quarter, pass
+
+$$
+\left(\tfrac14\right)^5 \approx 0.001 .
+$$
+
+A change of 1 in every input moves the outputs by about a thousandth. So the
+outputs are set almost entirely by the brain's biases and by the average
+activity of its layers. What it sees hardly counts. The brain still computes
+something. It just computes nearly the same thing for every input.
+
+Measured, a B1 founder's gain is 0.0006, and an evolved B1 brain's 0.0015
+([What the brains are like](what-the-brains-are-like.md)). [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s brain has one
+hidden layer of 16 units, and a founder's gain of about 0.2
+([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
+
+### Why the signal matters for evolution
+
+Selection can only favour a brain that reacts to its situation if its
+reactions differ enough to matter. Take two candidates whose scores differ by
+a thousandth of a token's worth. For every decision of
+[One iteration, step by step](one-iteration.md), they are the same candidate.
+So a mutation that makes a brain attend to a neighbour's wealth has almost no
+effect to be selected for. Only mutations that move what the brain does
+*whatever it sees* have any.
+
+### The usual remedies
+
+Deep learning met this problem when networks first grew deep, and found
+three remedies:
+
+- **Fewer layers.** Each layer removed multiplies the gain by about four.
+- **A different squashing.** tanh has slope 1 at 0, four times the
+  sigmoid's. A *rectifier* (ReLU), max(0, *z*), has slope 1 wherever it is
+  active (Nair and Hinton 2010).
+- **Larger starting weights**, scaled to the squashing so that each layer's
+  gain starts near 1 (Glorot and Bengio 2010). For rectifiers that is a
+  standard deviation of √(2/*k*) (He and others 2015). For sigmoids it is
+  about four times what suits tanh, since the sigmoid's slope is a quarter of
+  tanh's.
+
+B2 took the first remedy. *How big should a brain be?*, a page still to be
+written, is to try the others.
+
 ## From outputs to decisions
 
 A look gives one column of 45 outputs per candidate. Think of each column as
@@ -248,7 +335,8 @@ The answer is selection, but only on constants.
 Selection did set these numbers, the same way in every world: have few
 children, spread the stake, mark every token revolutionary. But none of these
 depends on the situation. The brains are nearly blind: their outputs move by
-about a thousandth of a change in what they see. So they decide almost the
+about a thousandth of a change in what they see
+([How a signal fades through layers](#how-a-signal-fades-through-layers)). So they decide almost the
 same, whatever their situation.
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 played evolved brains against their founders. By iteration 50, they hold about
@@ -275,11 +363,24 @@ world run that way.
 - [Questioning the mechanics](questioning-the-mechanics.md): the rules
   themselves, examined one by one.
 
+## References
+
+- Glorot, X. and Bengio, Y. (2010). Understanding the difficulty of training
+  deep feedforward neural networks. *Proceedings of AISTATS*, 249–256.
+- He, K., Zhang, X., Ren, S. and Sun, J. (2015). Delving deep into
+  rectifiers. *Proceedings of ICCV*, 1026–1034.
+- Hochreiter, S. (1991). *Untersuchungen zu dynamischen neuronalen Netzen*.
+  Diploma thesis, Technische Universität München.
+- Nair, V. and Hinton, G. E. (2010). Rectified linear units improve
+  restricted Boltzmann machines. *Proceedings of ICML*, 807–814.
+
 <!-- turns -->
 ---
 
 ← [One iteration, step by step](one-iteration.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Questioning the mechanics](questioning-the-mechanics.md) →
 
-> [!info]- Pages that link here (18)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [The share function f(a, b)](share-function.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [The even split](even-split.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [How a signal fades through layers](vanishing-signal.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [What a brain can compute](what-a-brain-can-compute.md) · [The lab, the engine and pilots](the-lab.md)
+**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+
+> [!info]- Pages that link here (20)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The even split](even-split.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [What a brain can compute](what-a-brain-can-compute.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->

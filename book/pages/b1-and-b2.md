@@ -35,7 +35,7 @@ tokens: 100 founders on [the starting ring](starting-ring.md).
 
 B1's brains barely see. Each of the five layers passes on about a quarter of
 a change, so a change in what a founder sees reaches what it does at a
-[gain](vanishing-signal.md) of 0.0006.
+[gain](the-brain.md#how-a-signal-fades-through-layers) of 0.0006.
 
 ## B2: a world that cannot break
 

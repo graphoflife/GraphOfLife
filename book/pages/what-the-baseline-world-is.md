@@ -15,7 +15,7 @@ The first baseline, B1, has been measured from every side, in thirty worlds
 of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."). All six theses written before its runs failed, and each
 failure taught something new about the world. Together, the measurements show
 a world of places, not individuals: the rules shape its network and its
-wealth, while its [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") barely see and change almost every game. Read for
+wealth, while its brains barely see and change almost every game. Read for
 open-ended evolution, B1 learns what it learns in its first fifty to a
 hundred iterations, builds no organisations, and has seven obstacles in its
 way, its blind brains first. Giving the brains sight broke the worlds, so the
@@ -98,7 +98,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
   and lines that bring a whole world down to one [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s descendants by
   about iteration 1,000 (175 at 10,000 tokens)
   ([Genotypes and lineages](genotypes-and-lineages.md)).
-- **Brains with a [gain](vanishing-signal.md) of 0.0015**: a change in what a
+- **Brains with a [gain](the-brain.md#how-a-signal-fades-through-layers) of 0.0015**: a change in what a
   brain sees reaches what it does at a seven-hundredth of its size. Selection
   has set their constants alike in every world: a child in 3.6% of cases, the
   stake spread in 98%. In the median world 42% of agents score every
@@ -504,7 +504,7 @@ adds that the tags already exist. A message is the name of its writer's
 genotype, and kin could tell each other by it, if a brain could compare what
 it reads. The remedy is in the architecture: fewer layers, a steeper
 squashing, larger starting weights
-([How a signal fades through layers](vanishing-signal.md)).
+([How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers)).
 
 [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
 tried fewer layers, as the first step towards B2. One hidden layer of 16
