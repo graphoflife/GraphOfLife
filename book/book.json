@@ -1466,7 +1466,8 @@
       "kind": "experiment",
       "experiments": [
         "E38",
-        "E39"
+        "E39",
+        "E40"
       ],
       "status": "ready",
       "added": "2026-10-22",

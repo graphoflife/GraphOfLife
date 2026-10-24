@@ -438,8 +438,13 @@ def _experiment_screen(name: str) -> List[RunSpec]:
     base = baseline("B1")
     specs: List[RunSpec] = []
     for draw in found:
-        condition = {"name": f"world {draw['world']}", "set": draw["set"], "seeds": [draw["seed"]]}
-        specs.extend(_condition_runs(name, "B1", base, world, record, iterations, condition, None, budget))
+        # A drawn world-level setting, such as its founders, belongs to that world itself:
+        # each drawn world is a condition of its own.
+        own = {k: v for k, v in draw["set"].items() if k in WORLD}
+        changed = {k: v for k, v in draw["set"].items() if k not in WORLD}
+        condition = {"name": f"world {draw['world']}", "set": changed, "seeds": [draw["seed"]]}
+        specs.extend(_condition_runs(name, "B1", base, {**world, **own}, record, iterations, condition,
+                                     None, budget))
     for ref, seed in gol_screen.references(screen):
         condition = {"name": f"{ref}, for reference", "seeds": [seed]}
         specs.extend(_condition_runs(name, ref, baseline(ref), world, record, iterations, condition, None,

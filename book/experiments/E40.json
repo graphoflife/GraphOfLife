@@ -1,0 +1,22 @@
+{
+ "id": "E40",
+ "title": "A screen of random worlds, round 3: the author's settings",
+ "thesis": {
+  "claim": "This round makes no prediction. A hundred worlds are drawn from the settings the author chose on 24 October 2026, setting by setting (research/screen/walkthrough.md), and looked at as if no world had been seen before.",
+  "why": "The author: \"No control simulations. 100 simulations. We just look at them, as we have not seen any simulation before. But we use already established analysis methods to analyse them and search for things we want to see.\" What makes a world interesting is to be defined together with the author once the round has run.",
+  "confirm": "Nothing confirms a survey. Every world is read by the notebook's measures, each averaged over iterations 100 to 3,000, and the round is judged with the author afterwards.",
+  "refute": "Nothing refutes one either: if no world turns out interesting, the page says so, with what each world missed."
+ },
+ "screen": {
+  "sampler": 2,
+  "seed": 3,
+  "worlds": 100,
+  "tokens": 30000,
+  "iterations": 3000,
+  "record": {
+   "archive_every": 250,
+   "checkpoint_every": 100,
+   "heavy_every": 25
+  }
+ }
+}

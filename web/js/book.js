@@ -392,7 +392,8 @@ const Book = {
       const labels = {
         ready: 'ready to run', queued: 'queued', running: `running · ${share}%`,
         paused: `paused · ${share}%`, stopped: `not running · ${share}%`,
-        finished: 'finished · to analyse', blocked: 'blocked', invalid: 'plan invalid'
+        finished: 'finished · to analyse', blocked: 'blocked', invalid: 'plan invalid',
+        withdrawn: 'withdrawn'
       };
       return { state: live.state, label: labels[live.state] || live.state };
     }
@@ -542,8 +543,9 @@ const Book = {
   liveHtml(name, status, lab) {
     const chapter = this.pages().find(c => (c.experiments || []).includes(name)) || {};
     const state = this.describe({ ...chapter, experiments: [name] }, lab);
-    // A plan the lab cannot carry out has no runs and no estimate: only its reason.
-    if (status.state === 'invalid') {
+    // A plan the lab cannot carry out, or one withdrawn, has no runs and no estimate:
+    // only its reason.
+    if (status.state === 'invalid' || status.state === 'withdrawn') {
       return `<div class="book-exp-head"><span class="book-chip book-chip-${state.state}">${state.label}</span></div>`
         + `<p class="book-reason">${Markdown.escape(status.reason || 'the lab cannot read this plan')}</p>`;
     }

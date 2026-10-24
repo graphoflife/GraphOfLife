@@ -226,4 +226,5 @@ settings in its `meta.json`.
 | screen | worlds | sampler | where |
 |---|---|---|---|
 | `E38` | 50 drawn, and 2 of B2 at 20,000 tokens for reference | 1, round seed 1 | the book's lab |
-| `E39` | 50 drawn, and 2 of B2 at 20,000 tokens for reference | 1, round seed 2 | the book's lab |
+| `E39` | 50 drawn, and 2 of B2 at 20,000 tokens for reference; withdrawn unplayed on 2026-10-24 | 1, round seed 2 | the book's lab |
+| `E40` | 100 drawn at 30,000 tokens, no reference worlds | 2, round seed 3 | the book's lab |

@@ -222,17 +222,13 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     ids = {s.lab["seed"]: s.run_id for s in gol_plan.experiment_runs(name)}
     budget = (f", or until {sc['budget_hours']:g} hours of playing have gone by: a world that slow stops "
               "as too slow" if sc.get("budget_hours") else "")
+    how, only = gol_screen.WORDS[int(sc["sampler"])]
     lines = [f"**{number(len(found))} worlds**, each with its settings drawn at random (sampler "
              f"{sc['sampler']}, round seed {sc['seed']}): B1's rules, changed as the draw says, at "
              f"{number(sc['tokens'])} tokens, played for {number(sc['iterations'])} iterations — or until "
              f"the world dies out{budget}.\n",
-             "- **How a setting is drawn:** an on/off switch is on in half the worlds, and a choice among "
-             "several options takes each equally often; a number keeps its default in three worlds of "
-             "four, and otherwise takes one of a few levels; the size of a message and the number of noise "
-             "inputs are 0 in one world of ten (`gol_screen.py`).",
-             "- **Only where it can matter:** buying life only with old age, the mate's kind only with "
-             "mixing, a search's steering and consent only with a search, messages before the game and "
-             "the pooled self-message only with messages."]
+             f"- **How a setting is drawn:** {how} (`gol_screen.py`).",
+             f"- **Only where it can matter:** {only}."]
     refs = gol_screen.references(sc)
     if refs:
         lines.append(f"- **Beside them, for reference:** " + ", ".join(

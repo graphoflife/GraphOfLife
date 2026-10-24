@@ -19,6 +19,17 @@ We turn this picture into six criteria and check them at [iteration](one-iterati
 - A world that is alive and misses at most one of the other five is still
   **interesting**: worlds vary, and one miss should not rule a world out.
 
+These are the criteria rounds 1 and 2 of the screen were judged by. On 24
+October 2026 the author revised them for round 3
+(`research/screen/walkthrough.md`). Every measure becomes an average over
+iterations 100 to 3,000, not a reading at one moment. A single loss may cut
+off up to 15% of a world, and a true space is 1.3 times as wide as its twin,
+of 2 to 5 dimensions. Diversity is judged statistic by statistic: a world is
+not diverse if 80% of its agents hold the same tokens (or none holds more
+than 3), have the same links in the core, the same age or the same [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."),
+or if nearly all take the same decision. What makes a world interesting is
+decided with the author once round 3 has run.
+
 ## The six criteria
 
 <!-- table criteria/criteria -->
@@ -57,7 +68,7 @@ Each criterion stands for one part of the picture.
    per agent wired at random. A folded world fails this; a true space passes
    ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 5. **Diverse.** Evolution needs differences to choose from. We ask that the
-   agents' tokens, links, ages and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") spread more widely than in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), our standard world, by the *[diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.")*
+   agents' tokens, links, ages and genotypes spread more widely than in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), our standard world, by the *[diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.")*
    ([Healthy and rich](healthy-and-rich.md)). And we
    ask that their decisions differ more: the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), put in the same
    situations, fall into more kinds of staking than in B2's median
@@ -132,6 +143,13 @@ page and the judge always agree.
   page that draws the line. The line itself, and every verdict judged by it,
   are unchanged. The theses of Experiments 31, 32, 38 and 39 keep the old
   words, as a thesis does, and mean this line.
+- **24 October 2026.** The author found the criteria too harsh, and revised
+  them for round 3 (`research/screen/walkthrough.md`): averages over
+  iterations 100 to 3,000, cuts up to 15%, a width of 1.3 and a dimension of 2
+  to 5, and diversity statistic by statistic instead of one score against
+  B2's median world. Even B2's own ten worlds met the old criteria only twice
+  in ten as interesting, and never as healthy. Round 1 keeps its verdict by
+  the criteria it was judged by.
 
 <!-- turns -->
 ---

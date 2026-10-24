@@ -724,6 +724,67 @@ def test_a_screen_draws_its_worlds_by_its_rules():
     assert len({json.dumps(w, sort_keys=True) for w in worlds}) == n
 
 
+def test_the_second_sampler_draws_the_authors_choices():
+    """
+    The author's walkthrough of 2026-10-24: tanh brains of three to five layers, mixing in one world
+    of three with parents as mates, coalitions only in the largest-stake game, a paying mate only
+    with mixing, where upkeep goes only with upkeep, the cap off in three worlds of four, founders
+    drawn; and nothing the walkthrough fixed at B1's value is drawn at all. The first sampler's
+    worlds are what they were.
+    """
+    import gol_screen
+    base = gol_plan.baseline("B1")
+    n = 2000
+    worlds = [gol_screen.draw(2, 7, i)[0] for i in range(1, n + 1)]
+    full = [gol_screen.full(w, 2) for w in worlds]
+    share = lambda key, test: sum(1 for w in full if test(w[key])) / n
+    assert all(w["hidden_activation"] == "tanh" for w in full)
+    assert all(3 <= len(w["hidden_layers"]) <= 5 and len(set(w["hidden_layers"])) == 1
+               and w["hidden_layers"][0] in (16, 32, 50) for w in full)
+    assert 0.29 < share("mix_at_birth", lambda v: v) < 0.38
+    assert all(w["mix_mates"] == ("parents" if w["mix_at_birth"] else "any") for w in full)
+    assert all(not w["mate_pays"] for w in full if not w["mix_at_birth"])
+    assert all(not w["allow_revolutions"] for w in full if w["contest"] == "lottery")
+    assert all(w["upkeep_to"] == "end" for w in full if w["link_upkeep"] == "off")
+    assert 0.70 < share("valence", lambda v: v == 0) < 0.80
+    assert {w["n_nodes"] for w in full} == {0, 150, 600}
+    assert {w["redistribution"] for w in full} == {"uniform", "poorest", "newborns", "parents", "children",
+                                                  "local"}
+    drawn = {s[0] for s in gol_screen.space(2)}
+    for fixed in ("incumbency", "keep_home", "max_age", "min_child", "birth_links", "prune_needs",
+                  "prune_after", "inactive_window", "child_floor", "buy_life", "proto"):
+        assert fixed not in drawn, f"the second sampler draws {fixed}, which the author fixed"
+    for w in worlds:
+        SimConfig.from_dict({**base, **w, "seed": 1}, stored=False)
+    # Round 1's fifty worlds, as its judgement recorded them, are drawn again exactly.
+    with open(os.path.join(runner.ROOT, "research", "screen", "E38.json")) as f:
+        round_1 = [w for w in json.load(f)["worlds"] if w.get("drawn")]
+    assert len(round_1) == 50
+    for w in round_1:
+        assert gol_screen.draw(1, 1, w["seed"] - 1000)[0] == w["set"], w["id"]
+
+
+def test_a_screened_world_carries_its_own_founders_and_a_withdrawn_round_never_runs():
+    """
+    A drawn world-level setting belongs to its world, which is a condition of its own; a plan
+    withdrawn unplayed stays readable, shows as withdrawn with its reason, and the lab neither
+    queues nor plays it.
+    """
+    second = screen_plan("E91", worlds=6)
+    second["screen"]["sampler"] = 2
+    withdrawn = screen_plan("E92", worlds=2)
+    withdrawn["withdrawn"] = "Withdrawn unplayed, for a test."
+    with screen_lab(second, withdrawn):
+        for spec, draw in zip(gol_plan.experiment_runs("E91"), gol_plan.screen_draws("E91")):
+            assert spec.config["n_nodes"] == draw["set"].get("n_nodes", 0)
+            assert "n_nodes" not in spec.lab["set"]
+        assert gol_plan.experiment_runs("E92"), "a withdrawn plan's worlds are still on record"
+        refused(lambda: gol_lab.request(run="E92"), "withdrawn")
+        status = gol_lab.status()["experiments"]["E92"]
+        assert status["state"] == "withdrawn" and "for a test" in status["reason"], status
+        assert gol_lab.jobs(["E92"], None) == []
+
+
 def test_a_screen_keeps_its_worlds_as_it_grows_and_names_them_for_what_they_are():
     """
     Each world is drawn from its own hash, so a round grown by more worlds keeps the ones it had,

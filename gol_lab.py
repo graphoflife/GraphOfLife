@@ -289,6 +289,7 @@ def request(run: Optional[str] = None, pause: Optional[bool] = None,
     every few seconds; nothing signals it.
     """
     if run is not None:
+        _refuse_withdrawn(run)
         experiment_runs(run)                       # refuses a plan it cannot carry out
 
     def change(control: Dict[str, Any]) -> None:
@@ -420,6 +421,7 @@ def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
     readable = []
     for name in queue:
         try:
+            _refuse_withdrawn(name)
             experiment_runs(name)
             readable.append(name)
         except LabError as exc:
@@ -722,6 +724,13 @@ def _shared_runs() -> Dict[str, List[str]]:
     return shared
 
 
+def _refuse_withdrawn(name: str) -> None:
+    """A plan withdrawn unplayed is kept on record, and never run."""
+    withdrawn = read_plan(name).get("withdrawn")
+    if withdrawn:
+        raise LabError(f"{name} was withdrawn: {withdrawn}")
+
+
 def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
                       alive: bool, everyone: Optional[Dict[str, List[str]]] = None) -> Dict[str, Any]:
     """
@@ -729,8 +738,14 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
     will take. Its state is one of ready (not asked for), queued (asked for,
     waiting its turn), running, paused (by you, or by the lab with a reason),
     stopped (asked for, but no lab is running — after a restart, say),
-    finished, blocked or invalid.
+    finished, blocked, invalid or withdrawn (kept on record, never to run).
     """
+    try:
+        withdrawn = read_plan(name).get("withdrawn")
+    except LabError as exc:
+        return {"state": "invalid", "reason": str(exc), "runs": []}
+    if withdrawn:
+        return {"state": "withdrawn", "reason": str(withdrawn), "runs": []}
     try:
         specs = experiment_runs(name)
         workers = min(control["workers"], workers_cap(name) or control["workers"])
