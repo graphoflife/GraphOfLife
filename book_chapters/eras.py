@@ -158,12 +158,14 @@ def eras(ch: F.Chapter) -> None:
                        "family has several worlds, runs from its lowest world to its highest; the line is the "
                        "median. A population at an equilibrium would score 0."),
               recipe=recipe(RUNS, "the worlds the archives keep",
-                            ["Load the world at the iteration and play one game, so its messages are fresh.",
+                            ["Load the world at the iteration and play one whole iteration, reproduction and then "
+                             "a game, so its messages are fresh.",
                              "Draw the random inputs 8 times and turn every brain's outputs into stakes as the "
                              "engine does: the others' play, as 8 draws.",
                              "For up to 300 agents with three tokens or more, score its own play and the best "
                              "of a set of replies (everything home; the cheapest way to keep its node and take "
-                             "the cheapest neighbours; taking without defending) by the nodes it holds after the "
+                             "the cheapest neighbours; taking without defending; its own stakes of each draw) "
+                             "by the nodes it holds after the "
                              "game, averaged over the 8 draws (`python3 research/oee/checks/exploitability.py "
                              "RUN:ITERATION … --draws 8 --sample 300`).",
                              "The gain is the best reply's score less the own play's, averaged over the agents."]))

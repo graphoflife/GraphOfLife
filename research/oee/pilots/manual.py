@@ -4,7 +4,10 @@ Hand-written strategies in place of brains, and an invasion test.
 A strategy reads exactly what a brain reads — the input rows X, one column per
 candidate, column 0 the agent itself — and writes exactly what a brain writes:
 the output rows Y that the engine turns into decisions. So it plugs into the
-world where a brain does and can do nothing an evolved brain could not.
+world where a brain does: it sees only what a brain sees, and acts only through
+what a brain decides. But it may compute what no brain can. A B2 brain scores
+each candidate's column on its own, so no B2 brain can write news of a third
+agent into a message, as the factory does (book/pages/what-a-brain-can-compute.md).
 
 Teammates recognise each other by what they write: the first four numbers of
 every message a strategy sends are a fixed signature (an evolved brain could

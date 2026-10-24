@@ -912,12 +912,13 @@ def stopping(ch: F.Chapter) -> None:
               x={"label": "iteration the brains are taken from"},
               y={"label": "nodes a best reply would gain, per agent and game", "min": 0},
               series=lines,
-              caption=("For a sample of 300 agents with at least three tokens: how many more nodes each "
-                       "would hold after one game with its best reply to everyone else's play than with "
+              caption=("For a sample of up to 300 agents with at least three tokens: how many more nodes "
+                       "each would hold after one game with its best reply to everyone else's play than with "
                        "its own, averaged. Zero would be an equilibrium. Thin lines are single worlds, "
                        "thick ones the median world of each condition."),
               recipe=recipe(E16_RUNS, ARCHIVE.replace("every 50", "every 100"), [
-                  "Load the world of each era, play one game so that its messages are fresh, and draw "
+                  "Load the world of each era, play one whole iteration (reproduction, then a game) so "
+                  "that its messages are fresh, and draw "
                   "the random inputs eight times; for each draw, turn every agent's brain outputs into "
                   "stakes as the engine does (`research/oee/checks/exploitability.py`).",
                   "Score a way of staking by the nodes an agent holds after the game (its own, and "
@@ -925,9 +926,10 @@ def stopping(ch: F.Chapter) -> None:
                   "engine's rule, averaged over the eight draws.",
                   "An agent's best reply is the best of: everything at home; for each draw, the "
                   "cheapest stakes that keep its node and then take the cheapest neighbours (one token "
-                  "above the largest rival offer), or that only take them. Its exploitability is the "
-                  "best reply's score minus its own; average over the agents (see the note "
-                  "*Exploitability*)."]))
+                  "above the largest rival offer), or that only take them; or its own stakes of each "
+                  "draw. Its exploitability is the "
+                  "best reply's score minus its own; average over the agents (see "
+                  "[Exploitability](eras-and-contests.md#exploitability))."]))
     ch.number("eras-and-contests", {c: {e: describe([r["eras-and-contests"] for w in exploited[c] for r in w["rows"]
                                                   if r["iteration"] == e]) for e in E16_ERAS}
                                  for c in E16_CONDITIONS})
