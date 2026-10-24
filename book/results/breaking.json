@@ -172,7 +172,7 @@
  "figures": {
   "risk": {
    "title": "Does a fragile world lose more?",
-   "caption": "Every game from iteration 500 on of the 30 worlds. x: before the game, the largest share of the world that one bridge held to the rest \u2014 if that one connection were cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
+   "caption": "Every game from iteration 500 on of the 30 worlds. x: after the game's unused connections are cut, just before the cull, the largest share of the world that one bridge held to the rest \u2014 if that one connection were cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
    "recipe": "**Runs.** The 30 baseline runs `B1-100000-s001` \u2026 `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).\n\n1. Take the rows with `phase` = 2 and 500 \u2264 `iteration` \u2264 1,499: `cutRiskBefore`, and `orphaned` / `nodes_before`.\n2. Plot one against the other; average y in classes of x.\n\n**To make it again:** `python3 book_figures.py breaking`."
   },
   "deaths-by-size": {

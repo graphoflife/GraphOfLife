@@ -515,14 +515,14 @@ def breaking(ch: F.Chapter) -> None:
     pick = rng.choice(len(risk), size=min(6000, len(risk)), replace=False)
     ch.figure(
         "risk", title="Does a fragile world lose more?",
-        x={"label": "worst single cut before the game: share of agents behind one bridge", "min": 0, "max": 0.5},
+        x={"label": "worst single cut before the cull: share of agents behind one bridge", "min": 0, "max": 0.5},
         y={"label": "share of agents cut off in the game", "min": 0, "max": 0.5},
         series=[{"label": "one game (6,000 drawn at random)", "x": risk[pick].tolist(), "y": culled[pick].tolist(),
                  "points": True, "size": 3, "colour": ORANGE, "alpha": 0.4},
                 line(bx, by_, "mean in classes of 0.05", "#eef4fa", width=2),
                 line([0, 0.5], [0, 0.5], "the whole worst cut lost", BLUE, width=1, dash=[4, 4])],
-        caption=f"Every game from iteration 500 on of {W.lived}. x: before the game, "
-                "the largest share of the world that one bridge held to the rest — if that one connection were "
+        caption=f"Every game from iteration 500 on of {W.lived}. x: after the game's unused connections are cut, "
+                "just before the cull, the largest share of the world that one bridge held to the rest — if that one connection were "
                 "cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the "
                 "game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.",
         recipe=recipe(W.surviving_text(), STATS_FILE,

@@ -72,7 +72,7 @@ If the worst bridge failed, the game would cut off that ninth. Does it?
 <!-- figure breaking/risk -->
 ![Does a fragile world lose more?](../figures/breaking/risk.svg)
 
-**Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: before the game, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
+**Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: after the game's unused connections are cut, just before the cull, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -378,6 +378,11 @@ and how.
   - It had said that a line of brains that keeps everything at home can cut
     its whole region off, and die with it. One did, in the world of seed 1. In
     the large worlds no such cut shows.
+- **24 October 2026.** The figure *Does a fragile world lose more?* labelled
+  its worst cut as taken "before the game". It is taken from the game's row:
+  after the game's unused connections are cut, just before the cull. The
+  figure's axis and caption now say so; its numbers are unchanged
+  ([When the cut risk is read](bridges.md#when-the-cut-risk-is-read)).
 
 <!-- turns -->
 ---
