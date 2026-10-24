@@ -599,8 +599,9 @@ stopped replacing its dead.
 <!-- /figure -->
 
 **Hardly.** In the pairs the plan named, the brains of 25,000 beat those of
-10,000 in seed 6 (73% of a contested world) and narrowly in seed 5 (56%). In
-seed 4 they did no better (45%). The brains of 50,000 took 55% from those of
+10,000 in seed 6 (72% of a contested world, the median of four contests)
+and narrowly in seed 5 (56%). In
+seed 4 they did no better (45%). The brains of 50,000 took 54% from those of
 25,000 in seed 5, and lost to them in seed 6 (42%). Over the first 10,000
 iterations, the mixed worlds' later brains had won 84%, then 66%, then 54%
 ([Does evolution go on?](#does-evolution-go-on)). The steps shrink towards
@@ -824,6 +825,11 @@ iteration 10,000 with the engine that made them. So they keep their names.
   three tokens or fewer, against 2,257 and 63%. Seed 6 ended about where it
   began: 1,324 agents and 43%, against 1,302 and 42%. Both stayed large and
   fairly poor.
+- **24 October 2026.** Two scores of [Did evolution go on?](#did-evolution-go-on)
+  were the means of their four contests, 73% and 55%, beside medians for the
+  rest. As medians, like the others and like the thesis of
+  [Every era against three](every-era-against-three.md), they are 72% and 54%
+  (`GraphOfLifeRuns/.pilots/e18_T100.json`).
 
 <!-- turns -->
 ---

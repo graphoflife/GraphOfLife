@@ -137,7 +137,7 @@ over a world's life
   towards the well connected in B1, towards the richer in B2. Only alliances
   make gifts go round (+0.04 to +0.14 over chance), and not for long
   ([Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go)).
-- **Takeovers circulate more than chance** (+0.07 in B2, +0.24 in B1), but
+- **Takeovers circulate more than chance** (+0.065 in B2, +0.24 in B1), but
   never twice in the same place: their persistence is 0.00.
 - **The groups tokens stay in** are, in B1, the network's own regions. A null
   model that keeps the network and redeals the stakes compresses the flow as
@@ -205,6 +205,10 @@ births fills a world**, to half as many agents again, and poorer ones
   100,000 tokens; in the largest worlds they are 6.5 to 6.75. It also said
   that batch H was testing the estate left to a dead agent's own children:
   that was done, and is in [Who inherits?](who-inherits.md).
+- **24 October 2026.** This page gave the circulation of takeovers above
+  chance in B2 as +0.07. It is 0.065 (0.0647 in `book/results/patterns.json`),
+  as [Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go)
+  now gives it.
 
 <!-- turns -->
 ---
