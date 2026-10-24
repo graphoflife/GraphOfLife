@@ -242,6 +242,6 @@ come next:
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (6)
-> [How this notebook is written](how-this-notebook-is-written.md) · [Other contests: a lottery, and alliances](another-game.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (7)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Who helps whom](who-helps-whom.md) · [Other contests: a lottery, and alliances](another-game.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
