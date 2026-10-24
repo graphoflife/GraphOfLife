@@ -865,6 +865,6 @@ section to `book/results/b1raiders.json`.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going), [Groups and cooperation](../README.md#groups-and-cooperation), [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (4)
-> [How a coalition takes a node](revolution.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md)
+> [!info]- Pages that link here (5)
+> [How a coalition takes a node](revolution.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md)
 <!-- /turns -->
