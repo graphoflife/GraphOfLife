@@ -99,7 +99,7 @@ def brains(ch: F.Chapter) -> None:
         caption="One dot per world that lived to iteration 3,000, at its mean over iterations 500 to "
                 "2,999. In each panel, the left column holds the 26 baseline worlds, whose brains "
                 "change (blue); the right column the 30 worlds whose brains never change, coloured by "
-                "the kind of world each became (see the figure of the four kinds below): violet frozen, "
+                "the kind of world each became (see the figure of the four kinds above): violet frozen, "
                 "green nearly frozen, yellow breeding, red teeming. The bars are the medians. The "
                 "panel of births has a logarithmic axis; the 15 frozen worlds, which had no births at "
                 "all, are drawn at its bottom, 0.001. No world deciding by chance lived more than 3 "

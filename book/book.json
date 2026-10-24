@@ -981,7 +981,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "Can a world live if its agents decide by pure chance? What happens to a world whose brains never change — whose agents keep the founders' brains, copied, forever? Do the worlds that evolve and the worlds that do not differ on average, or in how alike they are?"
+      "summary": "Experiment 7 took away the brains of the first baseline, B1, in two ways, for the same thirty seeds. Worlds whose every decision was drawn by chance all died within three iterations, while worlds of random, unselected brains live: the brains matter."
     },
     {
       "id": "brains-replaced-by-their-average",
