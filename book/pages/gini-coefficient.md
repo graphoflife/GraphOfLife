@@ -367,7 +367,7 @@ recorded after every phase.
 <!-- turns -->
 ---
 
-← [The largest and the smallest](the-largest-and-the-smallest.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) →
+← [The largest and the smallest](the-largest-and-the-smallest.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
 
 > [!info]- Pages that link here (17)
 > [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Genotypes, families and the common ancestor](genotype.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [What a run records](frames-and-stats.md) · [Mobility](mobility.md) · [How many directions a cloud of points uses](participation-ratio.md)

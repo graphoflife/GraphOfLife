@@ -39,7 +39,7 @@ node, held by whoever holds it then.
 | `age` | iterations since it was born |
 | `clones` | agents carrying its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), itself included |
 | `degree` | its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") |
-| `curvature` | [token curvature](token-curvature.md): the sum over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of their tokens minus its own |
+| `curvature` | [token curvature](gains-and-losses.md#token-curvature): the sum over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of their tokens minus its own |
 | `nbr_tokens`, `nbr_max` | its neighbours' mean tokens, its richest neighbour's |
 | `poorer_nbrs` | the share of its neighbours holding fewer tokens than it |
 | `nbr_degree` | its neighbours' mean connections |
@@ -143,7 +143,7 @@ Having a child next is hardly predictable in either world (at most 0.18).
 
 Heat flows from hot to cold in proportion to the difference: a node's
 temperature changes by its curvature, the sum of its neighbours'
-temperatures minus its own (the note [*Token curvature*](token-curvature.md)).
+temperatures minus its own (the note [*Token curvature*](gains-and-losses.md#token-curvature)).
 An even split of every agent's stake over itself and its neighbours would
 move tokens the same way, by the curvature divided by connections plus one
 ([Physical inspiration](physical-inspiration.md)). Both worlds do run downhill. Peaks

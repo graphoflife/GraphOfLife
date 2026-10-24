@@ -284,8 +284,9 @@
     },
     {
       "name": "share-out",
-      "page": "gains-losses-and-the-share-out",
-      "says": "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random."
+      "page": "gains-and-losses",
+      "says": "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.",
+      "anchor": "gains-losses-and-the-share-out"
     },
     {
       "name": "home stake",
@@ -409,8 +410,9 @@
     },
     {
       "name": "token curvature",
-      "page": "token-curvature",
-      "says": "How much richer an agent's neighbourhood is than the agent itself."
+      "page": "gains-and-losses",
+      "says": "How much richer an agent's neighbourhood is than the agent itself.",
+      "anchor": "token-curvature"
     },
     {
       "name": "circulation",

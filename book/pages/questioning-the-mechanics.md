@@ -451,7 +451,7 @@ empty. This one is not. Whether a region lives depends on its connection to
 the rest of the world, however well it is doing inside. The thesis of
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
 reasoned that "nothing in the rules reaches across the world" except the
-[share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random."); this rule does too.
+share-out; this rule does too.
 
 And it forbids a world from ever splitting into populations that go their own
 ways. In nature, that isolation is how most new species begin (Mayr 1942).

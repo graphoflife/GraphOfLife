@@ -130,7 +130,7 @@ same places in every picture. What each colouring shows:
 - **Change in the last game.** Almost everything is dark: most agents ended the
   game with what they had or close to it ([Gains and losses](gains-and-losses.md)).
   The few bright dots are the big winners and losers of the game.
-- **[Token curvature](token-curvature.md "How much richer an agent's neighbourhood is than the agent itself.") before the game.** Blue dots are richer than their
+- **Token curvature before the game.** Blue dots are richer than their
   neighbourhood (hills), red dots poorer (valleys). The hubs are blue, and the
   clump around the largest hub is red: every agent there is poorer than its
   rich neighbour. The landscape of wealth is a set of peaks with valleys

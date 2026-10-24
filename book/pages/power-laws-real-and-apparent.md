@@ -247,7 +247,7 @@ and a rich agent with one or two connections dies in one game in ten.
 That suggests a different mechanism, also a classic. An agent's tokens are
 multiplied, game after game, by a random factor — sometimes a big gain, more
 often a loss — while a floor holds up the poorest (a node with nothing dies,
-and the [share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") tops up the poor). Random multiplication with a floor
+and the share-out tops up the poor). Random multiplication with a floor
 produces a power-law tail (Champernowne 1953; Kesten 1973; Levy and Solomon
 1996; Gabaix 1999 for the sizes of cities). Again a hypothesis, which the
 simplest test would be to look for.
@@ -357,5 +357,5 @@ To make every figure of this page: `python3 book_figures.py powerlaws`.
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (12)
-> [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Fitting a power law properly](power-law-fit.md) · [The power spectrum of a time series](power-spectrum.md)
+> [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Fitting a power law properly](power-law-fit.md) · [The power spectrum of a time series](power-spectrum.md)
 <!-- /turns -->

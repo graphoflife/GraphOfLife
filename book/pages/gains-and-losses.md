@@ -1,4 +1,4 @@
-# Gains and losses
+# Gains and losses: who gains, who loses, and the share-out
 
 > [!question] Questions of this page
 > - What does one game do to the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."): how many die, lose, keep exactly what
@@ -7,7 +7,8 @@
 >   with few [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")?
 > - Do [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") run "downhill", from agents richer than their [neighbours](the-world.md#the-network "An agent joined to another by a connection.") to
 >   agents poorer than them?
-> - How large is the lottery in which the tokens of the dead are dealt out?
+> - How large is the lottery in which the tokens of the dead are dealt out,
+>   and how is it drawn?
 
 ## In short
 
@@ -60,6 +61,66 @@ The worlds are the thirty [B1](b1-and-b2.md "The first baseline: the algorithm e
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)). This page was first written
 from the thirty worlds of 10,000 tokens; where those differ, both numbers are
 given.
+
+## Gains, losses and the share-out
+
+Every frame of a run records each agent's change of tokens over the phase,
+for every agent alive at its end. This change is `delta`: its tokens now
+minus its tokens when the phase began. A newborn counts its whole endowment as gained. Five statistics of
+every frame sum these changes up.
+
+### The five statistics
+
+| field | definition |
+|---|---|
+| `gainers` | agents alive at the end with `delta` > 0 |
+| `losers` | agents alive at the end with `delta` < 0 |
+| `maxTokenAdded` | the largest `delta` |
+| `maxTokenLost` | minus the smallest `delta`, as a positive number |
+| `redistributed` | the tokens the cleanup dealt out among the survivors |
+
+The agents with `delta` = 0 are counted by neither. There are
+`nodes` − `gainers` − `losers` of them.
+
+### Why gains and losses do not balance
+
+Tokens are never made or destroyed, so one might expect the gains to equal
+the losses. They do not, because a frame only describes the agents **still
+alive**. An agent that died in the phase lost everything. But it is not in
+the frame, so its loss is never counted. The tokens it let go of turn up as
+gains of the survivors: the cut-off agents' tokens through the share-out, the
+others' through stakes. Summed over the frame,
+
+$$
+\sum_{\text{survivors}} \text{delta} = \text{tokens held by the agents that died, at the start of the phase} .
+$$
+
+In words: the survivors' changes add up to exactly what the dead held when
+the phase began.
+
+### The share-out
+
+The cleanup removes the agents that hold nothing, and those cut off from the
+largest piece of the network. It pools the tokens of the dead. In B1 only the
+cut-off ones hold any; in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), agents that die of old age hold theirs too
+([`max_age`](settings.md#max_age)). Then it deals the pool out in one
+multinomial draw: each token goes to a survivor chosen uniformly at random
+([Seeds and the random stream](random-numbers.md)). The size of that pool is
+`redistributed`. Both [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") deal the tokens out this way; the setting
+[`redistribution`](settings.md#redistribution) offers other ways
+([The estate of the dead](estate.md)).
+
+**An example.** 100 tokens are dealt out among 1,000 survivors. Each survivor
+gets a binomial number of them, with mean 0.1. About 90% get none, 9% get
+one, and fewer than 1% get two or more. For an agent holding 2 tokens, one
+extra token is a 50% gain. So the share-out is a small lottery that matters
+most to the poor ([The lottery](#the-lottery)).
+
+### In the code
+
+The [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") computes `delta` (`GraphOfLifeSimple.py`, `_frame`), and
+`gol_series.frame_stats` the five statistics. `redistributed` comes from the
+cleanup report of each frame.
 
 ## What one game does
 
@@ -161,25 +222,65 @@ Then it is cut off, and dies with its tokens. Otherwise it can only go with
 its branch. That happens when a connection further in is cut, so that its
 whole branch is no longer joined to the largest piece.
 
-## Tokens run downhill
+## Token curvature
 
 Picture the tokens of a world as a landscape. An agent richer than its
 neighbours stands on a hill; an agent poorer than them sits in a valley. The
-**token curvature** says how deep a valley or how high a hill is
-([Token curvature](token-curvature.md)). It adds up, over an agent's
-neighbours *N*(*u*), how many more tokens each holds than the agent does:
+**token curvature** says how deep a valley or how high a hill is. It adds up,
+over an agent's neighbours *N*(*u*), how many more tokens each holds than the
+agent does:
 
 $$
-\kappa(u) = \sum_{v \in N(u)} (\tau_v - \tau_u) .
+\kappa(u) = \sum_{v \in N(u)} (\tau_v - \tau_u)
+         = \sum_{v \in N(u)} \tau_v \;-\; \deg(u)\, \tau_u .
 $$
 
-It is negative for an agent on a hill, richer than its neighbourhood, and
-positive for one in a valley.
+Here τ is an agent's tokens, and deg(*u*) its number of connections.
+
+- κ > 0: the agent is in a **valley**. Its neighbours hold more than it does.
+- κ < 0: the agent is on a **hill**. It holds more than its neighbours.
+- κ = 0: it is as much above some neighbours as below others.
+
+**Example.** An agent with 5 tokens has neighbours holding 2, 8 and 20. Its
+curvature is (2 − 5) + (8 − 5) + (20 − 5) = −3 + 3 + 15 = 15: a valley. A hub
+with 200 tokens has 50 neighbours holding 4 each. Its curvature is
+κ = 50 · (4 − 200) = −9,800: a high hill.
+
+### Why it is called curvature: heat
+
+Take agents in a row, each joined to the next. For an agent in the middle, κ
+is the tokens on its left plus those on its right, minus twice its own. That
+is the discrete second derivative of the token landscape: how it bends at the
+agent. A valley bends up and a hill bends down. This is where the name comes
+from. On any network, κ is the **discrete Laplacian** of the tokens.
+
+It is also the quantity that drives heat. Suppose heat spreads along the
+connections of a network. Then each node's temperature changes in proportion
+to the sum of its differences with its neighbours, which is exactly κ. A
+valley warms up, a hill cools down, and the landscape smooths out. In the
+language of matrices, κ = −*L*τ. Here *L* is the network's Laplacian matrix,
+with the [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") on its diagonal and −1 for every connection.
+
+If tokens behaved like heat, an agent's change of tokens in a game would
+follow its curvature at the start of the game.
+[Tokens run downhill](#tokens-run-downhill) tests that.
+
+### In the viewer
+
+The viewer can colour every agent by its token curvature
+([What the viewer can colour by](viewer-colours.md)). The field
+`token_curvature` is measured on the frame itself. The field
+`token_curvature_pre` is measured on the network and the tokens as they were
+when the phase began. So it can be read against the change the phase then
+produced. On a signed colour scale, blue is a hill and
+red a valley.
+
+## Tokens run downhill
 
 <!-- figure gains/downhill -->
 ![Tokens run downhill](../figures/gains/downhill.svg)
 
-**Tokens run downhill.** The token curvature of an agent is the sum, over its neighbours, of how many more tokens the neighbour holds than it does ([Token curvature](token-curvature.md)): negative for an agent richer than its neighbourhood, positive for one poorer. For each class of curvature, the mean change of an agent's tokens over the game divided by the tokens it held at the start, over the agents that survived the game. Yellow: all agents; cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the pattern. A class with fewer than 1,000 agents is left out (drawn at 0).
+**Tokens run downhill.** The token curvature of an agent is the sum, over its neighbours, of how many more tokens the neighbour holds than it does ([Token curvature](gains-and-losses.md#token-curvature)): negative for an agent richer than its neighbourhood, positive for one poorer. For each class of curvature, the mean change of an agent's tokens over the game divided by the tokens it held at the start, over the agents that survived the game. Yellow: all agents; cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the pattern. A class with fewer than 1,000 agents is left out (drawn at 0).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -217,9 +318,10 @@ $$
 $$
 
 The change would be **proportional to the curvature**. This is the discrete
-heat equation, in which heat flows from warm to cold in proportion to the
-difference ([Physical inspiration](physical-inspiration.md)). Real agents do
-not split exactly evenly, and [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") differ. That is why the relation is a
+heat equation of [Why it is called curvature](#why-it-is-called-curvature-heat):
+heat flows from warm to cold in proportion to the difference
+([Physical inspiration](physical-inspiration.md)). Real agents do
+not split exactly evenly, and degrees differ. That is why the relation is a
 tendency and not a law. But
 [Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk) shows
 how close to an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") the brains in fact play.
@@ -290,8 +392,7 @@ agent is.
 
 When the cleanup removes the agents cut off from the network, it pools their
 tokens. Then it deals them out, token by token, to survivors drawn at random,
-every survivor with the same chance
-([Gains, losses and the share-out](gains-losses-and-the-share-out.md#the-share-out)).
+every survivor with the same chance ([The share-out](#the-share-out)).
 
 <!-- figure gains/lottery -->
 ![Tokens shared out among the survivors](../figures/gains/lottery.svg)
@@ -350,13 +451,13 @@ tokens out would do.
   whether the same agents stay rich, game after game.
 - [The largest and the smallest](the-largest-and-the-smallest.md): the richest
   agent, the largest gain and loss of a game, and the stars.
-- [Token curvature](token-curvature.md): the hills and valleys of wealth, and
-  where the name comes from.
+- [Physical inspiration](physical-inspiration.md): the heat equation, and the
+  other physics the notebook borrows from.
 
 ## How this was made
 
 Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") B1 at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30,
+below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
 run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
 them, and `python3 book_figures.py gains` draws every figure of this page.
 Each figure says, folded beneath it, which runs it reads and how. The numbers
@@ -447,6 +548,6 @@ Experiment 2, from which this page was first written.
 
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
-> [!info]- Pages that link here (13)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) · [Where tokens flow](where-the-tokens-flow.md) · [Token curvature](token-curvature.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (15)
+> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Do agents cooperate?](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

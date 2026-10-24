@@ -244,7 +244,7 @@ def gains(ch: F.Chapter) -> None:
                      (0, 0.38))],
         guides=[{"axis": "y", "at": 0}],
         caption="The token curvature of an agent is the sum, over its neighbours, of how many more tokens "
-                "the neighbour holds than it does ([Token curvature](token-curvature.md)): "
+                "the neighbour holds than it does ([Token curvature](gains-and-losses.md#token-curvature)): "
                 "negative for an agent richer than its neighbourhood, positive for one poorer. For each "
                 "class of curvature, the mean change of an agent's tokens over the game divided by the "
                 "tokens it held at the start, over the agents that survived the game. Yellow: all agents; "

@@ -527,7 +527,7 @@
     },
     {
       "id": "gains-and-losses",
-      "title": "Gains and losses",
+      "title": "Gains and losses: who gains, who loses, and the share-out",
       "file": "pages/gains-and-losses.md",
       "topics": [
         "wealth",
@@ -573,19 +573,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Four kinds of number say how unequally a world's tokens are held, and the notebook records them after every phase. The Gini coefficient sums up the whole Lorenz curve in one number, and the richest tenth's share reads one point of it."
-    },
-    {
-      "id": "gains-losses-and-the-share-out",
-      "title": "Gains, losses and the share-out",
-      "file": "pages/gains-losses-and-the-share-out.md",
-      "topics": [
-        "wealth",
-        "game"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every frame records, for every agent alive at its end, its change of tokens over the phase: `delta` = tokens now − tokens when the phase began (a newborn counts its whole endowment as gained)."
     },
     {
       "id": "where-tokens-go",
@@ -661,18 +648,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "In every game, the tokens an agent stakes on a neighbour's node flow along the connection between them: that is the token flow. Once each pair's two directions cancel, what is left is the net flow."
-    },
-    {
-      "id": "token-curvature",
-      "title": "Token curvature",
-      "file": "pages/token-curvature.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "The viewer can colour every agent by its **token curvature**: how much richer its neighbourhood is than it is."
     },
     {
       "id": "map-equation",

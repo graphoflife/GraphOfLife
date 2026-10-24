@@ -82,11 +82,10 @@ Who is born, who dies and when, how old agents get, and how a world's ages chang
 How unequal a world is, who stays rich, and how gains and losses are shared out.
 
 - [How unequal is a world, and who stays rich](pages/where-do-the-tokens-go.md)
-- [Gains and losses](pages/gains-and-losses.md)
+- [Gains and losses: who gains, who loses, and the share-out](pages/gains-and-losses.md)
 - [The largest and the smallest](pages/the-largest-and-the-smallest.md)
 - What keeps wealth spread? — *not written yet*
 - [Measuring inequality: the Gini coefficient, the richest tenth, entropy](pages/gini-coefficient.md)
-- [Gains, losses and the share-out](pages/gains-losses-and-the-share-out.md)
 
 ### The game and the flow of tokens
 
@@ -98,7 +97,6 @@ How the game is played, where tokens flow, which loops they go round, and the gr
 - [Where tokens flow](pages/where-the-tokens-flow.md)
 - [Flow modules: the groups tokens stay in](pages/flow-modules.md)
 - [Measuring the flow: token flow, lightning and circulation](pages/token-flow.md)
-- [Token curvature](pages/token-curvature.md)
 - [Flow modules and the map equation](pages/map-equation.md)
 
 ### The shape and health of the network

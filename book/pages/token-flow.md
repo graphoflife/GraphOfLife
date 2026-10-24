@@ -411,7 +411,7 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 <!-- turns -->
 ---
 
-← [Flow modules: the groups tokens stay in](flow-modules.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token curvature](token-curvature.md) →
+← [Flow modules: the groups tokens stay in](flow-modules.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flow modules and the map equation](map-equation.md) →
 
 > [!info]- Pages that link here (9)
 > [Glossary](glossary.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)

@@ -119,7 +119,7 @@ Two more measures need no following at all, or ask what following finds:
 <!-- turns -->
 ---
 
-← [Token curvature](token-curvature.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens)
+← [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens)
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 

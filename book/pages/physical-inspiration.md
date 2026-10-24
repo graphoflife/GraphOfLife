@@ -140,7 +140,7 @@ Three rules reach across the whole world at once.
    [How a world breaks](how-a-world-breaks.md) found that most big losses happen
    this way, and [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
    that the regions lost grow with the world.
-2. **The [share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.").** The tokens of agents cut off are dealt out to survivors
+2. **The share-out.** The tokens of agents cut off are dealt out to survivors
    chosen at random from the whole world. They are conserved, but they jump:
    a token can leave one end of a world and arrive at the other in one step.
 3. **The one random stream.** Every random number in a world — every tie, every
@@ -218,7 +218,7 @@ step of the **heat equation**:
 ![The even split as a step of the heat equation](../diagrams/finite-difference.svg)
 
 On a network the same holds with the discrete Laplacian — the
-[token curvature](token-curvature.md): for agents with *d* neighbours
+[token curvature](gains-and-losses.md#token-curvature): for agents with *d* neighbours
 each, an even split changes an agent's tokens by its curvature divided by
 *d* + 1 ([Gains and losses](gains-and-losses.md)). A settled world, in its
 tokens, behaves almost like a computer solving the heat equation on its own
@@ -522,5 +522,5 @@ part of the notebook (see [the contents](../README.md)):
 **Also about:** [Start here](../README.md#start-here).
 
 > [!info]- Pages that link here (18)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

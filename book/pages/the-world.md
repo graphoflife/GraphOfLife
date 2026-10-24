@@ -208,7 +208,7 @@ a world ever makes is drawn from one stream of pseudo-random numbers. These
 look random, but are computed one after another from the same seed. That
 stream gives the founders' brains and every change of a brain. It gives every
 probabilistic decision and tie-break, every random input of a brain, and every
-[share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead. So a run depends on its settings and its
+[share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead. So a run depends on its settings and its
 seed, and on nothing else ([Seeds and the random stream](random-numbers.md)).
 [Is a run reproducible?](is-a-run-reproducible.md) tests this.
 

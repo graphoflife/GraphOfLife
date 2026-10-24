@@ -38,7 +38,7 @@ rainbow; *grayscale* is black to white.
 | Degree | its number of connections ([Degree](degree.md)) |
 | Token change (signed) | its tokens now minus its tokens before the phase; a newborn counts from 0 |
 | Token change (magnitude) | the size of that change |
-| Token curvature (signed) | Σ over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of (their tokens − its tokens) ([Token curvature](token-curvature.md)) |
+| Token curvature (signed) | Σ over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of (their tokens − its tokens) ([Token curvature](gains-and-losses.md#token-curvature)) |
 | Token curvature (before phase) | the same, on the network as it stood before the phase; newborns have none |
 | Loops through it | fundamental cycles of a breadth-first spanning tree through it ([Loops](bridges.md#loops)) |
 | Triangles | the triangles it is a corner of ([Clustering](degree.md#clustering)) |
@@ -82,6 +82,6 @@ colour by family instead, as [One world, many colours](one-world-many-colours.md
 
 ← [What a run records](frames-and-stats.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Pilot worlds](pilot-worlds.md) →
 
-> [!info]- Pages that link here (3)
-> [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (4)
+> [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

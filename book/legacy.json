@@ -138,12 +138,12 @@
   "n-common-ancestor": "genotype#the-common-ancestor-of-the-living",
   "n-tokens-per-agent": "gini-coefficient#tokens-per-agent-mean-median-extremes",
   "n-entropy-and-evenness": "gini-coefficient#entropy-and-evenness",
-  "n-gains-and-losses": "gains-losses-and-the-share-out",
+  "n-gains-and-losses": "gains-and-losses#gains-losses-and-the-share-out",
   "n-brain-diversity": "genotype#brain-diversity",
   "n-reproduction-statistics": "reproduction-statistics",
   "n-token-flow": "token-flow",
   "n-lightning": "token-flow#lightning-tokens-that-go-round",
-  "n-token-curvature": "token-curvature",
+  "n-token-curvature": "gains-and-losses#token-curvature",
   "n-loops": "bridges#loops",
   "n-cut-risk": "bridges#cut-risk",
   "n-radius-and-diameter": "path-length#radius-and-diameter",
@@ -328,6 +328,8 @@
   "preferential-attachment": "degree#preferential-attachment-and-its-kernel",
   "scaling-relations": "degree#scaling-relations-between-agents-properties",
   "correlation-function": "like-next-to-like#how-alike-at-a-distance",
-  "home-stake": "how-the-game-is-played#staking-at-home-and-keeping-ones-node"
+  "home-stake": "how-the-game-is-played#staking-at-home-and-keeping-ones-node",
+  "gains-losses-and-the-share-out": "gains-and-losses#gains-losses-and-the-share-out",
+  "token-curvature": "gains-and-losses#token-curvature"
  }
 }

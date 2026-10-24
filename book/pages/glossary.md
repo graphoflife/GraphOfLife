@@ -89,12 +89,12 @@ there.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
 - **[settled life](settled-life.md)** — A world from iteration 500 to its end, after its youth, where it is measured.
 - **[share function](share-function.md)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
-- **[share-out](gains-losses-and-the-share-out.md)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
+- **[share-out](gains-and-losses.md#gains-losses-and-the-share-out)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
 - **[spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.
 - **[spectral gap](path-length.md#the-spectral-gap)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
 - **[survival curve](kaplan-meier.md)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.
 - **[token](the-world.md#agents-and-tokens)** — The one thing of value in a world: every agent holds a whole number of them, and their total never changes.
-- **[token curvature](token-curvature.md)** — How much richer an agent's neighbourhood is than the agent itself.
+- **[token curvature](gains-and-losses.md#token-curvature)** — How much richer an agent's neighbourhood is than the agent itself.
 - **[token flow](token-flow.md)** (also net flow) — The tokens a game moves along each connection, from the agent who stakes to the node staked on.
 - **[Wilson interval](wilson-interval.md)** — The range a share probably lies in, when it was counted in only a few worlds.
 - **[yes-or-no decision](binary-decision.md)** — A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion.

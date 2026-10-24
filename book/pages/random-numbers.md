@@ -43,7 +43,7 @@ written down with the run. From the seed, two streams are started:
    numpy's `RandomState` (the Mersenne Twister algorithm), seeded with the
    run's seed. It gives the founders' brains, every tie broken at random and
    every probabilistic yes-or-no decision. It also gives every random input of
-   a brain, every [share-out](gains-losses-and-the-share-out.md "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of tokens and every mutation.
+   a brain, every [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of tokens and every mutation.
 
 The program always takes its draws in the same order: [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are visited in
 increasing order of id, and so are [neighbours](the-world.md#the-network "An agent joined to another by a connection."). So the whole history of a world
@@ -119,5 +119,5 @@ mutation adds normal draws to a brain's numbers
 ← [The starting ring](starting-ring.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The share function f(a, b)](share-function.md) →
 
 > [!info]- Pages that link here (14)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [A yes-or-no decision](binary-decision.md) · [What a brain sees](brain-inputs.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [Births and the four ways to die](births-and-deaths.md) · [Gains, losses and the share-out](gains-losses-and-the-share-out.md) · [Physical inspiration](physical-inspiration.md) · [The lab, the engine and pilots](the-lab.md)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [A yes-or-no decision](binary-decision.md) · [What a brain sees](brain-inputs.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [Births and the four ways to die](births-and-deaths.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Physical inspiration](physical-inspiration.md) · [The lab, the engine and pilots](the-lab.md)
 <!-- /turns -->
