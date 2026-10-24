@@ -6,21 +6,34 @@
 > - Who does it reach, and what does that do to the network, to the riches of
 >   the world, to evolution?
 
-In every world of the notebook so far an agent could only link to agents it was
-already near: its parent and its parent's neighbours at birth, and the
-neighbours of its neighbours when it chose links of its own. A world built that
-way grows like a crystal, outward from where it began. The author asked for a
-way out: an agent that can go looking for a stranger, by a jump or by walking
-step by step, at random or by looking where it is going, and that can propose
-a link or force one.
+## In short
+
+Agents of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") were given a way to look for a stranger and propose a link.
+It was a paid jump, a paid scout that walks step by step, or a free reach. When a
+search costs [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), hardly anyone pays for it; when it is free, agents reach
+all the time. But the strangers they find are near, two or three steps away.
+So the network grows denser where it already is, and its [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") does not
+change. Every searching world is smaller and a little richer than B2, and its
+[brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") evolve faster, whether its agents search or not.
+
+## A way out of the neighbourhood
+
+In every world of the notebook so far, an agent could only link to agents it
+was already near. At birth those are its parent and its parent's neighbours.
+When it chose links of its own, they were the neighbours of its neighbours. A
+world built that way grows like a crystal, outward from where it began.
+
+The author asked for a way out: an agent that can go looking for a stranger.
+It might jump or walk step by step, at random or looking where it is going.
+And it might propose a link, or force one.
 
 ## What was built
 
-Three settings of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."), all off unless a run turns them on
+Three settings of the engine do it, all off unless a run turns them on
 ([`link_search`](settings.md#link_search),
 [`link_steering`](settings.md#link_steering),
-[`link_consent`](settings.md#link_consent)). After a reproduction
-phase, an agent's [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") says how many of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") it spends on a search:
+[`link_consent`](settings.md#link_consent)). After a reproduction phase, an
+agent's brain says how many of its tokens it spends on a search:
 
 | search | what the agent does |
 |---|---|
@@ -29,19 +42,21 @@ phase, an agent's [brain](the-brain.md "The neural network each agent decides wi
 | **reach** | a jump whose steps are free, as many as the tokens it holds would pay for |
 
 A paid step costs one token, paid to the agent the step enters; nobody pays
-its last token. Each step goes to a neighbour drawn at random, or, **looking**,
-to the one the searcher would most like a link with. A proposal becomes a link
-if both ends agree (**mutual**) or if the proposer alone wants it
-(**forced**); nobody at its valence of eight links gets a new one either way.
+its last token. Each step goes to a neighbour drawn at random. Or, when the
+search is **looking**, it goes to the neighbour the searcher would most like a
+link with. A proposal becomes a link if both ends agree (**mutual**), or if
+the proposer alone wants it (**forced**). Either way, nobody at its valence
+of eight links gets a new one.
 
 ## The worlds
 
-Batch K: [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") at 10,000 tokens with every search, every steering and every
-consent — twelve kinds of world — [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2, 1,000 iterations, as [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
-worlds. The control is B2 itself with the same seeds (`P/B2-s1`, `-s2`, the
-lab's Experiment 16 worlds again, game for game). From each world's
-checkpoint at iteration 1,000, fifty more [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") were played and recorded, and
-every proposal in them counted (`research/oee/checks/k_links.py`).
+Batch K plays B2 at 10,000 tokens with every search, every steering and every
+consent: twelve kinds of world. Each has [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2 and runs for 1,000
+iterations, as pilot worlds ([Pilot worlds](the-lab.md#pilot-worlds)). The
+control is B2 itself with the same seeds: the lab's Experiment 16 worlds
+again, game for game. From each world's checkpoint at iteration 1,000, fifty
+more [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") were played and recorded, and every proposal in them was counted
+([How this was made](#how-this-was-made)).
 
 ## Do they search?
 
@@ -60,21 +75,22 @@ every proposal in them counted (`research/oee/checks/k_links.py`).
 >
 > **To make it again:** `python3 book_figures.py strangers`.
 <!-- /figure -->
+**When a search costs tokens, hardly anyone pays for it.** In the worlds with
+a jump, 0.01 to 0.04 proposals were made per hundred agents an iteration.
+With a walk it was 0.1 to 0.4: in a world of 3,000 agents, one proposal every
+few iterations.
 
-**When a search costs tokens, hardly anyone pays for it.** In the worlds with a
-jump, 0.01 to 0.04 proposals were made per hundred agents an iteration; with a
-walk, 0.1 to 0.4 — in a world of 3,000 agents, one proposal every few
-iterations. **When it is free, they reach all the time**: up to 35 proposals
-per hundred agents an iteration, and 0.1 to 3 new links. Most proposals fail —
-7% to 36% of the reach worlds' become links — because the other end says no
-or is already at its valence. How a search steers, and whether a link needs
-both ends' consent, matters less than the seed of the world.
+**When it is free, they reach all the time**: up to 35 proposals per hundred
+agents an iteration, and 0.1 to 3 new links. Most proposals fail: only 7% to
+36% of the reach worlds' proposals become links. The other end says no, or is
+already at its valence. How a search steers, and whether a link needs both
+ends' consent, matters less than the seed of the world.
 
-**And the strangers are near.** The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") proposal, in every world, goes to an
-agent two or three steps away — a neighbour's neighbour, or one step beyond.
-No proposal in any world went twenty steps or more. A search walks the
-network as it is, and a short walk on a network where every agent has five or
-six links rarely leaves the neighbourhood.
+**And the strangers are near.** The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") proposal, in every world, goes to
+an agent two or three steps away: a neighbour's neighbour, or one step
+beyond. No proposal in any world went twenty steps or more. A search walks
+the network as it is. And a short walk on a network where every agent has
+five or six links rarely leaves the neighbourhood.
 
 ## What it does to a world
 
@@ -93,22 +109,22 @@ six links rarely leaves the neighbourhood.
 >
 > **To make it again:** `python3 book_figures.py strangers`.
 <!-- /figure -->
-
-- **More links, shorter paths — with the free reach.** Its worlds hold 6.0 to
-  8.1 links per agent against B2's 5.4 to 5.5, and two agents are 4.4 to 5.5
-  steps apart against 5.2 to 5.4. The paid searches leave both as they were.
-- **The [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") does not change.** It stays at 3.8 to 4.6 in every searching
-  world, B2's own range: links to friends of friends make the network denser
-  where it already is, not wider.
+- **More links and shorter paths, with the free reach.** Its worlds hold 6.0
+  to 8.1 links per agent, against B2's 5.4 to 5.5. Two agents are 4.4 to 5.5
+  steps apart, against 5.2 to 5.4. The paid searches leave both as they were.
+- **The dimension does not change.** It stays at 3.8 to 4.6 in every
+  searching world, B2's own range. Links to friends of friends make the
+  network denser where it already is, not wider.
 - **Smaller worlds, a little richer.** Every kind of searching world holds
-  fewer agents than B2's — a median of about 2,900 with a jump, 2,800 with a
-  walk, 2,350 with the reach, against 3,350 — and fewer of them are poor: 49% to
-  79% at three tokens or fewer, against 76% and 77%. The worlds of the paid
-  searches shrink although their agents hardly propose anything. Two things
-  could do it: their brains have two more outputs to set, and a walk that ends
-  where its agent proposes nothing has still paid every step — a token to each
-  agent it entered — so a paid search moves tokens about even when it makes no
-  link. This batch does not tell which.
+  fewer agents than B2's. The median is about 2,900 with a jump, 2,800 with a
+  walk and 2,350 with the reach, against 3,350. And fewer of them are poor: 49%
+  to 79% hold three tokens or fewer, against 76% and 77%.
+
+The worlds of the paid searches shrink, although their agents hardly propose
+anything. Two things could do it. Their brains have two more outputs to set.
+And a walk that ends where its agent proposes nothing has still paid every
+step, a token to each agent it entered. So a paid search moves tokens about
+even when it makes no link. This batch does not tell which.
 
 ## Does evolution go on?
 
@@ -127,40 +143,60 @@ six links rarely leaves the neighbourhood.
 >
 > **To make it again:** `python3 book_figures.py strangers`.
 <!-- /figure -->
+**Yes, and faster than in B2.** In every one of the 24 worlds, the brains of
+iteration 1,000 took more than half of a contested world from those of 500.
+Over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), they took 70% to 91%
+([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+B2's took 68%, in the median of its ten lab worlds. The median world with a
+jump took 79%, with a walk 78%, and with the reach 83%.
 
-**Yes, and faster than in B2.** In every one of the 24 worlds the brains of
-iteration 1,000 took more than half of a contested world from those of 500,
-over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") — 70% to 91% — where B2's took 68% in the median of
-its ten lab worlds. The median world with a jump took 79%, with a walk 78%,
-with the reach 83%. And it hardly matters how much the agents searched: the
-worlds of the paid searches, whose agents almost never propose a link, evolve
-as fast as those of the free one. What every searching world has is a smaller
-size and two more outputs for its brains to set. The mixed worlds of
+And it hardly matters how much the agents searched. The worlds of the paid
+searches, whose agents almost never propose a link, evolve as fast as those
+of the free one. What every searching world has is a smaller size, and two
+more outputs for its brains to set. The mixed worlds of
 [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#does-evolution-go-on),
-smaller still, took 84%; whether smaller worlds evolve faster, or a contest in
-a smaller world gives a later brain more room to win, this batch cannot say.
+smaller still, took 84%. Do smaller worlds evolve faster? Or does a contest
+in a smaller world give a later brain more room to win? This batch cannot
+say.
 
-## What it teaches
+## What we learned
 
 - **Given a way to reach strangers, agents reach their neighbours'
-  neighbours.** Nothing in the game rewards a far link over a near one, and a
+  neighbours.** Nothing in the game rewards a far link over a near one. And a
   search that walks the network finds what is near.
-- **A paid search is not worth its tokens** — to these brains, at this
-  length of evolution. The free one is used, and changes the network locally.
+- **A paid search is not worth its tokens**, to these brains, at this length
+  of evolution. The free one is used, and changes the network locally.
 - **Every searching world evolves faster than B2**, whether its agents search
-  or not; what they share is a smaller world and more for a brain to set.
-- **Locality survives.** For the notebook's other aim, a network that behaves like
-  space ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)),
+  or not. What they share is a smaller world, and more for a brain to set.
+- **Locality survives.** The notebook's other aim is a network that behaves
+  like space
+  ([Is a world a space?](how-many-dimensions-does-a-world-have.md)). For it,
   far links would be the danger: a few shortcuts make a world small and its
   dimension high. Searching agents do not make them, and their worlds keep
-  B2's dimension. A search that goes further than a walk from home — to an
-  agent drawn from the whole world, say — would be the test of whether the
-  game itself keeps space local; no setting offers one yet.
+  B2's dimension. A search could go further than a walk from home, to an
+  agent drawn from the whole world, say. That would test whether the game
+  itself keeps space local. No setting offers one yet.
 
-**Related notes:** [Every setting](settings.md#link_search) ·
-[How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md) ·
-[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
-[Healthy and rich](healthy-and-rich.md)
+## Where to go next
+
+- [Every setting](settings.md#link_search): the three settings of the search,
+  exactly.
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
+  why far links would fold a world.
+- [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md): other
+  small worlds whose brains evolve fast.
+- [Healthy and rich](healthy-and-rich.md): what a world in which much can
+  happen looks like.
+
+## How this was made
+
+Every world on this page is a pilot of batch K, kept in
+`GraphOfLifeRuns/.pilots`. No experiment of the lab stands behind it, so the
+page has no box of runs. The control worlds are the pilots `P/B2-s1` and
+`-s2`, which replay the lab's Experiment 16 worlds game for game. The
+proposals of the fifty recorded games were
+counted with `research/oee/checks/k_links.py`. Every figure says, folded
+beneath it, which worlds it reads and how.
 
 <!-- turns -->
 ---
