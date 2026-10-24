@@ -1530,7 +1530,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-02",
-      "summary": "Every experiment in this notebook is sized by what it costs: the hours a computer spends on it, the memory a run needs, and the disk its frames take."
+      "summary": "Every experiment of the notebook is sized by what it costs. That is the hours a computer spends on it, the memory a run needs, and the disk its frames take. These costs are measured, not guessed."
     },
     {
       "id": "what-goes-with-what",
