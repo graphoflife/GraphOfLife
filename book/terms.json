@@ -395,8 +395,9 @@
     },
     {
       "name": "lightning",
-      "page": "lightning",
-      "says": "A closed loop of the flow of a game: tokens that go round and come back where they started."
+      "page": "token-flow",
+      "says": "A closed loop of the flow of a game: tokens that go round and come back where they started.",
+      "anchor": "lightning-tokens-that-go-round"
     },
     {
       "name": "token curvature",
@@ -405,8 +406,9 @@
     },
     {
       "name": "circulation",
-      "page": "circulation",
-      "says": "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."
+      "page": "token-flow",
+      "says": "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.",
+      "anchor": "flows-that-go-round"
     },
     {
       "name": "flow module",

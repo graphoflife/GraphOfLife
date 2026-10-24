@@ -81,7 +81,7 @@ read from the record of the games, each against the level chance would give:
   helps $u$. The net help between two agents in a stretch is a flow on the
   network, and the share of it that circulates is compared with the share
   that would if each pair's net help had a random direction (the note
-  [*Flows that go round*](circulation.md)).
+  [*Flows that go round*](token-flow.md#flows-that-go-round)).
 
 Help that shows none of the three is help without cooperation.
 
@@ -101,6 +101,6 @@ it did, not what it was for.
 
 ← [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation)
 
-> [!info]- Pages that link here (2)
-> [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
+> [!info]- Pages that link here (3)
+> [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md)
 <!-- /turns -->

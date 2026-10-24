@@ -82,6 +82,6 @@ colour by family instead, as [One world, many colours](one-world-many-colours.md
 
 ← [What a run records](frames-and-stats.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Pilot worlds](pilot-worlds.md) →
 
-> [!info]- Pages that link here (2)
-> [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [One world, many colours](one-world-many-colours.md)
+> [!info]- Pages that link here (3)
+> [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Bridges, cut risk and loops: how a network can be cut](bridges.md) · [One world, many colours](one-world-many-colours.md)
 <!-- /turns -->

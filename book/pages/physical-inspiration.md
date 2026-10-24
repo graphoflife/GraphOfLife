@@ -386,7 +386,7 @@ What to look for:
 
 - **Bound tokens**: tokens that keep going round a closed loop of agents
   instead of spreading. [Where the tokens flow](where-the-tokens-flow.md) looked, and
-  found almost no [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.") once exchanges were cancelled.
+  found almost no [circulation](token-flow.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.") once exchanges were cancelled.
 - **Groups that outlast their members**: a set of agents whose membership
   turns over while the set persists.
 - **A beat**: a pattern with a characteristic frequency, local in the

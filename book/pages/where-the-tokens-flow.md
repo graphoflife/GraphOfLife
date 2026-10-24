@@ -438,7 +438,7 @@ numbers:
 <!-- figure connections/round-figures -->
 ![Flow on the connections, and the loops it makes](../figures/connections/round-figures.svg)
 
-**Flow on the connections, and the loops it makes.** After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](lightning.md) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Flow on the connections, and the loops it makes.** After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](token-flow.md#lightning-tokens-that-go-round) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -488,7 +488,7 @@ A **lightning** is what the viewer calls a closed loop in that flow: A stakes on
 B, B on C, and C back on A. A loop of *L* agents carries *L* tokens, one along
 each of its arrows, and scores *L*². So one long circuit counts for more than
 many short ones. Ecologists measure the same thing in food webs, as a *cycling
-index*. The note [Lightning: tokens that go round](lightning.md) works through
+index*. The note [Lightning: tokens that go round](token-flow.md#lightning-tokens-that-go-round) works through
 the definition with an example. Why it matters:
 
 - **Flow that goes round is flow that can keep going.** Tokens that run one way
@@ -524,7 +524,7 @@ records eight numbers, every 25th iteration:
 ### Do tokens go round?
 
 Start with the thirty B1 worlds of 100,000 tokens. How much of their flow
-goes round? Only bounds can be given ([Lightning](lightning.md)). The greedy
+goes round? Only bounds can be given ([Lightning](token-flow.md#lightning-tokens-that-go-round)). The greedy
 search finds some loops: a floor. Conservation sets a ceiling. A token that comes back to where it started
 changes no balance. So an agent that ends a game with more or less than it
 sent cannot have had all its flow in loops. At least the difference runs one
@@ -533,7 +533,7 @@ way.
 <!-- figure flow/circulation -->
 ![Do tokens go round?](../figures/flow/circulation.svg)
 
-**Do tokens go round?** Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search could place in closed loops (blue; [Lightning](lightning.md)), and the share that conservation forbids from ever going round, because some agents receive more than they send (red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one coming back: the share of the flow left (cyan), and of that, the share found in loops (green). Every 25 iterations, 30 worlds; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Do tokens go round?** Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search could place in closed loops (blue; [Lightning](token-flow.md#lightning-tokens-that-go-round)), and the share that conservation forbids from ever going round, because some agents receive more than they send (red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one coming back: the share of the flow left (cyan), and of that, the share found in loops (green). Every 25 iterations, 30 worlds; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -570,7 +570,7 @@ net flow can go round, and the search finds almost nothing, as at 10,000
 tokens.
 
 A theorem says what that means. Any flow on a network can be split into two
-parts ([Flows that go round](circulation.md)). One part runs **downhill**,
+parts ([Flows that go round](token-flow.md#flows-that-go-round)). One part runs **downhill**,
 from high to low along a "potential": a height that every agent has. The other
 part **circulates**. This is the Helmholtz–Hodge decomposition (for networks,
 Jiang, Lim, Yao and Ye 2011). A downhill flow can never go round: round a loop,
@@ -714,7 +714,7 @@ The greedy count looks at one game at a time.
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md) took the net flow
 of fifty games together. It split that flow exactly into a part that runs
 downhill and a part that circulates. The tool is the Helmholtz–Hodge
-decomposition (the note [Flows that go round](circulation.md)).
+decomposition (the note [Flows that go round](token-flow.md#flows-that-go-round)).
 
 <!-- figure lightning/exact -->
 ![A greedy count and an exact one](../figures/lightning/exact.svg)
@@ -834,8 +834,8 @@ The command `python3 book_figures.py lightning` draws these figures. Each
 figure says, folded beneath it, which runs it reads and how.
 
 The measures are explained in the notes
-[Lightning: tokens that go round](lightning.md),
-[Token flow](token-flow.md), [Flows that go round](circulation.md) and
+[Lightning: tokens that go round](token-flow.md#lightning-tokens-that-go-round),
+[Token flow](token-flow.md), [Flows that go round](token-flow.md#flows-that-go-round) and
 [Logarithmic axes and power laws](logarithmic-axes.md).
 
 ### The runs of Experiment 10
@@ -959,5 +959,5 @@ The measures are explained in the notes
 ← [The even split](even-split.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flow modules: the groups tokens stay in](flow-modules.md) →
 
 > [!info]- Pages that link here (26)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Token flow](token-flow.md) · [Token curvature](token-curvature.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Healthy and rich](healthy-and-rich.md) · [Every world side by side](every-world-side-by-side.md) · [One world, many colours](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Token curvature](token-curvature.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Healthy and rich](healthy-and-rich.md) · [Every world side by side](every-world-side-by-side.md) · [One world, many colours](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

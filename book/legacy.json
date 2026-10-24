@@ -142,7 +142,7 @@
   "n-brain-diversity": "genotype#brain-diversity",
   "n-reproduction-statistics": "reproduction-statistics",
   "n-token-flow": "token-flow",
-  "n-lightning": "lightning",
+  "n-lightning": "token-flow#lightning-tokens-that-go-round",
   "n-token-curvature": "token-curvature",
   "n-loops": "bridges#loops",
   "n-cut-risk": "bridges#cut-risk",
@@ -158,7 +158,7 @@
   "n-pilot-worlds": "pilot-worlds",
   "n-invasion-test": "invasion-test",
   "n-exploitability": "exploitability",
-  "n-circulation": "circulation",
+  "n-circulation": "token-flow#flows-that-go-round",
   "n-help": "help",
   "n-map-equation": "map-equation",
   "n-what-makes-a-world-interesting": "what-makes-a-world-interesting",
@@ -318,6 +318,8 @@
   "loops": "bridges#loops",
   "families": "genotype#families",
   "common-ancestor": "genotype#the-common-ancestor-of-the-living",
-  "brain-diversity": "genotype#brain-diversity"
+  "brain-diversity": "genotype#brain-diversity",
+  "lightning": "token-flow#lightning-tokens-that-go-round",
+  "circulation": "token-flow#flows-that-go-round"
  }
 }

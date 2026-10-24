@@ -664,7 +664,7 @@
     },
     {
       "id": "token-flow",
-      "title": "Token flow",
+      "title": "Measuring the flow: token flow, lightning and circulation",
       "file": "pages/token-flow.md",
       "topics": [
         "game"
@@ -672,19 +672,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "In every game every agent stakes all its tokens on itself and its neighbours (One iteration, step by step)."
-    },
-    {
-      "id": "lightning",
-      "title": "Lightning: tokens that go round",
-      "file": "pages/lightning.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Does the flow of a game (Token flow) go round in circles — tokens leaving an agent, crossing several connections, and arriving back where they started?"
+      "summary": "In every game, the tokens an agent stakes on a neighbour's node flow along the connection between them: that is the token flow. Once each pair's two directions cancel, what is left is the net flow."
     },
     {
       "id": "token-curvature",
@@ -697,18 +685,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "The viewer can colour every agent by its **token curvature**: how much richer its neighbourhood is than it is."
-    },
-    {
-      "id": "circulation",
-      "title": "Flows that go round",
-      "file": "pages/circulation.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-15",
-      "summary": "Tokens move over the network every game: an agent's stake on a neighbour's node goes to that node, whoever takes it."
     },
     {
       "id": "map-equation",

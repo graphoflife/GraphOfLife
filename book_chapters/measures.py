@@ -507,9 +507,9 @@ def flow(ch: F.Chapter) -> None:
         for st, _, _ in stats_:
             ch.number(f"{st}_settled", describe([mean_over(s.run_id, st, *W.window) for s in alive]))
     ch.grid(
-        "circulation", panels, columns=2, title="Do tokens go round?",
+        "token-flow", panels, columns=2, title="Do tokens go round?",
         caption="Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search "
-                "could place in closed loops (blue; [Lightning](lightning.md)), and the share that "
+                "could place in closed loops (blue; [Lightning](token-flow.md#lightning-tokens-that-go-round)), and the share that "
                 "conservation forbids from ever going round, because some agents receive more than they send "
                 "(red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one "
                 "coming back: the share of the flow left (cyan), and of that, the share found in loops "

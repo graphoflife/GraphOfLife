@@ -98,10 +98,8 @@ How the game is played, where tokens flow, which loops they go round, and the gr
 - [Where tokens flow](pages/where-the-tokens-flow.md)
 - [Flow modules: the groups tokens stay in](pages/flow-modules.md)
 - [Staking at home, and keeping one's node](pages/home-stake.md)
-- [Token flow](pages/token-flow.md)
-- [Lightning: tokens that go round](pages/lightning.md)
+- [Measuring the flow: token flow, lightning and circulation](pages/token-flow.md)
 - [Token curvature](pages/token-curvature.md)
-- [Flows that go round](pages/circulation.md)
 - [Flow modules and the map equation](pages/map-equation.md)
 
 ### The shape and health of the network

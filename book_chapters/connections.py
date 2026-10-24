@@ -170,7 +170,7 @@ def connections(ch: F.Chapter) -> None:
         caption=f"After every game of the {n} worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across "
                 "a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a "
                 "logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of "
-                "[Lightning](lightning.md) found in the flow as staked (`lightningLongest`) and in what is "
+                "[Lightning](token-flow.md#lightning-tokens-that-go-round) found in the flow as staked (`lightningLongest`) and in what is "
                 f"left after cancelling (`netLightningLongest`). {BAND_WORDS}.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2: `meanEdgeFlow`, `maxEdgeFlow`, `lightningLongest` and "

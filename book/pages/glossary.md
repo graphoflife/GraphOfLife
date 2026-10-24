@@ -25,7 +25,7 @@ there.
 - **[brain diversity](genotype.md#brain-diversity)** — How many different brains, or genotypes, a world holds.
 - **[bridge](bridges.md)** — A connection that lies on no loop: cut it and the network falls into two pieces.
 - **[candidate](one-iteration.md#phase-1-reproduction)** — An agent itself and each of its neighbours, the ones its brain looks at when it decides.
-- **[circulation](circulation.md)** — The part of a flow that goes round in loops, as against the part that runs from sources to sinks.
+- **[circulation](token-flow.md#flows-that-go-round)** — The part of a flow that goes round in loops, as against the part that runs from sources to sinks.
 - **[cleanup](one-iteration.md#cleanup)** — The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.
 - **[clustering](clustering.md)** — How often an agent's neighbours are also each other's neighbours.
 - **[common ancestor](genotype.md#the-common-ancestor-of-the-living)** — The genotype every living agent descends from, and how far back it lies.
@@ -63,7 +63,7 @@ there.
 - **[largest remainder](largest-remainder.md)** — How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions.
 - **[least squares](least-squares.md)** (also R²) — The straight line that fits a cloud of points best, and how much of their spread it explains.
 - **[lifetime](age-and-lifetime.md)** — How many iterations an agent lives, from its birth to its death.
-- **[lightning](lightning.md)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
+- **[lightning](token-flow.md#lightning-tokens-that-go-round)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
 - **[lineage](genotype.md#families)** — A line of descent: the agents whose genotypes go back to one ancestor.
 - **[logarithmic axis](logarithmic-axes.md)** — An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.
 - **[loop](bridges.md#loops)** — A path through the network that comes back to where it started without using a connection twice.

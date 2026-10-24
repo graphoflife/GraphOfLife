@@ -81,7 +81,7 @@ The two long runs do not go the same way, though. One swung towards B2 at
 2,500 iterations and came back. The other grew richer and smaller up to 4,500
 iterations, and then larger again. Two worlds cannot say which is the rule.
 
-The pilots showed more than the table does. Mixing doubled the [circulation](circulation.md "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.")
+The pilots showed more than the table does. Mixing doubled the [circulation](token-flow.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.")
 that [Gliders, and who helps whom](gliders-and-who-helps-whom.md) measures:
 the part of the flow of tokens that goes round in [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice."). Three things have not
 yet been read in the long worlds of this page: that circulation, the kinds of

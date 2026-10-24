@@ -215,10 +215,10 @@ in the game itself. That comes after the tokens.
 ## Where the tokens go
 
 Every stake moves tokens over a connection, to the node staked on. Over a
-stretch of 50 games each connection carries a [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on."), what went one way
+stretch of 50 games each connection carries a net flow, what went one way
 minus what came back, and that flow splits exactly into a part that runs
 downhill, from some agents to others, and a part that goes round loops (the
-note [*Flows that go round*](circulation.md)). Tokens going round a
+note [*Flows that go round*](token-flow.md#flows-that-go-round)). Tokens going round a
 ring of agents, each giving to the next, would be the Kula ring of the
 Trobriand Islands that Bronisław Malinowski described: armshells and necklaces
 passed from island to island, round and round. Chance keeps each connection's
@@ -465,5 +465,5 @@ where it is, and in B2 it falls.
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
 > [!info]- Pages that link here (12)
-> [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Flows that go round](circulation.md) · [Who helps whom](who-helps-whom.md) · [Help](help.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Who helps whom](who-helps-whom.md) · [Help](help.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

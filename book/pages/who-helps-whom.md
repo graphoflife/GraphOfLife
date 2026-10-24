@@ -88,7 +88,7 @@ becomes peaceful, and conquest — the engine of selection here — nearly stops
 The open question is a rule under which cooperation is adopted *and*
 competition between groups goes on.
 
-**Related notes:** [Help](help.md) · [Flows that go round](circulation.md) ·
+**Related notes:** [Help](help.md) · [Flows that go round](token-flow.md#flows-that-go-round) ·
 [Families](genotype.md#families) ·
 [Do agents cooperate?](do-agents-cooperate.md) ·
 [Another game](another-game.md) ·

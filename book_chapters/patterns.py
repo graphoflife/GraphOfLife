@@ -258,9 +258,9 @@ def patterns(ch: F.Chapter) -> None:
         def flows(kind, key):
             g = {"B2": [circ[w][kind][key] for w in B2], "B1": [circ[w][kind][key] for w in B1]}
             if allies:
-                g["another-game"] = [p["circulation"][kind][key] for p in allies]
+                g["another-game"] = [p["token-flow"][kind][key] for p in allies]
             if controls:
-                g["no alliances"] = [p["circulation"][kind][key] for p in controls]
+                g["no alliances"] = [p["token-flow"][kind][key] for p in controls]
             return g
 
         def excess(kind):

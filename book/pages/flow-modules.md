@@ -278,8 +278,8 @@ fifths.
 
 
 **Related notes:** [Flow modules and the map equation](map-equation.md) ·
-[Token flow](token-flow.md) · [Lightning](lightning.md) ·
-[Flows that go round](circulation.md) ·
+[Token flow](token-flow.md) · [Lightning](token-flow.md#lightning-tokens-that-go-round) ·
+[Flows that go round](token-flow.md#flows-that-go-round) ·
 [How the game is played](how-the-game-is-played.md) ·
 [Where the tokens flow](where-the-tokens-flow.md) ·
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md) ·
@@ -292,6 +292,6 @@ fifths.
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (8)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules and the map equation](map-equation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (9)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Flow modules and the map equation](map-equation.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
