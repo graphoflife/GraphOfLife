@@ -798,7 +798,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How do an agent's tokens grow with its connections? Is that the resting state of the even split (Where the tokens flow)? How closely knit is the neighbourhood of a well-connected agent? To whom are the well-connected joined?"
+      "summary": "On average, agents hold tokens in proportion to their connections plus one: the resting state of the even split. The exponent that least squares fits to this, 0.58, is no law; it says only that most agents have one or two connections."
     },
     {
       "id": "how-a-world-breaks",
@@ -810,7 +810,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How much of a world hangs on single connections? Does a world in which a large part hangs on one connection lose more agents? When a game cuts off a thousand agents, what severed them — and why there?"
+      "summary": "Only the largest connected piece of a world's network survives each phase, so a whole region can die in one game. In a typical settled world one connection holds a ninth of it to the rest, yet such weak points almost never give way."
     },
     {
       "id": "degree",
@@ -1195,7 +1195,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-08",
-      "summary": "How long does a genotype last? How long does an agent? Does any single genotype ever hold a large part of the world? Does any *line of descent* take the world over — and how often?"
+      "summary": "A genotype names one exact brain, and in B1 brains change so often that a genotype lasts about two iterations. A world holds about five genotypes for every eight agents, and the most common one usually holds only about 1% of it."
     },
     {
       "id": "what-the-brains-are-like",

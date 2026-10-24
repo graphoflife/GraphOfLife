@@ -64,6 +64,6 @@ no better.
 
 ← [The Wilson interval](wilson-interval.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Muller plots](muller-plot.md) →
 
-> [!info]- Pages that link here (13)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Degree](degree.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How worlds are measured](how-worlds-are-measured.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Fitting a straight line, and R²](least-squares.md) · [Fitting a power law properly](power-law-fit.md)
+> [!info]- Pages that link here (14)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [Degree](degree.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How worlds are measured](how-worlds-are-measured.md) · [Survival curves (Kaplan–Meier)](kaplan-meier.md) · [Fitting a straight line, and R²](least-squares.md) · [Fitting a power law properly](power-law-fit.md)
 <!-- /turns -->
