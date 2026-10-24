@@ -564,7 +564,7 @@
     },
     {
       "id": "gini-coefficient",
-      "title": "The Gini coefficient and the Lorenz curve",
+      "title": "Measuring inequality: the Gini coefficient, the richest tenth, entropy",
       "file": "pages/gini-coefficient.md",
       "topics": [
         "wealth"
@@ -572,43 +572,7 @@
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How unequal is the wealth of a world?"
-    },
-    {
-      "id": "richest-tenth",
-      "title": "The richest tenth's share",
-      "file": "pages/richest-tenth.md",
-      "topics": [
-        "wealth"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A second, plainer measure of inequality than the Gini coefficient: **what share of all tokens do the richest ten percent of agents hold?** If everyone held the same, it would be 10%."
-    },
-    {
-      "id": "tokens-per-agent",
-      "title": "Tokens per agent: mean, median, extremes",
-      "file": "pages/tokens-per-agent.md",
-      "topics": [
-        "wealth"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Four simple numbers describe how the tokens of a world are held, after every phase."
-    },
-    {
-      "id": "entropy-and-evenness",
-      "title": "Entropy and evenness",
-      "file": "pages/entropy-and-evenness.md",
-      "topics": [
-        "wealth"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How evenly is something shared out — tokens over agents, agents over genotypes, agents over numbers of connections?"
+      "summary": "Four kinds of number say how unequally a world's tokens are held, and the notebook records them after every phase. The Gini coefficient sums up the whole Lorenz curve in one number, and the richest tenth's share reads one point of it."
     },
     {
       "id": "gains-losses-and-the-share-out",

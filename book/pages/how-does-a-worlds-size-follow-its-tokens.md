@@ -707,7 +707,7 @@ tokens, over the same iterations:
 > **To make it again:** `python3 book_figures.py takeover`.
 <!-- /figure -->
 
-Per agent, almost nothing changes. The Gini coefficient, the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.")'s
+Per agent, almost nothing changes. The Gini coefficient, the [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")'s
 share and the genotypes per agent are all within 3% of their values at 10,000
 tokens. So are the shares of nodes taken by [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") and kept by their own
 agent. There are 8% more connections per agent and 5% fewer leaves. Births

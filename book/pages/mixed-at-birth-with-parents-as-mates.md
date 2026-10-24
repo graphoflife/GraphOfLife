@@ -384,7 +384,7 @@ is read:
   1.28 times as many steps to reach half its world as in that twin. A space
   needs at least 1.5 times as many. These are folded small worlds, as
   Experiment 19's are.
-- **[Evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."):** a [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of the tokens of 0.43 to 0.48. A Gini is 0
+- **[Evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."):** a [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of the tokens of 0.43 to 0.48. A Gini is 0
   if every agent holds as many, and near 1 if one holds nearly all. That is
   about as even as B2's least even world (0.46).
 

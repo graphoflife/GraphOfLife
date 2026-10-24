@@ -122,7 +122,7 @@ The columns differ a great deal in height:
 - The number of distinct [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), or kinds of brain, per agent is almost
   the same in every world: a spread of 0.02.
 - Inequality (the [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), 0.06), connections per agent (0.08) and
-  the share of tokens held by the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.") (0.09) vary little.
+  the share of tokens held by the [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.") (0.09) vary little.
 - The number of agents (0.11) and of connections (0.12) vary more.
 - The number of [families](families.md), or separate lines of descent
   (0.20), and the number of births in an iteration (0.22) vary more still.

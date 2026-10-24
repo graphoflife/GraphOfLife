@@ -25,7 +25,7 @@ connections. After every game the viewer also reports the extremes
 ([What a run records](frames-and-stats.md)):
 
 - the richest agent and the poorest, `maxTokens` and `minTokens`
-  ([Tokens per agent: mean, median, extremes](tokens-per-agent.md));
+  ([Tokens per agent: mean, median, extremes](gini-coefficient.md#tokens-per-agent-mean-median-extremes));
 - the best-connected agent and the least, `maxDegree` and `minDegree`, beside
   the median agent's `medianDegree` ([Degree](degree.md));
 - the largest gain and the largest loss of one agent in the game,
@@ -422,10 +422,10 @@ Each figure says, folded beneath it, which runs it reads and how.
 <!-- turns -->
 ---
 
-← [Gains and losses](gains-and-losses.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [The Gini coefficient and the Lorenz curve](gini-coefficient.md) →
+← [Gains and losses](gains-and-losses.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (15)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [How the game is played](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Genotypes and lineages](genotypes-and-lineages.md)
+> [!info]- Pages that link here (16)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [How the game is played](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Genotypes and lineages](genotypes-and-lineages.md)
 <!-- /turns -->

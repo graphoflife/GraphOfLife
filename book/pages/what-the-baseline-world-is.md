@@ -85,7 +85,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
   follow from the [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), as in a stationary population, one whose make-up
   holds still while its members come and go
   ([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
-- **A Gini coefficient of wealth of 0.47** (0.49), with the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.")
+- **A Gini coefficient of wealth of 0.47** (0.49), with the [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")
   holding **42%** of the tokens (44%)
   ([Where do the tokens go?](where-do-the-tokens-go.md)).
 - **44%** of agents keep their node in a game (45%), and [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") win
@@ -309,7 +309,7 @@ may choose at most 8 links.
 ### What came next
 
 The measurements of B1 then read the same thirty worlds through every
-statistic the Graph of Life viewer offers: [entropy](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."), gains and losses, the
+statistic the Graph of Life viewer offers: [entropy](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."), gains and losses, the
 flow of tokens, what crosses a connection, children, [power laws](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones."), the largest
 and the smallest, scaling, geometry, how worlds break, pictures, cooperation.
 They closed with [Questioning the mechanics](questioning-the-mechanics.md),

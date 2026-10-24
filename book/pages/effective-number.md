@@ -39,7 +39,7 @@ nothing an agent does.
 ## Two effective numbers
 
 [Brain diversity](brain-diversity.md) uses a sibling of this count, 2^H with H
-the [entropy](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of the shares — the Hill number of order 1, which weighs rare kinds
+the [entropy](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of the shares — the Hill number of order 1, which weighs rare kinds
 a little more than the one above (order 2) does. Both are 1 for a single kind
 and n for n equally common ones; on a population with many rare kinds, 2^H is
 the larger. Where the notebook gives an effective number it says which.
@@ -51,6 +51,6 @@ the larger. Where the notebook gives an effective number it says which.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (6)
-> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [!info]- Pages that link here (7)
+> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

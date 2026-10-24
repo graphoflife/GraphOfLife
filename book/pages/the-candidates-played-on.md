@@ -491,7 +491,7 @@ the least of B2's ten worlds at 10,000.
 - **A fast change of brains passes in none of five.** Its two worlds that
   passed are more even than any of B2's, with Ginis of 0.38 and 0.34. Four
   of its five worlds are, at 8 to 22 tokens per agent. Its "not poor" was
-  [evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.").
+  evenness.
 - **The others keep their count.** Plain mixing still passes in three, and
   no random inputs and no revolutions in one each, with Ginis of 0.52 to
   0.55.

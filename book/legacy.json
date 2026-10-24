@@ -132,12 +132,12 @@
   "n-core-trees-leaves": "core-trees-leaves",
   "n-bridges": "bridges",
   "n-gini-coefficient": "gini-coefficient",
-  "n-richest-tenth": "richest-tenth",
+  "n-richest-tenth": "gini-coefficient#the-richest-tenths-share",
   "n-home-stake": "home-stake",
   "n-families": "families",
   "n-common-ancestor": "common-ancestor",
-  "n-tokens-per-agent": "tokens-per-agent",
-  "n-entropy-and-evenness": "entropy-and-evenness",
+  "n-tokens-per-agent": "gini-coefficient#tokens-per-agent-mean-median-extremes",
+  "n-entropy-and-evenness": "gini-coefficient#entropy-and-evenness",
   "n-gains-and-losses": "gains-losses-and-the-share-out",
   "n-brain-diversity": "brain-diversity",
   "n-reproduction-statistics": "reproduction-statistics",
@@ -310,6 +310,9 @@
   "handover-with-every-other-rule": "the-switches-the-world-was-built-with#handover-with-every-other-rule",
   "gifts-with-every-other-rule": "the-switches-the-world-was-built-with#gifts-with-every-other-rule",
   "spectral-dimension": "ball-dimension-and-curvature#the-spectral-dimension",
-  "box-dimension": "ball-dimension-and-curvature#box-dimension"
+  "box-dimension": "ball-dimension-and-curvature#box-dimension",
+  "richest-tenth": "gini-coefficient#the-richest-tenths-share",
+  "tokens-per-agent": "gini-coefficient#tokens-per-agent-mean-median-extremes",
+  "entropy-and-evenness": "gini-coefficient#entropy-and-evenness"
  }
 }

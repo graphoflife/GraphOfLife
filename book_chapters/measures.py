@@ -73,7 +73,7 @@ def entropy(ch: F.Chapter) -> None:
     ch.grid(
         "evenness", panels, columns=3, title="How even a world is, in three respects",
         caption=f"Evenness after every game of the {len(specs)} baseline worlds, from 0 (everything in one hand) "
-                "to 1 (as even as it can be; [Entropy and evenness](entropy-and-evenness.md)). "
+                "to 1 (as even as it can be; [Entropy and evenness](gini-coefficient.md#entropy-and-evenness)). "
                 "Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the "
                 "numbers of connections that occur (`degreeEvenness`). Right: of the agents over the "
                 "genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the "

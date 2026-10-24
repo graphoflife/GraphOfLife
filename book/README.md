@@ -85,10 +85,7 @@ How unequal a world is, who stays rich, and how gains and losses are shared out.
 - [Gains and losses](pages/gains-and-losses.md)
 - [The largest and the smallest](pages/the-largest-and-the-smallest.md)
 - What keeps wealth spread? — *not written yet*
-- [The Gini coefficient and the Lorenz curve](pages/gini-coefficient.md)
-- [The richest tenth's share](pages/richest-tenth.md)
-- [Tokens per agent: mean, median, extremes](pages/tokens-per-agent.md)
-- [Entropy and evenness](pages/entropy-and-evenness.md)
+- [Measuring inequality: the Gini coefficient, the richest tenth, entropy](pages/gini-coefficient.md)
 - [Gains, losses and the share-out](pages/gains-losses-and-the-share-out.md)
 
 ### The game and the flow of tokens

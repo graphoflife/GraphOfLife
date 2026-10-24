@@ -15,7 +15,7 @@ agents *decide* is a separate measure: the
 **Tokens, links and ages.** Sort the agents into doubling classes: 1, 2–3,
 4–7, 8–15, and so on (for ages, the age plus one, so that a newborn counts).
 The **spread** is the [effective number](effective-number.md) of classes the
-agents fill: 2 to the power of the [entropy](entropy-and-evenness.md), in
+agents fill: 2 to the power of the [entropy](gini-coefficient.md#entropy-and-evenness), in
 bits, of the classes' shares. It is 1 when every agent is in one class, and
 *k* when the agents are spread evenly over *k* classes. Agents holding one to
 three tokens fill at most two classes.
@@ -122,6 +122,6 @@ the kinds swing from moment to moment.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->

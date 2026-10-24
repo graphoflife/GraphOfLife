@@ -226,7 +226,7 @@ how close to an [even split](even-split.md "What the rules do when a brain score
 
 ## How a rich agent drains back
 
-If the rich lose 48% of their tokens in a game, how can the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.")
+If the rich lose 48% of their tokens in a game, how can the [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")
 always hold 42% of all tokens
 ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time))?
 Because wealth has places where it can rest, and whoever sits in such a place

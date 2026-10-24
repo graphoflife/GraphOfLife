@@ -60,7 +60,7 @@ and works an example by hand.
 
 A plainer measure reads a single point of the curve: the share of all tokens
 held by the **richest tenth** of the agents. If everyone held the same, it
-would be 10% ([The richest tenth's share](richest-tenth.md)).
+would be 10% ([The richest tenth's share](gini-coefficient.md#the-richest-tenths-share)).
 
 ### What was expected
 
@@ -353,7 +353,7 @@ $$
 
 With four equal shares you would need two questions every time: log₂ 4 = 2,
 the most four agents allow. With everything in one hand you would need none.
-Two readings of *H* follow ([Entropy and evenness](entropy-and-evenness.md)):
+Two readings of *H* follow ([Entropy and evenness](gini-coefficient.md#entropy-and-evenness)):
 
 - the **evenness** *J* = *H* / log₂ *n* runs from 0 (one holds everything) to
   1 (all hold the same). Here it is 1.75/2 = 0.875;
@@ -374,7 +374,7 @@ many connections does it have? Which genotype does it carry?*
 <!-- figure entropy/evenness -->
 ![How even a world is, in three respects](../figures/entropy/evenness.svg)
 
-**How even a world is, in three respects.** Evenness after every game of the 30 baseline worlds, from 0 (everything in one hand) to 1 (as even as it can be; [Entropy and evenness](entropy-and-evenness.md)). Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the numbers of connections that occur (`degreeEvenness`). Right: of the agents over the genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the number of agents, measured every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**How even a world is, in three respects.** Evenness after every game of the 30 baseline worlds, from 0 (everything in one hand) to 1 (as even as it can be; [Entropy and evenness](gini-coefficient.md#entropy-and-evenness)). Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the numbers of connections that occur (`degreeEvenness`). Right: of the agents over the genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the number of agents, measured every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -933,6 +933,6 @@ first tested. Four of them died out before iteration 3,000:
 
 [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains and losses](gains-and-losses.md) →
 
-> [!info]- Pages that link here (23)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [The estate of the dead](estate.md) · [Gains and losses](gains-and-losses.md) · [Tokens per agent: mean, median, extremes](tokens-per-agent.md) · [Entropy and evenness](entropy-and-evenness.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brain diversity](brain-diversity.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Correlation](correlation.md) · [Mobility](mobility.md)
+> [!info]- Pages that link here (22)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [The estate of the dead](estate.md) · [Gains and losses](gains-and-losses.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brain diversity](brain-diversity.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Correlation](correlation.md) · [Mobility](mobility.md)
 <!-- /turns -->

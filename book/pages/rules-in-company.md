@@ -156,7 +156,7 @@ waits its turn.
 >   to 0.60): the half of their agents at three tokens or fewer no longer
 >   counts against them.
 >
-> So room costs [evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") only where links lapse. What the spaces of births,
+> So room costs evenness only where links lapse. What the spaces of births,
 > no old age and handover still miss is diversity, or marks. At 10,000
 > iterations it is the small rich worlds that grew even
 > ([The candidates, played on](the-candidates-played-on.md)), the second seed without

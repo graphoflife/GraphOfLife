@@ -125,7 +125,7 @@ within them](between-and-within.md) explains; here the groups are the
 | flow that runs one way (`flowImbalance`) | 0.88 | flow per link (`meanEdgeFlow`) | 0.19 |
 | net ÷ staked flow (`netFlowShare`) | 0.87 | [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") on [loops](loops.md "A path through the network that comes back to where it started without using a connection twice.") (`netCyclingShare`) | 0.16 |
 | revolutions per agent | 0.87 | the poorest agent (`minTokens`) | 0.15 |
-| [evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of wealth (`tokenEntropy`) | 0.82 | starved per agent | 0.14 |
+| [evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of wealth (`tokenEntropy`) | 0.82 | starved per agent | 0.14 |
 | agents in the core (`coreShare`) | 0.81 | fit of the degree law (`degreeGammaR2`) | 0.13 |
 
 The settings decide **how agents play**: whether they spread or go all in,

@@ -27,7 +27,7 @@ $$
   none, PR = *m*. For example, *m* eigenvalues of 1 give *m*²/*m* = *m*.
 - If one direction holds almost everything, PR is close to 1.
 - In between, PR is an **[effective number](effective-number.md "How many kinds there really are, when kinds are counted by how much of the population they hold.")** of directions, in the same sense
-  as 2^H is an effective number of kinds ([Entropy and evenness](entropy-and-evenness.md)):
+  as 2^H is an effective number of kinds ([Entropy and evenness](gini-coefficient.md#entropy-and-evenness)):
   how many equally important directions would spread the cloud as unevenly
   as it is spread.
 

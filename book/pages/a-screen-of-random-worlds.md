@@ -223,7 +223,7 @@ We expected at least one of the fifty worlds to be healthy. Settings drawn
 together reach combinations that no single change of B2 would, and the round
 judges every criterion at once. But a healthy world is rare. Of 45 worlds of
 B2's kind read at iteration 2,000, ten met the health bar's marks at a
-dimension of 2 to 4, and that was before width, diversity and [evenness](entropy-and-evenness.md "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") were
+dimension of 2 to 4, and that was before width, diversity and [evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") were
 asked for. So the thesis asks for only one healthy world in fifty. It was
 written down on 22 October 2026, before any of the round's runs existed:
 

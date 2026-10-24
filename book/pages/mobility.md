@@ -69,6 +69,6 @@ the [baseline](b1-and-b2.md "The stated rules an experiment starts from and chan
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (2)
-> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)
+> [!info]- Pages that link here (3)
+> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md)
 <!-- /turns -->

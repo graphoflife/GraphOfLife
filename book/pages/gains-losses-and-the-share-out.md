@@ -53,7 +53,7 @@ cleanup report of each frame.
 <!-- turns -->
 ---
 
-← [Entropy and evenness](entropy-and-evenness.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
+← [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
 
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 

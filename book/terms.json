@@ -269,16 +269,18 @@
     },
     {
       "name": "richest tenth",
-      "page": "richest-tenth",
-      "says": "The share of all tokens held by the richest tenth of the agents."
+      "page": "gini-coefficient",
+      "says": "The share of all tokens held by the richest tenth of the agents.",
+      "anchor": "the-richest-tenths-share"
     },
     {
       "name": "entropy",
       "also": [
         "evenness"
       ],
-      "page": "entropy-and-evenness",
-      "says": "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."
+      "page": "gini-coefficient",
+      "says": "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.",
+      "anchor": "entropy-and-evenness"
     },
     {
       "name": "share-out",

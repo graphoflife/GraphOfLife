@@ -40,7 +40,7 @@ there.
 - **[diversity score](diversity-score.md)** — How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.
 - **[effective kinds of staking](how-different-are-the-agents.md)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
 - **[effective number](effective-number.md)** — How many kinds there really are, when kinds are counted by how much of the population they hold.
-- **[entropy](entropy-and-evenness.md)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
+- **[entropy](gini-coefficient.md#entropy-and-evenness)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
 - **[estate](estate.md)** — The tokens a dead agent leaves, and who gets them.
 - **[even split](even-split.md)** — What the rules do when a brain scores no candidate above zero: the stake is spread evenly.
 - **[exploitability](exploitability.md)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
@@ -83,7 +83,7 @@ there.
 - **[preferential attachment](preferential-attachment.md)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](random-twin.md)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.
 - **[revolution](revolution.md)** (also coalition) — A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.
-- **[richest tenth](richest-tenth.md)** — The share of all tokens held by the richest tenth of the agents.
+- **[richest tenth](gini-coefficient.md#the-richest-tenths-share)** — The share of all tokens held by the richest tenth of the agents.
 - **[scaling relation](scaling-relations.md)** — How one property of an agent grows with another, as a power.
 - **[seed](random-numbers.md)** — The number that fixes every random choice of a run: the same settings and the same seed make the same world.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.

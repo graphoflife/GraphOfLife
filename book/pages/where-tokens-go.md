@@ -67,7 +67,7 @@ slope of 0.94, in the worlds without a giant [star](stars-and-hubs.md "An agent 
 
 So in B1, wealth is a matter of place. Tokens and connections go together (a
 rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of +0.56). A rich agent is still rich ten games later
-(+0.78). The [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.") hold about two fifths of the tokens, 39% to 44%
+(+0.78). The [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.") hold about two fifths of the tokens, 39% to 44%
 ([Rich agents are connected agents](where-do-the-tokens-go.md#rich-agents-are-connected-agents),
 [What goes with what](what-goes-with-what.md#the-agents)).
 
