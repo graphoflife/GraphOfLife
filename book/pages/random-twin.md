@@ -136,6 +136,6 @@ by the rule that made them. The line of 1.5 lies between the two.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (9)
-> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (10)
+> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->

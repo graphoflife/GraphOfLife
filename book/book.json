@@ -767,7 +767,7 @@
       "kind": "explanation",
       "status": "written",
       "added": "2026-10-09",
-      "summary": "Which ideas from physics shaped the rules of Graph of Life? Where does the algorithm follow them, and where does it break them? What would it mean for a space, a particle or life to emerge here — and how would one measure it?"
+      "summary": "The rules of Graph of Life were chosen with physics in mind: they conserve the tokens, are the same everywhere, and are almost all local."
     },
     {
       "id": "like-next-to-like",
