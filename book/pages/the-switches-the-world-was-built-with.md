@@ -99,7 +99,7 @@ The worlds are pilots in the engine's own code (`--proto engine=true`; see
 [Pilot worlds](pilot-worlds.md)), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of each kind. Each holds 10,000
 tokens and runs for 1,000 iterations, and a whole world is kept every 100
 iterations. With two seeds a kind, what they show is indicative, not an
-effect ([How many seeds an experiment needs](seeds-needed.md)). The two
+effect ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)). The two
 baselines differ in their brains. B1's, of five hidden layers, barely see
 what is around them. B2's, of one hidden layer of 16 units, are brains that
 see ([B1 and B2: the two baselines](b1-and-b2.md)).

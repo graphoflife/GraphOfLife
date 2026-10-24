@@ -590,7 +590,7 @@ def seed(ch: F.Chapter) -> None:
             needed.append(line(100 * changes, np.ceil(n_needed), f"{label}, {how} (spread {cv:.2f})", k * 2,
                                width=2, **({"dash": dash} if dash else {})))
     ch.figure(
-        "seeds-needed", title="Seeds a condition needs",
+        "bootstrap", title="Seeds a condition needs",
         x={"label": "the change to be seen, % of the mean"},
         y={"label": "seeds per condition (logarithmic)", "log": True, "min": 1},
         series=needed, guides=[{"axis": "y", "at": 30}],

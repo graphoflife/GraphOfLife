@@ -174,9 +174,9 @@
   "n-participation-ratio": "participation-ratio",
   "n-kaplan-meier": "kaplan-meier",
   "n-bootstrap": "bootstrap",
-  "n-permutation-test": "permutation-test",
-  "n-seeds-needed": "seeds-needed",
-  "n-wilson-interval": "wilson-interval",
+  "n-permutation-test": "bootstrap#permutation-tests",
+  "n-seeds-needed": "bootstrap#how-many-seeds-an-experiment-needs",
+  "n-wilson-interval": "bootstrap#the-wilson-interval",
   "n-logarithmic-axes": "logarithmic-axes",
   "n-muller-plot": "muller-plot",
   "n-least-squares": "least-squares",
@@ -336,6 +336,9 @@
   "settled-life": "median-and-quantiles#the-settled-life-of-a-world",
   "spread-between-worlds": "median-and-quantiles#spread-between-worlds",
   "map-equation": "flow-modules#flow-modules-and-the-map-equation",
-  "help": "do-agents-cooperate#help"
+  "help": "do-agents-cooperate#help",
+  "permutation-test": "bootstrap#permutation-tests",
+  "wilson-interval": "bootstrap#the-wilson-interval",
+  "seeds-needed": "bootstrap#how-many-seeds-an-experiment-needs"
  }
 }

@@ -33,7 +33,7 @@ Three worlds: (*x*, *y*) = (1, 2), (2, 2), (3, 5). Means 2 and 3. Deviations
 ## Is a correlation real?
 
 With few pairs, a sizeable *r* can come about by chance. The notebook checks
-this with a [permutation test](permutation-test.md): shuffle the *y* values
+this with a [permutation test](bootstrap.md#permutation-tests): shuffle the *y* values
 against the *x* values many times, and see how often the shuffled pairs give
 an *r* at least as large. In [How much does the seed decide?](how-much-does-the-seed-decide.md),
 for 26 worlds, the correlation 0.12 between the number of [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") in the first
@@ -54,5 +54,5 @@ brings both.
 ← [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Autocorrelation: how long a world remembers](autocorrelation.md) →
 
 > [!info]- Pages that link here (13)
-> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Mobility](mobility.md) · [Between worlds and within them](between-and-within.md) · [Permutation tests](permutation-test.md) · [Fitting a straight line, and R²](least-squares.md)
+> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Mobility](mobility.md) · [Between worlds and within them](between-and-within.md) · [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md) · [Fitting a straight line, and R²](least-squares.md)
 <!-- /turns -->

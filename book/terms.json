@@ -505,13 +505,15 @@
     },
     {
       "name": "permutation test",
-      "page": "permutation-test",
-      "says": "Whether a difference could be chance, found by shuffling which world belongs to which condition."
+      "page": "bootstrap",
+      "says": "Whether a difference could be chance, found by shuffling which world belongs to which condition.",
+      "anchor": "permutation-tests"
     },
     {
       "name": "Wilson interval",
-      "page": "wilson-interval",
-      "says": "The range a share probably lies in, when it was counted in only a few worlds."
+      "page": "bootstrap",
+      "says": "The range a share probably lies in, when it was counted in only a few worlds.",
+      "anchor": "the-wilson-interval"
     },
     {
       "name": "logarithmic axis",

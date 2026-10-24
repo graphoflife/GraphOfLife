@@ -1715,7 +1715,7 @@
     },
     {
       "id": "bootstrap",
-      "title": "The bootstrap",
+      "title": "How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds",
       "file": "pages/bootstrap.md",
       "topics": [
         "methods"
@@ -1723,43 +1723,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Thirty worlds give a mean."
-    },
-    {
-      "id": "permutation-test",
-      "title": "Permutation tests",
-      "file": "pages/permutation-test.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A difference between two conditions, or a correlation between two measurements, could be real — or chance."
-    },
-    {
-      "id": "seeds-needed",
-      "title": "How many seeds an experiment needs",
-      "file": "pages/seeds-needed.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "An experiment changes one setting and asks whether the worlds change."
-    },
-    {
-      "id": "wilson-interval",
-      "title": "The Wilson interval",
-      "file": "pages/wilson-interval.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Four of the thirty baseline worlds of 10,000 tokens died out: 13%."
+      "summary": "Every number the notebook reports comes from a few dozen worlds, and another few dozen would give a somewhat different number. Four tools say how much that matters. The bootstrap redraws the worlds we have, many times, to show how much a mean could vary."
     },
     {
       "id": "logarithmic-axes",

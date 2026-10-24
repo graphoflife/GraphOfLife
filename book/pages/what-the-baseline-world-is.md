@@ -285,7 +285,7 @@ may choose at most 8 links.
   varies across seeds by much less than its last fifth does. For the number
   of agents it varies by 0.10 of the mean instead of 0.17 at 100,000 tokens,
   and 0.17 instead of 0.25 at 10,000. So it needs fewer than half the seeds
-  ([How many seeds an experiment needs](seeds-needed.md)).
+  ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)).
 - **Thirty seeds see changes of about a tenth.** Over the settled life,
   thirty seeds per condition see a change of 8% in the number of agents, 9%
   in connections and 5% in inequality at 100,000 tokens, four times in five

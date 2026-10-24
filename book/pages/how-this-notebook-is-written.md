@@ -77,7 +77,7 @@ it again.
 - **The thesis comes first.** It is fixed in the plan before the runs start.
 - **Enough seeds.** A difference seen in fewer than thirty seeds per
   condition is called *indicative*, not an effect
-  ([How many seeds an experiment needs](seeds-needed.md)).
+  ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)).
 - **No number without its null.** A measurement is reported next to what it
   would be by chance.
 - **Every run can be made again**, from its plan, seed and frozen engine

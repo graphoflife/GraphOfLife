@@ -363,7 +363,7 @@ change (it asked for more than half).
 >   four workers; 11 GB on disk; at most 746 MB of memory for one run.
 > - **Comparisons:** paired by seed; intervals by resampling the
 >   differences, *p* by flipping their signs at random, 10,000 times each
->   ([Permutation tests](permutation-test.md)).
+>   ([Permutation tests](bootstrap.md#permutation-tests)).
 > - **Results:** `book/results/E07.json`, made with `python3 gol_lab.py analyse E07`
 >   (about 14 minutes: the lineages read every frame of every run); the
 >   figures with `python3 book_figures.py brains`.

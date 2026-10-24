@@ -161,7 +161,7 @@ several agents acting together.
   and [The Gini coefficient and the Lorenz curve](gini-coefficient.md).
 - **[Lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
   1958): [Survival curves](kaplan-meier.md).
-- **Intervals by resampling**: the [bootstrap](bootstrap.md "How sure a number is, found by redrawing the worlds it came from many times.") (Efron 1979). **Intervals for
+- **Intervals by resampling**: the bootstrap (Efron 1979). **Intervals for
   proportions**: Wilson (1927).
 - **[Correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of a series with itself**, and the bias of measuring them
   against the series' own mean: Bartlett (1946), Marriott and Pope (1954),
@@ -170,7 +170,7 @@ several agents acting together.
   of one: Clauset, Shalizi and Newman (2009). See
   [Logarithmic axes](logarithmic-axes.md).
 - **Testing by shuffling**: the permutation test goes back to Fisher (1935).
-  See [Permutation tests](permutation-test.md).
+  See [Permutation tests](bootstrap.md#permutation-tests).
 - **Pictures of networks**: the ForceAtlas2 layout (Jacomy, Venturini, Heymann
   and Bastian 2014) places joined nodes near each other.
 - **Progress against the past**: compare a population with its own ancestors,

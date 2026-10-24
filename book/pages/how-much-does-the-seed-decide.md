@@ -293,7 +293,7 @@ crowded in the second?
 
 Hardly. Over the 30 worlds, the correlation between the two halves is 0.17 for
 the number of agents and 0.20 for connections. Now pair first and second
-halves at random, many times over ([a permutation test](permutation-test.md)).
+halves at random, many times over ([a permutation test](bootstrap.md#permutation-tests)).
 Random pairings give a correlation at least that large 18 and 14 times in 100.
 So a world's first half says little more about its second than another
 world's first half would.
@@ -345,7 +345,7 @@ $$
 
 worlds, rounded up. Here *z*₁ = 1.960 stands for the 5% level, and
 *z*₂ = 0.842 for the four times in five.
-[How many seeds an experiment needs](seeds-needed.md) shows where the formula
+[How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs) shows where the formula
 comes from. The seeds needed grow with the square of the spread, and fall with
 the square of the change. For the number of agents over the settled life,
 *c* = 0.11. So a change of a tenth needs *n* = 15.7 × 0.11² / 0.1² ≈ 19
@@ -429,7 +429,7 @@ over their settled life, from iteration 500 on.
 - [A world's life](a-worlds-life.md): how a single world wanders.
 - [Stars and hubs](stars-and-hubs.md): the worlds that one agent holds
   together.
-- [How many seeds an experiment needs](seeds-needed.md): the formula behind
+- [How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs): the formula behind
   the seed counts, step by step.
 - [Thirty worlds](a-worlds-life.md#thirty-worlds): the thirty worlds of this page, and the
   other questions asked of them.
@@ -592,5 +592,5 @@ written by `python3 gol_lab.py analyse E03`.
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (15)
-> [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Correlation](correlation.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Between worlds and within them](between-and-within.md) · [How many seeds an experiment needs](seeds-needed.md)
+> [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Correlation](correlation.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [Between worlds and within them](between-and-within.md) · [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md)
 <!-- /turns -->

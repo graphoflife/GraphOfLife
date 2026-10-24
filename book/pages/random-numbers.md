@@ -109,7 +109,7 @@ mutation adds normal draws to a brain's numbers
   tested all this, and found the threads.
 - [How much does the seed decide?](how-much-does-the-seed-decide.md): how
   differently thirty worlds of the same settings turn out.
-- [How many seeds an experiment needs](seeds-needed.md): why an experiment
+- [How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs): why an experiment
   runs many seeds.
 - [The starting ring](starting-ring.md): what the ring's stream builds.
 

@@ -220,7 +220,7 @@ average world, and a column's height shows the spread
 - To say how much the seed decides
   ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 - To work out how many seeds an experiment needs: the number grows with *c*²
-  ([How many seeds an experiment needs](seeds-needed.md)).
+  ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)).
 
 ## Where to go next
 
@@ -228,7 +228,7 @@ average world, and a column's height shows the spread
   spread of thirty worlds, statistic by statistic.
 - [The life of a B1 world](a-worlds-life.md): bands at work, and single
   worlds drawn one by one.
-- [How many seeds an experiment needs](seeds-needed.md): what the spread
+- [How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs): what the spread
   means for planning an experiment.
 - [The bootstrap](bootstrap.md): how sure a median of thirty worlds is.
 
@@ -237,6 +237,6 @@ average world, and a column's height shows the spread
 
 ← [Pilot worlds](pilot-worlds.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Correlation](correlation.md) →
 
-> [!info]- Pages that link here (19)
-> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [What a brain sees](brain-inputs.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Do the brains matter?](do-the-brains-matter.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [The bootstrap](bootstrap.md) · [How many seeds an experiment needs](seeds-needed.md)
+> [!info]- Pages that link here (18)
+> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [What a brain sees](brain-inputs.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Do the brains matter?](do-the-brains-matter.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Autocorrelation: how long a world remembers](autocorrelation.md) · [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md)
 <!-- /turns -->

@@ -83,7 +83,7 @@ A pilot has two seeds where an experiment has ten, and it was not announced
 with a thesis before it ran. So a pilot can show that something *can* happen,
 or give a number worth testing, but a difference between two pilots of two
 seeds each is a lead, not a finding
-([How many seeds an experiment needs](seeds-needed.md)). The pages built
+([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)). The pages built
 on pilots say so where it matters. Whatever they find that the notebook relies on
 later is meant to be tested again as an experiment of the lab.
 

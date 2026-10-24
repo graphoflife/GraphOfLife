@@ -144,17 +144,17 @@ would make them differ.
    with a 95% interval from the [bootstrap](bootstrap.md): resample
    the worlds with replacement 10,000 times and keep the middle 95% of the
    resampled differences. Worlds made with the same seed are paired.
-2. **Could it be chance?** A [permutation test](permutation-test.md):
+2. **Could it be chance?** A [permutation test](bootstrap.md#permutation-tests):
    if the setting made no difference, the labels "baseline" and "changed"
    would be arbitrary, so shuffle them 10,000 times and see how often a
    difference at least as large appears. That share is the *p*-value.
 3. **Enough seeds?** How many worlds per condition a change of a given size
-   needs to be found four times in five ([How many seeds](seeds-needed.md)).
+   needs to be found four times in five ([How many seeds](bootstrap.md#how-many-seeds-an-experiment-needs)).
    Results from fewer than thirty seeds per condition are called
    **indicative**, not effects.
 
 Worlds that died out are not averaged in; they are an outcome of their own,
-counted with a [Wilson interval](wilson-interval.md) for the share
+counted with a [Wilson interval](bootstrap.md#the-wilson-interval) for the share
 that died.
 
 ## Step 6 · How long things last

@@ -76,7 +76,7 @@ there.
 - **[open-ended evolution](open-ended-test.md)** — Evolution that keeps producing new things without end, not only up to a plateau.
 - **[participation ratio](participation-ratio.md)** — How many directions a cloud of points really uses.
 - **[path length](path-length.md)** — How many connections the shortest way between two agents crosses.
-- **[permutation test](permutation-test.md)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
+- **[permutation test](bootstrap.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](pilot-worlds.md)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
 - **[power law](power-law-fit.md)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
 - **[power spectrum](power-spectrum.md)** — How much of a series' wandering comes at each speed, from slow to fast.
@@ -96,7 +96,7 @@ there.
 - **[token](the-world.md#agents-and-tokens)** — The one thing of value in a world: every agent holds a whole number of them, and their total never changes.
 - **[token curvature](gains-and-losses.md#token-curvature)** — How much richer an agent's neighbourhood is than the agent itself.
 - **[token flow](token-flow.md)** (also net flow) — The tokens a game moves along each connection, from the agent who stakes to the node staked on.
-- **[Wilson interval](wilson-interval.md)** — The range a share probably lies in, when it was counted in only a few worlds.
+- **[Wilson interval](bootstrap.md#the-wilson-interval)** — The range a share probably lies in, when it was counted in only a few worlds.
 - **[yes-or-no decision](binary-decision.md)** — A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion.
 <!-- /glossary -->
 

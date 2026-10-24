@@ -110,6 +110,6 @@ fewer.
 
 ← [How a brain changes](mutation.md) · [How the simulation works](../README.md#how-the-simulation-works)
 
-> [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md)
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md)
 <!-- /turns -->
