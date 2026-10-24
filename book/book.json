@@ -1506,7 +1506,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What is measured in a world, and when? How is one world summed up in a number? How are thirty worlds drawn in one figure?"
+      "summary": "A world of 10,000 tokens holds about 1,300 agents and lives 3,000 iterations: some four million agent-moments, recorded twice per iteration. The baseline worlds of 100,000 tokens hold about 14,000 agents for 1,500 iterations: some twenty million."
     },
     {
       "id": "one-world-many-colours",
