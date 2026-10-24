@@ -221,8 +221,9 @@
     },
     {
       "name": "pilot",
-      "page": "pilot-worlds",
-      "says": "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."
+      "page": "the-lab",
+      "says": "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.",
+      "anchor": "pilot-worlds"
     },
     {
       "name": "cross-time tournament",

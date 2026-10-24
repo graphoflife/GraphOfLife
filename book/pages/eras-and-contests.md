@@ -288,7 +288,7 @@ solved, but not that it is.
   [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
   applies it to B2. [Every era against three](every-era-against-three.md)
   plays fixed eras. [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)
-  compares rules by their contests. [Pilot worlds](pilot-worlds.md) plays
+  compares rules by their contests. [Pilot worlds](the-lab.md#pilot-worlds) plays
   the eras of pilots.
 - **Exploitability.**
   [Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)

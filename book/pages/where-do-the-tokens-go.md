@@ -467,7 +467,7 @@ game about half the nodes take a copy of a winner's brain
 common again. A balance between a fixed rate of making and a fixed rate of
 copying gives a fixed ratio, whatever the brains do. So if a change of the
 rules moves the ratio, the change has altered how often brains are changed or
-copied. The [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of
+copied. The [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of
 [How fast should brains change?](how-fast-should-brains-change.md) show it.
 As the probability of a change rose from 0.05 to 0.8, the ratio rose from
 0.32 to 0.98. [Questioning the mechanics](questioning-the-mechanics.md) comes

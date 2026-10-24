@@ -126,7 +126,7 @@ One rule decides how much goes round in the first place: **whether a
 connection must carry tokens to survive.** Where it must (B1, and B2 with
 every unused link lapsing), the greedy search finds about a sixth of the
 staked flow on loops: 13% in B1 at 100,000 tokens, 17% at 10,000, and 11% to
-28% in the B2 [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") whose links lapse. In B2, whose connections survive
+28% in the B2 [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") whose links lapse. In B2, whose connections survive
 unused if their ends share two neighbours, it finds 4.5%, and the share falls
 over a world's life
 ([Every world](where-the-tokens-flow.md#every-world)).

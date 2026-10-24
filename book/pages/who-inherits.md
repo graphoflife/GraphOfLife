@@ -37,7 +37,7 @@ last two share the pool out evenly, as before.
 
 ## The worlds
 
-Each rule was played in [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds of 10,000 tokens for 2,000 iterations,
+Each rule was played in [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds of 10,000 tokens for 2,000 iterations,
 two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each (batch R), on both of the notebook's [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."): B2, the world that
 cannot break, with Experiment 16's settings, and B1, where worlds break and
 cut-off pieces are culled. The controls are the same settings and seeds with

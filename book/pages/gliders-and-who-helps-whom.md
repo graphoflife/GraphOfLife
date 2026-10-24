@@ -65,7 +65,7 @@ their own.
 This page reads the record of play: every game, with every agent's stakes. The
 worlds are B2's ten worlds of Experiment 16 and the first ten worlds of B1's
 [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") set, all of 10,000 tokens. Read are the games of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 to
-2,000: settled worlds, long after the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). For alliances, [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds
+2,000: settled worlds, long after the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). For alliances, [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds
 with and without them are played on from a checkpoint for 200 iterations.
 Their games are recorded in the same form
 ([How this was made](#how-this-was-made)).

@@ -59,7 +59,7 @@ From [What folds a world](how-many-dimensions-does-a-world-have.md#b1-and-b2-sid
 |---|---|---|---|
 | B1 at 10,000 tokens (Experiment 2) | 10.5 steps | 4.5 steps | 2.3 |
 | [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") at 10,000 tokens, [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000 (Experiment 16) | 5.0 steps | 4.2 steps | 1.18 |
-| B2 with the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead to the newborns or the parents ([pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), batch R) | 11.2 steps | 4.7 steps | 2.4 |
+| B2 with the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead to the newborns or the parents ([pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), batch R) | 11.2 steps | 4.7 steps | 2.4 |
 
 B1's width grows with its size, as a space's must: 2.3 at 1,500 agents, 3.7
 at 13,800 and 5.1 at 64,000. B2's does not: 1.24 at 1,600 agents, 1.18 at

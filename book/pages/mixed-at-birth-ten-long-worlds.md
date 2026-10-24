@@ -2,7 +2,7 @@
 
 > [!question] Questions of this page
 > - Do [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth keep a world healthy and rich for 10,000
->   [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), or was that the luck of a few [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds?
+>   [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), or was that the luck of a few [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds?
 > - What does a world of mixed brains look like after a long life: how many
 >   [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), how rich, how well knit? And why?
 > - Is that health a state a mixed world keeps, or one it passes through?

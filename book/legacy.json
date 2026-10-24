@@ -155,7 +155,7 @@
   "n-assortativity": "degree#assortativity",
   "n-correlation-function": "like-next-to-like#how-alike-at-a-distance",
   "n-viewer-colours": "viewer-colours",
-  "n-pilot-worlds": "pilot-worlds",
+  "n-pilot-worlds": "the-lab#pilot-worlds",
   "n-invasion-test": "eras-and-contests#the-invasion-test",
   "n-exploitability": "eras-and-contests#exploitability",
   "n-circulation": "token-flow#flows-that-go-round",
@@ -350,6 +350,7 @@
   "between-and-within": "variance-split#between-worlds-and-within-them",
   "participation-ratio": "effective-number#how-many-directions-a-cloud-of-points-uses",
   "kaplan-meier": "age-and-lifetime#survival-curves-kaplanmeier",
-  "muller-plot": "genotype#muller-plots"
+  "muller-plot": "genotype#muller-plots",
+  "pilot-worlds": "the-lab#pilot-worlds"
  }
 }

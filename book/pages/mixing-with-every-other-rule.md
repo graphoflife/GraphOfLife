@@ -17,7 +17,7 @@ them at once.
 ## The worlds
 
 Batch Y: B2 at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") with brains mixed at birth and one other rule,
-[seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2, 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), as [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. Each world is the fourth
+[seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2, 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), as [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. Each world is the fourth
 corner of a two-by-two whose other three already existed:
 
 | corner | the worlds |

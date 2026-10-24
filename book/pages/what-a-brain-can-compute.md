@@ -333,7 +333,7 @@ It takes 12 of the 16 units B2 gives every agent. Evolution did not fail to
 find it for lack of room in a brain.
 [How deep is the valley?](strategies-written-by-hand.md#how-deep-is-the-valley)
 says why evolution misses it. The raid, the password and the crowd pay only
-together, and about a hundred raiders must start at once. [Pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") that gave
+together, and about a hundred raiders must start at once. [Pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") that gave
 evolution the password and the crowd for free did not lead it there either
 ([A password and a crowd, for free](another-game.md#a-password-and-a-crowd-for-free)).
 

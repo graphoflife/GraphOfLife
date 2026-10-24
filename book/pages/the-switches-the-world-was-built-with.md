@@ -29,7 +29,7 @@ world whatever the switches: they change only how fast.
 The rules made for B2 have been judged by one test: does a world keep
 beating its own past
 ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md))?
-The switches the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") was built with were never judged that way. Some were
+The switches the engine was built with were never judged that way. Some were
 set for other reasons. Handover was taken out of B2 because it breaks the
 network ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
 Revolutions are to be turned off in a page still to be written, *What keeps
@@ -96,7 +96,7 @@ and a world of rich and poor plays a different game.
 ### The worlds of batch S
 
 The worlds are pilots in the engine's own code (`--proto engine=true`; see
-[Pilot worlds](pilot-worlds.md)), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of each kind. Each holds 10,000
+[Pilot worlds](the-lab.md#pilot-worlds)), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of each kind. Each holds 10,000
 tokens and runs for 1,000 iterations, and a whole world is kept every 100
 iterations. With two seeds a kind, what they show is indicative, not an
 effect ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)). The two
@@ -652,7 +652,7 @@ revolutions.
 
 Every world on this page is a pilot, made with `research/oee/pilots/run.py`
 in the engine's own code (`--proto engine=true`) and kept in
-`GraphOfLifeRuns/.pilots` ([Pilot worlds](pilot-worlds.md)). No experiment of
+`GraphOfLifeRuns/.pilots` ([Pilot worlds](the-lab.md#pilot-worlds)). No experiment of
 the lab stands behind it, so the page has no box of runs. Every figure says,
 folded beneath it, which worlds it reads and how. The command lines that made
 the worlds, and what each check found, are in `research/oee/pilots/LOG.md`.
@@ -724,6 +724,6 @@ the worlds, and what each check found, are in `research/oee/pilots/LOG.md`.
 
 ← [Rules in company](rules-in-company.md) · [Changing the rules](../README.md#changing-the-rules) · [Rules without numbers](rules-without-numbers.md) →
 
-> [!info]- Pages that link here (17)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a coalition takes a node](revolution.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Where tokens flow](where-the-tokens-flow.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules in company](rules-in-company.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [!info]- Pages that link here (16)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a coalition takes a node](revolution.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Where tokens flow](where-the-tokens-flow.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules in company](rules-in-company.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once](eight-switches-at-once.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -23,7 +23,7 @@ three more changes, each aimed at a different part of how evolution works:
 ## What was built
 
 Every world is B2 at 10,000 tokens (Experiment 16's [settings](settings.md "One number or switch of a run's rules, fixed before it starts.")), played for
-2,000 iterations, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, as [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds (research/oee/pilots,
+2,000 iterations, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, as [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds (research/oee/pilots,
 `jobs_Q.txt`):
 
 | switch | what it does | compared with |

@@ -427,7 +427,7 @@ out, about a quarter of the crowd they needed.
   the crowd pay only together, as a green beard would. A B2 brain can play
   the raider, so what fails is the way there, not the brain.
 - **Evolution goes on, but not towards this play.** Other pages gave
-  evolution parts of the raider for free. Some [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") gave brains a sense of
+  evolution parts of the raider for free. Some [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") gave brains a sense of
   their clones or their family. Others counted stakes together, by [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")
   or by family
   ([A password and a crowd, for free](another-game.md#a-password-and-a-crowd-for-free)).

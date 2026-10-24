@@ -204,7 +204,7 @@ of 16 units, and a founder's gain is about 0.2
 ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
 Its messages hold 8 numbers, not 30. Whether seeing brains use the names to
 tell kin from strangers has not been measured. Three things nearby were
-measured, in [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds under B2's rules:
+measured, in [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds under B2's rules:
 
 - Connected groups of kin shrank over time, in every world.
 - Evolution turned the brains' attention to messages down, not up. Take the

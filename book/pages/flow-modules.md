@@ -210,7 +210,7 @@ agents spread their stake over nearly all their neighbours
 ([How widely agents stake](where-the-tokens-flow.md#how-widely-agents-stake)),
 so every agent sends and receives. From one game to the next, a module of
 the lab's B1 worlds changes about an eighth of its members (0.11–0.13). Where
-B2's unused links lapse, and in the B1 [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), it changes more (0.18 and
+B2's unused links lapse, and in the B1 [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), it changes more (0.18 and
 0.26).
 
 **In B2's worlds** the flow falls apart into pairs. The modules compress it

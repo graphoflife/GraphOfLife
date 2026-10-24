@@ -7,7 +7,7 @@
 > - Does any combination come nearer to a world that keeps evolving?
 
 Most experiments on B2 asked what one rule does to it. In October 2026 the
-author asked for the rules in combination, and six [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batches answered:
+author asked for the rules in combination, and six [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batches answered:
 four played one rule together with each of the others in turn — [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed
 at birth (batch Y, [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)), no
 [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") (W, [Revolutions, with every other rule](the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule)),

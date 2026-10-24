@@ -51,7 +51,7 @@ birth, and `children` for an estate that finds no living child.
 
 ## What each heir did
 
-Each rule was played in [pilot worlds](pilot-worlds.md) of 10,000 tokens, two
+Each rule was played in [pilot worlds](the-lab.md#pilot-worlds) of 10,000 tokens, two
 [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each:
 
 - **By wealth** (B2, 1,000 iterations): the world held 2,450 and 2,800 agents

@@ -77,7 +77,7 @@ there.
 - **[participation ratio](effective-number.md#how-many-directions-a-cloud-of-points-uses)** — How many directions a cloud of points really uses.
 - **[path length](path-length.md)** — How many connections the shortest way between two agents crosses.
 - **[permutation test](bootstrap.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
-- **[pilot](pilot-worlds.md)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
+- **[pilot](the-lab.md#pilot-worlds)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
 - **[power law](power-law-fit.md)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
 - **[power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)** — How much of a series' wandering comes at each speed, from slow to fast.
 - **[preferential attachment](degree.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.

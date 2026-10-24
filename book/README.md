@@ -217,7 +217,6 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 - [Every simulation: what was run, and what was measured](pages/every-simulation.md)
 - [What a run records](pages/frames-and-stats.md)
 - [What the viewer can colour by](pages/viewer-colours.md)
-- [Pilot worlds](pages/pilot-worlds.md)
 - [Many worlds at once: the median, bands, the settled life and the spread](pages/median-and-quantiles.md)
 - [Two numbers together: correlation, a fitted line and logarithmic axes](pages/correlation.md)
 - [How long a world remembers: autocorrelation and the power spectrum](pages/autocorrelation.md)

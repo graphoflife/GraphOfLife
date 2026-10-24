@@ -51,7 +51,7 @@ The bar was set in
 `research/atlas/profile.py` reads a world from its saved state at one moment,
 without its [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."). One depth-first search finds the pieces and the worst cut
 by one agent and by one link; peeling finds the 2-core; the dimension is the
-[lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own measure: how the number of agents within 1 to 5 steps
+lab's own measure: how the number of agents within 1 to 5 steps
 grows, around 24 agents spread through the world. The notebook's tables give
 the result as "marks (of 7)".
 Earlier experiments read the same lines from a run's recorded statistics, as
@@ -59,7 +59,7 @@ Earlier experiments read the same lines from a run's recorded statistics, as
 
 ## Two examples
 
-- **[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") fails it.** A [pilot](pilot-worlds.md) of B1 at 5,000 tokens ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1,
+- **[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") fails it.** A [pilot](the-lab.md#pilot-worlds) of B1 at 5,000 tokens ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1,
   iterations 200 to 999) had 59% of its agents in the 2-core, a link whose
   loss could cut off 8% of the world, and a best-connected agent linked to 8%
   of the others. Its 3.3 links per agent and its dimension of 2.7 passed.

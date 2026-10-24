@@ -79,7 +79,7 @@ one.
 
 Experiment 30 plants raiders, 5% of a world in three places each, in B2's
 five worlds played on to 10,000 iterations. These are Experiment 16's worlds,
-played on as [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules. The raiders are planted at
+played on as [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules. The raiders are planted at
 iterations 500, 2,000, 5,000 and 10,000, and each planting has its control.
 The test is the one of
 [How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs).

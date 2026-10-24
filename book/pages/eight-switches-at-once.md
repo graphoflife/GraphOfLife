@@ -35,7 +35,7 @@ The eight switches, each one the notebook has played alone in B2 before:
 A, B, C and D are on and off in all sixteen combinations; E, F, G and H are
 set from them (E = BCD, F = ACD, G = ABC, H = ABD — on where the product of
 the three is +1). Each world is B2 at 10,000 tokens, [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, played for
-1,000 iterations ([pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batch U), and read at iteration 1,000 as
+1,000 iterations ([pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batch U), and read at iteration 1,000 as
 [Healthy and rich](healthy-and-rich.md) reads every world. The world with
 no switch on is B2's own world of seed 1, game for game.
 

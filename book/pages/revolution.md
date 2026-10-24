@@ -137,7 +137,7 @@ decides about half of all nodes. In the last game of the 30 B1 worlds of
 anyone staked. The winning member was the agent living on the node for 12%
 of all those nodes, and a neighbour for 40%. By then 97% of all staked tokens
 are marked revolutionary
-([How the game is played](how-the-game-is-played.md)). In B2's [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds
+([How the game is played](how-the-game-is-played.md)). In B2's [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds
 of 10,000 tokens, coalitions won about one node in three hundred a game. B2
 with and without them was the same world in every measure
 ([The switches the world was built with](the-switches-the-world-was-built-with.md)).

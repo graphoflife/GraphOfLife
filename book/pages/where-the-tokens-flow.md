@@ -629,7 +629,7 @@ flow goes round. Where it need not, the flow runs one way. Nothing in the
 brains changed: one of the rules that make B2's network unbreakable also made
 its economy run one way.
 
-The [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds say the same, independently
+The [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds say the same, independently
 ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
 Of all the B2 pilots, four let unused links lapse, and they are the only ones
 whose flow mostly cancels. They keep 0.11 to 0.23 of their flow after

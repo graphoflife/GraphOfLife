@@ -12,7 +12,7 @@
 Until now each page measured the worlds of one experiment, or of a few. That
 is how experiments are read: one change against its control. But the notebook has
 by now made **369 [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") worlds** in fifteen experiments, and about a hundred
-[pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds besides, and each was measured only for what its own page
+[pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds besides, and each was measured only for what its own page
 asked. This page puts them all in one table and looks at them together. It
 is a meta page: it builds nothing new into the worlds, it gathers what is
 there.

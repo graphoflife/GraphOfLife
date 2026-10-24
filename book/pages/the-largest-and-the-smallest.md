@@ -283,7 +283,7 @@ incumbent. It would turn the dynasty of a place into a dynasty of a line
 ([Two roads of inheritance](questioning-the-mechanics.md#two-roads-of-inheritance)).
 Such a rule was tried later. The setting
 [`incumbency`](settings.md#incumbency) counts an agent's stake on its own node
-more than anyone else's. In [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds, counted twice, it let one agent
+more than anyone else's. In [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds, counted twice, it let one agent
 gather 57% of all tokens behind a home stake nobody could outbid. Counted one
 and a half times, it is part of the second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")
 ([Holding one's place](a-world-that-cannot-break.md#holding-ones-place)). But

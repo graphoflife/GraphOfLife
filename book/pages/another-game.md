@@ -15,7 +15,7 @@
 ## In short
 
 In the game of Graph of Life, a node goes to whoever stakes most on it. This
-page changes that contest in [pilot worlds](pilot-worlds.md), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
+page changes that contest in [pilot worlds](the-lab.md#pilot-worlds), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
 and asks whether evolution then goes on. Under a **lottery**, where a node goes
 to a staker drawn in proportion to the stakes, the brains have almost nothing
 to learn. Of all the contests tried, it is the only one under which they stop
@@ -79,7 +79,7 @@ the clones' stakes on a stranger's node are added together.
 This is the rule the factories of
 [Strategies written by hand](strategies-written-by-hand.md) would need. A
 factory is a team written by hand, whose inner members pass their tokens on to
-the members at its frontier. In the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") as it is, a stake on a teammate's
+the members at its frontier. In the engine as it is, a stake on a teammate's
 node counts against the teammate. Pooling by genotype is also the narrowest
 kind of kin pooling, which [Alliances](#alliances) tries within two [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.").
 Here there is no alliance to agree on, and no threshold of relatedness to
@@ -95,7 +95,7 @@ signature in its [messages](messages.md "Numbers an agent writes to itself and t
 
 Like every world on this page, these are pilots, with two seeds per kind where
 an experiment would have ten. So they show a lead and not a law
-([Pilot worlds](pilot-worlds.md)). They run in the engine's own code
+([Pilot worlds](the-lab.md#pilot-worlds)). They run in the engine's own code
 (`--proto engine=true`), which plays the engine's phases unchanged. Every
 world is B2 at 10,000 tokens, played for 1,000 iterations. Each condition has two
 seeds, and a whole world is kept every 100 iterations. [Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") are off in
@@ -201,7 +201,7 @@ worlds.
 
 A contest of coins cannot see a body of clones, since it deals brains out one
 agent at a time. The **turf** contest can
-([Pilot worlds](pilot-worlds.md#tournaments-between-its-eras)): the era whose
+([Pilot worlds](the-lab.md#tournaments-between-its-eras)): the era whose
 world it is keeps its clones in place. On turf, in contests of 50 iterations,
 the brains of iteration 1,000 held 0.35 and 0.40 of the world against those of
 iteration 500. In the same contest without pooling they held 0.45 and 0.37.
@@ -626,7 +626,7 @@ improving, as the brains of a world without alliances do.
 ## How this was made
 
 Every world on this page is a pilot, made with `research/oee/pilots/run.py` and
-kept in `GraphOfLifeRuns/.pilots` ([Pilot worlds](pilot-worlds.md)). No
+kept in `GraphOfLifeRuns/.pilots` ([Pilot worlds](the-lab.md#pilot-worlds)). No
 experiment of the lab stands behind it, so the page has no box of runs. Every
 figure says, folded beneath it, which worlds it reads and how. To draw the
 figures again, run `python3 book_figures.py games` for the first half of the
@@ -712,5 +712,5 @@ that made the worlds are in `research/oee/pilots/LOG.md`.
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (16)
-> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Pilot worlds](pilot-worlds.md)
+> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

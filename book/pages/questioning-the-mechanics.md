@@ -44,7 +44,7 @@ looked at in the open.
 **Two baselines.** A baseline is a stated set of rules that experiments start
 from ([B1 and B2: the two baselines](b1-and-b2.md)). B1 holds the rules as
 they were first built, and the rule and the data of every section below are
-B1's. B2 was made on 12 October 2026 from [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. It is B1 with rules
+B1's. B2 was made on 12 October 2026 from [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. It is B1 with rules
 that keep its network from breaking and its agents from staking or breeding
 themselves to death, and with smaller brains that see. Several of its changes
 answer questions this page asked.

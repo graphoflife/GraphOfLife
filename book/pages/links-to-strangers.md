@@ -37,7 +37,7 @@ if both ends agree (**mutual**) or if the proposer alone wants it
 ## The worlds
 
 Batch K: [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") at 10,000 tokens with every search, every steering and every
-consent — twelve kinds of world — [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2, 1,000 iterations, as [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+consent — twelve kinds of world — [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2, 1,000 iterations, as [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
 worlds. The control is B2 itself with the same seeds (`P/B2-s1`, `-s2`, the
 lab's Experiment 16 worlds again, game for game). From each world's
 checkpoint at iteration 1,000, fifty more [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") were played and recorded, and

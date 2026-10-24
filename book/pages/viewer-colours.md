@@ -80,7 +80,7 @@ colour by family instead, as [One world, many colours](one-world-many-colours.md
 <!-- turns -->
 ---
 
-← [What a run records](frames-and-stats.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Pilot worlds](pilot-worlds.md) →
+← [What a run records](frames-and-stats.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) →
 
 > [!info]- Pages that link here (4)
 > [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [One world, many colours](one-world-many-colours.md)

@@ -168,7 +168,7 @@ founders start at about 0.2.
 
 **Longer worlds.** Worlds have since lived far longer than 3,000
 iterations. B2's worlds of Experiment 16 were played on to 10,000 as
-[pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), and the eras of three of them were played against each other.
+pilots, and the eras of three of them were played against each other.
 Their brains kept improving until about iteration 5,000, and then all but
 stopped
 ([Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)).

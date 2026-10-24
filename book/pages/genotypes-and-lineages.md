@@ -53,7 +53,7 @@ thirty of Experiment 2.
 We expected nobody to win for long. Every brain has one chance in five of
 changing after every game, and again when it is copied to a child. A node
 that is conquered takes on its conqueror's brain. So a genotype should be
-renamed long before it could spread far. [Pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") run earlier had found a
+renamed long before it could spread far. [Pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") run earlier had found a
 typical genotype lasting a single iteration, and fewer than one in ten
 lasting more than five.
 

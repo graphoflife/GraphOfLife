@@ -2,7 +2,7 @@
 
 This appendix lists every world the notebook has made: the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s experiments,
 which were planned before they ran and are judged against a thesis, and the
-[pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batches, smaller sets of worlds that try an idea quickly. For each it
+[pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") batches, smaller sets of worlds that try an idea quickly. For each it
 gives the settings, how many worlds, how far they ran, the page that reports
 them, and which measures have been taken on them.
 

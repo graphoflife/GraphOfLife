@@ -10,7 +10,7 @@
 >   any rule make a mixed world hold more often than mixing alone?
 > - The random search found one world more diverse than any other. Was it
 >   its [settings](settings.md "One number or switch of a run's rules, fixed before it starts."), or the luck of one draw?
-> - Can the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") play the [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' worlds, and their rules, as the pilots did?
+> - Can the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") play the [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' worlds, and their rules, as the pilots did?
 
 ## In short
 

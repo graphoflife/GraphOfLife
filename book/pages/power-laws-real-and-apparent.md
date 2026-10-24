@@ -195,7 +195,7 @@ an experiment that joined children to random agents instead would test it.
 > [!info] Added later: preferential attachment, capped
 > [A world that cannot break](a-world-that-cannot-break.md) meets the same mechanism when
 > [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") can see: whatever a brain favours, the well connected are offered as
-> candidates more often, and in [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") in which the brains chose a newborn's
+> candidates more often, and in [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") in which the brains chose a newborn's
 > links the best-connected agent was joined to 30% of the world. The second
 > baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), draws two of a newborn's links at random and caps the links a
 > brain may choose at eight.

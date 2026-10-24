@@ -39,7 +39,7 @@ a change, so a change in what a founder sees reaches what it does at a
 
 ## B2: a world that cannot break
 
-B2 was made on 12 October 2026 from [pilot worlds](pilot-worlds.md). It
+B2 was made on 12 October 2026 from [pilot worlds](the-lab.md#pilot-worlds). It
 differs from B1 in these settings and in no other
 ([Every setting](settings.md) explains each):
 

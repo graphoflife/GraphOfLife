@@ -64,7 +64,7 @@ its owner has won.
 
 ### What the pilots showed
 
-[Pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, at 5,000 tokens for 1,500 iterations, compared B1
+[Pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, at 5,000 tokens for 1,500 iterations, compared B1
 with brains of one hidden layer, with and without change only when copied.
 
 **The worlds broke.** B1's two worlds never fell below 74 and 397 agents.

@@ -42,7 +42,7 @@ be replaced by a rule with no number in it.
 
 ## B3: B2 without its numbers
 
-The [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of this page (batch N in `research/oee/pilots/LOG.md`) run [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s
+The [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of this page (batch N in `research/oee/pilots/LOG.md`) run [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s
 [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") with every number at its original value. An owner's stake counts once.
 A newborn has only the links its brain chooses. Any [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that carries
 no tokens lapses. No agent has a cap on its links, none keeps anything at

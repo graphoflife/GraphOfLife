@@ -144,7 +144,7 @@ Nor do parents as mates: with them, the estates filled a world to about 5,000
 agents, of 1.9 tokens each
 ([Room for the steadiest world](room-for-the-steadiest-world.md#room-for-the-steadiest-world)).
 
-**Switching a rule shows the ledger at work.** Batch SW, a group of [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+**Switching a rule shows the ledger at work.** Batch SW, a group of [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
 worlds, took worlds from the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") at a moment and played them on with mixing
 switched
 ([Why a mixed world is rich](mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)):

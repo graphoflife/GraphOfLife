@@ -379,7 +379,7 @@ space when its width is at least 1.5 ([The random twin](random-twin.md)).
 A small world's rulers run out of room within a few steps. And a space only
 shows its dimension where it has room
 ([The rulers, on the worlds](#the-rulers-on-the-worlds)). So a B2 world of
-100,000 tokens was played for 1,000 iterations (a [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1,
+100,000 tokens was played for 1,000 iterations (a [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1,
 `GraphOfLifeRuns/.pilots/BIG/B2-100000-s1`). At the end it held 30,686 agents,
 nine times B2's usual 3,400.
 

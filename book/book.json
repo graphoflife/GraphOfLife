@@ -1494,7 +1494,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-23",
-      "summary": "How an experiment is run: its plan, the lab that runs it on a frozen copy of the engine, and the pilots that come before."
+      "summary": "The engine is the program that plays a world. The lab carries out an experiment's plan. It has the engine play every run the plan asks for, several at a time. And it records how each was made, so that it can be made again exactly."
     },
     {
       "id": "how-worlds-are-measured",
@@ -1580,18 +1580,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "The viewer draws every agent as a dot and every connection as a line, and can colour and size both by a measured quantity."
-    },
-    {
-      "id": "pilot-worlds",
-      "title": "Pilot worlds",
-      "file": "pages/pilot-worlds.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-15",
-      "summary": "Most pages read **runs**: worlds the lab made for an experiment, ten or thirty seeds of every condition, with a thesis written before the first of them existed."
     },
     {
       "id": "median-and-quantiles",

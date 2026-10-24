@@ -67,7 +67,7 @@ the random numbers. Then it compares what each brain decides.
   situation and draw. A brain carried by many agents is drawn as often as it
   is carried. Beside them go 400 fresh **[founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")** brains, which have
   never met selection. They show what brains do by chance.
-- **Decisions.** The [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules turn each brain's outputs into
+- **Decisions.** The engine's own rules turn each brain's outputs into
   decisions (`research/oee/checks/diversity.py`):
 
 | decision | what it is |
@@ -85,7 +85,7 @@ The worlds are all of 10,000 tokens:
   100 iterations, at 0, 100, 500, 1,000 and 2,000 iterations;
 - **B1**: the first ten worlds of Experiment 2, at the end of their 3,000
   iterations;
-- **the long runs of B1**: two [pilot worlds](pilot-worlds.md) of the same
+- **the long runs of B1**: two [pilot worlds](the-lab.md#pilot-worlds) of the same
   settings, from their start to 10,000 iterations;
 - **the long runs of B2**: three of B2's ten worlds, played on from 2,000 to
   10,000.

@@ -70,7 +70,7 @@ on its own.
 
 The measures of [How different are the agents?](how-different-are-the-agents.md) were taken
 again in three [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of every condition the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") has run, at the end of each
-run (58 worlds), and in both seeds of every [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") condition (69).
+run (58 worlds), and in both seeds of every [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") condition (69).
 
 <!-- figure how_alike/lab -->
 ![How alike the agents are, in every lab condition](../figures/how_alike/lab.svg)

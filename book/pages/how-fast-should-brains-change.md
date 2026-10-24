@@ -94,7 +94,7 @@ This experiment was first planned on [B1](b1-and-b2.md "The first baseline: the 
 whether three births per hundred agents an iteration is a rate that selection
 finds, or only the churn of mutation.
 
-Two [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, 600 iterations) pointed to churn. Births
+Two [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, 600 iterations) pointed to churn. Births
 per hundred agents were 2.0 at *p* = 0.05, 2.9 at the baseline's 0.2 and 8.0
 at 0.8. Genotypes per agent were 0.32, 0.60 and 0.98. That is a
 mutation–selection balance, in a world whose brains are nearly blind.

@@ -117,7 +117,7 @@ stake counts one and a half times. But a crowd of revolutionary stakes can
 win instead. Count the crowd up from its smallest stake. Once the part counted
 so far outweighs the largest staker and everyone in the crowd above it, the
 crowd wins. The winner is drawn from the step that tipped it. Under the
-[pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' alliances ([Alliances](another-game.md#alliances)), the side with the
+[pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' alliances ([Alliances](another-game.md#alliances)), the side with the
 largest total wins.
 
 A tie between $k$ stakers gives each a probability $1/k$. In both cases the

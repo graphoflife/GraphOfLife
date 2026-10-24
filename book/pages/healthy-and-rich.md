@@ -32,7 +32,7 @@ same few ([Too even, not too poor](#too-even-not-too-poor)).
 
 This page turns the picture into measurements and reads every world the
 notebook has made against them. When they were last counted, on 17 October
-2026, they were 624 worlds. The [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s runs are read at their end. The [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+2026, they were 624 worlds. The [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s runs are read at their end. The [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
 worlds, made by hand in batches, are read at their last checkpoint: the
 last whole world the run saved. Each world is counted once.
 [Every world side by side](every-world-side-by-side.md) compares the same

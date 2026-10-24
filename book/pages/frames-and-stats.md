@@ -70,7 +70,7 @@ the viewer charts, and every one has a note that says how it is computed.
 
 > [!note] Corrected on 23 October 2026
 > This table said the gift fields are `null` in every run of this notebook, which had no gifts. In a run
-> without gifts they are 0 in every reproduction row, and gifts have been switched on in [pilots](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") since
+> without gifts they are 0 in every reproduction row, and gifts have been switched on in [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") since
 > 15 October 2026, in Experiment 24 and in half the worlds of
 > [A screen of random worlds](a-screen-of-random-worlds.md). The table also did not say where deaths of
 > age are counted.

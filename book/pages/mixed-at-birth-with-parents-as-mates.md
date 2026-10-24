@@ -7,7 +7,7 @@
 >   mixed world stay alive — and stay rich?
 > - If the mate pays the child as much as the parent does, does a mixed world
 >   hold its size more steadily?
-> - Can the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") play again, game for game, two [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds that were stopped
+> - Can the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") play again, game for game, two [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds that were stopped
 >   on 18 October 2026?
 
 ## In short

@@ -431,7 +431,7 @@ evolve all end up alike ([Do the brains matter?](do-the-brains-matter.md)).
 
 But heredity is weak. In B1 a brain is changed with probability 0.2 after
 every game, whether or not it is copied, and a brain is overwritten whenever
-its node is won. The project's [pilot](pilot-worlds.md "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") measurements (`research/pilot_heredity.py`,
+its node is won. The project's [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") measurements (`research/pilot_heredity.py`,
 at a higher mutation rate) found a lineage 45% of the way to a stranger after
 one iteration, and 92% after ten. Selection can only work on what is
 inherited, and here little is inherited for long.
