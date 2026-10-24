@@ -579,7 +579,7 @@ have been.
 <!-- figure searchbest/measures -->
 ![The search's best settings, in six worlds](../figures/searchbest/measures.svg)
 
-**The search's best settings, in six worlds.** Each dot is one world at iteration 1,000 (orange) or 2,000 (violet): the five new seeds small, the search's own seed large. The dashed line is what the author's picture asks: every mark of the health bar, a diversity score above B2's median world (0.49), a typical distance at least 1.5 times the random twin's, and a Gini no lower than B2's most even world (0.47).
+**The search's best settings, in six worlds.** Each dot is one world at iteration 1,000 (orange) or 2,000 (violet): the five new seeds small, the search's own seed large. The dashed line is what the author's picture asks: every mark of the health bar, a diversity score above B2's median world (0.49), a typical distance at least 1.5 times the random twin's, and a Gini no lower than B2's most even world at the same iteration (0.49 at 1,000, 0.46 at 2,000).
 
 > [!example]- How to make this figure
 > **Runs.** Experiment 24's six runs (`python3 gol_lab.py run E24`): the settings of `Z/r2-25` played by the research prototype in the lab (`gol_pilot.py`), seeds 1 to 5 (`B2-10000-d2b0d2-s001` … `-s005`) and the search's own seed (`B2-10000-d2b0d2-s2025`), each to 2,000 iterations, with a whole world kept every 100.
@@ -606,8 +606,8 @@ None met more than four marks of the health bar:
   two-dimensional networks.
 
 And beyond the bar, **their tokens** were too even, with Ginis of 0.33 to
-0.38, against B2's most even world at 0.47. At 2,000 the picture was much
-the same; one world met five marks.
+0.38, against B2's most even world at 1,000, 0.49. At 2,000 the picture was
+much the same, against B2's 0.46; one world met five marks.
 
 **The search's own world was a lucky moment of the same thing.** At 1,000
 it met every mark, as the search found. By 2,000 it met four, with a
@@ -898,6 +898,12 @@ was played with.
 - **24 October 2026.** This page called the line of evenness "B2's least
   even world". It is B2's most even world, the one with the lowest Gini
   ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
+- **24 October 2026.** The search's best settings were set beside B2's most
+  even world at 10,000 iterations, a Gini of 0.47, though they were read at
+  1,000 and 2,000. At those iterations B2's most even world reads 0.49 and
+  0.46 (the screen's reference, `research/screen/E38.json`). The six worlds'
+  Ginis, 0.32 to 0.44, lie below both, so nothing changes. The figure now
+  draws the line of each iteration.
 
 <!-- turns -->
 ---

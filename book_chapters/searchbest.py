@@ -22,8 +22,16 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 READINGS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots", "atlas", "e24_readings.json")
 PILOT = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots", "Z", "r2-25-s2025", "series.jsonl")
 OWN = "B2-10000-d2b0d2-s2025"
-#: Healthy and rich's lines: every mark, diversity above B2's median world, a space, no more even than B2.
-LINES = {"marks": 7, "diversity": 0.49, "wide": 1.5, "gini_tokens": 0.47}
+#: Healthy and rich's lines: every mark, diversity above B2's median world (as the thesis has it), a space.
+LINES = {"marks": 7, "diversity": 0.49, "wide": 1.5}
+#: No more even than B2: the screen reads B2's ten worlds at the very iterations these worlds are read at.
+SCREEN = os.path.join(ROOT, "research", "screen", "E38.json")
+
+
+def _most_even() -> Dict[int, float]:
+    """The Gini of B2's most even world at iterations 1,000 and 2,000 (the screen's reference)."""
+    reference = json.load(open(SCREEN))["reference"]
+    return {int(at): float(reference[at]["gini"]) for at in ("1000", "2000")}
 RUNS = ("Experiment 24's six runs (`python3 gol_lab.py run E24`): the settings of `Z/r2-25` played by the "
         "research prototype in the lab (`gol_pilot.py`), seeds 1 to 5 (`B2-10000-d2b0d2-s001` … `-s005`) and "
         "the search's own seed (`B2-10000-d2b0d2-s2025`), each to 2,000 iterations, with a whole world kept "
@@ -47,6 +55,7 @@ def searchbest(ch: F.Chapter) -> None:
     if not os.path.exists(READINGS):
         return
     rows = json.load(open(READINGS))
+    even = _most_even()
     twin = _twin()
     if twin:
         ch.number("twin", twin)
@@ -66,15 +75,22 @@ def searchbest(ch: F.Chapter) -> None:
             series.append({"label": f"the search's own seed, iteration {at:,}" if key == "marks" else None,
                            "x": [x0 + 0.3], "y": [r[key] for r in own], "points": True, "size": 9, "colour": colour,
                            "alpha": 0.5})
-        series.append({"label": "the line the author's picture asks for" if key == "marks" else None,
-                       "x": [-0.5, 1.5], "y": [LINES[key]] * 2, "colour": GREY, "dash": [5, 4], "width": 1.2})
+        label = "the line the author's picture asks for" if key == "marks" else None
+        if key == "gini_tokens":
+            for x0, at in ((0, 1000), (1, 2000)):
+                series.append({"label": None, "x": [x0 - 0.5, x0 + 0.5], "y": [even[at]] * 2, "colour": GREY,
+                               "dash": [5, 4], "width": 1.2})
+        else:
+            series.append({"label": label, "x": [-0.5, 1.5], "y": [LINES[key]] * 2, "colour": GREY,
+                           "dash": [5, 4], "width": 1.2})
         panels.append({"title": title, "x": {"categories": ["1,000", "2,000"], "label": "iteration"},
                        "y": {"label": ylabel, "min": 0}, "series": series})
     ch.grid("measures", panels, title="The search's best settings, in six worlds", columns=2,
             caption=("Each dot is one world at iteration 1,000 (orange) or 2,000 (violet): the five new seeds small, "
                      "the search's own seed large. The dashed line is what the author's picture asks: every mark of "
                      "the health bar, a diversity score above B2's median world (0.49), a typical distance at least "
-                     "1.5 times the random twin's, and a Gini no lower than B2's most even world (0.47)."),
+                     f"1.5 times the random twin's, and a Gini no lower than B2's most even world at the same "
+                     f"iteration ({even[1000]:.2f} at 1,000, {even[2000]:.2f} at 2,000)."),
             recipe=recipe(RUNS, "each run's checkpoints at 1,000 and 2,000 (`ckpt_001000.npz`, `ckpt_002000.npz`)",
                           ["Read each world as `research/atlas/profile.py` reads every world: the seven marks, the "
                            "four spreads ranked among the frozen reference worlds, the Gini of the tokens.",
