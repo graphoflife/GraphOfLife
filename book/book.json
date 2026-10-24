@@ -565,10 +565,11 @@
     },
     {
       "id": "gini-coefficient",
-      "title": "Measuring inequality: the Gini coefficient, the richest tenth, entropy",
+      "title": "Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility",
       "file": "pages/gini-coefficient.md",
       "topics": [
-        "wealth"
+        "wealth",
+        "methods"
       ],
       "kind": "term",
       "status": "written",
@@ -1625,19 +1626,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "A world wanders: its size, its inequality and its births go up and down over hundreds of iterations. The autocorrelation says how long it remembers where it was: the correlation of a world with itself, some time later."
-    },
-    {
-      "id": "mobility",
-      "title": "Mobility",
-      "file": "pages/mobility.md",
-      "topics": [
-        "methods",
-        "wealth"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "A world can be unequal in two very different ways."
     },
     {
       "id": "between-and-within",

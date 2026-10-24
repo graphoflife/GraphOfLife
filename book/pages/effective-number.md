@@ -52,5 +52,5 @@ the larger. Where the notebook gives an effective number it says which.
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
+> [Glossary](glossary.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md)
 <!-- /turns -->

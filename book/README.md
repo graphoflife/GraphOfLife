@@ -85,7 +85,7 @@ How unequal a world is, who stays rich, and how gains and losses are shared out.
 - [Gains and losses: who gains, who loses, and the share-out](pages/gains-and-losses.md)
 - [The largest and the smallest](pages/the-largest-and-the-smallest.md)
 - What keeps wealth spread? — *not written yet*
-- [Measuring inequality: the Gini coefficient, the richest tenth, entropy](pages/gini-coefficient.md)
+- [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](pages/gini-coefficient.md)
 
 ### The game and the flow of tokens
 
@@ -221,7 +221,6 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 - [Many worlds at once: the median, bands, the settled life and the spread](pages/median-and-quantiles.md)
 - [Two numbers together: correlation, a fitted line and logarithmic axes](pages/correlation.md)
 - [How long a world remembers: autocorrelation and the power spectrum](pages/autocorrelation.md)
-- [Mobility](pages/mobility.md)
 - [Between worlds and within them](pages/between-and-within.md)
 - [How many directions a cloud of points uses](pages/participation-ratio.md)
 - [Survival curves (Kaplan–Meier)](pages/kaplan-meier.md)

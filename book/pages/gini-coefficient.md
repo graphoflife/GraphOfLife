@@ -1,4 +1,4 @@
-# Measuring inequality: the Gini coefficient, the richest tenth, entropy
+# Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility
 
 ## In short
 
@@ -7,7 +7,8 @@ notebook records them after every phase. The **Gini coefficient** sums up the
 whole Lorenz curve in one number, and the **richest tenth's share** reads one
 point of it. The **mean, median, richest and poorest** describe the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
 directly, while **entropy** and **evenness** say how evenly anything is
-spread, [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") too. In a settled [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000
+spread, [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") too. **Mobility** compares two moments: whether the same agents
+stay rich. In a settled [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000
 tokens the Gini is about 0.47, and the richest tenth hold about 42% of all
 tokens.
 
@@ -125,7 +126,7 @@ above, rearranged, and it is recorded as `gini` after every phase.
   of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s most even world at the same [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): 0.46 at iteration 2,000
   ([The six criteria](what-makes-a-world-interesting.md#the-six-criteria)).
 - A Gini looks at one moment, so it cannot tell whether the same agents stay
-  rich. [Mobility](mobility.md) compares two moments.
+  rich. [Mobility](#mobility) compares two moments.
 
 ## The richest tenth's share
 
@@ -338,12 +339,70 @@ one curve
 from the histogram of degrees. Both entropies, and both evenness values, are
 recorded after every phase.
 
+## Mobility
+
+A world can be unequal in two very different ways. In one, the same agents
+are rich [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") after game. In the other, wealth is just as unequal at every
+moment, but who holds it keeps changing. The Gini coefficient cannot tell the
+two apart, because it looks at one moment. **Mobility** compares two moments.
+Economists measure it for incomes across years and generations (Shorrocks
+1978; Chetty and others 2014). The notebook uses three measures.
+
+### Rank correlation over time
+
+Take the agents alive at a moment *t* and again *k* games later. Rank them by
+their tokens at each moment, the poorest first; agents with equal tokens share
+the mean of their ranks. **Spearman's rank correlation** ρ is the ordinary
+[correlation](correlation.md) of the two lists of ranks:
+
+- ρ = 1: every agent kept its place in the order of wealth;
+- ρ = 0: the later order has nothing to do with the earlier;
+- ρ < 0: the order turned round, and the poor became the rich.
+
+Ranks rather than tokens make ρ deaf to how unequal the world is. They also
+keep a few very rich agents from deciding it, as they would decide an ordinary
+correlation of the tokens themselves. Drawn against *k*, ρ shows how long
+wealth is remembered.
+
+### A table of moves
+
+Sort the agents at *t* into fifths by their rank of wealth, from the poorest
+fifth to the richest. Do the same *k* games later. For every pair of fifths,
+count the agents that went from the one to the other, and add a column for
+those no longer alive. Divide each row by its total. Then each row says where
+the agents of one fifth went.
+
+This is a **transition matrix** *P*. Its entry *Pᵢⱼ* is the share of the
+agents of fifth *i* found in fifth *j* later. A world where nobody moves has 1
+on the diagonal and 0 elsewhere.
+
+### One number: the Shorrocks index
+
+For *n* classes, with the diagonal entries *Pᵢᵢ* computed among the agents
+still alive,
+
+$$
+M = \frac{n - \sum_i P_{ii}}{n - 1}
+$$
+
+(Shorrocks 1978). In words: count how far the diagonal falls short of *n*,
+the sum it would have if nobody moved, and scale it.
+
+If nobody moves, every *Pᵢᵢ* is 1 and *M* = 0. Suppose instead that where an
+agent ends up has nothing to do with where it started. Then every row is
+(⅕, ⅕, ⅕, ⅕, ⅕), the diagonal adds up to 1, and *M* = 1. So *M* runs from 0,
+a rigid world, to 1, a world without memory of wealth. It can exceed 1 when
+the order tends to reverse.
+
+### Where mobility is used
+
+[Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)
+measures all three in the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.
+
 ## Where to go next
 
 - [How unequal is a world, and who stays rich](where-do-the-tokens-go.md):
   each of these measures, read in thirty B1 worlds.
-- [Mobility](mobility.md): whether the same agents stay rich, which no
-  measure of one moment can tell.
 - [Effective numbers: how many kinds there really are](effective-number.md):
   the effective number beside other ways of counting kinds.
 - [What a run records](frames-and-stats.md): every number recorded after a
@@ -359,7 +418,7 @@ recorded after every phase.
     best questioner needs 5/3 ≈ 1.67 questions per pick, against an entropy
     of 1.585 bits
     ([Entropy: how many yes-or-no questions?](#entropy-how-many-yes-or-no-questions)).
-  - The page on tokens per agent gave its numbers for "a settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")
+  - The page on tokens per agent gave its numbers for "a settled baseline
     world". It was written when B1 was the only baseline, and the numbers
     are B1's. B2's worlds hold only about three tokens per agent
     ([What each of the four says](#what-each-of-the-four-says)).
@@ -367,11 +426,32 @@ recorded after every phase.
   even world". It is B2's most even world, the one with the lowest Gini
   ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
 
+## References
+
+- Chetty, R., Hendren, N., Kline, P. and Saez, E. (2014). Where is the land
+  of opportunity? The geography of intergenerational mobility in the United
+  States. *Quarterly Journal of Economics* 129, 1553–1623.
+- Gini, C. (1912). *Variabilità e mutabilità*. Bologna: Tipografia di Paolo
+  Cuppini.
+- Hill, M. O. (1973). Diversity and evenness: a unifying notation and its
+  consequences. *Ecology* 54, 427–432.
+- Jost, L. (2006). Entropy and diversity. *Oikos* 113, 363–375.
+- Lorenz, M. O. (1905). Methods of measuring the concentration of wealth.
+  *Publications of the American Statistical Association* 9, 209–219.
+- Pielou, E. C. (1966). The measurement of diversity in different types of
+  biological collections. *Journal of Theoretical Biology* 13, 131–144.
+- Shannon, C. E. (1948). A mathematical theory of communication. *Bell System
+  Technical Journal* 27, 379–423 and 623–656.
+- Shorrocks, A. F. (1978). The measurement of mobility. *Econometrica* 46,
+  1013–1024.
+
 <!-- turns -->
 ---
 
 ← [The largest and the smallest](the-largest-and-the-smallest.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
 
-> [!info]- Pages that link here (17)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Genotypes, families and the common ancestor](genotype.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [What a run records](frames-and-stats.md) · [Mobility](mobility.md) · [How many directions a cloud of points uses](participation-ratio.md)
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (16)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Genotypes, families and the common ancestor](genotype.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [What a run records](frames-and-stats.md) · [How many directions a cloud of points uses](participation-ratio.md)
 <!-- /turns -->

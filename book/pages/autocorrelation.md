@@ -189,7 +189,7 @@ shorter than 10.
 <!-- turns -->
 ---
 
-← [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Mobility](mobility.md) →
+← [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Between worlds and within them](between-and-within.md) →
 
 > [!info]- Pages that link here (8)
 > [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md) · [How worlds are measured](how-worlds-are-measured.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Between worlds and within them](between-and-within.md)

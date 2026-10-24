@@ -123,5 +123,5 @@ the kinds swing from moment to moment.
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
+> [Glossary](glossary.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->

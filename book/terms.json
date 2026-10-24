@@ -484,8 +484,9 @@
     },
     {
       "name": "mobility",
-      "page": "mobility",
-      "says": "Whether the rich stay rich, or who holds the wealth keeps changing."
+      "page": "gini-coefficient",
+      "says": "Whether the rich stay rich, or who holds the wealth keeps changing.",
+      "anchor": "mobility"
     },
     {
       "name": "participation ratio",

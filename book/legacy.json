@@ -169,7 +169,7 @@
   "n-spread-between-worlds": "median-and-quantiles#spread-between-worlds",
   "n-correlation": "correlation",
   "n-autocorrelation": "autocorrelation",
-  "n-mobility": "mobility",
+  "n-mobility": "gini-coefficient#mobility",
   "n-between-and-within": "between-and-within",
   "n-participation-ratio": "participation-ratio",
   "n-kaplan-meier": "kaplan-meier",
@@ -345,6 +345,7 @@
   "vanishing-signal": "the-brain#how-a-signal-fades-through-layers",
   "least-squares": "correlation#fitting-a-straight-line",
   "logarithmic-axes": "correlation#logarithmic-axes-and-power-laws",
-  "power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series"
+  "power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series",
+  "mobility": "gini-coefficient#mobility"
  }
 }
