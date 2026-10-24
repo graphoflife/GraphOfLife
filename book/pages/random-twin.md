@@ -122,7 +122,7 @@ that made them. The line of 1.5 lies between the two.
 <!-- turns -->
 ---
 
-← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [How alike at a distance](correlation-function.md) →
+← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 

@@ -138,7 +138,7 @@ def alike(ch: F.Chapter) -> None:
                 f"ln k), counting every connection both ways round. One dot per {W.per_lived}, the "
                 f"mean over five moments (after the games of iterations {listed(list(MOMENTS))}); the "
                 "bar is the median. The same values shuffled among a world's agents give correlations within "
-                "0.01 of zero; the last column is the assortativity of [How properties scale together](how-properties-scale-together.md), taken of ln k instead of k.",
+                "0.01 of zero in the median world, and within 0.09 in every world; the last column is the assortativity of [How properties scale together](how-properties-scale-together.md), taken of ln k instead of k.",
         recipe=recipe(W.lived_text(), FRAMES,
                       [f"Read frames 2·t + 1 for t = {', '.join(f'{t:,}' for t in MOMENTS)}: `ids`, `tokens`, `ages`, "
                        "`brain_ids` and `edges`.",
@@ -201,8 +201,9 @@ def alike(ch: F.Chapter) -> None:
                 "genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: "
                 "a straight falling line would be a relatedness that halves over a fixed number of steps. The "
                 f"line is the median of the {len(alive)} worlds, the darker band the middle half of them and the paler band "
-                "nine in ten. From 9 steps on, most worlds have no such pair at all, and none has a twentieth of what "
-                "chance would give.",
+                "nine in ten. From 9 steps on, at least half of the worlds have no such pair at all. In the others such "
+                "pairs are rare: at most an eighth of what chance would give at 9 steps, and less than a "
+                "fortieth from 11 steps on.",
         recipe=recipe(W.lived_text(), FRAMES,
                       ["As above; for every pair, whether the two `brain_ids` are equal.",
                        "Any two agents: Σ c(c − 1) / (n(n − 1)) over the genotypes' counts c among the n agents."]))

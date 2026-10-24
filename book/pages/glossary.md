@@ -31,7 +31,7 @@ there.
 - **[common ancestor](genotype.md#the-common-ancestor-of-the-living)** — The genotype every living agent descends from, and how far back it lies.
 - **[connection](the-world.md#the-network)** — A link between two agents of the network: they are neighbours, and can stake on each other's nodes.
 - **[correlation](correlation.md)** — Whether two quantities go up and down together, from −1 to 1.
-- **[correlation length](correlation-function.md)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
+- **[correlation length](like-next-to-like.md#how-alike-at-a-distance)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
 - **[cross-time tournament](eras-and-contests.md)** (also era) — Brains of a world at two moments, its eras, played against each other: do the later ones win?
 - **[cut risk](bridges.md#cut-risk)** — The largest share of a world that cutting one connection would cut off.
 - **[degree](degree.md)** — The number of an agent's connections: how many neighbours it has.

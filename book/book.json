@@ -830,7 +830,7 @@
     },
     {
       "id": "like-next-to-like",
-      "title": "Like next to like",
+      "title": "Like next to like: how alike agents are at a distance",
       "file": "pages/like-next-to-like.md",
       "topics": [
         "space",
@@ -839,7 +839,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-09",
-      "summary": "Are neighbours alike in their tokens, their age, their connections? How far does likeness reach — two steps, ten, across the world? How much of it comes from an agent's place in the network, and how much from closeness itself?"
+      "summary": "How alike are two agents a given number of steps apart, and up to how far? The correlation function and the correlation length measure it."
     },
     {
       "id": "how-many-dimensions-does-a-world-have",
@@ -932,19 +932,6 @@
       "status": "planned",
       "added": "2026-10-09",
       "summary": "Patterns that persist while what carries them changes: tokens bound in loops, groups that outlast their members, local beats in the flow of tokens (*Physical inspiration*)."
-    },
-    {
-      "id": "correlation-function",
-      "title": "How alike at a distance",
-      "file": "pages/correlation-function.md",
-      "topics": [
-        "space",
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "In a magnet, a spin pointing up makes its neighbours more likely to point up, and their neighbours a little more likely, and so on, fading with distance."
     },
     {
       "id": "ball-dimension-and-curvature",

@@ -296,7 +296,7 @@ leaves
 Taken of the logarithm of the degree, which the hubs sway less, the same
 correlation reads −0.20 in the median world
 ([Like next to like](like-next-to-like.md#neighbours)).
-[How alike at a distance](correlation-function.md) carries it on to agents
+[How alike at a distance](like-next-to-like.md#how-alike-at-a-distance) carries it on to agents
 several steps apart.
 
 ## Preferential attachment and its kernel
@@ -527,5 +527,5 @@ of the points are.
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
 > [!info]- Pages that link here (16)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [How alike at a distance](correlation-function.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

@@ -121,7 +121,7 @@ Degrees, cores, bridges, power laws and cuts: what shape the links take, and how
 Whether a world is a space, of how many dimensions, what folds it, and the physics the project hopes for.
 
 - [Physical inspiration](pages/physical-inspiration.md)
-- [Like next to like](pages/like-next-to-like.md)
+- [Like next to like: how alike agents are at a distance](pages/like-next-to-like.md)
 - [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
 - [The random twin: is a world a space?](pages/random-twin.md)
 - Dimensions at scale — *not written yet*
@@ -130,7 +130,6 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 - How far does a difference travel? — *not written yet*
 - A source and a sink — *not written yet*
 - Particles — *not written yet*
-- [How alike at a distance](pages/correlation-function.md)
 - [Three ways to measure a network's dimension](pages/ball-dimension-and-curvature.md)
 
 ### Size and riches of a world

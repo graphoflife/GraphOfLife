@@ -342,7 +342,7 @@ branches
 <!-- turns -->
 ---
 
-← [How alike at a distance](correlation-function.md) · [Space and dimension](../README.md#space-and-dimension)
+← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension)
 
 > [!info]- Pages that link here (8)
 > [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)

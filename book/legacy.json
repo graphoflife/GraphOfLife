@@ -153,7 +153,7 @@
   "n-box-dimension": "ball-dimension-and-curvature#box-dimension",
   "n-scaling-relations": "degree#scaling-relations-between-agents-properties",
   "n-assortativity": "degree#assortativity",
-  "n-correlation-function": "correlation-function",
+  "n-correlation-function": "like-next-to-like#how-alike-at-a-distance",
   "n-viewer-colours": "viewer-colours",
   "n-pilot-worlds": "pilot-worlds",
   "n-invasion-test": "invasion-test",
@@ -326,6 +326,7 @@
   "clustering": "degree#clustering",
   "assortativity": "degree#assortativity",
   "preferential-attachment": "degree#preferential-attachment-and-its-kernel",
-  "scaling-relations": "degree#scaling-relations-between-agents-properties"
+  "scaling-relations": "degree#scaling-relations-between-agents-properties",
+  "correlation-function": "like-next-to-like#how-alike-at-a-distance"
  }
 }

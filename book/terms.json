@@ -388,8 +388,9 @@
       "also": [
         "correlation function"
       ],
-      "page": "correlation-function",
-      "says": "How far apart two agents can be and still be alike: how fast likeness fades with distance."
+      "page": "like-next-to-like",
+      "says": "How far apart two agents can be and still be alike: how fast likeness fades with distance.",
+      "anchor": "how-alike-at-a-distance"
     },
     {
       "name": "token flow",

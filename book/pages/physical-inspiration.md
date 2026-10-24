@@ -331,7 +331,7 @@ the same distribution in a world of five hundred agents and one of sixty
 thousand. Finding such scaleless properties systematically — by measuring the
 same thing at many sizes and asking whether, rescaled, it is the same — is now
 an aim of the notebook. Two measurements since sharpen the picture. What agents
-hold is correlated over one or two steps only, a short [correlation length](correlation-function.md "How far apart two agents can be and still be alike: how fast likeness fades with distance."),
+hold is correlated over one or two steps only, a short correlation length,
 far from critical ([Like next to like](like-next-to-like.md)). But the space
 itself has no scale: within *r* steps lie about *r*^3.3 agents, the same
 law from 3 steps to 14 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
@@ -517,10 +517,10 @@ part of the notebook (see [the contents](../README.md)):
 <!-- turns -->
 ---
 
-[Space and dimension](../README.md#space-and-dimension) · [Like next to like](like-next-to-like.md) →
+[Space and dimension](../README.md#space-and-dimension) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) →
 
 **Also about:** [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (17)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
+> [!info]- Pages that link here (18)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->
