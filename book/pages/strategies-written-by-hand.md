@@ -53,7 +53,7 @@ becomes how evolution could get there.
 
 ### The invasion test
 
-The method has a page of its own ([The invasion test](invasion-test.md)).
+The method has a page of its own ([The invasion test](eras-and-contests.md#the-invasion-test)).
 Take an evolved world: one of the ten B2 worlds of
 [Experiment 16](how-to-tell-a-world-that-keeps-evolving.md#the-runs-of-experiment-16),
 each of 10,000 tokens, as it stood at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000. This page calls each
@@ -446,7 +446,7 @@ out, about a quarter of the crowd they needed.
   grew too poor to raid.
 - [What a brain can compute](what-a-brain-can-compute.md): a B2 brain of 12
   units plays the raider, and no B2 brain can write the factory's message.
-- [The invasion test](invasion-test.md): the method in full, and how to read
+- [The invasion test](eras-and-contests.md#the-invasion-test): the method in full, and how to read
   what it shows.
 - [Other contests: a lottery, and alliances](another-game.md): a password and
   a crowd given to evolution for free.
@@ -500,7 +500,7 @@ the pilots' plantings, and came out exactly as they did.
 - **24 October 2026.** From 15 October, this page said that none of the
   rules tried after it made evolution find the raiders' play "or go on
   improving". Contests a lifetime long, played later that day, found
-  evolution going on slowly. In plain B2, every [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") beat the one before it,
+  evolution going on slowly. In plain B2, every era beat the one before it,
   to iteration 2,000
   ([Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)).
   Under every contest tried but a lottery, later brains beat earlier ones in
@@ -547,5 +547,5 @@ the pilots' plantings, and came out exactly as they did.
 [Strategies written by hand](../README.md#strategies-written-by-hand) · [What a brain can compute](what-a-brain-can-compute.md) →
 
 > [!info]- Pages that link here (12)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [What the brains are like](what-the-brains-are-like.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [The invasion test](invasion-test.md) · [Other contests: a lottery, and alliances](another-game.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [What the brains are like](what-the-brains-are-like.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Other contests: a lottery, and alliances](another-game.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

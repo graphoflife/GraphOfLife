@@ -36,7 +36,7 @@ far to run and what to keep. It also holds the **thesis**: a claim, why it
 would be so, and what would confirm or refute it. The thesis is fixed before
 the runs start, and the page quotes it from the plan, so it cannot be
 reworded once the results are in. Some plans ask for **trials** instead:
-[contests](eras-and-contests.md) or [invasions](invasion-test.md) played
+[contests](eras-and-contests.md) or [invasions](eras-and-contests.md#the-invasion-test) played
 from worlds that runs kept.
 
 ## The lab
@@ -112,6 +112,6 @@ does.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (9)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
+> [!info]- Pages that link here (10)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
 <!-- /turns -->

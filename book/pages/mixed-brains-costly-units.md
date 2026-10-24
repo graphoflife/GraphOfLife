@@ -171,7 +171,7 @@ rule keeps a [healthy world](what-makes-a-world-interesting.md "A world that mee
 
 **Related notes:** [How a brain changes](mutation.md) ·
 [Genotypes and the family tree](genotype.md) ·
-[The invasion test](invasion-test.md) ·
+[The invasion test](eras-and-contests.md#the-invasion-test) ·
 [What the brains are like](what-the-brains-are-like.md) ·
 [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) ·
 [The switches the world was built with](the-switches-the-world-was-built-with.md)

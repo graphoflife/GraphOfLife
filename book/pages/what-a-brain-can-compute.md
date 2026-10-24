@@ -290,7 +290,7 @@ physics, asks for exactly that kind of thing.
 [Another game](another-game.md) ·
 [What a brain sees](brain-inputs.md) ·
 [What a brain says](brain-outputs.md) ·
-[The invasion test](invasion-test.md)
+[The invasion test](eras-and-contests.md#the-invasion-test)
 
 <!-- turns -->
 ---
@@ -299,6 +299,6 @@ physics, asks for exactly that kind of thing.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (8)
-> [Every setting](settings.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
+> [!info]- Pages that link here (9)
+> [Every setting](settings.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
 <!-- /turns -->

@@ -56,7 +56,7 @@ Three answers are possible, and each says something different about
 - **The door closes, and nothing opens.** Later worlds resist every raid
   tried: a top, at least for these brains.
 
-Each planting is an [invasion test](invasion-test.md):
+Each planting is an [invasion test](eras-and-contests.md#the-invasion-test):
 - **The patch.** An agent is drawn at random, then its nearest neighbours,
   step by step, until the patch holds 5% of the world.
 - **The planting.** Every agent of the patch gets the raider's rule in place
@@ -72,8 +72,8 @@ Each planting is an [invasion test](invasion-test.md):
 We expected the door to stay open. Evolution's own contests fade: later
 brains beat earlier ones by less and less
 ([Every era against three](every-era-against-three.md)). A world learning to
-defend itself would not show that. In every long world, one agent's [best
-reply](exploitability.md "How much better than a world's brains the best reply to them would do: zero only at the top.") to the rest would gain about one node a game, at every [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") from 2,500
+defend itself would not show that. In every long world, one agent's best
+reply to the rest would gain about one node a game, at every era from 2,500
 to 50,000. Nothing in a world that has never met a raider selects against
 one.
 
@@ -861,10 +861,10 @@ section to `book/results/b1raiders.json`.
 <!-- turns -->
 ---
 
-← [What a brain can compute](what-a-brain-can-compute.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [The invasion test](invasion-test.md) →
+← [What a brain can compute](what-a-brain-can-compute.md) · [Strategies written by hand](../README.md#strategies-written-by-hand)
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going), [Groups and cooperation](../README.md#groups-and-cooperation), [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (2)
-> [How a coalition takes a node](revolution.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
+> [!info]- Pages that link here (3)
+> [How a coalition takes a node](revolution.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
 <!-- /turns -->

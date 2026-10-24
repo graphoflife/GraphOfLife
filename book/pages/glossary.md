@@ -43,7 +43,7 @@ there.
 - **[entropy](gini-coefficient.md#entropy-and-evenness)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
 - **[estate](estate.md)** — The tokens a dead agent leaves, and who gets them.
 - **[even split](even-split.md)** — What the rules do when a brain scores no candidate above zero: the stake is spread evenly.
-- **[exploitability](exploitability.md)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
+- **[exploitability](eras-and-contests.md#exploitability)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
 - **[extinction](extinction.md)** (also extinct) — A world's end before its last iteration: it has dropped to its threshold of agents or fewer.
 - **[flow module](flow-modules.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
 - **[founder](starting-ring.md)** — One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.
@@ -57,7 +57,7 @@ there.
 - **[hegemon](revolution.md)** — The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.
 - **[home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node)** — The tokens an agent stakes on its own node, to keep it.
 - **[hub](stars-and-hubs.md)** (also star) — An agent joined to far more agents than most; a star is a world held together by a single hub.
-- **[invasion test](invasion-test.md)** — A strategy planted as a patch in an evolved world: does it spread, or die out?
+- **[invasion test](eras-and-contests.md#the-invasion-test)** — A strategy planted as a patch in an evolved world: does it spread, or die out?
 - **[iteration](one-iteration.md)** — One step of a world's time: a phase of reproduction, then a phase of the game.
 - **[lab](the-lab.md)** (also engine) — The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.
 - **[largest remainder](largest-remainder.md)** — How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions.

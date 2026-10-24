@@ -138,7 +138,7 @@ def eras(ch: F.Chapter) -> None:
         rows = [r for r in rows if not member(r["run"])]
         by_it: Dict[int, List[float]] = defaultdict(list)
         for r in mine:
-            by_it[int(r["iteration"])].append(r["exploitability"])
+            by_it[int(r["iteration"])].append(r["eras-and-contests"])
         its = sorted(by_it)
         med = [float(np.median(by_it[i])) for i in its]
         lo = [float(min(by_it[i])) for i in its]

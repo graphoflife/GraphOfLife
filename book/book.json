@@ -1044,16 +1044,17 @@
     },
     {
       "id": "eras-and-contests",
-      "title": "Eras and contests: does a world keep getting better?",
+      "title": "Eras, contests and invasions: does a world keep getting better?",
       "file": "pages/eras-and-contests.md",
       "topics": [
         "evolution",
-        "methods"
+        "methods",
+        "strategies"
       ],
       "kind": "term",
       "status": "written",
       "added": "2026-10-23",
-      "summary": "The brains of a world at two moments played against each other: the yardstick of whether evolution keeps going."
+      "summary": "A world whose numbers have settled may have stopped evolving, or may still be improving in ways no single moment shows. To tell, the notebook plays a world's brains of two moments against each other."
     },
     {
       "id": "how-to-tell-a-world-that-keeps-evolving",
@@ -1133,19 +1134,6 @@
       "summary": "No run can show that evolution goes on for ever."
     },
     {
-      "id": "exploitability",
-      "title": "Exploitability",
-      "file": "pages/exploitability.md",
-      "topics": [
-        "evolution",
-        "strategies"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-15",
-      "summary": "A cross-time tournament (How to tell a world that keeps evolving) compares a world's brains with its own past."
-    },
-    {
       "id": "strategies-written-by-hand",
       "title": "Can a strategy written by hand beat evolution?",
       "file": "pages/strategies-written-by-hand.md",
@@ -1205,19 +1193,6 @@
       "status": "planned",
       "added": "2026-10-09",
       "summary": "A large world of agents that decide as the average evolved agent does (*Brains replaced by their average*), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
-    },
-    {
-      "id": "invasion-test",
-      "title": "The invasion test",
-      "file": "pages/invasion-test.md",
-      "topics": [
-        "strategies",
-        "methods"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-15",
-      "summary": "A cross-time tournament (How to tell a world that keeps evolving) asks whether a world's later brains beat its earlier ones."
     },
     {
       "id": "who-helps-whom",

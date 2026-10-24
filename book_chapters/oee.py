@@ -817,7 +817,7 @@ def _want_exploit(run_id: str) -> Dict[str, Any]:
     return {"eras": [e for e in E16_ERAS if e in have], "draws": EXPLOIT_DRAWS, "sample": EXPLOIT_SAMPLE}
 
 
-@D.measure("exploitability", field="key", want=_want_exploit)
+@D.measure("eras-and-contests", field="key", want=_want_exploit)
 def exploitability(run_id: str) -> Dict[str, Any]:
     """Exploitability of a world's brains at each era (the note *Exploitability*)."""
     eras = _want_exploit(run_id)["eras"]
@@ -901,7 +901,7 @@ def stopping(ch: F.Chapter) -> None:
     exploited = {c: [exploitability(s.run_id) for s in specs[c]] for c in E16_CONDITIONS}
     lines = []
     for k, c in enumerate(E16_CONDITIONS):
-        table = [{r["iteration"]: r["exploitability"] for r in w["rows"]} for w in exploited[c]]
+        table = [{r["iteration"]: r["eras-and-contests"] for r in w["rows"]} for w in exploited[c]]
         for row in table:
             lines.append({"x": list(row), "y": list(row.values()), "colour": COLOURS[k], "alpha": 0.3,
                           "width": 1})
@@ -928,7 +928,7 @@ def stopping(ch: F.Chapter) -> None:
                   "above the largest rival offer), or that only take them. Its exploitability is the "
                   "best reply's score minus its own; average over the agents (see the note "
                   "*Exploitability*)."]))
-    ch.number("exploitability", {c: {e: describe([r["exploitability"] for w in exploited[c] for r in w["rows"]
+    ch.number("eras-and-contests", {c: {e: describe([r["eras-and-contests"] for w in exploited[c] for r in w["rows"]
                                                   if r["iteration"] == e]) for e in E16_ERAS}
                                  for c in E16_CONDITIONS})
     ch.number("holds", {c: {e: describe([r["actual"] for w in exploited[c] for r in w["rows"]

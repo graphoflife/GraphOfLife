@@ -234,16 +234,18 @@
     },
     {
       "name": "invasion test",
-      "page": "invasion-test",
-      "says": "A strategy planted as a patch in an evolved world: does it spread, or die out?"
+      "page": "eras-and-contests",
+      "says": "A strategy planted as a patch in an evolved world: does it spread, or die out?",
+      "anchor": "the-invasion-test"
     },
     {
       "name": "exploitability",
       "also": [
         "best reply"
       ],
-      "page": "exploitability",
-      "says": "How much better than a world's brains the best reply to them would do: zero only at the top."
+      "page": "eras-and-contests",
+      "says": "How much better than a world's brains the best reply to them would do: zero only at the top.",
+      "anchor": "exploitability"
     },
     {
       "name": "open-ended evolution",

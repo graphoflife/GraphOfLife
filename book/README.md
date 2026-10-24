@@ -153,13 +153,12 @@ What the brains are and compute, the families they make, and how different agent
 
 How to tell whether evolution goes on, why it stops, and what would count as open-ended evolution.
 
-- [Eras and contests: does a world keep getting better?](pages/eras-and-contests.md)
+- [Eras, contests and invasions: does a world keep getting better?](pages/eras-and-contests.md)
 - [Does evolution keep going?](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
 - [Every era against three](pages/every-era-against-three.md)
 - [A hundred thousand iterations](pages/a-hundred-thousand-iterations.md)
 - [What would count as open-ended evolution](pages/open-ended-test.md)
-- [Exploitability](pages/exploitability.md)
 
 ### Strategies written by hand
 
@@ -169,7 +168,6 @@ Raiders, turtles and crews written by hand and planted in evolved worlds: is evo
 - [What a brain can compute](pages/what-a-brain-can-compute.md)
 - [Why the raiders stopped winning](pages/does-evolution-close-the-door.md)
 - One agent in a sea of average agents — *not written yet*
-- [The invasion test](pages/invasion-test.md)
 
 ### Groups and cooperation
 
