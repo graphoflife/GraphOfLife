@@ -206,7 +206,7 @@ def domains(run_id: str) -> Dict[str, Any]:
             families[str(k)] = int(counts.size)
         out.append({"t": t, "agents": len(ids), "pairs": pairs.tolist(),
                     "same": {str(k): v.tolist() for k, v in same.items()},
-                    "chance": chance, "largest": largest, "families": families})
+                    "chance": chance, "largest": largest, "genotype": families})
     return {"moments": out}
 
 
@@ -291,7 +291,7 @@ COMPARED = (
     ("The largest, and totals", (1, 20), (
         ("maxTokenAdded", 2, "largest gain", RED), ("maxTokens", 2, "richest", RED),
         ("maxDegree", 2, "best-connected", RED), ("nodes", 2, "agents", GREY),
-        ("cladesInWindow", 2, "families", GREY))),
+        ("cladesInWindow", 2, "genotype", GREY))),
 )
 #: Both sets of worlds are compared over the same iterations.
 COMPARED_WINDOW = (500, 1499)

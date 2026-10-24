@@ -160,11 +160,8 @@ What the brains are and compute, the families they make, and how different agent
 - Brains replaced by their average — *not written yet*
 - [How different are the agents?](pages/how-different-are-the-agents.md)
 - How big should a brain be? — *not written yet*
-- [Genotypes and the family tree](pages/genotype.md)
+- [Genotypes, families and the common ancestor](pages/genotype.md)
 - [How a signal fades through layers](pages/vanishing-signal.md)
-- [Brain diversity](pages/brain-diversity.md)
-- [Families](pages/families.md)
-- [The common ancestor of the living](pages/common-ancestor.md)
 
 ### Does evolution keep going?
 

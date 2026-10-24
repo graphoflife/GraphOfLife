@@ -36,7 +36,7 @@ those in danger, so the comparison measures need, not benefit.
 | [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") | Almost none: about 0.01 nodes saved per 100 agents a game, falling as the world evolves. Without revolutions or pooled sides the rules give no stake that defends another's node. | [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
 | B2 with stakes that support a neighbour's defence | Evolution gave them up: at face value a gift without surplus is a loss. | [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) |
 | B2 with a yield on stakes returned | Built [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), not partnerships. | [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) |
-| B2 with stakes pooled by [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") | Fighting cut to a third; clone groups of 8–11 agents. Pooled family tags made families of hundreds that rose and fell like empires. | [Another game](another-game.md) |
+| B2 with stakes pooled by genotype | Fighting cut to a third; clone groups of 8–11 agents. Pooled family tags made families of hundreds that rose and fell like empires. | [Another game](another-game.md) |
 | B2 with kin sense alone | No groups formed; the sense was used less than [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") use it. | [Another game](another-game.md) |
 | B2 with alliances by mutual consent | Taken up: one alliance held 99% of the world by 2,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). It spread as a habit (say yes to every neighbour), not as a family, and brought peace: conquest fell from 8 to 0.3 per 100 agents a game. It protects by peace and exchange (gifts go round), not by rescue. | [Alliances](another-game.md#alliances), [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
 | B2 with an input saying where an agent's brain came from, or what each neighbour's stake did for it in the last game | The sense of direction was used to go back: chains of takeovers returned to where they came from more often. The sense of who helped changed nothing: help stayed at 0.006–0.012 nodes per 100 agents a game (control 0.009), none was returned, gifts still ran downhill, and evolution went on at the control's pace. | [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
@@ -89,7 +89,7 @@ The open question is a rule under which cooperation is adopted *and*
 competition between groups goes on.
 
 **Related notes:** [Help](help.md) · [Flows that go round](circulation.md) ·
-[Families](families.md) ·
+[Families](genotype.md#families) ·
 [Do agents cooperate?](do-agents-cooperate.md) ·
 [Another game](another-game.md) ·
 [Alliances](another-game.md#alliances) ·

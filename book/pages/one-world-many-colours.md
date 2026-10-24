@@ -136,9 +136,9 @@ same places in every picture. What each colouring shows:
   rich neighbour. The landscape of wealth is a set of peaks with valleys
   around them — and tokens flow downhill, from the peaks into the valleys
   ([Gains and losses](gains-and-losses.md)).
-- **Families.** Each agent is coloured by the [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), among those alive 100
+- **Families.** Each agent is coloured by the genotype, among those alive 100
   iterations earlier, from which its own genotype descends
-  ([Families](families.md)). The seven largest families of the whole
+  ([Families](genotype.md#families)). The seven largest families of the whole
   world hold 344, 333, 314, 290, 285, 245 and 244 agents — 2,055 of 14,870;
   the other 12,815 belong to smaller ones. (At 10,000 tokens the seven largest
   held 1,040 of 1,336.) And the families **live together**: three of the
@@ -216,6 +216,6 @@ To make every figure of this page: `python3 book_figures.py colours`.
 
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a simulation costs](what-a-simulation-costs.md) →
 
-> [!info]- Pages that link here (5)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Do agents cooperate?](do-agents-cooperate.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (6)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like](like-next-to-like.md) · [Genotypes, families and the common ancestor](genotype.md) · [Do agents cooperate?](do-agents-cooperate.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

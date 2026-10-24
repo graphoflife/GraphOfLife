@@ -396,7 +396,7 @@ def side_by_side(ch: F.Chapter) -> None:
             decided.append((k, round(e, 3)))
     decided.sort(key=lambda r: -r[1])
     ch.number("decided_by_settings", decided)
-    ch.number("families", len(set(labels)))
+    ch.number("genotype", len(set(labels)))
 
     # One statistic the settings decide, one the seed does.
     charts = []

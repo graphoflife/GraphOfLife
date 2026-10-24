@@ -81,7 +81,7 @@ Each changes one setting of the baseline [B1](b1-and-b2.md "The first baseline: 
   reused.
 - **brains never change** — [`mutation_sparsity`](settings.md#mutation_sparsity)
   = 0. A brain still "changes" with probability one in five, at birth and
-  after every game, and gets a new [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") number when it does — but not
+  after every game, and gets a new genotype number when it does — but not
   one of its weights moves ([How a brain changes](mutation.md)). So
   the only brains a world ever has are its founders', copied; the family tree
   still branches exactly as often as in the baseline, which keeps it
@@ -276,7 +276,7 @@ carries the same brain, and which genotype spreads is pure chance.
 <!-- figure brains/moves-dots -->
 ![How often one branch replaces all others](../figures/brains/moves-dots.svg)
 
-**How often one branch replaces all others.** For each world that lived to the end, coloured as above: how many times after iteration 100 the newest common ancestor of all the living moved forward to a younger genotype ([The common ancestor](common-ancestor.md)). In a world whose brains never change, every genotype is a renamed copy of one founder's brain once that founder's line fills the world, so which branch wins is chance.
+**How often one branch replaces all others.** For each world that lived to the end, coloured as above: how many times after iteration 100 the newest common ancestor of all the living moved forward to a younger genotype ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)). In a world whose brains never change, every genotype is a renamed copy of one founder's brain once that founder's line fills the world, so which branch wins is chance.
 
 > [!example]- How to make this figure
 > **Runs.** The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations — in three conditions: the 30 baseline runs `B1-10000-s001` … `-s030`; *brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box of the runs behind this page.
@@ -365,7 +365,7 @@ change (it asked for more than half).
 >   differences, *p* by flipping their signs at random, 10,000 times each
 >   ([Permutation tests](permutation-test.md)).
 > - **Results:** `book/results/E07.json`, made with `python3 gol_lab.py analyse E07`
->   (about 14 minutes: the [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") read every frame of every run); the
+>   (about 14 minutes: the lineages read every frame of every run); the
 >   figures with `python3 book_figures.py brains`.
 
 <!-- turns -->
@@ -374,5 +374,5 @@ change (it asked for more than half).
 ← [What agents say to each other](what-agents-say-to-each-other.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [How different are the agents?](how-different-are-the-agents.md) →
 
 > [!info]- Pages that link here (19)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How the game is played](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [Brain diversity](brain-diversity.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How the game is played](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

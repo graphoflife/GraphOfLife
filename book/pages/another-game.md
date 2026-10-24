@@ -64,8 +64,8 @@ Blotto: any contest whose best play can be found will be found.
 
 ### Stakes counted by genotype
 
-**A contest that lets a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") act as one.** Let stakes count by
-**[genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.")**, the identity of a brain. Every stake on a node made by agents
+**A contest that lets a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") act as one.** Let stakes count by
+**[genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")**, the identity of a brain. Every stake on a node made by agents
 with exactly the same brain counts as one side's. The side with the largest
 total takes the node, and the owner keeps it if its own genotype wins. Each
 agent also sees, for every [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), whether it carries the same brain.

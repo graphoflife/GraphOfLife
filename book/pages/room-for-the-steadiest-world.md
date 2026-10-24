@@ -195,7 +195,7 @@ At iteration 3,000:
 
 The diversity score is the mean of four parts. Three of them count how many
 doubling classes (1, 2–3, 4–7, and so on) the agents' tokens, links and ages
-fill. The fourth counts their [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). Each rule took a different part:
+fill. The fourth counts their [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). Each rule took a different part:
 - **The estates take the tokens.** Paying the estate to births fills the
   world with children: about 5,000 agents for 10,000 tokens, 1.9 tokens
   each. The agents' tokens fill about two doubling classes, against four or

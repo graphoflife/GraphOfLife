@@ -82,7 +82,7 @@ And two things say that nothing will change.
 A world of 204,800 tokens holds about 27,000 agents. After every game each
 brain is changed with probability 0.2, so some 5,400 changed brains are
 tried in every iteration, and over 100,000 iterations some 500 million. In
-the worlds of 10,000 tokens one branch of the [family tree](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") replaced all
+the worlds of 10,000 tokens one branch of the family tree replaced all
 others about every 350 iterations
 ([Genotypes and lineages](genotypes-and-lineages.md)); a world twenty times larger
 is slower, by a factor that [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) is
@@ -231,7 +231,7 @@ before the run.
 
 1. **Frames in windows, statistics always.** Today a run that records its
    statistics as it goes must keep every frame, because families can only
-   be counted from every iteration in order ([Families](families.md)).
+   be counted from every iteration in order ([Families](genotype.md#families)).
    The recorder will instead read every frame as it is made, and the store
    keep only the windows. A resumed run then takes its families up from the
    window before its checkpoint, which is why checkpoints fall at the ends

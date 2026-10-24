@@ -60,7 +60,7 @@ tested it again on the worlds of 100,000.
   Thesis **refuted**, narrowly at 10,000 tokens (a core of 53%) and more
   clearly at 100,000 (57%). The network is part tree, part web.
 - [Genotypes and lineages](genotypes-and-lineages.md). Thesis **refuted** at
-  both sizes. A [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") lasts two iterations. Lines of descent take the world
+  both sizes. A [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") lasts two iterations. Lines of descent take the world
   over: again and again in a small world, about once a run in a large one.
 
 Six of six theses failed, and no failure changed with the size of the world.
@@ -366,7 +366,7 @@ with it, and from then on only reshuffles
 [What this notebook is about](what-this-notebook-is-about.md#a-ladder-of-four-steps)
 sets out a ladder of four claims, each needed before the next:
 
-1. **P1, there is evolution:** [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") last long enough for selection to act
+1. **P1, there is evolution:** [lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") last long enough for selection to act
    on them, and selection changes the outcome.
 2. **P2, adaptation accumulates:** a late population would beat its own
    ancestors.

@@ -16,7 +16,7 @@ In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its netwo
 its owner has just won — and then with probability *p* = 0.2
 ([How a brain changes](mutation.md);
 [`mutate_on_replication`](settings.md#mutate_on_replication)). One
-copy in five is a new [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). Is that a lot or a little?
+copy in five is a new [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). Is that a lot or a little?
 
 [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) proposed that evolution stops because
 the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") has an answer: a contest for nodes is best played at random, and
@@ -318,6 +318,6 @@ keeps evolution from going on.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (7)
-> [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (8)
+> [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes, families and the common ancestor](genotype.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

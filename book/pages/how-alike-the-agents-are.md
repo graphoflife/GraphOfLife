@@ -217,7 +217,7 @@ they only differ, it is drift, and variety without direction.
 
 **Related notes:** [Effective numbers](effective-number.md) ·
 [Where, who and chance](variance-split.md) ·
-[Brain diversity](brain-diversity.md) ·
+[Brain diversity](genotype.md#brain-diversity) ·
 [Genotypes and the family tree](genotype.md) ·
 [Genotypes and lineages](genotypes-and-lineages.md) ·
 [What the brains are like](what-the-brains-are-like.md) ·

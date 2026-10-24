@@ -319,7 +319,7 @@ brains as the root mean square of the differences of all their 15,795 numbers.
 > **To make it again:** `python3 book_figures.py minds`.
 <!-- /figure -->
 
-- A [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") and its parent are **0.0085** apart: one change.
+- A [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") and its parent are **0.0085** apart: one change.
 - Two agents drawn at random from one world are **0.20** apart (the worlds:
   0.09 to 0.21).
 - Two founders, drawn independently, are 0.18 apart (0.176): less than two

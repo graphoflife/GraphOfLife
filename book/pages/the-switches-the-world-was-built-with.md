@@ -342,7 +342,7 @@ have tried with B2, and batch S's other ways of deciding a node:
   all but the last token, kept at home;
 - brains that grow or whose units each hold a token, brains that change more
   slowly or faster, and every unused link lapsing;
-- a lottery, sides pooled by [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") or by family, and a sense of kin or of
+- a lottery, sides pooled by [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") or by family, and a sense of kin or of
   family ([Other contests: a lottery, and alliances](another-game.md)).
 
 Every world holds 10,000 tokens and is played for 1,000 iterations in the

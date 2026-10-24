@@ -46,7 +46,7 @@ health bar, the seven marks of a sound network:
 
 Second, its [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") is above that of B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world. The
 diversity score says, in one number from 0 to 1, how much a world's agents
-differ in [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), links, ages and [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). B2 is the second [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), the
+differ in [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), links, ages and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). B2 is the second [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), the
 world built so that its network cannot break.
 
 One moment says little. Most candidate worlds have brains **mixed at

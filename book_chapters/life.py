@@ -231,15 +231,15 @@ def youth(ch: F.Chapter) -> None:
     fam = F.A.bands([early(*series(s.run_id, "cladesInWindow")) for s in specs], points=151)
     fam.update(label=f"{len(specs)} worlds: median, middle half, nine in ten", colour=GREEN)
     ch.figure(
-        "families", title="Families: distinct ancestors eight iterations back",
-        x={"label": "iteration", "min": 0, "max": 150}, y={"label": "families", "min": 0},
+        "genotype", title="Families: distinct ancestors eight iterations back",
+        x={"label": "iteration", "min": 0, "max": 150}, y={"label": "genotype", "min": 0},
         series=[fam],
         caption="After every game, how many different genotypes of eight iterations earlier the "
                 "living descend from (before iteration 8: how many founders). "
                 f"{BAND_WORDS}, at every iteration.",
         recipe=recipe(W.runs_text(), STATS_FILE,
                       ["Take the rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150, and the statistic "
-                       "`cladesInWindow` ([Families](families.md): for every living agent, follow its genotype's "
+                       "`cladesInWindow` ([Families](genotype.md#families): for every living agent, follow its genotype's "
                        "parents back to the newest one born at or before iteration t − 8, or to a "
                        "founder's; count the distinct ones).",
                        "At each iteration take the median, quartiles and 5th and 95th percentiles over the runs."]))
@@ -412,7 +412,7 @@ def births(ch: F.Chapter) -> None:
 # ---------------------------------------------------------------------------
 
 SEED_STATS = [("nodes", 2, "agents"), ("edges", 2, "connections"), (("births"), 1, "births"),
-              ("cladesInWindow", 2, "families"), ("gini", 2, "Gini"), ("topDecileShare", 2, "richest tenth"),
+              ("cladesInWindow", 2, "genotype"), ("gini", 2, "Gini"), ("topDecileShare", 2, "richest tenth"),
               ("meanDegree", 2, "connections per agent"), ("leaves/nodes", 2, "leaf share"),
               ("bridges/edges", 2, "bridge share"), ("coreShare", 2, "core share"),
               ("transitivity", 2, "clustering"), ("distinctBrains/nodes", 2, "genotypes per agent")]

@@ -146,7 +146,7 @@ criteria, read at iteration 2,000:
 4. **Almost three-dimensional:** a dimension of 2 to 4, and a typical
    distance at least 1.5 times its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s. A folded small world reads
    three dimensions too, so both are asked.
-5. **Diverse:** its agents' tokens, links, ages and [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") spread more
+5. **Diverse:** its agents' tokens, links, ages and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") spread more
    widely than in B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, by the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."). And its agents'
    decisions vary more. Put in the same situations, they fall into more
    effective kinds of staking than the agents of B2's median world

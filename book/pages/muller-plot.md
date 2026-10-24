@@ -47,5 +47,5 @@ does not tell them apart.
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (4)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Genotypes and the family tree](genotype.md)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Genotypes, families and the common ancestor](genotype.md)
 <!-- /turns -->

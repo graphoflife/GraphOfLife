@@ -7,7 +7,7 @@ a [neighbour](the-world.md#the-network "An agent joined to another by a connecti
 numbers**. Two say how strongly it means yes and how strongly no; the other
 two, the **mode**, say how to read that pair. Read as a probability, chance
 draws the answer; read sharply, the stronger one always wins. The mode is
-part of the brain, so whether a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") decides firmly or by chance is
+part of the brain, so whether a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") decides firmly or by chance is
 inherited, and can evolve.
 
 ## Firm, or by chance

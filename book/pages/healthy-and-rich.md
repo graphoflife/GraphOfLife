@@ -78,7 +78,7 @@ classes they fill
 ([Effective numbers: how many kinds there really are](effective-number.md)).
 It is 1 if every agent is in one class, and *k* if they are spread evenly
 over *k*. Agents holding one to three tokens fill at most two, the classes 1
-and 2–3. [Genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") are counted as an effective number per agent: 1 when
+and 2–3. [Genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") are counted as an effective number per agent: 1 when
 every agent has a genotype of its own, near 0 when one genotype is
 everywhere.
 

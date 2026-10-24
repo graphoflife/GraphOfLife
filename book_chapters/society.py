@@ -24,8 +24,8 @@ from book_chapters.common import (BAND_STEPS, BAND_WORDS, BLUE, CYAN, GREEN, GRE
 #: common genotype held the largest share, a world one family took over within the window and one no
 #: family took over, and three for the common ancestor.
 EXAMPLES = {
-    "E02": {"top": 12, "families": ((12, (2550, 2999)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
-    "E10": {"top": 28, "families": ((12, (550, 1499)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
+    "E02": {"top": 12, "genotype": ((12, (2550, 2999)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
+    "E10": {"top": 28, "genotype": ((12, (550, 1499)), (1, (1000, 1499))), "ancestry": (1, 12, 17)},
 }[W.experiment]
 
 # ---------------------------------------------------------------------------
@@ -614,7 +614,7 @@ def lineage(ch: F.Chapter) -> None:
         lowest.append(float(np.nanmin(v[its >= 100])))
     ch.number("thesis_E06", {
         "distinct_per_agent": describe([mean_over(s.run_id, "distinctBrains/nodes", 100, W.last) for s in alive]),
-        "families": describe([mean_over(s.run_id, "cladesInWindow", 100, W.last) for s in alive]),
+        "genotype": describe([mean_over(s.run_id, "cladesInWindow", 100, W.last) for s in alive]),
         "families_lowest": describe(lowest), "worlds_ever_ten_or_fewer": int(sum(x <= 10 for x in lowest)),
         "worlds_with_a_tenth": int(sum(v > 0.1 for _, v in peaks.values()))})
 
@@ -631,7 +631,7 @@ def lineage(ch: F.Chapter) -> None:
               caption=f"Every 25 iterations, for three worlds (seeds {seeds[0]}, {seeds[1]} and {seeds[2]}, one "
                       "colour each): how "
                       "many iterations earlier the newest genotype lived from which every living agent "
-                      "descends ([The common ancestor](common-ancestor.md)). While a line rises "
+                      "descends ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)). While a line rises "
                       "by 25 every 25 iterations, that ancestor stays the same and simply grows older; "
                       "each drop is a moment when it moves forward to a younger genotype, because all "
                       "the other branches of the family tree have died out. Before the first drop the "
@@ -642,11 +642,11 @@ def lineage(ch: F.Chapter) -> None:
                              "iteration it first appeared.",
                              "Every 25 iterations, after the game, count the agents per living genotype "
                              "and climb the family tree from them, newest genotype first, adding each "
-                             "genotype's count to its parent's ([The common ancestor](common-ancestor.md)).",
+                             "genotype's count to its parent's ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)).",
                              "The first genotype reached that carries all agents is their newest common "
                              "ancestor; plot the iterations since it first appeared."]))
 
-    for seed, window in EXAMPLES["families"]:
+    for seed, window in EXAMPLES["genotype"]:
         w = F.world_pass(W.run(seed), window)
         m = w["muller"]
         xs = [t for t, n, _ in m["series"]]

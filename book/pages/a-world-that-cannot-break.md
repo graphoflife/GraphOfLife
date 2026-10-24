@@ -101,7 +101,7 @@ smallest](the-largest-and-the-smallest.md)).
 two that fell furthest. A stricter variant changed a brain only when it was
 copied into a newborn, never into a won node, and it shows what heredity alone
 cannot do. In one of its worlds births stopped, so change stopped, and the
-world froze into a single [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). Its agents aged by one every iteration,
+world froze into a single [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). Its agents aged by one every iteration,
 and every node was taken by its own kin each game. Longer lives, for once,
 meant that nothing was happening.
 
@@ -286,7 +286,7 @@ Why would brains give up their children? A brain spreads mostly by winning
 nodes, not by having children: seventeen times more in B1 ([Questioning the
 mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)). And tokens
 given to a child are tokens not staked. So giving up children may have been
-selected, because a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") gains from keeping its tokens while the world it
+selected, because a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") gains from keeping its tokens while the world it
 lives in drains. Or a decision that had become easy to change may simply have
 drifted to zero, in a world already small. These runs cannot say which.
 

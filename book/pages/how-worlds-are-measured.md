@@ -159,7 +159,7 @@ that died.
 
 ## Step 6 · How long things last
 
-For [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") — of agents, of [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") — the notebook draws the share that
+For [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") — of agents, of [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") — the notebook draws the share that
 lasted **at least** *L* iterations, for every *L*, as a
 [Kaplan–Meier survival curve](kaplan-meier.md), which counts lives
 still going at the end of a run correctly. Such curves, and many

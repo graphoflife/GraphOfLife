@@ -70,8 +70,8 @@ because each looks like the thing we want.
    When a number keeps being drawn from the same distribution, and very large
    values are rare, its record grows like the logarithm of time. So a record
    that rises like a logarithm is exactly what a world standing still makes.
-2. **Counts.** [Genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") ever made, [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") since the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), iterations
-   of a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor."): anything that only adds. A count rises in a straight line at
+2. **Counts.** [Genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") ever made, [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") since the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), iterations
+   of a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor."): anything that only adds. A count rises in a straight line at
    the rate things happen, whether anything is selected or not. Biology calls
    this the molecular clock.
 3. **The left wall.** Take a trait that cannot fall below a floor, such as a

@@ -22,13 +22,13 @@ there.
 - **[bootstrap](bootstrap.md)** — How sure a number is, found by redrawing the worlds it came from many times.
 - **[box dimension](ball-dimension-and-curvature.md#box-dimension)** — A network's dimension read from how many boxes of a given size it takes to cover it.
 - **[brain](the-brain.md)** — The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.
-- **[brain diversity](brain-diversity.md)** — How many different brains, or genotypes, a world holds.
+- **[brain diversity](genotype.md#brain-diversity)** — How many different brains, or genotypes, a world holds.
 - **[bridge](bridges.md)** — A connection that lies on no loop: cut it and the network falls into two pieces.
 - **[candidate](one-iteration.md#phase-1-reproduction)** — An agent itself and each of its neighbours, the ones its brain looks at when it decides.
 - **[circulation](circulation.md)** — The part of a flow that goes round in loops, as against the part that runs from sources to sinks.
 - **[cleanup](one-iteration.md#cleanup)** — The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.
 - **[clustering](clustering.md)** — How often an agent's neighbours are also each other's neighbours.
-- **[common ancestor](common-ancestor.md)** — The genotype every living agent descends from, and how far back it lies.
+- **[common ancestor](genotype.md#the-common-ancestor-of-the-living)** — The genotype every living agent descends from, and how far back it lies.
 - **[connection](the-world.md#the-network)** — A link between two agents of the network: they are neighbours, and can stake on each other's nodes.
 - **[correlation](correlation.md)** — Whether two quantities go up and down together, from −1 to 1.
 - **[correlation length](correlation-function.md)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
@@ -50,7 +50,7 @@ there.
 - **[fractional factorial](fractional-factorial.md)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
 - **[frame](frames-and-stats.md)** — A whole world as a run records it after one phase: every agent, its tokens and connections.
 - **[game](one-iteration.md#phase-2-the-game)** — The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.
-- **[genotype](genotype.md)** (also family tree) — The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.
+- **[genotype](genotype.md)** (also family tree) — The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.
 - **[Gini coefficient](gini-coefficient.md)** (also Gini, Lorenz curve) — How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.
 - **[health bar](health-bar.md)** — The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.
 - **[healthy world](what-makes-a-world-interesting.md)** (also interesting world) — A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.
@@ -64,7 +64,7 @@ there.
 - **[least squares](least-squares.md)** (also R²) — The straight line that fits a cloud of points best, and how much of their spread it explains.
 - **[lifetime](age-and-lifetime.md)** — How many iterations an agent lives, from its birth to its death.
 - **[lightning](lightning.md)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
-- **[lineage](families.md)** — A line of descent: the agents whose genotypes go back to one ancestor.
+- **[lineage](genotype.md#families)** — A line of descent: the agents whose genotypes go back to one ancestor.
 - **[logarithmic axis](logarithmic-axes.md)** — An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.
 - **[loop](bridges.md#loops)** — A path through the network that comes back to where it started without using a connection twice.
 - **[median](median-and-quantiles.md)** (also quantile) — The middle value: half of the numbers lie below it and half above.

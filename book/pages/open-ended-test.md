@@ -45,7 +45,7 @@ when **at least two of three new worlds** pass all four parts below.
      a strategy answers a fixed set of situations
      ([What a brain can compute](what-a-brain-can-compute.md)).
    - "By mutation alone" is the same brains changed only by the random
-     mutations their [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") collected over the same time, with no
+     mutations their [lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") collected over the same time, with no
      selection.
    - A world whose kinds come and go in a cycle does not pass.
 4. **It stays a world in which much can happen**

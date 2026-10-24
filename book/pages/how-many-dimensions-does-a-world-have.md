@@ -685,7 +685,7 @@ the line between folded and not.
   The diameter of a world grows as a power of its size, a small world's only
   as its logarithm. So a large world has room for regions that evolve apart.
   Lines of descent do hold patches, a dozen steps across. But what the agents
-  hold, their tokens, ages and [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), is alike only within three steps
+  hold, their tokens, ages and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), is alike only within three steps
   ([Like next to like](like-next-to-like.md)).
 - **Open**: rules that would keep a world's dying from gathering wide rings in
   a rich world, or keep a world whole without folding it. Mending would add

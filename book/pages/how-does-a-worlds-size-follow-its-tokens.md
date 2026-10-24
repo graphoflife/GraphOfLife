@@ -291,7 +291,7 @@ flat within what three seeds per size can see:
 |---|---|---|
 | inequality ([Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.")) | 0.003 | −0.022 to 0.026 |
 | share of stakes at home | −0.017 | −0.041 to 0.007 |
-| [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") per agent | 0.003 | −0.017 to 0.024 |
+| genotypes per agent | 0.003 | −0.017 to 0.024 |
 | births per 100 agents | −0.05 | −0.18 to 0.06 |
 | cut off per 100 agents | 0.000 | −0.14 to 0.11 |
 | dimension from ball growth | −0.001 | −0.048 to 0.045 |
@@ -532,7 +532,7 @@ agents.
 
 - **How lines take over.** After every 25th iteration: how far back all the
   living share one ancestor. And the first iteration at which they all
-  descend from a single founder ([The common ancestor](common-ancestor.md)):
+  descend from a single founder ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)):
   this is what the thesis counts. It is set against the baseline's 30 worlds
   of 10,000 tokens over the same iterations. And it is set against the time a
   front would need, from the worlds' diameters.

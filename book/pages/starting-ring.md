@@ -58,7 +58,7 @@ Let *T* be the number of tokens ([`total_tokens`](settings.md#total_tokens)).
    one [multinomial draw](random-numbers.md#how-a-draw-becomes-a-decision), in
    which every founder has the same chance at every token.
 5. **Brains.** Every founder gets a brain whose weights are drawn at random
-   ([The brain](the-brain.md)). Each is a [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") of its own, numbered 1 to
+   ([The brain](the-brain.md)). Each is a [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") of its own, numbered 1 to
    *n*.
 
 Steps 1–3 are done by the networkx function

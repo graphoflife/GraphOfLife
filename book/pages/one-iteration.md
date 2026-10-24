@@ -113,7 +113,7 @@ Exactly, the phase runs in six steps.
    - **The child is born.** It gets a new node and the next unused id, and
      holds *c* tokens; the parent keeps τ(*u*) − *c*. The child's brain is a
      copy of the parent's, which then changes with probability 0.2
-     ([How a brain changes](mutation.md)). A changed brain is a new [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."):
+     ([How a brain changes](mutation.md)). A changed brain is a new [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."):
      a new identity, passed on to its copies.
    - **Whom the child joins.** For each candidate, the parent itself
      included, a yes-or-no decision: join the child to it or not. These

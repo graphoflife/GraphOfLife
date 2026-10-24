@@ -94,7 +94,7 @@ There is no single agreed definition of open-ended evolution
 ([The ideas this builds on](the-ideas-this-builds-on.md) lists the main ones).
 This notebook climbs a ladder of four claims, each needed before the next:
 
-1. **P1: there is evolution.** [Lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") — a brain and its descendants — last
+1. **P1: there is evolution.** [Lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") — a brain and its descendants — last
    long enough for selection to act on them.
 2. **P2: adaptation accumulates.** A late population would beat its own
    ancestors, if they were brought back and made to compete.

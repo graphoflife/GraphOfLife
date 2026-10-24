@@ -94,7 +94,7 @@ hardly. It read every message of the 30 B1 worlds of 100,000 [tokens](the-world.
 end. Two messages written by one agent to two readers differ by 0.0005, as
 the root mean square of the differences of their 30 numbers. Messages written
 by two different agents differ by 0.60. So an agent says the same thing to
-everyone, and all agents of one [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") write alike: a message is a name.
+everyone, and all agents of one [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") write alike: a message is a name.
 What a message could be about — the writer's and the reader's tokens and
 connections, and whether it is written to oneself — accounts for only 1.2%
 of the messages' variety.

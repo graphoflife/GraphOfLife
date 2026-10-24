@@ -13,7 +13,7 @@ Much of what the first baseline, B1, does follows from a few of its rules, not
 from what its brains compute. This page takes those rules one at a time: what
 each does, whether that is what was meant, and what could replace it. In B1 a
 brain spreads seventeen times more by conquest, winning a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."),
-than by birth, and 97% of new [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") arise in living brains. Four rules
+than by birth, and 97% of new [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") arise in living brains. Four rules
 stood most in the way of open-ended evolution: brains that change as they
 live, conquest that erases, places nobody can hold, and a cull that kills
 every piece cut off from the rest. The second baseline, B2, changed three of
@@ -227,7 +227,7 @@ that is not copied stays itself. What harmed the worlds of Experiment 13 was a
 drain: their births fell short of what the cull took. B2's other rules stop
 worlds from breaking and starving, and so remove the drain
 ([A world that cannot break](a-world-that-cannot-break.md),
-[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") now stays like
+[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") now stays like
 its ancestor has not been measured.
 
 ## Hubs are places
@@ -595,6 +595,6 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (13)
-> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Age and lifetime](age-and-lifetime.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate?](do-agents-cooperate.md)
+> [!info]- Pages that link here (14)
+> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Age and lifetime](age-and-lifetime.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes, families and the common ancestor](genotype.md) · [Do agents cooperate?](do-agents-cooperate.md)
 <!-- /turns -->

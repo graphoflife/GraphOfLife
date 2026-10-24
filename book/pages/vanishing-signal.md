@@ -93,7 +93,7 @@ is to try the remedies.
 <!-- turns -->
 ---
 
-← [Genotypes and the family tree](genotype.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brain diversity](brain-diversity.md) →
+← [Genotypes, families and the common ancestor](genotype.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 

@@ -702,7 +702,7 @@ def colours(ch: F.Chapter) -> None:
                        "Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
     ch.number("six_views", {"agents": len(ids), "drawn": len(drawn), "piece": info,
-                            "families": {str(k): v for k, v in shares.items()},
+                            "genotype": {str(k): v for k, v in shares.items()},
                             "max_tokens": float(tokens.max()), "max_age": float(ages.max() - 1)})
 
     flow = Counter()

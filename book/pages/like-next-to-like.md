@@ -180,7 +180,7 @@ other.
 
 ## Kin, near and far
 
-The last question is about families. Do agents of one [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") live
+The last question is about families. Do agents of one [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") live
 together?
 
 <!-- figure alike/kin -->

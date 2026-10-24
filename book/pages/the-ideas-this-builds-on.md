@@ -23,14 +23,14 @@ will have to face each of them:
 
 - **Evolutionary activity** (Bedau and Packard 1992; Bedau, Snyder, Brown and
   Packard 1997; Bedau, Snyder and Packard 1998). Give every component — a
-  gene, a [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") — a counter that grows while it is present and in use. Then
+  gene, a [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") — a counter that grows while it is present and in use. Then
   watch three numbers: how many components there are, how much *new* activity
   appears, and how much activity accumulates. Systems fall into three classes:
   no adaptive activity; unbounded new activity but bounded diversity; and both
   unbounded, which is what the fossil record shows. The lasting lesson is the
   **neutral shadow**: activity counts only above what an identical system
   without adaptation produces. [Do the brains matter?](do-the-brains-matter.md)
-  builds a shadow of this kind for [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor."), and finds it hard.
+  builds a shadow of this kind for [lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor."), and finds it hard.
 - **MODES** (Dolson, Vostinar, Wiser and Ofria 2019) splits open-endedness into
   four kinds of growth that can be measured: change, novelty, complexity and
   ecology. It adds a **persistence filter**: a component counts only once it
@@ -141,7 +141,7 @@ several agents acting together.
   individual at a time is copied and one replaced, at random. Even with no
   differences between them, one lineage eventually takes over.
 - **The coalescent** (Kingman 1982): followed backwards, the lineages of the
-  living merge, two by two, until all meet in one **[common ancestor](common-ancestor.md "The genotype every living agent descends from, and how far back it lies.")**. In a
+  living merge, two by two, until all meet in one **[common ancestor](genotype.md#the-common-ancestor-of-the-living "The genotype every living agent descends from, and how far back it lies.")**. In a
   population of fixed size *N*, replaced by chance alone, that ancestor lived a
   number of generations back proportional to *N*.
   [Genotypes and lineages](genotypes-and-lineages.md) finds the common ancestor

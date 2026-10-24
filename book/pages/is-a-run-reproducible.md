@@ -45,7 +45,7 @@ repeatable if three things hold.
    same look.
 3. **A saved world is the whole world.** To stop a run and continue it later,
    the program saves a **checkpoint**. It holds every agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")
-   weights, [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") and age. It holds every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and when it last
+   weights, [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") and age. It holds every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and when it last
    carried tokens, and every message in flight. And it holds the state of the
    random generator. A run continued from a checkpoint first deletes any
    frames recorded after it (the pictures of the world it writes after every

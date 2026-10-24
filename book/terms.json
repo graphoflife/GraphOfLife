@@ -122,7 +122,7 @@
         "family tree"
       ],
       "page": "genotype",
-      "says": "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."
+      "says": "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."
     },
     {
       "name": "seed",
@@ -418,18 +418,21 @@
     },
     {
       "name": "lineage",
-      "page": "families",
-      "says": "A line of descent: the agents whose genotypes go back to one ancestor."
+      "page": "genotype",
+      "says": "A line of descent: the agents whose genotypes go back to one ancestor.",
+      "anchor": "families"
     },
     {
       "name": "common ancestor",
-      "page": "common-ancestor",
-      "says": "The genotype every living agent descends from, and how far back it lies."
+      "page": "genotype",
+      "says": "The genotype every living agent descends from, and how far back it lies.",
+      "anchor": "the-common-ancestor-of-the-living"
     },
     {
       "name": "brain diversity",
-      "page": "brain-diversity",
-      "says": "How many different brains, or genotypes, a world holds."
+      "page": "genotype",
+      "says": "How many different brains, or genotypes, a world holds.",
+      "anchor": "brain-diversity"
     },
     {
       "name": "frame",

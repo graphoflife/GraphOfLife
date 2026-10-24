@@ -202,5 +202,5 @@ of its first 100 iterations. One born from iteration 500 on lived 28 to 31
 ← [The estate of the dead](estate.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Reproduction statistics](reproduction-statistics.md) →
 
 > [!info]- Pages that link here (6)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Births and the four ways to die](births-and-deaths.md) · [Genotypes and the family tree](genotype.md) · [What the viewer can colour by](viewer-colours.md)
+> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Births and the four ways to die](births-and-deaths.md) · [Genotypes, families and the common ancestor](genotype.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

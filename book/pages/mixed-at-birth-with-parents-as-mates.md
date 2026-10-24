@@ -184,7 +184,7 @@ held 15%. Only the poorest two of those were as poor.
 
 **As diverse as mixed worlds.** The [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") says in one number, from
 0 to 1, how much a world's agents differ: in tokens, links, ages and
-[genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."). At 20,000 it is 0.59 in the median world (0.52 to 0.69). That is
+[genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). At 20,000 it is 0.59 in the median world (0.52 to 0.69). That is
 as high as in Experiment 17's worlds at 10,000 (0.58), and above B2's ten
 worlds played on to 10,000 (0.49). Part of it is built in: every mixed birth
 makes a new genotype

@@ -118,7 +118,7 @@ the longest are longer, 69 to 175 moves.
 
 **B2's chains are puffers, B1's are gliders.** In B2 the mover still holds the
 node it left after 93% of its moves and never leaves it to starve: a chain is
-a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself outward, node by node, and its packet is small, three
+a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself outward, node by node, and its packet is small, three
 tokens at the start and two at the end in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of each world's 300
 longest chains. In B1 the mover keeps the node it left after only 9% of its
 moves; after 8% that node starves, and after the rest it is taken by another
@@ -126,7 +126,7 @@ agent. The brain moves on, and the packet grows as it goes, from 18 tokens to
 82: B1's gliders are rich agents travelling the network and gathering what is
 staked on the nodes they take. In both, the brain changes as it goes: in B2
 each copy is made with [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."), and in B1 every brain may mutate after every
-game. After 70% of the moves the chain's holder no longer carries the [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.")
+game. After 70% of the moves the chain's holder no longer carries the [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")
 it started with.
 
 Drawn on their networks, one chain of each kind, the one among each world's

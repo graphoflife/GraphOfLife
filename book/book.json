@@ -1189,16 +1189,17 @@
     },
     {
       "id": "genotype",
-      "title": "Genotypes and the family tree",
+      "title": "Genotypes, families and the common ancestor",
       "file": "pages/genotype.md",
       "topics": [
         "brains",
-        "simulation"
+        "simulation",
+        "evolution"
       ],
       "kind": "term",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Every brain carries a whole number, its **genotype**."
+      "summary": "Every brain carries a whole number, its genotype, which a copy keeps and a change replaces. The new number remembers the old one as its parent, so the genotypes of a world form one family tree."
     },
     {
       "id": "vanishing-signal",
@@ -1212,43 +1213,6 @@
       "status": "written",
       "added": "2026-10-09",
       "summary": "A brain's inputs reach its outputs only by passing through every layer in between."
-    },
-    {
-      "id": "brain-diversity",
-      "title": "Brain diversity",
-      "file": "pages/brain-diversity.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How many different brains does a world hold?"
-    },
-    {
-      "id": "families",
-      "title": "Families",
-      "file": "pages/families.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "How many separate lines of descent does a world hold?"
-    },
-    {
-      "id": "common-ancestor",
-      "title": "The common ancestor of the living",
-      "file": "pages/common-ancestor.md",
-      "topics": [
-        "brains",
-        "evolution"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every living agent's genotype descends, through the family tree, from one of the founders (Genotypes)."
     },
     {
       "id": "eras-and-contests",

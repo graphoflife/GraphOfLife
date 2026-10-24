@@ -13,7 +13,7 @@ Each agent writes a message of 30 numbers to itself and to each neighbour, and
 nothing but the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") gives the numbers a meaning. At the end of thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")
 worlds, two messages of one agent differ by 0.0005, while those of two agents
 differ by 0.60. So a message tells its reader one thing, who wrote it: it is a
-name, and all agents of one [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") write the same one. Kin could recognise
+name, and all agents of one [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") write the same one. Kin could recognise
 each other by it with a single comparison, but B1's nearly blind brains cannot
 make it.
 
@@ -179,7 +179,7 @@ informative for being spread wider. They are still the same for every reader.
 [Do agents cooperate?](do-agents-cooperate.md) found that kin live side by
 side: a tenth of an agent's neighbours carry its own genotype. Yet kin are
 staked on exactly like strangers. A brain cannot see genotypes. It could tell
-kin only through messages, if a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") evolved a password. That is a signal
+kin only through messages, if a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") evolved a password. That is a signal
 its members send, with a habit of treating those who send it differently.
 Biologists call such a signal a **green beard** (Hamilton 1964; Dawkins 1976).
 

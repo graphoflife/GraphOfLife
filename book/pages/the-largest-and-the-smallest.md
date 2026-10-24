@@ -203,7 +203,7 @@ in all of the hundred games from iteration 1,122 on. Its own agent, spreading
 its tokens one by one, stakes a token or two there at most, and often none, as
 in the game above. On a node with twenty thousand stakers it is at best one
 small staker among many. Each time, a winner's brain is copied in: the centre
-carried 78 different [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") in those hundred games. What persists is not a
+carried 78 different [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") in those hundred games. What persists is not a
 brain but a place: the agent's connections, and the tokens that flow through
 them.
 

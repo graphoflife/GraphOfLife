@@ -4,7 +4,7 @@
 > - The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") start equal: who holds the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") later? How unequal does a
 >   world become, and does inequality keep growing, or does it settle?
 > - Are the rich [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") special in some way we can see?
-> - How evenly are tokens, [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") spread over the agents?
+> - How evenly are tokens, [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") spread over the agents?
 >   How many genotypes are there, in effect?
 > - Do entropy and the Gini coefficient say the same thing?
 > - If an agent is rich now, how likely is it to be rich ten, a hundred, two
@@ -729,7 +729,7 @@ connectedness is taxed away in this manner, a little at a time.
   where the network is thick.
 - **For open-ended evolution, this world rewards position, not strategy.**
   The rich are those that the walk's resting state favours, not those that
-  played well. A [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") cannot bank an advantage as tokens for long: wealth
+  played well. A [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") cannot bank an advantage as tokens for long: wealth
   drains back towards the resting share of its connections within tens of
   games. Selection can only act on what persists: connections, and the brains
   that sit on them.
@@ -934,5 +934,5 @@ first tested. Four of them died out before iteration 3,000:
 [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Gains and losses](gains-and-losses.md) →
 
 > [!info]- Pages that link here (22)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [The estate of the dead](estate.md) · [Gains and losses](gains-and-losses.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brain diversity](brain-diversity.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Correlation](correlation.md) · [Mobility](mobility.md)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [The estate of the dead](estate.md) · [Gains and losses](gains-and-losses.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Where tokens go](where-tokens-go.md) · [How the game is played](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes, families and the common ancestor](genotype.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Correlation](correlation.md) · [Mobility](mobility.md)
 <!-- /turns -->

@@ -192,7 +192,7 @@ three to nine, and 32 through one or two.
 
 There, once, a single line of [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") cut itself off. In the world of seed 1 of
 10,000 tokens, a game at iteration 541 cut off 319 agents. Of them, 60%
-carried one [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), and the typical one staked all its tokens on its own
+carried one [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), and the typical one staked all its tokens on its own
 node. An agent that stakes everything at home sends nothing across its
 connections; they stay alive only if its neighbours stake on it.
 

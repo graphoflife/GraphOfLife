@@ -151,7 +151,7 @@ Kin selection needs relatives to meet. Do they?
 <!-- /figure -->
 
 Yes, strongly. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, **9.6%** of neighbours carry the same
-[genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), against **0.05%** of two agents drawn at random — 200 times as
+[genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), against **0.05%** of two agents drawn at random — 200 times as
 often (at 10,000 tokens, 10.6% against 0.28%: 38 times). Counted over all
 pairs of a world rather than a sample of them, chance is rarer still, 0.03%,
 and [Like next to like](like-next-to-like.md) puts the ratio near 290. Counting
@@ -195,7 +195,7 @@ That is not surprising once one looks at what a brain can see
 ([What a brain sees](brain-inputs.md)): tokens and connections — its
 own, the [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")'s, and their neighbourhoods' — messages, and random numbers.
 **Not genotypes.** A brain cannot tell kin from stranger, except through
-messages: a [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") could, in principle, evolve a "password" — send a
+messages: a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") could, in principle, evolve a "password" — send a
 particular pattern and treat those who send it back differently, a
 **green-beard** (Hamilton 1964; Dawkins 1976). Nothing in the stakes says that
 this has happened.

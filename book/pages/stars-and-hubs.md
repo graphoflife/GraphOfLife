@@ -41,7 +41,7 @@ all agents on average, for a thousand [iterations](one-iteration.md "One step of
 joined to 20,666 of the 25,958 agents alive and held 20,286 tokens, a fifth of
 all; 94% of its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") were leaves, holding 2.8 tokens each on average. A
 [coalition](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") of neighbours won its node in each of the hundred games from then
-on, and the node carried 78 different [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was.") in them
+on, and the node carried 78 different [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") in them
 ([The largest and the smallest](the-largest-and-the-smallest.md#how-a-star-works)).
 
 ## How a star is handed down

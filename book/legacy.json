@@ -134,12 +134,12 @@
   "n-gini-coefficient": "gini-coefficient",
   "n-richest-tenth": "gini-coefficient#the-richest-tenths-share",
   "n-home-stake": "home-stake",
-  "n-families": "families",
-  "n-common-ancestor": "common-ancestor",
+  "n-families": "genotype#families",
+  "n-common-ancestor": "genotype#the-common-ancestor-of-the-living",
   "n-tokens-per-agent": "gini-coefficient#tokens-per-agent-mean-median-extremes",
   "n-entropy-and-evenness": "gini-coefficient#entropy-and-evenness",
   "n-gains-and-losses": "gains-losses-and-the-share-out",
-  "n-brain-diversity": "brain-diversity",
+  "n-brain-diversity": "genotype#brain-diversity",
   "n-reproduction-statistics": "reproduction-statistics",
   "n-token-flow": "token-flow",
   "n-lightning": "lightning",
@@ -315,6 +315,9 @@
   "tokens-per-agent": "gini-coefficient#tokens-per-agent-mean-median-extremes",
   "entropy-and-evenness": "gini-coefficient#entropy-and-evenness",
   "cut-risk": "bridges#cut-risk",
-  "loops": "bridges#loops"
+  "loops": "bridges#loops",
+  "families": "genotype#families",
+  "common-ancestor": "genotype#the-common-ancestor-of-the-living",
+  "brain-diversity": "genotype#brain-diversity"
  }
 }

@@ -86,7 +86,7 @@ pilot world so far. The second world moves like B2 (0.70, then 0.55; B2
 Why would mixing help? A mixed child inherits whole units from two unrelated
 brains. A unit that does something useful can spread through the population
 without carrying the rest of the brain it arose in, and two useful units that
-arose in different [lineages](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") can meet in one child. That is the classical
+arose in different lineages can meet in one child. That is the classical
 argument for sex. Here it is a hypothesis: two seeds, small and combative
 worlds, and no test yet of which of these does the work.
 

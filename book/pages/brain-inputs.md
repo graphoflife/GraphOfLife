@@ -128,7 +128,7 @@ changes only 1.5% ([What the brains are like](what-the-brains-are-like.md)).
   ([B1 and B2: the two baselines](b1-and-b2.md)).
 - [What a brain can compute](what-a-brain-can-compute.md): what a B2 brain
   can and cannot work out from its 66 inputs.
-- [Do agents cooperate?](do-agents-cooperate.md): no input names a [genotype](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."),
+- [Do agents cooperate?](do-agents-cooperate.md): no input names a [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."),
   so a brain cannot tell kin from stranger, except through messages.
 
 ## Where to go next

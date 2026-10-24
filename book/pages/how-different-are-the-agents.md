@@ -12,7 +12,7 @@
 A world of 3,000 agents holds about a thousand genotypes
 ([Genotypes and lineages](genotypes-and-lineages.md)). But a genotype is a name: a brain
 gets a new one whenever a [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") touches it, even when the change changes
-nothing the brain does ([Brain diversity](brain-diversity.md)).
+nothing the brain does ([Brain diversity](genotype.md#brain-diversity)).
 [What the brains are like](what-the-brains-are-like.md) opened the brains of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds
 and found that selection had set **constants**: never have children, spread
 the stake, mark every [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") revolutionary — the same in every world. So is a
@@ -392,7 +392,7 @@ every experiment and to the pilot worlds.
 
 **Related notes:** [Where, who and chance](variance-split.md) ·
 [Effective numbers](effective-number.md) ·
-[Brain diversity](brain-diversity.md) ·
+[Brain diversity](genotype.md#brain-diversity) ·
 [Genotypes and the family tree](genotype.md) ·
 [What a brain sees](brain-inputs.md) ·
 [Genotypes and lineages](genotypes-and-lineages.md) ·
@@ -403,8 +403,8 @@ every experiment and to the pilot worlds.
 <!-- turns -->
 ---
 
-← [Do the brains matter?](do-the-brains-matter.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Genotypes and the family tree](genotype.md) →
+← [Do the brains matter?](do-the-brains-matter.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Genotypes, families and the common ancestor](genotype.md) →
 
-> [!info]- Pages that link here (14)
-> [Glossary](glossary.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What would count as open-ended evolution](open-ended-test.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Where, who and chance: splitting a decision's variance](variance-split.md) · [Effective numbers: how many kinds there really are](effective-number.md)
+> [!info]- Pages that link here (15)
+> [Glossary](glossary.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes, families and the common ancestor](genotype.md) · [What would count as open-ended evolution](open-ended-test.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Where, who and chance: splitting a decision's variance](variance-split.md) · [Effective numbers: how many kinds there really are](effective-number.md)
 <!-- /turns -->

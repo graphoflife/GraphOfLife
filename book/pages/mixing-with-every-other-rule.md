@@ -97,7 +97,7 @@ not show.
 Mixing raises the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") with nearly every rule — even with most of
 those that cancel its riches: with children of any size from 0.25 to 0.54,
 with only the last token kept from 0.43 to 0.66. Part of that is built in.
-The score counts [genotypes](genotype.md "The identity of a brain: a number that a brain keeps until it changes, and that records whose copy it was."), and every mixed birth makes a new set of weights,
+The score counts [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), and every mixed birth makes a new set of weights,
 so a mixed world always has more genotypes per agent. But tokens, links and
 ages spread wider too where the world is rich.
 

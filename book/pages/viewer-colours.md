@@ -72,7 +72,7 @@ colour by family instead, as [One world, many colours](one-world-many-colours.md
 |---|---|---|---|
 | default | tokens (log), *coolwarm* | tokens (log) | one colour |
 | wealth | tokens (log), *inferno* | tokens | one colour |
-| [lineage](families.md "A line of descent: the agents whose genotypes go back to one ancestor.") | brain id, *turbo* | tokens (log) | the colour of their dots |
+| lineage | brain id, *turbo* | tokens (log) | the colour of their dots |
 | structure | degree (log), *cividis* | degree | average endpoint degree (log) |
 | flow | token curvature (log), *coolwarm* | size of the token change (log) | token flow (log) |
 | minimal | one colour | one size | one colour |
