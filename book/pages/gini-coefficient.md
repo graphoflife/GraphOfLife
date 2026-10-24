@@ -122,7 +122,7 @@ above, rearranged, and it is recorded as `gini` after every phase.
   thirty worlds lie between 0.40 and 0.55
   ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
 - A healthy world must not be too even. Its Gini may be no lower than that
-  of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s least even world at the same [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): 0.46 at iteration 2,000
+  of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s most even world at the same [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): 0.46 at iteration 2,000
   ([The six criteria](what-makes-a-world-interesting.md#the-six-criteria)).
 - A Gini looks at one moment, so it cannot tell whether the same agents stay
   rich. [Mobility](mobility.md) compares two moments.
@@ -363,6 +363,9 @@ recorded after every phase.
     world". It was written when B1 was the only baseline, and the numbers
     are B1's. B2's worlds hold only about three tokens per agent
     ([What each of the four says](#what-each-of-the-four-says)).
+- **24 October 2026.** This page called the line of evenness "B2's least
+  even world". It is B2's most even world, the one with the lowest Gini
+  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
 
 <!-- turns -->
 ---

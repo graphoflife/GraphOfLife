@@ -154,7 +154,7 @@ criteria, read at iteration 2,000:
    kinds are read from the world as kept, with no game played. They swing
    from one moment to the next, so they are averaged over iteration 1,500 and
    iteration 2,000.
-6. **Not too even:** a [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of its tokens no lower than B2's least even
+6. **Not too even:** a [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of its tokens no lower than B2's most even
    world.
 
 Criteria 2 and 3 are the marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), all but its dimension
@@ -263,7 +263,7 @@ beside them lived. This is how many of them met each criterion at 2,000:
 | resilient | one piece, with at least 80% of the agents in the 2-core; no single agent's loss cuts off more than 2% of the world, and no single link's more than 1% | 3 | 2 |
 | almost three-dimensional | a dimension of 2 to 4, and a typical distance at least 1.5 times its random twin's: a true space, not a folded small world | 16 | 0 |
 | diverse | tokens, links, ages and genotypes spread more widely than in B2's median world, and its agents' decisions vary more (effective kinds of staking) | 3 | 2 |
-| not too even | a Gini of the tokens no lower than B2's least even world | 7 | 2 |
+| not too even | a Gini of the tokens no lower than B2's most even world | 7 | 2 |
 <!-- /table -->
 
 ### No healthy world
@@ -623,6 +623,11 @@ round.
   neurons, and B1's five layers are never drawn (`gol_screen.py`,
   `book/experiments/B1.json`). So no drawn world has B1's brain, and every row
   of the table of settings lists `hidden_layers`.
+- **24 October 2026.** This page called the line of evenness "B2's least
+  even world". It is B2's most even world, the one with the lowest Gini
+  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
+  The theses of Experiments 38 and 39 keep the old words, as theses do, and
+  mean this world.
 
 <!-- turns -->
 ---

@@ -67,7 +67,7 @@
   {
    "key": "uneven",
    "name": "not too even",
-   "asks": "a Gini of the tokens no lower than B2's least even world"
+   "asks": "a Gini of the tokens no lower than B2's most even world"
   }
  ],
  "worlds": [

@@ -42,7 +42,7 @@ same moment:
 - **A space.** It is wide, at least half again as wide as a random network
   with the same links ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 - **Uneven.** Its tokens are held no more evenly than B2's: their [Gini
-  coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is no lower than that of B2's least even world. The author
+  coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is no lower than that of B2's most even world. The author
   added this fourth wish later, on 19 October 2026
   ([Healthy and rich](healthy-and-rich.md)). What looks unhealthy is a world
   where almost every agent holds the same few tokens.
@@ -138,7 +138,7 @@ estates might give room without filling the world.
 <!-- figure room/measures -->
 ![Experiment 19's world, given room](../figures/room/measures.svg)
 
-**Experiment 19's world, given room.** Each dot is one world at iteration 3,000: Experiment 19's ten (grey) and Experiment 31's two for each rule. The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's least even world at 3,000 (0.47).
+**Experiment 19's world, given room.** Each dot is one world at iteration 3,000: Experiment 19's ten (grey) and Experiment 31's two for each rule. The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's most even world at 3,000 (0.47).
 
 > [!example]- How to make this figure
 > **Runs.** Experiment 31's eight runs (`python3 gol_lab.py run E31`): B2 at 10,000 tokens with brains mixed at birth and parents as mates, and the estate of the dead paid to the newborns (`B2-10000-06b876-…`) or to the parents (`-b8e9fc-…`), no old age (`-89f5b1-…`) or deaths not mended (`-c58a16-…`), seeds 1 and 2, to 3,000 iterations; and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` … `-s010`), all read at iteration 3,000 from their archives.
@@ -165,7 +165,7 @@ At iteration 3,000:
   - about 5,000 agents.
 
   But the diversity scores fell to 0.32 to 0.41. And the Ginis fell to 0.42
-  to 0.45: a little more even than B2's least even world (0.47).
+  to 0.45: a little more even than B2's most even world (0.47).
 - **No old age** made spaces too, 1.7 and 1.85 times their twins, with every
   mark and very uneven tokens (Ginis of 0.70 and 0.73). Diversity fell to
   0.29 and 0.30.
@@ -294,7 +294,7 @@ estate to the newborns, with the estate to the parents, or alone. Experiment
 <!-- figure floor/measures -->
 ![The floor, with each estate and without](../figures/floor/measures.svg)
 
-**The floor, with each estate and without.** Each dot is one world at iteration 3,000, without the floor (grey: Experiment 19's ten worlds for parents as mates alone, Experiment 31's two for each estate) and with it (orange: Experiment 32's two for each). The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's least even world at 3,000 (0.47).
+**The floor, with each estate and without.** Each dot is one world at iteration 3,000, without the floor (grey: Experiment 19's ten worlds for parents as mates alone, Experiment 31's two for each estate) and with it (orange: Experiment 32's two for each). The dashed line is what the author's picture asks: every mark, a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the random twin's, a Gini no lower than B2's most even world at 3,000 (0.47).
 
 > [!example]- How to make this figure
 > **Runs.** Experiment 32's six runs (`python3 gol_lab.py run E32`): B2 at 10,000 tokens with brains mixed at birth, parents as mates and a child never poorer than the median holding of its parent's neighbours, with the estate of the dead paid to the newborns (`B2-10000-12215f-…`), to the parents (`-86df9e-…`) or neither (`-b289dd-…`), seeds 1 and 2, to 3,000 iterations; against Experiment 31's estate worlds of the same seeds (`B2-10000-06b876-…`, `-b8e9fc-…`) and Experiment 19's ten worlds (`B2-10000-bcc1bc-s001` … `-s010`), which have no floor.
@@ -859,6 +859,11 @@ Experiment 16's ten worlds read the same way:
 - **23 October 2026.** The page gave the width of the worlds without old age
   as 1.7 to 1.9 times their twins. The two worlds measure 1.70 and 1.85
   (`book/results/room.json`); the 1.9 came from rounding twice.
+- **24 October 2026.** This page called the line of [evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") "B2's least
+  even world". It is B2's most even world, the one with the lowest Gini
+  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
+  The theses of Experiments 31 and 32 keep the old words, as theses do, and
+  mean this world.
 
 <!-- turns -->
 ---

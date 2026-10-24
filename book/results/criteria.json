@@ -29,7 +29,7 @@
     ],
     [
      "not too even",
-     "a Gini of the tokens no lower than B2's least even world"
+     "a Gini of the tokens no lower than B2's most even world"
     ]
    ]
   },
@@ -51,7 +51,7 @@
      "16.5"
     ],
     [
-     "Gini of the tokens of B2's least even world",
+     "Gini of the tokens of B2's most even world",
      "0.49",
      "0.46"
     ]

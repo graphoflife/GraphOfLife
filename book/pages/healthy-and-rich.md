@@ -400,7 +400,7 @@ three tokens or fewer.
   B2's ten worlds played on that far, 66%.
 
 Since 19 October 2026 the last line asks instead for tokens no more even
-than in B2's least even world
+than in B2's most even world
 ([Too even, not too poor](#too-even-not-too-poor)).
 
 The long runs were planned in three steps. Here is what each found.
@@ -598,13 +598,16 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
   picture precise: the worry is agents that hold their tokens evenly. The
   share at three or fewer follows the tokens per agent, not the Gini, and
   B2 is poor but not even. Theses since ask for a Gini no lower than B2's
-  least even world (on this page; see
+  most even world (on this page; see
   [The candidates, played on and played again](the-candidates-played-on.md#too-even-not-too-poor)).
 - **19 October 2026.** On 17 October this page said that none of the
   candidate worlds is a space. By the line the notebook drew later, a
   width of 1.5, a few were spaces at iteration 1,000. By 10,000 all but one
   had folded, and that one had grown poor
   ([The candidates, played on](the-candidates-played-on.md#the-candidates-played-on)).
+- **24 October 2026.** This page called the line of evenness "B2's least
+  even world". It is B2's most even world, the one with the lowest Gini
+  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
 
 <!-- turns -->
 ---

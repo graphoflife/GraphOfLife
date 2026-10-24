@@ -32,7 +32,7 @@ CRITERIA = [
      "asks": "tokens, links, ages and genotypes spread more widely than in B2's median world, and its "
              "agents' decisions vary more (effective kinds of staking)"},
     {"key": "uneven", "name": "not too even",
-     "asks": "a Gini of the tokens no lower than B2's least even world"},
+     "asks": "a Gini of the tokens no lower than B2's most even world"},
 ]
 KEYS = [c["key"] for c in CRITERIA]
 #: How many of the criteria after "alive" an interesting world may miss.

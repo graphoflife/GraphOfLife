@@ -29,7 +29,7 @@ We turn this picture into six criteria and check them at [iteration](one-iterati
 | resilient | one piece, with at least 80% of the agents in the 2-core; no single agent's loss cuts off more than 2% of the world, and no single link's more than 1% |
 | almost three-dimensional | a dimension of 2 to 4, and a typical distance at least 1.5 times its random twin's: a true space, not a folded small world |
 | diverse | tokens, links, ages and genotypes spread more widely than in B2's median world, and its agents' decisions vary more (effective kinds of staking) |
-| not too even | a Gini of the tokens no lower than B2's least even world |
+| not too even | a Gini of the tokens no lower than B2's most even world |
 <!-- /table -->
 
 Each criterion stands for one part of the picture.
@@ -65,8 +65,8 @@ Each criterion stands for one part of the picture.
    The kinds swing from moment to moment, so we take their mean over
    iterations 1,500 and 2,000.
 6. **Not too even.** If almost every agent holds the same few tokens, there
-   is little to win and little to select. We ask that the tokens are spread at
-   least as unevenly as in B2's least even world, measured by the
+   is little to win and little to select. We ask that the tokens are spread no
+   more evenly than in B2's most even world, measured by the
    [Gini coefficient](gini-coefficient.md).
 
 ## Healthy, and interesting
@@ -89,7 +89,7 @@ read in the same way and at the same iterations.
 |---|---|---|
 | diversity score of B2's median world | 0.53 | 0.51 |
 | effective kinds of staking of B2's median world | 19.7 | 16.5 |
-| Gini of the tokens of B2's least even world | 0.49 | 0.46 |
+| Gini of the tokens of B2's most even world | 0.49 | 0.46 |
 <!-- /table -->
 
 ## When a setting is marked bad
@@ -122,11 +122,22 @@ page and the judge always agree.
 - [What would count as open-ended evolution](open-ended-test.md): the test a
   healthy world's long run will face.
 
+## How our view changed
+
+- **24 October 2026.** Since 19 October 2026, the notebook called the line of
+  the sixth criterion "B2's least even world". The line the judge compares
+  with is the lowest Gini among B2's worlds: 0.49 at iteration 1,000 and 0.46
+  at 2,000 ([The lines we compare with](#the-lines-we-compare-with)). That is
+  B2's **most** even world. The words are set right on this page and on every
+  page that draws the line. The line itself, and every verdict judged by it,
+  are unchanged. The theses of Experiments 31, 32, 38 and 39 keep the old
+  words, as a thesis does, and mean this line.
+
 <!-- turns -->
 ---
 
 ← [Healthy and rich](healthy-and-rich.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [The health bar](health-bar.md) →
 
-> [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy](gini-coefficient.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

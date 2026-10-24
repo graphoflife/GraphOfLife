@@ -74,7 +74,7 @@ def searchbest(ch: F.Chapter) -> None:
             caption=("Each dot is one world at iteration 1,000 (orange) or 2,000 (violet): the five new seeds small, "
                      "the search's own seed large. The dashed line is what the author's picture asks: every mark of "
                      "the health bar, a diversity score above B2's median world (0.49), a typical distance at least "
-                     "1.5 times the random twin's, and a Gini no lower than B2's least even world (0.47)."),
+                     "1.5 times the random twin's, and a Gini no lower than B2's most even world (0.47)."),
             recipe=recipe(RUNS, "each run's checkpoints at 1,000 and 2,000 (`ckpt_001000.npz`, `ckpt_002000.npz`)",
                           ["Read each world as `research/atlas/profile.py` reads every world: the seven marks, the "
                            "four spreads ranked among the frozen reference worlds, the Gini of the tokens.",

@@ -133,7 +133,7 @@ def floor(ch: F.Chapter) -> None:
                      "for parents as mates alone, Experiment 31's two for each estate) and with it (orange: "
                      "Experiment 32's two for each). The dashed line is what the author's picture asks: every mark, "
                      "a diversity score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 "
-                     "times the random twin's, a Gini no lower than B2's least even world at 3,000 (0.47)."),
+                     "times the random twin's, a Gini no lower than B2's most even world at 3,000 (0.47)."),
             recipe=recipe(RUNS, "each world's archive at iteration 3,000", STEPS))
 
     worlds = [f"{base}-s{s:03d}" for _, without, with_floor in RULES for base in (without, with_floor)

@@ -34,7 +34,7 @@ def criteria(ch: F.Chapter) -> None:
         ref = json.load(f)
     rows = [("diversity score of B2's median world", "diversity", "{:.2f}"),
             ("effective kinds of staking of B2's median world", "kinds", "{:.1f}"),
-            ("Gini of the tokens of B2's least even world", "gini", "{:.2f}")]
+            ("Gini of the tokens of B2's most even world", "gini", "{:.2f}")]
     ch.number("table:references", {"head": ["the line", "at iteration 1,000", "at iteration 2,000"],
                                    "rows": [[text, form.format(ref["1000"][key]), form.format(ref["2000"][key])]
                                             for text, key, form in rows]})

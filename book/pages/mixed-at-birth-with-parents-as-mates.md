@@ -35,7 +35,7 @@ comes whole from its parent or from a **mate**, by an even chance. The mate
 is one of the parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."), drawn at random. Yet only the parent pays:
 every token the child starts with comes from the parent.
 
-Brains mixed at birth made the richest [healthy worlds](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.") the notebook had found
+Brains mixed at birth made the richest healthy worlds the notebook had found
 ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md),
 Experiment 17). They also made mortal ones. Of the five that met every mark at
 10,000 iterations, three died out before 40,000
@@ -386,7 +386,7 @@ is read:
   Experiment 19's are.
 - **[Evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."):** a [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of the tokens of 0.43 to 0.48. A Gini is 0
   if every agent holds as many, and near 1 if one holds nearly all. That is
-  about as even as B2's least even world (0.46).
+  about as even as B2's most even world (0.46).
 
 ### The verdict: steadier in all four seeds
 
@@ -569,6 +569,9 @@ is read:
   been tried in four pilot worlds. It had been tried in two, seeds 1 and 2, as
   Experiment 22's thesis says and as
   [Every simulation](every-simulation.md) lists them.
+- **24 October 2026.** This page called the line of evenness "B2's least
+  even world". It is B2's most even world, the one with the lowest Gini
+  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
 
 <!-- turns -->
 ---

@@ -80,7 +80,7 @@ def room(ch: F.Chapter) -> None:
             caption=("Each dot is one world at iteration 3,000: Experiment 19's ten (grey) and Experiment 31's two "
                      "for each rule. The dashed line is what the author's picture asks: every mark, a diversity "
                      "score above B2's median world at 3,000 (0.54), a typical distance at least 1.5 times the "
-                     "random twin's, a Gini no lower than B2's least even world at 3,000 (0.47)."),
+                     "random twin's, a Gini no lower than B2's most even world at 3,000 (0.47)."),
             recipe=recipe(RUNS, "each world's archive at iteration 3,000", STEPS))
     parts = []
     for key, title in PARTS:
