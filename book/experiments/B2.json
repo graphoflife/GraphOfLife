@@ -45,7 +45,13 @@
     "link_search": "off",
     "link_steering": "random",
     "link_consent": "mutual",
-    "proto": {}
+    "proto": {},
+    "hidden_activation": "sigmoid",
+    "contest": "largest",
+    "mate_pays": false,
+    "link_token": false,
+    "link_upkeep": "off",
+    "upkeep_to": "end"
   },
   "why": {
     "hidden_layers": "One hidden layer of 16: brains whose decisions follow what they see. Founders' gain about 0.2, against 0.0006 for the five layers of B1 (Chapter 47).",

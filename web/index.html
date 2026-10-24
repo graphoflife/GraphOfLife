@@ -206,6 +206,16 @@
           <label><input type="checkbox" id="cfg_allow_revolutions" data-cfg="allow_revolutions"> Allow revolutions</label>
           <small>Off, a node goes to whoever staked most, ties at random. This and handover change the brain's outputs, so neither can be altered later.</small>
         </div>
+        <div class="field">
+          <label for="cfg_contest">A contested node goes to</label>
+          <select id="cfg_contest" data-cfg="contest">
+            <option value="largest">The largest stake</option>
+            <option value="lottery">A staker drawn by lottery</option>
+          </select>
+          <small>The lottery draws the taker with a chance in proportion to its
+            stake, so a small stake can win and the largest can lose. It needs
+            revolutions off.</small>
+        </div>
         <div class="field checkbox">
           <label><input type="checkbox" id="cfg_allow_gifting" data-cfg="allow_gifting"> Allow gifting</label>
           <small>An agent may hand tokens to a neighbour during reproduction, asking
@@ -246,6 +256,7 @@
             <option value="newborns">To the children born this iteration</option>
             <option value="parents">To this iteration's parents, once per child</option>
             <option value="children">To the dead agent's own children</option>
+            <option value="local">To the nearest living agents, through the network</option>
           </select>
           <small>Evenly makes each cull a leveller. Weighted makes it the opposite —
             the largest holders take most of what the dead leave, and every cull
@@ -254,7 +265,8 @@
             their parents rewards having children; in an iteration without births
             the estate is shared out evenly. To the dead agent's own children keeps
             an estate in the family; one without a living child is shared out
-            evenly.</small>
+            evenly. To the nearest living agents lets each estate flow through the
+            network, step by step, to the living around the dead.</small>
         </div>
         <div class="field checkbox">
           <label><input type="checkbox" id="cfg_random_decisions" data-cfg="random_decisions"> Random decisions</label>
@@ -334,6 +346,16 @@
           <label for="cfg_hidden_layers">Hidden layers</label>
           <input type="text" id="cfg_hidden_layers" data-cfg="hidden_layers" placeholder="50, 45, 40">
         </div>
+        <div class="field">
+          <label for="cfg_hidden_activation">Hidden units' curve</label>
+          <select id="cfg_hidden_activation" data-cfg="hidden_activation">
+            <option value="sigmoid">Sigmoid (0 to 1)</option>
+            <option value="tanh">Tanh (−1 to 1, centred on zero)</option>
+          </select>
+          <small>A sigmoid passes on at most a quarter of a change, so a brain of
+            several layers barely responds to what it sees; tanh lets a change
+            through deep brains. Float brains only.</small>
+        </div>
         </fieldset>
         <fieldset>
           <legend>Mutation</legend>
@@ -381,6 +403,31 @@
           <input type="number" id="cfg_valence" data-cfg="valence" min="0" step="1">
           <small>The most links a brain may choose to hold. An agent at its limit is crowded and has no children.</small>
         </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_link_token" data-cfg="link_token"> Every link holds a token</label>
+          <small>Whoever makes a link pays one token for it, and gets it back when
+            the link lapses; a dead agent's links give theirs to the agents they
+            joined. The links can never outnumber the tokens.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_link_upkeep">Upkeep of links</label>
+          <select id="cfg_link_upkeep" data-cfg="link_upkeep">
+            <option value="off">None: only use keeps a link</option>
+            <option value="paid_or_used">Paid for or used</option>
+            <option value="paid_only">Paid for only</option>
+          </select>
+          <small>Each brain decides, every iteration, which links to pay a token
+            to keep, never its last token. A link stays if either end pays.</small>
+        </div>
+        <div class="field">
+          <label for="cfg_upkeep_to">Upkeep goes</label>
+          <select id="cfg_upkeep_to" data-cfg="upkeep_to">
+            <option value="end">To the link's other end</option>
+            <option value="estate">Into the estate of the dead</option>
+          </select>
+          <small>Into the estate, it is shared out with the tokens of the dead by
+            the world's rule for them. Needs upkeep.</small>
+        </div>
         <div class="field">
           <label for="cfg_keep_home">Kept at home <span class="hint">(share, 0 = none)</span></label>
           <input type="number" id="cfg_keep_home" data-cfg="keep_home" min="0" max="1" step="0.05">
@@ -422,6 +469,11 @@
           <small>Only a parent may be a mate: an agent that never breeds then spreads
             nothing of its brain through other agents' children. With no such
             neighbour the newborn's brain is a copy.</small>
+        </div>
+        <div class="field checkbox">
+          <label><input type="checkbox" id="cfg_mate_pays" data-cfg="mate_pays"> The mate pays too</label>
+          <small>Once every birth is made, the mate gives the child as many tokens
+            as the parent did, as far as it can and never its last. Needs mixing.</small>
         </div>
         <div class="field">
           <label for="cfg_self_message">What an agent writes to itself</label>

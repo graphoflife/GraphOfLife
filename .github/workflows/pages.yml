@@ -44,6 +44,8 @@ jobs:
         run: pip install --quiet -r requirements.txt
       - name: Engine invariants
         run: python3 tests/test_engine.py
+      - name: The rules of the author's walkthrough keep what they say
+        run: python3 tests/test_rules.py
       - name: The lab runs what the book plans, and stopping it changes nothing
         run: python3 tests/test_lab.py
       - name: A run's statistics, and the page's registry of them

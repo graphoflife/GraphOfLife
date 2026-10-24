@@ -10,7 +10,7 @@
 A run of Graph of Life is fixed by two things: its **settings** and its
 **seed** ([Seeds and the random stream](random-numbers.md)). A setting is one
 number or switch of a run's rules, fixed before the run starts. The settings
-say how many [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") there are, how large the brains are, and which rules are
+say how many tokens there are, how large the brains are, and which rules are
 on. This page lists the 41 settings that decide a world, and one more,
 `archive_every`, that decides what a run keeps. It says what each does, and gives its
 value in the two baselines, B1 and B2
@@ -28,7 +28,7 @@ which. Its last line gives the setting's value in the two baselines; the plans
 that define them are the files `book/experiments/B1.json` and `B2.json`.
 
 Three letters come back often. *T* is the number of tokens, and *n* the
-number of founders. *k* is the number of [neighbours](the-world.md#the-network "An agent joined to another by a connection.") each founder starts with
+number of founders. *k* is the number of neighbours each founder starts with
 in the ring.
 
 ## At a glance
@@ -42,14 +42,16 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`k_neighbors`](#k_neighbors) | 0 → 5, wired as 4 | 0 → 5, wired as 4 | neighbours in the starting ring |
 | [`rewire_p`](#rewire_p) | 0.2 | 0.2 | shortcuts in the starting ring |
 | [`hidden_layers`](#hidden_layers) | 50, 45, 40, 35, 30 | 16 | the brain's hidden layers |
+| [`hidden_activation`](#hidden_activation) | sigmoid | sigmoid | the curve of a hidden unit |
 | [`brain_kind`](#brain_kind) | float16 | float16 | how weights are stored |
 | [`brain_bits`](#brain_bits) | 16 (unused) | 16 (unused) | only for binary brains |
 | [`message_amount`](#message_amount) | 30 | 8 | numbers per message |
 | [`random_input_amount`](#random_input_amount) | 5 | 5 | random inputs per look |
 | [`exchange_messages`](#exchange_messages) | on | on | messages at all |
 | [`message_prepass`](#message_prepass) | on | off | a look that only talks |
-| [`allow_handover`](#allow_handover) | on | off | parents hand [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") to children |
-| [`allow_revolutions`](#allow_revolutions) | on | on | coalitions can take [nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") |
+| [`allow_handover`](#allow_handover) | on | off | parents hand connections to children |
+| [`allow_revolutions`](#allow_revolutions) | on | on | coalitions can take nodes |
+| [`contest`](#contest) | largest | largest | who takes a contested node |
 | [`allow_gifting`](#allow_gifting) | off | off | gifts of tokens |
 | [`random_decisions`](#random_decisions) | off | off | the control without brains |
 | [`prune_after`](#prune_after) | blotto | blotto | when unused connections are cut |
@@ -62,6 +64,9 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`mend_on_death`](#mend_on_death) | off | on | no death splits the world |
 | [`prune_needs`](#prune_needs) | 0 | 2 | only redundant connections lapse |
 | [`valence`](#valence) | 0 | 8 | most connections a brain may choose |
+| [`link_token`](#link_token) | off | off | every link holds a token |
+| [`link_upkeep`](#link_upkeep) | off | off | links kept by paying for them |
+| [`upkeep_to`](#upkeep_to) | end | end | where a link's upkeep goes |
 | [`keep_home`](#keep_home) | 0 | 0.3 | a share of the tokens stays at home |
 | [`max_age`](#max_age) | 0 | 100 | the longest life |
 | [`buy_life`](#buy_life) | off | off | the old may buy more life |
@@ -69,6 +74,7 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`child_floor`](#child_floor) | fixed | fixed | the least a child may start with |
 | [`mix_at_birth`](#mix_at_birth) | off | off | a newborn's brain mixed from two |
 | [`mix_mates`](#mix_mates) | any | any | who may be the mate |
+| [`mate_pays`](#mate_pays) | off | off | the mate pays for the child too |
 | [`self_message`](#self_message) | own | own | what an agent writes to itself |
 | [`link_search`](#link_search) | off | off | links to strangers, found by a search |
 | [`link_steering`](#link_steering) | random | random | which way a search steps |
@@ -158,6 +164,26 @@ gives 15,550 weights and 245 biases: 15,795 numbers in all.
 
 **B1:** 50, 45, 40, 35, 30. **B2:** one layer of 16.
 
+### hidden_activation
+
+The curve each hidden unit of a brain applies to the sum of what reaches it.
+
+- `sigmoid`: an S-shaped curve from 0 to 1, whose slope is at most a quarter.
+  Each layer then passes on at most a quarter of a change in what the brain
+  sees: one layer of 16 units passes on about 0.20 of it, three layers about
+  0.012, and B1's five layers about 0.0006
+  ([What the brains are like](what-the-brains-are-like.md)).
+- `tanh`: the same S-shape, but from −1 to 1 and centred on zero, where its
+  slope is 1. Three layers of it still pass on about 0.45 of a change, and
+  B1's five about 0.36.
+
+The output layer stays a plain sum either way. It works only with float
+brains (`float` and `float16`): a binary brain's units are on or off. Added
+on 24 October 2026, at the author's request, so that brains of three layers
+or more can still see.
+
+**B1 and B2:** `sigmoid`.
+
 ### brain_kind
 
 How a brain's numbers are stored:
@@ -246,6 +272,25 @@ to whoever staked the most on it.
 
 **B1 and B2:** on.
 
+### contest
+
+Who takes a [node](the-world.md#agents-and-tokens) that several agents
+staked on:
+
+- `largest`: the largest stake, as the game weighs it
+  ([`incumbency`](#incumbency)), or a coalition that outweighs it
+  ([`allow_revolutions`](#allow_revolutions)). Ties are drawn at random.
+- `lottery`: a staker drawn at random, with a chance in proportion to its
+  stake as the game weighs it. This is Tullock's contest: a small stake can
+  win, and the largest can lose.
+
+A coalition belongs to the largest-stake rule, so the lottery needs
+`allow_revolutions` off. The lottery was first played in pilot worlds
+([Other contests: a lottery, and alliances](another-game.md)), and moved
+into the engine on 24 October 2026.
+
+**B1 and B2:** `largest`.
+
 ### allow_gifting
 
 Whether agents may give tokens to their neighbours during reproduction. Off,
@@ -292,7 +337,7 @@ the ones a newborn got in the reproduction phase just before.
 ### redistribution
 
 Who gets the tokens of the agents a [cleanup](one-iteration.md#cleanup)
-removes. There are six rules:
+removes. There are seven rules:
 
 - `uniform`: every surviving agent has the same chance at every token. The
   pooled tokens are dealt out by one multinomial draw with equal
@@ -309,6 +354,13 @@ removes. There are six rules:
 - `children`: each dead agent's estate stays in the family. It goes to the
   agent's own living children, each with the same chance at every token. An
   estate that finds no living child is dealt out as `uniform` does.
+- `local`: each estate flows through the network to the nearest living
+  agents. A dead agent passes its tokens to its neighbours one step nearer the
+  living, split evenly, and on until they reach them. The network counts as it
+  stood before the phase's lapses, so a piece cut off whole flows out across
+  the link it lost. An estate with no way to the living goes to the dead
+  agent's parent if it lives. Tokens that are no one's estate are dealt out
+  as `uniform` does. Added on 24 October 2026, at the author's request.
 
 When no child born this iteration is alive, `newborns` and `parents` deal the
 pool out as `uniform` does ([The estate of the dead](estate.md)).
@@ -408,6 +460,63 @@ agent at its limit cannot have a child: it is crowded. That is what keeps a
 dense region from growing denser.
 
 **B1:** 0. **B2:** 8.
+
+### link_token
+
+A cost for [links](the-world.md#the-network), in place of a cap on them.
+Every link holds one token for as long as it stands, and whoever makes it
+pays that token:
+
+- a child pays for the links it is born with, out of its endowment;
+- a searcher pays for the link to the stranger it found;
+- an agent that mends a death ([`mend_on_death`](#mend_on_death)) pays for
+  the mend. The dead agent's link to it has just given it a token back.
+
+An agent with no token makes no link. When a link lapses for want of use,
+its token goes to one of its two ends, drawn at random. When an agent dies,
+each of its links gives its token to the agent at its other end, or, if both
+ends die, to the estate of one of them. A link handed to a child
+([`allow_handover`](#allow_handover)) keeps its token.
+
+So the tokens agents hold, plus one for every link, always make up the
+world's tokens, and the links can never outnumber the tokens. It works with
+or without [`valence`](#valence). It was first played in pilot worlds
+([Rules without numbers](rules-without-numbers.md#links-that-hold-a-token)),
+and moved into the engine on 24 October 2026.
+
+**B1 and B2:** off.
+
+### link_upkeep
+
+Whether an agent can keep a link by paying for it. Every iteration, in the
+reproduction phase, each agent's brain says of each neighbour whether to pay
+one token to keep their link. The brain's UPKEEP output decides it, read as
+the link decision is. An agent pays the links it wants most first, as far as
+its tokens go, and never its last token. A link is paid for if either end
+pays.
+
+- `off`: the old rule. Only use keeps a link.
+- `paid_or_used`: a link lives if it was paid for this iteration, or if
+  tokens crossed it. Paying is a second way to keep it.
+- `paid_only`: only a link paid for this iteration lives, used or not.
+
+A new link counts as paid for in the iteration it is made in. Where the paid
+token goes is [`upkeep_to`](#upkeep_to). Added on 24 October 2026, at the
+author's request: a cost of links that the brains decide, against hubs.
+
+**B1 and B2:** `off`.
+
+### upkeep_to
+
+Where a link's upkeep goes, under [`link_upkeep`](#link_upkeep):
+
+- `end`: to the agent at the link's other end;
+- `estate`: into the estate of the dead, shared out with it by the world's
+  [`redistribution`](#redistribution) rule.
+
+It needs `link_upkeep`.
+
+**B1 and B2:** `end`.
 
 ### keep_home
 
@@ -511,6 +620,18 @@ agents' children; with `parents` it cannot. A parent without such a neighbour
 gives its newborn a copy of its own brain. It needs `mix_at_birth`.
 
 **B1 and B2:** `any`.
+
+### mate_pays
+
+Under [`mix_at_birth`](#mix_at_birth), whether the mate pays for the child
+too. Once every birth of the phase is made, each mate gives its child as many
+tokens as the parent gave it, as far as it can and never its last. A mate's
+half of the brain then costs it something, and a child's price is shared. It
+needs `mix_at_birth`. It was first played in pilot worlds, where it steadied
+the size of mixed worlds ([Who may be a mate](mixed-at-birth-with-parents-as-mates.md)),
+and moved into the engine on 24 October 2026.
+
+**B1 and B2:** off.
 
 ### self_message
 

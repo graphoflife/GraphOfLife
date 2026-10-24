@@ -45,7 +45,9 @@ PHASE 1 — REPRODUCTION
      in one jump, paying a token a step, with a scout that goes a step
      further each iteration, or in a free reach as far as their tokens — and
      propose a link to the stranger they reach, which `link_consent` says who
-     must accept.
+     must accept. Under `link_upkeep` each agent also says which of its links
+     it pays a token to keep this iteration, and under `mate_pays` the mate
+     of each mixed birth pays the child as much as the parent gave.
 
   Phase 1 does NOT move or create any other edges. No walker, no edge
   shifting, no reconnection.
@@ -69,7 +71,9 @@ PHASE 2 — BLOTTO (competition)
          The first rung where that tips, the revolution wins and the winner is
          drawn from the group that tipped it.
        - If it never tips, the hegemon keeps the node.
-     So a coalition of small allocators can unseat the richest one.
+     So a coalition of small allocators can unseat the richest one. Under
+     `contest = lottery` the node goes instead to a staker drawn with a chance
+     in proportion to its stake.
   5. ALLOCATE_AND_CONQUER: the winner's brain is copied into `v`. `v`'s new
      token count is everything that was allocated to it. This is the selection
      mechanism — phase 1 spreads genes, phase 2 decides which genes win.
@@ -82,8 +86,10 @@ CLEANUP (after both phases)
   3. All tokens from the dead are pooled and shared out over the survivors —
      uniformly at random by default; `redistribution` names the other rules
      (by holdings, to the poorest, to this iteration's newborns or to their
-     parents, to the dead agent's own children) — keeping the global count
-     conserved.
+     parents, to the dead agent's own children, or flowing through the network
+     to the nearest of the living) — keeping the global count conserved.
+     Under `link_token` every link holds one token besides: its maker pays for
+     it, and it comes back when the link goes.
   4. If the world empties completely, a single fresh agent is resurrected
      holding every token.
 
@@ -202,14 +208,17 @@ def decision_keys(cfg: SimConfig) -> Dict[str, frozenset]:
     a test holds every frame to it. Every key is always written — an empty
     list when its mechanic is off, so whether a mechanic was on is the run's
     settings to say, not the frame's — with one exception: a stake's and a
-    conquest's `revolt` is left out when revolutions are off, and the
-    reproduction record's `proposals` when nobody may search for strangers, so
+    conquest's `revolt` is left out when revolutions are off, the reproduction
+    record's `proposals` when nobody may search for strangers, its `upkeep`
+    when links cost no upkeep and its `mate_paid` when mates pay nothing, so
     that "not part of these rules" can be told from "allowed and unused".
     """
     revolt = frozenset({"revolt"}) if cfg.allow_revolutions else frozenset()
     search = frozenset({"proposals"}) if cfg.link_search != "off" else frozenset()
+    upkeep = frozenset({"upkeep"}) if cfg.link_upkeep != "off" else frozenset()
+    mates = frozenset({"mate_paid"}) if cfg.mate_pays else frozenset()
     return {
-        "reproduction": frozenset({"births", "gifts", "pruned_edges"}) | search,
+        "reproduction": frozenset({"births", "gifts", "pruned_edges"}) | search | upkeep | mates,
         "birth": frozenset({"agent", "tokens_before", "invested", "child", "links",
                             "handed_over"}),
         "game": frozenset({"allocations", "winners", "pruned_edges"}),
@@ -453,7 +462,8 @@ def two_core_size(ids, adj) -> int:
 
 class Brain:
     """
-    A feed-forward network with sigmoid hidden layers and a linear output.
+    A feed-forward network with sigmoid (or tanh, hidden_activation) hidden
+    layers and a linear output.
 
     Evaluated on a whole candidate set at once: pass a matrix of shape
     (n_inputs, n_candidates) and get back (n_outputs, n_candidates), so one
@@ -526,12 +536,13 @@ class Brain:
         a = np.asarray(x, dtype=float)
         if a.ndim == 1:
             a = a.reshape(-1, 1)
+        squash = np.tanh if self.cfg.hidden_activation == "tanh" else _sigmoid
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             # Computed in double precision whatever the weights are stored as:
             # the saving being tested is in what a population has to hold, not
             # in how each sum is added up.
             z = W.astype(np.float64) @ a + b.astype(np.float64)
-            a = z if i == len(self.weights) - 1 else _sigmoid(z)
+            a = z if i == len(self.weights) - 1 else squash(z)
         return a
 
     def copy(self) -> "Brain":
@@ -999,6 +1010,18 @@ class GraphOfLife:
         # pay at the first cleanup of an iteration and are spared at the second.
         # A world restored from a checkpoint begins an iteration, so it is not kept.
         self._life_paid_at = -1
+        # Under link_upkeep, the iteration each connection was last paid for, or
+        # made in — keyed like edge_active_at, and kept in checkpoints with it.
+        self.edge_paid_at: Dict[Tuple[int, int], int] = {}
+        # Each of these lives inside one phase, so none is kept: under mate_pays
+        # the mate of the birth under way and what each mate of the phase owes;
+        # under upkeep_to = estate the upkeep paid into the estate of the dead;
+        # and the links the phase let lapse, across which a local estate may
+        # still flow to the living.
+        self._mate_of_birth: Optional[int] = None
+        self._dues_of_mates: List[Tuple[int, int, int]] = []
+        self._upkeep_pool = 0
+        self._lapsed: List[Tuple[int, int]] = []
 
         if _empty:
             return
@@ -1024,6 +1047,8 @@ class GraphOfLife:
 
         # Hand any rounding remainder to the founders so the count is exact.
         self._settle_remainder()
+        if cfg.link_token:
+            self._pay_for_seed_links()
 
     # ------------------------------------------------------------------------
     # Identity helpers
@@ -1094,8 +1119,11 @@ class GraphOfLife:
         if u == v:
             return
         self.G.add_edge(int(u), int(v))
-        self.edge_active_at[self._edge_key(u, v)] = (
-            self.phase_count if when is None else int(when))
+        key = self._edge_key(u, v)
+        self.edge_active_at[key] = self.phase_count if when is None else int(when)
+        if self.cfg.link_upkeep != "off":
+            # A new connection counts as paid for the iteration it is made in.
+            self.edge_paid_at[key] = self.iteration
 
     def _first_unrun_phase(self) -> int:
         """
@@ -1118,7 +1146,68 @@ class GraphOfLife:
             return
         self.G.remove_edges_from(edges)
         for u, v in edges:
-            self.edge_active_at.pop(self._edge_key(u, v), None)
+            key = self._edge_key(u, v)
+            self.edge_active_at.pop(key, None)
+            self.edge_paid_at.pop(key, None)
+
+    def _make_link(self, maker: int, other: int) -> bool:
+        """
+        Make a connection in play, and say whether it was made.
+
+        Under link_token a link holds one token, which its maker pays; a maker
+        without a token makes no link. The seed graph, a restored checkpoint
+        and a handover add their connections with _add_edge itself, since none
+        of them makes a link in play: the founders pay for theirs afterwards,
+        a checkpoint's were paid for when they were made, and a handed link
+        moves with its token.
+        """
+        if self.cfg.link_token and maker != other and not self.G.has_edge(maker, other):
+            if self.tokens.get(maker, 0) < 1:
+                return False
+            self.tokens[maker] -= 1
+        self._add_edge(maker, other)
+        return True
+
+    def _lapse(self, edges: List[Tuple[int, int]]) -> None:
+        """
+        Let unused connections go, and remember them for the phase's cleanup: a
+        local estate may still flow across a link that has just lapsed. Under
+        link_token each gives its token to one of its two ends, drawn at
+        random, in the order of the links so that a resumed run draws alike.
+        """
+        if self.cfg.link_token:
+            for u, v in sorted(self._edge_key(u, v) for u, v in edges):
+                end = (u, v)[self.rng.randint(2)]
+                self.tokens[end] = self.tokens.get(end, 0) + 1
+        self._lapsed.extend(self._edge_key(u, v) for u, v in edges)
+        self._drop_edges(edges)
+
+    def _release_links(self, doomed: set) -> None:
+        """
+        Under link_token, what the links of agents about to be removed held. A
+        link to an agent that lives on gives its token to that agent; a link
+        between two of the doomed gives it to one of them, drawn at random, to
+        go with that one's estate. The links themselves go with the agents.
+        """
+        if not self.cfg.link_token:
+            return
+        for u, v in sorted({self._edge_key(u, v) for u in doomed for v in self.G.neighbors(u)}):
+            if u in doomed and v in doomed:
+                end = (u, v)[self.rng.randint(2)]
+            else:
+                end = v if u in doomed else u
+            self.tokens[end] = self.tokens.get(end, 0) + 1
+
+    def _pay_for_seed_links(self) -> None:
+        """
+        Under link_token the seed graph's links are paid like any other: one
+        token each, from one of its two ends that has one, drawn at random.
+        """
+        for u, v in sorted(self._edge_key(u, v) for u, v in self.G.edges()):
+            ends = [x for x in (u, v) if self.tokens.get(x, 0) > 0]
+            if not ends:
+                raise ValueError("too few tokens to pay for the seed graph's links under link_token")
+            self.tokens[ends[self.rng.randint(len(ends))]] -= 1
 
     def _mark_flow(self, u: int, v: int) -> None:
         """Tokens crossed this connection in the current phase."""
@@ -1136,11 +1225,22 @@ class GraphOfLife:
 
         The window ends at the current phase and reaches back one phase, or two
         when a whole iteration counts. An edge whose last activity — a crossing
-        or its own creation — falls before that has lapsed.
+        or its own creation — falls before that has lapsed. Under link_upkeep a
+        link paid for this iteration stands whether or not anything crossed it,
+        and under `paid_only` nothing else keeps one.
         """
         oldest = self.phase_count - self._window_phases() + 1
-        stale = [self._edge_key(u, v) for u, v in self.G.edges()
-                 if self.edge_active_at.get(self._edge_key(u, v), -1) < oldest]
+        upkeep = self.cfg.link_upkeep
+        if upkeep == "paid_only":
+            # Only a link paid for this iteration lives, used or not.
+            stale = [self._edge_key(u, v) for u, v in self.G.edges()
+                     if self.edge_paid_at.get(self._edge_key(u, v), -1) < self.iteration]
+        else:
+            stale = [self._edge_key(u, v) for u, v in self.G.edges()
+                     if self.edge_active_at.get(self._edge_key(u, v), -1) < oldest]
+            if upkeep == "paid_or_used":
+                # Paying for a link is the other way to keep it.
+                stale = [e for e in stale if self.edge_paid_at.get(e, -1) < self.iteration]
         return self._redundant(stale) if self.cfg.prune_needs else stale
 
     def _redundant(self, stale: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
@@ -1210,6 +1310,7 @@ class GraphOfLife:
         has a copy.
         """
         brain = self.brains[parent]
+        self._mate_of_birth = None
         if self.cfg.mix_at_birth:
             mates = [v for v in candidates[1:] if v != parent and self.G.has_node(v)]
             if self.cfg.mix_mates == "parents":
@@ -1217,7 +1318,8 @@ class GraphOfLife:
                 mates = [v for v in mates if v in parents]
                 parents.add(parent)          # the child about to be born makes it one
             if mates:
-                return self._mixed_brain(brain, self.brains[mates[self.rng.randint(len(mates))]])
+                self._mate_of_birth = mates[self.rng.randint(len(mates))]
+                return self._mixed_brain(brain, self.brains[self._mate_of_birth])
         return self._copy_brain(brain)
 
     def _parents_now(self) -> set:
@@ -1493,9 +1595,11 @@ class GraphOfLife:
         decisions: List[Dict[str, Any]] = []
         handovers: List[Tuple[int, int, int]] = []
         gifts: List[Tuple[int, int, int]] = []
+        upkeep: List[Tuple[int, int, float]] = []
         searches: List[Tuple[int, int]] = []
         outbox: Dict[int, Dict[int, List[float]]] = {}
         self.phase_count += 1
+        self._lapsed = []
         # Captured before anything changes, so the viewer can express births and
         # deaths as a share of the population that actually faced this phase,
         # and show how much each agent gained or lost across it.
@@ -1552,6 +1656,7 @@ class GraphOfLife:
             # their ids.
             gifts.extend(self._choose_gifts(u, tokens_u - child_tokens,
                                             candidates, Y))
+            upkeep.extend(self._choose_upkeep(u, candidates, Y))
             spend = self._choose_search(tokens_u - child_tokens, Y)
             if spend:
                 searches.append((int(u), spend))
@@ -1564,9 +1669,14 @@ class GraphOfLife:
         for parent, v, child in handovers:
             if not (self.G.has_node(child) and self.G.has_edge(parent, v)):
                 continue
+            # A handed link keeps its token; one that joins a link the child
+            # already has to that neighbour leaves its token with the child.
+            merged = self.G.has_edge(child, v)
             if child != v:
                 self._add_edge(child, v)
             self._drop_edges([(parent, v)])
+            if merged and self.cfg.link_token:
+                self.tokens[child] = self.tokens.get(child, 0) + 1
 
         self._drop_edges(list(nx.selfloop_edges(self.G)))
         self._note("repro.born", lambda: {
@@ -1591,6 +1701,11 @@ class GraphOfLife:
             paid.append((int(giver), int(taker), amount))
         self._note("repro.gifts", lambda: {"gifts": [[g, t, a] for g, t, a in paid]})
 
+        # A mate pays its child once every birth of the phase is made, as the
+        # gifts are; then the upkeep the agents chose, out of what is left.
+        mate_paid = self._pay_mates()
+        kept = self._pay_upkeep(upkeep)
+
         # Searches go out once the gifts have landed, so a searcher spends only
         # what it has left.
         proposals: List[Tuple[int, int, bool]] = []
@@ -1602,7 +1717,7 @@ class GraphOfLife:
         # The accounting may fall due here rather than after the game. When it
         # does, a gift paid moments ago is what keeps a connection standing.
         dead_edges = self._stale_edges() if self._prunes_after(1) else []
-        self._drop_edges(dead_edges)
+        self._lapse(dead_edges)
         self._note("repro.prune", lambda: {"cut": [[int(a), int(b)] for a, b in dead_edges]})
 
         self._deliver_messages(outbox)
@@ -1621,6 +1736,10 @@ class GraphOfLife:
                 "gifts": [[g, t, a] for g, t, a in paid],
                 **({"proposals": [[int(u), int(w), bool(made)] for u, w, made in proposals]}
                    if self.cfg.link_search != "off" else {}),
+                **({"upkeep": [[int(p), int(o)] for p, o in kept]}
+                   if self.cfg.link_upkeep != "off" else {}),
+                **({"mate_paid": [[int(m), int(c), int(a)] for m, c, a in mate_paid]}
+                   if self.cfg.mate_pays else {}),
                 # The prune can run here now, so a reproduction frame says what
                 # it cut — an empty list on a run that settles up only after the
                 # game. Whether this phase prunes at all is the run's
@@ -1670,6 +1789,8 @@ class GraphOfLife:
 
         self._register_agent(child_id, child_tokens, child_brain, int(parent))
         self.tokens[parent] = parent_tokens - child_tokens
+        if self.cfg.mate_pays and self._mate_of_birth is not None:
+            self._dues_of_mates.append((int(self._mate_of_birth), int(child_id), int(child_tokens)))
 
         link_logits = Y[self.heads["LINK"], :]
         link_mode = Y[self.heads["LINK_MODE"], :]
@@ -1690,8 +1811,7 @@ class GraphOfLife:
                 continue
             if _choose_binary(link_logits[0, col], link_logits[1, col],
                               link_mode[0, col], link_mode[1, col], self.rng):
-                if v != child_id and self.G.has_node(v):
-                    self._add_edge(child_id, v)
+                if v != child_id and self.G.has_node(v) and self._make_link(child_id, v):
                     linked.append(v)
 
         return child_id, linked
@@ -1701,12 +1821,11 @@ class GraphOfLife:
         k = self.cfg.birth_links
         if not k:
             return []
-        self._add_edge(child, parent)
+        linked = [parent] if self._make_link(child, parent) else []
         others = [v for v in candidates if v != parent and v != child and self.G.has_node(v)]
         chosen = [others[i] for i in self.rng.permutation(len(others))[:k]] if others else []
-        for v in chosen:
-            self._add_edge(child, v)
-        return [parent] + chosen
+        linked += [v for v in chosen if self._make_link(child, v)]
+        return linked
 
     def _choose_gifts(self, u: int, purse: int, candidates: List[int],
                       Y: np.ndarray) -> List[Tuple[int, int, int]]:
@@ -1753,6 +1872,69 @@ class GraphOfLife:
         shares = _apportion(weights, budget)
         return [(int(u), int(candidates[col]), int(amount))
                 for col, amount in zip(cols, shares) if amount > 0]
+
+    def _choose_upkeep(self, u: int, candidates: List[int],
+                       Y: np.ndarray) -> List[Tuple[int, int, float]]:
+        """
+        Which of its links `u` would pay a token to keep this iteration
+        (link_upkeep): yes or no to each neighbour, read like the link decision,
+        with how strongly it said yes, so that an agent short of tokens keeps
+        the links it wants most. Column zero is the agent itself: no link there.
+        """
+        if self.cfg.link_upkeep == "off" or len(candidates) < 2:
+            return []
+        logits = Y[self.heads["UPKEEP"], :]
+        mode = Y[self.heads["LINK_MODE"], :]
+        wanted: List[Tuple[int, int, float]] = []
+        for col in range(1, len(candidates)):
+            if _choose_binary(logits[0, col], logits[1, col], mode[0, col], mode[1, col], self.rng):
+                wanted.append((int(u), int(candidates[col]), float(logits[0, col] - logits[1, col])))
+        return wanted
+
+    def _pay_upkeep(self, wanted: List[Tuple[int, int, float]]) -> List[Tuple[int, int]]:
+        """
+        Pay the upkeep each agent chose: a token a link, the link it wanted most
+        first, as far as its tokens go and never its last. A paid link is paid
+        for this iteration; its token goes to the link's other end, or into the
+        estate of the dead (upkeep_to). A link handed on or gone since the
+        choice is not paid for. Paid in the order of the payers' ids, after
+        every choice is made, as gifts are.
+        """
+        by_payer: Dict[int, List[Tuple[float, int]]] = {}
+        for payer, other, strength in wanted:
+            by_payer.setdefault(payer, []).append((-strength, other))
+        paid: List[Tuple[int, int]] = []
+        for payer in sorted(by_payer):
+            for _, other in sorted(by_payer[payer]):
+                if not self.G.has_edge(payer, other) or self.tokens.get(payer, 0) < 2:
+                    continue
+                self.tokens[payer] -= 1
+                if self.cfg.upkeep_to == "end":
+                    self.tokens[other] = self.tokens.get(other, 0) + 1
+                else:
+                    self._upkeep_pool += 1
+                self.edge_paid_at[self._edge_key(payer, other)] = self.iteration
+                paid.append((payer, other))
+        return paid
+
+    def _pay_mates(self) -> List[Tuple[int, int, int]]:
+        """
+        Under mate_pays, each mate of the phase pays its child what the parent
+        gave it, as far as it can and never its last token. A mate or child
+        gone since the birth pays or gets nothing.
+        """
+        dues, self._dues_of_mates = self._dues_of_mates, []
+        paid: List[Tuple[int, int, int]] = []
+        for mate, child, wanted in dues:
+            if not (self.G.has_node(mate) and self.G.has_node(child)):
+                continue
+            amount = min(wanted, int(self.tokens.get(mate, 0)) - 1)
+            if amount < 1:
+                continue
+            self.tokens[mate] -= amount
+            self.tokens[child] = self.tokens.get(child, 0) + amount
+            paid.append((mate, child, amount))
+        return paid
 
     def _choose_search(self, purse: int, Y: np.ndarray) -> int:
         """
@@ -1819,7 +2001,7 @@ class GraphOfLife:
             room = not cfg.valence or (self.G.degree(u) < cfg.valence
                                        and self.G.degree(here) < cfg.valence)
             if agreed and room:
-                self._add_edge(u, here)
+                self._make_link(u, here)
             # Recorded as the graph has it, which a link that has to be paid for may not.
             proposals.append((u, here, self.G.has_edge(u, here)))
         return proposals
@@ -1889,6 +2071,7 @@ class GraphOfLife:
         nodes_before = self.G.number_of_nodes()
         tokens_before = dict(self.tokens)
         self.phase_count += 1
+        self._lapsed = []
         features = self._precompute_features()
         self._message_prepass("game.messages", features)
         log_deg, neighs, q_tok, q_deg, log_tok, at_risk = features
@@ -2006,8 +2189,11 @@ class GraphOfLife:
                 new_brains[v] = self._copy_brain(self.brains[v])
                 continue
 
-            winner, max_amount, by_revolt = self._resolve_winner(
-                self._weighed(v, offers), revolution_to[v], self.rng)
+            if self.cfg.contest == "lottery":
+                winner, max_amount, by_revolt = self._lottery(self._weighed(v, offers))
+            else:
+                winner, max_amount, by_revolt = self._resolve_winner(
+                    self._weighed(v, offers), revolution_to[v], self.rng)
             new_brains[v] = self._copy_brain(self.brains[winner])
             # A won node is a copy of its winner's brain made somewhere new, so
             # under mutate_on_replication it is a replication like a birth.
@@ -2052,7 +2238,7 @@ class GraphOfLife:
         # fall due here. A run that settles up after reproduction instead
         # leaves every connection standing at this point.
         dead_edges = self._stale_edges() if self._prunes_after(2) else []
-        self._drop_edges(dead_edges)
+        self._lapse(dead_edges)
         self._note("game.prune", lambda: {"cut": [[int(a), int(b)] for a, b in dead_edges]})
 
         self._deliver_messages(outbox)
@@ -2099,6 +2285,19 @@ class GraphOfLife:
         if h == 1.0 or v not in offers:
             return offers
         return {**offers, v: offers[v] * h}
+
+    def _lottery(self, offers: Dict[int, float]) -> Tuple[int, float, bool]:
+        """
+        contest = lottery: the node goes to a staker drawn with a chance in
+        proportion to its stake as the game weighs it (Tullock's contest).
+        The stakers are taken in the order of their ids, so the draw does not
+        depend on the order the stakes were made in. Returns the winner, the
+        largest stake, and that no revolution won.
+        """
+        keys = sorted(offers)
+        weights = np.array([float(offers[k]) for k in keys])
+        pick = int(self.rng.choice(len(keys), p=weights / weights.sum()))
+        return int(keys[pick]), max(offers.values()), False
 
     @staticmethod
     def _resolve_winner(offers: Dict[int, int], revolutionaries: Dict[int, int],
@@ -2214,16 +2413,29 @@ class GraphOfLife:
         report["aged"] = len(aged)
         dying = starved + aged
 
-        global_pool = self.cfg.tokens_created_per_phase + bought
+        global_pool = self.cfg.tokens_created_per_phase + bought + self._upkeep_pool
+        self._upkeep_pool = 0
         # Each dead agent's estate, for the rule that leaves it to its children.
         estates: Dict[int, int] = {}
+        # Under the local rule an estate flows to the nearest of the living
+        # before its agent is removed, rather than joining the pool.
+        local = self.cfg.redistribution == "local"
+        given = 0
         if self.cfg.mend_on_death:
             # Each death on its own, its neighbourhood mended before the next:
             # then no death can split the graph, and the cull below finds one
             # piece. Their estates join the pool like any other.
+            pending = set(dying)
             for u in sorted(dying):
-                estates[u] = max(0, self.tokens.get(u, 0))
-                global_pool += estates[u]
+                self._release_links({u})
+                if local:
+                    flowed, rest = self._flow_estates({u: max(0, self.tokens.get(u, 0))}, pending)
+                    given += flowed
+                    global_pool += rest
+                else:
+                    estates[u] = max(0, self.tokens.get(u, 0))
+                    global_pool += estates[u]
+                pending.discard(u)
                 self._remove_and_mend(u)
             dying = []
 
@@ -2239,9 +2451,15 @@ class GraphOfLife:
         doomed = set(dying) | orphaned
         report["orphaned"] = len(orphaned)
 
-        for u in doomed:
-            estates[u] = max(0, self.tokens.get(u, 0))
-            global_pool += estates[u]
+        self._release_links(doomed)
+        if local:
+            flowed, rest = self._flow_estates({u: max(0, self.tokens.get(u, 0)) for u in doomed}, doomed)
+            given += flowed
+            global_pool += rest
+        else:
+            for u in doomed:
+                estates[u] = max(0, self.tokens.get(u, 0))
+                global_pool += estates[u]
 
         if doomed:
             # Their connections go first, so the upkeep record loses them with
@@ -2258,7 +2476,7 @@ class GraphOfLife:
         # dropped, and the resurrection below mints a whole world's worth
         # instead. It was reported all the same, which put a number on a chart
         # for tokens that went nowhere.
-        report["redistributed"] = self._share_out(global_pool, estates)
+        report["redistributed"] = given + self._share_out(global_pool, estates)
 
         if self.G.number_of_nodes() == 0:
             aid = self.next_agent_id
@@ -2271,6 +2489,7 @@ class GraphOfLife:
             # Not a per-agent book — it is keyed by pairs — but it names agents
             # that no longer exist, and ids are handed out fresh from here.
             self.edge_active_at.clear()
+            self.edge_paid_at.clear()
             self._register_agent(aid, self.cfg.total_tokens,
                                  self._new_brain(), NO_PARENT)
             report["resurrected"] = True
@@ -2299,6 +2518,10 @@ class GraphOfLife:
         - `children`: each dead agent's estate to its own living children, an
           even chance for each; an estate without a living child, and anything
           else in the pool, as `uniform`.
+        - `local`: each estate has flowed to the nearest of the living already,
+          in the cleanup (`_flow_estates`); what is left here is no one's
+          estate, or an estate with no way to the living and no parent alive,
+          and goes as `uniform`.
 
         `newborns` and `parents` fall back to `uniform` in an iteration without
         any heir, and `children` for a pool that is no one's estate.
@@ -2343,7 +2566,7 @@ class GraphOfLife:
                 heirs = survivors
                 weights = np.ones(len(heirs))
             probs = weights / weights.sum()
-        elif rule == "uniform":
+        elif rule in ("uniform", "local"):
             probs = np.full(len(survivors), 1 / len(survivors))
         else:
             raise ValueError(f"no rule for sharing out the dead: {rule!r}")
@@ -2446,9 +2669,87 @@ class GraphOfLife:
         for first, second in pairs:
             a = min(first, key=lambda z: (len(adj[z]), z))
             b = min(second, key=lambda z: (len(adj[z]), z))
-            self._add_edge(a, b)
+            # Under link_token the mend is a link like any other, paid by `a`,
+            # which the dead agent's link to it has just paid back a token.
+            self._make_link(a, b)
             made += 1
         return made
+
+    def _flow_estates(self, estates: Dict[int, int], doomed: set) -> Tuple[int, int]:
+        """
+        redistribution = local: let each estate flow to the nearest of the living.
+
+        Distances are counted from the living into the doomed, over the network
+        as it stands with the links this phase let lapse put back, so that a
+        piece cut off whole flows out across the link it lost. Each doomed
+        agent, farthest first, passes on what it holds to its neighbours one
+        step nearer the living, split evenly, the tokens left over one each to
+        neighbours drawn at random, until everything has reached the living.
+        An estate with no way to them goes to the dead agent's parent if it
+        lives; what is left after that is returned, for the pool. Returns
+        (tokens given to the living, tokens left).
+        """
+        extra: Dict[int, set] = {}
+        for a, b in self._lapsed:
+            if self.G.has_node(a) and self.G.has_node(b):
+                extra.setdefault(a, set()).add(b)
+                extra.setdefault(b, set()).add(a)
+
+        def around(u: int) -> List[int]:
+            return sorted(set(self.G.adj[u]) | extra.get(u, set()))
+
+        # The doomed agents an estate may have to cross, and how far each is
+        # from the living.
+        region: set = set()
+        stack = [u for u, amount in estates.items() if amount > 0]
+        while stack:
+            u = stack.pop()
+            if u not in region:
+                region.add(u)
+                stack.extend(v for v in around(u) if v in doomed and v not in region)
+        dist: Dict[int, int] = {}
+        frontier = sorted(u for u in region if any(v not in doomed for v in around(u)))
+        for u in frontier:
+            dist[u] = 1
+        while frontier:
+            nearer = []
+            for u in frontier:
+                for v in around(u):
+                    if v in region and v not in dist:
+                        dist[v] = dist[u] + 1
+                        nearer.append(v)
+            frontier = sorted(nearer)
+
+        carry = {u: int(amount) for u, amount in estates.items() if amount > 0}
+        for u in estates:
+            self.tokens[u] = 0
+        given = 0
+        for u in sorted(dist, key=lambda x: (-dist[x], x)):
+            amount = carry.pop(u, 0)
+            if amount <= 0:
+                continue
+            d = dist[u]
+            onward = [v for v in around(u) if (v not in doomed if d == 1 else dist.get(v) == d - 1)]
+            share, left = divmod(amount, len(onward))
+            lucky = set(onward[i] for i in self.rng.permutation(len(onward))[:left]) if left else set()
+            for v in onward:
+                n = share + (1 if v in lucky else 0)
+                if n <= 0:
+                    continue
+                if v in doomed:
+                    carry[v] = carry.get(v, 0) + n
+                else:
+                    self.tokens[v] = self.tokens.get(v, 0) + n
+                    given += n
+        rest = 0
+        for u, amount in sorted(carry.items()):
+            parent = self.parent_of.get(u, NO_PARENT)
+            if parent != NO_PARENT and parent not in doomed and self.G.has_node(parent):
+                self.tokens[parent] = self.tokens.get(parent, 0) + amount
+                given += amount
+            else:
+                rest += amount
+        return given, rest
 
     def _prune_stale_messages(self) -> None:
         """Forget messages to or from anyone who is no longer a neighbor."""
@@ -2595,6 +2896,15 @@ class GraphOfLife:
         blob["msg_values"] = (np.array(payloads, dtype=np.float64)
                               if payloads else np.zeros((0, width), dtype=np.float64))
 
+        # Under link_upkeep, the iteration each connection was last paid for, in
+        # the order the edges are written: without it a resumed run could not
+        # tell a link just paid for from one about to lapse. Written only under
+        # that rule, so every other world's checkpoint holds what it always held.
+        if self.cfg.link_upkeep != "off":
+            blob["edge_paid_at"] = np.array(
+                [self.edge_paid_at.get(self._edge_key(u, v), self.iteration)
+                 for u, v in self.G.edges()], dtype=np.int64)
+
         # Where each searching agent's scout stands is world state too. Written
         # only under the rule that has scouts, so that every other world's
         # checkpoint holds what it always held.
@@ -2693,6 +3003,15 @@ class GraphOfLife:
         world.next_agent_id, world.next_brain_id, world.iteration = (
             int(counters[0]), int(counters[1]), int(counters[2])
         )
+
+        # The upkeep paid for each link, against the iteration just read. A
+        # checkpoint without the record counts every link paid for the iteration
+        # it resumes, as one without use counts every link used.
+        if cfg.link_upkeep != "off":
+            paid = (blob["edge_paid_at"].tolist() if "edge_paid_at" in blob
+                    else [world.iteration] * len(edge_list))
+            for (a, b), when in zip(edge_list, paid):
+                world.edge_paid_at[world._edge_key(ids[a], ids[b])] = int(when)
 
         scalars = blob["rng_scalars"].tolist()
         world.rng.set_state((

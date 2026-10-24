@@ -89,6 +89,19 @@ MECHANICS: Dict[str, Any] = {
     "link_steering": "random",
     "link_consent": "mutual",
 
+    # ---- the author's walkthrough of 2026-10-24 --------------------------------
+    #
+    # Rules the author chose for the screen's next round of random worlds
+    # (research/screen/walkthrough.md): a brain whose hidden layers pass a
+    # change on, links that cost tokens, the lottery game and a mate that pays,
+    # each off here so that `gol-1` keeps naming what it always named.
+    "hidden_activation": "sigmoid",
+    "contest": "largest",
+    "mate_pays": False,
+    "link_token": False,
+    "link_upkeep": "off",
+    "upkeep_to": "end",
+
     # ---- the pilots' rules ---------------------------------------------------
     #
     # Rules first played in the pilots' prototype (research/oee/pilots/proto.py)
@@ -235,7 +248,7 @@ class SimConfig:
     INACTIVE_WINDOW: ClassVar[Dict[str, int]] = {"phase": 1, "iteration": 2}
     # How the tokens of removed agents are shared among the survivors.
     REDISTRIBUTIONS: ClassVar[Tuple[str, ...]] = (
-        "uniform", "by_tokens", "poorest", "newborns", "parents", "children")
+        "uniform", "by_tokens", "poorest", "newborns", "parents", "children", "local")
     # How an agent reaches a stranger (link_search), which way it goes there
     # (link_steering), and who has to agree to the link it proposes (link_consent).
     LINK_SEARCHES: ClassVar[Tuple[str, ...]] = ("off", "jump", "walk", "reach")
@@ -249,6 +262,15 @@ class SimConfig:
     # The least a child may start with: min_child alone, or also the median
     # holding of its parent's neighbours.
     CHILD_FLOORS: ClassVar[Tuple[str, ...]] = ("fixed", "neighbours")
+    # The curve a hidden unit applies to its sum.
+    HIDDEN_ACTIVATIONS: ClassVar[Tuple[str, ...]] = ("sigmoid", "tanh")
+    # Who takes a contested node: the largest stake, or a staker drawn in
+    # proportion to its stake.
+    CONTESTS: ClassVar[Tuple[str, ...]] = ("largest", "lottery")
+    # Whether links cost upkeep, and what then keeps one alive; and where the
+    # token paid for it goes.
+    LINK_UPKEEPS: ClassVar[Tuple[str, ...]] = ("off", "paid_or_used", "paid_only")
+    UPKEEP_TO: ClassVar[Tuple[str, ...]] = ("end", "estate")
     MODES: ClassVar[Dict[str, Tuple[str, ...]]] = {
         "brain_kind": tuple(BRAIN_PRESETS),
         "prune_after": tuple(PRUNE_AFTER),
@@ -260,6 +282,10 @@ class SimConfig:
         "link_search": LINK_SEARCHES,
         "link_steering": LINK_STEERINGS,
         "link_consent": LINK_CONSENTS,
+        "hidden_activation": HIDDEN_ACTIVATIONS,
+        "contest": CONTESTS,
+        "link_upkeep": LINK_UPKEEPS,
+        "upkeep_to": UPKEEP_TO,
     }
 
     # ---- Economy ----
@@ -280,6 +306,13 @@ class SimConfig:
 
     # ---- Brain ----
     hidden_layers: List[int] = field(default_factory=lambda: [50, 45, 40, 35, 30])
+    # The curve each hidden unit applies to its sum. A sigmoid passes on at most
+    # a quarter of a change, so B1's five layers pass on about a thousandth of
+    # what a brain sees, and its brains decide nearly the same whatever they see.
+    # tanh is the same S-shape centred on zero, with a slope of one there: three
+    # layers of it still pass on about half. The output layer stays linear. Float
+    # brains only, since a binary brain's units are on or off.
+    hidden_activation: str = "sigmoid"
 
     # How a brain stores and computes.
     #
@@ -343,6 +376,14 @@ class SimConfig:
     # random, and the revolution fraction head disappears from the brain.
     allow_revolutions: bool = True
 
+    # Who takes a contested node. `largest`, the old rule: the largest stake as
+    # the game weighs it, or a coalition that outweighs it. `lottery`: a staker
+    # drawn with a chance in proportion to its weighed stake (Tullock's contest),
+    # so a small stake can win and a large one lose. A coalition belongs to the
+    # largest-stake rule, so the lottery needs revolutions off. The pilots'
+    # rule, in the engine.
+    contest: str = "largest"
+
     # The control. With this on, an agent never reads its inputs: the numbers
     # its brain would have produced are replaced with noise, and every decision
     # downstream follows from that instead. Nothing else changes — the same
@@ -394,7 +435,13 @@ class SimConfig:
     # children born this iteration, and `parents` to their parents, once per
     # child; those two fall back to `uniform` in an iteration without any.
     # `children` leaves each dead agent's estate to its own living children,
-    # and what has no heir goes as `uniform`.
+    # and what has no heir goes as `uniform`. `local` lets each estate flow
+    # through the network to the nearest living agents: from the dead agent to
+    # its neighbours one step nearer the living, split evenly, and on until it
+    # reaches them, over the network as it stood before the phase's lapses, so
+    # that a piece cut off whole still flows out across the link it lost. An
+    # estate with no way to the living goes to the dead agent's parent if it
+    # lives, and what is no one's estate goes as `uniform`.
     redistribution: str = "uniform"
 
     # ---- Open-ended evolution ----
@@ -435,6 +482,29 @@ class SimConfig:
     # newborn's links to its parent and the parent's neighbours are exempt, and
     # so is mending. An agent at its limit cannot have a child: it is crowded.
     valence: int = 0
+    # A cost for links instead of a cap on them. Every link holds one token for
+    # as long as it stands: whoever makes it pays — a child for the links it is
+    # born with, a searcher for its find, an agent mending a death for the mend
+    # — and a link its maker cannot pay for is not made. A link that lapses
+    # gives its token to one of its two ends, drawn at random; a link that goes
+    # with a dead agent gives it to the end that lives on, or to the estate when
+    # both die; a link handed to a child keeps its token. The tokens agents hold
+    # and the links together are the world's tokens, so the links can never
+    # outnumber them. The pilots' rule, in the engine.
+    link_token: bool = False
+    # Upkeep a brain chooses. Every iteration, in the reproduction phase, an
+    # agent says of each neighbour whether to pay one token to keep their link
+    # (its UPKEEP head, read like the link decision), out of what reproduction
+    # left and never its last token; a link is paid for if either end pays.
+    # `paid_or_used`: a link lives if it was paid for this iteration or tokens
+    # crossed it, payment being another way to stay; `paid_only`: only paid
+    # links live, used or not. A new link counts as paid for the iteration it is
+    # made in. Off, the old rule: only use keeps a link.
+    link_upkeep: str = "off"
+    # Where an upkeep token goes: to the link's other end (`end`), or into the
+    # estate of the dead (`estate`), shared out with it by the world's
+    # redistribution rule.
+    upkeep_to: str = "end"
 
     # Demography. At least this share of an agent's tokens stays on its own
     # node whatever its brain says — rounded up, and never less than one token
@@ -477,6 +547,11 @@ class SimConfig:
     # through other agents' children. With no such neighbour the newborn's
     # brain is a copy of its parent's.
     mix_mates: str = "any"
+    # Under mix_at_birth, the mate pays the child as many tokens as the parent
+    # gave it, as far as it can and never its last, once every birth of the
+    # phase is made: a mate's half of the brain costs it something, and a
+    # child's price is shared. The pilots' rule (Experiment 22), in the engine.
+    mate_pays: bool = False
 
     # Reach beyond a pair. A brain scores each candidate from that candidate's
     # column alone, so what it writes to one neighbour can never carry news of
@@ -773,6 +848,11 @@ class SimConfig:
             layout["SEEK"] = [nxt, nxt + 2]
             layout["ACCEPT"] = [nxt + 2, nxt + 4]
             nxt += 4
+        if self.link_upkeep != "off":
+            # Yes or no to paying a token to keep the link to each neighbour,
+            # read like the link decision (with LINK_MODE).
+            layout["UPKEEP"] = [nxt, nxt + 2]
+            nxt += 2
         layout["MESSAGE"] = [nxt, nxt + self.message_amount]
         return layout
 
@@ -895,6 +975,15 @@ class SimConfig:
             raise ValueError("mix_mates says who a newborn's brain is mixed with: it needs mix_at_birth")
         if self.buy_life and not self.max_age:
             raise ValueError("buy_life buys a life past max_age: it needs max_age")
+        if self.mate_pays and not self.mix_at_birth:
+            raise ValueError("mate_pays makes a mate pay for its child: it needs mix_at_birth")
+        if self.contest == "lottery" and self.allow_revolutions:
+            raise ValueError("contest = lottery draws a node's taker by chance, and a coalition belongs "
+                             "to the largest-stake rule: it needs allow_revolutions off")
+        if self.hidden_activation != "sigmoid" and self.brain_kind == "binary":
+            raise ValueError("hidden_activation shapes a float brain's units; a binary brain's are on or off")
+        if self.upkeep_to != "end" and self.link_upkeep == "off":
+            raise ValueError("upkeep_to says where a link's upkeep goes: it needs link_upkeep")
         if not 0.0 <= self.mutation_probability <= 1.0:
             raise ValueError("mutation_probability must be between 0 and 1")
         if not 0.0 <= self.mutation_sparsity <= 1.0:

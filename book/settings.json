@@ -6,6 +6,7 @@
   "k_neighbors",
   "rewire_p",
   "hidden_layers",
+  "hidden_activation",
   "brain_kind",
   "brain_bits",
   "message_amount",
@@ -14,6 +15,7 @@
   "message_prepass",
   "allow_handover",
   "allow_revolutions",
+  "contest",
   "allow_gifting",
   "random_decisions",
   "prune_after",
@@ -26,6 +28,9 @@
   "mend_on_death",
   "prune_needs",
   "valence",
+  "link_token",
+  "link_upkeep",
+  "upkeep_to",
   "keep_home",
   "max_age",
   "buy_life",
@@ -33,6 +38,7 @@
   "child_floor",
   "mix_at_birth",
   "mix_mates",
+  "mate_pays",
   "self_message",
   "link_search",
   "link_steering",
@@ -96,7 +102,7 @@
    "meaning": "How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases."
   },
   "redistribution": {
-   "meaning": "How the tokens of removed agents are shared: `uniform` gives every survivor the same chance at each token; `by_tokens` weights by what a survivor holds; `poorest` raises the poorest to one common level first; `newborns` gives them to this iteration's children, `parents` to their parents, once per child (both `uniform` in an iteration without births); `children` leaves each dead agent's estate to its own living children (`uniform` where there are none)."
+   "meaning": "How the tokens of removed agents are shared: `uniform` gives every survivor the same chance at each token; `by_tokens` weights by what a survivor holds; `poorest` raises the poorest to one common level first; `newborns` gives them to this iteration's children, `parents` to their parents, once per child (both `uniform` in an iteration without births); `children` leaves each dead agent's estate to its own living children (`uniform` where there are none); `local` lets each estate flow through the network to the nearest living agents, split evenly at every step."
   },
   "tokens_created_per_phase": {
    "meaning": "Tokens added to the world at every cleanup. 0 keeps the supply fixed."
@@ -166,6 +172,24 @@
   },
   "child_floor": {
    "meaning": "The least a child may start with: min_child alone (fixed), or also the median holding of its parent's neighbours (neighbours), so that a world grows only as rich as it is."
+  },
+  "hidden_activation": {
+   "meaning": "The curve each hidden unit applies to its sum: `sigmoid`, which passes on at most a quarter of a change, so that deep brains barely respond to what they see, or `tanh`, the same S-shape centred on zero, through which a change still passes in several layers."
+  },
+  "contest": {
+   "meaning": "Who takes a contested node: the `largest` stake as the game weighs it, or a staker drawn by `lottery` with a chance in proportion to its stake (needs revolutions off)."
+  },
+  "link_token": {
+   "meaning": "Whether every link holds one token: its maker pays for it, a lapsing link gives it back to one of its ends, and a link of a dead agent to the end that lives on, so the links can never outnumber the tokens."
+  },
+  "link_upkeep": {
+   "meaning": "Whether an agent may pay a token an iteration to keep a link, each brain deciding for each neighbour: `paid_or_used` keeps a link that was paid for or used, `paid_only` only one that was paid for; `off`, only use keeps a link."
+  },
+  "upkeep_to": {
+   "meaning": "Where a link's upkeep goes: to the link's other end (`end`), or into the estate of the dead (`estate`), shared out by the world's redistribution rule."
+  },
+  "mate_pays": {
+   "meaning": "Under mix_at_birth, whether the mate pays the child as many tokens as the parent gave it, as far as it can and never its last."
   }
  }
 }

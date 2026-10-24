@@ -56,12 +56,23 @@ which it is.
 | `link_search` | `off` | agents may reach beyond their neighbours to propose links: `jump` (a walk of as many steps as tokens spent in one iteration), `walk` (a scout one step further each iteration paid for) or `reach` (a jump whose steps are free, as many as the tokens held would pay for); a paid step costs one token, paid to the agent it enters |
 | `link_steering` | `random` | which way a search steps: at random, or `looking` (to the neighbour the searcher would most like a link with) |
 | `link_consent` | `mutual` | who must agree to a link a search proposes: both ends, or `forced` (only the searcher); never to or from an agent at its valence |
+| `hidden_activation` | `sigmoid` | the curve of a hidden unit: `sigmoid`, or `tanh`, centred on zero, through which a change still passes in deep brains; float brains only |
+| `contest` | `largest` | who takes a contested node: the largest stake (or a coalition), or `lottery`, a staker drawn in proportion to its weighed stake (Tullock's contest); the lottery needs `allow_revolutions=false` |
+| `mate_pays` | `false` | under `mix_at_birth`, the mate pays the child what the parent gave, as far as it can and never its last token |
+| `link_token` | `false` | every link holds one token, paid by its maker (no token, no link); a lapsing link gives it to one of its ends at random, a dead agent's link to the end that lives on, a handed link keeps it |
+| `link_upkeep` | `off` | a brain may pay a token an iteration to keep a link (its UPKEEP head, never its last token): `paid_or_used` keeps a link paid for or used, `paid_only` only one paid for |
+| `upkeep_to` | `end` | where upkeep goes: the link's other end, or the `estate` of the dead; needs `link_upkeep` |
 
 The nine from `mutate_on_replication` to `min_child` were added together on
 2026-10-12 for Part V of the book, from the pilots in `research/oee/` (`LOG.md`
 there says which failure each answers). `mix_at_birth` and the three for links to strangers followed on 2026-10-16,
 from the prototype's `mix` (`research/oee/pilots/proto.py`), the rule of the
 pilot worlds that came closest to a healthy and diverse one (the book's Meta X).
+The six from `hidden_activation` to `upkeep_to`, and `redistribution=local`
+(each estate flowing through the network to the nearest of the living),
+followed on 2026-10-24 from the author's walkthrough of every setting
+(`research/screen/walkthrough.md`); `contest`, `mate_pays` and `link_token`
+are the prototype's rules of those names, moved into the engine.
 
 ### What a new run is offered
 
