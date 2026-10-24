@@ -1207,7 +1207,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-09",
-      "summary": "Does what a brain sees reach what it does? Which decisions did evolution change, and in which direction? Which of its inputs does a brain listen to — its own wealth, its neighbour's, the messages, or the noise?"
+      "summary": "Every agent decides with a brain of 15,795 numbers, and we tested the brains of thirty B1 worlds at the end of their runs. They are nearly blind: a change in what a brain sees reaches what it does about a thousand times smaller."
     },
     {
       "id": "what-agents-say-to-each-other",
@@ -1219,7 +1219,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-09",
-      "summary": "Does an agent say different things to different neighbours? What does a message tell its reader: about the writer, about the reader, about the world? Do kin speak alike? Could an agent recognise its kin by what they say?"
+      "summary": "Each agent writes a message of 30 numbers to itself and to each neighbour, and nothing but the brains gives the numbers a meaning. At the end of thirty B1 worlds, two messages of one agent differ by 0.0005, while those of two agents differ by 0.60."
     },
     {
       "id": "do-the-brains-matter",
