@@ -191,6 +191,6 @@ shorter than 10.
 
 ← [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](bootstrap.md) →
 
-> [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md) · [How worlds are measured](how-worlds-are-measured.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Splitting variation: where, who and chance, and between worlds and within them](variance-split.md)
+> [!info]- Pages that link here (9)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Power laws, real and apparent](power-laws-real-and-apparent.md) · [Physical inspiration](physical-inspiration.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [Splitting variation: where, who and chance, and between worlds and within them](variance-split.md)
 <!-- /turns -->

@@ -334,6 +334,6 @@ its figure gives every step.
 
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 
-> [!info]- Pages that link here (5)
-> [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md)
+> [!info]- Pages that link here (6)
+> [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md)
 <!-- /turns -->

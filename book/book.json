@@ -1108,7 +1108,7 @@
       ],
       "status": "draft",
       "added": "2026-10-09",
-      "summary": "Have the agents simply not had the time to learn to cooperate? What does a world do over a hundred thousand iterations, thirty times longer than any world of this notebook has lived? Does a world settle, or does it keep wandering? Does anything appear late that was not there early? How can a run that lasts a month be watched, so that it stops when something goes wrong and says so when something stands out?"
+      "summary": "This experiment has not been played: it is a plan, written on 9 October 2026. One world of B1, the first baseline, at 204,800 tokens, would be left for 100,000 iterations and checked every 500."
     },
     {
       "id": "open-ended-test",
