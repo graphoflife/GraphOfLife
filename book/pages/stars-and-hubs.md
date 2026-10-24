@@ -107,6 +107,6 @@ at random, a brain may choose at most 8 links
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (7)
-> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
+> [!info]- Pages that link here (8)
+> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

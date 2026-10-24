@@ -186,6 +186,6 @@ longer makes.
 
 [Methods and statistics](../README.md#methods-and-statistics) · [The lab, the engine and pilots](the-lab.md) →
 
-> [!info]- Pages that link here (3)
-> [Where tokens flow](where-the-tokens-flow.md) · [Healthy and rich](healthy-and-rich.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (4)
+> [Where tokens flow](where-the-tokens-flow.md) · [Healthy and rich](healthy-and-rich.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
