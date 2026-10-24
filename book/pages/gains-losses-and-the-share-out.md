@@ -57,6 +57,6 @@ cleanup report of each frame.
 
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
-> [!info]- Pages that link here (3)
-> [Glossary](glossary.md) · [Gains and losses](gains-and-losses.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (4)
+> [Glossary](glossary.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

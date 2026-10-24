@@ -536,7 +536,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "What does one game do to the agents: how many die, lose, keep exactly what they had, or gain? Does that depend on how rich an agent is? Do tokens run \"downhill\", from agents richer than their neighbours to agents poorer than them?"
+      "summary": "Every token is staked in every game. Yet in a settled world nearly half the agents end a game with exactly what they had, because what they send out comes back."
     },
     {
       "id": "the-largest-and-the-smallest",
@@ -549,7 +549,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-11",
-      "summary": "How rich is the richest agent, and how well connected the best-connected? Who comes first, and for how long? Why is the largest gain of a game about as large as the largest loss?"
+      "summary": "In a settled world, the richest agent holds about 2% of all tokens and the best-connected some 640 connections; the median agent has 2."
     },
     {
       "id": "what-keeps-wealth-spread",

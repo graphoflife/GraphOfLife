@@ -79,6 +79,6 @@ tokens, 37%, 23%, 4% and 1,399).
 
 ← [How a world breaks](how-a-world-breaks.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Stars and hubs](stars-and-hubs.md) →
 
-> [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The even split](even-split.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Stars and hubs](stars-and-hubs.md) · [Assortativity](assortativity.md) · [The random twin: is a world a space?](random-twin.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Stars and hubs](stars-and-hubs.md) · [Assortativity](assortativity.md) · [The random twin: is a world a space?](random-twin.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

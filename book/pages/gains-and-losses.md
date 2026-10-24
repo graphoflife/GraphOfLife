@@ -1,22 +1,369 @@
 # Gains and losses
 
-In every game every [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stakes **all** of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), on its own node and on
-its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' ([One iteration, step by step](one-iteration.md)), and every node ends the
-game holding exactly the tokens staked on it. So a game reshuffles every token
-of the world, every iteration. This page asks what that does to the agents
-one by one: who gains, who loses, who dies — and whether there is a law to it.
-
 > [!question] Questions of this page
-> - What does one game do to the agents: how many die, lose, keep exactly what
+> - What does one game do to the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."): how many die, lose, keep exactly what
 >   they had, or gain?
-> - Does that depend on how rich an agent is?
-> - Do tokens run "downhill", from agents richer than their neighbours to
+> - Does that depend on how rich an agent is? What becomes of a rich agent
+>   with few [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")?
+> - Do [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") run "downhill", from agents richer than their [neighbours](the-world.md#the-network "An agent joined to another by a connection.") to
 >   agents poorer than them?
 > - How large is the lottery in which the tokens of the dead are dealt out?
 
-The worlds are the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds);
-where the thirty of 10,000 tokens this page was first written from differ,
-both are given.
+## In short
+
+Every token is staked in every game. Yet in a settled world nearly half the
+agents end a game with exactly what they had, because what they send out comes
+back. The poorest live on a coin toss: an agent with one token dies in 30% of
+games, and the survivors multiply their tokens. The rich lose: agents with 100
+tokens or more shrink by 48% in a game on average, and those with few
+connections die most often. Tokens run downhill, from agents richer than their
+neighbours to poorer ones. So a rich agent with few connections drains back,
+within a few games, to the share its connections give it.
+
+## The bookkeeping of a game
+
+A game reshuffles every token of a world, every iteration. Each agent stakes
+**all** of its tokens, on its own node and on its neighbours' nodes. Every
+node then ends the game holding exactly the tokens staked on it
+([One iteration, step by step](one-iteration.md#phase-2-the-game)). This page
+follows what that does to each agent: who gains, who loses, who dies, and
+whether there is a law to it.
+
+Start with two neighbours. A holds 6 tokens and B holds 2. A stakes 3 at home
+and 3 on B; B stakes 1 at home and 1 on A. After the game A's node holds
+3 + 1 = 4 tokens: its change is Δ = −2. B's node holds 1 + 3 = 4, a change of
+Δ = +2. Now suppose A had put 5 at home and only 1 on B. Then the two stakes
+across the connection would have matched. Neither balance would have changed:
+A would hold 5 + 1 = 6, and B 1 + 1 = 2.
+
+The rule behind the example is simple. What an agent puts on its own node, it
+keeps. What it puts on a neighbour's node, it loses. What others put on its
+node, it gains. To write it down, let *a*(*u* → *v*) be the tokens agent *u*
+stakes on node *v*. Here *v* is *u* itself or one of its neighbours. Every
+agent stakes everything, so Σᵥ *a*(*u* → *v*) = τᵤ, the tokens *u* held at the
+start. After the game node *u* holds the stakes on it, so its change is
+
+$$
+\Delta_u \;=\; \underbrace{\sum_{v \ne u} a(v \to u)}_{\text{staked on } u \text{ by others}} \;-\; \underbrace{\sum_{v \ne u} a(u \to v)}_{\text{staked by } u \text{ on others}} .
+$$
+
+In words: the tokens others staked on *u*, minus the tokens *u* staked on
+others. An agent's change is exactly zero when the two are equal: what goes
+out comes back.
+
+Who *wins* a node, and so whose [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") the node takes, is a separate question
+([How a coalition takes a node](revolution.md)). The tokens stay with the
+node, whoever wins it. So on this page an agent is its node, as in the frames
+a run records ([What a run records](frames-and-stats.md)).
+
+The worlds are the thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 100,000 tokens of Experiment 10
+([Thirty worlds](a-worlds-life.md#thirty-worlds)). This page was first written
+from the thirty worlds of 10,000 tokens; where those differ, both numbers are
+given.
+
+## What one game does
+
+<!-- figure gains/outcome -->
+![What one game does to the agents](../figures/gains/outcome.svg)
+
+**What one game does to the agents.** Every agent alive at the start of a game ends it in one of five ways: it starved (no one staked on its node), it was cut off from the largest piece of the network, or it survived holding fewer tokens, exactly as many, or more than before. Left: the game of iteration 0 in all 30 worlds. Right: every game from iteration 500 on in the 30 worlds, pooled.
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+>
+> 1. Take the rows with `phase` = 2 (iteration 0, or 500 to 1,499).
+> 2. Sum over them: `nodes_before` (agents at the start), `starved`, `orphaned`, `gainers`, `losers`, and `nodes` − `gainers` − `losers` (survivors whose tokens did not change).
+> 3. Divide each sum by the sum of `nodes_before` and stack the shares.
+>
+> **To make it again:** `python3 book_figures.py gains`.
+<!-- /figure -->
+
+The first game is a scramble. Of the agents alive at its start, 57% lose
+tokens and 41% gain. Fewer than one in a hundred come out with exactly what
+they had. Few die in it. 0.8% starve: nobody, not even they themselves, staked
+on their node. And 0.4% are cut off from the network. The worlds of 10,000
+tokens were different. Their [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") had four neighbours each instead of ten,
+and their first game was violent: 3.8% starved and 4.0% were cut off.
+
+Settled games, from iteration 500 on, are calm. 0.7% starve and 2.1% are cut
+off; 24% lose and 26% gain. And **47% of the agents end the game with exactly
+the tokens they began with**. Nearly half the world is, in tokens, untouched
+by a game in which every token was staked.
+
+That is not because they stake nothing on their neighbours: 71% of the tokens
+staked go to neighbours ([How the game is played](how-the-game-is-played.md)).
+It is because what they send out comes back in equal measure.
+[Where tokens flow](where-the-tokens-flow.md#the-budget-of-a-game) counts how
+much: 51% of all the tokens staked in a settled game are matched by a stake
+coming back.
+
+How much changes hands? In a settled world of about 14,400 agents, some 3,800
+agents gain in a game and 3,600 lose. The largest single gain is about 1,400
+tokens, and the largest loss about 1,400. That is a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s worth, changing
+hands in one game
+([The largest gain is the largest loss](the-largest-and-the-smallest.md#the-largest-gain-is-the-largest-loss)).
+At 10,000 tokens it was 330 and 320 agents, and about 640 and 620 tokens.
+
+## Rich and poor
+
+<!-- figure gains/by-tokens -->
+![What a game does, by how rich an agent was](../figures/gains/by-tokens.svg)
+
+**What a game does, by how rich an agent was.** Agents alive at the start of a game, sorted by the tokens they held then; for each class, the share that died in the game (starved or cut off), and of the rest the shares that lost tokens, kept exactly as many, or gained. From the games of every 100th iteration from 500 on, in the 30 worlds (4,520,044 agents in all).
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
+>
+> 1. For every 100th iteration t from 500 on, take each agent in frame `2·t` (the start of the game) with its `tokens`.
+> 2. Find it in frame `2·t + 1`: if it is not there, it died in the game; if it is, its `delta` there is its change over the game.
+> 3. Sort the agents by their tokens at the start into the classes shown, and count the four outcomes in each class.
+>
+> **To make it again:** `python3 book_figures.py gains`.
+<!-- /figure -->
+
+The picture changes completely with wealth.
+
+- **One token.** An agent with a single token can stake it at home or on one
+  neighbour. It cannot lose without dying: if it sends its token away and
+  nobody stakes on it, its node holds nothing. In a game, 30% of 1-token
+  agents die, 61% gain, and only 9% stay at 1. The survivors gain a lot: their
+  tokens grow by 321% on average (416% at 10,000 tokens). A node with its own
+  token on it and a neighbour's stake besides holds several times what it had.
+- **The middle.** Agents with 2 to 9 tokens most often keep exactly what they
+  had (42% to 60%), and die rarely (1.1% to 3.6%).
+- **The rich.** Agents with 100 tokens or more lose in 61% of games and gain
+  in 33%. They almost never keep exactly what they had (0.7%). On average,
+  over those that survive the game, their tokens shrink by 48% in one game.
+  Those with 50 to 99 tokens shrink by 18%.
+
+The risk of dying is U-shaped. It is high for the poorest and lowest in the
+middle. For the rich it rises again, to 4.7% per game for agents with 100
+tokens or more. Which rich agents die? Almost only those with few connections.
+Among the agents with 100 tokens or more in the sample, the share that died in
+the game falls steeply with their connections:
+
+| connections | 1–2 | 3–9 | 10+ |
+|---|---|---|---|
+| agents with 100 tokens or more, in the sample | 4,845 | 4,978 | 4,757 |
+| died in the game | 10.4% | 3.1% | 0.7% |
+
+All these shares are as at 10,000 tokens, within a few points.
+
+A rich agent with one connection can die in two ways of its own, both visible
+in the rules. It can put all its tokens on its neighbour while nobody stakes
+on it. Then it starves, and its tokens are not lost: they have moved to the
+neighbour's node. Or its connection carries nothing in the game and is cut.
+Then it is cut off, and dies with its tokens. Otherwise it can only go with
+its branch. That happens when a connection further in is cut, so that its
+whole branch is no longer joined to the largest piece.
+
+## Tokens run downhill
+
+Picture the tokens of a world as a landscape. An agent richer than its
+neighbours stands on a hill; an agent poorer than them sits in a valley. The
+**token curvature** says how deep a valley or how high a hill is
+([Token curvature](token-curvature.md)). It adds up, over an agent's
+neighbours *N*(*u*), how many more tokens each holds than the agent does:
+
+$$
+\kappa(u) = \sum_{v \in N(u)} (\tau_v - \tau_u) .
+$$
+
+It is negative for an agent on a hill, richer than its neighbourhood, and
+positive for one in a valley.
+
+<!-- figure gains/downhill -->
+![Tokens run downhill](../figures/gains/downhill.svg)
+
+**Tokens run downhill.** The token curvature of an agent is the sum, over its neighbours, of how many more tokens the neighbour holds than it does ([Token curvature](token-curvature.md)): negative for an agent richer than its neighbourhood, positive for one poorer. For each class of curvature, the mean change of an agent's tokens over the game divided by the tokens it held at the start, over the agents that survived the game. Yellow: all agents; cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the pattern. A class with fewer than 1,000 agents is left out (drawn at 0).
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
+>
+> 1. For every 100th iteration t from 500 on, read frame `2·t`: for every agent u, κ(u) = Σ over its neighbours v of (τ(v) − τ(u)).
+> 2. Find each agent in frame `2·t + 1` and take its `delta` (agents not there died and are left out).
+> 3. Sort by κ into the classes shown and average `delta` / τ(u) in each.
+>
+> **To make it again:** `python3 book_figures.py gains`.
+<!-- /figure -->
+
+The tokens run downhill. Agents in deep valleys (κ > 50) gain 74% on average
+in a game; agents on hills (κ < −50) lose 6.5%. At 10,000 tokens it was 113%
+and 6.6%.
+
+Is that only because valleys are poor and hills rich, and we saw above that
+the poor gain? The cyan line answers. Take only agents that hold 3 to 9
+tokens. Those in valleys still gain: +39% above κ = 50 (+63% at 10,000
+tokens). And those on hills still lose: −7% between κ = −10 and −3.
+
+One class goes the other way. The few agents of 3 to 9 tokens on the steepest
+hills, κ < −50, gain. They are hubs among many poorer neighbours. With fewer
+tokens than neighbours, they cannot send one token to each, while each
+neighbour sends them one or two.
+
+There is a reason to expect the tokens to run downhill. Suppose every agent
+split its tokens evenly over its own node and its *d* neighbours, and every
+agent had the same number *d*. Node *u* would receive τᵤ/(*d*+1) from itself
+and τᵥ/(*d*+1) from each neighbour, so
+
+$$
+\Delta_u = \frac{\tau_u + \sum_{v \in N(u)} \tau_v}{d+1} - \tau_u = \frac{\kappa(u)}{d+1} .
+$$
+
+The change would be **proportional to the curvature**. This is the discrete
+heat equation, in which heat flows from warm to cold in proportion to the
+difference ([Physical inspiration](physical-inspiration.md)). Real agents do
+not split exactly evenly, and [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") differ. That is why the relation is a
+tendency and not a law. But
+[Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk) shows
+how close to an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") the brains in fact play.
+
+## How a rich agent drains back
+
+If the rich lose 48% of their tokens in a game, how can the [richest tenth](richest-tenth.md "The share of all tokens held by the richest tenth of the agents.")
+always hold 42% of all tokens
+([Inequality over time](where-do-the-tokens-go.md#inequality-over-time))?
+Because wealth has places where it can rest, and whoever sits in such a place
+is rich, game after game.
+
+The places are set by the connections. Under the even split, tokens move like
+a random walk. The walk comes to rest when every agent holds tokens in
+proportion to its connections plus one
+([Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+Call that an agent's **resting share**. In the thirty worlds after their last
+game, rest would mean 1.7 tokens for each candidate: an agent's own node, and
+each neighbour's. Agents of every class of connections hold about that on
+average
+([How properties scale together](how-properties-scale-together.md#tokens-and-connections)).
+So an agent with one connection rests at about 3.4 tokens, and a hub with a
+hundred connections at about 170.
+
+A rich agent with few connections is far above its resting share, and the even
+split takes the excess away. Take an agent with one connection, holding τ
+tokens, and write *s* for the tokens per candidate at rest. The agent keeps
+τ/2 at home and stakes τ/2 on its neighbour. If the neighbour holds its own
+resting share, it stakes *s* on each of its candidates, so *s* comes back. The
+agent ends the game with τ/2 + *s*. Its resting share is 2*s*, and its excess
+over it has halved:
+
+$$
+\left(\frac{\tau}{2} + s\right) - 2s = \frac{\tau - 2s}{2} .
+$$
+
+An agent with one connection and 40 tokens ends such a game with about 22. If
+little comes back in the next games either, the excess halves again and again.
+Within a few games, little of it is left at the agent. The tokens are not
+lost. They run downhill into the neighbourhood, and spread from there.
+
+Real agents do not split exactly evenly. But the rich do lose: those with 100
+tokens or more shrink by 48% in a game on average. And many of the richest are
+rich far beyond their place. Take the tail of the distribution of tokens: the
+3,358 agents that held 49 tokens or more after the last game of the thirty
+worlds. Of them, 33% have only one or two connections
+([Power laws, real and apparent](power-laws-real-and-apparent.md#the-tokens-a-power-law-in-the-tail)).
+
+Some die before they drain. A rich agent with one or two connections dies in
+about one game in ten ([Rich and poor](#rich-and-poor)). If it is cut off, the
+share-out deals its tokens out among all the survivors
+([The lottery](#the-lottery)). Either way, its wealth returns to the world.
+
+Wealth that sits on many connections is near its resting share, and lasts.
+Nearly half of the richest hundredth of a world are hubs with ten connections
+or more. The survivors among the richest keep 87% of their tokens over ten
+games, in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
+([The fate of the richest](where-do-the-tokens-go.md#the-fate-of-the-richest)).
+Even there, wealth sways. On a hub with many leaves the even split overshoots.
+Tokens slosh between the hub and its leaves, with a period of two games
+([A two-game rhythm](where-do-the-tokens-go.md#a-two-game-rhythm)).
+
+So the rich are replaced as fast as they shrink: tokens pile up again wherever
+there are many connections. Who is rich is mostly a matter of **where** an
+agent is.
+
+## The lottery
+
+When the cleanup removes the agents cut off from the network, it pools their
+tokens. Then it deals them out, token by token, to survivors drawn at random,
+every survivor with the same chance
+([Gains, losses and the share-out](gains-losses-and-the-share-out.md#the-share-out)).
+
+<!-- figure gains/lottery -->
+![Tokens shared out among the survivors](../figures/gains/lottery.svg)
+
+**Tokens shared out among the survivors.** How many tokens the cleanup dealt out at random among the survivors — the tokens of the agents that were cut off — after each game (green) and after each reproduction phase (cyan), on a logarithmic axis. For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+
+> [!example]- How to make this figure
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+>
+> 1. Take `redistributed` of the rows with `phase` = 2 and of those with `phase` = 1.
+> 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
+> 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
+>
+> **To make it again:** `python3 book_figures.py gains`.
+<!-- /figure -->
+
+In a settled world, about 1,300 tokens are dealt out after each game, and
+about 210 after each reproduction phase. Per agent and game that is 0.10
+tokens (the thirty worlds: 0.05 to 0.15; 0.11 at 10,000 tokens): on average
+one token every ten games. That is small. But half of all agents hold 5 tokens
+or fewer, and for an agent with 1 token, one lottery token doubles its wealth.
+The share-out is a small basic income that matters only to the poor.
+[The estate of the dead](estate.md) shows what other ways of sharing the
+tokens out would do.
+
+## What we learned
+
+- **A game is an exchange, plus diffusion.** Nearly half the agents end a game
+  with exactly what they had, because what they send out comes back. What does
+  move runs downhill, from agents richer than their neighbourhood to agents
+  poorer than it. In tokens, a world works much like heat spreading through a
+  network.
+- **The poor live on a knife's edge.** Nearly a third of 1-token agents die in
+  every game; the survivors multiply their tokens. Being poor in this world is not a
+  slow decline, it is a coin toss.
+- **Wealth above its resting share does not last.** A rich agent with few
+  connections loses its excess to its neighbours within a few games. Or it
+  dies on its dead end, and its tokens are shared out. The rich are replaced
+  where connections are many.
+- **Wealth is a place, not a memory.** An agent's tokens drain back to the
+  share its connections give it, so its wealth cannot record that its brain
+  did well in the past. For evolution, that matters: selection needs
+  differences in success that last long enough to be inherited
+  ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)).
+- **The share-out is a lottery for the poor.** It deals out 0.10 tokens per
+  agent and game: nothing to the rich, and a doubling to an agent with one
+  token.
+
+## Where to go next
+
+- [Where tokens flow](where-the-tokens-flow.md): where each staked token goes,
+  and the random walk that sets every agent's resting share.
+- [How unequal is a world, and who stays rich](where-do-the-tokens-go.md#do-the-rich-stay-rich):
+  whether the same agents stay rich, game after game.
+- [The largest and the smallest](the-largest-and-the-smallest.md): the richest
+  agent, the largest gain and loss of a game, and the stars.
+- [Token curvature](token-curvature.md): the hills and valleys of wealth, and
+  where the name comes from.
+
+## How this was made
+
+Every figure of this page reads the thirty runs of Experiment 10, listed
+below. They are worlds of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") B1 at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30,
+run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
+them, and `python3 book_figures.py gains` draws every figure of this page.
+Each figure says, folded beneath it, which runs it reads and how. The numbers
+given for the worlds of 10,000 tokens come from the thirty runs of
+Experiment 2, from which this page was first written.
+
+### The runs of Experiment 10
 
 <!-- runs E10 -->
 > [!info]- The runs behind this page
@@ -76,225 +423,22 @@ both are given.
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-## The bookkeeping of a game
+## How our view changed
 
-Write *a*(*u* → *v*) for the tokens agent *u* stakes on node *v* (where *v*
-is *u* itself or one of its neighbours). Every agent stakes everything, so
-Σᵥ *a*(*u* → *v*) = τᵤ, its tokens at the start. After the game node *u* holds
-the stakes on it, so its change is
-
-$$
-\Delta_u \;=\; \underbrace{\sum_{v \ne u} a(v \to u)}_{\text{staked on } u \text{ by others}} \;-\; \underbrace{\sum_{v \ne u} a(u \to v)}_{\text{staked by } u \text{ on others}} .
-$$
-
-What an agent puts on its own node it keeps; what it puts elsewhere it loses;
-what others put on it it gains. **An example.** A holds 6 tokens and B 2, and
-they are neighbours. A stakes 3 at home and 3 on B; B stakes 1 at home and 1
-on A. After the game A's node holds 3 + 1 = 4 (Δ = −2) and B's 1 + 3 = 4
-(Δ = +2). Had A put 5 at home and only 1 on B, the two stakes across the
-[connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") would have matched, and neither balance would have changed (A:
-5 + 1 = 6, B: 1 + 1 = 2). Exactly-zero changes come from exactly that: what
-goes out comes back.
-
-Who *wins* a node — whose [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") it takes — is a separate matter
-([How a coalition takes a node](revolution.md)): the tokens are the
-node's whoever wins it. This page is about the tokens; the identity of an
-agent here is its node, as in the frames.
-
-## What one game does
-
-<!-- figure gains/outcome -->
-![What one game does to the agents](../figures/gains/outcome.svg)
-
-**What one game does to the agents.** Every agent alive at the start of a game ends it in one of five ways: it starved (no one staked on its node), it was cut off from the largest piece of the network, or it survived holding fewer tokens, exactly as many, or more than before. Left: the game of iteration 0 in all 30 worlds. Right: every game from iteration 500 on in the 30 worlds, pooled.
-
-> [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
->
-> 1. Take the rows with `phase` = 2 (iteration 0, or 500 to 1,499).
-> 2. Sum over them: `nodes_before` (agents at the start), `starved`, `orphaned`, `gainers`, `losers`, and `nodes` − `gainers` − `losers` (survivors whose tokens did not change).
-> 3. Divide each sum by the sum of `nodes_before` and stack the shares.
->
-> **To make it again:** `python3 book_figures.py gains`.
-<!-- /figure -->
-
-The first game is a scramble. Of the agents alive at its start, 57% lose
-tokens and 41% gain; fewer than one in a hundred come out with exactly what
-they had. Few die in it: 0.8% starve — nobody, not even they themselves,
-staked on their node — and 0.4% are cut off from the network. (In the worlds
-of 10,000 tokens, whose [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") had four neighbours each instead of ten, the
-first game was violent: 3.8% starved and 4.0% were cut off.)
-
-Settled games are calm. 0.7% starve and 2.1% are cut off; 24% lose and 26%
-gain; and **47% of the agents end the game with exactly the tokens they began
-with**. Nearly half the world is, in tokens, untouched by a game in which every
-token was staked. That is not because they stake nothing on their neighbours —
-71% of staked tokens go to neighbours ([How the game is played](how-the-game-is-played.md)) —
-but because what they send out comes back in equal measure
-([Where the tokens flow](where-the-tokens-flow.md) counts how much of the flow is
-returned).
-
-In numbers per game in a settled world of about 14,400: some 3,800 agents
-gain, 3,600 lose; the largest single gain is about 1,400 tokens and the
-largest loss about 1,400 — a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s worth, changing hands in one game. (At
-10,000 tokens: 330 and 320 agents, and about 640 and 620 tokens.)
-
-## Rich and poor
-
-<!-- figure gains/by-tokens -->
-![What a game does, by how rich an agent was](../figures/gains/by-tokens.svg)
-
-**What a game does, by how rich an agent was.** Agents alive at the start of a game, sorted by the tokens they held then; for each class, the share that died in the game (starved or cut off), and of the rest the shares that lost tokens, kept exactly as many, or gained. From the games of every 100th iteration from 500 on, in the 30 worlds (4,520,044 agents in all).
-
-> [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
->
-> **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
->
-> 1. For every 100th iteration t from 500 on, take each agent in frame `2·t` (the start of the game) with its `tokens`.
-> 2. Find it in frame `2·t + 1`: if it is not there, it died in the game; if it is, its `delta` there is its change over the game.
-> 3. Sort the agents by their tokens at the start into the classes shown, and count the four outcomes in each class.
->
-> **To make it again:** `python3 book_figures.py gains`.
-<!-- /figure -->
-
-The picture changes completely with wealth.
-
-- **One token.** An agent with a single token can stake it at home or on one
-  neighbour. It cannot lose without dying: if it sends its token away and
-  nobody stakes on it, its node holds nothing. 30% of 1-token agents die in a
-  game; 61% gain; only 9% stay at 1. The survivors gain a lot: their tokens
-  grow by 321% on average — a node with one token on it and a neighbour's
-  stake besides holds several times what it had.
-- **The middle.** Agents with 2 to 9 tokens mostly keep exactly what they had
-  (42% to 60%) and die rarely (1.1% to 3.6%).
-- **The rich.** Agents with 100 tokens or more lose in 61% of games, gain in
-  33%, almost never keep exactly what they had (0.7%) — and on average their
-  tokens shrink by 48% in one game. Those with 50 to 99 shrink by 18%.
-
-The risk of dying is U-shaped: high for the poorest, lowest in the middle,
-higher again for the rich — 4.7% per game for agents with 100 tokens or more.
-Which rich agents die? Almost only those with few connections: of the rich
-agents in the sample with one or two connections, 10.4% died in the game;
-with three to nine, 3.1%; with ten or more, 0.7%. All of this is as at 10,000
-tokens, within a few points. A rich agent with one connection
-dies in one of two ways of its own, both visible in the rules: it puts all its
-tokens on its neighbour and nobody stakes on it (it starves — its tokens are
-not lost, they moved to the neighbour's node), or its connection carries
-nothing and is cut, and it is cut off with its tokens. Otherwise it can only
-go with its branch, when a connection further in is cut and the part of the
-network it hangs on is no longer joined to the largest piece.
-
-If the rich lose 48% per game, why is there always a rich tenth holding 42%
-of the tokens ([Where do the tokens go?](where-do-the-tokens-go.md))? Because the rich
-are replaced as fast as they shrink: tokens pile up again wherever there are
-many connections. Who is rich is mostly a matter of **where** an agent is.
-[Where the tokens flow](where-the-tokens-flow.md) shows the law behind it.
-
-## Tokens run downhill
-
-How does an agent's wealth compare with its neighbours'? The **token
-curvature** ([Token curvature](token-curvature.md)) adds up, over its
-neighbours, how many more tokens each holds than it does:
-
-$$
-\kappa(u) = \sum_{v \in N(u)} (\tau_v - \tau_u) .
-$$
-
-It is negative for an agent on a hill (richer than its neighbourhood),
-positive for one in a valley.
-
-<!-- figure gains/downhill -->
-![Tokens run downhill](../figures/gains/downhill.svg)
-
-**Tokens run downhill.** The token curvature of an agent is the sum, over its neighbours, of how many more tokens the neighbour holds than it does ([Token curvature](token-curvature.md)): negative for an agent richer than its neighbourhood, positive for one poorer. For each class of curvature, the mean change of an agent's tokens over the game divided by the tokens it held at the start, over the agents that survived the game. Yellow: all agents; cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the pattern. A class with fewer than 1,000 agents is left out (drawn at 0).
-
-> [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
->
-> **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
->
-> 1. For every 100th iteration t from 500 on, read frame `2·t`: for every agent u, κ(u) = Σ over its neighbours v of (τ(v) − τ(u)).
-> 2. Find each agent in frame `2·t + 1` and take its `delta` (agents not there died and are left out).
-> 3. Sort by κ into the classes shown and average `delta` / τ(u) in each.
->
-> **To make it again:** `python3 book_figures.py gains`.
-<!-- /figure -->
-
-The tokens run downhill. Agents in deep valleys (κ > 50) gain 74% on
-average in a game; agents on hills (κ < −50) lose 6.5%. Is that only because
-valleys are poor and hills rich, and we saw above that the poor gain? The cyan
-line answers: among agents that all hold 3 to 9 tokens, those in valleys still
-gain (+39% above κ = 50) and those on hills still lose (−7% between −10 and
-−3). (The few agents of 3 to 9 tokens on the steepest hills, κ < −50, gain:
-they are hubs among many poorer neighbours, and with fewer tokens than
-neighbours they cannot send one token to each, while each neighbour sends
-them one or two.)
-
-There is a reason to expect exactly this. Suppose every agent split its
-tokens evenly over its own node and its *d* neighbours, and every agent had
-the same number *d*. Node *u* would receive τᵤ/(*d*+1) from itself and
-τᵥ/(*d*+1) from each neighbour, so
-
-$$
-\Delta_u = \frac{\tau_u + \sum_{v \in N(u)} \tau_v}{d+1} - \tau_u = \frac{\kappa(u)}{d+1} .
-$$
-
-The change would be **proportional to the curvature**: the discrete heat
-equation, in which heat flows from warm to cold in proportion to the
-difference. Real agents do not split exactly evenly, and [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") differ —
-which is why the relation is a tendency and not a law — but
-[Where the tokens flow](where-the-tokens-flow.md) shows how close to an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") the
-brains in fact play.
-
-## The lottery
-
-When the cleanup removes the agents cut off from the network, their tokens
-are pooled and dealt out, token by token, to survivors chosen at random
-([Gains and losses](gains-losses-and-the-share-out.md)).
-
-<!-- figure gains/lottery -->
-![Tokens shared out among the survivors](../figures/gains/lottery.svg)
-
-**Tokens shared out among the survivors.** How many tokens the cleanup dealt out at random among the survivors — the tokens of the agents that were cut off — after each game (green) and after each reproduction phase (cyan), on a logarithmic axis. For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
-
-> [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
->
-> 1. Take `redistributed` of the rows with `phase` = 2 and of those with `phase` = 1.
-> 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
-> 3. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
->
-> **To make it again:** `python3 book_figures.py gains`.
-<!-- /figure -->
-
-In a settled world, about 1,300 tokens are dealt out after each game and
-about 210 after each reproduction phase. Per agent and game that is 0.10
-tokens (the thirty worlds: 0.05 to 0.15; 0.11 at 10,000 tokens) — on average
-one token every ten games. Small: but half of all agents hold 5 tokens or
-fewer, and for an agent with 1 token, one lottery token doubles its wealth. The share-out is a small basic income that
-matters only to the poor.
-
-## What this means
-
-- **A game is mostly diffusion.** Tokens flow from agents richer than their
-  neighbourhood to agents poorer than it, nearly half the agents end a game
-  with exactly what they had, and the rich lose ground every game. A world
-  works, in tokens, much like heat spreading through a network.
-- **Wealth is a place, not a memory.** If an agent's tokens drain back to its
-  neighbourhood within a few games, its wealth cannot record that its brain
-  did well in the past. For evolution, that matters: selection needs
-  differences in success that last long enough to be inherited
-  ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)).
-- **The poor live on a knife's edge.** A third of 1-token agents die in every
-  game; the survivors multiply their tokens. Being poor in this world is not a
-  slow decline, it is a coin toss.
-
-To make every figure of this page: `python3 book_figures.py gains`.
+- **11 October 2026.** This page was first written, on 8 October, from the
+  thirty worlds of 10,000 tokens. On this day it was rewritten from the thirty
+  of 100,000 tokens, with the small worlds' numbers beside the new ones where
+  they differ. One claim changed with the size of a world. The page had called
+  the first game violent: 3.8% of the agents starved in it and 4.0% were cut
+  off. In the large worlds, whose founders have ten neighbours each instead of
+  four, few agents die in the first game.
+- **14 October 2026.** A pass through the whole notebook corrected two
+  statements. The page had given the founders of a world of 10,000 tokens five
+  neighbours each. They have four: the rules wire an odd number of neighbours
+  as one less. And the page had said that a rich agent with one connection
+  dies in one of two ways. It starves, or its only connection is cut. Those
+  are its two ways of its own. It can also go with its branch, when a
+  connection further in is cut.
 
 <!-- turns -->
 ---
