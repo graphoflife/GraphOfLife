@@ -133,7 +133,7 @@
   "n-bridges": "bridges",
   "n-gini-coefficient": "gini-coefficient",
   "n-richest-tenth": "gini-coefficient#the-richest-tenths-share",
-  "n-home-stake": "home-stake",
+  "n-home-stake": "how-the-game-is-played#staking-at-home-and-keeping-ones-node",
   "n-families": "genotype#families",
   "n-common-ancestor": "genotype#the-common-ancestor-of-the-living",
   "n-tokens-per-agent": "gini-coefficient#tokens-per-agent-mean-median-extremes",
@@ -327,6 +327,7 @@
   "assortativity": "degree#assortativity",
   "preferential-attachment": "degree#preferential-attachment-and-its-kernel",
   "scaling-relations": "degree#scaling-relations-between-agents-properties",
-  "correlation-function": "like-next-to-like#how-alike-at-a-distance"
+  "correlation-function": "like-next-to-like#how-alike-at-a-distance",
+  "home-stake": "how-the-game-is-played#staking-at-home-and-keeping-ones-node"
  }
 }

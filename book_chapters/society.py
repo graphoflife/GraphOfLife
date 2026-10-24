@@ -189,7 +189,7 @@ def game(ch: F.Chapter) -> None:
     h0, h1 = hist(first), hist(last)
     k = np.arange(len(labels))
     ch.figure(
-        "home-stake", title="How much of its stake an agent puts on its own node",
+        "how-the-game-is-played", title="How much of its stake an agent puts on its own node",
         x={"label": "share of the agent's tokens staked on its own node", "categories": labels},
         y={"label": "share of agents", "min": 0},
         series=[{"label": f"the first game: {len(first):,} agents of {len(specs)} worlds", "kind": "bars",
@@ -285,7 +285,7 @@ def game(ch: F.Chapter) -> None:
                                 ["Take the rows with `phase` = 2 and the statistics "
                                  + ", ".join(f"`{s}`" for s, _ in stats)
                                  + " (`a/b` is the row's `a` divided by its `b`; "
-                                 "[Staking at home](home-stake.md) defines each).", *BAND_STEPS]))
+                                 "[Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node) defines each).", *BAND_STEPS]))
 
     # Where each world settles, statistic by statistic.
     order = ["spreadShare", "revoltShare", "heldHomeShare", "revolutions/nodes_before", "selfAllocationShare"]

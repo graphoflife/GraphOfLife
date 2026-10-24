@@ -167,7 +167,7 @@ anything revolutionary, and the hegemon always wins.
   the game.
 - [The share function f(a, b)](share-function.md): how a brain marks part of
   a stake revolutionary.
-- [Staking at home, and keeping one's node](home-stake.md): how often an
+- [Staking at home, and keeping one's node](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node): how often an
   agent keeps its own node.
 
 ## How our view changed
@@ -186,6 +186,6 @@ anything revolutionary, and the hegemon always wins.
 
 ← [Messages](messages.md) · [How the simulation works](../README.md#how-the-simulation-works) · [How a brain changes](mutation.md) →
 
-> [!info]- Pages that link here (20)
-> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Staking at home, and keeping one's node](home-stake.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (19)
+> [Glossary](glossary.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Seeds and the random stream](random-numbers.md) · [The share function f(a, b)](share-function.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Gains and losses](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Do agents cooperate?](do-agents-cooperate.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

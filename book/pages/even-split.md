@@ -118,10 +118,10 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 <!-- turns -->
 ---
 
-← [How the game is played](how-the-game-is-played.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Where tokens flow](where-the-tokens-flow.md) →
+← [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Where tokens flow](where-the-tokens-flow.md) →
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (5)
-> [Glossary](glossary.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [Where tokens go](where-tokens-go.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md)
+> [!info]- Pages that link here (6)
+> [Glossary](glossary.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [Where tokens go](where-tokens-go.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md)
 <!-- /turns -->

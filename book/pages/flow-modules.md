@@ -288,7 +288,7 @@ fifths.
 <!-- turns -->
 ---
 
-← [Where tokens flow](where-the-tokens-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Staking at home, and keeping one's node](home-stake.md) →
+← [Where tokens flow](where-the-tokens-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) →
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 

@@ -254,7 +254,7 @@ lasting individuals struggles to build anything that lasts on top of them.
 **What could replace it.** An advantage for the incumbent, the agent already
 on the node. For instance, its own stake on its node could count double. Or a
 takeover could need the coalition's revolutionary part to exceed the
-hegemon's stake *and* the [home stake](home-stake.md "The tokens an agent stakes on its own node, to keep it."), what the agent stakes on its own node.
+hegemon's stake *and* the [home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it."), what the agent stakes on its own node.
 Then measure how long brains hold hubs, and whether partnerships appear.
 
 **What B2 did.** Two things. It gave the incumbent its advantage: a stake on

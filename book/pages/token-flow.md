@@ -33,7 +33,7 @@ agents staked, and which connections the game cut.
 | `netFlowShare` | the share of `totalFlow` left after cancelling each pair's two directions against each other ([below](#cancelling-the-net-flow)) |
 | `flowImbalance` | the share of `totalFlow` that must flow one way ([The ceiling: what conservation forbids](#the-ceiling-what-conservation-forbids)) |
 | `spreadShare` | the share of the agents that staked who spread their tokens rather than going all in ([What a brain says](brain-outputs.md)) |
-| `revoltShare` | the share of all staked tokens, [home stakes](home-stake.md "The tokens an agent stakes on its own node, to keep it.") included, marked revolutionary ([How a coalition takes a node](revolution.md)) |
+| `revoltShare` | the share of all staked tokens, [home stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it.") included, marked revolutionary ([How a coalition takes a node](revolution.md)) |
 | `prunedEdges` | the connections cut at the end of the game because nothing crossed them ([Why flow matters](#why-flow-matters)) |
 
 A run records the first three and the last three after every game. The
@@ -411,7 +411,7 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 <!-- turns -->
 ---
 
-← [Staking at home, and keeping one's node](home-stake.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token curvature](token-curvature.md) →
+← [Flow modules: the groups tokens stay in](flow-modules.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Token curvature](token-curvature.md) →
 
 > [!info]- Pages that link here (9)
 > [Glossary](glossary.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Help](help.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)

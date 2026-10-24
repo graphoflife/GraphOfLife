@@ -529,7 +529,7 @@ The six rules:
    partners. The "shadow of the future" that reciprocity needs, the chance of
    meeting the same partner again, is about 0.04 (0.05 at 10,000 tokens)
    ([Hubs are places](questioning-the-mechanics.md#hubs-are-places)).
-   *In B2* a [home stake](home-stake.md "The tokens an agent stakes on its own node, to keep it.") counts 1.5 times
+   *In B2* a home stake counts 1.5 times
    ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How often the same two brains
    meet again has not been measured there.
 4. **Nothing is positive-sum.** Tokens are conserved, and every stake is a

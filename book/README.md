@@ -93,11 +93,10 @@ How unequal a world is, who stays rich, and how gains and losses are shared out.
 How the game is played, where tokens flow, which loops they go round, and the groups they stay in.
 
 - [Where tokens go](pages/where-tokens-go.md)
-- [How the game is played](pages/how-the-game-is-played.md)
+- [How the game is played: what agents stake, and who wins the nodes](pages/how-the-game-is-played.md)
 - [The even split](pages/even-split.md)
 - [Where tokens flow](pages/where-the-tokens-flow.md)
 - [Flow modules: the groups tokens stay in](pages/flow-modules.md)
-- [Staking at home, and keeping one's node](pages/home-stake.md)
 - [Measuring the flow: token flow, lightning and circulation](pages/token-flow.md)
 - [Token curvature](pages/token-curvature.md)
 - [Flow modules and the map equation](pages/map-equation.md)

@@ -289,8 +289,9 @@
     },
     {
       "name": "home stake",
-      "page": "home-stake",
-      "says": "The tokens an agent stakes on its own node, to keep it."
+      "page": "how-the-game-is-played",
+      "says": "The tokens an agent stakes on its own node, to keep it.",
+      "anchor": "staking-at-home-and-keeping-ones-node"
     },
     {
       "name": "degree",

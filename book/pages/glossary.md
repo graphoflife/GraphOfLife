@@ -55,7 +55,7 @@ there.
 - **[health bar](health-bar.md)** — The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.
 - **[healthy world](what-makes-a-world-interesting.md)** (also interesting world) — A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.
 - **[hegemon](revolution.md)** — The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.
-- **[home stake](home-stake.md)** — The tokens an agent stakes on its own node, to keep it.
+- **[home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node)** — The tokens an agent stakes on its own node, to keep it.
 - **[hub](stars-and-hubs.md)** (also star) — An agent joined to far more agents than most; a star is a world held together by a single hub.
 - **[invasion test](invasion-test.md)** — A strategy planted as a patch in an evolved world: does it spread, or die out?
 - **[iteration](one-iteration.md)** — One step of a world's time: a phase of reproduction, then a phase of the game.

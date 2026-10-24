@@ -740,7 +740,7 @@ these matters.
 
 - **A world's averages follow its tokens.** Agents and connections grow in
   proportion to the tokens, with exponents 1.00 and 1.04. Inequality, [home
-  stakes](home-stake.md "The tokens an agent stakes on its own node, to keep it.") and genotypes per agent are the same at every size. For its
+  stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it.") and genotypes per agent are the same at every size. For its
   averages, a result found at 10,000 tokens holds from a few thousand tokens
   to hundreds of thousands. So size can be chosen for cost.
 - **Its ups and downs do not average out.** In every world, at every size, a

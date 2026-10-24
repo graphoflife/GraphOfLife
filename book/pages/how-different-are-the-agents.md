@@ -41,7 +41,7 @@ down to the random numbers — and compares what each one does.
 | decision | what it is |
 |---|---|
 | the stake | the shares of its tokens the agent puts on its own node and on each neighbour's |
-| kept at home | the share on its own node ([Staking at home](home-stake.md)) |
+| kept at home | the share on its own node ([Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node)) |
 | given to a child | the share it would give a child; 0 when no child would be made |
 | spread or all in | 1 if it spreads its stake over its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), 0 if it puts it all on one |
 | a newborn's links | how likely a child of its own is to be linked to each of its neighbours |

@@ -601,15 +601,16 @@
     },
     {
       "id": "how-the-game-is-played",
-      "title": "How the game is played",
+      "title": "How the game is played: what agents stake, and who wins the nodes",
       "file": "pages/how-the-game-is-played.md",
       "topics": [
-        "game"
+        "game",
+        "wealth"
       ],
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How much of their tokens do agents stake on their own node? Do they spread their stakes or put everything on one candidate? Who wins the nodes — the agent living there, or a neighbour; the largest staker, or a coalition?"
+      "summary": "In every game, each agent stakes all its tokens on its own node and its neighbours' nodes. A node goes to its largest staker or to a coalition, and the winner's brain is copied into it. The founders' random brains play in every way there is."
     },
     {
       "id": "even-split",
@@ -648,19 +649,6 @@
       "status": "written",
       "added": "2026-10-16",
       "summary": "The groups a token tends to stay inside (the map equation), in every world, set beside the same flow with every agent's partners dealt among its neighbours: B1's groups are its network's, B2's flow is pairs, and only B2's agents keep a partner longer than chance."
-    },
-    {
-      "id": "home-stake",
-      "title": "Staking at home, and keeping one's node",
-      "file": "pages/home-stake.md",
-      "topics": [
-        "game",
-        "wealth"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "In the game every agent stakes all its tokens on its **candidates**: its own node and its neighbours' nodes (One iteration, step by step)."
     },
     {
       "id": "token-flow",

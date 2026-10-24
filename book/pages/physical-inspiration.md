@@ -292,7 +292,7 @@ Graph of Life's agents are its elementary particles: every one follows the
 same rules and differs only in its state — its tokens, its connections, its
 brain. And its worlds are statistically homogeneous:
 [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) found that
-inequality, [home stakes](home-stake.md "The tokens an agent stakes on its own node, to keep it."), births and [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") diversity are the same in worlds
+inequality, [home stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it."), births and [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") diversity are the same in worlds
 of five hundred agents and of sixty thousand. Structure, where there is any,
 shows only in collective patterns: families side by side
 ([One world, many colours](one-world-many-colours.md)), hubs with their stars. And it

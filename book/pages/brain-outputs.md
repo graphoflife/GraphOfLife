@@ -121,5 +121,5 @@ search for strangers four ([Every setting](settings.md)).
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (10)
-> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [What a brain sees](brain-inputs.md) · [Messages](messages.md) · [How the game is played](how-the-game-is-played.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [What a brain can compute](what-a-brain-can-compute.md)
+> [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [What a brain sees](brain-inputs.md) · [Messages](messages.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [What a brain can compute](what-a-brain-can-compute.md)
 <!-- /turns -->
