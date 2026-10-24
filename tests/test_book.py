@@ -315,8 +315,12 @@ def test_a_term_is_linked_where_it_is_first_used():
     once = book_fill.link_terms(md, text)
     assert book_fill.link_terms(md, once) == once, "linking twice changed the page"
     assert once.startswith("# Degree and dimension\n"), "a heading was linked"
-    assert '[spectral dimension](spectral-dimension.md "' in once, once
-    assert '[dimension](ball-dimension-and-curvature.md "' in once, "a shorter name took the longer one's words"
+    def href(name):
+        term = next(t for t in book_fill.terms() if t["name"] == name)
+        page = os.path.basename(book_fill.page_file(term["page"]))
+        return page + (f"#{term['anchor']}" if term.get("anchor") else "")
+    assert f'[spectral dimension]({href("spectral dimension")} "' in once, once
+    assert f'[dimension]({href("dimension")} "' in once, "a shorter name took the longer one's words"
     assert once.count("](degree.md") == 1 and "`degree`" in once, once
     assert once.count("gini-coefficient.md") == 1, "a term the page links already was linked again"
     assert book_fill.link_terms("pages/degree.md", "the degree of an agent").count("degree.md") == 0, \
