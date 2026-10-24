@@ -180,7 +180,7 @@
   "n-logarithmic-axes": "correlation#logarithmic-axes-and-power-laws",
   "n-muller-plot": "genotype#muller-plots",
   "n-least-squares": "correlation#fitting-a-straight-line",
-  "n-power-law-fit": "power-law-fit",
+  "n-power-law-fit": "power-laws-real-and-apparent#fitting-a-power-law-properly",
   "n-power-spectrum": "autocorrelation#the-power-spectrum-of-a-time-series",
   "n-variance-split": "variance-split",
   "n-effective-number": "effective-number",
@@ -351,6 +351,7 @@
   "participation-ratio": "effective-number#how-many-directions-a-cloud-of-points-uses",
   "kaplan-meier": "age-and-lifetime#survival-curves-kaplanmeier",
   "muller-plot": "genotype#muller-plots",
-  "pilot-worlds": "the-lab#pilot-worlds"
+  "pilot-worlds": "the-lab#pilot-worlds",
+  "power-law-fit": "power-laws-real-and-apparent#fitting-a-power-law-properly"
  }
 }

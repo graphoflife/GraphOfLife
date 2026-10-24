@@ -121,7 +121,7 @@ connection holds 1.5 tokens per candidate, one with five to nine connections
 1.1, and one with ten or more 1.0.
 
 This is the most useful lesson of the page. **An exponent fitted to a relation
-that is not a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") reports where most of the points are**, not a law.
+that is not a power law reports where most of the points are**, not a law.
 Here the law is simple, tokens in proportion to connections plus one, and the
 exponent 0.6 is what it looks like through a log–log fit.
 
@@ -373,8 +373,8 @@ folded beneath it, which runs it reads and how.
 <!-- turns -->
 ---
 
-← [Power laws, real and apparent](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
+← [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
 
-> [!info]- Pages that link here (10)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
+> [!info]- Pages that link here (11)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
 <!-- /turns -->

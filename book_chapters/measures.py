@@ -716,7 +716,7 @@ def powerlaws(ch: F.Chapter) -> None:
                 "least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ "
                 "(the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the "
                 f"tail from the k that fits best, k = {mle['kMin']:.0f} (`degreeGamma`, `degreeKMin`), which "
-                f"holds {100 * tail:.1f}% of the agents ([Fitting a power law](power-law-fit.md)).",
+                f"holds {100 * tail:.1f}% of the agents ([Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly)).",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read the last frame after a game (`{W.frame(W.last)}`) and count every agent's connections in `edges`.",
                        "Dots: for each distinct count k, the share of agents with at least k.",

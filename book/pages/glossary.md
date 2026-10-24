@@ -78,7 +78,7 @@ there.
 - **[path length](path-length.md)** — How many connections the shortest way between two agents crosses.
 - **[permutation test](bootstrap.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](the-lab.md#pilot-worlds)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
-- **[power law](power-law-fit.md)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
+- **[power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
 - **[power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)** — How much of a series' wandering comes at each speed, from slow to fast.
 - **[preferential attachment](degree.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](random-twin.md)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.

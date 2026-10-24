@@ -670,7 +670,7 @@
     },
     {
       "id": "power-laws-real-and-apparent",
-      "title": "Power laws, real and apparent",
+      "title": "Power laws, real and apparent, and how to fit one",
       "file": "pages/power-laws-real-and-apparent.md",
       "topics": [
         "network",
@@ -679,7 +679,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Are the numbers of connections distributed as a power law? Does it matter how the exponent is fitted? Are the tokens? How many agents does one game remove — is there a typical number, or do removals come in avalanches of every size?"
+      "summary": "A power law has no typical size, and on logarithmic axes it is a straight line. Least squares through such a plot gives a biased exponent."
     },
     {
       "id": "how-properties-scale-together",
@@ -1628,18 +1628,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Every number the notebook reports comes from a few dozen worlds, and another few dozen would give a somewhat different number. Four tools say how much that matters. The bootstrap redraws the worlds we have, many times, to show how much a mean could vary."
-    },
-    {
-      "id": "power-law-fit",
-      "title": "Fitting a power law properly",
-      "file": "pages/power-law-fit.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Is the number of connections, or of tokens, distributed as a **power law**, P(*k*) ∝ *k*^−γ?"
     },
     {
       "id": "variance-split",

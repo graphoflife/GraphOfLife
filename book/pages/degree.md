@@ -95,7 +95,7 @@ The CCDF is the better picture for wide distributions. It needs no choice of
 bins, it is smooth where the histogram is noisy, and on
 [logarithmic axes](correlation.md#logarithmic-axes-and-power-laws) it shows the shape of the tail.
 Suppose the share of agents with degree *d* falls like *d*^−γ, a
-[power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones."). Then the CCDF falls like *d*^−(γ−1). On log–log axes it is
+power law. Then the CCDF falls like *d*^−(γ−1). On log–log axes it is
 a straight line, with slope −(γ − 1).
 
 ### Hubs and leaves
@@ -526,6 +526,6 @@ of the points are.
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (16)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (17)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The starting ring](starting-ring.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [The random twin: is a world a space?](random-twin.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
 <!-- /turns -->

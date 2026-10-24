@@ -193,7 +193,7 @@ connections show nothing on linear axes (0.05) and 0.64 on logarithmic ones:
 an agent among well-connected neighbours lives in a valley, because
 well-connected agents are rich. In B2 the logarithm reveals almost nothing.
 Its links are capped at eight and most agents hold one to three tokens, so
-there is little range for a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") to hide in. Only tokens per link
+there is little range for a [power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") to hide in. Only tokens per link
 against betweenness and PageRank gain much (−0.17 to −0.57, −0.30 to
 −0.62).
 

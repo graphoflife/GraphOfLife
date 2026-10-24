@@ -57,7 +57,7 @@ past the youth of a world
 ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
 The same means over iterations 400 to 499 say whether a world had settled.
 
-**How it is read.** Suppose the agents follow a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") of the tokens:
+**How it is read.** Suppose the agents follow a [power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") of the tokens:
 agents = *a* × tokens^*b*, some number *a* times the tokens to the power *b*.
 On logarithmic axes, on both sides, such a law is a straight line. Its slope
 is the exponent *b*

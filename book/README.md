@@ -103,7 +103,7 @@ How the game is played, where tokens flow, which loops they go round, and the gr
 Degrees, cores, bridges, power laws and cuts: what shape the links take, and how a world breaks.
 
 - [The shape of the network](pages/what-shape-does-the-network-take.md)
-- [Power laws, real and apparent](pages/power-laws-real-and-apparent.md)
+- [Power laws, real and apparent, and how to fit one](pages/power-laws-real-and-apparent.md)
 - [How properties scale together](pages/how-properties-scale-together.md)
 - [How a world breaks](pages/how-a-world-breaks.md)
 - [An agent's connections: degree, clustering, assortativity, attachment and scaling](pages/degree.md)
@@ -221,7 +221,6 @@ How runs are recorded and measured, the statistics the notebook uses, and every 
 - [Two numbers together: correlation, a fitted line and logarithmic axes](pages/correlation.md)
 - [How long a world remembers: autocorrelation and the power spectrum](pages/autocorrelation.md)
 - [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](pages/bootstrap.md)
-- [Fitting a power law properly](pages/power-law-fit.md)
 - [Splitting variation: where, who and chance, and between worlds and within them](pages/variance-split.md)
 - [Effective numbers: how many kinds, and how many directions](pages/effective-number.md)
 - [Many switches in few worlds: fractional factorial designs](pages/fractional-factorial.md)

@@ -138,7 +138,7 @@ the richest agent of all held 15,603 tokens. The mean is 7.6.
 On logarithmic axes the curve bends down over the first ten or twenty tokens.
 Then it falls almost straight, over two powers of ten, to the richest agents.
 At 10,000 tokens it kept bending and showed no straight stretch; with ten
-times the agents there is room for a long tail. Whether it is a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") is
+times the agents there is room for a long tail. Whether it is a power law is
 the question of
 [Power laws, real and apparent](power-laws-real-and-apparent.md).
 

@@ -313,7 +313,7 @@ that, every part of a world is like every other.
 Many natural systems have **no characteristic scale**. At a critical point —
 water at 374 °C and 218 atmospheres, a magnet at its Curie temperature —
 fluctuations of every size appear at once, and correlations span the whole
-system; quantities follow [power laws](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones."). Bak, Tang and Wiesenfeld (1987)
+system; quantities follow power laws. Bak, Tang and Wiesenfeld (1987)
 proposed that some systems tune themselves to such a point —
 **self-organised criticality** — and that this is why sandpiles, earthquakes
 and perhaps evolution show events of every size (Bak and Sneppen 1993). Some

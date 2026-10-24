@@ -170,7 +170,7 @@ shows several things at once:
 - Then it drops: 0.26% live at least 500 iterations, and 0.003% — about one in
   thirty thousand — at least 1,000.
 
-A curve that fell along a straight line on these axes would be a [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.").
+A curve that fell along a straight line on these axes would be a [power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.").
 This one bends: early deaths are common, and long lives exist, but not without
 limit. The bend comes from the risk of dying: past an age of about a hundred,
 it holds near one game in a hundred. A steady risk makes the curve fall ever

@@ -544,8 +544,9 @@
     },
     {
       "name": "power law",
-      "page": "power-law-fit",
-      "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones."
+      "page": "power-laws-real-and-apparent",
+      "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones.",
+      "anchor": "fitting-a-power-law-properly"
     },
     {
       "name": "power spectrum",

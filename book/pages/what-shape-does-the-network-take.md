@@ -141,7 +141,7 @@ Every founder started with ten. At 10,000 tokens, 37% had one connection and
 
 So the network is very unequal in connections. Most agents have one or two,
 and a few are **hubs**, joined to hundreds. On the log–log axes the curve
-bends downward instead of running straight, so it is not a clean [power law](power-law-fit.md "A quantity whose frequency falls as a power of its size: few huge values, many small ones.").
+bends downward instead of running straight, so it is not a clean power law.
 
 ### Core, leaves and bridges
 
@@ -1071,7 +1071,7 @@ checks it again.
 <!-- turns -->
 ---
 
-[The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Power laws, real and apparent](power-laws-real-and-apparent.md) →
+[The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) →
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
