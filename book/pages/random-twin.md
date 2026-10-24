@@ -86,9 +86,9 @@ among the dead agent's [neighbours](the-world.md#the-network "An agent joined to
 two steps apart. Worlds without old age, without mending, or whose unused
 links lapse keep their room.
 
-Read at iteration 1,000, 395 worlds fell into two groups: 318 folded, with a
-median width of 1.26, and 77 spaces, with medians of 2.22 to 3.80 by the rule
-that made them. The line of 1.5 lies between the two.
+Read at iteration 1,000, 498 worlds fell into two groups: 371 folded, with
+median widths of 1.26 and 1.27, and 127 spaces, with medians of 2.09 to 3.63
+by the rule that made them. The line of 1.5 lies between the two.
 
 ## Where it is used
 
@@ -118,6 +118,16 @@ that made them. The line of 1.5 lies between the two.
   the two rulers of dimension.
 - [Path length](path-length.md): distances in a network.
 - [The health bar](health-bar.md): the marks a healthy network meets.
+
+## How our view changed
+
+- **24 October 2026.** Since 23 October, this page had said that 395 worlds
+  read at iteration 1,000 fell into 318 folded and 77 spaces, the spaces with
+  medians of 2.22 to 3.80. That reading lacked batches L and V and the second
+  round of the search by elimination. With them, 498 worlds fall into 371 and
+  127, with medians of 2.09 to 3.63
+  ([Every world at iteration 1,000](how-many-dimensions-does-a-world-have.md#every-world-at-iteration-1000)).
+  The two groups stay apart.
 
 <!-- turns -->
 ---

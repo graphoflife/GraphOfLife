@@ -499,7 +499,7 @@ in so much cannot say; worlds without brains can
 **Every world at iteration 1,000.** Each dot is a world of the notebook read at iteration 1,000 — the pilot batches, the search by elimination and the lab's B2 families at 10,000 tokens — its typical distance over its random twin's (logarithmic). Top, for the worlds whose agents die of age and are mended round: against the number of groups the neighbours of its agents within ten iterations of their death fall into — groups linked to one another directly, which mending joins in a ring. Middle: against its links per agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what stands out in its rules.
 
 > [!example]- How to make this figure
-> **Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, M, P, Q, R, S, T, U, W, X, Y and YB, the search by elimination's worlds (Z), and the lab's B2 families of Experiments 15 to 17.
+> **Runs.** Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the pilot batches K, L, M, P, Q, R, S, T, U, V, W, X, Y and YB, the search by elimination's worlds (Z), and the lab's B2 families of Experiments 15 to 17.
 >
 > **Data.** From each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/space_at1000.json`).
 >
@@ -510,36 +510,36 @@ in so much cannot say; worlds without brains can
 > **To make it again:** `python3 book_figures.py spaces`.
 <!-- /figure -->
 
-Read at iteration 1,000, 395 worlds fall into two groups. They are every pilot
-batch, the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s B2 families at 10,000 tokens, and the first round of the
-search by elimination. That search drew every setting at random. Round after
+Read at iteration 1,000, 498 worlds fall into two groups. They are the pilot
+batches read at that iteration, the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s B2 families at 10,000 tokens, and the first two rounds of
+the search by elimination. That search drew every setting at random. Round after
 round, it kept the values that did not make worlds worse
 ([The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds)).
 
-- **Folded**: the 235 worlds of B2 with other rules (a median width of 1.26)
-  and the 83 with brains mixed at birth (1.26).
-- **Spaces**: the 37 worlds whose estate goes to the newborns or the parents
-  (2.22), and the 14 in which every unused link lapses (3.80). And the 26
-  whose deaths are not mended, on B1's rules or drawn so by the search (2.30).
+- **Folded**: the 284 worlds of B2 with other rules (a median width of 1.27)
+  and the 87 with brains mixed at birth (1.26).
+- **Spaces**: the 50 worlds whose estate goes to the newborns or the parents
+  (2.22), and the 18 in which every unused link lapses (3.63). And the 59
+  whose deaths are not mended, on B1's rules or drawn so by the search (2.09).
 
 Across them all, the width goes with fewer links per agent: a rank correlation
-of −0.58. That is the correlation of the worlds' ranks, not of their values.
-The width goes hardly at all with how poor the agents are (+0.12), how many
-they are (+0.07) or how many tokens each holds (−0.09). Being a space is not a
+of −0.51. That is the correlation of the worlds' ranks, not of their values.
+The width goes hardly at all with how poor the agents are (+0.09), how many
+they are (+0.06) or how many tokens each holds (−0.09). Being a space is not a
 matter of poverty or size.
 
-**The ring a death closes tells it best.** Take the 336 worlds whose agents
+**The ring a death closes tells it best.** Take the 363 worlds whose agents
 die of age and are mended round. For every agent within ten iterations of its
 death, count the groups its neighbours fall into: the groups mending will join
 in a ring (`research/atlas/rings.py`). The more groups, the more folded the
-world (a rank correlation of −0.69):
+world (a rank correlation of −0.71):
 
 | groups of neighbours of the agents about to die | worlds | width, the typical distance over the twin's (median) |
 |---|---|---|
-| fewer than 5 | 50 | 1.88 |
-| 5 to 6 | 15 | 2.12 |
+| fewer than 5 | 70 | 1.77 |
+| 5 to 6 | 17 | 2.03 |
 | 6 to 7 | 55 | 1.34 |
-| 7 to 9 | 193 | 1.24 |
+| 7 to 9 | 198 | 1.24 |
 | 9 or more | 23 | 1.08 |
 
 The most folded worlds are those whose children may be of any size, down to a
@@ -548,7 +548,7 @@ iterations old at a birth (a median), and the dying hold 12 to 14 links in as
 many groups. Where the old breed, they gather links till they die, and every
 death closes a wide ring.
 
-Experiment 14's worlds, at 5,000 tokens and not among the 336, follow the same
+Experiment 14's worlds, at 5,000 tokens and not among the 363, follow the same
 rule. B2 there leaves rings of 6.7 to 7.5 groups and reads 1.25 to 1.33. With
 handover, the dying leave rings of 2 to 5 groups, and the world reads 1.50 to
 1.84. Without the cap on links, the rings have 10 to 24 groups, and two of the
@@ -821,6 +821,18 @@ iterations each.
   readings (`book/results/dimensions.json`) are 2.1 near 6 steps, and fall to
   1.8 by about 30 steps. Over the two decades they stay between 1.8 and 2.1,
   as [The rulers, on the worlds](#the-rulers-on-the-worlds) now says.
+- **24 October 2026.** Since 17 October, [Every world at iteration
+  1,000](#every-world-at-iteration-1000) had read 395 worlds, 336 of them
+  with rings. Its figure had not been drawn again since the atlas gained
+  batches L and V and the search's second round. With them it reads 498
+  worlds and 363 with rings. The width goes with fewer links per agent at
+  −0.51, where it said −0.58, and with the ring a death closes at −0.71,
+  where it said −0.69. The worlds whose deaths are not mended read 2.09, 59
+  of them, where it said 2.30 for 26. Nothing it concluded changed. The same
+  day, the figure [B1 and B2 side by side](#b1-and-b2-side-by-side) gained
+  two of Experiment 17's nine worlds. A store of readings had confused their
+  reading at 10,000 iterations with Experiment 18's at 50,000, so their line
+  was drawn from seven. With all nine it reads 1.21, as the text said.
 
 <!-- turns -->
 ---

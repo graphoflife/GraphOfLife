@@ -19,7 +19,7 @@ import numpy as np
 
 import book_figures as F
 from book_figures import chapter, recipe
-from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
+from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW, listed
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
@@ -239,6 +239,7 @@ def spaces(ch: F.Chapter) -> None:
                        "y": {"label": "typical distance, over the twin's", "log": True}, "series": series,
                        "guides": [{"axis": "y", "at": 1.0, "label": "as the twin"}]})
     distance = np.array([S.typical_distance(r) for r in rows])
+    batches = sorted({r["id"].split("/")[0] for r in rows if "/" in r["id"]} - {"Z"})
 
     def rank_corr(key: str) -> float:
         v = np.array([float(at[r["id"]][key]) for r in rows])
@@ -274,8 +275,8 @@ def spaces(ch: F.Chapter) -> None:
                      "agent; bottom: against the share of its agents holding three tokens or fewer. Colours: what "
                      "stands out in its rules."),
             recipe=recipe("Every world of `GraphOfLifeRuns/.pilots/atlas/at1000.json` (`research/atlas/at.py`): the "
-                          "pilot batches K, M, P, Q, R, S, T, U, W, X, Y and YB, the search by elimination's worlds "
-                          "(Z), and the lab's B2 families of Experiments 15 to 17.",
+                          f"pilot batches {listed(batches)}, the search by elimination's worlds (Z), and the lab's "
+                          "B2 families of Experiments 15 to 17.",
                           "each world's whole world kept at iteration 1,000 (`research/atlas/space.py --at 1000`, "
                           "`GraphOfLifeRuns/.pilots/atlas/space_at1000.json`)",
                           ["Measure each world and its twin as above.", "Split the neighbours of each agent within ten "

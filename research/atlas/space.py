@@ -195,13 +195,17 @@ def main():
         out, todo = os.path.join(PILOTS, "atlas", f"space_at{a.at}.json"), at_worlds(a.at)
     else:
         out, todo = OUT, worlds()
-    # A world read before at the same moment is not read again.
-    done = {(r["id"], r.get("at", a.at)): r for r in json.load(open(out))} if os.path.exists(out) else {}
-    wanted = [t for t in todo if (t[2], t[4]) not in done]
+    # A world read before for the same group at the same moment is not read again. The group belongs in the
+    # key: Experiment 18 played two of Experiment 17's worlds on, so one run is read from its world kept at 10,000
+    # and from the one kept at 50,000, and only its group tells the two apart (both are read with at None).
+    def key(r):
+        return r["id"], r["group"], r.get("at", a.at)
+    done = {key(r): r for r in json.load(open(out))} if os.path.exists(out) else {}
+    wanted = [t for t in todo if (t[2], t[0], t[4]) not in done]
     print(f"{len(todo)} worlds, {len(wanted)} to read", flush=True)
     with ProcessPoolExecutor(max_workers=a.jobs) as pool:
-        fresh = {(r["id"], r["at"]): r for r in pool.map(one, wanted) if r}
-    rows = [r for r in (done.get((t[2], t[4])) or fresh.get((t[2], t[4])) for t in todo) if r]
+        fresh = {key(r): r for r in pool.map(one, wanted) if r}
+    rows = [r for r in (done.get((t[2], t[0], t[4])) or fresh.get((t[2], t[0], t[4])) for t in todo) if r]
     with open(out + ".tmp", "w") as f:
         json.dump(rows, f)
     os.replace(out + ".tmp", out)
