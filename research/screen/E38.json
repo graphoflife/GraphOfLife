@@ -1,0 +1,5160 @@
+{
+ "rounds": [
+  "E38"
+ ],
+ "reference": {
+  "1000": {
+   "diversity": 0.5333588957055214,
+   "gini": 0.4880367426347971,
+   "kinds": 19.705128146693795,
+   "worlds": [
+    "B2-10000-s001",
+    "B2-10000-s002",
+    "B2-10000-s003",
+    "B2-10000-s004",
+    "B2-10000-s005",
+    "B2-10000-s006",
+    "B2-10000-s007",
+    "B2-10000-s008",
+    "B2-10000-s009",
+    "B2-10000-s010"
+   ]
+  },
+  "2000": {
+   "diversity": 0.5053680981595092,
+   "gini": 0.45851625328275447,
+   "kinds": 16.51985909976581,
+   "worlds": [
+    "B2-10000-s001",
+    "B2-10000-s002",
+    "B2-10000-s003",
+    "B2-10000-s004",
+    "B2-10000-s005",
+    "B2-10000-s006",
+    "B2-10000-s007",
+    "B2-10000-s008",
+    "B2-10000-s009",
+    "B2-10000-s010"
+   ]
+  }
+ },
+ "criteria": [
+  {
+   "key": "alive",
+   "name": "alive",
+   "asks": "more than 20 agents at iteration 2,000, and not stopped as too slow"
+  },
+  {
+   "key": "decentralised",
+   "name": "decentralised",
+   "asks": "no agent linked to more than 5% of the others, and 3 to 12 links per agent"
+  },
+  {
+   "key": "resilient",
+   "name": "resilient",
+   "asks": "one piece, with at least 80% of the agents in the 2-core; no single agent's loss cuts off more than 2% of the world, and no single link's more than 1%"
+  },
+  {
+   "key": "space",
+   "name": "almost three-dimensional",
+   "asks": "a dimension of 2 to 4, and a typical distance at least 1.5 times its random twin's: a true space, not a folded small world"
+  },
+  {
+   "key": "diverse",
+   "name": "diverse",
+   "asks": "tokens, links, ages and genotypes spread more widely than in B2's median world, and its agents' decisions vary more (effective kinds of staking)"
+  },
+  {
+   "key": "uneven",
+   "name": "not too even",
+   "asks": "a Gini of the tokens no lower than B2's least even world"
+  }
+ ],
+ "worlds": [
+  {
+   "round": "E38",
+   "id": "B1-20000-8c796a-s1001",
+   "baseline": "B1",
+   "seed": 1001,
+   "set": {
+    "message_amount": 8,
+    "message_prepass": false,
+    "hidden_layers": [
+     8
+    ],
+    "mutation_noise_std": 0.1,
+    "allow_revolutions": false,
+    "allow_gifting": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "newborns",
+    "prune_after": "reproduction",
+    "incumbency": 1.25,
+    "prune_needs": 1
+   },
+   "fate": "died",
+   "ended_at": 208,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-ad33ae-s1002",
+   "baseline": "B1",
+   "seed": 1002,
+   "set": {
+    "message_amount": 8,
+    "message_prepass": false,
+    "hidden_layers": [
+     16,
+     16
+    ],
+    "mutation_noise_std": 0.4,
+    "allow_revolutions": false,
+    "child_floor": "neighbours",
+    "prune_after": "both",
+    "link_search": "walk",
+    "valence": 4
+   },
+   "fate": "died",
+   "ended_at": 2,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-63be3b-s1003",
+   "baseline": "B1",
+   "seed": 1003,
+   "set": {
+    "message_amount": 4,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_sparsity": 0.3,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "prune_after": "both",
+    "link_search": "jump",
+    "link_steering": "looking",
+    "link_consent": "forced",
+    "incumbency": 1.25,
+    "keep_home": 0.5,
+    "prune_needs": 1
+   },
+   "fate": "too slow",
+   "ended_at": 1865,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 19806,
+      "marks": 7,
+      "dimension": 3.9709412779987256,
+      "wide": 1.61245604222575,
+      "diversity": 0.24884969325153375,
+      "gini_tokens": 0.00969114914672331,
+      "tokens_per_agent": 1.0097950116126426,
+      "hub": 0.0011613228982580157,
+      "agent_cut": 0.00474603655457942
+     },
+     "kinds": 1.0
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": 1.0
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-7ea3c8-s1004",
+   "baseline": "B1",
+   "seed": 1004,
+   "set": {
+    "message_amount": 8,
+    "random_input_amount": 0,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_revolutions": false,
+    "allow_gifting": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "inactive_window": "iteration",
+    "redistribution": "by_tokens",
+    "prune_after": "both",
+    "link_search": "walk",
+    "link_steering": "looking"
+   },
+   "fate": "died",
+   "ended_at": 425,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-69be0c-s1005",
+   "baseline": "B1",
+   "seed": 1005,
+   "set": {
+    "message_amount": 0,
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.1,
+    "mutation_sparsity": 0.05,
+    "mutate_on_replication": true,
+    "redistribution": "parents",
+    "link_search": "walk",
+    "link_consent": "forced",
+    "keep_home": 0.3,
+    "max_age": 50,
+    "min_child": 20,
+    "valence": 16
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 2069,
+      "marks": 4,
+      "dimension": 2.3776879394275854,
+      "wide": 2.8930052767926493,
+      "diversity": 0.33588957055214724,
+      "gini_tokens": 0.2799283711938134,
+      "tokens_per_agent": 9.666505558240695,
+      "hub": 0.007736943907156673,
+      "agent_cut": 0.42145964233929434
+     },
+     "kinds": 1.0178174334624441
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 1584,
+      "marks": 4,
+      "dimension": 2.270418536495309,
+      "wide": 2.859669114993648,
+      "diversity": 0.44286809815950917,
+      "gini_tokens": 0.2739214646464647,
+      "tokens_per_agent": 12.626262626262626,
+      "hub": 0.008843967150979154,
+      "agent_cut": 0.06439393939393939
+     },
+     "kinds": 1.0
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-d30991-s1006",
+   "baseline": "B1",
+   "seed": 1006,
+   "set": {
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "hidden_layers": [
+     8
+    ],
+    "mutation_probability": 0.1,
+    "mutation_sparsity": 0.3,
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "inactive_window": "iteration",
+    "redistribution": "parents",
+    "link_search": "reach",
+    "link_steering": "looking",
+    "link_consent": "forced",
+    "min_child": 10,
+    "prune_needs": 3
+   },
+   "fate": "died",
+   "ended_at": 222,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-b54298-s1007",
+   "baseline": "B1",
+   "seed": 1007,
+   "set": {
+    "message_amount": 8,
+    "random_input_amount": 2,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.4,
+    "allow_handover": false,
+    "mix_at_birth": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "by_tokens",
+    "prune_after": "both",
+    "link_search": "jump",
+    "link_steering": "looking",
+    "keep_home": 0.1,
+    "min_child": 10,
+    "valence": 4
+   },
+   "fate": "died",
+   "ended_at": 150,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-1ba6bd-s1008",
+   "baseline": "B1",
+   "seed": 1008,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 2,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.4,
+    "allow_gifting": true,
+    "mix_at_birth": true,
+    "child_floor": "neighbours",
+    "redistribution": "by_tokens",
+    "prune_after": "both",
+    "incumbency": 1.5,
+    "prune_needs": 3
+   },
+   "fate": "died",
+   "ended_at": 382,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-fc88c6-s1009",
+   "baseline": "B1",
+   "seed": 1009,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 0,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "redistribution": "poorest",
+    "prune_after": "both",
+    "keep_home": 0.3,
+    "valence": 8
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.16666666666666666,
+     "reading": {
+      "agents": 2570,
+      "marks": 3,
+      "dimension": 1.8545866303105356,
+      "wide": 4.498503216468135,
+      "diversity": 0.060582822085889575,
+      "gini_tokens": 0.15396315175097275,
+      "tokens_per_agent": 7.782101167315175,
+      "hub": 0.0023355391202802647,
+      "agent_cut": 0.2992217898832685
+     },
+     "kinds": 97.8979155636606
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 2897,
+      "marks": 4,
+      "dimension": 1.876615680140587,
+      "wide": 5.436246152525673,
+      "diversity": 0.04754601226993865,
+      "gini_tokens": 0.11017345529858469,
+      "tokens_per_agent": 6.903693476009665,
+      "hub": 0.0027624309392265192,
+      "agent_cut": 0.44597859855022437
+     },
+     "kinds": 137.55564830272675
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-28be4f-s1010",
+   "baseline": "B1",
+   "seed": 1010,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 0,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "parents",
+    "prune_after": "both",
+    "incumbency": 1.5,
+    "min_child": 10,
+    "valence": 4
+   },
+   "fate": "died",
+   "ended_at": 12,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-f7d2f4-s1011",
+   "baseline": "B1",
+   "seed": 1011,
+   "set": {
+    "message_amount": 0,
+    "message_prepass": false,
+    "hidden_layers": [
+     32
+    ],
+    "mutation_probability": 0.1,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "child_floor": "neighbours",
+    "redistribution": "poorest",
+    "prune_after": "reproduction",
+    "prune_needs": 3
+   },
+   "fate": "died",
+   "ended_at": 73,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-3dcf03-s1012",
+   "baseline": "B1",
+   "seed": 1012,
+   "set": {
+    "message_amount": 8,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.1,
+    "mutation_sparsity": 0.3,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "prune_after": "reproduction",
+    "link_search": "jump",
+    "incumbency": 2.0,
+    "max_age": 50,
+    "buy_life": true
+   },
+   "fate": "died",
+   "ended_at": 129,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-5695c2-s1013",
+   "baseline": "B1",
+   "seed": 1013,
+   "set": {
+    "random_input_amount": 2,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.1,
+    "mutation_noise_std": 0.1,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "redistribution": "children",
+    "prune_after": "reproduction",
+    "link_search": "walk",
+    "link_steering": "looking",
+    "link_consent": "forced",
+    "keep_home": 0.3,
+    "prune_needs": 1
+   },
+   "fate": "too slow",
+   "ended_at": 1304,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 17461,
+      "marks": 6,
+      "dimension": 3.80164378152184,
+      "wide": 1.6977473124818465,
+      "diversity": 0.25,
+      "gini_tokens": 0.12475769429013228,
+      "tokens_per_agent": 1.145409770345341,
+      "hub": 0.010423825887743413,
+      "agent_cut": 0.013630376267109558
+     },
+     "kinds": 15.388787467371486
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-3414ae-s1014",
+   "baseline": "B1",
+   "seed": 1014,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.1,
+    "mutation_noise_std": 0.4,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "newborns",
+    "link_search": "walk",
+    "link_consent": "forced",
+    "valence": 4
+   },
+   "fate": "died",
+   "ended_at": 87,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-fdd440-s1015",
+   "baseline": "B1",
+   "seed": 1015,
+   "set": {
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "inactive_window": "iteration",
+    "prune_after": "reproduction",
+    "link_search": "walk",
+    "link_consent": "forced"
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 3019,
+      "marks": 2,
+      "dimension": 7.1730104736279365,
+      "wide": 0.9759317973858778,
+      "diversity": 0.589340490797546,
+      "gini_tokens": 0.5658385889367339,
+      "tokens_per_agent": 6.624710168930109,
+      "hub": 0.47978793903247186,
+      "agent_cut": 0.1888042398145081
+     },
+     "kinds": 2.00218333774758
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 2349,
+      "marks": 3,
+      "dimension": 4.562138397734988,
+      "wide": 1.1459014661624756,
+      "diversity": 0.6690950920245399,
+      "gini_tokens": 0.6463224776500638,
+      "tokens_per_agent": 8.514261387824606,
+      "hub": 0.13202725724020442,
+      "agent_cut": 0.023839931885908897
+     },
+     "kinds": 1.4354411298392886
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-9bf2a7-s1016",
+   "baseline": "B1",
+   "seed": 1016,
+   "set": {
+    "message_amount": 8,
+    "random_input_amount": 2,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_noise_std": 0.1,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "child_floor": "neighbours",
+    "redistribution": "by_tokens",
+    "prune_after": "reproduction",
+    "link_search": "reach",
+    "link_steering": "looking",
+    "link_consent": "forced"
+   },
+   "fate": "died",
+   "ended_at": 7,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-d97eea-s1017",
+   "baseline": "B1",
+   "seed": 1017,
+   "set": {
+    "message_amount": 8,
+    "message_prepass": false,
+    "hidden_layers": [
+     32
+    ],
+    "mutation_probability": 0.4,
+    "mutation_sparsity": 0.3,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "redistribution": "newborns"
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 3751,
+      "marks": 2,
+      "dimension": 2.2809032616500007,
+      "wide": 2.6383508658918697,
+      "diversity": 0.4470858895705521,
+      "gini_tokens": 0.3477653692348708,
+      "tokens_per_agent": 5.3319114902692615,
+      "hub": 0.0029333333333333334,
+      "agent_cut": 0.25246600906424954
+     },
+     "kinds": 1.238390478297918
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 2767,
+      "marks": 4,
+      "dimension": 2.991736336141291,
+      "wide": 2.3400917100977052,
+      "diversity": 0.6675613496932515,
+      "gini_tokens": 0.4265026743765812,
+      "tokens_per_agent": 7.228044813877846,
+      "hub": 0.024584237165582067,
+      "agent_cut": 0.1402240693892302
+     },
+     "kinds": 1.3604652994209547
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-0f6e84-s1018",
+   "baseline": "B1",
+   "seed": 1018,
+   "set": {
+    "random_input_amount": 2,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_noise_std": 0.4,
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mix_at_birth": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "poorest"
+   },
+   "fate": "died",
+   "ended_at": 69,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-4c2347-s1019",
+   "baseline": "B1",
+   "seed": 1019,
+   "set": {
+    "message_amount": 0,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.8,
+    "mutation_sparsity": 0.05,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "redistribution": "by_tokens",
+    "link_search": "jump",
+    "link_steering": "looking",
+    "incumbency": 1.5,
+    "max_age": 200
+   },
+   "fate": "died",
+   "ended_at": 249,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-5e0717-s1020",
+   "baseline": "B1",
+   "seed": 1020,
+   "set": {
+    "message_amount": 16,
+    "random_input_amount": 2,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.1,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "inactive_window": "iteration",
+    "redistribution": "children",
+    "prune_after": "both",
+    "birth_links": 2
+   },
+   "fate": "died",
+   "ended_at": 86,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-1cdee2-s1021",
+   "baseline": "B1",
+   "seed": 1021,
+   "set": {
+    "random_input_amount": 10,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_noise_std": 0.4,
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "inactive_window": "iteration",
+    "redistribution": "children",
+    "link_search": "reach",
+    "link_steering": "looking",
+    "birth_links": 4
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 7123,
+      "marks": 6,
+      "dimension": 5.044132696666111,
+      "wide": 1.3432094257741027,
+      "diversity": 0.6012269938650306,
+      "gini_tokens": 0.4951457391548504,
+      "tokens_per_agent": 2.8078056998455705,
+      "hub": 0.008003369839932602,
+      "agent_cut": 0.0077214656745753195
+     },
+     "kinds": 4.012815410333715
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 2385,
+      "marks": 5,
+      "dimension": 2.9234339276038526,
+      "wide": 2.0185712484438247,
+      "diversity": 0.5406441717791411,
+      "gini_tokens": 0.6519206708595386,
+      "tokens_per_agent": 8.385744234800839,
+      "hub": 0.007969798657718121,
+      "agent_cut": 0.02348008385744235
+     },
+     "kinds": 3.478483162224222
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-c049bc-s1022",
+   "baseline": "B1",
+   "seed": 1022,
+   "set": {
+    "random_input_amount": 2,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_sparsity": 0.3,
+    "allow_revolutions": false,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "inactive_window": "iteration",
+    "redistribution": "children",
+    "prune_after": "both"
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 3501,
+      "marks": 5,
+      "dimension": 4.203544668783394,
+      "wide": 1.408354286106667,
+      "diversity": 0.7089723926380368,
+      "gini_tokens": 0.6190553841759496,
+      "tokens_per_agent": 5.712653527563553,
+      "hub": 0.008571428571428572,
+      "agent_cut": 0.014281633818908884
+     },
+     "kinds": 14.41369010051066
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": false,
+      "diverse": true,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": true,
+     "score": 0.8333333333333334,
+     "reading": {
+      "agents": 2544,
+      "marks": 6,
+      "dimension": 4.617662216776848,
+      "wide": 1.1341092712020586,
+      "diversity": 0.7331288343558282,
+      "gini_tokens": 0.6856139544025157,
+      "tokens_per_agent": 7.861635220125786,
+      "hub": 0.02477388910735352,
+      "agent_cut": 0.0066823899371069185
+     },
+     "kinds": 20.24652558460388
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-fae518-s1023",
+   "baseline": "B1",
+   "seed": 1023,
+   "set": {
+    "random_input_amount": 2,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_sparsity": 0.3,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "newborns",
+    "prune_after": "both",
+    "link_search": "walk",
+    "birth_links": 1,
+    "prune_needs": 3
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": true,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 2307,
+      "marks": 5,
+      "dimension": 4.4605960668725055,
+      "wide": 1.3886553957555263,
+      "diversity": 0.8792177914110431,
+      "gini_tokens": 0.7446915908105765,
+      "tokens_per_agent": 8.669267446900736,
+      "hub": 0.03252385082393756,
+      "agent_cut": 0.007802340702210663
+     },
+     "kinds": 13.28615314597793
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 12395,
+      "marks": 5,
+      "dimension": 3.356996510341886,
+      "wide": 5.6306002576590055,
+      "diversity": 0.7001533742331288,
+      "gini_tokens": 0.352917563533683,
+      "tokens_per_agent": 1.6135538523598225,
+      "hub": 0.009278683233822818,
+      "agent_cut": 0.2199273900766438
+     },
+     "kinds": 1.2967339406276084
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-9760a2-s1024",
+   "baseline": "B1",
+   "seed": 1024,
+   "set": {
+    "message_amount": 8,
+    "random_input_amount": 2,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.8,
+    "mutation_noise_std": 0.4,
+    "allow_revolutions": false,
+    "mutate_on_replication": true,
+    "prune_after": "reproduction",
+    "max_age": 200
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 12463,
+      "marks": 3,
+      "dimension": 2.722565315667789,
+      "wide": 2.7013795594231707,
+      "diversity": 0.4773773006134969,
+      "gini_tokens": 0.2863299045173715,
+      "tokens_per_agent": 1.6047500601781273,
+      "hub": 0.0024875621890547263,
+      "agent_cut": 0.15670384337639412
+     },
+     "kinds": 4.217404394978325
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": true,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 13605,
+      "marks": 3,
+      "dimension": 3.199047275300774,
+      "wide": 2.818655199190983,
+      "diversity": 0.5774539877300613,
+      "gini_tokens": 0.2751444689452407,
+      "tokens_per_agent": 1.470047776552738,
+      "hub": 0.005366068803293149,
+      "agent_cut": 0.3975009187798603
+     },
+     "kinds": 32.06645473492994
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-f570c2-s1025",
+   "baseline": "B1",
+   "seed": 1025,
+   "set": {
+    "message_amount": 16,
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_sparsity": 0.3,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "redistribution": "parents",
+    "prune_after": "reproduction",
+    "keep_home": 0.3,
+    "valence": 4,
+    "prune_needs": 2
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.16666666666666666,
+     "reading": {
+      "agents": 11172,
+      "marks": 3,
+      "dimension": 1.6662275559347008,
+      "wide": 4.038089813146256,
+      "diversity": 0.495398773006135,
+      "gini_tokens": 0.3433545112781955,
+      "tokens_per_agent": 1.7901897601145722,
+      "hub": 0.000358070002685525,
+      "agent_cut": 0.6326530612244898
+     },
+     "kinds": 10.003456521522486
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.16666666666666666,
+     "reading": {
+      "agents": 11211,
+      "marks": 3,
+      "dimension": 1.8459633605777097,
+      "wide": 3.5575160243906194,
+      "diversity": 0.4946319018404908,
+      "gini_tokens": 0.34430733208455977,
+      "tokens_per_agent": 1.783962180001784,
+      "hub": 0.0003568242640499554,
+      "agent_cut": 0.5225225225225225
+     },
+     "kinds": 13.18591334383579
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-34e831-s1026",
+   "baseline": "B1",
+   "seed": 1026,
+   "set": {
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "allow_handover": false,
+    "inactive_window": "iteration",
+    "redistribution": "poorest",
+    "prune_after": "both",
+    "max_age": 200,
+    "birth_links": 2
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 13696,
+      "marks": 5,
+      "dimension": 4.641278725198944,
+      "wide": 2.011453844632022,
+      "diversity": 0.41296012269938653,
+      "gini_tokens": 0.2998217581775702,
+      "tokens_per_agent": 1.4602803738317758,
+      "hub": 0.048630887185104055,
+      "agent_cut": 0.01854556074766355
+     },
+     "kinds": 1.2229319076972938
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.16666666666666666,
+     "reading": {
+      "agents": 12051,
+      "marks": 4,
+      "dimension": 4.891599406330139,
+      "wide": 1.1038467038832964,
+      "diversity": 0.5115030674846626,
+      "gini_tokens": 0.36438651564185554,
+      "tokens_per_agent": 1.659613310098747,
+      "hub": 0.06589211618257261,
+      "agent_cut": 0.018753630404115842
+     },
+     "kinds": 1.2997583711997405
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-b53ad5-s1027",
+   "baseline": "B1",
+   "seed": 1027,
+   "set": {
+    "message_amount": 8,
+    "random_input_amount": 10,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.4,
+    "mutation_noise_std": 0.4,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "redistribution": "children",
+    "link_search": "walk",
+    "link_steering": "looking",
+    "link_consent": "forced",
+    "prune_needs": 1
+   },
+   "fate": "too slow",
+   "ended_at": 1620,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.16666666666666666,
+     "reading": {
+      "agents": 17595,
+      "marks": 3,
+      "dimension": 2.603645954173014,
+      "wide": NaN,
+      "diversity": 0.4976993865030675,
+      "gini_tokens": 0.1102386018755328,
+      "tokens_per_agent": 1.1366865586814436,
+      "hub": 0.0009662384903944527,
+      "agent_cut": 0.14310883773799374
+     },
+     "kinds": 1.0906166073643886
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": 1.1020801763328283
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-b4f079-s1028",
+   "baseline": "B1",
+   "seed": 1028,
+   "set": {
+    "message_amount": 16,
+    "random_input_amount": 2,
+    "self_message": "largest",
+    "hidden_layers": [
+     16,
+     16
+    ],
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mend_on_death": true,
+    "redistribution": "poorest",
+    "link_search": "jump",
+    "link_consent": "forced",
+    "valence": 16,
+    "prune_needs": 1
+   },
+   "fate": "died",
+   "ended_at": 279,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-a6f392-s1029",
+   "baseline": "B1",
+   "seed": 1029,
+   "set": {
+    "message_amount": 0,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.8,
+    "allow_handover": false,
+    "mix_at_birth": true,
+    "redistribution": "by_tokens",
+    "link_search": "walk",
+    "link_consent": "forced",
+    "valence": 16,
+    "prune_needs": 3
+   },
+   "fate": "died",
+   "ended_at": 823,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": 2.9266508139747587
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-f578dc-s1030",
+   "baseline": "B1",
+   "seed": 1030,
+   "set": {
+    "message_amount": 16,
+    "random_input_amount": 2,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "child_floor": "neighbours",
+    "redistribution": "newborns",
+    "prune_after": "both",
+    "link_search": "reach",
+    "link_consent": "forced",
+    "keep_home": 0.5
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 2129,
+      "marks": 5,
+      "dimension": 4.4089268670013055,
+      "wide": 1.1663620559235643,
+      "diversity": 0.9068251533742331,
+      "gini_tokens": 0.41652217003287917,
+      "tokens_per_agent": 9.394081728511038,
+      "hub": 0.020676691729323307,
+      "agent_cut": 0.007515265382808831
+     },
+     "kinds": 2.410525596142974
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 2575,
+      "marks": 4,
+      "dimension": 3.1052010128095273,
+      "wide": 1.5654352638914646,
+      "diversity": 0.7749233128834356,
+      "gini_tokens": 0.35823223300970874,
+      "tokens_per_agent": 7.766990291262136,
+      "hub": 0.016317016317016316,
+      "agent_cut": 0.01087378640776699
+     },
+     "kinds": 4.780617488152057
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-fca269-s1031",
+   "baseline": "B1",
+   "seed": 1031,
+   "set": {
+    "message_amount": 0,
+    "random_input_amount": 2,
+    "message_prepass": false,
+    "hidden_layers": [
+     32
+    ],
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "child_floor": "neighbours",
+    "incumbency": 1.5,
+    "valence": 4,
+    "prune_needs": 3
+   },
+   "fate": "died",
+   "ended_at": 72,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-6853f3-s1032",
+   "baseline": "B1",
+   "seed": 1032,
+   "set": {
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "hidden_layers": [
+     16,
+     16
+    ],
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "inactive_window": "iteration",
+    "redistribution": "by_tokens",
+    "prune_after": "reproduction",
+    "incumbency": 2.0,
+    "keep_home": 0.1,
+    "max_age": 100,
+    "buy_life": true,
+    "prune_needs": 3
+   },
+   "fate": "died",
+   "ended_at": 583,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": 11.043622308117065
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-518d0c-s1033",
+   "baseline": "B1",
+   "seed": 1033,
+   "set": {
+    "message_amount": 16,
+    "random_input_amount": 2,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.1,
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "inactive_window": "iteration",
+    "max_age": 100,
+    "prune_needs": 3
+   },
+   "fate": "too slow",
+   "ended_at": 1203,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 13706,
+      "marks": 5,
+      "dimension": 3.3347459903883316,
+      "wide": 3.5330491112435354,
+      "diversity": 0.620782208588957,
+      "gini_tokens": 0.2972907266890412,
+      "tokens_per_agent": 1.4592149423610097,
+      "hub": 0.00488872674206494,
+      "agent_cut": 0.5492485043046841
+     },
+     "kinds": 1.3507934188441815
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-26aeaf-s1034",
+   "baseline": "B1",
+   "seed": 1034,
+   "set": {
+    "message_amount": 16,
+    "random_input_amount": 10,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_noise_std": 0.1,
+    "mutation_sparsity": 0.05,
+    "allow_revolutions": false,
+    "inactive_window": "iteration",
+    "redistribution": "parents",
+    "prune_after": "reproduction"
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 8816,
+      "marks": 7,
+      "dimension": 2.5801012091003415,
+      "wide": 5.594057979659164,
+      "diversity": 0.18711656441717792,
+      "gini_tokens": 0.2993499546279492,
+      "tokens_per_agent": 2.268602540834846,
+      "hub": 0.003062960862166761,
+      "agent_cut": 0.00850725952813067
+     },
+     "kinds": 1.1249914041308409
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 8328,
+      "marks": 5,
+      "dimension": 2.578956441179807,
+      "wide": 5.5605004275617755,
+      "diversity": 0.299079754601227,
+      "gini_tokens": 0.3077187199807876,
+      "tokens_per_agent": 2.4015369836695486,
+      "hub": 0.0024018253872943435,
+      "agent_cut": 0.11683477425552354
+     },
+     "kinds": 1.2440362236512263
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-63a28e-s1035",
+   "baseline": "B1",
+   "seed": 1035,
+   "set": {
+    "message_amount": 16,
+    "random_input_amount": 2,
+    "self_message": "largest",
+    "hidden_layers": [
+     16,
+     16
+    ],
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "redistribution": "parents",
+    "prune_after": "reproduction",
+    "link_search": "reach",
+    "link_steering": "looking",
+    "link_consent": "forced"
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 866,
+      "marks": 7,
+      "dimension": 3.9012347493121653,
+      "wide": 1.1378590606149006,
+      "diversity": 0.6046779141104295,
+      "gini_tokens": 0.8019064665127023,
+      "tokens_per_agent": 23.094688221709006,
+      "hub": 0.03236994219653179,
+      "agent_cut": 0.006928406466512702
+     },
+     "kinds": 5.931362519802882
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": true,
+      "space": false,
+      "diverse": true,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 358,
+      "marks": 6,
+      "dimension": 3.98128773973783,
+      "wide": 0.9948349270056336,
+      "diversity": 0.7626533742331288,
+      "gini_tokens": 0.8560162011173185,
+      "tokens_per_agent": 55.865921787709496,
+      "hub": 0.09243697478991597,
+      "agent_cut": 0.00558659217877095
+     },
+     "kinds": 116.80859912547572
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-7a52ea-s1036",
+   "baseline": "B1",
+   "seed": 1036,
+   "set": {
+    "random_input_amount": 10,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_noise_std": 0.4,
+    "mutation_sparsity": 0.05,
+    "allow_revolutions": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "redistribution": "poorest",
+    "prune_after": "reproduction",
+    "link_search": "reach",
+    "max_age": 50,
+    "buy_life": true,
+    "prune_needs": 1
+   },
+   "fate": "died",
+   "ended_at": 141,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-92700f-s1037",
+   "baseline": "B1",
+   "seed": 1037,
+   "set": {
+    "random_input_amount": 10,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_noise_std": 0.1,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mix_at_birth": true,
+    "child_floor": "neighbours",
+    "redistribution": "parents",
+    "prune_after": "reproduction",
+    "link_search": "jump",
+    "link_consent": "forced",
+    "max_age": 50,
+    "buy_life": true,
+    "valence": 4
+   },
+   "fate": "died",
+   "ended_at": 4,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-ab3fda-s1038",
+   "baseline": "B1",
+   "seed": 1038,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 2,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "inactive_window": "iteration",
+    "redistribution": "poorest",
+    "link_search": "jump",
+    "link_steering": "looking",
+    "link_consent": "forced",
+    "keep_home": 0.1,
+    "valence": 8
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 5271,
+      "marks": 3,
+      "dimension": 2.5784977363333113,
+      "wide": 2.287593214993275,
+      "diversity": 0.5812883435582822,
+      "gini_tokens": 0.1622070385126162,
+      "tokens_per_agent": 3.7943464238284954,
+      "hub": 0.0015180265654648956,
+      "agent_cut": 0.5080629861506355
+     },
+     "kinds": 1.2045355259140285
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 6808,
+      "marks": 5,
+      "dimension": 2.8591573759212574,
+      "wide": 2.083000725477965,
+      "diversity": 0.4877300613496932,
+      "gini_tokens": 0.3522279524089307,
+      "tokens_per_agent": 2.937720329024677,
+      "hub": 0.0011752607609813426,
+      "agent_cut": 0.5411280846063454
+     },
+     "kinds": 2.129909806602658
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-5cc34b-s1039",
+   "baseline": "B1",
+   "seed": 1039,
+   "set": {
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "newborns",
+    "prune_after": "reproduction",
+    "link_search": "walk",
+    "keep_home": 0.5
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 14315,
+      "marks": 3,
+      "dimension": 3.9797191726330317,
+      "wide": 2.0573699047781595,
+      "diversity": 0.2737730061349693,
+      "gini_tokens": 0.275768229130283,
+      "tokens_per_agent": 1.3971358714634998,
+      "hub": 0.012365516277770015,
+      "agent_cut": 0.21236465246245198
+     },
+     "kinds": 1.7659300619877571
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 17263,
+      "marks": 4,
+      "dimension": 3.091343678315405,
+      "wide": 1.9585234671997178,
+      "diversity": 0.2661042944785276,
+      "gini_tokens": 0.13454023055088915,
+      "tokens_per_agent": 1.15854718183398,
+      "hub": 0.02172401807438304,
+      "agent_cut": 0.045936395759717315
+     },
+     "kinds": 3.0005569562719394
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-1e8af7-s1040",
+   "baseline": "B1",
+   "seed": 1040,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_handover": false,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "newborns",
+    "prune_after": "both",
+    "link_search": "reach",
+    "link_steering": "looking",
+    "max_age": 200,
+    "birth_links": 1
+   },
+   "fate": "died",
+   "ended_at": 930,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": 1.1875779348019715
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-e55747-s1041",
+   "baseline": "B1",
+   "seed": 1041,
+   "set": {
+    "message_amount": 0,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_sparsity": 0.3,
+    "allow_handover": false,
+    "redistribution": "children",
+    "prune_after": "both",
+    "link_search": "reach",
+    "max_age": 200
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 5496,
+      "marks": 3,
+      "dimension": 2.454494819838799,
+      "wide": 3.749116245781474,
+      "diversity": 0.19210122699386503,
+      "gini_tokens": 0.27471044395924316,
+      "tokens_per_agent": 3.63901018922853,
+      "hub": 0.002001819836214741,
+      "agent_cut": 0.11663027656477438
+     },
+     "kinds": 1.1967320272057604
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 5423,
+      "marks": 3,
+      "dimension": 2.778799241367954,
+      "wide": 2.446934762725947,
+      "diversity": 0.20053680981595093,
+      "gini_tokens": 0.3534845472985433,
+      "tokens_per_agent": 3.687995574405311,
+      "hub": 0.002397639247510144,
+      "agent_cut": 0.024156371012354787
+     },
+     "kinds": 1.199179065893957
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-b1bdf8-s1042",
+   "baseline": "B1",
+   "seed": 1042,
+   "set": {
+    "message_amount": 16,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.4,
+    "mutation_noise_std": 0.1,
+    "mutation_sparsity": 0.05,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "child_floor": "neighbours",
+    "redistribution": "newborns",
+    "prune_after": "both",
+    "birth_links": 2
+   },
+   "fate": "died",
+   "ended_at": 3,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-a9101a-s1043",
+   "baseline": "B1",
+   "seed": 1043,
+   "set": {
+    "message_amount": 8,
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "allow_handover": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "inactive_window": "iteration",
+    "redistribution": "poorest",
+    "keep_home": 0.5
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.16666666666666666,
+     "reading": {
+      "agents": 16876,
+      "marks": 3,
+      "dimension": 4.406158216180787,
+      "wide": 1.7333845760695454,
+      "diversity": 0.12346625766871165,
+      "gini_tokens": 0.12814490993126326,
+      "tokens_per_agent": 1.1851149561507466,
+      "hub": 0.0546962962962963,
+      "agent_cut": 0.023228253140554635
+     },
+     "kinds": 2.082323138039443
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 17245,
+      "marks": 3,
+      "dimension": 3.5151892576002246,
+      "wide": 2.009109847114863,
+      "diversity": 0.04716257668711657,
+      "gini_tokens": 0.11793530298637278,
+      "tokens_per_agent": 1.1597564511452596,
+      "hub": 0.05915100904662491,
+      "agent_cut": 0.04957958828645984
+     },
+     "kinds": 1.5351581805176304
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-cd59a3-s1044",
+   "baseline": "B1",
+   "seed": 1044,
+   "set": {
+    "message_amount": 8,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.8,
+    "mutation_noise_std": 0.1,
+    "allow_revolutions": false,
+    "allow_gifting": true,
+    "mend_on_death": true,
+    "child_floor": "neighbours",
+    "redistribution": "parents",
+    "prune_after": "both",
+    "link_search": "jump",
+    "link_steering": "looking",
+    "link_consent": "forced",
+    "incumbency": 1.5
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 2293,
+      "marks": 5,
+      "dimension": 2.788452170414662,
+      "wide": 2.1219457660350516,
+      "diversity": 0.5617331288343559,
+      "gini_tokens": 0.4382557784561709,
+      "tokens_per_agent": 8.722197993894461,
+      "hub": 0.005235602094240838,
+      "agent_cut": 0.057130396860008724
+     },
+     "kinds": 2.180299260005746
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 2425,
+      "marks": 5,
+      "dimension": 2.672725366519062,
+      "wide": 2.9028320619059875,
+      "diversity": 0.5364263803680982,
+      "gini_tokens": 0.4685758762886596,
+      "tokens_per_agent": 8.24742268041237,
+      "hub": 0.005775577557755775,
+      "agent_cut": 0.12989690721649486
+     },
+     "kinds": 1.640080766482987
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-276640-s1045",
+   "baseline": "B1",
+   "seed": 1045,
+   "set": {
+    "random_input_amount": 2,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_gifting": true,
+    "redistribution": "poorest",
+    "link_search": "jump",
+    "min_child": 20
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 917,
+      "marks": 5,
+      "dimension": 2.7684221242648466,
+      "wide": 2.1122627106384,
+      "diversity": 0.6809815950920245,
+      "gini_tokens": 0.4408260632497274,
+      "tokens_per_agent": 21.810250817884405,
+      "hub": 0.026200873362445413,
+      "agent_cut": 0.05234460196292257
+     },
+     "kinds": 1.6520076293131116
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 1586,
+      "marks": 4,
+      "dimension": 2.119507571909021,
+      "wide": 3.0259457140057897,
+      "diversity": 0.6844325153374233,
+      "gini_tokens": 0.6132310844892812,
+      "tokens_per_agent": 12.610340479192939,
+      "hub": 0.010094637223974764,
+      "agent_cut": 0.13808322824716268
+     },
+     "kinds": 1.6071036765814668
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-a5e709-s1046",
+   "baseline": "B1",
+   "seed": 1046,
+   "set": {
+    "message_amount": 0,
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "hidden_layers": [
+     16
+    ],
+    "mutation_noise_std": 0.4,
+    "allow_revolutions": false,
+    "allow_handover": false,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "mix_mates": "parents",
+    "inactive_window": "iteration",
+    "redistribution": "newborns",
+    "link_search": "walk",
+    "link_steering": "looking",
+    "incumbency": 1.5,
+    "keep_home": 0.1
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": false,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.3333333333333333,
+     "reading": {
+      "agents": 9600,
+      "marks": 3,
+      "dimension": 2.7912284187854395,
+      "wide": 4.218812746055243,
+      "diversity": 0.3266871165644172,
+      "gini_tokens": 0.4334328645833334,
+      "tokens_per_agent": 2.0833333333333335,
+      "hub": 0.0022919054068132098,
+      "agent_cut": 0.30052083333333335
+     },
+     "kinds": 1.0962883799446976
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 7862,
+      "marks": 7,
+      "dimension": 3.007625351894571,
+      "wide": 2.9859259120844857,
+      "diversity": 0.5,
+      "gini_tokens": 0.3424335156448739,
+      "tokens_per_agent": 2.543881963876876,
+      "hub": 0.005978883093753975,
+      "agent_cut": 0.0015263291783261257
+     },
+     "kinds": 1.0849588434776463
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-9c15e0-s1047",
+   "baseline": "B1",
+   "seed": 1047,
+   "set": {
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_probability": 0.1,
+    "mutation_noise_std": 0.1,
+    "allow_handover": false,
+    "child_floor": "neighbours",
+    "redistribution": "poorest",
+    "link_search": "walk",
+    "link_steering": "looking",
+    "link_consent": "forced",
+    "min_child": 20,
+    "valence": 16
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": true,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": true,
+     "score": 0.8333333333333334,
+     "reading": {
+      "agents": 828,
+      "marks": 7,
+      "dimension": 2.758022141197766,
+      "wide": 1.8998350880396189,
+      "diversity": 0.7151073619631901,
+      "gini_tokens": 0.7721637681159421,
+      "tokens_per_agent": 24.154589371980677,
+      "hub": 0.019347037484885126,
+      "agent_cut": 0.006038647342995169
+     },
+     "kinds": 1.4137826677310883
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.5,
+     "reading": {
+      "agents": 767,
+      "marks": 5,
+      "dimension": 2.3938412115757686,
+      "wide": 3.1586063781015343,
+      "diversity": 0.473159509202454,
+      "gini_tokens": 0.3876393741851367,
+      "tokens_per_agent": 26.07561929595828,
+      "hub": 0.020887728459530026,
+      "agent_cut": 0.3624511082138201
+     },
+     "kinds": 1.7617651519780868
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-efdfec-s1048",
+   "baseline": "B1",
+   "seed": 1048,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 2,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_revolutions": false,
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "mend_on_death": true,
+    "mix_at_birth": true,
+    "child_floor": "neighbours",
+    "redistribution": "newborns",
+    "prune_after": "both",
+    "link_search": "jump",
+    "link_consent": "forced",
+    "keep_home": 0.5,
+    "valence": 16
+   },
+   "fate": "died",
+   "ended_at": 101,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-d3809d-s1049",
+   "baseline": "B1",
+   "seed": 1049,
+   "set": {
+    "message_amount": 8,
+    "random_input_amount": 10,
+    "message_prepass": false,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "allow_gifting": true,
+    "mutate_on_replication": true,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "poorest",
+    "prune_after": "both",
+    "link_search": "reach",
+    "link_consent": "forced",
+    "max_age": 100,
+    "buy_life": true,
+    "prune_needs": 2
+   },
+   "fate": "died",
+   "ended_at": 275,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    },
+    "2000": {
+     "criteria": {
+      "alive": false,
+      "decentralised": false,
+      "resilient": false,
+      "space": false,
+      "diverse": false,
+      "uneven": false
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.0,
+     "reading": {
+      "agents": null,
+      "marks": null,
+      "dimension": null,
+      "wide": null,
+      "diversity": null,
+      "gini_tokens": null,
+      "tokens_per_agent": null,
+      "hub": null,
+      "agent_cut": null
+     },
+     "kinds": null
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B1-20000-f777c0-s1050",
+   "baseline": "B1",
+   "seed": 1050,
+   "set": {
+    "message_amount": 4,
+    "random_input_amount": 0,
+    "self_message": "largest",
+    "hidden_layers": [
+     16
+    ],
+    "mutation_sparsity": 0.3,
+    "allow_handover": false,
+    "child_floor": "neighbours",
+    "inactive_window": "iteration",
+    "redistribution": "children",
+    "min_child": 5
+   },
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": true,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 1512,
+      "marks": 4,
+      "dimension": 2.0143624242453617,
+      "wide": 3.4719156410672465,
+      "diversity": 0.8719325153374233,
+      "gini_tokens": 0.58207585978836,
+      "tokens_per_agent": 13.227513227513228,
+      "hub": 0.013236267372600927,
+      "agent_cut": 0.15542328042328044
+     },
+     "kinds": 12.872240933823816
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": false,
+      "space": true,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 2721,
+      "marks": 5,
+      "dimension": 2.81238781384216,
+      "wide": 3.9060734880463692,
+      "diversity": 0.7933282208588958,
+      "gini_tokens": 0.5437765159867696,
+      "tokens_per_agent": 7.35023888276369,
+      "hub": 0.01764705882352941,
+      "agent_cut": 0.047409040793825796
+     },
+     "kinds": 6.212725694566627
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B2-20000-s1901",
+   "baseline": "B2",
+   "seed": 1901,
+   "set": {},
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": false,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 6723,
+      "marks": 6,
+      "dimension": 4.842802458540261,
+      "wide": 1.3254718995609374,
+      "diversity": 0.4766104294478528,
+      "gini_tokens": 0.5419553770638108,
+      "tokens_per_agent": 2.9748624126134167,
+      "hub": 0.01368640285629277,
+      "agent_cut": 0.0
+     },
+     "kinds": 43.72085374305482
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": false,
+      "diverse": true,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": true,
+     "score": 0.8333333333333334,
+     "reading": {
+      "agents": 6691,
+      "marks": 6,
+      "dimension": 4.816880307293198,
+      "wide": 1.2674148488806822,
+      "diversity": 0.5532975460122699,
+      "gini_tokens": 0.5061535943805113,
+      "tokens_per_agent": 2.9890898221491558,
+      "hub": 0.010911808669656204,
+      "agent_cut": 0.0
+     },
+     "kinds": 40.140986908358514
+    }
+   }
+  },
+  {
+   "round": "E38",
+   "id": "B2-20000-s1902",
+   "baseline": "B2",
+   "seed": 1902,
+   "set": {},
+   "fate": "lived",
+   "ended_at": 2000,
+   "until": 2000,
+   "sampler": 1,
+   "drawn": false,
+   "moments": {
+    "1000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": false,
+      "diverse": false,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": false,
+     "score": 0.6666666666666666,
+     "reading": {
+      "agents": 5530,
+      "marks": 6,
+      "dimension": 4.771682708188952,
+      "wide": 1.2274393982401741,
+      "diversity": 0.567101226993865,
+      "gini_tokens": 0.5344896383363473,
+      "tokens_per_agent": 3.616636528028933,
+      "hub": 0.011213601012841383,
+      "agent_cut": 0.0
+     },
+     "kinds": 6.979935461643482
+    },
+    "2000": {
+     "criteria": {
+      "alive": true,
+      "decentralised": true,
+      "resilient": true,
+      "space": false,
+      "diverse": true,
+      "uneven": true
+     },
+     "healthy": false,
+     "interesting": true,
+     "score": 0.8333333333333334,
+     "reading": {
+      "agents": 7006,
+      "marks": 6,
+      "dimension": 4.763180758466696,
+      "wide": 1.2131888638924875,
+      "diversity": 0.5118865030674846,
+      "gini_tokens": 0.4804983870967743,
+      "tokens_per_agent": 2.8546959748786755,
+      "hub": 0.009421841541755889,
+      "agent_cut": 0.0
+     },
+     "kinds": 16.55235927986997
+    }
+   }
+  }
+ ],
+ "healthy": [],
+ "interesting": [
+  "B1-20000-c049bc-s1022",
+  "B2-20000-s1901",
+  "B2-20000-s1902"
+ ],
+ "values": [
+  {
+   "setting": "message_amount",
+   "value": 0,
+   "worlds": 7,
+   "died": 4,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "message_amount",
+   "value": 4,
+   "worlds": 9,
+   "died": 5,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "message_amount",
+   "value": 8,
+   "worlds": 12,
+   "died": 7,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 12 worlds was interesting (chance 0.76)"
+   ]
+  },
+  {
+   "setting": "message_amount",
+   "value": 16,
+   "worlds": 8,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "message_amount",
+   "value": 30,
+   "worlds": 14,
+   "died": 5,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "random_input_amount",
+   "value": 0,
+   "worlds": 4,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "random_input_amount",
+   "value": 2,
+   "worlds": 17,
+   "died": 8,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "random_input_amount",
+   "value": 5,
+   "worlds": 14,
+   "died": 7,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 14 worlds was interesting (chance 0.72)"
+   ]
+  },
+  {
+   "setting": "random_input_amount",
+   "value": 10,
+   "worlds": 15,
+   "died": 7,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 15 worlds was interesting (chance 0.7)"
+   ]
+  },
+  {
+   "setting": "message_prepass",
+   "value": false,
+   "worlds": 24,
+   "died": 12,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 24 worlds was interesting (chance 0.44)"
+   ]
+  },
+  {
+   "setting": "message_prepass",
+   "value": true,
+   "worlds": 19,
+   "died": 8,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "self_message",
+   "value": "own",
+   "worlds": 20,
+   "died": 10,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 20 worlds was interesting (chance 0.53)"
+   ]
+  },
+  {
+   "setting": "self_message",
+   "value": "largest",
+   "worlds": 23,
+   "died": 10,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "hidden_layers",
+   "value": [
+    16
+   ],
+   "worlds": 41,
+   "died": 17,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "hidden_layers",
+   "value": [
+    8
+   ],
+   "worlds": 2,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "hidden_layers",
+   "value": [
+    32
+   ],
+   "worlds": 3,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "hidden_layers",
+   "value": [
+    16,
+    16
+   ],
+   "worlds": 4,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_probability",
+   "value": 0.2,
+   "worlds": 32,
+   "died": 14,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_probability",
+   "value": 0.1,
+   "worlds": 9,
+   "died": 5,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_probability",
+   "value": 0.4,
+   "worlds": 5,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_probability",
+   "value": 0.8,
+   "worlds": 4,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_noise_std",
+   "value": 0.2,
+   "worlds": 34,
+   "died": 16,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_noise_std",
+   "value": 0.1,
+   "worlds": 8,
+   "died": 4,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_noise_std",
+   "value": 0.4,
+   "worlds": 8,
+   "died": 4,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_sparsity",
+   "value": 0.1,
+   "worlds": 36,
+   "died": 19,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 36 worlds was interesting (chance 0.28)"
+   ]
+  },
+  {
+   "setting": "mutation_sparsity",
+   "value": 0.05,
+   "worlds": 5,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mutation_sparsity",
+   "value": 0.3,
+   "worlds": 9,
+   "died": 2,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "allow_revolutions",
+   "value": false,
+   "worlds": 19,
+   "died": 8,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "allow_revolutions",
+   "value": true,
+   "worlds": 31,
+   "died": 16,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 31 worlds was interesting (chance 0.38)"
+   ]
+  },
+  {
+   "setting": "allow_handover",
+   "value": false,
+   "worlds": 32,
+   "died": 13,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 32 worlds was interesting (chance 0.36)"
+   ]
+  },
+  {
+   "setting": "allow_handover",
+   "value": true,
+   "worlds": 18,
+   "died": 11,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "allow_gifting",
+   "value": false,
+   "worlds": 25,
+   "died": 10,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "allow_gifting",
+   "value": true,
+   "worlds": 25,
+   "died": 14,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 25 worlds was interesting (chance 0.5)"
+   ]
+  },
+  {
+   "setting": "mutate_on_replication",
+   "value": false,
+   "worlds": 23,
+   "died": 10,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 23 worlds was interesting (chance 0.54)"
+   ]
+  },
+  {
+   "setting": "mutate_on_replication",
+   "value": true,
+   "worlds": 27,
+   "died": 14,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mend_on_death",
+   "value": false,
+   "worlds": 33,
+   "died": 15,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 33 worlds was interesting (chance 0.34)"
+   ]
+  },
+  {
+   "setting": "mend_on_death",
+   "value": true,
+   "worlds": 17,
+   "died": 9,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mix_at_birth",
+   "value": false,
+   "worlds": 24,
+   "died": 9,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 24 worlds was interesting (chance 0.52)"
+   ]
+  },
+  {
+   "setting": "mix_at_birth",
+   "value": true,
+   "worlds": 26,
+   "died": 15,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "mix_mates",
+   "value": "any",
+   "worlds": 14,
+   "died": 10,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 14 worlds was interesting (chance 0.46)"
+   ]
+  },
+  {
+   "setting": "mix_mates",
+   "value": "parents",
+   "worlds": 12,
+   "died": 5,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "child_floor",
+   "value": "fixed",
+   "worlds": 28,
+   "died": 8,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "child_floor",
+   "value": "neighbours",
+   "worlds": 22,
+   "died": 16,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 22 worlds was interesting (chance 0.56)"
+   ]
+  },
+  {
+   "setting": "inactive_window",
+   "value": "phase",
+   "worlds": 26,
+   "died": 12,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 26 worlds was interesting (chance 0.48)"
+   ]
+  },
+  {
+   "setting": "inactive_window",
+   "value": "iteration",
+   "worlds": 24,
+   "died": 12,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "redistribution",
+   "value": "uniform",
+   "worlds": 7,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "redistribution",
+   "value": "by_tokens",
+   "worlds": 7,
+   "died": 7,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "redistribution",
+   "value": "poorest",
+   "worlds": 11,
+   "died": 5,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 11 worlds was interesting (chance 0.78)"
+   ]
+  },
+  {
+   "setting": "redistribution",
+   "value": "newborns",
+   "worlds": 10,
+   "died": 5,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 10 worlds was interesting (chance 0.8)"
+   ]
+  },
+  {
+   "setting": "redistribution",
+   "value": "parents",
+   "worlds": 8,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "redistribution",
+   "value": "children",
+   "worlds": 7,
+   "died": 1,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "prune_after",
+   "value": "blotto",
+   "worlds": 18,
+   "died": 7,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 18 worlds was interesting (chance 0.64)"
+   ]
+  },
+  {
+   "setting": "prune_after",
+   "value": "reproduction",
+   "worlds": 14,
+   "died": 7,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 14 worlds was interesting (chance 0.72)"
+   ]
+  },
+  {
+   "setting": "prune_after",
+   "value": "both",
+   "worlds": 18,
+   "died": 10,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "link_search",
+   "value": "off",
+   "worlds": 19,
+   "died": 9,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "link_search",
+   "value": "jump",
+   "worlds": 10,
+   "died": 6,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 10 worlds was interesting (chance 0.8)"
+   ]
+  },
+  {
+   "setting": "link_search",
+   "value": "walk",
+   "worlds": 12,
+   "died": 4,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 12 worlds was interesting (chance 0.76)"
+   ]
+  },
+  {
+   "setting": "link_search",
+   "value": "reach",
+   "worlds": 9,
+   "died": 5,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "link_steering",
+   "value": "random",
+   "worlds": 16,
+   "died": 9,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 16 worlds was interesting (chance 1)"
+   ]
+  },
+  {
+   "setting": "link_steering",
+   "value": "looking",
+   "worlds": 15,
+   "died": 6,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 15 worlds was interesting (chance 1)"
+   ]
+  },
+  {
+   "setting": "link_consent",
+   "value": "mutual",
+   "worlds": 13,
+   "died": 7,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 13 worlds was interesting (chance 1)"
+   ]
+  },
+  {
+   "setting": "link_consent",
+   "value": "forced",
+   "worlds": 18,
+   "died": 8,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": [
+    "none of 18 worlds was interesting (chance 1)"
+   ]
+  },
+  {
+   "setting": "incumbency",
+   "value": 1.0,
+   "worlds": 40,
+   "died": 17,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "incumbency",
+   "value": 1.25,
+   "worlds": 2,
+   "died": 1,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "incumbency",
+   "value": 1.5,
+   "worlds": 6,
+   "died": 4,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "incumbency",
+   "value": 2.0,
+   "worlds": 2,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "keep_home",
+   "value": 0.0,
+   "worlds": 37,
+   "died": 21,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "keep_home",
+   "value": 0.1,
+   "worlds": 4,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "keep_home",
+   "value": 0.3,
+   "worlds": 4,
+   "died": 0,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "keep_home",
+   "value": 0.5,
+   "worlds": 5,
+   "died": 1,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "max_age",
+   "value": 0,
+   "worlds": 38,
+   "died": 17,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "max_age",
+   "value": 50,
+   "worlds": 4,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "max_age",
+   "value": 100,
+   "worlds": 3,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "max_age",
+   "value": 200,
+   "worlds": 5,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "buy_life",
+   "value": false,
+   "worlds": 7,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "buy_life",
+   "value": true,
+   "worlds": 5,
+   "died": 5,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "min_child",
+   "value": 1,
+   "worlds": 43,
+   "died": 21,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "min_child",
+   "value": 5,
+   "worlds": 1,
+   "died": 0,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "min_child",
+   "value": 10,
+   "worlds": 3,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "min_child",
+   "value": 20,
+   "worlds": 3,
+   "died": 0,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "valence",
+   "value": 0,
+   "worlds": 36,
+   "died": 15,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "valence",
+   "value": 4,
+   "worlds": 7,
+   "died": 6,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "valence",
+   "value": 8,
+   "worlds": 2,
+   "died": 0,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "valence",
+   "value": 16,
+   "worlds": 5,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "birth_links",
+   "value": 0,
+   "worlds": 44,
+   "died": 21,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "birth_links",
+   "value": 1,
+   "worlds": 2,
+   "died": 1,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "birth_links",
+   "value": 2,
+   "worlds": 3,
+   "died": 2,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "birth_links",
+   "value": 4,
+   "worlds": 1,
+   "died": 0,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "prune_needs",
+   "value": 0,
+   "worlds": 34,
+   "died": 14,
+   "interesting": 1,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "prune_needs",
+   "value": 1,
+   "worlds": 6,
+   "died": 3,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "prune_needs",
+   "value": 2,
+   "worlds": 2,
+   "died": 1,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  },
+  {
+   "setting": "prune_needs",
+   "value": 3,
+   "worlds": 8,
+   "died": 6,
+   "interesting": 0,
+   "healthy": 0,
+   "bad": []
+  }
+ ],
+ "judged": 50,
+ "forced_next": {
+  "message_amount": [
+   8
+  ],
+  "random_input_amount": [
+   5,
+   10
+  ],
+  "message_prepass": [
+   false
+  ],
+  "self_message": [
+   "own"
+  ],
+  "mutation_sparsity": [
+   0.1
+  ],
+  "allow_revolutions": [
+   true
+  ],
+  "allow_handover": [
+   false
+  ],
+  "allow_gifting": [
+   true
+  ],
+  "mutate_on_replication": [
+   false
+  ],
+  "mend_on_death": [
+   false
+  ],
+  "mix_at_birth": [
+   false
+  ],
+  "mix_mates": [
+   "any"
+  ],
+  "child_floor": [
+   "neighbours"
+  ],
+  "inactive_window": [
+   "phase"
+  ],
+  "redistribution": [
+   "poorest",
+   "newborns"
+  ],
+  "prune_after": [
+   "blotto",
+   "reproduction"
+  ],
+  "link_search": [
+   "jump",
+   "walk"
+  ]
+ }
+}

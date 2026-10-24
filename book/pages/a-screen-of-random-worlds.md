@@ -17,8 +17,10 @@ a screen: rounds of fifty worlds with every setting drawn at random, each
 judged at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000 by six criteria. A world is healthy when it meets
 all six, and interesting when it is alive and misses at most one. A value is
 set aside once it was tried in at least ten worlds where it could matter, and
-all of them died or none was interesting. Round 1, Experiment 38, is being
-played in the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."); its results are still to come.
+all of them died or none was interesting. Round 1, Experiment 38, found no
+healthy world in fifty, and one interesting one, so its thesis is refuted.
+The worlds met the two walls the notebook knew: mended worlds are whole but
+folded, and the worlds that stay spaces break or are poor.
 
 ## Why draw worlds at random
 
@@ -247,14 +249,137 @@ what chance would explain ([How our view changed](#how-our-view-changed)).
 Round 1 is judged by the author's rule, with the chance printed beside each
 value marked bad.
 
-## Results still to come
+## What round 1 found
 
-The fifty worlds of round 1, and the two worlds of B2 beside them, are being
-played in the lab. The round has not been judged yet.
-Its results are still to come: until the judge has read every world, the
-thesis is neither confirmed nor refuted, and no value is set aside. Then this
-page will say which worlds were healthy or interesting, which criteria the
-others missed, and which values the next round draws no more.
+Of the fifty drawn worlds, 24 died out, half of them by iteration 135. Four
+were stopped as too slow, and 22 lived to iteration 2,000. Both worlds of B2
+beside them lived. This is how many of them met each criterion at 2,000:
+
+<!-- table screenround/E38_met -->
+| criterion | what it asks | drawn worlds that meet it (of 50) | B2's 2 worlds |
+|---|---|---|---|
+| alive | more than 20 agents at iteration 2,000, and not stopped as too slow | 22 | 2 |
+| decentralised | no agent linked to more than 5% of the others, and 3 to 12 links per agent | 14 | 2 |
+| resilient | one piece, with at least 80% of the agents in the 2-core; no single agent's loss cuts off more than 2% of the world, and no single link's more than 1% | 3 | 2 |
+| almost three-dimensional | a dimension of 2 to 4, and a typical distance at least 1.5 times its random twin's: a true space, not a folded small world | 16 | 0 |
+| diverse | tokens, links, ages and genotypes spread more widely than in B2's median world, and its agents' decisions vary more (effective kinds of staking) | 3 | 2 |
+| not too even | a Gini of the tokens no lower than B2's least even world | 7 | 2 |
+<!-- /table -->
+
+### No healthy world
+
+None of the 22 living worlds met all six criteria. One missed a single one,
+six missed two, and the others missed three or more. Resilience and
+diversity were the rarest: 3 drawn worlds met each.
+
+So the thesis is **refuted**. It asked for at least one healthy world in
+fifty, and there was none.
+
+### The worlds that came nearest
+
+These are the worlds that missed at most two criteria, with their readings at
+iteration 2,000. The *width* is a world's typical distance over its random
+twin's, and a world counts as a space at 1.5 or more:
+
+<!-- table screenround/E38_near -->
+| world | misses | agents | width | dimension | diversity score | Gini | kinds of staking |
+|---|---|---|---|---|---|---|---|
+| 22 (seed 1022) | almost three-dimensional | 2,544 | 1.13 | 4.62 | 0.73 | 0.69 | 20.2 |
+| B2, seed 1901 | almost three-dimensional | 6,691 | 1.27 | 4.82 | 0.55 | 0.51 | 40.1 |
+| B2, seed 1902 | almost three-dimensional | 7,006 | 1.21 | 4.76 | 0.51 | 0.48 | 16.6 |
+| 21 (seed 1021) | resilient, diverse | 2,385 | 2.02 | 2.92 | 0.54 | 0.65 | 3.5 |
+| 35 (seed 1035) | decentralised, almost three-dimensional | 358 | 0.99 | 3.98 | 0.76 | 0.86 | 116.8 |
+| 44 (seed 1044) | resilient, diverse | 2,425 | 2.90 | 2.67 | 0.54 | 0.47 | 1.6 |
+| 45 (seed 1045) | resilient, diverse | 1,586 | 3.03 | 2.12 | 0.68 | 0.61 | 1.6 |
+| 46 (seed 1046) | diverse, not too even | 7,862 | 2.99 | 3.01 | 0.50 | 0.34 | 1.1 |
+| 50 (seed 1050) | resilient, diverse | 2,721 | 3.91 | 2.81 | 0.79 | 0.54 | 6.2 |
+<!-- /table -->
+
+Three worlds were interesting, but two of them are B2's own, played beside the
+round for reference. Only one drawn world was interesting: **world 22**. Its
+brains are mixed at birth, with parents as mates; its deaths are mended; it
+has no revolutions; and the estate of the dead goes to the dead agent's own
+children. It met every criterion but one: it is not a space. It is folded,
+as B2's two worlds are, at a width of 1.13.
+
+**World 46** is the mirror image. It is decentralised and resilient, and a
+true space of 3.0 dimensions, at a width of 2.99. But its agents are alike,
+with one kind of staking, and its tokens are too even: a Gini of 0.34. Its
+estate goes to the newborns, and it holds 7,862 agents on 20,000 tokens.
+
+### Room or resilience
+
+The round sets apart what the notebook found one rule at a time. Of the 22
+living drawn worlds, 15 were spaces that a single loss could cut, 2 were
+resilient but folded, and 4 were neither. Only world 46 was both, and it is
+poor and alike. Mending keeps a world whole and folds it; without mending a
+world keeps its room and breaks
+([Is a world a space?](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
+And where the estate pays for births, the world is a space of paupers
+([Room and riches for the steadiest world](room-for-the-steadiest-world.md)).
+A random draw of thirty settings met the same two walls.
+
+Some settings killed every world they came in, but in fewer than ten worlds,
+so the rule cannot set them aside yet. The estate shared by wealth
+([`redistribution`](settings.md#redistribution) = `by_tokens`) came in 7
+finished worlds, and all 7 died. A cap of 4 links
+([`valence`](settings.md#valence)) came in 7, and 6 died. A least child of 10
+tokens ([`min_child`](settings.md#min_child)) came in 3, and all 3 died.
+
+### What the rule sets aside
+
+The author's rule sets a value aside when it came in at least ten worlds where
+it could matter, and every one of them died or none was interesting. Only
+worlds that were drawn count, not B2's. So in round 1 the rule rests on a
+single world, world 22. Every value that world 22 did not have, and that came
+in ten worlds or more, is marked bad: 25 values. A setting always keeps one
+value, so the link search's steering and consent, all of whose values were
+marked, keep them; the other 21 values, of 17 settings, are set aside.
+
+<!-- table screenround/E38_aside -->
+| setting | value set aside | worlds where it could matter | of them died | chance of this by luck |
+|---|---|---|---|---|
+| [`allow_gifting`](settings.md#allow_gifting) | True | 25 | 14 | 0.5 |
+| [`allow_handover`](settings.md#allow_handover) | False | 32 | 13 | 0.36 |
+| [`allow_revolutions`](settings.md#allow_revolutions) | True | 31 | 16 | 0.38 |
+| [`child_floor`](settings.md#child_floor) | neighbours | 22 | 16 | 0.56 |
+| [`inactive_window`](settings.md#inactive_window) | phase | 26 | 12 | 0.48 |
+| [`link_consent`](settings.md#link_consent) | forced | 18 | 8 | 1 |
+| [`link_consent`](settings.md#link_consent) | mutual | 13 | 7 | 1 |
+| [`link_search`](settings.md#link_search) | jump | 10 | 6 | 0.8 |
+| [`link_search`](settings.md#link_search) | walk | 12 | 4 | 0.76 |
+| [`link_steering`](settings.md#link_steering) | looking | 15 | 6 | 1 |
+| [`link_steering`](settings.md#link_steering) | random | 16 | 9 | 1 |
+| [`mend_on_death`](settings.md#mend_on_death) | False | 33 | 15 | 0.34 |
+| [`message_amount`](settings.md#message_amount) | 8 | 12 | 7 | 0.76 |
+| [`message_prepass`](settings.md#message_prepass) | False | 24 | 12 | 0.44 |
+| [`mix_at_birth`](settings.md#mix_at_birth) | False | 24 | 9 | 0.52 |
+| [`mix_mates`](settings.md#mix_mates) | any | 14 | 10 | 0.46 |
+| [`mutate_on_replication`](settings.md#mutate_on_replication) | False | 23 | 10 | 0.54 |
+| [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.1 | 36 | 19 | 0.28 |
+| [`prune_after`](settings.md#prune_after) | blotto | 18 | 7 | 0.64 |
+| [`prune_after`](settings.md#prune_after) | reproduction | 14 | 7 | 0.72 |
+| [`random_input_amount`](settings.md#random_input_amount) | 10 | 15 | 7 | 0.7 |
+| [`random_input_amount`](settings.md#random_input_amount) | 5 | 14 | 7 | 0.72 |
+| [`redistribution`](settings.md#redistribution) | newborns | 10 | 5 | 0.8 |
+| [`redistribution`](settings.md#redistribution) | poorest | 11 | 5 | 0.78 |
+| [`self_message`](settings.md#self_message) | own | 20 | 10 | 0.53 |
+<!-- /table -->
+
+The last column is the chance that a value would be set aside by luck alone,
+if the one interesting world had fallen among the worlds at random. It is
+0.28 or more for every one of the 25: each could easily be chance. That is
+the warning of [When a value is set aside](#when-a-value-is-set-aside): when
+interesting worlds are rare, ten failures in a row come easily. Applied as it
+stands, the rule would draw round 2 around world 22's settings. It would set
+aside, among others, the estate to the newborns, which made world 46, the
+round's only resilient space.
+
+The thesis's last sentence names values set aside "beyond what chance would
+explain", the rule of the day it was written. By that rule none of the 25
+would be set aside.
+
+How round 2 is drawn is the author's decision, and it waits for it.
 
 ## Where to go next
 
@@ -280,7 +405,7 @@ worlds have seeds 1001 to 1050. The worlds of B2 have seeds
 Every value is drawn from a hash of the sampler's version, the round's seed,
 the world's number and the setting's name, not from one random stream. So
 adding worlds to a round, or drawing a refused combination again, changes no
-other world. A draw the engine refuses is drawn again with the next attempt
+other world. A draw the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") refuses is drawn again with the next attempt
 number; none of round 1's draws was refused. A world's settings are kept as
 what differs from B1. That is why every row of the table of settings below
 lists the brain's hidden layers.

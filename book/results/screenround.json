@@ -1,0 +1,499 @@
+{
+ "chapter": "screenround",
+ "numbers": {
+  "E38_fates": {
+   "drawn": 50,
+   "died": 24,
+   "too slow": 4,
+   "lived": 22,
+   "died_at_median": 135.0
+  },
+  "table:E38_met": {
+   "head": [
+    "criterion",
+    "what it asks",
+    "drawn worlds that meet it (of 50)",
+    "B2's 2 worlds"
+   ],
+   "rows": [
+    [
+     "alive",
+     "more than 20 agents at iteration 2,000, and not stopped as too slow",
+     22,
+     2
+    ],
+    [
+     "decentralised",
+     "no agent linked to more than 5% of the others, and 3 to 12 links per agent",
+     14,
+     2
+    ],
+    [
+     "resilient",
+     "one piece, with at least 80% of the agents in the 2-core; no single agent's loss cuts off more than 2% of the world, and no single link's more than 1%",
+     3,
+     2
+    ],
+    [
+     "almost three-dimensional",
+     "a dimension of 2 to 4, and a typical distance at least 1.5 times its random twin's: a true space, not a folded small world",
+     16,
+     0
+    ],
+    [
+     "diverse",
+     "tokens, links, ages and genotypes spread more widely than in B2's median world, and its agents' decisions vary more (effective kinds of staking)",
+     3,
+     2
+    ],
+    [
+     "not too even",
+     "a Gini of the tokens no lower than B2's least even world",
+     7,
+     2
+    ]
+   ]
+  },
+  "table:E38_near": {
+   "head": [
+    "world",
+    "misses",
+    "agents",
+    "width",
+    "dimension",
+    "diversity score",
+    "Gini",
+    "kinds of staking"
+   ],
+   "rows": [
+    [
+     "22 (seed 1022)",
+     "almost three-dimensional",
+     "2,544",
+     "1.13",
+     "4.62",
+     "0.73",
+     "0.69",
+     "20.2"
+    ],
+    [
+     "B2, seed 1901",
+     "almost three-dimensional",
+     "6,691",
+     "1.27",
+     "4.82",
+     "0.55",
+     "0.51",
+     "40.1"
+    ],
+    [
+     "B2, seed 1902",
+     "almost three-dimensional",
+     "7,006",
+     "1.21",
+     "4.76",
+     "0.51",
+     "0.48",
+     "16.6"
+    ],
+    [
+     "21 (seed 1021)",
+     "resilient, diverse",
+     "2,385",
+     "2.02",
+     "2.92",
+     "0.54",
+     "0.65",
+     "3.5"
+    ],
+    [
+     "35 (seed 1035)",
+     "decentralised, almost three-dimensional",
+     "358",
+     "0.99",
+     "3.98",
+     "0.76",
+     "0.86",
+     "116.8"
+    ],
+    [
+     "44 (seed 1044)",
+     "resilient, diverse",
+     "2,425",
+     "2.90",
+     "2.67",
+     "0.54",
+     "0.47",
+     "1.6"
+    ],
+    [
+     "45 (seed 1045)",
+     "resilient, diverse",
+     "1,586",
+     "3.03",
+     "2.12",
+     "0.68",
+     "0.61",
+     "1.6"
+    ],
+    [
+     "46 (seed 1046)",
+     "diverse, not too even",
+     "7,862",
+     "2.99",
+     "3.01",
+     "0.50",
+     "0.34",
+     "1.1"
+    ],
+    [
+     "50 (seed 1050)",
+     "resilient, diverse",
+     "2,721",
+     "3.91",
+     "2.81",
+     "0.79",
+     "0.54",
+     "6.2"
+    ]
+   ]
+  },
+  "E38_misses": {
+   "3": 8,
+   "4": 5,
+   "2": 6,
+   "1": 1,
+   "5": 2
+  },
+  "E38_resilient_space": {
+   "True/True": 1,
+   "True/False": 2,
+   "False/True": 15,
+   "False/False": 4
+  },
+  "table:E38_aside": {
+   "head": [
+    "setting",
+    "value set aside",
+    "worlds where it could matter",
+    "of them died",
+    "chance of this by luck"
+   ],
+   "rows": [
+    [
+     {
+      "text": "`allow_gifting`",
+      "href": "pages/settings.md#allow_gifting"
+     },
+     "True",
+     25,
+     14,
+     "0.5"
+    ],
+    [
+     {
+      "text": "`allow_handover`",
+      "href": "pages/settings.md#allow_handover"
+     },
+     "False",
+     32,
+     13,
+     "0.36"
+    ],
+    [
+     {
+      "text": "`allow_revolutions`",
+      "href": "pages/settings.md#allow_revolutions"
+     },
+     "True",
+     31,
+     16,
+     "0.38"
+    ],
+    [
+     {
+      "text": "`child_floor`",
+      "href": "pages/settings.md#child_floor"
+     },
+     "neighbours",
+     22,
+     16,
+     "0.56"
+    ],
+    [
+     {
+      "text": "`inactive_window`",
+      "href": "pages/settings.md#inactive_window"
+     },
+     "phase",
+     26,
+     12,
+     "0.48"
+    ],
+    [
+     {
+      "text": "`link_consent`",
+      "href": "pages/settings.md#link_consent"
+     },
+     "forced",
+     18,
+     8,
+     "1"
+    ],
+    [
+     {
+      "text": "`link_consent`",
+      "href": "pages/settings.md#link_consent"
+     },
+     "mutual",
+     13,
+     7,
+     "1"
+    ],
+    [
+     {
+      "text": "`link_search`",
+      "href": "pages/settings.md#link_search"
+     },
+     "jump",
+     10,
+     6,
+     "0.8"
+    ],
+    [
+     {
+      "text": "`link_search`",
+      "href": "pages/settings.md#link_search"
+     },
+     "walk",
+     12,
+     4,
+     "0.76"
+    ],
+    [
+     {
+      "text": "`link_steering`",
+      "href": "pages/settings.md#link_steering"
+     },
+     "looking",
+     15,
+     6,
+     "1"
+    ],
+    [
+     {
+      "text": "`link_steering`",
+      "href": "pages/settings.md#link_steering"
+     },
+     "random",
+     16,
+     9,
+     "1"
+    ],
+    [
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "False",
+     33,
+     15,
+     "0.34"
+    ],
+    [
+     {
+      "text": "`message_amount`",
+      "href": "pages/settings.md#message_amount"
+     },
+     "8",
+     12,
+     7,
+     "0.76"
+    ],
+    [
+     {
+      "text": "`message_prepass`",
+      "href": "pages/settings.md#message_prepass"
+     },
+     "False",
+     24,
+     12,
+     "0.44"
+    ],
+    [
+     {
+      "text": "`mix_at_birth`",
+      "href": "pages/settings.md#mix_at_birth"
+     },
+     "False",
+     24,
+     9,
+     "0.52"
+    ],
+    [
+     {
+      "text": "`mix_mates`",
+      "href": "pages/settings.md#mix_mates"
+     },
+     "any",
+     14,
+     10,
+     "0.46"
+    ],
+    [
+     {
+      "text": "`mutate_on_replication`",
+      "href": "pages/settings.md#mutate_on_replication"
+     },
+     "False",
+     23,
+     10,
+     "0.54"
+    ],
+    [
+     {
+      "text": "`mutation_sparsity`",
+      "href": "pages/settings.md#mutation_sparsity"
+     },
+     "0.1",
+     36,
+     19,
+     "0.28"
+    ],
+    [
+     {
+      "text": "`prune_after`",
+      "href": "pages/settings.md#prune_after"
+     },
+     "blotto",
+     18,
+     7,
+     "0.64"
+    ],
+    [
+     {
+      "text": "`prune_after`",
+      "href": "pages/settings.md#prune_after"
+     },
+     "reproduction",
+     14,
+     7,
+     "0.72"
+    ],
+    [
+     {
+      "text": "`random_input_amount`",
+      "href": "pages/settings.md#random_input_amount"
+     },
+     "10",
+     15,
+     7,
+     "0.7"
+    ],
+    [
+     {
+      "text": "`random_input_amount`",
+      "href": "pages/settings.md#random_input_amount"
+     },
+     "5",
+     14,
+     7,
+     "0.72"
+    ],
+    [
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "newborns",
+     10,
+     5,
+     "0.8"
+    ],
+    [
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "poorest",
+     11,
+     5,
+     "0.78"
+    ],
+    [
+     {
+      "text": "`self_message`",
+      "href": "pages/settings.md#self_message"
+     },
+     "own",
+     20,
+     10,
+     "0.53"
+    ]
+   ]
+  },
+  "E38_interesting": [
+   "B1-20000-c049bc-s1022",
+   "B2-20000-s1901",
+   "B2-20000-s1902"
+  ],
+  "E38_forced_next": {
+   "message_amount": [
+    8
+   ],
+   "random_input_amount": [
+    5,
+    10
+   ],
+   "message_prepass": [
+    false
+   ],
+   "self_message": [
+    "own"
+   ],
+   "mutation_sparsity": [
+    0.1
+   ],
+   "allow_revolutions": [
+    true
+   ],
+   "allow_handover": [
+    false
+   ],
+   "allow_gifting": [
+    true
+   ],
+   "mutate_on_replication": [
+    false
+   ],
+   "mend_on_death": [
+    false
+   ],
+   "mix_at_birth": [
+    false
+   ],
+   "mix_mates": [
+    "any"
+   ],
+   "child_floor": [
+    "neighbours"
+   ],
+   "inactive_window": [
+    "phase"
+   ],
+   "redistribution": [
+    "poorest",
+    "newborns"
+   ],
+   "prune_after": [
+    "blotto",
+    "reproduction"
+   ],
+   "link_search": [
+    "jump",
+    "walk"
+   ]
+  }
+ },
+ "figures": {}
+}
