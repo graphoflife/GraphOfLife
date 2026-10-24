@@ -1,0 +1,26 @@
+{
+ "id": "E39",
+ "title": "A screen of random worlds, round 2",
+ "thesis": {
+  "claim": "Fifty more worlds drawn as round 1's were, with a new round seed, meet the same two walls: at iteration 2,000 no drawn world is at once resilient, a true space, as diverse as B2's median world in its agents and its decisions, and no more even than B2's least even world.",
+  "why": "In round 1 (Experiment 38), of the 22 drawn worlds that lived to 2,000, 15 were spaces that a single loss could cut, 2 were resilient but folded, and 4 were neither. The one world both resilient and a space (world 46, the estate paid to the newborns) had agents alike in their staking and tokens too even. One rule at a time showed the same: mending keeps a world whole and folds it, and estates that pay for births keep it a space and fill it with paupers. A round drawn the same way should meet the same walls. The author chose to draw round 2 as round 1 was drawn and to judge both rounds together, since round 1 had a single interesting world to set values aside by.",
+  "confirm": "No drawn world of round 2 meets the four criteria resilient, almost three-dimensional, diverse and not too even together at 2,000 (research/screen/judge.py E38 E39, with B2's lines from Experiment 16's ten worlds).",
+  "refute": "At least one does: the page says which world, what else it misses if anything, and which of its settings set it apart."
+ },
+ "screen": {
+  "sampler": 1,
+  "seed": 2,
+  "worlds": 50,
+  "tokens": 20000,
+  "iterations": 2000,
+  "budget_hours": 4,
+  "references": {
+   "B2": 2
+  },
+  "record": {
+   "archive_every": 500,
+   "checkpoint_every": 100,
+   "heavy_every": 25
+  }
+ }
+}
