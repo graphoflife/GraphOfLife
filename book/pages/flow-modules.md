@@ -453,8 +453,9 @@ reads and how.
   from its record, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 950 when it lived that long, for up to five
   [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of every condition. A pilot is played on from its checkpoint at
   iteration 1,000. That makes 183 worlds of every kind, each counted once.
-  Eighteen pilot worlds replay a lab world, with its [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and seed, game
-  for game; they are left out. The results are kept in
+  Sixteen pilot worlds replay a lab world, with its [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and seed, game
+  for game; they are left out. And seven worlds give another's answer to the
+  last digit, a condition that never came into play, so each is counted once. The results are kept in
   `GraphOfLifeRuns/.pilots/atlas/flowmodules/`.
 - **Eighteen worlds, three ways.** `research/atlas/flowpersist.py` reads the
   same fifty games of eighteen lab worlds again. It follows each world as it
@@ -499,6 +500,11 @@ reads and how.
   eighth (0.11–0.13) was said of every world where unused links lapse. It
   holds for the lab's B1 worlds. Where B2's unused links lapse, modules change
   0.18 of their members a game, and in the B1 pilots 0.26.
+- **24 October 2026.** How this was made said that eighteen pilot worlds
+  replay a lab world and are left out. Counted again, with every lab run's
+  settings readable (`book_chapters/everyworld.replicas`), sixteen do. Seven
+  more give the same answer as another world to the last digit, and are
+  counted once. So 206 complete results make the 183 worlds of this page.
 
 ## References
 
