@@ -1230,7 +1230,7 @@
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-15",
-      "summary": "Patterns that outlast the agents in them, after Conway's Game of Life: puffers, gliders, blinkers and guns made of takeovers, and tokens that run downhill or go round. Then help, defined by the rules: a stake without which a neighbour would have lost its node."
+      "summary": "When an agent takes a neighbour's node with at least half of its tokens, its wealth and a copy of its brain move there together."
     },
     {
       "id": "rules-in-company",
