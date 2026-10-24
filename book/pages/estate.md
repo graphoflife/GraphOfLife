@@ -108,6 +108,6 @@ them had 12 to 23.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (7)
-> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Births and the four ways to die](births-and-deaths.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Where tokens go](where-tokens-go.md)
+> [!info]- Pages that link here (8)
+> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Births and the four ways to die](births-and-deaths.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Where tokens go](where-tokens-go.md) · [Who inherits?](who-inherits.md)
 <!-- /turns -->

@@ -872,6 +872,6 @@ Experiment 16's ten worlds read the same way:
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Size and riches of a world](../README.md#size-and-riches-of-a-world).
 
-> [!info]- Pages that link here (9)
-> [Every setting](settings.md) · [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (10)
+> [Every setting](settings.md) · [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Who inherits?](who-inherits.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
 <!-- /turns -->

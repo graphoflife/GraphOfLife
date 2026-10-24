@@ -3,47 +3,58 @@
 > [!question] Questions of this page
 > - When an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") dies, its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") go back to the world. Does it matter who
 >   gets them?
-> - What happens if the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") goes to the poorest, to the children just
+> - What happens if the estate goes to the poorest, to the children just
 >   born, or to the agents that have just had children?
-> - And if it stays in the family — each estate to the dead agent's own
->   children? (Added later.)
+> - And if it stays in the family, each estate to the dead agent's own
+>   children?
 
-When an agent dies — of age in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), or in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") when it loses its node or the
-piece of the world it is on is cut off — its tokens do not vanish: the
-[cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") pools them and shares them out among the survivors. Until now every
-world of this notebook shared them out **evenly**: every survivor had the same
-chance at every token ([`redistribution`](settings.md#redistribution)
-= `uniform`). The author asked for other ways, and each has a reading of its
-own:
+## In short
 
-- **to the poorest** — a safety net: the pool raises the poorest survivors to
+When an agent dies, the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") shares its tokens out among the survivors:
+until now evenly, every survivor with the same chance at every token. Four
+other rules were played in pilot worlds of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") and [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."). Given to the poorest,
+the estate changes little in B2, and keeps B1's poorest alive. Given to the
+newborns or to the parents, it pays for births. B2's worlds grow by half and
+grow poorer, and B1 becomes a world of infants. And in B2 evolution stops. Kept
+in the family, it changes little in B2, and there evolution goes on at least
+as fast as in B2 itself.
+
+## Where the tokens of the dead go
+
+An agent dies of age in B2. In B1 it dies when it loses its node, or when the
+piece of the world it is on is cut off. Either way its tokens do not vanish:
+the cleanup pools them and shares them out among the survivors. Until now
+every world of this notebook shared them out **evenly**: every survivor had
+the same chance at every token
+([`redistribution`](settings.md#redistribution) = `uniform`;
+[The share-out](gains-and-losses.md#the-share-out)). The author asked for
+other ways, and each has a reading of its own:
+
+- **to the poorest**: a safety net. The pool raises the poorest survivors to
   one common level, as far as it reaches, like water poured on an uneven
   floor;
-- **to the newborns** — an inheritance for the young: the pool is shared
+- **to the newborns**: an inheritance for the young. The pool is shared
   evenly among the children born that [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.");
-- **to the parents** — a reward for having children: the pool is shared among
-  the agents that had a child that iteration, once per child.
+- **to the parents**: a reward for having children. The pool is shared among
+  the agents that had a child that iteration, once per child;
+- **to the dead agent's own children**: the estate stays in the family. Each
+  dead agent's tokens go to its own living children, evenly. An estate that
+  finds no living child is shared out evenly among everyone, as before
+  (`redistribution` = `children`). This fourth rule followed on 17 October
+  2026.
 
 None of them has a number of its own. In an iteration without a birth, the
-last two share the pool out evenly, as before.
-
-> [!info] Added later (17 October 2026)
-> A fourth rule followed: **to the dead agent's own children** — the estate
-> stays in the family. Each dead agent's tokens go to its own living
-> children, evenly; an estate that finds no living child is shared out evenly
-> among everyone, as before (`redistribution` = `children`). Its worlds were
-> played the same way and are the blue lines and dots below; what they show
-> is in [its own section](#added-later-to-the-dead-agents-own-children).
+newborns' and the parents' rules share the pool out evenly, as before.
 
 ## The worlds
 
-Each rule was played in [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds of 10,000 tokens for 2,000 iterations,
-two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each (batch R), on both of the notebook's [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."): B2, the world that
-cannot break, with Experiment 16's settings, and B1, where worlds break and
+Each rule was played in pilot worlds of 10,000 tokens for 2,000 iterations,
+two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each (batch R; [Pilot worlds](the-lab.md#pilot-worlds)). They were
+played on both of the notebook's [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."). One is B2, the world that cannot
+break, with Experiment 16's settings. The other is B1, where worlds break and
 cut-off pieces are culled. The controls are the same settings and seeds with
-the estate shared evenly: for B2 the pilot worlds `P/B2-s1` and `-s2` (the
-[lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s Experiment 16 worlds again, game for game), for B1 the first 2,000
-iterations of the long runs `L/B1-long-s1` and `-s2`.
+the estate shared evenly ([How this was made](#how-this-was-made)). The
+worlds of the fourth rule are the blue lines and dots below.
 
 ## B2: bigger and poorer, or no change
 
@@ -62,22 +73,22 @@ iterations of the long runs `L/B1-long-s1` and `-s2`.
 >
 > **To make it again:** `python3 book_figures.py inherit`.
 <!-- /figure -->
-
 **To the poorest, nothing much changes.** The worlds hold 3,600 to 3,700
-agents, as B2's do; four agents in five still hold three tokens or fewer, the
-[median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent one. The pool is small: in B2 the dead leave about seventy
-tokens an iteration among 3,600 agents, and raising the poorest by that much
-lifts a few of them by a token.
+agents, as B2's do. Four agents in five still hold three tokens or fewer, and
+the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent holds one. The pool is small. In B2 the dead leave about
+seventy tokens an iteration among 3,600 agents. Raising the poorest by that
+much lifts a few of them by a token.
 
-**To the newborns or to the parents, the worlds grow by half** — to 5,100 to
-5,300 agents, all four of them — and grow poorer: nine agents in ten hold
+**To the newborns or to the parents, the worlds grow by half**, all four of
+them, to 5,100 to 5,300 agents. And they grow poorer: nine agents in ten hold
 three tokens or fewer. Both rules put the estate where a birth can follow
-from it. A newborn starts with the 10 tokens its parent gave and its share of
-the estate on top, so it can often afford a child of its own at once; a
-parent's reward makes the next child sooner. Births pass on, the world fills
-until hardly anyone can afford a child, and it fills to more agents than B2's
-because the tokens that would have scattered evenly go to the very agents
-that will breed.
+from it. A newborn starts with the 10 tokens its parent gave, and its share
+of the estate on top. So it can often afford a child of its own at once. And
+a parent's reward makes the next child sooner.
+
+Births pass on, and the world fills until hardly anyone can afford a child.
+It fills to more agents than B2's, because the tokens that would have
+scattered evenly go to the very agents that will breed.
 
 ## B1: younger, or a world of infants
 
@@ -96,21 +107,20 @@ that will breed.
 >
 > **To make it again:** `python3 book_figures.py inherit`.
 <!-- /figure -->
+B1 is a different world. Nobody dies of age: an agent lives until it loses
+its node, or its piece is cut off. Its controls hold 800 to 1,400 agents,
+with a mean age of 120 to 210 iterations, and about two births per hundred
+agents an iteration.
 
-B1 is a different world: nobody dies of age, and an agent lives until it loses
-its node or its piece is cut off. Its controls hold 800 to 1,400 agents with a
-mean age of 120 to 210 iterations, and about two births per hundred agents an
-iteration.
-
-**To the poorest, B1's worlds grow larger and younger:** 2,100 to 2,300
-agents, a mean age of 74 to 76, four to seven births per hundred agents an
-iteration. The poorest are the agents about to starve; raised, they live on,
-and the world holds more of them.
+**To the poorest, B1's worlds grow larger and younger.** They hold 2,100 to
+2,300 agents, with a mean age of 74 to 76, and four to seven births per
+hundred agents an iteration. The poorest are the agents about to starve.
+Raised, they live on, and the world holds more of them.
 
 **To the newborns or the parents, B1 becomes a world of infants.** Fifty-five
-to eighty-five agents in a hundred are born *every iteration*, and the living are
-three iterations old on average. Where nothing caps a life, the estate that
-pays for a birth sets off the next birth at once, and the newborns die
+to eighty-five agents in a hundred are born *every iteration*, and the living
+are three iterations old on average. Where nothing caps a life, the estate
+that pays for a birth sets off the next birth at once. And the newborns die
 almost as fast as they come.
 
 ## Does evolution go on?
@@ -131,35 +141,34 @@ almost as fast as they come.
 >
 > **To make it again:** `python3 book_figures.py inherit`.
 <!-- /figure -->
-
-Lifetime contests (T = 100, as in
-[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)): the
-[brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment against those of an earlier one, once in each
+The contests are a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long: 100 iterations
+([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+The [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment play those of an earlier one, once in each
 moment's world.
 
-- **B2 with the estate to the poorest evolves as B2 does:** the brains of
-  1,000 iterations take 64% and 70% of a contested world from those of 500,
-  those of 2,000 take 63% and 58% from those of 1,000 (the control: 69% and
-  67%, then 65% and 76%).
-- **B2 with the estate to the newborns or to the parents stops evolving:** the
-  later brains take 37% to 57% — no better, at both steps, in all four worlds.
+- **B2 with the estate to the poorest evolves as B2 does.** The brains of
+  1,000 iterations take 64% and 70% of a contested world from those of 500.
+  Those of 2,000 take 63% and 58% from those of 1,000. The control gives 69%
+  and 67%, then 65% and 76%.
+- **B2 with the estate to the newborns or to the parents stops evolving.** The
+  later brains take 37% to 57%: no better, at both steps, in all four worlds.
 - **B1's worlds tie or swing**, with the estate shared any way: from 13% to
-  88% for one world and one step. B1 stops learning after its first hundred
-  iterations ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)),
+  88%, for one world and one step. B1 stops learning after its first hundred
+  iterations
+  ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)),
   and a contest of a stopped world is a coin toss.
 
 Why should evolution stop in B2 when the estate goes to the newborns or the
-parents? One reading, not tested here: in those worlds what an agent's line
-gets depends on when it was born — whose estate fell to it — as much as on
-what its brain does, so the brains that spread are not the better ones.
-(The fourth rule, added later, is a test of it: see
-[below](#added-later-to-the-dead-agents-own-children).)
+parents? Here is one reading. In those worlds, what an agent's line gets
+depends on when it was born, on whose estate fell to it. That counts as much
+as what its brain does, so the brains that spread are not the better ones.
+The fourth rule is a test of this reading
+([To the dead agent's own children](#to-the-dead-agents-own-children)).
 
 ## Healthy, and diverse?
 
-Each world at iteration 2,000, read as
-[Healthy and rich](healthy-and-rich.md) reads every world (16 October
-2026):
+Here is each world at iteration 2,000, read as
+[Healthy and rich](healthy-and-rich.md) reads every world:
 
 | world | agents | marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") (of 7) | [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") | agents with 3 tokens or fewer | [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") |
 |---|---|---|---|---|---|
@@ -167,98 +176,120 @@ Each world at iteration 2,000, read as
 | B2, to the poorest | 3,753; 3,728 | 6; 7 | 4.42; 3.95 | 80%; 82% | 0.45; 0.46 |
 | B2, to the newborns | 5,179; 5,029 | 7; 7 | 3.90; 3.85 | 91%; 91% | 0.26; 0.28 |
 | B2, to the parents | 5,317; 5,228 | 7; 7 | 3.40; 3.76 | 91%; 92% | 0.19; 0.21 |
-| B2, to its own children (added later) | 2,748; 3,541 | 6; 6 | 4.32; 4.64 | 64%; 77% | 0.55; 0.51 |
+| B2, to its own children | 2,748; 3,541 | 6; 6 | 4.32; 4.64 | 64%; 77% | 0.55; 0.51 |
 | B1, the control (`L/B1-long`, seeds 1, 2) | 711; 778 | 3; 3 | 2.74; 2.70 | 6%; 19% | 0.83; 0.88 |
 | B1, to the poorest | 1,775; 1,726 | 3; 3 | 2.39; 3.28 | 71%; 52% | 0.38; 0.64 |
 | B1, to the newborns | 2,631; 2,236 | 2; 4 | 2.00; 2.11 | 57%; 40% | 0.37; 0.20 |
 | B1, to the parents | 2,761; 2,351 | 5; 4 | 3.31; 3.20 | 65%; 58% | 0.55; 0.60 |
-| B1, to its own children (added later) | 2,047; 1,112 | 4; 5 | 2.35; 3.01 | 44%; 35% | 0.76; 0.85 |
+| B1, to its own children | 2,047; 1,112 | 4; 5 | 2.35; 3.01 | 44%; 35% | 0.76; 0.85 |
 
-> [!warning] Corrected (17 October 2026)
-> The row of B1 with the estate to the parents first showed seed 2 as it was
-> at iteration 1,600, read while the world was still running: 2,429 agents, 5
-> marks, a dimension of 4.57, 66% poor and a diversity score of 0.55. At
-> 2,000 it holds 2,351 agents and meets 4 marks, at a dimension of 3.20, with
-> 58% poor and a score of 0.60. The table now reads every world from one file
-> (`research/atlas/at.py --at 2000`); three diversity scores moved by 0.01, as
-> [Healthy and rich](healthy-and-rich.md)'s set of worlds that ranks them had grown, one share was rounded the
-> wrong way (70.496% is 70%, not 71%), and B1's controls and the fourth rule
-> were added. Nothing the page concludes changes.
+Take the B2 worlds whose estate goes to the newborns or the parents. They
+meet every mark, at a dimension well under 4, although they hold more than
+5,000 agents.
+And their agents are alike in tokens, links and ages. Their diversity scores
+are 0.19 to 0.28, against 0.48 and 0.53 for B2 itself, and nine in ten of
+them are poor. A healthy network is not a world that keeps evolving.
 
-The B2 worlds whose estate goes to the newborns or the parents meet every
-mark, at a dimension well under 4 although they hold more than 5,000 agents —
-and their agents are alike in tokens, links and ages: diversity scores of 0.19
-to 0.28, against 0.48 and 0.53 for B2 itself, and nine in ten of them poor. A
-healthy network is not a world that keeps evolving.
+## To the dead agent's own children
 
-## Added later: to the dead agent's own children
-
-The fourth rule keeps each estate in the family: a dead agent's tokens go to
-its own living children, evenly, and only an estate that finds no living
-child is shared out among everyone. Two seeds of each baseline were played as
-the others were, to 2,000 iterations (`R/B2-children-s1`, `-s2`,
-`R/B1-children-s1`, `-s2`; the blue lines in the figures above).
+The fourth rule keeps each estate in the family. A dead agent's tokens go to
+its own living children, evenly. Only an estate that finds no living child is
+shared out among everyone. Two seeds of each baseline were played as the
+others were, to 2,000 iterations.
 
 **In B2 it changes little.** Over iterations 1,500 to 2,000 the two worlds
-hold 2,700 and 3,400 agents (the controls 3,650 and 3,200), with a birth per
-hundred agents an iteration, as in every B2 world, and about as much
-inequality. At 2,000, 64% and 77% of their agents hold three tokens or fewer
-(78% and 70% in the controls), and they meet the same six marks of seven,
-failing the dimension as B2 does. The estates to the newborns and to the
-parents filled the world because they reach agents the moment they breed; a
-dead agent's children are of every age, and the estate comes to them whether
-or not they breed. Their parents are 26 iterations old at a birth (a median),
-as in B2, against two or three where the estate goes to the newborns or the
-parents ([What folds a world](how-many-dimensions-does-a-world-have.md#a-world-through-its-life)).
+hold 2,700 and 3,400 agents, where the controls hold 3,650 and 3,200. They
+have a birth per hundred agents an iteration, as every B2 world does, and
+about as much inequality. At 2,000, 64% and 77% of their agents hold three
+tokens or fewer (78% and 70% in the controls). And they meet the same six
+marks of seven, failing the dimension as B2 does.
+
+The estates to the newborns and to the parents filled the world because they
+reach agents the moment they breed. A dead agent's children are of every
+age, and the estate comes to them whether or not they breed. Their parents
+are 26 iterations old at a birth, in the median, as in B2. Where the estate
+goes to the newborns or the parents, parents are two or three iterations old
+([A world through its life](how-many-dimensions-does-a-world-have.md#a-world-through-its-life)).
 
 **In B1 the worlds grow larger and younger, less than with the safety net.**
-1,800 and 1,300 agents over iterations 1,500 to 2,000 (the controls 1,370 and
-790), 4.7 and 2.8 births per hundred agents an iteration (2.0 and 1.5), and a
-mean age of 74 and 113 iterations (119 and 214). Like the controls they
-swing, one world between 570 and 2,700 agents. At 2,000 they are poorer than
-the controls — 44% and 35% of their agents at three tokens or fewer, against
-6% and 19% — about as diverse, and they meet four and five marks of seven
-where the controls meet three.
+Over iterations 1,500 to 2,000 they hold 1,800 and 1,300 agents, where the
+controls hold 1,370 and 790. They have 4.7 and 2.8 births per hundred agents
+an iteration, against 2.0 and 1.5 in the controls. Their mean age is 74 and
+113 iterations, against 119 and 214. Like the controls they swing, one world between 570
+and 2,700 agents. At 2,000 they are poorer than the controls: 44% and 35% of
+their agents hold three tokens or fewer, against 6% and 19%. They are about
+as diverse, and they meet four and five marks of seven, where the controls
+meet three.
 
-**In B2 evolution goes on, at least as fast as in B2 itself.** In [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
-contests the brains of 1,000 take 80% and 74% of a contested world from
-those of 500, and the brains of 2,000 take 74% and 61% from those of 1,000
-(the control: 69% and 67%, then 65% and 76%; the blue dots of the contests
-figure). Here the estate passes down an agent's own line, to heirs of every
-age, whenever one of the line dies — not to whoever has just been born or
-has just had a child, whatever its line. That is the difference the reading
-above points to: where the estate pays for a birth as it happens, what a
-line gets depends on when it was born, and evolution stops; where it passes
-down a line over a life, evolution goes on.
+**In B2 evolution goes on, at least as fast as in B2 itself.** In lifetime
+contests the brains of 1,000 take 80% and 74% of a contested world from those
+of 500. The brains of 2,000 take 74% and 61% from those of 1,000. The control
+gives 69% and 67%, then 65% and 76%: the blue dots of the contests figure.
 
-**In B1 the later brains lose**, at 38% and 39%, then 49% and 39% — as B1's
+Here the estate passes down an agent's own line, to heirs of every age,
+whenever one of the line dies. It does not go to whoever has just been born,
+or has just had a child, whatever its line. That is the difference the
+reading above points to. Where the estate pays for a birth as it happens,
+what a line gets depends on when it was born, and evolution stops. Where it
+passes down a line over a life, evolution goes on.
+
+**In B1 the later brains lose**, at 38% and 39%, then 49% and 39%, as B1's
 other worlds tie or swing.
 
-## What it teaches
+## What we learned
 
-- **Who inherits sets how many agents a world holds.** An estate that lands
-  where a birth can follow from it — on the newborns, on the parents — fills a
-  world to more agents than an even share does: B2's worlds by half, B1's to a
-  world of infants. The safety net does little in B2, whose dead are poor, and
-  keeps B1's poorest alive.
-- **More agents is not more life.** The bigger worlds are poorer, more alike,
-  and in B2 they stop evolving. None of the three rules brings a world nearer
-  to the author's picture than the even share does.
-- **An estate kept in the family changes little** (added later): B2's
-  worlds stay near B2's size and poverty and keep evolving at least as fast;
-  B1's grow larger, poorer and younger than its controls.
+- **Who inherits sets how many agents a world holds.** Some estates land
+  where a birth can follow from them, on the newborns or the parents. They
+  fill a world to more agents than an even share does. It grows B2's worlds by half,
+  and makes B1's a world of infants. The safety net does little in B2, whose
+  dead are poor, and keeps B1's poorest alive.
+- **More agents is not more life.** The bigger worlds are poorer and more
+  alike, and in B2 they stop evolving. None of the first three rules brings a
+  world nearer to the author's picture than the even share does.
+- **An estate kept in the family changes little.** B2's worlds stay near B2's
+  size and poverty, and keep evolving at least as fast. B1's grow larger,
+  poorer and younger than its controls.
 - **With mixing, too.** Batch M combines each rule with brains mixed at birth
-  ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)), to see whether one of
-  them holds a mixed world's drifting size. The estates to the newborns and to
-  the parents fill those worlds as well — past 5,000 agents in the first seeds
-  played.
+  ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)). It
+  asks whether one of them holds a mixed world's drifting size. The estates to
+  the newborns and to the parents fill those worlds as well: past 5,000
+  agents in the first seeds played.
 
-**Related notes:** [Every setting](settings.md#redistribution) ·
-[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) ·
-[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) ·
-[Healthy and rich](healthy-and-rich.md) ·
-[Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) ·
-[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)
+## Where to go next
+
+- [The estate of the dead](estate.md): the rules for the estate, exactly.
+- [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why): the
+  deaths that make the estate in B2.
+- [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md):
+  which of these rules cancel mixing's riches.
+- [Room and riches for the steadiest world](room-for-the-steadiest-world.md):
+  the estates played again, in the search for a [healthy world](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.").
+
+## How this was made
+
+Every world on this page is a pilot of batch R, kept in
+`GraphOfLifeRuns/.pilots`. No experiment of the lab stands behind it, so the
+page has no box of runs. The worlds of the fourth rule are
+`R/B2-children-s1`, `-s2`, `R/B1-children-s1` and `-s2`. The controls are,
+for B2, the pilot worlds `P/B2-s1` and `-s2`, which replay the lab's
+Experiment 16 worlds game for game. For B1 they are the first 2,000
+iterations of the long runs `L/B1-long-s1` and `-s2`. The table reads every
+world from one file (`research/atlas/at.py --at 2000`). Every figure says,
+folded beneath it, which worlds it reads and how. The setting is
+[`redistribution`](settings.md#redistribution).
+
+## How our view changed
+
+- **17 October 2026.** The row of B1 with the estate to the parents first
+  showed seed 2 as it was at iteration 1,600. It was read while the world was
+  still running. It gave 2,429 agents, 5 marks, a dimension of 4.57, 66% poor and a
+  diversity score of 0.55. At 2,000 the world holds 2,351 agents and meets 4
+  marks, at a dimension of 3.20, with 58% poor and a score of 0.60. Since
+  then the table reads every world from one file. Three diversity scores
+  moved by 0.01, as the set of worlds that ranks them
+  ([Healthy and rich](healthy-and-rich.md)) had grown. One share had been
+  rounded the wrong way: 70.496% is 70%, not 71%. Nothing the page concludes
+  changed.
 
 <!-- turns -->
 ---
