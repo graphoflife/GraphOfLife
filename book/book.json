@@ -1511,7 +1511,7 @@
     },
     {
       "id": "one-world-many-colours",
-      "title": "One world, many colours",
+      "title": "One world, many colours: what the viewer can colour by",
       "file": "pages/one-world-many-colours.md",
       "topics": [
         "methods"
@@ -1519,7 +1519,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "How is a network drawn, and what does the position of a dot mean? Where in a world are the rich, the old, the gaining, the hills and the valleys of wealth? Do the descendants of one ancestor live together?"
+      "summary": "Statistics average; a picture shows where things are. The viewer draws a world as dots and lines, and colours them by any quantity it measures. Each value is placed on a colour map, within the range of the frame on screen."
     },
     {
       "id": "what-a-simulation-costs",
@@ -1569,18 +1569,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Everything the notebook shows is computed from two kinds of record that every run writes into its folder, GraphOfLifeRuns/<run>/. A frame is the whole world, written down after every phase."
-    },
-    {
-      "id": "viewer-colours",
-      "title": "What the viewer can colour by",
-      "file": "pages/viewer-colours.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "The viewer draws every agent as a dot and every connection as a line, and can colour and size both by a measured quantity."
     },
     {
       "id": "median-and-quantiles",

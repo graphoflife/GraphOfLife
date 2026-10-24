@@ -1,22 +1,271 @@
-# One world, many colours
-
-Statistics average. A picture does not: it shows **where** things are — which
-[agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are rich, which are old, which belong together. The viewer draws a
-world as dots and lines and can colour them by any quantity it measures
-([What the viewer can colour by](viewer-colours.md)). This page
-takes one world, the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 after its last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), draws a piece of
-it once, and colours that one drawing six ways, then its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") by the
-[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") that crossed them. Each picture is read for what it shows, and for the questions
-it raises.
+# One world, many colours: what the viewer can colour by
 
 > [!question] Questions of this page
 > - How is a network drawn, and what does the position of a dot mean?
+> - How does a measured number become a colour?
 > - Where in a world are the rich, the old, the gaining, the hills and the
 >   valleys of wealth?
 > - Do the descendants of one ancestor live together?
-> - Which connections carry the tokens?
+> - Which [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") carry the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")?
 
-The world is one of the thirty of 100,000 tokens of [Thirty worlds](a-worlds-life.md#thirty-worlds).
+## In short
+
+Statistics average; a picture shows **where** things are. The viewer draws a
+world as dots and lines, and colours them by any quantity it measures. Each
+value is placed on a colour map, within the range of the [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") on screen. This page
+draws a piece of one [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000 tokens, and colours that one
+drawing six ways. The rich are scattered, and the old live in cohorts.
+Wealth is a landscape of peaks at the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), with valleys around them. And
+families live together in regions. Almost every connection is kept alive at a low price, a
+few tokens a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").
+
+## Pictures, not averages
+
+Statistics average. A picture does not: it shows **where** things are, which
+[agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are rich, which are old, which belong together. The viewer draws a
+world as dots and lines, and can colour them by any quantity it measures
+([What the viewer can colour by](#what-the-viewer-can-colour-by)). This page
+takes one world, the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 after its last game. It draws a piece of
+it once, colours that one drawing six ways, and then colours its connections
+by the tokens that crossed them. Each picture is read for what it shows, and
+for the questions it raises.
+
+The world is one of the thirty of 100,000 tokens of
+[Thirty worlds](a-worlds-life.md#thirty-worlds).
+
+## How a network is drawn
+
+A network has no positions; a drawing has to invent them. The usual way is a
+**force-directed layout**. Every connection pulls its two agents together
+like a spring, and every pair of agents pushes apart like charges. The dots
+are moved step by step until the forces balance. The pictures here use
+ForceAtlas2 (Jacomy, Venturini, Heymann and Bastian 2014), with a fixed seed
+so that they can be made again. The viewer does the same thing live, in
+three dimensions.
+
+Reading such a drawing needs one rule: **only closeness means anything.**
+Agents joined to each other, or to the same [neighbours](the-world.md#the-network "An agent joined to another by a connection."), end up close. A tight
+group of mutual connections becomes a clump; a chain becomes an arm. Left and
+right, up and down mean nothing: rotate the picture, and it says the same.
+
+## What the viewer can colour by
+
+The viewer draws every agent as a dot and every connection as a line. It can
+colour and size both by a measured quantity. This section says what each
+quantity is, and how a number becomes a colour. Then a picture can be read as
+precisely as a chart.
+
+### From a number to a colour
+
+For the frame on screen, and for the quantity chosen:
+
+1. **Values.** Every agent, or connection, gets its value *v*.
+2. **Logarithm, if chosen.** *v* becomes ln(1 + *v*). For a quantity that can
+   be negative it becomes sign(*v*)·ln(1 + |*v*|), which squeezes large
+   magnitudes but keeps the sign.
+3. **Range.** For an amount, the range runs from the frame's smallest value
+   to its largest. For a **signed** quantity, such as a change or a
+   curvature, it runs from −*m* to +*m*, with *m* the largest magnitude. So
+   the middle of the colour map always means zero.
+4. **Position.** Each value is placed in the range as a number between 0 and
+   1, and the **colour map** gives its colour. An unknown value is put in the
+   middle, such as the age in a run recorded before ages were kept.
+
+The same colour therefore means different values in different frames: the
+range follows the frame. The legend in the corner gives the range.
+
+**Colour maps.** Six maps run from dark to light, and suit amounts:
+*viridis*, *plasma*, *magma*, *inferno*, *cividis* and *ember*. Two diverge
+from a neutral middle, and suit signed quantities: *coolwarm* and
+*spectral*. The map *turbo* is a rainbow, and *grayscale* is black to
+white.
+
+### Agents
+
+| choice | the value of agent *u* |
+|---|---|
+| Tokens | its tokens |
+| Degree | its number of connections ([Degree](degree.md)) |
+| Token change (signed) | its tokens now minus its tokens before the phase; a newborn counts from 0 |
+| Token change (magnitude) | the size of that change |
+| Token curvature (signed) | Σ over its neighbours of (their tokens − its tokens) ([Token curvature](gains-and-losses.md#token-curvature)) |
+| Token curvature (before phase) | the same, on the network as it stood before the phase; newborns have none |
+| Loops through it | fundamental cycles of a breadth-first spanning tree through it ([Loops](bridges.md#loops)) |
+| Triangles | the triangles it is a corner of ([Clustering](degree.md#clustering)) |
+| Share of total tokens | its tokens divided by all tokens |
+| [Brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") id | its genotype ([Genotypes](genotype.md)) |
+| Parent brain id | its genotype's parent genotype |
+| Age | [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") it has lived ([Age and lifetime](age-and-lifetime.md)) |
+| Node id | its id, which is its birth order |
+
+A word on **brain id**. A genotype is a number, and the colour map turns
+numbers that are close into colours that are close. Close genotype numbers
+were *born* at about the same time; they need not be related. To see
+kinship, colour by family instead, as
+[Six views of one world](#six-views-of-one-world) does.
+
+### Connections
+
+| choice | the value of the connection between *u* and *v* |
+|---|---|
+| Average / weaker / stronger endpoint tokens | the mean, smaller, larger of their tokens |
+| Endpoint token gap | \|tokens of *u* − tokens of *v*\| |
+| Average / weaker / stronger endpoint degree | the mean, smaller, larger of their degrees |
+| Average endpoint curvature (signed) | the mean of their token curvatures |
+| Token flow | tokens staked across it in the game, both ways together ([Token flow](token-flow.md)) |
+| Loops through it | fundamental cycles through it, as for agents |
+| Triangles | triangles it is a side of |
+| Bridge | 1 if it lies on no loop, so that cutting it splits the network ([Bridges](bridges.md)); else 0 |
+
+### The built-in looks
+
+| look | dots coloured by | dots sized by | lines coloured by |
+|---|---|---|---|
+| default | tokens (log), *coolwarm* | tokens (log) | one colour |
+| wealth | tokens (log), *inferno* | tokens | one colour |
+| lineage | brain id, *turbo* | tokens (log) | the colour of their dots |
+| structure | degree (log), *cividis* | degree | average endpoint degree (log) |
+| flow | token curvature (log), *coolwarm* | size of the token change (log) | token flow (log) |
+| minimal | one colour | one size | one colour |
+
+## Six views of one world
+
+<!-- figure colours/six-views -->
+![The world of seed 1 after its last game, six ways](../figures/colours/six-views.svg)
+
+**The world of seed 1 after its last game, six ways.** The world with seed 1 after the game of iteration 1,499, the 2,495 of its 14,870 agents within 25 steps of agent 660,973, the oldest, 806 iterations old — a piece, since a world this large is a tangle when drawn whole: every agent drawn is a dot, every connection between two of them a faint line, and the dots sit in the same places in all six pictures (a ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the dots by one of the quantities the viewer offers ([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)): tokens and age on logarithmic scales; the change of tokens in the last game and the token curvature at its start on a signed scale, blue below zero, red above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th percentile); the family — which of the genotypes alive 100 iterations earlier each agent's genotype descends from, the seven largest in colour; and how many loops of a breadth-first cycle basis pass through each agent.
+
+> [!example]- How to make this figure
+> **Runs.** `B1-100000-s001`.
+>
+> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+>
+> 1. Read frames `2998` (start of the last game) and `2999` (after it): `ids`, `tokens`, `ages`, `delta`, `brain_ids`, `edges`.
+> 2. Curvature: in frame 2998, Σ over neighbours of (their tokens − own tokens).
+> 3. Families: read frames 2799 to 2999, note each genotype's parent, and climb from each living genotype to one alive after the game of iteration 1,399.
+> 4. Loops: as in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).
+> 5. Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).
+> 6. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.
+>
+> **To make it again:** `python3 book_figures.py colours`.
+<!-- /figure -->
+A world of 14,870 agents drawn whole is a tangle. So the pictures hold a
+piece of it: the 2,495 agents within 25 steps of its oldest agent, in the
+same places in every picture. What each colouring shows:
+
+- **Tokens.** The rich are scattered: a bright dot here and there, in clumps
+  and on arms. No region holds the wealth. The richest agent drawn holds
+  1,487 tokens.
+- **Age.** Old and young are mixed, but not at random. Here and there a clump
+  of agents is old together, up to 806 iterations, beside a clump of young
+  ones. That is what [Like next to like](like-next-to-like.md) measured: ages
+  are alike over two or three steps, as cohorts that arrived and live
+  together. At 10,000 tokens the oldest sat far out on the arms of the
+  drawing, and the clumps around the hubs were younger. One picture is not a
+  proof either way.
+- **Change in the last game.** Almost everything is dark: most agents ended
+  the game with what they had, or close to it
+  ([Gains and losses](gains-and-losses.md)). The few bright dots are the big
+  winners and losers of the game.
+- **Token curvature before the game.** Blue dots are richer than their
+  neighbourhood (hills), red dots poorer (valleys). The hubs are blue, and
+  the clump around the largest hub is red: every agent there is poorer than
+  its rich neighbour. The landscape of wealth is a set of peaks with valleys
+  around them. And tokens flow downhill, from the peaks into the valleys
+  ([Tokens run downhill](gains-and-losses.md#tokens-run-downhill)).
+- **Families.** Each agent is coloured by the genotype, among those alive 100
+  iterations earlier, from which its own genotype descends
+  ([Families](genotype.md#families)). The seven largest families of the whole
+  world hold 344, 333, 314, 290, 285, 245 and 244 agents: 2,055 of 14,870.
+  The other 12,815 belong to smaller ones. (At 10,000 tokens the seven
+  largest held 1,040 of 1,336.) And the families **live together**. Three of
+  the seven fill one region at the lower right of the piece, and the rest of
+  it belongs to many smaller families. A family is a region: a small one in a
+  large world, where many more lines live side by side
+  ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+- **Loops.** The clumps around hubs carry the loops, and the arms carry none.
+  Up to 1,012 of the world's 11,297 independent loops pass through one agent
+  ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
+
+## Where the tokens went
+
+<!-- figure colours/flows -->
+![Where the tokens went in the last game](../figures/colours/flows.svg)
+
+**Where the tokens went in the last game.** The same world and layout; every connection is coloured by how many tokens crossed it in the last game, in both directions together, and drawn the wider the more crossed. Every connection that is left carried at least one token — the others were cut at the end of the game. Agents are small dots.
+
+> [!example]- How to make this figure
+> **Runs.** `B1-100000-s001`.
+>
+> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+>
+> 1. In frame `2999`, read `decisions.allocations`: for every agent and target ≠ itself, add the `alloc` to the connection between them.
+> 2. Colour each connection of `edges` by its class.
+>
+> **To make it again:** `python3 book_figures.py colours`.
+<!-- /figure -->
+Every connection left after the game carried at least one token across it;
+the others were cut. Of the 4,139 connections drawn, **2,311 carried only one
+or two tokens**, both directions together. Then 1,812 carried 3 to 9, 7
+carried 10 to 49, and 9 carried 50 or more. Almost every connection of the world is kept
+alive at a low price, a few tokens a game
+([How a world breaks](how-a-world-breaks.md)). In the world of 10,000 tokens
+that an earlier version of this page drew, 2,145 of 2,447 carried one or two.
+[What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)
+counts every connection of every world. The traffic of a world is thin and
+everywhere, not heavy on a few roads.
+
+## Reading pictures well
+
+Five cautions apply to every picture the viewer draws:
+
+- **The layout is one of many.** A different seed gives a different drawing
+  of the same network. Clumps and arms are real; their places are not.
+- **Colours are relative to the frame.** A colour scale runs from the frame's
+  smallest value to its largest, or is centred on zero for signed
+  quantities. So the same colour can mean different values in different
+  frames. Read the legend.
+- **Logarithmic colour scales** spread out the small values. On a linear
+  scale, a world with one agent at 1,487 tokens would show everyone else as
+  the same dark colour.
+- **A piece is not the whole.** A drawing of the agents near one agent shows
+  that neighbourhood; another piece of the same world could look different.
+- **A picture is one moment.** It suggests; a statistic over many moments and
+  many worlds decides.
+
+## What we learned
+
+- **Families live together.** Descent is regional: a line of brains holds a
+  part of the world, not scattered agents. Spatial structure like this is
+  what kin selection and network reciprocity need.
+  [Do agents cooperate?](do-agents-cooperate.md) asks whether it is used.
+- **Wealth is a landscape of peaks and valleys,** with the peaks at the hubs.
+- **Connections are kept near their minimum price,** a few tokens a game.
+- **Pictures raise questions.** Here are two from this page. Do the old live
+  at the edges, as a picture at 10,000 tokens suggested, or in cohorts, as
+  this one does? And do families always occupy regions?
+  [Kin, near and far](like-next-to-like.md#kin-near-and-far) and
+  [Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live)
+  measure both.
+
+## Where to go next
+
+- [Like next to like](like-next-to-like.md): how alike agents are at a
+  distance, the measure behind cohorts and families.
+- [Genotypes, families and the common ancestor](genotype.md): what a family
+  is, and how lines of descent are drawn over time.
+- [Gains and losses](gains-and-losses.md): the token curvature and the tokens
+  that run downhill.
+- [Where tokens flow](where-the-tokens-flow.md): what every connection of
+  every world carries.
+
+## How this was made
+
+Every figure of this page says, folded beneath it, which runs it reads and
+how. To make every figure of this page again: `python3 book_figures.py
+colours`.
+
+### The runs of Experiment 10
 
 <!-- runs E10 -->
 > [!info]- The runs behind this page
@@ -76,146 +325,17 @@ The world is one of the thirty of 100,000 tokens of [Thirty worlds](a-worlds-lif
 > A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
-## How a network is drawn
+## References
 
-A network has no positions; a drawing has to invent them. The usual way is a
-**force-directed layout**: every connection pulls its two agents together like
-a spring, every pair of agents pushes apart like charges, and the dots are
-moved step by step until the forces balance. The pictures here use
-ForceAtlas2 (Jacomy, Venturini, Heymann and Bastian 2014), with a fixed seed so
-that it can be made again; the viewer does the same thing live, in three
-dimensions.
-
-Reading such a drawing needs one rule: **only closeness means anything.**
-Agents joined to each other, or to the same [neighbours](the-world.md#the-network "An agent joined to another by a connection."), end up close; a tight
-group of mutual connections becomes a clump; a chain becomes an arm. Left and
-right, up and down mean nothing — rotate the picture and it says the same.
-
-## Six views of one world
-
-<!-- figure colours/six-views -->
-![The world of seed 1 after its last game, six ways](../figures/colours/six-views.svg)
-
-**The world of seed 1 after its last game, six ways.** The world with seed 1 after the game of iteration 1,499, the 2,495 of its 14,870 agents within 25 steps of agent 660,973, the oldest, 806 iterations old — a piece, since a world this large is a tangle when drawn whole: every agent drawn is a dot, every connection between two of them a faint line, and the dots sit in the same places in all six pictures (a ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the dots by one of the quantities the viewer offers ([What the viewer can colour by](viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in the last game and the token curvature at its start on a signed scale, blue below zero, red above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th percentile); the family — which of the genotypes alive 100 iterations earlier each agent's genotype descends from, the seven largest in colour; and how many loops of a breadth-first cycle basis pass through each agent.
-
-> [!example]- How to make this figure
-> **Runs.** `B1-100000-s001`.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
->
-> 1. Read frames `2998` (start of the last game) and `2999` (after it): `ids`, `tokens`, `ages`, `delta`, `brain_ids`, `edges`.
-> 2. Curvature: in frame 2998, Σ over neighbours of (their tokens − own tokens).
-> 3. Families: read frames 2799 to 2999, note each genotype's parent, and climb from each living genotype to one alive after the game of iteration 1,399.
-> 4. Loops: as in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).
-> 5. Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).
-> 6. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.
->
-> **To make it again:** `python3 book_figures.py colours`.
-<!-- /figure -->
-
-A world of 14,870 agents drawn whole is a tangle, so the pictures hold a
-piece of it: the 2,495 agents within 25 steps of its oldest agent, in the
-same places in every picture. What each colouring shows:
-
-- **Tokens.** The rich are scattered: a bright dot here and there, in clumps
-  and on arms. No region holds the wealth. The richest agent drawn holds 1,487
-  tokens.
-- **Age.** Old and young are mixed, but not at random: here and there a
-  clump of agents is old together — up to 806 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") — beside a clump of
-  young ones. That is what [Like next to like](like-next-to-like.md) measured:
-  ages are alike over two or three steps, as cohorts that arrived and live
-  together. (At 10,000 tokens the oldest sat far out on the arms of the
-  drawing, and the clumps around the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") were younger; one picture is not a
-  proof either way.)
-- **Change in the last game.** Almost everything is dark: most agents ended the
-  game with what they had or close to it ([Gains and losses](gains-and-losses.md)).
-  The few bright dots are the big winners and losers of the game.
-- **Token curvature before the game.** Blue dots are richer than their
-  neighbourhood (hills), red dots poorer (valleys). The hubs are blue, and the
-  clump around the largest hub is red: every agent there is poorer than its
-  rich neighbour. The landscape of wealth is a set of peaks with valleys
-  around them — and tokens flow downhill, from the peaks into the valleys
-  ([Gains and losses](gains-and-losses.md)).
-- **Families.** Each agent is coloured by the genotype, among those alive 100
-  iterations earlier, from which its own genotype descends
-  ([Families](genotype.md#families)). The seven largest families of the whole
-  world hold 344, 333, 314, 290, 285, 245 and 244 agents — 2,055 of 14,870;
-  the other 12,815 belong to smaller ones. (At 10,000 tokens the seven largest
-  held 1,040 of 1,336.) And the families **live together**: three of the
-  seven fill one region at the lower right of the piece, and the rest of it
-  belongs to many smaller families. A family is a region — a small one in a
-  large world, where many more lines live side by side
-  ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
-- **[Loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.").** The clumps around hubs carry the loops — up to 1,012 of the
-  world's 11,297 independent loops pass through one agent — and the arms carry
-  none ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
-
-## Where the tokens went
-
-<!-- figure colours/flows -->
-![Where the tokens went in the last game](../figures/colours/flows.svg)
-
-**Where the tokens went in the last game.** The same world and layout; every connection is coloured by how many tokens crossed it in the last game, in both directions together, and drawn the wider the more crossed. Every connection that is left carried at least one token — the others were cut at the end of the game. Agents are small dots.
-
-> [!example]- How to make this figure
-> **Runs.** `B1-100000-s001`.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
->
-> 1. In frame `2999`, read `decisions.allocations`: for every agent and target ≠ itself, add the `alloc` to the connection between them.
-> 2. Colour each connection of `edges` by its class.
->
-> **To make it again:** `python3 book_figures.py colours`.
-<!-- /figure -->
-
-Every connection left after the game carried at least one token across it —
-the others were cut. Of the 4,139 connections drawn, **2,311 carried only one
-or two tokens**, both directions together; 1,812 carried 3 to 9; 7 carried 10
-to 49; 9 carried 50 or more. Almost every connection of the world is kept
-alive at a low price, a few tokens a game
-([How a world breaks](how-a-world-breaks.md)). (In the world of 10,000 tokens drawn
-in the first edition, 2,145 of 2,447 carried one or two; [What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)
-counts every connection of every world.) The traffic of a world is thin and
-everywhere, not heavy on a few roads.
-
-## Reading pictures well
-
-Five cautions, which apply to every picture the viewer draws:
-
-- **The layout is one of many.** A different seed gives a different drawing of
-  the same network. Clumps and arms are real; their places are not.
-- **Colours are relative to the [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.").** A colour scale runs from the frame's
-  smallest value to its largest (or is centred on zero for signed quantities),
-  so the same colour can mean different values in different frames. Read the
-  legend.
-- **Logarithmic colour scales** spread out the small values. On a linear
-  scale, a world with one agent at 1,487 tokens would show everyone else as the
-  same dark colour.
-- **A piece is not the whole.** A drawing of the agents near one agent shows
-  that neighbourhood; another piece of the same world could look different.
-- **A picture is one moment.** It suggests; a statistic over many moments and
-  many worlds decides.
-
-## What this means
-
-- **Families live together.** Descent is regional: a line of [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") holds a
-  part of the world, not scattered agents. Spatial structure like this is what
-  kin selection and network reciprocity need ([Do agents cooperate?](do-agents-cooperate.md)
-  asks whether it is used).
-- **Wealth is a landscape of peaks and valleys,** peaks at the hubs.
-- **Connections are kept near their minimum price,** a few tokens a game.
-- **Pictures raise questions.** Two from this page: where do the old live —
-  at the edges, as a picture at 10,000 tokens suggested, or in cohorts, as
-  this one does? And do families always occupy regions? The second is
-  measured in the next page.
-
-To make every figure of this page: `python3 book_figures.py colours`.
+- Jacomy, M., Venturini, T., Heymann, S. and Bastian, M. (2014). ForceAtlas2,
+  a continuous graph layout algorithm for handy network visualization
+  designed for the Gephi software. *PLoS ONE* 9, e98679.
 
 <!-- turns -->
 ---
 
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a simulation costs](what-a-simulation-costs.md) →
 
-> [!info]- Pages that link here (6)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Genotypes, families and the common ancestor](genotype.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (8)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Genotypes, families and the common ancestor](genotype.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
 <!-- /turns -->

@@ -685,7 +685,7 @@ def colours(ch: F.Chapter) -> None:
                 "connection between two of them a faint line, and the dots sit in the same places in all six pictures (a "
                 "ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the "
                 "dots by one of the quantities the viewer offers ([What the viewer can colour by]"
-                "(viewer-colours.md)): tokens and age on logarithmic scales; the change of tokens in "
+                "(one-world-many-colours.md#what-the-viewer-can-colour-by)): tokens and age on logarithmic scales; the change of tokens in "
                 "the last game and the token curvature at its start on a signed scale, blue below zero, red "
                 "above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th "
                 "percentile); the family — which of the genotypes alive 100 iterations earlier each agent's "

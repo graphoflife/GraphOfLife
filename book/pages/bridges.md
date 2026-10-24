@@ -94,7 +94,7 @@ Experiment 5 predicted that more than a fifth of all connections would be
 bridges, and in every world they were
 ([Was the thesis right?](what-shape-does-the-network-take.md#was-the-thesis-right)).
 The viewer can colour every connection by whether it is a bridge
-([What the viewer can colour by](viewer-colours.md)).
+([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)).
 
 A count of bridges does not say how much hangs on each. For every bridge, the
 program also works out how many agents lie behind it. The largest share of
@@ -402,5 +402,5 @@ deeper cores, the trees and the [dimension](ball-dimension-and-curvature.md "How
 ← [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
 
 > [!info]- Pages that link here (18)
-> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

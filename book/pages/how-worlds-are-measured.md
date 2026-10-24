@@ -201,7 +201,7 @@ makes the figures does nothing the recipe does not say. It is
 <!-- turns -->
 ---
 
-← [The lab, the engine and pilots](the-lab.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours](one-world-many-colours.md) →
+← [The lab, the engine and pilots](the-lab.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) →
 
 > [!info]- Pages that link here (1)
 > [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)

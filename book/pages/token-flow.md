@@ -102,7 +102,7 @@ reshuffled.
   others who do not stake back
   ([Every world](where-the-tokens-flow.md#every-world)).
 - **The viewer** can colour every connection by its token flow, both
-  directions together ([What the viewer can colour by](viewer-colours.md)).
+  directions together ([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)).
 
 ## Lightning: tokens that go round
 
@@ -414,5 +414,5 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 ← [Flow modules: the groups tokens stay in](flow-modules.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens)
 
 > [!info]- Pages that link here (9)
-> [Glossary](glossary.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [Glossary](glossary.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

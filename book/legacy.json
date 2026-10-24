@@ -154,7 +154,7 @@
   "n-scaling-relations": "degree#scaling-relations-between-agents-properties",
   "n-assortativity": "degree#assortativity",
   "n-correlation-function": "like-next-to-like#how-alike-at-a-distance",
-  "n-viewer-colours": "viewer-colours",
+  "n-viewer-colours": "one-world-many-colours#what-the-viewer-can-colour-by",
   "n-pilot-worlds": "the-lab#pilot-worlds",
   "n-invasion-test": "eras-and-contests#the-invasion-test",
   "n-exploitability": "eras-and-contests#exploitability",
@@ -353,6 +353,7 @@
   "muller-plot": "genotype#muller-plots",
   "pilot-worlds": "the-lab#pilot-worlds",
   "power-law-fit": "power-laws-real-and-apparent#fitting-a-power-law-properly",
-  "fractional-factorial": "eight-switches-at-once#many-switches-in-few-worlds-fractional-factorial-designs"
+  "fractional-factorial": "eight-switches-at-once#many-switches-in-few-worlds-fractional-factorial-designs",
+  "viewer-colours": "one-world-many-colours#what-the-viewer-can-colour-by"
  }
 }

@@ -268,7 +268,7 @@ follow its curvature at the start of the game.
 ### In the viewer
 
 The viewer can colour every agent by its token curvature
-([What the viewer can colour by](viewer-colours.md)). The field
+([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)). The field
 `token_curvature` is measured on the frame itself. The field
 `token_curvature_pre` is measured on the network and the tokens as they were
 when the phase began. So it can be read against the change the phase then
@@ -548,6 +548,6 @@ Experiment 2, from which this page was first written.
 
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
-> [!info]- Pages that link here (15)
-> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [What a run records](frames-and-stats.md) · [What the viewer can colour by](viewer-colours.md)
+> [!info]- Pages that link here (14)
+> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

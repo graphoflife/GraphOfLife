@@ -141,7 +141,7 @@ gol_record.record_stored('<run>')"` rebuilds a run's whole statistics file.
 <!-- turns -->
 ---
 
-← [Every simulation: what was run, and what was measured](every-simulation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What the viewer can colour by](viewer-colours.md) →
+← [Every simulation: what was run, and what was measured](every-simulation.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) →
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
