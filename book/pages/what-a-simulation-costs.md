@@ -91,6 +91,6 @@ about seven hours. The thirty worlds of 100,000 tokens that
 
 ← [One world, many colours](one-world-many-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 
-> [!info]- Pages that link here (3)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The lab, the engine and pilots](the-lab.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (4)
+> [What this notebook is about](what-this-notebook-is-about.md) · [What would count as open-ended evolution](open-ended-test.md) · [The lab, the engine and pilots](the-lab.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->
