@@ -120,3 +120,29 @@ screen draws (the author, 2026-10-24).
 - The local estate: the tokens go to the nearest living agents, in the network
   as it was just before the cut, split evenly among all at that distance.
 
+## Built (24 October 2026)
+
+- **Engine** (commit d86b9e7), every rule off by default so that old runs
+  replay as they did: `hidden_activation`, `contest`, `mate_pays`,
+  `link_token`, `link_upkeep`, `upkeep_to`, and `redistribution = local`.
+  Their entries are on the settings page, and the new-simulation form offers
+  each (the curve, sigmoid or tanh, as the author asked).
+- **Round 3** (commit 394185b): sampler 2 draws the table above; Experiment 40
+  plays a hundred of its worlds; Experiment 39 is withdrawn unplayed.
+
+Choices made in building, open to change:
+
+- Upkeep never takes an agent's last token, as a search and a bought life
+  never do. A link is paid for if either end pays; a new link counts as paid
+  for the iteration it is made in, so a newborn's links are not cut at once.
+- Under `link_token`, a dead agent's links give their tokens to the agents
+  they joined (and pay for the links that mend its death), rather than to a
+  common pool; a link handed to a child keeps its token, and one that merges
+  with a link the child already has leaves its token with the child.
+- The local estate: an estate with no path to the living goes to the dead
+  agent's parent if it lives; tokens that are no one's estate (upkeep paid
+  into the estate, for one) are shared out as `uniform`.
+- The lottery needs revolutions off, so the sampler draws revolutions only in
+  the largest-stake game.
+- The brain's width is drawn once per world, every layer as wide.
+
