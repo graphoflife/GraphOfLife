@@ -24,25 +24,25 @@
     "from": 0,
     "to": 2,
     "held": 0,
-    "plantings": 24
+    "plantings": 23
    },
    {
     "from": 2,
     "to": 2.5,
-    "held": 8,
-    "plantings": 58
+    "held": 7,
+    "plantings": 48
    },
    {
     "from": 2.5,
     "to": 3,
-    "held": 7,
-    "plantings": 16
+    "held": 6,
+    "plantings": 14
    },
    {
     "from": 3,
     "to": 4,
-    "held": 16,
-    "plantings": 16
+    "held": 14,
+    "plantings": 14
    },
    {
     "from": 4,
@@ -56,12 +56,12 @@
   "door": {
    "title": "The same raid, planted in older worlds",
    "caption": "Left: of the fifteen plantings at each era (five worlds, three places), how many took hold. Right: each planting's raiders as a share of the world after 300 iterations (0 where they died out).",
-   "recipe": "**Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000).\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.\n3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.\n4. A patch's wealth is its tokens over its agents when it is planted.\n\n**To make it again:** `python3 book_figures.py door`."
+   "recipe": "**Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000), of which Experiment 30's plantings at 2,000 replay fifteen, counted once.\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.\n3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.\n4. A patch's wealth is its tokens over its agents when it is planted.\n\n**To make it again:** `python3 book_figures.py door`."
   },
   "wealth": {
    "title": "What a raid starts from",
-   "caption": "Each dot is one planting of 5% of a world, from Experiments 29 and 30, by the patch's tokens per agent when it was planted and the raiders' share of the world 300 iterations later.",
-   "recipe": "**Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000).\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.\n3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.\n4. A patch's wealth is its tokens over its agents when it is planted.\n\n**To make it again:** `python3 book_figures.py door`."
+   "caption": "Each dot is one planting of 5% of a world, from Experiments 29 and 30, each counted once, by the patch's tokens per agent when it was planted and the raiders' share of the world 300 iterations later.",
+   "recipe": "**Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` \u2026 `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000), of which Experiment 30's plantings at 2,000 replay fifteen, counted once.\n\n**Data.** From each trial's `result.json`.\n\n1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.\n2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.\n3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.\n4. A patch's wealth is its tokens over its agents when it is planted.\n\n**To make it again:** `python3 book_figures.py door`."
   }
  }
 }

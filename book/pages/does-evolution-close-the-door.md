@@ -105,7 +105,7 @@ The test is the one of
 **The same raid, planted in older worlds.** Left: of the fifteen plantings at each era (five worlds, three places), how many took hold. Right: each planting's raiders as a share of the world after 300 iterations (0 where they died out).
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000).
+> **Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000), of which Experiment 30's plantings at 2,000 replay fifteen, counted once.
 >
 > **Data.** From each trial's `result.json`.
 >
@@ -143,10 +143,10 @@ Over 120 iterations:
 <!-- figure door/wealth -->
 ![What a raid starts from](../figures/door/wealth.svg)
 
-**What a raid starts from.** Each dot is one planting of 5% of a world, from Experiments 29 and 30, by the patch's tokens per agent when it was planted and the raiders' share of the world 300 iterations later.
+**What a raid starts from.** Each dot is one planting of 5% of a world, from Experiments 29 and 30, each counted once, by the patch's tokens per agent when it was planted and the raiders' share of the world 300 iterations later.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000).
+> **Runs.** Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worlds of Experiment 16 played on to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too (Experiment 16's ten worlds at 2,000), of which Experiment 30's plantings at 2,000 replay fifteen, counted once.
 >
 > **Data.** From each trial's `result.json`.
 >
@@ -165,31 +165,32 @@ half times the neighbour's. Against a neighbour of one token, the raider
 needs three tokens to raid at all.
 
 So a raid depends on the patch's wealth: its tokens per agent when it is
-planted. Here is how often a patch of 5% took hold, by that wealth, over all
-120 such plantings of Experiments 29 and 30:
+planted. Here is how often a patch of 5% took hold, by that wealth. The
+table counts the 105 such plantings of Experiments 29 and 30, each once:
 
 | tokens per agent | took hold |
 |---|---|
-| under 2 | 0 of 24 |
-| 2 to 2.5 | 8 of 58 |
-| 2.5 to 3 | 7 of 16 |
-| 3 to 4 | 16 of 16 |
+| under 2 | 0 of 23 |
+| 2 to 2.5 | 7 of 48 |
+| 2.5 to 3 | 6 of 14 |
+| 3 to 4 | 14 of 14 |
 | 4 or more | 6 of 6 |
 
-The table counts fifteen plantings twice: Experiment 30's at 2,000, which
-repeat fifteen of Experiment 29's. Counted once, its rows read 0 of 23, 7 of
-48, 6 of 14, 14 of 14 and 6 of 6: the same picture.
+Experiment 30's fifteen plantings at 2,000 repeat fifteen of Experiment 29's
+exactly. Its long runs begin from Experiment 16's worlds at 2,000, and the
+places are the same. So they are counted once, as Experiment 29's.
 
 A patch planted at 500 held a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 3.85 tokens per agent; one planted
-at 5,000 or 10,000 held 2.0. At 2,000 the median was 2.35 over both
-experiments' plantings, and 2.26 over Experiment 30's own fifteen. The
+at 5,000 or 10,000 held 2.0. At 2,000 the median was 2.36 over Experiment
+29's sixty plantings, and 2.26 over the fifteen that Experiment 30 repeated.
+The
 worlds hold about as many tokens per agent at 10,000 as at 1,000, 2.7
 to 3.3. But a patch, an agent and its nearest neighbours, is poorer than
 the average agent, and it got poorer as the worlds aged.
 
 Whether the residents also learned something, these plantings cannot say.
-At 2,000, the plantings of 2.2 to 2.6 tokens per agent took hold 9 times in
-30 (8 times in 25, counting each planting once). Only five late patches
+At 2,000, the plantings of 2.2 to 2.6 tokens per agent took hold 8 times in
+25. Only five late patches
 were that rich, and none of the five took hold.
 
 ### Verdict on Experiment 30: the door closed, by poverty
@@ -753,7 +754,7 @@ figure says, folded beneath it, how it is drawn from the trials.
 `python3 book_figures.py door` draws the two figures again; their numbers
 are in `book/results/door.json`. The fifteen plantings at 2,000 repeat
 fifteen of Experiment 29's exactly, so the second figure and its table
-count them twice.
+count each of them once.
 
 <!-- runs E30 -->
 > [!info]- The trials behind this page
@@ -857,6 +858,12 @@ section to `book/results/b1raiders.json`.
     that fifteen are counted twice. Counted once, the plantings of 2.2 to 2.6
     tokens per agent at 2,000 took hold 8 times in 25, not 9 in 30. The
     picture does not change.
+- **24 October 2026.** The second figure and the table of plantings by
+  wealth are now drawn with each planting counted once
+  (`book_chapters/door.py`). Their rows read 0 of 23, 7 of 48, 6 of 14, 14
+  of 14 and 6 of 6. They had read 0 of 24, 8 of 58, 7 of 16, 16 of 16 and 6
+  of 6. The median wealth at 2,000 is 2.36 over Experiment 29's sixty
+  plantings, where the page gave 2.35 over all seventy-five.
 
 <!-- turns -->
 ---

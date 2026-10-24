@@ -24,7 +24,8 @@ RUNS = ("Experiment 30's 120 invasions (`python3 gol_lab.py run E30`): B2's worl
         "to 10,000 iterations as pilots of the engine's own rules (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … "
         "`s005`), at iterations 500, 2,000, 5,000 and 10,000, a patch of 5% on places 1 to 3, once with the "
         "raider's rule and once as a control; and, in the second chart, every patch of 5% of Experiment 29 too "
-        "(Experiment 16's ten worlds at 2,000).")
+        "(Experiment 16's ten worlds at 2,000), of which Experiment 30's plantings at 2,000 replay fifteen, counted "
+        "once.")
 STEPS = ["Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by "
          "step, until the patch holds 5% of the world.",
          "Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.",
@@ -82,7 +83,12 @@ def door(ch: F.Chapter) -> None:
                  "Right: each planting's raiders as a share of the world after 300 iterations (0 where they died "
                  "out)."),
         recipe=recipe(RUNS, "each trial's `result.json`", STEPS))
-    both = e29 + e30
+    # Experiment 30's plantings at 2,000 replay fifteen of Experiment 29's exactly: the long runs begin from
+    # Experiment 16's worlds at 2,000, and the places are the same. Each planting is counted once.
+    seen = {(p["wealth"], p["share"]) for p in e29}
+    replays = [p for p in e30 if p["era"] == 2000]
+    assert all((p["wealth"], p["share"]) in seen for p in replays), "E30's plantings at 2,000 no longer replay E29's"
+    both = e29 + [p for p in e30 if p["era"] != 2000]
     series = []
     for era, colour in ERAS:
         mine = [p for p in both if p["era"] == era]
@@ -90,8 +96,9 @@ def door(ch: F.Chapter) -> None:
                        "points": True, "size": 6, "colour": colour, "alpha": 0.8})
     ch.figure("wealth", title="What a raid starts from", x={"label": "the patch's tokens per agent when planted"},
               y={"label": "raiders' share of the world after 300 iterations", "min": 0}, series=series,
-              caption=("Each dot is one planting of 5% of a world, from Experiments 29 and 30, by the patch's tokens "
-                       "per agent when it was planted and the raiders' share of the world 300 iterations later."),
+              caption=("Each dot is one planting of 5% of a world, from Experiments 29 and 30, each counted once, by the "
+                       "patch's tokens per agent when it was planted and the raiders' share of the world 300 iterations "
+                       "later."),
               recipe=recipe(RUNS, "each trial's `result.json`", STEPS))
     bins = [(0, 2), (2, 2.5), (2.5, 3), (3, 4), (4, 99)]
     ch.number("by_era", {f"{e}": {"held": h, "wealth_median": float(np.median([p["wealth"] for p in e30 if p["era"] == e]))}
