@@ -583,8 +583,9 @@ iteration 2,000 were recorded in each world, and read as above.
 - **The sense of direction made no gliders.** With `came_from` alone, chains
   of three takeovers or more were 20–35% more common than in the control:
   3,500–4,000 against 2,900–3,000 in 200 games. With both inputs, one world had
-  more and one fewer. A chain went straight back to the node it had just left
-  1.4–1.5 times as often as chance has it, against 1.2–1.35 in the control. But
+  more and one fewer. In the four worlds with the input, a chain went straight
+  back to the node it had just left 1.38 to 1.57 times as often as chance has
+  it, against 1.25 and 1.36 in the controls. But
   one world with only the other input went back 1.66 times as often. So two
   seeds cannot lay the going back to the sense of direction. Chains did not
   travel further: the longest reached no further for the steps they took than
@@ -709,6 +710,11 @@ kept in `book/results/patterns.json`.
   agents a game, not 0.016 to 0.085. The chance of a move is about 0.07 in B2
   and 0.06 in B1, not 0.07 in both. And in the pilots without alliances, the
   feuding pairs kept their nodes in 0.49 and 0.48 of games, not 0.49 in both.
+- **24 October 2026.** This page said that with the sense of direction a
+  chain went straight back 1.4–1.5 times as often as chance, against 1.2–1.35
+  in the controls. Batch P's records (`GraphOfLifeRuns/.pilots/frames_P_*.json`)
+  give 1.38 to 1.57 in the four worlds with the input, and 1.25 and 1.36 in
+  the controls.
 
 <!-- turns -->
 ---
