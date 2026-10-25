@@ -62,14 +62,18 @@ def lab(*plans, baseline=TINY):
         for p in plans:
             with open(os.path.join(plans_dir, f"{p['id']}.json"), "w") as f:
                 json.dump(p, f)
-        saved = gol_store.BASE_DIR, gol_plan.PLANS, gol_lab._git
+        saved = gol_store.BASE_DIR, gol_plan.PLANS, gol_lab._git, gol_lab.DISK_MARGIN
         gol_store.BASE_DIR, gol_plan.PLANS = runs, plans_dir
         # The tests run on whatever is in the working tree, committed or not.
         gol_lab._git = lambda *args: "" if args[0] == "status" else "test-commit"
+        # Worlds this small need no margin on the disk. With the lab's own, a
+        # machine with less than ten gigabytes free (a CI runner, since
+        # 25 October 2026) paused every test before it began.
+        gol_lab.DISK_MARGIN = 0
         try:
             yield tmp
         finally:
-            gol_store.BASE_DIR, gol_plan.PLANS, gol_lab._git = saved
+            gol_store.BASE_DIR, gol_plan.PLANS, gol_lab._git, gol_lab.DISK_MARGIN = saved
 
 
 def work(spec, until, *extra, engine=None):
