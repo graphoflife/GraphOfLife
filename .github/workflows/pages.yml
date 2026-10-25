@@ -48,6 +48,8 @@ jobs:
         run: python3 tests/test_rules.py
       - name: The lab runs what the book plans, and stopping it changes nothing
         run: python3 tests/test_lab.py
+      - name: The screen's judge draws its lines where the author drew them
+        run: python3 tests/test_judge.py
       - name: A run's statistics, and the page's registry of them
         run: python3 tests/test_series.py
       - name: The server and the static site ship and answer alike

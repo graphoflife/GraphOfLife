@@ -263,7 +263,7 @@ other worlds tie or swing.
 - [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md):
   which of these rules cancel mixing's riches.
 - [Room and riches for the steadiest world](room-for-the-steadiest-world.md):
-  the estates played again, in the search for a [healthy world](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.").
+  the estates played again, in the search for a [healthy world](what-makes-a-world-interesting.md "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).").
 
 ## How this was made
 

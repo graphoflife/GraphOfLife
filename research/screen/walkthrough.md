@@ -7,10 +7,11 @@ change only after the walkthrough is complete.
 
 ## The criteria
 
-Every number is an **average over iterations 100 to 2,000** (the first 100
-iterations are always ignored), not a reading at one moment. Every threshold is
-a visible number the author controls, shown with each world's value, with a
-sensitivity table (how many worlds pass as each threshold moves).
+Every number is an **average over iterations 100 to the end of the run**
+(3,000 in round 3; the first 100 iterations are always ignored), not a reading
+at one moment. Every threshold is a visible number the author controls, shown
+with each world's value, with a sensitivity table (how many worlds pass as
+each threshold moves).
 
 - **Resilient:** one piece and 80% in the 2-core as before; a single agent's or
   link's loss may cut off up to **15%** ("we are dealing with small networks").
@@ -146,3 +147,54 @@ Choices made in building, open to change:
   the largest-stake game.
 - The brain's width is drawn once per world, every layer as wide.
 
+
+## The judge for round 3 (built 25 October 2026)
+
+Round 3 (Experiment 40) started on 25 October. The judge reads finished worlds
+only, plays none, and keeps every reading as it is made (one file a world in
+`GraphOfLifeRuns/.pilots/screen/worlds/`), so it can be run again as worlds
+finish: `python3 research/screen/judge.py E40 --jobs 3`.
+
+- **Files**: the lines and verdicts in `criteria.py` (read by the page too);
+  the first criteria, for rounds 1 and 2, kept as they were in
+  `criteria_1.py`; the readings in `measures.py`; `judge.py` judges a round by
+  its sampler's criteria (re-judging round 1 gives its committed verdict
+  exactly); tests in `tests/test_judge.py` (the judge's tests moved there from
+  `test_lab.py`), in CI.
+- **Where each number comes from**, every one averaged from iteration 100 to
+  the end:
+  - every iteration, from `stats.jsonl`: the share of agents having a child
+    (`births / nodes_before`, phase 1; the line uses the larger of the share
+    and its complement), links per agent (`meanDegree`), the hub
+    (`maxDegree / (nodes - 1)`), the largest holding (`maxTokens`), the Gini;
+    the spread-or-all-in doctrine (`spreadShare`) is reported, not judged (in
+    the first world 98.5% of agents spread, which says nothing about how alike
+    their stakes are);
+  - every 25th iteration (the heavy rows), from the game's frame (found
+    through each row's `_frame`): how alike the agents are in tokens, age and
+    genotype (`brain_ids` name genotypes in the engine); the 2-core, and how
+    alike its agents' numbers of links are; the worst agent and link cut
+    (`research/atlas/profile.py`); the dimension from the heavy rows;
+  - every kept world (250 to 3,000): the width over the random twin
+    (`book_chapters/space.measure`, `book_graph.degree_preserving`), the
+    half-cut exponent of the world and its twin, and the same-position share
+    (`diversity.stake_kinds(..., game=False)["pairs_apart"]`, with the
+    effective kinds).
+- **The half cut**: the cheapest of the median cuts of the ten smoothest
+  eigenvectors of the normalised Laplacian (numpy Lanczos, 400 steps; scipy is
+  not installed). One eigenvector alone is not enough: the smallest
+  eigenvalues lie close together, and on B1-30000-10c9f1-s3047 at 3,000 the
+  Fiedler vector's median cut 121 links where the third eigenvector's cut 62.
+  At 200 steps the vectors had not converged (one world: 216 links against an
+  exact 33); at 400 the ten cuts match an exact eigensolver's on four worlds.
+- **Cost**: a frame 0.03 s; the width 2.4 s; a half cut about 10 s; the
+  same-position share about a minute per kept world. Some 15 minutes a world,
+  6 hours for the round on 3 processes, one numpy thread each (several threads
+  a process loaded the machine to 30 on 8 cores beside the lab).
+- **The lines** (each a number the author controls, with a sensitivity
+  table): hub ≤ 0.05; links 3–12; 2-core ≥ 0.8; agent and link cut ≤ 0.15;
+  width ≥ 1.3; dimension 2–5; tokens, core links, ages, genotypes each
+  < 0.8 alike; largest holding > 3; children < 0.95 alike; Gini ≥ 0.46.
+  "One piece" is kept by the rules (cleanup removes everything cut off).
+  Interesting stays undefined: "at most two misses" is shown as provisional,
+  and so is every value it marks bad.

@@ -188,6 +188,11 @@ def cuts(n: int, edges: np.ndarray) -> Dict[str, float]:
 
 def two_core(n: int, edges: np.ndarray) -> float:
     """The share of agents left when every agent with fewer than two links is peeled away, again and again."""
+    return float(two_core_members(n, edges).mean()) if n else 0.0
+
+
+def two_core_members(n: int, edges: np.ndarray) -> np.ndarray:
+    """Which agents are left when every agent with fewer than two links is peeled away, again and again."""
     degree = np.zeros(n, dtype=int)
     adj: List[List[int]] = [[] for _ in range(n)]
     for a, b in edges:
@@ -208,7 +213,7 @@ def two_core(n: int, edges: np.ndarray) -> float:
                 if degree[v] < 2:
                     gone[v] = True
                     queue.append(v)
-    return float((~gone).sum() / n) if n else 0.0
+    return ~gone
 
 
 def worlds() -> List[Tuple[str, str, str, bool]]:

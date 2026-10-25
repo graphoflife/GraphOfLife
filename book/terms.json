@@ -261,7 +261,19 @@
         "interesting world"
       ],
       "page": "what-makes-a-world-interesting",
-      "says": "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one."
+      "says": "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3)."
+    },
+    {
+      "name": "half-cut exponent",
+      "page": "what-makes-a-world-interesting",
+      "anchor": "the-half-cut-exponent",
+      "says": "How the links crossing the cheapest cut of a world into halves grow with its size: 2/3 for a space of three dimensions, near 0 for a bottleneck, near 1 for a folded world."
+    },
+    {
+      "name": "same-position share",
+      "page": "what-makes-a-world-interesting",
+      "anchor": "the-same-position-share",
+      "says": "Of two agents put in the same situation, how often they stake their tokens measurably differently."
     },
     {
       "name": "Gini coefficient",

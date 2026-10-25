@@ -52,8 +52,9 @@ there.
 - **[game](one-iteration.md#phase-2-the-game)** — The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.
 - **[genotype](genotype.md)** (also family tree) — The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.
 - **[Gini coefficient](gini-coefficient.md)** (also Gini, Lorenz curve) — How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.
+- **[half-cut exponent](what-makes-a-world-interesting.md#the-half-cut-exponent)** — How the links crossing the cheapest cut of a world into halves grow with its size: 2/3 for a space of three dimensions, near 0 for a bottleneck, near 1 for a folded world.
 - **[health bar](health-bar.md)** — The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.
-- **[healthy world](what-makes-a-world-interesting.md)** (also interesting world) — A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one.
+- **[healthy world](what-makes-a-world-interesting.md)** (also interesting world) — A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).
 - **[hegemon](revolution.md)** — The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.
 - **[home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node)** — The tokens an agent stakes on its own node, to keep it.
 - **[hub](stars-and-hubs.md)** (also star) — An agent joined to far more agents than most; a star is a world held together by a single hub.
@@ -84,6 +85,7 @@ there.
 - **[random twin](random-twin.md)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.
 - **[revolution](revolution.md)** (also coalition) — A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.
 - **[richest tenth](gini-coefficient.md#the-richest-tenths-share)** — The share of all tokens held by the richest tenth of the agents.
+- **[same-position share](what-makes-a-world-interesting.md#the-same-position-share)** — Of two agents put in the same situation, how often they stake their tokens measurably differently.
 - **[scaling relation](degree.md#scaling-relations-between-agents-properties)** — How one property of an agent grows with another, as a power.
 - **[seed](random-numbers.md)** — The number that fixes every random choice of a run: the same settings and the same seed make the same world.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.

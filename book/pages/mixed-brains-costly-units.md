@@ -210,7 +210,7 @@ number appears during one.
 ## How our view changed
 
 - **24 October 2026.** From 23 October, this page called the worlds whose
-  links hold a token, with the age limit, a [healthy world](what-makes-a-world-interesting.md "A world that meets the six criteria of the screen of random worlds; an interesting one misses at most one."), and linked the
+  links hold a token, with the age limit, a [healthy world](what-makes-a-world-interesting.md "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3)."), and linked the
   words to the six criteria of the screen of random worlds. Their [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
   of 4.1 to 4.2 is above the screen's 4, as B2's own 4.4 is
   ([Links that hold a token](rules-without-numbers.md#links-that-hold-a-token)).
