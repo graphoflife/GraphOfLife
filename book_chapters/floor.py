@@ -194,23 +194,208 @@ def _children(run_id: str, start: int, end: int) -> Dict[str, float]:
     return {"child_tokens": given / births if births else float("nan"), "agents": float(np.mean(agents))}
 
 
+#: Experiment 2's thirty worlds of plain B1 at 10,000 tokens: those that lived to 3,000 are B1's line.
+PLAIN_B1 = [f"B1-10000-s{s:03d}" for s in range(1, 31)]
+#: Iterations a line of Experiment 37's figure averages over.
+STRETCH = 50
+#: The two floor worlds' colours.
+SEEDS = (ORANGE, VIOLET)
+B1_RUNS = ("Experiment 37's two runs (`python3 gol_lab.py run E37`): B1 at 10,000 tokens with a child never "
+           "poorer than the median holding of its parent's neighbours (`B1-10000-60e522-s001`, `-s002`), to 3,000 "
+           "iterations; beside the 26 of Experiment 2's 30 worlds of plain B1 (`B1-10000-s001` … `-s030`) that "
+           "lived to 3,000.")
+
+
+def _stats(run_id: str) -> Tuple[Dict[int, Dict[str, Any]], Dict[int, Dict[str, Any]]]:
+    """A run's statistics by iteration: its reproduction phase's rows and its game's."""
+    birth, game = {}, {}
+    with open(os.path.join(gol_store.run_dir(run_id), "stats.jsonl")) as f:
+        for line in f:
+            r = json.loads(line)
+            (birth if r.get("phase") == 1 else game)[r["iteration"]] = r
+    return birth, game
+
+
+def _stretches(run_id: str, end: int = AT) -> Dict[str, List[float]]:
+    """
+    A world through time, in stretches of STRETCH iterations: its agents after the game, the tokens a child
+    starts with (all given to children over all births), births per hundred agents, and the share of its
+    holding a parent gives its child.
+    """
+    birth, game = _stats(run_id)
+    out: Dict[str, List[float]] = {"agents": [], "child": [], "births": [], "given": []}
+    for a in range(0, end, STRETCH):
+        its = range(a, a + STRETCH)
+        given = sum((birth[t].get("reproTokenShare") or 0.0) * birth[t]["tokens"] for t in its)
+        born = sum(birth[t]["births"] for t in its)
+        out["agents"].append(float(np.mean([game[t]["nodes"] for t in its])))
+        out["child"].append(given / born if born else float("nan"))
+        out["births"].append(float(np.mean([100 * birth[t]["births"] / birth[t]["nodes_before"] for t in its])))
+        shares = [birth[t]["meanInvestedShare"] for t in its if birth[t].get("meanInvestedShare") is not None
+                  and birth[t]["births"]]
+        out["given"].append(float(np.mean(shares)) if shares else float("nan"))
+    return out
+
+
+def _window(run_id: str, start: int = 2000, end: int = AT) -> Dict[str, float]:
+    """Iterations start to end - 1: what a child starts with, the agents, births per agent and how long agents live."""
+    birth, game = _stats(run_id)
+    its = range(start, end)
+    born = sum(birth[t]["births"] for t in its)
+    agents = float(np.mean([birth[t]["nodes"] for t in its]))
+    return {"child_tokens": sum((birth[t].get("reproTokenShare") or 0.0) * birth[t]["tokens"] for t in its) / born,
+            "agents": agents,
+            "births_per_agent": float(np.mean([birth[t]["births"] / birth[t]["nodes_before"] for t in its])),
+            "life": agents / (born / len(its)),
+            "given": float(np.mean([birth[t]["meanInvestedShare"] for t in its if birth[t]["births"]])),
+            "hub": float(np.mean([game[t]["maxDegree"] / max(1, game[t]["nodes"] - 1) for t in its]))}
+
+
+def _barred(run_id: str, at: int) -> Dict[str, float]:
+    """
+    How hard the floor binds where a child may start with a single token, at the end of iteration at - 1:
+    the share of agents holding less than the median holding of their neighbours, whom the floor bars from
+    any child even if they gave it all they hold; and that median, over the agents.
+    """
+    frame = gol_store.read_frame(run_id, 2 * at - 1)
+    assert (frame["iteration"], frame["phase"]) == (at - 1, 2), (run_id, at)
+    place = {int(u): i for i, u in enumerate(frame["ids"])}
+    nb: List[List[int]] = [[] for _ in place]
+    for u, v in frame["edges"]:
+        nb[place[int(u)]].append(place[int(v)])
+        nb[place[int(v)]].append(place[int(u)])
+    tokens = np.asarray(frame["tokens"], float)
+    median = np.array([np.median(tokens[x]) if x else 0.0 for x in nb])
+    return {"agents": len(tokens), "barred": float(np.mean(tokens < median)),
+            "neighbours_median": float(np.median(median))}
+
+
+def _whole(run_id: str, start: int, end: int, every: int = 10) -> float:
+    """The share of births in which the parent gives its child everything it holds, every tenth iteration."""
+    whole = births = 0
+    for t in range(start, end, every):
+        for b in gol_store.read_frame(run_id, 2 * t)["decisions"]["births"]:
+            births += 1
+            whole += b["invested"] == b["tokens_before"]
+    return whole / births if births else float("nan")
+
+
+def _end(run_id: str) -> Dict[str, Any]:
+    """A world after its last game: its agents, its richest agent's tokens, links and age, and its last births."""
+    frame = gol_store.read_frame(run_id, 2 * AT - 1)
+    place = {int(u): i for i, u in enumerate(frame["ids"])}
+    links = np.zeros(len(place), dtype=int)
+    for u, v in frame["edges"]:
+        links[place[int(u)]] += 1
+        links[place[int(v)]] += 1
+    tokens = np.asarray(frame["tokens"])
+    ages = np.asarray(frame["ages"])
+    richest = int(np.argmax(tokens))
+    others = np.arange(len(tokens)) != richest
+    hubs = np.argsort(-links)[:3]
+    born = gol_store.read_frame(run_id, 2 * AT - 2)["decisions"]["births"]
+    birth, game = _stats(run_id)
+    return {"agents": len(tokens), "richest_tokens": int(tokens[richest]), "richest_links": int(links[richest]),
+            "richest_age": int(ages[richest]), "links": len(frame["edges"]),
+            "one_link": int((links == 1).sum()), "median_tokens": float(np.median(tokens)),
+            "others_ages": [int(ages[others].min()), int(ages[others].max())],
+            "others_median_tokens": float(np.median(tokens[others])),
+            "most_linked": [{"links": int(links[h]), "tokens": int(tokens[h]), "age": int(ages[h])} for h in hubs],
+            "last_births": [[int(b["tokens_before"]), int(b["invested"])] for b in born],
+            "below_50_since": min((t for t in range(2000, AT) if all(game[u]["nodes"] < 50 for u in range(t, AT))),
+                                  default=None)}
+
+
+def _swing(run_id: str, start: int = 500, end: int = 2250) -> float:
+    """How widely a world's size swings: the standard deviation of the logarithm of its agents after the game."""
+    _, game = _stats(run_id)
+    return float(np.std(np.log([game[t]["nodes"] for t in range(start, end)])))
+
+
+def _hubs(run_id: str) -> List[float]:
+    """The most links any agent has, as a share of the others, averaged over each stretch of 250 iterations."""
+    _, game = _stats(run_id)
+    return [float(np.mean([game[t]["maxDegree"] / max(1, game[t]["nodes"] - 1) for t in range(a, a + 250)]))
+            for a in range(0, AT, 250)]
+
+
+def _b1_figure(ch: F.Chapter, floors: List[str], plain: List[str]) -> None:
+    mids = [a + STRETCH / 2 for a in range(0, AT, STRETCH)]
+    worlds = {r: _stretches(r) for r in floors + plain}
+    panels = [("agents", "Agents", "agents after the game", False),
+              ("child", "What a child starts with", "tokens per child", True),
+              ("births", "Births", "births per hundred agents", False),
+              ("given", "What a parent gives", "share of its tokens given to the child", False)]
+    charts = []
+    for key, title, ylabel, log in panels:
+        series = [{"label": "plain B1, 26 worlds", **F.quantile_band([worlds[r][key] for r in plain], mids),
+                   "colour": GREY}]
+        series += [F.line(mids, worlds[r][key], f"with the floor, seed {k + 1}", colour, width=1.6)
+                   for k, (r, colour) in enumerate(zip(floors, SEEDS))]
+        y = {"label": ylabel, "log": True} if log else {"label": ylabel, "min": 0}
+        if key == "given":
+            y["max"] = 1
+        charts.append({"title": title, "x": {"label": "iteration", "min": 0, "max": AT}, "y": y,
+                       "series": series, "legend": key == "agents"})
+    ch.grid("b1", charts, title="The floor in B1, through time", columns=2,
+            caption=("Each line is a mean over stretches of 50 iterations: Experiment 37's two worlds with the floor "
+                     "(orange and violet), beside the 26 worlds of plain B1 that lived to 3,000 (grey: the median "
+                     "line, the middle half darker, nine in ten paler). Top left: the agents. Top right: the tokens "
+                     "a child starts with, all the tokens given to children over all the births (a logarithmic "
+                     "scale). Bottom left: births in an iteration per hundred agents. Bottom right: the share of "
+                     "its tokens a parent gives its child."),
+            recipe=recipe(B1_RUNS, "each run's `stats.jsonl`",
+                          ["Agents: the agents after each iteration's game.",
+                           "What a child starts with: the tokens given to children in a stretch (each birth "
+                           "phase's `reproTokenShare` times the tokens) over its births.",
+                           "Births: each birth phase's births over the agents it began with, times 100.",
+                           "What a parent gives: each birth phase's `meanInvestedShare`, the mean over its births "
+                           "of the tokens given over the tokens the parent held.",
+                           "Means over the stretches 0 to 49, 50 to 99, and so on; the band over plain B1's 26 "
+                           "worlds stretch by stretch."]))
+
+
 @chapter
 def floorplain(ch: F.Chapter) -> None:
     """
     The floor in plain B2 (Experiment 36) and in B1 (Experiment 37): how often
     it asks more than the least child, and what children start with, beside the
-    worlds of the same rules without it (Experiments 16 and 2). Numbers only.
+    worlds of the same rules without it (Experiments 16 and 2). In B1, where the
+    floor binds, also how the two worlds lived and ended, and a figure of them
+    through time beside plain B1's.
     """
     import gol_plan
-    for name, worlds, without, window in (("E36", "B2-10000-60e522", [f"B2-10000-s{s:03d}" for s in range(1, 11)],
-                                           (1000, 2000)),
-                                          ("E37", "B1-10000-60e522", None, (2000, 3000))):
-        runs = [s.run_id for s in gol_plan.experiment_runs(name)]
-        if not all(os.path.exists(os.path.join(gol_store.run_dir(r), "archive", "world_003000.npz"))
-                   for r in runs):
-            continue
-        ch.number(name, {r: {"floor": {str(at): _floor(r, at) for at in (1000, 2000, 3000)},
-                             "children": {f"{a}-{b}": _children(r, a, b) for a, b in ((1000, 2000), (2000, 3000))}}
-                         for r in runs})
-        if without:
-            ch.number(f"{name}_without", {r: _children(r, *window) for r in without})
+    b2 = [s.run_id for s in gol_plan.experiment_runs("E36")]
+    if all(os.path.exists(os.path.join(gol_store.run_dir(r), "archive", "world_003000.npz")) for r in b2):
+        ch.number("E36", {r: {"floor": {str(at): _floor(r, at) for at in (1000, 2000, 3000)},
+                              "children": {f"{a}-{b}": _children(r, a, b) for a, b in ((1000, 2000), (2000, 3000))}}
+                          for r in b2})
+        ch.number("E36_without", {r: _children(r, 1000, 2000) for r in [f"B2-10000-s{s:03d}" for s in range(1, 11)]})
+    floors = [s.run_id for s in gol_plan.experiment_runs("E37")]
+    if not all(int(gol_store.load_meta(r).get("iteration") or 0) >= AT for r in floors):
+        return
+    plain = [r for r in PLAIN_B1 if int(gol_store.load_meta(r).get("iteration") or 0) >= AT]
+    late = {r: _window(r) for r in floors + plain}
+    early = {r: _window(r, 1000, 2000) for r in floors + plain}
+    swing = {r: _swing(r) for r in floors + plain}
+    ch.number("E37", {r: {"late": late[r], "early": early[r], "swing": swing[r],
+                          "barred": {str(at): _barred(r, at) for at in (1000, 2000, 3000)},
+                          "whole": {f"{a}-{a + 249}": _whole(r, a, a + 250) for a in range(0, AT, 250)},
+                          "end": _end(r)}
+                      for r in floors})
+
+    def spread(values: List[float]) -> List[float]:
+        return [float(min(values)), float(np.median(values)), float(max(values))]
+
+    hubs = {r: _hubs(r) for r in plain}
+    ch.number("E37_plain", {"worlds": len(plain), "died": [r for r in PLAIN_B1 if r not in plain],
+                            **{key: spread([late[r][key] for r in plain]) for key in late[plain[0]]},
+                            "early": {key: spread([early[r][key] for r in plain]) for key in early[plain[0]]},
+                            "swing": spread([swing[r] for r in plain]),
+                            "swing_above_the_floor_worlds": sum(swing[r] > min(swing[f] for f in floors)
+                                                                for r in plain),
+                            "stars": {r: [round(h, 3) for h in hubs[r]] for r in plain if max(hubs[r]) > 0.25},
+                            "barred": {str(at): spread([_barred(r, at)["barred"] for r in plain])
+                                       for at in (1000, 2000, 3000)},
+                            "whole": spread([_whole(r, 2000, AT) for r in plain])})
+    _b1_figure(ch, floors, plain)

@@ -579,8 +579,11 @@ In the worlds of
 [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours) it
 changed nothing measurable. Their neighbours were as poor as the world, and
 every child already started with B2's 10 tokens.
-[The floor in plain B2 and in B1](room-for-the-steadiest-world.md#the-floor-in-plain-b2-and-in-b1) tries it
-in plain B2, and in B1, where a child may start with a single token.
+It was as idle in plain B2. In B1, where a child may start with a single
+token, it binds: most agents may not have a child, children start three to
+nine times as rich, lives are short, and both worlds ended small, around a few
+hubs that give their whole fortune to one child every iteration
+([The floor in plain B2 and in B1](room-for-the-steadiest-world.md#the-floor-in-plain-b2-and-in-b1)).
 
 **B1 and B2:** `fixed`.
 

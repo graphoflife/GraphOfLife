@@ -24,8 +24,12 @@ tokens each. Experiment 32 then asked every child to start as rich as its
 parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."), and nothing changed: the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), not birth, makes the
 poor. These worlds are spaces because their young are the parents, so here
 room and riches come from the same coin. In plain B2 the rule is just as idle
-(Experiment 36); whether it binds in B1, where a child may start with a single
-token, Experiment 37 will tell once it is played.
+(Experiment 36). In B1, where a child may start with a single token, it binds
+hard (Experiment 37). Most agents may not have a child at all, and those that
+may give most of what they hold. Children start three to nine times as rich
+as in plain B1, and agents live a few [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). Both worlds ended small,
+around a few rich [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") that hand their whole fortune to one child every
+iteration.
 
 ## Room for the steadiest world
 
@@ -38,7 +42,7 @@ What would a world that might keep evolving look like? The author's picture
 same moment:
 - **Healthy.** Its network meets all seven marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.").
 - **Diverse.** Its agents differ, more than B2's do: its [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") is
-  above that of B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, read at the same [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.").
+  above that of B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, read at the same iteration.
 - **A space.** It is wide, at least half again as wide as a random network
   with the same links ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 - **Uneven.** Its tokens are held no more evenly than B2's: their [Gini
@@ -173,7 +177,7 @@ At iteration 3,000:
   - **Seed 1** came nearest of all: 1.89 times its twin, a diversity score
     of 0.57, a Gini of 0.48. It missed one mark: one agent's loss could cut
     off too much.
-  - **Seed 2** missed two marks (a cut and a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")), and fell short on
+  - **Seed 2** missed two marks (a cut and a hub), and fell short on
     diversity (0.39) and on unevenness (a Gini of 0.35).
 
 ### What each rule cost
@@ -545,11 +549,111 @@ So it was not the estates or the mixed brains that kept the floor idle in
 any world of B2's rules, every child already gets ten tokens, and its
 parent's neighbours are poor: a floor set by them has nothing to add.
 
-### B1: still to be played
+### What the floor did in B1
 
-Experiment 37's two worlds have not been played yet. The [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") holds them
-ready, and they start when ▶ is pressed in the panel at the top of this
-section. Until then its thesis is not judged.
+In B1 the floor binds. Recall the rule: a parent may have a child only if the
+child starts with at least the median holding of the parent's neighbours; a
+smaller birth is refused. At iterations 1,000 and 2,000, 54% to 70% of the
+floor worlds' agents held less than their neighbours' median. Even if they
+gave everything they held, they could not have a child. The floor would bar as
+many or more in plain B1: in its 26 long worlds, 58% to 97% of the agents hold
+less than their neighbours' median at iterations 1,000, 2,000 and 3,000 (a
+median of 70% to 74%).
+
+So the agents richer than their neighbours had the children, and they gave
+generously (the figure below). Over iterations 1,000 to 2,000, against plain
+B1's 26 long worlds over the same iterations:
+- **Parents gave more.** A parent gave its child about two thirds of what it
+  held: 62% and 65% on average. In plain B1 a parent gives about a third (25%
+  to 43%, a median of 37%).
+- **Children started richer.** They started with 9.5 and 9.2 tokens on
+  average, more than in any of plain B1's worlds (2.2 to 7.7, a median of
+  3.1).
+- **Births were not fewer, but more frequent.** There were 19 births in an
+  iteration per hundred agents, against 2 to 4 in plain B1.
+- **Lives were short.** A world's agents are its births in an iteration times
+  how long its agents live. With so many births, an agent lived about 6
+  iterations on average, against 28 to 54 in plain B1.
+
+The worlds were as large as plain B1's, or larger: about 1,500 agents after
+the births, where plain B1's held 643 to 1,676 (a median of 1,249). Their size
+swung more widely than in 17 of plain B1's 26 worlds. Then both shrank: seed 1
+from about iteration 2,250, seed 2 from about 2,750.
+
+<!-- figure floorplain/b1 -->
+![The floor in B1, through time](../figures/floorplain/b1.svg)
+
+**The floor in B1, through time.** Each line is a mean over stretches of 50 iterations: Experiment 37's two worlds with the floor (orange and violet), beside the 26 worlds of plain B1 that lived to 3,000 (grey: the median line, the middle half darker, nine in ten paler). Top left: the agents. Top right: the tokens a child starts with, all the tokens given to children over all the births (a logarithmic scale). Bottom left: births in an iteration per hundred agents. Bottom right: the share of its tokens a parent gives its child.
+
+> [!example]- How to make this figure
+> **Runs.** Experiment 37's two runs (`python3 gol_lab.py run E37`): B1 at 10,000 tokens with a child never poorer than the median holding of its parent's neighbours (`B1-10000-60e522-s001`, `-s002`), to 3,000 iterations; beside the 26 of Experiment 2's 30 worlds of plain B1 (`B1-10000-s001` … `-s030`) that lived to 3,000.
+>
+> **Data.** From each run's `stats.jsonl`.
+>
+> 1. Agents: the agents after each iteration's game.
+> 2. What a child starts with: the tokens given to children in a stretch (each birth phase's `reproTokenShare` times the tokens) over its births.
+> 3. Births: each birth phase's births over the agents it began with, times 100.
+> 4. What a parent gives: each birth phase's `meanInvestedShare`, the mean over its births of the tokens given over the tokens the parent held.
+> 5. Means over the stretches 0 to 49, 50 to 99, and so on; the band over plain B1's 26 worlds stretch by stretch.
+>
+> **To make it again:** `python3 book_figures.py floorplain`.
+<!-- /figure -->
+
+### Where the floor leads: a star reborn every iteration
+
+As the worlds shrank, their agents grew richer, and so did the floor. In seed
+1, the share of births in which a parent gave its child everything it held
+rose from 5% to 17% before iteration 2,250 to 89% to 94% after 2,500. Such a
+parent dies with nothing, and its child takes its place and its links. In
+plain B1, 0.2% to 10% of births do this, over iterations 2,000 to 3,000.
+
+Seed 1 ended at iteration 3,000 with 30 agents, below 50 since iteration
+2,984. It was a **star**. One hub, born in that very iteration, held 3,291
+tokens and 28 of the world's 29 links. The 29 others, 27 of them joined to
+the hub alone, were 38 to 670 iterations old and held a median of 228 tokens.
+For an agent joined to the hub alone, the floor asks for a child of 3,291
+tokens, so none of them could have a child. Only the hub could. In each of
+the last 15 iterations there was one birth, and every one took the hub's
+whole holding, 3,005 to 3,897 tokens: the hub was reborn every iteration.
+B1 calls a world dead at 20 agents; this one was ten above.
+
+Seed 2 ended the same way. Its 127 agents sat around three hubs, all born in
+the last iteration, with 58, 57 and 31 links and 1,231, 1,173 and 659 tokens.
+Its last three births each took a parent's whole holding: 1,209, 1,392 and
+670 tokens.
+
+The floor looks like a ratchet in a world where tokens gather. Beside a rich
+agent a poor one may not breed; the rich one may, and gives its child enough
+to stay above its neighbours. But plain B1 swings and gathers too. After
+iteration 500, half its long worlds fall below 349 agents at some point, one
+to 114, and 4 of its 30 worlds died. In 16 of its 26 long worlds one agent was
+linked to more than a quarter of the world for 250 iterations or more, and in
+13 of them that star had broken up by the end. What no plain B1 world did was
+end as small (683 agents at the least) or give whole holdings so often (at
+most 10% of births). Whether the floor made these two worlds shrink, or B1's
+own swings did, two worlds cannot tell; nor whether they would have broken
+up their stars, as plain B1's do. Only longer runs and more seeds can.
+
+### Verdict on B1: the thesis holds, but not as expected
+
+All three conditions of the thesis are met:
+- both worlds lived to iteration 3,000;
+- over iterations 2,000 to 3,000 their children started with 22.3 and 15.4
+  tokens on average, more than the 5.1 of plain B1's richest world;
+- they held 919 and 1,130 agents on average, fewer than the 1,462 of plain
+  B1's median world.
+
+So the floor binds in B1, and the worlds it leaves are smaller and richer.
+But not in the way the thesis expected:
+- Births did not become fewer. They became larger and more frequent, and
+  lives short.
+- For 2,000 iterations the worlds were as large as plain B1's, or larger.
+  Their smaller size in the thesis's window comes from their last few hundred
+  iterations, when both shrank toward a few rich hubs. One came within ten
+  agents of the line where B1 calls a world dead. Plain B1's worlds swing
+  too, so two worlds cannot say whether the floor did this.
+
+Fewer and richer agents, yes; a steadier or healthier world, no.
 
 ## What we learned
 
@@ -562,10 +666,15 @@ section. Until then its thesis is not judged.
   nearest world had no mending, and missed only a cut.
 - **The poor are made by the game, not at birth.** Children start with ten
   tokens or more, and the game takes most of it within twenty iterations.
-- **In B2's mixed worlds, a floor set by the neighbours hardly binds.** A
-  poor world's neighbours are poor, so the floor falls below the ten tokens
-  every child already gets. In plain B2 it is just as idle; whether it
-  binds in B1 is still to be seen.
+- **A floor set by the neighbours binds only where a child may start poor.**
+  In B2, mixed or plain, a poor world's neighbours are poor, and the floor
+  falls below the ten tokens every child already gets. In B1 it bars most
+  agents from having a child. Those that may give most of what they hold:
+  children start richer, births are more frequent, and lives short.
+- **In B1 the floor gathers tokens.** Beside a rich agent a poor one may not
+  breed. Both worlds ended small, around a few hubs that hand their whole
+  fortune to one child every iteration. Whether that was the floor or B1's
+  own swings, two worlds cannot tell.
 - **Where every agent dies at a fixed age, a world's size is a hundred times
   its births an iteration.**
 - **Room and riches come from the same coin.** Young parents keep a world a
@@ -801,6 +910,14 @@ Experiment 16's ten worlds read the same way:
 <!-- /runs -->
 
 ### The runs of Experiment 37
+
+The numbers and the figure of [What the floor did in B1](#what-the-floor-did-in-b1)
+are read from the two worlds' `stats.jsonl` and [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), beside the 26 of
+Experiment 2's 30 worlds of plain B1 that lived to 3,000, read the same way:
+`python3 book_figures.py floorplain` writes them to
+`book/results/floorplain.json`. A parent gives its child its whole holding
+when a birth's `invested` equals its `tokens_before`, counted in every tenth
+iteration's frame.
 
 <!-- runs E37 -->
 > [!info]- The runs behind this page

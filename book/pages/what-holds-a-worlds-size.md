@@ -328,8 +328,13 @@ estate, children start with ten tokens or more, and the game takes most of it
 within twenty iterations. In plain B2 the floor is just as idle (Experiment
 36): every child already starts with ten tokens there too
 ([The floor in plain B2 and in B1](room-for-the-steadiest-world.md#the-floor-in-plain-b2-and-in-b1)).
-Whether it binds in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), where a child may start with a single token,
-Experiment 37 will tell once it is played.
+In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), where a child may start with a single token, it binds (Experiment 37).
+Most agents may not have a child at all, and those that may give most of what
+they hold. For 2,000 iterations the worlds held as many agents as plain B1's,
+with births more frequent and lives short. Then both shrank, around a few
+hubs that give their whole fortune to one child every iteration
+([What the floor did in B1](room-for-the-steadiest-world.md#what-the-floor-did-in-b1)).
+A floor set by the neighbours is no pull toward a steady size.
 
 ## What we learned
 
