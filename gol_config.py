@@ -102,6 +102,14 @@ MECHANICS: Dict[str, Any] = {
     "link_upkeep": "off",
     "upkeep_to": "end",
 
+    # ---- the original engine's game (2026-10-28) -------------------------------
+    #
+    # How the stakes are placed: all at once, the rule since the simple engine,
+    # or a token at a time with the board in view, as the original engine
+    # placed them (GraphOfLife.py of 2026-08-01). Off here, so `gol-1` keeps
+    # naming what it always named.
+    "allocation": "full",
+
     # ---- the pilots' rules ---------------------------------------------------
     #
     # Rules first played in the pilots' prototype (research/oee/pilots/proto.py)
@@ -109,6 +117,40 @@ MECHANICS: Dict[str, Any] = {
     # a field each: see PROTO_SWITCHES. Empty, so no strain gains a name.
     "proto": {},
 }
+
+# What an agent reads of each candidate before it places a token, under
+# allocation = weakest_first or strongest_first (gol_rounds.py): the original
+# engine's blotto features (GraphOfLife.py of 2026-08-01) of the game as it
+# stands, each a row of its observation, in this order. "On it" is on the
+# candidate's node; "left" is tokens still to be placed this game; a "rival" is
+# anyone else who may stake on the candidate's node: the candidate and its
+# neighbours, but the observer.
+BOARD: Tuple[str, ...] = (
+    "staked",           # tokens on it so far, from everyone
+    "lead",             # the largest stake on it
+    "crossed",          # whether my link to it has carried a token this game (my own node: yes)
+    "mine",             # what I have staked on it
+    "its_own",          # what it has staked on itself
+    "win_now",          # my share of its lead: 1 / how many share the lead, if I am one of them
+    "my_left",          # tokens I have left
+    "its_left",         # tokens it has left
+    "around_left",      # tokens left to everyone who may stake on it
+    "my_part",          # my part of those
+    "rivals",           # how many rivals I have on it
+    "rivals_left",      # tokens my rivals have left
+    "rival_most_left",  # the most any one rival has left
+    "others_staked",    # what others have staked on it
+    "others_most",      # the largest stake on it by another
+    "gap",              # how far the lead is ahead of the next stake
+    "gap_share",        # that gap over one more than the lead
+    "tied",             # how many share the lead
+    "leading",          # whether I lead on it
+    "behind",           # tokens I need to lead it
+    "revolt_staked",    # revolutionary tokens on it
+    "my_revolt",        # my revolutionary tokens on it
+    "lead_revolts",     # whether its largest staker is also its largest revolutionary
+    "would_win",        # whether I would take it if the game ended now (under the lottery, my chance)
+)
 
 # The pilots' rules a run may switch on in `proto`, each with the values it may
 # take. A switch at its default is left out rather than spelt, so one world has
@@ -267,6 +309,9 @@ class SimConfig:
     # Who takes a contested node: the largest stake, or a staker drawn in
     # proportion to its stake.
     CONTESTS: ClassVar[Tuple[str, ...]] = ("largest", "lottery")
+    # How the game's stakes are placed: all at once, or a token at a time with
+    # the poorest or the richest placing first.
+    ALLOCATIONS: ClassVar[Tuple[str, ...]] = ("full", "weakest_first", "strongest_first")
     # Whether links cost upkeep, and what then keeps one alive; and where the
     # token paid for it goes.
     LINK_UPKEEPS: ClassVar[Tuple[str, ...]] = ("off", "paid_or_used", "paid_only")
@@ -284,6 +329,7 @@ class SimConfig:
         "link_consent": LINK_CONSENTS,
         "hidden_activation": HIDDEN_ACTIVATIONS,
         "contest": CONTESTS,
+        "allocation": ALLOCATIONS,
         "link_upkeep": LINK_UPKEEPS,
         "upkeep_to": UPKEEP_TO,
     }
@@ -383,6 +429,22 @@ class SimConfig:
     # largest-stake rule, so the lottery needs revolutions off. The pilots'
     # rule, in the engine.
     contest: str = "largest"
+
+    # How the game's stakes are placed: the original engine's
+    # BLOTTO_ALLOCATION_MODE (GraphOfLife.py of 2026-08-01), back in the engine
+    # at the author's request (2026-10-28). `full`, the rule since: every agent
+    # looks once and places all its tokens at once. `weakest_first` and
+    # `strongest_first`: a token at a time, in rounds (gol_rounds.py). Before
+    # each round an agent that places one this round looks again, now with the
+    # board in view (BOARD: what each candidate has drawn so far and from whom,
+    # who leads it and by how much, what is still to be placed), and puts its
+    # next token where its brain scores highest. Under weakest_first every
+    # agent with a token left places one each round, so the poor are done first
+    # and the richest places its last tokens alone; under strongest_first only
+    # the agents with the most tokens left place one, so the richest starts
+    # alone and everyone places a last token in the last round. The board adds
+    # its rows to every observation in these two, and no head is added.
+    allocation: str = "full"
 
     # The control. With this on, an agent never reads its inputs: the numbers
     # its brain would have produced are replaced with noise, and every decision
@@ -712,6 +774,11 @@ class SimConfig:
             ("own_degree", 1, "magnitude"), ("its_degree", 1, "magnitude"),
             ("own_token_quantiles", 6, "magnitude"), ("its_token_quantiles", 6, "magnitude"),
             ("own_degree_quantiles", 6, "magnitude"), ("its_degree_quantiles", 6, "magnitude"),
+        ]
+        # The game as it stands, read before each token under a step allocation (BOARD).
+        if self.allocation != "full":
+            blocks.append(("board", len(BOARD), "magnitude"))
+        blocks += [
             # What each of the two wrote: the observer to itself, the observer
             # to the candidate, the candidate to the observer, the candidate to
             # itself.
@@ -977,6 +1044,9 @@ class SimConfig:
             raise ValueError("buy_life buys a life past max_age: it needs max_age")
         if self.mate_pays and not self.mix_at_birth:
             raise ValueError("mate_pays makes a mate pay for its child: it needs mix_at_birth")
+        if self.allocation != "full" and self.proto:
+            raise ValueError("allocation places the engine's stakes a token at a time; the prototype's world "
+                             "(proto) plays a game of its own")
         if self.contest == "lottery" and self.allow_revolutions:
             raise ValueError("contest = lottery draws a node's taker by chance, and a coalition belongs "
                              "to the largest-stake rule: it needs allow_revolutions off")

@@ -16,6 +16,7 @@
   "allow_handover",
   "allow_revolutions",
   "contest",
+  "allocation",
   "allow_gifting",
   "random_decisions",
   "prune_after",
@@ -190,6 +191,9 @@
   },
   "mate_pays": {
    "meaning": "Under mix_at_birth, whether the mate pays the child as many tokens as the parent gave it, as far as it can and never its last."
+  },
+  "allocation": {
+   "meaning": "How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played."
   }
  }
 }

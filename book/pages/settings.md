@@ -52,6 +52,7 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`allow_handover`](#allow_handover) | on | off | parents hand connections to children |
 | [`allow_revolutions`](#allow_revolutions) | on | on | coalitions can take nodes |
 | [`contest`](#contest) | largest | largest | who takes a contested node |
+| [`allocation`](#allocation) | full | full | how the game's stakes are placed |
 | [`allow_gifting`](#allow_gifting) | off | off | gifts of tokens |
 | [`random_decisions`](#random_decisions) | off | off | the control without brains |
 | [`prune_after`](#prune_after) | blotto | blotto | when unused connections are cut |
@@ -290,6 +291,41 @@ A coalition belongs to the largest-stake rule, so the lottery needs
 into the engine on 24 October 2026.
 
 **B1 and B2:** `largest`.
+
+### allocation
+
+How the [game](one-iteration.md#phase-2-the-game)'s stakes are placed:
+
+- `full`: every agent looks once at its neighbourhood and places all its
+  tokens at once, before anyone has placed anything. The rule since the simple
+  engine of 1 August 2026.
+- `weakest_first`: a token at a time, in rounds. In each round every agent
+  with a token left places one, so the poorest are done first and the richest
+  places its last tokens alone.
+- `strongest_first`: a token at a time, in rounds, but only the agents with
+  the most tokens left place one. The richest starts alone, the next richest
+  join it as it comes down to them, and in the last round everyone places a
+  last token.
+
+In both step modes an agent looks again before each token, now with the game
+as it stands in view: for every neighbour, what has been staked on its node
+so far and by whom, who leads there and by how much, and what everyone around
+it still has to place. These 24 numbers, the *board*, are extra inputs of the
+brain under a step allocation, so a brain can answer what others have already
+done: outbid a leader by one token, or stop staking where it has already won.
+Everyone in a round reads the board as it stood when the round began, so the
+order of the agents decides nothing. A token goes where the brain scores
+highest at that moment; the choice between spreading the stake and staking
+it all on one place is not read, since every token is a choice of its own.
+Tokens kept home under [`keep_home`](#keep_home) sit at home before the first
+round.
+
+The original engine (GraphOfLife.py, before it was simplified) played
+`strongest_first` by default. The step modes came back into the engine on 28
+October 2026, at the author's request. A game takes as many rounds as its
+richest agent has tokens, so these worlds are slower to play.
+
+**B1 and B2:** `full`.
 
 ### allow_gifting
 

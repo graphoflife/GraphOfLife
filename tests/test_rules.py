@@ -6,8 +6,10 @@ random worlds: hidden units that pass a change on (hidden_activation), links
 that cost a token (link_token) or upkeep a brain chooses (link_upkeep,
 upkeep_to), the lottery game (contest), a mate that pays (mate_pays) and an
 estate that flows to the nearest of the living (redistribution = local).
-Every one is off by default, and the old rules' own tests in test_engine.py
-hold that a world without them is the world it always was.
+And the original engine's game, its stakes placed a token at a time with the
+board in view (allocation, gol_rounds.py), back at the author's request of 28
+October 2026. Every one is off by default, and the old rules' own tests in
+test_engine.py hold that a world without them is the world it always was.
 
     python3 tests/test_rules.py
 """
@@ -24,6 +26,7 @@ import numpy as np
 
 from gol_config import SimConfig
 from GraphOfLifeSimple import GraphOfLife, decision_keys, make_brain, new_world
+from gol_rounds import Board, schedule, who_places
 from worlds import small
 
 
@@ -54,6 +57,10 @@ RULES = {
     "upkeep, paid or used, to the estate": dict(link_upkeep="paid_or_used", upkeep_to="estate"),
     "local estate": dict(redistribution="local"),
     "local estate, mended": dict(redistribution="local", mend_on_death=True, birth_links=2),
+    "weakest first": dict(allocation="weakest_first"),
+    "strongest first, home kept": dict(allocation="strongest_first", keep_home=0.2),
+    "strongest first, lottery, gifts": dict(allocation="strongest_first", contest="lottery",
+                                            allow_revolutions=False, allow_gifting=True),
     "everything": dict(hidden_activation="tanh", hidden_layers=[12, 10, 8], link_token=True,
                        link_upkeep="paid_or_used", upkeep_to="estate", contest="lottery",
                        allow_revolutions=False, mix_at_birth=True, mix_mates="parents",
@@ -84,7 +91,8 @@ def test_what_each_new_rule_needs():
     _refused(dict(mate_pays=True), "mix_at_birth")
     _refused(dict(hidden_activation="tanh", brain_kind="binary", hidden_layers=[24, 16]), "binary")
     _refused(dict(upkeep_to="estate"), "link_upkeep")
-    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to"):
+    _refused(dict(allocation="weakest_first", proto={"came_from": True}), "proto")
+    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to", "allocation"):
         _refused({setting: "no-such-rule"}, setting)
 
 
@@ -93,6 +101,73 @@ def test_upkeep_adds_one_decision_to_the_brain_and_nothing_else():
     assert paying.n_outputs() == plain.n_outputs() + 2
     assert "UPKEEP" in paying.head_layout() and "UPKEEP" not in plain.head_layout()
     assert paying.n_inputs() == plain.n_inputs()
+
+
+def test_a_step_allocation_adds_the_board_to_every_observation_and_no_head():
+    import gol_config
+    plain = small()
+    assert "board" not in plain.input_layout()
+    for mode in ("weakest_first", "strongest_first"):
+        step = small(allocation=mode)
+        start, stop, kind = step.input_layout()["board"]
+        assert (stop - start, kind) == (len(gol_config.BOARD), "magnitude")
+        assert step.n_inputs() == plain.n_inputs() + len(gol_config.BOARD)
+        assert step.n_outputs() == plain.n_outputs()
+
+
+# ---------------------------------------------------------------------------
+# A token at a time
+# ---------------------------------------------------------------------------
+
+def test_the_rounds_go_as_the_author_described_them():
+    """
+    Strongest first: the richest places alone first, and every agent places a last token in the last
+    round. Weakest first: everyone places in the first round, and the richest places its last alone.
+    The rounds worked out at once are the rounds taken one at a time.
+    """
+    tokens = {1: 3, 2: 1, 3: 2, 4: 0}
+    assert schedule(tokens, "strongest_first") == [[1], [1, 3], [1, 2, 3]]
+    assert schedule(tokens, "weakest_first") == [[1, 2, 3], [1, 3], [1]]
+    rng = np.random.RandomState(5)
+    for _ in range(100):
+        left = {int(u): int(rng.choice([0, 1, 2, 3, 7])) for u in rng.choice(50, 9, replace=False)}
+        for mode in ("weakest_first", "strongest_first"):
+            rounds, now = [], dict(left)
+            while who_places(now, mode):
+                rounds.append(who_places(now, mode))
+                for u in rounds[-1]:
+                    now[u] -= 1
+            assert schedule(left, mode) == rounds, (left, mode)
+
+
+def test_the_board_reads_the_game_as_it_stands():
+    """
+    Three agents in a line, 1 - 2 - 3, with 3, 1 and 2 tokens left; 1 has staked two on 2 and 3 one.
+    Each reads what is on 2, who leads it and by how much, and what is still to come around it.
+    """
+    from types import SimpleNamespace
+    from gol_config import BOARD
+    neighs = {1: [2], 2: [1, 3], 3: [2]}
+    world = SimpleNamespace(cfg=SimpleNamespace(contest="largest"), _mark_flow=lambda u, v: None)
+    stakes = {v: {} for v in neighs}
+    board = Board(world, neighs, stakes, {v: {} for v in neighs}, {v: 0 for v in neighs},
+                  {(1, 2): 0, (2, 3): 0}, {1: 5, 2: 1, 3: 3})
+    for u, v in ((1, 2), (1, 2), (3, 2)):
+        board.place(u, v, revolutionary=False)
+    board.new_round()
+
+    def read(u, targets):
+        return {name: dict(zip(targets, np.expm1(row).round(6))) for name, row in zip(BOARD, board.read(u, targets))}
+
+    one, three = read(1, [1, 2]), read(3, [3, 2])
+    assert one["staked"][2] == 3 and one["lead"][2] == 2 and one["mine"][2] == 2 and one["leading"][2] == 1
+    assert one["would_win"][2] == 1 and one["gap"][2] == 1 and one["behind"][2] == 0
+    assert three["mine"][2] == 1 and three["leading"][2] == 0 and three["behind"][2] == 2
+    assert three["would_win"][2] == 0 and three["others_most"][2] == 2 and three["crossed"][2] == 1
+    # Left: 1 has 3, 2 has 1, 3 has 2; around 2 (itself and both neighbours) 6, of which 3 is 1's.
+    assert one["my_left"][2] == 3 and one["its_left"][2] == 1 and one["around_left"][2] == 6
+    assert one["rivals_left"][2] == 3 and one["rival_most_left"][2] == 2 and three["rival_most_left"][2] == 3
+    assert one["crossed"][1] == 1 and one["mine"][1] == 0
 
 
 # ---------------------------------------------------------------------------

@@ -214,7 +214,9 @@ def test_a_round_three_world_carries_its_drawn_founders():
     with scratch_runs():
         worlds = JUDGE.worlds_of(["E40"])
         draws = gol_screen.draws(gol_plan.read_plan("E40")["screen"])
-        assert len(worlds) == len(draws) == 100
+        skipped = gol_plan.read_plan("E40")["screen"].get("skip") or []
+        assert len(worlds) == len(draws) == 100 - len(skipped)
+        assert not {w["seed"] - 3000 for w in worlds} & set(skipped)
         for w, d in zip(worlds, draws):
             assert w["set"].get("n_nodes") == d["set"].get("n_nodes"), (w["id"], d)
             assert w["fate"] == "not made"

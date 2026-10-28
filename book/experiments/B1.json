@@ -52,6 +52,7 @@
     "proto": {},
     "hidden_activation": "sigmoid",
     "contest": "largest",
+    "allocation": "full",
     "mate_pays": false,
     "link_token": false,
     "link_upkeep": "off",

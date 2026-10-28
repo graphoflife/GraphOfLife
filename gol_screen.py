@@ -49,9 +49,10 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from gol_config import SimConfig
 
-#: What a screen plan may say.
+#: What a screen plan may say. `skip` names worlds of the draw that are never played (each other world
+#: keeps its number, seed and name); `fixed` gives settings every world of the screen takes beside its draw.
 SCREEN_PLAN = ("sampler", "seed", "worlds", "tokens", "iterations", "forced", "budget_hours", "record",
-               "references", "workers")
+               "references", "workers", "skip", "fixed")
 #: Each round's worlds have seeds 1000·seed + i; its reference worlds 1000·seed + 900 + j.
 SEED_STRIDE = 1000
 REFERENCE_OFFSET = 900
@@ -258,7 +259,16 @@ def check(screen: Dict[str, Any]) -> None:
                          + (f"; {', '.join(unknown)} is not something it reads" if unknown else ""))
     if not 1 <= int(screen["worlds"]) <= MAX_WORLDS:
         raise ValueError(f"a screen plays 1 to {MAX_WORLDS} worlds, not {screen['worlds']}")
-    space(int(screen["sampler"]))
+    drawn = {setting[0] for setting in space(int(screen["sampler"]))}
+    skip = screen.get("skip") or []
+    if not all(isinstance(i, int) and not isinstance(i, bool) and 1 <= i <= int(screen["worlds"]) for i in skip) \
+            or len(set(skip)) != len(skip):
+        raise ValueError(f"skip names worlds of the draw, each once, from 1 to {screen['worlds']}, not {skip!r}")
+    fixed = screen.get("fixed") or {}
+    if not isinstance(fixed, dict) or set(fixed) & drawn:
+        raise ValueError("fixed gives settings the draw does not, and the draw draws "
+                         + ", ".join(sorted(set(fixed) & drawn)) if isinstance(fixed, dict)
+                         else f"fixed is a set of settings, not {fixed!r}")
     for name, refs in (screen.get("references") or {}).items():
         if not 0 <= int(refs) <= SEED_STRIDE - REFERENCE_OFFSET - 1:
             raise ValueError(f"a screen plays 0 to {SEED_STRIDE - REFERENCE_OFFSET - 1} worlds of {name}")
@@ -268,10 +278,13 @@ def draws(screen: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Every world of a screen: its number, seed, settings (what differs from B1) and attempt."""
     check(screen)
     version, seed = int(screen["sampler"]), int(screen["seed"])
+    skip, fixed = set(screen.get("skip") or []), dict(screen.get("fixed") or {})
     out = []
     for i in range(1, int(screen["worlds"]) + 1):
+        if i in skip:
+            continue
         changed, attempt = draw(version, seed, i, screen.get("forced"))
-        out.append({"world": i, "seed": SEED_STRIDE * seed + i, "set": changed, "attempt": attempt})
+        out.append({"world": i, "seed": SEED_STRIDE * seed + i, "set": {**changed, **fixed}, "attempt": attempt})
     return out
 
 

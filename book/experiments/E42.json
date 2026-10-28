@@ -1,0 +1,25 @@
+{
+ "id": "E42",
+ "title": "Round 3, a token at a time: strongest first",
+ "thesis": {
+  "claim": "This round makes no prediction. Eight worlds are drawn from the author's settings of round 3 (sampler 2, a round seed of their own) and played with the game's stakes placed a token at a time, strongest first, as the original engine placed them. The same eight worlds, with the same seeds, are played weakest first in Experiment 41, so each pair differs in nothing but the order in which the agents place their tokens.",
+  "why": "The author (2026-10-28): the original engine placed the stakes one token at a time, with each agent looking again at the game as it stood before each token, and that rule had been lost when the engine was simplified. Round 3 gives up sixteen of its worlds that had not been played, and these sixteen take their place, every other setting drawn as the author decided on 24 October 2026.",
+  "confirm": "Nothing confirms a survey. Each world is read by the measures of round 3, and each pair is compared, setting for setting the same but for the allocation.",
+  "refute": "Nothing refutes one either: if the order of the stakes changes nothing, the pairs say so."
+ },
+ "screen": {
+  "sampler": 2,
+  "seed": 4,
+  "worlds": 8,
+  "tokens": 30000,
+  "iterations": 3000,
+  "record": {
+   "archive_every": 250,
+   "checkpoint_every": 100,
+   "heavy_every": 25
+  },
+  "fixed": {
+   "allocation": "strongest_first"
+  }
+ }
+}

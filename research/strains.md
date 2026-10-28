@@ -227,4 +227,6 @@ settings in its `meta.json`.
 |---|---|---|---|
 | `E38` | 50 drawn, and 2 of B2 at 20,000 tokens for reference | 1, round seed 1 | the book's lab |
 | `E39` | 50 drawn, and 2 of B2 at 20,000 tokens for reference; withdrawn unplayed on 2026-10-24 | 1, round seed 2 | the book's lab |
-| `E40` | 100 drawn at 30,000 tokens, no reference worlds | 2, round seed 3 | the book's lab |
+| `E40` | 100 drawn at 30,000 tokens, no reference worlds; 16 of them given up unplayed on 2026-10-28 (`skip`), so 84 are played | 2, round seed 3 | the book's lab |
+| `E41` | 8 drawn at 30,000 tokens, every world's stakes placed a token at a time, weakest first (`fixed`: `allocation=weakest_first`); the same draws and seeds as E42 | 2, round seed 4 | the book's lab |
+| `E42` | 8 drawn at 30,000 tokens, every world's stakes placed a token at a time, strongest first (`fixed`: `allocation=strongest_first`); the same draws and seeds as E41 | 2, round seed 4 | the book's lab |

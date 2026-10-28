@@ -91,7 +91,7 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 # An explicit list, not a directory: /py/ must not become a way to read
 # arbitrary files out of the project. tests/test_site.py checks it against
 # build_site.sh so the two cannot drift.
-SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
+SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_rounds.py", "gol_series.py",
               "gol_lineage.py", "gol_spectral.py", "gol_lightning.py",
               "gol_stats.py", "gol_framestats.py", "gol_atlas.py", "explain_minimal.py")
 

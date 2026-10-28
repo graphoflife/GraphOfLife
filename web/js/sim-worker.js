@@ -32,6 +32,7 @@ const PY_DIR = new URL('../py/', self.location.href).href;
 // the order does not matter.
 const PY_FILES = [
   'gol_config.py',
+  'gol_rounds.py',
   'GraphOfLifeSimple.py',
   'gol_spectral.py',
   'gol_lightning.py',

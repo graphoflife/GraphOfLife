@@ -216,6 +216,23 @@
             stake, so a small stake can win and the largest can lose. It needs
             revolutions off.</small>
         </div>
+        <div class="field">
+          <label for="cfg_allocation">Tokens are staked</label>
+          <select id="cfg_allocation" data-cfg="allocation">
+            <option value="full">All at once</option>
+            <option value="weakest_first">A token at a time, weakest first</option>
+            <option value="strongest_first">A token at a time, strongest first</option>
+          </select>
+          <small>All at once: every agent looks once and places all its tokens.
+            A token at a time, as the original engine played: in rounds, each
+            agent placing one token per round, after looking again at the game
+            as it stands (who has staked what on each neighbour so far). Weakest
+            first, everyone with a token left places one each round, so the
+            richest places its last ones alone. Strongest first, only the
+            agents with the most tokens left place one, so the richest starts
+            alone and everyone places a last token in the last round. Slower to
+            play, the more tokens the richest agent holds.</small>
+        </div>
         <div class="field checkbox">
           <label><input type="checkbox" id="cfg_allow_gifting" data-cfg="allow_gifting"> Allow gifting</label>
           <small>An agent may hand tokens to a neighbour during reproduction, asking

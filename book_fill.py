@@ -237,6 +237,15 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     if forced:
         lines.append("- **Forced off in this round:** " + "; ".join(
             f"`{key}` = {', '.join(show(v) for v in values)}" for key, values in sorted(forced.items())) + ".")
+    fixed = sc.get("fixed") or {}
+    if fixed:
+        lines.append("- **The same in every world:** " + "; ".join(
+            f"`{key}` = {show(value)}" for key, value in sorted(fixed.items())) + ".")
+    skip = sc.get("skip") or []
+    if skip:
+        lines.append(f"- **Given up unplayed:** {number(len(skip))} of the {number(sc['worlds'])} worlds drawn, "
+                     f"world{'s' if len(skip) > 1 else ''} " + ", ".join(str(i) for i in skip)
+                     + "; every other world keeps its number, seed and name.")
     lines.append("")
     lines.append(f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab of a "
                  "computer running `gol_server.py`. Each run writes its settings, seed and engine version "

@@ -69,7 +69,7 @@ from gol_plan import (WORLD, LabError, RunSpec, baseline, experiment_runs, exper
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 #: What a run is made and advanced by, copied whole into each snapshot.
-ENGINE_FILES = ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py", "gol_spectral.py",
+ENGINE_FILES = ("GraphOfLifeSimple.py", "gol_config.py", "gol_rounds.py", "gol_series.py", "gol_spectral.py",
                 "gol_lightning.py", "gol_store.py", "gol_run.py", "gol_record.py",
                 "gol_worker.py", "gol_strategies.py", "gol_tournament.py", "gol_trial.py",
                 "gol_pilot.py", "research/oee/pilots/proto.py", "research/oee/pilots/grow.py",

@@ -120,6 +120,7 @@ import networkx as nx
 import numpy as np
 
 from gol_config import SimConfig
+from gol_rounds import stake_in_rounds
 
 # Node ids use -1 to mean "no parent" (founder or resurrected agent).
 NO_PARENT = -1
@@ -1437,6 +1438,11 @@ class GraphOfLife:
         X[rows["its_token_quantiles"]] = np.array([q_tok[v] for v in candidates]).T
         X[rows["own_degree_quantiles"]] = np.array(q_deg[u])[:, None]
         X[rows["its_degree_quantiles"]] = np.array([q_deg[v] for v in candidates]).T
+        # Under a step allocation the game's board has rows of its own, filled
+        # only while its tokens are being placed (gol_rounds); anywhere else it
+        # is empty.
+        if "board" in rows:
+            X[rows["board"]] = 0.0
 
         def msg(src: int, dst: int) -> List[float]:
             vec = self.messages.get(src, {}).get(dst)
@@ -2095,80 +2101,85 @@ class GraphOfLife:
         edge_flow: Dict[Tuple[int, int], int] = {tuple(sorted(e)): 0 for e in self.G.edges()}
         alloc_records: List[Dict[str, Any]] = []
 
-        for u in sorted(self.G.nodes()):
-            targets = [u] + list(neighs[u])
-            Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
-            # Written even by an agent with nothing to stake: it is still there,
-            # its neighbours can still see it, and it still has something to say.
-            self._emit_messages(u, targets, Y, outbox)
+        if self.cfg.allocation != "full":
+            # A token at a time, with the board in view: the original engine's game.
+            alloc_records = stake_in_rounds(self, features, outbox, allocations_to, revolution_to,
+                                            incoming_totals, edge_flow, record_decisions)
+        else:
+            for u in sorted(self.G.nodes()):
+                targets = [u] + list(neighs[u])
+                Y = self._observe(u, targets, log_deg, q_tok, q_deg, log_tok, at_risk)
+                # Written even by an agent with nothing to stake: it is still there,
+                # its neighbours can still see it, and it still has something to say.
+                self._emit_messages(u, targets, Y, outbox)
 
-            tokens_u = int(self.tokens.get(u, 0))
-            if tokens_u <= 0:
-                continue
-
-            scores = np.asarray(Y[self.heads["BLOTTO"], :], dtype=float)
-            mode = np.mean(Y[self.heads["BLOTTO_MODE"], :], axis=1)
-
-            # Under keep_home part of the tokens is not the agent's to stake: it
-            # stays on its own node whatever the brain says, at least one token,
-            # and only the rest is placed. That is what makes starving oneself
-            # impossible.
-            share = self.cfg.keep_home
-            kept = max(1, int(np.ceil(share * tokens_u))) if share > 0 else 0
-            stake = tokens_u - kept
-
-            # The agent picks its own doctrine: spread by score, or all-in.
-            spread = bool(mode[0] > mode[1])
-            if spread:
-                alloc = _apportion(scores, stake)
-            else:
-                alloc = np.zeros(len(targets), dtype=int)
-                alloc[int(np.argmax(scores))] = stake
-            alloc[0] += kept
-
-            revolts_allowed = self.cfg.allow_revolutions
-            rev_logits = Y[self.heads["REV_FRACTION"], :] if revolts_allowed else None
-            rev_amounts: List[int] = []
-
-            for idx, v in enumerate(targets):
-                amount = int(alloc[idx])
-                if amount <= 0:
-                    rev_amounts.append(0)
+                tokens_u = int(self.tokens.get(u, 0))
+                if tokens_u <= 0:
                     continue
 
-                incoming_totals[v] += amount
-                allocations_to[v][u] = allocations_to[v].get(u, 0) + amount
+                scores = np.asarray(Y[self.heads["BLOTTO"], :], dtype=float)
+                mode = np.mean(Y[self.heads["BLOTTO_MODE"], :], axis=1)
 
-                # Only part of what I send here needs to be revolutionary.
-                if revolts_allowed:
-                    rev_share = _share_of_first(rev_logits[0, idx], rev_logits[1, idx])
-                    rev_amount = int(np.floor(rev_share * amount))
-                    rev_amounts.append(rev_amount)
-                    if rev_amount > 0:
-                        revolution_to[v][u] = revolution_to[v].get(u, 0) + rev_amount
+                # Under keep_home part of the tokens is not the agent's to stake: it
+                # stays on its own node whatever the brain says, at least one token,
+                # and only the rest is placed. That is what makes starving oneself
+                # impossible.
+                share = self.cfg.keep_home
+                kept = max(1, int(np.ceil(share * tokens_u))) if share > 0 else 0
+                stake = tokens_u - kept
+
+                # The agent picks its own doctrine: spread by score, or all-in.
+                spread = bool(mode[0] > mode[1])
+                if spread:
+                    alloc = _apportion(scores, stake)
                 else:
-                    rev_amounts.append(0)
+                    alloc = np.zeros(len(targets), dtype=int)
+                    alloc[int(np.argmax(scores))] = stake
+                alloc[0] += kept
 
-                if u != v and amount > 0:
-                    edge = tuple(sorted((u, v)))
-                    if edge in edge_flow:
-                        edge_flow[edge] += amount
-                        self._mark_flow(u, v)
+                revolts_allowed = self.cfg.allow_revolutions
+                rev_logits = Y[self.heads["REV_FRACTION"], :] if revolts_allowed else None
+                rev_amounts: List[int] = []
 
-            if record_decisions:
-                record = {
-                    "agent": int(u),
-                    "tokens": tokens_u,
-                    "spread": spread,
-                    "targets": [int(v) for v in targets],
-                    "alloc": [int(a) for a in alloc],
-                }
-                # Absent rather than zero when revolutions are off, so the
-                # viewer can tell "not part of these rules" from "allowed but
-                # nobody used it".
-                if revolts_allowed:
-                    record["revolt"] = rev_amounts
-                alloc_records.append(record)
+                for idx, v in enumerate(targets):
+                    amount = int(alloc[idx])
+                    if amount <= 0:
+                        rev_amounts.append(0)
+                        continue
+
+                    incoming_totals[v] += amount
+                    allocations_to[v][u] = allocations_to[v].get(u, 0) + amount
+
+                    # Only part of what I send here needs to be revolutionary.
+                    if revolts_allowed:
+                        rev_share = _share_of_first(rev_logits[0, idx], rev_logits[1, idx])
+                        rev_amount = int(np.floor(rev_share * amount))
+                        rev_amounts.append(rev_amount)
+                        if rev_amount > 0:
+                            revolution_to[v][u] = revolution_to[v].get(u, 0) + rev_amount
+                    else:
+                        rev_amounts.append(0)
+
+                    if u != v and amount > 0:
+                        edge = tuple(sorted((u, v)))
+                        if edge in edge_flow:
+                            edge_flow[edge] += amount
+                            self._mark_flow(u, v)
+
+                if record_decisions:
+                    record = {
+                        "agent": int(u),
+                        "tokens": tokens_u,
+                        "spread": spread,
+                        "targets": [int(v) for v in targets],
+                        "alloc": [int(a) for a in alloc],
+                    }
+                    # Absent rather than zero when revolutions are off, so the
+                    # viewer can tell "not part of these rules" from "allowed but
+                    # nobody used it".
+                    if revolts_allowed:
+                        record["revolt"] = rev_amounts
+                    alloc_records.append(record)
 
         # --- 3. Resolve every contested node ---------------------------------
         new_tokens = dict(self.tokens)
