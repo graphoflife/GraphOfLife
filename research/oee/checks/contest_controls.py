@@ -14,7 +14,7 @@ import json
 import sys
 from concurrent.futures import ProcessPoolExecutor
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 
 import numpy as np
 

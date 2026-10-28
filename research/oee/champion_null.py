@@ -12,11 +12,11 @@ and the founders lose every contest, and count champions with the same rule
 """
 import glob, json, sys
 import numpy as np
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import gol_tournament as tour
 
 pattern = sys.argv[1] if len(sys.argv) > 1 else "B1-5000-s0*.tournament.json"
-runs = sorted(glob.glob("/home/stefan/Documents/CodingProjects/GraphOfLife Claude/GraphOfLifeRuns/.book/" + pattern))
+runs = sorted(glob.glob("/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns/.book/" + pattern))
 diffs, real = [], []
 for p in runs:
     v = json.load(open(p))

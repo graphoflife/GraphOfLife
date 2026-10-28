@@ -3,7 +3,7 @@
     python3 cross.py ARENA_RUN:IT A_RUN:IT B_RUN:IT [--T 20] [--coins 4] [--jobs 4]
 """
 import argparse, json, os, sys
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from concurrent.futures import ProcessPoolExecutor
 import numpy as np

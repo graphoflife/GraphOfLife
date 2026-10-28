@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 from gol_config import SimConfig
 from GraphOfLifeSimple import new_world
 from proto import make_world

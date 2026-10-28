@@ -18,7 +18,7 @@
 # folder is half way to a link. A run someone is advancing all the same (its
 # own lock held, say from the server's Start) is left where it is.
 set -u
-cd "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/GraphOfLifeRuns" || exit 1
+cd "/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns" || exit 1
 DEST=$1
 shift
 mkdir -p "$DEST" .lab || exit 1

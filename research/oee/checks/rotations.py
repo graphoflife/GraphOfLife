@@ -26,7 +26,7 @@ import json
 import sys
 from collections import Counter
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 
 import book_data as D
 

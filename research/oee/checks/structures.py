@@ -38,7 +38,7 @@ import json
 import sys
 from collections import defaultdict
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 
 import numpy as np
 

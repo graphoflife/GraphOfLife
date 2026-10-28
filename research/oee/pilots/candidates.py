@@ -24,7 +24,7 @@ import re
 import shutil
 import sys
 
-ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife"
 sys.path.insert(0, ROOT)
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
 HERE = os.path.dirname(os.path.abspath(__file__))

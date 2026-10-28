@@ -1,6 +1,6 @@
 #!/bin/sh
 # The worlds of "How different are the agents?", measured in turn by diversity.py.
-cd "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+cd "/home/stefan/Documents/CodingProjects/GraphOfLife"
 D="nice -n 10 python3 research/oee/checks/diversity.py --jobs 2"
 L=GraphOfLifeRuns/.pilots/L
 # B2 over its life: ten seeds at its start, after 100, 500, 1,000 and 2,000 iterations.

@@ -3,7 +3,7 @@
 # file of their own; handed to analyse_batch.sh's file only if that has not
 # begun, so that two writers never share one file. If it has begun, it plays
 # these contests itself and nothing is lost.
-cd "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+cd "/home/stefan/Documents/CodingProjects/GraphOfLife"
 OUT=GraphOfLifeRuns/.pilots
 nice -n 10 python3 research/oee/checks/rejudge.py --worlds research/oee/checks/batch_R_early_worlds.txt --T 100 \
     --jobs 2 --out $OUT/batch_R_early_T100.json > $OUT/batch_R_early_T100.log 2>&1

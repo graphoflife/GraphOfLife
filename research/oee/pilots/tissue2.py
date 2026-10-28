@@ -1,6 +1,6 @@
 """Space alone, with wound healing (neighbours of the dead join up) or token-limited walks closing loops."""
 import sys
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import numpy as np, networkx as nx
 from gol_series import _structure
 from cuts import node_cut_risk

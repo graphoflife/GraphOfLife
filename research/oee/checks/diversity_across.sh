@@ -5,7 +5,7 @@
 # more than two of these run at once. Results: .pilots/diversity/across_lab.json
 # and across_pilots.json; a world already measured is skipped, so this can be
 # started again after an interruption.
-cd "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+cd "/home/stefan/Documents/CodingProjects/GraphOfLife"
 LOG=GraphOfLifeRuns/.pilots/diversity_across.log
 until grep -q "diversity gaps measured" GraphOfLifeRuns/.pilots/diversity_gaps.log 2>/dev/null; do sleep 60; done
 D="nice -n 10 python3 research/oee/checks/diversity.py --jobs 2"

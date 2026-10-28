@@ -1,6 +1,6 @@
 """Space alone: path healing that happens with probability q per death."""
 import sys
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import numpy as np, networkx as nx
 from gol_series import _structure
 from cuts import node_cut_risk

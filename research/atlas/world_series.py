@@ -16,13 +16,13 @@ import json
 import os
 import sys
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 
 import numpy as np
 
 import gol_record
 
-OUT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/GraphOfLifeRuns/.pilots/atlas"
+OUT = "/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns/.pilots/atlas"
 #: Not statistics of the world: bookkeeping, or the same in every frame.
 SKIP = {"_frame", "_heavy", "iteration", "phase", "tokens", "nodes_before", "_seconds"}
 

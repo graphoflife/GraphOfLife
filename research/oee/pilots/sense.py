@@ -1,6 +1,6 @@
 """Which inputs change an evolved agent's stakes? Perturb one input group at a time and count changed decisions."""
 import sys, json, os
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 from GraphOfLifeSimple import _apportion

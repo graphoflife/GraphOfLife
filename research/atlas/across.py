@@ -31,7 +31,7 @@ import re
 import sys
 from concurrent.futures import ProcessPoolExecutor
 
-ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife"
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "research", "oee", "pilots"))
 sys.path.insert(0, os.path.join(ROOT, "research", "oee", "checks"))

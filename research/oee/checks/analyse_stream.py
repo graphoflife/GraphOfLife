@@ -32,7 +32,7 @@ import tempfile
 import time
 from concurrent.futures import ProcessPoolExecutor
 
-ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife"
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
 DONE = os.path.join(PILOTS, "analysis")
 GAMES = 200

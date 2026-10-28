@@ -3,7 +3,7 @@
 # eras (T = 100) and 200 recorded games from each world's last checkpoint.
 #     sh research/oee/checks/analyse_batch.sh P <pid of its jobq>
 B=$1; Q=$2
-cd "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+cd "/home/stefan/Documents/CodingProjects/GraphOfLife"
 while kill -0 "$Q" 2>/dev/null; do sleep 120; done
 OUT=GraphOfLifeRuns/.pilots
 python3 research/oee/checks/rejudge.py --worlds research/oee/checks/batch_${B}_worlds.txt --T 100 --jobs 2 \

@@ -1,6 +1,6 @@
 """The B2 recipe run by the engine itself (not the prototype): health and economy over time."""
 import sys, json, time
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import numpy as np, networkx as nx
 from gol_config import SimConfig
 from GraphOfLifeSimple import new_world, worst_node_cut_share

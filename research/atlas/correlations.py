@@ -23,13 +23,13 @@ import json
 import os
 import sys
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 
 import numpy as np
 
 import book_data as D
 
-OUT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/GraphOfLifeRuns/.pilots/atlas"
+OUT = "/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns/.pilots/atlas"
 
 # The quantities, the pairs made from the same numbers, and the arithmetic are
 # gol_atlas's, which the Research tab's Correlations view answers with too.

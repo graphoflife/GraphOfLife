@@ -50,7 +50,7 @@ import os
 import sys
 from collections import defaultdict
 
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import numpy as np

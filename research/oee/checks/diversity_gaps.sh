@@ -2,7 +2,7 @@
 # The ceiling of "Do kinds of behaviour last?": the same world against itself
 # (two samples of one moment), and against itself 100 iterations later, so the
 # share of kinds found again is read against what sampling alone allows.
-cd "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+cd "/home/stefan/Documents/CodingProjects/GraphOfLife"
 D="nice -n 10 python3 research/oee/checks/diversity.py --jobs 2"
 L=GraphOfLifeRuns/.pilots/L
 P=""

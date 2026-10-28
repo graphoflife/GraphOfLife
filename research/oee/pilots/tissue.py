@@ -1,6 +1,6 @@
 """Space alone: births that insert a node into triangles, random deaths, the cull. What network results?"""
 import sys
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import numpy as np, networkx as nx
 from gol_series import _structure
 from cuts import node_cut_risk

@@ -17,7 +17,7 @@ _spec = importlib.util.spec_from_file_location("correlations", os.path.join(os.p
 _c = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_c)
 
-OUT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude/GraphOfLifeRuns/.pilots/atlas"
+OUT = "/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns/.pilots/atlas"
 OUTCOMES = ["change", "rel_change", "kept", "took", "alive_10", "change_10", "degree_change_10", "child_next"]
 AXES = ("lin-lin", "log-lin", "lin-log", "log-log")
 

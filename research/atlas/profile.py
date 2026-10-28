@@ -48,7 +48,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
-ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife Claude"
+ROOT = "/home/stefan/Documents/CodingProjects/GraphOfLife"
 sys.path.insert(0, ROOT)
 RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
 PILOTS = os.path.join(RUNS, ".pilots")

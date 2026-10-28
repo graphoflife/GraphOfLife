@@ -1,6 +1,6 @@
 """Space alone with a link cap: births need room; repair as a chain or a ring of the dead agent's neighbour groups."""
 import sys
-sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife Claude")
+sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import numpy as np, networkx as nx
 from gol_series import _structure
 from cuts import node_cut_risk
