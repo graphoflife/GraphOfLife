@@ -915,6 +915,32 @@ def test_a_run_moved_away_is_remembered_and_done_without_its_disk():
         assert gol_lab.jobs(["E91"], "x") == []
 
 
+def test_trials_already_played_stay_finished_while_their_source_is_away():
+    """
+    A plan of trials reads each source run's settings, and the source may move to a drive that is
+    unplugged later. Every trial played keeps those settings in its own record, so the plan reads
+    them there and the experiment stays finished (2026-10-29); one not played yet still needs its source.
+    """
+    with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED)) as tmp:
+        assert work(gol_plan.experiment_runs("E91")[0], 4) == 0
+        p = trials_plan("E92", "contest", CONTESTS)
+        with open(os.path.join(tmp, "plans", "E92.json"), "w") as f:
+            json.dump(p, f)
+        gol_lab.request(run="E92")
+        with contextlib.redirect_stdout(io.StringIO()):
+            assert gol_lab.run_lab() == 0
+        before = [(s.run_id, gol_plan.what_it_is(s.config)) for s in gol_plan.experiment_runs("E92")]
+        source = gol_store.run_dir("B9-400-s001")
+        shutil.move(source, os.path.join(tmp, "unplugged"))
+        os.symlink(os.path.join(tmp, "elsewhere", "B9-400-s001"), source)
+        assert [(s.run_id, gol_plan.what_it_is(s.config)) for s in gol_plan.experiment_runs("E92")] == before
+        assert gol_lab.status()["experiments"]["E92"]["state"] == "finished"
+        p["trials"]["sets"][0]["grid"]["seed"] = [17, 18]            # a trial not yet played
+        with open(os.path.join(tmp, "plans", "E92.json"), "w") as f:
+            json.dump(p, f)
+        refused(lambda: gol_plan.experiment_runs("E92"), "not mounted")
+
+
 def test_an_experiment_that_cannot_be_read_holds_up_no_other():
     """
     Trials whose world sits on a disk that is not mounted cannot be read: the lab passes that

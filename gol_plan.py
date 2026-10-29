@@ -355,6 +355,19 @@ def trials_of(name: str) -> List[Dict[str, Any]]:
     return found
 
 
+def _played_with(trial: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """
+    The settings a trial already played was played with: its source run's, with the trial's own
+    few. Kept in the trial's record on this disk, so they can be read while the run it was played
+    from is on a drive that is away (2026-10-29); None for a trial not yet played.
+    """
+    import gol_store as store
+    try:
+        return store.load_meta(trial_id_for(trial))["config"]
+    except (OSError, ValueError, KeyError):
+        return None
+
+
 def _experiment_trials(name: str) -> List[RunSpec]:
     """Every trial an experiment asks for, as the lab plays it: from a run on this machine."""
     import gol_store as store
@@ -364,12 +377,15 @@ def _experiment_trials(name: str) -> List[RunSpec]:
         try:
             source = store.source_config(trial["run"])
         except (OSError, ValueError) as exc:
-            folder = store.run_dir(trial["run"]) if not trial["run"].startswith(store.PILOT) else ""
-            reason = str(exc) if isinstance(exc, ValueError) and "prototype" in str(exc) else \
-                f"the run {trial['run']} is on {os.readlink(folder)}, which is not mounted" \
-                if folder and os.path.islink(folder) and not os.path.exists(folder) else \
-                f"there is no run {trial['run']} on this machine to play from"
-            raise LabError(f"{name} trials {label!r}: {reason}") from None
+            # A trial already played can do without its source: its own record holds the settings.
+            source = _played_with(trial)
+            if source is None:
+                folder = store.run_dir(trial["run"]) if not trial["run"].startswith(store.PILOT) else ""
+                reason = str(exc) if isinstance(exc, ValueError) and "prototype" in str(exc) else \
+                    f"the run {trial['run']} is on {os.readlink(folder)}, which is not mounted" \
+                    if folder and os.path.islink(folder) and not os.path.exists(folder) else \
+                    f"there is no run {trial['run']} on this machine to play from"
+                raise LabError(f"{name} trials {label!r}: {reason}") from None
         era = trial.get("home", trial.get("era"))
         what = (f"era {trial['b']:,} against {trial['a']:,} on the world of {era:,}, coin {trial['seed']}"
                 if trial["kind"] == "contest" else
