@@ -16,7 +16,9 @@
 # Nothing is moved while the lab runs: the script holds the lab's own lock for
 # as long as it moves, so the lab cannot start, or make again, a run whose
 # folder is half way to a link. A run someone is advancing all the same (its
-# own lock held, say from the server's Start) is left where it is.
+# own lock held, say from the server's Start) is left where it is. Once moved, where each run
+# stands is noted in the lab's own folder (.lab/elsewhere.json), so that a finished run counts as
+# done while its drive is unplugged (2026-10-29).
 set -u
 cd "/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns" || exit 1
 DEST=$1
@@ -47,4 +49,7 @@ for run in "$@"; do
         echo "$run: could not swap, left in place"
     fi
 done
+# Where each moved run stands, noted on this disk while the other is still there to read: a
+# finished run then counts as done whether or not the drive is plugged in (gol_lab.remember_moved).
+python3 -c 'import sys; sys.path.insert(0, ".."); import gol_lab; print(len(gol_lab.remember_moved(sys.argv[1:])), "moved runs noted")' "$@"
 echo "move done"

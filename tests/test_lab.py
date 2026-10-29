@@ -885,26 +885,34 @@ def test_a_run_on_a_drive_that_fails_is_blocked_and_the_lab_plays_the_rest():
             gol_store.load_meta, gol_costs.tail_rows = real_meta, real_rows
 
 
-def test_a_finished_run_on_another_disk_is_read_once_a_session():
-    """Done and moved away, a run is not read again: a drive asleep under it is not woken every few seconds."""
-    with lab(plan("E91", seeds="1", iterations=2)) as tmp:
-        spec = gol_plan.experiment_runs("E91")[0]
-        assert work(spec, 2) == 0
-        folder = gol_store.run_dir(spec.run_id)
-        elsewhere = os.path.join(tmp, "elsewhere", spec.run_id)
-        os.makedirs(os.path.dirname(elsewhere))
-        shutil.move(folder, elsewhere)
-        os.symlink(elsewhere, folder)
-        gol_lab._DONE_ELSEWHERE.clear()
-        assert gol_lab.jobs(["E91"], "x") == []
-        assert gol_lab._DONE_ELSEWHERE == {spec.run_id: 2}
+def test_a_run_moved_away_is_remembered_and_done_without_its_disk():
+    """
+    Moved to another disk and done, a run stays done when the disk is unplugged, and is not read again
+    while it is there (the author, 2026-10-29: a finished world only waits to be analysed). One moved
+    away before it was done is blocked while its disk is away: only the disk can carry it on.
+    """
+    with lab(plan("E91", seeds="1..2", iterations=4)) as tmp:
+        done, unfinished = gol_plan.experiment_runs("E91")
+        assert work(done, 4) == 0 and work(unfinished, 2) == 0
+        disk = os.path.join(tmp, "drive")
+        for spec in (done, unfinished):
+            folder = gol_store.run_dir(spec.run_id)
+            shutil.move(folder, os.path.join(disk, spec.run_id))
+            os.symlink(os.path.join(disk, spec.run_id), folder)
+        assert sorted(gol_lab.remember_moved([done.run_id, unfinished.run_id, "B9-400-s999"])) == \
+            sorted([done.run_id, unfinished.run_id])
         real = gol_store.load_meta
-        gol_store.load_meta = lambda run_id: (_ for _ in ()).throw(AssertionError("read again"))
+        gol_store.load_meta = lambda run_id: (_ for _ in ()).throw(AssertionError(f"{run_id} read again"))
         try:
-            assert gol_lab.jobs(["E91"], "x") == []
+            assert gol_lab.run_state(done, None)["state"] == "done"
         finally:
             gol_store.load_meta = real
-            gol_lab._DONE_ELSEWHERE.clear()
+        os.rename(disk, disk + ".unplugged")
+        assert gol_lab.run_state(done, None) == {"state": "done", "iteration": 4, "status": "stopped",
+                                                 "checkpoint": 4}
+        blocked = gol_lab.run_state(unfinished, None)
+        assert blocked["state"] == "blocked" and "not mounted" in blocked["reason"], blocked
+        assert gol_lab.jobs(["E91"], "x") == []
 
 
 def test_an_experiment_that_cannot_be_read_holds_up_no_other():

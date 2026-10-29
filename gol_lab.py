@@ -358,24 +358,93 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     exists is continued by the engine that made it; one that does not is made
     by `engine`, the snapshot of today's, which is None while there is none.
 
-    A run that cannot be read now is blocked for as long as that lasts. The
-    runs moved to an external drive are read through links, and a drive that
-    sleeps, fails or is made read-only under them answers with errors rather
-    than with nothing: they used to stop the lab, and every run it was playing
-    with it (2026-10-25, 2026-10-29).
+    A run moved to another disk (research/tools/move_runs.sh) is read through
+    a link, and the lab remembers where each stood when it was last read
+    (_elsewhere). A run remembered as done is done, whether its disk is there
+    or not, and is not read again: unplugged, asleep or failing, the drive
+    stops nothing (the author, 2026-10-29). One that is not done, or not
+    remembered, is blocked while its disk is away, since only the disk can
+    carry it on. A run that cannot be read now — a drive that sleeps, fails or
+    is made read-only answers with errors rather than with nothing — is
+    blocked for as long as that lasts: such errors used to stop the lab, and
+    every run it was playing with it (2026-10-25, 2026-10-29).
     """
+    folder = store.run_dir(spec.run_id)
+    moved = os.path.islink(folder)
+    kept = _elsewhere().get(spec.run_id) if moved else None
+    if kept and _done(kept, spec):
+        return {"state": "done", "iteration": kept["iteration"], "status": kept["status"],
+                "checkpoint": kept["checkpoint"]}
     try:
-        return _run_state(spec, engine)
+        state = _run_state(spec, engine)
     except OSError as exc:
         return {"state": "blocked", "iteration": 0,
                 "reason": f"{spec.run_id} cannot be read now ({exc.strerror or exc})"}
+    if moved and "checkpoint" in state:
+        _remember(spec.run_id, state)
+    return state
+
+
+def _done(kept: Dict[str, Any], spec: RunSpec) -> bool:
+    """Whether a run remembered at `kept` has nothing left for this plan to do."""
+    return kept["status"] in ("extinct", "too_slow") or kept["checkpoint"] >= spec.targets[-1]
+
+
+_ELSEWHERE: Dict[str, Any] = {"path": None, "stamp": None, "runs": {}}
+
+
+def _elsewhere() -> Dict[str, Dict[str, Any]]:
+    """
+    Where every run on another disk stood when it was last read, kept on this
+    one. Asked for every moved run each time the lab looks round, so read again
+    only when the file has changed.
+    """
+    path = os.path.join(lab_dir(), "elsewhere.json")
+    try:
+        stat = os.stat(path)
+    except FileNotFoundError:
+        return {}
+    stamp = (stat.st_mtime_ns, stat.st_size)
+    if (_ELSEWHERE["path"], _ELSEWHERE["stamp"]) != (path, stamp):
+        with open(path) as f:
+            _ELSEWHERE.update(path=path, stamp=stamp, runs=json.load(f))
+    return _ELSEWHERE["runs"]
+
+
+def _remember(run_id: str, state: Dict[str, Any]) -> None:
+    """Note where a run on another disk stands, when that is news."""
+    kept = {"iteration": int(state.get("iteration") or 0), "status": state.get("status"),
+            "checkpoint": int(state.get("checkpoint") or 0)}
+    if _elsewhere().get(run_id) != kept:
+        store.update_json(os.path.join(_made(lab_dir()), "elsewhere.json"),
+                          lambda elsewhere: elsewhere.update({run_id: kept}), indent=1)
+
+
+def remember_moved(run_ids: Iterable[str]) -> List[str]:
+    """
+    Note where each of these runs stands, for those now on another disk: what
+    research/tools/move_runs.sh calls once it has moved them, while their disk
+    is still there to read. Returns the runs noted.
+    """
+    noted = []
+    for run_id in run_ids:
+        if not os.path.islink(store.run_dir(run_id)):
+            continue
+        try:
+            meta = store.load_meta(run_id)
+        except OSError:
+            continue
+        _remember(run_id, {"iteration": meta.get("iteration"), "status": meta.get("status"),
+                           "checkpoint": meta.get("checkpoint_iteration")})
+        noted.append(run_id)
+    return noted
 
 
 def _run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     folder = store.run_dir(spec.run_id)
     if os.path.islink(folder) and not os.path.exists(folder):
-        # Moved to another disk (research/tools/move_runs.sh) that is not mounted now:
-        # the run exists, and making it again would lose it.
+        # Moved to another disk (research/tools/move_runs.sh) that is not mounted now, and
+        # not remembered as done: the run exists, and making it again would lose it.
         return {"state": "blocked", "iteration": 0,
                 "reason": f"{spec.run_id} is on {os.readlink(folder)}, which is not mounted"}
     path = os.path.join(folder, "meta.json")
@@ -410,10 +479,6 @@ def _run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
 
 _SKIPPED: Dict[str, str] = {}
 
-#: The runs found done on another disk this session, by the last target each had reached: not read
-#: again until the lab starts anew, so a drive that sleeps or fails under them goes untouched while
-#: the lab plays the runs on this one.
-_DONE_ELSEWHERE: Dict[str, int] = {}
 
 
 def _note_skipped(name: str, reason: str) -> None:
@@ -446,11 +511,7 @@ def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
         except LabError as exc:
             _note_skipped(name, str(exc))
     for spec in wanted(readable).values():
-        if _DONE_ELSEWHERE.get(spec.run_id, -1) >= spec.targets[-1]:
-            continue
         state = run_state(spec, engine)
-        if state["state"] == "done" and os.path.islink(store.run_dir(spec.run_id)):
-            _DONE_ELSEWHERE[spec.run_id] = spec.targets[-1]
         if state.get("job"):
             found.append(state["job"])
 
