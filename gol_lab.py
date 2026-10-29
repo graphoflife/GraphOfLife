@@ -357,7 +357,21 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     — and if waiting, the job that takes it to its next target. A run that
     exists is continued by the engine that made it; one that does not is made
     by `engine`, the snapshot of today's, which is None while there is none.
+
+    A run that cannot be read now is blocked for as long as that lasts. The
+    runs moved to an external drive are read through links, and a drive that
+    sleeps, fails or is made read-only under them answers with errors rather
+    than with nothing: they used to stop the lab, and every run it was playing
+    with it (2026-10-25, 2026-10-29).
     """
+    try:
+        return _run_state(spec, engine)
+    except OSError as exc:
+        return {"state": "blocked", "iteration": 0,
+                "reason": f"{spec.run_id} cannot be read now ({exc.strerror or exc})"}
+
+
+def _run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     folder = store.run_dir(spec.run_id)
     if os.path.islink(folder) and not os.path.exists(folder):
         # Moved to another disk (research/tools/move_runs.sh) that is not mounted now:
@@ -396,6 +410,11 @@ def run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
 
 _SKIPPED: Dict[str, str] = {}
 
+#: The runs found done on another disk this session, by the last target each had reached: not read
+#: again until the lab starts anew, so a drive that sleeps or fails under them goes untouched while
+#: the lab plays the runs on this one.
+_DONE_ELSEWHERE: Dict[str, int] = {}
+
 
 def _note_skipped(name: str, reason: str) -> None:
     """Log a queued experiment passed over, once for each reason, not on every tick."""
@@ -427,7 +446,11 @@ def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
         except LabError as exc:
             _note_skipped(name, str(exc))
     for spec in wanted(readable).values():
+        if _DONE_ELSEWHERE.get(spec.run_id, -1) >= spec.targets[-1]:
+            continue
         state = run_state(spec, engine)
+        if state["state"] == "done" and os.path.islink(store.run_dir(spec.run_id)):
+            _DONE_ELSEWHERE[spec.run_id] = spec.targets[-1]
         if state.get("job"):
             found.append(state["job"])
 

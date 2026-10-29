@@ -852,6 +852,61 @@ def test_a_run_moved_to_a_disk_that_is_not_there_is_blocked_not_made_again():
         assert work(spec, 2) == gol_lab.EXIT_REFUSED
 
 
+def test_a_run_on_a_drive_that_fails_is_blocked_and_the_lab_plays_the_rest():
+    """
+    A drive that sleeps, fails or turns read-only under a moved run answers with errors, not with
+    nothing (2026-10-29: input/output errors stopped the lab and every run it played). Such a run is
+    blocked while it cannot be read, the lab plans the others, and the costs are fitted without it.
+    """
+    import errno
+    import gol_costs
+    with lab(plan("E91", seeds="1..2", iterations=4)) as tmp:
+        one, two = gol_plan.experiment_runs("E91")
+        assert work(one, 4) == 0
+        real_meta, real_rows = gol_store.load_meta, gol_costs.tail_rows
+
+        def failing_meta(run_id):
+            if run_id == one.run_id:
+                raise OSError(errno.EIO, "Input/output error")
+            return real_meta(run_id)
+
+        def failing_rows(path, count=400):
+            if one.run_id in path:
+                raise OSError(errno.EIO, "Input/output error")
+            return real_rows(path, count)
+
+        gol_store.load_meta, gol_costs.tail_rows = failing_meta, failing_rows
+        try:
+            state = gol_lab.run_state(one, None)
+            assert state["state"] == "blocked" and "cannot be read now" in state["reason"], state
+            assert [j.spec.run_id for j in gol_lab.jobs(["E91"], "x")] == [two.run_id]
+            gol_costs.fit_costs()
+        finally:
+            gol_store.load_meta, gol_costs.tail_rows = real_meta, real_rows
+
+
+def test_a_finished_run_on_another_disk_is_read_once_a_session():
+    """Done and moved away, a run is not read again: a drive asleep under it is not woken every few seconds."""
+    with lab(plan("E91", seeds="1", iterations=2)) as tmp:
+        spec = gol_plan.experiment_runs("E91")[0]
+        assert work(spec, 2) == 0
+        folder = gol_store.run_dir(spec.run_id)
+        elsewhere = os.path.join(tmp, "elsewhere", spec.run_id)
+        os.makedirs(os.path.dirname(elsewhere))
+        shutil.move(folder, elsewhere)
+        os.symlink(elsewhere, folder)
+        gol_lab._DONE_ELSEWHERE.clear()
+        assert gol_lab.jobs(["E91"], "x") == []
+        assert gol_lab._DONE_ELSEWHERE == {spec.run_id: 2}
+        real = gol_store.load_meta
+        gol_store.load_meta = lambda run_id: (_ for _ in ()).throw(AssertionError("read again"))
+        try:
+            assert gol_lab.jobs(["E91"], "x") == []
+        finally:
+            gol_store.load_meta = real
+            gol_lab._DONE_ELSEWHERE.clear()
+
+
 def test_an_experiment_that_cannot_be_read_holds_up_no_other():
     """
     Trials whose world sits on a disk that is not mounted cannot be read: the lab passes that

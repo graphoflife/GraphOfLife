@@ -53,7 +53,10 @@ def samples(count: int = 400) -> Iterator[Tuple[Dict[str, Any], List[Dict[str, A
     for meta in store.list_runs():
         if "lab" not in meta:
             continue
-        rows = tail_rows(gol_record.stats_path(meta["id"]), count)
+        try:
+            rows = tail_rows(gol_record.stats_path(meta["id"]), count)
+        except OSError:
+            continue                  # on a drive that cannot be read now: the others are enough
         timed = [r for r in rows if r.get("_seconds") and r.get("nodes")]
         if timed:
             yield meta, rows, timed
@@ -136,7 +139,10 @@ def fit_costs() -> Dict[str, Any]:
         if top and biggest:
             peak.append((biggest * weights * width / 2**20, top))
         frames = os.path.join(store.run_dir(meta["id"]), "frames")
-        stored = sum(os.path.getsize(os.path.join(frames, n)) for n in os.listdir(frames))
+        try:
+            stored = sum(os.path.getsize(os.path.join(frames, n)) for n in os.listdir(frames))
+        except OSError:
+            continue                  # its frames on a drive that cannot be read now
         recorded = (meta.get("iteration") or 0) * (median([r["nodes"] for r in rows]) or 0)
         if recorded:
             disk.append(stored / recorded)
