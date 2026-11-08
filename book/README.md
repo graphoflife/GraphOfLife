@@ -158,6 +158,7 @@ How to tell whether evolution goes on, why it stops, and what would count as ope
 - [Every era against three](pages/every-era-against-three.md)
 - [A hundred thousand iterations](pages/a-hundred-thousand-iterations.md)
 - [What would count as open-ended evolution](pages/open-ended-test.md)
+- [Candidates for open-ended evolution](pages/candidates-for-open-ended-evolution.md)
 
 ### Strategies written by hand
 
@@ -203,6 +204,8 @@ The search for a world that is decentralised, resilient, about three-dimensional
 - [The candidates, played on and played again](pages/the-candidates-played-on.md)
 - [Room and riches for the steadiest world](pages/room-for-the-steadiest-world.md)
 - [A screen of random worlds](pages/a-screen-of-random-worlds.md)
+- [Which worlds are healthy? A proposed order](pages/which-worlds-are-healthy.md)
+- [How the drawn settings shape a world](pages/how-the-drawn-settings-shape-a-world.md)
 
 ### Methods and statistics
 

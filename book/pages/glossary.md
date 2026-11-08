@@ -40,11 +40,13 @@ there.
 - **[diversity score](diversity-score.md)** — How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.
 - **[effective kinds of staking](how-different-are-the-agents.md)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
 - **[effective number](effective-number.md)** — How many kinds there really are, when kinds are counted by how much of the population they hold.
+- **[effective population](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — The size of a population left to chance that would lose its lines as fast: the smaller it is, the more chance decides which line survives.
 - **[entropy](gini-coefficient.md#entropy-and-evenness)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
 - **[estate](estate.md)** — The tokens a dead agent leaves, and who gets them.
 - **[even split](even-split.md)** — What the rules do when a brain scores no candidate above zero: the stake is spread evenly.
 - **[exploitability](eras-and-contests.md#exploitability)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
 - **[extinction](extinction.md)** (also extinct) — A world's end before its last iteration: it has dropped to its threshold of agents or fewer.
+- **[false discovery rate](how-the-drawn-settings-shape-a-world.md#how-a-setting-is-tested)** — Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg).
 - **[flow module](flow-modules.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
 - **[founder](starting-ring.md)** — One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.
 - **[fractional factorial](eight-switches-at-once.md#many-switches-in-few-worlds-fractional-factorial-designs)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
@@ -56,6 +58,7 @@ there.
 - **[health bar](health-bar.md)** — The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.
 - **[healthy world](what-makes-a-world-interesting.md)** (also interesting world) — A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).
 - **[hegemon](revolution.md)** — The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.
+- **[heredity index](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — How much more a child acts like its parent than like a stranger, in the same situations: 1 as its parent does, 0 as a stranger does.
 - **[home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node)** — The tokens an agent stakes on its own node, to keep it.
 - **[hub](stars-and-hubs.md)** (also star) — An agent joined to far more agents than most; a star is a world held together by a single hub.
 - **[invasion test](eras-and-contests.md#the-invasion-test)** — A strategy planted as a patch in an evolved world: does it spread, or die out?

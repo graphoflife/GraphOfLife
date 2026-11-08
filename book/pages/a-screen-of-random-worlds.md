@@ -544,8 +544,91 @@ A game played a token at a time takes as many rounds as its richest agent has
 tokens, and every token is a look of its own, so these worlds take about two
 to three times as long to play as the others.
 
+## What round 3 found
+
+All hundred worlds of round 3 had been played by 3 November 2026: Experiment
+40's 84, and the eight draws played a token at a time, twice each. The author
+then asked (7 November 2026) for three things, each now on a page of its own:
+an order of the worlds from the most healthy to the least, by a definition of
+health they can check
+([Which worlds are healthy? A proposed order](which-worlds-are-healthy.md));
+what each drawn setting does to a world
+([How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md));
+and every world that lived read as a candidate for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")
+([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)).
+In the author's words, "there is no baseline": every world of round 3 is a
+candidate, and no world is measured against B1 or B2 any more. Round 1, drawn
+from an older list of settings, is left out of all three (the author, 8
+November 2026).
+
+<!-- figure roundthree/fates -->
+![A hundred worlds, iteration by iteration](../figures/roundthree/fates.svg)
+
+**A hundred worlds, iteration by iteration.** Each line is a world of round 3: its number of agents after every 10th game. Blue: the 82 worlds that lived through their 3,000 iterations; red: the 18 that fell to 20 agents and died. Every world started with 150, 300 or 600 founders and 30,000 tokens.
+
+> [!example]- How to make this figure
+> **Runs.** every world of round 3: Experiment 40's 84 worlds, and the eight draws of Experiments 41 and 42 played a token at a time, weakest first and strongest first (30,000 tokens, 3,000 iterations)
+>
+> **Data.** From the screen's readings of every world, `GraphOfLifeRuns/.pilots/screen/worlds/<run>.json`, whose series holds each iteration's number of agents from the run's `stats.jsonl` (research/screen/measures.py), and the judge's `research/screen/E40.json` for how each world ended.
+>
+> 1. Read each world's agents per iteration; keep every 10th.
+> 2. Draw the living in blue, the dead in red, on a logarithmic scale.
+>
+> **To make it again:** `python3 book_figures.py roundthree`.
+<!-- /figure -->
+
+**82 worlds lived** through their 3,000 iterations and **18 died**. The deaths
+are of four kinds:
+- **A cap of two links.** All six worlds drawn with
+  [`valence`](settings.md#valence) 2 died, within 214 iterations. An agent
+  may then hold at most two links, so the network can only be chains and
+  rings, and an agent that holds two cannot have a child: such a world cannot
+  renew itself.
+- **Booms that bust.** Five worlds grew three- to eightfold in their first
+  150 iterations, to between 760 and 4,659 agents, and died before iteration
+  400.
+- **Kingdoms that wither.** Three worlds lived for 719 to 2,442 iterations as
+  a few hundred agents (a median of 264 to 514) ruled by one: the richest agent
+  held a median of 9% to 41% of all the tokens, the Gini was 0.79 to 0.87, and
+  the world shrank until it died.
+- **Crashes.** Four large worlds, of 3,855 to 8,217 agents at their peaks,
+  fell all at once or swung until they did. The world of seed 4006, played
+  weakest first, held 8,061 agents at iteration 1,200; in the 50 iterations
+  from 1,290 to 1,340 it fell from 7,134 to 801, and it died at 1,444.
+
+<!-- table roundthree/died -->
+| world | died at iteration | most agents it had |
+|---|---|---|
+| [s3074](run:B1-30000-165142-s3074) | 12 | 295 |
+| [s3027](run:B1-30000-be02ce-s3027) | 26 | 293 |
+| [s3017](run:B1-30000-44f693-s3017) | 94 | 593 |
+| [s3036](run:B1-30000-1d8c54-s3036) | 115 | 1,561 |
+| [s3031](run:B1-30000-caf1c5-s3031) | 142 | 705 |
+| [s4001 w](run:B1-30000-1da684-s4001) | 144 | 3,168 |
+| [s3081](run:B1-30000-378f0a-s3081) | 167 | 283 |
+| [s3010](run:B1-30000-30d3da-s3010) | 202 | 593 |
+| [s3079](run:B1-30000-afe35f-s3079) | 210 | 2,662 |
+| [s3015](run:B1-30000-f05b17-s3015) | 214 | 144 |
+| [s4005 w](run:B1-30000-a6c23a-s4005) | 230 | 5,158 |
+| [s4001 s](run:B1-30000-ec8a95-s4001) | 387 | 4,132 |
+| [s3086](run:B1-30000-1393f4-s3086) | 719 | 2,305 |
+| [s3009](run:B1-30000-f1b401-s3009) | 920 | 6,927 |
+| [s3096](run:B1-30000-76ca8e-s3096) | 1,030 | 3,743 |
+| [s4006 w](run:B1-30000-673ef1-s4006) | 1,445 | 8,061 |
+| [s3100](run:B1-30000-13bb83-s3100) | 1,815 | 2,160 |
+| [s3069](run:B1-30000-033fbf-s3069) | 2,442 | 3,302 |
+<!-- /table -->
+
+Every world's name in these tables opens it in the viewer.
+
 ## Where to go next
 
+- [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md):
+  every world drawn at random, from the most healthy to the least.
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md):
+  what each drawn setting does, and what could be set aside.
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
+  the worlds that lived, read for heredity, selection and change.
 - [What makes a world interesting](what-makes-a-world-interesting.md): the
   six criteria, B2's lines and the rule for setting a value aside, in full.
 - [Room and riches for the steadiest world](room-for-the-steadiest-world.md):
@@ -913,8 +996,8 @@ round.
 <!-- turns -->
 ---
 
-← [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world)
+← [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md) →
 
-> [!info]- Pages that link here (10)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Reproduction statistics](reproduction-statistics.md) · [The random twin: is a world a space?](random-twin.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (13)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Reproduction statistics](reproduction-statistics.md) · [The random twin: is a world a space?](random-twin.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->

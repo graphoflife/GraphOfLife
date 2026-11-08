@@ -229,6 +229,7 @@ const Book = {
     }
     if (this.file !== file) return;            // another page was opened meanwhile
     this.page.innerHTML = (chapter ? this.kicker(chapter) : '') + Markdown.render(source, this.EMBEDS);
+    this.sortable(this.page);
     // An image's path is relative to the file it is written in.
     const drawings = [];
     for (const img of this.page.querySelectorAll('img[src]')) {
@@ -247,6 +248,40 @@ const Book = {
     }
     await Promise.all([...this.page.querySelectorAll('.md-embed')].map(el => this.embed(el)));
     Markdown.typeset(this.page);
+  },
+
+  /**
+   * A long table sorts by any column whose head is clicked: rising, then falling, then back as it was
+   * written. A cell that begins with a number sorts as that number ("1,234", "0.95", "−0.2"), and numbers
+   * come before words.
+   */
+  sortable(root) {
+    for (const table of root.querySelectorAll('.md-scroll table')) {
+      const body = table.tBodies[0];
+      if (!body || body.rows.length < 8 || !table.tHead) continue;
+      const written = [...body.rows];
+      const heads = [...table.tHead.rows[0].cells];
+      table.classList.add('md-sortable');
+      const key = (row, col) => {
+        const text = (row.cells[col]?.textContent ?? '').trim().replace(/^−/, '-');
+        const n = parseFloat(text.replace(/,/g, ''));
+        return /^-?[\d.]/.test(text) && Number.isFinite(n) ? n : text;
+      };
+      const order = (a, b) => (typeof a === 'number') === (typeof b === 'number')
+        ? (typeof a === 'number' ? a - b : String(a).localeCompare(String(b)))
+        : (typeof a === 'number' ? -1 : 1);
+      heads.forEach((th, col) => {
+        th.title = 'Sort by this column';
+        th.addEventListener('click', () => {
+          const next = { '': 'up', up: 'down', down: '' }[th.dataset.sort || ''];
+          for (const other of heads) delete other.dataset.sort;
+          if (next) th.dataset.sort = next;
+          const rows = next ? [...written].sort((a, b) => order(key(a, col), key(b, col))) : written;
+          if (next === 'down') rows.reverse();
+          body.append(...rows);
+        });
+      });
+    }
   },
 
   /**
@@ -451,6 +486,17 @@ const Book = {
   },
 
   onClick(event) {
+    // A link written [name](run:<run id>) opens that world in the viewer, where the runs are (not on
+    // the published site, which holds none).
+    const world = event.target.closest('a[href^="run:"]');
+    if (world) {
+      event.preventDefault();
+      if (!API.runsInBrowser) {
+        App.showView('viewer');
+        Viewer.load(world.getAttribute('href').slice(4));
+      }
+      return;
+    }
     const topic = event.target.closest('[data-topic]');
     if (topic) {
       event.preventDefault();

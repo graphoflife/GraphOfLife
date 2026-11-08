@@ -206,6 +206,16 @@ author once round 3 has run and we have looked at its worlds. Until then the
 judge counts a world as interesting when it is alive and misses at most two of
 criteria 2 to 6, the author's first answer.
 
+> [!note] Added later (7 November 2026)
+> Round 3 has run. Instead of a verdict, the author asked for an order of
+> every world drawn at random, from the most healthy to the least, by a
+> definition they can check:
+> [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md)
+> reads each line of this page as how much of what it asks a world has, and
+> proposes lines for the two numbers reported here, a line for *not too even*
+> drawn by chance instead of by B2, and two other changes. Until the author
+> has decided on them, the lines on this page stay as they are.
+
 ## When a setting is marked bad
 
 In the [screen of random worlds](a-screen-of-random-worlds.md),
@@ -299,12 +309,18 @@ read in the same way and at the same iterations.
   nothing about how alike their stakes are. And the half cut is the cheapest of
   ten cuts, since the slowest way to vibrate alone varied by a factor of two
   between ways that vibrate at nearly the same rate.
+- **7 November 2026.** Round 3 has run, and the author asked for an order of
+  the worlds rather than a verdict. The proposal
+  ([Which worlds are healthy?](which-worlds-are-healthy.md)) keeps these lines
+  but reads them as shares, draws lines for the half-cut exponent and the
+  same-position share, and would replace B2's Gini line by one drawn by chance.
+  This page's lines stand until the author decides.
 
 <!-- turns -->
 ---
 
 ← [Healthy and rich](healthy-and-rich.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [The health bar](health-bar.md) →
 
-> [!info]- Pages that link here (14)
-> [Glossary](glossary.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (16)
+> [Glossary](glossary.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [Stars and hubs](stars-and-hubs.md) · [The random twin: is a world a space?](random-twin.md) · [How alike the agents are](how-alike-the-agents-are.md) · [How different are the agents?](how-different-are-the-agents.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)
 <!-- /turns -->

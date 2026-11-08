@@ -578,6 +578,24 @@
       "page": "eight-switches-at-once",
       "says": "A design that tests many switches together in few worlds, so that each one's effect can still be told apart.",
       "anchor": "many-switches-in-few-worlds-fractional-factorial-designs"
+    },
+    {
+      "name": "false discovery rate",
+      "page": "how-the-drawn-settings-shape-a-world",
+      "anchor": "how-a-setting-is-tested",
+      "says": "Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg)."
+    },
+    {
+      "name": "heredity index",
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "how-each-pillar-is-read",
+      "says": "How much more a child acts like its parent than like a stranger, in the same situations: 1 as its parent does, 0 as a stranger does."
+    },
+    {
+      "name": "effective population",
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "how-each-pillar-is-read",
+      "says": "The size of a population left to chance that would lose its lines as fast: the smaller it is, the more chance decides which line survives."
     }
   ],
   "skip": {
@@ -614,6 +632,15 @@
       "candidate"
     ],
     "room-for-the-steadiest-world": [
+      "candidate"
+    ],
+    "which-worlds-are-healthy": [
+      "candidate"
+    ],
+    "how-the-drawn-settings-shape-a-world": [
+      "candidate"
+    ],
+    "candidates-for-open-ended-evolution": [
       "candidate"
     ]
   }

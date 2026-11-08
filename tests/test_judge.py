@@ -265,5 +265,131 @@ def test_a_value_is_marked_bad_only_after_ten_worlds_that_all_died_or_were_all_d
     assert not any(v["bad"] for v in got["values"] if v["setting"] == "valence" and v["value"] == 0)
 
 
+# ---------------------------------------------------------------------------
+# The proposed order of health, the settings' tests, fertility passed on, and the shortlist (2026-11-07)
+# ---------------------------------------------------------------------------
+
+def _screen(name):
+    spec = importlib.util.spec_from_file_location(
+        f"screen_{name}", os.path.join(runner.ROOT, "research", "screen", f"{name}.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+HEALTH, EFFECTS, FAMILIES, FUNNEL = (_screen(name) for name in ("health", "effects", "families", "funnel"))
+
+
+def _line(key):
+    return next(line for line in HEALTH.lines() if line["key"] == key)
+
+
+def test_a_line_is_read_as_the_share_of_what_it_asks():
+    near = lambda a, b: abs(a - b) < 1e-9
+    assert near(HEALTH.progress(_line("core"), 0.76), 0.95)            # 76 of the 80 the line asks
+    assert HEALTH.progress(_line("core"), 0.85) == 1.0                  # more than enough counts as enough
+    assert near(HEALTH.progress(_line("hub"), 0.30), 0.05 / 0.30)       # six times over the line
+    assert near(HEALTH.progress(_line("width"), 1.1), 1 / 3)            # counted from the random twin's 1
+    assert near(HEALTH.progress(_line("links_min"), 2.5), 0.5)          # from a tree's two links an agent
+    assert near(HEALTH.progress(_line("tokens_alike"), 0.9), 0.5)       # 0.1 unlike, of the 0.2 asked
+    assert near(HEALTH.progress(_line("richest"), 0.10), 0.5)           # twice the share of the tokens allowed
+    assert HEALTH.progress(_line("width"), 0.9) == 0.0                  # below its twin: none of it
+    assert HEALTH.progress(_line("core"), None) == 0.0                  # not read: nothing met
+
+
+def test_health_is_the_sum_of_the_criteria_each_as_its_weakest_line():
+    well = {"hub": 0.01, "links": 4.0, "richest": 0.01, "core": 0.9, "agent_cut": 0.05, "link_cut": 0.05,
+            "width": 2.0, "dimension": 3.0, "half_cut": 0.6, "tokens_alike": 0.3, "max_tokens": 100.0,
+            "core_links_alike": 0.3, "ages_alike": 0.3, "children_alike": 0.7, "apart": 0.8, "gini_random": 1.2}
+    got = HEALTH.score(well)
+    assert got["health"] == 5.0 and got["met"] == 5, got
+    got = HEALTH.score({**well, "core": 0.4})                           # half the 2-core asked: resilient 0.5
+    assert abs(got["criteria"]["resilient"] - 0.5) < 1e-9 and abs(got["health"] - 4.5) < 1e-9, got
+    got = HEALTH.score({**well, "core": 0.4, "agent_cut": 0.6})         # the weakest line decides: 0.25
+    assert abs(got["criteria"]["resilient"] - 0.25) < 1e-9, got
+    # The author's own lines: five criteria too, the genotype line and B2's Gini among them.
+    author = HEALTH.score({**well, "genotypes_alike": 0.01, "gini": 0.5}, proposed=False)
+    assert set(author["criteria"]) == set(C.KEYS[1:]) and author["met"] == 5, author
+
+
+def test_a_cube_is_harder_to_halve_than_a_plane_and_a_dense_one_than_a_sparse_one():
+    exponent = lambda dim, links: M.half_cut(1500, HEALTH.geometric(1500, dim, links, 3))["exponent"]
+    plane, cube, dense = exponent(2, 6), exponent(3, 6), exponent(3, 9)
+    assert plane < cube < dense, (plane, cube, dense)
+
+
+def test_tokens_dealt_at_random_have_the_gini_the_line_is_drawn_at():
+    rng = np.random.default_rng(3)
+    for mean in (1.5, 3.0, 7.0, 20.0):
+        x = np.sort(rng.geometric(1.0 / mean, 200000).astype(float))
+        n = x.size
+        gini = float((2 * np.arange(1, n + 1) - n - 1) @ x / (n * x.sum()))
+        assert abs(gini - HEALTH.random_gini(mean)) < 0.01, (mean, gini, HEALTH.random_gini(mean))
+    assert HEALTH.random_gini(1.0) == 0.0                               # one token each: no spread at all
+
+
+def test_shuffling_finds_a_difference_only_where_there_is_one():
+    rng = np.random.RandomState(5)
+    groups = ["a"] * 30 + ["b"] * 30
+    chance, size = EFFECTS.permutation_test(np.array([0] * 25 + [1] * 5 + [0] * 5 + [1] * 25), groups, True, rng)
+    assert chance < 0.001 and size > 0.3, (chance, size)
+    chance, _ = EFFECTS.permutation_test(rng.permutation(np.array([0, 1] * 30)), groups, True, rng)
+    assert chance > 0.05, chance
+    chance, size = EFFECTS.permutation_test(np.arange(60, dtype=float), groups, False, rng)
+    assert chance < 0.001 and size > 0.5, (chance, size)
+
+
+def test_false_discovery_rates_follow_benjamini_and_hochberg():
+    got = EFFECTS.false_discovery([0.01, 0.04, 0.03, 0.2])
+    assert np.allclose(got, [0.04, 0.16 / 3, 0.16 / 3, 0.2]), got
+
+
+def _tree(heritable):
+    """A family tree in which fertility is passed on to children, or drawn afresh for every child."""
+    class Tree:
+        def __init__(self, run_id, until):
+            rng = np.random.RandomState(2)
+            size = 1 << 17
+            self.parent = np.full(size, -2, dtype=np.int64)
+            self.born = np.full(size, -1, dtype=np.int32)
+            self.parent[:300], self.born[:300] = -1, 0
+            fertile = {i: rng.choice([0.02, 0.06, 0.12]) for i in range(300)}
+            new, alive = 300, list(range(300))
+            for t in range(1, until):
+                born = []
+                for a in alive:
+                    if rng.rand() < fertile[a]:
+                        self.parent[new], self.born[new] = a, t
+                        keep = heritable and rng.rand() > 0.3
+                        fertile[new] = fertile[a] if keep else rng.choice([0.02, 0.06, 0.12])
+                        born.append(new)
+                        new += 1
+                alive = [a for a in alive if rng.rand() > 0.07] + born
+                if len(alive) > 2000:
+                    alive = list(rng.choice(alive, 2000, replace=False))
+    return Tree
+
+
+def test_fertility_passed_on_is_told_from_chance():
+    real = FAMILIES.K.Tree
+    try:
+        FAMILIES.K.Tree = _tree(heritable=True)
+        passed = FAMILIES.fertility("made-up", 600)
+        FAMILIES.K.Tree = _tree(heritable=False)
+        drawn = FAMILIES.fertility("made-up", 600)
+    finally:
+        FAMILIES.K.Tree = real
+    assert passed["z"] > 3, passed
+    assert drawn["z"] < 2, drawn
+
+
+def test_the_shortlist_is_every_candidate_no_other_beats_in_both():
+    ranks = lambda r: {k: r for k in FUNNEL.EVOLUTION}
+    worlds = [{"id": "a", "numbers": {"health": 5.0}, "ranks": ranks(1)},
+              {"id": "b", "numbers": {"health": 4.0}, "ranks": ranks(2)},      # a is better in both
+              {"id": "c", "numbers": {"health": 5.5}, "ranks": ranks(3)}]      # the healthiest, though less evolving
+    assert FUNNEL.pareto(worlds) == ["a", "c"], FUNNEL.pareto(worlds)
+
+
 if __name__ == "__main__":
     sys.exit(runner.main(globals()))

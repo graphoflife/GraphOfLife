@@ -28,7 +28,14 @@ one cannot evolve open-endedly however long it runs):
   novelty       its line of descent keeps reaching behaviour it has not
                 shown before, rather than standing still or coming back
 
-    python3 research/screen/funnel.py E40        prints the table and writes research/screen/E40_candidates.json
+Health is the proposed order's (research/screen/health.py), and whether
+fertility is passed on is read from each world's family tree
+(research/screen/families.py). Every random round can be read together (the
+author, 2026-11-07: "treat all the random simulations as potential
+candidates"); a round's reference worlds are not candidates. Round 3 alone is read
+since 2026-11-08 (the author: "keep only round 3").
+
+    python3 research/screen/funnel.py E41 E42 E40    prints the table and writes research/screen/candidates.json
 """
 from __future__ import annotations
 
@@ -51,7 +58,7 @@ import gol_screen  # noqa: E402
 import gol_store  # noqa: E402
 
 import candidates as K  # noqa: E402
-import criteria as C  # noqa: E402
+import families as FA  # noqa: E402
 
 #: An era of the line of descent comes back to earlier behaviour when it lies closer to an earlier era than
 #: this many times a brain lies from itself between two tries, or than MIN_NEW where brains draw no chance
@@ -83,7 +90,14 @@ def numbers(w: Dict[str, Any]) -> Dict[str, Optional[float]]:
     out["iterations_per_generation"] = (w["until"] / gens["mean"]) if gens.get("mean") else None
     out["ancestry_generations"] = lin.get("common_ancestor_generations")
     out["effective_population"] = effective_population(w, lin)
-    out["heredity"] = _mean([(d.get(f"heredity {at}") or {}).get("index") for at in K.HEREDITY_AT])
+    out["heredity"] = _mean([v.get("index") for k, v in d.items() if k.startswith("heredity ")])
+    fam = w.get("families") or {}
+    out["fertility"] = ((fam["correlation"] - fam["shuffled_mean"])
+                        if fam.get("correlation") is not None and fam.get("shuffled_mean") is not None
+                        and np.isfinite(fam["correlation"]) else None)
+    out["fertility_z"] = fam.get("z")
+    out["childless"] = fam.get("childless")
+    out["health"] = (w.get("health") or {}).get("health")
     line = d.get("line")
     if line:
         D = np.array(line["distance"])
@@ -199,41 +213,93 @@ CATEGORIES = [
     ("novelty", "novelty", "late_novelty", True,
      "how far the line of descent's later eras lie from every earlier one (0 acting alike, 1 wholly unlike)"),
     ("contemporaries", "variation", "contemporaries", True, "how far apart two agents of one era act"),
-    ("health", "health", "health_lines", True, "the author's lines met, of those read"),
+    ("fertility", "selection", "fertility", True,
+     "how much more a parent's number of children says of its children's than chance alone (a correlation)"),
+    ("health", "health", "health", True, "health by the proposed order, of 5 (research/screen/health.py)"),
     ("riches", "economy", "tokens_per_agent", True, "tokens per agent"),
 ]
 
 
-def worlds_of(name: str) -> List[Dict[str, Any]]:
-    """Every finished world of a round, with its draw, how it ended, and its dossier."""
-    plan = gol_plan.read_plan(name)
-    version = int(plan["screen"]["sampler"])
-    drawn = {s[0] for s in gol_screen.space(version)}
-    out = []
-    for spec in gol_plan.experiment_runs(name):
-        if not os.path.exists(os.path.join(gol_store.run_dir(spec.run_id), "meta.json")):
-            continue
-        meta = gol_store.load_meta(spec.run_id)
-        at = int(meta.get("iteration") or 0)
-        fate = "died" if meta.get("status") == "extinct" else ("lived" if at >= spec.until else None)
-        if fate is None:
-            continue
-        changed = {**spec.lab["set"], **{k: v for k, v in spec.lab["world"].items() if k in drawn}}
-        full = {**gol_plan.baseline("B1"), **changed}
-        out.append({"id": spec.run_id, "seed": spec.lab["seed"], "fate": fate, "ended_at": at, "until": spec.until,
-                    "tokens": spec.lab["world"]["total_tokens"], "set": changed, "full": full,
-                    "dossier": K.kept(spec.run_id)})
+#: The categories that read evolution itself (the pillars after persistence and health).
+EVOLUTION = ("heredity", "population", "novelty", "contemporaries", "fertility", "generations")
+
+
+def evolution_rank(w: Dict[str, Any], worst: int) -> float:
+    """A world's mean rank over the categories of evolution; a category it has no number in counts as last."""
+    return float(np.mean([w.get("ranks", {}).get(k, worst) for k in EVOLUTION]))
+
+
+#: How many fronts the shortlist takes.
+FRONTS = 3
+
+
+def pareto(left: List[Dict[str, Any]]) -> List[str]:
+    """
+    The front: every candidate no other beats both in health (the proposed order's) and in evolution (its
+    mean rank over the categories of evolution), with no weight between the two.
+    """
+    have = [w for w in left if w["numbers"].get("health") is not None]
+    score = {w["id"]: (w["numbers"]["health"], -evolution_rank(w, len(left))) for w in have}
+    return [a for a in score if not any(score[b][0] >= score[a][0] and score[b][1] >= score[a][1]
+                                        and score[b] != score[a] for b in score)]
+
+
+def fronts(left: List[Dict[str, Any]]) -> Dict[str, int]:
+    """
+    Each candidate's front: 1 for the front itself, 2 for the front of what is left once it is set aside,
+    and so on. One world may be best in both, and its front alone would shortlist it alone.
+    """
+    out: Dict[str, int] = {}
+    rest = list(left)
+    k = 1
+    while rest:
+        front = set(pareto(rest))
+        if not front:
+            break
+        for w in rest:
+            if w["id"] in front:
+                out[w["id"]] = k
+        rest = [w for w in rest if w["id"] not in front]
+        k += 1
     return out
 
 
-def judge(name: str) -> Dict[str, Any]:
-    worlds = worlds_of(name)
+def worlds_of(names: List[str]) -> List[Dict[str, Any]]:
+    """Every finished world drawn at random in the rounds named, with its draw, how it ended, and its dossier."""
+    health = {}
+    path = os.path.join(HERE, "health.json")
+    if os.path.exists(path):
+        health = {w["id"]: w for w in json.load(open(path))["worlds"]}
+    out = []
+    for name in names:
+        plan = gol_plan.read_plan(name)
+        version = int(plan["screen"]["sampler"])
+        drawn = {s[0] for s in gol_screen.space(version)}
+        fixed = plan["screen"].get("fixed") or {}
+        for spec in gol_plan.experiment_runs(name):
+            if spec.lab["baseline"] != "B1":
+                continue                       # a round's reference worlds are not candidates
+            if not os.path.exists(os.path.join(gol_store.run_dir(spec.run_id), "meta.json")):
+                continue
+            meta = gol_store.load_meta(spec.run_id)
+            at = int(meta.get("iteration") or 0)
+            fate = "died" if meta.get("status") == "extinct" else ("lived" if at >= spec.until else None)
+            if fate is None:
+                continue
+            changed = {**spec.lab["set"], **{k: v for k, v in spec.lab["world"].items() if k in drawn}}
+            full = {**gol_plan.baseline("B1"), **changed, **fixed}
+            out.append({"id": spec.run_id, "round": name, "seed": spec.lab["seed"], "fate": fate, "ended_at": at,
+                        "until": spec.until, "tokens": spec.lab["world"]["total_tokens"], "set": changed,
+                        "full": full, "dossier": K.kept(spec.run_id), "families": FA.kept(spec.run_id),
+                        "health": (health.get(spec.run_id) or {}).get("proposal")})
+    return out
+
+
+def judge(names: List[str]) -> Dict[str, Any]:
+    worlds = worlds_of(names)
     for w in worlds:
         n = numbers(w)
-        verdict = C.judged(n, w["fate"] == "lived")
-        read = [line for line in C.LINES if n.get(line["measure"]) is not None]
-        n["health_lines"] = float(sum(verdict["lines"][line["key"]] for line in read)) if read else None
-        w["numbers"], w["lines_read"] = n, len(read)
+        w["numbers"] = n
         w["capability"] = capability(w["full"])
         w["notes"] = notes(w, n, w["capability"])
         w["out"] = next((reason for rule in RULES if (reason := rule(w, n))), None)
@@ -245,7 +311,14 @@ def judge(name: str) -> Dict[str, Any]:
         ranks[key] = [w["id"] for w in have]
         for i, w in enumerate(have, 1):
             w.setdefault("ranks", {})[key] = i
-    return {"round": name, "worlds": worlds, "ranks": ranks,
+    front = fronts(left)
+    shortlist = [i for i, k in sorted(front.items(), key=lambda x: x[1]) if k <= FRONTS]
+    for w in left:
+        w["evolution_rank"] = evolution_rank(w, len(left))
+        w["front"] = front.get(w["id"])
+        w["shortlisted"] = w["id"] in shortlist
+    return {"rounds": names, "worlds": worlds, "ranks": ranks, "shortlist": shortlist,
+            "evolution": list(EVOLUTION),
             "rules": [r.__name__.strip("_").replace("_", " ") for r in RULES],
             "categories": [{"key": k, "pillar": p, "measure": m, "more_is_better": b, "says": s}
                            for k, p, m, b, s in CATEGORIES]}
@@ -255,35 +328,44 @@ def _f(v: Optional[float], form: str = "{:.2f}") -> str:
     return "-" if v is None else form.format(v)
 
 
+def label(w: Dict[str, Any]) -> str:
+    """A world's short name: its seed, and where seeds repeat, its round."""
+    tag = {"E41": " w", "E42": " s"}.get(w["round"], "")
+    return f"s{w['seed']}{tag}"
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("round")
+    ap.add_argument("rounds", nargs="+")
     a = ap.parse_args()
-    out = judge(a.round)
-    with open(os.path.join(HERE, f"{a.round}_candidates.json"), "w") as f:
-        json.dump(out, f, indent=1, default=str)
+    out = judge(a.rounds)
+    # Each world's dossier, families and health stay in their own files; the page reads what they came to.
+    slim = {**out, "worlds": [{k: v for k, v in w.items() if k not in ("dossier", "families", "health", "full")}
+                              for w in out["worlds"]]}
+    with open(os.path.join(HERE, "candidates.json"), "w") as f:
+        json.dump(slim, f, indent=1, default=str)
     worlds = out["worlds"]
     gone = [w for w in worlds if w["out"]]
     print(f"{len(worlds)} worlds finished; {len(gone)} ruled out, {len(worlds) - len(gone)} candidates left\n")
-    for w in sorted(gone, key=lambda w: w["seed"]):
-        print(f"  out  s{w['seed']}  {w['out']}")
+    for w in sorted(gone, key=lambda w: (w["round"], w["seed"])):
+        print(f"  out  {label(w):9s} {w['out']}")
     print("\ncandidates (rank in each category; 1 is best):")
     keys = [c[0] for c in CATEGORIES]
-    print("  world    " + " ".join(f"{k[:8]:>8s}" for k in keys) + "   channels")
+    print("  world      " + " ".join(f"{k[:8]:>8s}" for k in keys) + "   channels")
     left = [w for w in worlds if not w["out"]]
     for w in sorted(left, key=lambda w: np.mean([w.get("ranks", {}).get(k, len(left)) for k in keys])):
-        print(f"  s{w['seed']}  " + " ".join(f"{w.get('ranks', {}).get(k, '-'):>8}" for k in keys)
+        print(f"  {label(w):9s}  " + " ".join(f"{w.get('ranks', {}).get(k, '-'):>8}" for k in keys)
               + f"   {w['capability']['open']} ({', '.join(w['capability']['channels'])})")
     print("\nthe numbers:")
-    for w in sorted(left, key=lambda w: w["seed"]):
+    for w in sorted(left, key=lambda w: (w["round"], w["seed"])):
         n = w["numbers"]
-        print(f"  s{w['seed']} agents {_f(n['agents'], '{:,.0f}'):>7s}  generations {_f(n['generations'], '{:.0f}'):>5s}"
+        print(f"  {label(w):9s} agents {_f(n['agents'], '{:,.0f}'):>7s}  generations {_f(n['generations'], '{:.0f}'):>5s}"
               f" ({_f(n['iterations_per_generation'], '{:.1f}')} it/gen)  ancestry {_f(n['ancestry_generations'], '{:.1f}'):>5s} gen"
               f"  N_e~{_f(n['effective_population'], '{:.0f}')}"
-              f"  heredity {_f(n['heredity'])}  floor {_f(n.get('floor'), '{:.3f}')}  step {_f(n.get('step'), '{:.2f}')}"
+              f"  heredity {_f(n['heredity'])}  fertility {_f(n.get('fertility'))}  step {_f(n.get('step'), '{:.2f}')}"
               f"  novelty {_f(n.get('late_novelty'), '{:.2f}')}  revisits {_f(n.get('revisits'), '{:.0f}')}"
               f"  contemporaries {_f(n.get('contemporaries'), '{:.2f}')}"
-              f"  lines {_f(n['health_lines'], '{:.0f}')}/{w['lines_read']}  tokens/agent {_f(n['tokens_per_agent'], '{:.1f}')}")
+              f"  health {_f(n.get('health'))}  tokens/agent {_f(n['tokens_per_agent'], '{:.1f}')}")
         for note in w["notes"]:
             print(f"        note: {note}")
 

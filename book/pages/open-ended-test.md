@@ -121,10 +121,10 @@ Each part closes a way to be fooled:
 <!-- turns -->
 ---
 
-← [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
+← [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) →
 
 **Also about:** [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (8)
-> [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (9)
+> [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)
 <!-- /turns -->

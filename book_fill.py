@@ -467,7 +467,9 @@ def costs(md: str, _: str) -> str:
 def table(md: str, name: str) -> str:
     """
     A table a page's code made from the records (`table chapter/name`): a head
-    and rows, each cell text or links to pages ({text, href} relative to book/).
+    and rows, each cell text or links ({text, href}): to pages, relative to
+    book/, or to a world, `run:<run id>`, which the notebook tab opens in the
+    viewer.
     """
     chapter, key = name.split("/")
     made = read_json(f"results/{chapter}.json").get("numbers", {}).get(f"table:{key}")
@@ -478,7 +480,8 @@ def table(md: str, name: str) -> str:
         if isinstance(value, list):
             return ", ".join(cell(v) for v in value) or "—"
         if isinstance(value, dict):
-            return f"[{value['text']}]({link(md, value['href'])})"
+            href = value["href"]
+            return f"[{value['text']}]({href if href.startswith('run:') else link(md, href)})"
         return str(value).replace("|", "\\|").replace("\n", " ") or "—"
 
     head = made.get("head") or [""] * len(made["rows"][0])

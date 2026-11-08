@@ -1,0 +1,181 @@
+{
+ "chapter": "roundthree",
+ "numbers": {
+  "fates": {
+   "worlds": 100,
+   "lived": 82,
+   "died": 18,
+   "died_at": {
+    "n": 18,
+    "mean": 573.0,
+    "median": 212.0,
+    "sd": 698.1063461881973,
+    "min": 12.0,
+    "max": 2442.0,
+    "q25": 142.5,
+    "q75": 869.75
+   },
+   "died_by_250": 11
+  },
+  "table:died": {
+   "head": [
+    "world",
+    "died at iteration",
+    "most agents it had"
+   ],
+   "rows": [
+    [
+     {
+      "text": "s3074",
+      "href": "run:B1-30000-165142-s3074"
+     },
+     "12",
+     "295"
+    ],
+    [
+     {
+      "text": "s3027",
+      "href": "run:B1-30000-be02ce-s3027"
+     },
+     "26",
+     "293"
+    ],
+    [
+     {
+      "text": "s3017",
+      "href": "run:B1-30000-44f693-s3017"
+     },
+     "94",
+     "593"
+    ],
+    [
+     {
+      "text": "s3036",
+      "href": "run:B1-30000-1d8c54-s3036"
+     },
+     "115",
+     "1,561"
+    ],
+    [
+     {
+      "text": "s3031",
+      "href": "run:B1-30000-caf1c5-s3031"
+     },
+     "142",
+     "705"
+    ],
+    [
+     {
+      "text": "s4001 w",
+      "href": "run:B1-30000-1da684-s4001"
+     },
+     "144",
+     "3,168"
+    ],
+    [
+     {
+      "text": "s3081",
+      "href": "run:B1-30000-378f0a-s3081"
+     },
+     "167",
+     "283"
+    ],
+    [
+     {
+      "text": "s3010",
+      "href": "run:B1-30000-30d3da-s3010"
+     },
+     "202",
+     "593"
+    ],
+    [
+     {
+      "text": "s3079",
+      "href": "run:B1-30000-afe35f-s3079"
+     },
+     "210",
+     "2,662"
+    ],
+    [
+     {
+      "text": "s3015",
+      "href": "run:B1-30000-f05b17-s3015"
+     },
+     "214",
+     "144"
+    ],
+    [
+     {
+      "text": "s4005 w",
+      "href": "run:B1-30000-a6c23a-s4005"
+     },
+     "230",
+     "5,158"
+    ],
+    [
+     {
+      "text": "s4001 s",
+      "href": "run:B1-30000-ec8a95-s4001"
+     },
+     "387",
+     "4,132"
+    ],
+    [
+     {
+      "text": "s3086",
+      "href": "run:B1-30000-1393f4-s3086"
+     },
+     "719",
+     "2,305"
+    ],
+    [
+     {
+      "text": "s3009",
+      "href": "run:B1-30000-f1b401-s3009"
+     },
+     "920",
+     "6,927"
+    ],
+    [
+     {
+      "text": "s3096",
+      "href": "run:B1-30000-76ca8e-s3096"
+     },
+     "1,030",
+     "3,743"
+    ],
+    [
+     {
+      "text": "s4006 w",
+      "href": "run:B1-30000-673ef1-s4006"
+     },
+     "1,445",
+     "8,061"
+    ],
+    [
+     {
+      "text": "s3100",
+      "href": "run:B1-30000-13bb83-s3100"
+     },
+     "1,815",
+     "2,160"
+    ],
+    [
+     {
+      "text": "s3069",
+      "href": "run:B1-30000-033fbf-s3069"
+     },
+     "2,442",
+     "3,302"
+    ]
+   ]
+  }
+ },
+ "figures": {
+  "fates": {
+   "title": "A hundred worlds, iteration by iteration",
+   "caption": "Each line is a world of round 3: its number of agents after every 10th game. Blue: the 82 worlds that lived through their 3,000 iterations; red: the 18 that fell to 20 agents and died. Every world started with 150, 300 or 600 founders and 30,000 tokens.",
+   "recipe": "**Runs.** every world of round 3: Experiment 40's 84 worlds, and the eight draws of Experiments 41 and 42 played a token at a time, weakest first and strongest first (30,000 tokens, 3,000 iterations)\n\n**Data.** From the screen's readings of every world, `GraphOfLifeRuns/.pilots/screen/worlds/<run>.json`, whose series holds each iteration's number of agents from the run's `stats.jsonl` (research/screen/measures.py), and the judge's `research/screen/E40.json` for how each world ended.\n\n1. Read each world's agents per iteration; keep every 10th.\n2. Draw the living in blue, the dead in red, on a logarithmic scale.\n\n**To make it again:** `python3 book_figures.py roundthree`."
+  }
+ }
+}

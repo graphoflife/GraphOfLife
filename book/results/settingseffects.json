@@ -1,0 +1,872 @@
+{
+ "chapter": "settingseffects",
+ "numbers": {
+  "table:found": {
+   "head": [
+    "outcome",
+    "setting",
+    "chance by shuffling",
+    "false discovery rate",
+    "by value: the share that died, or the median (worlds)"
+   ],
+   "rows": [
+    [
+     "died",
+     {
+      "text": "`valence`",
+      "href": "pages/settings.md#valence"
+     },
+     "0.0001",
+     "0.002",
+     "0: 0.10 (59); 16: 0.17 (6); 2: 1.00 (6); 4: 0.12 (8); 8: 0.00 (5)"
+    ],
+    [
+     "died",
+     {
+      "text": "`allow_gifting`",
+      "href": "pages/settings.md#allow_gifting"
+     },
+     "0.0069",
+     "0.086",
+     "false: 0.28 (43); true: 0.05 (41)"
+    ],
+    [
+     "health (the proposal)",
+     {
+      "text": "`valence`",
+      "href": "pages/settings.md#valence"
+     },
+     "0.0017",
+     "0.042",
+     "0: 4.21 (53); 16: 4.79 (5); 4: 3.47 (7); 8: 3.75 (5)"
+    ],
+    [
+     "resilient",
+     {
+      "text": "`valence`",
+      "href": "pages/settings.md#valence"
+     },
+     "0.0000",
+     "0.001",
+     "0: 0.91 (53); 16: 0.98 (5); 4: 0.31 (7); 8: 0.51 (5)"
+    ],
+    [
+     "diverse",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "0.0001",
+     "0.002",
+     "false: 0.55 (28); true: 1.00 (42)"
+    ],
+    [
+     "not too even",
+     {
+      "text": "`mix_at_birth`",
+      "href": "pages/settings.md#mix_at_birth"
+     },
+     "0.0027",
+     "0.067",
+     "false: 1.00 (49); true: 0.87 (21)"
+    ],
+    [
+     "not too even",
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "0.0072",
+     "0.091",
+     "children: 0.96 (13); local: 1.00 (9); newborns: 1.00 (10); parents: 0.95 (9); poorest: 0.80 (24); uniform: 0.91 (5)"
+    ],
+    [
+     "agents (log10 of the median)",
+     {
+      "text": "`link_token`",
+      "href": "pages/settings.md#link_token"
+     },
+     "0.0002",
+     "0.005",
+     "false: 3.80 (37); true: 3.47 (33)"
+    ],
+    [
+     "agents (log10 of the median)",
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "0.0013",
+     "0.017",
+     "children: 3.40 (13); local: 3.54 (9); newborns: 3.53 (10); parents: 3.52 (9); poorest: 3.82 (24); uniform: 3.77 (5)"
+    ],
+    [
+     "same-position share",
+     {
+      "text": "`random_input_amount`",
+      "href": "pages/settings.md#random_input_amount"
+     },
+     "0.0001",
+     "0.004",
+     "0: 0.98 (10); 10: 0.27 (19); 2: 0.49 (21); 5: 0.50 (20)"
+    ],
+    [
+     "same-position share",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "0.0010",
+     "0.013",
+     "false: 0.29 (28); true: 0.60 (42)"
+    ],
+    [
+     "Gini of the tokens",
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "0.0000",
+     "0.001",
+     "children: 0.45 (13); local: 0.53 (9); newborns: 0.44 (10); parents: 0.42 (9); poorest: 0.32 (24); uniform: 0.36 (5)"
+    ],
+    [
+     "heredity index",
+     {
+      "text": "`mutate_on_replication`",
+      "href": "pages/settings.md#mutate_on_replication"
+     },
+     "0.0005",
+     "0.014",
+     "false: 0.34 (41); true: 0.61 (29)"
+    ],
+    [
+     "heredity index",
+     {
+      "text": "`mutation_probability`",
+      "href": "pages/settings.md#mutation_probability"
+     },
+     "0.0026",
+     "0.023",
+     "0.1: 0.83 (5); 0.2: 0.45 (52); 0.4: 0.48 (6); 0.8: 0.16 (7)"
+    ],
+    [
+     "heredity index",
+     {
+      "text": "`valence`",
+      "href": "pages/settings.md#valence"
+     },
+     "0.0028",
+     "0.023",
+     "0: 0.35 (53); 16: 0.41 (5); 4: 0.67 (7); 8: 0.58 (5)"
+    ],
+    [
+     "heredity index",
+     {
+      "text": "`link_search`",
+      "href": "pages/settings.md#link_search"
+     },
+     "0.0089",
+     "0.056",
+     "jump: 0.56 (18); off: 0.54 (18); reach: 0.20 (19); walk: 0.44 (15)"
+    ],
+    [
+     "generations",
+     {
+      "text": "`link_upkeep`",
+      "href": "pages/settings.md#link_upkeep"
+     },
+     "0.0001",
+     "0.004",
+     "off: 386.50 (27); paid_only: 1236.53 (21); paid_or_used: 807.03 (22)"
+    ],
+    [
+     "effective population (log10)",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "0.0003",
+     "0.009",
+     "false: 1.04 (28); true: 1.55 (42)"
+    ],
+    [
+     "late novelty of the line of descent",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "0.0012",
+     "0.031",
+     "false: 0.05 (28); true: 0.09 (42)"
+    ],
+    [
+     "late novelty of the line of descent",
+     {
+      "text": "`random_input_amount`",
+      "href": "pages/settings.md#random_input_amount"
+     },
+     "0.0101",
+     "0.100",
+     "0: 0.08 (10); 10: 0.05 (19); 2: 0.08 (21); 5: 0.09 (20)"
+    ],
+    [
+     "late novelty of the line of descent",
+     {
+      "text": "`mix_at_birth`",
+      "href": "pages/settings.md#mix_at_birth"
+     },
+     "0.0119",
+     "0.100",
+     "false: 0.08 (49); true: 0.06 (21)"
+    ],
+    [
+     "fertility passed on",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "0.0000",
+     "0.001",
+     "false: 0.28 (28); true: 0.07 (42)"
+    ],
+    [
+     "fertility passed on",
+     {
+      "text": "`link_token`",
+      "href": "pages/settings.md#link_token"
+     },
+     "0.0071",
+     "0.089",
+     "false: 0.20 (37); true: 0.08 (33)"
+    ]
+   ]
+  },
+  "found": 23,
+  "table:all": {
+   "head": [
+    "setting",
+    "died, by value",
+    "chance",
+    "median health of the living, by value",
+    "chance"
+   ],
+   "rows": [
+    [
+     {
+      "text": "`allow_gifting`",
+      "href": "pages/settings.md#allow_gifting"
+     },
+     "false: 12/43; true: 2/41",
+     "0.007",
+     "false: 4.16; true: 4.01",
+     "0.842"
+    ],
+    [
+     {
+      "text": "`allow_handover`",
+      "href": "pages/settings.md#allow_handover"
+     },
+     "false: 7/37; true: 7/47",
+     "0.767",
+     "false: 4.04; true: 4.18",
+     "0.911"
+    ],
+    [
+     {
+      "text": "`allow_revolutions`",
+      "href": "pages/settings.md#allow_revolutions"
+     },
+     "false: 4/18; true: 6/23",
+     "1.000",
+     "false: 4.16; true: 4.39",
+     "0.516"
+    ],
+    [
+     {
+      "text": "`contest`",
+      "href": "pages/settings.md#contest"
+     },
+     "largest: 10/41; lottery: 4/43",
+     "0.081",
+     "largest: 4.21; lottery: 4.06",
+     "0.961"
+    ],
+    [
+     {
+      "text": "`hidden_layers`",
+      "href": "pages/settings.md#hidden_layers"
+     },
+     "[16, 16, 16, 16, 16]: 1/11; [16, 16, 16, 16]: 3/9; [16, 16, 16]: 0/10; [32, 32, 32, 32, 32]: 3/10; [32, 32, 32, 32]: 1/6; [32, 32, 32]: 1/5; [50, 50, 50, 50, 50]: 3/15; [50, 50, 50, 50]: 1/5; [50, 50, 50]: 1/13",
+     "0.621",
+     "[16, 16, 16, 16, 16]: 4.20; [16, 16, 16, 16]: 3.53; [16, 16, 16]: 4.17; [32, 32, 32, 32, 32]: 4.44; [32, 32, 32, 32]: 3.85; [32, 32, 32]: 3.88; [50, 50, 50, 50, 50]: 4.49; [50, 50, 50, 50]: 4.43; [50, 50, 50]: 3.93",
+     "0.365"
+    ],
+    [
+     {
+      "text": "`link_consent`",
+      "href": "pages/settings.md#link_consent"
+     },
+     "forced: 5/32; mutual: 8/33",
+     "0.535",
+     "forced: 4.12; mutual: 4.21",
+     "0.651"
+    ],
+    [
+     {
+      "text": "`link_search`",
+      "href": "pages/settings.md#link_search"
+     },
+     "jump: 2/20; off: 1/19; reach: 5/24; walk: 6/21",
+     "0.183",
+     "jump: 4.07; off: 4.04; reach: 4.21; walk: 4.12",
+     "0.765"
+    ],
+    [
+     {
+      "text": "`link_steering`",
+      "href": "pages/settings.md#link_steering"
+     },
+     "looking: 4/32; random: 9/33",
+     "0.214",
+     "looking: 4.14; random: 4.26",
+     "0.430"
+    ],
+    [
+     {
+      "text": "`link_token`",
+      "href": "pages/settings.md#link_token"
+     },
+     "false: 6/43; true: 8/41",
+     "0.570",
+     "false: 4.16; true: 4.10",
+     "0.768"
+    ],
+    [
+     {
+      "text": "`link_upkeep`",
+      "href": "pages/settings.md#link_upkeep"
+     },
+     "off: 5/32; paid_only: 4/25; paid_or_used: 5/27",
+     "1.000",
+     "off: 4.30; paid_only: 3.78; paid_or_used: 4.32",
+     "0.041"
+    ],
+    [
+     {
+      "text": "`mate_pays`",
+      "href": "pages/settings.md#mate_pays"
+     },
+     "false: 5/16; true: 1/11",
+     "0.346",
+     "false: 3.75; true: 3.90",
+     "0.511"
+    ],
+    [
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "false: 7/35; true: 7/49",
+     "0.559",
+     "false: 4.06; true: 4.17",
+     "0.216"
+    ],
+    [
+     {
+      "text": "`message_amount`",
+      "href": "pages/settings.md#message_amount"
+     },
+     "0: 1/4; 16: 2/17; 30: 4/21; 4: 6/25; 8: 1/17",
+     "0.583",
+     "0: 3.84; 16: 3.96; 30: 4.41; 4: 4.10; 8: 4.23",
+     "0.714"
+    ],
+    [
+     {
+      "text": "`message_prepass`",
+      "href": "pages/settings.md#message_prepass"
+     },
+     "false: 5/32; true: 8/48",
+     "1.000",
+     "false: 4.25; true: 4.05",
+     "0.724"
+    ],
+    [
+     {
+      "text": "`mix_at_birth`",
+      "href": "pages/settings.md#mix_at_birth"
+     },
+     "false: 8/57; true: 6/27",
+     "0.533",
+     "false: 4.30; true: 3.84",
+     "0.023"
+    ],
+    [
+     {
+      "text": "`mutate_on_replication`",
+      "href": "pages/settings.md#mutate_on_replication"
+     },
+     "false: 7/48; true: 7/36",
+     "0.773",
+     "false: 4.21; true: 4.01",
+     "0.149"
+    ],
+    [
+     {
+      "text": "`mutation_noise_std`",
+      "href": "pages/settings.md#mutation_noise_std"
+     },
+     "0.1: 0/12; 0.2: 11/59; 0.4: 3/13",
+     "0.279",
+     "0.1: 4.07; 0.2: 4.13; 0.4: 4.25",
+     "0.791"
+    ],
+    [
+     {
+      "text": "`mutation_probability`",
+      "href": "pages/settings.md#mutation_probability"
+     },
+     "0.1: 0/5; 0.2: 14/66; 0.4: 0/6; 0.8: 0/7",
+     "0.192",
+     "0.1: 3.53; 0.2: 4.11; 0.4: 3.99; 0.8: 4.25",
+     "0.792"
+    ],
+    [
+     {
+      "text": "`mutation_sparsity`",
+      "href": "pages/settings.md#mutation_sparsity"
+     },
+     "0.05: 2/8; 0.1: 11/66; 0.3: 1/10",
+     "0.669",
+     "0.05: 3.96; 0.1: 4.16; 0.3: 4.21",
+     "0.570"
+    ],
+    [
+     {
+      "text": "`n_nodes`",
+      "href": "pages/settings.md#n_nodes"
+     },
+     "0: 6/33; 150: 5/30; 600: 3/21",
+     "1.000",
+     "0: 3.96; 150: 4.24; 600: 4.31",
+     "0.472"
+    ],
+    [
+     {
+      "text": "`random_input_amount`",
+      "href": "pages/settings.md#random_input_amount"
+     },
+     "0: 2/12; 10: 3/22; 2: 6/27; 5: 3/23",
+     "0.847",
+     "0: 4.23; 10: 3.95; 2: 4.16; 5: 4.21",
+     "0.942"
+    ],
+    [
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "children: 3/16; local: 4/13; newborns: 0/10; parents: 2/11; poorest: 3/27; uniform: 2/7",
+     "0.397",
+     "children: 4.39; local: 4.30; newborns: 4.15; parents: 4.44; poorest: 3.85; uniform: 4.54",
+     "0.218"
+    ],
+    [
+     {
+      "text": "`self_message`",
+      "href": "pages/settings.md#self_message"
+     },
+     "largest: 7/31; own: 6/49",
+     "0.356",
+     "largest: 3.85; own: 4.39",
+     "0.073"
+    ],
+    [
+     {
+      "text": "`upkeep_to`",
+      "href": "pages/settings.md#upkeep_to"
+     },
+     "end: 6/27; estate: 3/25",
+     "0.467",
+     "end: 4.01; estate: 3.84",
+     "0.148"
+    ],
+    [
+     {
+      "text": "`valence`",
+      "href": "pages/settings.md#valence"
+     },
+     "0: 6/59; 16: 1/6; 2: 6/6; 4: 1/8; 8: 0/5",
+     "0.000",
+     "0: 4.21; 16: 4.79; 4: 3.47; 8: 3.75",
+     "0.002"
+    ]
+   ]
+  },
+  "table:quiet": {
+   "head": [
+    "setting",
+    "its smallest chance on any outcome",
+    "on which"
+   ],
+   "rows": [
+    [
+     {
+      "text": "`message_prepass`",
+      "href": "pages/settings.md#message_prepass"
+     },
+     "0.39",
+     "same-position share"
+    ],
+    [
+     {
+      "text": "`link_consent`",
+      "href": "pages/settings.md#link_consent"
+     },
+     "0.30",
+     "resilient"
+    ],
+    [
+     {
+      "text": "`link_steering`",
+      "href": "pages/settings.md#link_steering"
+     },
+     "0.21",
+     "died"
+    ],
+    [
+     {
+      "text": "`message_amount`",
+      "href": "pages/settings.md#message_amount"
+     },
+     "0.19",
+     "died, valence 2 aside"
+    ],
+    [
+     {
+      "text": "`mate_pays`",
+      "href": "pages/settings.md#mate_pays"
+     },
+     "0.13",
+     "died, valence 2 aside"
+    ],
+    [
+     {
+      "text": "`n_nodes`",
+      "href": "pages/settings.md#n_nodes"
+     },
+     "0.11",
+     "late novelty of the line of descent"
+    ],
+    [
+     {
+      "text": "`allow_revolutions`",
+      "href": "pages/settings.md#allow_revolutions"
+     },
+     "0.09",
+     "same-position share"
+    ],
+    [
+     {
+      "text": "`hidden_layers`",
+      "href": "pages/settings.md#hidden_layers"
+     },
+     "0.08",
+     "late novelty of the line of descent"
+    ],
+    [
+     {
+      "text": "`upkeep_to`",
+      "href": "pages/settings.md#upkeep_to"
+     },
+     "0.06",
+     "decentralised"
+    ],
+    [
+     {
+      "text": "`self_message`",
+      "href": "pages/settings.md#self_message"
+     },
+     "0.06",
+     "same-position share"
+    ],
+    [
+     {
+      "text": "`allow_handover`",
+      "href": "pages/settings.md#allow_handover"
+     },
+     "0.05",
+     "generations"
+    ]
+   ]
+  },
+  "quiet": [
+   "message_prepass",
+   "link_consent",
+   "link_steering",
+   "message_amount",
+   "mate_pays",
+   "n_nodes",
+   "allow_revolutions",
+   "hidden_layers",
+   "upkeep_to",
+   "self_message",
+   "allow_handover"
+  ],
+  "table:pairs": {
+   "head": [
+    "one value",
+    "and another",
+    "worlds with both",
+    "of them died",
+    "died with each alone",
+    "chance",
+    "false discovery rate"
+   ],
+   "rows": [
+    [
+     "`allow_gifting` = False",
+     "`link_steering` = random",
+     15,
+     6,
+     "18% / 20%",
+     "0.00043",
+     "0.24"
+    ],
+    [
+     "`contest` = largest",
+     "`allow_gifting` = False",
+     18,
+     6,
+     "18% / 18%",
+     "0.0015",
+     "0.31"
+    ],
+    [
+     "`mutation_probability` = 0.2",
+     "`contest` = largest",
+     28,
+     7,
+     "13% / 18%",
+     "0.0027",
+     "0.31"
+    ],
+    [
+     "`contest` = largest",
+     "`mate_pays` = False",
+     8,
+     4,
+     "18% / 27%",
+     "0.0029",
+     "0.31"
+    ],
+    [
+     "`link_steering` = random",
+     "`link_token` = True",
+     15,
+     5,
+     "20% / 15%",
+     "0.0055",
+     "0.31"
+    ],
+    [
+     "`mutation_probability` = 0.2",
+     "`allow_gifting` = False",
+     31,
+     7,
+     "13% / 18%",
+     "0.0056",
+     "0.31"
+    ],
+    [
+     "`message_amount` = 4",
+     "`link_search` = reach",
+     5,
+     3,
+     "21% / 14%",
+     "0.0066",
+     "0.31"
+    ],
+    [
+     "`redistribution` = local",
+     "`link_token` = True",
+     5,
+     3,
+     "25% / 15%",
+     "0.0066",
+     "0.31"
+    ],
+    [
+     "`message_amount` = 4",
+     "`contest` = largest",
+     16,
+     5,
+     "21% / 18%",
+     "0.0077",
+     "0.31"
+    ],
+    [
+     "`mutation_probability` = 0.2",
+     "`link_search` = walk",
+     16,
+     5,
+     "13% / 25%",
+     "0.0077",
+     "0.31"
+    ],
+    [
+     "`message_prepass` = True",
+     "`link_search` = walk",
+     10,
+     4,
+     "11% / 25%",
+     "0.0079",
+     "0.31"
+    ],
+    [
+     "`allow_gifting` = False",
+     "`mate_pays` = False",
+     10,
+     4,
+     "18% / 27%",
+     "0.0079",
+     "0.31"
+    ]
+   ]
+  },
+  "simplicity": {
+   "spearman": -0.1510125720580359,
+   "dead_counts": {
+    "n": 14,
+    "mean": 7.642857142857143,
+    "median": 8.0,
+    "sd": 1.549547966698321,
+    "min": 5.0,
+    "max": 10.0,
+    "q25": 7.0,
+    "q75": 9.0
+   },
+   "living_counts": {
+    "n": 70,
+    "mean": 7.642857142857143,
+    "median": 7.0,
+    "sd": 1.5135687196659222,
+    "min": 5.0,
+    "max": 11.0,
+    "q25": 7.0,
+    "q75": 9.0
+   }
+  },
+  "table:allocation": {
+   "head": [
+    "draw",
+    "weakest first",
+    "strongest first"
+   ],
+   "rows": [
+    [
+     "s4001",
+     "died at 144",
+     "died at 387"
+    ],
+    [
+     "s4002",
+     "5.00",
+     "4.70"
+    ],
+    [
+     "s4003",
+     "4.63",
+     "4.62"
+    ],
+    [
+     "s4004",
+     "4.40",
+     "4.41"
+    ],
+    [
+     "s4005",
+     "died at 230",
+     "4.39"
+    ],
+    [
+     "s4006",
+     "died at 1,445",
+     "4.51"
+    ],
+    [
+     "s4007",
+     "4.16",
+     "4.17"
+    ],
+    [
+     "s4008",
+     "4.99",
+     "4.73"
+    ]
+   ]
+  },
+  "allocation": {
+   "full": {
+    "worlds": 84,
+    "died": 14,
+    "health": {
+     "n": 70,
+     "mean": 4.030919927049482,
+     "median": 4.106791332851611,
+     "sd": 0.7402513544747855,
+     "min": 1.1220837579927918,
+     "max": 5.0,
+     "q25": 3.6186492032409134,
+     "q75": 4.602623112645027
+    }
+   },
+   "E41": {
+    "worlds": 8,
+    "died": 3,
+    "health": {
+     "n": 5,
+     "mean": 4.637112719709796,
+     "median": 4.633907860501476,
+     "sd": 0.3660109713141757,
+     "min": 4.164198818022124,
+     "max": 5.0,
+     "q25": 4.398685723565177,
+     "q75": 4.988771196460202
+    }
+   },
+   "E42": {
+    "worlds": 8,
+    "died": 1,
+    "health": {
+     "n": 7,
+     "mean": 4.502798135703879,
+     "median": 4.5117225371372065,
+     "sd": 0.20009745429036238,
+     "min": 4.166452727571964,
+     "max": 4.732975598236548,
+     "q25": 4.3964783995633585,
+     "q75": 4.657739643927358
+    }
+   }
+  }
+ },
+ "figures": {
+  "matrix": {
+   "title": "Which settings matter for what",
+   "caption": "Each row is a drawn setting, each column an outcome of the worlds; a cell is bright where the worlds drawn with the setting's different values differ in that outcome more than shuffling the outcome among the worlds would make them differ. Its brightness is how unlikely that is by chance: 1 for a chance of 1 in 10, 2 for 1 in 100, 4.3 for none in 20,000 shuffles. Many cells are tested, so a few are bright by luck alone: the table below gives each its false discovery rate. Whether a world died is tested over all of them; every other outcome over the living. A blank cell was not tested (a setting that cannot matter there, or too few worlds). The columns: died, died; died*, died, valence 2 aside; health, health (the proposal); decent., decentralised; resil., resilient; 3-D, almost three-dimensional; diverse, diverse; uneven, not too even; agents, agents (log10 of the median); apart, same-position share; Gini, Gini of the tokens; hered., heredity index; gener., generations; popul., effective population (log10); novelty, late novelty of the line of descent; fertil., fertility passed on.",
+   "recipe": "**Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end\n\n**Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.\n\n1. For each setting, the worlds where it can matter (as the sampler draws it), grouped by its value.\n2. Died: the chi-square statistic of the deaths across the groups; numbers: the Kruskal-Wallis statistic of their ranks.\n3. The share of 20,000 shuffles of the outcome among the worlds whose statistic is at least as large (seed 11): the chance.\n4. The false discovery rate of each chance among all settings tested on that outcome (Benjamini-Hochberg).\n\n**To make it again:** `python3 book_figures.py settingseffects`."
+  },
+  "deaths": {
+   "title": "Which worlds died",
+   "caption": "For four settings, the share of Experiment 40's worlds drawn with each value that died; the number in brackets is how many worlds had that value. A cap of two links killed every world it was drawn in, so the three charts marked * leave those six worlds out. Each title gives the chance of differences this large by shuffling the deaths among the worlds.",
+   "recipe": "**Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end\n\n**Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.\n\n1. For each value, the deaths over the worlds drawn with it.\n2. The chance: the share of 20,000 shuffles of the deaths with a chi-square statistic at least as large.\n\n**To make it again:** `python3 book_figures.py settingseffects`."
+  },
+  "simplicity": {
+   "title": "Do worlds with more mechanisms switched on do better?",
+   "caption": "Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation -0.15.",
+   "recipe": "**Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end\n\n**Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.\n\n1. Count each world's drawn values that differ from `SIMPLEST` in effects.py.\n2. Plot against its health; the Spearman correlation of the two.\n\n**To make it again:** `python3 book_figures.py settingseffects`."
+  }
+ }
+}

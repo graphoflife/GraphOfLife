@@ -16,7 +16,8 @@ A world's dossier asks of each what its records can say:
   of about 2N generations before; a world whose living descend from one
   ancestor of a few generations before has a tiny effective population, in
   which chance decides all but the largest differences.
-- **Heredity**: in two kept worlds, agents and their parents alive together,
+- **Heredity**: in two kept worlds (the middle of the run and its end),
+  agents and their parents alive together,
   played in the same situations (research/oee/checks/diversity.py). The
   heredity index is 1 when a child acts as its parent does (as the parent acts
   like itself between two tries) and 0 when it acts like a stranger.
@@ -56,8 +57,11 @@ import numpy as np  # noqa: E402
 import gol_plan  # noqa: E402
 import gol_store  # noqa: E402
 
-#: The kept worlds heredity is read in.
-HEREDITY_AT = (1500, 3000)
+def heredity_at(until: int) -> Tuple[int, int]:
+    """The kept worlds heredity is read in: the middle of a run and its end (1,500 and 3,000 in round 3)."""
+    return until // 2, until
+
+
 #: Parent-child pairs played, and situations they are played in.
 PAIRS, SITUATIONS = 150, 100
 #: Situations of each kept world the line of descent is played in.
@@ -296,7 +300,7 @@ def dossier(item: Tuple[str, int]) -> str:
     if "lineage" not in have:
         keep(run_id, "lineage", lineage(run_id, until, archived))
         have = kept(run_id)
-    for at in HEREDITY_AT:
+    for at in heredity_at(until):
         if at in archived and f"heredity {at}" not in have:
             keep(run_id, f"heredity {at}", heredity(run_id, at))
     if "line" not in have:

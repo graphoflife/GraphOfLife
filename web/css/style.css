@@ -1079,6 +1079,11 @@ details.control-group > summary:hover h3 { color: var(--text); }
 /* A wide table scrolls inside its own box. Letting it push the page sideways
    makes every paragraph on the page scroll with it. */
 .md-scroll { overflow-x: auto; margin: 0 0 18px; }
+/* A long table sorts by the column whose head is clicked (Book.sortable). */
+.md-sortable th { cursor: pointer; user-select: none; }
+.md-sortable th:hover { color: var(--text); }
+.md-sortable th[data-sort="up"]::after { content: " ▲"; }
+.md-sortable th[data-sort="down"]::after { content: " ▼"; }
 .md table { border-collapse: collapse; font-size: 13px; min-width: 100%; }
 .md th, .md td {
   border: 1px solid var(--border);

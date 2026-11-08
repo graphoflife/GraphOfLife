@@ -1476,6 +1476,60 @@
       "summary": "Round 1 of fifty worlds with every setting drawn at random found no healthy world and one interesting one: mended worlds are whole but folded, and the worlds that stay spaces break or are poor."
     },
     {
+      "id": "which-worlds-are-healthy",
+      "title": "Which worlds are healthy? A proposed order",
+      "file": "pages/which-worlds-are-healthy.md",
+      "topics": [
+        "healthy",
+        "methods"
+      ],
+      "kind": "study",
+      "experiments": [
+        "E40",
+        "E41",
+        "E42"
+      ],
+      "status": "analysed",
+      "added": "2026-11-07",
+      "summary": "SUMMARY"
+    },
+    {
+      "id": "how-the-drawn-settings-shape-a-world",
+      "title": "How the drawn settings shape a world",
+      "file": "pages/how-the-drawn-settings-shape-a-world.md",
+      "topics": [
+        "healthy",
+        "rules"
+      ],
+      "kind": "study",
+      "experiments": [
+        "E40",
+        "E41",
+        "E42"
+      ],
+      "status": "analysed",
+      "added": "2026-11-07",
+      "summary": "SUMMARY"
+    },
+    {
+      "id": "candidates-for-open-ended-evolution",
+      "title": "Candidates for open-ended evolution",
+      "file": "pages/candidates-for-open-ended-evolution.md",
+      "topics": [
+        "evolution",
+        "healthy"
+      ],
+      "kind": "study",
+      "experiments": [
+        "E40",
+        "E41",
+        "E42"
+      ],
+      "status": "analysed",
+      "added": "2026-11-07",
+      "summary": "SUMMARY"
+    },
+    {
       "id": "every-world-side-by-side",
       "title": "Every world side by side",
       "file": "pages/every-world-side-by-side.md",
