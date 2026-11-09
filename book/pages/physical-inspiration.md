@@ -617,8 +617,9 @@ a B1 world is a restless sea of ordinary agents playing a near-even split: a
 kind of vacuum. Could something stable form in it, rarely and locally, as
 matter did?
 
-One way to ask is an experiment planned for later, *One agent in a sea of
-average agents*. Make a sea of agents that all decide as the average evolved
+One way to ask is an experiment planned for later,
+[One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md).
+Make a sea of agents that all decide as the average evolved
 agent decides. Place in it a single agent, or a small group, with a brain of
 its own. Can it draw tokens from the sea without exhausting it, and without
 being cut off? Can a group hold together in it?

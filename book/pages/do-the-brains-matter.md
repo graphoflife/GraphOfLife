@@ -157,7 +157,8 @@ it is overall, then given the agent's own tokens and connections. Agents that
 decide like that behave, on average, exactly like evolved ones, but respond to
 nothing. If such a world looks like the baseline, what the brains contribute
 is their average. If it does not, what they respond to matters. It is planned
-as *Brains replaced by their average*.
+in [Brains replaced by their average](brains-replaced-by-their-average.md),
+as a draft for round 3's candidates.
 
 ## Without change: frozen or teeming
 
