@@ -724,7 +724,7 @@ figures.
 <!-- turns -->
 ---
 
-← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) →
+← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [Which properties have no scale?](which-properties-have-no-scale.md) →
 
 **Also about:** [Size and riches of a world](../README.md#size-and-riches-of-a-world), [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 <!-- /turns -->

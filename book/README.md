@@ -119,7 +119,7 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 - [Like next to like: how alike agents are at a distance](pages/like-next-to-like.md)
 - [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
 - [The random twin: is a world a space?](pages/random-twin.md)
-- Dimensions at scale — *not written yet*
+- [Dimensions at scale](pages/dimensions-at-scale.md)
 - [Which properties have no scale?](pages/which-properties-have-no-scale.md)
 - [Local rules only](pages/local-rules-only.md)
 - [How far does a difference travel?](pages/how-far-does-a-difference-travel.md)

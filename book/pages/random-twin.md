@@ -132,10 +132,10 @@ by the rule that made them. The line of 1.5 lies between the two.
 <!-- turns -->
 ---
 
-← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [Which properties have no scale?](which-properties-have-no-scale.md) →
+← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [Dimensions at scale](dimensions-at-scale.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Local rules only](local-rules-only.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [The estate of the dead](estate.md) · [The shape of the network](what-shape-does-the-network-take.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Local rules only](local-rules-only.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md)
 <!-- /turns -->

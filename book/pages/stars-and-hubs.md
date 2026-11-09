@@ -107,6 +107,6 @@ at random, a brain may choose at most 8 links
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (9)
-> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What goes with what](what-goes-with-what.md)
+> [!info]- Pages that link here (10)
+> [Glossary](glossary.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

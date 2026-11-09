@@ -120,6 +120,6 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 
 ← [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 
-> [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What would count as open-ended evolution](open-ended-test.md) · [The lab, the engine and pilots](the-lab.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Dimensions at scale](dimensions-at-scale.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What would count as open-ended evolution](open-ended-test.md) · [The lab, the engine and pilots](the-lab.md) · [What a run records](frames-and-stats.md)
 <!-- /turns -->
