@@ -254,7 +254,7 @@ lapsed link can split a world. In the ten B2 worlds of Experiment 14, not one
 agent was cut off from iteration 200 to 1,000
 ([Nobody cut off](a-world-that-cannot-break.md#nobody-cut-off)). Letting a
 separated piece live on as a world of its own is planned for the experiment
-*Local rules only*.
+[Local rules only](local-rules-only.md).
 
 ## What we learned
 

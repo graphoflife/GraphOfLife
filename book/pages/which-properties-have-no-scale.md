@@ -490,8 +490,9 @@ scale only because one rule reaches across the whole world: the cull kills
 everything outside the largest piece, so a branch that falls away dies,
 whatever its size and however far away it lies. And the branches may have no
 scale for the plainest of reasons, if our hypothesis is right: they grow like
-a tree grown at random, which has none either. The planned page *Local rules
-only*, which lets a piece that separates live on, is the test that remains:
+a tree grown at random, which has none either. The planned page
+[Local rules only](local-rules-only.md), which lets a piece that separates
+live on, is the test that remains:
 with the cull made local, is anything left without a scale?
 
 For [open-ended evolution](open-ended-test.md), a world ten times the size is

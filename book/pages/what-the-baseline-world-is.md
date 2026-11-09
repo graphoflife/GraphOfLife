@@ -666,7 +666,7 @@ than B2 did. B2 keeps every rule local
 agent anywhere. And it took the other road from letting pieces live:
 [A world that cannot break](a-world-that-cannot-break.md) adds local rules
 under which worlds cannot split at all. A piece that lives on as a world of
-its own is planned for *Local rules only*. Several kinds of tokens have not
+its own is planned for [Local rules only](local-rules-only.md). Several kinds of tokens have not
 been tried.
 
 #### Later: let the possible grow

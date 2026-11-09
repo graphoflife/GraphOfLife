@@ -271,11 +271,16 @@ and
 [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)
 found. Physics and evolution, asked separately, point at the same rules.
 
-None of the three has been made local yet. B2 took another road: its worlds
-cannot split at all, rather than living on apart. The tokens of the dead have
-been given to other heirs, such as the newborns, their parents or the poorest
-([The estate of the dead](estate.md)). They have not gone to the dead agent's
-former neighbours. All three changes are planned, in *Local rules only*.
+B2 took another road for the first: its worlds cannot split at all, rather
+than living on apart. The tokens of the dead have been given to other heirs,
+such as the newborns, their parents or the poorest
+([The estate of the dead](estate.md)). Since 24 October 2026 they can also
+flow to the nearest living, step by step through the network
+([`redistribution`](settings.md#redistribution) `local`), and round 3 of the
+random screen drew that rule in some of its worlds: they are the most unequal
+of all ([What keeps wealth spread?](what-keeps-wealth-spread.md)). The other
+two changes, and all three together, are planned in
+[Local rules only](local-rules-only.md).
 
 ### A word of care about long-range connections
 
@@ -308,7 +313,7 @@ spreads, and whether it grows or dies away, says how chaotic the world is.
 This is **damage spreading**, a standard experiment on cellular automata and
 random networks (Derrida and Weisbuch 1986). It needs local random numbers
 first: with one shared stream, the difference is everywhere at once. It is
-planned, as *How far does a difference travel?*
+planned, as [How far does a difference travel?](how-far-does-a-difference-travel.md)
 
 ## Conservation
 
@@ -566,7 +571,8 @@ There are two ways a gradient could be built in.
   oil heated from below.
 
 Either would make a world in which order can feed on a flow: the condition, on
-Earth, for life. Both are planned, as *A source and a sink*.
+Earth, for life. A world fed at one place and drained everywhere is planned, as
+[A source and a sink](a-source-and-a-sink.md).
 
 ## Particles: stable things in a restless world
 
@@ -704,17 +710,20 @@ are not written yet:
   balls and walks on worlds of 60,000 agents. Next comes every measure of
   dimension on the largest worlds the notebook can afford: ball growth, the
   width of a lump, boxes, the spectral dimension.
-- *How far does a difference travel?* Damage spreading: the light cone,
-  measured, once random numbers are local.
+- [How far does a difference travel?](how-far-does-a-difference-travel.md)
+  Damage spreading: the light cone, measured, once random numbers are local.
+  A draft plan.
 - [Which properties have no scale?](which-properties-have-no-scale.md) The
   same quantities across many sizes, rescaled: written, from Experiments 2, 8
   and 10.
-- *Local rules only.* The cull, the share-out and the random stream, each made
-  local, and what changes.
-- *A source and a sink.* Tokens with a quality, or stars: a world with a flow
-  running through it.
+- [Local rules only](local-rules-only.md). The cull, the share-out and the
+  random stream, each made local, and what changes. A draft plan, with what
+  round 3 already shows of the local share-out and of mending.
+- [A source and a sink](a-source-and-a-sink.md). A world with a flow running
+  through it: fed at one node, drained by every agent. A draft plan.
 - *Particles.* Bound tokens, persistent groups, beats.
-- *One agent in a sea of average agents.* The invasion experiment above.
+- [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md).
+  The invasion experiment above. A draft plan.
 
 ## What we learned
 

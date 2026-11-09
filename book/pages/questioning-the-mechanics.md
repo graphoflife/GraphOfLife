@@ -480,8 +480,9 @@ worlds of Experiment 14, not one agent was cut off from iteration 200 to
 1,000. The cull is still a rule of B2, but it has nothing left to cut — and
 populations still cannot separate.
 
-Letting a separated piece live on is planned for the experiment *Local rules
-only*. A child joined to an agent anywhere was not adopted. It would break
+Letting a separated piece live on is planned for the experiment
+[Local rules only](local-rules-only.md). A child joined to an agent anywhere
+was not adopted. It would break
 locality, which the search for open-ended evolution asks of every rule
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md),
 [Physical inspiration](physical-inspiration.md)). Agents were later given a
@@ -514,8 +515,13 @@ iteration among 3,600 agents, in worlds of 10,000 tokens
 in pilot worlds of B1 and of B2: survivors by wealth, the poorest, the
 newborns, the parents, and each dead agent's own children. Who inherits
 decides how many agents a world holds, and how poor they are
-([Who inherits?](who-inherits.md)). Giving the tokens to the dead agent's
-former neighbours is planned for *Local rules only*.
+([Who inherits?](who-inherits.md)). Since 24 October 2026 the tokens can also
+flow to the nearest living, step by step through the network
+([`redistribution`](settings.md#redistribution) `local`); round 3's worlds
+that drew it are the most unequal of all
+([What keeps wealth spread?](what-keeps-wealth-spread.md)), and
+[Local rules only](local-rules-only.md) plans it beside the other two local
+rules.
 
 ## Numbers that mislead
 
