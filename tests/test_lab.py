@@ -145,6 +145,17 @@ def test_a_condition_may_have_seeds_of_its_own():
             [("a", 1), ("a", 2), ("b", 7)]
 
 
+def test_a_condition_may_start_with_founders_of_its_own():
+    """A world played again at another size keeps its founders a token: a condition may say its own."""
+    own = plan("E91", [{"name": "a"}, {"name": "b", "world": {"n_nodes": 20}}])
+    sized = plan("E92", [{"name": "a", "world": {"total_tokens": 300}}])
+    with lab(own, sized):
+        specs = {s.condition: s for s in gol_plan.experiment_runs("E91") if s.lab["seed"] == 1}
+        assert specs["b"].config["n_nodes"] == 20 and specs["b"].lab["world"]["n_nodes"] == 20
+        assert specs["a"].config["n_nodes"] != 20 and specs["a"].run_id != specs["b"].run_id
+        refused(lambda: gol_plan.experiment_runs("E92"), "total_tokens")
+
+
 def test_a_condition_may_not_set_what_the_baseline_already_has():
     """A setting at the baseline's own value changes only the run's name: one world, two names."""
     with lab(plan("E91", [{"name": "a", "set": {"keep_home": TINY["keep_home"]}}]),

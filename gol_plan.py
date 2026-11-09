@@ -226,10 +226,16 @@ def _experiment_runs(name: str) -> List[RunSpec]:
 def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict[str, Any],
                     record: Dict[str, Any], iterations: int, condition: Dict[str, Any], seeds: Any,
                     budget: Optional[float] = None) -> List[RunSpec]:
-    """The runs of one condition: the baseline changed as it says, at each size and seed."""
+    """
+    The runs of one condition: the baseline changed as it says, at each size and seed. A condition
+    may start its worlds with founders of its own (`world`: n_nodes, k_neighbors), as a world found
+    at one size is played again at another with as many founders a token; its size is the plan's.
+    """
     label = condition.get("name")
     _check_keys(f"{name} condition {label!r}", condition,
-                ("name", "set", "seeds", "sizes", "stops", "fault_at", "threads", "replicate"))
+                ("name", "set", "world", "seeds", "sizes", "stops", "fault_at", "threads", "replicate"))
+    own_world = dict(condition.get("world", {}))
+    _check_keys(f"{name} condition {label!r} world", own_world, tuple(k for k in WORLD if k != "total_tokens"))
     changed = dict(condition.get("set", {}))
     forbidden = sorted(set(changed) & ({"seed"} | set(INFRASTRUCTURE)))
     if forbidden:
@@ -253,7 +259,7 @@ def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict
     specs: List[RunSpec] = []
     for size, seed in ((size, seed) for size in _sizes(name, label, condition, world)
                        for seed in parse_seeds(condition.get("seeds", seeds))):
-        here = {**world, "total_tokens": size}
+        here = {**world, **own_world, "total_tokens": size}
         config = {**base, **here, **changed, "seed": seed, "export_every": 1,
                   "export_decisions": True,
                   "checkpoint_every": int(record.get("checkpoint_every", 0)),
