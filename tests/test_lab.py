@@ -11,6 +11,7 @@ small enough that a worker process spends most of its life importing numpy.
 from __future__ import annotations
 
 import contextlib
+import importlib.util
 import io
 import json
 import os
@@ -924,6 +925,48 @@ def test_a_run_moved_away_is_remembered_and_done_without_its_disk():
         blocked = gol_lab.run_state(unfinished, None)
         assert blocked["state"] == "blocked" and "not mounted" in blocked["reason"], blocked
         assert gol_lab.jobs(["E91"], "x") == []
+
+
+def _mover():
+    """research/tools/move_finished_runs.py, which cron runs while the lab plays."""
+    spec = importlib.util.spec_from_file_location(
+        "move_finished_runs", os.path.join(runner.ROOT, "research", "tools", "move_finished_runs.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_a_finished_run_moves_to_another_disk_while_the_lab_plays():
+    """
+    The mover takes only a run the lab is done with and nobody is advancing, and leaves a link to a checked
+    copy in its place, the two trading places in one step (the author, 2026-11-09: the automatic mover to
+    Speicher2); the run is then remembered as done. A move cut short is finished the next time.
+    """
+    mover = _mover()
+    with lab(plan("E91", seeds="1..2", iterations=4)) as tmp:
+        done, unfinished = gol_plan.experiment_runs("E91")
+        assert work(done, 4) == 0 and work(unfinished, 2) == 0
+        disk = os.path.join(tmp, "drive")
+        os.makedirs(disk)
+        folder = gol_store.run_dir(done.run_id)
+        assert mover.move_finished(unfinished, disk) is None                    # the lab has more to do with it
+        with gol_store.hold(done.run_id):                                      # a worker is advancing it
+            assert "being played" in mover.move_finished(done, disk)
+        files = mover._files(folder)
+        assert "moved" in mover.move_finished(done, disk)
+        assert os.path.islink(folder) and os.path.realpath(folder) == os.path.realpath(os.path.join(disk, done.run_id))
+        assert mover._files(folder) == files and not os.path.lexists(folder + ".moving")
+        assert gol_lab.run_state(done, None) == {"state": "done", "iteration": 4, "status": "stopped",
+                                                 "checkpoint": 4}
+        assert mover.move_finished(done, disk) is None                          # moved already
+        # Cut short after the swap, the folder set aside is removed the next time; a link never swapped in, too.
+        os.makedirs(folder + ".moving")
+        mover.tidy(folder)
+        assert not os.path.lexists(folder + ".moving") and os.path.islink(folder)
+        other = gol_store.run_dir(unfinished.run_id)
+        os.symlink(os.path.join(disk, unfinished.run_id), other + ".moving")
+        mover.tidy(other)
+        assert not os.path.lexists(other + ".moving") and os.path.isdir(other) and not os.path.islink(other)
 
 
 def test_trials_already_played_stay_finished_while_their_source_is_away():

@@ -18,7 +18,8 @@
 # folder is half way to a link. A run someone is advancing all the same (its
 # own lock held, say from the server's Start) is left where it is. Once moved, where each run
 # stands is noted in the lab's own folder (.lab/elsewhere.json), so that a finished run counts as
-# done while its drive is unplugged (2026-10-29).
+# done while its drive is unplugged (2026-10-29). The runs the lab is done with can also be moved
+# while it plays: research/tools/move_finished_runs.py, which cron runs for Experiment 43 (2026-11-09).
 set -u
 cd "/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns" || exit 1
 DEST=$1

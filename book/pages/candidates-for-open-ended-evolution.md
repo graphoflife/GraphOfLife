@@ -496,6 +496,8 @@ The five ways:
 
 ## Round 3's best worlds, played again
 
+<!-- experiment E43 -->
+
 Experiment 43 plays every world of the shortlist again: each with its own
 drawn settings, exactly as round 3 drew them (the way of staking too, for the
 draws played a token at a time), and with as many founders a token as it had.
