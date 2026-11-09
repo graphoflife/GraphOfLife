@@ -315,6 +315,20 @@ def test_a_world_is_averaged_with_the_share_of_its_tokens_each_game_culled():
     assert abs(got["gini_random"] - 1.0) < 1e-12                                 # a random deal's Gini at 3 an agent
 
 
+def test_agents_on_loops_per_link_is_low_for_a_tree_and_for_a_crowd_of_links():
+    # The author, 2026-11-09: links an agent should not be too many, but fewer is not simply better, since at
+    # some point the world is a tree. The share of agents in the 2-core over half the links an agent holds:
+    # a ring 1, a tree 0, a world of 28 links an agent about 0.07; averaged reading by reading.
+    reading = lambda core, links: HEALTH.averages([{"t": 100, "core": core, "links": links}], 300, 100, 101)["lean"]
+    ring, tree, crowd, b1 = reading(1.0, 2.0), reading(0.0, 2.0), reading(1.0, 28.0), reading(0.6, 3.5)
+    assert ring == 1.0 and tree == 0.0 and abs(crowd - 2 / 28) < 1e-12, (ring, tree, crowd)
+    assert tree < crowd < b1 < ring, (tree, crowd, b1, ring)
+    two = HEALTH.averages([{"t": 100, "core": 1.0, "links": 2.0}, {"t": 101, "core": 1.0, "links": 4.0}], 300, 100, 102)
+    assert abs(two["lean"] - 0.75) < 1e-12, "the measure was not averaged reading by reading"
+    lean = next(m for m in HEALTH.MEASURES if m["key"] == "lean")
+    assert lean["criterion"] == "resilient" and lean["better"] == "more"
+
+
 def test_a_cube_is_harder_to_halve_than_a_plane_and_a_dense_one_than_a_sparse_one():
     exponent = lambda dim, links: M.half_cut(1500, HEALTH.geometric(1500, dim, links, 3))["exponent"]
     plane, cube, dense = exponent(2, 6), exponent(3, 6), exponent(3, 9)

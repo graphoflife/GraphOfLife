@@ -138,6 +138,19 @@ SPACES: Dict[int, List[Setting]] = {
         ("upkeep_to", "switch", ("end", "estate"), ("link_upkeep", True)),
     ],
 }
+# The third sampler draws what the second does (the author, 2026-11-09: "draw the rules, but one of the
+# rules that makes a limit for edges must be enabled"), with RULES below.
+SPACES[3] = list(SPACES[2])
+
+#: What a sampler makes true of every world once it is drawn, as (setting, value, needs). The author,
+#: 2026-11-09, after two worlds of round 3 grew 10 and 28 links an agent: some rule must keep a world's links
+#: in check. A link lives if tokens cross it, unless it may be kept by paying for it instead; then it holds a
+#: token as well (link_token), so a world never holds more links than tokens. Payment alone was no check:
+#: a new link counts as paid for its first iteration, and a world whose agents are nearly all newborns kept
+#: every newborn's links that way.
+RULES: Dict[int, List[Tuple[str, Any, Tuple[str, Any]]]] = {
+    3: [("link_token", True, ("link_upkeep", True))],
+}
 
 
 #: How each sampler draws, in words, for the notebook's box of a round's worlds: what a draw
@@ -157,6 +170,8 @@ WORDS: Dict[int, Tuple[str, str]] = {
         "self-message only with messages, coalitions only in the largest-stake game, the mate a parent "
         "and paying only with mixing, and where upkeep goes only with upkeep"),
 }
+WORDS[3] = (WORDS[2][0], WORDS[2][1] + "; and a link kept by payment always holds a token, so that no world "
+                                        "holds more links than tokens")
 
 
 def space(version: int) -> List[Setting]:
@@ -240,6 +255,9 @@ def draw(version: int, seed: int, world: int, forced: Optional[Dict[str, Sequenc
         if drawn["message_amount"] == 0:
             # No messages: nothing to say before the game, and a talk-only look would cost for nothing.
             drawn["message_prepass"] = False
+        for name, value, needs in RULES.get(version, []):
+            if _applies(needs, drawn):
+                drawn[name] = value
         changed = {k: (list(v) if isinstance(v, list) else v) for k, v in drawn.items() if base.get(k) != v}
         try:
             SimConfig.from_dict({**base, **changed, "seed": 1}, stored=False)

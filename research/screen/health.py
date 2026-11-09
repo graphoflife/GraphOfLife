@@ -47,6 +47,13 @@ whether a world grew healthier or sicker.
     python3 research/screen/health.py E41 E42 E40 [--read 3]
         prints the orders and writes research/screen/health.json; with --read, first makes every reading a
         world still lacks, on that many processes
+
+2026-11-09, later: links an agent come back, as a measure that is low at both ends (the author: "fewer is
+not exactly better, because at some point it becomes a tree; is there a measure that is high when not tree
+like and not fully connected?"): agents on loops per link, the share of the agents in the 2-core over half the
+links an agent holds, in the resilient criterion beside the cuts. And what each world's statistics say of its
+games is kept beside the readings (GAMES), so that the worlds can be scored again while their runs are on a
+drive that is not plugged in.
 """
 from __future__ import annotations
 
@@ -65,6 +72,7 @@ sys.path.insert(0, HERE)
 import numpy as np  # noqa: E402
 
 import gol_record  # noqa: E402
+import gol_store  # noqa: E402
 
 import criteria as C  # noqa: E402
 import judge as J  # noqa: E402
@@ -84,6 +92,12 @@ MEASURES: List[Dict[str, Any]] = [
      "name": "most of the world one agent's loss cuts off"},
     {"key": "link_cut", "criterion": "resilient", "better": "less",
      "name": "most of the world one link's loss cuts off"},
+    # The author, 2026-11-09: links an agent should not be too many, but fewer is not simply better, since
+    # at some point the world is a tree. The share of agents on loops, per link an agent holds, is low at
+    # both ends: a tree has no loops, and a world crowded with links spends many on each agent's loops.
+    {"key": "lean", "criterion": "resilient", "better": "more",
+     "name": "agents on loops per link: the share of the agents in the 2-core, over half the links an agent "
+             "holds (a ring scores 1, a tree 0, a world of 28 links an agent 0.07)"},
     {"key": "width", "criterion": "space", "better": "more", "name": "typical distance, over the random twin's"},
     {"key": "dimension", "criterion": "space", "better": "near 3", "name": "dimension, by how balls grow"},
     {"key": "apart", "criterion": "diverse", "better": "more",
@@ -102,8 +116,8 @@ MEASURES: List[Dict[str, Any]] = [
      "name": "share of all tokens culled in a game, with the agents cut off from the largest piece"},
 ]
 #: The author's measures left out, with the reason.
-DROPPED = {"links": "links per agent asked for a range, 3 to 12, in which more is not better; what it stood for, "
-                    "loops and a world hard to cut, the 2-core and the two cuts measure directly",
+DROPPED = {"links": "links per agent asked for a range, 3 to 12, and neither more nor fewer is simply better: "
+                    "agents on loops per link (`lean`) reads it against the loops the links make",
            "max_tokens": "the largest holding is the richest agent's share of all tokens, counted the other way "
                          "round, so the two would cancel; its line kept out a world of paupers, which no living "
                          "world is",
@@ -226,12 +240,33 @@ def random_gini(mean: float) -> float:
     return (mean - 1.0) / (2.0 * mean - 1.0) if mean > 1.0 else 0.0
 
 
+#: What each world's statistics say of its games, kept beside the readings: the runs may be on a drive that is not
+#: plugged in when the worlds are scored again.
+GAMES = os.path.join(gol_store.BASE_DIR, ".pilots", "screen", "games")
+
+
 def games(run_id: str, tokens: int) -> Dict[int, Dict[str, float]]:
     """
     Every game of a world, from its statistics: the mean holding after it (tokens a link locks are held by
     none), the share of all tokens its cleanup culled (`redistributed`: the starved hold nothing), and the share
-    of its agents culled (`nodes` are those left after the cleanup).
+    of its agents culled (`nodes` are those left after the cleanup). Read from the run when it can be, and
+    kept; from what was kept when the run cannot be read.
     """
+    kept = os.path.join(GAMES, f"{run_id}.json")
+    try:
+        out = _games(run_id, tokens)
+    except OSError:
+        if not os.path.exists(kept):
+            raise
+        with open(kept) as f:
+            return {int(t): g for t, g in json.load(f).items()}
+    os.makedirs(GAMES, exist_ok=True)
+    with open(kept, "w") as f:
+        json.dump(out, f)
+    return out
+
+
+def _games(run_id: str, tokens: int) -> Dict[int, Dict[str, float]]:
     out = {}
     for r in gol_record.read_stats(run_id):
         if r["phase"] == 2 and r.get("meanTokens") is not None:
@@ -257,6 +292,8 @@ def averages(rows: List[Dict[str, Any]], tokens: int, start: int, stop: int,
             values.setdefault("richest", []).append(row["max_tokens"] / tokens)
         if row.get("agents") is not None:
             agents.append(float(row["agents"]))
+        if row.get("core") is not None and row.get("links"):
+            values.setdefault("lean", []).append(2.0 * row["core"] / row["links"])
         m = (game or {}).get(row["t"], {}).get("mean")
         if row.get("gini") is not None and m is not None and random_gini(m) > 0:
             values.setdefault("gini_random", []).append(row["gini"] / random_gini(m))

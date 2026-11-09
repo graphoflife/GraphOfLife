@@ -740,6 +740,26 @@ def test_a_screen_draws_its_worlds_by_its_rules():
     assert len({json.dumps(w, sort_keys=True) for w in worlds}) == n
 
 
+def test_the_third_sampler_keeps_every_worlds_links_in_check():
+    """
+    The third sampler draws as the second does, but a world whose links may be kept by payment has
+    links that hold a token as well (the author, 2026-11-09: one of the rules that limits the links must
+    be on), so no world it draws can hold more links than tokens. Where links are kept only by the
+    tokens that cross them, whether they hold a token is still drawn.
+    """
+    import gol_screen
+    n = 400
+    worlds = [gol_screen.full(gol_screen.draw(3, 7, i)[0], 3) for i in range(1, n + 1)]
+    paid = [w for w in worlds if w["link_upkeep"] != "off"]
+    assert paid and all(w["link_token"] for w in paid), "a world could keep links by payment alone"
+    used = [w["link_token"] for w in worlds if w["link_upkeep"] == "off"]
+    assert True in used and False in used, "links that tokens must cross no longer draw whether they hold one"
+    assert {s[0] for s in gol_screen.space(3)} == {s[0] for s in gol_screen.space(2)}
+    # The second sampler is as it was: round 3 can be drawn again world for world.
+    assert any(not w["link_token"] and w["link_upkeep"] != "off"
+               for w in (gol_screen.full(gol_screen.draw(2, 7, i)[0], 2) for i in range(1, n + 1)))
+
+
 def test_the_second_sampler_draws_the_authors_choices():
     """
     The author's walkthrough of 2026-10-24: tanh brains of three to five layers, mixing in one world
