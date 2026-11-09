@@ -800,7 +800,7 @@ def piece_figures(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
     numbers["random_tree"] = {"members": TREE, "seed": TREE_SEED,
                               "at_least": {str(x): float(np.mean(tree >= x)) for x in (2, 10, 100, 1000, 10000)}}
     for key, title, what, per_what, unit in (
-            ("pieces", "The pieces one game cuts off", "pieces cut off", "per 1,000 agents and game", "per game"),
+            ("pieces", "The pieces one game cuts off", "pieces", "per 1,000 agents a game", "per game"),
             ("branches", "What hangs behind a bridge", "branches", "per 1,000 agents", "per world")):
         found = {t: (k.pieces() if key == "pieces" else k.network(key)) for t, k in kept.items()}
         s = np.geomspace(1, 1e5, 20)
@@ -810,7 +810,7 @@ def piece_figures(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
                      line(tree_s, tree_q * PER, f"a tree grown at random, {TREE:,} members", "#eef4fa", width=1,
                           dash=[5, 4]))
         raw = dict(title="As counted", x={"label": "size s, in agents (logarithmic)", "log": True, "min": 1, "max": 1e5},
-                   y={"label": f"{what} of s agents or more, {per_what}", "log": True, "min": 1e-5, "max": 1000},
+                   y={"label": f"{what} of s or more, {per_what}", "log": True, "min": 1e-5, "max": 1000},
                    series=size_lines(found, agents, legend=True) + [reference])
         scaled = dict(title="Rescaled by the size of the world",
                       x={"label": "x = s ÷ agents in the world (logarithmic)", "log": True, "min": 1e-5, "max": 1},
