@@ -241,28 +241,6 @@
     }
    },
    {
-    "name": "s3030",
-    "set": {
-     "random_input_amount": 10,
-     "hidden_activation": "tanh",
-     "hidden_layers": [
-      16,
-      16,
-      16,
-      16,
-      16
-     ],
-     "contest": "lottery",
-     "allow_revolutions": false,
-     "allow_handover": false,
-     "mutate_on_replication": true,
-     "mend_on_death": true,
-     "redistribution": "poorest",
-     "link_upkeep": "paid_only",
-     "upkeep_to": "estate"
-    }
-   },
-   {
     "name": "s3042",
     "set": {
      "message_amount": 16,
@@ -463,58 +441,6 @@
      "link_consent": "forced",
      "link_upkeep": "paid_or_used",
      "upkeep_to": "estate"
-    }
-   },
-   {
-    "name": "s3094",
-    "set": {
-     "message_amount": 8,
-     "random_input_amount": 2,
-     "self_message": "largest",
-     "hidden_activation": "tanh",
-     "hidden_layers": [
-      50,
-      50,
-      50
-     ],
-     "mutation_noise_std": 0.1,
-     "mutation_sparsity": 0.05,
-     "contest": "lottery",
-     "allow_revolutions": false,
-     "allow_handover": false,
-     "allow_gifting": true,
-     "mend_on_death": true,
-     "redistribution": "poorest",
-     "link_search": "jump",
-     "link_steering": "looking",
-     "link_upkeep": "paid_only",
-     "upkeep_to": "estate"
-    }
-   },
-   {
-    "name": "s3095",
-    "set": {
-     "message_amount": 8,
-     "random_input_amount": 2,
-     "message_prepass": false,
-     "self_message": "largest",
-     "hidden_activation": "tanh",
-     "hidden_layers": [
-      32,
-      32,
-      32
-     ],
-     "mutation_noise_std": 0.1,
-     "mutation_sparsity": 0.3,
-     "allow_revolutions": false,
-     "mutate_on_replication": true,
-     "mend_on_death": true,
-     "redistribution": "newborns",
-     "link_search": "walk",
-     "link_upkeep": "paid_only"
-    },
-    "world": {
-     "n_nodes": 250
     }
    },
    {
