@@ -1,0 +1,1449 @@
+{
+ "chapter": "localrules",
+ "numbers": {
+  "round": {
+   "drawn": 84,
+   "living": 70,
+   "mend": {
+    "drawn": [
+     49,
+     35
+    ],
+    "died": [
+     7,
+     7
+    ],
+    "worlds": [
+     42,
+     28
+    ],
+    "culled_tokens": {
+     "medians": [
+      0.03532952298850575,
+      0.11437285632183908
+     ],
+     "chance": 0.00044997750112494374
+    },
+    "culled_agents": {
+     "medians": [
+      0.049394440872690584,
+      0.134915616641129
+     ],
+     "chance": 0.0012999350032498376
+    },
+    "worst": {
+     "medians": [
+      0.5545662800841777,
+      0.690409235692784
+     ],
+     "chance": 0.0011499425028748563
+    },
+    "deaths": {
+     "medians": [
+      0.4233317719675612,
+      0.398427662203701
+     ],
+     "chance": 0.7719114044297785
+    },
+    "culled": {
+     "medians": [
+      0.10152445997560147,
+      0.24862151503039287
+     ],
+     "chance": 9.99950002499875e-05
+    },
+    "starved": {
+     "medians": [
+      0.3026128537255218,
+      0.1363444608629375
+     ],
+     "chance": 0.02709864506774661
+    },
+    "cull_share": {
+     "medians": [
+      0.3156473804762633,
+      0.5728886678950996
+     ],
+     "chance": 4.999750012499375e-05
+    },
+    "births": {
+     "medians": [
+      0.493978306824701,
+      0.5302257850761092
+     ],
+     "chance": 0.38553072346382683
+    },
+    "width": {
+     "medians": [
+      1.87276583509744,
+      2.5300478594096356
+     ],
+     "chance": 0.0008999550022498875
+    },
+    "dimension": {
+     "medians": [
+      3.134131483902718,
+      2.8962047722901394
+     ],
+     "chance": 0.1191940402979851
+    },
+    "agent_cut": {
+     "medians": [
+      0.11327067381886884,
+      0.1694297406349474
+     ],
+     "chance": 0.10654467276636168
+    },
+    "link_cut": {
+     "medians": [
+      0.07210540016180111,
+      0.13347899562052554
+     ],
+     "chance": 0.021498925053747314
+    },
+    "core": {
+     "medians": [
+      0.770506956627983,
+      0.7444982115360553
+     ],
+     "chance": 0.5235738213089346
+    },
+    "richest": {
+     "medians": [
+      0.011227310344827587,
+      0.0047902586206896546
+     ],
+     "chance": 0.044547772611369434
+    },
+    "hub": {
+     "medians": [
+      0.008745503158086036,
+      0.009836515977266948
+     ],
+     "chance": 0.44132793360331984
+    },
+    "gini": {
+     "medians": [
+      0.44510850290793613,
+      0.3720728554448577
+     ],
+     "chance": 0.03179841007949603
+    },
+    "agents": {
+     "medians": [
+      3465.25,
+      5393.25
+     ],
+     "chance": 0.049647517624118793
+    },
+    "effects": {
+     "culls": {
+      "worlds": 70,
+      "chance": 0.0004999750012499375,
+      "fdr": 0.012499375031248438,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.11437285632183908
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.03532952298850575
+       }
+      }
+     },
+     "health": {
+      "worlds": 70,
+      "chance": 0.03884805759712014,
+      "fdr": 0.19424028798560072,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.3662156144272528
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.42594494184306564
+       }
+      }
+     },
+     "c_space": {
+      "worlds": 70,
+      "chance": 0.007649617519124044,
+      "fdr": 0.1912404379781011,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.5596007376467693
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.4463920695302422
+       }
+      }
+     },
+     "c_diverse": {
+      "worlds": 70,
+      "chance": 0.004449777511124443,
+      "fdr": 0.05812209389530524,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.33230867912654116
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.48302414910150027
+       }
+      }
+     },
+     "gini": {
+      "worlds": 70,
+      "chance": 0.03329833508324584,
+      "fdr": 0.36373181340932953,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.3720728554448577
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.44510850290793613
+       }
+      }
+     },
+     "agents": {
+      "worlds": 70,
+      "chance": 0.04329783510824459,
+      "fdr": 0.2706114694265287,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 3.7352630898068213
+       },
+       "true": {
+        "worlds": 42,
+        "median": 3.54777176032506
+       }
+      }
+     },
+     "apart": {
+      "worlds": 70,
+      "chance": 0.0006999650017499125,
+      "fdr": 0.008749562521873906,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.28831901041666674
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.5978122395833334
+       }
+      }
+     },
+     "population": {
+      "worlds": 70,
+      "chance": 0.00039998000099995,
+      "fdr": 0.00999950002499875,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 1.038947326292684
+       },
+       "true": {
+        "worlds": 42,
+        "median": 1.5510657736485851
+       }
+      }
+     },
+     "novelty": {
+      "worlds": 70,
+      "chance": 0.0015999200039998,
+      "fdr": 0.039998000099995,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.050141724615690976
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.08637386194187266
+       }
+      }
+     },
+     "fertility": {
+      "worlds": 70,
+      "chance": 4.999750012499375e-05,
+      "fdr": 0.0012499375031248437,
+      "by": {
+       "false": {
+        "worlds": 28,
+        "median": 0.2838516138036865
+       },
+       "true": {
+        "worlds": 42,
+        "median": 0.06731582052151153
+       }
+      }
+     },
+     "died": {
+      "worlds": 84,
+      "chance": 0.559322033898305,
+      "fdr": 0.9109700764961752,
+      "by": {
+       "false": {
+        "worlds": 35,
+        "rate": 0.2
+       },
+       "true": {
+        "worlds": 49,
+        "rate": 0.14285714285714285
+       }
+      }
+     }
+    }
+   },
+   "local": {
+    "drawn": 13,
+    "died": 4,
+    "worlds": [
+     9,
+     61
+    ],
+    "culled_tokens": {
+     "medians": [
+      0.029245988505747125,
+      0.05584333333333333
+     ],
+     "chance": 0.1447927603619819
+    },
+    "culled_agents": {
+     "medians": [
+      0.05311636027998771,
+      0.06726592909441188
+     ],
+     "chance": 0.311934403279836
+    },
+    "worst": {
+     "medians": [
+      0.41425035360678925,
+      0.6454025516937968
+     ],
+     "chance": 0.1008449577521124
+    },
+    "deaths": {
+     "medians": [
+      0.2180731928221054,
+      0.42635814622723367
+     ],
+     "chance": 0.04739763011849408
+    },
+    "culled": {
+     "medians": [
+      0.11268354328551992,
+      0.1634296412569844
+     ],
+     "chance": 0.6541672916354182
+    },
+    "starved": {
+     "medians": [
+      0.10009918268586868,
+      0.1934133292995988
+     ],
+     "chance": 0.041647917604119795
+    },
+    "cull_share": {
+     "medians": [
+      0.5002134574660005,
+      0.4197785108916974
+     ],
+     "chance": 0.15014249287535622
+    },
+    "births": {
+     "medians": [
+      0.22725006784099158,
+      0.5609929855218813
+     ],
+     "chance": 0.041797910104494775
+    },
+    "width": {
+     "medians": [
+      1.485746966059624,
+      2.1569136292187605
+     ],
+     "chance": 0.2989850507474626
+    },
+    "dimension": {
+     "medians": [
+      4.057747925888026,
+      3.003957857481549
+     ],
+     "chance": 0.1568921553922304
+    },
+    "agent_cut": {
+     "medians": [
+      0.010302858193984504,
+      0.16439135406383337
+     ],
+     "chance": 0.08734563271836408
+    },
+    "link_cut": {
+     "medians": [
+      0.007986680337542072,
+      0.09887557746657442
+     ],
+     "chance": 0.17314134293285335
+    },
+    "core": {
+     "medians": [
+      0.8041735961683526,
+      0.7437433811806985
+     ],
+     "chance": 0.23888805559722015
+    },
+    "richest": {
+     "medians": [
+      0.026573597701149428,
+      0.006192172413793103
+     ],
+     "chance": 0.004449777511124443
+    },
+    "hub": {
+     "medians": [
+      0.016611582530039706,
+      0.008165362888264457
+     ],
+     "chance": 0.312234388280586
+    },
+    "gini": {
+     "medians": [
+      0.5347030178501094,
+      0.4094951106061856
+     ],
+     "chance": 0.0011499425028748563
+    },
+    "agents": {
+     "medians": [
+      3345.5,
+      4214.5
+     ],
+     "chance": 0.28993550322483874
+    },
+    "searching": {
+     "jump": {
+      "local": {
+       "worlds": 3,
+       "dimension": 2.8410788661221007,
+       "width": 2.510686888949902,
+       "gini": 0.6129233643639243,
+       "richest": 0.06841701149425287
+      },
+      "other": {
+       "worlds": 15,
+       "dimension": 2.969009546801051,
+       "width": 2.2686285597643954,
+       "gini": 0.3730461764990311,
+       "richest": 0.0044615632183908046
+      }
+     },
+     "reach": {
+      "local": {
+       "worlds": 5,
+       "dimension": 4.307089765665291,
+       "width": 1.174258389347432,
+       "gini": 0.48780190514231053,
+       "richest": 0.019656183908045976
+      },
+      "other": {
+       "worlds": 14,
+       "dimension": 3.02987345543149,
+       "width": 1.8782843747758746,
+       "gini": 0.42188758939489046,
+       "richest": 0.007562706896551723
+      }
+     }
+    },
+    "effects": {
+     "culls": {
+      "worlds": 70,
+      "chance": 0.4371281435928204,
+      "fdr": 0.810653911748857,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.03648116091954023
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.029245988505747125
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.06570744252873563
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.14437258620689658
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.09309629310344829
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.05584333333333333
+       }
+      }
+     },
+     "health": {
+      "worlds": 70,
+      "chance": 0.013749312534373281,
+      "fdr": 0.12041064613435996,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.39130246174423156
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.47010060172538104
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.44805326788243527
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.4029445595332049
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.3503545306414696
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.5172762939612494
+       }
+      }
+     },
+     "c_space": {
+      "worlds": 70,
+      "chance": 0.3158342082895855,
+      "fdr": 0.991350432478376,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.46421625147986045
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.17923095678901302
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.5822480827885592
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.5423745355594412
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.45864620436125914
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.545382433536534
+       }
+      }
+     },
+     "c_diverse": {
+      "worlds": 70,
+      "chance": 0.028598570071496424,
+      "fdr": 0.23832141726247022,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.4727059423002426
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.49801096665446126
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.4938605079892646
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.44332852995517874
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.2933775260835306
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.45782945330094743
+       }
+      }
+     },
+     "gini": {
+      "worlds": 70,
+      "chance": 9.99950002499875e-05,
+      "fdr": 0.0024998750062496873,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.45025697372977136
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.5347030178501094
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.4390240839105351
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.4150227880552583
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.3175794214675064
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.3551406999505679
+       }
+      }
+     },
+     "agents": {
+      "worlds": 70,
+      "chance": 0.0014499275036248187,
+      "fdr": 0.01812409379531023,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 3.4016589724951523
+       },
+       "local": {
+        "worlds": 9,
+        "median": 3.5356105459087925
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 3.525185643428194
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 3.521530341278711
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 3.8163652944919053
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 3.768268016451548
+       }
+      }
+     },
+     "apart": {
+      "worlds": 70,
+      "chance": 0.919954002299885,
+      "fdr": 0.9958002099895005,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.4205078125000001
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.3089807291666667
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.5837645833333334
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.39545364583333337
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.44039947916666666
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.32545208333333336
+       }
+      }
+     },
+     "population": {
+      "worlds": 70,
+      "chance": 0.7254137293135343,
+      "fdr": 0.9078712731030115,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 1.204027674501147
+       },
+       "local": {
+        "worlds": 9,
+        "median": 1.780065510723094
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 1.4078679220897943
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 1.0849521714764867
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 1.1791254872284436
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 1.2568288014191473
+       }
+      }
+     },
+     "novelty": {
+      "worlds": 70,
+      "chance": 0.3002349882505875,
+      "fdr": 0.6225522057230471,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.09227184331107258
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.07642616028865526
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.12175997005344485
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.06131996287415198
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.0761312593303499
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.07420522620052106
+       }
+      }
+     },
+     "fertility": {
+      "worlds": 70,
+      "chance": 0.15389230538473075,
+      "fdr": 0.7735327519338319,
+      "by": {
+       "children": {
+        "worlds": 13,
+        "median": 0.053435742342996376
+       },
+       "local": {
+        "worlds": 9,
+        "median": 0.09296907054027619
+       },
+       "newborns": {
+        "worlds": 10,
+        "median": 0.10906061586837285
+       },
+       "parents": {
+        "worlds": 9,
+        "median": 0.18509998045054216
+       },
+       "poorest": {
+        "worlds": 24,
+        "median": 0.19189293245822736
+       },
+       "uniform": {
+        "worlds": 5,
+        "median": 0.2463231134159515
+       }
+      }
+     },
+     "died": {
+      "worlds": 84,
+      "chance": 0.39683015849207537,
+      "fdr": 0.9109700764961752,
+      "by": {
+       "children": {
+        "worlds": 16,
+        "rate": 0.1875
+       },
+       "local": {
+        "worlds": 13,
+        "rate": 0.3076923076923077
+       },
+       "newborns": {
+        "worlds": 10,
+        "rate": 0.0
+       },
+       "parents": {
+        "worlds": 11,
+        "rate": 0.18181818181818182
+       },
+       "poorest": {
+        "worlds": 27,
+        "rate": 0.1111111111111111
+       },
+       "uniform": {
+        "worlds": 7,
+        "rate": 0.2857142857142857
+       }
+      }
+     }
+    }
+   },
+   "by_rule": {
+    "uniform": {
+     "worlds": 5,
+     "drawn": 7,
+     "died": 2,
+     "richest": 0.004752919540229885,
+     "gini": 0.3551406999505679,
+     "dimension": 2.976327959998575,
+     "width": 2.4259298608598914,
+     "agent_cut": 0.13946974066294054,
+     "culled_tokens": 0.05584333333333333,
+     "deaths": 0.3682367378685126,
+     "births": 0.4271984549780571
+    },
+    "poorest": {
+     "worlds": 24,
+     "drawn": 27,
+     "died": 3,
+     "richest": 0.004861902298850575,
+     "gini": 0.3175794214675064,
+     "dimension": 3.2840475411575825,
+     "width": 2.1204148600921546,
+     "agent_cut": 0.16640926304307135,
+     "culled_tokens": 0.09309629310344829,
+     "deaths": 0.5293262369613435,
+     "births": 0.5811230705073294
+    },
+    "newborns": {
+     "worlds": 10,
+     "drawn": 10,
+     "died": 0,
+     "richest": 0.007433747126436782,
+     "gini": 0.4390240839105351,
+     "dimension": 2.9214028351959436,
+     "width": 2.2995067961024676,
+     "agent_cut": 0.1420201748523426,
+     "culled_tokens": 0.06570744252873563,
+     "deaths": 0.5315457842315419,
+     "births": 0.6118982916068969
+    },
+    "parents": {
+     "worlds": 9,
+     "drawn": 11,
+     "died": 2,
+     "richest": 0.0044615632183908046,
+     "gini": 0.4150227880552583,
+     "dimension": 2.6891717348278283,
+     "width": 2.3801623102578797,
+     "agent_cut": 0.18716416239063519,
+     "culled_tokens": 0.14437258620689658,
+     "deaths": 0.4394274375698617,
+     "births": 0.6549357022318232
+    },
+    "children": {
+     "worlds": 13,
+     "drawn": 16,
+     "died": 3,
+     "richest": 0.008933241379310343,
+     "gini": 0.45025697372977136,
+     "dimension": 2.890998464677669,
+     "width": 2.0192126770686154,
+     "agent_cut": 0.12445985800887148,
+     "culled_tokens": 0.03648116091954023,
+     "deaths": 0.27338880647954766,
+     "births": 0.2843063943183874
+    },
+    "local": {
+     "worlds": 9,
+     "drawn": 13,
+     "died": 4,
+     "richest": 0.026573597701149428,
+     "gini": 0.5347030178501094,
+     "dimension": 4.057747925888026,
+     "width": 1.485746966059624,
+     "agent_cut": 0.010302858193984504,
+     "culled_tokens": 0.029245988505747125,
+     "deaths": 0.2180731928221054,
+     "births": 0.22725006784099158
+    }
+   },
+   "rule_tests": {
+    "richest": 0.050997450127493626,
+    "dimension": 0.16619169041547924,
+    "width": 0.7191640417979102,
+    "agent_cut": 0.32843357832108394,
+    "deaths": 0.0503974801259937,
+    "births": 0.07029648517574122
+   },
+   "died_all": 14
+  },
+  "table:candidates": {
+   "head": [
+    "world",
+    "health's place (product)",
+    "estates of the dead go",
+    "mends its dead",
+    "search",
+    "tokens culled a game",
+    "worst game culled",
+    "agents",
+    "hours for 3,000 iterations"
+   ],
+   "rows": [
+    [
+     {
+      "text": "s3042",
+      "href": "run:B1-30000-b82ad0-s3042"
+     },
+     1,
+     "evenly over all",
+     "yes",
+     "jump",
+     "5.6%",
+     "53%",
+     "11,604",
+     "9.4"
+    ],
+    [
+     {
+      "text": "s3018",
+      "href": "run:B1-30000-af1e28-s3018"
+     },
+     3,
+     "to the dead's children",
+     "yes",
+     "reach",
+     "4.2%",
+     "47%",
+     "3,021",
+     "3.8"
+    ],
+    [
+     {
+      "text": "s3080",
+      "href": "run:B1-30000-625bc7-s3080"
+     },
+     4,
+     "to the dead's children",
+     "yes",
+     "jump",
+     "1.9%",
+     "60%",
+     "1,900",
+     "0.8"
+    ],
+    [
+     {
+      "text": "s3057",
+      "href": "run:B1-30000-38aee9-s3057"
+     },
+     5,
+     "to the newborns",
+     "no",
+     "reach",
+     "12.7%",
+     "66%",
+     "5,010",
+     "2.5"
+    ],
+    [
+     {
+      "text": "s3026",
+      "href": "run:B1-30000-d6955f-s3026"
+     },
+     27,
+     "to the newborns",
+     "yes",
+     "off",
+     "12.4%",
+     "63%",
+     "1,876",
+     "1.6"
+    ],
+    [
+     {
+      "text": "s3004",
+      "href": "run:B1-30000-7d5208-s3004"
+     },
+     16,
+     "evenly over all",
+     "yes",
+     "off",
+     "0.3%",
+     "41%",
+     "1,610",
+     "0.6"
+    ]
+   ]
+  },
+  "candidates": {
+   "s3042": {
+    "hours": 9.353907694444418,
+    "agents": 11604.0,
+    "worst": 0.5288432267884323,
+    "culled_tokens": 0.05584333333333333,
+    "rank": 1
+   },
+   "s3018": {
+    "hours": 3.751428083333329,
+    "agents": 3021.0,
+    "worst": 0.4729327781082689,
+    "culled_tokens": 0.0419817356321839,
+    "rank": 3
+   },
+   "s3080": {
+    "hours": 0.801068416666668,
+    "agents": 1900.5,
+    "worst": 0.6007005253940455,
+    "culled_tokens": 0.018973793103448277,
+    "rank": 4
+   },
+   "s3057": {
+    "hours": 2.5151570833333423,
+    "agents": 5010.5,
+    "worst": 0.6577385481661847,
+    "culled_tokens": 0.12731501149425287,
+    "rank": 5
+   },
+   "s3026": {
+    "hours": 1.6167481944444477,
+    "agents": 1875.5,
+    "worst": 0.6308029837648091,
+    "culled_tokens": 0.12369226436781611,
+    "rank": 27
+   },
+   "s3004": {
+    "hours": 0.6477847222222227,
+    "agents": 1610.0,
+    "worst": 0.4079397672826831,
+    "culled_tokens": 0.003414793103448276,
+    "rank": 16
+   }
+  },
+  "table:cone": {
+   "head": [
+    "world",
+    "talks before it acts",
+    "search",
+    "stakes placed",
+    "estates of the dead go",
+    "upkeep into the estate",
+    "how far a difference can go in a phase, once the three rules are local"
+   ],
+   "rows": [
+    [
+     {
+      "text": "s3042",
+      "href": "run:B1-30000-b82ad0-s3042"
+     },
+     "no",
+     "jump",
+     "all at once",
+     "evenly over all",
+     "no",
+     "none: a search that jumps, a mate's child, wherever it is"
+    ],
+    [
+     {
+      "text": "s4006",
+      "href": "run:B1-30000-8526cf-s4006"
+     },
+     "no",
+     "off",
+     "strongest first",
+     "to the poorest",
+     "yes",
+     "none: stakes placed in rounds, upkeep paid into the estate"
+    ],
+    [
+     {
+      "text": "s3018",
+      "href": "run:B1-30000-af1e28-s3018"
+     },
+     "yes",
+     "reach",
+     "all at once",
+     "to the dead's children",
+     "no",
+     "none: a search that reaches, a mate's child, wherever it is"
+    ],
+    [
+     {
+      "text": "s3080",
+      "href": "run:B1-30000-625bc7-s3080"
+     },
+     "yes",
+     "jump",
+     "all at once",
+     "to the dead's children",
+     "no",
+     "none: a search that jumps"
+    ],
+    [
+     {
+      "text": "s3057",
+      "href": "run:B1-30000-38aee9-s3057"
+     },
+     "yes",
+     "reach",
+     "all at once",
+     "to the newborns",
+     "no",
+     "none: a search that reaches, a mate's child, wherever it is"
+    ],
+    [
+     {
+      "text": "s4002",
+      "href": "run:B1-30000-5379e2-s4002"
+     },
+     "yes",
+     "reach",
+     "weakest first",
+     "to the parents",
+     "no",
+     "none: stakes placed in rounds, a search that reaches, a mate's child, wherever it is"
+    ],
+    [
+     {
+      "text": "s3008",
+      "href": "run:B1-30000-e19f2d-s3008"
+     },
+     "no",
+     "jump",
+     "all at once",
+     "to the newborns",
+     "no",
+     "none: a search that jumps"
+    ],
+    [
+     {
+      "text": "s3024",
+      "href": "run:B1-30000-f05874-s3024"
+     },
+     "no",
+     "off",
+     "all at once",
+     "to the poorest",
+     "no",
+     "3 steps"
+    ],
+    [
+     {
+      "text": "s3022",
+      "href": "run:B1-30000-298337-s3022"
+     },
+     "no",
+     "walk",
+     "all at once",
+     "evenly over all",
+     "no",
+     "none: a scout that walks"
+    ],
+    [
+     {
+      "text": "s3051",
+      "href": "run:B1-30000-b5a76a-s3051"
+     },
+     "yes",
+     "walk",
+     "all at once",
+     "to the dead's children",
+     "yes",
+     "none: a scout that walks, upkeep paid into the estate"
+    ],
+    [
+     {
+      "text": "s4008",
+      "href": "run:B1-30000-1cfaa4-s4008"
+     },
+     "no",
+     "off",
+     "weakest first",
+     "to the parents",
+     "no",
+     "none: stakes placed in rounds"
+    ],
+    [
+     {
+      "text": "s3054",
+      "href": "run:B1-30000-d9254e-s3054"
+     },
+     "yes",
+     "walk",
+     "all at once",
+     "to the parents",
+     "no",
+     "none: a scout that walks"
+    ],
+    [
+     {
+      "text": "s3087",
+      "href": "run:B1-30000-363694-s3087"
+     },
+     "no",
+     "jump",
+     "all at once",
+     "to the parents",
+     "yes",
+     "none: a search that jumps, upkeep paid into the estate"
+    ],
+    [
+     {
+      "text": "s3004",
+      "href": "run:B1-30000-7d5208-s3004"
+     },
+     "no",
+     "off",
+     "all at once",
+     "evenly over all",
+     "no",
+     "3 steps"
+    ],
+    [
+     {
+      "text": "s3023",
+      "href": "run:B1-30000-b0f6e3-s3023"
+     },
+     "yes",
+     "off",
+     "all at once",
+     "to the parents",
+     "no",
+     "4 steps"
+    ],
+    [
+     {
+      "text": "s3058",
+      "href": "run:B1-30000-4108dd-s3058"
+     },
+     "no",
+     "walk",
+     "all at once",
+     "to the dead's children",
+     "no",
+     "none: a scout that walks"
+    ],
+    [
+     {
+      "text": "s3045",
+      "href": "run:B1-30000-f6d23f-s3045"
+     },
+     "no",
+     "walk",
+     "all at once",
+     "to the parents",
+     "no",
+     "none: a scout that walks"
+    ],
+    [
+     {
+      "text": "s3019",
+      "href": "run:B1-30000-b1209a-s3019"
+     },
+     "yes",
+     "reach",
+     "all at once",
+     "to the dead's children",
+     "no",
+     "none: a search that reaches"
+    ],
+    [
+     {
+      "text": "s3026",
+      "href": "run:B1-30000-d6955f-s3026"
+     },
+     "yes",
+     "off",
+     "all at once",
+     "to the newborns",
+     "no",
+     "4 steps"
+    ],
+    [
+     {
+      "text": "s3016",
+      "href": "run:B1-30000-b23381-s3016"
+     },
+     "no",
+     "reach",
+     "all at once",
+     "to the dead's children",
+     "yes",
+     "none: a search that reaches, upkeep paid into the estate"
+    ],
+    [
+     {
+      "text": "s3030",
+      "href": "run:B1-30000-90fc91-s3030"
+     },
+     "yes",
+     "off",
+     "all at once",
+     "to the poorest",
+     "yes",
+     "none: upkeep paid into the estate"
+    ],
+    [
+     {
+      "text": "s3095",
+      "href": "run:B1-30000-3e5856-s3095"
+     },
+     "no",
+     "walk",
+     "all at once",
+     "to the newborns",
+     "no",
+     "none: a scout that walks"
+    ],
+    [
+     {
+      "text": "s3094",
+      "href": "run:B1-30000-4ac946-s3094"
+     },
+     "yes",
+     "jump",
+     "all at once",
+     "to the poorest",
+     "yes",
+     "none: a search that jumps, upkeep paid into the estate"
+    ],
+    [
+     {
+      "text": "s4004",
+      "href": "run:B1-30000-17ac6e-s4004"
+     },
+     "yes",
+     "walk",
+     "weakest first",
+     "to the newborns",
+     "no",
+     "none: stakes placed in rounds, a scout that walks, a mate's child, wherever it is"
+    ]
+   ]
+  },
+  "cone": {
+   "shortlist": 24,
+   "kept": 4,
+   "by_reason": {
+    "rounds": 4,
+    "jump": 5,
+    "reach": 5,
+    "walk": 7,
+    "mates": 5,
+    "estate": 6
+   }
+  },
+  "table:flow": {
+   "head": [
+    "world",
+    "agents",
+    "links per agent",
+    "tokens per agent",
+    "tokens a game's cleanup shares out",
+    "inflow a phase, to feed as many agents",
+    "hours for 3,000 iterations"
+   ],
+   "rows": [
+    [
+     {
+      "text": "s3026",
+      "href": "run:B1-30000-d6955f-s3026"
+     },
+     "1,876",
+     "3.33",
+     "16.0",
+     "9.7%",
+     "938",
+     "1.6"
+    ],
+    [
+     {
+      "text": "s3004",
+      "href": "run:B1-30000-7d5208-s3004"
+     },
+     "1,610",
+     "5.79",
+     "15.7",
+     "0.09%",
+     "805",
+     "0.6"
+    ],
+    [
+     {
+      "text": "s3080",
+      "href": "run:B1-30000-625bc7-s3080"
+     },
+     "1,900",
+     "3.36",
+     "14.0",
+     "1.4%",
+     "950",
+     "0.8"
+    ]
+   ]
+  },
+  "flow": {
+   "s3026": {
+    "agents": 1875.5,
+    "links": 3.326323681347316,
+    "tokens_each": 15.995735607675906,
+    "median_tokens": 9.0,
+    "shared": 0.09723333333333334,
+    "inflow": 938,
+    "hours": 1.6167481944444477,
+    "seconds_per_iteration": 1.9400978333333372,
+    "entropy": 7.536630569521942
+   },
+   "s3004": {
+    "agents": 1610.0,
+    "links": 5.7939345154461686,
+    "tokens_each": 15.74453222534332,
+    "median_tokens": 11.0,
+    "shared": 0.0009488042315981054,
+    "inflow": 805,
+    "hours": 0.6477847222222227,
+    "seconds_per_iteration": 0.7773416666666673,
+    "entropy": 7.383989457978509
+   },
+   "s3080": {
+    "agents": 1900.5,
+    "links": 3.3596522553684274,
+    "tokens_each": 14.013957193646739,
+    "median_tokens": 9.0,
+    "shared": 0.014273031318609195,
+    "inflow": 950,
+    "hours": 0.801068416666668,
+    "seconds_per_iteration": 0.9612821000000016,
+    "entropy": 7.549872288429303
+   }
+  }
+ },
+ "figures": {
+  "roundthree": {
+   "title": "What round 3 says about a local repair and a local share-out",
+   "caption": "Each dot is one of the 70 worlds of Experiment 40 that lived to the end of their 3,000 iterations, read from iteration 100 on; the short bar is the median of a column. Top left, on a logarithmic axis: the share of all the world's tokens a game culls, the tokens of agents cut off from the largest piece of the network, for the worlds drawn with mending (a dying agent's former neighbours joined up again in a ring) and those without. Top right: the most of its agents a single game culled. Bottom left: how wide the world is, its typical distance over that of a random network with the same links (on the dashed line, no wider than one). Bottom right, on a logarithmic axis: what the richest agent holds, by where each world's rule sends the tokens of the dead: evenly over all, to the poorest, to this iteration's newborns, to their parents, to the dead agent's own children, or to the nearest living. Every other setting of each world was drawn at random too, so each column mixes many kinds of world.",
+   "recipe": "**Runs.** the worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiment 40: 30,000 tokens, every setting drawn at random)\n\n**Data.** From each world's averages over iterations 100 to the end, `research/screen/health.json` (from the screen's readings, `research/screen/measures.py`), and each run's own statistics, `GraphOfLifeRuns/<run>/stats.jsonl` (`nodes_before`, `starved`, `orphaned`).\n\n1. Read each living world's averages from `health.json`: `culled_tokens` (the share of all tokens a game's cleanup shares out, every one a culled agent's), `width` and `richest`.\n2. From its `stats.jsonl`, for every game from iteration 100 on, `orphaned` over `nodes_before`: the share of the agents the game culled. Keep the largest.\n3. Group the worlds by their drawn `mend_on_death`, and by `redistribution`.\n4. One dot per world; the bar is the median.\n\n**To make it again:** `python3 book_figures.py localrules`."
+  }
+ }
+}
