@@ -1,0 +1,5211 @@
+{
+ "chapter": "assembly",
+ "numbers": {
+  "floor": {
+   "shapes_on": 14920,
+   "shapes_off": 1657,
+   "agents_on": 987042,
+   "agents_off": 12040,
+   "unsure_shapes": 20462,
+   "off": [
+    [
+     8,
+     4,
+     137,
+     3909
+    ],
+    [
+     12,
+     5,
+     85,
+     1017
+    ],
+    [
+     15,
+     6,
+     192,
+     904
+    ],
+    [
+     16,
+     5,
+     673,
+     1059
+    ],
+    [
+     16,
+     6,
+     76,
+     600
+    ],
+    [
+     17,
+     6,
+     98,
+     352
+    ],
+    [
+     18,
+     6,
+     4,
+     9
+    ],
+    [
+     20,
+     6,
+     62,
+     531
+    ],
+    [
+     23,
+     7,
+     49,
+     519
+    ],
+    [
+     24,
+     6,
+     39,
+     294
+    ],
+    [
+     24,
+     7,
+     30,
+     312
+    ],
+    [
+     25,
+     7,
+     34,
+     289
+    ],
+    [
+     27,
+     7,
+     30,
+     381
+    ],
+    [
+     28,
+     7,
+     22,
+     322
+    ],
+    [
+     30,
+     7,
+     23,
+     365
+    ],
+    [
+     32,
+     6,
+     10,
+     57
+    ],
+    [
+     32,
+     7,
+     34,
+     372
+    ],
+    [
+     33,
+     7,
+     16,
+     139
+    ],
+    [
+     33,
+     8,
+     4,
+     112
+    ],
+    [
+     34,
+     7,
+     15,
+     134
+    ],
+    [
+     36,
+     7,
+     9,
+     144
+    ],
+    [
+     39,
+     8,
+     6,
+     134
+    ],
+    [
+     40,
+     7,
+     6,
+     49
+    ],
+    [
+     40,
+     8,
+     3,
+     36
+    ]
+   ]
+  },
+  "shares": {
+   "B1-100000-s001": {
+    "small": {
+     "farther": 96934,
+     "pairs": 97528,
+     "two apart": 440,
+     "neighbours": 129,
+     "parent and child": 69,
+     "twins": 25
+    },
+    "large": {
+     "farther": 64,
+     "pairs": 68,
+     "neighbours": 2,
+     "parent and child": 1,
+     "two apart": 2
+    },
+    "same": {
+     "linked twins counted once": 198,
+     "of them a parent and its child": 149
+    }
+   },
+   "B1-30000-b82ad0-s3042": {
+    "small": {
+     "farther": 306756,
+     "pairs": 308099,
+     "two apart": 981,
+     "neighbours": 360,
+     "parent and child": 59,
+     "twins": 2
+    },
+    "large": {
+     "farther": 87,
+     "pairs": 99,
+     "two apart": 11,
+     "neighbours": 1
+    },
+    "same": {
+     "linked twins counted once": 73,
+     "of them a parent and its child": 41
+    }
+   }
+  },
+  "depths": {
+   "B1-100000-s001": {
+    "key": {
+     "iteration": 1500,
+     "every": 100,
+     "version": 1
+    },
+    "points": [
+     {
+      "t": 0,
+      "agents": 1389,
+      "genotypes": 985,
+      "median_depth": 0.0,
+      "max_depth": 2.0,
+      "shared": 0.46724262059035276,
+      "most_copies": 6,
+      "top_shared_depth": 1,
+      "log10_A": -0.4907700572115961,
+      "top_term": 0.01211692135318985
+     },
+     {
+      "t": 100,
+      "agents": 16099,
+      "genotypes": 8568,
+      "median_depth": 20.0,
+      "max_depth": 32.0,
+      "shared": 0.5692900180135412,
+      "most_copies": 346,
+      "top_shared_depth": 32,
+      "log10_A": 11.177435657620066,
+      "top_term": 0.19800002626321647
+     },
+     {
+      "t": 200,
+      "agents": 18189,
+      "genotypes": 10243,
+      "median_depth": 40.0,
+      "max_depth": 56.0,
+      "shared": 0.53686293913904,
+      "most_copies": 334,
+      "top_shared_depth": 55,
+      "log10_A": 20.59871593188872,
+      "top_term": 0.5328951334663099
+     },
+     {
+      "t": 300,
+      "agents": 19389,
+      "genotypes": 11613,
+      "median_depth": 58.0,
+      "max_depth": 84.0,
+      "shared": 0.5114240033008407,
+      "most_copies": 191,
+      "top_shared_depth": 83,
+      "log10_A": 32.19960218820215,
+      "top_term": 0.3624802920863296
+     },
+     {
+      "t": 400,
+      "agents": 18426,
+      "genotypes": 10892,
+      "median_depth": 77.0,
+      "max_depth": 100.0,
+      "shared": 0.520134592423749,
+      "most_copies": 312,
+      "top_shared_depth": 99,
+      "log10_A": 39.34463099926992,
+      "top_term": 0.48542443968509436
+     },
+     {
+      "t": 500,
+      "agents": 15889,
+      "genotypes": 9429,
+      "median_depth": 99.0,
+      "max_depth": 123.0,
+      "shared": 0.5436465479262382,
+      "most_copies": 246,
+      "top_shared_depth": 122,
+      "log10_A": 49.37619213861651,
+      "top_term": 0.2814912252170645
+     },
+     {
+      "t": 600,
+      "agents": 18669,
+      "genotypes": 11719,
+      "median_depth": 117.0,
+      "max_depth": 143.0,
+      "shared": 0.5277733140500295,
+      "most_copies": 127,
+      "top_shared_depth": 143,
+      "log10_A": 58.416551806559475,
+      "top_term": 0.5217567131130382
+     },
+     {
+      "t": 700,
+      "agents": 15789,
+      "genotypes": 9866,
+      "median_depth": 135.0,
+      "max_depth": 169.0,
+      "shared": 0.5320159604788144,
+      "most_copies": 63,
+      "top_shared_depth": 166,
+      "log10_A": 68.60985311112965,
+      "top_term": 0.5778265790634303
+     },
+     {
+      "t": 800,
+      "agents": 13852,
+      "genotypes": 7994,
+      "median_depth": 143.0,
+      "max_depth": 185.0,
+      "shared": 0.5687987294253537,
+      "most_copies": 230,
+      "top_shared_depth": 185,
+      "log10_A": 76.67747088927396,
+      "top_term": 0.493470606820634
+     },
+     {
+      "t": 900,
+      "agents": 21023,
+      "genotypes": 13099,
+      "median_depth": 159.0,
+      "max_depth": 195.0,
+      "shared": 0.5372687057032773,
+      "most_copies": 107,
+      "top_shared_depth": 189,
+      "log10_A": 78.00669496850175,
+      "top_term": 0.5652849471828707
+     },
+     {
+      "t": 1000,
+      "agents": 19666,
+      "genotypes": 12474,
+      "median_depth": 178.0,
+      "max_depth": 210.0,
+      "shared": 0.5257296857520594,
+      "most_copies": 68,
+      "top_shared_depth": 208,
+      "log10_A": 86.77454617375082,
+      "top_term": 0.1840729732322191
+     },
+     {
+      "t": 1100,
+      "agents": 18007,
+      "genotypes": 11499,
+      "median_depth": 194.0,
+      "max_depth": 230.0,
+      "shared": 0.5213528072416282,
+      "most_copies": 95,
+      "top_shared_depth": 229,
+      "log10_A": 96.18380661093921,
+      "top_term": 0.2660675670778638
+     },
+     {
+      "t": 1200,
+      "agents": 17175,
+      "genotypes": 10936,
+      "median_depth": 212.0,
+      "max_depth": 254.0,
+      "shared": 0.5347307132459971,
+      "most_copies": 90,
+      "top_shared_depth": 254,
+      "log10_A": 106.28265511850739,
+      "top_term": 0.6212215876432579
+     },
+     {
+      "t": 1300,
+      "agents": 16195,
+      "genotypes": 10381,
+      "median_depth": 227.0,
+      "max_depth": 264.0,
+      "shared": 0.5293609138623032,
+      "most_copies": 74,
+      "top_shared_depth": 264,
+      "log10_A": 110.44505968971967,
+      "top_term": 0.9983954207245246
+     },
+     {
+      "t": 1400,
+      "agents": 16007,
+      "genotypes": 9906,
+      "median_depth": 247.0,
+      "max_depth": 287.0,
+      "shared": 0.5483226088586244,
+      "most_copies": 129,
+      "top_shared_depth": 286,
+      "log10_A": 120.58234426746274,
+      "top_term": 0.29133615537073254
+     },
+     {
+      "t": 1499,
+      "agents": 14870,
+      "genotypes": 9392,
+      "median_depth": 262.0,
+      "max_depth": 305.0,
+      "shared": 0.5476126429051782,
+      "most_copies": 29,
+      "top_shared_depth": 304,
+      "log10_A": 128.38137201489255,
+      "top_term": 0.5927471995757085
+     }
+    ],
+    "parents_unseen": 52,
+    "genotypes": 5366897
+   },
+   "B2-10000-s001": {
+    "key": {
+     "iteration": 2000,
+     "every": 100,
+     "version": 1
+    },
+    "points": [
+     {
+      "t": 0,
+      "agents": 170,
+      "genotypes": 109,
+      "median_depth": 0.0,
+      "max_depth": 1.0,
+      "shared": 0.6764705882352942,
+      "most_copies": 3,
+      "top_shared_depth": 1,
+      "log10_A": -0.3987510612268515,
+      "top_term": 0.040049456037145256
+     },
+     {
+      "t": 100,
+      "agents": 2544,
+      "genotypes": 1211,
+      "median_depth": 9.0,
+      "max_depth": 22.0,
+      "shared": 0.7287735849056604,
+      "most_copies": 18,
+      "top_shared_depth": 20,
+      "log10_A": 6.675038022414785,
+      "top_term": 0.28211913830998897
+     },
+     {
+      "t": 200,
+      "agents": 2994,
+      "genotypes": 1362,
+      "median_depth": 22.0,
+      "max_depth": 36.0,
+      "shared": 0.7598530394121576,
+      "most_copies": 31,
+      "top_shared_depth": 35,
+      "log10_A": 12.753825744865246,
+      "top_term": 0.18674944568558535
+     },
+     {
+      "t": 300,
+      "agents": 2635,
+      "genotypes": 1243,
+      "median_depth": 30.0,
+      "max_depth": 48.0,
+      "shared": 0.7510436432637572,
+      "most_copies": 17,
+      "top_shared_depth": 48,
+      "log10_A": 18.07403090404226,
+      "top_term": 0.22455545405149727
+     },
+     {
+      "t": 400,
+      "agents": 2937,
+      "genotypes": 1367,
+      "median_depth": 36.0,
+      "max_depth": 58.0,
+      "shared": 0.7565543071161048,
+      "most_copies": 27,
+      "top_shared_depth": 57,
+      "log10_A": 22.026079222712298,
+      "top_term": 0.36461312247295374
+     },
+     {
+      "t": 500,
+      "agents": 2865,
+      "genotypes": 1322,
+      "median_depth": 43.0,
+      "max_depth": 70.0,
+      "shared": 0.7664921465968586,
+      "most_copies": 15,
+      "top_shared_depth": 68,
+      "log10_A": 27.109342052208454,
+      "top_term": 0.203898888990492
+     },
+     {
+      "t": 600,
+      "agents": 3054,
+      "genotypes": 1355,
+      "median_depth": 46.0,
+      "max_depth": 85.0,
+      "shared": 0.7881466928618206,
+      "most_copies": 16,
+      "top_shared_depth": 82,
+      "log10_A": 32.78178905231876,
+      "top_term": 0.3260280304933734
+     },
+     {
+      "t": 700,
+      "agents": 3302,
+      "genotypes": 1505,
+      "median_depth": 50.0,
+      "max_depth": 86.0,
+      "shared": 0.7722592368261659,
+      "most_copies": 19,
+      "top_shared_depth": 85,
+      "log10_A": 34.10107878227801,
+      "top_term": 0.789287276443466
+     },
+     {
+      "t": 800,
+      "agents": 3467,
+      "genotypes": 1517,
+      "median_depth": 55.0,
+      "max_depth": 95.0,
+      "shared": 0.7871358523218921,
+      "most_copies": 14,
+      "top_shared_depth": 95,
+      "log10_A": 38.73976514076933,
+      "top_term": 0.4755835263044762
+     },
+     {
+      "t": 900,
+      "agents": 3560,
+      "genotypes": 1632,
+      "median_depth": 62.0,
+      "max_depth": 112.0,
+      "shared": 0.7665730337078651,
+      "most_copies": 15,
+      "top_shared_depth": 112,
+      "log10_A": 45.5305804561536,
+      "top_term": 0.7244051258590759
+     },
+     {
+      "t": 1000,
+      "agents": 3596,
+      "genotypes": 1653,
+      "median_depth": 67.0,
+      "max_depth": 125.0,
+      "shared": 0.7744716351501668,
+      "most_copies": 14,
+      "top_shared_depth": 125,
+      "log10_A": 51.318792164360325,
+      "top_term": 0.2583440064894678
+     },
+     {
+      "t": 1100,
+      "agents": 3679,
+      "genotypes": 1693,
+      "median_depth": 73.0,
+      "max_depth": 142.0,
+      "shared": 0.773579777113346,
+      "most_copies": 15,
+      "top_shared_depth": 141,
+      "log10_A": 57.92303962826692,
+      "top_term": 0.5581520603954502
+     },
+     {
+      "t": 1200,
+      "agents": 3680,
+      "genotypes": 1683,
+      "median_depth": 76.0,
+      "max_depth": 155.0,
+      "shared": 0.7703804347826086,
+      "most_copies": 17,
+      "top_shared_depth": 155,
+      "log10_A": 64.20804761869631,
+      "top_term": 0.6962725171417549
+     },
+     {
+      "t": 1300,
+      "agents": 3753,
+      "genotypes": 1722,
+      "median_depth": 80.0,
+      "max_depth": 167.0,
+      "shared": 0.7703170796695976,
+      "most_copies": 13,
+      "top_shared_depth": 166,
+      "log10_A": 69.4611147862974,
+      "top_term": 0.45651035867555934
+     },
+     {
+      "t": 1400,
+      "agents": 3730,
+      "genotypes": 1679,
+      "median_depth": 86.0,
+      "max_depth": 181.0,
+      "shared": 0.7718498659517427,
+      "most_copies": 17,
+      "top_shared_depth": 178,
+      "log10_A": 74.03232651885008,
+      "top_term": 0.5016287600873425
+     },
+     {
+      "t": 1500,
+      "agents": 3592,
+      "genotypes": 1627,
+      "median_depth": 91.0,
+      "max_depth": 179.0,
+      "shared": 0.7711581291759465,
+      "most_copies": 14,
+      "top_shared_depth": 178,
+      "log10_A": 74.8102301737961,
+      "top_term": 0.8686629069996044
+     },
+     {
+      "t": 1600,
+      "agents": 3651,
+      "genotypes": 1633,
+      "median_depth": 96.0,
+      "max_depth": 178.0,
+      "shared": 0.7871815940838126,
+      "most_copies": 17,
+      "top_shared_depth": 178,
+      "log10_A": 74.46795596796639,
+      "top_term": 0.5638599293392756
+     },
+     {
+      "t": 1700,
+      "agents": 3649,
+      "genotypes": 1680,
+      "median_depth": 104.0,
+      "max_depth": 185.0,
+      "shared": 0.7689778021375719,
+      "most_copies": 15,
+      "top_shared_depth": 183,
+      "log10_A": 75.99426488334358,
+      "top_term": 0.830713831496786
+     },
+     {
+      "t": 1800,
+      "agents": 3772,
+      "genotypes": 1743,
+      "median_depth": 113.0,
+      "max_depth": 187.0,
+      "shared": 0.7560975609756098,
+      "most_copies": 17,
+      "top_shared_depth": 185,
+      "log10_A": 77.28178009679229,
+      "top_term": 0.6125723175207345
+     },
+     {
+      "t": 1900,
+      "agents": 3644,
+      "genotypes": 1666,
+      "median_depth": 120.0,
+      "max_depth": 195.0,
+      "shared": 0.7777167947310648,
+      "most_copies": 14,
+      "top_shared_depth": 194,
+      "log10_A": 81.18717281995617,
+      "top_term": 0.9582957359177675
+     },
+     {
+      "t": 1999,
+      "agents": 3546,
+      "genotypes": 1649,
+      "median_depth": 124.0,
+      "max_depth": 200.0,
+      "shared": 0.7538071065989848,
+      "most_copies": 14,
+      "top_shared_depth": 198,
+      "log10_A": 83.20784838756587,
+      "top_term": 0.31433722904728867
+     }
+    ],
+    "parents_unseen": 0,
+    "genotypes": 121070
+   },
+   "B1-30000-b82ad0-s3042": {
+    "key": {
+     "iteration": 3000,
+     "every": 250,
+     "version": 1
+    },
+    "points": [
+     {
+      "t": 0,
+      "agents": 235,
+      "genotypes": 176,
+      "median_depth": 1.0,
+      "max_depth": 2.0,
+      "shared": 0.41702127659574467,
+      "most_copies": 5,
+      "top_shared_depth": 1,
+      "log10_A": -0.3208167633143496,
+      "top_term": 0.09685083609949786
+     },
+     {
+      "t": 250,
+      "agents": 11273,
+      "genotypes": 8450,
+      "median_depth": 8.0,
+      "max_depth": 52.0,
+      "shared": 0.4057482480262574,
+      "most_copies": 11,
+      "top_shared_depth": 48,
+      "log10_A": 17.49516616369353,
+      "top_term": 0.9951750172230446
+     },
+     {
+      "t": 500,
+      "agents": 7499,
+      "genotypes": 5261,
+      "median_depth": 11.0,
+      "max_depth": 77.0,
+      "shared": 0.46886251500200027,
+      "most_copies": 15,
+      "top_shared_depth": 75,
+      "log10_A": 29.03388276376536,
+      "top_term": 0.9209372105731413
+     },
+     {
+      "t": 750,
+      "agents": 10709,
+      "genotypes": 7967,
+      "median_depth": 9.0,
+      "max_depth": 142.0,
+      "shared": 0.4119899150247455,
+      "most_copies": 21,
+      "top_shared_depth": 141,
+      "log10_A": 57.20577302979166,
+      "top_term": 1.0
+     },
+     {
+      "t": 1000,
+      "agents": 11916,
+      "genotypes": 8949,
+      "median_depth": 8.0,
+      "max_depth": 84.0,
+      "shared": 0.40558912386706947,
+      "most_copies": 18,
+      "top_shared_depth": 83,
+      "log10_A": 32.36880960841146,
+      "top_term": 0.7989726088734365
+     },
+     {
+      "t": 1250,
+      "agents": 11928,
+      "genotypes": 8978,
+      "median_depth": 9.0,
+      "max_depth": 59.0,
+      "shared": 0.40040241448692154,
+      "most_copies": 31,
+      "top_shared_depth": 57,
+      "log10_A": 21.18588701047684,
+      "top_term": 0.9320776242371981
+     },
+     {
+      "t": 1500,
+      "agents": 12418,
+      "genotypes": 9520,
+      "median_depth": 7.0,
+      "max_depth": 83.0,
+      "shared": 0.38573039136737,
+      "most_copies": 10,
+      "top_shared_depth": 83,
+      "log10_A": 31.95239817981206,
+      "top_term": 0.9999819539926621
+     },
+     {
+      "t": 1750,
+      "agents": 12115,
+      "genotypes": 9211,
+      "median_depth": 8.0,
+      "max_depth": 84.0,
+      "shared": 0.39306644655385886,
+      "most_copies": 21,
+      "top_shared_depth": 82,
+      "log10_A": 31.715458899314132,
+      "top_term": 0.6506766143953077
+     },
+     {
+      "t": 2000,
+      "agents": 11185,
+      "genotypes": 8249,
+      "median_depth": 9.0,
+      "max_depth": 54.0,
+      "shared": 0.41868573983012963,
+      "most_copies": 21,
+      "top_shared_depth": 54,
+      "log10_A": 19.6802011683278,
+      "top_term": 0.5285241859987206
+     },
+     {
+      "t": 2250,
+      "agents": 9925,
+      "genotypes": 7193,
+      "median_depth": 8.0,
+      "max_depth": 89.0,
+      "shared": 0.44594458438287155,
+      "most_copies": 14,
+      "top_shared_depth": 56,
+      "log10_A": 20.742966141973024,
+      "top_term": 0.38088540303181684
+     },
+     {
+      "t": 2500,
+      "agents": 12338,
+      "genotypes": 9480,
+      "median_depth": 8.0,
+      "max_depth": 59.0,
+      "shared": 0.38977143783433293,
+      "most_copies": 14,
+      "top_shared_depth": 59,
+      "log10_A": 21.568281988199388,
+      "top_term": 0.9201267954543537
+     },
+     {
+      "t": 2750,
+      "agents": 8196,
+      "genotypes": 6138,
+      "median_depth": 8.0,
+      "max_depth": 79.0,
+      "shared": 0.40800390434358225,
+      "most_copies": 14,
+      "top_shared_depth": 75,
+      "log10_A": 28.967131122836285,
+      "top_term": 0.9826142676540977
+     },
+     {
+      "t": 2999,
+      "agents": 11709,
+      "genotypes": 8698,
+      "median_depth": 9.0,
+      "max_depth": 117.0,
+      "shared": 0.4198479801861816,
+      "most_copies": 17,
+      "top_shared_depth": 117,
+      "log10_A": 47.27340377101275,
+      "top_term": 0.5909636948414517
+     }
+    ],
+    "parents_unseen": 1846124,
+    "genotypes": 16756849
+   }
+  },
+  "groups": {
+   "B1": {
+    "world_A": 12.630702749620887,
+    "world_A_range": [
+     2.366139999918907,
+     21.674400264457425
+    ],
+    "world_A_hi": 12.815378430981898,
+    "world_A_hi_range": [
+     2.366139999918907,
+     3.765821858055988e+34
+    ],
+    "world_A_floor": 12.067576902832156,
+    "world_A_floor_range": [
+     2.3585498057007506,
+     20.908262832005665
+    ],
+    "world_mean_index": 1.5776887298618663,
+    "world_mean_index_range": [
+     0.4969736986904369,
+     2.076852446974566
+    ],
+    "world_mean_links": 4.696149019052362,
+    "world_mean_links_range": [
+     2.808115240818122,
+     15.318163181631816
+    ],
+    "world_on_floor": 0.9895498044451324,
+    "world_on_floor_range": [
+     0.9833746536386174,
+     0.999559810718609
+    ],
+    "world_shared": 0.9551789291708886,
+    "world_shared_range": [
+     0.8686620199535329,
+     0.996921046844073
+    ],
+    "world_shapes": 804.0,
+    "world_shapes_range": [
+     96.0,
+     1479.0
+    ],
+    "world_exact": 0.9660051484742962,
+    "world_exact_range": [
+     0.8798687986879868,
+     0.9992302617110183
+    ],
+    "world_top_shared": 7.0,
+    "world_top_shared_range": [
+     5.0,
+     9.0
+    ],
+    "world_top_ten": 5.0,
+    "world_top_ten_range": [
+     4.0,
+     6.0
+    ],
+    "world_objects": 13601.5,
+    "world_objects_range": [
+     6154.0,
+     18188.0
+    ],
+    "world_inexact_shared": 0.0,
+    "world_inexact_shared_range": [
+     0.0,
+     14.0
+    ],
+    "world_largest_shared": 31.5,
+    "world_largest_shared_range": [
+     14.0,
+     115.0
+    ],
+    "world_largest_inexact": 0.0,
+    "world_largest_inexact_range": [
+     0.0,
+     101.0
+    ],
+    "world_same": 163.5,
+    "world_same_range": [
+     57.0,
+     345.0
+    ],
+    "twin_A": 13.979932633469165,
+    "twin_A_range": [
+     2.62855859281224,
+     21.14941052491607
+    ],
+    "twin_A_hi": 15.200389797380877,
+    "twin_A_hi_range": [
+     2.62855859281224,
+     1458904394.98618
+    ],
+    "twin_A_floor": 13.065042284416847,
+    "twin_A_floor_range": [
+     2.593126340371217,
+     18.561701868073065
+    ],
+    "twin_mean_index": 1.4702915192891473,
+    "twin_mean_index_range": [
+     0.5541145956142419,
+     1.872438524590164
+    ],
+    "twin_mean_links": 3.656620237282209,
+    "twin_mean_links_range": [
+     2.5371526142251533,
+     8.508532423208191
+    ],
+    "twin_on_floor": 0.9956953546248855,
+    "twin_on_floor_range": [
+     0.9818135245901639,
+     0.9993995436531764
+    ],
+    "twin_shared": 0.9942722805638179,
+    "twin_shared_range": [
+     0.9179522184300342,
+     0.9987994477459632
+    ],
+    "twin_shapes": 121.0,
+    "twin_shapes_range": [
+     60.0,
+     747.0
+    ],
+    "twin_exact": 0.9952881270580878,
+    "twin_exact_range": [
+     0.9245051194539249,
+     0.9996998619364907
+    ],
+    "twin_top_shared": 7.0,
+    "twin_top_shared_range": [
+     5.0,
+     8.0
+    ],
+    "twin_top_ten": 5.0,
+    "twin_top_ten_range": [
+     4.0,
+     6.0
+    ],
+    "twin_objects": 13461.0,
+    "twin_objects_range": [
+     6243.0,
+     18029.0
+    ],
+    "twin_inexact_shared": 0.0,
+    "twin_inexact_shared_range": [
+     0.0,
+     4.0
+    ],
+    "twin_largest_shared": 40.0,
+    "twin_largest_shared_range": [
+     16.0,
+     57.0
+    ],
+    "twin_largest_inexact": 0.0,
+    "twin_largest_inexact_range": [
+     0.0,
+     53.0
+    ],
+    "twin_same": 208.5,
+    "twin_same_range": [
+     49.0,
+     1319.0
+    ],
+    "above_twin": 6,
+    "worlds": 30,
+    "ratio": 0.9235271579029745,
+    "ratio_range": [
+     0.6446413854755649,
+     1.1648617302745554
+    ]
+   },
+   "B2": {
+    "world_A": 32.36628863054324,
+    "world_A_range": [
+     28.980971331316336,
+     33.14169190930729
+    ],
+    "world_A_hi": 32.845262803815814,
+    "world_A_hi_range": [
+     30.81625184830597,
+     83.82274130794393
+    ],
+    "world_A_floor": 27.172345099248925,
+    "world_A_floor_range": [
+     24.950518634087974,
+     28.275571976425017
+    ],
+    "world_mean_index": 2.6774476871032364,
+    "world_mean_index_range": [
+     2.4469135802469135,
+     2.7670261066969353
+    ],
+    "world_mean_links": 5.911470521977167,
+    "world_mean_links_range": [
+     5.592160383004189,
+     6.021432600112803
+    ],
+    "world_on_floor": 0.9640019269617071,
+    "world_on_floor_range": [
+     0.9601317957166392,
+     0.96875
+    ],
+    "world_shared": 0.9863058618129217,
+    "world_shared_range": [
+     0.9837442427526416,
+     0.9887196841511562
+    ],
+    "world_shapes": 115.0,
+    "world_shapes_range": [
+     103.0,
+     135.0
+    ],
+    "world_exact": 0.9904138967621263,
+    "world_exact_range": [
+     0.9875372527770252,
+     0.9937958262831359
+    ],
+    "world_top_shared": 7.0,
+    "world_top_shared_range": [
+     7.0,
+     8.0
+    ],
+    "world_top_ten": 6.0,
+    "world_top_ten_range": [
+     5.0,
+     6.0
+    ],
+    "world_objects": 3418.0,
+    "world_objects_range": [
+     3061.0,
+     3691.0
+    ],
+    "world_inexact_shared": 0.0,
+    "world_inexact_shared_range": [
+     0.0,
+     4.0
+    ],
+    "world_largest_shared": 36.0,
+    "world_largest_shared_range": [
+     32.0,
+     50.0
+    ],
+    "world_largest_inexact": 0.0,
+    "world_largest_inexact_range": [
+     0.0,
+     50.0
+    ],
+    "world_same": 6.0,
+    "world_same_range": [
+     0.0,
+     8.0
+    ],
+    "twin_A": 27.496097767608802,
+    "twin_A_range": [
+     23.127699968565015,
+     30.48258758909104
+    ],
+    "twin_A_hi": 28.060468872796406,
+    "twin_A_hi_range": [
+     23.127699968565015,
+     35.252608210455534
+    ],
+    "twin_A_floor": 25.127344997777286,
+    "twin_A_floor_range": [
+     21.815877641373437,
+     27.049822162876456
+    ],
+    "twin_mean_index": 2.57321561112841,
+    "twin_mean_index_range": [
+     2.3342458253490284,
+     2.666761282997445
+    ],
+    "twin_mean_links": 5.64240253399612,
+    "twin_mean_links_range": [
+     5.329850746268657,
+     5.763677382966723
+    ],
+    "twin_on_floor": 0.9860118221775641,
+    "twin_on_floor_range": [
+     0.9813851628798248,
+     0.9893836626363904
+    ],
+    "twin_shared": 0.9875072692145617,
+    "twin_shared_range": [
+     0.9817910447761194,
+     0.990975747320925
+    ],
+    "twin_shapes": 94.0,
+    "twin_shapes_range": [
+     83.0,
+     124.0
+    ],
+    "twin_exact": 0.9908139415383866,
+    "twin_exact_range": [
+     0.9875642065423087,
+     0.9943217665615142
+    ],
+    "twin_top_shared": 7.0,
+    "twin_top_shared_range": [
+     7.0,
+     8.0
+    ],
+    "twin_top_ten": 5.0,
+    "twin_top_ten_range": [
+     5.0,
+     6.0
+    ],
+    "twin_objects": 3422.5,
+    "twin_objects_range": [
+     3064.0,
+     3699.0
+    ],
+    "twin_inexact_shared": 0.0,
+    "twin_inexact_shared_range": [
+     0.0,
+     2.0
+    ],
+    "twin_largest_shared": 40.0,
+    "twin_largest_shared_range": [
+     28.0,
+     45.0
+    ],
+    "twin_largest_inexact": 0.0,
+    "twin_largest_inexact_range": [
+     0.0,
+     45.0
+    ],
+    "twin_same": 0.0,
+    "twin_same_range": [
+     0.0,
+     0.0
+    ],
+    "above_twin": 10,
+    "worlds": 10,
+    "ratio": 1.1570509089956145,
+    "ratio_range": [
+     1.0789860684678605,
+     1.2530848882814565
+    ]
+   },
+   "round 3": {
+    "world_A": 13.777258995519647,
+    "world_A_range": [
+     9.633047573521013,
+     26.877363576732662
+    ],
+    "world_A_hi": 13.777258995519647,
+    "world_A_hi_range": [
+     9.633047573521013,
+     26.877363576732662
+    ],
+    "world_A_floor": 13.381450006006858,
+    "world_A_floor_range": [
+     9.395089228147112,
+     25.40653115808953
+    ],
+    "world_mean_index": 2.033744190745605,
+    "world_mean_index_range": [
+     1.6161274140958113,
+     2.560711455490006
+    ],
+    "world_mean_links": 5.148385842084792,
+    "world_mean_links_range": [
+     3.2237683339601353,
+     6.737034777303234
+    ],
+    "world_on_floor": 0.9884825217215599,
+    "world_on_floor_range": [
+     0.9724399049044642,
+     0.9924755455229496
+    ],
+    "world_shared": 0.9612409762805088,
+    "world_shared_range": [
+     0.8309945088468579,
+     0.9961138272533534
+    ],
+    "world_shapes": 352.0,
+    "world_shapes_range": [
+     98.0,
+     724.0
+    ],
+    "world_exact": 0.9760226882090065,
+    "world_exact_range": [
+     0.900549115314216,
+     0.9996239187664535
+    ],
+    "world_top_shared": 6.0,
+    "world_top_shared_range": [
+     5.0,
+     6.0
+    ],
+    "world_top_ten": 5.0,
+    "world_top_ten_range": [
+     4.0,
+     5.0
+    ],
+    "world_objects": 5142.0,
+    "world_objects_range": [
+     1639.0,
+     11636.0
+    ],
+    "world_inexact_shared": 0.0,
+    "world_inexact_shared_range": [
+     0.0,
+     0.0
+    ],
+    "world_largest_shared": 19.0,
+    "world_largest_shared_range": [
+     13.0,
+     26.0
+    ],
+    "world_largest_inexact": 0.0,
+    "world_largest_inexact_range": [
+     0.0,
+     0.0
+    ],
+    "world_same": 62.0,
+    "world_same_range": [
+     39.0,
+     112.0
+    ],
+    "twin_A": 12.40153500214109,
+    "twin_A_range": [
+     7.280619367859625,
+     21.036007965171095
+    ],
+    "twin_A_hi": 12.40153500214109,
+    "twin_A_hi_range": [
+     7.280619367859625,
+     21.036007965171095
+    ],
+    "twin_A_floor": 12.192389495015343,
+    "twin_A_floor_range": [
+     7.280619367859625,
+     20.87101748741337
+    ],
+    "twin_mean_index": 1.7196853415195703,
+    "twin_mean_index_range": [
+     1.4563167818981773,
+     2.2549640534063675
+    ],
+    "twin_mean_links": 3.589125023932606,
+    "twin_mean_links_range": [
+     2.827404148334381,
+     4.611244223857607
+    ],
+    "twin_on_floor": 0.9980314960629921,
+    "twin_on_floor_range": [
+     0.9940227136879857,
+     0.9998742928975487
+    ],
+    "twin_shared": 0.9991662034463591,
+    "twin_shared_range": [
+     0.9955964005360903,
+     0.9994971715901948
+    ],
+    "twin_shapes": 37.0,
+    "twin_shapes_range": [
+     18.0,
+     57.0
+    ],
+    "twin_exact": 0.999828855040219,
+    "twin_exact_range": [
+     0.9978939306911736,
+     1.0
+    ],
+    "twin_top_shared": 6.0,
+    "twin_top_shared_range": [
+     4.0,
+     6.0
+    ],
+    "twin_top_ten": 5.0,
+    "twin_top_ten_range": [
+     4.0,
+     6.0
+    ],
+    "twin_objects": 5223.0,
+    "twin_objects_range": [
+     1675.0,
+     11686.0
+    ],
+    "twin_inexact_shared": 0.0,
+    "twin_inexact_shared_range": [
+     0.0,
+     0.0
+    ],
+    "twin_largest_shared": 17.0,
+    "twin_largest_shared_range": [
+     10.0,
+     26.0
+    ],
+    "twin_largest_inexact": 0.0,
+    "twin_largest_inexact_range": [
+     0.0,
+     0.0
+    ],
+    "twin_same": 23.0,
+    "twin_same_range": [
+     10.0,
+     84.0
+    ],
+    "above_twin": 4,
+    "worlds": 5,
+    "ratio": 1.2776836565774734,
+    "ratio_range": [
+     0.71425943510209,
+     1.4900723557439055
+    ]
+   },
+   "dense": {
+    "world_A": 404.92981186556625,
+    "world_A_range": [
+     404.92981186556625,
+     404.92981186556625
+    ],
+    "world_A_hi": 167775.43614522688,
+    "world_A_hi_range": [
+     167775.43614522688,
+     167775.43614522688
+    ],
+    "world_A_floor": 303.1830647678073,
+    "world_A_floor_range": [
+     303.1830647678073,
+     303.1830647678073
+    ],
+    "world_mean_index": 5.601103752759382,
+    "world_mean_index_range": [
+     5.601103752759382,
+     5.601103752759382
+    ],
+    "world_mean_links": 27.88415404040404,
+    "world_mean_links_range": [
+     27.88415404040404,
+     27.88415404040404
+    ],
+    "world_on_floor": 0.7454746136865342,
+    "world_on_floor_range": [
+     0.7454746136865342,
+     0.7454746136865342
+    ],
+    "world_shared": 0.8446180555555556,
+    "world_shared_range": [
+     0.8446180555555556,
+     0.8446180555555556
+    ],
+    "world_shapes": 2764.0,
+    "world_shapes_range": [
+     2764.0,
+     2764.0
+    ],
+    "world_exact": 0.7149621212121212,
+    "world_exact_range": [
+     0.7149621212121212,
+     0.7149621212121212
+    ],
+    "world_top_shared": 8.0,
+    "world_top_shared_range": [
+     8.0,
+     8.0
+    ],
+    "world_top_ten": 8.0,
+    "world_top_ten_range": [
+     8.0,
+     8.0
+    ],
+    "world_objects": 12672.0,
+    "world_objects_range": [
+     12672.0,
+     12672.0
+    ],
+    "world_inexact_shared": 1652.0,
+    "world_inexact_shared_range": [
+     1652.0,
+     1652.0
+    ],
+    "world_largest_shared": 66.0,
+    "world_largest_shared_range": [
+     66.0,
+     66.0
+    ],
+    "world_largest_inexact": 66.0,
+    "world_largest_inexact_range": [
+     66.0,
+     66.0
+    ],
+    "world_same": 0.0,
+    "world_same_range": [
+     0.0,
+     0.0
+    ],
+    "twin_A": 539.9980928843244,
+    "twin_A_range": [
+     539.9980928843244,
+     539.9980928843244
+    ],
+    "twin_A_hi": 5345.608852160044,
+    "twin_A_hi_range": [
+     5345.608852160044,
+     5345.608852160044
+    ],
+    "twin_A_floor": 416.42523184198774,
+    "twin_A_floor_range": [
+     416.42523184198774,
+     416.42523184198774
+    ],
+    "twin_mean_index": 5.65917942215379,
+    "twin_mean_index_range": [
+     5.65917942215379,
+     5.65917942215379
+    ],
+    "twin_mean_links": 25.549479166666668,
+    "twin_mean_links_range": [
+     25.549479166666668,
+     25.549479166666668
+    ],
+    "twin_on_floor": 0.8192192736165202,
+    "twin_on_floor_range": [
+     0.8192192736165202,
+     0.8192192736165202
+    ],
+    "twin_shared": 0.9735637626262627,
+    "twin_shared_range": [
+     0.9735637626262627,
+     0.9735637626262627
+    ],
+    "twin_shapes": 715.0,
+    "twin_shapes_range": [
+     715.0,
+     715.0
+    ],
+    "twin_exact": 0.8712910353535354,
+    "twin_exact_range": [
+     0.8712910353535354,
+     0.8712910353535354
+    ],
+    "twin_top_shared": 8.0,
+    "twin_top_shared_range": [
+     8.0,
+     8.0
+    ],
+    "twin_top_ten": 8.0,
+    "twin_top_ten_range": [
+     8.0,
+     8.0
+    ],
+    "twin_objects": 12672.0,
+    "twin_objects_range": [
+     12672.0,
+     12672.0
+    ],
+    "twin_inexact_shared": 1304.0,
+    "twin_inexact_shared_range": [
+     1304.0,
+     1304.0
+    ],
+    "twin_largest_shared": 75.0,
+    "twin_largest_shared_range": [
+     75.0,
+     75.0
+    ],
+    "twin_largest_inexact": 75.0,
+    "twin_largest_inexact_range": [
+     75.0,
+     75.0
+    ],
+    "twin_same": 0.0,
+    "twin_same_range": [
+     0.0,
+     0.0
+    ],
+    "above_twin": 0,
+    "worlds": 1,
+    "ratio": 0.7498726702953528,
+    "ratio_range": [
+     0.7498726702953528,
+     0.7498726702953528
+    ]
+   },
+   "star": {
+    "world_A": 0.9997536642443651,
+    "world_A_range": [
+     0.9997536642443651,
+     0.9997536642443651
+    ],
+    "world_A_hi": 0.9997536642443651,
+    "world_A_hi_range": [
+     0.9997536642443651,
+     0.9997536642443651
+    ],
+    "world_A_floor": 0.9997536642443651,
+    "world_A_floor_range": [
+     0.9997536642443651,
+     0.9997536642443651
+    ],
+    "world_mean_index": 0.0,
+    "world_mean_index_range": [
+     0.0,
+     0.0
+    ],
+    "world_mean_links": 1.999753664244365,
+    "world_mean_links_range": [
+     1.999753664244365,
+     1.999753664244365
+    ],
+    "world_on_floor": 1.0,
+    "world_on_floor_range": [
+     1.0,
+     1.0
+    ],
+    "world_shared": 0.9998768321221825,
+    "world_shared_range": [
+     0.9998768321221825,
+     0.9998768321221825
+    ],
+    "world_shapes": 2.0,
+    "world_shapes_range": [
+     2.0,
+     2.0
+    ],
+    "world_exact": 0.9998768321221825,
+    "world_exact_range": [
+     0.9998768321221825,
+     0.9998768321221825
+    ],
+    "world_top_shared": 0.0,
+    "world_top_shared_range": [
+     0.0,
+     0.0
+    ],
+    "world_top_ten": 0.0,
+    "world_top_ten_range": [
+     0.0,
+     0.0
+    ],
+    "world_objects": 8119.0,
+    "world_objects_range": [
+     8119.0,
+     8119.0
+    ],
+    "world_inexact_shared": 0.0,
+    "world_inexact_shared_range": [
+     0.0,
+     0.0
+    ],
+    "world_largest_shared": 1.0,
+    "world_largest_shared_range": [
+     1.0,
+     1.0
+    ],
+    "world_largest_inexact": 0.0,
+    "world_largest_inexact_range": [
+     0.0,
+     0.0
+    ],
+    "world_same": 0.0,
+    "world_same_range": [
+     0.0,
+     0.0
+    ],
+    "twin_A": 0.9996733627306875,
+    "twin_A_range": [
+     0.9996733627306875,
+     0.9996733627306875
+    ],
+    "twin_A_hi": 0.9996733627306875,
+    "twin_A_hi_range": [
+     0.9996733627306875,
+     0.9996733627306875
+    ],
+    "twin_A_floor": 0.9996733627306875,
+    "twin_A_floor_range": [
+     0.9996733627306875,
+     0.9996733627306875
+    ],
+    "twin_mean_index": 0.0,
+    "twin_mean_index_range": [
+     0.0,
+     0.0
+    ],
+    "twin_mean_links": 1.6736893679568838,
+    "twin_mean_links_range": [
+     1.6736893679568838,
+     1.6736893679568838
+    ],
+    "twin_on_floor": 1.0,
+    "twin_on_floor_range": [
+     1.0,
+     1.0
+    ],
+    "twin_shared": 0.9998366813653438,
+    "twin_shared_range": [
+     0.9998366813653438,
+     0.9998366813653438
+    ],
+    "twin_shapes": 2.0,
+    "twin_shapes_range": [
+     2.0,
+     2.0
+    ],
+    "twin_exact": 0.9998366813653438,
+    "twin_exact_range": [
+     0.9998366813653438,
+     0.9998366813653438
+    ],
+    "twin_top_shared": 0.0,
+    "twin_top_shared_range": [
+     0.0,
+     0.0
+    ],
+    "twin_top_ten": 0.0,
+    "twin_top_ten_range": [
+     0.0,
+     0.0
+    ],
+    "twin_objects": 6123.0,
+    "twin_objects_range": [
+     6123.0,
+     6123.0
+    ],
+    "twin_inexact_shared": 0.0,
+    "twin_inexact_shared_range": [
+     0.0,
+     0.0
+    ],
+    "twin_largest_shared": 1.0,
+    "twin_largest_shared_range": [
+     1.0,
+     1.0
+    ],
+    "twin_largest_inexact": 0.0,
+    "twin_largest_inexact_range": [
+     0.0,
+     0.0
+    ],
+    "twin_same": 1996.0,
+    "twin_same_range": [
+     1996.0,
+     1996.0
+    ],
+    "above_twin": 1,
+    "worlds": 1,
+    "ratio": 1.000080327751715,
+    "ratio_range": [
+     1.000080327751715,
+     1.000080327751715
+    ]
+   }
+  },
+  "worlds": {
+   "B1": {
+    "B1-100000-s001": {
+     "world": {
+      "objects": 14672,
+      "isolated": 0,
+      "same": 198,
+      "shapes": 808,
+      "exact": 0.9715103598691385,
+      "A": 14.32416637394041,
+      "A_hi": 14.547089871656107,
+      "A_floor": 13.393689231442776,
+      "mean_index": 1.6645853795425845,
+      "mean_links": 4.532919847328245,
+      "on_floor": 0.9874421215097516,
+      "above_floor": 179,
+      "shared": 0.9601962922573609,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 33,
+      "inexact_shared": 4,
+      "largest_inexact": 33
+     },
+     "twin": {
+      "objects": 14683,
+      "isolated": 0,
+      "same": 187,
+      "shapes": 110,
+      "exact": 0.9978206088673977,
+      "A": 15.768899466465358,
+      "A_hi": 15.897233242166049,
+      "A_floor": 14.78211180532229,
+      "mean_index": 1.5555934748481333,
+      "mean_links": 3.56957025131104,
+      "on_floor": 0.9963142447614497,
+      "above_floor": 54,
+      "shared": 0.9970033371926718,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 45,
+      "inexact_shared": 2,
+      "largest_inexact": 45
+     }
+    },
+    "B1-100000-s002": {
+     "world": {
+      "objects": 18188,
+      "isolated": 0,
+      "same": 115,
+      "shapes": 96,
+      "exact": 0.9992302617110183,
+      "A": 2.366139999918907,
+      "A_hi": 2.366139999918907,
+      "A_floor": 2.3585498057007506,
+      "mean_index": 0.4969736986904369,
+      "mean_links": 2.808115240818122,
+      "on_floor": 0.999559810718609,
+      "above_floor": 8,
+      "shared": 0.996921046844073,
+      "top_shared": 5,
+      "top_ten": 4,
+      "largest_shared": 14,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 16984,
+      "isolated": 0,
+      "same": 1319,
+      "shapes": 83,
+      "exact": 0.9988224211022139,
+      "A": 2.62855859281224,
+      "A_hi": 2.62855859281224,
+      "A_floor": 2.593126340371217,
+      "mean_index": 0.5541145956142419,
+      "mean_links": 2.5371526142251533,
+      "on_floor": 0.99893892949776,
+      "above_floor": 18,
+      "shared": 0.9969971738106453,
+      "top_shared": 5,
+      "top_ten": 4,
+      "largest_shared": 16,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s003": {
+     "world": {
+      "objects": 11606,
+      "isolated": 0,
+      "same": 182,
+      "shapes": 638,
+      "exact": 0.9742374633810098,
+      "A": 10.723251937689762,
+      "A_hi": 10.723251937689762,
+      "A_floor": 10.250913942283802,
+      "mean_index": 1.4291147077031927,
+      "mean_links": 4.013527485783215,
+      "on_floor": 0.9912443618997081,
+      "above_floor": 99,
+      "shared": 0.9602791659486473,
+      "top_shared": 6,
+      "top_ten": 4,
+      "largest_shared": 30,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11551,
+      "isolated": 0,
+      "same": 237,
+      "shapes": 108,
+      "exact": 0.9967968141286468,
+      "A": 11.150307330033401,
+      "A_hi": 11.150307330033401,
+      "A_floor": 10.609748760268157,
+      "mean_index": 1.3428000694806324,
+      "mean_links": 3.2079473638646006,
+      "on_floor": 0.9963522668056279,
+      "above_floor": 42,
+      "shared": 0.9951519348974115,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 39,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s004": {
+     "world": {
+      "objects": 16790,
+      "isolated": 0,
+      "same": 234,
+      "shapes": 989,
+      "exact": 0.967540202501489,
+      "A": 15.324958550381163,
+      "A_hi": 7.458982554152553e+24,
+      "A_floor": 14.516711214874453,
+      "mean_index": 1.7760541705140043,
+      "mean_links": 4.806611078022632,
+      "on_floor": 0.9873191751308095,
+      "above_floor": 206,
+      "shared": 0.9557474687313877,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 76,
+      "inexact_shared": 6,
+      "largest_inexact": 76
+     },
+     "twin": {
+      "objects": 16860,
+      "isolated": 0,
+      "same": 164,
+      "shapes": 100,
+      "exact": 0.9982799525504152,
+      "A": 15.427864634721345,
+      "A_hi": 15.427864634721345,
+      "A_floor": 15.128452581559383,
+      "mean_index": 1.6668647139207415,
+      "mean_links": 3.699584816132859,
+      "on_floor": 0.9983364030657715,
+      "above_floor": 28,
+      "shared": 0.9973309608540926,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 57,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s005": {
+     "world": {
+      "objects": 10986,
+      "isolated": 0,
+      "same": 81,
+      "shapes": 504,
+      "exact": 0.9756963407973784,
+      "A": 11.544120574373315,
+      "A_hi": 11.567333357405369,
+      "A_floor": 10.861557387114903,
+      "mean_index": 1.3630935721615822,
+      "mean_links": 3.9636810486073184,
+      "on_floor": 0.9902043101035545,
+      "above_floor": 105,
+      "shared": 0.9667758965956672,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 32,
+      "inexact_shared": 2,
+      "largest_inexact": 32
+     },
+     "twin": {
+      "objects": 10808,
+      "isolated": 0,
+      "same": 259,
+      "shapes": 97,
+      "exact": 0.9974093264248705,
+      "A": 13.0191304643467,
+      "A_hi": 13.0191304643467,
+      "A_floor": 12.627095982191715,
+      "mean_index": 1.3543599257884973,
+      "mean_links": 3.267116950407106,
+      "on_floor": 0.9970315398886828,
+      "above_floor": 32,
+      "shared": 0.9957438934122872,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 29,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s006": {
+     "world": {
+      "objects": 18158,
+      "isolated": 0,
+      "same": 131,
+      "shapes": 550,
+      "exact": 0.9852406652715057,
+      "A": 12.713720591480625,
+      "A_hi": 12.713720591480625,
+      "A_floor": 11.914483870972559,
+      "mean_index": 1.5069312465064282,
+      "mean_links": 3.7636854279105627,
+      "on_floor": 0.9901621017328116,
+      "above_floor": 176,
+      "shared": 0.9790175129419539,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 29,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 18029,
+      "isolated": 0,
+      "same": 260,
+      "shapes": 99,
+      "exact": 0.998502412779411,
+      "A": 13.275310645430212,
+      "A_hi": 13.275310645430212,
+      "A_floor": 13.028311101227658,
+      "mean_index": 1.450449950005555,
+      "mean_links": 3.3118309390426535,
+      "on_floor": 0.9983335184979447,
+      "above_floor": 30,
+      "shared": 0.9977258860724388,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 47,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s007": {
+     "world": {
+      "objects": 15400,
+      "isolated": 0,
+      "same": 86,
+      "shapes": 898,
+      "exact": 0.962012987012987,
+      "A": 12.465989709526777,
+      "A_hi": 12.710707219736294,
+      "A_floor": 12.027498211588346,
+      "mean_index": 1.4731015862301722,
+      "mean_links": 5.057987012987013,
+      "on_floor": 0.9921700978737765,
+      "above_floor": 116,
+      "shared": 0.9546103896103896,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 38,
+      "inexact_shared": 4,
+      "largest_inexact": 38
+     },
+     "twin": {
+      "objects": 15252,
+      "isolated": 0,
+      "same": 234,
+      "shapes": 310,
+      "exact": 0.9870180959874115,
+      "A": 14.002386588800974,
+      "A_hi": 14.461765737053462,
+      "A_floor": 12.914213121954765,
+      "mean_index": 1.3838846818121429,
+      "mean_links": 3.958234985575662,
+      "on_floor": 0.9930915371329879,
+      "above_floor": 104,
+      "shared": 0.9857067925517965,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 41,
+      "inexact_shared": 2,
+      "largest_inexact": 41
+     }
+    },
+    "B1-100000-s008": {
+     "world": {
+      "objects": 11390,
+      "isolated": 0,
+      "same": 203,
+      "shapes": 998,
+      "exact": 0.9477611940298507,
+      "A": 14.810647509776974,
+      "A_hi": 14.810647509776974,
+      "A_floor": 14.20047800162719,
+      "mean_index": 1.7639647985178324,
+      "mean_links": 5.366725197541704,
+      "on_floor": 0.9851783232978231,
+      "above_floor": 160,
+      "shared": 0.9326602282704126,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 25,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11476,
+      "isolated": 0,
+      "same": 117,
+      "shapes": 89,
+      "exact": 0.9981700941094458,
+      "A": 16.40164419686419,
+      "A_hi": 16.40164419686419,
+      "A_floor": 15.96452395329365,
+      "mean_index": 1.676036665211698,
+      "mean_links": 3.7794527710003485,
+      "on_floor": 0.9979921431689218,
+      "above_floor": 23,
+      "shared": 0.9966887417218543,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 35,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s009": {
+     "world": {
+      "objects": 7380,
+      "isolated": 0,
+      "same": 159,
+      "shapes": 881,
+      "exact": 0.9291327913279133,
+      "A": 14.628348320387694,
+      "A_hi": 16.749530692007674,
+      "A_floor": 13.939458554338191,
+      "mean_index": 1.8624763015896164,
+      "mean_links": 6.25840108401084,
+      "on_floor": 0.9833746536386174,
+      "above_floor": 114,
+      "shared": 0.9065040650406504,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 40,
+      "inexact_shared": 5,
+      "largest_inexact": 40
+     },
+     "twin": {
+      "objects": 7477,
+      "isolated": 0,
+      "same": 62,
+      "shapes": 75,
+      "exact": 0.9981275912799251,
+      "A": 19.252863180578853,
+      "A_hi": 19.252863180578853,
+      "A_floor": 18.561701868073065,
+      "mean_index": 1.819509580597615,
+      "mean_links": 4.093085462083724,
+      "on_floor": 0.9950422082272544,
+      "above_floor": 37,
+      "shared": 0.9963889260398555,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 29,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s010": {
+     "world": {
+      "objects": 15274,
+      "isolated": 0,
+      "same": 147,
+      "shapes": 782,
+      "exact": 0.9714547597224041,
+      "A": 11.773369256893693,
+      "A_hi": 11.773369256893693,
+      "A_floor": 11.162664409095425,
+      "mean_index": 1.379498584714921,
+      "mean_links": 4.39832394919471,
+      "on_floor": 0.9911713168890686,
+      "above_floor": 131,
+      "shared": 0.9607830299855964,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 27,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 15067,
+      "isolated": 2,
+      "same": 352,
+      "shapes": 301,
+      "exact": 0.9891152850600651,
+      "A": 12.188441682882823,
+      "A_hi": 87542.19692711835,
+      "A_floor": 11.403138179080681,
+      "mean_index": 1.3300677715896128,
+      "mean_links": 3.785823322492865,
+      "on_floor": 0.9921492316983158,
+      "above_floor": 117,
+      "shared": 0.9867923276033717,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 43,
+      "inexact_shared": 2,
+      "largest_inexact": 43
+     }
+    },
+    "B1-100000-s011": {
+     "world": {
+      "objects": 6154,
+      "isolated": 0,
+      "same": 138,
+      "shapes": 799,
+      "exact": 0.9171270718232044,
+      "A": 11.941784424739422,
+      "A_hi": 11.941784424739422,
+      "A_floor": 11.541197232629083,
+      "mean_index": 1.7489369241672572,
+      "mean_links": 9.54273643158921,
+      "on_floor": 0.9897236002834869,
+      "above_floor": 58,
+      "shared": 0.8937276568085798,
+      "top_shared": 6,
+      "top_ten": 4,
+      "largest_shared": 28,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 6243,
+      "isolated": 0,
+      "same": 49,
+      "shapes": 150,
+      "exact": 0.9891078007368252,
+      "A": 18.524694029580072,
+      "A_hi": 18.524694029580072,
+      "A_floor": 15.964295967591253,
+      "mean_index": 1.6984615384615385,
+      "mean_links": 4.211917347429121,
+      "on_floor": 0.9891497975708502,
+      "above_floor": 67,
+      "shared": 0.9868652891238187,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 40,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s012": {
+     "world": {
+      "objects": 14013,
+      "isolated": 0,
+      "same": 182,
+      "shapes": 926,
+      "exact": 0.9623207022050952,
+      "A": 13.21048171351252,
+      "A_hi": 13.21048171351252,
+      "A_floor": 12.633766213975777,
+      "mean_index": 1.6558398220244717,
+      "mean_links": 4.690073503175623,
+      "on_floor": 0.9876158694846126,
+      "above_floor": 167,
+      "shared": 0.9494754870477414,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 23,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 14030,
+      "isolated": 0,
+      "same": 165,
+      "shapes": 87,
+      "exact": 0.998503207412687,
+      "A": 14.198639241915,
+      "A_hi": 14.198639241915,
+      "A_floor": 13.848207433785298,
+      "mean_index": 1.5651366978371046,
+      "mean_links": 3.475623663578047,
+      "on_floor": 0.9980012848882861,
+      "above_floor": 28,
+      "shared": 0.9974340698503208,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 43,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s013": {
+     "world": {
+      "objects": 16585,
+      "isolated": 0,
+      "same": 345,
+      "shapes": 613,
+      "exact": 0.9844437744950256,
+      "A": 11.011733154250877,
+      "A_hi": 11.434190240120454,
+      "A_floor": 10.622513168721426,
+      "mean_index": 1.4891896857965334,
+      "mean_links": 3.6141694302080194,
+      "on_floor": 0.9919764806761806,
+      "above_floor": 131,
+      "shared": 0.9742538438347905,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 34,
+      "inexact_shared": 2,
+      "largest_inexact": 31
+     },
+     "twin": {
+      "objects": 16659,
+      "isolated": 0,
+      "same": 271,
+      "shapes": 60,
+      "exact": 0.9996998619364907,
+      "A": 9.453253436058402,
+      "A_hi": 9.453253436058402,
+      "A_floor": 9.418395635171864,
+      "mean_index": 1.3656779152155638,
+      "mean_links": 2.9484963083018187,
+      "on_floor": 0.9993995436531764,
+      "above_floor": 10,
+      "shared": 0.9987994477459632,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 50,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s014": {
+     "world": {
+      "objects": 12638,
+      "isolated": 0,
+      "same": 195,
+      "shapes": 898,
+      "exact": 0.9618610539642348,
+      "A": 12.917036270483173,
+      "A_hi": 12.917036270483173,
+      "A_floor": 12.407920397436163,
+      "mean_index": 1.6321980914774596,
+      "mean_links": 4.598987181516063,
+      "on_floor": 0.9888943731490621,
+      "above_floor": 135,
+      "shared": 0.945640132932426,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 27,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 12655,
+      "isolated": 1,
+      "same": 177,
+      "shapes": 73,
+      "exact": 0.998893717898064,
+      "A": 14.446672929874243,
+      "A_hi": 14.446672929874243,
+      "A_floor": 14.078257650263103,
+      "mean_index": 1.53642907997785,
+      "mean_links": 3.438482813117345,
+      "on_floor": 0.9982596313582787,
+      "above_floor": 22,
+      "shared": 0.997787435796128,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 31,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s015": {
+     "world": {
+      "objects": 9508,
+      "isolated": 0,
+      "same": 150,
+      "shapes": 800,
+      "exact": 0.9507782919646613,
+      "A": 12.626383693619788,
+      "A_hi": 1351661770546847.5,
+      "A_floor": 12.107655594075966,
+      "mean_index": 1.6230088495575221,
+      "mean_links": 5.235065208245688,
+      "on_floor": 0.9888274336283186,
+      "above_floor": 101,
+      "shared": 0.9336348338241481,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 57,
+      "inexact_shared": 4,
+      "largest_inexact": 57
+     },
+     "twin": {
+      "objects": 9532,
+      "isolated": 1,
+      "same": 125,
+      "shapes": 110,
+      "exact": 0.9954888795635753,
+      "A": 15.323834913842802,
+      "A_hi": 16.596241198954072,
+      "A_floor": 14.24065836241131,
+      "mean_index": 1.5548529876699335,
+      "mean_links": 3.6370121695342004,
+      "on_floor": 0.9953630519548952,
+      "above_floor": 44,
+      "shared": 0.9945446915652539,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 53,
+      "inexact_shared": 4,
+      "largest_inexact": 53
+     }
+    },
+    "B1-100000-s016": {
+     "world": {
+      "objects": 7635,
+      "isolated": 0,
+      "same": 189,
+      "shapes": 537,
+      "exact": 0.9637197118533072,
+      "A": 10.204456974117107,
+      "A_hi": 11.122132254948403,
+      "A_floor": 9.910239532213318,
+      "mean_index": 1.369937483011688,
+      "mean_links": 4.575376555337263,
+      "on_floor": 0.9922533297091601,
+      "above_floor": 57,
+      "shared": 0.9466928618205632,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 31,
+      "inexact_shared": 2,
+      "largest_inexact": 31
+     },
+     "twin": {
+      "objects": 7616,
+      "isolated": 0,
+      "same": 208,
+      "shapes": 143,
+      "exact": 0.9927783613445378,
+      "A": 10.967247115053414,
+      "A_hi": 11.305683196139153,
+      "A_floor": 10.3867541805852,
+      "mean_index": 1.2977119428647004,
+      "mean_links": 3.417673319327731,
+      "on_floor": 0.9936516333818278,
+      "above_floor": 48,
+      "shared": 0.9902836134453782,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 34,
+      "inexact_shared": 2,
+      "largest_inexact": 34
+     }
+    },
+    "B1-100000-s017": {
+     "world": {
+      "objects": 13190,
+      "isolated": 0,
+      "same": 133,
+      "shapes": 685,
+      "exact": 0.9704321455648218,
+      "A": 9.623872118486515,
+      "A_hi": 9.623872118486515,
+      "A_floor": 9.018849043214088,
+      "mean_index": 1.2284375,
+      "mean_links": 4.130932524639879,
+      "on_floor": 0.991015625,
+      "above_floor": 115,
+      "shared": 0.9595147839272176,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 24,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 12923,
+      "isolated": 0,
+      "same": 400,
+      "shapes": 260,
+      "exact": 0.9897856534860326,
+      "A": 11.301187443842034,
+      "A_hi": 264.71968083414066,
+      "A_floor": 10.408567402459314,
+      "mean_index": 1.2117113595496833,
+      "mean_links": 3.554050916969744,
+      "on_floor": 0.9924947228520054,
+      "above_floor": 96,
+      "shared": 0.9873094482705255,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 43,
+      "inexact_shared": 4,
+      "largest_inexact": 43
+     }
+    },
+    "B1-100000-s018": {
+     "world": {
+      "objects": 15035,
+      "isolated": 0,
+      "same": 180,
+      "shapes": 861,
+      "exact": 0.966744263385434,
+      "A": 13.85782616815721,
+      "A_hi": 13.85782616815721,
+      "A_floor": 13.054541714233638,
+      "mean_index": 1.6076367389060888,
+      "mean_links": 4.813568340538743,
+      "on_floor": 0.9881664946680426,
+      "above_floor": 172,
+      "shared": 0.9574326571333555,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 28,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 14985,
+      "isolated": 0,
+      "same": 230,
+      "shapes": 182,
+      "exact": 0.9946613279946613,
+      "A": 15.076714167644868,
+      "A_hi": 15.076714167644868,
+      "A_floor": 13.855737580456768,
+      "mean_index": 1.5126467628312648,
+      "mean_links": 3.6932932932932934,
+      "on_floor": 0.9944984904394498,
+      "above_floor": 82,
+      "shared": 0.9930597263930597,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 40,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s019": {
+     "world": {
+      "objects": 10427,
+      "isolated": 0,
+      "same": 168,
+      "shapes": 958,
+      "exact": 0.9469646111057831,
+      "A": 14.219201048958698,
+      "A_hi": 29.90488228605731,
+      "A_floor": 13.768784170029633,
+      "mean_index": 1.7676726757139964,
+      "mean_links": 5.402704517119018,
+      "on_floor": 0.988454527040713,
+      "above_floor": 114,
+      "shared": 0.9301812601898917,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 36,
+      "inexact_shared": 6,
+      "largest_inexact": 36
+     },
+     "twin": {
+      "objects": 10503,
+      "isolated": 0,
+      "same": 92,
+      "shapes": 72,
+      "exact": 0.9991431019708654,
+      "A": 15.324065427116887,
+      "A_hi": 15.324065427116887,
+      "A_floor": 14.860872613620245,
+      "mean_index": 1.658947970268725,
+      "mean_links": 3.655907835856422,
+      "on_floor": 0.9973318086525633,
+      "above_floor": 28,
+      "shared": 0.9981909930496049,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 33,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s020": {
+     "world": {
+      "objects": 11922,
+      "isolated": 0,
+      "same": 169,
+      "shapes": 1479,
+      "exact": 0.9135212212715987,
+      "A": 21.674400264457425,
+      "A_hi": 3.765821858055988e+34,
+      "A_floor": 20.908262832005665,
+      "mean_index": 2.076852446974566,
+      "mean_links": 9.181177654755913,
+      "on_floor": 0.9842071435129924,
+      "above_floor": 172,
+      "shared": 0.9002684113403792,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 101,
+      "inexact_shared": 14,
+      "largest_inexact": 101
+     },
+     "twin": {
+      "objects": 12021,
+      "isolated": 0,
+      "same": 70,
+      "shapes": 468,
+      "exact": 0.9742949837783879,
+      "A": 21.14941052491607,
+      "A_hi": 21.14941052491607,
+      "A_floor": 18.480430918004423,
+      "mean_index": 1.872438524590164,
+      "mean_links": 5.74636053572914,
+      "on_floor": 0.9818135245901639,
+      "above_floor": 213,
+      "shared": 0.9713002246069379,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 34,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s021": {
+     "world": {
+      "objects": 15436,
+      "isolated": 0,
+      "same": 107,
+      "shapes": 913,
+      "exact": 0.9634620367970977,
+      "A": 12.930045478585233,
+      "A_hi": 13.383948741681046,
+      "A_floor": 12.294258061483896,
+      "mean_index": 1.547740720817644,
+      "mean_links": 4.762956724540036,
+      "on_floor": 0.9893760086067779,
+      "above_floor": 158,
+      "shared": 0.9529023062969681,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 39,
+      "inexact_shared": 2,
+      "largest_inexact": 39
+     },
+     "twin": {
+      "objects": 15333,
+      "isolated": 0,
+      "same": 210,
+      "shapes": 174,
+      "exact": 0.9947824952716363,
+      "A": 16.288229775402037,
+      "A_hi": 16.534016617978605,
+      "A_floor": 15.205990957895745,
+      "mean_index": 1.4901330885727397,
+      "mean_links": 3.6980369138459532,
+      "on_floor": 0.9954107388710418,
+      "above_floor": 70,
+      "shared": 0.9939998695623818,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 43,
+      "inexact_shared": 3,
+      "largest_inexact": 43
+     }
+    },
+    "B1-100000-s022": {
+     "world": {
+      "objects": 14273,
+      "isolated": 0,
+      "same": 283,
+      "shapes": 666,
+      "exact": 0.9763189238422195,
+      "A": 10.97629943866353,
+      "A_hi": 10.97629943866353,
+      "A_floor": 10.613820978477701,
+      "mean_index": 1.4215285252960173,
+      "mean_links": 3.981923912281931,
+      "on_floor": 0.9919626838894869,
+      "above_floor": 112,
+      "shared": 0.9666503187837175,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 25,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 14249,
+      "isolated": 0,
+      "same": 307,
+      "shapes": 153,
+      "exact": 0.9950873745526002,
+      "A": 10.09248124682756,
+      "A_hi": 10.09248124682756,
+      "A_floor": 9.641054868336397,
+      "mean_index": 1.3228718527399677,
+      "mean_links": 3.2322268229349427,
+      "on_floor": 0.9959799703787291,
+      "above_floor": 57,
+      "shared": 0.9938241280089831,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 25,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s023": {
+     "world": {
+      "objects": 14598,
+      "isolated": 0,
+      "same": 248,
+      "shapes": 261,
+      "exact": 0.9935607617481846,
+      "A": 6.038063782796708,
+      "A_hi": 6.038063782796708,
+      "A_floor": 5.952698761265097,
+      "mean_index": 0.8494208494208494,
+      "mean_links": 3.060624743115495,
+      "on_floor": 0.997173193601765,
+      "above_floor": 41,
+      "shared": 0.9882175640498698,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 49,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 13999,
+      "isolated": 0,
+      "same": 847,
+      "shapes": 269,
+      "exact": 0.9888563468819201,
+      "A": 5.295184340499674,
+      "A_hi": 696112.3278020807,
+      "A_floor": 5.164685398483293,
+      "mean_index": 0.8298056779599797,
+      "mean_links": 3.7127651975141083,
+      "on_floor": 0.9966047822003901,
+      "above_floor": 47,
+      "shared": 0.9857846989070648,
+      "top_shared": 6,
+      "top_ten": 4,
+      "largest_shared": 42,
+      "inexact_shared": 2,
+      "largest_inexact": 42
+     }
+    },
+    "B1-100000-s024": {
+     "world": {
+      "objects": 17241,
+      "isolated": 0,
+      "same": 338,
+      "shapes": 1140,
+      "exact": 0.9597471144365176,
+      "A": 9.402944858665407,
+      "A_hi": 9.402944858665407,
+      "A_floor": 9.243095885561006,
+      "mean_index": 1.0549948631171813,
+      "mean_links": 4.819094020068442,
+      "on_floor": 0.9947422493503354,
+      "above_floor": 87,
+      "shared": 0.9472188388144539,
+      "top_shared": 9,
+      "top_ten": 5,
+      "largest_shared": 115,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 16846,
+      "isolated": 0,
+      "same": 733,
+      "shapes": 409,
+      "exact": 0.9875934940045115,
+      "A": 11.016141465727834,
+      "A_hi": 11.210296372440686,
+      "A_floor": 10.560305267417075,
+      "mean_index": 1.0962913986896676,
+      "mean_links": 4.02766235308085,
+      "on_floor": 0.9931478030894993,
+      "above_floor": 114,
+      "shared": 0.9858126558233409,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 27,
+      "inexact_shared": 4,
+      "largest_inexact": 27
+     }
+    },
+    "B1-100000-s025": {
+     "world": {
+      "objects": 7687,
+      "isolated": 0,
+      "same": 75,
+      "shapes": 539,
+      "exact": 0.9652660335631585,
+      "A": 12.635021805621987,
+      "A_hi": 12.635021805621987,
+      "A_floor": 11.957098299425738,
+      "mean_index": 1.678167115902965,
+      "mean_links": 4.702224534929101,
+      "on_floor": 0.9892183288409704,
+      "above_floor": 80,
+      "shared": 0.9499154416547417,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 26,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 7678,
+      "isolated": 0,
+      "same": 84,
+      "shapes": 98,
+      "exact": 0.9945298254753843,
+      "A": 13.957478678137358,
+      "A_hi": 13.957478678137358,
+      "A_floor": 13.77104017892963,
+      "mean_index": 1.576086956521739,
+      "mean_links": 3.657332638707997,
+      "on_floor": 0.9982975379779989,
+      "above_floor": 13,
+      "shared": 0.9929669184683512,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 29,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s026": {
+     "world": {
+      "objects": 14555,
+      "isolated": 0,
+      "same": 264,
+      "shapes": 869,
+      "exact": 0.9682583304706287,
+      "A": 13.872231062563515,
+      "A_hi": 13.889751889385236,
+      "A_floor": 13.368247018596767,
+      "mean_index": 1.735826296743064,
+      "mean_links": 4.6177945723119205,
+      "on_floor": 0.986872915631874,
+      "above_floor": 185,
+      "shared": 0.9558227413260048,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 32,
+      "inexact_shared": 2,
+      "largest_inexact": 32
+     },
+     "twin": {
+      "objects": 14663,
+      "isolated": 0,
+      "same": 156,
+      "shapes": 67,
+      "exact": 0.9992498124531133,
+      "A": 13.204657136938962,
+      "A_hi": 13.204657136938962,
+      "A_floor": 13.101773467606039,
+      "mean_index": 1.6072891072891073,
+      "mean_links": 3.4626611198254107,
+      "on_floor": 0.9989079989079989,
+      "above_floor": 16,
+      "shared": 0.9980904316988338,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 29,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s027": {
+     "world": {
+      "objects": 11801,
+      "isolated": 0,
+      "same": 152,
+      "shapes": 509,
+      "exact": 0.9813575120752479,
+      "A": 11.78166097181219,
+      "A_hi": 11.78166097181219,
+      "A_floor": 11.177694293691365,
+      "mean_index": 1.5022882307227354,
+      "mean_links": 3.9428014575036014,
+      "on_floor": 0.9899835938174596,
+      "above_floor": 116,
+      "shared": 0.9701720193203965,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 26,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11744,
+      "isolated": 0,
+      "same": 209,
+      "shapes": 132,
+      "exact": 0.9961682561307902,
+      "A": 11.179855486564403,
+      "A_hi": 11.179855486564403,
+      "A_floor": 10.794069675921362,
+      "mean_index": 1.4207197196341568,
+      "mean_links": 3.373893051771117,
+      "on_floor": 0.9951277886998888,
+      "above_floor": 57,
+      "shared": 0.9948058583106267,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 37,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-100000-s028": {
+     "world": {
+      "objects": 7317,
+      "isolated": 0,
+      "same": 80,
+      "shapes": 1089,
+      "exact": 0.8798687986879868,
+      "A": 12.15110952925126,
+      "A_hi": 57.976826045757875,
+      "A_floor": 12.108658590616626,
+      "mean_index": 1.6575023299161231,
+      "mean_links": 15.318163181631816,
+      "on_floor": 0.9976700838769804,
+      "above_floor": 15,
+      "shared": 0.8686620199535329,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 32,
+      "inexact_shared": 9,
+      "largest_inexact": 32
+     },
+     "twin": {
+      "objects": 7325,
+      "isolated": 0,
+      "same": 72,
+      "shapes": 747,
+      "exact": 0.9245051194539249,
+      "A": 12.54827397455285,
+      "A_hi": 1458904394.98618,
+      "A_floor": 12.202842521862351,
+      "mean_index": 1.4363555818074425,
+      "mean_links": 8.508532423208191,
+      "on_floor": 0.9952746603662138,
+      "above_floor": 32,
+      "shared": 0.9179522184300342,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 43,
+      "inexact_shared": 4,
+      "largest_inexact": 43
+     }
+    },
+    "B1-100000-s029": {
+     "world": {
+      "objects": 16403,
+      "isolated": 0,
+      "same": 57,
+      "shapes": 793,
+      "exact": 0.9698835578857526,
+      "A": 13.761770913695635,
+      "A_hi": 13.761770913695635,
+      "A_floor": 12.720629544340774,
+      "mean_index": 1.3711106920610976,
+      "mean_links": 4.778638054014509,
+      "on_floor": 0.9891885096486266,
+      "above_floor": 172,
+      "shared": 0.9639700054868012,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 41,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 16114,
+      "isolated": 0,
+      "same": 346,
+      "shapes": 424,
+      "exact": 0.9826858632245252,
+      "A": 14.330743230132574,
+      "A_hi": 15.629603391258197,
+      "A_floor": 12.644219629556364,
+      "mean_index": 1.3028102305020524,
+      "mean_links": 4.420565967481693,
+      "on_floor": 0.9892642879696874,
+      "above_floor": 170,
+      "shared": 0.9807620702494725,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 44,
+      "inexact_shared": 2,
+      "largest_inexact": 44
+     }
+    },
+    "B1-100000-s030": {
+     "world": {
+      "objects": 12716,
+      "isolated": 0,
+      "same": 89,
+      "shapes": 912,
+      "exact": 0.9570619691726958,
+      "A": 13.614519213541556,
+      "A_hi": 13.614519213541556,
+      "A_floor": 12.796840210599466,
+      "mean_index": 1.6179129005751849,
+      "mean_links": 5.061104120792702,
+      "on_floor": 0.9863599013968776,
+      "above_floor": 166,
+      "shared": 0.9451085246932998,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 26,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 12635,
+      "isolated": 0,
+      "same": 170,
+      "shapes": 148,
+      "exact": 0.9946181242580134,
+      "A": 18.164648775728597,
+      "A_hi": 18.7191759438447,
+      "A_floor": 16.81804406905529,
+      "mean_index": 1.5593220338983051,
+      "mean_links": 3.846379105658884,
+      "on_floor": 0.9941911355136469,
+      "above_floor": 73,
+      "shared": 0.9937475267115157,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 53,
+      "inexact_shared": 4,
+      "largest_inexact": 53
+     }
+    }
+   },
+   "B2": {
+    "B2-10000-s001": {
+     "world": {
+      "objects": 3546,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 116,
+      "exact": 0.9937958262831359,
+      "A": 33.10566587467246,
+      "A_hi": 33.10566587467246,
+      "A_floor": 28.275571976425017,
+      "mean_index": 2.7670261066969353,
+      "mean_links": 6.021432600112803,
+      "on_floor": 0.9653802497162316,
+      "above_floor": 122,
+      "shared": 0.9887196841511562,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 36,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3546,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 87,
+      "exact": 0.9935138183869149,
+      "A": 30.48258758909104,
+      "A_hi": 30.48258758909104,
+      "A_floor": 27.049822162876456,
+      "mean_index": 2.666761282997445,
+      "mean_links": 5.763677382966723,
+      "on_floor": 0.9843883054215158,
+      "above_floor": 55,
+      "shared": 0.990975747320925,
+      "top_shared": 8,
+      "top_ten": 5,
+      "largest_shared": 40,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B2-10000-s002": {
+     "world": {
+      "objects": 3061,
+      "isolated": 0,
+      "same": 3,
+      "shapes": 103,
+      "exact": 0.9915060437765436,
+      "A": 31.06212358085274,
+      "A_hi": 31.06212358085274,
+      "A_floor": 25.91489956866372,
+      "mean_index": 2.6448105436573313,
+      "mean_links": 5.71610584776217,
+      "on_floor": 0.9601317957166392,
+      "above_floor": 121,
+      "shared": 0.9879124469127736,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 34,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3064,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 83,
+      "exact": 0.993798955613577,
+      "A": 27.39663459980099,
+      "A_hi": 27.39663459980099,
+      "A_floor": 24.60544942495193,
+      "mean_index": 2.5343185550082103,
+      "mean_links": 5.421997389033942,
+      "on_floor": 0.9835796387520526,
+      "above_floor": 50,
+      "shared": 0.9902088772845953,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 40,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B2-10000-s003": {
+     "world": {
+      "objects": 3342,
+      "isolated": 0,
+      "same": 8,
+      "shapes": 121,
+      "exact": 0.988031119090365,
+      "A": 28.980971331316336,
+      "A_hi": 83.82274130794393,
+      "A_floor": 24.950518634087974,
+      "mean_index": 2.525741974560872,
+      "mean_links": 5.592160383004189,
+      "on_floor": 0.967595396729255,
+      "above_floor": 107,
+      "shared": 0.9847396768402155,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 44,
+      "inexact_shared": 4,
+      "largest_inexact": 44
+     },
+     "twin": {
+      "objects": 3350,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 110,
+      "exact": 0.9877611940298507,
+      "A": 23.127699968565015,
+      "A_hi": 23.127699968565015,
+      "A_floor": 21.815877641373437,
+      "mean_index": 2.4176488365064976,
+      "mean_links": 5.329850746268657,
+      "on_floor": 0.986400725294651,
+      "above_floor": 45,
+      "shared": 0.9817910447761194,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 28,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B2-10000-s004": {
+     "world": {
+      "objects": 3536,
+      "isolated": 0,
+      "same": 6,
+      "shapes": 126,
+      "exact": 0.9889705882352942,
+      "A": 32.57853728586794,
+      "A_hi": 80.2778045454048,
+      "A_floor": 27.827132611195104,
+      "mean_index": 2.637975407492136,
+      "mean_links": 5.929581447963801,
+      "on_floor": 0.9622533600228768,
+      "above_floor": 132,
+      "shared": 0.9852941176470589,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 50,
+      "inexact_shared": 4,
+      "largest_inexact": 50
+     },
+     "twin": {
+      "objects": 3542,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 99,
+      "exact": 0.989553924336533,
+      "A": 29.343564552528303,
+      "A_hi": 35.252608210455534,
+      "A_floor": 26.87756921497907,
+      "mean_index": 2.5395149786019973,
+      "mean_links": 5.6770186335403725,
+      "on_floor": 0.9863052781740371,
+      "above_floor": 48,
+      "shared": 0.9864483342744212,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 45,
+      "inexact_shared": 2,
+      "largest_inexact": 45
+     }
+    },
+    "B2-10000-s005": {
+     "world": {
+      "objects": 3164,
+      "isolated": 0,
+      "same": 6,
+      "shapes": 111,
+      "exact": 0.9914664981036663,
+      "A": 31.37168810673566,
+      "A_hi": 31.37168810673566,
+      "A_floor": 27.09046754015716,
+      "mean_index": 2.7032196365954735,
+      "mean_links": 5.922882427307206,
+      "on_floor": 0.9649346509403889,
+      "above_floor": 110,
+      "shared": 0.9860935524652339,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 32,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3170,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 85,
+      "exact": 0.9943217665615142,
+      "A": 29.07515585561068,
+      "A_hi": 29.07515585561068,
+      "A_floor": 25.965419148737222,
+      "mean_index": 2.6069162436548226,
+      "mean_links": 5.667192429022082,
+      "on_floor": 0.9844543147208121,
+      "above_floor": 49,
+      "shared": 0.9889589905362776,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 34,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B2-10000-s006": {
+     "world": {
+      "objects": 3424,
+      "isolated": 0,
+      "same": 3,
+      "shapes": 112,
+      "exact": 0.9912383177570093,
+      "A": 32.584859732959174,
+      "A_hi": 32.584859732959174,
+      "A_floor": 27.4841224111876,
+      "mean_index": 2.7486741308190927,
+      "mean_links": 5.985981308411215,
+      "on_floor": 0.9616971125515615,
+      "above_floor": 130,
+      "shared": 0.9874415887850467,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 38,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3427,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 90,
+      "exact": 0.9912459877443829,
+      "A": 27.32848282548159,
+      "A_hi": 27.32848282548159,
+      "A_floor": 25.650829418750305,
+      "mean_index": 2.632911392405063,
+      "mean_links": 5.696527575138605,
+      "on_floor": 0.9879305269355314,
+      "above_floor": 41,
+      "shared": 0.987744382842136,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 35,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B2-10000-s007": {
+     "world": {
+      "objects": 3412,
+      "isolated": 0,
+      "same": 6,
+      "shapes": 114,
+      "exact": 0.9903282532239156,
+      "A": 33.131020864785434,
+      "A_hi": 33.131020864785434,
+      "A_floor": 26.88676671829493,
+      "mean_index": 2.709973364900858,
+      "mean_links": 5.900058616647128,
+      "on_floor": 0.9630068067475585,
+      "above_floor": 125,
+      "shared": 0.9865181711606096,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 36,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3418,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 94,
+      "exact": 0.992100643651258,
+      "A": 27.595560935416618,
+      "A_hi": 27.595560935416618,
+      "A_floor": 25.06256090105185,
+      "mean_index": 2.607785314066647,
+      "mean_links": 5.617612638970158,
+      "on_floor": 0.9893836626363904,
+      "above_floor": 36,
+      "shared": 0.9880046811000586,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 36,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B2-10000-s008": {
+     "world": {
+      "objects": 3691,
+      "isolated": 0,
+      "same": 8,
+      "shapes": 135,
+      "exact": 0.9875372527770252,
+      "A": 33.14169190930729,
+      "A_hi": 33.14169190930729,
+      "A_floor": 27.05238135243053,
+      "mean_index": 2.4469135802469135,
+      "mean_links": 5.594689785965863,
+      "on_floor": 0.9632373113854595,
+      "above_floor": 134,
+      "shared": 0.9837442427526416,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 34,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3699,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 124,
+      "exact": 0.9875642065423087,
+      "A": 28.525376810176194,
+      "A_hi": 28.525376810176194,
+      "A_floor": 24.260277534158007,
+      "mean_index": 2.3342458253490284,
+      "mean_links": 5.35279805352798,
+      "on_floor": 0.9813851628798248,
+      "above_floor": 68,
+      "shared": 0.9843200865098676,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 40,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B2-10000-s009": {
+     "world": {
+      "objects": 3528,
+      "isolated": 0,
+      "same": 7,
+      "shapes": 120,
+      "exact": 0.9895124716553289,
+      "A": 32.15403997521854,
+      "A_hi": 32.15403997521854,
+      "A_floor": 27.25422265834069,
+      "mean_index": 2.651675737611,
+      "mean_links": 5.809807256235827,
+      "on_floor": 0.9647665425379547,
+      "above_floor": 123,
+      "shared": 0.985827664399093,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 36,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3535,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 96,
+      "exact": 0.9903818953323904,
+      "A": 26.43944486600649,
+      "A_hi": 32.36018960048408,
+      "A_floor": 24.601996103505755,
+      "mean_index": 2.5315624107397885,
+      "mean_links": 5.528712871287128,
+      "on_floor": 0.9857183661810911,
+      "above_floor": 50,
+      "shared": 0.9872701555869873,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 41,
+      "inexact_shared": 2,
+      "largest_inexact": 41
+     }
+    },
+    "B2-10000-s010": {
+     "world": {
+      "objects": 3263,
+      "isolated": 0,
+      "same": 7,
+      "shapes": 106,
+      "exact": 0.9904995403003372,
+      "A": 30.81625184830597,
+      "A_hi": 30.81625184830597,
+      "A_floor": 27.39772041725712,
+      "mean_index": 2.719678217821782,
+      "mean_links": 5.997241802022678,
+      "on_floor": 0.96875,
+      "above_floor": 101,
+      "shared": 0.987434875881091,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 38,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3270,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 94,
+      "exact": 0.9902140672782874,
+      "A": 26.743951734398347,
+      "A_hi": 27.320197859356533,
+      "A_floor": 25.192129094502718,
+      "mean_index": 2.624768375540457,
+      "mean_links": 5.758103975535168,
+      "on_floor": 0.9870290302655961,
+      "above_floor": 42,
+      "shared": 0.9859327217125382,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 42,
+      "inexact_shared": 2,
+      "largest_inexact": 42
+     }
+    }
+   },
+   "round 3": {
+    "B1-30000-b82ad0-s3042": {
+     "world": {
+      "objects": 11636,
+      "isolated": 0,
+      "same": 73,
+      "shapes": 724,
+      "exact": 0.9760226882090065,
+      "A": 26.877363576732662,
+      "A_hi": 26.877363576732662,
+      "A_floor": 25.40653115808953,
+      "mean_index": 2.560711455490006,
+      "mean_links": 5.9098487452732895,
+      "on_floor": 0.9724399049044642,
+      "above_floor": 313,
+      "shared": 0.9612409762805088,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 26,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11686,
+      "isolated": 0,
+      "same": 23,
+      "shapes": 49,
+      "exact": 0.999828855040219,
+      "A": 21.036007965171095,
+      "A_hi": 21.036007965171095,
+      "A_floor": 20.87101748741337,
+      "mean_index": 2.2549640534063675,
+      "mean_links": 4.611244223857607,
+      "on_floor": 0.9980314960629921,
+      "above_floor": 23,
+      "shared": 0.9994009926407668,
+      "top_shared": 6,
+      "top_ten": 6,
+      "largest_shared": 26,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-30000-8526cf-s4006": {
+     "world": {
+      "objects": 7977,
+      "isolated": 0,
+      "same": 62,
+      "shapes": 98,
+      "exact": 0.9996239187664535,
+      "A": 9.633047573521013,
+      "A_hi": 9.633047573521013,
+      "A_floor": 9.395089228147112,
+      "mean_index": 1.6161274140958113,
+      "mean_links": 3.2237683339601353,
+      "on_floor": 0.9924755455229496,
+      "above_floor": 60,
+      "shared": 0.9961138272533534,
+      "top_shared": 5,
+      "top_ten": 4,
+      "largest_shared": 13,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 7955,
+      "isolated": 0,
+      "same": 84,
+      "shapes": 19,
+      "exact": 1.0,
+      "A": 7.280619367859625,
+      "A_hi": 7.280619367859625,
+      "A_floor": 7.280619367859625,
+      "mean_index": 1.4563167818981773,
+      "mean_links": 2.827404148334381,
+      "on_floor": 0.9998742928975487,
+      "above_floor": 1,
+      "shared": 0.9994971715901948,
+      "top_shared": 5,
+      "top_ten": 4,
+      "largest_shared": 14,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-30000-af1e28-s3018": {
+     "world": {
+      "objects": 3575,
+      "isolated": 0,
+      "same": 39,
+      "shapes": 144,
+      "exact": 0.9991608391608392,
+      "A": 13.777258995519647,
+      "A_hi": 13.777258995519647,
+      "A_floor": 13.381450006006858,
+      "mean_index": 1.8706606942889137,
+      "mean_links": 3.9434965034965037,
+      "on_floor": 0.9874020156774916,
+      "above_floor": 45,
+      "shared": 0.9818181818181818,
+      "top_shared": 5,
+      "top_ten": 5,
+      "largest_shared": 15,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 3598,
+      "isolated": 0,
+      "same": 16,
+      "shapes": 18,
+      "exact": 1.0,
+      "A": 9.246033551599897,
+      "A_hi": 9.246033551599897,
+      "A_floor": 9.23644138564382,
+      "mean_index": 1.5772651473040578,
+      "mean_links": 3.1806559199555307,
+      "on_floor": 0.9994441356309061,
+      "above_floor": 2,
+      "shared": 0.9991662034463591,
+      "top_shared": 4,
+      "top_ten": 4,
+      "largest_shared": 10,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-30000-625bc7-s3080": {
+     "world": {
+      "objects": 1639,
+      "isolated": 0,
+      "same": 46,
+      "shapes": 352,
+      "exact": 0.900549115314216,
+      "A": 12.030035601313134,
+      "A_hi": 12.030035601313134,
+      "A_floor": 11.903692905364545,
+      "mean_index": 2.1043360433604335,
+      "mean_links": 6.737034777303234,
+      "on_floor": 0.9911924119241192,
+      "above_floor": 13,
+      "shared": 0.8309945088468579,
+      "top_shared": 6,
+      "top_ten": 4,
+      "largest_shared": 19,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 1675,
+      "isolated": 0,
+      "same": 10,
+      "shapes": 37,
+      "exact": 0.9988059701492538,
+      "A": 16.842669498084636,
+      "A_hi": 16.842669498084636,
+      "A_floor": 16.364341661518036,
+      "mean_index": 1.9246861924686192,
+      "mean_links": 4.107462686567164,
+      "on_floor": 0.9940227136879857,
+      "above_floor": 10,
+      "shared": 0.9964179104477612,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 17,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    "B1-30000-38aee9-s3057": {
+     "world": {
+      "objects": 5142,
+      "isolated": 0,
+      "same": 112,
+      "shapes": 473,
+      "exact": 0.9624659665499805,
+      "A": 14.734056046466549,
+      "A_hi": 14.734056046466549,
+      "A_floor": 14.458147518681981,
+      "mean_index": 2.033744190745605,
+      "mean_links": 5.148385842084792,
+      "on_floor": 0.9884825217215599,
+      "above_floor": 57,
+      "shared": 0.9327110073901206,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 19,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 5223,
+      "isolated": 1,
+      "same": 30,
+      "shapes": 57,
+      "exact": 0.9978939306911736,
+      "A": 12.40153500214109,
+      "A_hi": 12.40153500214109,
+      "A_floor": 12.192389495015343,
+      "mean_index": 1.7196853415195703,
+      "mean_links": 3.589125023932606,
+      "on_floor": 0.9969301611665388,
+      "above_floor": 16,
+      "shared": 0.9955964005360903,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 20,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    }
+   },
+   "dense": {
+    "B1-30000-4ac946-s3094": {
+     "world": {
+      "objects": 12672,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 2764,
+      "exact": 0.7149621212121212,
+      "A": 404.92981186556625,
+      "A_hi": 167775.43614522688,
+      "A_floor": 303.1830647678073,
+      "mean_index": 5.601103752759382,
+      "mean_links": 27.88415404040404,
+      "on_floor": 0.7454746136865342,
+      "above_floor": 2306,
+      "shared": 0.8446180555555556,
+      "top_shared": 8,
+      "top_ten": 8,
+      "largest_shared": 66,
+      "inexact_shared": 1652,
+      "largest_inexact": 66
+     },
+     "twin": {
+      "objects": 12672,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 715,
+      "exact": 0.8712910353535354,
+      "A": 539.9980928843244,
+      "A_hi": 5345.608852160044,
+      "A_floor": 416.42523184198774,
+      "mean_index": 5.65917942215379,
+      "mean_links": 25.549479166666668,
+      "on_floor": 0.8192192736165202,
+      "above_floor": 1996,
+      "shared": 0.9735637626262627,
+      "top_shared": 8,
+      "top_ten": 8,
+      "largest_shared": 75,
+      "inexact_shared": 1304,
+      "largest_inexact": 75
+     }
+    }
+   },
+   "star": {
+    "B1-30000-511930-s3020": {
+     "world": {
+      "objects": 8119,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 2,
+      "exact": 0.9998768321221825,
+      "A": 0.9997536642443651,
+      "A_hi": 0.9997536642443651,
+      "A_floor": 0.9997536642443651,
+      "mean_index": 0.0,
+      "mean_links": 1.999753664244365,
+      "on_floor": 1.0,
+      "above_floor": 0,
+      "shared": 0.9998768321221825,
+      "top_shared": 0,
+      "top_ten": 0,
+      "largest_shared": 1,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 6123,
+      "isolated": 0,
+      "same": 1996,
+      "shapes": 2,
+      "exact": 0.9998366813653438,
+      "A": 0.9996733627306875,
+      "A_hi": 0.9996733627306875,
+      "A_floor": 0.9996733627306875,
+      "mean_index": 0.0,
+      "mean_links": 1.6736893679568838,
+      "on_floor": 1.0,
+      "above_floor": 0,
+      "shared": 0.9998366813653438,
+      "top_shared": 0,
+      "top_ten": 0,
+      "largest_shared": 1,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    }
+   }
+  },
+  "controls": {
+   "lattice": {
+    "world": {
+     "objects": 10000,
+     "isolated": 0,
+     "same": 0,
+     "shapes": 1,
+     "exact": 1.0,
+     "A": 54.592690218140916,
+     "A_hi": 54.592690218140916,
+     "A_floor": 54.592690218140916,
+     "mean_index": 4.0,
+     "mean_links": 12.0,
+     "on_floor": 1.0,
+     "above_floor": 0,
+     "shared": 1.0,
+     "top_shared": 4,
+     "top_ten": 4,
+     "largest_shared": 12,
+     "inexact_shared": 0,
+     "largest_inexact": 0
+    },
+    "twin": {
+     "objects": 10000,
+     "isolated": 0,
+     "same": 0,
+     "shapes": 4,
+     "exact": 1.0,
+     "A": 20.235903045787914,
+     "A_hi": 20.235903045787914,
+     "A_floor": 20.235903045787914,
+     "mean_index": 3.0044,
+     "mean_links": 6.0026,
+     "on_floor": 1.0,
+     "above_floor": 0,
+     "shared": 1.0,
+     "top_shared": 4,
+     "top_ten": 4,
+     "largest_shared": 7,
+     "inexact_shared": 0,
+     "largest_inexact": 0
+    },
+    "agents": 10000,
+    "links": 30000
+   },
+   "cubic": {
+    "world": {
+     "objects": 10648,
+     "isolated": 0,
+     "same": 0,
+     "shapes": 1,
+     "exact": 1.0,
+     "A": 20.083650603040862,
+     "A_hi": 20.083650603040862,
+     "A_floor": 20.083650603040862,
+     "mean_index": 3.0,
+     "mean_links": 6.0,
+     "on_floor": 1.0,
+     "above_floor": 0,
+     "shared": 1.0,
+     "top_shared": 3,
+     "top_ten": 3,
+     "largest_shared": 6,
+     "inexact_shared": 0,
+     "largest_inexact": 0
+    },
+    "twin": {
+     "objects": 10648,
+     "isolated": 0,
+     "same": 0,
+     "shapes": 5,
+     "exact": 1.0,
+     "A": 20.332162463295727,
+     "A_hi": 20.332162463295727,
+     "A_floor": 20.332162463295727,
+     "mean_index": 3.007419233658903,
+     "mean_links": 6.006010518407213,
+     "on_floor": 1.0,
+     "above_floor": 0,
+     "shared": 0.9999060856498873,
+     "top_shared": 4,
+     "top_ten": 4,
+     "largest_shared": 8,
+     "inexact_shared": 0,
+     "largest_inexact": 0
+    },
+    "agents": 10648,
+    "links": 31944
+   },
+   "tree": {
+    "world": {
+     "objects": 10000,
+     "isolated": 0,
+     "same": 0,
+     "shapes": 15,
+     "exact": 1.0,
+     "A": 4.18128817587541,
+     "A_hi": 4.18128817587541,
+     "A_floor": 4.18128817587541,
+     "mean_index": 0.8226,
+     "mean_links": 1.9998,
+     "on_floor": 1.0,
+     "above_floor": 0,
+     "shared": 0.9997,
+     "top_shared": 5,
+     "top_ten": 4,
+     "largest_shared": 12,
+     "inexact_shared": 0,
+     "largest_inexact": 0
+    },
+    "twin": {
+     "objects": 9418,
+     "isolated": 0,
+     "same": 582,
+     "shapes": 19,
+     "exact": 1.0,
+     "A": 4.3728985219010035,
+     "A_hi": 4.3728985219010035,
+     "A_floor": 4.3728985219010035,
+     "mean_index": 0.8737523890422595,
+     "mean_links": 2.062008919091102,
+     "on_floor": 1.0,
+     "above_floor": 0,
+     "shared": 0.9994691017201104,
+     "top_shared": 5,
+     "top_ten": 4,
+     "largest_shared": 12,
+     "inexact_shared": 0,
+     "largest_inexact": 0
+    },
+    "agents": 10000,
+    "links": 9999
+   },
+   "space": {
+    "world": {
+     "objects": 9326,
+     "isolated": 187,
+     "same": 487,
+     "shapes": 897,
+     "exact": 0.9463864464936736,
+     "A": 38.140724119621176,
+     "A_hi": 108.18129140456094,
+     "A_floor": 37.8118324341339,
+     "mean_index": 2.98447767958305,
+     "mean_links": 7.906605189791979,
+     "on_floor": 0.9901427600271924,
+     "above_floor": 87,
+     "shared": 0.9377010508256487,
+     "top_shared": 6,
+     "top_ten": 5,
+     "largest_shared": 25,
+     "inexact_shared": 12,
+     "largest_inexact": 22
+    },
+    "twin": {
+     "objects": 9807,
+     "isolated": 187,
+     "same": 6,
+     "shapes": 20,
+     "exact": 1.0,
+     "A": 14.175876768552852,
+     "A_hi": 14.175876768552852,
+     "A_floor": 14.172357587038631,
+     "mean_index": 2.1840522076068116,
+     "mean_links": 4.101152238197206,
+     "on_floor": 0.9997960640358927,
+     "above_floor": 2,
+     "shared": 0.9995921280717854,
+     "top_shared": 5,
+     "top_ten": 5,
+     "largest_shared": 12,
+     "inexact_shared": 0,
+     "largest_inexact": 0
+    },
+    "agents": 10000,
+    "links": 20106
+   }
+  },
+  "life": {
+   "B1-100000-s001": [
+    {
+     "t": 0,
+     "world": {
+      "objects": 1389,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 495,
+      "exact": 0.8214542836573074,
+      "A": 21.521667066821568,
+      "A_hi": 22.020734284197896,
+      "A_floor": 21.081419258528708,
+      "mean_index": 3.1779141104294477,
+      "mean_links": 10.319654427645789,
+      "on_floor": 0.9684487291849255,
+      "above_floor": 36,
+      "shared": 0.7177825773938085,
+      "top_shared": 5,
+      "top_ten": 4,
+      "largest_shared": 21,
+      "inexact_shared": 2,
+      "largest_inexact": 21
+     },
+     "twin": {
+      "objects": 1389,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 44,
+      "exact": 0.9978401727861771,
+      "A": 35.13166483697006,
+      "A_hi": 35.13166483697006,
+      "A_floor": 33.999336205368905,
+      "mean_index": 3.017316017316017,
+      "mean_links": 6.4420446364290855,
+      "on_floor": 0.9812409812409812,
+      "above_floor": 26,
+      "shared": 0.9892008639308856,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 17,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 100,
+     "world": {
+      "objects": 15984,
+      "isolated": 0,
+      "same": 115,
+      "shapes": 1260,
+      "exact": 0.9455705705705706,
+      "A": 14.103054857559243,
+      "A_hi": 14.220943047537553,
+      "A_floor": 13.395941624395908,
+      "mean_index": 1.4237792774910678,
+      "mean_links": 6.846221221221221,
+      "on_floor": 0.9922588328701866,
+      "above_floor": 117,
+      "shared": 0.9369994994994995,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 33,
+      "inexact_shared": 2,
+      "largest_inexact": 31
+     },
+     "twin": {
+      "objects": 15800,
+      "isolated": 1,
+      "same": 298,
+      "shapes": 760,
+      "exact": 0.9632278481012658,
+      "A": 12.502453233417988,
+      "A_hi": 12.94589948462982,
+      "A_floor": 11.1821574354698,
+      "mean_index": 1.2863525855838096,
+      "mean_links": 6.328417721518988,
+      "on_floor": 0.9875813128326434,
+      "above_floor": 189,
+      "shared": 0.9610759493670886,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 29,
+      "inexact_shared": 2,
+      "largest_inexact": 29
+     }
+    },
+    {
+     "t": 200,
+     "world": {
+      "objects": 18120,
+      "isolated": 0,
+      "same": 69,
+      "shapes": 995,
+      "exact": 0.9627483443708609,
+      "A": 12.113828007410625,
+      "A_hi": 12.294332066929648,
+      "A_floor": 11.39971023060361,
+      "mean_index": 1.2542275723703067,
+      "mean_links": 5.52869757174393,
+      "on_floor": 0.9914015477214101,
+      "above_floor": 150,
+      "shared": 0.9572847682119205,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 40,
+      "inexact_shared": 6,
+      "largest_inexact": 40
+     },
+     "twin": {
+      "objects": 17792,
+      "isolated": 0,
+      "same": 397,
+      "shapes": 697,
+      "exact": 0.9711668165467626,
+      "A": 10.511313655353263,
+      "A_hi": 10.94407304913039,
+      "A_floor": 9.472113693263498,
+      "mean_index": 1.1549858209387118,
+      "mean_links": 5.695986960431655,
+      "on_floor": 0.9890039932866486,
+      "above_floor": 190,
+      "shared": 0.9689186151079137,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 29,
+      "inexact_shared": 4,
+      "largest_inexact": 29
+     }
+    },
+    {
+     "t": 300,
+     "world": {
+      "objects": 19264,
+      "isolated": 0,
+      "same": 125,
+      "shapes": 751,
+      "exact": 0.9753945182724253,
+      "A": 9.815256952509142,
+      "A_hi": 9.815256952509142,
+      "A_floor": 9.295893269801788,
+      "mean_index": 1.1711016498137308,
+      "mean_links": 4.379308554817276,
+      "on_floor": 0.9932943054816392,
+      "above_floor": 126,
+      "shared": 0.9707745016611296,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 29,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 18801,
+      "isolated": 0,
+      "same": 588,
+      "shapes": 526,
+      "exact": 0.9808520823360459,
+      "A": 9.182120601378559,
+      "A_hi": 9.41944063872563,
+      "A_floor": 8.622521910155479,
+      "mean_index": 1.1082913074128302,
+      "mean_links": 4.5258762831764265,
+      "on_floor": 0.9923539938181226,
+      "above_floor": 141,
+      "shared": 0.9786713472687623,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 31,
+      "inexact_shared": 4,
+      "largest_inexact": 29
+     }
+    },
+    {
+     "t": 400,
+     "world": {
+      "objects": 18340,
+      "isolated": 0,
+      "same": 86,
+      "shapes": 773,
+      "exact": 0.9736641221374046,
+      "A": 10.990508305376284,
+      "A_hi": 10.990508305376284,
+      "A_floor": 10.076220554567577,
+      "mean_index": 1.2612420899367196,
+      "mean_links": 4.6733369683751365,
+      "on_floor": 0.990983927871423,
+      "above_floor": 161,
+      "shared": 0.9677753544165758,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 30,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 17987,
+      "isolated": 0,
+      "same": 439,
+      "shapes": 563,
+      "exact": 0.9778729082114861,
+      "A": 9.785458575960714,
+      "A_hi": 9.83817553817375,
+      "A_floor": 9.026576297374092,
+      "mean_index": 1.1714139519017568,
+      "mean_links": 4.802690832267749,
+      "on_floor": 0.9916993575530161,
+      "above_floor": 146,
+      "shared": 0.9756490798910324,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 27,
+      "inexact_shared": 4,
+      "largest_inexact": 27
+     }
+    },
+    {
+     "t": 500,
+     "world": {
+      "objects": 15810,
+      "isolated": 0,
+      "same": 79,
+      "shapes": 605,
+      "exact": 0.9797596457938014,
+      "A": 13.732248729554692,
+      "A_hi": 13.732248729554692,
+      "A_floor": 12.87997166588289,
+      "mean_index": 1.4494512588766946,
+      "mean_links": 4.432131562302341,
+      "on_floor": 0.9896061975468043,
+      "above_floor": 161,
+      "shared": 0.9732447817836812,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 42,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 15601,
+      "isolated": 0,
+      "same": 288,
+      "shapes": 380,
+      "exact": 0.9850650599320556,
+      "A": 12.956638384056212,
+      "A_hi": 12.956638384056212,
+      "A_floor": 12.029165620077507,
+      "mean_index": 1.3778630921395107,
+      "mean_links": 4.178065508621242,
+      "on_floor": 0.9922566371681416,
+      "above_floor": 119,
+      "shared": 0.9825011217229664,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 36,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 600,
+     "world": {
+      "objects": 18577,
+      "isolated": 0,
+      "same": 92,
+      "shapes": 644,
+      "exact": 0.9816439683479572,
+      "A": 11.541566486367001,
+      "A_hi": 11.541566486367001,
+      "A_floor": 10.705797466386851,
+      "mean_index": 1.3829787234042554,
+      "mean_links": 3.908704311783388,
+      "on_floor": 0.9894713753016012,
+      "above_floor": 192,
+      "shared": 0.9749152177423696,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 36,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 18285,
+      "isolated": 0,
+      "same": 384,
+      "shapes": 233,
+      "exact": 0.9927809680065628,
+      "A": 12.07921091044175,
+      "A_hi": 13.22385584543646,
+      "A_floor": 11.269415691148119,
+      "mean_index": 1.3219853467746379,
+      "mean_links": 3.4661744599398414,
+      "on_floor": 0.994766705227786,
+      "above_floor": 95,
+      "shared": 0.9916324856439704,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 49,
+      "inexact_shared": 2,
+      "largest_inexact": 49
+     }
+    },
+    {
+     "t": 700,
+     "world": {
+      "objects": 15654,
+      "isolated": 0,
+      "same": 135,
+      "shapes": 784,
+      "exact": 0.9717644052638303,
+      "A": 12.356917585532056,
+      "A_hi": 5044267303.8852215,
+      "A_floor": 11.65596656193839,
+      "mean_index": 1.4610176176702603,
+      "mean_links": 4.400281078318641,
+      "on_floor": 0.989744938206679,
+      "above_floor": 156,
+      "shared": 0.9630126485243389,
+      "top_shared": 8,
+      "top_ten": 5,
+      "largest_shared": 44,
+      "inexact_shared": 2,
+      "largest_inexact": 44
+     },
+     "twin": {
+      "objects": 15530,
+      "isolated": 0,
+      "same": 259,
+      "shapes": 175,
+      "exact": 0.993947198969736,
+      "A": 13.078207225572957,
+      "A_hi": 13.320876231189603,
+      "A_floor": 12.531411802835455,
+      "mean_index": 1.3857864731795801,
+      "mean_links": 3.533032839665164,
+      "on_floor": 0.9961129826379891,
+      "above_floor": 60,
+      "shared": 0.9931101094655506,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 45,
+      "inexact_shared": 4,
+      "largest_inexact": 45
+     }
+    },
+    {
+     "t": 800,
+     "world": {
+      "objects": 13706,
+      "isolated": 0,
+      "same": 146,
+      "shapes": 967,
+      "exact": 0.9557128264993433,
+      "A": 14.703665327504156,
+      "A_hi": 27.129320762640884,
+      "A_floor": 13.99465095678734,
+      "mean_index": 1.6628750286281395,
+      "mean_links": 5.912009338975631,
+      "on_floor": 0.9880143522406291,
+      "above_floor": 157,
+      "shared": 0.9454983219028162,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 36,
+      "inexact_shared": 4,
+      "largest_inexact": 36
+     },
+     "twin": {
+      "objects": 13695,
+      "isolated": 0,
+      "same": 157,
+      "shapes": 361,
+      "exact": 0.9833515881708653,
+      "A": 14.936904126912312,
+      "A_hi": 14.936904126912312,
+      "A_floor": 13.585305322537815,
+      "mean_index": 1.5320412861067796,
+      "mean_links": 4.511062431544359,
+      "on_floor": 0.9894557065419173,
+      "above_floor": 142,
+      "shared": 0.9805768528660095,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 33,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 900,
+     "world": {
+      "objects": 20909,
+      "isolated": 0,
+      "same": 114,
+      "shapes": 665,
+      "exact": 0.9823520971830312,
+      "A": 11.632874503832687,
+      "A_hi": 11.632874503832687,
+      "A_floor": 10.833004777780122,
+      "mean_index": 1.3439143135345668,
+      "mean_links": 3.7659381127744034,
+      "on_floor": 0.9911879259980526,
+      "above_floor": 181,
+      "shared": 0.9773303362188531,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 38,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 20565,
+      "isolated": 0,
+      "same": 458,
+      "shapes": 173,
+      "exact": 0.9960612691466083,
+      "A": 12.724661942366769,
+      "A_hi": 12.816289699654067,
+      "A_floor": 12.029481855663613,
+      "mean_index": 1.2963776606131614,
+      "mean_links": 3.2442985655239482,
+      "on_floor": 0.9971685217730912,
+      "above_floor": 58,
+      "shared": 0.9951859956236324,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 52,
+      "inexact_shared": 2,
+      "largest_inexact": 52
+     }
+    },
+    {
+     "t": 1000,
+     "world": {
+      "objects": 19545,
+      "isolated": 0,
+      "same": 121,
+      "shapes": 694,
+      "exact": 0.9798925556408289,
+      "A": 11.046813303461624,
+      "A_hi": 11.178689957007236,
+      "A_floor": 10.353932878758382,
+      "mean_index": 1.3257101086048455,
+      "mean_links": 3.8426707597851113,
+      "on_floor": 0.9909147869674185,
+      "above_floor": 174,
+      "shared": 0.9740086978766949,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 41,
+      "inexact_shared": 4,
+      "largest_inexact": 29
+     },
+     "twin": {
+      "objects": 19228,
+      "isolated": 0,
+      "same": 438,
+      "shapes": 182,
+      "exact": 0.9954233409610984,
+      "A": 12.087611743869623,
+      "A_hi": 12.45199965572457,
+      "A_floor": 11.327599583196912,
+      "mean_index": 1.2792580982236155,
+      "mean_links": 3.234189723320158,
+      "on_floor": 0.996760710553814,
+      "above_floor": 62,
+      "shared": 0.9942271687122946,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 53,
+      "inexact_shared": 2,
+      "largest_inexact": 43
+     }
+    },
+    {
+     "t": 1100,
+     "world": {
+      "objects": 17850,
+      "isolated": 0,
+      "same": 157,
+      "shapes": 683,
+      "exact": 0.9805602240896358,
+      "A": 12.26728794270279,
+      "A_hi": 12.372852358871603,
+      "A_floor": 11.59164681944148,
+      "mean_index": 1.4327829514940296,
+      "mean_links": 3.9496918767507,
+      "on_floor": 0.9902302462435011,
+      "above_floor": 171,
+      "shared": 0.9728851540616247,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 35,
+      "inexact_shared": 2,
+      "largest_inexact": 35
+     },
+     "twin": {
+      "objects": 17693,
+      "isolated": 0,
+      "same": 314,
+      "shapes": 167,
+      "exact": 0.9958175549652405,
+      "A": 12.513835607334407,
+      "A_hi": 12.620336756298023,
+      "A_floor": 11.949818613381945,
+      "mean_index": 1.3605198932970088,
+      "mean_links": 3.3793590685581867,
+      "on_floor": 0.9960270162892332,
+      "above_floor": 70,
+      "shared": 0.9944610863053185,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 45,
+      "inexact_shared": 2,
+      "largest_inexact": 45
+     }
+    },
+    {
+     "t": 1200,
+     "world": {
+      "objects": 16932,
+      "isolated": 0,
+      "same": 243,
+      "shapes": 743,
+      "exact": 0.9775572879754312,
+      "A": 12.84588349755778,
+      "A_hi": 12.84588349755778,
+      "A_floor": 11.766119695460619,
+      "mean_index": 1.4775253745770904,
+      "mean_links": 4.017068273092369,
+      "on_floor": 0.9882189463508941,
+      "above_floor": 195,
+      "shared": 0.9688755020080321,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 33,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 16872,
+      "isolated": 0,
+      "same": 303,
+      "shapes": 123,
+      "exact": 0.9971550497866287,
+      "A": 12.802215672113679,
+      "A_hi": 12.802215672113679,
+      "A_floor": 12.276962345804689,
+      "mean_index": 1.386055634807418,
+      "mean_links": 3.3120554765291605,
+      "on_floor": 0.9970280551592963,
+      "above_floor": 50,
+      "shared": 0.996384542437174,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 37,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 1300,
+     "world": {
+      "objects": 15943,
+      "isolated": 0,
+      "same": 252,
+      "shapes": 915,
+      "exact": 0.9685755503982939,
+      "A": 12.541984779132973,
+      "A_hi": 12.541984779132973,
+      "A_floor": 11.743917186636416,
+      "mean_index": 1.5306307473125242,
+      "mean_links": 4.382111271404378,
+      "on_floor": 0.9862712083926952,
+      "above_floor": 212,
+      "shared": 0.9570971586276109,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 34,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 15935,
+      "isolated": 0,
+      "same": 260,
+      "shapes": 142,
+      "exact": 0.996862252902416,
+      "A": 14.025937752815498,
+      "A_hi": 14.025937752815498,
+      "A_floor": 13.093878593792255,
+      "mean_index": 1.4591753226314133,
+      "mean_links": 3.483777847505491,
+      "on_floor": 0.9949638023292414,
+      "above_floor": 80,
+      "shared": 0.9956071540633825,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 39,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 1400,
+     "world": {
+      "objects": 15811,
+      "isolated": 0,
+      "same": 196,
+      "shapes": 751,
+      "exact": 0.9760293466573904,
+      "A": 12.700305068364841,
+      "A_hi": 12.744148238621985,
+      "A_floor": 12.061466985435775,
+      "mean_index": 1.5953214100570243,
+      "mean_links": 4.320852570994877,
+      "on_floor": 0.9885303265940902,
+      "above_floor": 177,
+      "shared": 0.9659098096262096,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 32,
+      "inexact_shared": 2,
+      "largest_inexact": 21
+     },
+     "twin": {
+      "objects": 15780,
+      "isolated": 0,
+      "same": 227,
+      "shapes": 204,
+      "exact": 0.9935994930291508,
+      "A": 12.437724984837558,
+      "A_hi": 12.437724984837558,
+      "A_floor": 11.578840897551473,
+      "mean_index": 1.4937177115887492,
+      "mean_links": 3.676108998732573,
+      "on_floor": 0.9942598379998724,
+      "above_floor": 90,
+      "shared": 0.9919518377693283,
+      "top_shared": 7,
+      "top_ten": 6,
+      "largest_shared": 32,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 1499,
+     "world": {
+      "objects": 14672,
+      "isolated": 0,
+      "same": 198,
+      "shapes": 808,
+      "exact": 0.9715103598691385,
+      "A": 14.32416637394041,
+      "A_hi": 14.547089871656107,
+      "A_floor": 13.393689231442776,
+      "mean_index": 1.6645853795425845,
+      "mean_links": 4.532919847328245,
+      "on_floor": 0.9874421215097516,
+      "above_floor": 179,
+      "shared": 0.9601962922573609,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 33,
+      "inexact_shared": 4,
+      "largest_inexact": 33
+     },
+     "twin": {
+      "objects": 14683,
+      "isolated": 0,
+      "same": 187,
+      "shapes": 110,
+      "exact": 0.9978206088673977,
+      "A": 15.768899466465358,
+      "A_hi": 15.897233242166049,
+      "A_floor": 14.78211180532229,
+      "mean_index": 1.5555934748481333,
+      "mean_links": 3.56957025131104,
+      "on_floor": 0.9963142447614497,
+      "above_floor": 54,
+      "shared": 0.9970033371926718,
+      "top_shared": 8,
+      "top_ten": 6,
+      "largest_shared": 45,
+      "inexact_shared": 2,
+      "largest_inexact": 45
+     }
+    }
+   ],
+   "B1-30000-b82ad0-s3042": [
+    {
+     "t": 0,
+     "world": {
+      "objects": 235,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 55,
+      "exact": 0.9957446808510638,
+      "A": 14.05888850677361,
+      "A_hi": 14.05888850677361,
+      "A_floor": 14.05888850677361,
+      "mean_index": 2.7094017094017095,
+      "mean_links": 5.493617021276596,
+      "on_floor": 0.9914529914529915,
+      "above_floor": 2,
+      "shared": 0.8723404255319149,
+      "top_shared": 4,
+      "top_ten": 4,
+      "largest_shared": 10,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 235,
+      "isolated": 0,
+      "same": 0,
+      "shapes": 16,
+      "exact": 1.0,
+      "A": 12.900577323905724,
+      "A_hi": 12.900577323905724,
+      "A_floor": 12.459990773565853,
+      "mean_index": 2.302127659574468,
+      "mean_links": 4.259574468085106,
+      "on_floor": 0.9829787234042553,
+      "above_floor": 4,
+      "shared": 0.9829787234042553,
+      "top_shared": 4,
+      "top_ten": 3,
+      "largest_shared": 9,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 250,
+     "world": {
+      "objects": 11188,
+      "isolated": 0,
+      "same": 85,
+      "shapes": 584,
+      "exact": 0.9841794780121559,
+      "A": 27.716778046725203,
+      "A_hi": 27.778737678914663,
+      "A_floor": 26.103661666201877,
+      "mean_index": 2.626918536009445,
+      "mean_links": 5.884072220235967,
+      "on_floor": 0.9691217873036054,
+      "above_floor": 340,
+      "shared": 0.9686271004647837,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 20,
+      "inexact_shared": 2,
+      "largest_inexact": 19
+     },
+     "twin": {
+      "objects": 11261,
+      "isolated": 0,
+      "same": 12,
+      "shapes": 40,
+      "exact": 1.0,
+      "A": 19.85724928619921,
+      "A_hi": 19.85724928619921,
+      "A_floor": 19.767712406267695,
+      "mean_index": 2.2913595595417813,
+      "mean_links": 4.603054790871148,
+      "on_floor": 0.9984903649764675,
+      "above_floor": 17,
+      "shared": 0.999555989698961,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 23,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 500,
+     "world": {
+      "objects": 7389,
+      "isolated": 0,
+      "same": 110,
+      "shapes": 461,
+      "exact": 0.9829476248477467,
+      "A": 20.738187737811547,
+      "A_hi": 20.738187737811547,
+      "A_floor": 20.04395732476365,
+      "mean_index": 2.3395291201982653,
+      "mean_links": 5.238868588442279,
+      "on_floor": 0.9809995869475423,
+      "above_floor": 138,
+      "shared": 0.9633238597915821,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 21,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 7481,
+      "isolated": 0,
+      "same": 18,
+      "shapes": 34,
+      "exact": 0.9998663280310119,
+      "A": 14.871800270171473,
+      "A_hi": 14.871800270171473,
+      "A_floor": 14.857960163323476,
+      "mean_index": 2.0024064171122995,
+      "mean_links": 3.980751236465713,
+      "on_floor": 0.9993315508021391,
+      "above_floor": 5,
+      "shared": 0.9991979681860714,
+      "top_shared": 5,
+      "top_ten": 5,
+      "largest_shared": 18,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 750,
+     "world": {
+      "objects": 10608,
+      "isolated": 0,
+      "same": 101,
+      "shapes": 579,
+      "exact": 0.9812405731523378,
+      "A": 26.201420849501343,
+      "A_hi": 26.927255609501593,
+      "A_floor": 24.59849517561791,
+      "mean_index": 2.5033144394274185,
+      "mean_links": 5.692213423831071,
+      "on_floor": 0.9741569795369391,
+      "above_floor": 269,
+      "shared": 0.9678544494720965,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 27,
+      "inexact_shared": 2,
+      "largest_inexact": 27
+     },
+     "twin": {
+      "objects": 10694,
+      "isolated": 0,
+      "same": 15,
+      "shapes": 52,
+      "exact": 0.9998129792406957,
+      "A": 19.426648706093285,
+      "A_hi": 19.426648706093285,
+      "A_floor": 19.36342159518933,
+      "mean_index": 2.1853722409277965,
+      "mean_links": 4.459790536749579,
+      "on_floor": 0.9985970819304153,
+      "above_floor": 15,
+      "shared": 0.9988778754441743,
+      "top_shared": 6,
+      "top_ten": 6,
+      "largest_shared": 30,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 1000,
+     "world": {
+      "objects": 11828,
+      "isolated": 0,
+      "same": 88,
+      "shapes": 630,
+      "exact": 0.9823300642543118,
+      "A": 26.04946674036281,
+      "A_hi": 26.04946674036281,
+      "A_floor": 24.728825075625075,
+      "mean_index": 2.538858765814614,
+      "mean_links": 5.715928305715252,
+      "on_floor": 0.9751269472415871,
+      "above_floor": 289,
+      "shared": 0.9683801149814001,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 22,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11903,
+      "isolated": 0,
+      "same": 13,
+      "shapes": 41,
+      "exact": 1.0,
+      "A": 18.857088711944698,
+      "A_hi": 18.857088711944698,
+      "A_floor": 18.77722548259765,
+      "mean_index": 2.2116273208434847,
+      "mean_links": 4.463496597496429,
+      "on_floor": 0.998403763757036,
+      "above_floor": 19,
+      "shared": 0.9995799378307989,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 25,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 1250,
+     "world": {
+      "objects": 11856,
+      "isolated": 0,
+      "same": 72,
+      "shapes": 627,
+      "exact": 0.9809379217273954,
+      "A": 27.233870641653052,
+      "A_hi": 27.233870641653052,
+      "A_floor": 25.56007188421132,
+      "mean_index": 2.578933791917455,
+      "mean_links": 5.832068151147099,
+      "on_floor": 0.9699914015477215,
+      "above_floor": 349,
+      "shared": 0.9690452091767882,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 22,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11915,
+      "isolated": 0,
+      "same": 13,
+      "shapes": 42,
+      "exact": 1.0,
+      "A": 20.211854403765592,
+      "A_hi": 20.211854403765592,
+      "A_floor": 20.112979139603155,
+      "mean_index": 2.2722618548048676,
+      "mean_links": 4.61863197650021,
+      "on_floor": 0.9985732270247587,
+      "above_floor": 17,
+      "shared": 0.9994964330675619,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 28,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 1500,
+     "world": {
+      "objects": 12331,
+      "isolated": 0,
+      "same": 87,
+      "shapes": 638,
+      "exact": 0.982807558186684,
+      "A": 27.347000466319066,
+      "A_hi": 27.347000466319066,
+      "A_floor": 25.663269641863923,
+      "mean_index": 2.614902219655087,
+      "mean_links": 5.8682994079961075,
+      "on_floor": 0.9702120637016255,
+      "above_floor": 361,
+      "shared": 0.9703187089449355,
+      "top_shared": 7,
+      "top_ten": 5,
+      "largest_shared": 23,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 12407,
+      "isolated": 0,
+      "same": 11,
+      "shapes": 47,
+      "exact": 0.9996776013540744,
+      "A": 19.99137393828879,
+      "A_hi": 19.99137393828879,
+      "A_floor": 19.895768071214782,
+      "mean_index": 2.286785455131823,
+      "mean_links": 4.609817038768437,
+      "on_floor": 0.9987906151737483,
+      "above_floor": 15,
+      "shared": 0.9991134037237044,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 25,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 1750,
+     "world": {
+      "objects": 12035,
+      "isolated": 0,
+      "same": 80,
+      "shapes": 515,
+      "exact": 0.9888658080598255,
+      "A": 24.84446980560132,
+      "A_hi": 24.84446980560132,
+      "A_floor": 23.592405268508877,
+      "mean_index": 2.4839089152172087,
+      "mean_links": 5.440631491483174,
+      "on_floor": 0.97428787496849,
+      "above_floor": 306,
+      "shared": 0.9771499792272539,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 20,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 12101,
+      "isolated": 0,
+      "same": 14,
+      "shapes": 35,
+      "exact": 1.0,
+      "A": 17.439659150183708,
+      "A_hi": 17.439659150183708,
+      "A_floor": 17.42539891833925,
+      "mean_index": 2.1689116601933724,
+      "mean_links": 4.33220395008677,
+      "on_floor": 0.9992562598132386,
+      "above_floor": 9,
+      "shared": 0.9993388976117676,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 21,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 2000,
+     "world": {
+      "objects": 11084,
+      "isolated": 0,
+      "same": 101,
+      "shapes": 493,
+      "exact": 0.9890833634067123,
+      "A": 23.6395804356436,
+      "A_hi": 23.6395804356436,
+      "A_floor": 22.764109311435046,
+      "mean_index": 2.4683024719511084,
+      "mean_links": 5.363857813063876,
+      "on_floor": 0.9790203411474961,
+      "above_floor": 230,
+      "shared": 0.9763623240707325,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 18,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11165,
+      "isolated": 0,
+      "same": 20,
+      "shapes": 32,
+      "exact": 1.0,
+      "A": 16.081209933882256,
+      "A_hi": 16.081209933882256,
+      "A_floor": 16.014614650383983,
+      "mean_index": 2.115808329601433,
+      "mean_links": 4.156202418271384,
+      "on_floor": 0.9988356471115092,
+      "above_floor": 13,
+      "shared": 0.999910434393193,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 20,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 2250,
+     "world": {
+      "objects": 9831,
+      "isolated": 0,
+      "same": 94,
+      "shapes": 598,
+      "exact": 0.984131827891364,
+      "A": 25.399643040543403,
+      "A_hi": 25.399643040543403,
+      "A_floor": 24.675232781960556,
+      "mean_index": 2.626356589147287,
+      "mean_links": 5.819957277998169,
+      "on_floor": 0.9780878552971576,
+      "above_floor": 212,
+      "shared": 0.9641948937035907,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 20,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 9914,
+      "isolated": 1,
+      "same": 10,
+      "shapes": 29,
+      "exact": 1.0,
+      "A": 16.710857046278203,
+      "A_hi": 16.710857046278203,
+      "A_floor": 16.632211841180688,
+      "mean_index": 2.2077869679241475,
+      "mean_links": 4.320254185999596,
+      "on_floor": 0.998285253177325,
+      "above_floor": 17,
+      "shared": 0.9996973976195279,
+      "top_shared": 5,
+      "top_ten": 5,
+      "largest_shared": 17,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 2500,
+     "world": {
+      "objects": 12236,
+      "isolated": 0,
+      "same": 102,
+      "shapes": 617,
+      "exact": 0.9851258581235698,
+      "A": 24.268682541274977,
+      "A_hi": 24.268682541274977,
+      "A_floor": 23.169464495277445,
+      "mean_index": 2.5189148830263814,
+      "mean_links": 5.563255966001962,
+      "on_floor": 0.9761075161772026,
+      "above_floor": 288,
+      "shared": 0.9691892775416803,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 21,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 12328,
+      "isolated": 0,
+      "same": 10,
+      "shapes": 39,
+      "exact": 0.9999188838416613,
+      "A": 17.00257565421781,
+      "A_hi": 17.00257565421781,
+      "A_floor": 16.904779770594505,
+      "mean_index": 2.1700332603228687,
+      "mean_links": 4.281310837118754,
+      "on_floor": 0.9982964224872232,
+      "above_floor": 21,
+      "shared": 0.999675535366645,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 22,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 2750,
+     "world": {
+      "objects": 8123,
+      "isolated": 0,
+      "same": 73,
+      "shapes": 366,
+      "exact": 0.990274529114859,
+      "A": 20.55201296511815,
+      "A_hi": 20.55201296511815,
+      "A_floor": 19.61982569172164,
+      "mean_index": 2.3199900546991548,
+      "mean_links": 4.994460174812262,
+      "on_floor": 0.9796121332670313,
+      "above_floor": 164,
+      "shared": 0.9751323402683737,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 17,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 8175,
+      "isolated": 0,
+      "same": 21,
+      "shapes": 30,
+      "exact": 1.0,
+      "A": 14.639213001273953,
+      "A_hi": 14.639213001273953,
+      "A_floor": 14.61810436940242,
+      "mean_index": 2.0057492354740063,
+      "mean_links": 3.9456880733944955,
+      "on_floor": 0.9991437308868502,
+      "above_floor": 7,
+      "shared": 0.9991437308868502,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 20,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    },
+    {
+     "t": 2999,
+     "world": {
+      "objects": 11636,
+      "isolated": 0,
+      "same": 73,
+      "shapes": 724,
+      "exact": 0.9760226882090065,
+      "A": 26.877363576732662,
+      "A_hi": 26.877363576732662,
+      "A_floor": 25.40653115808953,
+      "mean_index": 2.560711455490006,
+      "mean_links": 5.9098487452732895,
+      "on_floor": 0.9724399049044642,
+      "above_floor": 313,
+      "shared": 0.9612409762805088,
+      "top_shared": 6,
+      "top_ten": 5,
+      "largest_shared": 26,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     },
+     "twin": {
+      "objects": 11686,
+      "isolated": 0,
+      "same": 23,
+      "shapes": 49,
+      "exact": 0.999828855040219,
+      "A": 21.036007965171095,
+      "A_hi": 21.036007965171095,
+      "A_floor": 20.87101748741337,
+      "mean_index": 2.2549640534063675,
+      "mean_links": 4.611244223857607,
+      "on_floor": 0.9980314960629921,
+      "above_floor": 23,
+      "shared": 0.9994009926407668,
+      "top_shared": 6,
+      "top_ten": 6,
+      "largest_shared": 26,
+      "inexact_shared": 0,
+      "largest_inexact": 0
+     }
+    }
+   ]
+  },
+  "table:worlds": {
+   "head": [
+    "networks (the median world)",
+    "links of an ego network",
+    "assembly index",
+    "index at the floor l(m)",
+    "agents whose shape another shares",
+    "assembly A, at least"
+   ],
+   "rows": [
+    [
+     "B1, 30 worlds",
+     "4.70 / 3.66",
+     "1.58 / 1.47",
+     "99.0% / 99.6%",
+     "96% / 99%",
+     "12.6 / 14.0"
+    ],
+    [
+     "B2, 10 worlds",
+     "5.91 / 5.64",
+     "2.68 / 2.57",
+     "96.4% / 98.6%",
+     "99% / 99%",
+     "32.4 / 27.5"
+    ],
+    [
+     "round 3, 5 healthiest",
+     "5.15 / 3.59",
+     "2.03 / 1.72",
+     "98.8% / 99.8%",
+     "96% / 100%",
+     "13.8 / 12.4"
+    ],
+    [
+     "round 3, dense (s3094)",
+     "27.88 / 25.55",
+     "5.60 / 5.66",
+     "74.5% / 81.9%",
+     "84% / 97%",
+     "404.9 / 540.0"
+    ],
+    [
+     "round 3, star (s3020)",
+     "2.00 / 1.67",
+     "0.00 / 0.00",
+     "100.0% / 100.0%",
+     "100% / 100%",
+     "1.0 / 1.0"
+    ],
+    [
+     "triangular lattice",
+     "12.00 / 6.00",
+     "4.00 / 3.00",
+     "100.0% / 100.0%",
+     "100% / 100%",
+     "54.6 / 20.2"
+    ],
+    [
+     "cubic lattice",
+     "6.00 / 6.01",
+     "3.00 / 3.01",
+     "100.0% / 100.0%",
+     "100% / 100%",
+     "20.1 / 20.3"
+    ],
+    [
+     "random tree",
+     "2.00 / 2.06",
+     "0.82 / 0.87",
+     "100.0% / 100.0%",
+     "100% / 100%",
+     "4.2 / 4.4"
+    ],
+    [
+     "random space",
+     "7.91 / 4.10",
+     "2.98 / 2.18",
+     "99.0% / 100.0%",
+     "94% / 100%",
+     "38.1 / 14.2"
+    ]
+   ]
+  }
+ },
+ "figures": {
+  "floor": {
+   "title": "The index of an ego network is set by how many links it has",
+   "caption": "Every shape of ego network whose index is known exactly, in all the worlds read, their twins and the four networks with no history: a dot for each pair of links and index that occurs (up to 40 links). The grey steps are l(m), the shortest addition chain of the number of links: no shape can be built in fewer joins, since each join at most adds two sizes already made. The dashed line is m \u2212 1, a link at a time, the most any shape needs. Blue: shapes whose index is exactly l(m), the floor; orange: shapes above it. Of 16,577 shapes counted (a shape found in two networks counts twice), 1,657 lie above the floor; they are the ego networks of 12,040 of 999,082 agents.",
+   "recipe": "**Runs.** The thirty worlds of B1 at 100,000 tokens (Experiment 10, `B1-100000-s001` \u2026 `-s030`) after the game of iteration 1,499; the ten worlds of B2 at 10,000 tokens (Experiment 16, `B2-10000-s001` \u2026 `-s010`) after the game of iteration 1,999; and seven worlds of round 3 of the screen, 30,000 tokens each, after the game of iteration 2,999: the five healthiest by the product (`B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006` played strongest first, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080`, `B1-30000-38aee9-s3057`), the densest (`B1-30000-4ac946-s3094`) and the star (`B1-30000-511930-s3020`); and four networks built from seed 23 with no history (see the figure of the worlds).\n\n**Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`.\n\n1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).\n2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler\u2013Lehman hash first). A shape's copy number is how many agents have it.\n3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).\n4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.\n5. Mark each pair (links, index) that some shape with an exact index has: blue if the index is l(links), orange if it is more.\n\n**To make it again:** `python3 book_figures.py assembly`."
+  },
+  "copies": {
+   "title": "Copies fall with the index, in the worlds as in their twins",
+   "caption": "Assembly theory's own picture: one dot for every shape of ego network, at its assembly index (across) and its copy number, the agents whose ego network has that shape (up, on a logarithmic scale). Orange: the network's shapes, a world's or the random space's; blue: its random twin's, the same agents with as many links each, wired at random. The dots are spread a little sideways at random so that they do not hide each other; only shapes whose index is known exactly are drawn. Assembly theory reads many copies of a shape of high index as the mark of selection; a shape with one copy adds nothing to the assembly A.",
+   "recipe": "**Runs.** `B1-100000-s001`, `B2-10000-s001` and `B1-30000-b82ad0-s3042` after their last games (iterations 1,499, 1,999 and 2,999), and a random space of 10,000 points (seed 23).\n\n**Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`.\n\n1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).\n2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler\u2013Lehman hash first). A shape's copy number is how many agents have it.\n3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).\n4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.\n5. One dot per shape: its index and its copies.\n\n**To make it again:** `python3 book_figures.py assembly`."
+  },
+  "worlds": {
+   "title": "The assembly of a world is about that of its twin",
+   "caption": "The assembly A = \u03a3 e^{a_i} (n_i \u2212 1) / N_T of each network's ego networks, a_i the index of shape i, n_i its copies and N_T the agents with at least one link. Orange: the network; blue: its random twin. A dot per world; the bars are the medians. B1: the thirty worlds at 100,000 tokens; B2: the ten at 10,000; round 3: its five healthiest worlds; dense: its densest world, s3094; star: its world held together by one hub. The last four are built with no history, from seed 23. Triangles: a triangular lattice on a torus, 10,000 nodes; cubes: a cubic lattice on a three-dimensional torus, 10,648 nodes; tree: a random tree of 10,000 nodes; space: a random space, 10,000 points in a cube that wraps round, joined when close enough for 4 links each on average. Where a shared shape's index is only bounded, A is drawn at its lower bound.",
+   "recipe": "**Runs.** The thirty worlds of B1 at 100,000 tokens (Experiment 10, `B1-100000-s001` \u2026 `-s030`) after the game of iteration 1,499; the ten worlds of B2 at 10,000 tokens (Experiment 16, `B2-10000-s001` \u2026 `-s010`) after the game of iteration 1,999; and seven worlds of round 3 of the screen, 30,000 tokens each, after the game of iteration 2,999: the five healthiest by the product (`B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006` played strongest first, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080`, `B1-30000-38aee9-s3057`), the densest (`B1-30000-4ac946-s3094`) and the star (`B1-30000-511930-s3020`).\n\n**Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`.\n\n1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).\n2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler\u2013Lehman hash first). A shape's copy number is how many agents have it.\n3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).\n4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.\n5. A = \u03a3 e^{a_i} (n_i \u2212 1) / N_T over the shapes.\n6. The networks with no history are made by `book_chapters/assembly.py` (`triangular_lattice`, `cubic_lattice`, `random_tree`, `random_space`) and read the same way.\n\n**To make it again:** `python3 book_figures.py assembly`."
+  },
+  "life": {
+   "title": "Through a world's life, its assembly follows its twin's",
+   "caption": "The assembly A of the ego networks after the game of every 100th iteration of a B1 world (top) and every 250th of round 3's healthiest world (bottom), from the founders' ring at iteration 0 to the end. Orange: the world; blue: its random twin, made again at each moment from the world's degrees then; dashed: the world's A with every shape's index set to the floor l(m) of its number of links.",
+   "recipe": "**Runs.** `B1-100000-s001` and `B1-30000-b82ad0-s3042`.\n\n**Data.** From each run's frames, read with `book_data.frame_at(run, t, 2)`; kept in `GraphOfLifeRuns/.book/<run>.assembly-life.json`.\n\n1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).\n2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler\u2013Lehman hash first). A shape's copy number is how many agents have it.\n3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).\n4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.\n5. A at each moment read, for the world and for its twin made then.\n\n**To make it again:** `python3 book_figures.py assembly`."
+  },
+  "brains": {
+   "title": "A genotype's path in the family tree is a clock",
+   "caption": "The depth of a genotype: how many changes its line has had since its founder, the length of the only pathway the family tree records. Solid: the median over the living agents' genotypes; dotted: the deepest. B1 offers every brain a change after every game and every newborn's brain one at birth, each taken with probability 0.2; B2 offers one only when a brain is copied, to a newborn or to a node won; round 3's world s3042 mixes a newborn's brain from two parents, of which the tree keeps one, and 1,846,124 of its genotypes have a parent that never appears in a frame, so its tree is cut into short pieces and its depths say little. The grey dashed line is 0.2 changes an iteration.",
+   "recipe": "**Runs.** `B1-100000-s001`, `B2-10000-s001` and `B1-30000-b82ad0-s3042`.\n\n**Data.** From every frame of each run, in order (`brain_ids`, `parent_brain_ids`); kept in `GraphOfLifeRuns/.book/<run>.genotype-depth.json`.\n\n1. Give each genotype, the first time it is seen, the depth of its parent plus one (a founder's: 0; a parent never seen counts as a founder).\n2. After the games of every 100th iteration (250th in round 3) and the last, the median and the largest depth of the genotypes the living carry.\n\n**To make it again:** `python3 book_figures.py assembly`."
+  }
+ }
+}

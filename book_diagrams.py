@@ -17,7 +17,7 @@ from __future__ import annotations
 import math
 import os
 import re
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 import networkx as nx
 
@@ -547,10 +547,62 @@ def patterns() -> str:
     return svg(760, 620, "".join(body), "Patterns of takeovers")
 
 
+def assembly() -> str:
+    """The wheel of six spokes, every agent's ego network in a triangular lattice, built in four joins."""
+    body = [text(20, 26, "Building a wheel of six spokes in four joins", "dg-h")]
+    r, top = 34, 126
+    xs = [70, 205, 345, 490, 650]
+    rim = [(math.cos(math.pi / 2 - k * math.pi / 3), -math.sin(math.pi / 2 - k * math.pi / 3)) for k in range(6)]
+
+    def at(x0: float, k: Optional[int]) -> Tuple[float, float]:
+        return (x0, top) if k is None else (x0 + r * rim[k][0], top + r * rim[k][1])
+
+    def edges(x0: float, pairs, cls: str) -> None:
+        for a, b in pairs:
+            (x1, y1), (x2, y2) = at(x0, a), at(x0, b)
+            body.append(seg(x1, y1, x2, y2, cls))
+
+    def nodes(x0: float, ks) -> None:
+        for k in ks:
+            body.append(dot(*at(x0, k), 4.2, "dg-node" if k is None else "dg-grey"))
+
+    leg = lambda k: [(None, k), (k, (k + 1) % 6)]                        # noqa: E731
+    first = leg(0) + leg(2) + leg(4)                                      # a spider: three legs of two links
+    second = leg(1) + leg(3) + leg(5)                                     # the same spider, turned
+    edges(xs[0], [(None, 0)], "dg-acc")
+    nodes(xs[0], [None, 0])
+    edges(xs[1], [(None, 0), (None, 3)], "dg-acc")
+    nodes(xs[1], [None, 0, 3])
+    edges(xs[2], [(None, 0), (0, 1), (None, 3), (3, 4)], "dg-acc")
+    nodes(xs[2], [None, 0, 1, 3, 4])
+    edges(xs[3], first, "dg-acc")
+    nodes(xs[3], [None, 0, 1, 2, 3, 4, 5])
+    edges(xs[4], first, "dg-acc")
+    edges(xs[4], second, "dg-warn")
+    nodes(xs[4], [None, 0, 1, 2, 3, 4, 5])
+    for a, b in zip(xs, xs[1:]):
+        body.append(arrow(a + r + 12, top, b - r - 12, top))
+    heads = [("a link", "the block"), ("join 1", "link + link"), ("join 2", "the path of 2, twice"),
+             ("join 3", "path of 4 + path of 2"), ("join 4", "the spider, twice")]
+    sizes = ["1 link", "2 links", "4 links", "6 links", "12 links"]
+    for x, (head, how), size in zip(xs, heads, sizes):
+        body.append(text(x, 60, head, "dg-b", "middle"))
+        body.append(text(x, 76, how, "dg-s", "middle"))
+        body.append(text(x, top + r + 26, size, "dg-m", "middle"))
+    body.append(lines(20, 228, [
+        "Each join lays two pieces already made together, making some of their nodes one node; whatever is",
+        "made can be used again for free. Join 2 uses the path of two links twice, and join 4 the spider of",
+        "three legs twice (yellow: the second copy, turned by one spoke). Twelve links take four joins, the",
+        "fewest any graph of twelve links can need: each join at most doubles the largest piece, and the",
+        "sizes made, 1, 2, 4, 6, 12, form a shortest addition chain, each a sum of two before it.",
+    ], "dg-t", 18))
+    return svg(760, 330, "".join(body), "Building a wheel of six spokes in four joins")
+
+
 DIAGRAMS = {"ring": ring, "one-iteration": one_iteration, "reproduction": reproduction,
             "game": game, "revolution": revolution, "cleanup": cleanup, "brain": brain,
             "gini": gini, "reproducibility": reproducibility, "light-cone": light_cone,
-            "finite-difference": finite_difference, "patterns": patterns}
+            "finite-difference": finite_difference, "patterns": patterns, "assembly": assembly}
 
 
 def main() -> None:
