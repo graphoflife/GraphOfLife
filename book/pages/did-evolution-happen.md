@@ -90,7 +90,9 @@ world plays than earlier ones. These two tests play eras against each other.
   world: 132 contests a world for a full round robin. With 3 seconds an
   iteration that is about 11 hours a world. Played like Experiment 28, every
   era against three fixed eras, it is 72 contests; neighbouring eras only,
-  22. The tool is built ([Every era against three](every-era-against-three.md)).
+  22. For all 24 shortlisted worlds on three workers, that is about 8 days,
+  4 days or a day and a half. The tool is built
+  ([Every era against three](every-era-against-three.md)).
 - **From:** the cross-time tournament of Cliff and Miller (1995), and the
   master tournament of Floreano and Nolfi (1997).
 

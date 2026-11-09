@@ -18,7 +18,12 @@ fail to cooperate only because they lack the time; its thesis expects that
 time is not what is missing. It needs three things the lab could not do:
 keep frames only in short windows, advance a run in blocks, and keep
 checkpoints. Since then, contests showed that B1's [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") stop learning
-within 50 to 100 iterations, so a run made now would be planned on [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").
+within 50 to 100 iterations. And since November 2026 the notebook plays only
+random worlds and worlds that follow a promising [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."). So the run is
+planned again, as a draft for the author to decide: three of round 3's
+shortlisted worlds, played on from iteration 3,000 to 100,000. That needs
+nothing new built, and takes about two and a half days
+([The long run, planned again](#the-long-run-planned-again-on-round-3s-candidates)).
 
 ## A plan that has not been played
 
@@ -154,7 +159,7 @@ times as long agree
 That speaks for the thesis below, before any run.
 
 **A world whose brains see.** The work on [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") also built a
-second baseline, B2
+second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")
 ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
 Its brains have one hidden layer instead of five, and a founder's gain is
 about 0.2, where B1's is 0.0006. Brains that see had broken worlds under
@@ -431,10 +436,76 @@ or `keep_checkpoints`, as this one does.
 With them comes an analysis of its own, which draws the variograms, the
 windows of cooperation and the gains, and decides the thesis.
 
+## The long run, planned again on round 3's candidates
+
+Since 7 November 2026 only two kinds of world are played: more worlds drawn
+at random, and worlds that follow a promising candidate
+([What could be played next](candidates-for-open-ended-evolution.md#what-could-be-played-next)).
+B1 is no longer a baseline anything is measured against. So a long run made
+now would be one of round 3's candidates, played on. Three things make it far
+easier than the plan above.
+
+- **Nothing has to be built.** The lab can play a kept world on from its last
+  state, iteration 3,000, under its own settings and seed. It records every
+  iteration as round 3 did, and it keeps whole worlds, brains included, as
+  often as the plan asks ([Eras](eras-and-contests.md#eras)). Frames for
+  every iteration cost a candidate 0.15 to 0.22 MB an iteration, so no
+  windows are needed.
+- **The worlds are small and fast.** Round 3's worlds hold 30,000 tokens. The
+  fastest of the shortlist play an iteration in under a second or two, where
+  B1 at 204,800 tokens took 25.
+- **The tests exist.** Contests between eras, a shadow world of pure luck and
+  the rest ([Did evolution happen?](did-evolution-happen.md)) can read the run
+  when it ends.
+
+**The proposal.** Three worlds of the shortlist, each played on from
+iteration 3,000 to 100,000, keeping a whole world every 2,500 iterations: 39
+more eras each.
+
+| world | why this one | health's ranks (product, sum, worst) | generations in its first 3,000 iterations | seconds an iteration | 97,000 iterations more |
+|---|---|---|---|---|---|
+| seed 3080 | the healthiest of the fast worlds | 4, 19, 4 | 121 | 0.87 | about a day |
+| seed 3008 | healthy, and its children act most like their parents (heredity index 0.62) | 7, 28, 8 | 947 | 1.32 | a day and a half |
+| seed 3026 | evolves the most: 2,159 generations, and its line never comes back to where it was | 27, 41, 13 | 2,159 | 2.05 | two and a third days |
+
+On three workers side by side that is about two and a half days, and about
+60 GB of disk. All three runs already live on the external drive, with 408 GB
+free, so they would grow there. The seconds are each world's own, over its iterations 2,000 to 3,000;
+the ranks and generations are from
+[Which worlds are healthy?](which-worlds-are-healthy.md) and
+[Candidates for open-ended evolution](candidates-for-open-ended-evolution.md).
+
+> [!quote] Draft thesis (to be fixed before any run)
+> **Claim.** Time is not what is missing in round 3 either. A candidate world
+> played on to 100,000 iterations keeps its health, and its brains stop
+> getting better long before the end, as the notebook's longest worlds did.
+>
+> **Why.** The two worlds of B2 played to 50,000 iterations climbed for 20,000
+> to 25,000 and then only wandered
+> ([Every era against three](every-era-against-three.md)). Round 3's worlds
+> are smaller still: about fourteen ancestors share each world's future, so
+> drift rules what spreads.
+>
+> **Confirm.** For each world: (1) its health by the product over iterations
+> 50,000 to 100,000, scored with round 3's living worlds, lies within 0.1 of
+> its health over iterations 100 to 3,000; (2) in lifetime contests played in
+> both eras' worlds, the brains of iteration 100,000 hold less than 0.55 of a
+> world contested with those of iteration 50,000; (3) the wander levels off,
+> as the first part of Experiment 11's thesis asks.
+>
+> **Refute.** Health moves by 0.1 or more; or the brains of 100,000 hold 0.55
+> or more of both worlds against those of 50,000, so evolution still climbs;
+> or the wander keeps growing. A world that dies before iteration 52,000
+> decides nothing.
+
+**Choices for the author.** Which worlds: these three, others of the
+shortlist, or none until Experiment 43 has shown which settings stay healthy
+with new seeds. How long: 100,000 iterations, or 25,000 first. And the
+lines of the thesis: 0.1 of health and 0.55 of a contest are proposals.
+
 ## Results
 
-None yet: the run has not been made. It waits for what has to be built
-first.
+None yet: neither the plan of 9 October nor the new one has been played.
 
 ## Where to go next
 
@@ -465,6 +536,12 @@ built.
 
 ## How our view changed
 
+- **9 November 2026.** From 9 October this page planned the run on B1, and
+  from 14 October said it would be planned on B2. Since the author's
+  decision of 7 November that only random worlds and candidates' worlds are
+  played, it proposes a long run of three of round 3's candidates instead
+  ([The long run, planned again](#the-long-run-planned-again-on-round-3s-candidates)).
+  The plan of 9 October and its thesis are kept as they were written.
 - **14 October 2026.** From 9 October, this page planned the run on B1,
   then the notebook's only baseline. A note added on 14 October said that if
   the run is made, it would be planned on B2. Contests between eras had
