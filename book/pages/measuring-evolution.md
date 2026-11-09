@@ -4,6 +4,7 @@
 > - What is a genotype, a family, and the common ancestor of the living?
 > - How do we tell whether a world keeps getting better?
 > - What would count as open-ended evolution?
+> - What do assembly theory's index and assembly count?
 
 ## In short
 
@@ -14,6 +15,9 @@ It gathers what were 3 pages of their own, one section each:
 - [Genotypes, families and the common ancestor](#genotypes-families-and-the-common-ancestor): Every brain carries a whole number, its genotype, which a copy keeps and a change replaces.
 - [Eras, contests and invasions: does a world keep getting better?](#eras-contests-and-invasions-does-a-world-keep-getting-better): A world whose numbers have settled may have stopped evolving, or may still be improving in ways no single moment shows.
 - [What would count as open-ended evolution](#what-would-count-as-open-ended-evolution): No run can show that evolution goes on for ever.
+
+A fourth section, added on 9 November 2026, says what assembly theory
+measures: [Assembly index and assembly](#assembly-index-and-assembly).
 
 ## Genotypes, families and the common ancestor
 
@@ -806,6 +810,45 @@ Each part closes a way to be fooled:
 - **Room** closes worlds that evolve only because they are poor in
   everything else, such as a few hundred agents holding everything evenly.
 
+## Assembly index and assembly
+
+How many steps does it take to make a thing, and how many copies of it are
+there? **Assembly theory** asks both (Marshall and others 2021; Sharma and
+others 2023). It builds an object from basic blocks by **joins**: a join lays
+two pieces already made together, and whatever is made can be used again for
+free. The **assembly index** *a* of an object is the fewest joins that make
+it. Its **copy number** *n* is how many identical copies of it a collection
+holds. The **assembly** of the collection adds up its kinds of object,
+weighing each by e to the power of its index and counting only its copies
+beyond the first:
+
+$$
+A = \sum_i e^{a_i} \, \frac{n_i - 1}{N_T},
+$$
+
+with *N_T* the objects in all. The theory reads many copies of objects with a
+high index as the mark of selection: chance alone seldom makes the same
+complicated thing twice.
+
+### An example of the index
+
+In a network the block is one link, and an object can be an agent's **ego
+network**: the agent, its neighbours and the links among them. A star of
+eight links takes three joins: two links make a star of two, two of those a
+star of four, two of those a star of eight. A star of seven links takes four,
+for each join can only add two sizes already made (1, 2, 3, 4, 7): the fewest
+joins for *m* links is the length of the shortest **addition chain** to *m*,
+written l(*m*). In a triangular lattice every agent's ego network is the same
+wheel of six spokes, twelve links built in four joins, so its 10,000 copies
+give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
+
+### Where it is used
+
+- [Assembly theory](assembly-theory.md): the index and the assembly of the
+  ego networks of B1, B2 and round 3, each against its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") and four
+  networks with no history; and why a genotype's path in the family tree
+  gives no index worth the name.
+
 ## Where to go next
 
 - [Genotypes and lineages](genotypes-and-lineages.md): all of these at work in
@@ -826,6 +869,8 @@ Each part closes a way to be fooled:
   whose signatures count as new things.
 - [Healthy and rich](healthy-and-rich.md): what a world in which much can
   happen looks like.
+- [Assembly theory](assembly-theory.md): how many steps an agent's
+  neighbourhood takes to make, and how many agents share its shape.
 
 ## How our view changed
 
@@ -886,3 +931,11 @@ Each part closes a way to be fooled:
 
 - Balduzzi, D., Tuyls, K., Pérolat, J. and Graepel, T. (2018). Re-evaluating
   evaluation. *Advances in Neural Information Processing Systems* 31.
+
+- Marshall, S. M., Mathis, C., Carrick, E. and others (2021). Identifying
+  molecules as biosignatures with assembly theory and mass spectrometry.
+  *Nature Communications* 12, 3033.
+
+- Sharma, A., Czégel, D., Lachmann, M., Kempes, C. P., Walker, S. I. and
+  Cronin, L. (2023). Assembly theory explains and quantifies selection and
+  evolution. *Nature* 622, 321–328.

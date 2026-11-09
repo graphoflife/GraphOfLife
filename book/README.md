@@ -155,6 +155,7 @@ how the pages hang together.
 - [Does evolution keep going?](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
 - [Every era against three](pages/every-era-against-three.md)
+- [Assembly theory: how many steps to make a thing, and how many copies](pages/assembly-theory.md)
 
 #### Changing the rules
 

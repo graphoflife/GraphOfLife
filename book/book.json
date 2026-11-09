@@ -1015,6 +1015,20 @@
       "summary": "The notebook's two longest worlds are Experiment 18's, whose brains are mixed at birth, played to 50,000 iterations. Experiment 28 played the brains of every 2,500th iteration of each against the brains of three fixed moments: 2,500, 10,000 and 25,000."
     },
     {
+      "id": "assembly-theory",
+      "title": "Assembly theory: how many steps to make a thing, and how many copies",
+      "file": "pages/assembly-theory.md",
+      "topics": [
+        "evolution",
+        "space",
+        "methods"
+      ],
+      "kind": "study",
+      "status": "written",
+      "added": "2026-11-09",
+      "summary": "Assembly theory counts the fewest joins that build a thing from parts and how many copies of it exist. Tried on the agents' neighbourhoods, its index turns out to be set by how many links a neighbourhood has, and the worlds hold about as much assembly as random networks with the same degrees."
+    },
+    {
       "id": "strategies-written-by-hand",
       "title": "Can a strategy written by hand beat evolution?",
       "file": "pages/strategies-written-by-hand.md",

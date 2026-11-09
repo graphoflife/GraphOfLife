@@ -472,6 +472,20 @@ def test_the_graph_helpers_agree_on_a_small_graph():
     assert set(book_graph.core(adj)) == {1, 2, 3}
 
 
+def test_the_assembly_index_is_right_where_it_is_known():
+    # Stars, paths and cycles of n links take l(n) joins, the shortest addition chain to n; K4, K5 and
+    # the wheel of six spokes meet the same bound. The canonical form tells random graphs apart exactly
+    # as an isomorphism test does, the twin-aware splits are every split, and small random graphs get
+    # the index a search over every pool gives (book_assembly.self_check).
+    import math
+    import book_assembly
+    assert [book_assembly.chain_length(n) for n in (1, 2, 3, 7, 8, 15, 16, 191)] == [0, 1, 2, 4, 3, 5, 4, 11]
+    checked = book_assembly.self_check(brute_up_to=6, samples=40)
+    assert checked["known"] == len(book_assembly.KNOWN) and checked["brute"] >= 10, checked
+    # The assembly of 10,000 copies of one shape of index 4, as in a triangular lattice.
+    assert abs(book_assembly.assembly([4], [10_000]) - math.exp(4) * 9_999 / 10_000) < 1e-9
+
+
 def test_a_chart_that_says_what_is_not_drawn_is_refused():
     good = {"title": "t", "x": {"label": "x"}, "y": {"label": "y", "min": 0},
             "series": [F.line([1, 2], [3, 4], "a line", 0), F.bars(["a", "b"], [1, 2], 1),

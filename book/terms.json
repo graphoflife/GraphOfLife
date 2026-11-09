@@ -639,6 +639,45 @@
       "page": "candidates-for-open-ended-evolution",
       "anchor": "how-each-pillar-is-read",
       "says": "The size of a population left to chance that would lose its lines as fast: the smaller it is, the more chance decides which line survives."
+    },
+    {
+      "name": "assembly theory",
+      "page": "assembly-theory",
+      "anchor": "building-with-reusable-parts",
+      "says": "A way to measure how much making went into a thing: the fewest steps that build it from basic parts, and how many copies of it there are."
+    },
+    {
+      "name": "assembly index",
+      "also": [
+        "assembly indices"
+      ],
+      "page": "assembly-theory",
+      "anchor": "the-assembly-index",
+      "says": "The fewest joins that build an object from basic blocks, when anything built before can be used again."
+    },
+    {
+      "name": "addition chain",
+      "page": "assembly-theory",
+      "anchor": "the-assembly-index",
+      "says": "Numbers from 1 in which each is the sum of two before it; the shortest one ending at m is the fewest joins m links can need."
+    },
+    {
+      "name": "copy number",
+      "page": "assembly-theory",
+      "anchor": "copy-number-and-assembly",
+      "says": "How many identical copies of an object a collection holds."
+    },
+    {
+      "name": "assembly",
+      "page": "assembly-theory",
+      "anchor": "copy-number-and-assembly",
+      "says": "Assembly theory's measure of a collection: each kind of object weighed by e to the power of its assembly index, times its copies beyond the first, over all the objects."
+    },
+    {
+      "name": "ego network",
+      "page": "assembly-theory",
+      "anchor": "ego-networks-as-molecules",
+      "says": "An agent, its neighbours and the links among them: the network as one agent sees it."
     }
   ],
   "skip": {
@@ -706,6 +745,12 @@
     ],
     "mixing-with-every-other-rule": [
       "candidate"
+    ],
+    "measuring-evolution": [
+      "hub"
+    ],
+    "assembly-theory": [
+      "hub"
     ]
   }
 }
