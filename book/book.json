@@ -1011,14 +1011,15 @@
     {
       "id": "how-big-should-a-brain-be",
       "title": "How big should a brain be?",
+      "file": "pages/how-big-should-a-brain-be.md",
       "topics": [
         "brains",
         "evolution"
       ],
-      "kind": "experiment",
-      "status": "planned",
+      "kind": "study",
+      "status": "written",
       "added": "2026-10-02",
-      "summary": "Brain size in a world that cannot break: B2 with hidden layers of 8, 16, 32 and 16 + 16, judged by cross-time tournaments."
+      "summary": "Round 3's brains of three to five tanh layers all respond to what they see, nearly 400 times as strongly as B1's, and depth costs them little; evolution raised their gain about as far as mutation alone would. The shape made no difference we can tell from chance to whether a world lived, how healthy it grew or how it evolved, so the smallest brain, three layers of 16, is enough for the next rounds."
     },
     {
       "id": "genotype",
