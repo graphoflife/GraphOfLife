@@ -3,8 +3,9 @@ Which worlds are healthy? The proposed order of research/screen/health.py, for
 the author to check (2026-11-07): every world drawn at random in round 3
 (Experiments 40 to 42; the author, 2026-11-08: round 3 only), most healthy first, as a
 heat map of its criteria, a table with every number and a link that opens the
-world in the viewer, every line of the proposal against the worlds, and the
-health of each run's two halves. Nothing is read here but health.json.
+world in the viewer, every line of the proposal against the worlds, the pieces
+the worlds lose at once, and the health of each run's two halves. Nothing is
+read here but health.json.
 """
 from __future__ import annotations
 
@@ -13,7 +14,7 @@ import os
 from typing import Any, Dict, List
 
 import book_figures as F
-from book_chapters.common import BLUE, GREY
+from book_chapters.common import BLUE, GREY, ORANGE
 from book_figures import chapter, dots, recipe
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,9 @@ SCREEN = os.path.join(ROOT, "research", "screen")
 HEALTH = os.path.join(SCREEN, "health.json")
 #: The criteria as the page names them.
 NAMES = {"decentralised": "decentralised", "resilient": "resilient",
-         "space": "almost 3-D", "diverse": "diverse", "uneven": "not too even"}
+         "space": "almost 3-D", "diverse": "diverse", "uneven": "not too even", "culls": "no big culls"}
+#: How often, every hundred iterations, a big piece might be allowed, for the table that moves the culls line.
+CULL_LINES = (0.5, 1.0, 2.0, 5.0)
 #: How the rounds' worlds are told apart where their seeds are the same.
 TAG = {"E41": "w", "E42": "s"}
 #: The page's worked example: decentralised, resilient, diverse and uneven, and folded.
@@ -100,7 +103,7 @@ def healthorder(ch: F.Chapter) -> None:
                              "label": "share of what the criterion asks (1: met)"}}]
     ch.grid("order", charts, columns=1, title="The living worlds, most healthy first",
             caption=f"Each of the {len(living)} worlds that lived to the end of its run is a row, ranked by its "
-                    "health, the sum of its five criteria's scores; each criterion is a column, coloured by how "
+                    "health, the sum of its criteria's scores; each criterion is a column, coloured by how "
                     "much of what it asks the world has, from none (dark) to all of it (bright yellow): a criterion "
                     "is met as far as its weakest line. A world named \"w\" or \"s\" is one of the eight draws played "
                     "a token at a time, weakest first or strongest first. The "
@@ -110,12 +113,12 @@ def healthorder(ch: F.Chapter) -> None:
                 "`research/screen/measures.py`).",
                 "For each line, the share of what it asks that the world has, counted from the line's floor "
                 "(`progress` in `health.py`), at most 1.",
-                "Each criterion: its weakest line's share. Health: the sum over the five criteria.",
+                "Each criterion: its weakest line's share. Health: the sum over the criteria.",
                 "Rank the living worlds by health, ties by their weakest criterion."]))
 
     # The order, as a table: every number, and a link that opens each world.
     ch.number("table:order", {
-        "head": ["rank", "world", "round", "health (of 5)", "rank by the author's lines",
+        "head": ["rank", "world", "round", f"health (of {len(criteria)})", "rank by the author's lines",
                  "rank if the weakest criterion decides"]
                 + [NAMES[c] for c in criteria] + ["agents", "first half → second", "weakest line"],
         "rows": [[w["rank"], world_link(w), ROUND[w["round"]], f"{w['proposal']['health']:.2f}",
@@ -153,13 +156,72 @@ def healthorder(ch: F.Chapter) -> None:
             recipe=recipe(RUNS, DATA, ["Read each living world's averages from `health.json`.",
                                        "One dot per world and measure; each line's value as a guide."]))
 
+    # What the worlds lose at once: leaves one by one, or whole branches.
+    line, big = next(line for line in lines if line["key"] == "big_culls"), d["big_cull"]
+    read = [w for w in living if w.get("culls")]
+    met = [w for w in read if w["proposal"]["criteria"]["culls"] >= 1.0]
+    missed = [w for w in read if w["proposal"]["criteria"]["culls"] < 1.0]
+    series = []
+    for group, colour, name in ((met, BLUE, "no big culls"), (missed, ORANGE, "big culls")):
+        series.append({"label": f"{name} ({len(group)})", "x": [w["culls"]["cut_off"] for w in group],
+                       "y": [w["averages"]["big_culls"] for w in group], "points": True, "size": 6,
+                       "colour": colour, "alpha": 0.85})
+    cut_off = [w["culls"]["cut_off"] for w in read]
+    ch.figure("culls", title="Leaves or branches: what the worlds lose at once",
+              x={"label": "share of the network a phase culls, all pieces together", "log": True,
+                 **_room(cut_off, True)},
+              y={"label": f"pieces of more than {big:.0%} culled at once, every 100 iterations", "min": 0},
+              series=series, guides=[{"axis": "y", "at": line["value"], "label": "line"}],
+              caption="Each dot is a living world. Across, how much of its network an average phase culls (cuts "
+                      "off from the largest piece and removes), every piece counted, from leaves culled one by one "
+                      f"to whole branches; up, how often a single piece of more than {big:.0%} of the network was "
+                      "culled at once, every 100 iterations (iterations 100 to the end of the run). Agents that "
+                      "starved are not counted. A world far to the right and low loses much, but in small pieces; "
+                      "a world high up loses whole branches. The dashed line is the criterion's line.",
+              recipe=recipe(RUNS, "every phase of every living world's recorded frames, read by "
+                                  "`research/screen/culls.py` into `GraphOfLifeRuns/.pilots/screen/culls/<run>.json`, "
+                                  "and scored by `research/screen/health.py` into `research/screen/health.json`", [
+                  "Rebuild the network as each phase left it, just before its cleanup: the frame before, changed as "
+                  "the phase's record says (newborns and their links, links handed over, searches, lapsed links).",
+                  "Of the agents the cleanup removed, tell those that starved from those culled: an agent linked "
+                  "to a survivor, or that held nothing (in a game nothing staked on it; in reproduction what it "
+                  "had, less its child, its gifts, its mates' dues and its upkeep), starved; the run's counts "
+                  "of the starved and the culled settle the agents the record leaves open, and any still open "
+                  "count as culled.",
+                  "Group the culled by their links (under mend_on_death, by the piece of the network they were "
+                  "cut off in): the pieces culled; the largest counts.",
+                  "Across: the share of the network culled in all, averaged over the phases. Up: how many phases "
+                  f"culled a piece of more than {big:.0%}, every 100 iterations."]))
+    ch.number("culls", {
+        "read": len(read), "met": len(met), "none": sum(w["averages"]["big_culls"] == 0 for w in read),
+        "big": big, "line": line["value"],
+        "cut_off": F.describe(cut_off),
+        "big_culls": F.describe([w["averages"]["big_culls"] for w in read]),
+        # Counting only the agents surely culled: how many worlds then meet the line, and the most it moves a world.
+        "met_surely": sum(w["averages"]["big_culls_surely"] <= line["value"] for w in read),
+        "moved": max((w["averages"]["big_culls"] - w["averages"]["big_culls_surely"] for w in read), default=0.0),
+        # The phases whose largest piece the record leaves open, as a share of a world's phases, and how wide open.
+        "open": F.describe([w["culls"]["open"] / w["culls"]["phases"] for w in read]),
+        "widest": max((w["culls"]["widest"] for w in read), default=0.0),
+        "contradicted": sum(w["culls"]["contradicted"] for w in read),
+        "worlds": {label(w): {"cut_off": w["culls"]["cut_off"], "largest": w["culls"]["largest"],
+                              "big_culls": w["averages"]["big_culls"],
+                              "big_culls_surely": w["averages"]["big_culls_surely"], "per_100": w["culls"]["per_100"],
+                              "score": w["proposal"]["criteria"]["culls"], "rank": w["rank"]} for w in read}})
+    # How many worlds would meet the culls criterion for other sizes of a big piece and other lines.
+    sizes = sorted(read[0]["culls"]["per_100"], key=float) if read else []
+    ch.number("table:culls", {
+        "head": ["a big piece is more than"] + [f"at most {n:g} every 100 iterations" for n in CULL_LINES],
+        "rows": [[f"{float(size):.0%}" + (" (the line)" if abs(float(size) - big) < 1e-9 else "")]
+                 + [sum(w["culls"]["per_100"][size][1] <= n for w in read) for n in CULL_LINES] for size in sizes]})
+
     # The two halves of each run: did a world grow healthier or sicker?
     first = [w["halves"][0] for w in living]
     second = [w["halves"][1] for w in living]
     ch.figure("halves", title="Healthier or sicker with time?",
-              x={"label": "health over the first half of the run", "min": 0, "max": 5},
-              y={"label": "health over the second half", "min": 0, "max": 5},
-              series=[{"x": [0, 5], "y": [0, 5], "colour": GREY, "dash": [4, 3], "width": 1},
+              x={"label": "health over the first half of the run", "min": 0, "max": len(criteria)},
+              y={"label": "health over the second half", "min": 0, "max": len(criteria)},
+              series=[{"x": [0, len(criteria)], "y": [0, len(criteria)], "colour": GREY, "dash": [4, 3], "width": 1},
                       {"x": first, "y": second, "points": True, "size": 6, "colour": BLUE, "alpha": 0.8}],
               legend=False,
               caption="Each dot is a living world: its health scored over the first half of its run (iterations "

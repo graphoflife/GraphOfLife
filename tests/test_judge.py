@@ -277,7 +277,8 @@ def _screen(name):
     return module
 
 
-HEALTH, EFFECTS, FAMILIES, FUNNEL = (_screen(name) for name in ("health", "effects", "families", "funnel"))
+HEALTH, EFFECTS, FAMILIES, FUNNEL, CULLS = (_screen(name) for name in ("health", "effects", "families", "funnel",
+                                                                        "culls"))
 
 
 def _line(key):
@@ -292,7 +293,7 @@ def test_a_line_is_read_as_the_share_of_what_it_asks():
     assert near(HEALTH.progress(_line("width"), 1.1), 1 / 3)            # counted from the random twin's 1
     assert near(HEALTH.progress(_line("links_min"), 2.5), 0.5)          # from a tree's two links an agent
     assert near(HEALTH.progress(_line("tokens_alike"), 0.9), 0.5)       # 0.1 unlike, of the 0.2 asked
-    assert near(HEALTH.progress(_line("richest"), 0.10), 0.5)           # twice the share of the tokens allowed
+    assert near(HEALTH.progress(_line("richest"), 0.20), 0.5)           # twice the share of the tokens allowed
     assert HEALTH.progress(_line("width"), 0.9) == 0.0                  # below its twin: none of it
     assert HEALTH.progress(_line("core"), None) == 0.0                  # not read: nothing met
 
@@ -381,6 +382,63 @@ def test_fertility_passed_on_is_told_from_chance():
         FAMILIES.K.Tree = real
     assert passed["z"] > 3, passed
     assert drawn["z"] < 2, drawn
+
+
+def test_a_phase_is_rebuilt_as_it_left_the_network_before_its_cleanup():
+    prev = {"ids": [1, 2, 3], "edges": [[1, 2], [1, 3]]}
+    # A child of 1, born linked to it, takes over 1's link to 2; a search joins 3 to the child; 1-3 lapses.
+    frame = {"decisions": {"births": [{"agent": 1, "child": 9, "links": [1], "handed_over": [2]}],
+                           "proposals": [[3, 9, True], [2, 3, False]], "pruned_edges": [[1, 3]]}}
+    assert CULLS.before_cleanup(prev, frame) == {1: {9}, 2: {9}, 3: {9}, 9: {1, 2, 3}}
+
+
+def test_what_an_agent_held_is_read_from_its_stakes_and_its_births():
+    # A game: a node holds what was staked on it; under link_token a lapsed link may have paid either end a token.
+    prev = {"ids": [1, 2, 3, 4], "tokens": [3, 3, 3, 3], "edges": []}
+    game = {"phase": 2, "decisions": {"allocations": [{"targets": [1, 2], "alloc": [2, 1]},
+                                                      {"targets": [2, 1, 3], "alloc": [0, 0, 3]}],
+                                      "pruned_edges": [[2, 4]]}}
+    assert CULLS.holdings(prev, game, {"link_token": True}) == ({1: 2, 2: 1, 3: 3, 4: 0}, {1: 2, 2: 2, 3: 3, 4: 1})
+    assert CULLS.holdings(prev, game, {})[1][4] == 0
+    # Reproduction: 1 gives its child 9 all it has; 9 pays for its two links under link_token; 3 gives 2 a token.
+    birth = {"phase": 1, "decisions": {"births": [{"agent": 1, "tokens_before": 3, "invested": 3, "child": 9,
+                                                   "links": [1, 2], "handed_over": []}],
+                                       "gifts": [[3, 2, 1]]}}
+    least, most = CULLS.holdings(prev, birth, {"link_token": True})
+    assert least == most == {1: 0, 2: 4, 3: 2, 4: 3, 9: 1}
+    # Searchers may have paid tokens the record leaves out: then nobody is surely broke.
+    assert set(CULLS.holdings(prev, birth, {"link_search": "walk"})[1].values()) == {None}
+
+
+def test_a_piece_culled_counts_the_culled_and_leaves_one_by_one():
+    # 1 holds the world together: 2 and 3 hang from it, and 4 hangs from it with two leaves of its own.
+    adj = {1: {2, 3, 4}, 2: {1}, 3: {1}, 4: {1, 5, 6}, 5: {4}, 6: {4}}
+    held = {4: 0, 5: 3, 6: 2}
+    # 4 starved: its two leaves are culled, each alone.
+    assert CULLS.pieces(adj, {1, 2, 3}, 1, 2, held, held, mend=False) == (1, 1, False)
+    # The link 1-4 lapsed instead: 4 and its leaves are culled as one piece of three.
+    adj = {1: {2, 3}, 2: {1}, 3: {1}, 4: {5, 6}, 5: {4}, 6: {4}}
+    held = {4: 1, 5: 1, 6: 1}
+    assert CULLS.pieces(adj, {1, 2, 3}, 0, 3, held, held, mend=False) == (3, 3, False)
+    # A piece cut off whole by a lapse, with an agent that starved inside it: under mending its death splits
+    # nothing, so the piece is the two culled; without, they are two pieces of one.
+    adj = {1: {2}, 2: {1}, 3: {4}, 4: {3, 5}, 5: {4}}
+    held = {3: 2, 4: 0, 5: 2}
+    assert CULLS.pieces(adj, {1, 2}, 1, 2, held, held, mend=True) == (2, 2, False)
+    assert CULLS.pieces(adj, {1, 2}, 1, 2, held, held, mend=False) == (1, 1, False)
+    # Two agents the record leaves open, of whom one starved: the piece is two surely, four at most.
+    adj = {1: {2}, 2: {1}, 3: {4}, 4: {3, 5}, 5: {4, 6}, 6: {5}}
+    least, most = {3: 2, 4: 0, 5: 2, 6: 0}, {3: 2, 4: None, 5: 2, 6: None}
+    assert CULLS.pieces(adj, {1, 2}, 1, 3, least, most, mend=True) == (2, 4, False)
+    # The counts settle an open agent when they can: here only one starved, and one was open.
+    assert CULLS.pieces(adj, {1, 2}, 1, 3, {**least, 6: 1}, {**most, 6: 1}, mend=True) == (3, 3, False)
+    # An agent that surely held a token cannot have been removed beside a survivor.
+    adj = {1: {2, 3}, 2: {1}, 3: {1}}
+    assert CULLS.pieces(adj, {1, 2}, 0, 1, {3: 2}, {3: 2}, mend=False)[2]
+    # A big cull counts once it is more than BIG_CULL of the world, as often as it happens; surely, or at most.
+    cut = {"lost": [[150, 1, 0.4, 0.4], [151, 2, 0.1, 0.1], [300, 1, 0.1, 0.2]]}
+    assert HEALTH.big_culls(cut, 100, 300) == 0.5 and HEALTH.big_culls(cut, 100, 400) == 2 / 3
+    assert HEALTH.big_culls(cut, 100, 400, surely=True) == 1 / 3
 
 
 def test_the_shortlist_is_every_candidate_no_other_beats_in_both():

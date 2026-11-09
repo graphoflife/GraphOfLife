@@ -215,7 +215,8 @@ CATEGORIES = [
     ("contemporaries", "variation", "contemporaries", True, "how far apart two agents of one era act"),
     ("fertility", "selection", "fertility", True,
      "how much more a parent's number of children says of its children's than chance alone (a correlation)"),
-    ("health", "health", "health", True, "health by the proposed order, of 5 (research/screen/health.py)"),
+    ("health", "health", "health", True,
+     "health by the proposed order, the sum of its criteria (research/screen/health.py)"),
     ("riches", "economy", "tokens_per_agent", True, "tokens per agent"),
 ]
 

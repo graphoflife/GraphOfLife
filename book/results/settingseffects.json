@@ -36,9 +36,39 @@
       "text": "`valence`",
       "href": "pages/settings.md#valence"
      },
-     "0.0017",
-     "0.042",
-     "0: 4.21 (53); 16: 4.79 (5); 4: 3.47 (7); 8: 3.75 (5)"
+     "0.0041",
+     "0.055",
+     "0: 4.75 (53); 16: 5.16 (5); 4: 3.88 (7); 8: 3.90 (5)"
+    ],
+    [
+     "health (the proposal)",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "0.0054",
+     "0.055",
+     "false: 4.22 (28); true: 4.82 (42)"
+    ],
+    [
+     "health (the proposal)",
+     {
+      "text": "`mix_at_birth`",
+      "href": "pages/settings.md#mix_at_birth"
+     },
+     "0.0066",
+     "0.055",
+     "false: 4.82 (49); true: 4.22 (21)"
+    ],
+    [
+     "decentralised",
+     {
+      "text": "`valence`",
+      "href": "pages/settings.md#valence"
+     },
+     "0.0029",
+     "0.072",
+     "0: 1.00 (53); 16: 1.00 (5); 4: 0.47 (7); 8: 0.99 (5)"
     ],
     [
      "resilient",
@@ -81,13 +111,23 @@
      "children: 0.96 (13); local: 1.00 (9); newborns: 1.00 (10); parents: 0.95 (9); poorest: 0.80 (24); uniform: 0.91 (5)"
     ],
     [
+     "no big culls",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "0.0000",
+     "0.001",
+     "false: 0.10 (28); true: 0.48 (42)"
+    ],
+    [
      "agents (log10 of the median)",
      {
       "text": "`link_token`",
       "href": "pages/settings.md#link_token"
      },
-     "0.0002",
-     "0.005",
+     "0.0000",
+     "0.001",
      "false: 3.80 (37); true: 3.47 (33)"
     ],
     [
@@ -96,8 +136,8 @@
       "text": "`redistribution`",
       "href": "pages/settings.md#redistribution"
      },
-     "0.0013",
-     "0.017",
+     "0.0014",
+     "0.018",
      "children: 3.40 (13); local: 3.54 (9); newborns: 3.53 (10); parents: 3.52 (9); poorest: 3.82 (24); uniform: 3.77 (5)"
     ],
     [
@@ -107,7 +147,7 @@
       "href": "pages/settings.md#random_input_amount"
      },
      "0.0001",
-     "0.004",
+     "0.002",
      "0: 0.98 (10); 10: 0.27 (19); 2: 0.49 (21); 5: 0.50 (20)"
     ],
     [
@@ -116,8 +156,8 @@
       "text": "`mend_on_death`",
       "href": "pages/settings.md#mend_on_death"
      },
-     "0.0010",
-     "0.013",
+     "0.0007",
+     "0.009",
      "false: 0.29 (28); true: 0.60 (42)"
     ],
     [
@@ -126,9 +166,19 @@
       "text": "`redistribution`",
       "href": "pages/settings.md#redistribution"
      },
+     "0.0001",
+     "0.002",
+     "children: 0.45 (13); local: 0.53 (9); newborns: 0.44 (10); parents: 0.42 (9); poorest: 0.32 (24); uniform: 0.36 (5)"
+    ],
+    [
+     "big culls every 100 iterations",
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
      "0.0000",
      "0.001",
-     "children: 0.45 (13); local: 0.53 (9); newborns: 0.44 (10); parents: 0.42 (9); poorest: 0.32 (24); uniform: 0.36 (5)"
+     "false: 9.84 (28); true: 2.14 (42)"
     ],
     [
      "heredity index",
@@ -136,19 +186,9 @@
       "text": "`mutate_on_replication`",
       "href": "pages/settings.md#mutate_on_replication"
      },
-     "0.0005",
-     "0.014",
+     "0.0006",
+     "0.016",
      "false: 0.34 (41); true: 0.61 (29)"
-    ],
-    [
-     "heredity index",
-     {
-      "text": "`mutation_probability`",
-      "href": "pages/settings.md#mutation_probability"
-     },
-     "0.0026",
-     "0.023",
-     "0.1: 0.83 (5); 0.2: 0.45 (52); 0.4: 0.48 (6); 0.8: 0.16 (7)"
     ],
     [
      "heredity index",
@@ -156,9 +196,19 @@
       "text": "`valence`",
       "href": "pages/settings.md#valence"
      },
-     "0.0028",
-     "0.023",
+     "0.0027",
+     "0.024",
      "0: 0.35 (53); 16: 0.41 (5); 4: 0.67 (7); 8: 0.58 (5)"
+    ],
+    [
+     "heredity index",
+     {
+      "text": "`mutation_probability`",
+      "href": "pages/settings.md#mutation_probability"
+     },
+     "0.0028",
+     "0.024",
+     "0.1: 0.83 (5); 0.2: 0.45 (52); 0.4: 0.48 (6); 0.8: 0.16 (7)"
     ],
     [
      "heredity index",
@@ -166,8 +216,8 @@
       "text": "`link_search`",
       "href": "pages/settings.md#link_search"
      },
-     "0.0089",
-     "0.056",
+     "0.0084",
+     "0.052",
      "jump: 0.56 (18); off: 0.54 (18); reach: 0.20 (19); walk: 0.44 (15)"
     ],
     [
@@ -176,8 +226,8 @@
       "text": "`link_upkeep`",
       "href": "pages/settings.md#link_upkeep"
      },
-     "0.0001",
-     "0.004",
+     "0.0002",
+     "0.006",
      "off: 386.50 (27); paid_only: 1236.53 (21); paid_or_used: 807.03 (22)"
     ],
     [
@@ -186,8 +236,8 @@
       "text": "`mend_on_death`",
       "href": "pages/settings.md#mend_on_death"
      },
-     "0.0003",
-     "0.009",
+     "0.0004",
+     "0.010",
      "false: 1.04 (28); true: 1.55 (42)"
     ],
     [
@@ -196,8 +246,8 @@
       "text": "`mend_on_death`",
       "href": "pages/settings.md#mend_on_death"
      },
-     "0.0012",
-     "0.031",
+     "0.0016",
+     "0.040",
      "false: 0.05 (28); true: 0.09 (42)"
     ],
     [
@@ -206,8 +256,8 @@
       "text": "`random_input_amount`",
       "href": "pages/settings.md#random_input_amount"
      },
-     "0.0101",
-     "0.100",
+     "0.0105",
+     "0.098",
      "0: 0.08 (10); 10: 0.05 (19); 2: 0.08 (21); 5: 0.09 (20)"
     ],
     [
@@ -216,8 +266,8 @@
       "text": "`mix_at_birth`",
       "href": "pages/settings.md#mix_at_birth"
      },
-     "0.0119",
-     "0.100",
+     "0.0117",
+     "0.098",
      "false: 0.08 (49); true: 0.06 (21)"
     ],
     [
@@ -236,13 +286,13 @@
       "text": "`link_token`",
       "href": "pages/settings.md#link_token"
      },
-     "0.0071",
-     "0.089",
+     "0.0066",
+     "0.082",
      "false: 0.20 (37); true: 0.08 (33)"
     ]
    ]
   },
-  "found": 23,
+  "found": 28,
   "table:all": {
    "head": [
     "setting",
@@ -259,8 +309,8 @@
      },
      "false: 12/43; true: 2/41",
      "0.007",
-     "false: 4.16; true: 4.01",
-     "0.842"
+     "false: 4.75; true: 4.42",
+     "0.433"
     ],
     [
      {
@@ -269,8 +319,8 @@
      },
      "false: 7/37; true: 7/47",
      "0.767",
-     "false: 4.04; true: 4.18",
-     "0.911"
+     "false: 4.66; true: 4.54",
+     "0.884"
     ],
     [
      {
@@ -279,8 +329,8 @@
      },
      "false: 4/18; true: 6/23",
      "1.000",
-     "false: 4.16; true: 4.39",
-     "0.516"
+     "false: 4.32; true: 4.77",
+     "0.678"
     ],
     [
      {
@@ -289,8 +339,8 @@
      },
      "largest: 10/41; lottery: 4/43",
      "0.081",
-     "largest: 4.21; lottery: 4.06",
-     "0.961"
+     "largest: 4.75; lottery: 4.55",
+     "0.671"
     ],
     [
      {
@@ -299,8 +349,8 @@
      },
      "[16, 16, 16, 16, 16]: 1/11; [16, 16, 16, 16]: 3/9; [16, 16, 16]: 0/10; [32, 32, 32, 32, 32]: 3/10; [32, 32, 32, 32]: 1/6; [32, 32, 32]: 1/5; [50, 50, 50, 50, 50]: 3/15; [50, 50, 50, 50]: 1/5; [50, 50, 50]: 1/13",
      "0.621",
-     "[16, 16, 16, 16, 16]: 4.20; [16, 16, 16, 16]: 3.53; [16, 16, 16]: 4.17; [32, 32, 32, 32, 32]: 4.44; [32, 32, 32, 32]: 3.85; [32, 32, 32]: 3.88; [50, 50, 50, 50, 50]: 4.49; [50, 50, 50, 50]: 4.43; [50, 50, 50]: 3.93",
-     "0.365"
+     "[16, 16, 16, 16, 16]: 4.79; [16, 16, 16, 16]: 3.73; [16, 16, 16]: 4.76; [32, 32, 32, 32, 32]: 4.94; [32, 32, 32, 32]: 4.20; [32, 32, 32]: 4.69; [50, 50, 50, 50, 50]: 4.76; [50, 50, 50, 50]: 4.53; [50, 50, 50]: 4.41",
+     "0.558"
     ],
     [
      {
@@ -309,8 +359,8 @@
      },
      "forced: 5/32; mutual: 8/33",
      "0.535",
-     "forced: 4.12; mutual: 4.21",
-     "0.651"
+     "forced: 4.60; mutual: 4.68",
+     "0.866"
     ],
     [
      {
@@ -319,8 +369,8 @@
      },
      "jump: 2/20; off: 1/19; reach: 5/24; walk: 6/21",
      "0.183",
-     "jump: 4.07; off: 4.04; reach: 4.21; walk: 4.12",
-     "0.765"
+     "jump: 4.45; off: 4.39; reach: 4.85; walk: 4.82",
+     "0.182"
     ],
     [
      {
@@ -329,8 +379,8 @@
      },
      "looking: 4/32; random: 9/33",
      "0.214",
-     "looking: 4.14; random: 4.26",
-     "0.430"
+     "looking: 4.49; random: 4.75",
+     "0.381"
     ],
     [
      {
@@ -339,8 +389,8 @@
      },
      "false: 6/43; true: 8/41",
      "0.570",
-     "false: 4.16; true: 4.10",
-     "0.768"
+     "false: 4.49; true: 4.75",
+     "0.725"
     ],
     [
      {
@@ -349,8 +399,8 @@
      },
      "off: 5/32; paid_only: 4/25; paid_or_used: 5/27",
      "1.000",
-     "off: 4.30; paid_only: 3.78; paid_or_used: 4.32",
-     "0.041"
+     "off: 4.68; paid_only: 4.16; paid_or_used: 4.85",
+     "0.029"
     ],
     [
      {
@@ -359,8 +409,8 @@
      },
      "false: 5/16; true: 1/11",
      "0.346",
-     "false: 3.75; true: 3.90",
-     "0.511"
+     "false: 4.22; true: 4.21",
+     "0.550"
     ],
     [
      {
@@ -369,8 +419,8 @@
      },
      "false: 7/35; true: 7/49",
      "0.559",
-     "false: 4.06; true: 4.17",
-     "0.216"
+     "false: 4.22; true: 4.82",
+     "0.005"
     ],
     [
      {
@@ -379,8 +429,8 @@
      },
      "0: 1/4; 16: 2/17; 30: 4/21; 4: 6/25; 8: 1/17",
      "0.583",
-     "0: 3.84; 16: 3.96; 30: 4.41; 4: 4.10; 8: 4.23",
-     "0.714"
+     "0: 4.01; 16: 4.49; 30: 4.87; 4: 4.33; 8: 4.82",
+     "0.440"
     ],
     [
      {
@@ -389,8 +439,8 @@
      },
      "false: 5/32; true: 8/48",
      "1.000",
-     "false: 4.25; true: 4.05",
-     "0.724"
+     "false: 4.60; true: 4.62",
+     "0.657"
     ],
     [
      {
@@ -399,8 +449,8 @@
      },
      "false: 8/57; true: 6/27",
      "0.533",
-     "false: 4.30; true: 3.84",
-     "0.023"
+     "false: 4.82; true: 4.22",
+     "0.007"
     ],
     [
      {
@@ -409,8 +459,8 @@
      },
      "false: 7/48; true: 7/36",
      "0.773",
-     "false: 4.21; true: 4.01",
-     "0.149"
+     "false: 4.60; true: 4.46",
+     "0.375"
     ],
     [
      {
@@ -419,8 +469,8 @@
      },
      "0.1: 0/12; 0.2: 11/59; 0.4: 3/13",
      "0.279",
-     "0.1: 4.07; 0.2: 4.13; 0.4: 4.25",
-     "0.791"
+     "0.1: 4.87; 0.2: 4.54; 0.4: 4.69",
+     "0.869"
     ],
     [
      {
@@ -429,8 +479,8 @@
      },
      "0.1: 0/5; 0.2: 14/66; 0.4: 0/6; 0.8: 0/7",
      "0.192",
-     "0.1: 3.53; 0.2: 4.11; 0.4: 3.99; 0.8: 4.25",
-     "0.792"
+     "0.1: 3.60; 0.2: 4.58; 0.4: 4.05; 0.8: 4.77",
+     "0.716"
     ],
     [
      {
@@ -439,8 +489,8 @@
      },
      "0.05: 2/8; 0.1: 11/66; 0.3: 1/10",
      "0.669",
-     "0.05: 3.96; 0.1: 4.16; 0.3: 4.21",
-     "0.570"
+     "0.05: 4.45; 0.1: 4.60; 0.3: 4.82",
+     "0.913"
     ],
     [
      {
@@ -449,8 +499,8 @@
      },
      "0: 6/33; 150: 5/30; 600: 3/21",
      "1.000",
-     "0: 3.96; 150: 4.24; 600: 4.31",
-     "0.472"
+     "0: 4.49; 150: 4.82; 600: 4.69",
+     "0.749"
     ],
     [
      {
@@ -459,8 +509,8 @@
      },
      "0: 2/12; 10: 3/22; 2: 6/27; 5: 3/23",
      "0.847",
-     "0: 4.23; 10: 3.95; 2: 4.16; 5: 4.21",
-     "0.942"
+     "0: 4.34; 10: 4.55; 2: 4.75; 5: 4.81",
+     "0.891"
     ],
     [
      {
@@ -469,8 +519,8 @@
      },
      "children: 3/16; local: 4/13; newborns: 0/10; parents: 2/11; poorest: 3/27; uniform: 2/7",
      "0.397",
-     "children: 4.39; local: 4.30; newborns: 4.15; parents: 4.44; poorest: 3.85; uniform: 4.54",
-     "0.218"
+     "children: 4.82; local: 4.75; newborns: 4.67; parents: 4.49; poorest: 4.31; uniform: 5.05",
+     "0.232"
     ],
     [
      {
@@ -479,8 +529,8 @@
      },
      "largest: 7/31; own: 6/49",
      "0.356",
-     "largest: 3.85; own: 4.39",
-     "0.073"
+     "largest: 4.37; own: 4.86",
+     "0.076"
     ],
     [
      {
@@ -489,8 +539,8 @@
      },
      "end: 6/27; estate: 3/25",
      "0.467",
-     "end: 4.01; estate: 3.84",
-     "0.148"
+     "end: 4.82; estate: 4.32",
+     "0.187"
     ],
     [
      {
@@ -499,8 +549,8 @@
      },
      "0: 6/59; 16: 1/6; 2: 6/6; 4: 1/8; 8: 0/5",
      "0.000",
-     "0: 4.21; 16: 4.79; 4: 3.47; 8: 3.75",
-     "0.002"
+     "0: 4.75; 16: 5.16; 4: 3.88; 8: 3.90",
+     "0.004"
     ]
    ]
   },
@@ -564,7 +614,7 @@
       "text": "`allow_revolutions`",
       "href": "pages/settings.md#allow_revolutions"
      },
-     "0.09",
+     "0.10",
      "same-position share"
     ],
     [
@@ -572,7 +622,7 @@
       "text": "`hidden_layers`",
       "href": "pages/settings.md#hidden_layers"
      },
-     "0.08",
+     "0.07",
      "late novelty of the line of descent"
     ],
     [
@@ -736,7 +786,7 @@
    ]
   },
   "simplicity": {
-   "spearman": -0.1510125720580359,
+   "spearman": -0.05018698103332409,
    "dead_counts": {
     "n": 14,
     "mean": 7.642857142857143,
@@ -772,38 +822,38 @@
     ],
     [
      "s4002",
-     "5.00",
-     "4.70"
+     "5.06",
+     "4.74"
     ],
     [
      "s4003",
-     "4.63",
-     "4.62"
+     "4.66",
+     "4.65"
     ],
     [
      "s4004",
-     "4.40",
-     "4.41"
+     "4.42",
+     "4.43"
     ],
     [
      "s4005",
      "died at 230",
-     "4.39"
+     "4.49"
     ],
     [
      "s4006",
      "died at 1,445",
-     "4.51"
+     "4.68"
     ],
     [
      "s4007",
-     "4.16",
-     "4.17"
+     "4.21",
+     "4.22"
     ],
     [
      "s4008",
-     "4.99",
-     "4.73"
+     "5.05",
+     "4.78"
     ]
    ]
   },
@@ -813,13 +863,13 @@
     "died": 14,
     "health": {
      "n": 70,
-     "mean": 4.030919927049482,
-     "median": 4.106791332851611,
-     "sd": 0.7402513544747855,
-     "min": 1.1220837579927918,
-     "max": 5.0,
-     "q25": 3.6186492032409134,
-     "q75": 4.602623112645027
+     "mean": 4.5048000099184184,
+     "median": 4.5766727323584,
+     "sd": 0.8544625415729551,
+     "min": 2.122083757992792,
+     "max": 6.0,
+     "q25": 4.005231254942581,
+     "q75": 5.061098151338692
     }
    },
    "E41": {
@@ -827,13 +877,13 @@
     "died": 3,
     "health": {
      "n": 5,
-     "mean": 4.637112719709796,
-     "median": 4.633907860501476,
-     "sd": 0.3660109713141757,
-     "min": 4.164198818022124,
-     "max": 5.0,
-     "q25": 4.398685723565177,
-     "q75": 4.988771196460202
+     "mean": 4.681207175186886,
+     "median": 4.663005152377103,
+     "sd": 0.3780644017541925,
+     "min": 4.207692071395438,
+     "max": 5.062521551724138,
+     "q25": 4.423608403977549,
+     "q75": 5.049208696460202
     }
    },
    "E42": {
@@ -841,13 +891,13 @@
     "died": 1,
     "health": {
      "n": 7,
-     "mean": 4.502798135703879,
-     "median": 4.5117225371372065,
-     "sd": 0.20009745429036238,
-     "min": 4.166452727571964,
-     "max": 4.732975598236548,
-     "q25": 4.3964783995633585,
-     "q75": 4.657739643927358
+     "mean": 4.569311421721033,
+     "median": 4.64921048278571,
+     "sd": 0.20022322650880078,
+     "min": 4.2158735112176196,
+     "max": 4.778162514124398,
+     "q25": 4.462039718634891,
+     "q75": 4.7089270033248605
     }
    }
   }
@@ -855,7 +905,7 @@
  "figures": {
   "matrix": {
    "title": "Which settings matter for what",
-   "caption": "Each row is a drawn setting, each column an outcome of the worlds; a cell is bright where the worlds drawn with the setting's different values differ in that outcome more than shuffling the outcome among the worlds would make them differ. Its brightness is how unlikely that is by chance: 1 for a chance of 1 in 10, 2 for 1 in 100, 4.3 for none in 20,000 shuffles. Many cells are tested, so a few are bright by luck alone: the table below gives each its false discovery rate. Whether a world died is tested over all of them; every other outcome over the living. A blank cell was not tested (a setting that cannot matter there, or too few worlds). The columns: died, died; died*, died, valence 2 aside; health, health (the proposal); decent., decentralised; resil., resilient; 3-D, almost three-dimensional; diverse, diverse; uneven, not too even; agents, agents (log10 of the median); apart, same-position share; Gini, Gini of the tokens; hered., heredity index; gener., generations; popul., effective population (log10); novelty, late novelty of the line of descent; fertil., fertility passed on.",
+   "caption": "Each row is a drawn setting, each column an outcome of the worlds; a cell is bright where the worlds drawn with the setting's different values differ in that outcome more than shuffling the outcome among the worlds would make them differ. Its brightness is how unlikely that is by chance: 1 for a chance of 1 in 10, 2 for 1 in 100, 4.3 for none in 20,000 shuffles. Many cells are tested, so a few are bright by luck alone: the table below gives each its false discovery rate. Whether a world died is tested over all of them; every other outcome over the living. A blank cell was not tested (a setting that cannot matter there, or too few worlds). The columns: died, died; died*, died, valence 2 aside; health, health (the proposal); decent., decentralised; resil., resilient; 3-D, almost three-dimensional; diverse, diverse; uneven, not too even; culls, no big culls; agents, agents (log10 of the median); apart, same-position share; Gini, Gini of the tokens; big culls, big culls every 100 iterations; hered., heredity index; gener., generations; popul., effective population (log10); novelty, late novelty of the line of descent; fertil., fertility passed on.",
    "recipe": "**Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end\n\n**Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.\n\n1. For each setting, the worlds where it can matter (as the sampler draws it), grouped by its value.\n2. Died: the chi-square statistic of the deaths across the groups; numbers: the Kruskal-Wallis statistic of their ranks.\n3. The share of 20,000 shuffles of the outcome among the worlds whose statistic is at least as large (seed 11): the chance.\n4. The false discovery rate of each chance among all settings tested on that outcome (Benjamini-Hochberg).\n\n**To make it again:** `python3 book_figures.py settingseffects`."
   },
   "deaths": {
@@ -865,7 +915,7 @@
   },
   "simplicity": {
    "title": "Do worlds with more mechanisms switched on do better?",
-   "caption": "Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation -0.15.",
+   "caption": "Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation -0.05.",
    "recipe": "**Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end\n\n**Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.\n\n1. Count each world's drawn values that differ from `SIMPLEST` in effects.py.\n2. Plot against its health; the Spearman correlation of the two.\n\n**To make it again:** `python3 book_figures.py settingseffects`."
   }
  }

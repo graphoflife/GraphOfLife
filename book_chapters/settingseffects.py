@@ -37,6 +37,7 @@ DATA = ("each world's drawn settings (its plan, `book/experiments/E40.json`, dra
 #: Each outcome's name under the map, short enough for its column; the caption says them in full.
 SHORT = {"died": "died", "died_rest": "died*", "health": "health", "c_decentralised": "decent.",
          "c_resilient": "resil.", "c_space": "3-D", "c_diverse": "diverse", "c_uneven": "uneven",
+         "c_culls": "culls", "culls": "big culls",
          "agents": "agents", "apart": "apart", "gini": "Gini", "heredity": "hered.", "generations": "gener.",
          "population": "popul.", "novelty": "novelty", "fertility": "fertil."}
 
@@ -166,7 +167,7 @@ def settingseffects(ch: F.Chapter) -> None:
     groups = [[r["health"] for r in living if r["count"] == k] for k in counts]
     ch.figure("simplicity", title="Do worlds with more mechanisms switched on do better?",
               x={"label": "mechanisms switched on beyond the simplest rules", "categories": [str(k) for k in counts]},
-              y={"label": "health (of 5)", "min": 0, "max": 5},
+              y={"label": f"health (of {len(h['criteria'])})", "min": 0, "max": len(h["criteria"])},
               series=dots([str(k) for k in counts], groups, [BLUE] * len(counts)), legend=False,
               caption=f"Each dot is a living world of Experiment 40, placed by how many of {len(simp['simplest'])} "
                       "mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the "

@@ -276,10 +276,46 @@
      1,
      2,
      42,
-     3,
+     14,
      15,
-     "20.3",
+     "21.6",
      "messages, handover"
+    ],
+    [
+     {
+      "text": "s3045",
+      "href": "run:B1-30000-f6d23f-s3045"
+     },
+     "round 3",
+     68,
+     12,
+     58,
+     9,
+     16,
+     18,
+     51,
+     2,
+     5,
+     "26.6",
+     "messages, gifts, handover, partner search, upkeep, revolutions"
+    ],
+    [
+     {
+      "text": "s3021",
+      "href": "run:B1-30000-4aff7d-s3021"
+     },
+     "round 3",
+     61,
+     23,
+     46,
+     26,
+     11,
+     16,
+     30,
+     17,
+     12,
+     "26.9",
+     "messages, handover, partner search, upkeep"
     ],
     [
      {
@@ -294,10 +330,28 @@
      2,
      10,
      4,
-     5,
+     20,
      45,
-     "25.9",
+     "27.6",
      "messages, gifts"
+    ],
+    [
+     {
+      "text": "s3095",
+      "href": "run:B1-30000-3e5856-s3095"
+     },
+     "round 3",
+     46,
+     7,
+     53,
+     5,
+     9,
+     3,
+     70,
+     29,
+     27,
+     "27.7",
+     "messages, handover, partner search, upkeep"
     ],
     [
      {
@@ -312,9 +366,9 @@
      18,
      23,
      16,
-     21,
+     38,
      65,
-     "26.4",
+     "28.3",
      "messages, gifts, handover, upkeep"
     ],
     [
@@ -330,64 +384,28 @@
      8,
      8,
      6,
-     15,
+     30,
      50,
-     "26.7",
+     "28.3",
      "messages, gifts"
     ],
     [
      {
-      "text": "s3021",
-      "href": "run:B1-30000-4aff7d-s3021"
+      "text": "s3062",
+      "href": "run:B1-30000-def151-s3062"
      },
      "round 3",
-     61,
-     23,
-     46,
-     26,
-     11,
-     16,
-     30,
-     19,
-     12,
-     "27.1",
-     "messages, handover, partner search, upkeep"
-    ],
-    [
-     {
-      "text": "s3045",
-      "href": "run:B1-30000-f6d23f-s3045"
-     },
-     "round 3",
-     68,
-     12,
-     58,
-     9,
-     16,
-     18,
      51,
-     8,
-     5,
-     "27.2",
-     "messages, gifts, handover, partner search, upkeep, revolutions"
-    ],
-    [
-     {
-      "text": "s4002 w",
-      "href": "run:B1-30000-5379e2-s4002"
-     },
-     "round 3, weakest first",
      26,
-     37,
-     57,
-     58,
-     4,
-     6,
-     12,
-     1,
-     47,
-     "27.6",
-     "messages, gifts, mates pay, partner search, mixing"
+     61,
+     45,
+     3,
+     5,
+     26,
+     23,
+     22,
+     "29.1",
+     "messages, handover, partner search, upkeep, revolutions"
     ],
     [
      {
@@ -402,46 +420,28 @@
      5,
      17,
      19,
-     23,
+     39,
      63,
-     "27.6",
+     "29.3",
      "messages, gifts, handover, upkeep"
     ],
     [
      {
-      "text": "s4002 s",
-      "href": "run:B1-30000-192733-s4002"
+      "text": "s4002 w",
+      "href": "run:B1-30000-5379e2-s4002"
      },
-     "round 3, strongest first",
-     21,
-     28,
-     56,
-     62,
-     7,
-     4,
-     10,
-     17,
-     52,
-     "28.6",
-     "messages, gifts, mates pay, partner search, mixing"
-    ],
-    [
-     {
-      "text": "s3046",
-      "href": "run:B1-30000-27bd64-s3046"
-     },
-     "round 3",
-     55,
-     8,
-     54,
-     19,
+     "round 3, weakest first",
      26,
-     27,
-     36,
-     14,
+     37,
+     57,
+     58,
+     4,
+     6,
+     12,
      18,
-     "28.6",
-     "messages, gifts, partner search, upkeep"
+     47,
+     "29.4",
+     "messages, gifts, mates pay, partner search, mixing"
     ],
     [
      {
@@ -456,9 +456,9 @@
      10,
      20,
      58,
-     7,
+     12,
      68,
-     "29.0",
+     "29.6",
      "messages, gifts, handover, mates pay, partner search, upkeep, mixing"
     ],
     [
@@ -474,46 +474,28 @@
      15,
      35,
      64,
-     6,
+     13,
      14,
-     "29.3",
+     "30.1",
      "messages, gifts, partner search, revolutions"
     ],
     [
      {
-      "text": "s3024",
-      "href": "run:B1-30000-f05874-s3024"
+      "text": "s3046",
+      "href": "run:B1-30000-27bd64-s3046"
      },
      "round 3",
-     31,
-     33,
-     34,
-     38,
-     23,
-     11,
-     44,
-     10,
-     42,
-     "29.6",
-     "messages, gifts, handover, upkeep, revolutions"
-    ],
-    [
-     {
-      "text": "s4004 w",
-      "href": "run:B1-30000-17ac6e-s4004"
-     },
-     "round 3, weakest first",
-     71,
-     9,
-     43,
-     68,
-     12,
-     12,
-     15,
-     35,
-     2,
-     "29.7",
-     "messages, handover, mates pay, partner search, mixing"
+     55,
+     8,
+     54,
+     19,
+     26,
+     27,
+     36,
+     28,
+     18,
+     "30.1",
+     "messages, gifts, partner search, upkeep"
     ],
     [
      {
@@ -528,100 +510,10 @@
      29,
      44,
      38,
-     48,
+     52,
      25,
-     "29.7",
-     "messages, upkeep"
-    ],
-    [
-     {
-      "text": "s4004 s",
-      "href": "run:B1-30000-2bac4d-s4004"
-     },
-     "round 3, strongest first",
-     69,
-     6,
-     48,
-     63,
-     19,
-     15,
-     13,
-     33,
-     4,
-     "30.0",
-     "messages, handover, mates pay, partner search, mixing"
-    ],
-    [
-     {
-      "text": "s3062",
-      "href": "run:B1-30000-def151-s3062"
-     },
-     "round 3",
-     51,
-     26,
-     61,
-     45,
-     3,
-     5,
-     26,
-     32,
-     22,
      "30.1",
-     "messages, handover, partner search, upkeep, revolutions"
-    ],
-    [
-     {
-      "text": "s3055",
-      "href": "run:B1-30000-cca771-s3055"
-     },
-     "round 3",
-     53,
-     25,
-     38,
-     65,
-     21,
-     14,
-     21,
-     16,
-     20,
-     "30.3",
-     "messages, handover, revolutions"
-    ],
-    [
-     {
-      "text": "s3095",
-      "href": "run:B1-30000-3e5856-s3095"
-     },
-     "round 3",
-     46,
-     7,
-     53,
-     5,
-     9,
-     3,
-     70,
-     65,
-     27,
-     "31.7",
-     "messages, handover, partner search, upkeep"
-    ],
-    [
-     {
-      "text": "s3028",
-      "href": "run:B1-30000-2eef58-s3028"
-     },
-     "round 3",
-     20,
-     3,
-     2,
-     20,
-     45,
-     72,
-     17,
-     62,
-     53,
-     "32.7",
-     "messages, gifts, handover, partner search, upkeep, revolutions"
+     "messages, upkeep"
     ],
     [
      {
@@ -636,100 +528,46 @@
      57,
      25,
      35,
-     58,
+     35,
      72,
-     "32.8",
+     "30.2",
      "messages, upkeep"
     ],
     [
      {
-      "text": "s3023",
-      "href": "run:B1-30000-b0f6e3-s3023"
+      "text": "s4002 s",
+      "href": "run:B1-30000-192733-s4002"
      },
-     "round 3",
-     64,
-     27,
-     44,
-     29,
-     52,
-     40,
-     34,
-     2,
-     9,
-     "33.4",
-     "messages, gifts, upkeep"
-    ],
-    [
-     {
-      "text": "s3091",
-      "href": "run:B1-30000-42d88d-s3091"
-     },
-     "round 3",
+     "round 3, strongest first",
+     21,
+     28,
      56,
-     17,
-     51,
-     70,
-     14,
-     22,
-     14,
-     41,
-     17,
-     "33.6",
-     "messages, gifts, handover, partner search, mixing"
-    ],
-    [
-     {
-      "text": "s4007 w",
-      "href": "run:B1-30000-04d3eb-s4007"
-     },
-     "round 3, weakest first",
-     17,
-     36,
-     20,
-     56,
-     36,
-     37,
-     3,
-     44,
-     56,
-     "33.9",
-     "messages, handover, partner search"
-    ],
-    [
-     {
-      "text": "s3032",
-      "href": "run:B1-30000-22865f-s3032"
-     },
-     "round 3",
-     13,
-     49,
-     50,
-     16,
-     35,
-     26,
-     37,
-     20,
-     60,
-     "34.0",
-     "messages, gifts, handover, partner search"
-    ],
-    [
-     {
-      "text": "s3094",
-      "href": "run:B1-30000-4ac946-s3094"
-     },
-     "round 3",
+     62,
+     7,
      4,
-     2,
-     68,
-     2,
-     40,
-     13,
-     41,
-     67,
-     69,
-     "34.0",
-     "messages, gifts, partner search, upkeep"
+     10,
+     34,
+     52,
+     "30.4",
+     "messages, gifts, mates pay, partner search, mixing"
+    ],
+    [
+     {
+      "text": "s3024",
+      "href": "run:B1-30000-f05874-s3024"
+     },
+     "round 3",
+     31,
+     33,
+     34,
+     38,
+     23,
+     11,
+     44,
+     21,
+     42,
+     "30.8",
+     "messages, gifts, handover, upkeep, revolutions"
     ],
     [
      {
@@ -744,82 +582,64 @@
      6,
      7,
      68,
-     61,
+     31,
      10,
-     "34.2",
+     "30.9",
      "handover, partner search, upkeep, revolutions"
     ],
     [
      {
-      "text": "s4005 s",
-      "href": "run:B1-30000-6f6c09-s4005"
+      "text": "s4004 w",
+      "href": "run:B1-30000-17ac6e-s4004"
      },
-     "round 3, strongest first",
-     39,
-     45,
-     45,
-     47,
-     13,
+     "round 3, weakest first",
+     71,
      9,
-     39,
-     38,
-     34,
-     "34.3",
-     "messages, gifts, partner search"
+     43,
+     68,
+     12,
+     12,
+     15,
+     47,
+     2,
+     "31.0",
+     "messages, handover, mates pay, partner search, mixing"
     ],
     [
      {
-      "text": "s4007 s",
-      "href": "run:B1-30000-a8a2d2-s4007"
+      "text": "s4004 s",
+      "href": "run:B1-30000-2bac4d-s4004"
      },
      "round 3, strongest first",
-     16,
-     34,
-     37,
-     61,
-     24,
-     34,
-     7,
-     43,
-     57,
-     "34.8",
-     "messages, handover, partner search"
-    ],
-    [
-     {
-      "text": "s3001",
-      "href": "run:B1-30000-68cda7-s3001"
-     },
-     "round 3",
-     2,
-     18,
-     4,
-     33,
+     69,
+     6,
+     48,
      63,
-     71,
-     22,
-     37,
-     71,
-     "35.7",
-     "messages, handover, mates pay, upkeep, revolutions, mixing"
+     19,
+     15,
+     13,
+     46,
+     4,
+     "31.4",
+     "messages, handover, mates pay, partner search, mixing"
     ],
     [
      {
-      "text": "s3006",
-      "href": "run:B1-30000-023c0a-s3006"
+      "text": "s3094",
+      "href": "run:B1-30000-4ac946-s3094"
      },
      "round 3",
-     15,
-     44,
-     27,
-     18,
-     58,
-     29,
-     50,
-     22,
-     58,
-     "35.7",
-     "messages, gifts, handover, partner search, upkeep"
+     4,
+     2,
+     68,
+     2,
+     40,
+     13,
+     41,
+     48,
+     69,
+     "31.9",
+     "messages, gifts, partner search, upkeep"
     ],
     [
      {
@@ -834,82 +654,100 @@
      56,
      1,
      60,
-     36,
+     3,
      6,
-     "35.7",
+     "32.0",
      "messages, partner search, upkeep"
     ],
     [
      {
-      "text": "s3014",
-      "href": "run:B1-30000-7d129f-s3014"
+      "text": "s3055",
+      "href": "run:B1-30000-cca771-s3055"
      },
      "round 3",
-     6,
-     11,
+     53,
+     25,
+     38,
+     65,
      21,
-     35,
-     64,
-     66,
-     1,
-     51,
-     67,
-     "35.8",
-     "messages, handover, partner search, upkeep"
+     14,
+     21,
+     32,
+     20,
+     "32.1",
+     "messages, handover, revolutions"
     ],
     [
      {
-      "text": "s4006 s",
-      "href": "run:B1-30000-8526cf-s4006"
+      "text": "s3032",
+      "href": "run:B1-30000-22865f-s3032"
+     },
+     "round 3",
+     13,
+     49,
+     50,
+     16,
+     35,
+     26,
+     37,
+     11,
+     60,
+     "33.0",
+     "messages, gifts, handover, partner search"
+    ],
+    [
+     {
+      "text": "s3028",
+      "href": "run:B1-30000-2eef58-s3028"
+     },
+     "round 3",
+     20,
+     3,
+     2,
+     20,
+     45,
+     72,
+     17,
+     66,
+     53,
+     "33.1",
+     "messages, gifts, handover, partner search, upkeep, revolutions"
+    ],
+    [
+     {
+      "text": "s3091",
+      "href": "run:B1-30000-42d88d-s3091"
+     },
+     "round 3",
+     56,
+     17,
+     51,
+     70,
+     14,
+     22,
+     14,
+     51,
+     17,
+     "34.7",
+     "messages, gifts, handover, partner search, mixing"
+    ],
+    [
+     {
+      "text": "s4005 s",
+      "href": "run:B1-30000-6f6c09-s4005"
      },
      "round 3, strongest first",
-     14,
-     31,
-     24,
-     25,
-     49,
+     39,
      45,
-     46,
-     30,
-     59,
-     "35.9",
-     "messages, gifts, handover, upkeep, revolutions"
-    ],
-    [
-     {
-      "text": "s3058",
-      "href": "run:B1-30000-4108dd-s3058"
-     },
-     "round 3",
-     70,
-     64,
-     32,
-     49,
-     17,
-     30,
-     43,
-     18,
-     3,
-     "36.2",
-     "messages, partner search, revolutions"
-    ],
-    [
-     {
-      "text": "s3018",
-      "href": "run:B1-30000-af1e28-s3018"
-     },
-     "round 3",
-     50,
-     54,
-     64,
-     11,
-     28,
-     33,
-     55,
+     45,
+     47,
      13,
-     23,
-     "36.8",
-     "messages, gifts, handover, mates pay, partner search, mixing"
+     9,
+     39,
+     42,
+     34,
+     "34.8",
+     "messages, gifts, partner search"
     ],
     [
      {
@@ -924,10 +762,46 @@
      20,
      31,
      45,
-     25,
+     7,
      46,
-     "36.9",
+     "34.9",
      "messages, gifts, handover, partner search"
+    ],
+    [
+     {
+      "text": "s3023",
+      "href": "run:B1-30000-b0f6e3-s3023"
+     },
+     "round 3",
+     64,
+     27,
+     44,
+     29,
+     52,
+     40,
+     34,
+     16,
+     9,
+     "35.0",
+     "messages, gifts, upkeep"
+    ],
+    [
+     {
+      "text": "s4007 w",
+      "href": "run:B1-30000-04d3eb-s4007"
+     },
+     "round 3, weakest first",
+     17,
+     36,
+     20,
+     56,
+     36,
+     37,
+     3,
+     55,
+     56,
+     "35.1",
+     "messages, handover, partner search"
     ],
     [
      {
@@ -942,46 +816,154 @@
      25,
      28,
      48,
-     27,
+     9,
      48,
-     "37.1",
+     "35.1",
      "messages, handover, partner search"
     ],
     [
      {
-      "text": "s3087",
-      "href": "run:B1-30000-363694-s3087"
+      "text": "s3018",
+      "href": "run:B1-30000-af1e28-s3018"
      },
      "round 3",
-     9,
-     16,
-     19,
-     40,
-     65,
-     70,
-     20,
-     31,
+     50,
+     54,
      64,
-     "37.1",
+     11,
+     28,
+     33,
+     55,
+     4,
+     23,
+     "35.8",
+     "messages, gifts, handover, mates pay, partner search, mixing"
+    ],
+    [
+     {
+      "text": "s3058",
+      "href": "run:B1-30000-4108dd-s3058"
+     },
+     "round 3",
+     70,
+     64,
+     32,
+     49,
+     17,
+     30,
+     43,
+     15,
+     3,
+     "35.9",
+     "messages, partner search, revolutions"
+    ],
+    [
+     {
+      "text": "s4007 s",
+      "href": "run:B1-30000-a8a2d2-s4007"
+     },
+     "round 3, strongest first",
+     16,
+     34,
+     37,
+     61,
+     24,
+     34,
+     7,
+     54,
+     57,
+     "36.0",
+     "messages, handover, partner search"
+    ],
+    [
+     {
+      "text": "s3006",
+      "href": "run:B1-30000-023c0a-s3006"
+     },
+     "round 3",
+     15,
+     44,
+     27,
+     18,
+     58,
+     29,
+     50,
+     25,
+     58,
+     "36.0",
+     "messages, gifts, handover, partner search, upkeep"
+    ],
+    [
+     {
+      "text": "s3001",
+      "href": "run:B1-30000-68cda7-s3001"
+     },
+     "round 3",
+     2,
+     18,
+     4,
+     33,
+     63,
+     71,
+     22,
+     45,
+     71,
+     "36.6",
+     "messages, handover, mates pay, upkeep, revolutions, mixing"
+    ],
+    [
+     {
+      "text": "s4006 s",
+      "href": "run:B1-30000-8526cf-s4006"
+     },
+     "round 3, strongest first",
+     14,
+     31,
+     24,
+     25,
+     49,
+     45,
+     46,
+     37,
+     59,
+     "36.7",
+     "messages, gifts, handover, upkeep, revolutions"
+    ],
+    [
+     {
+      "text": "s3014",
+      "href": "run:B1-30000-7d129f-s3014"
+     },
+     "round 3",
+     6,
+     11,
+     21,
+     35,
+     64,
+     66,
+     1,
+     62,
+     67,
+     "37.0",
      "messages, handover, partner search, upkeep"
     ],
     [
      {
-      "text": "s3057",
-      "href": "run:B1-30000-38aee9-s3057"
+      "text": "s3092",
+      "href": "run:B1-30000-7fc03f-s3092"
      },
      "round 3",
-     30,
-     46,
-     67,
-     43,
-     47,
-     21,
-     27,
-     11,
-     43,
-     "37.2",
-     "messages, partner search, mixing"
+     18,
+     57,
+     60,
+     15,
+     42,
+     32,
+     54,
+     1,
+     55,
+     "37.1",
+     "messages, partner search, upkeep"
     ],
     [
      {
@@ -996,10 +978,46 @@
      66,
      56,
      29,
-     69,
+     68,
      30,
-     "37.3",
+     "37.2",
      "messages, gifts, handover, mates pay, upkeep, mixing"
+    ],
+    [
+     {
+      "text": "s3054",
+      "href": "run:B1-30000-d9254e-s3054"
+     },
+     "round 3",
+     45,
+     60,
+     12,
+     23,
+     55,
+     52,
+     53,
+     8,
+     28,
+     "37.3",
+     "messages, partner search, upkeep"
+    ],
+    [
+     {
+      "text": "s3071",
+      "href": "run:B1-30000-605c0d-s3071"
+     },
+     "round 3",
+     19,
+     67,
+     30,
+     36,
+     27,
+     48,
+     33,
+     22,
+     54,
+     "37.3",
+     "messages, partner search"
     ],
     [
      {
@@ -1021,42 +1039,6 @@
     ],
     [
      {
-      "text": "s3052",
-      "href": "run:B1-30000-0d058a-s3052"
-     },
-     "round 3",
-     12,
-     51,
-     35,
-     34,
-     37,
-     49,
-     24,
-     34,
-     61,
-     "37.4",
-     "messages, gifts, handover, partner search"
-    ],
-    [
-     {
-      "text": "s3092",
-      "href": "run:B1-30000-7fc03f-s3092"
-     },
-     "round 3",
-     18,
-     57,
-     60,
-     15,
-     42,
-     32,
-     54,
-     4,
-     55,
-     "37.4",
-     "messages, partner search, upkeep"
-    ],
-    [
-     {
       "text": "s3080",
       "href": "run:B1-30000-625bc7-s3080"
      },
@@ -1068,82 +1050,64 @@
      22,
      24,
      59,
-     12,
+     5,
      13,
-     "38.2",
+     "37.4",
      "messages, gifts, handover, partner search, revolutions"
     ],
     [
      {
-      "text": "s3050",
-      "href": "run:B1-30000-ebe08c-s3050"
+      "text": "s3052",
+      "href": "run:B1-30000-0d058a-s3052"
      },
      "round 3",
-     44,
-     32,
-     31,
-     64,
-     41,
-     42,
-     25,
-     42,
-     29,
-     "38.9",
-     "messages, gifts, handover, mates pay, partner search, mixing"
-    ],
-    [
-     {
-      "text": "s3078",
-      "href": "run:B1-30000-dd27b6-s3078"
-     },
-     "round 3",
-     62,
-     48,
-     10,
-     69,
-     33,
-     67,
-     5,
-     46,
-     11,
-     "39.0",
-     "messages, gifts, partner search"
-    ],
-    [
-     {
-      "text": "s3054",
-      "href": "run:B1-30000-d9254e-s3054"
-     },
-     "round 3",
-     45,
-     60,
      12,
-     23,
-     55,
-     52,
-     53,
-     26,
-     28,
-     "39.3",
-     "messages, partner search, upkeep"
+     51,
+     35,
+     34,
+     37,
+     49,
+     24,
+     41,
+     61,
+     "38.2",
+     "messages, gifts, handover, partner search"
     ],
     [
      {
-      "text": "s3071",
-      "href": "run:B1-30000-605c0d-s3071"
+      "text": "s3087",
+      "href": "run:B1-30000-363694-s3087"
      },
      "round 3",
+     9,
+     16,
      19,
-     67,
-     30,
-     36,
-     27,
-     48,
-     33,
      40,
-     54,
-     "39.3",
-     "messages, partner search"
+     65,
+     70,
+     20,
+     44,
+     64,
+     "38.6",
+     "messages, handover, partner search, upkeep"
+    ],
+    [
+     {
+      "text": "s3057",
+      "href": "run:B1-30000-38aee9-s3057"
+     },
+     "round 3",
+     30,
+     46,
+     67,
+     43,
+     47,
+     21,
+     27,
+     24,
+     43,
+     "38.7",
+     "messages, partner search, mixing"
     ],
     [
      {
@@ -1158,46 +1122,28 @@
      43,
      64,
      23,
-     39,
+     36,
      32,
-     "39.6",
+     "39.2",
      "messages, gifts, handover, partner search"
     ],
     [
      {
-      "text": "s3061",
-      "href": "run:B1-30000-00e3c8-s3061"
+      "text": "s3050",
+      "href": "run:B1-30000-ebe08c-s3050"
      },
      "round 3",
-     47,
-     20,
-     62,
-     60,
-     54,
-     19,
-     18,
-     50,
-     26,
-     "39.6",
-     "gifts, mates pay, partner search, revolutions, mixing"
-    ],
-    [
-     {
-      "text": "s3063",
-      "href": "run:B1-30000-924e70-s3063"
-     },
-     "round 3",
-     3,
-     24,
-     28,
-     59,
-     60,
-     59,
-     8,
-     45,
-     70,
-     "39.6",
-     "messages, handover, partner search, upkeep"
+     44,
+     32,
+     31,
+     64,
+     41,
+     42,
+     25,
+     49,
+     29,
+     "39.7",
+     "messages, gifts, handover, mates pay, partner search, mixing"
     ],
     [
      {
@@ -1219,21 +1165,21 @@
     ],
     [
      {
-      "text": "s3040",
-      "href": "run:B1-30000-36d076-s3040"
+      "text": "s3078",
+      "href": "run:B1-30000-dd27b6-s3078"
      },
      "round 3",
-     38,
-     38,
-     40,
+     62,
      48,
-     31,
-     41,
-     32,
-     55,
-     35,
-     "39.8",
-     "messages, gifts, partner search, upkeep"
+     10,
+     69,
+     33,
+     67,
+     5,
+     57,
+     11,
+     "40.2",
+     "messages, gifts, partner search"
     ],
     [
      {
@@ -1248,28 +1194,64 @@
      44,
      53,
      72,
-     47,
+     50,
      36,
-     "40.3",
+     "40.7",
      "messages, handover, mixing"
     ],
     [
      {
-      "text": "s3022",
-      "href": "run:B1-30000-298337-s3022"
+      "text": "s3040",
+      "href": "run:B1-30000-36d076-s3040"
      },
      "round 3",
-     24,
+     38,
+     38,
+     40,
+     48,
+     31,
+     41,
+     32,
      63,
-     59,
-     52,
-     46,
-     39,
+     35,
+     "40.7",
+     "messages, gifts, partner search, upkeep"
+    ],
+    [
+     {
+      "text": "s3061",
+      "href": "run:B1-30000-00e3c8-s3061"
+     },
+     "round 3",
+     47,
+     20,
+     62,
+     60,
+     54,
+     19,
+     18,
+     60,
+     26,
+     "40.7",
+     "gifts, mates pay, partner search, revolutions, mixing"
+    ],
+    [
+     {
+      "text": "s3063",
+      "href": "run:B1-30000-924e70-s3063"
+     },
+     "round 3",
+     3,
+     24,
      28,
-     9,
-     49,
-     "41.0",
-     "messages, partner search"
+     59,
+     60,
+     59,
+     8,
+     56,
+     70,
+     "40.8",
+     "messages, handover, partner search, upkeep"
     ],
     [
      {
@@ -1284,9 +1266,9 @@
      32,
      36,
      57,
-     49,
+     53,
      37,
-     "41.1",
+     "41.6",
      "messages, gifts, handover, mixing"
     ],
     [
@@ -1302,28 +1284,10 @@
      69,
      38,
      11,
-     66,
-     38,
-     "41.2",
-     "messages, handover, partner search, upkeep"
-    ],
-    [
-     {
-      "text": "s3070",
-      "href": "run:B1-30000-a4d3a0-s3070"
-     },
-     "round 3",
-     11,
-     39,
-     7,
-     42,
-     48,
      69,
-     47,
-     52,
-     62,
-     "41.9",
-     "messages, gifts, partner search, upkeep"
+     38,
+     "41.6",
+     "messages, handover, partner search, upkeep"
     ],
     [
      {
@@ -1338,64 +1302,46 @@
      39,
      68,
      61,
-     28,
+     10,
      8,
-     "44.0",
+     "42.0",
      "messages, gifts"
     ],
     [
      {
-      "text": "s3051",
-      "href": "run:B1-30000-b5a76a-s3051"
+      "text": "s3022",
+      "href": "run:B1-30000-298337-s3022"
      },
      "round 3",
-     72,
-     65,
-     36,
-     72,
-     30,
-     51,
-     40,
-     29,
-     1,
-     "44.0",
-     "messages, gifts, partner search, upkeep, revolutions"
-    ],
-    [
-     {
-      "text": "s3013",
-      "href": "run:B1-30000-7f7cd5-s3013"
-     },
-     "round 3",
-     7,
-     47,
-     17,
-     67,
-     71,
-     61,
-     9,
-     54,
-     66,
-     "44.3",
-     "messages, partner search, upkeep"
-    ],
-    [
-     {
-      "text": "s3083",
-      "href": "run:B1-30000-0d7e0c-s3083"
-     },
-     "round 3",
-     34,
-     50,
-     11,
-     44,
-     38,
-     47,
-     69,
-     68,
+     24,
+     63,
+     59,
+     52,
+     46,
      39,
-     "44.4",
-     "messages, gifts, handover, mates pay, upkeep, mixing"
+     28,
+     19,
+     49,
+     "42.1",
+     "messages, partner search"
+    ],
+    [
+     {
+      "text": "s3070",
+      "href": "run:B1-30000-a4d3a0-s3070"
+     },
+     "round 3",
+     11,
+     39,
+     7,
+     42,
+     48,
+     69,
+     47,
+     61,
+     62,
+     "42.9",
+     "messages, gifts, partner search, upkeep"
     ],
     [
      {
@@ -1410,64 +1356,46 @@
      53,
      43,
      71,
+     6,
      24,
-     24,
-     "45.0",
+     "43.0",
      "messages, handover, partner search, upkeep"
     ],
     [
      {
-      "text": "s3012",
-      "href": "run:B1-30000-02fa53-s3012"
+      "text": "s3051",
+      "href": "run:B1-30000-b5a76a-s3051"
      },
      "round 3",
-     54,
-     53,
-     9,
-     54,
-     50,
-     46,
-     63,
-     59,
-     19,
-     "45.2",
-     "messages, gifts, partner search, upkeep, mixing"
-    ],
-    [
-     {
-      "text": "s3056",
-      "href": "run:B1-30000-43985b-s3056"
-     },
-     "round 3",
+     72,
+     65,
+     36,
+     72,
+     30,
+     51,
      40,
-     52,
-     16,
-     32,
-     62,
-     60,
-     56,
-     64,
-     33,
-     "46.1",
-     "messages, gifts, handover, mates pay, partner search, mixing"
+     26,
+     1,
+     "43.7",
+     "messages, gifts, partner search, upkeep, revolutions"
     ],
     [
      {
-      "text": "s3093",
-      "href": "run:B1-30000-26a341-s3093"
+      "text": "s3083",
+      "href": "run:B1-30000-0d7e0c-s3083"
      },
      "round 3",
-     42,
-     62,
-     14,
+     34,
      50,
-     59,
-     54,
-     52,
-     57,
-     31,
-     "46.8",
-     "messages, gifts, handover, partner search"
+     11,
+     44,
+     38,
+     47,
+     69,
+     67,
+     39,
+     "44.3",
+     "messages, gifts, handover, mates pay, upkeep, mixing"
     ],
     [
      {
@@ -1482,9 +1410,9 @@
      68,
      57,
      65,
-     63,
+     43,
      40,
-     "46.9",
+     "44.7",
      "messages, gifts, mates pay, partner search, mixing"
     ],
     [
@@ -1500,10 +1428,100 @@
      70,
      65,
      49,
-     53,
+     27,
      21,
-     "47.6",
+     "44.7",
      "messages, gifts, handover, partner search, upkeep"
+    ],
+    [
+     {
+      "text": "s3013",
+      "href": "run:B1-30000-7f7cd5-s3013"
+     },
+     "round 3",
+     7,
+     47,
+     17,
+     67,
+     71,
+     61,
+     9,
+     64,
+     66,
+     "45.4",
+     "messages, partner search, upkeep"
+    ],
+    [
+     {
+      "text": "s3056",
+      "href": "run:B1-30000-43985b-s3056"
+     },
+     "round 3",
+     40,
+     52,
+     16,
+     32,
+     62,
+     60,
+     56,
+     59,
+     33,
+     "45.6",
+     "messages, gifts, handover, mates pay, partner search, mixing"
+    ],
+    [
+     {
+      "text": "s3012",
+      "href": "run:B1-30000-02fa53-s3012"
+     },
+     "round 3",
+     54,
+     53,
+     9,
+     54,
+     50,
+     46,
+     63,
+     65,
+     19,
+     "45.9",
+     "messages, gifts, partner search, upkeep, mixing"
+    ],
+    [
+     {
+      "text": "s3093",
+      "href": "run:B1-30000-26a341-s3093"
+     },
+     "round 3",
+     42,
+     62,
+     14,
+     50,
+     59,
+     54,
+     52,
+     58,
+     31,
+     "46.9",
+     "messages, gifts, handover, partner search"
+    ],
+    [
+     {
+      "text": "s3065",
+      "href": "run:B1-30000-ba3afe-s3065"
+     },
+     "round 3",
+     57,
+     70,
+     72,
+     6,
+     67,
+     50,
+     66,
+     33,
+     16,
+     "48.6",
+     "messages, handover, partner search, upkeep, mixing"
     ],
     [
      {
@@ -1525,24 +1543,6 @@
     ],
     [
      {
-      "text": "s3065",
-      "href": "run:B1-30000-ba3afe-s3065"
-     },
-     "round 3",
-     57,
-     70,
-     72,
-     6,
-     67,
-     50,
-     66,
-     56,
-     16,
-     "51.1",
-     "messages, handover, partner search, upkeep, mixing"
-    ],
-    [
-     {
       "text": "s3090",
       "href": "run:B1-30000-05ba40-s3090"
      },
@@ -1554,9 +1554,9 @@
      72,
      58,
      62,
-     60,
+     40,
      7,
-     "53.0",
+     "50.8",
      "messages, partner search, upkeep, mixing"
     ]
    ]
@@ -1586,63 +1586,7 @@
      "0.12",
      "0.26",
      "0.31",
-     "5.00"
-    ],
-    [
-     {
-      "text": "s4008 w",
-      "href": "run:B1-30000-1cfaa4-s4008"
-     },
-     "5,120",
-     "662",
-     "12",
-     "0.23",
-     "0.42",
-     "0.23",
-     "0.26",
-     "4.99"
-    ],
-    [
-     {
-      "text": "s4003 w",
-      "href": "run:B1-30000-9efb1d-s4003"
-     },
-     "10,264",
-     "1189",
-     "9",
-     "0.52",
-     "0.34",
-     "0.13",
-     "0.19",
-     "4.63"
-    ],
-    [
-     {
-      "text": "s4008 s",
-      "href": "run:B1-30000-645972-s4008"
-     },
-     "5,402",
-     "691",
-     "14",
-     "0.25",
-     "0.40",
-     "0.17",
-     "0.27",
-     "4.73"
-    ],
-    [
-     {
-      "text": "s3021",
-      "href": "run:B1-30000-4aff7d-s3021"
-     },
-     "1,715",
-     "1064",
-     "27",
-     "0.32",
-     "0.22",
-     "0.14",
-     "0.23",
-     "4.67"
+     "5.16"
     ],
     [
      {
@@ -1656,175 +1600,35 @@
      "0.08",
      "0.14",
      "0.22",
-     "4.89"
+     "5.89"
     ],
     [
      {
-      "text": "s4002 w",
-      "href": "run:B1-30000-5379e2-s4002"
+      "text": "s3021",
+      "href": "run:B1-30000-4aff7d-s3021"
      },
-     "5,278",
-     "822",
-     "8",
+     "1,715",
+     "1064",
+     "27",
+     "0.32",
      "0.22",
-     "0.37",
-     "0.22",
-     "0.28",
-     "5.00"
-    ],
-    [
-     {
-      "text": "s4003 s",
-      "href": "run:B1-30000-fffc7d-s4003"
-     },
-     "8,805",
-     "1131",
-     "9",
-     "0.36",
-     "0.33",
-     "0.19",
-     "0.23",
-     "4.62"
-    ],
-    [
-     {
-      "text": "s4002 s",
-      "href": "run:B1-30000-192733-s4002"
-     },
-     "5,705",
-     "953",
-     "7",
-     "0.22",
-     "0.39",
-     "0.17",
-     "0.29",
-     "4.70"
-    ],
-    [
-     {
-      "text": "s3046",
-      "href": "run:B1-30000-27bd64-s3046"
-     },
-     "2,418",
-     "1321",
-     "51",
-     "0.23",
-     "0.18",
-     "0.10",
-     "0.18",
-     "4.74"
-    ],
-    [
-     {
-      "text": "s3042",
-      "href": "run:B1-30000-b82ad0-s3042"
-     },
-     "11,125",
-     "1180",
-     "247",
      "0.14",
-     "0.04",
-     "0.15",
-     "0.21",
-     "4.91"
+     "0.23",
+     "5.06"
     ],
     [
      {
-      "text": "s3008",
-      "href": "run:B1-30000-e19f2d-s3008"
+      "text": "s4008 w",
+      "href": "run:B1-30000-1cfaa4-s4008"
      },
-     "2,063",
-     "947",
-     "24",
-     "0.62",
-     "0.01",
-     "0.14",
-     "0.15",
-     "4.98"
-    ],
-    [
-     {
-      "text": "s3024",
-      "href": "run:B1-30000-f05874-s3024"
-     },
-     "4,614",
-     "878",
+     "5,120",
+     "662",
      "12",
-     "0.44",
-     "0.12",
-     "0.11",
-     "0.26",
-     "4.83"
-    ],
-    [
-     {
-      "text": "s4004 w",
-      "href": "run:B1-30000-17ac6e-s4004"
-     },
-     "1,186",
-     "1309",
-     "5",
-     "0.34",
-     "0.35",
-     "0.14",
-     "0.25",
-     "4.40"
-    ],
-    [
-     {
-      "text": "s3082",
-      "href": "run:B1-30000-1141ea-s3082"
-     },
-     "3,207",
-     "1411",
-     "26",
-     "0.84",
-     "0.14",
-     "0.09",
-     "0.12",
-     "4.06"
-    ],
-    [
-     {
-      "text": "s4004 s",
-      "href": "run:B1-30000-2bac4d-s4004"
-     },
-     "1,349",
-     "1392",
-     "6",
-     "0.29",
-     "0.37",
-     "0.12",
      "0.23",
-     "4.41"
-    ],
-    [
-     {
-      "text": "s3062",
-      "href": "run:B1-30000-def151-s3062"
-     },
-     "2,569",
-     "993",
-     "11",
-     "0.19",
-     "0.27",
-     "0.22",
-     "0.28",
-     "4.44"
-    ],
-    [
-     {
-      "text": "s3055",
-      "href": "run:B1-30000-cca771-s3055"
-     },
-     "2,507",
-     "1033",
-     "6",
-     "0.36",
-     "0.31",
-     "0.11",
-     "0.24",
-     "4.71"
+     "0.42",
+     "0.23",
+     "0.26",
+     "5.05"
     ],
     [
      {
@@ -1838,21 +1642,133 @@
      "-0.02",
      "0.15",
      "0.29",
-     "3.47"
+     "4.82"
     ],
     [
      {
-      "text": "s3028",
-      "href": "run:B1-30000-2eef58-s3028"
+      "text": "s4003 w",
+      "href": "run:B1-30000-9efb1d-s4003"
      },
-     "5,736",
-     "1437",
-     "37",
-     "0.84",
+     "10,264",
+     "1189",
+     "9",
+     "0.52",
+     "0.34",
+     "0.13",
+     "0.19",
+     "4.66"
+    ],
+    [
+     {
+      "text": "s4008 s",
+      "href": "run:B1-30000-645972-s4008"
+     },
+     "5,402",
+     "691",
+     "14",
+     "0.25",
+     "0.40",
+     "0.17",
+     "0.27",
+     "4.78"
+    ],
+    [
+     {
+      "text": "s3062",
+      "href": "run:B1-30000-def151-s3062"
+     },
+     "2,569",
+     "993",
+     "11",
+     "0.19",
+     "0.27",
+     "0.22",
+     "0.28",
+     "4.94"
+    ],
+    [
+     {
+      "text": "s4003 s",
+      "href": "run:B1-30000-fffc7d-s4003"
+     },
+     "8,805",
+     "1131",
+     "9",
+     "0.36",
      "0.33",
-     "0.07",
-     "0.05",
-     "3.53"
+     "0.19",
+     "0.23",
+     "4.65"
+    ],
+    [
+     {
+      "text": "s4002 w",
+      "href": "run:B1-30000-5379e2-s4002"
+     },
+     "5,278",
+     "822",
+     "8",
+     "0.22",
+     "0.37",
+     "0.22",
+     "0.28",
+     "5.06"
+    ],
+    [
+     {
+      "text": "s3042",
+      "href": "run:B1-30000-b82ad0-s3042"
+     },
+     "11,125",
+     "1180",
+     "247",
+     "0.14",
+     "0.04",
+     "0.15",
+     "0.21",
+     "5.32"
+    ],
+    [
+     {
+      "text": "s3008",
+      "href": "run:B1-30000-e19f2d-s3008"
+     },
+     "2,063",
+     "947",
+     "24",
+     "0.62",
+     "0.01",
+     "0.14",
+     "0.15",
+     "5.30"
+    ],
+    [
+     {
+      "text": "s3046",
+      "href": "run:B1-30000-27bd64-s3046"
+     },
+     "2,418",
+     "1321",
+     "51",
+     "0.23",
+     "0.18",
+     "0.10",
+     "0.18",
+     "4.82"
+    ],
+    [
+     {
+      "text": "s3082",
+      "href": "run:B1-30000-1141ea-s3082"
+     },
+     "3,207",
+     "1411",
+     "26",
+     "0.84",
+     "0.14",
+     "0.09",
+     "0.12",
+     "4.23"
     ],
     [
      {
@@ -1866,77 +1782,35 @@
      "0.18",
      "0.05",
      "0.18",
-     "3.71"
+     "4.71"
     ],
     [
      {
-      "text": "s3023",
-      "href": "run:B1-30000-b0f6e3-s3023"
+      "text": "s4002 s",
+      "href": "run:B1-30000-192733-s4002"
      },
-     "1,612",
-     "955",
-     "22",
-     "0.34",
-     "0.19",
-     "0.06",
-     "0.14",
-     "5.00"
+     "5,705",
+     "953",
+     "7",
+     "0.22",
+     "0.39",
+     "0.17",
+     "0.29",
+     "4.74"
     ],
     [
      {
-      "text": "s3091",
-      "href": "run:B1-30000-42d88d-s3091"
+      "text": "s3024",
+      "href": "run:B1-30000-f05874-s3024"
      },
-     "2,361",
-     "1173",
-     "5",
-     "0.25",
-     "0.36",
-     "0.14",
-     "0.20",
-     "4.21"
-    ],
-    [
-     {
-      "text": "s4007 w",
-      "href": "run:B1-30000-04d3eb-s4007"
-     },
-     "6,489",
-     "828",
-     "9",
-     "0.53",
-     "0.43",
-     "0.08",
-     "0.14",
-     "4.16"
-    ],
-    [
-     {
-      "text": "s3032",
-      "href": "run:B1-30000-22865f-s3032"
-     },
-     "7,263",
-     "401",
-     "67",
-     "0.28",
-     "0.18",
-     "0.08",
-     "0.18",
-     "4.64"
-    ],
-    [
-     {
-      "text": "s3094",
-      "href": "run:B1-30000-4ac946-s3094"
-     },
-     "11,256",
-     "1509",
-     "11,316",
-     "0.13",
-     "0.14",
-     "0.08",
-     "0.24",
-     "3.42"
+     "4,614",
+     "878",
+     "12",
+     "0.44",
+     "0.12",
+     "0.11",
+     "0.26",
+     "5.03"
     ],
     [
      {
@@ -1950,63 +1824,49 @@
      "-0.00",
      "0.19",
      "0.27",
-     "3.53"
+     "4.77"
     ],
     [
      {
-      "text": "s4005 s",
-      "href": "run:B1-30000-6f6c09-s4005"
+      "text": "s4004 w",
+      "href": "run:B1-30000-17ac6e-s4004"
      },
-     "3,866",
-     "646",
-     "10",
-     "0.33",
+     "1,186",
+     "1309",
+     "5",
+     "0.34",
+     "0.35",
      "0.14",
-     "0.14",
-     "0.26",
-     "4.39"
+     "0.25",
+     "4.42"
     ],
     [
      {
-      "text": "s4007 s",
-      "href": "run:B1-30000-a8a2d2-s4007"
+      "text": "s4004 s",
+      "href": "run:B1-30000-2bac4d-s4004"
      },
-     "6,653",
-     "855",
-     "7",
-     "0.37",
-     "0.40",
-     "0.11",
-     "0.15",
-     "4.17"
-    ],
-    [
-     {
-      "text": "s3001",
-      "href": "run:B1-30000-68cda7-s3001"
-     },
-     "17,266",
-     "1138",
-     "15",
-     "0.83",
+     "1,349",
+     "1392",
+     "6",
      "0.29",
-     "0.04",
-     "0.05",
-     "4.39"
+     "0.37",
+     "0.12",
+     "0.23",
+     "4.43"
     ],
     [
      {
-      "text": "s3006",
-      "href": "run:B1-30000-023c0a-s3006"
+      "text": "s3094",
+      "href": "run:B1-30000-4ac946-s3094"
      },
-     "6,774",
-     "652",
-     "59",
-     "0.48",
-     "0.09",
-     "0.05",
-     "0.17",
-     "4.62"
+     "11,256",
+     "1509",
+     "11,316",
+     "0.13",
+     "0.14",
+     "0.08",
+     "0.24",
+     "4.42"
     ],
     [
      {
@@ -2020,63 +1880,77 @@
      "0.04",
      "0.05",
      "0.34",
-     "4.39"
+     "5.78"
     ],
     [
      {
-      "text": "s3014",
-      "href": "run:B1-30000-7d129f-s3014"
+      "text": "s3055",
+      "href": "run:B1-30000-cca771-s3055"
      },
-     "10,836",
-     "1242",
-     "14",
-     "0.53",
-     "0.45",
-     "0.04",
+     "2,507",
+     "1033",
+     "6",
+     "0.36",
+     "0.31",
+     "0.11",
+     "0.24",
+     "4.75"
+    ],
+    [
+     {
+      "text": "s3032",
+      "href": "run:B1-30000-22865f-s3032"
+     },
+     "7,263",
+     "401",
+     "67",
+     "0.28",
+     "0.18",
+     "0.08",
+     "0.18",
+     "5.34"
+    ],
+    [
+     {
+      "text": "s3028",
+      "href": "run:B1-30000-2eef58-s3028"
+     },
+     "5,736",
+     "1437",
+     "37",
+     "0.84",
+     "0.33",
      "0.07",
-     "3.95"
+     "0.05",
+     "3.60"
     ],
     [
      {
-      "text": "s4006 s",
-      "href": "run:B1-30000-8526cf-s4006"
+      "text": "s3091",
+      "href": "run:B1-30000-42d88d-s3091"
      },
-     "7,009",
-     "940",
-     "30",
-     "0.51",
-     "0.12",
-     "0.07",
-     "0.12",
-     "4.51"
+     "2,361",
+     "1173",
+     "5",
+     "0.25",
+     "0.36",
+     "0.14",
+     "0.20",
+     "4.24"
     ],
     [
      {
-      "text": "s3058",
-      "href": "run:B1-30000-4108dd-s3058"
+      "text": "s4005 s",
+      "href": "run:B1-30000-6f6c09-s4005"
      },
-     "1,257",
-     "142",
+     "3,866",
+     "646",
      "10",
-     "0.46",
-     "0.12",
-     "0.13",
-     "0.17",
-     "4.68"
-    ],
-    [
-     {
-      "text": "s3018",
-      "href": "run:B1-30000-af1e28-s3018"
-     },
-     "2,861",
-     "313",
-     "263",
-     "0.16",
-     "0.06",
-     "0.10",
-     "0.16",
-     "4.74"
+     "0.33",
+     "0.14",
+     "0.14",
+     "0.26",
+     "4.49"
     ],
     [
      {
@@ -2090,7 +1964,35 @@
      "0.12",
      "0.11",
      "0.17",
-     "4.58"
+     "5.58"
+    ],
+    [
+     {
+      "text": "s3023",
+      "href": "run:B1-30000-b0f6e3-s3023"
+     },
+     "1,612",
+     "955",
+     "22",
+     "0.34",
+     "0.19",
+     "0.06",
+     "0.14",
+     "5.10"
+    ],
+    [
+     {
+      "text": "s4007 w",
+      "href": "run:B1-30000-04d3eb-s4007"
+     },
+     "6,489",
+     "828",
+     "9",
+     "0.53",
+     "0.43",
+     "0.08",
+     "0.14",
+     "4.21"
     ],
     [
      {
@@ -2104,6 +2006,202 @@
      "0.09",
      "0.10",
      "0.18",
+     "5.55"
+    ],
+    [
+     {
+      "text": "s3018",
+      "href": "run:B1-30000-af1e28-s3018"
+     },
+     "2,861",
+     "313",
+     "263",
+     "0.16",
+     "0.06",
+     "0.10",
+     "0.16",
+     "5.74"
+    ],
+    [
+     {
+      "text": "s3058",
+      "href": "run:B1-30000-4108dd-s3058"
+     },
+     "1,257",
+     "142",
+     "10",
+     "0.46",
+     "0.12",
+     "0.13",
+     "0.17",
+     "5.16"
+    ],
+    [
+     {
+      "text": "s4007 s",
+      "href": "run:B1-30000-a8a2d2-s4007"
+     },
+     "6,653",
+     "855",
+     "7",
+     "0.37",
+     "0.40",
+     "0.11",
+     "0.15",
+     "4.22"
+    ],
+    [
+     {
+      "text": "s3006",
+      "href": "run:B1-30000-023c0a-s3006"
+     },
+     "6,774",
+     "652",
+     "59",
+     "0.48",
+     "0.09",
+     "0.05",
+     "0.17",
+     "4.87"
+    ],
+    [
+     {
+      "text": "s3001",
+      "href": "run:B1-30000-68cda7-s3001"
+     },
+     "17,266",
+     "1138",
+     "15",
+     "0.83",
+     "0.29",
+     "0.04",
+     "0.05",
+     "4.46"
+    ],
+    [
+     {
+      "text": "s4006 s",
+      "href": "run:B1-30000-8526cf-s4006"
+     },
+     "7,009",
+     "940",
+     "30",
+     "0.51",
+     "0.12",
+     "0.07",
+     "0.12",
+     "4.68"
+    ],
+    [
+     {
+      "text": "s3014",
+      "href": "run:B1-30000-7d129f-s3014"
+     },
+     "10,836",
+     "1242",
+     "14",
+     "0.53",
+     "0.45",
+     "0.04",
+     "0.07",
+     "3.97"
+    ],
+    [
+     {
+      "text": "s3092",
+      "href": "run:B1-30000-7fc03f-s3092"
+     },
+     "6,165",
+     "253",
+     "74",
+     "0.20",
+     "0.07",
+     "0.08",
+     "0.17",
+     "6.00"
+    ],
+    [
+     {
+      "text": "s3007",
+      "href": "run:B1-30000-8119cd-s3007"
+     },
+     "3,382",
+     "1434",
+     "37",
+     "0.57",
+     "0.23",
+     "0.04",
+     "0.09",
+     "3.57"
+    ],
+    [
+     {
+      "text": "s3054",
+      "href": "run:B1-30000-d9254e-s3054"
+     },
+     "3,309",
+     "224",
+     "34",
+     "0.63",
+     "0.07",
+     "0.05",
+     "0.10",
+     "5.55"
+    ],
+    [
+     {
+      "text": "s3071",
+      "href": "run:B1-30000-605c0d-s3071"
+     },
+     "6,070",
+     "109",
+     "14",
+     "0.47",
+     "0.19",
+     "0.10",
+     "0.11",
+     "5.02"
+    ],
+    [
+     {
+      "text": "s3076",
+      "href": "run:B1-30000-66c764-s3076"
+     },
+     "4,525",
+     "1198",
+     "9",
+     "0.66",
+     "0.44",
+     "0.06",
+     "0.08",
+     "2.78"
+    ],
+    [
+     {
+      "text": "s3080",
+      "href": "run:B1-30000-625bc7-s3080"
+     },
+     "1,985",
+     "121",
+     "11",
+     "0.34",
+     "0.04",
+     "0.11",
+     "0.18",
+     "5.70"
+    ],
+    [
+     {
+      "text": "s3052",
+      "href": "run:B1-30000-0d058a-s3052"
+     },
+     "7,368",
+     "387",
+     "15",
+     "0.42",
+     "0.28",
+     "0.08",
+     "0.11",
      "4.55"
     ],
     [
@@ -2118,7 +2216,7 @@
      "0.31",
      "0.04",
      "0.06",
-     "4.44"
+     "4.49"
     ],
     [
      {
@@ -2132,133 +2230,7 @@
      "0.26",
      "0.07",
      "0.20",
-     "4.82"
-    ],
-    [
-     {
-      "text": "s3007",
-      "href": "run:B1-30000-8119cd-s3007"
-     },
-     "3,382",
-     "1434",
-     "37",
-     "0.57",
-     "0.23",
-     "0.04",
-     "0.09",
-     "3.23"
-    ],
-    [
-     {
-      "text": "s3076",
-      "href": "run:B1-30000-66c764-s3076"
-     },
-     "4,525",
-     "1198",
-     "9",
-     "0.66",
-     "0.44",
-     "0.06",
-     "0.08",
-     "2.75"
-    ],
-    [
-     {
-      "text": "s3052",
-      "href": "run:B1-30000-0d058a-s3052"
-     },
-     "7,368",
-     "387",
-     "15",
-     "0.42",
-     "0.28",
-     "0.08",
-     "0.11",
-     "4.41"
-    ],
-    [
-     {
-      "text": "s3092",
-      "href": "run:B1-30000-7fc03f-s3092"
-     },
-     "6,165",
-     "253",
-     "74",
-     "0.20",
-     "0.07",
-     "0.08",
-     "0.17",
-     "5.00"
-    ],
-    [
-     {
-      "text": "s3080",
-      "href": "run:B1-30000-625bc7-s3080"
-     },
-     "1,985",
-     "121",
-     "11",
-     "0.34",
-     "0.04",
-     "0.11",
-     "0.18",
-     "4.79"
-    ],
-    [
-     {
-      "text": "s3050",
-      "href": "run:B1-30000-ebe08c-s3050"
-     },
-     "3,312",
-     "926",
-     "6",
-     "0.47",
-     "0.28",
-     "0.08",
-     "0.13",
-     "4.21"
-    ],
-    [
-     {
-      "text": "s3078",
-      "href": "run:B1-30000-dd27b6-s3078"
-     },
-     "1,672",
-     "422",
-     "5",
-     "0.65",
-     "0.40",
-     "0.09",
-     "0.07",
-     "4.12"
-    ],
-    [
-     {
-      "text": "s3054",
-      "href": "run:B1-30000-d9254e-s3054"
-     },
-     "3,309",
-     "224",
-     "34",
-     "0.63",
-     "0.07",
-     "0.05",
-     "0.10",
-     "4.55"
-    ],
-    [
-     {
-      "text": "s3071",
-      "href": "run:B1-30000-605c0d-s3071"
-     },
-     "6,070",
-     "109",
-     "14",
-     "0.47",
-     "0.19",
-     "0.10",
-     "0.11",
-     "4.24"
+     "4.91"
     ],
     [
      {
@@ -2272,35 +2244,21 @@
      "0.29",
      "0.08",
      "0.08",
-     "4.30"
+     "4.68"
     ],
     [
      {
-      "text": "s3061",
-      "href": "run:B1-30000-00e3c8-s3061"
+      "text": "s3050",
+      "href": "run:B1-30000-ebe08c-s3050"
      },
-     "3,236",
-     "1092",
-     "8",
-     "0.17",
-     "0.33",
-     "0.05",
-     "0.22",
-     "3.96"
-    ],
-    [
-     {
-      "text": "s3063",
-      "href": "run:B1-30000-924e70-s3063"
-     },
-     "14,473",
-     "1053",
-     "8",
+     "3,312",
+     "926",
+     "6",
      "0.47",
-     "0.39",
-     "0.05",
-     "0.09",
-     "4.16"
+     "0.28",
+     "0.08",
+     "0.13",
+     "4.40"
     ],
     [
      {
@@ -2314,21 +2272,21 @@
      "-0.00",
      "0.09",
      "0.09",
-     "1.90"
+     "2.21"
     ],
     [
      {
-      "text": "s3040",
-      "href": "run:B1-30000-36d076-s3040"
+      "text": "s3078",
+      "href": "run:B1-30000-dd27b6-s3078"
      },
-     "3,904",
-     "805",
-     "10",
-     "0.35",
-     "0.21",
+     "1,672",
+     "422",
+     "5",
+     "0.65",
+     "0.40",
      "0.09",
-     "0.14",
-     "3.78"
+     "0.07",
+     "4.17"
     ],
     [
      {
@@ -2342,21 +2300,49 @@
      "-0.05",
      "0.08",
      "0.10",
-     "4.10"
+     "4.33"
     ],
     [
      {
-      "text": "s3022",
-      "href": "run:B1-30000-298337-s3022"
+      "text": "s3040",
+      "href": "run:B1-30000-36d076-s3040"
      },
-     "5,394",
-     "199",
-     "9",
-     "0.22",
-     "0.25",
-     "0.07",
+     "3,904",
+     "805",
+     "10",
+     "0.35",
+     "0.21",
+     "0.09",
      "0.14",
-     "4.85"
+     "3.97"
+    ],
+    [
+     {
+      "text": "s3061",
+      "href": "run:B1-30000-00e3c8-s3061"
+     },
+     "3,236",
+     "1092",
+     "8",
+     "0.17",
+     "0.33",
+     "0.05",
+     "0.22",
+     "4.00"
+    ],
+    [
+     {
+      "text": "s3063",
+      "href": "run:B1-30000-924e70-s3063"
+     },
+     "14,473",
+     "1053",
+     "8",
+     "0.47",
+     "0.39",
+     "0.05",
+     "0.09",
+     "4.20"
     ],
     [
      {
@@ -2370,7 +2356,7 @@
      "0.05",
      "0.09",
      "0.15",
-     "3.96"
+     "4.22"
     ],
     [
      {
@@ -2384,21 +2370,7 @@
      "0.39",
      "0.02",
      "0.14",
-     "3.47"
-    ],
-    [
-     {
-      "text": "s3070",
-      "href": "run:B1-30000-a4d3a0-s3070"
-     },
-     "7,767",
-     "774",
-     "12",
-     "0.67",
-     "0.11",
-     "0.07",
-     "0.06",
-     "3.92"
+     "3.49"
     ],
     [
      {
@@ -2412,49 +2384,35 @@
      "0.04",
      "0.08",
      "0.07",
-     "4.54"
+     "5.54"
     ],
     [
      {
-      "text": "s3051",
-      "href": "run:B1-30000-b5a76a-s3051"
+      "text": "s3022",
+      "href": "run:B1-30000-298337-s3022"
      },
-     "1,091",
-     "141",
-     "4",
-     "0.41",
+     "5,394",
+     "199",
+     "9",
+     "0.22",
+     "0.25",
+     "0.07",
      "0.14",
-     "0.09",
-     "0.11",
-     "4.53"
+     "5.05"
     ],
     [
      {
-      "text": "s3013",
-      "href": "run:B1-30000-7f7cd5-s3013"
+      "text": "s3070",
+      "href": "run:B1-30000-a4d3a0-s3070"
      },
-     "10,511",
-     "500",
-     "5",
-     "0.58",
-     "0.39",
-     "0.02",
-     "0.09",
-     "3.81"
-    ],
-    [
-     {
-      "text": "s3083",
-      "href": "run:B1-30000-0d7e0c-s3083"
-     },
-     "4,159",
-     "389",
-     "11",
-     "0.63",
-     "-0.01",
-     "0.08",
+     "7,767",
+     "774",
+     "12",
+     "0.67",
      "0.11",
-     "3.29"
+     "0.07",
+     "0.06",
+     "4.00"
     ],
     [
      {
@@ -2468,49 +2426,35 @@
      "-0.03",
      "0.05",
      "0.13",
-     "4.61"
+     "5.61"
     ],
     [
      {
-      "text": "s3012",
-      "href": "run:B1-30000-02fa53-s3012"
+      "text": "s3051",
+      "href": "run:B1-30000-b5a76a-s3051"
      },
-     "2,487",
-     "327",
-     "9",
-     "0.65",
-     "0.02",
-     "0.06",
-     "0.12",
-     "3.68"
-    ],
-    [
-     {
-      "text": "s3056",
-      "href": "run:B1-30000-43985b-s3056"
-     },
-     "3,649",
-     "361",
-     "16",
-     "0.60",
-     "0.05",
-     "0.04",
+     "1,091",
+     "141",
+     "4",
+     "0.41",
+     "0.14",
      "0.09",
-     "3.47"
+     "0.11",
+     "4.86"
     ],
     [
      {
-      "text": "s3093",
-      "href": "run:B1-30000-26a341-s3093"
+      "text": "s3083",
+      "href": "run:B1-30000-0d7e0c-s3083"
      },
-     "3,387",
-     "207",
-     "9",
-     "0.61",
+     "4,159",
+     "389",
+     "11",
+     "0.63",
+     "-0.01",
      "0.08",
-     "0.05",
-     "0.10",
-     "3.75"
+     "0.11",
+     "3.58"
     ],
     [
      {
@@ -2524,7 +2468,7 @@
      "0.00",
      "0.03",
      "0.09",
-     "3.49"
+     "4.49"
     ],
     [
      {
@@ -2538,21 +2482,63 @@
      "0.09",
      "0.02",
      "0.07",
-     "3.85"
+     "4.85"
     ],
     [
      {
-      "text": "s3098",
-      "href": "run:B1-30000-794ae8-s3098"
+      "text": "s3013",
+      "href": "run:B1-30000-7f7cd5-s3013"
      },
-     "4,806",
-     "256",
-     "6",
-     "0.49",
-     "0.21",
+     "10,511",
+     "500",
+     "5",
+     "0.58",
+     "0.39",
+     "0.02",
+     "0.09",
+     "3.90"
+    ],
+    [
+     {
+      "text": "s3056",
+      "href": "run:B1-30000-43985b-s3056"
+     },
+     "3,649",
+     "361",
+     "16",
+     "0.60",
+     "0.05",
      "0.04",
+     "0.09",
+     "4.01"
+    ],
+    [
+     {
+      "text": "s3012",
+      "href": "run:B1-30000-02fa53-s3012"
+     },
+     "2,487",
+     "327",
+     "9",
+     "0.65",
+     "0.02",
+     "0.06",
+     "0.12",
+     "3.88"
+    ],
+    [
+     {
+      "text": "s3093",
+      "href": "run:B1-30000-26a341-s3093"
+     },
+     "3,387",
+     "207",
+     "9",
+     "0.61",
+     "0.08",
+     "0.05",
      "0.10",
-     "3.19"
+     "4.15"
     ],
     [
      {
@@ -2566,7 +2552,21 @@
      "-0.00",
      "0.03",
      "0.11",
-     "3.75"
+     "4.75"
+    ],
+    [
+     {
+      "text": "s3098",
+      "href": "run:B1-30000-794ae8-s3098"
+     },
+     "4,806",
+     "256",
+     "6",
+     "0.49",
+     "0.21",
+     "0.04",
+     "0.10",
+     "3.42"
     ],
     [
      {
@@ -2580,7 +2580,7 @@
      "0.03",
      "-0.00",
      "0.09",
-     "3.60"
+     "4.60"
     ]
    ]
   },
@@ -2602,11 +2602,43 @@
     [
      1,
      {
+      "text": "s3092",
+      "href": "run:B1-30000-7fc03f-s3092"
+     },
+     "round 3",
+     "6.00",
+     "43.3",
+     "0.20",
+     "0.08",
+     "253",
+     "74",
+     "0.07",
+     "messages, partner search, upkeep"
+    ],
+    [
+     1,
+     {
+      "text": "s3045",
+      "href": "run:B1-30000-f6d23f-s3045"
+     },
+     "round 3",
+     "5.89",
+     "27.3",
+     "0.22",
+     "0.14",
+     "1,237",
+     "490",
+     "0.08",
+     "messages, gifts, handover, partner search, upkeep, revolutions"
+    ],
+    [
+     1,
+     {
       "text": "s3026",
       "href": "run:B1-30000-d6955f-s3026"
      },
      "round 3",
-     "5.00",
+     "5.16",
      "17.8",
      "0.30",
      "0.26",
@@ -2618,50 +2650,66 @@
     [
      2,
      {
-      "text": "s4002 w",
-      "href": "run:B1-30000-5379e2-s4002"
+      "text": "s3016",
+      "href": "run:B1-30000-b23381-s3016"
      },
-     "round 3, weakest first",
-     "5.00",
-     "29.0",
-     "0.22",
-     "0.22",
-     "822",
-     "8",
-     "0.37",
-     "messages, gifts, mates pay, partner search, mixing"
+     "round 3",
+     "5.78",
+     "35.3",
+     "0.28",
+     "0.05",
+     "1,071",
+     "31",
+     "0.04",
+     "messages, partner search, upkeep"
     ],
     [
      2,
      {
-      "text": "s4008 w",
-      "href": "run:B1-30000-1cfaa4-s4008"
+      "text": "s3042",
+      "href": "run:B1-30000-b82ad0-s3042"
      },
-     "round 3, weakest first",
-     "4.99",
-     "25.8",
-     "0.23",
-     "0.23",
-     "662",
-     "12",
-     "0.42",
-     "messages, gifts"
+     "round 3",
+     "5.32",
+     "30.2",
+     "0.14",
+     "0.15",
+     "1,180",
+     "247",
+     "0.04",
+     "messages, gifts, handover, mates pay, partner search, upkeep, mixing"
     ],
     [
      2,
      {
-      "text": "s4008 s",
-      "href": "run:B1-30000-645972-s4008"
+      "text": "s3021",
+      "href": "run:B1-30000-4aff7d-s3021"
      },
-     "round 3, strongest first",
-     "4.73",
+     "round 3",
+     "5.06",
      "25.3",
+     "0.32",
+     "0.14",
+     "1,064",
+     "27",
+     "0.22",
+     "messages, handover, partner search, upkeep"
+    ],
+    [
+     2,
+     {
+      "text": "s3095",
+      "href": "run:B1-30000-3e5856-s3095"
+     },
+     "round 3",
+     "4.82",
+     "24.5",
      "0.25",
-     "0.17",
-     "691",
-     "14",
-     "0.40",
-     "messages, gifts"
+     "0.15",
+     "1,338",
+     "1,219",
+     "-0.02",
+     "messages, handover, partner search, upkeep"
     ],
     [
      2,
@@ -2670,7 +2718,7 @@
       "href": "run:B1-30000-9efb1d-s4003"
      },
      "round 3, weakest first",
-     "4.63",
+     "4.66",
      "24.0",
      "0.52",
      "0.13",
@@ -2682,18 +2730,50 @@
     [
      3,
      {
-      "text": "s3023",
-      "href": "run:B1-30000-b0f6e3-s3023"
+      "text": "s3018",
+      "href": "run:B1-30000-af1e28-s3018"
      },
      "round 3",
-     "5.00",
-     "37.7",
-     "0.34",
+     "5.74",
+     "40.8",
+     "0.16",
+     "0.10",
+     "313",
+     "263",
      "0.06",
-     "955",
-     "22",
-     "0.19",
-     "messages, gifts, upkeep"
+     "messages, gifts, handover, mates pay, partner search, mixing"
+    ],
+    [
+     3,
+     {
+      "text": "s3049",
+      "href": "run:B1-30000-c51eb8-s3049"
+     },
+     "round 3",
+     "5.58",
+     "39.0",
+     "0.17",
+     "0.11",
+     "236",
+     "60",
+     "0.12",
+     "messages, gifts, handover, partner search"
+    ],
+    [
+     3,
+     {
+      "text": "s3032",
+      "href": "run:B1-30000-22865f-s3032"
+     },
+     "round 3",
+     "5.34",
+     "35.5",
+     "0.28",
+     "0.08",
+     "401",
+     "67",
+     "0.18",
+     "messages, gifts, handover, partner search"
     ],
     [
      3,
@@ -2702,7 +2782,7 @@
       "href": "run:B1-30000-e19f2d-s3008"
      },
      "round 3",
-     "4.98",
+     "5.30",
      "30.8",
      "0.62",
      "0.14",
@@ -2714,50 +2794,50 @@
     [
      3,
      {
-      "text": "s3042",
-      "href": "run:B1-30000-b82ad0-s3042"
+      "text": "s4002 w",
+      "href": "run:B1-30000-5379e2-s4002"
      },
-     "round 3",
-     "4.91",
-     "30.2",
-     "0.14",
-     "0.15",
-     "1,180",
-     "247",
-     "0.04",
-     "messages, gifts, handover, mates pay, partner search, upkeep, mixing"
-    ],
-    [
-     3,
-     {
-      "text": "s3045",
-      "href": "run:B1-30000-f6d23f-s3045"
-     },
-     "round 3",
-     "4.89",
-     "27.3",
+     "round 3, weakest first",
+     "5.06",
+     "29.0",
      "0.22",
-     "0.14",
-     "1,237",
-     "490",
-     "0.08",
-     "messages, gifts, handover, partner search, upkeep, revolutions"
+     "0.22",
+     "822",
+     "8",
+     "0.37",
+     "messages, gifts, mates pay, partner search, mixing"
     ],
     [
      3,
      {
-      "text": "s3021",
-      "href": "run:B1-30000-4aff7d-s3021"
+      "text": "s4008 w",
+      "href": "run:B1-30000-1cfaa4-s4008"
      },
-     "round 3",
-     "4.67",
+     "round 3, weakest first",
+     "5.05",
+     "25.8",
+     "0.23",
+     "0.23",
+     "662",
+     "12",
+     "0.42",
+     "messages, gifts"
+    ],
+    [
+     3,
+     {
+      "text": "s4008 s",
+      "href": "run:B1-30000-645972-s4008"
+     },
+     "round 3, strongest first",
+     "4.78",
      "25.3",
-     "0.32",
-     "0.14",
-     "1,064",
-     "27",
-     "0.22",
-     "messages, handover, partner search, upkeep"
+     "0.25",
+     "0.17",
+     "691",
+     "14",
+     "0.40",
+     "messages, gifts"
     ],
     [
      3,
@@ -2766,7 +2846,7 @@
       "href": "run:B1-30000-1141ea-s3082"
      },
      "round 3",
-     "4.06",
+     "4.23",
      "24.3",
      "0.84",
      "0.09",
