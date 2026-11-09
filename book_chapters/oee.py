@@ -929,7 +929,7 @@ def stopping(ch: F.Chapter) -> None:
                   "above the largest rival offer), or that only take them; or its own stakes of each "
                   "draw. Its exploitability is the "
                   "best reply's score minus its own; average over the agents (see "
-                  "[Exploitability](eras-and-contests.md#exploitability))."]))
+                  "[Exploitability](measuring-evolution.md#exploitability))."]))
     ch.number("exploitability", {c: {e: describe([r["exploitability"] for w in exploited[c] for r in w["rows"]
                                                   if r["iteration"] == e]) for e in E16_ERAS}
                                  for c in E16_CONDITIONS})

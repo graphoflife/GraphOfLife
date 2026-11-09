@@ -837,7 +837,7 @@ def piece_figures(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
             caption = (f"Every bridge of the network after the games of iterations {SETTLED_E08[0] + 9}, "
                        f"{SETTLED_E08[0] + 19}, … {SETTLED_E08[1]} of the worlds of Experiment 8, and the smaller of the "
                        "two pieces it holds together: the branch behind it, which cutting it would cut off "
-                       "([Cut risk](bridges.md#cut-risk)). Left: for every size s, how many branches of s agents or "
+                       "([Cut risk](measuring-networks.md#cut-risk)). Left: for every size s, how many branches of s agents or "
                        "more a world has, per 1,000 agents; one line per size of world, from blue-green (3,200 "
                        "tokens) to yellow (409,600). Dashed: the same for a tree grown by joining each newcomer to a "
                        f"member drawn at random, {TREE:,} members, per 1,000 members — exactly 1,000/s. Right: the "

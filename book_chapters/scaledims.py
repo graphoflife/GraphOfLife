@@ -485,7 +485,7 @@ STEPS_READ = [
     "steps follows from where it is after m, and half the steps are propagated); d(t) = −2 · ln(P(2t)/P(t)) / ln 2 on "
     "a grid of t of ratio √2, read while P(2t) is above 5/n (`walk` and `walk_curve`).",
     "A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents "
-    "or more is a star ([Stars and hubs](stars-and-hubs.md); `maxDegree`/`nodes` of its rows in `stats.jsonl`).",
+    "or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).",
 ]
 BODY_STEPS = (
     "Bodies: the n points of a square or cubic grid nearest its centre (and any as near as the last), each linked to "

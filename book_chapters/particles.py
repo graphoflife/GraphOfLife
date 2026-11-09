@@ -1046,7 +1046,7 @@ def particles(ch: F.Chapter) -> None:
             f"{RING_PAIRS + 1} stretches in a row).",
             "Find the potential that explains as much of the net flow as possible as running downhill (least "
             "squares, by conjugate gradients on the network's Laplacian, after pruning dead-end branches, on which "
-            "no flow goes round); the circulation is the rest ([Flows that go round](token-flow.md#flows-that-go-round)).",
+            "no flow goes round); the circulation is the rest ([Flows that go round](measuring-tokens.md#flows-that-go-round)).",
             "Correlate each stretch's circulation, and its downhill part, with the next stretch's, over the "
             "connections both used; take the median over the pairs of stretches.",
             "Positive control: on the connections two stretches share, loops of three or four connections "

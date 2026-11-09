@@ -834,7 +834,7 @@ def brainsize(ch: F.Chapter) -> None:
         series=_side_by_side([by_depth(outputs["founders"]), by_depth(outputs["evolved"])], [GREY, BLUE],
                              ["founders' brains", "evolved brains"]),
         caption="One dot per living world, by the depth of its brains: how much one change of a brain ([How a "
-                "brain changes](mutation.md), made for sure, with the world's own settings) moves the outputs that "
+                "brain changes](rules-in-detail.md#how-a-brain-changes), made for sure, with the world's own settings) moves the outputs that "
                 "make decisions, over how much the brain of a stranger differs from it, on the same inputs — the "
                 "root-mean-square differences, the median over the agents probed. Grey: fresh founders' brains, "
                 "each against another founder's; blue: the agents' own brains at the end, each against another "
