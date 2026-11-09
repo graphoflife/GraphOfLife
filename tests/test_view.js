@@ -1466,6 +1466,38 @@ function test_the_notebook_lists_its_pages_as_the_reader_asks() {
   assert(Book.chosen(null).sort === 'part');
 }
 
+function test_a_part_the_reader_shuts_stays_shut() {
+  // The lab's refresh draws the contents again every five seconds, and each
+  // drawing opened the part of the page on screen: a part shut a moment before
+  // opened by itself (the author, 2026-11-09). Only the reader opens and shuts.
+  const Book = bookWith();
+  Book.index = {
+    topics: [{ id: 'size', title: 'Size' }, { id: 'rules', title: 'Rules' }],
+    parts: [{ id: 'start', title: 'Start', colour: '#111', topics: ['size'] },
+            { id: 'how', title: 'The rules', colour: '#222', topics: ['rules'] }],
+    pages: [{ id: 'a', title: 'Alpha', topics: ['size'], kind: 'study', file: 'a.md', summary: '' },
+            { id: 'b', title: 'Beta', topics: ['rules'], kind: 'study', file: 'b.md', summary: '' }] };
+  Book.list = { innerHTML: '' };
+  Book.current = 'a';
+  const open = () => [...Book.list.innerHTML.matchAll(/data-part="([^"]+)" style="[^"]*"( open)?>/g)]
+    .filter(m => m[2]).map(m => m[1]).join();
+  Book.renderToc();
+  assert(open() === 'start', `a first visit opened ${open()}`);
+  Book.keepOpen('start', false);       // the part of the page on screen, shut
+  Book.keepOpen('how', true);
+  for (let refresh = 0; refresh < 3; refresh++) Book.renderToc();
+  assert(open() === 'how', `the refresh undid the reader's choice: ${open()}`);
+
+  // A search opens every part with a match; one shut during it stays shut until the search changes.
+  Book.choose('query', 'beta');
+  assert(open() === 'how', open());
+  Book.keepOpen('how', false);
+  Book.renderToc();
+  assert(open() === '', `a part shut during a search opened again: ${open()}`);
+  Book.choose('query', '');
+  assert(open() === 'how', `shutting a part during a search changed what is kept: ${open()}`);
+}
+
 function test_a_run_that_died_out_says_so() {
   // A world that died out is done, but it did not reach its target: its cell
   // says when it died rather than claiming the whole run.

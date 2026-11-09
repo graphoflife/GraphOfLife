@@ -46,12 +46,14 @@ const Book = {
   // experiment, a plan (an experiment with no results yet), a reference page, a guide.
   MARKS: [['study', 'Study'], ['experiment', 'Experiment'], ['plan', 'Plan, not played yet'],
           ['reference', 'Reference'], ['guide', 'Guide']],
-  /** The parts the reader left open, kept from one visit to the next; round 3's is open at first. */
+  /** The parts the reader left open, kept from one visit to the next; Start and round 3's at first. */
   OPENED: 'gol.book.open',
   STATUSES: [['analysed', 'Analysed'], ['ready', 'Ready to run'], ['draft', 'Drafts'],
              ['written', 'Written'], ['planned', 'Not written yet']],
   /** How the reader asked for the contents: an order, three filters and words to look for. */
   view: { sort: 'part', topic: '', kind: '', status: '', query: '' },
+  /** The parts the reader shut while looking for something, open again once the search changes. */
+  searchShut: new Set(),
 
   index: null,
   lab: null,
@@ -73,18 +75,13 @@ const Book = {
     this.offer(this.choices.kind, [['', 'Every kind'], ...this.KINDS.map(([id, kinds]) => [id, kinds])]);
     this.offer(this.choices.status, [['', 'Any status'], ...this.STATUSES]);
     for (const [key, el] of Object.entries(this.choices)) {
-      el.addEventListener(key === 'query' ? 'input' : 'change', () => {
-        this.view = { ...this.view, [key]: el.value };
-        try { localStorage.setItem(this.LISTING, JSON.stringify(this.view)); } catch (err) { /* private window */ }
-        this.renderToc();
-      });
+      el.addEventListener(key === 'query' ? 'input' : 'change', () => this.choose(key, el.value));
     }
     this.toc.addEventListener('click', event => {
       const summary = event.target.closest('details.book-section > summary');
       if (summary) {
-        // The details opens or shuts itself; remembered only when the reader chose it, not
-        // when a search opened every part that holds a match.
-        if (!this.filtered()) this.keepOpen(summary.parentElement.dataset.part, !summary.parentElement.open);
+        // The details opens or shuts itself; this keeps the choice for the next drawing.
+        this.keepOpen(summary.parentElement.dataset.part, !summary.parentElement.open);
         return;
       }
       const link = event.target.closest('[data-chapter]');
@@ -176,19 +173,38 @@ const Book = {
     return 'guide';
   },
 
-  /** The parts left open: those the reader opened, or round 3's at first. */
+  /**
+   * The parts open in the contents: the reader's choice, and nothing else's. The
+   * lab's refresh draws the contents again every few seconds, and each drawing
+   * used to open the part of the page on screen, so a part shut a moment before
+   * opened by itself (the author, 2026-11-09).
+   */
   opened() {
-    try {
-      const kept = JSON.parse(localStorage.getItem(this.OPENED));
-      if (Array.isArray(kept)) return new Set(kept);
-    } catch (err) { /* none kept, or a private window */ }
-    return new Set(['now']);
+    if (!this._opened) {
+      let kept = null;
+      try { kept = JSON.parse(localStorage.getItem(this.OPENED)); } catch (err) { /* none kept, or a private window */ }
+      this._opened = new Set(Array.isArray(kept) ? kept : ['start', 'now']);
+    }
+    return this._opened;
   },
 
+  /** The reader opened or shut a part: kept for good, or while they search, until the search changes. */
   keepOpen(part, open) {
+    if (this.filtered()) {
+      if (open) this.searchShut.delete(part); else this.searchShut.add(part);
+      return;
+    }
     const kept = this.opened();
     if (open) kept.add(part); else kept.delete(part);
     try { localStorage.setItem(this.OPENED, JSON.stringify([...kept])); } catch (err) { /* private window */ }
+  },
+
+  /** The reader chose an order, a filter or words to look for: every part with a match opens. */
+  choose(key, value) {
+    this.view = { ...this.view, [key]: value };
+    this.searchShut.clear();
+    try { localStorage.setItem(this.LISTING, JSON.stringify(this.view)); } catch (err) { /* private window */ }
+    this.renderToc();
   },
 
   /** Whether the reader is looking for something: then every part with a match is open. */
@@ -496,14 +512,13 @@ const Book = {
         + '</a>';
     };
     const opened = this.opened();
-    const here = this.partOf(this.chapter(this.current));
     const groups = this.listing().map(([heading, list, partId]) => {
       const part = partId && this.parts().find(p => p.id === partId);
       if (!part) {
         return `<div class="book-part">${heading ? `<h3>${Markdown.inline(heading)}</h3>` : ''}${
           list.map(item).join('')}</div>`;
       }
-      const open = this.filtered() || opened.has(part.id) || here === part;
+      const open = this.filtered() ? !this.searchShut.has(part.id) : opened.has(part.id);
       let last = null;
       const items = list.map(c => {
         const home = c.topics[0];
