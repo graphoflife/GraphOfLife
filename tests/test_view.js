@@ -1353,6 +1353,15 @@ function test_book_progress_of_an_experiment() {
   assert(Book.describe(two, both).label === 'running · 50%', Book.describe(two, both).label);
   both.experiments.E37 = { state: 'finished', done: 10, total: 10 };
   assert(Book.describe(two, both).label === 'finished · to analyse', 'a page finished before its last experiment');
+  // An analysed page given a new experiment says where the new one is, and only the new one counts.
+  const grown = { ...two, status: 'analysed' };
+  both.experiments.E37 = { state: 'ready', done: 0, total: 10 };
+  assert(Book.describe(grown, both).label === 'ready to run', Book.describe(grown, both).label);
+  both.experiments.E37 = { state: 'running', done: 1, total: 10 };
+  assert(Book.describe(grown, both).label === 'running · 10%', Book.describe(grown, both).label);
+  both.experiments.E37 = { state: 'finished', done: 10, total: 10 };
+  assert(Book.describe(grown, both).label === 'analysed', 'an analysed page lost its chip');
+  assert(Book.describe(grown, null).label === 'analysed', 'without a lab, an analysed page is analysed');
   // Above its title a page says where it belongs: its topic, and what it reports.
   Book.index = { topics: [{ id: 'size', title: 'Size and riches of a world' }], pages: [] };
   const floor = { id: 'the-floor', topics: ['size'], experiments: ['E36', 'E37'] };

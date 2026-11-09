@@ -416,12 +416,18 @@ const Book = {
 
   /**
    * What a chapter's chip says. An analysed chapter is analysed whatever the
-   * lab says; otherwise its experiments are where the lab says they are, and a
-   * chapter without one is just written or not.
+   * lab says of the experiments it has analysed, but one it was given since,
+   * which the lab has not finished, is where the lab says it is (Experiment 43,
+   * on a page that had analysed round 3: 2026-11-09). Otherwise its experiments
+   * are where the lab says they are, and a chapter without one is just written
+   * or not.
    */
   describe(chapter, lab = this.lab) {
-    if (chapter.status === 'analysed') return { state: 'analysed', label: 'analysed' };
-    const live = lab && this.together((chapter.experiments || []).map(name => lab.experiments[name]).filter(Boolean));
+    const states = lab ? (chapter.experiments || []).map(name => lab.experiments[name]).filter(Boolean) : [];
+    const analysed = chapter.status === 'analysed';
+    const open = analysed ? states.filter(s => !['finished', 'withdrawn'].includes(s.state)) : states;
+    if (analysed && !open.length) return { state: 'analysed', label: 'analysed' };
+    const live = this.together(open);
     if (live) {
       const share = live.total ? Math.floor(100 * live.done / live.total) : 0;
       const labels = {
