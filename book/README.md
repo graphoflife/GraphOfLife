@@ -84,7 +84,7 @@ How unequal a world is, who stays rich, and how gains and losses are shared out.
 - [How unequal is a world, and who stays rich](pages/where-do-the-tokens-go.md)
 - [Gains and losses: who gains, who loses, and the share-out](pages/gains-and-losses.md)
 - [The largest and the smallest](pages/the-largest-and-the-smallest.md)
-- What keeps wealth spread? — *not written yet*
+- [What keeps wealth spread?](pages/what-keeps-wealth-spread.md)
 - [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](pages/gini-coefficient.md)
 
 ### The game and the flow of tokens
@@ -159,6 +159,7 @@ How to tell whether evolution goes on, why it stops, and what would count as ope
 - [A hundred thousand iterations](pages/a-hundred-thousand-iterations.md)
 - [What would count as open-ended evolution](pages/open-ended-test.md)
 - [Candidates for open-ended evolution](pages/candidates-for-open-ended-evolution.md)
+- [Did evolution happen? Fourteen ways to find out](pages/did-evolution-happen.md)
 
 ### Strategies written by hand
 

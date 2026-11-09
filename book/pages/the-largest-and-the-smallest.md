@@ -429,7 +429,7 @@ Each figure says, folded beneath it, which runs it reads and how.
 <!-- turns -->
 ---
 
-← [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) →
+← [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens) · [What keeps wealth spread?](what-keeps-wealth-spread.md) →
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 

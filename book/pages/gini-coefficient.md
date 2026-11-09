@@ -448,10 +448,10 @@ measures all three in the [baseline](b1-and-b2.md "The stated rules an experimen
 <!-- turns -->
 ---
 
-← [The largest and the smallest](the-largest-and-the-smallest.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
+← [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (16)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Genotypes, families and the common ancestor](genotype.md) · [What would count as open-ended evolution](open-ended-test.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [What a run records](frames-and-stats.md) · [Effective numbers: how many kinds, and how many directions](effective-number.md)
+> [!info]- Pages that link here (17)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The estate of the dead](estate.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Genotypes, families and the common ancestor](genotype.md) · [What would count as open-ended evolution](open-ended-test.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [What a run records](frames-and-stats.md) · [Effective numbers: how many kinds, and how many directions](effective-number.md)
 <!-- /turns -->

@@ -492,7 +492,9 @@ The five ways:
    and lose in bands, it goes round in circles. The notebook's programme calls
    this the test that a forgetful world cannot pass (`research/Research.md`,
    the cross-time tournament of Cliff and Miller, 1995). It needs no new world,
-   only contests: in Experiment 28 one took about half a minute.
+   only contests: in Experiment 28 one took about half a minute. It is the
+   first of fourteen tests of whether evolution happened at all, gathered in
+   [Did evolution happen?](did-evolution-happen.md)
 
 ## Round 3's best worlds, played again
 
@@ -624,6 +626,8 @@ luck of its seed:
 
 ## Where to go next
 
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md):
+  how to tell selection from luck in these candidates.
 - [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md):
   the health each candidate brings.
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md):

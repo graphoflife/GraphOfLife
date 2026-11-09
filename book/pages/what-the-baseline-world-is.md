@@ -336,8 +336,9 @@ since a brain that cannot see was the first thing to change. What happened
 when it changed is told in [The road from here](#the-road-from-here). The
 rate of mutation became [How fast should brains change?](how-fast-should-brains-change.md),
 coalitions switched off are among
-[The switches the world was built with](the-switches-the-world-was-built-with.md),
-and *How big should a brain be?* is still to come.
+[The switches the world was built with](the-switches-the-world-was-built-with.md)
+and in [What keeps wealth spread?](what-keeps-wealth-spread.md), and
+*How big should a brain be?* is still to come.
 
 ## What the measurements say about open-ended evolution
 

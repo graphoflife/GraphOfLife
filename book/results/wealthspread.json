@@ -1,0 +1,390 @@
+{
+ "chapter": "wealthspread",
+ "numbers": {
+  "pilots": {
+   "B1": [
+    {
+     "gini": 0.44779481935923654,
+     "relative": 0.989800251415026,
+     "births": 2.3317788141239175,
+     "age": 113.13740458015268,
+     "agents": 1638.0
+    },
+    {
+     "gini": 0.5283960635881908,
+     "relative": 1.1402354096401546,
+     "births": 1.6709511568123394,
+     "age": 136.44589000591367,
+     "agents": 1273.0
+    }
+   ],
+   "B1, no coalitions": [
+    {
+     "gini": 0.38494936847885775,
+     "relative": 0.8542741349518194,
+     "births": 25.082872928176794,
+     "age": 6.3998025666337615,
+     "agents": 1702.0
+    },
+    {
+     "gini": 0.3480358549222798,
+     "relative": 0.7774247566209943,
+     "births": 13.189845474613687,
+     "age": 12.068287635799276,
+     "agents": 1829.0
+    }
+   ],
+   "B2": [
+    {
+     "gini": 0.5110602945423044,
+     "relative": 1.2830926674217158,
+     "births": 1.0153946937438585,
+     "age": 50.153225806451616,
+     "agents": 3394.0
+    },
+    {
+     "gini": 0.46924400991462406,
+     "relative": 1.1833817095279067,
+     "births": 0.9948652118100129,
+     "age": 50.6510215350635,
+     "agents": 3405.0
+    }
+   ],
+   "B2, no coalitions": [
+    {
+     "gini": 0.4969596894926532,
+     "relative": 1.273211963454512,
+     "births": 1.0033444816053512,
+     "age": 50.21407856577907,
+     "agents": 3616.0
+    },
+    {
+     "gini": 0.5276355838887279,
+     "relative": 1.3078017893428167,
+     "births": 0.9927200529450695,
+     "age": 50.574539363484085,
+     "agents": 3249.0
+    }
+   ],
+   "B2, estates by wealth": [
+    {
+     "gini": 0.5306245290916701,
+     "relative": 1.24039710896672,
+     "births": 0.9860312243221035,
+     "age": 49.93213988343047,
+     "agents": 2456.0
+    },
+    {
+     "gini": 0.5897341135972461,
+     "relative": 1.408762506718648,
+     "births": 1.0137581462708183,
+     "age": 49.92112578179291,
+     "agents": 2822.0
+    }
+   ]
+  },
+  "round": {
+   "worlds": 70,
+   "gini": {
+    "n": 70,
+    "mean": 0.43644666342929395,
+    "median": 0.42188758939489046,
+    "sd": 0.1495686811394361,
+    "min": 0.1644360117862204,
+    "max": 0.8419651118787331,
+    "q25": 0.3493853229874908,
+    "q75": 0.5042163956608554
+   },
+   "by_rule": {
+    "uniform": {
+     "worlds": 5,
+     "gini": 0.3551406999505679
+    },
+    "poorest": {
+     "worlds": 24,
+     "gini": 0.3175794214675064
+    },
+    "newborns": {
+     "worlds": 10,
+     "gini": 0.4390240839105351
+    },
+    "parents": {
+     "worlds": 9,
+     "gini": 0.4150227880552583
+    },
+    "children": {
+     "worlds": 13,
+     "gini": 0.45025697372977136
+    },
+    "local": {
+     "worlds": 9,
+     "gini": 0.5347030178501094
+    }
+   },
+   "relative_by_rule": {
+    "uniform": 0.9052036527637607,
+    "poorest": 0.7954906105769142,
+    "newborns": 1.0815121859068468,
+    "parents": 0.9540299272260084,
+    "children": 0.9590561610268004,
+    "local": 1.1045068896749897
+   },
+   "relative": {
+    "n": 70,
+    "mean": 0.9890521794563416,
+    "median": 0.9557474289479515,
+    "sd": 0.2672491091317517,
+    "min": 0.4241708991507855,
+    "max": 1.7283008192709668,
+    "q25": 0.8365201901392411,
+    "q75": 1.1262195388171623
+   },
+   "r_shared_relative": -0.4766162190534511,
+   "relative_tests": {
+    "redistribution": {
+     "worlds": 70,
+     "chance": 0.00279986000699965,
+     "fdr": 0.062496875156242186,
+     "by": {
+      "children": {
+       "worlds": 13,
+       "median": 0.5487804878048781
+      },
+      "local": {
+       "worlds": 9,
+       "median": 0.7560975609756098
+      },
+      "newborns": {
+       "worlds": 10,
+       "median": 0.7134146341463414
+      },
+      "parents": {
+       "worlds": 9,
+       "median": 0.524390243902439
+      },
+      "poorest": {
+       "worlds": 24,
+       "median": 0.23780487804878048
+      },
+      "uniform": {
+       "worlds": 5,
+       "median": 0.4268292682926829
+      }
+     }
+    },
+    "contest": {
+     "worlds": 70,
+     "chance": 0.039798010099495025,
+     "fdr": 0.33165008416245856,
+     "by": {
+      "largest": {
+       "worlds": 31,
+       "median": 0.6829268292682927
+      },
+      "lottery": {
+       "worlds": 39,
+       "median": 0.45121951219512196
+      }
+     }
+    },
+    "allow_revolutions": {
+     "worlds": 31,
+     "chance": 0.4527773611319434,
+     "fdr": 0.7877939436361515,
+     "by": {
+      "false": {
+       "worlds": 14,
+       "median": 0.6951219512195121
+      },
+      "true": {
+       "worlds": 17,
+       "median": 0.6829268292682927
+      }
+     }
+    }
+   },
+   "by_game": {
+    "largest stake, with coalitions": {
+     "worlds": 17,
+     "gini": 0.458412513043865
+    },
+    "largest stake, no coalitions": {
+     "worlds": 14,
+     "gini": 0.48670977728327847
+    },
+    "lottery": {
+     "worlds": 39,
+     "gini": 0.41259317713765525
+    }
+   },
+   "tests": {
+    "redistribution": {
+     "worlds": 70,
+     "chance": 9.99950002499875e-05,
+     "fdr": 0.0024998750062496873,
+     "by": {
+      "children": {
+       "worlds": 13,
+       "median": 0.45025697372977136
+      },
+      "local": {
+       "worlds": 9,
+       "median": 0.5347030178501094
+      },
+      "newborns": {
+       "worlds": 10,
+       "median": 0.4390240839105351
+      },
+      "parents": {
+       "worlds": 9,
+       "median": 0.4150227880552583
+      },
+      "poorest": {
+       "worlds": 24,
+       "median": 0.3175794214675064
+      },
+      "uniform": {
+       "worlds": 5,
+       "median": 0.3551406999505679
+      }
+     }
+    },
+    "contest": {
+     "worlds": 70,
+     "chance": 0.05819709014549272,
+     "fdr": 0.36373181340932953,
+     "by": {
+      "largest": {
+       "worlds": 31,
+       "median": 0.458412513043865
+      },
+      "lottery": {
+       "worlds": 39,
+       "median": 0.41259317713765525
+      }
+     }
+    },
+    "allow_revolutions": {
+     "worlds": 31,
+     "chance": 0.8889055547222638,
+     "fdr": 0.9532023398830058,
+     "by": {
+      "false": {
+       "worlds": 14,
+       "median": 0.48670977728327847
+      },
+      "true": {
+       "worlds": 17,
+       "median": 0.458412513043865
+      }
+     }
+    },
+    "mend_on_death": {
+     "worlds": 70,
+     "chance": 0.03329833508324584,
+     "fdr": 0.36373181340932953,
+     "by": {
+      "false": {
+       "worlds": 28,
+       "median": 0.3720728554448577
+      },
+      "true": {
+       "worlds": 42,
+       "median": 0.44510850290793613
+      }
+     }
+    },
+    "valence": {
+     "worlds": 70,
+     "chance": 0.43707814609269535,
+     "fdr": 0.9532023398830058,
+     "by": {
+      "0": {
+       "worlds": 53,
+       "median": 0.42422754802531126
+      },
+      "16": {
+       "worlds": 5,
+       "median": 0.507549661748502
+      },
+      "4": {
+       "worlds": 7,
+       "median": 0.4047957104378338
+      },
+      "8": {
+       "worlds": 5,
+       "median": 0.41605217723646626
+      }
+     }
+    },
+    "link_token": {
+     "worlds": 70,
+     "chance": 0.47167641617919104,
+     "fdr": 0.9532023398830058,
+     "by": {
+      "false": {
+       "worlds": 37,
+       "median": 0.4094951106061856
+      },
+      "true": {
+       "worlds": 33,
+       "median": 0.43237973545694613
+      }
+     }
+    }
+   },
+   "shared": {
+    "n": 70,
+    "mean": 0.07614534470468835,
+    "median": 0.059203353778671114,
+    "sd": 0.06371460808550568,
+    "min": 0.002473593758691346,
+    "max": 0.28066142764523594,
+    "q25": 0.02360659876687034,
+    "q75": 0.12071310280222222
+   },
+   "shared_by_rule": {
+    "uniform": 0.053944620689655165,
+    "poorest": 0.07761725852777868,
+    "newborns": 0.07441031609195403,
+    "parents": 0.08489289080459769,
+    "children": 0.031856141414936874,
+    "local": 0.03336680459770115
+   },
+   "r_shared": -0.47514653136208557,
+   "r_shared_wide": -0.4981545809813287,
+   "wide_worlds": 48,
+   "r_culled": -0.4549908144519289,
+   "r_agents": -0.6842620943049601,
+   "mend": {
+    "False": {
+     "worlds": 28,
+     "gini": 0.3720728554448577,
+     "shared": 0.10926596826501941
+    },
+    "True": {
+     "worlds": 42,
+     "gini": 0.44510850290793613,
+     "shared": 0.03426697039221298
+    }
+   }
+  }
+ },
+ "figures": {
+  "coalitions": {
+   "title": "Without coalitions, B1 grows more even, not less",
+   "caption": "One dot per world (seeds 1 and 2), its median over iterations 500 to 1,000; the short bar is the middle of the two. Top: the Gini coefficient of the tokens (0 if every agent held the same, near 1 if one held all). Middle and bottom, on logarithmic axes: how many agents are born in an iteration, per hundred living, and how old the average agent is. \"No coalitions\": `allow_revolutions` off, so a node always goes to its largest staker. \"Estates by wealth\": the tokens of the dead shared out in proportion to what each survivor holds.",
+   "recipe": "**Runs.** the pilot worlds of batch S ([Revolutions, handover and gifts](the-switches-the-world-was-built-with.md)): B1 and B2 at 10,000 tokens, each with and without coalitions (`allow_revolutions` off), and B2 with the estates of the dead shared out by wealth (`redistribution` `by_tokens`), seeds 1 and 2, played to iteration 1,000\n\n**Data.** From each pilot world's series, `GraphOfLifeRuns/.pilots/S/<world>-s<seed>/series.jsonl`, one row an iteration after its game (`gini`, `births`, `nodes`, `meanAge`).\n\n1. Keep each world's rows from iteration 500 to 1,000.\n2. Births per hundred: 100 \u00b7 births / agents, row by row. Take the median of each quantity.\n3. One dot per world; the bar is the middle of a pair.\n\n**To make it again:** `python3 book_figures.py wealthspread`."
+  },
+  "rules": {
+   "title": "In round 3, the share-out of estates sets inequality; coalitions do not",
+   "caption": "Each dot is one of the 70 worlds of Experiment 40 that lived to the end of its run: the Gini coefficient of its tokens, averaged from iteration 100 to the end. The short bar is the median of a column. Top: the worlds by where their rule sends the tokens of agents that die. Middle: the same Gini coefficient over the Gini of the same tokens dealt out at random over the same agents (each holding at least one), so that a world of paupers, which cannot be very unequal, is not called even for that alone; on the dashed line a world is as unequal as chance would make it. Bottom: the worlds' Gini by how their game gives a node away: to the largest stake, with or without coalitions of smaller stakers that can outweigh it, or by a lottery weighted by the stakes (where coalitions are not drawn). Every other setting of each world was drawn at random too, so each column mixes many kinds of world.",
+   "recipe": "**Runs.** the worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiment 40: 30,000 tokens, every setting drawn at random)\n\n**Data.** From each world's averages over iterations 100 to the end, `research/screen/health.json` (from the screen's readings, `research/screen/measures.py`), and each run's own statistics, `GraphOfLifeRuns/<run>/stats.jsonl` (`redistributed`, `tokens`).\n\n1. Read each living world's average Gini coefficient from `health.json` (`averages.gini`), and its Gini over a random deal's (`averages.gini_random`: each iteration's Gini over (m \u2212 1)/(2m \u2212 1), m the mean holding, the Gini of a random deal that leaves every agent at least one token).\n2. Group the worlds by their drawn `redistribution`, and by `contest` and `allow_revolutions`.\n3. One dot per world; the bar is the median.\n\n**To make it again:** `python3 book_figures.py wealthspread`."
+  },
+  "shared": {
+   "title": "The more tokens pass through the share-out, the more even a world",
+   "caption": "Each dot is a world of Experiment 40 that lived, coloured by its share-out rule. Across, on a logarithmic axis: the share of all the world's tokens that a cleanup hands on from the dead to the living, averaged over every phase from iteration 100 to the end; it counts the estates of every agent that died, culled or starved (the starved hold nothing). Up: the world's Gini coefficient, averaged over the same stretch.",
+   "recipe": "**Runs.** the worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiment 40: 30,000 tokens, every setting drawn at random)\n\n**Data.** From each world's averages over iterations 100 to the end, `research/screen/health.json` (from the screen's readings, `research/screen/measures.py`), and each run's own statistics, `GraphOfLifeRuns/<run>/stats.jsonl` (`redistributed`, `tokens`).\n\n1. For every phase from iteration 100 on: `redistributed` over `tokens` (the cleanup's handed-on tokens over all of them). Average over the phases.\n2. Plot against the world's average Gini coefficient; colour by `redistribution`.\n\n**To make it again:** `python3 book_figures.py wealthspread`."
+  }
+ }
+}
