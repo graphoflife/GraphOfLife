@@ -53,7 +53,8 @@ Most tests need no new runs, because round 3 kept a great deal:
 
 - **Twelve eras a world.** Every 250 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") each world kept its whole
   state, brains included, so the brains of iteration 250, 500, …, 3,000 can be
-  played again ([Eras](eras-and-contests.md#eras)).
+  played again, and so can the founders of iteration 0
+  ([Eras](eras-and-contests.md#eras)).
 - **Every birth.** Parent and child are recorded at every birth, so each
   world has its whole [family tree](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.").
 - **Every decision.** Each phase's decisions are in the record: who staked
