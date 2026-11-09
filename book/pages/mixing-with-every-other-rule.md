@@ -32,8 +32,8 @@ that, for 23 of them at once.
 ## The worlds
 
 Batch Y plays B2 at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") with brains mixed at birth and one other
-rule. Each world has [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2 and runs for 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), as pilot
-worlds ([Pilot worlds](the-lab.md#pilot-worlds)). Each world is the fourth
+rule. Each world has [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2 and runs for 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), as pilot
+worlds ([Pilot worlds](runs-and-records.md#pilot-worlds)). Each world is the fourth
 corner of a two-by-two whose other three corners already existed:
 
 | corner | the worlds |
@@ -45,7 +45,7 @@ corner of a two-by-two whose other three corners already existed:
 
 The other rules are every switch of the notebook's pilots and lab experiments
 with B2:
-- who inherits the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") ([Who inherits?](who-inherits.md));
+- who inherits the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") ([Who inherits?](who-inherits.md));
 - links that hold a token;
 - inputs that say who helped, or where an agent came from;
 - handover, no random inputs, no old age, and children of any size;
@@ -126,10 +126,10 @@ show.
 >
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
-Mixing raises the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") with nearly every rule, even with most of
+Mixing raises the [diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") with nearly every rule, even with most of
 those that cancel its riches. With children of any size it rises from 0.25 to
 0.54, and with only the last token kept from 0.43 to 0.66. Part of that is
-built in. The score counts [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), and every mixed birth makes a new set of
+built in. The score counts genotypes, and every mixed birth makes a new set of
 weights, so a mixed world always has more genotypes per agent. But tokens,
 links and ages spread wider too where the world is rich.
 
@@ -142,7 +142,7 @@ The most diverse worlds of the batch are these:
 
 ## Healthy?
 
-Nearly every world meets six or seven marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), as B2's and
+Nearly every world meets six or seven marks of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), as B2's and
 the mixed worlds do. The exceptions are the rules that broke the network
 before mixing came. With every unused link lapsing, worlds meet four or five
 marks; with handover, three.
@@ -174,9 +174,9 @@ hold a token, and 366 with brains that grow. And small mixed worlds are the ones
 <!-- /figure -->
 With almost every rule, yes. In 42 of the 46 worlds, the brains of iteration
 1,000 took more than half of a contested world from those of 500. The
-contests last an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
-([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
-The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world took 69%, where B2's take 68% and those of mixing alone 84%.
+contests last an agent's [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.")
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
+The [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world took 69%, where B2's take 68% and those of mixing alone 84%.
 The steps are largest with links that hold a token (93%), half kept at home
 (91%) and units that hold a token (90%). Next come the estate to the poorest
 and brains that grow (89% each).
@@ -241,7 +241,7 @@ says, folded beneath it, which worlds it reads and how. The setting is
   ([Two halves](healthy-and-rich.md#two-halves)), so that they stay put. Three
   diversity figures of this page moved by 0.01. The figures also gained the
   second seed of every rule alone that had only one before: batch W's worlds
-  with [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), and handover alone.
+  with [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), and handover alone.
 
 <!-- turns -->
 ---

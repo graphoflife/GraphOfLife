@@ -7,7 +7,7 @@
 >   mixed world stay alive — and stay rich?
 > - If the mate pays the child as much as the parent does, does a mixed world
 >   hold its size more steadily?
-> - Can the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") play again, game for game, two [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds that were stopped
+> - Can the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") play again, game for game, two [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds that were stopped
 >   on 18 October 2026?
 
 ## In short
@@ -61,7 +61,7 @@ for an agent that never breeds.
 
 The engine's setting [`mix_mates`](settings.md#mix_mates) = `parents` does
 this. A parent with no such neighbour gives its newborn a copy of its own
-brain. Four pilot worlds of batch MP played it, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 4. A pilot is a
+brain. Four pilot worlds of batch MP played it, [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 4. A pilot is a
 world made by hand, to see whether an idea is worth an experiment. Each was
 set beside Experiment 17's mixed world of the same seed, where any neighbour
 may be the mate. The table reads each pair of worlds in three ways:
@@ -104,7 +104,7 @@ long as Experiment 17, and long enough for the deaths of Experiment 18 to have
 begun. Like every run of the lab, it records the graph statistics every 25
 iterations and a whole world every 500. So each world can be read at any of
 those moments as [Healthy and rich](healthy-and-rich.md) reads every world.
-And its brains of one moment, or [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), can be played against those of another.
+And its brains of one moment, or [era](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), can be played against those of another.
 Experiment 17's ten worlds, with any neighbour as a mate, are the comparison.
 
 We expected parents as mates to keep every mixed world alive. If the free
@@ -112,7 +112,7 @@ ride makes agents reluctant to breed, ending it should keep births above the
 line that replaces the dead. We also expected the worlds to stay richer than
 B2's. They might be less rich than mixed worlds with a free mate, as three of
 the four pilots warned. So the thesis asks two things. No world may die out.
-And at iteration 20,000, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world's share of poor agents must be below
+And at iteration 20,000, the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world's share of poor agents must be below
 0.66. That is the share in the least poor of B2's ten worlds, at 10,000
 iterations.
 
@@ -182,9 +182,9 @@ least poor of its ten held 66% at 10,000 iterations. But it is far poorer than
 Experiment 17's mixed worlds: at 10,000, the median of the nine that lived
 held 15%. Only the poorest two of those were as poor.
 
-**As diverse as mixed worlds.** The [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") says in one number, from
+**As diverse as mixed worlds.** The diversity score says in one number, from
 0 to 1, how much a world's agents differ: in tokens, links, ages and
-[genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). At 20,000 it is 0.59 in the median world (0.52 to 0.69). That is
+[genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). At 20,000 it is 0.59 in the median world (0.52 to 0.69). That is
 as high as in Experiment 17's worlds at 10,000 (0.58), and above B2's ten
 worlds played on to 10,000 (0.49). Part of it is built in: every mixed birth
 makes a new genotype
@@ -234,7 +234,7 @@ agents breed sets how full a world becomes, and a full world is a poor one.
 
 **Evolution goes on, as it did with any mate.** To see whether brains still
 improve, the brains of a later era meet those of an earlier one. They are
-seated on alternate agents of a world and played for a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), 100
+seated on alternate agents of a world and played for a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death."), 100
 iterations. If the later brains then hold more than half the world, they are
 better. The brains of 1,000 beat those of 500 in every world (a median of
 0.78 of a contested world, against 0.84 with any mate). Those of 5,000 beat
@@ -265,10 +265,10 @@ Evolution is slowing, but not stopping.
 median world holds 60% of its agents at three tokens or fewer, below the line
 of 0.66.
 
-Every world meets six of the seven marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), the marks a
+Every world meets six of the seven marks of the health bar, the marks a
 network must meet to count as healthy. It did so at every moment kept from
 500 on, and met all seven at nearly a quarter of them. The one it misses is
-the one B2's own worlds miss: a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4. These worlds read
+the one B2's own worlds miss: a [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4. These worlds read
 4.1 to 4.3. Like B2's, they are folded: nearly small worlds, in which everyone
 is a few steps from everyone, not spaces
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
@@ -379,12 +379,12 @@ is read:
 - **Marks:** six or seven of the health bar.
 - **Diversity:** scores of 0.52 to 0.64, against B2's median at 5,000 of
   0.49.
-- **Width:** 1.16 to 1.28. A world's [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") has the same agents, with
+- **Width:** 1.16 to 1.28. A world's [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") has the same agents, with
   as many links each, wired at random. A typical agent here needs only 1.16 to
   1.28 times as many steps to reach half its world as in that twin. A space
   needs at least 1.5 times as many. These are folded small worlds, as
   Experiment 19's are.
-- **[Evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."):** a [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of the tokens of 0.43 to 0.48. A Gini is 0
+- **[Evenness](measuring-tokens.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."):** a [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of the tokens of 0.43 to 0.48. A Gini is 0
   if every agent holds as many, and near 1 if one holds nearly all. That is
   about as even as B2's most even world (0.46).
 
@@ -585,7 +585,7 @@ is read:
   [Every simulation](every-simulation.md) lists them.
 - **24 October 2026.** This page called the line of evenness "B2's least
   even world". It is B2's most even world, the one with the lowest Gini
-  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
+  ([What makes a world interesting](measuring-health.md#how-our-view-changed)).
 
 <!-- turns -->
 ---

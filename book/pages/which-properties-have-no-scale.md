@@ -93,7 +93,7 @@ side form **clusters**, as a fire spreads from tree to touching tree. When
 one cluster spans the grid. In between, at *p* = 0.5927… (Newman and Ziff
 2000), the grid is at its **critical point**, and clusters of every size
 appear. This is **percolation**, the textbook system without a scale
-(Stauffer and Aharony 1994). In two [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") its exponents are known
+(Stauffer and Aharony 1994). In two [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") its exponents are known
 exactly. The number of clusters of *s* sites falls as *s*^−τ with
 τ = 187/91 ≈ 2.055, and the largest cluster grows as *L*^*D* with
 *D* = 91/48 ≈ 1.896, its fractal dimension. In sites, *N* = *L*², that is
@@ -153,7 +153,7 @@ explains step by step. A critical system breaks it.
 > [!example]- How to make this figure
 > **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](a-worlds-life.md)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`. And the lattices of the figure above.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For each world, the rows with `phase` = 2 in its stretch: `orphaned` / `nodes_before` and `starved` / `nodes_before`, one value per game; their 10th, 50th and 90th percentiles; x is the mean of `nodes_before`.
 > 2. For each lattice, its largest cluster divided by its sites; the percentiles over the 200 lattices of each size.
@@ -163,7 +163,7 @@ explains step by step. A critical system breaks it.
 <!-- /figure -->
 
 Here the spread of a share is how far apart its 90th and 10th percentiles
-lie, divided by its [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above."). At the threshold, the share of a grid held by its
+lie, divided by its median. At the threshold, the share of a grid held by its
 largest cluster does not average out. Its spread is 1.06 on grids of 1,024
 sites and 0.99 on grids of 262,144. Above the threshold, at *p* = 0.70, one
 cluster holds about 69% of every grid, and its share averages out as the law
@@ -171,13 +171,13 @@ of large numbers says: its spread falls from 0.12 to 0.005.
 
 ## The worlds
 
-Experiment 8 ran the baseline [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at ten sizes, three [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, for 600
+Experiment 8 ran the baseline [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at ten sizes, three [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, for 600
 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
 Its eight sizes from 3,200 tokens up all lived to the end. They hold from
 about 470 agents to about 63,000, a range of 130. This page reads them over
-their [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), iterations 500 to 599. Three worlds a size show only what
+their settled life, iterations 500 to 599. Three worlds a size show only what
 is large, so a difference between sizes found in them is **indicative**
-([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)).
+([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)).
 Where thirty are needed, two other sets of baseline worlds stand side by
 side: the 28 worlds of 10,000 tokens of Experiment 2 that lived past
 iteration 1,499, and the 30 worlds of 100,000 tokens of Experiment 10, both
@@ -219,7 +219,7 @@ share.
 > [!example]- How to make this figure
 > **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](a-worlds-life.md)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `orphaned` / `nodes_before` of every row with `phase` = 2 in the stretch, and pool the worlds of each size.
 > 2. For every x, the share of those games with a value of x or more.
@@ -315,14 +315,14 @@ give γ between 1.9 and 2.3, as rough as the fit on the grids was.
 
 Where do pieces of every size come from? Before a game, a world is held
 together in places by single connections, its bridges
-([Bridges](bridges.md)). Behind each lies a **branch**: the smaller of the two
+([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)). Behind each lies a **branch**: the smaller of the two
 parts that cutting the bridge would separate. A branch is a piece waiting to
 fall.
 
 <!-- figure noscale/branches -->
 ![What hangs behind a bridge](../figures/noscale/branches.svg)
 
-**What hangs behind a bridge.** Every bridge of the network after the games of iterations 509, 519, … 599 of the worlds of Experiment 8, and the smaller of the two pieces it holds together: the branch behind it, which cutting it would cut off ([Cut risk](bridges.md#cut-risk)). Left: for every size s, how many branches of s agents or more a world has, per 1,000 agents; one line per size of world, from blue-green (3,200 tokens) to yellow (409,600). Dashed: the same for a tree grown by joining each newcomer to a member drawn at random, 200,000 members, per 1,000 members — exactly 1,000/s. Right: the worlds' lines with s as a share x of the agents of the world, and the number of branches of that share or more a world has, times x.
+**What hangs behind a bridge.** Every bridge of the network after the games of iterations 509, 519, … 599 of the worlds of Experiment 8, and the smaller of the two pieces it holds together: the branch behind it, which cutting it would cut off ([Cut risk](measuring-networks.md#cut-risk)). Left: for every size s, how many branches of s agents or more a world has, per 1,000 agents; one line per size of world, from blue-green (3,200 tokens) to yellow (409,600). Dashed: the same for a tree grown by joining each newcomer to a member drawn at random, 200,000 members, per 1,000 members — exactly 1,000/s. Right: the worlds' lines with s as a share x of the agents of the world, and the number of branches of that share or more a world has, times x.
 
 > [!example]- How to make this figure
 > **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`.
@@ -348,7 +348,7 @@ more: between 0.3 and 3 in the mean look, size by size, with no trend. Such
 branches come nested, one inside another. In 13% to 63% of looks there is at
 least one (47% in the thirty worlds of 100,000 tokens), and a look that has
 one has, on average, two to eight. So the largest branch, the cut risk of
-[Bridges](bridges.md#cut-risk), is a share of the world at every size: 1.5%
+[Bridges](measuring-networks.md#cut-risk), is a share of the world at every size: 1.5%
 to 19% of it in the median look, size by size, with no trend.
 
 A law with γ = 2 has a simple origin. Grow a tree by joining every newcomer
@@ -411,7 +411,7 @@ does not last long enough to grow with the world.
 **Connections keep a scale in their body, and none we can read in their
 hubs.** The curves agree up to about 30 connections. Beyond that, they scatter
 from world to world: in some worlds one hub holds hundreds or thousands of
-agents, in others none ([Stars and hubs](stars-and-hubs.md)). The
+agents, in others none ([Stars and hubs](measuring-networks.md#stars-and-hubs)). The
 best-connected agent of the median world holds from 72 to 1,246 connections,
 size by size, with no law that three worlds a size can show. In the thirty
 worlds of 100,000 tokens alone it ranges from 63 to 11,181.
@@ -440,7 +440,7 @@ measurement at every size.
 > **To make it again:** `python3 book_figures.py noscale`.
 <!-- /figure -->
 
-Two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") carry the same [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") in 7% to 11% of pairs at every size,
+Two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") carry the same genotype in 7% to 11% of pairs at every size,
 two agents two steps apart in 2% to 7%, three steps apart in under 1%. From
 two steps to three, kinship falls about tenfold, and then about threefold
 with every further step. Meanwhile the chance that any two agents of a world
@@ -495,7 +495,7 @@ a tree grown at random, which has none either. The planned page
 live on, is the test that remains:
 with the cull made local, is anything left without a scale?
 
-For [open-ended evolution](open-ended-test.md), a world ten times the size is
+For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution), a world ten times the size is
 not ten times as safe. About one game in ninety cuts off a tenth of a world or
 more, whatever its size, and with it every line of descent that lived only
 there. Size buys a steadier drizzle, not fewer landslides. If those landslides

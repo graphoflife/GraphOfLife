@@ -56,7 +56,7 @@ For a world of Graph of Life it is two questions in one.
 
 ## How far a difference can go in one phase
 
-Follow a difference at one agent, *x*, through one phase of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")
+Follow a difference at one agent, *x*, through one phase of the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")
 (`GraphOfLifeSimple.py`):
 
 ![A light cone on a network](../diagrams/light-cone.svg)
@@ -64,11 +64,11 @@ Follow a difference at one agent, *x*, through one phase of the [engine](the-lab
 1. **The look.** Before anyone acts, every agent's inputs are measured: its
    own tokens and links, each neighbour's, and six numbers each that sum up
    the tokens and the links of each neighbour's neighbours
-   ([What a brain sees](brain-inputs.md)). A [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") sees two steps away, so
+   ([What a brain sees](rules-in-detail.md#what-a-brain-sees)). A [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") sees two steps away, so
    every agent within two steps of *x* sees *x* change.
 2. **The look that only talks.** In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), and in every world of round 3 that
    did not switch it off ([`message_prepass`](settings.md#message_prepass)),
-   every agent looks once only to write [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), and the messages are
+   every agent looks once only to write messages, and the messages are
    delivered before anyone acts. A message written from a look two steps deep
    is read by the writer's neighbours: three steps.
 3. **Acting.** An agent stakes on its own node and its neighbours'. It has its
@@ -107,7 +107,7 @@ light at all:
 | rule | why it reaches further | how far in one phase |
 |---|---|---|
 | the cull | whether a piece lives depends on the size of every other piece | the whole world |
-| the share-out, unless [estates](estate.md "The tokens a dead agent leaves, and who gets them.") go to the children or the nearest living | every survivor's share depends on the whole pool | the whole world |
+| the share-out, unless [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") go to the children or the nearest living | every survivor's share depends on the whole pool | the whole world |
 | the one random stream | one more draw shifts every later draw | the whole world |
 | tokens that are no one's estate: upkeep paid into the estate, a life bought, tokens created | dealt out over everyone | the whole world |
 | estates to the dead agent's children | a child may have moved anywhere since it was born | as far as the children are |
@@ -169,7 +169,7 @@ Under the rules as round 3 played them, a difference is everywhere at once.
   draws once more, or once less: a birth in one twin and not the other, or a
   tie that needs breaking in only one. From that draw on, every later number
   differs, for every agent after it in the order of ids and in every phase
-  after it ([Seeds and the random stream](random-numbers.md)).
+  after it ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
 - **The cull.** If a border goes quiet in one twin and not in the other, a
   whole region dies in one twin only, however far it reaches
   ([How a world breaks](how-a-world-breaks.md)).
@@ -223,7 +223,7 @@ five trials from each: thirty trials a world and condition.
   ([Random streams of their own](local-rules-only.md#random-streams-of-their-own)),
   not from the order of their births.
 - **What differs.** For each agent: whether it lives; its tokens; its links;
-  its brain, by its weights rather than its [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")'s number; and the
+  its brain, by its weights rather than its [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")'s number; and the
   messages it writes.
 - **Reach and damage.** The *reach* of the difference is every agent at which
   any number differs, messages included. The *damage* is every agent whose
@@ -233,7 +233,7 @@ five trials from each: thirty trials a world and condition.
   phase before, in either twin's network as it stood when the phase began. A
   child born in the phase counts as standing one step beyond its parent.
   Every exception is kept, with its cause.
-- **The front.** The largest and the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") distance, in the network as it
+- **The front.** The largest and the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") distance, in the network as it
   stands, from where the token was moved to the damaged agents; and the
   iteration at which the front first reaches each distance, which gives its
   speed.
@@ -257,7 +257,7 @@ five trials from each: thirty trials a world and condition.
   In real numbers, a difference at one agent reaches exactly the agents *t*
   steps away after *t* steps: a front of one step a step, behind which the
   difference fades as a random walker spreads. In whole tokens, split by the
-  [largest remainder](largest-remainder.md), a moved token stays two defects of
+  [largest remainder](rules-in-detail.md#splitting-tokens-into-whole-numbers), a moved token stays two defects of
   one token, one too many and one too few, which wander until they meet and
   cancel. The measurement must find a front of exactly one step a step in the
   first, and two walkers in the second.
@@ -336,7 +336,7 @@ line a phase a trial: tens of megabytes.
    broken; or all four that keep a cone, adding seeds 3023 and 3024.
 2. **The difference:** a token moved, as proposed; a token added, which breaks
    conservation; one weight of one brain changed, which asks how far the
-   effect of a [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") travels; or one link removed.
+   effect of a mutation travels; or one link removed.
 3. **Messages:** counted in the reach only, as proposed, or in the damage too.
 4. **Payments and mending in turn:** made to happen at once, or counted as
    known exceptions.
@@ -361,7 +361,7 @@ line a phase a trial: tens of megabytes.
 
 No run of this experiment exists. The bound of four steps a phase was read
 from the engine (`GraphOfLifeSimple.py`: the features measured once a phase,
-the look that only talks, the [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") of both phases, the cleanup), as
+the look that only talks, the [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") of both phases, the cleanup), as
 [Physical inspiration](physical-inspiration.md#a-speed-limit) first drew it.
 The table of the shortlist reads each world's drawn settings from
 `research/screen/health.json` and the shortlist from

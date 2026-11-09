@@ -13,7 +13,7 @@ Each agent writes a message of 30 numbers to itself and to each neighbour, and
 nothing but the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") gives the numbers a meaning. At the end of thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")
 worlds, two messages of one agent differ by 0.0005, while those of two agents
 differ by 0.60. So a message tells its reader one thing, who wrote it: it is a
-name, and all agents of one [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") write the same one. Kin could recognise
+name, and all agents of one [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") write the same one. Kin could recognise
 each other by it with a single comparison, but B1's nearly blind brains cannot
 make it.
 
@@ -22,7 +22,7 @@ make it.
 Picture neighbours who pass each other notes written in numbers, in a code
 that nobody ever wrote down. Every agent writes a note of 30 numbers to itself
 and to each of its neighbours, in every phase. It reads the notes written to
-it ([Messages](messages.md)). Nothing in the rules reads them except the
+it ([Messages](rules-in-detail.md#messages)). Nothing in the rules reads them except the
 brains, and nothing gives the numbers a meaning. If a message says anything,
 evolution made it say it.
 
@@ -41,7 +41,7 @@ to 1. (tanh is a function that maps any number into that range.)
 
 That gives between 32,000 and 79,000 messages per world. There is one for
 every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") in each direction, and one from every agent to itself. As a
-control, a fresh [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s brain writes from exactly the same inputs. It shows
+control, a fresh founder's brain writes from exactly the same inputs. It shows
 what the architecture does before any selection.
 
 The worlds are the thirty B1 worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of
@@ -122,10 +122,10 @@ genotype**.
 
 **Few numbers are used.** Picture every message as a point, with its 30
 numbers as coordinates. If the points spread along only a few directions, the
-messages use only a few numbers' worth of freedom. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, the
+messages use only a few numbers' worth of freedom. In the median world, the
 messages vary along only **15** independent directions (6 to 21). They are
 counted as a participation ratio
-([How many directions a cloud of points uses](effective-number.md#how-many-directions-a-cloud-of-points-uses)).
+([How many directions a cloud of points uses](statistics.md#how-many-directions-a-cloud-of-points-uses)).
 Founders' brains, independent of each other, use 30, all of them.
 
 Why so few? A world's genotypes descend from a few lines
@@ -168,7 +168,7 @@ Founders' messages pile up around 0, in a bell. Evolved messages are spread
 almost evenly from −0.7 to +0.7, with more numbers near the ends: 2.5% lie
 beyond ±0.9, against 0.4% for founders.
 
-Larger weights would do this. And [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") alone leaves the weights of an
+Larger weights would do this. And mutation alone leaves the weights of an
 evolved brain larger than a founder's
 ([What a brain listens to](what-the-brains-are-like.md#what-a-brain-listens-to)).
 So nothing here needs selection to explain it. Nor are the evolved values more
@@ -179,12 +179,12 @@ informative for being spread wider. They are still the same for every reader.
 [Do agents cooperate?](do-agents-cooperate.md) found that kin live side by
 side: a tenth of an agent's neighbours carry its own genotype. Yet kin are
 staked on exactly like strangers. A brain cannot see genotypes. It could tell
-kin only through messages, if a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") evolved a password. That is a signal
+kin only through messages, if a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") evolved a password. That is a signal
 its members send, with a habit of treating those who send it differently.
 Biologists call such a signal a **green beard** (Hamilton 1964; Dawkins 1976).
 
 The password exists already, without any evolution. When an agent *u* looks at
-a neighbour *v*, it reads four messages ([Messages](messages.md)). Two of them
+a neighbour *v*, it reads four messages ([Messages](rules-in-detail.md#messages)). Two of them
 are the message it wrote to itself and the message *v* wrote to it. If *u* and
 *v* share a genotype, these two messages are identical but for a thousandth or
 so. If *v* is a close relative, they are nearly identical. If *v* is a
@@ -204,7 +204,7 @@ of 16 units, and a founder's gain is about 0.2
 ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
 Its messages hold 8 numbers, not 30. Whether seeing brains use the names to
 tell kin from strangers has not been measured. Three things nearby were
-measured, in [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds under B2's rules:
+measured, in [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds under B2's rules:
 
 - Connected groups of kin shrank over time, in every world.
 - Evolution turned the brains' attention to messages down, not up. Take the
@@ -247,7 +247,7 @@ the rules give it something to gain by reading it
 
 - [What the brains are like](what-the-brains-are-like.md): why the brains
   barely see, which makes every message a name.
-- [Messages](messages.md): how messages are written, delivered and read.
+- [Messages](rules-in-detail.md#messages): how messages are written, delivered and read.
 - [Do agents cooperate?](do-agents-cooperate.md): kin live side by side, and
   are treated like strangers.
 - [Another game](another-game.md): what happened when kin could sense each
@@ -352,5 +352,5 @@ that lived to the end of their 3,000 iterations were read the same way.
 ← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Do the brains matter?](do-the-brains-matter.md) →
 
 > [!info]- Pages that link here (9)
-> [Messages](messages.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [What the brains are like](what-the-brains-are-like.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Effective numbers: how many kinds, and how many directions](effective-number.md)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [What the brains are like](what-the-brains-are-like.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Statistics: the tools of the notebook](statistics.md)
 <!-- /turns -->

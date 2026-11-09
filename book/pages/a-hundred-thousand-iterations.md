@@ -38,7 +38,7 @@ This page plans that test, Experiment 11. **It has not been played.** The
 question, the thesis and the method below were written on 9 October 2026,
 before any run of it existed. The plan is the file
 `book/experiments/drafts/E11.json`. The lab is the program that plays an
-experiment's runs ([The lab, the engine and pilots](the-lab.md)). It reads
+experiment's runs ([The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots)). It reads
 only the plans in `book/experiments/` itself, so it cannot start this one.
 
 Nor could it run this one yet. The run needs three things the lab could not
@@ -84,7 +84,7 @@ computing.
   Then every road to cooperation that needs seeing would open: recognising
   kin, answering a partner ([Do agents cooperate?](do-agents-cooperate.md)).
   The worlds of 100,000 tokens, examined later, had reached the same gain,
-  0.0015, within 1,500 iterations: 2.4 times a [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s.
+  0.0015, within 1,500 iterations: 2.4 times a founder's.
 - **The worlds wander, slowly.** Think of the level of a lake. The wind
   makes it jitter from minute to minute, and the seasons move it slowly.
   Average it over a day, and the jitter is gone, but the seasons are not.
@@ -107,7 +107,7 @@ computing.
   nearly independent of where it was. A world's spectrum says how much of
   its wander happens at each rhythm. For its number of agents it levels off
   for periods of 800 iterations and more
-  ([How long a world remembers](autocorrelation.md#the-spectrum-in-the-baseline)).
+  ([How long a world remembers](statistics.md#the-spectrum-in-the-baseline)).
   On those scales a world is pulled back to its level, like a random walk
   held near it by a spring. Whether a slower drift lies beneath this, on a
   scale of ten thousand iterations, is what 3,000 iterations cannot show.
@@ -147,7 +147,7 @@ worlds, and of B1 in another way.
 
 **B1 stops learning early.** Contests play the brains of one moment of a
 world, an era, against those of another
-([Eras, contests and invasions](eras-and-contests.md)). A contest's score is
+([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). A contest's score is
 the share of the world the later brains hold at the end, and 0.5 is a tie.
 In ten worlds of B1 at 5,000 tokens, nothing is learned after the first 50
 to 100 iterations
@@ -158,7 +158,7 @@ times as long agree
 ([The verdict of Experiment 12](how-to-tell-a-world-that-keeps-evolving.md#the-verdict-of-experiment-12)).
 That speaks for the thesis below, before any run.
 
-**A world whose brains see.** The work on [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") also built a
+**A world whose brains see.** The work on open-ended evolution also built a
 second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")
 ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
 Its brains have one hidden layer instead of five, and a founder's gain is
@@ -185,7 +185,7 @@ worlds of the notebook are two of B2 with brains mixed at birth, played to
 Their brains climbed for about 20,000 to 25,000 iterations, then stopped
 climbing and wandered ([Every era against three](every-era-against-three.md)).
 
-The search for a healthy, rich world plans a long run of its own. Ten [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.")
+The search for a healthy, rich world plans a long run of its own. Ten seeds
 would go to 10,000 iterations, and the best world on to a hundred thousand.
 Brains mixed at birth went first and did not stay healthy, and no other rule
 has yet held more often
@@ -198,7 +198,7 @@ its agents would learn to cooperate in that time is still open.
 ## How much evolution is a hundred thousand iterations?
 
 A world of 204,800 tokens holds about 27,000 agents. After every game each
-brain is changed with probability 0.2 ([How a brain changes](mutation.md)).
+brain is changed with probability 0.2 ([How a brain changes](rules-in-detail.md#how-a-brain-changes)).
 So some 5,400 changed brains are tried in every iteration, and some 500
 million over 100,000 iterations.
 
@@ -240,7 +240,7 @@ written when no world had lived longer than 3,000 iterations, so its
 >
 > **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)): a node's brain is replaced almost every game, so nobody meets anybody twice ([Chapter 38](do-agents-cooperate.md)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations ([Chapter 18](genotypes-and-lineages.md)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
 >
-> **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent; [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."); births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
+> **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent; [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."); births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the median difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
 >
 > **It fails if:** Any one of: for two or more of the eight statistics, the difference at 20,000 to 50,000 iterations is more than twice that at 2,000 to 5,000, so the world goes on moving on scales the shorter runs could not see; or the kin ratio or the share of lasting partners crosses its line in three successive windows, so cooperation has appeared; or the median gain passes 0.005, so the brains have begun to see. A world that dies, or is stopped, before iteration 52,000 decides nothing.
 
@@ -294,7 +294,7 @@ its last checkpoint, once someone has looked.
 
 | the sentinel stops the run when | because |
 |---|---|
-| the world dies (20 agents or fewer) | every run ends there ([When a world ends](extinction.md)) |
+| the world dies (20 agents or fewer) | every run ends there ([When a world ends](rules-in-detail.md#when-a-world-ends)) |
 | the tokens no longer add up to 204,800, or a statistic is missing or not a number where it never was | that is a fault in the program, not a finding |
 | an iteration takes more than twice as long as in the ten blocks before, two blocks in a row | something has gone wrong with the machine, or the world has fallen into a shape the program handles badly |
 | memory or disk would run out within the next ten blocks | the run would fail half-way through a block |
@@ -319,7 +319,7 @@ measured each block of 100 iterations from iteration 1,500 on against the
 blocks of iterations 500 to 1,499 of the same world. The unit was how much
 those earlier blocks spread. Six such units sounds safe. Yet 5% of all
 blocks went beyond it, and runs of three such blocks in a row were common.
-They were most common in the largest [degree](degree.md "The number of an agent's connections: how many neighbours it has."), the median degree and the
+They were most common in the largest [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has."), the median degree and the
 number of leaves (agents with a single connection). Before the run starts,
 the rule above is tried on the same worlds, and it must stay quiet there.
 
@@ -330,7 +330,7 @@ the game, with the agents' decisions. Every frame of 100,000 iterations
 would need more than 200 GB, more than the disk holds. So the run keeps:
 
 - the **statistics** of every frame, as every run does (`stats.jsonl`;
-  [What a run records](frames-and-stats.md)): about 400 MB for the whole
+  [What a run records](runs-and-records.md#what-a-run-records)): about 400 MB for the whole
   run;
 - **frames**, with the decisions, only for the last 17 iterations of every
   block. That is enough for every measure of
@@ -376,13 +376,13 @@ it. A frame that was not kept is a frame that has not been made again yet.
   The study of the baseline proposed this tournament
   ([How we will know](what-the-baseline-world-is.md#how-we-will-know)). It
   has since become the notebook's yardstick
-  ([Eras, contests and invasions](eras-and-contests.md)).
+  ([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)).
 
 ### What it costs
 
 On 9 October 2026, the lab's cost model gave about 27,300 agents, 25
 seconds an iteration and 5.9 GB of memory. That makes 29 days for 100,000
-iterations on one worker ([What a simulation costs](what-a-simulation-costs.md)).
+iterations on one worker ([What a simulation costs](runs-and-records.md#what-a-simulation-costs)).
 The run keeps about 20 GB, where every frame would have needed over 200. The
 thesis can be decided from iteration 52,000, about two weeks in, and the run
 can be stopped after any block.
@@ -408,7 +408,7 @@ or `keep_checkpoints`, as this one does.
 1. **Frames in windows, statistics always.** Today a run that records its
    statistics as it goes must keep every frame. The reason is the count of
    families: it climbs the family tree, so it needs every iteration in order
-   ([Families](genotype.md#families)). The recorder will instead read every
+   ([Families](measuring-evolution.md#families)). The recorder will instead read every
    frame as it is made, and the store will keep only the windows. A resumed
    run then takes its families up from the window before its checkpoint,
    which is why checkpoints fall at the ends of windows. This touches the
@@ -448,7 +448,7 @@ easier than the plan above.
 - **Nothing has to be built.** The lab can play a kept world on from its last
   state, iteration 3,000, under its own settings and seed. It records every
   iteration as round 3 did, and it keeps whole worlds, brains included, as
-  often as the plan asks ([Eras](eras-and-contests.md#eras)). Frames for
+  often as the plan asks ([Eras](measuring-evolution.md#eras)). Frames for
   every iteration cost a candidate 0.15 to 0.22 MB an iteration, so no
   windows are needed.
 - **The worlds are small and fast.** Round 3's worlds hold 30,000 tokens. The
@@ -512,7 +512,7 @@ None yet: neither the plan of 9 October nor the new one has been played.
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md):
   the yardstick, and why B1 stops learning within its first hundred
   iterations.
-- [Eras, contests and invasions](eras-and-contests.md): how a world's brains
+- [Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better): how a world's brains
   are played against their own past.
 - [Every era against three](every-era-against-three.md): the longest worlds
   of the notebook, and where their evolution stopped climbing.
@@ -578,7 +578,9 @@ built.
 <!-- turns -->
 ---
 
-← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [What would count as open-ended evolution](open-ended-test.md) →
+← [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen)
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (7)
 > [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)

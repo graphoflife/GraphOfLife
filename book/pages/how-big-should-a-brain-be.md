@@ -11,7 +11,7 @@
 Round 3 of the random screen gave every world one of nine brains, three to
 five hidden layers of 16, 32 or 50 tanh units, and all nine see: a small
 change in what a brain sees reaches its outputs at a third of its size in a
-[founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") and at more than half after evolution, nearly 400 times as much as in
+founder and at more than half after evolution, nearly 400 times as much as in
 B1's evolved brains. Depth costs them little, since every tanh layer after
 the first passes on 80 to 90% of a change. Evolution raised this gain by about
 1.6 times, but mutation alone does as much, and selection added little if
@@ -25,7 +25,7 @@ between a world's eras show whether a larger one lets evolution go further.
 This page was planned on 2 October 2026 as an experiment: [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), the world that
 cannot break, played with brains of one hidden layer of 8, 16 or 32 units, or
 two of 16, and judged by contests between each world's eras
-([Eras, contests and invasions](eras-and-contests.md)). It was never played.
+([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). It was never played.
 Round 3 of the random screen gave the brain's shape to chance instead
 ([Round 3: the author's settings](a-screen-of-random-worlds.md#round-3-the-authors-settings)).
 Every world drew three, four or five hidden layers, each of 16, 32 or 50
@@ -37,7 +37,7 @@ three layers deep, so the plan's smallest brains are not among them. And the
 worlds differ in every other [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") too, so a small effect of the brain can
 hide among the large effects of the rest. About eight living worlds share each
 shape, and every difference between shapes on this page is *indicative*
-([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)).
+([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)).
 
 ## Why depth blinded B1, and why tanh need not
 
@@ -93,7 +93,7 @@ stakes placed a [token](the-world.md#agents-and-tokens "The one thing of value i
 
 A brain's size is the number of its weights and biases. The shape sets most
 of it, and the world's other settings the rest: a brain reads more inputs
-where more [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") and random numbers were drawn, from 31 to 176 in the living
+where more messages and random numbers were drawn, from 31 to 176 in the living
 worlds of round 3. The smallest brains, three layers of 16, hold about 2,000
 numbers; the largest, five layers of 50, about 15,600, nearly eight times as
 many. What each costs to run is [below](#what-a-brain-costs).
@@ -103,7 +103,7 @@ many. What each costs to run is [below](#what-a-brain-costs).
 To see whether a brain responds, we did what
 [What the brains are like](what-the-brains-are-like.md) did for B1. In each
 living world, at its end, we took 300 [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") at random among those holding a
-token. We rebuilt what each of them sees, exactly as the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") builds it,
+token. We rebuilt what each of them sees, exactly as the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") builds it,
 and ran its brain on it. Then we moved every input by a small random amount
 and ran it again. The brain's gain is how much of that change reached its
 outputs. We did the same with a fresh founder's brain of the same shape,
@@ -127,7 +127,7 @@ shown exactly the same inputs.
 <!-- /figure -->
 
 Every brain of round 3 responds. A founder's brain passes a change on at a
-[median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of **0.34** of its size (the 82 worlds: 0.18 to 0.52), and an evolved
+median of **0.34** of its size (the 82 worlds: 0.18 to 0.52), and an evolved
 brain at **0.56** (0.21 to 2.2). B1's founders passed on 0.0006 and its evolved
 brains 0.0015 ([What the brains are like](what-the-brains-are-like.md)). So a
 round-3 brain is nearly 400 times as sensitive as an evolved B1 brain, and more
@@ -230,7 +230,7 @@ Think of a bath with the tap running and the plug a little loose. The water
 settles where what runs in equals what drains out. Each change of a brain
 adds a little to the spread of its weights: that is the tap. And now and then
 it draws a weight afresh at a founder's size: that is the loose plug
-([How a brain changes](mutation.md#how-big-a-little-is)). The weights grow
+([How a brain changes](rules-in-detail.md#how-big-a-little-is)). The weights grow
 until the two balance. Larger weights make larger sums, and in a tanh brain a
 larger gain.
 
@@ -309,7 +309,7 @@ brain takes more jitters on the way from what it sees to what it does.
 <!-- figure brainsize/change -->
 ![How far one change moves a brain](../figures/brainsize/change.svg)
 
-**How far one change moves a brain.** One dot per living world, by the depth of its brains: how much one change of a brain ([How a brain changes](mutation.md), made for sure, with the world's own settings) moves the outputs that make decisions, over how much the brain of a stranger differs from it, on the same inputs — the root-mean-square differences, the median over the agents probed. Grey: fresh founders' brains, each against another founder's; blue: the agents' own brains at the end, each against another agent's of the same world; the bar is the median. The dots high above the rest are the worlds whose changes touch three numbers in ten (a mutation sparsity of 0.3).
+**How far one change moves a brain.** One dot per living world, by the depth of its brains: how much one change of a brain ([How a brain changes](rules-in-detail.md#how-a-brain-changes), made for sure, with the world's own settings) moves the outputs that make decisions, over how much the brain of a stranger differs from it, on the same inputs — the root-mean-square differences, the median over the agents probed. Grey: fresh founders' brains, each against another founder's; blue: the agents' own brains at the end, each against another agent's of the same world; the bar is the median. The dots high above the rest are the worlds whose changes touch three numbers in ten (a mutation sparsity of 0.3).
 
 > [!example]- How to make this figure
 > **Runs.** Round 3 of the random screen: Experiment 40's 84 worlds, each a draw of its own, and the 16 of Experiments 41 and 42, eight draws played twice with the stakes placed a token at a time (30,000 tokens, 3,000 iterations; [A screen of random worlds](a-screen-of-random-worlds.md))
@@ -344,14 +344,14 @@ deep brains and those with shallow ones differ in everything else by chance
 alone, and a difference beyond chance is the shape's doing
 ([How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#why-one-setting-can-be-looked-at-alone)).
 Chance is large here, though. Whether a world dies depends mostly on its cap
-on links and its gifts, and how healthy it grows on its [estates](estate.md "The tokens a dead agent leaves, and who gets them."), its upkeep
+on links and its gifts, and how healthy it grows on its [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them."), its upkeep
 and its mending. Those settings fell unevenly among the shapes, and can make a
 shape look better or worse than it is.
 
 So each test first takes away what is already known. Rank the worlds by an
 outcome, say health. Fit the ranks with a straight line on the settings
 already found to matter for health (their values as columns of 0 and 1:
-[least squares](correlation.md#fitting-a-straight-line)), and keep what the
+[least squares](statistics.md#fitting-a-straight-line)), and keep what the
 fit leaves over. That is how much healthier or sicker a world is than its
 other settings would say. Then ask whether what is left rises or falls with
 depth: its correlation with the rank of the depth. Last, shuffle the depths
@@ -411,7 +411,7 @@ Three hints stand out, none of them a finding:
   32 and 0.09 with 50 (chance 0.02, false discovery rate 0.29).
 - **Deeper brains lived more generations**, a median of 548 with three layers
   and 947 with five (0.07), and their worlds were a little closer to three
-  [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") (0.04).
+  [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") (0.04).
 - **Fertility passed on rose with depth** once the settings known to matter
   for it are taken into account (0.03), though its medians, 0.13, 0.18 and
   0.12, rise and fall again.
@@ -458,13 +458,13 @@ draw three layers of 16 for every world, and spend their worlds on the
 settings that do matter.
 
 Two cautions. The hint that wider brains keep moving into new behaviour is
-the one result here that bears on [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), and a round that
+the one result here that bears on open-ended evolution, and a round that
 fixed the width at 16 could not follow it up. And the gain says only that a
 brain *can* respond. Whether a larger brain lets selection find more is a
 question about evolution, not about sight.
 
 The decisive test is a contest between a world's eras
-([Eras, contests and invasions](eras-and-contests.md)), read shape by shape.
+([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)), read shape by shape.
 Brains of two shapes cannot meet in one world, so each shape is judged in its
 own worlds, against its own past:
 - **On the worlds that exist.** Round 3 kept every world whole every 250
@@ -476,7 +476,7 @@ own worlds, against its own past:
 - **On matched worlds.** If a shape stands out, a few draws that lived well,
   say the shortlist's
   ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)),
-  are played again with the same settings and [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") in two or three shapes
+  are played again with the same settings and seed in two or three shapes
   only: three layers of 16, three of 50, five of 50. Then nothing but the
   brain differs between the worlds compared.
 
@@ -510,7 +510,7 @@ built something that mutation alone does not.
   measured the way this page measures round 3's.
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md):
   the settings that do matter, tested one at a time.
-- [Eras, contests and invasions](eras-and-contests.md): the contests that
+- [Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better): the contests that
   would show whether a larger brain lets evolution go further.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
   heredity, novelty and generations, the outcomes tested here.
@@ -544,7 +544,7 @@ settings known to matter for each are those with a chance below 0.05 on
 <!-- turns -->
 ---
 
-← [How different are the agents?](how-different-are-the-agents.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Genotypes, families and the common ancestor](genotype.md) →
+← [How different are the agents?](how-different-are-the-agents.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 

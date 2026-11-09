@@ -12,7 +12,7 @@ B2, the world that cannot break, has seven numbers in its rules that were
 chosen by hand, and the notebook asks for rules without them. Taken away all
 at once, the numbers show what each was for: without alliances the worlds
 died out. With alliances, each lived as one peaceful alliance, but on a
-network that fails the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."). The clearest replacement so far is a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
+network that fails the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."). The clearest replacement so far is a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
 in every link: then no cap on links is needed. Nothing yet replaces the age
 limit.
 
@@ -25,7 +25,7 @@ half times.* It does its job. Defending becomes cheaper than attacking, so a
 
 The author of the simulation set a rule for everything that follows. No
 factor chosen by hand may sit in the rules, except the total of tokens and
-the parameters of [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
+the parameters of mutation
 ([How this notebook is written](how-this-notebook-is-written.md#the-rules-of-the-research)).
 Every other number should come out of the world. The one and a half by which
 an owner's stake counts was the author's own example of what is not wanted.
@@ -40,7 +40,7 @@ built
 | [`incumbency`](settings.md#incumbency) | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking, and a brain is not lost in almost every game | [Holding one's place](a-world-that-cannot-break.md#holding-ones-place) |
 | [`birth_links`](settings.md#birth_links) | 2 | a newborn is joined to its parent and two of the parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."), drawn at random: no world grows as a tree | [A tree of blobs](a-world-that-cannot-break.md#a-tree-of-blobs) |
 | [`prune_needs`](settings.md#prune_needs) | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [What the game adds](a-world-that-cannot-break.md#what-the-game-adds) |
-| [`valence`](settings.md#valence) | 8 | a brain may choose at most 8 links: no [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") | [What the game adds](a-world-that-cannot-break.md#what-the-game-adds) |
+| [`valence`](settings.md#valence) | 8 | a brain may choose at most 8 links: no [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") | [What the game adds](a-world-that-cannot-break.md#what-the-game-adds) |
 | [`keep_home`](settings.md#keep_home) | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and fewer agents are left with a single token than when only the last token is kept | [A share kept at home](a-world-that-cannot-break.md#a-share-kept-at-home) |
 | [`max_age`](settings.md#max_age) | 100 | every agent dies at 100: no agent holds its place forever, and there is room for the young | [Old age](a-world-that-cannot-break.md#old-age) |
 | [`min_child`](settings.md#min_child) | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Children as missiles](a-world-that-cannot-break.md#children-as-missiles) |
@@ -49,7 +49,7 @@ Two more rules of B2 have no number in them. A death is mended by joining the
 dead agent's neighbours in a ring
 ([Mending a death](a-world-that-cannot-break.md#mending-a-death)), and a brain
 changes only when it is copied. Both stay. The brain has sizes too: one
-hidden layer of 16 units, and [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") of 8 numbers. Those are left alone
+hidden layer of 16 units, and messages of 8 numbers. Those are left alone
 here, for [How big should a brain be?](how-big-should-a-brain-be.md), which
 found in round 3 that the shape of a tanh brain made no difference to the
 worlds that could be told from chance.
@@ -64,9 +64,9 @@ rule with no number in it.
 
 ## B3: B2 without its numbers
 
-The [pilot worlds](the-lab.md#pilot-worlds) of this page are batch N. A pilot
+The [pilot worlds](runs-and-records.md#pilot-worlds) of this page are batch N. A pilot
 is a world made by hand to see whether an idea is worth an experiment, here
-with two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of each kind. These worlds play B1's game, with each of the
+with two seeds of each kind. These worlds play B1's game, with each of the
 seven numbers at its value in the original rules:
 
 - an owner's stake counts once;
@@ -80,7 +80,7 @@ seven numbers at its value in the original rules:
 On top of that, they keep the two rules B2 has without a number. Their
 brains, of one hidden layer of 16, change only when copied, and deaths are
 mended in a ring. Each brain also remembers the last game: what each
-neighbour staked on it, and what it staked on each neighbour. [Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") are
+neighbour staked on it, and what it staked on each neighbour. Revolutions are
 off. We call these worlds **B3**. There are three kinds, two seeds each, at
 10,000 tokens for 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."):
 
@@ -112,7 +112,7 @@ off. We call these worlds **B3**. There are three kinds, two seeds each, at
 
 **Without alliances, the worlds died.** Both B3c worlds died out: they fell
 to 20 agents or fewer, the notebook's mark of a world that has ended
-([When a world ends](extinction.md)). One did so at iteration 102, the other
+([When a world ends](rules-in-detail.md#when-a-world-ends)). One did so at iteration 102, the other
 at 432. Until then, nearly every node changed hands in every game: 88 to 91
 per hundred agents. In the longer-lived world, from iteration 100 to 400, 96
 agents in a hundred were born and 77 starved in every iteration. So the
@@ -134,7 +134,7 @@ left differed from world to world:
   joined to all but one of 4,383. Nothing stopped brains from joining their
   children to the best-connected neighbour. When the star went, the world
   grew back as a tree. Over its last 300 iterations it had 2.2 links per
-  agent, and 42% of its agents had a single link. A third were in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."),
+  agent, and 42% of its agents had a single link. A third were in the [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."),
   and one agent or one link could cut off 39% of the world. It was a tree of
   old agents, with a mean age of 206. There were 3.5 births per hundred
   agents an iteration, and as many agents were cut off.
@@ -143,7 +143,7 @@ left differed from world to world:
   age was 21.
 - **B3b: births among allies.** Seed 1 died out at iteration 74. Seed 2
   lived dense and short. It had 8 links per agent, one agent joined to a
-  fifth of the world, and a [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of 5.2. There were 53 births and
+  fifth of the world, and a [ball dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of 5.2. There were 53 births and
   49 starvations per hundred agents an iteration, and the mean age was 5.
 
 <!-- figure numberless/ages -->
@@ -170,12 +170,12 @@ all selection, except that between who has children and who does not.
 ### Did the worlds that lived keep evolving?
 
 A world can be played against its own past
-([Eras, contests and invasions](eras-and-contests.md)). Take the brains of
+([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). Take the brains of
 one moment, an **era**, and those of a later one. Give every agent a brain of
 one era or the other, at random, switch mutation off, and let the world play
 on. The later era's share of the world at the end is its score: 0.5 is a
-tie. Here every contest lasted 100 iterations, a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") in B2
-([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)),
+tie. Here every contest lasted 100 iterations, a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") in B2
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)),
 and was played once in each era's world. An era played against itself, in
 other worlds, held 0.44 to 0.58: that much is noise.
 
@@ -293,7 +293,7 @@ Every link holds one token, paid by whoever makes it: a newborn pays for the
 links it is born with. When a link lapses, its token goes back to one of its
 two ends, drawn at random. When an agent dies, the tokens of its links pay for
 the links that mend its neighbourhood. The rest is shared out like its
-[estate](estate.md "The tokens a dead agent leaves, and who gets them.").
+[estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.").
 
 So the tokens the agents hold and the tokens in links always add up to the
 world's tokens. The links can never outnumber the tokens, and no cap is
@@ -424,7 +424,7 @@ settings.
     (`GraphOfLifeRuns/.pilots/rejudge_T100.json`).
   - The table said that the share kept at home stops a world of one-token
     zombies. Experiment 15, analysed on 16 October, found that it only thins
-    them out. In B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, 52% of the agents hold a single token.
+    them out. In B2's [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, 52% of the agents hold a single token.
     When only the last token is kept, 77% do
     ([What each rule of death did](a-world-that-cannot-break.md#what-each-rule-of-death-did)).
   - The table said that the age limit stops a hoarding queen. The queen

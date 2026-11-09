@@ -15,7 +15,7 @@
 ## In short
 
 In the game of Graph of Life, a node goes to whoever stakes most on it. This
-page changes that contest in [pilot worlds](the-lab.md#pilot-worlds), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
+page changes that contest in [pilot worlds](runs-and-records.md#pilot-worlds), two [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
 and asks whether evolution then goes on. Under a **lottery**, where a node goes
 to a staker drawn in proportion to the stakes, the brains have almost nothing
 to learn. Of all the contests tried, it is the only one under which they stop
@@ -24,7 +24,7 @@ count their stakes as one builds bodies and brings peace, but finds no better
 play. **Alliances**, which two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") choose together, are taken up at
 once: one alliance spreads until it holds nearly the whole world, and the
 fighting ends. Its brains keep improving slowly, as they do without alliances,
-but one habit spreading once is not [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.").
+but one habit spreading once is not [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.").
 
 ## Another game
 
@@ -64,8 +64,8 @@ Blotto: any contest whose best play can be found will be found.
 
 ### Stakes counted by genotype
 
-**A contest that lets a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") act as one.** Let stakes count by
-**[genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")**, the identity of a brain. Every stake on a node made by agents
+**A contest that lets a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") act as one.** Let stakes count by
+**[genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")**, the identity of a brain. Every stake on a node made by agents
 with exactly the same brain counts as one side's. The side with the largest
 total takes the node, and the owner keeps it if its own genotype wins. Each
 agent also sees, for every [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), whether it carries the same brain.
@@ -81,7 +81,7 @@ This is the rule the factories of
 factory is a team written by hand, whose inner members pass their tokens on to
 the members at its frontier. In the engine as it is, a stake on a teammate's
 node counts against the teammate. Pooling by genotype is also the narrowest
-kind of kin pooling, which [Alliances](#alliances) tries within two [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.").
+kind of kin pooling, which [Alliances](#alliances) tries within two [mutations](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.").
 Here there is no alliance to agree on, and no threshold of relatedness to
 choose.
 
@@ -89,16 +89,16 @@ choose.
 brain as mine*. An agent can tell its clones, and nothing in the rules makes
 it matter. This is the free version of the raiders' password in Strategies
 written by hand. There, a team written by hand knew its own by a fixed
-signature in its [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.").
+signature in its [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.").
 
 ### The contest worlds
 
 Like every world on this page, these are pilots, with two seeds per kind where
 an experiment would have ten. So they show a lead and not a law
-([Pilot worlds](the-lab.md#pilot-worlds)). They run in the engine's own code
+([Pilot worlds](runs-and-records.md#pilot-worlds)). They run in the engine's own code
 (`--proto engine=true`), which plays the engine's phases unchanged. Every
 world is B2 at 10,000 tokens, played for 1,000 iterations. Each condition has two
-seeds, and a whole world is kept every 100 iterations. [Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") are off in
+seeds, and a whole world is kept every 100 iterations. [Revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") are off in
 all of them. A revolution is itself a rule about who takes a node, and would
 mix with the rule under test.
 
@@ -163,10 +163,10 @@ Two more pairs of worlds, with families, came later
 > **To make it again:** `python3 book_figures.py games`.
 <!-- /figure -->
 
-The last figure plays each world's [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), its brains at different moments,
+The last figure plays each world's [eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), its brains at different moments,
 against each other. In each contest every agent gets a brain from one era or
 the other, by the toss of a coin, and 20 iterations are played. Each era gets
-a rating in Elo points, with the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") at 0. A **step score** is an era's
+a rating in Elo points, with the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") at 0. A **step score** is an era's
 share of the world against the era just before it; one half is a tie.
 
 **The lottery leaves almost nothing to learn.** Under a lottery, the brains of
@@ -201,7 +201,7 @@ worlds.
 
 A contest of coins cannot see a body of clones, since it deals brains out one
 agent at a time. The **turf** contest can
-([Pilot worlds](the-lab.md#tournaments-between-its-eras)): the era whose
+([Pilot worlds](runs-and-records.md#tournaments-between-its-eras)): the era whose
 world it is keeps its clones in place. On turf, in contests of 50 iterations,
 the brains of iteration 1,000 held 0.35 and 0.40 of the world against those of
 iteration 500. In the same contest without pooling they held 0.45 and 0.37.
@@ -262,8 +262,8 @@ when one copy in twenty changes. It finds no better play either
 
 Every one of these worlds kept a network that holds. The loss of no single
 agent or link would cut it, and agents had five or six links on average. Their
-[ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
-was 4.1 to 4.4 in eleven of the twelve worlds, a little above the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.")'s
+[ball dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
+was 4.1 to 4.4 in eleven of the twelve worlds, a little above the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.")'s
 4, as in B2. The twelfth, a world with the family sense, read 3.8, inside the
 bar.
 
@@ -486,8 +486,8 @@ the two says that clearly, and the other does not.
 ### The network of a world of allies
 
 The network holds. In the last 500 iterations of every world of alliances,
-every agent was in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."): on a [loop](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice."), or between loops. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
-[frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), no agent or connection could cut off anyone at all. No agent was linked
+every agent was in the [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."): on a [loop](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice."), or between loops. In the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
+frame, no agent or connection could cut off anyone at all. No agent was linked
 to more than 2% of the others, and an agent had about five connections (4.9 to
 5.5). The worlds failed the health bar only on its last line. Their ball
 dimension was 4.1 to 4.8, a little above the bar's 4, and highest in the worlds
@@ -552,7 +552,7 @@ world of alliances, and 0.42 in the control. In contests of 50 iterations the
 later brains lost every way they were played. Whatever they had become, it did
 not make them better at war within half a life, alone or together.
 
-**A [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long, they win.** Contests of 20 or 50 iterations are shorter than
+**A [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long, they win.** Contests of 20 or 50 iterations are shorter than
 a life of 100, and miss what pays off over a life
 ([A lifetime long](#a-lifetime-long)). So these contests, too, were played
 again for 100 iterations, once in each era's world
@@ -626,7 +626,7 @@ improving, as the brains of a world without alliances do.
 ## How this was made
 
 Every world on this page is a pilot, made with `research/oee/pilots/run.py` and
-kept in `GraphOfLifeRuns/.pilots` ([Pilot worlds](the-lab.md#pilot-worlds)). No
+kept in `GraphOfLifeRuns/.pilots` ([Pilot worlds](runs-and-records.md#pilot-worlds)). No
 experiment of the lab stands behind it, so the page has no box of runs. Every
 figure says, folded beneath it, which worlds it reads and how. To draw the
 figures again, run `python3 book_figures.py games` for the first half of the
@@ -712,5 +712,5 @@ that made the worlds are in `research/oee/pilots/LOG.md`.
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (16)
-> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

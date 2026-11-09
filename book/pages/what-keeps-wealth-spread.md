@@ -1,7 +1,7 @@
 # What keeps wealth spread?
 
 > [!question] Questions of this page
-> - Without [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") of small stakers to unseat the largest, would the rich
+> - Without [coalitions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") of small stakers to unseat the largest, would the rich
 >   take everything?
 > - What does keep a world's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") spread out, and what pools them?
 > - How unequal are the worlds, against what chance alone would deal out?
@@ -16,7 +16,7 @@ mayflies, where 13 to 25 [agents](the-world.md#agents-and-tokens "One member of 
 and in the 31 worlds of round 3 whose [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") had coalitions to switch, they
 changed nothing. What sets how unequal a world is, more than anything else
 drawn in round 3, is where the tokens of the dead go. Worlds that pass them to
-the poorest have a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") Gini of 0.32; worlds that let them flow to the
+the poorest have a median Gini of 0.32; worlds that let them flow to the
 nearest living, 0.53. And the more of a world's tokens pass from the dead to
 the living, the more even the world tends to be. Most worlds are about as
 unequal as a random deal of their tokens would be.
@@ -25,7 +25,7 @@ unequal as a random deal of their tokens would be.
 
 A world is a few thousand agents holding a fixed number of tokens between
 them. How unevenly they hold them is summed up by the
-[Gini coefficient](gini-coefficient.md#the-gini-coefficient): 0 if every agent
+[Gini coefficient](measuring-tokens.md#the-gini-coefficient): 0 if every agent
 held the same, near 1 if one held almost everything. B1's worlds of 100,000
 tokens settle near 0.47, and their richest tenth hold about 42% of the tokens
 ([Where do the tokens go?](where-do-the-tokens-go.md)).
@@ -54,18 +54,18 @@ Four things could hold it back:
    every survivor has the same chance at each token of an estate, rich or
    poor, which works like a basic income
    ([The tokens of the dead](where-do-the-tokens-go.md#the-tokens-of-the-dead),
-   [The estate of the dead](estate.md)).
+   [The estate of the dead](measuring-lives.md#the-estate-of-the-dead)).
 
 This page was planned as an experiment on the second: B1 with coalitions
 switched off, against B1. It can now be answered from worlds already played.
-The [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of batch S switched coalitions off in B1 and in B2. Round 3 of the
+The [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of batch S switched coalitions off in B1 and in B2. Round 3 of the
 screen of random worlds drew the game, its coalitions and the share-out of
 estates at random, among everything else
 ([A screen of random worlds](a-screen-of-random-worlds.md)).
 
 ## Without coalitions
 
-The pilot worlds of batch S are B1 and B2 at 10,000 tokens, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
+The pilot worlds of batch S are B1 and B2 at 10,000 tokens, two [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
 played with and without coalitions to iteration 1,000. A node then always goes
 to its largest staker. The figure reads each over iterations 500 to 1,000.
 
@@ -99,7 +99,7 @@ joined to 9 to 32% of them
 
 So the guess had the cause the wrong way round. Coalitions do let a crowd beat
 the largest stake on one node. But the world they make is a calm one, of old
-agents and large [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), and since tokens follow connections, a hub's
+agents and large [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), and since tokens follow connections, a hub's
 connections hold a fortune. Without coalitions, the world turns over about ten
 times faster, no hub forms, and nothing lives long enough to grow rich. Which
 of these does the levelling, the turnover or the missing hubs, the two pilot
@@ -117,7 +117,7 @@ coefficient rose to 0.53 and 0.59. The richest inherit most, so every death
 concentrates the world a little more.
 
 Two seeds a condition are few: these differences are indicative, not
-established ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)).
+established ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)).
 Round 3 has many more worlds.
 
 ## A hundred rule sets
@@ -210,7 +210,7 @@ tokens a cleanup hands on against each world's inequality.
 <!-- /figure -->
 
 The share ranges from a quarter of a percent to more than a quarter of all
-tokens a phase, with a median of 5.9%. The worlds that hand on more are more even: the rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") is
+tokens a phase, with a median of 5.9%. The worlds that hand on more are more even: the rank correlation is
 −0.48 over the seventy worlds, and −0.50 among the 48 worlds whose rule spreads
 an estate widely (evenly, to the poorest, to the newborns or to the parents).
 Against chance, the correlation is −0.48 too.
@@ -250,7 +250,7 @@ ten times faster is the more even one.
 For open-ended evolution this gives a lever without a number in it. The
 author's picture of a world that might keep evolving asks for wealth that is
 neither too even nor held by a few
-([What would count as open-ended evolution](open-ended-test.md),
+([What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution),
 [Which worlds are healthy?](which-worlds-are-healthy.md)). The share-out rule
 moves a world along that line on its own: from the poorest first, the most
 even, to the nearest living, the least. It is structural: it says where an
@@ -276,7 +276,7 @@ same thing.
 
 - [Where do the tokens go?](where-do-the-tokens-go.md): B1's inequality, and
   why tokens follow connections.
-- [The estate of the dead](estate.md): every rule for handing on an estate,
+- [The estate of the dead](measuring-lives.md#the-estate-of-the-dead): every rule for handing on an estate,
   and how each levels or pools.
 - [Revolutions, handover and gifts](the-switches-the-world-was-built-with.md):
   everything else that switching coalitions off does to a world.

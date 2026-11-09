@@ -5,7 +5,7 @@
 > - Do they spread their stakes or put everything on one candidate?
 > - Who wins the nodes — the agent living there, or a neighbour; the largest
 >   staker, or a coalition?
-> - Do the answers change between the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' first game and a settled
+> - Do the answers change between the founders' first game and a settled
 >   world, and do the worlds agree?
 
 ## In short
@@ -14,7 +14,7 @@ In every game, each agent stakes all its tokens on its own node and its
 neighbours' nodes. A node goes to its largest staker or to a coalition, and
 the winner's [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") is copied into it. The founders' random brains play in
 every way there is. Within a few hundred iterations, every world but the
-[stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") plays the same game. There, 98% of the agents spread their stakes, and
+[stars](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") plays the same game. There, 98% of the agents spread their stakes, and
 97% of the staked tokens are marked revolutionary. About 30% of the staked
 tokens stay at home.
 An agent then keeps its node in 44% of games, and coalitions decide about
@@ -34,7 +34,7 @@ The worlds are the thirty of 100,000 tokens of
 from the thirty worlds of 10,000 tokens; where they differ, both are given.
 
 Each agent takes three decisions in every game
-([What a brain says](brain-outputs.md)):
+([What a brain says](rules-in-detail.md#what-a-brain-says)):
 
 1. **Spread or all in.** Either the agent splits its tokens over its
    candidates in proportion to its stake scores. Or it puts all of them on
@@ -45,14 +45,14 @@ Each agent takes three decisions in every game
 3. **How much is revolutionary.** Of what it stakes on each candidate, the
    agent marks a share as revolutionary. That share counts for a coalition
    against the largest staker
-   ([How a coalition takes a node](revolution.md)).
+   ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
 
 ## Staking at home, and keeping one's node
 
 Two questions run through this page. How much do agents stake **at home**,
 on their own node? And how often does an agent **keep** its node, by winning
 it itself? Every game row of a run records the statistics that answer them
-([What a run records](frames-and-stats.md)).
+([What a run records](runs-and-records.md#what-a-run-records)).
 
 **How much is staked at home.** `selfAllocationShare` is, of all the tokens
 staked in the game, the share that agents staked on their own node:
@@ -81,7 +81,7 @@ that is not kept was won by a neighbour, alone or with a coalition. Its agent
 now carries a copy of that neighbour's brain.
 
 **How often a coalition wins.** `revolutions` is the number of nodes won by a
-coalition ([How a coalition takes a node](revolution.md)). The notebook
+coalition ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)). The notebook
 divides it by the number of agents at the start of the game:
 `revolutions/nodes_before`.
 
@@ -140,12 +140,12 @@ simple fractions.
 <!-- figure game/doctrine -->
 ![How agents stake, over a world's life](../figures/game/doctrine.svg)
 
-**How agents stake, over a world's life.** After every game of the 30 baseline worlds. Blue: the share of the agents that staked who spread their tokens over several candidates rather than putting all on one (`spreadShare`). Yellow: of all tokens staked, the share staked by agents on their own node (`selfAllocationShare`). Red: of all tokens staked, the share marked revolutionary (`revoltShare`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)).
+**How agents stake, over a world's life.** After every game of the 30 baseline worlds. Blue: the share of the agents that staked who spread their tokens over several candidates rather than putting all on one (`spreadShare`). Yellow: of all tokens staked, the share staked by agents on their own node (`selfAllocationShare`). Red: of all tokens staked, the share marked revolutionary (`revoltShare`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](statistics.md#bands-many-worlds-in-one-figure)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `spreadShare`, `selfAllocationShare`, `revoltShare` (`a/b` is the row's `a` divided by its `b`; [Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node) defines each).
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -181,7 +181,7 @@ single staker, or a member of a coalition that outweighed the largest staker.
 <!-- figure game/winners -->
 ![Who wins a node](../figures/game/winners.svg)
 
-**Who wins a node.** Every node on which anyone staked in the game, by who won it: the agent living on it (green and cyan) or one of its neighbours (orange and violet), and whether the winner was the largest single staker (green, orange) or the member of a coalition that outweighed the largest staker (cyan, violet; see [How a coalition takes a node](revolution.md)). Each column adds up to 1. Left: the game of iteration 0; right: the game of iteration 1,499.
+**Who wins a node.** Every node on which anyone staked in the game, by who won it: the agent living on it (green and cyan) or one of its neighbours (orange and violet), and whether the winner was the largest single staker (green, orange) or the member of a coalition that outweighed the largest staker (cyan, violet; see [How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)). Each column adds up to 1. Left: the game of iteration 0; right: the game of iteration 1,499.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -210,12 +210,12 @@ of all nodes** (12% + 40%), as at 10,000 tokens.
 <!-- figure game/kept-taken -->
 ![Who wins the nodes, over a world's life](../figures/game/kept-taken.svg)
 
-**Who wins the nodes, over a world's life.** After every game of the 30 baseline worlds. Green: of all nodes on which anyone staked, the share won by the agent living on it (`heldHomeShare`). Violet: the number of nodes won by a coalition, divided by the number of agents at the start of the game (`revolutions/nodes_before`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)).
+**Who wins the nodes, over a world's life.** After every game of the 30 baseline worlds. Green: of all nodes on which anyone staked, the share won by the agent living on it (`heldHomeShare`). Violet: the number of nodes won by a coalition, divided by the number of agents at the start of the game (`revolutions/nodes_before`). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th) ([Bands](statistics.md#bands-many-worlds-in-one-figure)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `heldHomeShare`, `revolutions/nodes_before` (`a/b` is the row's `a` divided by its `b`; [Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node) defines each).
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -248,7 +248,7 @@ not individuals**: the brain on a hub is replaced in nearly every game.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For each run, average each statistic over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. Draw one dot per run and statistic, and a bar at the median.
@@ -264,7 +264,7 @@ keep their node in 37% to 48% of games. Coalitions win nodes numbering 47% to
 In the other seven, one agent became a hub joined to a tenth of the world or
 more
 ([How much does the seed decide?](how-much-does-the-seed-decide.md)). They
-lie apart, in the order of their hubs. Take the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 28, whose hub
+lie apart, in the order of their hubs. Take the world with seed 28, whose hub
 is joined to 58% of all agents. There, agents keep their node in 67% of
 games, and coalitions win nodes numbering only 16% of the agents. And 45% of
 the staked tokens go home, while 90% of stakers spread. A leaf of a star has
@@ -301,7 +301,7 @@ playing the game in much the same way, whatever its founders started with.
   constants (few children, the stake spread, every token revolutionary)
   made alike in every world.
   [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)
-  plays the brains of each [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against their founders' in ten worlds of
+  plays the brains of each [era](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against their founders' in ten worlds of
   5,000 tokens. By iteration 50 they hold nine tenths of a contested world,
   and no later era does better than the one before it.
   [Do the brains matter?](do-the-brains-matter.md) compares worlds whose
@@ -311,9 +311,9 @@ playing the game in much the same way, whatever its founders started with.
 
 - [Where tokens flow](where-the-tokens-flow.md): where the staked tokens go,
   connection by connection, and why the game is nearly a random walk.
-- [How a coalition takes a node](revolution.md): the rule behind half of all
+- [How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node): the rule behind half of all
   nodes.
-- [The even split](even-split.md): what the rules do with a stake no brain
+- [The even split](measuring-tokens.md#the-even-split): what the rules do with a stake no brain
   decided.
 - [What the brains are like](what-the-brains-are-like.md): the brains that
   learned to play this way.
@@ -393,10 +393,10 @@ how. To make every figure of this page again: `python3 book_figures.py game`.
 <!-- turns -->
 ---
 
-← [Where tokens go](where-tokens-go.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [The even split](even-split.md) →
+← [Where tokens go](where-tokens-go.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Where tokens flow](where-the-tokens-flow.md) →
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (25)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [What a brain says](brain-outputs.md) · [How a coalition takes a node](revolution.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (24)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md)
 <!-- /turns -->

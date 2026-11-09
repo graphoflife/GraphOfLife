@@ -9,7 +9,7 @@
 >   who keeps their node?
 > - How many tokens cross one connection in a game, and which connections
 >   carry nothing, and so are cut?
-> - Do tokens go round in closed [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.")? How long are the loops, and does a
+> - Do tokens go round in closed [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.")? How long are the loops, and does a
 >   quick count, game by game, agree with an exact one?
 > - Is that the same in every world the notebook has made: both rule sets,
 >   every size, every setting an experiment changed?
@@ -47,7 +47,7 @@ numbers are given.
 
 Start with the bookkeeping. In every game of these worlds, exactly 100,000
 tokens are staked: every token, by whoever holds it. Each staked token lands in
-one of three places ([Token flow](token-flow.md)):
+one of three places ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)):
 
 1. on the staker's **own node**;
 2. on a neighbour's node, **matched** by a stake coming back. Say A puts 5 on
@@ -59,12 +59,12 @@ one of three places ([Token flow](token-flow.md)):
 <!-- figure flow/budget -->
 ![Where the tokens of a game go](../figures/flow/budget.svg)
 
-**Where the tokens of a game go.** Every token is staked in every game. Yellow: the share staked by agents on their own node. Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after cancelling, flow with a direction ([Token flow](token-flow.md)). Left: the game of iteration 0, pooled over the 30 worlds; right: every game from iteration 500 on of the 30 worlds, pooled. Exactly 100,000 tokens are staked in each game.
+**Where the tokens of a game go.** Every token is staked in every game. Yellow: the share staked by agents on their own node. Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after cancelling, flow with a direction ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)). Left: the game of iteration 0, pooled over the 30 worlds; right: every game from iteration 500 on of the 30 worlds, pooled. Exactly 100,000 tokens are staked in each game.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2: `tokens` (all staked), `totalFlow` (staked on others) and `netFlowShare` (the share of that flow left after cancelling).
 > 2. Sum over the rows: at home = Σ `tokens` − Σ `totalFlow`; cancelled = Σ `totalFlow` × (1 − `netFlowShare`); one way = Σ `totalFlow` × `netFlowShare`.
@@ -74,7 +74,7 @@ one of three places ([Token flow](token-flow.md)):
 <!-- /figure -->
 
 In the first game, 13% of the tokens stay home, 23% are matched and 64% go one
-way. The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") of these worlds have ten neighbours each. They keep less at
+way. The founders of these worlds have ten neighbours each. They keep less at
 home than the founders of a world of 10,000 tokens, which have four. There a
 quarter stays home, a quarter is matched and a half goes one way.
 
@@ -126,7 +126,7 @@ them on each, home included.
 <!-- figure flow/breadth -->
 ![How widely agents stake](../figures/flow/breadth.svg)
 
-**How widely agents stake.** Agents at the start of a game, sorted by their number of connections. Blue: the share of their candidates (themselves and their neighbours) on which they staked at least one token. Yellow: the share of their tokens they staked on their own node. White dots: the home share an agent would have if it split its tokens evenly over all its candidates, 1/(d + 1), averaged over the class. Red dots: the same even split dealt out in whole tokens by the rules' own rounding ([Splitting tokens into whole numbers](largest-remainder.md)), which gives the tokens left over to the largest remainders, and, when all remainders tie, to the agent's own node first. From the games of every 100th iteration from 500 on, in the 30 worlds.
+**How widely agents stake.** Agents at the start of a game, sorted by their number of connections. Blue: the share of their candidates (themselves and their neighbours) on which they staked at least one token. Yellow: the share of their tokens they staked on their own node. White dots: the home share an agent would have if it split its tokens evenly over all its candidates, 1/(d + 1), averaged over the class. Red dots: the same even split dealt out in whole tokens by the rules' own rounding ([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)), which gives the tokens left over to the largest remainders, and, when all remainders tie, to the agent's own node first. From the games of every 100th iteration from 500 on, in the 30 worlds.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -143,7 +143,7 @@ them on each, home included.
 
 Agents stake on almost all their candidates: on 96% of them for agents with
 one connection, falling to 81–82% for agents with ten or more. And their
-**home share** follows the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") closely, a little above it:
+**home share** follows the even split closely, a little above it:
 
 | connections | 1 | 2 | 3–4 | 5–9 | 10–49 | 50+ |
 |---|---|---|---|---|---|---|
@@ -154,7 +154,7 @@ one connection, falling to 81–82% for agents with ten or more. And their
 The extra at home is not the brains' doing. Tokens are whole, and an even split
 rarely comes out even: an agent with 3 tokens and 2 candidates cannot stake 1.5
 on each. The rules deal the tokens left over to the candidates with the largest
-remainders ([Splitting tokens into whole numbers](largest-remainder.md)). In an
+remainders ([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)). In an
 even split every remainder ties. So the leftovers go down the list of
 candidates in order, and an agent's own node is always first.
 
@@ -162,7 +162,7 @@ Dealt out in whole tokens this way, an exact even split puts 60% at home for
 an agent with one connection. For one with two, it puts 44%. The brains put a
 little *less* at home than that.
 
-Often there is not even a split to round. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, 42% of agents
+Often there is not even a split to round. In the median world, 42% of agents
 give every candidate a score of zero or below (58% at 10,000 tokens). Then the
 rules split their tokens evenly by default
 ([What the brains are like](what-the-brains-are-like.md)). The brains that do
@@ -198,7 +198,7 @@ with.
 <!-- figure flow/random-walk -->
 ![The game as a random walk of tokens](../figures/flow/random-walk.svg)
 
-**The game as a random walk of tokens.** For every agent at the start of a game: x is the balance it would end the stakes with — the tokens staked on its node minus the tokens it held — if every agent split its tokens evenly over itself and its neighbours; y is the balance it really ended them with. Agents are binned by x in steps of 2; the line is the mean of y in each bin and the band its middle half. The dashed line is y = x. Over all 1,798,806 agents (the games of every 250th iteration from 500 on, 30 worlds), the straight line fitted to the points has slope 0.65, and the even split accounts for 34% of the variance (R², [Fitting a straight line](correlation.md#fitting-a-straight-line)); over the 23 worlds that are not held together by a single hub ([The largest and the smallest](the-largest-and-the-smallest.md)), slope 0.94 and 45%.
+**The game as a random walk of tokens.** For every agent at the start of a game: x is the balance it would end the stakes with — the tokens staked on its node minus the tokens it held — if every agent split its tokens evenly over itself and its neighbours; y is the balance it really ended them with. Agents are binned by x in steps of 2; the line is the mean of y in each bin and the band its middle half. The dashed line is y = x. Over all 1,798,806 agents (the games of every 250th iteration from 500 on, 30 worlds), the straight line fitted to the points has slope 0.65, and the even split accounts for 34% of the variance (R², [Fitting a straight line](statistics.md#fitting-a-straight-line)); over the 23 worlds that are not held together by a single hub ([The largest and the smallest](the-largest-and-the-smallest.md)), slope 0.94 and 45%.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -219,7 +219,7 @@ balances move exactly as much as the even split's. The even split accounts for
 34% of the variance, that is, of how much the real balances differ from agent
 to agent.
 
-But that is the [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") speaking. Leave out the seven worlds held together by one
+But that is the [stars](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") speaking. Leave out the seven worlds held together by one
 hub ([The largest and the smallest](the-largest-and-the-smallest.md)). Then
 the slope is **0.94**, and the even split accounts for **45%**: exactly as in
 the worlds of 10,000 tokens (0.94 and 46%). The median world, fitted on its
@@ -237,7 +237,7 @@ one with three sends one. So a star's leaves, holding about three tokens, send a
 quarter of a token less each than the fractions say. Over twenty thousand
 leaves, that is some five thousand tokens at one agent. A point that far out
 tilts a straight line fitted to two million. The rounding of
-[Splitting tokens into whole numbers](largest-remainder.md) is a small
+[Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers) is a small
 correction for an agent, and a large one for a star.
 
 A random walk on a network has a well-known resting state, and it takes two
@@ -277,8 +277,8 @@ random walk on such a network can settle at all.
 
 The winner of a node, whose brain the node takes, is its largest staker. The
 exception is a coalition of smaller stakers that outweighs it
-([How a coalition takes a node](revolution.md)). Under the even split, the
-agent living on a node of [degree](degree.md "The number of an agent's connections: how many neighbours it has.") *d* is one of *d* + 1 stakers of roughly equal
+([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)). Under the even split, the
+agent living on a node of [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has.") *d* is one of *d* + 1 stakers of roughly equal
 size there.
 
 <!-- figure flow/kept -->
@@ -327,7 +327,7 @@ Why look at single connections? Because a connection lives only as long as
 tokens keep crossing it. In B1, every connection that no token crossed in a
 game is cut at the end of that game ([Every setting](settings.md),
 `prune_after` and `inactive_window`). The viewer, the app that charts a run's
-statistics ([What a run records](frames-and-stats.md)), counts these cuts as
+statistics ([What a run records](runs-and-records.md#what-a-run-records)), counts these cuts as
 `prunedEdges`. So the flow on the connections is not only how tokens move: it
 is what keeps B1's network standing. A connection that carries nothing for one
 game is gone, and with it, perhaps, the only path between two parts of a world.
@@ -354,7 +354,7 @@ larger, and see what is left.
 <!-- figure connections/per-connection -->
 ![Tokens across one connection in one game](../figures/connections/per-connection.svg)
 
-**Tokens across one connection in one game.** Every connection at the start of the games of every 25th iteration from 500 on, in the 30 worlds, pooled: how many tokens its two agents staked on each other in that game, both directions added (blue), and what is left when the smaller direction is cancelled against the larger (cyan; [Token flow](token-flow.md)). A connection in the first class carried nothing and is cut at the end of the game.
+**Tokens across one connection in one game.** Every connection at the start of the games of every 25th iteration from 500 on, in the 30 worlds, pooled: how many tokens its two agents staked on each other in that game, both directions added (blue), and what is left when the smaller direction is cancelled against the larger (cyan; [Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)). A connection in the first class carried nothing and is cut at the end of the game.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -438,12 +438,12 @@ numbers:
 <!-- figure connections/round-figures -->
 ![Flow on the connections, and the loops it makes](../figures/connections/round-figures.svg)
 
-**Flow on the connections, and the loops it makes.** After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](token-flow.md#lightning-tokens-that-go-round) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Flow on the connections, and the loops it makes.** After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](measuring-tokens.md#lightning-tokens-that-go-round) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2: `meanEdgeFlow`, `maxEdgeFlow`, `lightningLongest` and `netLightningLongest`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -488,7 +488,7 @@ A **lightning** is what the viewer calls a closed loop in that flow: A stakes on
 B, B on C, and C back on A. A loop of *L* agents carries *L* tokens, one along
 each of its arrows, and scores *L*². So one long circuit counts for more than
 many short ones. Ecologists measure the same thing in food webs, as a *cycling
-index*. The note [Lightning: tokens that go round](token-flow.md#lightning-tokens-that-go-round) works through
+index*. The note [Lightning: tokens that go round](measuring-tokens.md#lightning-tokens-that-go-round) works through
 the definition with an example. Why it matters:
 
 - **Flow that goes round is flow that can keep going.** Tokens that run one way
@@ -504,7 +504,7 @@ the definition with an example. Why it matters:
   (*gross*), and for what is left after cancelling (*net*).
 
 Finding the largest set of loops in a flow is as hard as some of the hardest
-problems in computing. So the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") (`gol_lightning.py`) does not try. It
+problems in computing. So the engine (`gol_lightning.py`) does not try. It
 peels loops off greedily. It walks along the arrows, preferring agents it has
 not visited yet, until an agent repeats. It takes that loop, removes one token
 from each of its arrows, and starts again. Every count is therefore a **lower
@@ -524,7 +524,7 @@ records eight numbers, every 25th iteration:
 ### Do tokens go round?
 
 Start with the thirty B1 worlds of 100,000 tokens. How much of their flow
-goes round? Only bounds can be given ([Lightning](token-flow.md#lightning-tokens-that-go-round)). The greedy
+goes round? Only bounds can be given ([Lightning](measuring-tokens.md#lightning-tokens-that-go-round)). The greedy
 search finds some loops: a floor. Conservation sets a ceiling. A token that comes back to where it started
 changes no balance. So an agent that ends a game with more or less than it
 sent cannot have had all its flow in loops. At least the difference runs one
@@ -533,12 +533,12 @@ way.
 <!-- figure flow/circulation -->
 ![Do tokens go round?](../figures/flow/circulation.svg)
 
-**Do tokens go round?** Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search could place in closed loops (blue; [Lightning](token-flow.md#lightning-tokens-that-go-round)), and the share that conservation forbids from ever going round, because some agents receive more than they send (red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one coming back: the share of the flow left (cyan), and of that, the share found in loops (green). Every 25 iterations, 30 worlds; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Do tokens go round?** Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search could place in closed loops (blue; [Lightning](measuring-tokens.md#lightning-tokens-that-go-round)), and the share that conservation forbids from ever going round, because some agents receive more than they send (red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one coming back: the share of the flow left (cyan), and of that, the share found in loops (green). Every 25 iterations, 30 worlds; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `cyclingShare`, `flowImbalance`, `netFlowShare` and `netCyclingShare` of the rows with `phase` = 2 (measured every 25 iterations).
 > 2. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
@@ -570,7 +570,7 @@ net flow can go round, and the search finds almost nothing, as at 10,000
 tokens.
 
 A theorem says what that means. Any flow on a network can be split into two
-parts ([Flows that go round](token-flow.md#flows-that-go-round)). One part runs **downhill**,
+parts ([Flows that go round](measuring-tokens.md#flows-that-go-round)). One part runs **downhill**,
 from high to low along a "potential": a height that every agent has. The other
 part **circulates**. This is the Helmholtz–Hodge decomposition (for networks,
 Jiang, Lim, Yao and Ye 2011). A downhill flow can never go round: round a loop,
@@ -629,7 +629,7 @@ flow goes round. Where it need not, the flow runs one way. Nothing in the
 brains changed: one of the rules that make B2's network unbreakable also made
 its economy run one way.
 
-The [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds say the same, independently
+The pilot worlds say the same, independently
 ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
 Of all the B2 pilots, four let unused links lapse, and they are the only ones
 whose flow mostly cancels. They keep 0.11 to 0.23 of their flow after
@@ -673,7 +673,7 @@ The longest loop grows with the size of the world, as the tokens to the power
 0.31. That number is not new. The distances across these worlds grow as the
 number of agents to the power 0.25–0.30
 ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). And the
-number of agents is proportional to the tokens. The worlds have a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of
+number of agents is proportional to the tokens. The worlds have a [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of
 about 3.3
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
 So a world's width grows as its size to the power 1/3.3 = 0.30.
@@ -714,7 +714,7 @@ The greedy count looks at one game at a time.
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md) took the net flow
 of fifty games together. It split that flow exactly into a part that runs
 downhill and a part that circulates. The tool is the Helmholtz–Hodge
-decomposition (the note [Flows that go round](token-flow.md#flows-that-go-round)).
+decomposition (the note [Flows that go round](measuring-tokens.md#flows-that-go-round)).
 
 <!-- figure lightning/exact -->
 ![A greedy count and an exact one](../figures/lightning/exact.svg)
@@ -784,7 +784,7 @@ keep tokens going round more than chance would; B2's barely do.
   distances. But they carry almost nothing. Over fifty games much more
   circulates, but in B2 hardly more than random flow would. No world builds
   more circulation as it evolves.
-- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") this is a warning.** A behaviour this close to
+- **For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") this is a warning.** A behaviour this close to
   "split evenly" leaves little for brains to differ in. And a world whose
   wealth and positions are set by the network, rather than by the brains,
   gives selection little to grip.
@@ -815,7 +815,7 @@ keep tokens going round more than chance would; B2's barely do.
 
 The first two sections, and [Do tokens go round?](#do-tokens-go-round), read
 the thirty runs of Experiment 10, listed below. They are worlds of the
-baseline B1 at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30, run for 1,500 iterations each.
+baseline B1 at 100,000 tokens, seeds 1 to 30, run for 1,500 iterations each.
 The command `python3 gol_lab.py run E10` makes them. From the runs, two
 commands draw the figures:
 
@@ -834,9 +834,9 @@ The command `python3 book_figures.py lightning` draws these figures. Each
 figure says, folded beneath it, which runs it reads and how.
 
 The measures are explained in the notes
-[Lightning: tokens that go round](token-flow.md#lightning-tokens-that-go-round),
-[Token flow](token-flow.md), [Flows that go round](token-flow.md#flows-that-go-round) and
-[Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws).
+[Lightning: tokens that go round](measuring-tokens.md#lightning-tokens-that-go-round),
+[Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation), [Flows that go round](measuring-tokens.md#flows-that-go-round) and
+[Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws).
 
 ### The runs of Experiment 10
 
@@ -912,7 +912,7 @@ The measures are explained in the notes
   [Who keeps their node](#who-keeps-their-node) had said that this "home
   bias" raised how often an agent keeps its node.
   [What the brains are like](what-the-brains-are-like.md) and the note
-  [Splitting tokens into whole numbers](largest-remainder.md) showed where the
+  [Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers) showed where the
   extra comes from. It is the rules' rounding of whole tokens, not the brains.
   An exact even split, dealt out in whole tokens, puts even more at home than
   the brains do.
@@ -963,8 +963,8 @@ The measures are explained in the notes
 <!-- turns -->
 ---
 
-← [The even split](even-split.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flow modules: the groups tokens stay in](flow-modules.md) →
+← [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Flow modules: the groups tokens stay in](flow-modules.md) →
 
-> [!info]- Pages that link here (29)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens go](where-tokens-go.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Healthy and rich](healthy-and-rich.md) · [Every world side by side](every-world-side-by-side.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md)
+> [!info]- Pages that link here (27)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens go](where-tokens-go.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Healthy and rich](healthy-and-rich.md) · [Every world side by side](every-world-side-by-side.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

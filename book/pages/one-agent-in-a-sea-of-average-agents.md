@@ -16,7 +16,7 @@ on 9 November 2026. It takes the sea of
 [Brains replaced by their average](brains-replaced-by-their-average.md): a
 world of round 3 played on with every agent answering every look with a brain
 drawn afresh from the world's own, so that nobody is anyone in particular.
-Into the sea it plants one agent, a leaf holding the sea's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") tokens, with
+Into the sea it plants one agent, a leaf holding the sea's [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") tokens, with
 a brain of its own that never changes and that its children and the nodes it
 takes inherit. Four plantings are made at the same places and moments: a
 marked agent of the sea, whose heirs keep deciding as the sea does, which is
@@ -56,7 +56,7 @@ matter in a vacuum.
 ## What the notebook already knows
 
 **The invasion test.** The notebook plants strategies in evolved worlds and
-watches whether they spread ([The invasion test](eras-and-contests.md#the-invasion-test)).
+watches whether they spread ([The invasion test](measuring-evolution.md#the-invasion-test)).
 A patch of agents gets a strategy in place of its brains. The strategy spreads
 as a brain does, into children and into nodes its agents take in a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), and
 it never mutates. The same agents given frozen copies of one resident's brain
@@ -84,7 +84,7 @@ In round 3 the roads are more even. In the five worlds of
 [Five worlds, from iteration 1,500](brains-replaced-by-their-average.md#five-worlds-from-iteration-1500),
 over iterations 1,500 to 3,000, 62% to 77% of the nodes change hands in a
 game, and 0.12 to 0.92 children are born per agent in an iteration. So a node
-is taken from 0.8 times as often as a child is born ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3026) to five times
+is taken from 0.8 times as often as a child is born ([seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3026) to five times
 as often (seeds 3018 and 3080). A line has to be followed down both roads.
 
 **Room for better play.** In every long world of B2 the notebook has
@@ -92,7 +92,7 @@ measured, up to 50,000 iterations, an agent's best reply to the others would
 have held about one node more after a game than its own play, at every era
 ([How much room is left](every-era-against-three.md#how-much-room-is-left)).
 Better play than the crowd's exists, at least for one game. Whether any brain
-a world made plays it, and whether it pays over a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), is another matter.
+a world made plays it, and whether it pays over a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death."), is another matter.
 
 **Lines by chance.** In Experiment 7, lines took over worlds whose brains
 never changed, by chance alone
@@ -168,7 +168,7 @@ two seas: 30 plantings of each kind in each world. A place also fixes the
 random stream, so the four kinds planted there meet the same chances until
 their paths part, as a strategy and its control do.
 
-**How long.** 300 iterations, as the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s invasion tests are played, or until
+**How long.** 300 iterations, as the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s invasion tests are played, or until
 the line has died out.
 
 ## What a planting measures
@@ -249,7 +249,7 @@ should draw on a sea made of their past.
 > planted in the same place at the same moment: (1) its presence does not
 > exceed the marked agent's by more than chance allows: flipping the signs of
 > the 30 paired differences 10,000 times, at least one time in twenty gives a
-> total as large as the one found (a one-sided [permutation test](bootstrap.md#permutation-tests "Whether a difference could be chance, found by shuffling which world belongs to which condition."), *p* ≥ 0.05);
+> total as large as the one found (a one-sided [permutation test](statistics.md#permutation-tests "Whether a difference could be chance, found by shuffling which world belongs to which condition."), *p* ≥ 0.05);
 > and (2) it takes hold in at most 3 of its 30 plantings.
 >
 > **Refute.** In two or more worlds, a brain's presence beats the marked
@@ -266,14 +266,14 @@ answered.
   kin: the leaf and its nearest agents, 10 and 100 together, as Experiment 29
   planted raiders. A brain that takes hold only in company has an Allee
   effect, which evolution, trying one agent at a time, can miss
-  ([Reading an invasion](eras-and-contests.md#reading-an-invasion)).
+  ([Reading an invasion](measuring-evolution.md#reading-an-invasion)).
 - **The world as it is.** The same brains planted alone in the world as it
   was played, at the same moments, with the invasion test's own control, a
   frozen copy of the planted agent's brain, in the marked agent's place. A
   brain that takes hold in the sea but not in the world meets something the
   sea lacks: lines, kin beside kin, agents that keep their ways.
 - **Written by hand.** The raider can be planted only where brains are not
-  mixed at birth and a [message](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") holds at least four numbers: seeds 3080 and
+  mixed at birth and a [message](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") holds at least four numbers: seeds 3080 and
   3026 of the five.
 - **A sea made in the trial.** If the sea's runs do not exist, a trial can
   make its own. The invasion test can already give a whole kept world another
@@ -313,7 +313,7 @@ answered.
 
 ## What it would cost
 
-Each planting is a trial of at most 300 iterations, and keeps no [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."). An
+Each planting is a trial of at most 300 iterations, and keeps no [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."). An
 iteration of a sea costs about what an iteration of its world costs: the
 crowd's brain runs one brain a look, as the world does. Four kinds, 30
 plantings each, make 120 trials a world. If every line lived the full 300
@@ -355,7 +355,7 @@ and 100 add 60 trials a world, whose lines, larger, live longer.
 
 - [Brains replaced by their average](brains-replaced-by-their-average.md): the
   ladder whose fourth way makes the sea.
-- [The invasion test](eras-and-contests.md#the-invasion-test): how a strategy
+- [The invasion test](measuring-evolution.md#the-invasion-test): how a strategy
   is planted, and how to read what it does.
 - [How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs):
   why one raider never takes hold and a hundred can.

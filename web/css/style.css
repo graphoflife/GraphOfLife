@@ -1178,6 +1178,70 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .book-kicker a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
 .book-kicker a:hover { color: var(--text); border-bottom-color: var(--text); }
+.book-kicker-part { color: var(--part, inherit); font-weight: 600; }
+
+/* The parts of the notebook, each in its colour (the author, 2026-11-09: seven parts,
+   the part's colour as a stripe, and a mark for the kind of page). A page wears its
+   part's colour as a band above its title; in the contents a part opens and shuts,
+   and in a list that mixes parts every page has its part's stripe. */
+.book-page { border-top: 4px solid var(--part, transparent); padding-top: 12px; }
+.book-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.book-legend > span { display: inline-flex; align-items: center; }
+.book-section {
+  margin-bottom: 8px;
+  border-left: 3px solid var(--part, var(--border));
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--part, transparent) 6%, transparent);
+}
+.book-section[open] { padding-bottom: 6px; }
+.book-section > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 7px 8px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--part, var(--text));
+}
+.book-section > summary::-webkit-details-marker { display: none; }
+.book-section > summary::before { content: "\25B8"; font-size: 10px; transition: transform 0.15s; }
+.book-section[open] > summary::before { transform: rotate(90deg); }
+.book-section > summary:hover { background: var(--panel); }
+.book-section-title { flex: 1; }
+.book-section-count { color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.book-topic-head {
+  margin: 8px 8px 2px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.book-part .book-toc-item { border-left: 3px solid var(--part, transparent); border-radius: 0 6px 6px 0; }
+.book-mark {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 7px;
+  vertical-align: 1px;
+  box-sizing: border-box;
+}
+.book-mark-study { background: #eef4fa; border-radius: 50%; }
+.book-mark-experiment { background: #f0a878; border-radius: 2px; }
+.book-mark-plan { border: 1.5px solid #f0a878; border-radius: 2px; }
+.book-mark-reference { width: 7px; height: 7px; background: #9ab0c3; transform: rotate(45deg); }
+.book-mark-guide { background: #8fa8e8; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .book-note { color: var(--muted); font-size: 12.5px; }
 .book-reason { color: var(--warn); font-size: 12.5px; }
 

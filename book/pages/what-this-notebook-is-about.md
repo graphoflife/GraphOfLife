@@ -12,7 +12,7 @@ Living things have been inventing new kinds of things for about four billion
 years, and they have not stopped. No computer world has yet been shown to do
 the same. This notebook follows one computer world, **Graph of Life**. It asks
 what the world does, and whether it — or a version of it with changed rules —
-can keep inventing without end. Biologists call that **[open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**.
+can keep inventing without end. Biologists call that **open-ended evolution**.
 A second question runs alongside: can rules this simple grow something like
 physical space? Every result comes with the worlds it was measured on, and the
 command that makes it again.
@@ -39,7 +39,7 @@ chance? Much of the notebook is that groundwork.
 There is a second aim, which shaped the rules from the start. The rules are
 simple and local, and they never create or destroy anything. Rules like that
 might grow, by themselves, the kinds of thing physics describes: a space of a
-few [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), things that last in it, places where something can live.
+few [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), things that last in it, places where something can live.
 [Physical inspiration](physical-inspiration.md) explains the physical ideas
 behind the rules, and why the two aims keep meeting.
 
@@ -53,7 +53,7 @@ world never changes. In every **iteration**, each agent may give some of its
 tokens to a child. The child appears on a new node next to it, with a copy of
 its brain, sometimes slightly changed. Then every agent stakes all of its
 tokens on itself and its neighbours. Every node goes to whoever staked most on
-it, or to a [coalition](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") of smaller stakers. The winner's brain is copied into the
+it, or to a coalition of smaller stakers. The winner's brain is copied into the
 node, and the node keeps every token staked on it. Agents left without tokens
 die, and so does every part of the network cut off from the rest. Nothing is
 scored and nothing is optimised: whatever keeps its tokens and its place is
@@ -75,7 +75,7 @@ In the sense biologists use, evolution needs three things:
 Graph of Life has the first two by construction. A child's brain is a copy of
 its parent's: heredity. A copy changes with probability one in five: variation.
 In the first baseline, every brain also changes with that probability after
-every game ([How a brain changes](mutation.md)).
+every game ([How a brain changes](rules-in-detail.md#how-a-brain-changes)).
 
 Whether it has the third is a question, not a given. Brains that keep their
 tokens and take over neighbouring nodes spread, and the others vanish. But is
@@ -94,7 +94,7 @@ There is no single agreed definition of open-ended evolution
 ([The ideas this builds on](the-ideas-this-builds-on.md) lists the main ones).
 This notebook climbs a ladder of four claims, each needed before the next:
 
-1. **P1: there is evolution.** [Lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") — a brain and its descendants — last
+1. **P1: there is evolution.** Lineages — a brain and its descendants — last
    long enough for selection to act on them.
 2. **P2: adaptation accumulates.** A late population would beat its own
    ancestors, if they were brought back and made to compete.
@@ -105,14 +105,14 @@ This notebook climbs a ladder of four claims, each needed before the next:
 
 The second step can be tested directly. Play the brains of a world at one
 moment against the brains of the same world at an earlier one
-([Eras and contests](eras-and-contests.md)). In the first baseline, the brains
-beat their [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") by iteration 50, by 361 Elo points in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world.
+([Eras and contests](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). In the first baseline, the brains
+beat their founders by iteration 50, by 361 Elo points in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world.
 After iteration 100 they gain nothing: those of iteration 1,000 score 0.483
 against those of iteration 300, a tie
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 
 So the notebook turned from watching the rules to building them. It made a
-yardstick for evolution that keeps going, and a [health bar](health-bar.md) for
+yardstick for evolution that keeps going, and a [health bar](measuring-health.md#the-health-bar) for
 the network. Then it tried rules meant to pass both, starting from the
 obstacles that
 [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)
@@ -155,9 +155,9 @@ one of them.
   [Physical inspiration](physical-inspiration.md) sets out the questions.
 - **Methods and statistics.** Short pages, one per idea. They define every
   measurement and statistical method the notebook uses, with worked examples:
-  [The Gini coefficient and the Lorenz curve](gini-coefficient.md),
-  [Survival curves (Kaplan–Meier)](age-and-lifetime.md#survival-curves-kaplanmeier) and many more. And what a
-  simulation costs ([What a simulation costs](what-a-simulation-costs.md)).
+  [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility),
+  [Survival curves (Kaplan–Meier)](measuring-lives.md#survival-curves-kaplanmeier) and many more. And what a
+  simulation costs ([What a simulation costs](runs-and-records.md#what-a-simulation-costs)).
 
 Many pages only **ask**: what does a world do, how often, how fast? A page that
 reports an **experiment** also shows a prediction, its **thesis**. The thesis
@@ -175,7 +175,7 @@ Everything in this notebook can be made again on any computer with Python 3,
 numpy and networkx. Each page that reads runs shows two things:
 
 - **the runs behind it**, in a box: which runs it reads, how many, with which
-  [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") and for how many iterations, and the command that makes them. Folded
+  seeds and for how many iterations, and the command that makes them. Folded
   beneath it is every setting of those runs.
 - under every **figure**, what it shows: what each line, band, bar or dot is.
   Folded away is **how to make this figure**: which runs, which file, which
@@ -189,7 +189,7 @@ one page from the runs, and writes them into the pages — here
 [A world's life](a-worlds-life.md). On the same kind of computer, with the same
 versions of the libraries, every run, figure and number comes out identical.
 [Is a run reproducible?](is-a-run-reproducible.md) shows why, and
-[The lab, the engine and pilots](the-lab.md) says how experiments are run.
+[The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots) says how experiments are run.
 
 The notebook is plain Markdown and SVG pictures. It reads the same in the
 Research Notebook tab of the Graph of Life app, on GitHub, and in **Obsidian**.
@@ -209,8 +209,8 @@ formula works.
 <!-- turns -->
 ---
 
-← [Welcome](../README.md) · [Start here](../README.md#start-here) · [Glossary](glossary.md) →
+← [Welcome](../README.md) · [Start here](../README.md#start-here) · [How this notebook is written](how-this-notebook-is-written.md) →
 
 > [!info]- Pages that link here (12)
-> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md)
+> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How fast should brains change?](how-fast-should-brains-change.md)
 <!-- /turns -->

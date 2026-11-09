@@ -24,14 +24,14 @@ and kinds sit in somewhat different places: niches, or families.
 
 How many different agents does a world hold? One answer counts genotypes.
 Every brain carries a number, its genotype, which a copy keeps and a change
-replaces ([Genotypes and the family tree](genotype.md)).
+replaces ([Genotypes and the family tree](measuring-evolution.md#genotypes-families-and-the-common-ancestor)).
 
 - A B1 world of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") has about 1,500 agents at the end of
   its run. They carry about a thousand genotypes, 0.64 for each agent
   ([Genotypes and lineages](genotypes-and-lineages.md)).
 - A B2 world of 10,000 tokens has about 3,400 agents at iteration 2,000.
   They carry about 1,600 genotypes, 0.46 for each agent
-  ([Brain diversity](genotype.md#brain-diversity)). Counted by how many
+  ([Brain diversity](measuring-evolution.md#brain-diversity)). Counted by how many
   agents carry each, as an effective number, these are worth about 950
   equally common genotypes.
 
@@ -40,7 +40,7 @@ it may change when it is copied into a child, and after every [game](one-iterati
 may change only when it is copied, into a child or into a node its owner has
 won (How a brain changes). It gets the new name even when the
 change changes nothing the brain does
-([A caution about names](genotype.md#a-caution-about-names)).
+([A caution about names](measuring-evolution.md#a-caution-about-names)).
 
 [What the brains are like](what-the-brains-are-like.md) opened the brains of
 B1's worlds. It found that selection had set **constants**, the same in every
@@ -56,16 +56,16 @@ the random numbers. Then it compares what each brain decides.
 
 ## The experiment
 
-- **Situations.** After one game, so that the [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") in flight are
+- **Situations.** After one game, so that the messages in flight are
   fresh, take 200 living agents at random. Record what each of them reads:
   its tokens and links, its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")', and the messages it holds
-  ([What a brain sees](brain-inputs.md)). The messages are part of the
+  ([What a brain sees](rules-in-detail.md#what-a-brain-sees)). The messages are part of the
   situation: they are what the agent holds at that moment. A brain also
   reads a few random numbers ([The brain](the-brain.md)). Draw those 8 times
   for each situation, and give every brain the same 8 draws.
 - **Brains.** Take 400 agents at random, and put each one's brain into every
   situation and draw. A brain carried by many agents is drawn as often as it
-  is carried. Beside them go 400 fresh **[founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")** brains, which have
+  is carried. Beside them go 400 fresh **founder** brains, which have
   never met selection. They show what brains do by chance.
 - **Decisions.** The engine's own rules turn each brain's outputs into
   decisions (`research/oee/checks/diversity.py`):
@@ -77,7 +77,7 @@ the random numbers. Then it compares what each brain decides.
 | given to a child | the share it would give a child; 0 when no child would be made |
 | spread or all in | 1 if it spreads its stake over its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), 0 if it puts it all on one |
 | a newborn's links | how likely a child of its own is to be linked to each of its neighbours |
-| marked revolutionary | the share of its stakes on others marked revolutionary ([How a coalition takes a node](revolution.md)) |
+| marked revolutionary | the share of its stakes on others marked revolutionary ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)) |
 
 The worlds are all of 10,000 tokens:
 
@@ -85,7 +85,7 @@ The worlds are all of 10,000 tokens:
   100 iterations, at 0, 100, 500, 1,000 and 2,000 iterations;
 - **B1**: the first ten worlds of Experiment 2, at the end of their 3,000
   iterations;
-- **the long runs of B1**: two [pilot worlds](the-lab.md#pilot-worlds) of the same
+- **the long runs of B1**: two [pilot worlds](runs-and-records.md#pilot-worlds) of the same
   settings, from their start to 10,000 iterations;
 - **the long runs of B2**: three of B2's ten worlds, played on from 2,000 to
   10,000.
@@ -104,7 +104,7 @@ reasons:
 
 With every brain in every situation and draw, the variance of a decision
 splits exactly into these four parts.
-[Where, who and chance](variance-split.md) shows how each part is computed.
+[Where, who and chance](statistics.md#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them) shows how each part is computed.
 
 A small example, made up to show the idea. Two brains, A and B, decide what
 share of their tokens to keep at home. Each is put in two places, an agent
@@ -173,7 +173,7 @@ much of it is the rules.
 - **In B1** nearly every brain spreads its stake, in 94–99% of cases in the
   ten worlds. Most split it evenly, or nearly evenly
   ([What the brains are like](what-the-brains-are-like.md)). An
-  [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") puts 1/(*k* + 1) of the stake at home for an agent
+  [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") puts 1/(*k* + 1) of the stake at home for an agent
   with *k* neighbours. That again is where the agent is, not what its brain
   makes of it. It fits the finding of
   [What the brains are like](what-the-brains-are-like.md) that B1's brains are
@@ -245,7 +245,7 @@ numbers change: its own noise.
 In B2 (the left panel):
 
 - At the start two founders differ by 0.46, and each from itself by 0.26
-  (the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of ten worlds).
+  (the median of ten worlds).
 - By 2,000 iterations two agents differ by 0.19, and one from itself by 0.13.
   The evolved brains are steadier: their stakes depend less on the random
   numbers.
@@ -281,7 +281,7 @@ no further apart than that line.
 How many kinds are there? A plain count would weigh a kind of one agent as
 much as a kind of a thousand. So the kinds are counted by their carriers, as
 an **effective number**: how many equally common kinds would give the same
-spread ([Effective numbers](effective-number.md)). If *p* is the share of the
+spread ([Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)). If *p* is the share of the
 agents in each kind, the effective number is 1 / Σ *p*². That is one over
 the chance that two agents drawn at random are of the same kind.
 
@@ -294,7 +294,7 @@ varied as one and a half equally common ones. Ten equally common kinds count
 **The test checks itself.** [What the brains are like](what-the-brains-are-like.md) found that many
 B1 agents score every candidate zero or below. The rules then split their
 stake exactly evenly
-([Splitting tokens into whole numbers](largest-remainder.md)). Such agents
+([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)). Such agents
 all stake alike, and should come out as one kind. In nine of the ten B1
 worlds, the largest kind of staking holds just the share of such agents, to
 within two hundredths. That share is 4% of the agents in one world, and 90%
@@ -324,10 +324,10 @@ one habit, all in and at home two times in three, and differ in *when* and
 
 The screen of random worlds uses this count. A world it calls diverse has
 more effective kinds of staking than B2's median world, and a higher
-diversity score ([What makes a world interesting](what-makes-a-world-interesting.md)).
+diversity score ([What makes a world interesting](measuring-health.md#what-makes-a-world-interesting)).
 The screen reads the kinds from the world as kept, with no game played first.
 And it averages two moments, since the count swings from one moment to the
-next ([The diversity score](diversity-score.md)).
+next ([The diversity score](measuring-health.md#the-diversity-score)).
 
 ## Genotypes and kinds
 
@@ -355,9 +355,9 @@ genotypes. Worlds with about a thousand effective genotypes hold anything
 from 1.6 to 43 kinds of staking.
 
 Both counts here are effective numbers of the same kind, 1 / Σ *p*². The
-note on [Brain diversity](genotype.md#brain-diversity) counts genotypes by
+note on [Brain diversity](measuring-evolution.md#brain-diversity) counts genotypes by
 2^*H* instead, which weighs rare genotypes more and so gives a larger number
-([Two effective numbers](effective-number.md#two-effective-numbers)).
+([Two effective numbers](statistics.md#two-effective-numbers)).
 
 The long runs add time:
 
@@ -479,7 +479,7 @@ does worse there.
   5,000 iterations later.
 - **Kinds sit in somewhat different places**, by links in B2 and by tokens in
   B1: niches or families, not yet told apart.
-- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), B2 has the raw material and B1 has not**:
+- **For open-ended evolution, B2 has the raw material and B1 has not**:
   many kinds of behaviour at once, steadily renewed. What B2 lacks is a
   reason for a kind to *stay*: a place where it does better than the others.
   Then new kinds would be added to the old ones, rather than replacing them.
@@ -499,8 +499,8 @@ does worse there.
   are nearly blind, and the constants selection set in them.
 - [Genotypes and lineages](genotypes-and-lineages.md): how long a genotype
   lasts, and how lines of descent take worlds over.
-- [Where, who and chance](variance-split.md) and
-  [Effective numbers](effective-number.md): the two methods of this page.
+- [Where, who and chance](statistics.md#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them) and
+  [Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions): the two methods of this page.
 
 ## How this was made
 
@@ -557,6 +557,6 @@ to every condition of every experiment, and to the pilot worlds.
 
 ← [Brains replaced by their average](brains-replaced-by-their-average.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [How big should a brain be?](how-big-should-a-brain-be.md) →
 
-> [!info]- Pages that link here (17)
-> [Glossary](glossary.md) · [The even split](even-split.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Genotypes, families and the common ancestor](genotype.md) · [What would count as open-ended evolution](open-ended-test.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Splitting variation: where, who and chance, and between worlds and within them](variance-split.md) · [Effective numbers: how many kinds, and how many directions](effective-number.md)
+> [!info]- Pages that link here (14)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md)
 <!-- /turns -->

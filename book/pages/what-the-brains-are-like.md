@@ -4,7 +4,7 @@
 > - Does what a brain sees reach what it does?
 > - Which decisions did evolution change, and in which direction?
 > - Which of its inputs does a brain listen to — its own wealth, its
->   [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s, the [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), or the noise?
+>   [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s, the messages, or the noise?
 > - How different are the brains of one world from each other?
 
 ## In short
@@ -31,12 +31,12 @@ what it *does* can be tested, the way a physiologist tests a nerve. Give it an
 input and measure the response. Then change the input, and measure again.
 
 Exactly: we take each of the thirty worlds as its last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") left it. We
-rebuild every agent's view exactly as the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") does: one column of 154
-inputs per [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") ([What a brain sees](brain-inputs.md)). Then we run the
+rebuild every agent's view exactly as the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") does: one column of 154
+inputs per [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") ([What a brain sees](rules-in-detail.md#what-a-brain-sees)). Then we run the
 agent's own brain on it. After that, we change the inputs, or the brain, and
 run it again.
 
-The comparison that matters most is a **fresh [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s brain**, given exactly
+The comparison that matters most is a **fresh founder's brain**, given exactly
 the same inputs. Its weights are drawn as for the founders of a world: normal,
 with standard deviation 1/√*k*. Here *k* is the number of inputs of the layer,
 its fan-in. Its biases are 0. A founder's brain shows what the architecture
@@ -138,14 +138,14 @@ The two kinds of brain decide very differently:
   candidates half the time, and goes all in on one the other half. An evolved
   brain spreads in **98%** of cases. That fits the 98% of
   [How the game is played](how-the-game-is-played.md).
-- **Splitting evenly.** In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, **42%** of agents give every
+- **Splitting evenly.** In the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, **42%** of agents give every
   candidate a score of zero or below. The rules then split their tokens
   exactly evenly
-  ([Splitting tokens into whole numbers](largest-remainder.md)). This is not
+  ([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)). This is not
   something selection made: founders' brains, on the same inputs, do so in 49%
   of cases. The worlds differ enormously here, from 13% to 98% (58% in the
   median world of 10,000 tokens, from 3% to 97%). In a world where it is 98%,
-  almost every stake is the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."), decided by the rules and not by the
+  almost every stake is the [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."), decided by the rules and not by the
   brain.
 
 The outputs behind these decisions show where selection pushed. Each decision
@@ -156,7 +156,7 @@ them.
 <!-- figure minds/outputs -->
 ![Where selection pushed](../figures/minds/outputs.svg)
 
-**Where selection pushed.** One dot per world: the mean, over its agents and their columns, of each of the brain's outputs that make decisions ([The brain](the-brain.md)). A founder's brain averages 0 on every one of them (the dashed line). A child's share is f(a, b), the share of the positive part of a in the positive parts of a and b ([The share function](share-function.md)): a below 0 and b above it means no child. Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two outputs is larger.
+**Where selection pushed.** One dot per world: the mean, over its agents and their columns, of each of the brain's outputs that make decisions ([The brain](the-brain.md)). A founder's brain averages 0 on every one of them (the dashed line). A child's share is f(a, b), the share of the positive part of a in the positive parts of a and b ([The share function](rules-in-detail.md#the-share-function-fa-b)): a below 0 and b above it means no child. Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two outputs is larger.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline worlds that lived to the end.
@@ -173,12 +173,12 @@ In the evolved worlds:
 
 - The two outputs of **a child's share**, *a* and *b*, sit at −0.53 and +0.70.
   The share function *f*(*a*, *b*) gives 0 whenever *a* is negative and *b*
-  positive ([The share function](share-function.md)), so there is no child.
+  positive ([The share function](rules-in-detail.md#the-share-function-fa-b)), so there is no child.
   Every one of the thirty worlds has *a* below 0 and *b* above it.
 - **Spread** beats **all in**, +0.61 against −0.45.
 - The **revolutionary share** is the part of a stake that may join smaller
   stakes against a node's largest staker
-  ([How a coalition takes a node](revolution.md)). Its two outputs sit at
+  ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)). Its two outputs sit at
   +0.64 and −0.61. The first is above 0 and the second below it in every
   world. So nearly every staked token is marked revolutionary: 97%
   ([How the game is played](how-the-game-is-played.md)).
@@ -254,7 +254,7 @@ brain. It is the square root of the sum of its squared weights.
 <!-- figure minds/listen -->
 ![What a brain listens to](../figures/minds/listen.svg)
 
-**What a brain listens to.** For each group of the brain's inputs ([What a brain sees](brain-inputs.md)) — whether the candidate is the agent itself; the agent's and the candidate's tokens and connections; the summaries of both neighbourhoods (around); the four messages, from writer to reader (I→me is what the agent wrote to itself, it→me what the candidate wrote to it, and so on); and the random numbers — the size of the first layer's weights that read it: for each input, the length of its column of 50 weights, averaged over the inputs of the group and the agents of the world; one dot per world. Lower dashed line: the same for founders' brains. Upper: what the changes of [How a brain changes](mutation.md) alone would bring every weight to, whatever it reads — its jitters adding variance, its resets drawing weights back — at the balance of the two.
+**What a brain listens to.** For each group of the brain's inputs ([What a brain sees](rules-in-detail.md#what-a-brain-sees)) — whether the candidate is the agent itself; the agent's and the candidate's tokens and connections; the summaries of both neighbourhoods (around); the four messages, from writer to reader (I→me is what the agent wrote to itself, it→me what the candidate wrote to it, and so on); and the random numbers — the size of the first layer's weights that read it: for each input, the length of its column of 50 weights, averaged over the inputs of the group and the agents of the world; one dot per world. Lower dashed line: the same for founders' brains. Upper: what the changes of [How a brain changes](rules-in-detail.md#how-a-brain-changes) alone would bring every weight to, whatever it reads — its jitters adding variance, its resets drawing weights back — at the balance of the two.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline worlds that lived to the end.
@@ -278,7 +278,7 @@ a bath with the tap running and the plug a little loose. The water settles at
 the level where what runs in equals what drains out. Each change of a brain
 adds a little variance to its weights: that is the jitter. And now and then it
 draws a weight afresh from the founders' distribution: that is the reset
-([How a brain changes](mutation.md)). The jitter runs in, and the reset
+([How a brain changes](rules-in-detail.md#how-a-brain-changes)). The jitter runs in, and the reset
 drains.
 
 Exactly: write *v* for the variance of a weight in a layer of fan-in *k*. A
@@ -319,7 +319,7 @@ brains as the root mean square of the differences of all their 15,795 numbers.
 > **To make it again:** `python3 book_figures.py minds`.
 <!-- /figure -->
 
-- A [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") and its parent are **0.0085** apart: one change.
+- A [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") and its parent are **0.0085** apart: one change.
 - Two agents drawn at random from one world are **0.20** apart (the worlds:
   0.09 to 0.21).
 - Two founders, drawn independently, are 0.18 apart (0.176): less than two
@@ -358,7 +358,7 @@ worlds did. So sight needed a world that cannot break, and B2 is that world.
 
 How long does evolution go on, with blind brains and with seeing ones? In B1,
 not long. Its blind brains beat their founders by iteration 50. After that, no
-[era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") beats the one before
+[era](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?") beats the one before
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 In B2, whose brains see, contests of 20 iterations at first showed the same:
 no gain after a few hundred iterations. Contests as long as an agent's life,
@@ -386,7 +386,7 @@ depth costs little
   These are the strategies a world of nearly identical agents converges to.
   They are a point in a space of a few dimensions, and once that point is
   found, there is nowhere further to go.
-- **This is the first obstacle to [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.").** Novelty that keeps
+- **This is the first obstacle to [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.").** Novelty that keeps
   coming needs behaviour that depends on circumstances. A brain that reacts to
   who its neighbour is can find a new way to treat a new kind of neighbour.
   That creates a new niche for someone else. A brain that cannot see has only
@@ -521,6 +521,6 @@ that lived to the end of their 3,000 iterations were read the same way.
 
 ← [Genotypes and lineages](genotypes-and-lineages.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [What agents say to each other](what-agents-say-to-each-other.md) →
 
-> [!info]- Pages that link here (28)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
+> [!info]- Pages that link here (25)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)
 <!-- /turns -->

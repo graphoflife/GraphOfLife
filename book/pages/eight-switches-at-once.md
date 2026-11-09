@@ -16,7 +16,7 @@ Most experiments threw one switch at a time into B2, the baseline whose
 network cannot break. Batch U threw eight together in sixteen worlds,
 chosen by a **fractional factorial design** so that each switch's effect can
 still be read. Whatever else is on, every unused link lapsing makes a world
-rich and small, and the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") to the newborns makes it large and poor. But
+rich and small, and the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the newborns makes it large and poor. But
 pairs of switches act together strongly, so what a switch does alone is
 often not what it does among others. The later [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") still beat the
 earlier ones in fifteen of the sixteen worlds. On B1, in batch V, few
@@ -163,7 +163,7 @@ worlds cannot say.
 
 ### How large is large?
 
-Each world is played once, with one [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). How far can a difference of
+Each world is played once, with one [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). How far can a difference of
 means between two groups of eight move by chance alone? Worlds that differ
 *only* in their seed tell. If one world's measure varies with the seed by a
 standard deviation σ, a difference of two means of eight varies by
@@ -172,7 +172,7 @@ $$\sigma \sqrt{1/8 + 1/8} = \sigma / 2.$$
 
 In words: a mean of eight worlds wobbles by σ/√8, and the difference of two
 such means by √2 times as much, which is σ/2. An effect several times σ/2 is
-not the seed. ([How sure can we be?](bootstrap.md) says more about how sure
+not the seed. ([How sure can we be?](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds) says more about how sure
 a difference is.)
 
 The chains give a second check. If every pair added nothing, the seven
@@ -188,7 +188,7 @@ before:
 | | switch | the setting | alone in |
 |---|---|---|---|
 | A | gifts | [`allow_gifting`](settings.md#allow_gifting), with unused links cut after reproduction once unused for an [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
-| B | no [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") | [`allow_revolutions`](settings.md#allow_revolutions) off | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
+| B | no [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") | [`allow_revolutions`](settings.md#allow_revolutions) off | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
 | C | every unused link lapses | [`prune_needs`](settings.md#prune_needs) = 0 | batch S ([The switches the world was built with](the-switches-the-world-was-built-with.md)) |
 | D | no random inputs | [`random_input_amount`](settings.md#random_input_amount) = 0 | Experiment 16 ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)) |
 | E | estates to the newborns | [`redistribution`](settings.md#redistribution) = `newborns` | [Who inherits?](who-inherits.md) |
@@ -214,9 +214,9 @@ For each world, the table gives its number of agents, and the share of them
 holding three tokens or fewer: the poor. Since 19 October 2026 that share
 only stands in for what the author's picture asks, tokens not held too
 evenly ([Too even, not too poor](healthy-and-rich.md#too-even-not-too-poor)).
-Then comes its [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."): how much its agents differ, from 0
-to 1. Then the marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") it meets, of seven; its
-[dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."); and its links per agent. The rows run from the
+Then comes its [diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."): how much its agents differ, from 0
+to 1. Then the marks of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") it meets, of seven; its
+[dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."); and its links per agent. The rows run from the
 richest world to the poorest.
 
 | switches on | agents | agents with 3 tokens or fewer | diversity score | marks (of 7) | dimension | links per agent |
@@ -359,12 +359,12 @@ revolutions, no random inputs, links that hold a token, and mixing. It
 meets the author's picture better than any of the sixteen. It meets all
 seven marks at a dimension of 3.7. A quarter of its 652 agents hold three
 tokens or fewer, and its diversity score is 0.68. Its tokens are not too
-even either: their [Gini coefficient](gini-coefficient.md) is 0.53, within
+even either: their [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) is 0.53, within
 the 0.49 to 0.56 of B2's ten worlds at iteration 1,000
 (`GraphOfLifeRuns/.pilots/atlas/at1000.json`).
 
 But it is one world of one seed, and its network is folded. A typical agent
-reaches half the world in 1.19 times the steps its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs
+reaches half the world in 1.19 times the steps its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 Played on to 10,000 iterations as a candidate world
 ([The candidates, played on](the-candidates-played-on.md#the-candidates-played-on)),
@@ -376,9 +376,9 @@ three tokens or fewer, at a diversity score of 0.66.
 
 Do the brains of these worlds still get better? To tell, each world's brains
 of iteration 1,000 are played against its brains of iteration 500
-([Eras, contests and invasions](eras-and-contests.md)). Every agent gets a
+([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). Every agent gets a
 brain of one era or the other. Then the world plays on for 100 iterations, a
-[lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") of B2 ([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+[lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") of B2 ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 If the later brains then hold more than half of the world, they are better.
 
 <!-- figure eightswitches/evolution -->
@@ -401,7 +401,7 @@ If the later brains then hold more than half of the world, they are better.
 The brains of 1,000 hold more than half of a contested world in fifteen of
 the sixteen worlds. They hold from 0.47, with C, D, G and H on, to 1.0 with
 all eight on. There the later brains took the whole world in both
-eras' worlds. The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") is 0.60, below B2's own 0.69. The lab's ten
+eras' worlds. The median is 0.60, below B2's own 0.69. The lab's ten
 B2 worlds give a median of 0.68, with a spread of 0.04. Gifts, no
 revolutions, lapsing links and the estate to the newborns each speed
 evolution a little. They add 0.07 to 0.09, about twice the spread of B2's
@@ -583,7 +583,7 @@ Neither moves it beyond the chains either (−0.02 and +0.14).
 
 Every world on this page is a pilot, made with `research/oee/pilots/run.py`
 in the engine's own code (`--proto engine=true`) and kept in
-`GraphOfLifeRuns/.pilots` ([Pilot worlds](the-lab.md#pilot-worlds)). No experiment
+`GraphOfLifeRuns/.pilots` ([Pilot worlds](runs-and-records.md#pilot-worlds)). No experiment
 of the lab stands behind it, so the page has no box of runs. Every figure
 says, folded beneath it, which worlds it reads and how. The numbers it
 quotes are in `book/results/eightswitches.json`.

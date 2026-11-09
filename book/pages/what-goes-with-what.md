@@ -24,7 +24,7 @@ tells thirty B1 worlds apart is one number: the size of their largest hub.
 This page is an atlas rather than an experiment. Nothing in it was
 predicted. It is a search. Every quantity the notebook measures for an agent
 is set against every other, on every combination of linear and logarithmic
-axes, in twenty worlds. And every statistic the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") records for a whole world
+axes, in twenty worlds. And every statistic the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") records for a whole world
 is set against every other.
 
 A search of this size finds hundreds of correlations, and most of them say
@@ -73,14 +73,14 @@ example.
 | `alive_10`, `change_10`, `degree_change_10` | ten iterations later: its node still exists; its change of tokens; its change of connections |
 | `child_next` | it had a child in the next reproduction phase |
 
-**The axes.** For every pair, Pearson's [correlation](correlation.md) is
+**The axes.** For every pair, Pearson's [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes) is
 taken with each quantity on a linear axis or a logarithmic one. That is the
 logarithm of a positive quantity, and log(1 + *x*) of a count that can be
 zero. A signed quantity gets sign(*x*) log(1 + |*x*|). Then a peak and a
 valley of the same depth sit at the same distance from zero. Shares and
 yes-or-no stay linear. And the rank correlation (Spearman's) is taken too,
 which no monotone change of axes can alter. Each correlation is taken in each
-world, and the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of the ten is reported.
+world, and the median of the ten is reported.
 
 <!-- figure atlas/before_after -->
 ![What comes before, and what follows](../figures/atlas/before_after.svg)
@@ -129,7 +129,7 @@ B1):
 | age and still alive ten iterations later | −0.52 | +0.22 |
 
 In B1 the rich are the well connected, the central and the old. The [even
-split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") ([Where tokens flow](where-the-tokens-flow.md)) pours tokens into
+split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") ([Where tokens flow](where-the-tokens-flow.md)) pours tokens into
 whoever has most neighbours, and nothing ages. They spread their stakes, and
 the nodes they take come from spreading.
 
@@ -239,7 +239,7 @@ the same sign in every one of ten worlds.
 
 **In B1, the dead's estate levels the world.** Look at the games in which more
 of the dead's tokens are scattered over the survivors
-([The estate of the dead](estate.md)). In them the [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") falls:
+([The estate of the dead](measuring-lives.md#the-estate-of-the-dead)). In them the [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") falls:
 −0.78 between the changes, from −0.65 to −0.83 in the ten worlds. The top
 tenth holds less (−0.76), more agents gain (+0.74), and the median holding
 rises (+0.65). A world that splits feeds the rest: when pieces break off, the
@@ -248,8 +248,8 @@ tokens of their agents are scattered (+0.75).
 **In B2, hoarding goes with inequality.** In games in which agents keep more
 of their tokens at home, inequality rises (+0.43), and fewer agents gain
 (−0.46). And sometimes the share of agents with many connections falls off
-more steeply, with fewer hubs: a larger exponent γ of the [degree](degree.md "The number of an agent's connections: how many neighbours it has.")
-distribution. Then the network has fewer [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") (−0.65), a smaller risk of
+more steeply, with fewer hubs: a larger exponent γ of the degree
+distribution. Then the network has fewer bridges (−0.65), a smaller risk of
 being cut apart (−0.70) and a larger core (+0.65).
 
 ## Between worlds
@@ -258,7 +258,7 @@ Take the thirty worlds of B1 at 100,000 tokens (Experiment 10). Each is
 described by the means of its statistics over iterations 500 to 1,500.
 Thirty pairs of numbers make a correlation above 0.36 unlikely by chance. Yet
 dozens of pairs reach 0.95 and more. The largest hub, the richest agent,
-[assortativity](degree.md#assortativity "Whether agents tend to be joined to agents like them: the well connected to the well connected."), the core, the flows and the [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") all move together from
+assortativity, the core, the flows and the [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") all move together from
 world to world. That many correlations that strong mean fewer things than
 there are statistics.
 
@@ -282,11 +282,11 @@ there are statistics.
 variance of their 79 standardised statistics. The first principal component
 holds 47% of it. Ordering the worlds along it orders them by their
 best-connected agent's share of the world, from 1% to 61%. The second
-component (18%) is how [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours.") and triangles grow with an agent's
+component (18%) is how clustering and triangles grow with an agent's
 connections. The third (16%) is the population. The seven "star" worlds of
 [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
 are the far end of the first. A world is first of all a world with or
-without a star ([Stars and hubs](stars-and-hubs.md)).
+without a star ([Stars and hubs](measuring-networks.md#stars-and-hubs)).
 
 ## What we learned
 
@@ -313,9 +313,9 @@ without a star ([Stars and hubs](stars-and-hubs.md)).
 
 - [Gains and losses](gains-and-losses.md): the token curvature and the heat
   equation, for one game.
-- [Stars and hubs](stars-and-hubs.md): the worlds that one agent holds
+- [Stars and hubs](measuring-networks.md#stars-and-hubs): the worlds that one agent holds
   together.
-- [Two numbers together](correlation.md): correlation, fitted lines and
+- [Two numbers together](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes): correlation, fitted lines and
   logarithmic axes.
 - [Every world side by side](every-world-side-by-side.md): every statistic of
   every world, in one table.
@@ -333,8 +333,8 @@ which worlds it reads and how.
 <!-- turns -->
 ---
 
-← [What a simulation costs](what-a-simulation-costs.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
+← [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
 
-> [!info]- Pages that link here (7)
-> [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [The even split](even-split.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (6)
+> [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens go](where-tokens-go.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

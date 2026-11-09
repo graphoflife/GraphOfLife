@@ -42,7 +42,7 @@ what actually severs a region from the rest.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)), read over their [settled
-life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The page was first written from the thirty worlds
+life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The page was first written from the thirty worlds
 of 10,000 tokens; where those differ, their numbers are given beside. A
 **big** cut is counted against the size of a world: a thousand agents or more
 here, a hundred in the worlds of 10,000 tokens. In both, that is one agent for
@@ -51,7 +51,7 @@ every hundred tokens of the world.
 ## Bridges and the worst cut
 
 A **bridge** is a connection that lies on no loop: cut it, and the network
-falls in two ([Bridges](bridges.md)). A settled world has about 6,400 of them,
+falls in two ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)). A settled world has about 6,400 of them,
 26% of its connections
 ([Core, leaves and bridges](what-shape-does-the-network-take.md#core-leaves-and-bridges)).
 Most hold a single leaf, an agent with one connection.
@@ -59,10 +59,10 @@ Most hold a single leaf, an agent with one connection.
 How much hangs on the worst of them? Take away one bridge, and the network
 falls into two pieces; the smaller piece is what the bridge holds to the rest.
 The **cut risk** is the largest such piece, over all bridges, as a share of
-all agents ([Cut risk](bridges.md#cut-risk)). It is 0 when there is no bridge, and at
+all agents ([Cut risk](measuring-networks.md#cut-risk)). It is 0 when there is no bridge, and at
 most a half.
 
-In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world the cut risk is **11%** (12% at 10,000 tokens). Somewhere,
+In the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world the cut risk is **11%** (12% at 10,000 tokens). Somewhere,
 a single connection is all that joins a ninth of the world to the rest.
 
 ## Does a fragile world lose more?
@@ -72,12 +72,12 @@ If the worst bridge failed, the game would cut off that ninth. Does it?
 <!-- figure breaking/risk -->
 ![Does a fragile world lose more?](../figures/breaking/risk.svg)
 
-**Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: after the game's unused connections are cut, just before the cull, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](bridges.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
+**Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: after the game's unused connections are cut, just before the cull, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](measuring-networks.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499: `cutRiskBefore`, and `orphaned` / `nodes_before`.
 > 2. Plot one against the other; average y in classes of x.
@@ -86,7 +86,7 @@ If the worst bridge failed, the game would cut off that ninth. Does it?
 <!-- /figure -->
 
 Over 30,000 settled games, the cut risk before a game and the share of agents
-it cut off have a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of **0.09**: almost nothing. The mean risk is
+it cut off have a [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of **0.09**: almost nothing. The mean risk is
 11%, and the mean share cut off is 2.0%. In 32% of games more than a tenth of
 the world hung on one connection. In only 1.1% of games was more than a tenth
 cut off. The worst bridge almost never fails. (At 10,000 tokens: 0.06, 41% and
@@ -114,14 +114,14 @@ an island, it is almost never empty.
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s026`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `nodes`, `orphaned` and `cutRiskBefore` of the rows with `phase` = 2 and 600 ≤ `iteration` ≤ 1,200.
 >
 > **To make it again:** `python3 book_figures.py breaking`.
 <!-- /figure -->
 
-Follow one world closely: the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 26, from iteration 600 to 1,200.
+Follow one world closely: the world of [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 26, from iteration 600 to 1,200.
 It shrinks from about 22,800 agents to 19,000 by iteration 734. Then a single
 game, that of iteration 735, cuts off **9,460** agents. That is half the
 world, and the largest cut of all thirty worlds.
@@ -150,7 +150,7 @@ How large are the games that do the killing?
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `orphaned` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. For every n, add up `orphaned` over the rows with `orphaned` ≥ n and divide by the total.
@@ -192,7 +192,7 @@ three to nine, and 32 through one or two.
 
 There, once, a single line of [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") cut itself off. In the world of seed 1 of
 10,000 tokens, a game at iteration 541 cut off 319 agents. Of them, 60%
-carried one [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), and the typical one staked all its tokens on its own
+carried one [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), and the typical one staked all its tokens on its own
 node. An agent that stakes everything at home sends nothing across its
 connections; they stay alive only if its neighbours stake on it.
 
@@ -240,7 +240,7 @@ A world that loses regions in every iteration is poor ground for evolution
 that should go on. In B1's worlds of 5,000 tokens, the cull removes about 2%
 of the agents in every iteration. That is four times as many as starve
 ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
-No such world passes the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.")
+No such world passes the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.")
 ([The network that holds, in numbers](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)).
 One of its marks is a cut risk of at most 1%.
 
@@ -389,13 +389,13 @@ and how.
   its worst cut as taken "before the game". It is taken from the game's row:
   after the game's unused connections are cut, just before the cull. The
   figure's axis and caption now say so; its numbers are unchanged
-  ([When the cut risk is read](bridges.md#when-the-cut-risk-is-read)).
+  ([When the cut risk is read](measuring-networks.md#when-the-cut-risk-is-read)).
 
 <!-- turns -->
 ---
 
-← [How properties scale together](how-properties-scale-together.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) →
+← [How properties scale together](how-properties-scale-together.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
 
-> [!info]- Pages that link here (19)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
+> [!info]- Pages that link here (18)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
 <!-- /turns -->

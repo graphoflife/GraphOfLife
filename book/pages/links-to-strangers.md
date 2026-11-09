@@ -12,7 +12,7 @@ Agents of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep it
 It was a paid jump, a paid scout that walks step by step, or a free reach. When a
 search costs [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), hardly anyone pays for it; when it is free, agents reach
 all the time. But the strangers they find are near, two or three steps away.
-So the network grows denser where it already is, and its [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") does not
+So the network grows denser where it already is, and its [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") does not
 change. Every searching world is smaller and a little richer than B2, and its
 [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") evolve faster, whether its agents search or not.
 
@@ -51,8 +51,8 @@ of eight links gets a new one.
 ## The worlds
 
 Batch K plays B2 at 10,000 tokens with every search, every steering and every
-consent: twelve kinds of world. Each has [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2 and runs for 1,000
-iterations, as pilot worlds ([Pilot worlds](the-lab.md#pilot-worlds)). The
+consent: twelve kinds of world. Each has [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 and 2 and runs for 1,000
+iterations, as pilot worlds ([Pilot worlds](runs-and-records.md#pilot-worlds)). The
 control is B2 itself with the same seeds: the lab's Experiment 16 worlds
 again, game for game. From each world's checkpoint at iteration 1,000, fifty
 more [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") were played and recorded, and every proposal in them was counted
@@ -86,7 +86,7 @@ agents an iteration, and 0.1 to 3 new links. Most proposals fail: only 7% to
 already at its valence. How a search steers, and whether a link needs both
 ends' consent, matters less than the seed of the world.
 
-**And the strangers are near.** The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") proposal, in every world, goes to
+**And the strangers are near.** The [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") proposal, in every world, goes to
 an agent two or three steps away: a neighbour's neighbour, or one step
 beyond. No proposal in any world went twenty steps or more. A search walks
 the network as it is. And a short walk on a network where every agent has
@@ -145,8 +145,8 @@ even when it makes no link. This batch does not tell which.
 <!-- /figure -->
 **Yes, and faster than in B2.** In every one of the 24 worlds, the brains of
 iteration 1,000 took more than half of a contested world from those of 500.
-Over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), they took 70% to 91%
-([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+Over an agent's [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death."), they took 70% to 91%
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 B2's took 68%, in the median of its ten lab worlds. The median world with a
 jump took 79%, with a walk 78%, and with the reach 83%.
 

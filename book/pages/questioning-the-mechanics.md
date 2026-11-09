@@ -3,7 +3,7 @@
 > [!question] Questions of this page
 > - How do [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") spread, and where do new ones come from?
 > - Which rules decide most of what a world does?
-> - Which of them stand in the way of [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), and what could
+> - Which of them stand in the way of [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), and what could
 >   replace them?
 > - What did the second baseline, B2, change about them, and what came of it?
 
@@ -13,7 +13,7 @@ Much of what the first baseline, B1, does follows from a few of its rules, not
 from what its brains compute. This page takes those rules one at a time: what
 each does, whether that is what was meant, and what could replace it. In B1 a
 brain spreads seventeen times more by conquest, winning a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."),
-than by birth, and 97% of new [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") arise in living brains. Four rules
+than by birth, and 97% of new [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") arise in living brains. Four rules
 stood most in the way of open-ended evolution: brains that change as they
 live, conquest that erases, places nobody can hold, and a cull that kills
 every piece cut off from the rest. The second baseline, B2, changed three of
@@ -44,7 +44,7 @@ looked at in the open.
 **Two baselines.** A baseline is a stated set of rules that experiments start
 from ([B1 and B2: the two baselines](b1-and-b2.md)). B1 holds the rules as
 they were first built, and the rule and the data of every section below are
-B1's. B2 was made on 12 October 2026 from [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. It is B1 with rules
+B1's. B2 was made on 12 October 2026 from [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. It is B1 with rules
 that keep its network from breaking and its agents from staking or breeding
 themselves to death, and with smaller brains that see. Several of its changes
 answer questions this page asked.
@@ -181,7 +181,7 @@ the pilots, and conquest settled between a few and about ten per cent of the
 nodes a game ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
 
 Even so, a brain in B2 still spreads mostly by conquest. In B2's worlds of
-10,000 tokens, 5.6 nodes per hundred agents change hands in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
+10,000 tokens, 5.6 nodes per hundred agents change hands in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
 iteration, against one birth
 ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)).
 Mixing brains has been tried only at birth: with
@@ -193,7 +193,7 @@ been tried.
 
 **The rule.** In B1 every brain is offered a change after every game, with
 probability 0.2, wherever it sits — and again when it is copied into a child
-([How a brain changes](mutation.md)). A brain that changes becomes a new
+([How a brain changes](rules-in-detail.md#how-a-brain-changes)). A brain that changes becomes a new
 genotype, with a number of its own.
 
 **What the data say.** In the figure above, about **91** new genotypes appear
@@ -234,7 +234,7 @@ that is not copied stays itself. What harmed the worlds of Experiment 13 was a
 drain: their births fell short of what the cull took. B2's other rules stop
 worlds from breaking and starving, and so remove the drain
 ([A world that cannot break](a-world-that-cannot-break.md),
-[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") now stays like
+[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") now stays like
 its ancestor has not been measured.
 
 ## Hubs are places
@@ -242,14 +242,14 @@ its ancestor has not been measured.
 **The rule.** In B1 a node goes to whoever staked most on it, the hegemon. Or
 it goes to a coalition of smaller stakers, if the parts of their stakes they
 marked revolutionary add up to more
-([How a coalition takes a node](revolution.md)). The agent living on the node
+([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)). The agent living on the node
 has no special claim to it.
 
 **What the data say.** The agent on a node with fifty or more [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")
 keeps it in 2.0% of games; on a node with one connection, in 74%
 ([Where the tokens flow](where-the-tokens-flow.md)). A pair of brains facing
 each other across a connection survives one more game in 4% of cases
-([Do agents cooperate?](do-agents-cooperate.md)). The centre of a [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") is the
+([Do agents cooperate?](do-agents-cooperate.md)). The centre of a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") is the
 extreme: a coalition takes its node in every game, and it carries a new brain
 almost every game ([The largest and the smallest](the-largest-and-the-smallest.md)).
 
@@ -318,7 +318,7 @@ outputs, *a* and *b*, and the share function turns them into one share between
 
 Here *x*⁺ is *x* when *x* is positive, and 0 otherwise. In words: the share is
 *a*'s positive part over the sum of both positive parts
-([The share function](share-function.md)).
+([The share function](rules-in-detail.md#the-share-function-fa-b)).
 
 <!-- figure mechanics/child-shares -->
 ![Where the share function jumps](../figures/mechanics/child-shares.svg)
@@ -336,7 +336,7 @@ Here *x*⁺ is *x* when *x* is positive, and 0 otherwise. In words: the share is
 > **To make it again:** `python3 book_figures.py mechanics`.
 <!-- /figure -->
 
-**What the data say.** Of the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' first children, 33.7% got exactly half
+**What the data say.** Of the founders' first children, 33.7% got exactly half
 of the parent's tokens, and 33.1% got all of them: their parents starved.
 Later, 25.3% get exactly half and 5.7% everything; the other shares are mostly
 the simple fractions that small token counts allow. (At 10,000 tokens: 33.2%
@@ -511,7 +511,7 @@ the world.
 **In B2.** The lottery is kept, but nobody is cut off. The share-out deals out
 the estates of agents that die of age instead: about seventy tokens an
 iteration among 3,600 agents, in worlds of 10,000 tokens
-([The estate of the dead](estate.md)). Five other heirs have since been tried,
+([The estate of the dead](measuring-lives.md#the-estate-of-the-dead)). Five other heirs have since been tried,
 in pilot worlds of B1 and of B2: survivors by wealth, the poorest, the
 newborns, the parents, and each dead agent's own children. Who inherits
 decides how many agents a world holds, and how poor they are
@@ -540,7 +540,7 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
 ## What we learned
 
 - **The rules, more than the brains, decide the measured world.** The [even
-  split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.")'s resting state, in which wealth follows connections; the hubs that
+  split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.")'s resting state, in which wealth follows connections; the hubs that
   grow because every child is joined to some of its parent's neighbours; the
   price of connections; the global cull; the coin toss of the poor. Most of
   what the measurements of B1 found follows from rules that do not depend on
@@ -556,7 +556,7 @@ Two pieces of bookkeeping deserve care, though they change nothing in a world:
   at a time. Every rule of its network turned out to be needed, and what an
   agent keeps at home decides who is left to play.
 - **Evolution in B2 goes on, but slows towards a plateau.** In contests an
-  agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long, the brains of each moment of a world beat those of
+  agent's lifetime long, the brains of each moment of a world beat those of
   the moment before, up to iteration 2,000, in all ten worlds of
   Experiment 16. In three worlds continued to 10,000 iterations, the gains
   all but stopped after iteration 5,000
@@ -609,5 +609,5 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
 > [!info]- Pages that link here (16)
-> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes, families and the common ancestor](genotype.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
+> [The brain](the-brain.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
 <!-- /turns -->

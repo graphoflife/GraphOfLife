@@ -30,8 +30,9 @@
     },
     {
       "name": "founder",
-      "page": "starting-ring",
-      "says": "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."
+      "page": "rules-in-detail",
+      "says": "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.",
+      "anchor": "the-starting-ring"
     },
     {
       "name": "iteration",
@@ -77,16 +78,18 @@
     },
     {
       "name": "hegemon",
-      "page": "revolution",
-      "says": "The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it."
+      "page": "rules-in-detail",
+      "says": "The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.",
+      "anchor": "how-a-coalition-takes-a-node"
     },
     {
       "name": "revolution",
       "also": [
         "coalition"
       ],
-      "page": "revolution",
-      "says": "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."
+      "page": "rules-in-detail",
+      "says": "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.",
+      "anchor": "how-a-coalition-takes-a-node"
     },
     {
       "name": "brain",
@@ -95,41 +98,48 @@
     },
     {
       "name": "message",
-      "page": "messages",
-      "says": "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."
+      "page": "rules-in-detail",
+      "says": "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.",
+      "anchor": "messages"
     },
     {
       "name": "share function",
-      "page": "share-function",
-      "says": "How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary."
+      "page": "rules-in-detail",
+      "says": "How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.",
+      "anchor": "the-share-function-fa-b"
     },
     {
       "name": "yes-or-no decision",
-      "page": "binary-decision",
-      "says": "A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion."
+      "page": "rules-in-detail",
+      "says": "A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion.",
+      "anchor": "a-yes-or-no-decision"
     },
     {
       "name": "largest remainder",
-      "page": "largest-remainder",
-      "says": "How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions."
+      "page": "rules-in-detail",
+      "says": "How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions.",
+      "anchor": "splitting-tokens-into-whole-numbers"
     },
     {
       "name": "mutation",
-      "page": "mutation",
-      "says": "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."
+      "page": "rules-in-detail",
+      "says": "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.",
+      "anchor": "how-a-brain-changes"
     },
     {
       "name": "genotype",
       "also": [
         "family tree"
       ],
-      "page": "genotype",
-      "says": "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."
+      "page": "measuring-evolution",
+      "says": "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.",
+      "anchor": "genotypes-families-and-the-common-ancestor"
     },
     {
       "name": "seed",
-      "page": "random-numbers",
-      "says": "The number that fixes every random choice of a run: the same settings and the same seed make the same world."
+      "page": "rules-in-detail",
+      "says": "The number that fixes every random choice of a run: the same settings and the same seed make the same world.",
+      "anchor": "seeds-and-the-random-stream"
     },
     {
       "name": "setting",
@@ -146,16 +156,18 @@
       "also": [
         "extinct"
       ],
-      "page": "extinction",
-      "says": "A world's end before its last iteration: it has dropped to its threshold of agents or fewer."
+      "page": "rules-in-detail",
+      "says": "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.",
+      "anchor": "when-a-world-ends"
     },
     {
       "name": "lifetime",
-      "page": "age-and-lifetime",
+      "page": "measuring-lives",
       "says": "How many iterations an agent lives, from its birth to its death.",
       "not": [
         "lifetime contest"
-      ]
+      ],
+      "anchor": "age-lifetime-and-survival-curves"
     },
     {
       "name": "B1",
@@ -174,13 +186,15 @@
     },
     {
       "name": "health bar",
-      "page": "health-bar",
-      "says": "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."
+      "page": "measuring-health",
+      "says": "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.",
+      "anchor": "the-health-bar"
     },
     {
       "name": "diversity score",
-      "page": "diversity-score",
-      "says": "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."
+      "page": "measuring-health",
+      "says": "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.",
+      "anchor": "the-diversity-score"
     },
     {
       "name": "effective kinds of staking",
@@ -189,41 +203,46 @@
     },
     {
       "name": "random twin",
-      "page": "random-twin",
-      "says": "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all."
+      "page": "measuring-space",
+      "says": "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.",
+      "anchor": "the-random-twin-is-a-world-a-space"
     },
     {
       "name": "even split",
-      "page": "even-split",
-      "says": "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."
+      "page": "measuring-tokens",
+      "says": "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.",
+      "anchor": "the-even-split"
     },
     {
       "name": "estate",
-      "page": "estate",
-      "says": "The tokens a dead agent leaves, and who gets them."
+      "page": "measuring-lives",
+      "says": "The tokens a dead agent leaves, and who gets them.",
+      "anchor": "the-estate-of-the-dead"
     },
     {
       "name": "hub",
       "also": [
         "star"
       ],
-      "page": "stars-and-hubs",
-      "says": "An agent joined to far more agents than most; a star is a world held together by a single hub."
+      "page": "measuring-networks",
+      "says": "An agent joined to far more agents than most; a star is a world held together by a single hub.",
+      "anchor": "stars-and-hubs"
     },
     {
       "name": "lab",
       "also": [
         "engine"
       ],
-      "page": "the-lab",
+      "page": "runs-and-records",
       "says": "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.",
       "not": [
         "engine of"
-      ]
+      ],
+      "anchor": "the-lab-the-engine-and-pilots"
     },
     {
       "name": "pilot",
-      "page": "the-lab",
+      "page": "runs-and-records",
       "says": "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.",
       "anchor": "pilot-worlds"
     },
@@ -232,12 +251,13 @@
       "also": [
         "era"
       ],
-      "page": "eras-and-contests",
-      "says": "Brains of a world at two moments, its eras, played against each other: do the later ones win?"
+      "page": "measuring-evolution",
+      "says": "Brains of a world at two moments, its eras, played against each other: do the later ones win?",
+      "anchor": "eras-contests-and-invasions-does-a-world-keep-getting-better"
     },
     {
       "name": "invasion test",
-      "page": "eras-and-contests",
+      "page": "measuring-evolution",
       "says": "A strategy planted as a patch in an evolved world: does it spread, or die out?",
       "anchor": "the-invasion-test"
     },
@@ -246,32 +266,34 @@
       "also": [
         "best reply"
       ],
-      "page": "eras-and-contests",
+      "page": "measuring-evolution",
       "says": "How much better than a world's brains the best reply to them would do: zero only at the top.",
       "anchor": "exploitability"
     },
     {
       "name": "open-ended evolution",
-      "page": "open-ended-test",
-      "says": "Evolution that keeps producing new things without end, not only up to a plateau."
+      "page": "measuring-evolution",
+      "says": "Evolution that keeps producing new things without end, not only up to a plateau.",
+      "anchor": "what-would-count-as-open-ended-evolution"
     },
     {
       "name": "healthy world",
       "also": [
         "interesting world"
       ],
-      "page": "what-makes-a-world-interesting",
-      "says": "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3)."
+      "page": "measuring-health",
+      "says": "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).",
+      "anchor": "what-makes-a-world-interesting"
     },
     {
       "name": "half-cut exponent",
-      "page": "what-makes-a-world-interesting",
+      "page": "measuring-health",
       "anchor": "the-half-cut-exponent",
       "says": "How the links crossing the cheapest cut of a world into halves grow with its size: 2/3 for a space of three dimensions, near 0 for a bottleneck, near 1 for a folded world."
     },
     {
       "name": "same-position share",
-      "page": "what-makes-a-world-interesting",
+      "page": "measuring-health",
       "anchor": "the-same-position-share",
       "says": "Of two agents put in the same situation, how often they stake their tokens measurably differently."
     },
@@ -281,12 +303,13 @@
         "Gini",
         "Lorenz curve"
       ],
-      "page": "gini-coefficient",
-      "says": "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."
+      "page": "measuring-tokens",
+      "says": "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.",
+      "anchor": "measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility"
     },
     {
       "name": "richest tenth",
-      "page": "gini-coefficient",
+      "page": "measuring-tokens",
       "says": "The share of all tokens held by the richest tenth of the agents.",
       "anchor": "the-richest-tenths-share"
     },
@@ -295,7 +318,7 @@
       "also": [
         "evenness"
       ],
-      "page": "gini-coefficient",
+      "page": "measuring-tokens",
       "says": "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.",
       "anchor": "entropy-and-evenness"
     },
@@ -313,61 +336,64 @@
     },
     {
       "name": "degree",
-      "page": "degree",
-      "says": "The number of an agent's connections: how many neighbours it has."
+      "page": "measuring-networks",
+      "says": "The number of an agent's connections: how many neighbours it has.",
+      "anchor": "an-agents-connections-degree-clustering-assortativity-attachment-and-scaling"
     },
     {
       "name": "preferential attachment",
-      "page": "degree",
+      "page": "measuring-networks",
       "says": "The well connected gaining new connections faster than the poorly connected.",
       "anchor": "preferential-attachment-and-its-kernel"
     },
     {
       "name": "clustering",
-      "page": "degree",
+      "page": "measuring-networks",
       "says": "How often an agent's neighbours are also each other's neighbours.",
       "anchor": "clustering"
     },
     {
       "name": "path length",
-      "page": "path-length",
-      "says": "How many connections the shortest way between two agents crosses."
+      "page": "measuring-networks",
+      "says": "How many connections the shortest way between two agents crosses.",
+      "anchor": "distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap"
     },
     {
       "name": "2-core",
       "also": [
         "hanging tree"
       ],
-      "page": "bridges",
+      "page": "measuring-networks",
       "says": "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.",
       "anchor": "core-trees-and-leaves"
     },
     {
       "name": "bridge",
-      "page": "bridges",
-      "says": "A connection that lies on no loop: cut it and the network falls into two pieces."
+      "page": "measuring-networks",
+      "says": "A connection that lies on no loop: cut it and the network falls into two pieces.",
+      "anchor": "bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut"
     },
     {
       "name": "loop",
-      "page": "bridges",
+      "page": "measuring-networks",
       "says": "A path through the network that comes back to where it started without using a connection twice.",
       "anchor": "loops"
     },
     {
       "name": "cut risk",
-      "page": "bridges",
+      "page": "measuring-networks",
       "says": "The largest share of a world that cutting one connection would cut off.",
       "anchor": "cut-risk"
     },
     {
       "name": "diameter",
-      "page": "path-length",
+      "page": "measuring-networks",
       "says": "The longest of the shortest paths between two agents of a world.",
       "anchor": "radius-and-diameter"
     },
     {
       "name": "spectral gap",
-      "page": "path-length",
+      "page": "measuring-networks",
       "says": "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.",
       "anchor": "the-spectral-gap"
     },
@@ -376,30 +402,31 @@
       "also": [
         "ball dimension"
       ],
-      "page": "ball-dimension-and-curvature",
-      "says": "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."
+      "page": "measuring-space",
+      "says": "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.",
+      "anchor": "three-ways-to-measure-a-networks-dimension"
     },
     {
       "name": "spectral dimension",
-      "page": "ball-dimension-and-curvature",
+      "page": "measuring-space",
       "says": "A network's dimension read from how a random walker spreads over it.",
       "anchor": "the-spectral-dimension"
     },
     {
       "name": "box dimension",
-      "page": "ball-dimension-and-curvature",
+      "page": "measuring-space",
       "says": "A network's dimension read from how many boxes of a given size it takes to cover it.",
       "anchor": "box-dimension"
     },
     {
       "name": "scaling relation",
-      "page": "degree",
+      "page": "measuring-networks",
       "says": "How one property of an agent grows with another, as a power.",
       "anchor": "scaling-relations-between-agents-properties"
     },
     {
       "name": "assortativity",
-      "page": "degree",
+      "page": "measuring-networks",
       "says": "Whether agents tend to be joined to agents like them: the well connected to the well connected.",
       "anchor": "assortativity"
     },
@@ -417,12 +444,13 @@
       "also": [
         "net flow"
       ],
-      "page": "token-flow",
-      "says": "The tokens a game moves along each connection, from the agent who stakes to the node staked on."
+      "page": "measuring-tokens",
+      "says": "The tokens a game moves along each connection, from the agent who stakes to the node staked on.",
+      "anchor": "measuring-the-flow-token-flow-lightning-and-circulation"
     },
     {
       "name": "lightning",
-      "page": "token-flow",
+      "page": "measuring-tokens",
       "says": "A closed loop of the flow of a game: tokens that go round and come back where they started.",
       "anchor": "lightning-tokens-that-go-round"
     },
@@ -434,7 +462,7 @@
     },
     {
       "name": "circulation",
-      "page": "token-flow",
+      "page": "measuring-tokens",
       "says": "The part of a flow that goes round in loops, as against the part that runs from sources to sinks.",
       "anchor": "flows-that-go-round"
     },
@@ -449,33 +477,34 @@
     },
     {
       "name": "lineage",
-      "page": "genotype",
+      "page": "measuring-evolution",
       "says": "A line of descent: the agents whose genotypes go back to one ancestor.",
       "anchor": "families"
     },
     {
       "name": "common ancestor",
-      "page": "genotype",
+      "page": "measuring-evolution",
       "says": "The genotype every living agent descends from, and how far back it lies.",
       "anchor": "the-common-ancestor-of-the-living"
     },
     {
       "name": "brain diversity",
-      "page": "genotype",
+      "page": "measuring-evolution",
       "says": "How many different brains, or genotypes, a world holds.",
       "anchor": "brain-diversity"
     },
     {
       "name": "frame",
-      "page": "frames-and-stats",
+      "page": "runs-and-records",
       "says": "A whole world as a run records it after one phase: every agent, its tokens and connections.",
       "not": [
         "preferred frame"
-      ]
+      ],
+      "anchor": "what-a-run-records"
     },
     {
       "name": "settled life",
-      "page": "median-and-quantiles",
+      "page": "statistics",
       "says": "A world from iteration 500 to its end, after its youth, where it is measured.",
       "anchor": "the-settled-life-of-a-world"
     },
@@ -484,28 +513,31 @@
       "also": [
         "quantile"
       ],
-      "page": "median-and-quantiles",
-      "says": "The middle value: half of the numbers lie below it and half above."
+      "page": "statistics",
+      "says": "The middle value: half of the numbers lie below it and half above.",
+      "anchor": "many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread"
     },
     {
       "name": "correlation",
-      "page": "correlation",
-      "says": "Whether two quantities go up and down together, from −1 to 1."
+      "page": "statistics",
+      "says": "Whether two quantities go up and down together, from −1 to 1.",
+      "anchor": "two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes"
     },
     {
       "name": "autocorrelation",
-      "page": "autocorrelation",
-      "says": "How much a world's value now still says about its value some iterations later."
+      "page": "statistics",
+      "says": "How much a world's value now still says about its value some iterations later.",
+      "anchor": "how-long-a-world-remembers-autocorrelation-and-the-power-spectrum"
     },
     {
       "name": "mobility",
-      "page": "gini-coefficient",
+      "page": "measuring-tokens",
       "says": "Whether the rich stay rich, or who holds the wealth keeps changing.",
       "anchor": "mobility"
     },
     {
       "name": "participation ratio",
-      "page": "effective-number",
+      "page": "statistics",
       "says": "How many directions a cloud of points really uses.",
       "anchor": "how-many-directions-a-cloud-of-points-uses"
     },
@@ -514,36 +546,37 @@
       "also": [
         "Kaplan–Meier"
       ],
-      "page": "age-and-lifetime",
+      "page": "measuring-lives",
       "says": "The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.",
       "anchor": "survival-curves-kaplanmeier"
     },
     {
       "name": "bootstrap",
-      "page": "bootstrap",
-      "says": "How sure a number is, found by redrawing the worlds it came from many times."
+      "page": "statistics",
+      "says": "How sure a number is, found by redrawing the worlds it came from many times.",
+      "anchor": "how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds"
     },
     {
       "name": "permutation test",
-      "page": "bootstrap",
+      "page": "statistics",
       "says": "Whether a difference could be chance, found by shuffling which world belongs to which condition.",
       "anchor": "permutation-tests"
     },
     {
       "name": "Wilson interval",
-      "page": "bootstrap",
+      "page": "statistics",
       "says": "The range a share probably lies in, when it was counted in only a few worlds.",
       "anchor": "the-wilson-interval"
     },
     {
       "name": "logarithmic axis",
-      "page": "correlation",
+      "page": "statistics",
       "says": "An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.",
       "anchor": "logarithmic-axes-and-power-laws"
     },
     {
       "name": "Muller plot",
-      "page": "genotype",
+      "page": "measuring-evolution",
       "says": "A chart of how lines of descent grow, shrink and replace each other over time.",
       "anchor": "muller-plots"
     },
@@ -552,7 +585,7 @@
       "also": [
         "R²"
       ],
-      "page": "correlation",
+      "page": "statistics",
       "says": "The straight line that fits a cloud of points best, and how much of their spread it explains.",
       "anchor": "fitting-a-straight-line"
     },
@@ -573,14 +606,15 @@
     },
     {
       "name": "power spectrum",
-      "page": "autocorrelation",
+      "page": "statistics",
       "says": "How much of a series' wandering comes at each speed, from slow to fast.",
       "anchor": "the-power-spectrum-of-a-time-series"
     },
     {
       "name": "effective number",
-      "page": "effective-number",
-      "says": "How many kinds there really are, when kinds are counted by how much of the population they hold."
+      "page": "statistics",
+      "says": "How many kinds there really are, when kinds are counted by how much of the population they hold.",
+      "anchor": "effective-numbers-how-many-kinds-and-how-many-directions"
     },
     {
       "name": "fractional factorial",

@@ -22,7 +22,7 @@ it exactly and works an example. The page teaches with the smaller worlds.
 
 After every phase the world is recorded as a frame. From every frame a
 **row** of statistics is computed
-([What a run records](frames-and-stats.md)). It holds the number of agents,
+([What a run records](runs-and-records.md#what-a-run-records)). It holds the number of agents,
 of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), how unequal the tokens are, how many agents starved, and so
 on. A row with `phase` = 1
 describes the world just after a reproduction phase, one with `phase` = 2
@@ -33,7 +33,7 @@ world **at the end of each iteration**. Births are the exception. They are
 counted in the rows of phase 1, where they happen.
 
 Most statistics are computed for every row. Those that need a walk through
-the whole network, such as [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), the core, [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours.") and distances, are
+the whole network, such as [bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut "A connection that lies on no loop: cut it and the network falls into two pieces."), the core, [clustering](measuring-networks.md#clustering "How often an agent's neighbours are also each other's neighbours.") and distances, are
 computed every 25 iterations.
 
 ## Step 2 · One world: means over stretches
@@ -56,7 +56,7 @@ where *m* is the number of rows in the stretch that hold the statistic.
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Plot `nodes` of the rows with `phase` = 2.
 > 2. For a = 100, 200, …, 2,900, average `nodes` over a ≤ `iteration` ≤ a + 99.
@@ -69,12 +69,12 @@ rest of its life
 Then it **wanders** ([The life of a B1 world](a-worlds-life.md)). So when the
 notebook asks where a world **settles**, it takes the mean from iteration
 500 to its end: its
-[settled life](median-and-quantiles.md#the-settled-life-of-a-world).
+[settled life](statistics.md#the-settled-life-of-a-world).
 
 ## Step 3 · Many worlds: lines, bands and dots
 
-Every world is a matter of chance. The [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") decides the starting ring, the
-[founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") and every random decision after. So the notebook makes many
+Every world is a matter of chance. The [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") decides the starting ring, the
+[founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") and every random decision after. So the notebook makes many
 worlds: thirty for each [setting](settings.md "One number or switch of a run's rules, fixed before it starts."), with seeds 1, 2, …, 30, unless a page says
 otherwise. There are three per size in
 [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md), and ten
@@ -88,7 +88,7 @@ per condition for [B2](b1-and-b2.md "The second baseline: B1 with the rules that
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take every run's rows with `phase` = 2 and `nodes`; average them in stretches of 25 iterations; draw one line per run.
 >
@@ -98,8 +98,8 @@ Thirty lines are hard to read. So the notebook usually draws them as a
 **band**. In each short stretch of iterations, the median of the worlds is
 the line. The middle half of the worlds is the darker band, and nine worlds
 in ten the paler band
-([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure);
-[Median and quantiles](median-and-quantiles.md)).
+([Bands](statistics.md#bands-many-worlds-in-one-figure);
+[Median and quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread)).
 
 <!-- figure measure/bands -->
 ![The same 30 worlds, as a band](../figures/measure/bands.svg)
@@ -109,7 +109,7 @@ in ten the paler band
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take every run's rows with `phase` = 2 and `nodes`.
 > 2. Cut the 3,000 iterations into 600 stretches of 5 and take each world's mean in each stretch.
@@ -133,14 +133,14 @@ hide each other; their sideways position means nothing.
 - The **spread** of worlds is the standard deviation of their levels divided
   by their mean: *c* = *s*/*x̄*. A spread of 0.17 means that worlds typically
   lie about a sixth of the mean away from it
-  ([Spread between worlds](median-and-quantiles.md#spread-between-worlds)).
+  ([Spread between worlds](statistics.md#spread-between-worlds)).
 - Whether two quantities go together is their **correlation** *r*, between
-  −1 and 1 ([Correlation](correlation.md)).
+  −1 and 1 ([Correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes)).
 - How long a world **remembers** its level is the correlation of the world
-  with itself some iterations later ([Autocorrelation](autocorrelation.md)).
+  with itself some iterations later ([Autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum)).
 - How much of all variation lies **between** worlds, and how much **within**
   each over time, is split by comparing two variances
-  ([Between and within](variance-split.md#between-worlds-and-within-them)).
+  ([Between and within](statistics.md#between-worlds-and-within-them)).
 
 ## Step 5 · Comparing two kinds of world
 
@@ -150,32 +150,32 @@ whether the two groups of levels differ by more than chance would make them
 differ.
 
 1. **The difference and its interval.** Take the difference of the two
-   means, with a 95% interval from the [bootstrap](bootstrap.md). Resample
+   means, with a 95% interval from the [bootstrap](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds). Resample
    the worlds with replacement 10,000 times, and keep the middle 95% of the
    resampled differences. Worlds made with the same seed are paired.
 2. **Could it be chance?** A
-   [permutation test](bootstrap.md#permutation-tests) answers. If the
+   [permutation test](statistics.md#permutation-tests) answers. If the
    setting made no difference, the labels "baseline" and "changed" would be
    arbitrary. So shuffle them 10,000 times, and see how often a difference at
    least as large appears. That share is the *p*-value.
 3. **Enough seeds?** A change of a given size needs a certain number of
    worlds per condition to be found four times in five
-   ([How many seeds](bootstrap.md#how-many-seeds-an-experiment-needs)).
+   ([How many seeds](statistics.md#how-many-seeds-an-experiment-needs)).
    Results from fewer than thirty seeds per condition are called
    **indicative**, not effects.
 
 Worlds that died out are not averaged in. They are an outcome of their own,
-counted with a [Wilson interval](bootstrap.md#the-wilson-interval) for the
+counted with a [Wilson interval](statistics.md#the-wilson-interval) for the
 share that died.
 
 ## Step 6 · How long things last
 
-For lifetimes, of agents or of [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), the notebook draws the share that
+For lifetimes, of agents or of [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), the notebook draws the share that
 lasted **at least** *L* iterations, for every *L*. That is a
-[Kaplan–Meier survival curve](age-and-lifetime.md#survival-curves-kaplanmeier),
+[Kaplan–Meier survival curve](measuring-lives.md#survival-curves-kaplanmeier),
 which counts lives still going at the end of a run correctly. Such curves,
 and many distributions, are drawn on
-[logarithmic axes](correlation.md#logarithmic-axes-and-power-laws).
+[logarithmic axes](statistics.md#logarithmic-axes-and-power-laws).
 
 ## Every figure can be made again
 
@@ -189,11 +189,11 @@ makes the figures does nothing the recipe does not say. It is
 
 ## Where to go next
 
-- [What a run records](frames-and-stats.md): the frames and rows every step
+- [What a run records](runs-and-records.md#what-a-run-records): the frames and rows every step
   starts from.
-- [Many worlds at once](median-and-quantiles.md): the median, bands, the
+- [Many worlds at once](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread): the median, bands, the
   settled life and the spread, exactly.
-- [How sure can we be?](bootstrap.md): the bootstrap, permutation tests and
+- [How sure can we be?](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds): the bootstrap, permutation tests and
   how many seeds.
 - [How much does the seed decide?](how-much-does-the-seed-decide.md): all of
   these at work on thirty worlds.
@@ -201,7 +201,7 @@ makes the figures does nothing the recipe does not say. It is
 <!-- turns -->
 ---
 
-← [The lab, the engine and pilots](the-lab.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) →
+← [Every world side by side](every-world-side-by-side.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) →
 
 > [!info]- Pages that link here (1)
 > [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)

@@ -4,7 +4,7 @@
 > - Every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), every [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") is staked somewhere. Where does it go, and does
 >   anything come back?
 > - What do the notebook's measures of flow say together: the budget of a
->   game, the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), the [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice."), the [circulation](token-flow.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), the groups, the estate
+>   game, the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), the [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice."), the circulation, the groups, the estate
 >   of the dead?
 
 ## In short
@@ -22,7 +22,7 @@ whether a connection must carry tokens to survive, and who inherits the dead.
 
 Picture every agent cutting its tokens into equal heaps: one for its own node,
 and one for each neighbour's. That is the **even split**
-([The even split](even-split.md)). If every agent did only that, the tokens of
+([The even split](measuring-tokens.md#the-even-split)). If every agent did only that, the tokens of
 a world would wander like a drop of ink in water: each token, game after game,
 stays or steps to a neighbour, each with the same chance. Such a wandering is
 a **random walk**, and it has a resting state that can be worked out exactly.
@@ -62,12 +62,12 @@ a stake. In B1 a connection that carries nothing is cut, every one of the
 A random walk on a network comes to rest when every agent holds tokens in
 proportion to its connections plus one: **an agent's share settles near
 (connections + 1) / Σ(connections + 1)**. B1's games follow that walk with a
-slope of 0.94, in the worlds without a giant [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")
+slope of 0.94, in the worlds without a giant [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.")
 ([The game as a random walk](where-the-tokens-flow.md#the-game-as-a-random-walk)).
 
 So in B1, wealth is a matter of place. Tokens and connections go together (a
-rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of +0.56). A rich agent is still rich ten games later
-(+0.78). The [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.") hold about two fifths of the tokens, 39% to 44%
+rank [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of +0.56). A rich agent is still rich ten games later
+(+0.78). The richest tenth hold about two fifths of the tokens, 39% to 44%
 ([Rich agents are connected agents](where-do-the-tokens-go.md#rich-agents-are-connected-agents),
 [What goes with what](what-goes-with-what.md#the-agents)).
 
@@ -106,7 +106,7 @@ The two [baselines](b1-and-b2.md "The stated rules an experiment starts from and
 
 Within one game almost nothing goes round. Cancel every stake against the one
 coming back, and look for loops in what is left. A greedy search finds 0.3%
-of the [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") in loops, and the conservation of tokens allows at most 16%:
+of the net flow in loops, and the conservation of tokens allows at most 16%:
 the net flow of a game runs downhill
 ([Do tokens go round?](where-the-tokens-flow.md#do-tokens-go-round),
 [The flow, in round figures](where-the-tokens-flow.md#the-flow-in-round-figures)).
@@ -126,7 +126,7 @@ One rule decides how much goes round in the first place: **whether a
 connection must carry tokens to survive.** Where it must (B1, and B2 with
 every unused link lapsing), the greedy search finds about a sixth of the
 staked flow on loops: 13% in B1 at 100,000 tokens, 17% at 10,000, and 11% to
-28% in the B2 [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") whose links lapse. In B2, whose connections survive
+28% in the B2 [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") whose links lapse. In B2, whose connections survive
 unused if their ends share two neighbours, it finds 4.5%, and the share falls
 over a world's life
 ([Every world](where-the-tokens-flow.md#every-world)).
@@ -150,7 +150,7 @@ over a world's life
 
 ## The estate of the dead
 
-The dead leave their tokens to the living ([The estate of the dead](estate.md)).
+The dead leave their tokens to the living ([The estate of the dead](measuring-lives.md#the-estate-of-the-dead)).
 In B1 that is 1.3% of the tokens in every game, handed out one token at a
 time, and it levels the world: over a world's life, the estate goes with
 falling inequality
@@ -216,5 +216,5 @@ births fills a world**, to half as many agents again, and poorer ones
 [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) →
 
 > [!info]- Pages that link here (4)
-> [The estate of the dead](estate.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md)
+> [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md)
 <!-- /turns -->

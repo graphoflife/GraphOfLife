@@ -16,7 +16,7 @@ spaces: about three-dimensional by the room they hold, but two-dimensional to
 a random walker. The second baseline's rules keep a world whole but fold it
 into a near small world; nothing that lasts like a particle has been found.
 Three rules still reach across a whole world at once; making them local is
-what physics asks, and what [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") asked for too.
+what physics asks, and what [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") asked for too.
 
 ## The second aim
 
@@ -40,7 +40,7 @@ asks the question this raises: a question the notebook can measure.
 > An analogy says "this might work like that". It does not say that it does.
 > Tokens are not energy, and [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are not particles. A [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") that "decides"
 > is a function: in the first baseline it turns 154 numbers into 45 others
-> ([What a brain sees](brain-inputs.md)). Every analogy below is offered as a
+> ([What a brain sees](rules-in-detail.md#what-a-brain-sees)). Every analogy below is offered as a
 > way to ask a sharper question, and the page says where each one stops.
 
 Two sets of rules recur on this page
@@ -64,7 +64,7 @@ away.
 Graph of Life takes the same view. There is no space outside the network.
 Agents are not *somewhere*; they are joined. The distance between two agents
 is the number of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") on the shortest path between them
-([Path length](path-length.md)), and nothing else.
+([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)), and nothing else.
 
 A network suits this well, because it can take any shape: a line, a sheet, a
 lattice of cubes, a tree, a tangle. Nobody chooses which shape a world takes:
@@ -76,14 +76,14 @@ network that, seen from far away, looks like a space of three dimensions?**
 A network has no coordinates, but it has distances, and distances are enough.
 Here are four ways to measure a dimension. On a lattice of *d* dimensions,
 each gives exactly *d*
-([Three ways to measure a network's dimension](ball-dimension-and-curvature.md)).
+([Three ways to measure a network's dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension)).
 
 - **How balls grow.** Count the agents within *r* steps of an agent: its
   *ball*. In *d* dimensions, their number grows as *r*^*d*.
 - **How wide a lump is.** *N* agents packed into *d* dimensions span about
   *N*^(1/*d*) steps. A cube of a thousand points is ten points wide.
 - **How many boxes cover it.** In *d* dimensions, boxes half as wide take
-  2^*d* times as many ([Box dimension](ball-dimension-and-curvature.md#box-dimension)).
+  2^*d* times as many ([Box dimension](measuring-space.md#box-dimension)).
 - **How a random walker returns.** A walker that wanders at random is back
   where it started after *t* steps with a probability that falls as
   *t*^(−*d*/2). This is the **spectral dimension**, the one quantum-gravity
@@ -126,14 +126,14 @@ game, steady from 3 steps to 14, and 3.0 to 3.2 over five moments of their
 settled lives ([Dimensions at scale](dimensions-at-scale.md)). By how a random
 walker spreads, they read about 2. Networks with
 the same connections at every agent, wired at random, read neither. These
-[random twins](random-twin.md) are *small worlds*, in which everyone is a few
+[random twins](measuring-space.md#the-random-twin-is-a-world-a-space) are *small worlds*, in which everyone is a few
 steps from everyone.
 
 That the worlds are spaces at all is a surprise worth taking seriously, and
 also with care. By box covering, the worlds measure about 1.9. They are full
 of stars, hubs with many agents of one connection around them, and of trees.
 And about a quarter of their connections (a third at 10,000 tokens) are
-**bridges**: cut one, and the network falls in two ([Bridges](bridges.md)).
+**bridges**: cut one, and the network falls in two ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)).
 Some of them, at times, hold half a world to the rest
 ([How a world breaks](how-a-world-breaks.md)).
 
@@ -153,9 +153,9 @@ world.
 
 The tools are ready. There are the dimensions above. There is the cut risk:
 the largest share of a world that one bridge holds to the rest
-([Cut risk](bridges.md#cut-risk)). And there is the spectral gap, which says
+([Cut risk](measuring-networks.md#cut-risk)). And there is the spectral gap, which says
 how hard a network is to cut in two
-([The spectral gap](path-length.md#the-spectral-gap)). For a *d*-dimensional
+([The spectral gap](measuring-networks.md#the-spectral-gap)). For a *d*-dimensional
 body of *N* agents, it shrinks as *N*^(−2/*d*); for a network with cheap
 cuts, it is tiny. One hint came early: bigger worlds have more loops per
 connection, and fewer leaves
@@ -208,11 +208,11 @@ could reach from it: a sphere that grows at the speed of light. This is
 Graph of Life is built to be local. Every iteration has two phases, one of
 reproduction and one of the game
 ([One iteration, step by step](one-iteration.md)). In one phase, an agent
-reads only a few things ([What a brain sees](brain-inputs.md)):
+reads only a few things ([What a brain sees](rules-in-detail.md#what-a-brain-sees)):
 
 - itself and its neighbours;
 - a summary of each neighbour's own neighbourhood;
-- messages written by itself and its neighbours ([Messages](messages.md)). In
+- messages written by itself and its neighbours ([Messages](rules-in-detail.md#messages)). In
   B1 they are written in a first look of the same phase, before anyone acts;
   in B2, in the phase before.
 
@@ -254,8 +254,8 @@ Three rules reach across the whole world at once.
    tokens are conserved, but they jump: a token can leave one end of a world
    and arrive at the other in one step.
 3. **The one random stream.** Every random number in a world is drawn from a
-   single sequence, in a fixed order ([Seeds and the random stream](random-numbers.md)).
-   That holds for every tie, every probabilistic decision and every [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.").
+   single sequence, in a fixed order ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
+   That holds for every tie, every probabilistic decision and every mutation.
    This is what makes a run exactly repeatable. But it also couples
    everything. If one agent anywhere takes one more random number, every
    later draw everywhere shifts. So two worlds that differ in one detail
@@ -280,7 +280,7 @@ found. Physics and evolution, asked separately, point at the same rules.
 B2 took another road for the first: its worlds cannot split at all, rather
 than living on apart. The tokens of the dead have been given to other heirs,
 such as the newborns, their parents or the poorest
-([The estate of the dead](estate.md)). Since 24 October 2026 they can also
+([The estate of the dead](measuring-lives.md#the-estate-of-the-dead)). Since 24 October 2026 they can also
 flow to the nearest living, step by step through the network
 ([`redistribution`](settings.md#redistribution) `local`), and round 3 of the
 random screen drew that rule in some of its worlds: they are the most unequal
@@ -352,7 +352,7 @@ calculator, the brain, is not given by any equation: it evolves. And yet, in
 B1, what the agents do comes to something an equation would give. They spread
 their stakes almost evenly over themselves and their neighbours
 ([Where tokens flow](where-the-tokens-flow.md)). And an
-[even split](even-split.md) is exactly one step of the **heat equation**:
+[even split](measuring-tokens.md#the-even-split) is exactly one step of the **heat equation**:
 
 ![The even split as a step of the heat equation](../diagrams/finite-difference.svg)
 
@@ -381,7 +381,7 @@ games.
 Do the brains, then, compute the heat equation? No.
 [What the brains are like](what-the-brains-are-like.md) found the evolved
 brains of B1 nearly blind. A change in what they see moves their outputs by
-about a thousandth of its size. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, 42% of agents (58% at
+about a thousandth of its size. In the median world, 42% of agents (58% at
 10,000 tokens) give every candidate a score of zero or below. The rules then
 split their tokens exactly evenly. The others give every candidate nearly the
 same score.
@@ -391,7 +391,7 @@ rules make of it.
 
 The brains of B2, which see, are different. They go all in on one node in
 nearly every case, so the even split hardly arises there
-([How often it happens](even-split.md#how-often-it-happens)).
+([How often it happens](measuring-tokens.md#how-often-it-happens)).
 
 ### Heat, not waves
 
@@ -405,7 +405,7 @@ particles are averaged.
 So a question: **can rules make tokens move like waves**, sloshing back and
 forth with a characteristic frequency, rather than spread like heat? A
 frequency would show as a peak in a power spectrum
-([The power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)).
+([The power spectrum](statistics.md#the-power-spectrum-of-a-time-series)).
 The spectrum of the number of agents shows none
 ([Power laws, real and apparent](power-laws-real-and-apparent.md)). In B1's
 worlds of 100,000 tokens it falls as *f*^−1.80, close to the smooth slope of a
@@ -425,7 +425,7 @@ structure out of a nearly uniform start: atoms, stars, galaxies.
 
 A world of Graph of Life begins the same way, at least in outline
 ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
-In a world of 10,000 tokens, a hundred [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") hold a hundred tokens each, in
+In a world of 10,000 tokens, a hundred founders hold a hundred tokens each, in
 a ring: small, dense in tokens and uniform. Then the network, which is space
 here, grows explosively. There are about 75 births per hundred agents in each
 of the first ten iterations.
@@ -439,7 +439,7 @@ Then comes a crash and a bottleneck. The families fall from a hundred to about
 twenty, and every later brain descends from a single founder. Then comes
 structure: inequality, hubs, and after about a hundred iterations a world that
 has settled down. (The notebook measures a world from iteration 500 on, its
-[settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.").)
+settled life.)
 
 The worlds of 100,000 tokens do the same ten times over, a little faster.
 Their bottleneck keeps about 400 of their 1,000 founders' lines. And three of
@@ -463,7 +463,7 @@ only when very many are taken together.
 Graph of Life's agents are its elementary particles. Every one follows the
 same rules, and differs only in its state: its tokens, its connections, its
 brain. And its worlds are statistically homogeneous, nearly the same at every
-size. Inequality, [home stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it.") and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") per agent are the same in worlds
+size. Inequality, [home stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it.") and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") per agent are the same in worlds
 of five hundred agents and of sixty thousand
 ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#is-a-big-world-the-same-kind-of-world)).
 Births and deaths run a little faster in larger worlds: 13 to 21% more per
@@ -619,7 +619,7 @@ Nothing yet lasts in the way a glider does.
 - **Patterns that travel.** When an agent takes a neighbour's node with at
   least half of its tokens, its wealth and a copy of its brain move together.
   Such moves form chains far more often than chance would. In B1 they are
-  *gliders*, rich agents moving on; in B2, *puffers*, a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself
+  *gliders*, rich agents moving on; in B2, *puffers*, a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself
   outward. But no chain keeps a direction; each wanders like a random walk
   ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)).
 - **A beat.** The nodes that launch such chains fire without a rhythm. And the
@@ -718,7 +718,7 @@ with new connections. There, the tokens have less say over the network.
 The second aim adds its own questions, and its own pages, under
 [Space and dimension](../README.md#space-and-dimension) in the contents.
 Three are studies of worlds already played; four are plans that wait for
-rules the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") does not have yet:
+rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") does not have yet:
 
 - [Dimensions at scale](dimensions-at-scale.md). Both rulers at every size
   the notebook has, beside bodies cut from grids: within a world the
@@ -862,6 +862,6 @@ rules the [engine](the-lab.md "The program that runs an experiment's plan as run
 
 **Also about:** [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (24)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md)
+> [!info]- Pages that link here (23)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md)
 <!-- /turns -->

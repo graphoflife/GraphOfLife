@@ -32,7 +32,7 @@ Imagine nudging what a brain sees, and watching how far its decisions move. In
 B1, the first baseline, they hardly move at all. A change in what a brain sees
 reaches what it does about a thousand times smaller. How much of a change gets
 through is the brain's **gain**: 0.0015 in the evolved worlds, and 0.0006 in a
-[founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") ([What the brains are like](what-the-brains-are-like.md)).
+founder ([What the brains are like](what-the-brains-are-like.md)).
 
 The reason is the depth of B1's brain. What it sees passes through five hidden
 layers of units before it decides. Each layer ends in a sigmoid, an S-shaped
@@ -42,13 +42,13 @@ fades through layers](the-brain.md#how-a-signal-fades-through-layers)). Whatever
 B1, it has done to a brain that responds to almost nothing. Its decisions are
 near enough constants.
 
-[Open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") needs agents whose behaviour depends on their world: kin
+[Open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") needs agents whose behaviour depends on their world: kin
 recognised, partners answered, threats met. So the first step towards it is to
 give the brains sight, and the cheapest way is to take layers away. With one
 hidden layer of 16 units, a founder's gain is about 0.2, some three hundred
 times a B1 founder's 0.0006. With no hidden layer at all, it is about 1:
 
-| hidden layers | founders' gain ([median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 30 brains) |
+| hidden layers | founders' gain ([median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of 30 brains) |
 |---|---|
 | 50, 45, 40, 35, 30 (B1) | 0.0006 |
 | 16, 16 | 0.04 |
@@ -56,7 +56,7 @@ times a B1 founder's 0.0006. With no hidden layer at all, it is about 1:
 | none | 1.0 |
 
 A second change goes with it. In B1 every brain may change after every game,
-wherever it sits ([How a brain changes](mutation.md)). So an adaptation is
+wherever it sits ([How a brain changes](rules-in-detail.md#how-a-brain-changes)). So an adaptation is
 worn away in the very agent that carries it, generation or not. The setting
 [`mutate_on_replication`](settings.md#mutate_on_replication) makes a brain
 change only where biology's do: when it is copied, into a child or into a node
@@ -64,7 +64,7 @@ its owner has won.
 
 ### What the pilots showed
 
-[Pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, at 5,000 tokens for 1,500 iterations, compared B1
+Pilots of two seeds each, at 5,000 tokens for 1,500 iterations, compared B1
 with brains of one hidden layer, with and without change only when copied.
 
 **The worlds broke.** B1's two worlds never fell below 74 and 397 agents.
@@ -80,10 +80,10 @@ puts it where it matters: on one neighbour, or two. And a [connection](the-world
 carries no tokens in a game is cut at the game's end ([One iteration, step by
 step](one-iteration.md)). So the seeing worlds kept few connections. The
 worlds that crashed had as few as 1.3 to 1.9 per agent, against 3.2 in B1.
-Only 27–39% of their agents were in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the agents on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") or between
+Only 27–39% of their agents were in the 2-core, the agents on loops or between
 them, against 54–55%.
 
-A network that is mostly trees is a network of [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."). When one of them is
+A network that is mostly trees is a network of bridges. When one of them is
 cut, everything beyond it is no longer joined to the largest piece. Then the
 cull, which keeps only the largest piece after each phase ([the
 cleanup](one-iteration.md#cleanup)), removes it whole. In one pilot world a
@@ -92,7 +92,7 @@ left 562.
 
 **And what was left was ruled by a few.** In a seeing world, the
 best-connected agent was joined to 15–35% of the others: more than in B1's two
-pilot worlds (9–12%). But B1 can grow such [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") too. In one of the ten B1
+pilot worlds (9–12%). But B1 can grow such hubs too. In one of the ten B1
 worlds of the experiment below, the best-connected agent was joined to 55% of
 the others (the stars of [The largest and the
 smallest](the-largest-and-the-smallest.md)).
@@ -101,7 +101,7 @@ smallest](the-largest-and-the-smallest.md)).
 two that fell furthest. A stricter variant changed a brain only when it was
 copied into a newborn, never into a won node, and it shows what heredity alone
 cannot do. In one of its worlds births stopped, so change stopped, and the
-world froze into a single [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). Its agents aged by one every iteration,
+world froze into a single [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). Its agents aged by one every iteration,
 and every node was taken by its own kin each game. Longer lives, for once,
 meant that nothing was happening.
 
@@ -136,7 +136,7 @@ asked what, exactly, kills a world.
 > [!example]- How to make this figure
 > **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `nodes` of the rows with `phase` = 2, one line per run.
 > 2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).
@@ -152,8 +152,8 @@ one hidden layer and change only when copied, eight of ten died out, at
 iterations 219, 292, 415, 454, 674, 820, 975 and 1,018. The two that lived
 fell to 96 and 181.
 
-"Died out" here means fell to 20 agents or fewer, where the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") stops a run as
-extinct ([When a world ends](extinction.md)). That rule ends some worlds that
+"Died out" here means fell to 20 agents or fewer, where the lab stops a run as
+extinct ([When a world ends](rules-in-detail.md#when-a-world-ends)). That rule ends some worlds that
 would have lived ([How does a world's size follow its
 tokens?](how-does-a-worlds-size-follow-its-tokens.md)). The pilot world with
 one hidden layer that fell to a single agent at iteration 547 was seed 1, run
@@ -167,7 +167,7 @@ on without the rule, and it grew back.
 > [!example]- How to make this figure
 > **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the smallest `nodes` of the rows with `phase` = 2 and `iteration` ≥ 50; a run that ended extinct counts 0.
 > 2. Count the worlds below 50 in each condition.
@@ -197,7 +197,7 @@ such early culls too. But the worlds that died out did not die of one of them:
 each shrank over a hundred iterations or more.
 
 **The network kills in every iteration, in every world.** No world of any
-condition passes the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of [How to tell a world that keeps
+condition passes the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of [How to tell a world that keeps
 evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers).
 B1's median world had 51% of its agents in the 2-core, and a link whose loss
 cut off 8% of it. The seeing worlds had 55% and 11%. With change only when
@@ -217,7 +217,7 @@ as starved (0.5%). In the median world with one hidden layer it removed 5.3%.
 > [!example]- How to make this figure
 > **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 and 200 ≤ `iteration` ≤ 1,500, and each world's median of each.
 >
@@ -240,7 +240,7 @@ world that shrinks to a few dozen agents is a few unlucky games from the end.
 > [!example]- How to make this figure
 > **Runs.** The 30 runs of Experiment 13 — at 5,000 tokens, seeds 1 to 10, 1,500 iterations — in three conditions: the baseline B1 (`B1-5000-s001` … `-s010`, shared with Experiment 12), its brains with one hidden layer of 16, and those brains changed only when copied. They are made with `python3 gol_lab.py run E13`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `births` / `nodes_before` of the rows with `phase` = 1, one line per run.
 > 2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).
@@ -251,7 +251,7 @@ world that shrinks to a few dozen agents is a few unlucky games from the end.
 **And seeing brains can stop having children.** In B1, whether an agent has a
 child is close to a constant of its brain, because the brains barely see. With
 one hidden layer it is a decision that depends on what the agent sees, and
-evolution can change it a great deal. To see what it did, every [era](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?")'s brains
+evolution can change it a great deal. To see what it did, every [era](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?")'s brains
 were put back into the same world: their own run's founders' world, 50 agents
 with 100 tokens each. There they played ten iterations with mutation off.
 
@@ -286,7 +286,7 @@ Why would brains give up their children? A brain spreads mostly by winning
 nodes, not by having children: seventeen times more in B1 ([Questioning the
 mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)). And tokens
 given to a child are tokens not staked. So giving up children may have been
-selected, because a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") gains from keeping its tokens while the world it
+selected, because a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") gains from keeping its tokens while the world it
 lives in drains. Or a decision that had become easy to change may simply have
 drifted to zero, in a world already small. These runs cannot say which.
 
@@ -334,7 +334,7 @@ seven marks that a healthy network meets:
 - no connection whose loss cuts off more than 1%;
 - no agent joined to more than 5% of the others;
 - 3 to 12 connections per agent;
-- a [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4.
+- a [ball dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4.
 
 And every rule has to be **local**: it may only look at an agent and its
 neighbours.
@@ -353,7 +353,7 @@ then dies with probability 0.02. The probability of a child is set so that
 births balance deaths at about 1,500 agents. While there are fewer, it is 0.05
 higher, so that the world fills quickly. The world starts as a ring of 50
 agents and runs 300 iterations. An agent lives 50 iterations on average, so
-that is six [lifetimes](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), and nothing of the start is left. What the network
+that is six lifetimes, and nothing of the start is left. What the network
 looks like then is what the rules of space make by themselves. A run takes six
 seconds, and each set of rules below was run with ten seeds.
 
@@ -476,7 +476,7 @@ agents, because the cull has nothing left to do.
 Mending in a **chain**, the same rule without the link back to the first
 group, keeps the world in one piece just as well, by the same argument. But
 the network it makes is different: its dimension falls to 2.3, and its
-[diameter](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") doubles to 38 steps. Every death replaces a star (*u* at the centre,
+diameter doubles to 38 steps. Every death replaces a star (*u* at the centre,
 its groups around it) with a path through the groups. A world in which stars
 keep turning into paths is stretched thin, towards a line. The ring replaces
 the star with a cycle instead: every two groups are at most half the ring
@@ -549,7 +549,7 @@ never touched.
 ranks its candidates by what it sees of them. Whatever it favours, agents that
 already have many links are offered as candidates more often, because they are
 the neighbours of more agents. That is preferential attachment, and it grows
-hubs ([Preferential attachment](degree.md#preferential-attachment-and-its-kernel)). In pilots where
+hubs ([Preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel)). In pilots where
 the brains chose a newborn's two extra links, the best-connected agent was
 joined to 30% of the world.
 
@@ -572,7 +572,7 @@ these changes:
 
 - brains of one hidden layer of 16 units, which change only when copied
   ([above](#brains-that-see-and-worlds-that-break));
-- shorter [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."): 8 numbers, and no extra look before acting;
+- shorter messages: 8 numbers, and no extra look before acting;
 - an agent's stake on its own node counting 1.5 times
   ([`incumbency`](settings.md#incumbency));
 - the rules of space of this section: links at birth 2, mending in a ring,
@@ -629,7 +629,7 @@ came apart and the cull removed every piece but the largest.
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Sum `orphaned` over the rows of both phases with 200 ≤ `iteration` ≤ 1,000.
 > 2. Add one, and draw a dot per world.
@@ -655,7 +655,7 @@ and the ball dimension was 3.45 to 4.19, 3.86 in the median world.
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every run take the rows with `phase` = 2 and 200 ≤ `iteration` ≤ 1,000, and the median of `coreShare`, `cutRisk`, `maxDegree` / `nodes`, `meanDegree` and `dimension`.
 > 2. No run records the worst cut by one agent, so read it off the frames: every 10th iteration from 200 to 1,000, rebuild the network after the game and take `GraphOfLifeSimple.worst_node_cut_share` (`oee.node_cut`); its median.
@@ -701,7 +701,7 @@ Each condition broke something different.
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `nodes` of the rows with `phase` = 2, one line per run.
 > 2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).
@@ -779,7 +779,7 @@ B2, and then tests it with Experiment 15.
 ### Ways to die
 
 In B1 an agent dies in one of four ways ([Births and the four ways to
-die](births-and-deaths.md)). It **starves**, holding no tokens, or it is **cut
+die](measuring-lives.md#births-and-the-four-ways-to-die)). It **starves**, holding no tokens, or it is **cut
 off** from the largest piece, after either of the two phases. B2 adds a fifth:
 it dies of **age**, when it has lived [`max_age`](settings.md#max_age)
 iterations. Winning a node does not kill anyone. It replaces the node's brain;
@@ -862,7 +862,7 @@ But the worlds found an exploit. One agent gathered 57% of all the tokens and
 staked all of them at home, where nobody could outbid them. It had child after
 child, while everyone else held a single token: a **queen**. With *h* = 1.5,
 as in B2, and a share kept at home, no queen formed in the pilots: the [Gini
-coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of tokens stayed near 0.5. Conquest settled between a few and
+coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of tokens stayed near 0.5. Conquest settled between a few and
 about ten per cent of the nodes a game.
 
 ### Old age
@@ -873,7 +873,7 @@ only its brain. An agent that cannot die holds its place forever. And in a
 world of fixed tokens, a world without deaths has no room for births.
 
 So in B2 every agent dies when it reaches age 100
-([`max_age`](settings.md#max_age)). Its tokens are shared out like any [estate](estate.md "The tokens a dead agent leaves, and who gets them."),
+([`max_age`](settings.md#max_age)). Its tokens are shared out like any estate,
 and its neighbourhood is mended. That makes a world's demography simple. Every
 agent lives exactly 100 iterations, so a world keeps its size only if one
 agent in a hundred has a child in every iteration. In the ten B2 worlds of
@@ -937,7 +937,7 @@ the pilots. The other fifty lived their 1,000 iterations.
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Read `nodes` from the rows of phase 2, for iterations 0 to 1,000.
 > 2. At each iteration, the median of the ten worlds, the middle half and nine in ten.
@@ -953,7 +953,7 @@ the pilots. The other fifty lived their 1,000 iterations.
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Read `births` from the rows of phase 1, divided by the agents that faced the phase (`nodes_before`), times 100, for iterations 0 to 1,000.
 > 2. At each iteration, the median of the ten worlds, the middle half and nine in ten.
@@ -978,7 +978,7 @@ die in the same iteration, and are replaced at once.
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 15 — B2 at 10,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: B2, and B2 with one rule of death changed. The ten worlds with nothing kept died out within 50 iterations and are not drawn. They are made with `python3 gol_lab.py run E15`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, one row per recorded phase (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Read `medianTokens` from the rows of phase 2, for iterations 100 to 1,000.
 > 2. At each iteration, the median of the ten worlds, the middle half and nine in ten.
@@ -1353,6 +1353,6 @@ held pilot worlds steady at about two thousand agents, six in ten of them poor
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network), [Changing the rules](../README.md#changing-the-rules), [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (40)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [The estate of the dead](estate.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The health bar](health-bar.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (36)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

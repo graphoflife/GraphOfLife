@@ -1369,6 +1369,12 @@ function test_book_progress_of_an_experiment() {
     + ' · Experiments 36 and 37</p>', Book.kicker(floor));
   assert(Book.kicker({ id: 'x', topics: ['size'], kind: 'term' }).endsWith('</a> · Term</p>'),
     'a page without an experiment did not say what kind of page it is');
+  // With parts, the part comes first, in its colour.
+  Book.index.parts = [{ id: 'worlds', title: 'What the worlds do', colour: '#4ccb60', topics: ['size'] }];
+  assert(Book.kicker(floor) === '<p class="book-kicker" style="--part: #4ccb60"><span class="book-kicker-part">'
+    + 'What the worlds do</span> · <a href="#" data-topic="size">Size and riches of a world</a>'
+    + ' · Experiments 36 and 37</p>', Book.kicker(floor));
+  delete Book.index.parts;
 
   assert(Book.eta(30) === 'under 2 min left');
   assert(Book.eta(600) === 'about 10 min left');
@@ -1393,20 +1399,35 @@ function test_the_notebook_lists_its_pages_as_the_reader_asks() {
         added: '2026-10-20', summary: '' },
     ] };
   const ids = groups => groups.map(([heading, list]) => `${heading}: ${list.map(p => p.id).join(' ')}`);
-  const view = { sort: 'topic', topic: '', kind: '', status: '', query: '' };
-  assert(ids(Book.listing(view)).join(' | ') === 'Wealth: gini | The game: flow even', ids(Book.listing(view)));
-  assert(ids(Book.listing({ ...view, topic: 'wealth' })).join(' | ') === 'Wealth: gini | The game: flow',
+  const view = { sort: 'part', topic: '', kind: '', status: '', query: '' };
+  // Without parts (an old index), the order by part shows nothing to group by.
+  assert(Book.listing(view).length === 0, 'an index without parts grouped pages by part');
+  // By part: each page under its home topic's part, the part's topics in order (the author, 2026-11-09).
+  Book.index.parts = [{ id: 'worlds', title: 'What the worlds do', colour: '#4ccb60', topics: ['game', 'wealth'] }];
+  assert(ids(Book.listing(view)).join(' | ') === 'What the worlds do: flow even gini', ids(Book.listing(view)));
+  assert(Book.listing(view)[0][2] === 'worlds', 'a part was listed without its id');
+  assert(ids(Book.listing({ ...view, topic: 'wealth' })).join(' | ') === 'What the worlds do: flow gini',
     'a page about a topic beside its home was left out of that topic');
+  assert(ids(Book.listing({ ...view, topic: 'part:worlds' })).join(' | ') === 'What the worlds do: flow even gini',
+    'a part asked for was not listed whole');
+  assert(Book.partOf(Book.chapter('flow')).id === 'worlds' && Book.partOf({ topics: ['elsewhere'] }) === undefined);
+  assert(Book.mark({ kind: 'experiment', status: 'draft' }) === 'plan'
+    && Book.mark({ kind: 'experiment', status: 'analysed' }) === 'experiment'
+    && Book.mark({ kind: 'term' }) === 'reference' && Book.mark({ kind: 'overview' }) === 'guide',
+    'a page wore the wrong mark');
+  assert(Book.scopes().map(([value]) => value).join() === ',part:worlds,game,wealth', Book.scopes().join('|'));
   assert(ids(Book.listing({ ...view, sort: 'kind' })).join(' | ') === 'Studies: flow | Terms: gini even');
   assert(ids(Book.listing({ ...view, sort: 'newest' })).join() === ': even flow gini');
   assert(ids(Book.listing({ ...view, sort: 'oldest', status: 'written' })).join() === ': gini flow');
   assert(ids(Book.listing({ ...view, sort: 'title' })).join() === ': even gini flow',
     'A to Z read the articles: ' + ids(Book.listing({ ...view, sort: 'title' })));
-  assert(ids(Book.listing({ ...view, query: 'WEALTH world' })).join() === 'Wealth: gini');
+  assert(ids(Book.listing({ ...view, query: 'WEALTH world' })).join() === 'What the worlds do: gini');
   assert(Book.listing({ ...view, query: 'nothing like this' }).length === 0);
   assert(JSON.stringify(Book.chosen({ sort: 'title', topic: 'gone', kind: 'term', status: 'x', query: 'gini' }))
     === JSON.stringify({ sort: 'title', topic: '', kind: 'term', status: '', query: 'gini' }));
-  assert(Book.chosen(null).sort === 'topic');
+  assert(Book.chosen({ sort: 'topic' }).sort === 'part', 'an order by topic kept from before parts was kept');
+  assert(Book.chosen({ topic: 'part:worlds' }).topic === 'part:worlds', 'a part chosen was not kept');
+  assert(Book.chosen(null).sort === 'part');
 }
 
 function test_a_run_that_died_out_says_so() {

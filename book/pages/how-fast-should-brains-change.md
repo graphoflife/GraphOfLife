@@ -16,7 +16,7 @@ rate; in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its
 five rates, from one copy in twenty to four in five. The faster brains change,
 the more kinds of brain a world holds, and the fewer agents. But in contests
 of 20 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), no rate's brains beat another's, and every rate stopped
-improving by iteration 500, as the thesis predicted. Contests a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long
+improving by iteration 500, as the thesis predicted. Contests a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long
 show every rate still improving at iteration 1,500, the slowest most: the rate
 is not what holds evolution back.
 
@@ -29,7 +29,7 @@ Life world the variation is in the brains. Every agent decides with a small
 neural network, its brain, and a newborn gets a copy of its parent's.
 
 A copy is not always exact. With a set chance it comes out a little changed,
-and a changed brain is a new [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") ([How a brain changes](mutation.md)).
+and a changed brain is a new genotype ([How a brain changes](rules-in-detail.md#how-a-brain-changes)).
 That chance is the **mutation rate**, *p*: the share of copies that come out
 changed.
 
@@ -76,7 +76,7 @@ stop improving, not how good they end up.
 The reading behind that expectation has since fallen. The game is not solved:
 a strategy written by hand took half of one of Experiment 16's evolved B2
 worlds ([Strategies written by hand](strategies-written-by-hand.md)). And
-[founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") brains, which no selection has touched, roll their dice as often as
+founder brains, which no selection has touched, roll their dice as often as
 evolved ones
 ([What the probes say about why](how-to-tell-a-world-that-keeps-evolving.md#what-the-probes-say-about-why)).
 
@@ -94,7 +94,7 @@ This experiment was first planned on [B1](b1-and-b2.md "The first baseline: the 
 whether three births per hundred agents an iteration is a rate that selection
 finds, or only the churn of mutation.
 
-Two [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, 600 iterations) pointed to churn. Births
+Two pilots at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") (seed 1, 600 iterations) pointed to churn. Births
 per hundred agents were 2.0 at *p* = 0.05, 2.9 at the baseline's 0.2 and 8.0
 at 0.8. Genotypes per agent were 0.32, 0.60 and 0.98. That is a
 mutation–selection balance, in a world whose brains are nearly blind.
@@ -103,7 +103,7 @@ In B2 that test is gone, because every agent dies at age 100
 ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). So
 births are held at one in a hundred agents per iteration, whatever the brains
 want. What the rate of change can still move is how good the brains become.
-That is the question the work on [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") needs answered.
+That is the question the work on open-ended evolution needs answered.
 
 ## How the rates are compared
 
@@ -121,7 +121,7 @@ moment are an **era**. A **contest** seats two sets of brains in one world, a
 coin deciding for each agent which side it gets. Mutation is switched off, and
 the world plays twenty iterations. Each side's score is its share of the
 agents at the end, so 0.5 is a tie
-([Eras, contests and invasions](eras-and-contests.md#a-contest-step-by-step)).
+([Eras, contests and invasions](measuring-evolution.md#a-contest-step-by-step)).
 Two kinds of contest are played:
 
 - **Across rates.** For each seed and each pair of rates, the brains of
@@ -165,7 +165,7 @@ All fifty worlds lived to iteration 1,500, and none came near dying out.
 > [!example]- How to make this figure
 > **Runs.** The 50 runs of Experiment 9 — B2 at 10,000 tokens, seeds 1 to 10, with the probability that a brain changes when it is copied at 0.05, 0.1, 0.2 (B2 itself, `B2-10000-s001` … `-s010`, shared with Experiment 16), 0.4 and 0.8, run to iteration 1,500 at least with a whole world archived every 100. They are made with `python3 gol_lab.py run E09`; every setting is listed in the box of the runs behind this page.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)) and the archive of iteration 1,500.
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)) and the archive of iteration 1,500.
 >
 > 1. For every run take the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,500 and average `distinctBrains` / `nodes` and `nodes`.
 > 2. Load the world of iteration 1,500 (`gol_store.load_archive`), join every two neighbours with the same `brain_ids` into one group, and average over agents the size of the group each belongs to (`rates.clones`).
@@ -187,11 +187,11 @@ at every rate, since the age limit sets them. And the share of agents that
 kept their own node in a game stayed at 0.91 to 0.92. So at every rate, 8 or 9
 agents in a hundred lost their node in each game.
 
-**The faster brains change, the fewer agents a world holds.** The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world
+**The faster brains change, the fewer agents a world holds.** The [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world
 held 3,730 agents at *p* = 0.05, 3,250 in B2 and 2,600 at *p* = 0.8. The extra
 agents of a slowly changing world are poor ones. At 0.05 and 0.1, half of all
 agents or more held a single token. The median holding was 1.6 tokens at 0.4,
-and 2 at 0.8. Inequality, by its [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), was 0.50 to 0.52 at every
+and 2 at 0.8. Inequality, by its [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), was 0.50 to 0.52 at every
 rate. Why a world of fast change keeps fewer poor agents alive is not measured
 here.
 
@@ -266,7 +266,7 @@ So where this page says that evolution stops, read: it stops *as far as a
 short contest can see*.
 
 This experiment's worlds were therefore played again in lifetime contests
-([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 Each lasted 100 iterations and was played once in each era's world, in five
 seeds of each rate. B2's own steps come from Experiment 16's ten worlds.
 
@@ -322,7 +322,7 @@ changed brains end up better than fast ones, over a whole life, is still open.
 
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md):
   the yardstick, and why evolution in B2 slows.
-- [How a brain changes](mutation.md): what one change does to a brain's
+- [How a brain changes](rules-in-detail.md#how-a-brain-changes): what one change does to a brain's
   numbers.
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md):
   the better play that no rate found.
@@ -446,5 +446,5 @@ steps are Experiment 16's, in `GraphOfLifeRuns/.pilots/long_steps.json`.
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (9)
-> [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes, families and the common ancestor](genotype.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

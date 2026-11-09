@@ -4,7 +4,7 @@
 
 A **baseline** is a stated set of rules: every [setting](settings.md) of a
 [world](the-world.md), written down in one file. An
-[experiment](the-lab.md#runs-and-experiments) changes one thing of its
+[experiment](runs-and-records.md#runs-and-experiments) changes one thing of its
 baseline, so that whatever differs comes from that change. **B1** is the
 algorithm exactly as a new run is offered it: the original rules. **B2** is
 B1 with rules that keep the network from breaking and agents from staking or
@@ -17,21 +17,21 @@ To learn what one rule does, compare worlds that differ in that rule and in
 nothing else. So every experiment names a baseline and keeps all of it
 except what a condition changes. A run's name
 starts with its baseline: `B2-5000-d6b607-s001` is B2 at 5,000 tokens with
-one change (deaths not mended), [seed](random-numbers.md) 1. The baselines
+one change (deaths not mended), [seed](rules-in-detail.md#seeds-and-the-random-stream) 1. The baselines
 are kept as plans, `book/experiments/B1.json` and `B2.json`.
 
 ## B1: the rules as they were built
 
 B1 is what the app has offered for a new simulation since 2 October 2026.
 Its brain has five hidden layers of 50, 45, 40, 35 and 30 units. A
-[message](messages.md) holds 30 numbers, and each phase begins with an extra
+[message](rules-in-detail.md#messages) holds 30 numbers, and each phase begins with an extra
 look in which agents only write messages.
-[Coalitions can take nodes](revolution.md), and a parent may hand
-connections to its child. A brain [changes](mutation.md) with probability
+[Coalitions can take nodes](rules-in-detail.md#how-a-coalition-takes-a-node), and a parent may hand
+connections to its child. A brain [changes](rules-in-detail.md#how-a-brain-changes) with probability
 0.2 at birth and again after every [game](one-iteration.md#phase-2-the-game),
 wherever it sits. Every rule added
 later for open-ended evolution is off. A plan that names no size gets 10,000
-tokens: 100 founders on [the starting ring](starting-ring.md).
+tokens: 100 founders on [the starting ring](rules-in-detail.md#the-starting-ring).
 
 B1's brains barely see. Each of the five layers passes on about a quarter of
 a change, so a change in what a founder sees reaches what it does at a
@@ -39,7 +39,7 @@ a change, so a change in what a founder sees reaches what it does at a
 
 ## B2: a world that cannot break
 
-B2 was made on 12 October 2026 from [pilot worlds](the-lab.md#pilot-worlds). It
+B2 was made on 12 October 2026 from [pilot worlds](runs-and-records.md#pilot-worlds). It
 differs from B1 in these settings and in no other
 ([Every setting](settings.md) explains each):
 
@@ -81,10 +81,10 @@ In words, the changes fall into four groups:
 ## An example: ten worlds of each at 5,000 tokens
 
 In B1 (the baseline of Experiment 13), the [cull](one-iteration.md#cleanup)
-of the [median](median-and-quantiles.md) world removed 1.9% of its agents in
+of the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread) world removed 1.9% of its agents in
 every iteration from
 iteration 500 on, and only 51% of its agents sat in the
-[2-core](bridges.md#core-trees-and-leaves).
+[2-core](measuring-networks.md#core-trees-and-leaves).
 
 In B2 (Experiment 14), not one agent of the ten worlds was cut off from
 iteration 200 to 1,000, and every agent sat in the 2-core. Every agent lives
@@ -105,7 +105,7 @@ B2's healthy but poor.
 - **B2**, the ground for open-ended evolution, is the start of Experiments 9
   and 14 to 21 and most later ones;
   [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) asks the question it was
-  built for. [What would count as open-ended evolution](open-ended-test.md)
+  built for. [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)
   asks a new world to be as diverse as B2's median world.
 - [Every simulation: what was run, and what was measured](every-simulation.md)
   gives the baseline of every experiment and pilot batch.
@@ -113,8 +113,8 @@ B2's healthy but poor.
 ## Where to go next
 
 - [A world that cannot break](a-world-that-cannot-break.md)
-- [The lab, the engine and pilots](the-lab.md)
-- [Eras and contests: does a world keep getting better?](eras-and-contests.md)
+- [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots)
+- [Eras and contests: does a world keep getting better?](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)
 
 <!-- turns -->
 ---
@@ -123,6 +123,6 @@ B2's healthy but poor.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (23)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [The even split](even-split.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (21)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -15,7 +15,7 @@
 
 We looked for particles, patterns that keep their identity while what carries
 them is replaced, in twelve worlds (five of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at 100,000 tokens and its
-largest [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), the five healthiest worlds of round 3, and a world that froze),
+largest [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), the five healthiest worlds of round 3, and a world that froze),
 with three detectors, each set beside a null and tried on a pattern known to
 be there. No ring of tokens lasts: the circulation of one stretch of games
 correlates with the next's at about 0 (−0.05 to 0.04), where rings planted to
@@ -81,7 +81,7 @@ passing: twelve worlds, each over the last 500 games of its run.
 - **B1 at 100,000 tokens** (Experiment 10, iterations 1,000 to 1,499). Its
   thirty worlds all play the same game, apart from their stars
   ([Do the worlds agree?](how-the-game-is-played.md#do-the-worlds-agree)).
-  So five stand for them: the first five [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") whose world is not held
+  So five stand for them: the first five [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") whose world is not held
   together by one hub, 1, 3, 4, 5 and 6. Beside them stands the largest star,
   seed 28, whose centre was joined to three agents in four in the games read
   ([Stars](the-largest-and-the-smallest.md#stars)).
@@ -158,15 +158,15 @@ world, and the ring would last while the tokens in it changed.
 ### How a ring is seen
 
 Add up, over a stretch of games, the tokens each [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") carried one way,
-minus what came back: the connection's [net flow](token-flow.md). Every net
+minus what came back: the connection's [net flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation). Every net
 flow splits exactly into two parts
-([Flows that go round](token-flow.md#flows-that-go-round); Jiang, Lim, Yao
+([Flows that go round](measuring-tokens.md#flows-that-go-round); Jiang, Lim, Yao
 and Ye 2011). One runs **downhill**, from some agents to others, as if each
-agent stood at a height. The other goes **round [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.")**: the circulation. A
+agent stood at a height. The other goes **round [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.")**: the circulation. A
 ring of tokens is circulation, and a ring that lasts is circulation that comes
 back on the same connections in the next stretch.
 
-So the detector is a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1."). Split the net flow of two stretches in a
+So the detector is a correlation. Split the net flow of two stretches in a
 row, and over the connections both used, correlate the circulation of the
 first with that of the second. Near 0, each stretch's rings are new. Near 1, they are the same
 rings. The stretches are 1, 2, 10 and 50 games long. A ring that lasts a few
@@ -196,7 +196,7 @@ out of the noise in the long ones.
 >
 > 1. For every game, the tokens each agent staked on each neighbour's node.
 > 2. Add them up over stretches of 1, 2, 10 and 50 games, one way minus the other: the net flow of each connection (from the first game read, at most 101 stretches in a row).
-> 3. Find the potential that explains as much of the net flow as possible as running downhill (least squares, by conjugate gradients on the network's Laplacian, after pruning dead-end branches, on which no flow goes round); the circulation is the rest ([Flows that go round](token-flow.md#flows-that-go-round)).
+> 3. Find the potential that explains as much of the net flow as possible as running downhill (least squares, by conjugate gradients on the network's Laplacian, after pruning dead-end branches, on which no flow goes round); the circulation is the rest ([Flows that go round](measuring-tokens.md#flows-that-go-round)).
 > 4. Correlate each stretch's circulation, and its downhill part, with the next stretch's, over the connections both used; take the median over the pairs of stretches.
 > 5. Positive control: on the connections two stretches share, loops of three or four connections running along 2% of them, each connection used once; the same ring on each loop in both stretches, as strong as makes the rings carry 5% or 20% of the first stretch's circulation on those connections (sum of squares); the same correlation. Rings that last, and nothing else, would give about 0.05 and 0.17.
 >
@@ -205,7 +205,7 @@ out of the noise in the long ones.
 
 **No ring lasts.** In every world but the frozen one, the circulation of one
 stretch has nothing to do with the next's. Over stretches of 2, 10 and 50
-games, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") correlation of the eleven worlds is 0.006, −0.002 and
+games, the median correlation of the eleven worlds is 0.006, −0.002 and
 −0.001, and no world is further from 0 than 0.05. The planted rings show what
 a lasting ring would have looked like: 0.06 for rings carrying a twentieth of
 the circulation, 0.17 for rings carrying a fifth (the median of the worlds,
@@ -223,7 +223,7 @@ downhill part, −0.51. Over two games it cancels, and what is left still turns
 back: what runs downhill in one stretch runs back up in the next (−0.29 over
 two games, −0.36 over ten). That is the even split pulling tokens back to
 their resting share, in proportion to their connections plus one
-([The resting state](even-split.md#the-resting-state)). It is the opposite of
+([The resting state](measuring-tokens.md#the-resting-state)). It is the opposite of
 a ring. Only in the star does the downhill part last a little (0.06 over two
 games, 0.13 over fifty), as its leaves keep paying into one centre. (In the
 worlds of 10,000 tokens, the downhill part of the gifts alone, the stakes
@@ -248,7 +248,7 @@ slosh round it.
 ### How a beat is seen
 
 Follow one agent's tokens after every game of a stretch of its life, and take
-the [power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)
+the [power spectrum](statistics.md#the-power-spectrum-of-a-time-series)
 of that series: how much of its ups and downs happen at each period. A beat
 is a period that holds more than its share.
 
@@ -275,7 +275,7 @@ with *f* the frequency, one over the period in games, and σ² the part of the
 variance the memories do not explain. It is high at the longest periods, or
 at two games, or both, and never higher anywhere in between. It is the
 Ornstein–Uhlenbeck process of
-[Reading the slope](autocorrelation.md#reading-the-slope), twice over, in
+[Reading the slope](statistics.md#reading-the-slope), twice over, in
 steps of one game. Its two memories are fitted to each stretch from the
 stretch's correlations with itself one and two games on, by the equations of
 Yule (1927) and Walker (1931). Where those would make the two memories a
@@ -629,7 +629,7 @@ show modules that outlast partners dealt, and perhaps modules that move.
   froze into a cycle of two games. Every detector finds its patterns, but
   nothing in it is replaced: the same agents swing the same tokens and brains
   back and forth for ever.
-- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**, there is no unit above the agent for
+- **For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.")**, there is no unit above the agent for
   selection to act on: P3, an organisation, is not reached. A group of the
   agents' own needs a rule that makes staying together pay, and the
   detectors of this page are ready to tell one from the network's regions.

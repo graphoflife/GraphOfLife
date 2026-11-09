@@ -31,9 +31,25 @@ page says what we know now, and keeps what we thought before, with its date.
 8. **How our view changed.** If anything on the page was once stated
    differently, the earlier claim and its correction, with dates, at the end.
 
-A **term page** explains one idea, so it is shorter: *In short*, the idea
-made precise, an example with real numbers, **Where it is used** and **Where
-to go next**. Its questions are its title.
+A **reference page** gathers the details of one family of rules or measures:
+the rules in detail, lives, [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), networks, space, evolution, health,
+statistics, and how runs are made. Each idea has a section of its own, as a
+short page had before 9 November 2026: the idea made precise, an example with
+real numbers, and **Where it is used**. A link to an idea leads to its section.
+
+## Parts, and what each page is
+
+The pages fall into seven **parts**, each with its colour: Start; Now, the
+research of the moment (round 3 of the random screen and its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")); The
+rules; What the worlds do; Space and physics; The search for [open-ended
+evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") that came before round 3; and Methods and look-up. A part holds a
+few **topics**, and a page belongs to the part of its first topic, its home.
+In the Research Notebook tab a part opens and shuts, a page wears its part's
+colour as a band above its title, and a mark beside it in the contents says
+what it is: a **study** of worlds already played, an **experiment** with its
+own runs, a **plan** that has not been played, a **reference** page, or a
+**guide** to read first (the author, 9 November 2026: fewer pages, better
+sorted, in colours).
 
 ## Words and links
 
@@ -65,7 +81,7 @@ what would refute it. A thesis is never reworded once the results are in. A
 thesis written while the notebook still numbered its chapters keeps those
 numbers, and each links to the page it meant that day.
 
-The runs behind a page — how many, which [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") — are listed in
+The runs behind a page — how many, which seeds, every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") — are listed in
 a box that folds away, in a last section, **How this was made**, so that the
 page reads as an argument and the details are there for whoever wants to make
 it again.
@@ -77,21 +93,21 @@ it again.
 - **The thesis comes first.** It is fixed in the plan before the runs start.
 - **Enough seeds.** A difference seen in fewer than thirty seeds per
   condition is called *indicative*, not an effect
-  ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)).
+  ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)).
 - **No number without its null.** A measurement is reported next to what it
   would be by chance.
 - **Every run can be made again**, from its plan, seed and frozen engine
   ([Is a run reproducible?](is-a-run-reproducible.md)).
 - **The dead are counted apart.** A world that dies out is an outcome of its
   own, not a world that ended up somewhere
-  ([When a world ends](extinction.md)).
+  ([When a world ends](rules-in-detail.md#when-a-world-ends)).
 - **A run is measured over its settled life**, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to its end
-  ([The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world)).
+  ([The settled life of a world](statistics.md#the-settled-life-of-a-world)).
 - **Runs are shared.** A run is named for what it is — baseline, world size,
   what differs, seed — so an experiment that needs runs which already exist
   uses them.
 - **No tuned constants in new rules.** A rule added to the engine carries no
-  hand-set factor beyond the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and the [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")'s parameters: what a
+  hand-set factor beyond the tokens and the mutation's parameters: what a
   world does should emerge. ([Rules without numbers](rules-without-numbers.md)
   shows what the numbers B2 was built with do.)
 
@@ -101,8 +117,8 @@ it again.
 - `book/figures/`, `book/diagrams/` — every figure and diagram, as SVG;
 - `book/results/` — every number a page quotes, written by the analysis;
 - `book/experiments/` — the baselines and each experiment's plan;
-- `book/book.json` — the topics, and every page with its topics, kind and
-  summary, from which the contents are made;
+- `book/book.json` — the parts with their colours, the topics, and every
+  page with its topics, kind and summary, from which the contents are made;
 - `book/terms.json` — the terms, linked where a page first uses them;
 - `book/legacy.json` — the chapter numbers the notebook had until
   23 October 2026, and the page each became;
@@ -123,15 +139,15 @@ and the page that changed it. Nothing is quietly deleted.
 - [What this notebook is about](what-this-notebook-is-about.md): the question
   behind it all.
 - [Glossary](glossary.md): every term in one line.
-- [The lab, the engine and pilots](the-lab.md): how an experiment is run.
+- [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots): how an experiment is run.
 
 <!-- turns -->
 ---
 
-← [Glossary](glossary.md) · [Start here](../README.md#start-here) · [The ideas this builds on](the-ideas-this-builds-on.md) →
+← [What this notebook is about](what-this-notebook-is-about.md) · [Start here](../README.md#start-here) · [The ideas this builds on](the-ideas-this-builds-on.md) →
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (4)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [When a world ends](extinction.md) · [Rules without numbers](rules-without-numbers.md)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [The rules in detail](rules-in-detail.md) · [Rules without numbers](rules-without-numbers.md)
 <!-- /turns -->

@@ -32,7 +32,7 @@ same few ([Too even, not too poor](#too-even-not-too-poor)).
 
 This page turns the picture into measurements and reads every world the
 notebook has made against them. When they were last counted, on 17 October
-2026, they were 624 worlds. The [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s runs are read at their end. The [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+2026, they were 624 worlds. The [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s runs are read at their end. The [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
 worlds, made by hand in batches, are read at their last checkpoint: the
 last whole world the run saved. Each world is counted once.
 [Every world side by side](every-world-side-by-side.md) compares the same
@@ -42,22 +42,22 @@ kinds of world through the statistics a run records.
 
 The picture asks two things of a world at once. Its network must hold
 together: no single agent or link whose loss cuts off much of it, and no
-[hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") it hangs on. And its agents must differ, or selection has nothing to
+[hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") it hangs on. And its agents must differ, or selection has nothing to
 choose from. Each half has a measure of its own.
 
-**The network: the health bar.** [The health bar](health-bar.md), set in
+**The network: the health bar.** [The health bar](measuring-health.md#the-health-bar), set in
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
 already says what a decentralised, resilient network is. It has seven
 marks, each checked on a world at one moment:
 
 1. one piece;
-2. a [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the agents on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") or between them, holding at least 0.8 of
+2. a [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") or between them, holding at least 0.8 of
    the agents;
 3. no agent whose loss cuts off more than 2% of the others;
 4. no link whose loss cuts off more than 1%;
 5. no agent joined to more than 5% of the others;
 6. 3 to 12 links per agent;
-7. a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") between 2.3 and 4: the number of agents within *r* steps
+7. a dimension between 2.3 and 4: the number of agents within *r* steps
    grows about as fast as *r* to that power
    ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
 
@@ -67,18 +67,18 @@ page says why each mark is there.
 
 One mark needs care. A tangle in which everyone is a few steps from
 everyone can also read "three dimensions" over its first few steps. Telling
-the two apart takes a second test, the [random twin](random-twin.md)
+the two apart takes a second test, the [random twin](measuring-space.md#the-random-twin-is-a-world-a-space)
 ([Healthy, but not a space](#healthy-but-not-a-space)).
 
 **The agents: the diversity score.** How much the agents differ is counted
-without drawing any line ([The diversity score](diversity-score.md)). For
+without drawing any line ([The diversity score](measuring-health.md#the-diversity-score)). For
 tokens, links and ages, the agents are sorted into doubling classes: 1,
 2–3, 4–7, 8–15, and so on. The **spread** is the effective number of
 classes they fill
-([Effective numbers: how many kinds there really are](effective-number.md)).
+([Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)).
 It is 1 if every agent is in one class, and *k* if they are spread evenly
 over *k*. Agents holding one to three tokens fill at most two, the classes 1
-and 2–3. [Genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") are counted as an effective number per agent: 1 when
+and 2–3. [Genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") are counted as an effective number per agent: 1 when
 every agent has a genotype of its own, near 0 when one genotype is
 everywhere.
 
@@ -126,7 +126,7 @@ the agents most diverse — is empty.
   exactly as a new run is offered them. Its agents spread widely: over 5.6
   to 6.9 classes of age and 3.5 to 4.1 of tokens, with a diversity score of
   0.67 to 0.75. But its networks meet two to four of the seven marks. Only
-  half the agents are in the 2-core, and in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world one agent's
+  half the agents are in the 2-core, and in the median world one agent's
   loss cuts off 13% to 35% of the others. Where tokens move along every
   link and unused links are cut
   ([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)), the network
@@ -190,12 +190,12 @@ unhealthy is not that agents hold few tokens, but that they hold them
 **evenly**: almost everyone the same few. The share at three tokens or
 fewer only stood in for that, and measured directly it stands in badly.
 Every world read so far now also carries the
-[Gini coefficient](gini-coefficient.md) of its agents' tokens, 0 when all
+[Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) of its agents' tokens, 0 when all
 hold the same and near 1 when one agent holds nearly all. It also carries
 the share of all tokens that its richest tenth hold.
 
 Across the 502 worlds read at iteration 1,000, the share at three or fewer
-follows the tokens per agent: a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of −0.77, and −0.92 across the
+follows the tokens per agent: a correlation of −0.77, and −0.92 across the
 54 read at 10,000. It does not follow the Gini: 0.01, and 0.52 at 10,000.
 It counts how many agents share the tokens, not how evenly they share
 them.
@@ -266,7 +266,7 @@ read off its first few steps grows with the room it has.
 B2's worlds start as spaces. They fold once their first generation dies,
 because each death is mended with a ring of links among the dead agent's
 [neighbours](the-world.md#the-network "An agent joined to another by a connection."). The rise with size holds for B2 itself and for its mixed
-worlds, but not for every variant of B2. With the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead left
+worlds, but not for every variant of B2. With the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead left
 to the newborns or to the parents, B2's worlds hold more than 5,000 agents
 at a dimension of 3.4 to 3.9. They stay spaces, of about three dimensions
 ([Who inherits?](who-inherits.md#healthy-and-diverse)).
@@ -290,7 +290,7 @@ counted, on 17 October 2026, 99 worlds of 624 met all seven marks:
 A healthy network is not enough. Nine of the ten B2 worlds without old age
 meet every mark, and have stopped. In a world of 3,800 agents there are
 about 0.4 births an iteration. Of the agents, 86 to 95% hold three tokens
-or fewer, and nearly all are of one age: the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' generation, which
+or fewer, and nearly all are of one age: the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' generation, which
 never dies. Their ages fill 1.3 to 2.3 classes, and their diversity scores
 are among the lowest of all.
 
@@ -319,9 +319,9 @@ comes from two agents: its parent, and a mate among the parent's
 neighbours. Each hidden unit of the brain comes whole from one or the other
 ([Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)).
 Each world also changes something else. The two at the top add a faster
-change of brains, a [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") probability of 0.8 where B2 has 0.2. They have
+change of brains, a [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") probability of 0.8 where B2 has 0.2. They have
 diversity scores of 0.79 and 0.78, with about 40% of their agents at three
-tokens or fewer. The world of batch W that mixes without [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") is
+tokens or fewer. The world of batch W that mixes without [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") is
 larger and poorer: 2,245 agents, two in three of them at three tokens or
 fewer. But its agents spread widely in age, links and genotypes.
 
@@ -392,7 +392,7 @@ three tokens or fewer.
 **The test of a long run.** A candidate world holds if, at iteration
 10,000:
 - it is still alive: it never fell to 20 agents or fewer, where the lab
-  calls a world [extinct](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.");
+  calls a world [extinct](rules-in-detail.md#when-a-world-ends "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.");
 - it meets every mark of the health bar;
 - it is more diverse than B2's median world at 10,000, a diversity score of
   0.49;
@@ -415,7 +415,7 @@ The long runs were planned in three steps. Here is what each found.
    birth. By the clarified test of evenness, three held. Four candidates
    whose rules exist only in the pilots' prototype wait for Experiment 23
    ([The candidates, played on](the-candidates-played-on.md#the-candidates-played-on)).
-2. **More [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") for what holds.** One world can be luck. A rule whose
+2. **More [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") for what holds.** One world can be luck. A rule whose
    candidate is still healthy and diverse at 10,000 iterations gets five
    seeds more, from the start, to 10,000. Experiment 21 gave three such
    rules five new seeds each, and none held more often than mixing alone
@@ -454,7 +454,7 @@ The same idea is now a lab experiment:
 The health bar's dimension mark does not tell a space from a small world. A
 B2 world of 600 to 1,500 agents passes it because it is small
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). A stronger test sets a world
-beside its [random twin](random-twin.md): the same agents, with as many
+beside its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space): the same agents, with as many
 links each, wired at random. Count the steps within which a typical
 agent's ball holds half the world, and divide by the same count in the
 twin: that ratio is the world's **width**. A small world has a width of
@@ -480,7 +480,7 @@ poor are of three kinds:
   27%, three marks, 0.83).
 
 So the author's "almost three-dimensional" asks more than the bar's mark
-does. That is why [What makes a world interesting](what-makes-a-world-interesting.md)
+does. That is why [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting)
 asks for a dimension of 2 to 4 *and* a width of at least 1.5.
 
 ## What we learned
@@ -516,13 +516,13 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
 
 ## Where to go next
 
-- [What makes a world interesting](what-makes-a-world-interesting.md): the
+- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting): the
   picture turned into six criteria, and the screen that uses them.
 - [The candidates, played on and played again](the-candidates-played-on.md):
   what became of the worlds that came closest.
 - [What holds a world's size](what-holds-a-worlds-size.md): why a world's
   riches, and much of its health, follow its size.
-- [The random twin: is a world a space?](random-twin.md): the test the
+- [The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space): the test the
   dimension mark needs beside it.
 
 ## How this was made
@@ -592,7 +592,7 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
   worlds read so far, so they moved whenever worlds were added: by up to
   0.01 between the scores on this page and those of the batches read since.
   Since then they are ranked among a frozen set of 653 worlds (on this page;
-  see [The diversity score](diversity-score.md)).
+  see [The diversity score](measuring-health.md#the-diversity-score)).
 - **19 October 2026.** The page took agents holding three tokens or fewer
   as the mark of a world in which little can happen. The author made the
   picture precise: the worry is agents that hold their tokens evenly. The
@@ -607,13 +607,13 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
   ([The candidates, played on](the-candidates-played-on.md#the-candidates-played-on)).
 - **24 October 2026.** This page called the line of evenness "B2's least
   even world". It is B2's most even world, the one with the lowest Gini
-  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
+  ([What makes a world interesting](measuring-health.md#how-our-view-changed)).
 
 <!-- turns -->
 ---
 
-[Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [What makes a world interesting](what-makes-a-world-interesting.md) →
+[Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) →
 
-> [!info]- Pages that link here (28)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What would count as open-ended evolution](open-ended-test.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (26)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -41,7 +41,7 @@ The author set the goal in three parts:
 - **A statistic that keeps rising** as the iterations go on. Any number will
   do that says evolution is still producing something. It might be the size
   of what agents organise into, or how long they live. It might be how much
-  of the [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") flow goes round in circles ([Lightning](token-flow.md#lightning-tokens-that-go-round)), or
+  of the [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") flow goes round in circles ([Lightning](measuring-tokens.md#lightning-tokens-that-go-round)), or
   something nobody has thought of yet. It may rise ever more slowly, as a
   logarithm does. A finite world has finitely many things it can become, so
   with finite tokens the number has a ceiling. But the ceiling should move up
@@ -70,8 +70,8 @@ because each looks like the thing we want.
    When a number keeps being drawn from the same distribution, and very large
    values are rare, its record grows like the logarithm of time. So a record
    that rises like a logarithm is exactly what a world standing still makes.
-2. **Counts.** [Genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") ever made, [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") since the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), iterations
-   of a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor."): anything that only adds. A count rises in a straight line at
+2. **Counts.** Genotypes ever made, mutations since the founders, iterations
+   of a lineage: anything that only adds. A count rises in a straight line at
    the rate things happen, whether anything is selected or not. Biology calls
    this the molecular clock.
 3. **The left wall.** Take a trait that cannot fall below a floor, such as a
@@ -111,14 +111,14 @@ The brains of one moment are an **era**, and a match between two eras is a
 tournament** (Cliff and Miller 1995). Stanley and Miikkulainen (2004) counted
 how many times in a run a new champion beat every champion before it. Miconi
 (2009) separates the kinds of progress such tournaments can show.
-[Eras and contests](eras-and-contests.md) explains contests in full. Here a
+[Eras and contests](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better) explains contests in full. Here a
 contest goes like this:
 
 1. Take the world as it stood at one archived moment: its network, its
    tokens, the ages of its agents. A run keeps such worlds when it is made
    with [`archive_every`](settings.md#archive_every).
 2. Give every agent a brain drawn at random from the agents of one era, A, or
-   of another, B: a coin each. Clear the [messages](messages.md) in flight, so
+   of another, B: a coin each. Clear the [messages](rules-in-detail.md#messages) in flight, so
    that neither side is primed.
 3. Switch mutation off, so that no brain can change and every copy of a brain
    keeps the era it came from. Let the world play twenty iterations under its
@@ -145,29 +145,29 @@ enough for most of a B1 world to change hands. It is not long enough for an
 agent of B2 to live its life, since there everyone dies at age 100. And what
 evolution improves there may pay off only over a whole life. Until 15 October
 2026 every contest of this notebook lasted 20 iterations. Since then, B2's
-worlds are also judged in contests a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long, of 100 iterations
+worlds are also judged in contests a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long, of 100 iterations
 ([Would we notice if it went on?](#would-we-notice-if-it-went-on)).
 
 ### The network that holds, in numbers
 
 The second half of the goal is a property of the network. Every part of it can
-be measured on a single [frame](frames-and-stats.md), one snapshot of a whole
+be measured on a single [frame](runs-and-records.md#what-a-run-records), one snapshot of a whole
 world. The **health bar** asks seven things of the network, each with a line
-to meet. [The health bar](health-bar.md) explains why each one is there.
+to meet. [The health bar](measuring-health.md#the-health-bar) explains why each one is there.
 
 | what is asked | measured as | bar |
 |---|---|---|
 | one world | the pieces the cull leaves | always one |
-| not a tree | share of agents in the [2-core](bridges.md#core-trees-and-leaves) — on a loop, or between loops | 0.8 or more |
+| not a tree | share of agents in the [2-core](measuring-networks.md#core-trees-and-leaves) — on a loop, or between loops | 0.8 or more |
 | few single points of failure | the largest share of the agents one agent's loss would cut off (`worst_node_cut_share`) | 2% or less |
-| | the same for one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") ([cut risk](bridges.md#cut-risk)) | 1% or less |
+| | the same for one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") ([cut risk](measuring-networks.md#cut-risk)) | 1% or less |
 | decentralised | the share of the others the best-connected agent is joined to | 5% or less |
 | neither a tree nor complete | connections per agent | 3 to 12 |
-| about three-dimensional | the [dimension of ball growth](ball-dimension-and-curvature.md) | 2.3 to 4 |
+| about three-dimensional | the [dimension of ball growth](measuring-space.md#three-ways-to-measure-a-networks-dimension) | 2.3 to 4 |
 
 B1 does not pass it. A pilot is a world made by hand to see whether an idea is
-worth an experiment ([Pilot worlds](the-lab.md#pilot-worlds)). Take a pilot of B1 at
-5,000 tokens ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1, iterations 200 to 999). There 59% of the agents sat in
+worth an experiment ([Pilot worlds](runs-and-records.md#pilot-worlds)). Take a pilot of B1 at
+5,000 tokens (seed 1, iterations 200 to 999). There 59% of the agents sat in
 the 2-core, and the rest hung in trees. One connection could cut off 8% of the
 world. The best-connected agent was joined to 8% of the others, and there were
 3.3 connections per agent. Its dimension, 2.7, was fine.
@@ -181,7 +181,7 @@ The same pilot played its eras against each other: the brains of iterations 0
   world. Those of iterations 200 to 600 held 77% to 90%. The world had learned
   something, and learned it fast.
 - From iteration 200 on, every pair of eras scored between 45% and 59%, with a
-  [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of exactly 50%. As ratings against the founders: +283 at iteration
+  [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of exactly 50%. As ratings against the founders: +283 at iteration
   100, then +320 to +345 for every era from 200 to 600.
 
 One world says that the baseline learns what it learns in about two hundred
@@ -473,7 +473,7 @@ questions whose answers change as the population changes.
 Two things the pilots tried were meant to be such games. Both lacked the one
 thing cooperation needs, a **surplus**. Support counted less than a home
 stake. The yield on returned stakes went to whoever had most partners, so it
-built [stars](stars-and-hubs.md) rather than partnerships. What a surplus
+built [stars](measuring-networks.md#stars-and-hubs) rather than partnerships. What a surplus
 could look like is the subject of [Alliances](another-game.md#alliances), and other
 contests are that of [Another game](another-game.md).
 
@@ -645,7 +645,7 @@ goes.
 
 How far it goes was measured by going on. Experiment 16's B2 worlds were
 played on from iteration 2,000 to 10,000 under the same rules, exactly as the
-[lab](the-lab.md) would have run them (`research/oee/pilots/run.py --from`).
+[lab](runs-and-records.md#the-lab-the-engine-and-pilots) would have run them (`research/oee/pilots/run.py --from`).
 The eras of three of them were played against each other the same way. All
 three kept improving to iteration 5,000: the brains of 5,000 held 0.69, 0.59
 and 0.63 of the world against those of 2,000. After that the gains all but stopped. The
@@ -664,7 +664,7 @@ There evolution climbed for about 20,000 to 25,000 iterations, then stopped
 climbing and wandered ([Every era against three](every-era-against-three.md)).
 
 **Distance to the best play.** A tie between eras says nothing about how good
-both are. [Exploitability](eras-and-contests.md#exploitability) measures that from outside. For
+both are. [Exploitability](measuring-evolution.md#exploitability) measures that from outside. For
 each agent it asks how much more the agent would hold after a game if it alone
 played its best reply to everyone else. At an equilibrium, where nobody gains
 by changing only its own play, the answer would be zero.
@@ -681,7 +681,7 @@ by changing only its own play, the answer would be zero.
 >
 > 1. Load the world of each era, play one whole iteration (reproduction, then a game) so that its messages are fresh, and draw the random inputs eight times; for each draw, turn every agent's brain outputs into stakes as the engine does (`research/oee/checks/exploitability.py`).
 > 2. Score a way of staking by the nodes an agent holds after the game (its own, and every neighbour's it takes), everyone else as drawn and each node decided by the engine's rule, averaged over the eight draws.
-> 3. An agent's best reply is the best of: everything at home; for each draw, the cheapest stakes that keep its node and then take the cheapest neighbours (one token above the largest rival offer), or that only take them; or its own stakes of each draw. Its exploitability is the best reply's score minus its own; average over the agents (see [Exploitability](eras-and-contests.md#exploitability)).
+> 3. An agent's best reply is the best of: everything at home; for each draw, the cheapest stakes that keep its node and then take the cheapest neighbours (one token above the largest rival offer), or that only take them; or its own stakes of each draw. Its exploitability is the best reply's score minus its own; average over the agents (see [Exploitability](measuring-evolution.md#exploitability)).
 >
 > **To make it again:** `python3 book_figures.py stopping`.
 <!-- /figure -->
@@ -716,7 +716,7 @@ to 11–20%. The exception is a world that pooled the stakes of kin
 start*). And in a contest where dice are worthless, a lottery, evolved brains
 roll them as much as under Blotto ([Another game](another-game.md)).
 Redrawing them changes 48 to 67% of the divisions there, against 59% in the
-same world under Blotto, both without [revolutions](revolution.md). The
+same world under Blotto, both without [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node). The
 brains keep the founders' dice because nothing selects against them, not
 because the game rewards them.
 
@@ -766,7 +766,7 @@ and [Another game](another-game.md). What they could do together is that of
 
 ## Where to go next
 
-- [Eras and contests: does a world keep getting better?](eras-and-contests.md):
+- [Eras and contests: does a world keep getting better?](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better):
   contests, ratings and lifetime contests, in full.
 - [Every era against three](every-era-against-three.md): in the longest
   worlds, has evolution stopped climbing, or does it go round in circles?
@@ -945,10 +945,10 @@ they were made with.
 <!-- turns -->
 ---
 
-← [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [How fast should brains change?](how-fast-should-brains-change.md) →
+[Does evolution keep going?](../README.md#does-evolution-keep-going) · [How fast should brains change?](how-fast-should-brains-change.md) →
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (50)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Stars and hubs](stars-and-hubs.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How different are the agents?](how-different-are-the-agents.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What would count as open-ended evolution](open-ended-test.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The lab, the engine and pilots](the-lab.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (48)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [How runs are made, recorded and costed](runs-and-records.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

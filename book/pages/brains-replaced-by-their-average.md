@@ -24,7 +24,7 @@ borrowed from other agents keep a world alive but make it another world; and a
 brain drawn afresh from the world's own at every look makes it itself again.
 Three of the six ways need building, and all six need a run that can start
 from a kept world. The runs would take about a day and a half on the
-[lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s three workers.
+[lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s three workers.
 
 ## Why chance is not enough
 
@@ -35,7 +35,7 @@ would give is drawn from a bell curve instead, and the rules read their
 decisions from that noise as usual
 ([The control: decisions by chance](the-brain.md#the-control-decisions-by-chance)).
 All thirty worlds died, 25 after their second iteration and 5 after their
-third. In each world's last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 62% of the agents were cut off
+third. In each world's last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of 62% of the agents were cut off
 and another 15% starved
 ([Chance cannot keep a world](do-the-brains-matter.md#chance-cannot-keep-a-world)).
 
@@ -43,7 +43,7 @@ That shows that the brains matter. It does not show what about them matters.
 Chance takes everything away at once, even the habits every evolved world
 shares. Drawn by chance, a parent gives its child all its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") one time in
 four, and starves: far more often than in any settled world. And brains whose
-weights nobody chose, the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")', keep a world alive where chance kills it.
+weights nobody chose, the founders', keep a world alive where chance kills it.
 A brain drawn at random is still a function of what it sees: what it does on
 one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") hangs together with what it does on the next.
 
@@ -78,8 +78,8 @@ Their brains are another matter. The five worlds this plan would play show it:
   a quarter of it in each ([`hidden_activation`](settings.md#hidden_activation)).
 - **Their agents differ.** Put two agents of one world in the same situation,
   with the same random numbers, and they act measurably differently in two
-  pairs in three ([seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3057) to nearly every pair (seed 3026): the
-  [same-position share](what-makes-a-world-interesting.md#the-same-position-share "Of two agents put in the same situation, how often they stake their tokens measurably differently.").
+  pairs in three (seed 3057) to nearly every pair (seed 3026): the
+  [same-position share](measuring-health.md#the-same-position-share "Of two agents put in the same situation, how often they stake their tokens measurably differently.").
 - **Children are only partly like their parents.** The heredity index of the
   five lies between 0.14 and 0.34, where 1 is a child that acts as its parent
   does and 0 one that acts like a stranger
@@ -92,7 +92,7 @@ Their brains are another matter. The five worlds this plan would play show it:
   and the median change was nil
   ([Healthier or sicker with time?](which-worlds-are-healthy.md#healthier-or-sicker-with-time)).
   And how unequal a world is depends, more than on any other rule drawn, on
-  where the tokens of the dead go: a median [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.32 where they go to the
+  where the tokens of the dead go: a median [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.32 where they go to the
   poorest, 0.53 where they flow to the nearest living
   ([What keeps wealth spread?](what-keeps-wealth-spread.md)).
 
@@ -122,8 +122,8 @@ In a world, a pupil's questions are an agent's **look**: one column of inputs
 for each of its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), itself and each [neighbour](the-world.md#the-network "An agent joined to another by a connection.")
 ([One look: a column per candidate](the-brain.md#one-look-a-column-per-candidate)).
 Her answers are the columns of outputs a brain gives back, which the rules
-turn into a child, its links, the stakes and the [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.")
-([What a brain says](brain-outputs.md)). The six ways differ only in where
+turn into a child, its links, the stakes and the messages
+([What a brain says](rules-in-detail.md#what-a-brain-says)). The six ways differ only in where
 those outputs come from. The rules of the world stay as they are. That is how
 the control by chance works too: a brain speaks in one place in the engine,
 and only that place changes.
@@ -134,7 +134,7 @@ and only that place changes.
 | (b) | a stranger's answers | the answers another agent's brain gave to its own look | the world's habits, in their right proportions | any answer to the agent's own situation | to be built |
 | (c) | the answers of an agent like it | the same, lent by an agent with as many neighbours and the nearest tokens | habits, and an answer to its own tokens and links | any answer to its neighbours and to what they say | to be built |
 | (d) | the crowd's brain | a brain drawn afresh at every look from the world's own, frozen, reading the agent's own inputs | everything the brains answer, as the crowd answers it on average | individuals that last, heirs, selection | to be built |
-| (e) | its own brain, frozen | its own brain, which never changes again | individuals and heirs; lines can still win and lose | new variation | yes: [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") off |
+| (e) | its own brain, frozen | its own brain, which never changes again | individuals and heirs; lines can still win and lose | new variation | yes: mutation off |
 | (f) | its own brain | the world as it is, played again from the same moment with a new seed | everything | nothing | yes |
 
 Every way also needs one thing the lab cannot do yet: start a run from the
@@ -179,7 +179,7 @@ every agent acts as the crowd does on average.
 
 **(e) Its own brain, frozen.**
 [`mutation_probability`](settings.md#mutation_probability) = 0, as in every
-contest ([A contest, step by step](eras-and-contests.md#a-contest-step-by-step)).
+contest ([A contest, step by step](measuring-evolution.md#a-contest-step-by-step)).
 Every agent keeps its brain, a child inherits its parent's, a node taken in a
 game takes on the winner's, and lines can still win and lose. But no mutation
 makes anything new. In the three worlds below that mix brains at birth
@@ -210,7 +210,7 @@ neighbouring ways says what that thing does for a world:
 ## Five worlds, from iteration 1,500
 
 Every run of round 3 kept its whole world every 250 iterations, brains
-included ([Eras](eras-and-contests.md#eras)). The plan takes five of the 24
+included ([Eras](measuring-evolution.md#eras)). The plan takes five of the 24
 shortlisted worlds ([The shortlist](candidates-for-open-ended-evolution.md#the-shortlist))
 as they stood at iteration 1,500, halfway through their runs.
 
@@ -287,7 +287,7 @@ further than every replay.
 **Plain numbers beside them.** For every continuation: its agents; the Gini
 coefficient of its tokens; births per agent; nodes taken in a game; the share
 of its tokens culled in a game; and whether and when it died, counted apart
-([When a world ends](extinction.md)).
+([When a world ends](rules-in-detail.md#when-a-world-ends)).
 
 **How it looks.** Every continuation is a run the author can open in the
 viewer, beside the world as it was played.
@@ -374,7 +374,7 @@ history.
    families can be counted on from there. And the viewer must show such a run
    from where it begins. **Its check:** started from the kept world with
    nothing changed and the kept world's own random stream, it must make the
-   original run's [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") again, frame for frame, to iteration 3,000, as a run
+   original run's [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") again, frame for frame, to iteration 3,000, as a run
    resumed from a checkpoint must ([Is a run reproducible?](is-a-run-reproducible.md)).
    The same piece serves tests 12 and 14 of
    [Did evolution happen?](did-evolution-happen.md).

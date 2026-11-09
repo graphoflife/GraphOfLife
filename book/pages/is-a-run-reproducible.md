@@ -1,7 +1,7 @@
 # Is a run reproducible?
 
 > [!question] Questions of this page
-> - Does the same seed always give the same world, [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") for frame?
+> - Does the same seed always give the same world, frame for frame?
 > - Does stopping a run and continuing it later, in a new process, change it?
 > - Does a crash, after which the run is resumed from its last save, change it?
 > - Does the number of processor threads the matrix library uses change it?
@@ -36,16 +36,16 @@ repeatable if three things hold.
    generator produces a fixed sequence of numbers from its starting value,
    the seed. In Graph of Life every world owns its own generator, started
    from its seed, and draws everything from it
-   ([Seeds and the random stream](random-numbers.md)).
+   ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
 2. **Everything is done in a fixed order.** [Agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") act in increasing order of
-   id, and [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are listed in increasing order of id. [Messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") are held
+   id, and [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are listed in increasing order of id. Messages are held
    back in an outbox and delivered together once every agent has written. That
    happens after the look that only talks, and again at the end of the phase.
    So no agent reads a message another agent wrote a moment earlier in the
    same look.
 3. **A saved world is the whole world.** To stop a run and continue it later,
    the program saves a **checkpoint**. It holds every agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")
-   weights, [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") and age. It holds every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and when it last
+   weights, [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") and age. It holds every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and when it last
    carried tokens, and every message in flight. And it holds the state of the
    random generator. A run continued from a checkpoint first deletes any
    frames recorded after it (the pictures of the world it writes after every
@@ -231,9 +231,9 @@ stopping, continuing and crashing, it holds exactly.
 
 ## Where to go next
 
-- [Seeds and the random stream](random-numbers.md): how one number fixes
+- [Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream): how one number fixes
   every random choice of a run.
-- [The lab, the engine and pilots](the-lab.md): how runs are made, paused and
+- [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots): how runs are made, paused and
   resumed.
 - [Every setting](settings.md): the numbers and switches that, with the seed,
   fix a run.
@@ -261,5 +261,5 @@ stopping, continuing and crashing, it holds exactly.
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (11)
-> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Seeds and the random stream](random-numbers.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

@@ -29,10 +29,10 @@ one, can spread through a whole town.
 
 A brain is such a song. It is copied into a child, and into every node its
 agent wins in a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). It changes with probability 0.2 at every birth and
-after every game ([How a brain changes](mutation.md)). Every change gives the
+after every game ([How a brain changes](rules-in-detail.md#how-a-brain-changes)). Every change gives the
 brain a new number, its **genotype**, and every genotype remembers the one it
 came from. So the genotypes of a world form one family tree
-([Genotypes and the family tree](genotype.md)).
+([Genotypes and the family tree](measuring-evolution.md#genotypes-families-and-the-common-ancestor)).
 
 A genotype is one version of the song. A **line** of descent, or lineage, is
 a family of versions: one genotype together with every genotype descended
@@ -53,7 +53,7 @@ thirty of Experiment 2.
 We expected nobody to win for long. Every brain has one chance in five of
 changing after every game, and again when it is copied to a child. A node
 that is conquered takes on its conqueror's brain. So a genotype should be
-renamed long before it could spread far. [Pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") run earlier had found a
+renamed long before it could spread far. [Pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") run earlier had found a
 typical genotype lasting a single iteration, and fewer than one in ten
 lasting more than five.
 
@@ -61,7 +61,7 @@ So we expected hundreds of genotypes at any moment, and no genotype holding
 more than a small part of the world. And we expected the living to descend
 from many different ancestors. The test counts those ancestors as
 **families**: the different genotypes of eight iterations earlier that the
-living descend from ([Families](genotype.md#families)). Here is the thesis, as it was
+living descend from ([Families](measuring-evolution.md#families)). Here is the thesis, as it was
 written down:
 
 <!-- thesis E06 -->
@@ -100,7 +100,7 @@ from its birth to the last game it is alive after.
 > **To make it again:** `python3 book_figures.py lineage`.
 <!-- /figure -->
 
-The two curves are [survival curves](age-and-lifetime.md#survival-curves-kaplanmeier) on logarithmic axes.
+The two curves are [survival curves](measuring-lives.md#survival-curves-kaplanmeier) on logarithmic axes.
 They follow every genotype and every agent that appeared from iteration 500
 on in the thirty worlds, if it was there after a game. Each curve gives the
 share that lasted at least *L* iterations.
@@ -108,7 +108,7 @@ share that lasted at least *L* iterations.
 - **Genotypes** (violet) are short-lived. More than half, 57%, last at least
   2 iterations; 20% last at least 5, and 6% at least 10. Only one in a
   hundred thousand reaches 50, and none reached 100, exactly as at 10,000
-  tokens. The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") genotype lasts two iterations.
+  tokens. The [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") genotype lasts two iterations.
 - **Agents** (blue) last far longer: 48% at least 10 iterations, 13% at least
   100. These are the agents that lived through their first game, as in
   [Births, deaths and ages](births-deaths-and-ages.md#how-long-agents-live).
@@ -122,7 +122,7 @@ change hands in every game
 ([How the game is played](how-the-game-is-played.md)). So a genotype has
 little time.
 
-In its [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on, a world holds about one genotype
+In its [settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on, a world holds about one genotype
 for every 1.6 agents. That is five genotypes for every eight agents: a world
 of some 14,400 agents holds about 9,000 different genotypes at once. The
 measure is the number of distinct genotypes divided by the number of agents
@@ -156,8 +156,8 @@ world of some 14,400 agents, that is fewer than a hundred of them.
 But not always. After iteration 100, a single genotype held more than a
 tenth of the world at some moment in 10 of the 30 worlds. One held more than
 a fifth in 7, more than a third in 2, and more than half in one. That one
-held 56% of all agents at iteration 1,408, in the world with [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 28 (the
-yellow line). This world is a [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), held together by a single hub, and
+held 56% of all agents at iteration 1,408, in the world with seed 28 (the
+yellow line). This world is a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), held together by a single hub, and
 [The largest and the smallest](the-largest-and-the-smallest.md) looks inside
 it. Its collapse had just left it some 2,100 agents
 ([No world died — but one came close](a-worlds-life.md#no-world-died--but-one-came-close)).
@@ -172,9 +172,9 @@ genotypes in turn, each changed from the one before: a **line** spreading.
 To see a line, follow the family tree backwards. Start from every agent
 alive now, and climb from its genotype to that genotype's parent, and on.
 Where two agents share an ancestor, their branches meet. If the living all
-descend from one [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."), all their branches meet, sooner or later, in one
+descend from one founder, all their branches meet, sooner or later, in one
 genotype. The newest genotype in which they all meet is the
-[common ancestor](genotype.md#the-common-ancestor-of-the-living) of the living. How many iterations
+[common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living) of the living. How many iterations
 back it lived is its **depth**.
 
 Watch that depth over time, and it tells a story. While no line takes over,
@@ -187,7 +187,7 @@ replaced all the others: a **sweep**.
 <!-- figure lineage/ancestor -->
 ![How far back everyone shares one ancestor](../figures/lineage/ancestor.svg)
 
-**How far back everyone shares one ancestor.** Every 25 iterations, for three worlds (seeds 1, 12 and 17, one colour each): how many iterations earlier the newest genotype lived from which every living agent descends ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)). While a line rises by 25 every 25 iterations, that ancestor stays the same and simply grows older; each drop is a moment when it moves forward to a younger genotype, because all the other branches of the family tree have died out. Before the first drop the living descend from more than one founder, and the line is drawn at the age of the world.
+**How far back everyone shares one ancestor.** Every 25 iterations, for three worlds (seeds 1, 12 and 17, one colour each): how many iterations earlier the newest genotype lived from which every living agent descends ([The common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living)). While a line rises by 25 every 25 iterations, that ancestor stays the same and simply grows older; each drop is a moment when it moves forward to a younger genotype, because all the other branches of the family tree have died out. Before the first drop the living descend from more than one founder, and the line is drawn at the age of the world.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`, `-s012` and `-s017`.
@@ -195,7 +195,7 @@ replaced all the others: a **sweep**.
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read every frame in order; remember each genotype's parent and the iteration it first appeared.
-> 2. Every 25 iterations, after the game, count the agents per living genotype and climb the family tree from them, newest genotype first, adding each genotype's count to its parent's ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)).
+> 2. Every 25 iterations, after the game, count the agents per living genotype and climb the family tree from them, newest genotype first, adding each genotype's count to its parent's ([The common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living)).
 > 3. The first genotype reached that carries all agents is their newest common ancestor; plot the iterations since it first appeared.
 >
 > **To make it again:** `python3 book_figures.py lineage`.
@@ -220,10 +220,10 @@ them one from 468. (At 10,000 tokens: 730, 590 and 300.)
 
 What does a takeover look like while it happens? Take every genotype alive
 at one moment, and let each start a **family**: itself and every genotype
-descended from it. It is the same idea as in [Families](genotype.md#families), with
+descended from it. It is the same idea as in [Families](measuring-evolution.md#families), with
 the moment held fixed instead of eight iterations back. Then follow the
 share of the living in each family over the following iterations, stacked
-one on top of the other ([Muller plots](genotype.md#muller-plots)):
+one on top of the other ([Muller plots](measuring-evolution.md#muller-plots)):
 
 <!-- figure lineage/families-12 -->
 ![Families of iteration 550, world of seed 12](../figures/lineage/families-12.svg)
@@ -351,7 +351,7 @@ question.
 
 The brains themselves could.
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
-played the brains of different [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") of ten worlds of 5,000 tokens against
+played the brains of different eras of ten worlds of 5,000 tokens against
 each other. By iteration 50 the brains already beat their founders', by 361
 Elo points in the median world. In a world shared between the two, they ended
 up with nine tenths of it. After that, every era ties with the one before it.
@@ -593,5 +593,5 @@ iterations.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (18)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

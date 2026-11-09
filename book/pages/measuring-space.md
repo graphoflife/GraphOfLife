@@ -1,6 +1,19 @@
-# Three ways to measure a network's dimension
+# Measuring space: dimension and the random twin
+
+> [!question] Questions of this page
+> - How can a network without coordinates have a dimension?
+> - What would a world be if it were wired at random?
 
 ## In short
+
+How the notebook reads a network as a space: three ways to measure its dimension, and the random twin, the same [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") wired at random, that every reading is set against.
+
+It gathers what were 2 pages of their own, one section each:
+
+- [Three ways to measure a network's dimension](#three-ways-to-measure-a-networks-dimension): A network has no coordinates, only links, yet it can be shaped like a line, a sheet or a solid.
+- [The random twin: is a world a space?](#the-random-twin-is-a-world-a-space): A world's network wired again at random, with as many links per [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."): what a world would be if it were no space, and how wide a world is beside it.
+
+## Three ways to measure a network's dimension
 
 A network has no coordinates, only links, yet it can be shaped like a line, a
 sheet or a solid. Three rulers read its dimension: the room within a few
@@ -10,11 +23,11 @@ they differ says what kind of space the network is.
 [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md)
 lays all three on the worlds.
 
-## Three rulers
+### Three rulers
 
-Stand on an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") of a network and look around. There is no map
+Stand on an agent of a network and look around. There is no map
 and no ruler, only links. The distance between two agents is the number of
-links on the shortest path between them ([Path length](path-length.md)). That
+links on the shortest path between them ([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)). That
 is enough to tell a line from a sheet or a solid, in three ways. On a grid of
 *d* dimensions, each of them gives *d*:
 
@@ -30,19 +43,19 @@ kind of space a network is
 Some networks have no dimension at all. In a random network everyone is a few
 steps from everyone: it is a *small world*, and its readings never settle. To
 tell a space from a small world, the notebook sets each world beside its
-[random twin](random-twin.md). The twin has the same agents, each with as many
+[random twin](measuring-space.md#the-random-twin-is-a-world-a-space). The twin has the same agents, each with as many
 links, wired at random.
 
-## Dimension and curvature from ball growth
+### Dimension and curvature from ball growth
 
 How many agents are within *r* steps of a given agent? The answer, as a
 function of *r*, says what kind of space a network is: a line, a sheet, a
 tree. Two statistics of the Graph of Life viewer read it off, `dimension`
 and `ricciCurvature`, on every 25th [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") of a run
-([What a run records](frames-and-stats.md)). The same idea lets Wolfram
+([What a run records](runs-and-records.md#what-a-run-records)). The same idea lets Wolfram
 (2020) read space and its curvature off his network models of physics.
 
-### Balls and shells
+#### Balls and shells
 
 The **ball** of radius *r* around agent *u* is every agent at distance at most
 *r* from it. The **shell** of radius *r* is every agent at distance exactly
@@ -58,14 +71,14 @@ In a **tree** in which every agent has *b* children, the shell grows as
 *b*^*r*. It grows by the same factor *b* at every step, faster than any power
 of *r*. A network like that has no finite dimension.
 
-### The dimension
+#### The dimension
 
 The viewer starts from about 24 agents spread evenly through the world. Around
 each, it counts the shells out to *r* = 5, and it averages the shell sizes
 *S*(*r*) over the agents. It drops every radius at which the ball already
 holds half the world. Beyond that, the growth measures the edge of the network,
 not its shape. Then it fits a straight line to ln *S*(*r*) against
-ln *r* by [least squares](correlation.md#fitting-a-straight-line). A shell that grows like
+ln *r* by [least squares](statistics.md#fitting-a-straight-line). A shell that grows like
 *r*^(*d*−1) gives a line of slope *d* − 1, so
 
 $$
@@ -81,7 +94,7 @@ slowly than *r*² over the first five steps. Fitted as above, they give a slope
 of 1.76, a dimension of 2.76, even with no edge. Read the dimension as a rough
 index.
 
-### The curvature
+#### The curvature
 
 On a curved surface, balls grow differently from flat space. On a sphere
 (positive curvature) they grow more slowly; on a saddle (negative curvature),
@@ -103,13 +116,13 @@ prove nothing.
   tree-like and expander-like networks give this.
 - **Positive**: neighbourhoods close back on themselves and hold less.
 
-In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") the curvature is +1.4 in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world,
+In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") the curvature is +1.4 in the median world,
 from −1.7 in the starting ring after the first [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). There it mostly means
-that the bushy neighbourhoods of [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") fill a ball's first steps, and the
+that the bushy neighbourhoods of hubs fill a ball's first steps, and the
 growth slows after them. Read it as "the growth slows", not as a sphere
 ([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
 
-### A caution
+#### A caution
 
 Both numbers are fitted to five or fewer points, on networks that are not
 lattices. They are indices for comparing worlds and moments, not exact
@@ -119,17 +132,17 @@ agents) reads 2.68. A finite dimension shows only as a plateau, a reading
 that holds steady over many scales
 ([The rulers, tried on known spaces](how-many-dimensions-does-a-world-have.md#the-rulers-tried-on-known-spaces)).
 
-### Where the ball dimension is used
+#### Where the ball dimension is used
 
 - **The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.** In B1's worlds of 100,000 tokens the dimension is
   3.4 in the median world (3.0 at 10,000 tokens).
   [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)
   reads it beside a picture of the ball growth itself.
 - **The health bar** asks for a dimension of 2.3 to 4
-  ([The health bar](health-bar.md)). It cannot tell a space from a small
+  ([The health bar](measuring-health.md#the-health-bar)). It cannot tell a space from a small
   world. [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds of 5,000 tokens (Experiment 14) read 3.45 to 4.19, yet
   they are hardly wider than their random twins
-  ([Folded](random-twin.md#folded)).
+  ([Folded](measuring-space.md#folded)).
 - **The two rulers** of
   [Is a world a space?](how-many-dimensions-does-a-world-have.md#two-rulers)
   read the same growth radius by radius, and look for a plateau. They use the
@@ -138,7 +151,7 @@ that holds steady over many scales
   the mean ball over radii 1 to 5, which the few agents next to a hub pull
   up.
 
-## The spectral dimension
+### The spectral dimension
 
 How many dimensions does a space have? One way to find out is to count the
 room in it. In *d* dimensions, the points within *r* steps of a point grow
@@ -148,7 +161,7 @@ Another way is to **get lost in it**. Release a walker that steps at random,
 and see how often it comes back to where it started. The more dimensions, the
 more directions there are to wander off in, and the rarer the return.
 
-### Why returning measures dimension
+#### Why returning measures dimension
 
 After *t* random steps, a walker has typically wandered about √*t* steps
 away, in every direction open to it. In *d* dimensions it is then spread
@@ -177,7 +190,7 @@ it. Its spectrum sets *P*(*t*) (Alexander and Orbach 1982). The heat
 equation of [Physical inspiration](physical-inspiration.md#agents-as-little-calculators)
 spreads heat exactly as the walker's probability spreads.
 
-### The walk used here
+#### The walk used here
 
 No run records this dimension: the notebook computes it where a page needs
 it, with this walk:
@@ -190,12 +203,12 @@ it, with this walk:
 - **Exact:** instead of simulating walkers, the notebook propagates the whole
   probability distribution, step by step, from a few dozen starting points.
 - **Minus the resting state:** in a finite world, the walker ends up spread
-  over the whole world, at each point in proportion to its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."). The
+  over the whole world, at each point in proportion to its connections. The
   notebook subtracts that resting probability from *P*(*t*), so that only the
   approach to rest is measured. It stops when what is left falls below 5/*n*,
   for a world of *n* points.
 
-### Two dimensions that need not agree
+#### Two dimensions that need not agree
 
 On a regular grid, the ball dimension and the spectral dimension are the
 same. On irregular spaces they differ, and how they differ is informative:
@@ -213,7 +226,7 @@ same. On irregular spaces they differ, and how they differ is informative:
   Jurkiewicz and Loll (2005) give *d*ₛ ≈ 4 at large scales and ≈ 2 at
   small ones.
 
-### Where the spectral dimension is used
+#### Where the spectral dimension is used
 
 [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#how-many-dimensions-does-a-world-have)
 measures both dimensions on the worlds, after calibrating them on spaces
@@ -225,13 +238,13 @@ a walker. In the game, tokens move almost as a random walk would
 ([Where the tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
 So a difference in tokens spreads slowly through these worlds too.
 
-## Box dimension
+### Box dimension
 
 A third way to give a network a dimension: cover it with boxes and count
 them (Song, Havlin and Makse 2005). It is the network version of the
 box-counting dimension of fractals.
 
-### Covering a shape with boxes
+#### Covering a shape with boxes
 
 Cover a shape with boxes of side ℓ and count how many are needed, *N*(ℓ). For
 a line of length 1, *N* = 1/ℓ; for a square, (1/ℓ)²; for a cube, (1/ℓ)³.
@@ -247,7 +260,7 @@ falls as they grow. A fractal can have a *d*_B that is not a whole number. A
 Sierpiński triangle is made of three half-size copies of itself. So it needs
 three times as many boxes each time they are halved: *d*_B = ln 3 / ln 2 ≈ 1.58.
 
-### Boxes on a network
+#### Boxes on a network
 
 A **box of size ℓ** is a set of agents no two of which are more than ℓ − 1
 steps apart. The viewer builds boxes as balls: a centre and every agent within
@@ -269,7 +282,7 @@ $$
 \texttt{boxDimension} = -\text{slope}, \qquad \texttt{boxDimensionR2} = R^2 .
 $$
 
-**Example.** Take the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 at 10,000 tokens (`B1-10000-s001`),
+**Example.** Take the world of [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 at 10,000 tokens (`B1-10000-s001`),
 after its last game. Of size 1, every agent is a box alone:
 
 | size of the boxes, ℓ | 1 | 3 | 5 | 9 | 17 | 33 |
@@ -281,14 +294,14 @@ dimension of about 2. The world of seed 1 at 100,000 tokens, 14,870 agents,
 reads 1.70
 ([Covering a world with boxes](what-shape-does-the-network-take.md#covering-a-world-with-boxes)).
 
-### Reading the R²
+#### Reading the R²
 
 Small-world networks are covered in a number of boxes that falls
 **exponentially** in ℓ, rather than as a power. Over a short range, even an
 exponential looks respectable on log–log axes. So a high R² is necessary for
 the dimension to mean something, but not sufficient.
 
-### Where the box dimension is used
+#### Where the box dimension is used
 
 The viewer records `boxDimension` and `boxDimensionR2` on every 25th
 iteration. In the median B1 world of 100,000 tokens, the box dimension is
@@ -299,30 +312,150 @@ covering runs to size 33, and at large sizes it counts the long, thin
 branches
 ([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
 
+## The random twin: is a world a space?
+
+The agents of a world have no positions, only links. Can such a network
+still be a space, in which far places are far apart? To find out, the
+notebook sets each world beside its **random twin**: the same agents, each
+with as many links as in the world, but wired at random. A random network is
+a *small world*, in which everyone is a few steps from everyone; a space is
+wide. A world counts as a space when its typical distance is at least 1.5
+times its twin's.
+
+### How the twin is made
+
+Give every agent as many link ends as it has links, put all the ends in one
+pile, and join them in pairs drawn at random: a *configuration model*. A pair
+that would join an agent to itself is dropped, and so is a second link
+between the same two agents (`book_graph.degree_preserving`, seed 23). Apart
+from those, every agent keeps its number of links, its [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling),
+and nothing else of the world is kept. So whatever a world has and its twin
+lacks was built by the world's rules.
+
+### Why a random network is near
+
+In a random network a link is as likely to be a long jump as a short one. So
+the number of agents within *r* steps multiplies at every step, and distances
+grow only like the logarithm of the network's size. In a space of *d*
+dimensions, about *r*^*d* agents lie within *r* steps of an agent
+([Dimension and curvature from ball growth](measuring-space.md#three-ways-to-measure-a-networks-dimension)),
+and distances grow as a power of the size.
+
+A twin has no dimension at all. B1's worlds of 100,000 tokens read 2.8 by
+ball growth; their twins read 6.5, and are still climbing when, after three
+or four steps, a quarter of the twin is reached
+([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
+
+### The typical distance
+
+From 40 agents drawn at random, count how many agents lie within *r* steps,
+for every *r*, and take the geometric mean of the 40 counts: the *typical*
+ball, which the few agents beside a hub do not pull up. The **typical
+distance** is the number of steps at which the typical ball holds half the
+world, read between whole steps. Do the same on the twin, and divide:
+
+$$
+\text{width} = \frac{\text{the world's typical distance}}{\text{its twin's typical distance}} .
+$$
+
+A small world has a width of about 1; a space is wider. The notebook's line
+for a space is a width of at least 1.5. Both networks are measured on their
+largest piece (`research/atlas/space.py`).
+
+### Examples
+
+From [What folds a world](how-many-dimensions-does-a-world-have.md#b1-and-b2-side-by-side), the
+median of each kind of world:
+
+| worlds | typical distance | the twin's | width |
+|---|---|---|---|
+| B1 at 10,000 tokens (Experiment 2) | 10.5 steps | 4.5 steps | 2.3 |
+| B2 at 10,000 tokens, iteration 2,000 (Experiment 16) | 5.0 steps | 4.2 steps | 1.18 |
+| B2 with the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead to the newborns or the parents (pilots, batch R) | 11.2 steps | 4.7 steps | 2.4 |
+
+B1's width grows with its size, as a space's must: 2.3 at 1,500 agents, 3.7
+at 13,800 and 5.1 at 64,000. B2's does not: 1.24 at 1,600 agents, 1.18 at
+3,400 and 1.14 at 30,700.
+
+### Folded
+
+A world is **folded** when its balls grow over the first few steps like those
+of a space of 2 to 4 dimensions, yet it is hardly wider than its twin. B2's
+worlds of 5,000 tokens (Experiment 14) are an example: by the
+[health bar](measuring-health.md#the-health-bar)'s
+measure, over 1 to 5 steps, they read 3.45 to 4.19, but their typical
+distance is only about 1.25 times their twins'. Followed further, the local
+dimension of a B2 world of 3,400 agents climbs 2.4, 3.9, 5.0 until, four
+steps out, a typical agent's ball holds a quarter of the world. A small world
+has no dimension to find, which is why the health bar's dimension rose with
+the size of B2's worlds.
+
+The word says how it happens. Every B2 world starts as a space, 1.68 times as
+wide as its twin at iteration 100, and folds to 1.24 by iteration 300, once
+its first generation dies of age. Each death is mended with a ring of links
+among the dead agent's neighbours
+([`mend_on_death`](settings.md#mend_on_death)), which joins agents that were
+two steps apart. Worlds without old age, without mending, or whose unused
+links lapse keep their room.
+
+Read at iteration 1,000, 498 worlds fell into two groups: 371 folded, with
+median widths of 1.26 and 1.27, and 127 spaces, with medians of 2.09 to 3.63
+by the rule that made them. The line of 1.5 lies between the two.
+
+### Where it is used
+
+- [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
+  and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world): B1's worlds and their
+  cores have a dimension; their twins have none.
+- [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world): a B1 world with a
+  mean [path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap) of 27.9 steps, against 6.0 when wired at
+  random.
+- [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): the width of every kind of
+  world, and what folds it.
+- [Healthy and rich](healthy-and-rich.md), [Rules in company](rules-in-company.md)
+  and [The candidates, played on](the-candidates-played-on.md): which worlds
+  are spaces.
+- [Room for the steadiest world](room-for-the-steadiest-world.md),
+  [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours) and
+  [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds):
+  theses that ask for a width of at least 1.5.
+- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
+  [A screen of random worlds](a-screen-of-random-worlds.md): the criterion
+  *almost three-dimensional*.
+
 ## Where to go next
 
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
   the rulers on the worlds, and what folds a world into a small world.
-- [The random twin: is a world a space?](random-twin.md): how the notebook
-  tells a space from a small world.
 - [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world):
   the viewer's measures on the baseline worlds.
 - [Physical inspiration](physical-inspiration.md#space-made-of-relations): why
   the notebook asks how many dimensions a world has.
+- [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap): distances in a network.
+- [The health bar](measuring-health.md#the-health-bar): the marks a healthy network meets.
 
 ## How our view changed
 
-- **24 October 2026.** From 8 October, this page said that a shell in a cubic
-  grid holds about 6*r*² points. It holds exactly 4*r*² + 2. The page also
-  said that the dimension falls short on grids because five steps are too few
-  for the growth to reach its limit. That holds for a cubic grid, whose shells
-  read 2.76 even with no edge. It does not hold for a square grid, whose shells
-  of 4*r* read exactly 2. Its 1.92 comes from the edges of a finite grid.
-  And the page said that the viewer starts from up to 24 agents. It takes
-  every ⌊*n*/24⌋-th of a world's *n* agents, which in any world of a thousand
-  agents or more is 24 or 25. All three were found when this page and two
-  others were merged into one, by counting and with the viewer's code
-  (`gol_series.py`).
+- *Three ways to measure a network's dimension*:
+  - **24 October 2026.** From 8 October, this page said that a shell in a cubic
+    grid holds about 6*r*² points. It holds exactly 4*r*² + 2. The page also
+    said that the dimension falls short on grids because five steps are too few
+    for the growth to reach its limit. That holds for a cubic grid, whose shells
+    read 2.76 even with no edge. It does not hold for a square grid, whose shells
+    of 4*r* read exactly 2. Its 1.92 comes from the edges of a finite grid.
+    And the page said that the viewer starts from up to 24 agents. It takes
+    every ⌊*n*/24⌋-th of a world's *n* agents, which in any world of a thousand
+    agents or more is 24 or 25. All three were found when this page and two
+    others were merged into one, by counting and with the viewer's code
+    (`gol_series.py`).
+- *The random twin: is a world a space?*:
+  - **24 October 2026.** Since 23 October, this page had said that 395 worlds
+    read at iteration 1,000 fell into 318 folded and 77 spaces, the spaces with
+    medians of 2.22 to 3.80. That reading lacked batches L and V and the second
+    round of the search by elimination. With them, 498 worlds fall into 371 and
+    127, with medians of 2.09 to 3.63
+    ([Every world at iteration 1,000](how-many-dimensions-does-a-world-have.md#every-world-at-iteration-1000)).
+    The two groups stay apart.
 
 ## References
 
@@ -338,12 +471,3 @@ branches
   networks. *Nature* 433, 392–395.
 - Wolfram, S. (2020). A class of models with the potential to represent
   fundamental physics. *Complex Systems* 29(2), 107–536.
-
-<!-- turns -->
----
-
-← [Particles: patterns that outlast what carries them](particles.md) · [Space and dimension](../README.md#space-and-dimension)
-
-> [!info]- Pages that link here (9)
-> [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Local rules only](local-rules-only.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [The health bar](health-bar.md) · [What a run records](frames-and-stats.md)
-<!-- /turns -->

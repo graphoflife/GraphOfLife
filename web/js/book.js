@@ -35,15 +35,23 @@ const Book = {
 
   // How the contents can be listed: the orders, the kinds of page and the states
   // a page can be in, each with the words the reader chooses it by.
-  SORTS: [['topic', 'By topic'], ['newest', 'Newest first'], ['oldest', 'Oldest first'],
+  SORTS: [['part', 'By part'], ['newest', 'Newest first'], ['oldest', 'Oldest first'],
           ['title', 'A to Z'], ['kind', 'By kind']],
   KINDS: [['overview', 'Overviews', 'Overview'], ['explanation', 'Explanations', 'Explanation'],
-          ['experiment', 'Experiments', 'Experiment'], ['study', 'Studies', 'Study'], ['term', 'Terms', 'Term'],
+          ['experiment', 'Experiments', 'Experiment'], ['study', 'Studies', 'Study'],
+          ['reference', 'Reference pages', 'Reference'], ['term', 'Terms', 'Term'],
           ['method', 'Methods and statistics', 'Method']],
+  // The mark beside a page in the contents says what kind of page it is (the author,
+  // 2026-11-09: the part's colour as a stripe, and a mark for the kind): a study, an
+  // experiment, a plan (an experiment with no results yet), a reference page, a guide.
+  MARKS: [['study', 'Study'], ['experiment', 'Experiment'], ['plan', 'Plan, not played yet'],
+          ['reference', 'Reference'], ['guide', 'Guide']],
+  /** The parts the reader left open, kept from one visit to the next; round 3's is open at first. */
+  OPENED: 'gol.book.open',
   STATUSES: [['analysed', 'Analysed'], ['ready', 'Ready to run'], ['draft', 'Drafts'],
              ['written', 'Written'], ['planned', 'Not written yet']],
   /** How the reader asked for the contents: an order, three filters and words to look for. */
-  view: { sort: 'topic', topic: '', kind: '', status: '', query: '' },
+  view: { sort: 'part', topic: '', kind: '', status: '', query: '' },
 
   index: null,
   lab: null,
@@ -72,6 +80,13 @@ const Book = {
       });
     }
     this.toc.addEventListener('click', event => {
+      const summary = event.target.closest('details.book-section > summary');
+      if (summary) {
+        // The details opens or shuts itself; remembered only when the reader chose it, not
+        // when a search opened every part that holds a match.
+        if (!this.filtered()) this.keepOpen(summary.parentElement.dataset.part, !summary.parentElement.open);
+        return;
+      }
       const link = event.target.closest('[data-chapter]');
       if (!link) return;
       event.preventDefault();
@@ -142,6 +157,45 @@ const Book = {
     return this.index ? this.index.pages : [];
   },
 
+  /** The parts of the index, each a colour and a few topics, in the order the contents show them. */
+  parts() {
+    return (this.index && this.index.parts) || [];
+  },
+
+  /** The part a page belongs to: the part of its home topic, its first. */
+  partOf(page) {
+    const home = ((page && page.topics) || [])[0];
+    return this.parts().find(part => part.topics.includes(home));
+  },
+
+  /** What the mark beside a page says it is. */
+  mark(page) {
+    if (page.kind === 'experiment') return ['draft', 'ready', 'planned'].includes(page.status) ? 'plan' : 'experiment';
+    if (page.kind === 'study') return 'study';
+    if (['reference', 'term', 'method'].includes(page.kind)) return 'reference';
+    return 'guide';
+  },
+
+  /** The parts left open: those the reader opened, or round 3's at first. */
+  opened() {
+    try {
+      const kept = JSON.parse(localStorage.getItem(this.OPENED));
+      if (Array.isArray(kept)) return new Set(kept);
+    } catch (err) { /* none kept, or a private window */ }
+    return new Set(['now']);
+  },
+
+  keepOpen(part, open) {
+    const kept = this.opened();
+    if (open) kept.add(part); else kept.delete(part);
+    try { localStorage.setItem(this.OPENED, JSON.stringify([...kept])); } catch (err) { /* private window */ }
+  },
+
+  /** Whether the reader is looking for something: then every part with a match is open. */
+  filtered(view = this.view) {
+    return Boolean(view.query || view.topic || view.kind || view.status);
+  },
+
   /** A topic of the index, by its id. A page's first topic is its home. */
   topic(id) {
     return ((this.index && this.index.topics) || []).find(t => t.id === id);
@@ -175,7 +229,7 @@ const Book = {
       return false;
     }
     document.getElementById('bookTitle').textContent = this.index.title;
-    this.offer(this.choices.topic, [['', 'Every topic'], ...this.index.topics.map(t => [t.id, t.title])]);
+    this.offer(this.choices.topic, this.scopes());
     try { this.view = this.chosen(JSON.parse(localStorage.getItem(this.LISTING))); } catch (err) { /* none kept */ }
     for (const [key, el] of Object.entries(this.choices)) el.value = this.view[key];
     let remembered = null;
@@ -229,6 +283,7 @@ const Book = {
     }
     if (this.file !== file) return;            // another page was opened meanwhile
     this.page.innerHTML = (chapter ? this.kicker(chapter) : '') + Markdown.render(source, this.EMBEDS);
+    this.page.style.setProperty('--part', (chapter && this.partOf(chapter)?.colour) || 'transparent');
     this.sortable(this.page);
     // An image's path is relative to the file it is written in.
     const drawings = [];
@@ -322,7 +377,10 @@ const Book = {
     const kind = (this.KINDS.find(([id]) => id === chapter.kind) || [])[2];
     const what = numbers.length ? `Experiment${numbers.length > 1 ? 's' : ''} ${
       numbers.length > 1 ? `${numbers.slice(0, -1).join(', ')} and ${numbers.at(-1)}` : numbers[0]}` : kind;
-    return `<p class="book-kicker"><a href="#" data-topic="${Markdown.escape(topic.id)}">${
+    const part = this.partOf(chapter);
+    return `<p class="book-kicker"${part ? ` style="--part: ${Markdown.escape(part.colour)}"` : ''}>${
+      part ? `<span class="book-kicker-part">${Markdown.escape(part.title)}</span> · ` : ''
+    }<a href="#" data-topic="${Markdown.escape(topic.id)}">${
       Markdown.escape(topic.title)}</a>${what ? ` · ${what}` : ''}</p>`;
   },
 
@@ -357,10 +415,9 @@ const Book = {
 
   /** A kept view, with anything this index no longer offers put back to its default. */
   chosen(kept) {
-    const view = { sort: 'topic', topic: '', kind: '', status: '', query: '' };
+    const view = { sort: 'part', topic: '', kind: '', status: '', query: '' };
     if (!kept || typeof kept !== 'object') return view;
-    const offered = { sort: this.SORTS, kind: this.KINDS, status: this.STATUSES,
-                      topic: ((this.index && this.index.topics) || []).map(t => [t.id]) };
+    const offered = { sort: this.SORTS, kind: this.KINDS, status: this.STATUSES, topic: this.scopes() };
     for (const [key, options] of Object.entries(offered)) {
       if (options.some(([value]) => value === kept[key])) view[key] = kept[key];
     }
@@ -369,22 +426,47 @@ const Book = {
   },
 
   /**
-   * The contents as the reader asked for them, as [[heading, pages], …]: by topic
-   * (each page under its home topic, in reading order) or by kind, in groups; by
-   * the day a page was added or by title, in one list without a heading. A page
-   * shows if any of its topics is the one asked for, its kind and status are, and
-   * every word looked for is in its title or summary.
+   * What the contents can be narrowed to: everything, a part, or one topic of a part,
+   * as [value, words] pairs; a part's value is `part:<id>`.
+   */
+  scopes() {
+    const topics = (this.index && this.index.topics) || [];
+    const out = [['', 'Every part']];
+    for (const part of this.parts()) {
+      out.push([`part:${part.id}`, part.title]);
+      for (const id of part.topics) {
+        const topic = topics.find(t => t.id === id);
+        if (topic && part.topics.length > 1) out.push([id, `\u00a0\u00a0· ${topic.title}`]);
+      }
+    }
+    // An index without parts (an old one) is narrowed by topic alone.
+    if (!this.parts().length) out.push(...topics.map(t => [t.id, t.title]));
+    return out;
+  },
+
+  /**
+   * (each page under its home topic, the part's topics in order, each in reading
+   * order; the part's id third) or by kind, in groups; by the day a page was added
+   * or by title, in one list without a heading. A page shows if it belongs to the
+   * part asked for, or any of its topics is the topic asked for, its kind and
+   * status are, and every word looked for is in its title or summary.
    */
   listing(view = this.view) {
     const words = view.query.toLowerCase().split(/\s+/).filter(Boolean);
-    const shown = this.pages().filter(p => (!view.topic || p.topics.includes(view.topic))
+    const inScope = p => !view.topic || (view.topic.startsWith('part:')
+      ? this.partOf(p)?.id === view.topic.slice(5) : p.topics.includes(view.topic));
+    const shown = this.pages().filter(p => inScope(p)
       && (!view.kind || p.kind === view.kind) && (!view.status || p.status === view.status)
       && words.every(w => `${p.title} ${p.summary || ''}`.toLowerCase().includes(w)));
     const grouped = (groups, inGroup) => groups.map(([key, heading]) => [heading, shown.filter(p => inGroup(p, key))])
       .filter(([, list]) => list.length);
-    if (view.sort === 'topic') return grouped(this.index.topics.map(t => [t.id, t.title]), (p, id) => p.topics[0] === id);
-    if (view.sort === 'kind') return grouped(this.KINDS.map(([id, kinds]) => [id, kinds]), (p, kind) => p.kind === kind);
     const order = new Map(this.pages().map((p, i) => [p.id, i]));
+    if (view.sort === 'part') {
+      return this.parts().map(part => [part.title, shown.filter(p => this.partOf(p) === part).sort((a, b) =>
+        part.topics.indexOf(a.topics[0]) - part.topics.indexOf(b.topics[0]) || order.get(a.id) - order.get(b.id)),
+      part.id]).filter(([, list]) => list.length);
+    }
+    if (view.sort === 'kind') return grouped(this.KINDS.map(([id, kinds]) => [id, kinds]), (p, kind) => p.kind === kind);
     const plain = p => p.title.replace(/^(the|a|an)\s+/i, '').replace(/[*_`]/g, '');
     const by = {
       newest: (a, b) => (b.added || '').localeCompare(a.added || '') || order.get(a.id) - order.get(b.id),
@@ -399,19 +481,45 @@ const Book = {
     if (!this.index) return;
     this.labelToggle();
     const dated = ['newest', 'oldest'].includes(this.view.sort);
-    const groups = this.listing().map(([heading, list]) => {
+    const marks = Object.fromEntries(this.MARKS);
+    const item = c => {
+      const state = this.describe(c);
+      const part = this.partOf(c);
+      const mark = this.mark(c);
+      return `<a href="#" data-chapter="${c.id}" class="book-toc-item${
+        c.id === this.current ? ' active' : ''}${c.file ? '' : ' unwritten'}"${
+        part ? ` style="--part: ${Markdown.escape(part.colour)}"` : ''}>`
+        + `<span class="book-toc-title"><span class="book-mark book-mark-${mark}" title="${marks[mark]}"></span>${
+          Markdown.inline(c.title)}</span>`
+        + (dated && c.added ? `<span class="book-toc-date">${Markdown.escape(c.added)}</span>` : '')
+        + (state.label ? `<span class="book-chip book-chip-${state.state}">${state.label}</span>` : '')
+        + '</a>';
+    };
+    const opened = this.opened();
+    const here = this.partOf(this.chapter(this.current));
+    const groups = this.listing().map(([heading, list, partId]) => {
+      const part = partId && this.parts().find(p => p.id === partId);
+      if (!part) {
+        return `<div class="book-part">${heading ? `<h3>${Markdown.inline(heading)}</h3>` : ''}${
+          list.map(item).join('')}</div>`;
+      }
+      const open = this.filtered() || opened.has(part.id) || here === part;
+      let last = null;
       const items = list.map(c => {
-        const state = this.describe(c);
-        return `<a href="#" data-chapter="${c.id}" class="book-toc-item${
-          c.id === this.current ? ' active' : ''}${c.file ? '' : ' unwritten'}">`
-          + `<span class="book-toc-title">${Markdown.inline(c.title)}</span>`
-          + (dated && c.added ? `<span class="book-toc-date">${Markdown.escape(c.added)}</span>` : '')
-          + (state.label ? `<span class="book-chip book-chip-${state.state}">${state.label}</span>` : '')
-          + '</a>';
+        const home = c.topics[0];
+        const head = home !== last && part.topics.length > 1
+          ? `<h4 class="book-topic-head">${Markdown.escape(this.topic(home)?.title || '')}</h4>` : '';
+        last = home;
+        return head + item(c);
       }).join('');
-      return `<div class="book-part">${heading ? `<h3>${Markdown.inline(heading)}</h3>` : ''}${items}</div>`;
+      return `<details class="book-section" data-part="${part.id}" style="--part: ${Markdown.escape(part.colour)}"${
+        open ? ' open' : ''}><summary title="${Markdown.escape(part.about || '')}"><span class="book-section-title">${
+        Markdown.escape(part.title)}</span><span class="book-section-count">${list.length}</span></summary>${
+        items}</details>`;
     }).join('');
-    this.list.innerHTML = groups || '<p class="book-toc-empty">No page matches.</p>';
+    const legend = `<p class="book-legend">${this.MARKS.map(([id, words]) =>
+      `<span><span class="book-mark book-mark-${id}"></span>${Markdown.escape(words.split(',')[0])}</span>`).join('')}</p>`;
+    this.list.innerHTML = legend + (groups || '<p class="book-toc-empty">No page matches.</p>');
   },
 
   /**

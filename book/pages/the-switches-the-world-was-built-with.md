@@ -21,7 +21,7 @@ revolutions win most of the nodes that change hands, and decide whether a
 world is old and calm or young and turbulent. In B2, alone or beside each of
 some twenty other rules, revolutions and gifts are details, except where
 brains are mixed at birth. Handover thins B2's network into trees with nearly
-every rule. Judged a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long, evolution goes on in nearly every B2
+every rule. Judged a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long, evolution goes on in nearly every B2
 world whatever the switches: they change only how fast.
 
 ## The switches the world was built with
@@ -35,7 +35,7 @@ network ([Building B2: a world that cannot break](a-world-that-cannot-break.md))
 Revolutions are to be turned off in a page still to be written, *What keeps
 wealth spread?*, for what they do to wealth. And gifts had been off in every
 run of the notebook. The author asked whether these switches had been tested
-for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."). They had not, and each has a reason it might
+for open-ended evolution. They had not, and each has a reason it might
 matter. So a batch of pilot worlds, batch S, threw them into B1 and B2.
 
 ### Three switches, and two more
@@ -48,7 +48,7 @@ army, the band takes the hill.
 In the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") a node goes to whoever staked the most on it, and a revolution is
 such a band. A staker may mark part of its stake on a node as revolutionary.
 If the marked parts of the smaller stakers together exceed the largest single
-stake, they take the node ([How a coalition takes a node](revolution.md)).
+stake, they take the node ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
 With the switch off ([`allow_revolutions`](settings.md#allow_revolutions)),
 every node goes to whoever staked the most on it.
 
@@ -88,7 +88,7 @@ number that [Rules without numbers](rules-without-numbers.md) looks for.
 
 **Two more.** The pilots of batch S also tried **every unused link lapsing**
 without gifts, as in the original algorithm (`prune_needs = 0` alone). And
-they tried **sharing the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") by wealth** (`redistribution = by_tokens`).
+they tried **sharing the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") by wealth** (`redistribution = by_tokens`).
 It gives the tokens of the dead to the survivors in proportion to what they
 hold. So every round of deaths concentrates wealth instead of spreading it,
 and a world of rich and poor plays a different game.
@@ -96,10 +96,10 @@ and a world of rich and poor plays a different game.
 ### The worlds of batch S
 
 The worlds are pilots in the engine's own code (`--proto engine=true`; see
-[Pilot worlds](the-lab.md#pilot-worlds)), two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of each kind. Each holds 10,000
+[Pilot worlds](runs-and-records.md#pilot-worlds)), two seeds of each kind. Each holds 10,000
 tokens and runs for 1,000 iterations, and a whole world is kept every 100
 iterations. With two seeds a kind, what they show is indicative, not an
-effect ([How many seeds an experiment needs](bootstrap.md#how-many-seeds-an-experiment-needs)). The two
+effect ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)). The two
 baselines differ in their brains. B1's, of five hidden layers, barely see
 what is around them. B2's, of one hidden layer of 16 units, are brains that
 see ([B1 and B2: the two baselines](b1-and-b2.md)).
@@ -125,7 +125,7 @@ reproduce the lab exactly.
 The two figures below read each world over iterations 500 to 1,000. The
 first shows how a world lives: the nodes taken, the births, the ages and the
 number of agents. The second holds each world's network against the [health
-bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), the marks a healthy network must meet.
+bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), the marks a healthy network must meet.
 
 <!-- figure switches/life -->
 ![How each switch changes a world's life](../figures/switches/life.svg)
@@ -161,14 +161,14 @@ bar](health-bar.md "The seven marks a world's network must meet to count as heal
 In every game, revolutions took 28 to 39 nodes per hundred agents, most of
 the 46 to 55 that changed hands. The world they make is calm and old. The
 average agent was 116 to 137 iterations old, and 3 agents in a hundred were
-born in an iteration. The network grew [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."): one agent was joined to 9 to
+born in an iteration. The network grew [stars](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."): one agent was joined to 9 to
 32% of the others.
 
 Take revolutions away, and B1 becomes a world of mayflies. Nodes changed
 hands 71 to 84 times per hundred agents a game. Between 14 and 28 agents in a
 hundred were born in every iteration, and the average agent was 7 to 13
 iterations old. Its network had no stars: no agent was joined to more than 1%
-of the others. But it was stretched and fragile. Its [ball dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") was 2.1 to
+of the others. But it was stretched and fragile. Its [ball dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") was 2.1 to
 2.2, and a single agent's loss would cut off 36 to 37% of the world.
 
 In B2, revolutions won about one node in three hundred a game over the
@@ -193,12 +193,12 @@ against 3,400, and otherwise left it as it was.
 
 How can one tell whether evolution goes on? Play a world against its own
 past. Take the brains of one world at two moments, two eras. Give every agent
-a brain drawn from one era or the other, switch [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") off, and play on
+a brain drawn from one era or the other, switch mutation off, and play on
 under the world's own rules. If the later brains end up holding more than
 half of the world, they are better
-([Eras and contests: does a world keep getting better?](eras-and-contests.md)).
+([Eras and contests: does a world keep getting better?](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)).
 The first contests here lasted 20 iterations, and from them each era gets a
-rating, the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' at 0.
+rating, the founders' at 0.
 
 <!-- figure switches/elo -->
 ![Does any switch keep evolution going?](../figures/switches/elo.svg)
@@ -280,7 +280,7 @@ they lost ground. Iteration 1,000 held 0.32 against iteration 500, and
 iteration 1,500 held 0.11. Meanwhile the world shrank. It held about a
 thousand agents from iteration 1,000 to 1,750, and a few dozen after 2,000.
 At its smallest it held 13, and 44 at iteration 3,000. A lab run would have
-counted it as [extinct](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer."). Contests played in its later eras' worlds often ended
+counted it as extinct. Contests played in its later eras' worlds often ended
 with fewer than 50 agents, so their scores say nothing.
 
 **A lifetime long, single worlds of B1 tell another story.** In the table
@@ -342,18 +342,18 @@ have tried with B2, and batch S's other ways of deciding a node:
   all but the last token, kept at home;
 - brains that grow or whose units each hold a token, brains that change more
   slowly or faster, and every unused link lapsing;
-- a lottery, sides pooled by [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") or by family, and a sense of kin or of
+- a lottery, sides pooled by genotype or by family, and a sense of kin or of
   family ([Other contests: a lottery, and alliances](another-game.md)).
 
 Every world holds 10,000 tokens and is played for 1,000 iterations in the
 engine's own code, as in batch S. Each corner is read at iteration 1,000, the
 same moment in each, as [Healthy and rich](healthy-and-rich.md) reads every
 world. Four of its numbers matter here. One is the share of agents holding
-three tokens or fewer, the poor. The others are the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."), the
+three tokens or fewer, the poor. The others are the [diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."), the
 marks of the health bar a world meets, and its number of agents. And each
 world's brains of iteration 1,000 are played against those of 500 a lifetime
 long, in contests of 100 iterations. The lab's ten B2 worlds, played the same
-way, have a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 0.68.
+way, have a median of 0.68.
 
 For revolutions, batch W plays B2 without revolutions beside each other rule.
 Each of its worlds completes a square whose other corners are B2, B2 without
@@ -457,7 +457,7 @@ alone.
 **It costs health with nearly every rule.** Handover costs two marks of the
 health bar at the median, and up to four; in five of the 46 worlds, none.
 The marks it costs are the network's. With handover, 38 of the 46 worlds
-have less than 0.8 of their agents in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). In 42 of the 46, a link's
+have less than 0.8 of their agents in the [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). In 42 of the 46, a link's
 loss would cut off more than 1% of the world. In 36, an agent's loss would
 cut off more than 2%. Without handover, none, two and three do. A parent that gives
 its links away thins the network into trees, with 1.8 links fewer per agent
@@ -481,8 +481,8 @@ the gap. A parent that passes its links on does not gather them till it
 dies. So the dying leave rings of 3.7 groups fewer
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 A typical agent is then further from everyone than in B2. The typical
-distance, over the [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s, rises by 0.24 at the median, in 41 of 46
-worlds. The room is bought with the trees and [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") above: room and
+distance, over the [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s, rises by 0.24 at the median, in 41 of 46
+worlds. The room is bought with the trees and [bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut "A connection that lies on no loop: cut it and the network falls into two pieces.") above: room and
 resilience pull apart, as What folds a world found.
 
 **Evolution goes on, more slowly.** In lifetime contests, the brains of
@@ -652,7 +652,7 @@ revolutions.
 
 Every world on this page is a pilot, made with `research/oee/pilots/run.py`
 in the engine's own code (`--proto engine=true`) and kept in
-`GraphOfLifeRuns/.pilots` ([Pilot worlds](the-lab.md#pilot-worlds)). No experiment of
+`GraphOfLifeRuns/.pilots` ([Pilot worlds](runs-and-records.md#pilot-worlds)). No experiment of
 the lab stands behind it, so the page has no box of runs. Every figure says,
 folded beneath it, which worlds it reads and how. The command lines that made
 the worlds, and what each check found, are in `research/oee/pilots/LOG.md`.
@@ -724,6 +724,6 @@ the worlds, and what each check found, are in `research/oee/pilots/LOG.md`.
 
 ← [Rules in company](rules-in-company.md) · [Changing the rules](../README.md#changing-the-rules) · [Rules without numbers](rules-without-numbers.md) →
 
-> [!info]- Pages that link here (17)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a coalition takes a node](revolution.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Where tokens flow](where-the-tokens-flow.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules in company](rules-in-company.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (16)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Where tokens flow](where-the-tokens-flow.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules in company](rules-in-company.md) · [Rules without numbers](rules-without-numbers.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

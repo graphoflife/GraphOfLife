@@ -354,20 +354,24 @@ def test_a_term_is_linked_where_it_is_first_used():
     # linking a page twice changes nothing.
     import book_fill
     md = "pages/x.md"
-    text = ("# Degree and dimension\n\nThe spectral dimension of a world, its dimension by balls, and the degree\n"
-            "of each; their degrees again, `degree` in code, and [the Gini](gini-coefficient.md) and the Gini again.\n")
-    once = book_fill.link_terms(md, text)
-    assert book_fill.link_terms(md, once) == once, "linking twice changed the page"
-    assert once.startswith("# Degree and dimension\n"), "a heading was linked"
+
     def href(name):
         term = next(t for t in book_fill.terms() if t["name"] == name)
         page = os.path.basename(book_fill.page_file(term["page"]))
         return page + (f"#{term['anchor']}" if term.get("anchor") else "")
+    # Where the terms are explained, whichever page that is today.
+    degree, gini = href("degree"), href("Gini coefficient")
+    text = ("# Degree and dimension\n\nThe spectral dimension of a world, its dimension by balls, and the degree\n"
+            f"of each; their degrees again, `degree` in code, and [the Gini]({gini}) and the Gini again.\n")
+    once = book_fill.link_terms(md, text)
+    assert book_fill.link_terms(md, once) == once, "linking twice changed the page"
+    assert once.startswith("# Degree and dimension\n"), "a heading was linked"
     assert f'[spectral dimension]({href("spectral dimension")} "' in once, once
     assert f'[dimension]({href("dimension")} "' in once, "a shorter name took the longer one's words"
-    assert once.count("](degree.md") == 1 and "`degree`" in once, once
-    assert once.count("gini-coefficient.md") == 1, "a term the page links already was linked again"
-    assert book_fill.link_terms("pages/degree.md", "the degree of an agent").count("degree.md") == 0, \
+    assert once.count(f"]({degree}") == 1 and "`degree`" in once, once
+    assert once.count(gini.split("#")[0]) == 1, "a term the page links already was linked again"
+    own = "pages/" + degree.split("#")[0]
+    assert book_fill.link_terms(own, "the degree of an agent").count(degree.split("#")[0]) == 0, \
         "a term was linked on its own page"
 
 

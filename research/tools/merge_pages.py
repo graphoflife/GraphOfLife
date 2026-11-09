@@ -211,7 +211,9 @@ def main() -> None:
     terms = load(os.path.join(BOOK, "terms.json"))
     for term in terms["terms"]:
         if term["page"] in olds:
-            term["anchor"] = dict(merged)[term["page"]]
+            # Its own heading, where NEW kept it; else the section its page became.
+            own = term.get("anchor")
+            term["anchor"] = own if own and own in ids else dict(merged)[term["page"]]
             term["page"] = a.new
             changes.append(f"terms.json: {term['name']}")
     legacy = load(os.path.join(BOOK, "legacy.json"))

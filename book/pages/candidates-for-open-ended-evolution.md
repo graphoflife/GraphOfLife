@@ -9,23 +9,23 @@
 
 Evolution needs variation, heredity and selection, and open-ended evolution
 needs them to last. Each of round 3's hundred worlds was read for them from
-what it recorded: its whole [family tree](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), how much children act like their
+what it recorded: its whole family tree, how much children act like their
 parents, whether having children runs in families, and how far its main line
 of descent keeps moving into new behaviour. Of the hundred, 28 are ruled out:
-18 died, one is a [star](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), four pass nothing on and five stand still. The other
-72 evolve fast but narrowly: a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 825 generations in 3,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."),
+18 died, one is a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), four pass nothing on and five stand still. The other
+72 evolve fast but narrowly: a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of 825 generations in 3,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."),
 but an effective population of only 14, so chance decides much of which line
 survives. The healthiest worlds change a little more than the rest, but they
 pass on less. The shortlist is every candidate among the first 13 of any of
 health's three orders: 24 worlds, which the author chose to play again with new
-[seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). Seeds 3042, 4006 played strongest first and 4008 played weakest first
+[seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). Seeds 3042, 4006 played strongest first and 4008 played weakest first
 are among the first of all three; seed 3026, with some of the simplest rules of
 the round, evolves the most, and is on the shortlist by its worst criterion.
 
 ## What evolution needs
 
 Evolution needs three things, and open-ended evolution needs them to last
-([The open-ended test](open-ended-test.md)):
+([The open-ended test](measuring-evolution.md#what-would-count-as-open-ended-evolution)):
 - **variation:** the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") differ, in what they are and in what they do;
 - **heredity:** children are like their parents;
 - **selection:** some agents leave more descendants than others *because of*
@@ -43,9 +43,9 @@ single verdict over all of them.
 
 Every number comes from what a world recorded. No world is played again.
 
-- **The family tree.** A world's [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") hold every birth of every iteration,
+- **The family tree.** A world's [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") hold every birth of every iteration,
   so its whole family tree can be built: who descends from whom, and how many
-  generations separate the living from the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). Going back from the agents
+  generations separate the living from the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). Going back from the agents
   alive at the end, their ancestors grow fewer and fewer, until all of them
   descend from one. In a population of *N* agents left to chance this takes
   about 2*N* generations. Where it takes a few dozen, the **effective
@@ -61,7 +61,7 @@ Every number comes from what a world recorded. No world is played again.
   differences in how many children its members leave, and only the differences
   that are passed on add up over the generations (Fisher's fundamental theorem
   of natural selection). So we ask whether agents that have many children have
-  children that have many too: the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of a parent's and its child's
+  children that have many too: the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of a parent's and its child's
   numbers of children, over every pair born from iteration 100 to two thirds of
   the run, against the same correlation with the children's counts shuffled
   among the children born in the same iteration. Where it is clearly above
@@ -83,7 +83,7 @@ These follow the measures of the MODES toolbox for open-ended dynamics
 (Dolson, Vostinar, Wiser and Ofria, 2019), read on what GraphOfLife records:
 *change* and *novelty* along the line of descent, and *ecology* in how many
 kinds of behaviour live side by side (the
-[same-position share](what-makes-a-world-interesting.md#the-same-position-share)
+[same-position share](measuring-health.md#the-same-position-share)
 and the effective kinds of staking). Its fourth measure, *complexity*, is not
 read yet.
 
@@ -418,7 +418,7 @@ shortlisted world's evolution beside its health.
 - **Seed 3026 is the most evolving world of the round:** it lives the most
   generations (2,159), and its line of descent reaches furthest into new
   behaviour (0.26 above the noise) and never comes back. Its rules are among the
-  simplest the round drew: [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), handing over, mending, [estates](estate.md "The tokens a dead agent leaves, and who gets them.") to the
+  simplest the round drew: [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), handing over, mending, [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the
   newborns, and a cap of 16 links that seldom binds; no search, no gifts, no
   costs on links. It is on the shortlist by its worst criterion: it culls 12%
   of its tokens in a game, and its agents act alike, so the product and the
@@ -451,11 +451,11 @@ screen draws opens a channel, and most have a price.
 | search (jump, walk, reach) | agents choose partners beyond their neighbours: they can find allies, or prey, and move in the network | links made far away fold a world into a small world |
 | a token in every link, or upkeep | links with a price: a link is kept only where it is worth it | poor agents can hold few links |
 | the lottery | the weaker can win: a node goes to a staker drawn in proportion to its stake | chance decides more: selection is weaker |
-| [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") (revolutions) | the small can join against the largest staker | — |
+| [coalitions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") (revolutions) | the small can join against the largest staker | — |
 | estates to the poor, the young, the family or the neighbours | where the wealth of the dead goes shapes who can have children next | — |
 | a cap on links (valence) | no hubs, by rule | at 2, chains and rings only, and an agent at its cap has no child |
 | a game in rounds, weakest or strongest first | agents see the board before each token and can answer each other's stakes | — |
-| [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") only when copied | a brain changes only when it is copied, into a child or into a node its owner wins, and never while it sits: a genotype lasts, and can be selected | — |
+| [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") only when copied | a brain changes only when it is copied, into a child or into a node its owner wins, and never while it sits: a genotype lasts, and can be selected | — |
 | larger brains (3 to 5 layers of 16 to 50) | more complicated behaviour can be represented | — |
 
 ## What could be played next
@@ -469,7 +469,7 @@ shortlist's 24 worlds again, with two new seeds each, at 50,000 tokens and for
 The five ways:
 
 1. **Play the shortlist on.** Every shortlisted world kept its last state, so
-   the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can play it on from iteration 3,000, to 10,000 say, without playing
+   the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can play it on from iteration 3,000, to 10,000 say, without playing
    its first 3,000 again. Does its health hold? Does its line of descent keep
    reaching new behaviour, or come to rest? A typical world of round 3 took
    about two and a half hours for its 3,000 iterations on one worker, so 7,000
@@ -487,7 +487,7 @@ The five ways:
 5. **Play each shortlisted world's eras against each other.** Every world of
    round 3 kept its whole state every 250 iterations: twelve eras. A contest
    between two eras plays their brains against each other in the same world
-   ([Eras, contests and invasions](eras-and-contests.md)). If every later era
+   ([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). If every later era
    beats every earlier one, the world keeps getting better; if the eras win
    and lose in bands, it goes round in circles. The notebook's programme calls
    this the test that a forgetful world cannot pass (`research/Research.md`,

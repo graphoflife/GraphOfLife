@@ -2,7 +2,7 @@
 
 > [!question] Questions of this page
 > - Is there a combination of the notebook's rules that makes a healthy world: a
->   resilient, decentralised network of about three [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), whose [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
+>   resilient, decentralised network of about three [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), whose [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
 >   differ in almost everything?
 > - Which rules make a world unhealthy wherever they appear, so that they can
 >   be set aside?
@@ -24,7 +24,7 @@ folded, and the worlds that stay spaces break or are poor. Then the author
 went through every setting and criterion again. Round 2 was withdrawn
 unplayed, and round 3 draws a hundred worlds from the author's choices, to be
 looked at as if no world had been seen before. Sixteen of them, not yet
-played, make way for sixteen more played with the original [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s game,
+played, make way for sixteen more played with the original [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s game,
 their stakes placed a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at a time.
 
 ## Why draw worlds at random
@@ -38,7 +38,7 @@ make anything good.
 That is where the notebook's search for a healthy world stood in October
 2026. Every healthy-looking world so far had been found by changing one rule
 of B2 at a time, and each paid for one quality with another:
-- the [estates](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead make spaces of paupers;
+- the [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead make spaces of paupers;
 - mixed [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") make rich worlds that fold;
 - worlds without mending can be cut
   ([Room for the steadiest world](room-for-the-steadiest-world.md#room-for-the-steadiest-world)
@@ -65,12 +65,12 @@ sampler draws afresh, by a rule that depends only on the kind of setting. The
 sampler is `gol_screen.py`. It starts from [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s rules and changes what the
 draw says.
 
-- **Every on/off rule** is on in half the worlds: [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.")
+- **Every on/off rule** is on in half the worlds: [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.")
   ([`allow_revolutions`](settings.md#allow_revolutions)), gifts
   ([`allow_gifting`](settings.md#allow_gifting)), handover
   ([`allow_handover`](settings.md#allow_handover)), mending
   ([`mend_on_death`](settings.md#mend_on_death)), mixing at birth
-  ([`mix_at_birth`](settings.md#mix_at_birth)), [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") before the game
+  ([`mix_at_birth`](settings.md#mix_at_birth)), [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") before the game
   ([`message_prepass`](settings.md#message_prepass)), brains that change only
   when copied ([`mutate_on_replication`](settings.md#mutate_on_replication)),
   the pooled self-message ([`self_message`](settings.md#self_message)), and a
@@ -112,7 +112,7 @@ These are the numbers and their levels:
 | links at birth | [`birth_links`](settings.md#birth_links) | 0 | 1, 2, 4 |
 | when unused links lapse: the neighbours their two ends must share | [`prune_needs`](settings.md#prune_needs) | 0: every unused link is cut | 1, 2, 3 |
 | the brain's size: its hidden layers | [`hidden_layers`](settings.md#hidden_layers) | one of 16 | one of 8, one of 32, two of 16 |
-| [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."): how often a brain changes | [`mutation_probability`](settings.md#mutation_probability) | 0.2 | 0.1, 0.4, 0.8 |
+| [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype."): how often a brain changes | [`mutation_probability`](settings.md#mutation_probability) | 0.2 | 0.1, 0.4, 0.8 |
 | mutation: how large a change is | [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.2 | 0.1, 0.4 |
 | mutation: the share of a brain a change touches | [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.1 | 0.05, 0.3 |
 
@@ -145,36 +145,36 @@ criteria, read at iteration 2,000:
 1. **Alive:** more than 20 agents, and not stopped as too slow.
 2. **Decentralised:** no agent linked to more than 5% of the others, and 3 to
    12 links per agent.
-3. **Resilient:** one piece, with at least 80% of the agents in the [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). No
+3. **Resilient:** one piece, with at least 80% of the agents in the [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."). No
    single agent's loss cuts off more than 2% of the world, and no single
    link's loss more than 1%.
 4. **Almost three-dimensional:** a dimension of 2 to 4, and a typical
-   distance at least 1.5 times its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s. A folded small world reads
+   distance at least 1.5 times its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s. A folded small world reads
    three dimensions too, so both are asked.
-5. **Diverse:** its agents' tokens, links, ages and [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") spread more
-   widely than in B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, by the [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes."). And its agents'
+5. **Diverse:** its agents' tokens, links, ages and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") spread more
+   widely than in B2's [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, by the diversity score. And its agents'
    decisions vary more. Put in the same situations, they fall into more
    effective kinds of staking than the agents of B2's median world
    ([How different are the agents?](how-different-are-the-agents.md)). The
    kinds are read from the world as kept, with no game played. They swing
    from one moment to the next, so they are averaged over iteration 1,500 and
    iteration 2,000.
-6. **Not too even:** a [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of its tokens no lower than B2's most even
+6. **Not too even:** a [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of its tokens no lower than B2's most even
    world.
 
-Criteria 2 and 3 are the marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."), all but its dimension
+Criteria 2 and 3 are the marks of the health bar, all but its dimension
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 Criterion 4 stands in for that mark, because the bar's dimension of 2.3 to 4
 cannot tell a space from a small world. B2's lines, in criteria 5 and 6, are
 those of Experiment 16's ten worlds of B2, at 10,000 tokens, read the same
 way;
-[What makes a world interesting](what-makes-a-world-interesting.md#the-lines-we-compare-with)
+[What makes a world interesting](measuring-health.md#the-lines-we-compare-with)
 gives them.
 
 A world that meets all six criteria is **healthy**. A world that is alive and
 misses at most one of the other five is **interesting**. Worlds of the same
-settings differ from [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") to seed, and one miss should not rule a setting
-out ([What makes a world interesting](what-makes-a-world-interesting.md)).
+settings differ from [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") to seed, and one miss should not rule a setting
+out ([What makes a world interesting](measuring-health.md#what-makes-a-world-interesting)).
 
 ## When a value is set aside
 
@@ -228,7 +228,7 @@ We expected at least one of the fifty worlds to be healthy. Settings drawn
 together reach combinations that no single change of B2 would, and the round
 judges every criterion at once. But a healthy world is rare. Of 45 worlds of
 B2's kind read at iteration 2,000, ten met the health bar's marks at a
-dimension of 2 to 4, and that was before width, diversity and [evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") were
+dimension of 2 to 4, and that was before width, diversity and [evenness](measuring-tokens.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") were
 asked for. So the thesis asks for only one healthy world in fifty. It was
 written down on 22 October 2026, before any of the round's runs existed:
 
@@ -454,9 +454,9 @@ decide more:
   mates, and in half of those worlds the mate pays.
 
 A hundred worlds are drawn (sampler 2, round seed 3). Each has 30,000 tokens
-and plays 3,000 iterations, with [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") of 50, 100 or 200 tokens each. No
+and plays 3,000 iterations, with [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") of 50, 100 or 200 tokens each. No
 reference worlds are played beside them, and no world is stopped for being
-slow. Every [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") is kept, and the whole world every 250 iterations.
+slow. Every [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") is kept, and the whole world every 250 iterations.
 
 ### Looked at as if for the first time
 
@@ -554,7 +554,7 @@ health they can check
 ([Which worlds are healthy? A proposed order](which-worlds-are-healthy.md));
 what each drawn setting does to a world
 ([How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md));
-and every world that lived read as a candidate for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")
+and every world that lived read as a candidate for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.")
 ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)).
 In the author's words, "there is no baseline": every world of round 3 is a
 candidate, and no world is measured against B1 or B2 any more. Round 1, drawn
@@ -629,7 +629,7 @@ Every world's name in these tables opens it in the viewer.
   what each drawn setting does, and what could be set aside.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
   the worlds that lived, read for heredity, selection and change.
-- [What makes a world interesting](what-makes-a-world-interesting.md): the
+- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting): the
   six criteria, B2's lines and the rule for setting a value aside, in full.
 - [Room and riches for the steadiest world](room-for-the-steadiest-world.md):
   the search one rule at a time that this screen takes over, and what each
@@ -963,11 +963,11 @@ round.
   judged. On made-up rounds in which no value mattered, chance alone set a
   value aside in fewer than one round in a hundred. While healthy worlds were
   rare, the same was asked of each of the five lines. So a value whose worlds
-  all died, or all grew [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), or all folded, was set aside too, if other
+  all died, or all grew [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), or all folded, was set aside too, if other
   worlds did not. Before round 1 was judged, the author replaced this rule with
   the simpler one above. The same day the line *decentralised and resilient*
   was split in two, so the five lines became six criteria
-  ([What makes a world interesting](what-makes-a-world-interesting.md)). The
+  ([What makes a world interesting](measuring-health.md#what-makes-a-world-interesting)). The
   judge still prints the chance, as a warning. And round 1's draws in fact
   hold all 92 values of the sampler, not about eighty.
 - **23 October 2026.** From 22 October, this page said that a diverse world's
@@ -982,7 +982,7 @@ round.
   of the table of settings lists `hidden_layers`.
 - **24 October 2026.** This page called the line of evenness "B2's least
   even world". It is B2's most even world, the one with the lowest Gini
-  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
+  ([What makes a world interesting](measuring-health.md#how-our-view-changed)).
   The theses of Experiments 38 and 39 keep the old words, as theses do, and
   mean this world.
 - **24 October 2026.** Round 2 (Experiment 39) was to be judged together with
@@ -996,8 +996,10 @@ round.
 <!-- turns -->
 ---
 
-← [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) →
+[Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) →
 
-> [!info]- Pages that link here (18)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Reproduction statistics](reproduction-statistics.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [The random twin: is a world a space?](random-twin.md) · [Dimensions at scale](dimensions-at-scale.md) · [Local rules only](local-rules-only.md) · [Particles: patterns that outlast what carries them](particles.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Healthy and rich](healthy-and-rich.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [What a run records](frames-and-stats.md)
+**Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
+
+> [!info]- Pages that link here (16)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Local rules only](local-rules-only.md) · [Particles: patterns that outlast what carries them](particles.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [How runs are made, recorded and costed](runs-and-records.md)
 <!-- /turns -->

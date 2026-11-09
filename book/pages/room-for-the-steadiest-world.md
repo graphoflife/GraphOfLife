@@ -5,7 +5,7 @@
 >   evolving, and what does it still miss?
 > - Can a rule that keeps a world's room give it the one thing it misses,
 >   without taking what it has?
-> - The [estates](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead paid to births make a world a healthy space, but
+> - The [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead paid to births make a world a healthy space, but
 >   fill it with paupers. Can a rule of birth keep the space and stop the
 >   paupers?
 > - What does a world do when a child may never be poorer than the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") it
@@ -19,7 +19,7 @@ The steadiest world the notebook has, Experiment 19's, lives long and its
 agents differ, but it is folded: a small world, not a space. Experiment 31
 gave it, one at a time, four rules that keep a world's room; each gave room
 and took something else. The estates of the dead paid to births made healthy
-spaces of about three [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), filled with some 5,000 paupers of about two
+spaces of about three [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), filled with some 5,000 paupers of about two
 tokens each. Experiment 32 then asked every child to start as rich as its
 parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."), and nothing changed: the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), not birth, makes the
 poor. These worlds are spaces because their young are the parents, so here
@@ -28,7 +28,7 @@ room and riches come from the same coin. In plain B2 the rule is just as idle
 hard (Experiment 37). Most agents may not have a child at all, and those that
 may give most of what they hold. Children start three to nine times as rich
 as in plain B1, and agents live a few [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). Both worlds ended small,
-around a few rich [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") that hand their whole fortune to one child every
+around a few rich [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") that hand their whole fortune to one child every
 iteration.
 
 ## Room for the steadiest world
@@ -40,13 +40,13 @@ iteration.
 What would a world that might keep evolving look like? The author's picture
 ([Healthy and rich](healthy-and-rich.md)) asks four things of it, all at the
 same moment:
-- **Healthy.** Its network meets all seven marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.").
-- **Diverse.** Its agents differ, more than B2's do: its [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") is
-  above that of B2's [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, read at the same iteration.
+- **Healthy.** Its network meets all seven marks of the health bar.
+- **Diverse.** Its agents differ, more than B2's do: its diversity score is
+  above that of B2's [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, read at the same iteration.
 - **A space.** It is wide, at least half again as wide as a random network
   with the same links ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 - **Uneven.** Its tokens are held no more evenly than B2's: their [Gini
-  coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is no lower than that of B2's most even world. The author
+  coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is no lower than that of B2's most even world. The author
   added this fourth wish later, on 19 October 2026
   ([Healthy and rich](healthy-and-rich.md)). What looks unhealthy is a world
   where almost every agent holds the same few tokens.
@@ -54,7 +54,7 @@ same moment:
 *A space* needs a picture. In a space, far places are far apart: to cross a
 city, you walk through many streets. In a *small world*, everyone is a few
 steps from everyone, as through friends of friends. To tell the two apart,
-the notebook sets each world beside its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all."). The twin has the same
+the notebook sets each world beside its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all."). The twin has the same
 agents, each with as many links, but wired at random; and a random network
 is a small world. A world counts as a space when a typical agent needs at
 least 1.5 times the twin's steps to reach half the world.
@@ -63,7 +63,7 @@ Read by all four, few worlds pass even for a moment:
 - **At 1,000 iterations:** three of the 466 worlds measured, each with
   [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") mixed at birth and one other rule.
 - **At 10,000:** one of 64. This is Experiment 21's world without random
-  inputs, [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 6
+  inputs, [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 6
   ([Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held)).
   The same rule's other worlds failed, and two of them died.
 
@@ -199,7 +199,7 @@ At iteration 3,000:
 
 The diversity score is the mean of four parts. Three of them count how many
 doubling classes (1, 2–3, 4–7, and so on) the agents' tokens, links and ages
-fill. The fourth counts their [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). Each rule took a different part:
+fill. The fourth counts their [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."). Each rule took a different part:
 - **The estates take the tokens.** Paying the estate to births fills the
   world with children: about 5,000 agents for 10,000 tokens, 1.9 tokens
   each. The agents' tokens fill about two doubling classes, against four or
@@ -915,7 +915,7 @@ Experiment 16's ten worlds read the same way:
 ### The runs of Experiment 37
 
 The numbers and the figure of [What the floor did in B1](#what-the-floor-did-in-b1)
-are read from the two worlds' `stats.jsonl` and [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), beside the 26 of
+are read from the two worlds' `stats.jsonl` and [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."), beside the 26 of
 Experiment 2's 30 worlds of plain B1 that lived to 3,000, read the same way:
 `python3 book_figures.py floorplain` writes them to
 `book/results/floorplain.json`. A parent gives its child its whole holding
@@ -1004,19 +1004,19 @@ iteration's frame.
 - **23 October 2026.** The page gave the width of the worlds without old age
   as 1.7 to 1.9 times their twins. The two worlds measure 1.70 and 1.85
   (`book/results/room.json`); the 1.9 came from rounding twice.
-- **24 October 2026.** This page called the line of [evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") "B2's least
+- **24 October 2026.** This page called the line of [evenness](measuring-tokens.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") "B2's least
   even world". It is B2's most even world, the one with the lowest Gini
-  ([What makes a world interesting](what-makes-a-world-interesting.md#how-our-view-changed)).
+  ([What makes a world interesting](measuring-health.md#how-our-view-changed)).
   The theses of Experiments 31 and 32 keep the old words, as theses do, and
   mean this world.
 
 <!-- turns -->
 ---
 
-← [The candidates, played on and played again](the-candidates-played-on.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [A screen of random worlds](a-screen-of-random-worlds.md) →
+← [The candidates, played on and played again](the-candidates-played-on.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world)
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Size and riches of a world](../README.md#size-and-riches-of-a-world).
 
-> [!info]- Pages that link here (10)
-> [Every setting](settings.md) · [The estate of the dead](estate.md) · [The random twin: is a world a space?](random-twin.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Who inherits?](who-inherits.md) · [The health bar](health-bar.md) · [The diversity score](diversity-score.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [!info]- Pages that link here (9)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Every setting](settings.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Who inherits?](who-inherits.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md)
 <!-- /turns -->

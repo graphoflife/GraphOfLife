@@ -377,16 +377,35 @@ def at_home(topic: str) -> List[Dict[str, Any]]:
     return [c for c in pages() if c["topics"][0] == topic]
 
 
+def parts() -> List[Dict[str, Any]]:
+    """The parts of the notebook, each a colour and a few topics, in the order the contents show them."""
+    return read_json("book.json").get("parts", [])
+
+
 def contents(md: str, _: str) -> str:
-    """Every page under its home topic, in reading order: the front page's list."""
+    """
+    Every page under its home topic, in reading order, and the topics under their parts (the author,
+    2026-11-09: seven parts, each with its colour, which a coloured square stands for where Markdown has
+    no colours): the front page's list.
+    """
     out = []
-    for topic in topics():
-        out.append(f"\n### {topic['title']}\n\n{topic['about']}\n")
-        for c in at_home(topic["id"]):
-            if c.get("file") and c["file"] != md:
-                out.append(f"- [{c['title']}]({link(md, c['file'])})")
-            elif not c.get("file"):
-                out.append(f"- {c['title']} — *not written yet*")
+    by_id = {t["id"]: t for t in topics()}
+    for part in parts() or [{"topics": list(by_id)}]:
+        if part.get("title"):
+            out.append(f"\n### {part['title']}\n\n{part.get('mark', '')} {part['about']}".replace("\n ", "\n"))
+        for tid in part["topics"]:
+            topic = by_id[tid]
+            listed = at_home(tid)
+            if not listed:
+                continue
+            # Every topic keeps its heading, even alone in its part: pages link to it, and a page's
+            # topic, above its title, opens the contents there.
+            out.append(f"\n#### {topic['title']}\n")
+            for c in listed:
+                if c.get("file") and c["file"] != md:
+                    out.append(f"- [{c['title']}]({link(md, c['file'])})")
+                elif not c.get("file"):
+                    out.append(f"- {c['title']} — *not written yet*")
     return "\n".join(out).strip("\n")
 
 

@@ -25,7 +25,7 @@ much as the crowd.
 
 ### Is evolution's play the best there is?
 
-Evolution in B2 slows down as a world ages. In contests a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long,
+Evolution in B2 slows down as a world ages. In contests a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long,
 later brains beat earlier ones by less and less
 ([Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)).
 Why does it slow? One early answer was that the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") has a best way to play,
@@ -43,21 +43,21 @@ has more to give than evolution has taken.
 There is a second reason to write strategies by hand. Evolution finds what is
 one small step from what it has. A strategy that needs many agents to act
 together may be far better and still never be found, because no single
-[mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") makes it. Some agents would hold a frontier, others would feed it,
+[mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") makes it. Some agents would hold a frontier, others would feed it,
 and all would know which is which. The author of the simulation suggested
 exactly such a strategy, a *factory*. In this structured group, every agent
-has its job in the pipeline of [token flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on."). It extracts [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") from its
+has its job in the pipeline of [token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation "The tokens a game moves along each connection, from the agent who stakes to the node staked on."). It extracts [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") from its
 surroundings like a colony of parasites. If a factory written by hand can
 grow in an evolved world, the game rewards organisation. The question then
 becomes how evolution could get there.
 
 ### The invasion test
 
-The method has a page of its own ([The invasion test](eras-and-contests.md#the-invasion-test)).
+The method has a page of its own ([The invasion test](measuring-evolution.md#the-invasion-test)).
 Take an evolved world: one of the ten B2 worlds of
 [Experiment 16](how-to-tell-a-world-that-keeps-evolving.md#the-runs-of-experiment-16),
 each of 10,000 tokens, as it stood at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000. This page calls each
-world by its [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") there: world 2 is the world of seed 2. Then:
+world by its [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") there: world 2 is the world of seed 2. Then:
 
 - **The patch.** Draw an agent at random, then take the agents nearest to
   it, step by step, until the patch holds 5% of the world.
@@ -80,9 +80,9 @@ it holds more of the world than the resident patch played from the same place
 on the same seed.
 
 A strategy reads exactly what a brain reads, and writes exactly what a brain
-writes (`research/oee/pilots/manual.py`; the rules now live in the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s
+writes (`research/oee/pilots/manual.py`; the rules now live in the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s
 `gol_strategies.py`). It sees each [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")'s tokens, its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and
-its [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."). Its decisions go through the same output rows that the engine
+its [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."). Its decisions go through the same output rows that the engine
 turns into a child, its links, the stakes and the messages. So it reads and
 writes nothing an evolved brain could not.
 
@@ -235,7 +235,7 @@ planted the same way.
 
 The single raider died out every time. Before it went, it grew larger than
 the single resident, with peaks of up to 28 agents against at most 5. It also
-lived longer, a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of about 34 iterations against 21. But it never took
+lived longer, a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of about 34 iterations against 21. But it never took
 hold. The single resident never did either: one brain in three thousand is
 easily lost.
 
@@ -427,8 +427,8 @@ out, about a quarter of the crowd they needed.
   the crowd pay only together, as a green beard would. A B2 brain can play
   the raider, so what fails is the way there, not the brain.
 - **Evolution goes on, but not towards this play.** Other pages gave
-  evolution parts of the raider for free. Some [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") gave brains a sense of
-  their clones or their family. Others counted stakes together, by [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")
+  evolution parts of the raider for free. Some [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") gave brains a sense of
+  their clones or their family. Others counted stakes together, by genotype
   or by family
   ([A password and a crowd, for free](another-game.md#a-password-and-a-crowd-for-free)).
   In alliances, knowing one's own is a decision two neighbours make together
@@ -446,7 +446,7 @@ out, about a quarter of the crowd they needed.
   grew too poor to raid.
 - [What a brain can compute](what-a-brain-can-compute.md): a B2 brain of 12
   units plays the raider, and no B2 brain can write the factory's message.
-- [The invasion test](eras-and-contests.md#the-invasion-test): the method in full, and how to read
+- [The invasion test](measuring-evolution.md#the-invasion-test): the method in full, and how to read
   what it shows.
 - [Other contests: a lottery, and alliances](another-game.md): a password and
   a crowd given to evolution for free.
@@ -547,5 +547,5 @@ the pilots' plantings, and came out exactly as they did.
 [Strategies written by hand](../README.md#strategies-written-by-hand) · [What a brain can compute](what-a-brain-can-compute.md) →
 
 > [!info]- Pages that link here (15)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Physical inspiration](physical-inspiration.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Other contests: a lottery, and alliances](another-game.md) · [A screen of random worlds](a-screen-of-random-worlds.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Physical inspiration](physical-inspiration.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What the brains are like](what-the-brains-are-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Other contests: a lottery, and alliances](another-game.md)
 <!-- /turns -->

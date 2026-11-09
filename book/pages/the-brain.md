@@ -13,7 +13,7 @@ each candidate, the agent itself and each [neighbour](the-world.md#the-network "
 gives 45, which the rules turn into decisions. It is 15,795 numbers in all,
 copied into children and changed with probability 0.2 at every birth and
 after every game. Over a run, selection moves the brains' decisions far from
-the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' random ones. But it moves them only as constants: the brains
+the founders' random ones. But it moves them only as constants: the brains
 barely react to what they see.
 
 ## A brain at a glance
@@ -55,18 +55,18 @@ once. The inputs, in order:
   ln(1 + 10) = 2.4, ln(1 + 100) = 4.6 and ln(1 + 1,000) = 6.9. The two
   steps are about the same, 2.2 and 2.3.
 - **24** — summaries of the two neighbourhoods. For the agent and for the
-  candidate: six [quantiles](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of ln(1 + τ) over their neighbours, and the same
+  candidate: six [quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of ln(1 + τ) over their neighbours, and the same
   for ln(1 + deg). The six are the smallest value, the 20th, 40th, 60th and
   80th percentiles, and the largest. About a fifth of the neighbours lie below
   the 20th percentile. That is 6 × 2 × 2 = 24 numbers.
-- **120** — four messages of 30 numbers each ([Messages](messages.md)). They
+- **120** — four messages of 30 numbers each ([Messages](rules-in-detail.md#messages)). They
   are what the agent last wrote to itself and to the candidate, and what the
   candidate last wrote to the agent and to itself.
 - **5** — random numbers, each drawn uniformly between −2 and 2, new for
   every candidate in every look. They let two agents in the same position,
   or one agent looking twice, act differently.
 
-That makes 1 + 4 + 24 + 120 + 5 = 154. [What a brain sees](brain-inputs.md)
+That makes 1 + 4 + 24 + 120 + 5 = 154. [What a brain sees](rules-in-detail.md#what-a-brain-sees)
 gives the full list, row by row, with a worked example.
 
 ## The neural network
@@ -238,10 +238,10 @@ from 0 as in the code:
 | 13–14 | how to read rows 11–12 | probability or sharp, per neighbour | reproduction |
 | 15–44 | message | tanh of each, one message per candidate | both |
 
-*f* is [the share function](share-function.md); "probability or sharp" is
-[the yes-or-no rule](binary-decision.md); the split of a spread stake is
-[the largest-remainder method](largest-remainder.md).
-[What a brain says](brain-outputs.md) goes through the table row by row.
+*f* is [the share function](rules-in-detail.md#the-share-function-fa-b); "probability or sharp" is
+[the yes-or-no rule](rules-in-detail.md#a-yes-or-no-decision); the split of a spread stake is
+[the largest-remainder method](rules-in-detail.md#splitting-tokens-into-whole-numbers).
+[What a brain says](rules-in-detail.md#what-a-brain-says) goes through the table row by row.
 Three things in it are easy to miss:
 
 - the **child's share** and the choice between **spreading and going all
@@ -265,7 +265,7 @@ other is after every game, for every brain in the world, independently. Each
 time, with probability *p* = 0.2, the brain is **mutated**; otherwise it is
 left exactly as it was. A mutation treats every weight matrix and every bias
 vector separately, with *s* = 0.1 and σ = 0.2. Here σ is the size of a change,
-not the sigmoid ([How a brain changes](mutation.md) has the details):
+not the sigmoid ([How a brain changes](rules-in-detail.md#how-a-brain-changes) has the details):
 
 1. **Jitter.** Each number, independently with probability *s*, has a normal
    random number of standard deviation σ/√*k* added to it. That is a fifth of
@@ -285,7 +285,7 @@ weight.
 id. So a child whose brain did not mutate, and a node that took on a
 conqueror's brain, carry the genotype of the brain they copied. A mutation
 gives the brain a new id and remembers the old one as its parent. The ids
-therefore form a family tree ([Genotypes and the family tree](genotype.md)),
+therefore form a family tree ([Genotypes and the family tree](measuring-evolution.md#genotypes-families-and-the-common-ancestor)),
 which [Genotypes and lineages](genotypes-and-lineages.md) climbs.
 
 ## What brains end up doing
@@ -357,9 +357,9 @@ world run that way.
 
 ## Where to go next
 
-- [What a brain sees](brain-inputs.md): the 154 inputs, row by row, with a
+- [What a brain sees](rules-in-detail.md#what-a-brain-sees): the 154 inputs, row by row, with a
   worked example.
-- [What a brain says](brain-outputs.md): the 45 outputs, row by row.
+- [What a brain says](rules-in-detail.md#what-a-brain-says): the 45 outputs, row by row.
 - [What the brains are like](what-the-brains-are-like.md): what evolved
   brains do, and why they barely see.
 - [Questioning the mechanics](questioning-the-mechanics.md): the rules
@@ -383,6 +383,6 @@ world run that way.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (23)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [The share function f(a, b)](share-function.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [How a brain changes](mutation.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The even split](even-split.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [What a brain can compute](what-a-brain-can-compute.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (19)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How runs are made, recorded and costed](runs-and-records.md)
 <!-- /turns -->

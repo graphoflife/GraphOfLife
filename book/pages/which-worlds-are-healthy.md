@@ -15,19 +15,19 @@ three-dimensional, diverse, not too even) and a sixth the author added, few
 by how many of round 3's 82 living worlds it does better than, so every
 difference counts, and the criteria are put together in three ways, each an
 order of its own: multiplied, added, or the worst of them. Two worlds are among
-the first 13 of all three orders: [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3042, first by the product, and seed
+the first 13 of all three orders: [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3042, first by the product, and seed
 4006 played strongest first. Seed 3077 shows how much the way of putting them
 together matters: it is the first by the sum, the 12th by the product and the
 63rd by its worst criterion, as it is folded into a small world. The candidates
-for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") are drawn from the first 13 of each order. Every name
+for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") are drawn from the first 13 of each order. Every name
 in the orders opens its world in the viewer, for the author to check.
 
 ## Why an order, and not a verdict
 
-The [criteria](what-makes-a-world-interesting.md) of the screen say yes or no.
+The [criteria](measuring-health.md#what-makes-a-world-interesting) of the screen say yes or no.
 A world meets a line or it does not, and it is healthy when it meets them all.
 That is clear, but it throws away most of what we measured: a world with 79%
-of its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") in its [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.") fails the line of 80% just as a world with 20%
+of its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") in its [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.") fails the line of 80% just as a world with 20%
 does, and a world far past a line counts the same as one just past it.
 
 So the author asked for something else (7 November 2026): an **order** of the
@@ -62,7 +62,7 @@ call such a world healthy if, beyond living,
    tokens;
 2. **it holds together:** losing one agent or one link does not cut off a
    large part of it;
-3. **it has room:** it is spread out like a space of a few [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), and not
+3. **it has room:** it is spread out like a space of a few [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), and not
    folded into a small world where everyone is a few steps from everyone;
 4. **its agents differ:** in their tokens, their links, their ages, and in
    what they do in the same situation;
@@ -102,7 +102,7 @@ from [iteration](one-iteration.md "One step of a world's time: a phase of reprod
 The measures are in different units: a share of the agents, a number of
 dimensions, a ratio of distances. To put them together, each is read the same
 way: **a world's score in a measure is the share of the round's living worlds
-it does better than.** The world with the smallest [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") of all scores 1 in the
+it does better than.** The world with the smallest [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") of all scores 1 in the
 hub; a world whose hub is smaller than 70% of the others' scores 0.7; the world
 with the largest hub scores 1/82, the least any world scores. Worlds that tie
 share their place. So every score is positive, a bigger one is always better,
@@ -146,7 +146,7 @@ bad. But if every few iterations a whole branch, maybe 40% of the network, it
 is quite bad." And on 9 November, how to measure it: "the average percentage
 of tokens culled ... only in the game phase."
 
-**What culled means.** At the end of every phase the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") removes the agents
+**What culled means.** At the end of every phase the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") removes the agents
 that starved, those left with no token. Then it keeps the largest piece of the
 network and removes every agent no longer joined to it: these are the
 *culled* ("Culled" in the viewer's statistics). A culled agent may hold many
@@ -178,7 +178,7 @@ average a game, it does not depend on how long a stretch is looked at.
 > **To make it again:** `python3 book_figures.py healthorder`.
 <!-- /figure -->
 
-**What the worlds lose.** The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world culls 8.9% of all its tokens in a
+**What the worlds lose.** The [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world culls 8.9% of all its tokens in a
 game, and 9% of its agents. Seed 3092 culls 2.3% of its tokens a game, seed
 3042 5.6%, seed 3026 12%, and seed 3014 24%. Where little is culled it is
 mostly poor agents: in seeds 3016 and 3090 the culled agents hold about 0.37
@@ -220,7 +220,7 @@ world: no single agent's loss cuts off more than 0.13% of it, and 94% of its
 agents sit in the 2-core (resilient: 0.95). It culls very little, 0.5% of its
 tokens in a game (0.90). Its agents act differently, and no agent rules it
 (diverse 0.69, decentralised 0.70). But it is folded: its typical distance is
-only 1.07 times its [random twin](random-twin.md "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s, and its dimension, 5.2, is far from three.
+only 1.07 times its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.")'s, and its dimension, 5.2, is far from three.
 Its width beats only 10% of the worlds, its dimension 6%, and its criterion
 *almost three-dimensional* scores 0.08. Added up, its six criteria make it
 the **first** of the 82 worlds (an average of 0.66). Multiplied, its folding
@@ -248,7 +248,7 @@ The first 13 of each order:
 <!-- /table -->
 
 The three orders agree only in part. The order by the product and the order
-by the sum have a rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of 0.81, the product and the worst 0.74,
+by the sum have a rank [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of 0.81, the product and the worst 0.74,
 the sum and the worst only 0.33. Two worlds are among the first 13 of all
 three: seeds 3042 and 4006 played strongest first. The candidates for
 open-ended evolution are the worlds among the first 13 of any of the three
@@ -470,10 +470,10 @@ were; the median change is nil.
 
 On 24 October 2026 the author asked for two numbers of health and chose to see
 them on every world of round 3 first
-([Two numbers reported, not judged](what-makes-a-world-interesting.md#two-numbers-reported-not-judged)).
-The [same-position share](what-makes-a-world-interesting.md#the-same-position-share),
+([Two numbers reported, not judged](measuring-health.md#two-numbers-reported-not-judged)).
+The [same-position share](measuring-health.md#the-same-position-share),
 for very different behaviours living side by side, is one of the measures of
-*diverse*. The [half-cut exponent](what-makes-a-world-interesting.md#the-half-cut-exponent),
+*diverse*. The [half-cut exponent](measuring-health.md#the-half-cut-exponent),
 for a world that on the largest scale looks like a space, is not one of the
 measures of *almost three-dimensional*. Halving a body of *d* dimensions cuts
 *N*^((*d* − 1)/*d*) of its links, so 1/2 is a plane's and 2/3 three
@@ -551,7 +551,7 @@ Two questions the orders cannot answer by themselves:
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
   the same worlds read for what evolution needs: heredity, selection and
   change.
-- [What makes a world interesting](what-makes-a-world-interesting.md): the
+- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting): the
   author's criteria and lines this order starts from.
 - [A screen of random worlds](a-screen-of-random-worlds.md): how the worlds
   were drawn, and what became of them.
@@ -576,7 +576,7 @@ processes, any reading a world still lacks. The figures and tables of this
 page are drawn from that file by `python3 book_figures.py healthorder`.
 
 An earlier version of the sixth criterion counted the pieces culled at once,
-read again from every phase of every world's [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), and a piece was big past
+read again from every phase of every world's [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."), and a piece was big past
 a quarter of the network. It is in the notebook's history
 (`research/screen/culls.py`, at commit a9621d7); the share of tokens culled
 replaced it as simpler, read straight from what each run recorded.

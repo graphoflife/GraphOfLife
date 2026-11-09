@@ -12,10 +12,10 @@
 
 Statistics average; a picture shows **where** things are. The viewer draws a
 world as dots and lines, and colours them by any quantity it measures. Each
-value is placed on a colour map, within the range of the [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") on screen. This page
+value is placed on a colour map, within the range of the [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") on screen. This page
 draws a piece of one [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000 tokens, and colours that one
 drawing six ways. The rich are scattered, and the old live in cohorts.
-Wealth is a landscape of peaks at the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), with valleys around them. And
+Wealth is a landscape of peaks at the hubs, with valleys around them. And
 families live together in regions. Almost every connection is kept alive at a low price, a
 few tokens a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").
 
@@ -25,7 +25,7 @@ Statistics average. A picture does not: it shows **where** things are, which
 [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") are rich, which are old, which belong together. The viewer draws a
 world as dots and lines, and can colour them by any quantity it measures
 ([What the viewer can colour by](#what-the-viewer-can-colour-by)). This page
-takes one world, the world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 after its last game. It draws a piece of
+takes one world, the world of [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 after its last game. It draws a piece of
 it once, colours that one drawing six ways, and then colours its connections
 by the tokens that crossed them. Each picture is read for what it shows, and
 for the questions it raises.
@@ -85,17 +85,17 @@ white.
 | choice | the value of agent *u* |
 |---|---|
 | Tokens | its tokens |
-| Degree | its number of connections ([Degree](degree.md)) |
+| Degree | its number of connections ([Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling)) |
 | Token change (signed) | its tokens now minus its tokens before the phase; a newborn counts from 0 |
 | Token change (magnitude) | the size of that change |
 | Token curvature (signed) | Σ over its neighbours of (their tokens − its tokens) ([Token curvature](gains-and-losses.md#token-curvature)) |
 | Token curvature (before phase) | the same, on the network as it stood before the phase; newborns have none |
-| Loops through it | fundamental cycles of a breadth-first spanning tree through it ([Loops](bridges.md#loops)) |
-| Triangles | the triangles it is a corner of ([Clustering](degree.md#clustering)) |
+| Loops through it | fundamental cycles of a breadth-first spanning tree through it ([Loops](measuring-networks.md#loops)) |
+| Triangles | the triangles it is a corner of ([Clustering](measuring-networks.md#clustering)) |
 | Share of total tokens | its tokens divided by all tokens |
-| [Brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") id | its genotype ([Genotypes](genotype.md)) |
+| [Brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") id | its genotype ([Genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor)) |
 | Parent brain id | its genotype's parent genotype |
-| Age | [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") it has lived ([Age and lifetime](age-and-lifetime.md)) |
+| Age | [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") it has lived ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)) |
 | Node id | its id, which is its birth order |
 
 A word on **brain id**. A genotype is a number, and the colour map turns
@@ -112,10 +112,10 @@ kinship, colour by family instead, as
 | Endpoint token gap | \|tokens of *u* − tokens of *v*\| |
 | Average / weaker / stronger endpoint degree | the mean, smaller, larger of their degrees |
 | Average endpoint curvature (signed) | the mean of their token curvatures |
-| Token flow | tokens staked across it in the game, both ways together ([Token flow](token-flow.md)) |
+| Token flow | tokens staked across it in the game, both ways together ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)) |
 | Loops through it | fundamental cycles through it, as for agents |
 | Triangles | triangles it is a side of |
-| Bridge | 1 if it lies on no loop, so that cutting it splits the network ([Bridges](bridges.md)); else 0 |
+| Bridge | 1 if it lies on no loop, so that cutting it splits the network ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)); else 0 |
 
 ### The built-in looks
 
@@ -175,7 +175,7 @@ same places in every picture. What each colouring shows:
   ([Tokens run downhill](gains-and-losses.md#tokens-run-downhill)).
 - **Families.** Each agent is coloured by the genotype, among those alive 100
   iterations earlier, from which its own genotype descends
-  ([Families](genotype.md#families)). The seven largest families of the whole
+  ([Families](measuring-evolution.md#families)). The seven largest families of the whole
   world hold 344, 333, 314, 290, 285, 245 and 244 agents: 2,055 of 14,870.
   The other 12,815 belong to smaller ones. (At 10,000 tokens the seven
   largest held 1,040 of 1,336.) And the families **live together**. Three of
@@ -252,7 +252,7 @@ Five cautions apply to every picture the viewer draws:
 
 - [Like next to like](like-next-to-like.md): how alike agents are at a
   distance, the measure behind cohorts and families.
-- [Genotypes, families and the common ancestor](genotype.md): what a family
+- [Genotypes, families and the common ancestor](measuring-evolution.md#genotypes-families-and-the-common-ancestor): what a family
   is, and how lines of descent are drawn over time.
 - [Gains and losses](gains-and-losses.md): the token curvature and the tokens
   that run downhill.
@@ -341,8 +341,8 @@ colours`.
 <!-- turns -->
 ---
 
-← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a simulation costs](what-a-simulation-costs.md) →
+← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 
 > [!info]- Pages that link here (8)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Genotypes, families and the common ancestor](genotype.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
 <!-- /turns -->

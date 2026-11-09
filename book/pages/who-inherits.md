@@ -49,7 +49,7 @@ newborns' and the parents' rules share the pool out evenly, as before.
 ## The worlds
 
 Each rule was played in pilot worlds of 10,000 tokens for 2,000 iterations,
-two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each (batch R; [Pilot worlds](the-lab.md#pilot-worlds)). They were
+two [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each (batch R; [Pilot worlds](runs-and-records.md#pilot-worlds)). They were
 played on both of the notebook's [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."). One is B2, the world that cannot
 break, with Experiment 16's settings. The other is B1, where worlds break and
 cut-off pieces are culled. The controls are the same settings and seeds with
@@ -75,7 +75,7 @@ worlds of the fourth rule are the blue lines and dots below.
 <!-- /figure -->
 **To the poorest, nothing much changes.** The worlds hold 3,600 to 3,700
 agents, as B2's do. Four agents in five still hold three tokens or fewer, and
-the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent holds one. The pool is small. In B2 the dead leave about
+the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") agent holds one. The pool is small. In B2 the dead leave about
 seventy tokens an iteration among 3,600 agents. Raising the poorest by that
 much lifts a few of them by a token.
 
@@ -141,8 +141,8 @@ almost as fast as they come.
 >
 > **To make it again:** `python3 book_figures.py inherit`.
 <!-- /figure -->
-The contests are a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.") long: 100 iterations
-([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+The contests are a lifetime long: 100 iterations
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 The [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment play those of an earlier one, once in each
 moment's world.
 
@@ -170,7 +170,7 @@ The fourth rule is a test of this reading
 Here is each world at iteration 2,000, read as
 [Healthy and rich](healthy-and-rich.md) reads every world:
 
-| world | agents | marks of the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") (of 7) | [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") | agents with 3 tokens or fewer | [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") |
+| world | agents | marks of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") (of 7) | [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") | agents with 3 tokens or fewer | [diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") |
 |---|---|---|---|---|---|
 | B2, the control (lab, seeds 1, 2) | 3,546; 3,064 | 6; 6 | 4.54; 4.35 | 78%; 70% | 0.53; 0.48 |
 | B2, to the poorest | 3,753; 3,728 | 6; 7 | 4.42; 3.95 | 80%; 82% | 0.45; 0.46 |
@@ -257,13 +257,13 @@ other worlds tie or swing.
 
 ## Where to go next
 
-- [The estate of the dead](estate.md): the rules for the estate, exactly.
+- [The estate of the dead](measuring-lives.md#the-estate-of-the-dead): the rules for the estate, exactly.
 - [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why): the
   deaths that make the estate in B2.
 - [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md):
   which of these rules cancel mixing's riches.
 - [Room and riches for the steadiest world](room-for-the-steadiest-world.md):
-  the estates played again, in the search for a [healthy world](what-makes-a-world-interesting.md "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).").
+  the estates played again, in the search for a [healthy world](measuring-health.md#what-makes-a-world-interesting "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).").
 
 ## How this was made
 
@@ -299,5 +299,5 @@ folded beneath it, which worlds it reads and how. The setting is
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
 > [!info]- Pages that link here (15)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [The diversity score](diversity-score.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Where tokens go](where-tokens-go.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

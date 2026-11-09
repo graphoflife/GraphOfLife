@@ -29,7 +29,7 @@ descendants *because* of how they differ.
 
 Round 3 shows the first two plainly. Two agents of one era act differently
 in the same situations, a child acts more like its parent than like a
-stranger (the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") heredity index is 0.39), and the main line of descent
+stranger (the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") heredity index is 0.39), and the main line of descent
 keeps moving away from where it was
 ([How each pillar is read](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)).
 
@@ -40,7 +40,7 @@ such villages: their effective population, the number of ancestors that
 really share the future, is about fourteen in the median world. In a
 population that small, chance carries a line further than a small advantage
 does. And a line taking a world over proves nothing by itself: in Experiment 7,
-worlds whose brains could never change were still taken over by one [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s
+worlds whose brains could never change were still taken over by one [founder](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s
 line, by chance alone
 ([Lines by chance](do-the-brains-matter.md#lines-by-chance)).
 
@@ -54,14 +54,14 @@ Most tests need no new runs, because round 3 kept a great deal:
 - **Twelve eras a world.** Every 250 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") each world kept its whole
   state, brains included, so the brains of iteration 250, 500, …, 3,000 can be
   played again, and so can the founders of iteration 0
-  ([Eras](eras-and-contests.md#eras)).
+  ([Eras](measuring-evolution.md#eras)).
 - **Every birth.** Parent and child are recorded at every birth, so each
-  world has its whole [family tree](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.").
+  world has its whole family tree.
 - **Every decision.** Each phase's decisions are in the record: who staked
   what where, who had a child and how much it was given, which links were made
   and kept.
 - **82 worlds that lived**, 72 of them still [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), 24 of them now being
-  played again with two new [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, larger and longer (Experiment 43,
+  played again with two new [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, larger and longer (Experiment 43,
   [Round 3's best worlds, played again](candidates-for-open-ended-evolution.md#round-3s-best-worlds-played-again)).
 
 A typical shortlisted world plays an iteration in about 3 seconds, from 0.6 in
@@ -77,14 +77,14 @@ world plays than earlier ones. These two tests play eras against each other.
 
 - **Asks:** do later brains beat earlier brains of the same world?
 - **How:** play every era against every other era inside the world itself,
-  half the agents with one era's brains and half with the other's, [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
+  half the agents with one era's brains and half with the other's, [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
   off, and see whose brains hold more of the world at the end
-  ([A contest, step by step](eras-and-contests.md#a-contest-step-by-step)).
+  ([A contest, step by step](measuring-evolution.md#a-contest-step-by-step)).
   Twelve eras make 66 pairs.
 - **Yes would look like:** later eras beat earlier ones, and by more the
   further apart they are: a climb. Or wins that go round in a circle, A over
   B over C over A: an arms race that keeps changing without getting better
-  overall ([Plateau, climb or circle](eras-and-contests.md#plateau-climb-or-circle)).
+  overall ([Plateau, climb or circle](measuring-evolution.md#plateau-climb-or-circle)).
 - **No would look like:** every contest ends near a tie. The brains of
   iteration 3,000 play no better than those of iteration 250.
 - **Cost:** contests of 100 iterations, each pair played once in each era's
@@ -178,7 +178,7 @@ directly.
 ## Does it keep going?
 
 Open-ended evolution keeps producing change and new things
-([What would count as open-ended evolution](open-ended-test.md)). These two
+([What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)). These two
 tests ask whether round 3 levels off, and where.
 
 ### 6 · Change, novelty, ecology, complexity
@@ -202,7 +202,7 @@ tests ask whether round 3 levels off, and where.
 - **Asks:** has evolution reached a top, or is it stuck on a plateau?
 - **How:** for each era, look for the best reply to the population: the
   brain that would win the most among those agents. What it would gain is the
-  era's [exploitability](eras-and-contests.md#exploitability). Track it over
+  era's [exploitability](measuring-evolution.md#exploitability). Track it over
   the eras.
 - **Yes would look like:** exploitability shrinks while the eras improve: the
   population climbs towards a top.
@@ -215,7 +215,7 @@ tests ask whether round 3 levels off, and where.
 
 ## Did something new appear?
 
-The rules of round 3 allow [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), gifts, links far away and more. These four
+The rules of round 3 allow [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), gifts, links far away and more. These four
 tests look for behaviour that uses them in ways nobody wrote in.
 
 ### 8 · Do the messages mean something?
@@ -254,7 +254,7 @@ tests look for behaviour that uses them in ways nobody wrote in.
 - **How:** give every agent of every era a fingerprint: its decisions in one
   fixed set of test situations. Group the fingerprints into kinds of
   strategy, and draw their shares over time, one band per kind, as the
-  long-term evolution experiment draws its [lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") (a [Muller plot](genotype.md#muller-plots "A chart of how lines of descent grow, shrink and replace each other over time.")).
+  long-term evolution experiment draws its lineages (a Muller plot).
 - **Yes would look like:** new kinds appear late, then sweep or settle beside
   the old ones: innovation, sweeps, and kinds that hold each other in check.
 - **No would look like:** one kind from the start, wandering slowly.
@@ -266,7 +266,7 @@ tests look for behaviour that uses them in ways nobody wrote in.
 
 - **Asks:** do agents in different places of the network play different
   parts, and do the parts run in families?
-- **How:** test brains in a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s position and in a leaf's: do they decide
+- **How:** test brains in a [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s position and in a leaf's: do they decide
   differently? Do the children of hub-like agents play hub-like parts too?
 - **Yes would look like:** distinct roles that are inherited: the start of a
   division of labour.
@@ -357,7 +357,7 @@ along the way (tests 8 to 11).
 
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
   the 72 worlds these tests would read, and the shortlist of 24.
-- [Eras, contests and invasions](eras-and-contests.md): how two eras are
+- [Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better): how two eras are
   played against each other, and what their scores mean.
 - [Every era against three](every-era-against-three.md): the era tournament,
   played on [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").
@@ -373,7 +373,7 @@ first put to the author as a page of their own, where each could be marked.
 The costs are from round 3's own records: the seconds each iteration took in
 the last thousand iterations of each shortlisted world (the field `_seconds`
 of each run's `stats.jsonl`, both phases of an iteration added). Contests play
-without recording [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), so they run somewhat faster than that.
+without recording [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."), so they run somewhat faster than that.
 
 **References.** Bedau, M. A. and Packard, N. H. (1992), Measurement of
 evolutionary activity, teleology, and life. Bedau, M. A., Snyder, E. and

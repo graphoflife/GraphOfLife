@@ -8,7 +8,7 @@
 ## In short
 
 A run of Graph of Life is fixed by two things: its **settings** and its
-**seed** ([Seeds and the random stream](random-numbers.md)). A setting is one
+**seed** ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)). A setting is one
 number or switch of a run's rules, fixed before the run starts. The settings
 say how many tokens there are, how large the brains are, and which rules are
 on. This page lists the 41 settings that decide a world, and one more,
@@ -90,7 +90,7 @@ Every setting, with its value in each baseline. A name leads to its entry.
 ## The world and its start
 
 How many tokens a world holds, and the ring of founders it starts as
-([The starting ring](starting-ring.md)).
+([The starting ring](rules-in-detail.md#the-starting-ring)).
 
 ### total_tokens
 
@@ -120,9 +120,9 @@ $$
 
 where ⌊*x*⌋ is *x* rounded down. With *T* = 10,000 that is 100 founders. Each
 founder gets ⌊*T*/*n*⌋ tokens. What the division leaves over is dealt out by
-one [multinomial draw](random-numbers.md#how-a-draw-becomes-a-decision):
+one [multinomial draw](rules-in-detail.md#how-a-draw-becomes-a-decision):
 every founder has the same chance at every token
-([The starting ring](starting-ring.md)).
+([The starting ring](rules-in-detail.md#the-starting-ring)).
 
 **B1 and B2:** 0, so one founder per hundred tokens.
 
@@ -148,7 +148,7 @@ either side.
 In the starting ring, the probability with which each connection is moved to
 a founder chosen at random. The moved connections are the shortcuts that make
 the ring a "small world", as Watts and Strogatz (1998) built it
-([The starting ring](starting-ring.md)).
+([The starting ring](rules-in-detail.md#the-starting-ring)).
 
 **B1 and B2:** 0.2.
 
@@ -219,7 +219,7 @@ neighbour, a brain reads four messages:
 - the candidate's message to itself.
 
 So a brain has 4*m* message inputs and *m* message outputs: 120 and 30 in B1
-([Messages](messages.md)).
+([Messages](rules-in-detail.md#messages)).
 
 **B1:** 30. **B2:** 8.
 
@@ -228,13 +228,13 @@ So a brain has 4*m* message inputs and *m* message outputs: 120 and 30 in B1
 How many random numbers a brain reads for each candidate it looks at. Each is
 drawn uniformly from −2 to 2, fresh every time. They let a brain act
 differently in situations that look the same
-([What a brain sees](brain-inputs.md)).
+([What a brain sees](rules-in-detail.md#what-a-brain-sees)).
 
 **B1 and B2:** 5.
 
 ## The rules the world was built with
 
-The rules the [engine](the-lab.md#the-engine) had from the start, with
+The rules the [engine](runs-and-records.md#the-engine) had from the start, with
 switches to turn them off or change them. In B1 every one of them is at the
 engine's first rule.
 [The switches the world was built with](the-switches-the-world-was-built-with.md)
@@ -251,7 +251,7 @@ Whether agents write and read messages at all. Off, every message input is 0.
 Whether each phase begins with an extra look in which every agent only writes
 messages. On, the look that acts reads messages written in this phase, about
 the world as it now is. Off, it reads those of the phase before, written
-before the births, deaths and conquests since ([Messages](messages.md)). The
+before the births, deaths and conquests since ([Messages](rules-in-detail.md#messages)). The
 extra look costs a second pass of every brain in every phase. It needs
 `exchange_messages`.
 
@@ -268,7 +268,7 @@ keeps all its connections.
 ### allow_revolutions
 
 Whether a coalition of smaller stakers can take a node from its largest
-staker ([How a coalition takes a node](revolution.md)). Off, every node goes
+staker ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)). Off, every node goes
 to whoever staked the most on it.
 
 **B1 and B2:** on.
@@ -399,7 +399,7 @@ removes. There are seven rules:
   as `uniform` does. Added on 24 October 2026, at the author's request.
 
 When no child born this iteration is alive, `newborns` and `parents` deal the
-pool out as `uniform` does ([The estate of the dead](estate.md)).
+pool out as `uniform` does ([The estate of the dead](measuring-lives.md#the-estate-of-the-dead)).
 
 **B1 and B2:** `uniform`.
 
@@ -413,7 +413,7 @@ anything else.
 
 ## Rules added for open-ended evolution
 
-Nine rules were added for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") on 12 October 2026. Each
+Nine rules were added for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") on 12 October 2026. Each
 answers one way a world was seen to fail once its brains could see. A tenth,
 `mix_at_birth`, came later from the pilots of
 [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md).
@@ -453,8 +453,8 @@ before the links its brain chooses. Above 0, the newborn is also always
 joined to its parent. With 0, the newborn has only the links its brain
 chooses, and is often a leaf, joined to one agent alone. With 2, every birth
 closes triangles. The links are drawn at random rather than by the brain's
-liking: a liking for well-connected agents is [preferential attachment](degree.md#preferential-attachment-and-its-kernel "The well connected gaining new connections faster than the poorly connected."), and
-makes [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.").
+liking: a liking for well-connected agents is [preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel "The well connected gaining new connections faster than the poorly connected."), and
+makes [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.").
 
 **B1:** 0. **B2:** 2.
 
@@ -480,7 +480,7 @@ Cutting unused connections can still split a world, unless
 ### prune_needs
 
 How many neighbours the two ends of an unused connection must have in common
-for it to be cut. With 0, every unused connection is cut, [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces.") as readily
+for it to be cut. With 0, every unused connection is cut, [bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut "A connection that lies on no loop: cut it and the network falls into two pieces.") as readily
 as anything else. With 1, the two ends always stay joined through a third
 agent, so pruning can never split the world. With 2, they stay joined twice
 over, so pruning cannot leave anybody hanging on a single agent either.
@@ -599,7 +599,7 @@ child less has no child.
 The least a child may start with:
 
 - `fixed`, the old rule: [`min_child`](#min_child) alone;
-- `neighbours`: also at least the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") holding of its parent's neighbours,
+- `neighbours`: also at least the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") holding of its parent's neighbours,
   at the moment of the birth. A parent that would give less has no child.
 
 Where births are cheap, a world fills with children, each with a token or
@@ -634,7 +634,7 @@ layers, each unit of every layer comes whole, with its weights in and its
 bias. A unit that works can then spread without the rest of the brain it
 arose in.
 
-The mixture is a new [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), unless it is the parent's brain again, as it
+The mixture is a new [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), unless it is the parent's brain again, as it
 is when the mate has the parent's genotype. A parent without a neighbour
 gives its newborn a copy. Off, a newborn has a copy of its parent's brain.
 
@@ -707,7 +707,7 @@ the agent the step enters. So a search moves tokens but never makes or
 destroys any, and no agent spends its last token on one. A reach is free. How
 much an agent spends is its brain's choice: a share of what reproduction left
 it. The share is given by the brain's SEEK head, a pair of its outputs read
-like a gift's share ([What a brain says](brain-outputs.md)).
+like a gift's share ([What a brain says](rules-in-detail.md#what-a-brain-says)).
 
 - **off**: no search.
 - **jump**: in one iteration, a walk as many steps long as the tokens spent,
@@ -756,11 +756,11 @@ Either way, no link is made to or from an agent at its
 ### proto
 
 Rules that pilot worlds played before the engine had them
-([Pilot worlds](the-lab.md#pilot-worlds)). On 19 October 2026 they became a setting,
+([Pilot worlds](runs-and-records.md#pilot-worlds)). On 19 October 2026 they became a setting,
 so that the lab can play them where they can be seen. Each is switched on by
 name. The engine's own world refuses them: the lab hands a run that names one
 to the pilots' own code, frozen beside the engine (`gol_pilot.py`). Such a
-run keeps no [frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."). Before 19 October 2026 no run of the notebook's
+run keeps no frames. Before 19 October 2026 no run of the notebook's
 experiments named any; Experiments 22 and 24 were the first.
 
 - **came_from**: one input row for each candidate. Is this the node my brain
@@ -797,7 +797,7 @@ experiments named any; Experiments 22 and 24 were the first.
 
 ## How brains change
 
-The three numbers of mutation ([How a brain changes](mutation.md)).
+The three numbers of mutation ([How a brain changes](rules-in-detail.md#how-a-brain-changes)).
 
 ### mutation_probability
 
@@ -836,7 +836,7 @@ the brain still gets a new genotype number:
 ### extinction_threshold
 
 A run stops, counted as **extinct**, when an iteration ends — after its game
-— with this many agents or fewer ([When a world ends](extinction.md)).
+— with this many agents or fewer ([When a world ends](rules-in-detail.md#when-a-world-ends)).
 
 **B1 and B2:** 20.
 
@@ -850,7 +850,7 @@ Every how many iterations a run keeps a whole world, in `archive/` beside its
 frames: its network, tokens, ages and every brain. The value 0 keeps none. The
 rolling checkpoint is overwritten, and serves only for resuming. These worlds
 are kept, for anything that needs the brains of more than one moment. Above
-all, that is the [cross-time tournament](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") of
+all, that is the [cross-time tournament](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md).
 A plan asks for it in its `record` block.
 
@@ -860,10 +860,10 @@ A plan asks for it in its `record` block.
 
 - [B1 and B2: the two baselines](b1-and-b2.md): why each baseline has the
   values it has.
-- [The starting ring](starting-ring.md): what the first four settings build.
+- [The starting ring](rules-in-detail.md#the-starting-ring): what the first four settings build.
 - [One iteration, step by step](one-iteration.md): where in an iteration each
   rule acts.
-- [The lab, the engine and pilots](the-lab.md): how an experiment's plan sets
+- [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots): how an experiment's plan sets
   these for its runs.
 
 ## How our view changed
@@ -884,8 +884,8 @@ A plan asks for it in its `record` block.
 <!-- turns -->
 ---
 
-← [Is a run reproducible?](is-a-run-reproducible.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The starting ring](starting-ring.md) →
+← [Is a run reproducible?](is-a-run-reproducible.md) · [How the simulation works](../README.md#how-the-simulation-works)
 
-> [!info]- Pages that link here (62)
-> [Glossary](glossary.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [The starting ring](starting-ring.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [How a coalition takes a node](revolution.md) · [How a brain changes](mutation.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births and the four ways to die](births-and-deaths.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [Genotypes, families and the common ancestor](genotype.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [The lab, the engine and pilots](the-lab.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What a run records](frames-and-stats.md)
+> [!info]- Pages that link here (47)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

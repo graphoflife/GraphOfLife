@@ -28,7 +28,7 @@ how far it has got; run that command again, and the tables catch up.
 Every world starts from one of two sets of rules. **B1** is the algorithm
 exactly as a new run is offered it. The study of the baseline, and the
 experiments that change one setting at a time, read it. **B2** is the world
-built for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), built so that its network cannot break apart
+built for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), built so that its network cannot break apart
 ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
 They differ in these settings, and in no other:
 
@@ -55,7 +55,7 @@ Every other setting, and what each one means, is in
 ## The lab's experiments
 
 An experiment of the lab is a plan written before any of its runs existed.
-It holds a question, a thesis, the conditions, the [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") and how far to run. The runs
+It holds a question, a thesis, the conditions, the [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") and how far to run. The runs
 are made with `python3 gol_lab.py run E…`, or with ▶ in the Research Notebook
 tab. Every one of them writes its settings and engine version beside its
 record. Several experiments answer their questions from the runs of another:
@@ -94,7 +94,7 @@ repeated exactly.
 ## The pilot batches
 
 A pilot world is run by `research/oee/pilots/run.py` rather than by the lab
-([Pilot worlds](the-lab.md#pilot-worlds)). It is quicker to set up, has no
+([Pilot worlds](runs-and-records.md#pilot-worlds)). It is quicker to set up, has no
 thesis written in advance, and usually two seeds of each condition. Since
 batch S, pilots play the engine's own [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") (`--proto engine=true`). So a
 pilot with a lab world's settings and seed *is* that lab world, game for
@@ -375,9 +375,9 @@ many worlds of that experiment or batch the measure has been taken on:
 
 - **the record of every game**: the statistics every run keeps, game by game.
   That is a lab run's `stats.jsonl`, or a pilot's `series.jsonl`
-  ([What a run records](frames-and-stats.md));
+  ([What a run records](runs-and-records.md#what-a-run-records));
 - **lifetime contests (T = 100)**: the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of a later moment against those
-  of an earlier one. They play for an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
+  of an earlier one. They play for an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.")
   ([Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on));
 - **games recorded and read again**: takeover chains, help, and flows that
   go round ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)).
@@ -439,16 +439,16 @@ many worlds of that experiment or batch the measure has been taken on:
 Older yardsticks are not counted here:
 - the contests of 20 iterations that built B2: the lab's Experiments 12 to 16,
   and the pilot batches of that time;
-- the [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
+- the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
   [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md),
   taken on every world from Experiment 12 on;
-- and the [correlations](correlation.md "Whether two quantities go up and down together, from −1 to 1.") among agents of
+- and the [correlations](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") among agents of
   [What goes with what](what-goes-with-what.md): ten B1 and ten B2 worlds, and
   any run in the Research tab.
 
 ## Where to go next
 
-- [The lab, the engine and pilots](the-lab.md): how runs and pilots are
+- [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots): how runs and pilots are
   made.
 - [B1 and B2: the two baselines](b1-and-b2.md): the two rule sets in plain
   words.
@@ -458,8 +458,8 @@ Older yardsticks are not counted here:
 <!-- turns -->
 ---
 
-← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What a run records](frames-and-stats.md) →
+← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics)
 
-> [!info]- Pages that link here (9)
-> [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Every world side by side](every-world-side-by-side.md) · [The lab, the engine and pilots](the-lab.md) · [What a simulation costs](what-a-simulation-costs.md)
+> [!info]- Pages that link here (8)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md)
 <!-- /turns -->

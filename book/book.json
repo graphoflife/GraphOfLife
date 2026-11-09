@@ -7,6 +7,11 @@
       "about": "What this notebook is about, how to read it, and the question behind it: can evolution in a simulated world go on without end?"
     },
     {
+      "id": "screen",
+      "title": "Round 3 of the random screen",
+      "about": "A hundred worlds with every setting drawn at random: which are healthy, what the settings do, which are candidates for open-ended evolution, how to tell whether they evolved, and what is played next."
+    },
+    {
       "id": "simulation",
       "title": "How the simulation works",
       "about": "The rules of a world, step by step: tokens, agents and links, the game, births and deaths, the brains, and every setting."
@@ -80,6 +85,11 @@
       "id": "methods",
       "title": "Methods and statistics",
       "about": "How runs are recorded and measured, the statistics the notebook uses, and every simulation made."
+    },
+    {
+      "id": "reference",
+      "title": "Reference: the rules and measures in detail",
+      "about": "The details of the rules and of every measure the notebook uses, one reference page for each family of them, with a section for every term."
     }
   ],
   "pages": [
@@ -108,18 +118,6 @@
       "summary": "Living things have been inventing new kinds of things for about four billion years, and they have not stopped. No computer world has yet been shown to do the same. This notebook follows one computer world, Graph of Life."
     },
     {
-      "id": "glossary",
-      "title": "Glossary",
-      "file": "pages/glossary.md",
-      "topics": [
-        "start"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-23",
-      "summary": "Every term of the notebook, from A to Z: what it is in one line, and the page that explains it."
-    },
-    {
       "id": "how-this-notebook-is-written",
       "title": "How this notebook is written",
       "file": "pages/how-this-notebook-is-written.md",
@@ -144,6 +142,115 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Graph of Life puts together ideas from several fields: artificial life, game theory, network science, population genetics and statistics. This page introduces each one far enough to read the rest of the notebook, and says where it shows up in this world."
+    },
+    {
+      "id": "a-screen-of-random-worlds",
+      "title": "A screen of random worlds",
+      "file": "pages/a-screen-of-random-worlds.md",
+      "topics": [
+        "screen",
+        "healthy"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E38",
+        "E39",
+        "E40",
+        "E41",
+        "E42"
+      ],
+      "status": "analysed",
+      "added": "2026-10-22",
+      "summary": "Round 1 of fifty worlds with every setting drawn at random found no healthy world and one interesting one: mended worlds are whole but folded, and the worlds that stay spaces break or are poor."
+    },
+    {
+      "id": "which-worlds-are-healthy",
+      "title": "Which worlds are healthy? Three orders",
+      "file": "pages/which-worlds-are-healthy.md",
+      "topics": [
+        "screen",
+        "healthy",
+        "methods"
+      ],
+      "kind": "study",
+      "experiments": [
+        "E40",
+        "E41",
+        "E42"
+      ],
+      "status": "analysed",
+      "added": "2026-11-07",
+      "summary": "Round 3's living worlds in three orders of health: every measure scored by the share of the worlds a world beats, the six criteria multiplied, added or the worst of them; few tokens culled is the sixth."
+    },
+    {
+      "id": "how-the-drawn-settings-shape-a-world",
+      "title": "How the drawn settings shape a world",
+      "file": "pages/how-the-drawn-settings-shape-a-world.md",
+      "topics": [
+        "screen",
+        "healthy",
+        "rules"
+      ],
+      "kind": "study",
+      "experiments": [
+        "E40",
+        "E41",
+        "E42"
+      ],
+      "status": "analysed",
+      "added": "2026-11-07",
+      "summary": "Each drawn setting judged on its own by shuffling: a cap of two links kills, gifts keep worlds alive, mending the dead spares a world its culls, and most settings show no effect."
+    },
+    {
+      "id": "candidates-for-open-ended-evolution",
+      "title": "Candidates for open-ended evolution",
+      "file": "pages/candidates-for-open-ended-evolution.md",
+      "topics": [
+        "screen",
+        "evolution",
+        "healthy"
+      ],
+      "kind": "study",
+      "experiments": [
+        "E40",
+        "E41",
+        "E42",
+        "E43"
+      ],
+      "status": "analysed",
+      "added": "2026-11-07",
+      "summary": "Round 3's worlds read for heredity, selection and change: 72 candidates, evolution fast but narrow, and a shortlist of 24 from health's three orders, played again in Experiment 43."
+    },
+    {
+      "id": "did-evolution-happen",
+      "title": "Did evolution happen? Fourteen ways to find out",
+      "file": "pages/did-evolution-happen.md",
+      "topics": [
+        "screen",
+        "evolution",
+        "healthy",
+        "methods"
+      ],
+      "kind": "method",
+      "status": "written",
+      "added": "2026-11-09",
+      "summary": "Round 3's worlds pass on what their agents do and keep changing it, but with about fourteen ancestors sharing the future, luck can look like selection. Fourteen tests in six questions tell the two apart; eleven need no new runs, and the era tournament comes first."
+    },
+    {
+      "id": "a-hundred-thousand-iterations",
+      "title": "A hundred thousand iterations",
+      "file": "pages/a-hundred-thousand-iterations.md",
+      "topics": [
+        "screen",
+        "evolution"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E11"
+      ],
+      "status": "draft",
+      "added": "2026-10-09",
+      "summary": "A plan not yet played. Written on 9 October 2026 for one world of B1 at 204,800 tokens left for 100,000 iterations, it is now proposed again on round 3's candidates: three shortlisted worlds played on from iteration 3,000 to 100,000, which needs nothing new built and takes about two and a half days."
     },
     {
       "id": "the-world",
@@ -218,145 +325,37 @@
       "topics": [
         "simulation"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
       "added": "2026-10-08",
       "summary": "A run of Graph of Life is fixed by two things: its settings and its seed (Seeds and the random stream). A setting is one number or switch of a run's rules, fixed before the run starts."
     },
     {
-      "id": "starting-ring",
-      "title": "The starting ring",
-      "file": "pages/starting-ring.md",
+      "id": "glossary",
+      "title": "Glossary",
+      "file": "pages/glossary.md",
       "topics": [
-        "simulation"
+        "reference",
+        "start"
       ],
-      "kind": "term",
+      "kind": "overview",
       "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every world starts as a ring of founders with a few shortcuts, the \"small-world\" network of Watts and Strogatz (1998). The founders, the agents a world begins with, sit around a circle, each joined to its nearest founders on either side."
+      "added": "2026-10-23",
+      "summary": "Every term of the notebook, from A to Z: what it is in one line, and the page that explains it."
     },
     {
-      "id": "random-numbers",
-      "title": "Seeds and the random stream",
-      "file": "pages/random-numbers.md",
+      "id": "rules-in-detail",
+      "title": "The rules in detail",
+      "file": "pages/rules-in-detail.md",
       "topics": [
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Graph of Life is full of chance: random starting brains, random tie-breaks, probabilistic decisions, random inputs, random sharing out of tokens. Yet a run can be made again exactly."
-    },
-    {
-      "id": "share-function",
-      "title": "The share function f(a, b)",
-      "file": "pages/share-function.md",
-      "topics": [
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A brain often answers with two numbers where the rules need one share between 0 and 1. The share may be of its tokens for a child, of a stake to mark revolutionary, or the probability of saying yes. One function turns every such pair into its share."
-    },
-    {
-      "id": "binary-decision",
-      "title": "A yes-or-no decision",
-      "file": "pages/binary-decision.md",
-      "topics": [
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Some decisions are a plain yes or no, such as whether to join a newborn to a neighbour, or to hand it a connection. A brain answers each with four numbers."
-    },
-    {
-      "id": "largest-remainder",
-      "title": "Splitting tokens into whole numbers",
-      "file": "pages/largest-remainder.md",
-      "topics": [
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Tokens are whole: an agent cannot stake 3.7 tokens. So when an agent spreads its τ tokens over several candidates in proportion to scores, the shares have to be rounded, and rounded so that no token is lost or made."
-    },
-    {
-      "id": "brain-inputs",
-      "title": "What a brain sees",
-      "file": "pages/brain-inputs.md",
-      "topics": [
+        "reference",
         "simulation",
         "brains"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every time an agent decides anything, its brain looks at its candidates: the agent itself first, then each of its neighbours in increasing order of id."
-    },
-    {
-      "id": "brain-outputs",
-      "title": "What a brain says",
-      "file": "pages/brain-outputs.md",
-      "topics": [
-        "simulation",
-        "brains"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "For every candidate it looks at — itself and each neighbour — a brain produces one column of numbers: 45 in B1, 19 in B2."
-    },
-    {
-      "id": "messages",
-      "title": "Messages",
-      "file": "pages/messages.md",
-      "topics": [
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Agents can say things to each other: every time an agent looks at its neighbours, it writes a message to each of them, and one to itself. A message is a list of numbers between −1 and 1, 30 in B1 and 8 in B2."
-    },
-    {
-      "id": "revolution",
-      "title": "How a coalition takes a node",
-      "file": "pages/revolution.md",
-      "topics": [
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "In the game every node goes to someone, usually whoever staked the most on it: the hegemon. But a coalition of smaller stakers takes the node if the parts of their stakes they marked revolutionary add up to more than the hegemon's whole stake."
-    },
-    {
-      "id": "mutation",
-      "title": "How a brain changes",
-      "file": "pages/mutation.md",
-      "topics": [
-        "simulation",
-        "brains"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Brains change: this is the variation that evolution needs (What this notebook is about). A brain is offered a change whenever it is copied into a newborn, and it changes with probability 0.2."
-    },
-    {
-      "id": "extinction",
-      "title": "When a world ends",
-      "file": "pages/extinction.md",
-      "topics": [
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A run goes for a fixed number of iterations, unless its world dies out first. In this notebook that has an exact meaning: if an iteration's game leaves 20 agents or fewer, the world is extinct and its run stops."
+      "added": "2026-11-09",
+      "summary": "The rules of a world, one detail at a time: how the first network is built, where chance comes in, how a brain's numbers become shares and decisions, what agents tell each other, how a coalition takes a node, how a brain changes, and when a world ends.."
     },
     {
       "id": "b1-and-b2",
@@ -366,7 +365,7 @@
         "baselines",
         "simulation"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
       "added": "2026-10-23",
       "summary": "The two sets of rules every experiment starts from: B1, the algorithm as a new run is offered it, and B2, built so that its network cannot break."
@@ -462,55 +461,20 @@
       "summary": "In the first baseline, B1, every new node of a world's network is a newborn agent, and every new connection is made at a birth. Only three or four agents in a hundred have a child in an iteration, and connections raise the chance more than wealth does."
     },
     {
-      "id": "births-and-deaths",
-      "title": "Births and the four ways to die",
-      "file": "pages/births-and-deaths.md",
+      "id": "measuring-lives",
+      "title": "Measuring lives: births, deaths, ages and estates",
+      "file": "pages/measuring-lives.md",
       "topics": [
+        "reference",
         "lives",
-        "simulation"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "After a world's founders, every agent enters it the same way: a parent gives it tokens in a reproduction phase, and it is born. In B1 it leaves in one of four ways: it starves or it is cut off, after reproduction or after the game."
-    },
-    {
-      "id": "estate",
-      "title": "The estate of the dead",
-      "file": "pages/estate.md",
-      "topics": [
-        "lives",
-        "rules"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-23",
-      "summary": "What happens to the tokens of an agent that dies, and the other ways of passing them on that the notebook tried."
-    },
-    {
-      "id": "age-and-lifetime",
-      "title": "Age, lifetime and survival curves",
-      "file": "pages/age-and-lifetime.md",
-      "topics": [
-        "lives",
+        "simulation",
+        "rules",
         "methods"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-08",
-      "summary": "An agent's age is how many iterations ago it was born; its lifetime is how many games it lives through. They answer two different questions: how old are the agents alive now, and how long does an agent live?"
-    },
-    {
-      "id": "reproduction-statistics",
-      "title": "Reproduction statistics",
-      "file": "pages/reproduction-statistics.md",
-      "topics": [
-        "lives"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every reproduction phase records each birth. It notes the parent, the tokens it held and gave, whom the child was joined to, and the connections the parent handed over. The row of statistics written after the phase sums these up in a few numbers."
+      "added": "2026-11-09",
+      "summary": "How the notebook counts the lives of agents: who is born and how, the four ways to die, where the tokens of the dead go, how old agents grow, and what every reproduction phase records.."
     },
     {
       "id": "where-do-the-tokens-go",
@@ -566,17 +530,20 @@
       "file": "pages/what-keeps-wealth-spread.md"
     },
     {
-      "id": "gini-coefficient",
-      "title": "Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility",
-      "file": "pages/gini-coefficient.md",
+      "id": "measuring-tokens",
+      "title": "Measuring tokens: inequality and flow",
+      "file": "pages/measuring-tokens.md",
       "topics": [
+        "reference",
         "wealth",
-        "methods"
+        "methods",
+        "game",
+        "brains"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-08",
-      "summary": "Four kinds of number say how unequally a world's tokens are held, and the notebook records them after every phase. The Gini coefficient sums up the whole Lorenz curve in one number, and the richest tenth's share reads one point of it."
+      "added": "2026-11-09",
+      "summary": "How the notebook measures who holds the tokens and where they go: the Gini coefficient and its companions, what the game does when a brain scores nothing, and the flow of tokens along the connections.."
     },
     {
       "id": "where-tokens-go",
@@ -604,19 +571,6 @@
       "summary": "In every game, each agent stakes all its tokens on its own node and its neighbours' nodes. A node goes to its largest staker or to a coalition, and the winner's brain is copied into it. The founders' random brains play in every way there is."
     },
     {
-      "id": "even-split",
-      "title": "The even split",
-      "file": "pages/even-split.md",
-      "topics": [
-        "game",
-        "brains"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-23",
-      "summary": "What the rules do when a brain scores no candidate above zero, how often that happens, and why it makes the game almost a random walk."
-    },
-    {
       "id": "where-the-tokens-flow",
       "title": "Where tokens flow",
       "file": "pages/where-the-tokens-flow.md",
@@ -640,18 +594,6 @@
       "status": "written",
       "added": "2026-10-16",
       "summary": "When an agent stakes tokens on a neighbour's node, the tokens flow along the connection between them. A flow module is a group of agents that a token wandering this flow tends to stay inside, and the map equation finds such groups."
-    },
-    {
-      "id": "token-flow",
-      "title": "Measuring the flow: token flow, lightning and circulation",
-      "file": "pages/token-flow.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "In every game, the tokens an agent stakes on a neighbour's node flow along the connection between them: that is the token flow. Once each pair's two directions cancel, what is left is the net flow."
     },
     {
       "id": "what-shape-does-the-network-take",
@@ -707,55 +649,20 @@
       "summary": "Only the largest connected piece of a world's network survives each phase, so a whole region can die in one game. In a typical settled world one connection holds a ninth of it to the rest, yet such weak points almost never give way."
     },
     {
-      "id": "degree",
-      "title": "An agent's connections: degree, clustering, assortativity, attachment and scaling",
-      "file": "pages/degree.md",
+      "id": "measuring-networks",
+      "title": "Measuring a network: connections, hubs, distances and cuts",
+      "file": "pages/measuring-networks.md",
       "topics": [
+        "reference",
         "network",
-        "lives"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "An agent's degree is the number of its connections; in a settled B1 world of 100,000 tokens, the mean is about 3.5. Most agents have one or two, and a few hubs hundreds or thousands."
-    },
-    {
-      "id": "stars-and-hubs",
-      "title": "Stars and hubs",
-      "file": "pages/stars-and-hubs.md",
-      "topics": [
-        "network",
-        "wealth"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-23",
-      "summary": "Agents joined to far more agents than most, and worlds held together by a single one of them."
-    },
-    {
-      "id": "path-length",
-      "title": "Distances in a network: path length, radius and diameter, the spectral gap",
-      "file": "pages/path-length.md",
-      "topics": [
-        "network",
+        "lives",
+        "wealth",
         "space"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-08",
-      "summary": "The distance between two agents is the fewest connections on a path from one to the other. The mean path length is its average over pairs, the diameter its largest value, and the radius the reach of the most central agent."
-    },
-    {
-      "id": "bridges",
-      "title": "Bridges, cut risk, loops and the core: how a network can be cut",
-      "file": "pages/bridges.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A bridge is a connection on no loop: cut it, and the network falls into two pieces. In a settled B1 world of 100,000 tokens, a quarter of the connections are bridges."
+      "added": "2026-11-09",
+      "summary": "How the notebook measures the shape of a world's network: how many connections agents have and how they cluster, the hubs and stars, how far apart agents are, and where a network can be cut.."
     },
     {
       "id": "physical-inspiration",
@@ -797,17 +704,18 @@
       "summary": "The notebook's second aim is a world that grows a space of its own, like a plane or a room, from simple local rules. The worlds of the first baseline, B1, are spaces: about three dimensions by the room they hold, and two by how a random walker spreads."
     },
     {
-      "id": "random-twin",
-      "title": "The random twin: is a world a space?",
-      "file": "pages/random-twin.md",
+      "id": "measuring-space",
+      "title": "Measuring space: dimension and the random twin",
+      "file": "pages/measuring-space.md",
       "topics": [
+        "reference",
         "space",
         "network"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-23",
-      "summary": "A world's network wired again at random, with as many links per agent: what a world would be if it were no space, and how wide a world is beside it."
+      "added": "2026-11-09",
+      "summary": "How the notebook reads a network as a space: three ways to measure its dimension, and the random twin, the same connections wired at random, that every reading is set against.."
     },
     {
       "id": "dimensions-at-scale",
@@ -888,18 +796,6 @@
       "status": "written",
       "added": "2026-10-09",
       "summary": "Patterns that keep their identity while what carries them is replaced, looked for in twelve worlds with three detectors, each beside a null and tried on a pattern known to be there: no ring of tokens outlasts the next stretch of games, no agent keeps a rhythm beyond a random walk's, and the groups that outlast their members are the network's own regions, which stay where they began. Only a world that froze keeps its patterns, as a crystal in which nothing is replaced."
-    },
-    {
-      "id": "ball-dimension-and-curvature",
-      "title": "Three ways to measure a network's dimension",
-      "file": "pages/ball-dimension-and-curvature.md",
-      "topics": [
-        "space"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A network has no coordinates, only links, yet it can be shaped like a line, a sheet or a solid. Three rulers read its dimension: the room within a few steps, how a random walker spreads, and how many boxes it takes to cover it."
     },
     {
       "id": "what-holds-a-worlds-size",
@@ -1036,33 +932,22 @@
       "summary": "Round 3's brains of three to five tanh layers all respond to what they see, nearly 400 times as strongly as B1's, and depth costs them little; evolution raised their gain about as far as mutation alone would. The shape made no difference we can tell from chance to whether a world lived, how healthy it grew or how it evolved, so the smallest brain, three layers of 16, is enough for the next rounds."
     },
     {
-      "id": "genotype",
-      "title": "Genotypes, families and the common ancestor",
-      "file": "pages/genotype.md",
+      "id": "measuring-evolution",
+      "title": "Measuring evolution: genotypes, eras and the open-ended test",
+      "file": "pages/measuring-evolution.md",
       "topics": [
+        "reference",
         "brains",
         "simulation",
         "evolution",
-        "methods"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every brain carries a whole number, its genotype, which a copy keeps and a change replaces. The new number remembers the old one as its parent, so the genotypes of a world form one family tree."
-    },
-    {
-      "id": "eras-and-contests",
-      "title": "Eras, contests and invasions: does a world keep getting better?",
-      "file": "pages/eras-and-contests.md",
-      "topics": [
-        "evolution",
         "methods",
-        "strategies"
+        "strategies",
+        "start"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-23",
-      "summary": "A world whose numbers have settled may have stopped evolving, or may still be improving in ways no single moment shows. To tell, the notebook plays a world's brains of two moments against each other."
+      "added": "2026-11-09",
+      "summary": "How the notebook follows evolution: genotypes, families and the common ancestor; eras of a world played against each other; and the test, written down before the long runs, of what would count as open-ended evolution.."
     },
     {
       "id": "how-to-tell-a-world-that-keeps-evolving",
@@ -1112,34 +997,6 @@
       "status": "analysed",
       "added": "2026-10-19",
       "summary": "The notebook's two longest worlds are Experiment 18's, whose brains are mixed at birth, played to 50,000 iterations. Experiment 28 played the brains of every 2,500th iteration of each against the brains of three fixed moments: 2,500, 10,000 and 25,000."
-    },
-    {
-      "id": "a-hundred-thousand-iterations",
-      "title": "A hundred thousand iterations",
-      "file": "pages/a-hundred-thousand-iterations.md",
-      "topics": [
-        "evolution"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E11"
-      ],
-      "status": "draft",
-      "added": "2026-10-09",
-      "summary": "A plan not yet played. Written on 9 October 2026 for one world of B1 at 204,800 tokens left for 100,000 iterations, it is now proposed again on round 3's candidates: three shortlisted worlds played on from iteration 3,000 to 100,000, which needs nothing new built and takes about two and a half days."
-    },
-    {
-      "id": "open-ended-test",
-      "title": "What would count as open-ended evolution",
-      "file": "pages/open-ended-test.md",
-      "topics": [
-        "evolution",
-        "start"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-19",
-      "summary": "No run can show that evolution goes on for ever. So the notebook writes down, before the long runs exist, what a run would have to show. A configuration of rules passes when at least two of three new worlds pass four parts."
     },
     {
       "id": "strategies-written-by-hand",
@@ -1367,42 +1224,19 @@
       "summary": "The author's picture of a world that might keep evolving has two halves: a decentralised, resilient, almost three-dimensional network, and agents that differ in almost everything."
     },
     {
-      "id": "what-makes-a-world-interesting",
-      "title": "What makes a world interesting",
-      "file": "pages/what-makes-a-world-interesting.md",
+      "id": "measuring-health",
+      "title": "Measuring health: criteria, the health bar and diversity",
+      "file": "pages/measuring-health.md",
       "topics": [
-        "healthy"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-23",
-      "summary": "What do we look for in a world before we ask how it evolves? When is a world healthy, and when is it still interesting? When do we give up on a setting?"
-    },
-    {
-      "id": "health-bar",
-      "title": "The health bar",
-      "file": "pages/health-bar.md",
-      "topics": [
+        "reference",
         "healthy",
-        "network"
-      ],
-      "kind": "term",
-      "status": "written",
-      "added": "2026-10-23",
-      "summary": "The seven marks a world's network must meet to count as healthy, why each is there, and how a world is read against them."
-    },
-    {
-      "id": "diversity-score",
-      "title": "The diversity score",
-      "file": "pages/diversity-score.md",
-      "topics": [
-        "healthy",
+        "network",
         "brains"
       ],
-      "kind": "term",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-23",
-      "summary": "How much the agents of a world differ, in one number, and how much their decisions differ."
+      "added": "2026-11-09",
+      "summary": "How the notebook judges whether a world is healthy and interesting: the author's criteria, the seven marks of the health bar that B2's worlds were held to, and the diversity score.."
     },
     {
       "id": "mixed-at-birth-ten-long-worlds",
@@ -1475,94 +1309,6 @@
       "summary": "The steadiest world the notebook has, Experiment 19's, lives long and its agents differ, but it is folded: a small world, not a space. Experiment 31 gave it, one at a time, four rules that keep a world's room; each gave room and took something else."
     },
     {
-      "id": "a-screen-of-random-worlds",
-      "title": "A screen of random worlds",
-      "file": "pages/a-screen-of-random-worlds.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E38",
-        "E39",
-        "E40",
-        "E41",
-        "E42"
-      ],
-      "status": "analysed",
-      "added": "2026-10-22",
-      "summary": "Round 1 of fifty worlds with every setting drawn at random found no healthy world and one interesting one: mended worlds are whole but folded, and the worlds that stay spaces break or are poor."
-    },
-    {
-      "id": "which-worlds-are-healthy",
-      "title": "Which worlds are healthy? Three orders",
-      "file": "pages/which-worlds-are-healthy.md",
-      "topics": [
-        "healthy",
-        "methods"
-      ],
-      "kind": "study",
-      "experiments": [
-        "E40",
-        "E41",
-        "E42"
-      ],
-      "status": "analysed",
-      "added": "2026-11-07",
-      "summary": "Round 3's living worlds in three orders of health: every measure scored by the share of the worlds a world beats, the six criteria multiplied, added or the worst of them; few tokens culled is the sixth."
-    },
-    {
-      "id": "how-the-drawn-settings-shape-a-world",
-      "title": "How the drawn settings shape a world",
-      "file": "pages/how-the-drawn-settings-shape-a-world.md",
-      "topics": [
-        "healthy",
-        "rules"
-      ],
-      "kind": "study",
-      "experiments": [
-        "E40",
-        "E41",
-        "E42"
-      ],
-      "status": "analysed",
-      "added": "2026-11-07",
-      "summary": "Each drawn setting judged on its own by shuffling: a cap of two links kills, gifts keep worlds alive, mending the dead spares a world its culls, and most settings show no effect."
-    },
-    {
-      "id": "candidates-for-open-ended-evolution",
-      "title": "Candidates for open-ended evolution",
-      "file": "pages/candidates-for-open-ended-evolution.md",
-      "topics": [
-        "evolution",
-        "healthy"
-      ],
-      "kind": "study",
-      "experiments": [
-        "E40",
-        "E41",
-        "E42",
-        "E43"
-      ],
-      "status": "analysed",
-      "added": "2026-11-07",
-      "summary": "Round 3's worlds read for heredity, selection and change: 72 candidates, evolution fast but narrow, and a shortlist of 24 from health's three orders, played again in Experiment 43."
-    },
-    {
-      "id": "did-evolution-happen",
-      "title": "Did evolution happen? Fourteen ways to find out",
-      "file": "pages/did-evolution-happen.md",
-      "topics": [
-        "evolution",
-        "healthy",
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-11-09",
-      "summary": "Round 3's worlds pass on what their agents do and keep changing it, but with about fourteen ancestors sharing the future, luck can look like selection. Fourteen tests in six questions tell the two apart; eleven need no new runs, and the era tournament comes first."
-    },
-    {
       "id": "every-world-side-by-side",
       "title": "Every world side by side",
       "file": "pages/every-world-side-by-side.md",
@@ -1575,17 +1321,18 @@
       "summary": "Each page measures the worlds of one experiment or a few. This page puts every world in one table, measured the same way over the same stretches of iterations, and looks at them together."
     },
     {
-      "id": "the-lab",
-      "title": "The lab, the engine and pilots",
-      "file": "pages/the-lab.md",
+      "id": "runs-and-records",
+      "title": "How runs are made, recorded and costed",
+      "file": "pages/runs-and-records.md",
       "topics": [
+        "reference",
         "methods",
         "simulation"
       ],
-      "kind": "method",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-23",
-      "summary": "The engine is the program that plays a world. The lab carries out an experiment's plan. It has the engine play every run the plan asks for, several at a time. And it records how each was made, so that it can be made again exactly."
+      "added": "2026-11-09",
+      "summary": "How every simulation of the notebook is made and kept, so that it can be made again: the lab and the engine, what a run records, and what a simulation costs.."
     },
     {
       "id": "how-worlds-are-measured",
@@ -1612,18 +1359,6 @@
       "summary": "Statistics average; a picture shows where things are. The viewer draws a world as dots and lines, and colours them by any quantity it measures. Each value is placed on a colour map, within the range of the frame on screen."
     },
     {
-      "id": "what-a-simulation-costs",
-      "title": "What a simulation costs",
-      "file": "pages/what-a-simulation-costs.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-02",
-      "summary": "Every experiment of the notebook is sized by what it costs. That is the hours a computer spends on it, the memory a run needs, and the disk its frames take. These costs are measured, not guessed."
-    },
-    {
       "id": "what-goes-with-what",
       "title": "What goes with what",
       "file": "pages/what-goes-with-what.md",
@@ -1648,91 +1383,101 @@
       "summary": "This page lists every world the notebook has made. The lab's experiments were planned before they ran, and are judged against a thesis. The pilot batches are smaller sets of worlds that try an idea quickly."
     },
     {
-      "id": "frames-and-stats",
-      "title": "What a run records",
-      "file": "pages/frames-and-stats.md",
+      "id": "statistics",
+      "title": "Statistics: the tools of the notebook",
+      "file": "pages/statistics.md",
       "topics": [
-        "methods",
-        "simulation"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Everything the notebook shows is computed from two kinds of record that every run writes into its folder, GraphOfLifeRuns/<run>/. A frame is the whole world, written down after every phase."
-    },
-    {
-      "id": "median-and-quantiles",
-      "title": "Many worlds at once: the median, bands, the settled life and the spread",
-      "file": "pages/median-and-quantiles.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "The notebook rarely looks at one world. It runs thirty, with different seeds, and sums them up in four steps. The median and other quantiles describe a set of numbers without letting one extreme decide."
-    },
-    {
-      "id": "correlation",
-      "title": "Two numbers together: correlation, a fitted line and logarithmic axes",
-      "file": "pages/correlation.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Much of the notebook asks how one number goes with another. The correlation r says, from −1 to 1, how closely two quantities rise and fall together along a straight line. The least-squares line is the straight line that misses a cloud of points least."
-    },
-    {
-      "id": "autocorrelation",
-      "title": "How long a world remembers: autocorrelation and the power spectrum",
-      "file": "pages/autocorrelation.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A world wanders: its size, its inequality and its births go up and down over hundreds of iterations. The autocorrelation says how long it remembers where it was: the correlation of a world with itself, some time later."
-    },
-    {
-      "id": "bootstrap",
-      "title": "How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds",
-      "file": "pages/bootstrap.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every number the notebook reports comes from a few dozen worlds, and another few dozen would give a somewhat different number. Four tools say how much that matters. The bootstrap redraws the worlds we have, many times, to show how much a mean could vary."
-    },
-    {
-      "id": "variance-split",
-      "title": "Splitting variation: where, who and chance, and between worlds and within them",
-      "file": "pages/variance-split.md",
-      "topics": [
+        "reference",
         "methods",
         "brains"
       ],
-      "kind": "method",
+      "kind": "reference",
       "status": "written",
-      "added": "2026-10-16",
-      "summary": "A spread of numbers can often be split exactly into parts with different causes. The notebook does it twice. For a decision, put every brain into every situation with the same random draws."
+      "added": "2026-11-09",
+      "summary": "The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation and fitted lines, how long a world remembers, how sure a number is, how a spread splits into parts, and how many kinds a world really holds.."
+    }
+  ],
+  "parts": [
+    {
+      "id": "start",
+      "title": "Start",
+      "colour": "#c2d0dc",
+      "about": "What the notebook asks, how to read it, and the ideas it builds on.",
+      "topics": [
+        "start"
+      ],
+      "mark": "⬜"
     },
     {
-      "id": "effective-number",
-      "title": "Effective numbers: how many kinds, and how many directions",
-      "file": "pages/effective-number.md",
+      "id": "now",
+      "title": "Now: round 3 and its candidates",
+      "colour": "#f2cd5c",
+      "about": "The research of the moment: round 3 of the screen of random worlds, its healthiest worlds and its candidates for open-ended evolution, and what is played next.",
+      "topics": [
+        "screen"
+      ],
+      "mark": "🟨"
+    },
+    {
+      "id": "how",
+      "title": "The rules",
+      "colour": "#64bdff",
+      "about": "How a world works: tokens, agents and the network, one iteration, the brain, every setting, and the two baselines.",
+      "topics": [
+        "simulation",
+        "baselines"
+      ],
+      "mark": "🟦"
+    },
+    {
+      "id": "worlds",
+      "title": "What the worlds do",
+      "colour": "#4ccb60",
+      "about": "What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.",
+      "topics": [
+        "lives",
+        "wealth",
+        "game",
+        "network",
+        "size",
+        "brains",
+        "groups"
+      ],
+      "mark": "🟩"
+    },
+    {
+      "id": "physics",
+      "title": "Space and physics",
+      "colour": "#ab77f4",
+      "about": "The second aim: whether a world grows a space of its own, what has no scale, locality, flows and particles.",
+      "topics": [
+        "space"
+      ],
+      "mark": "🟪"
+    },
+    {
+      "id": "search",
+      "title": "The search for open-ended evolution",
+      "colour": "#e6a532",
+      "about": "Everything tried before round 3 to make evolution go on: tests of evolution, rules changed alone and together, strategies written by hand, and the hunt for a healthy, rich world.",
+      "topics": [
+        "evolution",
+        "rules",
+        "strategies",
+        "healthy"
+      ],
+      "mark": "🟧"
+    },
+    {
+      "id": "lookup",
+      "title": "Methods and look-up",
+      "colour": "#7e94a5",
+      "about": "How runs are made and measured, the statistics, every simulation, and the rules and measures in detail.",
       "topics": [
         "methods",
-        "brains"
+        "reference"
       ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Counting kinds can mislead: one kind may hold half the agents and the rest one agent each. An effective number counts kinds by how much of the population they hold. It is the number of equally common kinds that would be as diverse."
+      "mark": "🔳"
     }
   ]
 }

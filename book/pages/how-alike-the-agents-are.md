@@ -25,7 +25,7 @@ the same, there is nothing to choose, and nothing changes. Evolution is in the
 same position: selection picks among differences, and without differences it
 has nothing to pick.
 
-[Open-ended evolution](open-ended-test.md) asks for more than differences at
+[Open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution) asks for more than differences at
 one moment. It asks for new kinds that keep appearing, and stay beside the old
 ones ([What this notebook is about](what-this-notebook-is-about.md)). So two
 questions matter: how many kinds a world holds now, and whether they pile up.
@@ -39,16 +39,16 @@ counts say about open-ended evolution.
 
 Two agents can differ in three ways, and each gives a different count:
 
-- **by name.** Every brain carries a [genotype](genotype.md): a number it gets
+- **by name.** Every brain carries a [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor): a number it gets
   when it is made, and a new one at every change
-  ([How a brain changes](mutation.md)). Two agents with one genotype have the
+  ([How a brain changes](rules-in-detail.md#how-a-brain-changes)). Two agents with one genotype have the
   same brain;
 - **by the numbers.** A brain is a set of weights. How far apart are the
   weights of two brains?
 - **by what they do.** Put two agents in the same situation, and see whether
   they stake differently. Agents that act alike are one kind of behaviour.
   The kinds are counted by how many agents carry each
-  ([Effective numbers](effective-number.md)).
+  ([Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)).
 
 | what is counted | how | B1 (10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")) | B2 (10,000 tokens) | pages |
 |---|---|---|---|---|
@@ -61,11 +61,11 @@ of 1,500 agents holds about a thousand genotypes, and a handful of kinds of
 behaviour. A B2 world of 3,400 agents holds about 1,600 genotypes, and a few
 dozen kinds. Most of what makes two genotypes two changes nothing they do.
 
-A fourth count, the [diversity score](diversity-score.md), asks how widely a
+A fourth count, the [diversity score](measuring-health.md#the-diversity-score), asks how widely a
 world's agents spread in what they hold: their tokens, links, ages and
 genotypes. The screen of random worlds uses it, beside the kinds of staking,
 to judge whether a world is diverse
-([What makes a world interesting](what-makes-a-world-interesting.md)).
+([What makes a world interesting](measuring-health.md#what-makes-a-world-interesting)).
 
 ## What the pages found
 
@@ -93,7 +93,7 @@ to judge whether a world is diverse
   places. With it, they all end alike
   ([Do the brains matter?](do-the-brains-matter.md)).
 - In the same situation, the agents act nearly alike: seven times more alike
-  than random brains. Their largest kind of staking is the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."), which
+  than random brains. Their largest kind of staking is the [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."), which
   the rules make of scores at or below zero
   ([How different are the agents?](how-different-are-the-agents.md)).
 
@@ -143,9 +143,9 @@ last is enough on its own.
 ## In every kind of world
 
 [How different are the agents?](how-different-are-the-agents.md) measured B1
-and B2. Its measures were taken again in three [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of every condition the
-[lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") has run, at the end of each run (58 worlds). And they were taken in both
-seeds of every [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") condition (69).
+and B2. Its measures were taken again in three seeds of every condition the
+[lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") has run, at the end of each run (58 worlds). And they were taken in both
+seeds of every [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") condition (69).
 
 <!-- figure how_alike/lab -->
 ![How alike the agents are, in every lab condition](../figures/how_alike/lab.svg)
@@ -173,7 +173,7 @@ brains.** The variants change a great deal:
 - children of any size, half the tokens, no links at birth;
 - no cap on links, and handover.
 
-In each, two agents stake as differently as two fresh [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") brains in the
+In each, two agents stake as differently as two fresh founder brains in the
 same situations: 0.88 to 1.07 times as far apart. Only without mending are
 they somewhat more alike (0.69). Without old age they are as different too
 (1.06), but there it says nothing. Most of the agents are the founders
@@ -265,7 +265,7 @@ What the notebook has measured over time:
   twice. One of the two long worlds settled on a single kind of staking for
   good.
 - **Better brains do keep coming in B2.** The brains of 2,000 iterations beat
-  those of 500 over an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death.")
+  those of 500 over an agent's [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.")
   ([Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)).
   But they come more and more slowly, towards a plateau from about 5,000
   iterations on. Whether the plateau is the end is still open for B2. Two
@@ -284,7 +284,7 @@ rather than taking their place. The notebook's evidence points four ways, and
 none of them needs a tuned number:
 
 1. **Places that differ in what pays.** B2's kinds already sit at different
-   [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") in the network
+   [degrees](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has.") in the network
    ([How different are the agents?](how-different-are-the-agents.md)). That
    fits niches, but it fits families that live together too. To tell them
    apart, move a kind to another place, and see whether it does worse there.
@@ -336,7 +336,7 @@ they only differ, it is drift: variety without direction.
   compute, and why B1's barely see.
 - [Genotypes and lineages](genotypes-and-lineages.md): how names and lines are
   born, spread and die.
-- [The diversity score](diversity-score.md): how widely a world's agents
+- [The diversity score](measuring-health.md#the-diversity-score): how widely a world's agents
   spread in what they hold.
 
 ## How this was made
@@ -345,9 +345,9 @@ The three figures of this page are drawn with
 `python3 book_figures.py how_alike`, from the measures of
 `research/oee/checks/diversity.py`. Each says, folded beneath it, which
 worlds it reads and how. The counts use
-[Effective numbers](effective-number.md) and
-[Splitting variation](variance-split.md).
-[Genotypes, families and the common ancestor](genotype.md#brain-diversity)
+[Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions) and
+[Splitting variation](statistics.md#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them).
+[Genotypes, families and the common ancestor](measuring-evolution.md#brain-diversity)
 says how genotypes are counted.
 
 <!-- turns -->

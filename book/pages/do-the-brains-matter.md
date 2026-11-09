@@ -3,7 +3,7 @@
 > [!question] Questions of this page
 > - Can a world live if its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") decide by pure chance?
 > - What happens to a world whose brains never change — whose agents keep
->   the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' brains, copied, forever?
+>   the founders' brains, copied, forever?
 > - Do the worlds that evolve and the worlds that do not differ on average,
 >   or in how alike they are?
 > - Do lines still take over a world in which no brain is better than
@@ -12,7 +12,7 @@
 ## In short
 
 Experiment 7 took away the brains of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), in two ways, for
-the same thirty [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). Worlds whose every decision was drawn by chance all
+the same thirty seeds. Worlds whose every decision was drawn by chance all
 died within three iterations, while worlds of random, unselected brains live:
 the brains matter. Worlds whose brains never change live on, each with the
 habits of the founder whose line fills it: some stop having children, some
@@ -49,7 +49,7 @@ iterations, or until its world dies out ([The runs of Experiment
   [`mutation_sparsity`](settings.md#mutation_sparsity) = 0. A brain is still
   offered a change with probability one in five, at birth and after every
   game. When it "changes", it gets a new genotype number, but not one of its
-  weights moves ([A new genotype](mutation.md#a-new-genotype)). So the only
+  weights moves ([A new genotype](rules-in-detail.md#a-new-genotype)). So the only
   brains a world ever has are its founders', copied. The family tree of
   genotype numbers still branches exactly as often as in the baseline, which
   keeps the two comparable. And once one founder's descendants fill a world,
@@ -67,7 +67,7 @@ iterations, or until its world dies out ([The runs of Experiment
 In the baseline the seed hardly matters. Thirty worlds that differ only in
 their seed all wander through the same range ([How much does the seed
 decide?](how-much-does-the-seed-decide.md)). Is evolution what keeps them
-alike? Two [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds whose brains never change suggested so. They ended up
+alike? Two pilot worlds whose brains never change suggested so. They ended up
 nothing alike: one froze, with the same agents game after game, while the
 other boomed and crashed. Without new brains, it seemed, nothing can move a
 world off the habits its founders brought.
@@ -79,10 +79,10 @@ life, from iteration 500 on. The spread of the worlds' numbers of agents
 should be at least twice the baseline's, and so should the spread of their
 births. The spread is the standard deviation of the worlds' levels divided by
 their mean ([Spread between
-worlds](median-and-quantiles.md#spread-between-worlds)). And more than half of
+worlds](statistics.md#spread-between-worlds)). And more than half of
 all the variation in their number of agents should lie between the worlds, not
 within each over time. [Between worlds and within
-them](variance-split.md#between-worlds-and-within-them) explains the split.
+them](statistics.md#between-worlds-and-within-them) explains the split.
 The thesis speaks only of the worlds whose brains never change. Here it is, as
 it was written down:
 
@@ -113,7 +113,7 @@ the thirty of the baseline, through their first five iterations.
 > [!example]- How to make this figure
 > **Runs.** The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations — in three conditions: the 30 baseline runs `B1-10000-s001` … `-s030`; *brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box of the runs behind this page.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Plot `nodes` of the rows with `phase` = 2 and `iteration` ≤ 4, one line per run.
 >
@@ -143,7 +143,7 @@ after game, like a fixed habit. Noise gives new ones every time. Whether that
 is what keeps a world alive, this experiment does not test.
 
 Decisions by chance are a crude control in another way too. Take how much a
-parent gives its child. The [share function](share-function.md "How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.") turns two of the brain's numbers
+parent gives its child. The share function turns two of the brain's numbers
 into that share. It gives all the parent's tokens when the first number is
 positive and the second is not. It gives exactly half when neither is positive
 ([A birth, decision by
@@ -173,7 +173,7 @@ beside one of the baseline:
 > [!example]- How to make this figure
 > **Runs.** `B1-10000-s001` (baseline), and `B1-10000-a8525d-s002`, `-s001`, `-s025` and `-s012` (brains never change), all from Experiment 7.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Plot `nodes` of the rows with `phase` = 2 and `births` of the rows with `phase` = 1 against `iteration`.
 >
@@ -191,7 +191,7 @@ have from iteration 500 on. They fall into kinds the baseline never shows:
 > [!example]- How to make this figure
 > **Runs.** The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations — in three conditions: the 30 baseline runs `B1-10000-s001` … `-s030`; *brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box of the runs behind this page.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Compute each run's births per 100 agents as for the figure of births above.
 > 2. Sort the runs into the four kinds by that number and count them.
@@ -207,7 +207,7 @@ have from iteration 500 on. They fall into kinds the baseline never shows:
   last child, the last of them at iteration 1,363, and ended with 2,252. The
   fifteenth, seed 20, lost agents without ever replacing them, from 1,165 at
   iteration 300 to 23 by iteration 2,024. Then it sat at 23, three above the
-  line at which a run counts as [extinct](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.").
+  line at which a run counts as extinct.
 - **nearly frozen**: 2 worlds. Seed 19 had a birth in about one iteration in
   ten, the last at iteration 1,960. Seed 10 had a birth in every iteration
   until iteration 695, and none after.
@@ -246,7 +246,7 @@ and the worlds without change are coloured by their kind.
 > [!example]- How to make this figure
 > **Runs.** The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations — in three conditions: the 30 baseline runs `B1-10000-s001` … `-s030`; *brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box of the runs behind this page.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For agents, the Gini coefficient and nodes kept: average `nodes`, `gini` and `heldHomeShare` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 2,999.
 > 2. For births: divide `births` in each row with `phase` = 1 by the row's `nodes_before`, multiply by 100, and average from iteration 500 to 2,999.
@@ -263,11 +263,11 @@ and the worlds without change are coloured by their kind.
   2.3 and 4.3. The worlds without change range from none at all to one per
   agent: a spread of 1.33, against 0.15.
 - **Inequality.** Wealth is spread more evenly without change, and most evenly
-  in the teeming worlds. The [Gini coefficient](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is 0 when every agent holds as
+  in the teeming worlds. The [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is 0 when every agent holds as
   many tokens, and near 1 when one holds nearly all. Its median is 0.32
   without change, against 0.49. Set against the baseline world of the same
   seed, the difference is 0.17, with a 95% interval of 0.11 to 0.23 by the
-  [bootstrap](bootstrap.md#for-a-difference).
+  [bootstrap](statistics.md#for-a-difference).
 - **Nodes kept.** The share of agents that keep their own node in a game is
   the same on average, 45% in both. But it runs from 15% to 77% without
   change, against 39% to 52%.
@@ -275,12 +275,12 @@ and the worlds without change are coloured by their kind.
 The same spread shows in every other statistic of the baseline's study. Of
 all the tokens staked, agents put 30% on their own nodes in both conditions,
 but from 4% to 51% without change. So it goes for
-[the core](bridges.md#core-trees-and-leaves) and for the bridges. On average
+[the core](measuring-networks.md#core-trees-and-leaves) and for the bridges. On average
 a world without change looks much like an evolving one, with two exceptions:
 
-- **[Coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.")** take a smaller share of the nodes in a game: 44% in the
+- **Coalitions** take a smaller share of the nodes in a game: 44% in the
   median world, against 52%.
-- **The [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours.")** is lower: 0.020, against 0.075.
+- **The clustering** is lower: 0.020, against 0.075.
 
 Set against the baseline world of the same seed, both differences are clear
 (*p* = 0.013 and 0.015). But above all, the evolving worlds sit close
@@ -292,7 +292,7 @@ statistic can be.
 A single world does not settle at one level. Its number of agents drifts up
 and down over hundreds of iterations: it **wanders**. A baseline world
 remembers where it was for a few hundred iterations, and not much longer ([How
-long a world remembers](autocorrelation.md)). How far does a world wander when
+long a world remembers](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum)). How far does a world wander when
 its brains never change?
 
 <!-- figure brains/wander-dots -->
@@ -303,7 +303,7 @@ its brains never change?
 > [!example]- How to make this figure
 > **Runs.** The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations — in three conditions: the 30 baseline runs `B1-10000-s001` … `-s030`; *brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box of the runs behind this page.
 >
-> **Data.** From the analysis of Experiment 7 (`python3 gol_lab.py analyse E07`), whose results file holds every run's ratio under `wandering.nodes`; or from each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From the analysis of Experiment 7 (`python3 gol_lab.py analyse E07`), whose results file holds every run's ratio under `wandering.nodes`; or from each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Cut iterations 100–2,999 into 29 stretches of 100 and average `nodes` in each.
 > 2. Divide the largest of the 29 by the smallest.
@@ -318,13 +318,13 @@ the difference is 3.5, with a 95% interval of 2.8 to 4.2.
 
 And a world without change stays where it is. Take each world's mean number of
 agents over iterations 100 to 1,499, and over 1,500 to 2,999. Across the
-thirty worlds without change, the two halves have a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of 0.96: a
+thirty worlds without change, the two halves have a correlation of 0.96: a
 world's first half says almost everything about its second. Across the
 baseline's worlds the correlation is 0.12.
 
 The same shows when all the variation in the number of agents is split in two
 ([Between worlds and within
-them](variance-split.md#between-worlds-and-within-them)). One part is how much
+them](statistics.md#between-worlds-and-within-them)). One part is how much
 the worlds' own averages differ: the part between the worlds, which each seed
 fixes. The other is how much each world moves around its own average over
 time: the part within. Without change, 96% of the variation lies between the
@@ -347,7 +347,7 @@ Yes. The thesis **holds**, on all three counts and by wide margins:
 In a village where nobody is better than anybody, family names still die out,
 one by one, until one is left. Lines of brains can do the same. A line of
 descent, or lineage, is one genotype together with every genotype descended
-from it ([Families](genotype.md#families)).
+from it ([Families](measuring-evolution.md#families)).
 
 In a world whose brains never change, the founders' lines still compete until
 one of them fills the world. In the median world that happens between
@@ -361,14 +361,14 @@ which genotype spreads is pure chance.
 How often does chance sweep such a world? The **common ancestor** of the
 living is the newest genotype that every living agent descends from ([The
 common ancestor of the
-living](genotype.md#the-common-ancestor-of-the-living)). When one branch of
+living](measuring-evolution.md#the-common-ancestor-of-the-living)). When one branch of
 the family tree replaces all the others, in a **sweep**, the common ancestor
 moves forward to a younger genotype. The figure counts those moves.
 
 <!-- figure brains/moves-dots -->
 ![How often one branch replaces all others](../figures/brains/moves-dots.svg)
 
-**How often one branch replaces all others.** For each world that lived to the end, coloured as above: how many times after iteration 100 the newest common ancestor of all the living moved forward to a younger genotype ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)). In a world whose brains never change, every genotype is a renamed copy of one founder's brain once that founder's line fills the world, so which branch wins is chance.
+**How often one branch replaces all others.** For each world that lived to the end, coloured as above: how many times after iteration 100 the newest common ancestor of all the living moved forward to a younger genotype ([The common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living)). In a world whose brains never change, every genotype is a renamed copy of one founder's brain once that founder's line fills the world, so which branch wins is chance.
 
 > [!example]- How to make this figure
 > **Runs.** The 90 runs of Experiment 7 — B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations — in three conditions: the 30 baseline runs `B1-10000-s001` … `-s030`; *brains never change*, `B1-10000-a8525d-s001` … `-s030` (`mutation_sparsity` 0); and *decisions by chance*, `B1-10000-e7f450-s001` … `-s030` (`random_decisions` on). They are made with `python3 gol_lab.py run E07`; every setting is listed in the box of the runs behind this page.
@@ -460,7 +460,7 @@ every run.
 
 - **Survived to iteration 3,000:** baseline 26, brains never change 30,
   decisions by chance 0 (25 died after 2 iterations, 5 after 3).
-- **[Engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."):** snapshot `f820369a1583af53`, commit `4bc7165`, for all 90 runs
+- **Engine:** snapshot `f820369a1583af53`, commit `4bc7165`, for all 90 runs
   ([Is a run reproducible?](is-a-run-reproducible.md)).
 - **Cost:** the new runs took 35 hours of computing, done in 9.1 hours on four
   workers. They take 11 GB on disk, and one run needed at most 746 MB of
@@ -468,8 +468,8 @@ every run.
 - **Comparisons:** paired by seed, each world without change set against the
   baseline world of the same seed. The intervals come from resampling the
   differences, and *p* from flipping their signs at random, 10,000 times each
-  ([The bootstrap](bootstrap.md#the-bootstrap), [Permutation
-  tests](bootstrap.md#permutation-tests)).
+  ([The bootstrap](statistics.md#the-bootstrap), [Permutation
+  tests](statistics.md#permutation-tests)).
 
 ### The runs of Experiment 7
 
@@ -587,5 +587,5 @@ every run.
 ← [What agents say to each other](what-agents-say-to-each-other.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
 
 > [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [How a brain changes](mutation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Genotypes, families and the common ancestor](genotype.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

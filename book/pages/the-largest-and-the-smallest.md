@@ -10,7 +10,7 @@
 ## In short
 
 In a settled world, the richest agent holds about 2% of all [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and the
-best-connected some 640 [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."); the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent has 2. First place in
+best-connected some 640 [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."); the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") agent has 2. First place in
 tokens changes hands in three games out of five; first place in connections
 lasts longer, often passing from parent to newborn child. In seven of thirty
 worlds one agent is joined to a tenth of the world or more: a star. Its centre
@@ -22,12 +22,12 @@ the best-connected agent's connections rise.
 
 A typical agent of a settled world holds a few tokens and has two or three
 connections. After every game the viewer also reports the extremes
-([What a run records](frames-and-stats.md)):
+([What a run records](runs-and-records.md#what-a-run-records)):
 
 - the richest agent and the poorest, `maxTokens` and `minTokens`
-  ([Tokens per agent: mean, median, extremes](gini-coefficient.md#tokens-per-agent-mean-median-extremes));
+  ([Tokens per agent: mean, median, extremes](measuring-tokens.md#tokens-per-agent-mean-median-extremes));
 - the best-connected agent and the least, `maxDegree` and `minDegree`, beside
-  the median agent's `medianDegree` ([Degree](degree.md));
+  the median agent's `medianDegree` ([Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling));
 - the largest gain and the largest loss of one agent in the game,
   `maxTokenAdded` and `maxTokenLost`
   ([Gains, losses and the share-out](gains-and-losses.md#gains-losses-and-the-share-out)).
@@ -49,7 +49,7 @@ the whole distribution; this page asks it of the top.
 
 The worlds are the thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)). They are read over their
-[settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to their end.
+[settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to their end.
 
 ## The largest, over a world's life
 
@@ -64,7 +64,7 @@ mean agent and the median one:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2: `maxTokens`, `maxTokenAdded`, `maxTokenLost` and `meanTokens`, divided by 100,000; `maxDegree`, `meanDegree` and `medianDegree`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -143,12 +143,12 @@ world. In some it is joined to much more:
 <!-- figure extremes/stars -->
 ![Worlds held together by one agent](../figures/extremes/stars.svg)
 
-**Worlds held together by one agent.** Left: after every game, the connections of the best-connected agent divided by the agents alive, in the worlds whose best-connected agent held, on average over iterations 500–1,499, a tenth of the world or more (one line each), and in the other worlds (the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th)). Right: one dot per world, its mean over the settled life of that share and of the share of agents in the core ([Core, trees and leaves](bridges.md#core-trees-and-leaves)), for the worlds of 100,000 tokens (blue) and of 10,000 (yellow, over iterations 500–2,999).
+**Worlds held together by one agent.** Left: after every game, the connections of the best-connected agent divided by the agents alive, in the worlds whose best-connected agent held, on average over iterations 500–1,499, a tenth of the world or more (one line each), and in the other worlds (the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th)). Right: one dot per world, its mean over the settled life of that share and of the share of agents in the core ([Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)), for the worlds of 100,000 tokens (blue) and of 10,000 (yellow, over iterations 500–2,999).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2: `maxDegree` / `nodes`, and `coreShare` (every 25 iterations).
 > 2. Left: one line per star world; the band over the others as every band. Right: each world's means over its settled life.
@@ -158,16 +158,16 @@ world. In some it is joined to much more:
 
 Seven of the thirty worlds had, on average over their settled life, a
 best-connected agent joined to a tenth of the world or more. In the world with
-[seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 28 it was joined to **58%** of all agents on average, for a thousand
+seed 28 it was joined to **58%** of all agents on average, for a thousand
 iterations. Such a world is a **star**: one agent at the centre, thousands of
 leaves around it. A leaf is an agent with a single connection
-([Stars and hubs](stars-and-hubs.md)).
+([Stars and hubs](measuring-networks.md#stars-and-hubs)).
 
 A star sets the shape of its world. The core of a world is what is left when
 agents with a single connection are peeled away, again and again
-([Core, trees and leaves](bridges.md#core-trees-and-leaves)). Across the thirty worlds,
+([Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)). Across the thirty worlds,
 the share of agents in the core falls as the share joined to the largest hub
-rises. Their [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") is **−0.96** (right panel). At 10,000 tokens stars
+rises. Their [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") is **−0.96** (right panel). At 10,000 tokens stars
 were no rarer. Ten of the 26 worlds had one by the same measure, the largest
 joined to 31% of its world. But there the core went with the hub far more
 loosely (−0.54).
@@ -189,12 +189,12 @@ centre's node and keep the rest at home
 ([How the game is played](how-the-game-is-played.md)). Two tokens at home
 outbid the centre's single token and keep the leaf its node. One token at home
 ties it, and a coin then settles who wins
-([How a coalition takes a node](revolution.md)).
+([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
 
 So across nearly every one of the twenty thousand connections, about one token
 goes out and about one comes back, every game. The centre is a clearing house.
 Its tokens are, almost to the token, the number of its connections. That is
-the resting state of an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") at its most extreme. At rest, every agent
+the resting state of an even split at its most extreme. At rest, every agent
 holds tokens in proportion to its connections plus one
 ([Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
 
@@ -203,7 +203,7 @@ in all of the hundred games from iteration 1,122 on. Its own agent, spreading
 its tokens one by one, stakes a token or two there at most, and often none, as
 in the game above. On a node with twenty thousand stakers it is at best one
 small staker among many. Each time, a winner's brain is copied in: the centre
-carried 78 different [genotypes](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") in those hundred games. What persists is not a
+carried 78 different [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") in those hundred games. What persists is not a
 brain but a place: the agent's connections, and the tokens that flow through
 them.
 
@@ -243,7 +243,7 @@ its worlds that lived to the end: none of 800 tokens, and one of 1,600.
 > [!example]- How to make this figure
 > **Runs.** The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`); The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Average `nodes`, `maxTokens` / total tokens and `maxDegree` over the rows with `phase` = 2 in the stretch.
 > 2. Fit ln y = a + b·ln x by least squares.
@@ -260,7 +260,7 @@ their stars far above the second.
 So a world of ten times the tokens, which holds about eleven times the agents,
 has a richest agent about three times as rich. Its best-connected agent is
 about four times as connected. That is faster than the width of a world grows:
-×2, since its [diameter](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") grows about as agents^0.30
+×2, since its diameter grows about as agents^0.30
 ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
 And it is slower than its agents (×11). Measured directly against the worlds
 of 10,000 tokens, the richest agent is 3.1 times as rich. The best-connected,
@@ -272,7 +272,7 @@ room at the top in a large world, and the stars show what it can be used for.
 
 ## What a dynasty carries
 
-For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), a dynasty is the first thing in these worlds that is
+For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), a dynasty is the first thing in these worlds that is
 inherited and lasts. It is not a brain: the centre's brain is replaced in
 nearly every game. It is a position, passed from parent to child for hundreds
 of iterations. If brains could hold what they inherit, a dynasty would be the
@@ -283,7 +283,7 @@ incumbent. It would turn the dynasty of a place into a dynasty of a line
 ([Two roads of inheritance](questioning-the-mechanics.md#two-roads-of-inheritance)).
 Such a rule was tried later. The setting
 [`incumbency`](settings.md#incumbency) counts an agent's stake on its own node
-more than anyone else's. In [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds, counted twice, it let one agent
+more than anyone else's. In pilot worlds, counted twice, it let one agent
 gather 57% of all tokens behind a home stake nobody could outbid. Counted one
 and a half times, it is part of the second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")
 ([Holding one's place](a-world-that-cannot-break.md#holding-ones-place)). But
@@ -316,8 +316,8 @@ brain holds its node in B2 has not been measured directly, as
 
 ## Where to go next
 
-- [Stars and hubs](stars-and-hubs.md): hubs and stars in short, and why the
-  [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") counts a hub as a fault.
+- [Stars and hubs](measuring-networks.md#stars-and-hubs): hubs and stars in short, and why the
+  [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") counts a hub as a fault.
 - [Where tokens flow](where-the-tokens-flow.md#who-keeps-their-node): why the
   agent on a hub keeps its node so rarely.
 - [How births build the network](how-agents-have-children.md): how a parent
@@ -434,5 +434,5 @@ Each figure says, folded beneath it, which runs it reads and how.
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
 > [!info]- Pages that link here (19)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [Stars and hubs](stars-and-hubs.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Genotypes and lineages](genotypes-and-lineages.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Genotypes and lineages](genotypes-and-lineages.md)
 <!-- /turns -->

@@ -10,7 +10,7 @@
 > - Do the well connected gain more connections than the poorly connected, and
 >   lose more? In proportion to what they have?
 > - Do agents gather connections as they grow old, so that the oldest are the
->   [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")?
+>   hubs?
 
 ## In short
 
@@ -52,11 +52,11 @@ columns:
 1. **How much.** Two of the outputs, averaged over all the columns, give two
    numbers (*ā*, *b̄*). The child gets *c* = ⌊*f*(*ā*, *b̄*) · τ⌋ tokens: the
    share *f* of the parent's tokens, rounded down. Here *f* is the share
-   function ([The share function](share-function.md)). It gives the positive
+   function ([The share function](rules-in-detail.md#the-share-function-fa-b)). It gives the positive
    part of *ā* as a share of the positive parts of both, or ½ if neither is
    positive. If *c* = 0, there is no child.
-2. **Whom it joins.** For every candidate, the parent included, a [yes-or-no
-   decision](binary-decision.md "A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion."): join the child to it or not.
+2. **Whom it joins.** For every candidate, the parent included, a yes-or-no
+   decision: join the child to it or not.
 3. **What it is handed.** For every neighbour of the parent, a yes-or-no
    decision: move the parent's connection to that neighbour over to the child.
 
@@ -95,13 +95,13 @@ it give?
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-In the first reproduction phase, three [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") in four (74.7%) had a child.
+In the first reproduction phase, three founders in four (74.7%) had a child.
 In a settled world, only a few agents in a hundred do in any one phase:
 
 | tokens | 1 | 2 | 3–4 | 5–9 | 10–19 | 20–49 | 50–99 | 100+ |
 |---|---|---|---|---|---|---|---|---|
 | had a child | 0.4% | 3.1% | 2.8% | 3.9% | 5.2% | 7.7% | 8.4% | 5.2% |
-| [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") share given | 1 | ½ | ⅓ | ¼ | 0.2 | 0.2 | 0.19 | 0.18 |
+| [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") share given | 1 | ½ | ⅓ | ¼ | 0.2 | 0.2 | 0.19 | 0.18 |
 
 The 1-token parents all give their only token, and starve for it. The 2-token
 parents mostly give half. From 3 tokens on, the median share falls to a
@@ -188,12 +188,12 @@ can be followed through a world's whole life:
 <!-- figure children/over-time -->
 ![Reproduction over a world's life](../figures/children/over-time.svg)
 
-**Reproduction over a world's life.** After every reproduction phase of the 30 baseline worlds ([Reproduction statistics](reproduction-statistics.md)): the mean share of its tokens a parent gave its child (`meanInvestedShare`); the tokens given to all children as a share of all tokens (`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); and the connections handed over per birth (`handovers` / `births`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Reproduction over a world's life.** After every reproduction phase of the 30 baseline worlds ([Reproduction statistics](measuring-lives.md#reproduction-statistics)): the mean share of its tokens a parent gave its child (`meanInvestedShare`); the tokens given to all children as a share of all tokens (`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); and the connections handed over per birth (`handovers` / `births`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 1: `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, and `handovers` divided by `births`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -202,7 +202,7 @@ can be followed through a world's whole life:
 > **To make it again:** `python3 book_figures.py children`.
 <!-- /figure -->
 
-Over the [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), the median world's parents give 36% of what they
+Over the [settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), the median world's parents give 36% of what they
 hold. All the tokens given to children in one phase are 1.3% of the world's
 tokens. And in the median world, a child is joined at birth to 4.8 of its
 parent's candidates on average. Births move little wealth.
@@ -268,7 +268,7 @@ world can grow, but new connections never shorten them. This is why a world
 keeps a shape in space at all
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
 
-The same rule limits what births can build. Every [loop](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") a birth closes is
+The same rule limits what births can build. Every loop a birth closes is
 small, through agents at most two steps apart. Nothing closes a large loop,
 through distant parts of the world. So a network grown by births alone is, at
 large scale, a tree: a network without loops, whose nodes are dense blobs of
@@ -290,7 +290,7 @@ them again at the start of the game that follows, and count what each class
 loses in it. Divided by the agents in the class, these are the **gain
 kernel** and the **loss kernel** of the network. They say what an agent with
 *k* connections gains, and loses, on average
-([Preferential attachment and its kernel](degree.md#preferential-attachment-and-its-kernel)).
+([Preferential attachment and its kernel](measuring-networks.md#preferential-attachment-and-its-kernel)).
 
 <!-- figure grows/kernel -->
 ![Who gains and who loses connections](../figures/grows/kernel.svg)
@@ -421,7 +421,7 @@ other way. They pass from parent to newborn child, as
   A brain spreads by conquest seventeen times more than by birth. In most
   models of evolution, reproduction is where heredity and variation happen;
   here, it is a side road.
-- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), the network is a churn.**
+- **For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), the network is a churn.**
   [Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich) found connections to be
   the only lasting form of wealth. Yet they too are gained and lost in
   proportion, at every scale. No structure is built up that lasts longer than
@@ -443,7 +443,7 @@ other way. They pass from parent to newborn child, as
 ## How this was made
 
 Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are the baseline B1 at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30, run for
+below. They are the baseline B1 at 100,000 tokens, seeds 1 to 30, run for
 1,500 iterations each. The command `python3 book_figures.py children` draws
 the figures of [How agents have children](#how-agents-have-children), and
 `python3 book_figures.py grows` those of
@@ -552,10 +552,10 @@ date from when the two pages this one joins were first written.
 <!-- turns -->
 ---
 
-← [Births, deaths and ages](births-deaths-and-ages.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [Births and the four ways to die](births-and-deaths.md) →
+← [Births, deaths and ages](births-deaths-and-ages.md) · [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages)
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (19)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Reproduction statistics](reproduction-statistics.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
+> [!info]- Pages that link here (17)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
 <!-- /turns -->

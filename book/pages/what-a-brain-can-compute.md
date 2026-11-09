@@ -25,7 +25,7 @@ planted rules written in Python into evolved B2 worlds. Each started as a
 patch of 5% of a world's agents. A plain one, the **raider**, took 40% of
 world 2 and 62% of world 3 within 300 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). It died out in the other
 eight of the ten worlds ([Ten worlds](strategies-written-by-hand.md#ten-worlds)).
-On a second [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") it took 50% of world 2. The brains it beat had been shaped
+On a second seed it took 50% of world 2. The brains it beat had been shaped
 by evolution for 2,000 iterations. So the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") has better play than
 evolution found.
 
@@ -49,24 +49,24 @@ compute, and names the smallest change to the rules that would let one.
 
 When an agent decides anything, it looks at its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."): itself first, then
 each of its neighbours. For each candidate its brain gets one column of 66
-numbers ([What a brain sees](brain-inputs.md)):
+numbers ([What a brain sees](rules-in-detail.md#what-a-brain-sees)):
 - whether the candidate is the agent itself: 1 or 0;
 - the agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and the candidate's, on a logarithmic
   scale, as ln(1 + count);
-- six [quantiles](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of the tokens of the agent's neighbours, six of their
+- six [quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of the tokens of the agent's neighbours, six of their
   connections, and the same for the candidate's neighbours;
 - four messages of eight numbers each: the agent's to itself and to the
   candidate, and the candidate's to the agent and to itself;
 - five random numbers.
 
 A B2 brain is small. One hidden layer of 16 units reads the column, and 19
-outputs read the units ([What a brain says](brain-outputs.md)). The same
+outputs read the units ([What a brain says](rules-in-detail.md#what-a-brain-says)). The same
 weights score every column. They are kept in half precision (float16), which
 holds about three significant digits. B2 has one hidden layer where [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") has
 five, so that a change in what a brain sees reaches what it does
 ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
 
-The [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") turns the outputs into decisions:
+The [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") turns the outputs into decisions:
 - **The stake.** Everything the agent may stake goes all on the column with
   the highest stake score, or is spread in proportion to the scores. A pair
   of outputs, averaged over the columns, decides which. Under B2 an agent may
@@ -74,11 +74,11 @@ The [engine](the-lab.md "The program that runs an experiment's plan as runs, eac
   home.
 - **The child.** A pair of outputs, averaged over the columns, gives the share
   of its tokens the agent gives a child
-  ([The share function](share-function.md)). Under B2 a child needs at least
+  ([The share function](rules-in-detail.md#the-share-function-fa-b)). Under B2 a child needs at least
   10 tokens, or there is none.
 - **The child's links.** Each column says yes or no to joining the child to
   that candidate.
-- **[Revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.").** A pair of outputs per column says how much of the stake on
+- **Revolutions.** A pair of outputs per column says how much of the stake on
   that candidate is marked revolutionary.
 - **The messages.** Each column's eight message outputs, squashed by tanh into
   the range from −1 to 1, are what the agent writes to that candidate.
@@ -292,7 +292,7 @@ numbers, which the rule never does. No raider that rich met one.
 ### Planted in its place
 
 Planted in its place, the brain does what the rule did. The raider's
-invasion test ([The invasion test](eras-and-contests.md#the-invasion-test))
+invasion test ([The invasion test](measuring-evolution.md#the-invasion-test))
 was played in worlds 1 to 3, on seeds 1 and 2. Each patch was played once
 with the rule and once with the hand-set brain, in the same place. Neither
 ever mutates.
@@ -333,7 +333,7 @@ It takes 12 of the 16 units B2 gives every agent. Evolution did not fail to
 find it for lack of room in a brain.
 [How deep is the valley?](strategies-written-by-hand.md#how-deep-is-the-valley)
 says why evolution misses it. The raid, the password and the crowd pay only
-together, and about a hundred raiders must start at once. [Pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") that gave
+together, and about a hundred raiders must start at once. [Pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") that gave
 evolution the password and the crowd for free did not lead it there either
 ([A password and a crowd, for free](another-game.md#a-password-and-a-crowd-for-free)).
 
@@ -497,7 +497,7 @@ of thing.
   range to the tokens, but not a password in the middle.
 - **One small rule would open the messages**: a message to itself that pools
   what it says to everyone. It is now a setting, still to be tested on its
-  own. [What would count as open-ended evolution](open-ended-test.md) says how
+  own. [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution) says how
   the long runs will be judged.
 
 ## Where to go next
@@ -506,10 +506,10 @@ of thing.
   the raider, the factory, and the crowd a raid needs.
 - [Why the raiders stopped winning](does-evolution-close-the-door.md): the
   same raider in older worlds, where its patches grew too poor to raid.
-- [What a brain sees](brain-inputs.md) and
-  [What a brain says](brain-outputs.md): every input and output row of a
+- [What a brain sees](rules-in-detail.md#what-a-brain-sees) and
+  [What a brain says](rules-in-detail.md#what-a-brain-says): every input and output row of a
   brain.
-- [Messages](messages.md): who writes the four messages, and when they are
+- [Messages](rules-in-detail.md#messages): who writes the four messages, and when they are
   read.
 
 ## How this was made
@@ -556,6 +556,6 @@ them, so this page has no box of runs. They were made with
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (9)
-> [Every setting](settings.md) · [What a brain sees](brain-inputs.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [What would count as open-ended evolution](open-ended-test.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
+> [!info]- Pages that link here (6)
+> [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
 <!-- /turns -->

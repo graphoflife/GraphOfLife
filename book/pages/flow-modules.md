@@ -39,7 +39,7 @@ program (`web/js/flowmodules.js`, run through `tools/flowmodules_cli.js`).
 In every game, each agent splits its tokens over its own node and its
 neighbours' nodes ([How the game is played](how-the-game-is-played.md)). A
 token staked on a neighbour's node **flows** along the connection between
-them ([Token flow](token-flow.md#token-flow)). Add up, for each pair of
+them ([Token flow](measuring-tokens.md#token-flow)). Add up, for each pair of
 neighbours, the tokens that crossed between them in either direction. That
 sum is the weight of their connection in this game, and the game becomes a
 weighted network: the **flow**. Tokens an agent keeps on its own node say
@@ -178,7 +178,7 @@ the network's own regions, or something the agents make? To find out, we read
 183 worlds for fifty games in a row, each world counted once. They are of
 every kind the notebook had made by 16 October 2026
 ([How this was made](#how-this-was-made)). The first and the last figure
-show them all; the two between set eighteen [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") worlds beside the nulls.
+show them all; the two between set eighteen [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") worlds beside the nulls.
 
 ### Groups in every world
 
@@ -203,14 +203,14 @@ show them all; the two between set eighteen [lab](the-lab.md "The program that r
 The worlds fall into the same two kinds as everywhere else in the notebook.
 
 **In B1's worlds**, and in every world where unused links lapse, the flow is
-grouped, but loosely. The modules compress it by 0.36–0.48 (the [medians](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of
+grouped, but loosely. The modules compress it by 0.36–0.48 (the [medians](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of
 the groups of worlds), where the same flow rewired at random compresses by
 about 0. A module holds about four agents, and every agent is in one. B1's
 agents spread their stake over nearly all their neighbours
 ([How widely agents stake](where-the-tokens-flow.md#how-widely-agents-stake)),
 so every agent sends and receives. From one game to the next, a module of
 the lab's B1 worlds changes about an eighth of its members (0.11–0.13). Where
-B2's unused links lapse, and in the B1 [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), it changes more (0.18 and
+B2's unused links lapse, and in the B1 [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds."), it changes more (0.18 and
 0.26).
 
 **In B2's worlds** the flow falls apart into pairs. The modules compress it
@@ -238,7 +238,7 @@ Some worlds stand apart within their kind:
 - Batch S's pilot worlds with **lapsing links**, with gifts and without, are
   B1-like, as are the lab's worlds with lapsing links. It is the same split
   that [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)
-  found for [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") of flow.
+  found for loops of flow.
 
 ### What the network makes, and what the agents make
 
@@ -258,7 +258,7 @@ The compression hardly changes: 0.388 against 0.384 in a B1 world, and 0.845
 against 0.846 in a B2 world. It changes as little in the others measured. In
 B1 that is no surprise. An agent that splits its stake evenly over its
 neighbours gives every neighbour the same, and dealing equal amounts changes
-nothing ([The even split](even-split.md)). B1's flow modules are its
+nothing ([The even split](measuring-tokens.md#the-even-split)). B1's flow modules are its
 network's regions. Whether they last, and whether B2's agents choose their
 partners, the next two sections ask.
 
@@ -349,7 +349,7 @@ are in a module then?
   pairs stay together (0.83 and 0.70), and as many with partners dealt (0.79
   and 0.67). But only two worlds were measured there, so the median is their
   mean. One of the two is a star, a world held together by a single hub
-  ([Stars and hubs](stars-and-hubs.md)). Its flow has one module of nearly
+  ([Stars and hubs](measuring-networks.md#stars-and-hubs)). Its flow has one module of nearly
   6,000 agents, two fifths of the world. The other keeps 0.73 and 0.46 of its
   pairs together: more than B1 at 10,000 tokens a game later, the same forty
   games later.
@@ -397,7 +397,7 @@ born since the game before, in the medians of the groups of B1 worlds. Of a B2
 module's, 4% were. Only where agents are born and die often does a module
 renew from births. In the B1 world whose modules lose 4.5% of their members to
 death every game, three new members in four were born. In the pilot worlds of
-B1 without [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), where agents come and go faster, between a third and
+B1 without [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), where agents come and go faster, between a third and
 four fifths were.
 
 ## What we learned
@@ -419,7 +419,7 @@ four fifths were.
   The same happens when every agent's partners are dealt at random.
 - **Some rules leave almost no flow at all.** Where children may be of any
   size, or nobody dies of age, almost no agent stakes on a neighbour.
-- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**, a group that holds together while its
+- **For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.")**, a group that holds together while its
   members change is what a higher level of individual would be built from.
   It is the step from single cells to organisms that Maynard Smith and
   Szathmáry (1995) call a major transition. These worlds make no such group beyond
@@ -437,7 +437,7 @@ four fifths were.
   side, these groups among them.
 - [Where tokens flow](where-the-tokens-flow.md): the budget of a game, the
   random walk the tokens follow, and the loops they make.
-- [Measuring the flow: token flow, lightning and circulation](token-flow.md):
+- [Measuring the flow: token flow, lightning and circulation](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation):
   how the flow of a game is measured, and how much of it goes round.
 - [Who helps whom](who-helps-whom.md): why nothing in the game rewards
   keeping a partner.
@@ -451,7 +451,7 @@ reads and how.
 - **Every world, fifty games.** `research/atlas/flowmodules.py` (`lab`, then
   `pilots`) reads fifty consecutive games of every world. A lab run is read
   from its record, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 950 when it lived that long, for up to five
-  [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of every condition. A pilot is played on from its checkpoint at
+  [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") of every condition. A pilot is played on from its checkpoint at
   iteration 1,000. That makes 183 worlds of every kind, each counted once.
   Sixteen pilot worlds replay a lab world, with its [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and seed, game
   for game; they are left out. And seven worlds give another's answer to the
@@ -464,7 +464,7 @@ reads and how.
   `GraphOfLifeRuns/.pilots/atlas/flowpersist/`. The worlds are:
   - B1 at 10,000 tokens (three seeds), at 100,000 (two), and with brains that
     never change (two);
-  - B2 at 10,000 tokens (three), without random inputs (two), and at [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
+  - B2 at 10,000 tokens (three), without random inputs (two), and at [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
     rates 0.05 and 0.8 (one each);
   - B2 at 5,000 tokens (two), and with lapsing links (two).
 - **The modules** are found and followed by the Research view's own program,
@@ -520,10 +520,10 @@ reads and how.
 <!-- turns -->
 ---
 
-← [Where tokens flow](where-the-tokens-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) →
+← [Where tokens flow](where-the-tokens-flow.md) · [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens)
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
 > [!info]- Pages that link here (14)
-> [Glossary](glossary.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Do the brains matter?](do-the-brains-matter.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Glossary](glossary.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Do the brains matter?](do-the-brains-matter.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

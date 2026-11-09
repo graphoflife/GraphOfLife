@@ -36,7 +36,7 @@ times the entropy of what arrives, and that export pays for every ordered
 thing on Earth, from a cloud to a cell (Boltzmann 1886; Schrödinger 1944).
 
 A world of Graph of Life has the conservation and not the flow. A token is a
-token, wherever it came from. In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") the game's [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") is a step of the
+token, wherever it came from. In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") the game's [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") is a step of the
 heat equation, which smooths every difference away
 ([Heat, not waves](physical-inspiration.md#heat-not-waves)): a closed world
 runs down towards a miniature heat death.
@@ -62,14 +62,14 @@ where its tokens are.
 A world of Graph of Life has no fixed places. Nodes are born and die, and the
 world has no coordinates. So where should tokens come in?
 
-1. **Everywhere.** The [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can do this now:
+1. **Everywhere.** The [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can do this now:
    [`tokens_created_per_phase`](settings.md#tokens_created_per_phase) adds
-   tokens to the pool at every [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out."), dealt out like an [estate](estate.md "The tokens a dead agent leaves, and who gets them."). A flow
+   tokens to the pool at every [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out."), dealt out like an [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them."). A flow
    without a place makes no gradient. It is kept below as a control.
 2. **At the oldest living agent.** The source would jump across the world
    whenever the oldest died, and finding the oldest means looking at every
    agent at once. Not local.
-3. **Where the world began.** The [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring does not last: its nodes die
+3. **Where the world began.** The [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring does not last: its nodes die
    like any others ([A beginning](physical-inspiration.md#a-beginning)), and
    without coordinates "near where it began" means nothing once they are gone.
 4. **On a node that stays a node.** The source starts on the first founder's
@@ -86,8 +86,8 @@ world has no coordinates. So where should tokens come in?
 
 The tokens land on the source node at the start of every phase, before
 anyone looks, so its holder sees them and stakes them. That holder will be by
-far the richest agent of its world. In [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3026, fed 938 tokens a phase where
-the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent holds 9, it could take every neighbour's node in every game,
+far the richest agent of its world. In [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3026, fed 938 tokens a phase where
+the median agent holds 9, it could take every neighbour's node in every game,
 and its neighbours will fight for its own. A line that holds the source may
 hold it long, as a hub's place was handed down in B1
 ([How a star is handed down](the-largest-and-the-smallest.md#how-a-star-is-handed-down)).
@@ -202,14 +202,14 @@ the same mean tokens.
 
 ### What is measured
 
-- **Distance from the source**, for every agent in every recorded [frame](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections."), by
+- **Distance from the source**, for every agent in every recorded [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."), by
   walking the network outward from the source node.
 - **Profiles by distance,** over iterations 500 to 3,000: how many agents
   stand at each distance; their tokens, their ages; births and deaths per
   agent; the share of nodes taken in a game, which is how fast brains turn
   over; how many kinds of brain there are; and the health of the network
   there: links per agent, and the share of agents in the
-  [2-core](bridges.md#core-trees-and-leaves).
+  [2-core](measuring-networks.md#core-trees-and-leaves).
 - **The outward flow:** the net tokens that cross from each distance to the
   next in a game, read from the stakes recorded with each frame. It must
   balance what the agents beyond pay.
@@ -217,7 +217,7 @@ the same mean tokens.
   outward flow, and how many of them still do fifty games later, against the
   same flow shuffled among the links at each distance. The source's dynasty:
   how long one line of descent holds the source node. Beats: peaks in the
-  [power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series) of
+  [power spectrum](statistics.md#the-power-spectrum-of-a-time-series) of
   the tokens at each distance, against a random walk's.
 - **The books and the size:** the tokens that come in and go out in every
   phase; the agents against *J*; the tokens held; the moves of the source.

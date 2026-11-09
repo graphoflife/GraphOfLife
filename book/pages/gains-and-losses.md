@@ -53,9 +53,9 @@ others. An agent's change is exactly zero when the two are equal: what goes
 out comes back.
 
 Who *wins* a node, and so whose [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") the node takes, is a separate question
-([How a coalition takes a node](revolution.md)). The tokens stay with the
+([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)). The tokens stay with the
 node, whoever wins it. So on this page an agent is its node, as in the frames
-a run records ([What a run records](frames-and-stats.md)).
+a run records ([What a run records](runs-and-records.md#what-a-run-records)).
 
 The worlds are the thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)). This page was first written
@@ -105,10 +105,10 @@ largest piece of the network. It pools the tokens of the dead. In B1 only the
 cut-off ones hold any; in [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), agents that die of old age hold theirs too
 ([`max_age`](settings.md#max_age)). Then it deals the pool out in one
 multinomial draw: each token goes to a survivor chosen uniformly at random
-([Seeds and the random stream](random-numbers.md)). The size of that pool is
+([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)). The size of that pool is
 `redistributed`. Both [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") deal the tokens out this way; the setting
 [`redistribution`](settings.md#redistribution) offers other ways
-([The estate of the dead](estate.md)).
+([The estate of the dead](measuring-lives.md#the-estate-of-the-dead)).
 
 **An example.** 100 tokens are dealt out among 1,000 survivors. Each survivor
 gets a binomial number of them, with mean 0.1. About 90% get none, 9% get
@@ -118,7 +118,7 @@ most to the poor ([The lottery](#the-lottery)).
 
 ### In the code
 
-The [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") computes `delta` (`GraphOfLifeSimple.py`, `_frame`), and
+The engine computes `delta` (`GraphOfLifeSimple.py`, `_frame`), and
 `gol_series.frame_stats` the five statistics. `redistributed` comes from the
 cleanup report of each frame.
 
@@ -132,7 +132,7 @@ cleanup report of each frame.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2 (iteration 0, or 500 to 1,499).
 > 2. Sum over them: `nodes_before` (agents at the start), `starved`, `orphaned`, `gainers`, `losers`, and `nodes` − `gainers` − `losers` (survivors whose tokens did not change).
@@ -145,7 +145,7 @@ The first game is a scramble. Of the agents alive at its start, 57% lose
 tokens and 41% gain. Fewer than one in a hundred come out with exactly what
 they had. Few die in it. 0.8% starve: nobody, not even they themselves, staked
 on their node. And 0.4% are cut off from the network. The worlds of 10,000
-tokens were different. Their [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") had four neighbours each instead of ten,
+tokens were different. Their founders had four neighbours each instead of ten,
 and their first game was violent: 3.8% starved and 4.0% were cut off.
 
 Settled games, from iteration 500 on, are calm. 0.7% starve and 2.1% are cut
@@ -162,7 +162,7 @@ coming back.
 
 How much changes hands? In a settled world of about 14,400 agents, some 3,800
 agents gain in a game and 3,600 lose. The largest single gain is about 1,400
-tokens, and the largest loss about 1,400. That is a [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s worth, changing
+tokens, and the largest loss about 1,400. That is a [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.")'s worth, changing
 hands in one game
 ([The largest gain is the largest loss](the-largest-and-the-smallest.md#the-largest-gain-is-the-largest-loss)).
 At 10,000 tokens it was 330 and 320 agents, and about 640 and 620 tokens.
@@ -259,7 +259,7 @@ connections of a network. Then each node's temperature changes in proportion
 to the sum of its differences with its neighbours, which is exactly κ. A
 valley warms up, a hill cools down, and the landscape smooths out. In the
 language of matrices, κ = −*L*τ. Here *L* is the network's Laplacian matrix,
-with the [degrees](degree.md "The number of an agent's connections: how many neighbours it has.") on its diagonal and −1 for every connection.
+with the [degrees](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has.") on its diagonal and −1 for every connection.
 
 If tokens behaved like heat, an agent's change of tokens in a game would
 follow its curvature at the start of the game.
@@ -324,11 +324,11 @@ heat flows from warm to cold in proportion to the difference
 not split exactly evenly, and degrees differ. That is why the relation is a
 tendency and not a law. But
 [Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk) shows
-how close to an [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") the brains in fact play.
+how close to an [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") the brains in fact play.
 
 ## How a rich agent drains back
 
-If the rich lose 48% of their tokens in a game, how can the [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")
+If the rich lose 48% of their tokens in a game, how can the [richest tenth](measuring-tokens.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")
 always hold 42% of all tokens
 ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time))?
 Because wealth has places where it can rest, and whoever sits in such a place
@@ -378,7 +378,7 @@ share-out deals its tokens out among all the survivors
 Wealth that sits on many connections is near its resting share, and lasts.
 Nearly half of the richest hundredth of a world are hubs with ten connections
 or more. The survivors among the richest keep 87% of their tokens over ten
-games, in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
+games, in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
 ([The fate of the richest](where-do-the-tokens-go.md#the-fate-of-the-richest)).
 Even there, wealth sways. On a hub with many leaves the even split overshoots.
 Tokens slosh between the hub and its leaves, with a period of two games
@@ -402,7 +402,7 @@ every survivor with the same chance ([The share-out](#the-share-out)).
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `redistributed` of the rows with `phase` = 2 and of those with `phase` = 1.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -417,7 +417,7 @@ tokens (the thirty worlds: 0.05 to 0.15; 0.11 at 10,000 tokens): on average
 one token every ten games. That is small. But half of all agents hold 5 tokens
 or fewer, and for an agent with 1 token, one lottery token doubles its wealth.
 The share-out is a small basic income that matters only to the poor.
-[The estate of the dead](estate.md) shows what other ways of sharing the
+[The estate of the dead](measuring-lives.md#the-estate-of-the-dead) shows what other ways of sharing the
 tokens out would do.
 
 ## What we learned
@@ -556,5 +556,5 @@ Experiment 2, from which this page was first written.
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
 > [!info]- Pages that link here (16)
-> [Glossary](glossary.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [What a run records](frames-and-stats.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md)
 <!-- /turns -->

@@ -32,7 +32,7 @@ societies. In these "major transitions" (Maynard Smith and Szathmáry 1995),
 units that once competed came to reproduce as one. A world in which evolution
 keeps producing new kinds of things will, very likely, have to produce new
 kinds of **togetherness**. So for the aim of this notebook,
-[open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), cooperation is not a side topic.
+[open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), cooperation is not a side topic.
 
 This page asks what cooperation would mean in Graph of Life, and measures what
 is there. Then it sets out how cooperation could be found and counted.
@@ -87,9 +87,9 @@ What can an agent of Graph of Life give, and at what cost?
   keeps open a channel both sides need.
 - **Joining a coalition.** A stake marked revolutionary can join others to
   take a node from its largest staker
-  ([How a coalition takes a node](revolution.md)).
+  ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
 - **Messages**, which cost nothing, and could carry signals
-  ([Messages](messages.md)).
+  ([Messages](rules-in-detail.md#messages)).
 
 Only a stake acts on what happens to another agent's node. And a stake on a
 neighbour's node is a gift and a bid at once. So when does it help the
@@ -111,13 +111,13 @@ gone the same way without them.
 
 Both probabilities come from the world's own rule for deciding a node,
 counted exactly, with nothing sampled (`research/oee/checks/decisive.py`).
-Under the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s rule ([One iteration, step by step](one-iteration.md)), the
+Under the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s rule ([One iteration, step by step](one-iteration.md)), the
 largest stake wins, and ties are drawn at random. In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") the owner's own
 stake counts one and a half times. But a crowd of revolutionary stakes can
 win instead. Count the crowd up from its smallest stake. Once the part counted
 so far outweighs the largest staker and everyone in the crowd above it, the
 crowd wins. The winner is drawn from the step that tipped it. Under the
-[pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' alliances ([Alliances](another-game.md#alliances)), the side with the
+[pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")' alliances ([Alliances](another-game.md#alliances)), the side with the
 largest total wins.
 
 A tie between $k$ stakers gives each a probability $1/k$. In both cases the
@@ -177,7 +177,7 @@ record of the games, each against the level chance would give:
   helps $u$. The net help between two agents in a stretch is a flow on the
   network. The share of it that circulates is compared with chance. Chance is
   the share that would circulate if each pair's net help had a random
-  direction ([Flows that go round](token-flow.md#flows-that-go-round)).
+  direction ([Flows that go round](measuring-tokens.md#flows-that-go-round)).
 
 Help that shows none of the three is help without cooperation.
 
@@ -223,8 +223,8 @@ Kin selection needs relatives to meet. Do they?
 > **To make it again:** `python3 book_figures.py cooperation`.
 <!-- /figure -->
 
-Yes, strongly. In the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, **9.6%** of neighbours carry the
-same [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), against **0.05%** of two agents drawn at random: 200
+Yes, strongly. In the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, **9.6%** of neighbours carry the
+same [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), against **0.05%** of two agents drawn at random: 200
 times as often. At 10,000 tokens it was 10.6% against 0.28%, 38 times. Counted
 over all pairs of a world rather than a sample of them, chance is rarer still:
 0.03%. [Like next to like](like-next-to-like.md) puts the ratio near 290.
@@ -269,12 +269,12 @@ others. And they mark 99.7% of what they stake on either kind as
 revolutionary. At 10,000 tokens it was 99.7% on kin and 99.6% on others.
 
 That is not surprising once one looks at what a brain can see
-([What a brain sees](brain-inputs.md)). It sees tokens and connections: its
+([What a brain sees](rules-in-detail.md#what-a-brain-sees)). It sees tokens and connections: its
 own, the candidate's, and their neighbourhoods'. It reads messages and
 random numbers. **Not genotypes.**
 
 So a brain cannot tell kin from stranger, except through messages. A
-[lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") could, in principle, evolve a "password": send a particular
+[lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") could, in principle, evolve a "password": send a particular
 pattern, and treat those who send it back differently. Biologists call this a
 **green-beard** (Hamilton 1964; Dawkins 1976). Nothing in the stakes says that
 this has happened.
@@ -332,14 +332,14 @@ expected. Takeovers do not spare kin, nor seek them out.
 Take the pairs of neighbours that staked on each other in a game. In the
 median world, 82% of them staked **exactly the same** amount on each other.
 And **66%** of all such pairs exchanged exactly one token each way. The
-[correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of the logarithms of the two stakes is 0.57. (At 10,000 tokens:
+[correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of the logarithms of the two stakes is 0.57. (At 10,000 tokens:
 79%, 58% and 0.63.)
 
 Is that reciprocity? Two observations say: not in the sense of the theory.
 First, an equal exchange cancels: it changes neither balance
 ([Where the tokens flow](where-the-tokens-flow.md)). What it does is keep the
 connection alive at its minimum price, paid by both. Second, it is what the
-[even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") gives. Two poor agents, each splitting a few tokens evenly over a
+even split gives. Two poor agents, each splitting a few tokens evenly over a
 few candidates, put one token on each other. It is a **handshake**, not a
 favour returned.
 
@@ -377,7 +377,7 @@ other one game later, with neither end won by a neighbour in between. After
 two games it is 0.8%; after four, 0.2%.
 
 The stage stays; the actors change almost every game. About half of all
-nodes, and nearly every [hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), are taken over in every game
+nodes, and nearly every [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), are taken over in every game
 ([How the game is played](how-the-game-is-played.md),
 [Where the tokens flow](where-the-tokens-flow.md)).
 
@@ -390,7 +390,7 @@ cost. With *w* ≈ 0.04, that is a benefit twenty-five times the cost (twenty at
 Nothing measured here shows cooperation beyond what the even split and kinship
 by proximity produce. But "not found" depends on where one looks. Here are six
 measures the notebook can use, each computable from the
-[frames](frames-and-stats.md "A whole world as a run records it after one phase: every agent, its tokens and connections.") every run already writes:
+[frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") every run already writes:
 
 1. **Kin discrimination.** The ratio of stakes on kin to stakes on others,
    per neighbour (here 1.02; 1.01 at 10,000 tokens). A value well above 1
@@ -416,7 +416,7 @@ measures the notebook can use, each computable from the
 
 None of the six has been computed in the form given here. The work on the
 second baseline, B2, judged progress another way. It played a world's
-[eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against each other
+[eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against each other
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md)
 judges the rules made for B2 by that test.
@@ -506,7 +506,7 @@ each (`python3 gol_lab.py run E02`). The 26 that lived to the end were read.
 
 ### The runs of Experiment 10
 
-Experiment 10 is 30 runs: B1 at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30, 1,500
+Experiment 10 is 30 runs: B1 at 100,000 tokens, seeds 1 to 30, 1,500
 iterations each.
 
 <!-- runs E10 -->
@@ -593,6 +593,6 @@ iterations each.
 
 ← [Who helps whom](who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Other contests: a lottery, and alliances](another-game.md) →
 
-> [!info]- Pages that link here (14)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What a brain sees](brain-inputs.md) · [Messages](messages.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
+> [!info]- Pages that link here (13)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
 <!-- /turns -->

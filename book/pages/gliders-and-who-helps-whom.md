@@ -12,11 +12,11 @@
 
 When an agent takes a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s node with at least half of its tokens, its
 wealth and a copy of its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") move there together. They form chains far more
-often than chance: *puffers* in B2, a [lineage](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself outward, and
+often than chance: *puffers* in B2, a lineage copying itself outward, and
 *gliders* in B1, rich agents moving on. But no chain keeps a direction, and no
 ring of tokens lasts fifty games; what lasts is gifts running downhill. Help,
 counted exactly by the rules, is almost absent in B2, a by-product of
-[revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") in B1, and rare among allies, whom peace protects instead. None of
+revolutions in B1, and rare among allies, whom peace protects instead. None of
 it is cooperation, and a sense of direction and a sense of who helped, given to
 the brains, did not change that.
 
@@ -41,12 +41,12 @@ Built from such patterns and the ways they meet, the Game of Life goes far: up
 to machines that compute anything.
 
 Could the worlds of Graph of Life hold patterns like these? The measures of
-[open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") so far look at agents one by one.
+open-ended evolution so far look at agents one by one.
 They ask what an agent holds, what it stakes, and how its brain does in a
 contest.
 [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
 found one blind spot in them: contests too short for what pays over a
-[lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."). The author suggested another. Perhaps the worlds hold structures
+[lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death."). The author suggested another. Perhaps the worlds hold structures
 above the single agent that none of the measures can see. They might be
 cyclic, like the gliders of the Game of Life. And they might be harder to spot,
 because they live on a network rather than a grid.
@@ -65,7 +65,7 @@ their own.
 This page reads the record of play: every game, with every agent's stakes. The
 worlds are B2's ten worlds of Experiment 16 and the first ten worlds of B1's
 [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") set, all of 10,000 tokens. Read are the games of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 to
-2,000: settled worlds, long after the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). For alliances, [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds
+2,000: settled worlds, long after the founders. For alliances, [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds
 with and without them are played on from a checkpoint for 200 iterations.
 Their games are recorded in the same form
 ([How this was made](#how-this-was-made)).
@@ -181,7 +181,7 @@ to 26). And the longest are longer: 69 to 175 moves.
 **B2's chains are puffers.** The mover still holds the node it left after 93%
 of its moves, and it never leaves it to starve. A chain is a
 lineage copying itself outward, node by node. Its
-packet is small: three tokens at the start and two at the end, in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.")
+packet is small: three tokens at the start and two at the end, in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
 of each world's 300 longest chains.
 
 **B1's chains are gliders.** The mover keeps the node it left after only 9% of
@@ -191,9 +191,9 @@ B1's gliders are rich agents travelling the network, gathering what is staked
 on the nodes they take.
 
 In both, the brain changes as it goes. In B2 a brain may change by
-[mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") each time it is copied, and in B1 every brain may also
+mutation each time it is copied, and in B1 every brain may also
 change after every game. In the median of the longest chains, after 70% of the
-moves the node taken no longer carries the [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") the chain
+moves the node taken no longer carries the genotype the chain
 started with.
 
 Here is one chain of each kind, drawn on its network: of each world's 300
@@ -242,8 +242,8 @@ distance in B2, and 1.0 in B1. A glider in the Game of Life flies straight;
 these have no direction.
 
 Nothing an agent senses says from which neighbour it came. Its inputs are its
-own and each neighbour's tokens and [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") and
-noise ([What a brain sees](brain-inputs.md)). Messages could carry it in
+own and each neighbour's tokens and [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), messages and
+noise ([What a brain sees](rules-in-detail.md#what-a-brain-sees)). Messages could carry it in
 principle. But the brains write the name of their genotype in them
 ([What agents say to each other](what-agents-say-to-each-other.md)). Along a
 puffer's trail, every neighbour carries the same name.
@@ -268,7 +268,7 @@ taken in the same game. Everyone moves up a seat.
 Two agents taking each other's nodes in one game is a **swap**. In B1, swaps
 happen as often as if every taker had picked its targets at random among its
 neighbours. They are 1.02 times as common as that (0.99 to 1.04 in the ten
-worlds). [Loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") of three agents or more, each taking the
+worlds). [Loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") of three agents or more, each taking the
 next one's node in the same game, are common too. They happen 1,500 to 4,800
 times in a world's 1,000 games, with up to fourteen agents round one loop. How
 many chance would make is not known.
@@ -317,7 +317,7 @@ each connection carried each way over a stretch of 50 games. What went one way
 minus what came back is the connection's **net flow**. That flow splits
 exactly into two parts. One runs downhill, from some agents to others. The
 other goes round loops: a **circulation**
-([Flows that go round](token-flow.md#flows-that-go-round) shows how, with a
+([Flows that go round](measuring-tokens.md#flows-that-go-round) shows how, with a
 worked example).
 
 Tokens going round a ring of agents, each giving to the next, would be a Kula
@@ -326,7 +326,7 @@ armshells and necklaces passed from island to island, round and round.
 
 A network with loops makes some circulation by chance. So the chance level
 keeps each connection's amount and throws its direction at random
-([Against what?](token-flow.md#against-what)). The flow is also split by what
+([Against what?](measuring-tokens.md#against-what)). The flow is also split by what
 its stakes did. A **gift** is a stake that did not take its target: its tokens
 went to whoever held the node. A **takeover** is a stake that did.
 
@@ -359,8 +359,8 @@ correlates with the next stretch's on the same connections: 0.20 in B2, and
 In B1, whose agents spread their stakes over every neighbour, the gifts drain
 towards the best-connected agents. Picture each agent's height on the slope:
 tokens run from high agents to low ones. In two worlds checked, the rank
-[correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of that height with an agent's number of
-connections is −0.28 and −0.33. That is the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") again, tokens settling
+[correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of that height with an agent's number of
+connections is −0.28 and −0.33. That is the even split again, tokens settling
 in proportion to connections
 ([The game as a random walk](where-the-tokens-flow.md#the-game-as-a-random-walk)).
 In B2, whose gifts are failed raids, they drain weakly towards the richer
@@ -373,7 +373,7 @@ B2, and 0.24 more in B1. But the circulation of one stretch has nothing to do
 with the next's: the correlation is 0.00 in both. The loops are made and gone
 within 50 games. The chains above are their likeliest makers. A route through
 a network counts as circulation even when it never closes
-([What it can and cannot say](token-flow.md#what-it-can-and-cannot-say)).
+([What it can and cannot say](measuring-tokens.md#what-it-can-and-cannot-say)).
 
 Taken whole, the net flow of fifty games goes round more than chance: about
 0.2 more in B1, and less than 0.1 more in B2.
@@ -576,7 +576,7 @@ Two inputs might change that, and neither needs a number:
 Both inputs were built: `came_from` and `helped_by` in
 `research/oee/pilots/proto.py`, the second computed by the rules exactly as
 above. They were given to B2 worlds of 10,000 tokens for 2,000 iterations:
-each alone and both together, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, beside two
+each alone and both together, two seeds each, beside two
 control worlds. This is batch P, of 16 October 2026. Then 200 games from
 iteration 2,000 were recorded in each world, and read as above.
 
@@ -601,7 +601,7 @@ iteration 2,000 were recorded in each world, and read as above.
   is knowing nothing.
 - **Evolution went on, at about the control's pace.** The contests were a
   lifetime long, 100 iterations
-  ([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+  ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
   With an input, the brains of iteration 1,000 held 0.64–0.78 of a contested
   world against those of 500. In the control they held 0.64–0.71. Those of
   2,000 held 0.50–0.70 against those of 1,000, and 0.65–0.80 in the control.
@@ -640,14 +640,14 @@ and then stays where it is, and in B2 it falls.
   cooperation.
 - [Who helps whom](who-helps-whom.md): every page that looked for cooperation,
   side by side.
-- [Flows that go round](token-flow.md#flows-that-go-round): how a flow splits
+- [Flows that go round](measuring-tokens.md#flows-that-go-round): how a flow splits
   into a part that runs downhill and a part that goes round.
 - [Other contests: a lottery, and alliances](another-game.md#alliances): the
   alliance worlds this page reads.
 
 ## How this was made
 
-The [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") worlds are the ten B2 worlds of Experiment 16, `B2-10000-s001` …
+The [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") worlds are the ten B2 worlds of Experiment 16, `B2-10000-s001` …
 `-s010`. With them are the first ten worlds of B1's baseline set,
 `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record
 every game with every agent's stakes. Read are the games of iterations 1,000
@@ -724,5 +724,5 @@ kept in `book/results/patterns.json`.
 **Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
 
 > [!info]- Pages that link here (13)
-> [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

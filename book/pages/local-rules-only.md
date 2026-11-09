@@ -44,10 +44,10 @@ old die. Of what is left, only the largest connected piece of the network
 lives on: every agent outside it is culled. The tokens of the dead are pooled
 and dealt out by the rule [`redistribution`](settings.md#redistribution) names.
 And every random number a world uses comes from one stream, in a fixed order
-([Seeds and the random stream](random-numbers.md#the-two-streams-of-a-run)).
+([Seeds and the random stream](rules-in-detail.md#the-two-streams-of-a-run)).
 
 Everything else is local. An agent's [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") reads its own node, its
-neighbours, a summary of each neighbour's neighbours, and the [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") they
+neighbours, a summary of each neighbour's neighbours, and the messages they
 wrote. It acts on its own node and its neighbours' nodes.
 
 Why do the three matter?
@@ -118,7 +118,7 @@ In a local world without old age, who inherits hardly matters any more.
 
 ### Random streams of their own
 
-[Seeds and the random stream](random-numbers.md) pictures a run's random
+[Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream) pictures a run's random
 numbers as a vast book of random digits, which the world reads from its first
 page on, one draw after another. A **counter-based** generator lets every
 reader open the book at an address of its own (Salmon, Moraes, Dror and Shaw
@@ -191,7 +191,7 @@ out here.
 
 Of the 84 worlds, 49 were drawn with mending, and 42 of them lived.
 
-- **Fewer culls.** A world that mends culls a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 3.5% of its tokens in
+- **Fewer culls.** A world that mends culls a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of 3.5% of its tokens in
   a game, against 11.4% for one that does not, and 4.9% of its agents
   against 13.5%. Differences as large turn up in about 1 shuffle in 2,000 of
   the worlds' numbers, and the false discovery rate over every setting tested
@@ -205,19 +205,19 @@ Of the 84 worlds, 49 were drawn with mending, and 42 of them lived.
   0.40 deaths per agent an iteration, culled or starved. With mending, the
   cull makes 32% of those deaths, against 57%; the rest starve.
 - **A folded world.** The worlds that mend are narrower: their typical
-  distance is 1.87 times their [random twin](random-twin.md)'s, against 2.53
-  (a chance of 0.001 by a [permutation test](bootstrap.md#permutation-tests "Whether a difference could be chance, found by shuffling which world belongs to which condition.") of our own). Their criterion
+  distance is 1.87 times their [random twin](measuring-space.md#the-random-twin-is-a-world-a-space)'s, against 2.53
+  (a chance of 0.001 by a [permutation test](statistics.md#permutation-tests "Whether a difference could be chance, found by shuffling which world belongs to which condition.") of our own). Their criterion
   *almost three-dimensional* scores 0.45 against 0.56 (a false discovery rate
   of 0.19). B2 found the same: a death mended in a ring joins agents that were
   two steps apart.
-- **More unequal, and smaller.** A median [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.45 against 0.37, and
+- **More unequal, and smaller.** A median [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.45 against 0.37, and
   3,530 agents against 5,440 (false discovery rates of 0.36 and 0.27: hints).
   Fewer culls means fewer estates passing from the dead to the living, and an
   estate shared out levels a world
-  ([The estate of the dead](estate.md#what-happens-at-a-death)).
+  ([The estate of the dead](measuring-lives.md#what-happens-at-a-death)).
 - **Healthier, and evolving in other ways.** Health by the product is 0.43
   against 0.37 (a false discovery rate of 0.19). Agents in the same situation
-  act more differently: a [same-position share](what-makes-a-world-interesting.md#the-same-position-share)
+  act more differently: a [same-position share](measuring-health.md#the-same-position-share)
   of 0.60 against 0.29 (a false discovery rate of 0.009). The
   [effective population](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)
   is 36 against 11 (0.010), and the main line of descent reaches further into
@@ -251,7 +251,7 @@ under which all six such worlds died.
   tokens go.
 - **A slower world.** 0.22 deaths per agent an iteration against 0.43, and
   0.23 births against 0.56 (chances of about 0.05).
-- **Folded, perhaps.** A ball [dimension](ball-dimension-and-curvature.md) of
+- **Folded, perhaps.** A ball [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension) of
   4.1 against 3.0, and a width of 1.49 against 2.16, but both within chance
   (0.16 and 0.30). Five of the nine also reach for strangers, a search that
   costs nothing and tends to fold a world
@@ -296,7 +296,7 @@ the shortlist: if the local rules change any world little, it is this one.
 
 Each world's control is its own run of round 3, already played: the same
 settings, seed and tokens, with the new rules off. A new rule is off unless a
-plan turns it on, and the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s tests prove that an old world is then
+plan turns it on, and the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s tests prove that an old world is then
 played exactly as before.
 
 ### Four conditions, one change each
@@ -330,7 +330,7 @@ round 3 recorded it, once under each condition:
   often they act differently, against two from the same piece.
 
 Many measures assume a world of one piece: its width and dimension, its
-distances, its cuts, its [2-core](bridges.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), and when it counts as dead. Under pieces that
+distances, its cuts, its [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), and when it counts as dead. Under pieces that
 live on, each is taken on every piece apart, and given for the largest piece
 and as an average over pieces, weighted by their agents. A world ends when its
 largest piece falls to 20 agents.
@@ -378,7 +378,7 @@ must be chosen with care: `local_rules` is reserved, in
      the name of the agent, node or link the draw is for; the iteration; the
      phase; what the draw is for; and its place in line.
    - Names become local: a newborn's is made from its parent's name and the
-     iteration, a [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")'s from the node it is made on. The ids the viewer
+     iteration, a [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")'s from the node it is made on. The ids the viewer
      reads stay whole numbers below 2⁵³, the largest JavaScript holds exactly,
      and a clash of two names is checked for.
    - A checkpoint no longer needs the stream's state, only the seed.
@@ -397,7 +397,7 @@ must be chosen with care: `local_rules` is reserved, in
    - Every phase's statistics gain the number of pieces, the agents and tokens
      of the largest, and the tokens that leave it.
    - Every measure of shape is taken on each piece, as above, and a world ends
-     when its largest piece falls to its [extinction](extinction.md "A world's end before its last iteration: it has dropped to its threshold of agents or fewer.") threshold.
+     when its largest piece falls to its extinction threshold.
    - The viewer draws the pieces apart.
    - Tests: under the default nothing changes; the tokens of every piece add
      up in every phase; no link ever joins two pieces.

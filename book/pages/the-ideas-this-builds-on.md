@@ -1,7 +1,7 @@
 # The ideas this builds on
 
 > [!question] Questions of this page
-> - What has been tried before, and what would [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") mean?
+> - What has been tried before, and what would open-ended evolution mean?
 > - Which ideas from game theory, network science, population genetics and
 >   statistics does this world use?
 
@@ -34,7 +34,7 @@ will have to face each of them:
 - **MODES** (Dolson, Vostinar, Wiser and Ofria 2019) splits open-endedness into
   four kinds of growth that can be measured: change, novelty, complexity and
   ecology. It adds a **persistence filter**: a component counts only once it
-  has survived for a while, or random [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") would look like novelty. In
+  has survived for a while, or random [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") would look like novelty. In
   this world a genotype typically lasts two iterations
   ([Genotypes and lineages](genotypes-and-lineages.md)), so that filter decides
   almost everything.
@@ -117,11 +117,11 @@ several agents acting together.
 
 - **Small worlds** (Watts and Strogatz 1998). A ring of nodes, each joined to
   its nearest few, with a few random shortcuts, is both clustered and short.
-  It is the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring of [The world: tokens, agents and a network](the-world.md).
+  It is the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring of [The world: tokens, agents and a network](the-world.md).
 - **Measures of a network** — degree, clustering, distances, bridges, the
-  2-core — are standard (Newman 2003). [Degree](degree.md),
-  [Clustering](degree.md#clustering), [Path length](path-length.md),
-  [Bridges](bridges.md) and [Core, trees and leaves](bridges.md#core-trees-and-leaves)
+  2-core — are standard (Newman 2003). [Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling),
+  [Clustering](measuring-networks.md#clustering), [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap),
+  [Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut) and [Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)
   define each. The bridges are found by depth-first search (Tarjan 1974), the
   core by peeling (Seidman 1983).
 - **Evolution on graphs.** Where individuals sit in a network changes what
@@ -152,25 +152,25 @@ several agents acting together.
   population that descends from each of several ancestors. A lineage taking
   over appears as a band that widens until it fills the picture
   ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations),
-  [Genotypes and lineages](genotypes-and-lineages.md); [Muller plots](genotype.md#muller-plots)).
+  [Genotypes and lineages](genotypes-and-lineages.md); [Muller plots](measuring-evolution.md#muller-plots)).
 
 ## Measuring
 
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
   coefficient** (Gini 1912): [Where do the tokens go?](where-do-the-tokens-go.md)
-  and [The Gini coefficient and the Lorenz curve](gini-coefficient.md).
+  and [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility).
 - **Lifetimes with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
-  1958): [Survival curves](age-and-lifetime.md#survival-curves-kaplanmeier).
+  1958): [Survival curves](measuring-lives.md#survival-curves-kaplanmeier).
 - **Intervals by resampling**: the bootstrap (Efron 1979). **Intervals for
   proportions**: Wilson (1927).
 - **Correlations of a series with itself**, and the bias of measuring them
   against the series' own mean: Bartlett (1946), Marriott and Pope (1954),
-  Kendall (1954). See [Autocorrelation](autocorrelation.md).
+  Kendall (1954). See [Autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum).
 - **[Power laws](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**, and why a straight stretch on log–log axes is weak evidence
   of one: Clauset, Shalizi and Newman (2009). See
-  [Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws).
+  [Logarithmic axes](statistics.md#logarithmic-axes-and-power-laws).
 - **Testing by shuffling**: the permutation test goes back to Fisher (1935).
-  See [Permutation tests](bootstrap.md#permutation-tests).
+  See [Permutation tests](statistics.md#permutation-tests).
 - **Pictures of networks**: the ForceAtlas2 layout (Jacomy, Venturini, Heymann
   and Bastian 2014) places joined nodes near each other.
 - **Progress against the past**: compare a population with its own ancestors,
@@ -188,7 +188,7 @@ several agents acting together.
 
 - [What this notebook is about](what-this-notebook-is-about.md): the ladder of
   four claims these ideas are tested against.
-- [Eras and contests: does a world keep getting better?](eras-and-contests.md):
+- [Eras and contests: does a world keep getting better?](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better):
   the test of bringing ancestors back, as this notebook plays it.
 - [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): what the game and the rules
   do to evolution here.

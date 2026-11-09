@@ -51,17 +51,17 @@ There are two ways to ask how old agents get, and they give different answers.
 Follow every agent from its birth to its death, and you get its **lifetime**.
 About half of those that live through their first game are gone within ten
 iterations. Or stop a world at one moment, and look at the **ages of the
-living**. Their [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above."), the age that half of them are below, is about 55
+living**. Their median, the age that half of them are below, is about 55
 iterations. The living are older because an agent that lives long is alive at
 many moments, so it is counted at many of them. A hospital ward is the same. On
 any day, long-stay patients fill most of its beds, though most patients go home
-within a day or two ([Age and lifetime](age-and-lifetime.md)).
+within a day or two ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)).
 
 The worlds of this page are the thirty of 100,000 tokens of [Thirty
 worlds](a-worlds-life.md#thirty-worlds). They are the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), run
-with the [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30 for 1,500 iterations each: Experiment 10. A settled
+with the [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30 for 1,500 iterations each: Experiment 10. A settled
 world holds about 14,400 agents. Unless a passage says otherwise, a number is
-measured over a world's [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The typical world
+measured over a world's settled life, from iteration 500 on. The typical world
 is the median of the thirty. This page was first written from the thirty worlds
 of 10,000 tokens; [Two sizes](#two-sizes) sets them beside the large ones.
 
@@ -80,7 +80,7 @@ iteration, step by step](one-iteration.md)). An agent is:
 - **cut off in the game**: no tokens crossed the connections that tied its
   part of the network to the rest, so they were cut.
 
-[Births and the four ways to die](births-and-deaths.md) defines each. Each is
+[Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die) defines each. Each is
 counted per hundred agents alive when its phase began:
 
 <!-- figure births/rates -->
@@ -91,7 +91,7 @@ counted per hundred agents alive when its phase began:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every row, divide the count (`births` or `orphaned` in rows with `phase` = 1; `starved` or `orphaned` in rows with `phase` = 2) by the row's `nodes_before`, the agents present when that phase began, and multiply by 100.
 > 2. Cut the 1,500 iterations into 60 stretches of 25; take each run's mean in each.
@@ -126,7 +126,7 @@ off in the cleanup of the reproduction phase, most of them because they were
 joined to no one. The rest died in their first game, starved or cut off.
 
 An agent's **lifetime** counts the games it lived through ([Age and
-lifetime](age-and-lifetime.md)). It runs from the iteration of its birth to the
+lifetime](measuring-lives.md#age-lifetime-and-survival-curves)). It runs from the iteration of its birth to the
 last iteration after whose game it was alive, both included. The 4.7 million
 were never alive after a game, so the curves of this page leave them out.
 
@@ -135,7 +135,7 @@ are all the agents born at iteration 500 or later that were still alive after
 the game of their birth iteration. Some were still alive when their run ended.
 Their lives are counted as having lasted *at least* that long. The Kaplan–Meier
 estimate does this: it uses what is known of an unfinished life, and no more
-([Survival curves (Kaplan–Meier)](age-and-lifetime.md#survival-curves-kaplanmeier)). The share that lived at
+([Survival curves (Kaplan–Meier)](measuring-lives.md#survival-curves-kaplanmeier)). The share that lived at
 least *L* iterations:
 
 <!-- figure births/lifetimes -->
@@ -156,7 +156,7 @@ least *L* iterations:
 <!-- /figure -->
 
 Both axes are logarithmic: each step along them multiplies by the same factor
-([Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws)). On them, the curve
+([Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws)). On them, the curve
 shows several things at once:
 
 - 79% of these agents live at least 2 iterations, 58% at least 5, and 48% at
@@ -227,7 +227,7 @@ that reach an age, the share that die at it.
 
 ### How old the living are, iteration by iteration
 
-At iteration 0 every agent is a [founder](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") or a founder's first child, and all are
+At iteration 0 every agent is a [founder](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") or a founder's first child, and all are
 of age 0. From then on, after every game, the run records a frame, the whole
 world as it stands, with the age of every agent alive. The figure follows three
 ages: the median, the oldest, and the age that nine in ten of the living are
@@ -380,7 +380,7 @@ and 13 to 14% at least 100. Their three lines lie on top of one another.
 A finer view takes every stretch of 25 birth iterations, in each world on its
 own. How many of their first 100 iterations do its agents live, on average?
 This is the **restricted mean lifetime**, the area under the survival curve up
-to 100 ([Age and lifetime](age-and-lifetime.md)). It can be measured in full
+to 100 ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)). It can be measured in full
 for every agent born at least 100 iterations before the end of a run:
 
 <!-- figure ages/expectancy -->
@@ -416,7 +416,7 @@ The **hazard** says, for an agent that has reached an age, how likely it is to
 die at that age. Exactly: take the agents alive when the iteration in which
 they are *a* iterations old begins. The hazard at age *a* is the share of them
 that is gone after that iteration's game ([Age and
-lifetime](age-and-lifetime.md)):
+lifetime](measuring-lives.md#age-lifetime-and-survival-curves)):
 
 <!-- figure ages/hazard -->
 ![The risk of dying, by age](../figures/ages/hazard.svg)
@@ -492,7 +492,7 @@ But the average is not the typical agent. [Connections and
 age](how-agents-have-children.md#connections-and-age) sorts the living by age,
 and looks at the median instead of the mean. The median agent has 2 connections
 at every age, from a few iterations to over 700. The old classes' higher means
-come from the [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") among them: agents joined to far more agents than most. Hubs
+come from the [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") among them: agents joined to far more agents than most. Hubs
 die less often than leaves, the agents with a single connection. Within ten
 games, 18% of the agents with a single connection die. Of those with ten
 connections or more, fewer than one in ten die ([The fate of the
@@ -630,7 +630,7 @@ calls it a border going quiet).
   The typical agent has 2 connections at every age; the hubs, which die less
   often, fill the old classes. Connections give an agent age, not age
   connections.
-- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), a world's demography is finished early.** From
+- **For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), a world's demography is finished early.** From
   iteration 500 on, nothing about who lives how long changes. Evolution, if it
   acts, has to act inside that steady turnover, not through how long agents
   last. It would act through which brains the 2.4% of newborns carry, and
@@ -644,7 +644,7 @@ calls it a border going quiet).
 
 ## Where to go next
 
-- [Age and lifetime](age-and-lifetime.md): age, lifetime, the hazard and the
+- [Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves): age, lifetime, the hazard and the
   stationary population, made exact.
 - [How a world breaks](how-a-world-breaks.md): the cuts that kill three in
   four of the agents that die.
@@ -771,6 +771,6 @@ it, which runs it reads and how.
 
 [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages) · [How births build the network](how-agents-have-children.md) →
 
-> [!info]- Pages that link here (12)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [Age, lifetime and survival curves](age-and-lifetime.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md)
+> [!info]- Pages that link here (11)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [How a world breaks](how-a-world-breaks.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Statistics: the tools of the notebook](statistics.md)
 <!-- /turns -->

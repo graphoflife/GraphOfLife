@@ -28,7 +28,7 @@ first, **reproduction**, an agent may give some of its coins to a child. The
 child gets a knot of its own, tied into its parent's part of the net. In the
 second, **the game**, every agent stakes all its coins on its own knot and its
 neighbours' knots. Each knot goes to whoever staked most on it, or sometimes
-to a [coalition](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") of smaller stakers. Strings that carried no coins in the game
+to a coalition of smaller stakers. Strings that carried no coins in the game
 are cut. An agent left with no coins dies, and so does every part of the net
 that has come loose from the rest.
 
@@ -72,7 +72,7 @@ $$
 \bar k = \frac{1}{|V|} \sum_{u \in V} \deg(u) = \frac{2\,|E|}{|V|} .
 $$
 
-In the example, *k̄* = 8 / 4 = 2. [Degree](degree.md) says more about
+In the example, *k̄* = 8 / 4 = 2. [Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling) says more about
 degrees.
 
 Every node carries a whole-number **id**. Ids are handed out in increasing
@@ -90,10 +90,10 @@ the same thing. An agent has four things:
 - **a brain** *B*(*u*): a neural network that takes all its decisions
   ([The brain](the-brain.md));
 - **an age**: the number of iterations since it was born
-  ([Age and lifetime](age-and-lifetime.md));
+  ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves));
 - **a genotype**, the identity of its brain. An agent can lose its genotype.
   When another agent wins its node in the game, the node takes on a copy of
-  the winner's brain ([Genotypes and the family tree](genotype.md)).
+  the winner's brain ([Genotypes and the family tree](measuring-evolution.md#genotypes-families-and-the-common-ancestor)).
 
 The world holds a fixed number of tokens, *T*. Tokens move between agents,
 but they are never made or destroyed. So after every phase of every
@@ -123,7 +123,7 @@ numbers and switches, chosen before the run starts.
 B1. A **baseline** is a set of rules that an experiment starts from and
 changes one thing of. B1 is the first
 ([B1 and B2: the two baselines](b1-and-b2.md)). Eighteen of the settings were
-added later, in the search for [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."): evolution that keeps
+added later, in the search for open-ended evolution: evolution that keeps
 producing new things without end. B1 keeps every one of them at its old rule,
 so its rules are exactly the ones these pages describe. The **seed** is a
 whole number that fixes every random choice of the run.
@@ -169,7 +169,7 @@ not 4 ([Every setting](settings.md#k_neighbors)).
 
 Then each connection is, with probability 0.2, **rewired**: one of its ends
 is moved to a founder chosen at random. Rewiring moves connections but never
-adds or removes one. [The starting ring](starting-ring.md) gives the exact
+adds or removes one. [The starting ring](rules-in-detail.md#the-starting-ring) gives the exact
 procedure.
 
 ![The founders' ring](../diagrams/ring.svg)
@@ -197,8 +197,8 @@ Here is the real starting network of one baseline run:
 <!-- /figure -->
 
 Without rewiring, this ring would have a clustering of 0.5
-([Clustering](degree.md#clustering)), and its founders would be 12.9 steps apart on
-average ([Path length](path-length.md)). Rewired, 37 of its 200 connections
+([Clustering](measuring-networks.md#clustering)), and its founders would be 12.9 steps apart on
+average ([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)). Rewired, 37 of its 200 connections
 are shortcuts. The clustering falls to 0.27, and the average distance to 4.4
 steps.
 
@@ -209,7 +209,7 @@ look random, but are computed one after another from the same seed. That
 stream gives the founders' brains and every change of a brain. It gives every
 probabilistic decision and tie-break, every random input of a brain, and every
 [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead. So a run depends on its settings and its
-seed, and on nothing else ([Seeds and the random stream](random-numbers.md)).
+seed, and on nothing else ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
 [Is a run reproducible?](is-a-run-reproducible.md) tests this.
 
 ## What is recorded
@@ -223,7 +223,7 @@ in the phase.
 
 From each frame, a row of about ninety **statistics** is computed: the number
 of agents, of connections, the inequality of wealth, and so on. The rows are
-kept in the run's file `stats.jsonl`. [What a run records](frames-and-stats.md)
+kept in the run's file `stats.jsonl`. [What a run records](runs-and-records.md#what-a-run-records)
 lists the fields, and links each statistic to the page that defines it.
 
 A baseline run of 10,000 tokens and 3,000 iterations writes 6,000 frames,
@@ -235,7 +235,7 @@ writes 3,000 frames, about 2 gigabytes.
 - [One iteration, step by step](one-iteration.md): how a world changes, in
   the exact order the program runs.
 - [The brain](the-brain.md): how an agent decides.
-- [The starting ring](starting-ring.md): the founders' ring, built step by
+- [The starting ring](rules-in-detail.md#the-starting-ring): the founders' ring, built step by
   step.
 - [Every setting](settings.md): every number and switch of a run.
 
@@ -245,5 +245,5 @@ writes 3,000 frames, about 2 gigabytes.
 [How the simulation works](../README.md#how-the-simulation-works) · [One iteration, step by step](one-iteration.md) →
 
 > [!info]- Pages that link here (11)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Every setting](settings.md) · [The starting ring](starting-ring.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [The lab, the engine and pilots](the-lab.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md)
 <!-- /turns -->

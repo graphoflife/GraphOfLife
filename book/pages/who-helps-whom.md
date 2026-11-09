@@ -16,7 +16,7 @@ help is a by-product of revolutions in [B1](b1-and-b2.md "The first baseline: th
 among allies, whom peace protects instead. Evolution gave up support stakes,
 gifts without a return, but took up alliances, which two neighbours choose
 together, at once. One alliance then held nearly the whole world and the
-fighting ended, but one habit spreading once is not [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.").
+fighting ended, but one habit spreading once is not [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.").
 
 ## Why cooperation matters
 
@@ -66,7 +66,7 @@ node:
 
 - in a **revolution**, a neighbour's revolutionary stake joins the holder's
   own in a crowd against the largest staker
-  ([How a coalition takes a node](revolution.md));
+  ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node));
 - with **alliances**, an ally's stake counts for the holder's side
   ([What an alliance is](another-game.md#what-an-alliance-is)).
 
@@ -97,7 +97,7 @@ can tell them apart
 - **rescue**: a stake without which a neighbour would have lost its node;
 - **peace**: neighbours that do not take each other's nodes;
 - **exchange**: gifts of tokens that come back round, instead of running
-  downhill ([Flows that go round](token-flow.md#flows-that-go-round)).
+  downhill ([Flows that go round](measuring-tokens.md#flows-that-go-round)).
 
 ## What was found
 
@@ -105,7 +105,7 @@ The table sets the worlds of
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md) against the
 three kinds of cooperation. All of them hold 10,000 tokens, and that page
 reads their record of play: every game, with every agent's stakes. A number
-is that of the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world, or the range over the worlds.
+is that of the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, or the range over the worlds.
 
 | world | rescue | peace | exchange |
 |---|---|---|---|
@@ -117,7 +117,7 @@ is that of the [median](median-and-quantiles.md "The middle value: half of the n
 
 In the thirty B1 worlds of 100,000 tokens, what kin selection needs is
 there, but not the behaviour ([Do agents cooperate?](do-agents-cooperate.md)).
-A tenth of an agent's neighbours carry its own [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") (9.6%), 200 times as
+A tenth of an agent's neighbours carry its own [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") (9.6%), 200 times as
 often as two agents drawn at random. But brains cannot see genotypes, and they
 stake on kin as on strangers.
 
@@ -145,7 +145,7 @@ to 0.028), and less as the worlds evolve. B2 has revolutions, but an agent
 that stakes on a neighbour puts it all on one. So the small stakes a crowd is
 made of are rare, and an owner's stake counts one and a half times against
 any crowd. Coalitions hardly ever win there
-([How often a coalition wins](revolution.md#how-often-a-coalition-wins)).
+([How often a coalition wins](rules-in-detail.md#how-often-a-coalition-wins)).
 
 The little help there is passes both ways more often than chance. Over the
 ten worlds, 156 pairs helped each other within 50 games, where chance would
@@ -188,8 +188,8 @@ stake ever helped.
 ## What was tried to make helping pay
 
 Rules, inputs and strategies were added to give agents a reason or a way to
-help. Most ran in pilot worlds, two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, so they show leads, not laws
-([Pilot worlds](the-lab.md#pilot-worlds)). The pilots of other contests and
+help. Most ran in pilot worlds, two seeds each, so they show leads, not laws
+([Pilot worlds](runs-and-records.md#pilot-worlds)). The pilots of other contests and
 of alliances ran without revolutions, since a revolution is itself a rule
 about who takes a node.
 
@@ -197,11 +197,11 @@ about who takes a node.
 |---|---|---|
 | **support**: a stake that adds to a neighbour's defence | given up: it counted once, a stake at home one and a half times; it fell from 200–300 tokens a game to about 20 by iteration 600 | [What the pilots tried](how-to-tell-a-world-that-keeps-evolving.md#what-the-pilots-tried) |
 | support counted twice | given up anyway: from about 2,700 tokens in the first game to 81 and 175 by iteration 100 | [One alliance takes the world](another-game.md#one-alliance-takes-the-world) |
-| a **yield on stakes returned** | it went to whoever had the most partners, and built [stars](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."), not partnerships | [Room to go on](how-to-tell-a-world-that-keeps-evolving.md#room-to-go-on) |
+| a **yield on stakes returned** | it went to whoever had the most partners, and built [stars](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), not partnerships | [Room to go on](how-to-tell-a-world-that-keeps-evolving.md#room-to-go-on) |
 | stakes **pooled by genotype** | fighting cut to about a third, and groups of clones of 8 and 11 agents on average; no better play | [What the contests did](another-game.md#what-the-contests-did) |
-| a **sense of one's clones**, alone | no groups: groups of clones stayed at 3 agents, and the brains used the sense less than the [founders](starting-ring.md "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") did | [What the contests did](another-game.md#what-the-contests-did) |
+| a **sense of one's clones**, alone | no groups: groups of clones stayed at 3 agents, and the brains used the sense less than the founders did | [What the contests did](another-game.md#what-the-contests-did) |
 | **family tags**, sensed or pooled | sensed, the fighting stayed as it was; pooled, families of hundreds rose and fell like empires; no better play either way | [A password and a crowd, for free](another-game.md#a-password-and-a-crowd-for-free) |
-| **kin pooled**: sides made by descent, within two [mutations](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") | peace, sooner, with nobody deciding anything; but small sides, 2 to 14% of the world | [One alliance takes the world](another-game.md#one-alliance-takes-the-world) |
+| **kin pooled**: sides made by descent, within two mutations | peace, sooner, with nobody deciding anything; but small sides, 2 to 14% of the world | [One alliance takes the world](another-game.md#one-alliance-takes-the-world) |
 | **alliances** by mutual consent | taken up at once: one alliance held 99% of the world by iteration 2,000 | [Alliances](another-game.md#alliances) |
 | alliances in worlds without B2's hand-set numbers | they made the difference between dying and living; whether also between living and evolving, two seeds cannot say | [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did) |
 | **crews**: raiders written by hand whose revolutionary stakes join against one stranger (Experiment 33) | no crew took hold, planted at iteration 2,000, 5,000 or 10,000 | [Raiders that pool their stakes](does-evolution-close-the-door.md#raiders-that-pool-their-stakes) |
@@ -226,7 +226,7 @@ changed hands in a game from iteration 500 to 1,000; with them, 2.2 and 3.4.
 In the two long worlds it fell to about 0.3 in their last 500 iterations (0.2
 and 0.4)
 ([One alliance takes the world](another-game.md#one-alliance-takes-the-world)).
-Judged over a [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."), the brains inside the alliance kept improving slowly,
+Judged over a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death."), the brains inside the alliance kept improving slowly,
 as brains do without alliances
 ([Does a world of allies keep evolving?](another-game.md#does-a-world-of-allies-keep-evolving)).
 Where all of B2's hand-set numbers were taken away, alliances kept worlds
@@ -282,7 +282,7 @@ partnership. Nothing in the game rewards keeping a partner.
 
 **Seeing is not enough.** Giving brains more to see did not by itself create
 help. They were given a sense of their clones, of their family, of where they
-came from, and of who helped them. Every [message](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") already names its writer's
+came from, and of who helped them. Every message already names its writer's
 genotype, so kin could tell each other with one comparison. But B1's nearly
 blind brains cannot make it
 ([Could kin recognise each other?](what-agents-say-to-each-other.md#could-kin-recognise-each-other)).

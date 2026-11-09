@@ -38,12 +38,12 @@ works:
 ## What was built
 
 Every world is B2 at 10,000 tokens, with Experiment 16's [settings](settings.md "One number or switch of a run's rules, fixed before it starts."), played for
-2,000 iterations. Each has two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), as pilot worlds
-([Pilot worlds](the-lab.md#pilot-worlds)):
+2,000 iterations. Each has two seeds, as pilot worlds
+([Pilot worlds](runs-and-records.md#pilot-worlds)):
 
 | switch | what it does | compared with |
 |---|---|---|
-| `mix` | A newborn's brain is mixed from its parent's and a mate's — a neighbour of the parent, drawn at random. Each hidden unit (its incoming weights, its bias and its outgoing weights together) and each output bias comes from one or the other, with an even chance. The mixture is a new [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), then mutated as any copy is. | B2 |
+| `mix` | A newborn's brain is mixed from its parent's and a mate's — a neighbour of the parent, drawn at random. Each hidden unit (its incoming weights, its bias and its outgoing weights together) and each output bias comes from one or the other, with an even chance. The mixture is a new genotype, then mutated as any copy is. | B2 |
 | `took_kin` | One more input per neighbour: did it, in the last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), take a node held by an agent of my genotype? | B2 |
 | `unit_token` | Brains that can grow (up to 32 hidden units, switched on and off by mutation), where every active unit holds one of its agent's tokens. A unit switched on is paid for, one switched off pays its token back, and what an agent cannot pay for stays off. | the same growable brains with units free |
 | `link_token`, no old age | Every link holds a token, paid by whoever makes it; no cap on links (valence 0) and no age limit. | — |
@@ -52,7 +52,7 @@ Each is judged by **lifetime contests**, as
 [The switches the world was built with](the-switches-the-world-was-built-with.md)
 judged the switches. The brains of a later moment play those of an earlier
 one, half and half on the same world. They play for 100 iterations
-([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 Each pair plays once in each moment's world.
 If the later brains hold more than half of the nodes at the end, evolution
 went somewhere between the two moments.
@@ -90,7 +90,7 @@ where B2 gives 0.67–0.69, then 0.65–0.76.
 Why would mixing help? A mixed child inherits whole units from two unrelated
 brains. So a unit that does something useful can spread through the
 population without carrying the rest of the brain it arose in. And two useful
-units that arose in different [lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") can meet in one child. That is the
+units that arose in different lineages can meet in one child. That is the
 classical argument for sex. Here it is a hypothesis: two seeds, small and
 combative worlds, and no test yet of which of these does the work.
 
@@ -183,7 +183,7 @@ whole and resilient as B2's, whose evolution goes on more strongly. There the br
   mixing beside 23 other rules.
 - [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md): the
   experiment that took mixing further.
-- [How a brain changes](mutation.md): what a mutation does to a brain.
+- [How a brain changes](rules-in-detail.md#how-a-brain-changes): what a mutation does to a brain.
 - [What the brains are like](what-the-brains-are-like.md): what evolved
   brains do.
 
@@ -210,8 +210,8 @@ number appears during one.
 ## How our view changed
 
 - **24 October 2026.** From 23 October, this page called the worlds whose
-  links hold a token, with the age limit, a [healthy world](what-makes-a-world-interesting.md "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3)."), and linked the
-  words to the six criteria of the screen of random worlds. Their [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
+  links hold a token, with the age limit, a [healthy world](measuring-health.md#what-makes-a-world-interesting "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3)."), and linked the
+  words to the six criteria of the screen of random worlds. Their [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
   of 4.1 to 4.2 is above the screen's 4, as B2's own 4.4 is
   ([Links that hold a token](rules-without-numbers.md#links-that-hold-a-token)).
   They are as whole and resilient as B2's worlds, but not healthy in the

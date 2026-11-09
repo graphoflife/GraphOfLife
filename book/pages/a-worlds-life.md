@@ -32,13 +32,13 @@ part in every step. So the study of the baseline runs one kind of world, the
 first baseline B1 ([B1 and B2: the two baselines](b1-and-b2.md)), thirty
 times. The thirty worlds share every rule and every [setting](settings.md "One number or switch of a run's rules, fixed before it starts."). They differ only
 in their seed, the number that fixes every random choice of a run
-([Seeds and the random stream](random-numbers.md)). What all thirty do, the
+([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)). What all thirty do, the
 rules do; where they differ, chance decides.
 
 Each world holds 100,000 tokens, the one thing of value in a world, whose
 total never changes ([The world: tokens, agents and a network](the-world.md)).
 It starts as a thousand founders of a hundred tokens each, on a ring with a
-few shortcuts ([The starting ring](starting-ring.md)). The seeds are 1 to 30,
+few shortcuts ([The starting ring](rules-in-detail.md#the-starting-ring)). The seeds are 1 to 30,
 and each world runs for 1,500 iterations. Together the thirty runs are
 Experiment 10 ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). The
 pages summed up in [What the baseline world is](what-the-baseline-world-is.md),
@@ -50,14 +50,14 @@ An iteration is one step of a world's time. In it, an agent may first give
 some of its tokens to a child, who appears on a new node next to it. Then
 comes the game. Every agent stakes all its tokens on its own node and its
 neighbours' nodes, and each node goes to whoever staked most on it, or to a
-[coalition](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") of smaller stakers. Agents left without tokens die, and so does
+coalition of smaller stakers. Agents left without tokens die, and so does
 every piece of the network cut off from the largest
 ([One iteration, step by step](one-iteration.md)).
 
 Nothing was thrown away. Every frame was kept, with every decision, and every
 statistic was recorded for every frame. The statistics that walk the whole
-network — bridges, the core, [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours."), distances, the flow's loops — were
-recorded every 25 iterations ([What a run records](frames-and-stats.md)).
+network — bridges, the core, clustering, distances, the flow's loops — were
+recorded every 25 iterations ([What a run records](runs-and-records.md#what-a-run-records)).
 
 ### Two sizes of world
 
@@ -84,7 +84,7 @@ the world's oldest agent.
 <!-- figure shape/world-end -->
 ![World of seed 1 after the game of iteration 1,499](../figures/shape/world-end.svg)
 
-**World of seed 1 after the game of iteration 1,499.** The world with seed 1 after the game of iteration 1,499, the 2,495 of its 14,870 agents within 25 steps of agent 660,973, the oldest, 806 iterations old — a piece, since a world this large is a tangle when drawn whole: every agent drawn is a dot, every connection between two of them a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](bridges.md#core-trees-and-leaves)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
+**World of seed 1 after the game of iteration 1,499.** The world with seed 1 after the game of iteration 1,499, the 2,495 of its 14,870 agents within 25 steps of agent 660,973, the oldest, 806 iterations old — a piece, since a world this large is a tangle when drawn whole: every agent drawn is a dot, every connection between two of them a line. Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -138,7 +138,7 @@ are answered on this page.
   grow?
 - [Like next to like](like-next-to-like.md) — Are neighbours alike?
 - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world) — How many [dimensions](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
+  and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world) — How many [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
   does a world have, and its core?
 - [What the baseline world is](what-the-baseline-world-is.md) — What the
   baseline world is, in sum.
@@ -196,7 +196,7 @@ the same scale. Each line is the number of agents alive after every game.
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001` … `B1-100000-s006`, six of the 30 baseline runs (their settings are listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)).
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2.
 > 2. Plot `nodes` against `iteration`, one point per iteration, joined.
@@ -221,7 +221,7 @@ Three things are visible in every one of them:
 ### All thirty together
 
 To see all thirty at once, draw them as a band
-([Bands: many worlds in one figure](median-and-quantiles.md#bands-many-worlds-in-one-figure)). The line is the typical world
+([Bands: many worlds in one figure](statistics.md#bands-many-worlds-in-one-figure)). The line is the typical world
 at each moment, the median of the thirty; the shading shows how far the
 others spread around it.
 
@@ -233,7 +233,7 @@ others spread around it.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `nodes`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -268,7 +268,7 @@ over iterations 1,300 to 1,499, at its end. Then join the two:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For each run that reached iteration 1,500, take the rows with `phase` = 2.
 > 2. Average `nodes` over the rows with 100 ≤ `iteration` ≤ 200, and again over 1,300 ≤ `iteration` ≤ 1,499.
@@ -302,7 +302,7 @@ the wandering, and asks how much of it the seed decides.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `edges`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -313,7 +313,7 @@ the wandering, and asks how much of it the seed decides.
 
 The number of connections follows the number of agents, at about 1.7
 connections per agent. A connection has two ends, so an agent has about 3.5
-connections on average: its mean [degree](degree.md "The number of an agent's connections: how many neighbours it has."). Every agent is joined to three or
+connections on average: its mean degree. Every agent is joined to three or
 four others ([What shape does the network take?](what-shape-does-the-network-take.md)).
 The median number of connections was 24,730 over iterations 100 to 200, and
 22,570 over the last two hundred: 9% fewer. The worlds of 10,000 tokens had
@@ -343,7 +343,7 @@ longer. There, births per hundred agents kept falling until about iteration
 
 None of the thirty worlds died: every one lived through its 1,500 iterations.
 (A world counts as dead when an iteration ends with 20 agents or fewer;
-[When a world ends](extinction.md) says why.) At 10,000 tokens four of thirty
+[When a world ends](rules-in-detail.md#when-a-world-ends) says why.) At 10,000 tokens four of thirty
 had died out, one in its fourth iteration and three after long declines. A
 world that small can lose its last agents to a few bad games. A world of
 15,000 agents has more to lose.
@@ -354,7 +354,7 @@ single cut: the network broke in one place, and the piece beyond the break
 died. Then, game after game, it lost another large piece: 901 agents, 1,730,
 4,060, 2,868, 1,344, 960. Before most of these games, the worst single cut of
 the network threatened a seventh to a third of the world
-([Cut risk](bridges.md#cut-risk)), against a hundredth or two on an ordinary day.
+([Cut risk](measuring-networks.md#cut-risk)), against a hundredth or two on an ordinary day.
 Births fell from 499 per iteration to 26.
 
 Ten games after the first cut, 2,137 agents were left. At iteration 1,416 one
@@ -410,7 +410,7 @@ over, and a little faster. Where the two differ, the text says so.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take every run's rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150.
 > 2. Draw `nodes` against `iteration` for each run.
@@ -429,7 +429,7 @@ iteration 20. The median of the thirty worlds peaks at about 17,400 agents
 around iteration 39, falls back, and is near 15,000 at iteration 100.
 
 The axis is logarithmic: equal heights are equal factors
-([Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws)). On it, steady
+([Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws)). On it, steady
 growth by a constant factor per iteration is a straight line, and the first
 ten or so iterations are close to one. The population doubles about every
 three iterations. That is a little faster than in the worlds of 10,000
@@ -447,7 +447,7 @@ and many fall steeply for a few iterations: the boom ends in a crash.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For iterations 0 to 150, take `births` and `orphaned` from the rows with `phase` = 1, and `starved` and `orphaned` from the rows with `phase` = 2.
 > 2. At each iteration, take the median of each over the runs that have a row there.
@@ -478,7 +478,7 @@ removed with everyone on them.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 1 and 0 ≤ `iteration` ≤ 150, and the statistic `reproTokenShare` — the sum of `invested` over the births of that phase, divided by the 100,000 tokens.
 > 2. At each iteration take the median, quartiles and 5th and 95th percentiles over the runs.
@@ -512,18 +512,18 @@ world holds about 4.5 ([Where do the tokens go?](where-do-the-tokens-go.md)).
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
-> 1. Take the rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150, and the statistic `cladesInWindow` ([Families](genotype.md#families): for every living agent, follow its genotype's parents back to the newest one born at or before iteration t − 8, or to a founder's; count the distinct ones).
+> 1. Take the rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150, and the statistic `cladesInWindow` ([Families](measuring-evolution.md#families): for every living agent, follow its genotype's parents back to the newest one born at or before iteration t − 8, or to a founder's; count the distinct ones).
 > 2. At each iteration take the median, quartiles and 5th and 95th percentiles over the runs.
 >
 > **To make it again:** `python3 book_figures.py youth`.
 <!-- /figure -->
 
 Every brain has a genotype: an identity that a copy keeps and a change
-replaces ([Genotypes and the family tree](genotype.md)). The number of
+replaces ([Genotypes and the family tree](measuring-evolution.md#genotypes-families-and-the-common-ancestor)). The number of
 **families** counts the different genotypes of eight iterations earlier that
-the living descend from ([Families](genotype.md#families)). Before iteration 8,
+the living descend from ([Families](measuring-evolution.md#families)). Before iteration 8,
 "eight iterations earlier" is before the world began. So there it counts how
 many of the 1,000 founders still have descendants.
 
@@ -570,7 +570,7 @@ one founder soon after iteration 300. This one got there at iteration 825.
 
 How soon does every agent of a world descend from one founder? Every 25
 iterations, the family tree of genotypes was climbed from the living
-([The common ancestor of the living](genotype.md#the-common-ancestor-of-the-living) explains how). The
+([The common ancestor of the living](measuring-evolution.md#the-common-ancestor-of-the-living) explains how). The
 first check at which every living agent descends from one and the same
 founder was noted:
 
@@ -615,7 +615,7 @@ Its numbers are unlike anything later in a world's life: about 74 births per
 hundred agents in each of the first ten iterations, some twenty times the
 settled rate, and families falling from a thousand to about four hundred.
 That is why the rest of the notebook measures settled worlds from iteration
-500 on ([The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world)).
+500 on ([The settled life of a world](statistics.md#the-settled-life-of-a-world)).
 
 A large world comes through its bottleneck with more lines, and keeps them
 longer: three of thirty had not come down to one founder after 1,500
@@ -625,7 +625,7 @@ it has made since.
 
 The youth is also when the brains learn.
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
-played the brains of a world at different moments, its [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), against each
+played the brains of a world at different moments, its eras, against each
 other, in ten worlds of 5,000 tokens (Experiment 12). By iteration 50 the
 brains of every world beat their founders': in the median world they hold
 nine tenths of a world contested with them. Every later era ties with the one
@@ -664,7 +664,7 @@ before it. Whatever the brains of a world learn, they learn in its youth.
   single worlds wander, and how much of it their seed decides.
 - [Births, deaths and ages](births-deaths-and-ages.md): who is born and who
   dies in a settled world, and how old agents get.
-- [The settled life of a world](median-and-quantiles.md#the-settled-life-of-a-world): why the notebook measures a
+- [The settled life of a world](statistics.md#the-settled-life-of-a-world): why the notebook measures a
   world from iteration 500 on.
 - [What the baseline world is](what-the-baseline-world-is.md): the whole study
   of the baseline, in sum.
@@ -861,6 +861,6 @@ first tested:
 
 **Also about:** [Agents' lives: births, deaths, ages](../README.md#agents-lives-births-deaths-ages).
 
-> [!info]- Pages that link here (45)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The starting ring](starting-ring.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](gini-coefficient.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Genotypes, families and the common ancestor](genotype.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Many worlds at once: the median, bands, the settled life and the spread](median-and-quantiles.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
+> [!info]- Pages that link here (42)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md)
 <!-- /turns -->

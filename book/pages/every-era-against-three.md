@@ -26,7 +26,7 @@ The brains a world holds at one moment, kept in its archive, are an **era**,
 named by its iteration. In a **contest**, the brains of two eras are seated in
 one world, a coin deciding for each agent. The world plays on, and the later
 era's share of the agents at the end is its score
-([Eras, contests and invasions](eras-and-contests.md#a-contest-step-by-step)).
+([Eras, contests and invasions](measuring-evolution.md#a-contest-step-by-step)).
 A score of 0.5 is a tie.
 
 Every long world the notebook has played says the same thing in its contests:
@@ -38,7 +38,7 @@ They are [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its
 hidden unit of its brain from its parent or from a [neighbour](the-world.md#the-network "An agent joined to another by a connection."), by a coin. They
 were played to 50,000 iterations. In their own contests, the brains of 25,000
 beat those of 10,000. Then those of 50,000 scored 0.54 and 0.42 against those
-of 25,000, each the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of four contests.
+of 25,000, each the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of four contests.
 
 Contests between neighbours in time cannot tell three different stories apart:
 - **a plateau**, where evolution has stopped;
@@ -48,7 +48,7 @@ Contests between neighbours in time cannot tell three different stories apart:
   gone.
 
 Rock, paper and scissors each beat the one before, for ever, and get nowhere
-([What would count as open-ended evolution](open-ended-test.md)).
+([What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)).
 
 Playing every era against the same few fixed eras tells the three apart:
 - **On a plateau**, the scores against a fixed era stop rising.
@@ -68,7 +68,7 @@ rest keep their play.
 
 So the distance from an equilibrium is how much an agent *would* gain by its
 best reply to the others: its **exploitability**
-([Exploitability](eras-and-contests.md#exploitability)). A population that
+([Exploitability](measuring-evolution.md#exploitability)). A population that
 evolution drives towards a top becomes less exploitable, era after era.
 
 <!-- figure eras/room -->
@@ -97,7 +97,7 @@ evolution drives towards a top becomes less exploitable, era after era.
   from 10,000 to 50,000.
 - **The room does not shrink with time.** From 10,000 to 50,000 it wanders
   around one node in both of Experiment 18's worlds. It stays between 0.80 and
-  1.20 in [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 5, and between 0.92 and 1.14 in seed 6.
+  1.20 in [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 5, and between 0.92 and 1.14 in seed 6.
 - **Where it was smaller, the world was.** Experiment 17's worlds fell from
   1.3 to 0.6 between 1,000 and 10,000 as they shrank, to a median of 620
   agents. Experiment 18's world of seed 6 read 0.5 at 5,000 and 7,500, when it
@@ -148,11 +148,11 @@ itself:
 ## The trials
 
 Each contest is the notebook's lifetime contest
-([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)).
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 In B2 every agent dies at age 100, so a contest lasts 100 iterations, a whole
 life:
 - The world of one era is given brains drawn by coin from two eras.
-- Every [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") is off: no copied brain is changed, so every copy keeps its
+- Every [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") is off: no copied brain is changed, so every copy keeps its
   era.
 - The world plays 100 iterations, and the later era's share of the agents is
   its score.
@@ -206,7 +206,7 @@ pulled ahead of the brains of 2,500.
 A **rating** sums up every contest of a world at once. Each era gets one
 number, fitted so that the difference between two eras' ratings gives the odds
 of their contest. This is the model of Bradley and Terry, which chess calls
-Elo ([Scores and ratings](eras-and-contests.md#scores-and-ratings)). The
+Elo ([Scores and ratings](measuring-evolution.md#scores-and-ratings)). The
 ratings say the same as the scores.
 - **Seed 5** rose from 0 at 2,500 to about +105 Elo points at 22,500. From
   30,000 to 50,000 it wandered between +55 and +110.
@@ -270,7 +270,7 @@ little in one world, round a circle in the other.
   brains can win against their parents and still lose ground against their
   ancestors. That is why the test of open-ended evolution asks for wins
   against the best mix of all the past
-  ([What would count as open-ended evolution](open-ended-test.md)).
+  ([What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)).
 - **What comes next.** A world that is to keep climbing needs a way across the
   valley. It might be a crowd for a new strategy to start from
   ([How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs)).
@@ -278,7 +278,7 @@ little in one world, round a circle in the other.
 
 ## Where to go next
 
-- [Eras, contests and invasions](eras-and-contests.md): contests, ratings,
+- [Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better): contests, ratings,
   exploitability and the invasion test, in full.
 - [Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations):
   the two worlds played here, and the three that died out.
@@ -289,7 +289,7 @@ little in one world, round a circle in the other.
 
 ## How this was made
 
-The 240 contests are trials of the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."), listed in the box below. Each writes
+The 240 contests are trials of the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."), listed in the box below. Each writes
 its score to `GraphOfLifeRuns/<trial>/result.json`, and
 `python3 book_figures.py eras` reads them and draws the two figures of the
 contests. The room a best reply finds was measured on the worlds the long runs
@@ -321,7 +321,7 @@ its figure gives every step.
   keep one's node and take the cheapest neighbours. The program also tries
   taking without defending, and the agent's own stakes of each draw
   (`research/oee/checks/exploitability.py`;
-  [Eras, contests and invasions](eras-and-contests.md#how-our-view-changed)).
+  [Eras, contests and invasions](measuring-evolution.md#how-our-view-changed)).
 - **24 October 2026.** This page gave the median score of seed 6's ten eras
   after 25,000 against the brains of 2,500 as 0.64. It is 0.63, the mean of
   the two middle scores of the ten, 0.627 and 0.640
@@ -330,10 +330,10 @@ its figure gives every step.
 <!-- turns -->
 ---
 
-← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) →
+← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
 
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 
 > [!info]- Pages that link here (9)
-> [How alike the agents are](how-alike-the-agents-are.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md)
 <!-- /turns -->

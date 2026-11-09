@@ -13,10 +13,10 @@
 How alike are two agents a given number of steps apart, and up to how far?
 The **correlation function** and the **correlation length** measure it. In the
 thirty worlds of 100,000 tokens, neighbours are a little unlike in tokens and
-connections, mostly because [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") sit among poor leaves. They are a little
+connections, mostly because hubs sit among poor leaves. They are a little
 alike in age, as cohorts that arrived together. Every such likeness fades
 within three steps, so the correlation length is one to two steps: a world is
-far from critical. Agents of one [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") cluster within two or three steps,
+far from critical. Agents of one [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") cluster within two or three steps,
 and lines of descent in patches 7 to 12 steps wide.
 
 ## How alike at a distance
@@ -48,7 +48,7 @@ number of connections. **Standardise** the values within the world: subtract
 their mean, and divide by their standard deviation. A standardised value says
 how far an agent stands above or below the typical one. Then take every pair
 of agents exactly *r* steps apart, and ask whether their two values go up and
-down together. That is the [correlation](correlation.md) over all such pairs,
+down together. That is the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes) over all such pairs,
 and it is the correlation function:
 
 $$
@@ -64,7 +64,7 @@ Here *d*(*u*, *v*) is the number of steps on the shortest path from *u* to
 
 At one step, *C*(1) takes all connected pairs: it is the assortativity of the
 value. For the connections themselves, it is the assortativity of the network
-([Assortativity](degree.md#assortativity)).
+([Assortativity](measuring-networks.md#assortativity)).
 
 Pairs *r* steps apart are found by **breadth-first search**. Start from an
 agent drawn at random. Its neighbours are one step away. Their neighbours not
@@ -113,7 +113,7 @@ The worlds are the thirty of 100,000 tokens of
 This page was first written from the worlds of 10,000 tokens, the 26 of
 thirty that lived to the end, about 1,300 agents each. Where the two sizes
 differ, both are given. Every value is read at five moments of each world's
-[settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.").
+settled life.
 
 ### Neighbours
 
@@ -143,14 +143,14 @@ cannot decide a correlation alone.
 <!-- /figure -->
 
 - **Tokens: unlike.** Neighbours' tokens are correlated at **−0.16** in the
-  [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") world (−0.10 at 10,000 tokens). The rich sit among the poor.
+  median world (−0.10 at 10,000 tokens). The rich sit among the poor.
 - **Age: like.** **+0.14** (+0.15). The old sit among the old, the young among
   the young.
 - **Connections: unlike.** **−0.20** (−0.19): hubs sit among agents with few
   connections. This is the assortativity of
   [How properties scale together](how-properties-scale-together.md), taken of
   the logarithm of the connections. Of the connections themselves, which the
-  hubs sway more, it is about −0.07 ([Assortativity](degree.md#assortativity)).
+  hubs sway more, it is about −0.07 ([Assortativity](measuring-networks.md#assortativity)).
 
 All three are small in the median world. Neighbours are alike or unlike only
 a little. And the worlds differ: the age correlation ranges from −0.09 to
@@ -277,7 +277,7 @@ in every [game](one-iteration.md#phase-2-the-game "The second phase of an iterat
 ([How the game is played](how-the-game-is-played.md)). So any territory is
 broken up as soon as it forms.
 
-[Lineages](genotype.md#families "A line of descent: the agents whose genotypes go back to one ancestor."), the lines of descent, last much longer than genotypes. A line is all
+[Lineages](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor."), the lines of descent, last much longer than genotypes. A line is all
 the agents whose genotypes go back to one ancestor, some iterations earlier.
 And lines do hold regions
 ([Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live)).
@@ -316,7 +316,7 @@ lines, not of genotypes.
   have no scale: the room within *r* steps grows as a power of *r*
   ([Is a world a space?](how-many-dimensions-does-a-world-have.md)). But what
   the agents hold is alike only within three steps.
-- **For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), nothing yet lets a second kind of world form
+- **For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), nothing yet lets a second kind of world form
   inside the first.** Matter in a vacuum, a cell in its medium, a species in
   its habitat: each is a region that keeps differing from its surroundings.
   A world has room for such regions, for it is a space. But what
@@ -327,7 +327,7 @@ lines, not of genotypes.
 ## Where to go next
 
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
-  the space the agents live in, with a [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") and room for regions.
+  the space the agents live in, with a [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") and room for regions.
 - [Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live):
   lines of descent, whose patches widen as they age.
 - [One world, many colours](one-world-many-colours.md): one world drawn by
@@ -349,7 +349,7 @@ five moments, from iteration 1,000 to 2,999.
 
 ### The runs of Experiment 10
 
-Experiment 10 is 30 runs: [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30, 1,500
+Experiment 10 is 30 runs: [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at 100,000 tokens, [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30, 1,500
 iterations each.
 
 <!-- runs E10 -->
@@ -454,5 +454,5 @@ iterations each.
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
 > [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
+> [Glossary](glossary.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
 <!-- /turns -->

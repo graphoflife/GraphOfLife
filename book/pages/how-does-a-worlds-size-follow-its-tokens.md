@@ -7,7 +7,7 @@
 >   diverse, as well connected per agent? Is a world of 100,000 tokens ten
 >   copies of a world of 10,000?
 > - Do big worlds settle down, or do they wander as much as small ones?
-> - How do distances grow as a world grows, and does its [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") change?
+> - How do distances grow as a world grows, and does its [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") change?
 > - How small can a world be and still live?
 > - How does a line of descent take over a world ten times the size: ten
 >   times slower, as chance would; about as fast, as a better [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") in a
@@ -47,7 +47,7 @@ and every result belongs to the size it was found at.
 
 ### How it was measured
 
-Experiment 8 runs worlds of the baseline B1 at ten sizes, three [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each,
+Experiment 8 runs worlds of the baseline B1 at ten sizes, three seeds each,
 for 600 iterations each. A world starts with one founder for every hundred
 tokens, so the founders go from 8 to 4,096.
 
@@ -61,21 +61,21 @@ The same means over iterations 400 to 499 say whether a world had settled.
 agents = *a* × tokens^*b*, some number *a* times the tokens to the power *b*.
 On logarithmic axes, on both sides, such a law is a straight line. Its slope
 is the exponent *b*
-([Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws)). An exponent of 1
+([Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws)). An exponent of 1
 means in proportion: twice the tokens, twice the agents. Below 1, bigger
 worlds hold fewer agents per token; above 1, more.
 
 The line is fitted by least squares to the baseline worlds of 3,200 tokens
-and more, every run a point ([Fitting a straight line](correlation.md#fitting-a-straight-line)).
+and more, every run a point ([Fitting a straight line](statistics.md#fitting-a-straight-line)).
 Its interval comes from resampling the runs within each size 10,000 times
-([The bootstrap](bootstrap.md)). A second fit, with a squared term, says
+([The bootstrap](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds)). A second fit, with a squared term, says
 whether the points bend away from a straight line.
 
 **The small end.** Two rules of the baseline limit how small a world can be.
 The founders' starting ring needs at least six founders
-([The starting ring](starting-ring.md)), so no world can have fewer than 600
+([The starting ring](rules-in-detail.md#the-starting-ring)), so no world can have fewer than 600
 tokens. And a run stops, as extinct, once a game leaves 20 agents or fewer
-([When a world ends](extinction.md)). Worlds of 800 and 1,600 tokens start
+([When a world ends](rules-in-detail.md#when-a-world-ends)). Worlds of 800 and 1,600 tokens start
 with 8 and 16 founders, below that line. So the small worlds were also run a
 second way, *stopped only when empty* (`extinction_threshold` 0), from 800
 to 6,400 tokens. A world that never falls to twenty agents is then exactly
@@ -114,12 +114,12 @@ as many agents and connections per token as at 10,000 tokens.
 <!-- figure size/agents -->
 ![Agents against the tokens of the world](../figures/size/agents.svg)
 
-**Agents against the tokens of the world.** Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which a power law, agents = a · tokens^b, is a straight line of slope b ([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)). Blue: the baseline, three seeds per size (at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the orange one of the same world; at 800 none did). Orange: the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the baseline worlds of [A world's life](a-worlds-life.md), a check from another experiment. Red: the straight line fitted to the blue dots from 3,200 tokens on, exponent 1.00 (95% interval 0.95 to 1.06). Dashed: exponent exactly 1.
+**Agents against the tokens of the world.** Every run that lived to iteration 600 is a dot: the tokens of its world, and the number of agents alive after each game, averaged over iterations 500 to 599 — both on logarithmic axes, on which a power law, agents = a · tokens^b, is a straight line of slope b ([Logarithmic axes](statistics.md#logarithmic-axes-and-power-laws)). Blue: the baseline, three seeds per size (at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the orange one of the same world; at 800 none did). Orange: the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the baseline worlds of [A world's life](a-worlds-life.md), a check from another experiment. Red: the straight line fitted to the blue dots from 3,200 tokens on, exponent 1.00 (95% interval 0.95 to 1.06). Dashed: exponent exactly 1.
 
 > [!example]- How to make this figure
 > **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every run, the mean of `nodes` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 599; leave out a run that stopped before iteration 600.
 > 2. Fit log₁₀(agents) = log₁₀ a + b · log₁₀(tokens) by least squares over the baseline runs of 3,200 tokens and more; the interval of b from 10,000 resamplings of the runs within each size (`gol_analysis.power_fit`, run by `python3 gol_lab.py analyse E08`).
@@ -135,7 +135,7 @@ about 0.14 agents per token, so a world of 409,600 tokens holds about 60,000
 agents.
 
 The worlds of [A world's life](a-worlds-life.md#a-worlds-life) fall where the
-line says they should. The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") one holds 0.124 agents per token, against
+line says they should. The median one holds 0.124 agents per token, against
 0.140 predicted, well inside their own spread (0.06 to 0.25).
 
 Below 3,200 tokens the line ends. The baseline stopped all three worlds of
@@ -155,7 +155,7 @@ proportion the worlds are, divide by the tokens:
 > [!example]- How to make this figure
 > **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every run, the means of `nodes`, `edges` and `meanDegree` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 599; divide the first two by the tokens.
 > 2. The red lines are the fits of `book/results/E08.json`, made by `python3 gol_lab.py analyse E08`.
@@ -184,7 +184,7 @@ connected.
 > [!example]- How to make this figure
 > **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page. The runs of [A world's life](a-worlds-life.md) with seeds 1, 2 and 3.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `nodes` of every row with `phase` = 2 and `iteration` ≤ 599, divided by the tokens of the world.
 >
@@ -219,7 +219,7 @@ ten times less.
 > [!example]- How to make this figure
 > **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `nodes` of the rows with `phase` = 2 and 300 ≤ `iteration` ≤ 599; the standard deviation of the differences between consecutive rows, divided by the mean.
 > 2. Fit the logarithm of that against the logarithm of the mean by least squares; the interval from resampling the runs within each size (`gol_analysis.power_fit`).
@@ -274,7 +274,7 @@ change with it?
 > [!example]- How to make this figure
 > **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every run, the mean over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 599 of `gini`, `selfAllocationShare`, `heldHomeShare`, `brainDiversity`, `leaves` / `nodes`, `loopDensity` and `dimension` (the last two every 25 iterations).
 > 2. Births: `births` of the rows with `phase` = 1, per 100 `nodes_before`; cut off: `orphaned` of the rows with `phase` = 2, per 100 `nodes_before`; each averaged over iterations 500 to 599.
@@ -289,7 +289,7 @@ flat within what three seeds per size can see:
 
 | property | exponent against the tokens | 95% interval |
 |---|---|---|
-| inequality ([Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.")) | 0.003 | −0.022 to 0.026 |
+| inequality ([Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.")) | 0.003 | −0.022 to 0.026 |
 | share of stakes at home | −0.017 | −0.041 to 0.007 |
 | genotypes per agent | 0.003 | −0.017 to 0.024 |
 | births per 100 agents | −0.05 | −0.18 to 0.06 |
@@ -307,7 +307,7 @@ change, slowly:
 - **Leaves**, the share of agents with a single connection, fall with an
   exponent of −0.08 (−0.12 to −0.04). Their median falls from 0.44 at 3,200
   tokens to 0.28 at 409,600.
-- **[Loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") per connection** rise with an exponent of 0.08 (0.02 to 0.14): from
+- **Loops per connection** rise with an exponent of 0.08 (0.02 to 0.14): from
   0.28 to 0.45.
 - **Nodes kept by their own agent** fall with an exponent of −0.03 (−0.06 to
   −0.01): from 0.51 to 0.40.
@@ -334,7 +334,7 @@ But at ten times the tokens, the dimension from ball growth is 15% higher
 Births and deaths per agent run 13 to 21% higher, as
 [Births, deaths and ages](births-deaths-and-ages.md) and
 [How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) find too. Leaves
-are only 5% fewer, and [clustering](degree.md#clustering "How often an agent's neighbours are also each other's neighbours.") is less than half. So births, the rate of
+are only 5% fewer, and clustering is less than half. So births, the rate of
 cutting and the dimension do change with size, a little. And the shape
 changes more than leaves and loops alone show.
 
@@ -343,12 +343,12 @@ changes more than leaves and loops alone show.
 <!-- figure size/distances -->
 ![How far apart agents are, as worlds grow](../figures/size/distances.svg)
 
-**How far apart agents are, as worlds grow.** Every baseline run of 3,200 tokens and more that lived to iteration 600, and the 28 worlds of [A world's life](a-worlds-life.md): the mean number of agents over iterations 500 to 599, and over the same iterations the mean distance between two agents (left) and the largest distance found (right), both estimated by the viewer from breadth-first searches out of 8 to 16 agents every 25 iterations ([Radius and diameter](path-length.md#radius-and-diameter)). Red: a power law fitted to the dots. Dashed: what a small world would do — distances growing in proportion to the logarithm of the number of agents — drawn through the runs of 3,200 tokens.
+**How far apart agents are, as worlds grow.** Every baseline run of 3,200 tokens and more that lived to iteration 600, and the 28 worlds of [A world's life](a-worlds-life.md): the mean number of agents over iterations 500 to 599, and over the same iterations the mean distance between two agents (left) and the largest distance found (right), both estimated by the viewer from breadth-first searches out of 8 to 16 agents every 25 iterations ([Radius and diameter](measuring-networks.md#radius-and-diameter)). Red: a power law fitted to the dots. Dashed: what a small world would do — distances growing in proportion to the logarithm of the number of agents — drawn through the runs of 3,200 tokens.
 
 > [!example]- How to make this figure
 > **Runs.** The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each size double the one before, seeds 1 to 3, 600 iterations — in two conditions: the baseline, `B1-800-s001` … `B1-409600-s003`; and *stopped only when empty* (`extinction_threshold` 0) at 800 to 6,400 tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with `python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page. As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every run, the means of `nodes`, `meanPathLength` and `diameter` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 599 (the last two are filled every 25 iterations).
 > 2. Fit log(distance) against log(agents) by least squares; the interval from resampling the runs within each size.
@@ -357,7 +357,7 @@ changes more than leaves and loops alone show.
 <!-- /figure -->
 
 In a random network, the typical distance between two agents grows only with
-the **logarithm** of their number ([Path length](path-length.md)). A hundred
+the **logarithm** of their number ([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)). A hundred
 times the agents adds only a few steps. Such a network is called a *small
 world*. Start from the worlds of 3,200 tokens: about 500 agents, 6 steps
 apart on average. A small world drawn through them would have its agents
@@ -391,7 +391,7 @@ diameter is the cleaner of the two.
 > [!example]- How to make this figure
 > **Runs.** The runs `B1-800-57b358-s001` … `-s003` and `B1-1600-57b358-s001` … `-s003` of Experiment 8 (`python3 gol_lab.py run E08`).
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `nodes` of every row with `phase` = 2.
 >
@@ -532,11 +532,11 @@ agents.
 
 - **How lines take over.** After every 25th iteration: how far back all the
   living share one ancestor. And the first iteration at which they all
-  descend from a single founder ([The common ancestor](genotype.md#the-common-ancestor-of-the-living)):
+  descend from a single founder ([The common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living)):
   this is what the thesis counts. It is set against the baseline's 30 worlds
   of 10,000 tokens over the same iterations. And it is set against the time a
   front would need, from the worlds' diameters.
-- **Everything the study of the baseline measures**, over the [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.")
+- **Everything the study of the baseline measures**, over the settled life
   from iteration 500 to 1,499: agents, connections, births, deaths,
   inequality, genotypes and families. Each is taken per token or per agent,
   and set beside the baseline.
@@ -699,7 +699,7 @@ tokens, over the same iterations:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every run and statistic, the mean over the rows of iterations 500 to 1,499 (`phase` 1 for births, 2 for the rest; a ratio such as `edges/nodes` is taken row by row).
 > 2. The median over each set's runs; the large set's divided by the small set's.
@@ -707,9 +707,9 @@ tokens, over the same iterations:
 > **To make it again:** `python3 book_figures.py takeover`.
 <!-- /figure -->
 
-Per agent, almost nothing changes. The Gini coefficient, the [richest tenth](gini-coefficient.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")'s
+Per agent, almost nothing changes. The Gini coefficient, the [richest tenth](measuring-tokens.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")'s
 share and the genotypes per agent are all within 3% of their values at 10,000
-tokens. So are the shares of nodes taken by [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") and kept by their own
+tokens. So are the shares of nodes taken by coalitions and kept by their own
 agent. There are 8% more connections per agent and 5% fewer leaves. Births
 and deaths per agent are 13 to 21% higher
 ([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) finds the old
@@ -719,8 +719,8 @@ living the same kind of lives, a little faster.
 Its shape is not the same. Clustering, the share of an agent's pairs of
 neighbours that are joined, is **less than half** (0.039 against 0.088). The
 spectral gap, which says how fast a random walk forgets where it began
-([The spectral gap](path-length.md#the-spectral-gap)), is half too. The large worlds have
-23% more loops per agent, 18% fewer [bridges](bridges.md "A connection that lies on no loop: cut it and the network falls into two pieces."), a 9% larger core, and a ball
+([The spectral gap](measuring-networks.md#the-spectral-gap)), is half too. The large worlds have
+23% more loops per agent, 18% fewer bridges, a 9% larger core, and a ball
 dimension 15% higher.
 
 Their distances grow as the width of a world does. The mean distance between
@@ -746,7 +746,7 @@ these matters.
 - **Its ups and downs do not average out.** In every world, at every size, a
   game can remove a third or half of everyone, whatever their brains. The
   noise comes from a rule, the cull, not from small numbers. So for
-  [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."), size is not a cure. Only a change of the rule removes
+  open-ended evolution, size is not a cure. Only a change of the rule removes
   the noise, as B2 does
   ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)).
 - **Size changes the arrangement more than the agents.** Distances grow like
@@ -802,15 +802,15 @@ The four smallest sizes run once more with the stopping rule switched off.
   3,200 tokens and more did, one of three at 1,600, and none at 800. Those
   three were stopped after their first game. Stopped only when empty, 12 of
   12 did.
-- **[Engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."):** snapshot `f820369a1583af53`, commit `4bc7165`, for all 42
+- **Engine:** snapshot `f820369a1583af53`, commit `4bc7165`, for all 42
   runs.
 - **Cost:** 56 hours of computing on one worker, from 6 to 9 October 2026,
   and 28 GB on disk. The largest run, at 409,600 tokens, needed at most
   11.0 GB of memory.
 - **Fits:** least squares on logarithmic axes
-  ([Fitting a straight line](correlation.md#fitting-a-straight-line)). Intervals come from
+  ([Fitting a straight line](statistics.md#fitting-a-straight-line)). Intervals come from
   resampling the runs within each size, 10,000 times
-  ([The bootstrap](bootstrap.md)). Bends come from a fit with a squared term.
+  ([The bootstrap](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds)). Bends come from a fit with a squared term.
 - **Results:** `book/results/E08.json`, made with
   `python3 gol_lab.py analyse E08` (seconds); the figures of
   [How does a world's size follow its tokens?](#how-does-a-worlds-size-follow-its-tokens)
@@ -994,5 +994,5 @@ iterations each.
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (32)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [When a world ends](extinction.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What a simulation costs](what-a-simulation-costs.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md)
 <!-- /turns -->

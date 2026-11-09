@@ -18,7 +18,7 @@
 Within a hundred iterations, the founders' ring with its few shortcuts becomes
 a mesh, the **core**, with small trees hanging off it. The core holds more
 than half of the agents, three quarters of the tokens and every loop. Most
-agents have one or two connections, and a few [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.") have hundreds or thousands.
+agents have one or two connections, and a few hubs have hundreds or thousands.
 Experiment 5 had predicted a thinner, more tree-like world, and was refuted on
 the size of the core. A child joins only its parent's neighbourhood, so the
 world is stretched, with bottlenecks that make it slow to mix and easy to
@@ -28,7 +28,7 @@ dimensions; by how a walker spreads, a little under two.
 ## What shape does the network take?
 
 The founders start on a small-world ring
-([The starting ring](starting-ring.md)). Each is joined to its nearest
+([The starting ring](rules-in-detail.md#the-starting-ring)). Each is joined to its nearest
 founders on a circle, and some connections are moved at random to make
 shortcuts. From then on the agents make and lose every connection themselves.
 A child is joined to some of its parent's candidates, and a parent may hand
@@ -51,12 +51,12 @@ only spent. Children should hang off their parents like leaves off a branch,
 and a world should become a tree of families.
 
 How tree-like is a network? Three measures say. A **bridge** is a connection
-on no loop: cut it, and the world falls in two ([Bridges](bridges.md)).
+on no loop: cut it, and the world falls in two ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)).
 **Clustering** says how often two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of an agent are neighbours of
-each other too; in a tree, never ([Clustering](degree.md#clustering)). And the
+each other too; in a tree, never ([Clustering](measuring-networks.md#clustering)). And the
 **core** is what is left when agents with one connection or none are peeled
 away, again and again. In it, every agent lies on a loop or on a path between
-loops ([Core, trees and leaves](bridges.md#core-trees-and-leaves)); a tree has no core at
+loops ([Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)); a tree has no core at
 all. Before the runs of 10,000 tokens, Experiment 5 wrote down its thesis:
 
 <!-- thesis E05 -->
@@ -79,7 +79,7 @@ here is what the large worlds did, with the small ones beside them.
 <!-- figure shape/worlds -->
 ![One world at four moments](../figures/shape/worlds.svg)
 
-**One world at four moments.** The world with seed 1 after the games of iterations 0, 100, 500 and 1,499. Every agent alive is a dot, every connection a line (at iteration 0, every one of its 1,389 agents; at iteration 100, the 748 of its 16,099 agents within 2 steps of agent 415, the oldest, 100 iterations old — a piece, since a world this large is a tangle when drawn whole; at iteration 500, the 685 of its 15,889 agents within 10 steps of agent 424, the oldest, 500 iterations old — a piece, since a world this large is a tangle when drawn whole; at iteration 1,499, the 2,495 of its 14,870 agents within 25 steps of agent 660,973, the oldest, 806 iterations old — a piece, since a world this large is a tangle when drawn whole). Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](bridges.md#core-trees-and-leaves)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
+**One world at four moments.** The world with seed 1 after the games of iterations 0, 100, 500 and 1,499. Every agent alive is a dot, every connection a line (at iteration 0, every one of its 1,389 agents; at iteration 100, the 748 of its 16,099 agents within 2 steps of agent 415, the oldest, 100 iterations old — a piece, since a world this large is a tangle when drawn whole; at iteration 500, the 685 of its 15,889 agents within 10 steps of agent 424, the oldest, 500 iterations old — a piece, since a world this large is a tangle when drawn whole; at iteration 1,499, the 2,495 of its 14,870 agents within 25 steps of agent 660,973, the oldest, 806 iterations old — a piece, since a world this large is a tangle when drawn whole). Blue: agents in the core, which is what is left when agents with one connection or none are removed again and again until none remains ([Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)); yellow: the rest of the hanging trees; red: leaves, agents with a single connection. Where a dot is drawn means nothing in itself: a layout (networkx's ForceAtlas2, seed 1) pulls joined agents together and pushes the rest apart.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`, one of the 30 baseline runs.
@@ -113,7 +113,7 @@ and 29%).
 <!-- figure shape/degree -->
 ![How many connections agents have](../figures/shape/degree.svg)
 
-**How many connections agents have.** Of all agents alive after the last game of the 30 worlds, the share that have at least d connections, for every d. At the start a founder had 10 on average (the grey line) — every one of them exactly that many before the ring's rewiring ([The starting ring](starting-ring.md)).
+**How many connections agents have.** Of all agents alive after the last game of the 30 worlds, the share that have at least d connections, for every d. At the start a founder had 10 on average (the grey line) — every one of them exactly that many before the ring's rewiring ([The starting ring](rules-in-detail.md#the-starting-ring)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -126,11 +126,11 @@ and 29%).
 > **To make it again:** `python3 book_figures.py shape`.
 <!-- /figure -->
 
-An agent's **degree** is its number of connections ([Degree](degree.md)). The
+An agent's **degree** is its number of connections ([Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling)). The
 figure shows, for every *d*, the share of agents with at least *d* connections
 (a complementary cumulative distribution). Both axes are logarithmic: each
 step along them multiplies by the same factor
-([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)). After the last game of the thirty
+([Logarithmic axes](statistics.md#logarithmic-axes-and-power-laws)). After the last game of the thirty
 worlds, 35% of all agents have exactly one connection and 23% have two. The
 mean is 3.5. But 4.7% have ten or more, and the curve reaches out to an agent
 with 10,735. That agent is the centre of a star, a world held together by a
@@ -148,15 +148,15 @@ bends downward instead of running straight, so it is not a clean power law.
 <!-- figure shape/structure -->
 ![Core, leaves and bridges](../figures/shape/structure.svg)
 
-**Core, leaves and bridges.** Three shares, after every game of the 30 baseline worlds. Left: the share of agents in the core ([Core, trees and leaves](bridges.md#core-trees-and-leaves)), measured every 25 iterations. Middle: the share of agents with exactly one connection, after every game. Right: the share of connections that are bridges ([Bridges](bridges.md)), every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Core, leaves and bridges.** Three shares, after every game of the 30 baseline worlds. Left: the share of agents in the core ([Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)), measured every 25 iterations. Middle: the share of agents with exactly one connection, after every game. Right: the share of connections that are bridges ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)), every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2 and the statistics `coreShare`, `leaves/nodes` and `bridges/edges` (`a/b` is the row's `a` divided by its `b`).
-> 2. For `leaves/nodes`, make the band as for every other band ([Bands](median-and-quantiles.md#bands-many-worlds-in-one-figure)): cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
+> 2. For `leaves/nodes`, make the band as for every other band ([Bands](statistics.md#bands-many-worlds-in-one-figure)): cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
 > 3. For `coreShare` and `bridges/edges`, which are measured every 25 iterations, use stretches of 25.
 >
 > **To make it again:** `python3 book_figures.py shape`.
@@ -175,7 +175,7 @@ nothing have just been cut. [Peeling a world](#peeling-a-world) counts them at
 the start of a game, and finds a slightly larger core.
 
 The worlds at the far ends of these ranges are the stars. In the world with
-[seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 28, the largest hub is joined to more than half of all agents. Only 19%
+seed 28, the largest hub is joined to more than half of all agents. Only 19%
 of its agents are in the core, 72% are leaves, and 72% of its connections are
 bridges.
 
@@ -184,12 +184,12 @@ bridges.
 <!-- figure shape/clustering -->
 ![Clustering](../figures/shape/clustering.svg)
 
-**Clustering.** Three times the number of triangles divided by the number of connected triples ([Clustering](degree.md#clustering)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Clustering.** Three times the number of triangles divided by the number of connected triples ([Clustering](measuring-networks.md#clustering)), every 25 iterations. The founders' ring starts at 0.34 in the median world. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take the rows with `phase` = 2 and the statistic `transitivity`.
 > 2. Bands as above, in stretches of 25.
@@ -200,7 +200,7 @@ bridges.
 Clustering is taken over the whole world. Of all the pairs of neighbours that
 agents have, it is the share that are joined to each other. A triangle closes
 three such pairs, so it is three times the number of triangles over the number
-of pairs ([Clustering](degree.md#clustering)).
+of pairs ([Clustering](measuring-networks.md#clustering)).
 
 In the founders' ring, about a third of the pairs of neighbours of a founder
 are neighbours themselves (0.34). Within the first game that halves (0.17). In
@@ -222,16 +222,16 @@ parent's neighbours closes a triangle the moment it is born.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
-> 1. Average `nodes`, `meanDegree` and `meanPathLength` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499 (`meanPathLength` is measured every 25 iterations, from breadth-first searches out of 8 to 16 evenly spread agents; [Path length](path-length.md)).
+> 1. Average `nodes`, `meanDegree` and `meanPathLength` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499 (`meanPathLength` is measured every 25 iterations, from breadth-first searches out of 8 to 16 evenly spread agents; [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)).
 > 2. Plot one dot per run, and ln N / ln k for the same run.
 >
 > **To make it again:** `python3 book_figures.py shape`.
 <!-- /figure -->
 
 The distance between two agents is the fewest connections on a path between
-them ([Path length](path-length.md)). Two agents of a settled world are a
+them ([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)). Two agents of a settled world are a
 median 17.7 steps apart. Take a random network with the same number of agents
 *N* and connections per agent *k*. There, two agents are about ln *N* / ln *k*
 steps apart: about 7.8. So the agents of a world are 2.3 times as far apart.
@@ -242,7 +242,7 @@ average.
 
 Among these thirty worlds, the larger ones do not have their agents further
 apart. The worlds hold 12,300 to 18,100 agents, and the
-[correlation](correlation.md) between size and distance is −0.35. Without the
+[correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes) between size and distance is −0.35. Without the
 seven stars, which are both large and short, it is −0.18. In a star, the
 agents joined to its centre are two steps from one another through it. The
 shortest world, seed 28, has its agents 4.2 steps apart. Among the others,
@@ -290,7 +290,7 @@ hubs ([Power laws, real and apparent](power-laws-real-and-apparent.md),
 
 Peel away every agent with one connection or none, again and again, and what
 is left is a world's **core**
-([Core, trees and leaves](bridges.md#core-trees-and-leaves)). Its agents lie on a loop, or
+([Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)). Its agents lie on a loop, or
 on a path between loops. Everything peeled hangs off the core in trees.
 [Core, leaves and bridges](#core-leaves-and-bridges) found that the core holds
 more than half of the agents. This section looks inside it. How much of the
@@ -305,9 +305,9 @@ core.
 The core is where a world can hold anything together. Every connection in it
 lies on a loop or on a path between loops. Cutting one on a loop splits
 nothing: there is another way round. But a connection on a path between loops
-is a bridge, and its loss splits the core in two ([Bridges](bridges.md)). The
+is a bridge, and its loss splits the core in two ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)). The
 **cut risk** of a world is the largest share of it that one bridge holds to
-the rest ([Cut risk](bridges.md#cut-risk)). In one world of
+the rest ([Cut risk](measuring-networks.md#cut-risk)). In one world of
 [How a world breaks](how-a-world-breaks.md), a third to almost half of the
 world hung on a single connection, for 140 iterations. A tree is cut off whole
 by the loss of the one connection that holds it. So anything larger than an
@@ -428,13 +428,13 @@ tree of its connections that reaches every agent, a **spanning tree**. It has
 one connection fewer than the world has agents. Every other connection closes
 one loop with it, and none of these loops is a combination of the others. So a
 world has connections − agents + 1 **independent loops**, its **cycle rank**
-([Loops](bridges.md#loops)). That many connections, the right ones, could be cut
+([Loops](measuring-networks.md#loops)). That many connections, the right ones, could be cut
 without splitting the world. All of those loops are in the core:
 
 <!-- figure core/loops -->
 ![Loops, per agent and per core agent](../figures/core/loops.svg)
 
-**Loops, per agent and per core agent.** Every 25 iterations at the start of the game: the number of independent loops of a world — connections minus agents plus one, its cycle rank ([Loops](bridges.md#loops)) — divided by its agents and by the agents of its core, which holds every loop; and the mean number of connections a core agent has to other core agents. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Loops, per agent and per core agent.** Every 25 iterations at the start of the game: the number of independent loops of a world — connections minus agents plus one, its cycle rank ([Loops](measuring-networks.md#loops)) — divided by its agents and by the agents of its core, which holds every loop; and the mean number of connections a core agent has to other core agents. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -490,12 +490,12 @@ Two rulers measure a network's dimension
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
 The first counts the agents in a ball of radius *r*. In a space of *d*
 dimensions, their number grows like *r*^*d*
-([Dimension and curvature](ball-dimension-and-curvature.md)). The second
+([Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension)). The second
 releases a walker that steps at random. It asks how often the walker is back
 where it started after *t* steps: the more dimensions, the rarer
-([The spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension)). Both rulers are laid on the
+([The spectral dimension](measuring-space.md#the-spectral-dimension)). Both rulers are laid on the
 whole world, on its core alone, and on its **random twin**
-([The random twin: is a world a space?](random-twin.md)). The twin has the
+([The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space)). The twin has the
 same agents, each with as many connections, wired at random.
 
 <!-- figure core/dimension -->
@@ -582,19 +582,19 @@ the world has and its twin lacks is what the rules built.
 [How far apart are two agents?](#how-far-apart-are-two-agents) found two
 agents of a settled world a median 17.7 steps apart: that is the world's
 **mean path length**. Two more numbers describe its distances
-([Radius and diameter](path-length.md#radius-and-diameter)). The **diameter** is the
+([Radius and diameter](measuring-networks.md#radius-and-diameter)). The **diameter** is the
 distance between the two agents furthest apart. The **radius** is how far the
 most central agent has to reach to touch everyone.
 
 <!-- figure geometry/distances -->
 ![Three distances](../figures/geometry/distances.svg)
 
-**Three distances.** Every 25 iterations, in the 30 baseline worlds: the diameter, the radius and the mean path length, all estimated from breadth-first searches out of 8 to 16 spread agents ([Radius and diameter](path-length.md#radius-and-diameter)). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Three distances.** Every 25 iterations, in the 30 baseline worlds: the diameter, the radius and the mean path length, all estimated from breadth-first searches out of 8 to 16 spread agents ([Radius and diameter](measuring-networks.md#radius-and-diameter)). For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `diameter`, `radius` and `meanPathLength` of the rows with `phase` = 2.
 > 2. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
@@ -634,12 +634,12 @@ Stand on an agent and count the agents within *r* steps. This is the ball of
 close in one world. In a space of *d* dimensions the count grows like *r*^*d*.
 In a tree, or in a random network, it grows exponentially: by about the same
 factor with every step
-([Dimension and curvature](ball-dimension-and-curvature.md)).
+([Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension)).
 
 <!-- figure geometry/ball -->
 ![How many agents are within r steps](../figures/geometry/ball.svg)
 
-**How many agents are within r steps.** The world with seed 1 after its last game (14,870 agents). From 24 agents spread evenly through the list of ids, a breadth-first search counts how many agents lie within r steps; the dots are the means over the 24. Left, both axes logarithmic: a power law r^d — growth like a d-dimensional space — is a straight line of slope d; red is the line least squares fits up to the radius where half the world is reached. Right, only the vertical axis logarithmic: exponential growth, as in a tree or a random network, would be a straight line there ([Dimension and curvature](ball-dimension-and-curvature.md)).
+**How many agents are within r steps.** The world with seed 1 after its last game (14,870 agents). From 24 agents spread evenly through the list of ids, a breadth-first search counts how many agents lie within r steps; the dots are the means over the 24. Left, both axes logarithmic: a power law r^d — growth like a d-dimensional space — is a straight line of slope d; red is the line least squares fits up to the radius where half the world is reached. Right, only the vertical axis logarithmic: exponential growth, as in a tree or a random network, would be a straight line there ([Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension)).
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -673,12 +673,12 @@ thirty worlds in brackets:
 <!-- figure geometry/measures -->
 ![Four measures of a world's geometry](../figures/geometry/measures.svg)
 
-**Four measures of a world's geometry.** Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how balls grow ([Dimension and curvature](ball-dimension-and-curvature.md)), the box dimension ([Box dimension](ball-dimension-and-curvature.md#box-dimension)), and the spectral gap, on a logarithmic axis ([The spectral gap](path-length.md#the-spectral-gap)). In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Four measures of a world's geometry.** Every 25 iterations, in the 30 baseline worlds: the dimension and the curvature read off how balls grow ([Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension)), the box dimension ([Box dimension](measuring-space.md#box-dimension)), and the spectral gap, on a logarithmic axis ([The spectral gap](measuring-networks.md#the-spectral-gap)). In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `dimension`, `ricciCurvature`, `boxDimension` and `spectralGap` of the rows with `phase` = 2 (measured every 25 iterations).
 > 2. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
@@ -692,7 +692,7 @@ thirty worlds in brackets:
   steps, balls grow about as fast as in three-dimensional space, or faster.
 - **Curvature**: +1.4 (0.1 to 23), from −1.7 at the start. Positive curvature
   means that balls grow more slowly at larger *r* than at smaller, as on a
-  sphere ([Dimension and curvature](ball-dimension-and-curvature.md)). Here
+  sphere ([Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension)). Here
   that is mostly the bushy neighbourhoods of hubs, which fill the first steps
   of a ball. In a star, most agents are two steps from most others, through
   the centre (the 23). Read it as "the growth slows", not as a sphere.
@@ -723,12 +723,12 @@ Cover the world with boxes. A box of size ℓ is every agent within (ℓ − 1)/
 steps of a centre. The larger the boxes, the fewer are needed: in a space of
 *d* dimensions, their number falls like ℓ^−*d*. Halve the size of the boxes,
 and a line needs twice as many, a sheet four times as many
-([Box dimension](ball-dimension-and-curvature.md#box-dimension)).
+([Box dimension](measuring-space.md#box-dimension)).
 
 <!-- figure geometry/boxes -->
 ![Covering one world with boxes](../figures/geometry/boxes.svg)
 
-**Covering one world with boxes.** The world with seed 1 after its last game, covered by boxes: a box of size ℓ is every agent within (ℓ − 1)/2 steps of a centre, and centres are taken greedily, best-connected first, among the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: the least-squares line on logarithmic axes, whose slope is minus the box dimension ([Box dimension](ball-dimension-and-curvature.md#box-dimension)).
+**Covering one world with boxes.** The world with seed 1 after its last game, covered by boxes: a box of size ℓ is every agent within (ℓ − 1)/2 steps of a centre, and centres are taken greedily, best-connected first, among the agents no box holds yet. Dots: how many boxes it takes for ℓ = 1, 3, 5, 9, 17 and 33; red: the least-squares line on logarithmic axes, whose slope is minus the box dimension ([Box dimension](measuring-space.md#box-dimension)).
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -758,7 +758,7 @@ read 2.0.
 The **spectral gap** λ₂ measures, in one number, how hard a network is to cut
 into two large parts. It also says how quickly a random walk on it forgets
 where it started: after about 1/λ₂ steps
-([The spectral gap](path-length.md#the-spectral-gap)).
+([The spectral gap](measuring-networks.md#the-spectral-gap)).
 
 The world of seed 1 has λ₂ = 0.00095. Its random twin has 0.031:
 **thirty-three times larger** (thirty-two at 10,000 tokens). By Cheeger's
@@ -792,7 +792,7 @@ do the loops run?
 <!-- figure geometry/loops -->
 ![How many loops pass through an agent](../figures/geometry/loops.svg)
 
-**How many loops pass through an agent.** A breadth-first spanning tree of the world with seed 1 after its last game leaves 11,297 connections over, each closing one loop of a cycle basis ([Loops](bridges.md#loops)). For every count x, the share of agents that at least x of those loops pass through. 37% of the agents lie on none of them.
+**How many loops pass through an agent.** A breadth-first spanning tree of the world with seed 1 after its last game leaves 11,297 connections over, each closing one loop of a cycle basis ([Loops](measuring-networks.md#loops)). For every count x, the share of agents that at least x of those loops pass through. 37% of the agents lie on none of them.
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -1091,6 +1091,6 @@ checks it again.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (19)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Stars and hubs](stars-and-hubs.md) · [Distances in a network: path length, radius and diameter, the spectral gap](path-length.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [The random twin: is a world a space?](random-twin.md) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (15)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

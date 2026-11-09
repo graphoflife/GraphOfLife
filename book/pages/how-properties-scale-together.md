@@ -2,7 +2,7 @@
 
 > [!question] Questions of this page
 > - How do an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") grow with its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")? Is that the resting
->   state of the [even split](even-split.md "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.")
+>   state of the [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.")
 >   ([Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk))?
 > - How closely knit is the neighbourhood of a well-connected agent?
 > - To whom are the well-connected joined?
@@ -14,7 +14,7 @@ On average, agents hold tokens in proportion to their connections plus one:
 the resting state of the even split. The exponent that least squares fits to
 this, 0.58, is no law; it says only that most agents have one or two
 connections. Triangles grow in proportion to connections, and leaves hang on
-[hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."): the network is a hierarchy of stars, built by children joining their
+hubs: the network is a hierarchy of stars, built by children joining their
 parents' [neighbours](the-world.md#the-network "An agent joined to another by a connection."). How much an agent's tokens change in a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") follows its
 wealth only loosely. All four relations are nearly the same in every world:
 they belong to the rules, not to what the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") compute.
@@ -24,7 +24,7 @@ they belong to the rules, not to what the [brains](the-brain.md "The neural netw
 Does an agent with ten times the connections hold ten times the tokens? Plot
 every agent as a dot, its connections across and its tokens up. Use
 logarithmic axes, on which each step multiplies by the same factor
-([Logarithmic axes and power laws](correlation.md#logarithmic-axes-and-power-laws)). If tokens grew as a
+([Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws)). If tokens grew as a
 power of connections, *y* ≈ *a xᵇ*, the dots would gather around a straight
 line of slope *b*. That slope is the **exponent**. An exponent of 1 means in
 proportion; one of 0.5 means that ten times the connections bring about three
@@ -34,14 +34,14 @@ An agent has more such properties. Besides tokens and connections, there are
 its triangles, how closely knit its neighbourhood is, and how much its tokens
 change in a game. Every 25 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), the viewer fits four **scaling
 relations** between them by least squares on the logarithms of all agents
-([Scaling relations](degree.md#scaling-relations-between-agents-properties)). This page shows the agents behind
+([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). This page shows the agents behind
 the four fits. And it finds that one of the exponents means something quite
 different from what it seems to say.
 
 The worlds are the thirty [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](a-worlds-life.md#thirty-worlds)). The pictures show every
 agent alive after the last game of each world. Single worlds are measured
-every 25 iterations over their [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."). The page was first written from
+every 25 iterations over their settled life. The page was first written from
 the thirty worlds of 10,000 tokens; where those differ, their numbers are
 given beside.
 
@@ -50,7 +50,7 @@ given beside.
 <!-- figure scaling/tokens-degree -->
 ![Tokens against connections](../figures/scaling/tokens-degree.svg)
 
-**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](degree.md#scaling-relations-between-agents-properties)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](where-the-tokens-flow.md)).
+**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](where-the-tokens-flow.md)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -73,7 +73,7 @@ measured every 25 iterations over the settled life, it gives 0.59 (0.51 to
 together, 0.61 in single worlds). Ten times the connections, about four times
 the tokens?
 
-Now compare the white line, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of each class, with the cyan line:
+Now compare the white line, the median of each class, with the cyan line:
 tokens in proportion to *k* + 1. From about five connections on, the two run
 parallel. Why *k* + 1? An agent with *k* connections has *k* + 1 [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."):
 its own node and its neighbours' nodes. Under the even split, a game moves
@@ -130,7 +130,7 @@ exponent 0.6 is what it looks like through a log–log fit.
 Among your friends, how many are friends with each other? In a village, most;
 in a big city, few. The **clustering coefficient** of an agent with *k* ≥ 2
 neighbours asks the same. It is the share of the *k*(*k* − 1)/2 pairs of its
-neighbours that are joined to each other ([Clustering](degree.md#clustering)). Each
+neighbours that are joined to each other ([Clustering](measuring-networks.md#clustering)). Each
 joined pair makes a triangle with the agent, and these are its **triangles**.
 
 <!-- figure scaling/clustering-triangles -->
@@ -184,7 +184,7 @@ one connection each. How close are the worlds to that?
 <!-- figure scaling/neighbours -->
 ![Whom the well-connected are joined to](../figures/scaling/neighbours.svg)
 
-**Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](degree.md#assortativity)).
+**Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](measuring-networks.md#assortativity)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -208,7 +208,7 @@ hubs are surrounded by leaves**: the world is built of stars.
 
 There is a single number for this, the **assortativity** *r*: the correlation
 of the connections at the two ends of a connection
-([Assortativity](degree.md#assortativity)). It is −0.07 in the median world, and from
+([Assortativity](measuring-networks.md#assortativity)). It is −0.07 in the median world, and from
 −0.47 to +0.02 across the thirty (−0.11 at 10,000 tokens). That is mildly
 negative. And as the note explains, a world with a few large hubs comes out
 negative anyway. It has too few hubs for its hubs to be joined to. The curve
@@ -226,12 +226,12 @@ against what they hold after it.
 <!-- figure scaling/exponents -->
 ![Four scaling relations in the 30 worlds](../figures/scaling/exponents.svg)
 
-**Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](degree.md#scaling-relations-between-agents-properties)).
+**Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Average `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree` and `changeVsTokens`, and the same with `R2` appended, over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. One dot per run, a bar at the median.
@@ -283,7 +283,7 @@ world's history.
 ## How this was made
 
 Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") B1 at 100,000 tokens, [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30,
+below. They are worlds of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") B1 at 100,000 tokens, [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 to 30,
 run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
 them. The pictures of single agents read each world's frame after its last
 game. The exponents of single worlds are the viewer's, every 25 iterations
@@ -383,5 +383,5 @@ folded beneath it, which runs it reads and how.
 ← [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
 
 > [!info]- Pages that link here (11)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The even split](even-split.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Statistics: the tools of the notebook](statistics.md)
 <!-- /turns -->

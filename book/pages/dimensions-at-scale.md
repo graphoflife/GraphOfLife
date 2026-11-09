@@ -1,7 +1,7 @@
 # Dimensions at scale
 
 > [!question] Questions of this page
-> - Is a world's [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") the same over a few steps as over many, or does
+> - Is a world's dimension the same over a few steps as over many, or does
 >   it change with the scale, as it does in some models of quantum gravity?
 > - How much of what the rulers read is the edge of a world of finite size?
 > - Does a larger world read more at the same radius, and why?
@@ -48,11 +48,11 @@ gave the notebook two rulers. The first counts **room**: the agents within *r*
 steps of an agent grow like *r*^*d* in a space of *d* dimensions, and the
 local dimension *d*(*r*) is read between neighbouring radii. The second asks a
 **walker**: its chance of being back where it started falls like
-*t*^(−*d*/2) after *t* steps, and the [spectral dimension](ball-dimension-and-curvature.md#the-spectral-dimension "A network's dimension read from how a random walker spreads over it.") is read between *t*
+*t*^(−*d*/2) after *t* steps, and the spectral dimension is read between *t*
 and 2*t*. Both are dimensions at a scale: *d*(*r*) at a radius, the spectral
 dimension at a length of walk. On B1's largest worlds, of about 60,000
 agents, the balls of two of the three read **3.3** from radius 3 to 14, and
-walks read 1.8 to 1.9 in the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") from 4 steps to 400
+walks read 1.8 to 1.9 in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") from 4 steps to 400
 ([The rulers, on the worlds](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds)).
 Neither changed much with the scale.
 
@@ -82,7 +82,7 @@ same code.
 **The worlds** are B1's, from three experiments:
 
 - Experiment 8 ran the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") at ten sizes, from 800 to 409,600 tokens,
-  three [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, for 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
+  three [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, for 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
   ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
   Of its 30 worlds, 25 lived to the end: one of 1,600 tokens and every world
   of 3,200 tokens and more.
@@ -97,7 +97,7 @@ random walk from 48 agents for up to 1,024 steps. Its **typical ball** at
 radius *r* is the geometric mean of the hundred balls, the mean taken on a
 logarithmic scale, which a few huge balls cannot pull up much; its
 **typical distance** is the radius at which that ball holds half the world
-([The typical distance](random-twin.md#the-typical-distance)). Its random
+([The typical distance](measuring-space.md#the-typical-distance)). Its random
 twin, the same agents with as many links each but wired at random, is read
 beside it.
 
@@ -106,12 +106,12 @@ double or halve within a few hundred iterations, as games cut off parts of it
 and lines sweep through it ([How a world breaks](how-a-world-breaks.md)). One
 look at a world is one draw from that restlessness. So each world's balls,
 and its twin's, are also read at five moments spread evenly over its
-[settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."),
+[settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."),
 from iteration 500 to its last, and the world is summed up by the median of
 the five.
 
 Many of the smaller worlds are **stars**, held together by one hub joined to
-a tenth of all agents or more ([Stars and hubs](stars-and-hubs.md)). Through
+a tenth of all agents or more ([Stars and hubs](measuring-networks.md#stars-and-hubs)). Through
 its hub nearly every agent of a star is two steps from every other, and there
 is little room to measure. Five of Experiment 8's seven worlds below 10,000
 tokens are stars, 10 of the 26 of Experiment 2 and 7 of the 30 of Experiment
@@ -194,7 +194,7 @@ and a fall once a typical ball nears a quarter of the world.
 > 1. Read the frame after each world's last game; build its network from `edges` and keep its largest piece (`book_chapters.space.largest_piece`). Its random twin: the same numbers of links per agent wired at random (`book_graph.degree_preserving`, seed 23), its largest piece.
 > 2. Balls: a breadth-first search all the way out from each of 100 agents drawn at random (seed 23); N(r) the geometric mean of the numbers within r steps; d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), read while N(r+1) is less than a quarter of the piece (`book_chapters.scaledims.reach` and `ball_curve`).
 > 3. Walks: a lazy random walk (stay with probability ½, else step to a neighbour drawn at random) from each of 48 agents drawn at random, its distribution propagated exactly, for up to 1,024 steps; P(t) the probability of being back at the start minus that of being there at rest (the walk is reversible, so the chance to be back after 2m steps follows from where it is after m, and half the steps are propagated); d(t) = −2 · ln(P(2t)/P(t)) / ln 2 on a grid of t of ratio √2, read while P(2t) is above 5/n (`walk` and `walk_curve`).
-> 4. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](stars-and-hubs.md); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
+> 4. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
 > 5. The same balls, of each world and of its twin, after the games of five iterations evenly spaced over its settled life, from 500 to its last (500, 525, 550, 574 and 599 in Experiment 8; 500, 750, 1,000, 1,249 and 1,499 in Experiment 10; 500, 1,125, 1,750, 2,374 and 2,999 in Experiment 2); each reading the median of the five (`book_chapters.scaledims.settled`).
 > 6. In the three worlds of 409,600 tokens, the same 48 walks for up to 8,192 steps (`book_chapters.scaledims.long_reading`).
 > 7. Each line: at every radius (or walk), the median over the worlds of that size (and, for the balls, their five moments) that read there, where at least half of them do.
@@ -260,7 +260,7 @@ reads 1.3 to 1.5 beyond 700 steps.
 **The twins have no plateau at any size.** A typical ball holds a quarter of
 a twin within three or four steps, and on the way the twin reads 4.5 at
 1,400 agents and 8.0 at 64,000, more the larger it is: the mark of a small
-world ([The random twin](random-twin.md)).
+world ([The random twin](measuring-space.md#the-random-twin-is-a-world-a-space)).
 
 ## One radius, every size
 
@@ -281,7 +281,7 @@ only as a body's do, and stop where a body's stop.
 >
 > 1. Read the frame after each world's last game; build its network from `edges` and keep its largest piece (`book_chapters.space.largest_piece`). Its random twin: the same numbers of links per agent wired at random (`book_graph.degree_preserving`, seed 23), its largest piece.
 > 2. Balls: a breadth-first search all the way out from each of 100 agents drawn at random (seed 23); N(r) the geometric mean of the numbers within r steps; d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), read while N(r+1) is less than a quarter of the piece (`book_chapters.scaledims.reach` and `ball_curve`).
-> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](stars-and-hubs.md); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
+> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
 > 4. The same balls, of each world and of its twin, after the games of five iterations evenly spaced over its settled life, from 500 to its last (500, 525, 550, 574 and 599 in Experiment 8; 500, 750, 1,000, 1,249 and 1,499 in Experiment 10; 500, 1,125, 1,750, 2,374 and 2,999 in Experiment 2); each reading the median of the five (`book_chapters.scaledims.settled`).
 > 5. Bodies: the n points of a square or cubic grid nearest its centre (and any as near as the last), each linked to the points beside it that are inside too (`book_chapters.scaledims.body`), for n = 250, 500, … 64,000; read as the worlds are. The endless grids' balls are counted exactly: Σₖ 2ᵏ·C(d, k)·C(r, k) points within r steps.
 >
@@ -304,7 +304,7 @@ against 2.3 to 2.65 for the balls of a grid and 2.80 with no edge.
 So the edge is not what lifts the larger worlds. What does? Within one size,
 the worlds that read more over their first few steps are those with bigger
 hubs or more links. Across Experiment 10's 23 worlds that are not stars, the
-rank [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of the reading over radii 3 to 6 with the links of the
+rank [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of the reading over radii 3 to 6 with the links of the
 best-linked agent is +0.61; across Experiment 2's 16, with the links per
 agent, +0.40. And the larger worlds have both. The best-linked agent of the
 median world has 60 links at 1,400 agents, 410 at 14,600 and 1,215 at
@@ -343,7 +343,7 @@ Here the width is the typical distance.
 >
 > 1. Read the frame after each world's last game; build its network from `edges` and keep its largest piece (`book_chapters.space.largest_piece`). Its random twin: the same numbers of links per agent wired at random (`book_graph.degree_preserving`, seed 23), its largest piece.
 > 2. Balls: a breadth-first search all the way out from each of 100 agents drawn at random (seed 23); N(r) the geometric mean of the numbers within r steps; d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), read while N(r+1) is less than a quarter of the piece (`book_chapters.scaledims.reach` and `ball_curve`).
-> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](stars-and-hubs.md); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
+> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
 > 4. The same balls, of each world and of its twin, after the games of five iterations evenly spaced over its settled life, from 500 to its last (500, 525, 550, 574 and 599 in Experiment 8; 500, 750, 1,000, 1,249 and 1,499 in Experiment 10; 500, 1,125, 1,750, 2,374 and 2,999 in Experiment 2); each reading the median of the five (`book_chapters.scaledims.settled`).
 > 5. Bodies: the n points of a square or cubic grid nearest its centre (and any as near as the last), each linked to the points beside it that are inside too (`book_chapters.scaledims.body`), for n = 250, 500, … 64,000; read as the worlds are. The endless grids' balls are counted exactly: Σₖ 2ᵏ·C(d, k)·C(r, k) points within r steps.
 > 6. The typical distance: the radius at which N(r) first reaches half the piece, between whole steps by the logarithm of N (`book_chapters.scaledims.half_reach`, as `research/atlas/space.py` reads it).
@@ -354,7 +354,7 @@ Here the width is the typical distance.
 
 In Experiment 8, over their settled lives, B1's worlds widen as
 agents^0.20 (95% interval 0.15 to 0.27); with Experiments 2 and 10 beside
-them, as agents^0.23 (0.19 to 0.27). Their [diameters](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world."), the longest distances
+them, as agents^0.23 (0.19 to 0.27). Their diameters, the longest distances
 found, widen a little faster: as agents^0.26 (0.22 to 0.30), and 0.27 (0.24
 to 0.31). The ruler itself is sound. The ball of a cubic grid widens as
 points^0.34 to 0.35 and the disc as points^0.51, close to 1/3 and 1/2. And
@@ -397,7 +397,7 @@ has at each size.
 >
 > 1. Read the frame after each world's last game; build its network from `edges` and keep its largest piece (`book_chapters.space.largest_piece`). Its random twin: the same numbers of links per agent wired at random (`book_graph.degree_preserving`, seed 23), its largest piece.
 > 2. Balls: a breadth-first search all the way out from each of 100 agents drawn at random (seed 23); N(r) the geometric mean of the numbers within r steps; d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), read while N(r+1) is less than a quarter of the piece (`book_chapters.scaledims.reach` and `ball_curve`).
-> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](stars-and-hubs.md); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
+> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
 > 4. The same balls, of each world and of its twin, after the games of five iterations evenly spaced over its settled life, from 500 to its last (500, 525, 550, 574 and 599 in Experiment 8; 500, 750, 1,000, 1,249 and 1,499 in Experiment 10; 500, 1,125, 1,750, 2,374 and 2,999 in Experiment 2); each reading the median of the five (`book_chapters.scaledims.settled`).
 > 5. Width: the typical distance over the twin's, at each moment; its median over the five. Fit log width against log agents over B1's worlds that are not stars (`gol_analysis.power_fit`).
 > 6. Round 3: each world's `averages.width` and `averages.agents` in `health.json`, and `set.mend_on_death`; nothing is measured again.
@@ -461,7 +461,7 @@ to its typical distance, and in Experiment 8 that distance grows as
 agents^0.20. So to read the balls half as far out again as on the largest
 worlds, to radius 30 or so, a world would need about seven times their
 tokens, some 3 million. By the notebook's own estimate of what a run costs
-([What a simulation costs](what-a-simulation-costs.md)), 600 iterations of
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)), 600 iterations of
 it would take 2.8 days and 65 GB of memory. To read them twice as far out,
 to radius 40, it would need 12 million tokens: 11 days and 260 GB. And it
 would need several seeds of each, since one world's hub can bend its whole
@@ -482,7 +482,7 @@ few steps grows with the world, through its hubs. A dimension that belongs to
 the size of a world is not yet the dimension of a space. A world whose rules
 gave it the same make-up at every size would be the test.
 
-**For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.")**, what counts is room for regions to evolve
+**For [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.")**, what counts is room for regions to evolve
 apart. In the largest worlds, a typical agent has half its world within 27
 steps (the median of their settled lives), and in the worlds of 100,000
 tokens a line of descent holds a patch out to about 12 steps
@@ -537,7 +537,7 @@ which it widens faster as it grows.
   world.
 - [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md): the
   experiment whose worlds this page reads at nine of its ten sizes.
-- [Stars and hubs](stars-and-hubs.md): the hubs that give larger worlds more
+- [Stars and hubs](measuring-networks.md#stars-and-hubs): the hubs that give larger worlds more
   room close in.
 - [Physical inspiration](physical-inspiration.md): the physics behind the
   hope for a space of three dimensions.
@@ -572,7 +572,7 @@ figures again: `python3 book_figures.py scaledims`; the code is
   `GraphOfLifeRuns/.book/bodies/`.
 - **Stars.** A world whose best-linked agent was joined, on average from
   iteration 500 to its end, to a tenth of its agents or more
-  ([Stars and hubs](stars-and-hubs.md)).
+  ([Stars and hubs](measuring-networks.md#stars-and-hubs)).
 - **Round 3.** Its 82 worlds that lived to the end of their runs, as
   `research/screen/health.json` holds them (made by
   `research/screen/health.py`); nothing of them was measured again.
@@ -724,7 +724,7 @@ figures.
 <!-- turns -->
 ---
 
-← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [Which properties have no scale?](which-properties-have-no-scale.md) →
+← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [Which properties have no scale?](which-properties-have-no-scale.md) →
 
 **Also about:** [Size and riches of a world](../README.md#size-and-riches-of-a-world), [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 

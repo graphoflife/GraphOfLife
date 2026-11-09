@@ -38,14 +38,14 @@ for the poorest neighbour that is not one of its team: a *stranger*. If it
 is sure to take that neighbour's node, it stakes all it can there; otherwise
 it keeps everything at home. When it holds 30 tokens or more, it has a child
 with a third of them. Raiders know their teammates by a password they write
-into their [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), so they never raid each other.
+into their messages, so they never raid each other.
 
 Planted as 5% of an evolved B2 world at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000, the raider took half
 of some worlds. Those worlds had never met a raider. Do worlds that evolve
 longer get harder to raid?
 
 Three answers are possible, and each says something different about
-[open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau."):
+open-ended evolution:
 - **The door stays open.** Later worlds are raided as easily as early ones.
   Evolution does not find the defence any more than it found the raid, so
   better play lies across a valley it does not cross. The next step is to
@@ -56,7 +56,7 @@ Three answers are possible, and each says something different about
 - **The door closes, and nothing opens.** Later worlds resist every raid
   tried: a top, at least for these brains.
 
-Each planting is an [invasion test](eras-and-contests.md#the-invasion-test):
+Each planting is an [invasion test](measuring-evolution.md#the-invasion-test):
 - **The patch.** An agent is drawn at random, then its nearest neighbours,
   step by step, until the patch holds 5% of the world.
 - **The planting.** Every agent of the patch gets the raider's rule in place
@@ -79,7 +79,7 @@ one.
 
 Experiment 30 plants raiders, 5% of a world in three places each, in B2's
 five worlds played on to 10,000 iterations. These are Experiment 16's worlds,
-played on as [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules. The raiders are planted at
+played on as [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") of the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s own rules. The raiders are planted at
 iterations 500, 2,000, 5,000 and 10,000, and each planting has its control.
 The test is the one of
 [How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs).
@@ -180,7 +180,7 @@ Experiment 30's fifteen plantings at 2,000 repeat fifteen of Experiment 29's
 exactly. Its long runs begin from Experiment 16's worlds at 2,000, and the
 places are the same. So they are counted once, as Experiment 29's.
 
-A patch planted at 500 held a [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") of 3.85 tokens per agent; one planted
+A patch planted at 500 held a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of 3.85 tokens per agent; one planted
 at 5,000 or 10,000 held 2.0. At 2,000 the median was 2.36 over Experiment
 29's sixty plantings, and 2.26 over the fifteen that Experiment 30 repeated.
 The
@@ -224,7 +224,7 @@ Does a world of many small agents shut out a group too? Stakes from several
 agents do not simply add up. A node goes to the
 largest single stake, the holder's own counting one and a half times. The
 one exception is a band of revolutionaries who together outweigh it
-([How a coalition takes a node](revolution.md)).
+([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
 
 The **crew** raider uses that:
 - **Its rule:** it stakes all it can on the weakest stranger next door that
@@ -873,5 +873,5 @@ section to `book/results/b1raiders.json`.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going), [Groups and cooperation](../README.md#groups-and-cooperation), [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
 > [!info]- Pages that link here (7)
-> [How a coalition takes a node](revolution.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Who helps whom](who-helps-whom.md)
+> [The rules in detail](rules-in-detail.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Who helps whom](who-helps-whom.md)
 <!-- /turns -->

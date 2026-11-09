@@ -4,7 +4,7 @@
 > - What does every simulation made so far look like when all of them are
 >   measured the same way?
 > - Along which directions do the worlds differ most?
-> - Which statistics do the [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") decide, and which does the [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."): the
+> - Which statistics do the [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") decide, and which does the [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."): the
 >   chance a world is born with?
 > - Which measures has the notebook applied to which kinds of world, and which
 >   not yet?
@@ -23,8 +23,8 @@ table shows which measures have been taken on which worlds.
 
 Each page of the notebook measured the worlds of one experiment, or of a
 few. That is how experiments are read: one change against its control. But by
-16 October 2026 the notebook had made **369 [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") worlds** in fifteen
-experiments, and about a hundred [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds besides. Each was measured only
+16 October 2026 the notebook had made **369 lab worlds** in fifteen
+experiments, and about a hundred pilot worlds besides. Each was measured only
 for what its own page asked. This page puts them all in one table, and looks
 at them together. It builds nothing new into the worlds; it gathers what is
 there.
@@ -32,7 +32,7 @@ there.
 ## One table for every world
 
 A lab run records about ninety-five statistics after every phase of every
-iteration ([What a run records](frames-and-stats.md)). A pilot world keeps
+iteration ([What a run records](runs-and-records.md#what-a-run-records)). A pilot world keeps
 only a few of them, and its checkpoints. To compare them,
 `research/atlas/across.py` takes every world over the same stretches of
 iterations: 400–499, 900–999, 1,900–1,999, and the last fifth of its life. It
@@ -55,10 +55,10 @@ Each world is a dot, coloured by its rule set and named when you point at it.
 
 Which directions do the worlds differ in most? Take the statistics that do
 not grow with the size of a world. They are shares, means and ratios, and the
-counts of births, deaths and [revolutions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") divided by the agents. Standardise each,
+counts of births, deaths and [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.") divided by the agents. Standardise each,
 and find the principal components: the directions along which the cloud of
 worlds is longest
-([How many directions a cloud of points uses](effective-number.md#how-many-directions-a-cloud-of-points-uses)).
+([How many directions a cloud of points uses](statistics.md#how-many-directions-a-cloud-of-points-uses)).
 
 <!-- figure side_by_side/components -->
 ![Every lab world on its first two components](../figures/side_by_side/components.svg)
@@ -87,7 +87,7 @@ between. It is made of how agents play:
   (`selfAllocationShare`, `heldHomeShare`);
 - how many revolutions there are, and how much of the world sits in its core.
 
-Experiments changed many settings in B2: [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") rates, what a parent keeps,
+Experiments changed many settings in B2: [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") rates, what a parent keeps,
 old age, random inputs, valence, mending, links at birth, handing links over.
 Every one of them moved its worlds only within the left cloud. Without
 mending, and with handover, the worlds moved furthest, about a third of the
@@ -100,7 +100,7 @@ found the same in the flow. Where a link must carry tokens to survive, agents
 stake on each other, and play the way B1's agents play.
 
 The second component (14%) is how much a world breeds. It holds births, the
-share of tokens given to children, handovers, and the long tail of [degrees](degree.md "The number of an agent's connections: how many neighbours it has.")
+share of tokens given to children, handovers, and the long tail of [degrees](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has.")
 that breeding builds. It is spread wide only in one kind of world: the B1 worlds
 whose [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") never change (yellow). Some of them breed every agent every
 iteration, and others not at all
@@ -111,7 +111,7 @@ iteration, and others not at all
 For each statistic, how much of its spread between worlds lies *between*
 conditions, rather than between seeds of one condition? That share is **eta
 squared**. It is the same split of variance as in
-[Between worlds and within them](variance-split.md#between-worlds-and-within-them);
+[Between worlds and within them](statistics.md#between-worlds-and-within-them);
 here the groups are the 35 conditions of the fifteen experiments.
 
 <!-- figure side_by_side/decided -->
@@ -134,12 +134,12 @@ here the groups are the 35 conditions of the fifteen experiments.
 | spread or all in (`spreadShare`) | 0.99 | tokens given to children (`reproTokenShare`) | 0.29 |
 | the fewest links (`minDegree`) | 0.96 | agents cut off (`orphaned`) | 0.27 |
 | kept at home (`selfAllocationShare`) | 0.95 | tokens per agent (`meanTokens`) | 0.24 |
-| brains per agent (`brainDiversity`) | 0.94 | its [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") (`medianTokens`) | 0.22 |
+| brains per agent (`brainDiversity`) | 0.94 | its median (`medianTokens`) | 0.22 |
 | own node held (`heldHomeShare`) | 0.91 | curvature of the network (`ricciCurvature`) | 0.22 |
 | flow that runs one way (`flowImbalance`) | 0.88 | flow per link (`meanEdgeFlow`) | 0.19 |
-| net ÷ staked flow (`netFlowShare`) | 0.87 | [net flow](token-flow.md "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") on [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") (`netCyclingShare`) | 0.16 |
+| net ÷ staked flow (`netFlowShare`) | 0.87 | [net flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation "The tokens a game moves along each connection, from the agent who stakes to the node staked on.") on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") (`netCyclingShare`) | 0.16 |
 | revolutions per agent | 0.87 | the poorest agent (`minTokens`) | 0.15 |
-| [evenness](gini-coefficient.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of wealth (`tokenEntropy`) | 0.82 | starved per agent | 0.14 |
+| [evenness](measuring-tokens.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.") of wealth (`tokenEntropy`) | 0.82 | starved per agent | 0.14 |
 | agents in the core (`coreShare`) | 0.81 | fit of the degree law (`degreeGammaR2`) | 0.13 |
 
 The settings decide **how agents play**: whether they spread or go all in,
@@ -153,9 +153,9 @@ worlds of different rules. That is because they are set by what happens early,
 and by chance. The same was seen inside one condition in
 [What goes with what](what-goes-with-what.md#between-worlds). There, half the
 differences between thirty [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds are the size of their largest
-[hub](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.").
+[hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.").
 
-For [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") this is worth keeping in mind. The things evolution
+For open-ended evolution this is worth keeping in mind. The things evolution
 could change, how agents play, are pinned by the rules. The things left free
 are decided by chance, early, and then stay.
 
@@ -166,13 +166,13 @@ worlds that question was about. Gathered:
 
 | measure | lab worlds | pilot worlds |
 |---|---|---|
-| the ~95 recorded statistics, [lightning](token-flow.md#lightning-tokens-that-go-round "A closed loop of the flow of a game: tokens that go round and come back where they started.") among them | every run | the engine's pilots, from recorded games; the prototype's, their series |
+| the ~95 recorded statistics, [lightning](measuring-tokens.md#lightning-tokens-that-go-round "A closed loop of the flow of a game: tokens that go round and come back where they started.") among them | every run | the engine's pilots, from recorded games; the prototype's, their series |
 | flow modules ([Flow modules: the groups tokens stay in](flow-modules.md)) | up to five seeds of every condition | the engine's pilots |
-| loops and the exact [circulation](token-flow.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
-| lifetime contests between eras ([A contest a lifetime long](eras-and-contests.md#a-contest-a-lifetime-long)) | B2, through the long runs that go on from its worlds | every pilot batch |
+| loops and the exact [circulation](measuring-tokens.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
+| lifetime contests between eras ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)) | B2, through the long runs that go on from its worlds | every pilot batch |
 | correlations among agents ([What goes with what](what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab | any run made on the server or in the browser |
 | how different the agents are ([How different are the agents?](how-different-are-the-agents.md)) | B1 and B2, over a world's life | the long runs |
-| exploitability ([Exploitability](eras-and-contests.md#exploitability)) | Experiment 16 | — |
+| exploitability ([Exploitability](measuring-evolution.md#exploitability)) | Experiment 16 | — |
 
 Two things are still missing. One is the lifetime contests for the lab's B1
 worlds, whose runs keep no archives of their brains. The other is every
@@ -196,15 +196,15 @@ fewer, which the notebook no longer makes.
 
 - [Every simulation: what was run, and what was measured](every-simulation.md):
   the catalogue of every experiment and pilot batch.
-- [What a run records](frames-and-stats.md): the statistics in the table.
-- [Splitting variation](variance-split.md): the split behind eta squared.
+- [What a run records](runs-and-records.md#what-a-run-records): the statistics in the table.
+- [Splitting variation](statistics.md#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them): the split behind eta squared.
 - [What goes with what](what-goes-with-what.md): the correlations inside the
   worlds.
 
 <!-- turns -->
 ---
 
-[Methods and statistics](../README.md#methods-and-statistics) · [The lab, the engine and pilots](the-lab.md) →
+[Methods and statistics](../README.md#methods-and-statistics) · [How worlds are measured](how-worlds-are-measured.md) →
 
 > [!info]- Pages that link here (4)
 > [Where tokens flow](where-the-tokens-flow.md) · [Healthy and rich](healthy-and-rich.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)

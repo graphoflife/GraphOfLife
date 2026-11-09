@@ -25,7 +25,7 @@ pulled back to its level: nothing points to a critical state.
 
 Most quantities have a typical size. People's heights gather around an
 average, and nobody is ten times as tall as anyone else. Other quantities
-have no typical size at all. In the worlds of this page, the [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") agent
+have no typical size at all. In the worlds of this page, the median agent
 holds 5 tokens, and a few hold thousands.
 
 A **power law** is the purest case of no typical size. A quantity *k*
@@ -36,10 +36,10 @@ divides it by 8.
 
 Such a distribution is easiest to see through the share of values **at
 least** *k*: the complementary cumulative distribution, or CCDF
-([The degree distribution](degree.md#the-degree-distribution)). For a power
+([The degree distribution](measuring-networks.md#the-degree-distribution)). For a power
 law it falls as *k*^−(γ−1). On log–log axes, where both axes are
 logarithmic, that is a straight line of slope 1 − γ
-([Logarithmic axes](correlation.md#logarithmic-axes-and-power-laws)).
+([Logarithmic axes](statistics.md#logarithmic-axes-and-power-laws)).
 
 Power laws have a special place in the study of complex systems. Networks
 whose numbers of connections follow one are called **scale-free**
@@ -74,7 +74,7 @@ small example. The sections after it apply the method to the worlds.
 
 The obvious way is to draw the CCDF on log–log axes and fit a straight line
 through it. The viewer's `degreeExponent` and `tokenExponent` are exactly
-that. Each is the [least-squares line](correlation.md#fitting-a-straight-line)
+that. Each is the [least-squares line](statistics.md#fitting-a-straight-line)
 of ln *P*(≥ *k*) on ln *k*, one point for each distinct value, and the
 exponent is 1 − slope.
 
@@ -156,7 +156,7 @@ curve might be too.
 
 The viewer does not run this test; the analysis behind this page does. Each
 sample draws its values below *k*_min from the data's own, and its tail from
-the fitted law. The world of [seed](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 gets 200 samples, and every other fit 100.
+the fitted law. The world of [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 1 gets 200 samples, and every other fit 100.
 
 **Does a different law fit as well?** A **log-normal**, a distribution whose
 logarithm is normal, often fits as well over the range one has. So does a
@@ -210,7 +210,7 @@ is 0.068. Samples drawn from the fitted law show a gap at least as large in
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Average `degreeGamma`, `degreeExponent`, `tokenExponent`, `degreeTailShare` and `degreeGammaKS` over the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. One dot per run, a bar at the median.
@@ -218,7 +218,7 @@ is 0.068. Samples drawn from the fitted law show a gap at least as large in
 > **To make it again:** `python3 book_figures.py powerlaws`.
 <!-- /figure -->
 
-Across the worlds, over their [settled life](median-and-quantiles.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."):
+Across the worlds, over their settled life:
 
 - maximum likelihood finds the tail from about 21 connections, holding 1.1%
   of the agents (0.7% to 1.6%), with γ = 3.04 (2.40 to 4.11);
@@ -249,7 +249,7 @@ chances.
 
 The well connected then gain connections in proportion to their
 connections. That is
-[preferential attachment](degree.md#preferential-attachment-and-its-kernel)
+[preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel)
 (Barabási and Albert 1999), reached here by copying. The "duplication"
 models of protein networks reach it the same way (Vázquez, Flammini, Maritan
 and Vespignani 2003; Chung, Lu, Dewey and Galas 2003). Preferential
@@ -266,7 +266,7 @@ The same mechanism came back when [brains](the-brain.md "The neural network each
 ([What the game adds](a-world-that-cannot-break.md#what-the-game-adds)). A
 brain that chooses a newborn's links ranks its candidates by what it sees of
 them. Whatever it favours, the well connected are among the candidates more
-often, because they are the neighbours of more agents. In [pilots](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") in
+often, because they are the neighbours of more agents. In pilots in
 which the brains chose a newborn's two extra links, the best-connected agent
 was joined to 30% of the world. So the second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), draws two of
 a newborn's links at random from its parent's neighbours. And it caps at
@@ -322,7 +322,7 @@ tokens to the richest agent, at about 3,300 tokens: two decades.
 
 ### Are the richest the hubs?
 
-Are the richest rich because they are [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub.")? If tokens were a fixed function of
+Are the richest rich because they are hubs? If tokens were a fixed function of
 connections, the two tails would be tied together. A token tail heavier than
 the connection tail would then need the hubs to hold *more* tokens per
 connection than everyone else.
@@ -364,7 +364,7 @@ not the largest. The [cleanup](one-iteration.md#cleanup "The end of every phase:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. Take `orphaned` and `starved` of every row with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499.
 > 2. For each n that occurs, the share of rows with at least n.
@@ -400,18 +400,18 @@ and whether they can be foreseen.
 
 How does a world's number of agents move over time? The **power spectrum**
 splits the movement into rhythms, and says how much of it happens at each
-([The power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)).
+([The power spectrum](statistics.md#the-power-spectrum-of-a-time-series)).
 A slow drift puts its power at low frequencies, a quick jitter at high ones.
 
 <!-- figure powerlaws/spectrum -->
 ![The rhythm of the wander](../figures/powerlaws/spectrum.svg)
 
-**The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](autocorrelation.md#the-power-spectrum-of-a-time-series)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 1,499, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 30 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
+**The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](statistics.md#the-power-spectrum-of-a-time-series)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 1,499, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 30 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For each run, take `nodes` of the rows with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499 (1,000 values); subtract the least-squares straight line.
 > 2. Multiply by a Hann window and take |FFT|², the power at frequencies k/1,000, k = 1 … 500; divide by the total.
@@ -429,7 +429,7 @@ flattens a little. The world does not keep walking away: something pulls it
 back. A random walk with a pull back to a level is the Ornstein–Uhlenbeck
 process. Its spectrum is flat below a corner and falls as *f*^−2 above it.
 Here the corner fits a pull that takes a few hundred iterations to act. The
-[autocorrelation](autocorrelation.md) of 0.61 after 100 iterations, found in
+[autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum) of 0.61 after 100 iterations, found in
 [How much does the seed decide?](how-much-does-the-seed-decide.md#a-world-forgets),
 fits it too.
 
@@ -458,7 +458,7 @@ scale. The world forgets.
   an experiment.
 - **No sign of a critical state.** No avalanches of every size, no 1/*f*
   noise: disturbances die out within a few hundred iterations, and the world
-  is pulled back to its level. Some theories tie [open-ended evolution](open-ended-test.md "Evolution that keeps producing new things without end, not only up to a plateau.") to
+  is pulled back to its level. Some theories tie [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") to
   criticality: to systems on the edge between order and chaos, where small
   causes can have effects of every size. Whatever the truth of that, this
   world is not on such an edge. It is a world that wanders and returns
@@ -466,13 +466,13 @@ scale. The world forgets.
 
 ## Where to go next
 
-- [Preferential attachment and its kernel](degree.md#preferential-attachment-and-its-kernel):
+- [Preferential attachment and its kernel](measuring-networks.md#preferential-attachment-and-its-kernel):
   who gains new connections, and what that does to the tail.
 - [Gains and losses](gains-and-losses.md): what a game does to the rich and
   to the poor.
 - [How a world breaks](how-a-world-breaks.md): where the lumps of death come
   from, and whether they can be foreseen.
-- [Two numbers together](correlation.md): least squares, R² and logarithmic
+- [Two numbers together](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes): least squares, R² and logarithmic
   axes, the tools this page says to use with care.
 
 ## How this was made
@@ -614,6 +614,6 @@ history (`git show 82062d7:book/figures/powerlaws/tokens-fit.svg`).
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (16)
-> [Glossary](glossary.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What a run records](frames-and-stats.md) · [Two numbers together: correlation, a fitted line and logarithmic axes](correlation.md) · [How long a world remembers: autocorrelation and the power spectrum](autocorrelation.md)
+> [!info]- Pages that link here (15)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Glossary](glossary.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md)
 <!-- /turns -->

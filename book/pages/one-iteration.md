@@ -46,7 +46,7 @@ into the other. Each has a page of its own, with examples.
 **A share from two numbers.** Many decisions come out of the brain as a pair
 of real numbers (*a*, *b*), to be turned into a share between 0 and 1.
 Negative values count as zero, and the share is *a*'s part of the total
-([The share function f(a, b)](share-function.md)):
+([The share function f(a, b)](rules-in-detail.md#the-share-function-fa-b)):
 
 $$
 f(a, b) = \frac{\max(a, 0)}{\max(a, 0) + \max(b, 0)}, \qquad f(a, b) = \tfrac12 \ \text{ if } a \le 0 \text{ and } b \le 0 .
@@ -61,7 +61,7 @@ the brain says yes and no. The second, (*m*₁, *m*₂), says how it wants the
 first pair read. If *m*₁ > *m*₂, the answer is yes with probability
 *f*(*y*, *n*). Otherwise the larger of *y* and *n* wins outright, and an
 exact tie is decided by a fair coin
-([A yes-or-no decision](binary-decision.md)). Say (*y*, *n*) = (0.8, 1.2).
+([A yes-or-no decision](rules-in-detail.md#a-yes-or-no-decision)). Say (*y*, *n*) = (0.8, 1.2).
 Read as a probability, the answer is yes four times in ten; read sharply, it
 is always no.
 
@@ -73,7 +73,7 @@ agents stake that way ([What the brains are like](what-the-brains-are-like.md)).
 Every candidate first gets its exact share rounded down. The tokens left over
 then go one each to the candidates that lost the most in the rounding: the
 *largest-remainder* method. No token is lost or made
-([Splitting tokens into whole numbers](largest-remainder.md)).
+([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)).
 
 For example, split 11 tokens by the scores (2, 1, −0.5, 0.5). The negative
 score counts as 0, so the scores add up to 3.5, and the exact shares are
@@ -92,18 +92,18 @@ parent chooses whom the child is joined to, and may hand it some of its own
 
 Exactly, the phase runs in six steps.
 
-1. **Measure.** The tokens and [degree](degree.md "The number of an agent's connections: how many neighbours it has.") of every agent, and the summaries of
+1. **Measure.** The tokens and [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has.") of every agent, and the summaries of
    every neighbourhood, are measured once, now. Every decision in this phase
    reads these numbers. So the order in which agents act does not change what
    they see.
 2. **Everyone speaks.** Every agent looks at its candidates — itself and its
    neighbours, in increasing order of id — and writes a message to each. A
    message is a list of numbers that the other's brain will read. The
-   messages are delivered before anyone acts ([Messages](messages.md)).
+   messages are delivered before anyone acts ([Messages](rules-in-detail.md#messages)).
 3. **Every agent with tokens decides.** The agents are taken one at a time,
    in increasing order of id. Agent *u*, holding τ(*u*) ≥ 1 tokens, looks at
    its candidates again. Its brain gives one column of outputs per candidate
-   ([What a brain says](brain-outputs.md)). From them:
+   ([What a brain says](rules-in-detail.md#what-a-brain-says)). From them:
    - **How much to give a child.** The two child-share outputs are averaged
      over all of *u*'s columns, giving (*ā*, *b̄*). The child gets the share
      *f*(*ā*, *b̄*) of the parent's tokens, rounded down:
@@ -113,7 +113,7 @@ Exactly, the phase runs in six steps.
    - **The child is born.** It gets a new node and the next unused id, and
      holds *c* tokens; the parent keeps τ(*u*) − *c*. The child's brain is a
      copy of the parent's, which then changes with probability 0.2
-     ([How a brain changes](mutation.md)). A changed brain is a new [genotype](genotype.md "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."):
+     ([How a brain changes](rules-in-detail.md#how-a-brain-changes)). A changed brain is a new [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."):
      a new identity, passed on to its copies.
    - **Whom the child joins.** For each candidate, the parent itself
      included, a yes-or-no decision: join the child to it or not. These
@@ -183,7 +183,7 @@ Exactly, the phase runs in nine steps.
    order. The winner is the member at whose part the running sum first
    exceeds (*R* + *H*)/2. Members with equal parts are added together, and
    one of them is drawn at random. If the coalition does not win, the hegemon
-   does. [How a coalition takes a node](revolution.md) derives this rule from
+   does. [How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node) derives this rule from
    the program's and works an example.
 
    Whoever wins, two things happen to node *v*. It takes on a **copy of the
@@ -197,7 +197,7 @@ Exactly, the phase runs in nine steps.
 6. **Messages** are delivered.
 7. **Cleanup** (below).
 8. **Change.** Every brain in the world changes with probability 0.2,
-   independently, brain by brain ([How a brain changes](mutation.md)).
+   independently, brain by brain ([How a brain changes](rules-in-detail.md#how-a-brain-changes)).
 9. **Forgetting.** Messages to or from anyone who is no longer a neighbour
    are deleted.
 
@@ -236,9 +236,9 @@ Exactly, the cleanup has three steps.
    purses.
 
 If an iteration ends, after its game, with 20 agents or fewer, the world
-counts as **extinct**. Then the run stops ([When a world ends](extinction.md)).
+counts as **extinct**. Then the run stops ([When a world ends](rules-in-detail.md#when-a-world-ends)).
 
-[Births and the four ways to die](births-and-deaths.md) sums up who dies
+[Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die) sums up who dies
 where: starved or cut off, after reproduction or after the game.
 
 ## Why the tokens add up
@@ -270,7 +270,7 @@ at the start of the phase:
 > [!example]- How to make this figure
 > **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](frames-and-stats.md)).
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
 > 1. For every iteration 500 ≤ t ≤ 2,999 of every run, take from the row with `phase` = 1: `nodes_before`, `births`, `orphaned`, `starved`; from the row with `phase` = 2: `starved`, `orphaned`.
 > 2. Sum each over all iterations and runs; divide by the sum of `nodes_before` of the rows with `phase` = 1, and multiply by 100.
@@ -300,9 +300,9 @@ members of a world stay; their brains are replaced all the time.
 ## Where to go next
 
 - [The brain](the-brain.md): how the brain arrives at each decision.
-- [How a coalition takes a node](revolution.md): the coalition rule, derived
+- [How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node): the coalition rule, derived
   and worked through.
-- [Births and the four ways to die](births-and-deaths.md): who dies where,
+- [Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die): who dies where,
   and how often.
 - [How the game is played](how-the-game-is-played.md): what the baseline's
   brains actually stake.
@@ -312,6 +312,6 @@ members of a world stay; their brains are replaced all the time.
 
 ← [The world: tokens, agents and a network](the-world.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The brain](the-brain.md) →
 
-> [!info]- Pages that link here (40)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Glossary](glossary.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The share function f(a, b)](share-function.md) · [A yes-or-no decision](binary-decision.md) · [Splitting tokens into whole numbers](largest-remainder.md) · [What a brain says](brain-outputs.md) · [Messages](messages.md) · [How a coalition takes a node](revolution.md) · [When a world ends](extinction.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Births and the four ways to die](births-and-deaths.md) · [The estate of the dead](estate.md) · [Reproduction statistics](reproduction-statistics.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The even split](even-split.md) · [Measuring the flow: token flow, lightning and circulation](token-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Bridges, cut risk, loops and the core: how a network can be cut](bridges.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [The health bar](health-bar.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [The lab, the engine and pilots](the-lab.md)
+> [!info]- Pages that link here (31)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md)
 <!-- /turns -->

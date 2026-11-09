@@ -15,9 +15,9 @@ every world it is drawn in, and caps of four and eight make worlds fragile.
 Gifts keep worlds alive: 2 of 41 worlds with gifts died, against 12 of 43
 without. Mending deaths spares a world its culls, in which whole branches are
 cut off with all they hold, and makes its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") act differently; random
-numbers in the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") drown their differences. Mixing brains at birth, and [estates](estate.md "The tokens a dead agent leaves, and who gets them.") given
+numbers in the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") drown their differences. Mixing brains at birth, and [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") given
 to the poorest, make worlds more even. Most settings show no effect we can see,
-and worlds with fewer mechanisms switched on are no less healthy. For evolution, [mutation](mutation.md "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") only at
+and worlds with fewer mechanisms switched on are no less healthy. For evolution, [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") only at
 birth, and rare, makes children like their parents; mending deaths keeps three
 times as many lines of descent alive and lets them reach new behaviour.
 
@@ -27,7 +27,7 @@ In round 3 every setting of every world was drawn at random, each on its own
 ([How a world's settings are drawn](a-screen-of-random-worlds.md#how-a-worlds-settings-are-drawn)).
 So the worlds drawn with gifts and the worlds drawn without them differ in
 every *other* setting by chance alone: about as many of each have the lottery,
-[messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") or a search. If the worlds with gifts die less often, more than chance
+[messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") or a search. If the worlds with gifts die less often, more than chance
 would make likely, the gifts are the reason.
 
 This is the logic of a randomised trial in medicine, and it is why the screen
@@ -46,13 +46,13 @@ For every setting and every outcome of the worlds:
 - for **whether a world died**, we count the deaths under each value;
 - for **a number** (a living world's [health](which-worlds-are-healthy.md),
   each of its criteria, its size, how differently its agents act, how much
-  children act like their parents, ...), we take its [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") under each value.
+  children act like their parents, ...), we take its median under each value.
 
 Then the outcome is **shuffled** among the worlds, 20,000 times, as if the
 setting had nothing to do with it. Each shuffle keeps how many worlds had each
 value and hands the outcomes out at random. The **chance** of a difference is
 the share of shuffles in which the values differ at least as much as they do in
-the real worlds: a [permutation test](bootstrap.md#permutation-tests). The
+the real worlds: a [permutation test](statistics.md#permutation-tests). The
 difference is measured by the chi-square statistic for deaths, and by the
 Kruskal-Wallis statistic of the ranks for numbers. A chance of 0.01 means one
 shuffle in a hundred does as well by luck alone.
@@ -205,7 +205,7 @@ criterion:
    false discovery rate 0.12). The cap hurts resilience most: a median score
    of 0.11 at 4 links and 0.21 at 8, against 0.55 with no cap (false discovery
    rate 0.001). An agent at its cap can neither take a new link nor have a
-   child, so where many agents sit at their cap, [loops](bridges.md#loops "A path through the network that comes back to where it started without using a connection twice.") are few and single
+   child, so where many agents sit at their cap, [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") are few and single
    agents hold whole parts of the world together. The author never liked the
    cap (it limits by rule what the brains should decide), and a cap of 16
    seldom binds.
@@ -223,11 +223,11 @@ criterion:
    ([Few tokens culled](which-worlds-are-healthy.md#few-tokens-culled)). Its
    health is 0.43 against 0.37 (chance 0.04, false discovery rate 0.19). The
    diverse criterion's median is 0.48 with mending and 0.33 without (false
-   discovery rate 0.06), and the [same-position share](what-makes-a-world-interesting.md#the-same-position-share "Of two agents put in the same situation, how often they stake their tokens measurably differently.") 0.60 against 0.29
+   discovery rate 0.06), and the [same-position share](measuring-health.md#the-same-position-share "Of two agents put in the same situation, how often they stake their tokens measurably differently.") 0.60 against 0.29
    (0.009). Why mending makes agents act differently is not yet clear. One
    guess: a big cull takes whole families at once, so the living descend from
    fewer lines, which act alike.
-4. **Estates given to the poorest make worlds even and crowded.** The [Gini](gini-coefficient.md "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
+4. **Estates given to the poorest make worlds even and crowded.** The [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
    the tokens has a median of 0.32 where the estate goes to the poorest, 0.36
    where it is shared uniformly, and 0.42 to 0.53 under the other four ways
    (false discovery rate 0.002). Raising the poorest keeps many poor agents
@@ -273,7 +273,7 @@ line of descent keeps moving into new behaviour.
 - **Mending deaths keeps lines alive, and keeps them moving.** With mending, a
   world's effective population has a median of about 35, without it about 11
   (false discovery rate 0.01); and its line of descent reaches nearly twice as
-  far into new behaviour in its late [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?") (0.09 against 0.05 above the noise;
+  far into new behaviour in its late [eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?") (0.09 against 0.05 above the noise;
   0.04).
   This fits what the big culls show: without mending, whole families are cut
   off at once.
@@ -283,7 +283,7 @@ line of descent keeps moving into new behaviour.
   ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)),
   a parent's number of children
   says clearly more of its children's than chance would (a median of 0.18
-  above chance in the [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.")). Where deaths are mended, it says much less:
+  above chance in the correlation). Where deaths are mended, it says much less:
   0.07 above chance, against 0.28 without mending (false discovery rate 0.001).
   So mending is a trade-off for evolution: it keeps more lines alive and their
   behaviour more varied, but fewer families out-breed the rest. A token in
@@ -337,12 +337,12 @@ estates) is no finding.
 
 The author prefers simple rules with clear mechanisms. Do worlds with fewer
 mechanisms switched on pay for it? They do not. Counting fourteen mechanisms
-(messages, noise, the lottery, [coalitions](revolution.md "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), handing over, gifts, mending,
+(messages, noise, the lottery, [coalitions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), handing over, gifts, mending,
 mixing, estates other than uniform, search, a cap on links, a token in every
 link, upkeep, and a game in rounds), the drawn worlds switched on 5 to 11. The
 four worlds with only 5 have a mean health of 0.47, the most of any count,
 and the rank correlation of mechanisms with health is 0.03: more mechanisms
-go with no more health. No mechanism is needed for a [healthy world](what-makes-a-world-interesting.md "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).") in round 3; a
+go with no more health. No mechanism is needed for a [healthy world](measuring-health.md#what-makes-a-world-interesting "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).") in round 3; a
 few ([above](#what-decides-how-healthy-a-living-world-grows)) do harm.
 
 ## A token at a time

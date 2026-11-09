@@ -35,9 +35,9 @@ are three each, and among 700 fourteen.
 
 **Health follows size**, in B2's networks
 ([The marks a world misses](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
-The [health bar](health-bar.md "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") asks seven things of a network, its marks. A small world fails
-the mark for [hubs](stars-and-hubs.md "An agent joined to far more agents than most; a star is a world held together by a single hub."): below about 300 agents, its best-connected agent is joined
-to more than 5% of the others. A large world fails the mark for [dimension](ball-dimension-and-curvature.md "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."),
+The [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") asks seven things of a network, its marks. A small world fails
+the mark for [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."): below about 300 agents, its best-connected agent is joined
+to more than 5% of the others. A large world fails the mark for [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."),
 which asks for 2.3 to 4: above about 1,500 agents, it reads near 4 or more.
 
 The large world fails because B2's kind of network is nearly a small world, in
@@ -68,7 +68,7 @@ every iteration.
 
 And it gets one. The notebook measured 454 moments: in B2's worlds, in the
 worlds whose brains are mixed at birth, and in worlds where that rule was
-switched on or off. The [median](median-and-quantiles.md "The middle value: half of the numbers lie below it and half above.") is 1.00 births per hundred agents an iteration. Worlds
+switched on or off. The [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") is 1.00 births per hundred agents an iteration. Worlds
 read later show the same balance: 99 to 102 agents for each birth an iteration,
 averaged over iterations 2,000 to 3,000
 ([A world's size is its births](room-for-the-steadiest-world.md#a-worlds-size-is-its-births)).
@@ -116,7 +116,7 @@ a world settles where a third of its agents can afford one: small and rich.
 
 But nothing holds the reluctance where it is. It drifts as the brains change,
 and the size follows. Across the 181 moments kept of Experiment 17's ten mixed
-worlds, eagerness and size go together closely: a [correlation](correlation.md "Whether two quantities go up and down together, from −1 to 1.") of 0.87 between
+worlds, eagerness and size go together closely: a [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of 0.87 between
 their logarithms. The marks of health follow the size.
 
 And the eagerness can fall too far. Suppose every agent were able: the share
@@ -133,7 +133,7 @@ agents could have had a child. Yet births had fallen to 0.4 to 0.5 per hundred
 agents an iteration, against the 1.0 that replaces the dead.
 
 **Paid: rules that pay for births.** Some rules make every birth easier or
-more rewarding: the [estate](estate.md "The tokens a dead agent leaves, and who gets them.") of the dead paid to the newborns or to their
+more rewarding: the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead paid to the newborns or to their
 parents, or a child allowed to start with any number of tokens. Their worlds
 fill to more agents than B2's, and are poorer still. With the estate to the
 newborns or to the parents, B2's worlds grew by half, to 5,100 to 5,300
@@ -144,8 +144,8 @@ Nor do parents as mates: with them, the estates filled a world to about 5,000
 agents, of 1.9 tokens each
 ([Room for the steadiest world](room-for-the-steadiest-world.md#room-for-the-steadiest-world)).
 
-**Switching a rule shows the ledger at work.** Batch SW, a group of [pilot](the-lab.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
-worlds, took worlds from the [lab](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") at a moment and played them on with mixing
+**Switching a rule shows the ledger at work.** Batch SW, a group of [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+worlds, took worlds from the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") at a moment and played them on with mixing
 switched
 ([Why a mixed world is rich](mixed-at-birth-ten-long-worlds.md#why-a-mixed-world-is-rich)):
 - **Mixing switched off** in five rich worlds: within 1,500 iterations,
@@ -176,8 +176,8 @@ little by it.
 
 It can even reward the reluctance that ends a world. To see whether brains
 still improve, the notebook plays a **lifetime contest**. The brains of two
-moments of a world, two [eras](eras-and-contests.md "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), are seated on alternate agents and played for
-100 iterations, an agent's [lifetime](age-and-lifetime.md "How many iterations an agent lives, from its birth to its death."). If the later brains then hold more than
+moments of a world, two [eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), are seated on alternate agents and played for
+100 iterations, an agent's [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death."). If the later brains then hold more than
 half of the world, they are the better ones.
 
 In one of the worlds that died, the brains of its last good years beat those
@@ -229,7 +229,7 @@ children. Breeding then pays, but late, at the parent's death, and only within
 its own line of descent. A line that does not breed loses its wealth to
 everyone else.
 
-**With mixing it did not hold the size** (batch H: two [seeds](random-numbers.md "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), 5,000
+**With mixing it did not hold the size** (batch H: two [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."), 5,000
 iterations). One world shrank to between 170 and 750 agents. The other fell to
 two agents by iteration 4,200 and died out. The engine then started it again
 from one agent holding every token, which filled the world within a hundred
@@ -281,7 +281,7 @@ worlds, seeds 1 to 10, for 20,000 iterations
 Every world lived, and settled: from iteration 15,000 on, each held 2,030 to
 2,350 agents on average. Over the first 10,000 iterations, the able had a
 child 6.0 times per hundred an iteration, twice the 3.0 with any mate. Their
-agents differed as much as in mixed worlds with a free mate: a [diversity score](diversity-score.md "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.")
+agents differed as much as in mixed worlds with a free mate: a [diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.")
 of 0.59 in the median world, against 0.58. But eager agents fill their world.
 At iteration 20,000, 55% to 66% of each world's agents held three tokens or
 fewer.
@@ -401,5 +401,5 @@ A floor set by the neighbours is no pull toward a steady size.
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
 > [!info]- Pages that link here (12)
-> [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [The estate of the dead](estate.md) · [Where tokens go](where-tokens-go.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Where tokens go](where-tokens-go.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->
