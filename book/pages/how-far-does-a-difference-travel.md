@@ -386,6 +386,6 @@ travel?*.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (2)
-> [Local rules only](local-rules-only.md) · [A source and a sink](a-source-and-a-sink.md)
+> [!info]- Pages that link here (3)
+> [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [A source and a sink](a-source-and-a-sink.md)
 <!-- /turns -->

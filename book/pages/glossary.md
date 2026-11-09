@@ -34,6 +34,7 @@ there.
 - **[correlation length](like-next-to-like.md#how-alike-at-a-distance)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
 - **[cross-time tournament](eras-and-contests.md)** (also era) — Brains of a world at two moments, its eras, played against each other: do the later ones win?
 - **[cut risk](bridges.md#cut-risk)** — The largest share of a world that cutting one connection would cut off.
+- **[data collapse](which-properties-have-no-scale.md#data-collapse)** (also finite-size scaling) — Curves of one quantity measured at many sizes that fall onto one another once its values are divided by a power of the size: then the size of the whole is its only scale.
 - **[degree](degree.md)** — The number of an agent's connections: how many neighbours it has.
 - **[diameter](path-length.md#radius-and-diameter)** — The longest of the shortest paths between two agents of a world.
 - **[dimension](ball-dimension-and-curvature.md)** (also ball dimension) — How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.

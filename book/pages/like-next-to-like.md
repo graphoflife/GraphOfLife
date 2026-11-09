@@ -453,6 +453,6 @@ iterations each.
 
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
-> [!info]- Pages that link here (10)
-> [Glossary](glossary.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [An agent's connections: degree, clustering, assortativity, attachment and scaling](degree.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md)
 <!-- /turns -->

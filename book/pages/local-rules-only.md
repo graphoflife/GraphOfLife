@@ -496,10 +496,10 @@ under *Local rules only*.
 <!-- turns -->
 ---
 
-← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [How far does a difference travel?](how-far-does-a-difference-travel.md) →
+← [Which properties have no scale?](which-properties-have-no-scale.md) · [Space and dimension](../README.md#space-and-dimension) · [How far does a difference travel?](how-far-does-a-difference-travel.md) →
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (2)
-> [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md)
+> [!info]- Pages that link here (7)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md)
 <!-- /turns -->

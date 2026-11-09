@@ -493,6 +493,6 @@ and May, R. M. (1992), Evolutionary games and spatial chaos.
 
 ← [Do the brains matter?](do-the-brains-matter.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [How different are the agents?](how-different-are-the-agents.md) →
 
-> [!info]- Pages that link here (1)
-> [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md)
+> [!info]- Pages that link here (2)
+> [Do the brains matter?](do-the-brains-matter.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md)
 <!-- /turns -->

@@ -125,6 +125,6 @@ Each part closes a way to be fooled:
 
 **Also about:** [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md)
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Eras, contests and invasions: does a world keep getting better?](eras-and-contests.md) · [Every era against three](every-era-against-three.md) · [What a brain can compute](what-a-brain-can-compute.md) · [What makes a world interesting](what-makes-a-world-interesting.md) · [The health bar](health-bar.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md)
 <!-- /turns -->

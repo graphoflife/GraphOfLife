@@ -392,6 +392,6 @@ we define 'fitness' for general ecological scenarios?
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (1)
-> [Brains replaced by their average](brains-replaced-by-their-average.md)
+> [!info]- Pages that link here (2)
+> [Physical inspiration](physical-inspiration.md) · [Brains replaced by their average](brains-replaced-by-their-average.md)
 <!-- /turns -->

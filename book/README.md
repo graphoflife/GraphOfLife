@@ -120,11 +120,11 @@ Whether a world is a space, of how many dimensions, what folds it, and the physi
 - [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
 - [The random twin: is a world a space?](pages/random-twin.md)
 - Dimensions at scale — *not written yet*
-- Which properties have no scale? — *not written yet*
-- Local rules only — *not written yet*
-- How far does a difference travel? — *not written yet*
-- A source and a sink — *not written yet*
-- Particles — *not written yet*
+- [Which properties have no scale?](pages/which-properties-have-no-scale.md)
+- [Local rules only](pages/local-rules-only.md)
+- [How far does a difference travel?](pages/how-far-does-a-difference-travel.md)
+- [A source and a sink](pages/a-source-and-a-sink.md)
+- [Particles: patterns that outlast what carries them](pages/particles.md)
 - [Three ways to measure a network's dimension](pages/ball-dimension-and-curvature.md)
 
 ### Size and riches of a world
@@ -143,9 +143,9 @@ What the brains are and compute, the families they make, and how different agent
 - [What the brains are like](pages/what-the-brains-are-like.md)
 - [What agents say to each other](pages/what-agents-say-to-each-other.md)
 - [Do the brains matter?](pages/do-the-brains-matter.md)
-- Brains replaced by their average — *not written yet*
+- [Brains replaced by their average](pages/brains-replaced-by-their-average.md)
 - [How different are the agents?](pages/how-different-are-the-agents.md)
-- How big should a brain be? — *not written yet*
+- [How big should a brain be?](pages/how-big-should-a-brain-be.md)
 - [Genotypes, families and the common ancestor](pages/genotype.md)
 
 ### Does evolution keep going?
@@ -168,7 +168,7 @@ Raiders, turtles and crews written by hand and planted in evolved worlds: is evo
 - [Can a strategy written by hand beat evolution?](pages/strategies-written-by-hand.md)
 - [What a brain can compute](pages/what-a-brain-can-compute.md)
 - [Why the raiders stopped winning](pages/does-evolution-close-the-door.md)
-- One agent in a sea of average agents — *not written yet*
+- [One agent in a sea of average agents](pages/one-agent-in-a-sea-of-average-agents.md)
 
 ### Groups and cooperation
 

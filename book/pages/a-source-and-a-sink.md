@@ -349,10 +349,10 @@ under *A source and a sink*.
 <!-- turns -->
 ---
 
-← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension) · [Three ways to measure a network's dimension](ball-dimension-and-curvature.md) →
+← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension) · [Particles: patterns that outlast what carries them](particles.md) →
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (2)
-> [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md)
+> [!info]- Pages that link here (3)
+> [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md)
 <!-- /turns -->

@@ -580,6 +580,6 @@ built.
 
 ← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [What would count as open-ended evolution](open-ended-test.md) →
 
-> [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (7)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

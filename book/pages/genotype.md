@@ -428,7 +428,7 @@ of behaviour instead, and compares them with the genotypes.
 <!-- turns -->
 ---
 
-← [How different are the agents?](how-different-are-the-agents.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
+← [How big should a brain be?](how-big-should-a-brain-be.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Does evolution keep going?](../README.md#does-evolution-keep-going), [Methods and statistics](../README.md#methods-and-statistics).
 
