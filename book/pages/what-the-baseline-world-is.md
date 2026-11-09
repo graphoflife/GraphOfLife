@@ -338,7 +338,8 @@ rate of mutation became [How fast should brains change?](how-fast-should-brains-
 coalitions switched off are among
 [The switches the world was built with](the-switches-the-world-was-built-with.md)
 and in [What keeps wealth spread?](what-keeps-wealth-spread.md), and
-*How big should a brain be?* is still to come.
+[How big should a brain be?](how-big-should-a-brain-be.md) was answered from
+round 3's random worlds.
 
 ## What the measurements say about open-ended evolution
 

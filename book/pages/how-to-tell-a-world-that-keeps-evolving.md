@@ -735,8 +735,10 @@ search back. Experiment 9 changed how often a copied brain changes, from one
 copy in twenty to four in five
 ([How fast should brains change?](how-fast-should-brains-change.md)). The rate
 did not decide whether evolution goes on: a lifetime long, it went on at every
-rate. How large brains should be is the subject of *How big should a brain
-be?*, a page still to be written. What the game asks of them is the subject of
+rate. How large brains should be is the subject of
+[How big should a brain be?](how-big-should-a-brain-be.md), answered from round
+3: no shape of brain made a difference that could be told from chance. What
+the game asks of them is the subject of
 [The switches the world was built with](the-switches-the-world-was-built-with.md)
 and [Another game](another-game.md). What they could do together is that of
 [Alliances](another-game.md#alliances).

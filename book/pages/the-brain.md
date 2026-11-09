@@ -213,8 +213,10 @@ three remedies:
   about four times what suits tanh, since the sigmoid's slope is a quarter of
   tanh's.
 
-B2 took the first remedy. *How big should a brain be?*, a page still to be
-written, is to try the others.
+B2 took the first remedy. Round 3 of the random screen took the second:
+tanh in three to five layers. All nine of its shapes see, at more than half
+of a change after evolution
+([How big should a brain be?](how-big-should-a-brain-be.md)).
 
 ## From outputs to decisions
 

@@ -370,7 +370,10 @@ What runs out there is the search, not the game: a strategy written by hand
 took half of one evolved world
 ([Strategies written by hand](strategies-written-by-hand.md)).
 
-The other remedies await a page still to come, *How big should a brain be?*
+The other remedies were tried in round 3 of the random screen, whose brains
+all squash with tanh in three to five layers: every one of them sees, and
+depth costs little
+([How big should a brain be?](how-big-should-a-brain-be.md)).
 
 ## What we learned
 

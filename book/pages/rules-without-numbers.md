@@ -50,7 +50,9 @@ dead agent's neighbours in a ring
 ([Mending a death](a-world-that-cannot-break.md#mending-a-death)), and a brain
 changes only when it is copied. Both stay. The brain has sizes too: one
 hidden layer of 16 units, and [messages](messages.md "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") of 8 numbers. Those are left alone
-here, for *How big should a brain be?*, a page still to be written.
+here, for [How big should a brain be?](how-big-should-a-brain-be.md), which
+found in round 3 that the shape of a tanh brain made no difference to the
+worlds that could be told from chance.
 
 Experiments 14 and 15 took six of B2's numbers away **one at a time**, all
 but the owner's one and a half. They showed what each prevents
