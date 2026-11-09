@@ -494,8 +494,11 @@ What the notebook has found is mixed
 - the tokens of the richest agents follow the most convincing power law, over
   one to two decades;
 - the connections of the best-connected agents plausibly follow one;
-- deaths do not come in avalanches of every size: the agents one game removes
-  have a typical size;
+- most games remove a few agents, a typical number; but the pieces a game
+  cuts off follow P(*s*) ∝ *s*^−2 up to the size of the whole world, so about
+  one game in ninety cuts off a tenth of a world or more, at 10,000 tokens as
+  at 100,000
+  ([Which properties have no scale?](which-properties-have-no-scale.md#big-cuts-keep-their-share));
 - and a world's wander is a random walk's, pulled back to its level within a
   few hundred iterations. It is not the 1/*f* noise of a critical system,
   which has memory on every time scale.
@@ -503,12 +506,19 @@ What the notebook has found is mixed
 But [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)
 found a property that does not change with size. The mean game cuts off
 about 2% of a world, at five hundred agents and at sixty thousand, with no
-trend. The worst cuts off a third to a half, at every size. Whether the whole
-distribution is the same at every size has not been compared yet.
+trend. The worst cuts off a third to a half, at every size. The whole
+distributions, compared since, are two things: their bulk of small pieces
+averages out as worlds grow, and their tail of big cuts does not
+([Which properties have no scale?](which-properties-have-no-scale.md)).
 
 Finding such scaleless properties systematically is now an aim of the
 notebook. Measure the same thing at many sizes, and ask whether, rescaled, it
-is the same (*Which properties have no scale?*).
+is the same
+([Which properties have no scale?](which-properties-have-no-scale.md)). The
+answer so far: a world's space, the branches that hang from it by a single
+connection, and the big cuts in which they fall away have no scale but the
+world's; nothing else does, and nothing is critical, for likeness fades
+within a step or two at every size.
 
 Two measurements since sharpen the picture. What agents hold is correlated
 over one or two steps only. That is a short correlation length, the distance
@@ -696,8 +706,9 @@ are not written yet:
   width of a lump, boxes, the spectral dimension.
 - *How far does a difference travel?* Damage spreading: the light cone,
   measured, once random numbers are local.
-- *Which properties have no scale?* The same quantities across many sizes,
-  rescaled.
+- [Which properties have no scale?](which-properties-have-no-scale.md) The
+  same quantities across many sizes, rescaled: written, from Experiments 2, 8
+  and 10.
 - *Local rules only.* The cull, the share-out and the random stream, each made
   local, and what changes.
 - *A source and a sink.* Tokens with a quality, or stars: a world with a flow
@@ -789,6 +800,12 @@ are not written yet:
     [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)
     shows less. The mean, about 2%, and the worst game, 35% to 48%, do not
     change with size. The whole distributions have not been compared.
+- **9 November 2026.** From 9 October, the page said that deaths do not come
+  in avalanches of every size, the agents one game removes having a typical
+  size. [Which properties have no scale?](which-properties-have-no-scale.md)
+  compared the whole distributions at eight sizes. Most games remove a few
+  agents, but the pieces a game cuts off follow P(*s*) ∝ *s*^−2 up to the size
+  of the world, and the big cuts keep their share at every size.
 
 ## References
 
