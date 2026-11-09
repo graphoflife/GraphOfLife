@@ -875,14 +875,16 @@
     },
     {
       "id": "particles",
-      "title": "Particles",
+      "title": "Particles: patterns that outlast what carries them",
+      "file": "pages/particles.md",
       "topics": [
-        "space"
+        "space",
+        "groups"
       ],
-      "kind": "experiment",
-      "status": "planned",
+      "kind": "study",
+      "status": "written",
       "added": "2026-10-09",
-      "summary": "Patterns that persist while what carries them changes: tokens bound in loops, groups that outlast their members, local beats in the flow of tokens (*Physical inspiration*)."
+      "summary": "Patterns that keep their identity while what carries them is replaced, looked for in twelve worlds with three detectors, each beside a null and tried on a pattern known to be there: no ring of tokens outlasts the next stretch of games, no agent keeps a rhythm beyond a random walk's, and the groups that outlast their members are the network's own regions, which stay where they began. Only a world that froze keeps its patterns, as a crystal in which nothing is replaced."
     },
     {
       "id": "ball-dimension-and-curvature",
