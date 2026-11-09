@@ -17,17 +17,18 @@ of descent keeps moving into new behaviour. Of the hundred, 28 are ruled out:
 but an effective population of only 14, so chance decides much of which line
 survives. The healthiest worlds change a little more than the rest, but they
 pass on less. The shortlist is every candidate among the first 13 of any of
-health's three orders: 24 worlds, which the author chose to play again with new
-[seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). Seeds 3042, 4006 played strongest first and 4008 played weakest first
-are among the first of all three; seed 3026, with some of the simplest rules of
-the round, evolves the most, and is on the shortlist by its worst criterion.
-Three of the 24, which grow far too many links, are no longer played again.
+health's three orders. On 9 November 2026 it held 24 worlds, which the author
+chose to play again with new [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") (Experiment 43, less three that grow far
+too many links). Since health also counts [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link, it holds
+21. Seeds 3042, 4006 played strongest first, 3018, 3080 and 3057 are among the
+first of all three orders; seed 3026, with some of the simplest rules of the
+round, evolves the most, and now just misses the shortlist.
 
 ## What evolution needs
 
 Evolution needs three things, and open-ended evolution needs them to last
 ([The open-ended test](measuring-evolution.md#what-would-count-as-open-ended-evolution)):
-- **variation:** the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") differ, in what they are and in what they do;
+- **variation:** the agents differ, in what they are and in what they do;
 - **heredity:** children are like their parents;
 - **selection:** some agents leave more descendants than others *because of*
   what they are, and not by luck alone.
@@ -166,7 +167,7 @@ Three pulls show across the worlds (rank correlations over the 72):
 - **heredity against novelty (−0.37):** where children are most like their
   parents, the line of descent changes least. Keeping what works and finding
   something new pull against each other;
-- **health against heredity (−0.37):** the healthiest worlds pass on less;
+- **health against heredity (−0.30):** the healthiest worlds pass on less;
 - **health with novelty (+0.23):** the healthiest worlds change a little more.
 
 Each world's rank in every category, 1 the best:
@@ -174,78 +175,78 @@ Each world's rank in every category, 1 the best:
 <!-- table oeecandidates/ranks -->
 | world | round | size | generations | heredity | population | novelty | contemporaries | fertility | health | riches | mean rank | channels open |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| [s3026](run:B1-30000-d6955f-s3026) | round 3 | 58 | 1 | 47 | 14 | 1 | 2 | 42 | 26 | 15 | 22.9 | messages, handover |
-| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | 28 | 43 | 55 | 41 | 2 | 10 | 4 | 11 | 45 | 26.6 | messages, gifts |
-| [s4008 s](run:B1-30000-645972-s4008) | round 3, strongest first | 23 | 41 | 52 | 37 | 8 | 8 | 6 | 20 | 50 | 27.2 | messages, gifts |
-| [s4003 w](run:B1-30000-9efb1d-s4003) | round 3, weakest first | 8 | 14 | 22 | 51 | 18 | 23 | 16 | 29 | 65 | 27.3 | messages, gifts, handover, upkeep |
-| [s4003 s](run:B1-30000-fffc7d-s4003) | round 3, strongest first | 10 | 19 | 39 | 53 | 5 | 17 | 19 | 21 | 63 | 27.3 | messages, gifts, handover, upkeep |
-| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | 26 | 37 | 57 | 58 | 4 | 6 | 12 | 6 | 47 | 28.1 | messages, gifts, mates pay, partner search, mixing |
-| [s3021](run:B1-30000-4aff7d-s3021) | round 3 | 61 | 23 | 46 | 26 | 11 | 16 | 30 | 30 | 12 | 28.3 | messages, handover, partner search, upkeep |
+| [s3026](run:B1-30000-d6955f-s3026) | round 3 | 58 | 1 | 47 | 14 | 1 | 2 | 42 | 23 | 15 | 22.6 | messages, handover |
+| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | 28 | 43 | 55 | 41 | 2 | 10 | 4 | 8 | 45 | 26.2 | messages, gifts |
+| [s4008 s](run:B1-30000-645972-s4008) | round 3, strongest first | 23 | 41 | 52 | 37 | 8 | 8 | 6 | 17 | 50 | 26.9 | messages, gifts |
+| [s4003 s](run:B1-30000-fffc7d-s4003) | round 3, strongest first | 10 | 19 | 39 | 53 | 5 | 17 | 19 | 18 | 63 | 27.0 | messages, gifts, handover, upkeep |
+| [s4003 w](run:B1-30000-9efb1d-s4003) | round 3, weakest first | 8 | 14 | 22 | 51 | 18 | 23 | 16 | 28 | 65 | 27.2 | messages, gifts, handover, upkeep |
+| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | 26 | 37 | 57 | 58 | 4 | 6 | 12 | 5 | 47 | 28.0 | messages, gifts, mates pay, partner search, mixing |
+| [s3021](run:B1-30000-4aff7d-s3021) | round 3 | 61 | 23 | 46 | 26 | 11 | 16 | 30 | 27 | 12 | 28.0 | messages, handover, partner search, upkeep |
 | [s3042](run:B1-30000-b82ad0-s3042) | round 3 | 5 | 15 | 66 | 12 | 10 | 20 | 58 | 1 | 68 | 28.3 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
-| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | 68 | 12 | 58 | 9 | 16 | 18 | 51 | 19 | 5 | 28.4 | messages, gifts, handover, partner search, upkeep, revolutions |
-| [s3024](run:B1-30000-f05874-s3024) | round 3 | 31 | 33 | 34 | 38 | 23 | 11 | 44 | 8 | 42 | 29.3 | messages, gifts, handover, upkeep, revolutions |
-| [s3062](run:B1-30000-def151-s3062) | round 3 | 51 | 26 | 61 | 45 | 3 | 5 | 26 | 25 | 22 | 29.3 | messages, handover, partner search, upkeep, revolutions |
-| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | 59 | 30 | 13 | 28 | 15 | 35 | 64 | 7 | 14 | 29.4 | messages, gifts, partner search, revolutions |
+| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | 68 | 12 | 58 | 9 | 16 | 18 | 51 | 25 | 5 | 29.1 | messages, gifts, handover, partner search, upkeep, revolutions |
+| [s3024](run:B1-30000-f05874-s3024) | round 3 | 31 | 33 | 34 | 38 | 23 | 11 | 44 | 7 | 42 | 29.2 | messages, gifts, handover, upkeep, revolutions |
+| [s3062](run:B1-30000-def151-s3062) | round 3 | 51 | 26 | 61 | 45 | 3 | 5 | 26 | 24 | 22 | 29.2 | messages, handover, partner search, upkeep, revolutions |
 | [s3082](run:B1-30000-1141ea-s3082) | round 3 | 48 | 5 | 3 | 27 | 29 | 44 | 38 | 47 | 25 | 29.6 | messages, upkeep |
-| [s3095](run:B1-30000-3e5856-s3095) | round 3 | 46 | 7 | 53 | 5 | 9 | 3 | 70 | 46 | 27 | 29.6 | messages, handover, partner search, upkeep |
-| [s4002 s](run:B1-30000-192733-s4002) | round 3, strongest first | 21 | 28 | 56 | 62 | 7 | 4 | 10 | 33 | 52 | 30.3 | messages, gifts, mates pay, partner search, mixing |
-| [s3028](run:B1-30000-2eef58-s3028) | round 3 | 20 | 3 | 2 | 20 | 45 | 72 | 17 | 48 | 53 | 31.1 | messages, gifts, handover, partner search, upkeep, revolutions |
-| [s3030](run:B1-30000-90fc91-s3030) | round 3 | 1 | 40 | 6 | 1 | 57 | 25 | 35 | 43 | 72 | 31.1 | messages, upkeep |
-| [s3046](run:B1-30000-27bd64-s3046) | round 3 | 55 | 8 | 54 | 19 | 26 | 27 | 36 | 42 | 18 | 31.7 | messages, gifts, partner search, upkeep |
-| [s3094](run:B1-30000-4ac946-s3094) | round 3 | 4 | 2 | 68 | 2 | 40 | 13 | 41 | 50 | 69 | 32.1 | messages, gifts, partner search, upkeep |
-| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | 71 | 9 | 43 | 68 | 12 | 12 | 15 | 62 | 2 | 32.7 | messages, handover, mates pay, partner search, mixing |
+| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | 59 | 30 | 13 | 28 | 15 | 35 | 64 | 10 | 14 | 29.8 | messages, gifts, partner search, revolutions |
+| [s4002 s](run:B1-30000-192733-s4002) | round 3, strongest first | 21 | 28 | 56 | 62 | 7 | 4 | 10 | 32 | 52 | 30.2 | messages, gifts, mates pay, partner search, mixing |
+| [s3028](run:B1-30000-2eef58-s3028) | round 3 | 20 | 3 | 2 | 20 | 45 | 72 | 17 | 46 | 53 | 30.9 | messages, gifts, handover, partner search, upkeep, revolutions |
+| [s3095](run:B1-30000-3e5856-s3095) | round 3 | 46 | 7 | 53 | 5 | 9 | 3 | 70 | 60 | 27 | 31.1 | messages, handover, partner search, upkeep |
+| [s3046](run:B1-30000-27bd64-s3046) | round 3 | 55 | 8 | 54 | 19 | 26 | 27 | 36 | 41 | 18 | 31.6 | messages, gifts, partner search, upkeep |
+| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | 71 | 9 | 43 | 68 | 12 | 12 | 15 | 58 | 2 | 32.2 | messages, handover, mates pay, partner search, mixing |
+| [s3055](run:B1-30000-cca771-s3055) | round 3 | 53 | 25 | 38 | 65 | 21 | 14 | 21 | 34 | 20 | 32.3 | messages, handover, revolutions |
+| [s3030](run:B1-30000-90fc91-s3030) | round 3 | 1 | 40 | 6 | 1 | 57 | 25 | 35 | 56 | 72 | 32.6 | messages, upkeep |
 | [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | 14 | 31 | 24 | 25 | 49 | 45 | 46 | 2 | 59 | 32.8 | messages, gifts, handover, upkeep, revolutions |
-| [s3033](run:B1-30000-631e49-s3033) | round 3 | 63 | 21 | 65 | 7 | 6 | 7 | 68 | 49 | 10 | 32.9 | handover, partner search, upkeep, revolutions |
-| [s3055](run:B1-30000-cca771-s3055) | round 3 | 53 | 25 | 38 | 65 | 21 | 14 | 21 | 39 | 20 | 32.9 | messages, handover, revolutions |
+| [s3033](run:B1-30000-631e49-s3033) | round 3 | 63 | 21 | 65 | 7 | 6 | 7 | 68 | 54 | 10 | 33.4 | handover, partner search, upkeep, revolutions |
 | [s4004 s](run:B1-30000-2bac4d-s4004) | round 3, strongest first | 69 | 6 | 48 | 63 | 19 | 15 | 13 | 66 | 4 | 33.7 | messages, handover, mates pay, partner search, mixing |
-| [s3006](run:B1-30000-023c0a-s3006) | round 3 | 15 | 44 | 27 | 18 | 58 | 29 | 50 | 14 | 58 | 34.8 | messages, gifts, handover, partner search, upkeep |
-| [s3016](run:B1-30000-b23381-s3016) | round 3 | 67 | 22 | 49 | 24 | 56 | 1 | 60 | 28 | 6 | 34.8 | messages, partner search, upkeep |
-| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | 64 | 27 | 44 | 29 | 52 | 40 | 34 | 17 | 9 | 35.1 | messages, gifts, upkeep |
-| [s3087](run:B1-30000-363694-s3087) | round 3 | 9 | 16 | 19 | 40 | 65 | 70 | 20 | 13 | 64 | 35.1 | messages, handover, partner search, upkeep |
-| [s3091](run:B1-30000-42d88d-s3091) | round 3 | 56 | 17 | 51 | 70 | 14 | 22 | 14 | 59 | 17 | 35.6 | messages, gifts, handover, partner search, mixing |
+| [s3094](run:B1-30000-4ac946-s3094) | round 3 | 4 | 2 | 68 | 2 | 40 | 13 | 41 | 64 | 69 | 33.7 | messages, gifts, partner search, upkeep |
+| [s3006](run:B1-30000-023c0a-s3006) | round 3 | 15 | 44 | 27 | 18 | 58 | 29 | 50 | 9 | 58 | 34.2 | messages, gifts, handover, partner search, upkeep |
+| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | 64 | 27 | 44 | 29 | 52 | 40 | 34 | 12 | 9 | 34.6 | messages, gifts, upkeep |
+| [s3091](run:B1-30000-42d88d-s3091) | round 3 | 56 | 17 | 51 | 70 | 14 | 22 | 14 | 55 | 17 | 35.1 | messages, gifts, handover, partner search, mixing |
+| [s3087](run:B1-30000-363694-s3087) | round 3 | 9 | 16 | 19 | 40 | 65 | 70 | 20 | 14 | 64 | 35.2 | messages, handover, partner search, upkeep |
+| [s3016](run:B1-30000-b23381-s3016) | round 3 | 67 | 22 | 49 | 24 | 56 | 1 | 60 | 33 | 6 | 35.3 | messages, partner search, upkeep |
+| [s4005 s](run:B1-30000-6f6c09-s4005) | round 3, strongest first | 39 | 45 | 45 | 47 | 13 | 9 | 39 | 50 | 34 | 35.7 | messages, gifts, partner search |
 | [s3018](run:B1-30000-af1e28-s3018) | round 3 | 50 | 54 | 64 | 11 | 28 | 33 | 55 | 3 | 23 | 35.7 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s4005 s](run:B1-30000-6f6c09-s4005) | round 3, strongest first | 39 | 45 | 45 | 47 | 13 | 9 | 39 | 52 | 34 | 35.9 | messages, gifts, partner search |
-| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | 25 | 59 | 71 | 3 | 25 | 28 | 48 | 16 | 48 | 35.9 | messages, handover, partner search |
-| [s3032](run:B1-30000-22865f-s3032) | round 3 | 13 | 49 | 50 | 16 | 35 | 26 | 37 | 38 | 60 | 36.0 | messages, gifts, handover, partner search |
-| [s3058](run:B1-30000-4108dd-s3058) | round 3 | 70 | 64 | 32 | 49 | 17 | 30 | 43 | 18 | 3 | 36.2 | messages, partner search, revolutions |
-| [s3057](run:B1-30000-38aee9-s3057) | round 3 | 30 | 46 | 67 | 43 | 47 | 21 | 27 | 5 | 43 | 36.6 | messages, partner search, mixing |
-| [s3007](run:B1-30000-8119cd-s3007) | round 3 | 43 | 4 | 18 | 21 | 66 | 56 | 29 | 64 | 30 | 36.8 | messages, gifts, handover, mates pay, upkeep, mixing |
+| [s3032](run:B1-30000-22865f-s3032) | round 3 | 13 | 49 | 50 | 16 | 35 | 26 | 37 | 36 | 60 | 35.8 | messages, gifts, handover, partner search |
+| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | 25 | 59 | 71 | 3 | 25 | 28 | 48 | 15 | 48 | 35.8 | messages, handover, partner search |
+| [s3007](run:B1-30000-8119cd-s3007) | round 3 | 43 | 4 | 18 | 21 | 66 | 56 | 29 | 61 | 30 | 36.4 | messages, gifts, handover, mates pay, upkeep, mixing |
+| [s3057](run:B1-30000-38aee9-s3057) | round 3 | 30 | 46 | 67 | 43 | 47 | 21 | 27 | 6 | 43 | 36.7 | messages, partner search, mixing |
 | [s4007 w](run:B1-30000-04d3eb-s4007) | round 3, weakest first | 17 | 36 | 20 | 56 | 36 | 37 | 3 | 71 | 56 | 36.9 | messages, handover, partner search |
-| [s3049](run:B1-30000-c51eb8-s3049) | round 3 | 27 | 58 | 63 | 17 | 20 | 31 | 45 | 27 | 46 | 37.1 | messages, gifts, handover, partner search |
+| [s3058](run:B1-30000-4108dd-s3058) | round 3 | 70 | 64 | 32 | 49 | 17 | 30 | 43 | 26 | 3 | 37.1 | messages, partner search, revolutions |
 | [s3076](run:B1-30000-66c764-s3076) | round 3 | 32 | 13 | 8 | 55 | 51 | 63 | 2 | 70 | 41 | 37.2 | messages, gifts, handover, mixing |
 | [s3014](run:B1-30000-7d129f-s3014) | round 3 | 6 | 11 | 21 | 35 | 64 | 66 | 1 | 65 | 67 | 37.3 | messages, handover, partner search, upkeep |
 | [s3080](run:B1-30000-625bc7-s3080) | round 3 | 60 | 66 | 42 | 46 | 22 | 24 | 59 | 4 | 13 | 37.3 | messages, gifts, handover, partner search, revolutions |
+| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | 37 | 29 | 23 | 22 | 44 | 53 | 72 | 22 | 36 | 37.6 | messages, handover, mixing |
+| [s3047](run:B1-30000-10c9f1-s3047) | round 3 | 41 | 42 | 15 | 57 | 43 | 64 | 23 | 21 | 32 | 37.6 | messages, gifts, handover, partner search |
+| [s3049](run:B1-30000-c51eb8-s3049) | round 3 | 27 | 58 | 63 | 17 | 20 | 31 | 45 | 31 | 46 | 37.6 | messages, gifts, handover, partner search |
 | [s4007 s](run:B1-30000-a8a2d2-s4007) | round 3, strongest first | 16 | 34 | 37 | 61 | 24 | 34 | 7 | 69 | 57 | 37.7 | messages, handover, partner search |
-| [s3047](run:B1-30000-10c9f1-s3047) | round 3 | 41 | 42 | 15 | 57 | 43 | 64 | 23 | 22 | 32 | 37.7 | messages, gifts, handover, partner search |
-| [s3054](run:B1-30000-d9254e-s3054) | round 3 | 45 | 60 | 12 | 23 | 55 | 52 | 53 | 12 | 28 | 37.8 | messages, partner search, upkeep |
-| [s3061](run:B1-30000-00e3c8-s3061) | round 3 | 47 | 20 | 62 | 60 | 54 | 19 | 18 | 37 | 26 | 38.1 | gifts, mates pay, partner search, revolutions, mixing |
-| [s3001](run:B1-30000-68cda7-s3001) | round 3 | 2 | 18 | 4 | 33 | 63 | 71 | 22 | 61 | 71 | 38.3 | messages, handover, mates pay, upkeep, revolutions, mixing |
-| [s3078](run:B1-30000-dd27b6-s3078) | round 3 | 62 | 48 | 10 | 69 | 33 | 67 | 5 | 41 | 11 | 38.4 | messages, gifts, partner search |
-| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | 37 | 29 | 23 | 22 | 44 | 53 | 72 | 31 | 36 | 38.6 | messages, handover, mixing |
-| [s3071](run:B1-30000-605c0d-s3071) | round 3 | 19 | 67 | 30 | 36 | 27 | 48 | 33 | 40 | 54 | 39.3 | messages, partner search |
+| [s3054](run:B1-30000-d9254e-s3054) | round 3 | 45 | 60 | 12 | 23 | 55 | 52 | 53 | 13 | 28 | 37.9 | messages, partner search, upkeep |
+| [s3061](run:B1-30000-00e3c8-s3061) | round 3 | 47 | 20 | 62 | 60 | 54 | 19 | 18 | 35 | 26 | 37.9 | gifts, mates pay, partner search, revolutions, mixing |
+| [s3078](run:B1-30000-dd27b6-s3078) | round 3 | 62 | 48 | 10 | 69 | 33 | 67 | 5 | 40 | 11 | 38.3 | messages, gifts, partner search |
+| [s3001](run:B1-30000-68cda7-s3001) | round 3 | 2 | 18 | 4 | 33 | 63 | 71 | 22 | 62 | 71 | 38.4 | messages, handover, mates pay, upkeep, revolutions, mixing |
 | [s3089](run:B1-30000-77ad6a-s3089) | round 3 | 22 | 35 | 1 | 13 | 34 | 62 | 67 | 72 | 51 | 39.7 | messages, partner search, upkeep |
-| [s3092](run:B1-30000-7fc03f-s3092) | round 3 | 18 | 57 | 60 | 15 | 42 | 32 | 54 | 24 | 55 | 39.7 | messages, partner search, upkeep |
-| [s3050](run:B1-30000-ebe08c-s3050) | round 3 | 44 | 32 | 31 | 64 | 41 | 42 | 25 | 54 | 29 | 40.2 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3050](run:B1-30000-ebe08c-s3050) | round 3 | 44 | 32 | 31 | 64 | 41 | 42 | 25 | 53 | 29 | 40.1 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3092](run:B1-30000-7fc03f-s3092) | round 3 | 18 | 57 | 60 | 15 | 42 | 32 | 54 | 29 | 55 | 40.2 | messages, partner search, upkeep |
+| [s3059](run:B1-30000-2ec87a-s3059) | round 3 | 36 | 55 | 29 | 39 | 32 | 36 | 57 | 42 | 37 | 40.3 | messages, gifts, handover, mixing |
+| [s3071](run:B1-30000-605c0d-s3071) | round 3 | 19 | 67 | 30 | 36 | 27 | 48 | 33 | 49 | 54 | 40.3 | messages, partner search |
 | [s3052](run:B1-30000-0d058a-s3052) | round 3 | 12 | 51 | 35 | 34 | 37 | 49 | 24 | 63 | 61 | 40.7 | messages, gifts, handover, partner search |
-| [s3022](run:B1-30000-298337-s3022) | round 3 | 24 | 63 | 59 | 52 | 46 | 39 | 28 | 9 | 49 | 41.0 | messages, partner search |
-| [s3063](run:B1-30000-924e70-s3063) | round 3 | 3 | 24 | 28 | 59 | 60 | 59 | 8 | 58 | 70 | 41.0 | messages, handover, partner search, upkeep |
+| [s3070](run:B1-30000-a4d3a0-s3070) | round 3 | 11 | 39 | 7 | 42 | 48 | 69 | 47 | 44 | 62 | 41.0 | messages, gifts, partner search, upkeep |
+| [s3063](run:B1-30000-924e70-s3063) | round 3 | 3 | 24 | 28 | 59 | 60 | 59 | 8 | 59 | 70 | 41.1 | messages, handover, partner search, upkeep |
+| [s3022](run:B1-30000-298337-s3022) | round 3 | 24 | 63 | 59 | 52 | 46 | 39 | 28 | 11 | 49 | 41.2 | messages, partner search |
 | [s3040](run:B1-30000-36d076-s3040) | round 3 | 38 | 38 | 40 | 48 | 31 | 41 | 32 | 68 | 35 | 41.2 | messages, gifts, partner search, upkeep |
-| [s3059](run:B1-30000-2ec87a-s3059) | round 3 | 36 | 55 | 29 | 39 | 32 | 36 | 57 | 51 | 37 | 41.3 | messages, gifts, handover, mixing |
 | [s3085](run:B1-30000-801b34-s3085) | round 3 | 35 | 10 | 33 | 71 | 69 | 38 | 11 | 67 | 38 | 41.3 | messages, handover, partner search, upkeep |
-| [s3051](run:B1-30000-b5a76a-s3051) | round 3 | 72 | 65 | 36 | 72 | 30 | 51 | 40 | 10 | 1 | 41.9 | messages, gifts, partner search, upkeep, revolutions |
-| [s3070](run:B1-30000-a4d3a0-s3070) | round 3 | 11 | 39 | 7 | 42 | 48 | 69 | 47 | 55 | 62 | 42.2 | messages, gifts, partner search, upkeep |
-| [s3004](run:B1-30000-7d5208-s3004) | round 3 | 65 | 71 | 25 | 31 | 39 | 68 | 61 | 15 | 8 | 42.6 | messages, gifts |
-| [s3083](run:B1-30000-0d7e0c-s3083) | round 3 | 34 | 50 | 11 | 44 | 38 | 47 | 69 | 57 | 39 | 43.2 | messages, gifts, handover, mates pay, upkeep, mixing |
-| [s3056](run:B1-30000-43985b-s3056) | round 3 | 40 | 52 | 16 | 32 | 62 | 60 | 56 | 45 | 33 | 44.0 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s3093](run:B1-30000-26a341-s3093) | round 3 | 42 | 62 | 14 | 50 | 59 | 54 | 52 | 32 | 31 | 44.0 | messages, gifts, handover, partner search |
-| [s3013](run:B1-30000-7f7cd5-s3013) | round 3 | 7 | 47 | 17 | 67 | 71 | 61 | 9 | 53 | 66 | 44.2 | messages, partner search, upkeep |
-| [s3041](run:B1-30000-965f1e-s3041) | round 3 | 33 | 61 | 5 | 30 | 68 | 57 | 65 | 44 | 40 | 44.8 | messages, gifts, mates pay, partner search, mixing |
-| [s3019](run:B1-30000-b1209a-s3019) | round 3 | 49 | 68 | 69 | 4 | 53 | 43 | 71 | 23 | 24 | 44.9 | messages, handover, partner search, upkeep |
-| [s3012](run:B1-30000-02fa53-s3012) | round 3 | 54 | 53 | 9 | 54 | 50 | 46 | 63 | 60 | 19 | 45.3 | messages, gifts, partner search, upkeep, mixing |
-| [s3043](run:B1-30000-02ed17-s3043) | round 3 | 52 | 69 | 41 | 8 | 70 | 65 | 49 | 36 | 21 | 45.7 | messages, gifts, handover, partner search, upkeep |
-| [s3098](run:B1-30000-794ae8-s3098) | round 3 | 29 | 56 | 26 | 66 | 61 | 55 | 31 | 56 | 44 | 47.1 | messages, gifts, handover, partner search, revolutions |
-| [s3065](run:B1-30000-ba3afe-s3065) | round 3 | 57 | 70 | 72 | 6 | 67 | 50 | 66 | 34 | 16 | 48.7 | messages, handover, partner search, upkeep, mixing |
-| [s3090](run:B1-30000-05ba40-s3090) | round 3 | 66 | 72 | 70 | 10 | 72 | 58 | 62 | 35 | 7 | 50.2 | messages, partner search, upkeep, mixing |
+| [s3051](run:B1-30000-b5a76a-s3051) | round 3 | 72 | 65 | 36 | 72 | 30 | 51 | 40 | 16 | 1 | 42.6 | messages, gifts, partner search, upkeep, revolutions |
+| [s3083](run:B1-30000-0d7e0c-s3083) | round 3 | 34 | 50 | 11 | 44 | 38 | 47 | 69 | 51 | 39 | 42.6 | messages, gifts, handover, mates pay, upkeep, mixing |
+| [s3004](run:B1-30000-7d5208-s3004) | round 3 | 65 | 71 | 25 | 31 | 39 | 68 | 61 | 20 | 8 | 43.1 | messages, gifts |
+| [s3056](run:B1-30000-43985b-s3056) | round 3 | 40 | 52 | 16 | 32 | 62 | 60 | 56 | 37 | 33 | 43.1 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3013](run:B1-30000-7f7cd5-s3013) | round 3 | 7 | 47 | 17 | 67 | 71 | 61 | 9 | 48 | 66 | 43.7 | messages, partner search, upkeep |
+| [s3093](run:B1-30000-26a341-s3093) | round 3 | 42 | 62 | 14 | 50 | 59 | 54 | 52 | 30 | 31 | 43.8 | messages, gifts, handover, partner search |
+| [s3012](run:B1-30000-02fa53-s3012) | round 3 | 54 | 53 | 9 | 54 | 50 | 46 | 63 | 52 | 19 | 44.4 | messages, gifts, partner search, upkeep, mixing |
+| [s3019](run:B1-30000-b1209a-s3019) | round 3 | 49 | 68 | 69 | 4 | 53 | 43 | 71 | 19 | 24 | 44.4 | messages, handover, partner search, upkeep |
+| [s3041](run:B1-30000-965f1e-s3041) | round 3 | 33 | 61 | 5 | 30 | 68 | 57 | 65 | 43 | 40 | 44.7 | messages, gifts, mates pay, partner search, mixing |
+| [s3043](run:B1-30000-02ed17-s3043) | round 3 | 52 | 69 | 41 | 8 | 70 | 65 | 49 | 39 | 21 | 46.0 | messages, gifts, handover, partner search, upkeep |
+| [s3098](run:B1-30000-794ae8-s3098) | round 3 | 29 | 56 | 26 | 66 | 61 | 55 | 31 | 57 | 44 | 47.2 | messages, gifts, handover, partner search, revolutions |
+| [s3065](run:B1-30000-ba3afe-s3065) | round 3 | 57 | 70 | 72 | 6 | 67 | 50 | 66 | 38 | 16 | 49.1 | messages, handover, partner search, upkeep, mixing |
+| [s3090](run:B1-30000-05ba40-s3090) | round 3 | 66 | 72 | 70 | 10 | 72 | 58 | 62 | 45 | 7 | 51.3 | messages, partner search, upkeep, mixing |
 <!-- /table -->
 
 <!-- figure oeecandidates/heredity_novelty -->
@@ -298,78 +299,78 @@ The numbers behind the ranks:
 <!-- table oeecandidates/numbers -->
 | world | agents | generations | effective population | heredity | fertility passed on | novelty | contemporaries | health |
 |---|---|---|---|---|---|---|---|---|
-| [s3026](run:B1-30000-d6955f-s3026) | 2,068 | 2159 | 78 | 0.30 | 0.12 | 0.26 | 0.31 | 0.47 |
+| [s3026](run:B1-30000-d6955f-s3026) | 2,068 | 2159 | 78 | 0.30 | 0.12 | 0.26 | 0.31 | 0.48 |
 | [s4008 w](run:B1-30000-1cfaa4-s4008) | 5,120 | 662 | 12 | 0.23 | 0.42 | 0.23 | 0.26 | 0.53 |
 | [s4008 s](run:B1-30000-645972-s4008) | 5,402 | 691 | 14 | 0.25 | 0.40 | 0.17 | 0.27 | 0.50 |
-| [s4003 w](run:B1-30000-9efb1d-s4003) | 10,264 | 1189 | 9 | 0.52 | 0.34 | 0.13 | 0.19 | 0.46 |
-| [s4003 s](run:B1-30000-fffc7d-s4003) | 8,805 | 1131 | 9 | 0.36 | 0.33 | 0.19 | 0.23 | 0.49 |
+| [s4003 s](run:B1-30000-fffc7d-s4003) | 8,805 | 1131 | 9 | 0.36 | 0.33 | 0.19 | 0.23 | 0.50 |
+| [s4003 w](run:B1-30000-9efb1d-s4003) | 10,264 | 1189 | 9 | 0.52 | 0.34 | 0.13 | 0.19 | 0.47 |
 | [s4002 w](run:B1-30000-5379e2-s4002) | 5,278 | 822 | 8 | 0.22 | 0.37 | 0.22 | 0.28 | 0.54 |
-| [s3021](run:B1-30000-4aff7d-s3021) | 1,715 | 1064 | 27 | 0.32 | 0.22 | 0.14 | 0.23 | 0.46 |
-| [s3042](run:B1-30000-b82ad0-s3042) | 11,125 | 1180 | 247 | 0.14 | 0.04 | 0.15 | 0.21 | 0.62 |
-| [s3045](run:B1-30000-f6d23f-s3045) | 1,411 | 1237 | 490 | 0.22 | 0.08 | 0.14 | 0.22 | 0.50 |
-| [s3024](run:B1-30000-f05874-s3024) | 4,614 | 878 | 12 | 0.44 | 0.12 | 0.11 | 0.26 | 0.53 |
+| [s3021](run:B1-30000-4aff7d-s3021) | 1,715 | 1064 | 27 | 0.32 | 0.22 | 0.14 | 0.23 | 0.47 |
+| [s3042](run:B1-30000-b82ad0-s3042) | 11,125 | 1180 | 247 | 0.14 | 0.04 | 0.15 | 0.21 | 0.61 |
+| [s3045](run:B1-30000-f6d23f-s3045) | 1,411 | 1237 | 490 | 0.22 | 0.08 | 0.14 | 0.22 | 0.48 |
+| [s3024](run:B1-30000-f05874-s3024) | 4,614 | 878 | 12 | 0.44 | 0.12 | 0.11 | 0.26 | 0.54 |
 | [s3062](run:B1-30000-def151-s3062) | 2,569 | 993 | 11 | 0.19 | 0.27 | 0.22 | 0.28 | 0.48 |
-| [s3008](run:B1-30000-e19f2d-s3008) | 2,063 | 947 | 24 | 0.62 | 0.01 | 0.14 | 0.15 | 0.53 |
 | [s3082](run:B1-30000-1141ea-s3082) | 3,207 | 1411 | 26 | 0.84 | 0.14 | 0.09 | 0.12 | 0.38 |
-| [s3095](run:B1-30000-3e5856-s3095) | 3,265 | 1338 | 1,219 | 0.25 | -0.02 | 0.15 | 0.29 | 0.38 |
-| [s4002 s](run:B1-30000-192733-s4002) | 5,705 | 953 | 7 | 0.22 | 0.39 | 0.17 | 0.29 | 0.43 |
-| [s3028](run:B1-30000-2eef58-s3028) | 5,736 | 1437 | 37 | 0.84 | 0.33 | 0.07 | 0.05 | 0.37 |
-| [s3030](run:B1-30000-90fc91-s3030) | 19,951 | 761 | 12,248 | 0.68 | 0.18 | 0.05 | 0.18 | 0.39 |
-| [s3046](run:B1-30000-27bd64-s3046) | 2,418 | 1321 | 51 | 0.23 | 0.18 | 0.10 | 0.18 | 0.39 |
-| [s3094](run:B1-30000-4ac946-s3094) | 11,256 | 1509 | 11,316 | 0.13 | 0.14 | 0.08 | 0.24 | 0.37 |
-| [s4004 w](run:B1-30000-17ac6e-s4004) | 1,186 | 1309 | 5 | 0.34 | 0.35 | 0.14 | 0.25 | 0.33 |
-| [s4006 s](run:B1-30000-8526cf-s4006) | 7,009 | 940 | 30 | 0.51 | 0.12 | 0.07 | 0.12 | 0.58 |
-| [s3033](run:B1-30000-631e49-s3033) | 1,639 | 1083 | 988 | 0.15 | -0.00 | 0.19 | 0.27 | 0.37 |
-| [s3055](run:B1-30000-cca771-s3055) | 2,507 | 1033 | 6 | 0.36 | 0.31 | 0.11 | 0.24 | 0.40 |
-| [s4004 s](run:B1-30000-2bac4d-s4004) | 1,349 | 1392 | 6 | 0.29 | 0.37 | 0.12 | 0.23 | 0.29 |
-| [s3006](run:B1-30000-023c0a-s3006) | 6,774 | 652 | 59 | 0.48 | 0.09 | 0.05 | 0.17 | 0.52 |
-| [s3016](run:B1-30000-b23381-s3016) | 1,486 | 1071 | 31 | 0.28 | 0.04 | 0.05 | 0.34 | 0.47 |
-| [s3023](run:B1-30000-b0f6e3-s3023) | 1,612 | 955 | 22 | 0.34 | 0.19 | 0.06 | 0.14 | 0.52 |
-| [s3087](run:B1-30000-363694-s3087) | 10,034 | 1179 | 12 | 0.54 | 0.31 | 0.04 | 0.06 | 0.52 |
-| [s3091](run:B1-30000-42d88d-s3091) | 2,361 | 1173 | 5 | 0.25 | 0.36 | 0.14 | 0.20 | 0.34 |
+| [s3008](run:B1-30000-e19f2d-s3008) | 2,063 | 947 | 24 | 0.62 | 0.01 | 0.14 | 0.15 | 0.53 |
+| [s4002 s](run:B1-30000-192733-s4002) | 5,705 | 953 | 7 | 0.22 | 0.39 | 0.17 | 0.29 | 0.44 |
+| [s3028](run:B1-30000-2eef58-s3028) | 5,736 | 1437 | 37 | 0.84 | 0.33 | 0.07 | 0.05 | 0.38 |
+| [s3095](run:B1-30000-3e5856-s3095) | 3,265 | 1338 | 1,219 | 0.25 | -0.02 | 0.15 | 0.29 | 0.34 |
+| [s3046](run:B1-30000-27bd64-s3046) | 2,418 | 1321 | 51 | 0.23 | 0.18 | 0.10 | 0.18 | 0.40 |
+| [s4004 w](run:B1-30000-17ac6e-s4004) | 1,186 | 1309 | 5 | 0.34 | 0.35 | 0.14 | 0.25 | 0.35 |
+| [s3055](run:B1-30000-cca771-s3055) | 2,507 | 1033 | 6 | 0.36 | 0.31 | 0.11 | 0.24 | 0.42 |
+| [s3030](run:B1-30000-90fc91-s3030) | 19,951 | 761 | 12,248 | 0.68 | 0.18 | 0.05 | 0.18 | 0.35 |
+| [s4006 s](run:B1-30000-8526cf-s4006) | 7,009 | 940 | 30 | 0.51 | 0.12 | 0.07 | 0.12 | 0.59 |
+| [s3033](run:B1-30000-631e49-s3033) | 1,639 | 1083 | 988 | 0.15 | -0.00 | 0.19 | 0.27 | 0.36 |
+| [s4004 s](run:B1-30000-2bac4d-s4004) | 1,349 | 1392 | 6 | 0.29 | 0.37 | 0.12 | 0.23 | 0.30 |
+| [s3094](run:B1-30000-4ac946-s3094) | 11,256 | 1509 | 11,316 | 0.13 | 0.14 | 0.08 | 0.24 | 0.32 |
+| [s3006](run:B1-30000-023c0a-s3006) | 6,774 | 652 | 59 | 0.48 | 0.09 | 0.05 | 0.17 | 0.53 |
+| [s3023](run:B1-30000-b0f6e3-s3023) | 1,612 | 955 | 22 | 0.34 | 0.19 | 0.06 | 0.14 | 0.51 |
+| [s3091](run:B1-30000-42d88d-s3091) | 2,361 | 1173 | 5 | 0.25 | 0.36 | 0.14 | 0.20 | 0.36 |
+| [s3087](run:B1-30000-363694-s3087) | 10,034 | 1179 | 12 | 0.54 | 0.31 | 0.04 | 0.06 | 0.51 |
+| [s3016](run:B1-30000-b23381-s3016) | 1,486 | 1071 | 31 | 0.28 | 0.04 | 0.05 | 0.34 | 0.43 |
+| [s4005 s](run:B1-30000-6f6c09-s4005) | 3,866 | 646 | 10 | 0.33 | 0.14 | 0.14 | 0.26 | 0.37 |
 | [s3018](run:B1-30000-af1e28-s3018) | 2,861 | 313 | 263 | 0.16 | 0.06 | 0.10 | 0.16 | 0.56 |
-| [s4005 s](run:B1-30000-6f6c09-s4005) | 3,866 | 646 | 10 | 0.33 | 0.14 | 0.14 | 0.26 | 0.36 |
-| [s3064](run:B1-30000-a6a7ec-s3064) | 5,290 | 232 | 2,072 | 0.13 | 0.09 | 0.10 | 0.18 | 0.52 |
 | [s3032](run:B1-30000-22865f-s3032) | 7,263 | 401 | 67 | 0.28 | 0.18 | 0.08 | 0.18 | 0.41 |
-| [s3058](run:B1-30000-4108dd-s3058) | 1,257 | 142 | 10 | 0.46 | 0.12 | 0.13 | 0.17 | 0.50 |
+| [s3064](run:B1-30000-a6a7ec-s3064) | 5,290 | 232 | 2,072 | 0.13 | 0.09 | 0.10 | 0.18 | 0.51 |
+| [s3007](run:B1-30000-8119cd-s3007) | 3,382 | 1434 | 37 | 0.57 | 0.23 | 0.04 | 0.09 | 0.34 |
 | [s3057](run:B1-30000-38aee9-s3057) | 4,802 | 597 | 11 | 0.14 | 0.26 | 0.07 | 0.20 | 0.54 |
-| [s3007](run:B1-30000-8119cd-s3007) | 3,382 | 1434 | 37 | 0.57 | 0.23 | 0.04 | 0.09 | 0.32 |
 | [s4007 w](run:B1-30000-04d3eb-s4007) | 6,489 | 828 | 9 | 0.53 | 0.43 | 0.08 | 0.14 | 0.16 |
-| [s3049](run:B1-30000-c51eb8-s3049) | 5,163 | 236 | 60 | 0.17 | 0.12 | 0.11 | 0.17 | 0.47 |
-| [s3076](run:B1-30000-66c764-s3076) | 4,525 | 1198 | 9 | 0.66 | 0.44 | 0.06 | 0.08 | 0.18 |
-| [s3014](run:B1-30000-7d129f-s3014) | 10,836 | 1242 | 14 | 0.53 | 0.45 | 0.04 | 0.07 | 0.30 |
+| [s3058](run:B1-30000-4108dd-s3058) | 1,257 | 142 | 10 | 0.46 | 0.12 | 0.13 | 0.17 | 0.47 |
+| [s3076](run:B1-30000-66c764-s3076) | 4,525 | 1198 | 9 | 0.66 | 0.44 | 0.06 | 0.08 | 0.19 |
+| [s3014](run:B1-30000-7d129f-s3014) | 10,836 | 1242 | 14 | 0.53 | 0.45 | 0.04 | 0.07 | 0.31 |
 | [s3080](run:B1-30000-625bc7-s3080) | 1,985 | 121 | 11 | 0.34 | 0.04 | 0.11 | 0.18 | 0.55 |
-| [s4007 s](run:B1-30000-a8a2d2-s4007) | 6,653 | 855 | 7 | 0.37 | 0.40 | 0.11 | 0.15 | 0.19 |
-| [s3047](run:B1-30000-10c9f1-s3047) | 3,607 | 662 | 9 | 0.61 | 0.29 | 0.08 | 0.08 | 0.49 |
-| [s3054](run:B1-30000-d9254e-s3054) | 3,309 | 224 | 34 | 0.63 | 0.07 | 0.05 | 0.10 | 0.52 |
+| [s3005](run:B1-30000-c18a1f-s3005) | 4,022 | 950 | 35 | 0.51 | -0.05 | 0.08 | 0.10 | 0.48 |
+| [s3047](run:B1-30000-10c9f1-s3047) | 3,607 | 662 | 9 | 0.61 | 0.29 | 0.08 | 0.08 | 0.48 |
+| [s3049](run:B1-30000-c51eb8-s3049) | 5,163 | 236 | 60 | 0.17 | 0.12 | 0.11 | 0.17 | 0.45 |
+| [s4007 s](run:B1-30000-a8a2d2-s4007) | 6,653 | 855 | 7 | 0.37 | 0.40 | 0.11 | 0.15 | 0.20 |
+| [s3054](run:B1-30000-d9254e-s3054) | 3,309 | 224 | 34 | 0.63 | 0.07 | 0.05 | 0.10 | 0.51 |
 | [s3061](run:B1-30000-00e3c8-s3061) | 3,236 | 1092 | 8 | 0.17 | 0.33 | 0.05 | 0.22 | 0.41 |
+| [s3078](run:B1-30000-dd27b6-s3078) | 1,672 | 422 | 5 | 0.65 | 0.40 | 0.09 | 0.07 | 0.40 |
 | [s3001](run:B1-30000-68cda7-s3001) | 17,266 | 1138 | 15 | 0.83 | 0.29 | 0.04 | 0.05 | 0.33 |
-| [s3078](run:B1-30000-dd27b6-s3078) | 1,672 | 422 | 5 | 0.65 | 0.40 | 0.09 | 0.07 | 0.39 |
-| [s3005](run:B1-30000-c18a1f-s3005) | 4,022 | 950 | 35 | 0.51 | -0.05 | 0.08 | 0.10 | 0.46 |
-| [s3071](run:B1-30000-605c0d-s3071) | 6,070 | 109 | 14 | 0.47 | 0.19 | 0.10 | 0.11 | 0.40 |
-| [s3089](run:B1-30000-77ad6a-s3089) | 5,521 | 844 | 133 | 0.86 | -0.00 | 0.09 | 0.09 | 0.12 |
-| [s3092](run:B1-30000-7fc03f-s3092) | 6,165 | 253 | 74 | 0.20 | 0.07 | 0.08 | 0.17 | 0.48 |
-| [s3050](run:B1-30000-ebe08c-s3050) | 3,312 | 926 | 6 | 0.47 | 0.28 | 0.08 | 0.13 | 0.35 |
+| [s3089](run:B1-30000-77ad6a-s3089) | 5,521 | 844 | 133 | 0.86 | -0.00 | 0.09 | 0.09 | 0.13 |
+| [s3050](run:B1-30000-ebe08c-s3050) | 3,312 | 926 | 6 | 0.47 | 0.28 | 0.08 | 0.13 | 0.36 |
+| [s3092](run:B1-30000-7fc03f-s3092) | 6,165 | 253 | 74 | 0.20 | 0.07 | 0.08 | 0.17 | 0.46 |
+| [s3059](run:B1-30000-2ec87a-s3059) | 4,136 | 310 | 12 | 0.47 | 0.05 | 0.09 | 0.15 | 0.40 |
+| [s3071](run:B1-30000-605c0d-s3071) | 6,070 | 109 | 14 | 0.47 | 0.19 | 0.10 | 0.11 | 0.38 |
 | [s3052](run:B1-30000-0d058a-s3052) | 7,368 | 387 | 15 | 0.42 | 0.28 | 0.08 | 0.11 | 0.33 |
+| [s3070](run:B1-30000-a4d3a0-s3070) | 7,767 | 774 | 12 | 0.67 | 0.11 | 0.07 | 0.06 | 0.39 |
+| [s3063](run:B1-30000-924e70-s3063) | 14,473 | 1053 | 8 | 0.47 | 0.39 | 0.05 | 0.09 | 0.34 |
 | [s3022](run:B1-30000-298337-s3022) | 5,394 | 199 | 9 | 0.22 | 0.25 | 0.07 | 0.14 | 0.53 |
-| [s3063](run:B1-30000-924e70-s3063) | 14,473 | 1053 | 8 | 0.47 | 0.39 | 0.05 | 0.09 | 0.35 |
-| [s3040](run:B1-30000-36d076-s3040) | 3,904 | 805 | 10 | 0.35 | 0.21 | 0.09 | 0.14 | 0.25 |
-| [s3059](run:B1-30000-2ec87a-s3059) | 4,136 | 310 | 12 | 0.47 | 0.05 | 0.09 | 0.15 | 0.37 |
-| [s3085](run:B1-30000-801b34-s3085) | 4,156 | 1303 | 5 | 0.44 | 0.39 | 0.02 | 0.14 | 0.26 |
-| [s3051](run:B1-30000-b5a76a-s3051) | 1,091 | 141 | 4 | 0.41 | 0.14 | 0.09 | 0.11 | 0.53 |
-| [s3070](run:B1-30000-a4d3a0-s3070) | 7,767 | 774 | 12 | 0.67 | 0.11 | 0.07 | 0.06 | 0.35 |
-| [s3004](run:B1-30000-7d5208-s3004) | 1,581 | 23 | 18 | 0.51 | 0.04 | 0.08 | 0.07 | 0.52 |
-| [s3083](run:B1-30000-0d7e0c-s3083) | 4,159 | 389 | 11 | 0.63 | -0.01 | 0.08 | 0.11 | 0.35 |
-| [s3056](run:B1-30000-43985b-s3056) | 3,649 | 361 | 16 | 0.60 | 0.05 | 0.04 | 0.09 | 0.38 |
-| [s3093](run:B1-30000-26a341-s3093) | 3,387 | 207 | 9 | 0.61 | 0.08 | 0.05 | 0.10 | 0.44 |
-| [s3013](run:B1-30000-7f7cd5-s3013) | 10,511 | 500 | 5 | 0.58 | 0.39 | 0.02 | 0.09 | 0.36 |
-| [s3041](run:B1-30000-965f1e-s3041) | 4,464 | 212 | 22 | 0.74 | 0.00 | 0.03 | 0.09 | 0.38 |
+| [s3040](run:B1-30000-36d076-s3040) | 3,904 | 805 | 10 | 0.35 | 0.21 | 0.09 | 0.14 | 0.24 |
+| [s3085](run:B1-30000-801b34-s3085) | 4,156 | 1303 | 5 | 0.44 | 0.39 | 0.02 | 0.14 | 0.28 |
+| [s3051](run:B1-30000-b5a76a-s3051) | 1,091 | 141 | 4 | 0.41 | 0.14 | 0.09 | 0.11 | 0.50 |
+| [s3083](run:B1-30000-0d7e0c-s3083) | 4,159 | 389 | 11 | 0.63 | -0.01 | 0.08 | 0.11 | 0.37 |
+| [s3004](run:B1-30000-7d5208-s3004) | 1,581 | 23 | 18 | 0.51 | 0.04 | 0.08 | 0.07 | 0.49 |
+| [s3056](run:B1-30000-43985b-s3056) | 3,649 | 361 | 16 | 0.60 | 0.05 | 0.04 | 0.09 | 0.40 |
+| [s3013](run:B1-30000-7f7cd5-s3013) | 10,511 | 500 | 5 | 0.58 | 0.39 | 0.02 | 0.09 | 0.38 |
+| [s3093](run:B1-30000-26a341-s3093) | 3,387 | 207 | 9 | 0.61 | 0.08 | 0.05 | 0.10 | 0.46 |
+| [s3012](run:B1-30000-02fa53-s3012) | 2,487 | 327 | 9 | 0.65 | 0.02 | 0.06 | 0.12 | 0.36 |
 | [s3019](run:B1-30000-b1209a-s3019) | 3,019 | 101 | 1,526 | 0.13 | -0.03 | 0.05 | 0.13 | 0.49 |
-| [s3012](run:B1-30000-02fa53-s3012) | 2,487 | 327 | 9 | 0.65 | 0.02 | 0.06 | 0.12 | 0.33 |
-| [s3043](run:B1-30000-02ed17-s3043) | 2,520 | 73 | 904 | 0.35 | 0.09 | 0.02 | 0.07 | 0.41 |
+| [s3041](run:B1-30000-965f1e-s3041) | 4,464 | 212 | 22 | 0.74 | 0.00 | 0.03 | 0.09 | 0.39 |
+| [s3043](run:B1-30000-02ed17-s3043) | 2,520 | 73 | 904 | 0.35 | 0.09 | 0.02 | 0.07 | 0.40 |
 | [s3098](run:B1-30000-794ae8-s3098) | 4,806 | 256 | 6 | 0.49 | 0.21 | 0.04 | 0.10 | 0.35 |
-| [s3065](run:B1-30000-ba3afe-s3065) | 2,104 | 54 | 1,147 | 0.12 | -0.00 | 0.03 | 0.11 | 0.42 |
-| [s3090](run:B1-30000-05ba40-s3090) | 1,521 | 14 | 365 | 0.13 | 0.03 | -0.00 | 0.09 | 0.42 |
+| [s3065](run:B1-30000-ba3afe-s3065) | 2,104 | 54 | 1,147 | 0.12 | -0.00 | 0.03 | 0.11 | 0.40 |
+| [s3090](run:B1-30000-05ba40-s3090) | 1,521 | 14 | 365 | 0.13 | 0.03 | -0.00 | 0.09 | 0.38 |
 <!-- /table -->
 
 ## The shortlist
@@ -378,42 +379,42 @@ Health comes in three orders: the six criteria multiplied, added, or the
 worst of them ([Which worlds are healthy?](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together)).
 The author (9 November 2026): "the union of the best of these rankings are
 candidates." So the shortlist is every candidate, of the 72 the rules above
-leave, among the first 13 of any of the three orders. That makes 24 worlds, the
-number the author chose to play again. Evolution does not choose them: the
+leave, among the first 13 of any of the three orders. On 9 November 2026 that
+made 24 worlds, the ones the author chose to play again in Experiment 43. Since
+health also counts agents on loops per link (the same day, later), it makes 21:
+seeds 3004, 3016, 3026, 3030, 3051, 3094 and 3095 left it, and seeds 3005, 3006,
+3064 and 3093 joined it. Evolution does not choose them: the
 rules above rule out the worlds that cannot evolve, and the table gives each
 shortlisted world's evolution beside its health.
 
 <!-- table oeecandidates/shortlist -->
 | world | round | among the first 13 by | health (product) | evolution's mean rank | heredity | novelty | generations | effective population | fertility passed on | channels open |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | product, sum, worst | 0.620 | 30.2 | 0.14 | 0.15 | 1,180 | 247 | 0.04 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
-| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | product, sum, worst | 0.576 | 36.7 | 0.51 | 0.07 | 940 | 30 | 0.12 | messages, gifts, handover, upkeep, revolutions |
-| [s3018](run:B1-30000-af1e28-s3018) | round 3 | product, worst | 0.560 | 40.8 | 0.16 | 0.10 | 313 | 263 | 0.06 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s3080](run:B1-30000-625bc7-s3080) | round 3 | product, worst | 0.554 | 43.2 | 0.34 | 0.11 | 121 | 11 | 0.04 | messages, gifts, handover, partner search, revolutions |
-| [s3057](run:B1-30000-38aee9-s3057) | round 3 | product, worst | 0.541 | 41.8 | 0.14 | 0.07 | 597 | 11 | 0.26 | messages, partner search, mixing |
-| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | product, sum | 0.537 | 29.0 | 0.22 | 0.22 | 822 | 8 | 0.37 | messages, gifts, mates pay, partner search, mixing |
-| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | product, worst | 0.534 | 30.8 | 0.62 | 0.14 | 947 | 24 | 0.01 | messages, gifts, partner search, revolutions |
-| [s3024](run:B1-30000-f05874-s3024) | round 3 | product, worst | 0.531 | 30.5 | 0.44 | 0.11 | 878 | 12 | 0.12 | messages, gifts, handover, upkeep, revolutions |
-| [s3022](run:B1-30000-298337-s3022) | round 3 | product, worst | 0.529 | 47.8 | 0.22 | 0.07 | 199 | 9 | 0.25 | messages, partner search |
-| [s3051](run:B1-30000-b5a76a-s3051) | round 3 | product, sum | 0.528 | 49.0 | 0.41 | 0.09 | 141 | 4 | 0.14 | messages, gifts, partner search, upkeep, revolutions |
-| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | product, sum, worst | 0.525 | 25.8 | 0.23 | 0.23 | 662 | 12 | 0.42 | messages, gifts |
-| [s3054](run:B1-30000-d9254e-s3054) | round 3 | product | 0.523 | 42.5 | 0.63 | 0.05 | 224 | 34 | 0.07 | messages, partner search, upkeep |
-| [s3087](run:B1-30000-363694-s3087) | round 3 | product, sum | 0.521 | 38.3 | 0.54 | 0.04 | 1,179 | 12 | 0.31 | messages, handover, partner search, upkeep |
-| [s3004](run:B1-30000-7d5208-s3004) | round 3 | sum | 0.517 | 49.2 | 0.51 | 0.08 | 23 | 18 | 0.04 | messages, gifts |
-| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | worst | 0.515 | 37.7 | 0.34 | 0.06 | 955 | 22 | 0.19 | messages, gifts, upkeep |
-| [s3058](run:B1-30000-4108dd-s3058) | round 3 | sum | 0.499 | 39.2 | 0.46 | 0.13 | 142 | 10 | 0.12 | messages, partner search, revolutions |
-| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | sum | 0.497 | 27.3 | 0.22 | 0.14 | 1,237 | 490 | 0.08 | messages, gifts, handover, partner search, upkeep, revolutions |
-| [s3019](run:B1-30000-b1209a-s3019) | round 3 | worst | 0.491 | 51.3 | 0.13 | 0.05 | 101 | 1,526 | -0.03 | messages, handover, partner search, upkeep |
-| [s3026](run:B1-30000-d6955f-s3026) | round 3 | worst | 0.472 | 17.8 | 0.30 | 0.26 | 2,159 | 78 | 0.12 | messages, handover |
-| [s3016](run:B1-30000-b23381-s3016) | round 3 | sum | 0.468 | 35.3 | 0.28 | 0.05 | 1,071 | 31 | 0.04 | messages, partner search, upkeep |
-| [s3030](run:B1-30000-90fc91-s3030) | round 3 | sum | 0.390 | 27.3 | 0.68 | 0.05 | 761 | 12,248 | 0.18 | messages, upkeep |
-| [s3095](run:B1-30000-3e5856-s3095) | round 3 | sum | 0.380 | 24.5 | 0.25 | 0.15 | 1,338 | 1,219 | -0.02 | messages, handover, partner search, upkeep |
-| [s3094](run:B1-30000-4ac946-s3094) | round 3 | sum | 0.372 | 27.7 | 0.13 | 0.08 | 1,509 | 11,316 | 0.14 | messages, gifts, partner search, upkeep |
-| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | worst | 0.327 | 26.5 | 0.34 | 0.14 | 1,309 | 5 | 0.35 | messages, handover, mates pay, partner search, mixing |
+| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | product, sum, worst | 0.606 | 30.2 | 0.14 | 0.15 | 1,180 | 247 | 0.04 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
+| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | product, sum, worst | 0.587 | 36.7 | 0.51 | 0.07 | 940 | 30 | 0.12 | messages, gifts, handover, upkeep, revolutions |
+| [s3018](run:B1-30000-af1e28-s3018) | round 3 | product, sum, worst | 0.565 | 40.8 | 0.16 | 0.10 | 313 | 263 | 0.06 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3080](run:B1-30000-625bc7-s3080) | round 3 | product, sum, worst | 0.549 | 43.2 | 0.34 | 0.11 | 121 | 11 | 0.04 | messages, gifts, handover, partner search, revolutions |
+| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | product, sum | 0.544 | 29.0 | 0.22 | 0.22 | 822 | 8 | 0.37 | messages, gifts, mates pay, partner search, mixing |
+| [s3057](run:B1-30000-38aee9-s3057) | round 3 | product, sum, worst | 0.541 | 41.8 | 0.14 | 0.07 | 597 | 11 | 0.26 | messages, partner search, mixing |
+| [s3024](run:B1-30000-f05874-s3024) | round 3 | product, worst | 0.536 | 30.5 | 0.44 | 0.11 | 878 | 12 | 0.12 | messages, gifts, handover, upkeep, revolutions |
+| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | product, sum | 0.528 | 25.8 | 0.23 | 0.23 | 662 | 12 | 0.42 | messages, gifts |
+| [s3006](run:B1-30000-023c0a-s3006) | round 3 | product, sum | 0.526 | 37.7 | 0.48 | 0.05 | 652 | 59 | 0.09 | messages, gifts, handover, partner search, upkeep |
+| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | product, worst | 0.526 | 30.8 | 0.62 | 0.14 | 947 | 24 | 0.01 | messages, gifts, partner search, revolutions |
+| [s3022](run:B1-30000-298337-s3022) | round 3 | product, worst | 0.525 | 47.8 | 0.22 | 0.07 | 199 | 9 | 0.25 | messages, partner search |
+| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | product, worst | 0.515 | 37.7 | 0.34 | 0.06 | 955 | 22 | 0.19 | messages, gifts, upkeep |
+| [s3054](run:B1-30000-d9254e-s3054) | round 3 | product, sum | 0.513 | 42.5 | 0.63 | 0.05 | 224 | 34 | 0.07 | messages, partner search, upkeep |
+| [s3087](run:B1-30000-363694-s3087) | round 3 | sum | 0.511 | 38.3 | 0.54 | 0.04 | 1,179 | 12 | 0.31 | messages, handover, partner search, upkeep |
+| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | sum | 0.511 | 39.0 | 0.13 | 0.10 | 232 | 2,072 | 0.09 | messages, handover, partner search |
+| [s3019](run:B1-30000-b1209a-s3019) | round 3 | worst | 0.485 | 51.3 | 0.13 | 0.05 | 101 | 1,526 | -0.03 | messages, handover, partner search, upkeep |
+| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | worst | 0.481 | 40.5 | 0.51 | 0.08 | 950 | 35 | -0.05 | messages, handover, mixing |
+| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | sum | 0.476 | 27.3 | 0.22 | 0.14 | 1,237 | 490 | 0.08 | messages, gifts, handover, partner search, upkeep, revolutions |
+| [s3058](run:B1-30000-4108dd-s3058) | round 3 | sum | 0.473 | 39.2 | 0.46 | 0.13 | 142 | 10 | 0.12 | messages, partner search, revolutions |
+| [s3093](run:B1-30000-26a341-s3093) | round 3 | worst | 0.457 | 48.5 | 0.61 | 0.05 | 207 | 9 | 0.08 | messages, gifts, handover, partner search |
+| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | worst | 0.345 | 26.5 | 0.34 | 0.14 | 1,309 | 5 | 0.35 | messages, handover, mates pay, partner search, mixing |
 <!-- /table -->
 
-- **Three worlds are among the first 13 of all three orders:** seeds 3042,
-  4006 played strongest first and 4008 played weakest first. Seed 3042 is the
+- **Five worlds are among the first 13 of all three orders:** seeds 3042,
+  4006 played strongest first, 3018, 3080 and 3057. Seed 3042 is the
   healthiest by the product, with a large effective population (247) but
   children little like their parents (a heredity index of 0.14).
 - **Seed 3026 is the most evolving world of the round:** it lives the most
@@ -421,14 +422,15 @@ shortlisted world's evolution beside its health.
   behaviour (0.26 above the noise) and never comes back. Its rules are among the
   simplest the round drew: [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), handing over, mending, [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the
   newborns, and a cap of 16 links that seldom binds; no search, no gifts, no
-  costs on links. It is on the shortlist by its worst criterion: it culls 12%
-  of its tokens in a game, and its agents act alike, so the product and the
-  sum leave it out of their first 13.
+  costs on links. It was on the shortlist by its worst criterion until health
+  counted agents on loops per link; now it is the 17th by its worst criterion,
+  the 23rd by the product and the 36th by the sum, and just misses it: it
+  culls 12% of its tokens in a game, and its agents act alike.
 - **Some worlds evolve well but are not among the healthiest:** of the five
-  worlds with the best mean rank in evolution, seeds 4003 played weakest first,
-  4003 strongest first and 3082 are not on the shortlist.
+  worlds with the best mean rank in evolution, four are not on the shortlist:
+  seeds 3026, 4008 played strongest first, and 4003 played either way.
 - **Seed 3092, which meets every one of the author's lines, is not on the
-  shortlist:** it is the 25th by the product, the 23rd by the sum and the 29th
+  shortlist:** it is the 30th by the product, the 31st by the sum and the 31st
   by its worst criterion
   ([Which worlds are healthy?](which-worlds-are-healthy.md#what-the-orders-show)).
 
@@ -541,7 +543,10 @@ seed:
 > runs are played. The stopped runs stay on disk: `B1-50000-4ac946-s4301` and
 > `-s4302` at about iteration 670, `B1-50000-90fc91-s4301` at about 600. The
 > thesis keeps its words, and is judged over the 21 settings played; the three
-> taken out are neither counted as dead nor scored.
+> taken out are neither counted as dead nor scored. Later that day health came
+> to count agents on loops per link, and the shortlist changed; Experiment 43
+> plays the shortlist as it was planned, and is judged by health as it was
+> then, without that measure (the author's choice).
 
 <!-- runs E43 -->
 > [!info]- The runs behind this page
@@ -639,11 +644,12 @@ seed:
   novelty, against heredity.
 - **Fertility runs in families in almost every world;** mending deaths weakens
   it.
-- **The shortlist is 24 worlds,** every candidate among the first 13 of any
-  of health's three orders; the author chose to play each again with two new
-  seeds, larger and longer (Experiment 43).
-- **Seed 3026, with simple rules, evolves the most,** and it is on the
-  shortlist only by its worst criterion: it culls 12% of its tokens in a game.
+- **The shortlist is 21 worlds,** every candidate among the first 13 of any
+  of health's three orders, now that health counts agents on loops per link.
+  The 24 it held before are played again with two new seeds, larger and
+  longer, less three whose links ran away (Experiment 43).
+- **Seed 3026, with simple rules, evolves the most,** and has just left the
+  shortlist: it culls 12% of its tokens in a game.
 
 ## Where to go next
 
@@ -676,3 +682,14 @@ themselves.
   ranks the rest, finds the shortlist and writes
   `research/screen/candidates.json`, from which
   `python3 book_figures.py oeecandidates` draws this page.
+
+## How our view changed
+
+- **9 November 2026, later.** Health came to count agents on loops per link
+  ([Which worlds are healthy?](which-worlds-are-healthy.md#not-a-tree-and-not-crowded-with-links)).
+  The shortlist went from 24 worlds to 21: seeds 3004, 3016, 3026, 3030, 3051,
+  3094 and 3095 left it, and seeds 3005, 3006, 3064 and 3093 joined it. Five
+  worlds, not three, are among the first 13 of all three orders. Health
+  against heredity reads −0.30, where it read −0.37.
+
+

@@ -19,7 +19,7 @@ time is not what is missing. It needs three things the lab could not do:
 keep frames only in short windows, advance a run in blocks, and keep
 checkpoints. Since then, contests showed that B1's [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") stop learning
 within 50 to 100 iterations. And since November 2026 the notebook plays only
-random worlds and worlds that follow a promising [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."). So the run is
+random worlds and worlds that follow a promising candidate. So the run is
 planned again, as a draft for the author to decide: three of round 3's
 shortlisted worlds, played on from iteration 3,000 to 100,000. That needs
 nothing new built, and takes about two and a half days
@@ -458,7 +458,9 @@ easier than the plan above.
   the rest ([Did evolution happen?](did-evolution-happen.md)) can read the run
   when it ends.
 
-**The proposal.** Three worlds of the shortlist, each played on from
+**The proposal.** Three worlds of the shortlist as it stood on 9 November
+2026 (since health also counts agents on loops per link, seed 3026 has left
+it, but it still evolves the most), each played on from
 iteration 3,000 to 100,000, keeping a whole world every 2,500 iterations: 39
 more eras each.
 

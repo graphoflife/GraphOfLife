@@ -275,11 +275,13 @@ experiment below changes one rule of one world, and keeps everything else.
 
 ### Six worlds
 
-The worlds are six of the 24 on the shortlist of
-[Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist),
-each with its own drawn settings and its own seed. Seed 3042 is the healthiest
-by the product of health's six criteria; seeds 3018, 3080 and 3057 come third
-to fifth. Seed 3026 evolves the most, with some of the simplest rules of the
+The worlds are six of the 24 that were on the shortlist of
+[Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)
+when this plan was written, on 9 November 2026 (since then health also counts
+agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link, and seeds 3026 and 3004 have left it), each with its
+own drawn settings and its own seed. Seed 3042 was the healthiest by the
+product of health's six criteria; seeds 3018, 3080 and 3057 came third to
+fifth. Seed 3026 evolves the most, with some of the simplest rules of the
 round. Seed 3004 culls only 0.3% of its tokens a game, the second least of
 the shortlist: if the local rules change any world little, it is this one.
 

@@ -194,9 +194,9 @@ age (an agent that starved holds nothing). The figure sets the share of all
 tokens a cleanup hands on against each world's inequality.
 
 <!-- figure wealthspread/shared -->
-![The more tokens pass through the share-out, the more even a world](../figures/wealthspread/shared.svg)
+![Where more tokens pass from the dead to the living, worlds tend to be more even](../figures/wealthspread/shared.svg)
 
-**The more tokens pass through the share-out, the more even a world.** Each dot is a world of Experiment 40 that lived, coloured by its share-out rule. Across, on a logarithmic axis: the share of all the world's tokens that a cleanup hands on from the dead to the living, averaged over every phase from iteration 100 to the end; it counts the estates of every agent that died, culled or starved (the starved hold nothing). Up: the world's Gini coefficient, averaged over the same stretch.
+**Where more tokens pass from the dead to the living, worlds tend to be more even.** Each dot is a world of Experiment 40 that lived, coloured by its share-out rule. Across, on a logarithmic axis: the share of all the world's tokens that a cleanup hands on from the dead to the living, averaged over every phase from iteration 100 to the end; it counts the estates of every agent that died, culled or starved (the starved hold nothing). Up: the world's Gini coefficient, averaged over the same stretch.
 
 > [!example]- How to make this figure
 > **Runs.** the worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiment 40: 30,000 tokens, every setting drawn at random)

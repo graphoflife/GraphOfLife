@@ -325,6 +325,10 @@ def test_agents_on_loops_per_link_is_low_for_a_tree_and_for_a_crowd_of_links():
     assert tree < crowd < b1 < ring, (tree, crowd, b1, ring)
     two = HEALTH.averages([{"t": 100, "core": 1.0, "links": 2.0}, {"t": 101, "core": 1.0, "links": 4.0}], 300, 100, 102)
     assert abs(two["lean"] - 0.75) < 1e-12, "the measure was not averaged reading by reading"
+    # As the readings come: links an agent in every iteration's row, the 2-core in a heavy frame's.
+    apart = HEALTH.averages([{"t": 100, "links": 4.0}, {"t": 101, "links": 2.0}, {"t": 100, "core": 0.5}],
+                            300, 100, 102)
+    assert abs(apart["lean"] - 0.25) < 1e-12, apart.get("lean")
     lean = next(m for m in HEALTH.MEASURES if m["key"] == "lean")
     assert lean["criterion"] == "resilient" and lean["better"] == "more"
 

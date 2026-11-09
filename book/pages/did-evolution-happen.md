@@ -60,7 +60,7 @@ Most tests need no new runs, because round 3 kept a great deal:
 - **Every decision.** Each phase's decisions are in the record: who staked
   what where, who had a child and how much it was given, which links were made
   and kept.
-- **82 worlds that lived**, 72 of them still [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), 24 of them now being
+- **82 worlds that lived**, 72 of them still candidates, 21 of them now being
   played again with two new [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, larger and longer (Experiment 43,
   [Round 3's best worlds, played again](candidates-for-open-ended-evolution.md#round-3s-best-worlds-played-again)).
 
@@ -91,7 +91,8 @@ world plays than earlier ones. These two tests play eras against each other.
   world: 132 contests a world for a full round robin. With 3 seconds an
   iteration that is about 11 hours a world. Played like Experiment 28, every
   era against three fixed eras, it is 72 contests; neighbouring eras only,
-  22. For all 24 shortlisted worlds on three workers, that is about 8 days,
+  22. For the 24 worlds shortlisted when this page was written, on three
+  workers, that is about 8 days,
   4 days or a day and a half. The tool is built
   ([Every era against three](every-era-against-three.md)).
 - **From:** the cross-time tournament of Cliff and Miller (1995), and the
@@ -295,7 +296,7 @@ worlds played again, and Experiment 43 is already playing some.
 ### 13 · Parallel evolution in Experiment 43
 
 - **Asks:** do two worlds with the same rules evolve the same strategies?
-- **How:** Experiment 43 plays 24 of round 3's worlds again with two new seeds
+- **How:** Experiment 43 plays 21 of round 3's worlds again with two new seeds
   each. When it ends, compare the two seeds' late kinds of strategy, and play
   their late brains against each other in a common garden (test 2).
 - **Yes would look like:** the same strategies arise with both seeds: the
@@ -356,7 +357,7 @@ along the way (tests 8 to 11).
 ## Where to go next
 
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
-  the 72 worlds these tests would read, and the shortlist of 24.
+  the 72 worlds these tests would read, and the shortlist of 21.
 - [Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better): how two eras are
   played against each other, and what their scores mean.
 - [Every era against three](every-era-against-three.md): the era tournament,

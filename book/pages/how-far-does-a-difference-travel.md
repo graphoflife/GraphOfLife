@@ -16,8 +16,8 @@ shows how far news travels in a world, and whether a small change grows or
 fades. By the rules, a difference can travel at most four steps a phase, three
 in worlds without the look that only talks: a world's speed of light. But only
 once the cull, the [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") and the one random stream are local, and only 4
-of the 24 shortlisted worlds of round 3 have no other rule that breaks the
-bound. The plan is thirty twin trials on each of three candidate worlds, under
+of the 24 worlds on round 3's shortlist when this plan was written have no
+other rule that breaks the bound. The plan is thirty twin trials on each of three candidate worlds, under
 three conditions, with heat spreading on the same network as the test of the
 measurement. The draft thesis: under local rules the bound is never broken,
 and the difference does not die away but spreads, more slowly than the bound
@@ -123,7 +123,9 @@ travels in a game is set by the wealth of the richest agent.
 ### Which candidates could keep a cone
 
 Round 3 drew most of these rules at random. The table reads each world of the
-shortlist of [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist):
+shortlist of [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)
+as it stood when this plan was written, on 9 November 2026, before health
+counted agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link:
 how far a difference could go in a phase once the cull, the share-out and the
 one random stream are local, as [Local rules only](local-rules-only.md) plans.
 
@@ -361,7 +363,7 @@ line a phase a trial: tens of megabytes.
 
 No run of this experiment exists. The bound of four steps a phase was read
 from the engine (`GraphOfLifeSimple.py`: the features measured once a phase,
-the look that only talks, the [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") of both phases, the cleanup), as
+the look that only talks, the loops of both phases, the cleanup), as
 [Physical inspiration](physical-inspiration.md#a-speed-limit) first drew it.
 The table of the shortlist reads each world's drawn settings from
 `research/screen/health.json` and the shortlist from

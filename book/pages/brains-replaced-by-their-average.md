@@ -212,7 +212,9 @@ neighbouring ways says what that thing does for a world:
 Every run of round 3 kept its whole world every 250 iterations, brains
 included ([Eras](measuring-evolution.md#eras)). The plan takes five of the 24
 shortlisted worlds ([The shortlist](candidates-for-open-ended-evolution.md#the-shortlist))
-as they stood at iteration 1,500, halfway through their runs.
+as they stood at iteration 1,500, halfway through their runs. They are the
+shortlist of 9 November 2026, when this plan was written; since health also
+counts agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link, seed 3026 has left it.
 
 | world | why this one | health's ranks (product, sum, worst) | agents | median tokens | heredity index | effective population | seconds an iteration | 1,500 iterations |
 |---|---|---|---|---|---|---|---|---|

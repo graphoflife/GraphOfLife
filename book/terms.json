@@ -643,7 +643,8 @@
   ],
   "skip": {
     "a-hundred-thousand-iterations": [
-      "loop"
+      "loop",
+      "candidate"
     ],
     "participation-ratio": [
       "dimension"
@@ -696,6 +697,15 @@
       "candidate",
       "entropy",
       "hub"
+    ],
+    "did-evolution-happen": [
+      "candidate"
+    ],
+    "how-this-notebook-is-written": [
+      "candidate"
+    ],
+    "mixing-with-every-other-rule": [
+      "candidate"
     ]
   }
 }

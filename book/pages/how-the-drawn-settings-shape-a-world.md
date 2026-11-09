@@ -16,7 +16,8 @@ Gifts keep worlds alive: 2 of 41 worlds with gifts died, against 12 of 43
 without. Mending deaths spares a world its culls, in which whole branches are
 cut off with all they hold, and makes its [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") act differently; random
 numbers in the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") drown their differences. Mixing brains at birth, and [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") given
-to the poorest, make worlds more even. Most settings show no effect we can see,
+to the poorest, make worlds more even; estates to the poorest, and links kept
+by payment alone, also make them the least healthy. Most settings show no effect we can see,
 and worlds with fewer mechanisms switched on are no less healthy. For evolution, [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") only at
 birth, and rare, makes children like their parents; mending deaths keeps three
 times as many lines of descent alive and lets them reach new behaviour.
@@ -101,8 +102,10 @@ The findings, every one with a false discovery rate below 0.1:
 |---|---|---|---|---|
 | died | [`valence`](settings.md#valence) | 0.0001 | 0.002 | 0: 0.10 (59); 16: 0.17 (6); 2: 1.00 (6); 4: 0.12 (8); 8: 0.00 (5) |
 | died | [`allow_gifting`](settings.md#allow_gifting) | 0.0069 | 0.086 | false: 0.28 (43); true: 0.05 (41) |
-| resilient | [`valence`](settings.md#valence) | 0.0000 | 0.001 | 0: 0.55 (53); 16: 0.61 (5); 4: 0.11 (7); 8: 0.21 (5) |
-| resilient | [`mix_at_birth`](settings.md#mix_at_birth) | 0.0073 | 0.091 | false: 0.56 (49); true: 0.27 (21) |
+| health (the six criteria multiplied, as their geometric average) | [`link_upkeep`](settings.md#link_upkeep) | 0.0024 | 0.037 | off: 0.42 (27); paid_only: 0.34 (21); paid_or_used: 0.42 (22) |
+| health (the six criteria multiplied, as their geometric average) | [`redistribution`](settings.md#redistribution) | 0.0030 | 0.037 | children: 0.40 (13); local: 0.46 (9); newborns: 0.46 (10); parents: 0.42 (9); poorest: 0.34 (24); uniform: 0.49 (5) |
+| resilient | [`valence`](settings.md#valence) | 0.0003 | 0.007 | 0: 0.50 (53); 16: 0.49 (5); 4: 0.14 (7); 8: 0.28 (5) |
+| resilient | [`link_search`](settings.md#link_search) | 0.0053 | 0.067 | jump: 0.35 (18); off: 0.45 (18); reach: 0.54 (19); walk: 0.48 (15) |
 | diverse | [`mend_on_death`](settings.md#mend_on_death) | 0.0044 | 0.058 | false: 0.33 (28); true: 0.48 (42) |
 | diverse | [`link_upkeep`](settings.md#link_upkeep) | 0.0046 | 0.058 | off: 0.44 (27); paid_only: 0.29 (21); paid_or_used: 0.49 (22) |
 | not too even | [`redistribution`](settings.md#redistribution) | 0.0028 | 0.062 | children: 0.55 (13); local: 0.76 (9); newborns: 0.71 (10); parents: 0.52 (9); poorest: 0.24 (24); uniform: 0.43 (5) |
@@ -196,58 +199,65 @@ A world's [health](which-worlds-are-healthy.md) is read here by the product
 of its six criteria (as their geometric average, from 0 to 1), and each
 criterion as a score from 0 to 1: the share of the round's worlds a world does
 better than. Experiment 40's 70 living worlds have a median health of 0.40.
-Five things make a difference, each clearly beyond chance in at least one
+Seven things make a difference, each clearly beyond chance in at least one
 criterion:
 
-1. **A cap of four or eight links makes a world sick.** The living worlds
-   capped at 4 links have a median health of 0.35, those capped at 8 a median
-   of 0.36, against 0.41 with no cap and 0.53 with a cap of 16 (chance 0.014,
-   false discovery rate 0.12). The cap hurts resilience most: a median score
-   of 0.11 at 4 links and 0.21 at 8, against 0.55 with no cap (false discovery
-   rate 0.001). An agent at its cap can neither take a new link nor have a
-   child, so where many agents sit at their cap, [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") are few and single
-   agents hold whole parts of the world together. The author never liked the
-   cap (it limits by rule what the brains should decide), and a cap of 16
-   seldom binds.
-2. **Mixing brains at birth makes worlds less resilient and more even.** With
-   mixing the median health is 0.35, without it 0.44 (chance 0.025, false
-   discovery rate 0.15). In the criteria: not too even, 0.35 against 0.65
-   (false discovery rate 0.06, a finding), and resilient, 0.27 against 0.56
-   (0.09).
-3. **Mending deaths spares a world its culls, and makes its agents act
+1. **A cap of four or eight links makes a world fragile.** Resilience has a
+   median score of 0.14 at a cap of 4 links and 0.28 at 8, against 0.50 with
+   no cap (false discovery rate 0.007). An agent at its cap can neither take a
+   new link nor have a child, so where many agents sit at their cap, [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.")
+   are few and single agents hold whole parts of the world together. Health
+   falls less: a median of 0.37 and 0.38, against 0.40 with no cap and 0.50
+   with a cap of 16 (chance 0.10). The author never liked the cap (it limits
+   by rule what the brains should decide), and a cap of 16 seldom binds.
+2. **Links kept by payment alone make a world sick.** Where only paying keeps
+   a link ([`link_upkeep`](settings.md#link_upkeep) `paid_only`), the median
+   health is 0.35, against 0.42 with no upkeep and 0.42 where paying or using
+   keeps it (chance 0.002, false discovery rate 0.04). These worlds are also
+   the least diverse, 0.29 against 0.44 and 0.49 (0.06). Four of them hold 10
+   to 28 links an agent: a new link counts as paid for its first iteration,
+   so in a world whose agents are nearly all newborns every newborn's links
+   stand, and health's agents on loops per link scores those worlds low
+   ([Not a tree, and not crowded with links](which-worlds-are-healthy.md#not-a-tree-and-not-crowded-with-links)).
+3. **Estates given to the poorest make worlds even, crowded and less
+   healthy.** Their median health is 0.34, against 0.40 to 0.49 under the
+   other five ways (chance 0.003, false discovery rate 0.04). The [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
+   the tokens has a median of 0.32 where the estate goes to the poorest, 0.36
+   where it is shared uniformly, and 0.42 to 0.53 under the other four ways
+   (false discovery rate 0.002). Raising the poorest keeps many poor agents
+   alive: these worlds hold a median of about 6,600 agents, against 2,500
+   where the estate goes to the dead agent's children (0.02).
+4. **Mending deaths spares a world its culls, and makes its agents act
    differently.** With [`mend_on_death`](settings.md#mend_on_death) a living
    world culls a median of 4% of its tokens in a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."); without it, 11% (false
    discovery rate 0.01). The rule says why: without mending, a death that cuts
    the network in two culls everything on the far side of it at once, with all
    it held; with mending, only links that lapse can cut a piece off
    ([Few tokens culled](which-worlds-are-healthy.md#few-tokens-culled)). Its
-   health is 0.43 against 0.37 (chance 0.04, false discovery rate 0.19). The
+   health is 0.41 against 0.38 (chance 0.05, false discovery rate 0.38). The
    diverse criterion's median is 0.48 with mending and 0.33 without (false
    discovery rate 0.06), and the [same-position share](measuring-health.md#the-same-position-share "Of two agents put in the same situation, how often they stake their tokens measurably differently.") 0.60 against 0.29
    (0.009). Why mending makes agents act differently is not yet clear. One
    guess: a big cull takes whole families at once, so the living descend from
    fewer lines, which act alike.
-4. **Estates given to the poorest make worlds even and crowded.** The [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
-   the tokens has a median of 0.32 where the estate goes to the poorest, 0.36
-   where it is shared uniformly, and 0.42 to 0.53 under the other four ways
-   (false discovery rate 0.002). Raising the poorest keeps many poor agents
-   alive: these worlds hold a median of about 6,600 agents, against 2,500
-   where the estate goes to the dead agent's children (0.02).
-5. **Noise drowns what makes agents different.** The same-position share has a
+5. **Mixing brains at birth makes worlds more even.** Not too even: 0.35 with
+   mixing against 0.65 without (false discovery rate 0.06, a finding). Its
+   health, 0.37 against 0.42, and its resilience, 0.36 against 0.49, differ by
+   no more than chance can tell (chances 0.11 and 0.10).
+6. **How agents search for partners shapes resilience.** Worlds whose agents
+   reach, a free jump as long as their tokens allow, score 0.54; walking 0.48;
+   no search 0.45; and paid jumps 0.35 (false discovery rate 0.07).
+7. **Noise drowns what makes agents different.** The same-position share has a
    median of 0.98 in worlds whose brains read no random numbers, about 0.5 with
    2 or 5 of them, and 0.27 with 10 (false discovery rate 0.002). The measure
    counts only differences larger than a brain's own noise. With ten random
    numbers for every [neighbour](the-world.md#the-network "An agent joined to another by a connection."), an agent's stakes are mostly noise, and two
    agents act no more differently than one agent twice.
 
-Two more change a world without changing its health beyond chance. Keeping a
-link only while it is paid for or used gives the healthiest worlds by
-[`link_upkeep`](settings.md#link_upkeep), a median of 0.46, against 0.41 with
-no upkeep and 0.36 when only paying keeps a link (chance 0.008, false
-discovery rate 0.12). And a token in every
-link ([`link_token`](settings.md#link_token)) halves the number of agents, from
-a median of about 6,300 to 2,950 (false discovery rate 0.001). A link that
-costs a token leaves fewer tokens for agents.
+One more changes a world without changing its health beyond chance: a token in
+every link ([`link_token`](settings.md#link_token)) halves the number of
+agents, from a median of about 6,300 to 2,950 (false discovery rate 0.001). A
+link that costs a token leaves fewer tokens for agents.
 
 ## What decides how a world evolves
 
@@ -307,11 +317,11 @@ steers at random.
 drawn value that best divides them into a healthier and a sicker group, so
 long as each group keeps six worlds at least. Its first steps:
 - estates given to the poorest: 24 worlds with a mean health of 0.33; among
-  them, links kept while paid for or used, 8 worlds at 0.41, and of the other
-  16, those with a token in every link, 6 at 0.23;
-- of the other 46 worlds (a mean of 0.44), a cap of 4 links: 6 worlds at 0.33;
-- the 40 left have a mean of 0.46, and the 28 of them that do not keep links
-  only by paying, 0.48: the healthiest group the tree finds.
+  them, links kept while paid for or used, 8 worlds at 0.40, and of the other
+  16, those with a token in every link, 6 at 0.24;
+- of the other 46 worlds (a mean of 0.44), a cap of 4 links: 6 worlds at 0.35;
+- the 40 left have a mean of 0.45, and the 28 of them that do not keep links
+  only by paying, 0.47: the healthiest group the tree finds.
 
 A tree this small also splits on chance: its first steps agree with the tests
 above, its last (a token in every link, among the worlds of the poorest's
@@ -322,7 +332,7 @@ estates) is no finding.
 <!-- figure settingseffects/simplicity -->
 ![Do worlds with more mechanisms switched on do better?](../figures/settingseffects/simplicity.svg)
 
-**Do worlds with more mechanisms switched on do better?** Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation 0.03.
+**Do worlds with more mechanisms switched on do better?** Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation 0.09.
 
 > [!example]- How to make this figure
 > **Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end
@@ -340,8 +350,8 @@ mechanisms switched on pay for it? They do not. Counting fourteen mechanisms
 (messages, noise, the lottery, [coalitions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), handing over, gifts, mending,
 mixing, estates other than uniform, search, a cap on links, a token in every
 link, upkeep, and a game in rounds), the drawn worlds switched on 5 to 11. The
-four worlds with only 5 have a mean health of 0.47, the most of any count,
-and the rank correlation of mechanisms with health is 0.03: more mechanisms
+four worlds with only 5 have a mean health of 0.45, the most of any count,
+and the rank correlation of mechanisms with health is 0.09: more mechanisms
 go with no more health. No mechanism is needed for a [healthy world](measuring-health.md#what-makes-a-world-interesting "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).") in round 3; a
 few ([above](#what-decides-how-healthy-a-living-world-grows)) do harm.
 
@@ -356,13 +366,13 @@ is the world's health, or when it died:
 | draw | weakest first | strongest first |
 |---|---|---|
 | s4001 | died at 144 | died at 387 |
-| s4002 | 0.537 | 0.431 |
-| s4003 | 0.464 | 0.493 |
-| s4004 | 0.327 | 0.287 |
-| s4005 | died at 230 | 0.361 |
-| s4006 | died at 1,445 | 0.576 |
-| s4007 | 0.159 | 0.190 |
-| s4008 | 0.525 | 0.496 |
+| s4002 | 0.544 | 0.442 |
+| s4003 | 0.466 | 0.498 |
+| s4004 | 0.345 | 0.303 |
+| s4005 | died at 230 | 0.373 |
+| s4006 | died at 1,445 | 0.587 |
+| s4007 | 0.164 | 0.197 |
+| s4008 | 0.528 | 0.501 |
 <!-- /table -->
 
 - **The order changed little in the worlds that lived.** In the five draws
@@ -408,7 +418,7 @@ effect on any outcome: no test of them had a chance below 0.05.
 | setting | its smallest chance on any outcome | on which |
 |---|---|---|
 | [`link_consent`](settings.md#link_consent) | 0.34 | almost three-dimensional |
-| [`upkeep_to`](settings.md#upkeep_to) | 0.28 | heredity index |
+| [`upkeep_to`](settings.md#upkeep_to) | 0.25 | resilient |
 | [`message_amount`](settings.md#message_amount) | 0.19 | died, valence 2 aside |
 | [`mate_pays`](settings.md#mate_pays) | 0.13 | died, valence 2 aside |
 | [`link_steering`](settings.md#link_steering) | 0.11 | diverse |
@@ -431,31 +441,31 @@ only over far longer runs than ours, messages above all
 <!-- table settingseffects/all -->
 | setting | died, by value | chance | median health of the living, by value | chance |
 |---|---|---|---|---|
-| [`allow_gifting`](settings.md#allow_gifting) | false: 12/43; true: 2/41 | 0.007 | false: 0.40; true: 0.39 | 0.954 |
-| [`allow_handover`](settings.md#allow_handover) | false: 7/37; true: 7/47 | 0.767 | false: 0.40; true: 0.39 | 0.592 |
-| [`allow_revolutions`](settings.md#allow_revolutions) | false: 4/18; true: 6/23 | 1.000 | false: 0.37; true: 0.44 | 0.150 |
-| [`contest`](settings.md#contest) | largest: 10/41; lottery: 4/43 | 0.081 | largest: 0.40; lottery: 0.40 | 0.879 |
-| [`hidden_layers`](settings.md#hidden_layers) | [16, 16, 16, 16, 16]: 1/11; [16, 16, 16, 16]: 3/9; [16, 16, 16]: 0/10; [32, 32, 32, 32, 32]: 3/10; [32, 32, 32, 32]: 1/6; [32, 32, 32]: 1/5; [50, 50, 50, 50, 50]: 3/15; [50, 50, 50, 50]: 1/5; [50, 50, 50]: 1/13 | 0.621 | [16, 16, 16, 16, 16]: 0.46; [16, 16, 16, 16]: 0.33; [16, 16, 16]: 0.47; [32, 32, 32, 32, 32]: 0.48; [32, 32, 32, 32]: 0.36; [32, 32, 32]: 0.38; [50, 50, 50, 50, 50]: 0.43; [50, 50, 50, 50]: 0.37; [50, 50, 50]: 0.40 | 0.233 |
-| [`link_consent`](settings.md#link_consent) | forced: 5/32; mutual: 8/33 | 0.535 | forced: 0.40; mutual: 0.41 | 0.971 |
-| [`link_search`](settings.md#link_search) | jump: 2/20; off: 1/19; reach: 5/24; walk: 6/21 | 0.183 | jump: 0.38; off: 0.38; reach: 0.42; walk: 0.39 | 0.518 |
-| [`link_steering`](settings.md#link_steering) | looking: 4/32; random: 9/33 | 0.214 | looking: 0.39; random: 0.41 | 0.483 |
-| [`link_token`](settings.md#link_token) | false: 6/43; true: 8/41 | 0.570 | false: 0.39; true: 0.41 | 0.368 |
-| [`link_upkeep`](settings.md#link_upkeep) | off: 5/32; paid_only: 4/25; paid_or_used: 5/27 | 1.000 | off: 0.41; paid_only: 0.36; paid_or_used: 0.46 | 0.008 |
-| [`mate_pays`](settings.md#mate_pays) | false: 5/16; true: 1/11 | 0.346 | false: 0.34; true: 0.37 | 0.504 |
-| [`mend_on_death`](settings.md#mend_on_death) | false: 7/35; true: 7/49 | 0.559 | false: 0.37; true: 0.43 | 0.039 |
-| [`message_amount`](settings.md#message_amount) | 0: 1/4; 16: 2/17; 30: 4/21; 4: 6/25; 8: 1/17 | 0.583 | 0: 0.37; 16: 0.42; 30: 0.48; 4: 0.38; 8: 0.41 | 0.377 |
-| [`message_prepass`](settings.md#message_prepass) | false: 5/32; true: 8/48 | 1.000 | false: 0.42; true: 0.40 | 0.644 |
-| [`mix_at_birth`](settings.md#mix_at_birth) | false: 8/57; true: 6/27 | 0.533 | false: 0.44; true: 0.35 | 0.025 |
-| [`mutate_on_replication`](settings.md#mutate_on_replication) | false: 7/48; true: 7/36 | 0.773 | false: 0.41; true: 0.39 | 0.342 |
-| [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.1: 0/12; 0.2: 11/59; 0.4: 3/13 | 0.279 | 0.1: 0.42; 0.2: 0.40; 0.4: 0.42 | 0.511 |
-| [`mutation_probability`](settings.md#mutation_probability) | 0.1: 0/5; 0.2: 14/66; 0.4: 0/6; 0.8: 0/7 | 0.192 | 0.1: 0.37; 0.2: 0.41; 0.4: 0.35; 0.8: 0.40 | 0.886 |
-| [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.05: 2/8; 0.1: 11/66; 0.3: 1/10 | 0.669 | 0.05: 0.39; 0.1: 0.40; 0.3: 0.41 | 0.966 |
-| [`n_nodes`](settings.md#n_nodes) | 0: 6/33; 150: 5/30; 600: 3/21 | 1.000 | 0: 0.39; 150: 0.41; 600: 0.41 | 0.733 |
-| [`random_input_amount`](settings.md#random_input_amount) | 0: 2/12; 10: 3/22; 2: 6/27; 5: 3/23 | 0.847 | 0: 0.37; 10: 0.41; 2: 0.40; 5: 0.44 | 0.775 |
-| [`redistribution`](settings.md#redistribution) | children: 3/16; local: 4/13; newborns: 0/10; parents: 2/11; poorest: 3/27; uniform: 2/7 | 0.397 | children: 0.39; local: 0.47; newborns: 0.45; parents: 0.40; poorest: 0.35; uniform: 0.52 | 0.014 |
-| [`self_message`](settings.md#self_message) | largest: 7/31; own: 6/49 | 0.356 | largest: 0.39; own: 0.45 | 0.105 |
-| [`upkeep_to`](settings.md#upkeep_to) | end: 6/27; estate: 3/25 | 0.467 | end: 0.39; estate: 0.38 | 0.909 |
-| [`valence`](settings.md#valence) | 0: 6/59; 16: 1/6; 2: 6/6; 4: 1/8; 8: 0/5 | 0.000 | 0: 0.41; 16: 0.53; 4: 0.35; 8: 0.36 | 0.014 |
+| [`allow_gifting`](settings.md#allow_gifting) | false: 12/43; true: 2/41 | 0.007 | false: 0.38; true: 0.40 | 0.555 |
+| [`allow_handover`](settings.md#allow_handover) | false: 7/37; true: 7/47 | 0.767 | false: 0.40; true: 0.40 | 1.000 |
+| [`allow_revolutions`](settings.md#allow_revolutions) | false: 4/18; true: 6/23 | 1.000 | false: 0.37; true: 0.42 | 0.234 |
+| [`contest`](settings.md#contest) | largest: 10/41; lottery: 4/43 | 0.081 | largest: 0.40; lottery: 0.40 | 0.777 |
+| [`hidden_layers`](settings.md#hidden_layers) | [16, 16, 16, 16, 16]: 1/11; [16, 16, 16, 16]: 3/9; [16, 16, 16]: 0/10; [32, 32, 32, 32, 32]: 3/10; [32, 32, 32, 32]: 1/6; [32, 32, 32]: 1/5; [50, 50, 50, 50, 50]: 3/15; [50, 50, 50, 50]: 1/5; [50, 50, 50]: 1/13 | 0.621 | [16, 16, 16, 16, 16]: 0.42; [16, 16, 16, 16]: 0.34; [16, 16, 16]: 0.47; [32, 32, 32, 32, 32]: 0.48; [32, 32, 32, 32]: 0.36; [32, 32, 32]: 0.36; [50, 50, 50, 50, 50]: 0.44; [50, 50, 50, 50]: 0.39; [50, 50, 50]: 0.39 | 0.301 |
+| [`link_consent`](settings.md#link_consent) | forced: 5/32; mutual: 8/33 | 0.535 | forced: 0.40; mutual: 0.41 | 0.984 |
+| [`link_search`](settings.md#link_search) | jump: 2/20; off: 1/19; reach: 5/24; walk: 6/21 | 0.183 | jump: 0.38; off: 0.39; reach: 0.41; walk: 0.40 | 0.549 |
+| [`link_steering`](settings.md#link_steering) | looking: 4/32; random: 9/33 | 0.214 | looking: 0.40; random: 0.41 | 0.656 |
+| [`link_token`](settings.md#link_token) | false: 6/43; true: 8/41 | 0.570 | false: 0.39; true: 0.40 | 0.200 |
+| [`link_upkeep`](settings.md#link_upkeep) | off: 5/32; paid_only: 4/25; paid_or_used: 5/27 | 1.000 | off: 0.42; paid_only: 0.34; paid_or_used: 0.42 | 0.002 |
+| [`mate_pays`](settings.md#mate_pays) | false: 5/16; true: 1/11 | 0.346 | false: 0.36; true: 0.38 | 0.383 |
+| [`mend_on_death`](settings.md#mend_on_death) | false: 7/35; true: 7/49 | 0.559 | false: 0.38; true: 0.41 | 0.045 |
+| [`message_amount`](settings.md#message_amount) | 0: 1/4; 16: 2/17; 30: 4/21; 4: 6/25; 8: 1/17 | 0.583 | 0: 0.36; 16: 0.40; 30: 0.46; 4: 0.38; 8: 0.41 | 0.443 |
+| [`message_prepass`](settings.md#message_prepass) | false: 5/32; true: 8/48 | 1.000 | false: 0.40; true: 0.40 | 0.804 |
+| [`mix_at_birth`](settings.md#mix_at_birth) | false: 8/57; true: 6/27 | 0.533 | false: 0.42; true: 0.37 | 0.111 |
+| [`mutate_on_replication`](settings.md#mutate_on_replication) | false: 7/48; true: 7/36 | 0.773 | false: 0.40; true: 0.38 | 0.189 |
+| [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.1: 0/12; 0.2: 11/59; 0.4: 3/13 | 0.279 | 0.1: 0.40; 0.2: 0.40; 0.4: 0.44 | 0.545 |
+| [`mutation_probability`](settings.md#mutation_probability) | 0.1: 0/5; 0.2: 14/66; 0.4: 0/6; 0.8: 0/7 | 0.192 | 0.1: 0.38; 0.2: 0.40; 0.4: 0.37; 0.8: 0.42 | 0.980 |
+| [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.05: 2/8; 0.1: 11/66; 0.3: 1/10 | 0.669 | 0.05: 0.40; 0.1: 0.40; 0.3: 0.41 | 0.957 |
+| [`n_nodes`](settings.md#n_nodes) | 0: 6/33; 150: 5/30; 600: 3/21 | 1.000 | 0: 0.40; 150: 0.40; 600: 0.40 | 0.754 |
+| [`random_input_amount`](settings.md#random_input_amount) | 0: 2/12; 10: 3/22; 2: 6/27; 5: 3/23 | 0.847 | 0: 0.39; 10: 0.40; 2: 0.39; 5: 0.42 | 0.929 |
+| [`redistribution`](settings.md#redistribution) | children: 3/16; local: 4/13; newborns: 0/10; parents: 2/11; poorest: 3/27; uniform: 2/7 | 0.397 | children: 0.40; local: 0.46; newborns: 0.46; parents: 0.42; poorest: 0.34; uniform: 0.49 | 0.003 |
+| [`self_message`](settings.md#self_message) | largest: 7/31; own: 6/49 | 0.356 | largest: 0.38; own: 0.42 | 0.086 |
+| [`upkeep_to`](settings.md#upkeep_to) | end: 6/27; estate: 3/25 | 0.467 | end: 0.38; estate: 0.38 | 0.877 |
+| [`valence`](settings.md#valence) | 0: 6/59; 16: 1/6; 2: 6/6; 4: 1/8; 8: 0/5 | 0.000 | 0: 0.40; 16: 0.50; 4: 0.37; 8: 0.38 | 0.101 |
 <!-- /table -->
 
 ## What we learned
@@ -511,3 +521,15 @@ only among the worlds where the sampler lets it matter. The pairs of values are
 tried where at least four worlds had both, and the tree of health splits no
 group below six worlds, at most three times. `python3 book_figures.py
 settingseffects` draws this page.
+
+## How our view changed
+
+- **9 November 2026, later.** Health came to count agents on loops per link
+  as well ([Which worlds are healthy?](which-worlds-are-healthy.md)). Since
+  then, links kept by payment alone and estates given to the poorest go with a
+  lower health beyond chance (false discovery rate 0.04 each), where before
+  they did not (0.12 each), and searching for partners with resilience (0.07).
+  The cap of four or eight links and mixing at birth no longer go with health
+  beyond chance (0.46 each, where before 0.12 and 0.15), nor mixing with
+  resilience. The worlds with the fewest mechanisms have a mean health of
+  0.45, where before 0.47. Everything else this page found stands.

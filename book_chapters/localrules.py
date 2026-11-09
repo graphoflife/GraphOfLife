@@ -192,13 +192,56 @@ def cone(s: Dict[str, Any]) -> Dict[str, Any]:
 # The page
 # ---------------------------------------------------------------------------
 
+#: The shortlist and health's places as they stood when these plans were written, 9 November 2026, before
+#: health counted agents on loops per link: the plans name their worlds by them, and keep them.
+SHORTLIST_OF_THE_PLANS = [
+    "B1-30000-17ac6e-s4004", "B1-30000-1cfaa4-s4008", "B1-30000-298337-s3022",
+    "B1-30000-363694-s3087", "B1-30000-38aee9-s3057", "B1-30000-3e5856-s3095",
+    "B1-30000-4108dd-s3058", "B1-30000-4ac946-s3094", "B1-30000-5379e2-s4002",
+    "B1-30000-625bc7-s3080", "B1-30000-7d5208-s3004", "B1-30000-8526cf-s4006",
+    "B1-30000-90fc91-s3030", "B1-30000-af1e28-s3018", "B1-30000-b0f6e3-s3023",
+    "B1-30000-b1209a-s3019", "B1-30000-b23381-s3016", "B1-30000-b5a76a-s3051",
+    "B1-30000-b82ad0-s3042", "B1-30000-d6955f-s3026", "B1-30000-d9254e-s3054",
+    "B1-30000-e19f2d-s3008", "B1-30000-f05874-s3024", "B1-30000-f6d23f-s3045",
+]
+PLACES_OF_THE_PLANS = {
+    "B1-30000-00e3c8-s3061": 40, "B1-30000-023c0a-s3006": 15, "B1-30000-02ed17-s3043": 39,
+    "B1-30000-02fa53-s3012": 65, "B1-30000-04d3eb-s4007": 80, "B1-30000-05ba40-s3090": 38,
+    "B1-30000-0d058a-s3052": 68, "B1-30000-0d7e0c-s3083": 62, "B1-30000-10c9f1-s3047": 23,
+    "B1-30000-1141ea-s3082": 50, "B1-30000-17ac6e-s4004": 67, "B1-30000-192733-s4002": 36,
+    "B1-30000-1ab8a0-s3099": 60, "B1-30000-1ad8a9-s3038": 79, "B1-30000-1cfaa4-s4008": 11,
+    "B1-30000-22865f-s3032": 41, "B1-30000-26a341-s3093": 35, "B1-30000-27bd64-s3046": 45,
+    "B1-30000-298337-s3022": 9, "B1-30000-2bac4d-s4004": 71, "B1-30000-2ec87a-s3059": 54,
+    "B1-30000-2eef58-s3028": 51, "B1-30000-363694-s3087": 14, "B1-30000-36d076-s3040": 73,
+    "B1-30000-38aee9-s3057": 5, "B1-30000-3e5856-s3095": 49, "B1-30000-4108dd-s3058": 19,
+    "B1-30000-42d88d-s3091": 64, "B1-30000-43985b-s3056": 48, "B1-30000-4ac946-s3094": 53,
+    "B1-30000-4aff7d-s3021": 31, "B1-30000-4bee8e-s3067": 34, "B1-30000-511930-s3020": 82,
+    "B1-30000-5379e2-s4002": 6, "B1-30000-605c0d-s3071": 43, "B1-30000-625bc7-s3080": 4,
+    "B1-30000-631e49-s3033": 52, "B1-30000-63827e-s3044": 76, "B1-30000-645972-s4008": 21,
+    "B1-30000-66c764-s3076": 78, "B1-30000-68cda7-s3001": 66, "B1-30000-6f6c09-s4005": 55,
+    "B1-30000-77ad6a-s3089": 81, "B1-30000-794ae8-s3098": 61, "B1-30000-7d129f-s3014": 70,
+    "B1-30000-7d5208-s3004": 16, "B1-30000-7f7cd5-s3013": 57, "B1-30000-7fc03f-s3092": 25,
+    "B1-30000-801b34-s3085": 72, "B1-30000-8119cd-s3007": 69, "B1-30000-845393-s3037": 75,
+    "B1-30000-8526cf-s4006": 2, "B1-30000-90fc91-s3030": 46, "B1-30000-924e70-s3063": 63,
+    "B1-30000-965f1e-s3041": 47, "B1-30000-9efb1d-s4003": 30, "B1-30000-a4d3a0-s3070": 59,
+    "B1-30000-a6a7ec-s3064": 17, "B1-30000-a8a2d2-s4007": 77, "B1-30000-ad76aa-s3084": 33,
+    "B1-30000-af1e28-s3018": 3, "B1-30000-b0f6e3-s3023": 18, "B1-30000-b1209a-s3019": 24,
+    "B1-30000-b23381-s3016": 29, "B1-30000-b5a76a-s3051": 10, "B1-30000-b82ad0-s3042": 1,
+    "B1-30000-ba3afe-s3065": 37, "B1-30000-c18a1f-s3005": 32, "B1-30000-c51eb8-s3049": 28,
+    "B1-30000-cca771-s3055": 42, "B1-30000-d6955f-s3026": 27, "B1-30000-d6eabf-s3077": 12,
+    "B1-30000-d9254e-s3054": 13, "B1-30000-dd27b6-s3078": 44, "B1-30000-def151-s3062": 26,
+    "B1-30000-dfd51b-s3066": 56, "B1-30000-e19f2d-s3008": 7, "B1-30000-ebe08c-s3050": 58,
+    "B1-30000-f05562-s3072": 74, "B1-30000-f05874-s3024": 8, "B1-30000-f6d23f-s3045": 20,
+    "B1-30000-fffc7d-s4003": 22,
+}
+
 @chapter
 def localrules(ch: F.Chapter) -> None:
     if not (os.path.exists(HEALTH) and os.path.exists(EFFECTS) and os.path.exists(CANDIDATES)):
         return
     health = json.load(open(HEALTH))
     effects = json.load(open(EFFECTS))
-    shortlist = json.load(open(CANDIDATES))["shortlist"]
+    shortlist = SHORTLIST_OF_THE_PLANS
 
     drawn = [w for w in health["worlds"] if w["round"] == "E40"]
     living = [w for w in drawn if w["fate"] == "lived" and w.get("read") and "health" in w]
@@ -316,7 +359,7 @@ def localrules(ch: F.Chapter) -> None:
     for seed in WORLDS:
         w, life = by_seed[seed], lives[by_seed[seed]["id"]]
         s = w["set"]
-        rows.append([{"text": f"s{seed}", "href": f"run:{w['id']}"}, w["ranks"]["product"],
+        rows.append([{"text": f"s{seed}", "href": f"run:{w['id']}"}, PLACES_OF_THE_PLANS[w["id"]],
                      RULE_WORDS[_rule(w)], "yes" if _mends(w) else "no", s.get("link_search", "off"),
                      f"{100 * w['averages']['culled_tokens']:.1f}%", f"{100 * life['worst']:.0f}%",
                      f"{life['agents']:,.0f}", f"{life['hours']:.1f}"])
@@ -328,13 +371,13 @@ def localrules(ch: F.Chapter) -> None:
                                           "agents": lives[by_seed[seed]["id"]]["agents"],
                                           "worst": lives[by_seed[seed]["id"]]["worst"],
                                           "culled_tokens": by_seed[seed]["averages"]["culled_tokens"],
-                                          "rank": by_seed[seed]["ranks"]["product"]}
+                                          "rank": PLACES_OF_THE_PLANS[by_seed[seed]["id"]]}
                              for seed in WORLDS})
 
     # Which shortlisted worlds would keep a light cone.
     every = {w["id"]: w for w in health["worlds"]}
     rows, kept = [], 0
-    for run_id in sorted(shortlist, key=lambda r: every[r]["ranks"]["product"]):
+    for run_id in sorted(shortlist, key=lambda r: PLACES_OF_THE_PLANS[r]):
         w = every[run_id]
         s = w["set"]
         c = cone(s)

@@ -87,7 +87,7 @@
    "worlds": 70,
    "gini": {
     "n": 70,
-    "mean": 0.43644666342929395,
+    "mean": 0.436446663429294,
     "median": 0.42188758939489046,
     "sd": 0.1495686811394361,
     "min": 0.1644360117862204,
@@ -382,7 +382,7 @@
    "recipe": "**Runs.** the worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiment 40: 30,000 tokens, every setting drawn at random)\n\n**Data.** From each world's averages over iterations 100 to the end, `research/screen/health.json` (from the screen's readings, `research/screen/measures.py`), and each run's own statistics, `GraphOfLifeRuns/<run>/stats.jsonl` (`redistributed`, `tokens`).\n\n1. Read each living world's average Gini coefficient from `health.json` (`averages.gini`), and its Gini over a random deal's (`averages.gini_random`: each iteration's Gini over (m \u2212 1)/(2m \u2212 1), m the mean holding, the Gini of a random deal that leaves every agent at least one token).\n2. Group the worlds by their drawn `redistribution`, and by `contest` and `allow_revolutions`.\n3. One dot per world; the bar is the median.\n\n**To make it again:** `python3 book_figures.py wealthspread`."
   },
   "shared": {
-   "title": "The more tokens pass through the share-out, the more even a world",
+   "title": "Where more tokens pass from the dead to the living, worlds tend to be more even",
    "caption": "Each dot is a world of Experiment 40 that lived, coloured by its share-out rule. Across, on a logarithmic axis: the share of all the world's tokens that a cleanup hands on from the dead to the living, averaged over every phase from iteration 100 to the end; it counts the estates of every agent that died, culled or starved (the starved hold nothing). Up: the world's Gini coefficient, averaged over the same stretch.",
    "recipe": "**Runs.** the worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiment 40: 30,000 tokens, every setting drawn at random)\n\n**Data.** From each world's averages over iterations 100 to the end, `research/screen/health.json` (from the screen's readings, `research/screen/measures.py`), and each run's own statistics, `GraphOfLifeRuns/<run>/stats.jsonl` (`redistributed`, `tokens`).\n\n1. For every phase from iteration 100 on: `redistributed` over `tokens` (the cleanup's handed-on tokens over all of them). Average over the phases.\n2. Plot against the world's average Gini coefficient; colour by `redistribution`.\n\n**To make it again:** `python3 book_figures.py wealthspread`."
   }

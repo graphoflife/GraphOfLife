@@ -282,6 +282,9 @@ def averages(rows: List[Dict[str, Any]], tokens: int, start: int, stop: int,
     """The judge's averages over iterations start to stop, with the measures read beside them."""
     values: Dict[str, List[float]] = {}
     agents: List[float] = []
+    # Links an agent are read every iteration, the 2-core in every heavy frame: each frame's 2-core is set
+    # against the links of its own iteration.
+    links_at = {row["t"]: row["links"] for row in rows if row.get("links")}
     for row in rows:
         if not start <= row["t"] < stop:
             continue
@@ -292,8 +295,8 @@ def averages(rows: List[Dict[str, Any]], tokens: int, start: int, stop: int,
             values.setdefault("richest", []).append(row["max_tokens"] / tokens)
         if row.get("agents") is not None:
             agents.append(float(row["agents"]))
-        if row.get("core") is not None and row.get("links"):
-            values.setdefault("lean", []).append(2.0 * row["core"] / row["links"])
+        if row.get("core") is not None and links_at.get(row["t"]):
+            values.setdefault("lean", []).append(2.0 * row["core"] / links_at[row["t"]])
         m = (game or {}).get(row["t"], {}).get("mean")
         if row.get("gini") is not None and m is not None and random_gini(m) > 0:
             values.setdefault("gini_random", []).append(row["gini"] / random_gini(m))

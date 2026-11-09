@@ -383,26 +383,26 @@ draw of its own, as on
 <!-- table brainsize/tests -->
 | outcome | 3 / 4 / 5 layers | chance (false discovery rate) | 16 / 32 / 50 units | chance (false discovery rate) | taken into account |
 |---|---|---|---|---|---|
-| died (the share) | 7% / 25% / 19% | 0.423 (0.62) | 13% / 24% / 15% | 0.393 (0.91) | `valence`, `allow_gifting` |
-| health | 0.41 / 0.35 / 0.46 | 0.899 (0.91) | 0.43 / 0.39 / 0.40 | 0.368 (0.91) | `link_upkeep`, `redistribution`, `valence`, `mix_at_birth`, `mend_on_death` |
-| decentralised | 0.40 / 0.58 / 0.46 | 0.428 (0.62) | 0.65 / 0.45 / 0.43 | 0.457 (0.91) | `mix_at_birth`, `valence` |
-| resilient | 0.47 / 0.28 / 0.56 | 0.909 (0.91) | 0.50 / 0.54 / 0.47 | 0.620 (0.91) | `valence`, `mix_at_birth` |
-| almost three-dimensional | 0.42 / 0.53 / 0.51 | 0.035 (0.22) | 0.43 / 0.51 / 0.53 | 0.766 (0.91) | `mend_on_death`, `link_upkeep` |
-| diverse | 0.42 / 0.39 / 0.47 | 0.556 (0.72) | 0.46 / 0.33 / 0.45 | 0.611 (0.91) | `mend_on_death`, `link_upkeep`, `redistribution`, `mutate_on_replication` |
-| not too even | 0.66 / 0.29 / 0.56 | 0.355 (0.62) | 0.45 / 0.52 / 0.60 | 0.908 (0.91) | `redistribution`, `mix_at_birth`, `contest` |
-| few tokens culled | 0.62 / 0.30 / 0.60 | 0.067 (0.22) | 0.65 / 0.60 / 0.52 | 0.186 (0.91) | `mend_on_death`, `link_token` |
-| heredity index | 0.44 / 0.47 / 0.44 | 0.698 (0.82) | 0.46 / 0.44 / 0.45 | 0.857 (0.91) | `mutate_on_replication`, `valence`, `mutation_probability`, `link_search`, `mutation_sparsity` |
-| generations in 3,000 iterations | 548 / 858 / 947 | 0.069 (0.22) | 783 / 970 / 861 | 0.606 (0.91) | `link_upkeep`, `contest`, `link_token` |
-| effective population (log10) | 1.46 / 1.06 / 1.39 | 0.242 (0.56) | 1.23 / 1.29 / 1.42 | 0.740 (0.91) | `mend_on_death`, `link_upkeep` |
-| late novelty of the line of descent | 0.08 / 0.07 / 0.09 | 0.258 (0.56) | 0.06 / 0.07 / 0.09 | 0.022 (0.29) | `mend_on_death`, `random_input_amount`, `mix_at_birth`, `valence`, `contest` |
-| fertility passed on | 0.13 / 0.18 / 0.12 | 0.030 (0.22) | 0.14 / 0.14 / 0.13 | 0.904 (0.91) | `mend_on_death`, `link_token` |
+| died (the share) | 7% / 25% / 19% | 0.423 (0.51) | 13% / 24% / 15% | 0.393 (0.98) | `valence`, `allow_gifting` |
+| health | 0.39 / 0.36 / 0.46 | 0.133 (0.29) | 0.40 / 0.38 / 0.40 | 0.987 (0.99) | `link_upkeep`, `redistribution`, `mend_on_death` |
+| decentralised | 0.40 / 0.58 / 0.46 | 0.428 (0.51) | 0.65 / 0.45 / 0.43 | 0.457 (0.98) | `mix_at_birth`, `valence` |
+| resilient | 0.44 / 0.37 / 0.51 | 0.104 (0.27) | 0.46 / 0.50 / 0.48 | 0.617 (0.98) | `valence`, `link_search` |
+| almost three-dimensional | 0.42 / 0.53 / 0.51 | 0.035 (0.22) | 0.43 / 0.51 / 0.53 | 0.766 (0.98) | `mend_on_death`, `link_upkeep` |
+| diverse | 0.42 / 0.39 / 0.47 | 0.556 (0.60) | 0.46 / 0.33 / 0.45 | 0.611 (0.98) | `mend_on_death`, `link_upkeep`, `redistribution`, `mutate_on_replication` |
+| not too even | 0.66 / 0.29 / 0.56 | 0.355 (0.51) | 0.45 / 0.52 / 0.60 | 0.908 (0.98) | `redistribution`, `mix_at_birth`, `contest` |
+| few tokens culled | 0.62 / 0.30 / 0.60 | 0.067 (0.22) | 0.65 / 0.60 / 0.52 | 0.186 (0.98) | `mend_on_death`, `link_token` |
+| heredity index | 0.44 / 0.47 / 0.44 | 0.698 (0.70) | 0.46 / 0.44 / 0.45 | 0.857 (0.98) | `mutate_on_replication`, `valence`, `mutation_probability`, `link_search`, `mutation_sparsity` |
+| generations in 3,000 iterations | 548 / 858 / 947 | 0.069 (0.22) | 783 / 970 / 861 | 0.606 (0.98) | `link_upkeep`, `contest`, `link_token` |
+| effective population (log10) | 1.46 / 1.06 / 1.39 | 0.242 (0.42) | 1.23 / 1.29 / 1.42 | 0.740 (0.98) | `mend_on_death`, `link_upkeep` |
+| late novelty of the line of descent | 0.08 / 0.07 / 0.09 | 0.258 (0.42) | 0.06 / 0.07 / 0.09 | 0.022 (0.29) | `mend_on_death`, `random_input_amount`, `mix_at_birth`, `valence`, `contest` |
+| fertility passed on | 0.13 / 0.18 / 0.12 | 0.030 (0.22) | 0.14 / 0.14 / 0.13 | 0.904 (0.98) | `mend_on_death`, `link_token` |
 <!-- /table -->
 
 The shape made no difference we can tell from chance. No test has a false
 discovery rate below 0.1, the mark for a finding. Deaths: 2 of 28 worlds with
 three layers died, 5 of 20 with four and 7 of 36 with five; with the cap on
 links and the gifts taken into account, a chance of 0.42. Health: a median of
-0.41, 0.35 and 0.46 by depth, 0.43, 0.39 and 0.40 by width. Heredity was the
+0.39, 0.36 and 0.46 by depth, 0.40, 0.38 and 0.40 by width. Heredity was the
 same at every depth and width, 0.44 to 0.47.
 
 Three hints stand out, none of them a finding:
@@ -540,6 +540,13 @@ settings known to matter for each are those with a chance below 0.05 on
 [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#every-setting-in-numbers).
 
 `python3 book_figures.py brainsize` draws every figure and table of this page.
+
+## How our view changed
+
+- **9 November 2026, later.** Health came to count agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link
+  as well ([Which worlds are healthy?](which-worlds-are-healthy.md)). The
+  medians of health by depth and by width moved by 0.01 to 0.03, and the tests
+  of health and of resilience with them; nothing this page concludes changed.
 
 <!-- turns -->
 ---

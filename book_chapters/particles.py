@@ -105,18 +105,22 @@ B1_SEEDS = (1, 3, 4, 5, 6)
 STAR_SEED = 28
 #: How many of round 3's healthiest worlds are read.
 ROUND3_TOP = 5
+#: The five the page read: round 3's healthiest by the product on 9 November 2026, before health counted
+#: agents on loops per link. Kept by name, so the page reads the same worlds whatever the order says since
+#: (the fifth by the product is now seed 4002 played weakest first, and seed 3057 the sixth).
+ROUND3_READ = ("B1-30000-b82ad0-s3042", "B1-30000-8526cf-s4006", "B1-30000-af1e28-s3018",
+               "B1-30000-625bc7-s3080", "B1-30000-38aee9-s3057")
 #: The control: brains that never change (Experiment 7), a world that froze long before its end.
 FROZEN = "B1-10000-a8525d-s002"
 
 
 def round3_worlds() -> List[Dict[str, Any]]:
-    """The healthiest worlds of round 3 by the product, best first: {id, label, rank}."""
+    """The healthiest worlds of round 3 by the product when the page was made, in that order: {id, label, rank}."""
     with open(HEALTH, encoding="utf-8") as f:
-        worlds = json.load(f)["worlds"]
-    living = sorted((w for w in worlds if w["alive"] and w.get("health")), key=lambda w: w["ranks"]["product"])
+        worlds = {w["id"]: w for w in json.load(f)["worlds"]}
     tag = {"E41": " w", "E42": " s"}
-    return [{"id": w["id"], "label": f"s{w['seed']}{tag.get(w['round'], '')}", "rank": w["ranks"]["product"],
-             "round": w["round"]} for w in living[:ROUND3_TOP]]
+    return [{"id": rid, "label": f"s{worlds[rid]['seed']}{tag.get(worlds[rid]['round'], '')}", "rank": i,
+             "round": worlds[rid]["round"]} for i, rid in enumerate(ROUND3_READ[:ROUND3_TOP], 1)]
 
 
 def worlds() -> List[Dict[str, Any]]:

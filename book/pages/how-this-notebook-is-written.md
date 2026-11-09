@@ -40,7 +40,7 @@ real numbers, and **Where it is used**. A link to an idea leads to its section.
 ## Parts, and what each page is
 
 The pages fall into seven **parts**, each with its colour: Start; Now, the
-research of the moment (round 3 of the random screen and its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")); The
+research of the moment (round 3 of the random screen and its candidates); The
 rules; What the worlds do; Space and physics; The search for [open-ended
 evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") that came before round 3; and Methods and look-up. A part holds a
 few **topics**, and a page belongs to the part of its first topic, its home.

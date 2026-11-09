@@ -31,24 +31,44 @@
      "false: 0.28 (43); true: 0.05 (41)"
     ],
     [
+     "health (the six criteria multiplied, as their geometric average)",
+     {
+      "text": "`link_upkeep`",
+      "href": "pages/settings.md#link_upkeep"
+     },
+     "0.0024",
+     "0.037",
+     "off: 0.42 (27); paid_only: 0.34 (21); paid_or_used: 0.42 (22)"
+    ],
+    [
+     "health (the six criteria multiplied, as their geometric average)",
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "0.0030",
+     "0.037",
+     "children: 0.40 (13); local: 0.46 (9); newborns: 0.46 (10); parents: 0.42 (9); poorest: 0.34 (24); uniform: 0.49 (5)"
+    ],
+    [
      "resilient",
      {
       "text": "`valence`",
       "href": "pages/settings.md#valence"
      },
-     "0.0000",
-     "0.001",
-     "0: 0.55 (53); 16: 0.61 (5); 4: 0.11 (7); 8: 0.21 (5)"
+     "0.0003",
+     "0.007",
+     "0: 0.50 (53); 16: 0.49 (5); 4: 0.14 (7); 8: 0.28 (5)"
     ],
     [
      "resilient",
      {
-      "text": "`mix_at_birth`",
-      "href": "pages/settings.md#mix_at_birth"
+      "text": "`link_search`",
+      "href": "pages/settings.md#link_search"
      },
-     "0.0073",
-     "0.091",
-     "false: 0.56 (49); true: 0.27 (21)"
+     "0.0053",
+     "0.067",
+     "jump: 0.35 (18); off: 0.45 (18); reach: 0.54 (19); walk: 0.48 (15)"
     ],
     [
      "diverse",
@@ -272,7 +292,7 @@
     ]
    ]
   },
-  "found": 26,
+  "found": 28,
   "table:all": {
    "head": [
     "setting",
@@ -289,8 +309,8 @@
      },
      "false: 12/43; true: 2/41",
      "0.007",
-     "false: 0.40; true: 0.39",
-     "0.954"
+     "false: 0.38; true: 0.40",
+     "0.555"
     ],
     [
      {
@@ -299,8 +319,8 @@
      },
      "false: 7/37; true: 7/47",
      "0.767",
-     "false: 0.40; true: 0.39",
-     "0.592"
+     "false: 0.40; true: 0.40",
+     "1.000"
     ],
     [
      {
@@ -309,8 +329,8 @@
      },
      "false: 4/18; true: 6/23",
      "1.000",
-     "false: 0.37; true: 0.44",
-     "0.150"
+     "false: 0.37; true: 0.42",
+     "0.234"
     ],
     [
      {
@@ -320,7 +340,7 @@
      "largest: 10/41; lottery: 4/43",
      "0.081",
      "largest: 0.40; lottery: 0.40",
-     "0.879"
+     "0.777"
     ],
     [
      {
@@ -329,8 +349,8 @@
      },
      "[16, 16, 16, 16, 16]: 1/11; [16, 16, 16, 16]: 3/9; [16, 16, 16]: 0/10; [32, 32, 32, 32, 32]: 3/10; [32, 32, 32, 32]: 1/6; [32, 32, 32]: 1/5; [50, 50, 50, 50, 50]: 3/15; [50, 50, 50, 50]: 1/5; [50, 50, 50]: 1/13",
      "0.621",
-     "[16, 16, 16, 16, 16]: 0.46; [16, 16, 16, 16]: 0.33; [16, 16, 16]: 0.47; [32, 32, 32, 32, 32]: 0.48; [32, 32, 32, 32]: 0.36; [32, 32, 32]: 0.38; [50, 50, 50, 50, 50]: 0.43; [50, 50, 50, 50]: 0.37; [50, 50, 50]: 0.40",
-     "0.233"
+     "[16, 16, 16, 16, 16]: 0.42; [16, 16, 16, 16]: 0.34; [16, 16, 16]: 0.47; [32, 32, 32, 32, 32]: 0.48; [32, 32, 32, 32]: 0.36; [32, 32, 32]: 0.36; [50, 50, 50, 50, 50]: 0.44; [50, 50, 50, 50]: 0.39; [50, 50, 50]: 0.39",
+     "0.301"
     ],
     [
      {
@@ -340,7 +360,7 @@
      "forced: 5/32; mutual: 8/33",
      "0.535",
      "forced: 0.40; mutual: 0.41",
-     "0.971"
+     "0.984"
     ],
     [
      {
@@ -349,8 +369,8 @@
      },
      "jump: 2/20; off: 1/19; reach: 5/24; walk: 6/21",
      "0.183",
-     "jump: 0.38; off: 0.38; reach: 0.42; walk: 0.39",
-     "0.518"
+     "jump: 0.38; off: 0.39; reach: 0.41; walk: 0.40",
+     "0.549"
     ],
     [
      {
@@ -359,8 +379,8 @@
      },
      "looking: 4/32; random: 9/33",
      "0.214",
-     "looking: 0.39; random: 0.41",
-     "0.483"
+     "looking: 0.40; random: 0.41",
+     "0.656"
     ],
     [
      {
@@ -369,8 +389,8 @@
      },
      "false: 6/43; true: 8/41",
      "0.570",
-     "false: 0.39; true: 0.41",
-     "0.368"
+     "false: 0.39; true: 0.40",
+     "0.200"
     ],
     [
      {
@@ -379,8 +399,8 @@
      },
      "off: 5/32; paid_only: 4/25; paid_or_used: 5/27",
      "1.000",
-     "off: 0.41; paid_only: 0.36; paid_or_used: 0.46",
-     "0.008"
+     "off: 0.42; paid_only: 0.34; paid_or_used: 0.42",
+     "0.002"
     ],
     [
      {
@@ -389,8 +409,8 @@
      },
      "false: 5/16; true: 1/11",
      "0.346",
-     "false: 0.34; true: 0.37",
-     "0.504"
+     "false: 0.36; true: 0.38",
+     "0.383"
     ],
     [
      {
@@ -399,8 +419,8 @@
      },
      "false: 7/35; true: 7/49",
      "0.559",
-     "false: 0.37; true: 0.43",
-     "0.039"
+     "false: 0.38; true: 0.41",
+     "0.045"
     ],
     [
      {
@@ -409,8 +429,8 @@
      },
      "0: 1/4; 16: 2/17; 30: 4/21; 4: 6/25; 8: 1/17",
      "0.583",
-     "0: 0.37; 16: 0.42; 30: 0.48; 4: 0.38; 8: 0.41",
-     "0.377"
+     "0: 0.36; 16: 0.40; 30: 0.46; 4: 0.38; 8: 0.41",
+     "0.443"
     ],
     [
      {
@@ -419,8 +439,8 @@
      },
      "false: 5/32; true: 8/48",
      "1.000",
-     "false: 0.42; true: 0.40",
-     "0.644"
+     "false: 0.40; true: 0.40",
+     "0.804"
     ],
     [
      {
@@ -429,8 +449,8 @@
      },
      "false: 8/57; true: 6/27",
      "0.533",
-     "false: 0.44; true: 0.35",
-     "0.025"
+     "false: 0.42; true: 0.37",
+     "0.111"
     ],
     [
      {
@@ -439,8 +459,8 @@
      },
      "false: 7/48; true: 7/36",
      "0.773",
-     "false: 0.41; true: 0.39",
-     "0.342"
+     "false: 0.40; true: 0.38",
+     "0.189"
     ],
     [
      {
@@ -449,8 +469,8 @@
      },
      "0.1: 0/12; 0.2: 11/59; 0.4: 3/13",
      "0.279",
-     "0.1: 0.42; 0.2: 0.40; 0.4: 0.42",
-     "0.511"
+     "0.1: 0.40; 0.2: 0.40; 0.4: 0.44",
+     "0.545"
     ],
     [
      {
@@ -459,8 +479,8 @@
      },
      "0.1: 0/5; 0.2: 14/66; 0.4: 0/6; 0.8: 0/7",
      "0.192",
-     "0.1: 0.37; 0.2: 0.41; 0.4: 0.35; 0.8: 0.40",
-     "0.886"
+     "0.1: 0.38; 0.2: 0.40; 0.4: 0.37; 0.8: 0.42",
+     "0.980"
     ],
     [
      {
@@ -469,8 +489,8 @@
      },
      "0.05: 2/8; 0.1: 11/66; 0.3: 1/10",
      "0.669",
-     "0.05: 0.39; 0.1: 0.40; 0.3: 0.41",
-     "0.966"
+     "0.05: 0.40; 0.1: 0.40; 0.3: 0.41",
+     "0.957"
     ],
     [
      {
@@ -479,8 +499,8 @@
      },
      "0: 6/33; 150: 5/30; 600: 3/21",
      "1.000",
-     "0: 0.39; 150: 0.41; 600: 0.41",
-     "0.733"
+     "0: 0.40; 150: 0.40; 600: 0.40",
+     "0.754"
     ],
     [
      {
@@ -489,8 +509,8 @@
      },
      "0: 2/12; 10: 3/22; 2: 6/27; 5: 3/23",
      "0.847",
-     "0: 0.37; 10: 0.41; 2: 0.40; 5: 0.44",
-     "0.775"
+     "0: 0.39; 10: 0.40; 2: 0.39; 5: 0.42",
+     "0.929"
     ],
     [
      {
@@ -499,8 +519,8 @@
      },
      "children: 3/16; local: 4/13; newborns: 0/10; parents: 2/11; poorest: 3/27; uniform: 2/7",
      "0.397",
-     "children: 0.39; local: 0.47; newborns: 0.45; parents: 0.40; poorest: 0.35; uniform: 0.52",
-     "0.014"
+     "children: 0.40; local: 0.46; newborns: 0.46; parents: 0.42; poorest: 0.34; uniform: 0.49",
+     "0.003"
     ],
     [
      {
@@ -509,8 +529,8 @@
      },
      "largest: 7/31; own: 6/49",
      "0.356",
-     "largest: 0.39; own: 0.45",
-     "0.105"
+     "largest: 0.38; own: 0.42",
+     "0.086"
     ],
     [
      {
@@ -519,8 +539,8 @@
      },
      "end: 6/27; estate: 3/25",
      "0.467",
-     "end: 0.39; estate: 0.38",
-     "0.909"
+     "end: 0.38; estate: 0.38",
+     "0.877"
     ],
     [
      {
@@ -529,8 +549,8 @@
      },
      "0: 6/59; 16: 1/6; 2: 6/6; 4: 1/8; 8: 0/5",
      "0.000",
-     "0: 0.41; 16: 0.53; 4: 0.35; 8: 0.36",
-     "0.014"
+     "0: 0.40; 16: 0.50; 4: 0.37; 8: 0.38",
+     "0.101"
     ]
    ]
   },
@@ -554,8 +574,8 @@
       "text": "`upkeep_to`",
       "href": "pages/settings.md#upkeep_to"
      },
-     "0.28",
-     "heredity index"
+     "0.25",
+     "resilient"
     ],
     [
      {
@@ -766,7 +786,7 @@
    ]
   },
   "simplicity": {
-   "spearman": 0.03399360081374923,
+   "spearman": 0.08712645586717237,
    "dead_counts": {
     "n": 14,
     "mean": 7.642857142857143,
@@ -802,38 +822,38 @@
     ],
     [
      "s4002",
-     "0.537",
-     "0.431"
+     "0.544",
+     "0.442"
     ],
     [
      "s4003",
-     "0.464",
-     "0.493"
+     "0.466",
+     "0.498"
     ],
     [
      "s4004",
-     "0.327",
-     "0.287"
+     "0.345",
+     "0.303"
     ],
     [
      "s4005",
      "died at 230",
-     "0.361"
+     "0.373"
     ],
     [
      "s4006",
      "died at 1,445",
-     "0.576"
+     "0.587"
     ],
     [
      "s4007",
-     "0.159",
-     "0.190"
+     "0.164",
+     "0.197"
     ],
     [
      "s4008",
-     "0.525",
-     "0.496"
+     "0.528",
+     "0.501"
     ]
    ]
   },
@@ -843,13 +863,13 @@
     "died": 14,
     "health": {
      "n": 70,
-     "mean": 0.40234444936212843,
-     "median": 0.3990009536453181,
-     "sd": 0.11017073884320794,
-     "min": 0.11130516474628367,
-     "max": 0.6197593982259076,
-     "q25": 0.3492593366318164,
-     "q75": 0.4925586330087045
+     "mean": 0.39897868296516664,
+     "median": 0.3978668673855791,
+     "sd": 0.10494312313999361,
+     "min": 0.10471492365308838,
+     "max": 0.6056472296657149,
+     "q25": 0.346621354451719,
+     "q75": 0.47669930041014813
     }
    },
    "E41": {
@@ -857,13 +877,13 @@
     "died": 3,
     "health": {
      "n": 5,
-     "mean": 0.4024339713928307,
-     "median": 0.46364924207950037,
-     "sd": 0.15967253388467265,
-     "min": 0.1590977293147076,
-     "max": 0.5374716285437824,
-     "q25": 0.3267842777159742,
-     "q75": 0.5251669793101891
+     "mean": 0.40960649091551826,
+     "median": 0.46570690282081145,
+     "sd": 0.15782461938171777,
+     "min": 0.16442462771100466,
+     "max": 0.5444951300559061,
+     "q25": 0.34529812617423583,
+     "q75": 0.5281076678156333
     }
    },
    "E42": {
@@ -871,13 +891,13 @@
     "died": 1,
     "health": {
      "n": 7,
-     "mean": 0.40489321466309935,
-     "median": 0.4309451356885642,
-     "sd": 0.13418554664843718,
-     "min": 0.18986190840405714,
-     "max": 0.5759272208143565,
-     "q25": 0.3241224292945796,
-     "q75": 0.4946366895727792
+     "mean": 0.41460198558474737,
+     "median": 0.4424045752777941,
+     "sd": 0.1333023698168271,
+     "min": 0.19734654498305917,
+     "max": 0.5873961572305955,
+     "q25": 0.3377826989381561,
+     "q75": 0.4997506118627353
     }
    }
   }
@@ -895,7 +915,7 @@
   },
   "simplicity": {
    "title": "Do worlds with more mechanisms switched on do better?",
-   "caption": "Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation 0.03.",
+   "caption": "Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation 0.09.",
    "recipe": "**Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end\n\n**Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.\n\n1. Count each world's drawn values that differ from `SIMPLEST` in effects.py.\n2. Plot against its health; the Spearman correlation of the two.\n\n**To make it again:** `python3 book_figures.py settingseffects`."
   }
  }

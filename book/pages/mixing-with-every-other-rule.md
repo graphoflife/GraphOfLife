@@ -203,7 +203,7 @@ stay rich.
   a small mixed world is a fragile one. None of these combinations was played
   long enough to say whether it holds its size. Experiment 18's five worlds of
   mixing alone did not.
-- **[Candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.").** Some worlds of the batch come closest to the author's
+- **Candidates.** Some worlds of the batch come closest to the author's
   picture, by riches and diversity together. They are mixing with:
   - a faster change of brains;
   - a sense of kin or of family;
