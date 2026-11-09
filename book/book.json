@@ -987,13 +987,14 @@
     {
       "id": "brains-replaced-by-their-average",
       "title": "Brains replaced by their average",
+      "file": "pages/brains-replaced-by-their-average.md",
       "topics": [
         "brains"
       ],
       "kind": "experiment",
-      "status": "planned",
+      "status": "draft",
       "added": "2026-10-09",
-      "summary": "A better control than decisions by chance (*Do the brains matter?*): every decision drawn at random from the distribution of that decision in the settled baseline worlds — first unconditionally, then given the agent's own tokens and connections. If a world of such agents looks like the baseline, what the brains add is their average, not what they respond to."
+      "summary": "A plan not yet played: six ways for agents to decide, from chance to the world as it is, each played on from iteration 1,500 of five of round 3's shortlisted worlds beside the world's own replays. Its draft thesis expects that a world needs the way its crowd of brains answers what each agent sees, not who answers: a brain drawn afresh from the world's own at every look makes it itself again."
     },
     {
       "id": "how-different-are-the-agents",
@@ -1177,14 +1178,15 @@
     {
       "id": "one-agent-in-a-sea-of-average-agents",
       "title": "One agent in a sea of average agents",
+      "file": "pages/one-agent-in-a-sea-of-average-agents.md",
       "topics": [
         "strategies",
         "space"
       ],
       "kind": "experiment",
-      "status": "planned",
+      "status": "draft",
       "added": "2026-10-09",
-      "summary": "A large world of agents that decide as the average evolved agent does (*Brains replaced by their average*), and in it a single agent, or a small group, with a brain of its own: can it draw tokens from the sea without exhausting it or being cut off, can its line invade, can a group hold together? Invasion analysis and a reservoir, in one experiment."
+      "summary": "A plan not yet played: in a sea of agents that answer every look with a brain drawn afresh from the world's own, one agent planted as a leaf with a brain of its own, fixed and inherited (a brain of the sea, the world's main line's, or its future's), beside a marked agent of the sea in the same place. Its draft thesis expects that no brain gains by being an individual, and that none takes hold in more than one planting in ten."
     },
     {
       "id": "who-helps-whom",
