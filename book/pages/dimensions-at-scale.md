@@ -727,4 +727,7 @@ figures.
 ← [The random twin: is a world a space?](random-twin.md) · [Space and dimension](../README.md#space-and-dimension) · [Which properties have no scale?](which-properties-have-no-scale.md) →
 
 **Also about:** [Size and riches of a world](../README.md#size-and-riches-of-a-world), [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
+
+> [!info]- Pages that link here (4)
+> [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)
 <!-- /turns -->

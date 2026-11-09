@@ -535,8 +535,10 @@ have about 42,000 core agents each. There the core reads 2.7 over radii 3 to
 14 (the whole world 3.3), and 3.1 at radii 3 to 6. By walks the cores read
 1.6, 1.9 and 1.5 at 10,000, 100,000 and 409,600 tokens. The core's dimension
 by balls grows with the world, as the world's does, and has not settled at any
-of these sizes. *Dimensions at scale*, planned (see
-[the contents](../README.md)), is to follow it further.
+of these sizes. [Dimensions at scale](dimensions-at-scale.md) followed the
+whole world's reading to every size the notebook has: it grows with a world's
+size through its hubs, and holds across scales within each world. The
+core's own reading has not been followed further.
 
 ### The core's dimension over a world's life
 

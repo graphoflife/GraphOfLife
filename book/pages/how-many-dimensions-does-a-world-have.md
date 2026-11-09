@@ -645,18 +645,23 @@ the line between folded and not.
   So a world can only grow as a body grows, outwards, never by shortcuts.
 - **About three dimensions of room.** At 14,000 agents the worlds hold about
   as much within *r* steps as a three-dimensional body does, from 5 to 10
-  steps. At 60,000 agents they hold somewhat more, 3.3, steady from 3 to 14
-  steps. Their [diameters](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") grow as agents^0.30
-  ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
+  steps. At 60,000 agents they hold somewhat more: 3.3 after their last game,
+  steady from 3 to 14 steps, and 3.0 to 3.2 over five moments of their
+  settled lives ([Dimensions at scale](dimensions-at-scale.md)). Their
+  [diameters](path-length.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") grow as agents^0.26 to 0.30
+  ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power),
+  [How wide a world is](dimensions-at-scale.md#how-wide-a-world-is)).
   It is the first sign that something like three-dimensional space can emerge
   from these rules, with no geometry put in.
 - **But not our kind of space.** A walker reads only two dimensions. The
   worlds are full of dead ends and narrow passages, a fractal more than a
   solid. In our space, both rulers read 3 at every scale we can measure. In
   the causal dynamical triangulations of quantum gravity, the dimension
-  depends on the scale (Ambjørn, Jurkiewicz and Loll 2005). Whether it does
-  here, in still larger worlds, is for a page still to be written, *Dimensions
-  at scale* ([the contents](../README.md#space-and-dimension)).
+  depends on the scale (Ambjørn, Jurkiewicz and Loll 2005). Here, within one
+  world, it does not, beyond what any finite body shows: by balls a plateau,
+  by walks 1.7 to 2.0, out to walks of 8,192 steps. Larger worlds read more
+  at the same radius, through their bigger hubs
+  ([Dimensions at scale](dimensions-at-scale.md)).
 - **B2 is not a space**, at any size measured, up to 30,700 agents. Its worlds
   are nearly small worlds: a typical agent is about as near to everyone as in
   a random network with the same links. That is why the health bar's dimension
@@ -802,6 +807,15 @@ iterations each.
 
 ## How our view changed
 
+- **9 November 2026.** From 9 October, this page gave the worlds of 409,600
+  tokens a dimension of 3.3 by balls, read after their last game.
+  [Dimensions at scale](dimensions-at-scale.md) read them at five moments of
+  their settled lives: 3.0 to 3.2 in the median from radius 3 to 14, and 3.04
+  over radii 3 to 6, where one look gave 3.3. One look at a world is one draw:
+  between five moments, a world's reading over radii 3 to 6 varies by 0.8.
+  It also walked them eight times further, 8,192 steps: they read 1.3 to 1.8
+  there, no more than at shorter walks. The figures of this page keep the
+  readings of the last game.
 - **14 October 2026.** From 9 October, the first half of this page said that
   nothing held regions of a world apart.
   [Like next to like](like-next-to-like.md) had found likeness gone within

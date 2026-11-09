@@ -114,11 +114,17 @@ worlds
 And the distance across a world, its diameter, grows as *N*^0.30 for *N*
 agents. That is how a body of 3.3 dimensions would grow, since 1/0.30 ≈ 3.3
 ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
+Read again with more worlds, at five moments of each, the diameter grows as
+*N*^0.26 to 0.27 and the typical distance as *N*^0.20 to 0.23: by width
+alone nearer four dimensions than three, which bigger hubs in bigger worlds
+could also make ([How wide a world is](dimensions-at-scale.md#how-wide-a-world-is)).
 
 [Is a world a space?](how-many-dimensions-does-a-world-have.md) measured the
 dimension with two rulers, tried first on spaces whose dimension is known. By
-the room within *r* steps, worlds of 60,000 agents read 3.3, steady from 3
-steps to 14. By how a random walker spreads, they read about 2. Networks with
+the room within *r* steps, worlds of 60,000 agents read 3.3 after their last
+game, steady from 3 steps to 14, and 3.0 to 3.2 over five moments of their
+settled lives ([Dimensions at scale](dimensions-at-scale.md)). By how a random
+walker spreads, they read about 2. Networks with
 the same connections at every agent, wired at random, read neither. These
 [random twins](random-twin.md) are *small worlds*, in which everyone is a few
 steps from everyone.
@@ -529,8 +535,9 @@ Two measurements since sharpen the picture. What agents hold is correlated
 over one or two steps only. That is a short correlation length, the distance
 over which likeness fades, so the worlds are far from critical
 ([Like next to like](like-next-to-like.md)). But the space itself has no
-scale. Within *r* steps lie about *r*^3.3 agents, the same law from 3 steps to
-14 ([The rulers, on the worlds](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds)).
+scale. Within *r* steps lie about *r*^3 agents, the same law from 3 steps to
+14 ([The rulers, on the worlds](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds),
+[Dimensions at scale](dimensions-at-scale.md)).
 
 ## Why life is possible: a flow of low entropy
 
@@ -708,15 +715,15 @@ with new connections. There, the tokens have less say over the network.
 
 ## What this asks of the notebook
 
-The second aim adds its own questions, and its own planned pages, under
-[Space and dimension](../README.md#space-and-dimension) in the contents. They
-are not written yet:
+The second aim adds its own questions, and its own pages, under
+[Space and dimension](../README.md#space-and-dimension) in the contents.
+Three are studies of worlds already played; four are plans that wait for
+rules the [engine](the-lab.md "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") does not have yet:
 
-- *Dimensions at scale.*
-  [Is a world a space?](how-many-dimensions-does-a-world-have.md) has read
-  balls and walks on worlds of 60,000 agents. Next comes every measure of
-  dimension on the largest worlds the notebook can afford: ball growth, the
-  width of a lump, boxes, the spectral dimension.
+- [Dimensions at scale](dimensions-at-scale.md). Both rulers at every size
+  the notebook has, beside bodies cut from grids: within a world the
+  dimension holds across scales, as a finite body's does, and larger worlds
+  read more at the same radius, through their hubs.
 - [How far does a difference travel?](how-far-does-a-difference-travel.md)
   Damage spreading: the light cone, measured, once random numbers are local.
   A draft plan.
@@ -817,6 +824,11 @@ are not written yet:
     [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)
     shows less. The mean, about 2%, and the worst game, 35% to 48%, do not
     change with size. The whole distributions have not been compared.
+- **9 November 2026.** From 9 October, the page said that worlds of 60,000
+  agents read 3.3 by balls and that within *r* steps lie about *r*^3.3
+  agents. Read at five moments of their settled lives instead of after their
+  last game, they read 3.0 to 3.2
+  ([Dimensions at scale](dimensions-at-scale.md)).
 - **9 November 2026.** From 9 October, the page said that deaths do not come
   in avalanches of every size, the agents one game removes having a typical
   size. [Which properties have no scale?](which-properties-have-no-scale.md)

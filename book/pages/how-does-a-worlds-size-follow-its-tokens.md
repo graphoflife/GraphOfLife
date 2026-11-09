@@ -461,9 +461,9 @@ baseline worlds**: thirty worlds of 100,000 tokens, ten times the first. They
 are worlds of B1 itself, not of the second baseline B2 of
 [A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break).
 
-The physics of space builds on these worlds. Two planned pages are to read
-them: *Dimensions at scale*, for their dimensions, and *Which properties have
-no scale?* (see [the contents](../README.md)). And the experiment answers one
+The physics of space builds on these worlds. Two pages read them:
+[Dimensions at scale](dimensions-at-scale.md), for their dimensions, and
+[Which properties have no scale?](which-properties-have-no-scale.md). And the experiment answers one
 question of its own: how a line takes over a world.
 
 ### How a line takes over
