@@ -812,13 +812,16 @@
     {
       "id": "dimensions-at-scale",
       "title": "Dimensions at scale",
+      "file": "pages/dimensions-at-scale.md",
       "topics": [
-        "space"
+        "space",
+        "size",
+        "healthy"
       ],
       "kind": "study",
-      "status": "planned",
+      "status": "written",
       "added": "2026-10-09",
-      "summary": "The measures of *How many dimensions does a world have?* on the worlds of 100,000 tokens (*Worlds of 100,000 tokens*): does a world look three-dimensional only at middle scales, as causal dynamical triangulations look four-dimensional only at large ones? Ball growth and the spectral dimension as functions of scale, and the width of worlds from 3,200 to 409,600 tokens (*How does a world's size follow its tokens?*)."
+      "summary": "Within one B1 world the dimension does not change with the scale beyond what a finite body shows: about 3 by balls and 2 by walks, as far as the rulers reach. Larger worlds read more over their first few steps, not because of their edge but because their hubs grow, and by their width they read four to five dimensions."
     },
     {
       "id": "which-properties-have-no-scale",
