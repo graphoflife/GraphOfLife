@@ -740,6 +740,20 @@ def test_a_screen_draws_its_worlds_by_its_rules():
     assert len({json.dumps(w, sort_keys=True) for w in worlds}) == n
 
 
+def test_the_link_watch_finds_each_follow_up_world_in_round_3():
+    """
+    research/tools/watch_links.py sets a follow-up run's links against the round-3 world it plays again:
+    the condition's name says which (a draw played a token at a time says weakest or strongest first).
+    """
+    path = os.path.join(runner.ROOT, "research", "tools", "watch_links.py")
+    spec = importlib.util.spec_from_file_location("watch_links", path)
+    watch = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(watch)
+    assert watch.world_of("s3042") == ("E40", 3042)
+    assert watch.world_of("s4002 weakest first") == ("E41", 4002)
+    assert watch.world_of("s4006 strongest first") == ("E42", 4006)
+
+
 def test_the_third_sampler_keeps_every_worlds_links_in_check():
     """
     The third sampler draws as the second does, but a world whose links may be kept by payment has

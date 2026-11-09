@@ -550,6 +550,107 @@
      "redistribution": "parents",
      "allocation": "weakest_first"
     }
+   },
+   {
+    "name": "s3005",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16
+     ],
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "mend_on_death": true,
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "redistribution": "newborns",
+     "link_token": true
+    }
+   },
+   {
+    "name": "s3006",
+    "set": {
+     "random_input_amount": 10,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16,
+      16
+     ],
+     "mutation_sparsity": 0.3,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "poorest",
+     "link_search": "walk",
+     "link_steering": "looking",
+     "link_consent": "forced",
+     "link_token": true,
+     "link_upkeep": "paid_or_used",
+     "upkeep_to": "estate"
+    }
+   },
+   {
+    "name": "s3064",
+    "set": {
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32,
+      32,
+      32
+     ],
+     "mutation_noise_std": 0.4,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "mend_on_death": true,
+     "redistribution": "local",
+     "link_search": "reach",
+     "link_consent": "forced"
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s3093",
+    "set": {
+     "message_amount": 8,
+     "random_input_amount": 10,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32,
+      32,
+      32
+     ],
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "local",
+     "link_search": "jump",
+     "link_steering": "looking",
+     "valence": 8
+    },
+    "world": {
+     "n_nodes": 1000
+    }
    }
   ]
  }
