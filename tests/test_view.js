@@ -799,6 +799,42 @@ function test_a_derived_statistic_reads_like_a_stored_one() {
     'a ratio of columns this run does not have came back as something');
 }
 
+function test_the_tokens_on_links_are_counted_where_links_hold_them() {
+  // Under link_token every link holds a token, and a frame counts only the
+  // agents': a world of 50,000 tokens read 42,226 in the strip, its 7,774
+  // links holding the rest.
+  const loader = loaderFor({});
+  const held = { link_token: true }, plain = { link_token: false };
+  const series = { tokens: [42226, 50000], edges: [7774, 0], phase: [1, 2], iteration: [1546, 1546] };
+  const world = loader.column(series, 'worldTokens', held);
+  assert(world[0] === 50000 && world[1] === 50000, `the world held ${world}`);
+  assert(loader.column(series, 'linkTokens', held)[0] === 7774, 'a link held other than one token');
+  const bare = { tokens: [50000], edges: [9000] };
+  assert(loader.column(bare, 'worldTokens', plain)[0] === 50000, 'links without tokens added some');
+  assert(loader.column(bare, 'linkTokens', plain)[0] === 0, 'links without tokens held some');
+  const path = loader.pairs(series, 'edges', 'worldTokens', () => true, held);
+  assert(path.points.every(p => p.y === 50000), 'the trajectory lost the links’ tokens');
+
+  // The total is always shown; only a world whose links hold tokens splits it.
+  assert(RunStats.applies('worldTokens', plain) && RunStats.applies('worldTokens', held));
+  assert(!RunStats.applies('linkTokens', plain) && RunStats.applies('linkTokens', held));
+  assert(!RunStats.applies('tokens', plain) && RunStats.applies('tokens', held));
+  assert(RunStats.label('worldTokens') === 'Tokens' && RunStats.label('tokens') === 'Held by agents');
+
+  // Diagrams offers each once, with the strip's names, by the run's settings.
+  const diagrams = diagramsWith(loader);
+  diagrams.runs = [{ id: 'held', config: held }, { id: 'plain', config: plain }];
+  const offered = id => new Map(diagrams.statOptions(id));
+  for (const id of ['held', 'plain']) {
+    const keys = diagrams.statOptions(id).map(([k]) => k);
+    assert(keys.length === new Set(keys).size, `a statistic offered twice for ${id}`);
+  }
+  assert(offered('held').get('linkTokens') === 'Held by links' && offered('held').has('tokens'));
+  assert(offered('plain').get('worldTokens') === 'Tokens', 'a plain world was offered no total');
+  assert(!offered('plain').has('linkTokens') && !offered('plain').has('tokens'),
+    'a world whose links hold nothing was offered the links’ share');
+}
+
 /**
  * The Viewer's history load, reading through the real API facade from
  * `backend`, with the trajectory and the stat popup it draws into counted

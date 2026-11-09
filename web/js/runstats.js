@@ -22,12 +22,18 @@ const RunStats = {
    * Phase-specific sections simply come out empty on the other phase, so the
    * Reproduction section disappears on a game frame rather than showing a row
    * of dashes.
+   *
+   * Two are worked out rather than stored, and DERIVED says how: the tokens
+   * the links hold, and all the tokens of the world, which the agents' own
+   * count leaves the links' out of.
    */
   GROUPS: [
     { key: 'general', label: 'General', open: true, stats: {
       nodes: 'Nodes',
       edges: 'Edges',
-      tokens: 'Tokens',
+      worldTokens: 'Tokens',
+      tokens: 'Held by agents',
+      linkTokens: 'Held by links',
       meanTokens: 'Mean tokens',
       medianTokens: 'Median tokens',
       maxTokens: 'Richest',
@@ -142,7 +148,12 @@ const RunStats = {
     giftShare: 'allow_gifting',
     handovers: 'allow_handover',
     revolutions: 'allow_revolutions',
-    revoltShare: 'allow_revolutions'
+    revoltShare: 'allow_revolutions',
+    // Not a mechanic's record but the split it makes. Every token is an
+    // agent's unless every link holds one, so only then do the links hold a
+    // share, and what the agents hold would otherwise say Tokens over again.
+    tokens: 'link_token',
+    linkTokens: 'link_token'
   },
 
   /** Whether a run of these settings can have measured a statistic. Unknown settings count as on. */
@@ -155,7 +166,9 @@ const RunStats = {
   EXPLANATIONS: {
     nodes: 'How many agents are alive right now. Agents appear by reproduction and vanish by starving, or by being cut off from the largest connected group and culled with it.',
     edges: 'How many connections exist. An edge is created when a newborn is wired into its parent\u2019s neighbourhood, and pruned at the end of a game phase if it carried no tokens through it.',
-    tokens: 'Total tokens in the world. Tokens are conserved by default, so a flat line is the expected behaviour and any drift would mean a bug. It moves only if the run was configured to mint tokens each phase.',
+    worldTokens: 'All the tokens in the world: what the agents hold and, in a run where every link holds a token (link_token), what the links hold. Tokens are conserved by default, so a flat line is the expected behaviour and any drift would mean a bug. It moves only if the run was configured to mint tokens each phase.',
+    tokens: 'How many tokens the agents hold between them. In most runs that is every token in the world. Where every link holds a token (link_token), the agents hold the world’s tokens less one for every link, so this line falls as links are made and rises as they go. Held by links is the rest, and Tokens the two together.',
+    linkTokens: 'How many tokens the links hold. Where every link holds a token (link_token), its maker pays one when it makes the link, and the token goes back to one of the link’s two ends when the link lapses or one of them dies. So this is the number of links, and with what the agents hold it makes up all the tokens in the world.',
     meanDegree: 'The average number of connections an agent has: twice the number of connections divided by the number of agents, since every connection is counted at both of its ends.',
     maxDegree: 'The number of connections held by the single most connected agent \u2014 the size of the largest hub in the population.',
     medianTokens: 'How many tokens the middle agent holds, when all agents are lined up from poorest to richest. Half the population holds less than this and half holds more. It sits far below the average whenever a few very rich agents are pulling that average up, so the gap between the two is itself a reading of how lopsided wealth has become.',
@@ -258,7 +271,8 @@ const RunStats = {
                               'gainers', 'losers']),
 
   /**
-   * Statistics read as a ratio of two stored ones.
+   * Statistics worked out from stored ones: ratios of two, and the tokens a
+   * run's settings put on its links.
    *
    * These were written inside the Theses view, one arrow function per claim,
    * which meant a thesis could plot a share that no chart anywhere else could.
@@ -270,8 +284,22 @@ const RunStats = {
    * Absent inputs give null rather than zero, for the reason the series does:
    * a run recorded before a statistic existed has no value for it, which is
    * not the same thing as having measured nothing.
+   *
+   * `of` is given the run's settings beside the row. Under link_token every
+   * link holds one token, which the agents' count leaves out; no run records
+   * it, since it is the number of links. The two that say so are named in a
+   * section of GROUPS, so the strip shows them, and need no label here.
    */
   DERIVED: {
+    linkTokens: {
+      needs: ['edges'],
+      of: (r, config) => (r.edges == null ? null : (config && config.link_token ? r.edges : 0))
+    },
+    worldTokens: {
+      needs: ['tokens', 'edges'],
+      of: (r, config) => (r.tokens == null ? null
+        : r.tokens + (config && config.link_token ? r.edges || 0 : 0))
+    },
     bridgeShare: {
       label: 'Bridges / edges',
       needs: ['bridges', 'edges'],
@@ -300,7 +328,7 @@ const RunStats = {
     return this.EXPLANATIONS[key] || null;
   },
 
-  /** Every stored statistic with a name, in the order the strip shows them. */
+  /** Every statistic with a name, in the order the strip shows them: the stored ones and the two derived ones placed among them. */
   keys() {
     return this.GROUPS.flatMap(group => Object.keys(group.stats));
   }

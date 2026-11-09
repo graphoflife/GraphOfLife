@@ -82,7 +82,7 @@ const StatDetail = {
     if (!payload || !key) return { xs: [], ys: [], asShare: false };
 
     const s = payload.series;
-    const values = s[key] || [];
+    const values = SeriesLoad.column(s, key, Viewer.meta && Viewer.meta.config) || [];
     const phases = s.phase || [];
     const iterations = s.iteration || [];
     const before = s.nodes_before || [];

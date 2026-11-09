@@ -31,7 +31,7 @@ const Metrics = {
       signed: true, needsPrevious: true },
     { key: 'loops',            label: 'Loops through it' },
     { key: 'triangles',        label: 'Triangles' },
-    { key: 'token_share',      label: 'Share of total tokens', format: 'share' },
+    { key: 'token_share',      label: 'Share of the agents\u2019 tokens', format: 'share' },
     { key: 'brain_id',         label: 'Brain id' },
     { key: 'parent_brain_id',  label: 'Parent brain id' },
     // Iterations lived. The node id used to stand in for this, and an ordinal

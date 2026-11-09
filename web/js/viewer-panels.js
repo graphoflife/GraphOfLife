@@ -140,6 +140,7 @@ Object.assign(Viewer, {
   /** Draw the strip from a frame's statistics, as gol_series names them. */
   drawStats(s, structureOpen) {
     const container = document.getElementById('statsStrip');
+    const config = this.meta && this.meta.config;
 
     // Node counts are also given as a share of the population that entered the
     // phase — "40 births" reads very differently at 100 agents than at 4,000.
@@ -156,7 +157,10 @@ Object.assign(Viewer, {
     const cells = {
       nodes: formatNumber(s.nodes),
       edges: formatNumber(s.edges),
+      // A frame counts the agents' tokens; the links' are the run's settings'.
+      worldTokens: formatNumber(RunStats.DERIVED.worldTokens.of(s, config)),
       tokens: formatNumber(s.tokens),
+      linkTokens: formatNumber(RunStats.DERIVED.linkTokens.of(s, config)),
       meanTokens: int(s.meanTokens),
       medianTokens: int(s.medianTokens),
       maxTokens: formatNumber(s.maxTokens),
@@ -289,7 +293,6 @@ Object.assign(Viewer, {
     }
 
     const html = [];
-    const config = this.meta && this.meta.config;
     for (const group of RunStats.GROUPS) {
       const present = Object.keys(group.stats).filter(k => k in cells && RunStats.applies(k, config));
       if (!present.length) continue;
@@ -332,7 +335,8 @@ Object.assign(Viewer, {
   trajectoryPoints(payload) {
     if (!payload || !payload.series) return { message: 'history is still loading' };
     const found = SeriesLoad.pairs(payload.series, this.settings.trajX, this.settings.trajY,
-                                   phase => this.framePassesFilter(phase));
+                                   phase => this.framePassesFilter(phase),
+                                   this.meta && this.meta.config);
     if (!found) return { message: 'this run has no history for one of these' };
     if (!found.pairing) return { message: 'these two are never recorded at the same time' };
     return found;
@@ -492,7 +496,7 @@ Object.assign(Viewer, {
 
     const rows = [
       `<b>Node ${d.id}</b> <span class="hint">#${d.rank} by wealth</span>`,
-      `Tokens ${formatNumber(d.tokens)} <span class="hint">(${(d.tokenShare * 100).toFixed(2)}% of world)</span>`,
+      `Tokens ${formatNumber(d.tokens)} <span class="hint">(${(d.tokenShare * 100).toFixed(2)}% of what the agents hold)</span>`,
       `Degree ${d.degree}`,
       this.curvatureRow(d),
       d.hasDelta ? this.deltaRow(d) : '<span class="hint">token change not recorded</span>',

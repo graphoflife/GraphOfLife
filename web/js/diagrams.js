@@ -45,7 +45,7 @@ const Diagrams = {
                  logCount: true, iteration: null, span: 1,
                  colormap: 'viridis', reverse: false,
                  title: '', grid: true, guides: [] },
-    correlate: { x: 'nodes', y: 'tokens', phase: 'all',
+    correlate: { x: 'nodes', y: 'worldTokens', phase: 'all',
                  logX: false, logY: false, colormap: 'viridis', reverse: false,
                  title: '', grid: true, guides: [] },
     // A line is a whole row of choices, so it carries them itself rather than
@@ -488,6 +488,12 @@ const Diagrams = {
     return run ? run.frame_count : 0;
   },
 
+  /** A run's settings, as Research last listed them: what it had on, and what its links hold. */
+  configOf(runId) {
+    const run = (this.runs || []).find(r => r.id === runId);
+    return run ? run.config : null;
+  },
+
   /**
    * Which runs this tab needs summarised, and which statistics of each —
    * several runs on the time chart, one on the correlation.
@@ -604,7 +610,8 @@ const Diagrams = {
       const payload = SeriesLoad.cache.get(this.runId);
       if (!payload) { drawTrajectory(this.canvas, null, { ...ink, message: 'Choose a simulation above.' }); return; }
       const found = SeriesLoad.pairs(payload.series || {}, s.x, s.y,
-                                     phase => s.phase === 'all' || String(phase) === s.phase);
+                                     phase => s.phase === 'all' || String(phase) === s.phase,
+                                     this.configOf(this.runId));
       if (!found) {
         drawTrajectory(this.canvas, null, { ...ink, message: 'This run has no history for one of these.' });
         return;
@@ -671,7 +678,7 @@ const Diagrams = {
       const payload = SeriesLoad.cache.get(line.run);
       if (!payload) continue;
       const series = payload.series || {};
-      const values = SeriesLoad.column(series, line.stat);
+      const values = SeriesLoad.column(series, line.stat, this.configOf(line.run));
       if (!values) continue;
       const phases = series.phase || [], iterations = series.iteration || [];
       // The opening iterations, dropped before anything else looks at the

@@ -92,7 +92,7 @@ white.
 | Token curvature (before phase) | the same, on the network as it stood before the phase; newborns have none |
 | Loops through it | fundamental cycles of a breadth-first spanning tree through it ([Loops](measuring-networks.md#loops)) |
 | Triangles | the triangles it is a corner of ([Clustering](measuring-networks.md#clustering)) |
-| Share of total tokens | its tokens divided by all tokens |
+| Share of the agents' tokens | its tokens divided by all the agents hold (where every link holds a token too, the links' are not counted) |
 | [Brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") id | its genotype ([Genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor)) |
 | Parent brain id | its genotype's parent genotype |
 | Age | [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") it has lived ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)) |

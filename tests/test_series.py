@@ -95,7 +95,7 @@ def _registry():
         " + '; return RunStats;')();"
         "const keys = RunStats.keys();"
         "console.log(JSON.stringify({ keys, explained: keys.filter(k => RunStats.explain(k)),"
-        " shares: [...RunStats.POPULATION_COUNTS],"
+        " shares: [...RunStats.POPULATION_COUNTS], worked: Object.keys(RunStats.DERIVED),"
         " derived: Object.values(RunStats.DERIVED).flatMap(d => d.needs) }));"
     )
     result = subprocess.run(["node", "-e", script, runner.ROOT], capture_output=True, text=True, timeout=60)
@@ -110,7 +110,8 @@ def test_every_statistic_has_a_name_a_section_and_a_meaning():
     web/js/runstats.js. A statistic gol_series gains and the registry misses
     turns up in a chart menu under its raw key and with nothing to say about
     it; one left there after gol_series dropped it is a menu entry that plots
-    nothing.
+    nothing. A statistic worked out from others (the tokens on the links) may
+    sit in a section too, but only from what is measured.
     """
     if shutil.which("node") is None:
         print("node is not installed; skipping")
@@ -119,13 +120,14 @@ def test_every_statistic_has_a_name_a_section_and_a_meaning():
     registry = _registry()
     measured = set(gol_series.frame_stats(_frames(2)[-1])) - COORDINATES
     named = set(registry["keys"])
-    assert named == measured, (
-        f"measured but not in the registry: {sorted(measured - named)}; "
-        f"in the registry but not measured: {sorted(named - measured)}")
+    stored = named - set(registry["worked"])
+    assert stored == measured, (
+        f"measured but not in the registry: {sorted(measured - stored)}; "
+        f"in the registry but not measured: {sorted(stored - measured)}")
     unexplained = named - set(registry["explained"])
     assert not unexplained, f"named but never explained: {sorted(unexplained)}"
     assert set(registry["shares"]) <= named, "a share of the population that is not a statistic"
-    assert set(registry["derived"]) <= named | COORDINATES, "a ratio of something not measured"
+    assert set(registry["derived"]) <= measured | COORDINATES, "worked out from something not measured"
 
 
 # ---------------------------------------------------------------------------

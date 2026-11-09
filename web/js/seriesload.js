@@ -55,9 +55,10 @@ const SeriesLoad = {
    *
    * The one place a chart asks for a statistic by name, so a derived one is
    * indistinguishable from a stored one to everything downstream. Null when
-   * the run lacks what it needs.
+   * the run lacks what it needs. `config` is the run's settings, which the
+   * tokens on its links are worked out from.
    */
-  column(series, key) {
+  column(series, key, config = null) {
     if (!series) return null;
     if (series[key]) return series[key];
     const derived = RunStats.DERIVED[key];
@@ -68,7 +69,7 @@ const SeriesLoad = {
     for (let i = 0; i < out.length; i++) {
       const row = {};
       derived.needs.forEach((name, j) => { row[name] = inputs[j][i]; });
-      out[i] = derived.of(row);
+      out[i] = derived.of(row, config);
     }
     return out;
   },
@@ -97,10 +98,11 @@ const SeriesLoad = {
    * which since it changes what a point means. `pairing` is null when neither
    * finds two points, and the whole answer null when the history has no
    * column for one of the two. The Viewer's trajectory and the Diagrams
-   * correlation each carried their own copy of this.
+   * correlation each carried their own copy of this. `config` is the run's
+   * settings, as column() takes them.
    */
-  pairs(series, xKey, yKey, keep) {
-    const xs = this.column(series, xKey), ys = this.column(series, yKey);
+  pairs(series, xKey, yKey, keep, config = null) {
+    const xs = this.column(series, xKey, config), ys = this.column(series, yKey, config);
     if (!xs || !ys) return null;
     const phases = series.phase || [], iterations = series.iteration || [];
     const usable = v => v !== null && v !== undefined && Number.isFinite(v);

@@ -262,16 +262,17 @@ const DiagramControls = {
     const keys = payload && payload.keys && payload.keys.length
       ? payload.keys
       : RunStats.keys();
-    // The derived ratios come last and only when the run holds what they are
-    // made from, so the menu never offers a line that would come out empty.
+    // The derived ones the list lacks come last and only when the run holds
+    // what they are made from, so the menu never offers a line that would
+    // come out empty.
     const have = new Set(keys);
     const derived = Object.entries(RunStats.DERIVED)
-      .filter(([, d]) => !payload || d.needs.every(n => have.has(n)))
-      .map(([k, d]) => [k, d.label]);
+      .filter(([k, d]) => !have.has(k) && (!payload || d.needs.every(n => have.has(n))))
+      .map(([k]) => k);
     // Nor a statistic of a mechanic the run had off.
-    const run = (this.runs || []).find(r => r.id === runId);
-    return keys.filter(k => RunStats.applies(k, run && run.config))
-      .map(k => [k, RunStats.label(k)]).concat(derived);
+    const config = this.configOf(runId);
+    return keys.concat(derived).filter(k => RunStats.applies(k, config))
+      .map(k => [k, RunStats.label(k)]);
   },
 
   /**
