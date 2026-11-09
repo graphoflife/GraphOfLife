@@ -580,7 +580,7 @@ built.
 <!-- turns -->
 ---
 
-← [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen)
+← [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen)
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 

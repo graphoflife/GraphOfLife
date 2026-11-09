@@ -237,6 +237,22 @@
       "summary": "Round 3's worlds pass on what their agents do and keep changing it, but with about fourteen ancestors sharing the future, luck can look like selection. Fourteen tests in six questions tell the two apart; eleven need no new runs, and the era tournament comes first."
     },
     {
+      "id": "round-3-eras-against-each-other",
+      "title": "Did the brains get better? Round 3's eras against each other",
+      "file": "pages/round-3-eras-against-each-other.md",
+      "topics": [
+        "screen",
+        "evolution"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E44"
+      ],
+      "status": "ready",
+      "added": "2026-11-09",
+      "summary": "Experiment 44, ready to play: in each of the 21 worlds of round 3's shortlist, the brains of every era played against those of iterations 250, 1,500 and 3,000, in the world itself; 1,512 contests. The thesis: most worlds got better early and had stopped by the middle of their runs."
+    },
+    {
       "id": "a-hundred-thousand-iterations",
       "title": "A hundred thousand iterations",
       "file": "pages/a-hundred-thousand-iterations.md",

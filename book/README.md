@@ -53,6 +53,7 @@ how the pages hang together.
 - [How the drawn settings shape a world](pages/how-the-drawn-settings-shape-a-world.md)
 - [Candidates for open-ended evolution](pages/candidates-for-open-ended-evolution.md)
 - [Did evolution happen? Fourteen ways to find out](pages/did-evolution-happen.md)
+- [Did the brains get better? Round 3's eras against each other](pages/round-3-eras-against-each-other.md)
 - [A hundred thousand iterations](pages/a-hundred-thousand-iterations.md)
 
 ### The rules

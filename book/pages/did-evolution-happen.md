@@ -97,6 +97,8 @@ world plays than earlier ones. These two tests play eras against each other.
   ([Every era against three](every-era-against-three.md)).
 - **From:** the cross-time tournament of Cliff and Miller (1995), and the
   master tournament of Floreano and Nolfi (1997).
+- **Planned:** as Experiment 44, every era against three in the 21 worlds of
+  the shortlist ([Did the brains get better?](round-3-eras-against-each-other.md)).
 
 ### 2 · Old and new in a common garden
 
