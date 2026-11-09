@@ -1,0 +1,630 @@
+{
+ "id": "E43",
+ "title": "Round 3's best worlds, again: new seeds and more tokens",
+ "thesis": {
+  "claim": "The health of round 3's best worlds belongs to their settings, not to the luck of their seed or to their size. Each of the 24 worlds chosen from health's three orders is played again with two new seeds, at 50,000 tokens instead of 30,000 and for 5,000 iterations instead of 3,000. Scored together with round 3's 82 living worlds, by the same measures averaged from iteration 100 to the end, the new worlds keep the order their settings had: a world's health by the product (the six criteria multiplied, as their geometric average) follows its setting's health in round 3, and two new worlds of one setting differ less than two worlds of round 3 drawn at random.",
+  "why": "In round 3 every setting was played once, with one seed and at one size, so a world's place in the orders mixes what its settings do with the luck of its seed. The five draws that lived both when played weakest first and strongest first differ in health by 0.03 to 0.11 (a median of 0.03), against a median of 0.11 between two living worlds of round 3 drawn at random: a hint that settings, not luck, decide most of a world's health. The author (2026-11-08, 2026-11-09) asked for the best worlds played again with new seeds, larger, and more of them than eleven: the 24 among the first 13 of health's three orders.",
+  "confirm": "Both, over the 24 settings, with a new world that dies counted as health 0: the rank correlation between a setting's health in round 3 and the mean health of its two new worlds is at least 0.5; and the median difference in health between a setting's two new worlds is below 0.11, the median between two living worlds of round 3 drawn at random.",
+  "refute": "Either: the rank correlation is below 0.2, or the median difference between a setting's two new worlds is 0.11 or more. Then health is mostly the luck of a seed or the size of a world, and a world's place in round 3 says little about its settings."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 50000
+  },
+  "seeds": "4301..4302",
+  "iterations": 5000,
+  "record": {
+   "heavy_every": 25,
+   "checkpoint_every": 100,
+   "archive_every": 250
+  },
+  "conditions": [
+   {
+    "name": "s3004",
+    "set": {
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "mutation_probability": 0.1,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "link_token": true
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s3008",
+    "set": {
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32,
+      32,
+      32
+     ],
+     "mutation_probability": 0.1,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "newborns",
+     "link_search": "jump",
+     "link_consent": "forced",
+     "valence": 16,
+     "link_token": true
+    },
+    "world": {
+     "n_nodes": 1000
+    }
+   },
+   {
+    "name": "s3016",
+    "set": {
+     "random_input_amount": 0,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16,
+      16
+     ],
+     "mutation_noise_std": 0.1,
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "reach",
+     "link_upkeep": "paid_or_used",
+     "upkeep_to": "estate"
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s3018",
+    "set": {
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "mutation_probability": 0.8,
+     "mutation_noise_std": 0.4,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_gifting": true,
+     "mend_on_death": true,
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "mate_pays": true,
+     "redistribution": "children",
+     "link_search": "reach",
+     "valence": 8,
+     "link_token": true
+    }
+   },
+   {
+    "name": "s3019",
+    "set": {
+     "random_input_amount": 10,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32,
+      32,
+      32
+     ],
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "reach",
+     "link_steering": "looking",
+     "link_token": true,
+     "link_upkeep": "paid_or_used"
+    }
+   },
+   {
+    "name": "s3022",
+    "set": {
+     "message_amount": 8,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16
+     ],
+     "mutation_probability": 0.8,
+     "mutation_noise_std": 0.1,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "mend_on_death": true,
+     "link_search": "walk",
+     "link_steering": "looking"
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s3023",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 10,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16
+     ],
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "mend_on_death": true,
+     "redistribution": "parents",
+     "link_token": true,
+     "link_upkeep": "paid_only"
+    }
+   },
+   {
+    "name": "s3024",
+    "set": {
+     "message_amount": 16,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "mutation_noise_std": 0.1,
+     "allow_gifting": true,
+     "mend_on_death": true,
+     "redistribution": "poorest",
+     "link_token": true,
+     "link_upkeep": "paid_or_used"
+    },
+    "world": {
+     "n_nodes": 1000
+    }
+   },
+   {
+    "name": "s3026",
+    "set": {
+     "message_amount": 16,
+     "random_input_amount": 0,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50
+     ],
+     "mutation_noise_std": 0.4,
+     "allow_revolutions": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "newborns",
+     "valence": 16
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s3030",
+    "set": {
+     "random_input_amount": 10,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16,
+      16
+     ],
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "poorest",
+     "link_upkeep": "paid_only",
+     "upkeep_to": "estate"
+    }
+   },
+   {
+    "name": "s3042",
+    "set": {
+     "message_amount": 16,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "mutation_noise_std": 0.4,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_gifting": true,
+     "mend_on_death": true,
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "mate_pays": true,
+     "link_search": "jump",
+     "link_steering": "looking",
+     "link_consent": "forced",
+     "link_upkeep": "paid_or_used"
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s3045",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 10,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16,
+      16
+     ],
+     "allow_gifting": true,
+     "mend_on_death": true,
+     "redistribution": "parents",
+     "link_search": "walk",
+     "link_token": true,
+     "link_upkeep": "paid_only"
+    },
+    "world": {
+     "n_nodes": 1000
+    }
+   },
+   {
+    "name": "s3051",
+    "set": {
+     "message_amount": 8,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_steering": "looking",
+     "link_consent": "forced",
+     "valence": 16,
+     "link_token": true,
+     "link_upkeep": "paid_or_used",
+     "upkeep_to": "estate"
+    },
+    "world": {
+     "n_nodes": 1000
+    }
+   },
+   {
+    "name": "s3054",
+    "set": {
+     "message_amount": 8,
+     "random_input_amount": 2,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50
+     ],
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "parents",
+     "link_search": "walk",
+     "link_steering": "looking",
+     "link_token": true,
+     "link_upkeep": "paid_or_used"
+    }
+   },
+   {
+    "name": "s3057",
+    "set": {
+     "message_amount": 8,
+     "random_input_amount": 2,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16
+     ],
+     "mutation_noise_std": 0.1,
+     "mutation_sparsity": 0.3,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "redistribution": "newborns",
+     "link_search": "reach"
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s3058",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true
+    },
+    "world": {
+     "n_nodes": 1000
+    }
+   },
+   {
+    "name": "s3080",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 0,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16,
+      16
+     ],
+     "mutation_probability": 0.4,
+     "mutation_noise_std": 0.4,
+     "allow_gifting": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "jump",
+     "valence": 16,
+     "link_token": true
+    }
+   },
+   {
+    "name": "s3087",
+    "set": {
+     "message_amount": 8,
+     "random_input_amount": 10,
+     "message_prepass": false,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16,
+      16
+     ],
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "redistribution": "parents",
+     "link_search": "jump",
+     "link_steering": "looking",
+     "link_consent": "forced",
+     "link_upkeep": "paid_or_used",
+     "upkeep_to": "estate"
+    }
+   },
+   {
+    "name": "s3094",
+    "set": {
+     "message_amount": 8,
+     "random_input_amount": 2,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50
+     ],
+     "mutation_noise_std": 0.1,
+     "mutation_sparsity": 0.05,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "mend_on_death": true,
+     "redistribution": "poorest",
+     "link_search": "jump",
+     "link_steering": "looking",
+     "link_upkeep": "paid_only",
+     "upkeep_to": "estate"
+    }
+   },
+   {
+    "name": "s3095",
+    "set": {
+     "message_amount": 8,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32
+     ],
+     "mutation_noise_std": 0.1,
+     "mutation_sparsity": 0.3,
+     "allow_revolutions": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "newborns",
+     "link_search": "walk",
+     "link_upkeep": "paid_only"
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s4002 weakest first",
+    "set": {
+     "message_amount": 16,
+     "random_input_amount": 0,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50
+     ],
+     "mutation_probability": 0.4,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "mate_pays": true,
+     "redistribution": "parents",
+     "link_search": "reach",
+     "link_consent": "forced",
+     "allocation": "weakest_first"
+    },
+    "world": {
+     "n_nodes": 250
+    }
+   },
+   {
+    "name": "s4004 weakest first",
+    "set": {
+     "message_amount": 8,
+     "random_input_amount": 2,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16,
+      16
+     ],
+     "mutation_sparsity": 0.3,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "mate_pays": true,
+     "redistribution": "newborns",
+     "link_search": "walk",
+     "link_steering": "looking",
+     "link_token": true,
+     "allocation": "weakest_first"
+    },
+    "world": {
+     "n_nodes": 1000
+    }
+   },
+   {
+    "name": "s4006 strongest first",
+    "set": {
+     "message_amount": 16,
+     "random_input_amount": 10,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      16,
+      16,
+      16
+     ],
+     "mutation_probability": 0.1,
+     "mutation_noise_std": 0.1,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "poorest",
+     "link_token": true,
+     "link_upkeep": "paid_or_used",
+     "upkeep_to": "estate",
+     "allocation": "strongest_first"
+    },
+    "world": {
+     "n_nodes": 1000
+    }
+   },
+   {
+    "name": "s4008 weakest first",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 0,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32,
+      32,
+      32
+     ],
+     "mutation_noise_std": 0.4,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "redistribution": "parents",
+     "allocation": "weakest_first"
+    }
+   }
+  ]
+ }
+}

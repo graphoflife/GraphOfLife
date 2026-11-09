@@ -73,12 +73,14 @@ def oeecandidates(ch: F.Chapter) -> None:
                   _f(w["numbers"].get("fertility")), _f(w["numbers"].get("late_novelty")),
                   _f(w["numbers"].get("contemporaries")), _f(w["numbers"].get("health"))] for w in ranked]})
 
-    # The shortlist: the first fronts of health against evolution.
-    short = sorted((w for w in left if w.get("shortlisted")), key=lambda w: (w["front"], -w["numbers"]["health"]))
+    # The shortlist: every candidate among the first of any of health's three orders.
+    short = sorted((w for w in left if w.get("shortlisted")), key=lambda w: -w["numbers"]["health"])
+    among = {"product": "product", "sum": "sum", "worst": "worst"}
     ch.number("table:shortlist", {
-        "head": ["front", "world", "round", "health", "evolution's mean rank", "heredity", "novelty", "generations",
-                 "effective population", "fertility passed on", "channels open"],
-        "rows": [[w["front"], link(w), ROUND[w["round"]], _f(w["numbers"].get("health")), f"{w['evolution_rank']:.1f}",
+        "head": ["world", "round", f"among the first {d['top']} by", "health (product)", "evolution's mean rank",
+                 "heredity", "novelty", "generations", "effective population", "fertility passed on", "channels open"],
+        "rows": [[link(w), ROUND[w["round"]], ", ".join(among[o] for o in w["top_of"]),
+                  _f(w["numbers"].get("health"), "{:.3f}"), f"{w['evolution_rank']:.1f}",
                   _f(w["numbers"].get("heredity")), _f(w["numbers"].get("late_novelty")),
                   _f(w["numbers"].get("generations"), "{:,.0f}"), _f(w["numbers"].get("effective_population"), "{:,.0f}"),
                   _f(w["numbers"].get("fertility")), ", ".join(w["capability"]["channels"]) or "none"] for w in short]})

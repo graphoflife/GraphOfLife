@@ -277,40 +277,42 @@ def _screen(name):
     return module
 
 
-HEALTH, EFFECTS, FAMILIES, FUNNEL, CULLS = (_screen(name) for name in ("health", "effects", "families", "funnel",
-                                                                        "culls"))
+HEALTH, EFFECTS, FAMILIES, FUNNEL = (_screen(name) for name in ("health", "effects", "families", "funnel"))
 
 
-def _line(key):
-    return next(line for line in HEALTH.lines() if line["key"] == key)
+def test_a_measure_is_scored_by_the_share_of_the_worlds_it_beats():
+    assert HEALTH.shares([3.0, 1.0, 2.0]) == [1.0, 1 / 3, 2 / 3]              # the best 1, the worst 1/n
+    assert HEALTH.shares([1.0, 1.0, 2.0]) == [0.5, 0.5, 1.0]                   # worlds that tie share their place
+    measure = lambda better: {"key": "x", "better": better}
+    assert HEALTH.oriented(measure("less"), 0.2) > HEALTH.oriented(measure("less"), 0.3)    # a smaller hub is better
+    near = measure("near 3")
+    assert HEALTH.oriented(near, 3.0) == 0.0                                    # three dimensions are best
+    assert abs(HEALTH.oriented(near, 2.0) - HEALTH.oriented(near, 4.5)) < 1e-12  # two as far off as four and a half
+    assert HEALTH.oriented(measure("more"), None) == -math.inf                   # not read: the worst
 
 
-def test_a_line_is_read_as_the_share_of_what_it_asks():
-    near = lambda a, b: abs(a - b) < 1e-9
-    assert near(HEALTH.progress(_line("core"), 0.76), 0.95)            # 76 of the 80 the line asks
-    assert HEALTH.progress(_line("core"), 0.85) == 1.0                  # more than enough counts as enough
-    assert near(HEALTH.progress(_line("hub"), 0.30), 0.05 / 0.30)       # six times over the line
-    assert near(HEALTH.progress(_line("width"), 1.1), 1 / 3)            # counted from the random twin's 1
-    assert near(HEALTH.progress(_line("links_min"), 2.5), 0.5)          # from a tree's two links an agent
-    assert near(HEALTH.progress(_line("tokens_alike"), 0.9), 0.5)       # 0.1 unlike, of the 0.2 asked
-    assert near(HEALTH.progress(_line("richest"), 0.20), 0.5)           # twice the share of the tokens allowed
-    assert HEALTH.progress(_line("width"), 0.9) == 0.0                  # below its twin: none of it
-    assert HEALTH.progress(_line("core"), None) == 0.0                  # not read: nothing met
+def test_health_is_read_in_three_orders_over_the_criteria():
+    well = {"hub": 0.01, "richest": 0.01, "core": 0.9, "agent_cut": 0.05, "link_cut": 0.05, "width": 2.0,
+            "dimension": 3.0, "apart": 0.8, "tokens_alike": 0.3, "core_links_alike": 0.3, "ages_alike": 0.3,
+            "children_alike": 0.7, "gini_random": 1.2, "culled_tokens": 0.01}
+    a, b = HEALTH.score([well, {**well, "hub": 0.02}])                        # alike but for b's larger hub
+    near = lambda x, y: abs(x - y) < 1e-12
+    assert a["measures"]["hub"] == 1.0 and b["measures"]["hub"] == 0.5 and a["measures"]["core"] == 0.75
+    # A criterion is the geometric mean of its measures: decentralised reads the hub and the richest agent.
+    assert near(a["criteria"]["decentralised"], math.sqrt(0.75)) and near(b["criteria"]["decentralised"], math.sqrt(0.375))
+    # Each order on the criteria's own scale: the sum as the six's average, the product as their geometric average.
+    assert near(a["health"]["sum"], (math.sqrt(0.75) + 5 * 0.75) / 6)
+    assert near(a["health"]["product"], (math.sqrt(0.75) * 0.75 ** 5) ** (1 / 6))
+    assert a["health"]["worst"] == 0.75 and near(b["health"]["worst"], math.sqrt(0.375))
 
 
-def test_health_is_the_sum_of_the_criteria_each_as_its_weakest_line():
-    well = {"hub": 0.01, "links": 4.0, "richest": 0.01, "core": 0.9, "agent_cut": 0.05, "link_cut": 0.05,
-            "width": 2.0, "dimension": 3.0, "half_cut": 0.6, "tokens_alike": 0.3, "max_tokens": 100.0,
-            "core_links_alike": 0.3, "ages_alike": 0.3, "children_alike": 0.7, "apart": 0.8, "gini_random": 1.2}
-    got = HEALTH.score(well)
-    assert got["health"] == 5.0 and got["met"] == 5, got
-    got = HEALTH.score({**well, "core": 0.4})                           # half the 2-core asked: resilient 0.5
-    assert abs(got["criteria"]["resilient"] - 0.5) < 1e-9 and abs(got["health"] - 4.5) < 1e-9, got
-    got = HEALTH.score({**well, "core": 0.4, "agent_cut": 0.6})         # the weakest line decides: 0.25
-    assert abs(got["criteria"]["resilient"] - 0.25) < 1e-9, got
-    # The author's own lines: five criteria too, the genotype line and B2's Gini among them.
-    author = HEALTH.score({**well, "genotypes_alike": 0.01, "gini": 0.5}, proposed=False)
-    assert set(author["criteria"]) == set(C.KEYS[1:]) and author["met"] == 5, author
+def test_a_world_is_averaged_with_the_share_of_its_tokens_each_game_culled():
+    rows = [{"t": 99, "gini": 0.9, "max_tokens": 300, "agents": 5},
+            {"t": 100, "gini": 0.4, "max_tokens": 30, "agents": 10}, {"t": 101, "gini": 0.4, "max_tokens": 30, "agents": 10}]
+    game = {t: {"mean": 3.0, "culled": c, "culled_agents": 2 * c} for t, c in ((99, 0.9), (100, 0.1), (101, 0.3))}
+    got = HEALTH.averages(rows, 300, 100, 102, game)
+    assert abs(got["culled_tokens"] - 0.2) < 1e-12 and abs(got["richest"] - 0.1) < 1e-12
+    assert abs(got["gini_random"] - 1.0) < 1e-12                                 # a random deal's Gini at 3 an agent
 
 
 def test_a_cube_is_harder_to_halve_than_a_plane_and_a_dense_one_than_a_sparse_one():
@@ -384,69 +386,12 @@ def test_fertility_passed_on_is_told_from_chance():
     assert drawn["z"] < 2, drawn
 
 
-def test_a_phase_is_rebuilt_as_it_left_the_network_before_its_cleanup():
-    prev = {"ids": [1, 2, 3], "edges": [[1, 2], [1, 3]]}
-    # A child of 1, born linked to it, takes over 1's link to 2; a search joins 3 to the child; 1-3 lapses.
-    frame = {"decisions": {"births": [{"agent": 1, "child": 9, "links": [1], "handed_over": [2]}],
-                           "proposals": [[3, 9, True], [2, 3, False]], "pruned_edges": [[1, 3]]}}
-    assert CULLS.before_cleanup(prev, frame) == {1: {9}, 2: {9}, 3: {9}, 9: {1, 2, 3}}
-
-
-def test_what_an_agent_held_is_read_from_its_stakes_and_its_births():
-    # A game: a node holds what was staked on it; under link_token a lapsed link may have paid either end a token.
-    prev = {"ids": [1, 2, 3, 4], "tokens": [3, 3, 3, 3], "edges": []}
-    game = {"phase": 2, "decisions": {"allocations": [{"targets": [1, 2], "alloc": [2, 1]},
-                                                      {"targets": [2, 1, 3], "alloc": [0, 0, 3]}],
-                                      "pruned_edges": [[2, 4]]}}
-    assert CULLS.holdings(prev, game, {"link_token": True}) == ({1: 2, 2: 1, 3: 3, 4: 0}, {1: 2, 2: 2, 3: 3, 4: 1})
-    assert CULLS.holdings(prev, game, {})[1][4] == 0
-    # Reproduction: 1 gives its child 9 all it has; 9 pays for its two links under link_token; 3 gives 2 a token.
-    birth = {"phase": 1, "decisions": {"births": [{"agent": 1, "tokens_before": 3, "invested": 3, "child": 9,
-                                                   "links": [1, 2], "handed_over": []}],
-                                       "gifts": [[3, 2, 1]]}}
-    least, most = CULLS.holdings(prev, birth, {"link_token": True})
-    assert least == most == {1: 0, 2: 4, 3: 2, 4: 3, 9: 1}
-    # Searchers may have paid tokens the record leaves out: then nobody is surely broke.
-    assert set(CULLS.holdings(prev, birth, {"link_search": "walk"})[1].values()) == {None}
-
-
-def test_a_piece_culled_counts_the_culled_and_leaves_one_by_one():
-    # 1 holds the world together: 2 and 3 hang from it, and 4 hangs from it with two leaves of its own.
-    adj = {1: {2, 3, 4}, 2: {1}, 3: {1}, 4: {1, 5, 6}, 5: {4}, 6: {4}}
-    held = {4: 0, 5: 3, 6: 2}
-    # 4 starved: its two leaves are culled, each alone.
-    assert CULLS.pieces(adj, {1, 2, 3}, 1, 2, held, held, mend=False) == (1, 1, False)
-    # The link 1-4 lapsed instead: 4 and its leaves are culled as one piece of three.
-    adj = {1: {2, 3}, 2: {1}, 3: {1}, 4: {5, 6}, 5: {4}, 6: {4}}
-    held = {4: 1, 5: 1, 6: 1}
-    assert CULLS.pieces(adj, {1, 2, 3}, 0, 3, held, held, mend=False) == (3, 3, False)
-    # A piece cut off whole by a lapse, with an agent that starved inside it: under mending its death splits
-    # nothing, so the piece is the two culled; without, they are two pieces of one.
-    adj = {1: {2}, 2: {1}, 3: {4}, 4: {3, 5}, 5: {4}}
-    held = {3: 2, 4: 0, 5: 2}
-    assert CULLS.pieces(adj, {1, 2}, 1, 2, held, held, mend=True) == (2, 2, False)
-    assert CULLS.pieces(adj, {1, 2}, 1, 2, held, held, mend=False) == (1, 1, False)
-    # Two agents the record leaves open, of whom one starved: the piece is two surely, four at most.
-    adj = {1: {2}, 2: {1}, 3: {4}, 4: {3, 5}, 5: {4, 6}, 6: {5}}
-    least, most = {3: 2, 4: 0, 5: 2, 6: 0}, {3: 2, 4: None, 5: 2, 6: None}
-    assert CULLS.pieces(adj, {1, 2}, 1, 3, least, most, mend=True) == (2, 4, False)
-    # The counts settle an open agent when they can: here only one starved, and one was open.
-    assert CULLS.pieces(adj, {1, 2}, 1, 3, {**least, 6: 1}, {**most, 6: 1}, mend=True) == (3, 3, False)
-    # An agent that surely held a token cannot have been removed beside a survivor.
-    adj = {1: {2, 3}, 2: {1}, 3: {1}}
-    assert CULLS.pieces(adj, {1, 2}, 0, 1, {3: 2}, {3: 2}, mend=False)[2]
-    # A big cull counts once it is more than BIG_CULL of the world, as often as it happens; surely, or at most.
-    cut = {"lost": [[150, 1, 0.4, 0.4], [151, 2, 0.1, 0.1], [300, 1, 0.1, 0.2]]}
-    assert HEALTH.big_culls(cut, 100, 300) == 0.5 and HEALTH.big_culls(cut, 100, 400) == 2 / 3
-    assert HEALTH.big_culls(cut, 100, 400, surely=True) == 1 / 3
-
-
-def test_the_shortlist_is_every_candidate_no_other_beats_in_both():
-    ranks = lambda r: {k: r for k in FUNNEL.EVOLUTION}
-    worlds = [{"id": "a", "numbers": {"health": 5.0}, "ranks": ranks(1)},
-              {"id": "b", "numbers": {"health": 4.0}, "ranks": ranks(2)},      # a is better in both
-              {"id": "c", "numbers": {"health": 5.5}, "ranks": ranks(3)}]      # the healthiest, though less evolving
-    assert FUNNEL.pareto(worlds) == ["a", "c"], FUNNEL.pareto(worlds)
+def test_the_shortlist_is_every_candidate_among_the_first_of_any_order():
+    worlds = [{"id": "a", "numbers": {"health": 0.5, "health_sum": 3.0, "health_worst": 0.1}},
+              {"id": "b", "numbers": {"health": 0.4, "health_sum": 4.0, "health_worst": 0.2}},
+              {"id": "c", "numbers": {"health": 0.3, "health_sum": 2.0, "health_worst": 0.3}}]
+    assert FUNNEL.tops(worlds, 1) == {"product": ["a"], "sum": ["b"], "worst": ["c"]}
+    assert FUNNEL.tops(worlds, 2)["product"] == ["a", "b"]
 
 
 if __name__ == "__main__":

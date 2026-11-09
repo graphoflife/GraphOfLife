@@ -28,9 +28,11 @@ one cannot evolve open-endedly however long it runs):
   novelty       its line of descent keeps reaching behaviour it has not
                 shown before, rather than standing still or coming back
 
-Health is the proposed order's (research/screen/health.py), and whether
-fertility is passed on is read from each world's family tree
-(research/screen/families.py). Every random round can be read together (the
+Health is read in its three orders, by the product, the sum and the worst of
+its six criteria (research/screen/health.py), and the shortlist is every
+candidate among the first TOP of any of the three (the author, 2026-11-09: "the
+union of the best of these rankings are candidates"). Whether fertility is
+passed on is read from each world's family tree (research/screen/families.py). Every random round can be read together (the
 author, 2026-11-07: "treat all the random simulations as potential
 candidates"); a round's reference worlds are not candidates. Round 3 alone is read
 since 2026-11-08 (the author: "keep only round 3").
@@ -97,7 +99,10 @@ def numbers(w: Dict[str, Any]) -> Dict[str, Optional[float]]:
                         and np.isfinite(fam["correlation"]) else None)
     out["fertility_z"] = fam.get("z")
     out["childless"] = fam.get("childless")
-    out["health"] = (w.get("health") or {}).get("health")
+    health = w.get("health") or {}
+    out["health"] = health.get("product")
+    out["health_sum"] = health.get("sum")
+    out["health_worst"] = health.get("worst")
     line = d.get("line")
     if line:
         D = np.array(line["distance"])
@@ -216,7 +221,7 @@ CATEGORIES = [
     ("fertility", "selection", "fertility", True,
      "how much more a parent's number of children says of its children's than chance alone (a correlation)"),
     ("health", "health", "health", True,
-     "health by the proposed order, the sum of its criteria (research/screen/health.py)"),
+     "health by the product of its six criteria (research/screen/health.py)"),
     ("riches", "economy", "tokens_per_agent", True, "tokens per agent"),
 ]
 
@@ -230,38 +235,20 @@ def evolution_rank(w: Dict[str, Any], worst: int) -> float:
     return float(np.mean([w.get("ranks", {}).get(k, worst) for k in EVOLUTION]))
 
 
-#: How many fronts the shortlist takes.
-FRONTS = 3
+#: How far down each of health's three orders the shortlist reaches (the author, 2026-11-09: "the union of the
+#: best of these rankings are candidates"): the first 13 of each, 24 worlds in all in round 3, the number the
+#: author asked to play again.
+TOP = 13
+#: Health's three orders, by the number each is read from.
+ORDERS = {"product": "health", "sum": "health_sum", "worst": "health_worst"}
 
 
-def pareto(left: List[Dict[str, Any]]) -> List[str]:
-    """
-    The front: every candidate no other beats both in health (the proposed order's) and in evolution (its
-    mean rank over the categories of evolution), with no weight between the two.
-    """
-    have = [w for w in left if w["numbers"].get("health") is not None]
-    score = {w["id"]: (w["numbers"]["health"], -evolution_rank(w, len(left))) for w in have}
-    return [a for a in score if not any(score[b][0] >= score[a][0] and score[b][1] >= score[a][1]
-                                        and score[b] != score[a] for b in score)]
-
-
-def fronts(left: List[Dict[str, Any]]) -> Dict[str, int]:
-    """
-    Each candidate's front: 1 for the front itself, 2 for the front of what is left once it is set aside,
-    and so on. One world may be best in both, and its front alone would shortlist it alone.
-    """
-    out: Dict[str, int] = {}
-    rest = list(left)
-    k = 1
-    while rest:
-        front = set(pareto(rest))
-        if not front:
-            break
-        for w in rest:
-            if w["id"] in front:
-                out[w["id"]] = k
-        rest = [w for w in rest if w["id"] not in front]
-        k += 1
+def tops(left: List[Dict[str, Any]], top: int = TOP) -> Dict[str, List[str]]:
+    """The first `top` candidates of each of health's three orders, best first."""
+    out = {}
+    for order, key in ORDERS.items():
+        have = [w for w in left if w["numbers"].get(key) is not None]
+        out[order] = [w["id"] for w in sorted(have, key=lambda w: (-w["numbers"][key], w["id"]))[:top]]
     return out
 
 
@@ -292,7 +279,7 @@ def worlds_of(names: List[str]) -> List[Dict[str, Any]]:
             out.append({"id": spec.run_id, "round": name, "seed": spec.lab["seed"], "fate": fate, "ended_at": at,
                         "until": spec.until, "tokens": spec.lab["world"]["total_tokens"], "set": changed,
                         "full": full, "dossier": K.kept(spec.run_id), "families": FA.kept(spec.run_id),
-                        "health": (health.get(spec.run_id) or {}).get("proposal")})
+                        "health": (health.get(spec.run_id) or {}).get("health")})
     return out
 
 
@@ -312,13 +299,13 @@ def judge(names: List[str]) -> Dict[str, Any]:
         ranks[key] = [w["id"] for w in have]
         for i, w in enumerate(have, 1):
             w.setdefault("ranks", {})[key] = i
-    front = fronts(left)
-    shortlist = [i for i, k in sorted(front.items(), key=lambda x: x[1]) if k <= FRONTS]
+    best = tops(left)
+    shortlist = sorted({i for ids in best.values() for i in ids})
     for w in left:
         w["evolution_rank"] = evolution_rank(w, len(left))
-        w["front"] = front.get(w["id"])
-        w["shortlisted"] = w["id"] in shortlist
-    return {"rounds": names, "worlds": worlds, "ranks": ranks, "shortlist": shortlist,
+        w["top_of"] = [order for order, ids in best.items() if w["id"] in ids]
+        w["shortlisted"] = bool(w["top_of"])
+    return {"rounds": names, "worlds": worlds, "ranks": ranks, "shortlist": shortlist, "tops": best, "top": TOP,
             "evolution": list(EVOLUTION),
             "rules": [r.__name__.strip("_").replace("_", " ") for r in RULES],
             "categories": [{"key": k, "pillar": p, "measure": m, "more_is_better": b, "says": s}
@@ -366,7 +353,7 @@ def main() -> None:
               f"  heredity {_f(n['heredity'])}  fertility {_f(n.get('fertility'))}  step {_f(n.get('step'), '{:.2f}')}"
               f"  novelty {_f(n.get('late_novelty'), '{:.2f}')}  revisits {_f(n.get('revisits'), '{:.0f}')}"
               f"  contemporaries {_f(n.get('contemporaries'), '{:.2f}')}"
-              f"  health {_f(n.get('health'))}  tokens/agent {_f(n['tokens_per_agent'], '{:.1f}')}")
+              f"  health {_f(n.get('health'), '{:.4f}')}  tokens/agent {_f(n['tokens_per_agent'], '{:.1f}')}")
         for note in w["notes"]:
             print(f"        note: {note}")
 

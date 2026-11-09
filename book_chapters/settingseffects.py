@@ -37,7 +37,7 @@ DATA = ("each world's drawn settings (its plan, `book/experiments/E40.json`, dra
 #: Each outcome's name under the map, short enough for its column; the caption says them in full.
 SHORT = {"died": "died", "died_rest": "died*", "health": "health", "c_decentralised": "decent.",
          "c_resilient": "resil.", "c_space": "3-D", "c_diverse": "diverse", "c_uneven": "uneven",
-         "c_culls": "culls", "culls": "big culls",
+         "c_culls": "culls", "culls": "culled",
          "agents": "agents", "apart": "apart", "gini": "Gini", "heredity": "hered.", "generations": "gener.",
          "population": "popul.", "novelty": "novelty", "fertility": "fertil."}
 
@@ -167,7 +167,7 @@ def settingseffects(ch: F.Chapter) -> None:
     groups = [[r["health"] for r in living if r["count"] == k] for k in counts]
     ch.figure("simplicity", title="Do worlds with more mechanisms switched on do better?",
               x={"label": "mechanisms switched on beyond the simplest rules", "categories": [str(k) for k in counts]},
-              y={"label": f"health (of {len(h['criteria'])})", "min": 0, "max": len(h["criteria"])},
+              y={"label": "health (the six criteria multiplied, as their geometric average)", "min": 0, "max": 1},
               series=dots([str(k) for k in counts], groups, [BLUE] * len(counts)), legend=False,
               caption=f"Each dot is a living world of Experiment 40, placed by how many of {len(simp['simplest'])} "
                       "mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the "
@@ -186,18 +186,18 @@ def settingseffects(ch: F.Chapter) -> None:
         if w["round"] in ("E41", "E42"):
             by_seed.setdefault(w["seed"], {})[w["round"]] = w
     full = [w for w in h["worlds"] if w["round"] == "E40"]
-    fate = lambda w: (f"{w['proposal']['health']:.2f}" if w.get("proposal") else
+    fate = lambda w: (f"{w['health']['product']:.3f}" if w.get("health") else
                       ("lived" if w["alive"] else f"died at {w['ended_at']:,}"))
     ch.number("table:allocation", {
         "head": ["draw", "weakest first", "strongest first"],
         "rows": [[f"s{seed}", fate(pair["E41"]), fate(pair["E42"])] for seed, pair in sorted(by_seed.items())
                  if "E41" in pair and "E42" in pair]})
-    alive = lambda ws: [w for w in ws if w["alive"] and w.get("proposal")]
+    alive = lambda ws: [w for w in ws if w["alive"] and w.get("health")]
     ch.number("allocation", {
         "full": {"worlds": len(full), "died": sum(not w["alive"] for w in full),
-                 "health": F.describe([w["proposal"]["health"] for w in alive(full)])},
+                 "health": F.describe([w["health"]["product"] for w in alive(full)])},
         **{r: {"worlds": sum(1 for p in by_seed.values() if r in p),
                "died": sum(1 for p in by_seed.values() if r in p and not p[r]["alive"]),
-               "health": F.describe([p[r]["proposal"]["health"] for p in by_seed.values()
-                                     if r in p and p[r]["alive"] and p[r].get("proposal")])}
+               "health": F.describe([p[r]["health"]["product"] for p in by_seed.values()
+                                     if r in p and p[r]["alive"] and p[r].get("health")])}
            for r in ("E41", "E42")}})

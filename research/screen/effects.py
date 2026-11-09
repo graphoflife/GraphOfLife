@@ -178,12 +178,12 @@ def outcomes(health: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[Tuple[s
     worlds = []
     for w in health["worlds"]:
         row = {"id": w["id"], "round": w["round"], "seed": w["seed"], "died": not w["alive"]}
-        if w.get("proposal"):
-            p, a = w["proposal"], w["averages"]
-            row.update(health=p["health"], **{f"c_{c}": v for c, v in p["criteria"].items()},
+        if w.get("health"):
+            a = w["averages"]
+            row.update(health=w["health"]["product"], **{f"c_{c}": v for c, v in w["criteria"].items()},
                        agents=math.log10(a["median_agents"]) if a.get("median_agents") else None,
                        apart=a.get("apart"), gini=a.get("gini"), core=a.get("core"), width=a.get("width"),
-                       culls=a.get("big_culls"))
+                       culls=a.get("culled_tokens"))
             dossier = K.kept(w["id"])
             if dossier:
                 n = FN.numbers({"dossier": dossier, "families": FA.kept(w["id"]), "tokens": 30000,
@@ -194,14 +194,14 @@ def outcomes(health: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], List[Tuple[s
                            novelty=n.get("late_novelty"), fertility=n.get("fertility"))
         worlds.append(row)
     keys = [("died", "died", True, "all"), ("died_rest", "died, valence 2 aside", True, "all"),
-            ("health", "health (the proposal)", False, "living"),
+            ("health", "health (the six criteria multiplied, as their geometric average)", False, "living"),
             ("c_decentralised", "decentralised", False, "living"),
             ("c_resilient", "resilient", False, "living"), ("c_space", "almost three-dimensional", False, "living"),
             ("c_diverse", "diverse", False, "living"), ("c_uneven", "not too even", False, "living"),
-            ("c_culls", "no big culls", False, "living"),
+            ("c_culls", "few tokens culled", False, "living"),
             ("agents", "agents (log10 of the median)", False, "living"),
             ("apart", "same-position share", False, "living"), ("gini", "Gini of the tokens", False, "living"),
-            ("culls", "big culls every 100 iterations", False, "living"),
+            ("culls", "share of all tokens culled a game", False, "living"),
             ("heredity", "heredity index", False, "living"), ("generations", "generations", False, "living"),
             ("population", "effective population (log10)", False, "living"),
             ("novelty", "late novelty of the line of descent", False, "living"),

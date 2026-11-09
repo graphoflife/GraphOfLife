@@ -1,70 +1,51 @@
 """
-Which of the screen's worlds are healthy? A proposed order, for the author to
-check and question (the author, 2026-11-07: "sort the simulations according to
-what you think healthy could mean, most healthy to least healthy, and I will
-check the order").
+Which of the screen's worlds are healthy? Three orders, for the author to check
+(the author, 2026-11-07: "sort the simulations according to what you think
+healthy could mean, most healthy to least healthy, and I will check the order";
+2026-11-09: no lines, "a continuous scoring ... always the bigger the better and
+always positive", combined "by adding scores, multiplying scores, or just by the
+worst score", and "the union of the best of these rankings are candidates").
 
-The author's criteria (research/screen/criteria.py) say yes or no: a world
-meets a line or it does not. To put worlds in order, each line is read instead
-as how much of what it asks a world has, from nothing to all of it:
+A world is read by the measures of the author's six criteria (MEASURES), each
+averaged over iterations 100 to the end of its run, as the judge reads them
+(research/screen/measures.py). A measure becomes a score by asking how many of
+the living worlds scored with it the world does better than (`shares`): the best
+scores 1, the worst 1/n of n worlds, and worlds that tie share their place. So
+every score is positive and a bigger one is better; every difference counts, not
+only one past a line; and every measure counts alike, whatever its units, which
+is what lets the criteria be added, multiplied or compared at all. A criterion is
+the geometric mean of its measures' scores, so that one poor measure pulls it
+down more than one good one lifts it: a star is not decentralised, however even
+its tokens.
 
-    progress = what the world has / what the line asks for, at most 1
+A world's health comes in three orders over its six criteria (ORDERS):
 
-Both are counted from the line's floor: the value a world has when it has none
-of what the line asks for. That is 0 for most numbers; for links per agent it
-is a tree's 2 (a network in one piece with fewer links has no loop at all); for
-width it is the random twin's 1; for the largest holding it is one token; for
-how alike the agents are it is "all alike", 1, from which the share unlike is
-counted. A line that asks for at most some amount (a hub, a cut) is met to the
-line's amount over the world's: a world whose best-linked agent reaches 30% of
-the others, against a line of 5%, is met to 5/30 = 0.17. A missing number (no
-width under a hundred agents) meets nothing.
+    product  the six multiplied: a strong criterion makes up for a weak one in part
+    sum      the six added: a strong criterion makes up for a weak one in full
+    worst    the weakest of the six: nothing makes up for it
 
-A criterion is met as far as its weakest line, as a criterion is met only when
-all its lines are; a world's health is the sum of its six criteria's scores
-(the author's five after "alive", and the author's sixth of 2026-11-08, no big
-culls), so it counts a criterion met as one point and one missed by a little as
-nearly one. A world's low points (the fewest agents it
-had in 5% of its iterations) are kept beside its averages: a world that kept
-dipping towards extinction would be less healthy, but no world that lived to
-its end came below a few hundred agents, so a line for it would order nothing
-yet. A world that died has no health: the dead come last, the longest-lived
-first.
+Each order's number is put on the criteria's own scale, from 0 to 1, without
+changing the order: the sum as the six's average, the product as their
+geometric average (its sixth root), so that a world's three numbers can be read
+side by side, the worst never above the geometric average, nor that above the
+average.
 
-Beside the author's lines, the proposal (PROPOSED) adds lines of its own and
-drops two, each with its reason; the author kept them all on 2026-11-08: a
-richest agent holding at most 10% of all tokens (no ruler of tokens, as the hub
-line says of links; the author chose 10%), a line for the author's
-same-position share of 2026-10-24 (at least a half), and a line for "not too
-even" drawn by chance instead of by B2: at least as unequal as tokens dealt out
-at random at the world's mean holding, whose Gini is (m - 1) / (2m - 1) for a
-mean of m tokens an agent (the most random spread of whole tokens, one at
-least, is geometric). The author's other new number, the half-cut exponent,
-gets no line: it reads a network's density as much as its dimension
-(CALIBRATION), so a fixed line would call a sparse world of three dimensions
-thin. The genotype line is dropped (a genotype is renewed by every mutation, so
-sharing one says how seldom brains mutate, not how differently agents act,
-which the same-position share measures), and so is B2's Gini line. The
-author's lines alone give the order `author`.
+The sixth criterion is the author's (2026-11-08, 2026-11-09): the share of all
+tokens culled in a game, on average. Culled are the agents the engine removes for
+being cut off from the largest piece of the network ("Culled" in the web app's
+statistics). The starved hold nothing, so every token a game's cleanup shares out
+was a culled agent's, and the run's statistics record it (`redistributed`;
+under link_token it also holds the token of a link between two of the dead, a
+token or two in a game). Counted in tokens, an agent cut off alone at the edge,
+a leaf, weighs little, and a whole branch weighs what it held.
 
-The sixth criterion is the author's (2026-11-08): "if everywhere a little bit
-is culled, like leaves, it is not bad; but if every few iterations a whole
-branch, maybe 40% of the network, it is quite bad". Culled are the agents the
-engine removes for being cut off from the largest piece of the network ("Culled"
-in the web app), not those that starved. Every phase's largest piece culled is
-read from the network as the phase left it, and from what its agents held
-(research/screen/culls.py); a piece is big when it is more than the author's own
-bar for what a single loss may cut off, the resilient criterion's 15%
-(BIG_CULL), and the line asks how often a big piece is culled. Where the record
-cannot say whether an agent starved or was culled, it is counted as culled; the
-count of only the agents surely culled is kept beside it.
-
-Every number is an average over iterations 100 to the end of a world's run, as
-the judge reads it (research/screen/measures.py); the two halves of a run are
-also scored apart, to say whether a world grew healthier or sicker.
+A few of the author's measures are left out, each for its reason (DROPPED). A
+world that died has no health: the dead come last, the longest-lived first. The
+two halves of every run are also scored, together with every other half, to say
+whether a world grew healthier or sicker.
 
     python3 research/screen/health.py E41 E42 E40 [--read 3]
-        prints the order and writes research/screen/health.json; with --read, first makes every reading a
+        prints the orders and writes research/screen/health.json; with --read, first makes every reading a
         world still lacks, on that many processes
 """
 from __future__ import annotations
@@ -86,94 +67,89 @@ import numpy as np  # noqa: E402
 import gol_record  # noqa: E402
 
 import criteria as C  # noqa: E402
-import culls as CU  # noqa: E402
 import judge as J  # noqa: E402
 import measures as M  # noqa: E402
 
-#: Where each line's quantity counts from: the value of a world with none of what the line asks for.
-FLOOR = {"hub": 0.0, "links_min": 2.0, "links_max": 2.0, "core": 0.0, "agent_cut": 0.0, "link_cut": 0.0,
-         "width": 1.0, "dimension_min": 1.0, "dimension_max": 1.0, "tokens_alike": 1.0, "max_tokens": 1.0,
-         "core_links_alike": 1.0, "ages_alike": 1.0, "genotypes_alike": 1.0, "children_alike": 1.0,
-         "gini": 0.0, "richest": 0.0, "apart": 0.0, "gini_random": 0.0, "big_culls": 0.0}
-
-#: A piece cut off at once counts as a big cull when it is more than this share of the world: the author's own
-#: bar for what a single loss may cut off (the resilient criterion's agent and link cuts).
-BIG_CULL = C.VALUES["agent_cut"]
-
-#: The lines this proposal adds to the author's, each with its reason.
-PROPOSED: List[Dict[str, Any]] = [
-    {"key": "richest", "name": "tokens of the richest agent, as a share of all tokens", "criterion": "decentralised",
-     "measure": "richest", "passes": "at most", "value": 0.10,
-     "why": "no ruler: as the hub line asks that no agent hold too many of the links, this asks it of tokens; a "
-            "world unequal everywhere is healthy, one agent holding the world's fortune is not (the author, "
-            "2026-11-08: at most 10%)"},
-    {"key": "apart", "name": "same-position share: of two agents in the same situation, how often they act "
-                             "measurably differently", "criterion": "diverse", "measure": "apart",
-     "passes": "at least", "value": 0.5,
-     "why": "the author's own number for very different behaviours surviving (2026-10-24), with its line at "
-            "half: two agents more often act differently than alike"},
-    {"key": "gini_random", "name": "Gini of the tokens, over the Gini of tokens dealt out at random at the same "
-                                   "mean holding", "criterion": "uneven", "measure": "gini_random",
-     "passes": "at least", "value": 1.0,
-     "why": "with no baseline, chance draws the line: a world more even than a random deal has something "
-            "flattening it; tokens dealt out at random, one at least, at a mean of m an agent have a Gini of "
-            "(m - 1) / (2m - 1), so the line moves with the world's own riches (0.40 at 3 tokens an agent, "
-            "0.46 at 7, 0.47 at 10)"},
-    {"key": "big_culls", "name": f"big culls: pieces of more than {BIG_CULL:.0%} of the network culled at once, "
-                                 "every hundred iterations", "criterion": "culls", "measure": "big_culls",
-     "passes": "at most", "value": 1.0,
-     "why": "the author's sixth criterion (2026-11-08): leaves culled everywhere are no harm, a whole branch "
-            "culled every few iterations is; a piece is big past the author's bar for what one loss may cut off "
-            "(15%), and a world may lose one about once every hundred iterations"},
-]
-#: The author's lines this proposal leaves out, with the reason.
-DROPPED = {"genotypes_alike": "a genotype is renewed by every mutation, so how many agents share one says how "
-                              "seldom brains mutate, not how differently agents act; the same-position share "
-                              "measures that (in round 3 no world came near the line: at most 26% of a world's "
-                              "agents shared a genotype)",
-           "gini": "drawn at B2's most even world of Experiment 16, a baseline the screen no longer compares with; "
-                   "the proposal's line for not too even is drawn by chance instead"}
-#: The criteria in the proposal's order: the author's after "alive", which every world in the order meets, and
-#: the author's sixth, no big culls.
+#: The criteria: the author's after "alive", which every world in the orders meets, and the author's sixth.
 CRITERIA = ["decentralised", "resilient", "space", "diverse", "uneven", "culls"]
 
+#: Each criterion's measures, and which way is better: more, less, or nearer three dimensions.
+MEASURES: List[Dict[str, Any]] = [
+    {"key": "hub", "criterion": "decentralised", "better": "less",
+     "name": "links of the best-linked agent, as a share of the others"},
+    {"key": "richest", "criterion": "decentralised", "better": "less",
+     "name": "tokens of the richest agent, as a share of all tokens"},
+    {"key": "core", "criterion": "resilient", "better": "more", "name": "share of the agents in the 2-core"},
+    {"key": "agent_cut", "criterion": "resilient", "better": "less",
+     "name": "most of the world one agent's loss cuts off"},
+    {"key": "link_cut", "criterion": "resilient", "better": "less",
+     "name": "most of the world one link's loss cuts off"},
+    {"key": "width", "criterion": "space", "better": "more", "name": "typical distance, over the random twin's"},
+    {"key": "dimension", "criterion": "space", "better": "near 3", "name": "dimension, by how balls grow"},
+    {"key": "apart", "criterion": "diverse", "better": "more",
+     "name": "same-position share: of two agents in the same situation, how often they act measurably "
+             "differently"},
+    {"key": "tokens_alike", "criterion": "diverse", "better": "less",
+     "name": "share of the agents holding the most common number of tokens"},
+    {"key": "core_links_alike", "criterion": "diverse", "better": "less",
+     "name": "share of the 2-core's agents with its most common number of links"},
+    {"key": "ages_alike", "criterion": "diverse", "better": "less", "name": "share of the agents of the most common age"},
+    {"key": "children_alike", "criterion": "diverse", "better": "less",
+     "name": "share of the agents making the more common choice, to have a child or not"},
+    {"key": "gini_random", "criterion": "uneven", "better": "more",
+     "name": "Gini of the tokens, over the Gini of tokens dealt out at random at the same mean holding"},
+    {"key": "culled_tokens", "criterion": "culls", "better": "less",
+     "name": "share of all tokens culled in a game, with the agents cut off from the largest piece"},
+]
+#: The author's measures left out, with the reason.
+DROPPED = {"links": "links per agent asked for a range, 3 to 12, in which more is not better; what it stood for, "
+                    "loops and a world hard to cut, the 2-core and the two cuts measure directly",
+           "max_tokens": "the largest holding is the richest agent's share of all tokens, counted the other way "
+                         "round, so the two would cancel; its line kept out a world of paupers, which no living "
+                         "world is",
+           "genotypes_alike": "a genotype is renewed by every mutation, so how many agents share one says how "
+                              "seldom brains mutate, not how differently agents act; the same-position share "
+                              "measures that",
+           "gini": "drawn at B2's most even world, a baseline the screen no longer compares with; the Gini over a "
+                   "random deal's at the same mean holding reads the same thing against chance"}
+#: The three ways to put the criteria together, each an order of its own.
+ORDERS = {"product": "the six multiplied (read as their geometric average): a strong criterion makes up for a "
+                      "weak one in part",
+          "sum": "the six added (read as their average): a strong criterion makes up for a weak one in full",
+          "worst": "the weakest of the six: nothing makes up for it"}
 
-def lines(proposed: bool = True) -> List[Dict[str, Any]]:
-    """The lines a world is scored on: the author's, or the proposal's."""
-    if not proposed:
-        return list(C.LINES)
-    return [line for line in C.LINES if line["key"] not in DROPPED] + PROPOSED
+
+def oriented(measure: Dict[str, Any], value: Optional[float]) -> float:
+    """A measure's value turned so that more is better; a measure not read counts as the worst."""
+    if value is None or not math.isfinite(value) or (measure["better"] == "near 3" and value <= 0):
+        return -math.inf
+    if measure["better"] == "more":
+        return value
+    if measure["better"] == "less":
+        return -value
+    return -abs(math.log(value / 3.0))      # as far from three dimensions at two as at four and a half
 
 
-def progress(line: Dict[str, Any], value: Optional[float]) -> float:
-    """How much of what a line asks a world has: 0 none, 1 all of it (meeting the line)."""
-    if value is None or not math.isfinite(value):
-        return 0.0
-    floor, need = FLOOR[line["key"]], line["value"]
-    if C.passes(line, value):
-        return 1.0
-    if floor == need:
-        return 0.0
-    if line["passes"] in ("at least", "above"):
-        got = (value - floor) / (need - floor)
-    elif floor > need:              # "below" a share of agents alike: the share unlike, against the one asked
-        got = (floor - value) / (floor - need)
-    else:                           # "at most" an amount: the amount allowed over the world's
-        got = (need - floor) / (value - floor)
-    return float(min(1.0, max(0.0, got)))
+def shares(values: List[float]) -> List[float]:
+    """Each value's place among them all, as the share of them it does better than: the best 1, the worst 1/n."""
+    n = len(values)
+    return [(sum(v < x for v in values) + (sum(v == x for v in values) + 1) / 2) / n for x in values]
 
 
-def score(averages: Dict[str, Optional[float]], proposed: bool = True) -> Dict[str, Any]:
-    """Every line's progress, every criterion's score (its weakest line's), and the health, their sum."""
-    each = lines(proposed)
-    got = {line["key"]: progress(line, averages.get(line["measure"])) for line in each}
-    criteria = {}
-    for c in (CRITERIA if proposed else C.KEYS[1:]):
-        mine = [got[line["key"]] for line in each if line["criterion"] == c]
-        if mine:
-            criteria[c] = min(mine)
-    return {"lines": got, "criteria": criteria, "health": float(sum(criteria.values())),
-            "of": len(criteria), "met": sum(v >= 1.0 for v in criteria.values())}
+def score(table: List[Dict[str, Optional[float]]]) -> List[Dict[str, Any]]:
+    """
+    Every world's scores, from the averages of all the worlds scored together: each measure's share, each
+    criterion's geometric mean of them, and the health of each of the three orders, on the criteria's scale.
+    """
+    each = {m["key"]: shares([oriented(m, a.get(m["key"])) for a in table]) for m in MEASURES}
+    out = []
+    for i in range(len(table)):
+        criteria = {c: float(math.exp(np.mean([math.log(each[m["key"]][i]) for m in MEASURES
+                                                if m["criterion"] == c]))) for c in CRITERIA}
+        out.append({"measures": {k: v[i] for k, v in each.items()}, "criteria": criteria,
+                    "health": {"product": float(math.prod(criteria.values()) ** (1 / len(CRITERIA))),
+                               "sum": float(np.mean(list(criteria.values()))), "worst": float(min(criteria.values()))}})
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -183,7 +159,7 @@ def score(averages: Dict[str, Optional[float]], proposed: bool = True) -> Dict[s
 #: Random networks in a plane and in a cube, at the densities of the screen's worlds and above: (dimensions,
 #: links an agent asked for). The half-cut exponent of a lattice is (d - 1) / d, but a sparse network halves
 #: more cheaply: at five links an agent a plane reads about 0.38 and a cube 0.56, and only at eight do they
-#: reach a lattice's 1/2 and 2/3. That is why the exponent gets no fixed line.
+#: reach a lattice's 1/2 and 2/3. That is why the exponent is not one of space's measures.
 CALIBRATION = [(2, 3), (2, 5), (2, 8), (3, 3), (3, 5), (3, 8)]
 CALIBRATION_AGENTS, CALIBRATION_SEED = 4000, 1
 
@@ -250,27 +226,25 @@ def random_gini(mean: float) -> float:
     return (mean - 1.0) / (2.0 * mean - 1.0) if mean > 1.0 else 0.0
 
 
-def held(run_id: str) -> Dict[int, float]:
-    """A world's mean holding after every game, from its statistics (tokens a link locks are held by none)."""
-    return {int(r["iteration"]): float(r["meanTokens"]) for r in gol_record.read_stats(run_id)
-            if r["phase"] == 2 and r.get("meanTokens") is not None}
-
-
-def big_culls(cut: Dict[str, Any], start: int, stop: int, surely: bool = False) -> Optional[float]:
+def games(run_id: str, tokens: int) -> Dict[int, Dict[str, float]]:
     """
-    How many times, every hundred iterations from start to stop, a piece of more than BIG_CULL was culled: counting
-    every agent the record does not show to have starved, or with `surely` only the agents it shows were culled.
+    Every game of a world, from its statistics: the mean holding after it (tokens a link locks are held by
+    none), the share of all tokens its cleanup culled (`redistributed`: the starved hold nothing), and the share
+    of its agents culled (`nodes` are those left after the cleanup).
     """
-    if not cut:
-        return None
-    hits = sum(1 for t, _, least, most in cut["lost"] if start <= t < stop and (least if surely else most) > BIG_CULL)
-    return 100.0 * hits / max(1, stop - start)
+    out = {}
+    for r in gol_record.read_stats(run_id):
+        if r["phase"] == 2 and r.get("meanTokens") is not None:
+            before = (r.get("nodes") or 0) + (r.get("starved") or 0) + (r.get("orphaned") or 0) + (r.get("aged") or 0)
+            out[int(r["iteration"])] = {"mean": float(r["meanTokens"]),
+                                        "culled": float(r.get("redistributed") or 0) / tokens,
+                                        "culled_agents": float(r.get("orphaned") or 0) / before if before else 0.0}
+    return out
 
 
 def averages(rows: List[Dict[str, Any]], tokens: int, start: int, stop: int,
-             mean_held: Optional[Dict[int, float]] = None,
-             cut: Optional[Dict[str, Any]] = None) -> Dict[str, Optional[float]]:
-    """The judge's averages over iterations start to stop, with the proposal's numbers beside them."""
+             game: Optional[Dict[int, Dict[str, float]]] = None) -> Dict[str, Optional[float]]:
+    """The judge's averages over iterations start to stop, with the measures read beside them."""
     values: Dict[str, List[float]] = {}
     agents: List[float] = []
     for row in rows:
@@ -283,54 +257,50 @@ def averages(rows: List[Dict[str, Any]], tokens: int, start: int, stop: int,
             values.setdefault("richest", []).append(row["max_tokens"] / tokens)
         if row.get("agents") is not None:
             agents.append(float(row["agents"]))
-        m = (mean_held or {}).get(row["t"])
+        m = (game or {}).get(row["t"], {}).get("mean")
         if row.get("gini") is not None and m is not None and random_gini(m) > 0:
             values.setdefault("gini_random", []).append(row["gini"] / random_gini(m))
     out: Dict[str, Optional[float]] = {key: float(np.mean(v)) for key, v in sorted(values.items())}
     if agents:
         out["low"] = float(np.quantile(agents, 0.05))
         out["median_agents"] = float(np.median(agents))
-    out["big_culls"] = big_culls(cut or {}, start, stop)
-    out["big_culls_surely"] = big_culls(cut or {}, start, stop, surely=True)
+    played = [g for t, g in (game or {}).items() if start <= t < stop]
+    out["culled_tokens"] = float(np.mean([g["culled"] for g in played])) if played else None
+    out["culled_agents"] = float(np.mean([g["culled_agents"] for g in played])) if played else None
     return out
 
 
 def world(w: Dict[str, Any], have: Dict[M.Item, Dict[str, Any]]) -> Dict[str, Any]:
-    """One world scored: over its whole run, by the proposal and by the author's lines, and in two halves."""
+    """One world's averages: over its whole run, and over each half of it."""
     wanted = M.items(w["id"], w["ended_at"], C.SETTLE)
     missing = [i for i in wanted if i not in have]
     out = {k: w[k] for k in ("round", "id", "seed", "fate", "ended_at", "until", "set")}
     out["alive"] = w["fate"] == "lived"
     out["stopped"] = w["fate"] == "too slow"         # a round may stop its slowest worlds: neither lived nor died
+    out["read"] = not missing
     if missing or not out["alive"]:
-        out["read"] = not missing
         return out
     rows = rows_of(have, wanted)
     tokens = int(w["tokens"])
     end = w["ended_at"] + 1
     half = (C.SETTLE + end) // 2            # the two halves of a run, scored apart: 100 to 1,550 and on, in round 3
-    mean_held = held(w["id"])
-    cut = CU.kept(w["id"])
-    whole = averages(rows, tokens, C.SETTLE, end, mean_held, cut)
-    out.update(read=True, averages=whole, proposal=score(whole), author=score(whole, proposed=False),
-               culls={k: cut[k] for k in ("phases", "cut_off", "largest", "per_100", "open", "widest", "contradicted")}
-               if cut else None,
-               halves=[score(averages(rows, tokens, C.SETTLE, half, mean_held, cut))["health"],
-                       score(averages(rows, tokens, half, end, mean_held, cut))["health"]])
+    game = games(w["id"], tokens)
+    out.update(averages=averages(rows, tokens, C.SETTLE, end, game),
+               half_averages=[averages(rows, tokens, C.SETTLE, half, game), averages(rows, tokens, half, end, game)])
     return out
 
 
-def order(worlds: List[Dict[str, Any]], key: str = "proposal") -> List[Dict[str, Any]]:
+def order(worlds: List[Dict[str, Any]], key: str = "product") -> List[Dict[str, Any]]:
     """
-    Most healthy first: the living by health, ties by their weakest criterion; then any living world not
-    yet read; then the worlds stopped as too slow, which neither lived nor died; then the dead,
-    longest-lived first.
+    Most healthy first, by one of the three orders: the living by health, ties by their weakest criterion;
+    then any living world not yet read; then the worlds stopped as too slow, which neither lived nor died; then
+    the dead, longest-lived first.
     """
-    living = [w for w in worlds if w["alive"] and w.get(key)]
-    unread = [w for w in worlds if w["alive"] and not w.get(key)]
+    living = [w for w in worlds if w["alive"] and w.get("health")]
+    unread = [w for w in worlds if w["alive"] and not w.get("health")]
     stopped = [w for w in worlds if w.get("stopped")]
     dead = [w for w in worlds if not w["alive"] and not w.get("stopped")]
-    living.sort(key=lambda w: (-w[key]["health"], -min(w[key]["criteria"].values()), w["id"]))
+    living.sort(key=lambda w: (-w["health"][key], -w["health"]["worst"], w["id"]))
     dead.sort(key=lambda w: (-w["ended_at"], w["id"]))
     return (living + sorted(unread, key=lambda w: w["id"]) + sorted(stopped, key=lambda w: w["id"]) + dead)
 
@@ -352,39 +322,36 @@ def main() -> None:
         wanted = [i for w in worlds for i in M.items(w["id"], w["ended_at"], C.SETTLE)]
         have = J.gather(wanted, a.read, M.read, have, M.keep)
     scored = [world(w, have) for w in worlds]
+    # Every living world is scored against all the others; each half of a run against every half of every run.
+    living = [w for w in scored if w["alive"] and w["read"]]
+    for w, s in zip(living, score([w["averages"] for w in living])):
+        w.update(s)
+    halves = score([w["half_averages"][0] for w in living] + [w["half_averages"][1] for w in living])
+    for i, w in enumerate(living):
+        w["halves"] = [halves[i]["health"], halves[len(living) + i]["health"]]
+        del w["half_averages"]
     ranked = order(scored)
-    for i, w in enumerate(ranked, 1):
-        w["rank"] = i
-    author = order(scored, "author")
-    for i, w in enumerate(author, 1):
-        w["rank_author"] = i
-    # The other way to combine the criteria, for the author to compare: a world as healthy as its weakest.
-    weakest = sorted((w for w in scored if w["alive"] and w.get("proposal")),
-                     key=lambda w: (-min(w["proposal"]["criteria"].values()), -w["proposal"]["health"], w["id"]))
-    for i, w in enumerate(weakest, 1):
-        w["rank_weakest"] = i
-    out = {"rounds": a.rounds, "criteria": CRITERIA, "lines": lines(), "author_lines": C.LINES,
-           "floor": FLOOR, "proposed": PROPOSED, "dropped": DROPPED, "big_cull": BIG_CULL,
-           "calibration": calibration(),
-           "worlds": ranked}
+    for key in ORDERS:
+        for i, w in enumerate(order(scored, key), 1):
+            w.setdefault("ranks", {})[key] = i
+    out = {"rounds": a.rounds, "criteria": CRITERIA, "measures": MEASURES, "dropped": DROPPED, "orders": ORDERS,
+           "calibration": calibration(), "worlds": ranked}
     with open(os.path.join(HERE, "health.json"), "w") as f:
         json.dump(out, f, indent=1, default=str)
-    unread = [w["id"] for w in ranked if not w.get("read")]
+    unread = [w["id"] for w in ranked if not w["read"]]
     print(f"{len(ranked)} worlds; {len(unread)} not yet read" + (f" ({', '.join(unread[:5])} ...)" if unread else ""))
-    print("rank  world   health  (author)  " + "  ".join(f"{c[:6]:>6s}" for c in CRITERIA) + "   halves")
+    print("rank: product  sum  worst   world    product    sum  worst  " + "  ".join(f"{c[:6]:>6s}" for c in CRITERIA))
     for w in ranked:
         if not w["alive"]:
             how = "stopped as too slow" if w["stopped"] else "died"
-            print(f"{w['rank']:4d}  s{w['seed']}  {how} at {w['ended_at']}")
+            print(f"                       s{w['seed']}  {how} at {w['ended_at']}")
             continue
-        if not w.get("proposal"):
-            print(f"{w['rank']:4d}  s{w['seed']}  not read")
+        if not w.get("health"):
+            print(f"                       s{w['seed']}  not read")
             continue
-        p = w["proposal"]
-        print(f"{w['rank']:4d}  s{w['seed']}  {p['health']:5.2f}  "
-              f"({w['author']['health']:4.2f} #{w['rank_author']:<3d})  "
-              + "  ".join(f"{p['criteria'][c]:6.2f}" for c in CRITERIA)
-              + f"   {w['halves'][0]:.2f} → {w['halves'][1]:.2f}")
+        h, r = w["health"], w["ranks"]
+        print(f"      {r['product']:7d} {r['sum']:4d} {r['worst']:6d}   s{w['seed']}  {h['product']:9.3f} {h['sum']:6.3f} "
+              f"{h['worst']:6.3f}  " + "  ".join(f"{w['criteria'][c]:6.2f}" for c in CRITERIA))
 
 
 if __name__ == "__main__":

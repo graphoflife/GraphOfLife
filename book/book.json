@@ -1477,7 +1477,7 @@
     },
     {
       "id": "which-worlds-are-healthy",
-      "title": "Which worlds are healthy? A proposed order",
+      "title": "Which worlds are healthy? Three orders",
       "file": "pages/which-worlds-are-healthy.md",
       "topics": [
         "healthy",
@@ -1491,7 +1491,7 @@
       ],
       "status": "analysed",
       "added": "2026-11-07",
-      "summary": "SUMMARY"
+      "summary": "Round 3's living worlds in three orders of health: every measure scored by the share of the worlds a world beats, the six criteria multiplied, added or the worst of them; few tokens culled is the sixth."
     },
     {
       "id": "how-the-drawn-settings-shape-a-world",
@@ -1509,7 +1509,7 @@
       ],
       "status": "analysed",
       "added": "2026-11-07",
-      "summary": "SUMMARY"
+      "summary": "Each drawn setting judged on its own by shuffling: a cap of two links kills, gifts keep worlds alive, mending the dead spares a world its culls, and most settings show no effect."
     },
     {
       "id": "candidates-for-open-ended-evolution",
@@ -1523,11 +1523,12 @@
       "experiments": [
         "E40",
         "E41",
-        "E42"
+        "E42",
+        "E43"
       ],
       "status": "analysed",
       "added": "2026-11-07",
-      "summary": "SUMMARY"
+      "summary": "Round 3's worlds read for heredity, selection and change: 72 candidates, evolution fast but narrow, and a shortlist of 24 from health's three orders, played again in Experiment 43."
     },
     {
       "id": "every-world-side-by-side",

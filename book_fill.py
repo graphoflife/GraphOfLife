@@ -299,7 +299,8 @@ def runs(md: str, name: str) -> str:
                  "until its world dies out. Every setting is that of the baseline "
                  f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it.\n")
     for c in conditions:
-        changed = ", ".join(f"`{k}` = {show(v)}" for k, v in (c.get("set") or {}).items()) \
+        # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
+        changed = ", ".join(f"`{k}` = {show(v)}" for k, v in {**(c.get("set") or {}), **(c.get("world") or {})}.items()) \
             or f"nothing: {base['id']} as it is"
         named = ids.get(c["name"], [])
         where = f" Runs `{named[0]}` … `{named[-1]}`." if named else ""
@@ -329,7 +330,8 @@ def runs(md: str, name: str) -> str:
             if key == "total_tokens":
                 cells.append(", ".join(number(s) for s in sizes(c)))
                 continue
-            value = (c.get("set") or {}).get(key, spec.get("world", {}).get(key, base["settings"][key]))
+            value = (c.get("set") or {}).get(key, (c.get("world") or {}).get(
+                key, spec.get("world", {}).get(key, base["settings"][key])))
             text = show(value)
             cells.append(f"**{text}**" if value != base["settings"][key] else text)
         meaning = (glossary["settings"].get(key) or {}).get("meaning", "")

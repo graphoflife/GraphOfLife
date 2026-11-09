@@ -204,7 +204,7 @@ The search for a world that is decentralised, resilient, about three-dimensional
 - [The candidates, played on and played again](pages/the-candidates-played-on.md)
 - [Room and riches for the steadiest world](pages/room-for-the-steadiest-world.md)
 - [A screen of random worlds](pages/a-screen-of-random-worlds.md)
-- [Which worlds are healthy? A proposed order](pages/which-worlds-are-healthy.md)
+- [Which worlds are healthy? Three orders](pages/which-worlds-are-healthy.md)
 - [How the drawn settings shape a world](pages/how-the-drawn-settings-shape-a-world.md)
 
 ### Methods and statistics
