@@ -563,6 +563,15 @@
       "anchor": "fitting-a-power-law-properly"
     },
     {
+      "name": "data collapse",
+      "also": [
+        "finite-size scaling"
+      ],
+      "page": "which-properties-have-no-scale",
+      "says": "Curves of one quantity measured at many sizes that fall onto one another once its values are divided by a power of the size: then the size of the whole is its only scale.",
+      "anchor": "data-collapse"
+    },
+    {
       "name": "power spectrum",
       "page": "autocorrelation",
       "says": "How much of a series' wandering comes at each speed, from slow to fast.",

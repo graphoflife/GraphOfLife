@@ -823,13 +823,16 @@
     {
       "id": "which-properties-have-no-scale",
       "title": "Which properties have no scale?",
+      "file": "pages/which-properties-have-no-scale.md",
       "topics": [
-        "space"
+        "space",
+        "size",
+        "methods"
       ],
       "kind": "study",
-      "status": "planned",
+      "status": "written",
       "added": "2026-10-09",
-      "summary": "The same quantities measured at many sizes and rescaled: do their distributions collapse onto one curve? Starts from the cuts of *How does a world's size follow its tokens?*, whose share of a world has the same distribution at every size."
+      "summary": "Measured at eight sizes and rescaled, most quantities of a B1 world keep a size of their own, and the small cuts of a game average out. But the branches behind bridges and the pieces a game cuts off follow P(s) ∝ s^−2 up to the size of the world, so a game cuts off a tenth of a world or more as often at 100,000 tokens as at 10,000."
     },
     {
       "id": "local-rules-only",
