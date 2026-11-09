@@ -626,6 +626,13 @@ Nothing yet lasts in the way a glider does.
   ([Where the world stands on the ladder](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder)).
   And families hold patches of a world that widen as their lines age.
 
+[Particles: patterns that outlast what carries them](particles.md) put three
+detectors, each with a null and a pattern planted to test it, on twelve
+worlds of B1 and of round 3. Nothing behaved like a particle: no ring of
+tokens outlasts the next stretch of games, no agent keeps a rhythm beyond a
+random walk's, and groups outlast their members only as the network's own
+regions do, without moving.
+
 ### Vacuum and matter
 
 Most of the universe is nearly empty; matter is a tiny fraction of it. Most of
@@ -721,7 +728,8 @@ are not written yet:
   round 3 already shows of the local share-out and of mending.
 - [A source and a sink](a-source-and-a-sink.md). A world with a flow running
   through it: fed at one node, drained by every agent. A draft plan.
-- *Particles.* Bound tokens, persistent groups, beats.
+- [Particles](particles.md). Bound tokens, persistent groups, beats: none
+  found, in twelve worlds read with nulls and planted patterns.
 - [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md).
   The invasion experiment above. A draft plan.
 
