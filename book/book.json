@@ -837,35 +837,41 @@
     {
       "id": "local-rules-only",
       "title": "Local rules only",
+      "file": "pages/local-rules-only.md",
       "topics": [
-        "space"
+        "space",
+        "rules"
       ],
       "kind": "experiment",
-      "status": "planned",
+      "status": "draft",
       "added": "2026-10-09",
-      "summary": "The three rules that reach across a world, each made local: a piece that separates lives on, the tokens of the dead go to their former neighbours, and every agent draws its random numbers from a stream of its own (*Physical inspiration*)."
+      "summary": "A plan: the cull, the share-out and the one random stream each made local, one at a time, on six of round 3's candidate worlds against their own runs. Round 3 already shows that mending a death cut the tokens a game culls from 11.4% to 3.5% but not the big breaks, and folded worlds, and that estates flowing to the nearest living pooled wealth (a median Gini of 0.53, the highest of six rules)."
     },
     {
       "id": "how-far-does-a-difference-travel",
       "title": "How far does a difference travel?",
+      "file": "pages/how-far-does-a-difference-travel.md",
       "topics": [
-        "space"
+        "space",
+        "rules"
       ],
       "kind": "experiment",
-      "status": "planned",
+      "status": "draft",
       "added": "2026-10-09",
-      "summary": "Twin worlds that differ in one token at one agent: how fast the difference spreads and whether it grows or dies away — the light cone of *Physical inspiration*, measured. Needs the local random numbers of *Local rules only*."
+      "summary": "A plan: twin worlds that differ by one token moved between neighbours, played side by side from kept states of three candidate worlds, to measure the light cone (at most four steps a phase under local rules, which only 4 of the 24 shortlisted worlds would keep) and whether a difference grows or dies away, with heat spreading on the same network as the control."
     },
     {
       "id": "a-source-and-a-sink",
       "title": "A source and a sink",
+      "file": "pages/a-source-and-a-sink.md",
       "topics": [
-        "space"
+        "space",
+        "rules"
       ],
       "kind": "experiment",
-      "status": "planned",
+      "status": "draft",
       "added": "2026-10-09",
-      "summary": "A world with a flow running through it: tokens that are spent when used and slowly renewed, or a few nodes that release tokens and a way for tokens to leave. What forms in the flow? (*Physical inspiration*; research/Research.md §4.3.)"
+      "summary": "A plan: tokens enter at one node, which passes to a neighbour only when it dies, and every agent pays a token an iteration that leaves the world, so the inflow replaces the total tokens as a world's one number. Tried on three candidate worlds in the local world, it expects a gradient around the source and a world that holds together without any cull."
     },
     {
       "id": "particles",

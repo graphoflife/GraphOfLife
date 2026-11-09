@@ -651,6 +651,17 @@
     ],
     "candidates-for-open-ended-evolution": [
       "candidate"
+    ],
+    "local-rules-only": [
+      "candidate"
+    ],
+    "how-far-does-a-difference-travel": [
+      "candidate"
+    ],
+    "a-source-and-a-sink": [
+      "candidate",
+      "entropy",
+      "hub"
     ]
   }
 }
