@@ -73,7 +73,7 @@ class Writer:
     """Builds the output rows from plain decisions."""
 
     def __init__(self, cfg, n):
-        from GraphOfLifeSimple import build_heads
+        from GraphOfLife import build_heads
         self.h = build_heads(cfg)
         self.cfg = cfg
         self.Y = np.zeros((cfg.n_outputs(), n))
@@ -301,7 +301,7 @@ def raider_weights(cfg, margin: float = MARGIN):
     teammate (Q + 4P > A + D). The child's share is the float16 just above a third, since
     the one below would give a parent of 30 tokens a child of 9, below B2's minimum.
     """
-    from GraphOfLifeSimple import BRAIN_KINDS, build_heads
+    from GraphOfLife import BRAIN_KINDS, build_heads
     if len(cfg.hidden_layers) != 1 or cfg.hidden_layers[0] < 12:
         raise ValueError("the raider's weights need one hidden layer of at least 12 units")
     if cfg.message_amount < SIGN:

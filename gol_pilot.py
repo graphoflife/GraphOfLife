@@ -38,7 +38,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 import numpy as np            # noqa: E402
 
 import gol_store as store     # noqa: E402
-import GraphOfLifeSimple      # noqa: E402
+import GraphOfLife      # noqa: E402
 from gol_config import SimConfig   # noqa: E402
 from gol_worker import EXIT_REFUSED, environment   # noqa: E402
 
@@ -71,7 +71,7 @@ def main() -> int:
     parser.add_argument("--fault-at", type=int, help="unused: the prototype has no cut of its own")
     args = parser.parse_args()
 
-    for module in (GraphOfLifeSimple, store, proto, grow, runner):
+    for module in (GraphOfLife, store, proto, grow, runner):
         if os.path.dirname(os.path.abspath(module.__file__)) != HERE:
             print(f"refusing: {module.__name__} comes from {module.__file__}, not {HERE}", file=sys.stderr)
             return EXIT_REFUSED

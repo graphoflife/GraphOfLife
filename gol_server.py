@@ -91,7 +91,7 @@ WEB_DIR = os.path.join(BASE_DIR, "web")
 # An explicit list, not a directory: /py/ must not become a way to read
 # arbitrary files out of the project. tests/test_site.py checks it against
 # build_site.sh so the two cannot drift.
-SHIPPED_PY = ("GraphOfLifeSimple.py", "gol_config.py", "gol_rounds.py", "gol_series.py",
+SHIPPED_PY = ("GraphOfLife.py", "gol_config.py", "gol_rounds.py", "gol_series.py",
               "gol_lineage.py", "gol_spectral.py", "gol_lightning.py",
               "gol_stats.py", "gol_framestats.py", "gol_atlas.py", "explain_minimal.py")
 
@@ -712,7 +712,7 @@ class Handler(BaseHTTPRequestHandler):
 
         # What a configuration being filled in would build, for the form.
         if parts == ["api", "describe"]:
-            from GraphOfLifeSimple import brain_shape
+            from GraphOfLife import brain_shape
             config = self._read_json().get("config") or {}
             self._send_json(brain_shape(SimConfig.from_dict(config, stored=False)))
             return

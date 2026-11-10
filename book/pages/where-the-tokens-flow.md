@@ -136,7 +136,7 @@ them on each, home included.
 > 1. For every 100th iteration t from 500 on, take each agent's degree d in frame `2·t`.
 > 2. In frame `2·t + 1`, read its entry of `decisions.allocations`: the number of `targets` (its candidates), how many of them got `alloc` > 0, and `alloc[0]` / `tokens` (its home share; its first target is itself).
 > 3. Average by class of d; the white dots are the mean of 1/(d + 1) in each class.
-> 4. Red dots: for every agent, `GraphOfLifeSimple._apportion` of equal scores over its candidates and its tokens; the share that lands on its own node, averaged by class.
+> 4. Red dots: for every agent, `GraphOfLife._apportion` of equal scores over its candidates and its tokens; the share that lands on its own node, averaged by class.
 >
 > **To make it again:** `python3 book_figures.py flow`.
 <!-- /figure -->

@@ -1163,7 +1163,7 @@ def test_an_engine_that_does_not_remake_a_run_is_caught():
 
         other = gol_lab.engine_dir("0123456789abcdef")
         shutil.copytree(gol_lab.engine_dir(engine), other)
-        source = os.path.join(other, "GraphOfLifeSimple.py")
+        source = os.path.join(other, "GraphOfLife.py")
         with open(source) as f:
             text = f.read()
         with open(source, "w") as f:
@@ -1220,7 +1220,7 @@ def test_what_a_simulation_costs_is_fitted_to_what_runs_recorded():
     for most, and each measure says whether it was measured. Agents per token
     waits until a world has settled, which a short run never does.
     """
-    from GraphOfLifeSimple import brain_shape
+    from GraphOfLife import brain_shape
     import gol_record
     with lab(plan("E91", seeds="1..2", iterations=5)):
         gol_lab.request(run="E91", workers=2)

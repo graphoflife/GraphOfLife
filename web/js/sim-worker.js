@@ -4,7 +4,7 @@
  * This is what stands in for gol_server.py when there is no server: a worker
  * that loads Pyodide, imports the very same engine the desktop version runs,
  * and answers the same questions the HTTP API answers. The engine is not
- * reimplemented and not adapted — GraphOfLifeSimple.py is fetched and imported
+ * reimplemented and not adapted — GraphOfLife.py is fetched and imported
  * unchanged. A JavaScript translation would have been a second implementation
  * to keep honest, and a simulation this sensitive to arithmetic would not have
  * stayed honest for long.
@@ -33,7 +33,7 @@ const PY_DIR = new URL('../py/', self.location.href).href;
 const PY_FILES = [
   'gol_config.py',
   'gol_rounds.py',
-  'GraphOfLifeSimple.py',
+  'GraphOfLife.py',
   'gol_spectral.py',
   'gol_lightning.py',
   'gol_series.py',

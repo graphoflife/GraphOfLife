@@ -530,7 +530,7 @@ def clear_leftovers(run_id: str) -> int:
 
 def load_checkpoint(run_id: str, cfg: SimConfig):
     """Rebuild the world from this run's checkpoint, or None if there is none."""
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
 
     path = checkpoint_path(run_id)
     if not os.path.exists(path):

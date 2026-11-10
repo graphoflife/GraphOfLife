@@ -34,8 +34,8 @@ import numpy as np
 
 import gol_series
 from gol_config import SimConfig
-from GraphOfLifeSimple import GraphOfLife, make_brain, new_world
-from GraphOfLifeSimple import _choose_binary as G_choose_binary
+from GraphOfLife import GraphOfLife, make_brain, new_world
+from GraphOfLife import _choose_binary as G_choose_binary
 from worlds import adjacency, advanced_run, scratch_runs, small, unrecorded_run, write_frames
 
 
@@ -158,7 +158,7 @@ def test_a_path_is_all_bridges_and_the_middle_one_is_the_worst():
     strands two of four. So the worst single cut costs half the population,
     which is the largest a cut can ever cost.
     """
-    import GraphOfLifeSimple as G
+    import GraphOfLife as G
 
     edges = [(0, 1), (1, 2), (2, 3)]
     ids, adj = [0, 1, 2, 3], adjacency(edges)
@@ -172,7 +172,7 @@ def test_a_path_is_all_bridges_and_the_middle_one_is_the_worst():
 
 def test_a_cycle_has_no_bridges_at_all():
     """Every edge of a cycle lies on a loop, so nothing can be cut in two."""
-    import GraphOfLifeSimple as G
+    import GraphOfLife as G
 
     edges = [(0, 1), (1, 2), (2, 3), (3, 0)]
     ids, adj = [0, 1, 2, 3], adjacency(edges)
@@ -193,7 +193,7 @@ def test_two_blobs_on_one_edge_is_the_worst_case_the_thesis_is_about():
     with three leaves stuck on it, which also has three bridges and costs one
     node each. That is the whole reason for measuring the split.
     """
-    import GraphOfLifeSimple as G
+    import GraphOfLife as G
 
     dumbbell = [(0, 1), (1, 2), (2, 0), (3, 4), (4, 5), (5, 3), (0, 3)]
     ids, adj = list(range(6)), adjacency(dumbbell)
@@ -208,7 +208,7 @@ def test_two_blobs_on_one_edge_is_the_worst_case_the_thesis_is_about():
 
 
 def test_the_worst_node_cut_is_the_biggest_piece_one_agent_holds_on():
-    from GraphOfLifeSimple import worst_node_cut_share
+    from GraphOfLife import worst_node_cut_share
     # A path of five: the middle agent holds two pairs together.
     path = adjacency([(0, 1), (1, 2), (2, 3), (3, 4)])
     assert worst_node_cut_share(list(path), path) == 2 / 5
@@ -227,7 +227,7 @@ def test_peeling_leaves_leaves_the_core():
     A triangle with a two-node tail loses both tail nodes, not just the leaf —
     peeling the leaf makes its neighbour a leaf in turn.
     """
-    import GraphOfLifeSimple as G
+    import GraphOfLife as G
 
     edges = [(0, 1), (1, 2), (2, 0), (0, 3), (3, 4)]
     ids, adj = list(range(5)), adjacency(edges)
@@ -417,7 +417,7 @@ def test_the_engine_calls_no_module_level_random():
     process with it. Nothing else would say so: a run with nobody beside it
     is unchanged either way.
     """
-    for name in ("GraphOfLifeSimple.py", "gol_config.py", "gol_series.py",
+    for name in ("GraphOfLife.py", "gol_config.py", "gol_series.py",
                  "gol_lineage.py", "gol_spectral.py", "gol_lightning.py"):
         with open(os.path.join(runner.ROOT, name)) as f:
             found = re.findall(r"np\.random\.(?!RandomState\b)\w+", f.read())
@@ -1081,7 +1081,7 @@ def test_the_form_is_told_the_shape_of_the_brain_it_would_build():
     input and six outputs gifting adds.
     """
     import numpy as np
-    from GraphOfLifeSimple import brain_shape, make_brain
+    from GraphOfLife import brain_shape, make_brain
     for overrides in ({}, {"brain_kind": "float16"}, {"brain_kind": "binary"},
                       {"allow_gifting": False, "allow_revolutions": False,
                        "allow_handover": False}):
@@ -1186,7 +1186,7 @@ def test_a_binary_checkpoint_refuses_a_ladder_it_was_not_written_for():
     back. Weights read under the wrong split would be nonsense that loads.
     """
     import numpy as np
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
 
     cfg = small(brain_kind="binary", seed=5)
     world = new_world(cfg)
@@ -1577,7 +1577,7 @@ def test_a_frame_records_the_decisions_its_mechanics_say_it_does():
     few iterations each: every record holds exactly the keys the engine's own
     statement of the contract, decision_keys, says it does.
     """
-    from GraphOfLifeSimple import decision_keys
+    from GraphOfLife import decision_keys
     for gifting, handover, revolutions, prune in itertools.product(
             (False, True), (False, True), (False, True), ("blotto", "reproduction", "both")):
         cfg = small(allow_gifting=gifting, allow_handover=handover,
@@ -1985,7 +1985,7 @@ def test_a_random_world_never_asks_its_brains_anything():
     could match by luck or diverge for reasons that have nothing to do with
     whether the forward pass happened.
     """
-    import GraphOfLifeSimple as G
+    import GraphOfLife as G
 
     world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
                                 seed=3, hidden_layers=[6], random_decisions=True))
@@ -2017,7 +2017,7 @@ def test_an_ordinary_world_still_reads_its_inputs():
     The other half of the guarantee, or the test above would pass on a world
     that had stopped using its brains entirely.
     """
-    import GraphOfLifeSimple as G
+    import GraphOfLife as G
 
     world = new_world(SimConfig(total_tokens=600, n_nodes=30, k_neighbors=4,
                                 seed=3, hidden_layers=[6]))
@@ -2334,7 +2334,7 @@ def test_mates_among_the_parents_are_neighbours_with_a_living_child():
     Under mix_mates = parents a newborn's brain is mixed only with a neighbour
     that has a living child of its own; with none, it is a copy of its parent's.
     """
-    from GraphOfLifeSimple import NO_PARENT
+    from GraphOfLife import NO_PARENT
     world = new_world(small(mix_at_birth=True, mix_mates="parents", hidden_layers=[16]))
     nodes = sorted(world.G.nodes())
     parent, mate, child = nodes[0], nodes[1], nodes[2]
@@ -2429,7 +2429,7 @@ def test_the_head_layout_is_the_only_statement_of_where_the_rows_are():
     reaching for a head that had no slice. One statement, checked here against
     every combination that changes the shape.
     """
-    from GraphOfLifeSimple import build_heads
+    from GraphOfLife import build_heads
 
     for gifting in (False, True):
         for handover in (False, True):

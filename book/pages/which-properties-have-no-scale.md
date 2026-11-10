@@ -330,7 +330,7 @@ fall.
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read frames 2·t + 1 for t = 509, 519, … 599: `ids` and `edges`.
-> 2. Every bridge, and the agents behind it on each side (`GraphOfLifeSimple.bridge_splits`); the branch is the smaller side.
+> 2. Every bridge, and the agents behind it on each side (`GraphOfLife.bridge_splits`); the branch is the smaller side.
 > 3. For each size, pool the branches of its three worlds' ten looks; for every s, the branches of s or more divided by the agents of all the looks, times 1,000.
 > 4. The tree: member i joins a member drawn at random from 0 … i − 1, by numpy's generator seeded 4; for every link, the smaller side (`book_chapters.noscale.random_tree_branches`).
 > 5. Rescaled: x = s ÷ the mean number of agents of the size; on the y axis, s times the count per agent, which is x times the count per game (or per world).

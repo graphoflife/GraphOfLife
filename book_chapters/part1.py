@@ -25,7 +25,7 @@ BAND_STEPS = band_steps(PART_ONE)
 def world(ch: F.Chapter) -> None:
     """The world: tokens, agents and a network: the founders' starting ring of one real run."""
     import networkx as nx
-    from GraphOfLifeSimple import new_world
+    from GraphOfLife import new_world
     from gol_config import SimConfig
     spec = runs_of("E02")[0]
     cfg = SimConfig.from_dict(spec.config)

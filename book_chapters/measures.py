@@ -377,7 +377,7 @@ def flow(ch: F.Chapter) -> None:
     ag = pooled("agents")
     degree = ag[:, AG["degree"]]
     labels = DEGREE_CLASSES.labels
-    from GraphOfLifeSimple import _apportion
+    from GraphOfLife import _apportion
     staked_share, home_share, even, rounded = [], [], [], []
     for m in DEGREE_CLASSES.masks(degree):
         ok = m & (ag[:, AG["candidates"]] > 0)
@@ -414,7 +414,7 @@ def flow(ch: F.Chapter) -> None:
                        "(its candidates), how many of them got `alloc` > 0, and `alloc[0]` / `tokens` (its "
                        "home share; its first target is itself).",
                        "Average by class of d; the white dots are the mean of 1/(d + 1) in each class.",
-                       "Red dots: for every agent, `GraphOfLifeSimple._apportion` of equal scores over its "
+                       "Red dots: for every agent, `GraphOfLife._apportion` of equal scores over its "
                        "candidates and its tokens; the share that lands on its own node, averaged by class."]))
     ch.number("breadth", {lab: {"staked": a, "home": b, "even": c, "rounded": d} for lab, a, b, c, d in
                           zip(labels, staked_share, home_share, even, rounded)})

@@ -64,7 +64,7 @@ def _decide(brain, heads, X: np.ndarray, tokens: int) -> Tuple[int, bool, np.nda
     with none, the tokens are split evenly over every candidate — and the mean, over the
     candidates, of each of the fifteen outputs that make decisions.
     """
-    from GraphOfLifeSimple import _apportion, _share_of_first
+    from GraphOfLife import _apportion, _share_of_first
     Y = brain.forward(X)
     scores = np.asarray(Y[heads["BLOTTO"], :], float)
     mode = np.mean(Y[heads["BLOTTO_MODE"], :], axis=1)
@@ -86,7 +86,7 @@ def probe(run_id: str) -> Dict[str, Any]:
     with one input changed at a time, and as a fresh founder's brain would make them
     on the same inputs.
     """
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     w = world_at_end(run_id)
     log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
     rng = np.random.default_rng(18)
@@ -162,7 +162,7 @@ def weights(run_id: str) -> Dict[str, Any]:
 
 def founder_weights(cfg, count: int = 400, seed: int = 1801) -> Tuple[Dict[str, float], List[float]]:
     """The same measures for fresh founders' brains: input norms by group, and distances between two."""
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     rs = np.random.RandomState(seed)
     brains = [make_brain(cfg, 0, rs) for _ in range(count)]
     W0 = np.stack([b.weights[0].astype(np.float64) for b in brains])
@@ -231,7 +231,7 @@ def _message_summary(M: np.ndarray, sender: np.ndarray, genotype: np.ndarray, fe
 def message_stats(run_id: str) -> Dict[str, Any]:
     """The messages every agent would write to each of its candidates at the end of a world,
     by its own brain and by a fresh founder's brain on the same inputs, summarised."""
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     w = world_at_end(run_id)
     log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
     founders = np.random.RandomState(1900)
@@ -268,7 +268,7 @@ def gain(run_id: str) -> Dict[str, Any]:
     world at its end and for fresh founders' brains, on the same inputs. Also each output's
     spread across one agent's candidates against its spread across agents.
     """
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     w = world_at_end(run_id)
     log_deg, neighs, q_tok, q_deg, log_tok, at_risk = w._precompute_features()
     rng = np.random.default_rng(2000)

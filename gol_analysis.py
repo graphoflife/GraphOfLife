@@ -899,7 +899,7 @@ def costs_report() -> Dict[str, Any]:
     fitted numbers, and every recorded iteration's seconds against how many
     agents it had, with the line the estimates use.
     """
-    from GraphOfLifeSimple import brain_shape
+    from GraphOfLife import brain_shape
     from gol_config import SimConfig
 
     known = gol_costs.fit_costs()

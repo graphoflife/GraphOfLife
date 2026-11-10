@@ -47,7 +47,7 @@ def record(run: str, era: int, T: int, seed: int, share: float = 0.05) -> str:
     """Plant manual.py's raiders as manual.invade does, play T iterations, keep every X a raider read."""
     import gol_store as store
     from gol_config import SimConfig
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
     cfg = SimConfig.from_dict(store.load_meta(run)["config"])
     cfg.extinction_threshold = 0
     world = GraphOfLife.from_checkpoint(store.load_archive(run, era), cfg)
@@ -90,7 +90,7 @@ def situations(path: str) -> List[np.ndarray]:
 
 def decisions(cfg, heads, X: np.ndarray, Y: np.ndarray) -> Dict[str, object]:
     """What the engine would do with Y: the stake, the child, the child's links, the message, revolts."""
-    from GraphOfLifeSimple import _apportion, _share_of_first
+    from GraphOfLife import _apportion, _share_of_first
     lay = cfg.input_layout()
     me = int(round(np.expm1(X[lay["own_tokens"][0], 0])))
     kept = max(1, int(np.ceil(cfg.keep_home * me))) if cfg.keep_home > 0 else 0
@@ -123,7 +123,7 @@ def decisions(cfg, heads, X: np.ndarray, Y: np.ndarray) -> Dict[str, object]:
 def check(paths: List[str], margin: float) -> Dict[str, float]:
     import gol_store as store
     from gol_config import SimConfig
-    from GraphOfLifeSimple import build_heads
+    from GraphOfLife import build_heads
     counts: Dict[str, int] = {}
     total = 0
     for path in paths:
@@ -176,7 +176,7 @@ def invade(task) -> Dict[str, object]:
     import gol_store as store
     import gol_strategies
     from gol_config import SimConfig
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
     cfg = SimConfig.from_dict(store.load_meta(run)["config"])
     cfg.extinction_threshold = 0
     world = GraphOfLife.from_checkpoint(store.load_archive(run, era), cfg)

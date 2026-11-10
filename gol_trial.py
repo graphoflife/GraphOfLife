@@ -41,7 +41,7 @@ import numpy as np            # noqa: E402
 import gol_store as store     # noqa: E402
 import gol_strategies         # noqa: E402
 import gol_tournament         # noqa: E402
-import GraphOfLifeSimple      # noqa: E402
+import GraphOfLife      # noqa: E402
 from gol_config import SimConfig   # noqa: E402
 from gol_worker import EXIT_REFUSED, environment   # noqa: E402
 
@@ -60,7 +60,7 @@ def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optiona
     """Chapter 51's invasion test, with the patch's strategy counted after every iteration."""
     cfg = SimConfig.from_dict(store.source_config(trial["run"]))
     cfg.extinction_threshold = 0
-    world = GraphOfLifeSimple.GraphOfLife.from_checkpoint(store.kept_world(trial["run"], int(trial["era"])), cfg)
+    world = GraphOfLife.GraphOfLife.from_checkpoint(store.kept_world(trial["run"], int(trial["era"])), cfg)
     world.rng = np.random.RandomState(int(trial["place"]))
     background = trial.get("background")
     if background:
@@ -98,7 +98,7 @@ def main() -> int:
     args = parser.parse_args()
 
     # The engine has to be the copy this file sits in, as for the worker.
-    for module in (GraphOfLifeSimple, gol_strategies, gol_tournament, store):
+    for module in (GraphOfLife, gol_strategies, gol_tournament, store):
         if os.path.dirname(os.path.abspath(module.__file__)) != HERE:
             print(f"refusing: {module.__name__} comes from {module.__file__}, not {HERE}",
                   file=sys.stderr)

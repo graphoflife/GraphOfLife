@@ -12,7 +12,7 @@ import runner  # noqa: F401  (first: the repository on the path, and a runs fold
 import gol_run
 import gol_store
 from gol_config import SimConfig
-from GraphOfLifeSimple import new_world
+from GraphOfLife import new_world
 
 
 def small(**overrides) -> SimConfig:

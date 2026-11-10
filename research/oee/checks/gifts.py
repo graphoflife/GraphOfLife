@@ -2,7 +2,7 @@
 Gifts: what agents hand to their neighbours, and to whom.
 
 With allow_gifting, an agent may hand tokens to neighbours in the reproduction
-phase, out of what its child left it (GraphOfLifeSimple._choose_gifts). The
+phase, out of what its child left it (GraphOfLife._choose_gifts). The
 reproduction frame records every gift paid as [giver, taker, tokens]. This reads
 a world's recorded games (book_data.frame_at, as the other checks do) and asks:
 

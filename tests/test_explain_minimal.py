@@ -24,7 +24,7 @@ import runner  # first: the repository on the path, and a runs folder of the tes
 import numpy as np
 
 import explain_minimal as M
-import GraphOfLifeSimple as E
+import GraphOfLife as E
 
 
 def test_tokens_are_split_as_the_engine_splits_them():

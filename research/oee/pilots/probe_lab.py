@@ -19,7 +19,7 @@ import numpy as np
 
 import gol_store as store
 from gol_config import SimConfig
-from GraphOfLifeSimple import GraphOfLife, _apportion
+from GraphOfLife import GraphOfLife, _apportion
 
 GROUPS = {"own state": ["own_tokens", "own_degree", "own_token_quantiles", "own_degree_quantiles"],
           "its state": ["its_tokens", "its_degree", "its_token_quantiles", "its_degree_quantiles"],

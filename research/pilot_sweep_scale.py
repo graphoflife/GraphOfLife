@@ -10,7 +10,7 @@ import numpy as np
 sys.path.insert(0, ".")
 sys.path.insert(0, "research")
 from gol_config import SimConfig
-import GraphOfLifeSimple as G
+import GraphOfLife as G
 from phylogeny import Forest
 
 NO_PARENT = -1

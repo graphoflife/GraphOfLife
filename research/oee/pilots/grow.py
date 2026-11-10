@@ -13,12 +13,12 @@ import sys
 # frozen beside the engine (the lab's snapshot, gol_pilot.py) then imports the copies it sits with.
 _HERE = os.path.dirname(os.path.abspath(__file__))
 for _path in (os.path.join(_HERE, "..", "checks"), os.path.join(_HERE, "..", "..", "..")):
-    if os.path.exists(os.path.join(_path, "rules.py")) or os.path.exists(os.path.join(_path, "GraphOfLifeSimple.py")):
+    if os.path.exists(os.path.join(_path, "rules.py")) or os.path.exists(os.path.join(_path, "GraphOfLife.py")):
         sys.path.insert(0, os.path.abspath(_path))
 sys.path.insert(0, _HERE)
 import numpy as np
 
-import GraphOfLifeSimple as E
+import GraphOfLife as E
 from gol_config import SimConfig
 
 GROW_START = 4

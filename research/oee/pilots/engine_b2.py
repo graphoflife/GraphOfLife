@@ -3,7 +3,7 @@ import sys, json, time
 sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import numpy as np, networkx as nx
 from gol_config import SimConfig
-from GraphOfLifeSimple import new_world, worst_node_cut_share
+from GraphOfLife import new_world, worst_node_cut_share
 from gol_series import _structure
 
 B2 = dict(brain_kind="float16", hidden_layers=[16], message_amount=8, message_prepass=False,

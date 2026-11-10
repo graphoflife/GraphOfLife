@@ -22,7 +22,7 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Set, Tuple
 # live graph before a cull. One Python implementation, mirrored once in
 # graphstats.js and compared key by key by tests/test_stats_parity.py — the
 # same arrangement every other structural measure here already has.
-from GraphOfLifeSimple import bridge_splits, two_core_size, worst_cut_share
+from GraphOfLife import bridge_splits, two_core_size, worst_cut_share
 from gol_lightning import lightning
 from gol_spectral import spectral_gap
 

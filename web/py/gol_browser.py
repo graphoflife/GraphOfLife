@@ -28,7 +28,7 @@ import gol_framestats
 import gol_lineage
 import gol_series
 from gol_config import SimConfig
-from GraphOfLifeSimple import GraphOfLife, brain_shape, new_world
+from GraphOfLife import GraphOfLife, brain_shape, new_world
 
 
 class Worlds:

@@ -3,7 +3,7 @@ import sys, json, os
 sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
-from GraphOfLifeSimple import _apportion
+from GraphOfLife import _apportion
 from proto import ProtoWorld, ProtoConfig, set_proto
 
 def alloc(w, u, Y, t):

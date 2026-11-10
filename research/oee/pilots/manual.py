@@ -56,7 +56,7 @@ def invade(task) -> Dict[str, Any]:
     run, era, strategy, seed, T, share = task
     import gol_store as store
     from gol_config import SimConfig
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
     cfg = SimConfig.from_dict(store.load_meta(run)["config"])
     cfg.extinction_threshold = 0
     world = GraphOfLife.from_checkpoint(store.load_archive(run, era), cfg)

@@ -23,7 +23,7 @@ import runner  # first: the repository on the path, and a runs folder of the tes
 import gol_record
 import gol_series
 from gol_config import SimConfig
-from GraphOfLifeSimple import new_world
+from GraphOfLife import new_world
 from worlds import advanced_run, scratch_runs, small, unrecorded_run
 
 
@@ -611,7 +611,7 @@ def test_every_mode_is_one_table_the_form_and_the_engine_share():
     rule up in it, and the form offers exactly what it holds. The engine used
     to fall back onto some other rule for a value it did not know.
     """
-    import GraphOfLifeSimple as engine
+    import GraphOfLife as engine
 
     page = open(os.path.join(runner.ROOT, "web", "index.html")).read()
     assert set(engine.BRAIN_KINDS) == set(SimConfig.MODES["brain_kind"])

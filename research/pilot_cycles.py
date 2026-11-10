@@ -16,7 +16,7 @@ from collections import Counter
 import numpy as np
 sys.path.insert(0, ".")
 from gol_config import SimConfig
-import GraphOfLifeSimple as G
+import GraphOfLife as G
 
 
 def cycles_of(winner_of):

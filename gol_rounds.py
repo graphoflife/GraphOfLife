@@ -198,7 +198,7 @@ def stake_in_rounds(world, features, outbox: Dict[int, Dict[int, List[float]]],
     The game's stakes under a step allocation, filling the game's tallies in place as the one-shot
     allocation does, and each agent's record of what it placed where.
     """
-    from GraphOfLifeSimple import _share_of_first
+    from GraphOfLife import _share_of_first
     cfg, heads = world.cfg, world.heads
     log_deg, neighs, q_tok, q_deg, log_tok, at_risk = features
     start, stop, _ = cfg.input_layout()["board"]

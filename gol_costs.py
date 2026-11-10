@@ -83,7 +83,7 @@ def tail_rows(path: str, count: int = 400) -> List[Dict[str, Any]]:
 
 
 def weights_of(config: Dict[str, Any]) -> Tuple[int, int]:
-    from GraphOfLifeSimple import brain_shape
+    from GraphOfLife import brain_shape
     shape = brain_shape(SimConfig.from_dict(config))
     return shape["weights"], shape["bytesPerWeight"]
 

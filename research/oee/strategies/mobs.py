@@ -39,7 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 sys.path.insert(0, ROOT)
 
-import GraphOfLifeSimple  # noqa: E402
+import GraphOfLife  # noqa: E402
 import gol_store  # noqa: E402
 import gol_strategies  # noqa: E402
 from gol_config import SimConfig  # noqa: E402
@@ -99,7 +99,7 @@ def main() -> None:
         for era in ERAS:
             kept_world = gol_store.kept_world(run, era)
             for place in PLACES:
-                world = GraphOfLifeSimple.GraphOfLife.from_checkpoint(kept_world, cfg)
+                world = GraphOfLife.GraphOfLife.from_checkpoint(kept_world, cfg)
                 rows.append({"run": run, "era": era, "place": place, **planting(world, cfg, place)})
     with open(out, "w") as f:
         json.dump(rows, f, indent=1)

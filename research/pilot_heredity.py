@@ -32,7 +32,7 @@ import numpy as np
 
 sys.path.insert(0, ".")
 from gol_config import SimConfig
-import GraphOfLifeSimple as G
+import GraphOfLife as G
 
 # Five is enough to see the shape of parts 1 and 2, where the effect is
 # enormous. Part 3 compares two populations and is held to Research.md's

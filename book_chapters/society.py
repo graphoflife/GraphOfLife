@@ -320,7 +320,7 @@ PICTURE_LIMIT = 2500
 
 def starting_ring(run_id: str) -> "nx.Graph":
     """A run's founders as the engine wired them, before anything happened: its own Watts–Strogatz ring."""
-    from GraphOfLifeSimple import stream_seed
+    from GraphOfLife import stream_seed
     cfg = F.store.load_config(run_id)
     return nx.watts_strogatz_graph(n=cfg.resolved_n(), k=cfg.resolved_k(), p=cfg.rewire_p, seed=stream_seed(cfg))
 

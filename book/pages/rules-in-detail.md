@@ -342,7 +342,7 @@ reads as 1 ([What the brains are like](what-the-brains-are-like.md)).
   and how far it searches for strangers
   ([`link_search`](settings.md#link_search)).
 
-In the code it is `_share_of_first(a, b)` in `GraphOfLifeSimple.py`.
+In the code it is `_share_of_first(a, b)` in `GraphOfLife.py`.
 
 ## A yes-or-no decision
 
@@ -430,7 +430,7 @@ an agent spreads its tokens over its candidates or puts them all on one
   link with a stranger met in a search ([`link_search`](settings.md#link_search)).
 
 In the code it is `_choose_binary(yes, no, mode_yes, mode_no, rng)` in
-`GraphOfLifeSimple.py`. The uniform number comes from the world's random
+`GraphOfLife.py`. The uniform number comes from the world's random
 stream ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
 
 ## Splitting tokens into whole numbers
@@ -524,7 +524,7 @@ agent's own node: 2 at home, 1 on the neighbour
   away are split over the neighbours it chose
   ([`allow_gifting`](settings.md#allow_gifting)).
 
-In the code it is `_apportion(weights, total)` in `GraphOfLifeSimple.py`.
+In the code it is `_apportion(weights, total)` in `GraphOfLife.py`.
 
 ## What a brain sees
 
@@ -1014,7 +1014,7 @@ with and without them was the same world in every measure
   with *R* = 2, they do.
 
 In the code it is `_resolve_winner(offers, revolutionaries, rng)` in
-`GraphOfLifeSimple.py`. With
+`GraphOfLife.py`. With
 [`allow_revolutions`](settings.md#allow_revolutions) off, nobody marks
 anything revolutionary, and the hegemon always wins.
 
@@ -1148,7 +1148,7 @@ the rounding.
   alone does to the size of an evolved brain's weights.
 
 In the code it is `Brain.mutate` and `Brain._perturb` in
-`GraphOfLifeSimple.py`. Every draw comes from the world's random stream
+`GraphOfLife.py`. Every draw comes from the world's random stream
 ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
 
 ## When a world ends
@@ -1294,5 +1294,5 @@ fewer.
   - **23 October 2026.** Until now the page said that a world which falls to 20
     agents or fewer in the reproduction phase, and recovers in the game, is not
     extinct. No world can do that, because a game adds no agents: only the
-    reproduction phase makes children (`GraphOfLifeSimple.py`, read when this
+    reproduction phase makes children (`GraphOfLife.py`, read when this
     page was rewritten). The count after the game misses no world.

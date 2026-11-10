@@ -403,7 +403,7 @@ def _children_in_founders_world(task) -> float:
     """Births per agent and iteration when the brains of one era play the founders' world."""
     run_id, era, coin = task
     from gol_config import SimConfig
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
     cfg = SimConfig.from_dict(store.load_meta(run_id)["config"])
     cfg.mutation_probability = 0.0
     cfg.extinction_threshold = 0
@@ -458,7 +458,7 @@ def _want_node_cut(run_id: str) -> Dict[str, Any]:
 @D.measure("nodecut", field="key", want=_want_node_cut)
 def node_cut(run_id: str) -> Dict[str, Any]:
     """The worst single-agent cut after the game, every NODE_CUT_EVERY iterations."""
-    from GraphOfLifeSimple import worst_node_cut_share
+    from GraphOfLife import worst_node_cut_share
     its, shares = [], []
     for t in range(0, min(_lived(run_id), 1000) + 1, NODE_CUT_EVERY):
         try:
@@ -592,7 +592,7 @@ def space_alone(ch: F.Chapter) -> None:
                           [SPACE_HOW,
                            "Measure the last network (`space.measure`): the largest share of the "
                            "others one agent's loss would cut off from the largest piece "
-                           "(`GraphOfLifeSimple.worst_node_cut_share`), the same for one link "
+                           "(`GraphOfLife.worst_node_cut_share`), the same for one link "
                            "(`cutRisk`), the 2-core, links per agent, the ball dimension, and the "
                            "best-connected agent's links over the agents less one."]))
 
@@ -697,7 +697,7 @@ def unbreakable(ch: F.Chapter) -> None:
                 "`dimension`.",
                 f"No run records the worst cut by one agent, so read it off the frames: every "
                 f"{NODE_CUT_EVERY}th iteration from 200 to 1,000, rebuild the network after the game "
-                f"and take `GraphOfLifeSimple.worst_node_cut_share` (`oee.node_cut`); its median.",
+                f"and take `GraphOfLife.worst_node_cut_share` (`oee.node_cut`); its median.",
                 "A world holds if every median is inside the bar and `orphaned` is 0 in every row "
                 "of either phase in the same iterations."]))
 

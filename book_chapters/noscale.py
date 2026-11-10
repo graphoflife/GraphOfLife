@@ -159,7 +159,7 @@ def noscale_pass(run_id: str) -> Dict[str, Any]:
                side of each), of tokens and of connections
       alike    at the first, middle and last of those games: likeness_at
     """
-    from GraphOfLifeSimple import bridge_splits
+    from GraphOfLife import bridge_splits
     D.needs_decisions(run_id, "the pieces a game cuts off")
     rng = np.random.default_rng(62)
     its = games_of(run_id)
@@ -844,7 +844,7 @@ def piece_figures(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
                        "worlds' lines with s as a share x of the agents of the world, and the number of branches of "
                        "that share or more a world has, times x.")
             steps = ["Read frames 2·t + 1 for t = 509, 519, … 599: `ids` and `edges`.",
-                     "Every bridge, and the agents behind it on each side (`GraphOfLifeSimple.bridge_splits`); the "
+                     "Every bridge, and the agents behind it on each side (`GraphOfLife.bridge_splits`); the "
                      "branch is the smaller side.",
                      "For each size, pool the branches of its three worlds' ten looks; for every s, the branches of "
                      "s or more divided by the agents of all the looks, times 1,000.",

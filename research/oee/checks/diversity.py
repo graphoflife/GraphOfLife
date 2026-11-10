@@ -95,7 +95,7 @@ def load(spec: str, game: bool = True):
     else:
         import gol_store as store
         from gol_config import SimConfig
-        from GraphOfLifeSimple import GraphOfLife
+        from GraphOfLife import GraphOfLife
         run, _, it = spec.partition(":")
         cfg = SimConfig.from_dict(store.load_meta(run)["config"])
         world = (GraphOfLife.from_checkpoint(store.load_archive(run, int(it)), cfg) if it
@@ -143,7 +143,7 @@ def situations(w, rng: np.random.RandomState, n: int) -> List[Dict[str, Any]]:
 
 def stake(w, Y: np.ndarray, sit: Dict[str, Any]) -> Tuple[np.ndarray, bool]:
     """The tokens one brain stakes on each candidate in one situation and draw, and whether it spreads them."""
-    from GraphOfLifeSimple import _apportion
+    from GraphOfLife import _apportion
     H, cfg, t, cands = w.heads, w.cfg, sit["tokens"], sit["cands"]
     scores = np.asarray(Y[H["BLOTTO"], :], float)
     mode = np.mean(Y[H["BLOTTO_MODE"], :], axis=1)
@@ -160,7 +160,7 @@ def stake(w, Y: np.ndarray, sit: Dict[str, Any]) -> Tuple[np.ndarray, bool]:
 
 def decide(w, Y: np.ndarray, sit: Dict[str, Any]) -> Tuple[Dict[str, float], np.ndarray]:
     """One brain's decisions from its outputs in one situation and draw, by the engine's rules."""
-    from GraphOfLifeSimple import _share_of_first
+    from GraphOfLife import _share_of_first
     from probe import p_yes
     H, cfg, t, cands = w.heads, w.cfg, sit["tokens"], sit["cands"]
     alloc, spread = stake(w, Y, sit)
@@ -411,7 +411,7 @@ def stake_kinds(spec: str, seed: int = 7, game: bool = True) -> Dict[str, Any]:
 
 
 def measure(spec: str, seed: int = 7, game: bool = True) -> Dict[str, Any]:
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     w = load(spec, game)
     rng = np.random.RandomState(seed)
     sits = situations(w, rng, SITUATIONS)

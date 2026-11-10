@@ -40,7 +40,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 import networkx as nx          # noqa: E402
 import numpy as np             # noqa: E402
 
-import GraphOfLifeSimple       # noqa: E402
+import GraphOfLife       # noqa: E402
 import gol_record              # noqa: E402
 import gol_run                 # noqa: E402
 import gol_store as store      # noqa: E402
@@ -149,7 +149,7 @@ def main() -> int:
     # The engine has to be the copy this file sits in. A path that led back to
     # the repository would run whatever is there today under the name of a
     # snapshot taken weeks ago.
-    for module in (GraphOfLifeSimple, gol_record, gol_run, store):
+    for module in (GraphOfLife, gol_record, gol_run, store):
         if os.path.dirname(os.path.abspath(module.__file__)) != HERE:
             print(f"refusing: {module.__name__} comes from {module.__file__}, not {HERE}",
                   file=sys.stderr)

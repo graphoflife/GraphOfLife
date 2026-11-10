@@ -96,7 +96,7 @@ def kept_world(run_id: str, path: str, count: int, seed: int):
     `count` agents holding a token or more, drawn at random; every other brain
     is left empty. Returns the world and the ids of the agents drawn.
     """
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
     cfg = store.load_config(run_id)
     with np.load(path) as z:
         blob = {k: z[k] for k in z.files if not _is_layer(k)}
@@ -119,7 +119,7 @@ def kept_brains(run_id: str, iteration: int, count: int, seed: int) -> List[Any]
     The brains of `count` agents of the world kept at `iteration`, drawn at random
     among those holding a token or more — again, with repeats, where fewer hold one.
     """
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     cfg = store.load_config(run_id)
     with np.load(store.archive_path(run_id, iteration)) as z:
         picked = _sample(z["tokens"], count, seed)
@@ -143,7 +143,7 @@ def _rms(a: np.ndarray) -> float:
 
 
 def _squash(cfg):
-    from GraphOfLifeSimple import _sigmoid
+    from GraphOfLife import _sigmoid
     return np.tanh if cfg.hidden_activation == "tanh" else _sigmoid
 
 
@@ -192,7 +192,7 @@ def balance(cfg: Any) -> Tuple[float, float]:
 
 def drifted(cfg: Any, rng: np.random.RandomState) -> Any:
     """A founder's brain taken to mutation's balance: its weights scaled up, its biases drawn at their spread."""
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     brain = make_brain(cfg, 0, rng)
     scale, bias = balance(cfg)
     for i, (W, b) in enumerate(zip(brain.weights, brain.biases)):
@@ -210,7 +210,7 @@ def balance_check(settings: Sequence[Tuple[float, float]], brains: int = 8,
     No world is played: a brain is only changed.
     """
     from gol_config import SimConfig
-    from GraphOfLifeSimple import make_brain
+    from GraphOfLife import make_brain
     out = {}
     for sigma, s in settings:
         cfg = SimConfig(hidden_layers=[16, 16, 16], hidden_activation="tanh", mutation_probability=1.0,
@@ -314,7 +314,7 @@ def probe(run_id: str) -> Dict[str, Any]:
     at random, one per agent probed), and fresh founders' brains. Also how much
     one change of a brain moves its decisions, against a stranger's brain.
     """
-    from GraphOfLifeSimple import brain_shape, make_brain
+    from GraphOfLife import brain_shape, make_brain
     cfg = store.load_config(run_id)
     world, picked = kept_world(run_id, store.checkpoint_path(run_id), AGENTS, SEED_AGENTS)
     log_deg, neighs, q_tok, q_deg, log_tok, at_risk = world._precompute_features()
@@ -618,7 +618,7 @@ def brainsize(ch: F.Chapter) -> None:
         recipe=recipe(RUNS, "each run's `GraphOfLifeRuns/<run>/provenance.json` (the processor seconds of each of its "
                             "sessions), its settings, and its mean number of agents from iteration 100 on "
                             "(`research/screen/health.json`)",
-                      ["A brain's size: its weights and biases, `GraphOfLifeSimple.brain_shape`.",
+                      ["A brain's size: its weights and biases, `GraphOfLife.brain_shape`.",
                        "Time: the sum of `cpu` over the sessions, in microseconds, over 3,000 × the mean agents "
                        "(`cost_of`).",
                        "Least squares of ln(time) on ln(size)."]))

@@ -52,7 +52,7 @@ def advance(run_id: str, should_stop: Callable[[Any], bool] = lambda world: Fals
 
 def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[int],
              deadline: Optional[float] = None) -> str:
-    from GraphOfLifeSimple import new_world
+    from GraphOfLife import new_world
 
     cfg = store.load_config(run_id)
     store.clear_leftovers(run_id)

@@ -186,7 +186,7 @@ That serves the same interface at <http://127.0.0.1:8000/> and stores runs in
 `GraphOfLifeRuns/`. The engine also runs headless:
 
 ```bash
-python3 GraphOfLifeSimple.py
+python3 GraphOfLife.py
 ```
 
 A run has no iteration ceiling. It goes until you stop it or the population
@@ -248,7 +248,7 @@ should run:
 - If `/api/defaults` answers, there is a local server and it uses that.
 - If nothing answers — which is the case on GitHub Pages — it starts a Web
   Worker, loads [Pyodide](https://pyodide.org), and imports
-  `GraphOfLifeSimple.py` **unchanged**.
+  `GraphOfLife.py` **unchanged**.
 
 The engine is not reimplemented in JavaScript. A translation would have been a
 second implementation to keep honest, and this simulation is far too sensitive
@@ -286,7 +286,7 @@ viewer and the statistics exist to answer it.
 
 ```
 LICENSE                MIT — use it for anything, including commercially
-GraphOfLifeSimple.py   the engine: agents, brains, both phases, cleanup
+GraphOfLife.py   the engine: agents, brains, both phases, cleanup
 gol_config.py          every setting, with validation
 gol_store.py           runs on disk — gzipped frames and a rolling checkpoint
 gol_run.py             the one loop that advances a stored run

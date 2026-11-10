@@ -28,7 +28,7 @@ import runner  # first: the repository on the path, and a runs folder of the tes
 import gol_record
 import gol_series
 from gol_config import SimConfig
-from GraphOfLifeSimple import new_world
+from GraphOfLife import new_world
 from worlds import adjacency, scratch_runs, small, unrecorded_run, write_frames
 
 

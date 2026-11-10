@@ -25,7 +25,7 @@ import networkx as nx
 import numpy as np
 
 from gol_config import SimConfig
-from GraphOfLifeSimple import GraphOfLife, decision_keys, make_brain, new_world
+from GraphOfLife import GraphOfLife, decision_keys, make_brain, new_world
 from gol_rounds import Board, schedule, who_places
 from worlds import small
 

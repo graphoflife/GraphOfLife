@@ -13,7 +13,7 @@ import random, sys
 import numpy as np
 sys.path.insert(0, ".")
 from gol_config import SimConfig
-import GraphOfLifeSimple as G
+import GraphOfLife as G
 
 def run(seed, iters=45, **over):
     random.seed(seed); np.random.seed(seed)

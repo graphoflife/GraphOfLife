@@ -118,7 +118,7 @@ most to the poor ([The lottery](#the-lottery)).
 
 ### In the code
 
-The engine computes `delta` (`GraphOfLifeSimple.py`, `_frame`), and
+The engine computes `delta` (`GraphOfLife.py`, `_frame`), and
 `gol_series.frame_stats` the five statistics. `redistributed` comes from the
 cleanup report of each frame.
 

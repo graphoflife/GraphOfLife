@@ -55,7 +55,7 @@ sys.path.insert(0, ROOT)
 import networkx as nx
 import numpy as np
 
-from GraphOfLifeSimple import worst_node_cut_share
+from GraphOfLife import worst_node_cut_share
 from gol_series import _structure
 
 

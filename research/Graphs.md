@@ -389,7 +389,7 @@ close to *you cannot*, and it is argued rather than assumed.
 Every edge the engine creates is created in one of two places, and both are
 local:
 
-- `_spawn_child` (`GraphOfLifeSimple.py:971`) links the newborn to members of
+- `_spawn_child` (`GraphOfLife.py:971`) links the newborn to members of
   `candidates`, which is `[parent] + parent's neighbours` (`:887`).
 - the handover loop (`:926`) moves an edge from the parent to the child, and its
   far endpoint is again a parent's neighbour.
@@ -467,7 +467,7 @@ alternating column is no result.**
 | `netLightningScore`, `netCyclingShare`, `netLightningLongest` | the same on flow with reciprocal amounts cancelled, so no two-hop loop can exist and every circuit is real | game-phase allocations |
 | `flowImbalance`, `netFlowShare` | the exact ceiling circulation lives under, and how much flow survives cancellation | game-phase allocations |
 
-`bridge_splits()` and `two_core_size()` live in `GraphOfLifeSimple.py` because
+`bridge_splits()` and `two_core_size()` live in `GraphOfLife.py` because
 the engine needs them on the live graph, and `gol_series` imports them rather
 than growing a third copy. The browser once kept a mirror of all of these in
 `graphstats.js`, compared value for value by a parity test; since 2026-10-09

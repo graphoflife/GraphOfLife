@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, "/home/stefan/Documents/CodingProjects/GraphOfLife")
 import numpy as np
 from gol_config import SimConfig
-from GraphOfLifeSimple import make_brain
+from GraphOfLife import make_brain
 
 rng = np.random.RandomState(0)
 def inputs(cfg, cols=8):

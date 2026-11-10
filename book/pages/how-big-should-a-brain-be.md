@@ -431,7 +431,7 @@ three do. They are worth looking at again, not yet worth believing.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/provenance.json` (the processor seconds of each of its sessions), its settings, and its mean number of agents from iteration 100 on (`research/screen/health.json`).
 >
-> 1. A brain's size: its weights and biases, `GraphOfLifeSimple.brain_shape`.
+> 1. A brain's size: its weights and biases, `GraphOfLife.brain_shape`.
 > 2. Time: the sum of `cpu` over the sessions, in microseconds, over 3,000 × the mean agents (`cost_of`).
 > 3. Least squares of ln(time) on ln(size).
 >

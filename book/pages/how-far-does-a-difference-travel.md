@@ -57,7 +57,7 @@ For a world of Graph of Life it is two questions in one.
 ## How far a difference can go in one phase
 
 Follow a difference at one agent, *x*, through one phase of the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")
-(`GraphOfLifeSimple.py`):
+(`GraphOfLife.py`):
 
 ![A light cone on a network](../diagrams/light-cone.svg)
 
@@ -362,7 +362,7 @@ line a phase a trial: tens of megabytes.
 ## How this was made
 
 No run of this experiment exists. The bound of four steps a phase was read
-from the engine (`GraphOfLifeSimple.py`: the features measured once a phase,
+from the engine (`GraphOfLife.py`: the features measured once a phase,
 the look that only talks, the loops of both phases, the cleanup), as
 [Physical inspiration](physical-inspiration.md#a-speed-limit) first drew it.
 The table of the shortlist reads each world's drawn settings from

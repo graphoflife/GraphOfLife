@@ -1068,7 +1068,7 @@ Tarjan's walk finds every bridge
 the agents below each one. So the size of the part behind every bridge costs
 nothing extra. In the example, the walk counts 1 agent below c–d, g–h and
 g–i, and 3 below f–g. The code is `bridge_splits` and `worst_cut_share` in
-`GraphOfLifeSimple.py`. `gol_series.py` applies them to every frame of a 25th
+`GraphOfLife.py`. `gol_series.py` applies them to every frame of a 25th
 iteration, for `cutRisk`. The engine applies them at the start of
 `_cleanup_and_redistribute`, for `cutRiskBefore`.
 

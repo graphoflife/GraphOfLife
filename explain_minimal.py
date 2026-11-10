@@ -9,7 +9,7 @@ change it:
 
     python3 explain_minimal.py
 
-The full version lives in GraphOfLifeSimple.py. It is the same algorithm in the
+The full version lives in GraphOfLife.py. It is the same algorithm in the
 same order; what it adds is the parts a research tool needs and a reader does
 not — configuration, checkpoints, recording, three kinds of brain, and the
 switches that make each mechanic optional. The observation vector here is

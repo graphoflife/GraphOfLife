@@ -26,7 +26,7 @@ made by hand, to see quickly whether an idea is worth an experiment.
 
 ### The engine
 
-The engine is the simulation code, `GraphOfLifeSimple.py`. Given the
+The engine is the simulation code, `GraphOfLife.py`. Given the
 [settings](settings.md) and a [seed](rules-in-detail.md#seeds-and-the-random-stream), it builds
 [the starting ring](rules-in-detail.md#the-starting-ring). Then it plays
 [one iteration](one-iteration.md) after another. The run writes the whole

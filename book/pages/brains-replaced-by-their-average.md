@@ -384,7 +384,7 @@ history.
    the agent's own brain, as now, with three new values: the crowd's brain
    (d), a stranger's answers (b), and the answers of an agent like it (c). A
    brain speaks in two places in the engine: in the look of every phase
-   (`_observe` in `GraphOfLifeSimple.py`), and in the look before each token
+   (`_observe` in `GraphOfLife.py`), and in the look before each token
    when tokens are placed one at a time (`gol_rounds.py`). Both already give
    way to noise under `random_decisions`, and the new values plug in at the
    same two places. The pool of (d), and the library of (b) and (c), are made

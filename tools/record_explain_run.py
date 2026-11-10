@@ -38,7 +38,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from GraphOfLifeSimple import new_world           # noqa: E402
+from GraphOfLife import new_world           # noqa: E402
 from gol_config import SimConfig                  # noqa: E402
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

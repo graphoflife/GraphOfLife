@@ -160,14 +160,14 @@ from typing import Any, Dict, List, Optional, Tuple
 # frozen beside the engine (the lab's snapshot, gol_pilot.py) then imports the copies it sits with.
 _HERE = os.path.dirname(os.path.abspath(__file__))
 for _path in (os.path.join(_HERE, "..", "checks"), os.path.join(_HERE, "..", "..", "..")):
-    if os.path.exists(os.path.join(_path, "rules.py")) or os.path.exists(os.path.join(_path, "GraphOfLifeSimple.py")):
+    if os.path.exists(os.path.join(_path, "rules.py")) or os.path.exists(os.path.join(_path, "GraphOfLife.py")):
         sys.path.insert(0, os.path.abspath(_path))
 sys.path.insert(0, _HERE)
 
 import numpy as np
 import networkx as nx
 
-from GraphOfLifeSimple import (GraphOfLife, _apportion, _share_of_first,
+from GraphOfLife import (GraphOfLife, _apportion, _share_of_first,
                                _choose_binary, stream_seed)
 from gol_config import SimConfig
 
@@ -655,7 +655,7 @@ class ProtoWorld(GraphOfLife):
     def _spawn_child_valence(self, parent, parent_tokens, child_tokens, candidates, Y, K):
         """The engine's birth, with a cap on links: the parent is always joined; then
         `birth_links` random neighbours of the parent that have room; then the LINK choices."""
-        from GraphOfLifeSimple import _choose_binary
+        from GraphOfLife import _choose_binary
         child_id = self.next_agent_id
         self.next_agent_id += 1
         self.G.add_node(child_id)

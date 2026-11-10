@@ -80,7 +80,7 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
     contest there with no result (None), as the lab's trials are stopped.
     """
     from gol_config import SimConfig
-    from GraphOfLifeSimple import GraphOfLife
+    from GraphOfLife import GraphOfLife
 
     cfg = SimConfig.from_dict(config)
     cfg.mutation_probability = 0.0

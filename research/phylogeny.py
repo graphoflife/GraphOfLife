@@ -288,7 +288,7 @@ def frames_from_simulation(iterations: int, tokens: int, seed: int,
     import numpy as np
 
     from gol_config import SimConfig
-    from GraphOfLifeSimple import new_world
+    from GraphOfLife import new_world
 
     random.seed(seed)
     np.random.seed(seed)

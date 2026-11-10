@@ -33,7 +33,7 @@ import numpy as np
 
 sys.path.insert(0, ".")
 from gol_config import SimConfig
-import GraphOfLifeSimple as G
+import GraphOfLife as G
 
 SEEDS = range(1, 31)          # the standing rule: thirty, not six
 ITERS = 60

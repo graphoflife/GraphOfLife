@@ -17,7 +17,7 @@ import numpy as np
 
 import gol_store as store
 from gol_config import SimConfig
-from GraphOfLifeSimple import GraphOfLife, _apportion, _share_of_first
+from GraphOfLife import GraphOfLife, _apportion, _share_of_first
 
 
 def profile(run, it):

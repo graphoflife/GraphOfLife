@@ -71,12 +71,14 @@ def load_engine(directory: str, stats: bool = False):
     directory = os.path.abspath(directory)
     sys.dont_write_bytecode = True          # leave an unpacked commit as it was
     sys.path.insert(0, directory)
-    names = ("gol_config", "GraphOfLifeSimple") + (STATS_MODULES if stats else ())
+    # The engine was GraphOfLifeSimple.py until 10 November 2026, and an older commit still has it so.
+    engine = "GraphOfLife" if os.path.exists(os.path.join(directory, "GraphOfLife.py")) else "GraphOfLifeSimple"
+    names = ("gol_config", engine) + (STATS_MODULES if stats else ())
     modules = {name: importlib.import_module(name) for name in names}
     for module in modules.values():
         if os.path.dirname(os.path.abspath(module.__file__)) != directory:
             raise SystemExit(f"{module.__name__} came from {module.__file__}, not {directory}")
-    return modules["gol_config"].SimConfig, modules["GraphOfLifeSimple"], modules
+    return modules["gol_config"].SimConfig, modules[engine], modules
 
 
 def frame_hash(frame: Dict[str, Any]) -> str:
