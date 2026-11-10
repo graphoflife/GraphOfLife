@@ -1026,7 +1026,7 @@
       "kind": "study",
       "status": "written",
       "added": "2026-11-09",
-      "summary": "Assembly theory counts the fewest joins that build a thing from parts and how many copies of it exist. Tried on the agents' neighbourhoods, its index turns out to be set by how many links a neighbourhood has, and the worlds hold about as much assembly as random networks with the same degrees."
+      "summary": "Assembly theory counts the fewest joins that build a thing from parts and how many copies of it exist. Tried on the agents' neighbourhoods, its index turns out to be set by how many links a neighbourhood has, and the worlds hold about as much assembly as random networks with the same degrees. Over every world of round 3, a world's assembly follows a cap on links, not its health."
     },
     {
       "id": "strategies-written-by-hand",

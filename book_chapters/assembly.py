@@ -29,8 +29,11 @@ Each world's shapes are kept beside the run, .book/<run>.assembly.json (and
 """
 from __future__ import annotations
 
+import json
 import math
+import os
 import random
+import sys
 from collections import Counter, defaultdict
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
@@ -69,6 +72,15 @@ LIVES = [("B1-100000-s001", 100), ("B1-30000-b82ad0-s3042", 250)]
 DEPTHS = [("B1-100000-s001", 100), ("B2-10000-s001", 100), ("B1-30000-b82ad0-s3042", 250)]
 #: The chance that a brain offered a change takes it, in B1 and B2 (mutation_probability).
 CHANGE = 0.2
+
+#: Every world of round 3 (the author, 10 November 2026: "please analyze them all"): Experiment 40's draws of
+#: the author's settings, and the eight draws of Experiments 41 and 42 played a token at a time.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SCREEN = os.path.join(ROOT, "research", "screen")
+HEALTH = os.path.join(SCREEN, "health.json")
+PLANS = [("E40", "every token at once (Experiment 40)", ORANGE),
+         ("E41", "a token at a time, weakest first (41)", BLUE),
+         ("E42", "a token at a time, strongest first (42)", GREEN)]
 
 _ASSEMBLER = AT.Assembler()
 
@@ -373,6 +385,75 @@ CONTROL_WORDS = {"lattice": "triangular lattice", "cubic": "cubic lattice", "tre
 
 
 # ---------------------------------------------------------------------------
+# Every world of round 3
+# ---------------------------------------------------------------------------
+
+def _effects():
+    """research/screen/effects.py: the worlds' drawn settings, and its permutation test with false discovery."""
+    sys.path.insert(0, SCREEN)
+    import effects  # noqa: E402
+    return effects
+
+
+def round3_worlds() -> List[Dict[str, Any]]:
+    """Every world of round 3, with its health; those that lived to the end read after their last game."""
+    with open(HEALTH, encoding="utf-8") as f:
+        worlds = [w for w in json.load(f)["worlds"] if w["round"] in {p for p, _, _ in PLANS}]
+    rows = []
+    for w in sorted(worlds, key=lambda w: w["id"]):
+        row = {"id": w["id"], "round": w["round"], "seed": w["seed"], "alive": w["alive"],
+               "ended_at": w.get("ended_at"), "health": w.get("health")}
+        if w["alive"]:
+            v = assembly_of(w["id"])
+            s, t = summary(v["world"]), summary(v["twin"])
+            row.update(world=s, twin=t, ratio=s["A"] / t["A"] if t["A"] else None)
+        rows.append(row)
+    return rows
+
+
+def rank_test(a: Sequence[float], b: Sequence[float], rng: np.random.RandomState) -> Tuple[float, float]:
+    """Spearman's rank correlation of a and b, and the chance of one at least as strong over shuffles of b."""
+    E = _effects()
+    ra, rb = E.average_ranks(np.asarray(a, float)), E.average_ranks(np.asarray(b, float))
+    ra, rb = ra - ra.mean(), rb - rb.mean()
+    norm = math.sqrt(float(ra @ ra) * float(rb @ rb))
+    r = float(ra @ rb) / norm
+    null = rb[np.argsort(rng.rand(E.SHUFFLES, rb.size), axis=1)] @ ra / norm
+    return r, float((1 + (np.abs(null) >= abs(r) - 1e-12).sum()) / (1 + E.SHUFFLES))
+
+
+def settings_tests(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Every drawn setting against a world's assembly over its twin's, over Experiment 40's worlds that lived,
+    each a draw of its own: research/screen/effects.py's permutation test and false discovery rate, as How
+    the drawn settings shape a world tests every other outcome. Experiments 41 and 42 play eight draws twice,
+    so they are left out here, as there.
+    """
+    import gol_screen
+    E = _effects()
+    space, values = E.settings_of([p for p, _, _ in PLANS])
+    rng = np.random.RandomState(E.SEED)
+    among = [r for r in rows if r["round"] == "E40" and r.get("ratio")]
+    out = []
+    for setting in space:
+        name = setting[0]
+        mine = [r for r in among if gol_screen._applies(setting[3], values[r["id"]])]
+        groups = [values[r["id"]][name] for r in mine]
+        if len(mine) < 6 or len({json.dumps(g) for g in groups}) < 2:
+            continue
+        y = np.array([r["ratio"] for r in mine])
+        chance, size = E.permutation_test(y, groups, False, rng)
+        by = {}
+        for g in sorted({json.dumps(g) for g in groups}):
+            ys = [v for v, gg in zip(y, groups) if json.dumps(gg) == g]
+            by[g] = {"worlds": len(ys), "median": float(np.median(ys))}
+        out.append({"setting": name, "worlds": len(mine), "chance": chance, "size": size, "by": by})
+    for row, q in zip(out, E.false_discovery([r["chance"] for r in out])):
+        row["fdr"] = q
+    return sorted(out, key=lambda r: r["chance"])
+
+
+# ---------------------------------------------------------------------------
 # The page
 # ---------------------------------------------------------------------------
 
@@ -559,6 +640,86 @@ def assembly(ch: F.Chapter) -> None:
                                    "The networks with no history are made by `book_chapters/assembly.py` "
                                    "(`triangular_lattice`, `cubic_lattice`, `random_tree`, `random_space`) and "
                                    "read the same way."]))
+
+    # ---- every world of round 3 ----
+    all3 = round3_worlds()
+    lived = [r for r in all3 if r.get("ratio")]
+    low = min(min(r["twin"]["A"], r["world"]["A"]) for r in lived) / 1.5
+    high = max(max(r["twin"]["A"], r["world"]["A"]) for r in lived) * 1.5
+    against_twin = [F.line([low, high], [low, high], "as much as the twin", GREY, dash=[4, 3], width=1)]
+    against_health = [F.line([0, 1], [1, 1], None, GREY, dash=[4, 3], width=1)]
+    for plan, words, colour in PLANS:
+        mine = [r for r in lived if r["round"] == plan]
+        against_twin.append({"label": words, "x": [r["twin"]["A"] for r in mine], "y": [r["world"]["A"] for r in mine],
+                             "points": True, "size": 6, "colour": colour, "alpha": 0.85})
+        against_health.append({"label": None, "x": [r["health"]["product"] for r in mine],
+                               "y": [r["ratio"] for r in mine], "points": True, "size": 6, "colour": colour,
+                               "alpha": 0.85})
+    ratios = [r["ratio"] for r in lived]
+    ch.grid("round3", [
+        {"title": "each world against its twin", "x": {"label": "assembly A of its random twin", "log": True,
+                                                      "min": low, "max": high},
+         "y": {"label": "assembly A of the world", "log": True, "min": low, "max": high},
+         "series": against_twin, "height": 260, "legend": True},
+        {"title": "and against its health", "x": {"label": "health (the product of the criteria)", "min": 0, "max": 1},
+         "y": {"label": "the world's A over its twin's", "log": True, "min": min(ratios) / 1.3,
+               "max": max(ratios) * 1.3},
+         "series": against_health, "height": 260, "legend": False}],
+        columns=2, title="Every world of round 3 holds about as much assembly as its twin, however healthy",
+        caption=(f"One dot for each of the {len(lived)} worlds of round 3 that lived to the end of their 3,000 "
+                 "iterations, read after the game of iteration 2,999. Orange: Experiment 40, every setting drawn at "
+                 "random and every token staked at once; blue and green: the eight draws of Experiments 41 and 42, "
+                 "staking a token at a time, the weakest stakes placed first or the strongest. Left: the assembly A "
+                 "of a world's ego networks (up) against its random twin's (across), both on logarithmic axes; on "
+                 "the dashed line a world holds exactly as much as its twin. Right: the world's A over its twin's "
+                 "against its health, the product of its six criteria's scores (Which worlds are healthy?); on the "
+                 "dashed line the two are equal. Where a shared shape's index is only bounded, A is taken at its "
+                 "lower bound."),
+        recipe=recipe(f"every world of round 3 of the screen that lived to the end: {sum(r['round'] == 'E40' for r in lived)} "
+                      f"of Experiment 40's 84 and {sum(r['round'] != 'E40' for r in lived)} of the 16 of Experiments 41 "
+                      "and 42 (30,000 tokens, 3,000 iterations), after the game of iteration 2,999",
+                      DATA_TEXT + "; each world's health from `research/screen/health.json` (`health.product`)",
+                      EGO_STEPS + ["A = Σ e^{a_i} (n_i − 1) / N_T over the shapes, for the world and for its twin.",
+                                   "Left: the world's A against its twin's. Right: their ratio against the world's "
+                                   "health."]))
+    rng = np.random.RandomState(_effects().SEED)
+    by_plan = {}
+    for plan, words, _ in PLANS:
+        mine = [r for r in all3 if r["round"] == plan]
+        alive = [r for r in mine if r.get("ratio")]
+        by_plan[plan] = {"worlds": len(mine), "lived": len(alive), "above_twin": sum(r["ratio"] > 1 for r in alive),
+                         "ratio": _median([r["ratio"] for r in alive]),
+                         "A": _median([r["world"]["A"] for r in alive]),
+                         "twin_A": _median([r["twin"]["A"] for r in alive]),
+                         "on_floor": _median([r["world"]["on_floor"] for r in alive])}
+    pairs = []
+    for seed in sorted({r["seed"] for r in lived if r["round"] == "E41"}):
+        weak = next((r for r in lived if r["round"] == "E41" and r["seed"] == seed), None)
+        strong = next((r for r in lived if r["round"] == "E42" and r["seed"] == seed), None)
+        if weak and strong:
+            pairs.append({"seed": seed, "weakest": weak["ratio"], "strongest": strong["ratio"]})
+    tests = settings_tests(all3)
+    extra = [r["world"]["mean_links"] - r["twin"]["mean_links"] for r in lived]
+    ch.number("round3", {
+        "worlds": len(all3), "lived": len(lived), "above_twin": sum(r["ratio"] > 1 for r in lived),
+        "ratio": F.describe(ratios), "A": F.describe([r["world"]["A"] for r in lived]),
+        "twin_A": F.describe([r["twin"]["A"] for r in lived]),
+        "on_floor": F.describe([r["world"]["on_floor"] for r in lived]),
+        "top_shared": max(r["world"]["top_shared"] for r in lived),
+        "unsettled": [{"id": r["id"], "agents": r["world"]["inexact_shared"],
+                       "largest": r["world"]["largest_inexact"]} for r in lived if r["world"]["inexact_shared"]],
+        "by_plan": by_plan, "pairs": pairs,
+        "health": {order: rank_test([r["health"][order] for r in lived], ratios, rng)
+                   for order in ("product", "sum", "worst")},
+        "health_A": rank_test([r["health"]["product"] for r in lived], [r["world"]["A"] for r in lived], rng),
+        "extra_links": rank_test(extra, ratios, rng),
+        "settings": tests,
+        "highest": sorted(({"id": r["id"], "round": r["round"], "ratio": r["ratio"], "A": r["world"]["A"],
+                            "twin_A": r["twin"]["A"], "health": r["health"]["product"]} for r in lived),
+                          key=lambda x: -x["ratio"])[:5],
+        "died": [{"id": r["id"], "round": r["round"], "ended_at": r["ended_at"]} for r in all3 if not r["alive"]],
+        "rows": [{"id": r["id"], "round": r["round"], "A": r["world"]["A"], "twin_A": r["twin"]["A"],
+                  "ratio": r["ratio"], "health": r["health"]["product"]} for r in lived]})
 
     # ---- A through a life ----
     lives = {run: assembly_life(run, every)["life"] for run, every in LIVES}

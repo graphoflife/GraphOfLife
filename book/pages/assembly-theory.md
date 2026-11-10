@@ -7,6 +7,8 @@
 >   many agents share each neighbourhood's shape?
 > - Do the worlds of Graph of Life hold more assembly than chance gives a
 >   network with the same numbers of links, and would that mean selection?
+> - Over every world of round 3, does a world's assembly follow its health,
+>   or its settings?
 > - What can assembly theory tell here, and what can it not?
 
 ## In short
@@ -25,7 +27,9 @@ twins: in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-se
 32.4 against 27.5; in round 3's healthiest, 13.8 against 12.4. A random
 space, made by chance and distance alone, beats its twin by far more (38.1
 against 14.2), and a triangular lattice, built by one rule in one go, has
-the most of all (54.6). So assembly theory finds no sign of selection in
+the most of all (54.6). Over all 82 worlds of round 3 that lived to the end,
+a world's assembly over its twin's does not follow its health; it is highest
+where a cap on links makes many agents close the same few triangles. So assembly theory finds no sign of selection in
 these networks, and it has nothing to say about the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), the things
 selection acts on here: their recorded family tree is a chain of changes
 without reuse, which ticks like a clock.
@@ -222,6 +226,9 @@ A handful of worlds read with care, each after its last [game](one-iteration.md#
   s4006 played strongest first, s3018, s3080 and s3057; its densest, s3094,
   with 24.6 links an agent at its end; and its star, s3020, one hub joined to
   every other agent.
+- **Every world of round 3**, read the same way: the 84 worlds of
+  Experiment 40 and the 16 of Experiments 41 and 42, of which 82 lived to
+  the end ([Every world of round 3](#every-world-of-round-3)).
 
 Two worlds are also read through their lives: B1's world s001 every 100
 iterations, and round 3's s3042 every 250.
@@ -378,6 +385,99 @@ each other and to all the same others have one ego network, counted once: a
 median of 164 agents in a B1 world, 6 in B2 and 62 in round 3's healthiest.
 In world s001 of B1, 149 of its 198 are a parent and the child it linked to
 all its neighbours: birth copies a neighbourhood whole.
+
+## Every world of round 3
+
+The worlds above are seven of round 3's hundred, chosen for their health or
+their shape. Here are all of them: the 84 worlds of Experiment 40, every
+setting drawn at random
+([Round 3: the author's settings](a-screen-of-random-worlds.md#round-3-the-authors-settings)),
+and the 16 of Experiments 41 and 42, which play eight of the draws again with
+the stakes placed a token at a time, the weakest first or the strongest
+([Round 3, a token at a time](a-screen-of-random-worlds.md#round-3-a-token-at-a-time)).
+82 of them lived to the end of their 3,000 iterations and are read after their
+last game. The other 18 died out before it, between iterations 12 and 2,442,
+and left no network to read.
+
+<!-- figure assembly/round3 -->
+![Every world of round 3 holds about as much assembly as its twin, however healthy](../figures/assembly/round3.svg)
+
+**Every world of round 3 holds about as much assembly as its twin, however healthy.** One dot for each of the 82 worlds of round 3 that lived to the end of their 3,000 iterations, read after the game of iteration 2,999. Orange: Experiment 40, every setting drawn at random and every token staked at once; blue and green: the eight draws of Experiments 41 and 42, staking a token at a time, the weakest stakes placed first or the strongest. Left: the assembly A of a world's ego networks (up) against its random twin's (across), both on logarithmic axes; on the dashed line a world holds exactly as much as its twin. Right: the world's A over its twin's against its health, the product of its six criteria's scores (Which worlds are healthy?); on the dashed line the two are equal. Where a shared shape's index is only bounded, A is taken at its lower bound.
+
+> [!example]- How to make this figure
+> **Runs.** every world of round 3 of the screen that lived to the end: 70 of Experiment 40's 84 and 12 of the 16 of Experiments 41 and 42 (30,000 tokens, 3,000 iterations), after the game of iteration 2,999
+>
+> **Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`; each world's health from `research/screen/health.json` (`health.product`).
+>
+> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
+> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
+> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
+> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> 5. A = Σ e^{a_i} (n_i − 1) / N_T over the shapes, for the world and for its twin.
+> 6. Left: the world's A against its twin's. Right: their ratio against the world's health.
+>
+> **To make it again:** `python3 book_figures.py assembly`.
+<!-- /figure -->
+
+**Most worlds hold a little more assembly than their twins, and how much
+more does not follow their health.** 57 of the 82 hold more than their twins:
+the median world 1.13 times as much, the middle half from 0.96 to 1.34 times.
+Their neighbourhoods are as cheap to build as everywhere else: in the median
+world 99.1% of the agents whose shape has a known index sit on the floor
+l(*m*), and no shape that two agents share, of those whose index is known,
+takes more than 9 joins. Set
+against health, the ratio does not follow it. Its rank [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") with the
+product of the six criteria is −0.05, with their sum −0.20 and with the worst
+of them 0.09; shuffling the worlds gives one as strong by chance 66, 8 and 43
+times in a hundred. The healthiest world, s3042, holds 1.28 times its twin's
+assembly; the five that hold the most over their twins, 2.0 to 3.3 times,
+have a health of 0.23 to 0.40, against its 0.61.
+
+**A cap on links raises it.** The 70 worlds of Experiment 40 that lived are
+each a draw of its own, so each setting can be tested on them as
+[How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md)
+tests every other outcome: the worlds' ratios shuffled 20,000 times among the
+setting's values, with a false discovery rate over all the settings. Two stand
+out. Worlds with a cap of four links an agent
+([`valence`](settings.md#valence) 4) hold a median 1.73 times their twins'
+assembly and those with a cap of eight 1.53, against 1.04 with no cap and 0.98
+with a cap of sixteen (false discovery rate 0.001). Worlds that mix a
+newborn's brain with a neighbour's ([`mix_at_birth`](settings.md#mix_at_birth))
+hold 1.29 times, against 1.01 (0.005). No other setting comes near (0.42 and
+more). Four of the five worlds with the most over their twins have a cap of
+four or eight.
+
+The cap's part shows in the shapes. Under a cap of four, many agents hold
+exactly four links, and their neighbours are often linked to each other: in
+world s3012, 327 agents have a star of four with three more links among its
+neighbours (in one of two shapes), seven links that take four joins. The twin's agents of degree four
+mostly have a bare star of four, which takes two. A copy counts by e to the
+power of its index, so each of the world's copies weighs e⁴ against e², seven
+times as much. The twin keeps the degrees the cap allows, but not the triangles
+the agents close within them. Why mixing brains raises the ratio the page does
+not know: mixing does not change how a newborn is linked, which the parent's
+brain chooses, so it can only act through what the mixed brains decide.
+
+**The densest worlds hold less than their twins.** Of the nine worlds with
+more than six links an agent on average over their runs, eight hold less
+assembly than their twins. Their
+neighbourhoods are large, and each closes a different number of triangles, so
+their agents spread over many shapes and share few: in s3016, 52% of the agents
+share their shape with another, against 79% in its twin. In three of them the
+deficit is partly the search's: s3030, s3066 and s3094 have 240, 278 and 1,652
+agents sharing large neighbourhoods whose index it could not settle, counted at
+their floor.
+
+**The worlds that stake a token at a time hold a little more, but they are
+too few to say why.** All five of Experiment 41's worlds that lived, and six of
+Experiment 42's seven, hold more than their twins, a median 1.27 and 1.34
+times, against 1.07 in Experiment 40. But they are eight draws, two with
+brains mixed and one with a cap of sixteen. The four with neither still hold
+1.17 to 1.77 times their twins', where Experiment 40's 40 worlds with neither
+sit at theirs (a median of 1.00, 21 of 40 above). That could be the staking,
+or the eight draws. Of the five draws that lived both ways, four hold more
+when the strongest stakes go first and one less (s4004), which five pairs
+cannot tell from chance.
 
 ## Through a world's life
 
@@ -536,6 +636,13 @@ reusable parts.
   1.16 in B2 and 1.28 in round 3's healthiest; a random space made by chance
   and distance alone reaches 2.7, and a lattice built by one rule has the
   most assembly of all.
+- **Over every world of round 3, assembly does not follow health.** 57 of
+  the 82 that lived hold more than their twins, a median of 1.13 times, and
+  the ratio has no rank correlation with health worth the name. What raises
+  it is a cap on links: under a cap of four, many agents close the same few
+  triangles within their four links, and hold 1.73 times their twins'
+  assembly. The densest worlds hold less than their twins, their agents
+  spread over too many shapes.
 - **Assembly does not build up as a world evolves.** Through 1,500 iterations
   of a B1 world and 3,000 of round 3's healthiest, A wanders with its twin's.
 - **Copies come from rules, not from selection.** Agents that share a
@@ -599,10 +706,20 @@ from worlds already played: no world was played for it.
   and once for each step of the search for a shorter pathway; four links on
   average in the random space, about the 3.5 to 4.6 of the worlds read; and
   10,000 agents for each network with no history.
+- **Every world of round 3.** On 10 November 2026 the author asked for all
+  of round 3 to be read, the author's settings and the worlds staking a token
+  at a time ("please analyze them all"). The 82 worlds that lived were read as
+  the seven before; their health is from `research/screen/health.json`, and
+  their settings and the [permutation test](statistics.md#permutation-tests "Whether a difference could be chance, found by shuffling which world belongs to which condition.") with its false discovery rate are
+  research/screen/effects.py's, run on the 70 of Experiment 40 alone, as
+  [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md)
+  runs it, since Experiments 41 and 42 play eight draws twice.
 - **What it cost.** Reading the thirty worlds of B1 took about 15 minutes of
   one core, the ten of B2 one, the seven of round 3 about 40, nearly all for
   the densest world; the two lives 14 minutes, the depths 10, and the networks
-  with no history 5.
+  with no history 5. The other 75 worlds of round 3 took 31 minutes, 23 of
+  them for three: s3066, s3030 and s3077, whose large shared neighbourhoods
+  the search worked on longest.
 
 `python3 book_figures.py assembly` draws the figures again from what is kept,
 and makes what is not.
