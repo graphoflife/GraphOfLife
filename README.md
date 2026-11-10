@@ -106,9 +106,10 @@ the leader — so the largest bid can be beaten by agreement among smaller ones.
 
 ## Watching a run
 
-The site opens on a front page whose background is a real run: five thousand
-agents turning slowly, played back and forth from a recording made by
-`tools/record_home_run.py`. It is recorded rather than computed in the page
+The site opens on a front page whose background is a real run: round 3's
+healthiest world, s3042, made small (3,200 tokens, about a thousand agents),
+its twenty iterations after the first fifty turning slowly, played forward and
+back from a recording made by `tools/record_home_run.py`. It is recorded rather than computed in the page
 because computing it would mean fetching a Python runtime and then waiting
 minutes for a hundred iterations, and because on a machine running
 `gol_server.py` it would leave a stray run on disk every time anyone opened the

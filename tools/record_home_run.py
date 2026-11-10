@@ -11,7 +11,13 @@ world would leave a stray run on disk every time the front page was opened.
 
 So the run happens here, once, and the site ships the result.
 
-    python3 tools/record_home_run.py
+    python3 tools/record_home_run.py                     the world the site ships (LIKE, TOKENS, WARMUP, KEEP)
+    python3 tools/record_home_run.py --like none --tokens 15000 --seed 11
+                                                         B1 as it is offered, as the page showed until 10 November 2026
+
+A world can take the rules of any run the plans name (`--like`), made as
+small as `--tokens` says: the plans in book/experiments hold every setting, so
+no run folder is needed to record it again.
 
 The first iterations are computed and thrown away. A world's opening moves are
 its least interesting: a ring lattice with the tokens spread evenly over it,
@@ -46,6 +52,7 @@ import os
 import struct
 import sys
 import time
+from typing import Any, Dict, Optional
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -54,6 +61,15 @@ from gol_config import SimConfig                  # noqa: E402
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(HERE, "web", "data", "home-run.bin")
+
+#: The world behind the front page (the author, 10 November 2026): round 3's healthiest world, s3042, first by
+#: the product of health's criteria and second by their sum and by the worst, made small enough to hold half
+#: the agents of the plain B1 world it replaced (about 1,000 against 2,000), and the twenty iterations after
+#: its first fifty, played forward and back.
+LIKE = "B1-30000-b82ad0-s3042"
+TOKENS = 3200
+WARMUP = 50
+KEEP = 20
 
 
 MAGIC = b"GOLH"
@@ -154,8 +170,36 @@ def _unpack(blob: bytes):
     return frames
 
 
-def record(tokens_total: int, warmup: int, keep: int, seed: int, out: str) -> None:
-    cfg = SimConfig(total_tokens=tokens_total, seed=seed)
+def settings(like: str, tokens: int, seed: Optional[int]) -> Dict[str, Any]:
+    """
+    The world's settings: those of the run the plans name `like`, or B1's as it
+    is offered for "none", made `tokens` big, with the run's own seed unless
+    `seed` says otherwise.
+    """
+    config: Dict[str, Any] = {}
+    if like != "none":
+        import gol_plan
+
+        def runs(name: str):
+            # A plan of trials is read only where the runs it plays from are; it names no run to take.
+            try:
+                return gol_plan.experiment_runs(name)
+            except gol_plan.LabError:
+                return []
+
+        found = next((spec for name in gol_plan.experiments() for spec in runs(name) if spec.run_id == like),
+                     None)
+        if found is None:
+            raise SystemExit(f"no plan names a run {like}")
+        config = dict(found.config)
+    config["total_tokens"] = tokens
+    if seed is not None:
+        config["seed"] = seed
+    return config
+
+
+def record(config: Dict[str, Any], like: str, warmup: int, keep: int, out: str) -> None:
+    cfg = SimConfig.from_dict(config)
     world = new_world(cfg)
 
     started = time.perf_counter()
@@ -238,9 +282,8 @@ def record(tokens_total: int, warmup: int, keep: int, seed: int, out: str) -> No
     # of the old version finished in the background and dropped 33 MB of stale
     # frames there, which was then committed and served to every visitor.
     with open(os.path.splitext(out)[0] + ".meta.json", "w") as handle:
-        json.dump({"recorded": time.strftime("%Y-%m-%d"), "format": "GOLH v1",
-                   "config": {"total_tokens": tokens_total, "seed": seed,
-                              "warmup": warmup, "frames": len(kept)}},
+        json.dump({"recorded": time.strftime("%Y-%m-%d"), "format": "GOLH v1", "like": like,
+                   "warmup": warmup, "frames": len(kept), "config": cfg.to_dict()},
                   handle, indent=2)
 
     agents = [len(f[0]) for f in kept]
@@ -252,16 +295,17 @@ def record(tokens_total: int, warmup: int, keep: int, seed: int, out: str) -> No
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--tokens", type=int, default=100000)
-    parser.add_argument("--warmup", type=int, default=50,
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--like", default=LIKE, help="the run whose rules the world takes, or none for B1's")
+    parser.add_argument("--tokens", type=int, default=TOKENS)
+    parser.add_argument("--warmup", type=int, default=WARMUP,
                         help="iterations computed and discarded")
-    parser.add_argument("--keep", type=int, default=50,
+    parser.add_argument("--keep", type=int, default=KEEP,
                         help="iterations recorded, played back and forth")
-    parser.add_argument("--seed", type=int, default=11)
+    parser.add_argument("--seed", type=int, default=None, help="the run's own seed unless given")
     parser.add_argument("--out", default=OUT)
     args = parser.parse_args()
-    record(args.tokens, args.warmup, args.keep, args.seed, args.out)
+    record(settings(args.like, args.tokens, args.seed), args.like, args.warmup, args.keep, args.out)
 
 
 if __name__ == "__main__":
