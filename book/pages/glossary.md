@@ -101,12 +101,12 @@ there.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
 - **[settled life](statistics.md#the-settled-life-of-a-world)** — A world from iteration 500 to its end, after its youth, where it is measured.
 - **[share function](rules-in-detail.md#the-share-function-fa-b)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
-- **[share-out](gains-and-losses.md#gains-losses-and-the-share-out)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
+- **[share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
 - **[spectral dimension](measuring-space.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.
 - **[spectral gap](measuring-networks.md#the-spectral-gap)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
 - **[survival curve](measuring-lives.md#survival-curves-kaplanmeier)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.
 - **[token](the-world.md#agents-and-tokens)** — The one thing of value in a world: every agent holds a whole number of them, and their total never changes.
-- **[token curvature](gains-and-losses.md#token-curvature)** — How much richer an agent's neighbourhood is than the agent itself.
+- **[token curvature](b1-lives-and-wealth.md#token-curvature)** — How much richer an agent's neighbourhood is than the agent itself.
 - **[token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)** (also net flow) — The tokens a game moves along each connection, from the agent who stakes to the node staked on.
 - **[Wilson interval](statistics.md#the-wilson-interval)** — The range a share probably lies in, when it was counted in only a few worlds.
 - **[yes-or-no decision](rules-in-detail.md#a-yes-or-no-decision)** — A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion.

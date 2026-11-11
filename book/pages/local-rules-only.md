@@ -12,7 +12,7 @@
 ## In short
 
 Almost every rule of Graph of Life acts only where it is, but three act on a
-whole world at once: the cull, the [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") and the one random stream. This
+whole world at once: the cull, the [share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") and the one random stream. This
 page plans to make each of them local, one at a time, on six of round 3's
 candidate worlds, each against its own run. Round 3 already drew two local
 rules. Mending a death cut the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") a game culls from 11.4% to 3.5%, but not

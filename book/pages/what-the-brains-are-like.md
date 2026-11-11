@@ -44,7 +44,7 @@ does before any selection. Whatever the evolved brains do differently, 1,500
 iterations of copying, changing and conquering did.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of
-[Thirty worlds](a-worlds-life.md#thirty-worlds). This page was first written
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds). This page was first written
 from thirty worlds of 10,000 tokens; where those differ, both are given.
 
 ## Does a brain see what it is shown?
@@ -132,7 +132,7 @@ The two kinds of brain decide very differently:
 - **Children.** A founder's brain would have a child in 69% of cases. An
   evolved brain would in **3.6%** (the worlds: 0.5% to 9%; 2.6% at 10,000
   tokens). That fits the 3.5 births per hundred agents in each reproduction
-  phase of [Births, deaths and ages](births-deaths-and-ages.md). Selection has
+  phase of [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages). Selection has
   all but abolished reproduction.
 - **Spreading the stake.** A founder's brain spreads its tokens over its
   candidates half the time, and goes all in on one the other half. An evolved
@@ -522,5 +522,5 @@ that lived to the end of their 3,000 iterations were read the same way.
 ← [Genotypes and lineages](genotypes-and-lineages.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [What agents say to each other](what-agents-say-to-each-other.md) →
 
 > [!info]- Pages that link here (25)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

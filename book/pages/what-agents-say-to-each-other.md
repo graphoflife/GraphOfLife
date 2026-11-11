@@ -45,7 +45,7 @@ control, a fresh founder's brain writes from exactly the same inputs. It shows
 what the architecture does before any selection.
 
 The worlds are the thirty B1 worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of
-[Thirty worlds](a-worlds-life.md#thirty-worlds). This page was first written
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds). This page was first written
 from thirty worlds of 10,000 tokens; where those differ, both are given.
 
 ## A name, not news
@@ -352,5 +352,5 @@ that lived to the end of their 3,000 iterations were read the same way.
 ← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Do the brains matter?](do-the-brains-matter.md) →
 
 > [!info]- Pages that link here (9)
-> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The rules in detail](rules-in-detail.md) · [The life of a B1 world](a-worlds-life.md) · [What the brains are like](what-the-brains-are-like.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The rules in detail](rules-in-detail.md) · [What the brains are like](what-the-brains-are-like.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

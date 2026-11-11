@@ -52,7 +52,7 @@ Two agents can differ in three ways, and each gives a different count:
 
 | what is counted | how | B1 (10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")) | B2 (10,000 tokens) | pages |
 |---|---|---|---|---|
-| **names** | genotypes: a brain gets a new one at every change | 0.65 per agent | 0.46 per agent | [Genotypes and lineages](genotypes-and-lineages.md), [How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world) |
+| **names** | genotypes: a brain gets a new one at every change | 0.65 per agent | 0.46 per agent | [Genotypes and lineages](genotypes-and-lineages.md), [How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world) |
 | **numbers** | how far apart two brains' weights are | two agents of one world as far apart as two random brains | — | [What the brains are like](what-the-brains-are-like.md) |
 | **behaviour** | kinds of agent that act measurably differently in the same situations, counted by their carriers | 3.2 kinds of staking, 9 over every decision | 17.5 kinds of staking, 54 over every decision | [How different are the agents?](how-different-are-the-agents.md) |
 
@@ -79,7 +79,7 @@ to judge whether a world is diverse
 - B1 keeps five genotypes for every eight agents, in every world and at every
   size. That is a balance of making and copying. It moves with the rate of
   change and with nothing else
-  ([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world),
+  ([How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world),
   [How fast should brains change?](how-fast-should-brains-change.md)).
 - Two brains of one world are as far apart in their numbers as two brains
   drawn at random. Nearly all of a brain is neutral: free to drift, because

@@ -136,7 +136,7 @@ above, rearranged, and it is recorded as `gini` after every phase.
 
 - In a settled B1 world of 100,000 tokens the Gini stays near 0.47. The
   thirty worlds lie between 0.40 and 0.55
-  ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
+  ([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
 - A healthy world must not be too even. Its Gini may be no lower than that
   of B2's most even world at the same iteration: 0.46 at iteration 2,000
   ([The six criteria](measuring-health.md#the-six-criteria)).
@@ -186,7 +186,7 @@ reads one point of it, the one people most often ask about.
 
 In a settled B1 world of 100,000 tokens the richest tenth hold about 42% of
 all tokens. Between worlds it ranges from 33% to 50%
-([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
+([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
 
 ### Tokens per agent: mean, median, extremes
 
@@ -215,7 +215,7 @@ values.
   agents. It rises when agents die and falls when they are born. A world
   holds 10,000 tokens unless its plan names another size. The thirty B1
   worlds of Experiment 10, which most measurements of B1 read, hold 100,000
-  ([Thirty worlds](a-worlds-life.md#thirty-worlds)). A settled B1 world has
+  ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). A settled B1 world has
   a mean of about 7 at 100,000 tokens, 9 at 10,000. B2's worlds hold only
   about three tokens per agent
   ([Too even, not too poor](healthy-and-rich.md#too-even-not-too-poor)).
@@ -228,13 +228,13 @@ values.
   some 2,100. At 10,000 tokens it holds about 7%, some 690, over the same
   iterations, 500 to 1,499. Over those worlds' longer settled life, to
   iteration 2,999, it holds about 8%, some 800
-  ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
+  ([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
 - **The poorest is almost always 1.** An agent left with 0 tokens is removed
   by the cleanup at the end of the phase. So the poorest survivor holds at
   least 1 ([Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die)).
   Averaged over the settled life, the poorest agent of the median B1 world
   holds 1.001 tokens
-  ([The largest, over a world's life](the-largest-and-the-smallest.md#the-largest-over-a-worlds-life)).
+  ([The largest, over a world's life](b1-lives-and-wealth.md#the-largest-over-a-worlds-life)).
 
 #### Tokens per agent: an example
 
@@ -295,7 +295,7 @@ no questioner gets that low: the best needs 5/3 ≈ 1.67 questions on average.
 |---|---|---|---|
 | tokens over agents | τᵢ / *T*, one per agent | `tokenEntropy` | log₂ *n* (*n* agents) |
 | agents over degrees | share of agents with exactly *d* connections, one per *d* that occurs | `degreeEntropy` | log₂ (number of distinct degrees) |
-| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)) | log₂ *n* |
+| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)) | log₂ *n* |
 
 For tokens the question is: *if you pick one token at random, whose is it?*
 
@@ -316,7 +316,7 @@ log₂ of the number of distinct degrees.
 In a settled B1 world of 100,000 tokens the token evenness is 0.91. The
 degree evenness is only 0.47. Agents pile up on a few numbers of
 connections, while hubs add rare numbers that raise the ceiling
-([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
+([How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)).
 
 #### The effective number
 
@@ -333,7 +333,7 @@ equal shares, would spread the tokens as evenly as they are spread.
 
 The tokens of a settled B1 world are as even as if 47% of its agents held
 them in equal shares
-([Effective numbers](where-do-the-tokens-go.md#effective-numbers)). The
+([Effective numbers](b1-lives-and-wealth.md#effective-numbers)). The
 [diversity score](measuring-health.md#the-diversity-score) reads three of its four spreads in the
 same way.
 
@@ -346,7 +346,7 @@ is more sensitive to the many small holdings, and less to the few large ones.
 Two worlds with the same Gini can have different evenness. Across 1,200
 looks at thirty B1 worlds the two correlate at −0.72. But they do not lie on
 one curve
-([Two measures of the same inequality](where-do-the-tokens-go.md#two-measures-of-the-same-inequality)).
+([Two measures of the same inequality](b1-lives-and-wealth.md#two-measures-of-the-same-inequality)).
 
 #### Entropy in the code
 
@@ -411,7 +411,7 @@ the order tends to reverse.
 
 #### Where mobility is used
 
-[Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)
+[Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)
 measures all three in the baseline worlds.
 
 ## The even split
@@ -447,7 +447,7 @@ the τ tokens are split evenly
 With 3 tokens and one neighbour, an agent stakes 2 at home and 1 on the
 neighbour, so whole tokens tilt the split towards home. The share staked at
 home, by [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling), in the thirty baseline worlds of 100,000 tokens of
-Experiment 10 ([Thirty worlds](a-worlds-life.md#thirty-worlds)):
+Experiment 10 ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)):
 
 | connections | 1 | 2 | 3–4 | 5–9 | 10–49 | 50+ |
 |---|---|---|---|---|---|---|
@@ -514,7 +514,7 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 - [Where the tokens flow](where-the-tokens-flow.md#who-keeps-their-node): an
   agent keeps its node about as often as one of *d* + 1 equal stakers would:
   in 74% of games with one connection, 2.0% with fifty or more.
-- [Do the rich stay rich?](where-do-the-tokens-go.md#a-two-game-rhythm): on a hub
+- [Do the rich stay rich?](b1-lives-and-wealth.md#a-two-game-rhythm): on a hub
   and its leaves the even split overshoots, and wealth swings with a period of
   two games.
 - [Physical inspiration](physical-inspiration.md): an even split is one step of
@@ -906,7 +906,7 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 
 ## Where to go next
 
-- [How unequal is a world, and who stays rich](where-do-the-tokens-go.md):
+- [How unequal is a world, and who stays rich](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich):
   each of these measures, read in thirty B1 worlds.
 - [Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions):
   the effective number beside other ways of counting kinds.

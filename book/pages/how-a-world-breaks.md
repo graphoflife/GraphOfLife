@@ -34,14 +34,14 @@ it dies, however many tokens it holds, and its tokens are dealt out among the
 survivors. This is the **cull**.
 
 Three deaths in four are of this kind
-([Births, deaths and ages](births-deaths-and-ages.md)). And they come in
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). And they come in
 lumps: half of them in games that cut off hundreds of agents at once
 ([How many agents one game removes](power-laws-real-and-apparent.md#how-many-agents-one-game-removes)).
 This page asks how fragile a world is, whether its breaks can be foreseen, and
 what actually severs a region from the rest.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of Experiment 10
-([Thirty worlds](a-worlds-life.md#thirty-worlds)), read over their [settled
+([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)), read over their [settled
 life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on. The page was first written from the thirty worlds
 of 10,000 tokens; where those differ, their numbers are given beside. A
 **big** cut is counted against the size of a world: a thousand agents or more
@@ -75,7 +75,7 @@ If the worst bridge failed, the game would cut off that ninth. Does it?
 **Does a fragile world lose more?** Every game from iteration 500 on of the 30 worlds. x: after the game's unused connections are cut, just before the cull, the largest share of the world that one bridge held to the rest — if that one connection were cut, that many would be cut off ([Cut risk](measuring-networks.md#cut-risk)). y: the share of agents the game really cut off. White: the mean of y in classes of x 0.05 wide; dashed: y = x.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -148,7 +148,7 @@ How large are the games that do the killing?
 **Where the cut-off deaths happen.** Of all agents cut off in games from iteration 500 on of the 30 worlds, the share that died in games which cut off at least n agents, for every n. Where the line is at 0.5, half of all such deaths happened in games at least that large.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -227,7 +227,7 @@ So every connection costs at least one token of flow per game, paid by one
 side or the other. A poor region cannot pay for all its connections. When the
 richer agents beyond the border spend their stakes elsewhere, the border goes
 quiet. Then the region dies, all of it, and its tokens are handed out by
-lottery to the survivors ([The lottery](gains-and-losses.md#the-lottery)).
+lottery to the survivors ([The lottery](b1-lives-and-wealth.md#the-lottery)).
 
 The same price shows connection by connection
 ([Which connections carry nothing](where-the-tokens-flow.md#which-connections-carry-nothing)).
@@ -396,6 +396,6 @@ and how.
 
 ← [How properties scale together](how-properties-scale-together.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
 
-> [!info]- Pages that link here (18)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (16)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

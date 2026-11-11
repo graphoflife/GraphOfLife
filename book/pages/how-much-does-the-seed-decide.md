@@ -39,7 +39,7 @@ them. The more worlds differ by chance alone, the more seeds it takes to tell
 a real change from luck.
 
 The worlds of this page are the thirty baseline worlds of 100,000 tokens of
-[Thirty worlds](a-worlds-life.md#thirty-worlds), seeds 1 to 30. All of them lived to the
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds), seeds 1 to 30. All of them lived to the
 end of their 1,500 iterations. The page was first written from the thirty
 worlds of 10,000 tokens, and their values are given alongside. Four of those
 died out, so their values are for the 26 that lived.
@@ -84,7 +84,7 @@ settle alike:
 **Where 30 worlds settle: people, wealth, families.** One dot per world: its mean over iterations 500 to 1,499, divided by the mean of that value over the 30 worlds, so that every statistic is on the same scale and 1 is the average world. The bar is the median. A column of dots close to 1 means the worlds settle alike; a tall column, that they do not. The dots are spread sideways only so they do not hide one another.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -101,7 +101,7 @@ settle alike:
 **Where 30 worlds settle: the shape of the network, genotypes.** One dot per world: its mean over iterations 500 to 1,499, divided by the mean of that value over the 30 worlds, so that every statistic is on the same scale and 1 is the average world. The bar is the median. A column of dots close to 1 means the worlds settle alike; a tall column, that they do not. The dots are spread sideways only so they do not hide one another.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -169,7 +169,7 @@ near −1 means that as one quantity goes up, the other goes down, with hardly
 an exception. Here, the bigger the hub, the smaller the core.
 [What shape does the network take?](what-shape-does-the-network-take.md)
 shows what such a world looks like, and
-[The largest and the smallest](the-largest-and-the-smallest.md) how a hub
+[The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest) how a hub
 grows and falls.
 
 Hubs of this kind were there in the worlds of 10,000 tokens too. Ten of the
@@ -180,7 +180,7 @@ a world went with its hub far more loosely: a correlation of −0.54. At
 
 ## A world forgets
 
-The single worlds of [A world's life](a-worlds-life.md) wander: their numbers
+The single worlds of [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world) wander: their numbers
 drift up and down over hundreds of iterations. How long does a world remember
 where it was? Cut each world's life, from iteration 100 on, into 14 stretches
 of 100 iterations, and take its mean level in each. Then correlate each
@@ -194,7 +194,7 @@ correlation of a world with its own later self is its
 **How long a world remembers its level.** For each statistic, the correlation between a world's level in one stretch of 100 iterations and its level a given number of iterations later, over all pairs of stretches in the 30 worlds. 1 would mean a world stays exactly where it was; 0 that where it was says nothing about where it will be. Because each world's own mean is taken away first, a world cut into only 14 stretches shows negative correlations at long lags even if it simply wandered: the grey dashes are what a random walk, cut and centred the same way, gives (averaged over 200 sets of as many walks), and the grey dots what levels with no memory at all give.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -249,7 +249,7 @@ world moving around its own average, like the weather:
 **Variation between worlds, and within each world.** All the variation of a statistic's 100-iteration levels — 14 stretches in each of 30 worlds — split into the part that lies between the worlds' own averages (blue) and the part that is each world moving around its own average (the rest of the column, grey).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -281,7 +281,7 @@ crowded in the second?
 **First half against second half.** One dot per world. Left: its mean number of agents over iterations 100–749 (x) against its mean over iterations 750–1,499 (y). Right: the same for connections. A dot on the dashed diagonal had the same mean in both halves. r is the correlation over the 30 dots.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -314,7 +314,7 @@ alike:
 **Longer looks, smaller differences.** For each statistic, how much the 30 worlds differ — the standard deviation of their averages divided by the mean — when each world is measured by its average over its last L iterations, for L from 100 to 1,400.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -357,7 +357,7 @@ seeds:
 **Seeds a condition needs.** How many worlds each of two conditions needs for a change of a given size in the average to be found four times in five at the 5% level, if worlds vary as much as these do. Dashed: worlds measured over their last fifth (iterations 1,200–1,499); solid: over iterations 500–1,499. The grey line is 30 seeds.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -376,7 +376,7 @@ Turn this around, and take 30 seeds per condition with the settled-life
 measure. Then the smallest change seen four times in five is about 8% in the
 number of agents, 9% in connections and 5% in inequality. Larger worlds make
 sharper experiments, at a price: each costs about eight times the computing
-([Thirty worlds](a-worlds-life.md#thirty-worlds)).
+([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)).
 
 Two more things follow for experiments:
 
@@ -426,12 +426,12 @@ over their settled life, from iteration 500 on.
 
 ## Where to go next
 
-- [A world's life](a-worlds-life.md): how a single world wanders.
+- [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world): how a single world wanders.
 - [Stars and hubs](measuring-networks.md#stars-and-hubs): the worlds that one agent holds
   together.
 - [How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs): the formula behind
   the seed counts, step by step.
-- [Thirty worlds](a-worlds-life.md#thirty-worlds): the thirty worlds of this page, and the
+- [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds): the thirty worlds of this page, and the
   other questions asked of them.
 
 ## How this was made
@@ -588,7 +588,7 @@ written by `python3 gol_lab.py analyse E03`.
   giant hub, lie far from the rest. And more than half (54%) of the variation
   in the share of agents in the core lies between the worlds. So the page now
   says that the spread is *mostly* time. It changed when it was rewritten
-  from the thirty worlds of Experiment 10 ([Thirty worlds](a-worlds-life.md#thirty-worlds)).
+  from the thirty worlds of Experiment 10 ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)).
 - **11 October 2026.** The page said that a world keeps something of its own
   in how densely it is connected, "perhaps a trace of its starting ring". At
   10,000 tokens, the two halves of a world's life agreed in connections with
@@ -601,10 +601,10 @@ written by `python3 gol_lab.py analyse E03`.
 <!-- turns -->
 ---
 
-← [The life of a B1 world](a-worlds-life.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) →
+← [B1 and B2: the two baselines](b1-and-b2.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) →
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
 > [!info]- Pages that link here (11)
-> [The rules in detail](rules-in-detail.md) · [The life of a B1 world](a-worlds-life.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [The rules in detail](rules-in-detail.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

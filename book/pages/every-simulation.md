@@ -65,9 +65,9 @@ Experiments 3 to 6 read Experiment 2's.
 |  | question | on | conditions (and what each changes) | seeds | tokens | iterations | runs on disk | page |
 |---|---|---|---|---|---|---|---|---|
 | E01 | Is a run reproducible? | B1 | *straight*; *stopped at 10*; *cut off at 15*; *all BLAS threads* | 1–3 | 10,000 | 30 | 12 | [Is a run reproducible?](is-a-run-reproducible.md) |
-| E02 | The life of a world | B1 | *baseline* | 1–30 | 10,000 | 3,000 | 30 | [A world's life](a-worlds-life.md) |
+| E02 | The life of a world | B1 | *baseline* | 1–30 | 10,000 | 3,000 | 30 | [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world) |
 | E03 | How much does the seed decide? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [How much does the seed decide?](how-much-does-the-seed-decide.md) |
-| E04 | Where do the tokens go? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [Where do the tokens go?](where-do-the-tokens-go.md) |
+| E04 | Where do the tokens go? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) |
 | E05 | What shape does the graph take? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [What shape does the network take?](what-shape-does-the-network-take.md) |
 | E06 | Who wins, and for how long? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [Genotypes and lineages](genotypes-and-lineages.md) |
 | E07 | Do the brains matter at all? | B1 | *baseline*; *brains never change* (mutation_sparsity = 0); *decisions by chance* (random_decisions = on) | 1–30 | 10,000 | 3,000 | 90 | [Do the brains matter?](do-the-brains-matter.md) |

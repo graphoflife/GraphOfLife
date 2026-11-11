@@ -28,7 +28,7 @@ them. How unevenly they hold them is summed up by the
 [Gini coefficient](measuring-tokens.md#the-gini-coefficient): 0 if every agent
 held the same, near 1 if one held almost everything. B1's worlds of 100,000
 tokens settle near 0.47, and their richest tenth hold about 42% of the tokens
-([Where do the tokens go?](where-do-the-tokens-go.md)).
+([Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)).
 
 Nothing in the rules caps a fortune. In every game each agent stakes all it
 holds on its own node and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")', and whoever stakes most on a node
@@ -42,7 +42,7 @@ Four things could hold it back:
    neighbours sends its tokens out along every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and receives theirs.
    Played over and over, this leaves each agent holding tokens in proportion to
    its connections plus one, as heat settles in a body
-   ([Rich agents are connected agents](where-do-the-tokens-go.md#rich-agents-are-connected-agents)).
+   ([Rich agents are connected agents](b1-lives-and-wealth.md#rich-agents-are-connected-agents)).
    Wealth is then as unequal as connections are.
 2. **Coalitions.** In B1, small stakers on a node can join to outweigh the
    largest one, and in every game they win about a third of all nodes
@@ -50,10 +50,10 @@ Four things could hold it back:
    A rich agent cannot hold a node against a crowd.
 3. **Death and birth.** Agents die and newborns start small. The faster a
    world turns over, the less time a fortune has to grow.
-4. **The [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.").** The tokens of an agent that dies are handed on. In B1
+4. **The share-out.** The tokens of an agent that dies are handed on. In B1
    every survivor has the same chance at each token of an estate, rich or
    poor, which works like a basic income
-   ([The tokens of the dead](where-do-the-tokens-go.md#the-tokens-of-the-dead),
+   ([The tokens of the dead](b1-lives-and-wealth.md#the-tokens-of-the-dead),
    [The estate of the dead](measuring-lives.md#the-estate-of-the-dead)).
 
 This page was planned as an experiment on the second: B1 with coalitions
@@ -274,7 +274,7 @@ same thing.
 
 ## Where to go next
 
-- [Where do the tokens go?](where-do-the-tokens-go.md): B1's inequality, and
+- [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich): B1's inequality, and
   why tokens follow connections.
 - [The estate of the dead](measuring-lives.md#the-estate-of-the-dead): every rule for handing on an estate,
   and how each levels or pools.

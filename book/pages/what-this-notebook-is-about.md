@@ -129,7 +129,7 @@ one of them.
 - **The baselines B1 and B2.** The two sets of rules every experiment starts
   from ([B1 and B2: the two baselines](b1-and-b2.md)). Thirty worlds of the
   first, about 14,000 agents each, are looked at from every side
-  ([Thirty worlds](a-worlds-life.md#thirty-worlds)). The second is built so that its network
+  ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). The second is built so that its network
   cannot break ([A world that cannot break](a-world-that-cannot-break.md)).
 - **Agents' lives, wealth, the game and the flow of tokens, the shape of the
   network, the size of a world, and brains.** The baseline measured every way,
@@ -186,7 +186,7 @@ experiment into the folder `GraphOfLifeRuns/` — here Experiment 10, the thirty
 baseline worlds of 100,000 tokens. `python3 gol_lab.py analyse E10` computes an
 experiment's results. And `python3 book_figures.py life` draws the figures of
 one page from the runs, and writes them into the pages — here
-[A world's life](a-worlds-life.md). On the same kind of computer, with the same
+[A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world). On the same kind of computer, with the same
 versions of the libraries, every run, figure and number comes out identical.
 [Is a run reproducible?](is-a-run-reproducible.md) shows why, and
 [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots) says how experiments are run.

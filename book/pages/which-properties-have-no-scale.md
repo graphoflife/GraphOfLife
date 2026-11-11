@@ -151,7 +151,7 @@ explains step by step. A critical system breaks it.
 **Does it average out?** How widely a share varies, relative to its middle: the 90th percentile minus the 10th, divided by the median. Left: the share of a lattice held by its largest cluster, over the 200 lattices of each size, at the threshold of percolation (yellow) and above it, at p = 0.70 (blue). Right: for every world, over the games of its settled life, the share of the agents at the start of a game that the game cut off (orange) and that starved in it (violet), in the worlds of Experiment 8 over iterations 500 to 599; small grey dots, the share cut off in the worlds of 10,000 and 100,000 tokens, over iterations 500 to 1,499. Dashed: what a sum of independent parts does — its spread falls as one over the square root of its size — drawn through the smallest lattices above the threshold (left) and through the worlds of 3,200 tokens (right).
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](a-worlds-life.md)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`. And the lattices of the figure above.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`. And the lattices of the figure above.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -217,7 +217,7 @@ share.
 **Small cuts average out, big cuts keep their share.** For every share x of a world, the share of games that cut off at least that share of the agents alive at their start; both axes logarithmic. Left: the worlds of Experiment 8, the three of each size pooled, over the games of iterations 500 to 599, one line per size from blue-green (3,200 tokens) to yellow (409,600). Right: the worlds of 10,000 and of 100,000 tokens, pooled, over iterations 500 to 1,499. The dashed line marks a tenth of a world.
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](a-worlds-life.md)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -357,7 +357,7 @@ behind them is then 1/*s*: exactly γ = 2. We checked it on such a tree of
 200,000 members, drawn by this page's code: 0.500 at *s* = 2, 0.0101 at
 *s* = 100, 0.000100 at *s* = 10,000. A world grows its hanging trees in much
 that way: every child is born joined to agents already there, beside its
-parent ([How births build the network](how-agents-have-children.md#how-agents-have-children)). Above about
+parent ([How births build the network](b1-lives-and-wealth.md#how-agents-have-children)). Above about
 ten agents, the worlds' branches fall at about the tree's rate, from fewer of
 them, since a world has fewer bridges and more of them hold a single leaf.
 That the worlds inherit the law from the way they grow is our hypothesis, not
@@ -395,7 +395,7 @@ as more draws from the same distribution would. The richest agent of a world
 holds 224 tokens in the median look at 3,200 tokens, and more as worlds grow,
 but ever more slowly: 2,080, 2,214 and 2,536 tokens at 102,400, 204,800 and
 409,600. Over all sizes it grows as *N*^0.48 (0.37 to 0.61), as
-[The largest and the smallest](the-largest-and-the-smallest.md#the-largest-by-the-size-of-a-world)
+[The largest and the smallest](b1-lives-and-wealth.md#the-largest-by-the-size-of-a-world)
 found, but with a bend downward whose interval stays below zero; over the
 three largest sizes, as *N*^0.12 (−0.09 to 0.59). The largest of *N* values
 drawn from the power law of the tail would grow as *N*^0.7. The thirty worlds
@@ -403,7 +403,7 @@ of 100,000 tokens agree: their richest agent holds 1,565 tokens in the median
 world, and between 1,149 and 2,214 in the middle half of them. A few go far
 beyond, most of them stars, worlds held together by a single hub: in one,
 the richest holds 11,406. Something holds the rich to a few thousand tokens.
-[How a rich agent drains back](gains-and-losses.md#how-a-rich-agent-drains-back)
+[How a rich agent drains back](b1-lives-and-wealth.md#how-a-rich-agent-drains-back)
 suggests what: an agent far above its resting share, about 1.7 tokens for
 each of its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), loses the excess within a few games, so a fortune
 does not last long enough to grow with the world.

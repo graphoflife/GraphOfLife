@@ -277,7 +277,7 @@ the viewer charts, and every one has a note that says how it is computed.
 | `cladesInWindow` | families: ancestors eight iterations back | [Families](measuring-evolution.md#families) |
 | `births` | children born (phase 1 rows) | [Births and deaths](measuring-lives.md#births-and-the-four-ways-to-die) |
 | `starved`, `orphaned` | agents the cleanup removed for having no tokens, or for being cut off; deaths of age (B2's [`max_age`](settings.md#max_age)) are in no field, only in a frame's `cleanup.aged` | [Births and deaths](measuring-lives.md#births-and-the-four-ways-to-die) |
-| `gainers`, `losers`, `maxTokenAdded`, `maxTokenLost`, `redistributed` | who gained and who lost in the phase, the extremes, and the tokens of the dead dealt out | [Gains and losses](gains-and-losses.md#gains-losses-and-the-share-out) |
+| `gainers`, `losers`, `maxTokenAdded`, `maxTokenLost`, `redistributed` | who gained and who lost in the phase, the extremes, and the tokens of the dead dealt out | [Gains and losses](b1-lives-and-wealth.md#gains-losses-and-the-share-out) |
 | `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, `handovers` | how parents gave (phase 1) | [Reproduction statistics](measuring-lives.md#reproduction-statistics) |
 | `selfAllocationShare`, `heldHomeShare` | staking on one's own node, and keeping it (phase 2) | [Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node) |
 | `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on neighbours, and the connections they keep alive (phase 2) | [Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation) |
@@ -387,14 +387,14 @@ what the estimates assume. The figure is redrawn by `python3 gol_lab.py costs`.
 
 Take the thirty runs of Experiment 2: 10,000 tokens and 3,000 iterations
 each. They are the worlds the study of the baseline was first written from
-([The life of a B1 world](a-worlds-life.md) lists their settings). They took
+([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world) lists their settings). They took
 26 hours of computing, done in 7.2 hours on four workers, and fill 7.8 GB. No
 run needed more than 651 MB of memory.
 
 That is the unit the experiments on the baseline are sized in: one condition
 of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 100,000 tokens, 1,500 iterations each
-([Thirty worlds](a-worlds-life.md#thirty-worlds)), took 211 hours and fill
+([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)), took 211 hours and fill
 58 GB.
 
 ### The rules for sizing an experiment

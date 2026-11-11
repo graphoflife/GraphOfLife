@@ -324,7 +324,7 @@
     },
     {
       "name": "share-out",
-      "page": "gains-and-losses",
+      "page": "b1-lives-and-wealth",
       "says": "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.",
       "anchor": "gains-losses-and-the-share-out"
     },
@@ -456,7 +456,7 @@
     },
     {
       "name": "token curvature",
-      "page": "gains-and-losses",
+      "page": "b1-lives-and-wealth",
       "says": "How much richer an agent's neighbourhood is than the agent itself.",
       "anchor": "token-curvature"
     },

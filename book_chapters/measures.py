@@ -244,7 +244,7 @@ def gains(ch: F.Chapter) -> None:
                      (0, 0.38))],
         guides=[{"axis": "y", "at": 0}],
         caption="The token curvature of an agent is the sum, over its neighbours, of how many more tokens "
-                "the neighbour holds than it does ([Token curvature](gains-and-losses.md#token-curvature)): "
+                "the neighbour holds than it does ([Token curvature](b1-lives-and-wealth.md#token-curvature)): "
                 "negative for an agent richer than its neighbourhood, positive for one poorer. For each "
                 "class of curvature, the mean change of an agent's tokens over the game divided by the "
                 "tokens it held at the start, over the agents that survived the game. Yellow: all agents; "
@@ -462,7 +462,7 @@ def flow(ch: F.Chapter) -> None:
                 f"the straight line fitted to the points has slope {slope:.2f}, and the even split accounts "
                 f"for {100 * r2:.0f}% of the variance (R², [Fitting a straight line](statistics.md#fitting-a-straight-line))"
                 + (f"; over the {without['worlds']} worlds that are not held together by a single hub "
-                   f"([The largest and the smallest](the-largest-and-the-smallest.md)), slope {without['slope']:.2f} and {100 * without['r2']:.0f}%."
+                   f"([The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)), slope {without['slope']:.2f} and {100 * without['r2']:.0f}%."
                    if without["worlds"] < len(alive) else "."),
         recipe=recipe(W.surviving_text(), SAMPLE.replace("every 25 iterations by `book_figures.sample_pass` ", ""),
                       ["For every 250th iteration t from 500 on, read frame `2·t` (the start of the game): each "

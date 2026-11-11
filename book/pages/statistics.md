@@ -125,7 +125,7 @@ In the code, this is `bands` in `gol_analysis.py`.
 - A band says nothing about how a single world moves through time. A world
   near the top of the band at one moment can be near the bottom later. To show
   single worlds, the notebook draws them separately, as in
-  [The life of a B1 world](a-worlds-life.md).
+  [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world).
 - After a world dies, the band is made of fewer worlds. In the baseline of
   10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), four of thirty died, and its last thousand iterations are
   bands of 26. In the baseline of 100,000 tokens, none died.
@@ -152,16 +152,16 @@ life is 1,000 iterations long.
 
 A world's first few hundred iterations are unlike the rest of its life. It
 starts with a boom and a crash
-([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
+([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 Its births, deaths and structure take hundreds of iterations to settle into
 the ranges they keep
-([Births, deaths and ages](births-deaths-and-ages.md)). Averaging the youth
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). Averaging the youth
 in would mix two different things.
 
 #### Why a long mean, and not the end?
 
 A single world does not settle at one level. It **wanders**, up and down over
-hundreds of iterations ([The life of a B1 world](a-worlds-life.md)). Where it
+hundreds of iterations ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). Where it
 stands at iteration 2,999, or over its last few hundred iterations, is
 wherever the wander happens to have taken it. A mean over 2,500 iterations
 averages much of the wander away. So it says more about the world, and less
@@ -295,7 +295,7 @@ reach only 2 times in 100.
 
 #### Correlation is not cause
 
-[How unequal is a world, and who stays rich](where-do-the-tokens-go.md) finds
+[How unequal is a world, and who stays rich](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) finds
 that agents with more connections hold more tokens. The correlation between
 the number of connections and the logarithm of the tokens is *r* = 0.50. That alone cannot say
 which way it works. Connections may make an agent rich, riches may bring
@@ -390,7 +390,7 @@ Two things follow:
 - Take a quantity that grows by the same **factor** every step, doubling
   every three iterations say. Against time, on a logarithmic value axis, it is
   a **straight line**
-  ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
+  ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 - Zero and negative numbers cannot be drawn: log 0 does not exist. Figures
   with logarithmic axes leave such values out, and say so.
 
@@ -1058,7 +1058,7 @@ neuroscience it measures the dimension of neural activity (Gao and others
 
 - [How much does the seed decide?](how-much-does-the-seed-decide.md): the
   spread of thirty worlds, statistic by statistic.
-- [The life of a B1 world](a-worlds-life.md): bands at work, and single
+- [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world): bands at work, and single
   worlds drawn one by one.
 - [Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly): how to find an exponent from a
   distribution, and where its tail starts.

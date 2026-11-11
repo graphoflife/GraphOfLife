@@ -100,7 +100,7 @@ B2's healthy but poor.
 ## Where it is used
 
 - **B1**, the world the notebook first set out to understand, is the start
-  of Experiments 1 to 8, 10, 12, 13 and 37; [Thirty worlds](a-worlds-life.md#thirty-worlds)
+  of Experiments 1 to 8, 10, 12, 13 and 37; [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)
   introduces its study.
 - **B2**, the ground for open-ended evolution, is the start of Experiments 9
   and 14 to 21 and most later ones;
@@ -119,10 +119,10 @@ B2's healthy but poor.
 <!-- turns -->
 ---
 
-[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [The life of a B1 world](a-worlds-life.md) →
+[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [How much does the seed decide?](how-much-does-the-seed-decide.md) →
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
 > [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

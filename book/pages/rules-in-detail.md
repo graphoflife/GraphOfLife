@@ -130,7 +130,7 @@ clustering fell to 0.27: about half was lost, but it is still far above the
 In B1, every game cuts the connections that carried no tokens in it, so the
 ring is forgotten within a few iterations. It matters mainly as a fair,
 connected start: every founder can reach every other.
-[The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations) follows what
+[The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations) follows what
 the founders make of it.
 
 ## Seeds and the random stream
@@ -170,7 +170,7 @@ written down with the run. From the seed, two streams are started:
    numpy's `RandomState` (the Mersenne Twister algorithm), seeded with the
    run's seed. It gives the founders' brains, every tie broken at random and
    every probabilistic yes-or-no decision. It also gives every random input of
-   a brain, every [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of tokens and every mutation.
+   a brain, every share-out of tokens and every mutation.
 
 The program always takes its draws in the same order: agents are visited in
 increasing order of id, and so are neighbours. So the whole history of a world
@@ -328,7 +328,7 @@ reads as 1 ([What the brains are like](what-the-brains-are-like.md)).
 - **The child's tokens.** A parent with τ tokens gives its child
   ⌊*f*(*ā*, *b̄*) · τ⌋: the share of its tokens, rounded down to a whole
   number. Here *ā* and *b̄* are its two reproduction outputs, averaged over
-  all its candidates ([How agents have children](how-agents-have-children.md),
+  all its candidates ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network),
   [One iteration, step by step](one-iteration.md)). B2 adds limits: a parent
   keeps at least one token, a child needs at least 10, and an agent with 8
   connections or more has no child
@@ -419,7 +419,7 @@ an agent spreads its tokens over its candidates or puts them all on one
   parent itself included — outputs 2–3 with mode 4–5. In the settled life of
   the 30 B1 worlds of 100,000 tokens, 11.5% of children are joined to none of
   their parent's candidates at birth
-  ([How agents have children](how-agents-have-children.md)). In B2 a newborn
+  ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)). In B2 a newborn
   is first joined to its parent and to two of the parent's neighbours, drawn
   at random, and the brain decides about the others.
 - **Handing over a connection**: one decision per neighbour of the parent —
@@ -1215,14 +1215,14 @@ their own ([The settled life of a world](statistics.md#the-settled-life-of-a-wor
 
 Of the 30 baseline worlds of 10,000 tokens, four died: after 4, 313, 1,547
 and 2,184 iterations. Of the 30 of 100,000 tokens, none did
-([A world's life](a-worlds-life.md)).
+([A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)).
 
 Iterations are numbered from 0. So "died after *N* iterations" means that the
 iteration numbered *N* − 1 was the last to run, and it ended with 20 agents or
 fewer.
 
 ### Where it is used (when a world ends)
-- [A world's life](a-worlds-life.md): the four B1 worlds of 10,000 tokens that
+- [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world): the four B1 worlds of 10,000 tokens that
   died out, one of them in its fourth iteration.
 - [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
   four of ten worlds of 5,000 tokens died out when their brains could see, and
@@ -1238,7 +1238,7 @@ fewer.
   ring starts, with the real ring of seed 1 drawn.
 - [Clustering](measuring-networks.md#clustering) and [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap): the two
   measures a small world is judged by.
-- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations): how the
+- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations): how the
   founders become a world.
 - [Is a run reproducible?](is-a-run-reproducible.md): the experiment that
   tested all this, and found the threads.
@@ -1246,7 +1246,7 @@ fewer.
   differently thirty worlds of the same settings turn out.
 - [How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs): why an experiment
   runs many seeds.
-- [How agents have children](how-agents-have-children.md): the decisions of
+- [How agents have children](b1-lives-and-wealth.md#how-births-build-the-network): the decisions of
   a birth, in the worlds.
 - [The even split](measuring-tokens.md#the-even-split): what the rule does when no score is above
   zero, and why that is common.

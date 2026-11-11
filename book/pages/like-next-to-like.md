@@ -109,7 +109,7 @@ strangers, in their tokens, their connections, their ages and their
 genotypes? And how far does the likeness reach?
 
 The worlds are the thirty of 100,000 tokens of
-[Thirty worlds](a-worlds-life.md#thirty-worlds), about 14,000 agents each.
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds), about 14,000 agents each.
 This page was first written from the worlds of 10,000 tokens, the 26 of
 thirty that lived to the end, about 1,300 agents each. Where the two sizes
 differ, both are given. Every value is read at five moments of each world's
@@ -132,7 +132,7 @@ cannot decide a correlation alone.
 **Are neighbours alike?** For every connection of a world, the two agents at its ends: the correlation of their tokens, of their ages and of their numbers of connections (tokens and age as ln(1 + x), connections as ln k), counting every connection both ways round. One dot per world, the mean over five moments (after the games of iterations 500, 750, 1,000, 1,250 and 1,499); the bar is the median. The same values shuffled among a world's agents give correlations within 0.01 of zero in the median world, and within 0.09 in every world; the last column is the assortativity of [How properties scale together](how-properties-scale-together.md), taken of ln k instead of k.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -183,7 +183,7 @@ Why would the old sit beside the old? A likely reason: agents die together,
 when a piece of the world is cut off
 ([How a world breaks](how-a-world-breaks.md)). And they are born into their
 parents' neighbourhoods
-([How the network grows](how-agents-have-children.md#how-the-network-grows)).
+([How the network grows](b1-lives-and-wealth.md#how-the-network-grows)).
 So the young arrive where the old are gone, side by side. Agents that arrived
 together live together, as **cohorts**.
 
@@ -201,7 +201,7 @@ their values differ a little from those above.
 **How alike, how far apart.** For pairs of agents r steps apart, the correlation of their tokens, ages and connections (as in the figure above), for r = 1 to 15. For each world, pairs from breadth-first searches out of 150 agents drawn at random at each of the five moments; the coloured line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. Grey dashes: the median when each agent's tokens (or age) are first shuffled among the agents with about as many connections (1, 2, 3–4, 5–9, 10–49, 50 and more) — what an agent's place in the network explains without any closeness of its own.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -240,7 +240,7 @@ keeps it, and a change gives the brain a new one.
 **Kin, near and far.** For pairs of agents r steps apart (as in the figure above), the share that carry the same genotype, divided by the share among all pairs of agents of the world, on a logarithmic axis: a straight falling line would be a relatedness that halves over a fixed number of steps. The line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten. From 9 steps on, at least half of the worlds have no such pair at all. In the others such pairs are rare: at most an eighth of what chance would give at 9 steps, and less than a fortieth from 11 steps on.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -454,5 +454,5 @@ iterations each.
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
 > [!info]- Pages that link here (11)
-> [Glossary](glossary.md) · [The life of a B1 world](a-worlds-life.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [Glossary](glossary.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How different are the agents?](how-different-are-the-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

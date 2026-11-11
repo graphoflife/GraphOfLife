@@ -388,7 +388,7 @@ def e08_text(specs: List[Any]) -> str:
 def pair_text(small: List[Any], large: List[Any]) -> str:
     return (f"The {len(small)} baseline runs of Experiment 2 that lived past iteration {SETTLED_PAIR[1]:,} "
             f"(`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world]"
-            f"(a-worlds-life.md)) and the {len(large)} of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 "
+            f"(b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the {len(large)} of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 "
             "tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). "
             "They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.")
 

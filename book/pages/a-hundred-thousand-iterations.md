@@ -67,7 +67,7 @@ tested.
 
 No world of the notebook had then lived longer than 3,000 iterations. That
 is how long the first thirty worlds of B1, at 10,000 tokens, were run
-([The life of a B1 world](a-worlds-life.md)). The largest worlds, of up to
+([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). The largest worlds, of up to
 409,600 tokens, had lived 600
 ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
 A reader may fairly ask whether cooperation is impossible here, or only slow.
@@ -113,7 +113,7 @@ computing.
   scale of ten thousand iterations, is what 3,000 iterations cannot show.
 - **Births fall as a world ages**, long after it has settled. In the worlds
   of 10,000 tokens they fell by 41% from iterations 100–200 to the end
-  ([Births and deaths slow down](a-worlds-life.md#births-and-deaths-slow-down)).
+  ([Births and deaths slow down](b1-lives-and-wealth.md#births-and-deaths-slow-down)).
   That was the clearest sign of an adaptation that the study of the
   baseline saw. An adaptation that takes ten thousand iterations would not
   have been seen at all. Later work dated the fall. In those worlds, births
@@ -364,7 +364,7 @@ it. A frame that was not kept is a frame that has not been made again yet.
 - **The brains**, at every kept checkpoint: the gain and the probes of
   [What the brains are like](what-the-brains-are-like.md). They say what a
   brain responds to, and how much.
-- **Everything of [Thirty worlds](a-worlds-life.md#thirty-worlds)**, as
+- **Everything of [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)**, as
   block means over the whole run. They are set beside the bands of the
   baseline worlds and of
   [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens).

@@ -31,7 +31,7 @@ by the tokens that crossed them. Each picture is read for what it shows, and
 for the questions it raises.
 
 The world is one of the thirty of 100,000 tokens of
-[Thirty worlds](a-worlds-life.md#thirty-worlds).
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds).
 
 ## How a network is drawn
 
@@ -88,7 +88,7 @@ white.
 | Degree | its number of connections ([Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling)) |
 | Token change (signed) | its tokens now minus its tokens before the phase; a newborn counts from 0 |
 | Token change (magnitude) | the size of that change |
-| Token curvature (signed) | Σ over its neighbours of (their tokens − its tokens) ([Token curvature](gains-and-losses.md#token-curvature)) |
+| Token curvature (signed) | Σ over its neighbours of (their tokens − its tokens) ([Token curvature](b1-lives-and-wealth.md#token-curvature)) |
 | Token curvature (before phase) | the same, on the network as it stood before the phase; newborns have none |
 | Loops through it | fundamental cycles of a breadth-first spanning tree through it ([Loops](measuring-networks.md#loops)) |
 | Triangles | the triangles it is a corner of ([Clustering](measuring-networks.md#clustering)) |
@@ -165,14 +165,14 @@ same places in every picture. What each colouring shows:
   proof either way.
 - **Change in the last game.** Almost everything is dark: most agents ended
   the game with what they had, or close to it
-  ([Gains and losses](gains-and-losses.md)). The few bright dots are the big
+  ([Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out)). The few bright dots are the big
   winners and losers of the game.
 - **Token curvature before the game.** Blue dots are richer than their
   neighbourhood (hills), red dots poorer (valleys). The hubs are blue, and
   the clump around the largest hub is red: every agent there is poorer than
   its rich neighbour. The landscape of wealth is a set of peaks with valleys
   around them. And tokens flow downhill, from the peaks into the valleys
-  ([Tokens run downhill](gains-and-losses.md#tokens-run-downhill)).
+  ([Tokens run downhill](b1-lives-and-wealth.md#tokens-run-downhill)).
 - **Families.** Each agent is coloured by the genotype, among those alive 100
   iterations earlier, from which its own genotype descends
   ([Families](measuring-evolution.md#families)). The seven largest families of the whole
@@ -254,7 +254,7 @@ Five cautions apply to every picture the viewer draws:
   distance, the measure behind cohorts and families.
 - [Genotypes, families and the common ancestor](measuring-evolution.md#genotypes-families-and-the-common-ancestor): what a family
   is, and how lines of descent are drawn over time.
-- [Gains and losses](gains-and-losses.md): the token curvature and the tokens
+- [Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out): the token curvature and the tokens
   that run downhill.
 - [Where tokens flow](where-the-tokens-flow.md): what every connection of
   every world carries.
@@ -344,5 +344,5 @@ colours`.
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 
 > [!info]- Pages that link here (8)
-> [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

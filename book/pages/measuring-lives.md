@@ -96,7 +96,7 @@ start of a reproduction phase, 3.1 have a child.
 Here are the five rates of a settled B1 world. Each is a world's mean over
 iterations 500 to 1,499. The table gives the median of the 30 worlds of
 100,000 tokens (Experiment 10;
-[Births, deaths and ages](births-deaths-and-ages.md)):
+[Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)):
 
 | per hundred agents | after reproduction | after the game |
 |---|---|---|
@@ -106,7 +106,7 @@ iterations 500 to 1,499. The table gives the median of the 30 worlds of
 
 About as many agents die as are born: the typical settled world hardly
 changes in size, while its members come and go
-([A world's life](a-worlds-life.md#a-worlds-life)). Three deaths in four are
+([A world's life](b1-lives-and-wealth.md#a-worlds-life)). Three deaths in four are
 cuts. The worlds of 10,000 tokens (Experiment 2) had a little less of
 everything: 3.1 births per hundred agents.
 
@@ -145,9 +145,9 @@ agent in a hundred has a child in each iteration. In the ten B2 worlds of
 ### Where it is used (births and the four ways to die)
 - [One iteration, step by step](one-iteration.md#what-an-iteration-does-on-average):
   what an average iteration of a settled world does.
-- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations):
+- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
   births and deaths in a world's youth.
-- [Births, deaths and ages](births-deaths-and-ages.md): the rates over a
+- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages): the rates over a
   world's life.
 - [Building B2: a world that cannot break](a-world-that-cannot-break.md#who-dies-and-why):
   which deaths a world needs.
@@ -179,7 +179,7 @@ tokens of the old ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and
 **The baseline rule**, `uniform`, deals the pool in one random draw, each token
 to a survivor drawn with equal chance. In the median settled B1 world of
 100,000 tokens that is about 1,300 tokens per game, 1.3% of all tokens
-([Where do the tokens go?](where-do-the-tokens-go.md#the-tokens-of-the-dead)).
+([Where do the tokens go?](b1-lives-and-wealth.md#the-tokens-of-the-dead)).
 Rich and poor have the same chance at every token, so the estate levels the
 world: in ten B1 worlds, the more of it a game scatters, the more the
 [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) falls, a correlation of −0.78 between
@@ -287,7 +287,7 @@ An agent that never outlives a game has lifetime 0, and is not counted. That
 is a newborn cut off in the cleanup after its birth, or one that dies in the
 cleanup after its first game. There are many: in the settled B1 worlds of
 100,000 tokens, nearly a third of all newborns
-([Births, deaths and ages](births-deaths-and-ages.md)).
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)).
 
 ### Lives that have not ended
 
@@ -353,7 +353,7 @@ understate the long lives too.
 The curve *S*(*L*) starts at 1 and falls in steps. The notebook draws it on
 [logarithmic axes](statistics.md#logarithmic-axes-and-power-laws). Then both
 the many short lives and the few long ones are visible
-([Births, deaths and ages](births-deaths-and-ages.md),
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages),
 [Genotypes and lineages](genotypes-and-lineages.md)).
 
 The **median lifetime** is the smallest *L* with *S*(*L* + 1) ≤ ½: half of all
@@ -378,7 +378,7 @@ That is why the living look so old. In the 30 B1 worlds of 100,000 tokens
 (Experiment 10), about half of the agents that live through a game are gone
 within ten iterations. Two thirds are, if the newborns that never do are
 counted too. Yet the median age of the agents alive at the end is 54
-([Births, deaths and ages](births-deaths-and-ages.md)).
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)).
 
 In general, take a world in a steady state, where lifetimes *L* occur with
 frequency *p*(*L*) and have mean μ. The agents alive at a random moment have
@@ -396,7 +396,7 @@ point of its life. This is the *inspection paradox* of renewal theory.
 The B1 worlds of 10,000 tokens are not exactly in a steady state: their births
 slow down for over a thousand iterations. But the effect is the same in kind.
 Those of 100,000 tokens are in one from iteration 500 on
-([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
+([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 ### The ages of a steady world
 
@@ -422,7 +422,7 @@ Two examples. In the B1 worlds of 100,000 tokens, the lives begun from
 iteration 500 to 1,399 last 41.3 iterations on average. So the newborns should
 be 1/41.3 = 2.4% of the living, and the median age of the living 55. Over
 iterations 500 to 1,499 the worlds had 2.3 to 2.6% newborns, and a median age
-of 55 ([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
+of 55 ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 In B2 every agent lives exactly 100 iterations. So in a steady B2 world, each
 age from 0 to 99 holds one agent in a hundred. Such a world keeps its size only
@@ -461,7 +461,7 @@ the robust. A hazard that rises with age is ageing in the usual sense.
 
 The worlds show both ends. In the settled B1 worlds of 100,000 tokens the
 hazard falls at every age. It is 21% at age 1, 2.7% at 10 and 1.1% at 100
-([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)). In B2 it is 0 at
+([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)). In B2 it is 0 at
 every age below 100, and every agent that reaches 100 dies at it: ageing at
 its sharpest.
 
@@ -484,12 +484,12 @@ the area under the survival curve from *L* = 1 to 100. Every cohort born at
 least 100 iterations before the end can be measured by it in full. In the
 median B1 world of 100,000 tokens, an agent born in iterations 1 to 24 lived 5
 of its first 100 iterations. One born from iteration 500 on lived 28 to 31
-([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
+([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 ### Where it is used (age)
-- [Births, deaths and ages](births-deaths-and-ages.md): how long agents live,
+- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages): how long agents live,
   and how old the living are, in the B1 worlds.
-- [How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life): the ages of the
+- [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life): the ages of the
   living, the cohorts and the hazard, iteration by iteration.
 - [Building B2: a world that cannot break](a-world-that-cannot-break.md#old-age):
   a world in which every agent dies at 100.
@@ -550,7 +550,7 @@ a world of 10,000 tokens, `reproTokenShare` = 13/10,000 = 0.0013.
 The baseline's worlds show the same gap. In the median B1 world of 100,000
 tokens, over its settled life, parents give 36% of what they hold. Yet all the
 tokens given to children in one phase are 1.3% of the world's
-([How births build the network](how-agents-have-children.md)).
+([How births build the network](b1-lives-and-wealth.md#how-births-build-the-network)).
 
 ### Links of a child
 
@@ -566,7 +566,7 @@ network. It dies in the cleanup that ends the phase
 100,000 tokens, 11.5% of children are joined to no candidate at birth. Two in
 five of these (39%) are handed a connection by their parent, and live. The
 rest, some 7% of all children, die at once
-([How births build the network](how-agents-have-children.md)).
+([How births build the network](b1-lives-and-wealth.md#how-births-build-the-network)).
 
 ### Handovers
 
@@ -593,7 +593,7 @@ Experiment 24 and in half the worlds of
 [A screen of random worlds](a-screen-of-random-worlds.md).
 
 ### Where it is used (reproduction statistics)
-- [How births build the network](how-agents-have-children.md): these statistics
+- [How births build the network](b1-lives-and-wealth.md#how-births-build-the-network): these statistics
   over a world's life, in the B1 worlds.
 - [What a run records](runs-and-records.md#what-a-run-records): every field of a run's
   statistics.
@@ -607,7 +607,7 @@ Experiment 24 and in half the worlds of
   lifetimes of brains, rather than of agents.
 - [One iteration, step by step](one-iteration.md#phase-1-reproduction): the
   reproduction phase, rule by rule.
-- [How births build the network](how-agents-have-children.md): who has children,
+- [How births build the network](b1-lives-and-wealth.md#how-births-build-the-network): who has children,
   and how much they give.
 
 ## How our view changed

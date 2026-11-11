@@ -50,7 +50,7 @@ themselves to death, and with smaller brains that see. Several of its changes
 answer questions this page asked.
 
 **The worlds.** The numbers are those of the thirty B1 worlds of 100,000
-[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](a-worlds-life.md#thirty-worlds). This page was first written from
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds). This page was first written from
 thirty worlds of 10,000 tokens; where those differ, both are given.
 
 <!-- runs E10 -->
@@ -133,7 +133,7 @@ only its brain is replaced
 **How brains spread, and where new ones come from.** One dot per world: means over the iterations sampled every 25 from 500 on. From the left: children born in a reproduction phase; nodes won in a game by a neighbour, each of which takes on a copy of the winner's brain; genotypes that appear for the first time in the frame after a reproduction phase (a newborn's brain that changed); and genotypes that appear for the first time after a game (every brain is offered a change at its end). On a logarithmic axis.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -211,7 +211,7 @@ moves under it, and a good brain is worn away in place, whether or not it is
 copied. This may be why genotypes last about two iterations
 ([Genotypes and lineages](genotypes-and-lineages.md)), and why the number of
 distinct genotypes is set by the rules
-([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
+([How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)).
 
 **What could replace it.** Change brains **only when they are copied** — at
 birth and at conquest — and never in place.
@@ -251,7 +251,7 @@ keeps it in 2.0% of games; on a node with one connection, in 74%
 each other across a connection survives one more game in 4% of cases
 ([Do agents cooperate?](do-agents-cooperate.md)). The centre of a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") is the
 extreme: a coalition takes its node in every game, and it carries a new brain
-almost every game ([The largest and the smallest](the-largest-and-the-smallest.md)).
+almost every game ([The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)).
 
 **Why it matters.** The most important positions of the world have no lasting
 occupant. So no brain can be selected for holding one, and no partnership
@@ -294,7 +294,7 @@ columns ([One iteration, step by step](one-iteration.md)).
 
 **What the data say.** The share of agents with a child rises from 2.1% at one
 connection to 10.5% at fifty or more
-([How agents have children](how-agents-have-children.md)). That is only partly
+([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)). That is only partly
 because the well connected are richer.
 
 **Why it matters.** The same brain behaves differently depending on how many
@@ -368,7 +368,7 @@ every game. A node on which nobody stakes is left with nothing, and its agent
 dies.
 
 **What the data say.** 30% of agents holding one token die in a game
-([Gains and losses](gains-and-losses.md)). Quiet borders — agents too poor to
+([Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out)). Quiet borders — agents too poor to
 stake across their connections — cost whole regions
 ([How a world breaks](how-a-world-breaks.md)).
 
@@ -443,7 +443,7 @@ network survives. Every agent that cannot reach it along connections dies,
 cut off. This rule is the cull ([One iteration, step by step](one-iteration.md)).
 
 **What the data say.** Three deaths in four are cut-offs
-([Births, deaths and ages](births-deaths-and-ages.md)). A sixth of them happen
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). A sixth of them happen
 in the one game in fifty that cuts off a thousand agents or more. A single
 game has cut off half a world ([How a world breaks](how-a-world-breaks.md)).
 
@@ -497,7 +497,7 @@ out, each token to a survivor drawn at random, every survivor with the same
 chance.
 
 **What the data say.** About 1,300 tokens after a game, 0.10 per agent
-([Gains and losses](gains-and-losses.md)).
+([Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out)).
 
 **Why it matters.** It is a transfer from the dead to everyone, unrelated to
 what anyone did. It is small, but it is the only income the poorest have
@@ -608,6 +608,6 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (16)
-> [The brain](the-brain.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (13)
+> [The brain](the-brain.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

@@ -43,7 +43,7 @@ iterations, or until its world dies out ([The runs of Experiment
 7](#the-runs-of-experiment-7)).
 
 - **baseline**: B1 as it is. These are the thirty runs of 10,000 tokens of
-  Experiment 2 ([Two sizes of world](a-worlds-life.md#two-sizes-of-world)),
+  Experiment 2 ([Two sizes of world](b1-lives-and-wealth.md#two-sizes-of-world)),
   reused.
 - **brains never change**:
   [`mutation_sparsity`](settings.md#mutation_sparsity) = 0. A brain is still
@@ -147,7 +147,7 @@ parent gives its child. The share function turns two of the brain's numbers
 into that share. It gives all the parent's tokens when the first number is
 positive and the second is not. It gives exactly half when neither is positive
 ([A birth, decision by
-decision](how-agents-have-children.md#a-birth-decision-by-decision)). Drawn by
+decision](b1-lives-and-wealth.md#a-birth-decision-by-decision)). Drawn by
 chance, each happens about one time in four: far more often than in any
 settled world.
 
@@ -587,5 +587,5 @@ every run.
 ← [What agents say to each other](what-agents-say-to-each-other.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
 
 > [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

@@ -341,7 +341,7 @@ from old ones.
 > in the same situation mostly act differently, so answers that ignore the
 > situation cannot stand in for them. But what holds a world's shape is
 > steadier than its individuals: health does not drift over a run, the
-> [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead sets how unequal a world is, and with 11
+> [share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead sets how unequal a world is, and with 11
 > to 263 effective ancestors, chance more than merit decides which line
 > carries the brains.
 >

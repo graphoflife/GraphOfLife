@@ -68,7 +68,7 @@ slope of 0.94, in the worlds without a giant [star](measuring-networks.md#stars-
 So in B1, wealth is a matter of place. Tokens and connections go together (a
 rank [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of +0.56). A rich agent is still rich ten games later
 (+0.78). The richest tenth hold about two fifths of the tokens, 39% to 44%
-([Rich agents are connected agents](where-do-the-tokens-go.md#rich-agents-are-connected-agents),
+([Rich agents are connected agents](b1-lives-and-wealth.md#rich-agents-are-connected-agents),
 [What goes with what](what-goes-with-what.md#the-agents)).
 
 But the place is rich, not whoever sits on it. The more connections a node
@@ -154,7 +154,7 @@ The dead leave their tokens to the living ([The estate of the dead](measuring-li
 In B1 that is 1.3% of the tokens in every game, handed out one token at a
 time, and it levels the world: over a world's life, the estate goes with
 falling inequality
-([The tokens of the dead](where-do-the-tokens-go.md#the-tokens-of-the-dead),
+([The tokens of the dead](b1-lives-and-wealth.md#the-tokens-of-the-dead),
 [What goes with what](what-goes-with-what.md#a-whole-world-over-time)). In B2
 the pool is small, about seventy tokens an [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") among 3,600 agents. There
 where it goes matters more than how much it is: **an estate that pays for
@@ -184,7 +184,7 @@ births fills a world**, to half as many agents again, and poorer ones
 
 - [Where tokens flow](where-the-tokens-flow.md): the budget of a game, the
   random walk, the connections and the loops, in full.
-- [How unequal is a world, and who stays rich](where-do-the-tokens-go.md):
+- [How unequal is a world, and who stays rich](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich):
   who holds the tokens the flow leaves behind.
 - [Gliders, and who helps whom](gliders-and-who-helps-whom.md): chains of
   takeovers, gifts, and the flow of fifty games.

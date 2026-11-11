@@ -60,7 +60,7 @@ This page fits power laws to four things in the [baseline](b1-and-b2.md "The sta
 are the connections, the tokens, the deaths of one game, and the rhythm of a
 world's wander. On the way, it shows how a real power law is told from an
 apparent one. The worlds are the thirty of 100,000 tokens of
-[Thirty worlds](a-worlds-life.md#thirty-worlds). Where the thirty of 10,000
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds). Where the thirty of 10,000
 tokens this page was first written from differ, both are given.
 
 ## Fitting a power law properly
@@ -208,7 +208,7 @@ is 0.068. Samples drawn from the fitted law show a gap at least as large in
 **Power-law exponents of the 30 worlds.** One dot per world, at its mean over the measurements (every 25 iterations) from iteration 500 on; the bar is the median. Left: the exponent γ of the degree distribution by maximum likelihood on the tail (`degreeGamma`) and by least squares on the whole distribution (`degreeExponent`), and of the token distribution by least squares (`tokenExponent`). Right: the share of agents in the tail the maximum-likelihood fit chose (`degreeTailShare`) and the largest gap between that tail and the fitted law (`degreeGammaKS`).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -242,7 +242,7 @@ scale-free" would claim far more than this.
 Where would a tail like this come from? The rules contain a known mechanism.
 A child is joined to some of its parent's [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."): in effect, it
 **copies** part of its parent's neighbourhood
-([How a child is joined](how-agents-have-children.md#how-a-child-is-joined)).
+([How a child is joined](b1-lives-and-wealth.md#how-a-child-is-joined)).
 An agent gains a connection whenever one of its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") has a child that
 is joined to it. So an agent with twice the neighbours has about twice the
 chances.
@@ -255,7 +255,7 @@ models of protein networks reach it the same way (Vázquez, Flammini, Maritan
 and Vespignani 2003; Chung, Lu, Dewey and Galas 2003). Preferential
 attachment on its own gives γ = 3.
 
-[How the network grows](how-agents-have-children.md#how-the-network-grows)
+[How the network grows](b1-lives-and-wealth.md#how-the-network-grows)
 has measured it here. An agent gains connections in proportion to those it
 has, as *k*^1.02, and loses them a little faster, as *k*^1.20. The faster
 losses bend the tail down at the top. Whether this is what makes the tail is
@@ -280,7 +280,7 @@ eight the links a brain may choose.
 **Two candidate laws for the tokens.** Dots: for every token count x that occurs among the agents alive after the last game of the 30 worlds, the share holding at least x. Red: a power law fitted by maximum likelihood to the tail, from the x that fits it best. Cyan: a log-normal distribution with the mean and standard deviation of ln x over all agents — a distribution whose logarithm is normal. Both on logarithmic axes.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -334,7 +334,7 @@ And among the 3,358 agents in the token tail, 40% have ten connections or
 more, but **33% have only one or two**. A third of the richest agents are
 rich far beyond their place.
 
-[Gains and losses](gains-and-losses.md) showed what happens to such agents.
+[Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out) showed what happens to such agents.
 Those with a hundred tokens or more that survive a game lose 48% of their
 tokens in it, on average. And a rich agent with one or two connections dies
 in about one game in ten.
@@ -362,7 +362,7 @@ not the largest. The [cleanup](one-iteration.md#cleanup "The end of every phase:
 **How many agents one game removes.** Of all games from iteration 500 on in the 30 worlds (30,000 games), the share that cut off at least n agents (orange) and the share in which at least n agents starved (red), for every n, on logarithmic axes. Games in which no one was removed count in the denominator, which is why the curves start below 1.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -409,7 +409,7 @@ A slow drift puts its power at low frequencies, a quick jitter at high ones.
 **The rhythm of the wander.** The power spectrum of the number of agents ([The power spectrum](statistics.md#the-power-spectrum-of-a-time-series)): for each frequency, how much of a world's up-and-down motion happens at that rhythm — slow wanders on the left, iteration-to-iteration jitter on the right. Each world's series from iteration 500 to 1,499, with its straight-line trend removed and a Hann window applied, normalised to total power 1 and averaged over the 30 worlds; then averaged in 39 bands of equal width on the logarithmic axis. Red: the straight line least squares fits between periods of 500 and 4 iterations.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -468,7 +468,7 @@ scale. The world forgets.
 
 - [Preferential attachment and its kernel](measuring-networks.md#preferential-attachment-and-its-kernel):
   who gains new connections, and what that does to the tail.
-- [Gains and losses](gains-and-losses.md): what a game does to the rich and
+- [Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out): what a game does to the rich and
   to the poor.
 - [How a world breaks](how-a-world-breaks.md): where the lumps of death come
   from, and whether they can be foreseen.
@@ -614,6 +614,6 @@ history (`git show 82062d7:book/figures/powerlaws/tokens-fit.svg`).
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (15)
-> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Glossary](glossary.md) · [How births build the network](how-agents-have-children.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md)
+> [!info]- Pages that link here (12)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Glossary](glossary.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

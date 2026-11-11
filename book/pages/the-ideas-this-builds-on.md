@@ -151,13 +151,13 @@ several agents acting together.
 - **Muller plots** (after Muller 1932) draw, stacked over time, the share of a
   population that descends from each of several ancestors. A lineage taking
   over appears as a band that widens until it fills the picture
-  ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations),
+  ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations),
   [Genotypes and lineages](genotypes-and-lineages.md); [Muller plots](measuring-evolution.md#muller-plots)).
 
 ## Measuring
 
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
-  coefficient** (Gini 1912): [Where do the tokens go?](where-do-the-tokens-go.md)
+  coefficient** (Gini 1912): [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)
   and [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility).
 - **Lifetimes with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
   1958): [Survival curves](measuring-lives.md#survival-curves-kaplanmeier).

@@ -65,8 +65,8 @@ where *m* is the number of rows in the stretch that hold the statistic.
 <!-- /figure -->
 A world spends its first hundred iterations or so in a **youth**, unlike the
 rest of its life
-([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
-Then it **wanders** ([The life of a B1 world](a-worlds-life.md)). So when the
+([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
+Then it **wanders** ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). So when the
 notebook asks where a world **settles**, it takes the mean from iteration
 500 to its end: its
 [settled life](statistics.md#the-settled-life-of-a-world).
@@ -86,7 +86,7 @@ per condition for [B2](b1-and-b2.md "The second baseline: B1 with the rules that
 **30 worlds, each a line.** The number of agents of each of the 30 baseline worlds, every line one world, averaged over stretches of 25 iterations so that the lines stay legible.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -107,7 +107,7 @@ in ten the paler band
 **The same 30 worlds, as a band.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -204,5 +204,5 @@ makes the figures does nothing the recipe does not say. It is
 ← [Every world side by side](every-world-side-by-side.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) →
 
 > [!info]- Pages that link here (1)
-> [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)
+> [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

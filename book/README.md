@@ -72,7 +72,6 @@ how the pages hang together.
 #### The baselines B1 and B2
 
 - [B1 and B2: the two baselines](pages/b1-and-b2.md)
-- [The life of a B1 world](pages/a-worlds-life.md)
 - [How much does the seed decide?](pages/how-much-does-the-seed-decide.md)
 - [Building B2: a world that cannot break](pages/a-world-that-cannot-break.md)
 
@@ -80,16 +79,8 @@ how the pages hang together.
 
 🟩 What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.
 
-#### Agents' lives: births, deaths, ages
-
-- [Births, deaths and ages](pages/births-deaths-and-ages.md)
-- [How births build the network](pages/how-agents-have-children.md)
-
 #### Wealth: who holds the tokens
 
-- [How unequal is a world, and who stays rich](pages/where-do-the-tokens-go.md)
-- [Gains and losses: who gains, who loses, and the share-out](pages/gains-and-losses.md)
-- [The largest and the smallest](pages/the-largest-and-the-smallest.md)
 - [What keeps wealth spread?](pages/what-keeps-wealth-spread.md)
 
 #### The game and the flow of tokens
@@ -214,4 +205,5 @@ how the pages hang together.
 #### B1, as described in October 2026
 
 - [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
+- [B1: lives and wealth](pages/b1-lives-and-wealth.md)
 <!-- /contents -->

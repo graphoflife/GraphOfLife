@@ -65,7 +65,7 @@ The answers so far were negative, but partial. No ring of tokens lasted fifty
 games in the worlds of 10,000 tokens, and chains of takeovers wander like a
 drunkard ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)). A
 star's centre is a place handed from parent to child
-([How a star is handed down](the-largest-and-the-smallest.md#how-a-star-is-handed-down)).
+([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 Groups of the flow are the network's regions
 ([Flow modules](flow-modules.md)). This page asks the question again of the
 largest worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") and of the healthiest worlds found
@@ -84,7 +84,7 @@ passing: twelve worlds, each over the last 500 games of its run.
   So five stand for them: the first five [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") whose world is not held
   together by one hub, 1, 3, 4, 5 and 6. Beside them stands the largest star,
   seed 28, whose centre was joined to three agents in four in the games read
-  ([Stars](the-largest-and-the-smallest.md#stars)).
+  ([Stars](b1-lives-and-wealth.md#stars)).
 - **The five healthiest worlds of round 3**, by the product of their six
   criteria ([Which worlds are healthy?](which-worlds-are-healthy.md)): s3042,
   s4006 played strongest first, s3018, s3080 and s3057, each of 30,000 tokens
@@ -258,7 +258,7 @@ and a random walk held near a level, the dog on the leash, has a spectrum of
 its own. An agent's tokens have two such memories at once. They drift
 slowly, as its connections change. And they swing from one game to the next,
 where the even split overshoots: tokens slosh from a hub to its leaves and
-back ([A two-game rhythm](where-do-the-tokens-go.md#a-two-game-rhythm)). A
+back ([A two-game rhythm](b1-lives-and-wealth.md#a-two-game-rhythm)). A
 memory says how much of a departure from the level is left a game later:
 near 1 for the slow drift, below 0 for the swing, whose sign flips every
 game. In the median stretch of 128 games of B1's worlds, the slow memory is
@@ -297,7 +297,7 @@ The swing itself cannot stand up out of the quotient: a random walk with a
 memory near −1 *is* a swing of two games. So the swing is read from its
 memory instead. How hard can the even split make tokens swing? For a hub
 whose *k* neighbours are leaves,
-[A two-game rhythm](where-do-the-tokens-go.md#a-two-game-rhythm) works it
+[A two-game rhythm](b1-lives-and-wealth.md#a-two-game-rhythm) works it
 out: every departure from rest is multiplied, game by game, by
 1/(*k* + 1) − 1/2. That is never below −1/2: of a swing, at most half is left
 a game later. A swing memory far below −1/2 is a swing that dies away more
@@ -574,7 +574,7 @@ A particle would need something that binds. Three places to look next:
 - **A flow through the world.** Order that feeds on a flow, like the
   convection cells of a pan of oil heated from below, needs a source and a
   sink: the planned study *A source and a sink*.
-- **Local rules.** The [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the dead and the single random stream
+- **Local rules.** The share-out of the dead and the single random stream
   still reach across a whole world at once
   ([What this asks of the notebook](physical-inspiration.md#what-this-asks-of-the-notebook)).
   A thing that keeps its form while it moves needs a world in which what

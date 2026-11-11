@@ -40,7 +40,7 @@ from it. This page asks how long genotypes last, how much of a world one of
 them can hold, and whether lines take whole worlds over.
 
 The worlds are the thirty of 100,000 tokens of
-[Thirty worlds](a-worlds-life.md#thirty-worlds), about 14,400 agents each.
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds), about 14,400 agents each.
 This page was first written from thirty worlds of 10,000 tokens, and gives
 their numbers beside.
 
@@ -89,13 +89,13 @@ from its birth to the last game it is alive after.
 **How long genotypes and agents last.** Of all genotypes that appeared, and all agents born, at iteration 500 or later in the 30 worlds, the share that lasted at least L iterations. A genotype lasts from the first game after which some agent carries it to the last; an agent from its birth to the last game it is alive after. Lives still going at the end are counted as far as they went (Kaplan–Meier).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read every frame with `phase` = 2; for every genotype (brain id in `brain_ids`) and every agent (id in `ids`) note the first and last iteration it appears.
 > 2. Keep those first seen at iteration 500 or later; one still present in the last frame is censored.
-> 3. Kaplan–Meier as in [Births, deaths and ages](births-deaths-and-ages.md).
+> 3. Kaplan–Meier as in [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages).
 >
 > **To make it again:** `python3 book_figures.py lineage`.
 <!-- /figure -->
@@ -111,7 +111,7 @@ share that lasted at least *L* iterations.
   tokens. The [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") genotype lasts two iterations.
 - **Agents** (blue) last far longer: 48% at least 10 iterations, 13% at least
   100. These are the agents that lived through their first game, as in
-  [Births, deaths and ages](births-deaths-and-ages.md#how-long-agents-live).
+  [Births, deaths and ages](b1-lives-and-wealth.md#how-long-agents-live).
   Nearly a third of all newborns do not.
 
 Why the difference? An agent keeps its node, its id and its age when its
@@ -138,7 +138,7 @@ in the median world, between 0.61 and 0.66 across the thirty, and 0.63 at
 **The most common genotype's share of the world.** After every game, the share of the living that carry the most common genotype. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). The yellow line is the single world with seed 28.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -158,9 +158,9 @@ tenth of the world at some moment in 10 of the 30 worlds. One held more than
 a fifth in 7, more than a third in 2, and more than half in one. That one
 held 56% of all agents at iteration 1,408, in the world with seed 28 (the
 yellow line). This world is a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), held together by a single hub, and
-[The largest and the smallest](the-largest-and-the-smallest.md) looks inside
+[The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest) looks inside
 it. Its collapse had just left it some 2,100 agents
-([No world died — but one came close](a-worlds-life.md#no-world-died--but-one-came-close)).
+([No world died — but one came close](b1-lives-and-wealth.md#no-world-died--but-one-came-close)).
 At 10,000 tokens large shares were more common: a tenth in 21 of 26 worlds,
 a fifth in 17.
 
@@ -204,7 +204,7 @@ replaced all the others: a **sweep**.
 Each curve is one world. While its living still descend from more than one
 founder, they have no common ancestor. The curve is then drawn at the age of
 the world. The first drop is the moment everyone alive descends from one
-founder ([One founder for everyone](a-worlds-life.md#one-founder-for-everyone)).
+founder ([One founder for everyone](b1-lives-and-wealth.md#one-founder-for-everyone)).
 In the median world it came at iteration 1,000, among the 27 that got there;
 three never did.
 [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
@@ -281,7 +281,7 @@ world:
 **How often one branch replaces all others.** One dot per world: how many times, between iteration 100 and the end, the newest common ancestor of all the living moved forward to a younger genotype (one of the drops in the figure above). The bar is the median.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](a-worlds-life.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From the lineage analysis of Experiment 10 (`python3 gol_lab.py analyse E10`), in `book/results/E10.json` (`ancestor.moves` of every run).
 >
@@ -565,7 +565,7 @@ iterations.
   the whole notebook found that they follow only what was alive after a
   game. That leaves out nearly a third of all newborns, which die in the
   iteration of their birth
-  ([Births, deaths and ages](births-deaths-and-ages.md)). The agents' 48%
+  ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). The agents' 48%
   and 13% hold for the agents that lived through their first game.
 - **14 October 2026.** From 8 October, this page said that
   [Do the brains matter?](do-the-brains-matter.md) builds a world in which no
@@ -592,6 +592,6 @@ iterations.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (18)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [The life of a B1 world](a-worlds-life.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (16)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

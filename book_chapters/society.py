@@ -581,7 +581,7 @@ def lineage(ch: F.Chapter) -> None:
                        "and every agent (id in `ids`) note the first and last iteration it appears.",
                        f"Keep those first seen at iteration {W.settled} or later; one still present in the "
                        "last frame is censored.",
-                       "Kaplan–Meier as in [Births, deaths and ages](births-deaths-and-ages.md)."]))
+                       "Kaplan–Meier as in [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)."]))
 
     top_seed = EXAMPLES["top"]
     example = F.world_pass(W.run(top_seed))

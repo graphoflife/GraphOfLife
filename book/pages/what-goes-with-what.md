@@ -57,7 +57,7 @@ example.
 | `age` | iterations since it was born |
 | `clones` | agents carrying its [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), itself included |
 | `degree` | its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") |
-| `curvature` | [token curvature](gains-and-losses.md#token-curvature): the sum over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of their tokens minus its own |
+| `curvature` | [token curvature](b1-lives-and-wealth.md#token-curvature): the sum over its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") of their tokens minus its own |
 | `nbr_tokens`, `nbr_max` | its neighbours' mean tokens, its richest neighbour's |
 | `poorer_nbrs` | the share of its neighbours holding fewer tokens than it |
 | `nbr_degree` | its neighbours' mean connections |
@@ -166,10 +166,10 @@ Having a child next is hardly predictable in either world (at most 0.18).
 Heat flows from hot to cold in proportion to the difference. A node's
 temperature changes by its curvature: the sum of its neighbours'
 temperatures minus its own
-([Token curvature](gains-and-losses.md#token-curvature)). Suppose every
+([Token curvature](b1-lives-and-wealth.md#token-curvature)). Suppose every
 agent split its stake evenly over itself and its neighbours. That would move
 tokens the same way: by the curvature divided by connections plus one
-([Tokens run downhill](gains-and-losses.md#tokens-run-downhill)).
+([Tokens run downhill](b1-lives-and-wealth.md#tokens-run-downhill)).
 
 Both worlds do run downhill. Peaks lose and valleys gain. Take the agents more
 than ten tokens richer than their neighbourhood: 13% to 21% more lost than
@@ -311,7 +311,7 @@ without a star ([Stars and hubs](measuring-networks.md#stars-and-hubs)).
 
 ## Where to go next
 
-- [Gains and losses](gains-and-losses.md): the token curvature and the heat
+- [Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out): the token curvature and the heat
   equation, for one game.
 - [Stars and hubs](measuring-networks.md#stars-and-hubs): the worlds that one agent holds
   together.

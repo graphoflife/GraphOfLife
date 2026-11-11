@@ -368,7 +368,7 @@ from vanishing.
 
 #### The kernels in the worlds
 
-[Who gains and who loses](how-agents-have-children.md#who-gains-and-who-loses)
+[Who gains and who loses](b1-lives-and-wealth.md#who-gains-and-who-loses)
 measures both kernels in the thirty B1 worlds of 100,000 tokens. It counts
 what each class of agents gains in a reproduction phase, sorted by their
 connections at its start. And it counts what they lose in the game that
@@ -396,7 +396,7 @@ So part of what the leaves gain may be handovers.
   ([What the game adds](a-world-that-cannot-break.md#what-the-game-adds)).
 - **Age.** In the model of Barabási and Albert, the oldest nodes are the
   hubs. In B1, age gives an agent no connections; connections give it age
-  ([Connections and age](how-agents-have-children.md#connections-and-age)).
+  ([Connections and age](b1-lives-and-wealth.md#connections-and-age)).
 
 ### Scaling relations between agents' properties
 
@@ -489,7 +489,7 @@ nearly every game, while its connections pass from parent to newborn child. The
 An agent's [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling) is its number of connections. In a settled
 baseline world of 100,000 tokens the median agent has 2 and the mean is 3.5, but
 the best-connected agent of the median world has 640 (from 130 to 11,000
-between worlds; [The largest and the smallest](the-largest-and-the-smallest.md)).
+between worlds; [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)).
 An agent that far above the rest is a **hub**. There is no exact line for a hub;
 there is one for a star.
 
@@ -517,17 +517,17 @@ joined to 20,666 of the 25,958 agents alive and held 20,286 tokens, a fifth of
 all; 94% of its neighbours were leaves, holding 2.8 tokens each on average. A
 coalition of neighbours won its node in each of the hundred games from then
 on, and the node carried 78 different [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") in them
-([The largest and the smallest](the-largest-and-the-smallest.md#how-a-star-works)).
+([The largest and the smallest](b1-lives-and-wealth.md#how-a-star-works)).
 
 ### How a star is handed down
 
 An agent gains connections as its neighbours have children, about in
 proportion to those it has, but loses them a little faster, so the well
 connected drift back down
-([How the network grows](how-agents-have-children.md#who-gains-and-who-loses)).
+([How the network grows](b1-lives-and-wealth.md#who-gains-and-who-loses)).
 
 A star's centre is kept another way. Now and then it has a child and hands it
-nearly all its connections ([How agents have children](how-agents-have-children.md)):
+nearly all its connections ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)):
 at iteration 1,153 the centre of seed 28 went from 18,913 connections to 219,
 and its child, of age 0, took 18,865. Over the settled lives of the thirty
 worlds, first place in connections changed hands 1,299 times, 21% of them to a
@@ -1247,9 +1247,9 @@ deeper cores, the trees and the dimension of the core are measured in
   connections, the clustering and the core of the thirty B1 worlds.
 - [How properties scale together](how-properties-scale-together.md): the
   agents behind the four scaling relations, and whom the hubs are joined to.
-- [How births build the network](how-agents-have-children.md#how-the-network-grows):
+- [How births build the network](b1-lives-and-wealth.md#how-the-network-grows):
   how agents gain connections, and how they lose them.
-- [The largest and the smallest](the-largest-and-the-smallest.md): stars and
+- [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest): stars and
   dynasties in full.
 - [A world that cannot break](a-world-that-cannot-break.md): the rules that
   keep hubs down.

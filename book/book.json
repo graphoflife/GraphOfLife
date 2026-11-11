@@ -22,11 +22,6 @@
       "about": "The two standard worlds every experiment starts from: B1, the original rules, and B2, a world that cannot break, and how it was built."
     },
     {
-      "id": "lives",
-      "title": "Agents' lives: births, deaths, ages",
-      "about": "Who is born, who dies and when, how old agents get, and how a world's ages change."
-    },
-    {
       "id": "wealth",
       "title": "Wealth: who holds the tokens",
       "about": "How unequal a world is, who stays rich, and how gains and losses are shared out."
@@ -402,22 +397,6 @@
       "summary": "The two sets of rules every experiment starts from: B1, the algorithm as a new run is offered it, and B2, built so that its network cannot break."
     },
     {
-      "id": "a-worlds-life",
-      "title": "The life of a B1 world",
-      "file": "pages/a-worlds-life.md",
-      "topics": [
-        "baselines",
-        "lives"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E02"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "The first baseline, B1, is studied through thirty worlds that differ only in their seed, each run for 1,500 iterations. In its youth a world booms from 1,000 founders to well over ten thousand agents, then crashes as its network breaks apart."
-    },
-    {
       "id": "how-much-does-the-seed-decide",
       "title": "How much does the seed decide?",
       "file": "pages/how-much-does-the-seed-decide.md",
@@ -440,8 +419,7 @@
       "topics": [
         "baselines",
         "network",
-        "rules",
-        "lives"
+        "rules"
       ],
       "kind": "experiment",
       "experiments": [
@@ -454,37 +432,11 @@
       "summary": "B2, the notebook's second baseline, was built in three steps, each tested by an experiment. First, brains that see broke their worlds: not in one great cut, but by a steady bleeding of cut-off agents that births did not always replace (Experiment 13)."
     },
     {
-      "id": "births-deaths-and-ages",
-      "title": "Births, deaths and ages",
-      "file": "pages/births-deaths-and-ages.md",
-      "topics": [
-        "lives"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "From iteration 500 on, a world of 100,000 tokens keeps about 14,400 agents, but replaces about 3.5 in a hundred of them in every iteration. Three in four of those that die are cut off from the network, and the rest starve."
-    },
-    {
-      "id": "how-agents-have-children",
-      "title": "How births build the network",
-      "file": "pages/how-agents-have-children.md",
-      "topics": [
-        "lives",
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "In the first baseline, B1, every new node of a world's network is a newborn agent, and every new connection is made at a birth. Only three or four agents in a hundred have a child in an iteration, and connections raise the chance more than wealth does."
-    },
-    {
       "id": "measuring-lives",
       "title": "Measuring lives: births, deaths, ages and estates",
       "file": "pages/measuring-lives.md",
       "topics": [
         "reference",
-        "lives",
         "simulation",
         "rules",
         "methods"
@@ -493,47 +445,6 @@
       "status": "written",
       "added": "2026-11-09",
       "summary": "How the notebook counts the lives of agents: who is born and how, the four ways to die, where the tokens of the dead go, how old agents grow, and what every reproduction phase records.."
-    },
-    {
-      "id": "where-do-the-tokens-go",
-      "title": "How unequal is a world, and who stays rich",
-      "file": "pages/where-do-the-tokens-go.md",
-      "topics": [
-        "wealth"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E04"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "The founders of a world start equal, but the first births end that, and from then on a world is moderately unequal. Its Gini coefficient stays near 0.47, and the richest tenth of its agents hold about 42% of its tokens."
-    },
-    {
-      "id": "gains-and-losses",
-      "title": "Gains and losses: who gains, who loses, and the share-out",
-      "file": "pages/gains-and-losses.md",
-      "topics": [
-        "wealth",
-        "game"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every token is staked in every game. Yet in a settled world nearly half the agents end a game with exactly what they had, because what they send out comes back."
-    },
-    {
-      "id": "the-largest-and-the-smallest",
-      "title": "The largest and the smallest",
-      "file": "pages/the-largest-and-the-smallest.md",
-      "topics": [
-        "wealth",
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-11",
-      "summary": "In a settled world, the richest agent holds about 2% of all tokens and the best-connected some 640 connections; the median agent has 2."
     },
     {
       "id": "what-keeps-wealth-spread",
@@ -673,7 +584,6 @@
       "topics": [
         "reference",
         "network",
-        "lives",
         "wealth",
         "space"
       ],
@@ -1441,6 +1351,24 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "The first baseline, B1, has been measured from every side, in thirty worlds of 100,000 tokens. All six theses written before its runs failed, and each failure taught something new about the world."
+    },
+    {
+      "id": "b1-lives-and-wealth",
+      "title": "B1: lives and wealth",
+      "file": "pages/b1-lives-and-wealth.md",
+      "topics": [
+        "b1-history",
+        "baselines",
+        "wealth"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "The first baseline, B1, as measured in October 2026: a world's life, births, deaths and ages, how births build the network, inequality, gains and losses, and the richest and best-connected agents.",
+      "experiments": [
+        "E02",
+        "E04"
+      ]
     }
   ],
   "parts": [
@@ -1481,7 +1409,6 @@
       "colour": "#4ccb60",
       "about": "What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.",
       "topics": [
-        "lives",
         "wealth",
         "game",
         "network",

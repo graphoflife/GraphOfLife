@@ -27,7 +27,7 @@ the cleanup pools them and shares them out among the survivors. Until now
 every world of this notebook shared them out **evenly**: every survivor had
 the same chance at every token
 ([`redistribution`](settings.md#redistribution) = `uniform`;
-[The share-out](gains-and-losses.md#the-share-out)). The author asked for
+[The share-out](b1-lives-and-wealth.md#the-share-out)). The author asked for
 other ways, and each has a reading of its own:
 
 - **to the poorest**: a safety net. The pool raises the poorest survivors to

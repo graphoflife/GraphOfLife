@@ -90,7 +90,7 @@ far the richest agent of its world. In [seed](rules-in-detail.md#seeds-and-the-r
 the median agent holds 9, it could take every neighbour's node in every game,
 and its neighbours will fight for its own. A line that holds the source may
 hold it long, as a hub's place was handed down in B1
-([How a star is handed down](the-largest-and-the-smallest.md#how-a-star-is-handed-down)).
+([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 
 ## What a sink could be
 
@@ -263,7 +263,7 @@ measurements above will say.
 ## What has to be built first
 
 1. **The local world** of [Local rules only](local-rules-only.md), which is
-   also the closed control. In a world with the cull and a [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") over
+   also the closed control. In a world with the cull and a share-out over
    everyone, the estates of the dead would land anywhere at once, and wash any
    gradient out.
 2. **The source:** a new setting, off by default. Its inflow is

@@ -198,7 +198,7 @@ climb ends at the founders, and the count is how many of them still have
 descendants. In the median B1 world of 100,000 tokens, around iteration
 8, the living descend from about 390 of the 1,000 founders. The worlds of
 10,000 tokens kept about 19 of their 100
-([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
+([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 
 Later the count rises again, as the surviving lines branch. From iteration
 100 on, the B1 worlds hold a median of 3,300 families at 100,000 tokens, and
@@ -248,7 +248,7 @@ Muller plot does not tell the two apart.
 
 #### Where Muller plots are used
 
-- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations):
+- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
   the lines of the 100 founders in the first 300 iterations of the world with
   seed 1.
 - [Genotypes and lineages](genotypes-and-lineages.md): the families of the
@@ -335,7 +335,7 @@ the age of the world itself, since their living did not yet all descend from
 one founder. Nine in ten shared one from 745 iterations back, and half from
 468 (at 10,000 tokens: 730, 590 and 300). The first drop is the moment
 everyone alive descends from one founder
-([One founder for everyone](a-worlds-life.md#one-founder-for-everyone)).
+([One founder for everyone](b1-lives-and-wealth.md#one-founder-for-everyone)).
 [Do the brains matter?](do-the-brains-matter.md) counts the drops in worlds
 whose brains never change. Once one founder's line fills such a world, every
 sweep is chance.
@@ -388,7 +388,7 @@ genotypes are as diverse as four equally common ones would be.
 
 In a settled B1 world the effective number is about 0.45 per agent at 100,000
 tokens, and 0.49 at 10,000. The distinct genotypes number 0.63 per agent at
-both sizes ([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
+both sizes ([How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)).
 
 #### A caution about names
 
