@@ -136,7 +136,7 @@ one of them.
   through every statistic the Graph of Life viewer offers and some it does
   not. Experiments change one setting at a time
   ([Do the brains matter?](do-the-brains-matter.md),
-  [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+  [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 - **Does evolution keep going?** The yardstick
   ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)),
   why evolution stops ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)), and one
@@ -212,5 +212,5 @@ formula works.
 ← [Welcome](../README.md) · [Start here](../README.md#start-here) · [How this notebook is written](how-this-notebook-is-written.md) →
 
 > [!info]- Pages that link here (12)
-> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The rules in detail](rules-in-detail.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The rules in detail](rules-in-detail.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

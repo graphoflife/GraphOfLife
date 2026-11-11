@@ -34,7 +34,7 @@ It was first written after Experiments 1 to 5, on worlds of 10,000 tokens,
 and kept up to date as more pages were written. Its second edition reads
 thirty worlds of 100,000 tokens. Two pages are new with it:
 [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life) and
-[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world).
+[The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world).
 
 ### The record
 
@@ -50,13 +50,13 @@ tested it again on the worlds of 100,000.
   10,000 tokens births fell by 41%, and 4 of 30 worlds died. At 100,000 none
   died and the typical world held its size; only the fall of births (28%)
   broke the thesis.
-- [How much does the seed decide?](how-much-does-the-seed-decide.md) Thesis
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) Thesis
   **refuted, narrowly**, at both sizes. The seed decides little: worlds differ
   mostly because each one wanders, not because of their seeds.
 - [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) Thesis **refuted** at
   both sizes. Inequality is moderate and steady, with a [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") just
   under 0.5, and [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stake 70% of their tokens on their [neighbours](the-world.md#the-network "An agent joined to another by a connection.").
-- [What shape does the network take?](what-shape-does-the-network-take.md)
+- [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)
   Thesis **refuted**, narrowly at 10,000 tokens (a core of 53%) and more
   clearly at 100,000 (57%). The network is part tree, part web.
 - [Genotypes and lineages](genotypes-and-lineages.md). Thesis **refuted** at
@@ -75,7 +75,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
 
 - **About 14,400 agents** (1,300), with **3.5 [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")** each (3.3)
   ([A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world),
-  [What shape does the network take?](what-shape-does-the-network-take.md)).
+  [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 - **3.5 births** per hundred agents per iteration (3.1), and as many deaths.
   Three deaths in four are agents cut off from the network
   ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)).
@@ -93,7 +93,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
 - **26%** of connections are [bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut "A connection that lies on no loop: cut it and the network falls into two pieces.") (31%), **35%** of agents are leaves
   (36%), **57%** sit in a core of [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") (54%), and two agents are **18
   steps** apart (10)
-  ([What shape does the network take?](what-shape-does-the-network-take.md)).
+  ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 - **A genotype for every 1.6 agents**, each lasting a couple of iterations,
   and lines that bring a whole world down to one founder's descendants by
   about iteration 1,000 (175 at 10,000 tokens)
@@ -115,7 +115,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
   bringing two agents closer**
   ([How the network grows](b1-lives-and-wealth.md#how-the-network-grows)).
 - **Likeness that fades within two or three steps**: tokens, age,
-  connections and kin alike ([Like next to like](like-next-to-like.md)).
+  connections and kin alike ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)).
 - **A finite [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")**: 2.8 by how the room within *r* steps grows (2.3 at
   10,000 tokens, 3.3 in worlds of 60,000 agents), and about 1.9 by how a
   walker spreads. Random networks with the same connections have none
@@ -123,7 +123,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
 - **A core** of three agents in five at the start of a game (57% after it,
   as above). It holds three quarters of the tokens and every loop. Its
   dimension by balls is a little lower than the whole world's (2.5), and the
-  same by walks ([The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
+  same by walks ([The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world)).
 
 ### What seems to hold across the pages
 
@@ -133,7 +133,7 @@ Six patterns run through the pages on B1.
 
 Watch one world's number of agents over its life: it drifts up and down,
 slowly, like the level of a lake.
-[How much does the seed decide?](how-much-does-the-seed-decide.md) measured
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measured
 how long a world remembers its level, statistic by statistic. They all forget
 at much the same pace. A hundred iterations later a world's level is still
 clearly alike: correlations of 0.52 to 0.69 for the number of agents,
@@ -148,7 +148,7 @@ rhythm. Every 350 iterations or so, one branch of the family tree outlived
 all the others, and the whole world descended from it. Was the wander made by
 these sweeps? The large worlds answer no. They forget their level within
 three hundred iterations, as the small ones do, but a line needs about a
-thousand to take one over ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+thousand to take one over ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 The wander is faster than the sweeps, and so not made by them.
 [Do the brains matter?](do-the-brains-matter.md) finds the other half of the
 answer: a world whose brains never change hardly wanders at all.
@@ -212,7 +212,7 @@ measurements after them, follows from that one number:
   It does so down to the two-game rhythm of wealth that a random walk shows on
   [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") and leaves ([Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)).
 - An agent's tokens are set by its place, its connections plus one, and not
-  by how it plays ([How properties scale together](how-properties-scale-together.md)).
+  by how it plays ([How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)).
   In the long run such a walk visits each agent in proportion to its
   connections plus one, its resting state; the rich are those it visits most.
 - Messages carry a name and nothing else
@@ -237,16 +237,16 @@ world grows as a body does. It does not become a "small world", in which
 everyone is a few steps from everyone. It has a finite dimension
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)),
 and its core is a space of the same kind
-([The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)). Its width grows with its
-size ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)),
+([The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world)). Its width grows with its
+size ([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)),
 where a random network with the same connections would be a small world.
 
 Yet nothing in this space keeps regions apart. Likeness fades within two or
-three steps ([Like next to like](like-next-to-like.md)). Lines of descent,
+three steps ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). Lines of descent,
 which last much longer than genotypes, do hold patches for a while. Two
 neighbours share a family of 25 iterations back 99 times as often as chance,
 and the excess reaches about 7 steps; for families of 200 iterations back,
-about 12 ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). But a patch
+about 12 ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)). But a patch
 widens as a random walk on these worlds would, until one line holds the whole
 world. A world has room for regions that differ, and lines that make them for
 a while, but nothing that keeps them apart.
@@ -255,11 +255,11 @@ a while, but nothing that keeps them apart.
 
 Seven of the thirty large worlds condensed, for long stretches, around a
 single agent joined to a tenth of the world or more; in one, to more than
-half ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+half ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 Such a world plays its game differently
 ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). It also has a different
 shape: fewer agents in the core, and far more leaves and bridges
-([What shape does the network take?](what-shape-does-the-network-take.md)).
+([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest) shows that
 the centre of a star is a place, handed down from parent to newborn child.
 
@@ -267,7 +267,7 @@ Stars are not new with size: ten of the 26 worlds of 10,000 tokens had one by
 the same measure. But in a large world a star decides the world's whole
 shape. Across the thirty, the share of agents in the core follows the share
 joined to the largest hub almost exactly
-([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 B2 counts a star as a fault of the network. The [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
@@ -293,7 +293,7 @@ may choose at most 8 links.
   as absent.
 - **The dead are counted apart.** About one world in eight dies at 10,000
   tokens: it falls to 20 agents, which
-  [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+  [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
   later found is not always the end. None of thirty did at 100,000.
   Extinction is reported for every condition, but only a large change in it
   can be seen: from 13% to 30% would take about ninety seeds per condition
@@ -310,7 +310,7 @@ may choose at most 8 links.
 
 The measurements of B1 then read the same thirty worlds through every
 statistic the Graph of Life viewer offers: [entropy](measuring-tokens.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."), gains and losses, the
-flow of tokens, what crosses a connection, children, [power laws](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones."), the largest
+flow of tokens, what crosses a connection, children, power laws, the largest
 and the smallest, scaling, geometry, how worlds break, pictures, cooperation.
 They closed with [Questioning the mechanics](questioning-the-mechanics.md),
 which questions the rules themselves, and with what all of it means for
@@ -323,9 +323,9 @@ important one was missing: a world in which the brains make no difference.
 So the control came first. [Do the brains matter?](do-the-brains-matter.md)
 runs worlds whose brains never change, and worlds in which every decision is
 drawn at random.
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 then asked, at the author's request, how a world's size follows its tokens.
-[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) made the thirty worlds
+[Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens) made the thirty worlds
 this edition is written from, and asked of them the question they were made
 for: how a line takes over a world ten times the size.
 
@@ -402,10 +402,10 @@ connection that carries nothing is cut
 stretched web of stars, grown locally by children joining their parents'
 neighbourhoods. It is four and a half times as long as a random network with
 the same connections, with a thirty-third of its [spectral gap](measuring-networks.md#the-spectral-gap "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.")
-([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)). It breaks along its
+([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)). It breaks along its
 poor regions, whose borders go quiet. Then the [cull](one-iteration.md#cleanup),
 the rule that only the largest piece of the network lives on, kills whatever
-fell off ([How a world breaks](how-a-world-breaks.md)). **Brains** spread by
+fell off ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). **Brains** spread by
 conquest seventeen times more than by birth, and change mostly in place, not
 when copied ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)).
 The brain on a hub is replaced almost every game, and the same two brains
@@ -556,7 +556,7 @@ The six rules:
    the network stretches, and its shortcuts are never renewed. The cull kills
    any part that separates, so populations can never diverge in isolation
    ([One rule reaches across the world](questioning-the-mechanics.md#one-rule-reaches-across-the-world)).
-   [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+   [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
    adds that a bigger world is no escape: distances grow like a power of its
    size, and the regions the cull removes grow with it. *In B2* worlds cannot
    split at all ([A world that cannot break](a-world-that-cannot-break.md)),
@@ -759,8 +759,8 @@ date where they did:
   ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 - **The network's shape has a mechanism**: copying neighbourhoods at birth
   gives the stars, the triangles and the hierarchy
-  ([What shape does the network take?](what-shape-does-the-network-take.md),
-  [How properties scale together](how-properties-scale-together.md)).
+  ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network),
+  [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)).
 - **"An agent" has two meanings**, the node and the brain, and the notebook
   now says which it means where it matters
   ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)).
@@ -773,7 +773,7 @@ been answered since, and one in part.
 - **Do family regions persist as organisations?** A region held by one
   lineage for hundreds of iterations, while its nodes turn over, would be a
   first candidate for P3, measurable against a null that shuffles lineages.
-  [Like next to like](like-next-to-like.md) found genotypes clustered within
+  [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) found genotypes clustered within
   two or three steps, and no territories. Lines, which last longer, sit in
   patches that widen as they age
   ([A space, not a small world](#a-space-not-a-small-world)). Whether a patch
@@ -788,7 +788,7 @@ been answered since, and one in part.
 - **Where are the old?** At 10,000 tokens a picture suggested the edges. At
   100,000 the old sit in clumps of their own
   ([One world, many colours](one-world-many-colours.md)), as cohorts
-  ([Like next to like](like-next-to-like.md)). Age against distance from the
+  ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). Age against distance from the
   hubs would say; it has not been measured.
 - **Why do worlds reproduce less as they age?** Births per agent fall over a
   world's first five hundred iterations and then, in a large world, hold
@@ -809,13 +809,13 @@ Redoing the study of B1 on worlds ten times larger left most of it as it
 was, and that is itself a finding. Per agent, a world of 100,000 tokens does
 what a world of 10,000 does: the same births and deaths within a tenth, the
 same inequality, the same game, the same brains
-([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). What changed is how
+([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)). What changed is how
 the agents are arranged, and how fast anything crosses a world:
 
 - **The shape changes.** Half the [clustering](measuring-networks.md#clustering "How often an agent's neighbours are also each other's neighbours."), more loops per agent, fewer
   bridges, distances twice as long, and a ball dimension that rises with size
   ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md),
-  [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
+  [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world)).
 - **Stars can take a world.** One world in four condensed around a single
   centre, and then everything about it, its core, its game, its cuts, follows
   from the star ([Stars](#stars),
@@ -824,7 +824,7 @@ the agents are arranged, and how fast anything crosses a world:
   long in a world ten times larger. So lines live side by side for most of a
   run, and the messages of a world speak more dialects
   ([What agents say to each other](what-agents-say-to-each-other.md),
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 - **Demography settles.** In a large world, ages, lifetimes and births per
   agent hold still from iteration 500 on
   ([A turnover that settles late](#a-turnover-that-settles-late)).
@@ -916,7 +916,7 @@ the rule changes of both aims will be tested together where they coincide.
   that respond to what is around them.
 - **11 October 2026.** The study of B1 said that a world has room for regions
   that differ, "and nothing to make them".
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) found that lines of
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens) found that lines of
   descent do make patches, for a while. What is missing is something to keep
   them apart.
 - **14 October 2026.** The study said that defence got better without agents
@@ -971,6 +971,6 @@ the rule changes of both aims will be tested together where they coincide.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (18)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (15)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

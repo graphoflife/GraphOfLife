@@ -134,7 +134,7 @@ line differ only where the line's changes moved them. So a world speaks a few
 dialects, each spoken by a line. The worlds of 10,000 tokens used fewer
 directions, 8.8 in the median world. In a world ten times larger, more lines
 live side by side, for longer
-([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)),
+([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)),
 and so do more dialects.
 
 **Nearly nothing about the world.** What could a message be about? The

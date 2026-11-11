@@ -102,9 +102,9 @@ not, and how they differ says what kind of space a network is.
 
 The worlds of B1 are about **three-dimensional** by the first two measures.
 Over their first few steps, their balls grow as *r*^3
-([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
+([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)).
 They do so at every size, from a few hundred agents to sixty thousand
-([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). That
+([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). That
 is the reading of the Graph of Life viewer, which averages the balls of many
 agents. The few agents next to a hub, an agent with very many connections,
 pull that average up. A typical agent's ball grows more slowly in small
@@ -113,7 +113,7 @@ worlds
 
 And the distance across a world, its diameter, grows as *N*^0.30 for *N*
 agents. That is how a body of 3.3 dimensions would grow, since 1/0.30 ≈ 3.3
-([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
+([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
 Read again with more worlds, at five moments of each, the diameter grows as
 *N*^0.26 to 0.27 and the typical distance as *N*^0.20 to 0.23: by width
 alone nearer four dimensions than three, which bigger hubs in bigger worlds
@@ -135,7 +135,7 @@ of stars, hubs with many agents of one connection around them, and of trees.
 And about a quarter of their connections (a third at 10,000 tokens) are
 **bridges**: cut one, and the network falls in two ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)).
 Some of them, at times, hold half a world to the rest
-([How a world breaks](how-a-world-breaks.md)).
+([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
 
 A three-dimensional lattice has no bridges at all. To cut a cube of *N* points
 in two, you must cut about *N*^(2/3) connections: a whole cross-section.
@@ -159,7 +159,7 @@ how hard a network is to cut in two
 body of *N* agents, it shrinks as *N*^(−2/*d*); for a network with cheap
 cuts, it is tiny. One hint came early: bigger worlds have more loops per
 connection, and fewer leaves
-([Is a big world the same kind of world?](how-does-a-worlds-size-follow-its-tokens.md#is-a-big-world-the-same-kind-of-world)).
+([Is a big world the same kind of world?](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)).
 A leaf is an agent with a single connection.
 
 B2 was built with rules of this kind, all of them local
@@ -231,7 +231,7 @@ moves more slowly.
 Lines of descent move far more slowly still. In a B1 world, the patch a line
 holds advances about a step every thirty-five iterations. It widens as a
 random walk spreads
-([Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live)).
+([Where the lines live](b1-the-network-size-and-scaling.md#where-the-lines-live)).
 
 ### Where the speed limit is broken
 
@@ -243,9 +243,9 @@ Three rules reach across the whole world at once.
    region lives depends on the connections of the entire world, at that
    instant: action at a distance. In B1, three deaths in four are of this
    kind, and the big losses come this way, whole regions at once
-   ([How a world breaks](how-a-world-breaks.md)). The regions lost grow with
+   ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). The regions lost grow with
    the world
-   ([Big worlds do not average out](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)).
+   ([Big worlds do not average out](b1-the-network-size-and-scaling.md#big-worlds-do-not-average-out)).
    In B2 nobody can be cut off, so the cull has nothing left to do.
 2. **The share-out.** The tokens of the dead are dealt out to survivors drawn
    at random from the whole world
@@ -407,7 +407,7 @@ forth with a characteristic frequency, rather than spread like heat? A
 frequency would show as a peak in a power spectrum
 ([The power spectrum](statistics.md#the-power-spectrum-of-a-time-series)).
 The spectrum of the number of agents shows none
-([Power laws, real and apparent](power-laws-real-and-apparent.md)). In B1's
+([Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)). In B1's
 worlds of 100,000 tokens it falls as *f*^−1.80, close to the smooth slope of a
 random walk. It flattens only at the slowest rhythms, where something pulls a
 world back to its level.
@@ -465,14 +465,14 @@ same rules, and differs only in its state: its tokens, its connections, its
 brain. And its worlds are statistically homogeneous, nearly the same at every
 size. Inequality, home stakes and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") per agent are the same in worlds
 of five hundred agents and of sixty thousand
-([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#is-a-big-world-the-same-kind-of-world)).
+([Worlds of many sizes](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)).
 Births and deaths run a little faster in larger worlds: 13 to 21% more per
 agent at 100,000 tokens than at 10,000.
 
 Structure, where there is any, shows only in collective patterns: families
 side by side ([One world, many colours](one-world-many-colours.md)), hubs with
 their stars. And most of it does not reach far.
-[Like next to like](like-next-to-like.md#how-alike-at-a-distance) measured how
+[Like next to like](b1-the-network-size-and-scaling.md#how-alike-at-a-distance) measured how
 alike agents are at a distance. Tokens, ages and connections are alike only
 within one or two steps, and agents of one genotype within two or three.
 Beyond that, what one agent holds is like what any other holds.
@@ -481,7 +481,7 @@ Lines of descent reach further. Give every agent its *family*: the genotype it
 descends from, a number of iterations back. Two agents belong to the same
 family of 25 iterations back more often than chance would have them out to
 about 7 steps. For a family of 200 iterations back, it is out to about 12
-([Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live)).
+([Where the lines live](b1-the-network-size-and-scaling.md#where-the-lines-live)).
 A family is a patch of the world that widens as its line ages, as a random
 walk spreads. So a world has territories after all: of lines, not of
 genotypes.
@@ -500,7 +500,7 @@ and Sneppen 1993). Some have argued that complex structure and computation
 live best near such a point, "at the edge of chaos" (Langton 1990).
 
 What the notebook has found is mixed
-([Power laws, real and apparent](power-laws-real-and-apparent.md)):
+([Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)):
 
 - the tokens of the richest agents follow the most convincing power law, over
   one to two decades;
@@ -514,7 +514,7 @@ What the notebook has found is mixed
   few hundred iterations. It is not the 1/*f* noise of a critical system,
   which has memory on every time scale.
 
-But [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)
+But [Worlds of many sizes](b1-the-network-size-and-scaling.md#big-worlds-do-not-average-out)
 found a property that does not change with size. The mean game cuts off
 about 2% of a world, at five hundred agents and at sixty thousand, with no
 trend. The worst cuts off a third to a half, at every size. The whole
@@ -534,7 +534,7 @@ within a step or two at every size.
 Two measurements since sharpen the picture. What agents hold is correlated
 over one or two steps only. That is a short correlation length, the distance
 over which likeness fades, so the worlds are far from critical
-([Like next to like](like-next-to-like.md)). But the space itself has no
+([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). But the space itself has no
 scale. Within *r* steps lie about *r*^3 agents, the same law from 3 steps to
 14 ([The rulers, on the worlds](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds),
 [Dimensions at scale](dimensions-at-scale.md)).
@@ -699,7 +699,7 @@ not fixed but shaped by what is in it. Wheeler put it in one line:
 In Graph of Life, the network tells the tokens where they can flow: only along
 connections. And the tokens tell the network which connections remain. In B1,
 a connection that no token crosses in a game is cut
-([How a world breaks](how-a-world-breaks.md)). In B2 an unused connection
+([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). In B2 an unused connection
 lapses only where its two ends share two neighbours, and deaths are mended
 with new connections. There, the tokens have less say over the network.
 
@@ -787,8 +787,8 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
   ages and connections, are alike only within one or two steps. Beyond three
   steps, it said, every part of a world is like every other. Agents of one
   genotype cluster within two or three steps
-  ([Like next to like](like-next-to-like.md)). And
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+  ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). And
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
   found that lines of descent hold patches. They reach about 7 steps for
   families of 25 iterations back, and about 12 for 200. So a world has
   territories, of lines ([Everywhere the same](#everywhere-the-same)).
@@ -811,17 +811,17 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
     ([The rulers, tried on known spaces](how-many-dimensions-does-a-world-have.md#the-rulers-tried-on-known-spaces)).
   - From 9 October, it said that births, like inequality, home stakes and
     genotypes, are the same in worlds of every size. But since 11 October,
-    [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#a-large-world-beside-ten-small-ones)
+    [Worlds of many sizes](b1-the-network-size-and-scaling.md#a-large-world-beside-ten-small-ones)
     has found them a little faster in larger worlds. Births and deaths per
     agent are 13 to 21% higher at 100,000 tokens than at 10,000.
   - From 9 October, it said that the richest agents' tokens follow a clean
     power law. On this day,
-    [Power laws, real and apparent](power-laws-real-and-apparent.md) read its
+    [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one) read its
     figure again, point by point. At 100,000 tokens the law holds for one
     decade, to about 500 tokens; at 10,000, for two.
   - From 9 October, it said that the share of a world one game cuts off has
     the same distribution at every size.
-    [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)
+    [Worlds of many sizes](b1-the-network-size-and-scaling.md#big-worlds-do-not-average-out)
     shows less. The mean, about 2%, and the worst game, 35% to 48%, do not
     change with size. The whole distributions have not been compared.
 - **9 November 2026.** From 9 October, the page said that worlds of 60,000
@@ -858,10 +858,10 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
 <!-- turns -->
 ---
 
-[Space and dimension](../README.md#space-and-dimension) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) →
+[Space and dimension](../README.md#space-and-dimension) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) →
 
 **Also about:** [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (22)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (20)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

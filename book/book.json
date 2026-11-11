@@ -27,11 +27,6 @@
       "about": "How unequal a world is, who stays rich, and how gains and losses are shared out."
     },
     {
-      "id": "network",
-      "title": "The shape and health of the network",
-      "about": "Degrees, cores, bridges, power laws and cuts: what shape the links take, and how a world breaks."
-    },
-    {
       "id": "space",
       "title": "Space and dimension",
       "about": "Whether a world is a space, of how many dimensions, what folds it, and the physics the project hopes for."
@@ -392,28 +387,11 @@
       "summary": "The two sets of rules every experiment starts from: B1, the algorithm as a new run is offered it, and B2, built so that its network cannot break."
     },
     {
-      "id": "how-much-does-the-seed-decide",
-      "title": "How much does the seed decide?",
-      "file": "pages/how-much-does-the-seed-decide.md",
-      "topics": [
-        "baselines",
-        "methods"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E03"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "Thirty baseline worlds that differ only in their seed end up alike: at 100,000 tokens, their sizes vary by about a tenth of the mean."
-    },
-    {
       "id": "a-world-that-cannot-break",
       "title": "Building B2: a world that cannot break",
       "file": "pages/a-world-that-cannot-break.md",
       "topics": [
         "baselines",
-        "network",
         "rules"
       ],
       "kind": "experiment",
@@ -469,65 +447,11 @@
       "summary": "How the notebook measures who holds the tokens and where they go: the Gini coefficient and its companions, what the game does when a brain scores nothing, and the flow of tokens along the connections.."
     },
     {
-      "id": "what-shape-does-the-network-take",
-      "title": "The shape of the network",
-      "file": "pages/what-shape-does-the-network-take.md",
-      "topics": [
-        "network",
-        "space"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E05"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "Within a hundred iterations, the founders' ring with its few shortcuts becomes a mesh, the core, with small trees hanging off it. The core holds more than half of the agents, three quarters of the tokens and every loop."
-    },
-    {
-      "id": "power-laws-real-and-apparent",
-      "title": "Power laws, real and apparent, and how to fit one",
-      "file": "pages/power-laws-real-and-apparent.md",
-      "topics": [
-        "network",
-        "methods"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A power law has no typical size, and on logarithmic axes it is a straight line. Least squares through such a plot gives a biased exponent."
-    },
-    {
-      "id": "how-properties-scale-together",
-      "title": "How properties scale together",
-      "file": "pages/how-properties-scale-together.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "On average, agents hold tokens in proportion to their connections plus one: the resting state of the even split. The exponent that least squares fits to this, 0.58, is no law; it says only that most agents have one or two connections."
-    },
-    {
-      "id": "how-a-world-breaks",
-      "title": "How a world breaks",
-      "file": "pages/how-a-world-breaks.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Only the largest connected piece of a world's network survives each phase, so a whole region can die in one game. In a typical settled world one connection holds a ninth of it to the rest, yet such weak points almost never give way."
-    },
-    {
       "id": "measuring-networks",
       "title": "Measuring a network: connections, hubs, distances and cuts",
       "file": "pages/measuring-networks.md",
       "topics": [
         "reference",
-        "network",
         "wealth",
         "space"
       ],
@@ -550,19 +474,6 @@
       "summary": "The rules of Graph of Life were chosen with physics in mind: they conserve the tokens, are the same everywhere, and are almost all local."
     },
     {
-      "id": "like-next-to-like",
-      "title": "Like next to like: how alike agents are at a distance",
-      "file": "pages/like-next-to-like.md",
-      "topics": [
-        "space",
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "How alike are two agents a given number of steps apart, and up to how far? The correlation function and the correlation length measure it."
-    },
-    {
       "id": "how-many-dimensions-does-a-world-have",
       "title": "Is a world a space? Dimension, and what folds it",
       "file": "pages/how-many-dimensions-does-a-world-have.md",
@@ -581,8 +492,7 @@
       "file": "pages/measuring-space.md",
       "topics": [
         "reference",
-        "space",
-        "network"
+        "space"
       ],
       "kind": "reference",
       "status": "written",
@@ -681,23 +591,6 @@
       "status": "analysed",
       "added": "2026-10-17",
       "summary": "Every agent of a B2 world dies at the age of 100, so a world keeps its size only if one agent in a hundred is born each iteration. How eagerly the agents breed decides how full the world gets; with its tokens fixed, a full world is a poor one."
-    },
-    {
-      "id": "how-does-a-worlds-size-follow-its-tokens",
-      "title": "Worlds of many sizes",
-      "file": "pages/how-does-a-worlds-size-follow-its-tokens.md",
-      "topics": [
-        "size",
-        "space"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E08",
-        "E10"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "Experiment 8 ran the first baseline, B1, at ten sizes, from 800 to 409,600 tokens. As its thesis said, agents and connections followed the tokens in proportion: about 0.14 agents per token."
     },
     {
       "id": "how-alike-the-agents-are",
@@ -1063,8 +956,7 @@
       "title": "Links to strangers",
       "file": "pages/links-to-strangers.md",
       "topics": [
-        "rules",
-        "network"
+        "rules"
       ],
       "kind": "study",
       "status": "analysed",
@@ -1115,7 +1007,6 @@
       "topics": [
         "reference",
         "healthy",
-        "network",
         "brains"
       ],
       "kind": "reference",
@@ -1326,6 +1217,28 @@
       "status": "analysed",
       "added": "2026-10-08",
       "summary": "B1's game and its tokens, as measured in October 2026: what agents stake and who wins the nodes, where tokens flow, and the groups they stay in."
+    },
+    {
+      "id": "b1-the-network-size-and-scaling",
+      "title": "B1: the network, size and scaling",
+      "file": "pages/b1-the-network-size-and-scaling.md",
+      "topics": [
+        "b1-history",
+        "baselines",
+        "space",
+        "size",
+        "methods"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "B1's network as measured in October 2026: its shape and core, how it breaks, power laws, how properties scale together, likeness at a distance, worlds of many sizes, and how much the seed decides.",
+      "experiments": [
+        "E03",
+        "E05",
+        "E08",
+        "E10"
+      ]
     }
   ],
   "parts": [
@@ -1367,7 +1280,6 @@
       "about": "What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.",
       "topics": [
         "wealth",
-        "network",
         "size",
         "brains",
         "groups"

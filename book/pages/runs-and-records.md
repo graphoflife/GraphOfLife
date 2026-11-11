@@ -302,7 +302,7 @@ on other rows they are `null`:
 | `dimension`, `ricciCurvature` | dimension and curvature from how balls grow | [Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension) |
 | `boxDimension`, `boxDimensionR2` | dimension from covering the network with boxes | [Box dimension](measuring-space.md#box-dimension) |
 | `lightningScore`, `cyclingShare`, `lightningLongest`, `flowImbalance`, and the `net…` versions, `netFlowShare` | tokens that go round in loops (phase 2) | [Lightning](measuring-tokens.md#lightning-tokens-that-go-round) |
-| `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly) |
+| `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly) |
 | `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree`, `changeVsTokens`, and their `…R2` | how one property of agents grows with another | [Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties) |
 | `assortativity` | whether hubs join hubs | [Assortativity](measuring-networks.md#assortativity) |
 
@@ -408,7 +408,7 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
   seconds per iteration. If the number of agents grows in step with the
   tokens, 200,000 tokens cost about 22. And it does: agents grow as the
   tokens to the power 1.00
-  ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
+  ([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 - Memory limits big worlds before time does. The lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
@@ -426,7 +426,7 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 - [Many worlds at once](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread): how the rows of thirty runs
   become one figure.
 - [Every setting](settings.md): what a run was asked to play.
-- [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md): how a
+- [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes): how a
   world's number of agents follows its tokens.
 
 ## How our view changed

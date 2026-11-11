@@ -166,7 +166,7 @@ several agents acting together.
 - **Correlations of a series with itself**, and the bias of measuring them
   against the series' own mean: Bartlett (1946), Marriott and Pope (1954),
   Kendall (1954). See [Autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum).
-- **[Power laws](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**, and why a straight stretch on log–log axes is weak evidence
+- **[Power laws](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**, and why a straight stretch on log–log axes is weak evidence
   of one: Clauset, Shalizi and Newman (2009). See
   [Logarithmic axes](statistics.md#logarithmic-axes-and-power-laws).
 - **Testing by shuffling**: the permutation test goes back to Fisher (1935).
@@ -258,5 +258,5 @@ several agents acting together.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

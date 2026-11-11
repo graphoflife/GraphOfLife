@@ -120,7 +120,7 @@ In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is 
 from −1.7 in the starting ring after the first [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). There it mostly means
 that the bushy neighbourhoods of hubs fill a ball's first steps, and the
 growth slows after them. Read it as "the growth slows", not as a sphere
-([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
+([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
 
 #### A caution
 
@@ -136,7 +136,7 @@ that holds steady over many scales
 
 - **The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.** In B1's worlds of 100,000 tokens the dimension is
   3.4 in the median world (3.0 at 10,000 tokens).
-  [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)
+  [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)
   reads it beside a picture of the ball growth itself.
 - **The health bar** asks for a dimension of 2.3 to 4
   ([The health bar](measuring-health.md#the-health-bar)). It cannot tell a space from a small
@@ -292,7 +292,7 @@ after its last game. Of size 1, every agent is a box alone:
 On logarithmic axes these lie close to a line of slope about −2: a box
 dimension of about 2. The world of seed 1 at 100,000 tokens, 14,870 agents,
 reads 1.70
-([Covering a world with boxes](what-shape-does-the-network-take.md#covering-a-world-with-boxes)).
+([Covering a world with boxes](b1-the-network-size-and-scaling.md#covering-a-world-with-boxes)).
 
 #### Reading the R²
 
@@ -310,7 +310,7 @@ same worlds. Over the thirty worlds it runs from 1.66 to 2.58, and in worlds
 of 10,000 tokens it is 1.85. The two dimensions look at different scales. Box
 covering runs to size 33, and at large sizes it counts the long, thin
 branches
-([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
+([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
 
 ## The random twin: is a world a space?
 
@@ -405,9 +405,9 @@ by the rule that made them. The line of 1.5 lies between the two.
 ### Where it is used
 
 - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world): B1's worlds and their
+  and [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world): B1's worlds and their
   cores have a dimension; their twins have none.
-- [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world): a B1 world with a
+- [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world): a B1 world with a
   mean [path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap) of 27.9 steps, against 6.0 when wired at
   random.
 - [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): the width of every kind of
@@ -427,7 +427,7 @@ by the rule that made them. The line of 1.5 lies between the two.
 
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
   the rulers on the worlds, and what folds a world into a small world.
-- [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world):
+- [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world):
   the viewer's measures on the baseline worlds.
 - [Physical inspiration](physical-inspiration.md#space-made-of-relations): why
   the notebook asks how many dimensions a world has.

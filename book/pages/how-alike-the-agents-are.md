@@ -75,7 +75,7 @@ to judge whether a world is diverse
   selection is a line, a family of genotypes. A line can take a world over in
   a few hundred iterations
   ([Genotypes and lineages](genotypes-and-lineages.md),
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 - B1 keeps five genotypes for every eight agents, in every world and at every
   size. That is a balance of making and copying. It moves with the rate of
   change and with nothing else

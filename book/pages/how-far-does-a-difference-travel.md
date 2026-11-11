@@ -174,7 +174,7 @@ Under the rules as round 3 played them, a difference is everywhere at once.
   after it ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
 - **The cull.** If a border goes quiet in one twin and not in the other, a
   whole region dies in one twin only, however far it reaches
-  ([How a world breaks](how-a-world-breaks.md)).
+  ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
 - **The share-out.** A different pool, or a different number of survivors,
   changes every survivor's share.
 

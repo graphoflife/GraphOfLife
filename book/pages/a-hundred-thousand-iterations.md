@@ -69,7 +69,7 @@ No world of the notebook had then lived longer than 3,000 iterations. That
 is how long the first thirty worlds of B1, at 10,000 tokens, were run
 ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). The largest worlds, of up to
 409,600 tokens, had lived 600
-([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 A reader may fairly ask whether cooperation is impossible here, or only slow.
 Perhaps the brains need longer to learn it.
 
@@ -207,13 +207,13 @@ of 10,000 tokens, one branch of the family tree replaced all the others
 about every 350 iterations
 ([Genotypes and lineages](genotypes-and-lineages.md)). A world twenty times
 larger is slower. By how much, the plan left to
-[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+[Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
 to measure, and it allowed for ten times as long.
 
 That has been measured since. The time a world needs to come down to a
 single founder's line grows as the tokens to the power 0.77. Ten times the
 tokens take 5.9 times as long
-([Verdict: slower than a front, faster than chance](how-does-a-worlds-size-follow-its-tokens.md#verdict-slower-than-a-front-faster-than-chance)).
+([Verdict: slower than a front, faster than chance](b1-the-network-size-and-scaling.md#verdict-slower-than-a-front-faster-than-chance)).
 If that holds up to 204,800 tokens, a world of that size needs about ten
 times as long as one of 10,000. That is just what the plan allowed for.
 
@@ -277,7 +277,7 @@ belongs to this world or to the rules.
 
 Why 204,800 tokens, rather than an even 200,000? Experiment 8 already ran
 this world, seed for seed, for 600 iterations (`B1-204800-s001`,
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 The first frames the long run keeps, those of iterations 483 to 499, must
 be that run's frames again. That is a free check that a run is still the
 same run a month and several program versions later
@@ -304,7 +304,7 @@ something new is what this experiment is for. It is flagged instead.
 
 | the sentinel flags | when |
 |---|---|
-| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens), for three blocks in a row |
+| **outside the known** | a statistic per agent or a share lies outside the band of the thirty worlds of [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens), for three blocks in a row |
 | **a new level** | a statistic's block mean lies beyond the range of all its earlier blocks by more than half that range, for five blocks in a row |
 | **cooperation** | the kin ratio or the share of lasting partners leaves the baseline worlds' range, in a window (below) |
 | **brains that see** | the median gain at a kept checkpoint passes 0.005 |
@@ -367,7 +367,7 @@ it. A frame that was not kept is a frame that has not been made again yet.
 - **Everything of [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)**, as
   block means over the whole run. They are set beside the bands of the
   baseline worlds and of
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens).
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens).
 - **Later, from the kept checkpoints:** a tournament across time, the
   brains of iteration 10,000 against those of iteration 90,000, in one
   world. A later population that beats an earlier one is adaptation that
@@ -388,7 +388,7 @@ thesis can be decided from iteration 52,000, about two weeks in, and the run
 can be stopped after any block.
 
 These costs may be too low. The same model gave the worlds of
-[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+[Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
 12 seconds an iteration, and they took 17. They are also B1's costs. A run
 on B2, whose brains are smaller, would have to be costed again. The model
 has been fitted since to 246 recorded runs.
@@ -570,7 +570,7 @@ built.
   stretches, the spectrum of the same worlds' number of agents levels off,
   from periods of 800 iterations on. A world is pulled back to its level,
   as a page of the day before had found
-  ([Power laws, real and apparent](power-laws-real-and-apparent.md#the-rhythm-of-the-wander)).
+  ([Power laws, real and apparent](b1-the-network-size-and-scaling.md#the-rhythm-of-the-wander)).
   And by the measure this page uses, a random walk has *H* = 1, so 0.8 to
   0.9 is a wander around a level. Its differences level off: about 1.1 times
   over a tenfold lag, not seven. The threshold of twice still lies between a
@@ -585,5 +585,5 @@ built.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

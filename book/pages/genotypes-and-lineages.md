@@ -207,7 +207,7 @@ the world. The first drop is the moment everyone alive descends from one
 founder ([One founder for everyone](b1-lives-and-wealth.md#one-founder-for-everyone)).
 In the median world it came at iteration 1,000, among the 27 that got there;
 three never did.
-[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+[Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
 counts it, and finds it 5.9 times as late as in the worlds of 10,000 tokens.
 After that the curve rises steadily again, one iteration per iteration. It
 drops whenever one branch of the family tree has outlived all the others.
@@ -297,7 +297,7 @@ first come down to a single founder. At 10,000 tokens it moved a median of 8
 times, about once every 350 iterations. In a world ten times larger, a line
 needs about as long to take it over as the whole run lasts. Why so much
 longer?
-[How a line takes over](how-does-a-worlds-size-follow-its-tokens.md#how-a-line-takes-over)
+[How a line takes over](b1-the-network-size-and-scaling.md#how-a-line-takes-over)
 asks that question, and [Selection, or chance?](#selection-or-chance) below
 gives its answer.
 
@@ -363,7 +363,7 @@ little to be better at. The brains are nearly blind, and agree on every
 decision that matters.
 
 The pace of a takeover tells a little more.
-[How a line takes over](how-does-a-worlds-size-follow-its-tokens.md#how-a-line-takes-over)
+[How a line takes over](b1-the-network-size-and-scaling.md#how-a-line-takes-over)
 sets out three paces for a world ten times larger. Chance alone would need
 ten times as long. A better brain in a well-mixed world, where every agent
 could meet every other, would need barely longer. A better line spreading
@@ -377,7 +377,7 @@ width of the world: the tokens to the power 0.30. Chance's would grow as the
 number of agents: the power 1. The measured pace lies between the two. It
 fits a line that spreads as a random walker wanders: its patch of the world
 widens more and more slowly
-([Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live)).
+([Where the lines live](b1-the-network-size-and-scaling.md#where-the-lines-live)).
 
 ## What we learned
 
@@ -400,7 +400,7 @@ widens more and more slowly
 
 ## Where to go next
 
-- [How a line takes over](how-does-a-worlds-size-follow-its-tokens.md#how-a-line-takes-over):
+- [How a line takes over](b1-the-network-size-and-scaling.md#how-a-line-takes-over):
   how long a line needs to fill a world ten times larger, and why.
 - [Do the brains matter?](do-the-brains-matter.md): worlds whose brains
   never change, where every sweep is chance.
@@ -592,6 +592,6 @@ iterations.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (16)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [!info]- Pages that link here (15)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

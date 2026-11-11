@@ -57,7 +57,7 @@ total never changes ([The world: tokens, agents and a network](the-world.md)).
 It starts as a thousand founders of a hundred tokens each, on a ring with a
 few shortcuts ([The starting ring](rules-in-detail.md#the-starting-ring)). The seeds are 1 to 30,
 and each world runs for 1,500 iterations. Together the thirty runs are
-Experiment 10 ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). The
+Experiment 10 ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)). The
 pages summed up in [What the baseline world is](what-the-baseline-world-is.md),
 and the measurements summed up in
 [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution),
@@ -118,8 +118,8 @@ the world's oldest agent.
 
 The thousand founders on their ring have become a network of dense clusters
 joined by thin paths, with many agents that hang on by a single connection.
-[What shape does the network take?](what-shape-does-the-network-take.md) takes
-this shape apart, and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world) its core.
+[What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) takes
+this shape apart, and [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world) its core.
 
 Any of the thirty worlds can be opened in the **Viewer** of the Graph of Life
 app, which replays a run frame by frame.
@@ -137,13 +137,13 @@ are answered on this page.
   born and how do they die? How old do they get?
 - [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life) — How do ages and
   lifespans change over a world's life?
-- [How much does the seed decide?](how-much-does-the-seed-decide.md) — How
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) — How
   much of what a world does is decided by its seed?
 - [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) — Where do the tokens
   go — how unequal does a world become?
 - [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) — How is the game
   played: where do agents stake, who wins the nodes?
-- [What shape does the network take?](what-shape-does-the-network-take.md) —
+- [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) —
   What shape does the network take?
 - [Genotypes and lineages](genotypes-and-lineages.md) — How long do genotypes
   last, and do lineages take over?
@@ -153,18 +153,18 @@ are answered on this page.
 - [Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich) — Do the rich stay rich?
 - [How the network grows](b1-lives-and-wealth.md#how-the-network-grows) — How does the network
   grow?
-- [Like next to like](like-next-to-like.md) — Are neighbours alike?
+- [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) — Are neighbours alike?
 - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world) — How many [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
+  and [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world) — How many [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
   does a world have, and its core?
 - [What the baseline world is](what-the-baseline-world-is.md) — What the
   baseline world is, in sum.
 
 Five of these pages were planned as experiments, Experiments 2 to 6:
 [A world's life](#a-worlds-life),
-[How much does the seed decide?](how-much-does-the-seed-decide.md),
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide),
 [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich),
-[What shape does the network take?](what-shape-does-the-network-take.md) and
+[What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) and
 [Genotypes and lineages](genotypes-and-lineages.md). Each wrote down a thesis
 before the runs of 10,000 tokens. Each quotes it, says whether it held there,
 and tests it again on the worlds of 100,000 tokens. The other pages only ask.
@@ -268,7 +268,7 @@ worlds of 10,000 tokens stayed within 15% of theirs (1,070 to 1,450 agents).
 Ten times the tokens hold eleven times the agents: 0.14 agents per token,
 where the smaller worlds held 0.13. That is a little more than the strict
 proportion that
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 found over a shorter life. And the typical large world holds stiller.
 
 #### Each world, early and late
@@ -306,7 +306,7 @@ Some of the difference is the shorter run: a wander has less time to go far.
 Some is size: the same number of games moves a large world by a smaller share
 of itself. **A typical world exists, and at this size a single world stays
 closer to it** — but not close.
-[How much does the seed decide?](how-much-does-the-seed-decide.md) measures
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measures
 the wandering, and asks how much of it the seed decides.
 
 #### Connections
@@ -331,7 +331,7 @@ the wandering, and asks how much of it the seed decides.
 The number of connections follows the number of agents, at about 1.7
 connections per agent. A connection has two ends, so an agent has about 3.5
 connections on average: its mean degree. Every agent is joined to three or
-four others ([What shape does the network take?](what-shape-does-the-network-take.md)).
+four others ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 The median number of connections was 24,730 over iterations 100 to 200, and
 22,570 over the last two hundred: 9% fewer. The worlds of 10,000 tokens had
 6% more late than early.
@@ -378,7 +378,7 @@ Ten games after the first cut, 2,137 agents were left. At iteration 1,416 one
 more cut took the world to 1,405 agents, the smallest any of the thirty
 worlds was after its youth. Then it grew again, to 7,400 by the end. No
 other world fell that low: the next-smallest low of any world was 5,070.
-[How a world breaks](how-a-world-breaks.md) takes such breakdowns apart.
+[How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks) takes such breakdowns apart.
 
 #### Was the thesis right? (the life of a B1 world)
 On the worlds of 10,000 tokens the thesis was **refuted**. Two of its tests
@@ -616,7 +616,7 @@ iteration 1,000, and the slowest at 1,475. Three worlds, those with seeds 13,
 Not one world got there within its first hundred iterations. Of the thirty
 smaller worlds, 13 did, and half had done so by iteration 175. **A world ten
 times the size takes about six times as long to come down to a single
-founder.** [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) reads in
+founder.** [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens) reads in
 that pace that a line spreads through a world as a random walk spreads, not
 as a front.
 
@@ -657,7 +657,7 @@ before it. Whatever the brains of a world learn, they learn in its youth.
   middle. A single world ends anywhere from about two thirds to one and a half
   times its early size. Where a world stands at iteration 1,500 is a moment in
   a wander; its mean over a long stretch says more
-  ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+  ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 - **Turnover settles late.** Births and deaths slow down until about
   iteration 500 in a large world, and until about 1,250 in a small one.
   Whatever depends on them, such as the ages of the living, settles only
@@ -687,18 +687,18 @@ From the runs, `python3 book_figures.py life` draws the figures of
 [A world's life](#a-worlds-life), `python3 book_figures.py youth` those of
 [The first hundred iterations](#the-first-hundred-iterations), and
 `python3 book_figures.py shape` the first look at a world, together with the
-figures of [What shape does the network take?](what-shape-does-the-network-take.md).
+figures of [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network).
 `python3 book_figures.py` alone redraws the figures of every page. Each
 figure says, folded beneath it, which of the runs it reads and how.
 
 A few figures on other pages set worlds of different sizes side by side: in
 [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life),
 [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md),
-[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world) and
+[The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world) and
 [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest). They also
 read the thirty worlds of 10,000 tokens (`python3 gol_lab.py run E02`), or
 the worlds of every size of
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 (`python3 gol_lab.py run E08`).
 
 #### The runs of Experiment 10 (the life of a B1 world)
@@ -915,7 +915,7 @@ counted per hundred agents alive when its phase began:
 **Births and deaths per 100 agents.** Each line is the median over the worlds, in stretches of 25 iterations, of a count divided by the agents present when the phase began, times 100. The first iterations run far above the top of the axis ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -970,7 +970,7 @@ least *L* iterations:
 **How long agents live.** Of all agents born at iteration 500 or later in the 30 worlds and alive after at least one game — the newborns cut off in the reproduction phase of their birth, or dead in their first game, are left out — the share that lived at least L iterations, for every L. A life is counted from the iteration of birth to the last iteration after whose game the agent was alive, both included. Lives still going when a run ended are counted as far as they went (Kaplan–Meier). Both axes are logarithmic.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -1016,7 +1016,7 @@ than the typical agent at death.
 **Ages of the living at the end.** The ages of all 394,056 agents alive after the last game of the 30 worlds, in bins that double in width: age 0 is born in this iteration, age 1 in the one before, and so on.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -1325,7 +1325,7 @@ connections or more, fewer than one in ten die ([The fate of the
 richest](b1-lives-and-wealth.md#the-fate-of-the-richest)). So the hubs make
 up more of the old than of the young. And an agent's tokens follow its
 connections ([How properties scale
-together](how-properties-scale-together.md)), so the old classes are richer
+together](b1-the-network-size-and-scaling.md#how-properties-scale-together)), so the old classes are richer
 too.
 
 So, as far as connections go, the risk falls with age because the mix changes.
@@ -1423,7 +1423,7 @@ cuts. An agent is cut off in a game about a fifth more often in a world of
 100,000 tokens than in one of 10,000. The rates are 2.1 and 1.7 per hundred.
 Being old is no protection when every connection between an agent's region and
 the rest of the world carries no tokens in the same game. Then all of them are
-cut together, and the region dies ([How a world breaks](how-a-world-breaks.md)
+cut together, and the region dies ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)
 calls it a border going quiet).
 
 ### What we learned (births)
@@ -1711,7 +1711,7 @@ having children. Then their worlds die out
 A world's network is not given. The rules make and unmake it, connection by
 connection: births make connections, and games and deaths unmake them
 ([Births build the network](#births-build-the-network)).
-[What shape does the network take?](what-shape-does-the-network-take.md)
+[What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)
 describes the shape that results. This section watches the making and the
 unmaking, and asks the question that decides the shape: who gains
 connections, and who loses them?
@@ -1811,7 +1811,7 @@ game. Meanwhile the world's total of connections stays in place, held there
 by its tokens, which set how many agents it can hold. Growth by random
 factors, kept off zero from below, makes heavy tails (Gabaix 1999). Losses
 that grow faster than gains bend the tail down at the top. That fits what
-[Power laws, real and apparent](power-laws-real-and-apparent.md) finds. Among
+[Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one) finds. Among
 the best-connected hundredth of agents, the connections follow a power law of
 exponent about 3 (the best-connected twentieth at 10,000 tokens). Below that
 tail, nothing is scale-free: nothing follows a power law.
@@ -2049,7 +2049,7 @@ Then it falls almost straight, over two powers of ten, to the richest agents.
 At 10,000 tokens it kept bending and showed no straight stretch; with ten
 times the agents there is room for a long tail. Whether it is a power law is
 the question of
-[Power laws, real and apparent](power-laws-real-and-apparent.md).
+[Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one).
 
 #### Inequality over time
 
@@ -2117,7 +2117,7 @@ The richest tenth hold on average 42% of all tokens over the settled life
 (33% to 50% between worlds; 44% at 10,000 tokens). The single richest agent
 holds about 2%, some 2,100 tokens, and from 1% to 13% between worlds. At
 10,000 tokens it held about 690 tokens over the same iterations, 7% of all
-([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 Over the small worlds' longer settled life, to iteration 2,999, it held 820.
 So in a world ten times larger, the richest agent holds three times as many
 tokens, and about a third of the share.
@@ -2180,7 +2180,7 @@ stakes nearly evenly over their own node and their neighbours'
 move tokens like a random walk. Such a walk comes to rest when every agent
 holds tokens in proportion to its connections **plus one**. The median agent
 of every class of connections holds close to that resting share
-([How properties scale together](how-properties-scale-together.md)). So, in
+([How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)). So, in
 the main, connections make agents rich. And a rich agent with few connections
 drains back to its share within a few games
 ([Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out)).
@@ -2308,7 +2308,7 @@ among about 14,000 agents, where perfect equality would need 13.8.
 The **degree evenness** is far lower: 0.47 (0.27 to 0.54; 0.59 at 10,000
 tokens). Agents are piled onto a few numbers of connections: 35% have exactly
 one, 23% exactly two
-([What shape does the network take?](what-shape-does-the-network-take.md)).
+([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 Meanwhile the hubs make the list of numbers that occur long, and longer in a
 larger world. Read this one with care. Its ceiling is log₂ of the number of
 *distinct* degrees in the world. So a single new hub of an unusual size raises
@@ -2472,7 +2472,7 @@ falls by 0.07 from 10 to 20 games, 0.11 from 50 to 100 and 0.13 from 100 to
 200. That is how memory fades when it is held by many things that last for
 very different times. Here the likely holders are the connections. An agent's
 tokens follow its number of connections plus one
-([How properties scale together](how-properties-scale-together.md)). And a
+([How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)). And a
 hub's connections outlast many games, while those of a leaf, an agent with a
 single connection, change all the time.
 
@@ -2540,7 +2540,7 @@ Ten games on, where are the agents of each fifth of the order of wealth?
   others are one fifth up or down.
 - Of the **poorest fifth**, 34% are still in it, 24% have risen one fifth,
   and **29% are dead**. Poverty is where agents die.
-  [How a world breaks](how-a-world-breaks.md) shows why: a region too poor to
+  [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks) shows why: a region too poor to
   keep its connections in use is cut off whole.
 
 Among those still alive, the **Shorrocks index** of the moves is **0.59**
@@ -3067,7 +3067,7 @@ Call that an agent's **resting share**. In the thirty worlds after their last
 game, rest would mean 1.7 tokens for each candidate: an agent's own node, and
 each neighbour's. Agents of every class of connections hold about that on
 average
-([How properties scale together](how-properties-scale-together.md#tokens-and-connections)).
+([How properties scale together](b1-the-network-size-and-scaling.md#tokens-and-connections)).
 So an agent with one connection rests at about 3.4 tokens, and a hub with a
 hundred connections at about 170.
 
@@ -3093,7 +3093,7 @@ tokens or more shrink by 48% in a game on average. And many of the richest are
 rich far beyond their place. Take the tail of the distribution of tokens: the
 3,358 agents that held 49 tokens or more after the last game of the thirty
 worlds. Of them, 33% have only one or two connections
-([Power laws, real and apparent](power-laws-real-and-apparent.md#the-tokens-a-power-law-in-the-tail)).
+([Power laws, real and apparent](b1-the-network-size-and-scaling.md#the-tokens-a-power-law-in-the-tail)).
 
 Some die before they drain. A rich agent with one or two connections dies in
 about one game in ten ([Rich and poor](#rich-and-poor)). If it is cut off, the
@@ -3215,7 +3215,7 @@ Extremes are also where scale shows first. In a larger world there is more
 room for one agent to become very large. Or the rules may hold every agent
 below some size, whatever the size of the world. Which of the two happens is a
 question about the rules.
-[Power laws, real and apparent](power-laws-real-and-apparent.md) asked it of
+[Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one) asked it of
 the whole distribution; this page asks it of the top.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of Experiment 10
@@ -3402,7 +3402,7 @@ of its 18,103 changes went to a child.
 
 The worlds of Experiment 8 say how the extremes grow with a world. It runs the
 baseline B1 at ten sizes, from 800 to 409,600 tokens, each double the one
-before ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
+before ([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 Each size has three seeds, run for 600 iterations. The figure shows the 25 of
 its worlds that lived to the end: none of 800 tokens, and one of 1,600.
 
@@ -3412,7 +3412,7 @@ its worlds that lived to the end: none of 800 tokens, and one of 1,600.
 **The largest, by the size of a world.** For every world of Experiment 8 that lived to its end, from 800 to 409,600 tokens, its mean over iterations 300–599 of the number of agents (x), and of the richest agent's share of all tokens (left) or the best-connected agent's connections (right); and the same for the 30 worlds of 100,000 tokens over iterations 500–1,499 (yellow). Both axes logarithmic; grey: the straight line least squares fits through the worlds of Experiment 8.
 
 > [!example]- How to make this figure
-> **Runs.** The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`); The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations ([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`); The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -3432,11 +3432,11 @@ So a world of ten times the tokens, which holds about eleven times the agents,
 has a richest agent about three times as rich. Its best-connected agent is
 about four times as connected. That is faster than the width of a world grows:
 ×2, since its diameter grows about as agents^0.30
-([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
+([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
 And it is slower than its agents (×11). Measured directly against the worlds
 of 10,000 tokens, the richest agent is 3.1 times as rich. The best-connected,
 stars included, is 7.7 times as connected
-([A large world beside ten small ones](how-does-a-worlds-size-follow-its-tokens.md#a-large-world-beside-ten-small-ones)).
+([A large world beside ten small ones](b1-the-network-size-and-scaling.md#a-large-world-beside-ten-small-ones)).
 
 No agent becomes a fixed share of the world as it grows. But there is more
 room at the top in a large world, and the stars show what it can be used for.
@@ -3498,7 +3498,7 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 
 ## Where to go next
 
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): how far
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): how far
   single worlds wander, and how much of it their seed decides.
 - [The settled life of a world](statistics.md#the-settled-life-of-a-world): why the notebook measures a
   world from iteration 500 on.
@@ -3506,13 +3506,13 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
   of the baseline, in sum.
 - [Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves): age, lifetime, the hazard and the
   stationary population, made exact.
-- [How a world breaks](how-a-world-breaks.md): the cuts that kill three in
+- [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks): the cuts that kill three in
   four of the agents that die.
 - [Genotypes and lineages](genotypes-and-lineages.md): how long brains and
   their lines last, rather than agents.
-- [What shape does the network take?](what-shape-does-the-network-take.md):
+- [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network):
   the shape that all this making and unmaking leaves.
-- [Power laws, real and apparent](power-laws-real-and-apparent.md): whether
+- [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one): whether
   the connections follow a power law, and where.
 - [Questioning the mechanics](questioning-the-mechanics.md): why a brain
   spreads by conquest more than by birth, and other rules worth questioning.
@@ -3680,6 +3680,6 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (44)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (38)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

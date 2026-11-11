@@ -506,7 +506,7 @@ so every agent holds the same number of tokens for each of its candidates. The
 worlds come close. Among the 394,056 agents alive after the last game of the
 thirty, rest would mean 1.70 tokens per candidate; the mean of each class runs
 from 2.28 for agents with one connection to 1.43–1.51 for those with ten or
-more ([How properties scale together](how-properties-scale-together.md#tokens-and-connections)).
+more ([How properties scale together](b1-the-network-size-and-scaling.md#tokens-and-connections)).
 The network keeps changing under the tokens, so no world is ever quite at rest.
 
 ### Where it is used

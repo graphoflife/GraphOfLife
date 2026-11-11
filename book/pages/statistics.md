@@ -167,7 +167,7 @@ wherever the wander happens to have taken it. A mean over 2,500 iterations
 averages much of the wander away. So it says more about the world, and less
 about the moment.
 
-[How much does the seed decide?](how-much-does-the-seed-decide.md) measures
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measures
 how much. Measured over their last 100 iterations, the worlds' sizes differ by
 a third of the mean. Measured over their settled life, they differ by a
 sixth.
@@ -227,12 +227,12 @@ add up to 200,000. Divided by 4, that is 50,000, so *s* = √50,000 ≈ 224. So
 The notebook's "dot columns" show the same thing without summing it up. Each
 world is a dot at its level divided by the mean of all worlds. So 1 is the
 average world, and a column's height shows the spread
-([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### What the spread is used for
 
 - To say how much the seed decides
-  ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+  ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 - To work out how many seeds an experiment needs: the number grows with *c*²
   ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)).
 
@@ -287,7 +287,7 @@ this with a [permutation test](statistics.md#permutation-tests). It shuffles
 the *y* values against the *x* values many times, and sees how often the
 shuffled pairs give an *r* at least as large.
 
-In [How much does the seed decide?](how-much-does-the-seed-decide.md), take
+In [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide), take
 26 worlds. Their numbers of agents in the first and the second half of a run
 correlate at 0.12. Shuffled pairings reach that 28 times in 100: it is
 nothing. For [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") the correlation is 0.41, which shuffled pairings
@@ -369,7 +369,7 @@ Two things to keep in mind:
 - **The line is pulled by where the points are.** Every point counts the
   same, so a crowd of points at small *x* decides the slope more than a few at
   large *x*. For distributions, this makes least squares a poor way to find an
-  exponent. [Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly) says what to do instead.
+  exponent. [Fitting a power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly) says what to do instead.
 
 ### Logarithmic axes and power laws
 
@@ -413,7 +413,7 @@ line on log–log axes, and its exponent is read off as the slope. Examples:
 
 - *b* = 1: *y* grows in proportion to *x*: twice the tokens, twice the
   agents. That is the question of
-  [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md).
+  [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes).
 - *b* = −1: *y* halves when *x* doubles.
 - A curve that **bends** downward on log–log axes is not a power law. It falls
   faster and faster, as an exponential tail does.
@@ -475,7 +475,7 @@ others throughout would look like a world with a long memory.
 - In the baseline, for the number of agents: 0.61 after 100 iterations in the
   worlds of 100,000 tokens (0.68 in those of 10,000). About a third of that
   is left after 200, and nothing after 300
-  ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+  ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### Why it dips below zero
 
@@ -502,7 +502,7 @@ to −0.17.
 deeper: about −0.5 at 700 iterations. The formula assumes that the memory
 dies within a few stretches. A level that also drifts slowly over the 1,400
 iterations is pushed further by the centring.
-[How much does the seed decide?](how-much-does-the-seed-decide.md#a-world-forgets)
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#a-world-forgets)
 brackets it with two made-up levels measured the same way. A random walk
 falls to −0.66 at 900 iterations, and a level with no memory at all sits at
 −0.08.
@@ -580,7 +580,7 @@ time *s* is *e*^(−*s*/τ) ([Autocorrelation](#autocorrelation)).
 The number of agents of the baseline worlds of 10,000 tokens has β ≈ −2.1
 for periods between 4 and 500 iterations. Its spectrum levels off for periods
 of 800 iterations and more. In the worlds of 100,000 tokens, β ≈ −1.8
-([Power laws, real and apparent](power-laws-real-and-apparent.md)). So a
+([Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)). So a
 world moves like a random walk on short scales, and is pulled back on long
 ones. Its τ is a few hundred iterations. In the small worlds, 70% of the
 variance lies at periods of 500 iterations or more, and 0.4% at periods
@@ -785,7 +785,7 @@ so 46 seeds per condition. Turned around: with 30 seeds, the smallest change
 found four times in five is Δ = (*z*₁ + *z*₂)·*c*·√(2/30) ≈ 0.12, that is
 12%. In the worlds of 100,000 tokens, measured over their settled life, *c*
 is 0.11, and 19 seeds are enough
-([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### Two lessons
 
@@ -797,7 +797,7 @@ is 0.11, and 19 seeds are enough
   needs four times the seeds.
 
 In the code, this is `seeds_needed` in `gol_analysis.py`.
-[How much does the seed decide?](how-much-does-the-seed-decide.md) draws *n*
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) draws *n*
 against Δ.
 
 ## Splitting variation: where, who and chance, and between worlds and within them
@@ -924,7 +924,7 @@ In the baseline worlds of 100,000 tokens the share between is a fifth to a
 quarter for most statistics: 21% for the number of agents. It is half for the
 share of agents in the core. At 10,000 tokens it is a tenth to a quarter, and
 17% for the number of agents
-([How much does the seed decide?](how-much-does-the-seed-decide.md)). So most
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)). So most
 of the variation is time, not seed.
 
 #### A caution
@@ -1056,13 +1056,13 @@ neuroscience it measures the dimension of neural activity (Gao and others
 
 ## Where to go next
 
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): the
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): the
   spread of thirty worlds, statistic by statistic.
 - [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world): bands at work, and single
   worlds drawn one by one.
-- [Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly): how to find an exponent from a
+- [Fitting a power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly): how to find an exponent from a
   distribution, and where its tail starts.
-- [How properties scale together](how-properties-scale-together.md): four
+- [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together): four
   power laws fitted to every agent of a world.
 - [When a world ends](rules-in-detail.md#when-a-world-ends): the deaths of whole worlds, counted in
   shares like the one above.
@@ -1083,13 +1083,13 @@ neuroscience it measures the dimension of neural activity (Gao and others
     *slightly* below zero, by about *S*/*m* ≈ 0.12. That holds for the worlds of
     10,000 tokens, with 29 stretches each. In the worlds of 100,000 tokens, with
     14, the dip reaches about −0.5 at 700 iterations
-    ([How much does the seed decide?](how-much-does-the-seed-decide.md#a-world-forgets)).
+    ([How much does the seed decide?](b1-the-network-size-and-scaling.md#a-world-forgets)).
 - *How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds*:
   - **24 October 2026.** The four notes became one page. The note on how many
     seeds an experiment needs had said that *c* is about 0.10 in the worlds of
     100,000 tokens. It also said that 19 seeds are enough. A spread of 0.10 would give
     16 seeds. The spread
-    [How much does the seed decide?](how-much-does-the-seed-decide.md) measures
+    [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measures
     is 0.11, and that gives 19.
 
 ## References

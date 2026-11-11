@@ -450,7 +450,7 @@ keep their node in 37% to 48% of games. Coalitions win nodes numbering 47% to
 
 In the other seven, one agent became a hub joined to a tenth of the world or
 more
-([How much does the seed decide?](how-much-does-the-seed-decide.md)). They
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)). They
 lie apart, in the order of their hubs. Take the world with seed 28, whose hub
 is joined to 58% of all agents. There, agents keep their node in 67% of
 games, and coalitions win nodes numbering only 16% of the agents. And 45% of
@@ -816,9 +816,9 @@ This is the law behind several findings of other pages:
 - a rich agent with few connections drains away within a few games.
 
 A world is never quite at rest, because the network keeps changing under the
-tokens. [How properties scale together](how-properties-scale-together.md)
+tokens. [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)
 measures how close it comes.
-[The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world) measures how fast a
+[The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world) measures how fast a
 random walk on such a network can settle at all.
 
 #### Who keeps their node
@@ -970,7 +970,7 @@ Why? A leaf stakes on its only neighbour or keeps everything at home, and its
 neighbour almost always stakes back on it. An agent with many connections and
 few tokens cannot send a token across each. If its neighbour does not send one
 either, the connection is gone. Every connection costs a token a game, from one
-side or the other. [How a world breaks](how-a-world-breaks.md) calls this the
+side or the other. [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks) calls this the
 price of a connection; here it is paid connection by connection.
 
 The viewer counts the connections cut after every game as `prunedEdges`: 6.7%
@@ -1220,7 +1220,7 @@ as B2 does (0.046 on loops, 0.95 left after cancelling), and B1's as B1 does
 The longest loop grows with the size of the world, as the tokens to the power
 0.31. That number is not new. The distances across these worlds grow as the
 number of agents to the power 0.25–0.30
-([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). And the
+([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). And the
 number of agents is proportional to the tokens. The worlds have a [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") of
 about 3.3
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
@@ -1320,7 +1320,7 @@ keep tokens going round more than chance would; B2's barely do.
 - **Big flows are rare.** A few connections carry hundreds or thousands of
   tokens in a game. Only an agent holding that many can send them, and the
   rich are the well connected
-  ([How properties scale together](how-properties-scale-together.md)).
+  ([How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)).
 - **Whether tokens go round is decided by one rule, not by the brains.** If a
   link must carry tokens to survive, agents stake on each other and the flow
   goes round (B1, and B2 with unused links lapsing). If links survive unused,
@@ -1962,10 +1962,10 @@ reads and how.
 <!-- turns -->
 ---
 
-← [B1: lives and wealth](b1-lives-and-wealth.md) · [B1, as described in October 2026](../README.md#b1-as-described-in-october-2026)
+← [B1: lives and wealth](b1-lives-and-wealth.md) · [B1, as described in October 2026](../README.md#b1-as-described-in-october-2026) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) →
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (38)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [!info]- Pages that link here (35)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

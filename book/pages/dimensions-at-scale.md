@@ -68,7 +68,7 @@ worlds:
    stops growing there, and a small world's balls reach it sooner. Then the
    readings would settle, as worlds grow, at the dimension they have.
 3. **Larger worlds are made differently.** They have a few more links per
-   agent ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#agents-and-connections-follow-the-tokens))
+   agent ([Worlds of many sizes](b1-the-network-size-and-scaling.md#agents-and-connections-follow-the-tokens))
    and bigger hubs, and so more room within a few steps. Then the dimension
    belongs to the size.
 
@@ -83,13 +83,13 @@ same code.
 
 - Experiment 8 ran the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") at ten sizes, from 800 to 409,600 tokens,
   three [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, for 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
-  ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
+  ([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
   Of its 30 worlds, 25 lived to the end: one of 1,600 tokens and every world
   of 3,200 tokens and more.
 - Experiment 2's worlds of 10,000 tokens, 26 of which lived through their
   3,000 iterations ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)).
 - Experiment 10's thirty worlds of 100,000 tokens, 1,500 iterations each
-  ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+  ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 
 Each world is read in its largest piece, after its last [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), by both rulers:
 balls grown all the way out from 100 agents drawn at random, and a lazy
@@ -103,7 +103,7 @@ beside it.
 
 A world's shape at large scales is restless. Its typical distance can
 double or halve within a few hundred iterations, as games cut off parts of it
-and lines sweep through it ([How a world breaks](how-a-world-breaks.md)). One
+and lines sweep through it ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). One
 look at a world is one draw from that restlessness. So each world's balls,
 and its twin's, are also read at five moments spread evenly over its
 [settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."),
@@ -187,7 +187,7 @@ and a fall once a typical ball nears a quarter of the world.
 **The two rulers, at every size.** The two rulers of [Is a world a space?](how-many-dimensions-does-a-world-have.md#two-rulers) on B1's worlds that are not stars, each line the median of the worlds of one size. From dark to bright: Experiment 8's worlds of 12,800 to 409,600 tokens (two or three of each size; below 12,800 tokens most of its worlds are stars). Grey: the 16 worlds of 10,000 tokens of Experiment 2 (dotted) and the 23 of 100,000 tokens of Experiment 10 (dashed). Left: the local dimension from balls, until a typical ball holds a quarter of its world, over the worlds and five moments of their settled lives. Right: the spectral dimension from a lazy random walk after their last game, of up to 1,024 steps, and of up to 8,192 in the worlds of 409,600 tokens, until it is back no more than 5/n more often than at rest.
 
 > [!example]- How to make this figure
-> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -275,7 +275,7 @@ only as a body's do, and stop where a body's stop.
 **One radius, every size.** The local dimension from balls, read between the same two radii at every size, against the agents of a world's largest piece (logarithmic). Each dot is a world, its median over five moments of its settled life: blue, Experiment 8's worlds of 1,600 to 409,600 tokens; green, Experiment 2's worlds of 10,000 tokens; yellow, Experiment 10's of 100,000 tokens; grey, the stars among them. A world whose typical ball holds a quarter of it before the outer radius, at most of its moments, has no dot. Lines, read the same way at 250 to 64,000 points: red, the ball cut out of a cubic grid; violet, the disc cut out of a square grid. Dashed: the same grids with no edge.
 
 > [!example]- How to make this figure
-> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -328,7 +328,7 @@ A third ruler needs no radius at all. Pack *N* points into a body of *d*
 dimensions, and it is about *N*^(1/*d*) points across: a cube of a thousand
 points is ten wide, a square of a thousand about 32. So how a world's width
 grows with its agents is a dimension too, read at the largest scale there is,
-the whole world ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)).
+the whole world ([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
 Here the width is the typical distance.
 
 <!-- figure scaledims/width -->
@@ -337,7 +337,7 @@ Here the width is the typical distance.
 **How wide a world is, at every size.** The typical distance of each world — the number of steps within which a typical agent's ball holds half of the world's largest piece — against the agents in that piece, both the medians over five moments of its settled life, on logarithmic axes. Blue: Experiment 8's worlds of 1,600 to 409,600 tokens, and dashed, the power law fitted to those of 3,200 tokens and more that are not stars, agents^0.20 (95% interval 0.15 to 0.27); green: Experiment 2's of 10,000 tokens; yellow: Experiment 10's of 100,000 tokens; grey: the stars among them; orange: the random twins of the worlds that are not stars. Lines: the disc and the ball cut out of a grid. On these axes a body of d dimensions is a line of slope 1/d, and a random network a curve that flattens.
 
 > [!example]- How to make this figure
-> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E10`).
+> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -391,7 +391,7 @@ has at each size.
 **Round 3's worlds, beside B1's at their size.** The width of a world — its typical distance over its random twin's — against its agents, on logarithmic axes. Blue: B1's worlds that are not stars, each the median over five moments of its settled life, and dashed, the power law fitted to them. Green and orange: the worlds of round 3 of the [screen of random worlds](a-screen-of-random-worlds.md) that lived to the end of their runs, each averaged from iteration 100 on as [Which worlds are healthy?](which-worlds-are-healthy.md) reads them, by whether their dead are mended (`mend_on_death`).
 
 > [!example]- How to make this figure
-> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E10`). Round 3 of the screen: every world of Experiments 40 to 42 that lived to the end of its run, 30,000 tokens, 3,000 iterations.
+> **Runs.** The 25 baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`B1-1600-s002`, `B1-3200-s001` … `B1-409600-s003`; [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`), after the game of iteration 599. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`). The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E10`). Round 3 of the screen: every world of Experiments 40 to 42 that lived to the end of its run, 30,000 tokens, 3,000 iterations.
 >
 > **Data.** From B1's frames, as above, and for round 3 `research/screen/health.json` (made by `research/screen/health.py` from the screen's readings).
 >
@@ -486,7 +486,7 @@ gave it the same make-up at every size would be the test.
 apart. In the largest worlds, a typical agent has half its world within 27
 steps (the median of their settled lives), and in the worlds of 100,000
 tokens a line of descent holds a patch out to about 12 steps
-([Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live)).
+([Where the lines live](b1-the-network-size-and-scaling.md#where-the-lines-live)).
 So even the largest worlds hold only a few such patches side by side. And
 B1's worlds widen slowly: ten times the agents make a world only
 10^0.20 ≈ 1.6 times as wide. A world that is to hold many regions far apart
@@ -535,7 +535,7 @@ which it widens faster as it grows.
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
   the two rulers, tried on known spaces, and what folds a world into a small
   world.
-- [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md): the
+- [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes): the
   experiment whose worlds this page reads at nine of its ten sizes.
 - [Stars and hubs](measuring-networks.md#stars-and-hubs): the hubs that give larger worlds more
   room close in.
@@ -728,6 +728,6 @@ figures.
 
 **Also about:** [Size and riches of a world](../README.md#size-and-riches-of-a-world), [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (4)
-> [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)
+> [!info]- Pages that link here (3)
+> [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

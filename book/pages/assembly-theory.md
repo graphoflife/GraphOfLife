@@ -217,7 +217,7 @@ A handful of worlds read with care, each after its last [game](one-iteration.md#
 
 - **B1 at 100,000 tokens**, all thirty worlds of Experiment 10 after
   [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,499, with 13,600 ego networks in the median world
-  ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
+  ([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 - **B2 at 10,000 tokens**, the ten worlds of B2 in Experiment 16 after
   iteration 1,999, with 3,400 in the median world
   ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)).

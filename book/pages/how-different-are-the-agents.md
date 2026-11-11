@@ -449,7 +449,7 @@ drawn at random.
 Kinds do sit in somewhat different places: in B2 by how many links their
 carriers have, in B1 by how rich they are. That fits niches. But it fits
 kinship as well. Relatives carry similar brains and live near one another
-([Like next to like](like-next-to-like.md)). So a kind may share a place
+([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). So a kind may share a place
 because it is a family, not because the place suits it. Telling the two
 apart needs an experiment: move a kind to another place, and see whether it
 does worse there.

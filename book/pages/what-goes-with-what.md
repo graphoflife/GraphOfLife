@@ -222,7 +222,7 @@ of magnitude there, and a few large values swamp a linear correlation.
 
 In B2 the logarithm reveals almost nothing. Its links are capped at eight,
 and most agents hold one to three tokens. So there is little range for a
-[power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.") to hide in. Only tokens per link against betweenness and PageRank
+power law to hide in. Only tokens per link against betweenness and PageRank
 gain much: −0.17 to −0.57, and −0.30 to −0.62.
 
 ## A whole world over time
@@ -284,7 +284,7 @@ holds 47% of it. Ordering the worlds along it orders them by their
 best-connected agent's share of the world, from 1% to 61%. The second
 component (18%) is how clustering and triangles grow with an agent's
 connections. The third (16%) is the population. The seven "star" worlds of
-[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+[Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
 are the far end of the first. A world is first of all a world with or
 without a star ([Stars and hubs](measuring-networks.md#stars-and-hubs)).
 

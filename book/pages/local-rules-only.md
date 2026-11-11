@@ -60,7 +60,7 @@ Why do the three matter?
   With them, a light cone cannot even be measured
   ([How far does a difference travel?](how-far-does-a-difference-travel.md)).
 - **For evolution.** The cull kills a region because it lost its way to the
-  rest, whatever its brains did ([How a world breaks](how-a-world-breaks.md)).
+  rest, whatever its brains did ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
   It also forbids a world to split into populations that go their own ways,
   which is how most new species begin (Mayr 1942;
   [One rule reaches across the world](questioning-the-mechanics.md#one-rule-reaches-across-the-world)).
@@ -141,7 +141,7 @@ differ in one detail differ everywhere from the first extra draw.
 ### A second road: pieces that never form
 
 [B2](b1-and-b2.md) took another road: rules under which no piece separates at
-all ([Worlds that cannot break](how-a-world-breaks.md#worlds-that-cannot-break)).
+all ([Worlds that cannot break](b1-the-network-size-and-scaling.md#worlds-that-cannot-break)).
 A death is mended ([`mend_on_death`](settings.md#mend_on_death)): the dead
 agent's former neighbours are joined up in a ring. An unused link lapses only
 where its two ends share neighbours ([`prune_needs`](settings.md#prune_needs)).
@@ -353,7 +353,7 @@ can never die: nobody dies of age, and an agent alone cannot starve. The six
 worlds culled 0.3% to 12.7% of their tokens in a game. Each such game would
 leave a piece behind, and its tokens with it; nothing brings them back. Against
 this: the regions that break off are the poorest
-([Poverty disconnects](how-a-world-breaks.md#poverty-disconnects)). Once they
+([Poverty disconnects](b1-the-network-size-and-scaling.md#poverty-disconnects)). Once they
 are gone, the largest piece may hold together better than before.
 
 **All three together** should do what pieces that live on do.
@@ -469,7 +469,7 @@ played today, for about 19 worker-hours.
   through it, planned on the local world of this page.
 - [Physical inspiration](physical-inspiration.md#where-the-speed-limit-is-broken):
   why physics asks for local rules.
-- [How a world breaks](how-a-world-breaks.md): what the cull removes, and
+- [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks): what the cull removes, and
   where.
 
 ## How this was made
@@ -503,5 +503,5 @@ under *Local rules only*.
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (7)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

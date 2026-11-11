@@ -72,7 +72,6 @@ how the pages hang together.
 #### The baselines B1 and B2
 
 - [B1 and B2: the two baselines](pages/b1-and-b2.md)
-- [How much does the seed decide?](pages/how-much-does-the-seed-decide.md)
 - [Building B2: a world that cannot break](pages/a-world-that-cannot-break.md)
 
 ### What the worlds do
@@ -83,17 +82,9 @@ how the pages hang together.
 
 - [What keeps wealth spread?](pages/what-keeps-wealth-spread.md)
 
-#### The shape and health of the network
-
-- [The shape of the network](pages/what-shape-does-the-network-take.md)
-- [Power laws, real and apparent, and how to fit one](pages/power-laws-real-and-apparent.md)
-- [How properties scale together](pages/how-properties-scale-together.md)
-- [How a world breaks](pages/how-a-world-breaks.md)
-
 #### Size and riches of a world
 
 - [What holds a world's size](pages/what-holds-a-worlds-size.md)
-- [Worlds of many sizes](pages/how-does-a-worlds-size-follow-its-tokens.md)
 
 #### Brains, and how alike agents are
 
@@ -120,7 +111,6 @@ how the pages hang together.
 #### Space and dimension
 
 - [Physical inspiration](pages/physical-inspiration.md)
-- [Like next to like: how alike agents are at a distance](pages/like-next-to-like.md)
 - [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
 - [Dimensions at scale](pages/dimensions-at-scale.md)
 - [Which properties have no scale?](pages/which-properties-have-no-scale.md)
@@ -200,4 +190,5 @@ how the pages hang together.
 - [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
 - [B1: lives and wealth](pages/b1-lives-and-wealth.md)
 - [B1: the game and its flows](pages/b1-the-game-and-its-flows.md)
+- [B1: the network, size and scaling](pages/b1-the-network-size-and-scaling.md)
 <!-- /contents -->

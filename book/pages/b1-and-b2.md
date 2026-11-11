@@ -119,7 +119,7 @@ B2's healthy but poor.
 <!-- turns -->
 ---
 
-[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [How much does the seed decide?](how-much-does-the-seed-decide.md) →
+[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) →
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 

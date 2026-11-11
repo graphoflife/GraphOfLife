@@ -370,7 +370,7 @@ A floor set by the neighbours is no pull toward a steady size.
   of ending the free ride, Experiments 19 and 22.
 - [Room and riches for the steadiest world](room-for-the-steadiest-world.md):
   the floor on a child's tokens, and where the poor agents come from.
-- [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md):
+- [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes):
   the other side of this topic, in B1: a world of twice the tokens holds twice
   the agents.
 
@@ -396,7 +396,7 @@ A floor set by the neighbours is no pull toward a steady size.
 <!-- turns -->
 ---
 
-[Size and riches of a world](../README.md#size-and-riches-of-a-world) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) →
+[Size and riches of a world](../README.md#size-and-riches-of-a-world)
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 

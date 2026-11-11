@@ -44,7 +44,7 @@ A world is finite. So even a quantity with no scale of its own meets one
 limit: the world. The question is therefore asked by growing the world.
 Measure the same quantity in worlds of many sizes, and draw its distribution
 for each size: for every value *x*, how many values are at least *x* (the
-CCDF of [Power laws, real and apparent](power-laws-real-and-apparent.md#what-a-power-law-is-and-why-it-is-hard-to-see)).
+CCDF of [Power laws, real and apparent](b1-the-network-size-and-scaling.md#what-a-power-law-is-and-why-it-is-hard-to-see)).
 As the worlds grow, one of three things happens.
 
 1. **The curves lie on top of each other.** The quantity has a size of its
@@ -142,7 +142,7 @@ made of many independent parts, such as the share of heads in many coin
 tosses. The more parts there are, the more their ups and downs cancel, and
 the less the share varies: its spread falls as one over the square root of
 the number of parts. That is the law of large numbers, which
-[Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)
+[Worlds of many sizes](b1-the-network-size-and-scaling.md#big-worlds-do-not-average-out)
 explains step by step. A critical system breaks it.
 
 <!-- figure noscale/spread -->
@@ -151,7 +151,7 @@ explains step by step. A critical system breaks it.
 **Does it average out?** How widely a share varies, relative to its middle: the 90th percentile minus the 10th, divided by the median. Left: the share of a lattice held by its largest cluster, over the 200 lattices of each size, at the threshold of percolation (yellow) and above it, at p = 0.70 (blue). Right: for every world, over the games of its settled life, the share of the agents at the start of a game that the game cut off (orange) and that starved in it (violet), in the worlds of Experiment 8 over iterations 500 to 599; small grey dots, the share cut off in the worlds of 10,000 and 100,000 tokens, over iterations 500 to 1,499. Dashed: what a sum of independent parts does — its spread falls as one over the square root of its size — drawn through the smallest lattices above the threshold (left) and through the worlds of 3,200 tokens (right).
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`. And the lattices of the figure above.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`. And the lattices of the figure above.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -172,7 +172,7 @@ of large numbers says: its spread falls from 0.12 to 0.005.
 ## The worlds
 
 Experiment 8 ran the baseline [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at ten sizes, three [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, for 600
-[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
+[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") ([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 Its eight sizes from 3,200 tokens up all lived to the end. They hold from
 about 470 agents to about 63,000, a range of 130. This page reads them over
 their settled life, iterations 500 to 599. Three worlds a size show only what
@@ -185,7 +185,7 @@ read over iterations 500 to 1,499. Those hold about 1,300 and 15,000 agents.
 
 ## The share one game cuts off
 
-[Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#big-worlds-do-not-average-out)
+[Worlds of many sizes](b1-the-network-size-and-scaling.md#big-worlds-do-not-average-out)
 found that the mean game cuts off about 2% of a world's agents at every size,
 and the worst a third to a half. Whether the whole distribution is the same
 at every size it left open. Here it is compared, game by game.
@@ -217,7 +217,7 @@ share.
 **Small cuts average out, big cuts keep their share.** For every share x of a world, the share of games that cut off at least that share of the agents alive at their start; both axes logarithmic. Left: the worlds of Experiment 8, the three of each size pooled, over the games of iterations 500 to 599, one line per size from blue-green (3,200 tokens) to yellow (409,600). Right: the worlds of 10,000 and of 100,000 tokens, pooled, over iterations 500 to 1,499. The dashed line marks a tenth of a world.
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -251,7 +251,7 @@ A game does not cut off one piece of a world. Every connection across which
 nobody staked is cut, the agents left without tokens are removed, and the
 [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") keeps only the largest connected piece that remains. Everything else
 dies, often hundreds of pieces at once
-([How a world breaks](how-a-world-breaks.md)). The runs do not record the
+([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). The runs do not record the
 pieces, but their frames hold everything needed to find them again: the world
 as the game began, what every agent staked, and which connections were cut.
 Rebuilt so, the pieces of each of the 5,400 games read add up exactly to the
@@ -265,7 +265,7 @@ run's own count of agents cut off.
 **The pieces one game cuts off.** Every piece the cull removed in the games of iterations 500 to 599 of the worlds of Experiment 8 — the connected pieces of the network, other than the largest, left when the game's unused connections are cut and the agents with no tokens removed. Left: for every size s, how many pieces of s agents or more a game cut off, per 1,000 agents at its start; one line per size of world, the three worlds of a size pooled, from blue-green (3,200 tokens) to yellow (409,600). Dashed: the law P(s) ∝ s^−2, for comparison. Right: the same lines with s as a share x of the agents of the world, and the number of pieces of that share or more one game cuts off, times x.
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -325,7 +325,7 @@ fall.
 **What hangs behind a bridge.** Every bridge of the network after the games of iterations 509, 519, … 599 of the worlds of Experiment 8, and the smaller of the two pieces it holds together: the branch behind it, which cutting it would cut off ([Cut risk](measuring-networks.md#cut-risk)). Left: for every size s, how many branches of s agents or more a world has, per 1,000 agents; one line per size of world, from blue-green (3,200 tokens) to yellow (409,600). Dashed: the same for a tree grown by joining each newcomer to a member drawn at random, 200,000 members, per 1,000 members — exactly 1,000/s. Right: the worlds' lines with s as a share x of the agents of the world, and the number of branches of that share or more a world has, times x.
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -367,7 +367,7 @@ yet a test.
 
 Tokens and connections are the two quantities of an agent whose tails look
 most like power laws
-([Power laws, real and apparent](power-laws-real-and-apparent.md)). Do their
+([Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)). Do their
 ends move out as worlds grow, as a critical system's would?
 
 <!-- figure noscale/riches -->
@@ -376,14 +376,14 @@ ends move out as worlds grow, as a critical system's would?
 **Tokens and connections at every size.** Left: for every x, how many agents of every 1,000 hold x tokens or more (top) or have x connections or more (bottom), in the worlds of Experiment 8 after the games of iterations 509, 519, … 599, the three worlds of a size pooled; one line per size, from blue-green (3,200 tokens) to yellow (409,600). Right: for every world, the median over those ten looks of the most tokens one agent held (top) and of the most connections (bottom), against the agents of the world: orange, the worlds of Experiment 8; grey, the 30 worlds of Experiment 10, over their last 100 games. Dashed: how the largest of n values would grow if they were drawn from the power law fitted to the tail of the smallest worlds — as n^(1/(γ−1)) — drawn through the smallest worlds.
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`. For the numbers at 100,000 tokens, the 30 runs of Experiment 10 (`B1-100000-s001` … `-s030`, `python3 gol_lab.py run E10`), over their last 100 games, iterations 1,400 to 1,499.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`. For the numbers at 100,000 tokens, the 30 runs of Experiment 10 (`B1-100000-s001` … `-s030`, `python3 gol_lab.py run E10`), over their last 100 games, iterations 1,400 to 1,499.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read frames 2·t + 1 for the ten looks: `tokens`, and every agent's connections counted from `edges`.
 > 2. Left: pool each size's looks; for every x, the agents with x or more divided by all agents, times 1,000.
 > 3. Right: the largest value of each look, and its median over the looks of each world.
-> 4. The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent](power-laws-real-and-apparent.md#fitting-a-power-law-properly), done on the pooled values of the smallest worlds (`book_chapters.noscale.tail_fit`).
+> 4. The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly), done on the pooled values of the smallest worlds (`book_chapters.noscale.tail_fit`).
 >
 > **To make it again:** `python3 book_figures.py noscale`.
 <!-- /figure -->
@@ -418,7 +418,7 @@ worlds of 100,000 tokens alone it ranges from 63 to 11,181.
 
 ## How far likeness reaches
 
-[Like next to like](like-next-to-like.md) measured how far likeness reaches in
+[Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) measured how far likeness reaches in
 the worlds of 10,000 and 100,000 tokens: one or two steps. At a critical
 point, the reach would grow with the system, without end. Here is the same
 measurement at every size.
@@ -429,12 +429,12 @@ measurement at every size.
 **How far likeness reaches, at every size.** For pairs of agents r steps apart in the worlds of Experiment 8: left, the share of the pairs whose two agents carry the same genotype (logarithmic); right, the correlation of their ages, as ln(1 + age). Pairs from breadth-first searches out of 150 agents drawn at random, after the games of iterations 500, 549 and 599, the three worlds of a size pooled; one line per size, from blue-green (3,200 tokens) to yellow (409,600).
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with `python3 gol_lab.py run E08`.
+> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
 > 1. Read frames 2·t + 1 for t = 500, 549 and 599; draw 150 agents at random (numpy's generator seeded 62, once per run) and search out from each to 10 steps.
-> 2. Every agent reached at r steps makes a pair with the agent searched from. Kin: the share of the pairs at r that carry the same `brain_ids`. Age: Pearson's correlation over the pairs at r of ln(1 + `ages`), standardised within each frame, as in [Like next to like](like-next-to-like.md#the-correlation-function) (`book_chapters.noscale.likeness_at`).
+> 2. Every agent reached at r steps makes a pair with the agent searched from. Kin: the share of the pairs at r that carry the same `brain_ids`. Age: Pearson's correlation over the pairs at r of ln(1 + `ages`), standardised within each frame, as in [Like next to like](b1-the-network-size-and-scaling.md#the-correlation-function) (`book_chapters.noscale.likeness_at`).
 > 3. Pool the sums of each size's three worlds and three moments.
 >
 > **To make it again:** `python3 book_figures.py noscale`.
@@ -465,7 +465,7 @@ at every size. Likeness has a scale of its own, a step or two, in a world of
 | distances, and the agents within them | grow as powers: a space of about 3.3 dimensions | **no** |
 
 The last row comes from
-[Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power)
+[Worlds of many sizes](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)
 and [Is a world a space?](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds).
 
 How sure is each row? **Established**, in about thirty worlds at each of two
@@ -526,12 +526,12 @@ experiment, not a finding.
 
 ## Where to go next
 
-- [How a world breaks](how-a-world-breaks.md): what severs a region when a
+- [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks): what severs a region when a
   landslide comes, and why poverty does it.
-- [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md): the
+- [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes): the
   experiment whose worlds this page reads, and how a world's size follows its
   tokens.
-- [Power laws, real and apparent](power-laws-real-and-apparent.md): how a
+- [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one): how a
   power law is fitted, and the tails of tokens and connections at 100,000
   tokens.
 - [Physical inspiration](physical-inspiration.md): the physics behind the

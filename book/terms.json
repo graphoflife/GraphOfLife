@@ -435,7 +435,7 @@
       "also": [
         "correlation function"
       ],
-      "page": "like-next-to-like",
+      "page": "b1-the-network-size-and-scaling",
       "says": "How far apart two agents can be and still be alike: how fast likeness fades with distance.",
       "anchor": "how-alike-at-a-distance"
     },
@@ -591,7 +591,7 @@
     },
     {
       "name": "power law",
-      "page": "power-laws-real-and-apparent",
+      "page": "b1-the-network-size-and-scaling",
       "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones.",
       "anchor": "fitting-a-power-law-properly"
     },
@@ -702,9 +702,6 @@
     "every-world-side-by-side": [
       "correlation"
     ],
-    "power-laws-real-and-apparent": [
-      "extinction"
-    ],
     "healthy-and-rich": [
       "candidate"
     ],
@@ -751,6 +748,9 @@
     ],
     "assembly-theory": [
       "hub"
+    ],
+    "b1-the-network-size-and-scaling": [
+      "extinction"
     ]
   }
 }

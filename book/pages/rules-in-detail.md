@@ -1188,7 +1188,7 @@ statistics — inequality, clustering, families — mean little. Stopping at 20
 also saves running a dying world to its end.
 
 But a world at 20 agents is not always dying.
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 ran small worlds with the threshold at 0. All six worlds of 800 and 1,600
 tokens lived to iteration 600, and five of them were worlds the threshold had
 stopped after their first game. One of them fell to 4 agents and came back.
@@ -1242,7 +1242,7 @@ fewer.
   founders become a world.
 - [Is a run reproducible?](is-a-run-reproducible.md): the experiment that
   tested all this, and found the threads.
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): how
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): how
   differently thirty worlds of the same settings turn out.
 - [How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs): why an experiment
   runs many seeds.
@@ -1263,7 +1263,7 @@ fewer.
   the changes grow.
 - [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): what changing brains find,
   and where they stop.
-- [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md):
+- [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes):
   small worlds near the line, and below it.
 
 ## How our view changed
@@ -1290,7 +1290,7 @@ fewer.
     it saves running a dying world to its end. Small worlds run with the
     threshold at 0 then showed that a world at 20 agents is not always dying:
     all six of 800 and 1,600 tokens lived on
-    ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+    ([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
   - **23 October 2026.** Until now the page said that a world which falls to 20
     agents or fewer in the reproduction phase, and recovers in the game, is not
     extinct. No world can do that, because a game adds no agents: only the

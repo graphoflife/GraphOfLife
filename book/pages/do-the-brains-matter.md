@@ -66,7 +66,7 @@ iterations, or until its world dies out ([The runs of Experiment
 
 In the baseline the seed hardly matters. Thirty worlds that differ only in
 their seed all wander through the same range ([How much does the seed
-decide?](how-much-does-the-seed-decide.md)). Is evolution what keeps them
+decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)). Is evolution what keeps them
 alike? Two pilot worlds whose brains never change suggested so. They ended up
 nothing alike: one froze, with the same agents game after game, while the
 other boomed and crashed. Without new brains, it seemed, nothing can move a
@@ -90,7 +90,7 @@ it was written down:
 > [!quote] The thesis of Experiment 7, written down before any of its runs existed
 > **The claim.** Evolution is what makes the worlds alike. A world whose brains never change is stuck with the brain of whichever founder's line takes it over, and worlds of different seeds, stuck with different founders, end up far more different from each other than worlds that keep evolving: some still, some teeming.
 >
-> **Why it would be so.** In the baseline the seed hardly matters (Chapter [4](how-much-does-the-seed-decide.md)): every world wanders through the same range. Two pilots of a world without change, run to plan this chapter, ended up nothing alike. In one, the descendants of a single founder filled the world by iteration 50, and from about iteration 100 no one was born and no one died: the same 1,420 agents, game after game. In the other, a different founder's descendants kept the world in boom and bust, between about 1,000 and 3,200 agents, with hundreds of births in every iteration. With no new brains, nothing can move a world off the policy it was dealt.
+> **Why it would be so.** In the baseline the seed hardly matters (Chapter [4](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)): every world wanders through the same range. Two pilots of a world without change, run to plan this chapter, ended up nothing alike. In one, the descendants of a single founder filled the world by iteration 50, and from about iteration 100 no one was born and no one died: the same 1,420 agents, game after game. In the other, a different founder's descendants kept the world in boom and bust, between about 1,000 and 3,200 agents, with hundreds of births in every iteration. With no new brains, nothing can move a world off the policy it was dealt.
 >
 > **It holds if:** Over the settled life of the runs, from iteration 500 on: the number of agents varies across the surviving worlds without change by at least twice as much as across the baseline's (a spread, sd ÷ mean, of at least 0.34 against 0.17); births vary across them at least twice as much as well; and more than half of all the variation in a world's number of agents lies between the worlds rather than within each of them over time (against 0.17 in the baseline).
 >
@@ -353,7 +353,7 @@ In a world whose brains never change, the founders' lines still compete until
 one of them fills the world. In the median world that happens between
 iterations 75 and 100. In the baseline the median over all thirty worlds is
 iteration 175, as [Worlds of 100,000
-tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
 counts it. Among the 26 baseline worlds that lived to the end, it is 125. From
 then on, every agent of a world without change carries the same brain, and
 which genotype spreads is pure chance.
@@ -433,7 +433,7 @@ lines that take a settled world over do not carry brains that play better.
 - **The wander needs evolution.** A world without change hardly wanders at
   all. But it is not the sweeps that drive the wander. In the large worlds of
   [Worlds of 100,000
-  tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens),
+  tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens),
   a world forgets its level within three hundred iterations. But a line needs
   about a thousand to take a world over. So the wander is faster than the
   sweeps, and not made by them ([One slow wander, in
@@ -445,7 +445,7 @@ lines that take a settled world over do not carry brains that play better.
   matter only as constants, and why they barely see.
 - [Genotypes and lineages](genotypes-and-lineages.md): how lines of descent
   take worlds over, and whether the winners are better.
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): how
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): how
   alike thirty baseline worlds are, and how long each one remembers.
 - [How fast should brains change?](how-fast-should-brains-change.md): what the
   rate of change does to a world.
@@ -556,7 +556,7 @@ every run.
 - **14 October 2026.** From 8 October, this page gave iteration 125 as the
   baseline's median for one founder's line to fill a world. That is the median
   of the 26 worlds that lived to the end. [Worlds of 100,000
-  tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+  tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
   counts all thirty, and finds 175. The same pass made the two pages agree:
   this page now gives both.
 - **24 October 2026.** From 8 October, this page said that the 1,297 agents of

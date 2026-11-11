@@ -370,7 +370,7 @@ dies.
 **What the data say.** 30% of agents holding one token die in a game
 ([Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out)). Quiet borders — agents too poor to
 stake across their connections — cost whole regions
-([How a world breaks](how-a-world-breaks.md)).
+([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
 
 **Why it matters.** There is no way to save, to wait, or to hold back. The
 poor live on a coin toss. That toss kills a large share of the world's agents
@@ -410,12 +410,12 @@ cut ([`prune_after`](settings.md#prune_after),
 game ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)). 66% of mutual
 stakes are one token each way, 58% at 10,000 tokens
 ([Do agents cooperate?](do-agents-cooperate.md)). Regions of poor agents lose
-their connections and die ([How a world breaks](how-a-world-breaks.md)).
+their connections and die ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
 
 **Why it matters.** Much of what agents stake on their neighbours is the rent
 of their connections. The rule ties the network to the tokens: every
 connection costs a token a game. That may be what sets a world's size
-([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 And it makes the poor lose their place in the network first.
 
 **What could replace it.** The setting `inactive_window = iteration` already
@@ -445,18 +445,18 @@ cut off. This rule is the cull ([One iteration, step by step](one-iteration.md))
 **What the data say.** Three deaths in four are cut-offs
 ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). A sixth of them happen
 in the one game in fifty that cuts off a thousand agents or more. A single
-game has cut off half a world ([How a world breaks](how-a-world-breaks.md)).
+game has cut off half a world ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
 
 The losses grow with the world. In worlds from 3,200 to 409,600 tokens, a
 single game has cut off a third to a half of all agents, at every size. So a
 big world changes from game to game as much, relatively, as a small one
-([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 
 **Why it matters.** The rules of an agent's life are local: it stakes on its
 neighbours, has its children beside itself, and dies when its own node is
 empty. This one is not. Whether a region lives depends on its connection to
 the rest of the world, however well it is doing inside. The thesis of
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 reasoned that "nothing in the rules reaches across the world" except the
 share-out; this rule does too.
 
@@ -468,7 +468,7 @@ the tokens it holds. On its own that would make the split permanent, since a
 birth only joins a child to its parent's neighbourhood. So pair it with an
 occasional long-range connection — a child joined, rarely, to an agent
 anywhere. That would let separated populations meet again, and would also
-shorten the world's distances ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
+shorten the world's distances ([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)).
 
 **What B2 did.** It took the other road: a world that cannot split.
 [A world that cannot break](a-world-that-cannot-break.md) adds three local
@@ -594,7 +594,7 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
   [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
 - **14 October 2026.** From 11 October the page said that a single game had
   cut off two thirds of a world. It was half: 9,460 agents, the largest cut in
-  the thirty worlds ([How a world breaks](how-a-world-breaks.md)).
+  the thirty worlds ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
 - **15 October 2026.** A note added the day before said that under B2's rules
   evolution still stopped within a few hundred iterations, in every pilot.
   Contests an agent's lifetime long showed that it goes on, more slowly as it
@@ -608,6 +608,6 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (13)
-> [The brain](the-brain.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (12)
+> [The brain](the-brain.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

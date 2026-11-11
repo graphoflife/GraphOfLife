@@ -381,7 +381,7 @@ def e08_text(specs: List[Any]) -> str:
     return (f"The {len(specs)} baseline runs of Experiment 8 from {sizes[0]:,} tokens up, `{specs[0].run_id}` … "
             f"`{specs[-1].run_id}`: B1 at {listed(sizes)} tokens, seeds 1 to 3, 600 iterations each, every one "
             "alive at the end (every setting is listed in "
-            "[Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). They are made with "
+            "[Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with "
             "`python3 gol_lab.py run E08`.")
 
 
@@ -389,7 +389,7 @@ def pair_text(small: List[Any], large: List[Any]) -> str:
     return (f"The {len(small)} baseline runs of Experiment 2 that lived past iteration {SETTLED_PAIR[1]:,} "
             f"(`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world]"
             f"(b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the {len(large)} of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 "
-            "tokens, 1,500 iterations each, [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)). "
+            "tokens, 1,500 iterations each, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). "
             "They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.")
 
 
@@ -951,7 +951,7 @@ def riches_figures(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
                        "times 1,000.",
                        "Right: the largest value of each look, and its median over the looks of each world.",
                        "The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent]"
-                       "(power-laws-real-and-apparent.md#fitting-a-power-law-properly), done on the pooled "
+                       "(b1-the-network-size-and-scaling.md#fitting-a-power-law-properly), done on the pooled "
                        "values of the smallest worlds (`book_chapters.noscale.tail_fit`)."]))
     ch.number("riches", numbers)
 
@@ -987,7 +987,7 @@ def likeness_figure(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
                        "Every agent reached at r steps makes a pair with the agent searched from. Kin: the share of "
                        "the pairs at r that carry the same `brain_ids`. Age: Pearson's correlation over the pairs at "
                        "r of ln(1 + `ages`), standardised within each frame, as in [Like next to like]"
-                       "(like-next-to-like.md#the-correlation-function) (`book_chapters.noscale.likeness_at`).",
+                       "(b1-the-network-size-and-scaling.md#the-correlation-function) (`book_chapters.noscale.likeness_at`).",
                        "Pool the sums of each size's three worlds and three moments."]))
     numbers = {}
     for t, f in list(found.items()) + [("E10", large.likeness())]:

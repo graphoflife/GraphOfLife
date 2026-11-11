@@ -36,7 +36,7 @@ there.
 - **[connection](the-world.md#the-network)** — A link between two agents of the network: they are neighbours, and can stake on each other's nodes.
 - **[copy number](assembly-theory.md#copy-number-and-assembly)** — How many identical copies of an object a collection holds.
 - **[correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes)** — Whether two quantities go up and down together, from −1 to 1.
-- **[correlation length](like-next-to-like.md#how-alike-at-a-distance)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
+- **[correlation length](b1-the-network-size-and-scaling.md#how-alike-at-a-distance)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
 - **[cross-time tournament](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)** (also era) — Brains of a world at two moments, its eras, played against each other: do the later ones win?
 - **[cut risk](measuring-networks.md#cut-risk)** — The largest share of a world that cutting one connection would cut off.
 - **[data collapse](which-properties-have-no-scale.md#data-collapse)** (also finite-size scaling) — Curves of one quantity measured at many sizes that fall onto one another once its values are divided by a power of the size: then the size of the whole is its only scale.
@@ -89,7 +89,7 @@ there.
 - **[path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)** — How many connections the shortest way between two agents crosses.
 - **[permutation test](statistics.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](runs-and-records.md#pilot-worlds)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
-- **[power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
+- **[power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
 - **[power spectrum](statistics.md#the-power-spectrum-of-a-time-series)** — How much of a series' wandering comes at each speed, from slow to fast.
 - **[preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](measuring-space.md#the-random-twin-is-a-world-a-space)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.

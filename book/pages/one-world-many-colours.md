@@ -143,8 +143,8 @@ kinship, colour by family instead, as
 > 1. Read frames `2998` (start of the last game) and `2999` (after it): `ids`, `tokens`, `ages`, `delta`, `brain_ids`, `edges`.
 > 2. Curvature: in frame 2998, Σ over neighbours of (their tokens − own tokens).
 > 3. Families: read frames 2799 to 2999, note each genotype's parent, and climb from each living genotype to one alive after the game of iteration 1,399.
-> 4. Loops: as in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).
-> 5. Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).
+> 4. Loops: as in [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world).
+> 5. Which agents are drawn: as in [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) (`book_chapters.society.shown`).
 > 6. Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour.
 >
 > **To make it again:** `python3 book_figures.py colours`.
@@ -158,7 +158,7 @@ same places in every picture. What each colouring shows:
   1,487 tokens.
 - **Age.** Old and young are mixed, but not at random. Here and there a clump
   of agents is old together, up to 806 iterations, beside a clump of young
-  ones. That is what [Like next to like](like-next-to-like.md) measured: ages
+  ones. That is what [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) measured: ages
   are alike over two or three steps, as cohorts that arrived and live
   together. At 10,000 tokens the oldest sat far out on the arms of the
   drawing, and the clumps around the hubs were younger. One picture is not a
@@ -182,10 +182,10 @@ same places in every picture. What each colouring shows:
   the seven fill one region at the lower right of the piece, and the rest of
   it belongs to many smaller families. A family is a region: a small one in a
   large world, where many more lines live side by side
-  ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+  ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 - **Loops.** The clumps around hubs carry the loops, and the arms carry none.
   Up to 1,012 of the world's 11,297 independent loops pass through one agent
-  ([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
+  ([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)).
 
 ## Where the tokens went
 
@@ -209,7 +209,7 @@ the others were cut. Of the 4,139 connections drawn, **2,311 carried only one
 or two tokens**, both directions together. Then 1,812 carried 3 to 9, 7
 carried 10 to 49, and 9 carried 50 or more. Almost every connection of the world is kept
 alive at a low price, a few tokens a game
-([How a world breaks](how-a-world-breaks.md)). In the world of 10,000 tokens
+([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). In the world of 10,000 tokens
 that an earlier version of this page drew, 2,145 of 2,447 carried one or two.
 [What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)
 counts every connection of every world. The traffic of a world is thin and
@@ -244,13 +244,13 @@ Five cautions apply to every picture the viewer draws:
 - **Pictures raise questions.** Here are two from this page. Do the old live
   at the edges, as a picture at 10,000 tokens suggested, or in cohorts, as
   this one does? And do families always occupy regions?
-  [Kin, near and far](like-next-to-like.md#kin-near-and-far) and
-  [Where the lines live](how-does-a-worlds-size-follow-its-tokens.md#where-the-lines-live)
+  [Kin, near and far](b1-the-network-size-and-scaling.md#kin-near-and-far) and
+  [Where the lines live](b1-the-network-size-and-scaling.md#where-the-lines-live)
   measure both.
 
 ## Where to go next
 
-- [Like next to like](like-next-to-like.md): how alike agents are at a
+- [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance): how alike agents are at a
   distance, the measure behind cohorts and families.
 - [Genotypes, families and the common ancestor](measuring-evolution.md#genotypes-families-and-the-common-ancestor): what a family
   is, and how lines of descent are drawn over time.
@@ -344,5 +344,5 @@ colours`.
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 
 > [!info]- Pages that link here (8)
-> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

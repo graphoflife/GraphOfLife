@@ -83,7 +83,7 @@ What can an agent of Graph of Life give, and at what cost?
 - **A child's endowment**: the tokens and connections a parent gives its
   child ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)).
 - **Keeping a connection alive.** A connection survives only if a token
-  crosses it ([How a world breaks](how-a-world-breaks.md)). Paying that token
+  crosses it ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). Paying that token
   keeps open a channel both sides need.
 - **Joining a coalition.** A stake marked revolutionary can join others to
   take a node from its largest staker
@@ -227,7 +227,7 @@ Yes, strongly. In the [median](statistics.md#many-worlds-at-once-the-median-band
 same [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), against **0.05%** of two agents drawn at random: 200
 times as often. At 10,000 tokens it was 10.6% against 0.28%, 38 times. Counted
 over all pairs of a world rather than a sample of them, chance is rarer still:
-0.03%. [Like next to like](like-next-to-like.md) puts the ratio near 290.
+0.03%. [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) puts the ratio near 290.
 
 Count close kin too: one's genotype the parent of the other's, or both sharing
 a parent genotype. Then 20% of neighbours are kin, against 0.12% of random
@@ -412,7 +412,7 @@ measures the notebook can use, each computable from the
 6. **Groups that win.** Whether regions held by one family grow, survive or
    split more than mixed regions. That is selection between groups. It can be
    read from the families of [One world, many colours](one-world-many-colours.md)
-   and the breaks of [How a world breaks](how-a-world-breaks.md).
+   and the breaks of [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks).
 
 None of the six has been computed in the form given here. The work on the
 second baseline, B2, judged progress another way. It played a world's
@@ -593,6 +593,6 @@ iterations each.
 
 ← [Who helps whom](who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Other contests: a lottery, and alliances](another-game.md) →
 
-> [!info]- Pages that link here (13)
-> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (12)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->
