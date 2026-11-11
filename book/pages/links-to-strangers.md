@@ -206,5 +206,5 @@ beneath it, which worlds it reads and how.
 **Also about:** [The shape and health of the network](../README.md#the-shape-and-health-of-the-network).
 
 > [!info]- Pages that link here (7)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
 <!-- /turns -->

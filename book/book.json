@@ -90,6 +90,21 @@
       "id": "reference",
       "title": "Reference: the rules and measures in detail",
       "about": "The details of the rules and of every measure the notebook uses, one reference page for each family of them, with a section for every term."
+    },
+    {
+      "id": "b1-history",
+      "title": "B1, as described in October 2026",
+      "about": "The first baseline, B1, measured from every side in October 2026: its agents' lives, its wealth, the game and where the tokens flow, the shape and size of its network, and its brains, lineages and messages."
+    },
+    {
+      "id": "history",
+      "title": "Building B2, the healthy and rich search, and the pilots",
+      "about": "How the second baseline, B2, was built so that its network cannot break; the search for a healthy world whose agents differ; and the pilots that tried the engine's switches, alone and in company."
+    },
+    {
+      "id": "side-studies",
+      "title": "Side studies",
+      "about": "Questions asked on the way that no longer bear on the main one: who helps whom, space at larger scales, atlases of measures, and assembly theory."
     }
   ],
   "pages": [
@@ -385,19 +400,6 @@
       "status": "written",
       "added": "2026-10-23",
       "summary": "The two sets of rules every experiment starts from: B1, the algorithm as a new run is offered it, and B2, built so that its network cannot break."
-    },
-    {
-      "id": "what-the-baseline-world-is",
-      "title": "What B1 is, and what stood in its way",
-      "file": "pages/what-the-baseline-world-is.md",
-      "topics": [
-        "baselines",
-        "evolution"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "The first baseline, B1, has been measured from every side, in thirty worlds of 100,000 tokens. All six theses written before its runs failed, and each failure taught something new about the world."
     },
     {
       "id": "a-worlds-life",
@@ -1425,6 +1427,20 @@
       "status": "written",
       "added": "2026-11-09",
       "summary": "The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation and fitted lines, how long a world remembers, how sure a number is, how a spread splits into parts, and how many kinds a world really holds.."
+    },
+    {
+      "id": "what-the-baseline-world-is",
+      "title": "What B1 is, and what stood in its way",
+      "file": "pages/what-the-baseline-world-is.md",
+      "topics": [
+        "b1-history",
+        "baselines",
+        "evolution"
+      ],
+      "kind": "overview",
+      "status": "written",
+      "added": "2026-10-08",
+      "summary": "The first baseline, B1, has been measured from every side, in thirty worlds of 100,000 tokens. All six theses written before its runs failed, and each failure taught something new about the world."
     }
   ],
   "parts": [
@@ -1508,6 +1524,18 @@
         "reference"
       ],
       "mark": "🔳"
+    },
+    {
+      "id": "archive",
+      "title": "Archive",
+      "colour": "#a3a3a3",
+      "about": "Frozen pages, kept so that every experiment can still be read and made again: what was done and found before 11 November 2026. They are not brought up to date as the research moves on.",
+      "topics": [
+        "b1-history",
+        "history",
+        "side-studies"
+      ],
+      "mark": "🗄️"
     }
   ]
 }

@@ -72,7 +72,6 @@ how the pages hang together.
 #### The baselines B1 and B2
 
 - [B1 and B2: the two baselines](pages/b1-and-b2.md)
-- [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
 - [The life of a B1 world](pages/a-worlds-life.md)
 - [How much does the seed decide?](pages/how-much-does-the-seed-decide.md)
 - [Building B2: a world that cannot break](pages/a-world-that-cannot-break.md)
@@ -207,4 +206,12 @@ how the pages hang together.
 - [Measuring health: criteria, the health bar and diversity](pages/measuring-health.md)
 - [How runs are made, recorded and costed](pages/runs-and-records.md)
 - [Statistics: the tools of the notebook](pages/statistics.md)
+
+### Archive
+
+🗄️ Frozen pages, kept so that every experiment can still be read and made again: what was done and found before 11 November 2026. They are not brought up to date as the research moves on.
+
+#### B1, as described in October 2026
+
+- [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
 <!-- /contents -->
