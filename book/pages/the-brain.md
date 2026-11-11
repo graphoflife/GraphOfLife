@@ -322,7 +322,7 @@ put it all on one. And half of all staked tokens (50%) were marked
 revolutionary. That is what brains of random weights do. Spreading turns on
 which of two random outputs is the larger. And the revolutionary share is *f*
 of two random outputs, a half on average. From iteration 500 on, the two were
-98% and 97% ([How the game is played](how-the-game-is-played.md)). That held
+98% and 97% ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). That held
 in the worlds of 10,000 tokens and in those of 100,000 alike.
 
 Nobody chose these numbers. Are they the work of selection, with brains that
@@ -330,7 +330,7 @@ did otherwise losing their tokens and their nodes? Or are they only the churn
 of copying and changing brains?
 [Do the brains matter?](do-the-brains-matter.md) tests the question against
 worlds whose brains never change, and
-[How the game is played](how-the-game-is-played.md) comes back to it.
+[How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) comes back to it.
 
 The answer is selection, but only on constants.
 [What the brains are like](what-the-brains-are-like.md) opened the brains.

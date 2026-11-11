@@ -87,7 +87,7 @@ the part of the flow of tokens that goes round in [loops](measuring-networks.md#
 yet been read in the long worlds of this page: that circulation, the kinds of
 behaviour of [How different are the agents?](how-different-are-the-agents.md),
 and the flow modules of [Flow modules: the groups tokens stay
-in](flow-modules.md).
+in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in).
 
 ### Ten worlds, ten thousand iterations
 

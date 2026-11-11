@@ -98,7 +98,7 @@ def scaling(ch: F.Chapter) -> None:
                 "against ln(k) over all agents ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). Cyan: "
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
-                "([Where the tokens flow](where-the-tokens-flow.md)).",
+                "([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read frame `{W.frame(LAST)}` of every run: each agent's tokens and its connections in `edges`.",
                        "Count the agents in each cell of the classes shown; colour by the count.",

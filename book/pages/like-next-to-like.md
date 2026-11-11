@@ -274,7 +274,7 @@ Two reasons keep it so. A genotype lasts about two
 ([Genotypes and lineages](genotypes-and-lineages.md)), so a cluster of one
 genotype has little time to grow. And more than half of all nodes change hands
 in every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.")
-([How the game is played](how-the-game-is-played.md)). So any territory is
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). So any territory is
 broken up as soon as it forms.
 
 [Lineages](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor."), the lines of descent, last much longer than genotypes. A line is all

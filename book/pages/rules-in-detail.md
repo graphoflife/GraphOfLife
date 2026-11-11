@@ -501,7 +501,7 @@ candidate 4's, 0.571, and candidate 4 gets the eleventh token.
   rule stays reproducible. In an even split every remainder is the same, and
   the leftovers go down the list of candidates in order. The agent's own node
   is first in that list, so it gets the first leftover token
-  ([Where the tokens flow](where-the-tokens-flow.md)).
+  ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
 
 An agent with 3 tokens and one neighbour that splits evenly shows both.
 Each of its two candidates has an exact share of 1.5 tokens, and rounded
@@ -746,7 +746,7 @@ search for strangers four ([Every setting](settings.md)).
 - [What the brains are like](what-the-brains-are-like.md): where selection
   pushed each row in B1's worlds, and why the stake score barely changes
   from one candidate to the next.
-- [How the game is played](how-the-game-is-played.md): what rows 6–10 come to
+- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): what rows 6–10 come to
   in B1's worlds. From iteration 500 on, 98% of the agents spread their stake.
 - [What a brain can compute](what-a-brain-can-compute.md): a B2 brain whose
   weights are set by hand so that its 19 outputs play a rule written in
@@ -995,13 +995,13 @@ decides about half of all nodes. In the last game of the 30 B1 worlds of
 anyone staked. The winning member was the agent living on the node for 12%
 of all those nodes, and a neighbour for 40%. By then 97% of all staked tokens
 are marked revolutionary
-([How the game is played](how-the-game-is-played.md)). In B2's pilot worlds
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). In B2's pilot worlds
 of 10,000 tokens, coalitions won about one node in three hundred a game. B2
 with and without them was the same world in every measure
 ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
 
 ### Where it is used (how a coalition takes a node)
-- [How the game is played](how-the-game-is-played.md): who wins the nodes of
+- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): who wins the nodes of
   B1's worlds, and how.
 - [The switches the world was built with](the-switches-the-world-was-built-with.md):
   B1 and B2 without revolutions. B1 without them becomes a world of mayflies,
@@ -1250,14 +1250,14 @@ fewer.
   a birth, in the worlds.
 - [The even split](measuring-tokens.md#the-even-split): what the rule does when no score is above
   zero, and why that is common.
-- [Where the tokens flow](where-the-tokens-flow.md): how the rounding tilts
+- [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): how the rounding tilts
   stakes towards home.
 - [Median and quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread): quantiles, as the
   notebook uses them to measure worlds.
 - [The brain](the-brain.md): the network between the inputs and the outputs.
 - [One iteration, step by step](one-iteration.md): when the looks happen in
   an iteration.
-- [Staking at home, and keeping one's node](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node): how often an
+- [Staking at home, and keeping one's node](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node): how often an
   agent keeps its own node.
 - [Genotypes and lineages](genotypes-and-lineages.md): the family trees that
   the changes grow.
@@ -1279,7 +1279,7 @@ fewer.
 - *How a coalition takes a node*:
   - **8 October 2026.** This page said that most nodes are not contested by a
     coalition.
-  - **23 October 2026.** Corrected. [How the game is played](how-the-game-is-played.md),
+  - **23 October 2026.** Corrected. [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes),
     written the same day as that sentence, measured the opposite in B1: in its
     settled worlds coalitions decide about half of all nodes. In B2's pilot
     worlds they won only about one node in three hundred a game

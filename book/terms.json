@@ -330,7 +330,7 @@
     },
     {
       "name": "home stake",
-      "page": "how-the-game-is-played",
+      "page": "b1-the-game-and-its-flows",
       "says": "The tokens an agent stakes on its own node, to keep it.",
       "anchor": "staking-at-home-and-keeping-ones-node"
     },
@@ -471,7 +471,7 @@
       "also": [
         "map equation"
       ],
-      "page": "flow-modules",
+      "page": "b1-the-game-and-its-flows",
       "says": "A group of agents that a token, following the flow, tends to stay inside.",
       "anchor": "flow-modules-and-the-map-equation"
     },

@@ -89,7 +89,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
   holding **42%** of the tokens (44%)
   ([Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)).
 - **44%** of agents keep their node in a game (45%), and coalitions win
-  **half** of all nodes ([How the game is played](how-the-game-is-played.md)).
+  **half** of all nodes ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 - **26%** of connections are [bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut "A connection that lies on no loop: cut it and the network falls into two pieces.") (31%), **35%** of agents are leaves
   (36%), **57%** sit in a core of [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") (54%), and two agents are **18
   steps** apart (10)
@@ -156,7 +156,7 @@ answer: a world whose brains never change hardly wanders at all.
 #### A world of attack
 
 Agents put only 29% of their staked tokens on their own node
-([How the game is played](how-the-game-is-played.md)). More than half of all
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). More than half of all
 nodes change hands in every game, and coalitions of smaller stakers take half
 of all nodes.
 
@@ -168,7 +168,7 @@ at 10,000 tokens it barely moved (25% to 30%), and defence got better all the
 same.
 
 What changed is how evenly agents stake
-([Where the tokens flow](where-the-tokens-flow.md)). Picture a node with *d*
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). Picture a node with *d*
 connections. Under the [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."), the agent living there is one of *d* + 1
 stakers on it, all staking about the same. So it keeps its node about one
 game in *d* + 1: in 74% of games with one connection, and in 2% with fifty or
@@ -208,7 +208,7 @@ measurements after them, follows from that one number:
 
 - The stakes are nearly even, so the game moves tokens almost as a random
   walk would: as if each token stepped, game after game, to its agent or to a
-  neighbour picked at random ([Where the tokens flow](where-the-tokens-flow.md)).
+  neighbour picked at random ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
   It does so down to the two-game rhythm of wealth that a random walk shows on
   [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") and leaves ([Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)).
 - An agent's tokens are set by its place, its connections plus one, and not
@@ -257,7 +257,7 @@ Seven of the thirty large worlds condensed, for long stretches, around a
 single agent joined to a tenth of the world or more; in one, to more than
 half ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
 Such a world plays its game differently
-([How the game is played](how-the-game-is-played.md)). It also has a different
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). It also has a different
 shape: fewer agents in the core, and far more leaves and bridges
 ([What shape does the network take?](what-shape-does-the-network-take.md)).
 [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest) shows that
@@ -345,7 +345,7 @@ round 3's random worlds.
 
 The pages on B1 measured its world in every way the viewer can, and a few
 more. In the second edition they read thirty worlds of 100,000 tokens, with
-two new pages: [What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection) and
+two new pages: [What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection) and
 [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest). This section
 steps back and asks what all of it means for the question the notebook
 exists for: **can open-ended evolution happen in Graph of Life, and what
@@ -397,7 +397,7 @@ and never circulate. **Connections** have a price. Two connections in three
 carry one or two tokens a game, most of them one each way: an equal exchange
 that keeps the connection alive at its price of a token a game. Every
 connection that carries nothing is cut
-([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection),
+([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection),
 [Do agents cooperate?](do-agents-cooperate.md)). **The network** is a
 stretched web of stars, grown locally by children joining their parents'
 neighbourhoods. It is four and a half times as long as a random network with
@@ -409,7 +409,7 @@ fell off ([How a world breaks](how-a-world-breaks.md)). **Brains** spread by
 conquest seventeen times more than by birth, and change mostly in place, not
 when copied ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)).
 The brain on a hub is replaced almost every game, and the same two brains
-rarely face each other twice ([Where the tokens flow](where-the-tokens-flow.md),
+rarely face each other twice ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow),
 [Do agents cooperate?](do-agents-cooperate.md)). **Relatives** live together,
 but cannot recognise each other, and do not treat each other differently
 ([Do agents cooperate?](do-agents-cooperate.md)). Almost every structural
@@ -485,7 +485,7 @@ last nearly as long when every agent's partners are dealt at random among its
 neighbours, and they outlast their first members only as a region outlasts
 its occupants. B2's agents add one thing of their own: pairs of partners
 that last a few games longer than chance would keep them
-([Flow modules: the groups tokens stay in](flow-modules.md)).
+([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)).
 
 **P4: out of reach** until P1 to P3 stand.
 
@@ -740,7 +740,7 @@ It taught one lesson on the way: a contest must last as long as what it
 judges, in B2 an agent's lifetime. A neutral shadow judged brains that can
 grow ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Flow modules have been
 read in worlds of every kind the notebook has made
-([Flow modules: the groups tokens stay in](flow-modules.md)). The heredity
+([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). The heredity
 half-life, selection ablation, the cooperation measures of
 [Do agents cooperate?](do-agents-cooperate.md) and evolutionary activity have
 not yet been used in the notebook. Help has been counted instead, exactly by
@@ -753,10 +753,10 @@ date where they did:
 
 - **Wealth follows connections because of a law**, not a mystery: the even
   split's resting state. [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)
-  now says so, and [Where the tokens flow](where-the-tokens-flow.md) derives
+  now says so, and [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow) derives
   it.
 - **"Keeping one's node" is about places**: hubs are nearly always taken
-  ([How the game is played](how-the-game-is-played.md)).
+  ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 - **The network's shape has a mechanism**: copying neighbourhoods at birth
   gives the stars, the triangles and the hierarchy
   ([What shape does the network take?](what-shape-does-the-network-take.md),
@@ -923,7 +923,7 @@ the rule changes of both aims will be tested together where they coincide.
   staking more at home, and that what changed instead was not known. In the
   worlds of 100,000 tokens agents did stake more at home, but that is not the
   cause: defence got better because the stakes became even
-  ([Where the tokens flow](where-the-tokens-flow.md)).
+  ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
 - **14 October 2026.** The plan was to try single settings first, then the
   rules in the order of the proposals. The notebook built its yardstick
   first, then gave the brains sight, and the worlds broke. So it had to build
@@ -972,5 +972,5 @@ the rule changes of both aims will be tested together where they coincide.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (18)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

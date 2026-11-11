@@ -95,7 +95,7 @@ way towards the middle.
 
 One setting crossed over. The worlds of Experiment 14 in which **any unused
 link lapses** (green) sit with B1.
-[Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)
+[Lightning in every world](b1-the-game-and-its-flows.md#lightning-in-every-world)
 found the same in the flow. Where a link must carry tokens to survive, agents
 stake on each other, and play the way B1's agents play.
 
@@ -167,7 +167,7 @@ worlds that question was about. Gathered:
 | measure | lab worlds | pilot worlds |
 |---|---|---|
 | the ~95 recorded statistics, [lightning](measuring-tokens.md#lightning-tokens-that-go-round "A closed loop of the flow of a game: tokens that go round and come back where they started.") among them | every run | the engine's pilots, from recorded games; the prototype's, their series |
-| flow modules ([Flow modules: the groups tokens stay in](flow-modules.md)) | up to five seeds of every condition | the engine's pilots |
+| flow modules ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)) | up to five seeds of every condition | the engine's pilots |
 | loops and the exact [circulation](measuring-tokens.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
 | lifetime contests between eras ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)) | B2, through the long runs that go on from its worlds | every pilot batch |
 | correlations among agents ([What goes with what](what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab | any run made on the server or in the browser |
@@ -207,5 +207,5 @@ fewer, which the notebook no longer makes.
 [Methods and statistics](../README.md#methods-and-statistics) · [How worlds are measured](how-worlds-are-measured.md) →
 
 > [!info]- Pages that link here (4)
-> [Where tokens flow](where-the-tokens-flow.md) · [Healthy and rich](healthy-and-rich.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Healthy and rich](healthy-and-rich.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

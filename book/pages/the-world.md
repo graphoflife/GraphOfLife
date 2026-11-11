@@ -132,7 +132,7 @@ The settings that shape the start are the number of tokens *T*, the number of
 founders and their ring. These pages teach with worlds of *T* = 10,000 tokens.
 The study of the baseline reads the same baseline at *T* = 100,000. That is
 ten times as many founders of 100 tokens each, on a denser ring (step 2
-below). [How the game is played](how-the-game-is-played.md) shows what the
+below). [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) shows what the
 denser ring changes in the first game.
 
 From the settings and the seed, the world is built in three steps.
@@ -245,5 +245,5 @@ writes 3,000 frames, about 2 gigabytes.
 [How the simulation works](../README.md#how-the-simulation-works) · [One iteration, step by step](one-iteration.md) →
 
 > [!info]- Pages that link here (11)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

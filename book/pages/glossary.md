@@ -54,7 +54,7 @@ there.
 - **[exploitability](measuring-evolution.md#exploitability)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
 - **[extinction](rules-in-detail.md#when-a-world-ends)** (also extinct) — A world's end before its last iteration: it has dropped to its threshold of agents or fewer.
 - **[false discovery rate](how-the-drawn-settings-shape-a-world.md#how-a-setting-is-tested)** — Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg).
-- **[flow module](flow-modules.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
+- **[flow module](b1-the-game-and-its-flows.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
 - **[founder](rules-in-detail.md#the-starting-ring)** — One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.
 - **[fractional factorial](eight-switches-at-once.md#many-switches-in-few-worlds-fractional-factorial-designs)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
 - **[frame](runs-and-records.md#what-a-run-records)** — A whole world as a run records it after one phase: every agent, its tokens and connections.
@@ -66,7 +66,7 @@ there.
 - **[healthy world](measuring-health.md#what-makes-a-world-interesting)** (also interesting world) — A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).
 - **[hegemon](rules-in-detail.md#how-a-coalition-takes-a-node)** — The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.
 - **[heredity index](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — How much more a child acts like its parent than like a stranger, in the same situations: 1 as its parent does, 0 as a stranger does.
-- **[home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node)** — The tokens an agent stakes on its own node, to keep it.
+- **[home stake](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node)** — The tokens an agent stakes on its own node, to keep it.
 - **[hub](measuring-networks.md#stars-and-hubs)** (also star) — An agent joined to far more agents than most; a star is a world held together by a single hub.
 - **[invasion test](measuring-evolution.md#the-invasion-test)** — A strategy planted as a patch in an evolved world: does it spread, or die out?
 - **[iteration](one-iteration.md)** — One step of a world's time: a phase of reproduction, then a phase of the game.

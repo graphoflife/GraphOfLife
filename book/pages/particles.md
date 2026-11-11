@@ -67,7 +67,7 @@ drunkard ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)). A
 star's centre is a place handed from parent to child
 ([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 Groups of the flow are the network's regions
-([Flow modules](flow-modules.md)). This page asks the question again of the
+([Flow modules](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). This page asks the question again of the
 largest worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") and of the healthiest worlds found
 since, with detectors that come with their own controls.
 
@@ -80,7 +80,7 @@ passing: twelve worlds, each over the last 500 games of its run.
 
 - **B1 at 100,000 tokens** (Experiment 10, iterations 1,000 to 1,499). Its
   thirty worlds all play the same game, apart from their stars
-  ([Do the worlds agree?](how-the-game-is-played.md#do-the-worlds-agree)).
+  ([Do the worlds agree?](b1-the-game-and-its-flows.md#do-the-worlds-agree)).
   So five stand for them: the first five [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") whose world is not held
   together by one hub, 1, 3, 4, 5 and 6. Beside them stands the largest star,
   seed 28, whose centre was joined to three agents in four in the games read
@@ -122,7 +122,7 @@ world?
 > 1. A token: 1/(1 − h), with h the share of all tokens staked in the games that went to the staker's own node.
 > 2. A brain: the nodes on which anyone staked over those taken by a neighbour.
 > 3. An agent: the mean number of agents after a game over the mean number that were not alive after the game before (Little's law).
-> 4. A group: flow modules followed as on [Flow modules](flow-modules.md#following-groups-through-time) (web/js/flowmodules.js through tools/flowmodules_cli.js); the 99th percentile of their lives.
+> 4. A group: flow modules followed as on [Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time) (web/js/flowmodules.js through tools/flowmodules_cli.js); the 99th percentile of their lives.
 > 5. A place: after every game the agent with the most connections; a dynasty goes on while the next one is the same agent or its child.
 >
 > **To make it again:** `python3 book_figures.py particles`.
@@ -253,7 +253,7 @@ of that series: how much of its ups and downs happen at each period. A beat
 is a period that holds more than its share.
 
 More than what share? Tokens move almost as a random walk does
-([The game as a random walk](where-the-tokens-flow.md#the-game-as-a-random-walk)),
+([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)),
 and a random walk held near a level, the dog on the leash, has a spectrum of
 its own. An agent's tokens have two such memories at once. They drift
 slowly, as its connections change. And they swing from one game to the next,
@@ -398,7 +398,7 @@ and the plainest kind of particle.
 
 The groups are the **flow modules** of each game: sets of agents that a token
 wandering the flow tends to stay inside, found by the map equation of Rosvall
-and Bergstrom (2008) ([Flow modules](flow-modules.md)). A module of one game
+and Bergstrom (2008) ([Flow modules](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). A module of one game
 and a module of the next are the same module if they share enough members,
 at least 0.3 of the agents in either. So a module can go on while its members
 change, one by one, and even when none of the agents it began with is left.
@@ -428,7 +428,7 @@ of its modules should last all fifty games read.
 > **Data.** From each run's frames, read once by `particles_pass` in `book_chapters/particles.py` (every game's `decisions.allocations` and `decisions.winners`, and the agents, tokens, connections and parents after it) and kept in `GraphOfLifeRuns/.book/<run>.particles.json`.
 >
 > 1. For each of the last 50 games, the flow between each pair of neighbours: the tokens staked either way.
-> 2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) and follow the groups from game to game: best overlap first, each used once, none below 0.3 of the members two modules share ([Flow modules](flow-modules.md#following-groups-through-time)).
+> 2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) and follow the groups from game to game: best overlap first, each used once, none below 0.3 of the members two modules share ([Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time)).
 > 3. Do the same with every agent's stakes on its neighbours dealt among them at random (`--neighbours 1`) and with each game's agents dealt among modules of its sizes (`--shuffle 1`).
 > 4. The share of modules followed for at least so many games; the median of each kind's worlds.
 >
@@ -441,7 +441,7 @@ for forty. Members dealt at random make none that last ten: B1's modules are
 no accident of their sizes. But partners dealt make nearly as many, 13% and
 1.6%. Agents that keep favouring the same neighbours add about a fifth to the
 modules that last ten games; the network's regions make the rest, as
-[Flow modules](flow-modules.md#how-long-modules-live) found in two worlds of
+[Flow modules](b1-the-game-and-its-flows.md#how-long-modules-live) found in two worlds of
 the same experiment, five hundred games earlier. The star is no different:
 10% of its modules last ten games, 8% with partners dealt.
 
@@ -638,7 +638,7 @@ show modules that outlast partners dealt, and perhaps modules that move.
 
 - [Physical inspiration](physical-inspiration.md#particles-stable-things-in-a-restless-world):
   the physics aim, and why a particle would be a win for both aims.
-- [Flow modules: the groups tokens stay in](flow-modules.md): the groups
+- [Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in): the groups
   followed here, in 183 worlds of every kind.
 - [Gliders, and who helps whom](gliders-and-who-helps-whom.md): packets of
   tokens and brain that move, and the rings of the worlds of 10,000 tokens.

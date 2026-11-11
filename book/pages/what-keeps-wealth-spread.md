@@ -32,7 +32,7 @@ tokens settle near 0.47, and their richest tenth hold about 42% of the tokens
 
 Nothing in the rules caps a fortune. In every game each agent stakes all it
 holds on its own node and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")', and whoever stakes most on a node
-takes it ([How the game is played](how-the-game-is-played.md)). A rich agent
+takes it ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). A rich agent
 can outstake its poorer neighbours everywhere at once. So why does wealth not
 pool in a few hands?
 

@@ -351,7 +351,7 @@ Graph of Life's agents are such calculators, with one difference. Their
 calculator, the brain, is not given by any equation: it evolves. And yet, in
 B1, what the agents do comes to something an equation would give. They spread
 their stakes almost evenly over themselves and their neighbours
-([Where tokens flow](where-the-tokens-flow.md)). And an
+([Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). And an
 [even split](measuring-tokens.md#the-even-split) is exactly one step of the **heat equation**:
 
 ![The even split as a step of the heat equation](../diagrams/finite-difference.svg)
@@ -463,7 +463,7 @@ only when very many are taken together.
 Graph of Life's agents are its elementary particles. Every one follows the
 same rules, and differs only in its state: its tokens, its connections, its
 brain. And its worlds are statistically homogeneous, nearly the same at every
-size. Inequality, [home stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it.") and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") per agent are the same in worlds
+size. Inequality, home stakes and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") per agent are the same in worlds
 of five hundred agents and of sixty thousand
 ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md#is-a-big-world-the-same-kind-of-world)).
 Births and deaths run a little faster in larger worlds: 13 to 21% more per
@@ -562,7 +562,7 @@ Graph of Life has the conservation, and not the gradient. A token is a token,
 wherever it came from: there are no fresh tokens to feed on, and no spent
 tokens to shed. And in B1 the even split drives a world towards its resting
 state. There every agent holds tokens in proportion to its connections plus
-one ([The game as a random walk](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+one ([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
 That is the miniature heat death above.
 
 There are two ways a gradient could be built in.
@@ -612,7 +612,7 @@ Nothing yet lasts in the way a glider does.
 
 - **Bound tokens.** Within one game, almost no tokens go round once the stakes
   that come back have cancelled
-  ([Do tokens go round?](where-the-tokens-flow.md#do-tokens-go-round)). Over
+  ([Do tokens go round?](b1-the-game-and-its-flows.md#do-tokens-go-round)). Over
   fifty games, more goes round than chance would make. But no ring of tokens
   outlasts those fifty games
   ([Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go)).
@@ -768,7 +768,7 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
 
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
   the dimension of the worlds, measured, and the rules that fold them.
-- [Where tokens flow](where-the-tokens-flow.md): the game as a random walk of
+- [Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): the game as a random walk of
   tokens, the other face of the heat equation.
 - [Gliders, and who helps whom](gliders-and-who-helps-whom.md): patterns that
   outlast their parts, looked for in the record of play.
@@ -863,5 +863,5 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
 **Also about:** [Start here](../README.md#start-here).
 
 > [!info]- Pages that link here (22)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

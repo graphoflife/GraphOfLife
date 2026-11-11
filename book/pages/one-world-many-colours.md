@@ -211,7 +211,7 @@ carried 10 to 49, and 9 carried 50 or more. Almost every connection of the world
 alive at a low price, a few tokens a game
 ([How a world breaks](how-a-world-breaks.md)). In the world of 10,000 tokens
 that an earlier version of this page drew, 2,145 of 2,447 carried one or two.
-[What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)
+[What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)
 counts every connection of every world. The traffic of a world is thin and
 everywhere, not heavy on a few roads.
 
@@ -256,7 +256,7 @@ Five cautions apply to every picture the viewer draws:
   is, and how lines of descent are drawn over time.
 - [Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out): the token curvature and the tokens
   that run downhill.
-- [Where tokens flow](where-the-tokens-flow.md): what every connection of
+- [Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): what every connection of
   every world carries.
 
 ## How this was made

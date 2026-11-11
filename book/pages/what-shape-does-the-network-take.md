@@ -769,7 +769,7 @@ branches hanging on single connections. A world breaks, when it breaks, along
 its poorest regions.
 
 The gap also says something about the tokens. A game moves tokens almost like
-a random walk ([Where the tokens flow](where-the-tokens-flow.md)). On this
+a random walk ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). On this
 network, a random walk needs about a thousand steps to forget its start. So
 tokens could spread evenly across a whole world only over about a thousand
 games, most of a run. Meanwhile the network changes in every game. About 2,300
@@ -863,7 +863,7 @@ agent is heavy-tailed: most agents are on a few, a handful on hundreds.
   are none but the hubs, which die about half as often as other agents
   ([Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)).
   And a hub is a place, not an individual: the brain on it changes in nearly
-  every game ([How the game is played](how-the-game-is-played.md)).
+  every game ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 
 ## Where to go next
 
@@ -1092,5 +1092,5 @@ checks it again.
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
 > [!info]- Pages that link here (13)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

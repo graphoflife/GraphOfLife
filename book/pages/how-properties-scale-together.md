@@ -3,7 +3,7 @@
 > [!question] Questions of this page
 > - How do an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") grow with its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")? Is that the resting
 >   state of the [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.")
->   ([Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk))?
+>   ([Where tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk))?
 > - How closely knit is the neighbourhood of a well-connected agent?
 > - To whom are the well-connected joined?
 > - Does the size of an agent's gains and losses grow with its wealth?
@@ -50,7 +50,7 @@ given beside.
 <!-- figure scaling/tokens-degree -->
 ![Tokens against connections](../figures/scaling/tokens-degree.svg)
 
-**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](where-the-tokens-flow.md)).
+**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
 
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
@@ -78,7 +78,7 @@ tokens in proportion to *k* + 1. From about five connections on, the two run
 parallel. Why *k* + 1? An agent with *k* connections has *k* + 1 [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."):
 its own node and its neighbours' nodes. Under the even split, a game moves
 tokens like a random walk
-([Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+([Where tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
 
 Think of the tokens as water in tanks joined by pipes, each agent's tank as
 wide as its number of candidates. The water settles at one level everywhere,
@@ -271,7 +271,7 @@ world's history.
 
 ## Where to go next
 
-- [Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk): the
+- [Where tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk): the
   game as a random walk of tokens, and its resting state.
 - [Gains and losses](b1-lives-and-wealth.md#how-a-rich-agent-drains-back): how a
   rich agent with few connections drains back to its resting share.
@@ -383,5 +383,5 @@ folded beneath it, which runs it reads and how.
 ← [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network) · [How a world breaks](how-a-world-breaks.md) →
 
 > [!info]- Pages that link here (9)
-> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

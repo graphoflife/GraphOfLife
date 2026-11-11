@@ -73,7 +73,7 @@ the random numbers. Then it compares what each brain decides.
 | decision | what it is |
 |---|---|
 | the stake | the shares of its tokens the agent puts on its own node and on each neighbour's |
-| kept at home | the share on its own node ([Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node)) |
+| kept at home | the share on its own node ([Staking at home](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node)) |
 | given to a child | the share it would give a child; 0 when no child would be made |
 | spread or all in | 1 if it spreads its stake over its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), 0 if it puts it all on one |
 | a newborn's links | how likely a child of its own is to be linked to each of its neighbours |
@@ -558,5 +558,5 @@ to every condition of every experiment, and to the pilot worlds.
 ← [Brains replaced by their average](brains-replaced-by-their-average.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [How big should a brain be?](how-big-should-a-brain-be.md) →
 
 > [!info]- Pages that link here (14)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

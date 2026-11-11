@@ -230,7 +230,7 @@ quiet. Then the region dies, all of it, and its tokens are handed out by
 lottery to the survivors ([The lottery](b1-lives-and-wealth.md#the-lottery)).
 
 The same price shows connection by connection
-([Which connections carry nothing](where-the-tokens-flow.md#which-connections-carry-nothing)).
+([Which connections carry nothing](b1-the-game-and-its-flows.md#which-connections-carry-nothing)).
 A leaf's only connection is empty in 1.3% of games. A connection between two
 agents with ten connections or more is empty in 13% to 14%.
 
@@ -280,7 +280,7 @@ separated piece live on as a world of its own is planned for the experiment
 
 - [The shape of the network](what-shape-does-the-network-take.md): the core,
   the bottlenecks, and why a world mixes slowly.
-- [Where tokens flow](where-the-tokens-flow.md#what-crosses-a-connection):
+- [Where tokens flow](b1-the-game-and-its-flows.md#what-crosses-a-connection):
   what crosses each connection in a game, and which connections carry nothing.
 - [Building B2: a world that cannot break](a-world-that-cannot-break.md): the
   rules under which nobody is cut off.
@@ -397,5 +397,5 @@ and how.
 ← [How properties scale together](how-properties-scale-together.md) · [The shape and health of the network](../README.md#the-shape-and-health-of-the-network)
 
 > [!info]- Pages that link here (16)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

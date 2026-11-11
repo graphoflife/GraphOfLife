@@ -242,7 +242,7 @@ them had 12 to 23.
 - [Who inherits?](who-inherits.md): four of the heirs, in B1 and in B2.
 - [What holds a world's size](what-holds-a-worlds-size.md): estates paid to
   births among the rules that set how many agents a world holds.
-- [Where tokens go](where-tokens-go.md#the-estate-of-the-dead): the estate beside
+- [Where tokens go](b1-the-game-and-its-flows.md#the-estate-of-the-dead): the estate beside
   the other flows of tokens.
 
 ## Age, lifetime and survival curves

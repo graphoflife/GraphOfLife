@@ -129,7 +129,7 @@ the agents most diverse — is empty.
   half the agents are in the 2-core, and in the median world one agent's
   loss cuts off 13% to 35% of the others. Where tokens move along every
   link and unused links are cut
-  ([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)), the network
+  ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)), the network
   is a tree of blobs held together by single agents.
 - **B2's worlds are healthy but poor.** B2 is the second baseline, built so
   that its network cannot break

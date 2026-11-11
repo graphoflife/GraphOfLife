@@ -497,7 +497,7 @@ Hubs are places. Under the near-[even split](measuring-tokens.md#the-even-split)
 with *d* connections is one of *d* + 1 stakers of about equal size, and keeps
 its node about as often as one of them would: with fifty connections or more,
 in 2.0% of games
-([Where the tokens flow](where-the-tokens-flow.md#who-keeps-their-node)).
+([Where the tokens flow](b1-the-game-and-its-flows.md#who-keeps-their-node)).
 
 ### Stars
 
@@ -555,9 +555,9 @@ at random, a brain may choose at most 8 links
 
 ### Where it is used
 
-- [How the game is played](how-the-game-is-played.md#do-the-worlds-agree): the
+- [How the game is played](b1-the-game-and-its-flows.md#do-the-worlds-agree): the
   stars play the game apart from the other worlds.
-- [Where the tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk):
+- [Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk):
   the even split fits the game with a slope of 0.94 without the stars, 0.65
   with them.
 - [What goes with what](what-goes-with-what.md#between-worlds): the one
@@ -872,7 +872,7 @@ last digit.
   ([How easily a world could be cut](what-shape-does-the-network-take.md#how-easily-a-world-could-be-cut)).
   [How a world breaks](how-a-world-breaks.md) finds those bottlenecks.
 - **Tokens.** A game moves tokens almost like a random walk
-  ([The game as a random walk](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+  ([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
   In the world of seed 1, such a walk needs about 1/0.00095, a thousand
   steps, to forget its start. So tokens settle within a neighbourhood in a few
   games, but could spread evenly across the whole world only over about a

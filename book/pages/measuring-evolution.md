@@ -243,7 +243,7 @@ H. J. Muller, who drew such pictures in 1932.
 
 A line spreads in two ways in Graph of Life. One is births. The other, far
 more often, is winning nodes in the game, which copies its brain onto the
-conquered node ([How the game is played](how-the-game-is-played.md)). A
+conquered node ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). A
 Muller plot does not tell the two apart.
 
 #### Where Muller plots are used

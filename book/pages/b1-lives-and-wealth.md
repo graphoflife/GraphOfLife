@@ -141,7 +141,7 @@ are answered on this page.
   much of what a world does is decided by its seed?
 - [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) — Where do the tokens
   go — how unequal does a world become?
-- [How the game is played](how-the-game-is-played.md) — How is the game
+- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) — How is the game
   played: where do agents stake, who wins the nodes?
 - [What shape does the network take?](what-shape-does-the-network-take.md) —
   What shape does the network take?
@@ -1600,7 +1600,7 @@ a child as one with 3 or 4. Connections help more:
 The share with a child rises from 2.1% of agents with one connection to 10.5%
 of agents with fifty or more. That is a fivefold rise (fourfold at 10,000
 tokens). Part of this is wealth, because well-connected agents are richer
-([Where the tokens flow](where-the-tokens-flow.md)). And part is an effect of
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). And part is an effect of
 the rules themselves. The child-share outputs are **averaged** over all of an
 agent's candidates. So an agent with many neighbours decides by an average of
 many columns. And an average of many columns is less extreme than one column.
@@ -2176,7 +2176,7 @@ cannot say.
 
 The measurements of the baseline found the law behind it. Agents spread their
 stakes nearly evenly over their own node and their neighbours'
-([Where the tokens flow](where-the-tokens-flow.md)). Stakes spread that way
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). Stakes spread that way
 move tokens like a random walk. Such a walk comes to rest when every agent
 holds tokens in proportion to its connections **plus one**. The median agent
 of every class of connections holds close to that resting share
@@ -2229,7 +2229,7 @@ is refuted again, on the same two counts. The median world's average Gini is
 0.485 (7 of the 30 worlds above 0.5). The richest tenth hold 43% (26 of 30
 above 40%), so that part holds again. And agents put a median 29% of what they
 stake on their own node, in no world more than 42%.
-[How the game is played](how-the-game-is-played.md) looks at how the game is
+[How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) looks at how the game is
 played instead.
 
 ### How even is a world?
@@ -2371,7 +2371,7 @@ Why is the distinct count so tight? Something in the rules must set it. Every
 brain may change after every game (with probability 0.2,
 [How a brain changes](rules-in-detail.md#how-a-brain-changes)), which makes a new genotype. And in every
 game about half the nodes take a copy of a winner's brain
-([How the game is played](how-the-game-is-played.md)), which makes genotypes
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)), which makes genotypes
 common again. A balance between a fixed rate of making and a fixed rate of
 copying gives a fixed ratio, whatever the brains do. So if a change of the
 rules moves the ratio, the change has altered how often brains are changed or
@@ -2486,7 +2486,7 @@ hundredth, 76% are still in the richest tenth two games later, but only 73%
 one game later.
 
 The brains move tokens almost as an even split would
-([Where the tokens flow](where-the-tokens-flow.md)). Each agent stakes the
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). Each agent stakes the
 same share on itself and on each of its neighbours. Take a hub with *k*
 neighbours that have no other connections. The hub keeps 1/(*k* + 1) of its
 tokens and gives each leaf as much. Each leaf keeps half of its tokens and
@@ -2879,9 +2879,9 @@ the tokens they began with**. Nearly half the world is, in tokens, untouched
 by a game in which every token was staked.
 
 That is not because they stake nothing on their neighbours: 71% of the tokens
-staked go to neighbours ([How the game is played](how-the-game-is-played.md)).
+staked go to neighbours ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 It is because what they send out comes back in equal measure.
-[Where tokens flow](where-the-tokens-flow.md#the-budget-of-a-game) counts how
+[Where tokens flow](b1-the-game-and-its-flows.md#the-budget-of-a-game-where-tokens-flow) counts how
 much: 51% of all the tokens staked in a settled game are matched by a stake
 coming back.
 
@@ -3048,7 +3048,7 @@ heat flows from warm to cold in proportion to the difference
 ([Physical inspiration](physical-inspiration.md)). Real agents do
 not split exactly evenly, and degrees differ. That is why the relation is a
 tendency and not a law. But
-[Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk) shows
+[Where tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk) shows
 how close to an even split the brains in fact play.
 
 ### How a rich agent drains back
@@ -3062,7 +3062,7 @@ is rich, game after game.
 The places are set by the connections. Under the even split, tokens move like
 a random walk. The walk comes to rest when every agent holds tokens in
 proportion to its connections plus one
-([Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+([Where tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
 Call that an agent's **resting share**. In the thirty worlds after their last
 game, rest would mean 1.7 tokens for each candidate: an agent's own node, and
 each neighbour's. Agents of every class of connections hold about that on
@@ -3357,7 +3357,7 @@ In the game, the centre stakes **exactly one token** on 98% of its neighbours,
 and nothing on its own node. It holds fewer tokens than it has neighbours, and
 spreads them one by one. Its leaves stake 41% of their few tokens on the
 centre's node and keep the rest at home
-([How the game is played](how-the-game-is-played.md)). Two tokens at home
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). Two tokens at home
 outbid the centre's single token and keep the leaf its node. One token at home
 ties it, and a coin then settles who wins
 ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
@@ -3367,7 +3367,7 @@ goes out and about one comes back, every game. The centre is a clearing house.
 Its tokens are, almost to the token, the number of its connections. That is
 the resting state of an even split at its most extreme. At rest, every agent
 holds tokens in proportion to its connections plus one
-([Where tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+([Where tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
 
 The centre's own node is won by a coalition of its neighbours in every game:
 in all of the hundred games from iteration 1,122 on. Its own agent, spreading
@@ -3469,7 +3469,7 @@ brain holds its node in B2 has not been measured directly, as
   whose brain is replaced in nearly every game. What lasts is its connections,
   and they are handed from parent to newborn child. A star is the clearest
   case of what
-  [Where tokens flow](where-the-tokens-flow.md#who-keeps-their-node) calls a
+  [Where tokens flow](b1-the-game-and-its-flows.md#who-keeps-their-node) calls a
   hub: a place, not an individual.
 - **Wealth flickers, connections last.** First place in tokens changes in
   three games out of five. First place in connections lasts a median of 6
@@ -3518,9 +3518,9 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
   spreads by conquest more than by birth, and other rules worth questioning.
 - [Building B2: a world that cannot break](a-world-that-cannot-break.md):
   rules that mend what births alone cannot build.
-- [Where the tokens flow](where-the-tokens-flow.md): where each staked token
+- [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): where each staked token
   goes, and the random walk that sets every agent's resting share.
-- [How the game is played](how-the-game-is-played.md): what the brains do in
+- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): what the brains do in
   the game, if not defend their own nodes.
 - [Physical inspiration](physical-inspiration.md): the heat equation, and the
   other physics the notebook borrows from.
@@ -3670,16 +3670,16 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
     node changes every game. On the node of the largest star a coalition did win
     in all of a hundred games. But on nodes with fifty connections or more, the
     agent keeps its node in 2.0% of games
-    ([Who keeps their node](where-the-tokens-flow.md#who-keeps-their-node)). So
+    ([Who keeps their node](b1-the-game-and-its-flows.md#who-keeps-their-node)). So
     the brain there is replaced in nearly every game, not in every one.
 
 <!-- turns -->
 ---
 
-← [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1, as described in October 2026](../README.md#b1-as-described-in-october-2026)
+← [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1, as described in October 2026](../README.md#b1-as-described-in-october-2026) · [B1: the game and its flows](b1-the-game-and-its-flows.md) →
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (46)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens go](where-tokens-go.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (44)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [How much does the seed decide?](how-much-does-the-seed-decide.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

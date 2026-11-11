@@ -442,7 +442,7 @@ the τ tokens are split evenly
 2. the tokens left over, fewer than *d* + 1, go one each down the list of
    candidates. Their remainders are all equal, so the order of the list
    decides, and the agent's own node is first
-   ([Where the tokens flow](where-the-tokens-flow.md#how-widely-agents-stake)).
+   ([Where the tokens flow](b1-the-game-and-its-flows.md#how-widely-agents-stake)).
 
 With 3 tokens and one neighbour, an agent stakes 2 at home and 1 on the
 neighbour, so whole tokens tilt the split towards home. The share staked at
@@ -478,7 +478,7 @@ at each step a token stays where it is or moves to a neighbour. The walk is
 *lazy* because staying is one of the choices.
 
 How close is the real game?
-[Where the tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)
+[Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)
 compares, agent by agent, the balance an exact even split would give with the
 real one. In the 23 worlds without a
 [star](measuring-networks.md#stars-and-hubs), the real balances follow the even split's with a
@@ -511,7 +511,7 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 
 ### Where it is used
 
-- [Where the tokens flow](where-the-tokens-flow.md#who-keeps-their-node): an
+- [Where the tokens flow](b1-the-game-and-its-flows.md#who-keeps-their-node): an
   agent keeps its node about as often as one of *d* + 1 equal stakers would:
   in 74% of games with one connection, 2.0% with fifty or more.
 - [Do the rich stay rich?](b1-lives-and-wealth.md#a-two-game-rhythm): on a hub
@@ -554,7 +554,7 @@ agents staked, and which connections the game cut.
 | `netFlowShare` | the share of `totalFlow` left after cancelling each pair's two directions against each other ([below](#cancelling-the-net-flow)) |
 | `flowImbalance` | the share of `totalFlow` that must flow one way ([The ceiling: what conservation forbids](#the-ceiling-what-conservation-forbids)) |
 | `spreadShare` | the share of the agents that staked who spread their tokens rather than going all in ([What a brain says](rules-in-detail.md#what-a-brain-says)) |
-| `revoltShare` | the share of all staked tokens, [home stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it.") included, marked revolutionary ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)) |
+| `revoltShare` | the share of all staked tokens, home stakes included, marked revolutionary ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)) |
 | `prunedEdges` | the connections cut at the end of the game because nothing crossed them ([Why flow matters](#why-flow-matters)) |
 
 A run records the first three and the last three after every game. The
@@ -613,15 +613,15 @@ reshuffled.
   its tokens at home in a game. Another 51% are matched by a stake coming
   back, and 20% go one way (49% and 21% at 10,000 tokens). So `totalFlow` is
   about 71% of the tokens, and `netFlowShare` about 0.28
-  ([The budget of a game](where-the-tokens-flow.md#the-budget-of-a-game)).
+  ([The budget of a game](b1-the-game-and-its-flows.md#the-budget-of-a-game-where-tokens-flow)).
 - **The connections.** Two connections in three carry one or two tokens a
   game, most of them one each way. In B1, every connection that carried
   nothing is cut
-  ([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)).
+  ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)).
 - **B2.** In B2's worlds almost nothing cancels: `netFlowShare` is about
   0.95. A connection there can survive unused, and agents stake mostly on
   others who do not stake back
-  ([Every world](where-the-tokens-flow.md#every-world)).
+  ([Every world](b1-the-game-and-its-flows.md#every-world)).
 - **The viewer** can colour every connection by its token flow, both
   directions together ([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)).
 
@@ -735,14 +735,14 @@ A run records these statistics after the games of every 25th iteration
   stake is a loop of two. So between 72% and 77% of the flow as staked goes
   round, yet the greedy peel finds only 13%: a weak floor. After cancelling,
   it finds 0.3% of the net flow on loops, where the ceiling allows 16%
-  ([Do tokens go round?](where-the-tokens-flow.md#do-tokens-go-round)).
-- **Every world.** [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)
+  ([Do tokens go round?](b1-the-game-and-its-flows.md#do-tokens-go-round)).
+- **Every world.** [Lightning in every world](b1-the-game-and-its-flows.md#lightning-in-every-world)
   reads the floor in every world the notebook has made. One rule decides how
   much goes round: whether a connection must carry tokens to survive. And the
   longest loop found is as long as a world is wide.
 - **Over many games.** The greedy count of single games is set beside the
   exact split of fifty games in
-  [A greedy count and an exact one](where-the-tokens-flow.md#a-greedy-count-and-an-exact-one).
+  [A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one).
   The split is explained under [Flows that go round](#flows-that-go-round).
 - **A yardstick for evolution.** How much of the flow goes round is one
   statistic that might keep rising in a world that keeps evolving
@@ -878,7 +878,7 @@ from island to island.
 - [Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go)
   splits the flow of 50 games in the twenty worlds of B1 and B2. Gifts run
   downhill; takeovers go round, but never twice in the same place.
-- [A greedy count and an exact one](where-the-tokens-flow.md#a-greedy-count-and-an-exact-one)
+- [A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one)
   sets this split beside the greedy count of
   [Lightning](#lightning-tokens-that-go-round). Over fifty games, 80% of
   B1's net flow circulates, by energy, where random flow on the same network
@@ -913,15 +913,15 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 - [What a run records](runs-and-records.md#what-a-run-records): every number recorded after a
   phase, these among them.
 - [Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers): the rounding.
-- [Where the tokens flow](where-the-tokens-flow.md): the random walk, measured.
+- [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): the random walk, measured.
 - [What the brains are like](what-the-brains-are-like.md): why brains score
   alike.
 - [Stars and hubs](measuring-networks.md#stars-and-hubs): where the walk fits worst.
 - [Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go):
   the flow of fifty games split exactly, gifts and takeovers apart.
-- [Flow modules: the groups tokens stay in](flow-modules.md): who trades with
+- [Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in): who trades with
   whom, and for how long.
-- [Where tokens go](where-tokens-go.md): every measure of the flow in the
+- [Where tokens go](b1-the-game-and-its-flows.md#where-tokens-go): every measure of the flow in the
   notebook, side by side.
 
 ## How our view changed

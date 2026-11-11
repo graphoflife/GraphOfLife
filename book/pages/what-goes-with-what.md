@@ -129,7 +129,7 @@ B1):
 | age and still alive ten iterations later | −0.52 | +0.22 |
 
 In B1 the rich are the well connected, the central and the old. The [even
-split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") ([Where tokens flow](where-the-tokens-flow.md)) pours tokens into
+split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") ([Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)) pours tokens into
 whoever has most neighbours, and nothing ages. They spread their stakes, and
 the nodes they take come from spreading.
 
@@ -336,5 +336,5 @@ which worlds it reads and how.
 ← [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
 
 > [!info]- Pages that link here (6)
-> [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens go](where-tokens-go.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

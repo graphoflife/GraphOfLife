@@ -325,7 +325,7 @@ condition fills about 2.3 GB of disk.
   the light cone of the same worlds.
 - [Physical inspiration](physical-inspiration.md#why-life-is-possible-a-flow-of-low-entropy):
   why a flow of low entropy makes life possible.
-- [Where tokens flow](where-the-tokens-flow.md): the game as a random walk of
+- [Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): the game as a random walk of
   tokens, the closed world's heat.
 
 ## How this was made

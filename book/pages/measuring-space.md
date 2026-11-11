@@ -235,7 +235,7 @@ whose dimension is known, of about 2,000 points each. By walks, a ring reads
 B1's worlds of 100,000 tokens read 1.9 by walks, flat from 4 to 160 steps,
 against 2.8 by balls. They have room, but dead ends and narrow passages slow
 a walker. In the game, tokens move almost as a random walk would
-([Where the tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+([Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
 So a difference in tokens spreads slowly through these worlds too.
 
 ### Box dimension

@@ -83,13 +83,6 @@ how the pages hang together.
 
 - [What keeps wealth spread?](pages/what-keeps-wealth-spread.md)
 
-#### The game and the flow of tokens
-
-- [Where tokens go](pages/where-tokens-go.md)
-- [How the game is played: what agents stake, and who wins the nodes](pages/how-the-game-is-played.md)
-- [Where tokens flow](pages/where-the-tokens-flow.md)
-- [Flow modules: the groups tokens stay in](pages/flow-modules.md)
-
 #### The shape and health of the network
 
 - [The shape of the network](pages/what-shape-does-the-network-take.md)
@@ -206,4 +199,5 @@ how the pages hang together.
 
 - [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
 - [B1: lives and wealth](pages/b1-lives-and-wealth.md)
+- [B1: the game and its flows](pages/b1-the-game-and-its-flows.md)
 <!-- /contents -->

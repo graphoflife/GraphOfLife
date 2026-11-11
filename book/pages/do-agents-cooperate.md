@@ -237,7 +237,7 @@ larger world changes is how rare kin are far away.
 This is the picture of [One world, many colours](one-world-many-colours.md) in
 numbers: families live together. A brain's copies sit next to it, for two
 reasons. A brain spreads by taking neighbouring nodes
-([Where the tokens flow](where-the-tokens-flow.md)), and children are joined
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)), and children are joined
 to their parents.
 
 So the precondition of kin selection is met: the relatedness *r* between
@@ -337,7 +337,7 @@ And **66%** of all such pairs exchanged exactly one token each way. The
 
 Is that reciprocity? Two observations say: not in the sense of the theory.
 First, an equal exchange cancels: it changes neither balance
-([Where the tokens flow](where-the-tokens-flow.md)). What it does is keep the
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). What it does is keep the
 connection alive at its minimum price, paid by both. Second, it is what the
 even split gives. Two poor agents, each splitting a few tokens evenly over a
 few candidates, put one token on each other. It is a **handshake**, not a
@@ -378,8 +378,8 @@ two games it is 0.8%; after four, 0.2%.
 
 The stage stays; the actors change almost every game. About half of all
 nodes, and nearly every [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), are taken over in every game
-([How the game is played](how-the-game-is-played.md),
-[Where the tokens flow](where-the-tokens-flow.md)).
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes),
+[Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
 
 Direct reciprocity needs *w* > *C*/*B*, so a benefit at least 1/*w* times its
 cost. With *w* ≈ 0.04, that is a benefit twenty-five times the cost (twenty at
@@ -425,7 +425,7 @@ Nearby measures were taken instead. Help itself was counted exactly by the
 rules ([Help](#help)), with the three signs of cooperation
 [above](#from-help-to-cooperation), in
 [Gliders, and who helps whom](gliders-and-who-helps-whom.md).
-[Flow modules: the groups tokens stay in](flow-modules.md) followed how long
+[Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in) followed how long
 the groups that tokens keep to last, pairs of partners among them. And in
 pilot worlds under B2's rules, connected groups of one genotype and of close
 kin shrank over time, in every world.
@@ -594,5 +594,5 @@ iterations each.
 ← [Who helps whom](who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Other contests: a lottery, and alliances](another-game.md) →
 
 > [!info]- Pages that link here (13)
-> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

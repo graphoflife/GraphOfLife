@@ -383,7 +383,7 @@ many worlds of that experiment or batch the measure has been taken on:
   go round ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)).
   Where there are gifts, also who gives to whom;
 - **flow modules**: the groups tokens stay in
-  ([Flow modules: the groups tokens stay in](flow-modules.md));
+  ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in));
 - **how different the agents are**: every brain in the same situations
   ([How different are the agents?](how-different-are-the-agents.md));
 - **the table of every world**: every statistic over the same stretches of

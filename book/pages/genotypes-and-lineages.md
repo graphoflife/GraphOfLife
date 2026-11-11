@@ -119,7 +119,7 @@ brain changes, and when a conqueror's brain replaces its own. A genotype ends
 when the last agent carrying it mutates, dies, or has its node won by another
 genotype. One brain in five changes after every game, and half of all nodes
 change hands in every game
-([How the game is played](how-the-game-is-played.md)). So a genotype has
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). So a genotype has
 little time.
 
 In its [settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured."), from iteration 500 on, a world holds about one genotype

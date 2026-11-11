@@ -86,7 +86,7 @@ to judge whether a world is diverse
   nothing depends on it
   ([What the brains are like](what-the-brains-are-like.md)).
 - Selection set the same constants in every world
-  ([How the game is played](how-the-game-is-played.md),
+  ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes),
   [What the brains are like](what-the-brains-are-like.md)). They are: no
   children, a spread stake, and every token revolutionary.
 - Without evolution, worlds started from random brains end in very different
@@ -111,7 +111,7 @@ in, and differ in when and on whom
   even split over the [neighbours](the-world.md#the-network "An agent joined to another by a connection.").
 - The groups tokens stay in are the network's regions. Only B2's agents keep
   a partner longer than chance, for a few [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.")
-  ([Flow modules: the groups tokens stay in](flow-modules.md)).
+  ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)).
 
 ## Why B1's agents are alike and B2's are not
 
@@ -301,7 +301,7 @@ none of them needs a tuned number:
    spread without the rest of the brain it arose in.
 4. **Groups that hold together.** None of these worlds makes any beyond the
    regions of its network
-   ([Flow modules: the groups tokens stay in](flow-modules.md),
+   ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in),
    [Who helps whom](who-helps-whom.md)).
 
 And one thing to avoid: a rule that leaves a single way of acting as the way

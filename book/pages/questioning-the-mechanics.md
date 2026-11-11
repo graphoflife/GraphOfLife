@@ -247,7 +247,7 @@ has no special claim to it.
 
 **What the data say.** The agent on a node with fifty or more [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")
 keeps it in 2.0% of games; on a node with one connection, in 74%
-([Where the tokens flow](where-the-tokens-flow.md)). A pair of brains facing
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). A pair of brains facing
 each other across a connection survives one more game in 4% of cases
 ([Do agents cooperate?](do-agents-cooperate.md)). The centre of a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") is the
 extreme: a coalition takes its node in every game, and it carries a new brain
@@ -261,7 +261,7 @@ lasting individuals struggles to build anything that lasts on top of them.
 **What could replace it.** An advantage for the incumbent, the agent already
 on the node. For instance, its own stake on its node could count double. Or a
 takeover could need the coalition's revolutionary part to exceed the
-hegemon's stake *and* the [home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it."), what the agent stakes on its own node.
+hegemon's stake *and* the home stake, what the agent stakes on its own node.
 Then measure how long brains hold hubs, and whether partnerships appear.
 
 **What B2 did.** Two things. It gave the incumbent its advantage: a stake on
@@ -407,7 +407,7 @@ cut ([`prune_after`](settings.md#prune_after),
 [`inactive_window`](settings.md#inactive_window)).
 
 **What the data say.** Two connections in three carry one or two tokens in a
-game ([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)). 66% of mutual
+game ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)). 66% of mutual
 stakes are one token each way, 58% at 10,000 tokens
 ([Do agents cooperate?](do-agents-cooperate.md)). Regions of poor agents lose
 their connections and die ([How a world breaks](how-a-world-breaks.md)).
@@ -609,5 +609,5 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
 > [!info]- Pages that link here (13)
-> [The brain](the-brain.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md)
+> [The brain](the-brain.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How a world breaks](how-a-world-breaks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

@@ -124,7 +124,7 @@ stake on kin as on strangers.
 Stakes come back, but not as favours. When an agent stakes on a neighbour,
 the neighbour stakes back in 90% of cases. That is about what the breadth of
 B1's staking gives alone, since its agents stake on nearly every neighbour
-([Stakes that are returned](where-the-tokens-flow.md#stakes-that-are-returned)).
+([Stakes that are returned](b1-the-game-and-its-flows.md#stakes-that-are-returned)).
 Most such pairs stake exactly the same on each other (82%). That is a
 handshake, which keeps their [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") alive at the price the rules set
 ([Do agents answer a stake with a stake?](do-agents-cooperate.md#do-agents-answer-a-stake-with-a-stake)).
@@ -165,7 +165,7 @@ such a pair is in a **feud**
 The flow of tokens shows the one structure B2's agents add. It falls into
 pairs of partners, and they last a little longer than chance. Of these pairs,
 9% last five games. When each agent's stakes are dealt among its neighbours at
-random, 4% do ([How long modules live](flow-modules.md#how-long-modules-live)).
+random, 4% do ([How long modules live](b1-the-game-and-its-flows.md#how-long-modules-live)).
 Whether these pairs are the feuds has not been checked. In B1, the groups the
 flow keeps to are the network's own regions.
 
@@ -306,7 +306,7 @@ rather than brains. Three things would open the way:
    enough.
 3. **A reason to stay.** In B2 the flow of tokens runs one way, because a link
    no longer has to carry tokens to survive
-   ([Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)).
+   ([Lightning in every world](b1-the-game-and-its-flows.md#lightning-in-every-world)).
    Where links must carry tokens, agents stake on each other: the raw
    material of exchange is already there.
 
@@ -325,7 +325,7 @@ one
 ([Other contests: a lottery, and alliances](another-game.md#what-we-learned)).
 Measured in worlds of allies, flow modules would show whether their groups
 outlast the network's regions
-([Flow modules: the groups tokens stay in](flow-modules.md#what-we-learned)).
+([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#what-we-learned-flow-modules)).
 
 ## What we learned
 
@@ -353,7 +353,7 @@ outlast the network's regions
   in B1, in B2 and among allies, and the two new inputs tested.
 - [Other contests: a lottery, and alliances](another-game.md): stakes pooled
   by clones and families, senses of kin, and alliances.
-- [Flow modules: the groups tokens stay in](flow-modules.md): the groups the
+- [Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in): the groups the
   flow of tokens keeps to, and B2's pairs of partners.
 
 ## How our view changed
@@ -371,7 +371,7 @@ outlast the network's regions
   returned as often as chance has it". It gave
   [Do agents cooperate?](do-agents-cooperate.md#do-agents-answer-a-stake-with-a-stake)
   as its source. That page never set the return of stakes against chance.
-  [Where tokens flow](where-the-tokens-flow.md#stakes-that-are-returned) finds
+  [Where tokens flow](b1-the-game-and-its-flows.md#stakes-that-are-returned) finds
   that a stake comes back in 90% of cases, about what the breadth of B1's
   staking gives alone. And help, counted by the rules, is returned less than
   chance: 0.76 times
@@ -383,5 +383,5 @@ outlast the network's regions
 [Groups and cooperation](../README.md#groups-and-cooperation) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) →
 
 > [!info]- Pages that link here (10)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->

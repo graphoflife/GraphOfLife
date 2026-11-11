@@ -291,7 +291,7 @@ stakes, like partners. In B2 they are not. Agents in such a pair keep their
 own node less often than other agents that stake out: 0.80 of the time against
 0.89. They do so in every one of the ten worlds. In B2 a stake on someone's
 node is an attack. Two agents attacking each other game after game are in a
-**feud**. [Flow modules](flow-modules.md#how-long-modules-live) finds B2's flow
+**feud**. [Flow modules](b1-the-game-and-its-flows.md#how-long-modules-live) finds B2's flow
 falling into pairs that last longer than chance would have them. The two
 measures have not been compared, so whether those pairs are these feuds is not
 known.
@@ -362,7 +362,7 @@ tokens run from high agents to low ones. In two worlds checked, the rank
 [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of that height with an agent's number of
 connections is −0.28 and −0.33. That is the even split again, tokens settling
 in proportion to connections
-([The game as a random walk](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
 In B2, whose gifts are failed raids, they drain weakly towards the richer
 (−0.16 in two worlds). That is tribute, paid by failed raids to whoever
 withstood them.
@@ -377,7 +377,7 @@ a network counts as circulation even when it never closes
 
 Taken whole, the net flow of fifty games goes round more than chance: about
 0.2 more in B1, and less than 0.1 more in B2.
-[A greedy count and an exact one](where-the-tokens-flow.md#a-greedy-count-and-an-exact-one)
+[A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one)
 sets this beside the loops found in single games.
 
 **With alliances, gifts go round.** The pilots with alliances are the only
@@ -721,8 +721,6 @@ kept in `book/results/patterns.json`.
 
 ← [Other contests: a lottery, and alliances](another-game.md) · [Groups and cooperation](../README.md#groups-and-cooperation)
 
-**Also about:** [The game and the flow of tokens](../README.md#the-game-and-the-flow-of-tokens).
-
-> [!info]- Pages that link here (13)
-> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens go](where-tokens-go.md) · [Where tokens flow](where-the-tokens-flow.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (12)
+> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
 <!-- /turns -->
