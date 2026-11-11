@@ -139,6 +139,20 @@ def test_no_run_of_the_books_plans_changes_its_name():
         assert [s.run_id for s in gol_plan.experiment_runs(name)] == ids, f"{name}'s runs changed their names"
 
 
+def test_a_plan_may_keep_a_frame_only_every_few_iterations():
+    # A long run that would not fit on the disk: its runs keep a frame every
+    # frames_every-th iteration, so their graph statistics have to be due on
+    # frames they keep. Any other plan keeps every frame, as before.
+    sparse = plan("E95", record={"checkpoint_every": 2, "heavy_every": 4, "frames_every": 2})
+    with lab(plan("E94"), sparse, plan("E96", record={"heavy_every": 3, "frames_every": 2})):
+        dense = gol_plan.experiment_runs("E94")[0]
+        assert dense.config["export_every"] == 1 and "frames_every" not in dense.record
+        spec = gol_plan.experiment_runs("E95")[0]
+        assert spec.config["export_every"] == 2 and spec.record["frames_every"] == 2
+        assert spec.run_id == dense.run_id, "how often frames are kept changed a run's name"
+        refused(lambda: gol_plan.experiment_runs("E96"), "frames_every", "heavy_every")
+
+
 def test_a_condition_may_have_seeds_of_its_own():
     """A world one seed found is played again with that seed, beside conditions on the plan's seeds."""
     with lab(plan("E91", [{"name": "a"}, {"name": "b", "set": {"keep_home": 0.5}, "seeds": "7"}])):

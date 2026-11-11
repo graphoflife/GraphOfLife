@@ -182,6 +182,20 @@ def _check_keys(where: str, given: Iterable[str], allowed: Iterable[str]) -> Non
                        f"(it can say {', '.join(sorted(allowed))})")
 
 
+def _check_frames_every(name: str, record: Dict[str, Any]) -> None:
+    """
+    A run that keeps a whole frame only every frames_every-th iteration (a long
+    run that would not fit on the disk otherwise) still has its graph
+    statistics due on frames it keeps, so frames_every has to divide
+    heavy_every.
+    """
+    every = record.get("frames_every", 1)
+    heavy = int(record.get("heavy_every", HEAVY_EVERY))
+    if not isinstance(every, int) or every < 1 or heavy % every:
+        raise LabError(f"{name} record: frames_every has to be a whole number of iterations, at least 1, "
+                       f"that divides heavy_every ({heavy}); it is {every!r}")
+
+
 def experiment_runs(name: str) -> List[RunSpec]:
     """Every run an experiment needs, made from its plan and checked on the way."""
     return _once(("runs", name), lambda: _experiment_runs(name))
@@ -212,7 +226,8 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     world = dict(runs["world"])
     _check_keys(f"{name} world", world, WORLD)
     record = dict(runs.get("record", {}))
-    _check_keys(f"{name} record", record, ("heavy_every", "checkpoint_every", "archive_every"))
+    _check_keys(f"{name} record", record, ("heavy_every", "checkpoint_every", "archive_every", "frames_every"))
+    _check_frames_every(name, record)
     iterations = int(runs["iterations"])
     workers_cap(name)                                       # refuses one that is not a count
 
@@ -260,7 +275,7 @@ def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict
     for size, seed in ((size, seed) for size in _sizes(name, label, condition, world)
                        for seed in parse_seeds(condition.get("seeds", seeds))):
         here = {**world, **own_world, "total_tokens": size}
-        config = {**base, **here, **changed, "seed": seed, "export_every": 1,
+        config = {**base, **here, **changed, "seed": seed, "export_every": int(record.get("frames_every", 1)),
                   "export_decisions": True,
                   "checkpoint_every": int(record.get("checkpoint_every", 0)),
                   "archive_every": int(record.get("archive_every", 0))}
@@ -279,7 +294,8 @@ def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict
             config=config,
             lab={"baseline": base_name, "world": here, "set": changed, "seed": seed,
                  "replicate": replicate},
-            record={"heavy_every": int(record.get("heavy_every", HEAVY_EVERY))},
+            record={"heavy_every": int(record.get("heavy_every", HEAVY_EVERY)),
+                    **({"frames_every": record["frames_every"]} if record.get("frames_every", 1) != 1 else {})},
             targets=sorted(set(int(s) for s in condition.get("stops", [])) | {iterations}),
             condition=label,
             threads=condition.get("threads"),

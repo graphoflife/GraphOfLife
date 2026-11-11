@@ -252,6 +252,17 @@ For the world as a whole, a frame holds:
 
 Frames are read with `gol_store.read_frame(run, index)`.
 
+A long run may keep a frame only every so often. A plan that asks for
+`frames_every` *n* in its `record` keeps the two frames of every *n*-th
+iteration, and the statistics file a line for each of those. What an
+iteration cost is still given per iteration, over every iteration since the
+last line. The families count (`cladesInWindow`) needs every iteration in
+order, so such a run leaves it empty. So do the analyses that follow every
+birth, which need every frame. The kept worlds (`archive_every`) are what
+contests and probes read, and they are kept as always. Added on
+11 November 2026, so that worlds of 20,000 iterations and more fit on the
+disk.
+
 ### The statistics file
 
 From every frame, a row of statistics is computed and appended to
@@ -432,6 +443,8 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 ## How our view changed
 
 - *What a run records*:
+  - **11 November 2026.** A plan may keep a frame only every `frames_every`-th
+    iteration, for long worlds that would not fit on the disk otherwise.
   - **23 October 2026.** This page said that the gift fields are `null` in
     every run of the notebook, since no run had gifts. In a run without gifts
     they are 0 in every reproduction row. Gifts have been switched on since

@@ -486,6 +486,46 @@ def test_a_stopped_and_resumed_run_is_the_run_that_never_stopped():
         assert _what_was_recorded(paused) == _what_was_recorded(straight)
 
 
+def test_a_run_keeps_a_frame_only_as_often_as_its_plan_asks():
+    """
+    A long run that would not fit on the disk keeps a whole frame only every
+    frames_every-th iteration. Its statistics are those frames', its families
+    are left absent rather than counted on a broken chain, what an iteration
+    cost is still per iteration, and stopped and taken up again it records what
+    a run left alone records. A run whose frames_every is not its export_every
+    refuses to go.
+    """
+    import gol_record
+    import gol_run
+    import gol_store
+
+    cfg = small(seed=63, checkpoint_every=4, export_every=3)
+    policy = {"heavy_every": 3, "frames_every": 3}
+    with scratch_runs():
+        straight = advanced_run(cfg, 10, policy, "straight")
+        rows = gol_record.read_stats(straight)
+        assert sorted({row["iteration"] for row in rows}) == [0, 3, 6, 9]
+        assert gol_store.count_frames(straight) == 8
+        assert all(row["cladesInWindow"] is None for row in rows)
+        assert all(row["_seconds"] >= 0 for row in rows if row["phase"] == 2)
+
+        paused = gol_store.create_run("paused", cfg, record=policy)["id"]
+        gol_run.advance(paused, until=5)
+        gol_run.advance(paused, until=10)
+        assert _what_was_recorded(paused) == _what_was_recorded(straight)
+        keep = lambda run: [{k: v for k, v in row.items() if k not in ("_seconds", "_cpu", "_peakMB")}
+                            for row in gol_record.read_stats(run)]
+        assert keep(paused) == keep(straight)
+
+        wrong = gol_store.create_run("wrong", small(seed=63), record=policy)["id"]
+        try:
+            gol_run.advance(wrong, until=2)
+        except ValueError as exc:
+            assert "frames_every" in str(exc), str(exc)
+        else:
+            raise AssertionError("a run kept every frame although its plan asked for every third")
+
+
 def test_a_run_cut_between_checkpoints_resumes_to_the_same_run():
     """
     A run that dies between checkpoints — the machine switched off, the

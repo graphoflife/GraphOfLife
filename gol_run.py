@@ -71,15 +71,18 @@ def _advance(run_id: str, should_stop: Callable[[Any], bool], until: Optional[in
         store.truncate_archive_after(run_id, world.iteration)
 
     # A run made with a recording policy keeps a line of statistics per frame
-    # as it goes (gol_record). Families need every iteration in order, so such
-    # a run has to store every one.
+    # as it goes (gol_record). It stores every iteration unless its plan asked
+    # for a frame only every frames_every-th (a long run that would not fit on
+    # the disk), and then families, which need every iteration in order, are
+    # not counted.
     policy = store.load_meta(run_id).get("record")
     recorder = None
     if policy is not None:
-        if cfg.export_every != 1:
-            raise ValueError("a run recorded as it goes has to keep every iteration")
+        if cfg.export_every != int(policy.get("frames_every", 1)):
+            raise ValueError("a run recorded as it goes keeps the frames its plan asks for: export_every "
+                             f"is {cfg.export_every}, the plan's frames_every {policy.get('frames_every', 1)}")
         recorder = Recorder(run_id, **policy)
-        recorder.start(cursor)
+        recorder.start(cursor, world.iteration)
 
     store.update_meta(run_id, status="running", error=None,
                       iteration=world.iteration, frame_count=cursor)
