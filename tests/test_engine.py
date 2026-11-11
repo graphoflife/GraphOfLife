@@ -3078,6 +3078,45 @@ def test_a_contest_cannot_change_a_brain():
     assert {contestant.brains[u].brain_id for u in contestant.G.nodes()} <= ids
 
 
+def test_a_patch_contest_plants_each_era_as_one_region():
+    """
+    A patch contest deals era B's brains to one region, grown breadth-first
+    from an agent drawn at random until it holds half the world, and era A's
+    to the rest, so that a group which needs its own kind around it starts
+    whole. A coin contest deals its brains exactly as it always has.
+    """
+    import numpy as np
+    import gol_strategies
+    import gol_tournament as tour
+    cfg = small(seed=68)
+    world = new_world(cfg)
+    for _ in range(3):
+        world.step(record_decisions=False)
+    state = world.to_checkpoint()
+    n = len(state["ids"])
+    in_b = tour.halves(state, np.random.RandomState(5))
+    assert in_b.sum() == n // 2
+    graph = nx.Graph()
+    graph.add_nodes_from(range(n))
+    graph.add_edges_from(state["edges"].tolist())
+    assert nx.is_connected(graph)
+    assert nx.is_connected(graph.subgraph(np.flatnonzero(in_b).tolist())), "era B's region came apart"
+    patch = tour.mixed(state, state, state, cfg.message_amount, np.random.RandomState(5), "patch")
+    assert ((patch["brain_ids"] >= tour.LABEL_B) == in_b).all()
+    coin = tour.mixed(state, state, state, cfg.message_amount, np.random.RandomState(5))
+    flips = np.random.RandomState(5).random_sample(n) < 0.5
+    assert ((coin["brain_ids"] >= tour.LABEL_B) == flips).all(), "the coin deal changed"
+    assert tour.contest(cfg.to_dict(), state, state, state, 4, 5, plant="patch")["agents"] > 0
+    trial = {"kind": "contest", "run": "r", "T": 4, "home": 0, "a": 0, "b": 1, "seed": 5}
+    gol_strategies.check_trial({**trial, "plant": "patch"})
+    try:
+        gol_strategies.check_trial({**trial, "plant": "rows"})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a contest dealt by neither coin nor patch was accepted")
+
+
 def test_a_contest_counts_a_brain_mixed_at_birth_for_its_parents_era():
     """
     Where brains are mixed at birth, a newborn's brain is new even in a contest,
