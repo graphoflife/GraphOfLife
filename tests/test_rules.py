@@ -57,6 +57,7 @@ RULES = {
     "upkeep, paid or used, to the estate": dict(link_upkeep="paid_or_used", upkeep_to="estate"),
     "local estate": dict(redistribution="local"),
     "local estate, mended": dict(redistribution="local", mend_on_death=True, birth_links=2),
+    "revolutionary tokens separate": dict(revolt_tokens="separate"),
     "weakest first": dict(allocation="weakest_first"),
     "strongest first, home kept": dict(allocation="strongest_first", keep_home=0.2),
     "strongest first, lottery, gifts": dict(allocation="strongest_first", contest="lottery",
@@ -91,8 +92,9 @@ def test_what_each_new_rule_needs():
     _refused(dict(mate_pays=True), "mix_at_birth")
     _refused(dict(hidden_activation="tanh", brain_kind="binary", hidden_layers=[24, 16]), "binary")
     _refused(dict(upkeep_to="estate"), "link_upkeep")
+    _refused(dict(revolt_tokens="separate", allow_revolutions=False), "allow_revolutions")
     _refused(dict(allocation="weakest_first", proto={"came_from": True}), "proto")
-    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to", "allocation"):
+    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to", "allocation", "revolt_tokens"):
         _refused({setting: "no-such-rule"}, setting)
 
 
@@ -148,7 +150,7 @@ def test_the_board_reads_the_game_as_it_stands():
     from types import SimpleNamespace
     from gol_config import BOARD
     neighs = {1: [2], 2: [1, 3], 3: [2]}
-    world = SimpleNamespace(cfg=SimpleNamespace(contest="largest"), _mark_flow=lambda u, v: None)
+    world = SimpleNamespace(cfg=SimpleNamespace(contest="largest", revolt_tokens="both"), _mark_flow=lambda u, v: None)
     stakes = {v: {} for v in neighs}
     board = Board(world, neighs, stakes, {v: {} for v in neighs}, {v: 0 for v in neighs},
                   {(1, 2): 0, (2, 3): 0}, {1: 5, 2: 1, 3: 3})
@@ -283,6 +285,23 @@ def test_a_world_with_link_tokens_pays_for_its_seed_graph():
 # ---------------------------------------------------------------------------
 # The lottery
 # ---------------------------------------------------------------------------
+
+def test_a_separate_revolutionary_token_counts_for_the_coalition_alone():
+    # Agent 1 stakes 10 and flags 6 of them; agent 2 stakes 8. Under both, 1's
+    # claim is all of its 10 and it leads; under separate it claims only the 4
+    # it did not flag, so 2 leads, and 1's 6 flagged tokens are too few to
+    # outweigh 2's 8 as a coalition.
+    from gol_rounds import would_take
+    stakes, revolts = {1: 10, 2: 8, 3: 3}, {1: 6}
+    both, separate = new_world(small()), new_world(small(revolt_tokens="separate"))
+    assert both._claims(stakes, revolts) == stakes
+    assert separate._claims(stakes, revolts) == {1: 4, 2: 8, 3: 3}
+    rng = np.random.RandomState(0)
+    assert GraphOfLife._resolve_winner(both._claims(stakes, revolts), revolts, rng)[0] == 1
+    assert GraphOfLife._resolve_winner(separate._claims(stakes, revolts), revolts, rng)[0] == 2
+    # The board the token-at-a-time game reads tells the same.
+    assert would_take(stakes, revolts) == 1 and would_take(stakes, revolts, separate=True) == 2
+
 
 def test_the_lottery_draws_the_taker_in_proportion_to_its_stake():
     world = new_world(small(contest="lottery", allow_revolutions=False))

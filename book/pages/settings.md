@@ -53,6 +53,7 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`allow_revolutions`](#allow_revolutions) | on | on | coalitions can take nodes |
 | [`contest`](#contest) | largest | largest | who takes a contested node |
 | [`allocation`](#allocation) | full | full | how the game's stakes are placed |
+| [`revolt_tokens`](#revolt_tokens) | both | both | what a revolutionary token counts for |
 | [`allow_gifting`](#allow_gifting) | off | off | gifts of tokens |
 | [`random_decisions`](#random_decisions) | off | off | the control without brains |
 | [`prune_after`](#prune_after) | blotto | blotto | when unused connections are cut |
@@ -326,6 +327,26 @@ October 2026, at the author's request. A game takes as many rounds as its
 richest agent has tokens, so these worlds are slower to play.
 
 **B1 and B2:** `full`.
+
+### revolt_tokens
+
+What a token an agent flags as revolutionary counts for in the
+[game](one-iteration.md#phase-2-the-game), under
+[`allow_revolutions`](#allow_revolutions):
+
+- `both`: the rule since the simple engine. A stake counts whole for its
+  staker's claim to be the node's largest staker, and its revolutionary part
+  counts again for the coalition against that largest staker. Flagging a token
+  costs nothing.
+- `separate`: a flagged token counts for the coalition alone, and the rest of
+  the stake for the staker's claim alone. A staker gives up its own claim on
+  every token it flags, so flagging is a choice between the two.
+
+Added on 11 November 2026, at the author's request, after a reading of the
+engine found that under `both` the brains flag almost every token, since doing
+so costs nothing. It needs `allow_revolutions`.
+
+**B1 and B2:** `both`.
 
 ### allow_gifting
 

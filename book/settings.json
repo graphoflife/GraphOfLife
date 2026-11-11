@@ -17,6 +17,7 @@
   "allow_revolutions",
   "contest",
   "allocation",
+  "revolt_tokens",
   "allow_gifting",
   "random_decisions",
   "prune_after",
@@ -194,6 +195,9 @@
   },
   "allocation": {
    "meaning": "How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played."
+  },
+  "revolt_tokens": {
+   "meaning": "What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim."
   }
  }
 }

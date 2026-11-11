@@ -53,6 +53,7 @@
     "hidden_activation": "sigmoid",
     "contest": "largest",
     "allocation": "full",
+    "revolt_tokens": "both",
     "mate_pays": false,
     "link_token": false,
     "link_upkeep": "off",

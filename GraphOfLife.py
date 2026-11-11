@@ -2204,7 +2204,7 @@ class GraphOfLife:
                 winner, max_amount, by_revolt = self._lottery(self._weighed(v, offers))
             else:
                 winner, max_amount, by_revolt = self._resolve_winner(
-                    self._weighed(v, offers), revolution_to[v], self.rng)
+                    self._weighed(v, self._claims(offers, revolution_to[v])), revolution_to[v], self.rng)
             new_brains[v] = self._copy_brain(self.brains[winner])
             # A won node is a copy of its winner's brain made somewhere new, so
             # under mutate_on_replication it is a replication like a birth.
@@ -2296,6 +2296,17 @@ class GraphOfLife:
         if h == 1.0 or v not in offers:
             return offers
         return {**offers, v: offers[v] * h}
+
+    def _claims(self, offers: Dict[int, int], revolts: Dict[int, int]) -> Dict[int, int]:
+        """
+        What each stake on a node counts for the claim to be its largest
+        staker. Under revolt_tokens = both, the whole stake, its revolutionary
+        part counting again for the coalition; under separate, only the part
+        not flagged, so that what a staker flags is the coalition's alone.
+        """
+        if self.cfg.revolt_tokens == "both":
+            return offers
+        return {u: amount - revolts.get(u, 0) for u, amount in offers.items()}
 
     def _lottery(self, offers: Dict[int, float]) -> Tuple[int, float, bool]:
         """

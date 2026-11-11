@@ -217,6 +217,17 @@
             revolutions off.</small>
         </div>
         <div class="field">
+          <label for="cfg_revolt_tokens">A revolutionary token counts for</label>
+          <select id="cfg_revolt_tokens" data-cfg="revolt_tokens">
+            <option value="both">The staker's claim and the coalition</option>
+            <option value="separate">The coalition alone</option>
+          </select>
+          <small>Both: a stake counts whole for its staker's claim to be the
+            largest, and its revolutionary part again for the coalition, so
+            flagging costs nothing. The coalition alone: a staker gives up its
+            own claim on every token it flags. It needs revolutions.</small>
+        </div>
+        <div class="field">
           <label for="cfg_allocation">Tokens are staked</label>
           <select id="cfg_allocation" data-cfg="allocation">
             <option value="full">All at once</option>

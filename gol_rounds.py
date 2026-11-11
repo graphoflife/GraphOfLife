@@ -68,16 +68,19 @@ def schedule(remaining: Dict[int, int], allocation: str) -> List[List[int]]:
     return out
 
 
-def would_take(stakes: Dict[int, int], revolts: Dict[int, int]) -> Optional[int]:
+def would_take(stakes: Dict[int, int], revolts: Dict[int, int], separate: bool = False) -> Optional[int]:
     """
     Who takes a node if the game ended with these stakes: the engine's rule
     (GraphOfLife._resolve_winner), with ties broken to the largest id rather than
     at random, so that reading the board draws no chance. None when nothing is on it.
+    `separate` is revolt_tokens = separate: a flagged token counts for the
+    coalition alone, not for its staker's claim (GraphOfLife._claims).
     """
     if not stakes:
         return None
-    lead = max(stakes.values())
-    hegemon = max(agent for agent, amount in stakes.items() if amount == lead)
+    claims = {agent: amount - revolts.get(agent, 0) for agent, amount in stakes.items()} if separate else stakes
+    lead = max(claims.values())
+    hegemon = max(agent for agent, amount in claims.items() if amount == lead)
     mob = sorted((amount, agent) for agent, amount in revolts.items() if agent != hegemon and amount > 0)
     total = sum(amount for amount, _ in mob)
     lower, i = 0, 0
@@ -103,6 +106,7 @@ class Board:
         self.stakes, self.revolts = allocations_to, revolution_to
         self.staked, self.flow = incoming_totals, edge_flow
         self.lottery = world.cfg.contest == "lottery"
+        self.separate = world.cfg.revolt_tokens == "separate"
         # What each agent has left, and what everyone who may stake on each node has left (the node and its
         # neighbours), as arrays: a hub's token touches every neighbour's count in one step.
         self.at = {v: i for i, v in enumerate(neighs)}
@@ -149,7 +153,7 @@ class Board:
             who = np.concatenate([[self.at[v]], near])
             best = np.argsort(-values, kind="stable")[:2]
             left = [(int(values[b]), int(who[b])) for b in best]
-            taker = None if self.lottery else would_take(stakes, revolts)
+            taker = None if self.lottery else would_take(stakes, revolts, self.separate)
             got = (lead, leaders, below, float(sum(revolts.values())), lead_revolts, left, taker)
             self._summary[v] = got
         return got

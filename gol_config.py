@@ -110,6 +110,14 @@ MECHANICS: Dict[str, Any] = {
     # naming what it always named.
     "allocation": "full",
 
+    # ---- what a revolutionary token counts for (2026-11-11) -------------------
+    #
+    # A token flagged revolutionary counts for its staker's own claim to be the
+    # largest and again for the coalition, the rule since the simple engine; or,
+    # at the author's request, for the coalition alone. Off here, so `gol-1`
+    # keeps naming what it always named.
+    "revolt_tokens": "both",
+
     # ---- the pilots' rules ---------------------------------------------------
     #
     # Rules first played in the pilots' prototype (research/oee/pilots/proto.py)
@@ -312,6 +320,9 @@ class SimConfig:
     # How the game's stakes are placed: all at once, or a token at a time with
     # the poorest or the richest placing first.
     ALLOCATIONS: ClassVar[Tuple[str, ...]] = ("full", "weakest_first", "strongest_first")
+    # What a token flagged revolutionary counts for: its staker's claim and the
+    # coalition both, or the coalition alone.
+    REVOLT_TOKENS: ClassVar[Tuple[str, ...]] = ("both", "separate")
     # Whether links cost upkeep, and what then keeps one alive; and where the
     # token paid for it goes.
     LINK_UPKEEPS: ClassVar[Tuple[str, ...]] = ("off", "paid_or_used", "paid_only")
@@ -330,6 +341,7 @@ class SimConfig:
         "hidden_activation": HIDDEN_ACTIVATIONS,
         "contest": CONTESTS,
         "allocation": ALLOCATIONS,
+        "revolt_tokens": REVOLT_TOKENS,
         "link_upkeep": LINK_UPKEEPS,
         "upkeep_to": UPKEEP_TO,
     }
@@ -445,6 +457,14 @@ class SimConfig:
     # alone and everyone places a last token in the last round. The board adds
     # its rows to every observation in these two, and no head is added.
     allocation: str = "full"
+
+    # What a token flagged revolutionary counts for. `both`, the rule since the
+    # simple engine: a stake counts whole for its staker's claim to be the
+    # largest, and its flagged part counts again for the coalition, so flagging
+    # costs nothing. `separate` (the author, 2026-11-11): a flagged token counts
+    # for the coalition alone and the rest of the stake for the claim alone, so
+    # a staker gives up its own claim on what it flags. It needs revolutions.
+    revolt_tokens: str = "both"
 
     # The control. With this on, an agent never reads its inputs: the numbers
     # its brain would have produced are replaced with noise, and every decision
@@ -1047,6 +1067,9 @@ class SimConfig:
         if self.allocation != "full" and self.proto:
             raise ValueError("allocation places the engine's stakes a token at a time; the prototype's world "
                              "(proto) plays a game of its own")
+        if self.revolt_tokens != "both" and not self.allow_revolutions:
+            raise ValueError("revolt_tokens says what a revolutionary token counts for: it needs "
+                             "allow_revolutions")
         if self.contest == "lottery" and self.allow_revolutions:
             raise ValueError("contest = lottery draws a node's taker by chance, and a coalition belongs "
                              "to the largest-stake rule: it needs allow_revolutions off")
