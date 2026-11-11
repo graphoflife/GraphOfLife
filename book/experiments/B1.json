@@ -54,6 +54,8 @@
     "contest": "largest",
     "allocation": "full",
     "revolt_tokens": "both",
+    "pool": "off",
+    "tag_rate": 0.0,
     "mate_pays": false,
     "link_token": false,
     "link_upkeep": "off",

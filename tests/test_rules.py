@@ -58,6 +58,8 @@ RULES = {
     "local estate": dict(redistribution="local"),
     "local estate, mended": dict(redistribution="local", mend_on_death=True, birth_links=2),
     "revolutionary tokens separate": dict(revolt_tokens="separate"),
+    "genotype pools": dict(pool="genotype"),
+    "family pools": dict(pool="family", tag_rate=0.2),
     "weakest first": dict(allocation="weakest_first"),
     "strongest first, home kept": dict(allocation="strongest_first", keep_home=0.2),
     "strongest first, lottery, gifts": dict(allocation="strongest_first", contest="lottery",
@@ -93,8 +95,11 @@ def test_what_each_new_rule_needs():
     _refused(dict(hidden_activation="tanh", brain_kind="binary", hidden_layers=[24, 16]), "binary")
     _refused(dict(upkeep_to="estate"), "link_upkeep")
     _refused(dict(revolt_tokens="separate", allow_revolutions=False), "allow_revolutions")
+    _refused(dict(pool="family"), "tag_rate")
+    _refused(dict(tag_rate=0.2), "pool")
+    _refused(dict(pool="genotype", allocation="weakest_first"), "allocation")
     _refused(dict(allocation="weakest_first", proto={"came_from": True}), "proto")
-    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to", "allocation", "revolt_tokens"):
+    for setting in ("hidden_activation", "contest", "link_upkeep", "upkeep_to", "allocation", "revolt_tokens", "pool"):
         _refused({setting: "no-such-rule"}, setting)
 
 
@@ -301,6 +306,41 @@ def test_a_separate_revolutionary_token_counts_for_the_coalition_alone():
     assert GraphOfLife._resolve_winner(separate._claims(stakes, revolts), revolts, rng)[0] == 2
     # The board the token-at-a-time game reads tells the same.
     assert would_take(stakes, revolts) == 1 and would_take(stakes, revolts, separate=True) == 2
+
+
+def test_pooled_stakes_count_as_one_sides_and_the_owner_keeps_its_own_sides_win():
+    # Agents 1 and 2 share a genotype and stake 3 each on the node of agent 3,
+    # which stakes 5 on itself: pooled they are one side of 6, and the larger
+    # staker of that side, the first of the tie, makes its offer. If 3 shares
+    # their genotype, its own side wins and it keeps its node.
+    world = new_world(small(pool="genotype"))
+    a, b, owner = sorted(world.brains)[:3]
+    world.brains[b].brain_id = world.brains[a].brain_id
+    offers = {a: 3, b: 3, owner: 5}
+    assert world._pooled(owner, offers) == {a: 6, owner: 5}
+    world.brains[owner].brain_id = world.brains[a].brain_id
+    assert world._pooled(owner, offers) == {owner: 11}
+    plain = new_world(small())
+    assert plain._weighed(owner, offers) == offers, "pools changed a world without them"
+
+
+def test_a_family_outlives_its_genotypes_and_starts_anew_at_its_rate():
+    # A copy keeps its genotype and so its family; a mutated brain starts a
+    # family of its own with chance tag_rate. At a rate near nought every brain
+    # stays in a founder's family; at one, every brain is a family of its own.
+    keep = new_world(small(pool="family", tag_rate=1e-12, mutation_probability=0.5))
+    founders = {brain.brain_id for brain in keep.brains.values()}
+    for _ in range(4):
+        keep.step()
+    assert any(brain.brain_id not in founders for brain in keep.brains.values()), "nothing mutated"
+    assert all(keep.family(brain.brain_id) in founders for brain in keep.brains.values())
+    fresh = new_world(small(pool="family", tag_rate=1.0, mutation_probability=0.5))
+    for _ in range(4):
+        fresh.step()
+    assert all(fresh.family(brain.brain_id) == brain.brain_id for brain in fresh.brains.values())
+    # Tags are let go at each cleanup; the game's mutations come after its
+    # cleanup, so at most the genotypes they replaced wait for the next one.
+    assert len(fresh.tag_of) <= 2 * len(fresh.brains), "the tags of dead genotypes were kept"
 
 
 def test_the_lottery_draws_the_taker_in_proportion_to_its_stake():

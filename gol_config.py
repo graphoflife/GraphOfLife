@@ -118,6 +118,13 @@ MECHANICS: Dict[str, Any] = {
     # keeps naming what it always named.
     "revolt_tokens": "both",
 
+    # ---- stakes pooled by kin (2026-11-11) ---------------------------------------
+    #
+    # The pilots' pools (research/oee/pilots/proto.py, `pool`), in the engine so
+    # that a world playing them keeps its worlds and can be contested. Off here,
+    # so `gol-1` keeps naming what it always named.
+    "pool": "off",
+
     # ---- the pilots' rules ---------------------------------------------------
     #
     # Rules first played in the pilots' prototype (research/oee/pilots/proto.py)
@@ -211,7 +218,7 @@ NEW_RUN_DEFAULTS: Dict[str, Any] = {
 PARAMETERS = (
     "total_tokens", "n_nodes", "k_neighbors", "rewire_p", "hidden_layers",
     "brain_bits", "message_amount", "random_input_amount",
-    "mutation_probability", "mutation_noise_std", "mutation_sparsity",
+    "mutation_probability", "mutation_noise_std", "mutation_sparsity", "tag_rate",
     "extinction_threshold", "seed",
 )
 
@@ -323,6 +330,9 @@ class SimConfig:
     # What a token flagged revolutionary counts for: its staker's claim and the
     # coalition both, or the coalition alone.
     REVOLT_TOKENS: ClassVar[Tuple[str, ...]] = ("both", "separate")
+    # Whose stakes on a node count as one side's: nobody's, one genotype's, or
+    # one family's.
+    POOLS: ClassVar[Tuple[str, ...]] = ("off", "genotype", "family")
     # Whether links cost upkeep, and what then keeps one alive; and where the
     # token paid for it goes.
     LINK_UPKEEPS: ClassVar[Tuple[str, ...]] = ("off", "paid_or_used", "paid_only")
@@ -342,6 +352,7 @@ class SimConfig:
         "contest": CONTESTS,
         "allocation": ALLOCATIONS,
         "revolt_tokens": REVOLT_TOKENS,
+        "pool": POOLS,
         "link_upkeep": LINK_UPKEEPS,
         "upkeep_to": UPKEEP_TO,
     }
@@ -465,6 +476,19 @@ class SimConfig:
     # for the coalition alone and the rest of the stake for the claim alone, so
     # a staker gives up its own claim on what it flags. It needs revolutions.
     revolt_tokens: str = "both"
+
+    # Stakes pooled by kin. `genotype`: every stake on a node by agents of one
+    # genotype counts as one side's; `family`: by family, every genotype
+    # descended from one family tag (tag_rate). The side with most takes the
+    # node, the owner keeps it if its own side wins, and a brain sees one input
+    # more: whether a candidate is on its side. The pilots' rule, in the engine
+    # since 11 November 2026, so that its worlds keep their worlds and can be
+    # contested. It needs the stakes placed all at once (allocation = full).
+    pool: str = "off"
+    # The chance that a brain which mutates starts a family of its own; else it
+    # stays in its parent's family. A mutation parameter, read only under
+    # pool = family.
+    tag_rate: float = 0.0
 
     # The control. With this on, an agent never reads its inputs: the numbers
     # its brain would have produced are replaced with noise, and every decision
@@ -809,7 +833,7 @@ class SimConfig:
         # What the pilots' rules let an agent see more of, after the noise and
         # in the prototype's order, so that a pilot's brain and the lab's read
         # the same rows in the same places.
-        if self.proto.get("pool") or self.proto.get("kin_sense"):
+        if self.pool != "off" or self.proto.get("pool") or self.proto.get("kin_sense"):
             blocks.append(("same_side", 1, "bit"))
         for name in ("came_from", "helped_by"):
             if self.proto.get(name):
@@ -1067,6 +1091,17 @@ class SimConfig:
         if self.allocation != "full" and self.proto:
             raise ValueError("allocation places the engine's stakes a token at a time; the prototype's world "
                              "(proto) plays a game of its own")
+        if self.pool == "family" and not 0.0 < self.tag_rate <= 1.0:
+            raise ValueError("pool = family pools stakes by family tag: it needs tag_rate above 0 and at most 1")
+        if self.pool != "family" and self.tag_rate:
+            raise ValueError("tag_rate gives brains family tags, which only pool = family reads: it needs "
+                             "pool = family")
+        if self.pool != "off" and self.allocation != "full":
+            raise ValueError("pool sums the stakes placed all at once; a token at a time each staker reads "
+                             "the board alone: it needs allocation = full")
+        if self.pool != "off" and self.proto:
+            raise ValueError("pool is the engine's pools and the prototype (proto) has its own: a world "
+                             "takes one")
         if self.revolt_tokens != "both" and not self.allow_revolutions:
             raise ValueError("revolt_tokens says what a revolutionary token counts for: it needs "
                              "allow_revolutions")

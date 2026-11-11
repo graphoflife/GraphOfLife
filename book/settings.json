@@ -18,6 +18,7 @@
   "contest",
   "allocation",
   "revolt_tokens",
+  "pool",
   "allow_gifting",
   "random_decisions",
   "prune_after",
@@ -49,6 +50,7 @@
   "mutation_probability",
   "mutation_noise_std",
   "mutation_sparsity",
+  "tag_rate",
   "extinction_threshold"
  ],
  "settings": {
@@ -198,6 +200,12 @@
   },
   "revolt_tokens": {
    "meaning": "What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim."
+  },
+  "pool": {
+   "meaning": "Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side."
+  },
+  "tag_rate": {
+   "meaning": "Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's."
   }
  }
 }
