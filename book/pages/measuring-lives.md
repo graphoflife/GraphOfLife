@@ -113,7 +113,7 @@ everything: 3.1 births per hundred agents.
 ### In B2
 
 B2's rules were made so that none of the four can happen
-([Building B2: a world that cannot break](a-world-that-cannot-break.md#who-dies-and-why)):
+([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)):
 
 - **Nobody starves.** In the game a share of every agent's tokens stays on
   its own node, at least one token ([`keep_home`](settings.md#keep_home)).
@@ -149,7 +149,7 @@ agent in a hundred has a child in each iteration. In the ten B2 worlds of
   births and deaths in a world's youth.
 - [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages): the rates over a
   world's life.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md#who-dies-and-why):
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why):
   which deaths a world needs.
 
 ## The estate of the dead
@@ -174,7 +174,7 @@ Who leaves an estate depends on the rules. In B1 the starved hold nothing, so
 the estate is the tokens of the cut off, who make three deaths in four
 ([What the baseline world is](what-the-baseline-world-is.md)). In B2 no agent
 can starve or be cut off, and every agent dies at age 100, so the estate is the
-tokens of the old ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
+tokens of the old ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)).
 
 **The baseline rule**, `uniform`, deals the pool in one random draw, each token
 to a survivor drawn with equal chance. In the median settled B1 world of
@@ -228,19 +228,19 @@ seeds each:
 
 Experiment 31 paid the estate to the newborns, or to the parents, in B2 worlds
 whose brains are mixed at birth, with parents as mates
-([Room for the steadiest world](room-for-the-steadiest-world.md)). Its worlds
+([Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world)). Its worlds
 met every mark of the [health bar](measuring-health.md#the-health-bar) and were true spaces, 2.0 to
 2.65 times as wide as their [random twins](measuring-space.md#the-random-twin-is-a-world-a-space). But about 5,000
 agents shared the 10,000 tokens, 1.9 each, and the
 diversity score fell from 0.54–0.75 to 0.32–0.41. Experiment 32 found the
-arithmetic ([Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours)):
+arithmetic ([Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours)):
 such a world holds about a hundred agents for every birth an iteration, and the
 estates paid for 51 to 53 births an iteration, where the same world without
 them had 12 to 23.
 
 ### Where it is used (the estate of the dead)
 - [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): four of the heirs, in B1 and in B2.
-- [What holds a world's size](what-holds-a-worlds-size.md): estates paid to
+- [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size): estates paid to
   births among the rules that set how many agents a world holds.
 - [Where tokens go](b1-the-game-and-its-flows.md#the-estate-of-the-dead): the estate beside
   the other flows of tokens.
@@ -428,7 +428,7 @@ In B2 every agent lives exactly 100 iterations. So in a steady B2 world, each
 age from 0 to 99 holds one agent in a hundred. Such a world keeps its size only
 if one agent in a hundred has a child in every iteration. B2's worlds in
 Experiment 14 had 1.00 to 1.05 births per hundred agents from iteration 200 to
-1,000 ([Building B2: a world that cannot break](a-world-that-cannot-break.md#old-age)).
+1,000 ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age)).
 
 ### The risk of dying at each age
 
@@ -491,7 +491,7 @@ of its first 100 iterations. One born from iteration 500 on lived 28 to 31
   and how old the living are, in the B1 worlds.
 - [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life): the ages of the
   living, the cohorts and the hazard, iteration by iteration.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md#old-age):
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age):
   a world in which every agent dies at 100.
 
 ## Reproduction statistics
@@ -601,7 +601,7 @@ Experiment 24 and in half the worlds of
 ## Where to go next
 
 - [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): the experiment behind most of this page.
-- [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours): why
+- [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours): why
   a world paid for its births fills with poor agents.
 - [Genotypes and the family tree](measuring-evolution.md#lifetimes-of-genotypes): the
   lifetimes of brains, rather than of agents.
@@ -617,7 +617,7 @@ Experiment 24 and in half the worlds of
     four ways. It also said that a parent that gives a child at least one
     token has one.
   - **12 October 2026.** B2 was made
-    ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
+    ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
     Under its rules nobody starves or is cut off, and every agent dies of age,
     at 100. A birth needs at least ten tokens, from a parent with fewer than
     eight connections. Since 23 October 2026 the page says which rules each

@@ -280,7 +280,7 @@ joined to the largest hub almost exactly
 B2 counts a star as a fault of the network. The [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 allows no agent to be joined to more than 5% of the others.
-[A world that cannot break](a-world-that-cannot-break.md) keeps hubs down: a
+[A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) keeps hubs down: a
 newborn's links to its parent's neighbours are drawn at random, and a brain
 may choose at most 8 links.
 
@@ -516,7 +516,7 @@ it reads. The remedy is in the architecture: fewer layers, a steeper
 squashing, larger starting weights
 ([How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers)).
 
-[Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
+[Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
 tried fewer layers, as the first step towards B2. One hidden layer of 16
 gives a founder a gain of about 0.2, against 0.0006 through B1's five layers.
 The worlds broke. At 5,000 tokens, four of ten seeing worlds died out, and
@@ -540,7 +540,7 @@ The six rules:
    meeting the same partner again, is about 0.04 (0.05 at 10,000 tokens)
    ([Hubs are places](questioning-the-mechanics.md#hubs-are-places)).
    *In B2* a home stake counts 1.5 times
-   ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How often the same two brains
+   ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). How often the same two brains
    meet again has not been measured there.
 4. **Nothing is positive-sum.** Tokens are conserved, and every stake is a
    transfer: no interaction makes anything that was not there before. So an
@@ -556,7 +556,7 @@ The six rules:
    ([Do agents cooperate?](do-agents-cooperate.md)). *In B2* brains that see
    could tell kin by the names in their messages
    ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other),
-   [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break));
+   [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break));
    whether they do has not been measured. Given a sense of kin as an input,
    brains formed groups only where a rule pooled the stakes of kin
    ([Who helps whom](who-helps-whom.md)).
@@ -567,7 +567,7 @@ The six rules:
    [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
    adds that a bigger world is no escape: distances grow like a power of its
    size, and the regions the cull removes grow with it. *In B2* worlds cannot
-   split at all ([A world that cannot break](a-world-that-cannot-break.md)),
+   split at all ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)),
    rather than living on apart, and long-range links were not adopted.
 
 ### What we propose to change
@@ -589,15 +589,15 @@ they are. Under each, **What came of it** says what has happened since.
 - **A germline** (§4.2), if that is not enough: every agent carries an
   unchanged copy of the brain it was born with, and passes that on.
 
-**What came of it.** [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
+**What came of it.** [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
 tried mutation at replication with brains that see (Experiment 13, ten
 worlds of 5,000 tokens). It made things worse: eight worlds died out instead
 of four ([What stands in the way](#what-stands-in-the-way)). A stricter
 variant, which changed a brain only when it was copied into a newborn, froze
 a pilot world into one genotype with no births at all. B2 keeps the rule,
 inside rules that stop worlds breaking and starving
-([A world that cannot break](a-world-that-cannot-break.md),
-[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long a lineage now stays like
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break),
+[Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). How long a lineage now stays like
 its ancestor has not been measured. A germline has not been tried.
 
 #### Second: let individuals last
@@ -615,13 +615,13 @@ from 40–90% of the nodes a game to 15–25%, and births came back as the way
 brains spread. But one agent gathered 57% of all the tokens, staked them all
 at home where nobody could outbid them, and had child after child: a queen.
 B2 uses 1.5, with a share of every agent's tokens kept at home, and in the
-pilots no queen formed ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long
+pilots no queen formed ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). How long
 brains hold their nodes, and how long partners last, has not been measured.
 Under B2's cap on links no agent is joined to more than a few per cent of the
-others ([A world that cannot break](a-world-that-cannot-break.md)), so there
+others ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)), so there
 are no hubs to hold. Recombination at conquest has not been tried; brains
 have been mixed only at birth, a newborn's brain mixing its parent's with a
-neighbour's ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)).
+neighbour's ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)).
 
 #### Third: let cooperation pay, and let kin find each other
 
@@ -672,7 +672,7 @@ than B2 did. B2 keeps every rule local
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md),
 [Physical inspiration](physical-inspiration.md)), so no child is joined to an
 agent anywhere. And it took the other road from letting pieces live:
-[A world that cannot break](a-world-that-cannot-break.md) adds local rules
+[A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) adds local rules
 under which worlds cannot split at all. A piece that lives on as a world of
 its own is planned for [Local rules only](local-rules-only.md). Several kinds of tokens have not
 been tried.
@@ -703,7 +703,7 @@ and the option to hold tokens back from the game
 **What came of them.** Only something like the last has been tried.
 [`keep_home`](settings.md#keep_home) keeps a share of every agent's tokens on
 its own node, so that no agent can stake itself to death
-([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)): held at home, not out of the
+([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)): held at home, not out of the
 game. The share function and the averaging of whole-agent decisions are
 unchanged.
 
@@ -806,7 +806,7 @@ been answered since, and one in part.
   candidate for an adaptation, the clearest one the measurements saw, but one
   that is finished early. The cross-time tournament dates it: B1's brains
   beat their founders by iteration 50 and improve no further. And the births
-  probe of [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
+  probe of [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
   puts the change in the brains. Put back into their founders' world, the
   founders' own brains have a child in about three agent-iterations in four;
   B1's later brains, in 3 to 9 in a hundred.
@@ -859,18 +859,18 @@ above.
 The experiments did not keep this order. The notebook built its yardstick
 first ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 Then it gave the brains sight, with change only when copied
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)),
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)),
 and the worlds broke. So it built rules that keep a world whole
-([A world that cannot break](a-world-that-cannot-break.md)) and keep agents
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)) and keep agents
 from staking or breeding themselves to death, with an incumbent's advantage
-of 1.5 ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). Together these rules are
+of 1.5 ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). Together these rules are
 the second baseline, B2. In B2 evolution goes on for thousands of
 iterations, more slowly as it goes, and then levels off
 ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). What stops it is not that
 the game has no better play left: a strategy written by hand took half of a
 B2 world ([Strategies written by hand](strategies-written-by-hand.md)). The
 search runs out before the game does. What moved since is told in
-[Healthy and rich](healthy-and-rich.md) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company).
+[Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company).
 
 It is a long way. But the measurements have made it shorter in one important
 sense. They turned a vague hope, that interesting things might emerge if we
@@ -936,8 +936,8 @@ the rule changes of both aims will be tested together where they coincide.
   rules in the order of the proposals. The notebook built its yardstick
   first, then gave the brains sight, and the worlds broke. So it had to build
   a world that cannot break, B2, before anything else could be tried
-  ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break),
-  [A world that cannot break](a-world-that-cannot-break.md)).
+  ([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break),
+  [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 - **14 October 2026.** Mutation only when copied was proposed as the first
   step to real heredity. Tried with brains that see, it did harm: eight worlds
   in ten died out instead of four. B2 keeps it, but only beside rules that
@@ -945,7 +945,7 @@ the rule changes of both aims will be tested together where they coincide.
 - **14 October 2026.** Incumbency was proposed as a home stake that counts
   double. At double, one agent gathered 57% of all the tokens: a queen. B2
   uses 1.5, with 30% of every agent's tokens kept at home
-  ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
+  ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)).
 - **14 October 2026.** A yield on mutual flow was proposed to make
   cooperation pay. A yield on stakes returned went to whoever had the most
   partners, and built stars, not partnerships
@@ -953,7 +953,7 @@ the rule changes of both aims will be tested together where they coincide.
 - **14 October 2026.** The proposals would have opened the world: links to
   agents anywhere, and separated pieces that live on. B2 kept every rule local
   and made worlds that cannot split instead
-  ([A world that cannot break](a-world-that-cannot-break.md)).
+  ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 - **14 October 2026.** Blind brains were called the first obstacle, sitting
   "in the architecture, not in the world". But sight was not enough: in pilot
   worlds that could not break, seeing brains stopped improving within a few
@@ -984,5 +984,5 @@ the rule changes of both aims will be tested together where they coincide.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (15)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

@@ -132,7 +132,7 @@ brain at **0.56** (0.21 to 2.2). B1's founders passed on 0.0006 and its evolved
 brains 0.0015 ([What the brains are like](what-the-brains-are-like.md)). So a
 round-3 brain is nearly 400 times as sensitive as an evolved B1 brain, and more
 than B2's single sigmoid layer of 16, whose founders pass on about 0.2
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
 
 Depth matters a little, and only in the founders. A founder's brain of three
 layers passes on 0.38 in the median world, one of four or five layers 0.32: a

@@ -1687,7 +1687,7 @@ tokens is cut. And an agent that dies takes its connections with it. So,
 apart from the ring the founders start on, **every connection in a world was
 made at a birth.** (B2 adds a second source: it mends the network where a
 death would cut it in pieces, as
-[Mending a death](a-world-that-cannot-break.md#mending-a-death) explains.)
+[Mending a death](building-b2-and-the-search-for-a-healthy-rich-world.md#mending-a-death) explains.)
 
 So the network is grown by births and pruned by games. In a settled world,
 about 480 children are born per iteration, joined to about 4.8 agents each:
@@ -1704,7 +1704,7 @@ from the largest piece. Such a world lives only while its births keep up.
 Brains that
 see what is around them, built with fewer layers than B1's, can give up
 having children. Then their worlds die out
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
 
 ### How the network grows
 
@@ -1741,7 +1741,7 @@ small, through agents at most two steps apart. Nothing closes a large loop,
 through distant parts of the world. So a network grown by births alone is, at
 large scale, a tree: a network without loops, whose nodes are dense blobs of
 agents. The blobs hang on each other by necks that one death can cut
-([A tree of blobs](a-world-that-cannot-break.md#a-tree-of-blobs)).
+([A tree of blobs](building-b2-and-the-search-for-a-healthy-rich-world.md#a-tree-of-blobs)).
 
 #### Who gains and who loses
 
@@ -3457,10 +3457,10 @@ Such a rule was tried later. The setting
 more than anyone else's. In pilot worlds, counted twice, it let one agent
 gather 57% of all tokens behind a home stake nobody could outbid. Counted one
 and a half times, it is part of the second baseline, B2
-([Holding one's place](a-world-that-cannot-break.md#holding-ones-place)). But
+([Holding one's place](building-b2-and-the-search-for-a-healthy-rich-world.md#holding-ones-place)). But
 B2 also switches handover off. So in B2 a place can no longer be handed to a
 newborn child, as it is here in B1
-([B2, rule by rule](a-world-that-cannot-break.md#b2-rule-by-rule)). How long a
+([B2, rule by rule](building-b2-and-the-search-for-a-healthy-rich-world.md#b2-rule-by-rule)). How long a
 brain holds its node in B2 has not been measured directly, as
 [Hubs are places](questioning-the-mechanics.md#hubs-are-places) notes.
 
@@ -3516,7 +3516,7 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
   the connections follow a power law, and where.
 - [Questioning the mechanics](questioning-the-mechanics.md): why a brain
   spreads by conquest more than by birth, and other rules worth questioning.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md):
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break):
   rules that mend what births alone cannot build.
 - [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): where each staked token
   goes, and the random walk that sets every agent's resting share.
@@ -3681,5 +3681,5 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
 > [!info]- Pages that link here (36)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

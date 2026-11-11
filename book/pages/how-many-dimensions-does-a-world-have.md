@@ -298,7 +298,7 @@ ends wither, or that give every place the same number of neighbours.
 
 The second baseline, B2, has rules that close loops and leave no dead ends.
 They were made to keep a world from breaking
-([Building B2: a world that cannot break](a-world-that-cannot-break.md)), and
+([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)), and
 B2 has been the baseline of everything since:
 
 - a newborn is joined to its parent and to two of its parent's neighbours;
@@ -318,7 +318,7 @@ But those readings are of the kind the health bar uses. The
 them is a dimension, read off the mean ball over radii 1 to 5. Until this
 section, B2's network had been read only through that one number. And it rose
 with a world's size
-([What holds a world's size](what-holds-a-worlds-size.md)), as a small world's
+([What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size)), as a small world's
 would. A small world has no dimension to find; the number read off its first
 few steps only grows with the room it has.
 
@@ -364,7 +364,7 @@ space when its width is at least 1.5 ([The random twin](measuring-space.md#the-r
 - **Brains mixed at birth do not change that.** Experiment 17's worlds read
   1.21, at 630 agents. There each newborn's brain is mixed from its parent's
   and a neighbour's
-  ([Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md)).
+  ([Brains mixed at birth, in long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)).
 - **But B2 is a space, and one of about three dimensions, when the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of
   the dead goes to the newborns or to the parents.** The estate is the tokens
   a dead agent leaves. Here it goes to the iteration's newborns, or to their
@@ -446,7 +446,7 @@ age. How does a world become what it is?
 
 The lower panel holds the worlds of Experiment 14, at 5,000 tokens, each
 without one of B2's rules
-([A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break)).
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)).
 B2 itself folds there too, from 1.54 to about 1.25. Without links at birth it
 folds a little less (1.35 to 1.45), and without the cap on links a little more
 (1.13 to 1.28). With handover, in which a parent passes some of its links to
@@ -514,7 +514,7 @@ Read at iteration 1,000, 498 worlds fall into two groups. They are the pilot
 batches read at that iteration, the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s B2 families at 10,000 tokens, and the first two rounds of
 the search by elimination. That search drew every setting at random. Round after
 round, it kept the values that did not make worlds worse
-([The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds)).
+([The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds)).
 
 - **Folded**: the 284 worlds of B2 with other rules (a median width of 1.27)
   and the 87 with brains mixed at birth (1.26).
@@ -558,7 +558,7 @@ three worlds read 1.14. The third, at 2.40, is the one exception.
 
 The worlds above differ in many things at once. To see whether who breeds is
 enough, the rules of space were played alone, as in
-[Space alone](a-world-that-cannot-break.md#space-alone). There are no brains
+[Space alone](building-b2-and-the-search-for-a-healthy-rich-world.md#space-alone). There are no brains
 and no tokens. A newborn is joined to its parent and two of the parent's
 neighbours, and every agent dies at age 100, as in B2. Births balance deaths
 at about 1,500 agents. The one thing changed is who may have a child. It is
@@ -572,7 +572,7 @@ iterations each:
 | deaths mended in a ring, only the young breed | 1.71 (1.50 to 2.05) | 3.8 | 3% |
 | deaths mended in a ring, only the old breed | 1.02 (1.02 to 1.06) | 7.6 | 0.1% |
 | deaths not mended, anyone breeds | 2.36 (2.09 to 2.52) | 1.2 | 37% |
-| the model of [Space alone](a-world-that-cannot-break.md#space-alone): agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
+| the model of [Space alone](building-b2-and-the-search-for-a-healthy-rich-world.md#space-alone): agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
 | only the pieces a death would split joined, anyone breeds | 5.1 to 5.6 (two seeds of five: beyond reach) | 1.9 | 47% |
 | the same, only the young breed | 4.22 (3.62 to 4.83) | 2.0 | 48% |
 | the same, only the old breed | beyond reach in all five | 1.8 | 46% |
@@ -685,7 +685,7 @@ the line between folded and not.
   or fewer, its agents are alike, and its evolution stops
   ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world that is a three-dimensional
   space and rich, and that keeps evolving, is still to be found
-  ([Healthy and rich](healthy-and-rich.md)).
+  ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)).
 - **Room for open-ended evolution.** In a space, distant places are far apart.
   The diameter of a world grows as a power of its size, a small world's only
   as its logarithm. So a large world has room for regions that evolve apart.
@@ -703,7 +703,7 @@ the line between folded and not.
 
 - [The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space): the width, and the
   line of 1.5 between a space and a folded world.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md): the
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break): the
   rules of B2, mending among them, and what each one does.
 - [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): the estates that keep a world a space, and
   why their worlds stay poor.
@@ -732,7 +732,7 @@ with `research/atlas/rings.py`. It reads Experiment 2's B1 worlds, Experiments
 (`GraphOfLifeRuns/.pilots/BIG/B2-100000-s1`). That world was still being
 played when What folds a world was first written, and its reading was added
 the same day, 17 October 2026. The worlds without brains come from the model
-of [Space alone](a-world-that-cannot-break.md#space-alone),
+of [Space alone](building-b2-and-the-search-for-a-healthy-rich-world.md#space-alone),
 `research/oee/fold.py`.
 
 ### The runs of Experiment 10
@@ -860,8 +860,6 @@ iterations each.
 
 ← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [Dimensions at scale](dimensions-at-scale.md) →
 
-**Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
-
-> [!info]- Pages that link here (20)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
+> [!info]- Pages that link here (14)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

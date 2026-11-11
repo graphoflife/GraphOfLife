@@ -687,7 +687,7 @@ solved, but not that it is.
   builds the yardstick on B1, and
   [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
   applies it to B2. [Every era against three](every-era-against-three.md)
-  plays fixed eras. [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)
+  plays fixed eras. [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)
   compares rules by their contests. [Pilot worlds](runs-and-records.md#pilot-worlds) plays
   the eras of pilots.
 - **Exploitability.**
@@ -779,7 +779,7 @@ other in the same world, and scores the share of it the later one holds.
      selection.
    - A world whose kinds come and go in a cycle does not pass.
 4. **It stays a world in which much can happen**
-   ([Healthy and rich](healthy-and-rich.md)):
+   ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)):
    - it never falls to 20 agents;
    - it meets every mark of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at every 10,000 iterations;
    - its agents are more diverse than those of B2's median world;
@@ -867,7 +867,7 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
   the first invasion tests, and what a raider needs to win.
 - [What a brain can compute](what-a-brain-can-compute.md): the strategies
   whose signatures count as new things.
-- [Healthy and rich](healthy-and-rich.md): what a world in which much can
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): what a world in which much can
   happen looks like.
 - [Assembly theory](assembly-theory.md): how many steps an agent's
   neighbourhood takes to make, and how many agents share its shape.

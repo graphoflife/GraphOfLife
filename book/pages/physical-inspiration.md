@@ -163,7 +163,7 @@ connection, and fewer leaves
 A leaf is an agent with a single connection.
 
 B2 was built with rules of this kind, all of them local
-([A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break)):
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)):
 
 - a newborn is joined to its parent and to two of its parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection.");
 - when an agent dies, the groups its former neighbours fall into are joined
@@ -196,7 +196,7 @@ go to the newborns, or to their parents. They cannot break, and they are
 spaces of about three dimensions. But nine agents in ten hold three tokens or
 fewer, and their evolution stops ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world
 that is a well-knit space, rich, and still evolving is yet to be found
-([Healthy and rich](healthy-and-rich.md)).
+([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)).
 
 ## A speed limit
 
@@ -793,7 +793,7 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
   families of 25 iterations back, and about 12 for 200. So a world has
   territories, of lines ([Everywhere the same](#everywhere-the-same)).
 - **17 October 2026.** From 14 October, this page said that
-  [A world that cannot break](a-world-that-cannot-break.md) builds rules for a
+  [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) builds rules for a
   well-knit world. It gave them a ball dimension of 3.7, in a model without
   brains.
   [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)

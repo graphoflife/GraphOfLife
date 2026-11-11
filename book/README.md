@@ -72,7 +72,6 @@ how the pages hang together.
 #### The baselines B1 and B2
 
 - [B1 and B2: the two baselines](pages/b1-and-b2.md)
-- [Building B2: a world that cannot break](pages/a-world-that-cannot-break.md)
 
 ### What the worlds do
 
@@ -81,10 +80,6 @@ how the pages hang together.
 #### Wealth: who holds the tokens
 
 - [What keeps wealth spread?](pages/what-keeps-wealth-spread.md)
-
-#### Size and riches of a world
-
-- [What holds a world's size](pages/what-holds-a-worlds-size.md)
 
 #### Brains, and how alike agents are
 
@@ -137,14 +132,6 @@ how the pages hang together.
 - [Why the raiders stopped winning](pages/does-evolution-close-the-door.md)
 - [One agent in a sea of average agents](pages/one-agent-in-a-sea-of-average-agents.md)
 
-#### Looking for a healthy, rich world
-
-- [Healthy and rich](pages/healthy-and-rich.md)
-- [Brains mixed at birth, in long worlds](pages/mixed-at-birth-ten-long-worlds.md)
-- [Who may be a mate](pages/mixed-at-birth-with-parents-as-mates.md)
-- [The candidates, played on and played again](pages/the-candidates-played-on.md)
-- [Room and riches for the steadiest world](pages/room-for-the-steadiest-world.md)
-
 ### Methods and look-up
 
 🔳 How runs are made and measured, the statistics, every simulation, and the rules and measures in detail.
@@ -185,4 +172,5 @@ how the pages hang together.
 #### Building B2, the healthy and rich search, and the pilots
 
 - [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
+- [Building B2, and the search for a healthy, rich world](pages/building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /contents -->

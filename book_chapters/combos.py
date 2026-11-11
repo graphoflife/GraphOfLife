@@ -160,7 +160,7 @@ def _combos(ch: F.Chapter, b: Batch) -> None:
                               "each world's checkpoint at iteration 1,000, or the lab's whole world kept then "
                               "(`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`)",
                               ["Read each world as `research/atlas/profile.py` reads every world.",
-                               "Rank its four spreads among [Healthy and rich](healthy-and-rich.md)'s worlds; the diversity score is the mean."]))
+                               "Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean."]))
     # Does evolution go on? The brains of 1,000 against those of 500, a lifetime long.
     contests = _contests()
     judged = [r for r in rows if any(f"{r[3]}-s{s}" in contests for s in (1, 2))]

@@ -71,7 +71,7 @@ and about a third of a settled B1 world's agents are
 ([Hubs and leaves](#hubs-and-leaves)). Under all of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s rules, in
 the worlds of Experiment 14, it was almost always 2. There, nearly every agent
 sat on a loop or between loops, and leaves were rare
-([Nobody cut off](a-world-that-cannot-break.md#nobody-cut-off)). In the small
+([Nobody cut off](building-b2-and-the-search-for-a-healthy-rich-world.md#nobody-cut-off)). In the small
 example, the median is 2, the fewest 1 and the most 3.
 
 The **density** is the share of all possible pairs of agents that are joined:
@@ -393,7 +393,7 @@ So part of what the leaves gain may be handovers.
   connected among its candidates more often, whatever it favours. That is
   preferential attachment, and it grows hubs. So B2 draws two of a newborn's
   links at random, and caps the links a brain may choose
-  ([What the game adds](a-world-that-cannot-break.md#what-the-game-adds)).
+  ([What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds)).
 - **Age.** In the model of Barabási and Albert, the oldest nodes are the
   hubs. In B1, age gives an agent no connections; connections give it age
   ([Connections and age](b1-lives-and-wealth.md#connections-and-age)).
@@ -549,7 +549,7 @@ in the core and 72% were leaves, and two agents were 4.2 steps apart on
 average, against 12 to 26 steps in the worlds without a star
 ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 
-[B2](a-world-that-cannot-break.md) keeps hubs down: a newborn's links are drawn
+[B2](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) keeps hubs down: a newborn's links are drawn
 at random, a brain may choose at most 8 links
 ([`valence`](settings.md#valence)), and no parent hands its links to a child.
 
@@ -1059,7 +1059,7 @@ more than 2%. B2 never lets a bridge lapse. There, an unused connection is cut
 only where its two ends share at least two neighbours
 ([`prune_needs`](settings.md#prune_needs)). The two ends of a bridge share
 none, since a shared neighbour would put the bridge on a triangle
-([A world that cannot break](a-world-that-cannot-break.md)).
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 
 #### How the cut risk is computed
 
@@ -1251,7 +1251,7 @@ deeper cores, the trees and the dimension of the core are measured in
   how agents gain connections, and how they lose them.
 - [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest): stars and
   dynasties in full.
-- [A world that cannot break](a-world-that-cannot-break.md): the rules that
+- [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break): the rules that
   keep hubs down.
 - [The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space): how the notebook
   tells a space from a small world.

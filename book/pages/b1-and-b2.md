@@ -70,13 +70,13 @@ In words, the changes fall into four groups:
   for worlds that run thousands of iterations.
 - **A network that holds.** A newborn is joined to two of its parent's
   neighbours, drawn at random; a death is
-  [mended in a ring](a-world-that-cannot-break.md#mending-a-death); an
+  [mended in a ring](building-b2-and-the-search-for-a-healthy-rich-world.md#mending-a-death); an
   unused link lapses only where its ends share at least two neighbours; a
   brain may choose at most 8 links; no handover.
 - **Death by age, and a home advantage.** 30% of an agent's tokens stay at
   home, so nobody stakes itself to death; a child gets at least 10 tokens;
   every agent dies at age 100; a stake on one's own node counts 1.5 times
-  ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
+  ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)).
 
 ## An example: ten worlds of each at 5,000 tokens
 
@@ -94,7 +94,7 @@ agents and iteration.
 
 B2 pays in wealth: in the median of Experiment 15's B2 worlds, at 10,000
 tokens, 52% of the agents held a single token. In the words of
-[Healthy and rich](healthy-and-rich.md), B1's worlds are rich but fragile,
+[Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich), B1's worlds are rich but fragile,
 B2's healthy but poor.
 
 ## Where it is used
@@ -112,17 +112,17 @@ B2's healthy but poor.
 
 ## Where to go next
 
-- [A world that cannot break](a-world-that-cannot-break.md)
+- [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)
 - [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots)
 - [Eras and contests: does a world keep getting better?](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)
 
 <!-- turns -->
 ---
 
-[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) →
+[The baselines B1 and B2](../README.md#the-baselines-b1-and-b2)
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
 > [!info]- Pages that link here (20)
-> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

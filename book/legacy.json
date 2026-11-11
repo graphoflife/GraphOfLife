@@ -51,9 +51,9 @@
   "44": "what-keeps-wealth-spread",
   "45": null,
   "46": "how-to-tell-a-world-that-keeps-evolving",
-  "47": "a-world-that-cannot-break#brains-that-see-and-worlds-that-break",
-  "48": "a-world-that-cannot-break",
-  "49": "a-world-that-cannot-break#who-dies-and-why",
+  "47": "building-b2-and-the-search-for-a-healthy-rich-world#brains-that-see-and-worlds-that-break",
+  "48": "building-b2-and-the-search-for-a-healthy-rich-world#building-b2-a-world-that-cannot-break",
+  "49": "building-b2-and-the-search-for-a-healthy-rich-world#who-dies-and-why",
   "50": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops",
   "51": "strategies-written-by-hand",
   "52": "how-fast-should-brains-change",
@@ -66,19 +66,19 @@
   "59": null,
   "73": "what-the-switches-did-in-pilots#who-inherits",
   "78": "what-the-switches-did-in-pilots#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin",
-  "80": "mixed-at-birth-ten-long-worlds",
+  "80": "building-b2-and-the-search-for-a-healthy-rich-world#brains-mixed-at-birth-in-long-worlds",
   "83": "what-the-switches-did-in-pilots#links-to-strangers",
   "82": "what-the-switches-did-in-pilots#brains-mixed-at-birth-with-every-other-rule",
-  "85": "mixed-at-birth-with-parents-as-mates",
+  "85": "building-b2-and-the-search-for-a-healthy-rich-world#who-may-be-a-mate",
   "86": "what-the-switches-did-in-pilots#eight-switches-at-once-and-how-sixteen-worlds-can-test-them",
   "88": "what-the-switches-did-in-pilots#revolutions-with-every-other-rule",
   "89": "what-the-switches-did-in-pilots#handover-with-every-other-rule",
   "90": "what-the-switches-did-in-pilots#gifts-with-every-other-rule",
-  "98": "the-candidates-played-on#the-searchs-best-world-in-new-seeds",
-  "99": "mixed-at-birth-with-parents-as-mates#a-mate-that-pays-its-share",
-  "100": "room-for-the-steadiest-world",
-  "101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours",
-  "105": "room-for-the-steadiest-world#the-floor-in-plain-b2-and-in-b1",
+  "98": "building-b2-and-the-search-for-a-healthy-rich-world#the-searchs-best-world-in-new-seeds",
+  "99": "building-b2-and-the-search-for-a-healthy-rich-world#who-may-be-a-mate",
+  "100": "building-b2-and-the-search-for-a-healthy-rich-world#room-and-riches-for-the-steadiest-world",
+  "101": "building-b2-and-the-search-for-a-healthy-rich-world#births-as-rich-as-the-neighbours",
+  "105": "building-b2-and-the-search-for-a-healthy-rich-world#the-floor-in-plain-b2-and-in-b1",
   "60": "b1-the-network-size-and-scaling#worlds-of-100000-tokens",
   "61": "dimensions-at-scale",
   "62": "which-properties-have-no-scale",
@@ -90,15 +90,15 @@
   "68": null,
   "87": "how-many-dimensions-does-a-world-have#what-folds-a-world",
   "69": "a-hundred-thousand-iterations",
-  "81": "mixed-at-birth-ten-long-worlds#five-mixed-worlds-fifty-thousand-iterations",
-  "92": "the-candidates-played-on",
-  "93": "the-candidates-played-on#five-more-seeds-for-the-rules-that-held",
+  "81": "building-b2-and-the-search-for-a-healthy-rich-world#five-mixed-worlds-fifty-thousand-iterations",
+  "92": "building-b2-and-the-search-for-a-healthy-rich-world#the-candidates-played-on-and-played-again",
+  "93": "building-b2-and-the-search-for-a-healthy-rich-world#five-more-seeds-for-the-rules-that-held",
   "74": "every-world-side-by-side",
   "75": "b1-the-game-and-its-flows#where-tokens-go",
   "76": "who-helps-whom",
   "77": "b1-brains-lineages-and-messages#how-alike-the-agents-are",
-  "79": "healthy-and-rich",
-  "84": "what-holds-a-worlds-size",
+  "79": "building-b2-and-the-search-for-a-healthy-rich-world#healthy-and-rich",
+  "84": "building-b2-and-the-search-for-a-healthy-rich-world#what-holds-a-worlds-size",
   "91": "what-the-switches-did-in-pilots#rules-in-company",
   "94": "what-a-brain-can-compute",
   "95": "every-era-against-three",
@@ -202,7 +202,7 @@
   "E09": {
    "Chapter 53": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops",
    "Chapter 43": "how-fast-should-brains-change",
-   "Chapter 52": "a-world-that-cannot-break#who-dies-and-why"
+   "Chapter 52": "building-b2-and-the-search-for-a-healthy-rich-world#who-dies-and-why"
   },
   "E10": {
    "Chapter 6": "the-ideas-this-builds-on",
@@ -220,33 +220,33 @@
    "Chapter 49": "how-to-tell-a-world-that-keeps-evolving"
   },
   "E17": {
-   "Meta X": "healthy-and-rich",
+   "Meta X": "building-b2-and-the-search-for-a-healthy-rich-world#healthy-and-rich",
    "Chapter 46": "how-to-tell-a-world-that-keeps-evolving"
   },
   "E18": {
-   "Meta X": "healthy-and-rich",
+   "Meta X": "building-b2-and-the-search-for-a-healthy-rich-world#healthy-and-rich",
    "Chapter 46": "how-to-tell-a-world-that-keeps-evolving"
   },
   "E19": {
-   "Meta XI": "what-holds-a-worlds-size"
+   "Meta XI": "building-b2-and-the-search-for-a-healthy-rich-world#what-holds-a-worlds-size"
   },
   "E20": {
-   "Meta X": "healthy-and-rich"
+   "Meta X": "building-b2-and-the-search-for-a-healthy-rich-world#healthy-and-rich"
   },
   "E21": {
-   "Meta X": "healthy-and-rich",
-   "Meta XI": "what-holds-a-worlds-size"
+   "Meta X": "building-b2-and-the-search-for-a-healthy-rich-world#healthy-and-rich",
+   "Meta XI": "building-b2-and-the-search-for-a-healthy-rich-world#what-holds-a-worlds-size"
   },
   "E22": {
-   "Meta XI": "what-holds-a-worlds-size"
+   "Meta XI": "building-b2-and-the-search-for-a-healthy-rich-world#what-holds-a-worlds-size"
   },
   "E24": {
-   "Chapter 93": "the-candidates-played-on#five-more-seeds-for-the-rules-that-held",
-   "Meta X": "healthy-and-rich"
+   "Chapter 93": "building-b2-and-the-search-for-a-healthy-rich-world#five-more-seeds-for-the-rules-that-held",
+   "Meta X": "building-b2-and-the-search-for-a-healthy-rich-world#healthy-and-rich"
   },
   "E28": {
-   "Chapter 81": "mixed-at-birth-ten-long-worlds#five-mixed-worlds-fifty-thousand-iterations",
-   "Chapter 92": "the-candidates-played-on"
+   "Chapter 81": "building-b2-and-the-search-for-a-healthy-rich-world#five-mixed-worlds-fifty-thousand-iterations",
+   "Chapter 92": "building-b2-and-the-search-for-a-healthy-rich-world#the-candidates-played-on-and-played-again"
   },
   "E29": {
    "Chapter 51": "strategies-written-by-hand",
@@ -268,28 +268,28 @@
    "Chapter 103": "does-evolution-close-the-door#raiders-that-breed"
   },
   "E36": {
-   "Chapter 101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours"
+   "Chapter 101": "building-b2-and-the-search-for-a-healthy-rich-world#births-as-rich-as-the-neighbours"
   },
   "E37": {
-   "Chapter 101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours"
+   "Chapter 101": "building-b2-and-the-search-for-a-healthy-rich-world#births-as-rich-as-the-neighbours"
   },
   "E38": {
-   "Chapter 100": "room-for-the-steadiest-world",
-   "Chapter 101": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours"
+   "Chapter 100": "building-b2-and-the-search-for-a-healthy-rich-world#room-and-riches-for-the-steadiest-world",
+   "Chapter 101": "building-b2-and-the-search-for-a-healthy-rich-world#births-as-rich-as-the-neighbours"
   }
  },
  "merged": {
   "thirty-worlds": "b1-lives-and-wealth#thirty-worlds",
   "the-first-hundred-iterations": "b1-lives-and-wealth#the-first-hundred-iterations",
-  "brains-that-see-and-worlds-that-break": "a-world-that-cannot-break#brains-that-see-and-worlds-that-break",
-  "who-dies-and-why": "a-world-that-cannot-break#who-dies-and-why",
+  "brains-that-see-and-worlds-that-break": "building-b2-and-the-search-for-a-healthy-rich-world#brains-that-see-and-worlds-that-break",
+  "who-dies-and-why": "building-b2-and-the-search-for-a-healthy-rich-world#who-dies-and-why",
   "what-the-measurements-say-about-open-ended-evolution": "what-the-baseline-world-is#what-the-measurements-say-about-open-ended-evolution",
-  "five-mixed-worlds-fifty-thousand-iterations": "mixed-at-birth-ten-long-worlds#five-mixed-worlds-fifty-thousand-iterations",
-  "a-mate-that-pays-its-share": "mixed-at-birth-with-parents-as-mates#a-mate-that-pays-its-share",
-  "five-more-seeds-for-the-rules-that-held": "the-candidates-played-on#five-more-seeds-for-the-rules-that-held",
-  "the-searchs-best-world-in-new-seeds": "the-candidates-played-on#the-searchs-best-world-in-new-seeds",
-  "births-as-rich-as-the-neighbours": "room-for-the-steadiest-world#births-as-rich-as-the-neighbours",
-  "the-floor-in-plain-b2-and-in-b1": "room-for-the-steadiest-world#the-floor-in-plain-b2-and-in-b1",
+  "five-mixed-worlds-fifty-thousand-iterations": "building-b2-and-the-search-for-a-healthy-rich-world#five-mixed-worlds-fifty-thousand-iterations",
+  "a-mate-that-pays-its-share": "building-b2-and-the-search-for-a-healthy-rich-world#who-may-be-a-mate",
+  "five-more-seeds-for-the-rules-that-held": "building-b2-and-the-search-for-a-healthy-rich-world#five-more-seeds-for-the-rules-that-held",
+  "the-searchs-best-world-in-new-seeds": "building-b2-and-the-search-for-a-healthy-rich-world#the-searchs-best-world-in-new-seeds",
+  "births-as-rich-as-the-neighbours": "building-b2-and-the-search-for-a-healthy-rich-world#births-as-rich-as-the-neighbours",
+  "the-floor-in-plain-b2-and-in-b1": "building-b2-and-the-search-for-a-healthy-rich-world#the-floor-in-plain-b2-and-in-b1",
   "worlds-of-100000-tokens": "b1-the-network-size-and-scaling#worlds-of-100000-tokens",
   "how-the-network-grows": "b1-lives-and-wealth#how-the-network-grows",
   "how-even-is-a-world": "b1-lives-and-wealth#how-even-is-a-world",
@@ -421,6 +421,13 @@
   "mixing-with-every-other-rule": "what-the-switches-did-in-pilots#brains-mixed-at-birth-with-every-other-rule",
   "who-inherits": "what-the-switches-did-in-pilots#who-inherits",
   "links-to-strangers": "what-the-switches-did-in-pilots#links-to-strangers",
-  "mixed-brains-costly-units": "what-the-switches-did-in-pilots#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin"
+  "mixed-brains-costly-units": "what-the-switches-did-in-pilots#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin",
+  "a-world-that-cannot-break": "building-b2-and-the-search-for-a-healthy-rich-world#building-b2-a-world-that-cannot-break",
+  "healthy-and-rich": "building-b2-and-the-search-for-a-healthy-rich-world#healthy-and-rich",
+  "mixed-at-birth-ten-long-worlds": "building-b2-and-the-search-for-a-healthy-rich-world#brains-mixed-at-birth-in-long-worlds",
+  "what-holds-a-worlds-size": "building-b2-and-the-search-for-a-healthy-rich-world#what-holds-a-worlds-size",
+  "mixed-at-birth-with-parents-as-mates": "building-b2-and-the-search-for-a-healthy-rich-world#who-may-be-a-mate",
+  "the-candidates-played-on": "building-b2-and-the-search-for-a-healthy-rich-world#the-candidates-played-on-and-played-again",
+  "room-for-the-steadiest-world": "building-b2-and-the-search-for-a-healthy-rich-world#room-and-riches-for-the-steadiest-world"
  }
 }

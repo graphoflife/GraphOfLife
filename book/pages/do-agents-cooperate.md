@@ -446,9 +446,9 @@ proposes changes.
 
 The work on B2 went some way down these roads. B2 gives an incumbent an
 advantage, so that a brain keeps its node longer
-([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). It
+([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). It
 gives agents brains that see, which could read the names of their kin
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
 Whether they do has not been measured. A memory of what each neighbour staked
 in the last game was tried too. It changed 11 to 24% of decisions, and
 evolution stopped all the same.

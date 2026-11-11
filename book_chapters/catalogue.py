@@ -59,12 +59,12 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
     "Z": ("Settings drawn at random from every value the notebook has used, the values that make worlds worse "
           "dropped round after round (research/oee/search.md)", []),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "
-           "to 10,000 iterations", ["healthy-and-rich", "the-candidates-played-on"]),
+           "to 10,000 iterations", ["building-b2-and-the-search-for-a-healthy-rich-world", "building-b2-and-the-search-for-a-healthy-rich-world"]),
     "SW": ("Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on "
-           "in five of B2's worlds, at 2,000", ["mixed-at-birth-ten-long-worlds"]),
+           "in five of B2's worlds, at 2,000", ["building-b2-and-the-search-for-a-healthy-rich-world"]),
     "M": ("Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, "
           "searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as "
-          "mates (MP) and a bought life (BL)", ["what-holds-a-worlds-size", "mixed-at-birth-with-parents-as-mates"]),
+          "mates (MP) and a bought life (BL)", ["building-b2-and-the-search-for-a-healthy-rich-world", "building-b2-and-the-search-for-a-healthy-rich-world"]),
     "YB": ("Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth",
            ["how-many-dimensions-does-a-world-have"]),
     "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["how-many-dimensions-does-a-world-have"]),

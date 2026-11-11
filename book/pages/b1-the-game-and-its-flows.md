@@ -176,7 +176,7 @@ the pool is small, about seventy tokens an iteration among 3,600 agents. There
 where it goes matters more than how much it is: **an estate that pays for
 births fills a world**, to half as many agents again, and poorer ones
 ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits),
-[What holds a world's size](what-holds-a-worlds-size.md)).
+[What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size)).
 
 ### What we learned (where tokens go)
 - **Flow here is mostly arithmetic.** An even split on a network, rounded to
@@ -720,13 +720,13 @@ something close to the simplest thing possible: spreading their tokens evenly
 over everyone they can reach.
 
 That is what blind brains do.
-[Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
+[Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
 gives the brains one hidden layer instead of five. With it, what an agent sees
 reaches what it stakes. A founder's brain passes on about 0.2 of a change in
 what it sees, instead of 0.0006. These brains stake on one neighbour or two,
 and their unused connections lapse. Their worlds need the rules of
-[A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break)
-and [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why) to hold
+[A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)
+and [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why) to hold
 together.
 
 #### The game as a random walk
@@ -881,7 +881,7 @@ is what keeps B1's network standing. A connection that carries nothing for one
 game is gone, and with it, perhaps, the only path between two parts of a world.
 
 The second baseline changes this rule
-([Building B2: a world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break)).
+([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)).
 In B2 an unused connection lapses only if its two ends share at least two
 neighbours ([`prune_needs`](settings.md#prune_needs)). So no lapse can cut a
 world in two. This section measures B1.
@@ -1166,7 +1166,7 @@ a loop of two, so most of B1's flow goes round, if only between neighbours.
 
 **One rule of B2 decides it.** A single kind of B2 world flows like B1: the
 condition of
-[Experiment 14](a-world-that-cannot-break.md#a-world-that-cannot-break) in
+[Experiment 14](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break) in
 which *any unused link lapses* (`prune_needs = 0`), green in the figure. In B1
 too, a connection that carries no tokens is cut after the game. B2 keeps a link
 alive unless cutting it is safe for the network (`prune_needs = 2`), so its
@@ -1966,6 +1966,6 @@ reads and how.
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (33)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [!info]- Pages that link here (32)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

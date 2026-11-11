@@ -33,21 +33,21 @@ an owner's stake counts was the author's own example of what is not wanted.
 B2 added seven such numbers to the original rules, those of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."). Each was
 chosen to stop one way a world was seen to fail. Each was tested when B2 was
 built
-([Building B2: a world that cannot break](a-world-that-cannot-break.md)):
+([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)):
 
 | number | in B2 | what it stops | shown in |
 |---|---|---|---|
-| [`incumbency`](settings.md#incumbency) | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking, and a brain is not lost in almost every game | [Holding one's place](a-world-that-cannot-break.md#holding-ones-place) |
-| [`birth_links`](settings.md#birth_links) | 2 | a newborn is joined to its parent and two of the parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."), drawn at random: no world grows as a tree | [A tree of blobs](a-world-that-cannot-break.md#a-tree-of-blobs) |
-| [`prune_needs`](settings.md#prune_needs) | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [What the game adds](a-world-that-cannot-break.md#what-the-game-adds) |
-| [`valence`](settings.md#valence) | 8 | a brain may choose at most 8 links: no [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") | [What the game adds](a-world-that-cannot-break.md#what-the-game-adds) |
-| [`keep_home`](settings.md#keep_home) | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and fewer agents are left with a single token than when only the last token is kept | [A share kept at home](a-world-that-cannot-break.md#a-share-kept-at-home) |
-| [`max_age`](settings.md#max_age) | 100 | every agent dies at 100: no agent holds its place forever, and there is room for the young | [Old age](a-world-that-cannot-break.md#old-age) |
-| [`min_child`](settings.md#min_child) | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Children as missiles](a-world-that-cannot-break.md#children-as-missiles) |
+| [`incumbency`](settings.md#incumbency) | 1.5 | an owner's stake counts one and a half times: defending is cheaper than attacking, and a brain is not lost in almost every game | [Holding one's place](building-b2-and-the-search-for-a-healthy-rich-world.md#holding-ones-place) |
+| [`birth_links`](settings.md#birth_links) | 2 | a newborn is joined to its parent and two of the parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection."), drawn at random: no world grows as a tree | [A tree of blobs](building-b2-and-the-search-for-a-healthy-rich-world.md#a-tree-of-blobs) |
+| [`prune_needs`](settings.md#prune_needs) | 2 | an unused link lapses only if its ends share two neighbours: pruning never cuts | [What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds) |
+| [`valence`](settings.md#valence) | 8 | a brain may choose at most 8 links: no [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") | [What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds) |
+| [`keep_home`](settings.md#keep_home) | 0.3 | 30% of an agent's tokens stay at home: no agent stakes itself to death, and fewer agents are left with a single token than when only the last token is kept | [A share kept at home](building-b2-and-the-search-for-a-healthy-rich-world.md#a-share-kept-at-home) |
+| [`max_age`](settings.md#max_age) | 100 | every agent dies at 100: no agent holds its place forever, and there is room for the young | [Old age](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age) |
+| [`min_child`](settings.md#min_child) | 10 | a child starts with at least 10 tokens: children are not spent as missiles | [Children as missiles](building-b2-and-the-search-for-a-healthy-rich-world.md#children-as-missiles) |
 
 Two more rules of B2 have no number in them. A death is mended by joining the
 dead agent's neighbours in a ring
-([Mending a death](a-world-that-cannot-break.md#mending-a-death)), and a brain
+([Mending a death](building-b2-and-the-search-for-a-healthy-rich-world.md#mending-a-death)), and a brain
 changes only when it is copied. Both stay. The brain has sizes too: one
 hidden layer of 16 units, and messages of 8 numbers. Those are left alone
 here, for [How big should a brain be?](how-big-should-a-brain-be.md), which
@@ -56,8 +56,8 @@ worlds that could be told from chance.
 
 Experiments 14 and 15 took six of B2's numbers away **one at a time**, all
 but the owner's one and a half. They showed what each prevents
-([Each rule taken away breaks something](a-world-that-cannot-break.md#each-rule-taken-away-breaks-something),
-[What each rule of death did](a-world-that-cannot-break.md#what-each-rule-of-death-did)).
+([Each rule taken away breaks something](building-b2-and-the-search-for-a-healthy-rich-world.md#each-rule-taken-away-breaks-something),
+[What each rule of death did](building-b2-and-the-search-for-a-healthy-rich-world.md#what-each-rule-of-death-did)).
 This page does the opposite. It takes all seven away at once, and asks what a
 world does with none of them. Then it asks which of them can be replaced by a
 rule with no number in it.
@@ -119,7 +119,7 @@ agents in a hundred were born and 77 starved in every iteration. So the
 average agent was one and a half iterations old.
 
 This is the world that
-[Children as missiles](a-world-that-cannot-break.md#children-as-missiles)
+[Children as missiles](building-b2-and-the-search-for-a-healthy-rich-world.md#children-as-missiles)
 warns of. Children of a token or two stake everything and lose it. Nothing
 holds the population up but births, until they fall short.
 
@@ -229,7 +229,7 @@ Other numbers are **magnitudes**: 1.5, 0.3, 8, 10 and 100. Nothing in the
 rules picks them; a world would work, differently, at 1.4 or at 120. The 2
 of `birth_links` is a magnitude too. In the model without brains, one link at
 birth or three both make a world, with thinner or thicker blobs
-([Too much, and too little](a-world-that-cannot-break.md#too-much-and-too-little)).
+([Too much, and too little](building-b2-and-the-search-for-a-healthy-rich-world.md#too-much-and-too-little)).
 
 ## Replacing the magnitudes
 
@@ -351,7 +351,7 @@ other switches ([Eight switches at once](what-the-switches-did-in-pilots.md#eigh
 
 ## Where to go next
 
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md):
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break):
   where each of the seven numbers came from, and what each prevents on its
   own.
 - [Every setting](settings.md): every number as a setting, and `link_token`
@@ -416,7 +416,7 @@ settings.
     (`GraphOfLifeRuns/.pilots/N/B3a-s1/series.jsonl`).
   - The table said that without an age limit, births nearly stop in the
     tree. They ran at 3.5 per hundred agents an iteration, more than three
-    times B2's 1.0 ([Old age](a-world-that-cannot-break.md#old-age)), and as
+    times B2's 1.0 ([Old age](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age)), and as
     many agents were cut off.
   - In B3b's world of seed 2, the brains of 500 were said to lose a little
     more than half of their own world. They kept a little more than half: the
@@ -426,11 +426,11 @@ settings.
     zombies. Experiment 15, analysed on 16 October, found that it only thins
     them out. In B2's [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, 52% of the agents hold a single token.
     When only the last token is kept, 77% do
-    ([What each rule of death did](a-world-that-cannot-break.md#what-each-rule-of-death-did)).
+    ([What each rule of death did](building-b2-and-the-search-for-a-healthy-rich-world.md#what-each-rule-of-death-did)).
   - The table said that the age limit stops a hoarding queen. The queen
     arose when an owner's stake counted double. With 1.5 and a share kept at
     home, none formed
-    ([Holding one's place](a-world-that-cannot-break.md#holding-ones-place)).
+    ([Holding one's place](building-b2-and-the-search-for-a-healthy-rich-world.md#holding-ones-place)).
     The age limit's job is the one that follows: no agent holds its place
     forever, and the dead make room for births.
 

@@ -160,11 +160,11 @@ That speaks for the thesis below, before any run.
 
 **A world whose brains see.** The work on open-ended evolution also built a
 second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")
-([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
+([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 Its brains have one hidden layer instead of five, and a founder's gain is
 about 0.2, where B1's is 0.0006. Brains that see had broken worlds under
 B1's other rules; B2's rules keep its network whole
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
 In B2, evolution goes on for thousands of iterations, more and more slowly
 ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
 So if this run is made, it would now be planned on B2. It would need a plan
@@ -181,7 +181,7 @@ Two worlds of B1 were played to 10,000 as pilots
 ([Every simulation](every-simulation.md#the-pilot-batches)). The longest
 worlds of the notebook are two of B2 with brains mixed at birth, played to
 50,000
-([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)).
+([Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)).
 Their brains climbed for about 20,000 to 25,000 iterations, then stopped
 climbing and wandered ([Every era against three](every-era-against-three.md)).
 
@@ -189,7 +189,7 @@ The search for a healthy, rich world plans a long run of its own. Ten seeds
 would go to 10,000 iterations, and the best world on to a hundred thousand.
 Brains mixed at birth went first and did not stay healthy, and no other rule
 has yet held more often
-([Healthy and rich](healthy-and-rich.md#candidates-and-long-runs)).
+([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#candidates-and-long-runs)).
 
 So for B1, part of the question is answered: its brains stop getting better
 early. But no world of B1 has lived a hundred thousand iterations. Whether
@@ -551,7 +551,7 @@ built.
   iterations
   ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)).
   And B2 had been built, a baseline whose brains see
-  ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
+  ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 - **24 October 2026.** From 9 October, this page said that the longest any
   world of the notebook had lived was 3,000 iterations. Its questions called
   a hundred thousand "thirty times longer than any world". That held until
@@ -559,7 +559,7 @@ built.
   Experiment 16 reached 10,000 iterations, and two of B1 followed as pilots
   ([Every simulation](every-simulation.md#the-pilot-batches)). By 17 October
   two worlds of Experiment 18 had lived 50,000
-  ([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)).
+  ([Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)).
   This rewrite corrected the page; the thesis keeps the words of its day.
 - **24 October 2026.** From 9 October, this page said that no world had
   been seen at rest. It read the Hurst exponent of 0.8 to 0.9 as a wander
@@ -584,6 +584,6 @@ built.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (7)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

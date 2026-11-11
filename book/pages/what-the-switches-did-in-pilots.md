@@ -134,10 +134,10 @@ and costs marks too ([Eight switches at once](what-the-switches-did-in-pilots.md
 - Links that hold a token shrink it.
 - Who mates sets it too. With only parents as mates, all ten mixed worlds of
   Experiment 19 settled at about 2,000 agents
-  ([Mixed at birth, with parents as mates](mixed-at-birth-with-parents-as-mates.md)).
+  ([Mixed at birth, with parents as mates](building-b2-and-the-search-for-a-healthy-rich-world.md#who-may-be-a-mate)).
 
 A world's size is set by how eagerly its agents breed, as
-[What holds a world's size](what-holds-a-worlds-size.md) found. These are the
+[What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size) found. These are the
 rules that change that.
 
 ### Does evolution go on? (rules in company)
@@ -168,7 +168,7 @@ that keep their links ([Eight switches at once](what-the-switches-did-in-pilots.
 ### Nearer the author's picture?
 
 The author's picture is a world with four things at once
-([Healthy and rich](healthy-and-rich.md)):
+([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)):
 
 - it is a space of about three dimensions;
 - no single loss can cut its network;
@@ -242,7 +242,7 @@ below it (0.48 and 0.52).
   both.
 - Played on to 10,000 iterations, two of the four worlds drifted out of the
   picture
-  ([The candidates, played on](the-candidates-played-on.md)). With the estate
+  ([The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again)). With the estate
   to the poorest, the world grew to 2,300 agents, 69% of them poor. Its
   diversity score fell to 0.28, though it stayed the widest of the long runs
   (1.79). With no random inputs, it shrank to 370 agents, rich and folded
@@ -252,7 +252,7 @@ below it (0.48 and 0.52).
   played on.
 
 At 10,000 iterations it is the small rich worlds that grew even
-([The candidates, played on](the-candidates-played-on.md)). The other seed
+([The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again)). The other seed
 without random inputs was one already at 1,000: 291 agents, 34 tokens per
 agent and a Gini of 0.39.
 
@@ -271,7 +271,7 @@ agent and a Gini of 0.39.
   worlds that were spaces, healthy and half rich at iteration 1,000, did not
   stay so.
 - **What is still missing** is a pull on births, which
-  [What holds a world's size](what-holds-a-worlds-size.md) asked for. Births
+  [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size) asked for. Births
   should pay more when few are born, and less when many are. When Experiment
   19 took mixing's free mate away, every world lived to 20,000 iterations, at
   about 2,000 agents. But six in ten of their agents were poor.
@@ -305,7 +305,7 @@ switches stood out, and none made evolution go on better than in B1 itself.
 
 Most experiments on B2 threw one switch into it and compared the world with
 B2 itself. [B1 and B2: the two baselines](b1-and-b2.md) says what B2 is,
-and [Building B2: a world that cannot break](a-world-that-cannot-break.md)
+and [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)
 how it was made. That tells what a switch does *in B2*. It cannot tell whether the switch
 does the same once other switches are thrown as well: whether the effects
 add up.
@@ -486,13 +486,13 @@ time, for each candidate it looks at. Without them it reads none.
 A, B, C and D are on and off in all sixteen combinations. E, F, G and H are
 set from them: E = BCD, F = ACD, G = ABC and H = ABD. Each world is B2 at 10,000 tokens, seed 1, played for
 1,000 iterations (pilot batch U). Each is read at iteration 1,000 as
-[Healthy and rich](healthy-and-rich.md) reads every world. The world with
+[Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world. The world with
 no switch on is B2's own world of seed 1, game for game.
 
 For each world, the table gives its number of agents, and the share of them
 holding three tokens or fewer: the poor. Since 19 October 2026 that share
 only stands in for what the author's picture asks, tokens not held too
-evenly ([Too even, not too poor](healthy-and-rich.md#too-even-not-too-poor)).
+evenly ([Too even, not too poor](building-b2-and-the-search-for-a-healthy-rich-world.md#too-even-not-too-poor-healthy-and-rich)).
 Then comes its diversity score: how much its agents differ, from 0
 to 1. Then the marks of the health bar it meets, of seven; its
 dimension; and its links per agent. The rows run from the
@@ -646,7 +646,7 @@ But it is one world of one seed, and its network is folded. A typical agent
 reaches half the world in 1.19 times the steps its random twin needs
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 Played on to 10,000 iterations as a candidate world
-([The candidates, played on](the-candidates-played-on.md#the-candidates-played-on)),
+([The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on)),
 it fell back on a single mark. One agent came to be joined to more than 5%
 of the others. It was still rich and diverse: 4% of its 399 agents held
 three tokens or fewer, at a diversity score of 0.66.
@@ -922,7 +922,7 @@ beating its own past
 ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md))?
 The switches the engine was built with were never judged that way. Some were
 set for other reasons. Handover was taken out of B2 because it breaks the
-network ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
+network ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 Revolutions are to be turned off in a page still to be written, *What keeps
 wealth spread?*, for what they do to wealth. And gifts had been off in every
 run of the notebook. The author asked whether these switches had been tested
@@ -999,7 +999,7 @@ see ([B1 and B2: the two baselines](b1-and-b2.md)).
 |---|---|
 | B1 | the baseline: brains of five layers, revolutions on |
 | B1, no revolutions | `allow_revolutions = false` |
-| B2 | a world that cannot break ([Building B2: a world that cannot break](a-world-that-cannot-break.md)), revolutions on |
+| B2 | a world that cannot break ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)), revolutions on |
 | B2, no revolutions | `allow_revolutions = false` |
 | B2 with gifts | `allow_gifting`, `prune_after = reproduction`, `inactive_window = iteration` |
 | B2 with gifts, every unused link lapsing | the same, and `prune_needs = 0` |
@@ -1238,7 +1238,7 @@ have tried with B2, and batch S's other ways of deciding a node:
 
 Every world holds 10,000 tokens and is played for 1,000 iterations in the
 engine's own code, as in batch S. Each corner is read at iteration 1,000, the
-same moment in each, as [Healthy and rich](healthy-and-rich.md) reads every
+same moment in each, as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every
 world. Four of its numbers matter here. One is the share of agents holding
 three tokens or fewer, the poor. The others are the diversity score, the
 marks of the health bar a world meets, and its number of agents. And each
@@ -1314,7 +1314,7 @@ and 0.84). So are those with slow brain change and with brains that grow
 With **handover** ([`allow_handover`](settings.md#allow_handover)), a
 parent moves some of its links to its newborn. A parent that hands over all
 but one hangs on that one. B1 has it. B2 was built without it. In the worlds
-of [Building B2: a world that cannot break](a-world-that-cannot-break.md),
+of [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break),
 handover left 40% of the agents in trees outside the core. And one link's
 loss could cut off 4% of a world.
 
@@ -1583,9 +1583,9 @@ ones that die out.
 
 Of every rule the notebook has tried, one came closest to the author's
 picture of a world that might keep evolving
-([Healthy and rich](healthy-and-rich.md)). It is mixing a newborn's brain
+([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)). It is mixing a newborn's brain
 from its parent's and a neighbour's.
-[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) found
+[Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds) found
 out why it makes a world rich. Agents put off having children, so the world
 never fills up to the point where hardly anyone can afford one. The author
 asked for mixing to be tested together with the other rules. This page does
@@ -1617,7 +1617,7 @@ with B2:
 - and the five other ways of deciding a node that batch S tried.
 
 Every corner is read at iteration 1,000, the same moment in each, as
-[Healthy and rich](healthy-and-rich.md) reads every world
+[Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world
 (`research/atlas/at.py`).
 
 ### Riches
@@ -1633,7 +1633,7 @@ Every corner is read at iteration 1,000, the same moment in each, as
 > **Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Rank its four spreads among [Healthy and rich](healthy-and-rich.md)'s worlds; the diversity score is the mean.
+> 2. Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean.
 >
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
@@ -1661,7 +1661,7 @@ to the poorest, and a slower change of brains.
 Their worlds are as poor with mixing as
 without: 73% to 94% of the agents hold three tokens or fewer.
 
-[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md) says
+[Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds) says
 why for most of them. Mixing makes a world rich by making its agents slow to
 have children. Three of these rules pay for a birth or make it cheap. An
 estate lands on the newborns or on their parents, or a child is had for any
@@ -1683,7 +1683,7 @@ show.
 > **Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Rank its four spreads among [Healthy and rich](healthy-and-rich.md)'s worlds; the diversity score is the mean.
+> 2. Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean.
 >
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
@@ -1708,9 +1708,9 @@ the mixed worlds do. The exceptions are the rules that broke the network
 before mixing came. With every unused link lapsing, worlds meet four or five
 marks; with handover, three.
 
-The marks hide a risk. [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)
+The marks hide a risk. [Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)
 found it, and
-[Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)
+[Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)
 saw it end in death: a mixed world's size drifts. Several of the richest
 combinations are small at 1,000 iterations. A world has 270 agents with a
 sense of family, and 291 without random inputs. It has 325 with units that
@@ -1758,7 +1758,7 @@ stay rich.
   agents stay rich.
 - **The richest combinations are also the smallest.** Riches are size where
   the tokens are fixed
-  ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)), and
+  ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)), and
   a small mixed world is a fragile one. None of these combinations was played
   long enough to say whether it holds its size. Experiment 18's five worlds of
   mixing alone did not.
@@ -1770,7 +1770,7 @@ stay rich.
   - nodes decided by lottery.
 
   Those that meet every mark join the candidates of
-  [Healthy and rich](healthy-and-rich.md) (`research/oee/candidates.md`).
+  [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) (`research/oee/candidates.md`).
 
 ### How this was made (brains mixed at birth)
 Every world of batch Y is a pilot, kept in `GraphOfLifeRuns/.pilots`. No
@@ -1937,7 +1937,7 @@ The fourth rule is a test of this reading
 ### Healthy, and diverse?
 
 Here is each world at iteration 2,000, read as
-[Healthy and rich](healthy-and-rich.md) reads every world:
+[Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world:
 
 | world | agents | marks of the health bar (of 7) | dimension | agents with 3 tokens or fewer | diversity score |
 |---|---|---|---|---|---|
@@ -2018,7 +2018,7 @@ other worlds tie or swing.
   size and poverty, and keep evolving at least as fast. B1's grow larger,
   poorer and younger than its controls.
 - **With mixing, too.** Batch M combines each rule with brains mixed at birth
-  ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)). It
+  ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)). It
   asks whether one of them holds a mixed world's drifting size. The estates to
   the newborns and to the parents fill those worlds as well: past 5,000
   agents in the first seeds played.
@@ -2180,7 +2180,7 @@ And it hardly matters how much the agents searched. The worlds of the paid
 searches, whose agents almost never propose a link, evolve as fast as those
 of the free one. What every searching world has is a smaller size, and two
 more outputs for its brains to set. The mixed worlds of
-[Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#does-evolution-go-on),
+[Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#does-evolution-go-on-brains-mixed-at-birth),
 smaller still, took 84%. Do smaller worlds evolve faster? Or does a contest
 in a smaller world give a later brain more room to win? This batch cannot
 say.
@@ -2398,23 +2398,23 @@ number appears during one.
 
 ## Where to go next
 
-- [Healthy and rich](healthy-and-rich.md): the author's picture, and the worlds
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): the author's picture, and the worlds
   read against it.
-- [What holds a world's size](what-holds-a-worlds-size.md): why the rules of
+- [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size): why the rules of
   birth set a world's size.
-- [The candidates, played on and played again](the-candidates-played-on.md):
+- [The candidates, played on and played again](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again):
   the best of the sixteen and the other candidate worlds at 10,000
   iterations.
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md):
   the yardstick these switches are judged by, and why a contest must last a
   life.
-- [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md): why
+- [Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds): why
   mixing makes a world rich, and what became of its worlds over 50,000
   iterations.
 - [The estate of the dead](measuring-lives.md#the-estate-of-the-dead): the rules for the estate, exactly.
-- [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why): the
+- [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): the
   deaths that make the estate in B2.
-- [Room and riches for the steadiest world](room-for-the-steadiest-world.md):
+- [Room and riches for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world):
   the estates played again, in the search for a healthy world.
 - [Every setting](settings.md#link_search): the three settings of the search,
   exactly.
@@ -2432,7 +2432,7 @@ number appears during one.
     author's picture, and the page said that three rules pay for their room
     with poverty. On 19 October the author made the picture precise: the worry
     is a world whose tokens are held too evenly
-    ([Healthy and rich](healthy-and-rich.md)). Read with the Gini, the spaces
+    ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)). Read with the Gini, the spaces
     of births, no old age and handover are not even: 0.45, 0.58 and 0.60. What
     they miss is diversity, or marks. The even spaces are the rich ones: 0.25
     where links lapse, and 0.39 where deaths are not mended. A box said so from
@@ -2441,7 +2441,7 @@ number appears during one.
   - **17 October 2026.** Diversity scores had been percentiles among all the
     worlds read so far, so they moved a little whenever worlds were added.
     Since that day they are ranked among a frozen set of worlds
-    ([Two halves](healthy-and-rich.md#two-halves)). Two numbers of this page
+    ([Two halves](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves)). Two numbers of this page
     moved by 0.01. No random inputs had raised diversity by 0.08, now 0.09;
     mixing alone by 0.17 and 0.19, now 0.18 and 0.20.
   - **24 October 2026.** Since 18 October this page said that pairs of
@@ -2484,7 +2484,7 @@ number appears during one.
   - **17 October 2026.** Diversity scores had been ranked among all the worlds
     read so far, so they moved a little whenever worlds were added. Since that
     day they are ranked among a frozen set of worlds
-    ([Two halves](healthy-and-rich.md#two-halves)), so that they stay put. Three
+    ([Two halves](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves)), so that they stay put. Three
     diversity figures of this page moved by 0.01. The figures also gained the
     second seed of every rule alone that had only one before: batch W's worlds
     with revolutions, and handover alone.
@@ -2496,7 +2496,7 @@ number appears during one.
     marks, at a dimension of 3.20, with 58% poor and a score of 0.60. Since
     then the table reads every world from one file. Three diversity scores
     moved by 0.01, as the set of worlds that ranks them
-    ([Healthy and rich](healthy-and-rich.md)) had grown. One share had been
+    ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)) had grown. One share had been
     rounded the wrong way: 70.496% is 70%, not 71%. Nothing the page concludes
     changed.
 - *Brains mixed at birth, units that cost, an eye for raids on kin*:
@@ -2516,10 +2516,10 @@ number appears during one.
 <!-- turns -->
 ---
 
-[Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots)
+[Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) →
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules), [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
-> [!info]- Pages that link here (27)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [!info]- Pages that link here (22)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

@@ -734,7 +734,7 @@ partly by a rule of B1's own.
 - [How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs):
   about a hundred raiders must start together, and the world decides as much
   as the crowd.
-- [What holds a world's size](what-holds-a-worlds-size.md): why B2's agents
+- [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size): why B2's agents
   are so poor. They breed as soon as they can, and fill their world.
 - [B1 and B2: the two baselines](b1-and-b2.md): every rule in which the two
   differ.

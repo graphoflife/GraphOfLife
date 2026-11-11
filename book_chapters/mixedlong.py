@@ -152,7 +152,7 @@ def mixedlong(ch: F.Chapter) -> None:
          "series": F.dots(["mixed at birth"], [marks], [ORANGE]),
          "guides": [{"axis": "y", "at": 7, "label": "every mark"}]}],
         columns=2, title="Experiment 17 at iteration 10,000",
-        caption=("Each dot is a world at its last checkpoint, read as [Healthy and rich](healthy-and-rich.md) reads every world. Left: the share of "
+        caption=("Each dot is a world at its last checkpoint, read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world. Left: the share of "
                  "its agents holding three tokens or fewer, B2's ten worlds at 10,000 iterations beside the mixed "
                  "ones. Right: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each mixed world meets; the "
                  "world that died out is read at its last checkpoint, with 20 agents."),

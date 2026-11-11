@@ -726,8 +726,6 @@ figures.
 
 ← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [Which properties have no scale?](which-properties-have-no-scale.md) →
 
-**Also about:** [Size and riches of a world](../README.md#size-and-riches-of-a-world), [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
-
 > [!info]- Pages that link here (3)
 > [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
 <!-- /turns -->

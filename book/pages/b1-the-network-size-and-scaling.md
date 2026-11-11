@@ -1271,20 +1271,20 @@ agents with ten connections or more is empty in 13% to 14%.
 A world that loses regions in every iteration is poor ground for evolution
 that should go on. In B1's worlds of 5,000 tokens, the cull removes about 2%
 of the agents in every iteration. That is four times as many as starve
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
 No such world passes the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.")
 ([The network that holds, in numbers](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)).
 One of its marks is a cut risk of at most 1%.
 
 The second baseline, [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), answers with three local rules
-([A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break)).
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)).
 A newborn is joined to two of its parent's neighbours. A death is mended:
 where the dead agent's neighbours would be left apart, they are joined up in a
 ring. And only redundant links lapse: an unused link is cut only where its two
 ends share at least two neighbours. Under these rules neither a death nor a
 lapsed link can split a world. In the ten B2 worlds of Experiment 14, not one
 agent was cut off from iteration 200 to 1,000
-([Nobody cut off](a-world-that-cannot-break.md#nobody-cut-off)). Letting a
+([Nobody cut off](building-b2-and-the-search-for-a-healthy-rich-world.md#nobody-cut-off)). Letting a
 separated piece live on as a world of its own is planned for the experiment
 [Local rules only](local-rules-only.md).
 
@@ -1579,7 +1579,7 @@ still a hypothesis. An experiment that joined children to random agents
 instead would test it.
 
 The same mechanism came back when brains could see
-([What the game adds](a-world-that-cannot-break.md#what-the-game-adds)). A
+([What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds)). A
 brain that chooses a newborn's links ranks its candidates by what it sees of
 them. Whatever it favours, the well connected are among the candidates more
 often, because they are the neighbours of more agents. In pilots in
@@ -2648,7 +2648,7 @@ world to every other, however big it is.
 
 So the noise comes from a rule, not from small numbers, and only a change of
 the rule removes it. The second baseline, B2, makes that change
-([A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break)).
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)).
 When an agent dies, the groups its former neighbours fall into are joined up
 in a ring. And a link that carried no tokens may lapse only if its two ends
 share at least two neighbours. A death mended so never splits a world, as
@@ -2855,7 +2855,7 @@ the tokens in proportion, and births seemed to. But it ran only three worlds
 of each size, for 600 iterations. So Experiment 10 makes a **second set of
 baseline worlds**: thirty worlds of 100,000 tokens, ten times the first. They
 are worlds of B1 itself, not of the second baseline B2 of
-[A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break).
+[A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break).
 
 The physics of space builds on these worlds. Two pages read them:
 [Dimensions at scale](dimensions-at-scale.md), for their dimensions, and
@@ -3789,7 +3789,7 @@ written by `python3 gol_lab.py analyse E03`.
   joined, and how births and games make and cut every connection.
 - [Where tokens flow](b1-the-game-and-its-flows.md#what-crosses-a-connection):
   what crosses each connection in a game, and which connections carry nothing.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md): the
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break): the
   rules under which nobody is cut off.
 - [Questioning the mechanics](questioning-the-mechanics.md#one-rule-reaches-across-the-world):
   the cull, and what could replace it.
@@ -3996,8 +3996,8 @@ written by `python3 gol_lab.py analyse E03`.
 
 ← [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1, as described in October 2026](../README.md#b1-as-described-in-october-2026) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) →
 
-**Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Space and dimension](../README.md#space-and-dimension), [Size and riches of a world](../README.md#size-and-riches-of-a-world), [Methods and statistics](../README.md#methods-and-statistics).
+**Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Space and dimension](../README.md#space-and-dimension), [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (31)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [!info]- Pages that link here (30)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

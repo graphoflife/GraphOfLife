@@ -99,7 +99,7 @@ of two seeds suggested that [brains](the-brain.md) that see break worlds.
 Experiment 13 then ran ten seeds of each condition. Of the worlds whose
 brains see and change only when copied, eight in ten died out. None of B1's
 did
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
 
 #### What makes one
 

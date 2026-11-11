@@ -101,7 +101,7 @@ same agent may be picked twice.)
 Chance alone leaves a world unequal. A random exchange of tokens would leave
 a Gini of (*m* − 1)/(2*m* − 1), with *m* tokens per agent on average. That is
 0.40 at three tokens per agent, and 0.46 at seven
-([Too even, not too poor](healthy-and-rich.md#too-even-not-too-poor)).
+([Too even, not too poor](building-b2-and-the-search-for-a-healthy-rich-world.md#too-even-not-too-poor-healthy-and-rich)).
 
 #### The Gini coefficient: a worked example
 
@@ -218,7 +218,7 @@ values.
   ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). A settled B1 world has
   a mean of about 7 at 100,000 tokens, 9 at 10,000. B2's worlds hold only
   about three tokens per agent
-  ([Too even, not too poor](healthy-and-rich.md#too-even-not-too-poor)).
+  ([Too even, not too poor](building-b2-and-the-search-for-a-healthy-rich-world.md#too-even-not-too-poor-healthy-and-rich)).
 - **The median is the typical agent.** About 4.5 in a settled B1 world of
   100,000 tokens (5 at 10,000 tokens). The gap between mean and median is
   itself a reading of inequality. A few rich agents pull the mean up, and

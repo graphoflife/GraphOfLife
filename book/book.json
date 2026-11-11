@@ -32,11 +32,6 @@
       "about": "Whether a world is a space, of how many dimensions, what folds it, and the physics the project hopes for."
     },
     {
-      "id": "size",
-      "title": "Size and riches of a world",
-      "about": "What sets how many agents a world holds, and how rich each is."
-    },
-    {
       "id": "brains",
       "title": "Brains, and how alike agents are",
       "about": "What the brains are and compute, the families they make, and how different agents really are."
@@ -60,11 +55,6 @@
       "id": "rules",
       "title": "Changing the rules",
       "about": "The switches of the engine, alone and in company: what each rule does to a world."
-    },
-    {
-      "id": "healthy",
-      "title": "Looking for a healthy, rich world",
-      "about": "The search for a world that is decentralised, resilient, about three-dimensional and full of different agents, and that keeps evolving."
     },
     {
       "id": "methods",
@@ -148,8 +138,7 @@
       "title": "A screen of random worlds",
       "file": "pages/a-screen-of-random-worlds.md",
       "topics": [
-        "screen",
-        "healthy"
+        "screen"
       ],
       "kind": "experiment",
       "experiments": [
@@ -169,7 +158,6 @@
       "file": "pages/which-worlds-are-healthy.md",
       "topics": [
         "screen",
-        "healthy",
         "methods"
       ],
       "kind": "study",
@@ -188,7 +176,6 @@
       "file": "pages/how-the-drawn-settings-shape-a-world.md",
       "topics": [
         "screen",
-        "healthy",
         "rules"
       ],
       "kind": "study",
@@ -207,8 +194,7 @@
       "file": "pages/candidates-for-open-ended-evolution.md",
       "topics": [
         "screen",
-        "evolution",
-        "healthy"
+        "evolution"
       ],
       "kind": "study",
       "experiments": [
@@ -228,7 +214,6 @@
       "topics": [
         "screen",
         "evolution",
-        "healthy",
         "methods"
       ],
       "kind": "method",
@@ -387,24 +372,6 @@
       "summary": "The two sets of rules every experiment starts from: B1, the algorithm as a new run is offered it, and B2, built so that its network cannot break."
     },
     {
-      "id": "a-world-that-cannot-break",
-      "title": "Building B2: a world that cannot break",
-      "file": "pages/a-world-that-cannot-break.md",
-      "topics": [
-        "baselines",
-        "rules"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E13",
-        "E14",
-        "E15"
-      ],
-      "status": "analysed",
-      "added": "2026-10-14",
-      "summary": "B2, the notebook's second baseline, was built in three steps, each tested by an experiment. First, brains that see broke their worlds: not in one great cut, but by a steady bleeding of cut-off agents that births did not always replace (Experiment 13)."
-    },
-    {
       "id": "measuring-lives",
       "title": "Measuring lives: births, deaths, ages and estates",
       "file": "pages/measuring-lives.md",
@@ -478,8 +445,7 @@
       "title": "Is a world a space? Dimension, and what folds it",
       "file": "pages/how-many-dimensions-does-a-world-have.md",
       "topics": [
-        "space",
-        "healthy"
+        "space"
       ],
       "kind": "study",
       "status": "written",
@@ -504,9 +470,7 @@
       "title": "Dimensions at scale",
       "file": "pages/dimensions-at-scale.md",
       "topics": [
-        "space",
-        "size",
-        "healthy"
+        "space"
       ],
       "kind": "study",
       "status": "written",
@@ -519,7 +483,6 @@
       "file": "pages/which-properties-have-no-scale.md",
       "topics": [
         "space",
-        "size",
         "methods"
       ],
       "kind": "study",
@@ -578,19 +541,6 @@
       "status": "written",
       "added": "2026-10-09",
       "summary": "Patterns that keep their identity while what carries them is replaced, looked for in twelve worlds with three detectors, each beside a null and tried on a pattern known to be there: no ring of tokens outlasts the next stretch of games, no agent keeps a rhythm beyond a random walk's, and the groups that outlast their members are the network's own regions, which stay where they began. Only a world that froze keeps its patterns, as a crystal in which nothing is replaced."
-    },
-    {
-      "id": "what-holds-a-worlds-size",
-      "title": "What holds a world's size",
-      "file": "pages/what-holds-a-worlds-size.md",
-      "topics": [
-        "size",
-        "healthy"
-      ],
-      "kind": "overview",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Every agent of a B2 world dies at the age of 100, so a world keeps its size only if one agent in a hundred is born each iteration. How eagerly the agents breed decides how full the world gets; with its tokens fixed, a full world is a poor one."
     },
     {
       "id": "what-the-brains-are-like",
@@ -667,8 +617,7 @@
       "title": "Does evolution keep going?",
       "file": "pages/how-to-tell-a-world-that-keeps-evolving.md",
       "topics": [
-        "evolution",
-        "healthy"
+        "evolution"
       ],
       "kind": "experiment",
       "experiments": [
@@ -850,100 +799,17 @@
       "summary": "B2, the world that cannot break, has seven numbers in its rules that were chosen by hand, and the notebook asks for rules without them. Taken away all at once, the numbers show what each was for: without alliances the worlds died out."
     },
     {
-      "id": "healthy-and-rich",
-      "title": "Healthy and rich",
-      "file": "pages/healthy-and-rich.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "The author's picture of a world that might keep evolving has two halves: a decentralised, resilient, almost three-dimensional network, and agents that differ in almost everything."
-    },
-    {
       "id": "measuring-health",
       "title": "Measuring health: criteria, the health bar and diversity",
       "file": "pages/measuring-health.md",
       "topics": [
         "reference",
-        "healthy",
         "brains"
       ],
       "kind": "reference",
       "status": "written",
       "added": "2026-11-09",
       "summary": "How the notebook judges whether a world is healthy and interesting: the author's criteria, the seven marks of the health bar that B2's worlds were held to, and the diversity score.."
-    },
-    {
-      "id": "mixed-at-birth-ten-long-worlds",
-      "title": "Brains mixed at birth, in long worlds",
-      "file": "pages/mixed-at-birth-ten-long-worlds.md",
-      "topics": [
-        "healthy",
-        "evolution"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E17",
-        "E18"
-      ],
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "Mixing a newborn's brain from its parent's and a neighbour's makes a B2 world smaller, so each of its agents holds more tokens."
-    },
-    {
-      "id": "mixed-at-birth-with-parents-as-mates",
-      "title": "Who may be a mate",
-      "file": "pages/mixed-at-birth-with-parents-as-mates.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E19",
-        "E22"
-      ],
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "When brains are mixed at birth, a child's brain is half its parent's and half a mate's, but only the parent pays for the child."
-    },
-    {
-      "id": "the-candidates-played-on",
-      "title": "The candidates, played on and played again",
-      "file": "pages/the-candidates-played-on.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E20",
-        "E21",
-        "E24"
-      ],
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "A candidate world meets every mark of the health bar at iteration 1,000, and its agents are more diverse than B2's. Played on to 10,000 iterations, most did not stay there: of nineteen, five held, eleven fell back and three died out."
-    },
-    {
-      "id": "room-for-the-steadiest-world",
-      "title": "Room and riches for the steadiest world",
-      "file": "pages/room-for-the-steadiest-world.md",
-      "topics": [
-        "healthy",
-        "space",
-        "size"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E31",
-        "E32",
-        "E36",
-        "E37"
-      ],
-      "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "The steadiest world the notebook has, Experiment 19's, lives long and its agents differ, but it is folded: a small world, not a space. Experiment 31 gave it, one at a time, four rules that keep a world's room; each gave room and took something else."
     },
     {
       "id": "every-world-side-by-side",
@@ -1087,7 +953,6 @@
         "b1-history",
         "baselines",
         "space",
-        "size",
         "methods"
       ],
       "kind": "experiment",
@@ -1131,6 +996,38 @@
       "status": "analysed",
       "added": "2026-10-15",
       "summary": "The engine's switches tried in pilot worlds in October 2026, alone and in company: indicative only, from two seeds a condition, mostly 1,000 iterations, on B2."
+    },
+    {
+      "id": "building-b2-and-the-search-for-a-healthy-rich-world",
+      "title": "Building B2, and the search for a healthy, rich world",
+      "file": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md",
+      "topics": [
+        "history",
+        "baselines",
+        "rules",
+        "evolution",
+        "space"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-14",
+      "summary": "How B2 was built so that it cannot break, and the search of October 2026 for a healthy, rich world: the best of many worlds is a lucky moment.",
+      "experiments": [
+        "E13",
+        "E14",
+        "E15",
+        "E17",
+        "E18",
+        "E19",
+        "E20",
+        "E21",
+        "E22",
+        "E24",
+        "E31",
+        "E32",
+        "E36",
+        "E37"
+      ]
     }
   ],
   "parts": [
@@ -1172,7 +1069,6 @@
       "about": "What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.",
       "topics": [
         "wealth",
-        "size",
         "brains",
         "groups"
       ],
@@ -1196,8 +1092,7 @@
       "topics": [
         "evolution",
         "rules",
-        "strategies",
-        "healthy"
+        "strategies"
       ],
       "mark": "🟧"
     },

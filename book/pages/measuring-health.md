@@ -359,7 +359,7 @@ medians over many iterations.
   In the mixed worlds of Experiment 17, the hub mark failed at 96% of the
   moments below 300 agents, while worlds of 600 to 1,000 agents met every
   mark at 98% of their moments
-  ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
+  ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-marks-a-world-misses)).
 - **The dimension mark cannot tell a space from a small world.** A B2 world
   of 600 to 1,500 agents passes it because it is small
   ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). So the
@@ -371,15 +371,15 @@ medians over many iterations.
   ([What makes a world interesting](measuring-health.md#the-six-criteria)).
 
 ### Where it is used (the health bar)
-- [A world that cannot break](a-world-that-cannot-break.md): B2's rules were
+- [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break): B2's rules were
   built to meet it.
-- [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
+- [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break):
   no world there held.
-- [Healthy and rich](healthy-and-rich.md): every world read against it; on
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): every world read against it; on
   17 October 2026, 99 of 624 met all seven marks.
-- [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md),
-  [The candidates, played on](the-candidates-played-on.md) and
-  [Room for the steadiest world](room-for-the-steadiest-world.md): theses
+- [Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds),
+  [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again) and
+  [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world): theses
   that ask for every mark.
 - [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
   [A screen of random worlds](a-screen-of-random-worlds.md): criteria built
@@ -430,7 +430,7 @@ tokens are shared; that is the [Gini coefficient](measuring-tokens.md#measuring-
 
 ### Examples
 
-From [Healthy and rich](healthy-and-rich.md):
+From [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich):
 
 - **B1's worlds** spread widely, their ages over 5.6 to 6.9 classes and their
   tokens over 3.5 to 4.1, and score 0.67 to 0.75.
@@ -457,7 +457,7 @@ both lines:
 
 Other pages draw the line at other moments: 0.54 for B2's ten worlds played
 on and read at iteration 3,000
-([Room for the steadiest world](room-for-the-steadiest-world.md)).
+([Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world)).
 
 ### Decisions: the effective kinds of staking
 
@@ -477,19 +477,19 @@ played, and averages each moment with the one 500 iterations before, since
 the kinds swing from moment to moment.
 
 ### Where it is used (the diversity score)
-- [Healthy and rich](healthy-and-rich.md#two-halves): where the score was
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves): where the score was
   made.
 - [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
   [A screen of random worlds](a-screen-of-random-worlds.md): the criterion
   *diverse*.
-- [The candidates, played on](the-candidates-played-on.md) and
-  [Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held):
+- [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again) and
+  [Five more seeds for the rules that held](building-b2-and-the-search-for-a-healthy-rich-world.md#five-more-seeds-for-the-rules-that-held):
   a world must score above B2's median world to be played on, and again to
   hold.
-- [Room for the steadiest world](room-for-the-steadiest-world.md): what each
+- [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world): what each
   rule cost of the four parts.
-- [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours),
-  [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds),
+- [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours),
+  [The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds),
   [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company):
   worlds scored by it.
 
@@ -499,7 +499,7 @@ the kinds swing from moment to moment.
   the rounds, and what each found.
 - [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md):
   where the health bar comes from.
-- [Healthy and rich](healthy-and-rich.md): how the
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): how the
   diversity score was made, and every world scored by it.
 - [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): the
   measure behind the same-position share.

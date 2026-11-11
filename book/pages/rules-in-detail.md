@@ -1224,10 +1224,10 @@ fewer.
 ### Where it is used (when a world ends)
 - [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world): the four B1 worlds of 10,000 tokens that
   died out, one of them in its fourth iteration.
-- [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
+- [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break):
   four of ten worlds of 5,000 tokens died out when their brains could see, and
   eight of ten when those brains also changed only when copied.
-- [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why): all ten B2 worlds that kept
+- [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): all ten B2 worlds that kept
   nothing at home died out, within 26 to 47 iterations.
 - [How this notebook is written](how-this-notebook-is-written.md): the rule
   that the dead are counted apart.

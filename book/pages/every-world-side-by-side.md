@@ -207,5 +207,5 @@ fewer, which the notebook no longer makes.
 [Methods and statistics](../README.md#methods-and-statistics) · [How worlds are measured](how-worlds-are-measured.md) →
 
 > [!info]- Pages that link here (4)
-> [Healthy and rich](healthy-and-rich.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

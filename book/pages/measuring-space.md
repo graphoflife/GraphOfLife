@@ -412,12 +412,12 @@ by the rule that made them. The line of 1.5 lies between the two.
   random.
 - [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): the width of every kind of
   world, and what folds it.
-- [Healthy and rich](healthy-and-rich.md), [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)
-  and [The candidates, played on](the-candidates-played-on.md): which worlds
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich), [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)
+  and [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again): which worlds
   are spaces.
-- [Room for the steadiest world](room-for-the-steadiest-world.md),
-  [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours) and
-  [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds):
+- [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world),
+  [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours) and
+  [The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds):
   theses that ask for a width of at least 1.5.
 - [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
   [A screen of random worlds](a-screen-of-random-worlds.md): the criterion

@@ -130,7 +130,7 @@ one of them.
   from ([B1 and B2: the two baselines](b1-and-b2.md)). Thirty worlds of the
   first, about 14,000 agents each, are looked at from every side
   ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). The second is built so that its network
-  cannot break ([A world that cannot break](a-world-that-cannot-break.md)).
+  cannot break ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 - **Agents' lives, wealth, the game and the flow of tokens, the shape of the
   network, the size of a world, and brains.** The baseline measured every way,
   through every statistic the Graph of Life viewer offers and some it does
@@ -145,7 +145,7 @@ one of them.
 - **Changing the rules, and looking for a healthy, rich world.** The rules
   built to pass the yardstick, alone and in company
   ([Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)). The search for a world that is
-  healthy and whose agents differ ([Healthy and rich](healthy-and-rich.md),
+  healthy and whose agents differ ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich),
   [A screen of random worlds](a-screen-of-random-worlds.md)).
 - **Strategies written by hand, and groups.** Is evolution's play the best
   there is ([Strategies written by hand](strategies-written-by-hand.md))? Do
