@@ -412,7 +412,7 @@ by the rule that made them. The line of 1.5 lies between the two.
   random.
 - [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): the width of every kind of
   world, and what folds it.
-- [Healthy and rich](healthy-and-rich.md), [Rules in company](rules-in-company.md)
+- [Healthy and rich](healthy-and-rich.md), [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)
   and [The candidates, played on](the-candidates-played-on.md): which worlds
   are spaces.
 - [Room for the steadiest world](room-for-the-steadiest-world.md),

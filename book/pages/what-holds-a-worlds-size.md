@@ -138,8 +138,8 @@ parents, or a child allowed to start with any number of tokens. Their worlds
 fill to more agents than B2's, and are poorer still. With the estate to the
 newborns or to the parents, B2's worlds grew by half, to 5,100 to 5,300
 agents, and nine agents in ten held three tokens or fewer
-([Who inherits?](who-inherits.md)). Mixing brains at birth does not change
-that ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)).
+([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). Mixing brains at birth does not change
+that ([Brains mixed at birth, with every other rule](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-with-every-other-rule)).
 Nor do parents as mates: with them, the estates filled a world to about 5,000
 agents, of 1.9 tokens each
 ([Room for the steadiest world](room-for-the-steadiest-world.md#room-for-the-steadiest-world)).
@@ -401,5 +401,5 @@ A floor set by the neighbours is no pull toward a steady size.
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
 > [!info]- Pages that link here (12)
-> [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Rules in company](rules-in-company.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

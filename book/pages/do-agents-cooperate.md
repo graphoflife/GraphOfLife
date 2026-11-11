@@ -418,7 +418,7 @@ None of the six has been computed in the form given here. The work on the
 second baseline, B2, judged progress another way. It played a world's
 [eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?") against each other
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
-[Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md)
+[Revolutions, handover and gifts: the switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 judges the rules made for B2 by that test.
 
 Nearby measures were taken instead. Help itself was counted exactly by the

@@ -344,7 +344,7 @@ since a brain that cannot see was the first thing to change. What happened
 when it changed is told in [The road from here](#the-road-from-here). The
 rate of mutation became [How fast should brains change?](how-fast-should-brains-change.md),
 coalitions switched off are among
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 and in [What keeps wealth spread?](what-keeps-wealth-spread.md), and
 [How big should a brain be?](how-big-should-a-brain-be.md) was answered from
 round 3's random worlds.
@@ -664,7 +664,7 @@ families of hundreds form, rising and falling like empires.
 **What came of it.** The world closed instead. In the pilots for B2 an agent
 could pay tokens for a short walk through the network, and join an agent it
 met if both agreed. Few links were made, one to ten an iteration, and little
-changed. Later, [Links to strangers](links-to-strangers.md) let agents search
+changed. Later, [Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers) let agents search
 further. When a search cost tokens, hardly anyone paid for one; when it was
 free, agents reached all the time. Either way the median proposal went to an
 agent only two or three steps away. Yet every searching world evolved faster
@@ -870,7 +870,7 @@ iterations, more slowly as it goes, and then levels off
 the game has no better play left: a strategy written by hand took half of a
 B2 world ([Strategies written by hand](strategies-written-by-hand.md)). The
 search runs out before the game does. What moved since is told in
-[Healthy and rich](healthy-and-rich.md) and [Rules in company](rules-in-company.md).
+[Healthy and rich](healthy-and-rich.md) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company).
 
 It is a long way. But the measurements have made it shorter in one important
 sense. They turned a vague hope, that interesting things might emerge if we

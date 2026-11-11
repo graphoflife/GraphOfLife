@@ -194,7 +194,7 @@ only where it would split, the model without brains stretches into a line.
 The nearest to this aim so far are B2 worlds in which the tokens of the dead
 go to the newborns, or to their parents. They cannot break, and they are
 spaces of about three dimensions. But nine agents in ten hold three tokens or
-fewer, and their evolution stops ([Who inherits?](who-inherits.md)). A world
+fewer, and their evolution stops ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world
 that is a well-knit space, rich, and still evolving is yet to be found
 ([Healthy and rich](healthy-and-rich.md)).
 
@@ -300,7 +300,7 @@ neighbourhood, so any two agents it joins were at most two steps apart. New
 connections could do the same. They could form only between agents a few
 steps apart, or with a reach that costs tokens to extend.
 
-That is what was tried. In [Links to strangers](links-to-strangers.md), the
+That is what was tried. In [Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers), the
 agents of B2 worlds could send a search through the network and propose a
 link where it ended. Its steps cost tokens, or were free. When a search cost
 tokens, hardly anyone paid for one; when it was free, agents reached all the

@@ -998,15 +998,15 @@ are marked revolutionary
 ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). In B2's pilot worlds
 of 10,000 tokens, coalitions won about one node in three hundred a game. B2
 with and without them was the same world in every measure
-([The switches the world was built with](the-switches-the-world-was-built-with.md)).
+([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)).
 
 ### Where it is used (how a coalition takes a node)
 - [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): who wins the nodes of
   B1's worlds, and how.
-- [The switches the world was built with](the-switches-the-world-was-built-with.md):
+- [The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with):
   B1 and B2 without revolutions. B1 without them becomes a world of mayflies,
   whose agents are 7 to 13 iterations old on average.
-- [Revolutions, with every other rule](the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule):
+- [Revolutions, with every other rule](what-the-switches-did-in-pilots.md#revolutions-with-every-other-rule):
   the worlds near B2 in which revolutions do matter.
 - [A crew of raiders](does-evolution-close-the-door.md#a-crew-of-raiders): two raiders of two tokens each
   stake one on a stranger of one token. In B2 the stranger's home stake
@@ -1283,7 +1283,7 @@ fewer.
     written the same day as that sentence, measured the opposite in B1: in its
     settled worlds coalitions decide about half of all nodes. In B2's pilot
     worlds they won only about one node in three hundred a game
-    ([The switches the world was built with](the-switches-the-world-was-built-with.md),
+    ([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with),
     15 October 2026).
 - *When a world ends*:
   - **9 October 2026.** The page first gave a single reason for stopping at 20:

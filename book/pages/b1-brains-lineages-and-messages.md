@@ -1102,7 +1102,7 @@ none of them needs a tuned number:
    ([How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs)).
 3. **Heredity of whole parts.** Mixing brains at birth gave some of the
    largest steps of evolution of any pilot, in one of two worlds
-   ([Brains mixed at birth](mixed-brains-costly-units.md#brains-mixed-at-birth)).
+   ([Brains mixed at birth](what-the-switches-did-in-pilots.md#brains-mixed-at-birth)).
    A child's brain is mixed from a parent and a mate. So a unit that works can
    spread without the rest of the brain it arose in.
 4. **Groups that hold together.** None of these worlds makes any beyond the

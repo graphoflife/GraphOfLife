@@ -128,14 +128,7 @@ how the pages hang together.
 
 #### Changing the rules
 
-- [Rules in company](pages/rules-in-company.md)
-- [Revolutions, handover and gifts: the switches the world was built with](pages/the-switches-the-world-was-built-with.md)
 - [Rules without numbers](pages/rules-without-numbers.md)
-- [Who inherits?](pages/who-inherits.md)
-- [Brains mixed at birth, units that cost, an eye for raids on kin](pages/mixed-brains-costly-units.md)
-- [Links to strangers](pages/links-to-strangers.md)
-- [Brains mixed at birth, with every other rule](pages/mixing-with-every-other-rule.md)
-- [Eight switches at once, and how sixteen worlds can test them](pages/eight-switches-at-once.md)
 
 #### Strategies written by hand
 
@@ -188,4 +181,8 @@ how the pages hang together.
 - [B1: the game and its flows](pages/b1-the-game-and-its-flows.md)
 - [B1: the network, size and scaling](pages/b1-the-network-size-and-scaling.md)
 - [B1: brains, lineages and messages](pages/b1-brains-lineages-and-messages.md)
+
+#### Building B2, the healthy and rich search, and the pilots
+
+- [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
 <!-- /contents -->

@@ -837,30 +837,6 @@
       "summary": "When an agent takes a neighbour's node with at least half of its tokens, its wealth and a copy of its brain move there together."
     },
     {
-      "id": "rules-in-company",
-      "title": "Rules in company",
-      "file": "pages/rules-in-company.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "overview",
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "Most experiments threw one rule at a time into B2. Six pilot batches threw them in together: four paired one rule with each of the others, and two threw eight in at once."
-    },
-    {
-      "id": "the-switches-the-world-was-built-with",
-      "title": "Revolutions, handover and gifts: the switches the world was built with",
-      "file": "pages/the-switches-the-world-was-built-with.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-15",
-      "summary": "The engine of Graph of Life came with three switches of its own. Revolutions let small stakers unite against the largest, handover lets a parent pass links to its child, and gifts let an agent pay a neighbour."
-    },
-    {
       "id": "rules-without-numbers",
       "title": "Rules without numbers",
       "file": "pages/rules-without-numbers.md",
@@ -872,69 +848,6 @@
       "status": "analysed",
       "added": "2026-10-15",
       "summary": "B2, the world that cannot break, has seven numbers in its rules that were chosen by hand, and the notebook asks for rules without them. Taken away all at once, the numbers show what each was for: without alliances the worlds died out."
-    },
-    {
-      "id": "who-inherits",
-      "title": "Who inherits?",
-      "file": "pages/who-inherits.md",
-      "topics": [
-        "rules",
-        "healthy"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "When an agent dies, the cleanup shares its tokens out among the survivors: until now evenly, every survivor with the same chance at every token. Four other rules were played in pilot worlds of B2 and B1."
-    },
-    {
-      "id": "mixed-brains-costly-units",
-      "title": "Brains mixed at birth, units that cost, an eye for raids on kin",
-      "file": "pages/mixed-brains-costly-units.md",
-      "topics": [
-        "rules",
-        "brains"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "Three changes to B2 were tried in pilot worlds, each aimed at a different part of how evolution works. Brains mixed at birth made the worlds small and combative, and in one of two worlds gave the largest steps of evolution yet."
-    },
-    {
-      "id": "links-to-strangers",
-      "title": "Links to strangers",
-      "file": "pages/links-to-strangers.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Agents of B2 were given a way to look for a stranger and propose a link. It was a paid jump, a paid scout that walks step by step, or a free reach. When a search costs tokens, hardly anyone pays for it; when it is free, agents reach all the time."
-    },
-    {
-      "id": "mixing-with-every-other-rule",
-      "title": "Brains mixed at birth, with every other rule",
-      "file": "pages/mixing-with-every-other-rule.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Mixing a newborn's brain from its parent's and a neighbour's makes B2's worlds rich, because agents put off having children. Batch Y played mixing together with 23 other rules, one at a time. With sixteen of them, mixing keeps its riches."
-    },
-    {
-      "id": "eight-switches-at-once",
-      "title": "Eight switches at once, and how sixteen worlds can test them",
-      "file": "pages/eight-switches-at-once.md",
-      "topics": [
-        "rules",
-        "methods"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Most experiments threw one switch at a time into B2, the baseline whose network cannot break. Batch U threw eight together in sixteen worlds, chosen by a fractional factorial design so that each switch's effect can still be read."
     },
     {
       "id": "healthy-and-rich",
@@ -1204,6 +1117,20 @@
       "experiments": [
         "E06"
       ]
+    },
+    {
+      "id": "what-the-switches-did-in-pilots",
+      "title": "What the switches did in pilots (indicative)",
+      "file": "pages/what-the-switches-did-in-pilots.md",
+      "topics": [
+        "history",
+        "rules",
+        "brains"
+      ],
+      "kind": "study",
+      "status": "analysed",
+      "added": "2026-10-15",
+      "summary": "The engine's switches tried in pilot worlds in October 2026, alone and in company: indicative only, from two seeds a condition, mostly 1,000 iterations, on B2."
     }
   ],
   "parts": [

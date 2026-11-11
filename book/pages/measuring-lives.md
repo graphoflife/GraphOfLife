@@ -185,7 +185,7 @@ world: in ten B1 worlds, the more of it a game scatters, the more the
 [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) falls, a correlation of −0.78 between
 the changes ([What goes with what](what-goes-with-what.md#a-whole-world-over-time)).
 In B2 worlds of 10,000 tokens the estate is small, about seventy tokens an
-iteration among 3,600 agents ([Who inherits?](who-inherits.md)).
+iteration among 3,600 agents ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)).
 
 ### Who may inherit
 
@@ -208,9 +208,9 @@ seeds each:
 
 - **By wealth** (B2, 1,000 iterations): the world held 2,450 and 2,800 agents
   against 3,400, and otherwise stayed as it was; its brains went on improving
-  ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
+  ([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)).
 - **To the poorest** (2,000 iterations, as below;
-  [Who inherits?](who-inherits.md)): B2 barely changed, at 3,600 to 3,700
+  [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)): B2 barely changed, at 3,600 to 3,700
   agents. B1's worlds grew larger and younger: 2,100 to 2,300 agents against
   the controls' 800 to 1,400, and a mean age of 74 to 76 iterations against
   120 to 210.
@@ -239,7 +239,7 @@ estates paid for 51 to 53 births an iteration, where the same world without
 them had 12 to 23.
 
 ### Where it is used (the estate of the dead)
-- [Who inherits?](who-inherits.md): four of the heirs, in B1 and in B2.
+- [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): four of the heirs, in B1 and in B2.
 - [What holds a world's size](what-holds-a-worlds-size.md): estates paid to
   births among the rules that set how many agents a world holds.
 - [Where tokens go](b1-the-game-and-its-flows.md#the-estate-of-the-dead): the estate beside
@@ -588,7 +588,7 @@ field `gifts` counts the gifts paid, one for each giver and neighbour. The
 field `giftTokens` counts the tokens they carried, and `giftShare` is those
 tokens as a share of all tokens. Gifting is off in both baselines, so there
 all three are 0. It is on in some pilots
-([Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule)), in
+([Gifts, with every other rule](what-the-switches-did-in-pilots.md#gifts-with-every-other-rule)), in
 Experiment 24 and in half the worlds of
 [A screen of random worlds](a-screen-of-random-worlds.md).
 
@@ -600,7 +600,7 @@ Experiment 24 and in half the worlds of
 
 ## Where to go next
 
-- [Who inherits?](who-inherits.md): the experiment behind most of this page.
+- [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): the experiment behind most of this page.
 - [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours): why
   a world paid for its births fills with poor agents.
 - [Genotypes and the family tree](measuring-evolution.md#lifetimes-of-genotypes): the
@@ -626,7 +626,7 @@ Experiment 24 and in half the worlds of
   - **8 October 2026.** This page said that gifting was off in every run of the
     notebook, so that the three gift fields were absent.
   - **15 October 2026.** Pilots with gifts were played for
-    [The switches the world was built with](the-switches-the-world-was-built-with.md).
+    [The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with).
     More pilots followed, then Experiment 24 and half the worlds of
     [A screen of random worlds](a-screen-of-random-worlds.md).
   - **23 October 2026.** Reading the runs' statistics files showed that the gift

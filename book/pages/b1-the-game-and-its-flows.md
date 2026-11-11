@@ -175,7 +175,7 @@ falling inequality
 the pool is small, about seventy tokens an iteration among 3,600 agents. There
 where it goes matters more than how much it is: **an estate that pays for
 births fills a world**, to half as many agents again, and poorer ones
-([Who inherits?](who-inherits.md),
+([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits),
 [What holds a world's size](what-holds-a-worlds-size.md)).
 
 ### What we learned (where tokens go)
@@ -1178,7 +1178,7 @@ brains changed: one of the rules that make B2's network unbreakable also made
 its economy run one way.
 
 The pilot worlds say the same, independently
-([The switches the world was built with](the-switches-the-world-was-built-with.md)).
+([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)).
 Of all the B2 pilots, four let unused links lapse, and they are the only ones
 whose flow mostly cancels. They keep 0.11 to 0.23 of their flow after
 cancelling; every other B2 pilot keeps 0.87 or more. Three of the four put
@@ -1597,7 +1597,7 @@ Some worlds stand apart within their kind:
 - Two of Experiment 15's rules leave almost nobody in a module: **children
   of any size** (1% of the agents) and **no old age** (4–7%). So do the pilot
   worlds of
-  [Links that hold a token, and nobody dies of age](mixed-brains-costly-units.md#links-that-hold-a-token-and-nobody-dies-of-age)
+  [Links that hold a token, and nobody dies of age](what-the-switches-did-in-pilots.md#links-that-hold-a-token-and-nobody-dies-of-age)
   (2–8%). In those worlds hardly anyone stakes on a neighbour.
 - Batch S's pilot worlds with **lapsing links**, with gifts and without, are
   B1-like, as are the lab's worlds with lapsing links. It is the same split
@@ -1852,7 +1852,7 @@ reads and how.
     longest loops after cancelling are five or six agents long, which holds at
     100,000 tokens; in the largest worlds they are 6.5 to 6.75. It also said
     that batch H was testing the estate left to a dead agent's own children:
-    that was done, and is in [Who inherits?](who-inherits.md).
+    that was done, and is in [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits).
   - **24 October 2026.** This page gave the circulation of takeovers above
     chance in B2 as +0.07. It is 0.065 (0.0647 in `book/results/patterns.json`),
     as [Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go)

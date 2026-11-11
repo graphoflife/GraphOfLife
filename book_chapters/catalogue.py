@@ -40,22 +40,22 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
           ["another-game", "rules-without-numbers"]),
     "S": ("The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other "
           "contests (a lottery, sides pooled by genotype or family, kin and family senses)",
-          ["the-switches-the-world-was-built-with", "another-game"]),
+          ["what-the-switches-did-in-pilots", "another-game"]),
     "L": ("Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without "
           "revolutions to 3,000", ["how-to-tell-a-world-that-keeps-evolving", "a-hundred-thousand-iterations"]),
     "P": ("Two inputs (where my brain came from, who helped me) and links that hold a token",
           ["rules-without-numbers", "gliders-and-who-helps-whom"]),
     "Q": ("Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a "
-          "token without old age", ["mixed-brains-costly-units"]),
-    "R": ("Who inherits the estate of the dead: the poorest, the newborns, their parents", ["who-inherits"]),
-    "T": ("Gifts together with each other switch", ["the-switches-the-world-was-built-with"]),
-    "U": ("Eight switches in combination on B2: a fractional factorial design", ["eight-switches-at-once"]),
-    "V": ("Eight switches in combination on B1: a fractional factorial design", ["eight-switches-at-once"]),
-    "W": ("No revolutions together with each other switch, on B2", ["the-switches-the-world-was-built-with"]),
-    "X": ("Handover together with each other switch, on B2", ["the-switches-the-world-was-built-with"]),
-    "Y": ("Brains mixed at birth together with each other switch, on B2", ["mixing-with-every-other-rule"]),
+          "token without old age", ["what-the-switches-did-in-pilots"]),
+    "R": ("Who inherits the estate of the dead: the poorest, the newborns, their parents", ["what-the-switches-did-in-pilots"]),
+    "T": ("Gifts together with each other switch", ["what-the-switches-did-in-pilots"]),
+    "U": ("Eight switches in combination on B2: a fractional factorial design", ["what-the-switches-did-in-pilots"]),
+    "V": ("Eight switches in combination on B1: a fractional factorial design", ["what-the-switches-did-in-pilots"]),
+    "W": ("No revolutions together with each other switch, on B2", ["what-the-switches-did-in-pilots"]),
+    "X": ("Handover together with each other switch, on B2", ["what-the-switches-did-in-pilots"]),
+    "Y": ("Brains mixed at birth together with each other switch, on B2", ["what-the-switches-did-in-pilots"]),
     "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent",
-          ["links-to-strangers"]),
+          ["what-the-switches-did-in-pilots"]),
     "Z": ("Settings drawn at random from every value the notebook has used, the values that make worlds worse "
           "dropped round after round (research/oee/search.md)", []),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "

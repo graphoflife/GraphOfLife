@@ -144,7 +144,7 @@ one of them.
   ([A hundred thousand iterations](a-hundred-thousand-iterations.md)).
 - **Changing the rules, and looking for a healthy, rich world.** The rules
   built to pass the yardstick, alone and in company
-  ([Rules in company](rules-in-company.md)). The search for a world that is
+  ([Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)). The search for a world that is
   healthy and whose agents differ ([Healthy and rich](healthy-and-rich.md),
   [A screen of random worlds](a-screen-of-random-worlds.md)).
 - **Strategies written by hand, and groups.** Is evolution's play the best

@@ -123,7 +123,7 @@ as which links a crowded newborn may still make. The switch
 unchanged, and only keep its books. A check, `research/oee/pilots/equiv.py`,
 makes sure that such a world stays identical to the engine's, iteration for
 iteration. The pilots of
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 and of [Other contests](another-game.md) run this way.
 
 #### What a pilot records
@@ -205,7 +205,7 @@ caption and recipe, into the pages.
 Every page with a box *The runs behind this page* reads the lab's runs.
 [Every simulation: what was run, and what was measured](every-simulation.md)
 lists every experiment and pilot batch. Pages built on pilots say so, as
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 does.
 
 ## What a run records

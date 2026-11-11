@@ -368,7 +368,7 @@ space when its width is at least 1.5 ([The random twin](measuring-space.md#the-r
 - **But B2 is a space, and one of about three dimensions, when the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of
   the dead goes to the newborns or to the parents.** The estate is the tokens
   a dead agent leaves. Here it goes to the iteration's newborns, or to their
-  parents ([Who inherits?](who-inherits.md)). These worlds' local dimension
+  parents ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). These worlds' local dimension
   rises to 3.1 at radius 3 and 3.5 at 4 to 5, then falls to 2.7 by radius 7. A
   typical agent needs 11.2 steps to reach half of its 5,200 agents, its twin
   4.7: a width of 2.4, as wide as B1. The twins' dimension climbs past 5.7
@@ -683,7 +683,7 @@ the line between folded and not.
   the newborns or the parents is a space of about three dimensions, as the
   notebook's second aim asks. But nine in ten of its agents hold three tokens
   or fewer, its agents are alike, and its evolution stops
-  ([Who inherits?](who-inherits.md)). A world that is a three-dimensional
+  ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world that is a three-dimensional
   space and rich, and that keeps evolving, is still to be found
   ([Healthy and rich](healthy-and-rich.md)).
 - **Room for open-ended evolution.** In a space, distant places are far apart.
@@ -705,7 +705,7 @@ the line between folded and not.
   line of 1.5 between a space and a folded world.
 - [Building B2: a world that cannot break](a-world-that-cannot-break.md): the
   rules of B2, mending among them, and what each one does.
-- [Who inherits?](who-inherits.md): the estates that keep a world a space, and
+- [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): the estates that keep a world a space, and
   why their worlds stay poor.
 - [Physical inspiration](physical-inspiration.md): the physics behind the aim,
   and what else a world might grow.
@@ -862,6 +862,6 @@ iterations each.
 
 **Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
 
-> [!info]- Pages that link here (24)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [!info]- Pages that link here (20)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

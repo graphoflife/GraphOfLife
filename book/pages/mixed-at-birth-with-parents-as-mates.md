@@ -188,7 +188,7 @@ held 15%. Only the poorest two of those were as poor.
 as high as in Experiment 17's worlds at 10,000 (0.58), and above B2's ten
 worlds played on to 10,000 (0.49). Part of it is built in: every mixed birth
 makes a new genotype
-([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)).
+([Brains mixed at birth, with every other rule](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-with-every-other-rule)).
 
 <!-- figure mixparents/breeding -->
 ![Who could have a child, and who has one](../figures/mixparents/breeding.svg)
@@ -593,5 +593,5 @@ is read:
 ← [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [The candidates, played on and played again](the-candidates-played-on.md) →
 
 > [!info]- Pages that link here (7)
-> [Every setting](settings.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Rules in company](rules-in-company.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [Every setting](settings.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

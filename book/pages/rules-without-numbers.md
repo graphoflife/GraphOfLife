@@ -274,11 +274,11 @@ limit nobody died.
 **Links that cost, paid as gifts, do not hold a network together.** With
 gifts, an agent may hand tokens to a neighbour, and a gift keeps the link it
 crosses alive
-([Three switches, and two more](the-switches-the-world-was-built-with.md#three-switches-and-two-more)).
+([Three switches, and two more](what-the-switches-did-in-pilots.md#three-switches-and-two-more)).
 But in B2 with every unused link lapsing, the brains did not pay for the
 links that held their world together. The network broke as it does without
 gifts
-([What the switches did to the world](the-switches-the-world-was-built-with.md#what-the-switches-did-to-the-world)).
+([What the switches did to the world](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world)).
 
 **Links that hold a token work.** The next section shows how.
 
@@ -312,7 +312,7 @@ a stranger and both agree, the two are joined.
   joined to 2 to 3% of the world (B2, with its cap of 8: 1.5%). Its dimension
   of 4.1 to 4.2 is a little above the health bar's 4. So is B2's own at
   10,000 tokens: 4.4 in its world of seed 1
-  ([The sixteen worlds](eight-switches-at-once.md#the-sixteen-worlds)).
+  ([The sixteen worlds](what-the-switches-did-in-pilots.md#the-sixteen-worlds)).
 - **The world is smaller.** About a third of the tokens sit in links. The
   worlds hold 1,100 to 1,500 agents, against B2's 3,200 to 3,650.
 - **Evolution goes on more strongly than in B2.** In contests a lifetime
@@ -322,13 +322,13 @@ a stranger and both agree, the two are joined.
   the same contests give 0.67 to 0.69, and 0.65 to 0.76.
 - **The age limit is still needed.** With links that hold a token and no age
   limit, births and deaths nearly stopped. The worlds froze
-  ([Links that hold a token, and nobody dies of age](mixed-brains-costly-units.md#links-that-hold-a-token-and-nobody-dies-of-age)).
+  ([Links that hold a token, and nobody dies of age](what-the-switches-did-in-pilots.md#links-that-hold-a-token-and-nobody-dies-of-age)).
 
 So the cap on links can be replaced. A link that holds a token is a rule
 without a number. Without a cap, the worlds that use it keep what the cap was
 for: their links do not run away, and no hub forms. And their brains evolve
 further than B2's. The rule has since been thrown into B2 together with seven
-other switches ([Eight switches at once](eight-switches-at-once.md)).
+other switches ([Eight switches at once](what-the-switches-did-in-pilots.md#eight-switches-at-once-and-how-sixteen-worlds-can-test-them)).
 
 ## What we learned
 
@@ -358,7 +358,7 @@ other switches ([Eight switches at once](eight-switches-at-once.md)).
   among the pilots' rules.
 - [Other contests: a lottery, and alliances](another-game.md#alliances): what
   alliances do when B2's numbers are in place.
-- [Eight switches at once](eight-switches-at-once.md): links that hold a token
+- [Eight switches at once](what-the-switches-did-in-pilots.md#eight-switches-at-once-and-how-sixteen-worlds-can-test-them): links that hold a token
   thrown into B2 together with seven other switches.
 
 ## How this was made
@@ -437,10 +437,10 @@ settings.
 <!-- turns -->
 ---
 
-← [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Changing the rules](../README.md#changing-the-rules) · [Who inherits?](who-inherits.md) →
+[Changing the rules](../README.md#changing-the-rules)
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
-> [!info]- Pages that link here (8)
-> [How this notebook is written](how-this-notebook-is-written.md) · [Every setting](settings.md) · [Who helps whom](who-helps-whom.md) · [Other contests: a lottery, and alliances](another-game.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (6)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Every setting](settings.md) · [Who helps whom](who-helps-whom.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

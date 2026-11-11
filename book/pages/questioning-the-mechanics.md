@@ -278,7 +278,7 @@ joined to 2.1 to 3.1%. Without the cap, links ran away: 8.7 per agent in the
 median world, and up to 17.7
 ([A world that cannot break](a-world-that-cannot-break.md)). And coalitions
 hardly matter in B2: they win about one node in three hundred a game
-([The switches the world was built with](the-switches-the-world-was-built-with.md)).
+([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)).
 
 How long a brain holds its node in B2 has not been measured directly. Help —
 a stake that saves another agent's node — is almost absent there: about 0.01
@@ -488,7 +488,7 @@ locality, which the search for open-ended evolution asks of every rule
 [Physical inspiration](physical-inspiration.md)). Agents were later given a
 local way to reach further: a search that walks the network and proposes a
 link where it ends. The median proposal went to an agent only two or three
-steps away ([Links to strangers](links-to-strangers.md)).
+steps away ([Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers)).
 
 ## The share-out lottery
 
@@ -515,7 +515,7 @@ iteration among 3,600 agents, in worlds of 10,000 tokens
 in pilot worlds of B1 and of B2: survivors by wealth, the poorest, the
 newborns, the parents, and each dead agent's own children. Who inherits
 decides how many agents a world holds, and how poor they are
-([Who inherits?](who-inherits.md)). Since 24 October 2026 the tokens can also
+([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). Since 24 October 2026 the tokens can also
 flow to the nearest living, step by step through the network
 ([`redistribution`](settings.md#redistribution) `local`); round 3's worlds
 that drew it are the most unequal of all

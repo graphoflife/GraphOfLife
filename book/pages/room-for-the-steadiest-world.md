@@ -103,7 +103,7 @@ The estate is the tokens a dead agent leaves. B2 gives each of them to a
 survivor drawn at random.
 
 Each pays for the room in its own coin
-([Rules in company](rules-in-company.md)):
+([Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)):
 - **The estates** fill a world with alike agents. With plain mixing, where
   any neighbour may be the mate, they gave spaces of about 5,000 agents
   whose diversity scores fell to 0.35 to 0.40.
@@ -128,7 +128,7 @@ estates might give room without filling the world.
 > [!quote] The thesis of Experiment 31, written down before any of its runs existed
 > **The claim.** Experiment 19's world, brains mixed at birth with only parents as mates, is steady, diverse and uneven, but folded. One of the rules that keep a world's room unfolds it without costing the rest. For at least one of four rules (the estate of the dead paid to the newborns, or to the parents, no old age, or deaths not mended) both of its worlds, at iteration 3,000, meet every mark of the health bar, are more diverse than B2's median world, are at least 1.5 times as wide as their random twins, and are no more even than B2's least even world, B2's ten worlds played on being read at the same iteration.
 >
-> **Why it would be so.** All ten of Experiment 19's worlds lived to 20,000 iterations. At 10,000 they held 1,429 to 2,385 agents, with diversity scores of 0.55 to 0.65 against B2's median of 0.49 and Ginis of 0.47 to 0.57 against B2's least of 0.47. Yet a typical agent reached half its world in 1.13 to 1.31 times the steps its random twin needs, and nine of ten missed the dimension mark: they are folded small worlds, not spaces. Chapter [87](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found what folds a world, a death mended with a ring of links, and what keeps a world's room: the estate paid to births (2.0 to 2.6 times the twin), no old age (1.8 to 1.9) and no mending (2.0). Each pays for the room in its own coin ([Meta XII](rules-in-company.md)): estates fill a world with alike, poor agents, no old age all but stops births, and without mending one loss can cut a world. With plain mixing, the estates gave spaces of about 5,000 agents with diversity scores of only 0.35 to 0.40. With parents as mates a mixed world held its size, which may keep the diversity the estates cost.
+> **Why it would be so.** All ten of Experiment 19's worlds lived to 20,000 iterations. At 10,000 they held 1,429 to 2,385 agents, with diversity scores of 0.55 to 0.65 against B2's median of 0.49 and Ginis of 0.47 to 0.57 against B2's least of 0.47. Yet a typical agent reached half its world in 1.13 to 1.31 times the steps its random twin needs, and nine of ten missed the dimension mark: they are folded small worlds, not spaces. Chapter [87](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found what folds a world, a death mended with a ring of links, and what keeps a world's room: the estate paid to births (2.0 to 2.6 times the twin), no old age (1.8 to 1.9) and no mending (2.0). Each pays for the room in its own coin ([Meta XII](what-the-switches-did-in-pilots.md#rules-in-company)): estates fill a world with alike, poor agents, no old age all but stops births, and without mending one loss can cut a world. With plain mixing, the estates gave spaces of about 5,000 agents with diversity scores of only 0.35 to 0.40. With parents as mates a mixed world held its size, which may keep the diversity the estates cost.
 >
 > **It holds if:** For at least one rule, both worlds (seeds 1 and 2) at iteration 3,000 meet every mark, have a diversity score above the median of B2's ten worlds played on and read at 3,000, a typical distance at least 1.5 times their twin's, and a Gini of their agents' tokens no lower than the least of those ten worlds'.
 >
@@ -469,7 +469,7 @@ estates and the mixed brains that kept the floor idle, or B2's least child?
 Two experiments ask:
 - **Plain B2.** Is the floor as idle without mixed brains and estates? Plain
   B2 is poor too: about three agents in four hold three tokens or fewer
-  ([Who inherits?](who-inherits.md)). Its children start with 11.2 to 12.1
+  ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). Its children start with 11.2 to 12.1
   tokens on average, in Experiment 16's ten worlds over iterations 1,000 to
   2,000.
 - **B1.** Its least child is a single token. Over iterations 2,000 to 3,000,
@@ -1018,5 +1018,5 @@ iteration's frame.
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Size and riches of a world](../README.md#size-and-riches-of-a-world).
 
 > [!info]- Pages that link here (9)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Every setting](settings.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Who inherits?](who-inherits.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Every setting](settings.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

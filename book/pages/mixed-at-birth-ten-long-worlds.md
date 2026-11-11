@@ -42,7 +42,7 @@ worlds meet six of the seven marks of the health bar, the notebook's test of a
 healthy network. But their agents do not differ: three in four hold three
 tokens or fewer. The worlds that came closest to both halves were those whose
 brains are mixed at birth ([Brains mixed at birth, units that cost, an eye for
-raids on kin](mixed-brains-costly-units.md)).
+raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)).
 
 Those were pilots. Batch Q made two worlds with mixing, later batches combined
 mixing with other rules, and the two worlds of batch Q were played on
@@ -369,7 +369,7 @@ The rise is not a law of every world built on B2, though. It holds for B2
 itself, at 5,000 and 10,000 tokens, and for its mixed worlds. Other rules move
 the dimension at any size. Leave the estate of the dead to the newborns, or to
 the parents, and B2 holds more than 5,000 agents at a dimension of 3.4 to 3.9,
-and meets every mark ([Who inherits?](who-inherits.md#healthy-and-diverse)).
+and meets every mark ([Who inherits?](what-the-switches-did-in-pilots.md#healthy-and-diverse)).
 
 ### Does evolution go on?
 
@@ -827,7 +827,7 @@ iteration 10,000 with the engine that made them. So they keep their names.
   first few steps grows with the world's size.
 - **17 October 2026.** This page said that the dimension's rise with size
   belongs to "B2's kind of network". [Who
-  inherits?](who-inherits.md#healthy-and-diverse) showed that this says too
+  inherits?](what-the-switches-did-in-pilots.md#healthy-and-diverse) showed that this says too
   much. The rise holds for B2 itself, at 5,000 and 10,000 tokens, and for its
   mixed worlds. But other rules move the dimension at any size. B2 with the
   estate of the dead left to the newborns, or to the parents, holds more than
@@ -852,6 +852,6 @@ iteration 10,000 with the engine that made them. So they keep their names.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (16)
-> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Every era against three](every-era-against-three.md) · [Who inherits?](who-inherits.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (13)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

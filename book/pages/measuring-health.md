@@ -490,7 +490,7 @@ the kinds swing from moment to moment.
   rule cost of the four parts.
 - [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours),
   [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds),
-  [Who inherits?](who-inherits.md) and [Rules in company](rules-in-company.md):
+  [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company):
   worlds scored by it.
 
 ## Where to go next

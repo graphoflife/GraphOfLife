@@ -79,7 +79,7 @@ There is no space between two pieces. In Graph of Life, space *is* the network
 two pieces are not far apart, they share nothing at all. And every link is
 made inside a neighbourhood. A child is joined to its parent and its parent's
 neighbours; a search for strangers walks along links
-([Links to strangers](links-to-strangers.md)). So two pieces can never be
+([Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers)). So two pieces can never be
 joined again. A split is for ever, like two universes that can no longer send
 each other a signal.
 

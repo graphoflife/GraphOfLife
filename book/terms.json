@@ -619,7 +619,7 @@
     },
     {
       "name": "fractional factorial",
-      "page": "eight-switches-at-once",
+      "page": "what-the-switches-did-in-pilots",
       "says": "A design that tests many switches together in few worlds, so that each one's effect can still be told apart.",
       "anchor": "many-switches-in-few-worlds-fractional-factorial-designs"
     },
@@ -741,9 +741,6 @@
     "how-this-notebook-is-written": [
       "candidate"
     ],
-    "mixing-with-every-other-rule": [
-      "candidate"
-    ],
     "measuring-evolution": [
       "hub"
     ],
@@ -752,6 +749,9 @@
     ],
     "b1-the-network-size-and-scaling": [
       "extinction"
+    ],
+    "what-the-switches-did-in-pilots": [
+      "candidate"
     ]
   }
 }

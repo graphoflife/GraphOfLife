@@ -56,7 +56,7 @@ there.
 - **[false discovery rate](how-the-drawn-settings-shape-a-world.md#how-a-setting-is-tested)** — Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg).
 - **[flow module](b1-the-game-and-its-flows.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
 - **[founder](rules-in-detail.md#the-starting-ring)** — One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.
-- **[fractional factorial](eight-switches-at-once.md#many-switches-in-few-worlds-fractional-factorial-designs)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
+- **[fractional factorial](what-the-switches-did-in-pilots.md#many-switches-in-few-worlds-fractional-factorial-designs)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
 - **[frame](runs-and-records.md#what-a-run-records)** — A whole world as a run records it after one phase: every agent, its tokens and connections.
 - **[game](one-iteration.md#phase-2-the-game)** — The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.
 - **[genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor)** (also family tree) — The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.

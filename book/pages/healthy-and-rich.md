@@ -230,7 +230,7 @@ the least of B2's worlds read at the same iteration. Old theses keep their
 wording.
 [The candidates, played on](the-candidates-played-on.md#the-candidates-played-on),
 [Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held)
-and [Rules in company](rules-in-company.md) say what the clarified reading
+and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company) say what the clarified reading
 changes.
 
 ### What B2's dimension measures
@@ -269,7 +269,7 @@ because each death is mended with a ring of links among the dead agent's
 worlds, but not for every variant of B2. With the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead left
 to the newborns or to the parents, B2's worlds hold more than 5,000 agents
 at a dimension of 3.4 to 3.9. They stay spaces, of about three dimensions
-([Who inherits?](who-inherits.md#healthy-and-diverse)).
+([Who inherits?](what-the-switches-did-in-pilots.md#healthy-and-diverse)).
 
 ## The worlds that come closest
 
@@ -281,7 +281,7 @@ counted, on 17 October 2026, 99 worlds of 624 met all seven marks:
   rarely change (Experiment 9);
 - 67 pilot worlds built on B2: among them 28 of batch Y, which mix brains
   at birth with one other rule
-  ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)),
+  ([Brains mixed at birth, with every other rule](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-with-every-other-rule)),
   and 12 of batch W;
 - five alliance pilots of B1 ([Alliances](another-game.md#alliances)), four of them at
   3,000 tokens, below the notebook's rule of 10,000;
@@ -317,7 +317,7 @@ meet every mark are:
 Every one of the twelve mixes its brains at birth. A newborn's brain then
 comes from two agents: its parent, and a mate among the parent's
 neighbours. Each hidden unit of the brain comes whole from one or the other
-([Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)).
+([Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)).
 Each world also changes something else. The two at the top add a faster
 change of brains, a [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") probability of 0.8 where B2 has 0.2. They have
 diversity scores of 0.79 and 0.78, with about 40% of their agents at three
@@ -500,7 +500,7 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
   spread as B1's do. Without old age, B2's worlds meet every mark of the
   bar and stop: hardly a birth, nearly every agent poor and of one age
   (Experiment 15). Links that hold a token without old age did the same
-  ([Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md)).
+  ([Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)).
   Something between, a death that depends on what an agent does rather
   than on a fixed age, would let ages spread without stopping the world.
 - **A healthy network is not yet a space.** The candidate worlds' networks
@@ -614,6 +614,6 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
 
 [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) →
 
-> [!info]- Pages that link here (26)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [!info]- Pages that link here (21)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

@@ -88,11 +88,11 @@ engine's own settings:
 - **links to strangers by a free reach, forced on the other end.** An agent
   may propose a link to an agent beyond its neighbours, reached in free
   steps. The other end cannot refuse
-  ([Links to strangers](links-to-strangers.md)).
+  ([Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers)).
 - **brains mixed at birth, with only the last token kept at home.** B2 keeps
   30% of an agent's tokens on its own node, whatever its brain says. Here
   only one token stays
-  ([Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md)).
+  ([Brains mixed at birth, with every other rule](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-with-every-other-rule)).
 
 The other four use rules that so far exist only in the pilots' prototype:
 - contests decided by lottery;
@@ -633,7 +633,7 @@ These settings give exactly what
 That world, mixing with parents as mates, is healthy, diverse and uneven,
 but folded. This one is a wide space, but thin and even. Among its
 settings, every unused link lapsing is the one
-[Rules in company](rules-in-company.md) found to make worlds rich, about
+[Rules in company](what-the-switches-did-in-pilots.md#rules-in-company) found to make worlds rich, about
 two-dimensional and short of marks. That is where the two configurations
 meet, and where [Room for the steadiest world](room-for-the-steadiest-world.md)
 looks for room.
@@ -931,6 +931,6 @@ was played with.
 
 ← [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) →
 
-> [!info]- Pages that link here (9)
-> [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Every era against three](every-era-against-three.md) · [Rules in company](rules-in-company.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (8)
+> [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Every era against three](every-era-against-three.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->
