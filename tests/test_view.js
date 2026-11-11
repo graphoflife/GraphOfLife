@@ -1253,6 +1253,21 @@ function test_no_canvas_writes_a_colour_out() {
   assert(!found.length, `colours written out where a retheme cannot reach them: ${found.join(', ')}`);
 }
 
+function test_every_rune_the_page_draws_is_in_its_sprite() {
+  // The runes are one set of strokes, defined once in index.html: the tabs and
+  // the front page's doors point at them with <use>, and entrance.js carves the
+  // ring and the inscription from the ones it names. A name with no symbol
+  // behind it draws nothing, and says nothing about it.
+  const html = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
+  const defined = new Set([...html.matchAll(/<symbol id="rune-([\w-]+)"/g)].map(m => m[1]));
+  const Entrance = new Function(
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'entrance.js'), 'utf8')}; return Entrance;`)();
+  const named = [...html.matchAll(/href="#rune-([\w-]+)"/g)].map(m => m[1]).concat(Entrance.RUNES);
+  const missing = [...new Set(named.filter(name => !defined.has(name)))];
+  assert(named.length > Entrance.RUNES.length, 'no tab or door wears a rune');
+  assert(!missing.length, `runes named but missing from the sprite: ${missing.join(', ')}`);
+}
+
 function test_no_canvas_writes_a_font_out() {
   // The site has one typeface, set once in the stylesheet as --font. A family
   // written into a canvas call is one the stylesheet cannot reach: eighteen

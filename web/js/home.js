@@ -87,16 +87,26 @@ const Home = {
       showEdgeLegend: false,
       autoFit: false,        // framed here instead, so it can be held closer
       layoutCarry: true,
-      // Quieter than the Viewer's. At several thousand agents the default edge
-      // opacity makes a bright mesh, and white text on a bright mesh is not
-      // text. The agents stay as they are, so the structure still reads.
-      edgeAlpha: 0.52,
+      // In the front page's own two inks rather than the Viewer's red and
+      // blue: wealth from the dark of the wall through the machine's green to
+      // the runes' gold, so the poorest agents sink into the background and
+      // the rich ones burn. Still tokens, still on a log scale, so it is the
+      // same picture of the same world.
+      nodeColormap: 'viridis',
+      // Threads of the green, quieter than the Viewer's white. At a thousand
+      // agents the default makes a bright mesh, and words on a bright mesh are
+      // not words. The agents stay as they are, so the structure still reads.
+      edgeFlatColor: '#7fe6cf',
+      edgeAlpha: 0.34,
       nodeAlpha: 1,
-      // The page's own colour. The veil above the canvas is mixed to match it
-      // exactly, so it darkens the graph without ever tinting the background.
-      bgColorA: '#0d1117',
-      bgColorB: '#0d1117'
+      // The stage's own colour (--stage). The veil above the canvas is mixed
+      // to match it exactly, so it darkens the graph without ever tinting the
+      // background.
+      bgColorA: '#05080b',
+      bgColorB: '#05080b'
     });
+
+    Entrance.init(this.stage);
 
     if (window.ResizeObserver) {
       this._observer = new ResizeObserver(() => this.resize());
@@ -116,11 +126,12 @@ const Home = {
   setActive(active) {
     this.active = active;
     if (!active) {
+      Entrance.stop();
       this.unload();
       return;
     }
 
-    // Replay the titles by taking the class off and putting it back, which is
+    // Replay the arrival by taking the class off and putting it back, which is
     // the only way to restart a CSS animation.
     if (this.stage) {
       this.stage.classList.remove('play');
@@ -130,6 +141,7 @@ const Home = {
 
     this.build();
     this.resize();
+    Entrance.start();
     if (!this.loaded && !this._loading) this.load();
   },
 
@@ -193,6 +205,10 @@ const Home = {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         this.buffer = await response.arrayBuffer();
       }
+      // Left while it was on its way, which the doors make easy to do: the
+      // layout is already given back, so keep what was fetched and play it
+      // the next time the page is opened.
+      if (!this.active || !this.layout) return;
       this.frames = this.decode(this.buffer);
       if (!this.frames.length) throw new Error('the recording has no frames');
 
@@ -282,15 +298,20 @@ const Home = {
     this.metrics = new FrameMetrics(frame, this.settings);
     this.layout.setFrame(frame.ids, frame.edges, frame.parent_ids, carry);
     this.layout.reheat(carry ? 0.3 : 1);
+    Entrance.report(frame);
   },
 
   resize() {
+    Entrance.resize();
     if (!this.renderer) return;
     this.renderer.resize();
   },
 
   /** One animation frame, handed over by App while the front page is shown. */
   tick(dt) {
+    // The entrance first: the title decodes while the recording is still on
+    // its way, which is exactly when there is nothing else to look at.
+    Entrance.tick(dt);
     if (!this.loaded || !this.layout || !this.renderer) return;
 
     // Move to the next frame first, so the check below sees it.
@@ -324,8 +345,10 @@ const Home = {
     if (!(this.renderer.cssWidth > 0)) this.resize();
 
     // The camera does not depend on which frame is showing, so it keeps
-    // gliding through the wait rather than stalling for it.
-    this.renderer.rotate(this.ROTATION * step, 0);
+    // gliding through the wait rather than stalling for it. Held still for a
+    // reader who has asked for less motion: a whole picture turning is the
+    // kind of movement that setting exists to stop.
+    if (!Entrance.calm) this.renderer.rotate(this.ROTATION * step, 0);
 
     // Until the coordinates belong to the frame we are holding, the canvas
     // simply keeps what it already shows.

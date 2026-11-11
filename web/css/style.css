@@ -1,31 +1,41 @@
-/* GraphOfLife — local viewer styling. Dark by default; the canvas is the star. */
+/* GraphOfLife — the site's styling. Dark by default; the canvas is the star. */
 
 /*
- * One ramp of surfaces, each a fixed step above the last.
+ * Obsidian, phosphor and gold.
  *
- * The four surfaces used to sit between 0.004 and 0.030 relative luminance —
- * the whole interface inside three percent of the scale, with 1.11:1 between
- * the page and a card and 1.10:1 between a card and the thing nested in it.
- * At those ratios a panel has no edge you can see: everything reads as one
- * flat sheet of the same darkness, and the borders that were meant to rescue
- * it were themselves 1.20:1 against what they bounded.
+ * The look is of something found rather than made: a dark wall, an inscription
+ * on it, and a light behind the inscription. Three inks carry that and nothing
+ * else does. The surfaces are near-black with a cold verdigris cast, the way
+ * old stone and old screens are; the accent is a phosphor green, the colour of
+ * the machine; and gold is kept for the runes, the titles and the few marks
+ * that say "this is the old part". The mystery lives on the front page and in
+ * those accents. The working tabs are calm: the same inks, at reading contrast.
  *
- * So the steps are geometric now — each surface about 1.3 times the last on
- * (L + 0.05), which is the term contrast is actually measured in — and they
- * carry a blue cast rather than going grey, so the lift reads as depth rather
- * than as fog. Text was never the problem and has not moved much: it stays
- * above 7:1 on every surface, and the muted grey is lifted just enough to
- * clear 4.5:1 on the lightest surface it is ever set on.
+ * One ramp of surfaces, each a fixed step above the last — about 1.15 to 1.2
+ * times on (L + 0.05), which is the term contrast is measured in. Deeper than
+ * the slate it replaced, so a panel is told from the page by a hairline edge
+ * and a faint lift at its top, not by being grey. Text stays above 10:1 on
+ * every surface, the muted tier above 5:1, and the dimmest tier above 4.5:1
+ * everywhere it is set except the raised hover surface, where it never sits
+ * for long.
  */
 :root {
-  /* The one typeface of the whole site — text, code, numbers, and every label a
+  /* The machine's typeface — controls, numbers, code, and every label a
      canvas draws (ink.js reads it from here). JetBrains Mono comes from Google
      Fonts (index.html); offline, the system's own monospace stands in. */
   --font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  /* Titles, in capitals cut from Roman inscriptions. Its lower case is a
+     second size of capital, so a title reads as carved rather than written. */
+  --font-display: "Cinzel", "Trajan Pro", "Cormorant Garamond", Georgia, serif;
+  /* Long reading. A notebook page is thousands of words, and a monospace set
+     at a reading size runs to a hundred characters a line; a book face made
+     for screens holds the same column at seventy, and the eye stops hunting
+     for the next line. */
+  --font-read: "Spectral", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 
   /* Behind the graph itself, and deliberately the darkest thing here: the
      visualisation is the picture, and everything else is the frame. */
-  --stage: #090c11;
+  --stage: #05080b;
 
   /* The explanation's own marks, drawn on that stage (stepview.js reads them
      through ink.js): an agent, a rich one, a newborn or a winner, a warning,
@@ -46,27 +56,39 @@
   --ex-shade: #0a0e14;
   --ex-halo: #ffffff;
 
-  --bg: #0b0e13;
-  --panel: #202b38;
-  --panel-2: #2d3d50;
+  --bg: #080d11;
+  --panel: #111c22;
+  --panel-2: #1a2a32;
   /* Raised: hover and active states, where the text on top is --text rather
      than --muted, which is what lets it go this light. */
-  --panel-3: #384c64;
+  --panel-3: #243841;
 
-  --border: #435468;
-  --border-strong: #5a6e86;
+  --border: #2c434b;
+  --border-strong: #46636c;
+  /* An edge that is lit rather than drawn: the accent at a whisper, for the
+     frame of something the eye should find first. */
+  --border-lit: rgba(95, 224, 198, 0.32);
 
-  --text: #eef4fa;
-  --muted: #9ab0c3;
+  --text: #e9f1ef;
+  --muted: #98aeac;
   /* The dimmest tier: unit names, ids, field hints, axis labels. It was three
      hard-coded greys that differed by less than one contrast step, so nothing
      ever told them apart, and all three read below 4.5:1 even against the old
      darker panels. One tier, light enough to clear it. */
-  --muted-2: #7e94a5;
-  --accent: #64bdff;
-  /* Deepened a shade from the accent so white sits on it at 4.6:1 — it is a
-     button fill before it is a hue. */
-  --accent-dim: #2b7cad;
+  --muted-2: #869c9c;
+  /* Phosphor: links, the tab you are on, focus, the one series a chart draws
+     in no colour of its own. */
+  --accent: #5fe0c6;
+  /* Deepened from the accent so white sits on it at 5.9:1 — it is a button
+     fill before it is a hue. */
+  --accent-dim: #13715f;
+  /* The accent as light rather than ink: a glow behind something lit. */
+  --glow: rgba(95, 224, 198, 0.28);
+  /* Gold, for the runes and the titles. As ink it reads at 7:1 or better on
+     every surface; it is never a fill. */
+  --gold: #e2bf7a;
+  /* The front page's lettering: white with the warmth of old paper in it. */
+  --ivory: #f4efe3;
   /* State, as ink and as fill.
    *
    * A state has two jobs and they want different colours: a word coloured on
@@ -75,15 +97,17 @@
    * reason — white reads on it at 7.5:1, where the amber used for *text*
    * would give 1.9:1 — so they are named apart rather than one being a
    * shade of the other. */
-  --danger: #ff6b61;
-  --ok: #4ccb60;
-  --warn: #e6a532;
-  --info: #ab77f4;
+  --danger: #ff7a6e;
+  /* A yellower green than the accent, so "running" is never mistaken for
+     "selected". */
+  --ok: #8fd16a;
+  --warn: #e9b04a;
+  --info: #b79cf6;
 
   /* Red as text. The second is for the one place it sits on a red tint
      rather than on a panel, where it has to be lighter to clear it. */
-  --danger-text: #ff9c8f;
-  --danger-on-tint: #ffb3a7;
+  --danger-text: #ffa196;
+  --danger-on-tint: #ffb7ad;
 
   /* Amber as a fill, with the edge and hover that go with it. Deliberately
      much darker than --warn: this one carries white ink. */
@@ -92,32 +116,39 @@
   --warn-edge: #9a5d17;
 
   /* Body text one step softer than --text, for prose inside a dialog. */
-  --text-soft: #c2d0dc;
+  --text-soft: #c4d3d1;
+  /* The notebook's running text: softer again than --text, because a page of
+     pure white on near-black glares, and still 12.8:1 on a panel. */
+  --text-read: #d5e0dd;
   /* The lines of a chart's frame, for canvases, which read them through
      ink.js. Translucent, so they sit the same step above whichever surface the
-     chart is drawn on rather than being tuned to one. */
-  --chart-grid: rgba(255, 255, 255, 0.07);
-  --chart-tick: rgba(255, 255, 255, 0.35);
-  --chart-axis: rgba(255, 255, 255, 0.18);
+     chart is drawn on rather than being tuned to one; tinted towards the
+     page's green so a chart sits in its panel rather than on it. */
+  --chart-grid: rgba(214, 245, 236, 0.07);
+  --chart-tick: rgba(214, 245, 236, 0.36);
+  --chart-axis: rgba(214, 245, 236, 0.18);
   /* Under a legend drawn over a picture, so it reads whatever is beneath. */
-  --chart-veil: rgba(0, 0, 0, 0.45);
+  --chart-veil: rgba(2, 5, 7, 0.55);
 
   /* The code viewer. Its syntax colours are a self-contained scheme — the
      family GitHub uses, which is where most people last read Python — and are
      left where they are used. These two are not part of that scheme: they are
      the script's own body text and its line-number gutter, and both are tuned
      against --panel, so they are the pair to revisit if that surface moves. */
-  --code-text: #96a3b3;
-  --code-gutter: #637488;
+  --code-text: #a3b6b3;
+  --code-gutter: #677f7e;
 
-  /* Depth, in two steps. A dark interface cannot lean on shadow the way a
+  /* Depth, in three steps. A dark interface cannot lean on shadow the way a
      light one does — there is little left to darken — so these are shallow and
-     wide, enough to detach a card from the page without looking dropped. */
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.42);
-  --shadow-2: 0 3px 10px rgba(0, 0, 0, 0.46);
-  --shadow-3: 0 12px 34px rgba(0, 0, 0, 0.55);
+     wide, enough to detach a card from the page without looking dropped. The
+     inset line is the lift: a panel catches a little light along its top edge,
+     the way a plate of glass or stone does. */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 6px 18px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 18px 48px rgba(0, 0, 0, 0.62);
+  --lift: inset 0 1px 0 rgba(214, 245, 236, 0.05);
 
-  --radius: 8px;
+  --radius: 6px;
 }
 
 * { box-sizing: border-box; }
@@ -155,12 +186,24 @@
    jumps sideways by its width every time. */
 html { scrollbar-gutter: stable; }
 
+/* The page is the darkest thing but the stage, with the faintest breath of the
+   accent along its top — light from the bar above, falling on stone. Painted
+   once and scrolled with the page: never fixed, which would repaint it on
+   every scroll. */
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(1200px 420px at 50% -260px, rgba(95, 224, 198, 0.045), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
+  background-color: var(--bg);
   color: var(--text);
   font: 14px/1.5 var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+::selection { background: rgba(95, 224, 198, 0.3); color: #fff; }
 
 /* Code and its kin would otherwise take the browser's own monospace. */
 code, pre, kbd, samp { font-family: var(--font); }
@@ -168,25 +211,75 @@ code, pre, kbd, samp { font-family: var(--font); }
 h1, h2, h3 { margin: 0; font-weight: 600; }
 h1 { font-size: 17px; letter-spacing: 0.3px; }
 h2 { font-size: 15px; }
-h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); }
+h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
 
 .hint { color: var(--muted); font-weight: 400; font-size: 11px; }
 
+/* Words for a screen reader alone: the front page draws its title and subtitle
+   letter by letter, and this is where they are said whole. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* A rune from the page's sprite (index.html): strokes only, in the colour of
+   whatever it is set in, at the height of a capital. */
+.rune {
+  width: 0.62em;
+  height: 1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+
+/* A view's own title: carved, not printed. */
+.sims-head h2,
+.explain-intro h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ivory);
+}
+
 /* ---- top bar ---- */
+/* A dark band with a lit seam beneath it: gold fading into the accent and out
+   again, the one line on the page that is drawn rather than ruled. */
 .topbar {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 10px 18px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow-1);
+  padding: 9px 18px;
+  background: var(--bg);
+  border-bottom: 1px solid rgba(95, 224, 198, 0.1);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35);
   position: sticky;
   top: 0;
   z-index: 20;
 }
+.topbar::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(226, 191, 122, 0.45) 30%,
+                              rgba(95, 224, 198, 0.55) 62%, transparent);
+  pointer-events: none;
+}
 
-.tabs { display: flex; gap: 4px; }
+.tabs { display: flex; gap: 2px; }
 
 /* ---- What is loading ----------------------------------------------------
    One bar for the whole site, in the top bar. It says what is being read, how
@@ -201,7 +294,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   padding: 4px 6px 4px 12px;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: var(--panel-2);
+  background: var(--panel);
   font-size: 12px;
   color: var(--muted);
   max-width: 46ch;
@@ -226,6 +319,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   inset: 0 auto 0 0;
   width: 0;
   background: var(--accent);
+  box-shadow: 0 0 8px var(--glow);
   border-radius: inherit;
   transition: width 0.25s ease;
 }
@@ -250,25 +344,41 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
 /* The label beside the bar is pushed across by the bar now, not by itself. */
 .job-bar:not([hidden]) + .run-label { margin-left: 12px; }
 
+/* Each tab a rune and a word. The rune is gold and dim until the tab is
+   wanted, so the row reads as five words with marks beside them, not as ten
+   things. */
 .tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: transparent;
   border: 1px solid transparent;
   color: var(--muted);
-  padding: 5px 14px;
+  padding: 6px 12px;
   border-radius: var(--radius);
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12.5px;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
-.tab:hover { color: var(--text); border-color: var(--border); background: var(--panel-2); }
-/* The tab you are on, said plainly. A border the same grey as every other
-   panel edge was doing the job in principle and not in practice — at a glance
-   the row read as five tabs of equal weight. */
+.tab .rune { width: 7px; height: 12px; color: var(--gold); opacity: 0.45; transition: opacity 0.2s ease; }
+.tab:hover { color: var(--text); border-color: transparent; background: rgba(214, 245, 236, 0.05); }
+.tab:hover .rune { opacity: 0.85; }
+/* The tab you are on, said plainly: bright, its rune lit, and a seam of the
+   accent beneath it. A border the same grey as every other panel edge did the
+   job in principle and not in practice — at a glance the row read as five
+   tabs of equal weight. */
 .tab.active {
-  background: var(--panel-2);
+  background: rgba(95, 224, 198, 0.07);
   color: #fff;
-  border-color: #fff;
   font-weight: 600;
+}
+.tab.active .rune { opacity: 1; filter: drop-shadow(0 0 4px rgba(226, 191, 122, 0.55)); }
+/* A laptop's width: the runes cost the bar about ninety pixels, which the
+   label of the open run would otherwise give up entirely. */
+@media (max-width: 1200px) {
+  .topbar { gap: 14px; }
+  .tab { padding: 6px 8px; gap: 6px; }
 }
 
 /* One line, shortened rather than wrapped when the loading bar and the byline
@@ -290,10 +400,11 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   flex-shrink: 0;
   white-space: nowrap;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11.5px;
+  letter-spacing: 0.01em;
 }
-.byline a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
-.byline a:hover { color: var(--text); border-bottom-color: var(--text); }
+.byline a { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(226, 191, 122, 0.55); }
+.byline a:hover { color: var(--gold); border-bottom-color: var(--gold); }
 /* In two short lines when the bar is crowded: beside a loading bar, and on
    windows too narrow for the tabs and the byline in one line. */
 .job-bar:not([hidden]) ~ .byline { white-space: normal; text-align: right; font-size: 11px; line-height: 1.3; }
@@ -313,6 +424,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: v
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift);
   padding: 16px;
   margin-bottom: 16px;
   max-width: 1400px;
@@ -335,7 +447,7 @@ fieldset {
   min-width: 240px;
 }
 
-legend { color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; padding: 0 6px; }
+legend { color: var(--gold); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.14em; padding: 0 6px; }
 
 .field { margin-bottom: 10px; }
 .field.wide { flex: 1 1 100%; }
@@ -343,20 +455,24 @@ legend { color: var(--accent); font-size: 11px; text-transform: uppercase; lette
 .field small { display: block; color: var(--muted-2); font-size: 10.5px; margin-top: 2px; }
 .field.checkbox label { display: flex; align-items: center; gap: 6px; color: var(--text); }
 
-input[type="text"], input[type="number"], select {
+/* Fields are wells cut into the panel: darker than what they sit in, with an
+   edge that lights when they are being written in. */
+input[type="text"], input[type="number"], input[type="search"], select {
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text);
   padding: 6px 8px;
-  border-radius: 6px;
+  border-radius: 5px;
   font-size: 13px;
   font-family: inherit;
 }
-input:focus, select:focus { outline: none; border-color: var(--accent-dim); }
+input:focus, select:focus { outline: none; border-color: var(--accent-dim); box-shadow: 0 0 0 3px rgba(95, 224, 198, 0.12); }
+select option { background: var(--panel); color: var(--text); }
 
-input[type="color"] { width: 100%; height: 28px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 2px; }
-input[type="range"] { width: 100%; accent-color: var(--accent); }
+input[type="color"] { width: 100%; height: 28px; background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 2px; }
+input[type="range"], input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+input[type="range"] { width: 100%; }
 
 .derived { color: var(--muted); font-size: 11px; margin: 8px 0 0; line-height: 1.45; }
 
@@ -369,18 +485,19 @@ button {
   border: 1px solid var(--border);
   color: var(--text);
   padding: 6px 14px;
-  border-radius: 6px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 13px;
   font-family: inherit;
 }
-button:hover:not(:disabled) { border-color: var(--accent-dim); background: var(--panel-3); }
+button:hover:not(:disabled) { border-color: var(--border-lit); background: var(--panel-3); }
 button:disabled { opacity: 0.4; cursor: not-allowed; }
-/* The fill decides the ink. On the deep accent white reads at 4.6:1; on the
-   bright one it reads at 2.1:1, which is why the hover state takes dark text
-   instead of keeping white and becoming the least legible thing on the page. */
-button.primary { background: var(--accent-dim); border-color: var(--accent-dim); color: #fff; }
-button.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--stage); }
+/* The fill decides the ink. On the deep accent white reads at 5.9:1; on the
+   bright one it would read at 1.6:1, which is why the hover state takes dark
+   text instead of keeping white and becoming the least legible thing on the
+   page. */
+button.primary { background: var(--accent-dim); border-color: rgba(95, 224, 198, 0.55); color: #fff; }
+button.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--stage); box-shadow: 0 0 16px var(--glow); }
 button.danger:hover { border-color: var(--danger); color: var(--danger); }
 button.ghost { background: transparent; }
 button.small { padding: 4px 9px; font-size: 12px; }
@@ -417,6 +534,7 @@ button.small { padding: 4px 9px; font-size: 12px; }
   background: var(--stage);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), var(--shadow-1);
   overflow: hidden;
   height: min(64vh, 720px);
 }
@@ -438,11 +556,15 @@ button.small { padding: 4px 9px; font-size: 12px; }
   padding: 20px;
 }
 
+/* Opaque enough to read over any part of the picture, and deliberately not
+   blurred: it follows the pointer over a canvas that redraws every frame, and
+   a backdrop blur would be recomputed with it. */
 .hover-card {
   position: absolute;
-  background: rgba(12, 16, 22, 0.94);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  background: rgba(5, 8, 11, 0.93);
+  border: 1px solid var(--border-lit);
+  border-radius: 5px;
+  box-shadow: var(--shadow-2);
   padding: 7px 9px;
   font-size: 11.5px;
   pointer-events: none;
@@ -462,6 +584,7 @@ button.small { padding: 4px 9px; font-size: 12px; }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift);
 }
 .playbar button { padding: 4px 10px; min-width: 34px; }
 #frameSlider { flex: 1; min-width: 80px; }
@@ -469,16 +592,20 @@ button.small { padding: 4px 9px; font-size: 12px; }
 .speed input { width: 76px; }
 
 /* ---- stats ---- */
-.stat-key { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-.stat-val { display: block; font-size: 15px; font-variant-numeric: tabular-nums; }
+.stat-key { display: block; font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.stat-val { display: block; font-size: 15px; font-variant-numeric: tabular-nums; color: var(--text); }
 
-.charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+/* minmax(0, 1fr), not 1fr: a plain 1fr will not shrink below the widest menu
+   in its caption, and the row of three ran past its column and under the
+   settings beside it. The captions wrap instead. */
+.charts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
 .charts figure {
+  min-width: 0;
   margin: 0;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-1);
+  box-shadow: var(--lift), var(--shadow-1);
   padding: 10px;
 }
 .charts figcaption { font-size: 11.5px; color: var(--muted); margin-bottom: 6px; }
@@ -494,6 +621,7 @@ button.small { padding: 4px 9px; font-size: 12px; }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift);
   padding: 12px;
   max-height: calc(100vh - var(--topbar-h, 47px) - 43px);
   overflow-y: auto;
@@ -541,7 +669,7 @@ button.small { padding: 4px 9px; font-size: 12px; }
   opacity: 0.5;
   transition: opacity 0.15s, background 0.15s;
 }
-.resizer:hover::after { opacity: 1; background: var(--accent-dim); }
+.resizer:hover::after { opacity: 1; background: var(--accent-dim); box-shadow: 0 0 10px var(--glow); }
 
 /* While dragging, stop the pointer selecting text across the page. */
 body.resizing { user-select: none; cursor: col-resize; }
@@ -602,13 +730,15 @@ details.control-group > summary {
 details.control-group > summary::-webkit-details-marker { display: none; }
 details.control-group > summary::before {
   content: '▸';
-  color: var(--muted);
+  color: var(--gold);
+  opacity: 0.7;
   font-size: 10px;
   transition: transform 0.15s;
 }
-details.control-group[open] > summary::before { transform: rotate(90deg); }
+details.control-group[open] > summary::before { transform: rotate(90deg); opacity: 1; }
 details.control-group > summary h3 { margin: 0; }
 details.control-group > summary:hover h3 { color: var(--text); }
+details.control-group[open] > summary h3 { color: var(--text-soft); }
 .group-body { padding: 4px 2px 2px; }
 
 .saved-label { margin-top: 10px; }
@@ -617,7 +747,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 /* Segmented toggles */
 .view-toggles { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
-.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; background: var(--panel); }
 .seg-btn {
   background: var(--panel);
   border: none;
@@ -628,7 +758,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .seg-btn + .seg-btn { border-left: 1px solid var(--border); }
 .seg-btn:hover { color: var(--text); background: var(--panel-3); }
-.seg-btn.active { background: var(--accent-dim); color: #fff; }
+.seg-btn.active { background: var(--accent-dim); color: #fff; box-shadow: inset 0 0 0 1px rgba(95, 224, 198, 0.35); }
 
 /* Fixed-width slots so the bar cannot reflow while playing. */
 .frame-label {
@@ -648,14 +778,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .stat {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 5px;
   padding: 6px 10px;
   min-width: 88px;
   text-align: left;
   cursor: pointer;
   font-family: inherit;
 }
-.stat:hover { border-color: var(--accent-dim); background: var(--panel-3); }
+.stat:hover { border-color: var(--border-lit); background: var(--panel-3); }
 
 /* Statistic detail popover */
 .stat-detail {
@@ -664,12 +794,13 @@ details.control-group > summary:hover h3 { color: var(--text); }
   bottom: 24px;
   width: min(460px, calc(100vw - 48px));
   background: var(--panel);
-  border: 1px solid var(--accent-dim);
+  border: 1px solid var(--border-lit);
   border-radius: var(--radius);
   padding: 14px;
-  box-shadow: var(--shadow-3);
+  box-shadow: var(--shadow-3), 0 0 0 1px rgba(0, 0, 0, 0.5), 0 0 40px rgba(95, 224, 198, 0.06);
   z-index: 40;
 }
+.stat-detail-head h3 { color: var(--gold); }
 .stat-detail.hidden { display: none; }
 .stat-detail-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .stat-detail-text { font-size: 12px; color: var(--text-soft); line-height: 1.55; margin: 8px 0 10px; }
@@ -722,7 +853,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .seg-btn.standalone {
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 /* The toggle row carries more now, so let it wrap tidily. */
@@ -750,7 +881,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   cursor: pointer;
   flex: none;
 }
-.step-btn:hover:not(:disabled) { color: #fff; border-color: #fff; }
+.step-btn:hover:not(:disabled) { color: #fff; border-color: var(--accent); }
 .step-btn:disabled { opacity: 0.3; cursor: default; }
 
 .chart-pair { display: inline-flex; gap: 4px; align-items: center; min-width: 0; }
@@ -786,6 +917,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift);
 }
 .stat-group > summary {
   cursor: pointer;
@@ -794,14 +926,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 11px;
+  font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.7px;
+  letter-spacing: 0.12em;
   color: var(--muted);
 }
 .stat-group > summary::-webkit-details-marker { display: none; }
-.stat-group > summary::before { content: '▸'; font-size: 9px; transition: transform 0.15s; }
-.stat-group[open] > summary::before { transform: rotate(90deg); }
+.stat-group > summary::before { content: '▸'; font-size: 9px; color: var(--gold); opacity: 0.7; transition: transform 0.15s; }
+.stat-group[open] > summary::before { transform: rotate(90deg); opacity: 1; }
 .stat-group > summary:hover { color: var(--text); }
 .stat-group-count { margin-left: auto; color: var(--muted-2); font-size: 10px; letter-spacing: 0; }
 .stat-group-body { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 10px 10px; }
@@ -892,7 +1024,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 /* Three abreast normally. Below that the trajectory takes the full width of a
    two-column row rather than being squeezed, and gets the height back. */
 @media (max-width: 1200px) {
-  .charts { grid-template-columns: 1fr 1fr; }
+  .charts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .charts .chart-wide { grid-column: 1 / -1; }
   .charts .chart-wide canvas { height: 240px; }
 }
@@ -931,14 +1063,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
    ========================================================================== */
 
 /* The same mark as the front page's, at the size the header has room for:
-   white agents, and the iris colour written into the symbol rather than
+   pale agents, and the iris colour written into the symbol rather than
    inherited, so it is blue here too. */
 .brand-mark {
   width: 26px;
   height: 26px;
   flex: 0 0 auto;
-  color: #fff;
-  margin-right: -2px;
+  color: var(--ivory);
+  margin-right: -6px;
 }
 
 /* ==========================================================================
@@ -951,8 +1083,10 @@ details.control-group > summary:hover h3 { color: var(--text); }
   margin: 0 auto 18px;
   padding: 0 4px;
 }
-.explain-intro h2 { margin: 0 0 6px; font-size: 20px; }
-.explain-intro p { margin: 0; color: var(--muted); line-height: 1.6; }
+.explain-intro h2 { margin: 0 0 8px; font-size: 22px; }
+.explain-intro p { margin: 0 0 6px; color: var(--text-soft); font-family: var(--font-read); font-size: 15.5px; line-height: 1.6; max-width: 78ch; }
+.explain-intro p:last-child { margin-bottom: 0; }
+.explain-intro b { color: var(--text); font-weight: 600; }
 
 /* ==========================================================================
    Research
@@ -984,9 +1118,9 @@ details.control-group > summary:hover h3 { color: var(--text); }
 }
 .research-modes button:hover { color: var(--text); border-color: var(--border); }
 .research-modes button.active {
-  background: var(--panel-2);
+  background: rgba(95, 224, 198, 0.07);
   color: #fff;
-  border-color: #fff;
+  border-color: var(--border-lit);
   font-weight: 600;
 }
 .research-panel[hidden] { display: none; }
@@ -1004,7 +1138,7 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .research-submodes button:hover { border-color: transparent; color: var(--text); }
 .research-submodes button.active {
   background: transparent;
-  border-bottom-color: #fff;
+  border-bottom-color: var(--accent);
   color: #fff;
 }
 .research-submodes button[hidden] { display: none; }
@@ -1016,56 +1150,136 @@ details.control-group > summary:hover h3 { color: var(--text); }
 /* ==========================================================================
    Rendered notes
    ==========================================================================
-   research/Research.md, as a page. Long-form reading at a comfortable measure,
-   the same as the Literature list beside it — the tables are the exception and
-   scroll on their own rather than forcing the page sideways. */
+   research/Research.md and every notebook page, as a page to read. Set in the
+   reading face at a book's size and a book's measure — about seventy
+   characters a line, where the eye finds the start of the next one without
+   searching. Everything on the page that is data rather than prose keeps the
+   machine's face: tables, code, formulas' source, the experiments' panels.
+   The tables and figures are the exception to the measure, and scroll in
+   their own boxes rather than forcing the page sideways. */
 
+/* As wide as its column, up to the page's width, and centred in it. Said as a
+   width rather than left to the margins: a grid item with auto margins takes
+   the width of its content, and the content of a wide table is wider than a
+   phone — so the whole page scrolled sideways instead of the table. */
 .md {
-  max-width: 860px;
+  width: 100%;
+  max-width: 760px;
   margin: 0 auto;
-  padding-bottom: 64px;
-  line-height: 1.7;
+  padding-bottom: 72px;
+  font-family: var(--font-read);
+  font-size: 19px;
+  line-height: 1.68;
+  color: var(--text-read);
+  /* Figures that line up with capitals, and sit in columns: a notebook is
+     full of numbers set in sentences. */
+  font-variant-numeric: lining-nums;
+  overflow-wrap: break-word;
 }
-.md h2 { font-size: 22px; margin: 0 0 18px; }
+/* The prose keeps to its measure, about seventy-four characters at this size.
+   A figure, a table, a formula and an experiment's panel take the page's
+   whole width, so a drawing's small labels are not shrunk to fit a column
+   set for reading. */
+.md > :is(p, ul, ol, blockquote, h2, h3, h4, h5, h6, hr, .md-callout) {
+  max-width: 610px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.md > p:has(> .md-svg, > img) { max-width: none; }
+/* The page's title, carved: a short rule of gold beneath it ending in a point
+   of light, so the title is set off from the page without a box. */
+.md h2 {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--ivory);
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+.md h2::after {
+  content: '';
+  display: block;
+  width: 92px;
+  height: 7px;
+  margin-top: 14px;
+  background:
+    radial-gradient(circle, var(--gold) 0 2px, rgba(226, 191, 122, 0.35) 2.5px, transparent 3.5px) right center / 7px 7px no-repeat,
+    linear-gradient(90deg, rgba(226, 191, 122, 0), rgba(226, 191, 122, 0.8)) left center / 86px 1px no-repeat;
+}
+/* A section: in the titles' face, in gold — the rubric of an old book, where
+   the headings were the one thing written in a second ink. */
 .md h3 {
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 8px;
-  margin: 34px 0 14px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  margin: 46px 0 14px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, rgba(226, 191, 122, 0.45), rgba(226, 191, 122, 0) 70%) 1;
 }
-.md h4 { font-size: 16px; margin: 24px 0 8px; }
-.md h5, .md h6 { font-size: 14px; margin: 18px 0 6px; color: var(--muted); }
-.md p { margin: 0 0 14px; }
-.md ul, .md ol { margin: 0 0 14px; padding-left: 22px; }
-.md li { margin-bottom: 7px; }
-.md hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
-.md a { color: var(--accent); }
+.md h4 { font-size: 19px; font-weight: 600; line-height: 1.4; color: var(--text); margin: 30px 0 8px; }
+.md h5, .md h6 {
+  font-family: var(--font);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 24px 0 6px;
+  color: var(--muted);
+}
+.md p { margin: 0 0 1.05em; }
+.md ul, .md ol { margin: 0 0 1.05em; padding-left: 1.35em; }
+.md li { margin-bottom: 0.4em; padding-left: 0.2em; }
+.md li::marker { color: var(--gold); }
+.md ol > li::marker { font-family: var(--font); font-size: 0.78em; }
+/* A break between parts of a page: a point of gold between two fading lines. */
+.md hr {
+  border: none;
+  height: 7px;
+  margin: 40px auto;
+  background:
+    radial-gradient(circle, var(--gold) 0 2px, rgba(226, 191, 122, 0.35) 2.5px, transparent 3.5px) center / 7px 7px no-repeat,
+    linear-gradient(90deg, transparent, rgba(226, 191, 122, 0.45) 46%, transparent 46%, transparent 54%, rgba(226, 191, 122, 0.45) 54%, transparent) center / 100% 1px no-repeat;
+}
+.md a {
+  color: var(--accent);
+  text-decoration-color: rgba(95, 224, 198, 0.4);
+  text-underline-offset: 3px;
+}
+.md a:hover { text-decoration-color: var(--accent); }
 /* A term, linked where a page first uses it (book_fill.link_terms): it reads as
    part of the sentence, a dotted line saying there is more, and its title, on
    hover, says what it is. A link to a page stays a link. */
 .md a[title][data-md] {
   color: inherit;
   text-decoration: underline dotted;
-  text-decoration-color: var(--accent);
-  text-underline-offset: 3px;
+  text-decoration-color: rgba(95, 224, 198, 0.75);
+  text-underline-offset: 4px;
 }
 .md a[title][data-md]:hover { color: var(--accent); }
-.md b { color: #fff; }
+.md b { color: #fff; font-weight: 600; }
 
 .md blockquote {
-  margin: 0 0 14px;
-  padding-left: 14px;
-  border-left: 2px solid var(--accent);
-  color: var(--muted);
+  margin: 0 0 1.05em;
+  padding: 2px 0 2px 18px;
+  border-left: 2px solid rgba(226, 191, 122, 0.6);
+  color: var(--text-soft);
+  font-style: italic;
 }
 .md code {
-  background: var(--panel-2);
+  font-family: var(--font);
+  background: rgba(214, 245, 236, 0.06);
+  border: 1px solid rgba(214, 245, 236, 0.08);
   border-radius: 4px;
   padding: 1px 5px;
-  font-size: 12.5px;
+  font-size: 0.76em;
+  color: #d3ece6;
+  overflow-wrap: anywhere;
 }
 .md pre {
   background: var(--panel);
@@ -1073,26 +1287,53 @@ details.control-group > summary:hover h3 { color: var(--text); }
   border-radius: var(--radius);
   padding: 12px 14px;
   overflow-x: auto;
+  line-height: 1.55;
 }
-.md pre code { background: none; padding: 0; font-size: 12.5px; }
+.md pre code { background: none; border: none; padding: 0; font-size: 12.5px; color: var(--code-text); overflow-wrap: normal; }
 
 /* A wide table scrolls inside its own box. Letting it push the page sideways
-   makes every paragraph on the page scroll with it. */
-.md-scroll { overflow-x: auto; margin: 0 0 18px; }
+   makes every paragraph on the page scroll with it. The box is a plate on the
+   page: a hairline frame, the rows ruled across like a ledger, and no lines
+   down — the columns are held by their spacing. */
+.md-scroll {
+  overflow-x: auto;
+  margin: 6px 0 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(17, 28, 34, 0.55);
+}
 /* A long table sorts by the column whose head is clicked (Book.sortable). */
 .md-sortable th { cursor: pointer; user-select: none; }
-.md-sortable th:hover { color: var(--text); }
+.md-sortable th:hover { color: #fff; }
 .md-sortable th[data-sort="up"]::after { content: " ▲"; }
 .md-sortable th[data-sort="down"]::after { content: " ▼"; }
-.md table { border-collapse: collapse; font-size: 13px; min-width: 100%; }
+.md table {
+  border-collapse: collapse;
+  font-family: var(--font);
+  font-size: 12.5px;
+  line-height: 1.55;
+  min-width: 100%;
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
 .md th, .md td {
-  border: 1px solid var(--border);
-  padding: 6px 11px;
+  border: none;
+  border-bottom: 1px solid rgba(44, 67, 75, 0.7);
+  padding: 7px 12px;
   text-align: left;
   vertical-align: top;
 }
-.md th { background: var(--panel-2); color: var(--text); white-space: nowrap; }
-.md-status { color: var(--muted); }
+.md tbody tr:last-child td { border-bottom: none; }
+.md th {
+  background: rgba(26, 42, 50, 0.7);
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap;
+  border-bottom-color: rgba(226, 191, 122, 0.35);
+}
+.md tbody tr:hover td { background: rgba(95, 224, 198, 0.045); }
+.md td b { color: #fff; }
+.md-status { color: var(--muted); font-family: var(--font); font-size: 13px; }
 /* A heading someone links to lands below the sticky top bar, not under it. */
 .md h2, .md h3, .md h4 { scroll-margin-top: 72px; }
 
@@ -1106,8 +1347,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 .book-layout {
   display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  gap: 32px;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 40px;
   max-width: 1240px;
   margin: 0 auto;
 }
@@ -1118,9 +1359,16 @@ details.control-group > summary:hover h3 { color: var(--text); }
   max-height: calc(100vh - var(--topbar-h, 47px) - 43px);
   overflow-y: auto;
   font-size: 13px;
-  padding-right: 4px;
+  padding-right: 6px;
 }
-.book-title { font-weight: 600; font-size: 14px; color: var(--text); margin: 4px 0 10px; }
+.book-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  color: var(--ivory);
+  margin: 4px 0 12px;
+}
 .book-toc-controls { display: grid; gap: 6px; margin: 0 0 16px; }
 .book-search {
   width: 100%;
@@ -1128,33 +1376,39 @@ details.control-group > summary:hover h3 { color: var(--text); }
   border: 1px solid var(--border);
   color: var(--text);
   padding: 6px 8px;
-  border-radius: 6px;
+  border-radius: 5px;
   font: inherit;
 }
-.book-search:focus { outline: none; border-color: var(--accent-dim); }
+.book-search:focus { outline: none; border-color: var(--accent-dim); box-shadow: 0 0 0 3px rgba(95, 224, 198, 0.12); }
 .book-toc-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .book-toc-filters select { min-width: 0; padding: 4px 6px; font-size: 12px; }
-.book-toc-date { color: var(--muted); font-size: 11px; }
+.book-toc-date { font-family: var(--font); color: var(--muted); font-size: 11px; }
 .book-toc-empty { color: var(--muted); margin: 4px 8px; }
 .book-part { margin-bottom: 18px; }
 .book-part h3 { margin: 0 0 6px; }
+/* A page in the contents is a title, so it is set in the reading face — the
+   contents of a book rather than a list of files. */
 .book-toc-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   padding: 5px 8px;
-  border-radius: 6px;
+  border-radius: 5px;
   color: var(--text-soft);
   text-decoration: none;
-  line-height: 1.4;
+  font-family: var(--font-read);
+  font-size: 14.5px;
+  line-height: 1.35;
 }
-.book-toc-item:hover { background: var(--panel); }
-.book-toc-item.active { background: var(--panel-2); color: var(--text); }
+.book-toc-item:hover { background: rgba(214, 245, 236, 0.05); color: var(--text); }
+.book-toc-item.active { background: rgba(95, 224, 198, 0.09); color: #fff; box-shadow: inset 0 0 0 1px rgba(95, 224, 198, 0.18); }
 .book-toc-item.unwritten { color: var(--muted-2); }
-.book-toc-item .book-chip { justify-self: start; margin-top: 3px; }
+.book-toc-item .book-chip { justify-self: start; margin-top: 4px; }
 
 .book-chip {
   display: inline-block;
+  font-family: var(--font);
   font-size: 10.5px;
+  line-height: 1.6;
   letter-spacing: 0.02em;
   padding: 0 7px;
   border: 1px solid currentColor;
@@ -1170,11 +1424,13 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-chip-planned { color: var(--muted-2); }
 
 .book-kicker {
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-family: var(--font);
+  font-size: 11.5px;
+  line-height: 1.6;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 4px 0 6px !important;
+  margin: 4px auto 10px !important;
 }
 .book-kicker a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
 .book-kicker a:hover { color: var(--text); border-bottom-color: var(--text); }
@@ -1182,9 +1438,14 @@ details.control-group > summary:hover h3 { color: var(--text); }
 
 /* The parts of the notebook, each in its colour (the author, 2026-11-09: seven parts,
    the part's colour as a stripe, and a mark for the kind of page). A page wears its
-   part's colour as a band above its title; in the contents a part opens and shuts,
-   and in a list that mixes parts every page has its part's stripe. */
-.book-page { border-top: 4px solid var(--part, transparent); padding-top: 12px; }
+   part's colour as a band above its title, burning out towards the right; in the
+   contents a part opens and shuts, and in a list that mixes parts every page has its
+   part's stripe. */
+.book-page {
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--part, transparent), transparent 75%) 1;
+  padding-top: 14px;
+}
 .book-legend {
   display: flex;
   flex-wrap: wrap;
@@ -1196,8 +1457,8 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-legend > span { display: inline-flex; align-items: center; }
 .book-section {
   margin-bottom: 8px;
-  border-left: 3px solid var(--part, var(--border));
-  border-radius: 4px;
+  border-left: 2px solid var(--part, var(--border));
+  border-radius: 0 5px 5px 0;
   background: color-mix(in srgb, var(--part, transparent) 6%, transparent);
 }
 .book-section[open] { padding-bottom: 6px; }
@@ -1205,35 +1466,35 @@ details.control-group > summary:hover h3 { color: var(--text); }
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 7px 8px;
+  padding: 8px 8px;
   cursor: pointer;
   list-style: none;
   font-weight: 600;
-  font-size: 11.5px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--part, var(--text));
 }
 .book-section > summary::-webkit-details-marker { display: none; }
 .book-section > summary::before { content: "\25B8"; font-size: 10px; transition: transform 0.15s; }
 .book-section[open] > summary::before { transform: rotate(90deg); }
-.book-section > summary:hover { background: var(--panel); }
+.book-section > summary:hover { background: rgba(214, 245, 236, 0.04); }
 .book-section-title { flex: 1; }
 .book-section-count { color: var(--muted); font-weight: 400; letter-spacing: 0; }
 .book-topic-head {
-  margin: 8px 8px 2px;
-  font-size: 10.5px;
+  margin: 10px 8px 3px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted-2);
 }
-.book-part .book-toc-item { border-left: 3px solid var(--part, transparent); border-radius: 0 6px 6px 0; }
+.book-part .book-toc-item { border-left: 2px solid var(--part, transparent); border-radius: 0 5px 5px 0; }
 .book-mark {
   display: inline-block;
   width: 8px;
   height: 8px;
-  margin-right: 7px;
+  margin-right: 8px;
   vertical-align: 1px;
   box-sizing: border-box;
 }
@@ -1245,14 +1506,20 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-note { color: var(--muted); font-size: 12.5px; }
 .book-reason { color: var(--warn); font-size: 12.5px; }
 
-/* What an experiment runs, and how far it has got. */
+/* What an experiment runs, and how far it has got. An instrument set into the
+   page, so it speaks in the machine's face rather than the page's. */
 .book-experiment {
-  margin: 0 0 18px;
+  margin: 0 0 22px;
   padding: 12px 16px 4px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--panel);
+  box-shadow: var(--lift);
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.55;
 }
+.book-experiment p { margin: 0 0 8px; }
 .book-exp-head {
   display: flex;
   flex-wrap: wrap;
@@ -1288,32 +1555,48 @@ details.control-group > summary:hover h3 { color: var(--text); }
 .book-run-slow span { background: var(--muted-2); opacity: 0.6; }
 .book-run-blocked { outline: 1px solid var(--danger); }
 
-/* A figure or diagram: an SVG drawn on its own dark card, as wide as the text. */
-.md img { display: block; max-width: 100%; height: auto; margin: 6px auto 10px; border-radius: var(--radius); }
-.md-svg { margin: 6px 0 10px; }
-.md-svg svg { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: var(--radius); }
+/* A figure or diagram: an SVG drawn on its own dark card, as wide as the text,
+   set into the page like a plate in a book — a hairline round it and a little
+   depth beneath. */
+.md img { display: block; max-width: 100%; height: auto; margin: 10px auto 14px; border-radius: var(--radius); }
+.md-svg { margin: 10px 0 18px; }
+.md-svg svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--border), var(--shadow-2);
+}
 
 /* Obsidian's callouts: a box with a coloured edge and a title, folded away
-   when it is a <details>. */
+   when it is a <details>. The title speaks in the machine's face, as a label
+   does; what follows is still the page's prose, a size down. */
 .md-callout {
-  margin: 0 0 16px;
-  padding: 10px 16px 2px;
+  margin: 0 0 20px;
+  padding: 12px 18px 4px;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent-dim);
-  border-radius: var(--radius);
+  border-left: 2px solid var(--accent-dim);
+  border-radius: 0 var(--radius) var(--radius) 0;
   background: var(--panel);
+  box-shadow: var(--lift);
+  font-size: 16.5px;
 }
 .md-callout > summary, .md-callout-title {
   margin: 0 0 8px !important;
+  font-family: var(--font);
+  font-size: 11.5px;
   font-weight: 600;
-  color: var(--text);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
 }
 .md-callout > summary { cursor: pointer; }
-details.md-callout:not([open]) { padding-bottom: 10px; }
+details.md-callout:not([open]) { padding-bottom: 12px; }
 details.md-callout:not([open]) > summary { margin: 0 !important; }
 .md-callout-quote { border-left-color: var(--accent); }
 .md-callout-example { border-left-color: var(--muted-2); }
-.md-callout-example, .md-callout-example li, .md-callout-example p { font-size: 13.5px; }
+.md-callout-example, .md-callout-example li, .md-callout-example p { font-size: 15.5px; }
 .md-callout-question { border-left-color: var(--warn); }
 .md-callout-info { border-left-color: var(--info); }
 .md-callout-summary, .md-callout-success { border-left-color: var(--ok); }
@@ -1323,7 +1606,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 .md-math {
   overflow-x: auto;
   overflow-y: hidden;
-  margin: 6px 0 16px;
+  margin: 6px 0 18px;
   padding: 4px 0;
   color: var(--text);
   white-space: pre-wrap;
@@ -1352,6 +1635,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift);
   padding: 9px 11px;
   min-width: 0;
 }
@@ -1407,6 +1691,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   background: var(--stage);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), var(--shadow-1);
   overflow: hidden;
 }
 #lineageCanvas,
@@ -1488,8 +1773,8 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 }
 .diagram-tabs button:hover { color: var(--text); }
 .diagram-tabs button.active {
-  background: var(--panel-2);
-  border-color: #fff;
+  background: rgba(95, 224, 198, 0.07);
+  border-color: var(--border-lit);
   color: #fff;
   font-weight: 600;
 }
@@ -1599,15 +1884,16 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
    The claim sits above the evidence for it. Set as reading text, because it
    is: a paragraph of argument, not a label. */
 .diagram-thesis {
-  padding: 12px 14px;
+  padding: 12px 16px;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
   background: var(--panel);
+  box-shadow: var(--lift);
   max-width: 78ch;
 }
-.diagram-thesis h4 { margin: 0 0 8px; font-size: 14px; color: var(--text); }
-.diagram-thesis p { margin: 0 0 7px; font-size: 12.5px; line-height: 1.6; color: var(--text-soft); }
+.diagram-thesis h4 { margin: 0 0 8px; font-family: var(--font-display); font-size: 15px; letter-spacing: 0.04em; color: var(--gold); }
+.diagram-thesis p { margin: 0 0 7px; font-family: var(--font-read); font-size: 15px; line-height: 1.6; color: var(--text-soft); }
 .diagram-thesis p:last-child { margin-bottom: 0; }
 .diagram-thesis b { color: var(--text); font-weight: 600; margin-right: 4px; }
 
@@ -1651,7 +1937,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   max-width: 1240px;
   margin: 0 auto 14px;
 }
-.sims-head h2 { margin: 0; font-size: 20px; }
+.sims-head h2 { margin: 0; font-size: 24px; }
 
 .sim-grid {
   max-width: 1240px;
@@ -1662,6 +1948,8 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   align-items: stretch;
 }
 
+/* A plate: lit a little along its top, as every panel here is, with a seam of
+   gold-to-green that only shows when the pointer is on it. */
 .sim-card {
   position: relative;
   display: flex;
@@ -1669,15 +1957,15 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   gap: 10px;
   min-width: 0;
   padding: 15px 16px;
-  background: var(--panel);
+  background: linear-gradient(180deg, rgba(214, 245, 236, 0.025), rgba(214, 245, 236, 0) 46%), var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-1);
+  box-shadow: var(--lift), var(--shadow-1);
   transition: box-shadow 0.15s, border-color 0.15s, background 0.15s;
 }
 .sim-card:hover {
   border-color: var(--border-strong);
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--lift), var(--shadow-2);
 }
 
 /* The one cell that is a button rather than a card. Dashed, because it is an
@@ -1688,26 +1976,30 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   gap: 12px;
   min-height: 190px;
   background: transparent;
-  border: 1px dashed var(--border);
+  border: 1px dashed var(--border-strong);
   color: var(--muted);
   font: inherit;
   font-size: 13.5px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  box-shadow: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s, box-shadow 0.15s;
 }
 .sim-card-new:hover {
   border-color: var(--accent);
   color: var(--text);
-  background: rgba(79, 179, 255, 0.05);
+  background: rgba(95, 224, 198, 0.04);
+  box-shadow: 0 0 28px rgba(95, 224, 198, 0.08), inset 0 0 22px rgba(95, 224, 198, 0.04);
 }
 .sim-new-mark {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
   border-radius: 50%;
   border: 1px solid currentColor;
+  color: var(--gold);
 }
+.sim-card-new:hover .sim-new-mark { box-shadow: 0 0 14px rgba(226, 191, 122, 0.35); }
 .sim-new-mark svg { width: 17px; height: 17px; }
 
 /* ---- the head: what it is called, and the way to everything else ---- */
@@ -1752,7 +2044,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   color: var(--muted);
   cursor: pointer;
 }
-.icon-button:hover { background: var(--panel-2, rgba(255,255,255,0.06)); color: var(--text); }
+.icon-button:hover { background: var(--panel-2); color: var(--text); }
 /* Stroked, not filled. The close crosses are two lines written as one path,
    which with SVG's default fill:black and stroke:none is a shape of zero area
    painted in a colour nobody can see — the button was there and worked, and
@@ -1813,9 +2105,10 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 .sim-facts div { min-width: 0; }
 .sim-facts b {
   display: block;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--ivory);
+  font-variant-numeric: tabular-nums;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -1866,9 +2159,9 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 .sim-icon { display: inline-grid; place-items: center; flex: 0 0 auto; }
 .sim-icon svg { width: 15px; height: 15px; display: block; }
 
-.sim-run { background: var(--accent-dim); border-color: var(--accent); color: #fff; }
+.sim-run { background: var(--accent-dim); border-color: rgba(95, 224, 198, 0.55); color: #fff; }
 /* Dark ink on the bright fill, for the reason button.primary takes it. */
-.sim-run:hover { background: var(--accent); color: var(--stage); }
+.sim-run:hover { background: var(--accent); color: var(--stage); box-shadow: 0 0 16px var(--glow); }
 .sim-run.is-running { background: var(--warn-fill); border-color: var(--warn-edge); }
 .sim-run.is-running:hover { background: var(--warn-fill-hover); }
 .sim-run[disabled] { opacity: 0.75; cursor: default; }
@@ -1886,9 +2179,9 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   display: flex;
   flex-direction: column;
   background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  box-shadow: var(--shadow-3);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  box-shadow: var(--lift), var(--shadow-3);
 }
 .sim-menu[hidden] { display: none; }
 .sim-menu button {
@@ -1901,7 +2194,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   border-radius: 6px;
   cursor: pointer;
 }
-.sim-menu button:hover { background: rgba(255, 255, 255, 0.06); }
+.sim-menu button:hover { background: rgba(214, 245, 236, 0.06); }
 .sim-menu b { display: block; font-size: 12.5px; font-weight: 600; color: var(--text); }
 .sim-menu i {
   display: block;
@@ -1924,16 +2217,17 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
      the button that acts on them are on screen together. */
   max-height: calc(100vh - 28px);
   padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
   background: var(--panel);
   color: var(--text);
+  box-shadow: var(--lift), var(--shadow-3), 0 0 60px rgba(95, 224, 198, 0.05);
   /* clip, not hidden: a box that hides its overflow can still be scrolled by
      script, and focusing a button far out to the right once scrolled a whole
      dialog sideways, its contents out of view. */
   overflow: clip;
 }
-.sim-dialog::backdrop { background: rgba(3, 6, 10, 0.66); backdrop-filter: blur(2px); }
+.sim-dialog::backdrop { background: rgba(2, 4, 6, 0.72); backdrop-filter: blur(3px); }
 /* A dialog is display:block when open and display:none when closed, so the
    column has to be attached to [open] or it would show while shut. */
 .sim-dialog[open] { display: flex; flex-direction: column; }
@@ -1961,10 +2255,19 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 15px 18px;
+  padding: 14px 18px;
   border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(214, 245, 236, 0.03), rgba(214, 245, 236, 0));
 }
-.sim-dialog-head h2 { margin: 0; font-size: 17px; flex: 0 0 auto; }
+.sim-dialog-head h2 {
+  margin: 0;
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--ivory);
+}
 /* A run's settings are headed by its name, which can be hundreds of characters
    long: the title shrinks to what fits, so the close button and the settings
    below stay on screen. */
@@ -2022,9 +2325,9 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 .settings-body h3 {
   margin: 0 0 5px;
   font-size: 10px;
-  color: var(--accent);
+  color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.14em;
 }
 .settings-body dl {
   margin: 0 0 12px;
@@ -2063,22 +2366,42 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 
 /* ==========================================================================
    Home
-   ========================================================================== */
+   ==========================================================================
+   The entrance. A dark wall with an inscription at its edges; a seal of runes
+   around the mark; the title decoded out of the machine's digits and the old
+   script; and, rising out of the dark behind it all, a world that is actually
+   running. The order things arrive in is the story — the wall, the seal, the
+   word, the world, and last the ways in — and it takes three seconds, during
+   which everything can already be clicked.
+
+   Every arrival is an opacity or a transform, which the compositor plays
+   without asking the page to paint; the two exceptions, the ring drawing its
+   circles and the title's letters, are small and over in two seconds. None of
+   it sits behind a blur, because behind everything here is a canvas redrawn
+   thirty times a second and a blur over it would be redone with it. A reader
+   who asks for less motion gets the page as it ends, with nothing turning. */
 
 /* The stage fills what is left under the top bar, edge to edge: the view's
    usual padding would put a frame around something meant to be a backdrop. */
 #view-home { padding: 0; }
 
+/* The title in the space above a foot that holds the note and the numbers: a
+   grid rather than everything placed over everything, so on a short screen
+   the ways in can never land on the note. The picture, the inscription and
+   the veil lie under all of it. */
 .home-stage {
   position: relative;
-  /* What is left under the top bar: its height is measured (app.js), and the
-     small viewport height keeps a phone's sliding address bar from cutting
-     the bottom off. */
-  height: calc(100vh - var(--topbar-h, 47px));
-  height: calc(100svh - var(--topbar-h, 47px));
-  min-height: 420px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: minmax(min-content, 1fr) auto;
+  /* At least what is left under the top bar: its height is measured
+     (app.js), and the small viewport height keeps a phone's sliding address
+     bar from cutting the bottom off. Taller only when its words need it. */
+  min-height: calc(100vh - var(--topbar-h, 47px));
+  min-height: max(460px, calc(100svh - var(--topbar-h, 47px)));
   overflow: hidden;
   background: var(--stage);
+  isolation: isolate;
 }
 
 /* Not interactive, and it says so: no pointer events at all, so a click or a
@@ -2092,145 +2415,280 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   pointer-events: none;
 }
 
-/* Darkened towards the middle and the bottom left, which is where the words
-   are. White on a bright cluster of agents is otherwise unreadable. Mixed in
-   the background's own colour, so an empty patch of canvas stays exactly
-   the stage colour no matter how heavily the veil sits on it. */
+/* Darkened towards the middle, where the words are, and at the foot and the
+   corners, where the note and the numbers are: white on a bright cluster of
+   agents is otherwise unreadable. Mixed in the stage's own colour, so an
+   empty patch of canvas stays exactly the stage colour no matter how heavily
+   the veil sits on it. */
 .home-veil {
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(120% 90% at 50% 45%, rgba(13, 17, 23, 0.52) 0%, rgba(13, 17, 23, 0.16) 45%, rgba(13, 17, 23, 0) 75%),
-    linear-gradient(to top, rgba(13, 17, 23, 0.68) 0%, rgba(13, 17, 23, 0) 42%);
+    radial-gradient(64% 56% at 50% 47%, rgba(5, 8, 11, 0.66) 0%, rgba(5, 8, 11, 0.3) 48%, rgba(5, 8, 11, 0) 76%),
+    radial-gradient(140% 120% at 50% 45%, rgba(5, 8, 11, 0) 52%, rgba(5, 8, 11, 0.7) 100%),
+    linear-gradient(to top, rgba(5, 8, 11, 0.72) 0%, rgba(5, 8, 11, 0) 30%);
+}
+
+/* The inscription, over the world and under the words. */
+.home-glyphs {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
 }
 
 .home-hero {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  z-index: 3;
+  grid-column: 1 / -1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   pointer-events: none;
   text-align: center;
-  padding: 0 24px;
+  padding: 28px 24px 8px;
 }
 
-/* The wordmark and the mark stand together on one line, with the subtitle
-   under both — so the subtitle centres on the pair rather than on the words. */
-.home-headline {
-  display: flex;
+/* ---- the seal ---- */
+
+.home-seal {
+  position: relative;
+  width: clamp(112px, 19vmin, 204px);
+  aspect-ratio: 1;
+  margin-bottom: clamp(16px, 3.2vh, 32px);
+}
+/* Each band its own layer, so turning it is the compositor's work alone. */
+.home-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  will-change: transform;
+}
+.home-ring-outer { color: var(--gold); }
+.home-ring-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.7;
+  stroke-dasharray: 1;
+  opacity: 0.5;
+}
+.home-ring-band use {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+}
+.home-ring-point { fill: currentColor; opacity: 0.55; }
+.home-ring-notch { fill: currentColor; opacity: 0.85; }
+.home-ring-inner circle { fill: none; stroke: var(--accent); stroke-width: 0.6; opacity: 0.4; stroke-dasharray: 1; }
+.home-ring-inner .home-ring-dots { stroke-width: 1.3; stroke-dasharray: 0.4 5.6; stroke-linecap: round; opacity: 0.6; }
+
+/* The six agents at the centre, lit faintly from behind. */
+.home-mark {
+  position: absolute;
+  inset: 26%;
+  width: 48%;
+  height: 48%;
+  color: var(--ivory);
+  filter: drop-shadow(0 0 16px rgba(95, 224, 198, 0.3));
+}
+
+/* ---- the title ---- */
+
+/* The site's titling face, in its own capitals and small capitals, spaced as
+   an inscription is. The trailing margin takes back the space the tracking
+   leaves after the last letter, so the word centres on its letters. */
+.home-title {
+  margin: 0 -0.08em 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 7.6vw, 108px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+  color: var(--ivory);
+  text-shadow: 0 0 36px rgba(226, 191, 122, 0.3), 0 2px 30px rgba(0, 0, 0, 0.85);
+}
+.home-word { display: inline-block; white-space: nowrap; }
+/* A letter in disguise keeps its own width — it is there, only unseen — so
+   the title is its final size from the first frame and nothing shifts as it
+   resolves. The cover over it shows what it is pretending to be. */
+.home-title .glyph { position: relative; display: inline-block; }
+.home-title .glyph.is-hidden { color: transparent; text-shadow: none; }
+.glyph-cover {
+  position: absolute;
+  inset: 0;
+  display: none;
   align-items: center;
   justify-content: center;
-  gap: clamp(14px, 2.4vw, 34px);
+  font-style: normal;
+  pointer-events: none;
 }
-
-/* Sized against the same viewport width as the title, so the two keep their
-   proportions at every width instead of the mark swelling on a small screen. */
-.home-mark {
-  width: clamp(46px, 9vw, 118px);
-  height: clamp(46px, 9vw, 118px);
-  flex: 0 0 auto;
-  color: #fff;
-  filter: drop-shadow(0 2px 30px rgba(0, 0, 0, 0.7));
-}
-
-/* The site's typeface at a light weight it really has: JetBrains Mono ships
-   every weight from 100 to 800. font-synthesis stops the browser faking a thin
-   one by shaving the strokes where a fallback face lacks it; a real regular is
-   better than a counterfeit light. */
-.home-title {
-  margin: 0;
+.glyph-cover[data-mode="digit"],
+.glyph-cover[data-mode="rune"] { display: flex; }
+.glyph-cover b {
+  display: none;
   font-family: var(--font);
-  font-size: clamp(38px, 8.2vw, 112px);
+  font-size: 0.6em;
   font-weight: 300;
-  font-synthesis: none;
-  line-height: 1.04;
-  color: #fff;
-  letter-spacing: 0.055em;
-  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.75);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0;
+  color: var(--accent);
+  text-shadow: 0 0 14px rgba(95, 224, 198, 0.75);
 }
+.glyph-cover[data-mode="digit"] b { display: block; }
+.glyph-cover .rune {
+  display: none;
+  width: 0.42em;
+  height: 0.68em;
+  color: var(--gold);
+  stroke-width: 1.15;
+  filter: drop-shadow(0 0 6px rgba(226, 191, 122, 0.65));
+}
+.glyph-cover[data-mode="rune"] .rune { display: block; }
+
+/* ---- the subtitle, typed ---- */
 
 .home-subtitle {
-  margin: 18px 0 0;
+  margin: clamp(14px, 2.4vh, 24px) -0.3em 0 0;
   font-family: var(--font);
-  font-size: clamp(13px, 1.7vw, 20px);
+  font-size: clamp(11px, 1.3vw, 15px);
   font-weight: 400;
-  font-synthesis: none;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+  color: var(--accent);
+  text-shadow: 0 0 18px rgba(95, 224, 198, 0.45), 0 2px 18px rgba(0, 0, 0, 0.9);
 }
-
-/* Resolving out of a blur, with the letters drawing together as they land.
-   Restarted by re-adding the class whenever the tab is opened, so it plays
-   every time rather than only on the first load. */
-.home-stage.play .home-title {
-  animation: home-resolve 2600ms cubic-bezier(0.16, 0.84, 0.24, 1) both,
-             home-tighten-title 2600ms cubic-bezier(0.16, 0.84, 0.24, 1) both;
-}
-.home-stage.play .home-subtitle {
-  animation: home-resolve 2000ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both,
-             home-tighten-sub 2000ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both;
-}
-.home-stage.play .home-note {
-  animation: home-fade 1600ms ease-out 1900ms both;
-}
-
-/* The mark arrives after the words have resolved: it turns into place and
-   settles, rather than fading in alongside them where it would read as one
-   more thing appearing at once. */
-.home-stage.play .home-mark {
-  animation: home-mark-in 2200ms cubic-bezier(0.16, 0.84, 0.24, 1) 700ms both;
-}
-
-@keyframes home-mark-in {
-  from { opacity: 0; filter: blur(12px); transform: scale(0.55) rotate(-32deg); }
-  55%  { opacity: 1; }
-  to   { opacity: 1; filter: blur(0);    transform: none; }
-}
-
-/* Letter-spacing is animated separately, because the title and the subtitle
-   settle on different values and a shared keyframe would end both on the
-   title's — quietly overriding the subtitle's own rule, since the animation
-   holds its final state. */
-@keyframes home-resolve {
-  from { opacity: 0; filter: blur(18px); transform: translateY(14px); }
-  60%  { opacity: 1; }
-  to   { opacity: 1; filter: blur(0);    transform: none; }
-}
-
-@keyframes home-tighten-title { from { letter-spacing: 0.3em; }  to { letter-spacing: 0.055em; } }
-@keyframes home-tighten-sub   { from { letter-spacing: 0.42em; } to { letter-spacing: 0.22em; } }
-
-@keyframes home-fade {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: none; }
-}
-
-.home-note {
+/* What is still to come is already there, unseen, so the line is its full
+   width from the start and stays centred as it types. */
+.home-untyped { color: transparent; text-shadow: none; }
+/* A block cursor of no width of its own, for the same reason. */
+.home-caret { position: relative; display: inline-block; width: 0; height: 1em; vertical-align: -0.12em; }
+.home-caret::after {
+  content: '';
   position: absolute;
-  left: 22px;
-  bottom: 22px;
-  max-width: 380px;
-  padding: 13px 15px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-left: 2px solid var(--accent);
-  border-radius: var(--radius);
-  background: rgba(13, 17, 23, 0.62);
-  backdrop-filter: blur(6px);
+  left: -0.2em;
+  top: 0;
+  width: 0.62em;
+  height: 1.12em;
+  background: currentColor;
+  box-shadow: 0 0 12px var(--glow);
+}
+.home-caret.is-done::after { opacity: 0; }
+
+/* ---- the ways in ---- */
+
+.home-doors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(26px, 5.4vh, 50px);
+  pointer-events: auto;
+}
+/* Doors rather than buttons: a dark lintel with a gold edge, the rune of the
+   tab it opens, and light behind it when the pointer comes near. Opaque
+   rather than blurred, for the reason the section gives. */
+.home-door {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 10px 16px;
+  background: rgba(5, 8, 11, 0.78);
+  border: 1px solid rgba(226, 191, 122, 0.32);
+  border-radius: 3px;
+  color: var(--text-soft);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+}
+.home-door .rune { width: 8px; height: 13px; color: var(--gold); opacity: 0.75; transition: opacity 0.2s ease; }
+.home-door:hover:not(:disabled) {
+  background: rgba(10, 18, 22, 0.92);
+  border-color: var(--gold);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(226, 191, 122, 0.25), 0 0 26px rgba(226, 191, 122, 0.18), 0 6px 22px rgba(0, 0, 0, 0.45);
+}
+.home-door:hover .rune { opacity: 1; }
+
+/* ---- the note and the numbers ---- */
+
+/* A card with two corners marked in gold, the way a plate in an old atlas is
+   framed. */
+.home-note {
+  position: relative;
+  z-index: 3;
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  align-self: end;
+  margin: 16px 24px 24px;
+  max-width: 370px;
+  padding: 14px 18px;
+  border: 1px solid rgba(214, 245, 236, 0.1);
+  border-radius: 3px;
+  background:
+    linear-gradient(var(--gold), var(--gold)) top left / 14px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) top left / 1px 14px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom right / 14px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom right / 1px 14px no-repeat,
+    rgba(5, 8, 11, 0.8);
 }
 .home-note p {
   margin: 0;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: rgba(230, 237, 243, 0.82);
+  font-family: var(--font-read);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-soft);
 }
-.home-note b { color: #fff; font-weight: 600; }
+.home-note b { color: var(--ivory); font-weight: 600; }
+
+/* The world's numbers, as the machine reports them. */
+.home-readout {
+  position: relative;
+  z-index: 3;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  margin: 16px 24px 24px 0;
+  pointer-events: none;
+  font-size: 11px;
+  color: var(--muted);
+}
+.home-readout-head {
+  margin: 0 0 6px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: right;
+}
+.home-readout dl {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 16px;
+  margin: 0;
+}
+.home-readout dt { letter-spacing: 0.06em; }
+.home-readout dd {
+  margin: 0;
+  min-width: 6ch;
+  text-align: right;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 10px rgba(95, 224, 198, 0.35);
+}
+
+/* ---- the wordmark in the bar ---- */
 
 /* The wordmark is the way back here, so it has to look pressable. */
 .brand {
@@ -2240,16 +2698,73 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   margin: 0;
   cursor: pointer;
   color: var(--text);
-  border-radius: 6px;
+  border-radius: 4px;
 }
-.brand:hover:not(:disabled) { border-color: transparent; color: #fff; }
-.brand.active h1 { color: #fff; }
-.brand.active { box-shadow: inset 0 -2px 0 var(--accent); }
+.brand h1 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+  white-space: nowrap;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+.brand:hover:not(:disabled) { border-color: transparent; background: none; }
+.brand:hover h1 { color: #fff; text-shadow: 0 0 14px rgba(226, 191, 122, 0.45); }
+.brand.active h1 { color: var(--gold); }
 
+/* ---- the arrival ---- */
+
+/* Restarted by re-adding the class whenever the tab is opened, so it plays
+   every time rather than only on the first load. The two bands of the seal
+   turn for as long as the page is open, which is the one thing here that
+   does not stop — and it is a transform of a layer of its own. */
+@media (prefers-reduced-motion: no-preference) {
+  .home-ring-outer { animation: home-turn 240s linear infinite; }
+  .home-ring-inner { animation: home-turn 150s linear infinite reverse; }
+
+  .home-stage.play .home-glyphs { animation: home-appear 2200ms ease-out both; }
+  .home-stage.play #homeCanvas { animation: home-world 3400ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms both; }
+  .home-stage.play .home-ring-line { animation: home-draw 1900ms cubic-bezier(0.6, 0.05, 0.2, 1) 120ms both; }
+  .home-stage.play .home-ring-inner circle:first-child { animation: home-draw 1500ms cubic-bezier(0.6, 0.05, 0.2, 1) 450ms both; }
+  .home-stage.play .home-ring-dots { animation: home-appear 1200ms ease-out 900ms both; }
+  .home-stage.play .home-ring-band > * { animation: home-glint 1000ms ease-out both; animation-delay: calc(420ms + var(--i) * 55ms); }
+  .home-stage.play .home-ring-notch { animation: home-appear 800ms ease-out 1500ms both; }
+  .home-stage.play .home-mark { animation: home-mark-in 1700ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both; }
+  .home-stage.play .home-doors { animation: home-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 2300ms both; }
+  .home-stage.play .home-note { animation: home-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 2700ms both; }
+  .home-stage.play .home-readout { animation: home-appear 1200ms ease-out 2900ms both; }
+  .home-caret.is-done::after { opacity: 1; animation: home-blink 0.9s step-end 3 forwards; }
+  .home-readout dd.is-new { animation: home-tick 800ms ease-out; }
+}
+/* Nothing typed, nothing blinking: the words are simply there. */
+@media (prefers-reduced-motion: reduce) {
+  .home-caret { display: none; }
+}
+
+@keyframes home-turn { to { transform: rotate(360deg); } }
+@keyframes home-appear { from { opacity: 0; } }
+@keyframes home-world { from { opacity: 0; transform: scale(1.05); } }
+@keyframes home-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes home-glint { from { opacity: 0; } 35% { opacity: 1; } }
+@keyframes home-mark-in { from { opacity: 0; transform: scale(0.6) rotate(-30deg); } }
+@keyframes home-rise { from { opacity: 0; transform: translateY(12px); } }
+@keyframes home-blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes home-tick { from { color: #fff; text-shadow: 0 0 14px var(--accent); } }
+
+/* A phone: one column — the seal, the title, the ways in stacked one above
+   another, and the note across the foot. The numbers step aside. */
 @media (max-width: 640px) {
-  .home-note { left: 12px; right: 12px; bottom: 12px; max-width: none; }
-  .home-headline { flex-direction: column-reverse; gap: 14px; }
-  .home-mark { width: 68px; height: 68px; }
+  .home-stage { grid-template-columns: minmax(0, 1fr); }
+  .home-hero { padding: 40px 16px 24px; }
+  .home-seal { width: 108px; }
+  .home-title { font-size: clamp(30px, 10vw, 44px); }
+  .home-subtitle { letter-spacing: 0.22em; margin-right: -0.22em; }
+  .home-doors { flex-direction: column; align-items: stretch; width: min(100%, 290px); gap: 10px; }
+  .home-door { justify-content: center; padding: 12px 16px; }
+  .home-note { justify-self: stretch; margin: 0 16px 20px; max-width: none; }
+  .home-note p { font-size: 14.5px; }
+  .home-readout { display: none; }
 }
 
 /* ==========================================================================
@@ -2271,20 +2786,23 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 /* The step's name and number head the explanation, because that is what they
    are naming — the words, not the row of three panes. */
 .ex-title {
-  margin: 0 0 2px;
-  font-size: 17px;
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: 19px;
   font-weight: 600;
-  line-height: 1.25;
-  color: var(--text);
+  line-height: 1.3;
+  color: var(--ivory);
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   text-align: left;
 }
 .ex-note p.ex-step {
-  margin: 0 0 10px;
-  font-size: 12px;
+  margin: 0 0 12px;
+  font-family: var(--font);
+  font-size: 11px;
   color: var(--accent);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-align: left;
 }
 .ex-nav { display: flex; gap: 8px; }
@@ -2296,10 +2814,10 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   padding: 0;
   background: var(--panel-2);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
 }
-.ex-nav button:hover { border-color: var(--accent); background: var(--panel-3); }
+.ex-nav button:hover { border-color: var(--accent); background: var(--panel-3); box-shadow: 0 0 14px var(--glow); }
 .ex-nav button:active { transform: translateY(1px); }
 .ex-nav svg { width: 13px; height: 13px; fill: var(--text); }
 .ex-nav button:hover svg { fill: #fff; }
@@ -2324,6 +2842,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift);
   min-height: 0;
 }
 
@@ -2352,9 +2871,10 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   overflow: hidden;
   padding: 15px 17px;
   padding-right: 94px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(214, 245, 236, 0.1);
   border-left: 2px solid var(--accent);
-  border-radius: var(--radius);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  box-shadow: var(--lift), var(--shadow-1);
   background-color: var(--panel);
   background-repeat: no-repeat;
   background-position: right 14px top 15px;
@@ -2390,18 +2910,21 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   overflow-y: auto;
 }
 
+/* The words in the reading face, as the notebook's are: this is the one place
+   in the walk-through where the reader reads rather than looks. */
 .ex-note p {
   margin: 0 0 10px;
-  color: var(--text);
-  line-height: 1.62;
-  font-size: 13.5px;
+  color: var(--text-read);
+  font-family: var(--font-read);
+  line-height: 1.58;
+  font-size: 16px;
   /* Justified, with hyphenation on so the ragged gaps justification usually
      opens up in a narrow column do not appear. */
   text-align: justify;
   hyphens: auto;
 }
 .ex-note p:last-child { margin-bottom: 0; }
-.ex-note b { color: #fff; }
+.ex-note b { color: #fff; font-weight: 600; }
 .ex-note em { color: var(--accent); font-style: normal; }
 
 /* The script, whole, with the lines under discussion lit and the rest left
@@ -2430,7 +2953,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
    still reads as a syntax-highlighted file all the way down instead of turning
    grey outside the part being discussed. */
 .explain-line { transition: opacity 140ms ease; opacity: 0.42; }
-.explain-line.lit { opacity: 1; background: rgba(79, 179, 255, 0.07); }
+.explain-line.lit { opacity: 1; background: rgba(95, 224, 198, 0.07); }
 .explain-line.lit .explain-no { color: var(--accent); }
 
 /* Token colours. The same family GitHub uses on this background, which is
@@ -2584,9 +3107,6 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   .view { padding: 12px 10px; }
   .panel { padding: 12px; }
 
-  /* Front page: the note a little smaller, so it covers fewer of the agents. */
-  .home-note p { font-size: 12px; }
-
   /* Explanation: the picture first, then the words, then the script. */
   .ex { padding: 10px; }
   .ex-stage { min-height: 56vw; }
@@ -2608,10 +3128,17 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   .research-bar select { min-width: 0; max-width: none; width: 100%; }
   .research-run { flex-wrap: wrap; }
 
-  /* Book: tables and wide formulas scroll inside themselves, not the page. */
+  /* Book: tables and wide formulas scroll inside themselves, not the page;
+     the reading size steps down with the column, keeping its measure near
+     sixty characters on a phone. */
+  .md { font-size: 17.5px; line-height: 1.65; }
+  .md h2 { font-size: 24px; margin-bottom: 24px; }
+  .md h3 { font-size: 17px; margin-top: 38px; }
+  .md h4 { font-size: 17.5px; }
   .md table { display: block; overflow-x: auto; min-width: 0; }
   .md .katex-display { overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
   .md pre { white-space: pre; overflow-x: auto; }
+  .md-callout { padding: 10px 14px 2px; font-size: 16px; }
 
   /* Fingers are wider than a mouse pointer. */
   button, select, input[type="text"], input[type="number"] { min-height: 34px; }
@@ -2620,13 +3147,13 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 /* ==========================================================================
    Finish
    Small things that make the page feel made rather than assembled: the top
-   bar lets what scrolls beneath it show through, controls answer the hand,
-   the tab you are on is marked by a bar of the accent, and a keyboard user
-   always sees where they are.
+   bar lets what scrolls beneath it show through, dimly, controls answer the
+   hand, the tab you are on is marked by a seam of the accent, and a keyboard
+   user always sees where they are.
    ========================================================================== */
 
 .topbar {
-  background: rgba(32, 43, 56, 0.86);
+  background: rgba(8, 13, 17, 0.86);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   backdrop-filter: saturate(140%) blur(10px);
 }
@@ -2641,11 +3168,11 @@ button:active:not(:disabled) { transform: translateY(1px); }
 .job-bar { min-width: 0; flex-shrink: 1; }
 .job-text { min-width: 0; }
 
-/* The tab you are on: lighter, white, and underlined in the accent. Still
+/* The tab you are on: lit, white, and underlined in the accent. Still
    unmistakable at a glance, and calmer than a white box. */
 .tab.active {
   border-color: transparent;
-  background: var(--panel-2);
+  background: rgba(95, 224, 198, 0.07);
   box-shadow: inset 0 -2px 0 var(--accent);
 }
 

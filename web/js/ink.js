@@ -17,6 +17,7 @@ const Ink = {
     label: '--muted',        // tick values, legends, a line the reader added
     dim: '--muted-2',        // axis names, footnotes, an empty chart's message
     accent: '--accent',      // a lone series with no colour of its own
+    gold: '--gold',          // the runes the front page carves
     grid: '--chart-grid',
     tick: '--chart-tick',
     axis: '--chart-axis',

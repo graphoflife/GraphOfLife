@@ -8,11 +8,15 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="favicon-180.png">
-<!-- The site's one typeface. Without the network the stylesheet falls back to
-     the system's own monospace. -->
+<!-- Three typefaces, each with one job. JetBrains Mono is the machine's voice:
+     every control, number and line of code, and every label a canvas draws.
+     Cinzel, cut from Roman inscriptions, sets the titles. Spectral, made for
+     reading on a screen, sets the long prose of the notebook and the
+     explanation. Without the network the stylesheet falls back to the
+     system's own faces. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -53,6 +57,32 @@
     <path d="M7.87 13.03L8.59 13.18 M7.45 13.72L7.90 14.30 M6.68 13.98L6.66 14.72 M5.93 13.68L5.44 14.24 M5.54 12.97L4.81 13.08 M5.70 12.18L5.07 11.80 M6.33 11.68L6.10 10.98 M7.14 11.70L7.41 11.01 M7.75 12.24L8.39 11.88" stroke="#05070a" stroke-width="0.26" opacity="0.30" fill="none"/>
     <circle cx="6.71" cy="12.80" r="1.05" fill="#05070a"/>
   </symbol>
+
+  <!-- The runes, as strokes rather than as a font: the elder futhark's own
+       straight cuts, each in a box ten wide and sixteen tall, inked by
+       whatever uses them (.rune in the stylesheet). The tabs wear one each,
+       and the front page carves its ring and its inscription from the same
+       set (entrance.js reads them from here), so there is one alphabet.
+       Runes that hate groups have taken as emblems are left out. -->
+  <symbol id="rune-fehu" viewBox="0 0 10 16"><path d="M3 1.5V14.5M3 4.8L7.5 1.5M3 8.8L7.5 5.5"/></symbol>
+  <symbol id="rune-uruz" viewBox="0 0 10 16"><path d="M2.5 14.5V1.5L7.5 5.5V14.5"/></symbol>
+  <symbol id="rune-thurisaz" viewBox="0 0 10 16"><path d="M3 1.5V14.5M3 5L7 8L3 11"/></symbol>
+  <symbol id="rune-ansuz" viewBox="0 0 10 16"><path d="M3 1.5V14.5M3 1.5L7.5 5M3 5.5L7.5 9"/></symbol>
+  <symbol id="rune-raidho" viewBox="0 0 10 16"><path d="M3 14.5V1.5L7 4.8L3 8L7.5 14.5"/></symbol>
+  <symbol id="rune-kaunan" viewBox="0 0 10 16"><path d="M7 2.5L3 8L7 13.5"/></symbol>
+  <symbol id="rune-gebo" viewBox="0 0 10 16"><path d="M2 2.5L8 13.5M8 2.5L2 13.5"/></symbol>
+  <symbol id="rune-wunjo" viewBox="0 0 10 16"><path d="M3 14.5V1.5L7 4.8L3 8"/></symbol>
+  <symbol id="rune-naudiz" viewBox="0 0 10 16"><path d="M5 1.5V14.5M2.5 6L7.5 10"/></symbol>
+  <symbol id="rune-isa" viewBox="0 0 10 16"><path d="M5 1.5V14.5"/></symbol>
+  <symbol id="rune-jera" viewBox="0 0 10 16"><path d="M5.5 1.5L2.5 5L5.5 8.5M4.5 7.5L7.5 11L4.5 14.5"/></symbol>
+  <symbol id="rune-eihwaz" viewBox="0 0 10 16"><path d="M5 1.5V14.5M5 1.5L8 4.5M5 14.5L2 11.5"/></symbol>
+  <symbol id="rune-perthro" viewBox="0 0 10 16"><path d="M2.5 1.5V14.5M2.5 1.5L5.5 4.5L8 2M2.5 14.5L5.5 11.5L8 14"/></symbol>
+  <symbol id="rune-berkano" viewBox="0 0 10 16"><path d="M3 1.5V14.5L7.5 11.2L3 8L7.5 4.8L3 1.5"/></symbol>
+  <symbol id="rune-ehwaz" viewBox="0 0 10 16"><path d="M2.5 14.5V1.5L5 5L7.5 1.5V14.5"/></symbol>
+  <symbol id="rune-mannaz" viewBox="0 0 10 16"><path d="M2.5 14.5V1.5L7.5 6.5M7.5 14.5V1.5L2.5 6.5"/></symbol>
+  <symbol id="rune-laguz" viewBox="0 0 10 16"><path d="M3 14.5V1.5L7.5 5.5"/></symbol>
+  <symbol id="rune-ingwaz" viewBox="0 0 10 16"><path d="M5 3L8 8L5 13L2 8Z"/></symbol>
+  <symbol id="rune-dagaz" viewBox="0 0 10 16"><path d="M2 2.5V13.5L8 2.5V13.5Z"/></symbol>
 </svg>
 
 
@@ -61,14 +91,16 @@
        colours, and it costs no extra request. -->
 <svg class="brand-mark" aria-hidden="true"><use href="#gol-mark"/></svg>
   <button class="brand" data-view="home" title="Home">
-    <h1>GraphOfLife</h1>
+    <h1>Graph of Life</h1>
   </button>
+  <!-- Each tab carries a rune for what it is: ansuz the word, jera the turning
+       year, dagaz daylight, perthro the unknown, kaunan the torch. -->
   <nav class="tabs">
-    <button class="tab" data-view="explain">Explanation</button>
-    <button class="tab" data-view="runs">Simulations</button>
-    <button class="tab" data-view="viewer">Viewer</button>
-    <button class="tab" data-view="research">Research</button>
-    <button class="tab" data-view="book">Research Notebook</button>
+    <button class="tab" data-view="explain"><svg class="rune" aria-hidden="true"><use href="#rune-ansuz"/></svg>Explanation</button>
+    <button class="tab" data-view="runs"><svg class="rune" aria-hidden="true"><use href="#rune-jera"/></svg>Simulations</button>
+    <button class="tab" data-view="viewer"><svg class="rune" aria-hidden="true"><use href="#rune-dagaz"/></svg>Viewer</button>
+    <button class="tab" data-view="research"><svg class="rune" aria-hidden="true"><use href="#rune-perthro"/></svg>Research</button>
+    <button class="tab" data-view="book"><svg class="rune" aria-hidden="true"><use href="#rune-kaunan"/></svg>Research Notebook</button>
   </nav>
   <!-- What is loading, how far, and how to stop it. One bar, up here, because
        the question "is anything still working?" is asked from whichever tab
@@ -86,14 +118,34 @@
          page has to open at once, and it must not leave a stray simulation
          behind on a machine that has a server. -->
     <canvas id="homeCanvas"></canvas>
+    <!-- An inscription half lost in the dark around the edges: runes and the
+         machine's own digits, drawn once and then changing a few at a time
+         (entrance.js). -->
+    <canvas id="homeGlyphs" class="home-glyphs" aria-hidden="true"></canvas>
     <div class="home-veil"></div>
 
     <div class="home-hero">
-      <div class="home-headline">
-        <h2 class="home-title">Graph of Life</h2>
-        <svg class="home-mark" aria-hidden="true"><use href="#gol-mark"/></svg>
+      <!-- The mark inside a ring of runes, like a seal. The ring is carved by
+           entrance.js from the runes above; the two bands turn against each
+           other, slowly. -->
+      <div class="home-seal" aria-hidden="true">
+        <svg class="home-ring home-ring-outer" id="homeRing" viewBox="-100 -100 200 200"></svg>
+        <svg class="home-ring home-ring-inner" viewBox="-100 -100 200 200">
+          <circle r="71" pathLength="1"/>
+          <circle class="home-ring-dots" r="66"/>
+        </svg>
+        <svg class="home-mark"><use href="#gol-mark"/></svg>
       </div>
-      <p class="home-subtitle">An Artificial Life Algorithm</p>
+      <!-- The words are written here whole, so the title reads as itself
+           without script and to a screen reader; entrance.js decodes them
+           into place letter by letter. -->
+      <h2 class="home-title" id="homeTitle">Graph of Life</h2>
+      <p class="home-subtitle" id="homeSubtitle">An artificial life algorithm</p>
+      <nav class="home-doors" aria-label="Where to begin">
+        <button class="home-door" data-view="explain"><svg class="rune" aria-hidden="true"><use href="#rune-ansuz"/></svg>How it works</button>
+        <button class="home-door" data-view="book"><svg class="rune" aria-hidden="true"><use href="#rune-kaunan"/></svg>Read the notebook</button>
+        <button class="home-door" data-view="runs"><svg class="rune" aria-hidden="true"><use href="#rune-jera"/></svg>The simulations</button>
+      </nav>
     </div>
 
     <aside class="home-note">
@@ -101,6 +153,17 @@
         evolutionary game theory and neural networks. No optimization &mdash;
         just mutation, evolution and natural selection.</p>
     </aside>
+
+    <!-- What the world behind the title holds, read from the frame on
+         screen. It is a real run, and says so in numbers. -->
+    <div class="home-readout" id="homeReadout">
+      <p class="home-readout-head">A recorded world</p>
+      <dl>
+        <dt>Agents</dt><dd data-count="agents">&mdash;</dd>
+        <dt>Links</dt><dd data-count="links">&mdash;</dd>
+        <dt>Tokens</dt><dd data-count="tokens">&mdash;</dd>
+      </dl>
+    </div>
   </div>
 </main>
 
@@ -1084,6 +1147,7 @@
 <script src="js/stepview.js"></script>
 <script src="js/emblems.js"></script>
 <script src="js/explain.js"></script>
+<script src="js/entrance.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runinfo.js"></script>
 <script src="js/runs.js"></script>
