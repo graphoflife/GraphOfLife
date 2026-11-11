@@ -877,7 +877,7 @@ given in its own units. That is how far apart two agents in the same
 situation and draw are, as the standard deviation over agents. It is set
 against how far one brain is from itself over the draws.
 
-[How different are the agents?](how-different-are-the-agents.md) uses this
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) uses this
 split, with a small worked example.
 
 ### Between worlds and within them
@@ -983,7 +983,7 @@ use (Hill 1973). This one, of order 2, weighs the common kinds most.
 
 Two genotypes one mutation apart may act exactly alike. Counting them as two
 kinds overstates diversity. That is why
-[How different are the agents?](how-different-are-the-agents.md) groups
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) groups
 brains into kinds **by what they do**, not by their weights. Brains whose
 decisions in the same situations differ no more than a brain differs from
 itself, between two sets of random inputs, are one kind.
@@ -1047,7 +1047,7 @@ near 28 or 29.
 
 #### Where the participation ratio is used
 
-[What agents say to each other](what-agents-say-to-each-other.md) uses it on
+[What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) uses it on
 the messages agents write. There it counts how many of the 30 message numbers
 a world's messages actually use. The measure comes from physics, where it
 counts over how many sites a wave is spread (Bell and Dean 1970). In
@@ -1066,11 +1066,11 @@ neuroscience it measures the dimension of neural activity (Gao and others
   power laws fitted to every agent of a world.
 - [When a world ends](rules-in-detail.md#when-a-world-ends): the deaths of whole worlds, counted in
   shares like the one above.
-- [How different are the agents?](how-different-are-the-agents.md): the split
+- [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): the split
   of where, who and chance, measured in B1 and [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").
 - [Measuring inequality](measuring-tokens.md#entropy-and-evenness): entropy,
   evenness and 2^*H*, the effective number of order 1.
-- [What agents say to each other](what-agents-say-to-each-other.md): how many
+- [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other): how many
   directions a world's messages use.
 - [The diversity score](measuring-health.md#the-diversity-score): four spreads of a world in one
   number.

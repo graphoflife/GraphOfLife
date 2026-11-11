@@ -375,7 +375,7 @@ moves forward to a younger genotype. The figure counts those moves.
 >
 > **Data.** From the lineage analysis of Experiment 7, `book/results/E07.json` (`lineage.<condition>.runs.<run>.ancestor.moves`).
 >
-> 1. As in [Genotypes and lineages](genotypes-and-lineages.md), for every run.
+> 1. As in [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages), for every run.
 >
 > **To make it again:** `python3 book_figures.py brains`.
 <!-- /figure -->
@@ -390,14 +390,14 @@ ten times as often.
 
 So chance alone can make one line take a world over. It can do so much faster
 than in the baseline, or never, depending on how often agents are born and
-die. The sweeps of [Genotypes and lineages](genotypes-and-lineages.md) are
+die. The sweeps of [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) are
 therefore not, by themselves, evidence of selection. A fair comparison needs a
 world that is born and dies as the baseline does, while no brain is better
 than another. None of these worlds is one. The three breeding worlds come
 closest, with 0, 16 and 68 moves.
 
 The question was settled from the brains' side instead ([Selection, or
-chance?](genotypes-and-lineages.md#selection-or-chance)). Played against the
+chance?](b1-brains-lineages-and-messages.md#selection-or-chance)). Played against the
 brains of their own past, the brains of a settled B1 world only tie. So the
 lines that take a settled world over do not carry brains that play better.
 
@@ -443,7 +443,7 @@ lines that take a settled world over do not carry brains that play better.
 
 - [What the brains are like](what-the-brains-are-like.md): why B1's brains
   matter only as constants, and why they barely see.
-- [Genotypes and lineages](genotypes-and-lineages.md): how lines of descent
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): how lines of descent
   take worlds over, and whether the winners are better.
 - [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): how
   alike thirty baseline worlds are, and how long each one remembers.
@@ -584,8 +584,8 @@ every run.
 <!-- turns -->
 ---
 
-← [What agents say to each other](what-agents-say-to-each-other.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
+← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
 
-> [!info]- Pages that link here (19)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (18)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

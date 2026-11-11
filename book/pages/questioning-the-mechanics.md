@@ -209,7 +209,7 @@ variation is mostly **somatic**: it happens in the body, during its life. A
 brain that does well does not stay itself. Selection works on a target that
 moves under it, and a good brain is worn away in place, whether or not it is
 copied. This may be why genotypes last about two iterations
-([Genotypes and lineages](genotypes-and-lineages.md)), and why the number of
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), and why the number of
 distinct genotypes is set by the rules
 ([How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)).
 

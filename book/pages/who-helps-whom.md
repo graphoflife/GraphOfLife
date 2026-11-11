@@ -285,7 +285,7 @@ help. They were given a sense of their clones, of their family, of where they
 came from, and of who helped them. Every message already names its writer's
 genotype, so kin could tell each other with one comparison. But B1's nearly
 blind brains cannot make it
-([Could kin recognise each other?](what-agents-say-to-each-other.md#could-kin-recognise-each-other)).
+([Could kin recognise each other?](b1-brains-lineages-and-messages.md#could-kin-recognise-each-other)).
 A brain can read what it is told; whether reading pays depends on the rules.
 A sense of kin made groups only where a rule pooled the stakes of kin. An
 input naming the helper changed nothing where helping itself was rare.
@@ -382,6 +382,6 @@ outlast the network's regions
 
 [Groups and cooperation](../README.md#groups-and-cooperation) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) →
 
-> [!info]- Pages that link here (10)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Particles: patterns that outlast what carries them](particles.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

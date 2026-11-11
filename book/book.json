@@ -593,34 +593,6 @@
       "summary": "Every agent of a B2 world dies at the age of 100, so a world keeps its size only if one agent in a hundred is born each iteration. How eagerly the agents breed decides how full the world gets; with its tokens fixed, a full world is a poor one."
     },
     {
-      "id": "how-alike-the-agents-are",
-      "title": "How alike the agents are",
-      "file": "pages/how-alike-the-agents-are.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Evolution can only choose among differences. The notebook has counted a world's agents in three ways. It counts the names of their brains, the numbers in them, and what they do."
-    },
-    {
-      "id": "genotypes-and-lineages",
-      "title": "Genotypes and lineages",
-      "file": "pages/genotypes-and-lineages.md",
-      "topics": [
-        "brains",
-        "evolution"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E06"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "A genotype names one exact brain, and in B1 brains change so often that a genotype lasts about two iterations. A world holds about five genotypes for every eight agents, and the most common one usually holds only about 1% of it."
-    },
-    {
       "id": "what-the-brains-are-like",
       "title": "What the brains are like",
       "file": "pages/what-the-brains-are-like.md",
@@ -631,18 +603,6 @@
       "status": "written",
       "added": "2026-10-09",
       "summary": "Every agent decides with a brain of 15,795 numbers, and we tested the brains of thirty B1 worlds at the end of their runs. They are nearly blind: a change in what a brain sees reaches what it does about a thousand times smaller."
-    },
-    {
-      "id": "what-agents-say-to-each-other",
-      "title": "What agents say to each other",
-      "file": "pages/what-agents-say-to-each-other.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "Each agent writes a message of 30 numbers to itself and to each neighbour, and nothing but the brains gives the numbers a meaning. At the end of thirty B1 worlds, two messages of one agent differ by 0.0005, while those of two agents differ by 0.60."
     },
     {
       "id": "do-the-brains-matter",
@@ -670,18 +630,6 @@
       "status": "draft",
       "added": "2026-10-09",
       "summary": "A plan not yet played: six ways for agents to decide, from chance to the world as it is, each played on from iteration 1,500 of five of round 3's shortlisted worlds beside the world's own replays. Its draft thesis expects that a world needs the way its crowd of brains answers what each agent sees, not who answers: a brain drawn afresh from the world's own at every look makes it itself again."
-    },
-    {
-      "id": "how-different-are-the-agents",
-      "title": "How different are the agents?",
-      "file": "pages/how-different-are-the-agents.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "We put the brains of a world's agents into the same situations, with the same random numbers, and compare what they do. In B2 they do not act alike: nine pairs in ten stake measurably differently, in about 17 effective kinds of staking."
     },
     {
       "id": "how-big-should-a-brain-be",
@@ -1238,6 +1186,23 @@
         "E05",
         "E08",
         "E10"
+      ]
+    },
+    {
+      "id": "b1-brains-lineages-and-messages",
+      "title": "B1: brains, lineages and messages",
+      "file": "pages/b1-brains-lineages-and-messages.md",
+      "topics": [
+        "b1-history",
+        "brains",
+        "evolution"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "Brains in B1, as measured in October 2026, and how alike the agents of B1, B2 and the pilots are: genotypes and lineages, the messages, and how differently agents play.",
+      "experiments": [
+        "E06"
       ]
     }
   ],

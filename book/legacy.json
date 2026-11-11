@@ -19,9 +19,9 @@
   "15": "b1-lives-and-wealth#how-unequal-is-a-world-and-who-stays-rich",
   "16": "b1-the-game-and-its-flows#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes",
   "17": "b1-the-network-size-and-scaling#the-shape-of-the-network",
-  "18": "genotypes-and-lineages",
+  "18": "b1-brains-lineages-and-messages#genotypes-and-lineages",
   "19": "what-the-brains-are-like",
-  "20": "what-agents-say-to-each-other",
+  "20": "b1-brains-lineages-and-messages#what-agents-say-to-each-other",
   "21": "b1-lives-and-wealth#do-the-rich-stay-rich",
   "22": "b1-lives-and-wealth#how-the-network-grows",
   "23": "b1-the-network-size-and-scaling#like-next-to-like-how-alike-agents-are-at-a-distance",
@@ -42,7 +42,7 @@
   "38": "do-agents-cooperate",
   "39": "questioning-the-mechanics",
   "40": "what-the-baseline-world-is#what-the-measurements-say-about-open-ended-evolution",
-  "70": "how-different-are-the-agents",
+  "70": "b1-brains-lineages-and-messages#how-different-are-the-agents",
   "71": "b1-the-game-and-its-flows#flow-modules-the-groups-tokens-stay-in",
   "72": "b1-the-game-and-its-flows#lightning-in-every-world",
   "41": "do-the-brains-matter",
@@ -96,7 +96,7 @@
   "74": "every-world-side-by-side",
   "75": "b1-the-game-and-its-flows#where-tokens-go",
   "76": "who-helps-whom",
-  "77": "how-alike-the-agents-are",
+  "77": "b1-brains-lineages-and-messages#how-alike-the-agents-are",
   "79": "healthy-and-rich",
   "84": "what-holds-a-worlds-size",
   "91": "rules-in-company",
@@ -410,6 +410,10 @@
   "how-properties-scale-together": "b1-the-network-size-and-scaling#how-properties-scale-together",
   "like-next-to-like": "b1-the-network-size-and-scaling#like-next-to-like-how-alike-agents-are-at-a-distance",
   "how-does-a-worlds-size-follow-its-tokens": "b1-the-network-size-and-scaling#worlds-of-many-sizes",
-  "how-much-does-the-seed-decide": "b1-the-network-size-and-scaling#how-much-does-the-seed-decide"
+  "how-much-does-the-seed-decide": "b1-the-network-size-and-scaling#how-much-does-the-seed-decide",
+  "genotypes-and-lineages": "b1-brains-lineages-and-messages#genotypes-and-lineages",
+  "what-agents-say-to-each-other": "b1-brains-lineages-and-messages#what-agents-say-to-each-other",
+  "how-alike-the-agents-are": "b1-brains-lineages-and-messages#how-alike-the-agents-are",
+  "how-different-are-the-agents": "b1-brains-lineages-and-messages#how-different-are-the-agents"
  }
 }

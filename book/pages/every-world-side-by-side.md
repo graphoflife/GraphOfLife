@@ -171,7 +171,7 @@ worlds that question was about. Gathered:
 | loops and the exact [circulation](measuring-tokens.md#flows-that-go-round "The part of a flow that goes round in loops, as against the part that runs from sources to sinks."), chains, help ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
 | lifetime contests between eras ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)) | B2, through the long runs that go on from its worlds | every pilot batch |
 | correlations among agents ([What goes with what](what-goes-with-what.md)) | ten B1 and ten B2 worlds; now any run, in the Research tab | any run made on the server or in the browser |
-| how different the agents are ([How different are the agents?](how-different-are-the-agents.md)) | B1 and B2, over a world's life | the long runs |
+| how different the agents are ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)) | B1 and B2, over a world's life | the long runs |
 | exploitability ([Exploitability](measuring-evolution.md#exploitability)) | Experiment 16 | — |
 
 Two things are still missing. One is the lifetime contests for the lab's B1

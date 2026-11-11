@@ -2342,7 +2342,7 @@ territories of genotypes. A genotype is a few agents, not a region.
 
 Two reasons keep it so. A genotype lasts about two
 iterations before a change renames it
-([Genotypes and lineages](genotypes-and-lineages.md)), so a cluster of one
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), so a cluster of one
 genotype has little time to grow. And more than half of all nodes change hands
 in every game
 ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). So any territory is
@@ -2864,7 +2864,7 @@ question of its own: how a line takes over a world.
 
 #### How a line takes over
 
-[Genotypes and lineages](genotypes-and-lineages.md) found that whole lines of
+[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) found that whole lines of
 descent take the worlds of 10,000 tokens over again and again, about once
 every 350 iterations. Is that chance or merit? Three answers give three
 different paces, and the size of the world tells them apart:
@@ -3801,19 +3801,13 @@ written by `python3 gol_lab.py analyse E03`.
   tokens, age and family, where cohorts and families can be seen.
 - [Physical inspiration](physical-inspiration.md): the physics behind the
   notebook's second aim, and a test of how far a difference travels.
-- [Genotypes and lineages](genotypes-and-lineages.md): how lines of descent
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): how lines of descent
   come and go, and take a world over.
 - [A hundred thousand iterations](a-hundred-thousand-iterations.md): one
   world of 204,800 tokens, planned to run for a hundred thousand iterations.
 
 ## How our view changed
 
-- **11 November 2026.** Seven pages on B1's network, its size and its scaling
-  became the sections of this one, and it moved to the Archive. Round 3's
-  worlds play other rules, so B1's own numbers no longer bear on the notebook's
-  question. They are kept so that every experiment here can be read and made
-  again. Nothing was cut but six copies of the list of the runs of Experiment
-  10: it is now shown once.
 - *The shape of the network*:
   - **11 October 2026.**
     [What shape does the network take?](#what-shape-does-the-network-take) and
@@ -3961,6 +3955,12 @@ written by `python3 gol_lab.py analyse E03`.
     holds. The halves agree only as well as chance would make them (0.20), and
     the spread of connections falls on, to 0.11. The page changed in the same
     rewrite.
+- **11 November 2026.** Seven pages on B1's network, its size and its scaling
+  became the sections of this one, and it moved to the Archive. Round 3's
+  worlds play other rules, so B1's own numbers no longer bear on the notebook's
+  question. They are kept so that every experiment here can be read and made
+  again. Nothing was cut but six copies of the list of the runs of Experiment
+  10: it is now shown once.
 
 ## References
 
@@ -3994,10 +3994,10 @@ written by `python3 gol_lab.py analyse E03`.
 <!-- turns -->
 ---
 
-← [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1, as described in October 2026](../README.md#b1-as-described-in-october-2026)
+← [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1, as described in October 2026](../README.md#b1-as-described-in-october-2026) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) →
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Space and dimension](../README.md#space-and-dimension), [Size and riches of a world](../README.md#size-and-riches-of-a-world), [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (34)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md)
+> [!info]- Pages that link here (31)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

@@ -245,7 +245,7 @@ Nothing an agent senses says from which neighbour it came. Its inputs are its
 own and each neighbour's tokens and [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), messages and
 noise ([What a brain sees](rules-in-detail.md#what-a-brain-sees)). Messages could carry it in
 principle. But the brains write the name of their genotype in them
-([What agents say to each other](what-agents-say-to-each-other.md)). Along a
+([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)). Along a
 puffer's trail, every neighbour carries the same name.
 
 ### Guns without a rhythm

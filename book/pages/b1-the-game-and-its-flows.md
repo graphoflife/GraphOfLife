@@ -1581,7 +1581,7 @@ B2's unused links lapse, and in the B1 pilots, it changes more (0.18 and
 by 0.82–0.85 and hold 2.3–2.4 agents, and only about three agents in ten are
 in a module at all. A B2 agent puts its whole stake on one node, its own in
 about two games of three. And half of B2's agents hold a single token, which
-stays at home ([How different are the agents?](how-different-are-the-agents.md)).
+stays at home ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)).
 So in a game most B2 agents send nothing, and those that do send it to one
 neighbour: the two are a module. Such flow compresses even when rewired at
 random (0.09–0.15), since pairs are groups of a kind
@@ -1840,11 +1840,6 @@ reads and how.
 
 ## How our view changed
 
-- **11 November 2026.** Four pages on B1's game and its flows became the
-  sections of this one, and it moved to the Archive. Round 3's worlds play
-  other rules, so these measurements no longer bear on the notebook's question.
-  They are kept so that every figure here can be read and made again. Nothing
-  was cut but a second copy of the list of the runs of Experiment 10.
 - *Where tokens go*:
   - **23 October 2026.** This page said that in a settled B1 world 30% of the
     tokens stay home, 51% are matched and 20% go one way "at 10,000 tokens and
@@ -1947,6 +1942,11 @@ reads and how.
     settings readable (`book_chapters/everyworld.replicas`), sixteen do. Seven
     more give the same answer as another world to the last digit, and are
     counted once. So 206 complete results make the 183 worlds of this page.
+- **11 November 2026.** Four pages on B1's game and its flows became the
+  sections of this one, and it moved to the Archive. Round 3's worlds play
+  other rules, so these measurements no longer bear on the notebook's question.
+  They are kept so that every figure here can be read and made again. Nothing
+  was cut but a second copy of the list of the runs of Experiment 10.
 
 ## References
 
@@ -1966,6 +1966,6 @@ reads and how.
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (35)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [!info]- Pages that link here (33)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

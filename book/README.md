@@ -88,13 +88,9 @@ how the pages hang together.
 
 #### Brains, and how alike agents are
 
-- [How alike the agents are](pages/how-alike-the-agents-are.md)
-- [Genotypes and lineages](pages/genotypes-and-lineages.md)
 - [What the brains are like](pages/what-the-brains-are-like.md)
-- [What agents say to each other](pages/what-agents-say-to-each-other.md)
 - [Do the brains matter?](pages/do-the-brains-matter.md)
 - [Brains replaced by their average](pages/brains-replaced-by-their-average.md)
-- [How different are the agents?](pages/how-different-are-the-agents.md)
 - [How big should a brain be?](pages/how-big-should-a-brain-be.md)
 
 #### Groups and cooperation
@@ -191,4 +187,5 @@ how the pages hang together.
 - [B1: lives and wealth](pages/b1-lives-and-wealth.md)
 - [B1: the game and its flows](pages/b1-the-game-and-its-flows.md)
 - [B1: the network, size and scaling](pages/b1-the-network-size-and-scaling.md)
+- [B1: brains, lineages and messages](pages/b1-brains-lineages-and-messages.md)
 <!-- /contents -->

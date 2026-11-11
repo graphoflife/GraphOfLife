@@ -280,7 +280,7 @@ pattern, and treat those who send it back differently. Biologists call this a
 this has happened.
 
 The pattern itself exists already, without any evolution.
-[What agents say to each other](what-agents-say-to-each-other.md) found that
+[What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) found that
 every message names its writer's genotype. Two agents of one genotype write
 the same message, but for a thousandth or so. Kin could tell each other by it.
 What is missing is a brain that compares what it reads, and the
@@ -491,7 +491,7 @@ But an alliance protects by peace, not by rescue
   cooperation, side by side.
 - [Other contests: a lottery, and alliances](another-game.md): kin that sense
   each other, stakes pooled by family, and alliances.
-- [What agents say to each other](what-agents-say-to-each-other.md): messages
+- [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other): messages
   that name their writer's genotype.
 
 ## How this was made
@@ -584,7 +584,7 @@ iterations each.
   ([Do agents treat their own kind differently?](#do-agents-treat-their-own-kind-differently)).
 - **24 October 2026.** Since 14 October, a note on this page said that two
   agents of one genotype write exactly the same message.
-  [What agents say to each other](what-agents-say-to-each-other.md) had
+  [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) had
   corrected that the same day: the two messages are the same but for a
   thousandth or so.
 
@@ -594,5 +594,5 @@ iterations each.
 ← [Who helps whom](who-helps-whom.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Other contests: a lottery, and alliances](another-game.md) →
 
 > [!info]- Pages that link here (12)
-> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Who helps whom](who-helps-whom.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

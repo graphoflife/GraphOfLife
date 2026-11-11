@@ -201,7 +201,7 @@ one of those agents' [brains](the-brain.md "The neural network each agent decide
 stakes differ by more than one brain differs from itself between two tries.
 In a world where every agent would act alike in the same place the share is
 near 0; in a world of many kinds of behaviour it is near 1. It is the measure
-of [How different are the agents?](how-different-are-the-agents.md), read at
+of [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents), read at
 every world kept.
 
 ### Healthy, and interesting
@@ -395,7 +395,7 @@ tokens, their links, their ages and their [genotypes](measuring-evolution.md#gen
 the four is counted without drawing any line, then ranked among a fixed set
 of 653 worlds; the score is the mean of the four ranks. How differently the
 agents *decide* is a separate measure: the
-[effective kinds of staking](how-different-are-the-agents.md#kinds-of-behaviour).
+[effective kinds of staking](b1-brains-lineages-and-messages.md#kinds-of-behaviour).
 
 ### Four spreads
 
@@ -464,7 +464,7 @@ on and read at iteration 3,000
 The score sees what agents hold and what they are, not what they do, and two
 genotypes may act exactly alike: a B2 world of 3,400 agents holds about 950
 effective genotypes but about 17 kinds of staking.
-[How different are the agents?](how-different-are-the-agents.md) puts the
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) puts the
 brains of 400 agents into the same 200 situations, with the same random
 inputs. Two brains act differently when their stakes are further apart than
 95% of brains are from themselves between two halves of the random draws;
@@ -501,7 +501,7 @@ the kinds swing from moment to moment.
   where the health bar comes from.
 - [Healthy and rich](healthy-and-rich.md): how the
   diversity score was made, and every world scored by it.
-- [How different are the agents?](how-different-are-the-agents.md): the
+- [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): the
   measure behind the same-position share.
 - [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution): the test a
   healthy world's long run will face.

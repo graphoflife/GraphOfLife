@@ -44,7 +44,7 @@ there.
 - **[diameter](measuring-networks.md#radius-and-diameter)** — The longest of the shortest paths between two agents of a world.
 - **[dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension)** (also ball dimension) — How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.
 - **[diversity score](measuring-health.md#the-diversity-score)** — How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.
-- **[effective kinds of staking](how-different-are-the-agents.md)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
+- **[effective kinds of staking](b1-brains-lineages-and-messages.md#how-different-are-the-agents)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
 - **[effective number](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)** — How many kinds there really are, when kinds are counted by how much of the population they hold.
 - **[effective population](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — The size of a population left to chance that would lose its lines as fast: the smaller it is, the more chance decides which line survives.
 - **[ego network](assembly-theory.md#ego-networks-as-molecules)** — An agent, its neighbours and the links among them: the network as one agent sees it.

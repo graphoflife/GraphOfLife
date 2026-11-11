@@ -467,7 +467,7 @@ their nearly blind brains give all candidates almost the same score
 
 In [B2](b1-and-b2.md#b2-a-world-that-cannot-break), where nearly every agent goes all in
 (spreading in 0.1–4% of cases), the even split hardly arises
-([How different are the agents?](how-different-are-the-agents.md)).
+([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)).
 
 ### A lazy random walk
 

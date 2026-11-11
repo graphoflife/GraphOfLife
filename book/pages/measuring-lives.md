@@ -354,7 +354,7 @@ The curve *S*(*L*) starts at 1 and falls in steps. The notebook draws it on
 [logarithmic axes](statistics.md#logarithmic-axes-and-power-laws). Then both
 the many short lives and the few long ones are visible
 ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages),
-[Genotypes and lineages](genotypes-and-lineages.md)).
+[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 The **median lifetime** is the smallest *L* with *S*(*L* + 1) ≤ ½: half of all
 lives end by then. In the code, this is `kaplan_meier(lives)` in

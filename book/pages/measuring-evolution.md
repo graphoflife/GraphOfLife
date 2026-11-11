@@ -95,7 +95,7 @@ Two different counts follow:
   ([Brain diversity](#brain-diversity)).
 
 A settled B1 world of some 14,400 agents holds about 9,000 different
-genotypes at once ([Genotypes and lineages](genotypes-and-lineages.md)).
+genotypes at once ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 #### The family tree
 
@@ -134,7 +134,7 @@ counted as an agent's lifetime is ([Age and lifetime](measuring-lives.md#age-lif
 Genotypes are short-lived. In the B1 worlds of 100,000 tokens the median
 genotype lasts two iterations. Of the agents that live through their first
 game, 48% last at least ten
-([Genotypes and lineages](genotypes-and-lineages.md)).
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 ### Families
 
@@ -188,7 +188,7 @@ Other pages fix the ancestors at another moment, with the same idea:
 - the genotypes alive 100 iterations earlier
   ([One world, many colours](one-world-many-colours.md));
 - those alive at one chosen iteration
-  ([Genotypes and lineages](genotypes-and-lineages.md));
+  ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages));
 - the founders ([Muller plots](#muller-plots)).
 
 #### Early in a run
@@ -203,7 +203,7 @@ descendants. In the median B1 world of 100,000 tokens, around iteration
 Later the count rises again, as the surviving lines branch. From iteration
 100 on, the B1 worlds hold a median of 3,300 families at 100,000 tokens, and
 315 at 10,000. Experiment 6 tested its thesis on this count
-([Genotypes and lineages](genotypes-and-lineages.md)).
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 #### Families in the code
 
@@ -251,7 +251,7 @@ Muller plot does not tell the two apart.
 - [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
   the lines of the 100 founders in the first 300 iterations of the world with
   seed 1.
-- [Genotypes and lineages](genotypes-and-lineages.md): the families of the
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): the families of the
   genotypes alive at a later moment, in two worlds.
 
 ### The common ancestor of the living
@@ -327,7 +327,7 @@ line: one genotype, a few iterations ago, took over — a **sweep**. A deep one
 means several lines have coexisted for a long time. In B1 the depth for all
 of the living rises and falls in a saw-tooth. It grows by one per iteration
 while no line takes over, and drops when one does
-([Genotypes and lineages](genotypes-and-lineages.md)).
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 From iteration 500 on, all the living of the B1 worlds of 100,000 tokens
 shared one ancestor a median of 946 iterations back. For many worlds that is
@@ -356,7 +356,7 @@ genotypes, in every frame.
 - `brainDiversity` = 1 means no two agents share a genotype; a small value
   means a few genotypes have been copied over much of the world. A settled
   B1 world has about 0.63: on average a genotype is carried by about 1.6
-  agents ([Genotypes and lineages](genotypes-and-lineages.md)). In B2, where
+  agents ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)). In B2, where
   a brain changes only when it is copied, ten worlds of 10,000 tokens held
   0.46 ([How fast should brains change?](how-fast-should-brains-change.md)).
 - `distinctParents` looks one step up the family tree. It is deliberately
@@ -397,7 +397,7 @@ A genotype number changes whenever a brain is offered a change and takes it
 changes nothing, yet the number still changes. Counting genotypes counts
 names; whether different names are different brains has to be checked
 separately ([Do the brains matter?](do-the-brains-matter.md)).
-[How different are the agents?](how-different-are-the-agents.md) counts kinds
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) counts kinds
 of behaviour instead, and compares them with the genotypes.
 
 ## Eras, contests and invasions: does a world keep getting better?
@@ -770,7 +770,7 @@ other in the same world, and scores the share of it the later one holds.
 3. **It keeps doing new things.** New kinds of behaviour appear faster than
    they would by mutation alone, and the old ones do not simply come back.
    - Kinds of behaviour means two things. One is kinds of staking
-     ([How different are the agents?](how-different-are-the-agents.md)). The
+     ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). The
      other is the signatures of the strategies written by hand: how a
      strategy answers a fixed set of situations
      ([What a brain can compute](what-a-brain-can-compute.md)).
@@ -851,7 +851,7 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 
 ## Where to go next
 
-- [Genotypes and lineages](genotypes-and-lineages.md): all of these at work in
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): all of these at work in
   the B1 worlds — how long genotypes last, and how lines take worlds over.
 - [How a brain changes](rules-in-detail.md#how-a-brain-changes): when a brain changes in B1 and in B2,
   and what a change does to it.

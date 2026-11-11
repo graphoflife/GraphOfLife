@@ -145,10 +145,10 @@ are answered on this page.
   played: where do agents stake, who wins the nodes?
 - [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) —
   What shape does the network take?
-- [Genotypes and lineages](genotypes-and-lineages.md) — How long do genotypes
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) — How long do genotypes
   last, and do lineages take over?
 - [What the brains are like](what-the-brains-are-like.md) and
-  [What agents say to each other](what-agents-say-to-each-other.md) — What
+  [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) — What
   are the brains like, and what do agents say to each other?
 - [Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich) — Do the rich stay rich?
 - [How the network grows](b1-lives-and-wealth.md#how-the-network-grows) — How does the network
@@ -165,7 +165,7 @@ Five of these pages were planned as experiments, Experiments 2 to 6:
 [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide),
 [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich),
 [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) and
-[Genotypes and lineages](genotypes-and-lineages.md). Each wrote down a thesis
+[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages). Each wrote down a thesis
 before the runs of 10,000 tokens. Each quotes it, says whether it held there,
 and tests it again on the worlds of 100,000 tokens. The other pages only ask.
 
@@ -1460,7 +1460,7 @@ calls it a border going quiet).
   acts, has to act inside that steady turnover, not through how long agents
   last. It would act through which brains the 2.4% of newborns carry, and
   which brains take over nodes in the games
-  ([Genotypes and lineages](genotypes-and-lineages.md)). And the brains settle
+  ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)). And the brains settle
   even earlier than the ages. In ten worlds of 5,000 tokens, the brains of each
   moment were played against those of earlier moments. They improve over a
   world's first 50 to 100 iterations, and not after. From then on, the brains
@@ -2317,7 +2317,7 @@ the ceiling and lowers the evenness, without anything else changing.
 The **genotype evenness** is high, about 0.9, and steady. The agents are
 spread over many genotypes, none of which holds much of the world for long.
 But high diversity is not the same as novelty. A genotype lasts about two
-iterations ([Genotypes and lineages](genotypes-and-lineages.md)). The variety
+iterations ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)). The variety
 is churn: new numbers made by small changes, and lost as fast as they are
 made. Entropy counts how many kinds there are *now*. It cannot say whether
 any of them is new in a way that matters. Measures of open-ended evolution
@@ -2352,7 +2352,7 @@ the units of the things counted. Per agent, over the settled life:
   in equal shares (the worlds: 24% to 64%). In a world of 14,000 agents, that
   is some 6,700 equal holders.
 - **Distinct genotypes.** There are 0.63 genotypes per agent, as
-  [Genotypes and lineages](genotypes-and-lineages.md) found. This is the
+  [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) found. This is the
   tightest number in the whole notebook so far. The thirty worlds lie between
   0.61 and 0.66, a standard deviation of 0.012, and the worlds of 10,000
   tokens had the same 0.63. Whatever their seed, their history and their
@@ -3508,7 +3508,7 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
   stationary population, made exact.
 - [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks): the cuts that kill three in
   four of the agents that die.
-- [Genotypes and lineages](genotypes-and-lineages.md): how long brains and
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): how long brains and
   their lines last, rather than agents.
 - [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network):
   the shape that all this making and unmaking leaves.
@@ -3529,12 +3529,6 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 
 ## How our view changed
 
-- **11 November 2026.** Six pages on B1's lives and wealth became the sections
-  of this one, and it moved to the Archive. Round 3's worlds start from B1's
-  rules but change many of them. So B1's own numbers no longer bear on the
-  notebook's question, and they are kept so that every experiment here can be
-  read and made again. Nothing was cut but five copies of the list of the runs
-  of Experiment 10: it is now shown once.
 - *The life of a B1 world*:
   - **8 October 2026.** [The first hundred iterations](#the-first-hundred-iterations)
     was first written from the thirty worlds of 10,000 tokens. It said that
@@ -3672,6 +3666,12 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
     agent keeps its node in 2.0% of games
     ([Who keeps their node](b1-the-game-and-its-flows.md#who-keeps-their-node)). So
     the brain there is replaced in nearly every game, not in every one.
+- **11 November 2026.** Six pages on B1's lives and wealth became the sections
+  of this one, and it moved to the Archive. Round 3's worlds start from B1's
+  rules but change many of them. So B1's own numbers no longer bear on the
+  notebook's question, and they are kept so that every experiment here can be
+  read and made again. Nothing was cut but five copies of the list of the runs
+  of Experiment 10: it is now shown once.
 
 <!-- turns -->
 ---
@@ -3680,6 +3680,6 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (38)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [!info]- Pages that link here (36)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Who inherits?](who-inherits.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

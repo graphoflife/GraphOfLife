@@ -155,7 +155,7 @@ criteria, read at iteration 2,000:
    widely than in B2's [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, by the diversity score. And its agents'
    decisions vary more. Put in the same situations, they fall into more
    effective kinds of staking than the agents of B2's median world
-   ([How different are the agents?](how-different-are-the-agents.md)). The
+   ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). The
    kinds are read from the world as kept, with no game played. They swing
    from one moment to the next, so they are averaged over iteration 1,500 and
    iteration 2,000.

@@ -69,7 +69,7 @@ Experiments 3 to 6 read Experiment 2's.
 | E03 | How much does the seed decide? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) |
 | E04 | Where do the tokens go? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) |
 | E05 | What shape does the graph take? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) |
-| E06 | Who wins, and for how long? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [Genotypes and lineages](genotypes-and-lineages.md) |
+| E06 | Who wins, and for how long? | B1 | the runs of E02; *baseline* | 1–30 | 10,000 | 3,000 | 30 | [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) |
 | E07 | Do the brains matter at all? | B1 | *baseline*; *brains never change* (mutation_sparsity = 0); *decisions by chance* (random_decisions = on) | 1–30 | 10,000 | 3,000 | 90 | [Do the brains matter?](do-the-brains-matter.md) |
 | E08 | How does a world's size follow its tokens? | B1 | *baseline*; *stopped only when empty* (extinction_threshold = 0) | 1–3 | 800–409,600 | 600 | 42 | [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes) |
 | E09 | How fast should brains change? | B2 | *mutation 0.05* (mutation_probability = 0.05); *mutation 0.1* (mutation_probability = 0.1); *B2*; *mutation 0.4* (mutation_probability = 0.4); *mutation 0.8* (mutation_probability = 0.8) | 1–10 | 10,000 | 1,500 | 50 | [How fast should brains change?](how-fast-should-brains-change.md) |
@@ -385,7 +385,7 @@ many worlds of that experiment or batch the measure has been taken on:
 - **flow modules**: the groups tokens stay in
   ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in));
 - **how different the agents are**: every brain in the same situations
-  ([How different are the agents?](how-different-are-the-agents.md));
+  ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents));
 - **the table of every world**: every statistic over the same stretches of
   iterations, side by side
   ([Every world side by side](every-world-side-by-side.md)).

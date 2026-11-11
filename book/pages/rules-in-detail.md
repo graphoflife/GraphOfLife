@@ -841,7 +841,7 @@ read messages: more than a third of all the brain's 15,550 weights. In B2,
 ### What the messages say
 
 Do the messages carry anything useful? For B1,
-[What agents say to each other](what-agents-say-to-each-other.md) answered:
+[What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) answered:
 hardly. It read every message of the 30 B1 worlds of 100,000 tokens at their
 end. Two messages written by one agent to two readers differ by 0.0005, as
 the root mean square of the differences of their 30 numbers. Messages written
@@ -852,7 +852,7 @@ connections, and whether it is written to oneself — accounts for only 1.2%
 of the messages' variety.
 
 ### Where it is used (messages)
-- [What agents say to each other](what-agents-say-to-each-other.md): what
+- [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other): what
   the messages of B1's worlds carry, number by number.
 - [What a brain can compute](what-a-brain-can-compute.md): why no message
   can carry news of a third agent, and how `self_message` = largest would let
@@ -1259,7 +1259,7 @@ fewer.
   an iteration.
 - [Staking at home, and keeping one's node](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node): how often an
   agent keeps its own node.
-- [Genotypes and lineages](genotypes-and-lineages.md): the family trees that
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): the family trees that
   the changes grow.
 - [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): what changing brains find,
   and where they stop.

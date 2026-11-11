@@ -198,8 +198,9 @@
     },
     {
       "name": "effective kinds of staking",
-      "page": "how-different-are-the-agents",
-      "says": "How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each."
+      "page": "b1-brains-lineages-and-messages",
+      "says": "How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.",
+      "anchor": "how-different-are-the-agents"
     },
     {
       "name": "random twin",

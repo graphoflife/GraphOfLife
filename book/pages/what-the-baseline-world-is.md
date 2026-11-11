@@ -22,6 +22,14 @@ way, its blind brains first. Giving the brains sight broke the worlds, so the
 notebook built a second baseline, B2, that cannot break. There evolution goes
 on for thousands of iterations before it, too, slows to a plateau.
 
+This page is the summary of B1 as it stood in October 2026, kept in the Archive
+since 11 November 2026. The measurements it sums up are in four pages beside
+it: [B1: lives and wealth](b1-lives-and-wealth.md), [B1: the game and its
+flows](b1-the-game-and-its-flows.md), [B1: the network, size and
+scaling](b1-the-network-size-and-scaling.md) and [B1: brains, lineages and
+messages](b1-brains-lineages-and-messages.md). Round 3's worlds start from B1's
+rules but change many of them, so what is said here of B1 is not said of them.
+
 ## What the baseline world is
 
 Thirty worlds of the first baseline, [B1](b1-and-b2.md), have been looked at
@@ -59,7 +67,7 @@ tested it again on the worlds of 100,000.
 - [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)
   Thesis **refuted**, narrowly at 10,000 tokens (a core of 53%) and more
   clearly at 100,000 (57%). The network is part tree, part web.
-- [Genotypes and lineages](genotypes-and-lineages.md). Thesis **refuted** at
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages). Thesis **refuted** at
   both sizes. A [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") lasts two iterations. Lines of descent take the world
   over: again and again in a small world, about once a run in a large one.
 
@@ -97,7 +105,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
 - **A genotype for every 1.6 agents**, each lasting a couple of iterations,
   and lines that bring a whole world down to one founder's descendants by
   about iteration 1,000 (175 at 10,000 tokens)
-  ([Genotypes and lineages](genotypes-and-lineages.md)).
+  ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 - **Brains with a [gain](the-brain.md#how-a-signal-fades-through-layers) of 0.0015**: a change in what a
   brain sees reaches what it does at a seven-hundredth of its size. Selection
   has set their constants alike in every world: a child in 3.6% of cases, the
@@ -106,7 +114,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
   ([What the brains are like](what-the-brains-are-like.md)).
 - **Messages that are names.** One agent's messages to two readers differ by
   0.0005, two agents' messages by 0.6, and agents of one genotype write the
-  same ([What agents say to each other](what-agents-say-to-each-other.md)).
+  same ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)).
 - **An order of wealth that is half forgotten in fifty to a hundred games**,
   and rich agents with one connection that die three times as often as other
   leaves ([Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)).
@@ -143,7 +151,7 @@ shape do not seem to wander each on its own schedule. They look like one slow
 process, seen through many windows.
 
 What could that process be? In the worlds of 10,000 tokens,
-[Genotypes and lineages](genotypes-and-lineages.md) found one with about that
+[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) found one with about that
 rhythm. Every 350 iterations or so, one branch of the family tree outlived
 all the others, and the whole world descended from it. Was the wander made by
 these sweeps? The large worlds answer no. They forget their level within
@@ -216,7 +224,7 @@ measurements after them, follows from that one number:
   In the long run such a walk visits each agent in proportion to its
   connections plus one, its resting state; the rich are those it visits most.
 - Messages carry a name and nothing else
-  ([What agents say to each other](what-agents-say-to-each-other.md)). Kin
+  ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)). Kin
   could tell each other by it, but cannot use it
   ([Do agents cooperate?](do-agents-cooperate.md)).
 - Selection has acted, the same way in every world, but on constants: have
@@ -501,7 +509,7 @@ a time. Here each obstacle is said in a few lines, with what B2 did about it.
 were listed. But it comes before them. B1's brains barely respond to what
 they see ([Brains that cannot see](#brains-that-cannot-see)), and every remedy
 for the six needs brains that do: incumbency worth defending, tags that tell
-kin, cooperation that pays. [What agents say to each other](what-agents-say-to-each-other.md)
+kin, cooperation that pays. [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)
 adds that the tags already exist. A message is the name of its writer's
 genotype, and kin could tell each other by it, if a brain could compare what
 it reads. The remedy is in the architecture: fewer layers, a steeper
@@ -547,7 +555,7 @@ The six rules:
    together. But brains cannot see relatedness
    ([Do agents cooperate?](do-agents-cooperate.md)). *In B2* brains that see
    could tell kin by the names in their messages
-   ([What agents say to each other](what-agents-say-to-each-other.md),
+   ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other),
    [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break));
    whether they do has not been measured. Given a sense of kin as an input,
    brains formed groups only where a rule pooled the stakes of kin
@@ -634,7 +642,7 @@ holdings, was tried in the pilots for B2
 most partners, and built stars rather than partnerships. Evolution stopped as
 in every other pilot judged by short contests. Cooperation needs a surplus
 that pairs, not hubs, can earn. The messages already serve as tags
-([What agents say to each other](what-agents-say-to-each-other.md)). A family
+([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)). A family
 tag, inherited and changed now and then, was later tried in pilots
 ([Another game](another-game.md)). With a sense of family alone, the fighting
 stayed as it was; only where a rule pooled the stakes of a family did
@@ -823,7 +831,7 @@ the agents are arranged, and how fast anything crosses a world:
 - **Lines take longer.** A takeover by one founder's line takes six times as
   long in a world ten times larger. So lines live side by side for most of a
   run, and the messages of a world speak more dialects
-  ([What agents say to each other](what-agents-say-to-each-other.md),
+  ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other),
   [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 - **Demography settles.** In a large world, ages, lifetimes and births per
   agent hold still from iteration 500 on
@@ -963,6 +971,10 @@ the rule changes of both aims will be tested together where they coincide.
   runs out before the game does
   ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops),
   [Strategies written by hand](strategies-written-by-hand.md)).
+- **11 November 2026.** Moved to the Archive as the summary of B1, beside the
+  four pages that hold its measurements. The pages it links to were merged into
+  those four, and every link leads to its section there. Its words are as they
+  were.
 
 <!-- turns -->
 ---
@@ -972,5 +984,5 @@ the rule changes of both aims will be tested together where they coincide.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (15)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

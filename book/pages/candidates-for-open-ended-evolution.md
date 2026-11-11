@@ -55,7 +55,7 @@ Every number comes from what a world recorded. No world is played again.
   agents are.
 - **Heredity.** In the worlds kept at the middle of the run and at its end,
   children and parents alive together are played in the same situations
-  ([How different are the agents?](how-different-are-the-agents.md)). The
+  ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). The
   **heredity index** is 1 when a child acts as its parent does (as the parent
   acts like itself from one try to the next), and 0 when it acts like a
   stranger.

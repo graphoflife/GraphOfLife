@@ -36,7 +36,7 @@ will have to face each of them:
   ecology. It adds a **persistence filter**: a component counts only once it
   has survived for a while, or random [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") would look like novelty. In
   this world a genotype typically lasts two iterations
-  ([Genotypes and lineages](genotypes-and-lineages.md)), so that filter decides
+  ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), so that filter decides
   almost everything.
 - **Three kinds of open-endedness** (Taylor 2019). *Exploratory*: new
   combinations within a fixed space. *Expansive*: new opportunities discovered.
@@ -144,7 +144,7 @@ several agents acting together.
   living merge, two by two, until all meet in one **common ancestor**. In a
   population of fixed size *N*, replaced by chance alone, that ancestor lived a
   number of generations back proportional to *N*.
-  [Genotypes and lineages](genotypes-and-lineages.md) finds the common ancestor
+  [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) finds the common ancestor
   of each world's living agents. [Do the brains matter?](do-the-brains-matter.md)
   compares its movements with those in a world where no brain is better than
   another.
@@ -152,7 +152,7 @@ several agents acting together.
   population that descends from each of several ancestors. A lineage taking
   over appears as a band that widens until it fills the picture
   ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations),
-  [Genotypes and lineages](genotypes-and-lineages.md); [Muller plots](measuring-evolution.md#muller-plots)).
+  [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages); [Muller plots](measuring-evolution.md#muller-plots)).
 
 ## Measuring
 
@@ -258,5 +258,5 @@ several agents acting together.
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->
