@@ -2,22 +2,26 @@
 
 > [!question] Questions of this page
 > - What question does this notebook ask, and why does it matter?
+> - What does it ask right now, and why?
+> - How are the worlds it studies chosen, and when does it change course?
 > - What is a Graph of Life world, in one paragraph?
-> - What would count as an answer?
 > - How do you read a page, and how do you check it?
 
 ## In short
 
 Living things have been inventing new kinds of things for about four billion
 years, and they have not stopped. No computer world has yet been shown to do
-the same. This notebook follows one computer world, **Graph of Life**. It asks
-what the world does, and whether it — or a version of it with changed rules —
-can keep inventing without end. Biologists call that **open-ended evolution**.
-A second question runs alongside: can rules this simple grow something like
-physical space? Every result comes with the worlds it was measured on, and the
-command that makes it again.
+the same. This notebook follows one computer world, **Graph of Life**, and
+asks one question. Does any set of its rules make worlds that pass a test of
+**open-ended evolution**, written down in advance, over 100,000 iterations?
+So far evolution levels off in every world played, so the notebook now asks
+why. Worlds are chosen by how they evolve, against what chance alone would
+do. Health only rules out worlds that are dead, a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen. If
+no change of settings lifts the plateau, the next step changes how a world is
+built. A second aim, whether such rules grow a space with particles in it, is
+a track of its own.
 
-## The question behind it
+## The question
 
 Life on Earth has produced new molecules, new cells, new bodies and new ways
 of living together, one after another, for about four billion years. It has
@@ -30,18 +34,89 @@ surprising things for a while. Then it settles, and the novelty stops. No
 artificial world has yet been shown, by an agreed test, to keep producing new
 kinds of things without end.
 
-This notebook follows one such world and asks what it does. The long-term aim
-is to learn whether it can be open-ended. But that question cannot be asked
-well until the world itself is understood. What happens in it from one
-iteration to the next? What do its numbers mean? How much do they depend on
-chance? Much of the notebook is that groundwork.
+So the notebook asks one question. **Does any set of rules of this family
+make worlds that pass the test of open-ended evolution over 100,000
+iterations?** The family is Graph of Life's rules, with every setting and
+switch its engine has ([Every setting](settings.md)). The test is
+[What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution).
+It was written down before any long run existed, so that it cannot be bent to
+fit one. A set of rules passes when at least two of three new worlds pass its four
+parts:
+
+1. their brains beat the best mixture of their whole past;
+2. their ratings keep rising;
+3. they keep doing new things, faster than mutation alone would;
+4. they stay worlds in which much can happen.
+
+A hundred thousand iterations is a length the notebook can play. Three of
+round 3's worlds would take about two and a half days
+([A hundred thousand iterations](a-hundred-thousand-iterations.md)).
+
+## What it asks now: why does evolution level off?
+
+In every world played so far, evolution levels off. B1's brains stop getting
+better within 50 to 100 iterations
+([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)).
+B2's go on for thousands of iterations, more and more slowly. The two longest
+worlds, played to 50,000 iterations, climbed for 20,000 to 25,000 and then
+only wandered ([Every era against three](every-era-against-three.md)). Round
+3's eras are to be played against each other the same way. That experiment's
+thesis expects the same
+([Did the brains get better?](round-3-eras-against-each-other.md)).
+
+So the question of the moment is why. Four reasons are candidates:
+
+- **Drift.** Few ancestors share a world's future. So luck, and not how
+  well a brain plays, may decide what spreads
+  ([Selection, or chance?](b1-brains-lineages-and-messages.md#selection-or-chance),
+  [Did evolution happen?](did-evolution-happen.md)).
+- **Valleys that need a crowd to cross.** Better play exists, but it pays
+  only when many agents play it at once. A raider written by hand takes hold
+  only if about a hundred start together
+  ([How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs)).
+- **A fixed space of strategies.** A brain of a fixed shape can compute only
+  so much. No brain of B2, of any size, can pass on news of a third agent
+  ([What a brain can compute](what-a-brain-can-compute.md)).
+- **A closed, zero-sum game.** The tokens are a fixed sum: what one agent
+  gains, another loses. And the game spreads them towards an even rest
+  ([A source and a sink](a-source-and-a-sink.md)).
+
+## How worlds are chosen
+
+Worlds are chosen by evolution first. A world counts for what its brains did:
+whether later brains beat earlier ones, whether selection beat luck, and
+whether new things appeared. Each is measured against a null model, which
+says what chance alone would do
+([Did evolution happen?](did-evolution-happen.md)).
+
+Health no longer ranks worlds. Since 11 November 2026 it is frozen at the
+version of 9 November. It only rules out worlds that are dead, a star, uniform
+or frozen
+([Health as a filter](measuring-health.md#from-11-november-2026-health-as-a-filter)).
+And a world chosen as the best of many is lucky as well as good. So a choice
+is tried again in new seeds
+([The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds)).
+
+## When the notebook changes course
+
+The experiment on why evolution levels off tries several arms: changes meant
+to delay or lift the plateau. If no arm does either, the notebook stops
+turning settings. The next step changes the world's structure instead. One is
+an open economy, in which tokens flow in at a source and leave everywhere
+([A source and a sink](a-source-and-a-sink.md)). Another is brains that can
+grow ([How big should a brain be?](how-big-should-a-brain-be.md)).
+
+## The second aim: space and particles
 
 There is a second aim, which shaped the rules from the start. The rules are
 simple and local, and they never create or destroy anything. Rules like that
 might grow, by themselves, the kinds of thing physics describes: a space of a
-few [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), things that last in it, places where something can live.
+few [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."), and things that last in it. This is a separate track with its
+own question: does a world grow a space of its own, with locality and
+particles in it? It has its own part, Space and physics.
 [Physical inspiration](physical-inspiration.md) explains the physical ideas
-behind the rules, and why the two aims keep meeting.
+behind the rules, and [Is a world a space?](how-many-dimensions-does-a-world-have.md)
+what the worlds have shown so far.
 
 ## The world in one paragraph
 
@@ -116,48 +191,33 @@ yardstick for evolution that keeps going, and a [health bar](measuring-health.md
 the network. Then it tried rules meant to pass both, starting from the
 obstacles that
 [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)
-lists.
+lists. That search, and the study of B1 before it,
+are now in the Archive; the notebook's question is the test above.
 
 ## How the notebook is organised
 
-The pages are sorted by topic; [the contents](../README.md#contents) list every
-one of them.
+The pages fall into eight parts; [the contents](../README.md#contents) list
+every one of them.
 
-- **How the simulation works.** The world, one iteration step by step, the
-  brain, every [setting](settings.md "One number or switch of a run's rules, fixed before it starts."), and whether a run can be made again exactly
-  ([Is a run reproducible?](is-a-run-reproducible.md)).
-- **The baselines B1 and B2.** The two sets of rules every experiment starts
-  from ([B1 and B2: the two baselines](b1-and-b2.md)). Thirty worlds of the
-  first, about 14,000 agents each, are looked at from every side
-  ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). The second is built so that its network
-  cannot break ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
-- **Agents' lives, wealth, the game and the flow of tokens, the shape of the
-  network, the size of a world, and brains.** The baseline measured every way,
-  through every statistic the Graph of Life viewer offers and some it does
-  not. Experiments change one setting at a time
-  ([Do the brains matter?](do-the-brains-matter.md),
-  [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
-- **Does evolution keep going?** The yardstick
-  ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)),
-  why evolution stops ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)), and one
-  world planned for a hundred thousand iterations
-  ([A hundred thousand iterations](a-hundred-thousand-iterations.md)).
-- **Changing the rules, and looking for a healthy, rich world.** The rules
-  built to pass the yardstick, alone and in company
-  ([Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)). The search for a world that is
-  healthy and whose agents differ ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich),
-  [A screen of random worlds](a-screen-of-random-worlds.md)).
-- **Strategies written by hand, and groups.** Is evolution's play the best
-  there is ([Strategies written by hand](strategies-written-by-hand.md))? Do
-  agents work together ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom))?
-- **Space and dimension.** The second aim: is a world a space, of how many
-  dimensions, what folds it, and does anything like a particle appear?
-  [Physical inspiration](physical-inspiration.md) sets out the questions.
-- **Methods and statistics.** Short pages, one per idea. They define every
-  measurement and statistical method the notebook uses, with worked examples:
-  [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility),
-  [Survival curves (Kaplan–Meier)](measuring-lives.md#survival-curves-kaplanmeier) and many more. And what a
-  simulation costs ([What a simulation costs](runs-and-records.md#what-a-simulation-costs)).
+- **Start.** What the notebook asks, how to read it, and the ideas it builds
+  on.
+- **Now: round 3 and its candidates.** Round 3's hundred worlds drawn at
+  random, and which of them might keep evolving
+  ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)).
+- **The rules.** How a world works, step by step, every [setting](settings.md),
+  and the two baselines ([B1 and B2: the two baselines](b1-and-b2.md)).
+- **What the worlds do.** What the brains are and do, where wealth goes, and
+  other contests.
+- **Space and physics.** The second aim, with its own question.
+- **The search for open-ended evolution.** How to tell whether evolution goes
+  on, and why it stops. Strategies written by hand, rules without tuned
+  numbers, and the plan for an open economy.
+- **Methods and look-up.** The statistics, every rule and measure in detail,
+  and every simulation made.
+- **Archive.** Frozen pages, shut at first. They hold B1 as it was described
+  in October 2026, how B2 was built, the search for a healthy, rich world with
+  its pilots, and side studies. They are kept so that every experiment can still
+  be read and made again.
 
 Many pages only **ask**: what does a world do, how often, how fast? A page that
 reports an **experiment** also shows a prediction, its **thesis**. The thesis
@@ -198,13 +258,30 @@ formula works.
 
 ## Where to go next
 
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
+  the worlds of round 3 that might keep evolving.
+- [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution):
+  the test the question asks of every world.
 - [The world: tokens, agents and a network](the-world.md): the rules, from the
   beginning.
-- [B1 and B2: the two baselines](b1-and-b2.md): the two worlds every experiment
-  starts from.
-- [Glossary](glossary.md): every term in one line.
 - [How this notebook is written](how-this-notebook-is-written.md): the rules of
   the research, and of its pages.
+
+## How our view changed
+
+- **8 October 2026.** This page was first written as the notebook's opening.
+  It asked what the world does, and whether it, or a version of it with
+  changed rules, can keep inventing without end. It called much of the
+  notebook groundwork, to understand the world before asking that question
+  well.
+- **11 November 2026.** Rewritten around the question as it now stands, after
+  a review of the whole notebook that the owner approved. The question is the
+  open-ended test over 100,000 iterations. The question of the moment is why
+  evolution levels off. Worlds are chosen by evolution against null models,
+  with health only as a filter. And a stop rule says when the notebook changes
+  a world's structure instead of its settings. The second aim is a track of
+  its own. The groundwork the page once announced, the study of B1 and the
+  search for a healthy world, is now in the Archive.
 
 <!-- turns -->
 ---

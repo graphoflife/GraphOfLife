@@ -1,8 +1,24 @@
 # Graph of Life — the Research Notebook
 
-This notebook is a research programme, written down while it is carried out:
-what the Graph of Life algorithm does, and whether a world of it can keep
-producing new things without end — what is called *[open-ended evolution](pages/measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.")*.
+This notebook is a research programme, written down while it is carried out.
+It asks one question: does any set of Graph of Life's rules make worlds that
+pass the notebook's test of *open-ended evolution* over 100,000 [iterations](pages/one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")?
+Open-ended evolution is evolution that keeps producing new things without end,
+and [What would count as open-ended evolution](pages/measuring-evolution.md#what-would-count-as-open-ended-evolution)
+writes the test down.
+
+- **What it asks now.** In every world played so far, evolution levels off.
+  Why? The candidates are drift, valleys that need a crowd to cross, a fixed
+  space of strategies, and a closed, zero-sum [game](pages/one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").
+- **How worlds are chosen.** By how they evolve first, against null models.
+  Health only rules out worlds that are dead, a [star](pages/measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen.
+- **When it changes course.** If the experiment on why evolution levels off
+  finds no arm that delays or lifts the plateau, the next step changes how a
+  world is built, with an open economy or [brains](pages/the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") that can grow, and not its
+  [settings](pages/settings.md "One number or switch of a run's rules, fixed before it starts.").
+- **A second aim.** Whether such rules grow a space of their own, with
+  particles in it, is a separate track with its own question, in its own
+  part.
 
 Start anywhere. Every page says what it asks, and every word that needs
 explaining links to the page that explains it. If you want a beginning, read
@@ -10,24 +26,28 @@ explaining links to the page that explains it. If you want a beginning, read
 pages on [how the simulation works](#how-the-simulation-works).
 
 - [What this notebook is about](pages/what-this-notebook-is-about.md): the
-  question, the world in one paragraph, and how to read and check a page.
+  question, why it is asked, and how to read and check a page.
+- [Candidates for open-ended evolution](pages/candidates-for-open-ended-evolution.md):
+  the worlds of round 3 that might keep evolving.
 - [Glossary](pages/glossary.md): every term in one line.
 - [How this notebook is written](pages/how-this-notebook-is-written.md): the
   rules of the research, and of its pages.
 - [The lab, the engine and pilots](pages/runs-and-records.md#the-lab-the-engine-and-pilots): how an experiment is run
   and made again.
 
-The pages fall into seven parts, each with its colour: where to start; the
+The pages fall into eight parts, each with its colour: where to start; the
 research of the moment, round 3 of the screen of random worlds and its
-[candidates](pages/one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."); the rules; what the worlds do; space and physics; the search for
-open-ended evolution that came before round 3; and methods and look-up, where
-every rule and measure is explained in detail. In the Research Notebook tab
-each part opens and shuts, every page wears its part's colour, and a mark says
-what kind of page it is: a study, an experiment, a plan not played yet, a
-reference page or a guide. The contents can also be sorted by date, by title
-or by kind, filtered, and searched. In **Obsidian**, open the folder `book/` as
-a vault: every link, figure and formula works there, and the graph view shows
-how the pages hang together.
+candidates for open-ended evolution; the rules; what the worlds do; space and
+physics; the search for open-ended evolution; methods and look-up, where every
+rule and measure is explained in detail; and the Archive. The Archive keeps
+frozen pages, what was done and found before 11 November 2026, so that every
+experiment can still be read and made again; it starts shut. In the Research
+Notebook tab each part opens and shuts, every page wears its part's colour, and
+a mark says what kind of page it is: a study, an experiment, a plan not played
+yet, a reference page or a guide. The contents can also be sorted by date, by
+title or by kind, filtered, and searched. In **Obsidian**, open the folder
+`book/` as a vault: every link, figure and formula works there, and the graph
+view shows how the pages hang together.
 
 ## Contents
 
@@ -44,7 +64,7 @@ how the pages hang together.
 
 ### Now: round 3 and its candidates
 
-🟨 The research of the moment: round 3 of the screen of random worlds, its healthiest worlds and its candidates for open-ended evolution, and what is played next.
+🟨 The research of the moment: round 3 of the screen of random worlds, its candidates for open-ended evolution, whether they evolved, and what is played next.
 
 #### Round 3 of the random screen
 
@@ -75,7 +95,7 @@ how the pages hang together.
 
 ### What the worlds do
 
-🟩 What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.
+🟩 What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests. What B1's worlds did is in the Archive.
 
 #### Wealth: who holds the tokens
 
@@ -94,7 +114,7 @@ how the pages hang together.
 
 ### Space and physics
 
-🟪 The second aim: whether a world grows a space of its own, what has no scale, locality, flows and particles.
+🟪 The second aim, a track with its own question: does a world grow a space of its own, with locality and particles in it?
 
 #### Space and dimension
 
@@ -106,7 +126,7 @@ how the pages hang together.
 
 ### The search for open-ended evolution
 
-🟧 Everything tried before round 3 to make evolution go on: tests of evolution, rules changed alone and together, strategies written by hand, and the hunt for a healthy, rich world.
+🟧 How to tell whether evolution goes on and why it stops, strategies written by hand, rules without tuned numbers, and the open economy planned for when no setting lifts the plateau.
 
 #### Does evolution keep going?
 
@@ -170,3 +190,13 @@ how the pages hang together.
 - [Space at scale (side study)](pages/space-at-scale.md)
 - [Measures, atlases and assembly (side studies)](pages/measures-atlases-and-assembly.md)
 <!-- /contents -->
+
+## How our view changed
+
+- **11 November 2026.** The front page now states the notebook's question as
+  it stands: the open-ended test over 100,000 iterations, why evolution levels
+  off, how worlds are chosen, when the notebook changes course, and the second
+  aim. Until then it said that the notebook asks what the Graph of Life
+  algorithm does, and whether a world of it can keep producing new things
+  without end. Since this day the pages fall into eight parts, the last an
+  Archive of frozen pages.

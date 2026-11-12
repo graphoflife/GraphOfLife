@@ -4,7 +4,7 @@
     {
       "id": "start",
       "title": "Start here",
-      "about": "What this notebook is about, how to read it, and the question behind it: can evolution in a simulated world go on without end?"
+      "about": "What this notebook is about, how to read it, and the question behind it: does any set of Graph of Life's rules make worlds that pass the test of open-ended evolution over 100,000 iterations?"
     },
     {
       "id": "screen",
@@ -19,12 +19,12 @@
     {
       "id": "baselines",
       "title": "The baselines B1 and B2",
-      "about": "The two standard worlds every experiment starts from: B1, the original rules, and B2, a world that cannot break, and how it was built."
+      "about": "The two rule sets the notebook started from: B1, the original rules, and B2, a world that cannot break. Round 3's worlds start from B1's rules, changed as drawn; how B2 was built is in the Archive."
     },
     {
       "id": "wealth",
       "title": "Wealth: who holds the tokens",
-      "about": "How unequal a world is, who stays rich, and how gains and losses are shared out."
+      "about": "What keeps a world's wealth spread. B1's inequality, gains and losses, and its richest agents are in the Archive."
     },
     {
       "id": "space",
@@ -34,12 +34,12 @@
     {
       "id": "brains",
       "title": "Brains, and how alike agents are",
-      "about": "What the brains are and compute, the families they make, and how different agents really are."
+      "about": "What the brains are and compute, whether they matter, and how big they should be. B1's genotypes, lineages and messages are in the Archive."
     },
     {
       "id": "evolution",
       "title": "Does evolution keep going?",
-      "about": "How to tell whether evolution goes on, why it stops, and what would count as open-ended evolution."
+      "about": "How to tell whether evolution goes on, why it stops, and the open economy planned for when no setting lifts the plateau."
     },
     {
       "id": "strategies",
@@ -49,12 +49,12 @@
     {
       "id": "groups",
       "title": "Groups and cooperation",
-      "about": "Help, alliances, other contests and patterns that outlast their agents: do agents work together?"
+      "about": "Other contests, and alliances: do agents work together when the game lets them? Who helps whom, and the gliders, are in the Archive."
     },
     {
       "id": "rules",
       "title": "Changing the rules",
-      "about": "The switches of the engine, alone and in company: what each rule does to a world."
+      "about": "Rules without tuned numbers. What each switch did in pilot worlds, alone and in company, is in the Archive."
     },
     {
       "id": "methods",
@@ -93,7 +93,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-02",
-      "summary": "The front page: what the notebook asks, where to begin, and every page by topic."
+      "summary": "The front page: the notebook's question, what it asks now, how worlds are chosen, where to begin, and every page by part and topic."
     },
     {
       "id": "what-this-notebook-is-about",
@@ -105,7 +105,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Living things have been inventing new kinds of things for about four billion years, and they have not stopped. No computer world has yet been shown to do the same. This notebook follows one computer world, Graph of Life."
+      "summary": "The notebook's question: does any set of Graph of Life's rules make worlds that pass the test of open-ended evolution over 100,000 iterations? Why evolution levels off, how worlds are chosen, when the notebook changes course, and the second aim."
     },
     {
       "id": "how-this-notebook-is-written",
@@ -963,7 +963,7 @@
       "id": "now",
       "title": "Now: round 3 and its candidates",
       "colour": "#f2cd5c",
-      "about": "The research of the moment: round 3 of the screen of random worlds, its healthiest worlds and its candidates for open-ended evolution, and what is played next.",
+      "about": "The research of the moment: round 3 of the screen of random worlds, its candidates for open-ended evolution, whether they evolved, and what is played next.",
       "topics": [
         "screen"
       ],
@@ -984,7 +984,7 @@
       "id": "worlds",
       "title": "What the worlds do",
       "colour": "#4ccb60",
-      "about": "What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.",
+      "about": "What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests. What B1's worlds did is in the Archive.",
       "topics": [
         "wealth",
         "brains",
@@ -996,7 +996,7 @@
       "id": "physics",
       "title": "Space and physics",
       "colour": "#ab77f4",
-      "about": "The second aim: whether a world grows a space of its own, what has no scale, locality, flows and particles.",
+      "about": "The second aim, a track with its own question: does a world grow a space of its own, with locality and particles in it?",
       "topics": [
         "space"
       ],
@@ -1006,7 +1006,7 @@
       "id": "search",
       "title": "The search for open-ended evolution",
       "colour": "#e6a532",
-      "about": "Everything tried before round 3 to make evolution go on: tests of evolution, rules changed alone and together, strategies written by hand, and the hunt for a healthy, rich world.",
+      "about": "How to tell whether evolution goes on and why it stops, strategies written by hand, rules without tuned numbers, and the open economy planned for when no setting lifts the plateau.",
       "topics": [
         "evolution",
         "rules",
