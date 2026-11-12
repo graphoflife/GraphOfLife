@@ -260,6 +260,6 @@ stopping, continuing and crashing, it holds exactly.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (11)
-> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [The rules in detail](rules-in-detail.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (10)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [The rules in detail](rules-in-detail.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
 <!-- /turns -->
