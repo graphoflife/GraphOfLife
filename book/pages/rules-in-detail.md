@@ -1131,7 +1131,7 @@ the rounding.
 - [The ideas this builds on](the-ideas-this-builds-on.md#open-ended-evolution-what-it-would-mean)
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#in-short)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#in-short)
-- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#in-short)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#1--the-era-tournament)
 - [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
 - [Why does evolution level off?](why-does-evolution-level-off.md#the-arms)
 - [A hundred thousand iterations](a-hundred-thousand-iterations.md#experiment-11-as-planned-on-9-october-2026)
