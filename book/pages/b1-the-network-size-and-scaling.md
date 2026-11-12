@@ -34,7 +34,7 @@ It gathers what were 7 pages of their own, one section each:
 - [Power laws, real and apparent, and how to fit one](#power-laws-real-and-apparent-and-how-to-fit-one): A power law has no typical size, and on logarithmic axes it is a straight line.
 - [How properties scale together](#how-properties-scale-together): On average, agents hold tokens in proportion to their connections plus one: the resting state of the even split.
 - [Like next to like: how alike agents are at a distance](#like-next-to-like-how-alike-agents-are-at-a-distance): How alike are two agents a given number of steps apart, and up to how far?
-- [Worlds of many sizes](#worlds-of-many-sizes): Experiment 8 ran the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), B1, at ten sizes, from 800 to 409,600 tokens.
+- [Worlds of many sizes](#worlds-of-many-sizes): Experiment 8 ran the first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."), B1, at ten sizes, from 800 to 409,600 tokens.
 - [How much does the seed decide?](#how-much-does-the-seed-decide): Thirty baseline worlds that differ only in their seed end up alike: at 100,000 tokens, their sizes vary by about a tenth of the mean.
 
 ## The shape of the network

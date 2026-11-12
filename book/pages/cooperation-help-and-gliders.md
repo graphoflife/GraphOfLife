@@ -630,7 +630,7 @@ The pattern itself exists already, without any evolution.
 every message names its writer's genotype. Two agents of one genotype write
 the same message, but for a thousandth or so. Kin could tell each other by it.
 What is missing is a brain that compares what it reads, and the
-[baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains barely see
+[baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.")'s brains barely see
 ([What the brains are like](what-the-brains-are-like.md)).
 
 ### When a node changes hands, does it stay in the family?

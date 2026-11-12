@@ -58,7 +58,7 @@ recorded as `meanDegree`.
 triangle, and *d* hangs on *c*. Their degrees are 2, 2, 3 and 1. These add up
 to 8, twice the 4 connections, so the mean degree is 8 / 4 = 2.
 
-A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world has about 1.7 connections for every agent at
+A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") world has about 1.7 connections for every agent at
 100,000 tokens (1.6 at 10,000). Each connection has two ends, so the mean
 degree is about 3.5 (3.3). This is what the notebook means by *links per
 agent*.
@@ -314,10 +314,7 @@ at random, a brain may choose at most 8 links
 ### Where it is used
 
 <!-- used stars-and-hubs -->
-- [Welcome](../README.md#graph-of-life--the-research-notebook)
-- [What this notebook is about](what-this-notebook-is-about.md#in-short)
-- [How this notebook is written](how-this-notebook-is-written.md#the-rules-of-the-research)
-- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#in-short)
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#every-measure-a-score-from-0-to-1)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#in-short)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#11--roles-in-the-network)
 - [Questioning the mechanics](questioning-the-mechanics.md#hubs-are-places)

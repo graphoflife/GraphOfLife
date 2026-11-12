@@ -58,7 +58,7 @@ with three guards against these:
 ### The agents
 
 **The rows.** The worlds are the ten B2 worlds of Experiment 16 and the first
-ten B1 worlds of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") set. Take every 20th game of each, from
+ten B1 worlds of the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") set. Take every 20th game of each, from
 [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 1,000 to 2,000. There is one row for every agent alive at the
 start of the game. That makes
 1,690,320 rows from B2, and 634,832 from B1. A node keeps its number when

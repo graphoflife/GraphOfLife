@@ -355,7 +355,7 @@ for all those above. And the reasons they failed there are B2's own rules:
 - **A least child of ten tokens**
   ([`min_child`](settings.md#min_child)), which the breeding strategies give.
 
-B1, the notebook's first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), has none of them. An agent may stake
+B1, the notebook's first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."), has none of them. An agent may stake
 everything, a holder's stake counts once, a child may start with a single
 token, and nobody dies of age. Its worlds stay rich. At 2,000, 5,000 and
 10,000 iterations, the median agent of its two long worlds holds 4 to 15

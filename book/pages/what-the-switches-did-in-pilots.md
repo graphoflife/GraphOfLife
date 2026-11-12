@@ -481,7 +481,7 @@ neighbours during reproduction
 A link is then cut only once it has gone unused for a whole iteration, so a
 gift can keep it alive.
 **Random inputs** are five random numbers that a brain reads, fresh every
-time, for each candidate it looks at. Without them it reads none.
+time, for each [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") it looks at. Without them it reads none.
 
 A, B, C and D are on and off in all sixteen combinations. E, F, G and H are
 set from them: E = BCD, F = ACD, G = ABC and H = ABD. Each world is B2 at 10,000 tokens, seed 1, played for
@@ -643,7 +643,7 @@ the 0.49 to 0.56 of B2's ten worlds at iteration 1,000
 But it is one world of one seed, and its network is folded. A typical agent
 reaches half the world in 1.19 times the steps its random twin needs
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
-Played on to 10,000 iterations as a candidate world
+Played on to 10,000 iterations as a [candidate world](candidates-for-open-ended-evolution.md#the-worlds-ruled-out "A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still.")
 ([The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on)),
 it fell back on a single mark. One agent came to be joined to more than 5%
 of the others. It was still rich and diverse: 4% of its 399 agents held

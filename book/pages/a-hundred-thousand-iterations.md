@@ -16,21 +16,22 @@ decide. Three of round 3's shortlisted worlds would be played on from iteration
 time is what is missing. Its draft thesis expects that it is not: each world
 keeps its health, and its brains stop getting better long before the end, as
 the notebook's longest worlds did. It needs nothing new built, and takes about
-two and a half days.
+115 worker-hours.
 
 ## The long run, planned again on round 3's candidates
 
 Since 7 November 2026 only two kinds of world are played: more worlds drawn at
 random, and worlds that follow a promising candidate ([What could be played
-next](candidates-for-open-ended-evolution.md#what-could-be-played-next)). [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") is
-no longer a [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") anything is measured against. So a long run made now would
+next](candidates-for-open-ended-evolution.md#what-could-be-played-next)). B1 is
+no longer a baseline anything is measured against
+([What a baseline is](b1-and-b2.md#what-a-baseline-is)). So a long run made now would
 be one of round 3's candidates, played on. Three things make it far easier than
 the plan of 9 October, below.
 
-- **Nothing has to be built.** The [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can play a kept world on from its last
+- **Nothing has to be built.** The lab can play a kept world on from its last
   state, iteration 3,000, under its own [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). It records every
   iteration as round 3 did, and it keeps whole worlds, brains included, as
-  often as the plan asks ([Eras](measuring-evolution.md#eras)). [Frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") for
+  often as the plan asks ([Eras](measuring-evolution.md#eras)). Frames for
   every iteration cost a candidate 0.15 to 0.22 MB an iteration, so no
   windows are needed.
 - **The worlds are small and fast.** Round 3's worlds hold 30,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."). The
@@ -48,13 +49,13 @@ more eras each.
 
 | world | why this one | health's ranks (product, sum, worst) | generations in its first 3,000 iterations | seconds an iteration | 97,000 iterations more |
 |---|---|---|---|---|---|
-| seed 3080 | the healthiest of the fast worlds | 4, 19, 4 | 121 | 0.87 | about a day |
-| seed 3008 | healthy, and its children act most like their parents (heredity index 0.62) | 7, 28, 8 | 947 | 1.32 | a day and a half |
-| seed 3026 | evolves the most: 2,159 generations, and its line never comes back to where it was | 27, 41, 13 | 2,159 | 2.05 | two and a third days |
+| seed 3080 | the healthiest of the fast worlds | 4, 10, 4 | 121 | 0.87 | about a day |
+| seed 3008 | healthy, and its children act most like their parents (heredity index 0.62) | 10, 20, 10 | 947 | 1.32 | a day and a half |
+| seed 3026 | evolves the most: 2,159 generations, and its line never comes back to where it was | 23, 36, 17 | 2,159 | 2.05 | two and a third days |
 
-On three workers side by side that is about two and a half days, and about
-60 GB of disk. All three runs already live on the external drive, with 408 GB
-free, so they would grow there. The seconds are each world's own, over its iterations 2,000 to 3,000;
+That is about 115 worker-hours and about 60 GB of disk
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)). The
+seconds are each world's own, over its iterations 2,000 to 3,000;
 the ranks and generations are from
 [Which worlds are healthy?](which-worlds-are-healthy.md) and
 [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md).
@@ -64,7 +65,7 @@ the ranks and generations are from
 > played on to 100,000 iterations keeps its health, and its brains stop
 > getting better long before the end, as the notebook's longest worlds did.
 >
-> **Why.** The two worlds of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") played to 50,000 iterations climbed for 20,000
+> **Why.** The two worlds of B2 played to 50,000 iterations climbed for 20,000
 > to 25,000 and then only wandered
 > ([Every era against three](every-era-against-three.md)). Round 3's worlds
 > are smaller still: about fourteen ancestors share each world's future, so
@@ -83,8 +84,8 @@ the ranks and generations are from
 > decides nothing.
 
 **Choices for the author.** Which worlds: these three, others of the
-shortlist, or none until Experiment 43 has shown which settings stay healthy
-with new seeds. How long: 100,000 iterations, or 25,000 first. And the
+shortlist, or none until [Experiment 43](candidates-for-open-ended-evolution.md)
+shows which settings stay healthy with new seeds. How long: 100,000 iterations, or 25,000 first. And the
 lines of the thesis: 0.1 of health and 0.55 of a contest are proposals.
 
 ## Experiment 11, as planned on 9 October 2026
@@ -96,8 +97,7 @@ stops it when something goes wrong and flags it when something stands out, and
 keep frames only in short windows. It needed three things the lab could not do
 on 9 October; of these, only kept checkpoints have been built since. Contests
 then showed that B1's brains learn nothing after their first 50 to 100
-iterations, and B1 is no longer a baseline anything is measured against. So the
-plan is obsolete. Its plan file is `book/experiments/drafts/E11.json`. The
+iterations, and B1 is no longer measured against. So the plan is obsolete. Its plan file is `book/experiments/drafts/E11.json`. The
 whole plan of 9 October, with its reasons, method, sentinel and costs, is in
 the notebook's history: `git show
 9ec755d:book/pages/a-hundred-thousand-iterations.md`. Its thesis stays here,
@@ -152,7 +152,7 @@ are in `research/Plans.md`.
   world of the notebook had lived was 3,000 iterations. Its questions called
   a hundred thousand "thirty times longer than any world". That held until
   15 October 2026. That night the first of B2's worlds played on from
-  Experiment 16 reached 10,000 iterations, and two of B1 followed as [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+  Experiment 16 reached 10,000 iterations, and two of B1 followed as pilots
   ([Every simulation](every-simulation.md#the-pilot-batches)). By 17 October
   two worlds of Experiment 18 had lived 50,000
   ([Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)).
@@ -185,6 +185,12 @@ are in `research/Plans.md`.
   B1's, so twice lies between. It is in the notebook's history (git show
   c09615c:book/pages/a-hundred-thousand-iterations.md). The section Results,
   which said that none of the runs had been played, is cut too.
+- **12 November 2026.** The table gave health's ranks (product, sum, worst) of
+  an earlier order: 4, 19, 4 for seed 3080; 7, 28, 8 for seed 3008; and 27,
+  41, 13 for seed 3026. The order of 9 November reads 4, 10, 4; 10, 20, 10;
+  and 23, 36, 17 ([Which worlds are healthy?](which-worlds-are-healthy.md)).
+  The time on the lab's workers is now given in worker-hours. On 9 November
+  the external drive the three runs live on had 408 GB free.
 
 <!-- turns -->
 ---

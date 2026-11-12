@@ -100,7 +100,7 @@ others spread around it.
 #### How a band is made
 
 Take a statistic and a set of runs: say, the number of agents after every
-[game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in the 30 [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") runs.
+[game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in the 30 [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") runs.
 
 1. **Stretches.** Cut the iterations into up to 600 stretches of equal
    length. A statistic measured every iteration over 3,000 iterations gets 600

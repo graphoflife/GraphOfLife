@@ -34,7 +34,7 @@ outputs. The outputs take every decision of
 
 Nothing in a brain is designed. A founder's brain is drawn at random, and
 brains change only by chance: when they are copied, and after every game.
-This page describes the brain of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") B1 completely. It says what the
+This page describes the brain of the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") B1 completely. It says what the
 brain reads, how it computes, how its outputs become decisions, and how it
 changes from one generation to the next.
 

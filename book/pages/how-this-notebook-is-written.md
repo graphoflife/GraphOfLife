@@ -35,13 +35,18 @@ made again.
 8. **How our view changed.** If anything on the page was once stated
    differently, the earlier claim and its correction, with dates, at the end.
 
-A **reference page** gathers the details of one family of rules or measures:
-the rules in detail, lives, [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), networks, space, evolution, health,
-statistics, and how runs are made. Each idea has a section of its own, as a
-short page had before 9 November 2026: the idea made precise, an example with
-real numbers, and **Where it is used**. That last is a list of the pages that
-link to the section, made by `python3 book_fill.py`, so it cannot fall behind.
-A link to an idea leads to its section.
+Each page has a kind, in `book/book.json`, and the kind decides its sections:
+- a **study** has all of them;
+- an **experiment** adds its thesis, and a last section, How this was made,
+  with the box of its runs; a **plan**, an experiment not played yet, has its
+  thesis and no results;
+- a **reference** page has a section for each idea of one family of rules or
+  measures, and no What we learned. Each section makes the idea precise,
+  gives an example with real numbers, and ends with **Where it is used**: the
+  pages that link to it, listed by `python3 book_fill.py`. A link to an idea
+  leads to its section;
+- an **overview**, a **method** or an **explanation** page explains the
+  notebook or the rules.
 
 ## Parts, and what each page is
 
@@ -100,9 +105,8 @@ it again.
 - **Evolution first.** Worlds are chosen and ranked by how they evolve:
   whether later [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") beat earlier ones, whether selection beat luck, and
   whether new things appeared
-  ([Did evolution happen?](did-evolution-happen.md)). Health only rules out
-  worlds that are dead, a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen
-  ([Health as a filter](measuring-health.md#from-11-november-2026-health-as-a-filter)).
+  ([Did evolution happen?](did-evolution-happen.md)). Health only filters
+  ([the health filter](measuring-health.md#from-11-november-2026-health-as-a-filter)).
 - **A stated start, and what changes.** A plan says the rules its worlds start
   from, and what it changes: one [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") of a baseline, as the early
   experiments did, or every setting drawn at random, as the screen does
@@ -128,7 +132,7 @@ it again.
   what differs, seed — so an experiment that needs runs which already exist
   uses them.
 - **No tuned constants in new rules.** A rule added to the engine carries no
-  hand-set factor beyond the tokens and the mutation's parameters: what a
+  hand-set factor beyond the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and the mutation's parameters: what a
   world does should emerge. ([Rules without numbers](rules-without-numbers.md)
   shows what the numbers B2 was built with do.)
 - **When settings run out, change the structure.** If no change of settings
@@ -166,8 +170,8 @@ keeps.
   another, with where it went;
 - `GraphOfLifeRuns/` — the runs themselves, on the machine that ran them.
 
-The programme the notebook follows, and what is already known, is in
-`research/Research.md` — the *Findings* page under Research.
+The programme the notebook follows is set out in
+[What this notebook is about](what-this-notebook-is-about.md).
 
 ## How mistakes are corrected
 
@@ -201,6 +205,6 @@ and the page that changed it. Nothing is quietly deleted.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (3)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Rules without numbers](rules-without-numbers.md)
+> [!info]- Pages that link here (4)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Rules without numbers](rules-without-numbers.md) · [How worlds are measured](how-worlds-are-measured.md)
 <!-- /turns -->

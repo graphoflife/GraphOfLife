@@ -14,7 +14,7 @@
 Almost every rule of Graph of Life acts only where it is, but three act on a
 whole world at once: the cull, the share-out and the one random stream. This
 page plans to make each of them local, one at a time, on six of round 3's
-candidate worlds, each against its own run. Round 3 already drew two local
+[candidate worlds](candidates-for-open-ended-evolution.md#the-worlds-ruled-out "A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still."), each against its own run. Round 3 already drew two local
 rules. Mending a death cut the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") culls from 11.4% to 3.5%, but not
 the big breaks, and it folded the worlds; estates that flow to the nearest
 living pooled wealth, so that the richest [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") held 2.7% of all tokens against

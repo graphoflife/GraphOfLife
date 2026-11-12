@@ -7,7 +7,7 @@
 >   changing but stays in place, as in a race where everybody runs?
 > - What does it mean, in numbers, for a world's network to hold: to be
 >   resilient, decentralised, and neither a tree nor complete?
-> - Do the [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") keep improving: [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), whose [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") are nearly blind, and
+> - Do the [baselines](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") keep improving: [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), whose [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") are nearly blind, and
 >   [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), a world that cannot break and whose brains can see?
 > - Why does evolution slow down, and would we notice if it went on?
 

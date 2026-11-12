@@ -25,8 +25,9 @@ and a brain of the world's future. Biologists ask this as whether a rare type
 can invade, physicists as a small system in touch with a reservoir. The draft
 thesis: no brain gains by being an individual, and none takes hold in more
 than one planting in ten. It needs the sea, a few additions to the invasion
-test, and at most about 20 hours on three workers for the three fastest
-worlds.
+test, and at most about 60 worker-hours (20 hours on three workers) for the
+three fastest worlds
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)).
 
 > [!quote] Draft thesis (to be fixed before any run)
 > **Claim.** In a sea of a world's average, no brain gains by being an

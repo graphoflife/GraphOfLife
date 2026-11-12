@@ -71,18 +71,9 @@ other library versions, or on another processor.
 
 ### An example: Experiment 1
 
-Experiment 1 tested the lab itself. Three seeds of B1 were each run four
-ways for 30 iterations:
-- straight through;
-- stopped at iteration 10, and continued in a new process;
-- killed without saving at 15, and resumed from its save at 10;
-- and with the matrix library on every core.
-
-The first three ways recorded the same frames, bit for bit. On every core the
-frames were the same too. But in two seeds the [messages](rules-in-detail.md#messages) in
-flight at the end differed in their last bits
-([Is a run reproducible?](is-a-run-reproducible.md)). All twelve runs were
-made on the snapshot `f39288e90b003df0`, from commit `ccba58f`.
+Experiment 1 tested the lab: stopped, killed or resumed runs record the same
+frames bit for bit, and one thread keeps even the last bits
+([Is a run reproducible?](is-a-run-reproducible.md#the-experiment)).
 
 ### Pilot worlds
 
@@ -209,10 +200,8 @@ Every page with a box *The runs behind this page* reads the lab's runs.
 - [What this notebook is about](what-this-notebook-is-about.md#how-to-read-a-page-and-how-to-make-it-again)
 - [How this notebook is written](how-this-notebook-is-written.md#where-to-go-next)
 - [A screen of random worlds](a-screen-of-random-worlds.md#looked-at-as-if-for-the-first-time)
-- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#few-tokens-culled)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-could-be-played-next)
 - [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#in-short)
-- [A hundred thousand iterations](a-hundred-thousand-iterations.md#the-long-run-planned-again-on-round-3s-candidates)
 - [Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)
 - [Is a run reproducible?](is-a-run-reproducible.md#where-to-go-next)
 - [Every setting](settings.md#where-to-go-next)
@@ -224,11 +213,9 @@ Every page with a box *The runs behind this page* reads the lab's runs.
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#every-world-at-iteration-1000)
 - [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
 - [What the brains are like](what-the-brains-are-like.md#how-a-brain-is-examined)
-- [Brains replaced by their average](brains-replaced-by-their-average.md#in-short)
 - [How big should a brain be?](how-big-should-a-brain-be.md#every-brain-of-round-3-responds)
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)
 - [Every era against three](every-era-against-three.md#how-this-was-made)
-- [A source and a sink](a-source-and-a-sink.md#where-a-source-could-sit)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#what-we-expected-of-a-crowd)
 - [What a brain can compute](what-a-brain-can-compute.md#the-check)
 - [Other contests: a lottery, and alliances](another-game.md#in-short)
@@ -370,7 +357,9 @@ hours a computer spends on it, the memory a run needs, and the disk its
 frames take. These costs are measured, not guessed. A run's time is close to
 proportional to its number of agents and the size of their brains. A B1
 world of 10,000 tokens takes about a second per iteration. An experiment takes about 12 hours
-of the computer, and never more than two days.
+of the computer, and never more than two days. A plan gives its cost in
+worker-hours, the hours of one of the lab's workers. Since 11 November 2026
+the lab plays on two workers at once, while a separate agent uses a core.
 
 ### Measured, not guessed
 
@@ -492,6 +481,6 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics), [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (33)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
+> [!info]- Pages that link here (37)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A source and a sink](a-source-and-a-sink.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

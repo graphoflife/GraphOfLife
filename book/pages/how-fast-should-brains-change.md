@@ -83,7 +83,7 @@ before all of this, is kept as it was.
 
 ## Why the question moved to B2
 
-This experiment was first planned on [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."). There it asked
+This experiment was first planned on [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), the first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."). There it asked
 whether three births per hundred agents an iteration is a rate that selection
 finds, or only the churn of mutation.
 

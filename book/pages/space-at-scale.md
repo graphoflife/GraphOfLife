@@ -92,7 +92,7 @@ same code.
 
 **The worlds** are B1's, from three experiments:
 
-- Experiment 8 ran the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") at ten sizes, from 800 to 409,600 tokens,
+- Experiment 8 ran the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") at ten sizes, from 800 to 409,600 tokens,
   three [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") each, for 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
   ([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
   Of its 30 worlds, 25 lived to the end: one of 1,600 tokens and every world

@@ -9,7 +9,7 @@
 
 ## In short
 
-Instead of changing [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") one rule at a time, the screen draws worlds with every
+Instead of changing B2 one rule at a time, the screen draws worlds with every
 setting at random, as biologists screen random mutants. Round 1 (Experiment 38)
 drew fifty worlds from an older list of settings, and found no healthy world
 among them and one interesting one. Round 2 (Experiment 39) was withdrawn
@@ -56,7 +56,7 @@ growth of groups ([Strategies written by hand](strategies-written-by-hand.md)).
 
 Each world is dealt its settings like a hand of cards. For every setting the
 sampler, `gol_screen.py`, draws afresh, by a rule that depends only on the kind
-of setting. It starts from [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s rules and changes what the draw says. An on/off
+of setting. It starts from B1's rules and changes what the draw says. An on/off
 rule is on in some of the worlds, and a choice takes each of its options
 equally often. A number keeps its default or takes one of a few levels. A
 setting that can matter only beside another is drawn only there, so two draws
@@ -216,13 +216,13 @@ All hundred worlds of round 3 had been played by 3 November 2026: Experiment
 then asked (7 November 2026) for three things, each now on a page of its own:
 an order of the worlds from the most healthy to the least, by a definition of
 health they can check
-([Which worlds are healthy? A proposed order](which-worlds-are-healthy.md));
+([Which worlds are healthy? Three orders](which-worlds-are-healthy.md));
 what each drawn setting does to a world
 ([How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md));
-and every world that lived read as a candidate for open-ended evolution
+and every world that lived read as a candidate world for open-ended evolution
 ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)).
-In the author's words, "there is no [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")": every world of round 3 is a
-candidate, and no world is measured against B1 or B2 any more. Round 1, drawn
+In the author's words, "there is no baseline": no world of round 3 is measured
+against B1 or B2 ([What a baseline is](b1-and-b2.md#what-a-baseline-is)). Round 1, drawn
 from an older list of settings, is left out of all three (the author, 8
 November 2026).
 
@@ -288,7 +288,7 @@ Every world's name in these tables opens it in the viewer.
 
 ## Where to go next
 
-- [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md):
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md):
   every world drawn at random, from the most healthy to the least.
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md):
   what each drawn setting does, and what could be set aside.
@@ -309,8 +309,9 @@ Every world's name in these tables opens it in the viewer.
 Every value is drawn from a hash of the sampler's version, the round's seed,
 the world's number and the setting's name, not from one random stream. So
 adding worlds to a round, or drawing a refused combination again, changes no
-other world. A world's settings are kept as what differs from B1, which is why
-every row of the tables of settings below lists the brain's hidden layers.
+other world. A world's settings are kept as what differs from B1
+([What a baseline is](b1-and-b2.md#what-a-baseline-is)), which is why every row
+of the tables of settings below lists the brain's hidden layers.
 
 The 25 million million worlds are counted from the sampler's list in
 `gol_screen.py`. The count multiplies every setting's number of values, and
@@ -466,6 +467,6 @@ counts a setting that can matter only beside another only where it can.
 
 [Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) →
 
-> [!info]- Pages that link here (16)
-> [How this notebook is written](how-this-notebook-is-written.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Particles: patterns that outlast what carries them](particles.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (17)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Particles: patterns that outlast what carries them](particles.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

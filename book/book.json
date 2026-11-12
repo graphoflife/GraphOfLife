@@ -19,12 +19,12 @@
     {
       "id": "baselines",
       "title": "The baselines B1 and B2",
-      "about": "The two rule sets the notebook started from: B1, the original rules, and B2, a world that cannot break. Round 3's worlds start from B1's rules, changed as drawn; how B2 was built is in the Archive."
+      "about": "The two rule sets the notebook started from: B1, the original rules, and B2, a world that cannot break. Round 3's worlds start from B1's rules, changed as drawn."
     },
     {
       "id": "wealth",
       "title": "Wealth: who holds the tokens",
-      "about": "What keeps a world's wealth spread. B1's inequality, gains and losses, and its richest agents are in the Archive."
+      "about": "What keeps a world's wealth spread."
     },
     {
       "id": "space",
@@ -34,7 +34,7 @@
     {
       "id": "brains",
       "title": "Brains: what they are, and whether they matter",
-      "about": "What the brains are and compute, whether they matter, and how big they should be. B1's genotypes, lineages and messages are in the Archive."
+      "about": "What the brains are and compute, whether they matter, and how big they should be."
     },
     {
       "id": "evolution",
@@ -49,12 +49,12 @@
     {
       "id": "groups",
       "title": "Groups and cooperation",
-      "about": "Other contests, and alliances: do agents work together when the game lets them? Who helps whom, and the gliders, are in the Archive."
+      "about": "Other contests, and alliances: do agents work together when the game lets them?"
     },
     {
       "id": "rules",
       "title": "Changing the rules",
-      "about": "Rules without tuned numbers. What each switch did in pilot worlds, alone and in company, is in the Archive."
+      "about": "Rules without tuned numbers."
     },
     {
       "id": "methods",
@@ -203,7 +203,7 @@
       ],
       "status": "analysed",
       "added": "2026-11-07",
-      "summary": "Round 3's worlds read for heredity, selection and change: 72 candidates, evolution fast but narrow, and a shortlist of 24 from health's three orders, played again in Experiment 43."
+      "summary": "Round 3's worlds read for heredity, selection and change: 72 candidates, evolution fast but narrow, and a shortlist of 21 from health's three orders (24 on 9 November, played again in Experiment 43)."
     },
     {
       "id": "did-evolution-happen",
@@ -1027,7 +1027,7 @@
       "id": "worlds",
       "title": "What the worlds do",
       "colour": "#4ccb60",
-      "about": "What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests. What B1's worlds did is in the Archive.",
+      "about": "What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests.",
       "topics": [
         "wealth",
         "brains",
@@ -1072,7 +1072,7 @@
       "id": "archive",
       "title": "Archive",
       "colour": "#a3a3a3",
-      "about": "Frozen pages, kept so that every experiment can still be read and made again: what was done and found before 11 November 2026. They are not brought up to date as the research moves on.",
+      "about": "Frozen pages: what was done and found before 11 November 2026. B1 as it was described in October, how B2 was built, the search for a healthy, rich world with its pilots, the strategies planted in late worlds, rounds 1 and 2 of the screen, and side studies. They are kept so that every experiment can still be read and made again, and are not brought up to date as the research moves on.",
       "topics": [
         "b1-history",
         "history",

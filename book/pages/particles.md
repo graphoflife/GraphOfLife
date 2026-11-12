@@ -68,7 +68,7 @@ star's centre is a place handed from parent to child
 ([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 Groups of the flow are the network's regions
 ([Flow modules](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). This page asks the question again of the
-largest worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") and of the healthiest worlds found
+largest worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") and of the healthiest worlds found
 since, with detectors that come with their own controls.
 
 ## Twelve worlds, read game by game

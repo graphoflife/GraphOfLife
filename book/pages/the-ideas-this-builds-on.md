@@ -113,7 +113,7 @@ buys a lasting advantage. A fixed supply of tokens fought over by neighbours is
 such a setting.
 
 In this world the game has not kept the population moving. Played against the
-brains of earlier eras, the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains stop improving within their first
+brains of earlier eras, the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.")'s brains stop improving within their first
 hundred iterations. Later brains neither beat the ones before them nor go round
 in a circle: they tie
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).

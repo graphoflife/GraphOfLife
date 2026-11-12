@@ -839,7 +839,6 @@ of the messages' variety.
 - [What a brain can compute](what-a-brain-can-compute.md#where-to-go-next)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
 - [Measuring health: criteria, the health bar and diversity](measuring-health.md#the-same-position-share)
-- [How runs are made, recorded and costed](runs-and-records.md#an-example-experiment-1)
 
 > [!info]- And in the Archive (3)
 > [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#notes-in-a-code-nobody-wrote) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-an-agent-can-give) · [Measures of the archived studies](measures-of-the-archived-studies.md#how-many-directions-a-cloud-of-points-uses)

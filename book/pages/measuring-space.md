@@ -411,7 +411,7 @@ tells the story, with its numbers.
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
   the rulers on the worlds, and what folds a world into a small world.
 - [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world):
-  the viewer's measures on the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.
+  the viewer's measures on the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") worlds.
 - [Physical inspiration](physical-inspiration.md#space-made-of-relations): why
   the notebook asks how many dimensions a world has.
 - [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap): distances in a network.

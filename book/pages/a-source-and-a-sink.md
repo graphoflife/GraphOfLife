@@ -43,7 +43,7 @@ where its tokens are.
 A world of Graph of Life has no fixed places. Nodes are born and die, and the
 world has no coordinates. So where should tokens come in?
 
-1. **Everywhere.** The [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can do this now:
+1. **Everywhere.** The engine can do this now:
    [`tokens_created_per_phase`](settings.md#tokens_created_per_phase) adds
    tokens to the pool at every [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out."), dealt out like an [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them."). A flow
    without a place makes no gradient. It is kept below as a control.
@@ -183,7 +183,7 @@ the same mean tokens.
 
 ### What is measured
 
-- **Distance from the source**, for every agent in every recorded [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."), by
+- **Distance from the source**, for every agent in every recorded frame, by
   walking the network outward from the source node.
 - **Profiles by distance,** over iterations 500 to 3,000: how many agents
   stand at each distance; their tokens, their ages; births and deaths per
@@ -275,8 +275,9 @@ the other road to a gradient, tokens with a quality, and is not this.
 In round 3 the three worlds took 3.1 hours of one worker for 3,000 iterations:
 1.6 for seed 3026, 0.6 for seed 3004 and 0.8 for seed 3080. An open world fed
 as many tokens as its closed self held agents should hold about as many and
-cost about as much: about three worker-hours a condition, an hour or so on the
-lab's three workers, and twice that with the flow spread everywhere. The
+cost about as much: about three worker-hours a condition, and twice that with
+the flow spread everywhere
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)). The
 closed controls are those of Local rules only; closed worlds at the open
 worlds' mean tokens, if they are needed, cost about as much again. Each
 condition fills about 2.3 GB of disk.

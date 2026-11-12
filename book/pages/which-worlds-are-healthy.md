@@ -21,16 +21,14 @@ three orders: [seed](rules-in-detail.md#seeds-and-the-random-stream "The number 
 first, and seeds 3018, 3080 and 3057. Seed 3077 shows how much the way of
 putting them together matters: it is the third by the sum, the 24th by the
 product and the 65th by its worst criterion, as it is folded into a small
-world. The candidates
-for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") are drawn from the first 13 of each order. Every name
+world. The worlds
+shortlisted for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") are drawn from the first 13 of each order. Every name
 in the orders opens its world in the viewer, for the author to check.
 
 From 11 November 2026 this health is frozen at the version of 9 November and
-used only as a filter: worlds that are dead, a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen are left
-out. Worlds are ranked by evolution, against null models, and no longer by
-these orders ([Health as a
-filter](measuring-health.md#from-11-november-2026-health-as-a-filter)). The
-orders stay as the record of how round 3's candidates were chosen.
+only filters ([the health filter](measuring-health.md#from-11-november-2026-health-as-a-filter)); worlds are ranked by evolution,
+against null models, and no longer by these orders. The orders stay as the
+record of how round 3's shortlist was chosen.
 
 ## Why an order, and not a verdict
 
@@ -56,12 +54,11 @@ The orders hold the hundred worlds of round 3 of
 Experiment 40's 84, drawn from the [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") the author chose on 24 October
 2026, and the eight draws of Experiments 41 and 42, each played twice, a token
 at a time. Round 1 drew from an older list of settings, round 2 was never
-played, and neither is in the orders (the author, 8 November 2026). Every run's
-name begins with "[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")" only because a drawn world's settings are kept as changes
-from B1's rules; its seed says which world it is (3001 to 3100 for Experiment
-40, 4001 to 4008 for the draws played a token at a time). There is no [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")
-any more. B1 and [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") were where we learned to measure, and a world is no longer
-judged against them.
+played, and neither is in the orders (the author, 8 November 2026). A world's
+seed says which world it is: 3001 to 3100 for Experiment 40, 4001 to 4008 for
+the draws played a token at a time. Drawn worlds are judged against each other,
+not against a baseline
+([What a baseline is](b1-and-b2.md#what-a-baseline-is)).
 
 ## What healthy could mean
 
@@ -88,7 +85,7 @@ added on 8 November 2026.
 ## Every measure, a score from 0 to 1
 
 Each criterion is read from a few measures, each averaged over a world's run
-from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 100 to its end:
+from iteration 100 to its end:
 
 <!-- table healthorder/measures -->
 | criterion | measure | better |
@@ -113,7 +110,7 @@ from [iteration](one-iteration.md "One step of a world's time: a phase of reprod
 The measures are in different units: a share of the agents, a number of
 dimensions, a ratio of distances. To put them together, each is read the same
 way: **a world's score in a measure is the share of the round's living worlds
-it does better than.** The world with the smallest hub of all scores 1 in the
+it does better than.** The world with the smallest [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") of all scores 1 in the
 hub; a world whose hub is smaller than 70% of the others' scores 0.7; the world
 with the largest hub scores 1/82, the least any world scores. Worlds that tie
 share their place. So every score is positive, a bigger one is always better,
@@ -168,7 +165,7 @@ its reason:
 <!-- /table -->
 
 **The price.** A score says how a world stands among round 3's worlds, not
-against a fixed mark. A world that loses 2% of its tokens in a [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") scores
+against a fixed mark. A world that loses 2% of its tokens in a game scores
 well here because most worlds of round 3 lose more; in a round of better worlds
 it would score less. For an order of round 3, that is what is wanted. To
 compare rounds, they are scored together.
@@ -181,18 +178,15 @@ bad. But if every few iterations a whole branch, maybe 40% of the network, it
 is quite bad." And on 9 November, how to measure it: "the average percentage
 of tokens culled ... only in the game phase."
 
-**What culled means.** At the end of every phase the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") removes the agents
-that starved, those left with no token. Then it keeps the largest piece of the
-network and removes every agent no longer joined to it: these are the
-*culled* ("Culled" in the viewer's statistics). A culled agent may hold many
-tokens; it is removed only because it lost its way to the rest. What it held is
-shared out among the living.
+**What culled means.** The culled are the agents a cleanup removes because
+they are no longer joined to the largest piece of the network, whatever they
+hold ([Cleanup](one-iteration.md#cleanup)).
 
 **Why tokens.** A leaf, an agent cut off alone at the edge, is mostly poor,
 while a whole branch holds its share of the world's riches. So the share of
 all tokens culled in a game counts a leaf for little and a branch for what it
 held, with no line for what makes a piece big. The starved hold nothing, so
-every token a game's [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") shares out was a culled agent's, and each run
+every token a game's cleanup shares out was a culled agent's, and each run
 records it in its statistics. The measure is the share of all the world's
 tokens culled in a game, averaged over the games from iteration 100 on. As an
 average a game, it does not depend on how long a stretch is looked at.
@@ -287,9 +281,9 @@ The three orders agree only in part. The order by the product and the order
 by the sum have a [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") of 0.87, the product and the worst 0.79,
 the sum and the worst only 0.46. Five worlds are among the first 13 of all
 three: seeds 3042, 4006 played strongest first, 3018, 3080 and 3057. The
-candidates for open-ended evolution are the worlds among the first 13 of any
-of the three orders that the candidates' own rules do not rule out: 21 worlds
-([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)).
+worlds shortlisted for open-ended evolution are those among the first 13 of any
+of the three orders that the funnel's rules do not rule out: 21 worlds
+([The shortlist](candidates-for-open-ended-evolution.md#the-shortlist)).
 
 ## The orders
 
@@ -422,7 +416,7 @@ allows gifts and keeps a link only while it is paid for or used.
 culled* in 21 worlds, *decentralised* in 19, *almost three-dimensional* in 15,
 *not too even* in 14, *resilient* in 9, and *diverse* in 4.
 
-**The candidates mostly mend their dead.** Of the 21 candidates, 16 mend their
+**The shortlisted worlds mostly mend their dead.** Of the 21, 16 mend their
 dead, against 44 of the 82 living worlds; 14 play the lottery, 12 allow gifts
 and 13 put a token in every link.
 
@@ -558,8 +552,8 @@ Two questions the orders cannot answer by themselves:
 - **The share of tokens culled tells leaves from branches** without a line for
   what makes a piece big: the worlds that cull little lose poor agents, those
   that cull much lose their share of the riches.
-- **Mending the dead spares a world its culls,** and 16 of the 21 candidates
-  mend.
+- **Mending the dead spares a world its culls,** and 16 of the 21
+  shortlisted worlds mend.
 - **Health does not drift** over a run.
 
 ## Where to go next

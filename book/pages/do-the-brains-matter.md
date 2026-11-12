@@ -11,7 +11,7 @@
 
 ## In short
 
-Experiment 7 took away the brains of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), in two ways, for
+Experiment 7 took away the brains of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."), [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), in two ways, for
 the same thirty seeds. Worlds whose every decision was drawn by chance all
 died within three iterations, while worlds of random, unselected brains live:
 the brains matter. Worlds whose brains never change live on, each with the

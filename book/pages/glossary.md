@@ -22,13 +22,14 @@ there.
 - **[autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum)** — How much a world's value now still says about its value some iterations later.
 - **[B1](b1-and-b2.md)** — The first baseline: the algorithm exactly as a new run is offered it.
 - **[B2](b1-and-b2.md)** — The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.
-- **[baseline](b1-and-b2.md)** — The stated rules an experiment starts from and changes one thing of: B1 or B2.
+- **[baseline](b1-and-b2.md)** — The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.
 - **[bootstrap](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds)** — How sure a number is, found by redrawing the worlds it came from many times.
 - **[box dimension](measuring-space.md#box-dimension)** — A network's dimension read from how many boxes of a given size it takes to cover it.
 - **[brain](the-brain.md)** — The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.
 - **[brain diversity](measuring-evolution.md#brain-diversity)** — How many different brains, or genotypes, a world holds.
 - **[bridge](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)** — A connection that lies on no loop: cut it and the network falls into two pieces.
 - **[candidate](one-iteration.md#phase-1-reproduction)** — An agent itself and each of its neighbours, the ones its brain looks at when it decides.
+- **[candidate world](candidates-for-open-ended-evolution.md#the-worlds-ruled-out)** (also candidates for open-ended evolution) — A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still.
 - **[circulation](measuring-tokens.md#flows-that-go-round)** — The part of a flow that goes round in loops, as against the part that runs from sources to sinks.
 - **[cleanup](one-iteration.md#cleanup)** — The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.
 - **[clustering](measuring-networks.md#clustering)** — How often an agent's neighbours are also each other's neighbours.
@@ -104,6 +105,7 @@ there.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
 - **[settled life](statistics.md#the-settled-life-of-a-world)** — A world after its youth, where it is measured: from iteration 500 to its end in the baselines, from 100 in round 3 of the screen.
 - **[share function](rules-in-detail.md#the-share-function-fa-b)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
+- **[shortlist](candidates-for-open-ended-evolution.md#the-shortlist)** — The candidate worlds of round 3 among the first 13 of any of health's three orders: the worlds chosen to be played again.
 - **[spectral dimension](measuring-space.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.
 - **[spectral gap](measuring-networks.md#the-spectral-gap)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
 - **[survival curve](measuring-lives.md#survival-curves-kaplanmeier)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.

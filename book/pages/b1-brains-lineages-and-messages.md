@@ -362,7 +362,7 @@ chance swept them depended on how often their agents were born and died.
 Where no one was born any more, the common ancestor hardly moved: a median of
 0 moves. Where about one child was born for every agent in every iteration,
 chance swept the whole world about every thirty iterations. That is a median
-of 94 moves, against 8 in the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of the same size. None of these
+of 94 moves, against 8 in the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") worlds of the same size. None of these
 worlds is born and dies as the baseline does, so they could not settle the
 question.
 

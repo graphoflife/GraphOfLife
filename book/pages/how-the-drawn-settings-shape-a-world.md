@@ -466,7 +466,7 @@ only over far longer runs than ours, messages above all
 
 ## Where to go next
 
-- [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md):
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md):
   the health every comparison here reads.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
   the living worlds read for heredity, selection and change.

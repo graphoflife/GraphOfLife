@@ -8,9 +8,8 @@
 
 ## In short
 
-This page lists every world the notebook has made. The lab's experiments, from
-Experiment 1 to Experiment 44, were planned before they ran, and are judged
-against a thesis. The pilot
+This page lists every world the notebook has made. The lab's experiments were
+planned before they ran, and are judged against a thesis. The pilot
 batches are smaller sets of worlds that try an idea quickly. For each, the
 page gives the settings, how many worlds, and how far they ran. It names the
 page that reports them, and which measures have been taken on them. The tables are made
@@ -28,7 +27,7 @@ how far it has got; run that command again, and the tables catch up.
 
 Every world starts from one of two sets of rules. **B1** is the algorithm
 exactly as a new run is offered it. The study of the baseline, and the
-experiments that change one setting at a time, read it. **B2** is the world
+experiments of October 2026 that changed one setting at a time, read it. **B2** is the world
 built for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), built so that its network cannot break apart
 ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 They differ in a few settings, listed in
@@ -46,8 +45,7 @@ Experiments 3 to 6 read Experiment 2's. Two kinds of plan have no conditions of
 their own. A **screen** draws every setting of each of its worlds at random
 (Experiments 38 to 42). A plan of **trials** plays contests between a world's
 [eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), or plants strategies written by hand, in worlds another run kept
-(Experiments 28 to 30, 33 to 35 and 44). The table lists every plan of the lab,
-from Experiment 1 to Experiment 44.
+(Experiments 28 to 30, 33 to 35 and 44). The table lists every plan of the lab.
 
 <!-- table catalogue/lab -->
 |  | question | on | conditions (and what each changes) | seeds | tokens | iterations | runs on disk | page |

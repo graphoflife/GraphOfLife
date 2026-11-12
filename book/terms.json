@@ -52,22 +52,29 @@
       ]
     },
     {
+      "name": "candidate world",
+      "also": [
+        "candidates for open-ended evolution"
+      ],
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "the-worlds-ruled-out",
+      "says": "A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still."
+    },
+    {
+      "name": "shortlist",
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "the-shortlist",
+      "says": "The candidate worlds of round 3 among the first 13 of any of health's three orders: the worlds chosen to be played again."
+    },
+    {
       "name": "candidate",
       "page": "one-iteration",
       "anchor": "phase-1-reproduction",
       "says": "An agent itself and each of its neighbours, the ones its brain looks at when it decides.",
       "not": [
         "candidate world",
-        "candidate cause",
-        "candidates that",
-        "candidate for",
-        "One candidate",
-        "five candidates",
         "the candidates",
-        "nineteen candidates",
-        "candidates of",
         "candidates for",
-        "equal candidates",
         "round 3's candidate"
       ]
     },
@@ -183,7 +190,7 @@
     {
       "name": "baseline",
       "page": "b1-and-b2",
-      "says": "The stated rules an experiment starts from and changes one thing of: B1 or B2."
+      "says": "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."
     },
     {
       "name": "health filter",
@@ -710,19 +717,7 @@
       "correlation",
       "hub"
     ],
-    "which-worlds-are-healthy": [
-      "candidate"
-    ],
-    "how-the-drawn-settings-shape-a-world": [
-      "candidate"
-    ],
     "candidates-for-open-ended-evolution": [
-      "candidate"
-    ],
-    "local-rules-only": [
-      "candidate"
-    ],
-    "how-far-does-a-difference-travel": [
       "candidate"
     ],
     "a-source-and-a-sink": [
@@ -733,33 +728,18 @@
     "did-evolution-happen": [
       "candidate"
     ],
-    "how-this-notebook-is-written": [
-      "candidate"
-    ],
     "measuring-evolution": [
       "hub"
     ],
     "b1-the-network-size-and-scaling": [
       "extinction"
     ],
-    "what-the-switches-did-in-pilots": [
-      "candidate"
-    ],
-    "building-b2-and-the-search-for-a-healthy-rich-world": [
-      "candidate"
-    ],
     "measures-atlases-and-assembly": [
       "correlation",
       "dimension",
       "hub"
     ],
-    "README": [
-      "candidate"
-    ],
     "round-3-eras-against-each-other": [
-      "candidate"
-    ],
-    "every-simulation": [
       "candidate"
     ]
   }

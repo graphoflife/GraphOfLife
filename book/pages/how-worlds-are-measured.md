@@ -10,7 +10,7 @@
 
 A world of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") holds about 1,300 [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") and lives 3,000
 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): some four million agent-moments, recorded twice per iteration.
-The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of 100,000 tokens hold about 14,000 agents for 1,500
+The [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") worlds of 100,000 tokens hold about 14,000 agents for 1,500
 iterations: some twenty million. This page follows, step by step, how that
 becomes the numbers and figures of the rest of the notebook. A world is
 recorded after every phase and summed up as means over stretches. Thirty
@@ -144,8 +144,8 @@ hide each other; their sideways position means nothing.
 
 ## Step 5 · Comparing two kinds of world
 
-An experiment changes one setting, and compares the worlds made with it
-against the baseline's. Each world is summed up by its level. The question is
+The experiments of October 2026 changed one setting, and compared the worlds
+made with it against the baseline's. Each world is summed up by its level. The question is
 whether the two groups of levels differ by more than chance would make them
 differ.
 
@@ -177,13 +177,10 @@ and many distributions, are drawn on
 
 ## Every figure can be made again
 
-Under every figure, folded away, is **how to make this figure**. It names the
-runs, the file and fields it reads, and each step of the calculation in the
-words of this page. And it gives the command that makes it from the runs:
-`python3 book_figures.py` followed by the page's short name. The program that
-makes the figures does nothing the recipe does not say. It is
-`book_figures.py`, with the package `book_chapters/`, drawing with
-`book_svg.py`.
+Under every figure, folded away, is how to make it, with the command that
+draws it again ([Figures](how-this-notebook-is-written.md#figures)). The
+program that makes the figures is `book_figures.py`, with the package
+`book_chapters/`, drawing with `book_svg.py`.
 
 ## Where to go next
 

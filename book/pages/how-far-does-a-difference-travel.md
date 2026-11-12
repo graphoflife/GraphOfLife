@@ -16,8 +16,8 @@ shows how far news travels in a world, and whether a small change grows or
 fades. By the rules, a difference can travel at most four steps a phase, three
 in worlds without the look that only talks: a world's speed of light. But only
 once the cull, the [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") and the one random stream are local, and only 4
-of the 24 worlds on round 3's shortlist when this plan was written have no
-other rule that breaks the bound. The plan is thirty twin trials on each of three candidate worlds, under
+of the 24 worlds on round 3's [shortlist](candidates-for-open-ended-evolution.md#the-shortlist "The candidate worlds of round 3 among the first 13 of any of health's three orders: the worlds chosen to be played again.") when this plan was written have no
+other rule that breaks the bound. The plan is thirty twin trials on each of three [candidate worlds](candidates-for-open-ended-evolution.md#the-worlds-ruled-out "A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still."), under
 three conditions, with heat spreading on the same network as the test of the
 measurement. The draft thesis: under local rules the bound is never broken,
 and the difference does not die away but spreads, more slowly than the bound

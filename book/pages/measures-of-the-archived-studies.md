@@ -318,7 +318,7 @@ A negative *r* is only interesting beyond that pull.
 
 #### Where assortativity is used
 
-A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world has an assortativity of about −0.07 at 100,000
+A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") world has an assortativity of about −0.07 at 100,000
 tokens, and −0.11 at 10,000. Across the thirty worlds of 100,000 tokens it
 runs from −0.47 to +0.02. That is mildly negative, and partly the pull above.
 A curve says more: the mean degree of an agent's neighbours, for each class

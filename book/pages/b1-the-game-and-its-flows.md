@@ -107,7 +107,7 @@ of the pace a plain even split would give: a slope of 0.20 in B2 and 0.21 in
 B1, where the even split would give 1
 ([What goes with what](measures-atlases-and-assembly.md#token-curvature-and-token-change)).
 
-The two [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") run downhill in different ways
+The two [baselines](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") run downhill in different ways
 ([Chains of takeovers](cooperation-help-and-gliders.md#chains-of-takeovers)):
 - **B1 through gliders.** A rich agent takes a neighbour's node and moves on,
   carrying its packet of tokens. Chains of three or more takeovers are eleven
