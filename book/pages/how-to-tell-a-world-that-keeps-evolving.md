@@ -361,7 +361,7 @@ won.
 **Support was given up.** A stake marked as support adds to its target's
 defence instead of contesting the node. It is a gift, since the tokens go to
 the node's owner. And it buys nothing that a [home stake](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node) would
-not buy better. A home stake counts one and a half times, and support only
+not buy better. A [home stake](one-iteration.md#phase-2-the-game "The tokens an agent stakes on its own node, to keep it.") counts one and a half times, and support only
 once. Evolution gave it up: support fell from 200–300 tokens a game to about
 20 by iteration 600.
 

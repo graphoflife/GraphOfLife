@@ -17,7 +17,8 @@ What --apply does, so that nothing that pointed at an old page points nowhere:
 - every link to OLD — in the pages, the front page, the results the figures were
   drawn with, and the strings of the figures' code — leads to NEW#section; a link
   to OLD#part leads to NEW#part when NEW has that section, else to NEW#section;
-- book/terms.json: a term explained on OLD is explained on NEW, at its section;
+- book/terms.json: a term explained on OLD is explained on NEW, at its section,
+  and a term OLD was not to link (`skip`) is not linked on NEW;
 - book/legacy.json: an old number or note id that became OLD, and every number
   a thesis cites that meant OLD, now leads to NEW, at OLD's section (theses
   keep their words);
@@ -216,6 +217,12 @@ def main() -> None:
             term["anchor"] = own if own and own in ids else dict(merged)[term["page"]]
             term["page"] = a.new
             changes.append(f"terms.json: {term['name']}")
+    # The terms a merged page opted out of are left unlinked where its text now is.
+    skip = terms.setdefault("skip", {})
+    for old in sorted(olds & set(skip)):
+        kept = skip.setdefault(a.new, [])
+        kept += [name for name in skip.pop(old) if name not in kept]
+        changes.append(f"terms.json: the terms {old} skips")
     legacy = load(os.path.join(BOOK, "legacy.json"))
 
     def moved_to(pid: str) -> str:

@@ -206,7 +206,7 @@ split, with a small worked example.
 ### How many directions a cloud of points uses
 
 A [message](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") of B1 has 30 numbers, so the messages of a world are points in a
-space of 30 [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."). They need not use all 30. Suppose every message were
+space of 30 dimensions. They need not use all 30. Suppose every message were
 the same except for one number. Then the messages would vary along a single
 direction, and the other 29 numbers would carry nothing. The **participation
 ratio** counts how many directions the variety is really spread over.

@@ -194,7 +194,7 @@ many worlds of that experiment or batch the measure has been taken on:
 - **games recorded and read again**: takeover chains, help, and flows that
   go round ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)).
   Where there are gifts, also who gives to whom;
-- **flow modules**: the groups tokens stay in
+- **[flow modules](measuring-tokens.md#flow-modules-and-the-map-equation "A group of agents that a token, following the flow, tends to stay inside.")**: the groups tokens stay in
   ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in));
 - **how different the agents are**: every brain in the same situations
   ([The effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking));

@@ -122,7 +122,7 @@ world?
 > 1. A token: 1/(1 − h), with h the share of all tokens staked in the games that went to the staker's own node.
 > 2. A brain: the nodes on which anyone staked over those taken by a neighbour.
 > 3. An agent: the mean number of agents after a game over the mean number that were not alive after the game before (Little's law).
-> 4. A group: flow modules followed as on [Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time) (web/js/flowmodules.js through tools/flowmodules_cli.js); the 99th percentile of their lives.
+> 4. A group: flow modules followed as on [Flow modules](measuring-tokens.md#following-groups-through-time) (web/js/flowmodules.js through tools/flowmodules_cli.js); the 99th percentile of their lives.
 > 5. A place: after every game the agent with the most connections; a dynasty goes on while the next one is the same agent or its child.
 >
 > **To make it again:** `python3 book_figures.py particles`.
@@ -422,7 +422,7 @@ of its modules should last all fifty games read.
 > **Runs and data.** As for the figure *How long things last* above.
 >
 > 1. For each of the last 50 games, the flow between each pair of neighbours: the tokens staked either way.
-> 2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) and follow the groups from game to game: best overlap first, each used once, none below 0.3 of the members two modules share ([Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time)).
+> 2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) and follow the groups from game to game: best overlap first, each used once, none below 0.3 of the members two modules share ([Flow modules](measuring-tokens.md#following-groups-through-time)).
 > 3. Do the same with every agent's stakes on its neighbours dealt among them at random (`--neighbours 1`) and with each game's agents dealt among modules of its sizes (`--shuffle 1`).
 > 4. The share of modules followed for at least so many games; the median of each kind's worlds.
 >

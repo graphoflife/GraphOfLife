@@ -364,6 +364,19 @@ def test_every_term_has_a_page_that_explains_it():
             names[name.lower()] = term["name"]
 
 
+def test_a_page_that_opts_out_of_a_term_is_a_page():
+    # terms.json's `skip` keeps a term unlinked on one page. Keyed by a page that was
+    # merged away, it keeps nothing unlinked, and the page that holds its text now
+    # links what it was meant not to.
+    import book_fill
+    ids = {page["id"] for page in book_fill.pages()}
+    names = {term["name"] for term in book_fill.terms()}
+    skip = book_fill.read_json("terms.json").get("skip", {})
+    assert set(skip) <= ids, f"skip names pages that are not there: {sorted(set(skip) - ids)}"
+    unknown = {page: sorted(set(listed) - names) for page, listed in skip.items() if set(listed) - names}
+    assert not unknown, f"skip names terms that are not there: {unknown}"
+
+
 def test_a_term_is_linked_where_it_is_first_used():
     # Once per page, at its first use outside headings, code and links; the
     # longest name first; never where the page links to the term already; and

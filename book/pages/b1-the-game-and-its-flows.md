@@ -1306,153 +1306,8 @@ flow falls into short-lived pairs, and 9% last five games against 4% with the
 stakes redealt: the one structure the agents add. A group outlasts its first
 members only as a region of the network does.
 
-### Flow modules and the map equation
-
-Which agents belong together? There are many ways to ask: agents joined to
-each other, agents related to each other — or agents **between whom the
-tokens actually go**. A flow module is a group of the third kind. Picture a
-token wandering the flow from agent to agent: a flow module is a set of agents
-it tends to stay inside. This section explains how such groups are found,
-followed through time and checked against chance. The Research tab's *Flow
-modules* view draws them for any run, and the study below uses the same
-program (`web/js/flowmodules.js`, run through `tools/flowmodules_cli.js`).
-
-#### The flow of one game
-
-In every game, each agent splits its tokens over its own node and its
-neighbours' nodes ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). A
-token staked on a neighbour's node **flows** along the connection between
-them ([Token flow](measuring-tokens.md#token-flow)). Add up, for each pair of
-neighbours, the tokens that crossed between them in either direction. That
-sum is the weight of their connection in this game, and the game becomes a
-weighted network: the **flow**. Tokens an agent keeps on its own node say
-nothing about whom it is grouped with, so they are left out.
-
-#### Describing a walk in as few bits as possible
-
-Think of street names. Many towns have a Station Road, and nobody is
-confused: you name the town only when you travel to another one. So a
-street's name can be short, because it has to be unique only within its town.
-
-The map equation (Rosvall and Bergstrom, 2008) does the same with the flow.
-Imagine a walker that steps along the weighted connections for ever, choosing
-each step in proportion to the weights. It spends a share p_a of its time at
-agent a. To write down where it goes, you could give every agent a code word
-and write one word per step. Groups can do better:
-
-- give every group a name;
-- give every agent a short code word that has to be unique only *within* its
-  group, so that other groups can use it again;
-- write the group's name only when the walk enters it.
-
-If the walk lingers in groups, with many steps inside and few between, group
-names are rarely needed. Then the description is shorter than the plain one.
-Its length per step is
-
-$$
-L = q \log_2 q \;-\; 2\sum_i q_i \log_2 q_i \;-\; \sum_a p_a \log_2 p_a \;+\; \sum_i (q_i + p_i)\log_2 (q_i + p_i)
-$$
-
-with p_i the share of time inside group i, q_i the share of steps that leave
-it, and q the sum of the q_i. In words: the first term and half of the second
-are the cost of group names, paid each time the walk moves into a group. The
-rest is the cost of naming the agents within their groups, with one more word
-to say that the walk leaves. The best grouping is the one with the smallest
-L. One group holding everyone describes the walk with no structure at all, in
-L₀ bits a step, and
-
-$$
-\text{compression} = \frac{L_0 - L}{L_0}
-$$
-
-says how much the groups shorten the description: 0 for flow with no group
-structure, and more the more the flow keeps to groups.
-
-**An example.** Four agents form two pairs, A–B and C–D, and tokens cross
-only within each pair. The walker spends a quarter of its time at each agent.
-Without groups, naming one agent of four takes 2 bits a step. With the two
-pairs as groups, naming one agent of two takes 1 bit. No group's name is ever
-needed, because the walk never leaves its pair. So L₀ = 2, L = 1, and the
-compression is (2 − 1)/2 = 0.5. With more pairs L₀ grows while L stays at
-1 bit, so flow made of many separate pairs compresses far more.
-
-#### Finding the groups
-
-Trying every grouping is impossible, so the program starts with every agent
-alone. It takes the agents one at a time, in a shuffled but fixed order. Each
-moves into whichever of its partners' groups shortens L most, or stays if none
-does. The program goes round again until no move helps, twelve times at most.
-This is the local-moving step of the Louvain method (Blondel and others,
-2008). The result is a good
-grouping, not always the best.
-
-#### Following groups through time
-
-A group of one game and a group of the next are taken to be **the same
-module** when they share enough agents. Their overlap is the Jaccard index:
-the agents they share, divided by the agents in either. "Enough" can be
-decided in two ways:
-
-- **above a floor**: the best overlaps first, each module used once, and none
-  below 0.3. This is the view's default, which you can move, and the rule of
-  the study below.
-- **mutually best**: of the pairs above the floor, only those in which each
-  module is the other's best overlap. With the floor at 0, this matches at
-  any overlap at all.
-
-A small module can be "followed" on very little: two modules of two agents
-that share one agent overlap by a third. A B2 agent that stakes on a
-neighbour at all puts its whole stake on one. So B2's flow is made mostly of
-pairs, and there a matching at any overlap follows chains of chance. The
-notebook therefore matches above the floor, and checks the result against
-chance (below).
-
-A module is known by its overlap, not by its members. So it can keep going
-while its agents change, as a town keeps its name while its people change.
-Its **turnover** is the share of its agents in a game that were not in it the
-game before. The change has two sources, and the difference matters:
-
-- **regeneration**: newcomers that were born, and members that died. The
-  module makes and loses its own agents, and the pattern outlives every one of
-  them, as a town lasts through its births and deaths.
-- **exchange**: newcomers that were alive before, in another module or in
-  none, and members that left while still alive. The agents were there all
-  along, and the border moved, as when people move between neighbouring
-  towns.
-
-#### Checking against chance
-
-Flow on any network has some group structure, because neighbours trade with
-neighbours. So each measure is set beside a **null**: the same measure with
-one thing shuffled at random and the rest kept. Three nulls answer three
-questions.
-
-- **Is there group structure at all?** The same game's flow is **rewired**.
-  Every token that crossed a connection is cut into two halves, one at each
-  end, and the halves are paired again at random. Every agent keeps how much
-  flow it sends and receives; whom it trades with is shuffled. A real module
-  structure compresses the flow better than the rewired one does.
-- **Is the structure the network's, or the agents'?** Rewired tokens cross
-  between agents that are not neighbours, which no token can. The fair
-  yardstick, **partners dealt**, keeps the network and deals every agent's
-  stakes among its own neighbours at random. Why it is fair is told in
-  [What the network makes, and what the agents make](#what-the-network-makes-and-what-the-agents-make).
-- **Do modules last longer than chance?** The rewired flow cannot say: its
-  modules are pairs and threes, which "live" long on single shared agents.
-  Instead each game's own modules are kept, with their sizes, and their
-  agents are dealt among them at random, game by game: **members dealt**.
-  Followed the same way, they show what following finds when nothing but the
-  sizes carries over.
-
-Two more measures complete the set. One needs no following at all, and the
-other asks what following finds:
-
-- **Kept together**: of two agents in one module, the share still in one
-  module so many games later. Beside it stands the same share with the later
-  game's agents dealt at random: what chance alone keeps together.
-- **Outlasting**: of the modules followed for many games, the share in which
-  none of the first members is left at the end. That is the sense in which a
-  group can outlast its members.
+How the groups are found, followed through time and checked against chance
+is told in [Flow modules and the map equation](measuring-tokens.md#flow-modules-and-the-map-equation).
 
 ### Flow modules in the worlds
 
@@ -1504,7 +1359,7 @@ stays at home ([How different are the agents?](b1-brains-lineages-and-messages.m
 So in a game most B2 agents send nothing, and those that do send it to one
 neighbour: the two are a module. Such flow compresses even when rewired at
 random (0.09–0.15), since pairs are groups of a kind
-([the example above](#describing-a-walk-in-as-few-bits-as-possible)). A
+([the example of the method](measuring-tokens.md#describing-a-walk-in-as-few-bits-as-possible)). A
 module changes a third of its members every game.
 
 Some worlds stand apart within their kind:
@@ -1664,7 +1519,7 @@ are in a module then?
 <!-- /figure -->
 
 A module renews its members in the two ways of
-[Following groups through time](#following-groups-through-time). It
+[Following groups through time](measuring-tokens.md#following-groups-through-time). It
 **regenerates** when agents born since the last game join it. It
 **exchanges** when agents that were already alive move in from around it,
 and its border moves.
@@ -1830,7 +1685,7 @@ reads and how.
     longer than those of the rewired flow. That is no fair test: the rewired
     flow's modules are pairs and threes that "live" long on single shared
     agents. The note was corrected the same day, and the study on this page
-    uses the nulls of [Checking against chance](#checking-against-chance).
+    uses the nulls of [Checking against chance](measuring-tokens.md#checking-against-chance).
   - **24 October 2026.** When the note was merged into this page, the page's
     numbers were checked against `book/results/flowmodules.json` and the worlds'
     own files in `GraphOfLifeRuns/.pilots/atlas/`. Six were set right. With
@@ -1860,17 +1715,14 @@ reads and how.
   other rules, so these measurements no longer bear on the notebook's question.
   They are kept so that every figure here can be read and made again. Nothing
   was cut but a second copy of the list of the runs of Experiment 10.
+- **12 November 2026.** The method of the flow modules, Flow modules and the
+  map equation, moved to [Measuring tokens](measuring-tokens.md#flow-modules-and-the-map-equation),
+  beside the other measures of the flow; the results stay here.
 
 ## References
 
-- Blondel, V. D., Guillaume, J.-L., Lambiotte, R. and Lefebvre, E. (2008).
-  Fast unfolding of communities in large networks. *Journal of Statistical
-  Mechanics: Theory and Experiment*, P10008.
 - Maynard Smith, J. and Szathmáry, E. (1995). *The Major Transitions in
   Evolution*. Oxford: W. H. Freeman.
-- Rosvall, M. and Bergstrom, C. T. (2008). Maps of random walks on complex
-  networks reveal community structure. *Proceedings of the National Academy
-  of Sciences* 105, 1118–1123.
 
 <!-- turns -->
 ---
@@ -1879,6 +1731,6 @@ reads and how.
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (27)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
+> [!info]- Pages that link here (26)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->
