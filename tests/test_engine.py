@@ -3117,6 +3117,37 @@ def test_a_patch_contest_plants_each_era_as_one_region():
         raise AssertionError("a contest dealt by neither coin nor patch was accepted")
 
 
+def test_a_contest_in_a_world_of_families_deals_each_brain_with_its_family():
+    """
+    Under pool = family a kept world holds every agent's family tag, and a
+    contest deals brains away from the agents they were kept with. Each brain
+    takes its family along, and the two eras' families are kept apart, so an
+    era never pools its stakes with the other's, though both descend from the
+    same founders.
+    """
+    import numpy as np
+    import gol_tournament as tour
+    cfg = small(seed=69, pool="family", tag_rate=0.5, mutation_probability=0.5)
+    world = new_world(cfg)
+    for _ in range(3):
+        world.step(record_decisions=False)
+    A = world.to_checkpoint()
+    for _ in range(3):
+        world.step(record_decisions=False)
+    B = world.to_checkpoint()
+    blob = tour.mixed(A, A, B, cfg.message_amount, np.random.RandomState(5))
+    from_b = blob["brain_ids"] >= tour.LABEL_B
+    picks = np.where(from_b, blob["brain_ids"] - tour.LABEL_B, blob["brain_ids"])
+    assert from_b.any() and (~from_b).any()
+    assert (blob["tags"][~from_b] == A["tags"][picks[~from_b]]).all(), "an era-A brain lost its family"
+    assert (blob["tags"][from_b] == tour.LABEL_B + B["tags"][picks[from_b]]).all(), "an era-B brain lost its family"
+    played = GraphOfLife.from_checkpoint(blob, cfg)
+    sides = {played.family(b.brain_id) >= tour.LABEL_B for b in played.brains.values()
+             if b.brain_id >= tour.LABEL_B}
+    assert sides == {True}, "an era-B brain was counted in an era-A family"
+    assert tour.contest(cfg.to_dict(), A, A, B, 3, 5)["agents"] > 0
+
+
 def test_a_contest_counts_a_brain_mixed_at_birth_for_its_parents_era():
     """
     Where brains are mixed at birth, a newborn's brain is new even in a contest,

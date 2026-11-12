@@ -97,6 +97,10 @@ def mixed(state: Dict[str, np.ndarray], A: Dict[str, np.ndarray], B: Dict[str, n
             blob[name] = np.where(from_b.reshape((n,) + (1,) * (state[name].ndim - 1)),
                                   B[name][pick_b], A[name][pick_a])
     blob["brain_ids"] = np.where(from_b, LABEL_B + pick_b, pick_a).astype(np.int64)
+    if "tags" in state:
+        # Under pool = family a brain takes its family to its new agent, and the
+        # eras' families are kept apart: one era never pools stakes with the other.
+        blob["tags"] = np.where(from_b, LABEL_B + B["tags"][pick_b], A["tags"][pick_a]).astype(np.int64)
     blob["parent_brain_ids"] = np.full(n, -1, dtype=np.int64)
     blob["msg_to"] = np.zeros(0, dtype=np.int64)
     blob["msg_from"] = np.zeros(0, dtype=np.int64)
