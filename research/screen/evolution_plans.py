@@ -15,9 +15,11 @@ health of 9 November (research/screen/health.json), which now only filters:
   to oneself, and revolutionary tokens that count for the coalition alone.
 
 A plan is written with an empty thesis, to be written into it by hand before
-any run; a plan whose thesis is written is never written over.
+any run, and a plan already written is never written over. Experiment 47, the
+contests that read Experiment 46, is written with it, so that how it is read
+is fixed before any run.
 
-    python3 research/screen/evolution_plans.py           writes book/experiments/E45.json and E46.json
+    python3 research/screen/evolution_plans.py           writes book/experiments/E45.json, E46.json and E47.json
     python3 research/screen/evolution_plans.py --show    says what it would write, and writes nothing
 """
 from __future__ import annotations
@@ -219,14 +221,30 @@ def e46() -> Dict[str, Any]:
                  "conditions": arms}}
 
 
-def written(path: str) -> bool:
-    """Whether the plan at `path` has its thesis written, so that it may not be written over."""
-    try:
-        with open(path) as f:
-            thesis = json.load(f).get("thesis", {})
-    except OSError:
-        return False
-    return any(str(v).strip() for v in thesis.values())
+#: Experiment 47, the contests that read Experiment 46: its eras, each played
+#: against the one before it, and the eras played against themselves for the noise.
+STEPS = [500, 1000, 2500, 5000, 10000, 20000]
+STILL = [1000, 5000, 20000]
+
+
+def e47(runs: List[str]) -> Dict[str, Any]:
+    """
+    The contests in Experiment 46's runs, written with it so that how it is read
+    is fixed before any run: each era against the era before it, three coins on
+    each era's world, the last step also dealt in patches (a family whose kin
+    stake as one stays whole), and three eras against themselves for the noise.
+    """
+    steps = [[a, b] for a, b in zip(STEPS, STEPS[1:])]
+    return {
+        "id": "E47", "title": "Why does evolution level off? The contests that read it",
+        "trials": {"kind": "contest", "T": T, "sets": [
+            {"name": "each era against the one before",
+             "grid": {"run": runs, "pair": steps, "home": ["a", "b"], "seed": COINS}},
+            {"name": "the last step, in patches",
+             "grid": {"run": runs, "pair": steps[-1:], "home": ["a", "b"], "seed": COINS, "plant": "patch"}},
+            {"name": "each against itself",
+             "grid": {"run": runs, "pair": [[e, e] for e in STILL], "home": ["a"], "seed": NOISE_COINS}}]}}
+
 
 
 def main() -> None:
@@ -237,13 +255,19 @@ def main() -> None:
     worlds = len(first["trials"]["sets"][0]["grid"]["run"])
     print(f"E45: {worlds} worlds, {contests_a_world(first)} contests each, "
           f"about {hours(first):.0f} worker-hours at the worlds' own pace")
-    for plan in (first, e46()):
+    for plan in (first, e46(), None):
+        if plan is None:
+            # Experiment 47 plays in Experiment 46's runs, named by its plan as written.
+            if not os.path.exists(os.path.join(ROOT, "book", "experiments", "E46.json")):
+                print("E47 is written once E46 is")
+                continue
+            plan = e47([spec.run_id for spec in gol_plan.experiment_runs("E46")])
         path = os.path.join(ROOT, "book", "experiments", f"{plan['id']}.json")
         text = json.dumps(plan, indent=1) + "\n"
         if a.show:
             print(text)
-        elif written(path):
-            print(f"{path} has its thesis written: left as it is")
+        elif os.path.exists(path):
+            print(f"{path} is written already: left as it is")
         else:
             with open(path, "w") as f:
                 f.write(text)
