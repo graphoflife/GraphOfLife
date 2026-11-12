@@ -43,7 +43,7 @@ PHASE 1 — REPRODUCTION
   6. Apply the new edges, drop self-loops, then run cleanup (below).
      Under `link_search`, agents may first search beyond their neighbours —
      in one jump, paying a token a step, with a scout that goes a step
-     further each iteration, or in a free reach as far as their tokens — and
+     further each iteration, or in a reach as long as such a jump but free — and
      propose a link to the stranger they reach, which `link_consent` says who
      must accept. Under `link_upkeep` each agent also says which of its links
      it pays a token to keep this iteration, and under `mate_pays` the mate
@@ -1786,7 +1786,9 @@ class GraphOfLife:
         What a birth may actually take from a parent who wants to give `wanted`.
 
         Under the old rules, whatever was asked for: anything from one token up
-        is a child. The rules of Part V can refuse a birth outright — a parent
+        is a child. The rules added for open-ended evolution
+        (book/pages/settings.md#rules-added-for-open-ended-evolution) can
+        refuse a birth outright — a parent
         at its valence is crowded, and an endowment below min_child is no
         child — and keep_home leaves the parent its last token. Under
         child_floor = neighbours, neither is a child that would start poorer
@@ -1972,8 +1974,8 @@ class GraphOfLife:
         How many steps an agent searches beyond its neighbours this iteration
         (link_search): the SEEK head's share of what reproduction left, read
         like the gift's fraction. In a jump each step costs a token, so this is
-        also what it spends; a reach is a jump whose steps are free, as far as
-        the agent's tokens would pay for; a scout goes one step at most in an
+        also what it spends; a reach is a jump of as many steps, which cost
+        nothing; a scout goes one step at most in an
         iteration, so there it says only whether to go on.
         """
         if self.cfg.link_search == "off" or purse < 1:

@@ -172,7 +172,7 @@ four steps, and climb past 6 by walks.
 > [!example]- How to make this figure
 > **Runs.** The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`), after their last game.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *The same rulers, on the worlds* above.
 >
 > 1. Read each run's last frame; build its network from `edges` and keep its largest piece; make its random twin as above.
 > 2. From each of 100 agents drawn at random (seed 23), a breadth-first search; N(r) the geometric mean of the number within r steps.
@@ -261,7 +261,7 @@ Their families widen as patches, as a random walk on these worlds would
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *The same rulers, on the worlds* above.
 >
 > 1. Read frame 2·t + 1 for each t; take the largest piece of its network.
 > 2. The rulers as in the first figure, the walk run for 128 steps (`book_chapters.space.life_dimensions`); read the ball ruler at r = √6 and the walk at t = √32.

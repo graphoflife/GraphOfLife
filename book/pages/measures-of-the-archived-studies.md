@@ -22,7 +22,6 @@ Its sections:
 - [Networks](#networks): assortativity, preferential attachment, scaling relations
 - [Tokens](#tokens): mobility and lightning
 - [Lives and ages](#lives-and-ages): why the living are older, steady ages, the risk at each age, cohorts
-- [Assembly index and assembly](#assembly-index-and-assembly)
 
 ## Statistics
 
@@ -206,7 +205,7 @@ split, with a small worked example.
 ### How many directions a cloud of points uses
 
 A [message](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") of B1 has 30 numbers, so the messages of a world are points in a
-space of 30 [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."). They need not use all 30. Suppose every message were
+space of 30 dimensions. They need not use all 30. Suppose every message were
 the same except for one number. Then the messages would vary along a single
 direction, and the other 29 numbers would carry nothing. The **participation
 ratio** counts how many directions the variety is really spread over.
@@ -398,17 +397,12 @@ So part of what the leaves gain may be handovers.
 
 #### Where preferential attachment is used
 
-- **The tail of the connections.** A child is joined to some of its parent's
-  [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."). So an agent gains a connection whenever a neighbour has a child
-  that is joined to it too. Twice the neighbours bring twice the chances.
-  [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one) had
-  proposed preferential attachment, reached by copying, as the source of the
-  heavy tail of the connections. There it is still a hypothesis.
-- **[B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s links at birth.** A brain that chooses links meets the well
-  connected among its candidates more often, whatever it favours. That is
-  preferential attachment, and it grows hubs. So B2 draws two of a newborn's
-  links at random, and caps the links a brain may choose
-  ([What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds)).
+- [Where the tail of the connections could come from](b1-the-network-size-and-scaling.md#where-the-tail-of-the-connections-could-come-from):
+  the tail of B1's connections, by copying a parent's neighbourhood; still a
+  hypothesis there.
+- [What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds):
+  why [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") draws two of a newborn's links at random, and caps the links a brain
+  may choose.
 - **Age.** In the model of Barabási and Albert, the oldest nodes are the
   hubs. In B1, age gives an agent no connections; connections give it age
   ([Connections and age](b1-lives-and-wealth.md#connections-and-age)).
@@ -470,7 +464,7 @@ Each is reported with its R² (`tokensVsDegreeR2`, …).
   hubs barely moves it.
 
 **An example.** In B1's worlds, agents hold on average tokens in proportion
-to *k* + 1, the number of their candidates. That is not a power of *k*. From
+to *k* + 1, the number of their [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."). That is not a power of *k*. From
 *k* = 1 to *k* = 2, *k* doubles, but *k* + 1 grows by a factor of only 1.5.
 That is a local exponent of ln 1.5 / ln 2 = 0.58. Most agents have one or two
 connections. So even if every agent held exactly its share, the fit over them
@@ -742,7 +736,8 @@ Two examples. In the B1 worlds of 100,000 tokens, the lives begun from
 iteration 500 to 1,399 last 41.3 iterations on average. So the newborns should
 be 1/41.3 = 2.4% of the living, and the median age of the living 55. Over
 iterations 500 to 1,499 the worlds had 2.3 to 2.6% newborns, and a median age
-of 55 ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
+of 55, with 3.3 to 3.6 births per hundred agents in every stretch of 250
+iterations ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 In B2 every agent lives exactly 100 iterations. So in a steady B2 world, each
 age from 0 to 99 holds one agent in a hundred. Such a world keeps its size only
@@ -806,45 +801,6 @@ median B1 world of 100,000 tokens, an agent born in iterations 1 to 24 lived 5
 of its first 100 iterations. One born from iteration 500 on lived 28 to 31
 ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
-## Assembly index and assembly
-
-How many steps does it take to make a thing, and how many copies of it are
-there? **Assembly theory** asks both (Marshall and others 2021; Sharma and
-others 2023). It builds an object from basic blocks by **joins**: a join lays
-two pieces already made together, and whatever is made can be used again for
-free. The **assembly index** *a* of an object is the fewest joins that make
-it. Its **copy number** *n* is how many identical copies of it a collection
-holds. The **assembly** of the collection adds up its kinds of object,
-weighing each by e to the power of its index and counting only its copies
-beyond the first:
-
-$$
-A = \sum_i e^{a_i} \, \frac{n_i - 1}{N_T},
-$$
-
-with *N_T* the objects in all. The theory reads many copies of objects with a
-high index as the mark of selection: chance alone seldom makes the same
-complicated thing twice.
-
-### An example of the index
-
-In a network the block is one link, and an object can be an agent's **ego
-network**: the agent, its neighbours and the links among them. A star of
-eight links takes three joins: two links make a star of two, two of those a
-star of four, two of those a star of eight. A star of seven links takes four,
-for each join can only add two sizes already made (1, 2, 3, 4, 7): the fewest
-joins for *m* links is the length of the shortest **addition chain** to *m*,
-written l(*m*). In a triangular lattice every agent's ego network is the same
-wheel of six spokes, twelve links built in four joins, so its 10,000 copies
-give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
-
-### Where it is used
-
-- [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): the index and the assembly of the
-  ego networks of B1, B2 and round 3, each against its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") and four
-  networks with no history; and why a [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")'s path in the family tree
-  gives no index worth the name.
-
 ## Where to go next
 
 - [Statistics: the tools of the notebook](statistics.md)
@@ -860,6 +816,9 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
   assortativity, preferential attachment and scaling relations; from Measuring
   tokens, mobility and lightning; from Measuring lives, four sections on age;
   and from Measuring evolution, assembly.
+- **12 November 2026.** The section on the assembly index and assembly was cut
+  the same day: [Measures, atlases and assembly](measures-atlases-and-assembly.md#the-assembly-index)
+  tells the theory in full, with the same example, and the terms point there.
 
 ## References
 
@@ -893,12 +852,6 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
   States. *Quarterly Journal of Economics* 129, 1553–1623.
 - Shorrocks, A. F. (1978). The measurement of mobility. *Econometrica* 46,
   1013–1024.
-- Marshall, S. M., Mathis, C., Carrick, E. and others (2021). Identifying
-  molecules as biosignatures with assembly theory and mass spectrometry.
-  *Nature Communications* 12, 3033.
-- Sharma, A., Czégel, D., Lachmann, M., Kempes, C. P., Walker, S. I. and
-  Cronin, L. (2023). Assembly theory explains and quantifies selection and
-  evolution. *Nature* 622, 321–328.
 
 <!-- turns -->
 ---

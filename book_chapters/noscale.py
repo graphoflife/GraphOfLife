@@ -950,7 +950,7 @@ def riches_figures(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
                        "Left: pool each size's looks; for every x, the agents with x or more divided by all agents, "
                        "times 1,000.",
                        "Right: the largest value of each look, and its median over the looks of each world.",
-                       "The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent]"
+                       "The tail exponent γ: the maximum-likelihood fit of [Fitting a power law properly]"
                        "(measures-of-the-archived-studies.md#fitting-a-power-law-properly), done on the pooled "
                        "values of the smallest worlds (`book_chapters.noscale.tail_fit`)."]))
     ch.number("riches", numbers)

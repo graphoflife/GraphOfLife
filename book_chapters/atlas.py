@@ -219,7 +219,7 @@ def atlas(ch: F.Chapter) -> None:
                        "guides": [{"axis": "y", "at": 0, "label": ""}] if what == "net" else []})
     ch.grid("curvature", charts, title="Tokens run downhill",
             caption=("One dot per world, the bar the median of ten. Token curvature is the sum, over an agent's "
-                     "neighbours, of their tokens minus its own (the note *Token curvature*): below zero an "
+                     "neighbours, of their tokens minus its own ([Token curvature](b1-lives-and-wealth.md#token-curvature)): below zero an "
                      "agent is a peak, above zero a valley. Left: of the agents in a class, the share whose "
                      "node held more tokens after the game than before, minus the share whose node held "
                      "fewer; most hold the same. Right: the share of agents that kept their own node. A "

@@ -16,10 +16,10 @@ but the world's. The physics track's own question, whether a world grows a
 space, is asked on [Is a world a
 space?](how-many-dimensions-does-a-world-have.md).
 
-It gathers what were 2 pages of their own, one section each:
+Its sections:
 
-- [Dimensions at scale](#dimensions-at-scale): Within one world, B1's dimension changes with the scale no more than a finite body's does.
-- [Which properties have no scale?](#which-properties-have-no-scale): A quantity has no scale when it has no typical size of its own: measured in worlds of many sizes and divided by the right power of the size, its distributions fall onto one curve, a data collapse.
+- [Dimensions at scale](#dimensions-at-scale)
+- [Which properties have no scale?](#which-properties-have-no-scale)
 
 ## Dimensions at scale
 
@@ -288,8 +288,8 @@ only as a body's do, and stop where a body's stop.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *The two rulers, at every size* above.
 >
-> 1. Read the frame after each world's last game; build its network from `edges` and keep its largest piece (`book_chapters.space.largest_piece`). Its random twin: the same numbers of links per agent wired at random (`book_graph.degree_preserving`, seed 23), its largest piece.
-> 2. Balls: a breadth-first search all the way out from each of 100 agents drawn at random (seed 23); N(r) the geometric mean of the numbers within r steps; d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), read while N(r+1) is less than a quarter of the piece (`book_chapters.scaledims.reach` and `ball_curve`).
+> Steps 1–2 as for the figure *The two rulers, at every size* above.
+>
 > 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
 > 4. The same balls, of each world and of its twin, after the games of five iterations evenly spaced over its settled life, from 500 to its last (500, 525, 550, 574 and 599 in Experiment 8; 500, 750, 1,000, 1,249 and 1,499 in Experiment 10; 500, 1,125, 1,750, 2,374 and 2,999 in Experiment 2); each reading the median of the five (`book_chapters.scaledims.settled`).
 > 5. Bodies: the n points of a square or cubic grid nearest its centre (and any as near as the last), each linked to the points beside it that are inside too (`book_chapters.scaledims.body`), for n = 250, 500, … 64,000; read as the worlds are. The endless grids' balls are counted exactly: Σₖ 2ᵏ·C(d, k)·C(r, k) points within r steps.
@@ -348,11 +348,8 @@ Here the width is the typical distance.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *The two rulers, at every size* above.
 >
-> 1. Read the frame after each world's last game; build its network from `edges` and keep its largest piece (`book_chapters.space.largest_piece`). Its random twin: the same numbers of links per agent wired at random (`book_graph.degree_preserving`, seed 23), its largest piece.
-> 2. Balls: a breadth-first search all the way out from each of 100 agents drawn at random (seed 23); N(r) the geometric mean of the numbers within r steps; d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), read while N(r+1) is less than a quarter of the piece (`book_chapters.scaledims.reach` and `ball_curve`).
-> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
-> 4. The same balls, of each world and of its twin, after the games of five iterations evenly spaced over its settled life, from 500 to its last (500, 525, 550, 574 and 599 in Experiment 8; 500, 750, 1,000, 1,249 and 1,499 in Experiment 10; 500, 1,125, 1,750, 2,374 and 2,999 in Experiment 2); each reading the median of the five (`book_chapters.scaledims.settled`).
-> 5. Bodies: the n points of a square or cubic grid nearest its centre (and any as near as the last), each linked to the points beside it that are inside too (`book_chapters.scaledims.body`), for n = 250, 500, … 64,000; read as the worlds are. The endless grids' balls are counted exactly: Σₖ 2ᵏ·C(d, k)·C(r, k) points within r steps.
+> Steps 1–5 as for the figure *One radius, every size* above.
+>
 > 6. The typical distance: the radius at which N(r) first reaches half the piece, between whole steps by the logarithm of N (`book_chapters.scaledims.half_reach`, as `research/atlas/space.py` reads it).
 > 7. Fit log₁₀(typical distance) = log₁₀ a + b · log₁₀(agents) by least squares over Experiment 8's worlds of 3,200 tokens and more that are not stars; the interval of b from 10,000 resamplings of the worlds within each size (`gol_analysis.power_fit`).
 >
@@ -402,10 +399,8 @@ has at each size.
 >
 > **Data.** From B1's frames, as above, and for round 3 `research/screen/health.json` (made by `research/screen/health.py` from the screen's readings).
 >
-> 1. Read the frame after each world's last game; build its network from `edges` and keep its largest piece (`book_chapters.space.largest_piece`). Its random twin: the same numbers of links per agent wired at random (`book_graph.degree_preserving`, seed 23), its largest piece.
-> 2. Balls: a breadth-first search all the way out from each of 100 agents drawn at random (seed 23); N(r) the geometric mean of the numbers within r steps; d(r) = ln(N(r+1)/N(r)) / ln((r+1)/r), read while N(r+1) is less than a quarter of the piece (`book_chapters.scaledims.reach` and `ball_curve`).
-> 3. A world whose best-linked agent was joined, on average over iterations 500 to its end, to a tenth of its agents or more is a star ([Stars and hubs](measuring-networks.md#stars-and-hubs); `maxDegree`/`nodes` of its rows in `stats.jsonl`).
-> 4. The same balls, of each world and of its twin, after the games of five iterations evenly spaced over its settled life, from 500 to its last (500, 525, 550, 574 and 599 in Experiment 8; 500, 750, 1,000, 1,249 and 1,499 in Experiment 10; 500, 1,125, 1,750, 2,374 and 2,999 in Experiment 2); each reading the median of the five (`book_chapters.scaledims.settled`).
+> Steps 1–4 as for the figure *One radius, every size* above.
+>
 > 5. Width: the typical distance over the twin's, at each moment; its median over the five. Fit log width against log agents over B1's worlds that are not stars (`gol_analysis.power_fit`).
 > 6. Round 3: each world's `averages.width` and `averages.agents` in `health.json`, and `set.mend_on_death`; nothing is measured again.
 >
@@ -513,16 +508,6 @@ which it widens faster as it grows.
 - **An edge only lowers a reading.** A ball cut out of a cubic grid reads at
   most 2.30 at 2,000 points and 2.65 at 64,000; a disc of a square grid, 1.73
   and 1.89. By balls, no body reads more than its dimension.
-- **Larger worlds read more at the same radius, and the edge is not why.**
-  Between radius 2 and 3 the worlds read 1.8 to 2.4 up to 5,000 agents and
-  2.5 to 2.8 from 14,000 on, more than any cubic grid; a body's reading
-  there changes by a tenth. Larger worlds hold bigger hubs, and more room
-  close in (*indicative*). Above 15,000 agents the rise slows.
-- **By their width, the worlds read about four.** Their typical distance
-  grows as agents^0.20 to 0.23, their diameter as agents^0.26 to 0.27, where
-  a ball of a cubic grid widens as points^0.35: 3.7 to 4.9 dimensions. Hubs
-  that grow with a world would do the same, so the width alone cannot say
-  whether the dimension grows at the largest scales (*indicative*).
 - **One look at a world is not enough.** A world's reading over radii 3 to 6
   varies by 0.8 between five moments of its settled life, and its typical
   distance by a factor of 1.8, in the median world.
@@ -530,15 +515,9 @@ which it widens faster as it grows.
   size**, in the median; those that mend are 0.73 times as wide. Seed 3044
   of Experiment 40 and seed 4003 of Experiments 41 and 42 are the widest for
   their size, 1.6 to 1.8 times B1's.
-- **Settling it needs larger worlds, or steadier ones.** To read the balls
-  twice as far out, a world needs about 12 million tokens: by the notebook's
-  own costs, 11 days and some 260 GB of memory for 600 iterations. Worlds
-  whose make-up does not change with their size would answer the question at
-  the sizes there are.
 
 ### How this was made (dimensions at scale)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. No world was played for it: it reads saved runs only. To draw its
+No world was played for this section: it reads saved runs only. To draw its
 figures again: `python3 book_figures.py scaledims`; the code is
 `book_chapters/scaledims.py`.
 
@@ -547,9 +526,7 @@ figures again: `python3 book_figures.py scaledims`; the code is
   `python3 gol_lab.py run E08`), Experiment 2's 26 worlds of 10,000 tokens
   that lived to iteration 3,000 (`B1-10000-s001` … `-s030`;
   `python3 gol_lab.py run E02`) and Experiment 10's 30 worlds of 100,000
-  tokens (`B1-100000-s001` … `-s030`; `python3 gol_lab.py run E10`). The
-  [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") of Experiments 8 and 10 are listed below, Experiment 2's in
-  [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world).
+  tokens (`B1-100000-s001` … `-s030`; `python3 gol_lab.py run E10`).
 - **After the last game.** Each world's largest piece and its random twin,
   by balls from 100 agents drawn at random, all the way out, and by a lazy
   random walk from 48 agents for up to 1,024 steps; in the three worlds of
@@ -573,25 +550,14 @@ figures again: `python3 book_figures.py scaledims`; the code is
 Every random choice is seeded with 23, so the same runs give the same
 figures.
 
-#### The runs of Experiment 8 (dimensions at scale)
 <!-- runs E08 -->
 > [!info]- The runs behind this page
-> **42 runs.** Every condition below is run once for every seed (1 to 3) and every number of tokens it lists, for 600 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 800, 1,600, 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800, 409,600 tokens. Runs `B1-800-s001` … `B1-409600-s003`.
-> - **stopped only when empty** — changes `extinction_threshold` = 0; 800, 1,600, 3,200, 6,400 tokens. Runs `B1-800-57b358-s001` … `B1-6400-57b358-s003`.
->
-> To make these runs again: `python3 gol_lab.py run E08`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 8](b1-the-network-size-and-scaling.md#the-runs-of-experiment-8), listed on the page that reports it. To make them again: `python3 gol_lab.py run E08`.
 <!-- /runs -->
 
-#### The runs of Experiment 10 (dimensions at scale)
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 10](b1-the-network-size-and-scaling.md#the-runs-of-experiment-10-the-shape-of-the-network), listed on the page that reports it. To make them again: `python3 gol_lab.py run E10`.
 <!-- /runs -->
 
 ## Which properties have no scale?
@@ -803,7 +769,7 @@ share.
 > [!example]- How to make this figure
 > **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`. The 28 baseline runs of Experiment 2 that lived past iteration 1,499 (`B1-10000-s001` … `-s030`: B1 at 10,000 tokens, 3,000 iterations each, [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)) and the 30 of Experiment 10 (`B1-100000-s001` … `-s030`: B1 at 100,000 tokens, 1,500 iterations each, [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E02` and `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Data.** As for the figure *Does it average out?* above.
 >
 > 1. Take `orphaned` / `nodes_before` of every row with `phase` = 2 in the stretch, and pool the worlds of each size.
 > 2. For every x, the share of those games with a value of x or more.
@@ -851,7 +817,7 @@ run's own count of agents cut off.
 > [!example]- How to make this figure
 > **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *The two rulers, at every size* above.
 >
 > 1. For every game, read frame 2·t (the world after reproduction) and frame 2·t + 1 (after the game). A node on which no agent staked a token in the game's `allocations` starves; take it away, and every connection in the game's `pruned_edges`.
 > 2. The connected pieces of what is left; all but the largest are the pieces cut off. In every game read, they add up to the run's own count (`cleanup.orphaned`) (`book_chapters.noscale.cut_pieces`).
@@ -960,12 +926,12 @@ ends move out as worlds grow, as a critical system's would?
 > [!example]- How to make this figure
 > **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`. For the numbers at 100,000 tokens, the 30 runs of Experiment 10 (`B1-100000-s001` … `-s030`, `python3 gol_lab.py run E10`), over their last 100 games, iterations 1,400 to 1,499.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *The two rulers, at every size* above.
 >
 > 1. Read frames 2·t + 1 for the ten looks: `tokens`, and every agent's connections counted from `edges`.
 > 2. Left: pool each size's looks; for every x, the agents with x or more divided by all agents, times 1,000.
 > 3. Right: the largest value of each look, and its median over the looks of each world.
-> 4. The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent](measures-of-the-archived-studies.md#fitting-a-power-law-properly), done on the pooled values of the smallest worlds (`book_chapters.noscale.tail_fit`).
+> 4. The tail exponent γ: the maximum-likelihood fit of [Fitting a power law properly](measures-of-the-archived-studies.md#fitting-a-power-law-properly), done on the pooled values of the smallest worlds (`book_chapters.noscale.tail_fit`).
 >
 > **To make it again:** `python3 book_figures.py noscale`.
 <!-- /figure -->
@@ -1011,9 +977,7 @@ measurement at every size.
 **How far likeness reaches, at every size.** For pairs of agents r steps apart in the worlds of Experiment 8: left, the share of the pairs whose two agents carry the same genotype (logarithmic); right, the correlation of their ages, as ln(1 + age). Pairs from breadth-first searches out of 150 agents drawn at random, after the games of iterations 500, 549 and 599, the three worlds of a size pooled; one line per size, from blue-green (3,200 tokens) to yellow (409,600).
 
 > [!example]- How to make this figure
-> **Runs.** The 24 baseline runs of Experiment 8 from 3,200 tokens up, `B1-3200-s001` … `B1-409600-s003`: B1 at 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800 and 409,600 tokens, seeds 1 to 3, 600 iterations each, every one alive at the end (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E08`.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *The pieces one game cuts off* above.
 >
 > 1. Read frames 2·t + 1 for t = 500, 549 and 599; draw 150 agents at random (numpy's generator seeded 62, once per run) and search out from each to 10 steps.
 > 2. Every agent reached at r steps makes a pair with the agent searched from. Kin: the share of the pairs at r that carry the same `brain_ids`. Age: Pearson's correlation over the pairs at r of ln(1 + `ages`), standardised within each frame, as in [Like next to like](b1-the-network-size-and-scaling.md#the-correlation-function) (`book_chapters.noscale.likeness_at`).
@@ -1099,17 +1063,13 @@ experiment, not a finding.
   share of the whole world. γ = 2 is exactly the law at which a world loses
   big pieces at the same rate whatever its size, and the law of a tree grown at
   random.
-- **Tokens, connections and likeness keep a scale of their own.** The richest
-  agent grows ever more slowly, to about 2,500 tokens; kin and age are alike
-  for a step or two, at 470 agents and at 63,000.
 - **Nothing here is critical.** What has no scale has it from the cull, which
   reaches across the whole world, and perhaps from the way trees grow.
 
 ### How this was made (which properties have no scale)
-Every figure and number of this page comes from the command
+Every figure and number of this section comes from the command
 `python3 book_figures.py noscale`, which writes the numbers to
-`book/results/noscale.json`; each figure says, folded beneath it, which runs
-it reads and how. The share each game cut off and starved is read from the
+`book/results/noscale.json`. The share each game cut off and starved is read from the
 runs' recorded statistics. The pieces a game cut off, the branches behind
 bridges, the tokens and connections, and the likeness at a distance are read
 from the frames, once per run, by `noscale_pass` in `book_chapters/noscale.py`,
@@ -1119,26 +1079,16 @@ its last 100 games: iterations 500 to 599 for Experiment 8, and 1,400 to
 tree are drawn by the same file, every random choice from a fixed seed, so the
 same command makes the same figures.
 
-No simulation was run for this page. It reads three experiments: the 24
+No simulation was run for this section. It reads three experiments: the 24
 worlds of Experiment 8 from 3,200 tokens up (its worlds of 800 and 1,600
 tokens did not live, and its second condition is not read); the 28 worlds of
 Experiment 2 that lived past iteration 1,499; and the 30 worlds of
 Experiment 10.
 
-The runs of Experiment 8 are listed once on this page, under [The runs of Experiment 8 (dimensions at scale)](#the-runs-of-experiment-8-dimensions-at-scale).
-
-#### The runs of Experiment 2
-
 <!-- runs E02 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 2](b1-lives-and-wealth.md#the-runs-of-experiment-2), listed on the page that reports it. To make them again: `python3 gol_lab.py run E02`.
 <!-- /runs -->
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (dimensions at scale)](#the-runs-of-experiment-10-dimensions-at-scale).
 
 ## Where to go next
 

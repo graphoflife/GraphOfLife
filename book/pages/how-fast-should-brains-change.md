@@ -220,9 +220,7 @@ iterations saw nothing gained after iteration 500.
 **The brains of one rate against another's.** Each column is a pair of rates of change, written lower–higher; each dot one seed: the share of a world the brains of iteration 1,500 of the higher rate held against those of the lower, the mean of two contests, one in each rate's world. The bar is the median seed; the dashed lines the band of the thesis.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *What the rate of change does to a world* above.
->
-> **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz`, kept every 100 iterations.
+> **Runs and data.** As for the figure *Each era against the one before, at five rates of change* above.
 >
 > 1. For each seed and each pair of rates, take the worlds of both rates at iteration 1,500. Play two contests, one in each of the two worlds: every agent gets a brain drawn at random from the agents of one rate's world or of the other's, a coin each, mutation is switched off, and 20 iterations are played (`gol_tournament.contest`, brains from two runs).
 > 2. The higher rate's score is its share of the agents at the end, averaged over the two.

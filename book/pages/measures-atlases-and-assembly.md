@@ -18,12 +18,12 @@ seed decides how many agents the [tokens](the-world.md#agents-and-tokens "The on
 with what, and the viewer's colours, are tools for looking, kept here with
 their figures.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [What goes with what](#what-goes-with-what): This page is an atlas rather than an experiment.
-- [Every world side by side](#every-world-side-by-side): Each page measures the worlds of one experiment or a few.
-- [One world, many colours: what the viewer can colour by](#one-world-many-colours-what-the-viewer-can-colour-by): Statistics average; a picture shows **where** things are.
-- [Assembly theory: how many steps to make a thing, and how many copies](#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): Assembly theory measures a thing by the fewest joins that build it from basic parts, reusing whatever was built before (its **assembly index**), and a collection by how many copies it holds of things that take many joins (its **assembly**, A).
+- [What goes with what](#what-goes-with-what)
+- [Every world side by side](#every-world-side-by-side)
+- [One world, many colours: what the viewer can colour by](#one-world-many-colours-what-the-viewer-can-colour-by)
+- [Assembly theory: how many steps to make a thing, and how many copies](#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies)
 
 ## What goes with what
 
@@ -168,12 +168,13 @@ Having a child next is hardly predictable in either world (at most 0.18).
 <!-- figure atlas/curvature -->
 ![Tokens run downhill](../figures/atlas/curvature.svg)
 
-**Tokens run downhill.** One dot per world, the bar the median of ten. Token curvature is the sum, over an agent's neighbours, of their tokens minus its own (the note *Token curvature*): below zero an agent is a peak, above zero a valley. Left: of the agents in a class, the share whose node held more tokens after the game than before, minus the share whose node held fewer; most hold the same. Right: the share of agents that kept their own node. A class with fewer than 50 agents in a world has no dot for it.
+**Tokens run downhill.** One dot per world, the bar the median of ten. Token curvature is the sum, over an agent's neighbours, of their tokens minus its own ([Token curvature](b1-lives-and-wealth.md#token-curvature)): below zero an agent is a peak, above zero a valley. Left: of the agents in a class, the share whose node held more tokens after the game than before, minus the share whose node held fewer; most hold the same. Right: the share of agents that kept their own node. A class with fewer than 50 agents in a world has no dot for it.
 
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *What comes before, and what follows* above.
 >
-> 1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).
+> Step 1 as for the figure *What comes before, and what follows* above.
+>
 > 2. Sort the rows by curvature into the classes on the axis; in each, count the agents whose node gained tokens over the game and those whose node lost, and those that kept their own node.
 >
 > **To make it again:** `python3 book_figures.py atlas`.
@@ -217,7 +218,8 @@ logarithmic axes.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *What comes before, and what follows* above.
 >
-> 1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).
+> Step 1 as for the figure *What comes before, and what follows* above.
+>
 > 2. For every pair, Pearson's r with each quantity on a linear axis or a logarithmic one: the logarithm of a positive quantity, log(1 + x) of a count, sign(x) log(1 + |x|) of a signed one; shares and yes-or-no stay linear. The median over ten worlds for each choice of axes.
 > 3. Leave out the pairs made from the same numbers (tokens and tokens per link, say).
 >
@@ -302,22 +304,11 @@ are the far end of the first. A world is first of all a world with or
 without a star ([Stars and hubs](measuring-networks.md#stars-and-hubs)).
 
 ### What we learned (what goes with what)
-- **The heat equation is a fifth true.** Tokens do run downhill along the
-  curvature, in both rule sets, at about a fifth of the pace an even split
-  would set. They run through nodes changing hands in B1, and through failed
-  stakes in B2.
-- **Where wealth sits is a property of the rules.** B1 ties it to the network:
-  the rich are the connected and the old. And it keeps it there (0.78 over ten
-  games). B2 cuts it loose, so that the connected are slightly poorer, and lets
-  it churn (0.41).
 - **In B2, losing one's node is close to a lottery**, as far as anything an
   agent is or does can tell. Selection can only act on traits that change the
   odds, and none of these does by much. That is one more reason for evolution
   in B2 to be slow, besides the ones of
   [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops).
-- **A world is first of all a world with or without a star.** Half of the
-  differences between thirty worlds of the same rules are the size of their
-  largest hub, decided early and by chance.
 - **For a world over time,** the dead's estate levels it in B1, and hoarding
   unlevels it in B2.
 
@@ -327,8 +318,7 @@ agents' tables and correlates them, and `report.py` prints the strongest
 pairs, the revealed ones, the predictors and the reversals. The program
 `world_series.py` does the same for whole worlds, with the groups of
 statistics in `groups.py`. The tables are kept in
-`GraphOfLifeRuns/.pilots/atlas/`. Every figure says, folded beneath it,
-which worlds it reads and how.
+`GraphOfLifeRuns/.pilots/atlas/`.
 
 ## Every world side by side
 
@@ -482,32 +472,10 @@ are decided by chance, early, and then stay.
 
 ### What has been measured where
 
-The notebook's measures were each made for one question, and applied to the
-worlds that question was about. Gathered:
-
-| measure | lab worlds | pilot worlds |
-|---|---|---|
-| the ~95 recorded statistics, lightning among them | every run | the engine's pilots, from recorded games; the prototype's, their series |
-| flow modules ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)) | up to five seeds of every condition | the engine's pilots |
-| loops and the exact circulation, chains, help ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
-| lifetime contests between eras ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)) | B2, through the long runs that go on from its worlds | every pilot batch |
-| correlations among agents ([What goes with what](measures-atlases-and-assembly.md#what-goes-with-what)) | ten B1 and ten B2 worlds; now any run, in the Research tab | any run made on the server or in the browser |
-| how different the agents are ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)) | B1 and B2, over a world's life | the long runs |
-| exploitability ([Exploitability](measuring-evolution.md#exploitability)) | Experiment 16 | — |
-
-Two things are still missing. One is the lifetime contests for the lab's B1
-worlds, whose runs keep no archives of their brains. The other is every
-measure for the worlds of the many experiments that ran at 5,000 tokens or
-fewer, which the notebook no longer makes.
+Which measure was made on which worlds is listed in [What was measured on
+what](every-simulation.md#what-was-measured-on-what), which is kept up to date.
 
 ### What we learned (every world side by side)
-- **There are two kinds of world, not a continuum.** Every lab world is
-  B1-like or B2-like in how its agents play. Only one of all the changes
-  tried, letting unused links lapse, moved a world from one kind to the
-  other.
-- **The rules pin the play; the seed sets the population.** How agents stake
-  is decided by the settings. How many agents the tokens are spread over, how
-  much a world breeds and how many are cut off are decided by chance, early.
 - **Every measure the notebook has can now be taken of every world** that
   plays the engine's game, lab or pilot. The table that holds them is in the
   notebook, and in the Research tab.
@@ -740,8 +708,6 @@ Five cautions apply to every picture the viewer draws:
   part of the world, not scattered agents. Spatial structure like this is
   what kin selection and network reciprocity need.
   [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners) asks whether it is used.
-- **Wealth is a landscape of peaks and valleys,** with the peaks at the hubs.
-- **Connections are kept near their minimum price,** a few tokens a game.
 - **Pictures raise questions.** Here are two from this page. Do the old live
   at the edges, as a picture at 10,000 tokens suggested, or in cohorts, as
   this one does? And do families always occupy regions?
@@ -750,19 +716,12 @@ Five cautions apply to every picture the viewer draws:
   measure both.
 
 ### How this was made (one world)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. To make every figure of this page again: `python3 book_figures.py
-colours`.
-
-#### The runs of Experiment 10
+`python3 book_figures.py colours` draws every figure of this section again,
+from the runs of Experiment 10:
 
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 10](b1-the-network-size-and-scaling.md#the-runs-of-experiment-10-the-shape-of-the-network), listed on the page that reports it. To make them again: `python3 gol_lab.py run E10`.
 <!-- /runs -->
 
 ## Assembly theory: how many steps to make a thing, and how many copies
@@ -1054,12 +1013,10 @@ against 121 in its twin, and 352 against 37 in round 3's healthiest.
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`, `B2-10000-s001` and `B1-30000-b82ad0-s3042` after their last games (iterations 1,499, 1,999 and 2,999), and a random space of 10,000 points (seed 23).
 >
-> **Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`.
+> **Data.** As for the figure *The index of an ego network is set by how many links it has* above.
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. One dot per shape: its index and its copies.
 >
 > **To make it again:** `python3 book_figures.py assembly`.
@@ -1085,12 +1042,10 @@ of index 0, and the hub's star of 8,118 links has only one copy.
 > [!example]- How to make this figure
 > **Runs.** The thirty worlds of B1 at 100,000 tokens (Experiment 10, `B1-100000-s001` … `-s030`) after the game of iteration 1,499; the ten worlds of B2 at 10,000 tokens (Experiment 16, `B2-10000-s001` … `-s010`) after the game of iteration 1,999; and seven worlds of round 3 of the screen, 30,000 tokens each, after the game of iteration 2,999: the five healthiest by the product (`B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006` played strongest first, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080`, `B1-30000-38aee9-s3057`), the densest (`B1-30000-4ac946-s3094`) and the star (`B1-30000-511930-s3020`).
 >
-> **Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`.
+> **Data.** As for the figure *The index of an ego network is set by how many links it has* above.
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. A = Σ e^{a_i} (n_i − 1) / N_T over the shapes.
 > 6. The networks with no history are made by `book_chapters/assembly.py` (`triangular_lattice`, `cubic_lattice`, `random_tree`, `random_space`) and read the same way.
 >
@@ -1163,10 +1118,8 @@ and left no network to read.
 >
 > **Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`; each world's health from `research/screen/health.json` (`health.product`).
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. A = Σ e^{a_i} (n_i − 1) / N_T over the shapes, for the world and for its twin.
 > 6. Left: the world's A against its twin's. Right: their ratio against the world's health.
 >
@@ -1258,10 +1211,8 @@ built.
 >
 > **Data.** From each run's frames, read with `book_data.frame_at(run, t, 2)`; kept in `GraphOfLifeRuns/.book/<run>.assembly-life.json`.
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. A at each moment read, for the world and for its twin made then.
 >
 > **To make it again:** `python3 book_figures.py assembly`.
@@ -1379,11 +1330,6 @@ what selection acts on here, and the brains, which are, are not made of
 reusable parts.
 
 ### What we learned (assembly theory)
-- **For small graphs whose nodes and links are all alike, the assembly index
-  is set by the number of links.** All 108 connected graphs of up to seven
-  links take the fewest joins their links allow, l(*m*), the shortest addition
-  chain; so do 98.8% of the agents' neighbourhoods in every network read, and
-  none is more than two joins above it.
 - **The worlds hold about as much assembly as random networks with their
   degrees.** The world's A over its twin's is 0.92 in the median B1 world,
   1.16 in B2 and 1.28 in round 3's healthiest; a random space made by chance

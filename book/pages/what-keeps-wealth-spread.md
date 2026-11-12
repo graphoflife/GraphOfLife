@@ -313,6 +313,6 @@ To draw the figures again: `python3 book_figures.py wealthspread`
 
 [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
 
-> [!info]- Pages that link here (5)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Physical inspiration](physical-inspiration.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (6)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Physical inspiration](physical-inspiration.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

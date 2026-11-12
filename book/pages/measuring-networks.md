@@ -140,8 +140,8 @@ Degree enters the [health bar](measuring-health.md#the-health-bar), the [even sp
 - [One iteration, step by step](one-iteration.md#phase-1-reproduction)
 - [Statistics: the tools of the notebook](statistics.md#distributions-on-loglog-axes)
 
-> [!info]- And in the Archive (4)
-> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#what-a-power-law-is-and-why-it-is-hard-to-see) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-it-would-take) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#children-as-missiles) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-idea-of-assortativity)
+> [!info]- And in the Archive (3)
+> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-it-would-take) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#children-as-missiles) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-idea-of-assortativity)
 <!-- /used -->
 
 ### Clustering

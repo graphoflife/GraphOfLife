@@ -18,17 +18,17 @@ brains two changes nothing they do. B1's agents act nearly alike; B2's differ
 as widely as random brains, but their kinds replace one another instead of
 piling up.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [Genotypes and lineages](#genotypes-and-lineages): A genotype names one exact brain, and in B1 brains change so often that a genotype lasts about two [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.").
-- [What agents say to each other](#what-agents-say-to-each-other): Each agent writes a message of 30 numbers to itself and to each neighbour, and nothing but the brains gives the numbers a meaning.
-- [How alike the agents are](#how-alike-the-agents-are): Evolution can only choose among differences.
-- [How different are the agents?](#how-different-are-the-agents): We put the brains of a world's agents into the same situations, with the same random numbers, and compare what they do.
+- [Genotypes and lineages](#genotypes-and-lineages)
+- [What agents say to each other](#what-agents-say-to-each-other)
+- [How alike the agents are](#how-alike-the-agents-are)
+- [How different are the agents?](#how-different-are-the-agents)
 
 ## Genotypes and lineages
 
 A genotype names one exact brain, and in B1 brains change so often that a
-genotype lasts about two iterations. A world holds about five genotypes for
+genotype lasts about two [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). A world holds about five genotypes for
 every eight agents, and the most common one usually holds only about 1% of
 it. Yet lines of descent take whole worlds over, about every 350 iterations
 at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and about once a run at 100,000. So Experiment 6's thesis,
@@ -69,18 +69,9 @@ Experiment 6 asked who wins, and for how long. Its thesis was written down
 before the runs of 10,000 tokens. It needed no runs of its own: it read the
 thirty of Experiment 2.
 
-We expected nobody to win for long. Every brain has one chance in five of
-changing after every game, and again when it is copied to a child. A node
-that is conquered takes on its conqueror's brain. So a genotype should be
-renamed long before it could spread far. Pilots run earlier had found a
-typical genotype lasting a single iteration, and fewer than one in ten
-lasting more than five.
-
-So we expected hundreds of genotypes at any moment, and no genotype holding
-more than a small part of the world. And we expected the living to descend
-from many different ancestors. The test counts those ancestors as
-**families**: the different genotypes of eight iterations earlier that the
-living descend from ([Families](measuring-evolution.md#families)). Here is the thesis, as it was
+The test counts the ancestors of the living as **families**: the different
+genotypes of eight iterations earlier that the living descend from
+([Families](measuring-evolution.md#families)). Here is the thesis, as it was
 written down:
 
 <!-- thesis E06 -->
@@ -209,7 +200,7 @@ replaced all the others: a **sweep**.
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`, `-s012` and `-s017`.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *How long genotypes and agents last* above.
 >
 > 1. Read every frame in order; remember each genotype's parent and the iteration it first appeared.
 > 2. Every 25 iterations, after the game, count the agents per living genotype and climb the family tree from them, newest genotype first, adding each genotype's count to its parent's ([The common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living)).
@@ -250,7 +241,7 @@ one on top of the other ([Muller plots](measuring-evolution.md#muller-plots)):
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s012`.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *How long genotypes and agents last* above.
 >
 > 1. Note the genotypes alive after the game of iteration 550.
 > 2. After every later game, follow each living agent's genotype up its parents until one of those is reached; count the agents per family and divide by the number of agents.
@@ -276,7 +267,7 @@ the same seed, a family went from nothing to all in about 270.)
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *How long genotypes and agents last* above.
 >
 > 1. Note the genotypes alive after the game of iteration 1,000.
 > 2. After every later game, follow each living agent's genotype up its parents until one of those is reached; count the agents per family and divide by the number of agents.
@@ -298,7 +289,7 @@ world:
 **How often one branch replaces all others.** One dot per world: how many times, between iteration 100 and the end, the newest common ancestor of all the living moved forward to a younger genotype (one of the drops in the figure above). The bar is the median.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** As for the figure *How long genotypes and agents last* above.
 >
 > **Data.** From the lineage analysis of Experiment 10 (`python3 gol_lab.py analyse E10`), in `book/results/E10.json` (`ancestor.moves` of every run).
 >
@@ -397,27 +388,16 @@ widens more and more slowly
 ([Where the lines live](b1-the-network-size-and-scaling.md#where-the-lines-live)).
 
 ### What we learned (genotypes and lineages)
-- **A genotype is a name that changes fast.** The median genotype lasts two
-  iterations. A settled world holds five genotypes for every eight agents,
-  at both sizes. The most common one usually holds a tiny part of it: a
-  median of 0.6% at 100,000 tokens, 1.6% at 10,000.
 - **The unit of evolution here is the line, not the genotype.** A genotype
   lasts a couple of iterations, far too short for selection to act on it. A
   line that takes over the world lasts hundreds. The first step of the
   ladder in [What this notebook is about](what-this-notebook-is-about.md)
   asks for lineages that last long enough for selection to act. Only lines
   can meet it.
-- **Lines take worlds over, more slowly in larger worlds.** One line
-  replaced all the others about every 350 iterations at 10,000 tokens, and
-  about once a run at 100,000.
-- **In a settled world, the winners are not better.** The lines that take it
-  over carry no brains that play better, and they spread as a random walk
-  does, not as a front.
 
 ### How this was made (genotypes and lineages)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. The command `python3 book_figures.py lineage` draws them all, and
-writes the numbers it measures to `book/results/lineage.json`.
+The command `python3 book_figures.py lineage` draws every figure of this
+section, and writes the numbers it measures to `book/results/lineage.json`.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of Experiment 10. The
 numbers given for worlds of 10,000 tokens come from the lineage analysis of
@@ -426,28 +406,16 @@ Experiment 6, which read the thirty runs of Experiment 2. They are in
 count the 26 of those worlds that lived to the end of their 3,000
 iterations.
 
-#### The runs of Experiment 10
-
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 10](b1-the-network-size-and-scaling.md#the-runs-of-experiment-10-the-shape-of-the-network), listed on the page that reports it. To make them again: `python3 gol_lab.py run E10`.
 <!-- /runs -->
 
 #### The runs of Experiment 6
 
 <!-- runs E06 -->
 > [!info]- The runs behind this page
-> These are the runs of Experiment 2; nothing new was run for this page.
->
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 2](b1-lives-and-wealth.md#the-runs-of-experiment-2); nothing new was run. To make them again: `python3 gol_lab.py run E02`.
 <!-- /runs -->
 
 ## What agents say to each other
@@ -663,9 +631,6 @@ the rules give it something to gain by reading it
 ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 
 ### What we learned (what agents say to each other)
-- **Messages are names.** An agent writes the same message to every reader,
-  and all agents of one genotype write the same message. A message carries who
-  wrote it, and almost nothing else.
 - **No language has evolved.** A signal can mean something only if two things
   hold. What is sent must depend on something: the sender's state, the
   receiver, or the situation. And what is done on receipt must depend on what
@@ -682,18 +647,16 @@ the rules give it something to gain by reading it
   kin.
 
 ### How this was made (what agents say to each other)
-Every figure of this page reads the final checkpoint of each of the thirty
-runs of Experiment 10, listed below. A checkpoint holds the world after its
-last iteration, with every living agent's brain. From it,
-`python3 book_figures.py talk` rebuilds every message and draws every figure.
-Each figure says, folded beneath it, which runs it reads and how.
+Every figure here reads the final checkpoint of each of the thirty runs of
+Experiment 10 ([How this was made](#how-this-was-made-genotypes-and-lineages)).
+A checkpoint holds the world after its last iteration, with every living
+agent's brain. From it, `python3 book_figures.py talk` rebuilds every message
+and draws every figure.
 
 The numbers given for worlds of 10,000 tokens come from the thirty runs of
 Experiment 2, `B1-10000-s001` … `-s030`, made with
 `python3 gol_lab.py run E02`. When this page was first written, the 26 of them
 that lived to the end of their 3,000 iterations were read the same way.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10](#the-runs-of-experiment-10).
 
 ## How alike the agents are
 
@@ -880,9 +843,7 @@ moves it most.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/across_lab.json` and `B2_1500.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
 >
 > **To make it again:** `python3 book_figures.py how_alike`.
 <!-- /figure -->
@@ -925,9 +886,7 @@ Three other rules make the agents more alike, though not nearly as much:
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/across_pilots.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
 >
 > **To make it again:** `python3 book_figures.py how_alike`.
 <!-- /figure -->
@@ -1002,13 +961,6 @@ that replaced it. If new kinds beat old ones, the turnover is selection. If
 they only differ, it is drift: variety without direction.
 
 ### What we learned (how alike the agents are)
-- **Kinds of behaviour are far fewer than names.** A B1 world holds about a
-  thousand genotypes but a handful of kinds of staking. Most of what makes two
-  brains two changes nothing they do.
-- **B1's agents act alike; B2's do not.** B2's agents differ as widely as
-  random brains, in nearly every variant of its rules.
-- **The rule for links decides it.** Where every unused link lapses, B2's
-  agents spread their stakes and become as alike as B1's, with B2's brains.
 - **The rate of change sets how many kinds there are:** about 4.5 kinds of
   staking at 0.05, and about 60 at 0.8.
 - **Variety is renewed, not accumulated.** B2's kinds turn over in hundreds of
@@ -1016,10 +968,9 @@ they only differ, it is drift: variety without direction.
   somewhere it does better than the others.
 
 ### How this was made (how alike the agents are)
-The three figures of this page are drawn with
+The three figures of this section are drawn with
 `python3 book_figures.py how_alike`, from the measures of
-`research/oee/checks/diversity.py`. Each says, folded beneath it, which
-worlds it reads and how. The counts use
+`research/oee/checks/diversity.py`. The counts use
 [Effective numbers](statistics.md#effective-numbers-how-many-kinds) and
 [Splitting variation](statistics.md#splitting-variation-between-worlds-and-within-them).
 [Genotypes, families and the common ancestor](measuring-evolution.md#brain-diversity)
@@ -1108,19 +1059,10 @@ The worlds are all of 10,000 tokens:
 
 ### Where, who and chance
 
-Why does one agent decide differently from another? There are four possible
-reasons:
-
-- **where it is**: every brain does the same in the same place, and agents
-  differ because their places differ;
-- **who it is**: some brains do more of it than others wherever they are: a
-  trait, like a temperament;
-- **who it is, there**: brains differ in how they answer a place;
-- **chance**: the random inputs decide.
-
-With every brain in every situation and draw, the variance of a decision
-splits exactly into these four parts.
-[Where, who and chance](statistics.md#splitting-variation-between-worlds-and-within-them) shows how each part is computed.
+Why does one agent decide differently from another? With every brain in every
+situation and draw, the variance of a decision splits exactly into four parts:
+**where** it is, **who** it is, **who it is, there**, and **chance**
+([Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance)).
 
 A small example, made up to show the idea. Two brains, A and B, decide what
 share of their tokens to keep at home. Each is put in two places, an agent
@@ -1156,10 +1098,9 @@ middle parts are small.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/B2.json` and `B1.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
-> 4. Split each decision's variance over brains, situations and draws into the four parts (the note *Where, who and chance*); take the median over worlds.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
+>
+> 4. Split each decision's variance over brains, situations and draws into the four parts ([Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance)); take the median over worlds.
 >
 > **To make it again:** `python3 book_figures.py diversity`.
 <!-- /figure -->
@@ -1250,9 +1191,8 @@ numbers change: its own noise.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/B2.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
+>
 > 4. Two brains are of one kind while their stakes differ by no more than 95% of brains differ from themselves between two halves of the draws; count the kinds by their carriers (1 / sum of squared shares).
 >
 > **To make it again:** `python3 book_figures.py diversity`.
@@ -1357,9 +1297,7 @@ next ([The diversity score](measuring-health.md#the-diversity-score)).
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/*.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
 >
 > **To make it again:** `python3 book_figures.py diversity`.
 <!-- /figure -->
@@ -1410,8 +1348,8 @@ twice. In B2 at 1,000 iterations, 0.68 of the agents' kinds are found again
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/persist.json` and `persist_gaps.json` (`research/oee/checks/diversity.py --persist`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
+> Steps 1–2 as for the figure *How alike the agents are, in every lab condition* above.
+>
 > 3. Draw 200 agents from each moment and put their brains into the first moment's situations and draws.
 > 4. Group the brains of both moments together, over the stake and the five decisions; ask which kinds of the first are found in the second.
 >
@@ -1471,29 +1409,12 @@ apart needs an experiment: move a kind to another place, and see whether it
 does worse there.
 
 ### What we learned (how different are the agents)
-- **In the same place, with the same dice, B2's agents do not act alike.**
-  Nine pairs in ten stake measurably differently. There are about 17
-  effective kinds of staking, and about 54 over every decision, in worlds of
-  about 950 effective genotypes.
-- **B1's agents mostly do.** They are nearly seven times more alike than
-  random brains. In four worlds of ten, one kind, built around the even
-  split, holds 73–94% of the agents.
 - **How an agent stakes depends on where it is, hardly on a fixed leaning.**
   The brain on its own makes only 2–3% of the variance of the share kept at
   home. The place, how a brain answers it, and chance make the rest. In B2
   the place also decides a child's share, through its rules. Spreading and
   linking a newborn are traits of each brain, and were before selection
   began. In B1 a child's share is a trait too.
-- **Genotypes overstate the variety of behaviour.** B2's worlds hold about
-  950 effective genotypes, but 17 kinds of staking (54 over every decision).
-  Across worlds, the number of genotypes does not predict the number of
-  kinds.
-- **B2's kinds turn over; B1's last.** Within 500 iterations, two thirds of
-  the kinds a sample of B2 can find are gone, and new ones have taken their
-  place. A core lasts thousands of iterations. B1's few kinds are still there
-  5,000 iterations later.
-- **Kinds sit in somewhat different places**, by links in B2 and by tokens in
-  B1: niches or families, not yet told apart.
 - **For open-ended evolution, B2 has the raw material and B1 has not**:
   many kinds of behaviour at once, steadily renewed. What B2 lacks is a
   reason for a kind to *stay*: a place where it does better than the others.
@@ -1507,9 +1428,8 @@ does worse there.
 
 ### How this was made (how different are the agents)
 The figures read the measurements of `research/oee/checks/diversity.py`,
-kept in `GraphOfLifeRuns/.pilots/diversity/`. Each figure says, folded
-beneath it, which worlds it reads and how. `python3 book_figures.py diversity`
-draws them all, and writes the numbers they quote to
+kept in `GraphOfLifeRuns/.pilots/diversity/`. `python3 book_figures.py
+diversity` draws them all, and writes the numbers they quote to
 `book/results/diversity.json`.
 
 Nothing in the measure is particular to B1 or B2. It needs only a world at
@@ -1547,7 +1467,7 @@ to every condition of every experiment, and to the pilot worlds.
   other, and when their stakes were pooled.
 - [The diversity score](measuring-health.md#the-diversity-score): how widely a world's agents
   spread in what they hold.
-- [Where, who and chance](statistics.md#splitting-variation-between-worlds-and-within-them) and
+- [Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance) and
   [Effective numbers](statistics.md#effective-numbers-how-many-kinds): the two methods of this page.
 
 ## How our view changed
@@ -1626,6 +1546,6 @@ to every condition of every experiment, and to the pilot worlds.
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (24)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
+> [!info]- Pages that link here (23)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

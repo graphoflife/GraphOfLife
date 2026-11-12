@@ -186,8 +186,9 @@ and quoted as it was written
 
 Every word that needs explaining is a link where a page first uses it; rest
 the pointer on it for its meaning, or open the [Glossary](glossary.md). Each
-page that reads runs shows them in a box, and under every figure how to make
-it again ([Figures](how-this-notebook-is-written.md#figures)).
+page that reads runs shows them in a box (an Archive page may link instead to
+the box on the page that reports the experiment), and under every figure how
+to make it again ([Figures](how-this-notebook-is-written.md#figures)).
 
 Three commands make everything again, on any computer with Python 3, numpy and
 networkx. `python3 gol_lab.py run E10` makes the runs of Experiment 10, and

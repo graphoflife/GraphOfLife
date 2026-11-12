@@ -141,7 +141,7 @@ def strangers(ch: F.Chapter) -> None:
                            "B2: Experiment 16's ten worlds."),
                   recipe=recipe(RUNS + " B2: Experiment 16's ten runs.",
                                 "`GraphOfLifeRuns/.pilots/batch_K_T100.json` and `long_steps.json`",
-                                ["Seat the brains of the two eras on alternate agents of each era's world and play "
+                                ["Seat the brains of the two eras by a coin per agent on each era's world and play "
                                  "100 iterations (`research/oee/checks/rejudge.py`).",
                                  "Count the agents the later era's brains hold, as a share of all."]))
         for k, _, _ in SEARCHES:

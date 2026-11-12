@@ -4,7 +4,6 @@
 > - What is a genotype, a family, and the common ancestor of the living?
 > - How do we tell whether a world keeps getting better?
 > - What would count as open-ended evolution?
-> - What do assembly theory's index and assembly count?
 
 ## In short
 
@@ -676,7 +675,7 @@ solved, but not that it is.
 - [Every simulation: what was run, and what was measured](every-simulation.md#the-labs-experiments)
 
 > [!info]- And in the Archive (7)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: the game and its flows](b1-the-game-and-its-flows.md#what-we-learned-how-the-game-is-played) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-kills-a-world) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#does-evolution-go-on-eight-switches-at-once) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#where-to-go-next) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#both-inputs-tested) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#brains-as-assembled-objects)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: the game and its flows](b1-the-game-and-its-flows.md#what-we-learned-how-the-game-is-played) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-kills-a-world) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#does-any-switch-keep-evolution-going) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#where-to-go-next) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#both-inputs-tested) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#brains-as-assembled-objects)
 <!-- /used -->
 
 ## What would count as open-ended evolution
@@ -789,9 +788,8 @@ Each part closes a way to be fooled:
 - [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): what a world in which much can
   happen looks like.
 - [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): how many steps an agent's
-  neighbourhood takes to make, and how many agents share its shape. What the
-  index and assembly are is in
-  [Measures of the archived studies](measures-of-the-archived-studies.md#assembly-index-and-assembly).
+  neighbourhood takes to make, and how many agents share its shape
+  ([The assembly index](measures-atlases-and-assembly.md#the-assembly-index)).
 
 ## How our view changed
 

@@ -345,9 +345,9 @@
     },
     {
       "name": "home stake",
-      "page": "b1-the-game-and-its-flows",
+      "page": "one-iteration",
       "says": "The tokens an agent stakes on its own node, to keep it.",
-      "anchor": "staking-at-home-and-keeping-ones-node"
+      "anchor": "phase-2-the-game"
     },
     {
       "name": "degree",
@@ -486,7 +486,7 @@
       "also": [
         "map equation"
       ],
-      "page": "b1-the-game-and-its-flows",
+      "page": "measuring-tokens",
       "says": "A group of agents that a token, following the flow, tends to stay inside.",
       "anchor": "flow-modules-and-the-map-equation"
     },
@@ -706,7 +706,7 @@
       "loop",
       "candidate"
     ],
-    "participation-ratio": [
+    "measures-of-the-archived-studies": [
       "dimension"
     ],
     "what-the-brains-are-like": [

@@ -188,7 +188,7 @@ def _combos(ch: F.Chapter, b: Batch) -> None:
                               f"Experiment 16's ten runs; {b.alone}: {b.alone_judged}.",
                               "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `rejudge_T100.json`, "
                               "`long_steps.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`)",
-                              ["Seat the brains of the two eras on alternate agents of each era's world and play "
+                              ["Seat the brains of the two eras by a coin per agent on each era's world and play "
                                "100 iterations.", "Count the agents the later era's brains hold, as a share of all."]))
         ch.number("evolution", {"worlds": {f"{both}-s{s}": contests[f"{both}-s{s}"] for _, _, _, both in rows
                                            for s in (1, 2) if f"{both}-s{s}" in contests},
@@ -275,7 +275,7 @@ def _changes(ch: F.Chapter, b: Batch, fig: str, marks: bool = False) -> Optional
                       "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`",
                       ["Read each world as `research/atlas/profile.py` reads every world.",
                        "Subtract the world with the rule alone from the world with both, seed by seed.",
-                       "Seat the brains of the two eras on alternate agents of each era's world, play 100 "
+                       "Seat the brains of the two eras by a coin per agent on each era's world, play 100 "
                        "iterations, and count the agents the later brains hold."]))
     out = {"rows": {name: {"poor": change(pairs, "share_at_most_three"), "diversity": change(pairs, "diversity"),
                            "marks": change(pairs, "marks"), "agents": change(pairs, "agents"), "evolution": c}

@@ -114,7 +114,7 @@ def whodies(ch: F.Chapter) -> None:
                        "the bar is the median world. B2 from its ten worlds, each other rule from five."),
               recipe=recipe(RUNS, "each run's archive, `GraphOfLifeRuns/<run>/archive/` "
                                   "(`GraphOfLifeRuns/.pilots/lab_rejudge_T100.json`, `long_steps.json`)",
-                            ["Seat the brains of iteration 500 and of iteration 1,000 on alternate agents of each "
+                            ["Seat the brains of iteration 500 and of iteration 1,000 by a coin per agent on each "
                              "era's world and play it on for 100 iterations, the length of an agent's life "
                              "(`research/oee/checks/rejudge.py`).",
                              "Count the agents the later era's brains hold at the end, as a share of all."]))

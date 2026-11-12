@@ -442,9 +442,7 @@ quarter of all their tokens in every game.
 **Healthier or sicker with time?** Each dot is a living world: its health by the product, scored over the first half of its run (iterations 100 to the middle) and over the second (the middle to the end), every half against every half of every world. Above the dashed diagonal a world grew healthier; below it, sicker.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Leaves or branches: what the worlds lose in their culls* above.
->
-> **Data.** From the screen's readings of every world, `GraphOfLifeRuns/.pilots/screen/worlds/<run>.json` (research/screen/measures.py: every iteration's statistics, every 25th iteration's frame, every kept world), and each run's own statistics for its culls, scored by `research/screen/health.py` into `research/screen/health.json`.
+> **Runs and data.** As for the figure *The living worlds, healthiest first* above.
 >
 > 1. Average every measure of each half of every living world's run.
 > 2. Score all the halves together, as the whole runs are scored.
@@ -465,9 +463,7 @@ were; the median change is nil.
 **Every measure, against the living worlds.** One chart a measure: each dot is a living world's average of it, from iteration 100 to the end of its run; the short bar is the median. The title says which criterion the measure belongs to and which way is better. A world's score in a measure is the share of the other worlds it does better than, so only the order of the dots counts. The dots are spread sideways only so that they do not hide each other.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Leaves or branches: what the worlds lose in their culls* above.
->
-> **Data.** From the screen's readings of every world, `GraphOfLifeRuns/.pilots/screen/worlds/<run>.json` (research/screen/measures.py: every iteration's statistics, every 25th iteration's frame, every kept world), and each run's own statistics for its culls, scored by `research/screen/health.py` into `research/screen/health.json`.
+> **Runs and data.** As for the figure *The living worlds, healthiest first* above.
 >
 > 1. Read each living world's averages from `health.json`.
 > 2. One dot per world and measure.

@@ -1369,6 +1369,16 @@ function test_markdown_reads_obsidian() {
   assert(html.includes('<a href="https://x.org" target="_blank" rel="noopener">x</a>'), html);
 }
 
+function test_a_numbered_list_starts_at_its_first_number() {
+  // A figure's steps go on from those told for a figure above ("Steps 1–2 as
+  // for …", then 3.), so a list keeps its first number, as GitHub keeps it.
+  const html = Markdown.render('> [!example]- How to make it\n> Steps 1–2 as for the figure *A* above.\n>\n'
+    + '> 3. draw\n> 4. fit\n\n1. one\n2. two\n');
+  const flat = html.replace(/\n/g, '');
+  assert(flat.includes('<ol start="3"><li>draw</li><li>fit</li></ol>'), html);
+  assert(flat.includes('<ol><li>one</li><li>two</li></ol>'), 'a list from 1 gained a start');
+}
+
 function test_markdown_table_cells_hold_escaped_pipes() {
   // GitHub and Obsidian read \| in a table as a pipe inside a cell, which is
   // how a cell holds |x|; it is neither a cell's edge nor shown with its slash.

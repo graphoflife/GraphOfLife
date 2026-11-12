@@ -62,9 +62,9 @@ equally often. A number keeps its default or takes one of a few levels. A
 setting that can matter only beside another is drawn only there, so two draws
 never make one world under two names. Rounds 1 and 2 used the first sampler,
 and round 3 the second, with the author's choices ([Round 3: the author's
-settings](#round-3-the-authors-settings)). The box of each round's worlds lists
-every world's settings: round 3's under [How this was made](#how-this-was-made),
-rounds 1 and 2's in the Archive
+settings](#round-3-the-authors-settings)). The box of round 3's worlds lists
+every world's settings ([How this was made](#how-this-was-made)); that of rounds
+1 and 2, in the Archive, says how to list them
 ([How this was made](rounds-1-and-2-of-the-screen.md#how-this-was-made)).
 
 ## Round 1
@@ -427,7 +427,7 @@ counts a setting that can matter only beside another only where it can.
 > - **Only where it can matter:** a search's steering and consent only with a search, messages before the game and the pooled self-message only with messages, coalitions only in the largest-stake game, the mate a parent and paying only with mixing, and where upkeep goes only with upkeep.
 > - **The same in every world:** `allocation` = weakest_first.
 >
-> To make these worlds again: `python3 gol_lab.py run E41`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these worlds again: `python3 gol_lab.py run E41`.
 
 > [!info]- Every world's settings
 > | world | seed | run | what differs from B1 |
@@ -446,7 +446,7 @@ counts a setting that can matter only beside another only where it can.
 > [!info]- The worlds behind this page
 > **8 worlds**: the worlds of Experiment 41 above, drawn alike (sampler 2, round seed 4) and played alike, but with `allocation` = strongest_first in every world. Runs, world by world: `B1-30000-ec8a95-s4001`, `B1-30000-192733-s4002`, `B1-30000-fffc7d-s4003`, `B1-30000-2bac4d-s4004`, `B1-30000-6f6c09-s4005`, `B1-30000-8526cf-s4006`, `B1-30000-a8a2d2-s4007`, `B1-30000-645972-s4008`.
 >
-> To make these worlds again: `python3 gol_lab.py run E42`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`.
+> To make these worlds again: `python3 gol_lab.py run E42`.
 <!-- /runs -->
 
 ## How our view changed

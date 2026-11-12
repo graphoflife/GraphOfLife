@@ -92,31 +92,55 @@ def anchors(md_text: str) -> List[str]:
 # ---------------------------------------------------------------------------
 
 #: What the blocks made so far on the page being filled know of one another, so
-#: that a page does not say the same thing twice: the runs and data of the last
-#: figure, and the screens whose worlds it has listed. fill_text starts it anew.
+#: that a page does not say the same thing twice: the recipes of the figures above,
+#: the screens whose worlds it has listed, and the sentences its boxes of runs and
+#: its theses have said. fill_text starts it anew.
 PAGE: Dict[str, Any] = {}
 
 
 def recipe_of(md: str, title: str, recipe: str) -> str:
     """
-    A figure's recipe, with its runs and its data said once on a page: a figure
-    that reads the same runs and data as the figure before it says so in a line.
+    A figure's recipe, with its runs, its data and its steps said once on a page:
+    what a figure above said already, word for word, is pointed to instead (the
+    first figure that said it), wherever the pointer is the shorter. Its steps are
+    pointed to as far as they begin as that figure's did.
     """
     paragraphs = recipe.split("\n\n")
-    last = PAGE.get("figure") or {}
-    said, source = {}, {}
-    for key in ("Runs", "Data"):
-        said[key] = next((p for p in paragraphs if p.startswith(f"**{key}.**")), None)
-        before = last.get(key) or (None, None)
-        source[key] = before[1] if said[key] and said[key] == before[0] else title
-    PAGE["figure"] = {key: (said[key], source[key]) for key in said}
-    if not said["Runs"] or source["Runs"] == title:
-        return recipe
-    both = source["Data"] == source["Runs"]
-    line = f"**{'Runs and data' if both else 'Runs'}.** As for the figure *{source['Runs'].rstrip('.')}* above."
-    if len(line) >= len(said["Runs"]) + (len(said["Data"]) if both else 0):
-        return recipe                                  # said again in fewer words than pointing back
-    return "\n\n".join(line if p == said["Runs"] else p for p in paragraphs if not (both and p == said["Data"]))
+    said = {key: next((p for p in paragraphs if p.startswith(f"**{key}.**")), None) for key in ("Runs", "Data")}
+    listed = next((p for p in paragraphs if re.match(r"1\. ", p)), None)
+    steps = listed.split("\n") if listed else []
+    plain = [re.sub(r"^\d+\. ", "", s) for s in steps]
+    above = PAGE.setdefault("figures", [])
+    above.append((title.rstrip("."), said, plain))
+    first = {key: next((t for t, s, _ in above[:-1] if said[key] and s[key] == said[key]), None) for key in said}
+    # Runs and data together point to the first figure that read both, though it may point on for its runs.
+    first["both"] = next((t for t, s, _ in above[:-1] if said["Runs"] and s == said), None)
+    shared, source = 0, None                           # the longest beginning of the steps a figure above had
+    for name, _, theirs in above[:-1]:
+        k = next((i for i, (a, b) in enumerate(zip(plain, theirs)) if a != b), min(len(plain), len(theirs)))
+        if k > shared:
+            shared, source = k, name
+
+    def as_for(name: Optional[str]) -> str:
+        return f"As for the figure *{name}* above."
+    out: Dict[str, Optional[str]] = {p: p for p in paragraphs}
+    if steps and shared == len(steps) and first["both"] == source:
+        out[said["Runs"]] = f"**Runs, data and steps.** {as_for(source)}"
+        out[said["Data"]] = out[listed] = None
+    else:
+        both = f"**Runs and data.** {as_for(first['both'])}"
+        if first["both"] and len(both) < len(said["Runs"]) + len(said["Data"]):
+            out[said["Runs"]], out[said["Data"]] = both, None
+        else:
+            for key, paragraph in said.items():
+                line = f"**{key}.** {as_for(first[key])}"
+                if first[key] and len(line) < len(paragraph):
+                    out[paragraph] = line
+        line = f"{'Step 1' if shared == 1 else f'Steps 1–{shared}'} as for the figure *{source}* above."
+        if shared and len(line) < len("\n".join(steps[:shared])):
+            # The steps after them keep their numbers: the list goes on from those told above.
+            out[listed] = "\n\n".join([line] + (["\n".join(steps[shared:])] if shared < len(steps) else []))
+    return "\n\n".join(p for p in (out[p] for p in paragraphs) if p is not None)
 
 
 def figure(md: str, name: str) -> str:
@@ -159,7 +183,8 @@ def thesis(md: str, name: str) -> str:
              ("confirm", "It holds if:"), ("refute", "It fails if:")]
     text = "\n\n".join(f"**{label}** {numbered(said[key]) if cited else said[key]}"
                        for key, label in parts if said.get(key))
-    if cited:
+    if cited and not PAGE.get("numbered"):            # said under the first such thesis of a page
+        PAGE["numbered"] = True
         text += ("\n\n*Written while the notebook still numbered its chapters: each number is a link to the "
                  "page it meant that day.*")
     return quote(text, f"[!quote] The thesis of Experiment {int(name[1:])}, "
@@ -194,6 +219,39 @@ def seeds_text(seeds: str) -> tuple:
         return f"{a} to {b}", b - a + 1
     listed = [s for s in str(seeds).replace(",", " ").split() if s]
     return ", ".join(listed), len(listed)
+
+
+def once(what: str) -> bool:
+    """Whether the page being filled has yet to say `what`: true the first time it is asked, and never after."""
+    said = PAGE.setdefault("said", set())
+    if what in said:
+        return False
+    said.add(what)
+    return True
+
+
+#: What every run of the lab writes beside its frames: said in a page's first box of runs.
+WRITES = ("Each run writes its settings, seed and engine version beside its frames, in "
+          "`GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
+
+
+def made_again(what: str, name: str, writes: str = "") -> str:
+    """
+    How a box's runs are made again: the command, and, in the first box of a page
+    that says so, the ▶ of the Research Notebook tab and what each run writes.
+    """
+    line = f"To {what} again: `python3 gol_lab.py run {name}`"
+    if once("▶"):
+        line += ", or ▶ in the Research Notebook tab of a computer running `gol_server.py`"
+    return line + "." + (f" {writes}" if writes and once(writes) else "")
+
+
+def baseline(md: str, base: Dict[str, Any]) -> str:
+    """Whose settings a box's runs have but where a condition changes them: in full the first time a page says so."""
+    if once(f"baseline {base['id']}"):
+        return (f"Every setting is that of the baseline **{base['id']}** ({base['title'].lower()}) unless the "
+                f"condition changes it ([At a glance]({link(md, page_file('settings'))}#at-a-glance)).")
+    return f"Every setting is {base['id']}'s unless the condition changes it."
 
 
 def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
@@ -236,9 +294,8 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
                          for key, word in words if key in fields)
         lines.append(f"- **{label}** — {number(count)} trials: {said}.")
     lines.append("")
-    lines.append(f"To play these trials again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab "
-                 "of a computer running `gol_server.py`. Each writes its settings and engine beside "
-                 "its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.")
+    lines.append(made_again("play these trials", name, "Each writes its settings and engine beside its result, in "
+                       "`GraphOfLifeRuns/<trial>/meta.json` and `result.json`."))
     return quote("\n".join(lines), "[!info]- The trials behind this page")
 
 
@@ -263,8 +320,8 @@ def same_draws(name: str, other: str) -> bool:
 def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     """
     The worlds of a screen: how their settings were drawn, and each one's, world
-    by world; or, where the page has listed the same draws for another screen
-    already, what this one changed in all of them.
+    by world (in the Archive, how to list them); or, where the page has listed the
+    same draws for another screen already, what this one changed in all of them.
     """
     import gol_plan
     import gol_screen
@@ -279,8 +336,7 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
                  f"alike (sampler {sc['sampler']}, round seed {sc['seed']}) and played alike, "
                  + (f"but with {fixed} in every world. " if fixed else "")
                  + "Runs, world by world: " + ", ".join(f"`{ids[d['seed']]}`" for d in found) + ".\n",
-                 f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook "
-                 "tab of a computer running `gol_server.py`."]
+                 made_again("make these worlds", name)]
         return quote("\n".join(lines), "[!info]- The worlds behind this page")
     budget = (f", or until {sc['budget_hours']:g} hours of playing have gone by: a world that slow stops "
               "as too slow" if sc.get("budget_hours") else "")
@@ -308,11 +364,14 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
         lines.append(f"- **Given up unplayed:** {number(len(skip))} of the {number(sc['worlds'])} worlds drawn, "
                      f"world{'s' if len(skip) > 1 else ''} " + ", ".join(str(i) for i in skip)
                      + "; every other world keeps its number, seed and name.")
+    if archived(md):                                   # the Archive keeps the summary; the draws are a call away
+        lines.append(f"- **Every world's settings:** `gol_plan.screen_draws(\"{name}\")` lists each world's "
+                     "number, seed and what was drawn for it.")
     lines.append("")
-    lines.append(f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab of a "
-                 "computer running `gol_server.py`. Each run writes its settings, seed and engine version "
-                 "beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
+    lines.append(made_again("make these worlds", name, WRITES))
     summary = quote("\n".join(lines), "[!info]- The worlds behind this page")
+    if archived(md):
+        return summary
     rows = ["| world | seed | run | what differs from B1 |", "|---|---|---|---|"]
     for d in found:
         what = ", ".join(f"[`{k}`]({link(md, page_file('settings'))}#{k}) = {show(v)}"
@@ -367,15 +426,25 @@ def withdrawn(plan: Dict[str, Any], what: str) -> str:
     return quote(f"None: {note[0].lower()}{note[1:]}", f"[!info] The {what} behind this page")
 
 
+def listed_at(md: str, name: str, why: str) -> str:
+    """A box of runs that would list again what another box lists: whose runs they are, a link there, the command."""
+    return quote(f"These are the runs of [Experiment {int(name[1:])}]({link(md, box_of(name))}){why}. "
+                 f"To make them again: `python3 gol_lab.py run {name}`.", "[!info]- The runs behind this page")
+
+
 def runs(md: str, name: str) -> str:
     import gol_plan                                    # only here: it reads the runs folder
     plan, borrowed = resolve(name)
     if plan.get("withdrawn"):
         return withdrawn(plan, "trials" if "trials" in plan else "worlds" if "screen" in plan else "runs")
+    if borrowed:                                       # a plan that reads another's runs: one line, to their box
+        return listed_at(md, borrowed, "; nothing new was run")
+    if archived(md) and home_of(name)["file"] != md:   # the Archive lists an experiment's runs on its own page
+        return listed_at(md, name, ", listed on the page that reports it")
     if "trials" in plan:
-        return trials(md, borrowed or name, plan)
+        return trials(md, name, plan)
     if "screen" in plan:
-        return screen(md, borrowed or name, plan)
+        return screen(md, name, plan)
     spec = plan["runs"]
     base = read_json(f"experiments/{spec['baseline']}.json")
     conditions = spec["conditions"]
@@ -392,21 +461,16 @@ def runs(md: str, name: str) -> str:
         return seeds_text(c.get("seeds", spec["seeds"]))
 
     ids: Dict[str, List[str]] = {}
-    for r in gol_plan.experiment_runs(borrowed or name):
+    for r in gol_plan.experiment_runs(name):
         ids.setdefault(r.condition, []).append(r.run_id)
 
     lines = []
-    if borrowed:
-        lines.append(f"These are the runs of Experiment {int(borrowed[1:])}; nothing new was run for "
-                     "this page.\n")
     worlds = sum(len(sizes(c)) * seeds_of(c)[1] for c in conditions)
     lines.append(f"**{number(worlds)} runs.** Every condition below is run once for "
                  + ("each of its seeds" if own else f"every seed ({seeds})")
                  + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
                                  else "") + f", for {number(spec['iterations'])} iterations — or "
-                 "until its world dies out. Every setting is that of the baseline "
-                 f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it "
-                 f"([At a glance]({link(md, page_file('settings'))}#at-a-glance)).\n")
+                 "until its world dies out. " + baseline(md, base) + "\n")
     for c in conditions:
         # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
         drawn = drawn_as(c, base)
@@ -424,11 +488,8 @@ def runs(md: str, name: str) -> str:
         lines.append(f"- **{c['name']}** — {changed}; {', '.join(number(s) for s in sizes(c))} "
                      f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
-    lines.append(f"To make these runs again: `python3 gol_lab.py run {borrowed or name}`, or ▶ in "
-                 "the Research Notebook tab of a computer running `gol_server.py`. Each run writes its "
-                 "settings, seed and engine version beside its frames, in "
-                 "`GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
-    if any((c.get("set") or {}).get("proto") for c in conditions):
+    lines.append(made_again("make these runs", name, WRITES))
+    if any((c.get("set") or {}).get("proto") for c in conditions) and once("proto"):
         lines.append("")
         lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "
                      "the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics "

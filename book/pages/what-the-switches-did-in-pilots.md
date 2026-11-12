@@ -12,8 +12,12 @@
 ## In short
 
 Pilot worlds tried the engine's switches in October 2026, alone and in company.
-Read them as indicative, not as effects: they are two seeds a condition, mostly
-1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), on B2. The exceptions are few. Batches U and V played sixteen
+Every world is a pilot ([Pilot worlds](runs-and-records.md#pilot-worlds)), kept
+in `GraphOfLifeRuns/.pilots`; no experiment of the lab stands behind them, so the
+page has no box of runs. Read them as indicative, not as effects
+([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)):
+they are two seeds a condition, mostly 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), on B2. The exceptions
+are few. Batches U and V played sixteen
 worlds of one seed each. Batches Q and R played 2,000 iterations. Batch V and a
 few other conditions played B1. What still bears on the question is this. What
 a rule does alone is often not what it does in company. Rules that reshape the
@@ -22,27 +26,21 @@ later brains beat earlier ones in nearly every B2 world, whatever the switches:
 they change only how fast. And no combination made a world that is both healthy
 and rich.
 
-It gathers what were 7 pages of their own, one section each:
+Its sections:
 
-- [Rules in company](#rules-in-company): Most experiments threw one rule at a time into B2.
-- [Eight switches at once, and how sixteen worlds can test them](#eight-switches-at-once-and-how-sixteen-worlds-can-test-them): Most experiments threw one switch at a time into B2, the baseline whose network cannot break.
-- [Revolutions, handover and gifts: the switches the world was built with](#revolutions-handover-and-gifts-the-switches-the-world-was-built-with): The engine of Graph of Life came with three switches of its own.
-- [Brains mixed at birth, with every other rule](#brains-mixed-at-birth-with-every-other-rule): Mixing a newborn's brain from its parent's and a neighbour's makes B2's worlds rich, because agents put off having children.
-- [Who inherits?](#who-inherits): When an agent dies, the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") shares its tokens out among the survivors: until now evenly, every survivor with the same chance at every token.
-- [Links to strangers](#links-to-strangers): Agents of B2 were given a way to look for a stranger and propose a link.
-- [Brains mixed at birth, units that cost, an eye for raids on kin](#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin): Three changes to B2 were tried in pilot worlds, each aimed at a different part of how evolution works.
+- [Rules in company](#rules-in-company)
+- [Eight switches at once, and how sixteen worlds can test them](#eight-switches-at-once-and-how-sixteen-worlds-can-test-them)
+- [Revolutions, handover and gifts: the switches the world was built with](#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
+- [Brains mixed at birth, with every other rule](#brains-mixed-at-birth-with-every-other-rule)
+- [Who inherits?](#who-inherits)
+- [Links to strangers](#links-to-strangers)
+- [Brains mixed at birth, units that cost, an eye for raids on kin](#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)
 
 ## Rules in company
 
 Most experiments threw one rule at a time into B2. Six pilot batches threw
 them in together: four paired one rule with each of the others, and two threw
-eight in at once. What a rule does alone is often not what it does in
-company, because rules act together about as strongly as alone. Rules of rare
-events change almost nothing anywhere. Rules that reshape the network, or set
-a world's size, do so in any company. Evolution went on in 174 of 198 worlds
-on B2, and no combination started it again on B1. And no combination reached
-the author's picture: every rule that keeps a world a space pays for it in
-some other way.
+eight in at once.
 
 ### Why rules in company
 
@@ -117,7 +115,7 @@ small and rich, revolutions are five to ten times as common, and hold the
 world small.
 
 **Rules that reshape the network do so everywhere.** Handover costs two marks
-of the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") with nearly every companion. It thins the network into trees
+of the health bar with nearly every companion. It thins the network into trees
 on single links, and unfolds it a little
 ([Handover, with every other rule](what-the-switches-did-in-pilots.md#handover-with-every-other-rule)).
 Every unused link lapsing makes worlds rich, small and about two-dimensional,
@@ -179,7 +177,7 @@ The author's picture is a world with four things at once
 None of these combinations is all of that. The best of the sixteen on B2 has
 no revolutions, no random inputs, links that hold a token and mixing. It
 meets every mark of the health bar, with a quarter of its agents poor and a
-[diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") of 0.68. But its network is folded. A typical agent reaches
+diversity score of 0.68. But its network is folded. A typical agent reaches
 half the world in 1.19 times the steps its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs. That is as in
 nearly every B2 world
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
@@ -257,29 +255,14 @@ without random inputs was one already at 1,000: 291 agents, 34 tokens per
 agent and a Gini of 0.39.
 
 ### What we learned (rules in company)
-- **Measure rules in company.** A rule's effect alone is one corner of a
-  table. Many rules change sign or size among others.
-- **Mixing is the rule to build on, with care.** At iteration 1,000 its rise
-  in diversity holds with nearly every companion. Its riches hold only where
-  nothing pays for births, nothing passes links on, and revolutions are left
-  on.
-- **The rules that matter most are the rules of birth**: who pays for it, who
-  may breed, who mates. They set a world's size and its riches. Through who
-  dies with how many links, they set its geometry too.
-- **Room has a price.** Every rule that keeps a world a space pays for the
-  room in diversity, in evenness, in a flat network or in cuts. And the mixed
-  worlds that were spaces, healthy and half rich at iteration 1,000, did not
-  stay so.
-- **What is still missing** is a pull on births, which
+- **What was still missing** was a pull on births, which
   [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size) asked for. Births
   should pay more when few are born, and less when many are. When Experiment
   19 took mixing's free mate away, every world lived to 20,000 iterations, at
   about 2,000 agents. But six in ten of their agents were poor.
 
 ### How this was made (rules in company)
-Every world on this page is a pilot, kept in `GraphOfLifeRuns/.pilots`. No
-experiment of the lab stands behind it, so the page has no box of runs. The
-pages of each batch say how its worlds were made and read.
+The sections of each batch say how its worlds were made and read.
 
 The census of spaces is `python3 research/atlas/census.py`. It reads every
 world measured at iteration 1,000 in the atlas
@@ -650,12 +633,9 @@ of the others. It was still rich and diverse: 4% of its 399 agents held
 three tokens or fewer, at a diversity score of 0.66.
 
 ### Does evolution go on? (eight switches at once)
-Do the brains of these worlds still get better? To tell, each world's brains
-of iteration 1,000 are played against its brains of iteration 500
-([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). Every agent gets a
-brain of one era or the other. Then the world plays on for 100 iterations, a
-lifetime of B2 ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
-If the later brains then hold more than half of the world, they are better.
+Do the brains of these worlds still get better? Each world's brains of
+iteration 1,000 play its brains of iteration 500 in a lifetime contest
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 
 <!-- figure eightswitches/evolution -->
 ![Do the brains of 1,000 beat those of 500?](../figures/eightswitches/evolution.svg)
@@ -667,7 +647,7 @@ If the later brains then hold more than half of the world, they are better.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and, for B2, `long_steps.json` (`research/oee/checks/rejudge.py`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
+> 1. Seat the brains of the two eras by a coin per agent on each era's world and play 100 iterations.
 > 2. Count the agents the later era's brains hold, as a share of all.
 > 3. A switch's main effect: the mean of the eight worlds with it on, minus the other eight.
 >
@@ -792,8 +772,8 @@ spread. Against it, few switches stand out:
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `batch_TUVWX4_T100.json`, `batch_TUVWX5_T100.json` and `rejudge_T100.json` (`research/oee/checks/rejudge.py`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
-> 2. Count the agents the later era's brains hold, as a share of all.
+> Steps 1–2 as for the figure *Do the brains of 1,000 beat those of 500?* above.
+>
 > 3. A switch's main effect: the mean of the worlds with it on, minus those with it off.
 >
 > **To make it again:** `python3 book_figures.py eightswitches`.
@@ -820,20 +800,10 @@ Neither moves it beyond the chains either (−0.02 and +0.14).
   design each main effect is a difference of two means of eight, clean of
   every pair. Pairs can be read only in chains of four, which the worlds
   cannot tell apart.
-- **A switch measured alone tells what it does in B2, not what it does.**
-  Among combinations, mixing's riches and the riches of links that hold a
-  token mostly vanish, and the lapse's fall in dimension halves. Pairs of
-  switches act together often and strongly.
-- **Three effects hold whatever else is on.** Every unused link lapsing
-  makes worlds rich, small and low in dimension, and costs marks. The estate
-  to the newborns makes them large and poor. Mixing makes the agents differ
-  more.
 - **One of the sixteen meets the author's picture better than any.** It is
   B, D, F and G, the one mixed world with no rule that cancels mixing's
   riches. It is one world of one seed, folded, and at 10,000 iterations it
   had lost a mark.
-- **Evolution goes on** in fifteen of the sixteen worlds, in most of them
-  more slowly than in B2 itself; four switches speed it a little.
 - **On B1** few switches stand out against the spread of the chains of
   pairs. The estate to the newborns makes a world larger, poorer and more
   alike, as on B2. No handover keeps more links. No revolutions, which alone
@@ -843,12 +813,9 @@ Neither moves it beyond the chains either (−0.02 and +0.14).
   as in B1 itself.
 
 ### How this was made (eight switches at once)
-Every world on this page is a pilot, made with `research/oee/pilots/run.py`
-in the engine's own code (`--proto engine=true`) and kept in
-`GraphOfLifeRuns/.pilots` ([Pilot worlds](runs-and-records.md#pilot-worlds)). No experiment
-of the lab stands behind it, so the page has no box of runs. Every figure
-says, folded beneath it, which worlds it reads and how. The numbers it
-quotes are in `book/results/eightswitches.json`.
+Every world here was made with `research/oee/pilots/run.py` in the engine's
+own code (`--proto engine=true`). The numbers this section quotes are in
+`book/results/eightswitches.json`.
 
 #### The pilots of batch U
 
@@ -921,25 +888,19 @@ beating its own past
 The switches the engine was built with were never judged that way. Some were
 set for other reasons. Handover was taken out of B2 because it breaks the
 network ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
-Revolutions are to be turned off in a page still to be written, *What keeps
-wealth spread?*, for what they do to wealth. And gifts had been off in every
+[What keeps wealth spread?](what-keeps-wealth-spread.md) later turned them off,
+for what they do to wealth. And gifts had been off in every
 run of the notebook. The author asked whether these switches had been tested
 for open-ended evolution. They had not, and each has a reason it might
 matter. So a batch of pilot worlds, batch S, threw them into B1 and B2.
 
 #### Three switches, and two more
 
-**Revolutions.** Think of a hill that goes to the largest army marching on
-it. Smaller armies can band together against that army, each swearing part
-of its troops to the band. If the sworn troops together outnumber the largest
-army, the band takes the hill.
-
-In the game a node goes to whoever staked the most on it, and a revolution is
-such a band. A staker may mark part of its stake on a node as revolutionary.
-If the marked parts of the smaller stakers together exceed the largest single
-stake, they take the node ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
-With the switch off ([`allow_revolutions`](settings.md#allow_revolutions)),
-every node goes to whoever staked the most on it.
+**Revolutions.** A band of smaller stakers whose revolutionary parts outweigh
+the largest stake takes the node
+([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node));
+off ([`allow_revolutions`](settings.md#allow_revolutions)), the largest stake
+wins.
 
 Revolutions are the one form of collective action the original game has. A
 rule that rewards standing together is the kind of rule
@@ -984,12 +945,10 @@ and a world of rich and poor plays a different game.
 
 #### The worlds of batch S
 
-The worlds are pilots in the engine's own code (`--proto engine=true`; see
-[Pilot worlds](runs-and-records.md#pilot-worlds)), two seeds of each kind. Each holds 10,000
-tokens and runs for 1,000 iterations, and a whole world is kept every 100
-iterations. With two seeds a kind, what they show is indicative, not an
-effect ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)). The two
-baselines differ in their brains. B1's, of five hidden layers, barely see
+The worlds are pilots in the engine's own code (`--proto engine=true`), two
+seeds of each kind. Each holds 10,000 tokens and runs for 1,000 iterations,
+and a whole world is kept every 100 iterations. The two baselines differ in
+their brains. B1's, of five hidden layers, barely see
 what is around them. B2's, of one hidden layer of 16 units, are brains that
 see ([B1 and B2: the two baselines](b1-and-b2.md)).
 
@@ -1034,7 +993,7 @@ bar, the marks a healthy network must meet.
 <!-- figure switches/bar -->
 ![Each switch against the health bar](../figures/switches/bar.svg)
 
-**Each switch against the health bar.** One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *−rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
+**Each switch against the health bar.** One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are [the health bar](measuring-health.md#the-health-bar). *−rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *How each switch changes a world's life* above.
@@ -1078,12 +1037,9 @@ against 3,400, and otherwise left it as it was.
 
 #### Does any switch keep evolution going?
 
-How can one tell whether evolution goes on? Play a world against its own
-past. Take the brains of one world at two moments, two eras. Give every agent
-a brain drawn from one era or the other, switch mutation off, and play on
-under the world's own rules. If the later brains end up holding more than
-half of the world, they are better
-([Eras and contests: does a world keep getting better?](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)).
+A world is played against its own past: its agents are given brains of two
+eras, with mutation off, and the later era's share of the world says which is
+better ([A contest, step by step](measuring-evolution.md#a-contest-step-by-step)).
 The first contests here lasted 20 iterations, and from them each era gets a
 rating, the founders' at 0.
 
@@ -1262,7 +1218,7 @@ batch W plays the missing corner instead: the same rule *with* revolutions.
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
 > 2. Subtract the world with the rule alone from the world with both, seed by seed.
-> 3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.
+> 3. Seat the brains of the two eras by a coin per agent on each era's world, play 100 iterations, and count the agents the later brains hold.
 >
 > **To make it again:** `python3 book_figures.py norevcombos`.
 <!-- /figure -->
@@ -1332,11 +1288,9 @@ alone.
 > [!example]- How to make this figure
 > **Runs.** Batch X's pilot worlds (B2 at 10,000 tokens, handover and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/X/`) and their controls: the same rule alone, from the batch or lab experiment that made it.
 >
-> **Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`) and the contests in `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`.
+> **Data.** As for the figure *Each rule, with no revolutions and without* above.
 >
-> 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Subtract the world with the rule alone from the world with both, seed by seed.
-> 3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.
+> Steps 1–3 as for the figure *Each rule, with no revolutions and without* above.
 >
 > **To make it again:** `python3 book_figures.py handovercombos`.
 <!-- /figure -->
@@ -1428,11 +1382,9 @@ those links alive.
 > [!example]- How to make this figure
 > **Runs.** Batch T's pilot worlds (B2 at 10,000 tokens, gifts and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/T/`) and their controls: the same rule alone, from the batch or lab experiment that made it.
 >
-> **Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`) and the contests in `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`.
+> **Data.** As for the figure *Each rule, with no revolutions and without* above.
 >
-> 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Subtract the world with the rule alone from the world with both, seed by seed.
-> 3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.
+> Steps 1–3 as for the figure *Each rule, with no revolutions and without* above.
 >
 > **To make it again:** `python3 book_figures.py giftcombos`.
 <!-- /figure -->
@@ -1477,14 +1429,6 @@ and 0.46 with gifts and revolutions, and 0.89 and 0.08 with gifts and no
 revolutions.
 
 ### What we learned (revolutions)
-- **In B2, evolution goes on whatever the switches; they change only how
-  fast.** A lifetime long, the brains of iteration 1,000 beat those of 500 in
-  B2 and nearly all its variants of batch S. In company they win in 42 of 48
-  worlds without revolutions, 40 of 42 with gifts and 35 of 46 with handover.
-  Evolution does not need revolutions. Gifts alone sped it up, but not in
-  company, and handover slows it, to a median of 0.57 against B2's 0.68. No
-  switch the world was built with stops evolution in B2. Whether any makes it
-  go on without end, worlds of 1,000 iterations cannot tell.
 - **Revolutions matter where they are common.** In B1 they are most of the
   fighting, and they decide whether a world is old and calm, with stars, or
   young and turbulent. In B2's kind of world they are a detail, with one
@@ -1504,10 +1448,6 @@ revolutions.
   in which evolution lasts longer can also die, as the world of 3,000
   iterations nearly did. Contests a lifetime long do not bear the lead out
   world by world.
-- **Handover trades resilience for room.** Whatever else the rules are, it
-  thins the network into trees hanging on single links. With fewer links to
-  gather, the dying fold the world less. It is no friend of riches: it
-  cancels mixing's, and those of links and units that hold a token.
 - **Gifts are a detail in B2's kind of world.** They move a few thousandths
   of the tokens a game, mostly to the poorer. Like revolutions and unlike
   handover, they change little whatever else the rules are. Where births are
@@ -1522,12 +1462,9 @@ revolutions.
   replace B2's rule for lapsing links, at least not as gifts stand.
 
 ### How this was made (revolutions)
-Every world on this page is a pilot, made with `research/oee/pilots/run.py`
-in the engine's own code (`--proto engine=true`) and kept in
-`GraphOfLifeRuns/.pilots` ([Pilot worlds](runs-and-records.md#pilot-worlds)). No experiment of
-the lab stands behind it, so the page has no box of runs. Every figure says,
-folded beneath it, which worlds it reads and how. The command lines that made
-the worlds, and what each check found, are in `research/oee/pilots/LOG.md`.
+Every world here was made with `research/oee/pilots/run.py` in the engine's
+own code (`--proto engine=true`). The command lines that made the worlds, and
+what each check found, are in `research/oee/pilots/LOG.md`.
 
 #### The pilots of batch S
 
@@ -1626,7 +1563,7 @@ Every corner is read at iteration 1,000, the same moment in each, as
 > [!example]- How to make this figure
 > **Runs.** Batch Y's 46 pilot worlds (B2 at 10,000 tokens, brains mixed at birth and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/Y/`) and their controls: the same rule alone, from the batch or lab experiment that made it, and, of the same seeds, B2 itself (Experiment 16's lab worlds) and B2 with brains mixed at birth alone (Experiment 17's lab worlds).
 >
-> **Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
+> **Data.** As for the figure *What each switch does, among the sixteen and alone* above.
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
 > 2. Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean.
@@ -1674,10 +1611,7 @@ show.
 **How much the agents differ.** Each grey dot is a world of B2 with one other rule, each orange dot the same rule with brains mixed at birth as well (batch Y), seeds 1 and 2, read at iteration 1,000; the short bars are the means. The dashed lines are B2 itself and B2 with mixing alone, the means of the same seeds. The rules are in the order of the orange means.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *Agents holding three tokens or fewer* above.
->
-> 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean.
+> **Runs, data and steps.** As for the figure *Agents holding three tokens or fewer* above.
 >
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
@@ -1721,8 +1655,7 @@ hold a token, and 366 with brains that grow. And small mixed worlds are the ones
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `rejudge_T100.json`, `long_steps.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
-> 2. Count the agents the later era's brains hold, as a share of all.
+> Steps 1–2 as for the figure *Do the brains of 1,000 beat those of 500?* above.
 >
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
@@ -1744,12 +1677,6 @@ evolution, whatever else the rules say; it speeds it most where the agents
 stay rich.
 
 ### What we learned (brains mixed at birth)
-- **Mixing's riches are robust, but not to rules that pay for births.** With
-  sixteen rules of twenty-three the worlds stay rich. Of the seven that cancel
-  it, four bring children back. They pay for them, make them cheap, or take
-  away the deaths they replace.
-- **Evolution goes on with nearly every combination**, fastest where the
-  agents stay rich.
 - **The richest combinations are also the smallest.** Riches are size where
   the tokens are fixed
   ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)), and
@@ -1767,15 +1694,12 @@ stay rich.
   [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) (`research/oee/candidates.md`).
 
 ### How this was made (brains mixed at birth)
-Every world of batch Y is a pilot, kept in `GraphOfLifeRuns/.pilots`. No
-experiment of the lab stands behind it, so the page has no box of runs. Each
-corner was read at iteration 1,000 with `research/atlas/at.py`. Every figure
-says, folded beneath it, which worlds it reads and how. The setting is
-[`mix_at_birth`](settings.md#mix_at_birth).
+Each corner of batch Y was read at iteration 1,000 with
+`research/atlas/at.py`. The setting is [`mix_at_birth`](settings.md#mix_at_birth).
 
 ## Who inherits?
 
-When an agent dies, the cleanup shares its tokens out among the survivors:
+When an agent dies, the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") shares its tokens out among the survivors:
 until now evenly, every survivor with the same chance at every token. Four
 other rules were played in pilot worlds of B2 and B1. Given to the poorest,
 the estate changes little in B2, and keeps B1's poorest alive. Given to the
@@ -1786,14 +1710,10 @@ as fast as in B2 itself.
 
 ### Where the tokens of the dead go
 
-An agent dies of age in B2. In B1 it dies when it loses its node, or when the
-piece of the world it is on is cut off. Either way its tokens do not vanish:
-the cleanup pools them and shares them out among the survivors. Until now
-every world of this notebook shared them out **evenly**: every survivor had
-the same chance at every token
-([`redistribution`](settings.md#redistribution) = `uniform`;
-[The share-out](b1-lives-and-wealth.md#the-share-out)). The author asked for
-other ways, and each has a reading of its own:
+The cleanup shares out the tokens of the dead, and until then every world of
+this notebook shared them out **evenly**
+([`redistribution`](settings.md#redistribution) = `uniform`). The author asked
+for other ways, and each has a reading of its own:
 
 - **to the poorest**: a safety net. The pool raises the poorest survivors to
   one common level, as far as it reaches, like water poured on an uneven
@@ -1807,9 +1727,6 @@ other ways, and each has a reading of its own:
   finds no living child is shared out evenly among everyone, as before
   (`redistribution` = `children`). This fourth rule followed on 17 October
   2026.
-
-None of them has a number of its own. In an iteration without a birth, the
-newborns' and the parents' rules share the pool out evenly, as before.
 
 ### The worlds (who inherits)
 Each rule was played in pilot worlds of 10,000 tokens for 2,000 iterations,
@@ -1862,10 +1779,7 @@ scattered evenly go to the very agents that will breed.
 **B1 worlds, by who inherits.** B1 worlds of 10,000 tokens, two seeds of each rule, through 2,000 iterations (means over blocks of 20 iterations). Grey: the estate shared evenly, the control; green: to the poorest; violet: to the children born that iteration; red: to their parents; blue (added later): each estate to the dead agent's own living children.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *B2 worlds, by who inherits* above.
->
-> 1. Read agents, births, the Gini coefficient and mean age every iteration.
-> 2. Average over blocks of 20 iterations and draw a line per world.
+> **Runs, data and steps.** As for the figure *B2 worlds, by who inherits* above.
 >
 > **To make it again:** `python3 book_figures.py inherit`.
 <!-- /figure -->
@@ -1998,17 +1912,6 @@ passes down a line over a life, evolution goes on.
 other worlds tie or swing.
 
 ### What we learned (who inherits)
-- **Who inherits sets how many agents a world holds.** Some estates land
-  where a birth can follow from them, on the newborns or the parents. They
-  fill a world to more agents than an even share does. It grows B2's worlds by half,
-  and makes B1's a world of infants. The safety net does little in B2, whose
-  dead are poor, and keeps B1's poorest alive.
-- **More agents is not more life.** The bigger worlds are poorer and more
-  alike, and in B2 they stop evolving. None of the first three rules brings a
-  world nearer to the author's picture than the even share does.
-- **An estate kept in the family changes little.** B2's worlds stay near B2's
-  size and poverty, and keep evolving at least as fast. B1's grow larger,
-  poorer and younger than its controls.
 - **With mixing, too.** Batch M combines each rule with brains mixed at birth
   ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)). It
   asks whether one of them holds a mixed world's drifting size. The estates to
@@ -2016,15 +1919,12 @@ other worlds tie or swing.
   agents in the first seeds played.
 
 ### How this was made (who inherits)
-Every world on this page is a pilot of batch R, kept in
-`GraphOfLifeRuns/.pilots`. No experiment of the lab stands behind it, so the
-page has no box of runs. The worlds of the fourth rule are
+The worlds are batch R's. Those of the fourth rule are
 `R/B2-children-s1`, `-s2`, `R/B1-children-s1` and `-s2`. The controls are,
 for B2, the pilot worlds `P/B2-s1` and `-s2`, which replay the lab's
 Experiment 16 worlds game for game. For B1 they are the first 2,000
 iterations of the long runs `L/B1-long-s1` and `-s2`. The table reads every
-world from one file (`research/atlas/at.py --at 2000`). Every figure says,
-folded beneath it, which worlds it reads and how. The setting is
+world from one file (`research/atlas/at.py --at 2000`). The setting is
 [`redistribution`](settings.md#redistribution).
 
 ## Links to strangers
@@ -2049,24 +1949,11 @@ It might jump or walk step by step, at random or looking where it is going.
 And it might propose a link, or force one.
 
 ### What was built (links to strangers)
-Three settings of the engine do it, all off unless a run turns them on
-([`link_search`](settings.md#link_search),
-[`link_steering`](settings.md#link_steering),
-[`link_consent`](settings.md#link_consent)). After a reproduction phase, an
-agent's brain says how many of its tokens it spends on a search:
-
-| search | what the agent does |
-|---|---|
-| **jump** | a walk as many steps long as the tokens it spends, all in one iteration; a link is proposed where the walk ends, if it ends at a stranger |
-| **walk** | a scout that goes one step further in every iteration the agent pays for, and proposes where it stands when that is a stranger |
-| **reach** | a jump whose steps are free, as many as the tokens it holds would pay for |
-
-A paid step costs one token, paid to the agent the step enters; nobody pays
-its last token. Each step goes to a neighbour drawn at random. Or, when the
-search is **looking**, it goes to the neighbour the searcher would most like a
-link with. A proposal becomes a link if both ends agree (**mutual**), or if
-the proposer alone wants it (**forced**). Either way, nobody at its valence
-of eight links gets a new one.
+Three settings of the engine do it, all off unless a run turns them on: a
+search by jump, walk or free reach ([`link_search`](settings.md#link_search)),
+steered at random or by looking ([`link_steering`](settings.md#link_steering)),
+and a link made where both ends agree or by the proposer alone
+([`link_consent`](settings.md#link_consent)).
 
 ### The worlds (links to strangers)
 Batch K plays B2 at 10,000 tokens with every search, every steering and every
@@ -2156,7 +2043,7 @@ even when it makes no link. This batch does not tell which.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_K_T100.json` and `long_steps.json`.
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations (`research/oee/checks/rejudge.py`).
+> 1. Seat the brains of the two eras by a coin per agent on each era's world and play 100 iterations (`research/oee/checks/rejudge.py`).
 > 2. Count the agents the later era's brains hold, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py strangers`.
@@ -2178,13 +2065,6 @@ in a smaller world give a later brain more room to win? This batch cannot
 say.
 
 ### What we learned (links to strangers)
-- **Given a way to reach strangers, agents reach their neighbours'
-  neighbours.** Nothing in the game rewards a far link over a near one. And a
-  search that walks the network finds what is near.
-- **A paid search is not worth its tokens**, to these brains, at this length
-  of evolution. The free one is used, and changes the network locally.
-- **Every searching world evolves faster than B2**, whether its agents search
-  or not. What they share is a smaller world, and more for a brain to set.
 - **Locality survives.** The notebook's other aim is a network that behaves
   like space
   ([Is a world a space?](how-many-dimensions-does-a-world-have.md)). For it,
@@ -2195,13 +2075,10 @@ say.
   itself keeps space local. No setting offers one yet.
 
 ### How this was made (links to strangers)
-Every world on this page is a pilot of batch K, kept in
-`GraphOfLifeRuns/.pilots`. No experiment of the lab stands behind it, so the
-page has no box of runs. The control worlds are the pilots `P/B2-s1` and
+The worlds are batch K's. The control worlds are the pilots `P/B2-s1` and
 `-s2`, which replay the lab's Experiment 16 worlds game for game. The
-proposals of the fifty recorded games were
-counted with `research/oee/checks/k_links.py`. Every figure says, folded
-beneath it, which worlds it reads and how.
+proposals of the fifty recorded games were counted with
+`research/oee/checks/k_links.py`.
 
 ## Brains mixed at birth, units that cost, an eye for raids on kin
 
@@ -2240,14 +2117,9 @@ Every world is B2 at 10,000 tokens, with Experiment 16's settings, played for
 | `unit_token` | Brains that can grow (up to 32 hidden units, switched on and off by mutation), where every active unit holds one of its agent's tokens. A unit switched on is paid for, one switched off pays its token back, and what an agent cannot pay for stays off. | the same growable brains with units free |
 | `link_token`, no old age | Every link holds a token, paid by whoever makes it; no cap on links (valence 0) and no age limit. | — |
 
-Each is judged by **lifetime contests**, as
-[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
-judged the switches. The brains of a later moment play those of an earlier
-one, half and half on the same world. They play for 100 iterations
-([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
-Each pair plays once in each moment's world.
-If the later brains hold more than half of the nodes at the end, evolution
-went somewhere between the two moments.
+Each is judged by **lifetime contests**
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)),
+each pair played once in each moment's world.
 
 <!-- figure ideas/contests -->
 ![Does evolution go on?](../figures/ideas/contests.svg)
@@ -2361,19 +2233,12 @@ whole and resilient as B2's, whose evolution goes on more strongly. There the br
 - **A cost turns size into a choice.** Free units grow beyond their neutral
   drift; units that cost a token shrink to almost nothing. Neither rule needs
   a number for the size of a brain.
-- **Information alone changes nothing**, here as in
-  [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom). An input is
-  only as useful as the rules make acting on it.
-- **A world without death freezes**, even with a network that holds together: turnover is
-  what selection works on.
-- Two seeds each are pilots. Mixing and costly units are candidates for an
-  experiment of ten worlds, run longer, beside B2.
+- Mixing was later played in the lab (Experiments 17 and 18); costly units
+  never were.
 
 ### How this was made (brains mixed at birth)
-Every world on this page is a pilot, made with `research/oee/pilots` from the
-job list `jobs_Q.txt` and kept in `GraphOfLifeRuns/.pilots`. No experiment of
-the lab stands behind it, so the page has no box of runs. Every figure says,
-folded beneath it, which worlds it reads and how.
+Every world here was made with `research/oee/pilots` from the job list
+`jobs_Q.txt`.
 
 A first count of the contests of the mixed worlds was wrong, before this page
 was written. Mixed worlds came out the other way: later brains *lost*. The
@@ -2620,7 +2485,7 @@ the others on this page. The batches reported outside the Archive are listed in
 - [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): the
   deaths that make the estate in B2.
 - [Room and riches for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world):
-  the estates played again, in the search for a [healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026 "A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.").
+  the estates played again, in the search for a healthy world.
 - [Every setting](settings.md#link_search): the three settings of the search,
   exactly.
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):

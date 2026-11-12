@@ -224,8 +224,8 @@ medians over many iterations.
 - [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did)
 - [How runs are made, recorded and costed](runs-and-records.md#what-a-pilot-records)
 
-> [!info]- And in the Archive (5)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#stars) · [B1: lives and wealth](b1-lives-and-wealth.md#where-to-go-next) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#worlds-that-cannot-break) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#three-kinds-of-rules)
+> [!info]- And in the Archive (6)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#stars) · [B1: lives and wealth](b1-lives-and-wealth.md#where-to-go-next) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#worlds-that-cannot-break) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-kills-a-world) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#the-six-criteria) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world)
 <!-- /used -->
 
 ## The diversity score
@@ -325,8 +325,8 @@ the kinds swing from moment to moment.
 - [Every simulation: what was run, and what was measured](every-simulation.md#what-was-measured-on-what)
 - [Statistics: the tools of the notebook](statistics.md#where-to-go-next)
 
-> [!info]- And in the Archive (3)
-> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#three-ways-to-count) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#nearer-the-authors-picture)
+> [!info]- And in the Archive (2)
+> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#three-ways-to-count) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves)
 <!-- /used -->
 
 ## Where to go next
@@ -366,6 +366,6 @@ the kinds swing from moment to moment.
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
-> [!info]- Pages that link here (20)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md)
+> [!info]- Pages that link here (21)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

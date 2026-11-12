@@ -150,7 +150,7 @@ agent in a hundred has a child in each iteration. In the ten B2 worlds of
 - [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
 
 > [!info]- And in the Archive (2)
-> [B1: lives and wealth](b1-lives-and-wealth.md#four-ways-in-and-out) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#ways-to-die)
+> [B1: lives and wealth](b1-lives-and-wealth.md#the-fate-of-the-richest) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#ways-to-die)
 <!-- /used -->
 
 ## The estate of the dead
@@ -384,7 +384,7 @@ Archive ([Lives and ages](measures-of-the-archived-studies.md#lives-and-ages)).
 - [Statistics: the tools of the notebook](statistics.md#distributions-on-loglog-axes)
 
 > [!info]- And in the Archive (5)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-baseline-world-in-numbers) · [B1: lives and wealth](b1-lives-and-wealth.md#the-picture) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#genotypes-come-and-go) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#agents)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-baseline-world-in-numbers) · [B1: lives and wealth](b1-lives-and-wealth.md#where-to-go-next) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#genotypes-come-and-go) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#agents)
 <!-- /used -->
 
 ## Reproduction statistics

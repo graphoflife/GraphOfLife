@@ -16,11 +16,11 @@ often than chance, puffers in B2 and gliders in B1, but no chain keeps a
 direction. None of it is cooperation, and two new inputs for the brains did not
 change that.
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [Who helps whom](#who-helps-whom): Cooperation means paying a cost so that someone else gains, and in Graph of Life the only act is a stake.
-- [Do agents cooperate? Help, kin and partners](#do-agents-cooperate-help-kin-and-partners): Cooperation means paying a cost so that someone else gains.
-- [Gliders, and who helps whom](#gliders-and-who-helps-whom): When an agent takes a neighbour's node with at least half of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), its wealth and a copy of its brain move there together.
+- [Who helps whom](#who-helps-whom)
+- [Do agents cooperate? Help, kin and partners](#do-agents-cooperate-help-kin-and-partners)
+- [Gliders, and who helps whom](#gliders-and-who-helps-whom)
 
 ## Who helps whom
 
@@ -33,92 +33,15 @@ gifts without a return, but took up alliances, which two neighbours choose
 together, at once. One alliance then held nearly the whole world and the
 fighting ended, but one habit spreading once is not open-ended evolution.
 
-### Why cooperation matters
-
-Why would anyone pay a cost so that someone else gains? Selection favours
-whatever spreads. So how can it favour helping another to spread? It is one
-of the oldest questions of evolution theory. Biologists know five answers,
-which Martin Nowak sorted in 2006
-([Five ways cooperation can evolve](cooperation-help-and-gliders.md#five-ways-cooperation-can-evolve)):
-
-- **kin selection**: help your relatives, who carry copies of your genes;
-- **direct reciprocity**: I help you, and you help me later;
-- **indirect reciprocity**: I help whoever has a good name;
-- **network reciprocity**: on a network, helpers form clusters that keep
-  cheats out;
-- **group selection**: groups of helpers grow and split more than other
-  groups.
-
-For this notebook, cooperation is not a side topic. The great steps in the
-history of life were steps of cooperation: genes joined into genomes, cells
-into organisms, organisms into colonies and societies. A world that keeps
-producing new kinds of things will very likely have to produce new kinds of
-togetherness.
-
-Several pages have looked for cooperation in Graph of Life. This page sets
-what they found side by side, in plain words, and leads to them.
-
-### What helping is, here
-
-Picture a node under attack. Its holder, V, keeps 4 tokens at home, and a
-neighbour, U, stakes 6 on it to take it. Another neighbour, W, adds 3 tokens
-to V's node. V and W mark their stakes revolutionary. Under B1's rules such
-stakes join as a crowd against the largest staker: their 7 beat U's 6, and V
-keeps its node. Without W's 3 tokens, V would have lost it. So W's stake saved
-V's node, and W paid 3 tokens for it, which V gained
-([A worked example](cooperation-help-and-gliders.md#a-worked-example)).
-
-That is the whole idea. A stake on a neighbour's node is a gift and a bid at
-once. Its tokens go to that node, but if the stake wins, the node takes the
-staker's brain. The stake **helps** if, without it, the neighbour would have
-been more likely to lose its node ([Help](cooperation-help-and-gliders.md#help)). Both
-chances come from the world's own rule for deciding a node, counted exactly,
-with nothing sampled. A stake that turns a lost node into a tie helps by half
-a node.
-
-Only two rules let one agent's stake raise another's chance of keeping its
-node:
-
-- in a **revolution**, a neighbour's revolutionary stake joins the holder's
-  own in a crowd against the largest staker
-  ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node));
-- with **alliances**, an ally's stake counts for the holder's side
-  ([What an alliance is](another-game.md#what-an-alliance-is)).
-
-Without either, a stake on someone else's node is a bid against its holder.
-Then help is impossible by rule.
-
-Why count help by the rules, and not by how the helped fare? Because help goes
-where it is needed. Those who are helped are those under attack, so comparing
-them with the rest measures the attack, not the help
-([Channels and feuds](cooperation-help-and-gliders.md#channels-and-feuds)).
-
-Help alone is not yet cooperation. An agent that stakes a little on every
-neighbour helps some of them by accident. Three signs, each set against what
-chance would give, would show more
-([From help to cooperation](cooperation-help-and-gliders.md#from-help-to-cooperation)):
-
-- help goes to **clones**, agents carrying the helper's own brain, more often
-  than clones are among its neighbours: the mark of kin selection;
-- help is **returned** within 50 games more often than chance: the mark of
-  direct reciprocity;
-- help **goes round**, from one agent to a second, a third and back to the
-  first: the mark of indirect reciprocity.
-
-And three different things go by the name of cooperation. The record of play
-can tell them apart
-([What cooperation is here](cooperation-help-and-gliders.md#what-cooperation-is-here)):
-
-- **rescue**: a stake without which a neighbour would have lost its node;
-- **peace**: neighbours that do not take each other's nodes;
-- **exchange**: gifts of tokens that come back round, instead of running
-  downhill ([Flows that go round](measuring-tokens.md#flows-that-go-round)).
+How cooperation can evolve, how help is counted and what cooperation can be
+here are told below ([Five ways cooperation can evolve](#five-ways-cooperation-can-evolve),
+[Help](#help), [What cooperation is here](#what-cooperation-is-here)).
 
 ### What was found
 
 The table sets the worlds of
 [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom) against the
-three kinds of cooperation. All of them hold 10,000 tokens, and that page
+three kinds of cooperation. All of them hold 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), and that section
 reads their record of play: every game, with every agent's stakes. A number
 is that of the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world, or the range over the worlds.
 
@@ -128,54 +51,9 @@ is that of the [median](statistics.md#many-worlds-at-once-the-median-bands-the-s
 | B2, the ten worlds of Experiment 16 | almost none: about 0.01 nodes saved per 100 agents a game | none: 6.5 nodes per 100 agents are lost to attacks a game | none: gifts run downhill, a tribute from failed raids to the richer |
 | pilot worlds of B2's rules with alliances, four worlds | rare: 0.015 to 0.085 nodes saved per 100 agents a game | by rule: allies cannot take each other's nodes | yes: gifts go round more than chance, but no ring lasts fifty games |
 
-#### B1: kin side by side, help by accident
-
-In the thirty B1 worlds of 100,000 tokens, what kin selection needs is
-there, but not the behaviour ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)).
-A tenth of an agent's neighbours carry its own genotype (9.6%), 200 times as
-often as two agents drawn at random. But brains cannot see genotypes, and they
-stake on kin as on strangers.
-
-Stakes come back, but not as favours. When an agent stakes on a neighbour,
-the neighbour stakes back in 90% of cases. That is about what the breadth of
-B1's staking gives alone, since its agents stake on nearly every neighbour
-([Stakes that are returned](b1-the-game-and-its-flows.md#stakes-that-are-returned)).
-Most such pairs stake exactly the same on each other (82%). That is a
-handshake, which keeps their [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") alive at the price the rules set
-([Do agents answer a stake with a stake?](cooperation-help-and-gliders.md#do-agents-answer-a-stake-with-a-stake)).
-
-Help itself, counted in ten B1 worlds of 10,000 tokens, saves 2.4 nodes per
-100 agents a game in the median world. That is a thirteenth of the 31 lost to
-attacks. It comes from the crowds of revolutionaries that B1's agents make by
-spreading a little over every neighbour. And it shows none of the three signs.
-It is returned less than chance (0.76 times), less of it goes round than
-chance would have, and clones get about their share (1.03 times). It doubled
-between iterations 100 and 1,000, and has gone no further since
-([In B1, help by accident](cooperation-help-and-gliders.md#in-b1-help-by-accident)).
-
-#### B2: almost no help, and feuds
-
-In B2's ten worlds, help saves about 0.01 nodes per 100 agents a game (0.005
-to 0.028), and less as the worlds evolve. B2 has revolutions, but an agent
-that stakes on a neighbour puts it all on one. So the small stakes a crowd is
-made of are rare, and an owner's stake counts one and a half times against
-any crowd. Coalitions hardly ever win there
-([How often a coalition wins](rules-in-detail.md#how-often-a-coalition-wins)).
-
-The little help there is passes both ways more often than chance. Over the
-ten worlds, 156 pairs helped each other within 50 games, where chance would
-make 28. Help also goes to clones 1.2 times their share. But a situation
-explains both better than a choice. Help needs two neighbours whose stakes
-can join against one attacker, and that situation is the same seen from
-either side. And no agent can see who staked on its node, so none could repay
-help if it wanted to
-([In B2, nobody helps](cooperation-help-and-gliders.md#in-b2-nobody-helps)).
-
-Take two B2 agents that stake on each other for three games or more. They
-keep their own nodes less often than other agents that stake on others: 0.80
-of the time against 0.89. In B2 a stake on someone's node is an attack, so
-such a pair is in a **feud**
-([Channels and feuds](cooperation-help-and-gliders.md#channels-and-feuds)).
+Each row is told in full below: [In B1, help by accident](#in-b1-help-by-accident),
+[In B2, nobody helps](#in-b2-nobody-helps), [Channels and feuds](#channels-and-feuds)
+and [Among allies, peace instead of rescue](#among-allies-peace-instead-of-rescue-gliders).
 
 The flow of tokens shows the one structure B2's agents add. It falls into
 pairs of partners, and they last a little longer than chance. Of these pairs,
@@ -183,21 +61,6 @@ pairs of partners, and they last a little longer than chance. Of these pairs,
 random, 4% do ([How long modules live](b1-the-game-and-its-flows.md#how-long-modules-live)).
 Whether these pairs are the feuds has not been checked. In B1, the groups the
 flow keeps to are the network's own regions.
-
-#### Among allies: peace instead of rescue (who helps whom)
-In the pilot worlds with alliances, rescue is rare too: 28 to 150 times less
-than in B1. Yet agents with an ally keep their node in 99–100% of games, and
-agents without one in 90–95%. An ally's stake counts for the holder, so an
-allied neighbour can never take the node: the alliance protects by peace. The
-little rescue there is passes both ways more often than chance. But only
-allies can rescue each other, and an alliance is mutual by definition.
-
-Allies also give to allies who give to allies. These are the only worlds whose
-gifts go round more than chance would make. But no ring lasts fifty games on
-the same connections
-([Among allies, peace instead of rescue](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)).
-In the same pilots without alliances, which have no revolutions either, no
-stake ever helped.
 
 ### What was tried to make helping pay
 
@@ -255,24 +118,10 @@ B2's worlds at iterations 2,000, 5,000 and 10,000. None took hold, and they
 died before lone raiders in 42 of 45 places. A group helps only where it can
 gather. On B2's network, a stranger next to a patch touches only one or two
 of its agents
-([Why the raiders stopped winning](crews-breeders-and-b1-raiders.md#verdict-on-experiment-33-refuted)).
+([A crew of raiders](crews-breeders-and-b1-raiders.md#verdict-on-experiment-33-refuted)).
 
-**More information made no cooperation.** The pilot worlds of batch P gave
-B2's brains two new inputs per neighbour. One was a sense of direction, *this
-is the node I came from*. The other was a sense of who helped, *this
-neighbour's stake saved my node in the last game*. With the sense of
-direction, chains of takeovers went straight back to the node they had just
-left more often than in the controls. But so did one world with only the
-sense of who helped, 1.66 times as often as chance. So two seeds cannot lay
-the going back to the sense of direction. And chains travelled no further
-than a random walk would.
-
-Help stayed where it was: 0.006–0.012 nodes saved per 100 agents a game in
-the six worlds with an input, against 0.009 in the controls. It was returned
-no more than there. In 200 games, help passed both ways in 4 and 2 pairs, in
-two of those worlds. In the two controls it did in 6 and 2. Gifts still ran
-downhill, and evolution went on at about the control's pace
-([Both inputs, tested](cooperation-help-and-gliders.md#both-inputs-tested)).
+**More information made no cooperation.** Batch P's two inputs made no gliders
+and no more help ([Both inputs, tested](#both-inputs-tested)).
 
 ### Why so little
 
@@ -287,7 +136,7 @@ peace appeared in these worlds, a rule made it possible: revolutions, pooled
 sides, alliances.
 
 **There is no future to reciprocate in.** Reciprocity needs the same two
-agents to meet again. In B1 a connection lasts, but the brains at its ends do
+agents to meet again. In B1 a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") lasts, but the brains at its ends do
 not. In only 4% of connections do the same two brains face each other a game
 later ([How long partners last](cooperation-help-and-gliders.md#how-long-partners-last)).
 The brain that was helped is often gone before it could return the favour.
@@ -342,20 +191,9 @@ outlast the network's regions
 ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#what-we-learned-flow-modules)).
 
 ### What we learned (who helps whom)
-- **Help has an exact meaning here, and it needs a rule.** A stake helps if,
-  without it, the neighbour would have been more likely to lose its node.
-  Only revolutions and alliances make help possible.
-- **B1 helps by accident, B2 hardly at all, and allies keep the peace
-  instead.** In B1 help is returned less than chance. Where it comes back more
-  often, in B2 and among allies, the situations and rules that allow it
-  explain why.
-- **There is no future to reciprocate in.** The same two brains seldom face
-  each other for long, and nothing in the game rewards keeping a partner.
-- **Seeing is not enough.** Senses of kin, of family, of direction and of who
-  helped made no cooperation where the rules gave nothing to gain by it.
 - **A rule that makes help mutual is taken up.** Alliances brought peace, and
   gifts that go round. But one habit spreading once is not open-ended
-  evolution, and what would keep cooperation contested is still open.
+  evolution, and what would keep cooperation contested was left open.
 
 ## Do agents cooperate? Help, kin and partners
 
@@ -671,6 +509,10 @@ expected. Takeovers do not spare kin, nor seek them out.
 > **To make it again:** `python3 book_figures.py cooperation`.
 <!-- /figure -->
 
+When an agent stakes on a neighbour, the neighbour stakes back in 90% of cases.
+That is about what the breadth of B1's staking gives alone, since its agents
+stake on nearly every neighbour
+([Stakes that are returned](b1-the-game-and-its-flows.md#stakes-that-are-returned)).
 Take the pairs of neighbours that staked on each other in a game. In the
 median world, 82% of them staked **exactly the same** amount on each other.
 And **66%** of all such pairs exchanged exactly one token each way. The
@@ -784,26 +626,6 @@ responsible, and
 [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)
 proposes changes.
 
-The work on B2 went some way down these roads. B2 gives an incumbent an
-advantage, so that a brain keeps its node longer
-([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). It
-gives agents brains that see, which could read the names of their kin
-([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
-Whether they do has not been measured. A memory of what each neighbour staked
-in the last game was tried too. It changed 11 to 24% of decisions, and
-evolution stopped all the same.
-
-Two attempts to make helping pay failed
-([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
-Stakes that support a neighbour's defence were given up by evolution. A yield
-on stakes returned built stars rather than partnerships.
-
-A way to commit to a partner was tested later: alliances by mutual consent
-([Alliances](another-game.md#alliances)). The agents took them up at once.
-But an alliance protects by peace, not by rescue
-([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)).
-[Who helps whom](cooperation-help-and-gliders.md#who-helps-whom) puts this beside every other attempt.
-
 ### What we learned (do agents cooperate)
 - **Help has an exact meaning here.** A stake helps if, without it, the
   neighbour staked on would have been more likely to lose its node. Only
@@ -823,26 +645,18 @@ But an alliance protects by peace, not by rescue
   kin, and to commit to a partner.
 
 ### How this was made (do agents cooperate)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. All five are drawn again with `python3 book_figures.py cooperation`, and
-their numbers are kept in `book/results/cooperation.json`.
+All five figures of this section are drawn again with
+`python3 book_figures.py cooperation`, from the thirty runs of Experiment 10
+(B1 at 100,000 tokens), and their numbers are kept in
+`book/results/cooperation.json`.
 
 The numbers for the worlds of 10,000 tokens come from the same measurement on
 Experiment 2: thirty worlds, `B1-10000-s001` … `-s030`, of 3,000 iterations
 each (`python3 gol_lab.py run E02`). The 26 that lived to the end were read.
 
-#### The runs of Experiment 10
-
-Experiment 10 is 30 runs: B1 at 100,000 tokens, seeds 1 to 30, 1,500
-iterations each.
-
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 10](b1-the-network-size-and-scaling.md#the-runs-of-experiment-10-the-shape-of-the-network), listed on the page that reports it. To make them again: `python3 gol_lab.py run E10`.
 <!-- /runs -->
 
 ## Gliders, and who helps whom
@@ -1168,7 +982,7 @@ went to whoever held the node. A **takeover** is a stake that did.
 <!-- figure patterns/flows -->
 ![Where the tokens go](../figures/patterns/flows.svg)
 
-**Where the tokens go.** One dot per world, the bar the median. The tokens each connection carried, net, over 50 games, split into the part that runs downhill and the part that goes round loops (the note *Flows that go round*). Top: how much more of the flow goes round than if each connection's net flow had a random direction; above zero it goes round, below it runs downhill. Gifts are stakes that did not take their target, takeovers stakes that did. Bottom: how much of each part comes back on the same connections in the next 50 games.
+**Where the tokens go.** One dot per world, the bar the median. The tokens each connection carried, net, over 50 games, split into the part that runs downhill and the part that goes round loops ([Flows that go round](measuring-tokens.md#flows-that-go-round)). Top: how much more of the flow goes round than if each connection's net flow had a random direction; above zero it goes round, below it runs downhill. Gifts are stakes that did not take their target, takeovers stakes that did. Bottom: how much of each part comes back on the same connections in the next 50 games.
 
 > [!example]- How to make this figure
 > **Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of the baseline set, `B1-10000-s001` … `-s010` (B1 at 10,000 tokens, Experiment 2). Both record every game with every agent's stakes; read are the games of iterations 1,000 to 2,000. Pilot worlds of [Alliances](another-game.md#alliances) (`GraphOfLifeRuns/.pilots`): with alliances `A10k/allies-s1` and `-s2` from iteration 500 and `AL/allies10k-s3` and `-s4` from iteration 2,000; without, `A10k/ctrl-s1` and `-s2` from iteration 500. Each goes on from its checkpoint for 200 iterations with every game recorded in the lab's form (`python3 research/oee/checks/pilot_frames.py <world> --at <iteration> --games 200`).
@@ -1228,32 +1042,17 @@ much: 0.02 in B2, and 0.09 in B1.
 
 ### Help, counted by the rules
 
-Cooperation needs an act that helps. In this game every act is a stake, so
-what helps must be a stake. A stake on a neighbour's node **helps** if,
-without it, the neighbour would have been more likely to lose that node.
-[Do agents cooperate?](cooperation-help-and-gliders.md#help) makes this exact. It counts
-both chances from the world's own rule for deciding a node, and works an
-example through ([A worked example](cooperation-help-and-gliders.md#a-worked-example)).
-
-Only two rules make help possible. In a revolution, a crowd
-of small revolutionary stakes overthrows the largest staker. So a neighbour's
-stake can join the holder's own in the crowd that saves its node. B1 and B2
-both have revolutions. With alliances, an ally's stake counts for the holder's
-side. Without either, every stake on another's node is a bid against its
-holder, and can only lower its chance. The pilots without alliances have
-neither, and in them no stake ever helped.
-
-Help alone is not yet cooperation: it can be a by-product. Three signs, each
-against chance, would show more
-([From help to cooperation](cooperation-help-and-gliders.md#from-help-to-cooperation)).
-Help goes to **clones**, agents carrying the helper's own brain. Help is
-**returned** within a stretch of 50 games. Or help **goes round**: one agent
-helps a second, the second a third, and the third the first.
+A stake helps a neighbour if, without it, the neighbour would more likely have
+lost its node; only revolutions and alliances make that possible, and help
+becomes cooperation only by three signs set against chance
+([Help](#help), [From help to cooperation](#from-help-to-cooperation)). In
+the pilots without alliances, which have no revolutions either, no stake ever
+helped.
 
 <!-- figure patterns/help -->
 ![Who helps whom](../figures/patterns/help.svg)
 
-**Who helps whom.** One dot per world, the bar the median. A stake on a neighbour's node helps if, without it, the neighbour would have been less likely to keep its node (the note *Help*). Top left: the nodes so saved, counted as the sum of those effects, per 100 agents and game; the pilots without alliances, in which no stake can help, are drawn at 0.001. Top right: the pairs in which help went both ways within a stretch of 50 games, summed over the stretches, divided by the number expected from how long each pair were neighbours; worlds in which chance expects fewer than one have no dot. Bottom: whether the net help between agents goes round loops more than chance (only where stretches have at least 100 helping pairs and their help closes loops), and whether help goes to agents carrying the helper's brain more than such agents are among its neighbours (only where at least 100 stakes helped).
+**Who helps whom.** One dot per world, the bar the median. A stake on a neighbour's node helps if, without it, the neighbour would have been less likely to keep its node ([Help](cooperation-help-and-gliders.md#help)). Top left: the nodes so saved, counted as the sum of those effects, per 100 agents and game; the pilots without alliances, in which no stake can help, are drawn at 0.001. Top right: the pairs in which help went both ways within a stretch of 50 games, summed over the stretches, divided by the number expected from how long each pair were neighbours; worlds in which chance expects fewer than one have no dot. Bottom: whether the net help between agents goes round loops more than chance (only where stretches have at least 100 helping pairs and their help closes loops), and whether help goes to agents carrying the helper's brain more than such agents are among its neighbours (only where at least 100 stakes helped).
 
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Where the tokens go* above.
@@ -1490,9 +1289,8 @@ Every check is a script in `research/oee/checks/`:
 - `circulation.py`: the split of the flow;
 - `decisive.py`: help.
 
-Every figure says, folded beneath it, which runs it reads and how. All five
-are drawn again with `python3 book_figures.py patterns`, and their numbers are
-kept in `book/results/patterns.json`.
+All five figures are drawn again with `python3 book_figures.py patterns`, and
+their numbers are kept in `book/results/patterns.json`.
 
 ## Where to go next
 
@@ -1581,6 +1379,11 @@ kept in `book/results/patterns.json`.
   agents work together no longer bears on the notebook's question as it stands.
   The pages are kept so that every figure here can be read and made again.
   Nothing was cut.
+- **12 November 2026.** Who helps whom, once the summary page, told the later
+  sections again. Its subsections Why cooperation matters, What helping is,
+  here, and the three that retold each row of its table (B1, B2, among allies)
+  were cut to links to the sections that tell them; the stakes returned in 90%
+  of cases moved into Do agents answer a stake with a stake?
 
 <!-- turns -->
 ---

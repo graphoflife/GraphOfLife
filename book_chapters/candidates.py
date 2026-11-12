@@ -306,7 +306,7 @@ def candidates(ch: F.Chapter) -> None:
                        "mixed worlds."),
               recipe=recipe(RUNS, "`GraphOfLifeRuns/.pilots/lc_T100.json` (`research/oee/checks/lc_rejudge_worlds.txt`), "
                                   "the batches' own contests for 1,000/500, and `e17_T100.json`",
-                            ["Seat the brains of the two moments on alternate agents of each moment's world and "
+                            ["Seat the brains of the two moments by a coin per agent on each moment's world and "
                              "play 100 iterations (`research/oee/checks/rejudge.py`).",
                              "Count the agents the later moment's brains hold, as a share of all."]))
     ch.number("evolution", steps)

@@ -998,7 +998,7 @@ with and without them was the same world in every measure
 - [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
 
 > [!info]- And in the Archive (6)
-> [B1: lives and wealth](b1-lives-and-wealth.md#the-bookkeeping-of-a-game) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-game-and-what-the-rules-leave-open) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#three-switches-and-two-more) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#raiders-that-pool-their-stakes) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-helping-is-here)
+> [B1: lives and wealth](b1-lives-and-wealth.md#the-bookkeeping-of-a-game) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-game-and-what-the-rules-leave-open) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#three-switches-and-two-more) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#raiders-that-pool-their-stakes) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-an-agent-can-give)
 <!-- /used -->
 
 In the code it is `_resolve_winner(offers, revolutionaries, rng)` in

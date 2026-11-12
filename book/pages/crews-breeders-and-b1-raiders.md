@@ -106,10 +106,7 @@ before the lone raiders planted there. That was so in 15 of 15 places at
 **What became of the patches planted at 5,000 and 10,000.** The median over the thirty plantings at 5,000 and 10,000 of each kind: crews (orange), lone raiders (violet), controls (grey). Left: the patch's strategy's agents as a share of the patch planted (0 once it has died out). Right: their tokens per agent, over the plantings still alive.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *Crews and lone raiders, planted in the same places* above.
->
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy and its tokens after every iteration.
+> **Runs, data and steps.** As for the figure *Crews and lone raiders, planted in the same places* above.
 >
 > **To make it again:** `python3 book_figures.py crews`.
 <!-- /figure -->
@@ -235,10 +232,7 @@ lone raiders and controls on the same patches.
 
 ### What we expected of breeding
 
-We expected breeding to open the door. A raider that breeds replaces its
-dead, so its patch need not die with the agents it was planted on. And every
-child can raid at once. The breeding turtle would show whether the raid adds
-anything to the breeding.
+Experiment 34 tested whether breeding opens the door:
 
 <!-- thesis E34 -->
 > [!quote] The thesis of Experiment 34, written down before any of its runs existed
@@ -265,7 +259,8 @@ anything to the breeding.
 >
 > **Data.** From each trial's `result.json`.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
+> Step 1 as for the figure *Crews and lone raiders, planted in the same places* above.
+>
 > 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
 > 3. A planting takes hold when its strategy is alive after 300 iterations, holds more agents than the patch began with, and more than the control planted in the same place; count the plantings of each era that took hold, and those alive at all.
 >
@@ -299,8 +294,8 @@ planted with, one more, for one iteration.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
+> Steps 1–2 as for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
+>
 > 3. At each iteration after planting, take the median over the thirty plantings of the strategy's agents over the patch planted, and of its tokens per agent over the plantings still alive.
 >
 > **To make it again:** `python3 book_figures.py breeders`.
@@ -388,10 +383,7 @@ each of B1's two long worlds. Beside each is a control.
 
 ### What we expected in B1
 
-If B2's rules closed the door, B1 should open it. Without a home share or a
-holder's bonus, a raid is cheap. Without old age, a patch need not breed to
-last. And the agents a patch meets are rich enough to be worth taking. So we
-expected lone raiders to take hold in B1, and crews at least as often.
+Experiment 35 tested whether B1, without B2's rules, opens the door:
 
 <!-- thesis E35 -->
 > [!quote] The thesis of Experiment 35, written down before any of its runs existed
@@ -402,8 +394,6 @@ expected lone raiders to take hold in B1, and crews at least as often.
 > **It holds if:** Counted by tokens (alive after 300 iterations, more tokens than the patch began with, and more than the control planted in the same place), lone raiders take hold in at least 5 of the 18 plantings, and crews in at least as many as lone raiders.
 >
 > **It fails if:** Lone raiders take hold in 4 or fewer of the 18, or crews in fewer than lone raiders: that verdict of B2 holds in B1 too, and the chapter says which.
->
-> *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 <!-- /thesis -->
 
 ### Nothing took hold in B1
@@ -418,8 +408,8 @@ expected lone raiders to take hold in B1, and crews at least as often.
 >
 > **Data.** From each trial's `result.json`.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
+> Steps 1–2 as for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
+>
 > 3. Count the plantings of each era whose strategy is alive after 300 iterations, and take the median of the iteration each planting's last agent died in (300 if it lived to the end).
 >
 > **To make it again:** `python3 book_figures.py b1raiders`.
@@ -442,12 +432,10 @@ iterations, crews 76 to 120, the controls 130 to 237.
 **What became of the patches in B1.** The median over the eighteen plantings of each kind, at each iteration after planting: the strategy's tokens (left) and agents (right) as a share of what the patch began with, 0 once it has died out.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Every strategy in B1's two long worlds* above.
+> **Runs and data.** As for the figure *Every strategy in B1's two long worlds* above.
 >
-> **Data.** From each trial's `result.json`.
+> Steps 1–2 as for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
 > 3. At each iteration after planting, take the median over the eighteen plantings of the strategy's tokens over the patch's tokens at planting, and of its agents over the patch planted.
 >
 > **To make it again:** `python3 book_figures.py b1raiders`.
@@ -533,8 +521,7 @@ played on to 10,000 iterations as [pilots](runs-and-records.md#pilot-worlds "A w
 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`). Experiment 35 plants
 them in B1's two long worlds, played on to 10,000 iterations as pilots too
 (`GraphOfLifeRuns/.pilots/L/B1-long-s1` and `s2`). Each trial plays from a
-pilot's checkpoint, which holds a whole world, as a run's archive does. Each
-figure says, folded beneath it, how it is drawn from the trials.
+pilot's checkpoint, which holds a whole world, as a run's archive does.
 
 ### The trials of Experiment 33
 
@@ -571,7 +558,7 @@ section to `book/results/breeders.json`.
 > - **lone raiders** — 45 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 2,000, 5,000, 10,000; strategies raider; patches of 5% of the world; places 1, 2, 3.
 > - **controls** — 45 trials: worlds `pilot:L/B2-long-s001`, `pilot:L/B2-long-s002`, `pilot:L/B2-long-s003`, `pilot:L/B2-long-s004`, `pilot:L/B2-long-s005`; at iteration 2,000, 5,000, 10,000; strategies resident; patches of 5% of the world; places 1, 2, 3.
 >
-> To play these trials again: `python3 gol_lab.py run E34`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+> To play these trials again: `python3 gol_lab.py run E34`.
 <!-- /runs -->
 
 ### The trials of Experiment 35
@@ -592,7 +579,7 @@ section to `book/results/b1raiders.json`.
 > - **lone raiders** — 18 trials: worlds `pilot:L/B1-long-s1`, `pilot:L/B1-long-s2`; at iteration 2,000, 5,000, 10,000; strategies raider; patches of 5% of the world; places 1, 2, 3.
 > - **controls** — 18 trials: worlds `pilot:L/B1-long-s1`, `pilot:L/B1-long-s2`; at iteration 2,000, 5,000, 10,000; strategies resident; patches of 5% of the world; places 1, 2, 3.
 >
-> To play these trials again: `python3 gol_lab.py run E35`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+> To play these trials again: `python3 gol_lab.py run E35`.
 <!-- /runs -->
 
 ## How our view changed

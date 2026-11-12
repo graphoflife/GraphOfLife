@@ -153,8 +153,8 @@ In a settled B1 world of 100,000 tokens the Gini stays near 0.47, between
 - [Brains replaced by their average](brains-replaced-by-their-average.md#what-the-brains-of-round-3-are-like)
 - [How fast should brains change?](how-fast-should-brains-change.md#what-the-fifty-worlds-did)
 
-> [!info]- And in the Archive (2)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-record) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)
+> [!info]- And in the Archive (3)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-record) · [B1: lives and wealth](b1-lives-and-wealth.md#where-do-the-tokens-go) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)
 <!-- /used -->
 
 ### The richest tenth's share
@@ -475,7 +475,7 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 - [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
 
 > [!info]- And in the Archive (4)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#a-world-of-attack) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-picture) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#b1-the-network-size-and-scaling) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-the-pages-found)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#a-world-of-attack) · [B1: the game and its flows](b1-the-game-and-its-flows.md#where-tokens-go) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#b1-the-network-size-and-scaling) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-the-pages-found)
 <!-- /used -->
 
 ## Measuring the flow: token flow and circulation
@@ -487,6 +487,8 @@ the net flow splits exactly into a part that runs downhill and a
 **circulation** that goes round. How much of a single game's flow goes round,
 its **lightning**, was measured only by studies now in the Archive
 ([Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)).
+Who trades with whom, game after game, is read as **flow modules**
+([Flow modules and the map equation](#flow-modules-and-the-map-equation)).
 
 ### Token flow
 
@@ -573,8 +575,8 @@ game, and about 71% cross a connection. In B2 almost nothing cancels
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#the-goal-evolution-that-keeps-going)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 
-> [!info]- And in the Archive (2)
-> [B1: the game and its flows](b1-the-game-and-its-flows.md#the-flow-of-one-game) · [Measures of the archived studies](measures-of-the-archived-studies.md#loops-of-flow)
+> [!info]- And in the Archive (1)
+> [Measures of the archived studies](measures-of-the-archived-studies.md#loops-of-flow)
 <!-- /used -->
 
 ### Flows that go round
@@ -708,7 +710,7 @@ from island to island.
 - [Particles: patterns that outlast what carries them](particles.md#how-a-ring-is-seen)
 
 > [!info]- And in the Archive (3)
-> [B1: the game and its flows](b1-the-game-and-its-flows.md#do-tokens-go-round) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-helping-is-here) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-net-version)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#do-tokens-go-round) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#from-help-to-cooperation) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-net-version)
 <!-- /used -->
 
 #### What it can and cannot say
@@ -728,6 +730,166 @@ Then the token's gradient part is the electrical current from $a$ to $b$,
 spread over every way between them. Its energy is the effective resistance
 between $a$ and $b$, which on a network with many loops is far less than $L$.
 The rest is circulation. So coherent routes, not only closed rings, raise the share.
+
+### Flow modules and the map equation
+
+Which agents belong together? There are many ways to ask: agents joined to
+each other, agents related to each other — or agents **between whom the
+tokens actually go**. A flow module is a group of the third kind. Picture a
+token wandering the flow from agent to agent: a flow module is a set of agents
+it tends to stay inside. This section explains how such groups are found,
+followed through time and checked against chance. The Research tab's *Flow
+modules* view draws them for any run, and the study of B1's and B2's worlds
+([Flow modules in the worlds](b1-the-game-and-its-flows.md#flow-modules-in-the-worlds))
+uses the same program (`web/js/flowmodules.js`, run through
+`tools/flowmodules_cli.js`).
+
+#### The flow of one game
+
+In every game, each agent splits its tokens over its own node and its
+neighbours' nodes ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). A
+token staked on a neighbour's node **flows** along the connection between
+them ([Token flow](#token-flow)). Add up, for each pair of
+neighbours, the tokens that crossed between them in either direction. That
+sum is the weight of their connection in this game, and the game becomes a
+weighted network: the **flow**. Tokens an agent keeps on its own node say
+nothing about whom it is grouped with, so they are left out.
+
+#### Describing a walk in as few bits as possible
+
+Think of street names. Many towns have a Station Road, and nobody is
+confused: you name the town only when you travel to another one. So a
+street's name can be short, because it has to be unique only within its town.
+
+The map equation (Rosvall and Bergstrom, 2008) does the same with the flow.
+Imagine a walker that steps along the weighted connections for ever, choosing
+each step in proportion to the weights. It spends a share p_a of its time at
+agent a. To write down where it goes, you could give every agent a code word
+and write one word per step. Groups can do better:
+
+- give every group a name;
+- give every agent a short code word that has to be unique only *within* its
+  group, so that other groups can use it again;
+- write the group's name only when the walk enters it.
+
+If the walk lingers in groups, with many steps inside and few between, group
+names are rarely needed. Then the description is shorter than the plain one.
+Its length per step is
+
+$$
+L = q \log_2 q \;-\; 2\sum_i q_i \log_2 q_i \;-\; \sum_a p_a \log_2 p_a \;+\; \sum_i (q_i + p_i)\log_2 (q_i + p_i)
+$$
+
+with p_i the share of time inside group i, q_i the share of steps that leave
+it, and q the sum of the q_i. In words: the first term and half of the second
+are the cost of group names, paid each time the walk moves into a group. The
+rest is the cost of naming the agents within their groups, with one more word
+to say that the walk leaves. The best grouping is the one with the smallest
+L. One group holding everyone describes the walk with no structure at all, in
+L₀ bits a step, and
+
+$$
+\text{compression} = \frac{L_0 - L}{L_0}
+$$
+
+says how much the groups shorten the description: 0 for flow with no group
+structure, and more the more the flow keeps to groups.
+
+**An example.** Four agents form two pairs, A–B and C–D, and tokens cross
+only within each pair. The walker spends a quarter of its time at each agent.
+Without groups, naming one agent of four takes 2 bits a step. With the two
+pairs as groups, naming one agent of two takes 1 bit. No group's name is ever
+needed, because the walk never leaves its pair. So L₀ = 2, L = 1, and the
+compression is (2 − 1)/2 = 0.5. With more pairs L₀ grows while L stays at
+1 bit, so flow made of many separate pairs compresses far more.
+
+#### Finding the groups
+
+Trying every grouping is impossible, so the program starts with every agent
+alone. It takes the agents one at a time, in a shuffled but fixed order. Each
+moves into whichever of its partners' groups shortens L most, or stays if none
+does. The program goes round again until no move helps, twelve times at most.
+This is the local-moving step of the Louvain method (Blondel and others,
+2008). The result is a good
+grouping, not always the best.
+
+#### Following groups through time
+
+A group of one game and a group of the next are taken to be **the same
+module** when they share enough agents. Their overlap is the Jaccard index:
+the agents they share, divided by the agents in either. "Enough" can be
+decided in two ways:
+
+- **above a floor**: the best overlaps first, each module used once, and none
+  below 0.3. This is the view's default, which you can move, and the rule of
+  the study.
+- **mutually best**: of the pairs above the floor, only those in which each
+  module is the other's best overlap. With the floor at 0, this matches at
+  any overlap at all.
+
+A small module can be "followed" on very little: two modules of two agents
+that share one agent overlap by a third. A B2 agent that stakes on a
+neighbour at all puts its whole stake on one. So B2's flow is made mostly of
+pairs, and there a matching at any overlap follows chains of chance. The
+notebook therefore matches above the floor, and checks the result against
+chance (below).
+
+A module is known by its overlap, not by its members. So it can keep going
+while its agents change, as a town keeps its name while its people change.
+Its **turnover** is the share of its agents in a game that were not in it the
+game before. The change has two sources, and the difference matters:
+
+- **regeneration**: newcomers that were born, and members that died. The
+  module makes and loses its own agents, and the pattern outlives every one of
+  them, as a town lasts through its births and deaths.
+- **exchange**: newcomers that were alive before, in another module or in
+  none, and members that left while still alive. The agents were there all
+  along, and the border moved, as when people move between neighbouring
+  towns.
+
+#### Checking against chance
+
+Flow on any network has some group structure, because neighbours trade with
+neighbours. So each measure is set beside a **null**: the same measure with
+one thing shuffled at random and the rest kept. Three nulls answer three
+questions.
+
+- **Is there group structure at all?** The same game's flow is **rewired**.
+  Every token that crossed a connection is cut into two halves, one at each
+  end, and the halves are paired again at random. Every agent keeps how much
+  flow it sends and receives; whom it trades with is shuffled. A real module
+  structure compresses the flow better than the rewired one does.
+- **Is the structure the network's, or the agents'?** Rewired tokens cross
+  between agents that are not neighbours, which no token can. The fair
+  yardstick, **partners dealt**, keeps the network and deals every agent's
+  stakes among its own neighbours at random. Why it is fair is told in
+  [What the network makes, and what the agents make](b1-the-game-and-its-flows.md#what-the-network-makes-and-what-the-agents-make).
+- **Do modules last longer than chance?** The rewired flow cannot say: its
+  modules are pairs and threes, which "live" long on single shared agents.
+  Instead each game's own modules are kept, with their sizes, and their
+  agents are dealt among them at random, game by game: **members dealt**.
+  Followed the same way, they show what following finds when nothing but the
+  sizes carries over.
+
+Two more measures complete the set. One needs no following at all, and the
+other asks what following finds:
+
+- **Kept together**: of two agents in one module, the share still in one
+  module so many games later. Beside it stands the same share with the later
+  game's agents dealt at random: what chance alone keeps together.
+- **Outlasting**: of the modules followed for many games, the share in which
+  none of the first members is left at the end. That is the sense in which a
+  group can outlast its members.
+
+#### Where flow modules are used
+
+<!-- used flow-modules-and-the-map-equation -->
+- [Particles: patterns that outlast what carries them](particles.md#how-long-the-carriers-last)
+- [Every simulation: what was run, and what was measured](every-simulation.md#what-was-measured-on-what)
+
+> [!info]- And in the Archive (2)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: the game and its flows](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)
+<!-- /used -->
 
 ## Where to go next
 
@@ -783,9 +945,16 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
   studies](measures-of-the-archived-studies.md): two sections that only pages of
   the Archive use: mobility and lightning. The two family headings that named
   them name what is left.
+- **12 November 2026.** [Flow modules and the map equation](#flow-modules-and-the-map-equation)
+  moved here from [B1: the game and its flows](b1-the-game-and-its-flows.md), the
+  method beside the other measures of the flow; the results it gave in B1's and
+  B2's worlds stay there, in the Archive.
 
 ## References
 
+- Blondel, V. D., Guillaume, J.-L., Lambiotte, R. and Lefebvre, E. (2008).
+  Fast unfolding of communities in large networks. *Journal of Statistical
+  Mechanics: Theory and Experiment*, P10008.
 - Gini, C. (1912). *Variabilità e mutabilità*. Bologna: Tipografia di Paolo
   Cuppini.
 - Hill, M. O. (1973). Diversity and evenness: a unifying notation and its
@@ -795,6 +964,9 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
   *Publications of the American Statistical Association* 9, 209–219.
 - Pielou, E. C. (1966). The measurement of diversity in different types of
   biological collections. *Journal of Theoretical Biology* 13, 131–144.
+- Rosvall, M. and Bergstrom, C. T. (2008). Maps of random walks on complex
+  networks reveal community structure. *Proceedings of the National Academy
+  of Sciences* 105, 1118–1123.
 - Shannon, C. E. (1948). A mathematical theory of communication. *Bell System
   Technical Journal* 27, 379–423 and 623–656.
 

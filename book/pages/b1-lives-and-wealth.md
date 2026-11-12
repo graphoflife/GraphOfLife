@@ -17,17 +17,16 @@ It booms and crashes in its first hundred iterations, and by iteration 500 its
 births, ages and lifetimes have stopped changing. Its Gini coefficient stays
 near 0.47. And it is a world of places more than of individuals. Most agents
 die young, cut off from the network. Wealth follows connections, as in a random
-walk, and who is rich keeps changing. Round 3's worlds start from B1's rules
-but change many of them, so the numbers here describe B1 alone.
+walk, and who is rich keeps changing.
 
-It gathers what were 6 pages of their own, one section each:
+Its sections:
 
-- [The life of a B1 world](#the-life-of-a-b1-world): The first baseline, B1, is studied through thirty worlds that differ only in their seed, each run for 1,500 iterations.
-- [Births, deaths and ages](#births-deaths-and-ages): From iteration 500 on, a world of 100,000 tokens keeps about 14,400 agents, but replaces about 3.5 in a hundred of them in every iteration.
-- [How births build the network](#how-births-build-the-network): In the first baseline, B1, every new node of a world's network is a newborn agent, and every new connection is made at a birth.
-- [How unequal is a world, and who stays rich](#how-unequal-is-a-world-and-who-stays-rich): The founders of a world start equal, but the first births end that, and from then on a world is moderately unequal.
-- [Gains and losses: who gains, who loses, and the share-out](#gains-and-losses-who-gains-who-loses-and-the-share-out): Every token is staked in every game.
-- [The largest and the smallest](#the-largest-and-the-smallest): In a settled world, the richest agent holds about 2% of all tokens and the best-connected some 640 connections; the median agent has 2.
+- [The life of a B1 world](#the-life-of-a-b1-world)
+- [Births, deaths and ages](#births-deaths-and-ages)
+- [How births build the network](#how-births-build-the-network)
+- [How unequal is a world, and who stays rich](#how-unequal-is-a-world-and-who-stays-rich)
+- [Gains and losses: who gains, who loses, and the share-out](#gains-and-losses-who-gains-who-loses-and-the-share-out)
+- [The largest and the smallest](#the-largest-and-the-smallest)
 
 ## The life of a B1 world
 
@@ -126,48 +125,13 @@ app, which replays a run frame by frame.
 
 #### The questions of the baseline's study
 
-Each page of the study asks the thirty worlds one question. The first two
-are answered on this page.
-
-- [A world's life](#a-worlds-life), below — What does a world do over 1,500
-  iterations? Does it settle?
-- [The first hundred iterations](#the-first-hundred-iterations), below — What
-  happens in its first hundred iterations?
-- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages) — How often are agents
-  born and how do they die? How old do they get?
-- [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life) — How do ages and
-  lifespans change over a world's life?
-- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) — How
-  much of what a world does is decided by its seed?
-- [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) — Where do the tokens
-  go — how unequal does a world become?
-- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) — How is the game
-  played: where do agents stake, who wins the nodes?
-- [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) —
-  What shape does the network take?
-- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) — How long do genotypes
-  last, and do lineages take over?
-- [What the brains are like](what-the-brains-are-like.md) and
-  [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) — What
-  are the brains like, and what do agents say to each other?
-- [Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich) — Do the rich stay rich?
-- [How the network grows](b1-lives-and-wealth.md#how-the-network-grows) — How does the network
-  grow?
-- [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) — Are neighbours alike?
-- [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world) — How many [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
-  does a world have, and its core?
-- [What the baseline world is](what-the-baseline-world-is.md) — What the
-  baseline world is, in sum.
-
-Five of these pages were planned as experiments, Experiments 2 to 6:
-[A world's life](#a-worlds-life),
-[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide),
-[Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich),
-[What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) and
-[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages). Each wrote down a thesis
-before the runs of 10,000 tokens. Each quotes it, says whether it held there,
-and tests it again on the worlds of 100,000 tokens. The other pages only ask.
+Each section of the four B1 pages ([B1: lives and wealth](b1-lives-and-wealth.md),
+[B1: the game and its flows](b1-the-game-and-its-flows.md),
+[B1: the network, size and scaling](b1-the-network-size-and-scaling.md),
+[B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)) was once a
+page asking these thirty worlds one question. Experiments 2 to 6 each wrote a
+thesis before the runs of 10,000 tokens; their sections quote it, say whether
+it held, and test it again at 100,000 tokens.
 
 ### A world's life
 
@@ -177,13 +141,8 @@ children, and their number grows fast. Then food runs short, and the
 population levels off at what the island can feed. From then on, every
 newcomer eats what someone else no longer has.
 
-A world's tokens are such a store. Their number never changes, and every
-agent needs at least one. A founder holds a hundred tokens and can afford
-many children, so a world should grow fast at first. Then every birth has to
-be paid for with tokens someone else loses. So we expected a world to grow
-quickly to some size and then keep it, with births and deaths in balance: a
-short youth, then a long, steady middle age. Before the thirty worlds of
-10,000 tokens were run, Experiment 2 wrote this down as its thesis:
+A world's tokens are such a store. Before the thirty worlds of 10,000 tokens
+were run, Experiment 2 wrote down its thesis:
 
 <!-- thesis E02 -->
 > [!quote] The thesis of Experiment 2, written down before any of its runs existed
@@ -250,7 +209,7 @@ others spread around it.
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Data.** As for the figure *Six worlds, one at a time* above.
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `nodes`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -283,9 +242,7 @@ over iterations 1,300 to 1,499, at its end. Then join the two:
 **Each world early and late.** One line per world, from its mean number of agents over iterations 100–200 (left) to its mean over iterations 1,300–1,499 (right). Green: the late mean is more than 1.2 times the early one; red: less than 0.8 times; grey: in between. The thick blue line joins the medians of the 30 worlds.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Agents alive, 30 worlds* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. For each run that reached iteration 1,500, take the rows with `phase` = 2.
 > 2. Average `nodes` over the rows with 100 ≤ `iteration` ≤ 200, and again over 1,300 ≤ `iteration` ≤ 1,499.
@@ -317,9 +274,7 @@ the wandering, and asks how much of it the seed decides.
 **Connections, 30 worlds.** The number of connections after every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Agents alive, 30 worlds* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `edges`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -424,9 +379,7 @@ over, and a little faster. Where the two differ, the text says so.
 **Agents in the first 150 iterations.** Each thin blue line is one of the 30 worlds: the number of agents alive after every game. The yellow line is their median. The axis is logarithmic, so equal heights are equal factors: the step from 100 to 1,000 is as tall as the one from 1,000 to 10,000.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Agents alive, 30 worlds* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take every run's rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150.
 > 2. Draw `nodes` against `iteration` for each run.
@@ -461,9 +414,7 @@ and many fall steeply for a few iterations: the boom ends in a crash.
 **Births and deaths in the first 150 iterations.** For each iteration, the median over the worlds of: the children born in the reproduction phase (yellow); the agents removed by the cleanup of that phase because they were joined to no one or to a piece smaller than the largest (orange — mostly newborns joined to no one); the agents removed by the cleanup of the game because nobody, not even themselves, staked a token on their node (red); and those removed in the game's cleanup because they were cut off (violet).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Agents alive, 30 worlds* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. For iterations 0 to 150, take `births` and `orphaned` from the rows with `phase` = 1, and `starved` and `orphaned` from the rows with `phase` = 2.
 > 2. At each iteration, take the median of each over the runs that have a row there.
@@ -492,9 +443,7 @@ removed with everyone on them.
 **Share of all tokens given to children.** In each reproduction phase, the tokens all parents together gave their children, as a share of all 100,000 tokens. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th), here at every single iteration.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Agents alive, 30 worlds* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 1 and 0 ≤ `iteration` ≤ 150, and the statistic `reproTokenShare` — the sum of `invested` over the births of that phase, divided by the 100,000 tokens.
 > 2. At each iteration take the median, quartiles and 5th and 95th percentiles over the runs.
@@ -526,9 +475,7 @@ world holds about 4.5 ([Where do the tokens go?](b1-lives-and-wealth.md#how-uneq
 **Families: distinct ancestors eight iterations back.** After every game, how many different genotypes of eight iterations earlier the living descend from (before iteration 8: how many founders). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th), at every iteration.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Agents alive, 30 worlds* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 2 and 0 ≤ `iteration` ≤ 150, and the statistic `cladesInWindow` ([Families](measuring-evolution.md#families): for every living agent, follow its genotype's parents back to the newest one born at or before iteration t − 8, or to a founder's; count the distinct ones).
 > 2. At each iteration take the median, quartiles and 5th and 95th percentiles over the runs.
@@ -566,7 +513,7 @@ takes over:
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`, one of the 30 baseline runs.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *World of seed 1 after the game of iteration 1,499* above.
 >
 > 1. Read every frame in order and remember each genotype's parent genotype (`brain_ids`, `parent_brain_ids`).
 > 2. After each game up to iteration 300, follow every living agent's genotype back to its founder and count the agents per founder; divide by the number of agents.
@@ -596,7 +543,7 @@ founder was noted:
 **When everyone descends from one founder.** For each world, the first of the checks — made every 25 iterations — at which every living agent descends from one and the same founder. 27 of the 30 worlds got there; the world with seed 13 never did; the world with seed 18 never did; the world with seed 20 never did.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** As for the figure *Agents alive, 30 worlds* above.
 >
 > **Data.** From the runs' frames, through the lineage analysis of Experiment 10 (`python3 gol_lab.py analyse E10`), whose results file `book/results/E10.json` holds every run's `oneFounder`.
 >
@@ -648,10 +595,6 @@ nine tenths of a world contested with them. Every later era ties with the one
 before it. Whatever the brains of a world learn, they learn in its youth.
 
 ### What we learned (the life of a B1 world)
-- **The youth is unlike the rest of a world's life.** Within twenty
-  iterations a world booms to well over ten thousand agents. Then its network
-  breaks apart, and most of its founders' lines die. Whatever the brains
-  learn, they learn then.
 - **A typical world exists; single worlds wander around it.** After the
   youth, the median of thirty worlds of 100,000 tokens stays within 7% of its
   middle. A single world ends anywhere from about two thirds to one and a half
@@ -662,21 +605,12 @@ before it. Whatever the brains of a world learn, they learn in its youth.
   iteration 500 in a large world, and until about 1,250 in a small one.
   Whatever depends on them, such as the ages of the living, settles only
   then. So the notebook measures a settled world from iteration 500 on.
-- **Size protects a world from dying, not from falling.** None of the thirty
-  large worlds died, where four of thirty small ones did. But one large world
-  lost nine tenths of itself in ten games.
-- **In the end, one founder for everyone.** In 27 of the 30 worlds every
-  agent came to descend from a single founder; a world ten times the size
-  takes about six times as long. Whatever diversity of brains a settled world
-  holds, it has made since.
-- **Experiment 2's thesis was refuted at both sizes.** Births fell by 28%
-  (41% in the small worlds), and four small worlds died. A world has more
-  than one phase of life.
 
 ### How this was made (the life of a B1 world)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. To make them again you need a computer with Python 3, numpy and
-networkx, and a copy of this repository. Then `python3 gol_lab.py run E10`
+Every figure of this section reads the thirty runs of Experiment 10: B1 at
+100,000 tokens, seeds 1 to 30, 1,500 iterations each. To make them again you
+need a computer with Python 3, numpy and networkx, and a copy of this
+repository. Then `python3 gol_lab.py run E10`
 makes the runs into the folder `GraphOfLifeRuns/`. A run of 1,500 iterations
 at this size takes about seven hours on one core. The thirty took 211 hours
 of computing in all, done in a little over two days on four processor cores,
@@ -688,8 +622,7 @@ From the runs, `python3 book_figures.py life` draws the figures of
 [The first hundred iterations](#the-first-hundred-iterations), and
 `python3 book_figures.py shape` the first look at a world, together with the
 figures of [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network).
-`python3 book_figures.py` alone redraws the figures of every page. Each
-figure says, folded beneath it, which of the runs it reads and how.
+`python3 book_figures.py` alone redraws the figures of every page.
 
 A few figures on other pages set worlds of different sizes side by side: in
 [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life),
@@ -701,14 +634,9 @@ the worlds of every size of
 [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 (`python3 gol_lab.py run E08`).
 
-#### The runs of Experiment 10 (the life of a B1 world)
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 10](b1-the-network-size-and-scaling.md#the-runs-of-experiment-10-the-shape-of-the-network), listed on the page that reports it. To make them again: `python3 gol_lab.py run E10`.
 <!-- /runs -->
 
 #### The runs of Experiment 2
@@ -761,15 +689,10 @@ once. Those that do get a hold are safer with every iteration they last, and
 the well connected last longest. Living long does not bring an agent
 connections; it is the connections that help it live long.
 
-There are two ways to ask how old agents get, and they give different answers.
-Follow every agent from its birth to its death, and you get its **lifetime**.
-About half of those that live through their first game are gone within ten
-iterations. Or stop a world at one moment, and look at the **ages of the
-living**. Their median, the age that half of them are below, is about 55
-iterations. The living are older because an agent that lives long is alive at
-many moments, so it is counted at many of them. A hospital ward is the same. On
-any day, long-stay patients fill most of its beds, though most patients go home
-within a day or two ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)).
+The living are older than the dead, since an agent that lives long is alive
+at many moments ([Why the living are older than the dead](measures-of-the-archived-studies.md#why-the-living-are-older-than-the-dead)):
+about half of those that live through their first game are gone within ten
+iterations, yet the median age of the living is about 55 iterations.
 
 The worlds of this page are the thirty of 100,000 tokens of [Thirty
 worlds](b1-lives-and-wealth.md#thirty-worlds). They are the first baseline, B1, run
@@ -781,21 +704,10 @@ of 10,000 tokens; [Two sizes](#two-sizes) sets them beside the large ones.
 
 ### Four ways in and out
 
-An agent enters a world in one way: it is born in a reproduction phase, with
-tokens its parent gives it. It leaves in one of four ways. Every death happens
-in a cleanup, at the end of each of the two phases of an iteration ([One
-iteration, step by step](one-iteration.md)). An agent is:
-
-- **cut off in reproduction**: mostly a newborn that its parent joined to no
-  one;
-- **starved in reproduction**: a parent that gave its last token to its child;
-- **starved in the game**: no one, not even the agent itself, staked a token
-  on its node;
-- **cut off in the game**: no tokens crossed the connections that tied its
-  part of the network to the rest, so they were cut.
-
-[Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die) defines each. Each is
-counted per hundred agents alive when its phase began:
+An agent enters a world by being born, with tokens its parent gives it, and
+leaves it in one of four ways: cut off or starved, in the reproduction phase
+or in the game ([The four ways to die](measuring-lives.md#the-four-ways-to-die)).
+Each is counted per hundred agents alive when its phase began:
 
 <!-- figure births/rates -->
 ![Births and deaths per 100 agents](../figures/births/rates.svg)
@@ -805,7 +717,7 @@ counted per hundred agents alive when its phase began:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Data.** As for the figure *Six worlds, one at a time* above.
 >
 > 1. For every row, divide the count (`births` or `orphaned` in rows with `phase` = 1; `starved` or `orphaned` in rows with `phase` = 2) by the row's `nodes_before`, the agents present when that phase began, and multiply by 100.
 > 2. Cut the 1,500 iterations into 60 stretches of 25; take each run's mean in each.
@@ -839,18 +751,14 @@ third — died in the very iteration they were born in. Some 2 million were cut
 off in the cleanup of the reproduction phase, most of them because they were
 joined to no one. The rest died in their first game, starved or cut off.
 
-An agent's **lifetime** counts the games it lived through ([Age and
-lifetime](measuring-lives.md#age-lifetime-and-survival-curves)). It runs from the iteration of its birth to the
-last iteration after whose game it was alive, both included. The 4.7 million
-were never alive after a game, so the curves of this page leave them out.
-
-The curve below, a **survival curve**, follows the other 10.4 million. These
-are all the agents born at iteration 500 or later that were still alive after
-the game of their birth iteration. Some were still alive when their run ended.
-Their lives are counted as having lasted *at least* that long. The Kaplan–Meier
-estimate does this: it uses what is known of an unfinished life, and no more
-([Survival curves (Kaplan–Meier)](measuring-lives.md#survival-curves-kaplanmeier)). The share that lived at
-least *L* iterations:
+An agent's **lifetime** counts the games it lived through, from the iteration
+of its birth to the last after whose game it was alive
+([Lifetime](measuring-lives.md#lifetime)). The 4.7 million were never alive
+after a game, so the curves of this page leave them out. The curve below, a
+**survival curve** estimated by Kaplan–Meier, follows the other 10.4 million,
+born at iteration 500 or later and alive after the game of their birth
+iteration ([Survival curves (Kaplan–Meier)](measuring-lives.md#survival-curves-kaplanmeier)).
+The share that lived at least *L* iterations:
 
 <!-- figure births/lifetimes -->
 ![How long agents live](../figures/births/lifetimes.svg)
@@ -860,7 +768,7 @@ least *L* iterations:
 > [!example]- How to make this figure
 > **Runs.** As for the figure *Births and deaths per 100 agents* above.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *World of seed 1 after the game of iteration 1,499* above.
 >
 > 1. Read every frame with `phase` = 2. For every agent id note its birth iteration (the frame's `iteration` minus its `ages` entry) and the last iteration it appears.
 > 2. Keep agents born at iteration 500 or later. An agent still present in the last frame is censored: its life is known to be at least that long.
@@ -904,9 +812,7 @@ than the typical agent at death.
 **Ages of the living at the end.** The ages of all 394,056 agents alive after the last game of the 30 worlds, in bins that double in width: age 0 is born in this iteration, age 1 in the one before, and so on.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Births and deaths per 100 agents* above.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *How long agents live* above.
 >
 > 1. Read each run's last frame (iteration 1,499, `phase` 2) and its `ages`.
 > 2. Count the ages in the bins 0, 1, 2–3, 4–7, …, and divide by the number of agents.
@@ -953,7 +859,7 @@ below, the **90th percentile**:
 **How old the living are.** After every game of the 30 worlds. Left: the median age of the agents alive, and the age that nine in ten of them are below (the 90th percentile). Right: the age of the oldest agent alive; the dashed diagonal is the age of an agent alive since iteration 0, which only the oldest can follow. For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** As for the figure *Agents alive, 30 worlds* above.
 >
 > **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
 >
@@ -1088,9 +994,8 @@ and 13 to 14% at least 100. Their three lines lie on top of one another.
 #### Life expectancy, birth by birth
 
 A finer view takes every stretch of 25 birth iterations, in each world on its
-own. How many of their first 100 iterations do its agents live, on average?
-This is the **restricted mean lifetime**, the area under the survival curve up
-to 100 ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)). It can be measured in full
+own, and asks how many of their first 100 iterations its agents live on
+average, the **restricted mean lifetime** ([Lifetime](measuring-lives.md#lifetime)),
 for every agent born at least 100 iterations before the end of a run:
 
 <!-- figure ages/expectancy -->
@@ -1120,11 +1025,8 @@ down](b1-lives-and-wealth.md#births-and-deaths-slow-down)).
 
 #### The risk of dying at each age
 
-The **hazard** says, for an agent that has reached an age, how likely it is to
-die at that age. Exactly: take the agents alive when the iteration in which
-they are *a* iterations old begins. The hazard at age *a* is the share of them
-that is gone after that iteration's game ([Age and
-lifetime](measuring-lives.md#age-lifetime-and-survival-curves)):
+The **hazard** at age *a* is the share of the agents alive at that age that
+die at it ([The risk of dying at each age](measures-of-the-archived-studies.md#the-risk-of-dying-at-each-age)):
 
 <!-- figure ages/hazard -->
 ![The risk of dying, by age](../figures/ages/hazard.svg)
@@ -1147,10 +1049,9 @@ never more at risk than a young one. Beyond an age of about a hundred, the risk
 hardly changes. About one game in a hundred is an old agent's last, whether it
 is a hundred iterations old or four hundred.
 
-A constant risk makes the survival curve fall exponentially from there on.
-Drawn on a logarithmic axis against a plain axis of *L*, it would be a straight
-line. That is what lets the estimate of [the oldest
-agent](#why-the-oldest-agent-stops-near-850) work.
+A constant risk makes the survival curve fall exponentially from there on,
+which is what lets the estimate of [the oldest agent](#why-the-oldest-agent-stops-near-850)
+work.
 
 Agents born early, in iterations 1 to 249, were at more risk at every age, and
 most of all when young. Their risk was 31% at age 1, 4.9% at 10 and 1.3% at
@@ -1158,11 +1059,10 @@ most of all when young. Their risk was 31% at age 1, 4.9% at 10 and 1.3% at
 early period that had lived a hundred iterations was almost as safe as one born
 later.
 
-A risk that falls with age can have two causes, and this figure cannot tell
-them apart. Either each agent becomes safer as it lives, gathering tokens and
-connections. Or agents differ from birth: the fragile ones die first, and those
-left are the robust. Then the risk of each agent stays what it was, but the mix
-changes. [Who the old are](#who-the-old-are) looks at what the old have.
+A risk that falls with age may mean that each agent grows safer, or that the
+fragile die first; this figure cannot tell them apart
+([Cohorts](measures-of-the-archived-studies.md#cohorts)).
+[Who the old are](#who-the-old-are) looks at what the old have.
 
 #### Who the old are
 
@@ -1218,31 +1118,11 @@ id, its age and its connections; only its brain is replaced. So an old agent
 may carry a brain that arrived in the last game ([Questioning the
 mechanics](questioning-the-mechanics.md)).
 
-#### The ages of a steady world
-
-Suppose a world's births never changed, and every agent's life followed the
-same survival curve *S*. Then the ages of the living would follow from *S*
-alone. The agents of age *a* alive after a game are those born *a* iterations
-earlier whose lives lasted at least *a* + 1 games. With *B* newborns per
-iteration that live through their first game, there are *B* · *S*(*a* + 1) of
-them. So the share of the living at age *a* is
-
-$$
-\frac{S(a+1)}{\sum_{L \ge 1} S(L)} ,
-$$
-
-and the sum in the denominator is the mean lifetime. This is the identity of a
-**stationary population** in demography: a population whose births and risks of
-death never change. It gives a check. If the settled worlds are in such a
-state, their ages should follow from their lifetimes.
-
-Pool every life begun from iteration 500 to 1,399, and follow it up to 999
-iterations. The mean lifetime is 41.3 iterations. So the newborns should be 1 /
-41.3 = **2.4%** of the living, and the median age of the living should be
-**55**. The pyramid measured 2.3 to 2.6%, and the median age of the living over
-the settled stretch was 55. The large worlds are in a steady state of ages from
-about iteration 500 on. Their births per hundred agents are 3.3 to 3.6 in every
-stretch of 250 iterations from then on, and the lives follow one curve.
+The settled worlds pass the stationary-population check
+([The ages of a steady world](measures-of-the-archived-studies.md#the-ages-of-a-steady-world)):
+lives begun from iteration 500 to 1,399 last 41.3 iterations, so 2.4% newborns
+and a median age of 55 are expected; 2.3 to 2.6% and 55 were measured, with
+3.3 to 3.6 births per hundred agents in every stretch of 250.
 
 #### Two sizes
 
@@ -1262,7 +1142,7 @@ faster. Their ages, beside these:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`. The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's frames after every game (frame `2·t + 1`, `gol_store.read_frame`), read in order by `book_chapters.ages.lifelines`: every agent's `ages` entry gives its birth iteration (the frame's iteration minus its age), and the last frame it is in its last iteration alive.
+> **Data.** As for the figure *How old the living are* above.
 >
 > 1. As in the first figure, for both sets of worlds.
 > 2. In each stretch, take the median, the 25th and 75th and the 5th and 95th percentiles of those means over the worlds that still have a value there (a world that died has none after its death).
@@ -1305,34 +1185,12 @@ cut together, and the region dies ([How a world breaks](b1-the-network-size-and-
 calls it a border going quiet).
 
 ### What we learned (births)
-- **A settled world replaces about 3.5 of every 100 agents in every
-  iteration.** Three in four of those that die are cut off from the network
-  rather than starved. The rates hold steady from iteration 500 on, and differ
-  little from world to world.
-- **Most agents die young, and none grows old.** Nearly a third of all
-  newborns die in the iteration they are born in, and two thirds within ten
-  iterations. A few live more than a thousand. The risk of dying falls with
-  age and then holds near one game in a hundred, so long lives are almost
-  memoryless. The oldest agent is set by how many agents there are, not by any
-  limit on a life.
 - **The living are older than the dead.** They are a sample weighted towards
   long lives, older than the typical agent ever gets. Half of the agents that
   live through their first game are gone within ten iterations, yet half of
   the living are older than 55.
-- **In a world of 100,000 tokens, ages settle by iteration 500.** By then a
-  world's age structure, life expectancy and risk at every age are those it
-  will still have at iteration 1,500. About 2.4% of its agents are newborns,
-  and half are younger than 55. An agent that lives through its first game can
-  expect some 41 iterations. The first five hundred iterations, the youth and
-  the slowing of turnover after it, are the only time the ages change. The
-  ages of the living follow from the lifetimes, as those of a stationary
-  population do.
 - **A world a tenth the size settles later, and grows older.** Its births kept
   falling after iteration 500, and its old agents died less often.
-- **The old are the rich, on average, because the well connected live long.**
-  The typical agent has 2 connections at every age; the hubs, which die less
-  often, fill the old classes. Connections give an agent age, not age
-  connections.
 - **For open-ended evolution, a world's demography is finished early.** From
   iteration 500 on, nothing about who lives how long changes. Evolution, if it
   acts, has to act inside that steady turnover, not through how long agents
@@ -1346,17 +1204,13 @@ calls it a border going quiet).
   ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 
 ### How this was made (births)
-Every figure of this page reads the thirty runs of Experiment 10, listed below.
-The figure of [Two sizes](#two-sizes) also reads the thirty runs of 10,000
-tokens of Experiment 2, made with `python3 gol_lab.py run E02`. From the runs,
 `python3 book_figures.py births` draws the figures of [Four ways in and
 out](#four-ways-in-and-out), [How long agents live](#how-long-agents-live) and
-[How old the living are](#how-old-the-living-are). And `python3 book_figures.py
-ages` draws those of [How ages change over a world's
-life](#how-ages-change-over-a-worlds-life). Each figure says, folded beneath
-it, which runs it reads and how.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
+[How old the living are](#how-old-the-living-are), and `python3 book_figures.py
+ages` those of [How ages change over a world's
+life](#how-ages-change-over-a-worlds-life), from the runs of Experiment 10
+([How this was made](#how-this-was-made-the-life-of-a-b1-world)). The figure of [Two sizes](#two-sizes) reads the thirty runs of 10,000
+tokens of Experiment 2 too (`python3 gol_lab.py run E02`).
 
 ## How births build the network
 
@@ -1390,33 +1244,15 @@ those differ, both are given.
 
 #### A birth, decision by decision
 
-A birth is three decisions, all taken by the parent's brain. Take
-agent *u*, holding τ tokens. Its brain gives one column of outputs for each
-of its candidates: *u* itself and each of its neighbours. From these
-columns:
-
-1. **How much.** Two of the outputs, averaged over all the columns, give two
-   numbers (*ā*, *b̄*). The child gets *c* = ⌊*f*(*ā*, *b̄*) · τ⌋ tokens: the
-   share *f* of the parent's tokens, rounded down. Here *f* is the share
-   function ([The share function](rules-in-detail.md#the-share-function-fa-b)). It gives the positive
-   part of *ā* as a share of the positive parts of both, or ½ if neither is
-   positive. If *c* = 0, there is no child.
-2. **Whom it joins.** For every candidate, the parent included, a yes-or-no
-   decision: join the child to it or not.
-3. **What it is handed.** For every neighbour of the parent, a yes-or-no
-   decision: move the parent's connection to that neighbour over to the child.
-
-Two consequences follow from the arithmetic alone, before any data:
-
-- **A poor agent can only give a lot.** With 1 token, *c* ≥ 1 needs *f* = 1:
-  the parent gives its only token. Left with none, it starves at the end of
-  the phase. With 2 tokens, *c* ≥ 1 needs *f* ≥ ½: it gives half or
-  everything. Only a richer agent can give a small share.
-- **"All", "half" and "nothing" are easy to say.** The share *f* is exactly 1
-  when *ā* is positive and *b̄* is not, and exactly ½ when neither is. It is
-  exactly 0, and there is no child, when *b̄* is positive and *ā* is not. A
-  brain does not need to compute a ratio to give half; it only needs two
-  negative numbers.
+A birth is three decisions of the parent's brain: how much (a share *f* of its
+tokens, rounded down), whom the child joins, which links it is handed
+([Phase 1: reproduction](one-iteration.md#phase-1-reproduction)); all, half and
+nothing are the share function's easy answers
+([All, nothing or half](rules-in-detail.md#all-nothing-or-half)). It follows
+from the arithmetic alone that **a poor agent can only give a lot**. With 1
+token, a child needs *f* = 1: the parent gives its only token. Left with none,
+it starves at the end of the phase. With 2 tokens, a child needs *f* ≥ ½: it
+gives half or everything. Only a richer agent can give a small share.
 
 #### Who has a child
 
@@ -1430,7 +1266,7 @@ it give?
 **Children, by the wealth of the parent.** Agents alive at the start of the reproduction phases of every 100th iteration from 500 on, in the 30 worlds, sorted by the tokens they held. Left: the share of them that had a child. Right: for those that did, the share of their tokens they gave it — the white dot is the median, the cyan bar runs from the 25th to the 75th percentile.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** As for the figure *Agents alive, 30 worlds* above.
 >
 > **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -1533,9 +1369,7 @@ can be followed through a world's whole life:
 **Reproduction over a world's life.** After every reproduction phase of the 30 baseline worlds ([Reproduction statistics](measuring-lives.md#reproduction-statistics)): the mean share of its tokens a parent gave its child (`meanInvestedShare`); the tokens given to all children as a share of all tokens (`reproTokenShare`); the mean number of connections a child was born with (`meanChildLinks`); and the connections handed over per birth (`handovers` / `births`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Children, by the wealth of the parent* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 1: `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, and `handovers` divided by `births`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -1642,7 +1476,7 @@ kernel** and the **loss kernel** of the network. They say what an agent with
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *World of seed 1 after the game of iteration 1,499* above.
 >
 > 1. For t = 500, 525, …, 1,475 read frames 2·t − 1 (before the reproduction phase of t), 2·t (after it) and 2·t + 1 (after the game).
 > 2. Gained: the edges in 2·t not in 2·t − 1, counted at both ends, for agents in both frames, by their degree in 2·t − 1. Lost: the edges in 2·t not in 2·t + 1, counted for agents of 2·t by their degree there (all of them if the agent is gone).
@@ -1742,17 +1576,6 @@ other way. They pass from parent to newborn child, as
   founders start on was made at a birth, so births are the world's only
   source of structure. They also keep a world alive, as long as they make up
   for its losses.
-- **Growth is local.** A connection is only ever made inside a parent's
-  neighbourhood, and never brings two agents closer together. That is what
-  lets a world keep a geometry. A network that added connections between
-  random agents would collapse into a small world, in which everything is a
-  few steps from everything. The price is that births close only small
-  loops, and leave a tree of blobs that one death can cut.
-- **The network grows by preferential attachment and shrinks by preferential
-  loss.** Both are close to proportional to an agent's connections. What a
-  node has, it gains more of, and loses more of.
-- **There is no first-mover advantage.** Old agents are no better connected
-  than young ones, except that the best connected live longest.
 - **Births are not the main road of inheritance.** About 480 children are
   born per iteration, but about 8,100 nodes take on a neighbour's brain in
   every game
@@ -1769,13 +1592,10 @@ other way. They pass from parent to newborn child, as
   asks what this means.
 
 ### How this was made (how births build the network)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are the baseline B1 at 100,000 tokens, seeds 1 to 30, run for
-1,500 iterations each. The command `python3 book_figures.py children` draws
-the figures of [How agents have children](#how-agents-have-children), and
-`python3 book_figures.py grows` those of
-[How the network grows](#how-the-network-grows). Each figure says, folded
-beneath it, which of the runs it reads and how.
+`python3 book_figures.py children` draws the figures of [How agents have
+children](#how-agents-have-children), and `python3 book_figures.py grows`
+those of [How the network grows](#how-the-network-grows), from the runs of
+Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)).
 
 The 39% of [How a child is joined](#how-a-child-is-joined) is counted in the
 samples behind its figure. The function `book_figures.sample_pass` keeps, for
@@ -1788,8 +1608,6 @@ connection.
 The values given for the worlds of 10,000 tokens were measured the same way,
 in the thirty worlds of Experiment 2 (`python3 gol_lab.py run E02`). They
 date from when the two pages this one joins were first written.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
 
 ## How unequal is a world, and who stays rich
 
@@ -1815,33 +1633,11 @@ This section reads the thirty worlds of the first baseline, B1, at 100,000
 tokens ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). The thirty worlds
 of 10,000 tokens it was first written from are given beside them.
 
-#### Measuring inequality
-
-How do we measure inequality? Sort a world's agents from poorest to richest.
-Then draw, for every share *x* of the agents counted from the poorest, the
-share of all tokens they hold. That is the **Lorenz curve** (Lorenz 1905). If
-everyone holds the same, it is the diagonal; the more unequal the world, the
-further it sags below. The **Gini coefficient** (Gini 1912) turns the sag into
-one number, between 0 (everyone the same) and almost 1 (one agent holds
-everything):
-
-![The Lorenz curve and the Gini coefficient of four agents](../diagrams/gini.svg)
-
-For *n* agents with tokens sorted from smallest, *x*₍₁₎ ≤ … ≤ *x*₍ₙ₎, it is
-
-$$
-G = \frac{\sum_{i=1}^{n} (2i - n - 1)\, x_{(i)}}{n \sum_{i=1}^{n} x_{(i)}} ,
-$$
-
-which equals 1 minus twice the area under the Lorenz curve. A Gini of 0.5 has
-a concrete meaning: two agents picked at random differ, on average, by as much
-as the average agent holds.
-[The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) shows why,
-and works an example by hand.
-
-A plainer measure reads a single point of the curve: the share of all tokens
-held by the **richest tenth** of the agents. If everyone held the same, it
-would be 10% ([The richest tenth's share](measuring-tokens.md#the-richest-tenths-share)).
+Inequality is read by the Gini coefficient, which turns the sag of the
+Lorenz curve into one number (Lorenz 1905; Gini 1912), and by the richest
+tenth's share of the tokens, 10% if everyone held the same
+([The Gini coefficient and the Lorenz curve](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve),
+[The richest tenth's share](measuring-tokens.md#the-richest-tenths-share)).
 
 #### What was expected
 
@@ -1877,9 +1673,9 @@ here is what the large worlds did, with the small ones beside them.
 **Lorenz curves at iteration 1,499.** For each of the 30 worlds (thin blue lines), after its last game: the poorest share x of its agents holds the share y of all tokens. The yellow line is the median over the worlds at each x; the dashed diagonal is a world where everyone holds the same. The further a curve sags below the diagonal, the more unequal the world ([How worlds are measured](how-worlds-are-measured.md), and the diagram there).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** As for the figure *Agents alive, 30 worlds* above.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *World of seed 1 after the game of iteration 1,499* above.
 >
 > 1. Read each run's last frame (iteration 1,499, `phase` 2) and its `tokens`.
 > 2. Sort the tokens from smallest to largest; the curve passes through the points (i / n, (t₁ + … + tᵢ) / T) for i = 0 … n.
@@ -1902,9 +1698,7 @@ together, and close to those of the worlds of 10,000 tokens (23%, 49% and
 **How many tokens agents hold.** Of all agents alive after the last game of the 30 worlds, the share that hold at least x tokens, for every x. Both axes are logarithmic: a straight falling line here would be a power law.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Lorenz curves at iteration 1,499* above.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *Lorenz curves at iteration 1,499* above.
 >
 > 1. Pool the `tokens` of the last frame of every run.
 > 2. For every value x that occurs, the share of agents with at least x.
@@ -1931,9 +1725,7 @@ the question of
 **Inequality of wealth (Gini).** After every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Lorenz curves at iteration 1,499* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `gini` ([What a run records](runs-and-records.md#what-a-run-records)).
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -1957,9 +1749,7 @@ shrinks.
 **Share of all tokens held by the richest tenth.** After every game. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Lorenz curves at iteration 1,499* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take every run's rows with `phase` = 2 and the statistic `topDecileShare` ([What a run records](runs-and-records.md#what-a-run-records)).
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -1974,9 +1764,7 @@ shrinks.
 **The richest agent's share of all tokens.** After every game, the tokens of the richest agent divided by all 100,000. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Lorenz curves at iteration 1,499* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 2; divide `maxTokens` by 100,000.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -2002,9 +1790,7 @@ richest.
 **What a typical agent holds.** After every game: the mean number of tokens per agent, which is 100,000 divided by the number of agents (blue), and the median agent's tokens (green). The median lies below the mean because a few agents hold a lot. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Lorenz curves at iteration 1,499* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 2 and the statistics `meanTokens` and `medianTokens`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -2027,9 +1813,7 @@ hold a lot.
 **Tokens against connections, world of seed 1 at the end.** Each dot is one of the 14,870 agents alive after the last game of the world with seed 1: how many connections it has (spread sideways a little so that agents with the same number do not hide each other) and how many tokens it holds.
 
 > [!example]- How to make this figure
-> **Runs.** `B1-100000-s001`.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *World of seed 1 after the game of iteration 1,499* above.
 >
 > 1. Read the last frame (iteration 1,499, `phase` 2); count each agent's connections in `edges`.
 > 2. Plot `tokens` against that count, one dot per agent.
@@ -2065,9 +1849,7 @@ drains back to its share within a few games
 **Tokens of the dead, shared out in each game.** In the cleanup of every game, the tokens of the agents removed — those cut off from the largest piece; agents that starved hold none — which are shared out at random among the survivors. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 2 and the statistic `redistributed`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -2131,23 +1913,9 @@ $$
 H = -\sum_i p_i \log_2 p_i = 1.75 \text{ bits.}
 $$
 
-With four equal shares you would need two questions every time: log₂ 4 = 2,
-the most four agents allow. With everything in one hand you would need none.
-Two readings of *H* follow ([Entropy and evenness](measuring-tokens.md#entropy-and-evenness)):
-
-- the **evenness** *J* = *H* / log₂ *n* runs from 0 (one holds everything) to
-  1 (all hold the same). Here it is 1.75/2 = 0.875;
-- the **effective number** 2^*H* is how many agents, holding equal shares,
-  would leave you exactly as uncertain: here 2^1.75 ≈ 3.4 agents.
-  ([Effective numbers](statistics.md#effective-numbers-how-many-kinds) compares it with other ways of
-  counting kinds.)
-
-The same arithmetic works for anything that falls into categories. For the
-connections, the categories are the numbers of connections an agent can have:
-1, 2, 3, and so on. Then *pᵢ* is the share of agents with exactly *i*. For the
-genotypes, the categories are the genotypes, and *pᵢ* is the share of agents
-carrying genotype *i*. The question becomes: *pick an agent at random. How
-many connections does it have? Which genotype does it carry?*
+Its evenness and effective number, read as in
+[Entropy and evenness](measuring-tokens.md#entropy-and-evenness), are 0.875 and
+3.4.
 
 #### Three things spread over the agents
 
@@ -2157,7 +1925,7 @@ many connections does it have? Which genotype does it carry?*
 **How even a world is, in three respects.** Evenness after every game of the 30 baseline worlds, from 0 (everything in one hand) to 1 (as even as it can be; [Entropy and evenness](measuring-tokens.md#entropy-and-evenness)). Left: of the tokens over the agents (`tokenEvenness`). Middle: of the agents over the numbers of connections that occur (`degreeEvenness`). Right: of the agents over the genotypes they carry — the entropy of the genotypes' shares divided by log₂ of the number of agents, measured every 25 iterations. In each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Tokens of the dead, shared out in each game* above.
+> **Runs.** As for the figure *Agents alive, 30 worlds* above.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)); for genotypes, each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
 >
@@ -2206,9 +1974,7 @@ builds one, playing the brains of different eras against each other.
 **Effective numbers, as a share of the agents.** One dot per world; the bar is the median. Left: 2^H of the tokens — the number of agents that, holding equal shares, would make the tokens as even as they are — divided by the number of agents. Middle: the number of different genotypes among the living, per agent. Right: 2^H of the genotypes — how many equally common genotypes would be as diverse as the ones there are — per agent. The dots are spread sideways only so that they do not hide each other.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Tokens of the dead, shared out in each game* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)); for genotypes, each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
+> **Runs and data.** As for the figure *How even a world is, in three respects* above.
 >
 > 1. Tokens: for each row with `phase` = 2 and 500 ≤ `iteration` ≤ 1,499, compute 2^`tokenEntropy` / `nodes`, and average over the rows.
 > 2. Genotypes: in the frames after the game of every 25th iteration from 500 on, the number of distinct `brain_ids` per agent, and 2^H per agent with H the entropy of the genotypes' shares; average over the frames.
@@ -2261,9 +2027,7 @@ back to where the new genotypes are made.
 **Two measures of the same inequality.** One dot per world and look: every 25th iteration from 500 on of the 30 worlds (1,200 dots). Across the dots the two measures move against each other — the correlation is -0.72 — but not along one curve: the same Gini comes with different evenness, because the two weigh the poor and the rich differently.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Tokens of the dead, shared out in each game* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 2 and `iteration` a multiple of 25 from 500 on.
 > 2. Plot `tokenEvenness` against `gini`, one dot per row.
@@ -2299,19 +2063,15 @@ different evenness.
 
 ### Do the rich stay rich?
 
-A world's Gini coefficient hardly moves over its settled life. But an
-unchanging inequality can hide two very different worlds. In one, the same
-agents are rich game after game. In the other, wealth is as unequal at every
-moment, but who holds it keeps changing. This section follows single agents
-through time to tell which world Graph of Life is. Economists call this
-question **mobility** ([Mobility](measures-of-the-archived-studies.md#mobility)).
+A world's Gini coefficient hardly moves over its settled life, but who holds
+the wealth may still change: the question of **mobility**
+([Mobility](measures-of-the-archived-studies.md#mobility)).
 
 #### How the order of wealth is remembered
 
-Line up the agents of a world by their tokens, the poorest first. Do it again
-some games later, for the agents still alive. If the order is the same, the
-rich stayed rich. Spearman's **rank correlation** ρ measures how alike the two
-orders are, from 1 (exactly the same) through 0 (unrelated).
+Spearman's **rank correlation** ρ says how alike the order of wealth is some
+games later, from 1 (the same order) through 0 (unrelated)
+([Mobility](measures-of-the-archived-studies.md#mobility)).
 
 <!-- figure rich/memory -->
 ![How long wealth lasts](../figures/rich/memory.svg)
@@ -2319,9 +2079,7 @@ orders are, from 1 (exactly the same) through 0 (unrelated).
 **How long wealth lasts.** Left: the agents alive after the game of an iteration t, and the same agents k games later, if they are still alive: Spearman's rank correlation of their tokens then and later ([Correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes)) — 1 if every agent kept its place in the order of wealth, 0 if the later order has nothing to do with the earlier. Right: the share of the agents still alive k games later. For each world, the mean over 8 moments t = 500, 600, …, 1,200 (leaving out, for the correlation, the few moments after which fewer than three of the agents were alive); the line is the median of the 30 worlds, the darker band the middle half of them and the paler band nine in ten.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`).
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *Who gains and who loses connections* above.
 >
 > 1. For t = 500, 600, …, 1,200 and k = 1, 2, 5, 10, 20, 50, 100, 200: read frames 2·t + 1 and 2·(t + k) + 1; the agents (`ids`) in both, and their `tokens` in each.
 > 2. Spearman's ρ: the correlation of the ranks of the two token counts (ties share their mean rank); alive: agents in both over agents in the first.
@@ -2394,7 +2152,7 @@ overshoot on the star-shaped parts of the network.
 **From one fifth to another, ten games later.** All agents alive after the game of t = 500, 600, …, 1,200 in the 30 worlds, sorted into fifths of the world by their tokens (ranks, ties shared), and where each one was ten games later: in which fifth, or dead. Each row adds up to 1; a cell's colour is the share of its row.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *How long wealth lasts* above.
+> **Runs and data.** As for the figure *Who gains and who loses connections* above.
 >
 > 1. As in the figure above, with k = 10: each agent's fifth is ⌈rank / n · 5⌉ among the n agents of its frame.
 > 2. Count the agents in every pair of fifths, and those not in the later frame as dead; divide each row by its total.
@@ -2414,9 +2172,8 @@ Ten games on, where are the agents of each fifth of the order of wealth?
   keep its connections in use is cut off whole.
 
 Among those still alive, the **Shorrocks index** of the moves is **0.59**
-(0.57 at 10,000 tokens). It runs from 0, for a world in which nobody changes
-place, to 1, for one that forgets the order completely in ten games
-([Mobility](measures-of-the-archived-studies.md#mobility)). The top is the stickiest part of the order: an
+(0.57 at 10,000 tokens; [Mobility](measures-of-the-archived-studies.md#mobility)).
+The top is the stickiest part of the order: an
 agent at the top has the most connections to hold it there.
 
 #### The fate of the richest
@@ -2427,7 +2184,7 @@ agent at the top has the most connections to hold it there.
 **The fate of the richest.** The agents in the richest hundredth of their world after the game of t = 500, 600, …, 1,200 (36,656 in all, pooled over the 30 worlds), followed k games on. Left: the share of them still in the richest tenth of their world, and the share dead. Right: for those alive, their tokens then divided by their tokens at t — the median in each world, and the median of the worlds.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *How long wealth lasts* above.
+> **Runs and data.** As for the figure *Who gains and who loses connections* above.
 >
 > 1. As in the first figure: the richest hundredth are the agents with tokens at or above the 99th percentile of their frame; the richest tenth later, at or above the 90th.
 >
@@ -2452,7 +2209,7 @@ them die?
 **Which of the richest die.** The agents alive after the game of t = 500, 600, …, 1,200 in the 30 worlds, in classes of their connections at t: the share no longer alive ten games later, for the richest hundredth of their world (red) and for every agent (grey). Pooled over moments and worlds: 7,069 of the richest and 1,367,720 in all with 1, 3,674 of the richest and 818,555 in all with 2, 8,721 of the richest and 1,223,956 in all with 3–9, 11,114 of the richest and 148,486 in all with 10–49, 6,078 of the richest and 6,405 in all with 50+ connections.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *How long wealth lasts* above.
+> **Runs and data.** As for the figure *Who gains and who loses connections* above.
 >
 > 1. For t = 500, 600, …, 1,200: read frames 2·t + 1 and 2·(t + 10) + 1; each agent's connections at t from `edges`; the richest hundredth as above.
 > 2. Per class of connections, the agents of the first frame missing from the second, over all agents of the class (`book_chapters.dynamics.fragile`).
@@ -2477,26 +2234,9 @@ returns to everyone at once. Concentrated wealth that is not also
 connectedness is taxed away in this manner, a little at a time.
 
 ### What we learned (how unequal is a world)
-- **Inequality comes at once, and then holds still.** The first births end
-  the founders' equality. Over the settled life the Gini coefficient stays
-  near 0.47, and the richest tenth hold about 42%. Worlds of 10,000 tokens
-  are much the same.
-- **Experiment 4's thesis was refuted at both sizes, mostly in its reason.**
-  Wealth pools, but only moderately, and agents stake about 30% of their
-  tokens at home, not most of them.
-- **Tokens follow connections, like a diffusion.** The game, as the brains
-  play it, is close to a random walk of tokens. It comes to rest with each
-  agent holding tokens in proportion to its connections plus one. On hubs
-  and leaves it overshoots, in a two-game rhythm.
-- **A world is moderately even, and stays so.** Tokens behave as if shared
-  equally among half the agents; genotypes as if each were carried by two.
-  Neither drifts over the settled life.
 - **One number is set by the rules.** Five genotypes for every eight agents,
   in every world: a balance of making and copying brains. That variety is
   churn, not novelty.
-- **The rich stay rich for a while, and then they don't.** The order of
-  wealth is half forgotten in fifty to a hundred games and mostly forgotten in
-  200. It is remembered as long as the connections that carry it.
 - **Wealth without connections is fragile.** The richest agents on dead ends
   die three times as often as other agents on dead ends. Wealth is safe only
   where the network is thick.
@@ -2508,10 +2248,8 @@ connectedness is taxed away in this manner, a little at a time.
   that sit on them.
 
 ### How this was made (how unequal is a world)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them. From the runs, three commands draw the figures:
+From the runs of Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)), three commands draw
+the figures:
 
 - `python3 book_figures.py tokens` those of
   [Where do the tokens go?](#where-do-the-tokens-go);
@@ -2520,14 +2258,10 @@ them. From the runs, three commands draw the figures:
 - `python3 book_figures.py rich` those of
   [Do the rich stay rich?](#do-the-rich-stay-rich).
 
-Each figure says, folded beneath it, which runs it reads and how.
-
 The thesis of Experiment 4 was first checked in the thirty worlds of 10,000
-tokens of Experiment 2, listed last. There the command
+tokens of Experiment 2. There the command
 `python3 gol_lab.py analyse E04` checks it. In the worlds of 100,000 tokens,
 `python3 book_figures.py tokens` checks it again.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
 
 #### The runs of Experiment 4
 
@@ -2536,13 +2270,7 @@ first tested. Four of them died out before iteration 3,000:
 
 <!-- runs E04 -->
 > [!info]- The runs behind this page
-> These are the runs of Experiment 2; nothing new was run for this page.
->
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 2](b1-lives-and-wealth.md#the-runs-of-experiment-2); nothing new was run. To make them again: `python3 gol_lab.py run E02`.
 <!-- /runs -->
 
 ## Gains and losses: who gains, who loses, and the share-out
@@ -2665,9 +2393,7 @@ cleanup report of each frame.
 **What one game does to the agents.** Every agent alive at the start of a game ends it in one of five ways: it starved (no one staked on its node), it was cut off from the largest piece of the network, or it survived holding fewer tokens, exactly as many, or more than before. Left: the game of iteration 0 in all 30 worlds. Right: every game from iteration 500 on in the 30 worlds, pooled.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 2 (iteration 0, or 500 to 1,499).
 > 2. Sum over them: `nodes_before` (agents at the start), `starved`, `orphaned`, `gainers`, `losers`, and `nodes` − `gainers` − `losers` (survivors whose tokens did not change).
@@ -2710,9 +2436,7 @@ At 10,000 tokens it was 330 and 320 agents, and about 640 and 620 tokens.
 **What a game does, by how rich an agent was.** Agents alive at the start of a game, sorted by the tokens they held then; for each class, the share that died in the game (starved or cut off), and of the rest the shares that lost tokens, kept exactly as many, or gained. From the games of every 100th iteration from 500 on, in the 30 worlds (4,520,044 agents in all).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *What one game does to the agents* above.
->
-> **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
+> **Runs and data.** As for the figure *Children, by the wealth of the parent* above.
 >
 > 1. For every 100th iteration t from 500 on, take each agent in frame `2·t` (the start of the game) with its `tokens`.
 > 2. Find it in frame `2·t + 1`: if it is not there, it died in the game; if it is, its `delta` there is its change over the game.
@@ -2818,9 +2542,7 @@ red a valley.
 **Tokens run downhill.** The token curvature of an agent is the sum, over its neighbours, of how many more tokens the neighbour holds than it does ([Token curvature](b1-lives-and-wealth.md#token-curvature)): negative for an agent richer than its neighbourhood, positive for one poorer. For each class of curvature, the mean change of an agent's tokens over the game divided by the tokens it held at the start, over the agents that survived the game. Yellow: all agents; cyan: only agents that held 3 to 9 tokens, so that wealth itself cannot explain the pattern. A class with fewer than 1,000 agents is left out (drawn at 0).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *What one game does to the agents* above.
->
-> **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
+> **Runs and data.** As for the figure *Children, by the wealth of the parent* above.
 >
 > 1. For every 100th iteration t from 500 on, read frame `2·t`: for every agent u, κ(u) = Σ over its neighbours v of (τ(v) − τ(u)).
 > 2. Find each agent in frame `2·t + 1` and take its `delta` (agents not there died and are left out).
@@ -2935,9 +2657,7 @@ every survivor with the same chance ([The share-out](#the-share-out)).
 **Tokens shared out among the survivors.** How many tokens the cleanup dealt out at random among the survivors — the tokens of the agents that were cut off — after each game (green) and after each reproduction phase (cyan), on a logarithmic axis. For each, the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *What one game does to the agents* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take `redistributed` of the rows with `phase` = 2 and of those with `phase` = 1.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -2956,18 +2676,6 @@ The share-out is a small basic income that matters only to the poor.
 tokens out would do.
 
 ### What we learned (gains and losses)
-- **A game is an exchange, plus diffusion.** Nearly half the agents end a game
-  with exactly what they had, because what they send out comes back. What does
-  move runs downhill, from agents richer than their neighbourhood to agents
-  poorer than it. In tokens, a world works much like heat spreading through a
-  network.
-- **The poor live on a knife's edge.** Nearly a third of 1-token agents die in
-  every game; the survivors multiply their tokens. Being poor in this world is not a
-  slow decline, it is a coin toss.
-- **Wealth above its resting share does not last.** A rich agent with few
-  connections loses its excess to its neighbours within a few games. Or it
-  dies on its dead end, and its tokens are shared out. The rich are replaced
-  where connections are many.
 - **Wealth is a place, not a memory.** An agent's tokens drain back to the
   share its connections give it, so its wealth cannot record that its brain
   did well in the past. For evolution, that matters: selection needs
@@ -2978,15 +2686,10 @@ tokens out would do.
   token.
 
 ### How this was made (gains and losses)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them, and `python3 book_figures.py gains` draws every figure of this page.
-Each figure says, folded beneath it, which runs it reads and how. The numbers
-given for the worlds of 10,000 tokens come from the thirty runs of
-Experiment 2, from which this page was first written.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
+`python3 book_figures.py gains` draws every figure here from the runs of
+Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)). The numbers given for the worlds of
+10,000 tokens come from the thirty runs of Experiment 2, from which this
+section was first written.
 
 ## The largest and the smallest
 
@@ -3043,9 +2746,7 @@ mean agent and the median one:
 **The largest, over a world's life.** After every game of the 30 worlds. Left: the tokens of the richest agent, the largest gain and the largest loss of one agent in that game, and the tokens of the mean agent, each as a share of all 100,000 tokens. Right: the connections of the best-connected agent, of the mean agent and of the median one. Both on logarithmic axes; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *What one game does to the agents* above.
->
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Runs and data.** As for the figure *Agents alive, 30 worlds* above.
 >
 > 1. Take the rows with `phase` = 2: `maxTokens`, `maxTokenAdded`, `maxTokenLost` and `meanTokens`, divided by 100,000; `maxDegree`, `meanDegree` and `medianDegree`.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -3090,9 +2791,7 @@ games in a row with the same agent first. How long do reigns last?
 **How long first place is held.** After every game from iteration 500 on, in the 30 worlds, which agent holds the most tokens and which the most connections. A reign is a stretch of consecutive iterations with the same agent first; for every L, the share of the reigns that lasted at least L iterations, pooled over the worlds. Dashed: the same for dynasties — a dynasty goes on while every new first agent is a child of the one before it, and ends when first place passes to anyone else — pooled over the worlds. A reign still going at the end of a run is counted as far as it went.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *What one game does to the agents* above.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *Lorenz curves at iteration 1,499* above.
 >
 > 1. Read the frame after every game; the agent with the most `tokens`, and the one with the most connections in `edges` (`book_chapters.extremes.reigns`).
 > 2. Cut each run's sequence of first agents into stretches of the same agent; count lengths.
@@ -3129,7 +2828,7 @@ world. In some it is joined to much more:
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`. The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Data.** As for the figure *Six worlds, one at a time* above.
 >
 > 1. Take the rows with `phase` = 2: `maxDegree` / `nodes`, and `coreShare` (every 25 iterations).
 > 2. Left: one line per star world; the band over the others as every band. Right: each world's means over its settled life.
@@ -3224,7 +2923,7 @@ its worlds that lived to the end: none of 800 tokens, and one of 1,600.
 > [!example]- How to make this figure
 > **Runs.** The baseline worlds of Experiment 8, from 800 to 409,600 tokens, three seeds each, 600 iterations ([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`); The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Data.** As for the figure *Six worlds, one at a time* above.
 >
 > 1. Average `nodes`, `maxTokens` / total tokens and `maxDegree` over the rows with `phase` = 2 in the stretch.
 > 2. Fit ln y = a + b·ln x by least squares.
@@ -3275,36 +2974,17 @@ brain holds its node in B2 has not been measured directly, as
 [Hubs are places](questioning-the-mechanics.md#hubs-are-places) notes.
 
 ### What we learned (the largest and the smallest)
-- **The top is a place.** The best-connected agent of a world sits on a node
-  whose brain is replaced in nearly every game. What lasts is its connections,
-  and they are handed from parent to newborn child. A star is the clearest
-  case of what
-  [Where tokens flow](b1-the-game-and-its-flows.md#who-keeps-their-node) calls a
-  hub: a place, not an individual.
-- **Wealth flickers, connections last.** First place in tokens changes in
-  three games out of five. First place in connections lasts a median of 6
-  iterations, and often ten or more. A dynasty can keep it in one line of
-  descent for hundreds.
-- **The extremes grow with the world, but slower than it.** In a world of ten
-  times the tokens, the richest agent is about three times as rich and the
-  best-connected about four times as connected. No agent becomes a fixed share
-  of the world.
 - **A dynasty is inherited, and carries nothing a brain did.** It is the first
   thing in these worlds that is inherited and lasts, but what it passes on is
   a position. B2's rules took handover away, and with it this kind of
   inheritance.
 
 ### How this was made (the largest and the smallest)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them. The figure of stars also reads the 26 worlds of 10,000 tokens of
-Experiment 2 that lived to the end (`python3 gol_lab.py run E02`). The figure
-by size reads the worlds of Experiment 8 (`python3 gol_lab.py run E08`). The
-command `python3 book_figures.py extremes` draws every figure of this page.
-Each figure says, folded beneath it, which runs it reads and how.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
+`python3 book_figures.py extremes` draws every figure here from the runs of
+Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)). The figure of stars reads the 26
+worlds of 10,000 tokens of Experiment 2 that lived to the end too
+(`python3 gol_lab.py run E02`), and the figure by size the worlds of
+Experiment 8 (`python3 gol_lab.py run E08`).
 
 ## Where to go next
 
@@ -3482,6 +3162,13 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
   notebook's question, and they are kept so that every experiment here can be
   read and made again. Nothing was cut but five copies of the list of the runs
   of Experiment 10: it is now shown once.
+- **12 November 2026.** What the reference pages define is no longer told here
+  again: the four ways to die, the lifetime and the survival curve, the risk
+  at each age, the Gini coefficient and the Lorenz curve (the subsection
+  Measuring inequality, with a second copy of its diagram), evenness, mobility
+  and the steps of a birth are a clause and a link each. The subsection The
+  ages of a steady world became one sentence of its numbers; its method is in
+  [Measures of the archived studies](measures-of-the-archived-studies.md#the-ages-of-a-steady-world).
 
 <!-- turns -->
 ---
@@ -3490,6 +3177,6 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (32)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
+> [!info]- Pages that link here (31)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->
