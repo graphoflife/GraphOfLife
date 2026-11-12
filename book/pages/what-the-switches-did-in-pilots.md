@@ -636,7 +636,7 @@ revolutions, no random inputs, links that hold a token, and mixing. It
 meets the author's picture better than any of the sixteen. It meets all
 seven marks at a dimension of 3.7. A quarter of its 652 agents hold three
 tokens or fewer, and its diversity score is 0.68. Its tokens are not too
-even either: their [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) is 0.53, within
+even either: their [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) is 0.53, within
 the 0.49 to 0.56 of B2's ten worlds at iteration 1,000
 (`GraphOfLifeRuns/.pilots/atlas/at1000.json`).
 

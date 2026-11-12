@@ -344,7 +344,7 @@
     },
     {
       "name": "preferential attachment",
-      "page": "measuring-networks",
+      "page": "measures-of-the-archived-studies",
       "says": "The well connected gaining new connections faster than the poorly connected.",
       "anchor": "preferential-attachment-and-its-kernel"
     },
@@ -422,13 +422,13 @@
     },
     {
       "name": "scaling relation",
-      "page": "measuring-networks",
+      "page": "measures-of-the-archived-studies",
       "says": "How one property of an agent grows with another, as a power.",
       "anchor": "scaling-relations-between-agents-properties"
     },
     {
       "name": "assortativity",
-      "page": "measuring-networks",
+      "page": "measures-of-the-archived-studies",
       "says": "Whether agents tend to be joined to agents like them: the well connected to the well connected.",
       "anchor": "assortativity"
     },
@@ -452,7 +452,7 @@
     },
     {
       "name": "lightning",
-      "page": "measuring-tokens",
+      "page": "measures-of-the-archived-studies",
       "says": "A closed loop of the flow of a game: tokens that go round and come back where they started.",
       "anchor": "lightning-tokens-that-go-round"
     },
@@ -533,13 +533,13 @@
     },
     {
       "name": "mobility",
-      "page": "measuring-tokens",
+      "page": "measures-of-the-archived-studies",
       "says": "Whether the rich stay rich, or who holds the wealth keeps changing.",
       "anchor": "mobility"
     },
     {
       "name": "participation ratio",
-      "page": "statistics",
+      "page": "measures-of-the-archived-studies",
       "says": "How many directions a cloud of points really uses.",
       "anchor": "how-many-directions-a-cloud-of-points-uses"
     },
@@ -595,7 +595,7 @@
       "name": "power law",
       "page": "statistics",
       "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones.",
-      "anchor": "fitting-a-power-law-properly"
+      "anchor": "logarithmic-axes-and-power-laws"
     },
     {
       "name": "data collapse",
@@ -616,7 +616,7 @@
       "name": "effective number",
       "page": "statistics",
       "says": "How many kinds there really are, when kinds are counted by how much of the population they hold.",
-      "anchor": "effective-numbers-how-many-kinds-and-how-many-directions"
+      "anchor": "effective-numbers-how-many-kinds"
     },
     {
       "name": "fractional factorial",

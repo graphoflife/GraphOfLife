@@ -505,7 +505,7 @@ before the links its brain chooses. Above 0, the newborn is also always
 joined to its parent. With 0, the newborn has only the links its brain
 chooses, and is often a leaf, joined to one agent alone. With 2, every birth
 closes triangles. The links are drawn at random rather than by the brain's
-liking: a liking for well-connected agents is [preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel "The well connected gaining new connections faster than the poorly connected."), and
+liking: a liking for well-connected agents is [preferential attachment](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel "The well connected gaining new connections faster than the poorly connected."), and
 makes [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.").
 
 **B1:** 0. **B2:** 2.

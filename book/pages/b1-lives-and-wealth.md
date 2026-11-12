@@ -1632,7 +1632,7 @@ them again at the start of the game that follows, and count what each class
 loses in it. Divided by the agents in the class, these are the **gain
 kernel** and the **loss kernel** of the network. They say what an agent with
 *k* connections gains, and loses, on average
-([Preferential attachment and its kernel](measuring-networks.md#preferential-attachment-and-its-kernel)).
+([Preferential attachment and its kernel](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel)).
 
 <!-- figure grows/kernel -->
 ![Who gains and who loses connections](../figures/grows/kernel.svg)
@@ -1836,7 +1836,7 @@ $$
 which equals 1 minus twice the area under the Lorenz curve. A Gini of 0.5 has
 a concrete meaning: two agents picked at random differ, on average, by as much
 as the average agent holds.
-[The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) shows why,
+[The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) shows why,
 and works an example by hand.
 
 A plainer measure reads a single point of the curve: the share of all tokens
@@ -2139,7 +2139,7 @@ Two readings of *H* follow ([Entropy and evenness](measuring-tokens.md#entropy-a
   1 (all hold the same). Here it is 1.75/2 = 0.875;
 - the **effective number** 2^*H* is how many agents, holding equal shares,
   would leave you exactly as uncertain: here 2^1.75 ≈ 3.4 agents.
-  ([Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions) compares it with other ways of
+  ([Effective numbers](statistics.md#effective-numbers-how-many-kinds) compares it with other ways of
   counting kinds.)
 
 The same arithmetic works for anything that falls into categories. For the
@@ -2304,7 +2304,7 @@ unchanging inequality can hide two very different worlds. In one, the same
 agents are rich game after game. In the other, wealth is as unequal at every
 moment, but who holds it keeps changing. This section follows single agents
 through time to tell which world Graph of Life is. Economists call this
-question **mobility** ([Mobility](measuring-tokens.md#mobility)).
+question **mobility** ([Mobility](measures-of-the-archived-studies.md#mobility)).
 
 #### How the order of wealth is remembered
 
@@ -2416,7 +2416,7 @@ Ten games on, where are the agents of each fifth of the order of wealth?
 Among those still alive, the **Shorrocks index** of the moves is **0.59**
 (0.57 at 10,000 tokens). It runs from 0, for a world in which nobody changes
 place, to 1, for one that forgets the order completely in ten games
-([Mobility](measuring-tokens.md#mobility)). The top is the stickiest part of the order: an
+([Mobility](measures-of-the-archived-studies.md#mobility)). The top is the stickiest part of the order: an
 agent at the top has the most connections to hold it there.
 
 #### The fate of the richest
@@ -3008,7 +3008,7 @@ connections. After every game the viewer also reports the extremes
 - the richest agent and the poorest, `maxTokens` and `minTokens`
   ([Tokens per agent: mean, median, extremes](measuring-tokens.md#tokens-per-agent-mean-median-extremes));
 - the best-connected agent and the least, `maxDegree` and `minDegree`, beside
-  the median agent's `medianDegree` ([Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling));
+  the median agent's `medianDegree` ([Degree](measuring-networks.md#an-agents-connections-degree-and-clustering));
 - the largest gain and the largest loss of one agent in the game,
   `maxTokenAdded` and `maxTokenLost`
   ([Gains, losses and the share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out)).
@@ -3490,6 +3490,6 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens).
 
-> [!info]- Pages that link here (32)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (33)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

@@ -189,6 +189,7 @@ view shows how the pages hang together.
 - [Cooperation, help and gliders (side study)](pages/cooperation-help-and-gliders.md)
 - [Space at scale (side study)](pages/space-at-scale.md)
 - [Measures, atlases and assembly (side studies)](pages/measures-atlases-and-assembly.md)
+- [Measures of the archived studies](pages/measures-of-the-archived-studies.md)
 <!-- /contents -->
 
 ## How our view changed

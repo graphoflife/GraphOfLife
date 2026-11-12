@@ -72,7 +72,7 @@ $$
 \bar k = \frac{1}{|V|} \sum_{u \in V} \deg(u) = \frac{2\,|E|}{|V|} .
 $$
 
-In the example, *k̄* = 8 / 4 = 2. [Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling) says more about
+In the example, *k̄* = 8 / 4 = 2. [Degree](measuring-networks.md#an-agents-connections-degree-and-clustering) says more about
 degrees.
 
 Every node carries a whole-number **id**. Ids are handed out in increasing

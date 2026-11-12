@@ -166,7 +166,7 @@ Each criterion stands for one part of the picture.
      every iteration, or none does, is sorted out.
 6. **Not too even.** If almost every agent holds the same few tokens, there
    is little to win and little to select. We ask for a
-   [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) of at least 0.46, the Gini of B2's
+   [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) of at least 0.46, the Gini of B2's
    most even world in Experiment 16. Round 3 has no B2 worlds of its own, so
    this line is a fixed number.
 
@@ -376,7 +376,7 @@ The bar was set in
 | agent cut | the largest share of the world that one agent's loss would cut off | at most 2% |
 | link cut | the same for one link: the [cut risk](measuring-networks.md#cut-risk) | at most 1% |
 | no hub | the share of the other agents that the best-connected agent is linked to | at most 5% |
-| links per agent | the mean [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling) | 3 to 12 |
+| links per agent | the mean [degree](measuring-networks.md#an-agents-connections-degree-and-clustering) | 3 to 12 |
 | dimension | how fast balls grow ([Dimension and curvature from ball growth](measuring-space.md#three-ways-to-measure-a-networks-dimension)) | 2.3 to 4 |
 
 ### Why each mark is there
@@ -475,7 +475,7 @@ agents *decide* is a separate measure: the
 
 **Tokens, links and ages.** Sort the agents into doubling classes: 1, 2–3,
 4–7, 8–15, and so on (for ages, the age plus one, so that a newborn counts).
-The **spread** is the [effective number](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions) of classes the
+The **spread** is the [effective number](statistics.md#effective-numbers-how-many-kinds) of classes the
 agents fill: 2 to the power of the [entropy](measuring-tokens.md#entropy-and-evenness), in
 bits, of the classes' shares. It is 1 when every agent is in one class, and
 *k* when the agents are spread evenly over *k* classes. Agents holding one to
@@ -500,7 +500,7 @@ spreads would have among them, so no score moves as worlds are added.
 
 So the score is relative: it places a world among the worlds this notebook
 has made, not on an absolute scale. And it does not say how evenly the
-tokens are shared; that is the [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility).
+tokens are shared; that is the [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy).
 
 ### Examples
 
@@ -574,7 +574,7 @@ the kinds swing from moment to moment.
   healthy world's long run will face.
 - [The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space): the test the
   dimension mark needs beside it.
-- [Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions):
+- [Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds):
   the count inside both measures.
 
 ## How our view changed

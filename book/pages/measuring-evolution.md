@@ -15,7 +15,6 @@ Its sections:
 - [Genotypes, families and the common ancestor](#genotypes-families-and-the-common-ancestor)
 - [Eras, contests and invasions: does a world keep getting better?](#eras-contests-and-invasions-does-a-world-keep-getting-better)
 - [What would count as open-ended evolution](#what-would-count-as-open-ended-evolution)
-- [Assembly index and assembly](#assembly-index-and-assembly): what assembly theory measures
 
 ## Genotypes, families and the common ancestor
 
@@ -378,7 +377,7 @@ genotypes**, 2^*H* with *H* the entropy of the genotypes' shares, weighs the
 common ones more
 ([Entropy and evenness](measuring-tokens.md#entropy-and-evenness)). It is
 how many equally common genotypes would be as diverse as the ones there are
-([Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)).
+([Effective numbers](statistics.md#effective-numbers-how-many-kinds)).
 
 In the example of eight agents, the shares are one half and four eighths.
 Each share *p* adds *p* · log₂(1/*p*) to *H*: the half adds ½ · 1, each
@@ -785,7 +784,7 @@ other in the same world, and scores the share of it the later one holds.
    - it meets every mark of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at every 10,000 iterations;
    - its agents are more diverse than those of B2's median world;
    - its tokens are no more even than B2's: a
-     [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) no lower than the least of
+     [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) no lower than the least of
      B2's worlds read at the same iteration.
 
 ### What it does not ask
@@ -811,45 +810,6 @@ Each part closes a way to be fooled:
 - **Room** closes worlds that evolve only because they are poor in
   everything else, such as a few hundred agents holding everything evenly.
 
-## Assembly index and assembly
-
-How many steps does it take to make a thing, and how many copies of it are
-there? **Assembly theory** asks both (Marshall and others 2021; Sharma and
-others 2023). It builds an object from basic blocks by **joins**: a join lays
-two pieces already made together, and whatever is made can be used again for
-free. The **assembly index** *a* of an object is the fewest joins that make
-it. Its **copy number** *n* is how many identical copies of it a collection
-holds. The **assembly** of the collection adds up its kinds of object,
-weighing each by e to the power of its index and counting only its copies
-beyond the first:
-
-$$
-A = \sum_i e^{a_i} \, \frac{n_i - 1}{N_T},
-$$
-
-with *N_T* the objects in all. The theory reads many copies of objects with a
-high index as the mark of selection: chance alone seldom makes the same
-complicated thing twice.
-
-### An example of the index
-
-In a network the block is one link, and an object can be an agent's **ego
-network**: the agent, its neighbours and the links among them. A star of
-eight links takes three joins: two links make a star of two, two of those a
-star of four, two of those a star of eight. A star of seven links takes four,
-for each join can only add two sizes already made (1, 2, 3, 4, 7): the fewest
-joins for *m* links is the length of the shortest **addition chain** to *m*,
-written l(*m*). In a triangular lattice every agent's ego network is the same
-wheel of six spokes, twelve links built in four joins, so its 10,000 copies
-give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
-
-### Where it is used
-
-- [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): the index and the assembly of the
-  ego networks of B1, B2 and round 3, each against its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") and four
-  networks with no history; and why a genotype's path in the family tree
-  gives no index worth the name.
-
 ## Where to go next
 
 - [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): all of these at work in
@@ -871,7 +831,9 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 - [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): what a world in which much can
   happen looks like.
 - [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): how many steps an agent's
-  neighbourhood takes to make, and how many agents share its shape.
+  neighbourhood takes to make, and how many agents share its shape. What the
+  index and assembly are is in
+  [Measures of the archived studies](measures-of-the-archived-studies.md#assembly-index-and-assembly).
 
 ## How our view changed
 
@@ -924,6 +886,9 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
     only 154 to 274 agents held that many. And the plays searched for the best
     reply include the agent's own stakes of each draw, which the note did not
     list.
+- **12 November 2026.** Moved to [Measures of the archived
+  studies](measures-of-the-archived-studies.md): the section on the assembly
+  index and assembly, which only pages of the Archive use.
 
 ## References
 
@@ -932,14 +897,6 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 
 - Balduzzi, D., Tuyls, K., Pérolat, J. and Graepel, T. (2018). Re-evaluating
   evaluation. *Advances in Neural Information Processing Systems* 31.
-
-- Marshall, S. M., Mathis, C., Carrick, E. and others (2021). Identifying
-  molecules as biosignatures with assembly theory and mass spectrometry.
-  *Nature Communications* 12, 3033.
-
-- Sharma, A., Czégel, D., Lachmann, M., Kempes, C. P., Walker, S. I. and
-  Cronin, L. (2023). Assembly theory explains and quantifies selection and
-  evolution. *Nature* 622, 321–328.
 
 <!-- turns -->
 ---

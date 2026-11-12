@@ -566,7 +566,7 @@ numbers as coordinates. If the points spread along only a few directions, the
 messages use only a few numbers' worth of freedom. In the median world, the
 messages vary along only **15** independent directions (6 to 21). They are
 counted as a participation ratio
-([How many directions a cloud of points uses](statistics.md#how-many-directions-a-cloud-of-points-uses)).
+([How many directions a cloud of points uses](measures-of-the-archived-studies.md#how-many-directions-a-cloud-of-points-uses)).
 Founders' brains, independent of each other, use 30, all of them.
 
 Why so few? A world's genotypes descend from a few lines
@@ -736,7 +736,7 @@ Two agents can differ in three ways, and each gives a different count:
 - **by what they do.** Put two agents in the same situation, and see whether
   they stake differently. Agents that act alike are one kind of behaviour.
   The kinds are counted by how many agents carry each
-  ([Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)).
+  ([Effective numbers](statistics.md#effective-numbers-how-many-kinds)).
 
 | what is counted | how | B1 (10,000 tokens) | B2 (10,000 tokens) | pages |
 |---|---|---|---|---|
@@ -1020,8 +1020,8 @@ The three figures of this page are drawn with
 `python3 book_figures.py how_alike`, from the measures of
 `research/oee/checks/diversity.py`. Each says, folded beneath it, which
 worlds it reads and how. The counts use
-[Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions) and
-[Splitting variation](statistics.md#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them).
+[Effective numbers](statistics.md#effective-numbers-how-many-kinds) and
+[Splitting variation](statistics.md#splitting-variation-between-worlds-and-within-them).
 [Genotypes, families and the common ancestor](measuring-evolution.md#brain-diversity)
 says how genotypes are counted.
 
@@ -1120,7 +1120,7 @@ reasons:
 
 With every brain in every situation and draw, the variance of a decision
 splits exactly into these four parts.
-[Where, who and chance](statistics.md#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them) shows how each part is computed.
+[Where, who and chance](statistics.md#splitting-variation-between-worlds-and-within-them) shows how each part is computed.
 
 A small example, made up to show the idea. Two brains, A and B, decide what
 share of their tokens to keep at home. Each is put in two places, an agent
@@ -1297,7 +1297,7 @@ no further apart than that line.
 How many kinds are there? A plain count would weigh a kind of one agent as
 much as a kind of a thousand. So the kinds are counted by their carriers, as
 an **effective number**: how many equally common kinds would give the same
-spread ([Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)). If *p* is the share of the
+spread ([Effective numbers](statistics.md#effective-numbers-how-many-kinds)). If *p* is the share of the
 agents in each kind, the effective number is 1 / Σ *p*². That is one over
 the chance that two agents drawn at random are of the same kind.
 
@@ -1547,8 +1547,8 @@ to every condition of every experiment, and to the pilot worlds.
   other, and when their stakes were pooled.
 - [The diversity score](measuring-health.md#the-diversity-score): how widely a world's agents
   spread in what they hold.
-- [Where, who and chance](statistics.md#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them) and
-  [Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions): the two methods of this page.
+- [Where, who and chance](statistics.md#splitting-variation-between-worlds-and-within-them) and
+  [Effective numbers](statistics.md#effective-numbers-how-many-kinds): the two methods of this page.
 
 ## How our view changed
 
@@ -1626,6 +1626,6 @@ to every condition of every experiment, and to the pilot worlds.
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (25)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (26)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

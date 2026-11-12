@@ -946,6 +946,19 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Side studies of many measures and worlds at once: an atlas of what goes with what, every world side by side, the viewer's colours, and assembly theory."
+    },
+    {
+      "id": "measures-of-the-archived-studies",
+      "title": "Measures of the archived studies",
+      "file": "pages/measures-of-the-archived-studies.md",
+      "topics": [
+        "side-studies",
+        "methods"
+      ],
+      "kind": "reference",
+      "status": "written",
+      "added": "2026-11-12",
+      "summary": "The measures only the Archive's pages use, kept as they were written: fitting a power law, splitting a decision's variance, the participation ratio, assortativity, preferential attachment, scaling relations, mobility, lightning, four measures of age, and assembly."
     }
   ],
   "parts": [

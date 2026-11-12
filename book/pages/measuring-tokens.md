@@ -11,21 +11,26 @@ How the notebook measures who holds the tokens and where they go: the Gini coeff
 
 Its sections:
 
-- [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility)
+- [Measuring inequality: the Gini coefficient, the richest tenth and entropy](#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy)
 - [The even split](#the-even-split): when a brain scores no candidate above zero
-- [Measuring the flow: token flow, lightning and circulation](#measuring-the-flow-token-flow-lightning-and-circulation)
+- [Measuring the flow: token flow and circulation](#measuring-the-flow-token-flow-and-circulation)
 
-## Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility
+## Measuring inequality: the Gini coefficient, the richest tenth and entropy
 
-Four kinds of number say how unequally a world's tokens are held, and the
-notebook records them after every phase. The **Gini coefficient** sums up the
-whole Lorenz curve in one number, and the **richest tenth's share** reads one
-point of it. The **mean, median, richest and poorest** describe the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
-directly, while **entropy** and **evenness** say how evenly anything is
-spread, connections and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") too. **Mobility** compares two moments: whether the same agents
-stay rich. In a settled B1 world of 100,000
-tokens the Gini is about 0.47, and the richest tenth hold about 42% of all
-tokens.
+Three kinds of number say how unequally a world's tokens are held, recorded
+after every phase:
+
+- the **Gini coefficient**, which sums up the whole Lorenz curve in one
+  number, and the **richest tenth's share**, one point of that curve;
+- the **mean, median, richest and poorest**, which describe the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
+  directly;
+- **entropy** and **evenness**, which say how evenly anything is spread,
+  connections and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") too.
+
+In a settled B1 world of 100,000 tokens the Gini is about 0.47, and the
+richest tenth hold about 42% of all tokens. Whether the same agents stay rich,
+their **mobility**, was measured only by studies now in the Archive
+([Mobility](measures-of-the-archived-studies.md#mobility)).
 
 ### The Gini coefficient and the Lorenz curve
 
@@ -363,66 +368,6 @@ one curve
 from the histogram of degrees. Both entropies, and both evenness values, are
 recorded after every phase.
 
-### Mobility
-
-A world can be unequal in two very different ways. In one, the same agents
-are rich game after game. In the other, wealth is just as unequal at every
-moment, but who holds it keeps changing. The Gini coefficient cannot tell the
-two apart, because it looks at one moment. **Mobility** compares two moments.
-Economists measure it for incomes across years and generations (Shorrocks
-1978; Chetty and others 2014). The notebook uses three measures.
-
-#### Rank correlation over time
-
-Take the agents alive at a moment *t* and again *k* games later. Rank them by
-their tokens at each moment, the poorest first; agents with equal tokens share
-the mean of their ranks. **Spearman's rank correlation** ρ is the ordinary
-[correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes) of the two lists of ranks:
-
-- ρ = 1: every agent kept its place in the order of wealth;
-- ρ = 0: the later order has nothing to do with the earlier;
-- ρ < 0: the order turned round, and the poor became the rich.
-
-Ranks rather than tokens make ρ deaf to how unequal the world is. They also
-keep a few very rich agents from deciding it, as they would decide an ordinary
-correlation of the tokens themselves. Drawn against *k*, ρ shows how long
-wealth is remembered.
-
-#### A table of moves
-
-Sort the agents at *t* into fifths by their rank of wealth, from the poorest
-fifth to the richest. Do the same *k* games later. For every pair of fifths,
-count the agents that went from the one to the other, and add a column for
-those no longer alive. Divide each row by its total. Then each row says where
-the agents of one fifth went.
-
-This is a **transition matrix** *P*. Its entry *Pᵢⱼ* is the share of the
-agents of fifth *i* found in fifth *j* later. A world where nobody moves has 1
-on the diagonal and 0 elsewhere.
-
-#### One number: the Shorrocks index
-
-For *n* classes, with the diagonal entries *Pᵢᵢ* computed among the agents
-still alive,
-
-$$
-M = \frac{n - \sum_i P_{ii}}{n - 1}
-$$
-
-(Shorrocks 1978). In words: count how far the diagonal falls short of *n*,
-the sum it would have if nobody moved, and scale it.
-
-If nobody moves, every *Pᵢᵢ* is 1 and *M* = 0. Suppose instead that where an
-agent ends up has nothing to do with where it started. Then every row is
-(⅕, ⅕, ⅕, ⅕, ⅕), the diagonal adds up to 1, and *M* = 1. So *M* runs from 0,
-a rigid world, to 1, a world without memory of wealth. It can exceed 1 when
-the order tends to reverse.
-
-#### Where mobility is used
-
-[Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)
-measures all three in the baseline worlds.
-
 ## The even split
 
 In every [game](one-iteration.md#phase-2-the-game) an agent stakes all its
@@ -455,7 +400,7 @@ the τ tokens are split evenly
 
 With 3 tokens and one neighbour, an agent stakes 2 at home and 1 on the
 neighbour, so whole tokens tilt the split towards home. The share staked at
-home, by [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling), in the thirty baseline worlds of 100,000 tokens of
+home, by [degree](measuring-networks.md#an-agents-connections-degree-and-clustering), in the thirty baseline worlds of 100,000 tokens of
 Experiment 10 ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)):
 
 | connections | 1 | 2 | 3–4 | 5–9 | 10–49 | 50+ |
@@ -533,14 +478,15 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 > [What B1 is, and what stood in its way](what-the-baseline-world-is.md#a-world-of-attack) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-picture) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#b1-the-network-size-and-scaling) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-the-pages-found)
 <!-- /used -->
 
-## Measuring the flow: token flow, lightning and circulation
+## Measuring the flow: token flow and circulation
 
 In every game, the tokens an agent stakes on a neighbour's node flow along
 the connection between them: that is the **token flow**. Once each pair's two
-directions cancel, what is left is the **net flow**. A **lightning** is a
-closed loop of the flow, and only a floor and a ceiling can be given for how
-much goes round. Over a stretch of games, the net flow splits exactly into a
-part that runs downhill and a **circulation** that goes round.
+directions cancel, what is left is the **net flow**. Over a stretch of games,
+the net flow splits exactly into a part that runs downhill and a
+**circulation** that goes round. How much of a single game's flow goes round,
+its **lightning**, was measured only by studies now in the Archive
+([Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)).
 
 ### Token flow
 
@@ -564,14 +510,14 @@ agents staked, and which connections the game cut.
 | `meanEdgeFlow` | the mean, over the connections that carried anything, of *a*(*u* → *v*) + *a*(*v* → *u*) |
 | `maxEdgeFlow` | the largest such sum on one connection |
 | `netFlowShare` | the share of `totalFlow` left after cancelling each pair's two directions against each other ([below](#cancelling-the-net-flow)) |
-| `flowImbalance` | the share of `totalFlow` that must flow one way ([The ceiling: what conservation forbids](#the-ceiling-what-conservation-forbids)) |
+| `flowImbalance` | the share of `totalFlow` that must flow one way ([The ceiling: what conservation forbids](measures-of-the-archived-studies.md#the-ceiling-what-conservation-forbids)) |
 | `spreadShare` | the share of the agents that staked who spread their tokens rather than going all in ([What a brain says](rules-in-detail.md#what-a-brain-says)) |
 | `revoltShare` | the share of all staked tokens, home stakes included, marked revolutionary ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)) |
 | `prunedEdges` | the connections cut at the end of the game because nothing crossed them ([Why flow matters](#why-flow-matters)) |
 
 A run records the first three and the last three after every game. The
 other two, `netFlowShare` and `flowImbalance`, are worked out with the loops
-of [Lightning](#lightning-tokens-that-go-round), after the games of every
+of [Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round), after the games of every
 25th iteration.
 
 **Example.** Three agents, A, B and C, are joined in a triangle. In one game,
@@ -626,134 +572,12 @@ game, and about 71% cross a connection. In B2 almost nothing cancels
 ([The budget of a game](b1-the-game-and-its-flows.md#the-budget-of-a-game-where-tokens-flow)).
 
 <!-- used token-flow -->
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#the-goal-evolution-that-keeps-going)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 
-> [!info]- And in the Archive (1)
-> [B1: the game and its flows](b1-the-game-and-its-flows.md#the-flow-of-one-game)
+> [!info]- And in the Archive (2)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#the-flow-of-one-game) · [Measures of the archived studies](measures-of-the-archived-studies.md#loops-of-flow)
 <!-- /used -->
-
-### Lightning: tokens that go round
-
-Does the flow of a game go round in circles? Picture tokens leaving an
-agent, crossing several connections and arriving back where they started,
-like current round a circuit. The viewer calls such a closed loop of flow a
-**lightning**. Ecologists measure the same thing in food webs as a *cycling
-index* (Finn 1976). This section explains what is measured, and why only
-bounds can be given.
-
-#### Loops of flow
-
-Think of the flow of a game ([Token flow](#token-flow)) as a directed
-network: an arrow from *u* to *v* carrying *a*(*u* → *v*) tokens. A **loop**
-of length *L* is a closed path along *L* arrows,
-*u*₁ → *u*₂ → … → *u*_L → *u*₁. Each of its arrows carries at least one
-token. Taking one token off every arrow of the loop removes *L* tokens of
-flow that went round. A token taken off cannot be counted in a second loop.
-A loop of length *L* **scores** *L*², so that one long circuit counts for
-more than many short ones.
-
-#### The greedy peel
-
-Finding the loops that use the most flow is as hard as finding the longest
-loop in a network. No fast exact method is known for that. So the program
-(`gol_lightning.py`) peels loops greedily:
-
-1. Start at an agent, in increasing order of id. Walk along arrows that
-   still carry tokens, preferring an agent not yet visited in this walk.
-2. As soon as the walk reaches an agent already on it, a loop is closed.
-   Remove one token from each arrow of the loop, and add *L*² to the score.
-3. Walk again from the same agent while its walks keep closing loops. As
-   soon as a walk ends at an agent with no arrow left to follow, move on to
-   the next agent. The walk from an agent always takes the same path: the
-   first unvisited target in order of id. So an agent is given up even when
-   another path from it would have closed a loop.
-
-Two limits keep the search short. A walk is given up after 4,096 steps, and
-the peel of one flow stops after 20,000 loops.
-
-| field | definition |
-|---|---|
-| `lightningScore` | Σ *L*² over the loops peeled |
-| `cyclingShare` | the tokens of flow the loops used, ÷ `totalFlow` |
-| `lightningLongest` | the longest loop found |
-
-Being greedy, these are **lower bounds**: the true maximum is at least this.
-
-#### The ceiling: what conservation forbids
-
-Every token that goes round a loop leaves an agent and comes back to it, so
-loops change no agent's balance. Whatever net imbalance there is — agents
-that received more than they sent, or the reverse — cannot be in loops.
-Write in(*u*) for the tokens *u*'s neighbours staked on its node, and
-out(*u*) for the tokens *u* staked on theirs. Then
-
-$$
-\texttt{flowImbalance} = \frac{\tfrac12 \sum_u \bigl| \text{in}(u) - \text{out}(u) \bigr|}{\texttt{totalFlow}} .
-$$
-
-In words: take the gap between what each agent received and what it sent,
-counted positive either way. Add up the gaps, halve the sum, and divide by
-the whole flow. It is halved because every stranded token appears twice:
-once as a surplus, once as a deficit. This is exact, and an **upper bound**:
-at most 1 − `flowImbalance` of the flow can go round. The truth lies between
-`cyclingShare` and that ceiling.
-
-#### The net version
-
-Two neighbours staking on each other form a loop of length 2:
-[circulation](#flows-that-go-round) of the most trivial kind. The `net…`
-statistics repeat everything on the net flow, in which each pair's two
-directions have cancelled ([Cancelling: the net flow](#cancelling-the-net-flow)).
-There, loops of length 2 cannot exist. The statistics are
-`netLightningScore`, `netCyclingShare` (÷ the net total) and
-`netLightningLongest`. A loop that survives cancellation is tokens genuinely
-going *round*.
-
-Cancelling changes no agent's balance, so the same stranded tokens bound the
-net flow too. A share `flowImbalance` ÷ `netFlowShare` of the net flow must
-run one way, and at most the rest can go round.
-
-#### An example: three agents
-
-Take agents A, B and C, as in [Token flow](#the-flow-of-a-game). A stakes 3
-on B, B 3 on C, C 3 on A, and B 2 on A. The total flow is 11. The loop
-A → B → C → A can be peeled three times. That uses 9 tokens, and each peel
-scores 3² = 9, so the score is 3 · 9 = 27. What remains is B → A (2), with no
-loop, so `cyclingShare` = 9/11.
-
-The imbalance: A received 3 + 2 = 5 and sent 3 (+2). B received 3 and sent
-5 (−2). C received 3 and sent 3 (0). Half of 2 + 2 is 2, so
-`flowImbalance` = 2/11, and the ceiling is 9/11. The greedy peel found
-everything there was.
-
-After cancelling, the net flow is A → B (1), B → C (3) and C → A (3): 7
-tokens. The loop can now be peeled only once, so `netCyclingShare` = 3/7
-and `netLightningLongest` = 3. The same 2 tokens are stranded, so the
-ceiling allows 5 of the 7. But this time the floor, 3/7, is the truth. The 2
-stranded tokens run B → C → A, two steps each, so they use up 4 tokens of the
-net flow, not 2.
-
-#### Where lightning is used
-
-A run records these statistics after the games of every 25th iteration
-([What a run records](runs-and-records.md#what-a-run-records)).
-
-- **Do tokens go round?** In B1's worlds of 100,000 tokens, every matched
-  stake is a loop of two. So between 72% and 77% of the flow as staked goes
-  round, yet the greedy peel finds only 13%: a weak floor. After cancelling,
-  it finds 0.3% of the net flow on loops, where the ceiling allows 16%
-  ([Do tokens go round?](b1-the-game-and-its-flows.md#do-tokens-go-round)).
-- **Every world.** [Lightning in every world](b1-the-game-and-its-flows.md#lightning-in-every-world)
-  reads the floor in every world the notebook has made. One rule decides how
-  much goes round: whether a connection must carry tokens to survive. And the
-  longest loop found is as long as a world is wide.
-- **Over many games.** The greedy count of single games is set beside the
-  exact split of fifty games in
-  [A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one).
-  The split is explained under [Flows that go round](#flows-that-go-round).
-- **A yardstick for evolution.** How much of the flow goes round is one
-  statistic that might keep rising in a world that keeps evolving
-  ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)).
 
 ### Flows that go round
 
@@ -885,8 +709,8 @@ from island to island.
 <!-- used flows-that-go-round -->
 - [Particles: patterns that outlast what carries them](particles.md#how-a-ring-is-seen)
 
-> [!info]- And in the Archive (2)
-> [B1: the game and its flows](b1-the-game-and-its-flows.md#do-tokens-go-round) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-helping-is-here)
+> [!info]- And in the Archive (3)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#do-tokens-go-round) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-helping-is-here) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-net-version)
 <!-- /used -->
 
 #### What it can and cannot say
@@ -911,7 +735,7 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 
 - [How unequal is a world, and who stays rich](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich):
   each of these measures, read in thirty B1 worlds.
-- [Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions):
+- [Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds):
   the effective number beside other ways of counting kinds.
 - [What a run records](runs-and-records.md#what-a-run-records): every number recorded after a
   phase, these among them.
@@ -957,12 +781,13 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
     one's own node is left out of every statistic in its table. The statistic
     `revoltShare` counts it: it is the share of all staked tokens, home stakes
     included, that are marked revolutionary (`gol_series.py`).
+- **12 November 2026.** Moved to [Measures of the archived
+  studies](measures-of-the-archived-studies.md): two sections that only pages of
+  the Archive use: mobility and lightning. The two family headings that named
+  them name what is left.
 
 ## References
 
-- Chetty, R., Hendren, N., Kline, P. and Saez, E. (2014). Where is the land
-  of opportunity? The geography of intergenerational mobility in the United
-  States. *Quarterly Journal of Economics* 129, 1553–1623.
 - Gini, C. (1912). *Variabilità e mutabilità*. Bologna: Tipografia di Paolo
   Cuppini.
 - Hill, M. O. (1973). Diversity and evenness: a unifying notation and its
@@ -974,8 +799,6 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
   biological collections. *Journal of Theoretical Biology* 13, 131–144.
 - Shannon, C. E. (1948). A mathematical theory of communication. *Bell System
   Technical Journal* 27, 379–423 and 623–656.
-- Shorrocks, A. F. (1978). The measurement of mobility. *Econometrica* 46,
-  1013–1024.
 
 <!-- turns -->
 ---
@@ -985,5 +808,5 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Methods and statistics](../README.md#methods-and-statistics), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
 > [!info]- Pages that link here (19)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

@@ -379,7 +379,7 @@ not grow with the size of a world. They are shares, means and ratios, and the
 counts of births, deaths and revolutions divided by the agents. Standardise each,
 and find the principal components: the directions along which the cloud of
 worlds is longest
-([How many directions a cloud of points uses](statistics.md#how-many-directions-a-cloud-of-points-uses)).
+([How many directions a cloud of points uses](measures-of-the-archived-studies.md#how-many-directions-a-cloud-of-points-uses)).
 
 <!-- figure side_by_side/components -->
 ![Every lab world on its first two components](../figures/side_by_side/components.svg)
@@ -589,7 +589,7 @@ white.
 | choice | the value of agent *u* |
 |---|---|
 | Tokens | its tokens |
-| Degree | its number of connections ([Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling)) |
+| Degree | its number of connections ([Degree](measuring-networks.md#an-agents-connections-degree-and-clustering)) |
 | Token change (signed) | its tokens now minus its tokens before the phase; a newborn counts from 0 |
 | Token change (magnitude) | the size of that change |
 | Token curvature (signed) | Σ over its neighbours of (their tokens − its tokens) ([Token curvature](b1-lives-and-wealth.md#token-curvature)) |
@@ -616,7 +616,7 @@ kinship, colour by family instead, as
 | Endpoint token gap | \|tokens of *u* − tokens of *v*\| |
 | Average / weaker / stronger endpoint degree | the mean, smaller, larger of their degrees |
 | Average endpoint curvature (signed) | the mean of their token curvatures |
-| Token flow | tokens staked across it in the game, both ways together ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)) |
+| Token flow | tokens staked across it in the game, both ways together ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation)) |
 | Loops through it | fundamental cycles through it, as for agents |
 | Triangles | triangles it is a side of |
 | Bridge | 1 if it lies on no loop, so that cutting it splits the network ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)); else 0 |
@@ -1532,10 +1532,10 @@ and makes what is not.
 <!-- turns -->
 ---
 
-← [Space at scale (side study)](space-at-scale.md) · [Side studies](../README.md#side-studies)
+← [Space at scale (side study)](space-at-scale.md) · [Side studies](../README.md#side-studies) · [Measures of the archived studies](measures-of-the-archived-studies.md) →
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics), [Does evolution keep going?](../README.md#does-evolution-keep-going), [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (12)
-> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
+> [!info]- Pages that link here (13)
+> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

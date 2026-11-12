@@ -158,7 +158,7 @@ world, and the ring would last while the tokens in it changed.
 ### How a ring is seen
 
 Add up, over a stretch of games, the tokens each [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") carried one way,
-minus what came back: the connection's [net flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation). Every net
+minus what came back: the connection's [net flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation). Every net
 flow splits exactly into two parts
 ([Flows that go round](measuring-tokens.md#flows-that-go-round); Jiang, Lim, Yao
 and Ye 2011). One runs **downhill**, from some agents to others, as if each

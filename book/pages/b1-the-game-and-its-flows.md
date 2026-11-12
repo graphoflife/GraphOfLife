@@ -539,7 +539,7 @@ numbers are given.
 #### The budget of a game (where tokens flow)
 Start with the bookkeeping. In every game of these worlds, exactly 100,000
 tokens are staked: every token, by whoever holds it. Each staked token lands in
-one of three places ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)):
+one of three places ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation)):
 
 1. on the staker's **own node**;
 2. on a neighbour's node, **matched** by a stake coming back. Say A puts 5 on
@@ -551,7 +551,7 @@ one of three places ([Token flow](measuring-tokens.md#measuring-the-flow-token-f
 <!-- figure flow/budget -->
 ![Where the tokens of a game go](../figures/flow/budget.svg)
 
-**Where the tokens of a game go.** Every token is staked in every game. Yellow: the share staked by agents on their own node. Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after cancelling, flow with a direction ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)). Left: the game of iteration 0, pooled over the 30 worlds; right: every game from iteration 500 on of the 30 worlds, pooled. Exactly 100,000 tokens are staked in each game.
+**Where the tokens of a game go.** Every token is staked in every game. Yellow: the share staked by agents on their own node. Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after cancelling, flow with a direction ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation)). Left: the game of iteration 0, pooled over the 30 worlds; right: every game from iteration 500 on of the 30 worlds, pooled. Exactly 100,000 tokens are staked in each game.
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *How much of its stake an agent puts on its own node* above.
@@ -846,7 +846,7 @@ larger, and see what is left.
 <!-- figure connections/per-connection -->
 ![Tokens across one connection in one game](../figures/connections/per-connection.svg)
 
-**Tokens across one connection in one game.** Every connection at the start of the games of every 25th iteration from 500 on, in the 30 worlds, pooled: how many tokens its two agents staked on each other in that game, both directions added (blue), and what is left when the smaller direction is cancelled against the larger (cyan; [Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)). A connection in the first class carried nothing and is cut at the end of the game.
+**Tokens across one connection in one game.** Every connection at the start of the games of every 25th iteration from 500 on, in the 30 worlds, pooled: how many tokens its two agents staked on each other in that game, both directions added (blue), and what is left when the smaller direction is cancelled against the larger (cyan; [Token flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation)). A connection in the first class carried nothing and is cut at the end of the game.
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *How much of its stake an agent puts on its own node* above.
@@ -930,7 +930,7 @@ numbers:
 <!-- figure connections/round-figures -->
 ![Flow on the connections, and the loops it makes](../figures/connections/round-figures.svg)
 
-**Flow on the connections, and the loops it makes.** After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](measuring-tokens.md#lightning-tokens-that-go-round) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Flow on the connections, and the loops it makes.** After every game of the 30 worlds. Left: the viewer's `meanEdgeFlow` — the tokens staked across a connection, over the connections something crossed — and `maxEdgeFlow`, the most across one, on a logarithmic axis. Right, every 25 iterations: the longest closed loop of flow the greedy peel of [Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round) found in the flow as staked (`lightningLongest`) and in what is left after cancelling (`netLightningLongest`). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *How much of its stake an agent puts on its own node* above.
@@ -980,7 +980,7 @@ A **lightning** is what the viewer calls a closed loop in that flow: A stakes on
 B, B on C, and C back on A. A loop of *L* agents carries *L* tokens, one along
 each of its arrows, and scores *L*². So one long circuit counts for more than
 many short ones. Ecologists measure the same thing in food webs, as a *cycling
-index*. The note [Lightning: tokens that go round](measuring-tokens.md#lightning-tokens-that-go-round) works through
+index*. The note [Lightning: tokens that go round](measures-of-the-archived-studies.md#lightning-tokens-that-go-round) works through
 the definition with an example. Why it matters:
 
 - **Flow that goes round is flow that can keep going.** Tokens that run one way
@@ -1016,7 +1016,7 @@ records eight numbers, every 25th iteration:
 #### Do tokens go round?
 
 Start with the thirty B1 worlds of 100,000 tokens. How much of their flow
-goes round? Only bounds can be given ([Lightning](measuring-tokens.md#lightning-tokens-that-go-round)). The greedy
+goes round? Only bounds can be given ([Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)). The greedy
 search finds some loops: a floor. Conservation sets a ceiling. A token that comes back to where it started
 changes no balance. So an agent that ends a game with more or less than it
 sent cannot have had all its flow in loops. At least the difference runs one
@@ -1025,7 +1025,7 @@ way.
 <!-- figure flow/circulation -->
 ![Do tokens go round?](../figures/flow/circulation.svg)
 
-**Do tokens go round?** Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search could place in closed loops (blue; [Lightning](measuring-tokens.md#lightning-tokens-that-go-round)), and the share that conservation forbids from ever going round, because some agents receive more than they send (red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one coming back: the share of the flow left (cyan), and of that, the share found in loops (green). Every 25 iterations, 30 worlds; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
+**Do tokens go round?** Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search could place in closed loops (blue; [Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)), and the share that conservation forbids from ever going round, because some agents receive more than they send (red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one coming back: the share of the flow left (cyan), and of that, the share found in loops (green). Every 25 iterations, 30 worlds; the line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *How much of its stake an agent puts on its own node* above.
@@ -1313,8 +1313,8 @@ The command `python3 book_figures.py lightning` draws these figures. Each
 figure says, folded beneath it, which runs it reads and how.
 
 The measures are explained in the notes
-[Lightning: tokens that go round](measuring-tokens.md#lightning-tokens-that-go-round),
-[Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation), [Flows that go round](measuring-tokens.md#flows-that-go-round) and
+[Lightning: tokens that go round](measures-of-the-archived-studies.md#lightning-tokens-that-go-round),
+[Token flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation), [Flows that go round](measuring-tokens.md#flows-that-go-round) and
 [Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws).
 
 The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (how the game is played)](#the-runs-of-experiment-10-how-the-game-is-played).
@@ -1908,6 +1908,6 @@ reads and how.
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (26)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (27)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

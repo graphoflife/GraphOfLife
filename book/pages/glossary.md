@@ -18,7 +18,7 @@ there.
 - **[assembly](measures-atlases-and-assembly.md#copy-number-and-assembly)** — Assembly theory's measure of a collection: each kind of object weighed by e to the power of its assembly index, times its copies beyond the first, over all the objects.
 - **[assembly index](measures-atlases-and-assembly.md#the-assembly-index)** (also assembly indices) — The fewest joins that build an object from basic blocks, when anything built before can be used again.
 - **[assembly theory](measures-atlases-and-assembly.md#building-with-reusable-parts)** — A way to measure how much making went into a thing: the fewest steps that build it from basic parts, and how many copies of it there are.
-- **[assortativity](measuring-networks.md#assortativity)** — Whether agents tend to be joined to agents like them: the well connected to the well connected.
+- **[assortativity](measures-of-the-archived-studies.md#assortativity)** — Whether agents tend to be joined to agents like them: the well connected to the well connected.
 - **[autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum)** — How much a world's value now still says about its value some iterations later.
 - **[B1](b1-and-b2.md)** — The first baseline: the algorithm exactly as a new run is offered it.
 - **[B2](b1-and-b2.md)** — The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.
@@ -45,7 +45,7 @@ there.
 - **[dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension)** (also ball dimension) — How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.
 - **[diversity score](measuring-health.md#the-diversity-score)** — How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.
 - **[effective kinds of staking](b1-brains-lineages-and-messages.md#how-different-are-the-agents)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
-- **[effective number](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)** — How many kinds there really are, when kinds are counted by how much of the population they hold.
+- **[effective number](statistics.md#effective-numbers-how-many-kinds)** — How many kinds there really are, when kinds are counted by how much of the population they hold.
 - **[effective population](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — The size of a population left to chance that would lose its lines as fast: the smaller it is, the more chance decides which line survives.
 - **[ego network](measures-atlases-and-assembly.md#ego-networks-as-molecules)** — An agent, its neighbours and the links among them: the network as one agent sees it.
 - **[entropy](measuring-tokens.md#entropy-and-evenness)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
@@ -74,29 +74,29 @@ there.
 - **[largest remainder](rules-in-detail.md#splitting-tokens-into-whole-numbers)** — How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions.
 - **[least squares](statistics.md#fitting-a-straight-line)** (also R²) — The straight line that fits a cloud of points best, and how much of their spread it explains.
 - **[lifetime](measuring-lives.md#age-lifetime-and-survival-curves)** — How many iterations an agent lives, from its birth to its death.
-- **[lightning](measuring-tokens.md#lightning-tokens-that-go-round)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
+- **[lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
 - **[lineage](measuring-evolution.md#families)** — A line of descent: the agents whose genotypes go back to one ancestor.
 - **[logarithmic axis](statistics.md#logarithmic-axes-and-power-laws)** — An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.
 - **[loop](measuring-networks.md#loops)** — A path through the network that comes back to where it started without using a connection twice.
 - **[median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread)** (also quantile) — The middle value: half of the numbers lie below it and half above.
 - **[message](rules-in-detail.md#messages)** — Numbers an agent writes to itself and to each neighbour every phase, which their brains read.
-- **[mobility](measuring-tokens.md#mobility)** — Whether the rich stay rich, or who holds the wealth keeps changing.
+- **[mobility](measures-of-the-archived-studies.md#mobility)** — Whether the rich stay rich, or who holds the wealth keeps changing.
 - **[Muller plot](measuring-evolution.md#muller-plots)** — A chart of how lines of descent grow, shrink and replace each other over time.
 - **[mutation](rules-in-detail.md#how-a-brain-changes)** — A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.
 - **[neighbour](the-world.md#the-network)** — An agent joined to another by a connection.
 - **[open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)** — Evolution that keeps producing new things without end, not only up to a plateau.
-- **[participation ratio](statistics.md#how-many-directions-a-cloud-of-points-uses)** — How many directions a cloud of points really uses.
+- **[participation ratio](measures-of-the-archived-studies.md#how-many-directions-a-cloud-of-points-uses)** — How many directions a cloud of points really uses.
 - **[path length](measuring-networks.md#path-length)** — How many connections the shortest way between two agents crosses.
 - **[permutation test](statistics.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](runs-and-records.md#pilot-worlds)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
-- **[power law](statistics.md#fitting-a-power-law-properly)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
+- **[power law](statistics.md#logarithmic-axes-and-power-laws)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
 - **[power spectrum](statistics.md#the-power-spectrum-of-a-time-series)** — How much of a series' wandering comes at each speed, from slow to fast.
-- **[preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
+- **[preferential attachment](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](measuring-space.md#the-random-twin-is-a-world-a-space)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.
 - **[revolution](rules-in-detail.md#how-a-coalition-takes-a-node)** (also coalition) — A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.
 - **[richest tenth](measuring-tokens.md#the-richest-tenths-share)** — The share of all tokens held by the richest tenth of the agents.
 - **[same-position share](measuring-health.md#the-same-position-share)** — Of two agents put in the same situation, how often they stake their tokens measurably differently.
-- **[scaling relation](measuring-networks.md#scaling-relations-between-agents-properties)** — How one property of an agent grows with another, as a power.
+- **[scaling relation](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)** — How one property of an agent grows with another, as a power.
 - **[seed](rules-in-detail.md#seeds-and-the-random-stream)** — The number that fixes every random choice of a run: the same settings and the same seed make the same world.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
 - **[settled life](statistics.md#the-settled-life-of-a-world)** — A world from iteration 500 to its end, after its youth, where it is measured.

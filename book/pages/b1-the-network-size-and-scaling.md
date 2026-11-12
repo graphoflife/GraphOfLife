@@ -23,7 +23,7 @@ three hundred iterations.
 
 Three methods this page used are still used across the notebook, so they are
 explained in Statistics: [fitting a power
-law](statistics.md#fitting-a-power-law-properly), [how many seeds an experiment
+law](measures-of-the-archived-studies.md#fitting-a-power-law-properly), [how many seeds an experiment
 needs](statistics.md#what-thirty-seeds-can-see) and [how long a world
 remembers](statistics.md#what-a-b1-world-remembers).
 
@@ -149,7 +149,7 @@ and 29%).
 > **To make it again:** `python3 book_figures.py shape`.
 <!-- /figure -->
 
-An agent's **degree** is its number of connections ([Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling)). The
+An agent's **degree** is its number of connections ([Degree](measuring-networks.md#an-agents-connections-degree-and-clustering)). The
 figure shows, for every *d*, the share of agents with at least *d* connections
 (a complementary cumulative distribution). Both axes are logarithmic: each
 step along them multiplies by the same factor
@@ -1275,7 +1275,7 @@ tokens this page was first written from differ, both are given.
 
 The method, maximum likelihood from where the tail starts, is one the notebook
 still uses. So since 11 November 2026 it is explained in Statistics:
-[Fitting a power law properly](statistics.md#fitting-a-power-law-properly).
+[Fitting a power law properly](measures-of-the-archived-studies.md#fitting-a-power-law-properly).
 The sections below apply it to B1's worlds.
 
 ### The connections of one world
@@ -1283,7 +1283,7 @@ The sections below apply it to B1's worlds.
 <!-- figure powerlaws/degree-fit -->
 ![Fitting the degrees of one world](../figures/powerlaws/degree-fit.svg)
 
-**Fitting the degrees of one world.** Dots: for every number of connections k that occurs among the 14,870 agents of the world with seed 1 after its last game, the share of agents with at least k — the complementary cumulative distribution, on logarithmic axes. Dashed: the straight line least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ (the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the tail from the k that fits best, k = 22 (`degreeGamma`, `degreeKMin`), which holds 0.8% of the agents ([Fitting a power law](statistics.md#fitting-a-power-law-properly)).
+**Fitting the degrees of one world.** Dots: for every number of connections k that occurs among the 14,870 agents of the world with seed 1 after its last game, the share of agents with at least k — the complementary cumulative distribution, on logarithmic axes. Dashed: the straight line least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ (the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the tail from the k that fits best, k = 22 (`degreeGamma`, `degreeKMin`), which holds 0.8% of the agents ([Fitting a power law](measures-of-the-archived-studies.md#fitting-a-power-law-properly)).
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -1361,7 +1361,7 @@ chances.
 
 The well connected then gain connections in proportion to their
 connections. That is
-[preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel)
+[preferential attachment](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel)
 (Barabási and Albert 1999), reached here by copying. The "duplication"
 models of protein networks reach it the same way (Vázquez, Flammini, Maritan
 and Vespignani 2003; Chung, Lu, Dewey and Galas 2003). Preferential
@@ -1626,7 +1626,7 @@ An agent has more such properties. Besides tokens and connections, there are
 its triangles, how closely knit its neighbourhood is, and how much its tokens
 change in a game. Every 25 iterations, the viewer fits four **scaling
 relations** between them by least squares on the logarithms of all agents
-([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). This page shows the agents behind
+([Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)). This page shows the agents behind
 the four fits. And it finds that one of the exponents means something quite
 different from what it seems to say.
 
@@ -1642,7 +1642,7 @@ given beside.
 <!-- figure scaling/tokens-degree -->
 ![Tokens against connections](../figures/scaling/tokens-degree.svg)
 
-**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
+**Tokens against connections.** Every agent alive after the last game of the 30 worlds (394,056 agents), counted in cells of connections k and tokens, both in classes of growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) against ln(k) over all agents ([Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)). Cyan: tokens proportional to k + 1, through the median at k = 1 — where an even split of every stake would leave the tokens on a network that held still ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *Power-law exponents of the 30 worlds* above.
@@ -1776,7 +1776,7 @@ one connection each. How close are the worlds to that?
 <!-- figure scaling/neighbours -->
 ![Whom the well-connected are joined to](../figures/scaling/neighbours.svg)
 
-**Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](measuring-networks.md#assortativity)).
+**Whom the well-connected are joined to.** For the agents alive after the last game of the 30 worlds, in classes of their connections k: the mean, over the class, of the average number of connections of an agent's neighbours. A falling line means the well-connected are joined mostly to the poorly connected ([Assortativity](measures-of-the-archived-studies.md#assortativity)).
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *Power-law exponents of the 30 worlds* above.
@@ -1800,7 +1800,7 @@ hubs are surrounded by leaves**: the world is built of stars.
 
 There is a single number for this, the **assortativity** *r*: the correlation
 of the connections at the two ends of a connection
-([Assortativity](measuring-networks.md#assortativity)). It is −0.07 in the median world, and from
+([Assortativity](measures-of-the-archived-studies.md#assortativity)). It is −0.07 in the median world, and from
 −0.47 to +0.02 across the thirty (−0.11 at 10,000 tokens). That is mildly
 negative. And as the note explains, a world with a few large hubs comes out
 negative anyway. It has too few hubs for its hubs to be joined to. The curve
@@ -1818,7 +1818,7 @@ against what they hold after it.
 <!-- figure scaling/exponents -->
 ![Four scaling relations in the 30 worlds](../figures/scaling/exponents.svg)
 
-**Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)).
+**Four scaling relations in the 30 worlds.** One dot per world: its mean, over the measurements every 25 iterations from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, and of their R². Tokens and triangles against connections, clustering against connections, and the size of an agent's change in tokens over the game against the tokens it holds ([Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)).
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *Power-law exponents of the 30 worlds* above.
@@ -1931,7 +1931,7 @@ Here *d*(*u*, *v*) is the number of steps on the shortest path from *u* to
 
 At one step, *C*(1) takes all connected pairs: it is the assortativity of the
 value. For the connections themselves, it is the assortativity of the network
-([Assortativity](measuring-networks.md#assortativity)).
+([Assortativity](measures-of-the-archived-studies.md#assortativity)).
 
 Pairs *r* steps apart are found by **breadth-first search**. Start from an
 agent drawn at random. Its neighbours are one step away. Their neighbours not
@@ -2017,7 +2017,7 @@ cannot decide a correlation alone.
   connections. This is the assortativity of
   [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together), taken of
   the logarithm of the connections. Of the connections themselves, which the
-  hubs sway more, it is about −0.07 ([Assortativity](measuring-networks.md#assortativity)).
+  hubs sway more, it is about −0.07 ([Assortativity](measures-of-the-archived-studies.md#assortativity)).
 
 All three are small in the median world. Neighbours are alike or unlike only
 a little. And the worlds differ: the age correlation ranges from −0.09 to
@@ -3471,7 +3471,7 @@ written by `python3 gol_lab.py analyse E03`.
   rules under which nobody is cut off.
 - [Questioning the mechanics](questioning-the-mechanics.md#one-rule-reaches-across-the-world):
   the cull, and what could replace it.
-- [Preferential attachment and its kernel](measuring-networks.md#preferential-attachment-and-its-kernel):
+- [Preferential attachment and its kernel](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel):
   who gains new connections, and what that does to the tail.
 - [Two numbers together](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes): least squares, R² and logarithmic
   axes, the tools this page says to use with care.
@@ -3679,6 +3679,6 @@ written by `python3 gol_lab.py analyse E03`.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Space and dimension](../README.md#space-and-dimension), [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (25)
-> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (26)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

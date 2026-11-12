@@ -95,7 +95,7 @@ def scaling(ch: F.Chapter) -> None:
                 f"({len(deg):,} agents), counted in cells of connections k and tokens, both in classes of "
                 "growing width; a cell's colour is how many agents it holds, on a logarithmic scale. White: the "
                 "median tokens in each class of k. Red: the straight line least squares fits through ln(tokens) "
-                "against ln(k) over all agents ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). Cyan: "
+                "against ln(k) over all agents ([Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)). Cyan: "
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
                 "([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).",
@@ -176,7 +176,7 @@ def scaling(ch: F.Chapter) -> None:
         caption=f"For the agents alive after the last game of {W.lived}, in classes of "
                 "their connections k: the mean, over the class, of the average number of connections of an "
                 "agent's neighbours. A falling line means the well-connected are joined mostly to the poorly "
-                "connected ([Assortativity](measuring-networks.md#assortativity)).",
+                "connected ([Assortativity](measures-of-the-archived-studies.md#assortativity)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read frame `{W.frame(LAST)}` of every run; for every agent, the mean degree of its neighbours.",
                        "Average by class of the agent's own degree."]))
@@ -200,7 +200,7 @@ def scaling(ch: F.Chapter) -> None:
                 "from 500 on, of four slopes fitted by least squares on the logarithms of the agents of a frame, "
                 "and of their R². Tokens and triangles against connections, clustering against connections, and "
                 "the size of an agent's change in tokens over the game against the tokens it holds "
-                "([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)).",
+                "([Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)).",
         recipe=recipe(W.surviving_text(), STATS_FILE,
                       ["Average `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree` and "
                        "`changeVsTokens`, and the same with `R2` appended, over the rows with `phase` = 2 and "

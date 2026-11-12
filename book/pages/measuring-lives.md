@@ -183,7 +183,7 @@ to a survivor drawn with equal chance. In the median settled B1 world of
 ([Where do the tokens go?](b1-lives-and-wealth.md#the-tokens-of-the-dead)).
 Rich and poor have the same chance at every token, so the estate levels the
 world: in ten B1 worlds, the more of it a game scatters, the more the
-[Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) falls, a correlation of −0.78 between
+[Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) falls, a correlation of −0.78 between
 the changes ([What goes with what](measures-atlases-and-assembly.md#a-whole-world-over-time)).
 In B2 worlds of 10,000 tokens the estate is small, about seventy tokens an
 iteration among 3,600 agents ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)).
@@ -377,130 +377,9 @@ lives end by then. In the code, this is `kaplan_meier(lives)` in
 `book_figures.py`, where a life is (first iteration, last iteration, still
 going).
 
-### Why the living are older than the dead
-
-Picture a hospital where most patients go home after a day, and a few stay a
-month. On any day you visit, the long stays fill far more beds than their
-number suggests. A patient who stays thirty days is there on thirty days; one
-who stays a day, on one.
-
-Agents are the same. Suppose half of all agents live 1 iteration and half live
-99. The **average lifetime** is 50. But look at the world at any moment. An
-agent of the second kind is alive at 99 times as many moments as one of the
-first. So 99 in 100 of the agents you see are long-lived ones: the **living
-are a sample weighted by lifetime**.
-
-That is why the living look so old. In the 30 B1 worlds of 100,000 tokens
-(Experiment 10), about half of the agents that live through a game are gone
-within ten iterations. Two thirds are, if the newborns that never do are
-counted too. Yet the median age of the agents alive at the end is 54
-([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)).
-
-In general, take a world in a steady state, where lifetimes *L* occur with
-frequency *p*(*L*) and have mean μ. The agents alive at a random moment have
-lifetimes with frequency
-
-$$
-\frac{L \, p(L)}{\mu} :
-$$
-
-each lifetime's frequency multiplied by its length, and divided by the mean so
-that the frequencies add up to one. So long lives are over-represented in
-proportion to their length, and each such agent is equally likely to be at any
-point of its life. This is the *inspection paradox* of renewal theory.
-
-The B1 worlds of 10,000 tokens are not exactly in a steady state: their births
-slow down for over a thousand iterations. But the effect is the same in kind.
-Those of 100,000 tokens are in one from iteration 500 on
-([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
-
-### The ages of a steady world
-
-The same idea, turned into a formula for the ages of the living. Suppose that
-in every iteration, always, *B* newborns live through their first game.
-Suppose too that every agent's life follows the same survival curve *S*(*L*),
-the share of lives lasting at least *L* iterations. The agents of age *a* alive
-after a game were born *a* iterations earlier, and their lives lasted at least
-*a* + 1 games. There are *B* · *S*(*a* + 1) of them. Summed over all ages, the
-living number *B* · Σ *S*(*L*), and Σ *S*(*L*) over *L* ≥ 1 is the mean
-lifetime μ. So in such a world
-
-$$
-\text{share of the living of age } a = \frac{S(a+1)}{\mu} ,
-$$
-
-and in particular the newborns, of age 0, are a share 1/μ of the living. This
-is the **stationary population** of demography. Its ages follow from the
-lifetimes alone. A world whose living are older than its lifetimes say has had
-more births in the past than now.
-
-Two examples. In the B1 worlds of 100,000 tokens, the lives begun from
-iteration 500 to 1,399 last 41.3 iterations on average. So the newborns should
-be 1/41.3 = 2.4% of the living, and the median age of the living 55. Over
-iterations 500 to 1,499 the worlds had 2.3 to 2.6% newborns, and a median age
-of 55 ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
-
-In B2 every agent lives exactly 100 iterations. So in a steady B2 world, each
-age from 0 to 99 holds one agent in a hundred. Such a world keeps its size only
-if one agent in a hundred has a child in every iteration. B2's worlds in
-Experiment 14 had 1.00 to 1.05 births per hundred agents from iteration 200 to
-1,000 ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age)).
-
-### The risk of dying at each age
-
-The survival curve *S*(*L*) is built from one number per age. An agent
-**reaches** age *a* when its lifetime is at least *a*, and its life **ends
-there** when its lifetime is exactly *a*. Of the agents whose lives reach age
-*a*, the share whose lives end there is
-
-$$
-h(a) = \frac{d(a)}{n(a)} ,
-$$
-
-with *n*(*a*) the lives lasting at least *a* (finished or not) and *d*(*a*)
-the finished lives of exactly *a*. This is the **hazard**, the chance of dying
-at age *a* for an agent that got there. To last at least *L* iterations, a
-life must get past every age before *L*, so
-
-$$
-S(L) = \prod_{a < L} \bigl(1 - h(a)\bigr) .
-$$
-
-If the hazard is the same at every age, an agent's past says nothing about its
-future: lives are **memoryless**. Then *S*(*L*) falls along a straight line
-when *S* is drawn on a logarithmic axis against a plain axis of *L*.
-
-A hazard that falls with age means that those who survive are safer than the
-young. The young die most, as in a population with high infant mortality.
-Either each agent grows safer as it lives, or the fragile die first and leave
-the robust. A hazard that rises with age is ageing in the usual sense.
-
-The worlds show both ends. In the settled B1 worlds of 100,000 tokens the
-hazard falls at every age. It is 21% at age 1, 2.7% at 10 and 1.1% at 100
-([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)). In B2 it is 0 at
-every age below 100, and every agent that reaches 100 dies at it: ageing at
-its sharpest.
-
-### Cohorts
-
-Agents born in the same stretch of iterations are a **cohort**. Following each
-cohort's lives says how life expectancy changes over a world's life. Cohorts
-born late can only be followed to the end of the run. The Kaplan–Meier
-estimate leaves their unfinished lives open, rather than cutting them short.
-
-To compare cohorts on equal terms, each is measured by how many of its first
-100 iterations an agent lives on average. That is the **restricted mean
-lifetime**,
-
-$$
-\sum_{L=1}^{100} S(L) ,
-$$
-
-the area under the survival curve from *L* = 1 to 100. Every cohort born at
-least 100 iterations before the end can be measured by it in full. In the
-median B1 world of 100,000 tokens, an agent born in iterations 1 to 24 lived 5
-of its first 100 iterations. One born from iteration 500 on lived 28 to 31
-([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
+Why the living are older than the dead, the ages of a steady world, the risk
+of dying at each age and cohorts were measured only by studies now in the
+Archive ([Lives and ages](measures-of-the-archived-studies.md#lives-and-ages)).
 
 ### Where it is used (age)
 
@@ -664,6 +543,10 @@ Experiment 24 and in half the worlds of
     fields are never absent from a row of reproduction. Where gifting is off
     they are 0; only the rows of the game leave them empty. The page now says
     both.
+- **12 November 2026.** Moved to [Measures of the archived
+  studies](measures-of-the-archived-studies.md): four sections on age that only
+  pages of the Archive use: why the living are older than the dead, the ages of
+  a steady world, the risk of dying at each age, and cohorts.
 
 ## References
 
@@ -678,6 +561,6 @@ Experiment 24 and in half the worlds of
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Changing the rules](../README.md#changing-the-rules), [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (19)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (20)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

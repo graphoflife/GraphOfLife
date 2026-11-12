@@ -119,7 +119,7 @@ several agents acting together.
   its nearest few, with a few random shortcuts, is both clustered and short.
   It is the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring of [The world: tokens, agents and a network](the-world.md).
 - **Measures of a network** — degree, clustering, distances, bridges, the
-  2-core — are standard (Newman 2003). [Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling),
+  2-core — are standard (Newman 2003). [Degree](measuring-networks.md#an-agents-connections-degree-and-clustering),
   [Clustering](measuring-networks.md#clustering), [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap),
   [Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut) and [Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)
   define each. The bridges are found by depth-first search (Tarjan 1974), the
@@ -158,7 +158,7 @@ several agents acting together.
 
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
   coefficient** (Gini 1912): [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)
-  and [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility).
+  and [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy).
 - **Lifetimes with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
   1958): [Survival curves](measuring-lives.md#survival-curves-kaplanmeier).
 - **Intervals by resampling**: the bootstrap (Efron 1979). **Intervals for

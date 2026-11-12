@@ -965,7 +965,7 @@ ends move out as worlds grow, as a critical system's would?
 > 1. Read frames 2·t + 1 for the ten looks: `tokens`, and every agent's connections counted from `edges`.
 > 2. Left: pool each size's looks; for every x, the agents with x or more divided by all agents, times 1,000.
 > 3. Right: the largest value of each look, and its median over the looks of each world.
-> 4. The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent](statistics.md#fitting-a-power-law-properly), done on the pooled values of the smallest worlds (`book_chapters.noscale.tail_fit`).
+> 4. The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent](measures-of-the-archived-studies.md#fitting-a-power-law-properly), done on the pooled values of the smallest worlds (`book_chapters.noscale.tail_fit`).
 >
 > **To make it again:** `python3 book_figures.py noscale`.
 <!-- /figure -->

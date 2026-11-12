@@ -100,10 +100,10 @@ puts it where it matters: on one neighbour, or two. And a [connection](the-world
 carries no tokens in a game is cut at the game's end ([One iteration, step by
 step](one-iteration.md)). So the seeing worlds kept few connections. The
 worlds that crashed had as few as 1.3 to 1.9 per agent, against 3.2 in B1.
-Only 27–39% of their agents were in the 2-core, the agents on loops or between
+Only 27–39% of their agents were in the [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), the agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") or between
 them, against 54–55%.
 
-A network that is mostly trees is a network of bridges. When one of them is
+A network that is mostly trees is a network of [bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut "A connection that lies on no loop: cut it and the network falls into two pieces."). When one of them is
 cut, everything beyond it is no longer joined to the largest piece. Then the
 cull, which keeps only the largest piece after each phase ([the
 cleanup](one-iteration.md#cleanup)), removes it whole. In one pilot world a
@@ -112,7 +112,7 @@ left 562.
 
 **And what was left was ruled by a few.** In a seeing world, the
 best-connected agent was joined to 15–35% of the others: more than in B1's two
-pilot worlds (9–12%). But B1 can grow such hubs too. In one of the ten B1
+pilot worlds (9–12%). But B1 can grow such [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") too. In one of the ten B1
 worlds of the experiment below, the best-connected agent was joined to 55% of
 the others (the stars of [The largest and the
 smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)).
@@ -488,7 +488,7 @@ agents, because the cull has nothing left to do.
 Mending in a **chain**, the same rule without the link back to the first
 group, keeps the world in one piece just as well, by the same argument. But
 the network it makes is different: its dimension falls to 2.3, and its
-diameter doubles to 38 steps. Every death replaces a star (*u* at the centre,
+[diameter](measuring-networks.md#radius-and-diameter "The longest of the shortest paths between two agents of a world.") doubles to 38 steps. Every death replaces a star (*u* at the centre,
 its groups around it) with a path through the groups. A world in which stars
 keep turning into paths is stretched thin, towards a line. The ring replaces
 the star with a cycle instead: every two groups are at most half the ring
@@ -561,7 +561,7 @@ never touched.
 ranks its candidates by what it sees of them. Whatever it favours, agents that
 already have many links are offered as candidates more often, because they are
 the neighbours of more agents. That is preferential attachment, and it grows
-hubs ([Preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel)). In pilots where
+hubs ([Preferential attachment](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel)). In pilots where
 the brains chose a newborn's two extra links, the best-connected agent was
 joined to 30% of the world.
 
@@ -810,7 +810,7 @@ to the child's brain, which is the parent's lineage. If it loses, the lineage
 has lost a token. It is a cheap attack, and evolution found it.
 
 Mending made it worse. Every starved child's neighbours were joined up, so
-degrees climbed to 11–14 links. Every agent's stake was split over more
+[degrees](measuring-networks.md#degree "The number of an agent's connections: how many neighbours it has.") climbed to 11–14 links. Every agent's stake was split over more
 neighbours, and more of them starved. Letting a newborn keep everything at
 home in its first game only delayed the missile by a game.
 
@@ -1215,7 +1215,7 @@ without drawing any line ([The diversity score](measuring-health.md#the-diversit
 tokens, links and ages, the agents are sorted into doubling classes: 1,
 2–3, 4–7, 8–15, and so on. The **spread** is the effective number of
 classes they fill
-([Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)).
+([Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds)).
 It is 1 if every agent is in one class, and *k* if they are spread evenly
 over *k*. Agents holding one to three tokens fill at most two, the classes 1
 and 2–3. Genotypes are counted as an effective number per agent: 1 when
@@ -1325,7 +1325,7 @@ unhealthy is not that agents hold few tokens, but that they hold them
 **evenly**: almost everyone the same few. The share at three tokens or
 fewer only stood in for that, and measured directly it stands in badly.
 Every world read so far now also carries the
-[Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) of its agents' tokens, 0 when all
+[Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) of its agents' tokens, 0 when all
 hold the same and near 1 when one agent holds nearly all. It also carries
 the share of all tokens that its richest tenth hold.
 
@@ -3375,7 +3375,7 @@ many poor agents. It was a world whose agents hold their tokens too evenly:
 almost everyone the same few. The share at three tokens or fewer had only
 stood in for that.
 
-The [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) of the agents' tokens measures
+The [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) of the agents' tokens measures
 it directly. It is 0 when every agent holds as many tokens, and near 1 when
 one agent holds nearly all. Read with the Gini instead, the verdict on the
 five that held turns round:
@@ -4783,6 +4783,6 @@ iteration's frame.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Changing the rules](../README.md#changing-the-rules), [Does evolution keep going?](../README.md#does-evolution-keep-going), [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (31)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What the brains are like](what-the-brains-are-like.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
+> [!info]- Pages that link here (32)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [What the brains are like](what-the-brains-are-like.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->
