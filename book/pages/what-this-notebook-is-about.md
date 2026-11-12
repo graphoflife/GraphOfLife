@@ -288,6 +288,6 @@ formula works.
 
 ← [Welcome](../README.md) · [Start here](../README.md#start-here) · [How this notebook is written](how-this-notebook-is-written.md) →
 
-> [!info]- Pages that link here (11)
-> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [The rules in detail](rules-in-detail.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [!info]- Pages that link here (13)
+> [Welcome](../README.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The rules in detail](rules-in-detail.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->
