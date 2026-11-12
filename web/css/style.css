@@ -1829,6 +1829,8 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 .book-toc-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .book-toc-filters select { min-width: 0; padding: 4px 6px; font-size: 12px; }
 .book-toc-date { font-family: var(--font); color: var(--muted); font-size: 11px; }
+/* The experiments a page reports, by the names the lab gives them (E45), under its title. */
+.book-toc-exp { font-family: var(--font); color: var(--muted); font-size: 11px; letter-spacing: 0.02em; }
 .book-toc-empty { color: var(--muted); margin: 4px 8px; }
 .book-part { margin-bottom: 18px; }
 .book-part h3 { margin: 0 0 6px; }
@@ -1983,6 +1985,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   line-height: 1.55;
 }
 .book-experiment p { margin: 0 0 8px; }
+.book-exp-name { font-weight: 600; color: var(--text-strong); letter-spacing: 0.02em; }
 .book-exp-head {
   display: flex;
   flex-wrap: wrap;

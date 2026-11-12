@@ -1507,6 +1507,14 @@ function test_the_notebook_lists_its_pages_as_the_reader_asks() {
     'A to Z read the articles: ' + ids(Book.listing({ ...view, sort: 'title' })));
   assert(ids(Book.listing({ ...view, query: 'WEALTH world' })).join() === 'What the worlds do: gini');
   assert(Book.listing({ ...view, query: 'nothing like this' }).length === 0);
+  // A page is found by its experiments too, as the lab names them or by number (the author, 2026-11-12).
+  Book.index.pages[1].experiments = ['E45', 'E44'];
+  for (const query of ['E45', 'e44', '45', 'experiment 45']) {
+    assert(ids(Book.listing({ ...view, query })).join() === 'What the worlds do: flow',
+      `looking for ${query} did not find its page: ${ids(Book.listing({ ...view, query }))}`);
+  }
+  assert(Book.listing({ ...view, query: 'E46' }).length === 0, 'a page was found by an experiment it does not report');
+  delete Book.index.pages[1].experiments;
   assert(JSON.stringify(Book.chosen({ sort: 'title', topic: 'gone', kind: 'term', status: 'x', query: 'gini' }))
     === JSON.stringify({ sort: 'title', topic: '', kind: 'term', status: '', query: 'gini' }));
   assert(Book.chosen({ sort: 'topic' }).sort === 'part', 'an order by topic kept from before parts was kept');
@@ -1561,6 +1569,17 @@ function test_a_run_that_died_out_says_so() {
   assert(Book.liveHtml('E02', { ...status, workers: 1 }, lab).includes('on 1 worker from'),
     'a one-worker experiment was estimated on the lab\'s workers');
   assert(html.includes('book-run-running') && html.includes('1 of 3000'), 'a living run lost its progress');
+  assert(html.includes('<span class="book-exp-name">E02</span>'), 'a panel did not say which experiment it is');
+}
+
+function test_a_page_names_its_experiments_as_the_lab_does() {
+  // Under its title in the contents, a run of three or more in a row as one.
+  const Book = bookWith();
+  assert(Book.experimentIds(['E45']) === 'E45');
+  assert(Book.experimentIds(['E45', 'E44']) === 'E45 · E44', Book.experimentIds(['E45', 'E44']));
+  assert(Book.experimentIds(['E40', 'E41', 'E42', 'E43']) === 'E40–E43', Book.experimentIds(['E40', 'E41', 'E42', 'E43']));
+  const b2 = ['E13', 'E14', 'E15', 'E17', 'E18', 'E19', 'E20', 'E21', 'E22', 'E24', 'E31', 'E32', 'E36', 'E37'];
+  assert(Book.experimentIds(b2) === 'E13–E15 · E17–E22 · E24 · E31 · E32 · E36 · E37', Book.experimentIds(b2));
 }
 
 function test_a_plan_the_lab_cannot_read_says_why() {

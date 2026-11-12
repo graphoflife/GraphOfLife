@@ -440,6 +440,24 @@ const Book = {
    * Where a page belongs, above its title: its topic, which opens the topic's list
    * in the contents, and the experiments it reports, or else what kind of page it is.
    */
+  /** A page's experiments as the lab names them, three or more in a row as one: E40–E43 · E45. */
+  experimentIds(names) {
+    const out = [];
+    for (let i = 0; i < names.length;) {
+      let j = i;
+      while (j + 1 < names.length && Number(names[j + 1].slice(1)) === Number(names[j].slice(1)) + 1) j++;
+      out.push(...(j - i >= 2 ? [`${names[i]}–${names[j]}`] : names.slice(i, j + 1)));
+      i = j + 1;
+    }
+    return out.join(' · ');
+  },
+
+  /** What looking for a page reads: its title, its summary, and its experiments by name and by number. */
+  searchText(page) {
+    const experiments = (page.experiments || []).map(name => `${name} experiment ${Number(name.slice(1))}`);
+    return [page.title, page.summary || '', ...experiments].join(' ').toLowerCase();
+  },
+
   kicker(chapter) {
     const topic = this.topic((chapter.topics || [])[0]);
     if (!topic) return '';
@@ -521,7 +539,8 @@ const Book = {
    * order; the part's id third) or by kind, in groups; by the day a page was added
    * or by title, in one list without a heading. A page shows if it belongs to the
    * part asked for, or any of its topics is the topic asked for, its kind and
-   * status are, and every word looked for is in its title or summary.
+   * status are, and every word looked for is in its title, its summary or the
+   * names of its experiments (searchText).
    */
   listing(view = this.view) {
     const words = view.query.toLowerCase().split(/\s+/).filter(Boolean);
@@ -529,7 +548,7 @@ const Book = {
       ? this.partOf(p)?.id === view.topic.slice(5) : p.topics.includes(view.topic));
     const shown = this.pages().filter(p => inScope(p)
       && (!view.kind || p.kind === view.kind) && (!view.status || p.status === view.status)
-      && words.every(w => `${p.title} ${p.summary || ''}`.toLowerCase().includes(w)));
+      && words.every(w => this.searchText(p).includes(w)));
     const grouped = (groups, inGroup) => groups.map(([key, heading]) => [heading, shown.filter(p => inGroup(p, key))])
       .filter(([, list]) => list.length);
     const order = new Map(this.pages().map((p, i) => [p.id, i]));
@@ -563,6 +582,8 @@ const Book = {
         part ? ` style="--part: ${Markdown.escape(part.colour)}"` : ''}>`
         + `<span class="book-toc-title"><span class="book-mark book-mark-${mark}" title="${marks[mark]}"></span>${
           Markdown.inline(c.title)}</span>`
+        + ((c.experiments || []).length ? `<span class="book-toc-exp">${
+          Markdown.escape(this.experimentIds(c.experiments))}</span>` : '')
         + (dated && c.added ? `<span class="book-toc-date">${Markdown.escape(c.added)}</span>` : '')
         + (state.label ? `<span class="book-chip book-chip-${state.state}">${state.label}</span>` : '')
         + '</a>';
@@ -770,7 +791,8 @@ const Book = {
     const live = el.querySelector('.book-live');
     const status = this.lab && this.lab.experiments[name];
     if (!this.lab || !status) {
-      live.innerHTML = this.lab ? '' : '<p class="book-note">Experiments run on a machine with '
+      live.innerHTML = this.lab ? '' : `<p class="book-note"><span class="book-exp-name">${Markdown.escape(name)}</span> `
+        + 'Experiments run on a machine with '
         + '<code>gol_server.py</code>: open this page there to run one, see how far it has got, '
         + 'or pause it.</p>';
       return;
@@ -795,8 +817,9 @@ const Book = {
     const state = this.describe({ ...chapter, experiments: [name] }, lab);
     // A plan the lab cannot carry out, or one withdrawn, has no runs and no estimate:
     // only its reason.
+    const named = `<span class="book-exp-name">${Markdown.escape(name)}</span>`;
     if (status.state === 'invalid' || status.state === 'withdrawn') {
-      return `<div class="book-exp-head"><span class="book-chip book-chip-${state.state}">${state.label}</span></div>`
+      return `<div class="book-exp-head">${named}<span class="book-chip book-chip-${state.state}">${state.label}</span></div>`
         + `<p class="book-reason">${Markdown.escape(status.reason || 'the lab cannot read this plan')}</p>`;
     }
     const share = status.total ? status.done / status.total : 0;
@@ -835,7 +858,7 @@ const Book = {
         opens ? ' · click to open' : ''}">`
         + `<span style="width:${(100 * done).toFixed(1)}%"></span></span>`;
     }).join('');
-    return `<div class="book-exp-head"><span class="book-chip book-chip-${state.state}">${state.label}</span>`
+    return `<div class="book-exp-head">${named}<span class="book-chip book-chip-${state.state}">${state.label}</span>`
       + `<span class="book-progress"><span style="width:${(100 * share).toFixed(1)}%"></span></span>`
       + `${left}${button}<label class="book-workers">Workers <select data-workers>${workers}</select></label></div>`
       + reason + blocked + estimate + engines
