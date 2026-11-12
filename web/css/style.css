@@ -3116,6 +3116,41 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
 }
 .home-caret.is-done::after { opacity: 0; }
 
+/* ---- over the eyes ---- */
+
+/* Over the eyes the web runs on through the words instead of parting round
+   them, so the words carry their own shade: soft shadows in the halo ink,
+   stacked from tight to wide, each letter in a pool of dark (of white, on
+   Paper) that the threads and eyes pass under. Shadows of the letters rather
+   than a blurred box, which would be redone with the canvas beneath it. */
+.home-stage.backdrop-eyes .home-title {
+  text-shadow:
+    0 0 2px rgba(var(--halo-rgb), 0.9),
+    0 0 6px rgba(var(--halo-rgb), 0.85),
+    0 0 14px rgba(var(--halo-rgb), 0.8),
+    0 0 30px rgba(var(--halo-rgb), 0.7),
+    0 0 60px rgba(var(--halo-rgb), 0.55);
+}
+/* The subtitle's letters are too small for their own shadows to hide an eye
+   behind them, so the line also lies on a soft oval of the same ink. */
+.home-stage.backdrop-eyes .home-subtitle {
+  position: relative;
+  text-shadow:
+    0 0 2px rgba(var(--halo-rgb), 0.95),
+    0 0 5px rgba(var(--halo-rgb), 0.9),
+    0 0 12px rgba(var(--halo-rgb), 0.85),
+    0 0 26px rgba(var(--halo-rgb), 0.7);
+}
+.home-stage.backdrop-eyes .home-subtitle::before {
+  content: '';
+  position: absolute;
+  inset: -120% -10%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(var(--halo-rgb), 0.78), rgba(var(--halo-rgb), 0.5) 55%,
+                              rgba(var(--halo-rgb), 0));
+  pointer-events: none;
+}
+
 /* ---- the ways in ---- */
 
 .home-doors {
