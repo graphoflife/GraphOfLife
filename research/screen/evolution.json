@@ -1,19 +1,9 @@
 {
  "made": "2026-11-12",
  "provisional": true,
- "complete": 32,
+ "complete": 42,
  "of": 82,
  "missing": [
-  "B1-30000-63827e-s3044",
-  "B1-30000-10c9f1-s3047",
-  "B1-30000-43985b-s3056",
-  "B1-30000-6f6c09-s4005",
-  "B1-30000-36d076-s3040",
-  "B1-30000-c18a1f-s3005",
-  "B1-30000-2ec87a-s3059",
-  "B1-30000-801b34-s3085",
-  "B1-30000-0d7e0c-s3083",
-  "B1-30000-965f1e-s3041",
   "B1-30000-66c764-s3076",
   "B1-30000-f05874-s3024",
   "B1-30000-38aee9-s3057",
@@ -85,51 +75,51 @@
  "top": 10,
  "bests": {
   "product": [
-   "B1-30000-ebe08c-s3050",
+   "B1-30000-10c9f1-s3047",
    "B1-30000-26a341-s3093",
-   "B1-30000-d6955f-s3026",
    "B1-30000-dd27b6-s3078",
+   "B1-30000-ebe08c-s3050",
+   "B1-30000-d6955f-s3026",
    "B1-30000-d9254e-s3054",
    "B1-30000-def151-s3062",
-   "B1-30000-b0f6e3-s3023",
+   "B1-30000-6f6c09-s4005",
    "B1-30000-4108dd-s3058",
-   "B1-30000-00e3c8-s3061",
-   "B1-30000-2bac4d-s4004"
+   "B1-30000-b0f6e3-s3023"
   ],
   "sum": [
+   "B1-30000-10c9f1-s3047",
    "B1-30000-ebe08c-s3050",
-   "B1-30000-def151-s3062",
-   "B1-30000-26a341-s3093",
    "B1-30000-dd27b6-s3078",
+   "B1-30000-63827e-s3044",
+   "B1-30000-26a341-s3093",
    "B1-30000-d6955f-s3026",
-   "B1-30000-d9254e-s3054",
-   "B1-30000-00e3c8-s3061",
-   "B1-30000-42d88d-s3091",
-   "B1-30000-b0f6e3-s3023",
-   "B1-30000-2bac4d-s4004"
+   "B1-30000-def151-s3062",
+   "B1-30000-6f6c09-s4005",
+   "B1-30000-36d076-s3040",
+   "B1-30000-d9254e-s3054"
   ],
   "worst": [
+   "B1-30000-10c9f1-s3047",
    "B1-30000-26a341-s3093",
    "B1-30000-b0f6e3-s3023",
+   "B1-30000-dd27b6-s3078",
+   "B1-30000-d9254e-s3054",
+   "B1-30000-43985b-s3056",
    "B1-30000-4108dd-s3058",
    "B1-30000-d6955f-s3026",
-   "B1-30000-d9254e-s3054",
-   "B1-30000-dd27b6-s3078",
    "B1-30000-ebe08c-s3050",
-   "B1-30000-b5a76a-s3051",
-   "B1-30000-4aff7d-s3021",
-   "B1-30000-00e3c8-s3061"
+   "B1-30000-6f6c09-s4005"
   ]
  },
  "union": [
-  "B1-30000-00e3c8-s3061",
+  "B1-30000-10c9f1-s3047",
   "B1-30000-26a341-s3093",
-  "B1-30000-2bac4d-s4004",
+  "B1-30000-36d076-s3040",
   "B1-30000-4108dd-s3058",
-  "B1-30000-42d88d-s3091",
-  "B1-30000-4aff7d-s3021",
+  "B1-30000-43985b-s3056",
+  "B1-30000-63827e-s3044",
+  "B1-30000-6f6c09-s4005",
   "B1-30000-b0f6e3-s3023",
-  "B1-30000-b5a76a-s3051",
   "B1-30000-d6955f-s3026",
   "B1-30000-d9254e-s3054",
   "B1-30000-dd27b6-s3078",
@@ -138,88 +128,88 @@
  ],
  "worlds": [
   {
-   "id": "B1-30000-ebe08c-s3050",
+   "id": "B1-30000-10c9f1-s3047",
    "round": "E40",
-   "seed": 3050,
-   "conquest_share": 0.6377032320478828,
+   "seed": 3047,
+   "conquest_share": 0.6628700384679417,
    "z": {
-    "shadow": 9.630535050568165,
-    "novelty": -1.4451773965169414,
-    "selection": 37.22195255590434,
-    "heredity": 19.85032598708897
+    "shadow": 7.775374921554552,
+    "novelty": -2.774363563657705,
+    "selection": 70.83042498690587,
+    "heredity": 21.519637409260184
    },
    "values": {
-    "shadow": 9.630535050568165,
-    "novelty": -0.04513125804514842,
-    "selection": 0.12927962443710292,
-    "heredity": 0.9447193163287648
+    "shadow": 7.775374921554552,
+    "novelty": -0.07866261203654634,
+    "selection": 0.1490137508793307,
+    "heredity": 0.9677874644651707
    },
    "beside": {
-    "birth_share": 0.3622967679521171,
-    "conquests_per_agent": 0.7994563209973619,
-    "conquests_per_agent_2000": 0.8211124033167269,
-    "births_per_agent": 0.430606288682121,
-    "conquests_per_birth": 1.7601681506917686,
-    "generations": 2900.127276623098,
-    "births_on_path": 640.6991643454039,
-    "conquests_on_path": 2259.4281122776943,
-    "generations_births_only": 925.9820012856225,
-    "common_ancestor_age": 76.0,
-    "common_ancestor_age_shadow": null,
+    "birth_share": 0.3371299615320583,
+    "conquests_per_agent": 0.845469740227703,
+    "conquests_per_agent_2000": 0.8757419889410274,
+    "births_per_agent": 0.4806941740686472,
+    "conquests_per_birth": 1.9662151517343203,
+    "generations": 3694.854998403066,
+    "births_on_path": 1167.3510060683489,
+    "conquests_on_path": 2527.503992334717,
+    "generations_births_only": 662.31906739061,
+    "common_ancestor_age": 89.0,
+    "common_ancestor_age_shadow": 2477.5,
     "coalescence_p": 0.009900990099009901,
-    "effective_population": 48.073939134162025,
-    "effective_population_shadow": 2635.90857449089,
-    "effective_population_births_only": 5.99100064281123,
-    "heredity_births_only": 0.465118883567625,
-    "heredity_birth_pairs": 1.0028675248024421,
-    "heredity_conquest_pairs": 0.927511838658778,
-    "births_only_pairs_still_brain_pairs": 0.03736089030206677,
-    "novelty_above_noise": 0.06278671891186545,
-    "novelty_null_above_noise": 0.10791797695701387,
-    "novelty_births_only": 0.07820118953049603,
+    "effective_population": 56.94568690095847,
+    "effective_population_shadow": 1415.6503194888178,
+    "effective_population_births_only": 8.659533695305015,
+    "heredity_births_only": 0.6084484025524962,
+    "heredity_birth_pairs": 0.9109286610679459,
+    "heredity_conquest_pairs": 0.9722646465209941,
+    "births_only_pairs_still_brain_pairs": 0.01886051902621911,
+    "novelty_above_noise": 0.06505358475566966,
+    "novelty_null_above_noise": 0.143716196792216,
+    "novelty_births_only": 0.07642616028865526,
     "shadow_z": {
-     "persist": 7.078555606415228,
-     "top": 15.481220095093548,
-     "life": 17.17412780485263,
-     "active_share": 6.331829450195716,
-     "active_count": -6.953172351648718,
-     "top_activity": 29.4266808185052
+     "persist": 6.548153458228746,
+     "top": 11.308568631179625,
+     "life": 18.292507185578,
+     "active_share": 5.469402675255285,
+     "active_count": -7.345867994690514,
+     "top_activity": 20.067248514544485
     },
-    "selection_visible": 52.078059458165626,
-    "selection_clear": 42,
+    "selection_visible": 111.97220466366524,
+    "selection_clear": 46,
     "selection_cells": 48,
-    "selection_follows": -0.014940098661028892,
-    "selection_same_sign": 0.45454545454545453
+    "selection_follows": 0.07258632840028188,
+    "selection_same_sign": 0.5681818181818182
    },
    "health": {
-    "product": 0.36181873951375393,
-    "sum": 0.45140536742883336,
-    "worst": 0.06453051978206319,
+    "product": 0.48242666204253926,
+    "sum": 0.5475874474317108,
+    "worst": 0.15425744683748194,
     "ranks": {
-     "product": 56,
-     "sum": 51,
-     "worst": 70
+     "product": 21,
+     "sum": 21,
+     "worst": 38
     }
    },
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 1.0,
-    "novelty": 0.71875,
-    "selection": 0.96875,
-    "heredity": 0.375
+    "shadow": 0.7142857142857143,
+    "novelty": 0.5714285714285714,
+    "selection": 0.9761904761904762,
+    "heredity": 0.6428571428571429
    },
    "orders": {
-    "product": 0.7148340153876596,
-    "sum": 0.765625,
-    "worst": 0.375
+    "product": 0.7114112667900375,
+    "sum": 0.7261904761904762,
+    "worst": 0.5714285714285714
    },
-   "score": 0.7148340153876596,
+   "score": 0.7114112667900375,
    "rank": 1,
    "ranks": {
     "product": 1,
     "sum": 1,
-    "worst": 7
+    "worst": 1
    }
   },
   {
@@ -289,107 +279,22 @@
    "shortlisted": true,
    "out": null,
    "shares": {
-    "shadow": 0.90625,
-    "novelty": 0.53125,
-    "selection": 0.625,
-    "heredity": 0.8125
+    "shadow": 0.7619047619047619,
+    "novelty": 0.47619047619047616,
+    "selection": 0.6428571428571429,
+    "heredity": 0.8333333333333334
    },
    "orders": {
-    "product": 0.7031736489288203,
-    "sum": 0.71875,
-    "worst": 0.53125
+    "product": 0.663977947056531,
+    "sum": 0.6785714285714286,
+    "worst": 0.47619047619047616
    },
-   "score": 0.7031736489288203,
+   "score": 0.663977947056531,
    "rank": 2,
    "ranks": {
     "product": 2,
-    "sum": 3,
-    "worst": 1
-   }
-  },
-  {
-   "id": "B1-30000-d6955f-s3026",
-   "round": "E40",
-   "seed": 3026,
-   "conquest_share": 0.4979230849746175,
-   "z": {
-    "shadow": 4.351076114161433,
-    "novelty": -2.124730312101271,
-    "selection": 35.860323751200156,
-    "heredity": 42.67744254445481
-   },
-   "values": {
-    "shadow": 4.351076114161433,
-    "novelty": -0.05605269750703312,
-    "selection": 0.10123615645630048,
-    "heredity": 1.0
-   },
-   "beside": {
-    "birth_share": 0.5020769150253824,
-    "conquests_per_agent": 0.9149767715553971,
-    "conquests_per_agent_2000": 0.9425495708124828,
-    "births_per_agent": 0.9204698314335062,
-    "conquests_per_birth": 0.9917267057567166,
-    "generations": 5232.002199736032,
-    "births_on_path": 2731.108666959965,
-    "conquests_on_path": 2500.893532776067,
-    "generations_births_only": 2158.648042234932,
-    "common_ancestor_age": 205.0,
-    "common_ancestor_age_shadow": 1725.5,
-    "coalescence_p": 0.009900990099009901,
-    "effective_population": 180.5805457746479,
-    "effective_population_shadow": 1279.0972711267605,
-    "effective_population_births_only": 78.32402111746592,
-    "heredity_births_only": 0.29851307839943086,
-    "heredity_birth_pairs": 1.0,
-    "heredity_conquest_pairs": 1.0,
-    "births_only_pairs_still_brain_pairs": 0.02014264364128606,
-    "novelty_above_noise": 0.23085004747923987,
-    "novelty_null_above_noise": 0.286902744986273,
-    "novelty_births_only": 0.2579966666666667,
-    "shadow_z": {
-     "persist": 4.444447285565195,
-     "top": 6.709874243359569,
-     "life": 6.399131644811749,
-     "active_share": 1.8989068135595353,
-     "active_count": -4.472410883884701,
-     "top_activity": 10.533579877663547
-    },
-    "selection_visible": 54.62415673555204,
-    "selection_clear": 47,
-    "selection_cells": 48,
-    "selection_follows": -0.03199436222692036,
-    "selection_same_sign": 0.4318181818181818
-   },
-   "health": {
-    "product": 0.4768167522436873,
-    "sum": 0.5128727705601598,
-    "worst": 0.24319246405145778,
-    "ranks": {
-     "product": 23,
-     "sum": 36,
-     "worst": 17
-    }
-   },
-   "shortlisted": false,
-   "out": null,
-   "shares": {
-    "shadow": 0.46875,
-    "novelty": 0.65625,
-    "selection": 0.75,
-    "heredity": 0.953125
-   },
-   "orders": {
-    "product": 0.6847868790506475,
-    "sum": 0.70703125,
-    "worst": 0.46875
-   },
-   "score": 0.6847868790506475,
-   "rank": 3,
-   "ranks": {
-    "product": 3,
     "sum": 5,
-    "worst": 4
+    "worst": 2
    }
   },
   {
@@ -459,22 +364,192 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.65625,
-    "novelty": 0.9375,
-    "selection": 0.40625,
-    "heredity": 0.875
+    "shadow": 0.5476190476190477,
+    "novelty": 0.9285714285714286,
+    "selection": 0.42857142857142855,
+    "heredity": 0.8809523809523809
    },
    "orders": {
-    "product": 0.6838494547053601,
-    "sum": 0.71875,
-    "worst": 0.40625
+    "product": 0.6619380978917935,
+    "sum": 0.6964285714285714,
+    "worst": 0.42857142857142855
    },
-   "score": 0.6838494547053601,
+   "score": 0.6619380978917935,
+   "rank": 3,
+   "ranks": {
+    "product": 3,
+    "sum": 3,
+    "worst": 4
+   }
+  },
+  {
+   "id": "B1-30000-ebe08c-s3050",
+   "round": "E40",
+   "seed": 3050,
+   "conquest_share": 0.6377032320478828,
+   "z": {
+    "shadow": 9.630535050568165,
+    "novelty": -1.4451773965169414,
+    "selection": 37.22195255590434,
+    "heredity": 19.85032598708897
+   },
+   "values": {
+    "shadow": 9.630535050568165,
+    "novelty": -0.04513125804514842,
+    "selection": 0.12927962443710292,
+    "heredity": 0.9447193163287648
+   },
+   "beside": {
+    "birth_share": 0.3622967679521171,
+    "conquests_per_agent": 0.7994563209973619,
+    "conquests_per_agent_2000": 0.8211124033167269,
+    "births_per_agent": 0.430606288682121,
+    "conquests_per_birth": 1.7601681506917686,
+    "generations": 2900.127276623098,
+    "births_on_path": 640.6991643454039,
+    "conquests_on_path": 2259.4281122776943,
+    "generations_births_only": 925.9820012856225,
+    "common_ancestor_age": 76.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 48.073939134162025,
+    "effective_population_shadow": 2635.90857449089,
+    "effective_population_births_only": 5.99100064281123,
+    "heredity_births_only": 0.465118883567625,
+    "heredity_birth_pairs": 1.0028675248024421,
+    "heredity_conquest_pairs": 0.927511838658778,
+    "births_only_pairs_still_brain_pairs": 0.03736089030206677,
+    "novelty_above_noise": 0.06278671891186545,
+    "novelty_null_above_noise": 0.10791797695701387,
+    "novelty_births_only": 0.07820118953049603,
+    "shadow_z": {
+     "persist": 7.078555606415228,
+     "top": 15.481220095093548,
+     "life": 17.17412780485263,
+     "active_share": 6.331829450195716,
+     "active_count": -6.953172351648718,
+     "top_activity": 29.4266808185052
+    },
+    "selection_visible": 52.078059458165626,
+    "selection_clear": 42,
+    "selection_cells": 48,
+    "selection_follows": -0.014940098661028892,
+    "selection_same_sign": 0.45454545454545453
+   },
+   "health": {
+    "product": 0.36181873951375393,
+    "sum": 0.45140536742883336,
+    "worst": 0.06453051978206319,
+    "ranks": {
+     "product": 56,
+     "sum": 51,
+     "worst": 70
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.8333333333333334,
+    "novelty": 0.7142857142857143,
+    "selection": 0.9285714285714286,
+    "heredity": 0.3333333333333333
+   },
+   "orders": {
+    "product": 0.6551582211176884,
+    "sum": 0.7023809523809524,
+    "worst": 0.3333333333333333
+   },
+   "score": 0.6551582211176884,
    "rank": 4,
    "ranks": {
     "product": 4,
-    "sum": 4,
-    "worst": 6
+    "sum": 2,
+    "worst": 9
+   }
+  },
+  {
+   "id": "B1-30000-d6955f-s3026",
+   "round": "E40",
+   "seed": 3026,
+   "conquest_share": 0.4979230849746175,
+   "z": {
+    "shadow": 4.351076114161433,
+    "novelty": -2.124730312101271,
+    "selection": 35.860323751200156,
+    "heredity": 42.67744254445481
+   },
+   "values": {
+    "shadow": 4.351076114161433,
+    "novelty": -0.05605269750703312,
+    "selection": 0.10123615645630048,
+    "heredity": 1.0
+   },
+   "beside": {
+    "birth_share": 0.5020769150253824,
+    "conquests_per_agent": 0.9149767715553971,
+    "conquests_per_agent_2000": 0.9425495708124828,
+    "births_per_agent": 0.9204698314335062,
+    "conquests_per_birth": 0.9917267057567166,
+    "generations": 5232.002199736032,
+    "births_on_path": 2731.108666959965,
+    "conquests_on_path": 2500.893532776067,
+    "generations_births_only": 2158.648042234932,
+    "common_ancestor_age": 205.0,
+    "common_ancestor_age_shadow": 1725.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 180.5805457746479,
+    "effective_population_shadow": 1279.0972711267605,
+    "effective_population_births_only": 78.32402111746592,
+    "heredity_births_only": 0.29851307839943086,
+    "heredity_birth_pairs": 1.0,
+    "heredity_conquest_pairs": 1.0,
+    "births_only_pairs_still_brain_pairs": 0.02014264364128606,
+    "novelty_above_noise": 0.23085004747923987,
+    "novelty_null_above_noise": 0.286902744986273,
+    "novelty_births_only": 0.2579966666666667,
+    "shadow_z": {
+     "persist": 4.444447285565195,
+     "top": 6.709874243359569,
+     "life": 6.399131644811749,
+     "active_share": 1.8989068135595353,
+     "active_count": -4.472410883884701,
+     "top_activity": 10.533579877663547
+    },
+    "selection_visible": 54.62415673555204,
+    "selection_clear": 47,
+    "selection_cells": 48,
+    "selection_follows": -0.03199436222692036,
+    "selection_same_sign": 0.4318181818181818
+   },
+   "health": {
+    "product": 0.4768167522436873,
+    "sum": 0.5128727705601598,
+    "worst": 0.24319246405145778,
+    "ranks": {
+     "product": 23,
+     "sum": 36,
+     "worst": 17
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.35714285714285715,
+    "novelty": 0.6666666666666666,
+    "selection": 0.7380952380952381,
+    "heredity": 0.9523809523809523
+   },
+   "orders": {
+    "product": 0.6396147251737991,
+    "sum": 0.6785714285714286,
+    "worst": 0.35714285714285715
+   },
+   "score": 0.6396147251737991,
+   "rank": 5,
+   "ranks": {
+    "product": 5,
+    "sum": 6,
+    "worst": 8
    }
   },
   {
@@ -544,21 +619,21 @@
    "shortlisted": true,
    "out": null,
    "shares": {
-    "shadow": 0.75,
-    "novelty": 0.46875,
-    "selection": 0.78125,
-    "heredity": 0.6875
+    "shadow": 0.6190476190476191,
+    "novelty": 0.42857142857142855,
+    "selection": 0.7619047619047619,
+    "heredity": 0.7142857142857143
    },
    "orders": {
-    "product": 0.6591986651255155,
-    "sum": 0.671875,
-    "worst": 0.46875
+    "product": 0.6164246271190685,
+    "sum": 0.6309523809523809,
+    "worst": 0.42857142857142855
    },
-   "score": 0.6591986651255155,
-   "rank": 5,
+   "score": 0.6164246271190685,
+   "rank": 6,
    "ranks": {
-    "product": 5,
-    "sum": 6,
+    "product": 6,
+    "sum": 10,
     "worst": 5
    }
   },
@@ -629,107 +704,107 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.78125,
-    "novelty": 0.96875,
-    "selection": 0.875,
-    "heredity": 0.28125
+    "shadow": 0.6428571428571429,
+    "novelty": 0.9523809523809523,
+    "selection": 0.8571428571428571,
+    "heredity": 0.2619047619047619
    },
    "orders": {
-    "product": 0.6569398129594954,
-    "sum": 0.7265625,
-    "worst": 0.28125
+    "product": 0.6088782279077657,
+    "sum": 0.6785714285714286,
+    "worst": 0.2619047619047619
    },
-   "score": 0.6569398129594954,
-   "rank": 6,
-   "ranks": {
-    "product": 6,
-    "sum": 2,
-    "worst": 11
-   }
-  },
-  {
-   "id": "B1-30000-b0f6e3-s3023",
-   "round": "E40",
-   "seed": 3023,
-   "conquest_share": 0.49257029257878826,
-   "z": {
-    "shadow": 4.854564537017895,
-    "novelty": -0.9738758445663118,
-    "selection": 27.96512874303631,
-    "heredity": 19.14515494179379
-   },
-   "values": {
-    "shadow": 4.854564537017895,
-    "novelty": -0.018023704579793062,
-    "selection": 0.07829607385170773,
-    "heredity": 0.956083457597587
-   },
-   "beside": {
-    "birth_share": 0.5074297074212117,
-    "conquests_per_agent": 0.852014351613611,
-    "conquests_per_agent_2000": 0.8337595724756074,
-    "births_per_agent": 0.86432715662611,
-    "conquests_per_birth": 0.9707163088303601,
-    "generations": 3874.5251330573624,
-    "births_on_path": 1340.2655233589592,
-    "conquests_on_path": 2534.2596096984034,
-    "generations_births_only": 954.7072738024838,
-    "common_ancestor_age": 135.0,
-    "common_ancestor_age_shadow": 1978.5,
-    "coalescence_p": 0.009900990099009901,
-    "effective_population": 99.32130177514792,
-    "effective_population_shadow": 1079.8414201183432,
-    "effective_population_births_only": 22.353636901241885,
-    "heredity_births_only": 0.3360719778546342,
-    "heredity_birth_pairs": 0.8776255215037616,
-    "heredity_conquest_pairs": 0.9647768630648881,
-    "births_only_pairs_still_brain_pairs": 0.04113950437479849,
-    "novelty_above_noise": 0.08634480687108131,
-    "novelty_null_above_noise": 0.10436851145087438,
-    "novelty_births_only": 0.06131996287415198,
-    "shadow_z": {
-     "persist": 4.571807652944679,
-     "top": 6.941537494249647,
-     "life": 11.347053582464072,
-     "active_share": 3.05034846385936,
-     "active_count": -4.7654863619617025,
-     "top_activity": 10.596296615396716
-    },
-    "selection_visible": 61.282977084443665,
-    "selection_clear": 47,
-    "selection_cells": 48,
-    "selection_follows": -0.13389711064129667,
-    "selection_same_sign": 0.5227272727272727
-   },
-   "health": {
-    "product": 0.5149063852998067,
-    "sum": 0.5372168833037351,
-    "worst": 0.35365853658536583,
-    "ranks": {
-     "product": 12,
-     "sum": 28,
-     "worst": 6
-    }
-   },
-   "shortlisted": true,
-   "out": null,
-   "shares": {
-    "shadow": 0.5625,
-    "novelty": 0.875,
-    "selection": 0.5,
-    "heredity": 0.5
-   },
-   "orders": {
-    "product": 0.5922671525671983,
-    "sum": 0.609375,
-    "worst": 0.5
-   },
-   "score": 0.5922671525671983,
+   "score": 0.6088782279077657,
    "rank": 7,
    "ranks": {
     "product": 7,
-    "sum": 9,
-    "worst": 2
+    "sum": 7,
+    "worst": 14
+   }
+  },
+  {
+   "id": "B1-30000-6f6c09-s4005",
+   "round": "E42",
+   "seed": 4005,
+   "conquest_share": 0.5373101911665068,
+   "z": {
+    "shadow": 11.063004220717984,
+    "novelty": -0.3556204112652292,
+    "selection": 41.506897949720575,
+    "heredity": 30.3930203061444
+   },
+   "values": {
+    "shadow": 11.063004220717984,
+    "novelty": -0.01292848010285979,
+    "selection": 0.06926045931841539,
+    "heredity": 0.9558208282487424
+   },
+   "beside": {
+    "birth_share": 0.4626898088334932,
+    "conquests_per_agent": 0.7854282567555648,
+    "conquests_per_agent_2000": 0.7607383255605864,
+    "births_per_agent": 0.6678990818927928,
+    "conquests_per_birth": 1.161275180279294,
+    "generations": 2718.1849557522123,
+    "births_on_path": 959.3110619469027,
+    "conquests_on_path": 1758.8738938053098,
+    "generations_births_only": 645.5546460176992,
+    "common_ancestor_age": 62.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 30.599247621155126,
+    "effective_population_shadow": 3943.507803852114,
+    "effective_population_births_only": 9.777323008849578,
+    "heredity_births_only": 0.33381668875234,
+    "heredity_birth_pairs": 0.9676422108718097,
+    "heredity_conquest_pairs": 0.9540913982649348,
+    "births_only_pairs_still_brain_pairs": 0.0264516407972675,
+    "novelty_above_noise": 0.06096577930696163,
+    "novelty_null_above_noise": 0.07389425940982142,
+    "novelty_births_only": 0.14009326176941514,
+    "shadow_z": {
+     "persist": 8.538657447213529,
+     "top": 19.544798005905697,
+     "life": 20.96316503494443,
+     "active_share": 5.105557209034722,
+     "active_count": -8.527600717138451,
+     "top_activity": 36.84511079373048
+    },
+    "selection_visible": 63.28227783818961,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": -0.11078224101479915,
+    "selection_same_sign": 0.4772727272727273
+   },
+   "health": {
+    "product": 0.37298591449108814,
+    "sum": 0.43922324963325904,
+    "worst": 0.08536585365853658,
+    "ranks": {
+     "product": 53,
+     "sum": 58,
+     "worst": 60
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.9047619047619048,
+    "novelty": 0.9047619047619048,
+    "selection": 0.3333333333333333,
+    "heredity": 0.4523809523809524
+   },
+   "orders": {
+    "product": 0.5927382001316883,
+    "sum": 0.6488095238095238,
+    "worst": 0.3333333333333333
+   },
+   "score": 0.5927382001316883,
+   "rank": 8,
+   "ranks": {
+    "product": 8,
+    "sum": 8,
+    "worst": 10
    }
   },
   {
@@ -799,21 +874,106 @@
    "shortlisted": true,
    "out": null,
    "shares": {
-    "shadow": 0.5,
-    "novelty": 0.625,
-    "selection": 0.6875,
-    "heredity": 0.5625
+    "shadow": 0.38095238095238093,
+    "novelty": 0.6428571428571429,
+    "selection": 0.6904761904761905,
+    "heredity": 0.5952380952380952
    },
    "orders": {
-    "product": 0.5896052103591091,
-    "sum": 0.59375,
-    "worst": 0.5
+    "product": 0.5632564166712957,
+    "sum": 0.5773809523809523,
+    "worst": 0.38095238095238093
    },
-   "score": 0.5896052103591091,
-   "rank": 8,
+   "score": 0.5632564166712957,
+   "rank": 9,
    "ranks": {
-    "product": 8,
-    "sum": 12,
+    "product": 9,
+    "sum": 15,
+    "worst": 7
+   }
+  },
+  {
+   "id": "B1-30000-b0f6e3-s3023",
+   "round": "E40",
+   "seed": 3023,
+   "conquest_share": 0.49257029257878826,
+   "z": {
+    "shadow": 4.854564537017895,
+    "novelty": -0.9738758445663118,
+    "selection": 27.96512874303631,
+    "heredity": 19.14515494179379
+   },
+   "values": {
+    "shadow": 4.854564537017895,
+    "novelty": -0.018023704579793062,
+    "selection": 0.07829607385170773,
+    "heredity": 0.956083457597587
+   },
+   "beside": {
+    "birth_share": 0.5074297074212117,
+    "conquests_per_agent": 0.852014351613611,
+    "conquests_per_agent_2000": 0.8337595724756074,
+    "births_per_agent": 0.86432715662611,
+    "conquests_per_birth": 0.9707163088303601,
+    "generations": 3874.5251330573624,
+    "births_on_path": 1340.2655233589592,
+    "conquests_on_path": 2534.2596096984034,
+    "generations_births_only": 954.7072738024838,
+    "common_ancestor_age": 135.0,
+    "common_ancestor_age_shadow": 1978.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 99.32130177514792,
+    "effective_population_shadow": 1079.8414201183432,
+    "effective_population_births_only": 22.353636901241885,
+    "heredity_births_only": 0.3360719778546342,
+    "heredity_birth_pairs": 0.8776255215037616,
+    "heredity_conquest_pairs": 0.9647768630648881,
+    "births_only_pairs_still_brain_pairs": 0.04113950437479849,
+    "novelty_above_noise": 0.08634480687108131,
+    "novelty_null_above_noise": 0.10436851145087438,
+    "novelty_births_only": 0.06131996287415198,
+    "shadow_z": {
+     "persist": 4.571807652944679,
+     "top": 6.941537494249647,
+     "life": 11.347053582464072,
+     "active_share": 3.05034846385936,
+     "active_count": -4.7654863619617025,
+     "top_activity": 10.596296615396716
+    },
+    "selection_visible": 61.282977084443665,
+    "selection_clear": 47,
+    "selection_cells": 48,
+    "selection_follows": -0.13389711064129667,
+    "selection_same_sign": 0.5227272727272727
+   },
+   "health": {
+    "product": 0.5149063852998067,
+    "sum": 0.5372168833037351,
+    "worst": 0.35365853658536583,
+    "ranks": {
+     "product": 12,
+     "sum": 28,
+     "worst": 6
+    }
+   },
+   "shortlisted": true,
+   "out": null,
+   "shares": {
+    "shadow": 0.4523809523809524,
+    "novelty": 0.8571428571428571,
+    "selection": 0.5238095238095238,
+    "heredity": 0.47619047619047616
+   },
+   "orders": {
+    "product": 0.5576707987208199,
+    "sum": 0.5773809523809524,
+    "worst": 0.4523809523809524
+   },
+   "score": 0.5576707987208199,
+   "rank": 10,
+   "ranks": {
+    "product": 10,
+    "sum": 14,
     "worst": 3
    }
   },
@@ -884,22 +1044,192 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.9375,
-    "novelty": 0.40625,
-    "selection": 0.90625,
-    "heredity": 0.3125
+    "shadow": 0.7857142857142857,
+    "novelty": 0.38095238095238093,
+    "selection": 0.8809523809523809,
+    "heredity": 0.2857142857142857
    },
    "orders": {
-    "product": 0.5730805551332898,
-    "sum": 0.640625,
-    "worst": 0.3125
+    "product": 0.523907882563987,
+    "sum": 0.5833333333333333,
+    "worst": 0.2857142857142857
    },
-   "score": 0.5730805551332898,
-   "rank": 9,
+   "score": 0.523907882563987,
+   "rank": 11,
    "ranks": {
-    "product": 9,
-    "sum": 7,
-    "worst": 10
+    "product": 11,
+    "sum": 13,
+    "worst": 12
+   }
+  },
+  {
+   "id": "B1-30000-36d076-s3040",
+   "round": "E40",
+   "seed": 3040,
+   "conquest_share": 0.3874543521033882,
+   "z": {
+    "shadow": 10.64933810750232,
+    "novelty": -7.251645627507414,
+    "selection": 42.95135748871302,
+    "heredity": 21.65404187922097
+   },
+   "values": {
+    "shadow": 10.64933810750232,
+    "novelty": -0.13940051495859473,
+    "selection": 0.2570395958180745,
+    "heredity": 0.9625155396245617
+   },
+   "beside": {
+    "birth_share": 0.6125456478966118,
+    "conquests_per_agent": 0.5759020731048363,
+    "conquests_per_agent_2000": 0.5973559562486942,
+    "births_per_agent": 0.8937041475644966,
+    "conquests_per_birth": 0.6325313932665219,
+    "generations": 3084.9772977738594,
+    "births_on_path": 1636.2748512232754,
+    "conquests_on_path": 1448.702446550584,
+    "generations_births_only": 805.3769010359268,
+    "common_ancestor_age": 358.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 188.03009259259258,
+    "effective_population_shadow": 2992.7415656008825,
+    "effective_population_births_only": 9.688450517963417,
+    "heredity_births_only": 0.3504447054959702,
+    "heredity_birth_pairs": 0.8520317683198905,
+    "heredity_conquest_pairs": 0.9713672905139873,
+    "births_only_pairs_still_brain_pairs": 0.10994920712040102,
+    "novelty_above_noise": 0.0638921070139465,
+    "novelty_null_above_noise": 0.20329262197254125,
+    "novelty_births_only": 0.09201692725470945,
+    "shadow_z": {
+     "persist": 7.9120298332544285,
+     "top": 16.825219688929696,
+     "life": 20.797061153049118,
+     "active_share": 7.210764800322836,
+     "active_count": -9.014938834080919,
+     "top_activity": 32.54103263333803
+    },
+    "selection_visible": 111.0732764704,
+    "selection_clear": 41,
+    "selection_cells": 48,
+    "selection_follows": 0.15828047921071173,
+    "selection_same_sign": 0.5454545454545454
+   },
+   "health": {
+    "product": 0.24458694267825237,
+    "sum": 0.28731464294432013,
+    "worst": 0.0844902832960428,
+    "ranks": {
+     "product": 73,
+     "sum": 80,
+     "worst": 62
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.8571428571428571,
+    "novelty": 0.14285714285714285,
+    "selection": 1.0,
+    "heredity": 0.5476190476190477
+   },
+   "orders": {
+    "product": 0.5088718522869881,
+    "sum": 0.6369047619047619,
+    "worst": 0.14285714285714285
+   },
+   "score": 0.5088718522869881,
+   "rank": 12,
+   "ranks": {
+    "product": 12,
+    "sum": 9,
+    "worst": 23
+   }
+  },
+  {
+   "id": "B1-30000-0d7e0c-s3083",
+   "round": "E40",
+   "seed": 3083,
+   "conquest_share": 0.6561840277542247,
+   "z": {
+    "shadow": 11.083479131479072,
+    "novelty": -2.769781933906828,
+    "selection": 44.68472451724302,
+    "heredity": 21.161370530356955
+   },
+   "values": {
+    "shadow": 11.083479131479072,
+    "novelty": -0.12688209340169088,
+    "selection": 0.07805566004776686,
+    "heredity": 0.9577498964525936
+   },
+   "beside": {
+    "birth_share": 0.3438159722457753,
+    "conquests_per_agent": 0.5664538446727467,
+    "conquests_per_agent_2000": 0.5646632551100264,
+    "births_per_agent": 0.29150089656946787,
+    "conquests_per_birth": 1.908532705645084,
+    "generations": 1987.2252663622526,
+    "births_on_path": 140.92922374429224,
+    "conquests_on_path": 1846.2960426179604,
+    "generations_births_only": 388.51648909183155,
+    "common_ancestor_age": 404.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 137.1474245115453,
+    "effective_population_shadow": 2927.182406702209,
+    "effective_population_births_only": 10.758244545915773,
+    "heredity_births_only": 0.6262733383337984,
+    "heredity_birth_pairs": 0.8079022016673862,
+    "heredity_conquest_pairs": 0.972555716378771,
+    "births_only_pairs_still_brain_pairs": 0.07901187457960365,
+    "novelty_above_noise": 0.03776924064393304,
+    "novelty_null_above_noise": 0.1646513340456239,
+    "novelty_births_only": 0.08088883521097455,
+    "shadow_z": {
+     "persist": 8.948185510211315,
+     "top": 21.284144002159376,
+     "life": 15.754467494402128,
+     "active_share": 3.0181078820665213,
+     "active_count": -7.508100496951717,
+     "top_activity": 24.474014937389203
+    },
+    "selection_visible": 71.58282120975888,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": 0.010429880197322057,
+    "selection_same_sign": 0.4090909090909091
+   },
+   "health": {
+    "product": 0.37148821628505513,
+    "sum": 0.43992294274054894,
+    "worst": 0.09025400054783966,
+    "ranks": {
+     "product": 54,
+     "sum": 57,
+     "worst": 58
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.9285714285714286,
+    "novelty": 0.2619047619047619,
+    "selection": 0.5,
+    "heredity": 0.5
+   },
+   "orders": {
+    "product": 0.4965633702570573,
+    "sum": 0.5476190476190477,
+    "worst": 0.2619047619047619
+   },
+   "score": 0.4965633702570573,
+   "rank": 13,
+   "ranks": {
+    "product": 13,
+    "sum": 20,
+    "worst": 15
    }
   },
   {
@@ -969,107 +1299,22 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.53125,
-    "novelty": 0.6875,
-    "selection": 1.0,
-    "heredity": 0.21875
+    "shadow": 0.42857142857142855,
+    "novelty": 0.6904761904761905,
+    "selection": 0.9523809523809523,
+    "heredity": 0.21428571428571427
    },
    "orders": {
-    "product": 0.531655029646891,
-    "sum": 0.609375,
-    "worst": 0.21875
+    "product": 0.4957285831365973,
+    "sum": 0.5714285714285714,
+    "worst": 0.21428571428571427
    },
-   "score": 0.531655029646891,
-   "rank": 10,
+   "score": 0.4957285831365973,
+   "rank": 14,
    "ranks": {
-    "product": 10,
-    "sum": 10,
-    "worst": 13
-   }
-  },
-  {
-   "id": "B1-30000-4aff7d-s3021",
-   "round": "E40",
-   "seed": 3021,
-   "conquest_share": 0.48448389218445065,
-   "z": {
-    "shadow": 4.210448857260032,
-    "novelty": -1.3717307142684385,
-    "selection": 36.556341921966236,
-    "heredity": 28.95641912757216
-   },
-   "values": {
-    "shadow": 4.210448857260032,
-    "novelty": -0.03835250773556284,
-    "selection": 0.09354626316252425,
-    "heredity": 0.9337458160296324
-   },
-   "beside": {
-    "birth_share": 0.5155161078155494,
-    "conquests_per_agent": 0.7483965637313095,
-    "conquests_per_agent_2000": 0.7023316955840745,
-    "births_per_agent": 0.7766297724946484,
-    "conquests_per_birth": 0.9398035965110872,
-    "generations": 3570.7256515775034,
-    "births_on_path": 1373.6488340192043,
-    "conquests_on_path": 2197.076817558299,
-    "generations_births_only": 1063.7530864197531,
-    "common_ancestor_age": 384.0,
-    "common_ancestor_age_shadow": 2026.5,
-    "coalescence_p": 0.009900990099009901,
-    "effective_population": 214.009608785175,
-    "effective_population_shadow": 1107.877316403569,
-    "effective_population_births_only": 26.87654320987656,
-    "heredity_births_only": 0.32167291653420976,
-    "heredity_birth_pairs": 0.8614656579084423,
-    "heredity_conquest_pairs": 0.9578260793133502,
-    "births_only_pairs_still_brain_pairs": 0.07095809476846651,
-    "novelty_above_noise": 0.12537108280062548,
-    "novelty_null_above_noise": 0.16372359053618832,
-    "novelty_births_only": 0.14297263074047525,
-    "shadow_z": {
-     "persist": 4.08027072680746,
-     "top": 5.618076778880273,
-     "life": 8.307244452702092,
-     "active_share": 2.9329990660923637,
-     "active_count": -4.062194117896625,
-     "top_activity": 10.972595851801643
-    },
-    "selection_visible": 50.88135047350052,
-    "selection_clear": 47,
-    "selection_cells": 48,
-    "selection_follows": -0.14559548978153627,
-    "selection_same_sign": 0.38636363636363635
-   },
-   "health": {
-    "product": 0.46963258517684875,
-    "sum": 0.5361774025814984,
-    "worst": 0.1368899043941686,
-    "ranks": {
-     "product": 28,
-     "sum": 30,
-     "worst": 44
-    }
-   },
-   "shortlisted": false,
-   "out": null,
-   "shares": {
-    "shadow": 0.40625,
-    "novelty": 0.78125,
-    "selection": 0.71875,
-    "heredity": 0.34375
-   },
-   "orders": {
-    "product": 0.5291770394128891,
-    "sum": 0.5625,
-    "worst": 0.34375
-   },
-   "score": 0.5291770394128891,
-   "rank": 11,
-   "ranks": {
-    "product": 11,
-    "sum": 14,
-    "worst": 9
+    "product": 14,
+    "sum": 16,
+    "worst": 16
    }
   },
   {
@@ -1139,22 +1384,277 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.8125,
-    "novelty": 0.75,
-    "selection": 0.84375,
-    "heredity": 0.125
+    "shadow": 0.6666666666666666,
+    "novelty": 0.7380952380952381,
+    "selection": 0.8095238095238095,
+    "heredity": 0.14285714285714285
    },
    "orders": {
-    "product": 0.5035030526779969,
-    "sum": 0.6328125,
-    "worst": 0.125
+    "product": 0.4884140883885484,
+    "sum": 0.5892857142857143,
+    "worst": 0.14285714285714285
    },
-   "score": 0.5035030526779969,
-   "rank": 12,
+   "score": 0.4884140883885484,
+   "rank": 15,
    "ranks": {
-    "product": 12,
-    "sum": 8,
-    "worst": 20
+    "product": 15,
+    "sum": 12,
+    "worst": 24
+   }
+  },
+  {
+   "id": "B1-30000-43985b-s3056",
+   "round": "E40",
+   "seed": 3056,
+   "conquest_share": 0.8024533976833826,
+   "z": {
+    "shadow": 4.441562152061199,
+    "novelty": -2.642983779946015,
+    "selection": 42.10767979443562,
+    "heredity": 18.1914736736002
+   },
+   "values": {
+    "shadow": 4.441562152061199,
+    "novelty": -0.0812403684858102,
+    "selection": 0.08877904369374562,
+    "heredity": 0.9515776292692631
+   },
+   "beside": {
+    "birth_share": 0.1975466023166174,
+    "conquests_per_agent": 0.7427149851385093,
+    "conquests_per_agent_2000": 0.7348646958838504,
+    "births_per_agent": 0.17609568372221007,
+    "conquests_per_birth": 4.062096681355482,
+    "generations": 2413.6829130065175,
+    "births_on_path": 134.03853782941343,
+    "conquests_on_path": 2279.644375177104,
+    "generations_births_only": 360.9931992065741,
+    "common_ancestor_age": 297.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 118.87514172335601,
+    "effective_population_shadow": 3645.94590187181,
+    "effective_population_births_only": 15.996599603287052,
+    "heredity_births_only": 0.5977688187794017,
+    "heredity_birth_pairs": 0.678674519835011,
+    "heredity_conquest_pairs": 0.9589820958195105,
+    "births_only_pairs_still_brain_pairs": 0.01752280117664733,
+    "novelty_above_noise": 0.026579066740099726,
+    "novelty_null_above_noise": 0.10781943522590993,
+    "novelty_births_only": 0.041428097621113984,
+    "shadow_z": {
+     "persist": 5.510049303794634,
+     "top": 7.567129416685449,
+     "life": 4.463713117618627,
+     "active_share": 0.24750773570351314,
+     "active_count": -3.855440598632249,
+     "top_activity": 8.855298541680439
+    },
+    "selection_visible": 47.79011965139131,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": 0.2830162085976039,
+    "selection_same_sign": 0.5454545454545454
+   },
+   "health": {
+    "product": 0.40365835212975054,
+    "sum": 0.43907369974285637,
+    "worst": 0.2479945136271799,
+    "ranks": {
+     "product": 39,
+     "sum": 59,
+     "worst": 14
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.40476190476190477,
+    "novelty": 0.5238095238095238,
+    "selection": 0.5952380952380952,
+    "heredity": 0.42857142857142855
+   },
+   "orders": {
+    "product": 0.48224944732139563,
+    "sum": 0.4880952380952381,
+    "worst": 0.40476190476190477
+   },
+   "score": 0.48224944732139563,
+   "rank": 16,
+   "ranks": {
+    "product": 16,
+    "sum": 24,
+    "worst": 6
+   }
+  },
+  {
+   "id": "B1-30000-4aff7d-s3021",
+   "round": "E40",
+   "seed": 3021,
+   "conquest_share": 0.48448389218445065,
+   "z": {
+    "shadow": 4.210448857260032,
+    "novelty": -1.3717307142684385,
+    "selection": 36.556341921966236,
+    "heredity": 28.95641912757216
+   },
+   "values": {
+    "shadow": 4.210448857260032,
+    "novelty": -0.03835250773556284,
+    "selection": 0.09354626316252425,
+    "heredity": 0.9337458160296324
+   },
+   "beside": {
+    "birth_share": 0.5155161078155494,
+    "conquests_per_agent": 0.7483965637313095,
+    "conquests_per_agent_2000": 0.7023316955840745,
+    "births_per_agent": 0.7766297724946484,
+    "conquests_per_birth": 0.9398035965110872,
+    "generations": 3570.7256515775034,
+    "births_on_path": 1373.6488340192043,
+    "conquests_on_path": 2197.076817558299,
+    "generations_births_only": 1063.7530864197531,
+    "common_ancestor_age": 384.0,
+    "common_ancestor_age_shadow": 2026.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 214.009608785175,
+    "effective_population_shadow": 1107.877316403569,
+    "effective_population_births_only": 26.87654320987656,
+    "heredity_births_only": 0.32167291653420976,
+    "heredity_birth_pairs": 0.8614656579084423,
+    "heredity_conquest_pairs": 0.9578260793133502,
+    "births_only_pairs_still_brain_pairs": 0.07095809476846651,
+    "novelty_above_noise": 0.12537108280062548,
+    "novelty_null_above_noise": 0.16372359053618832,
+    "novelty_births_only": 0.14297263074047525,
+    "shadow_z": {
+     "persist": 4.08027072680746,
+     "top": 5.618076778880273,
+     "life": 8.307244452702092,
+     "active_share": 2.9329990660923637,
+     "active_count": -4.062194117896625,
+     "top_activity": 10.972595851801643
+    },
+    "selection_visible": 50.88135047350052,
+    "selection_clear": 47,
+    "selection_cells": 48,
+    "selection_follows": -0.14559548978153627,
+    "selection_same_sign": 0.38636363636363635
+   },
+   "health": {
+    "product": 0.46963258517684875,
+    "sum": 0.5361774025814984,
+    "worst": 0.1368899043941686,
+    "ranks": {
+     "product": 28,
+     "sum": 30,
+     "worst": 44
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.30952380952380953,
+    "novelty": 0.7857142857142857,
+    "selection": 0.7142857142857143,
+    "heredity": 0.30952380952380953
+   },
+   "orders": {
+    "product": 0.4815386871773678,
+    "sum": 0.5297619047619049,
+    "worst": 0.30952380952380953
+   },
+   "score": 0.4815386871773678,
+   "rank": 17,
+   "ranks": {
+    "product": 17,
+    "sum": 21,
+    "worst": 11
+   }
+  },
+  {
+   "id": "B1-30000-c18a1f-s3005",
+   "round": "E40",
+   "seed": 3005,
+   "conquest_share": 0.6919250527580617,
+   "z": {
+    "shadow": 11.567620492400108,
+    "novelty": -1.72357046267353,
+    "selection": 28.45836321067376,
+    "heredity": 23.085757022804017
+   },
+   "values": {
+    "shadow": 11.567620492400108,
+    "novelty": -0.0405458489301852,
+    "selection": 0.05657862110135827,
+    "heredity": 0.9616180461749844
+   },
+   "beside": {
+    "birth_share": 0.3080749472419383,
+    "conquests_per_agent": 0.7147976375502627,
+    "conquests_per_agent_2000": 0.69705920501467,
+    "births_per_agent": 0.3191033370812465,
+    "conquests_per_birth": 2.2459633895990807,
+    "generations": 3293.0201406649617,
+    "births_on_path": 1024.141304347826,
+    "conquests_on_path": 2268.8788363171357,
+    "generations_births_only": 950.0821611253197,
+    "common_ancestor_age": 193.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 103.54317236968342,
+    "effective_population_shadow": 3601.12392,
+    "effective_population_births_only": 34.54108056265983,
+    "heredity_births_only": 0.5134612138309025,
+    "heredity_birth_pairs": 0.6853020571496281,
+    "heredity_conquest_pairs": 0.9657573970876907,
+    "births_only_pairs_still_brain_pairs": 0.019319581280788176,
+    "novelty_above_noise": 0.08516343132607784,
+    "novelty_null_above_noise": 0.12570928025626305,
+    "novelty_births_only": 0.0760176366178519,
+    "shadow_z": {
+     "persist": 8.804316073499665,
+     "top": 22.27224122408957,
+     "life": 15.44706399272377,
+     "active_share": 3.6263041796110915,
+     "active_count": -8.057542142920836,
+     "top_activity": 33.61674578333167
+    },
+    "selection_visible": 79.19831186595525,
+    "selection_clear": 47,
+    "selection_cells": 48,
+    "selection_follows": 0.16222692036645525,
+    "selection_same_sign": 0.5227272727272727
+   },
+   "health": {
+    "product": 0.48100259323930183,
+    "sum": 0.5089567132178335,
+    "worst": 0.2928732898091354,
+    "ranks": {
+     "product": 22,
+     "sum": 38,
+     "worst": 8
+    }
+   },
+   "shortlisted": true,
+   "out": null,
+   "shares": {
+    "shadow": 0.9761904761904762,
+    "novelty": 0.7619047619047619,
+    "selection": 0.11904761904761904,
+    "heredity": 0.5238095238095238
+   },
+   "orders": {
+    "product": 0.46406876632082816,
+    "sum": 0.5952380952380952,
+    "worst": 0.11904761904761904
+   },
+   "score": 0.46406876632082816,
+   "rank": 18,
+   "ranks": {
+    "product": 18,
+    "sum": 11,
+    "worst": 27
    }
   },
   {
@@ -1224,21 +1724,106 @@
    "shortlisted": true,
    "out": null,
    "shares": {
-    "shadow": 0.4375,
-    "novelty": 0.90625,
-    "selection": 0.9375,
-    "heredity": 0.15625
+    "shadow": 0.3333333333333333,
+    "novelty": 0.8809523809523809,
+    "selection": 0.9047619047619048,
+    "heredity": 0.16666666666666666
    },
    "orders": {
-    "product": 0.4909127873962558,
-    "sum": 0.609375,
-    "worst": 0.15625
+    "product": 0.4587262140118358,
+    "sum": 0.5714285714285714,
+    "worst": 0.16666666666666666
    },
-   "score": 0.4909127873962558,
-   "rank": 13,
+   "score": 0.4587262140118358,
+   "rank": 19,
    "ranks": {
-    "product": 13,
-    "sum": 11,
+    "product": 19,
+    "sum": 17,
+    "worst": 21
+   }
+  },
+  {
+   "id": "B1-30000-1141ea-s3082",
+   "round": "E40",
+   "seed": 3082,
+   "conquest_share": 0.4723485388902722,
+   "z": {
+    "shadow": 9.501421417686881,
+    "novelty": -3.5850427803316447,
+    "selection": 39.41665841327051,
+    "heredity": 33.33835756997781
+   },
+   "values": {
+    "shadow": 9.501421417686881,
+    "novelty": -0.12937385772254167,
+    "selection": 0.061514526105825466,
+    "heredity": 1.0
+   },
+   "beside": {
+    "birth_share": 0.5276514611097278,
+    "conquests_per_agent": 0.8099772470356608,
+    "conquests_per_agent_2000": 0.6944631384789522,
+    "births_per_agent": 0.8874650194120132,
+    "conquests_per_birth": 0.8951904310031749,
+    "generations": 3237.6470588235293,
+    "births_on_path": 938.6112652608213,
+    "conquests_on_path": 2299.035793562708,
+    "generations_births_only": 1411.3751387347393,
+    "common_ancestor_age": 109.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 59.33999444907022,
+    "effective_population_shadow": 3053.0842587451416,
+    "effective_population_births_only": 25.687569367369633,
+    "heredity_births_only": 0.8372302946257325,
+    "heredity_birth_pairs": 1.0,
+    "heredity_conquest_pairs": 1.0,
+    "births_only_pairs_still_brain_pairs": 0.11936188292608024,
+    "novelty_above_noise": 0.08474043259930387,
+    "novelty_null_above_noise": 0.21411429032184556,
+    "novelty_births_only": 0.09438166666666668,
+    "shadow_z": {
+     "persist": 7.570392433816746,
+     "top": 16.338114786943077,
+     "life": 20.068731253229004,
+     "active_share": 4.595757032300821,
+     "active_count": -7.270375672241392,
+     "top_activity": 25.199116129490296
+    },
+    "selection_visible": 172.24338655614477,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": 0.08949964763918251,
+    "selection_same_sign": 0.45454545454545453
+   },
+   "health": {
+    "product": 0.37857638257069426,
+    "sum": 0.40791713074277375,
+    "worst": 0.1569575367457178,
+    "ranks": {
+     "product": 50,
+     "sum": 65,
+     "worst": 37
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.8095238095238095,
+    "novelty": 0.21428571428571427,
+    "selection": 0.23809523809523808,
+    "heredity": 0.9523809523809523
+   },
+   "orders": {
+    "product": 0.44534447016167344,
+    "sum": 0.5535714285714286,
+    "worst": 0.21428571428571427
+   },
+   "score": 0.44534447016167344,
+   "rank": 20,
+   "ranks": {
+    "product": 20,
+    "sum": 19,
     "worst": 17
    }
   },
@@ -1309,107 +1894,22 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.21875,
-    "novelty": 0.5625,
-    "selection": 0.53125,
-    "heredity": 0.71875
+    "shadow": 0.16666666666666666,
+    "novelty": 0.5476190476190477,
+    "selection": 0.5476190476190477,
+    "heredity": 0.7619047619047619
    },
    "orders": {
-    "product": 0.46557199337247435,
-    "sum": 0.5078125,
-    "worst": 0.21875
+    "product": 0.4417500752862652,
+    "sum": 0.5059523809523809,
+    "worst": 0.16666666666666666
    },
-   "score": 0.46557199337247435,
-   "rank": 14,
+   "score": 0.4417500752862652,
+   "rank": 21,
    "ranks": {
-    "product": 14,
-    "sum": 16,
-    "worst": 14
-   }
-  },
-  {
-   "id": "B1-30000-1141ea-s3082",
-   "round": "E40",
-   "seed": 3082,
-   "conquest_share": 0.4723485388902722,
-   "z": {
-    "shadow": 9.501421417686881,
-    "novelty": -3.5850427803316447,
-    "selection": 39.41665841327051,
-    "heredity": 33.33835756997781
-   },
-   "values": {
-    "shadow": 9.501421417686881,
-    "novelty": -0.12937385772254167,
-    "selection": 0.061514526105825466,
-    "heredity": 1.0
-   },
-   "beside": {
-    "birth_share": 0.5276514611097278,
-    "conquests_per_agent": 0.8099772470356608,
-    "conquests_per_agent_2000": 0.6944631384789522,
-    "births_per_agent": 0.8874650194120132,
-    "conquests_per_birth": 0.8951904310031749,
-    "generations": 3237.6470588235293,
-    "births_on_path": 938.6112652608213,
-    "conquests_on_path": 2299.035793562708,
-    "generations_births_only": 1411.3751387347393,
-    "common_ancestor_age": 109.0,
-    "common_ancestor_age_shadow": null,
-    "coalescence_p": 0.009900990099009901,
-    "effective_population": 59.33999444907022,
-    "effective_population_shadow": 3053.0842587451416,
-    "effective_population_births_only": 25.687569367369633,
-    "heredity_births_only": 0.8372302946257325,
-    "heredity_birth_pairs": 1.0,
-    "heredity_conquest_pairs": 1.0,
-    "births_only_pairs_still_brain_pairs": 0.11936188292608024,
-    "novelty_above_noise": 0.08474043259930387,
-    "novelty_null_above_noise": 0.21411429032184556,
-    "novelty_births_only": 0.09438166666666668,
-    "shadow_z": {
-     "persist": 7.570392433816746,
-     "top": 16.338114786943077,
-     "life": 20.068731253229004,
-     "active_share": 4.595757032300821,
-     "active_count": -7.270375672241392,
-     "top_activity": 25.199116129490296
-    },
-    "selection_visible": 172.24338655614477,
-    "selection_clear": 48,
-    "selection_cells": 48,
-    "selection_follows": 0.08949964763918251,
-    "selection_same_sign": 0.45454545454545453
-   },
-   "health": {
-    "product": 0.37857638257069426,
-    "sum": 0.40791713074277375,
-    "worst": 0.1569575367457178,
-    "ranks": {
-     "product": 50,
-     "sum": 65,
-     "worst": 37
-    }
-   },
-   "shortlisted": false,
-   "out": null,
-   "shares": {
-    "shadow": 0.96875,
-    "novelty": 0.21875,
-    "selection": 0.21875,
-    "heredity": 0.953125
-   },
-   "orders": {
-    "product": 0.4584736970854962,
-    "sum": 0.58984375,
-    "worst": 0.21875
-   },
-   "score": 0.4584736970854962,
-   "rank": 15,
-   "ranks": {
-    "product": 15,
-    "sum": 13,
-    "worst": 15
+    "product": 21,
+    "sum": 22,
+    "worst": 22
    }
   },
   {
@@ -1479,22 +1979,22 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.28125,
-    "novelty": 0.34375,
-    "selection": 0.65625,
-    "heredity": 0.59375
+    "shadow": 0.21428571428571427,
+    "novelty": 0.3333333333333333,
+    "selection": 0.6666666666666666,
+    "heredity": 0.6190476190476191
    },
    "orders": {
-    "product": 0.44055693723060846,
-    "sum": 0.46875,
-    "worst": 0.28125
+    "product": 0.4143584413032243,
+    "sum": 0.4583333333333333,
+    "worst": 0.21428571428571427
    },
-   "score": 0.44055693723060846,
-   "rank": 16,
+   "score": 0.4143584413032243,
+   "rank": 22,
    "ranks": {
-    "product": 16,
-    "sum": 20,
-    "worst": 12
+    "product": 22,
+    "sum": 28,
+    "worst": 18
    }
   },
   {
@@ -1564,192 +2064,22 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.375,
-    "novelty": 0.375,
-    "selection": 0.5625,
-    "heredity": 0.4375
+    "shadow": 0.2857142857142857,
+    "novelty": 0.35714285714285715,
+    "selection": 0.5714285714285714,
+    "heredity": 0.38095238095238093
    },
    "orders": {
-    "product": 0.4313112438358511,
-    "sum": 0.4375,
-    "worst": 0.375
+    "product": 0.3860571870877241,
+    "sum": 0.3988095238095238,
+    "worst": 0.2857142857142857
    },
-   "score": 0.4313112438358511,
-   "rank": 17,
+   "score": 0.3860571870877241,
+   "rank": 23,
    "ranks": {
-    "product": 17,
-    "sum": 22,
-    "worst": 8
-   }
-  },
-  {
-   "id": "B1-30000-f6d23f-s3045",
-   "round": "E40",
-   "seed": 3045,
-   "conquest_share": 0.5109105439142662,
-   "z": {
-    "shadow": 1.6781877248174786,
-    "novelty": -1.1987847074932598,
-    "selection": 33.532395505772016,
-    "heredity": 24.874177023306217
-   },
-   "values": {
-    "shadow": 1.6781877248174786,
-    "novelty": -0.026641257177056343,
-    "selection": 0.07576961626338403,
-    "heredity": 0.9505741548106341
-   },
-   "beside": {
-    "birth_share": 0.4890894560857339,
-    "conquests_per_agent": 0.688923214243272,
-    "conquests_per_agent_2000": 0.6730179237170558,
-    "births_per_agent": 0.6562283610718644,
-    "conquests_per_birth": 1.044615739630067,
-    "generations": 2874.2254213483147,
-    "births_on_path": 561.754213483146,
-    "conquests_on_path": 2312.4712078651687,
-    "generations_births_only": 1236.5287921348315,
-    "common_ancestor_age": 452.0,
-    "common_ancestor_age_shadow": 1741.5,
-    "coalescence_p": 0.009900990099009901,
-    "effective_population": 202.25474349964864,
-    "effective_population_shadow": 850.0244202389318,
-    "effective_population_births_only": 489.76439606741576,
-    "heredity_births_only": 0.21860579790271117,
-    "heredity_birth_pairs": 0.8783479947069981,
-    "heredity_conquest_pairs": 0.9677989988217337,
-    "births_only_pairs_still_brain_pairs": 0.06506121420100716,
-    "novelty_above_noise": 0.11450409994890579,
-    "novelty_null_above_noise": 0.14114535712596213,
-    "novelty_births_only": 0.13526416496998786,
-    "shadow_z": {
-     "persist": 2.3515248517688403,
-     "top": 3.6933494374761238,
-     "life": -5.084101078176751,
-     "active_share": -1.0103111147925279,
-     "active_count": -1.9855144206952202,
-     "top_activity": 3.834501187898839
-    },
-    "selection_visible": 44.90741444117503,
-    "selection_clear": 42,
-    "selection_cells": 48,
-    "selection_follows": 0.05243128964059196,
-    "selection_same_sign": 0.45454545454545453
-   },
-   "health": {
-    "product": 0.4759141898689069,
-    "sum": 0.5613017575015098,
-    "worst": 0.20038630152628026,
-    "ranks": {
-     "product": 26,
-     "sum": 11,
-     "worst": 25
-    }
-   },
-   "shortlisted": true,
-   "out": null,
-   "shares": {
-    "shadow": 0.15625,
-    "novelty": 0.8125,
-    "selection": 0.4375,
-    "heredity": 0.46875
-   },
-   "orders": {
-    "product": 0.4016896885377101,
-    "sum": 0.46875,
-    "worst": 0.15625
-   },
-   "score": 0.4016896885377101,
-   "rank": 18,
-   "ranks": {
-    "product": 18,
-    "sum": 21,
-    "worst": 18
-   }
-  },
-  {
-   "id": "B1-30000-27bd64-s3046",
-   "round": "E40",
-   "seed": 3046,
-   "conquest_share": 0.5138843045988377,
-   "z": {
-    "shadow": 6.555137783614938,
-    "novelty": -6.319246460590426,
-    "selection": 27.438271790361643,
-    "heredity": 22.464832371865967
-   },
-   "values": {
-    "shadow": 6.555137783614938,
-    "novelty": -0.15944529605854285,
-    "selection": 0.07000134230884027,
-    "heredity": 1.0
-   },
-   "beside": {
-    "birth_share": 0.48611569540116223,
-    "conquests_per_agent": 0.8540282387024278,
-    "conquests_per_agent_2000": 0.6803484582214313,
-    "births_per_agent": 0.771857419418904,
-    "conquests_per_birth": 1.0571234573587667,
-    "generations": 4198.116303219107,
-    "births_on_path": 1946.8156801661476,
-    "conquests_on_path": 2251.3006230529595,
-    "generations_births_only": 1320.748701973001,
-    "common_ancestor_age": 253.0,
-    "common_ancestor_age_shadow": 2327.0,
-    "coalescence_p": 0.009900990099009901,
-    "effective_population": 172.6477922077922,
-    "effective_population_shadow": 1340.0375324675324,
-    "effective_population_births_only": 50.87435098650053,
-    "heredity_births_only": 0.23429707819509493,
-    "heredity_birth_pairs": 1.0,
-    "heredity_conquest_pairs": 1.0,
-    "births_only_pairs_still_brain_pairs": 0.023198310465146785,
-    "novelty_above_noise": 0.11433074851949916,
-    "novelty_null_above_noise": 0.273776044578042,
-    "novelty_births_only": 0.103845,
-    "shadow_z": {
-     "persist": 5.583206857046214,
-     "top": 9.47388235405487,
-     "life": 15.454137410101046,
-     "active_share": 4.608324139743728,
-     "active_count": -5.8407890090608445,
-     "top_activity": 17.361285836810506
-    },
-    "selection_visible": 62.415002619822104,
-    "selection_clear": 44,
-    "selection_cells": 48,
-    "selection_follows": -0.019873150105708243,
-    "selection_same_sign": 0.4772727272727273
-   },
-   "health": {
-    "product": 0.3970100483483673,
-    "sum": 0.43407703681482085,
-    "worst": 0.17073170731707318,
-    "ranks": {
-     "product": 43,
-     "sum": 60,
-     "worst": 33
-    }
-   },
-   "shortlisted": false,
-   "out": null,
-   "shares": {
-    "shadow": 0.6875,
-    "novelty": 0.09375,
-    "selection": 0.3125,
-    "heredity": 0.953125
-   },
-   "orders": {
-    "product": 0.3722296512407156,
-    "sum": 0.51171875,
-    "worst": 0.09375
-   },
-   "score": 0.3722296512407156,
-   "rank": 19,
-   "ranks": {
-    "product": 19,
-    "sum": 15,
-    "worst": 23
+    "product": 23,
+    "sum": 32,
+    "worst": 13
    }
   },
   {
@@ -1819,22 +2149,362 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.84375,
-    "novelty": 0.59375,
-    "selection": 0.09375,
-    "heredity": 0.40625
+    "shadow": 0.6904761904761905,
+    "novelty": 0.5952380952380952,
+    "selection": 0.14285714285714285,
+    "heredity": 0.35714285714285715
    },
    "orders": {
-    "product": 0.3716597365533659,
-    "sum": 0.484375,
-    "worst": 0.09375
+    "product": 0.3805360787011551,
+    "sum": 0.4464285714285714,
+    "worst": 0.14285714285714285
    },
-   "score": 0.3716597365533659,
-   "rank": 20,
+   "score": 0.3805360787011551,
+   "rank": 24,
    "ranks": {
-    "product": 20,
-    "sum": 18,
-    "worst": 24
+    "product": 24,
+    "sum": 29,
+    "worst": 25
+   }
+  },
+  {
+   "id": "B1-30000-965f1e-s3041",
+   "round": "E40",
+   "seed": 3041,
+   "conquest_share": 0.8189567164961622,
+   "z": {
+    "shadow": 5.043059906050871,
+    "novelty": -4.2449052726651555,
+    "selection": 28.84149251239909,
+    "heredity": 20.564713344491388
+   },
+   "values": {
+    "shadow": 5.043059906050871,
+    "novelty": -0.06632128565993244,
+    "selection": 0.055723958093784665,
+    "heredity": 0.9815686913876653
+   },
+   "beside": {
+    "birth_share": 0.1810432835038378,
+    "conquests_per_agent": 0.6312669819603396,
+    "conquests_per_agent_2000": 0.6485221871468752,
+    "births_per_agent": 0.13959024131277786,
+    "conquests_per_birth": 4.523541004374248,
+    "generations": 2177.1879344587883,
+    "births_on_path": 152.31107249255214,
+    "conquests_on_path": 2024.8768619662364,
+    "generations_births_only": 211.52954319761668,
+    "common_ancestor_age": 1568.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 565.7344176806556,
+    "effective_population_shadow": 3015.6691304347833,
+    "effective_population_births_only": 21.764771598808338,
+    "heredity_births_only": 0.7400187858632987,
+    "heredity_birth_pairs": 0.8976244372340902,
+    "heredity_conquest_pairs": 0.9867631807471942,
+    "births_only_pairs_still_brain_pairs": 0.009611714872555365,
+    "novelty_above_noise": 0.04912423161476338,
+    "novelty_null_above_noise": 0.11544551727469582,
+    "novelty_births_only": 0.03154742489263579,
+    "shadow_z": {
+     "persist": 5.543679293563238,
+     "top": 10.178381033181209,
+     "life": 0.8034636131532222,
+     "active_share": -0.5928806085918332,
+     "active_count": -3.851608514446039,
+     "top_activity": 9.44069801955019
+    },
+    "selection_visible": 84.42504455635927,
+    "selection_clear": 47,
+    "selection_cells": 48,
+    "selection_follows": 0.016772374911909794,
+    "selection_same_sign": 0.4090909090909091
+   },
+   "health": {
+    "product": 0.39322727792527923,
+    "sum": 0.460396017916813,
+    "worst": 0.13563101296842633,
+    "ranks": {
+     "product": 46,
+     "sum": 47,
+     "worst": 45
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.47619047619047616,
+    "novelty": 0.6190476190476191,
+    "selection": 0.09523809523809523,
+    "heredity": 0.7380952380952381
+   },
+   "orders": {
+    "product": 0.37940842182230883,
+    "sum": 0.4821428571428572,
+    "worst": 0.09523809523809523
+   },
+   "score": 0.37940842182230883,
+   "rank": 25,
+   "ranks": {
+    "product": 25,
+    "sum": 25,
+    "worst": 29
+   }
+  },
+  {
+   "id": "B1-30000-27bd64-s3046",
+   "round": "E40",
+   "seed": 3046,
+   "conquest_share": 0.5138843045988377,
+   "z": {
+    "shadow": 6.555137783614938,
+    "novelty": -6.319246460590426,
+    "selection": 27.438271790361643,
+    "heredity": 22.464832371865967
+   },
+   "values": {
+    "shadow": 6.555137783614938,
+    "novelty": -0.15944529605854285,
+    "selection": 0.07000134230884027,
+    "heredity": 1.0
+   },
+   "beside": {
+    "birth_share": 0.48611569540116223,
+    "conquests_per_agent": 0.8540282387024278,
+    "conquests_per_agent_2000": 0.6803484582214313,
+    "births_per_agent": 0.771857419418904,
+    "conquests_per_birth": 1.0571234573587667,
+    "generations": 4198.116303219107,
+    "births_on_path": 1946.8156801661476,
+    "conquests_on_path": 2251.3006230529595,
+    "generations_births_only": 1320.748701973001,
+    "common_ancestor_age": 253.0,
+    "common_ancestor_age_shadow": 2327.0,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 172.6477922077922,
+    "effective_population_shadow": 1340.0375324675324,
+    "effective_population_births_only": 50.87435098650053,
+    "heredity_births_only": 0.23429707819509493,
+    "heredity_birth_pairs": 1.0,
+    "heredity_conquest_pairs": 1.0,
+    "births_only_pairs_still_brain_pairs": 0.023198310465146785,
+    "novelty_above_noise": 0.11433074851949916,
+    "novelty_null_above_noise": 0.273776044578042,
+    "novelty_births_only": 0.103845,
+    "shadow_z": {
+     "persist": 5.583206857046214,
+     "top": 9.47388235405487,
+     "life": 15.454137410101046,
+     "active_share": 4.608324139743728,
+     "active_count": -5.8407890090608445,
+     "top_activity": 17.361285836810506
+    },
+    "selection_visible": 62.415002619822104,
+    "selection_clear": 44,
+    "selection_cells": 48,
+    "selection_follows": -0.019873150105708243,
+    "selection_same_sign": 0.4772727272727273
+   },
+   "health": {
+    "product": 0.3970100483483673,
+    "sum": 0.43407703681482085,
+    "worst": 0.17073170731707318,
+    "ranks": {
+     "product": 43,
+     "sum": 60,
+     "worst": 33
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.5714285714285714,
+    "novelty": 0.09523809523809523,
+    "selection": 0.35714285714285715,
+    "heredity": 0.9523809523809523
+   },
+   "orders": {
+    "product": 0.3688555567816587,
+    "sum": 0.494047619047619,
+    "worst": 0.09523809523809523
+   },
+   "score": 0.3688555567816587,
+   "rank": 26,
+   "ranks": {
+    "product": 26,
+    "sum": 23,
+    "worst": 30
+   }
+  },
+  {
+   "id": "B1-30000-f6d23f-s3045",
+   "round": "E40",
+   "seed": 3045,
+   "conquest_share": 0.5109105439142662,
+   "z": {
+    "shadow": 1.6781877248174786,
+    "novelty": -1.1987847074932598,
+    "selection": 33.532395505772016,
+    "heredity": 24.874177023306217
+   },
+   "values": {
+    "shadow": 1.6781877248174786,
+    "novelty": -0.026641257177056343,
+    "selection": 0.07576961626338403,
+    "heredity": 0.9505741548106341
+   },
+   "beside": {
+    "birth_share": 0.4890894560857339,
+    "conquests_per_agent": 0.688923214243272,
+    "conquests_per_agent_2000": 0.6730179237170558,
+    "births_per_agent": 0.6562283610718644,
+    "conquests_per_birth": 1.044615739630067,
+    "generations": 2874.2254213483147,
+    "births_on_path": 561.754213483146,
+    "conquests_on_path": 2312.4712078651687,
+    "generations_births_only": 1236.5287921348315,
+    "common_ancestor_age": 452.0,
+    "common_ancestor_age_shadow": 1741.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 202.25474349964864,
+    "effective_population_shadow": 850.0244202389318,
+    "effective_population_births_only": 489.76439606741576,
+    "heredity_births_only": 0.21860579790271117,
+    "heredity_birth_pairs": 0.8783479947069981,
+    "heredity_conquest_pairs": 0.9677989988217337,
+    "births_only_pairs_still_brain_pairs": 0.06506121420100716,
+    "novelty_above_noise": 0.11450409994890579,
+    "novelty_null_above_noise": 0.14114535712596213,
+    "novelty_births_only": 0.13526416496998786,
+    "shadow_z": {
+     "persist": 2.3515248517688403,
+     "top": 3.6933494374761238,
+     "life": -5.084101078176751,
+     "active_share": -1.0103111147925279,
+     "active_count": -1.9855144206952202,
+     "top_activity": 3.834501187898839
+    },
+    "selection_visible": 44.90741444117503,
+    "selection_clear": 42,
+    "selection_cells": 48,
+    "selection_follows": 0.05243128964059196,
+    "selection_same_sign": 0.45454545454545453
+   },
+   "health": {
+    "product": 0.4759141898689069,
+    "sum": 0.5613017575015098,
+    "worst": 0.20038630152628026,
+    "ranks": {
+     "product": 26,
+     "sum": 11,
+     "worst": 25
+    }
+   },
+   "shortlisted": true,
+   "out": null,
+   "shares": {
+    "shadow": 0.11904761904761904,
+    "novelty": 0.8095238095238095,
+    "selection": 0.4523809523809524,
+    "heredity": 0.40476190476190477
+   },
+   "orders": {
+    "product": 0.36447149696600795,
+    "sum": 0.4464285714285714,
+    "worst": 0.11904761904761904
+   },
+   "score": 0.36447149696600795,
+   "rank": 27,
+   "ranks": {
+    "product": 27,
+    "sum": 30,
+    "worst": 28
+   }
+  },
+  {
+   "id": "B1-30000-63827e-s3044",
+   "round": "E40",
+   "seed": 3044,
+   "conquest_share": 0.5646481030772026,
+   "z": {
+    "shadow": 10.909135541471253,
+    "novelty": 0.8654674559581471,
+    "selection": 93.1817815889195,
+    "heredity": 5.908054986986929
+   },
+   "values": {
+    "shadow": 10.909135541471253,
+    "novelty": 0.022247701883242293,
+    "selection": 0.12360842731570167,
+    "heredity": 0.26495566402383885
+   },
+   "beside": {
+    "birth_share": 0.4353518969227974,
+    "conquests_per_agent": 0.9324870516807083,
+    "conquests_per_agent_2000": 0.970612282730467,
+    "births_per_agent": 0.7103754349983286,
+    "conquests_per_birth": 1.296992403313988,
+    "generations": 3708.002481389578,
+    "births_on_path": 1489.2427626137303,
+    "conquests_on_path": 2218.759718775848,
+    "generations_births_only": 916.4528535980149,
+    "common_ancestor_age": 42.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 26.011998345055854,
+    "effective_population_shadow": 3395.6999172185433,
+    "effective_population_births_only": 6.72642679900747,
+    "heredity_births_only": 0.006790342668622171,
+    "heredity_birth_pairs": -0.17052340701544996,
+    "heredity_conquest_pairs": 0.33607444283869725,
+    "births_only_pairs_still_brain_pairs": 0.03478538893187958,
+    "novelty_above_noise": 0.13541061277497332,
+    "novelty_null_above_noise": 0.11316291089173103,
+    "novelty_births_only": 0.07406132913020379,
+    "shadow_z": {
+     "persist": 7.5338276717232615,
+     "top": 16.910765782565313,
+     "life": 26.41543493639664,
+     "active_share": 8.28281317012518,
+     "active_count": -9.622759673693265,
+     "top_activity": 35.47460525305977
+    },
+    "selection_visible": 101.17083670168884,
+    "selection_clear": 46,
+    "selection_cells": 48,
+    "selection_follows": 0.33812544045102183,
+    "selection_same_sign": 0.5227272727272727
+   },
+   "health": {
+    "product": 0.20265270626039955,
+    "sum": 0.3418996588804568,
+    "worst": 0.03658536585365854,
+    "ranks": {
+     "product": 76,
+     "sum": 74,
+     "worst": 76
+    }
+   },
+   "shortlisted": false,
+   "out": "no heredity: children act like strangers (index 0.01)",
+   "shares": {
+    "shadow": 0.8809523809523809,
+    "novelty": 1.0,
+    "selection": 0.8333333333333334,
+    "heredity": 0.023809523809523808
+   },
+   "orders": {
+    "product": 0.3636055254892736,
+    "sum": 0.6845238095238095,
+    "worst": 0.023809523809523808
+   },
+   "score": 0.3636055254892736,
+   "rank": 28,
+   "ranks": {
+    "product": 28,
+    "sum": 4,
+    "worst": 39
    }
   },
   {
@@ -1904,22 +2574,22 @@
    "shortlisted": true,
    "out": null,
    "shares": {
-    "shadow": 0.59375,
-    "novelty": 0.25,
-    "selection": 0.1875,
-    "heredity": 0.625
+    "shadow": 0.5,
+    "novelty": 0.23809523809523808,
+    "selection": 0.21428571428571427,
+    "heredity": 0.6666666666666666
    },
    "orders": {
-    "product": 0.3631668759861614,
-    "sum": 0.4140625,
-    "worst": 0.1875
+    "product": 0.3611234314459881,
+    "sum": 0.40476190476190477,
+    "worst": 0.21428571428571427
    },
-   "score": 0.3631668759861614,
-   "rank": 21,
+   "score": 0.3611234314459881,
+   "rank": 29,
    "ranks": {
-    "product": 21,
-    "sum": 23,
-    "worst": 16
+    "product": 29,
+    "sum": 31,
+    "worst": 19
    }
   },
   {
@@ -1989,22 +2659,107 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.3125,
-    "novelty": 0.4375,
-    "selection": 0.15625,
-    "heredity": 0.65625
+    "shadow": 0.23809523809523808,
+    "novelty": 0.40476190476190477,
+    "selection": 0.19047619047619047,
+    "heredity": 0.6904761904761905
    },
    "orders": {
-    "product": 0.34409578706176236,
-    "sum": 0.390625,
-    "worst": 0.15625
+    "product": 0.3355327653442496,
+    "sum": 0.38095238095238093,
+    "worst": 0.19047619047619047
    },
-   "score": 0.34409578706176236,
-   "rank": 22,
+   "score": 0.3355327653442496,
+   "rank": 30,
    "ranks": {
-    "product": 22,
-    "sum": 24,
-    "worst": 19
+    "product": 30,
+    "sum": 35,
+    "worst": 20
+   }
+  },
+  {
+   "id": "B1-30000-2ec87a-s3059",
+   "round": "E40",
+   "seed": 3059,
+   "conquest_share": 0.7497983491242894,
+   "z": {
+    "shadow": 11.5910806245305,
+    "novelty": -8.075331903660075,
+    "selection": 32.49850064692849,
+    "heredity": 32.220580721758054
+   },
+   "values": {
+    "shadow": 11.5910806245305,
+    "novelty": -0.19471837663740807,
+    "selection": 0.06310236747604396,
+    "heredity": 1.0
+   },
+   "beside": {
+    "birth_share": 0.25020165087571056,
+    "conquests_per_agent": 0.7009960516482249,
+    "conquests_per_agent_2000": 0.7149250578715115,
+    "births_per_agent": 0.23660804732514806,
+    "conquests_per_birth": 2.9967761863280313,
+    "generations": 2321.1371709822383,
+    "births_on_path": 142.61887438476353,
+    "conquests_on_path": 2178.518296597475,
+    "generations_births_only": 309.6537556173764,
+    "common_ancestor_age": 256.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 92.58839897260273,
+    "effective_population_shadow": 3179.4284261241974,
+    "effective_population_births_only": 12.32687780868821,
+    "heredity_births_only": 0.473685475569585,
+    "heredity_birth_pairs": null,
+    "heredity_conquest_pairs": 1.0,
+    "births_only_pairs_still_brain_pairs": 0.0077956989247311825,
+    "novelty_above_noise": 0.06119963582334877,
+    "novelty_null_above_noise": 0.25591801246075685,
+    "novelty_births_only": 0.09128666666666667,
+    "shadow_z": {
+     "persist": 9.186454560896282,
+     "top": 22.737625686358115,
+     "life": 13.97705433384531,
+     "active_share": 2.849161626337107,
+     "active_count": -7.278624771478198,
+     "top_activity": 26.133387455680435
+    },
+    "selection_visible": 67.71220952343064,
+    "selection_clear": 46,
+    "selection_cells": 48,
+    "selection_follows": 0.03241719520789288,
+    "selection_same_sign": 0.5681818181818182
+   },
+   "health": {
+    "product": 0.39504742986255204,
+    "sum": 0.46978204312656024,
+    "worst": 0.12195121951219512,
+    "ranks": {
+     "product": 45,
+     "sum": 44,
+     "worst": 50
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 1.0,
+    "novelty": 0.047619047619047616,
+    "selection": 0.2619047619047619,
+    "heredity": 0.9523809523809523
+   },
+   "orders": {
+    "product": 0.3301290181476181,
+    "sum": 0.5654761904761905,
+    "worst": 0.047619047619047616
+   },
+   "score": 0.3301290181476181,
+   "rank": 31,
+   "ranks": {
+    "product": 31,
+    "sum": 18,
+    "worst": 35
    }
   },
   {
@@ -2074,106 +2829,106 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.71875,
-    "novelty": 1.0,
-    "selection": 0.0625,
-    "heredity": 0.25
+    "shadow": 0.5952380952380952,
+    "novelty": 0.9761904761904762,
+    "selection": 0.07142857142857142,
+    "heredity": 0.23809523809523808
    },
    "orders": {
-    "product": 0.32553633589252723,
-    "sum": 0.5078125,
-    "worst": 0.0625
+    "product": 0.3152913017674911,
+    "sum": 0.47023809523809523,
+    "worst": 0.07142857142857142
    },
-   "score": 0.32553633589252723,
-   "rank": 23,
+   "score": 0.3152913017674911,
+   "rank": 32,
    "ranks": {
-    "product": 23,
-    "sum": 17,
-    "worst": 25
+    "product": 32,
+    "sum": 26,
+    "worst": 32
    }
   },
   {
-   "id": "B1-30000-631e49-s3033",
+   "id": "B1-30000-3e5856-s3095",
    "round": "E40",
-   "seed": 3033,
-   "conquest_share": 0.5154924453878825,
+   "seed": 3095,
+   "conquest_share": 0.49192861803962695,
    "z": {
-    "shadow": 0.5968411619454183,
-    "novelty": -0.7123595226814673,
-    "selection": 36.6499095537118,
-    "heredity": 25.141208911832557
+    "shadow": 2.6726159817745874,
+    "novelty": -7.783875114231335,
+    "selection": 30.927972209345555,
+    "heredity": 20.617131466019128
    },
    "values": {
-    "shadow": 0.5968411619454183,
-    "novelty": -0.022146121223412002,
-    "selection": 0.07638235528565306,
-    "heredity": 0.890084594829499
+    "shadow": 2.6726159817745874,
+    "novelty": -0.13343982309688807,
+    "selection": 0.05756448698068699,
+    "heredity": 0.9850937729011311
    },
    "beside": {
-    "birth_share": 0.4845075546121175,
-    "conquests_per_agent": 0.624801963092667,
-    "conquests_per_agent_2000": 0.6411085507451811,
-    "births_per_agent": 0.5859055838190809,
-    "conquests_per_birth": 1.063951305775966,
-    "generations": 2628.165595650025,
-    "births_on_path": 784.5946613939693,
-    "conquests_on_path": 1843.5709342560554,
-    "generations_births_only": 1083.34206623826,
-    "common_ancestor_age": 1239.0,
-    "common_ancestor_age_shadow": 2548.5,
-    "coalescence_p": 0.07920792079207921,
-    "effective_population": 648.9035608308606,
-    "effective_population_shadow": 1050.0002472799208,
-    "effective_population_births_only": 988.2151346709311,
-    "heredity_births_only": 0.15196026233630153,
-    "heredity_birth_pairs": 0.885181399871041,
-    "heredity_conquest_pairs": 0.8898165647126581,
-    "births_only_pairs_still_brain_pairs": 0.12019112962509189,
-    "novelty_above_noise": 0.14922636405736106,
-    "novelty_null_above_noise": 0.17137248528077306,
-    "novelty_births_only": 0.18819000355092685,
+    "birth_share": 0.508071381960373,
+    "conquests_per_agent": 0.5492828530366342,
+    "conquests_per_agent_2000": 0.4831623651997606,
+    "births_per_agent": 0.5532956412148846,
+    "conquests_per_birth": 0.9682273702201847,
+    "generations": 1371.9638279692394,
+    "births_on_path": 390.03303902022213,
+    "conquests_on_path": 981.9307889490174,
+    "generations_births_only": 1338.4562802620337,
+    "common_ancestor_age": 2591.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.0297029702970297,
+    "effective_population": 509.1269230769231,
+    "effective_population_shadow": 2662.9660775370585,
+    "effective_population_births_only": 1218.6165197829919,
+    "heredity_births_only": 0.24504028862024546,
+    "heredity_birth_pairs": 0.9703667349205396,
+    "heredity_conquest_pairs": 0.9993357474991366,
+    "births_only_pairs_still_brain_pairs": 0.22692731098487134,
+    "novelty_above_noise": 0.03676219987680118,
+    "novelty_null_above_noise": 0.17020202297368925,
+    "novelty_births_only": 0.14764162668506375,
     "shadow_z": {
-     "persist": 0.6155856482197313,
-     "top": 2.102655008683595,
-     "life": -10.098077245463548,
-     "active_share": -0.9277171710670715,
-     "active_count": -0.9258270861179368,
-     "top_activity": 1.8824878060854633
+     "persist": 2.599569898423125,
+     "top": 5.362429616888504,
+     "life": -7.511995623740925,
+     "active_share": 0.05584843001213299,
+     "active_count": -3.0320124934201824,
+     "top_activity": 7.715424184305431
     },
-    "selection_visible": 47.254870481214006,
-    "selection_clear": 40,
+    "selection_visible": 53.18030961291582,
+    "selection_clear": 42,
     "selection_cells": 48,
-    "selection_follows": 0.05609584214235377,
-    "selection_same_sign": 0.5
+    "selection_follows": -0.10232558139534882,
+    "selection_same_sign": 0.4318181818181818
    },
    "health": {
-    "product": 0.35618232464653765,
-    "sum": 0.5421509288532823,
-    "worst": 0.04224514164802138,
+    "product": 0.33909319278194827,
+    "sum": 0.5204090401918978,
+    "worst": 0.07317073170731705,
     "ranks": {
-     "product": 57,
-     "sum": 26,
-     "worst": 75
+     "product": 63,
+     "sum": 34,
+     "worst": 66
     }
    },
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.0625,
-    "novelty": 0.84375,
-    "selection": 0.46875,
-    "heredity": 0.1875
+    "shadow": 0.14285714285714285,
+    "novelty": 0.19047619047619047,
+    "selection": 0.16666666666666666,
+    "heredity": 0.8571428571428571
    },
    "orders": {
-    "product": 0.2609210328481632,
-    "sum": 0.390625,
-    "worst": 0.0625
+    "product": 0.2496957521441944,
+    "sum": 0.3392857142857143,
+    "worst": 0.14285714285714285
    },
-   "score": 0.2609210328481632,
-   "rank": 24,
+   "score": 0.2496957521441944,
+   "rank": 33,
    "ranks": {
-    "product": 24,
-    "sum": 25,
+    "product": 33,
+    "sum": 38,
     "worst": 26
    }
   },
@@ -2244,22 +2999,107 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.09375,
-    "novelty": 0.0625,
-    "selection": 0.8125,
-    "heredity": 0.953125
+    "shadow": 0.07142857142857142,
+    "novelty": 0.07142857142857142,
+    "selection": 0.7857142857142857,
+    "heredity": 0.9523809523809523
    },
    "orders": {
-    "product": 0.2595410941162887,
-    "sum": 0.48046875,
-    "worst": 0.0625
+    "product": 0.24857349564401168,
+    "sum": 0.47023809523809523,
+    "worst": 0.07142857142857142
    },
-   "score": 0.2595410941162887,
-   "rank": 25,
+   "score": 0.24857349564401168,
+   "rank": 34,
    "ranks": {
-    "product": 25,
-    "sum": 19,
-    "worst": 27
+    "product": 34,
+    "sum": 27,
+    "worst": 33
+   }
+  },
+  {
+   "id": "B1-30000-631e49-s3033",
+   "round": "E40",
+   "seed": 3033,
+   "conquest_share": 0.5154924453878825,
+   "z": {
+    "shadow": 0.5968411619454183,
+    "novelty": -0.7123595226814673,
+    "selection": 36.6499095537118,
+    "heredity": 25.141208911832557
+   },
+   "values": {
+    "shadow": 0.5968411619454183,
+    "novelty": -0.022146121223412002,
+    "selection": 0.07638235528565306,
+    "heredity": 0.890084594829499
+   },
+   "beside": {
+    "birth_share": 0.4845075546121175,
+    "conquests_per_agent": 0.624801963092667,
+    "conquests_per_agent_2000": 0.6411085507451811,
+    "births_per_agent": 0.5859055838190809,
+    "conquests_per_birth": 1.063951305775966,
+    "generations": 2628.165595650025,
+    "births_on_path": 784.5946613939693,
+    "conquests_on_path": 1843.5709342560554,
+    "generations_births_only": 1083.34206623826,
+    "common_ancestor_age": 1239.0,
+    "common_ancestor_age_shadow": 2548.5,
+    "coalescence_p": 0.07920792079207921,
+    "effective_population": 648.9035608308606,
+    "effective_population_shadow": 1050.0002472799208,
+    "effective_population_births_only": 988.2151346709311,
+    "heredity_births_only": 0.15196026233630153,
+    "heredity_birth_pairs": 0.885181399871041,
+    "heredity_conquest_pairs": 0.8898165647126581,
+    "births_only_pairs_still_brain_pairs": 0.12019112962509189,
+    "novelty_above_noise": 0.14922636405736106,
+    "novelty_null_above_noise": 0.17137248528077306,
+    "novelty_births_only": 0.18819000355092685,
+    "shadow_z": {
+     "persist": 0.6155856482197313,
+     "top": 2.102655008683595,
+     "life": -10.098077245463548,
+     "active_share": -0.9277171710670715,
+     "active_count": -0.9258270861179368,
+     "top_activity": 1.8824878060854633
+    },
+    "selection_visible": 47.254870481214006,
+    "selection_clear": 40,
+    "selection_cells": 48,
+    "selection_follows": 0.05609584214235377,
+    "selection_same_sign": 0.5
+   },
+   "health": {
+    "product": 0.35618232464653765,
+    "sum": 0.5421509288532823,
+    "worst": 0.04224514164802138,
+    "ranks": {
+     "product": 57,
+     "sum": 26,
+     "worst": 75
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.047619047619047616,
+    "novelty": 0.8333333333333334,
+    "selection": 0.47619047619047616,
+    "heredity": 0.19047619047619047
+   },
+   "orders": {
+    "product": 0.24493746302906672,
+    "sum": 0.3869047619047619,
+    "worst": 0.047619047619047616
+   },
+   "score": 0.24493746302906672,
+   "rank": 35,
+   "ranks": {
+    "product": 35,
+    "sum": 34,
+    "worst": 36
    }
   },
   {
@@ -2329,192 +3169,22 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.125,
-    "novelty": 0.125,
-    "selection": 0.34375,
-    "heredity": 0.75
+    "shadow": 0.09523809523809523,
+    "novelty": 0.11904761904761904,
+    "selection": 0.38095238095238093,
+    "heredity": 0.7857142857142857
    },
    "orders": {
-    "product": 0.25193064528996556,
-    "sum": 0.3359375,
-    "worst": 0.125
+    "product": 0.24136077359938776,
+    "sum": 0.34523809523809523,
+    "worst": 0.09523809523809523
    },
-   "score": 0.25193064528996556,
-   "rank": 26,
+   "score": 0.24136077359938776,
+   "rank": 36,
    "ranks": {
-    "product": 26,
-    "sum": 28,
-    "worst": 21
-   }
-  },
-  {
-   "id": "B1-30000-3e5856-s3095",
-   "round": "E40",
-   "seed": 3095,
-   "conquest_share": 0.49192861803962695,
-   "z": {
-    "shadow": 2.6726159817745874,
-    "novelty": -7.783875114231335,
-    "selection": 30.927972209345555,
-    "heredity": 20.617131466019128
-   },
-   "values": {
-    "shadow": 2.6726159817745874,
-    "novelty": -0.13343982309688807,
-    "selection": 0.05756448698068699,
-    "heredity": 0.9850937729011311
-   },
-   "beside": {
-    "birth_share": 0.508071381960373,
-    "conquests_per_agent": 0.5492828530366342,
-    "conquests_per_agent_2000": 0.4831623651997606,
-    "births_per_agent": 0.5532956412148846,
-    "conquests_per_birth": 0.9682273702201847,
-    "generations": 1371.9638279692394,
-    "births_on_path": 390.03303902022213,
-    "conquests_on_path": 981.9307889490174,
-    "generations_births_only": 1338.4562802620337,
-    "common_ancestor_age": 2591.0,
-    "common_ancestor_age_shadow": null,
-    "coalescence_p": 0.0297029702970297,
-    "effective_population": 509.1269230769231,
-    "effective_population_shadow": 2662.9660775370585,
-    "effective_population_births_only": 1218.6165197829919,
-    "heredity_births_only": 0.24504028862024546,
-    "heredity_birth_pairs": 0.9703667349205396,
-    "heredity_conquest_pairs": 0.9993357474991366,
-    "births_only_pairs_still_brain_pairs": 0.22692731098487134,
-    "novelty_above_noise": 0.03676219987680118,
-    "novelty_null_above_noise": 0.17020202297368925,
-    "novelty_births_only": 0.14764162668506375,
-    "shadow_z": {
-     "persist": 2.599569898423125,
-     "top": 5.362429616888504,
-     "life": -7.511995623740925,
-     "active_share": 0.05584843001213299,
-     "active_count": -3.0320124934201824,
-     "top_activity": 7.715424184305431
-    },
-    "selection_visible": 53.18030961291582,
-    "selection_clear": 42,
-    "selection_cells": 48,
-    "selection_follows": -0.10232558139534882,
-    "selection_same_sign": 0.4318181818181818
-   },
-   "health": {
-    "product": 0.33909319278194827,
-    "sum": 0.5204090401918978,
-    "worst": 0.07317073170731705,
-    "ranks": {
-     "product": 63,
-     "sum": 34,
-     "worst": 66
-    }
-   },
-   "shortlisted": false,
-   "out": null,
-   "shares": {
-    "shadow": 0.1875,
-    "novelty": 0.1875,
-    "selection": 0.125,
-    "heredity": 0.84375
-   },
-   "orders": {
-    "product": 0.24676387742859235,
-    "sum": 0.3359375,
-    "worst": 0.125
-   },
-   "score": 0.24676387742859235,
-   "rank": 27,
-   "ranks": {
-    "product": 27,
-    "sum": 29,
-    "worst": 22
-   }
-  },
-  {
-   "id": "B1-30000-af1e28-s3018",
-   "round": "E40",
-   "seed": 3018,
-   "conquest_share": 0.7853623509818137,
-   "z": {
-    "shadow": 3.56282161960336,
-    "novelty": -4.742208001787617,
-    "selection": 42.577877447270126,
-    "heredity": 23.116774168542626
-   },
-   "values": {
-    "shadow": 3.56282161960336,
-    "novelty": -0.1251292334611595,
-    "selection": 0.09079996038498213,
-    "heredity": 0.7358662700592441
-   },
-   "beside": {
-    "birth_share": 0.21463764901818627,
-    "conquests_per_agent": 0.7348306421839889,
-    "conquests_per_agent_2000": 0.7251988011140179,
-    "births_per_agent": 0.21723193301362664,
-    "conquests_per_birth": 3.659014877279381,
-    "generations": 2452.035141117875,
-    "births_on_path": 147.26978417266187,
-    "conquests_on_path": 2304.765356945213,
-    "generations_births_only": 312.7858328721638,
-    "common_ancestor_age": 1849.0,
-    "common_ancestor_age_shadow": null,
-    "coalescence_p": 0.0297029702970297,
-    "effective_population": 754.2262662607251,
-    "effective_population_shadow": 2465.051495016611,
-    "effective_population_births_only": 263.32007944750626,
-    "heredity_births_only": 0.16255390534783423,
-    "heredity_birth_pairs": 0.07061487339118128,
-    "heredity_conquest_pairs": 0.7488683059450774,
-    "births_only_pairs_still_brain_pairs": 0.011816083108888034,
-    "novelty_above_noise": 0.05059452957969716,
-    "novelty_null_above_noise": 0.17572376304085666,
-    "novelty_births_only": 0.09782983909977355,
-    "shadow_z": {
-     "persist": 4.1781588664450195,
-     "top": 4.609442699889526,
-     "life": 6.696067115721799,
-     "active_share": 1.9008632924755353,
-     "active_count": -3.0899134225103873,
-     "top_activity": 4.399647345671381
-    },
-    "selection_visible": 56.35372173936908,
-    "selection_clear": 48,
-    "selection_cells": 48,
-    "selection_follows": 0.07681465821000703,
-    "selection_same_sign": 0.6136363636363636
-   },
-   "health": {
-    "product": 0.5647468829024658,
-    "sum": 0.5740501937430248,
-    "worst": 0.3902439024390244,
-    "ranks": {
-     "product": 3,
-     "sum": 6,
-     "worst": 3
-    }
-   },
-   "shortlisted": true,
-   "out": null,
-   "shares": {
-    "shadow": 0.34375,
-    "novelty": 0.28125,
-    "selection": 0.59375,
-    "heredity": 0.0625
-   },
-   "orders": {
-    "product": 0.2447398668835352,
-    "sum": 0.3203125,
-    "worst": 0.0625
-   },
-   "score": 0.2447398668835352,
-   "rank": 28,
-   "ranks": {
-    "product": 28,
-    "sum": 30,
-    "worst": 28
+    "product": 36,
+    "sum": 37,
+    "worst": 31
    }
   },
   {
@@ -2584,22 +3254,107 @@
    "shortlisted": true,
    "out": null,
    "shares": {
-    "shadow": 0.25,
-    "novelty": 0.5,
-    "selection": 0.03125,
-    "heredity": 0.78125
+    "shadow": 0.19047619047619047,
+    "novelty": 0.4523809523809524,
+    "selection": 0.047619047619047616,
+    "heredity": 0.8095238095238095
    },
    "orders": {
-    "product": 0.2350376933178996,
-    "sum": 0.390625,
-    "worst": 0.03125
+    "product": 0.24007052088576403,
+    "sum": 0.375,
+    "worst": 0.047619047619047616
    },
-   "score": 0.2350376933178996,
-   "rank": 29,
+   "score": 0.24007052088576403,
+   "rank": 37,
    "ranks": {
-    "product": 29,
-    "sum": 26,
-    "worst": 29
+    "product": 37,
+    "sum": 36,
+    "worst": 37
+   }
+  },
+  {
+   "id": "B1-30000-af1e28-s3018",
+   "round": "E40",
+   "seed": 3018,
+   "conquest_share": 0.7853623509818137,
+   "z": {
+    "shadow": 3.56282161960336,
+    "novelty": -4.742208001787617,
+    "selection": 42.577877447270126,
+    "heredity": 23.116774168542626
+   },
+   "values": {
+    "shadow": 3.56282161960336,
+    "novelty": -0.1251292334611595,
+    "selection": 0.09079996038498213,
+    "heredity": 0.7358662700592441
+   },
+   "beside": {
+    "birth_share": 0.21463764901818627,
+    "conquests_per_agent": 0.7348306421839889,
+    "conquests_per_agent_2000": 0.7251988011140179,
+    "births_per_agent": 0.21723193301362664,
+    "conquests_per_birth": 3.659014877279381,
+    "generations": 2452.035141117875,
+    "births_on_path": 147.26978417266187,
+    "conquests_on_path": 2304.765356945213,
+    "generations_births_only": 312.7858328721638,
+    "common_ancestor_age": 1849.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.0297029702970297,
+    "effective_population": 754.2262662607251,
+    "effective_population_shadow": 2465.051495016611,
+    "effective_population_births_only": 263.32007944750626,
+    "heredity_births_only": 0.16255390534783423,
+    "heredity_birth_pairs": 0.07061487339118128,
+    "heredity_conquest_pairs": 0.7488683059450774,
+    "births_only_pairs_still_brain_pairs": 0.011816083108888034,
+    "novelty_above_noise": 0.05059452957969716,
+    "novelty_null_above_noise": 0.17572376304085666,
+    "novelty_births_only": 0.09782983909977355,
+    "shadow_z": {
+     "persist": 4.1781588664450195,
+     "top": 4.609442699889526,
+     "life": 6.696067115721799,
+     "active_share": 1.9008632924755353,
+     "active_count": -3.0899134225103873,
+     "top_activity": 4.399647345671381
+    },
+    "selection_visible": 56.35372173936908,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": 0.07681465821000703,
+    "selection_same_sign": 0.6136363636363636
+   },
+   "health": {
+    "product": 0.5647468829024658,
+    "sum": 0.5740501937430248,
+    "worst": 0.3902439024390244,
+    "ranks": {
+     "product": 3,
+     "sum": 6,
+     "worst": 3
+    }
+   },
+   "shortlisted": true,
+   "out": null,
+   "shares": {
+    "shadow": 0.2619047619047619,
+    "novelty": 0.2857142857142857,
+    "selection": 0.6190476190476191,
+    "heredity": 0.07142857142857142
+   },
+   "orders": {
+    "product": 0.23983791667809531,
+    "sum": 0.30952380952380953,
+    "worst": 0.07142857142857142
+   },
+   "score": 0.23983791667809531,
+   "rank": 38,
+   "ranks": {
+    "product": 38,
+    "sum": 40,
+    "worst": 34
    }
   },
   {
@@ -2669,22 +3424,22 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 0.875,
-    "novelty": 0.15625,
-    "selection": 0.375,
-    "heredity": 0.03125
+    "shadow": 0.7380952380952381,
+    "novelty": 0.16666666666666666,
+    "selection": 0.40476190476190477,
+    "heredity": 0.047619047619047616
    },
    "orders": {
-    "product": 0.20006786705897997,
-    "sum": 0.359375,
-    "worst": 0.03125
+    "product": 0.22066597442958408,
+    "sum": 0.3392857142857143,
+    "worst": 0.047619047619047616
    },
-   "score": 0.20006786705897997,
-   "rank": 30,
+   "score": 0.22066597442958408,
+   "rank": 39,
    "ranks": {
-    "product": 30,
-    "sum": 27,
-    "worst": 30
+    "product": 39,
+    "sum": 39,
+    "worst": 38
    }
   },
   {
@@ -2754,22 +3509,107 @@
    "shortlisted": false,
    "out": "no heredity: children act like strangers (index 0.08)",
    "shares": {
-    "shadow": 0.03125,
-    "novelty": 0.3125,
-    "selection": 0.25,
-    "heredity": 0.53125
+    "shadow": 0.023809523809523808,
+    "novelty": 0.30952380952380953,
+    "selection": 0.2857142857142857,
+    "heredity": 0.5714285714285714
    },
    "orders": {
-    "product": 0.18977314229442568,
-    "sum": 0.28125,
-    "worst": 0.03125
+    "product": 0.18624502027023734,
+    "sum": 0.2976190476190476,
+    "worst": 0.023809523809523808
    },
-   "score": 0.18977314229442568,
-   "rank": 31,
+   "score": 0.18624502027023734,
+   "rank": 40,
    "ranks": {
-    "product": 31,
-    "sum": 31,
-    "worst": 31
+    "product": 40,
+    "sum": 41,
+    "worst": 40
+   }
+  },
+  {
+   "id": "B1-30000-801b34-s3085",
+   "round": "E40",
+   "seed": 3085,
+   "conquest_share": 0.42005879935227297,
+   "z": {
+    "shadow": 11.456076369881343,
+    "novelty": -5.748100928923379,
+    "selection": 24.941492295204604,
+    "heredity": 17.858025367133887
+   },
+   "values": {
+    "shadow": 11.456076369881343,
+    "novelty": -0.08652087566753236,
+    "selection": 0.038666973856578475,
+    "heredity": 0.7910494283863445
+   },
+   "beside": {
+    "birth_share": 0.579941200647727,
+    "conquests_per_agent": 0.7149273094124468,
+    "conquests_per_agent_2000": 0.7473843940466548,
+    "births_per_agent": 0.9243967721598287,
+    "conquests_per_birth": 0.7243127387450935,
+    "generations": 3195.082095778408,
+    "births_on_path": 1405.3595861838812,
+    "conquests_on_path": 1789.7225095945269,
+    "generations_births_only": 1302.511763724345,
+    "common_ancestor_age": 29.0,
+    "common_ancestor_age_shadow": null,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 13.04322429906542,
+    "effective_population_shadow": 3058.257719913203,
+    "effective_population_births_only": 4.755881862172487,
+    "heredity_births_only": 0.4397959756719648,
+    "heredity_birth_pairs": 0.8115818422179839,
+    "heredity_conquest_pairs": 0.7910494283863445,
+    "births_only_pairs_still_brain_pairs": 0.12637468206129376,
+    "novelty_above_noise": 0.024460557221209447,
+    "novelty_null_above_noise": 0.11098143288874181,
+    "novelty_births_only": 0.02395712562323344,
+    "shadow_z": {
+     "persist": 7.707237746075086,
+     "top": 18.05681118101483,
+     "life": 26.822753791145306,
+     "active_share": 8.604180182554108,
+     "active_count": -8.575782388930415,
+     "top_activity": 40.342934060764435
+    },
+    "selection_visible": 36.7361040934534,
+    "selection_clear": 46,
+    "selection_cells": 48,
+    "selection_follows": -0.06765327695560254,
+    "selection_same_sign": 0.5454545454545454
+   },
+   "health": {
+    "product": 0.2828567403743069,
+    "sum": 0.3705738187756353,
+    "worst": 0.07317073170731705,
+    "ranks": {
+     "product": 72,
+     "sum": 69,
+     "worst": 67
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.9523809523809523,
+    "novelty": 0.5,
+    "selection": 0.023809523809523808,
+    "heredity": 0.09523809523809523
+   },
+   "orders": {
+    "product": 0.18127400456377712,
+    "sum": 0.3928571428571428,
+    "worst": 0.023809523809523808
+   },
+   "score": 0.18127400456377712,
+   "rank": 41,
+   "ranks": {
+    "product": 41,
+    "sum": 33,
+    "worst": 41
    }
   },
   {
@@ -2839,22 +3679,22 @@
    "shortlisted": true,
    "out": null,
    "shares": {
-    "shadow": 0.625,
-    "novelty": 0.03125,
-    "selection": 0.28125,
-    "heredity": 0.09375
+    "shadow": 0.5238095238095238,
+    "novelty": 0.023809523809523808,
+    "selection": 0.30952380952380953,
+    "heredity": 0.11904761904761904
    },
    "orders": {
-    "product": 0.1506428285521222,
-    "sum": 0.2578125,
-    "worst": 0.03125
+    "product": 0.14641471247302643,
+    "sum": 0.24404761904761907,
+    "worst": 0.023809523809523808
    },
-   "score": 0.1506428285521222,
-   "rank": 32,
+   "score": 0.14641471247302643,
+   "rank": 42,
    "ranks": {
-    "product": 32,
-    "sum": 32,
-    "worst": 32
+    "product": 42,
+    "sum": 42,
+    "worst": 42
    }
   }
  ]

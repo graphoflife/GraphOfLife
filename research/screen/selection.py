@@ -149,7 +149,8 @@ def summary(rows: Dict[str, np.ndarray], eras: Sequence[int]) -> Dict[str, Any]:
     A world's test 4: every behaviour's eras, and over them all how visible selection is (the root mean square
     of the eras' z-scores), how strong (the mean size of the standardized gradient, with wealth held fixed),
     and whether the behaviours moved the way the differentials point (the rank correlation, over every era and
-    behaviour, of the differential, in standard deviations of the behaviour, with the change that followed).
+    behaviour, of the differential per iteration, in standard deviations of the behaviour, with the change of
+    the behaviour's mean to the next era, in the same units; and how often their signs agree).
     """
     t = rows["t"]
     traits = {}
@@ -158,7 +159,9 @@ def summary(rows: Dict[str, np.ndarray], eras: Sequence[int]) -> Dict[str, Any]:
     cells = [(k, e) for k in traits for e in traits[k] if e.get("z_S") is not None]
     zs = [e["z_S"] for _, e in cells]
     zg = [e["z_gradient"] for _, e in cells if e.get("z_gradient") is not None]
-    moved = [(e["S"] / e["sd"], e["change"] / e["sd"]) for _, e in cells if "change" in e and e["sd"] > 0]
+    # Per iteration and per standard deviation of the behaviour, so that behaviours read in every iteration and
+    # those read in every fifth game (the stakes) stand on one scale.
+    moved = [(e["intensity"], e["change"] / e["sd"]) for _, e in cells if "change" in e and e["sd"] > 0]
     agree = [np.sign(a) == np.sign(b) for a, b in moved if a and b]
     strength = [float(np.mean([abs(e["gradient"]) for e in traits[k] if "gradient" in e]))
                 for k in traits if any("gradient" in e for e in traits[k])]
@@ -169,7 +172,9 @@ def summary(rows: Dict[str, np.ndarray], eras: Sequence[int]) -> Dict[str, Any]:
             "clear_gradient": int(sum(abs(z) > 3.29 for z in zg)),
             "strength": float(np.mean(strength)) if strength else None,
             "follows": _spearman([a for a, _ in moved], [b for _, b in moved]),
-            "same_sign": float(np.mean(agree)) if agree else None}
+            "same_sign": float(np.mean(agree)) if agree else None,
+            "blocks_agreeing": float(np.mean([e["blocks_agreeing"] for _, e in cells
+                                              if e.get("blocks_agreeing") is not None])) if cells else None}
 
 
 def main() -> None:
