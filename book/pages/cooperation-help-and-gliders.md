@@ -626,7 +626,6 @@ responsible, and
 [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)
 proposes changes.
 
-
 ### What we learned (do agents cooperate)
 - **Help has an exact meaning here.** A stake helps if, without it, the
   neighbour staked on would have been more likely to lose its node. Only

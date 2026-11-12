@@ -823,7 +823,7 @@ draw the figures:
   [The geometry of a world](#the-geometry-of-a-world).
 
 The thesis of Experiment 5 was first checked in the thirty worlds of 10,000
-tokens of Experiment 2, listed last. There `python3 gol_lab.py analyse E05`
+tokens of Experiment 2. There `python3 gol_lab.py analyse E05`
 checks it. In the worlds of 100,000 tokens, `python3 book_figures.py shape`
 checks it again.
 
