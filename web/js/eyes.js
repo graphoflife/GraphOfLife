@@ -168,7 +168,11 @@ const Eyes = {
     const mark = this.anchor ? this.anchor.getBoundingClientRect() : null;
     const showX = mark && mark.width ? mark.left + mark.width / 2 - box.left : width / 2;
     const showY = mark && mark.height ? mark.top + mark.height / 2 - box.top : height / 2;
-    const big = Math.max(34, Math.min(96, (mark && mark.width ? mark.width : 140) * 0.42));
+    // Its size follows the mark's box too; full screen, with no box to read,
+    // the same share of the shorter side the stylesheet gives the box (17vmin),
+    // so a phone's great eye is no bigger for the words being put away.
+    const box17 = Math.min(140, Math.min(width, height) * 0.17);
+    const big = Math.max(24, Math.min(96, (mark && mark.width ? mark.width : box17) * 0.42));
     Tube.unwarp(showX, showY);
     const cx = Tube.atX, cy = Tube.atY;
     this.cx = cx;

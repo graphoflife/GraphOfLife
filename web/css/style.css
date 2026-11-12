@@ -3302,6 +3302,9 @@ html:has(.home-stage.is-full) { overflow: hidden; }
   .home-stage { grid-template-columns: minmax(0, 1fr); }
   .home-hero { padding: 56px 16px 24px; }
   .home-seal { width: 104px; }
+  /* Over the eyes the mark's box is the great eye's: there it keeps the share
+     of the screen it has on a laptop, not the mark's smallest size. */
+  .home-stage.backdrop-eyes .home-seal { width: clamp(56px, 17vmin, 104px); }
   .home-title { font-size: clamp(30px, 10vw, 44px); }
   .home-subtitle { letter-spacing: 0.22em; margin-right: -0.22em; }
   .home-readout { display: none; }
