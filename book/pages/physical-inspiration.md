@@ -615,13 +615,13 @@ Nothing yet lasts in the way a glider does.
   ([Do tokens go round?](b1-the-game-and-its-flows.md#do-tokens-go-round)). Over
   fifty games, more goes round than chance would make. But no ring of tokens
   outlasts those fifty games
-  ([Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go)).
+  ([Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go)).
 - **Patterns that travel.** When an agent takes a neighbour's node with at
   least half of its tokens, its wealth and a copy of its brain move together.
   Such moves form chains far more often than chance would. In B1 they are
   *gliders*, rich agents moving on; in B2, *puffers*, a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself
   outward. But no chain keeps a direction; each wanders like a random walk
-  ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)).
+  ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)).
 - **A beat.** The nodes that launch such chains fire without a rhythm. And the
   two-game swing of the hubs is an overshoot, damped in every game.
 - **Groups.** The nearest thing is a star's **dynasty**, in B1
@@ -770,7 +770,7 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
   the dimension of the worlds, measured, and the rules that fold them.
 - [Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): the game as a random walk of
   tokens, the other face of the heat equation.
-- [Gliders, and who helps whom](gliders-and-who-helps-whom.md): patterns that
+- [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom): patterns that
   outlast their parts, looked for in the record of play.
 - [What this notebook is about](what-this-notebook-is-about.md): the first
   aim, open-ended evolution, which keeps meeting this one.

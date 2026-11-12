@@ -186,7 +186,7 @@ curvature still predicts the change in B2 (0.28), and does not in B1
 (−0.01). In B1 the flow downhill is nodes changing hands. A peak keeps its
 node in only 10% of games, and an agent level with its neighbours in 56%.
 Those peaks are the rich nomads of
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md), which move
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom), which move
 their wealth on and leave their node behind. In B2 nearly every agent keeps
 its node (88% to 98%), and the tokens move as stakes that fail. Over ten
 games the slope shows plainly in B2: curvature predicts the change at 0.44 on

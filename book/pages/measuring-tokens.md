@@ -847,7 +847,7 @@ on it alone would go round, as a share of the whole energy. In the example it
 is $(9 + 9 + 1)/3/23 = 19/69 \approx 0.28$. Averaging over all sixteen ways of
 flipping the four directions gives the same. In a world it is estimated by
 flipping the directions at random a few times: four, in
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go).
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#where-the-tokens-go).
 
 The example's 0.71 is far above both levels: its flow goes round. A share
 *below* the sign-flip level means the opposite. The flow's directions line up
@@ -858,7 +858,7 @@ downhill more than chance: tokens run from some agents to others.
 A ring that is there in one stretch of games and gone in the next is an
 accident of those games. A ring that **persists** is a structure. Split the
 flow of two consecutive stretches, 50 games each in
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md). Then, over the
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom). Then, over the
 connections both stretches used, take the correlation of their circulations,
 and of their gradient parts. A correlation near zero means each stretch's
 rings are new. A positive one means rings or slopes that come back on the
@@ -875,7 +875,7 @@ another. Bronisław Malinowski described the classic case in *Argonauts of the
 Western Pacific* (1922): the Kula ring, whose armshells and necklaces pass
 from island to island.
 
-- [Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go)
+- [Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go)
   splits the flow of 50 games in the twenty worlds of B1 and B2. Gifts run
   downhill; takeovers go round, but never twice in the same place.
 - [A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one)
@@ -883,7 +883,7 @@ from island to island.
   [Lightning](#lightning-tokens-that-go-round). Over fifty games, 80% of
   B1's net flow circulates, by energy, where random flow on the same network
   would circulate about 60%.
-- [Help](do-agents-cooperate.md#help) splits the net help between agents the same way, to look
+- [Help](cooperation-help-and-gliders.md#help) splits the net help between agents the same way, to look
   for help that goes round.
 
 #### What it can and cannot say
@@ -917,7 +917,7 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 - [What the brains are like](what-the-brains-are-like.md): why brains score
   alike.
 - [Stars and hubs](measuring-networks.md#stars-and-hubs): where the walk fits worst.
-- [Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go):
+- [Gliders, and who helps whom](cooperation-help-and-gliders.md#where-the-tokens-go):
   the flow of fifty games split exactly, gifts and takeovers apart.
 - [Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in): who trades with
   whom, and for how long.

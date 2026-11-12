@@ -733,7 +733,7 @@ informative for being spread wider. They are still the same for every reader.
 
 ### Could kin recognise each other?
 
-[Do agents cooperate?](do-agents-cooperate.md) found that kin live side by
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners) found that kin live side by
 side: a tenth of an agent's neighbours carry its own genotype. Yet kin are
 staked on exactly like strangers. A brain cannot see genotypes. It could tell
 kin only through messages, if a lineage evolved a password. That is a signal
@@ -778,7 +778,7 @@ measured, in pilot worlds under B2's rules:
 
 So sight is needed, but it is not enough. What a brain can read pays only if
 the rules give it something to gain by reading it
-([Who helps whom](who-helps-whom.md)).
+([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 
 ### What we learned (what agents say to each other)
 - **Messages are names.** An agent writes the same message to every reader,
@@ -794,7 +794,7 @@ the rules give it something to gain by reading it
 - **The raw material is there.** The names identify kin exactly. If brains
   could compare what they read, kin recognition would be one comparison away,
   and with it Hamilton's kin selection
-  ([Do agents cooperate?](do-agents-cooperate.md)). That makes the gain of the
+  ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). That makes the gain of the
   brain, again, the first thing to change. The pilots with seeing brains add
   that it is not the only thing: a rule must also make it pay to treat kin as
   kin.
@@ -1108,7 +1108,7 @@ none of them needs a tuned number:
 4. **Groups that hold together.** None of these worlds makes any beyond the
    regions of its network
    ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in),
-   [Who helps whom](who-helps-whom.md)).
+   [Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 
 And one thing to avoid: a rule that leaves a single way of acting as the way
 to keep going. Lapsing links do that to the stake: spread it, or lose your
@@ -1659,7 +1659,7 @@ to every condition of every experiment, and to the pilot worlds.
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md):
   playing a world's brains against their own past.
 - [Messages](rules-in-detail.md#messages): how messages are written, delivered and read.
-- [Do agents cooperate?](do-agents-cooperate.md): kin live side by side, and
+- [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): kin live side by side, and
   are treated like strangers.
 - [Another game](another-game.md): what happened when kin could sense each
   other, and when their stakes were pooled.
@@ -1744,6 +1744,6 @@ to every condition of every experiment, and to the pilot worlds.
 
 **Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (27)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [!info]- Pages that link here (25)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every world side by side](every-world-side-by-side.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

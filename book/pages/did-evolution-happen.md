@@ -247,7 +247,7 @@ tests look for behaviour that uses them in ways nobody wrote in.
   Hamilton's rule predicts.
 - **No would look like:** gifts go to whoever is near, kin or not, as
   stakes do in B1, whose brains stake on kin as on strangers
-  ([Do agents cooperate?](do-agents-cooperate.md)).
+  ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)).
 - **Cost:** small: the record and the family tree.
 - **From:** Hamilton (1964).
 

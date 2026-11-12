@@ -37,7 +37,7 @@ and falls where it is, and the wave travels on. In Conway's Game of Life
 (Gardner 1970) the same thing happens on a grid. A glider is five live cells
 that rebuild themselves one cell further on every four generations. The cells
 are born and die, and the glider goes on
-([Patterns that outlast their parts](gliders-and-who-helps-whom.md#patterns-that-outlast-their-parts)).
+([Patterns that outlast their parts](cooperation-help-and-gliders.md#patterns-that-outlast-their-parts)).
 
 That is what a particle would be in Graph of Life: a **pattern that keeps
 its identity while what carries it is replaced**. Three things carry
@@ -63,7 +63,7 @@ there", not "a test that cannot see".
 
 The answers so far were negative, but partial. No ring of tokens lasted fifty
 games in the worlds of 10,000 tokens, and chains of takeovers wander like a
-drunkard ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)). A
+drunkard ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)). A
 star's centre is a place handed from parent to child
 ([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 Groups of the flow are the network's regions
@@ -228,7 +228,7 @@ a ring. Only in the star does the downhill part last a little (0.06 over two
 games, 0.13 over fifty), as its leaves keep paying into one centre. (In the
 worlds of 10,000 tokens, the downhill part of the gifts alone, the stakes
 that took no node, lasts as well:
-[Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go).)
+[Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go).)
 
 In the frozen world the circulation of each game is the exact reverse of the
 one before, a correlation of −1. Over any even number of games, every token
@@ -568,7 +568,7 @@ A particle would need something that binds. Three places to look next:
 
 - **Stakes that do not spread.** In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") nearly every agent stakes all in, so
   tokens travel in bundles, the puffers of
-  [Gliders, and who helps whom](gliders-and-who-helps-whom.md#puffers-in-b2-gliders-in-b1).
+  [Gliders, and who helps whom](cooperation-help-and-gliders.md#puffers-in-b2-gliders-in-b1).
   The detectors of this page, run on B2's worlds, would show whether a bundle
   can outlast the agents that carry it.
 - **A flow through the world.** Order that feeds on a flow, like the
@@ -602,7 +602,7 @@ have one answer.
 
 A group of the agents' own needs a rule that makes staying together pay,
 which none of these worlds has
-([What would have to change](who-helps-whom.md#what-would-have-to-change)).
+([What would have to change](cooperation-help-and-gliders.md#what-would-have-to-change)).
 The detectors of this page are ready for one: a world with such a rule should
 show modules that outlast partners dealt, and perhaps modules that move.
 
@@ -640,9 +640,9 @@ show modules that outlast partners dealt, and perhaps modules that move.
   the physics aim, and why a particle would be a win for both aims.
 - [Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in): the groups
   followed here, in 183 worlds of every kind.
-- [Gliders, and who helps whom](gliders-and-who-helps-whom.md): packets of
+- [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom): packets of
   tokens and brain that move, and the rings of the worlds of 10,000 tokens.
-- [Who helps whom](who-helps-whom.md): why nothing in the game rewards
+- [Who helps whom](cooperation-help-and-gliders.md#who-helps-whom): why nothing in the game rewards
   keeping a partner, and what would have to change.
 
 ## How this was made

@@ -620,7 +620,7 @@ improving, as the brains of a world without alliances do.
   factory and the password that this page tried to give evolution for free.
 - [Rules without numbers](rules-without-numbers.md): what is left of an
   alliance when the rules have no hand-chosen numbers.
-- [Who helps whom](who-helps-whom.md): every way the agents were given to
+- [Who helps whom](cooperation-help-and-gliders.md#who-helps-whom): every way the agents were given to
   cooperate, side by side.
 
 ## How this was made
@@ -707,10 +707,10 @@ that made the worlds are in `research/oee/pilots/LOG.md`.
 <!-- turns -->
 ---
 
-← [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Groups and cooperation](../README.md#groups-and-cooperation) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) →
+[Groups and cooperation](../README.md#groups-and-cooperation)
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (15)
-> [Every setting](settings.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [!info]- Pages that link here (13)
+> [Every setting](settings.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

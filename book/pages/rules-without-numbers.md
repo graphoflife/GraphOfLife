@@ -442,5 +442,5 @@ settings.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
 > [!info]- Pages that link here (6)
-> [How this notebook is written](how-this-notebook-is-written.md) · [Every setting](settings.md) · [Who helps whom](who-helps-whom.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
+> [How this notebook is written](how-this-notebook-is-written.md) · [Every setting](settings.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

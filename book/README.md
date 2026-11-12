@@ -90,10 +90,7 @@ how the pages hang together.
 
 #### Groups and cooperation
 
-- [Who helps whom](pages/who-helps-whom.md)
-- [Do agents cooperate? Help, kin and partners](pages/do-agents-cooperate.md)
 - [Other contests: a lottery, and alliances](pages/another-game.md)
-- [Gliders, and who helps whom](pages/gliders-and-who-helps-whom.md)
 
 ### Space and physics
 
@@ -173,4 +170,8 @@ how the pages hang together.
 
 - [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
 - [Building B2, and the search for a healthy, rich world](pages/building-b2-and-the-search-for-a-healthy-rich-world.md)
+
+#### Side studies
+
+- [Cooperation, help and gliders (side study)](pages/cooperation-help-and-gliders.md)
 <!-- /contents -->

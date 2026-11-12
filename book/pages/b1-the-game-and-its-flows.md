@@ -108,7 +108,7 @@ B1, where the even split would give 1
 ([What goes with what](what-goes-with-what.md#token-curvature-and-token-change)).
 
 The two [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") run downhill in different ways
-([Chains of takeovers](gliders-and-who-helps-whom.md#chains-of-takeovers)):
+([Chains of takeovers](cooperation-help-and-gliders.md#chains-of-takeovers)):
 - **B1 through gliders.** A rich agent takes a neighbour's node and moves on,
   carrying its packet of tokens. Chains of three or more takeovers are eleven
   times as common as chance would make them. The mover keeps its old node
@@ -152,7 +152,7 @@ over a world's life
 - **Gifts circulate less than chance**, in B1 and B2 alike, and run downhill:
   towards the well connected in B1, towards the richer in B2. Only alliances
   make gifts go round (+0.04 to +0.14 over chance), and not for long
-  ([Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go)).
+  ([Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go)).
 - **Takeovers circulate more than chance** (+0.065 in B2, +0.24 in B1), but
   never twice in the same place: their persistence is 0.00.
 - **The groups tokens stay in** are, in B1, the network's own regions. A null
@@ -663,7 +663,7 @@ everyone they can. Suppose every agent picked its targets without regard to who
 staked on it. B would still stake on A with about that probability. So a
 reciprocity of 90% is what breadth alone would give. Real reciprocity would
 mean that B stakes *more* on A *because* A staked on B. That is a question for
-[Do agents cooperate?](do-agents-cooperate.md).
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners).
 
 #### How widely agents stake
 
@@ -929,7 +929,7 @@ anything, two thirds cancel. Almost all of the connections that carried two
 tokens carried one each way. Where something is left, it is mostly a single
 token: 28% of the connections moved one token net, and only 2% moved more.
 
-[Do agents cooperate?](do-agents-cooperate.md) calls this a **handshake**, and
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners) calls this a **handshake**, and
 here it is seen from the connections. Two neighbours, each splitting a few
 tokens evenly over a few candidates, put one token on each other.
 
@@ -1259,7 +1259,7 @@ evolves.
 #### A greedy count and an exact one
 
 The greedy count looks at one game at a time.
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md) took the net flow
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom) took the net flow
 of fifty games together. It split that flow exactly into a part that runs
 downhill and a part that circulates. The tool is the Helmholtz–Hodge
 decomposition (the note [Flows that go round](measuring-tokens.md#flows-that-go-round)).
@@ -1267,7 +1267,7 @@ decomposition (the note [Flows that go round](measuring-tokens.md#flows-that-go-
 <!-- figure lightning/exact -->
 ![A greedy count and an exact one](../figures/lightning/exact.svg)
 
-**A greedy count and an exact one.** Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz–Hodge decomposition of [Gliders, and who helps whom](gliders-and-who-helps-whom.md)); up, the greedy loop count of a single game, averaged over the same thousand iterations.
+**A greedy count and an exact one.** Each dot is a world: across, the exact share of the flow over 50 games that circulates (the Helmholtz–Hodge decomposition of [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)); up, the greedy loop count of a single game, averaged over the same thousand iterations.
 
 > [!example]- How to make this figure
 > **Runs.** The ten B2 worlds of Experiment 16 and the first ten B1 worlds of Experiment 2, iterations 1,000 to 2,000.
@@ -1297,7 +1297,7 @@ That is a warning about both numbers. Random flow on the same network would
 circulate too. There are two ways to make it. One puts random amounts of the
 same size on every connection. The other keeps each connection's own amount,
 and throws its direction at random. By these two null models of
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md), random flow
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom), random flow
 circulates 59–60% in B1, and 50–53% in B2. The real excess over chance is
 about 0.2 in B1, and less than 0.1 in B2. B1's agents
 keep tokens going round more than chance would; B2's barely do.
@@ -1787,7 +1787,7 @@ four fifths were.
   It is the step from single cells to organisms that Maynard Smith and
   Szathmáry (1995) call a major transition. These worlds make no such group beyond
   the regions of their network. That fits what
-  [Who helps whom](who-helps-whom.md) found for help: nothing in the game
+  [Who helps whom](cooperation-help-and-gliders.md#who-helps-whom) found for help: nothing in the game
   rewards staying with a partner. A group of the agents' own needs a rule that
   does. It could be a support stake that counts only if it is returned, or a
   share in what a partnership wins. [Alliances](another-game.md#alliances)
@@ -1827,7 +1827,7 @@ reads and how.
 
 - [How unequal is a world, and who stays rich](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich):
   who holds the tokens the flow leaves behind.
-- [Gliders, and who helps whom](gliders-and-who-helps-whom.md): chains of
+- [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom): chains of
   takeovers, gifts, and the flow of fifty games.
 - [How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node): the rule behind half of all
   nodes.
@@ -1835,7 +1835,7 @@ reads and how.
   decided.
 - [What the brains are like](what-the-brains-are-like.md): the brains that
   learned to play this way.
-- [Who helps whom](who-helps-whom.md): why nothing in the game rewards
+- [Who helps whom](cooperation-help-and-gliders.md#who-helps-whom): why nothing in the game rewards
   keeping a partner.
 
 ## How our view changed
@@ -1855,7 +1855,7 @@ reads and how.
     that was done, and is in [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits).
   - **24 October 2026.** This page gave the circulation of takeovers above
     chance in B2 as +0.07. It is 0.065 (0.0647 in `book/results/patterns.json`),
-    as [Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go)
+    as [Gliders, and who helps whom](cooperation-help-and-gliders.md#where-the-tokens-go)
     now gives it.
 - *Where tokens flow*:
   - **9 October 2026.** [How widely agents stake](#how-widely-agents-stake) had
@@ -1966,6 +1966,6 @@ reads and how.
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (32)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [!info]- Pages that link here (30)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

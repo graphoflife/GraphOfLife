@@ -226,7 +226,7 @@ measurements after them, follows from that one number:
 - Messages carry a name and nothing else
   ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)). Kin
   could tell each other by it, but cannot use it
-  ([Do agents cooperate?](do-agents-cooperate.md)).
+  ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)).
 - Selection has acted, the same way in every world, but on constants: have
   few children, spread the stake, and mark every staked token revolutionary,
   so that it can join a coalition.
@@ -406,7 +406,7 @@ carry one or two tokens a game, most of them one each way: an equal exchange
 that keeps the connection alive at its price of a token a game. Every
 connection that carries nothing is cut
 ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection),
-[Do agents cooperate?](do-agents-cooperate.md)). **The network** is a
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). **The network** is a
 stretched web of stars, grown locally by children joining their parents'
 neighbourhoods. It is four and a half times as long as a random network with
 the same connections, with a thirty-third of its [spectral gap](measuring-networks.md#the-spectral-gap "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.")
@@ -418,9 +418,9 @@ conquest seventeen times more than by birth, and change mostly in place, not
 when copied ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)).
 The brain on a hub is replaced almost every game, and the same two brains
 rarely face each other twice ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow),
-[Do agents cooperate?](do-agents-cooperate.md)). **Relatives** live together,
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). **Relatives** live together,
 but cannot recognise each other, and do not treat each other differently
-([Do agents cooperate?](do-agents-cooperate.md)). Almost every structural
+([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). Almost every structural
 statistic is the same in every world: it follows from the rules, not from
 what brains compute.
 
@@ -553,13 +553,13 @@ The six rules:
 5. **Nobody can tell kin from stranger.** Kin selection, help given to
    relatives who carry the same genes, has its precondition: relatives live
    together. But brains cannot see relatedness
-   ([Do agents cooperate?](do-agents-cooperate.md)). *In B2* brains that see
+   ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). *In B2* brains that see
    could tell kin by the names in their messages
    ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other),
    [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break));
    whether they do has not been measured. Given a sense of kin as an input,
    brains formed groups only where a rule pooled the stakes of kin
-   ([Who helps whom](who-helps-whom.md)).
+   ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 6. **The world can neither reach across nor split.** Growth is local only, so
    the network stretches, and its shortcuts are never renewed. The cull kills
    any part that separates, so populations can never diverge in isolation
@@ -721,7 +721,7 @@ measures, by rung of the ladder:
   the same world. A clean gradient, later beating earlier, is accumulation. A
   pattern of bands is cycling, as rock–paper–scissors would give.
 - **For cooperation**, the measures of
-  [Do agents cooperate?](do-agents-cooperate.md): kin discrimination;
+  [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): kin discrimination;
   Hamilton's accounting Σ(*rB* − *C*), which adds up, over every helping act,
   the benefit *B* to the one helped, weighted by how related *r* the two are,
   minus the cost *C* to the helper; reciprocity beyond the even split; the
@@ -750,9 +750,9 @@ grow ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolu
 read in worlds of every kind the notebook has made
 ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). The heredity
 half-life, selection ablation, the cooperation measures of
-[Do agents cooperate?](do-agents-cooperate.md) and evolutionary activity have
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners) and evolutionary activity have
 not yet been used in the notebook. Help has been counted instead, exactly by
-the rules ([Who helps whom](who-helps-whom.md)).
+the rules ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 
 ### What the measurements changed in what this notebook teaches
 
@@ -984,5 +984,5 @@ the rule changes of both aims will be tested together where they coincide.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
 > [!info]- Pages that link here (15)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

@@ -653,7 +653,7 @@ changes only 1.5% ([What the brains are like](what-the-brains-are-like.md)).
   ([B1 and B2: the two baselines](b1-and-b2.md)).
 - [What a brain can compute](what-a-brain-can-compute.md): what a B2 brain
   can and cannot work out from its 66 inputs.
-- [Do agents cooperate?](do-agents-cooperate.md): no input names a genotype,
+- [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): no input names a genotype,
   so a brain cannot tell kin from stranger, except through messages.
 
 ## What a brain says
@@ -857,7 +857,7 @@ of the messages' variety.
 - [What a brain can compute](what-a-brain-can-compute.md): why no message
   can carry news of a third agent, and how `self_message` = largest would let
   one.
-- [Do agents cooperate?](do-agents-cooperate.md): messages are the only way
+- [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): messages are the only way
   a brain could tell kin from strangers.
 
 ## How a coalition takes a node

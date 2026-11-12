@@ -29,7 +29,7 @@ nothing new built, and takes about two and a half days
 
 In the worlds of B1 measured so far, nothing shows that agents cooperate.
 They stake on kin as on strangers, and the same two brains rarely face each
-other twice ([Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)).
+other twice ([Do agents cooperate? Help, kin and partners](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)).
 Is cooperation impossible under these rules, or only slow? The plainest way
 to find out is to wait: leave one world alone for a very long time, and
 look.
@@ -82,7 +82,7 @@ computing.
   ([What the brains are like](what-the-brains-are-like.md#does-a-brain-see-what-it-is-shown)).
   If it went on rising, the brains would one day see what is around them.
   Then every road to cooperation that needs seeing would open: recognising
-  kin, answering a partner ([Do agents cooperate?](do-agents-cooperate.md)).
+  kin, answering a partner ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)).
   The worlds of 100,000 tokens, examined later, had reached the same gain,
   0.0015, within 1,500 iterations: 2.4 times a founder's.
 - **The worlds wander, slowly.** Think of the level of a lake. The wind
@@ -238,7 +238,7 @@ written when no world had lived longer than 3,000 iterations, so its
 > [!quote] The thesis of Experiment 11, written down before any of its runs existed
 > **The claim.** Time is not what is missing. A world of 204,800 tokens left for 100,000 iterations, thirty times longer than any world of this book has lived, goes on wandering, but within bounds it reaches in its first few thousand iterations, and nothing appears late that was not there early. Its agents do not learn to cooperate: they stake on kin as they stake on strangers, the same two brains still rarely face each other twice, and the brains stay nearly blind.
 >
-> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)): a node's brain is replaced almost every game, so nobody meets anybody twice ([Chapter 38](do-agents-cooperate.md)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations ([Chapter 18](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
+> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)): a node's brain is replaced almost every game, so nobody meets anybody twice ([Chapter 38](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of mutation and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations ([Chapter 18](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
 >
 > **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent; [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."); births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the median difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
 >
@@ -334,7 +334,7 @@ would need more than 200 GB, more than the disk holds. So the run keeps:
   run;
 - **frames**, with the decisions, only for the last 17 iterations of every
   block. That is enough for every measure of
-  [Do agents cooperate?](do-agents-cooperate.md), which looks up to 16 games
+  [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners), which looks up to 16 games
   ahead: about 8 GB;
 - a **checkpoint** at the end of every block, with every brain, every token
   and the state of the random stream. A copy is kept every 10,000
@@ -355,7 +355,7 @@ it. A frame that was not kept is a frame that has not been made again yet.
   were taken. A world at rest gives a curve that levels off; a world still
   moving, one that keeps rising; a change of state, a step.
 - **Cooperation**, in every window, by the five measures of
-  [Do agents cooperate?](do-agents-cooperate.md):
+  [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners):
   - how related [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are;
   - the ratio of stakes on kin to stakes on others;
   - whether a node taken stays in the family;
@@ -518,7 +518,7 @@ None yet: neither the plan of 9 October nor the new one has been played.
   are played against their own past.
 - [Every era against three](every-era-against-three.md): the longest worlds
   of the notebook, and where their evolution stopped climbing.
-- [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md): the
+- [Do agents cooperate? Help, kin and partners](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): the
   measures this run would take in every window.
 
 ## How this was made

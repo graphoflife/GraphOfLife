@@ -249,7 +249,7 @@ has no special claim to it.
 keeps it in 2.0% of games; on a node with one connection, in 74%
 ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). A pair of brains facing
 each other across a connection survives one more game in 4% of cases
-([Do agents cooperate?](do-agents-cooperate.md)). The centre of a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") is the
+([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). The centre of a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") is the
 extreme: a coalition takes its node in every game, and it carries a new brain
 almost every game ([The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)).
 
@@ -282,7 +282,7 @@ hardly matter in B2: they win about one node in three hundred a game
 
 How long a brain holds its node in B2 has not been measured directly. Help —
 a stake that saves another agent's node — is almost absent there: about 0.01
-nodes saved per 100 agents a game ([Who helps whom](who-helps-whom.md)).
+nodes saved per 100 agents a game ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 
 ## Decisions averaged over neighbours
 
@@ -409,7 +409,7 @@ cut ([`prune_after`](settings.md#prune_after),
 **What the data say.** Two connections in three carry one or two tokens in a
 game ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)). 66% of mutual
 stakes are one token each way, 58% at 10,000 tokens
-([Do agents cooperate?](do-agents-cooperate.md)). Regions of poor agents lose
+([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). Regions of poor agents lose
 their connections and die ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)).
 
 **Why it matters.** Much of what agents stake on their neighbours is the rent
@@ -609,5 +609,5 @@ To make every figure of this page: `python3 book_figures.py mechanics`.
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2).
 
 > [!info]- Pages that link here (12)
-> [The brain](the-brain.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [The brain](the-brain.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

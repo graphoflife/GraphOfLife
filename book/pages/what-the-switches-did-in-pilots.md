@@ -960,7 +960,7 @@ than a stake. It gives from what its child left it: the tokens it keeps after
 a birth. A gift is a real transfer, and it crosses a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), so it keeps
 that connection alive. These are gifts an agent chooses to make. They are not
 the failed stakes that
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md) calls gifts,
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom) calls gifts,
 which end up with a node's holder.
 
 The author built gifts to make the upkeep of a link a decision. In the
@@ -2279,7 +2279,7 @@ agents, against 3,200–3,650. Their conquest is twice B2's: 10–13 nodes taken
 per 100 agents a game, against about 6. And more of what is taken goes round.
 Over fifty games, the circulating share of the takeovers' flow is 0.63–0.64,
 against 0.49–0.51 for its sign-flip null
-([Gliders, and who helps whom](gliders-and-who-helps-whom.md)). B2 has
+([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)). B2 has
 0.39–0.42, against 0.34–0.35.
 
 And evolution goes on, in one world strongly. In the first world, the brains
@@ -2337,7 +2337,7 @@ The input changed nothing that was measured. The worlds are B2's size, with
 3,540–3,560 agents. Evolution goes on at B2's pace: 0.65–0.74 from 500 to
 1,000, and 0.60–0.61 from 1,000 to 2,000, against 0.67–0.69 and 0.65–0.76.
 And help between neighbours stays at B2's level. Like the inputs of
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md), it tells an
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom), it tells an
 agent something its rules give it no reason to act on.
 
 ### Links that hold a token, and nobody dies of age
@@ -2370,7 +2370,7 @@ whole and resilient as B2's, whose evolution goes on more strongly. There the br
   drift; units that cost a token shrink to almost nothing. Neither rule needs
   a number for the size of a brain.
 - **Information alone changes nothing**, here as in
-  [Gliders, and who helps whom](gliders-and-who-helps-whom.md). An input is
+  [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom). An input is
   only as useful as the rules make acting on it.
 - **A world without death freezes**, even with a network that holds together: turnover is
   what selection works on.
@@ -2521,5 +2521,5 @@ number appears during one.
 **Also about:** [Changing the rules](../README.md#changing-the-rules), [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 
 > [!info]- Pages that link here (22)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

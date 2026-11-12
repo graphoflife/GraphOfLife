@@ -110,7 +110,7 @@ each batch asked:
 | N | Rules without numbers (B3, with and without allies) and alliances without the home advantage | 4 | 8 | 10,000 | 1,000 | done | [Alliances](another-game.md#alliances), [Rules without numbers](rules-without-numbers.md) |
 | S | The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other contests (a lottery, sides pooled by genotype or family, kin and family senses) | 13 | 26 | 10,000 | 1,000 | done | [The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with), [Another game](another-game.md) |
 | L | Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without revolutions to 3,000 | 3 | 13 | 10,000 | 3,000, 10,000, 50,000 | 10 done, 3 stopped early | [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops), [A hundred thousand iterations](a-hundred-thousand-iterations.md) |
-| P | Two inputs (where my brain came from, who helped me) and links that hold a token | 6 | 12 | 10,000 | 2,000 | done | [Rules without numbers](rules-without-numbers.md), [Gliders, and who helps whom](gliders-and-who-helps-whom.md) |
+| P | Two inputs (where my brain came from, who helped me) and links that hold a token | 6 | 12 | 10,000 | 2,000 | done | [Rules without numbers](rules-without-numbers.md), [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom) |
 | Q | Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a token without old age | 5 | 10 | 10,000 | 2,000 | done | [Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin) |
 | R | Who inherits the estate of the dead: the poorest, the newborns, their parents | 9 | 18 | 10,000 | 2,000 | done | [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits) |
 | T | Gifts together with each other switch | 24 | 48 | 10,000 | 1,000 | done | [Gifts, with every other rule](what-the-switches-did-in-pilots.md#gifts-with-every-other-rule) |
@@ -380,7 +380,7 @@ many worlds of that experiment or batch the measure has been taken on:
   of an earlier one. They play for an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")'s [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.")
   ([Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on));
 - **games recorded and read again**: takeover chains, help, and flows that
-  go round ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)).
+  go round ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)).
   Where there are gifts, also who gives to whom;
 - **flow modules**: the groups tokens stay in
   ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in));

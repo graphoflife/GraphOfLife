@@ -238,7 +238,7 @@ Five cautions apply to every picture the viewer draws:
 - **Families live together.** Descent is regional: a line of brains holds a
   part of the world, not scattered agents. Spatial structure like this is
   what kin selection and network reciprocity need.
-  [Do agents cooperate?](do-agents-cooperate.md) asks whether it is used.
+  [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners) asks whether it is used.
 - **Wealth is a landscape of peaks and valleys,** with the peaks at the hubs.
 - **Connections are kept near their minimum price,** a few tokens a game.
 - **Pictures raise questions.** Here are two from this page. Do the old live
@@ -344,5 +344,5 @@ colours`.
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics) · [What goes with what](what-goes-with-what.md) →
 
 > [!info]- Pages that link here (8)
-> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

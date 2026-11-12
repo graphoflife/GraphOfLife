@@ -149,7 +149,7 @@ one of them.
   [A screen of random worlds](a-screen-of-random-worlds.md)).
 - **Strategies written by hand, and groups.** Is evolution's play the best
   there is ([Strategies written by hand](strategies-written-by-hand.md))? Do
-  agents work together ([Who helps whom](who-helps-whom.md))?
+  agents work together ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom))?
 - **Space and dimension.** The second aim: is a world a space, of how many
   dimensions, what folds it, and does anything like a particle appear?
   [Physical inspiration](physical-inspiration.md) sets out the questions.

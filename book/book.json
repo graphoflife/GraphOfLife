@@ -737,30 +737,6 @@
       "summary": "A plan not yet played: in a sea of agents that answer every look with a brain drawn afresh from the world's own, one agent planted as a leaf with a brain of its own, fixed and inherited (a brain of the sea, the world's main line's, or its future's), beside a marked agent of the sea in the same place. Its draft thesis expects that no brain gains by being an individual, and that none takes hold in more than one planting in ten."
     },
     {
-      "id": "who-helps-whom",
-      "title": "Who helps whom",
-      "file": "pages/who-helps-whom.md",
-      "topics": [
-        "groups"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Cooperation means paying a cost so that someone else gains, and in Graph of Life the only act is a stake. A stake helps a neighbour if, without it, the neighbour would have been more likely to lose its node."
-    },
-    {
-      "id": "do-agents-cooperate",
-      "title": "Do agents cooperate? Help, kin and partners",
-      "file": "pages/do-agents-cooperate.md",
-      "topics": [
-        "groups"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Cooperation means paying a cost so that someone else gains. In Graph of Life the only act is a stake. A stake on a neighbour's node helps if, without it, the neighbour would have been more likely to lose that node."
-    },
-    {
       "id": "another-game",
       "title": "Other contests: a lottery, and alliances",
       "file": "pages/another-game.md",
@@ -772,18 +748,6 @@
       "status": "analysed",
       "added": "2026-10-15",
       "summary": "In the game of Graph of Life, a node goes to whoever stakes most on it. This page changes that contest in pilot worlds, two seeds each, and asks whether evolution then goes on."
-    },
-    {
-      "id": "gliders-and-who-helps-whom",
-      "title": "Gliders, and who helps whom",
-      "file": "pages/gliders-and-who-helps-whom.md",
-      "topics": [
-        "groups"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-15",
-      "summary": "When an agent takes a neighbour's node with at least half of its tokens, its wealth and a copy of its brain move there together."
     },
     {
       "id": "rules-without-numbers",
@@ -1028,6 +992,19 @@
         "E36",
         "E37"
       ]
+    },
+    {
+      "id": "cooperation-help-and-gliders",
+      "title": "Cooperation, help and gliders (side study)",
+      "file": "pages/cooperation-help-and-gliders.md",
+      "topics": [
+        "side-studies",
+        "groups"
+      ],
+      "kind": "study",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "Whether agents cooperate, asked in October 2026 of B1, B2 and pilot worlds: help as the rules count it, kin and partners, and chains of takeovers."
     }
   ],
   "parts": [
