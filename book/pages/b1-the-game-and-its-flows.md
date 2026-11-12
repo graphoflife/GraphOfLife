@@ -179,11 +179,6 @@ births fills a world**, to half as many agents again, and poorer ones
 [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size)).
 
 ### What we learned (where tokens go)
-- **Flow here is mostly arithmetic.** An even split on a network, rounded to
-  whole tokens, explains where tokens rest, why wealth follows connections in
-  B1, how fast tokens run downhill, and most of what circulates. The brains'
-  part is a margin: about 0.2 of circulation in B1, pairs in B2, brief rings
-  in alliances.
 - **Nothing that flows comes back to the same place.** Gliders move on and
   grow, takeovers never repeat, gifts drain. A lasting cycle of exchange, the
   kind a structure could be built on, has not appeared in any world.
@@ -465,10 +460,6 @@ playing the game in much the same way, whatever its founders started with.
   born per iteration
   ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). A brain's
   descendants are mostly the nodes it conquers, not its children.
-- **The game is a game of coalitions.** 97% of staked tokens are marked
-  revolutionary. So a node goes, nearly always, to one of its other stakers
-  when together they put more on it than its largest single staker did. That
-  winner may be the agent living there.
 - **The stakes are nearly an even split.**
   [Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow) shows that agents stake on
   almost all of their candidates. They keep a little more than an even share
@@ -1225,14 +1216,6 @@ about 0.2 in B1, and less than 0.1 in B2. B1's agents
 keep tokens going round more than chance would; B2's barely do.
 
 ### What we learned (where tokens flow)
-- **A game is close to a random walk of tokens.** The evolved brains of B1
-  spread their tokens nearly evenly over everyone they can reach, as blind
-  brains do. In tokens, a world's economy is an exchange of equal stakes, plus
-  a diffusion downhill.
-- **Wealth follows connections, and hubs are places.** At rest, an agent holds
-  tokens in proportion to its connections plus one: being rich is a matter of
-  being in a well-connected place. The brains on hubs change almost every game,
-  so the network's most important positions are held by no one.
 - **A connection lives on a token a game.** Two connections in three carry one
   or two tokens, most of them one each way, and cancel exactly. In B1 the rule
   that cuts is exact and local: every empty connection is cut, and every
@@ -1243,10 +1226,6 @@ keep tokens going round more than chance would; B2's barely do.
   tokens in a game. Only an agent holding that many can send them, and the
   rich are the well connected
   ([How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)).
-- **Whether tokens go round is decided by one rule, not by the brains.** If a
-  link must carry tokens to survive, agents stake on each other and the flow
-  goes round (B1, and B2 with unused links lapsing). If links survive unused,
-  the flow runs one way (B2).
 - **Within a game, almost all that goes round is two agents staking on each
   other.** What is not exchanged runs downhill. The longest loops are as long
   as the world is wide: they grow as its size to the power 0.31, like its

@@ -508,16 +508,6 @@ which it widens faster as it grows.
 - **An edge only lowers a reading.** A ball cut out of a cubic grid reads at
   most 2.30 at 2,000 points and 2.65 at 64,000; a disc of a square grid, 1.73
   and 1.89. By balls, no body reads more than its dimension.
-- **Larger worlds read more at the same radius, and the edge is not why.**
-  Between radius 2 and 3 the worlds read 1.8 to 2.4 up to 5,000 agents and
-  2.5 to 2.8 from 14,000 on, more than any cubic grid; a body's reading
-  there changes by a tenth. Larger worlds hold bigger hubs, and more room
-  close in (*indicative*). Above 15,000 agents the rise slows.
-- **By their width, the worlds read about four.** Their typical distance
-  grows as agents^0.20 to 0.23, their diameter as agents^0.26 to 0.27, where
-  a ball of a cubic grid widens as points^0.35: 3.7 to 4.9 dimensions. Hubs
-  that grow with a world would do the same, so the width alone cannot say
-  whether the dimension grows at the largest scales (*indicative*).
 - **One look at a world is not enough.** A world's reading over radii 3 to 6
   varies by 0.8 between five moments of its settled life, and its typical
   distance by a factor of 1.8, in the median world.
@@ -525,11 +515,6 @@ which it widens faster as it grows.
   size**, in the median; those that mend are 0.73 times as wide. Seed 3044
   of Experiment 40 and seed 4003 of Experiments 41 and 42 are the widest for
   their size, 1.6 to 1.8 times B1's.
-- **Settling it needs larger worlds, or steadier ones.** To read the balls
-  twice as far out, a world needs about 12 million tokens: by the notebook's
-  own costs, 11 days and some 260 GB of memory for 600 iterations. Worlds
-  whose make-up does not change with their size would answer the question at
-  the sizes there are.
 
 ### How this was made (dimensions at scale)
 No world was played for this section: it reads saved runs only. To draw its
@@ -1078,9 +1063,6 @@ experiment, not a finding.
   share of the whole world. γ = 2 is exactly the law at which a world loses
   big pieces at the same rate whatever its size, and the law of a tree grown at
   random.
-- **Tokens, connections and likeness keep a scale of their own.** The richest
-  agent grows ever more slowly, to about 2,500 tokens; kin and age are alike
-  for a step or two, at 470 agents and at 63,000.
 - **Nothing here is critical.** What has no scale has it from the cull, which
   reaches across the whole world, and perhaps from the way trees grow.
 

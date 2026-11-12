@@ -304,22 +304,11 @@ are the far end of the first. A world is first of all a world with or
 without a star ([Stars and hubs](measuring-networks.md#stars-and-hubs)).
 
 ### What we learned (what goes with what)
-- **The heat equation is a fifth true.** Tokens do run downhill along the
-  curvature, in both rule sets, at about a fifth of the pace an even split
-  would set. They run through nodes changing hands in B1, and through failed
-  stakes in B2.
-- **Where wealth sits is a property of the rules.** B1 ties it to the network:
-  the rich are the connected and the old. And it keeps it there (0.78 over ten
-  games). B2 cuts it loose, so that the connected are slightly poorer, and lets
-  it churn (0.41).
 - **In B2, losing one's node is close to a lottery**, as far as anything an
   agent is or does can tell. Selection can only act on traits that change the
   odds, and none of these does by much. That is one more reason for evolution
   in B2 to be slow, besides the ones of
   [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops).
-- **A world is first of all a world with or without a star.** Half of the
-  differences between thirty worlds of the same rules are the size of their
-  largest hub, decided early and by chance.
 - **For a world over time,** the dead's estate levels it in B1, and hoarding
   unlevels it in B2.
 
@@ -487,13 +476,6 @@ Which measure was made on which worlds is listed in [What was measured on
 what](every-simulation.md#what-was-measured-on-what), which is kept up to date.
 
 ### What we learned (every world side by side)
-- **There are two kinds of world, not a continuum.** Every lab world is
-  B1-like or B2-like in how its agents play. Only one of all the changes
-  tried, letting unused links lapse, moved a world from one kind to the
-  other.
-- **The rules pin the play; the seed sets the population.** How agents stake
-  is decided by the settings. How many agents the tokens are spread over, how
-  much a world breeds and how many are cut off are decided by chance, early.
 - **Every measure the notebook has can now be taken of every world** that
   plays the engine's game, lab or pilot. The table that holds them is in the
   notebook, and in the Research tab.
@@ -726,8 +708,6 @@ Five cautions apply to every picture the viewer draws:
   part of the world, not scattered agents. Spatial structure like this is
   what kin selection and network reciprocity need.
   [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners) asks whether it is used.
-- **Wealth is a landscape of peaks and valleys,** with the peaks at the hubs.
-- **Connections are kept near their minimum price,** a few tokens a game.
 - **Pictures raise questions.** Here are two from this page. Do the old live
   at the edges, as a picture at 10,000 tokens suggested, or in cohorts, as
   this one does? And do families always occupy regions?
@@ -1350,11 +1330,6 @@ what selection acts on here, and the brains, which are, are not made of
 reusable parts.
 
 ### What we learned (assembly theory)
-- **For small graphs whose nodes and links are all alike, the assembly index
-  is set by the number of links.** All 108 connected graphs of up to seven
-  links take the fewest joins their links allow, l(*m*), the shortest addition
-  chain; so do 98.8% of the agents' neighbourhoods in every network read, and
-  none is more than two joins above it.
 - **The worlds hold about as much assembly as random networks with their
   degrees.** The world's A over its twin's is 0.92 in the median B1 world,
   1.16 in B2 and 1.28 in round 3's healthiest; a random space made by chance

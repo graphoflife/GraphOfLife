@@ -1064,14 +1064,6 @@ held pilot worlds steady at about two thousand agents, six in ten of them poor
 ([What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size)).
 
 ### What we learned (building B2)
-- **Brains that see break worlds.** With one hidden layer and change only when
-  copied, eight of ten worlds of 5,000 tokens died out; none of B1's did.
-- **Worlds bleed; they do not snap.** Every world of 5,000 tokens, blind or
-  seeing, loses agents to the cull in every iteration, and lives only while
-  its births keep up. Seeing brains can stop having children.
-- **Births alone grow a tree of blobs, and a death mended in a ring never
-  splits a world.** Under four local rules, no agent of ten B2 worlds was cut
-  off. Each rule taken away broke something.
 - **What is kept at home decides who is left to play.** The more an agent
   keeps, the fewer agents hold a single token, and the more evolution goes on.
   With nothing kept, no world lived 50 iterations. A world of paupers is a
@@ -1083,9 +1075,6 @@ held pilot worlds steady at about two thousand agents, six in ten of them poor
   rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)). With children of any size, a world fills with
   9,543 agents, nearly all of one token (a Gini of 0.04: all equally poor),
   born and dying in cohorts, and evolution is weaker than in B2.
-- **B2 pays in riches and in room.** About half its agents hold a single
-  token, and its network is nearly a small world, not a space of three
-  dimensions.
 
 ### How this was made (building B2)
 #### The runs of Experiment 13
@@ -1606,8 +1595,6 @@ does. That is why [What makes a world interesting](rounds-1-and-2-of-the-screen.
 asks for a dimension of 2 to 4 *and* a width of at least 1.5.
 
 ### What we learned (healthy and rich)
-- **No world yet fits the picture.** The two rule sets each have half of
-  it: B1 the diverse agents, B2 the healthy network. Neither has both.
 - **B2's network rules work; its agents are many, and so poor.** A world of
   10,000 tokens that holds 3,400 agents has about three tokens per agent,
   and in B2 the median agent holds one. What made worlds richer — mixing
@@ -1624,11 +1611,6 @@ asks for a dimension of 2 to 4 *and* a width of at least 1.5.
   ([Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)).
   Something between, a death that depends on what an agent does rather
   than on a fixed age, would let ages spread without stopping the world.
-- **A healthy network is not yet a space.** The candidate worlds' networks
-  are folded small worlds, and "almost three-dimensional" asks more than
-  the bar's mark does ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
-- **A good moment is not a good world.** Most candidate worlds did not hold
-  over 10,000 iterations, and no rule held more often than mixing alone.
 - **A world might be judged by this map before it is judged by its
   evolution.** A rule that moves worlds towards the top right is a
   candidate for the long runs and the lifetime contests. The
@@ -2272,11 +2254,6 @@ world can be led to extinction by the very brains that win in it.
   a child. The two that lived stayed large and fairly poor, and missed the
   dimension mark at most of their moments. They ended closer to B2 than to the
   worlds that came closest in [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich).
-- **Evolution goes on, then fades.** Mixing does not stop selection: later
-  brains beat earlier ones as they do in B2, and by more at first. Then the
-  steps shrink. By 25,000 to 50,000 iterations, an era is as likely to lose as
-  to win against the one before it. In one world, the brains that won were
-  those that let it die.
 - **Two marks of the health bar measure size.** In B2 and its mixed worlds,
   the dimension fails a large world and the hub a small one. Networks are best
   compared at one size.
@@ -2650,18 +2627,6 @@ hubs that give their whole fortune to one child every iteration
 A floor set by the neighbours is no pull toward a steady size.
 
 ### What we learned (what holds a world's size)
-- **A world's size is set by how eagerly its agents breed.** Every agent
-  lives the same hundred iterations, so the births have to match the deaths:
-  one per hundred agents an iteration. In these worlds, eagerness is a matter
-  of what selection rewards.
-- **Riches here are reluctance.** With the tokens fixed, a small world is a
-  rich one. B2's agents breed as soon as they can, and fill their world until
-  most are poor. Agents that put children off keep their world small and
-  rich.
-- **Reluctance that nothing holds can end a world.** In the mixed worlds it
-  drifts, and the size, the riches and the marks of health drift with it.
-  Three of five long worlds died when births fell below one per hundred
-  agents; in one of them, the winning brains were those that let it die.
 - **Nothing tried so far holds a world both rich and steady.** Rules that pay
   for births fill a world. Rules that keep agents alive, or reward a line
   late, let it shrink further. The estate to the poorest and half kept at home
@@ -3039,11 +3004,6 @@ is read:
 - The lab's worlds of seeds 1 and 2 are the stopped pilots, game for game.
 
 ### What we learned (who may be a mate)
-- **The free ride was the cause.** Two ways of ending it both steady a mixed
-  world. With only parents as mates, able agents breed twice as eagerly as
-  with any mate. None of ten worlds bred itself towards its end in 20,000
-  iterations. With a mate that pays, all four worlds held their size more
-  steadily than with a free mate.
 - **But reluctance was also what made mixed worlds rich.** With parents as
   mates the eager fill their world to about 2,000 agents, six in ten of them
   poor. Its network becomes B2's: six marks of the health bar, and folded,
@@ -3058,9 +3018,6 @@ is read:
   have them, and less when many do. Parents as mates raise eagerness
   everywhere, at every size, and so set the world at one size: larger than
   mixing's, smaller than B2's.
-- **Steady is not yet a space.** The worlds of both rules are folded. Room is
-  the one thing the steadiest mixed worlds still lack
-  ([Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world)).
 
 ### How this was made (who may be a mate)
 #### The runs of Experiment 19
@@ -3704,16 +3661,6 @@ looks for room.
   other, beside the pages that ask for them. Among them are a lottery for
   each node, stakes pooled by genotype, brains that grow, and an input of
   where a brain came from.
-- **Most candidate worlds do not hold.** Of nineteen, five held over 10,000
-  iterations, eleven fell back and three died out. By the clarified test,
-  three held.
-- **One world says little about a rule.** A candidate world that held was
-  one draw from a wide spread. Of the same rule's next five worlds, some
-  held, some fell back and some died. No rule held more often than mixing
-  alone.
-- **A search judged at one moment finds lucky moments.** The search's best
-  settings make diverse, wide and rich worlds every time, and thin,
-  cuttable and even ones every time.
 - **A fast change of brains is the steadiest of the three rules, but its
   riches are evenness.** Every one of its worlds lived, diverse and with
   few poor, and missed at most a single mark. But four of its five are more
@@ -3966,24 +3913,6 @@ pays is now known:
 - no old age pays with one age;
 - no mending pays with cuts.
 
-#### What the room rules teach
-
-- **Half the picture is solved.** With the estates to births, a world of
-  mixed brains and parents as mates is a healthy space of about three
-  dimensions, with every mark. It is the network the author's picture asks
-  for. What it lacks is in its agents. There are too many of them, each too
-  poor for its tokens to differ.
-- **Why so many, and so poor?** We first read it as the price of a child.
-  An estate paid to the newborns makes children cheap to have, and the world
-  fills with them. So the next rule asked more of a birth: a child must start
-  with at least what its parent's neighbours hold. The next section tells
-  how that turned out: the price of a child was not the cost.
-- **The nearest world is one without mending.** Seed 1 missed only a cut. A
-  world whose deaths are not mended keeps its tokens and its room; what it
-  needs is to stay whole. Mending without folding is a second rule to try
-  ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) traced the folding to the
-  rings a death closes).
-
 ### Births as rich as the neighbours
 
 <!-- experiment E32 -->
@@ -4172,27 +4101,8 @@ every B2 child already starts with ten tokens, more than a poor world's
 neighbours hold. A world whose least child is a single token, such as B1, is
 another matter.
 [The floor in plain B2 and in B1](#the-floor-in-plain-b2-and-in-b1) plays
-the same floor in both.
-
-#### What the floor teaches
-
-- **In B2, a rule that measures a world against itself follows it down.** The
-  floor asked a child to be as rich as its neighbours. In a poor world the
-  neighbours are poor, so the floor fell with the world, below the ten
-  tokens every child already gets. A pull has to measure against something a
-  poor world does not drag down with it.
-- **The paupers are made by the game, not at birth.** A rule on what a child
-  starts with cannot reach them. Under old age, only two things can:
-  - fewer births, since the world's size is a hundred times its births;
-  - or a game that strips the young less.
-- **Room and riches come from the same coin.** The estate worlds are spaces
-  because their young are the parents. Their young are the parents because,
-  in a world of paupers, only the newly born and the newly paid are rich
-  enough. Under these rules a world gets young parents only by paying for
-  births, and paying for births fills it with paupers. A world that is both a
-  space and rich needs its young to breed without the world filling up. Or it
-  needs deaths that do not fold it when the old breed: the open question of
-  [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world), mending without folding.
+the same floor in both. Mending without folding was left open
+([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 
 ### The floor in plain B2 and in B1
 
@@ -4386,31 +4296,6 @@ But not in the way the thesis expected:
   too, so two worlds cannot say whether the floor did this.
 
 Fewer and richer agents, yes; a steadier or healthier world, no.
-
-### What we learned (room and riches for the steadiest world)
-- **Half the picture is solved.** With the estates paid to births, a world
-  of mixed brains and parents as mates is a healthy space of about three
-  dimensions. What it lacks is in its agents: too many, each too poor for its
-  tokens to differ.
-- **Each rule that keeps room pays in its own coin.** The estates pay with
-  poor, alike agents; no old age with one age; no mending with cuts. The
-  nearest world had no mending, and missed only a cut.
-- **The poor are made by the game, not at birth.** Children start with ten
-  tokens or more, and the game takes most of it within twenty iterations.
-- **A floor set by the neighbours binds only where a child may start poor.**
-  In B2, mixed or plain, a poor world's neighbours are poor, and the floor
-  falls below the ten tokens every child already gets. In B1 it bars most
-  agents from having a child. Those that may give most of what they hold:
-  children start richer, births are more frequent, and lives short.
-- **In B1 the floor gathers tokens.** Beside a rich agent a poor one may not
-  breed. Both worlds ended small, around a few hubs that hand their whole
-  fortune to one child every iteration. Whether that was the floor or B1's
-  own swings, two worlds cannot tell.
-- **Where every agent dies at a fixed age, a world's size is a hundred times
-  its births an iteration.**
-- **Room and riches come from the same coin.** Young parents keep a world a
-  space. Here only births paid for by the estates make young parents, and
-  those births fill the world with paupers.
 
 ### How this was made (room and riches for the steadiest world)
 Experiments 31, 32 and 36 start from B2, and Experiment 37 from B1, all at
@@ -4691,6 +4576,11 @@ iteration's frame.
   Since that day health is used only as a filter, and worlds are ranked by
   evolution, so the search no longer bears on the question. Its pages are kept
   so that every experiment here can be read and made again. Nothing was cut.
+- **12 November 2026.** What room and riches taught was told four times: in
+  What the room rules teach, What the floor teaches, the list What we learned
+  (room and riches for the steadiest world), and the verdicts. The three were
+  cut; the verdicts tell it, and the open question they pointed to, mending
+  without folding, ends Experiment 32's verdict.
 
 <!-- turns -->
 ---

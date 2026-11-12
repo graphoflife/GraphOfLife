@@ -40,13 +40,7 @@ Its sections:
 
 Most experiments threw one rule at a time into B2. Six pilot batches threw
 them in together: four paired one rule with each of the others, and two threw
-eight in at once. What a rule does alone is often not what it does in
-company, because rules act together about as strongly as alone. Rules of rare
-events change almost nothing anywhere. Rules that reshape the network, or set
-a world's size, do so in any company. Evolution went on in 174 of 198 worlds
-on B2, and no combination started it again on B1. And no combination reached
-the author's picture: every rule that keeps a world a space pays for it in
-some other way.
+eight in at once.
 
 ### Why rules in company
 
@@ -261,20 +255,7 @@ without random inputs was one already at 1,000: 291 agents, 34 tokens per
 agent and a Gini of 0.39.
 
 ### What we learned (rules in company)
-- **Measure rules in company.** A rule's effect alone is one corner of a
-  table. Many rules change sign or size among others.
-- **Mixing is the rule to build on, with care.** At iteration 1,000 its rise
-  in diversity holds with nearly every companion. Its riches hold only where
-  nothing pays for births, nothing passes links on, and revolutions are left
-  on.
-- **The rules that matter most are the rules of birth**: who pays for it, who
-  may breed, who mates. They set a world's size and its riches. Through who
-  dies with how many links, they set its geometry too.
-- **Room has a price.** Every rule that keeps a world a space pays for the
-  room in diversity, in evenness, in a flat network or in cuts. And the mixed
-  worlds that were spaces, healthy and half rich at iteration 1,000, did not
-  stay so.
-- **What is still missing** is a pull on births, which
+- **What was still missing** was a pull on births, which
   [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size) asked for. Births
   should pay more when few are born, and less when many are. When Experiment
   19 took mixing's free mate away, every world lived to 20,000 iterations, at
@@ -822,20 +803,10 @@ Neither moves it beyond the chains either (−0.02 and +0.14).
   design each main effect is a difference of two means of eight, clean of
   every pair. Pairs can be read only in chains of four, which the worlds
   cannot tell apart.
-- **A switch measured alone tells what it does in B2, not what it does.**
-  Among combinations, mixing's riches and the riches of links that hold a
-  token mostly vanish, and the lapse's fall in dimension halves. Pairs of
-  switches act together often and strongly.
-- **Three effects hold whatever else is on.** Every unused link lapsing
-  makes worlds rich, small and low in dimension, and costs marks. The estate
-  to the newborns makes them large and poor. Mixing makes the agents differ
-  more.
 - **One of the sixteen meets the author's picture better than any.** It is
   B, D, F and G, the one mixed world with no rule that cancels mixing's
   riches. It is one world of one seed, folded, and at 10,000 iterations it
   had lost a mark.
-- **Evolution goes on** in fifteen of the sixteen worlds, in most of them
-  more slowly than in B2 itself; four switches speed it a little.
 - **On B1** few switches stand out against the spread of the chains of
   pairs. The estate to the newborns makes a world larger, poorer and more
   alike, as on B2. No handover keeps more links. No revolutions, which alone
@@ -1470,14 +1441,6 @@ and 0.46 with gifts and revolutions, and 0.89 and 0.08 with gifts and no
 revolutions.
 
 ### What we learned (revolutions)
-- **In B2, evolution goes on whatever the switches; they change only how
-  fast.** A lifetime long, the brains of iteration 1,000 beat those of 500 in
-  B2 and nearly all its variants of batch S. In company they win in 42 of 48
-  worlds without revolutions, 40 of 42 with gifts and 35 of 46 with handover.
-  Evolution does not need revolutions. Gifts alone sped it up, but not in
-  company, and handover slows it, to a median of 0.57 against B2's 0.68. No
-  switch the world was built with stops evolution in B2. Whether any makes it
-  go on without end, worlds of 1,000 iterations cannot tell.
 - **Revolutions matter where they are common.** In B1 they are most of the
   fighting, and they decide whether a world is old and calm, with stars, or
   young and turbulent. In B2's kind of world they are a detail, with one
@@ -1497,10 +1460,6 @@ revolutions.
   in which evolution lasts longer can also die, as the world of 3,000
   iterations nearly did. Contests a lifetime long do not bear the lead out
   world by world.
-- **Handover trades resilience for room.** Whatever else the rules are, it
-  thins the network into trees hanging on single links. With fewer links to
-  gather, the dying fold the world less. It is no friend of riches: it
-  cancels mixing's, and those of links and units that hold a token.
 - **Gifts are a detail in B2's kind of world.** They move a few thousandths
   of the tokens a game, mostly to the poorer. Like revolutions and unlike
   handover, they change little whatever else the rules are. Where births are
@@ -1730,12 +1689,6 @@ evolution, whatever else the rules say; it speeds it most where the agents
 stay rich.
 
 ### What we learned (brains mixed at birth)
-- **Mixing's riches are robust, but not to rules that pay for births.** With
-  sixteen rules of twenty-three the worlds stay rich. Of the seven that cancel
-  it, four bring children back. They pay for them, make them cheap, or take
-  away the deaths they replace.
-- **Evolution goes on with nearly every combination**, fastest where the
-  agents stay rich.
 - **The richest combinations are also the smallest.** Riches are size where
   the tokens are fixed
   ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)), and
@@ -1978,17 +1931,6 @@ passes down a line over a life, evolution goes on.
 other worlds tie or swing.
 
 ### What we learned (who inherits)
-- **Who inherits sets how many agents a world holds.** Some estates land
-  where a birth can follow from them, on the newborns or the parents. They
-  fill a world to more agents than an even share does. It grows B2's worlds by half,
-  and makes B1's a world of infants. The safety net does little in B2, whose
-  dead are poor, and keeps B1's poorest alive.
-- **More agents is not more life.** The bigger worlds are poorer and more
-  alike, and in B2 they stop evolving. None of the first three rules brings a
-  world nearer to the author's picture than the even share does.
-- **An estate kept in the family changes little.** B2's worlds stay near B2's
-  size and poverty, and keep evolving at least as fast. B1's grow larger,
-  poorer and younger than its controls.
 - **With mixing, too.** Batch M combines each rule with brains mixed at birth
   ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)). It
   asks whether one of them holds a mixed world's drifting size. The estates to
@@ -2155,13 +2097,6 @@ in a smaller world give a later brain more room to win? This batch cannot
 say.
 
 ### What we learned (links to strangers)
-- **Given a way to reach strangers, agents reach their neighbours'
-  neighbours.** Nothing in the game rewards a far link over a near one. And a
-  search that walks the network finds what is near.
-- **A paid search is not worth its tokens**, to these brains, at this length
-  of evolution. The free one is used, and changes the network locally.
-- **Every searching world evolves faster than B2**, whether its agents search
-  or not. What they share is a smaller world, and more for a brain to set.
 - **Locality survives.** The notebook's other aim is a network that behaves
   like space
   ([Is a world a space?](how-many-dimensions-does-a-world-have.md)). For it,
@@ -2335,11 +2270,6 @@ whole and resilient as B2's, whose evolution goes on more strongly. There the br
 - **A cost turns size into a choice.** Free units grow beyond their neutral
   drift; units that cost a token shrink to almost nothing. Neither rule needs
   a number for the size of a brain.
-- **Information alone changes nothing**, here as in
-  [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom). An input is
-  only as useful as the rules make acting on it.
-- **A world without death freezes**, even with a network that holds together: turnover is
-  what selection works on.
 - Mixing was later played in the lab (Experiments 17 and 18); costly units
   never were.
 

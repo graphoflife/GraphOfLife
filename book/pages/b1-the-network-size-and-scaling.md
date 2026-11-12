@@ -814,38 +814,6 @@ of seed 1, at 10,000 tokens, half of them did. The number of loops through an
 agent is heavy-tailed: most agents are on a few, a handful on hundreds.
 
 ### What we learned (the shape of the network)
-- **The ring is gone at once, and a mesh with trees replaces it.** Within a
-  hundred iterations, more than half of the agents are in the core: 57% after
-  a game, 60% before it. Small trees hang off the core. A third of all agents
-  are leaves, and a quarter of all connections are bridges. At a tenth of the
-  size, a world was half tree and half web.
-- **Experiment 5's thesis was refuted, on one clause.** Bridges and clustering
-  were as tree-like as it predicted. But the core held most of the agents:
-  narrowly so at 10,000 tokens, more clearly at 100,000. Births close loops: a
-  child joined to two agents that are neighbours closes a triangle as it is
-  born.
-- **Connections are very unequal.** Most agents have one or two, and a few
-  hubs have hundreds or thousands. Growth by copying makes a hierarchy of
-  stars, with leaves hanging on hubs.
-- **The core is a mesh within meshes.** It holds three quarters of the tokens
-  and every loop. Inside it is a denser mesh, and inside that a denser one
-  still, down to a knot of agents each joined to eight others. The trees
-  around it are small, mostly a single step deep.
-- **The mesh is a space.** By balls the core has two to three dimensions, a
-  little fewer than the whole world, because trees add room without adding
-  directions. By walks it reads a little under two (1.5 to 1.9 at the three
-  sizes), as the world does. Its random twin has no dimension at all. So a
-  world's dimension is not an artefact of its trees: it is the dimension of
-  its core. By balls, it grows with the world's size, over the sizes run so
-  far.
-- **The world is stretched.** Two agents are a median 17.7 steps apart, 2.3
-  times as far as in a random network of the same size. A token needs about
-  eighteen games to go between them. Measured exactly, one world is four and a
-  half times as long as its random twin (twice at 10,000 tokens). Nothing
-  makes long jumps, and the gap widens with size.
-- **It mixes slowly, through bottlenecks.** Its spectral gap is a thirty-third
-  of its twin's. Tokens settle within neighbourhoods and not across the world,
-  and far-apart regions are only loosely coupled.
 - **For evolution, that cuts both ways.** A network that mixes slowly lets
   regions differ for a long time. That is how spatial structure protects
   variety, and how cooperation can grow among neighbours (Nowak and May 1992;
@@ -1149,9 +1117,6 @@ separated piece live on as a world of its own is planned for the experiment
 [Local rules only](local-rules-only.md).
 
 ### What we learned (how a world breaks)
-- **A world breaks along its poor regions, not at its weakest bridge.** The
-  most fragile-looking connection almost never fails. The big losses are
-  borders of agents too poor to keep their connections in use.
 - **Connections have a price.** One token of flow per game, per connection,
   paid by one side or the other. That caps how many connections a world of *T*
   tokens can hold. It may be part of why a world's size follows its tokens
@@ -1506,15 +1471,6 @@ It is not 1/*f* noise, a slope of −1, which would mean memory on every time
 scale. The world forgets.
 
 ### What we learned (power laws)
-- **One real power law, one plausible, two apparent.** The token tail
-  follows a power law over one to two decades, and the test finds it
-  plausible. The tail of the connections is plausibly one, for the top 1%
-  (the top 5% at 10,000 tokens). The degree distribution as a whole is not,
-  and neither are the lumps of death.
-- **Fit the tail, then test it.** Least squares through a whole distribution
-  gave a lower exponent than maximum likelihood in all thirty worlds. A good
-  fit is not yet a power law, and the test cannot see a bend among the
-  richest few.
 - **The rules contain two textbook mechanisms for heavy tails**: copying
   neighbourhoods at birth, and multiplying tokens by chance with a floor
   below. Neither is shown here to be the cause; both could be switched off in
@@ -1784,13 +1740,6 @@ clustering −1.64 to −1.29. The fourth, for the change in a game, lies betwee
 world's history.
 
 ### What we learned (how properties scale together)
-- **The even split's resting state describes wealth.** Across three decades of
-  connections, agents hold on average about 1.7 tokens for each of their
-  candidates, the median agent a little less. The famous-looking exponent 0.6
-  is that law seen through a log–log fit.
-- **The network is a hierarchy of stars.** Triangles grow with connections,
-  clustering falls about as 1/*k*, and leaves hang on hubs. Copying
-  neighbourhoods at birth explains all three.
 - **These relations belong to the rules.** They are nearly the same in every
   world. And they follow from two mechanisms, splitting stakes evenly and
   joining children to their parents' neighbours, that say nothing about what a
@@ -2089,21 +2038,6 @@ draws such families in colour. So a world has territories after all: of
 lines, not of genotypes.
 
 ### What we learned (like next to like)
-- **Likeness at a distance has a measure.** The correlation function *C*(*r*)
-  says how alike agents *r* steps apart are, and the correlation length how
-  far likeness reaches. Shuffling values among agents with as many
-  connections tells place from closeness.
-- **A world has structure only within one or two steps.** Its correlation
-  length is one to two connections. Beyond three steps, a world is
-  statistically the same everywhere: no rich regions, no old towns, no
-  territories of genotypes.
-- **Most of the local structure is place, not influence.** Rich beside poor
-  is mostly hubs among leaves. Only age is alike beside alike beyond what
-  place explains, as cohorts born and dying together.
-- **Kin cluster, and lines spread.** Agents of one genotype cluster within two
-  or three steps: one step apart, two agents carry the same genotype 290 times
-  as often as chance. Lines of descent hold patches of about 7 to 12 steps, which widen
-  as a random walker spreads.
 - **A world is far from critical.** At a critical point the correlation
   length grows without bound, and likeness falls off with distance only as a
   power. Here it is gone within three steps. That fits
@@ -2836,27 +2770,12 @@ extremes are rarer and larger. The pages on the baseline say where each of
 these matters.
 
 ### What we learned (worlds of many sizes)
-- **A world's averages follow its tokens.** Agents and connections grow in
-  proportion to the tokens, with exponents 1.00 and 1.04. Inequality, home
-  stakes and genotypes per agent are the same at every size. For its
-  averages, a result found at 10,000 tokens holds from a few thousand tokens
-  to hundreds of thousands. So size can be chosen for cost.
-- **Its ups and downs do not average out.** In every world, at every size, a
-  game can remove a third or half of everyone, whatever their brains. The
-  noise comes from a rule, the cull, not from small numbers. So for
-  open-ended evolution, size is not a cure. Only a change of the rule removes
-  the noise, as B2 does
-  ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)).
 - **Size changes the arrangement more than the agents.** Distances grow like
   a power of size, as in a three-dimensional body, not as in a small world.
   At ten times the tokens, clustering is less than half and the extremes are
   larger. Births and deaths per agent run only 13 to 21% faster. A finding
   made at one size holds, per agent, roughly at another; a finding about
   shape has to be checked at both.
-- **A line takes over a world ten times larger in about six times as long.**
-  The time to a single founder grows as the tokens to the power 0.77. That
-  lies between the width of a world (0.30) and its number of agents (1). The
-  front the thesis expected is refuted, and so is chance alone.
 - **Lines live in patches that widen as a random walk would.** A family is a
   region of a world, a few steps across at first, a dozen after two hundred
   iterations. It spreads locally, as the rules require, but with no steady
@@ -3309,17 +3228,6 @@ What the thesis missed, at both sizes, is where the spread comes from. It is
 mostly not the seed but time. Each world wanders, and the end of a run catches
 it wherever it happens to be. That is why every later page measures worlds
 over their settled life, from iteration 500 on.
-
-### What we learned (how much does the seed decide)
-- Worlds that differ only in their seed settle alike in size and inequality.
-  At 100,000 tokens they vary by about a tenth of the mean or less: less than
-  at 10,000 tokens.
-- Most of what tells such worlds apart is time, not the seed: a world forgets
-  its level within about three hundred iterations.
-- The shape of the network is the exception: a few worlds grow a giant hub,
-  and stay apart from the rest.
-- Measure a world over its settled life, not at its end. A change of a tenth
-  in the number of agents then takes 19 seeds, not 48.
 
 ### How this was made (how much does the seed decide)
 The thirty worlds of 100,000 tokens are those of Experiment 10

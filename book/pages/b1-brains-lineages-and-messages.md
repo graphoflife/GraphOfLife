@@ -388,22 +388,12 @@ widens more and more slowly
 ([Where the lines live](b1-the-network-size-and-scaling.md#where-the-lines-live)).
 
 ### What we learned (genotypes and lineages)
-- **A genotype is a name that changes fast.** The median genotype lasts two
-  iterations. A settled world holds five genotypes for every eight agents,
-  at both sizes. The most common one usually holds a tiny part of it: a
-  median of 0.6% at 100,000 tokens, 1.6% at 10,000.
 - **The unit of evolution here is the line, not the genotype.** A genotype
   lasts a couple of iterations, far too short for selection to act on it. A
   line that takes over the world lasts hundreds. The first step of the
   ladder in [What this notebook is about](what-this-notebook-is-about.md)
   asks for lineages that last long enough for selection to act. Only lines
   can meet it.
-- **Lines take worlds over, more slowly in larger worlds.** One line
-  replaced all the others about every 350 iterations at 10,000 tokens, and
-  about once a run at 100,000.
-- **In a settled world, the winners are not better.** The lines that take it
-  over carry no brains that play better, and they spread as a random walk
-  does, not as a front.
 
 ### How this was made (genotypes and lineages)
 The command `python3 book_figures.py lineage` draws every figure of this
@@ -641,9 +631,6 @@ the rules give it something to gain by reading it
 ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 
 ### What we learned (what agents say to each other)
-- **Messages are names.** An agent writes the same message to every reader,
-  and all agents of one genotype write the same message. A message carries who
-  wrote it, and almost nothing else.
 - **No language has evolved.** A signal can mean something only if two things
   hold. What is sent must depend on something: the sender's state, the
   receiver, or the situation. And what is done on receipt must depend on what
@@ -974,13 +961,6 @@ that replaced it. If new kinds beat old ones, the turnover is selection. If
 they only differ, it is drift: variety without direction.
 
 ### What we learned (how alike the agents are)
-- **Kinds of behaviour are far fewer than names.** A B1 world holds about a
-  thousand genotypes but a handful of kinds of staking. Most of what makes two
-  brains two changes nothing they do.
-- **B1's agents act alike; B2's do not.** B2's agents differ as widely as
-  random brains, in nearly every variant of its rules.
-- **The rule for links decides it.** Where every unused link lapses, B2's
-  agents spread their stakes and become as alike as B1's, with B2's brains.
 - **The rate of change sets how many kinds there are:** about 4.5 kinds of
   staking at 0.05, and about 60 at 0.8.
 - **Variety is renewed, not accumulated.** B2's kinds turn over in hundreds of
@@ -1438,29 +1418,12 @@ apart needs an experiment: move a kind to another place, and see whether it
 does worse there.
 
 ### What we learned (how different are the agents)
-- **In the same place, with the same dice, B2's agents do not act alike.**
-  Nine pairs in ten stake measurably differently. There are about 17
-  effective kinds of staking, and about 54 over every decision, in worlds of
-  about 950 effective genotypes.
-- **B1's agents mostly do.** They are nearly seven times more alike than
-  random brains. In four worlds of ten, one kind, built around the even
-  split, holds 73–94% of the agents.
 - **How an agent stakes depends on where it is, hardly on a fixed leaning.**
   The brain on its own makes only 2–3% of the variance of the share kept at
   home. The place, how a brain answers it, and chance make the rest. In B2
   the place also decides a child's share, through its rules. Spreading and
   linking a newborn are traits of each brain, and were before selection
   began. In B1 a child's share is a trait too.
-- **Genotypes overstate the variety of behaviour.** B2's worlds hold about
-  950 effective genotypes, but 17 kinds of staking (54 over every decision).
-  Across worlds, the number of genotypes does not predict the number of
-  kinds.
-- **B2's kinds turn over; B1's last.** Within 500 iterations, two thirds of
-  the kinds a sample of B2 can find are gone, and new ones have taken their
-  place. A core lasts thousands of iterations. B1's few kinds are still there
-  5,000 iterations later.
-- **Kinds sit in somewhat different places**, by links in B2 and by tokens in
-  B1: niches or families, not yet told apart.
 - **For open-ended evolution, B2 has the raw material and B1 has not**:
   many kinds of behaviour at once, steadily renewed. What B2 lacks is a
   reason for a kind to *stay*: a place where it does better than the others.

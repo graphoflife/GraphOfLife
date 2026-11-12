@@ -630,10 +630,6 @@ nine tenths of a world contested with them. Every later era ties with the one
 before it. Whatever the brains of a world learn, they learn in its youth.
 
 ### What we learned (the life of a B1 world)
-- **The youth is unlike the rest of a world's life.** Within twenty
-  iterations a world booms to well over ten thousand agents. Then its network
-  breaks apart, and most of its founders' lines die. Whatever the brains
-  learn, they learn then.
 - **A typical world exists; single worlds wander around it.** After the
   youth, the median of thirty worlds of 100,000 tokens stays within 7% of its
   middle. A single world ends anywhere from about two thirds to one and a half
@@ -644,16 +640,6 @@ before it. Whatever the brains of a world learn, they learn in its youth.
   iteration 500 in a large world, and until about 1,250 in a small one.
   Whatever depends on them, such as the ages of the living, settles only
   then. So the notebook measures a settled world from iteration 500 on.
-- **Size protects a world from dying, not from falling.** None of the thirty
-  large worlds died, where four of thirty small ones did. But one large world
-  lost nine tenths of itself in ten games.
-- **In the end, one founder for everyone.** In 27 of the 30 worlds every
-  agent came to descend from a single founder; a world ten times the size
-  takes about six times as long. Whatever diversity of brains a settled world
-  holds, it has made since.
-- **Experiment 2's thesis was refuted at both sizes.** Births fell by 28%
-  (41% in the small worlds), and four small worlds died. A world has more
-  than one phase of life.
 
 ### How this was made (the life of a B1 world)
 Every figure of this section reads the thirty runs of Experiment 10: B1 at
@@ -1280,34 +1266,12 @@ cut together, and the region dies ([How a world breaks](b1-the-network-size-and-
 calls it a border going quiet).
 
 ### What we learned (births)
-- **A settled world replaces about 3.5 of every 100 agents in every
-  iteration.** Three in four of those that die are cut off from the network
-  rather than starved. The rates hold steady from iteration 500 on, and differ
-  little from world to world.
-- **Most agents die young, and none grows old.** Nearly a third of all
-  newborns die in the iteration they are born in, and two thirds within ten
-  iterations. A few live more than a thousand. The risk of dying falls with
-  age and then holds near one game in a hundred, so long lives are almost
-  memoryless. The oldest agent is set by how many agents there are, not by any
-  limit on a life.
 - **The living are older than the dead.** They are a sample weighted towards
   long lives, older than the typical agent ever gets. Half of the agents that
   live through their first game are gone within ten iterations, yet half of
   the living are older than 55.
-- **In a world of 100,000 tokens, ages settle by iteration 500.** By then a
-  world's age structure, life expectancy and risk at every age are those it
-  will still have at iteration 1,500. About 2.4% of its agents are newborns,
-  and half are younger than 55. An agent that lives through its first game can
-  expect some 41 iterations. The first five hundred iterations, the youth and
-  the slowing of turnover after it, are the only time the ages change. The
-  ages of the living follow from the lifetimes, as those of a stationary
-  population do.
 - **A world a tenth the size settles later, and grows older.** Its births kept
   falling after iteration 500, and its old agents died less often.
-- **The old are the rich, on average, because the well connected live long.**
-  The typical agent has 2 connections at every age; the hubs, which die less
-  often, fill the old classes. Connections give an agent age, not age
-  connections.
 - **For open-ended evolution, a world's demography is finished early.** From
   iteration 500 on, nothing about who lives how long changes. Evolution, if it
   acts, has to act inside that steady turnover, not through how long agents
@@ -1711,17 +1675,6 @@ other way. They pass from parent to newborn child, as
   founders start on was made at a birth, so births are the world's only
   source of structure. They also keep a world alive, as long as they make up
   for its losses.
-- **Growth is local.** A connection is only ever made inside a parent's
-  neighbourhood, and never brings two agents closer together. That is what
-  lets a world keep a geometry. A network that added connections between
-  random agents would collapse into a small world, in which everything is a
-  few steps from everything. The price is that births close only small
-  loops, and leave a tree of blobs that one death can cut.
-- **The network grows by preferential attachment and shrinks by preferential
-  loss.** Both are close to proportional to an agent's connections. What a
-  node has, it gains more of, and loses more of.
-- **There is no first-mover advantage.** Old agents are no better connected
-  than young ones, except that the best connected live longest.
 - **Births are not the main road of inheritance.** About 480 children are
   born per iteration, but about 8,100 nodes take on a neighbour's brain in
   every game
@@ -2421,26 +2374,9 @@ returns to everyone at once. Concentrated wealth that is not also
 connectedness is taxed away in this manner, a little at a time.
 
 ### What we learned (how unequal is a world)
-- **Inequality comes at once, and then holds still.** The first births end
-  the founders' equality. Over the settled life the Gini coefficient stays
-  near 0.47, and the richest tenth hold about 42%. Worlds of 10,000 tokens
-  are much the same.
-- **Experiment 4's thesis was refuted at both sizes, mostly in its reason.**
-  Wealth pools, but only moderately, and agents stake about 30% of their
-  tokens at home, not most of them.
-- **Tokens follow connections, like a diffusion.** The game, as the brains
-  play it, is close to a random walk of tokens. It comes to rest with each
-  agent holding tokens in proportion to its connections plus one. On hubs
-  and leaves it overshoots, in a two-game rhythm.
-- **A world is moderately even, and stays so.** Tokens behave as if shared
-  equally among half the agents; genotypes as if each were carried by two.
-  Neither drifts over the settled life.
 - **One number is set by the rules.** Five genotypes for every eight agents,
   in every world: a balance of making and copying brains. That variety is
   churn, not novelty.
-- **The rich stay rich for a while, and then they don't.** The order of
-  wealth is half forgotten in fifty to a hundred games and mostly forgotten in
-  200. It is remembered as long as the connections that carry it.
 - **Wealth without connections is fragile.** The richest agents on dead ends
   die three times as often as other agents on dead ends. Wealth is safe only
   where the network is thick.
@@ -2880,18 +2816,6 @@ The share-out is a small basic income that matters only to the poor.
 tokens out would do.
 
 ### What we learned (gains and losses)
-- **A game is an exchange, plus diffusion.** Nearly half the agents end a game
-  with exactly what they had, because what they send out comes back. What does
-  move runs downhill, from agents richer than their neighbourhood to agents
-  poorer than it. In tokens, a world works much like heat spreading through a
-  network.
-- **The poor live on a knife's edge.** Nearly a third of 1-token agents die in
-  every game; the survivors multiply their tokens. Being poor in this world is not a
-  slow decline, it is a coin toss.
-- **Wealth above its resting share does not last.** A rich agent with few
-  connections loses its excess to its neighbours within a few games. Or it
-  dies on its dead end, and its tokens are shared out. The rich are replaced
-  where connections are many.
 - **Wealth is a place, not a memory.** An agent's tokens drain back to the
   share its connections give it, so its wealth cannot record that its brain
   did well in the past. For evolution, that matters: selection needs
@@ -3190,20 +3114,6 @@ brain holds its node in B2 has not been measured directly, as
 [Hubs are places](questioning-the-mechanics.md#hubs-are-places) notes.
 
 ### What we learned (the largest and the smallest)
-- **The top is a place.** The best-connected agent of a world sits on a node
-  whose brain is replaced in nearly every game. What lasts is its connections,
-  and they are handed from parent to newborn child. A star is the clearest
-  case of what
-  [Where tokens flow](b1-the-game-and-its-flows.md#who-keeps-their-node) calls a
-  hub: a place, not an individual.
-- **Wealth flickers, connections last.** First place in tokens changes in
-  three games out of five. First place in connections lasts a median of 6
-  iterations, and often ten or more. A dynasty can keep it in one line of
-  descent for hundreds.
-- **The extremes grow with the world, but slower than it.** In a world of ten
-  times the tokens, the richest agent is about three times as rich and the
-  best-connected about four times as connected. No agent becomes a fixed share
-  of the world.
 - **A dynasty is inherited, and carries nothing a brain did.** It is the first
   thing in these worlds that is inherited and lasts, but what it passes on is
   a position. B2's rules took handover away, and with it this kind of
