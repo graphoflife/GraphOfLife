@@ -1,0 +1,631 @@
+{
+ "chapter": "evolutionrank",
+ "numbers": {
+  "counts": {
+   "read": 19,
+   "of": 82,
+   "provisional": true,
+   "shortlisted_in_top": 3,
+   "union": 14
+  },
+  "table:top": {
+   "head": [
+    "rank",
+    "world",
+    "round",
+    "score",
+    "among the first 10 by",
+    "lines beyond luck (z)",
+    "novelty above the null",
+    "selection strength",
+    "heredity",
+    "copies by conquest",
+    "health's rank",
+    "on the shortlist"
+   ],
+   "rows": [
+    [
+     "1",
+     {
+      "text": "s3078",
+      "href": "run:B1-30000-dd27b6-s3078"
+     },
+     "round 3",
+     "0.726",
+     "product, sum, worst",
+     "6.2",
+     "-0.008",
+     "0.074",
+     "0.99",
+     "49%",
+     "42",
+     "no"
+    ],
+    [
+     "2",
+     {
+      "text": "s3026",
+      "href": "run:B1-30000-d6955f-s3026"
+     },
+     "round 3",
+     "0.708",
+     "product, sum, worst",
+     "4.4",
+     "-0.056",
+     "0.101",
+     "1.00",
+     "50%",
+     "23",
+     "no"
+    ],
+    [
+     "3",
+     {
+      "text": "s3023",
+      "href": "run:B1-30000-b0f6e3-s3023"
+     },
+     "round 3",
+     "0.637",
+     "product, sum, worst",
+     "4.9",
+     "-0.018",
+     "0.078",
+     "0.96",
+     "49%",
+     "12",
+     "yes"
+    ],
+    [
+     "4",
+     {
+      "text": "s3058",
+      "href": "run:B1-30000-4108dd-s3058"
+     },
+     "round 3",
+     "0.602",
+     "product, sum, worst",
+     "4.4",
+     "-0.061",
+     "0.093",
+     "0.96",
+     "80%",
+     "27",
+     "yes"
+    ],
+    [
+     "5",
+     {
+      "text": "s4004 s",
+      "href": "run:B1-30000-2bac4d-s4004"
+     },
+     "round 3, strongest first",
+     "0.581",
+     "product, sum, worst",
+     "4.5",
+     "-0.046",
+     "0.133",
+     "0.90",
+     "54%",
+     "71",
+     "no"
+    ],
+    [
+     "6",
+     {
+      "text": "s3021",
+      "href": "run:B1-30000-4aff7d-s3021"
+     },
+     "round 3",
+     "0.534",
+     "product, sum, worst",
+     "4.2",
+     "-0.038",
+     "0.094",
+     "0.93",
+     "48%",
+     "28",
+     "no"
+    ],
+    [
+     "7",
+     {
+      "text": "s4004 w",
+      "href": "run:B1-30000-17ac6e-s4004"
+     },
+     "round 3, weakest first",
+     "0.523",
+     "product, sum",
+     "4.2",
+     "-0.018",
+     "0.128",
+     "0.89",
+     "55%",
+     "61",
+     "yes"
+    ],
+    [
+     "8",
+     {
+      "text": "s3091",
+      "href": "run:B1-30000-42d88d-s3091"
+     },
+     "round 3",
+     "0.504",
+     "product, sum",
+     "7.6",
+     "-0.043",
+     "0.112",
+     "0.88",
+     "57%",
+     "58",
+     "no"
+    ],
+    [
+     "9",
+     {
+      "text": "s3090",
+      "href": "run:B1-30000-05ba40-s3090"
+     },
+     "round 3",
+     "0.464",
+     "product, worst",
+     "3.3",
+     "-0.117",
+     "0.092",
+     "0.97",
+     "77%",
+     "48",
+     "no"
+    ],
+    [
+     "10",
+     {
+      "text": "s3051",
+      "href": "run:B1-30000-b5a76a-s3051"
+     },
+     "round 3",
+     "0.441",
+     "product, worst",
+     "3.9",
+     "-0.107",
+     "0.082",
+     "0.95",
+     "83%",
+     "16",
+     "no"
+    ]
+   ]
+  },
+  "table:all": {
+   "head": [
+    "rank",
+    "world",
+    "score",
+    "ranks by product, sum, worst",
+    "lines beyond luck (z)",
+    "novelty above the null",
+    "selection strength",
+    "heredity",
+    "copies by conquest",
+    "generations (births only)",
+    "effective population (births only, shadow)",
+    "on the shortlist"
+   ],
+   "rows": [
+    [
+     "1",
+     {
+      "text": "s3078",
+      "href": "run:B1-30000-dd27b6-s3078"
+     },
+     "0.726",
+     "1, 1, 4",
+     "6.2",
+     "-0.008",
+     "0.074",
+     "0.99",
+     "49%",
+     "3,480 (422)",
+     "23 (5, 668)",
+     "no"
+    ],
+    [
+     "2",
+     {
+      "text": "s3026",
+      "href": "run:B1-30000-d6955f-s3026"
+     },
+     "0.708",
+     "2, 2, 1",
+     "4.4",
+     "-0.056",
+     "0.101",
+     "1.00",
+     "50%",
+     "5,232 (2,159)",
+     "181 (78, 1,279)",
+     "no"
+    ],
+    [
+     "3",
+     {
+      "text": "s3023",
+      "href": "run:B1-30000-b0f6e3-s3023"
+     },
+     "0.637",
+     "3, 4, 3",
+     "4.9",
+     "-0.018",
+     "0.078",
+     "0.96",
+     "49%",
+     "3,875 (955)",
+     "99 (22, 1,080)",
+     "yes"
+    ],
+    [
+     "4",
+     {
+      "text": "s3058",
+      "href": "run:B1-30000-4108dd-s3058"
+     },
+     "0.602",
+     "4, 7, 2",
+     "4.4",
+     "-0.061",
+     "0.093",
+     "0.96",
+     "80%",
+     "2,303 (142)",
+     "70 (10, 743)",
+     "yes"
+    ],
+    [
+     "5",
+     {
+      "text": "s4004 s",
+      "href": "run:B1-30000-2bac4d-s4004"
+     },
+     "0.581",
+     "5, 5, 8",
+     "4.5",
+     "-0.046",
+     "0.133",
+     "0.90",
+     "54%",
+     "3,774 (1,392)",
+     "26 (6, 680)",
+     "no"
+    ],
+    [
+     "6",
+     {
+      "text": "s3021",
+      "href": "run:B1-30000-4aff7d-s3021"
+     },
+     "0.534",
+     "6, 9, 6",
+     "4.2",
+     "-0.038",
+     "0.094",
+     "0.93",
+     "48%",
+     "3,571 (1,064)",
+     "214 (27, 1,108)",
+     "no"
+    ],
+    [
+     "7",
+     {
+      "text": "s4004 w",
+      "href": "run:B1-30000-17ac6e-s4004"
+     },
+     "0.523",
+     "7, 6, 11",
+     "4.2",
+     "-0.018",
+     "0.128",
+     "0.89",
+     "55%",
+     "3,738 (1,309)",
+     "15 (5, 639)",
+     "yes"
+    ],
+    [
+     "8",
+     {
+      "text": "s3091",
+      "href": "run:B1-30000-42d88d-s3091"
+     },
+     "0.504",
+     "8, 3, 13",
+     "7.6",
+     "-0.043",
+     "0.112",
+     "0.88",
+     "57%",
+     "3,642 (1,173)",
+     "16 (5, 1,580)",
+     "no"
+    ],
+    [
+     "9",
+     {
+      "text": "s3090",
+      "href": "run:B1-30000-05ba40-s3090"
+     },
+     "0.464",
+     "9, 11, 7",
+     "3.3",
+     "-0.117",
+     "0.092",
+     "0.97",
+     "77%",
+     "2,590 (14)",
+     "279 (365, 959)",
+     "no"
+    ],
+    [
+     "10",
+     {
+      "text": "s3051",
+      "href": "run:B1-30000-b5a76a-s3051"
+     },
+     "0.441",
+     "10, 14, 5",
+     "3.9",
+     "-0.107",
+     "0.082",
+     "0.95",
+     "83%",
+     "2,137 (141)",
+     "44 (4, 420)",
+     "no"
+    ],
+    [
+     "11",
+     {
+      "text": "s3046",
+      "href": "run:B1-30000-27bd64-s3046"
+     },
+     "0.439",
+     "11, 8, 12",
+     "6.6",
+     "-0.159",
+     "0.070",
+     "1.00",
+     "51%",
+     "4,198 (1,321)",
+     "173 (51, 1,340)",
+     "no"
+    ],
+    [
+     "12",
+     {
+      "text": "s3045",
+      "href": "run:B1-30000-f6d23f-s3045"
+     },
+     "0.438",
+     "12, 12, 9",
+     "1.7",
+     "-0.027",
+     "0.076",
+     "0.95",
+     "51%",
+     "2,874 (1,237)",
+     "202 (490, 850)",
+     "yes"
+    ],
+    [
+     "13",
+     {
+      "text": "s3008",
+      "href": "run:B1-30000-e19f2d-s3008"
+     },
+     "0.350",
+     "13, 13, 14",
+     "5.3",
+     "-0.127",
+     "0.060",
+     "0.98",
+     "60%",
+     "3,160 (947)",
+     "706 (24, 1,056)",
+     "yes"
+    ],
+    [
+     "14",
+     {
+      "text": "s3016",
+      "href": "run:B1-30000-b23381-s3016"
+     },
+     "0.339",
+     "14, 10, 15",
+     "0.7",
+     "-0.164",
+     "0.103",
+     "1.00",
+     "44%",
+     "1,926 (1,071)",
+     "75 (31, 715)",
+     "no"
+    ],
+    [
+     "15",
+     {
+      "text": "s3004",
+      "href": "run:B1-30000-7d5208-s3004"
+     },
+     "0.324",
+     "15, 17, 10",
+     "1.7",
+     "-0.146",
+     "0.072",
+     "0.98",
+     "93%",
+     "2,562 (23)",
+     "395 (18, 1,078)",
+     "no"
+    ],
+    [
+     "16",
+     {
+      "text": "s3033",
+      "href": "run:B1-30000-631e49-s3033"
+     },
+     "0.307",
+     "16, 15, 16",
+     "0.6",
+     "-0.022",
+     "0.076",
+     "0.89",
+     "52%",
+     "2,628 (1,083)",
+     "649 (988, 1,050)",
+     "no"
+    ],
+    [
+     "17",
+     {
+      "text": "s3065",
+      "href": "run:B1-30000-ba3afe-s3065"
+     },
+     "0.287",
+     "17, 16, 17",
+     "3.4",
+     "-0.100",
+     "0.059",
+     "0.98",
+     "92%",
+     "2,351 (54)",
+     "689 (1,147, 2,143)",
+     "no"
+    ],
+    [
+     "18",
+     {
+      "text": "s3084",
+      "href": "run:B1-30000-ad76aa-s3084"
+     },
+     "0.193",
+     "18, 19, 18",
+     "0.1",
+     "-0.120",
+     "0.066",
+     "0.96",
+     "59%",
+     "3,157 (976)",
+     "415 (179, 1,012)",
+     "no"
+    ],
+    [
+     "19",
+     {
+      "text": "s3080",
+      "href": "run:B1-30000-625bc7-s3080"
+     },
+     "0.149",
+     "19, 18, 19",
+     "6.1",
+     "-0.248",
+     "0.067",
+     "0.85",
+     "83%",
+     "2,254 (121)",
+     "165 (11, 1,759)",
+     "yes"
+    ]
+   ]
+  },
+  "table:changed": {
+   "head": [
+    "in the median world",
+    "births-only tree",
+    "brain-copy tree"
+   ],
+   "rows": [
+    [
+     "generations by the end",
+     "976",
+     "3,157"
+    ],
+    [
+     "births on the way",
+     "\u2014",
+     "1,039"
+    ],
+    [
+     "effective population",
+     "24",
+     "173"
+    ],
+    [
+     "heredity index",
+     "0.30",
+     "0.96"
+    ],
+    [
+     "late novelty above noise",
+     "0.12",
+     "0.09"
+    ],
+    [
+     "shadow worlds' effective population",
+     "\u2014",
+     "1,050"
+    ],
+    [
+     "copies made by conquest",
+     "\u2014",
+     "55%"
+    ]
+   ]
+  },
+  "medians": {
+   "birth_share": 0.4525012002355811,
+   "conquests_per_agent": 0.7505369698553065,
+   "conquests_per_agent_2000": 0.747955096497822,
+   "births_per_agent": 0.5975661092014013,
+   "conquests_per_birth": 1.2099388896192542,
+   "generations": 3157.03007518797,
+   "births_on_path": 1039.220211827008,
+   "conquests_on_path": 2277.3113113113113,
+   "generations_births_only": 976.4350161117078,
+   "common_ancestor_age": 253.0,
+   "common_ancestor_age_shadow": 1978.5,
+   "coalescence_p": 0.009900990099009901,
+   "effective_population": 172.6477922077922,
+   "effective_population_shadow": 1050.0002472799208,
+   "effective_population_births_only": 24.323561643835603,
+   "heredity_births_only": 0.29851307839943086,
+   "heredity_birth_pairs": 0.8783479947069981,
+   "heredity_conquest_pairs": 0.9684748041822244,
+   "births_only_pairs_still_brain_pairs": 0.03402248509488307,
+   "novelty_above_noise": 0.09071696623491375,
+   "novelty_null_above_noise": 0.16372359053618832,
+   "novelty_births_only": 0.12387172386466522,
+   "selection_visible": 44.90741444117503,
+   "selection_clear": 47.0,
+   "selection_cells": 48.0,
+   "selection_follows": -0.017758985200845664,
+   "selection_same_sign": 0.5
+  }
+ },
+ "figures": {
+  "heredity": {
+   "title": "Is a child's brain like its parent's?",
+   "caption": "Each dot is a world of round 3 that lived. Across: the heredity index as the births-only tree read it, playing a child against the agent that bore it. Up: the same index on the brain-copy tree, playing each brain against the brain it was copied from, by birth or by conquest. 1 means a child acts as its parent does, 0 as a stranger does.",
+   "recipe": "**Runs.** every world of round 3 of the screen of random worlds that lived to the end of its run (Experiments 40, 41 and 42; 30,000 tokens, 3,000 iterations)\n\n**Data.** From each world's readings on its brain-copy tree, `GraphOfLifeRuns/.pilots/screen/braintree/<run>.json` (research/screen/braintree.py: one pass over every frame, births and conquests both copying brains, and 100 shadow worlds of pure luck; selection.py; brainplay.py, brains of the kept worlds played), gathered by `research/screen/evolution.py` into `research/screen/evolution.json`, with the births-only numbers of `research/screen/candidates.json` beside them.\n\n1. Read each world's `heredity_births_only` (`beside`) and its brain-tree heredity (`values`) from `evolution.json`.\n\n**To make it again:** `python3 book_figures.py evolutionrank`."
+  },
+  "ancestry": {
+   "title": "How far back do the living meet one ancestor?",
+   "caption": "Each dot is a world of round 3 that lived. Across: how many iterations before the end all its last agents' brains descend from one brain. Up: the same in 100 shadow worlds, whose copies are made at the same moments into the same living but from parents drawn at random (the median; a world whose shadows mostly never meet one ancestor within the run is drawn at 3,000). A dot above the line: the real ancestry narrows faster than luck would narrow it.",
+   "recipe": "**Runs.** every world of round 3 of the screen of random worlds that lived to the end of its run (Experiments 40, 41 and 42; 30,000 tokens, 3,000 iterations)\n\n**Data.** From each world's readings on its brain-copy tree, `GraphOfLifeRuns/.pilots/screen/braintree/<run>.json` (research/screen/braintree.py: one pass over every frame, births and conquests both copying brains, and 100 shadow worlds of pure luck; selection.py; brainplay.py, brains of the kept worlds played), gathered by `research/screen/evolution.py` into `research/screen/evolution.json`, with the births-only numbers of `research/screen/candidates.json` beside them.\n\n1. Read each world's `common_ancestor_age` and `common_ancestor_age_shadow` (`beside`) from `evolution.json`.\n\n**To make it again:** `python3 book_figures.py evolutionrank`."
+  },
+  "novelty": {
+   "title": "Does the line of descent find more than mutation alone?",
+   "caption": "Each dot is a world of round 3 that lived. Across: how far the later eras of its line of descent, on the brain-copy tree, lie from every earlier era in the same situations, above the noise of playing one brain twice. Up: the same for six lines that start from the line's brain of iteration 250 and make as many changes as it made, at random. A dot below the line: the real line moved further than mutation alone would take it; above it, less far.",
+   "recipe": "**Runs.** every world of round 3 of the screen of random worlds that lived to the end of its run (Experiments 40, 41 and 42; 30,000 tokens, 3,000 iterations)\n\n**Data.** From each world's readings on its brain-copy tree, `GraphOfLifeRuns/.pilots/screen/braintree/<run>.json` (research/screen/braintree.py: one pass over every frame, births and conquests both copying brains, and 100 shadow worlds of pure luck; selection.py; brainplay.py, brains of the kept worlds played), gathered by `research/screen/evolution.py` into `research/screen/evolution.json`, with the births-only numbers of `research/screen/candidates.json` beside them.\n\n1. Read each world's `novelty_above_noise` and `novelty_null_above_noise` (`beside`) from `evolution.json`.\n\n**To make it again:** `python3 book_figures.py evolutionrank`."
+  }
+ }
+}
