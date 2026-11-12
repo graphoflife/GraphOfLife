@@ -5,15 +5,16 @@
  *
  * The glass is a rounded square — |X|⁶ + |Y|⁶ = 1 on the stage's half-sizes —
  * that bulges a little, so what is drawn near its edge bends in towards the
- * corners (eyes.js draws its picture through warp()). Outside the glass there
- * is no frame of any kind: the page's own colour fills the corners right up to
- * the window's edge and the top bar, turning a shade darker there on a white
- * page and a shade lighter on a dark one. On the glass lie still scan lines,
- * bent with the bulge, a fine grain of phosphor and a glow of the eyes'
+ * corners (eyes.js draws its picture through warp()). On it lie still scan
+ * lines, bent with the bulge, a fine grain of phosphor and a glow of the eyes'
  * colour, as a lit tube has — faint in the middle, round the great eye and
  * the words, and growing steadily stronger out to the glass's edge, where on
  * Paper it deepens into blue — and, on a dark screen, a faint sheen high on
- * the left.
+ * the left. There is no frame: the same look runs on past the glass into the
+ * window's corners, at its full strength, so no corner is left empty, and only
+ * the bending rows and the rounded line where the eyes come loose tell where
+ * the tube is. The faintest tone darkens (on Paper) or lightens (on a dark
+ * screen) the very edge of the window, all round alike.
  *
  * Nothing on it moves. It is drawn once for each size and theme into a canvas
  * of its own, and costs nothing a frame.
@@ -98,17 +99,6 @@ const Tube = {
     this.atY = hh + Y * hh;
   },
 
-  /** The glass's outline on the screen: the rounded square, bent with the bulge. */
-  outline() {
-    const points = [];
-    for (let i = 0; i < 400; i++) {
-      const a = (i / 400) * Math.PI * 2;
-      this.warp(this.width / 2 + Math.cbrt(Math.cos(a)) * this.ax, this.height / 2 + Math.cbrt(Math.sin(a)) * this.ay);
-      points.push(this.atX, this.atY);
-    }
-    return points;
-  },
-
   /** A colour written as #rgb or #rrggbb, as red, green and blue. */
   rgb(colour) {
     const hex = String(colour).trim().replace(/^#/, '');
@@ -146,18 +136,13 @@ const Tube = {
     const iris = Ink.of('eyeIris'), stage = Ink.of('stage'), ball = Ink.of('eyeBall');
     const [sr, sg, sb] = this.rgb(stage);
     const light = sr * 0.299 + sg * 0.587 + sb * 0.114 > 128;
-    const outline = this.outline();
-    const trace = () => {
-      g.moveTo(outline[0], outline[1]);
-      for (let i = 2; i < outline.length; i += 2) g.lineTo(outline[i], outline[i + 1]);
-      g.closePath();
-    };
 
-    // ---- on the glass ----
+    // ---- the glass, and on past it into the corners ----
     // How strongly the tube shows at each point: faint in the middle, round
-    // the great eye and the words, and growing steadily stronger out to the
-    // glass's rounded edge, where the eyes' raster is. Worked out on a coarse
-    // grid, the bulge undone at each point, and stretched: it changes slowly.
+    // the great eye and the words, growing steadily stronger out to the
+    // glass's rounded edge, where the eyes' raster is, and at its full
+    // strength from there to the window's edge. Worked out on a coarse grid,
+    // the bulge undone at each point, and stretched: it changes slowly.
     const make = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
     const Q = 6, mw = Math.ceil(W / Q) + 1, mh = Math.ceil(H / Q) + 1;
     const mask = make(mw, mh), mc = mask.getContext('2d'), md = mc.createImageData(mw, mh);
@@ -202,10 +187,11 @@ const Tube = {
     l.globalAlpha = light ? 0.32 : 0.5;
     l.lineWidth = 1;
     l.beginPath();
-    for (let row = 0; row <= H; row += this.pitch / 2) {
-      for (let col = 0; col < W + STEP; col += STEP) {
-        this.warp(Math.min(col, W), row);
-        if (col === 0) l.moveTo(this.atX, this.atY);
+    const overX = this.BULGE * W / 2 + this.pitch, overY = this.BULGE * H / 2 + this.pitch;
+    for (let row = -Math.ceil(overY / (this.pitch / 2)) * (this.pitch / 2); row <= H + overY; row += this.pitch / 2) {
+      for (let col = -overX; col < W + overX + STEP; col += STEP) {
+        this.warp(Math.min(col, W + overX), row);
+        if (col === -overX) l.moveTo(this.atX, this.atY);
         else l.lineTo(this.atX, this.atY);
       }
     }
@@ -216,9 +202,6 @@ const Tube = {
     l.drawImage(mask, 0, 0, mw * Q * dpr, mh * Q * dpr);
 
     g.save();
-    g.beginPath();
-    trace();
-    g.clip();
     g.setTransform(1, 0, 0, 1, 0, 0);
     g.drawImage(layer, 0, 0);
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -233,25 +216,21 @@ const Tube = {
     }
     g.restore();
 
-    // ---- beyond the glass ----
-    // No frame: the page's own colour, right up to the window's edge and the
-    // top bar, turning a shade darker at the very edge on a white page and a
-    // shade lighter on a dark one.
+    // ---- toward the window's edge ----
+    // The faintest tone along every edge of the window alike — a shade darker
+    // on a white page, a shade lighter on a dark one — taken where two edges
+    // meet as the stronger of the two rather than both, so a corner reads as
+    // any other stretch of edge.
     g.save();
-    g.beginPath();
-    g.rect(0, 0, W, H);
-    trace();
-    g.clip('evenodd');
-    g.fillStyle = stage;
-    g.fillRect(0, 0, W, H);
-    const [er, eg, eb] = light ? [sr * 0.93, sg * 0.93, sb * 0.93]
-                               : [sr + (255 - sr) * 0.05, sg + (255 - sg) * 0.05, sb + (255 - sb) * 0.05];
+    const [er, eg, eb] = light ? [sr * 0.9, sg * 0.9, sb * 0.9]
+                               : [sr + (255 - sr) * 0.08, sg + (255 - sg) * 0.08, sb + (255 - sb) * 0.08];
     const edge = a => `rgba(${Math.round(er)}, ${Math.round(eg)}, ${Math.round(eb)}, ${a})`;
-    const band = Math.min(W, H) * 0.07;
+    const band = Math.min(W, H) * 0.05;
     const sides = [[0, 0, band, 0], [W, 0, W - band, 0], [0, 0, 0, band], [0, H, 0, H - band]];
+    g.globalCompositeOperation = light ? 'darken' : 'lighten';
     for (const [x0, y0, x1, y1] of sides) {
       const fall = g.createLinearGradient(x0, y0, x1, y1);
-      fall.addColorStop(0, edge(1));
+      fall.addColorStop(0, edge(0.5));
       fall.addColorStop(1, edge(0));
       g.fillStyle = fall;
       g.fillRect(0, 0, W, H);

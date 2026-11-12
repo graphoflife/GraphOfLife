@@ -16,10 +16,11 @@
  * The screen is an old tube television (tube.js), and its pixels are eyes.
  * Its glass is a rounded square, bulging a little, so the picture bends in
  * towards the corners, and the tube's look grows stronger towards its edge.
- * There the eyes sit still in a raster, tiny and in rows. None of it moves:
- * the edge is a screen standing still. Inwards the raster loosens and the
- * eyes come free, take threads, and grow in a straight line all the way to
- * the clear ring. An eye's size is where it is, so one that travels in grows,
+ * There the eyes sit still in a raster, tiny and in rows, which runs on past
+ * the glass into the window's corners, so the whole screen is pixels to its
+ * edge. None of it moves: the edge is a screen standing still. Inwards the
+ * raster loosens along a rounded line and the eyes come free, take threads,
+ * and grow in a straight line all the way to the clear ring. An eye's size is where it is, so one that travels in grows,
  * and one that travels out shrinks until it sinks back among the pixels. The
  * words lie over the web and do not part it; the title carries its own
  * shadow (style.css).
@@ -251,15 +252,19 @@ const Eyes = {
     }
 
     // ---- the raster: the screen's own pixels ----
-    // In rows at the very edge; looser further in, where the eyes come free.
+    // In rows at the very edge, and on past the glass into the window's
+    // corners, so none is left empty; looser further in, where the eyes come
+    // free. The rows start a little beyond the stage, by as much as the bulge
+    // pulls in, so that once bent they still reach every corner of the window.
     const raster = [];
-    for (let j = 0; (j + 0.5) * pitch < height; j++) {
-      for (let i = 0; (i + 0.5) * pitch < width; i++) {
+    const overX = Math.ceil(Tube.BULGE * width / 2 / pitch) + 1, overY = Math.ceil(Tube.BULGE * height / 2 / pitch) + 1;
+    for (let j = -overY; (j - overY + 0.5) * pitch < height; j++) {
+      for (let i = -overX; (i - overX + 0.5) * pitch < width; i++) {
         const px = (i + 0.5) * pitch, py = (j + 0.5) * pitch;
         const e = this.inset(px, py);
-        // Out to a little beyond the glass's outline, under the tube's fill,
-        // so the glass is full to its edge.
-        if (e >= depth || e < -pitch || Math.hypot(px - cx, py - cy) < ring) continue;
+        if (e >= depth || Math.hypot(px - cx, py - cy) < ring) continue;
+        Tube.warp(px, py);
+        if (Tube.atX < -pitch || Tube.atX > width + pitch || Tube.atY < -pitch || Tube.atY > height + pitch) continue;
         const loose = (Math.max(0, e) / depth) ** 2;
         raster.push(px + (rand() - 0.5) * 0.7 * pitch * loose, py + (rand() - 0.5) * 0.7 * pitch * loose, loose);
       }
