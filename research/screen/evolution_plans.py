@@ -227,9 +227,12 @@ def e46() -> Dict[str, Any]:
         "thesis": {"claim": "", "why": "", "confirm": "", "refute": ""},
         "chosen": {"world": world["id"], "rank": world["rank"], "passed over as too slow": passed,
                    "faithful copies from": copies_from},
+        # One worker at a time: the lab starts the longest job first, so without a
+        # cap these runs would hold every worker and Experiment 45's short
+        # contests would wait for all of them.
         "runs": {"baseline": "B1", "world": {"total_tokens": TOKENS}, "seeds": SEEDS, "iterations": ITERATIONS,
                  "record": {"heavy_every": 25, "checkpoint_every": 100, "archive_every": 500},
-                 "conditions": arms}}
+                 "workers": 1, "conditions": arms}}
 
 
 
