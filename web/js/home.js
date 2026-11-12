@@ -272,7 +272,7 @@ const Home = {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         this.buffer = await response.arrayBuffer();
       }
-      // Left while it was on its way, which the doors make easy to do: the
+      // Left while it was on its way, which the tabs make easy to do: the
       // layout is already given back, so keep what was fetched and play it
       // the next time the page is opened.
       if (!this.active || !this.layout) return;

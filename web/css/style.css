@@ -2910,9 +2910,8 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
    lit from behind; the title decoded out of hexadecimal; and, rising out of
    the dark behind it all, one of two backdrops — a world that is actually
    running, or a network of eyes round one that looks back. The order things
-   arrive in is the story — the wall, the word, the world, and last the ways
-   in — and it takes three seconds, during which everything can already be
-   clicked.
+   arrive in is the story — the wall, the word, the world, and last the note —
+   and it takes three seconds. The tabs in the bar above are the ways in.
 
    Every arrival is an opacity or a transform, which the compositor plays
    without asking the page to paint; the one exception, the title's letters,
@@ -2927,7 +2926,7 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
 
 /* The title in the space above a foot that holds the note and the numbers: a
    grid rather than everything placed over everything, so on a short screen
-   the ways in can never land on the note. The picture, the wall and the veil
+   the title can never land on the note. The picture, the wall and the veil
    lie under all of it. */
 .home-stage {
   position: relative;
@@ -2977,9 +2976,10 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
     radial-gradient(140% 120% at 50% 45%, rgba(var(--stage-rgb), 0) 52%, rgba(var(--stage-rgb), 0.7) 100%),
     linear-gradient(to top, rgba(var(--stage-rgb), 0.72) 0%, rgba(var(--stage-rgb), 0) 30%);
 }
-.home-stage.backdrop-eyes .home-veil {
-  background: linear-gradient(to top, rgba(var(--stage-rgb), 0.7) 0%, rgba(var(--stage-rgb), 0) 26%);
-}
+/* Over the eyes the screen is a tube with a rim round it, standing still, so
+   nothing is laid over it: no darkening at the foot and no digits on the rim. */
+.home-stage.backdrop-eyes .home-veil,
+.home-stage.backdrop-eyes .home-glyphs { display: none; }
 
 /* The wall of digits, over the backdrop and under the words. */
 .home-glyphs {
@@ -3118,6 +3118,14 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
 
 /* ---- over the eyes ---- */
 
+/* Over the eyes the great eye and the title stand lower, a little below the
+   middle, so the web has room to grow above them as well as round them. The
+   great eye is drawn where the mark's box is (eyes.js), so it moves with it. */
+.home-stage.backdrop-eyes .home-hero {
+  justify-content: flex-end;
+  padding-bottom: clamp(10px, 2.5vh, 30px);
+}
+
 /* Over the eyes the web runs on through the words instead of parting round
    them, so the words carry their own shade: soft shadows in the halo ink,
    stacked from tight to wide, each letter in a pool of dark (of white, on
@@ -3150,42 +3158,6 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
                               rgba(var(--halo-rgb), 0));
   pointer-events: none;
 }
-
-/* ---- the ways in ---- */
-
-.home-doors {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: clamp(26px, 5.4vh, 50px);
-  pointer-events: auto;
-}
-/* Doors rather than buttons: a dark lintel with a lit edge, a number in the
-   machine's face, and light behind it when the pointer comes near. Opaque
-   rather than blurred, for the reason the section gives. */
-.home-door {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 10px;
-  padding: 10px 18px 10px 14px;
-  background: rgba(var(--stage-rgb), 0.8);
-  border: 1px solid rgba(var(--accent-rgb), 0.32);
-  border-radius: 3px;
-  color: var(--text-soft);
-  font-size: 12.5px;
-  letter-spacing: 0.06em;
-  box-shadow: 0 6px 22px rgba(var(--shade-rgb), calc(0.45 * var(--shade-k)));
-}
-.home-door-no { font-size: 10.5px; color: var(--accent); opacity: 0.8; letter-spacing: 0.04em; }
-.home-door:hover:not(:disabled) {
-  background: rgba(var(--panel-rgb), 0.95);
-  border-color: var(--accent);
-  color: var(--text-strong);
-  box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.25), 0 0 26px rgba(var(--accent-rgb), 0.18),
-              0 6px 22px rgba(var(--shade-rgb), calc(0.45 * var(--shade-k)));
-}
-.home-door:hover .home-door-no { opacity: 1; }
 
 /* ---- the note and the numbers ---- */
 
@@ -3288,7 +3260,6 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   .home-stage.play .home-glyphs { animation: home-appear 2200ms ease-out both; }
   .home-stage.play #homeCanvas { animation: home-world 3400ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms both; }
   .home-stage.play .home-mark { animation: home-mark-in 1700ms cubic-bezier(0.16, 0.84, 0.24, 1) 600ms both; }
-  .home-stage.play .home-doors { animation: home-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 2300ms both; }
   .home-stage.play .home-note { animation: home-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 2700ms both; }
   .home-stage.play .home-readout { animation: home-appear 1200ms ease-out 2900ms both; }
   .home-stage.play .home-backdrop { animation: home-appear 1200ms ease-out 3000ms both; }
@@ -3310,16 +3281,14 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
 @keyframes home-tick { from { color: var(--text-strong); text-shadow: 0 0 14px var(--accent); } }
 @keyframes glyph-land { from { color: var(--accent); text-shadow: 0 0 20px rgba(var(--accent-rgb), 0.9); } }
 
-/* A phone: one column — the mark, the title, the ways in stacked one above
-   another, and the note across the foot. The numbers step aside. */
+/* A phone: one column — the mark and the title, and the note across the
+   foot. The numbers step aside. */
 @media (max-width: 640px) {
   .home-stage { grid-template-columns: minmax(0, 1fr); }
   .home-hero { padding: 56px 16px 24px; }
   .home-seal { width: 104px; }
   .home-title { font-size: clamp(30px, 10vw, 44px); }
   .home-subtitle { letter-spacing: 0.22em; margin-right: -0.22em; }
-  .home-doors { flex-direction: column; align-items: stretch; width: min(100%, 290px); gap: 10px; }
-  .home-door { justify-content: center; padding: 12px 16px; }
   .home-note { justify-self: stretch; margin: 0 16px 20px; max-width: none; }
   .home-note p { font-size: 14.5px; }
   .home-readout { display: none; }
