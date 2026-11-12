@@ -19,7 +19,7 @@ brain-copy tree, each reading set against a null model:
   novelty    the line of descent's late novelty, above its own noise, less that
              of lines that start from its brain at iteration 250 and make the
              same changes at random (the mutation-only null)
-  selection  the strength of selection on behaviour: the mean size of the
+  selection  the strength of selection on behaviour: the median size of the
              standardized selection gradient, wealth held fixed, over four
              behaviours and twelve eras (its null: fitness shuffled)
   heredity   the heredity index on the brain tree's own parent-child pairs (its
@@ -79,9 +79,9 @@ READINGS = [
              "late novelty above its own noise, less the null lines' mean (z: in the null lines' spreads)"},
     {"key": "selection", "name": "selection-gradient strength", "better": "more",
      "null": "fitness (descendants at the next iteration on the brain tree) shuffled among the agents of each "
-             "iteration, whose mean (0) and variance the permutation fixes exactly; the value is the mean size of "
-             "the standardized gradient, wealth held fixed, over four behaviours and twelve eras; z is the root "
-             "mean square of the eras' gradient z-scores"},
+             "iteration, whose mean (0) and variance the permutation fixes exactly; the value is the median size of "
+             "the standardized gradient, wealth held fixed, over four behaviours and twelve eras (a median, since "
+             "the links a newborn gets are heavy-tailed); z is the root mean square of the eras' gradient z-scores"},
     {"key": "heredity", "name": "heredity on the brain tree", "better": "more",
      "null": "children given another pair's parent at random (200 shuffles): an index of 0 means a child acts "
              "like a stranger, 1 like its parent; z is how many spreads of the shuffled medians the real median "

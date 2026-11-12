@@ -147,7 +147,8 @@ def _spearman(x: Sequence[float], y: Sequence[float]) -> Optional[float]:
 def summary(rows: Dict[str, np.ndarray], eras: Sequence[int]) -> Dict[str, Any]:
     """
     A world's test 4: every behaviour's eras, and over them all how visible selection is (the root mean square
-    of the eras' z-scores), how strong (the mean size of the standardized gradient, with wealth held fixed),
+    of the eras' z-scores), how strong (the median size, over every behaviour and era, of the standardized
+    gradient, with wealth held fixed),
     and whether the behaviours moved the way the differentials point (the rank correlation, over every era and
     behaviour, of the differential per iteration, in standard deviations of the behaviour, with the change of
     the behaviour's mean to the next era, in the same units; and how often their signs agree).
@@ -163,14 +164,15 @@ def summary(rows: Dict[str, np.ndarray], eras: Sequence[int]) -> Dict[str, Any]:
     # those read in every fifth game (the stakes) stand on one scale.
     moved = [(e["intensity"], e["change"] / e["sd"]) for _, e in cells if "change" in e and e["sd"] > 0]
     agree = [np.sign(a) == np.sign(b) for a, b in moved if a and b]
-    strength = [float(np.mean([abs(e["gradient"]) for e in traits[k] if "gradient" in e]))
-                for k in traits if any("gradient" in e for e in traits[k])]
+    # The median over every behaviour and era: the links a newborn gets are heavy-tailed (a few get dozens), and a
+    # mean would let those few decide a world's whole reading.
+    strength = [abs(e["gradient"]) for k in traits for e in traits[k] if e.get("gradient") is not None]
     return {"traits": traits,
             "visible": float(np.sqrt(np.mean(np.square(zs)))) if zs else None,
             "visible_gradient": float(np.sqrt(np.mean(np.square(zg)))) if zg else None,
             "cells": len(cells), "clear": int(sum(abs(z) > 3.29 for z in zs)),
             "clear_gradient": int(sum(abs(z) > 3.29 for z in zg)),
-            "strength": float(np.mean(strength)) if strength else None,
+            "strength": float(np.median(strength)) if strength else None,
             "follows": _spearman([a for a, _ in moved], [b for _, b in moved]),
             "same_sign": float(np.mean(agree)) if agree else None,
             "blocks_agreeing": float(np.mean([e["blocks_agreeing"] for _, e in cells

@@ -60,19 +60,22 @@ def evolutionrank(ch: F.Chapter) -> None:
                          "shortlisted_in_top": sum(1 for w in worlds[:d["top"]] if w["shortlisted"]),
                          "union": len(d["union"])})
     among = lambda w: ", ".join(o for o, ids in d["bests"].items() if w["id"] in ids) or "—"
+    filtered = lambda w: (w.get("filter") or "").split(":")[0] or "—"
     ch.number("table:top", {
         "head": ["rank", "world", "round", "score", "among the first 10 by", "lines beyond luck (z)",
                  "novelty above the null", "selection strength", "heredity", "copies by conquest",
-                 "health's rank", "on the shortlist"],
+                 "health's rank", "on the shortlist", "health filters it out"],
         "rows": [[str(w["rank"]), link(w), ROUND[w["round"]], f"{w['score']:.3f}", among(w),
                   _f(v(w, "shadow"), "{:.1f}"), _f(v(w, "novelty"), "{:+.3f}"), _f(v(w, "selection"), "{:.3f}"),
                   _f(v(w, "heredity")), _f(w["conquest_share"], "{:.0%}"),
-                  str((w["health"].get("ranks") or {}).get("product", "—")), "yes" if w["shortlisted"] else "no"]
+                  str((w["health"].get("ranks") or {}).get("product", "—")), "yes" if w["shortlisted"] else "no",
+                  filtered(w)]
                  for w in worlds[:d["top"]]]})
     ch.number("table:all", {
         "head": ["rank", "world", "score", "ranks by product, sum, worst", "lines beyond luck (z)",
                  "novelty above the null", "selection strength", "heredity", "copies by conquest",
-                 "generations (births only)", "effective population (births only, shadow)", "on the shortlist"],
+                 "generations (births only)", "effective population (births only, shadow)", "on the shortlist",
+                 "health filters it out"],
         "rows": [[str(w["rank"]), link(w), f"{w['score']:.3f}",
                   f"{w['ranks']['product']}, {w['ranks']['sum']}, {w['ranks']['worst']}",
                   _f(v(w, "shadow"), "{:.1f}"), _f(v(w, "novelty"), "{:+.3f}"), _f(v(w, "selection"), "{:.3f}"),
@@ -80,7 +83,7 @@ def evolutionrank(ch: F.Chapter) -> None:
                   f"{_f(b(w, 'generations'), '{:,.0f}')} ({_f(b(w, 'generations_births_only'), '{:,.0f}')})",
                   f"{_f(b(w, 'effective_population'), '{:,.0f}')} ({_f(b(w, 'effective_population_births_only'), '{:,.0f}')}, "
                   f"{_f(b(w, 'effective_population_shadow'), '{:,.0f}')})",
-                  "yes" if w["shortlisted"] else "no"] for w in worlds]})
+                  "yes" if w["shortlisted"] else "no", filtered(w)] for w in worlds]})
     rows = [("generations by the end", "generations_births_only", "generations", "{:,.0f}"),
             ("births on the way", None, "births_on_path", "{:,.0f}"),
             ("effective population", "effective_population_births_only", "effective_population", "{:,.0f}"),
