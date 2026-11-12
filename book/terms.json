@@ -592,7 +592,7 @@
     },
     {
       "name": "power law",
-      "page": "b1-the-network-size-and-scaling",
+      "page": "statistics",
       "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones.",
       "anchor": "fitting-a-power-law-properly"
     },

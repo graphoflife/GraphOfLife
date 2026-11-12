@@ -89,7 +89,7 @@ there.
 - **[path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)** — How many connections the shortest way between two agents crosses.
 - **[permutation test](statistics.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](runs-and-records.md#pilot-worlds)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
-- **[power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
+- **[power law](statistics.md#fitting-a-power-law-properly)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
 - **[power spectrum](statistics.md#the-power-spectrum-of-a-time-series)** — How much of a series' wandering comes at each speed, from slow to fast.
 - **[preferential attachment](measuring-networks.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](measuring-space.md#the-random-twin-is-a-world-a-space)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.

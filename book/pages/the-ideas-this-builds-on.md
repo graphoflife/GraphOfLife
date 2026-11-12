@@ -166,7 +166,7 @@ several agents acting together.
 - **Correlations of a series with itself**, and the bias of measuring them
   against the series' own mean: Bartlett (1946), Marriott and Pope (1954),
   Kendall (1954). See [Autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum).
-- **[Power laws](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones.")**, and why a straight stretch on log–log axes is weak evidence
+- **Power laws**, and why a straight stretch on log–log axes is weak evidence
   of one: Clauset, Shalizi and Newman (2009). See
   [Logarithmic axes](statistics.md#logarithmic-axes-and-power-laws).
 - **Testing by shuffling**: the permutation test goes back to Fisher (1935).

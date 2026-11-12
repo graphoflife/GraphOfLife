@@ -10,7 +10,11 @@
 
 ## In short
 
-The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation and fitted lines, how long a world remembers, how sure a number is, how a spread splits into parts, and how many kinds a world really holds.
+The statistics the notebook measures with, each explained from the start:
+medians and bands over many worlds, correlation and fitted lines, how to fit a
+power law, how long a world remembers, how sure a number is and how many seeds
+it takes, how a spread splits into parts, and how many kinds a world really
+holds.
 
 It gathers what were 6 pages of their own, one section each:
 
@@ -369,7 +373,7 @@ Two things to keep in mind:
 - **The line is pulled by where the points are.** Every point counts the
   same, so a crowd of points at small *x* decides the slope more than a few at
   large *x*. For distributions, this makes least squares a poor way to find an
-  exponent. [Fitting a power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly) says what to do instead.
+  exponent. [Fitting a power law](#fitting-a-power-law-properly) says what to do instead.
 
 ### Logarithmic axes and power laws
 
@@ -434,12 +438,118 @@ distributions look straight over a decade or two. The notebook calls
 something a power law only when it holds over a wide range, and a bent
 alternative fits no better.
 
+### Fitting a power law properly
+
+Say the connections of a world follow a power law above some size. How is
+its exponent γ found, and where does the law begin? This section gives the
+method the literature recommends (Clauset, Shalizi and Newman 2009), with a
+small example. [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)
+applies it to the worlds of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.").
+
+#### The obvious way, and its problem
+
+The obvious way is to draw the CCDF on log–log axes and fit a straight line
+through it. The viewer's `degreeExponent` and `tokenExponent` are exactly
+that. Each is the [least-squares line](statistics.md#fitting-a-straight-line)
+of ln *P*(≥ *k*) on ln *k*, one point for each distinct value, and the
+exponent is 1 − slope.
+
+The trouble is in the points:
+
+- Neighbouring points of a cumulative distribution are not independent: each
+  contains the next.
+- The line counts every distinct value once. In the far tail each value
+  belongs to one agent or two, so a handful of agents make many of the
+  points.
+
+So the estimate wanders, and R² looks good whatever the truth. In the median
+B1 world of 100,000 tokens, the line through the whole degree distribution has
+R² = 0.96. Yet the distribution is not straight
+([The connections of one world](b1-the-network-size-and-scaling.md#the-connections-of-one-world)).
+
+#### Maximum likelihood
+
+Maximum likelihood asks a different question. If the values came from a
+power law with exponent γ, how probable would the values we see be? The best
+γ is the one that makes them most probable.
+
+Precisely: suppose the values *x*₁ … *x*ₙ from some *x*_min upward follow the
+density p(*x*) = (γ − 1) *x*_min^(γ−1) *x*^−γ. That is a power law, scaled
+so that its shares above *x*_min add up to one. The γ that makes the
+observed values most probable is
+
+$$
+\hat\gamma = 1 + n \Bigl[\sum_{i=1}^{n} \ln \frac{x_i}{x_{\min}}\Bigr]^{-1} .
+$$
+
+In words: take the logarithm of how many times over each value exceeds
+*x*_min, add these up, divide *n* by the sum, and add one. Values far above
+*x*_min make the sum large and the exponent small: that is a heavy tail. The
+estimate is uncertain by about (γ̂ − 1)/√*n*, its standard error.
+
+For whole numbers, like a degree, *x*_min is replaced by *x*_min − ½. That
+corrects most of the error of treating them as continuous.
+
+**Example.** Take a tail of four degrees, 2, 3, 4 and 8, with *k*_min = 2,
+so that the formula divides by 1.5. The logarithms of 2/1.5, 3/1.5, 4/1.5
+and 8/1.5 add up to 3.636. So γ̂ = 1 + 4/3.636 = 2.10. It is known to about
+±1.1/√4 = ±0.55, which is to say hardly at all. A tail needs many values.
+
+#### Where does the tail start?
+
+Real distributions are a power law, if at all, only above some *x*_min.
+Below it, the body bends away. So the fit tries many starts, and keeps the
+one whose fitted law sits closest to the data:
+
+1. Take up to 24 values of *k*_min, spread evenly over the distinct values.
+2. For each with at least 25 values at or above it, estimate γ̂ as above.
+3. Measure the **Kolmogorov–Smirnov distance**: the largest vertical gap
+   between the cumulative distribution of the tail and that of the fitted
+   law.
+4. Keep the *k*_min with the smallest distance.
+
+The viewer reports five numbers from this fit:
+
+- γ̂ (`degreeGamma`);
+- the *k*_min (`degreeKMin`);
+- the share of all agents in the tail (`degreeTailShare`);
+- the distance (`degreeGammaKS`);
+- R² of the CCDF over the tail (`degreeGammaR2`), which describes the fit
+  but does not test it.
+
+#### What this does not tell you
+
+The method finds the best power law. It does not prove there is one. Two
+more checks are needed.
+
+**Is the gap small enough?** Draw many samples from the fitted law, and fit
+each the same way. Then ask how often a sample fits its own law **worse**
+than the data fit theirs: how often its distance is at least the data's.
+This is the test of Clauset, Shalizi and Newman, and that share is its
+p-value. If it is 10% or less, the data are too far from a power law to be
+one. If it is larger, a power law is a plausible description, though another
+curve might be too.
+
+The viewer does not run this test; the analysis behind
+[Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)
+does. Each
+sample draws its values below *k*_min from the data's own, and its tail from
+the fitted law. The world of seed 1 gets 200 samples, and every other fit 100.
+
+**Does a different law fit as well?** A **log-normal**, a distribution whose
+logarithm is normal, often fits as well over the range one has. So does a
+power law with an exponential cut-off, which bends down at the top.
+
+And a tail is a small part of a world. In B1, the tail of the connections holds 5%
+of its agents at 10,000 tokens, and 1% at 100,000 tokens. A power law there
+says nothing about the rest.
+
 ## How long a world remembers: autocorrelation and the power spectrum
 
 A world wanders: its size, its inequality and its births go up and down over
 hundreds of iterations. The **autocorrelation** says how long it remembers
 where it was: the correlation of a world with itself, some time later. In
-[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") it falls from about 0.6 after 100 iterations to nothing after 300, so
+B1 it falls from about 0.6 after 100 iterations to nothing after 300, so
 levels 500 iterations apart are nearly independent. The **power spectrum**
 splits the wander into rhythms and says how much of it happens at each. A
 world's number of agents moves like a random walk on short scales, and is
@@ -516,6 +626,16 @@ ones. A world's settled life, iterations 500 to 2,999, is 25 stretches of
 look for a single stretch at the end. That is why the notebook measures
 worlds over their settled life
 ([The settled life of a world](statistics.md#the-settled-life-of-a-world)).
+
+#### What a B1 world remembers
+
+In B1's thirty worlds of 100,000 tokens, a world a hundred iterations on is
+still much where it was: the autocorrelation is 0.61 for the number of agents
+and 0.62 for inequality. Two hundred iterations on it is 0.21 for both, and
+three hundred on nothing is left. So a world forgets its level within about
+three hundred iterations, far faster than a random walk would
+([A world forgets](b1-the-network-size-and-scaling.md#a-world-forgets)). Two
+looks at one world that far apart are close to two looks at different worlds.
 
 ### The power spectrum of a time series
 
@@ -800,6 +920,22 @@ In the code, this is `seeds_needed` in `gol_analysis.py`.
 [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) draws *n*
 against Δ.
 
+#### What thirty seeds can see
+
+In B1's worlds of 100,000 tokens, measured over their settled life, thirty
+seeds per condition see a change of about 8% in the number of agents four
+times in five, 9% in connections and 5% in inequality. Measured over the last
+fifth of each run instead, a change of 10% in the number of agents takes 48
+seeds, not 19. Two more lessons came from the same worlds
+([How many seeds an experiment needs](b1-the-network-size-and-scaling.md#how-many-seeds-an-experiment-needs)):
+
+- **Pairing by seed helps little.** Two conditions run with the same seed
+  share their starting ring and founders, and little else. A comparison seed
+  by seed is about as noisy as one between unrelated worlds.
+- **Shape needs more seeds than size.** Only a few worlds in thirty grow a
+  giant [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."). A setting that made giant hubs twice as common would need far
+  more than thirty seeds to see.
+
 ## Splitting variation: where, who and chance, and between worlds and within them
 
 A spread of numbers can often be split exactly into parts with different
@@ -1060,8 +1196,8 @@ neuroscience it measures the dimension of neural activity (Gao and others
   spread of thirty worlds, statistic by statistic.
 - [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world): bands at work, and single
   worlds drawn one by one.
-- [Fitting a power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly): how to find an exponent from a
-  distribution, and where its tail starts.
+- [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one):
+  the fit applied to the tokens, connections and cuts of B1's worlds.
 - [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together): four
   power laws fitted to every agent of a world.
 - [When a world ends](rules-in-detail.md#when-a-world-ends): the deaths of whole worlds, counted in
@@ -1091,6 +1227,12 @@ neuroscience it measures the dimension of neural activity (Gao and others
     16 seeds. The spread
     [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measures
     is 0.11, and that gives 19.
+- **11 November 2026.** The pages on B1 moved to the Archive, and three methods
+  they explained, which the notebook still uses, moved here. [Fitting a power
+  law properly](#fitting-a-power-law-properly) came whole from Power laws, real
+  and apparent. [What a B1 world remembers](#what-a-b1-world-remembers) and
+  [What thirty seeds can see](#what-thirty-seeds-can-see) say in short what How
+  much does the seed decide? found.
 
 ## References
 

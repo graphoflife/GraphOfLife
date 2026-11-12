@@ -21,6 +21,12 @@ agents per token, and nothing points to a critical state. And thirty seeds of
 one world end up alike: each world wanders, and forgets its level within about
 three hundred iterations.
 
+Three methods this page used are still used across the notebook, so they are
+explained in Statistics: [fitting a power
+law](statistics.md#fitting-a-power-law-properly), [how many seeds an experiment
+needs](statistics.md#what-thirty-seeds-can-see) and [how long a world
+remembers](statistics.md#what-a-b1-world-remembers).
+
 It gathers what were 7 pages of their own, one section each:
 
 - [The shape of the network](#the-shape-of-the-network): Within a hundred iterations, the founders' ring with its few shortcuts becomes a mesh, the **core**, with small trees hanging off it.
@@ -1381,113 +1387,17 @@ tokens this page was first written from differ, both are given.
 
 ### Fitting a power law properly
 
-Say the connections of a world follow a power law above some size. How is
-its exponent γ found, and where does the law begin? This section gives the
-method the literature recommends (Clauset, Shalizi and Newman 2009), with a
-small example. The sections after it apply the method to the worlds.
-
-#### The obvious way, and its problem
-
-The obvious way is to draw the CCDF on log–log axes and fit a straight line
-through it. The viewer's `degreeExponent` and `tokenExponent` are exactly
-that. Each is the [least-squares line](statistics.md#fitting-a-straight-line)
-of ln *P*(≥ *k*) on ln *k*, one point for each distinct value, and the
-exponent is 1 − slope.
-
-The trouble is in the points:
-
-- Neighbouring points of a cumulative distribution are not independent: each
-  contains the next.
-- The line counts every distinct value once. In the far tail each value
-  belongs to one agent or two, so a handful of agents make many of the
-  points.
-
-So the estimate wanders, and R² looks good whatever the truth. In the median
-world of this page, the line through the whole degree distribution has
-R² = 0.96. Yet the distribution is not straight
-([The connections of one world](#the-connections-of-one-world)).
-
-#### Maximum likelihood
-
-Maximum likelihood asks a different question. If the values came from a
-power law with exponent γ, how probable would the values we see be? The best
-γ is the one that makes them most probable.
-
-Precisely: suppose the values *x*₁ … *x*ₙ from some *x*_min upward follow the
-density p(*x*) = (γ − 1) *x*_min^(γ−1) *x*^−γ. That is a power law, scaled
-so that its shares above *x*_min add up to one. The γ that makes the
-observed values most probable is
-
-$$
-\hat\gamma = 1 + n \Bigl[\sum_{i=1}^{n} \ln \frac{x_i}{x_{\min}}\Bigr]^{-1} .
-$$
-
-In words: take the logarithm of how many times over each value exceeds
-*x*_min, add these up, divide *n* by the sum, and add one. Values far above
-*x*_min make the sum large and the exponent small: that is a heavy tail. The
-estimate is uncertain by about (γ̂ − 1)/√*n*, its standard error.
-
-For whole numbers, like a degree, *x*_min is replaced by *x*_min − ½. That
-corrects most of the error of treating them as continuous.
-
-**Example.** Take a tail of four degrees, 2, 3, 4 and 8, with *k*_min = 2,
-so that the formula divides by 1.5. The logarithms of 2/1.5, 3/1.5, 4/1.5
-and 8/1.5 add up to 3.636. So γ̂ = 1 + 4/3.636 = 2.10. It is known to about
-±1.1/√4 = ±0.55, which is to say hardly at all. A tail needs many values.
-
-#### Where does the tail start?
-
-Real distributions are a power law, if at all, only above some *x*_min.
-Below it, the body bends away. So the fit tries many starts, and keeps the
-one whose fitted law sits closest to the data:
-
-1. Take up to 24 values of *k*_min, spread evenly over the distinct values.
-2. For each with at least 25 values at or above it, estimate γ̂ as above.
-3. Measure the **Kolmogorov–Smirnov distance**: the largest vertical gap
-   between the cumulative distribution of the tail and that of the fitted
-   law.
-4. Keep the *k*_min with the smallest distance.
-
-The viewer reports five numbers from this fit:
-
-- γ̂ (`degreeGamma`);
-- the *k*_min (`degreeKMin`);
-- the share of all agents in the tail (`degreeTailShare`);
-- the distance (`degreeGammaKS`);
-- R² of the CCDF over the tail (`degreeGammaR2`), which describes the fit
-  but does not test it.
-
-#### What this does not tell you
-
-The method finds the best power law. It does not prove there is one. Two
-more checks are needed.
-
-**Is the gap small enough?** Draw many samples from the fitted law, and fit
-each the same way. Then ask how often a sample fits its own law **worse**
-than the data fit theirs: how often its distance is at least the data's.
-This is the test of Clauset, Shalizi and Newman, and that share is its
-p-value. If it is 10% or less, the data are too far from a power law to be
-one. If it is larger, a power law is a plausible description, though another
-curve might be too.
-
-The viewer does not run this test; the analysis behind this page does. Each
-sample draws its values below *k*_min from the data's own, and its tail from
-the fitted law. The world of seed 1 gets 200 samples, and every other fit 100.
-
-**Does a different law fit as well?** A **log-normal**, a distribution whose
-logarithm is normal, often fits as well over the range one has. So does a
-power law with an exponential cut-off, which bends down at the top.
-
-And a tail is a small part of a world. The tail of the connections holds 5%
-of its agents at 10,000 tokens, and 1% at 100,000 tokens. A power law there
-says nothing about the rest.
+The method, maximum likelihood from where the tail starts, is one the notebook
+still uses. So since 11 November 2026 it is explained in Statistics:
+[Fitting a power law properly](statistics.md#fitting-a-power-law-properly).
+The sections below apply it to B1's worlds.
 
 ### The connections of one world
 
 <!-- figure powerlaws/degree-fit -->
 ![Fitting the degrees of one world](../figures/powerlaws/degree-fit.svg)
 
-**Fitting the degrees of one world.** Dots: for every number of connections k that occurs among the 14,870 agents of the world with seed 1 after its last game, the share of agents with at least k — the complementary cumulative distribution, on logarithmic axes. Dashed: the straight line least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ (the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the tail from the k that fits best, k = 22 (`degreeGamma`, `degreeKMin`), which holds 0.8% of the agents ([Fitting a power law](b1-the-network-size-and-scaling.md#fitting-a-power-law-properly)).
+**Fitting the degrees of one world.** Dots: for every number of connections k that occurs among the 14,870 agents of the world with seed 1 after its last game, the share of agents with at least k — the complementary cumulative distribution, on logarithmic axes. Dashed: the straight line least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ (the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the tail from the k that fits best, k = 22 (`degreeGamma`, `degreeKMin`), which holds 0.8% of the agents ([Fitting a power law](statistics.md#fitting-a-power-law-properly)).
 
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
@@ -3961,6 +3871,9 @@ written by `python3 gol_lab.py analyse E03`.
   question. They are kept so that every experiment here can be read and made
   again. Nothing was cut but six copies of the list of the runs of Experiment
   10: it is now shown once.
+- **11 November 2026.** The section Fitting a power law properly moved whole to
+  Statistics, where the notebook keeps the methods it still uses; a short note
+  and a link take its place here.
 
 ## References
 

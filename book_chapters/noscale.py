@@ -951,7 +951,7 @@ def riches_figures(ch: F.Chapter, kept: Dict[int, Kept], large: Kept) -> None:
                        "times 1,000.",
                        "Right: the largest value of each look, and its median over the looks of each world.",
                        "The tail exponent γ: the maximum-likelihood fit of [Power laws, real and apparent]"
-                       "(b1-the-network-size-and-scaling.md#fitting-a-power-law-properly), done on the pooled "
+                       "(statistics.md#fitting-a-power-law-properly), done on the pooled "
                        "values of the smallest worlds (`book_chapters.noscale.tail_fit`)."]))
     ch.number("riches", numbers)
 
