@@ -304,11 +304,10 @@ in some worlds mixed with a mate's, and the copy may change. And a node won in
 the game keeps its agent, but takes on a copy of the winner's brain. In the
 median world of round 3 a game makes 1.4 copies for every birth: from almost
 none in seed 3020, a star, to 14 in seed 3004. So what descends in a world is
-its brains, not its agents. In November 2026 an independent review found that
-this page read its numbers of evolution on a family tree of births alone, and
-drew its shortlist from health, not from evolution. On 11 November 2026 the
-author approved a plan to rank round 3 by evolution on the brains' own family
-tree, every reading set against a model of what chance alone would do.
+its brains, not its agents. On 11 November 2026, after an independent review
+of this page, the author approved a plan to rank round 3 by evolution on the
+brains' own family tree, every reading set against a model of what chance
+alone would do.
 
 The **brain-copy tree** follows every copy of a brain, an **instance**. An
 instance begins in one of three ways:
@@ -714,18 +713,16 @@ round 3 is stopped and shown to the author.
 
 ## What we learned
 
-- **72 of round 3's hundred worlds are candidate worlds**; all five that stand
-  still are crowded and poor.
-- **Evolution must be read on the brains' own family tree.** Conquests copy
-  brains more often than births do, and a tree of births alone misreads both
-  heredity and how many lines go on.
-- **Selection is plain, but it holds behaviour in place.** Lines spread
-  faster than luck would spread them, and selection on behaviour shows in
-  every world; but hardly any line of descent finds more new behaviour than
-  mutation alone, and the behaviours do not follow their selection.
-- **Health does not pick the worlds that evolve.** Four of the evolution
-  rank's first ten are on the shortlist; eight of the ten play the game a
-  token at a time.
+- **Crowded, poor worlds stand still**: where agents hold a token or two,
+  selection has little variation to choose from.
+- **Evolution must be read on the brains' own family tree.** A tree of births
+  alone misses the copies of conquest, and misreads both heredity and how
+  many lines go on.
+- **Selection holds behaviour in place.** Lines beat luck and selection on
+  behaviour is plain, yet behaviour does not move where selection points, and
+  hardly any line of descent gets further than mutation alone would take it.
+- **Health is no guide to evolution**: over the 82 worlds that lived, the two
+  do not go together.
 - **Fertility runs in families in almost every world** (on the births-only
   tree); mending deaths weakens it.
 
@@ -812,4 +809,4 @@ themselves.
   table of every candidate world, with the mean ranks it was sorted by, is in
   the notebook's history
   (`git show 037f997:book/pages/candidates-for-open-ended-evolution.md`). The
-  shortlist's and Experiment 43's history went to this list.
+  shortlist's history and Experiment 43's change are told only here.
