@@ -67,9 +67,9 @@ A world spends its first hundred iterations or so in a **youth**, unlike the
 rest of its life
 ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 Then it **wanders** ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). So when the
-notebook asks where a world **settles**, it takes the mean from iteration
-500 to its end: its
-[settled life](statistics.md#the-settled-life-of-a-world).
+notebook asks where a world **settles**, it takes the mean over its
+[settled life](statistics.md#the-settled-life-of-a-world): from iteration 500
+to its end in the baselines, and from 100 in round 3 of the screen.
 
 ## Step 3 · Many worlds: lines, bands and dots
 
@@ -158,11 +158,9 @@ differ.
    setting made no difference, the labels "baseline" and "changed" would be
    arbitrary. So shuffle them 10,000 times, and see how often a difference at
    least as large appears. That share is the *p*-value.
-3. **Enough seeds?** A change of a given size needs a certain number of
-   worlds per condition to be found four times in five
+3. **Enough seeds?** Results from fewer than thirty seeds per condition are
+   called **indicative**, not effects, in the plans that ask for them
    ([How many seeds](statistics.md#how-many-seeds-an-experiment-needs)).
-   Results from fewer than thirty seeds per condition are called
-   **indicative**, not effects.
 
 Worlds that died out are not averaged in. They are an outcome of their own,
 counted with a [Wilson interval](statistics.md#the-wilson-interval) for the

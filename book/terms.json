@@ -186,6 +186,12 @@
       "says": "The stated rules an experiment starts from and changes one thing of: B1 or B2."
     },
     {
+      "name": "health filter",
+      "page": "measuring-health",
+      "anchor": "from-11-november-2026-health-as-a-filter",
+      "says": "Health's only use since 11 November 2026: a world that died, is a star (one agent linked to half of it), holds all alike or stands still is left out."
+    },
+    {
       "name": "health bar",
       "page": "measuring-health",
       "says": "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.",
@@ -199,9 +205,9 @@
     },
     {
       "name": "effective kinds of staking",
-      "page": "b1-brains-lineages-and-messages",
+      "page": "measuring-health",
       "says": "How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.",
-      "anchor": "how-different-are-the-agents"
+      "anchor": "decisions-the-effective-kinds-of-staking"
     },
     {
       "name": "random twin",
@@ -217,6 +223,9 @@
     },
     {
       "name": "estate",
+      "also": [
+        "share-out"
+      ],
       "page": "measuring-lives",
       "says": "The tokens a dead agent leaves, and who gets them.",
       "anchor": "the-estate-of-the-dead"
@@ -326,12 +335,6 @@
       "page": "measuring-tokens",
       "says": "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.",
       "anchor": "entropy-and-evenness"
-    },
-    {
-      "name": "share-out",
-      "page": "b1-lives-and-wealth",
-      "says": "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.",
-      "anchor": "gains-losses-and-the-share-out"
     },
     {
       "name": "home stake",
@@ -510,7 +513,7 @@
     {
       "name": "settled life",
       "page": "statistics",
-      "says": "A world from iteration 500 to its end, after its youth, where it is measured.",
+      "says": "A world after its youth, where it is measured: from iteration 500 to its end in the baselines, from 100 in round 3 of the screen.",
       "anchor": "the-settled-life-of-a-world"
     },
     {
@@ -521,6 +524,12 @@
       "page": "statistics",
       "says": "The middle value: half of the numbers lie below it and half above.",
       "anchor": "many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread"
+    },
+    {
+      "name": "rank correlation",
+      "page": "statistics",
+      "anchor": "rank-correlation",
+      "says": "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other."
     },
     {
       "name": "correlation",
@@ -629,8 +638,8 @@
     },
     {
       "name": "false discovery rate",
-      "page": "how-the-drawn-settings-shape-a-world",
-      "anchor": "how-a-setting-is-tested",
+      "page": "statistics",
+      "anchor": "testing-many-settings-at-once",
       "says": "Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg)."
     },
     {

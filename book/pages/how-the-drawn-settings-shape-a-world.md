@@ -43,37 +43,13 @@ twice, so they are looked at apart, [at the end](#a-token-at-a-time).
 
 ## How a setting is tested
 
-For every setting and every outcome of the worlds:
-- for **whether a world died**, we count the deaths under each value;
-- for **a number** (a living world's [health](which-worlds-are-healthy.md),
-  each of its criteria, its size, how differently its agents act, how much
-  children act like their parents, ...), we take its median under each value.
-
-Then the outcome is **shuffled** among the worlds, 20,000 times, as if the
-setting had nothing to do with it. Each shuffle keeps how many worlds had each
-value and hands the outcomes out at random. The **chance** of a difference is
-the share of shuffles in which the values differ at least as much as they do in
-the real worlds: a [permutation test](statistics.md#permutation-tests). The
-difference is measured by the chi-square statistic for deaths, and by the
-Kruskal-Wallis statistic of the ranks for numbers. A chance of 0.01 means one
-shuffle in a hundred does as well by luck alone.
-
-Many settings are tested on many outcomes, so a few small chances turn up by
-luck. Every test therefore also has a **false discovery rate**: among all the
-settings tested on that outcome, how often a result this strong would be a
-false alarm (the rule of Benjamini and Hochberg, 1995). We call a result a
-**finding** only when that rate is below 0.1. Every test also gives its
-**size**: the share of the outcome's spread that the setting's values account
-for, from 0 (none) to 1 (all of it).
-
-**An example.** Of the 41 worlds drawn with gifts, 2 died; of the 43 drawn
-without, 12. Shuffle the 14 deaths at random among the 84 worlds, keeping 41
-worlds in one group and 43 in the other, and count how often the two groups
-end up at least this far apart: about 140 times in 20,000 shuffles, a chance of
-0.007. But 25 settings were tested on deaths, so a chance that small could turn
-up by luck in one of them. The false discovery rate says how likely that is
-here: 0.09, below 0.1, so it counts as a finding. Gifts or none account for a
-tenth of the spread of deaths across the worlds (a size of 0.10).
+Every setting is tested on every outcome by shuffling the outcome among the
+worlds, 20,000 times, as if the setting had nothing to do with it. A result
+is a **finding** only when its false discovery rate is below 0.1; its size is
+the share of the outcome's spread the setting accounts for
+([Testing many settings at once](statistics.md#testing-many-settings-at-once)).
+Of the 41 worlds drawn with gifts, 2 died; of the 43 drawn without, 12: a
+finding.
 
 ## Which settings matter for what
 
@@ -538,5 +514,5 @@ settingseffects` draws this page.
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (7)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Statistics: the tools of the notebook](statistics.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

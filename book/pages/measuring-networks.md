@@ -31,10 +31,8 @@ attachment and scaling relations, are in
 
 ### Degree
 
-The **degree** of an agent is the number of connections it has, which is the
-number of its neighbours. It is the simplest thing to know about a place in a
-network, and much depends on it. An agent stakes only on its own node and its
-neighbours' nodes, and only its neighbours can stake on its node.
+An agent stakes only on its own node and its neighbours' nodes, and only its
+neighbours can stake on its node.
 
 #### Degree, mean degree and density
 
@@ -249,21 +247,15 @@ In B1's worlds clustering stays below 0.1, as Experiment 5 predicted
 
 ## Stars and hubs
 
-Most agents have one or two connections; a few, the **hubs**, have hundreds or
-thousands. A world whose best-connected agent is joined to a tenth of it or
-more is a **star**, and seven of the thirty baseline worlds of 100,000 tokens
-were. A star's centre is a place, not an individual: the [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") on it changes
-nearly every game, while its connections pass from parent to newborn child. The
-[health bar](measuring-health.md#the-health-bar) counts any agent joined to more than 5% of the others as a fault.
+A few agents, the **hubs**, have hundreds or thousands of connections. A star's
+centre is a place, not an individual: the [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") on it changes nearly every
+game, while its connections pass from parent to newborn child.
 
 ### Hubs
 
-An agent's [degree](measuring-networks.md#an-agents-connections-degree-and-clustering) is its number of connections. In a settled
-baseline world of 100,000 tokens the median agent has 2 and the mean is 3.5, but
+In a settled baseline world of 100,000 tokens the median agent has 2 and the mean is 3.5, but
 the best-connected agent of the median world has 640 (from 130 to 11,000
 between worlds; [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)).
-An agent that far above the rest is a **hub**. There is no exact line for a hub;
-there is one for a star.
 
 Hubs are places. Under the near-[even split](measuring-tokens.md#the-even-split), the agent on a node
 with *d* connections is one of *d* + 1 stakers of about equal size, and keeps
@@ -293,10 +285,9 @@ on, and the node carried 78 different [genotypes](measuring-evolution.md#genotyp
 
 ### How a star is handed down
 
-An agent gains connections as its neighbours have children, about in
-proportion to those it has, but loses them a little faster, so the well
-connected drift back down
-([How the network grows](b1-lives-and-wealth.md#who-gains-and-who-loses)).
+The well connected drift back down: they lose connections a little faster
+than they gain them
+([The kernels in the worlds](measures-of-the-archived-studies.md#the-kernels-in-the-worlds)).
 
 A star's centre is kept another way. Now and then it has a child and hands it
 nearly all its connections ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)):
@@ -309,14 +300,9 @@ of 7 iterations, and the longest 942.
 
 ### Why the health bar counts a hub as a fault
 
-The author's picture of a world that might keep evolving asks for a network
-that is resilient, decentralised and close to three-dimensional, with few
-single points of failure. So the
-[health bar](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)
-allows no agent to be joined to more than 5% of the others. If one agent holds
-links to many others, the world depends on it: when that hub dies, everything
-changes at once ([What makes a world interesting](rounds-1-and-2-of-the-screen.md#the-six-criteria)).
-And a star is mostly leaves, and short: in seed 28 only 19% of the agents were
+The health bar allows no agent to be joined to more than 5% of the others
+([Why each mark is there](measuring-health.md#why-each-mark-is-there)). A star
+is mostly leaves, and short: in seed 28 only 19% of the agents were
 in the core and 72% were leaves, and two agents were 4.2 steps apart on
 average, against 12 to 26 steps in the worlds without a star
 ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
@@ -341,6 +327,7 @@ at random, a brain may choose at most 8 links
 - [Particles: patterns that outlast what carries them](particles.md#in-short)
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#room-to-go-on)
 - [Rules without numbers](rules-without-numbers.md#why-ask)
+- [Measuring health: criteria, the health bar and diversity](measuring-health.md#from-11-november-2026-health-as-a-filter)
 - [Statistics: the tools of the notebook](statistics.md#what-thirty-seeds-can-see)
 
 > [!info]- And in the Archive (11)
@@ -463,9 +450,7 @@ No page links here yet.
 
 The mean path length is a typical distance. Two more numbers describe the
 extremes. How far apart are the two agents furthest from each other? And how
-far must the most central agent reach to touch everyone? Both start from the
-distance d(*u*, *v*): the fewest connections on a path from *u* to *v*
-([Path length](#path-length)).
+far must the most central agent reach to touch everyone?
 
 #### Eccentricity
 
@@ -495,10 +480,8 @@ other through the most central one takes at most twice the radius.
 
 #### How the viewer estimates them
 
-Exact values need a breadth-first search from every agent: too slow for a
-world of thousands, every 25 iterations. So the program reuses the searches
-of the mean path length
-([The estimate the notebook uses](#the-estimate-the-notebook-uses)). Then it
+The program reuses the searches of the mean path length
+([The estimate the notebook uses](#the-estimate-the-notebook-uses)), then
 searches once more, from the furthest agent any of them reached. This
 "double sweep" is exact on a tree. There, whichever agent a search starts
 from, the agent furthest from it is one end of a longest path. So:
@@ -936,15 +919,7 @@ connection, after every phase.
 
 #### An example of peeling
 
-Take the network of [What a bridge is](#what-a-bridge-is) again:
-
-```
-  a — b — c — d
-  |       |
-  e ——————f — g — h
-              |
-              i
-```
+Take the network drawn under [Bridges](#bridges).
 
 The loop a–b–c–f–e–a is the core, with its members' connections among
 themselves. Peeling removes d, h and i, which have one connection each, in
@@ -960,9 +935,8 @@ Every other connection is a [bridge](#bridges). A bridge of a tree cuts off
 everything beyond it. A bridge on a path between two loops of the core cuts
 the core itself in two. The cleanup then removes whatever is no longer joined
 to the largest piece. So a single cut can lose any tree whole, and, through a
-bridge of the core, part of the core too. B2 cuts an unused connection only
-where its two ends share two neighbours, so it never cuts a bridge
-([`prune_needs`](settings.md#prune_needs)).
+bridge of the core, part of the core too. B2 never cuts a bridge
+([Why the cut risk matters](#why-the-cut-risk-matters)).
 
 In a settled B1 world of 100,000 tokens, about 57% of the agents are in the
 core, and 35% are leaves. The rest lie in trees. At 10,000 tokens it is 54%

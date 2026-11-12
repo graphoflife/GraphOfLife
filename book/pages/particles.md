@@ -566,7 +566,7 @@ A particle would need something that binds. Three places to look next:
 - **A flow through the world.** Order that feeds on a flow, like the
   convection cells of a pan of oil heated from below, needs a source and a
   sink: the planned study *A source and a sink*.
-- **Local rules.** The share-out of the dead and the single random stream
+- **Local rules.** The [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead and the single random stream
   still reach across a whole world at once
   ([What this asks of the notebook](physical-inspiration.md#what-this-asks-of-the-notebook)).
   A thing that keeps its form while it moves needs a world in which what

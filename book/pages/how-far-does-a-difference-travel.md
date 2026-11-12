@@ -15,7 +15,7 @@ Take two copies of a world, and in one of them move a single token from an
 shows how far news travels in a world, and whether a small change grows or
 fades. By the rules, a difference can travel at most four steps a phase, three
 in worlds without the look that only talks: a world's speed of light. But only
-once the cull, the [share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") and the one random stream are local, and only 4
+once the cull, the [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") and the one random stream are local, and only 4
 of the 24 worlds on round 3's shortlist when this plan was written have no
 other rule that breaks the bound. The plan is thirty twin trials on each of three candidate worlds, under
 three conditions, with heat spreading on the same network as the test of the

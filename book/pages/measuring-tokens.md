@@ -195,8 +195,7 @@ tokens, and it holds 60%.
 
 The richest tenth hold 1 minus what the poorest 90% hold. That is one minus
 the height of the [Lorenz curve](#the-lorenz-curve) at 0.9, up to the
-rounding of *m*. The Gini coefficient sums up the whole curve; this share
-reads one point of it, the one people most often ask about.
+rounding of *m*.
 
 In a settled B1 world of 100,000 tokens the richest tenth hold about 42% of
 all tokens. Between worlds it ranges from 33% to 50%
@@ -398,8 +397,9 @@ the τ tokens are split evenly
    decides, and the agent's own node is first
    ([Where the tokens flow](b1-the-game-and-its-flows.md#how-widely-agents-stake)).
 
-With 3 tokens and one neighbour, an agent stakes 2 at home and 1 on the
-neighbour, so whole tokens tilt the split towards home. The share staked at
+Whole tokens tilt the split towards home: with 3 tokens and one neighbour, an
+agent stakes 2 at home and 1 on the neighbour
+([Zero scores, and ties](rules-in-detail.md#zero-scores-and-ties)). The share staked at
 home, by [degree](measuring-networks.md#an-agents-connections-degree-and-clustering), in the thirty baseline worlds of 100,000 tokens of
 Experiment 10 ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)):
 
@@ -491,9 +491,7 @@ its **lightning**, was measured only by studies now in the Archive
 
 ### Token flow
 
-Picture each token an agent stakes on a neighbour walking across the
-connection between them. In every game every agent stakes all its tokens on itself and its neighbours
-([One iteration, step by step](one-iteration.md)). A stake of agent *u* on a
+A stake of agent *u* on a
 neighbour *v*'s node is a **flow** of tokens from *u* to *v*. Whatever happens
 to the node, those tokens end the game at *v*'s node. A stake on one's own
 node moves nothing, and the measures of flow leave it out. The viewer shows

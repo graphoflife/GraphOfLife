@@ -1456,7 +1456,7 @@ in about one game in ten.
 That suggests a different mechanism, also a classic. An agent's tokens are
 multiplied, game after game, by a random factor: sometimes a big gain, more
 often a loss. Meanwhile a floor holds up the poorest. A node with nothing
-dies, and the share-out tops up the poor. Random multiplication with a floor
+dies, and the [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") tops up the poor. Random multiplication with a floor
 produces a power-law tail (Champernowne 1953; Kesten 1973; Levy and Solomon
 1996; Gabaix 1999 for the sizes of cities). Again this is a hypothesis. The
 simplest test would be to look for that multiplication in the worlds.

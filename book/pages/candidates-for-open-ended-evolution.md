@@ -163,7 +163,7 @@ The 72 candidates evolve fast, but in few lines.
   above the noise from every earlier era, and in 15 worlds it never comes back
   to behaviour it had shown before.
 
-Three pulls show across the worlds (rank correlations over the 72):
+Three pulls show across the worlds ([rank correlations](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") over the 72):
 - **heredity against novelty (−0.37):** where children are most like their
   parents, the line of descent changes least. Keeping what works and finding
   something new pull against each other;

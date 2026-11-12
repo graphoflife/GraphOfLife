@@ -387,17 +387,12 @@ steps out, a typical agent's ball holds a quarter of the world. A small world
 has no dimension to find, which is why the health bar's dimension rose with
 the size of B2's worlds.
 
-The word says how it happens. Every B2 world starts as a space, 1.68 times as
-wide as its twin at iteration 100, and folds to 1.24 by iteration 300, once
-its first generation dies of age. Each death is mended with a ring of links
-among the dead agent's neighbours
-([`mend_on_death`](settings.md#mend_on_death)), which joins agents that were
-two steps apart. Worlds without old age, without mending, or whose unused
-links lapse keep their room.
-
-Read at iteration 1,000, 498 worlds fell into two groups: 371 folded, with
-median widths of 1.26 and 1.27, and 127 spaces, with medians of 2.09 to 3.63
-by the rule that made them. The line of 1.5 lies between the two.
+The word says how it happens. Every B2 world starts as a space and folds once
+its first generation dies of age. Each death is mended by joining the separate
+groups the dead agent's neighbours fall into
+([`mend_on_death`](settings.md#mend_on_death)), which links agents that were
+two steps apart. [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)
+tells the story, with its numbers.
 
 ### Where it is used
 

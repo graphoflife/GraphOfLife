@@ -229,7 +229,7 @@ once was 0.8% of the network), and only 0.6% in a game.
 **Mending is what spares a world.** Of Experiment 40's living worlds, those that
 mend their dead (the setting *mend_on_death*: a dying agent's [neighbours](the-world.md#the-network "An agent joined to another by a connection.") are
 joined up again, so that no death cuts the network apart) cull a median of 4%
-of their tokens in a game, those that do not, 11% (a false discovery rate of
+of their tokens in a game, those that do not, 11% (a [false discovery rate](statistics.md#testing-many-settings-at-once "Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg).") of
 0.01; [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md)).
 
 ## Three ways to put the criteria together
@@ -284,7 +284,7 @@ The first 13 of each order:
 <!-- /table -->
 
 The three orders agree only in part. The order by the product and the order
-by the sum have a rank [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of 0.87, the product and the worst 0.79,
+by the sum have a [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") of 0.87, the product and the worst 0.79,
 the sum and the worst only 0.46. Five worlds are among the first 13 of all
 three: seeds 3042, 4006 played strongest first, 3018, 3080 and 3057. The
 candidates for open-ended evolution are the worlds among the first 13 of any
@@ -511,7 +511,7 @@ and joined to those nearest:
 At about five links an agent, a random network in a cube reads 0.56 and one in
 a plane 0.38; only at about eight links do they reach a lattice's values. At
 three links both nearly fall apart. Round 3's living worlds have a median of
-3.6 links an agent, and their exponents follow their links (a correlation of
+3.6 links an agent, and their exponents follow their links (a [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of
 0.67) and their dimension by balls (0.91). So the exponent would score a world
 for being dense as much as for having room. The fair test compares each world
 with a random network of its own size and density in a cube: a world as hard

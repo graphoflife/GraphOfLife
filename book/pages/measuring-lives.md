@@ -159,17 +159,11 @@ When an agent dies, the tokens it still holds are not lost: the
 [cleanup](one-iteration.md#cleanup) pools them as the **estate of the dead** and hands them to the living. The setting
 [`redistribution`](settings.md#redistribution) says who inherits. In both
 [baselines](b1-and-b2.md), B1 and B2, every token goes to a survivor drawn at
-random, each with the same chance. The notebook tried five other heirs, and found that who
-inherits decides how many agents a world holds, and how poor they are.
+random, each with the same chance. The notebook tried other heirs, and found
+that who inherits decides how many agents a world holds, and how poor they
+are.
 
 ### What happens at a death
-
-Every death happens in the cleanup after a phase of an iteration
-([Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die)). Agents with no
-tokens starve, and agents no longer joined to the largest connected piece of
-the network are cut off; under [`max_age`](settings.md#max_age), agents also
-die when they reach that age. The tokens the dead still hold are pooled and
-dealt out among the survivors, so the world's total never changes.
 
 Who leaves an estate depends on the rules. In B1 the starved hold nothing, so
 the estate is the tokens of the cut off, who make three deaths in four
@@ -190,17 +184,11 @@ iteration among 3,600 agents ([Who inherits?](what-the-switches-did-in-pilots.md
 
 ### Who may inherit
 
-| `redistribution` | the estate goes to |
-|---|---|
-| `uniform` | every survivor, the same chance at every token (B1 and B2) |
-| `by_tokens` | every survivor, with a chance in proportion to what it holds |
-| `poorest` | the poorest survivors, raised to one common level as far as the pool reaches |
-| `newborns` | the children born this iteration that are still alive, an even chance each |
-| `parents` | the parents of those children, once per child |
-| `children` | each dead agent's own living children, an even chance each |
-
-`newborns` and `parents` fall back to `uniform` in an iteration without a
-birth, and `children` for an estate that finds no living child.
+[`redistribution`](settings.md#redistribution) lists every heir a world can
+have: seven rules, from `uniform`, the baselines', to `local`, the nearest of
+the living, added on 24 October 2026. Round 3 of the screen drew among them,
+and [What keeps wealth spread?](what-keeps-wealth-spread.md) reads what each
+did there.
 
 ### What each heir did
 
@@ -247,18 +235,22 @@ them had 12 to 23.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)
 - [Questioning the mechanics](questioning-the-mechanics.md#the-share-out-lottery)
 - [Every setting](settings.md#redistribution)
+- [The rules in detail](rules-in-detail.md#the-two-streams-of-a-run)
 - [What keeps wealth spread?](what-keeps-wealth-spread.md#the-question)
 - [Physical inspiration](physical-inspiration.md#where-the-speed-limit-is-broken)
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#b1-and-b2-side-by-side)
 - [Measuring space: dimension and the random twin](measuring-space.md#examples)
 - [Local rules only](local-rules-only.md#local-rules-only)
+- [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
+- [Particles: patterns that outlast what carries them](particles.md#for-the-physics-aim)
+- [Brains replaced by their average](brains-replaced-by-their-average.md#what-we-expect)
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-it-is-tested)
 - [A source and a sink](a-source-and-a-sink.md#where-a-source-could-sit)
 - [Rules without numbers](rules-without-numbers.md#links-that-hold-a-token)
 - [Measuring health: criteria, the health bar and diversity](measuring-health.md#examples)
 
-> [!info]- And in the Archive (4)
-> [B1: lives and wealth](b1-lives-and-wealth.md#the-tokens-of-the-dead) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-estate-of-the-dead) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#where-to-go-next) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#a-whole-world-over-time)
+> [!info]- And in the Archive (6)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-road-from-here) · [B1: lives and wealth](b1-lives-and-wealth.md#the-tokens-of-the-dead) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-estate-of-the-dead) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#where-the-tail-of-the-tokens-could-come-from) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#where-to-go-next) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#a-whole-world-over-time)
 <!-- /used -->
 
 ## Age, lifetime and survival curves
@@ -311,17 +303,11 @@ When a run stops, some agents are still alive. Their lifetime is not known,
 only that it is **at least** what they have lived so far. Leaving them out
 would make lives look shorter than they are, because the long lives are the
 ones most likely to be unfinished. Counting them as if they had ended would do
-the same. The right way is the **Kaplan–Meier estimate**
-([Survival curves](#survival-curves-kaplanmeier)). It counts an unfinished
+the same. The right way is the **Kaplan–Meier estimate** (Kaplan and Meier 1958;
+[Survival curves](#survival-curves-kaplanmeier)). It counts an unfinished
 life as "survived at least this long", and no further.
 
 ### Survival curves (Kaplan–Meier)
-
-*What share of agents live at least L iterations?* If every life had ended by
-the end of the run, the answer would be a simple count. But some are still
-going, and for them we know only that they lasted **at least** so long. The
-**Kaplan–Meier estimate** (Kaplan and Meier 1958) uses exactly that much and
-no more.
 
 #### The idea: survive one step at a time
 

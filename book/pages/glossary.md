@@ -44,16 +44,16 @@ there.
 - **[diameter](measuring-networks.md#radius-and-diameter)** — The longest of the shortest paths between two agents of a world.
 - **[dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension)** (also ball dimension) — How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.
 - **[diversity score](measuring-health.md#the-diversity-score)** — How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.
-- **[effective kinds of staking](b1-brains-lineages-and-messages.md#how-different-are-the-agents)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
+- **[effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
 - **[effective number](statistics.md#effective-numbers-how-many-kinds)** — How many kinds there really are, when kinds are counted by how much of the population they hold.
 - **[effective population](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — The size of a population left to chance that would lose its lines as fast: the smaller it is, the more chance decides which line survives.
 - **[ego network](measures-atlases-and-assembly.md#ego-networks-as-molecules)** — An agent, its neighbours and the links among them: the network as one agent sees it.
 - **[entropy](measuring-tokens.md#entropy-and-evenness)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
-- **[estate](measuring-lives.md#the-estate-of-the-dead)** — The tokens a dead agent leaves, and who gets them.
+- **[estate](measuring-lives.md#the-estate-of-the-dead)** (also share-out) — The tokens a dead agent leaves, and who gets them.
 - **[even split](measuring-tokens.md#the-even-split)** — What the rules do when a brain scores no candidate above zero: the stake is spread evenly.
 - **[exploitability](measuring-evolution.md#exploitability)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
 - **[extinction](rules-in-detail.md#when-a-world-ends)** (also extinct) — A world's end before its last iteration: it has dropped to its threshold of agents or fewer.
-- **[false discovery rate](how-the-drawn-settings-shape-a-world.md#how-a-setting-is-tested)** — Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg).
+- **[false discovery rate](statistics.md#testing-many-settings-at-once)** — Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg).
 - **[flow module](b1-the-game-and-its-flows.md#flow-modules-and-the-map-equation)** (also map equation) — A group of agents that a token, following the flow, tends to stay inside.
 - **[founder](rules-in-detail.md#the-starting-ring)** — One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.
 - **[fractional factorial](what-the-switches-did-in-pilots.md#many-switches-in-few-worlds-fractional-factorial-designs)** — A design that tests many switches together in few worlds, so that each one's effect can still be told apart.
@@ -63,6 +63,7 @@ there.
 - **[Gini coefficient](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve)** (also Gini, Lorenz curve) — How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.
 - **[half-cut exponent](measuring-health.md#the-half-cut-exponent)** — How the links crossing the cheapest cut of a world into halves grow with its size: 2/3 for a space of three dimensions, near 0 for a bottleneck, near 1 for a folded world.
 - **[health bar](measuring-health.md#the-health-bar)** — The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.
+- **[health filter](measuring-health.md#from-11-november-2026-health-as-a-filter)** — Health's only use since 11 November 2026: a world that died, is a star (one agent linked to half of it), holds all alike or stands still is left out.
 - **[healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026)** — A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.
 - **[hegemon](rules-in-detail.md#how-a-coalition-takes-a-node)** — The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.
 - **[heredity index](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — How much more a child acts like its parent than like a stranger, in the same situations: 1 as its parent does, 0 as a stranger does.
@@ -94,15 +95,15 @@ there.
 - **[power spectrum](statistics.md#the-power-spectrum-of-a-time-series)** — How much of a series' wandering comes at each speed, from slow to fast.
 - **[preferential attachment](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel)** — The well connected gaining new connections faster than the poorly connected.
 - **[random twin](measuring-space.md#the-random-twin-is-a-world-a-space)** — A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.
+- **[rank correlation](statistics.md#rank-correlation)** — How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.
 - **[revolution](rules-in-detail.md#how-a-coalition-takes-a-node)** (also coalition) — A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.
 - **[richest tenth](measuring-tokens.md#the-richest-tenths-share)** — The share of all tokens held by the richest tenth of the agents.
 - **[same-position share](measuring-health.md#the-same-position-share)** — Of two agents put in the same situation, how often they stake their tokens measurably differently.
 - **[scaling relation](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)** — How one property of an agent grows with another, as a power.
 - **[seed](rules-in-detail.md#seeds-and-the-random-stream)** — The number that fixes every random choice of a run: the same settings and the same seed make the same world.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
-- **[settled life](statistics.md#the-settled-life-of-a-world)** — A world from iteration 500 to its end, after its youth, where it is measured.
+- **[settled life](statistics.md#the-settled-life-of-a-world)** — A world after its youth, where it is measured: from iteration 500 to its end in the baselines, from 100 in round 3 of the screen.
 - **[share function](rules-in-detail.md#the-share-function-fa-b)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
-- **[share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out)** — How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.
 - **[spectral dimension](measuring-space.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.
 - **[spectral gap](measuring-networks.md#the-spectral-gap)** — How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.
 - **[survival curve](measuring-lives.md#survival-curves-kaplanmeier)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.

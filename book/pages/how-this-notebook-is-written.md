@@ -111,7 +111,8 @@ it again.
   well as good, so it counts only once new seeds have played it again.
 - **The thesis comes first.** It is fixed in the plan before the runs start.
 - **Enough seeds.** A difference seen in fewer than thirty seeds per
-  condition is called *indicative*, not an effect
+  condition is called *indicative*, not an effect, where a plan asks what a
+  change does on average
   ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)).
 - **No number without its null.** A measurement is reported next to what it
   would be by chance.

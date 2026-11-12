@@ -199,7 +199,7 @@ many worlds of that experiment or batch the measure has been taken on:
 - **flow modules**: the groups tokens stay in
   ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in));
 - **how different the agents are**: every brain in the same situations
-  ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents));
+  ([The effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking));
 - **the table of every world**: every statistic over the same stretches of
   iterations, side by side
   ([Every world side by side](measures-atlases-and-assembly.md#every-world-side-by-side)).
@@ -272,7 +272,7 @@ many worlds of that experiment or batch the measure has been taken on:
 Older yardsticks are not counted here:
 - the contests of 20 iterations that built B2: the lab's Experiments 12 to 16,
   and the pilot batches of that time;
-- the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") of
+- the health bar of
   [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md),
   taken on every world from Experiment 12 on;
 - and the [correlations](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") among agents of

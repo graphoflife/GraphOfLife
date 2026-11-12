@@ -50,7 +50,7 @@ their end. Besides them, it measures the three worlds of 409,600 tokens of
 (`B1-409600-s001` … `-s003`, `python3 gol_lab.py run E08`). They held about
 60,000 agents each after 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). And it measures the worlds of 10,000
 tokens it was first written from: the 26 of thirty that lived to the end. They
-held about 1,500 agents each at their end (1,300 over their [settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.")).
+held about 1,500 agents each at their end (1,300 over their [settled life](statistics.md#the-settled-life-of-a-world "A world after its youth, where it is measured: from iteration 500 to its end in the baselines, from 100 in round 3 of the screen.")).
 That makes three sizes, each four to ten times the one before.
 [How this was made](#how-this-was-made) lists every run.
 
@@ -522,7 +522,7 @@ round, it kept the values that did not make worlds worse
   (2.22), and the 18 in which every unused link lapses (3.63). And the 59
   whose deaths are not mended, on B1's rules or drawn so by the search (2.09).
 
-Across them all, the width goes with fewer links per agent: a rank correlation
+Across them all, the width goes with fewer links per agent: a [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.")
 of −0.51. That is the correlation of the worlds' ranks, not of their values.
 The width goes hardly at all with how poor the agents are (+0.09), how many
 they are (+0.06) or how many tokens each holds (−0.09). Being a space is not a

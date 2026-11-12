@@ -170,7 +170,7 @@ written down with the run. From the seed, two streams are started:
    numpy's `RandomState` (the Mersenne Twister algorithm), seeded with the
    run's seed. It gives the founders' brains, every tie broken at random and
    every probabilistic yes-or-no decision. It also gives every random input of
-   a brain, every share-out of tokens and every mutation.
+   a brain, every [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of tokens and every mutation.
 
 The program always takes its draws in the same order: agents are visited in
 increasing order of id, and so are neighbours. So the whole history of a world
@@ -1142,7 +1142,7 @@ the rounding.
 - [What the brains are like](what-the-brains-are-like.md#what-a-brain-listens-to)
 - [Do the brains matter?](do-the-brains-matter.md#the-three-conditions)
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-far-one-change-moves-a-brain)
-- [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#how-genotypes-are-numbered)
+- [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-caution-about-names)
 - [How fast should brains change?](how-fast-should-brains-change.md#where-to-go-next)
 - [Every era against three](every-era-against-three.md#the-trials)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)

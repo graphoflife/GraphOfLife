@@ -880,7 +880,7 @@ of which can be changed and tested on its own.
 The notebook's second aim points at the same rules.
 [Physical inspiration](physical-inspiration.md), written after this section,
 sets out that aim: a world that grows a space, and stable things in it. The
-cull and the share-out, which this page questions for evolution's sake, also
+cull and the [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them."), which this page questions for evolution's sake, also
 break locality, the speed limit physics insists on. And the organisations of
 P3 are what a physicist would call particles.
 [Space and dimension](../README.md#space-and-dimension) follows that aim, and

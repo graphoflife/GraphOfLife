@@ -1193,8 +1193,8 @@ correlates with the next stretch's on the same connections: 0.20 in B2, and
 
 In B1, whose agents spread their stakes over every neighbour, the gifts drain
 towards the best-connected agents. Picture each agent's height on the slope:
-tokens run from high agents to low ones. In two worlds checked, the rank
-correlation of that height with an agent's number of
+tokens run from high agents to low ones. In two worlds checked, the [rank
+correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") of that height with an agent's number of
 connections is −0.28 and −0.33. That is the even split again, tokens settling
 in proportion to connections
 ([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).

@@ -341,7 +341,7 @@ from old ones.
 > in the same situation mostly act differently, so answers that ignore the
 > situation cannot stand in for them. But what holds a world's shape is
 > steadier than its individuals: health does not drift over a run, the
-> [share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead sets how unequal a world is, and with 11
+> [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the tokens of the dead sets how unequal a world is, and with 11
 > to 263 effective ancestors, chance more than merit decides which line
 > carries the brains.
 >
@@ -467,7 +467,7 @@ as `random_decisions` shows: one switch at the place where a brain speaks.
   worlds whose brains never change.
 - [Did evolution happen?](did-evolution-happen.md): fourteen tests, two of
   which would share this plan's runs.
-- [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): how much of
+- [Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance): how much of
   what an agent does comes from where it is, who it is, and chance.
 
 ## How this was made

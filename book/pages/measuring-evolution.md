@@ -49,16 +49,9 @@ brains with exactly the same weights, because they hold copies of one brain.
   Numbers are never reused, and a parent always has a smaller number than its
   child.
 
-A brain is offered a change only at set moments, and changes with
-probability 0.2 each time ([How a brain changes](rules-in-detail.md#how-a-brain-changes)):
-
-- **in both baselines**, a newborn's brain, just copied from its parent;
-- **in B1**, also every surviving brain after every game, wherever it sits;
-- **in B2**, instead, the copy a node takes on when another agent wins it
-  ([`mutate_on_replication`](settings.md#mutate_on_replication)). A brain
-  that stays where it is never changes.
-
-B2 has that rule because in B1, 97% of new genotypes are made in brains that
+A brain is offered a change at birth. In B1 it is also offered one after every
+game; in B2 instead, whenever a won node copies it. It changes with
+probability 0.2 each time ([When](rules-in-detail.md#when)). B2 has that rule because in B1, 97% of new genotypes are made in brains that
 are not being copied
 ([Variation in the living](questioning-the-mechanics.md#variation-in-the-living)).
 
@@ -395,8 +388,8 @@ A genotype number changes whenever a brain is offered a change and takes it
 changes nothing, yet the number still changes. Counting genotypes counts
 names; whether different names are different brains has to be checked
 separately ([Do the brains matter?](do-the-brains-matter.md)).
-[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) counts kinds
-of behaviour instead, and compares them with the genotypes.
+The [effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking) count
+kinds of behaviour instead, and compare them with the genotypes.
 
 ## Eras, contests and invasions: does a world keep getting better?
 
@@ -607,26 +600,8 @@ outputs a brain writes. So it sees nothing a brain could not see. It acts
 only through the outputs a brain has, which the engine turns into a child,
 its links, the stakes and the messages.
 
-What it makes of what it reads is another matter. A rule written in Python
-can combine its inputs in ways a brain cannot. A B2 brain reads one column
-of inputs for each candidate, the agent itself and each neighbour. It
-scores each column on its own, with the same weights, and no unit sees two
-columns. Two of the
-[three strategies](strategies-written-by-hand.md#three-strategies) first
-planted show the difference:
-- **The raider** stakes all it can on the poorest neighbour outside its
-  team, if it is sure to take it. Twelve of a B2 brain's 16 units, with
-  weights set by hand, play it
-  ([A raider in a brain's weights](what-a-brain-can-compute.md#a-raider-in-a-brains-weights)).
-- **The factory** is a team whose members write into their messages how far
-  they are from the team's frontier, where strangers begin. A member with a
-  stranger next door writes 0 to its teammates: news of a third agent, the
-  stranger. No B2 brain of any size can put such news into a message
-  ([What no brain of B2 can compute](what-a-brain-can-compute.md#what-no-brain-of-b2-can-compute)).
-
-So a strategy that wins shows that the game holds better play than
-evolution found. Whether a brain of that world could play it is a separate
-question, answered for the raider by building the brain.
+A rule written by hand can combine its inputs as no brain can; whether a brain
+could play it is answered in [What a brain can compute](what-a-brain-can-compute.md).
 
 #### The control
 
@@ -656,7 +631,7 @@ control holds there.
   that does well only in numbers. Evolution, which tries one agent at a
   time, can miss such a strategy although it is better.
 - **A strategy's parts** can be tested one at a time by dropping them. The
-  raider without its password
+  raider without a password
   ([The password](strategies-written-by-hand.md#the-password)) shows which
   part wins.
 
@@ -666,13 +641,9 @@ and 50% of the world. The control, the residents' own brains planted in the
 same places, ended with 7% and 1%
 ([What the strategies did](strategies-written-by-hand.md#what-the-strategies-did)).
 
-**One planting says little.** The raider's rule and the brain that plays it
-choose differently in only one or two situations in a hundred. Yet planted
-on the same seed in world 3, the rule died out while the brain took 59% of
-the world. Their worlds part ways within a few iterations, and from there
-chance decides whether a patch takes hold
-([A raider in a brain's weights](what-a-brain-can-compute.md#a-raider-in-a-brains-weights)).
-So the lab's tests plant a strategy in several places in each world.
+Rule and brain part ways within a few iterations, so one planting says little
+([Planted in its place](what-a-brain-can-compute.md#planted-in-its-place)). So
+the lab's tests plant a strategy in several places in each world.
 
 A strategy that dies out says at most that *this* strategy is worse, never
 that nothing better exists. An invasion test can show that a game is not
@@ -710,29 +681,19 @@ solved, but not that it is.
 
 ## What would count as open-ended evolution
 
-No run can show that evolution goes on for ever. So the notebook writes
-down, before the long runs exist, what a run would have to show. A configuration of
-rules passes when at least two of three new worlds pass four parts. Their
-brains beat the best mixture of their whole past, and their ratings keep
-rising. They keep doing new things, faster than mutation alone would. And
-they stay worlds in which much can happen. Each part closes one way of being
-fooled. They are a circle, a plateau and an arms race that swaps two
-answers. The fourth is a world that evolves only because it is poor in all
-else.
+No run can show that evolution goes on for ever. So the notebook writes down,
+before the long runs, what a run would have to show. A configuration of rules
+passes when at least two of three new worlds pass four parts, each closing one
+way of being fooled.
 
 ### Why write the test first
 
-No run can show that evolution goes on for ever. A run is finite, and so is
-the budget. A world of 10,000 tokens runs about 100,000 iterations in a day
+A run is finite, and so is the budget. A world of 10,000 tokens runs about 100,000 iterations in a day
 and a half. A world of 100,000 tokens runs a tenth as far in two days
 ([What a simulation costs](runs-and-records.md#what-a-simulation-costs)). What a run can show
-is that, as far as it went, nothing stopped:
-- later brains beat their whole past;
-- they keep getting better;
-- they keep doing new things;
-- the world stays one in which much can happen.
+is that, as far as it went, nothing stopped.
 
-This page writes the test down before any of the long runs it will judge
+The notebook writes the test down before any of the long runs it will judge
 exists. A thesis written after its results can be bent to fit them; one
 written before cannot.
 
@@ -746,10 +707,7 @@ run can show it.
   own seed says nothing about that.
 - Every world played counts, the ones that fail included.
 
-The four parts use the contests of
-[Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better). An **era** is the
-brains of one moment of a world. A **contest** plays two eras against each
-other in the same world, and scores the share of it the later one holds.
+The four parts use the [contests](#a-contest-step-by-step) above.
 
 1. **It beats its whole past.** At every 10,000 iterations, the brains of
    that moment beat the best mixture of all earlier eras. They do so in
@@ -770,7 +728,7 @@ other in the same world, and scores the share of it the later one holds.
 3. **It keeps doing new things.** New kinds of behaviour appear faster than
    they would by mutation alone, and the old ones do not simply come back.
    - Kinds of behaviour means two things. One is kinds of staking
-     ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). The
+     ([The effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking)). The
      other is the signatures of the strategies written by hand: how a
      strategy answers a fixed set of situations
      ([What a brain can compute](what-a-brain-can-compute.md)).
@@ -781,7 +739,7 @@ other in the same world, and scores the share of it the later one holds.
 4. **It stays a world in which much can happen**
    ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)):
    - it never falls to 20 agents;
-   - it meets every mark of the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") at every 10,000 iterations;
+   - it meets every mark of the health bar at every 10,000 iterations;
    - its agents are more diverse than those of B2's median world;
    - its tokens are no more even than B2's: a
      [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) no lower than the least of

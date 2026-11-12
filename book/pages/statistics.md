@@ -31,8 +31,8 @@ The notebook rarely looks at one world. It runs thirty, with different
 seeds, and sums them up in four steps. The **median** and other
 **quantiles** describe a set of numbers without letting one extreme decide.
 A **band** draws thirty worlds through time as one line and two shaded
-regions. A world's **settled life**, from iteration 500 to its end, gives it
-one number per statistic. And the **spread** says how far the worlds' numbers
+regions. A world's **settled life**, from iteration 500 to its end (from 100
+in round 3 of the screen), gives it one number per statistic. And the **spread** says how far the worlds' numbers
 lie from each other, as a share of their mean.
 
 ### Median and quantiles
@@ -142,10 +142,15 @@ rule the notebook uses, and why.
 
 #### The rule
 
-> A world's level for a statistic is its **mean over iterations 500 to the
-> end of the run** (2,999 for the baseline runs), over the rows of the phase
-> the statistic belongs to. Only worlds that lived to the end are measured
-> this way; worlds that died are counted apart.
+> A world's level for a statistic is its **mean over its settled life**, over
+> the rows of the phase the statistic belongs to:
+> - in the baselines and the experiments built on them, iterations **500 to
+>   the end** of the run (2,999 for the baseline runs);
+> - in round 3 of the screen and the worlds that follow it, since 24 October
+>   2026, iterations **100 to the end**.
+>
+> Only worlds that lived to the end are measured this way; worlds that died
+> are counted apart.
 
 For the baseline runs of 10,000 tokens, that is the mean over 2,500 game
 rows. For a graph statistic, measured every 25 iterations, it is the mean
@@ -162,6 +167,12 @@ the ranges they keep
 ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). Averaging the youth
 in would mix two different things.
 
+Round 3 of the screen starts at iteration 100 instead, by the author's
+walkthrough of 24 October 2026 (`research/screen/walkthrough.md`). Every
+world starts the same way, so its first hundred iterations are always left
+out. But a drawn world is judged by its whole run after them, not by a
+reading at one moment.
+
 #### Why a long mean, and not the end?
 
 A single world does not settle at one level. It **wanders**, up and down over
@@ -175,10 +186,6 @@ about the moment.
 how much. Measured over their last 100 iterations, the worlds' sizes differ by
 a third of the mean. Measured over their settled life, they differ by a
 sixth.
-
-Pages written before this rule, the first analyses of Experiments 2 to 6,
-used the last fifth of a run: iterations 2,400 to 2,999. Where this notebook
-checks a thesis that was written with the last fifth in mind, it says so.
 
 #### Why not the worlds that died?
 
@@ -304,6 +311,21 @@ that agents with more connections hold more tokens. The correlation between
 the number of connections and the logarithm of the tokens is *r* = 0.50. That alone cannot say
 which way it works. Connections may make an agent rich, riches may bring
 connections, or something else may bring both.
+
+#### Rank correlation
+
+**Spearman's rank correlation** ρ is the ordinary correlation of two lists of
+ranks. Put each list of values in order, give each value its place, with
+equal values sharing the mean of their places, and correlate the places:
+
+- ρ = 1: the two orders agree;
+- ρ = 0: one order says nothing about the other;
+- ρ < 0: one order turns the other round.
+
+Ranks make ρ deaf to the sizes of the values, so a few very large ones cannot
+decide it. Experiment 43 compares the order of health in round 3 with the
+order in its new worlds this way. The studies of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") used it for whether the
+rich stay rich ([Mobility](measures-of-the-archived-studies.md#mobility)).
 
 ### Fitting a straight line
 
@@ -432,9 +454,7 @@ exponent −γ. Then the share at least *x* follows one with the exponent
 −(γ − 1), and is a straight line. A survival curve
 ([Kaplan–Meier](measuring-lives.md#survival-curves-kaplanmeier)) is the same kind of picture for lifetimes.
 
-Clauset, Shalizi and Newman (2009) give a caution. A stretch of a curve that
-looks straight on log–log axes is weak evidence of a power law. Many
-distributions look straight over a decade or two. The notebook calls
+Clauset, Shalizi and Newman (2009) give a caution, so the notebook calls
 something a power law only when it holds over a wide range, and a bent
 alternative fits no better. How to fit one properly, and where its tail
 starts, is in
@@ -446,7 +466,7 @@ only pages of the Archive fit one.
 A world wanders: its size, its inequality and its births go up and down over
 hundreds of iterations. The **autocorrelation** says how long it remembers
 where it was: the correlation of a world with itself, some time later. In
-[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") it falls from about 0.6 after 100 iterations to nothing after 300, so
+B1 it falls from about 0.6 after 100 iterations to nothing after 300, so
 levels 500 iterations apart are nearly independent. The **power spectrum**
 splits the wander into rhythms and says how much of it happens at each. A
 world's number of agents moves like a random walk on short scales, and is
@@ -479,10 +499,6 @@ others throughout would look like a world with a long memory.
 
 - Close to 1: a world is still where it was.
 - Close to 0: where a world was says nothing about where it will be.
-- In the baseline, for the number of agents: 0.61 after 100 iterations in the
-  worlds of 100,000 tokens (0.68 in those of 10,000). About a third of that
-  is left after 200, and nothing after 300
-  ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### Why it dips below zero
 
@@ -528,7 +544,7 @@ worlds over their settled life
 
 In B1's thirty worlds of 100,000 tokens, a world a hundred iterations on is
 still much where it was: the autocorrelation is 0.61 for the number of agents
-and 0.62 for inequality. Two hundred iterations on it is 0.21 for both, and
+(0.68 at 10,000 tokens) and 0.62 for inequality. Two hundred iterations on it is 0.21 for both, and
 three hundred on nothing is left. So a world forgets its level within about
 three hundred iterations, far faster than a random walk would
 ([A world forgets](b1-the-network-size-and-scaling.md#a-world-forgets)). Two
@@ -700,6 +716,36 @@ never exactly 0.
   worlds; then recompute the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes). Here the test is
   one-sided: how often is the shuffled *r* at least as large as the real one?
 
+#### Testing many settings at once
+
+The screen of random worlds tests every setting on every outcome of its worlds
+([How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md)):
+- for **whether a world died**, it counts the deaths under each value of the
+  setting;
+- for **a number**, it takes the median under each value.
+
+Then the outcome is shuffled among the worlds, 20,000 times, keeping how many
+worlds had each value. The chance is the share of shuffles in which the values
+differ at least as much as in the real worlds. The difference is measured by
+the **chi-square** statistic for deaths, and by the **Kruskal–Wallis**
+statistic of the ranks for numbers.
+
+Many settings are tested on many outcomes, so a few small chances turn up by
+luck. So every test also has a **false discovery rate**: among all the
+settings tested on that outcome, how often a result this strong would be a
+false alarm (Benjamini and Hochberg 1995). A result is a **finding** only when
+that rate is below 0.1. Every test also gives its **size**: the share of the
+outcome's spread that the setting's values account for, from 0 (none) to 1
+(all of it).
+
+**An example.** Of the 41 worlds of round 3 drawn with gifts, 2 died; of the 43
+drawn without, 12. Shuffled at random among the 84 worlds, keeping the two
+groups' sizes, the 14 deaths end up at least this far apart about 140 times in
+20,000: a chance of 0.007. But 25 settings were tested on deaths, so a chance
+that small could turn up by luck in one of them. The false discovery rate is
+0.09, below 0.1, so it counts as a finding. Gifts or none account for a tenth
+of the spread of deaths across the worlds (a size of 0.10).
+
 #### Reading a p-value
 
 A *p*-value is not the probability that the difference is real. It is how
@@ -753,6 +799,19 @@ An experiment changes one setting and asks whether the worlds change. Worlds
 differ by chance anyway, so a small change can hide in the noise. How many
 worlds, that is seeds, does each condition need for a change of a given size
 to be **found**, most of the time?
+
+The rule of the notebook: a difference seen in fewer than thirty seeds per
+condition is called *indicative*, not an effect. The rule is for plans that ask
+whether a change moves worlds on average. Three kinds of plan ask something
+else, and use fewer seeds:
+- a **screen** plays each drawn world once, with a seed of its own: what a
+  setting does is read across the many worlds that drew it;
+- a **replay** of chosen worlds, such as Experiment 43, plays each with two
+  new seeds, to see whether its health belongs to its settings;
+- the **open-ended test** asks what a configuration can do, not what it
+  usually does, so two worlds of three are enough (the author, 19 October
+  2026: a configuration that shows open-ended evolution in a few seeds is
+  enough; [The test](measuring-evolution.md#the-test)).
 
 #### The formula for the seeds
 
@@ -912,11 +971,6 @@ only pages of the Archive use
 
 ### Effective numbers: how many kinds there really are
 
-A world has 1,600 genotypes. Does it have 1,600 kinds of agents? Not if one
-genotype is carried by half the agents, and the rest by one agent each. The
-**effective number** of kinds counts kinds by how much of the population they
-hold.
-
 #### The count
 
 Let *p*ᵢ be the share of agents of kind *i*: a genotype, a kind of behaviour,
@@ -934,7 +988,6 @@ properties make *D* the right count:
 - if one kind holds nearly everyone, then *D* is close to 1, however many rare
   kinds there are.
 
-So *D* is "the number of equally common kinds that would be as diverse".
 
 **Example.** Ten agents fall into two kinds of five: *D* = 1/(0.5² + 0.5²) =
 2. Now let eight be of one kind, and one each of two others:
@@ -947,8 +1000,8 @@ use (Hill 1973). This one, of order 2, weighs the common kinds most.
 #### Kinds that are similar
 
 Two genotypes one mutation apart may act exactly alike. Counting them as two
-kinds overstates diversity. That is why
-[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) groups
+kinds overstates diversity. That is why the
+[effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking) group
 brains into kinds **by what they do**, not by their weights. Brains whose
 decisions in the same situations differ no more than a brain differs from
 itself, between two sets of random inputs, are one kind.
@@ -1014,6 +1067,11 @@ notebook gives an effective number, it says which.
   studies](measures-of-the-archived-studies.md): three sections that only pages
   of the Archive use: fitting a power law properly; where, who and chance; and
   how many directions a cloud of points uses.
+- **12 November 2026.** The rule of the settled life said that pages written
+  before it, the first analyses of Experiments 2 to 6, used the last fifth of
+  a run: iterations 2,400 to 2,999. Where the notebook checks a thesis written
+  with the last fifth in mind, it says so. That note now stands here, and the
+  rule names the window round 3 uses, from iteration 100.
 
 ## References
 
@@ -1025,6 +1083,9 @@ notebook gives an effective number, it says which.
 - Marriott, F. H. C. and Pope, J. A. (1954). Bias in the estimation of
   autocorrelations. *Biometrika* 41, 390–402.
 
+- Benjamini, Y. and Hochberg, Y. (1995). Controlling the false discovery rate:
+  a practical and powerful approach to multiple testing. *Journal of the Royal
+  Statistical Society B* 57, 289–300.
 - Efron, B. (1979). Bootstrap methods: another look at the jackknife.
   *The Annals of Statistics* 7, 1–26.
 - Wilson, E. B. (1927). Probable inference, the law of succession, and

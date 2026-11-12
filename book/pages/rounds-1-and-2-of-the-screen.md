@@ -445,6 +445,6 @@ research/screen/judge.py E38` judges round 1.
 
 **Also about:** [Round 3 of the random screen](../README.md#round-3-of-the-random-screen).
 
-> [!info]- Pages that link here (8)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Glossary](glossary.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
+> [!info]- Pages that link here (7)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Glossary](glossary.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->
