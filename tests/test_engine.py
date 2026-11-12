@@ -486,6 +486,46 @@ def test_a_stopped_and_resumed_run_is_the_run_that_never_stopped():
         assert _what_was_recorded(paused) == _what_was_recorded(straight)
 
 
+def test_a_run_keeps_a_frame_only_as_often_as_its_plan_asks():
+    """
+    A long run that would not fit on the disk keeps a whole frame only every
+    frames_every-th iteration. Its statistics are those frames', its families
+    are left absent rather than counted on a broken chain, what an iteration
+    cost is still per iteration, and stopped and taken up again it records what
+    a run left alone records. A run whose frames_every is not its export_every
+    refuses to go.
+    """
+    import gol_record
+    import gol_run
+    import gol_store
+
+    cfg = small(seed=63, checkpoint_every=4, export_every=3)
+    policy = {"heavy_every": 3, "frames_every": 3}
+    with scratch_runs():
+        straight = advanced_run(cfg, 10, policy, "straight")
+        rows = gol_record.read_stats(straight)
+        assert sorted({row["iteration"] for row in rows}) == [0, 3, 6, 9]
+        assert gol_store.count_frames(straight) == 8
+        assert all(row["cladesInWindow"] is None for row in rows)
+        assert all(row["_seconds"] >= 0 for row in rows if row["phase"] == 2)
+
+        paused = gol_store.create_run("paused", cfg, record=policy)["id"]
+        gol_run.advance(paused, until=5)
+        gol_run.advance(paused, until=10)
+        assert _what_was_recorded(paused) == _what_was_recorded(straight)
+        keep = lambda run: [{k: v for k, v in row.items() if k not in ("_seconds", "_cpu", "_peakMB")}
+                            for row in gol_record.read_stats(run)]
+        assert keep(paused) == keep(straight)
+
+        wrong = gol_store.create_run("wrong", small(seed=63), record=policy)["id"]
+        try:
+            gol_run.advance(wrong, until=2)
+        except ValueError as exc:
+            assert "frames_every" in str(exc), str(exc)
+        else:
+            raise AssertionError("a run kept every frame although its plan asked for every third")
+
+
 def test_a_run_cut_between_checkpoints_resumes_to_the_same_run():
     """
     A run that dies between checkpoints — the machine switched off, the
@@ -3036,6 +3076,45 @@ def test_a_contest_cannot_change_a_brain():
     for _ in range(3):
         contestant.step(record_decisions=False)
     assert {contestant.brains[u].brain_id for u in contestant.G.nodes()} <= ids
+
+
+def test_a_patch_contest_plants_each_era_as_one_region():
+    """
+    A patch contest deals era B's brains to one region, grown breadth-first
+    from an agent drawn at random until it holds half the world, and era A's
+    to the rest, so that a group which needs its own kind around it starts
+    whole. A coin contest deals its brains exactly as it always has.
+    """
+    import numpy as np
+    import gol_strategies
+    import gol_tournament as tour
+    cfg = small(seed=68)
+    world = new_world(cfg)
+    for _ in range(3):
+        world.step(record_decisions=False)
+    state = world.to_checkpoint()
+    n = len(state["ids"])
+    in_b = tour.halves(state, np.random.RandomState(5))
+    assert in_b.sum() == n // 2
+    graph = nx.Graph()
+    graph.add_nodes_from(range(n))
+    graph.add_edges_from(state["edges"].tolist())
+    assert nx.is_connected(graph)
+    assert nx.is_connected(graph.subgraph(np.flatnonzero(in_b).tolist())), "era B's region came apart"
+    patch = tour.mixed(state, state, state, cfg.message_amount, np.random.RandomState(5), "patch")
+    assert ((patch["brain_ids"] >= tour.LABEL_B) == in_b).all()
+    coin = tour.mixed(state, state, state, cfg.message_amount, np.random.RandomState(5))
+    flips = np.random.RandomState(5).random_sample(n) < 0.5
+    assert ((coin["brain_ids"] >= tour.LABEL_B) == flips).all(), "the coin deal changed"
+    assert tour.contest(cfg.to_dict(), state, state, state, 4, 5, plant="patch")["agents"] > 0
+    trial = {"kind": "contest", "run": "r", "T": 4, "home": 0, "a": 0, "b": 1, "seed": 5}
+    gol_strategies.check_trial({**trial, "plant": "patch"})
+    try:
+        gol_strategies.check_trial({**trial, "plant": "rows"})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a contest dealt by neither coin nor patch was accepted")
 
 
 def test_a_contest_counts_a_brain_mixed_at_birth_for_its_parents_era():

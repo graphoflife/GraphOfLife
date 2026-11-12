@@ -53,6 +53,8 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`allow_revolutions`](#allow_revolutions) | on | on | coalitions can take nodes |
 | [`contest`](#contest) | largest | largest | who takes a contested node |
 | [`allocation`](#allocation) | full | full | how the game's stakes are placed |
+| [`revolt_tokens`](#revolt_tokens) | both | both | what a revolutionary token counts for |
+| [`pool`](#pool) | off | off | stakes pooled by kin |
 | [`allow_gifting`](#allow_gifting) | off | off | gifts of tokens |
 | [`random_decisions`](#random_decisions) | off | off | the control without brains |
 | [`prune_after`](#prune_after) | blotto | blotto | when unused connections are cut |
@@ -326,6 +328,56 @@ October 2026, at the author's request. A game takes as many rounds as its
 richest agent has tokens, so these worlds are slower to play.
 
 **B1 and B2:** `full`.
+
+### revolt_tokens
+
+What a token an agent flags as revolutionary counts for in the
+[game](one-iteration.md#phase-2-the-game), under
+[`allow_revolutions`](#allow_revolutions):
+
+- `both`: the rule since the simple engine. A stake counts whole for its
+  staker's claim to be the node's largest staker, and its revolutionary part
+  counts again for the coalition against that largest staker. Flagging a token
+  costs nothing.
+- `separate`: a flagged token counts for the coalition alone, and the rest of
+  the stake for the staker's claim alone. A staker gives up its own claim on
+  every token it flags, so flagging is a choice between the two.
+
+Added on 11 November 2026, at the author's request, after a reading of the
+engine found that under `both` the brains flag almost every token, since doing
+so costs nothing. It needs `allow_revolutions`.
+
+**B1 and B2:** `both`.
+
+### pool
+
+Whose stakes on a [node](the-world.md#agents-and-tokens) count as one side's in
+the [game](one-iteration.md#phase-2-the-game):
+
+- `off`: nobody's; every staker is a side of its own, as since the simple
+  engine.
+- `genotype`: every stake by agents with one brain, one [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), counts as
+  one side's.
+- `family`: every stake by agents of one family counts as one side's: every
+  genotype descended from one family tag ([`tag_rate`](#tag_rate)).
+
+The side with the most takes the node, and the owner keeps it if its own side
+wins. A brain sees one more input: whether a candidate is on its side. First
+played in pilot worlds ([Other contests: a lottery, and alliances](another-game.md)),
+where families of 150 to 490 agents rose and fell like empires; moved into the
+engine on 11 November 2026, so that such a world keeps its worlds and can be
+contested. It needs the stakes placed all at once ([`allocation`](#allocation) = full).
+
+**B1 and B2:** `off`.
+
+### tag_rate
+
+Under [`pool`](#pool) = family, the chance that a brain which mutates starts a
+family of its own; otherwise it stays in its parent's family. A copy keeps its
+genotype and so its family. A mutation parameter, between 0 and 1; read only
+under `pool` = family.
+
+**B1 and B2:** 0.
 
 ### allow_gifting
 
@@ -634,7 +686,7 @@ layers, each unit of every layer comes whole, with its weights in and its
 bias. A unit that works can then spread without the rest of the brain it
 arose in.
 
-The mixture is a new [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), unless it is the parent's brain again, as it
+The mixture is a new genotype, unless it is the parent's brain again, as it
 is when the mate has the parent's genotype. A parent without a neighbour
 gives its newborn a copy. Off, a newborn has a copy of its parent's brain.
 

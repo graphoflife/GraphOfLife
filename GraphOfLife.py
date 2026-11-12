@@ -974,6 +974,10 @@ class GraphOfLife:
         self.next_agent_id = 0
         self.next_brain_id = 1
         self.iteration = 0
+        # Under pool = family, each living genotype's family tag: a copy keeps
+        # its genotype and so its tag; a mutated brain starts a family of its
+        # own with chance tag_rate, else stays in its parent's.
+        self.tag_of: Dict[int, int] = {}
 
         self.tokens: Dict[int, int] = {}
         self.brains: Dict[int, Brain] = {}
@@ -1296,7 +1300,18 @@ class GraphOfLife:
     def _new_brain(self) -> Brain:
         brain = make_brain(self.cfg, self.next_brain_id, self.rng)
         self.next_brain_id += 1
+        if self.cfg.pool == "family":
+            self.tag_of[brain.brain_id] = brain.brain_id
         return brain
+
+    def family(self, brain_id: int) -> int:
+        """A genotype's family under pool = family: its tag, which a founder's own id starts."""
+        return self.tag_of.get(brain_id, brain_id)
+
+    def _same_side(self, u: int, v: int) -> bool:
+        """Whether agents u and v pool their stakes: one genotype, or under pool = family one family."""
+        a, b = self.brains[u].brain_id, self.brains[v].brain_id
+        return a == b if self.cfg.pool == "genotype" else self.family(a) == self.family(b)
 
     def _copy_brain(self, source: Brain) -> Brain:
         # No id is allocated: copying does not make a new genotype.
@@ -1341,11 +1356,17 @@ class GraphOfLife:
             child.parent_brain_id = brain.brain_id
             child.brain_id = self.next_brain_id
             self.next_brain_id += 1
+            if self.cfg.pool == "family":
+                self.tag_of[child.brain_id] = self.family(brain.brain_id)
         return child
 
     def _mutate_brain(self, brain: Brain) -> None:
+        old = brain.brain_id
         if brain.mutate(self.next_brain_id, self.rng):
             self.next_brain_id += 1
+            if self.cfg.pool == "family":
+                fresh = self.rng.random_sample() < self.cfg.tag_rate
+                self.tag_of[brain.brain_id] = brain.brain_id if fresh else self.family(old)
 
     def _settle_remainder(self) -> None:
         """Give any integer-division leftover to random survivors."""
@@ -1417,7 +1438,8 @@ class GraphOfLife:
         cfg = self.cfg
         m = cfg.message_amount
         rows = {name: slice(start, stop) for name, (start, stop, _) in cfg.input_layout().items()}
-        X = np.empty((rows["noise"].stop, len(candidates)))
+        # The prototype adds the rows after the noise itself; the engine's pools add one of their own.
+        X = np.empty((rows["same_side"].stop if cfg.pool != "off" else rows["noise"].stop, len(candidates)))
 
         # Whether the candidate is the observer itself, and, with gifting,
         # whether the connection to it lapses unless something crosses it.
@@ -1462,6 +1484,9 @@ class GraphOfLife:
         # column drew its own.
         X[rows["noise"]] = self.kind.draw_noise((len(candidates), cfg.random_input_amount),
                                                 self.rng).T
+        # Under pools, whether the candidate's stakes would count with the observer's.
+        if cfg.pool != "off":
+            X[rows["same_side"]] = [v != u and self._same_side(u, v) for v in candidates]
         return X
 
     def _observe(self, u: int, candidates: List[int], log_deg, q_tok, q_deg,
@@ -2204,7 +2229,7 @@ class GraphOfLife:
                 winner, max_amount, by_revolt = self._lottery(self._weighed(v, offers))
             else:
                 winner, max_amount, by_revolt = self._resolve_winner(
-                    self._weighed(v, offers), revolution_to[v], self.rng)
+                    self._weighed(v, self._claims(offers, revolution_to[v])), revolution_to[v], self.rng)
             new_brains[v] = self._copy_brain(self.brains[winner])
             # A won node is a copy of its winner's brain made somewhere new, so
             # under mutate_on_replication it is a replication like a birth.
@@ -2290,12 +2315,44 @@ class GraphOfLife:
 
         Under incumbency an agent's stake on its own node counts that many times
         over, and nothing else changes: the tokens the node ends with are what
-        was staked, whoever takes it.
+        was staked, whoever takes it. Under pools the stakes then count as one
+        offer per side (_pooled).
         """
         h = self.cfg.incumbency
-        if h == 1.0 or v not in offers:
+        weighed = offers if h == 1.0 or v not in offers else {**offers, v: offers[v] * h}
+        return self._pooled(v, weighed) if self.cfg.pool != "off" and len(weighed) > 1 else weighed
+
+    def _pooled(self, v: int, weighed: Dict[int, float]) -> Dict[int, float]:
+        """
+        Under pools, the weighed stakes on node v as one offer per side: the
+        side's total, made by the owner if it is the owner's side and else by
+        the side's largest staker, so that the owner keeps its node when its
+        side wins (the pilots' rule, research/oee/pilots/proto.py).
+        """
+        side_of = ((lambda b: self.brains[b].brain_id) if self.cfg.pool == "genotype"
+                   else (lambda b: self.family(self.brains[b].brain_id)))
+        own = side_of(v)
+        totals: Dict[int, float] = {}
+        maker: Dict[int, int] = {}
+        for b in sorted(weighed):
+            side = side_of(b)
+            totals[side] = totals.get(side, 0) + weighed[b]
+            if side == own:
+                maker[side] = v
+            elif side not in maker or weighed[b] > weighed[maker[side]]:
+                maker[side] = b
+        return {maker[side]: total for side, total in totals.items()}
+
+    def _claims(self, offers: Dict[int, int], revolts: Dict[int, int]) -> Dict[int, int]:
+        """
+        What each stake on a node counts for the claim to be its largest
+        staker. Under revolt_tokens = both, the whole stake, its revolutionary
+        part counting again for the coalition; under separate, only the part
+        not flagged, so that what a staker flags is the coalition's alone.
+        """
+        if self.cfg.revolt_tokens == "both":
             return offers
-        return {**offers, v: offers[v] * h}
+        return {u: amount - revolts.get(u, 0) for u, amount in offers.items()}
 
     def _lottery(self, offers: Dict[int, float]) -> Tuple[int, float, bool]:
         """
@@ -2504,6 +2561,13 @@ class GraphOfLife:
             self._register_agent(aid, self.cfg.total_tokens,
                                  self._new_brain(), NO_PARENT)
             report["resurrected"] = True
+
+        # Family tags are needed only while a genotype lives: a mutation reads
+        # its brain's tag before it changes, and a mixture its parent's, both
+        # living. Keeping every genotype ever made would grow without end.
+        if self.cfg.pool == "family":
+            alive = {self.brains[u].brain_id for u in self.G.nodes()}
+            self.tag_of = {b: t for b, t in self.tag_of.items() if b in alive}
 
         return report
 
@@ -2816,6 +2880,8 @@ class GraphOfLife:
             # Iterations lived, not a birth stamp: a reader of one frame should
             # not have to know when the run started to know how old anyone is.
             "ages": [self._age_of(u) for u in nodes],
+            **({"family_ids": [int(self.family(brains[u].brain_id)) for u in nodes]}
+               if self.cfg.pool == "family" else {}),
             # What this phase did to each agent's pile, end to end: a parent
             # paying for a child, a newborn receiving its endowment, a node
             # conquered or defended, plus whatever cleanup redistributed. A
@@ -2901,6 +2967,11 @@ class GraphOfLife:
                 senders.append(int(sender))
                 payloads.append([float(v) for v in values])
 
+        # Under pool = family, each agent's family tag, in the order of `ids`:
+        # the prototype's format (proto.restore_tags), so either can read it.
+        if self.cfg.pool == "family":
+            blob["tags"] = np.array([self.family(self.brains[u].brain_id) for u in nodes], dtype=np.int64)
+
         width = len(payloads[0]) if payloads else 0
         blob["msg_to"] = np.array(recipients, dtype=np.int64)
         blob["msg_from"] = np.array(senders, dtype=np.int64)
@@ -2949,6 +3020,8 @@ class GraphOfLife:
         # born after the resume get real ages.
         born_at = (blob["born_at"].tolist() if "born_at" in blob
                    else [UNKNOWN_BIRTH] * len(parent_ids))
+        if cfg.pool == "family" and "tags" in blob:
+            world.tag_of = {int(b): int(t) for b, t in zip(brain_ids, blob["tags"].tolist())}
 
         # Before the edges, because adding one stamps it with this number.
         world.phase_count = (int(blob["phase_count"][0]) if "phase_count" in blob

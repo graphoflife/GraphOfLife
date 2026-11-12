@@ -50,12 +50,45 @@ import numpy as np
 LABEL_B = 1_000_000_000
 
 
+def halves(state: Dict[str, np.ndarray], rng: np.random.RandomState) -> np.ndarray:
+    """
+    Which agents of `state` take era B's brains in a patch contest: a region
+    grown breadth-first from an agent drawn at random until it holds half of
+    them, so that each era starts as one piece of the world, kin beside kin. A
+    coin for every agent breaks up any group that needs its own kind around it
+    (a raider needed about a hundred together); this keeps such groups whole.
+    A world in pieces, where no region from the start reaches half, fills the
+    rest at random.
+    """
+    n = len(state["ids"])
+    near: List[List[int]] = [[] for _ in range(n)]
+    for a, b in state["edges"].tolist():
+        near[a].append(b)
+        near[b].append(a)
+    want = n // 2
+    in_b = np.zeros(n, dtype=bool)
+    if want:
+        start = int(rng.randint(n))
+        in_b[start] = True
+        queue, count, head = [start], 1, 0
+        while head < len(queue) and count < want:
+            for y in sorted(near[queue[head]]):
+                if not in_b[y] and count < want:
+                    in_b[y] = True
+                    queue.append(y)
+                    count += 1
+            head += 1
+        if count < want:
+            in_b[rng.choice(np.flatnonzero(~in_b), want - count, replace=False)] = True
+    return in_b
+
+
 def mixed(state: Dict[str, np.ndarray], A: Dict[str, np.ndarray], B: Dict[str, np.ndarray],
-          message_amount: int, rng: np.random.RandomState) -> Dict[str, np.ndarray]:
-    """`state`'s world with every agent given a brain drawn from era A or era B."""
+          message_amount: int, rng: np.random.RandomState, plant: str = "coin") -> Dict[str, np.ndarray]:
+    """`state`'s world with every agent given a brain drawn from era A or era B, dealt as `plant` says."""
     n = len(state["ids"])
     layers = int(state["n_layers"][0])
-    from_b = rng.random_sample(n) < 0.5
+    from_b = halves(state, rng) if plant == "patch" else rng.random_sample(n) < 0.5
     pick_a = rng.randint(0, len(A["ids"]), size=n)
     pick_b = rng.randint(0, len(B["ids"]), size=n)
     blob = dict(state)
@@ -73,11 +106,13 @@ def mixed(state: Dict[str, np.ndarray], A: Dict[str, np.ndarray], B: Dict[str, n
 
 def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, np.ndarray],
             B: Dict[str, np.ndarray], T: int, seed: int,
-            on_step: Optional[Callable[[Any, int], bool]] = None) -> Dict[str, Any]:
+            on_step: Optional[Callable[[Any, int], bool]] = None, plant: str = "coin") -> Dict[str, Any]:
     """
-    One contest: B's share of the agents (and of the tokens) after T iterations.
-    `on_step(world, t)` is told after each iteration, and a True from it ends the
-    contest there with no result (None), as the lab's trials are stopped.
+    One contest: B's share of the agents (and of the tokens) after T iterations,
+    the two eras' brains dealt by a coin for every agent or as one region each
+    (`plant`, see halves). `on_step(world, t)` is told after each iteration, and
+    a True from it ends the contest there with no result (None), as the lab's
+    trials are stopped.
     """
     from gol_config import SimConfig
     from GraphOfLife import GraphOfLife
@@ -86,7 +121,7 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
     cfg.mutation_probability = 0.0
     cfg.extinction_threshold = 0
     rng = np.random.RandomState(seed)
-    world = GraphOfLife.from_checkpoint(mixed(state, A, B, cfg.message_amount, rng), cfg)
+    world = GraphOfLife.from_checkpoint(mixed(state, A, B, cfg.message_amount, rng, plant), cfg)
     world.rng = np.random.RandomState(seed + 1)
     # A brain mixed at birth (mix_at_birth) is new even without mutation, and draws
     # a fresh id, below LABEL_B whatever its side: it is of its parent's side, so
