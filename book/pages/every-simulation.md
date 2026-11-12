@@ -113,7 +113,7 @@ from Experiment 1 to Experiment 44.
 Experiment 11 is planned and has not run. Its plan of 9 October 2026, one world
 of B1 at 204,800 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") for 100,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), lies in
 `book/experiments/drafts/`, which this table does not read; since 9 November
-it is proposed again on three of round 3's [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")
+it is proposed again on three of round 3's candidates
 ([A hundred thousand iterations](a-hundred-thousand-iterations.md)).
 Experiment 1's runs are thirty iterations long: they test that a run can be
 repeated exactly.

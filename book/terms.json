@@ -67,7 +67,8 @@
         "nineteen candidates",
         "candidates of",
         "candidates for",
-        "equal candidates"
+        "equal candidates",
+        "round 3's candidate"
       ]
     },
     {
@@ -739,6 +740,15 @@
       "correlation",
       "dimension",
       "hub"
+    ],
+    "README": [
+      "candidate"
+    ],
+    "round-3-eras-against-each-other": [
+      "candidate"
+    ],
+    "every-simulation": [
+      "candidate"
     ]
   }
 }
