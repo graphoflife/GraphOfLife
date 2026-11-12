@@ -102,10 +102,7 @@ B2's healthy but poor.
 [Every simulation: what was run, and what was measured](every-simulation.md)
 gives the baseline of every experiment and pilot batch.
 
-<!-- used b1-and-b2-the-two-baselines -->
-- [Measuring tokens: inequality and flow](measuring-tokens.md#the-even-split)
-- [Every simulation: what was run, and what was measured](every-simulation.md#the-two-rule-sets)
-<!-- /used -->
+The pages that use them link here, and are listed at the foot of this page.
 
 ## Where to go next
 
