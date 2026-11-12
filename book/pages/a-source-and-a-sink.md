@@ -331,10 +331,10 @@ under *A source and a sink*.
 <!-- turns -->
 ---
 
-← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
+← [Why does evolution level off?](why-does-evolution-level-off.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Why does evolution level off?](why-does-evolution-level-off.md)
 <!-- /turns -->

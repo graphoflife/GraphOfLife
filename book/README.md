@@ -126,10 +126,10 @@ view shows how the pages hang together.
 
 #### Does evolution keep going?
 
-- [Why does evolution level off?](pages/why-does-evolution-level-off.md)
 - [Does evolution keep going?](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
 - [Every era against three](pages/every-era-against-three.md)
+- [Why does evolution level off?](pages/why-does-evolution-level-off.md)
 - [A source and a sink](pages/a-source-and-a-sink.md)
 
 #### Changing the rules

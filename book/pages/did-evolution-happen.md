@@ -495,3 +495,14 @@ covariance. Skyrms, B. (2010), *Signals*.
   lines that only mutate, and round 3 was ranked by four readings, each
   against chance, heredity on that tree among them
   ([The evolution rank](candidates-for-open-ended-evolution.md#the-evolution-rank)).
+
+<!-- turns -->
+---
+
+← [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) →
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going), [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Glossary](glossary.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

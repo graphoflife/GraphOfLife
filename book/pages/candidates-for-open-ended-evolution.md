@@ -810,3 +810,14 @@ themselves.
   the notebook's history
   (`git show 037f997:book/pages/candidates-for-open-ended-evolution.md`). The
   shortlist's history and Experiment 43's change are told only here.
+
+<!-- turns -->
+---
+
+← [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) →
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
+
+> [!info]- Pages that link here (15)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Glossary](glossary.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+<!-- /turns -->
