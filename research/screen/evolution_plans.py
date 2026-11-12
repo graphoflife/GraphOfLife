@@ -53,8 +53,8 @@ COINS, NOISE_COINS, T = "17..19", "17..20", 100
 #: Experiment 46: its size, how much bigger the bigger arm is, how long, its seeds.
 TOKENS, BIGGER, ITERATIONS, SEEDS = 10000, 4, 20000, "4601..4603"
 #: The most worker-hours, by the lab's cost model, Experiment 46 may take: about
-#: three days on the lab's two workers at the pace the lab has measured, which
-#: has run well behind the model. A world whose rules would take longer is passed over.
+#: two days on the lab's two workers (its runs have taken 0.8 to 1.0 of the
+#: model's time). A world whose rules would take longer is passed over.
 HOURS = 100
 #: How a brain changes: what the faithful-copies arm takes from the world of round 3 whose copies are most faithful.
 MUTATION = ("mutate_on_replication", "mutation_probability", "mutation_noise_std", "mutation_sparsity")
