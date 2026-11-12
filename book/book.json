@@ -142,8 +142,6 @@
       ],
       "kind": "experiment",
       "experiments": [
-        "E38",
-        "E39",
         "E40",
         "E41",
         "E42"
@@ -887,6 +885,23 @@
         "E36",
         "E37"
       ]
+    },
+    {
+      "id": "rounds-1-and-2-of-the-screen",
+      "title": "Rounds 1 and 2 of the screen, and the criteria they were judged by",
+      "file": "pages/rounds-1-and-2-of-the-screen.md",
+      "topics": [
+        "history",
+        "screen"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E38",
+        "E39"
+      ],
+      "status": "analysed",
+      "added": "2026-11-12",
+      "summary": "Rounds 1 and 2 of the screen of random worlds, with their theses and runs: round 1 found no healthy world in fifty, round 2 was withdrawn unplayed. And the criteria worlds were judged by before 9 November 2026, with their lines and the rule that marked a value bad."
     },
     {
       "id": "what-the-switches-did-in-pilots",

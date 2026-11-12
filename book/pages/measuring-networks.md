@@ -316,7 +316,7 @@ single points of failure. So the
 [health bar](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)
 allows no agent to be joined to more than 5% of the others. If one agent holds
 links to many others, the world depends on it: when that hub dies, everything
-changes at once ([What makes a world interesting](measuring-health.md#the-six-criteria)).
+changes at once ([What makes a world interesting](rounds-1-and-2-of-the-screen.md#the-six-criteria)).
 And a star is mostly leaves, and short: in seed 28 only 19% of the agents were
 in the core and 72% were leaves, and two agents were 4.2 steps apart on
 average, against 12 to 26 steps in the worlds without a star
@@ -332,7 +332,6 @@ at random, a brain may choose at most 8 links
 - [Welcome](../README.md#graph-of-life--the-research-notebook)
 - [What this notebook is about](what-this-notebook-is-about.md#in-short)
 - [How this notebook is written](how-this-notebook-is-written.md#the-rules-of-the-research)
-- [A screen of random worlds](a-screen-of-random-worlds.md#how-our-view-changed)
 - [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#in-short)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#in-short)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#11--roles-in-the-network)
@@ -345,8 +344,8 @@ at random, a brain may choose at most 8 links
 - [Rules without numbers](rules-without-numbers.md#why-ask)
 - [Statistics: the tools of the notebook](statistics.md#what-thirty-seeds-can-see)
 
-> [!info]- And in the Archive (10)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#brains-that-cannot-see) · [B1: lives and wealth](b1-lives-and-wealth.md#stars) · [B1: the game and its flows](b1-the-game-and-its-flows.md#two-agents-of-one-module-games-later) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#the-worlds-of-a-giant-hub) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#but-some-genotypes-get-big) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-pilots-showed) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay) · [Space at scale (side study)](space-at-scale.md#the-worlds-and-the-bodies-beside-them) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#between-worlds)
+> [!info]- And in the Archive (11)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#brains-that-cannot-see) · [B1: lives and wealth](b1-lives-and-wealth.md#stars) · [B1: the game and its flows](b1-the-game-and-its-flows.md#two-agents-of-one-module-games-later) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#the-worlds-of-a-giant-hub) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#but-some-genotypes-get-big) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-pilots-showed) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#the-six-criteria) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay) · [Space at scale (side study)](space-at-scale.md#the-worlds-and-the-bodies-beside-them) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#between-worlds)
 <!-- /used -->
 
 ## Distances in a network: path length, radius and diameter, the spectral gap

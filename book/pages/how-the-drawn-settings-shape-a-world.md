@@ -348,7 +348,7 @@ mixing, estates other than uniform, search, a cap on links, a token in every
 link, upkeep, and a game in rounds), the drawn worlds switched on 5 to 11. The
 four worlds with only 5 have a mean health of 0.45, the most of any count,
 and the rank correlation of mechanisms with health is 0.09: more mechanisms
-go with no more health. No mechanism is needed for a [healthy world](measuring-health.md#what-makes-a-world-interesting "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).") in round 3; a
+go with no more health. No mechanism is needed for a [healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026 "A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.") in round 3; a
 few ([above](#what-decides-how-healthy-a-living-world-grows)) do harm.
 
 ## A token at a time

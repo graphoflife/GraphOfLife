@@ -34,7 +34,7 @@ orders stay as the record of how round 3's candidates were chosen.
 
 ## Why an order, and not a verdict
 
-The [criteria](measuring-health.md#what-makes-a-world-interesting) of the screen say yes or no.
+The [criteria](rounds-1-and-2-of-the-screen.md#what-makes-a-world-interesting) of the screen say yes or no.
 A world meets a line or it does not, and it is healthy when it meets them all.
 That is clear, but it throws away most of what we measured: a world with 79%
 of its agents in its [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.") fails the line of 80% just as a world with 20%
@@ -569,7 +569,7 @@ Two questions the orders cannot answer by themselves:
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
   the same worlds read for what evolution needs: heredity, selection and
   change.
-- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting): the
+- [What makes a world interesting](rounds-1-and-2-of-the-screen.md#what-makes-a-world-interesting): the
   author's criteria and lines this order starts from.
 - [A screen of random worlds](a-screen-of-random-worlds.md): how the worlds
   were drawn, and what became of them.
@@ -623,6 +623,6 @@ replaced it as simpler, read straight from what each run recorded.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (13)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Particles: patterns that outlast what carries them](particles.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (14)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Particles: patterns that outlast what carries them](particles.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

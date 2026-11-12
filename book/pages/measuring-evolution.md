@@ -781,7 +781,7 @@ other in the same world, and scores the share of it the later one holds.
 4. **It stays a world in which much can happen**
    ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)):
    - it never falls to 20 agents;
-   - it meets every mark of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at every 10,000 iterations;
+   - it meets every mark of the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") at every 10,000 iterations;
    - its agents are more diverse than those of B2's median world;
    - its tokens are no more even than B2's: a
      [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) no lower than the least of

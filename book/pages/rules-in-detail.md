@@ -1157,7 +1157,6 @@ the rounding.
 <!-- used how-a-brain-changes -->
 - [What this notebook is about](what-this-notebook-is-about.md#what-evolution-means-here)
 - [The ideas this builds on](the-ideas-this-builds-on.md#open-ended-evolution-what-it-would-mean)
-- [A screen of random worlds](a-screen-of-random-worlds.md#how-our-view-changed)
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#in-short)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-a-worlds-rules-make-possible)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#1--the-era-tournament)
@@ -1177,8 +1176,8 @@ the rounding.
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
 
-> [!info]- And in the Archive (5)
-> [B1: lives and wealth](b1-lives-and-wealth.md#effective-numbers) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-lasts-long-enough-to-be-selected) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#where-to-go-next) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#brains-as-assembled-objects)
+> [!info]- And in the Archive (6)
+> [B1: lives and wealth](b1-lives-and-wealth.md#effective-numbers) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-lasts-long-enough-to-be-selected) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#how-our-view-changed) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#where-to-go-next) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#brains-as-assembled-objects)
 <!-- /used -->
 
 In the code it is `Brain.mutate` and `Brain._perturb` in

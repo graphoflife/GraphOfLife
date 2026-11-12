@@ -182,6 +182,7 @@ view shows how the pages hang together.
 #### Building B2, the healthy and rich search, and the pilots
 
 - [Building B2, and the search for a healthy, rich world](pages/building-b2-and-the-search-for-a-healthy-rich-world.md)
+- [Rounds 1 and 2 of the screen, and the criteria they were judged by](pages/rounds-1-and-2-of-the-screen.md)
 - [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
 
 #### Side studies

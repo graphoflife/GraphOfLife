@@ -261,7 +261,7 @@ when one copy in twenty changes. It finds no better play either
 Every one of these worlds kept a network that holds. The loss of no single
 agent or link would cut it, and agents had five or six links on average. Their
 [ball dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
-was 4.1 to 4.4 in eleven of the twelve worlds, a little above the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.")'s
+was 4.1 to 4.4 in eleven of the twelve worlds, a little above the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.")'s
 4, as in B2. The twelfth, a world with the family sense, read 3.8, inside the
 bar.
 

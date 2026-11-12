@@ -753,7 +753,7 @@ A fourth count, the [diversity score](measuring-health.md#the-diversity-score), 
 world's agents spread in what they hold: their tokens, links, ages and
 genotypes. The screen of random worlds uses it, beside the kinds of staking,
 to judge whether a world is diverse
-([What makes a world interesting](measuring-health.md#what-makes-a-world-interesting)).
+([What makes a world interesting](rounds-1-and-2-of-the-screen.md#what-makes-a-world-interesting)).
 
 ### What the pages found
 
@@ -1340,7 +1340,7 @@ one habit, all in and at home two times in three, and differ in *when* and
 
 The screen of random worlds uses this count. A world it calls diverse has
 more effective kinds of staking than B2's median world, and a higher
-diversity score ([What makes a world interesting](measuring-health.md#what-makes-a-world-interesting)).
+diversity score ([What makes a world interesting](rounds-1-and-2-of-the-screen.md#what-makes-a-world-interesting)).
 The screen reads the kinds from the world as kept, with no game played first.
 And it averages two moments, since the count swings from one moment to the
 next ([The diversity score](measuring-health.md#the-diversity-score)).

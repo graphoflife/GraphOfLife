@@ -277,7 +277,7 @@ shape. Across the thirty, the share of agents in the core follows the share
 joined to the largest hub almost exactly
 ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
-B2 counts a star as a fault of the network. The [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
+B2 counts a star as a fault of the network. The [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 allows no agent to be joined to more than 5% of the others.
 [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) keeps hubs down: a

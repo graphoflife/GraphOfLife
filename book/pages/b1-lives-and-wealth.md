@@ -3335,7 +3335,7 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 - [Physical inspiration](physical-inspiration.md): the heat equation, and the
   other physics the notebook borrows from.
 - [Stars and hubs](measuring-networks.md#stars-and-hubs): hubs and stars in short, and why the
-  [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") counts a hub as a fault.
+  [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") counts a hub as a fault.
 
 ## How our view changed
 

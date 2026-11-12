@@ -117,7 +117,7 @@ small and rich, revolutions are five to ten times as common, and hold the
 world small.
 
 **Rules that reshape the network do so everywhere.** Handover costs two marks
-of the health bar with nearly every companion. It thins the network into trees
+of the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") with nearly every companion. It thins the network into trees
 on single links, and unfolds it a little
 ([Handover, with every other rule](what-the-switches-did-in-pilots.md#handover-with-every-other-rule)).
 Every unused link lapsing makes worlds rich, small and about two-dimensional,
@@ -179,7 +179,7 @@ The author's picture is a world with four things at once
 None of these combinations is all of that. The best of the sixteen on B2 has
 no revolutions, no random inputs, links that hold a token and mixing. It
 meets every mark of the health bar, with a quarter of its agents poor and a
-diversity score of 0.68. But its network is folded. A typical agent reaches
+[diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") of 0.68. But its network is folded. A typical agent reaches
 half the world in 1.19 times the steps its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs. That is as in
 nearly every B2 world
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
@@ -199,7 +199,7 @@ that are spaces:
 | deaths not mended, as in B1 | 44 | 51% | 0.39 | 0.66 | 4 | 2.6 |
 
 To read it, take B2's own lines at iteration 1,000
-([What makes a world interesting](measuring-health.md#the-lines-we-compare-with)).
+([What makes a world interesting](rounds-1-and-2-of-the-screen.md#the-lines-we-compare-with)).
 B2's median world has a diversity score of 0.53. Its most even world has a
 Gini of 0.49, and its ten worlds read 0.49 to 0.56. A random exchange of
 tokens would leave 0.33 to 0.42 at two to four tokens per agent.
@@ -2620,7 +2620,7 @@ the others on this page. The batches reported outside the Archive are listed in
 - [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): the
   deaths that make the estate in B2.
 - [Room and riches for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world):
-  the estates played again, in the search for a healthy world.
+  the estates played again, in the search for a [healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026 "A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.").
 - [Every setting](settings.md#link_search): the three settings of the search,
   exactly.
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
@@ -2721,7 +2721,7 @@ the others on this page. The batches reported outside the Archive are listed in
 <!-- turns -->
 ---
 
-← [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots)
+← [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots)
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 

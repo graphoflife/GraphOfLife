@@ -62,12 +62,13 @@ there.
 - **[genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor)** (also family tree) — The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.
 - **[Gini coefficient](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve)** (also Gini, Lorenz curve) — How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.
 - **[half-cut exponent](measuring-health.md#the-half-cut-exponent)** — How the links crossing the cheapest cut of a world into halves grow with its size: 2/3 for a space of three dimensions, near 0 for a bottleneck, near 1 for a folded world.
-- **[health bar](measuring-health.md#the-health-bar)** — The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.
-- **[healthy world](measuring-health.md#what-makes-a-world-interesting)** (also interesting world) — A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).
+- **[health bar](measuring-health.md#the-health-bar)** — The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.
+- **[healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026)** — A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.
 - **[hegemon](rules-in-detail.md#how-a-coalition-takes-a-node)** — The agent that made the largest single stake on a node; it wins the node unless a coalition outbids it.
 - **[heredity index](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — How much more a child acts like its parent than like a stranger, in the same situations: 1 as its parent does, 0 as a stranger does.
 - **[home stake](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node)** — The tokens an agent stakes on its own node, to keep it.
 - **[hub](measuring-networks.md#stars-and-hubs)** (also star) — An agent joined to far more agents than most; a star is a world held together by a single hub.
+- **[interesting world](rounds-1-and-2-of-the-screen.md#healthy-and-interesting)** — By the screen's criteria of October 2026, a world that is alive and misses at most two of the other five criteria (at most one in rounds 1 and 2).
 - **[invasion test](measuring-evolution.md#the-invasion-test)** — A strategy planted as a patch in an evolved world: does it spread, or die out?
 - **[iteration](one-iteration.md)** — One step of a world's time: a phase of reproduction, then a phase of the game.
 - **[lab](runs-and-records.md#the-lab-the-engine-and-pilots)** (also engine) — The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.
