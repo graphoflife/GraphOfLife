@@ -183,7 +183,8 @@ def thesis(md: str, name: str) -> str:
              ("confirm", "It holds if:"), ("refute", "It fails if:")]
     text = "\n\n".join(f"**{label}** {numbered(said[key]) if cited else said[key]}"
                        for key, label in parts if said.get(key))
-    if cited:
+    if cited and not PAGE.get("numbered"):            # said under the first such thesis of a page
+        PAGE["numbered"] = True
         text += ("\n\n*Written while the notebook still numbered its chapters: each number is a link to the "
                  "page it meant that day.*")
     return quote(text, f"[!quote] The thesis of Experiment {int(name[1:])}, "
@@ -218,6 +219,39 @@ def seeds_text(seeds: str) -> tuple:
         return f"{a} to {b}", b - a + 1
     listed = [s for s in str(seeds).replace(",", " ").split() if s]
     return ", ".join(listed), len(listed)
+
+
+def once(what: str) -> bool:
+    """Whether the page being filled has yet to say `what`: true the first time it is asked, and never after."""
+    said = PAGE.setdefault("said", set())
+    if what in said:
+        return False
+    said.add(what)
+    return True
+
+
+#: What every run of the lab writes beside its frames: said in a page's first box of runs.
+WRITES = ("Each run writes its settings, seed and engine version beside its frames, in "
+          "`GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
+
+
+def made_again(what: str, name: str, writes: str = "") -> str:
+    """
+    How a box's runs are made again: the command, and, in the first box of a page
+    that says so, the ▶ of the Research Notebook tab and what each run writes.
+    """
+    line = f"To {what} again: `python3 gol_lab.py run {name}`"
+    if once("▶"):
+        line += ", or ▶ in the Research Notebook tab of a computer running `gol_server.py`"
+    return line + "." + (f" {writes}" if writes and once(writes) else "")
+
+
+def baseline(md: str, base: Dict[str, Any]) -> str:
+    """Whose settings a box's runs have but where a condition changes them: in full the first time a page says so."""
+    if once(f"baseline {base['id']}"):
+        return (f"Every setting is that of the baseline **{base['id']}** ({base['title'].lower()}) unless the "
+                f"condition changes it ([At a glance]({link(md, page_file('settings'))}#at-a-glance)).")
+    return f"Every setting is {base['id']}'s unless the condition changes it."
 
 
 def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
@@ -260,9 +294,8 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
                          for key, word in words if key in fields)
         lines.append(f"- **{label}** — {number(count)} trials: {said}.")
     lines.append("")
-    lines.append(f"To play these trials again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab "
-                 "of a computer running `gol_server.py`. Each writes its settings and engine beside "
-                 "its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.")
+    lines.append(made_again("play these trials", name, "Each writes its settings and engine beside its result, in "
+                       "`GraphOfLifeRuns/<trial>/meta.json` and `result.json`."))
     return quote("\n".join(lines), "[!info]- The trials behind this page")
 
 
@@ -303,8 +336,7 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
                  f"alike (sampler {sc['sampler']}, round seed {sc['seed']}) and played alike, "
                  + (f"but with {fixed} in every world. " if fixed else "")
                  + "Runs, world by world: " + ", ".join(f"`{ids[d['seed']]}`" for d in found) + ".\n",
-                 f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook "
-                 "tab of a computer running `gol_server.py`."]
+                 made_again("make these worlds", name)]
         return quote("\n".join(lines), "[!info]- The worlds behind this page")
     budget = (f", or until {sc['budget_hours']:g} hours of playing have gone by: a world that slow stops "
               "as too slow" if sc.get("budget_hours") else "")
@@ -333,9 +365,7 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
                      f"world{'s' if len(skip) > 1 else ''} " + ", ".join(str(i) for i in skip)
                      + "; every other world keeps its number, seed and name.")
     lines.append("")
-    lines.append(f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook tab of a "
-                 "computer running `gol_server.py`. Each run writes its settings, seed and engine version "
-                 "beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
+    lines.append(made_again("make these worlds", name, WRITES))
     summary = quote("\n".join(lines), "[!info]- The worlds behind this page")
     rows = ["| world | seed | run | what differs from B1 |", "|---|---|---|---|"]
     for d in found:
@@ -428,9 +458,7 @@ def runs(md: str, name: str) -> str:
                  + ("each of its seeds" if own else f"every seed ({seeds})")
                  + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
                                  else "") + f", for {number(spec['iterations'])} iterations — or "
-                 "until its world dies out. Every setting is that of the baseline "
-                 f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it "
-                 f"([At a glance]({link(md, page_file('settings'))}#at-a-glance)).\n")
+                 "until its world dies out. " + baseline(md, base) + "\n")
     for c in conditions:
         # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
         drawn = drawn_as(c, base)
@@ -448,11 +476,8 @@ def runs(md: str, name: str) -> str:
         lines.append(f"- **{c['name']}** — {changed}; {', '.join(number(s) for s in sizes(c))} "
                      f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
-    lines.append(f"To make these runs again: `python3 gol_lab.py run {borrowed or name}`, or ▶ in "
-                 "the Research Notebook tab of a computer running `gol_server.py`. Each run writes its "
-                 "settings, seed and engine version beside its frames, in "
-                 "`GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.")
-    if any((c.get("set") or {}).get("proto") for c in conditions):
+    lines.append(made_again("make these runs", borrowed or name, WRITES))
+    if any((c.get("set") or {}).get("proto") for c in conditions) and once("proto"):
         lines.append("")
         lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "
                      "the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics "
