@@ -399,7 +399,9 @@ def drawn_as(condition: Dict[str, Any], base: Dict[str, Any]) -> Optional[Tuple[
     """
     The world of a screen whose drawn settings a condition of B1 plays again, if
     any: the screen, the draw, and what the condition plays otherwise (its
-    founders, say, for a world played at another size).
+    founders, say, for a world played at another size, or a rule it changes).
+    A condition is told as the draw nearest to it when that says less than
+    telling it as B1 changed.
     """
     import gol_plan
     plays = {**(condition.get("set") or {}), **(condition.get("world") or {})}
@@ -410,14 +412,21 @@ def drawn_as(condition: Dict[str, Any], base: Dict[str, Any]) -> Optional[Tuple[
         for f in sorted(os.listdir(os.path.join(BOOK, "experiments"))):
             if f.startswith("E") and f.endswith(".json") and "screen" in read_json(f"experiments/{f}"):
                 DRAWS[f[:-5]] = gol_plan.screen_draws(f[:-5])
+    settings = base["settings"]
+    nearest = None
     for plan, found in DRAWS.items():
         for d in found:
-            if {k: v for k, v in d["set"].items() if k not in gol_plan.WORLD} == rules:
-                world = [k for k in gol_plan.WORLD if k != "total_tokens"]
-                other = {k: plays.get(k, base["settings"][k]) for k in world
-                         if plays.get(k, base["settings"][k]) != d["set"].get(k, base["settings"][k])}
-                return plan, d, other
-    return None
+            drawn = {k: v for k, v in d["set"].items() if k not in gol_plan.WORLD}
+            changed = {k: rules.get(k, settings.get(k)) for k in sorted(set(drawn) | set(rules))
+                       if rules.get(k, settings.get(k)) != drawn.get(k, settings.get(k))}
+            if len(changed) < len(rules) and (nearest is None or len(changed) < len(nearest[2])):
+                nearest = (plan, d, changed)
+    if nearest is None:
+        return None
+    plan, d, changed = nearest
+    world = [k for k in gol_plan.WORLD if k != "total_tokens"]
+    return plan, d, {**changed, **{k: plays.get(k, settings[k]) for k in world
+                                   if plays.get(k, settings[k]) != d["set"].get(k, settings[k])}}
 
 
 def withdrawn(plan: Dict[str, Any], what: str) -> str:

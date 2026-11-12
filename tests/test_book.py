@@ -404,6 +404,21 @@ def test_a_term_is_linked_where_it_is_first_used():
         "a term was linked on its own page"
 
 
+def test_a_world_of_a_screen_played_with_one_rule_changed_is_told_as_that_world():
+    # A run box tells such a condition as the draw "but with" the change, not as
+    # every drawn setting of B1 changed; one far from every draw stays B1 changed.
+    import book_fill
+    import gol_plan
+    base = book_fill.read_json("experiments/B1.json")
+    draw = gol_plan.screen_draws("E40")[57]
+    rules = {k: v for k, v in draw["set"].items() if k not in gol_plan.WORLD}
+    other = "own" if rules.get("self_message", base["settings"]["self_message"]) == "largest" else "largest"
+    plan, d, changed = book_fill.drawn_as({"set": {**draw["set"], "self_message": other}}, base)
+    assert (plan, d["world"]) == ("E40", draw["world"]), (plan, d["world"])
+    assert changed == {"self_message": other}, changed
+    assert book_fill.drawn_as({"set": {"self_message": other}}, base) is None, "B1 with one change became a draw"
+
+
 def test_every_page_is_filled_as_the_notebook_says():
     # The blocks of a page — figures, theses, runs, contents, and the foot that
     # names its topic and the pages that link to it — are made from book.json,
