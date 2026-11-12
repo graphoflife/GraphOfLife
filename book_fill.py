@@ -320,8 +320,8 @@ def same_draws(name: str, other: str) -> bool:
 def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     """
     The worlds of a screen: how their settings were drawn, and each one's, world
-    by world; or, where the page has listed the same draws for another screen
-    already, what this one changed in all of them.
+    by world (in the Archive, how to list them); or, where the page has listed the
+    same draws for another screen already, what this one changed in all of them.
     """
     import gol_plan
     import gol_screen
@@ -364,9 +364,14 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
         lines.append(f"- **Given up unplayed:** {number(len(skip))} of the {number(sc['worlds'])} worlds drawn, "
                      f"world{'s' if len(skip) > 1 else ''} " + ", ".join(str(i) for i in skip)
                      + "; every other world keeps its number, seed and name.")
+    if archived(md):                                   # the Archive keeps the summary; the draws are a call away
+        lines.append(f"- **Every world's settings:** `gol_plan.screen_draws(\"{name}\")` lists each world's "
+                     "number, seed and what was drawn for it.")
     lines.append("")
     lines.append(made_again("make these worlds", name, WRITES))
     summary = quote("\n".join(lines), "[!info]- The worlds behind this page")
+    if archived(md):
+        return summary
     rows = ["| world | seed | run | what differs from B1 |", "|---|---|---|---|"]
     for d in found:
         what = ", ".join(f"[`{k}`]({link(md, page_file('settings'))}#{k}) = {show(v)}"

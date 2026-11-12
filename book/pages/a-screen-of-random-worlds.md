@@ -62,9 +62,9 @@ equally often. A number keeps its default or takes one of a few levels. A
 setting that can matter only beside another is drawn only there, so two draws
 never make one world under two names. Rounds 1 and 2 used the first sampler,
 and round 3 the second, with the author's choices ([Round 3: the author's
-settings](#round-3-the-authors-settings)). The box of each round's worlds lists
-every world's settings: round 3's under [How this was made](#how-this-was-made),
-rounds 1 and 2's in the Archive
+settings](#round-3-the-authors-settings)). The box of round 3's worlds lists
+every world's settings ([How this was made](#how-this-was-made)); that of rounds
+1 and 2, in the Archive, says how to list them
 ([How this was made](rounds-1-and-2-of-the-screen.md#how-this-was-made)).
 
 ## Round 1
