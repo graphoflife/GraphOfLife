@@ -100,8 +100,6 @@ how the pages hang together.
 
 - [Physical inspiration](pages/physical-inspiration.md)
 - [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
-- [Dimensions at scale](pages/dimensions-at-scale.md)
-- [Which properties have no scale?](pages/which-properties-have-no-scale.md)
 - [Local rules only](pages/local-rules-only.md)
 - [How far does a difference travel?](pages/how-far-does-a-difference-travel.md)
 - [A source and a sink](pages/a-source-and-a-sink.md)
@@ -174,4 +172,5 @@ how the pages hang together.
 #### Side studies
 
 - [Cooperation, help and gliders (side study)](pages/cooperation-help-and-gliders.md)
+- [Space at scale (side study)](pages/space-at-scale.md)
 <!-- /contents -->

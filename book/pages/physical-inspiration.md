@@ -117,13 +117,13 @@ agents. That is how a body of 3.3 dimensions would grow, since 1/0.30 ≈ 3.3
 Read again with more worlds, at five moments of each, the diameter grows as
 *N*^0.26 to 0.27 and the typical distance as *N*^0.20 to 0.23: by width
 alone nearer four dimensions than three, which bigger hubs in bigger worlds
-could also make ([How wide a world is](dimensions-at-scale.md#how-wide-a-world-is)).
+could also make ([How wide a world is](space-at-scale.md#how-wide-a-world-is)).
 
 [Is a world a space?](how-many-dimensions-does-a-world-have.md) measured the
 dimension with two rulers, tried first on spaces whose dimension is known. By
 the room within *r* steps, worlds of 60,000 agents read 3.3 after their last
 game, steady from 3 steps to 14, and 3.0 to 3.2 over five moments of their
-settled lives ([Dimensions at scale](dimensions-at-scale.md)). By how a random
+settled lives ([Dimensions at scale](space-at-scale.md#dimensions-at-scale)). By how a random
 walker spreads, they read about 2. Networks with
 the same connections at every agent, wired at random, read neither. These
 [random twins](measuring-space.md#the-random-twin-is-a-world-a-space) are *small worlds*, in which everyone is a few
@@ -509,7 +509,7 @@ What the notebook has found is mixed
   cuts off follow P(*s*) ∝ *s*^−2 up to the size of the whole world, so about
   one game in ninety cuts off a tenth of a world or more, at 10,000 tokens as
   at 100,000
-  ([Which properties have no scale?](which-properties-have-no-scale.md#big-cuts-keep-their-share));
+  ([Which properties have no scale?](space-at-scale.md#big-cuts-keep-their-share));
 - and a world's wander is a random walk's, pulled back to its level within a
   few hundred iterations. It is not the 1/*f* noise of a critical system,
   which has memory on every time scale.
@@ -520,12 +520,12 @@ about 2% of a world, at five hundred agents and at sixty thousand, with no
 trend. The worst cuts off a third to a half, at every size. The whole
 distributions, compared since, are two things: their bulk of small pieces
 averages out as worlds grow, and their tail of big cuts does not
-([Which properties have no scale?](which-properties-have-no-scale.md)).
+([Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale)).
 
 Finding such scaleless properties systematically is now an aim of the
 notebook. Measure the same thing at many sizes, and ask whether, rescaled, it
 is the same
-([Which properties have no scale?](which-properties-have-no-scale.md)). The
+([Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale)). The
 answer so far: a world's space, the branches that hang from it by a single
 connection, and the big cuts in which they fall away have no scale but the
 world's; nothing else does, and nothing is critical, for likeness fades
@@ -537,7 +537,7 @@ over which likeness fades, so the worlds are far from critical
 ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). But the space itself has no
 scale. Within *r* steps lie about *r*^3 agents, the same law from 3 steps to
 14 ([The rulers, on the worlds](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds),
-[Dimensions at scale](dimensions-at-scale.md)).
+[Dimensions at scale](space-at-scale.md#dimensions-at-scale)).
 
 ## Why life is possible: a flow of low entropy
 
@@ -720,14 +720,14 @@ The second aim adds its own questions, and its own pages, under
 Three are studies of worlds already played; four are plans that wait for
 rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") does not have yet:
 
-- [Dimensions at scale](dimensions-at-scale.md). Both rulers at every size
+- [Dimensions at scale](space-at-scale.md#dimensions-at-scale). Both rulers at every size
   the notebook has, beside bodies cut from grids: within a world the
   dimension holds across scales, as a finite body's does, and larger worlds
   read more at the same radius, through their hubs.
 - [How far does a difference travel?](how-far-does-a-difference-travel.md)
   Damage spreading: the light cone, measured, once random numbers are local.
   A draft plan.
-- [Which properties have no scale?](which-properties-have-no-scale.md) The
+- [Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale) The
   same quantities across many sizes, rescaled: written, from Experiments 2, 8
   and 10.
 - [Local rules only](local-rules-only.md). The cull, the share-out and the
@@ -828,10 +828,10 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
   agents read 3.3 by balls and that within *r* steps lie about *r*^3.3
   agents. Read at five moments of their settled lives instead of after their
   last game, they read 3.0 to 3.2
-  ([Dimensions at scale](dimensions-at-scale.md)).
+  ([Dimensions at scale](space-at-scale.md#dimensions-at-scale)).
 - **9 November 2026.** From 9 October, the page said that deaths do not come
   in avalanches of every size, the agents one game removes having a typical
-  size. [Which properties have no scale?](which-properties-have-no-scale.md)
+  size. [Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale)
   compared the whole distributions at eight sizes. Most games remove a few
   agents, but the pieces a game cuts off follow P(*s*) ∝ *s*^−2 up to the size
   of the world, and the big cuts keep their share at every size.
@@ -862,6 +862,6 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
 
 **Also about:** [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (20)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [!info]- Pages that link here (19)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->

@@ -1653,7 +1653,7 @@ kept in `book/results/patterns.json`.
 <!-- turns -->
 ---
 
-[Side studies](../README.md#side-studies)
+[Side studies](../README.md#side-studies) · [Space at scale (side study)](space-at-scale.md) →
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 

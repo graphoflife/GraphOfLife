@@ -80,8 +80,8 @@
   "101": "building-b2-and-the-search-for-a-healthy-rich-world#births-as-rich-as-the-neighbours",
   "105": "building-b2-and-the-search-for-a-healthy-rich-world#the-floor-in-plain-b2-and-in-b1",
   "60": "b1-the-network-size-and-scaling#worlds-of-100000-tokens",
-  "61": "dimensions-at-scale",
-  "62": "which-properties-have-no-scale",
+  "61": "space-at-scale#dimensions-at-scale",
+  "62": "space-at-scale#which-properties-have-no-scale",
   "63": "local-rules-only",
   "64": "how-far-does-a-difference-travel",
   "65": "a-source-and-a-sink",
@@ -431,6 +431,8 @@
   "room-for-the-steadiest-world": "building-b2-and-the-search-for-a-healthy-rich-world#room-and-riches-for-the-steadiest-world",
   "who-helps-whom": "cooperation-help-and-gliders#who-helps-whom",
   "do-agents-cooperate": "cooperation-help-and-gliders#do-agents-cooperate-help-kin-and-partners",
-  "gliders-and-who-helps-whom": "cooperation-help-and-gliders#gliders-and-who-helps-whom"
+  "gliders-and-who-helps-whom": "cooperation-help-and-gliders#gliders-and-who-helps-whom",
+  "dimensions-at-scale": "space-at-scale#dimensions-at-scale",
+  "which-properties-have-no-scale": "space-at-scale#which-properties-have-no-scale"
  }
 }

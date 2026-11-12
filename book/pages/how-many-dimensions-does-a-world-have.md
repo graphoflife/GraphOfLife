@@ -647,10 +647,10 @@ the line between folded and not.
   as much within *r* steps as a three-dimensional body does, from 5 to 10
   steps. At 60,000 agents they hold somewhat more: 3.3 after their last game,
   steady from 3 to 14 steps, and 3.0 to 3.2 over five moments of their
-  settled lives ([Dimensions at scale](dimensions-at-scale.md)). Their
+  settled lives ([Dimensions at scale](space-at-scale.md#dimensions-at-scale)). Their
   diameters grow as agents^0.26 to 0.30
   ([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power),
-  [How wide a world is](dimensions-at-scale.md#how-wide-a-world-is)).
+  [How wide a world is](space-at-scale.md#how-wide-a-world-is)).
   It is the first sign that something like three-dimensional space can emerge
   from these rules, with no geometry put in.
 - **But not our kind of space.** A walker reads only two dimensions. The
@@ -661,7 +661,7 @@ the line between folded and not.
   world, it does not, beyond what any finite body shows: by balls a plateau,
   by walks 1.7 to 2.0, out to walks of 8,192 steps. Larger worlds read more
   at the same radius, through their bigger hubs
-  ([Dimensions at scale](dimensions-at-scale.md)).
+  ([Dimensions at scale](space-at-scale.md#dimensions-at-scale)).
 - **B2 is not a space**, at any size measured, up to 30,700 agents. Its worlds
   are nearly small worlds: a typical agent is about as near to everyone as in
   a random network with the same links. That is why the health bar's dimension
@@ -809,7 +809,7 @@ iterations each.
 
 - **9 November 2026.** From 9 October, this page gave the worlds of 409,600
   tokens a dimension of 3.3 by balls, read after their last game.
-  [Dimensions at scale](dimensions-at-scale.md) read them at five moments of
+  [Dimensions at scale](space-at-scale.md#dimensions-at-scale) read them at five moments of
   their settled lives: 3.0 to 3.2 in the median from radius 3 to 14, and 3.04
   over radii 3 to 6, where one look gave 3.3. One look at a world is one draw:
   between five moments, a world's reading over radii 3 to 6 varies by 0.8.
@@ -858,8 +858,8 @@ iterations each.
 <!-- turns -->
 ---
 
-← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [Dimensions at scale](dimensions-at-scale.md) →
+← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [Local rules only](local-rules-only.md) →
 
-> [!info]- Pages that link here (14)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [!info]- Pages that link here (13)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->

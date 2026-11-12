@@ -551,7 +551,7 @@ have about 42,000 core agents each. There the core reads 2.7 over radii 3 to
 14 (the whole world 3.3), and 3.1 at radii 3 to 6. By walks the cores read
 1.6, 1.9 and 1.5 at 10,000, 100,000 and 409,600 tokens. The core's dimension
 by balls grows with the world, as the world's does, and has not settled at any
-of these sizes. [Dimensions at scale](dimensions-at-scale.md) followed the
+of these sizes. [Dimensions at scale](space-at-scale.md#dimensions-at-scale) followed the
 whole world's reading to every size the notebook has: it grows with a world's
 size through its hubs, and holds across scales within each world. The
 core's own reading has not been followed further.
@@ -2858,8 +2858,8 @@ are worlds of B1 itself, not of the second baseline B2 of
 [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break).
 
 The physics of space builds on these worlds. Two pages read them:
-[Dimensions at scale](dimensions-at-scale.md), for their dimensions, and
-[Which properties have no scale?](which-properties-have-no-scale.md). And the experiment answers one
+[Dimensions at scale](space-at-scale.md#dimensions-at-scale), for their dimensions, and
+[Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale). And the experiment answers one
 question of its own: how a line takes over a world.
 
 #### How a line takes over
@@ -3998,6 +3998,6 @@ written by `python3 gol_lab.py analyse E03`.
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Space and dimension](../README.md#space-and-dimension), [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (30)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
+> [!info]- Pages that link here (29)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->

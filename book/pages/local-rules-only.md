@@ -498,10 +498,10 @@ under *Local rules only*.
 <!-- turns -->
 ---
 
-← [Which properties have no scale?](which-properties-have-no-scale.md) · [Space and dimension](../README.md#space-and-dimension) · [How far does a difference travel?](how-far-does-a-difference-travel.md) →
+← [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Space and dimension](../README.md#space-and-dimension) · [How far does a difference travel?](how-far-does-a-difference-travel.md) →
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (7)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->
