@@ -34,8 +34,11 @@ orders by it, then by the sum, the worst and the world's id, so every rank is
 distinct. Each world carries its four readings (`values`), their z-scores
 against their nulls (`z`), and beside them what is not scored (`beside`): how
 its brains were copied, and the births-only numbers these readings replace. The best of each order are listed, and their union. Health is beside
-it only as a filter: its product and rank (research/screen/health.json), and
-whether the world is on the shortlist (research/screen/candidates.json).
+it only as a filter: its product and rank (research/screen/health.json),
+whether the world is on the shortlist (research/screen/candidates.json), and
+`filter`, the funnel's reason where one of its rules that still filter rules
+the world out (a star, one holding, standing still; dead worlds are not
+ranked). The rank itself scores every world that lived.
 
     python3 research/screen/evolution.py      writes research/screen/evolution.json
 
@@ -89,6 +92,17 @@ ORDER = ("score is the product of the four readings' shares (each the share of t
          "the worst 1/n), read as their geometric average; rank orders by score, then by the sum of the shares (as "
          "their average), then by the worst share, then by the world's id. The orders by the sum and by the worst "
          "are kept beside it, and the union of the first ten of each (bests).")
+
+
+#: The funnel's rules (research/screen/funnel.py) that still filter: health of 9 November, and a line that stands
+#: still. Its rule of no heredity read the births-only tree, which played children against parents whose brains
+#: had mostly been replaced by conquests since; on the brain tree it does not hold, so it filters nothing.
+FILTERS = ("died", "a star", "one holding", "standing still")
+
+
+def filtered(out: Optional[str]) -> Optional[str]:
+    """The funnel's reason for ruling a world out, where it is one that still filters."""
+    return out if out and out.startswith(FILTERS) else None
 
 
 def shares(values: List[float]) -> List[float]:
@@ -205,7 +219,8 @@ def build() -> Dict[str, Any]:
                        "z": {k: r[k]["z"] for k in KEYS}, "values": {k: r[k]["value"] for k in KEYS},
                        "beside": values_of(have, (cand.get(run_id) or {}).get("numbers") or {}),
                        "health": {**(h.get("health") or {}), "ranks": h.get("ranks")},
-                       "shortlisted": run_id in shortlist, "out": (cand.get(run_id) or {}).get("out")})
+                       "shortlisted": run_id in shortlist, "out": (cand.get(run_id) or {}).get("out"),
+                       "filter": filtered((cand.get(run_id) or {}).get("out"))})
     worlds, bests = rank(worlds)
     return {"made": datetime.date.today().isoformat(), "provisional": bool(missing),
             "complete": len(done), "of": len(living), "missing": [r for r, _ in missing],
