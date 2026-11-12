@@ -185,6 +185,6 @@ def fiveseeds(ch: F.Chapter) -> None:
                      "that died out has the steps before its death only."),
             recipe=recipe(RUNS, "`GraphOfLifeRuns/.pilots/e21_T100.json` and `e17_T100.json` "
                                 "(`research/oee/checks/rejudge.py`, `research/oee/checks/e20_e21_rejudge_worlds.txt`)",
-                          ["Seat the brains of the two moments on alternate agents of each moment's world and play "
+                          ["Seat the brains of the two moments by a coin per agent on each moment's world and play "
                            "100 iterations.", "Count the agents the later moment's brains hold, as a share of all."]))
     ch.number("evolution", steps)

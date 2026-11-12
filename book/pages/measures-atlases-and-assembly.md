@@ -168,7 +168,7 @@ Having a child next is hardly predictable in either world (at most 0.18).
 <!-- figure atlas/curvature -->
 ![Tokens run downhill](../figures/atlas/curvature.svg)
 
-**Tokens run downhill.** One dot per world, the bar the median of ten. Token curvature is the sum, over an agent's neighbours, of their tokens minus its own (the note *Token curvature*): below zero an agent is a peak, above zero a valley. Left: of the agents in a class, the share whose node held more tokens after the game than before, minus the share whose node held fewer; most hold the same. Right: the share of agents that kept their own node. A class with fewer than 50 agents in a world has no dot for it.
+**Tokens run downhill.** One dot per world, the bar the median of ten. Token curvature is the sum, over an agent's neighbours, of their tokens minus its own ([Token curvature](b1-lives-and-wealth.md#token-curvature)): below zero an agent is a peak, above zero a valley. Left: of the agents in a class, the share whose node held more tokens after the game than before, minus the share whose node held fewer; most hold the same. Right: the share of agents that kept their own node. A class with fewer than 50 agents in a world has no dot for it.
 
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *What comes before, and what follows* above.

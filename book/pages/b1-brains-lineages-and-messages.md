@@ -1140,7 +1140,7 @@ middle parts are small.
 >
 > Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
 >
-> 4. Split each decision's variance over brains, situations and draws into the four parts (the note *Where, who and chance*); take the median over worlds.
+> 4. Split each decision's variance over brains, situations and draws into the four parts ([Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance)); take the median over worlds.
 >
 > **To make it again:** `python3 book_figures.py diversity`.
 <!-- /figure -->

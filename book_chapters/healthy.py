@@ -24,6 +24,7 @@ import numpy as np
 import book_figures as F
 from book_figures import chapter, recipe
 from book_chapters.common import BLUE, CYAN, GREEN, GREY, ORANGE, RED, VIOLET, YELLOW
+from book_chapters.oee import HEALTH_BAR
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
@@ -121,7 +122,7 @@ def healthy(ch: F.Chapter) -> None:
               y={"label": "diversity score (mean percentile of the four spreads)", "min": 0, "max": 1},
               series=series,
               caption=("Each dot is a world at its last checkpoint. Across: how many of the seven marks of "
-                       "[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets — one piece, a 2-core of at least 0.8, no agent whose "
+                       f"{HEALTH_BAR} it meets — one piece, a 2-core of at least 0.8, no agent whose "
                        "loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the "
                        "others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways "
                        "within each count only so that they do not hide each other). Up: how widely its agents "

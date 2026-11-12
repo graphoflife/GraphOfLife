@@ -117,7 +117,7 @@ small and rich, revolutions are five to ten times as common, and hold the
 world small.
 
 **Rules that reshape the network do so everywhere.** Handover costs two marks
-of the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") with nearly every companion. It thins the network into trees
+of the health bar with nearly every companion. It thins the network into trees
 on single links, and unfolds it a little
 ([Handover, with every other rule](what-the-switches-did-in-pilots.md#handover-with-every-other-rule)).
 Every unused link lapsing makes worlds rich, small and about two-dimensional,
@@ -179,7 +179,7 @@ The author's picture is a world with four things at once
 None of these combinations is all of that. The best of the sixteen on B2 has
 no revolutions, no random inputs, links that hold a token and mixing. It
 meets every mark of the health bar, with a quarter of its agents poor and a
-[diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") of 0.68. But its network is folded. A typical agent reaches
+diversity score of 0.68. But its network is folded. A typical agent reaches
 half the world in 1.19 times the steps its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs. That is as in
 nearly every B2 world
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
@@ -667,7 +667,7 @@ If the later brains then hold more than half of the world, they are better.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and, for B2, `long_steps.json` (`research/oee/checks/rejudge.py`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
+> 1. Seat the brains of the two eras by a coin per agent on each era's world and play 100 iterations.
 > 2. Count the agents the later era's brains hold, as a share of all.
 > 3. A switch's main effect: the mean of the eight worlds with it on, minus the other eight.
 >
@@ -1034,7 +1034,7 @@ bar, the marks a healthy network must meet.
 <!-- figure switches/bar -->
 ![Each switch against the health bar](../figures/switches/bar.svg)
 
-**Each switch against the health bar.** One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *−rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
+**Each switch against the health bar.** One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are [the health bar](measuring-health.md#the-health-bar). *−rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *How each switch changes a world's life* above.
@@ -1262,7 +1262,7 @@ batch W plays the missing corner instead: the same rule *with* revolutions.
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
 > 2. Subtract the world with the rule alone from the world with both, seed by seed.
-> 3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.
+> 3. Seat the brains of the two eras by a coin per agent on each era's world, play 100 iterations, and count the agents the later brains hold.
 >
 > **To make it again:** `python3 book_figures.py norevcombos`.
 <!-- /figure -->
@@ -2145,7 +2145,7 @@ even when it makes no link. This batch does not tell which.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_K_T100.json` and `long_steps.json`.
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations (`research/oee/checks/rejudge.py`).
+> 1. Seat the brains of the two eras by a coin per agent on each era's world and play 100 iterations (`research/oee/checks/rejudge.py`).
 > 2. Count the agents the later era's brains hold, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py strangers`.
@@ -2609,7 +2609,7 @@ the others on this page. The batches reported outside the Archive are listed in
 - [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): the
   deaths that make the estate in B2.
 - [Room and riches for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world):
-  the estates played again, in the search for a [healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026 "A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.").
+  the estates played again, in the search for a healthy world.
 - [Every setting](settings.md#link_search): the three settings of the search,
   exactly.
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):

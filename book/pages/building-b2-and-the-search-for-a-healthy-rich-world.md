@@ -230,7 +230,7 @@ as starved (0.5%). In the median world with one hidden layer it removed 5.3%.
 <!-- figure seeing/health -->
 ![How the network holds](../figures/seeing/health.svg)
 
-**How the network holds.** One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md).
+**How the network holds.** One dot per world, at its median over iterations 200 to 1,500 while it lived; the bar is the median world and the dashed line [the health bar](measuring-health.md#the-health-bar).
 
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Agents alive* above.
@@ -374,7 +374,7 @@ seconds, and each set of rules below was run with ten seeds.
 <!-- figure unbreakable/space -->
 ![What the rules of space make, with no brains](../figures/unbreakable/space.svg)
 
-**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 links or more nor a newborn's random link to one (mending still links past the cap). The dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
+**What the rules of space make, with no brains.** Each column is one set of rules, each dot one world of about 1,500 agents after 300 iterations, the bar the median of ten. *parent*: a newborn is joined to its parent alone; *+2*: also to two of the parent's neighbours, drawn at random; *chain*: also, when an agent dies, the groups of its former neighbours that are not linked to one another are joined in a chain; *ring*: joined in a ring — B2's rules; *ring, 1* and *ring, 3*: the ring, with one or three of the parent's neighbours instead of two; *join all*: every former neighbour of the dead joined in a chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 links or more nor a newborn's random link to one (mending still links past the cap). The dashed lines are [the health bar](measuring-health.md#the-health-bar). Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
 > **Runs.** No runs: the worlds are made by the model itself, seeds 1 to 10 for every set of rules.
@@ -656,7 +656,7 @@ and the ball dimension was 3.45 to 4.19, 3.86 in the median world.
 <!-- figure unbreakable/bar -->
 ![Each rule against the health bar](../figures/unbreakable/bar.svg)
 
-**Each rule against the health bar.** One dot per world, at its median over iterations 200 to 1,000; the bar is the median world; dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *B2*: every rule; *no mending*: deaths not mended; *all lapse*: any unused link lapses; *no birth links*: a newborn joined to its parent alone; *no valence*: no cap on chosen links; *handover*: a parent may hand its links to its child.
+**Each rule against the health bar.** One dot per world, at its median over iterations 200 to 1,000; the bar is the median world; dashed lines are [the health bar](measuring-health.md#the-health-bar). *B2*: every rule; *no mending*: deaths not mended; *all lapse*: any unused link lapses; *no birth links*: a newborn joined to its parent alone; *no valence*: no cap on chosen links; *handover*: a parent may hand its links to its child.
 
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Agents cut off from iteration 200 to 1,000* above.
@@ -1055,7 +1055,7 @@ all where only the last token is kept (0.54) or nobody dies of age (0.52).
 >
 > **Data.** From each run's archive, `GraphOfLifeRuns/<run>/archive/` (`GraphOfLifeRuns/.pilots/lab_rejudge_T100.json`, `long_steps.json`).
 >
-> 1. Seat the brains of iteration 500 and of iteration 1,000 on alternate agents of each era's world and play it on for 100 iterations, the length of an agent's life (`research/oee/checks/rejudge.py`).
+> 1. Seat the brains of iteration 500 and of iteration 1,000 by a coin per agent on each era's world and play it on for 100 iterations, the length of an agent's life (`research/oee/checks/rejudge.py`).
 > 2. Count the agents the later era's brains hold at the end, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py whodies`.
@@ -1237,7 +1237,7 @@ top right corner.
 <!-- figure healthy/map -->
 ![Healthy, and diverse?](../figures/healthy/map.svg)
 
-**Healthy, and diverse?** Each dot is a world at its last checkpoint. Across: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets — one piece, a 2-core of at least 0.8, no agent whose loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways within each count only so that they do not hide each other). Up: how widely its agents spread over tokens, links, ages and genotypes, as the mean of its percentiles among all worlds. The author's picture of a world that might keep evolving is the top right. B1: B1 at every size and its variants (Experiments 2, 8, 10, 12, 13); brains fixed: Experiment 7; B2: B2 and its variants (Experiments 9, 14, 15, 16), except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pilots: the other pilot worlds, by the rule set they start from.
+**Healthy, and diverse?** Each dot is a world at its last checkpoint. Across: how many of the seven marks of [the health bar](measuring-health.md#the-health-bar) it meets — one piece, a 2-core of at least 0.8, no agent whose loss cuts off more than 2%, no link more than 1%, no agent joined to more than 5% of the others, 3 to 12 links per agent, a dimension of 2.3 to 4 (the dots are spread sideways within each count only so that they do not hide each other). Up: how widely its agents spread over tokens, links, ages and genotypes, as the mean of its percentiles among all worlds. The author's picture of a world that might keep evolving is the top right. B1: B1 at every size and its variants (Experiments 2, 8, 10, 12, 13); brains fixed: Experiment 7; B2: B2 and its variants (Experiments 9, 14, 15, 16), except lapse, where any unused link lapses; long runs: the pilot worlds played to 10,000 iterations; pilots: the other pilot worlds, by the rule set they start from.
 
 > [!example]- How to make this figure
 > **Runs.** Every world the notebook has made that settled (500 iterations or more), each once, at its last checkpoint: the lab's runs at their end, the pilot worlds at theirs, the long runs at 10,000 iterations; pilots that replay a lab world are counted as that world (`python3 research/atlas/profile.py`).
@@ -1828,7 +1828,7 @@ With the tokens fixed, a world's riches *are* its size. If 152 agents share
 <!-- figure mixedlong/verdict -->
 ![Experiment 17 at iteration 10,000](../figures/mixedlong/verdict.svg)
 
-**Experiment 17 at iteration 10,000.** Each dot is a world at its last checkpoint, read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world. Left: the share of its agents holding three tokens or fewer, B2's ten worlds at 10,000 iterations beside the mixed ones. Right: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each mixed world meets; the world that died out is read at its last checkpoint, with 20 agents.
+**Experiment 17 at iteration 10,000.** Each dot is a world at its last checkpoint, read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world. Left: the share of its agents holding three tokens or fewer, B2's ten worlds at 10,000 iterations beside the mixed ones. Right: how many of the seven marks of [the health bar](measuring-health.md#the-health-bar) each mixed world meets; the world that died out is read at its last checkpoint, with 20 agents.
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *Agents alive, world by world* above.
@@ -2033,7 +2033,7 @@ and meets every mark ([Who inherits?](what-the-switches-did-in-pilots.md#healthy
 >
 > **Data.** From each run's whole worlds every 500 iterations (`GraphOfLifeRuns/.pilots/e17_T100.json`, `long_steps.json`, `long_rejudge_T100.json`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play it on for 100 iterations, an agent's lifetime (`research/oee/checks/rejudge.py`).
+> 1. Seat the brains of the two eras by a coin per agent on each era's world and play it on for 100 iterations, an agent's lifetime (`research/oee/checks/rejudge.py`).
 > 2. Count the agents the later era's brains hold at the end, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py mixedlong`.
@@ -2177,7 +2177,7 @@ seed 6 ended alive with fewer than half its agents poor, at 43%.
 <!-- figure longmixed/health -->
 ![Health and riches, every 500 iterations](../figures/longmixed/health.svg)
 
-**Health and riches, every 500 iterations.** Each world read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world, from the whole worlds the lab kept every 500 iterations from 10,500 on, while it lived. Left: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar it meets (the dots of each world are set a little apart so that they do not hide each other). Right: the share of its agents holding three tokens or fewer.
+**Health and riches, every 500 iterations.** Each world read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world, from the whole worlds the lab kept every 500 iterations from 10,500 on, while it lived. Left: how many of the seven marks of [the health bar](measuring-health.md#the-health-bar) it meets (the dots of each world are set a little apart so that they do not hide each other). Right: the share of its agents holding three tokens or fewer.
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *Agents alive, world by world* above.
@@ -2241,7 +2241,7 @@ stopped replacing its dead.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/e18_T100.json` (`research/oee/checks/rejudge.py --seeds 17,18`).
 >
-> 1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations, an agent's lifetime.
+> 1. Seat the brains of the two moments by a coin per agent on each moment's world and play 100 iterations, an agent's lifetime.
 > 2. Count the agents the later moment's brains hold at the end, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py longmixed`.
@@ -2508,8 +2508,8 @@ little by it.
 
 It can even reward the reluctance that ends a world. To see whether brains
 still improve, the notebook plays a **lifetime contest**. The brains of two
-moments of a world, two eras, are seated on alternate agents and played for
-100 iterations, an agent's lifetime. If the later brains then hold more than
+moments of a world, two eras, are dealt to its agents by a coin each and played
+for 100 iterations, an agent's lifetime. If the later brains then hold more than
 half of the world, they are the better ones.
 
 In one of the worlds that died, the brains of its last good years beat those
@@ -2904,7 +2904,7 @@ agents breed sets how full a world becomes, and a full world is a poor one.
 >
 > **Data.** From each run's whole worlds (`GraphOfLifeRuns/.pilots/e19_T100.json` and `e17_T100.json`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play it on for 100 iterations (`research/oee/checks/rejudge.py`).
+> 1. Seat the brains of the two eras by a coin per agent on each era's world and play it on for 100 iterations (`research/oee/checks/rejudge.py`).
 > 2. Count the agents the later era's brains hold at the end, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py mixparents`.
@@ -2912,7 +2912,7 @@ agents breed sets how full a world becomes, and a full world is a poor one.
 
 **Evolution goes on, as it did with any mate.** To see whether brains still
 improve, the brains of a later era meet those of an earlier one. They are
-seated on alternate agents of a world and played for a lifetime, 100
+dealt to the agents of a world by a coin each and played for a lifetime, 100
 iterations. If the later brains then hold more than half the world, they are
 better. The brains of 1,000 beat those of 500 in every world (a median of
 0.78 of a contested world, against 0.84 with any mate). Those of 5,000 beat
@@ -2926,7 +2926,7 @@ Evolution is slowing, but not stopping.
 <!-- figure mixparents/verdict -->
 ![Experiment 19 at iteration 20,000](../figures/mixparents/verdict.svg)
 
-**Experiment 19 at iteration 20,000.** Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of its agents holding three tokens or fewer; the thesis asked that the median of the ten be below 0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each world meets.
+**Experiment 19 at iteration 20,000.** Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of its agents holding three tokens or fewer; the thesis asked that the median of the ten be below 0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of [the health bar](measuring-health.md#the-health-bar) each world meets.
 
 > [!example]- How to make this figure
 > **Runs.** As for the figure *Agents alive, world by world* above.
@@ -3391,8 +3391,8 @@ ones; the large poor ones are not.
 #### Does evolution go on? (the candidates)
 Are the brains still getting better after thousands of iterations? A
 contest tells. Take a world's brains at two moments, say iterations 500 and
-1,000. Seat them on alternate agents of the world as it was at one of those
-moments, and play 100 iterations. That is about a lifetime: in B2 every
+1,000. Deal them to the agents of the world as it was at one of those
+moments, by a coin for each agent, and play 100 iterations. That is about a lifetime: in B2 every
 agent dies by age 100. Then count the share of agents the later brains hold. Above one half, the later brains are
 the better players. Each world plays two such contests, one in each
 moment's world, and the figure shows their mean.
@@ -3407,7 +3407,7 @@ moment's world, and the figure shows their mean.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/lc_T100.json` (`research/oee/checks/lc_rejudge_worlds.txt`), the batches' own contests for 1,000/500, and `e17_T100.json`.
 >
-> 1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations (`research/oee/checks/rejudge.py`).
+> 1. Seat the brains of the two moments by a coin per agent on each moment's world and play 100 iterations (`research/oee/checks/rejudge.py`).
 > 2. Count the agents the later moment's brains hold, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py candidates`.
@@ -3560,7 +3560,7 @@ the small ones ([What folds a world](how-many-dimensions-does-a-world-have.md#wh
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/e21_T100.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`, `research/oee/checks/e20_e21_rejudge_worlds.txt`).
 >
-> 1. Seat the brains of the two moments on alternate agents of each moment's world and play 100 iterations.
+> 1. Seat the brains of the two moments by a coin per agent on each moment's world and play 100 iterations.
 > 2. Count the agents the later moment's brains hold, as a share of all.
 >
 > **To make it again:** `python3 book_figures.py fiveseeds`.

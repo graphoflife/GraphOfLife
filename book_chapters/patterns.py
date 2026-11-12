@@ -277,7 +277,7 @@ def patterns(ch: F.Chapter) -> None:
             title="Where the tokens go",
             caption=("One dot per world, the bar the median. The tokens each connection carried, net, over "
                      "50 games, split into the part that runs downhill and the part that goes round loops "
-                     "(the note *Flows that go round*). Top: how much more of the flow goes round than if "
+                     "([Flows that go round](measuring-tokens.md#flows-that-go-round)). Top: how much more of the flow goes round than if "
                      "each connection's net flow had a random direction; above zero it goes round, below "
                      "it runs downhill. Gifts are stakes that did not take their target, takeovers stakes "
                      "that did. Bottom: how much of each part comes back on the same connections in the "
@@ -337,7 +337,7 @@ def patterns(ch: F.Chapter) -> None:
             _panel("Help to clones", "share ÷ the clones' share (logarithmic)", kin, 1, log=True, min=0.3, max=10)],
             title="Who helps whom",
             caption=("One dot per world, the bar the median. A stake on a neighbour's node helps if, without "
-                     "it, the neighbour would have been less likely to keep its node (the note *Help*). Top "
+                     "it, the neighbour would have been less likely to keep its node ([Help](cooperation-help-and-gliders.md#help)). Top "
                      "left: the nodes so saved, counted as the sum of those effects, per 100 agents and "
                      "game; the pilots without alliances, in which no stake can help, are drawn at 0.001. "
                      "Top right: the pairs in which help went both ways within a stretch of 50 games, "

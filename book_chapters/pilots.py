@@ -25,6 +25,7 @@ import numpy as np
 import book_figures as F
 from book_figures import chapter, recipe
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET
+from book_chapters.oee import HEALTH_BAR
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PILOTS = os.path.join(ROOT, "GraphOfLifeRuns", ".pilots")
@@ -486,7 +487,7 @@ def switches(ch: F.Chapter) -> None:
     worlds_short = {short[l]: worlds[l] for l in labels}
     _bar_grid(ch, "bar", list(short.values()), worlds_short, "Each switch against the health bar",
               ("One dot per world, at its median over iterations 500 to 1,000; the bar is the median of "
-               "the two; dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *−rev*: no revolutions; "
+               f"the two; dashed lines are {HEALTH_BAR}. *−rev*: no revolutions; "
                "*gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; "
                "*by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share "
                "are drawn on logarithmic axes, a cut of nothing at 0.0001."),

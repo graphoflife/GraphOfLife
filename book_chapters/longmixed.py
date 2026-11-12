@@ -26,6 +26,7 @@ import numpy as np
 import book_figures as F
 from book_figures import chapter, recipe
 from book_chapters.common import BLUE, GREEN, ORANGE, RED, VIOLET
+from book_chapters.oee import HEALTH_BAR
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUNS_DIR = os.path.join(ROOT, "GraphOfLifeRuns")
@@ -114,8 +115,8 @@ def longmixed(ch: F.Chapter) -> None:
              "guides": [{"axis": "y", "at": 0.5, "label": "half"}]}],
             columns=2, title="Health and riches, every 500 iterations",
             caption=("Each world read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world, from the whole worlds the lab kept every 500 "
-                     "iterations from 10,500 on, while it lived. Left: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s "
-                     "health bar it meets (the dots of each world are set a little apart so that they do not hide each other). "
+                     "iterations from 10,500 on, while it lived. Left: how many of the seven marks of "
+                     f"{HEALTH_BAR} it meets (the dots of each world are set a little apart so that they do not hide each other). "
                      "Right: the share of its agents holding three tokens or fewer."),
             recipe=recipe(RUNS, "Each run's `archive/world_<iteration>.npz` "
                                 "(`research/oee/checks/e17_health.py --seeds 2,4,5,6,10 --from 10500 --to 50000`)",
@@ -193,6 +194,6 @@ def longmixed(ch: F.Chapter) -> None:
                          "iterations before."),
                 recipe=recipe(RUNS, "`GraphOfLifeRuns/.pilots/e18_T100.json` "
                                     "(`research/oee/checks/rejudge.py --seeds 17,18`)",
-                              ["Seat the brains of the two moments on alternate agents of each moment's world "
+                              ["Seat the brains of the two moments by a coin per agent on each moment's world "
                                "and play 100 iterations, an agent's lifetime.",
                                "Count the agents the later moment's brains hold at the end, as a share of all."]))

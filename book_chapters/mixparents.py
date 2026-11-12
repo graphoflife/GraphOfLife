@@ -27,6 +27,7 @@ import numpy as np
 import book_figures as F
 from book_figures import chapter, recipe
 from book_chapters.common import GREY, ORANGE, VIOLET
+from book_chapters.oee import HEALTH_BAR
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUNS_DIR = os.path.join(ROOT, "GraphOfLifeRuns")
@@ -145,7 +146,7 @@ def mixparents(ch: F.Chapter) -> None:
         caption=("Each dot is a world at iteration 20,000, read from the whole world kept then. Left: the share of "
                  "its agents holding three tokens or fewer; the thesis asked that the median of the ten be below "
                  "0.66, the least of B2's ten worlds at 10,000 iterations. Right: how many of the seven marks of "
-                 "[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each world meets."),
+                 f"{HEALTH_BAR} each world meets."),
         recipe=recipe(RUNS, "each run's whole world kept at 20,000 (`archive/world_020000.npz`) and "
                             "`GraphOfLifeRuns/.pilots/e19_health.json` (`research/oee/checks/e17_health.py --family "
                             "B2-10000-bcc1bc`)",
@@ -219,7 +220,7 @@ def mixparents(ch: F.Chapter) -> None:
                            "500. Orange: Experiment 19; grey: Experiment 17, any neighbour a mate."),
                   recipe=recipe(RUNS, "each run's whole worlds (`GraphOfLifeRuns/.pilots/e19_T100.json` and "
                                       "`e17_T100.json`)",
-                                ["Seat the brains of the two eras on alternate agents of each era's world and play "
+                                ["Seat the brains of the two eras by a coin per agent on each era's world and play "
                                  "it on for 100 iterations (`research/oee/checks/rejudge.py`).",
                                  "Count the agents the later era's brains hold at the end, as a share of all."]))
         ch.number("evolution", {label: {"parents": [round(v, 3) for v in parents_contests.get(pair, {}).values()],

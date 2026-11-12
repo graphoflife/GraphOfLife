@@ -32,6 +32,7 @@ import numpy as np
 import book_figures as F
 from book_figures import chapter, recipe
 from book_chapters.common import BLUE, GREY, ORANGE
+from book_chapters.oee import HEALTH_BAR
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUNS_DIR = os.path.join(ROOT, "GraphOfLifeRuns")
@@ -154,7 +155,7 @@ def mixedlong(ch: F.Chapter) -> None:
         columns=2, title="Experiment 17 at iteration 10,000",
         caption=("Each dot is a world at its last checkpoint, read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world. Left: the share of "
                  "its agents holding three tokens or fewer, B2's ten worlds at 10,000 iterations beside the mixed "
-                 "ones. Right: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s health bar each mixed world meets; the "
+                 f"ones. Right: how many of the seven marks of {HEALTH_BAR} each mixed world meets; the "
                  "world that died out is read at its last checkpoint, with 20 agents."),
         recipe=recipe(RUNS, "Each run's last checkpoint (`checkpoint.npz`; B2's continuations' `ckpt_010000.npz`) "
                             "(`GraphOfLifeRuns/.pilots/e17_profile.json`)",
@@ -315,7 +316,7 @@ def mixedlong(ch: F.Chapter) -> None:
                        "against 500, three of their continuations for the later pairs."),
               recipe=recipe(RUNS, "Each run's whole worlds every 500 iterations (`GraphOfLifeRuns/.pilots/"
                                   "e17_T100.json`, `long_steps.json`, `long_rejudge_T100.json`)",
-                            ["Seat the brains of the two eras on alternate agents of each era's world and play it on "
+                            ["Seat the brains of the two eras by a coin per agent on each era's world and play it on "
                              "for 100 iterations, an agent's lifetime (`research/oee/checks/rejudge.py`).",
                              "Count the agents the later era's brains hold at the end, as a share of all."]))
     ch.number("evolution", {label: {"mixed": float(np.median(m)) if m else None, "mixed_worlds": len(m),

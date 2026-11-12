@@ -204,6 +204,8 @@ BAR = (("coreShare", "agents in the 2-core", 0.8, None),
        ("maxDegree/nodes", "best-connected agent's links per agent", None, 0.05),
        ("meanDegree", "connections per agent", 3.0, 12.0),
        ("dimension", "ball dimension", 2.3, 4.0))
+#: Where a caption links the health bar: its home, Measuring health.
+HEALTH_BAR = "[the health bar](measuring-health.md#the-health-bar)"
 
 
 def settled_median(run_id: str, stat: str, start: int, stop: int, phase: int = 2) -> float:
@@ -286,8 +288,8 @@ def seeing(ch: F.Chapter) -> None:
         panels.append(dots(stat, E13_CONDITIONS, values, title=words, y=y, guides=guides))
     ch.grid("health", panels, columns=1, title="How the network holds",
             caption=("One dot per world, at its median over iterations "
-                     "200 to 1,500 while it lived; the bar is the median world and the dashed line the "
-                     "health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)."),
+                     "200 to 1,500 while it lived; the bar is the median world and the dashed line "
+                     f"{HEALTH_BAR}."),
             recipe=recipe(E13_RUNS, F.STATS_FILE, [
                 "Take `coreShare`, `cutRisk` and `maxDegree` / `nodes` of the rows with `phase` = 2 "
                 "and 200 ≤ `iteration` ≤ 1,500, and each world's median of each."]))
@@ -584,7 +586,7 @@ def space_alone(ch: F.Chapter) -> None:
                      "chain, linked or not; *ring, ≤ 8*: B2's rules, and no child for an agent of 8 "
                      "links or more nor a newborn's random link to one (mending still links past the "
                      "cap). The "
-                     "dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). Cut shares and the "
+                     f"dashed lines are {HEALTH_BAR}. Cut shares and the "
                      "best-connected agent's share are drawn on logarithmic axes, a cut of nothing "
                      "at 0.0001."),
             recipe=recipe("No runs: the worlds are made by the model itself, seeds 1 to 10 for every "
@@ -686,8 +688,8 @@ def unbreakable(ch: F.Chapter) -> None:
                            y={"label": words, "min": 0}, guides=guides))
     ch.grid("bar", panels, columns=2, title="Each rule against the health bar",
             caption=("One dot per world, at its median over "
-                     "iterations 200 to 1,000; the bar is the median world; dashed lines are the "
-                     "health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *B2*: every rule; *no mending*: deaths not mended; "
+                     "iterations 200 to 1,000; the bar is the median world; dashed lines are "
+                     f"{HEALTH_BAR}. *B2*: every rule; *no mending*: deaths not mended; "
                      "*all lapse*: any unused link lapses; *no birth links*: a newborn joined to its "
                      "parent alone; *no valence*: no cap on chosen links; *handover*: a parent may "
                      "hand its links to its child."),

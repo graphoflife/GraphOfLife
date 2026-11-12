@@ -1005,7 +1005,7 @@
   "evolution": {
    "title": "Do the brains of 1,000 beat those of 500?",
    "caption": "Each dot is a world of batch Y: the share of a contested world its brains of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, one in each era's world; the bars are the medians, the rules in the order of the figures above. The dashed lines are the medians of B2's ten lab worlds and of the ten mixed worlds of Experiment 17, played the same way.",
-   "recipe": "**Runs.** Batch Y's pilot worlds (`GraphOfLifeRuns/.pilots/Y/`); B2: Experiment 16's ten runs; mixing alone: the ten mixed worlds of Experiment 17.\n\n**Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `rejudge_T100.json`, `long_steps.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`).\n\n1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.\n2. Count the agents the later era's brains hold, as a share of all.\n\n**To make it again:** `python3 book_figures.py mixcombos`."
+   "recipe": "**Runs.** Batch Y's pilot worlds (`GraphOfLifeRuns/.pilots/Y/`); B2: Experiment 16's ten runs; mixing alone: the ten mixed worlds of Experiment 17.\n\n**Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `rejudge_T100.json`, `long_steps.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`).\n\n1. Seat the brains of the two eras by a coin per agent on each era's world and play 100 iterations.\n2. Count the agents the later era's brains hold, as a share of all.\n\n**To make it again:** `python3 book_figures.py mixcombos`."
   }
  }
 }

@@ -184,7 +184,7 @@ def eightswitches(ch: F.Chapter) -> None:
                      "B2 worlds (one standard deviation), twice the noise of a main effect."),
             recipe=recipe(RUNS, "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and, for B2, `long_steps.json` "
                                 "(`research/oee/checks/rejudge.py`)",
-                          ["Seat the brains of the two eras on alternate agents of each era's world and play 100 "
+                          ["Seat the brains of the two eras by a coin per agent on each era's world and play 100 "
                            "iterations.", "Count the agents the later era's brains hold, as a share of all.",
                            "A switch's main effect: the mean of the eight worlds with it on, minus the other eight."]))
 
@@ -291,6 +291,6 @@ def _b1_screen(ch: F.Chapter, measured: Dict[str, Dict[str, Any]]) -> None:
                           "worlds of 5,000 tokens (Experiment 12, `B1-5000-s001` … `-s010`).",
                           "`GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `batch_TUVWX4_T100.json`, "
                           "`batch_TUVWX5_T100.json` and `rejudge_T100.json` (`research/oee/checks/rejudge.py`)",
-                          ["Seat the brains of the two eras on alternate agents of each era's world and play 100 "
+                          ["Seat the brains of the two eras by a coin per agent on each era's world and play 100 "
                            "iterations.", "Count the agents the later era's brains hold, as a share of all.",
                            "A switch's main effect: the mean of the worlds with it on, minus those with it off."]))

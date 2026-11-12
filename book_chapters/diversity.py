@@ -91,7 +91,7 @@ def diversity(ch: F.Chapter) -> None:
                           "B1 worlds of Experiment 2 at the end of their 3,000 iterations.",
                           f"`GraphOfLifeRuns/.pilots/diversity/B2.json` and `B1.json` (`{CHECK}`)",
                           METHOD + ["Split each decision's variance over brains, situations and draws into the "
-                                    "four parts (the note *Where, who and chance*); take the median over worlds."]))
+                                    "four parts ([Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance)); take the median over worlds."]))
 
     # 2. Two agents in the same spot, over a world's life.
     times = sorted({_at(w) for w in b2["worlds"] if _at(w) is not None})
