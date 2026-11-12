@@ -31,27 +31,9 @@ exactly as a new run is offered it. The study of the baseline, and the
 experiments that change one setting at a time, read it. **B2** is the world
 built for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), built so that its network cannot break apart
 ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
-They differ in these settings, and in no other:
-
-<!-- table catalogue/baselines -->
-| setting | B1 | B2 | what it is |
-|---|---|---|---|
-| [`hidden_layers`](settings.md#hidden_layers) | 50, 45, 40, 35, 30 | 16 | The widths of the brain's hidden layers, in order from input to output. |
-| [`message_amount`](settings.md#message_amount) | 30 | 8 | How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase. |
-| [`message_prepass`](settings.md#message_prepass) | on | off | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
-| [`allow_handover`](settings.md#allow_handover) | on | off | Whether a parent may move some of its own connections to its newborn child. |
-| [`mutate_on_replication`](settings.md#mutate_on_replication) | off | on | Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits. |
-| [`incumbency`](settings.md#incumbency) | 1.0 | 1.5 | How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule. |
-| [`birth_links`](settings.md#birth_links) | 0 | 2 | How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice. |
-| [`mend_on_death`](settings.md#mend_on_death) | off | on | Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces. |
-| [`prune_needs`](settings.md#prune_needs) | 0 | 2 | How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection. |
-| [`valence`](settings.md#valence) | 0 | 8 | The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child. |
-| [`keep_home`](settings.md#keep_home) | 0.0 | 0.3 | The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule. |
-| [`max_age`](settings.md#max_age) | 0 | 100 | The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent. |
-| [`min_child`](settings.md#min_child) | 1 | 10 | The fewest tokens a child can be born with; a parent that would give less has no child. |
-<!-- /table -->
-Every other setting, and what each one means, is in
-[Every setting](settings.md).
+They differ in a few settings, listed in
+[B2: a world that cannot break](b1-and-b2.md#b2-a-world-that-cannot-break).
+Every setting, and what each one means, is in [Every setting](settings.md).
 
 ## The lab's experiments
 
@@ -161,7 +143,11 @@ stopped at 12,000.
 ## Every pilot condition
 
 What each condition changes, against the rule set it starts from: the
-settings that differ from B1 or B2, and the prototype's own switches.
+settings that differ from B1 or B2, and the prototype's own switches. The
+table holds the batches reported outside the Archive. The conditions of the
+batches the Archive reports (K, LC, M, Q, R, S, SW, T, U, V, W, X, Y and Z)
+are in
+[Every condition of the archived batches](what-the-switches-did-in-pilots.md#every-condition-of-the-archived-batches).
 
 <!-- table catalogue/pilot_conditions -->
 | batch | condition | on | what it changes | seeds | iterations |
@@ -180,19 +166,6 @@ settings that differ from B1 or B2, and the prototype's own switches.
 | N | B3b | B1 (the prototype's own code) | allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_allies = on, memory = on, mor = all, repair = on | 1, 2 | 1,000 |
 | N | B3c | B1 (the prototype's own code) | allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, memory = on, mor = all, repair = on | 1, 2 | 1,000 |
 | N | N0 | B1 (the prototype's own code) | allow_handover = off, allow_revolutions = off, hidden_layers = 16, message_amount = 8, message_prepass = off, allies = on, birth_links = 2, incumbency = 1.0, keep_frac = 0.3, max_age = 100, memory = on, min_child = 10, mor = all, repair = on, safe_prune = 2, valence = 8, valence_mode = optional | 1, 2 | 1,000 |
-| S | G1-lottery | B2 | allow_revolutions = off, contest = lottery | 1, 2 | 1,000 |
-| S | G2-genotype | B2 | allow_revolutions = off, pool = genotype | 1, 2 | 1,000 |
-| S | G3-kinsense | B2 | allow_revolutions = off, kin_sense = on | 1, 2 | 1,000 |
-| S | G4-familysense | B2 | allow_revolutions = off, kin_sense = on, tag_rate = 0.05 | 1, 2 | 1,000 |
-| S | G5-familypool | B2 | allow_revolutions = off, pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
-| S | S0-B2 | B2 | nothing: B2 itself | 1, 2 | 1,000 |
-| S | S1-norev | B2 | allow_revolutions = off | 1, 2 | 1,000 |
-| S | S2-gifts | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
-| S | S3-giftslapse | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, prune_needs = 0 | 1, 2 | 1,000 |
-| S | S4-lapse | B2 | prune_needs = 0 | 1, 2 | 1,000 |
-| S | S5-bytokens | B2 | redistribution = by_tokens | 1, 2 | 1,000 |
-| S | S6-B1 | B1 | nothing: B1 itself | 1, 2 | 1,000 |
-| S | S7-B1norev | B1 | allow_revolutions = off | 1, 2 | 1,000 |
 | L | B1-long | B1 | nothing: B1 itself | 1, 2 | 10,000 |
 | L | B1norev-long | B1 | allow_revolutions = off | 3 | 3,000 |
 | L | B2-long | B2 | nothing: B2 itself | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 | 50,000 |
@@ -202,192 +175,6 @@ settings that differ from B1 or B2, and the prototype's own switches.
 | P | helped | B2 | helped_by = on | 1, 2 | 2,000 |
 | P | linkseek | B2 | valence = 0, link_token = on, seek = on, seek_max = 0, toll = path | 1, 2 | 2,000 |
 | P | linktoken | B2 | valence = 0, link_token = on | 1, 2 | 2,000 |
-| Q | grow | B2 | brain_kind = grow, hidden_layers = 32 | 1, 2 | 2,000 |
-| Q | linknoage | B2 | max_age = 0, valence = 0, link_token = on | 1, 2 | 2,000 |
-| Q | mix | B2 | mix = on | 1, 2 | 2,000 |
-| Q | tookkin | B2 | took_kin = on | 1, 2 | 2,000 |
-| Q | unittoken | B2 | brain_kind = grow, hidden_layers = 32, unit_token = on | 1, 2 | 2,000 |
-| R | B1-children | B1 | redistribution = children | 1, 2 | 2,000 |
-| R | B1-newborns | B1 | redistribution = newborns | 1, 2 | 2,000 |
-| R | B1-parents | B1 | redistribution = parents | 1, 2 | 2,000 |
-| R | B1-poorest | B1 | redistribution = poorest | 1, 2 | 2,000 |
-| R | B2-buylife | B2 | buy_life = on | 1, 2 | 2,000 |
-| R | B2-children | B2 | redistribution = children | 1, 2 | 2,000 |
-| R | B2-newborns | B2 | redistribution = newborns | 1, 2 | 2,000 |
-| R | B2-parents | B2 | redistribution = parents | 1, 2 | 2,000 |
-| R | B2-poorest | B2 | redistribution = poorest | 1, 2 | 2,000 |
-| T | gifts-B1 | B1 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-B1norev | B1 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-anychild | B2 | allow_gifting = on, inactive_window = iteration, min_child = 1, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-bytokens | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = by_tokens | 1, 2 | 1,000 |
-| T | gifts-came | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, came_from = on | 1, 2 | 1,000 |
-| T | gifts-grow | B2 | allow_gifting = on, brain_kind = grow, hidden_layers = 32, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-handover | B2 | allow_gifting = on, allow_handover = on, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-helped | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, helped_by = on | 1, 2 | 1,000 |
-| T | gifts-keephalf | B2 | allow_gifting = on, inactive_window = iteration, keep_home = 0.5, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-keepone | B2 | allow_gifting = on, inactive_window = iteration, keep_home = 0.01, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-linktoken | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, valence = 0, link_token = on | 1, 2 | 1,000 |
-| T | gifts-lottery | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, contest = lottery | 1, 2 | 1,000 |
-| T | gifts-mix | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, mix = on | 1, 2 | 1,000 |
-| T | gifts-mut05 | B2 | allow_gifting = on, inactive_window = iteration, mutation_probability = 0.05, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-mut80 | B2 | allow_gifting = on, inactive_window = iteration, mutation_probability = 0.8, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-newborns | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = newborns | 1, 2 | 1,000 |
-| T | gifts-noage | B2 | allow_gifting = on, inactive_window = iteration, max_age = 0, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-nodice | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0 | 1, 2 | 1,000 |
-| T | gifts-norev | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
-| T | gifts-parents | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = parents | 1, 2 | 1,000 |
-| T | gifts-pool | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, pool = genotype | 1, 2 | 1,000 |
-| T | gifts-poorest | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = poorest | 1, 2 | 1,000 |
-| T | gifts-unittoken | B2 | allow_gifting = on, brain_kind = grow, hidden_layers = 32, inactive_window = iteration, prune_after = reproduction, unit_token = on | 1, 2 | 1,000 |
-| T | handover | B2 | allow_handover = on | 1, 2 | 1,000 |
-| U | U-ABCDEFGH | B2 | allow_gifting = on, allow_handover = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, random_input_amount = 0, redistribution = newborns, valence = 0, link_token = on, mix = on | 1 | 1,000 |
-| U | U-ABCG | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, mix = on | 1 | 1,000 |
-| U | U-ABDH | B2 | allow_gifting = on, allow_handover = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0 | 1 | 1,000 |
-| U | U-ABEF | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, redistribution = newborns, valence = 0, link_token = on | 1 | 1,000 |
-| U | U-ACDF | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, random_input_amount = 0, valence = 0, link_token = on | 1 | 1,000 |
-| U | U-ACEH | B2 | allow_gifting = on, allow_handover = on, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, redistribution = newborns | 1 | 1,000 |
-| U | U-ADEG | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0, redistribution = newborns, mix = on | 1 | 1,000 |
-| U | U-AFGH | B2 | allow_gifting = on, allow_handover = on, inactive_window = iteration, prune_after = reproduction, valence = 0, link_token = on, mix = on | 1 | 1,000 |
-| U | U-BCDE | B2 | allow_revolutions = off, prune_needs = 0, random_input_amount = 0, redistribution = newborns | 1 | 1,000 |
-| U | U-BCFH | B2 | allow_handover = on, allow_revolutions = off, prune_needs = 0, valence = 0, link_token = on | 1 | 1,000 |
-| U | U-BDFG | B2 | allow_revolutions = off, random_input_amount = 0, valence = 0, link_token = on, mix = on | 1 | 1,000 |
-| U | U-BEGH | B2 | allow_handover = on, allow_revolutions = off, redistribution = newborns, mix = on | 1 | 1,000 |
-| U | U-CDGH | B2 | allow_handover = on, prune_needs = 0, random_input_amount = 0, mix = on | 1 | 1,000 |
-| U | U-CEFG | B2 | prune_needs = 0, redistribution = newborns, valence = 0, link_token = on, mix = on | 1 | 1,000 |
-| U | U-DEFH | B2 | allow_handover = on, random_input_amount = 0, redistribution = newborns, valence = 0, link_token = on | 1 | 1,000 |
-| U | U-none | B2 | nothing: B2 itself | 1 | 1,000 |
-| V | V-ABCDEFGH | B1 | allow_gifting = on, allow_handover = off, allow_revolutions = off, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, random_input_amount = 0, redistribution = newborns, link_token = on, mix = on | 1 | 1,000 |
-| V | V-ABCG | B1 | allow_gifting = on, allow_handover = off, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, mix = on | 1 | 1,000 |
-| V | V-ABDH | B1 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0, link_token = on | 1 | 1,000 |
-| V | V-ABEF | B1 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, redistribution = newborns | 1 | 1,000 |
-| V | V-ACDF | B1 | allow_gifting = on, allow_handover = off, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, random_input_amount = 0 | 1 | 1,000 |
-| V | V-ACEH | B1 | allow_gifting = on, allow_handover = off, inactive_window = iteration, prune_after = reproduction, redistribution = newborns, link_token = on | 1 | 1,000 |
-| V | V-ADEG | B1 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0, redistribution = newborns, mix = on | 1 | 1,000 |
-| V | V-AFGH | B1 | allow_gifting = on, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, link_token = on, mix = on | 1 | 1,000 |
-| V | V-BCDE | B1 | allow_handover = off, allow_revolutions = off, random_input_amount = 0, redistribution = newborns | 1 | 1,000 |
-| V | V-BCFH | B1 | allow_handover = off, allow_revolutions = off, mutate_on_replication = on, link_token = on | 1 | 1,000 |
-| V | V-BDFG | B1 | allow_revolutions = off, mutate_on_replication = on, random_input_amount = 0, mix = on | 1 | 1,000 |
-| V | V-BEGH | B1 | allow_revolutions = off, redistribution = newborns, link_token = on, mix = on | 1 | 1,000 |
-| V | V-CDGH | B1 | allow_handover = off, random_input_amount = 0, link_token = on, mix = on | 1 | 1,000 |
-| V | V-CEFG | B1 | allow_handover = off, mutate_on_replication = on, redistribution = newborns, mix = on | 1 | 1,000 |
-| V | V-DEFH | B1 | mutate_on_replication = on, random_input_amount = 0, redistribution = newborns, link_token = on | 1 | 1,000 |
-| V | V-none | B1 | nothing: B1 itself | 1 | 1,000 |
-| W | norev-anychild | B2 | allow_revolutions = off, min_child = 1 | 1, 2 | 1,000 |
-| W | norev-bytokens | B2 | allow_revolutions = off, redistribution = by_tokens | 1, 2 | 1,000 |
-| W | norev-came | B2 | allow_revolutions = off, came_from = on | 1, 2 | 1,000 |
-| W | norev-grow | B2 | allow_revolutions = off, brain_kind = grow, hidden_layers = 32 | 1, 2 | 1,000 |
-| W | norev-handover | B2 | allow_handover = on, allow_revolutions = off | 1, 2 | 1,000 |
-| W | norev-helped | B2 | allow_revolutions = off, helped_by = on | 1, 2 | 1,000 |
-| W | norev-keephalf | B2 | allow_revolutions = off, keep_home = 0.5 | 1, 2 | 1,000 |
-| W | norev-keepone | B2 | allow_revolutions = off, keep_home = 0.01 | 1, 2 | 1,000 |
-| W | norev-lapse | B2 | allow_revolutions = off, prune_needs = 0 | 1, 2 | 1,000 |
-| W | norev-linktoken | B2 | allow_revolutions = off, valence = 0, link_token = on | 1, 2 | 1,000 |
-| W | norev-mix | B2 | allow_revolutions = off, mix = on | 1, 2 | 1,000 |
-| W | norev-mut05 | B2 | allow_revolutions = off, mutation_probability = 0.05 | 1, 2 | 1,000 |
-| W | norev-mut80 | B2 | allow_revolutions = off, mutation_probability = 0.8 | 1, 2 | 1,000 |
-| W | norev-newborns | B2 | allow_revolutions = off, redistribution = newborns | 1, 2 | 1,000 |
-| W | norev-noage | B2 | allow_revolutions = off, max_age = 0 | 1, 2 | 1,000 |
-| W | norev-nodice | B2 | allow_revolutions = off, random_input_amount = 0 | 1, 2 | 1,000 |
-| W | norev-parents | B2 | allow_revolutions = off, redistribution = parents | 1, 2 | 1,000 |
-| W | norev-poorest | B2 | allow_revolutions = off, redistribution = poorest | 1, 2 | 1,000 |
-| W | norev-unittoken | B2 | allow_revolutions = off, brain_kind = grow, hidden_layers = 32, unit_token = on | 1, 2 | 1,000 |
-| W | rev-familypool | B2 | pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
-| W | rev-familysense | B2 | kin_sense = on, tag_rate = 0.05 | 1, 2 | 1,000 |
-| W | rev-kinsense | B2 | kin_sense = on | 1, 2 | 1,000 |
-| W | rev-lottery | B2 | contest = lottery | 1, 2 | 1,000 |
-| W | rev-pool | B2 | pool = genotype | 1, 2 | 1,000 |
-| X | handover-anychild | B2 | allow_handover = on, min_child = 1 | 1, 2 | 1,000 |
-| X | handover-bytokens | B2 | allow_handover = on, redistribution = by_tokens | 1, 2 | 1,000 |
-| X | handover-came | B2 | allow_handover = on, came_from = on | 1, 2 | 1,000 |
-| X | handover-familypool | B2 | allow_handover = on, pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
-| X | handover-familysense | B2 | allow_handover = on, kin_sense = on, tag_rate = 0.05 | 1, 2 | 1,000 |
-| X | handover-grow | B2 | allow_handover = on, brain_kind = grow, hidden_layers = 32 | 1, 2 | 1,000 |
-| X | handover-helped | B2 | allow_handover = on, helped_by = on | 1, 2 | 1,000 |
-| X | handover-keephalf | B2 | allow_handover = on, keep_home = 0.5 | 1, 2 | 1,000 |
-| X | handover-keepone | B2 | allow_handover = on, keep_home = 0.01 | 1, 2 | 1,000 |
-| X | handover-kinsense | B2 | allow_handover = on, kin_sense = on | 1, 2 | 1,000 |
-| X | handover-lapse | B2 | allow_handover = on, prune_needs = 0 | 1, 2 | 1,000 |
-| X | handover-linktoken | B2 | allow_handover = on, valence = 0, link_token = on | 1, 2 | 1,000 |
-| X | handover-lottery | B2 | allow_handover = on, contest = lottery | 1, 2 | 1,000 |
-| X | handover-mix | B2 | allow_handover = on, mix = on | 1, 2 | 1,000 |
-| X | handover-mut05 | B2 | allow_handover = on, mutation_probability = 0.05 | 1, 2 | 1,000 |
-| X | handover-mut80 | B2 | allow_handover = on, mutation_probability = 0.8 | 1, 2 | 1,000 |
-| X | handover-newborns | B2 | allow_handover = on, redistribution = newborns | 1, 2 | 1,000 |
-| X | handover-noage | B2 | allow_handover = on, max_age = 0 | 1, 2 | 1,000 |
-| X | handover-nodice | B2 | allow_handover = on, random_input_amount = 0 | 1, 2 | 1,000 |
-| X | handover-parents | B2 | allow_handover = on, redistribution = parents | 1, 2 | 1,000 |
-| X | handover-pool | B2 | allow_handover = on, pool = genotype | 1, 2 | 1,000 |
-| X | handover-poorest | B2 | allow_handover = on, redistribution = poorest | 1, 2 | 1,000 |
-| X | handover-unittoken | B2 | allow_handover = on, brain_kind = grow, hidden_layers = 32, unit_token = on | 1, 2 | 1,000 |
-| Y | mix-anychild | B2 | min_child = 1, mix = on | 1, 2 | 1,000 |
-| Y | mix-bytokens | B2 | redistribution = by_tokens, mix = on | 1, 2 | 1,000 |
-| Y | mix-came | B2 | came_from = on, mix = on | 1, 2 | 1,000 |
-| Y | mix-familypool | B2 | mix = on, pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
-| Y | mix-familysense | B2 | kin_sense = on, mix = on, tag_rate = 0.05 | 1, 2 | 1,000 |
-| Y | mix-grow | B2 | brain_kind = grow, hidden_layers = 32, mix = on | 1, 2 | 1,000 |
-| Y | mix-handover | B2 | allow_handover = on, mix = on | 1, 2 | 1,000 |
-| Y | mix-helped | B2 | helped_by = on, mix = on | 1, 2 | 1,000 |
-| Y | mix-keephalf | B2 | keep_home = 0.5, mix = on | 1, 2 | 1,000 |
-| Y | mix-keepone | B2 | keep_home = 0.01, mix = on | 1, 2 | 1,000 |
-| Y | mix-kinsense | B2 | kin_sense = on, mix = on | 1, 2 | 1,000 |
-| Y | mix-lapse | B2 | prune_needs = 0, mix = on | 1, 2 | 1,000 |
-| Y | mix-linktoken | B2 | valence = 0, link_token = on, mix = on | 1, 2 | 1,000 |
-| Y | mix-lottery | B2 | contest = lottery, mix = on | 1, 2 | 1,000 |
-| Y | mix-mut05 | B2 | mutation_probability = 0.05, mix = on | 1, 2 | 1,000 |
-| Y | mix-mut80 | B2 | mutation_probability = 0.8, mix = on | 1, 2 | 1,000 |
-| Y | mix-newborns | B2 | redistribution = newborns, mix = on | 1, 2 | 1,000 |
-| Y | mix-noage | B2 | max_age = 0, mix = on | 1, 2 | 1,000 |
-| Y | mix-nodice | B2 | random_input_amount = 0, mix = on | 1, 2 | 1,000 |
-| Y | mix-parents | B2 | redistribution = parents, mix = on | 1, 2 | 1,000 |
-| Y | mix-pool | B2 | mix = on, pool = genotype | 1, 2 | 1,000 |
-| Y | mix-poorest | B2 | redistribution = poorest, mix = on | 1, 2 | 1,000 |
-| Y | mix-unittoken | B2 | brain_kind = grow, hidden_layers = 32, mix = on, unit_token = on | 1, 2 | 1,000 |
-| K | jump-looking-forced | B2 | link_consent = forced, link_search = jump, link_steering = looking | 1, 2 | 1,000 |
-| K | jump-looking-mutual | B2 | link_search = jump, link_steering = looking | 1, 2 | 1,000 |
-| K | jump-random-forced | B2 | link_consent = forced, link_search = jump | 1, 2 | 1,000 |
-| K | jump-random-mutual | B2 | link_search = jump | 1, 2 | 1,000 |
-| K | reach-looking-forced | B2 | link_consent = forced, link_search = reach, link_steering = looking | 1, 2 | 1,000 |
-| K | reach-looking-mutual | B2 | link_search = reach, link_steering = looking | 1, 2 | 1,000 |
-| K | reach-random-forced | B2 | link_consent = forced, link_search = reach | 1, 2 | 1,000 |
-| K | reach-random-mutual | B2 | link_search = reach | 1, 2 | 1,000 |
-| K | walk-looking-forced | B2 | link_consent = forced, link_search = walk, link_steering = looking | 1, 2 | 1,000 |
-| K | walk-looking-mutual | B2 | link_search = walk, link_steering = looking | 1, 2 | 1,000 |
-| K | walk-random-forced | B2 | link_consent = forced, link_search = walk | 1, 2 | 1,000 |
-| K | walk-random-mutual | B2 | link_search = walk | 1, 2 | 1,000 |
-| Z | every world its own | B2 | each world its settings drawn at random from the values the notebook has used (research/oee/search.md) | 1001 to 2032 | 1,000 |
-| LC | K-reach-random-forced | B2 | link_consent = forced, link_search = reach | 1 | 10,000 |
-| LC | M-mix-children | B2 | mix_at_birth = on, redistribution = children | 2 | 10,000 |
-| LC | Q-mix | B2 | mix = on | 1, 2 | 10,000 |
-| LC | S-G4-familysense | B2 | allow_revolutions = off, kin_sense = on, tag_rate = 0.05 | 2 | 10,000 |
-| LC | U-U-BDFG | B2 | allow_revolutions = off, random_input_amount = 0, valence = 0, link_token = on, mix = on | 1 | 10,000 |
-| LC | W-norev-linktoken | B2 | allow_revolutions = off, valence = 0, link_token = on | 1 | 10,000 |
-| LC | W-norev-mix | B2 | allow_revolutions = off, mix = on | 1, 2 | 10,000 |
-| LC | Y-mix-came | B2 | came_from = on, mix = on | 1, 2 | 1,000 |
-| LC | Y-mix-familysense | B2 | kin_sense = on, mix = on, tag_rate = 0.05 | 1 | 1,000 |
-| LC | Y-mix-grow | B2 | brain_kind = grow, hidden_layers = 32, mix = on | 1 | 10,000 |
-| LC | Y-mix-helped | B2 | helped_by = on, mix = on | 1 | 10,000 |
-| LC | Y-mix-keepone | B2 | keep_home = 0.01, mix = on | 1, 2 | 10,000 |
-| LC | Y-mix-kinsense | B2 | kin_sense = on, mix = on | 2 | 10,000 |
-| LC | Y-mix-linktoken | B2 | valence = 0, link_token = on, mix = on | 1 | 10,000 |
-| LC | Y-mix-lottery | B2 | contest = lottery, mix = on | 2 | 1,000 |
-| LC | Y-mix-mut80 | B2 | mutation_probability = 0.8, mix = on | 1, 2 | 10,000 |
-| LC | Y-mix-nodice | B2 | random_input_amount = 0, mix = on | 2 | 10,000 |
-| LC | Y-mix-pool | B2 | mix = on, pool = genotype | 1 | 10,000 |
-| LC | Y-mix-poorest | B2 | redistribution = poorest, mix = on | 1 | 10,000 |
-| LC | Y-mix-unittoken | B2 | brain_kind = grow, hidden_layers = 32, mix = on, unit_token = on | 2 | 1,000 |
-| SW | mixoff | B2 | nothing: B2 itself | 2, 4, 5, 6, 10 | 7,000 |
-| SW | mixon | B2 | mix_at_birth = on | 1, 2, 3, 4, 5 | 4,000 |
-| M | mix-buylife | B2 | buy_life = on, mix_at_birth = on | 1, 2, 3, 4 | 5,000 |
-| M | mix-children | B2 | mix_at_birth = on, redistribution = children | 1, 2 | 5,000 |
-| M | mix-keephalf | B2 | keep_home = 0.5, mix_at_birth = on | 1, 2 | 5,000 |
-| M | mix-mateparents | B2 | mates = parents, mix = on | 1, 2, 3, 4 | 5,000 |
-| M | mix-matepays | B2 | mate_pays = on, mix = on | 1, 2 | 5,000 |
-| M | mix-mut05 | B2 | mix_at_birth = on, mutation_probability = 0.05 | 1, 2 | 5,000 |
-| M | mix-newborns | B2 | mix_at_birth = on, redistribution = newborns | 1, 2 | 5,000 |
-| M | mix-parents | B2 | mix_at_birth = on, redistribution = parents | 1, 2 | 5,000 |
-| M | mix-poorest | B2 | mix_at_birth = on, redistribution = poorest | 1, 2 | 5,000 |
-| M | mix-reach | B2 | link_consent = forced, link_search = reach, mix_at_birth = on | 1, 2 | 5,000 |
-| M | mix-walk | B2 | link_search = walk, mix_at_birth = on | 1, 2 | 5,000 |
 | YB | mix-young | B2 | breeders = young, mix = on | 1, 2 | 2,000 |
 | YB | old | B2 | breeders = old | 1 | 2,000 |
 | YB | old-from500 | B2 | breeders = old | 1 | 2,000 |
@@ -504,6 +291,11 @@ Older yardsticks are not counted here:
 
 ## How our view changed
 
+- **12 November 2026.** The conditions of the pilot batches that the Archive
+  reports moved to
+  [What the switches did in pilots](what-the-switches-did-in-pilots.md#every-condition-of-the-archived-batches),
+  and the settings in which B1 and B2 differ are listed on
+  [B1 and B2](b1-and-b2.md#b2-a-world-that-cannot-break) alone.
 - **11 November 2026.** The tables were made again from the records. Until then
   they stopped at Experiment 21, because the catalogue could not read a
   screen's plan. Now they list every plan of the lab to Experiment 44, a screen
@@ -515,6 +307,6 @@ Older yardsticks are not counted here:
 
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics)
 
-> [!info]- Pages that link here (7)
-> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (8)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

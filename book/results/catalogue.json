@@ -1250,6 +1250,138 @@
      "1,000"
     ],
     [
+     "L",
+     "B1-long",
+     "B1",
+     "nothing: B1 itself",
+     "1, 2",
+     "10,000"
+    ],
+    [
+     "L",
+     "B1norev-long",
+     "B1",
+     "allow_revolutions = off",
+     "3",
+     "3,000"
+    ],
+    [
+     "L",
+     "B2-long",
+     "B2",
+     "nothing: B2 itself",
+     "1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
+     "50,000"
+    ],
+    [
+     "P",
+     "B2",
+     "B2",
+     "nothing: B2 itself",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "both",
+     "B2",
+     "came_from = on, helped_by = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "came",
+     "B2",
+     "came_from = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "helped",
+     "B2",
+     "helped_by = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "linkseek",
+     "B2",
+     "valence = 0, link_token = on, seek = on, seek_max = 0, toll = path",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "P",
+     "linktoken",
+     "B2",
+     "valence = 0, link_token = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "YB",
+     "mix-young",
+     "B2",
+     "breeders = young, mix = on",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "YB",
+     "old",
+     "B2",
+     "breeders = old",
+     "1",
+     "2,000"
+    ],
+    [
+     "YB",
+     "old-from500",
+     "B2",
+     "breeders = old",
+     "1",
+     "2,000"
+    ],
+    [
+     "YB",
+     "young",
+     "B2",
+     "breeders = young",
+     "1, 2",
+     "2,000"
+    ],
+    [
+     "YB",
+     "young-from500",
+     "B2",
+     "breeders = young",
+     "1",
+     "2,000"
+    ],
+    [
+     "BIG",
+     "B2-100000",
+     "B2",
+     "nothing: B2 itself",
+     "1",
+     "1,000"
+    ]
+   ]
+  },
+  "table:pilot_conditions_archive": {
+   "head": [
+    "batch",
+    "condition",
+    "on",
+    "what it changes",
+    "seeds",
+    "iterations"
+   ],
+   "rows": [
+    [
      "S",
      "G1-lottery",
      "B2",
@@ -1352,78 +1484,6 @@
      "allow_revolutions = off",
      "1, 2",
      "1,000"
-    ],
-    [
-     "L",
-     "B1-long",
-     "B1",
-     "nothing: B1 itself",
-     "1, 2",
-     "10,000"
-    ],
-    [
-     "L",
-     "B1norev-long",
-     "B1",
-     "allow_revolutions = off",
-     "3",
-     "3,000"
-    ],
-    [
-     "L",
-     "B2-long",
-     "B2",
-     "nothing: B2 itself",
-     "1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
-     "50,000"
-    ],
-    [
-     "P",
-     "B2",
-     "B2",
-     "nothing: B2 itself",
-     "1, 2",
-     "2,000"
-    ],
-    [
-     "P",
-     "both",
-     "B2",
-     "came_from = on, helped_by = on",
-     "1, 2",
-     "2,000"
-    ],
-    [
-     "P",
-     "came",
-     "B2",
-     "came_from = on",
-     "1, 2",
-     "2,000"
-    ],
-    [
-     "P",
-     "helped",
-     "B2",
-     "helped_by = on",
-     "1, 2",
-     "2,000"
-    ],
-    [
-     "P",
-     "linkseek",
-     "B2",
-     "valence = 0, link_token = on, seek = on, seek_max = 0, toll = path",
-     "1, 2",
-     "2,000"
-    ],
-    [
-     "P",
-     "linktoken",
-     "B2",
-     "valence = 0, link_token = on",
-     "1, 2",
-     "2,000"
     ],
     [
      "Q",
@@ -2912,54 +2972,6 @@
      "link_search = walk, mix_at_birth = on",
      "1, 2",
      "5,000"
-    ],
-    [
-     "YB",
-     "mix-young",
-     "B2",
-     "breeders = young, mix = on",
-     "1, 2",
-     "2,000"
-    ],
-    [
-     "YB",
-     "old",
-     "B2",
-     "breeders = old",
-     "1",
-     "2,000"
-    ],
-    [
-     "YB",
-     "old-from500",
-     "B2",
-     "breeders = old",
-     "1",
-     "2,000"
-    ],
-    [
-     "YB",
-     "young",
-     "B2",
-     "breeders = young",
-     "1, 2",
-     "2,000"
-    ],
-    [
-     "YB",
-     "young-from500",
-     "B2",
-     "breeders = young",
-     "1",
-     "2,000"
-    ],
-    [
-     "BIG",
-     "B2-100000",
-     "B2",
-     "nothing: B2 itself",
-     "1",
-     "1,000"
     ]
    ]
   },

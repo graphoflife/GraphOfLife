@@ -104,6 +104,7 @@ gives the baseline of every experiment and pilot batch.
 
 <!-- used b1-and-b2-the-two-baselines -->
 - [Measuring tokens: inequality and flow](measuring-tokens.md#the-even-split)
+- [Every simulation: what was run, and what was measured](every-simulation.md#the-two-rule-sets)
 <!-- /used -->
 
 ## Where to go next
