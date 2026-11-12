@@ -551,7 +551,7 @@ settings known to matter for each are those with a chance below 0.05 on
 <!-- turns -->
 ---
 
-← [Brains replaced by their average](brains-replaced-by-their-average.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are)
+← [Brains replaced by their average](brains-replaced-by-their-average.md) · [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter)
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 

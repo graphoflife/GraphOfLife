@@ -101,7 +101,7 @@ view shows how the pages hang together.
 
 - [What keeps wealth spread?](pages/what-keeps-wealth-spread.md)
 
-#### Brains, and how alike agents are
+#### Brains: what they are, and whether they matter
 
 - [What the brains are like](pages/what-the-brains-are-like.md)
 - [Do the brains matter?](pages/do-the-brains-matter.md)

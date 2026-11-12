@@ -584,7 +584,7 @@ every run.
 <!-- turns -->
 ---
 
-← [What the brains are like](what-the-brains-are-like.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
+← [What the brains are like](what-the-brains-are-like.md) · [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
 
 > [!info]- Pages that link here (17)
 > [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)

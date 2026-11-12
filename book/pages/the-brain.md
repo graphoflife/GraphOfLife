@@ -381,7 +381,7 @@ world run that way.
 
 ← [One iteration, step by step](one-iteration.md) · [How the simulation works](../README.md#how-the-simulation-works) · [Questioning the mechanics](questioning-the-mechanics.md) →
 
-**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+**Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
 > [!info]- Pages that link here (19)
 > [What this notebook is about](what-this-notebook-is-about.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [What a brain can compute](what-a-brain-can-compute.md) · [How runs are made, recorded and costed](runs-and-records.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
