@@ -25,6 +25,13 @@ world. The candidates
 for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") are drawn from the first 13 of each order. Every name
 in the orders opens its world in the viewer, for the author to check.
 
+From 11 November 2026 this health is frozen at the version of 9 November and
+used only as a filter: worlds that are dead, a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen are left
+out. Worlds are ranked by evolution, against null models, and no longer by
+these orders ([Health as a
+filter](measuring-health.md#from-11-november-2026-health-as-a-filter)). The
+orders stay as the record of how round 3's candidates were chosen.
+
 ## Why an order, and not a verdict
 
 The [criteria](measuring-health.md#what-makes-a-world-interesting) of the screen say yes or no.
@@ -106,7 +113,7 @@ from [iteration](one-iteration.md "One step of a world's time: a phase of reprod
 The measures are in different units: a share of the agents, a number of
 dimensions, a ratio of distances. To put them together, each is read the same
 way: **a world's score in a measure is the share of the round's living worlds
-it does better than.** The world with the smallest [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") of all scores 1 in the
+it does better than.** The world with the smallest hub of all scores 1 in the
 hub; a world whose hub is smaller than 70% of the others' scores 0.7; the world
 with the largest hub scores 1/82, the least any world scores. Worlds that tie
 share their place. So every score is positive, a bigger one is always better,
@@ -626,5 +633,8 @@ replaced it as simpler, read straight from what each run recorded.
   little otherwise (rank correlations of 0.97, 0.93 and 0.98 with what they
   were), and agree more with each other. The shortlist went from 24 worlds to
   21.
-
+- **11 November 2026.** Health is frozen at the version of 9 November, this
+  page's, and used only as a filter from this day: worlds that are dead, a
+  star, uniform or frozen are left out, and worlds are ranked by evolution. The
+  orders are kept as they were.
 

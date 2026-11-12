@@ -150,7 +150,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-22",
-      "summary": "Round 1 of fifty worlds with every setting drawn at random found no healthy world and one interesting one: mended worlds are whole but folded, and the worlds that stay spaces break or are poor."
+      "summary": "Rounds of worlds with every setting drawn at random. Round 1 found no healthy world in fifty, round 2 was withdrawn unplayed, and round 3 drew a hundred worlds from the author's settings, of which 82 lived through their 3,000 iterations."
     },
     {
       "id": "which-worlds-are-healthy",
@@ -168,7 +168,7 @@
       ],
       "status": "analysed",
       "added": "2026-11-07",
-      "summary": "Round 3's living worlds in three orders of health: every measure scored by the share of the worlds a world beats, the six criteria multiplied, added or the worst of them; few tokens culled is the sixth."
+      "summary": "Round 3's living worlds in three orders of health: every measure scored by the share of the worlds a world beats, the six criteria multiplied, added or the worst of them. Since 11 November 2026 health is only a filter, and worlds are ranked by evolution."
     },
     {
       "id": "how-the-drawn-settings-shape-a-world",
@@ -251,7 +251,7 @@
       ],
       "status": "draft",
       "added": "2026-10-09",
-      "summary": "A plan not yet played. Written on 9 October 2026 for one world of B1 at 204,800 tokens left for 100,000 iterations, it is now proposed again on round 3's candidates: three shortlisted worlds played on from iteration 3,000 to 100,000, which needs nothing new built and takes about two and a half days."
+      "summary": "A plan not yet played: three of round 3's shortlisted worlds played on from iteration 3,000 to 100,000, which needs nothing new built and takes about two and a half days. The first plan, of 9 October 2026, for one world of B1, is kept as its thesis."
     },
     {
       "id": "the-world",
@@ -721,7 +721,7 @@
       "kind": "reference",
       "status": "written",
       "added": "2026-11-09",
-      "summary": "How the notebook judges whether a world is healthy and interesting: the author's criteria, the seven marks of the health bar that B2's worlds were held to, and the diversity score.."
+      "summary": "Health as defined on 9 November 2026, frozen since 11 November and used only as a filter (dead, star, uniform or frozen worlds are left out), with a table of its earlier versions: the health bar, the diversity score and the criteria of the screen."
     },
     {
       "id": "runs-and-records",
@@ -773,7 +773,7 @@
       "kind": "reference",
       "status": "written",
       "added": "2026-11-09",
-      "summary": "The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation and fitted lines, how long a world remembers, how sure a number is, how a spread splits into parts, and how many kinds a world really holds.."
+      "summary": "The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation, fitted lines and power laws, how long a world remembers, how sure a number is and how many seeds it needs, how a spread splits into parts, and how many kinds a world really holds."
     },
     {
       "id": "what-the-baseline-world-is",

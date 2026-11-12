@@ -2,12 +2,23 @@
 
 > [!question] Questions of this page
 > - What do we look for in a world before we ask how it evolves?
+> - How is health measured now, and what is it used for since 11 November 2026?
 > - What were the seven marks of the health bar?
 > - How much do a world's [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") differ, in one number?
 
 ## In short
 
-How the notebook judges whether a world is healthy and interesting: the author's criteria, the seven marks of the health bar that [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds were held to, and the diversity score.
+Health says whether a world could hold long evolution at all: whether it lives,
+holds together, has room, and has agents that differ. The definition in force
+is the author's of 9 November 2026. It scores fifteen measures by how many of
+round 3's living worlds a world does better than, and puts six criteria
+together in three ways ([Which worlds are
+healthy?](which-worlds-are-healthy.md)). From 11 November 2026 health is frozen
+at that version and used only as a filter: worlds that are dead, a star,
+uniform or frozen are left out, and worlds are ranked by evolution. A table
+lists the earlier versions. They are kept in full below, because round 3's
+pages were written with them and the open-ended test still asks for the health
+bar and the diversity score.
 
 It gathers what were 3 pages of their own, one section each:
 
@@ -15,13 +26,74 @@ It gathers what were 3 pages of their own, one section each:
 - [The health bar](#the-health-bar): The seven marks a world's network must meet to count as healthy, why each is there, and how a world is read against them.
 - [The diversity score](#the-diversity-score): How much the agents of a world differ, in one number, and how much their decisions differ.
 
+## From 11 November 2026: health as a filter
+
+From 11 November 2026, health is frozen at the version of 9 November and used
+only as a filter. Worlds that are dead, a star, uniform or frozen are left out.
+The worlds that are left are ranked by evolution, against null models, and not
+by health ([What this notebook is about](what-this-notebook-is-about.md)). So a
+world is chosen for what the notebook asks, whether it keeps evolving, and not
+for how healthy it looks.
+
+## The definition in force: health of 9 November 2026
+
+Health, as the author defined it on 9 November 2026, reads six criteria from
+fifteen measures of a world. Each measure is averaged over the world's run,
+from iteration 100 to its end ([Every measure, a score from 0 to
+1](which-worlds-are-healthy.md#every-measure-a-score-from-0-to-1) lists them):
+
+- **decentralised:** the links of the best-linked agent, and the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of the
+  richest, each as a share;
+- **resilient:** the share of the agents in the 2-core, the most of the world
+  that one agent's or one link's loss cuts off, and agents on loops per link,
+  which is low both for a tree and for a world crowded with links;
+- **almost three-dimensional:** the typical distance over the random twin's,
+  and a dimension near three;
+- **diverse:** the [same-position share](#the-same-position-share), and how
+  alike the agents are in tokens, in the links of the 2-core, in age and in the
+  choice to have a child;
+- **not too even:** the Gini of the tokens over the Gini of the same tokens
+  dealt out at random;
+- **few tokens culled:** the share of all the tokens culled in a game ([Few
+  tokens culled](which-worlds-are-healthy.md#few-tokens-culled)).
+
+No measure has a line. A world's score in a measure is the share of round 3's
+living worlds it does better than, so every score is positive, and a bigger one
+is always better. A criterion is the geometric mean of its measures' scores.
+The six criteria are put together in three ways, each an order of its own:
+multiplied, added, or the worst of them ([Three ways to put the criteria
+together](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together)).
+Four measures of the version before are left out, each for its reason: links
+per agent, the largest holding, how many agents share a genotype, and [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s line
+for the Gini.
+
+## Earlier versions
+
+| version | in use | what it asked | what it judged |
+|---|---|---|---|
+| [The health bar](#the-health-bar) | from 12 October 2026 | seven marks of a world's network at one moment, each met or missed | B2 and the worlds built from it; part 4 of the [open-ended test](measuring-evolution.md#what-would-count-as-open-ended-evolution) still asks for every mark |
+| [The diversity score](#the-diversity-score) | from 16 October 2026 | four spreads of a world's agents in one number, ranked among frozen worlds | the search for a healthy, rich world; part 4 of the open-ended test |
+| [The criteria of rounds 1 and 2](#the-criteria-of-rounds-1-and-2) | 23 October 2026 | six criteria read at iteration 2,000, each a yes or a no | round 1 of the screen (Experiment 38) |
+| [The six criteria of round 3](#what-makes-a-world-interesting) | 24 October to 7 November 2026 | the same six, averaged over iterations 100 to 3,000, with looser lines | round 3, as first judged (Experiments 40 to 42) |
+| a first order | 7 to 9 November 2026 | each line read as the share of what it asks, up to the line | round 3; the author found it still a yes or a no past the lines |
+| [the definition in force](#the-definition-in-force-health-of-9-november-2026) | from 9 November 2026 | fifteen measures, each scored against round 3's living worlds; six criteria; three orders | round 3's orders and shortlist (Experiment 43); from 11 November, a filter only |
+
+The earlier versions are kept below as they were. Round 3's pages and the
+theses of their day were written with them, and the open-ended test still asks
+for the health bar and the diversity score.
+
 ## What makes a world interesting
+
+*This is how health was judged from 24 October to 7 November 2026, as round 3
+was first judged. [The definition in
+force](#the-definition-in-force-health-of-9-november-2026) replaced it on 9
+November.*
 
 We are looking for worlds in which evolution could go on for a very long
 time. Such a world has to stay alive. It must not hang on a few agents, and it
 must not fall apart when one agent dies. It should look like a space of about
 three dimensions, as our own world does. And its agents should differ from
-one another, in [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), links, age, genes and decisions, without the tokens
+one another, in tokens, links, age, genes and decisions, without the tokens
 being spread too evenly.
 
 We turn this picture into six criteria. From round 3 of the screen on, every
@@ -216,15 +288,13 @@ author once round 3 has run and we have looked at its worlds. Until then the
 judge counts a world as interesting when it is alive and misses at most two of
 criteria 2 to 6, the author's first answer.
 
-> [!note] Added later (7 November 2026)
-> Round 3 has run. Instead of a verdict, the author asked for an order of
-> every world drawn at random, from the most healthy to the least, by a
-> definition they can check:
-> [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md)
-> reads each line of this page as how much of what it asks a world has, and
-> proposes lines for the two numbers reported here, a line for *not too even*
-> drawn by chance instead of by B2, and two other changes. Until the author
-> has decided on them, the lines on this page stay as they are.
+Round 3 has run. Instead of a verdict, the author then asked (7 November
+2026) for an order of every world drawn at random, from the most healthy to
+the least, by a definition they can check
+([Which worlds are healthy?](which-worlds-are-healthy.md)). Its definition of
+9 November is now
+[the definition in force](#the-definition-in-force-health-of-9-november-2026),
+and the lines of this section are an earlier version.
 
 ### When a setting is marked bad
 
@@ -542,3 +612,10 @@ the kinds swing from moment to moment.
     but reads them as shares, draws lines for the half-cut exponent and the
     same-position share, and would replace B2's Gini line by one drawn by chance.
     This page's lines stand until the author decides.
+- **11 November 2026.** This page now opens with the definition in force, of 9
+  November 2026, until then only on Which worlds are healthy?, and a table of
+  the earlier versions. From this day health is frozen at that version and used
+  only as a filter: worlds that are dead, a star, uniform or frozen are left
+  out, and worlds are ranked by evolution. The earlier versions are kept as
+  they were.
+
