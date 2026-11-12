@@ -307,6 +307,6 @@ Older yardsticks are not counted here:
 
 ← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics)
 
-> [!info]- Pages that link here (8)
-> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (10)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What the brains are like](what-the-brains-are-like.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

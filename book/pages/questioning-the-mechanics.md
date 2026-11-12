@@ -41,26 +41,12 @@ Nothing here is a verdict. Several of these rules may be exactly right. But a
 rule that quietly decides most of what happens in a world deserves to be
 looked at in the open.
 
-**Two baselines.** A baseline is a stated set of rules that experiments start
-from ([B1 and B2: the two baselines](b1-and-b2.md)). B1 holds the rules as
-they were first built, and the rule and the data of every section below are
-B1's. B2 was made on 12 October 2026 from [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds. It is B1 with rules
-that keep its network from breaking and its agents from staking or breeding
-themselves to death, and with smaller brains that see. Several of its changes
-answer questions this page asked.
-
-**The worlds.** The numbers are those of the thirty B1 worlds of 100,000
-[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds). This page was first written from
-thirty worlds of 10,000 tokens; where those differ, both are given.
-
-<!-- runs E10 -->
-> [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
-<!-- /runs -->
+Every rule and number below is B1's; each section ends with what B2 changed
+([B1 and B2](b1-and-b2.md)). The numbers are those of B1's thirty worlds of
+100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") (Experiment 10), with those of 10,000 tokens where they differ.
+Their box of runs is on
+[Is a world a space?](how-many-dimensions-does-a-world-have.md#the-runs-of-experiment-10),
+and their row in [Every simulation](every-simulation.md#the-labs-experiments).
 
 ## Two roads of inheritance
 
@@ -115,7 +101,7 @@ node" is the brain, the agent that "is old" is the body.
 
 **What B2 did.** It took up (c). The setting
 [`incumbency`](settings.md#incumbency) makes an agent's stake on its own node
-count *h* times over when the game decides who takes the node. In pilot worlds
+count *h* times over when the game decides who takes the node. In [pilot](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.") worlds
 with brains that see and *h* = 2, conquest fell from 40–90% of the nodes in a
 game to 15–25%. Births came back as the way brains spread. But one agent
 gathered 57% of all the tokens, staked them at home where nobody could outbid
@@ -255,13 +241,8 @@ rather than an average over its neighbours.
 
 **The rule.** Some decisions are shares: how much of its tokens a parent gives
 its child, or how much of a stake is marked revolutionary. The brain gives two
-outputs, *a* and *b*, and the share function turns them into one share between
-0 and 1:
-
-*f*(*a*, *b*) = *a*⁺ / (*a*⁺ + *b*⁺), or ½ when neither is positive.
-
-Here *x*⁺ is *x* when *x* is positive, and 0 otherwise. In words: the share is
-*a*'s positive part over the sum of both positive parts
+outputs, *a* and *b*, and the share is *a*'s positive part over the sum of both
+positive parts, or ½ when neither is positive
 ([The share function](rules-in-detail.md#the-share-function-fa-b)).
 
 <!-- figure mechanics/child-shares -->
@@ -414,12 +395,11 @@ occasional long-range connection — a child joined, rarely, to an agent
 anywhere. That would let separated populations meet again, and would also
 shorten the world's distances ([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)).
 
-**What B2 did.** It took the other road: a world that cannot split.
-[A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) adds three local
-rules. A newborn is joined to two of its parent's neighbours, drawn at random.
-A death is mended: where the dead agent's former neighbours would be left
-apart, they are joined up in a ring. And only redundant links lapse. Under
-these rules neither a death nor a lapsed link can split a world. In the ten B2
+**What B2 did.** It took the other road: a world that cannot split. B2's rules
+keep the network whole: two random links at birth, deaths mended, only
+redundant links lapse, at most 8 chosen links
+([B2: a world that cannot break](b1-and-b2.md#b2-a-world-that-cannot-break)).
+In the ten B2
 worlds of Experiment 14, not one agent was cut off from iteration 200 to
 1,000. The cull is still a rule of B2, but it has nothing left to cut — and
 populations still cannot separate.

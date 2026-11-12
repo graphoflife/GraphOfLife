@@ -28,16 +28,9 @@ parents, or selection has nothing to choose from
 Life world the variation is in the brains. Every agent decides with a small
 neural network, its brain, and a newborn gets a copy of its parent's.
 
-A copy is not always exact. With a set chance it comes out a little changed,
-and a changed brain is a new genotype ([How a brain changes](rules-in-detail.md#how-a-brain-changes)).
-That chance is the **mutation rate**, *p*: the share of copies that come out
-changed.
-
-In B2, the second [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), a brain is copied at two moments: into a newborn,
-and into a node its owner has just won
-([`mutate_on_replication`](settings.md#mutate_on_replication)). A brain that
-stays where it is never changes. And *p* = 0.2: one copy in five is a new
-genotype.
+The **mutation rate** *p* is the share of copies that come out changed; in B2
+a brain is copied into a newborn and into a won node, and *p* = 0.2
+([How a brain changes](rules-in-detail.md#when)).
 
 Is that a lot or a little? With too few changes, evolution has little new to
 try. With too many, the changes break what works faster than selection can
@@ -90,7 +83,7 @@ before all of this, is kept as it was.
 
 ## Why the question moved to B2
 
-This experiment was first planned on [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), the first baseline. There it asked
+This experiment was first planned on [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."). There it asked
 whether three births per hundred agents an iteration is a rate that selection
 finds, or only the churn of mutation.
 
@@ -332,7 +325,7 @@ changed brains end up better than fast ones, over a whole life, is still open.
 ## How this was made
 
 The fifty runs of Experiment 9 are listed in the box below, with every
-setting. The condition B2 shares its ten runs with Experiment 16. The command
+[setting](settings.md "One number or switch of a run's rules, fixed before it starts."). The condition B2 shares its ten runs with Experiment 16. The command
 `python3 book_figures.py rates` plays the contests of the three figures and
 draws them. Each figure's recipe, folded beneath it, says how.
 

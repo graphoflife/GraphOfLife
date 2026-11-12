@@ -43,43 +43,26 @@ A brain speaks in real numbers, such as 0.73 or −1.4. But the world deals in
 whole tokens and plain yes-or-no answers. Three small rules translate the one
 into the other. Each has a page of its own, with examples.
 
-**A share from two numbers.** Many decisions come out of the brain as a pair
-of real numbers (*a*, *b*), to be turned into a share between 0 and 1.
-Negative values count as zero, and the share is *a*'s part of the total
+**A share from two numbers.** A pair of real numbers (*a*, *b*) becomes *a*'s
+part of their total, negative values counting as zero
 ([The share function f(a, b)](rules-in-detail.md#the-share-function-fa-b)):
 
 $$
 f(a, b) = \frac{\max(a, 0)}{\max(a, 0) + \max(b, 0)}, \qquad f(a, b) = \tfrac12 \ \text{ if } a \le 0 \text{ and } b \le 0 .
 $$
 
-If both numbers are zero or less, the share is one half. For example,
-*f*(0.8, 1.2) = 0.8 / 2 = 0.4, *f*(3, −1) = 1 and *f*(−2, −5) = ½.
+**A yes-or-no decision.** One pair (*y*, *n*) says how strongly the brain says
+yes and no, and a second pair whether the answer is drawn with probability
+*f*(*y*, *n*) or the larger of the two wins outright
+([A yes-or-no decision](rules-in-detail.md#a-yes-or-no-decision)).
 
-**A yes-or-no decision, read as the brain chooses.** A yes-or-no decision
-comes out of the brain as two pairs. The first, (*y*, *n*), says how strongly
-the brain says yes and no. The second, (*m*₁, *m*₂), says how it wants the
-first pair read. If *m*₁ > *m*₂, the answer is yes with probability
-*f*(*y*, *n*). Otherwise the larger of *y* and *n* wins outright, and an
-exact tie is decided by a fair coin
-([A yes-or-no decision](rules-in-detail.md#a-yes-or-no-decision)). Say (*y*, *n*) = (0.8, 1.2).
-Read as a probability, the answer is yes four times in ten; read sharply, it
-is always no.
-
-**Splitting whole tokens.** Tokens often have to be split among the
-**candidates**, the agent itself and its neighbours, in proportion to scores.
-Negative scores count as zero. If no score is above zero, the tokens are
-split evenly over all the candidates. In a settled world, about half of all
-agents stake that way ([What the brains are like](what-the-brains-are-like.md)).
-Every candidate first gets its exact share rounded down. The tokens left over
-then go one each to the candidates that lost the most in the rounding: the
-*largest-remainder* method. No token is lost or made
-([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)).
-
-For example, split 11 tokens by the scores (2, 1, −0.5, 0.5). The negative
-score counts as 0, so the scores add up to 3.5, and the exact shares are
-6.29, 3.14, 0 and 1.57. Rounded down they are 6, 3, 0 and 1, which make 10.
-The one token left goes to the last candidate, which lost the most (0.57).
-So splitting 11 tokens by the scores (2, 1, −0.5, 0.5) gives (6, 3, 0, 2).
+**Splitting whole tokens.** Tokens are split over the **candidates**, the agent
+itself and its neighbours, in proportion to their scores, evenly if no score is
+above zero; the shares are rounded down and the tokens left over go to the
+largest remainders
+([A worked example](rules-in-detail.md#a-worked-example-splitting-tokens-into-whole-numbers)).
+In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world 42% of the agents stake evenly that way, 58% at 10,000
+tokens ([How often it happens](measuring-tokens.md#how-often-it-happens)).
 
 ## Phase 1: reproduction
 
@@ -208,12 +191,9 @@ part, 4, whose staker takes the node:
 
 ![A coalition taking a node](../diagrams/revolution.svg)
 
-The game is a version of **Colonel Blotto** (Borel 1921). In that game,
-players spread a fixed force over several battlefields, and each battlefield
-goes to whoever committed more to it. Here every node is a battlefield, and
-every agent a player who can only reach its own neighbourhood. Winning a
-battlefield wins its tokens and plants the winner's brain there.
-[The ideas this builds on](the-ideas-this-builds-on.md) says more.
+That is nearly Colonel Blotto, where no division is best and the best play is
+to be unpredictable
+([The game: Colonel Blotto](the-ideas-this-builds-on.md#the-game-colonel-blotto)).
 
 ## Cleanup
 

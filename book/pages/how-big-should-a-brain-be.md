@@ -41,15 +41,12 @@ shape, and every difference between shapes on this page is *indicative*
 
 ## Why depth blinded B1, and why tanh need not
 
-Picture five people in a row, each repeating what they hear at a quarter of
-the loudness. A shout at one end arrives at the other as a whisper, a
-thousandth as loud. B1's brain is such a row: each of its five hidden layers
-ends in a sigmoid, whose slope is at most ¼, so a change in what it sees
-reaches what it does about a thousand times smaller
-([What the brains are like](what-the-brains-are-like.md#does-a-brain-see-what-it-is-shown)).
+B1's brain passes a change through five sigmoid layers, each passing on at most
+a quarter, so what it sees reaches what it does about a thousand times smaller
+([How a signal fades](the-brain.md#how-a-signal-fades-through-layers)).
 
-Now let each person repeat what they hear at full loudness, and only cut off
-a shout. That is a layer of tanh units. tanh is the same S-shape as the
+Now let each layer pass a change on at its full size, and cut off only a large
+one. That is a layer of tanh units. tanh is the same S-shape as the
 sigmoid, centred on zero and twice as tall, and its slope at zero is 1, four
 times the sigmoid's. Where a unit's sum is near zero, a change passes through
 it whole. Where the sum reaches into the flat ends of the S, less gets
@@ -222,13 +219,9 @@ in half, as in B1, whose evolved brains spread in 98%.
 Evolved brains pass on about 1.6 times what their founders did. Was it
 selection, favouring brains that respond? Or did mutation alone do it?
 
-Think of a bath with the tap running and the plug a little loose. The water
-settles where what runs in equals what drains out. Each change of a brain
-adds a little to the spread of its weights: that is the tap. And now and then
-it draws a weight afresh at a founder's size: that is the loose plug
-([How a brain changes](rules-in-detail.md#how-big-a-little-is)). The weights grow
-until the two balance. Larger weights make larger sums, and in a tanh brain a
-larger gain.
+Mutation alone sets the size of the weights, where its jitter balances its
+resets ([How big "a little" is](rules-in-detail.md#how-big-a-little-is)).
+Larger weights make larger sums, and in a tanh brain a larger gain.
 
 Exactly: a change jitters a share *s* of a brain's numbers by a normal amount
 of standard deviation σ/√*k*, and, with chance *s*, redraws a share *s* of a

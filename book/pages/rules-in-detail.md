@@ -262,10 +262,6 @@ f(a, b) =
 \end{cases}
 $$
 
-In words: negative numbers count as zero, and the share is *a*'s part of the
-total. If neither number is positive, there is no preference, and the share
-is one half.
-
 ### Examples (the share function)
 Take *a* = 0.8 and *b* = 1.2. Both are positive, so both count in full. The
 total is 0.8 + 1.2 = 2, and *a*'s part of it is 0.8 / 2 = 0.4.
@@ -292,8 +288,7 @@ examples and four more.
   the share larger.
 - **It has corners.** The share is exactly 0 or exactly 1 whenever one of the
   two numbers is zero or negative and the other positive. It is exactly ½
-  whenever both are zero or negative. So a brain can say "all", "nothing" or
-  "half" outright, without computing any ratio.
+  whenever both are zero or negative.
 
 ### All, nothing or half
 
@@ -328,10 +323,8 @@ reads as 1 ([What the brains are like](what-the-brains-are-like.md)).
 
 <!-- used the-share-function-fa-b -->
 - [One iteration, step by step](one-iteration.md#three-tools-used-everywhere)
-- [The brain](the-brain.md#from-outputs-to-decisions)
 - [Questioning the mechanics](questioning-the-mechanics.md#the-share-function-jumps)
 - [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
-- [What a brain can compute](what-a-brain-can-compute.md#what-a-b2-brain-sees-and-does)
 
 > [!info]- And in the Archive (1)
 > [B1: lives and wealth](b1-lives-and-wealth.md#a-birth-decision-by-decision)
@@ -413,7 +406,6 @@ an agent spreads its tokens over its candidates or puts them all on one
 
 <!-- used a-yes-or-no-decision -->
 - [One iteration, step by step](one-iteration.md#three-tools-used-everywhere)
-- [The brain](the-brain.md#from-outputs-to-decisions)
 <!-- /used -->
 
 In the code it is `_choose_binary(yes, no, mode_yes, mode_no, rng)` in
@@ -504,7 +496,6 @@ split, when every score is zero or below
 
 <!-- used splitting-tokens-into-whole-numbers -->
 - [One iteration, step by step](one-iteration.md#three-tools-used-everywhere)
-- [The brain](the-brain.md#from-outputs-to-decisions)
 - [Measuring tokens: inequality and flow](measuring-tokens.md#the-rule)
 - [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
 
@@ -532,7 +523,7 @@ candidate, and the brain reads. Every form has the same boxes, in the same
 order. Only what is written in them changes from one candidate to the next.
 What is not on the form, the brain cannot know.
 
-This page lists the boxes: the inputs, in the order the program builds them,
+The table lists the boxes: the inputs, in the order the program builds them,
 for an agent *u* looking at a candidate *v*. Rows are counted from 0, as in
 the code.
 
@@ -574,7 +565,9 @@ down by one ([`allow_gifting`](settings.md#allow_gifting)).
 ln(1 + *x*) makes a brain see **orders of magnitude**. The difference between
 10 and 20 tokens (ln 21 − ln 11 = 0.65) is then much larger than the
 difference between 1,000 and 1,010 (0.01), as it should be: doubling matters,
-adding ten to a thousand does not. The "1 +" keeps 0 at 0.
+adding ten to a thousand does not. So 10, 100 and 1,000 tokens read 2.4, 4.6
+and 6.9: each factor of ten is a step of about the same size, 2.2 and 2.3. The
+"1 +" keeps 0 at 0.
 
 ### The six quantiles
 
@@ -633,12 +626,12 @@ changes only 1.5% ([What the brains are like](what-the-brains-are-like.md)).
 ### Where it is used (what a brain sees)
 
 <!-- used what-a-brain-sees -->
-- [The brain](the-brain.md#one-look-a-column-per-candidate)
+- [The brain](the-brain.md#where-to-go-next)
 - [Every setting](settings.md#random_input_amount)
 - [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md#where-degree-is-used)
 - [Physical inspiration](physical-inspiration.md#the-second-aim)
 - [What the brains are like](what-the-brains-are-like.md#how-a-brain-is-examined)
-- [What a brain can compute](what-a-brain-can-compute.md#what-a-b2-brain-sees-and-does)
+- [What a brain can compute](what-a-brain-can-compute.md#where-to-go-next)
 - [Statistics: the tools of the notebook](statistics.md#exactly-how-many-worlds-at-once)
 
 > [!info]- And in the Archive (2)
@@ -651,18 +644,13 @@ For every candidate it looks at — itself and each neighbour — a brain
 produces one column of numbers: **45** in B1, 19 in B2. Each group of rows
 has one job: how much to give a child, whom the child joins, where and how
 to stake, how much of a stake is revolutionary, which connections to hand
-over, and what to say. Two decisions concern the agent as a whole, and their
-rows are averaged over all its columns first; the others are taken candidate
-by candidate. An output can be any number, positive or negative; only the
-message rows are squeezed into the range from −1 to 1.
+over, and what to say.
 
 ### One answer sheet per candidate
 
 [What a brain sees](rules-in-detail.md#what-a-brain-sees) pictures each column of inputs as a
 form about one candidate. The column of outputs is the answer sheet the brain
-hands back for it. Every sheet has the same lines, in the same order. Some
-lines make sense only once per agent, such as how much to give a child; for
-those, the program reads the average over all of the agent's sheets.
+hands back for it. Every sheet has the same lines, in the same order.
 
 ### The outputs
 
@@ -735,7 +723,7 @@ search for strangers four ([Every setting](settings.md)).
 
 <!-- used what-a-brain-says -->
 - [One iteration, step by step](one-iteration.md#phase-1-reproduction)
-- [The brain](the-brain.md#from-outputs-to-decisions)
+- [The brain](the-brain.md#where-to-go-next)
 - [Every setting](settings.md#link_search)
 - [Measuring tokens: inequality and flow](measuring-tokens.md#the-flow-of-a-game)
 - [Brains replaced by their average](brains-replaced-by-their-average.md#a-ladder-of-six-ways-to-decide)
@@ -755,15 +743,6 @@ neighbour, and the neighbour's to it and to itself. No rule says what the
 numbers mean: a message means whatever the brains that write and read it make
 of it, and that can evolve. In B1, a message turned out to say little more
 than who wrote it.
-
-### Notes between neighbours
-
-Picture neighbours who leave each other notes. Every agent writes one note to
-each neighbour, and one to itself. When it later considers a neighbour, it
-reads four notes: its note to itself, its note to that neighbour, the
-neighbour's note to it, and the neighbour's note to itself. The notes are
-lists of numbers, and nothing gives them a meaning but the brains that write
-and read them.
 
 ### Who writes what
 
@@ -851,7 +830,6 @@ of the messages' variety.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#did-something-new-appear)
 - [One iteration, step by step](one-iteration.md#phase-1-reproduction)
-- [The brain](the-brain.md#one-look-a-column-per-candidate)
 - [Every setting](settings.md#message_amount)
 - [B1 and B2: the two baselines](b1-and-b2.md#b1-the-rules-as-they-were-built)
 - [Physical inspiration](physical-inspiration.md#a-speed-limit)
@@ -889,9 +867,6 @@ Which member of the band then holds it? Line the band up from the smallest
 sworn part to the largest, and count the sworn troops along the line. The
 hill goes to the member at whom the count first passes half of everything
 that matters on the field: all the sworn troops, plus the largest army.
-
-The rest of this page states the rule as the program has it, shows that it
-says the same as this picture, and works an example.
 
 ### What each staker brings
 
@@ -1105,9 +1080,6 @@ part: every number of it is, independently with probability *s*, replaced by
 a fresh draw. A weight is drawn from the distribution the founders' weights
 were drawn from, 𝒩(0, (1/√*k*)²); a bias from 𝒩(0, (σ/√*k*)²).
 
-So a change moves about one number in ten by a little, and now and then
-redraws about one number in ten of a matrix from scratch.
-
 ### How big "a little" is
 
 A founder's weights are drawn from 𝒩(0, (1/√*k*)²): their standard deviation
@@ -1171,7 +1143,7 @@ the rounding.
 - [Do the brains matter?](do-the-brains-matter.md#the-three-conditions)
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-far-one-change-moves-a-brain)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#how-genotypes-are-numbered)
-- [How fast should brains change?](how-fast-should-brains-change.md#copies-with-slips)
+- [How fast should brains change?](how-fast-should-brains-change.md#where-to-go-next)
 - [Every era against three](every-era-against-three.md#the-trials)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
@@ -1188,16 +1160,11 @@ In the code it is `Brain.mutate` and `Brain._perturb` in
 
 A run goes for a fixed number of iterations, unless its world dies out first.
 In this notebook that has an exact meaning: if an iteration's game leaves 20
-agents or fewer, the world is **extinct** and its run stops. A world that
-small is no longer a population worth measuring. But it is not always dying:
-small worlds run without the rule fell below 20 agents and grew back. So the
-notebook reports the worlds that die out apart from those that live to the
-end.
+agents or fewer, the world is **extinct** and its run stops.
 
 ### The rule (when a world ends)
-A run goes for a fixed number of iterations — 3,000 for the thirty baseline
-worlds of 10,000 tokens, 1,500 for the thirty of 100,000 — unless its world
-**dies out** first.
+Runs last 3,000 iterations for the thirty baseline worlds of 10,000 tokens,
+and 1,500 for the thirty of 100,000.
 
 After every iteration — that is, after its game and the cleanup that follows
 — the agents are counted. If there are at most
@@ -1226,10 +1193,8 @@ ran small worlds with the threshold at 0. All six worlds of 800 and 1,600
 tokens lived to iteration 600, and five of them were worlds the threshold had
 stopped after their first game. One of them fell to 4 agents and came back.
 
-So "extinct" in this notebook means exactly what the rule says — **fell to 20
-agents or fewer** — which is not always the same as dying. An experiment that
-cares about extinction should run a condition with the threshold at 0 beside
-it.
+An experiment that cares about extinction should run a condition with the
+threshold at 0 beside it.
 
 ### An empty world
 
@@ -1241,10 +1206,8 @@ always holds at least this one.
 
 ### How the notebook counts the dead
 
-A world that dies out did not end up anywhere: the last stretch of its life is
-its dying. So where the worlds of a setting end up is measured over the worlds
-that lived to the end. The dead are reported beside them, as an outcome of
-their own ([The settled life of a world](statistics.md#the-settled-life-of-a-world)).
+The dead are reported beside the worlds that lived to the end
+([Why not the worlds that died?](statistics.md#why-not-the-worlds-that-died)).
 
 Of the 30 baseline worlds of 10,000 tokens, four died: after 4, 313, 1,547
 and 2,184 iterations. Of the 30 of 100,000 tokens, none did

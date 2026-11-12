@@ -12,9 +12,9 @@ An [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a 
 each candidate, the agent itself and each [neighbour](the-world.md#the-network "An agent joined to another by a connection."), it reads 154 numbers and
 gives 45, which the rules turn into decisions. It is 15,795 numbers in all,
 copied into children and changed with probability 0.2 at every birth and
-after every game. Over a run, selection moves the brains' decisions far from
-the founders' random ones. But it moves them only as constants: the brains
-barely react to what they see.
+after every game. In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), selection moves the brains' decisions far from the
+founders' random ones, but only as constants: the brains barely react to what
+they see ([What the brains are like](what-the-brains-are-like.md)).
 
 ## A brain at a glance
 
@@ -34,7 +34,7 @@ outputs. The outputs take every decision of
 
 Nothing in a brain is designed. A founder's brain is drawn at random, and
 brains change only by chance: when they are copied, and after every game.
-This page describes the brain of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") completely. It says what the
+This page describes the brain of the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") B1 completely. It says what the
 brain reads, how it computes, how its outputs become decisions, and how it
 changes from one generation to the next.
 
@@ -42,32 +42,8 @@ changes from one generation to the next.
 
 ## One look: a column per candidate
 
-Agent *u* looks at its candidates (*u*, *v*₁, …, *v*_d): itself and its *d*
-neighbours, in increasing order of id. It builds one column of **154 inputs**
-for each candidate. It feeds all *d* + 1 columns through the same network at
-once. The inputs, in order:
-
-- **1** — whether the candidate is the agent itself: 1 for the first column,
-  0 for the others.
-- **4** — ln(1 + τ) of the agent and of the candidate, and ln(1 + deg) of
-  both: [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and connections on a logarithmic scale. On that scale, 10
-  against 100 tokens looks as different as 100 against 1,000. Indeed,
-  ln(1 + 10) = 2.4, ln(1 + 100) = 4.6 and ln(1 + 1,000) = 6.9. The two
-  steps are about the same, 2.2 and 2.3.
-- **24** — summaries of the two neighbourhoods. For the agent and for the
-  candidate: six [quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of ln(1 + τ) over their neighbours, and the same
-  for ln(1 + deg). The six are the smallest value, the 20th, 40th, 60th and
-  80th percentiles, and the largest. About a fifth of the neighbours lie below
-  the 20th percentile. That is 6 × 2 × 2 = 24 numbers.
-- **120** — four messages of 30 numbers each ([Messages](rules-in-detail.md#messages)). They
-  are what the agent last wrote to itself and to the candidate, and what the
-  candidate last wrote to the agent and to itself.
-- **5** — random numbers, each drawn uniformly between −2 and 2, new for
-  every candidate in every look. They let two agents in the same position,
-  or one agent looking twice, act differently.
-
-That makes 1 + 4 + 24 + 120 + 5 = 154. [What a brain sees](rules-in-detail.md#what-a-brain-sees)
-gives the full list, row by row, with a worked example.
+For each candidate the brain reads one column of 154 numbers, the same network
+for every column ([What a brain sees](rules-in-detail.md#the-inputs)).
 
 ## The neural network
 
@@ -138,6 +114,11 @@ outputs barely move, whatever its inputs do. This is called the **vanishing
 signal**. In training by gradients it is the *vanishing gradient*
 (Hochreiter 1991; Glorot and Bengio 2010).
 
+Picture five people in a row, each repeating what they hear at a quarter of
+the loudness. A shout at one end arrives at the other as a whisper, a
+thousandth as loud. A brain of B1 is such a row: what it sees passes through
+five hidden layers before it decides.
+
 ### The gain of one layer
 
 Take one hidden layer of the brain:
@@ -192,7 +173,7 @@ hidden layer of 16 units, and a founder's gain of about 0.2
 
 Selection can only favour a brain that reacts to its situation if its
 reactions differ enough to matter. Take two candidates whose scores differ by
-a thousandth of a token's worth. For every decision of
+a thousandth of a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")'s worth. For every decision of
 [One iteration, step by step](one-iteration.md), they are the same candidate.
 So a mutation that makes a brain attend to a neighbour's wealth has almost no
 effect to be selected for. Only mutations that move what the brain does
@@ -220,73 +201,16 @@ of a change after evolution
 
 ## From outputs to decisions
 
-A look gives one column of 45 outputs per candidate. Think of each column as
-a form the brain fills in about one candidate. Should the child join it? How
-much to stake on it? What to tell it? A few answers concern the agent as a
-whole, and those are averaged over all its forms. Here are the rows, counted
-from 0 as in the code:
-
-| rows | what | read as | used in |
-|---|---|---|---|
-| 0–1 | child share | *f*(row 0, row 1), averaged over columns first | reproduction |
-| 2–3 | join the child to this candidate? | yes/no, per candidate | reproduction |
-| 4–5 | how to read rows 2–3 | probability or sharp, per candidate | reproduction |
-| 6 | stake score | one score per candidate | game |
-| 7–8 | spread or all in | spread if row 7 > row 8, averaged over columns first | game |
-| 9–10 | revolutionary share | *f*(row 9, row 10), per candidate | game |
-| 11–12 | hand this connection to the child? | yes/no, per neighbour | reproduction |
-| 13–14 | how to read rows 11–12 | probability or sharp, per neighbour | reproduction |
-| 15–44 | message | tanh of each, one message per candidate | both |
-
-*f* is [the share function](rules-in-detail.md#the-share-function-fa-b); "probability or sharp" is
-[the yes-or-no rule](rules-in-detail.md#a-yes-or-no-decision); the split of a spread stake is
-[the largest-remainder method](rules-in-detail.md#splitting-tokens-into-whole-numbers).
-[What a brain says](rules-in-detail.md#what-a-brain-says) goes through the table row by row.
-Three things in it are easy to miss:
-
-- the **child's share** and the choice between **spreading and going all
-  in** are each one decision for the whole agent. Their rows are averaged
-  over all candidate columns before they are read.
-- everything else is decided **per candidate**. Does the child join it, and
-  is the connection to it handed to the child? How much is staked on it, and
-  how much of that stake is revolutionary?
-- the **message** to a candidate is rows 15–44 of that candidate's column,
-  each passed through tanh, which squeezes any number into (−1, 1). The
-  message an agent writes to itself is in the column of itself.
+Each column gives 45 outputs; the child's share and the choice to spread are
+averaged over all columns, and the rest is read candidate by candidate
+([What a brain says](rules-in-detail.md#the-outputs)).
 
 ## How a brain changes
 
-A brain is copied the way a text is copied by hand. Usually the copy is
-exact; sometimes it has a few small slips; now and then a few words are
-replaced outright.
-
-A brain may change at two moments. One is when it is copied into a child. The
-other is after every game, for every brain in the world, independently. Each
-time, with probability *p* = 0.2, the brain is **mutated**; otherwise it is
-left exactly as it was. A mutation treats every weight matrix and every bias
-vector separately, with *s* = 0.1 and σ = 0.2. Here σ is the size of a change,
-not the sigmoid ([How a brain changes](rules-in-detail.md#how-a-brain-changes) has the details):
-
-1. **Jitter.** Each number, independently with probability *s*, has a normal
-   random number of standard deviation σ/√*k* added to it. That is a fifth of
-   the spread of the layer's starting weights.
-2. **Reset**, rarely. With probability *s*, a fraction *s* of the matrix's
-   numbers are drawn afresh, each independently with probability *s*. A
-   weight is drawn from the starting distribution, normal with standard
-   deviation 1/√*k*. A bias is drawn from a normal with standard deviation
-   σ/√*k*.
-
-So a mutation nudges about one number in ten, a little. And about one matrix
-in ten also has about one number in ten replaced outright. In the first
-layer, a jitter is typically about 0.2/√154 = 0.016, a fifth of a typical
-weight.
-
-**Genotypes.** Every brain carries an id, its **genotype**. A copy keeps the
-id. So a child whose brain did not mutate, and a node that took on a
-conqueror's brain, carry the genotype of the brain they copied. A mutation
-gives the brain a new id and remembers the old one as its parent. The ids
-therefore form a family tree ([Genotypes and the family tree](measuring-evolution.md#genotypes-families-and-the-common-ancestor)),
-which [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) climbs.
+A copied brain, and in B1 every brain after every game, changes with
+probability 0.2: about one number in ten is nudged by a fifth of a weight's
+size, and the brain gets a new [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")
+([How a brain changes](rules-in-detail.md#how-a-brain-changes)).
 
 ## What brains end up doing
 
@@ -310,7 +234,7 @@ parent gives a child:
 > **To make it again:** `python3 book_figures.py brain`.
 <!-- /figure -->
 
-The founders' random brains give their children a median of half their
+The founders' random brains give their children a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of half their
 tokens. A third of them (33%) give everything, and die of it, since a parent
 left with no tokens starves. Another third give exactly half, which is what
 *f* says when both of its outputs are negative. In the last fifty iterations

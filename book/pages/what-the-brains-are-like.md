@@ -43,16 +43,10 @@ its fan-in. Its biases are 0. A founder's brain shows what the architecture
 does before any selection. Whatever the evolved brains do differently, 1,500
 iterations of copying, changing and conquering did.
 
-The worlds are the thirty B1 worlds of 100,000 tokens of
-[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds). This page was first written
-from thirty worlds of 10,000 tokens; where those differ, both are given.
+The worlds are B1's thirty worlds of 100,000 tokens (Experiment 10), with those
+of 10,000 tokens where they differ.
 
 ## Does a brain see what it is shown?
-
-Picture five people in a row, each repeating what they hear at a quarter of
-the loudness. A shout at one end arrives at the other as a whisper, a
-thousandth as loud. A brain of B1 is such a row: what it sees passes through
-five hidden layers before it decides.
 
 To measure this, move every input a little, and see how much the outputs move.
 The ratio of the two is the brain's **gain**: the root-mean-square change of
@@ -85,15 +79,8 @@ outputs by about a seven-hundredth. A founder's brain passes on even less,
 The right panel shows where the signal goes. Each of the five hidden layers
 passes a change on at about a quarter of its size (0.23 to 0.27). Only the
 last layer, which is linear, passes it on whole, even a little enlarged
-(1.23). Five quarters multiply to (¼)⁵ ≈ 0.001.
-
-This is not an accident of these worlds; it is built into the brain. Every
-hidden layer ends in a sigmoid, an S-shaped squashing whose slope is at most
-¼. And the founders' weights are scaled to keep the sums the same size from
-layer to layer, not to make them larger. A five-layer sigmoid network started
-that way is close to blind. Deep learning met this problem when its networks
-first grew deep, and called it the **vanishing gradient**
-([How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers)).
+(1.23). Five sigmoid layers each pass about a quarter of a change, and
+(¼)⁵ ≈ 0.001 ([How a signal fades](the-brain.md#how-a-signal-fades-through-layers)).
 
 After 1,500 iterations the gain is 2.4 times a founder's; whether selection
 or mutation alone raised it, these brains cannot tell. But a gain of a
@@ -273,23 +260,11 @@ draws a weight afresh from the founders' distribution: that is the reset
 ([How a brain changes](rules-in-detail.md#how-a-brain-changes)). The jitter runs in, and the reset
 drains.
 
-Exactly: write *v* for the variance of a weight in a layer of fan-in *k*. A
-founder's weight has *v* = 1/*k*. One change jitters a weight with probability
-0.1, by a normal amount of variance 0.2²/*k*. On average that adds 0.004/*k*,
-0.4% of the founders' variance. The change also redraws one weight in a
-hundred, on average, from the founders' distribution. That takes away 1% of
-the excess over the founders' variance. So after one change, 99 weights in 100
-keep what the jitter left them, and 1 in 100 has the variance 1/*k* again. The
-level stops moving when the two balance:
-
-$$
-v = 0.99\,\bigl(v + 0.004/k\bigr) + 0.01/k, \qquad \text{so} \qquad v = 1.396/k .
-$$
-
-In words: the variance settles at 1.40 times the founders'. Then the column of
-50 weights has a length of √1.40 × 0.57 = 0.67, for every input alike. So the
-first layer of an evolved brain is what mutation makes of any matrix. Nothing
-of selection is visible in it.
+The two balance at 1.40 times the founders' variance
+([How big "a little" is](rules-in-detail.md#how-big-a-little-is)). Then the
+column of 50 weights has a length of √1.40 × 0.57 = 0.67, for every input alike.
+So the first layer of an evolved brain is what mutation makes of any matrix.
+Nothing of selection is visible in it.
 
 ## How far apart the brains are
 
@@ -404,7 +379,7 @@ depth costs little
 ## How this was made
 
 Every figure of this page reads the final checkpoint of each of the thirty
-runs of Experiment 10, listed below. A checkpoint holds the world after its
+runs of Experiment 10. A checkpoint holds the world after its
 last iteration: every living agent's brain, and every message in flight.
 `python3 book_figures.py minds` draws every figure. Each figure says, folded
 beneath it, which runs it reads and how.
@@ -414,14 +389,9 @@ Experiment 2, `B1-10000-s001` … `-s030`, made with
 `python3 gol_lab.py run E02`. When this page was first written, the 26 of them
 that lived to the end of their 3,000 iterations were read the same way.
 
-<!-- runs E10 -->
-> [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
-<!-- /runs -->
+Their box of runs is on
+[Is a world a space?](how-many-dimensions-does-a-world-have.md#the-runs-of-experiment-10),
+and their row in [Every simulation](every-simulation.md#the-labs-experiments).
 
 ## How our view changed
 
@@ -455,6 +425,6 @@ that lived to the end of their 3,000 iterations were read the same way.
 
 [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter) · [Do the brains matter?](do-the-brains-matter.md) →
 
-> [!info]- Pages that link here (20)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
+> [!info]- Pages that link here (19)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

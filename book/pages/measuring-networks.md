@@ -239,7 +239,6 @@ In B1's worlds clustering stays below 0.1, as Experiment 5 predicted
 
 <!-- used clustering -->
 - [The ideas this builds on](the-ideas-this-builds-on.md#networks)
-- [The world: tokens, agents and a network](the-world.md#how-a-world-begins)
 - [The rules in detail](rules-in-detail.md#why-a-small-world)
 - [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
 - [How worlds are measured](how-worlds-are-measured.md#step-1--a-row-of-statistics-per-phase)
