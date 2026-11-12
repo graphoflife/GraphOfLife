@@ -4,7 +4,6 @@
 > - What is a genotype, a family, and the common ancestor of the living?
 > - How do we tell whether a world keeps getting better?
 > - What would count as open-ended evolution?
-> - What do assembly theory's index and assembly count?
 
 ## In short
 
@@ -789,9 +788,8 @@ Each part closes a way to be fooled:
 - [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): what a world in which much can
   happen looks like.
 - [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): how many steps an agent's
-  neighbourhood takes to make, and how many agents share its shape. What the
-  index and assembly are is in
-  [Measures of the archived studies](measures-of-the-archived-studies.md#assembly-index-and-assembly).
+  neighbourhood takes to make, and how many agents share its shape
+  ([The assembly index](measures-atlases-and-assembly.md#the-assembly-index)).
 
 ## How our view changed
 

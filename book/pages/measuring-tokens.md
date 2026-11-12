@@ -153,8 +153,8 @@ In a settled B1 world of 100,000 tokens the Gini stays near 0.47, between
 - [Brains replaced by their average](brains-replaced-by-their-average.md#what-the-brains-of-round-3-are-like)
 - [How fast should brains change?](how-fast-should-brains-change.md#what-the-fifty-worlds-did)
 
-> [!info]- And in the Archive (2)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-record) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)
+> [!info]- And in the Archive (3)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-record) · [B1: lives and wealth](b1-lives-and-wealth.md#where-do-the-tokens-go) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)
 <!-- /used -->
 
 ### The richest tenth's share
@@ -475,7 +475,7 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 - [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
 
 > [!info]- And in the Archive (4)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#a-world-of-attack) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-picture) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#b1-the-network-size-and-scaling) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-the-pages-found)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#a-world-of-attack) · [B1: the game and its flows](b1-the-game-and-its-flows.md#where-tokens-go) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#b1-the-network-size-and-scaling) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-the-pages-found)
 <!-- /used -->
 
 ## Measuring the flow: token flow and circulation
@@ -710,7 +710,7 @@ from island to island.
 - [Particles: patterns that outlast what carries them](particles.md#how-a-ring-is-seen)
 
 > [!info]- And in the Archive (3)
-> [B1: the game and its flows](b1-the-game-and-its-flows.md#do-tokens-go-round) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-helping-is-here) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-net-version)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#do-tokens-go-round) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#from-help-to-cooperation) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-net-version)
 <!-- /used -->
 
 #### What it can and cannot say

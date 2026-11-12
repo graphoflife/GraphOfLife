@@ -125,48 +125,13 @@ app, which replays a run frame by frame.
 
 #### The questions of the baseline's study
 
-Each page of the study asks the thirty worlds one question. The first two
-are answered on this page.
-
-- [A world's life](#a-worlds-life), below — What does a world do over 1,500
-  iterations? Does it settle?
-- [The first hundred iterations](#the-first-hundred-iterations), below — What
-  happens in its first hundred iterations?
-- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages) — How often are agents
-  born and how do they die? How old do they get?
-- [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life) — How do ages and
-  lifespans change over a world's life?
-- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) — How
-  much of what a world does is decided by its seed?
-- [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) — Where do the tokens
-  go — how unequal does a world become?
-- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) — How is the game
-  played: where do agents stake, who wins the nodes?
-- [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) —
-  What shape does the network take?
-- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) — How long do genotypes
-  last, and do lineages take over?
-- [What the brains are like](what-the-brains-are-like.md) and
-  [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) — What
-  are the brains like, and what do agents say to each other?
-- [Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich) — Do the rich stay rich?
-- [How the network grows](b1-lives-and-wealth.md#how-the-network-grows) — How does the network
-  grow?
-- [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) — Are neighbours alike?
-- [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world) — How many [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
-  does a world have, and its core?
-- [What the baseline world is](what-the-baseline-world-is.md) — What the
-  baseline world is, in sum.
-
-Five of these pages were planned as experiments, Experiments 2 to 6:
-[A world's life](#a-worlds-life),
-[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide),
-[Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich),
-[What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) and
-[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages). Each wrote down a thesis
-before the runs of 10,000 tokens. Each quotes it, says whether it held there,
-and tests it again on the worlds of 100,000 tokens. The other pages only ask.
+Each section of the four B1 pages ([B1: lives and wealth](b1-lives-and-wealth.md),
+[B1: the game and its flows](b1-the-game-and-its-flows.md),
+[B1: the network, size and scaling](b1-the-network-size-and-scaling.md),
+[B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)) was once a
+page asking these thirty worlds one question. Experiments 2 to 6 each wrote a
+thesis before the runs of 10,000 tokens; their sections quote it, say whether
+it held, and test it again at 100,000 tokens.
 
 ### A world's life
 
@@ -724,15 +689,10 @@ once. Those that do get a hold are safer with every iteration they last, and
 the well connected last longest. Living long does not bring an agent
 connections; it is the connections that help it live long.
 
-There are two ways to ask how old agents get, and they give different answers.
-Follow every agent from its birth to its death, and you get its **lifetime**.
-About half of those that live through their first game are gone within ten
-iterations. Or stop a world at one moment, and look at the **ages of the
-living**. Their median, the age that half of them are below, is about 55
-iterations. The living are older because an agent that lives long is alive at
-many moments, so it is counted at many of them. A hospital ward is the same. On
-any day, long-stay patients fill most of its beds, though most patients go home
-within a day or two ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)).
+The living are older than the dead, since an agent that lives long is alive
+at many moments ([Why the living are older than the dead](measures-of-the-archived-studies.md#why-the-living-are-older-than-the-dead)):
+about half of those that live through their first game are gone within ten
+iterations, yet the median age of the living is about 55 iterations.
 
 The worlds of this page are the thirty of 100,000 tokens of [Thirty
 worlds](b1-lives-and-wealth.md#thirty-worlds). They are the first baseline, B1, run
@@ -744,21 +704,10 @@ of 10,000 tokens; [Two sizes](#two-sizes) sets them beside the large ones.
 
 ### Four ways in and out
 
-An agent enters a world in one way: it is born in a reproduction phase, with
-tokens its parent gives it. It leaves in one of four ways. Every death happens
-in a cleanup, at the end of each of the two phases of an iteration ([One
-iteration, step by step](one-iteration.md)). An agent is:
-
-- **cut off in reproduction**: mostly a newborn that its parent joined to no
-  one;
-- **starved in reproduction**: a parent that gave its last token to its child;
-- **starved in the game**: no one, not even the agent itself, staked a token
-  on its node;
-- **cut off in the game**: no tokens crossed the connections that tied its
-  part of the network to the rest, so they were cut.
-
-[Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die) defines each. Each is
-counted per hundred agents alive when its phase began:
+An agent enters a world by being born, with tokens its parent gives it, and
+leaves it in one of four ways: cut off or starved, in the reproduction phase
+or in the game ([The four ways to die](measuring-lives.md#the-four-ways-to-die)).
+Each is counted per hundred agents alive when its phase began:
 
 <!-- figure births/rates -->
 ![Births and deaths per 100 agents](../figures/births/rates.svg)
@@ -802,18 +751,14 @@ third — died in the very iteration they were born in. Some 2 million were cut
 off in the cleanup of the reproduction phase, most of them because they were
 joined to no one. The rest died in their first game, starved or cut off.
 
-An agent's **lifetime** counts the games it lived through ([Age and
-lifetime](measuring-lives.md#age-lifetime-and-survival-curves)). It runs from the iteration of its birth to the
-last iteration after whose game it was alive, both included. The 4.7 million
-were never alive after a game, so the curves of this page leave them out.
-
-The curve below, a **survival curve**, follows the other 10.4 million. These
-are all the agents born at iteration 500 or later that were still alive after
-the game of their birth iteration. Some were still alive when their run ended.
-Their lives are counted as having lasted *at least* that long. The Kaplan–Meier
-estimate does this: it uses what is known of an unfinished life, and no more
-([Survival curves (Kaplan–Meier)](measuring-lives.md#survival-curves-kaplanmeier)). The share that lived at
-least *L* iterations:
+An agent's **lifetime** counts the games it lived through, from the iteration
+of its birth to the last after whose game it was alive
+([Lifetime](measuring-lives.md#lifetime)). The 4.7 million were never alive
+after a game, so the curves of this page leave them out. The curve below, a
+**survival curve** estimated by Kaplan–Meier, follows the other 10.4 million,
+born at iteration 500 or later and alive after the game of their birth
+iteration ([Survival curves (Kaplan–Meier)](measuring-lives.md#survival-curves-kaplanmeier)).
+The share that lived at least *L* iterations:
 
 <!-- figure births/lifetimes -->
 ![How long agents live](../figures/births/lifetimes.svg)
@@ -1049,9 +994,8 @@ and 13 to 14% at least 100. Their three lines lie on top of one another.
 #### Life expectancy, birth by birth
 
 A finer view takes every stretch of 25 birth iterations, in each world on its
-own. How many of their first 100 iterations do its agents live, on average?
-This is the **restricted mean lifetime**, the area under the survival curve up
-to 100 ([Age and lifetime](measuring-lives.md#age-lifetime-and-survival-curves)). It can be measured in full
+own, and asks how many of their first 100 iterations its agents live on
+average, the **restricted mean lifetime** ([Lifetime](measuring-lives.md#lifetime)),
 for every agent born at least 100 iterations before the end of a run:
 
 <!-- figure ages/expectancy -->
@@ -1081,11 +1025,8 @@ down](b1-lives-and-wealth.md#births-and-deaths-slow-down)).
 
 #### The risk of dying at each age
 
-The **hazard** says, for an agent that has reached an age, how likely it is to
-die at that age. Exactly: take the agents alive when the iteration in which
-they are *a* iterations old begins. The hazard at age *a* is the share of them
-that is gone after that iteration's game ([Age and
-lifetime](measuring-lives.md#age-lifetime-and-survival-curves)):
+The **hazard** at age *a* is the share of the agents alive at that age that
+die at it ([The risk of dying at each age](measures-of-the-archived-studies.md#the-risk-of-dying-at-each-age)):
 
 <!-- figure ages/hazard -->
 ![The risk of dying, by age](../figures/ages/hazard.svg)
@@ -1108,10 +1049,9 @@ never more at risk than a young one. Beyond an age of about a hundred, the risk
 hardly changes. About one game in a hundred is an old agent's last, whether it
 is a hundred iterations old or four hundred.
 
-A constant risk makes the survival curve fall exponentially from there on.
-Drawn on a logarithmic axis against a plain axis of *L*, it would be a straight
-line. That is what lets the estimate of [the oldest
-agent](#why-the-oldest-agent-stops-near-850) work.
+A constant risk makes the survival curve fall exponentially from there on,
+which is what lets the estimate of [the oldest agent](#why-the-oldest-agent-stops-near-850)
+work.
 
 Agents born early, in iterations 1 to 249, were at more risk at every age, and
 most of all when young. Their risk was 31% at age 1, 4.9% at 10 and 1.3% at
@@ -1119,11 +1059,10 @@ most of all when young. Their risk was 31% at age 1, 4.9% at 10 and 1.3% at
 early period that had lived a hundred iterations was almost as safe as one born
 later.
 
-A risk that falls with age can have two causes, and this figure cannot tell
-them apart. Either each agent becomes safer as it lives, gathering tokens and
-connections. Or agents differ from birth: the fragile ones die first, and those
-left are the robust. Then the risk of each agent stays what it was, but the mix
-changes. [Who the old are](#who-the-old-are) looks at what the old have.
+A risk that falls with age may mean that each agent grows safer, or that the
+fragile die first; this figure cannot tell them apart
+([Cohorts](measures-of-the-archived-studies.md#cohorts)).
+[Who the old are](#who-the-old-are) looks at what the old have.
 
 #### Who the old are
 
@@ -1179,31 +1118,11 @@ id, its age and its connections; only its brain is replaced. So an old agent
 may carry a brain that arrived in the last game ([Questioning the
 mechanics](questioning-the-mechanics.md)).
 
-#### The ages of a steady world
-
-Suppose a world's births never changed, and every agent's life followed the
-same survival curve *S*. Then the ages of the living would follow from *S*
-alone. The agents of age *a* alive after a game are those born *a* iterations
-earlier whose lives lasted at least *a* + 1 games. With *B* newborns per
-iteration that live through their first game, there are *B* · *S*(*a* + 1) of
-them. So the share of the living at age *a* is
-
-$$
-\frac{S(a+1)}{\sum_{L \ge 1} S(L)} ,
-$$
-
-and the sum in the denominator is the mean lifetime. This is the identity of a
-**stationary population** in demography: a population whose births and risks of
-death never change. It gives a check. If the settled worlds are in such a
-state, their ages should follow from their lifetimes.
-
-Pool every life begun from iteration 500 to 1,399, and follow it up to 999
-iterations. The mean lifetime is 41.3 iterations. So the newborns should be 1 /
-41.3 = **2.4%** of the living, and the median age of the living should be
-**55**. The pyramid measured 2.3 to 2.6%, and the median age of the living over
-the settled stretch was 55. The large worlds are in a steady state of ages from
-about iteration 500 on. Their births per hundred agents are 3.3 to 3.6 in every
-stretch of 250 iterations from then on, and the lives follow one curve.
+The settled worlds pass the stationary-population check
+([The ages of a steady world](measures-of-the-archived-studies.md#the-ages-of-a-steady-world)):
+lives begun from iteration 500 to 1,399 last 41.3 iterations, so 2.4% newborns
+and a median age of 55 are expected; 2.3 to 2.6% and 55 were measured, with
+3.3 to 3.6 births per hundred agents in every stretch of 250.
 
 #### Two sizes
 
@@ -1325,33 +1244,15 @@ those differ, both are given.
 
 #### A birth, decision by decision
 
-A birth is three decisions, all taken by the parent's brain. Take
-agent *u*, holding τ tokens. Its brain gives one column of outputs for each
-of its candidates: *u* itself and each of its neighbours. From these
-columns:
-
-1. **How much.** Two of the outputs, averaged over all the columns, give two
-   numbers (*ā*, *b̄*). The child gets *c* = ⌊*f*(*ā*, *b̄*) · τ⌋ tokens: the
-   share *f* of the parent's tokens, rounded down. Here *f* is the share
-   function ([The share function](rules-in-detail.md#the-share-function-fa-b)). It gives the positive
-   part of *ā* as a share of the positive parts of both, or ½ if neither is
-   positive. If *c* = 0, there is no child.
-2. **Whom it joins.** For every candidate, the parent included, a yes-or-no
-   decision: join the child to it or not.
-3. **What it is handed.** For every neighbour of the parent, a yes-or-no
-   decision: move the parent's connection to that neighbour over to the child.
-
-Two consequences follow from the arithmetic alone, before any data:
-
-- **A poor agent can only give a lot.** With 1 token, *c* ≥ 1 needs *f* = 1:
-  the parent gives its only token. Left with none, it starves at the end of
-  the phase. With 2 tokens, *c* ≥ 1 needs *f* ≥ ½: it gives half or
-  everything. Only a richer agent can give a small share.
-- **"All", "half" and "nothing" are easy to say.** The share *f* is exactly 1
-  when *ā* is positive and *b̄* is not, and exactly ½ when neither is. It is
-  exactly 0, and there is no child, when *b̄* is positive and *ā* is not. A
-  brain does not need to compute a ratio to give half; it only needs two
-  negative numbers.
+A birth is three decisions of the parent's brain: how much (a share *f* of its
+tokens, rounded down), whom the child joins, which links it is handed
+([Phase 1: reproduction](one-iteration.md#phase-1-reproduction)); all, half and
+nothing are the share function's easy answers
+([All, nothing or half](rules-in-detail.md#all-nothing-or-half)). It follows
+from the arithmetic alone that **a poor agent can only give a lot**. With 1
+token, a child needs *f* = 1: the parent gives its only token. Left with none,
+it starves at the end of the phase. With 2 tokens, a child needs *f* ≥ ½: it
+gives half or everything. Only a richer agent can give a small share.
 
 #### Who has a child
 
@@ -1732,33 +1633,11 @@ This section reads the thirty worlds of the first baseline, B1, at 100,000
 tokens ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). The thirty worlds
 of 10,000 tokens it was first written from are given beside them.
 
-#### Measuring inequality
-
-How do we measure inequality? Sort a world's agents from poorest to richest.
-Then draw, for every share *x* of the agents counted from the poorest, the
-share of all tokens they hold. That is the **Lorenz curve** (Lorenz 1905). If
-everyone holds the same, it is the diagonal; the more unequal the world, the
-further it sags below. The **Gini coefficient** (Gini 1912) turns the sag into
-one number, between 0 (everyone the same) and almost 1 (one agent holds
-everything):
-
-![The Lorenz curve and the Gini coefficient of four agents](../diagrams/gini.svg)
-
-For *n* agents with tokens sorted from smallest, *x*₍₁₎ ≤ … ≤ *x*₍ₙ₎, it is
-
-$$
-G = \frac{\sum_{i=1}^{n} (2i - n - 1)\, x_{(i)}}{n \sum_{i=1}^{n} x_{(i)}} ,
-$$
-
-which equals 1 minus twice the area under the Lorenz curve. A Gini of 0.5 has
-a concrete meaning: two agents picked at random differ, on average, by as much
-as the average agent holds.
-[The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) shows why,
-and works an example by hand.
-
-A plainer measure reads a single point of the curve: the share of all tokens
-held by the **richest tenth** of the agents. If everyone held the same, it
-would be 10% ([The richest tenth's share](measuring-tokens.md#the-richest-tenths-share)).
+Inequality is read by the Gini coefficient, which turns the sag of the
+Lorenz curve into one number (Lorenz 1905; Gini 1912), and by the richest
+tenth's share of the tokens, 10% if everyone held the same
+([The Gini coefficient and the Lorenz curve](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve),
+[The richest tenth's share](measuring-tokens.md#the-richest-tenths-share)).
 
 #### What was expected
 
@@ -2034,23 +1913,9 @@ $$
 H = -\sum_i p_i \log_2 p_i = 1.75 \text{ bits.}
 $$
 
-With four equal shares you would need two questions every time: log₂ 4 = 2,
-the most four agents allow. With everything in one hand you would need none.
-Two readings of *H* follow ([Entropy and evenness](measuring-tokens.md#entropy-and-evenness)):
-
-- the **evenness** *J* = *H* / log₂ *n* runs from 0 (one holds everything) to
-  1 (all hold the same). Here it is 1.75/2 = 0.875;
-- the **effective number** 2^*H* is how many agents, holding equal shares,
-  would leave you exactly as uncertain: here 2^1.75 ≈ 3.4 agents.
-  ([Effective numbers](statistics.md#effective-numbers-how-many-kinds) compares it with other ways of
-  counting kinds.)
-
-The same arithmetic works for anything that falls into categories. For the
-connections, the categories are the numbers of connections an agent can have:
-1, 2, 3, and so on. Then *pᵢ* is the share of agents with exactly *i*. For the
-genotypes, the categories are the genotypes, and *pᵢ* is the share of agents
-carrying genotype *i*. The question becomes: *pick an agent at random. How
-many connections does it have? Which genotype does it carry?*
+Its evenness and effective number, read as in
+[Entropy and evenness](measuring-tokens.md#entropy-and-evenness), are 0.875 and
+3.4.
 
 #### Three things spread over the agents
 
@@ -2198,19 +2063,15 @@ different evenness.
 
 ### Do the rich stay rich?
 
-A world's Gini coefficient hardly moves over its settled life. But an
-unchanging inequality can hide two very different worlds. In one, the same
-agents are rich game after game. In the other, wealth is as unequal at every
-moment, but who holds it keeps changing. This section follows single agents
-through time to tell which world Graph of Life is. Economists call this
-question **mobility** ([Mobility](measures-of-the-archived-studies.md#mobility)).
+A world's Gini coefficient hardly moves over its settled life, but who holds
+the wealth may still change: the question of **mobility**
+([Mobility](measures-of-the-archived-studies.md#mobility)).
 
 #### How the order of wealth is remembered
 
-Line up the agents of a world by their tokens, the poorest first. Do it again
-some games later, for the agents still alive. If the order is the same, the
-rich stayed rich. Spearman's **rank correlation** ρ measures how alike the two
-orders are, from 1 (exactly the same) through 0 (unrelated).
+Spearman's **rank correlation** ρ says how alike the order of wealth is some
+games later, from 1 (the same order) through 0 (unrelated)
+([Mobility](measures-of-the-archived-studies.md#mobility)).
 
 <!-- figure rich/memory -->
 ![How long wealth lasts](../figures/rich/memory.svg)
@@ -2311,9 +2172,8 @@ Ten games on, where are the agents of each fifth of the order of wealth?
   keep its connections in use is cut off whole.
 
 Among those still alive, the **Shorrocks index** of the moves is **0.59**
-(0.57 at 10,000 tokens). It runs from 0, for a world in which nobody changes
-place, to 1, for one that forgets the order completely in ten games
-([Mobility](measures-of-the-archived-studies.md#mobility)). The top is the stickiest part of the order: an
+(0.57 at 10,000 tokens; [Mobility](measures-of-the-archived-studies.md#mobility)).
+The top is the stickiest part of the order: an
 agent at the top has the most connections to hold it there.
 
 #### The fate of the richest
@@ -3302,6 +3162,13 @@ Experiment 8 (`python3 gol_lab.py run E08`).
   notebook's question, and they are kept so that every experiment here can be
   read and made again. Nothing was cut but five copies of the list of the runs
   of Experiment 10: it is now shown once.
+- **12 November 2026.** What the reference pages define is no longer told here
+  again: the four ways to die, the lifetime and the survival curve, the risk
+  at each age, the Gini coefficient and the Lorenz curve (the subsection
+  Measuring inequality, with a second copy of its diagram), evenness, mobility
+  and the steps of a birth are a clause and a link each. The subsection The
+  ages of a steady world became one sentence of its numbers; its method is in
+  [Measures of the archived studies](measures-of-the-archived-studies.md#the-ages-of-a-steady-world).
 
 <!-- turns -->
 ---

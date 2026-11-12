@@ -1059,19 +1059,10 @@ The worlds are all of 10,000 tokens:
 
 ### Where, who and chance
 
-Why does one agent decide differently from another? There are four possible
-reasons:
-
-- **where it is**: every brain does the same in the same place, and agents
-  differ because their places differ;
-- **who it is**: some brains do more of it than others wherever they are: a
-  trait, like a temperament;
-- **who it is, there**: brains differ in how they answer a place;
-- **chance**: the random inputs decide.
-
-With every brain in every situation and draw, the variance of a decision
-splits exactly into these four parts.
-[Where, who and chance](statistics.md#splitting-variation-between-worlds-and-within-them) shows how each part is computed.
+Why does one agent decide differently from another? With every brain in every
+situation and draw, the variance of a decision splits exactly into four parts:
+**where** it is, **who** it is, **who it is, there**, and **chance**
+([Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance)).
 
 A small example, made up to show the idea. Two brains, A and B, decide what
 share of their tokens to keep at home. Each is put in two places, an agent
@@ -1476,7 +1467,7 @@ to every condition of every experiment, and to the pilot worlds.
   other, and when their stakes were pooled.
 - [The diversity score](measuring-health.md#the-diversity-score): how widely a world's agents
   spread in what they hold.
-- [Where, who and chance](statistics.md#splitting-variation-between-worlds-and-within-them) and
+- [Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance) and
   [Effective numbers](statistics.md#effective-numbers-how-many-kinds): the two methods of this page.
 
 ## How our view changed

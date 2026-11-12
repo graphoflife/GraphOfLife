@@ -35,53 +35,16 @@ connections, makes tokens run downhill, and leaves almost nothing going round
 in one game. The brains add a small margin on top. Two rules decide the rest:
 whether a connection must carry tokens to survive, and who inherits the dead.
 
-### The picture
-
-Picture every agent cutting its tokens into equal heaps: one for its own node,
-and one for each neighbour's. That is the **even split**
-([The even split](measuring-tokens.md#the-even-split)). If every agent did only that, the tokens of
-a world would wander like a drop of ink in water: each token, game after game,
-stays or steps to a neighbour, each with the same chance. Such a wandering is
-a **random walk**, and it has a resting state that can be worked out exactly.
-
-The brains of a B1 world come close to that picture. So the measures of flow
-mostly measure the walk, and the interesting part is where a world departs
-from it.
-
-### The budget of a game (where tokens go)
-Every token is staked in every game, in one of three ways: on the agent's own
-node; on a neighbour that stakes back, so the two stakes cancel (*matched*);
-or one way. In a settled world of B1 at 100,000 tokens, **30% of the tokens
-stay home, 51% are matched and 20% go one way**; at 10,000 tokens it is 30%,
-49% and 21% ([The budget of a game](b1-the-game-and-its-flows.md#where-tokens-flow)).
-
-Nine stakes in ten are returned. That sounds like reciprocity, but it is what
-breadth alone gives: agents stake on 81% to 96% of the agents they could stake
-on, so a stake usually meets one coming back
-([Stakes that are returned](b1-the-game-and-its-flows.md#stakes-that-are-returned)).
-
-The brains come close to the even split. Agents with one connection keep 58%
-of their tokens at home, where an even split gives 50%. Agents with ten to
-forty-nine connections keep 10%, where it gives 7%. Nearly all of the
-difference is the rounding of tokens into whole ones. And 42% of the agents
-score every target zero or less, so the rules split their tokens evenly for
-them ([How widely agents stake](b1-the-game-and-its-flows.md#how-widely-agents-stake)).
-
-On a single connection, a game is small change. 52% of the connections carry
-exactly two tokens, and on 70% the two directions cancel exactly: a stake for
-a stake. In B1 a connection that carries nothing is cut, every one of the
-1,650,222 such connections counted
-([What crosses a connection](b1-the-game-and-its-flows.md#how-much-crosses-a-connection)).
+The one rule is the even split ([The even split](measuring-tokens.md#the-even-split));
+this page's [budget](#the-budget-of-a-game-where-tokens-flow),
+[random walk](#the-game-as-a-random-walk) and
+[lightning](#lightning-in-every-world) sections give the numbers.
 
 ### Where tokens come to rest
 
-A random walk on a network comes to rest when every agent holds tokens in
-proportion to its connections plus one: **an agent's share settles near
-(connections + 1) / Σ(connections + 1)**. B1's games follow that walk with a
-slope of 0.94, in the worlds without a giant star
-([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
-
-So in B1, wealth is a matter of place. Tokens and connections go together (a
+In B1, wealth is a matter of place, as the even split's resting state says
+([The resting state](measuring-tokens.md#the-resting-state)). Tokens and
+connections go together (a
 rank correlation of +0.56). A rich agent is still rich ten games later
 (+0.78). The richest tenth hold about two fifths of the tokens, 39% to 44%
 ([Rich agents are connected agents](b1-lives-and-wealth.md#rich-agents-are-connected-agents),
@@ -120,32 +83,12 @@ The two [baselines](b1-and-b2.md "The stated rules an experiment starts from: B1
 
 ### Round and round?
 
-Within one game almost nothing goes round. Cancel every stake against the one
-coming back, and look for loops in what is left. A greedy search finds 0.3%
-of the net flow in loops, and the conservation of tokens allows at most 16%:
-the net flow of a game runs downhill
-([Do tokens go round?](b1-the-game-and-its-flows.md#do-tokens-go-round),
-[The flow, in round figures](b1-the-game-and-its-flows.md#the-flow-in-round-figures)).
-Before cancelling, the longest loops are as long as the world is wide: the
-longest grows as the tokens to the power 0.31. After cancelling they are five
-or six agents long at 100,000 tokens
-([The longest loop grows with the world](b1-the-game-and-its-flows.md#the-longest-loop-grows-with-the-world)).
-
-Over fifty games the picture changes. The flow of fifty games can be split
-exactly into a part that runs downhill and a part that circulates: 80% of
-B1's net flow circulates, and 59% of B2's. **But random flow on the same
-networks circulates 59% to 60% and 50% to 53%.** The excess the agents add is
-about 0.2 in B1, and under 0.1 in B2
-([A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one)).
-
-One rule decides how much goes round in the first place: **whether a
-connection must carry tokens to survive.** Where it must (B1, and B2 with
-every unused link lapsing), the greedy search finds about a sixth of the
-staked flow on loops: 13% in B1 at 100,000 tokens, 17% at 10,000, and 11% to
-28% in the B2 pilots whose links lapse. In B2, whose connections survive
-unused if their ends share two neighbours, it finds 4.5%, and the share falls
-over a world's life
-([Every world](b1-the-game-and-its-flows.md#every-world)).
+Within one game almost nothing goes round once returned stakes cancel; over
+fifty games much does, but hardly more than random flow would
+([Do tokens go round?](#do-tokens-go-round)). How much goes round is set by
+one rule, whether a connection must carry tokens to survive: 13% of the staked
+flow is on loops in B1, 11% to 28% in the B2 pilots whose links lapse, and 4.5%
+in B2 ([Every world](#every-world)).
 
 ### Gifts, takeovers and groups
 
@@ -185,7 +128,7 @@ births fills a world**, to half as many agents again, and poorer ones
 - **Two rules matter most for flow.** Whether an unused connection lapses
   decides how much goes round. Who inherits the dead decides how many agents
   share the tokens.
-- **Still open:** how one game's 0.3% to 16% of circulation grows to fifty
+- **Left open:** how one game's 0.3% to 16% of circulation grows to fifty
   games' 80% and 59%; what makes B1's excess over chance; whether alliances'
   groups outlast the network's regions; how the flow of brains that see
   differs; and how an estate shared by wealth (`by_tokens`) moves tokens.
@@ -590,9 +533,9 @@ mean that B stakes *more* on A *because* A staked on B. That is a question for
 
 #### How widely agents stake
 
-An agent with *d* connections has *d* + 1 **candidates**: its own node and its
-neighbours' nodes. If it split its tokens evenly, it would put 1/(*d* + 1) of
-them on each, home included.
+An agent with *d* connections has *d* + 1 **candidates**, its own node and its
+neighbours'; an even split puts 1/(*d* + 1) on each
+([The even split](measuring-tokens.md#the-even-split)).
 
 <!-- figure flow/breadth -->
 ![How widely agents stake](../figures/flow/breadth.svg)
@@ -620,25 +563,16 @@ one connection, falling to 81–82% for agents with ten or more. And their
 | even split, 1/(*d*+1) | 50% | 33% | 23% | 14% | 7% | 1.2% |
 | even split, in whole tokens | 60% | 44% | 34% | 23% | 13% | 3.0% |
 
-The extra at home is not the brains' doing. Tokens are whole, and an even split
-rarely comes out even: an agent with 3 tokens and 2 candidates cannot stake 1.5
-on each. The rules deal the tokens left over to the candidates with the largest
-remainders ([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)). In an
-even split every remainder ties. So the leftovers go down the list of
-candidates in order, and an agent's own node is always first.
-
-Dealt out in whole tokens this way, an exact even split puts 60% at home for
-an agent with one connection. For one with two, it puts 44%. The brains put a
-little *less* at home than that.
-
-Often there is not even a split to round. In the median world, 42% of agents
-give every candidate a score of zero or below (58% at 10,000 tokens). Then the
-rules split their tokens evenly by default
-([What the brains are like](what-the-brains-are-like.md)). The brains that do
-give positive scores give nearly the same one to every candidate: a brain's
-outputs barely move with what it sees. So the evolved brains end up doing
-something close to the simplest thing possible: spreading their tokens evenly
-over everyone they can reach.
+The extra at home is not the brains' doing. Tokens are whole (3 tokens on 2
+candidates cannot be 1.5 each), and the leftovers of an even split go first to
+the agent's own node
+([Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers)),
+which the last row counts; the brains put a little *less* at home than that.
+And in the median world 42% of agents score every candidate zero or below (58%
+at 10,000 tokens), so the rules split their tokens evenly for them
+([What the brains are like](what-the-brains-are-like.md)). The evolved brains
+end up doing something close to the simplest thing possible: spreading their
+tokens evenly over everyone they can reach.
 
 That is what blind brains do.
 [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
@@ -652,12 +586,9 @@ together.
 
 #### The game as a random walk
 
-Suppose, then, that every agent split its tokens **exactly** evenly. Follow a
-single token at node *u*. In a game it goes to each of the *d*ᵤ + 1 candidates
-of *u* with the same chance. Repeated game after game, that is a **random
-walk** of tokens. At every step a token stays where it is or moves to a
-neighbour, each with probability 1/(*d*ᵤ + 1). It is a "lazy" walk, because
-staying is one of the choices.
+Suppose, then, that every agent split its tokens **exactly** evenly. Each token
+would take a lazy random walk, staying or stepping to a neighbour with the same
+chance ([A lazy random walk](measuring-tokens.md#a-lazy-random-walk)).
 
 How good is that description? For every agent at the start of a game, work out
 the balance the even split would give it. That is the stakes it would receive,
@@ -709,26 +640,10 @@ tilts a straight line fitted to two million. The rounding of
 [Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers) is a small
 correction for an agent, and a large one for a star.
 
-A random walk on a network has a well-known resting state, and it takes two
-lines to find. Write π(*u*) for the share of all tokens at node *u*. The walk is
-at rest when, across every connection, as many tokens go one way as the other:
-
-$$
-\pi(u) \cdot \frac{1}{d_u + 1} = \pi(v) \cdot \frac{1}{d_v + 1}
-\quad\text{for every connection } \{u, v\} .
-$$
-
-The left side is what *u* sends to *v* in a game: its share, split over its
-*d*ᵤ + 1 candidates. The right side is what *v* sends back. The two are equal
-if π(*u*) is proportional to *d*ᵤ + 1. So:
-
-> [!summary] The resting state of the even split
-> On a fixed network, tokens moved by the even split settle to
-> τᵤ = *T* · (*d*ᵤ + 1) / Σᵥ (*d*ᵥ + 1): **every agent holds tokens in
-> proportion to its number of connections plus one.**
-
-Here *T* is the number of tokens in the world, and τᵤ what agent *u* holds.
-This is the law behind several findings of other pages:
+On a fixed network the even split comes to rest with every agent holding
+tokens in proportion to its connections plus one
+([The resting state](measuring-tokens.md#the-resting-state)). This is the law
+behind several findings of other pages:
 
 - agents with more connections hold more tokens
   ([How unequal is a world, and who stays rich](b1-lives-and-wealth.md#rich-agents-are-connected-agents));
@@ -942,17 +857,10 @@ both rule sets, every size, every setting an experiment changed.
 
 #### What a lightning is
 
-In every game each agent splits its tokens over its own node and its
-neighbours' nodes. A token staked on a neighbour's node **flows** along that
-connection, from the agent to the neighbour. Draw an arrow for every such
-token, and a game becomes a network of arrows: the flow.
-
-A **lightning** is what the viewer calls a closed loop in that flow: A stakes on
-B, B on C, and C back on A. A loop of *L* agents carries *L* tokens, one along
-each of its arrows, and scores *L*². So one long circuit counts for more than
-many short ones. Ecologists measure the same thing in food webs, as a *cycling
-index*. The note [Lightning: tokens that go round](measures-of-the-archived-studies.md#lightning-tokens-that-go-round) works through
-the definition with an example. Why it matters:
+A **lightning** is a closed loop of flow, A staking on B, B on C and C back on
+A, scored by its length squared
+([Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)).
+Why it matters:
 
 - **Flow that goes round is flow that can keep going.** Tokens that run one way
   end up somewhere and stop; tokens that go round can circulate for ever. In
@@ -966,32 +874,15 @@ the definition with an example. Why it matters:
   has moved. So every number below comes twice: for the flow as it was staked
   (*gross*), and for what is left after cancelling (*net*).
 
-Finding the largest set of loops in a flow is as hard as some of the hardest
-problems in computing. So the engine (`gol_lightning.py`) does not try. It
-peels loops off greedily. It walks along the arrows, preferring agents it has
-not visited yet, until an agent repeats. It takes that loop, removes one token
-from each of its arrows, and starts again. Every count is therefore a **lower
-bound**: there are at least this many tokens on loops, perhaps more. A run
-records eight numbers, every 25th iteration:
-
-| statistic | what it is |
-|---|---|
-| `cyclingShare` | the share of the staked flow the greedy search put on loops |
-| `lightningLongest` | the longest loop it found, in agents |
-| `lightningScore` | the sum over its loops of the length squared (long loops count for more) |
-| `netFlowShare` | the flow left after cancelling, as a share of the flow staked |
-| `netCyclingShare` | the share of that net flow on loops |
-| `netLightningLongest`, `netLightningScore` | the longest net loop, and the score of the net loops |
-| `flowImbalance` | half the sum over agents of the gap between flow in and flow out (counted positive either way), over the total: how much of the flow *must* run one way, whatever the loops are |
+The engine (`gol_lightning.py`) peels loops greedily, so every count is a
+floor, and conservation sets a ceiling; a run records eight numbers of them
+every 25th iteration
+([Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)).
 
 #### Do tokens go round?
 
 Start with the thirty B1 worlds of 100,000 tokens. How much of their flow
-goes round? Only bounds can be given ([Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)). The greedy
-search finds some loops: a floor. Conservation sets a ceiling. A token that comes back to where it started
-changes no balance. So an agent that ends a game with more or less than it
-sent cannot have had all its flow in loops. At least the difference runs one
-way.
+goes round?
 
 <!-- figure flow/circulation -->
 ![Do tokens go round?](../figures/flow/circulation.svg)
@@ -1030,13 +921,9 @@ agent's balance, so the imbalance stays the same, and at least
 net flow can go round, and the search finds almost nothing, as at 10,000
 tokens.
 
-A theorem says what that means. Any flow on a network can be split into two
-parts ([Flows that go round](measuring-tokens.md#flows-that-go-round)). One part runs **downhill**,
-from high to low along a "potential": a height that every agent has. The other
-part **circulates**. This is the Helmholtz–Hodge decomposition (for networks,
-Jiang, Lim, Yao and Ye 2011). A downhill flow can never go round: round a loop,
-you would come back to the height you started from.
-
+Any flow on a network splits into a part that runs downhill and a part that
+circulates, the Helmholtz–Hodge decomposition (for networks, Jiang, Lim, Yao
+and Ye 2011; [Flows that go round](measuring-tokens.md#flows-that-go-round)).
 The net flow of a game is almost entirely of the downhill kind. Tokens move
 from hills to valleys, as heat does: from agents richer than their
 neighbourhood to agents poorer than it. The few loops that survive cancelling
@@ -1695,6 +1582,11 @@ has no single box of runs.
 - **12 November 2026.** The method of the flow modules, Flow modules and the
   map equation, moved to [Measuring tokens](measuring-tokens.md#flow-modules-and-the-map-equation),
   beside the other measures of the flow; the results stay here.
+- **12 November 2026.** Where tokens go lost its subsections The picture and
+  The budget of a game, which told again what the sections below and
+  [The even split](measuring-tokens.md#the-even-split) tell; the even split, its
+  lazy walk and its resting state, and what a lightning is, are a clause and a
+  link to their reference pages.
 
 ## References
 

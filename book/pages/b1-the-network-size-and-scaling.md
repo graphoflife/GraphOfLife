@@ -21,11 +21,11 @@ agents per token, and nothing points to a critical state. And thirty seeds of
 one world end up alike: each world wanders, and forgets its level within about
 three hundred iterations.
 
-Three methods this page used are still used across the notebook, so they are
-explained in Statistics: [fitting a power
-law](measures-of-the-archived-studies.md#fitting-a-power-law-properly), [how many seeds an experiment
+Three of its methods are explained elsewhere: [fitting a power
+law](measures-of-the-archived-studies.md#fitting-a-power-law-properly) in Measures of the
+archived studies, and [how many seeds an experiment
 needs](statistics.md#what-thirty-seeds-can-see) and [how long a world
-remembers](statistics.md#what-a-b1-world-remembers).
+remembers](statistics.md#what-a-b1-world-remembers) in Statistics.
 
 Its sections:
 
@@ -320,18 +320,13 @@ core.
 
 #### Why the core matters
 
-The core is where a world can hold anything together. Every connection in it
-lies on a loop or on a path between loops. Cutting one on a loop splits
-nothing: there is another way round. But a connection on a path between loops
-is a bridge, and its loss splits the core in two ([Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)). The
-**cut risk** of a world is the largest share of it that one bridge holds to
-the rest ([Cut risk](measuring-networks.md#cut-risk)). In one world of
-[How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks), a third to almost half of the
-world hung on a single connection, for 140 iterations. A tree is cut off whole
-by the loss of the one connection that holds it. So anything larger than an
-agent that might last and evolve can only live in the core. Such a thing would
-be a group of agents that holds together while its members come and go.
-
+The core is where a world can hold anything together: a loop survives the
+loss of one connection, while a tree is cut off whole by the loss of the one
+that holds it ([Why the core matters](measuring-networks.md#why-the-core-matters)).
+In one world of [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks), a third
+to almost half of the world hung on a single connection, for 140 iterations.
+So anything larger than an agent that might last and evolve, a group of agents
+that holds together while its members come and go, can only live in the core.
 And the core is the better candidate for a **space**, in the sense of
 [Physical inspiration](physical-inspiration.md). Trees branch. A tree of depth
 *d* can hold a number of agents that grows exponentially with *d*. So the
@@ -377,9 +372,9 @@ iterations and do not move after.
 
 #### How far the trees hang
 
-Search outward from all core agents at once, one step at a time: a
-breadth-first search. It gives every other agent its distance from the core,
-and the core agent its tree hangs from.
+One breadth-first search from all core agents at once gives every other agent
+its distance from the core, and the core agent its tree hangs from
+([How far a tree hangs](measuring-networks.md#how-far-a-tree-hangs)).
 
 <!-- figure core/trees -->
 ![The trees that hang off the core](../figures/core/trees.svg)
@@ -408,12 +403,10 @@ trees are small, with a few large ones.
 
 #### A core within the core
 
-Peeling can go on. Remove, again and again, every agent with fewer than three
-connections, and what is left is the **3-core**; with fewer than *k*, the
-*k*-core. The core of this page is the 2-core. An agent's **core number** is
-the deepest core it belongs to. It is 1 for the trees and leaves, which the
-first peeling removes. It is 2 for the agents of the core that the 3-core no
-longer holds, and so on. A world is an onion:
+Peeling can go on, to the 3-core and deeper; an agent's **core number** is the
+deepest core it belongs to, 1 for the trees and leaves
+([Deeper cores: the onion](measuring-networks.md#deeper-cores-the-onion)). A
+world is an onion:
 
 <!-- figure core/onion -->
 ![A world as an onion](../figures/core/onion.svg)
@@ -437,13 +430,10 @@ the world's densest knot.
 
 #### The loops live in the core
 
-A world after cleanup is one piece. How much more than a tree is it? Take any
-tree of its connections that reaches every agent, a **spanning tree**. It has
-one connection fewer than the world has agents. Every other connection closes
-one loop with it, and none of these loops is a combination of the others. So a
-world has connections − agents + 1 **independent loops**, its **cycle rank**
-([Loops](measuring-networks.md#loops)). That many connections, the right ones, could be cut
-without splitting the world. All of those loops are in the core:
+A world has connections − agents + 1 **independent loops**, its **cycle rank**
+([Independent loops: the cycle rank](measuring-networks.md#independent-loops-the-cycle-rank)):
+that many connections, the right ones, could be cut without splitting it. All
+of those loops are in the core:
 
 <!-- figure core/loops -->
 ![Loops, per agent and per core agent](../figures/core/loops.svg)
@@ -496,17 +486,10 @@ as often. They starve, and whole parts of the core go quiet at once
 
 #### How many dimensions the core has
 
-Two rulers measure a network's dimension
-([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
-The first counts the agents in a ball of radius *r*. In a space of *d*
-dimensions, their number grows like *r*^*d*
-([Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension)). The second
-releases a walker that steps at random. It asks how often the walker is back
-where it started after *t* steps: the more dimensions, the rarer
-([The spectral dimension](measuring-space.md#the-spectral-dimension)). Both rulers are laid on the
-whole world, on its core alone, and on its **random twin**
-([The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space)). The twin has the
-same agents, each with as many connections, wired at random.
+Two rulers of a network's dimension, the agents in a ball of radius *r* and a
+random walker's returns ([Three rulers](measuring-space.md#three-rulers)), are
+laid on the whole world, on its core alone, and on its **random twin**, the
+same agents wired at random ([The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space)).
 
 <!-- figure core/dimension -->
 ![How many dimensions the core has](../figures/core/dimension.svg)
@@ -588,11 +571,9 @@ the world has and its twin lacks is what the rules built.
 #### Distances
 
 [How far apart are two agents?](#how-far-apart-are-two-agents) found two
-agents of a settled world a median 17.7 steps apart: that is the world's
-**mean path length**. Two more numbers describe its distances
-([Radius and diameter](measuring-networks.md#radius-and-diameter)). The **diameter** is the
-distance between the two agents furthest apart. The **radius** is how far the
-most central agent has to reach to touch everyone.
+agents of a settled world a median 17.7 steps apart, its **mean path length**;
+its **diameter** and **radius** complete its distances
+([Radius and diameter](measuring-networks.md#radius-and-diameter)).
 
 <!-- figure geometry/distances -->
 ![Three distances](../figures/geometry/distances.svg)
@@ -635,12 +616,9 @@ so the network only ever grows locally, branch by branch.
 
 #### How a world grows around an agent
 
-Stand on an agent and count the agents within *r* steps. This is the ball of
-[How many dimensions the core has](#how-many-dimensions-the-core-has), seen up
-close in one world. In a space of *d* dimensions the count grows like *r*^*d*.
-In a tree, or in a random network, it grows exponentially: by about the same
-factor with every step
-([Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension)).
+Stand on an agent and count the agents within *r* steps: in a space of *d*
+dimensions the count grows like *r*^*d*, in a tree or a random network
+exponentially ([Three rulers](measuring-space.md#three-rulers)).
 
 <!-- figure geometry/ball -->
 ![How many agents are within r steps](../figures/geometry/ball.svg)
@@ -723,11 +701,8 @@ hub pull up.
 
 #### Covering a world with boxes
 
-Cover the world with boxes. A box of size ℓ is every agent within (ℓ − 1)/2
-steps of a centre. The larger the boxes, the fewer are needed: in a space of
-*d* dimensions, their number falls like ℓ^−*d*. Halve the size of the boxes,
-and a line needs twice as many, a sheet four times as many
-([Box dimension](measuring-space.md#box-dimension)).
+Cover the world with boxes of size ℓ: in a space of *d* dimensions their
+number falls like ℓ^−*d* ([Box dimension](measuring-space.md#box-dimension)).
 
 <!-- figure geometry/boxes -->
 ![Covering one world with boxes](../figures/geometry/boxes.svg)
@@ -757,10 +732,9 @@ read 2.0.
 
 #### How easily a world could be cut
 
-The **spectral gap** λ₂ measures, in one number, how hard a network is to cut
-into two large parts. It also says how quickly a random walk on it forgets
-where it started: after about 1/λ₂ steps
-([The spectral gap](measuring-networks.md#the-spectral-gap)).
+The **spectral gap** λ₂ says how hard a network is to cut into two large
+parts, and a random walk on it forgets where it started after about 1/λ₂
+steps ([The spectral gap](measuring-networks.md#the-spectral-gap)).
 
 The world of seed 1 has λ₂ = 0.00095. Its random twin has 0.031:
 **thirty-three times larger** (thirty-two at 10,000 tokens). By Cheeger's
@@ -1163,33 +1137,15 @@ average, and nobody is ten times as tall as anyone else. Other quantities
 have no typical size at all. In the worlds of this page, the median agent
 holds 5 tokens, and a few hold thousands.
 
-A **power law** is the purest case of no typical size. A quantity *k*
-follows one if the share of values equal to *k* falls as *k*^−γ, for some
-exponent γ: P(*k*) ∝ *k*^−γ. Then doubling *k* always divides the share by
-the same factor, 2^γ, whether *k* is 2 or 2,000. With γ = 3, every doubling
-divides it by 8.
-
-Such a distribution is easiest to see through the share of values **at
-least** *k*: the complementary cumulative distribution, or CCDF
-([The degree distribution](measuring-networks.md#the-degree-distribution)). For a power
-law it falls as *k*^−(γ−1). On log–log axes, where both axes are
-logarithmic, that is a straight line of slope 1 − γ
-([Logarithmic axes](statistics.md#logarithmic-axes-and-power-laws)).
-
-Power laws have a special place in the study of complex systems. Networks
-whose numbers of connections follow one are called **scale-free**
-(Barabási and Albert 1999). Pareto (1896) found one in incomes. Sandpiles,
-earthquakes and, in a famous model, extinctions come in avalanches of every
-size (Bak, Tang and Wiesenfeld 1987; Bak and Sneppen 1993). And noise whose
-power falls as 1/*f*, for the frequency *f*, is found in music, rivers and
-heartbeats. A power law is often read as a sign of something deep. It may
-mean a system poised at a critical point, or one that grows by "the rich get
-richer".
-
-Most claimed power laws do not survive a careful test (Clauset, Shalizi and
-Newman 2009). And scale-free networks turn out to be rare (Broido and
-Clauset 2019). The trouble is that many curves look straight over a decade
-or two of log–log axes.
+A **power law**, P(*k*) ∝ *k*^−γ, is the purest case of no typical size:
+doubling *k* divides the share by the same factor whether *k* is 2 or 2,000,
+and on log–log axes its tail is a straight line
+([Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws)).
+It is often read as a sign of something deep, a critical point or "the rich
+get richer". But most claimed power laws do not survive a careful test
+(Clauset, Shalizi and Newman 2009), and scale-free networks are rare (Broido
+and Clauset 2019): many curves look straight over a decade or two of log–log
+axes.
 
 This page fits power laws to four things in the baseline worlds. They
 are the connections, the tokens, the deaths of one game, and the rhythm of a
@@ -1200,10 +1156,10 @@ tokens this page was first written from differ, both are given.
 
 ### Fitting a power law properly
 
-The method, maximum likelihood from where the tail starts, is one the notebook
-still uses. So since 11 November 2026 it is explained in Statistics:
-[Fitting a power law properly](measures-of-the-archived-studies.md#fitting-a-power-law-properly).
-The sections below apply it to B1's worlds.
+The method, maximum likelihood from where the tail starts, is explained in
+[Fitting a power law properly](measures-of-the-archived-studies.md#fitting-a-power-law-properly),
+in Measures of the archived studies. The sections below apply it to B1's
+worlds.
 
 ### The connections of one world
 
@@ -1274,38 +1230,13 @@ scale-free" would claim far more than this.
 
 #### Where the tail of the connections could come from
 
-Where would a tail like this come from? The rules contain a known mechanism.
-A child is joined to some of its parent's candidates: in effect, it
-**copies** part of its parent's neighbourhood
-([How a child is joined](b1-lives-and-wealth.md#how-a-child-is-joined)).
-An agent gains a connection whenever one of its neighbours has a child that
-is joined to it. So an agent with twice the neighbours has about twice the
-chances.
-
-The well connected then gain connections in proportion to their
-connections. That is
-[preferential attachment](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel)
-(Barabási and Albert 1999), reached here by copying. The "duplication"
-models of protein networks reach it the same way (Vázquez, Flammini, Maritan
-and Vespignani 2003; Chung, Lu, Dewey and Galas 2003). Preferential
-attachment on its own gives γ = 3.
-
-[How the network grows](b1-lives-and-wealth.md#how-the-network-grows)
-has measured it here. An agent gains connections in proportion to those it
-has, as *k*^1.02, and loses them a little faster, as *k*^1.20. The faster
-losses bend the tail down at the top. Whether this is what makes the tail is
-still a hypothesis. An experiment that joined children to random agents
-instead would test it.
-
-The same mechanism came back when brains could see
-([What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds)). A
-brain that chooses a newborn's links ranks its candidates by what it sees of
-them. Whatever it favours, the well connected are among the candidates more
-often, because they are the neighbours of more agents. In pilots in
-which the brains chose a newborn's two extra links, the best-connected agent
-was joined to 30% of the world. So the second baseline, B2, draws two of
-a newborn's links at random from its parent's neighbours. And it caps at
-eight the links a brain may choose.
+A child copies part of its parent's neighbourhood: preferential attachment by
+copying (Barabási and Albert 1999), with gains as *k*^1.02 and losses as
+*k*^1.20 ([Where preferential attachment is used](measures-of-the-archived-studies.md#where-preferential-attachment-is-used)).
+The "duplication" models of protein networks reach it the same way (Vázquez,
+Flammini, Maritan and Vespignani 2003; Chung, Lu, Dewey and Galas 2003).
+Whether it makes the tail is still a hypothesis, and B2 answered the same pull
+([What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds)).
 
 ### The tokens: a power law in the tail
 
@@ -1516,22 +1447,13 @@ they belong to the rules, not to what the brains compute.
 
 ### Four relations
 
-Does an agent with ten times the connections hold ten times the tokens? Plot
-every agent as a dot, its connections across and its tokens up. Use
-logarithmic axes, on which each step multiplies by the same factor
-([Logarithmic axes and power laws](statistics.md#logarithmic-axes-and-power-laws)). If tokens grew as a
-power of connections, *y* ≈ *a xᵇ*, the dots would gather around a straight
-line of slope *b*. That slope is the **exponent**. An exponent of 1 means in
-proportion; one of 0.5 means that ten times the connections bring about three
-times the tokens.
-
-An agent has more such properties. Besides tokens and connections, there are
-its triangles, how closely knit its neighbourhood is, and how much its tokens
-change in a game. Every 25 iterations, the viewer fits four **scaling
-relations** between them by least squares on the logarithms of all agents
-([Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)). This page shows the agents behind
-the four fits. And it finds that one of the exponents means something quite
-different from what it seems to say.
+Does an agent with ten times the connections hold ten times the tokens? Every
+25 iterations the viewer fits four **scaling relations** between an agent's
+tokens, connections, triangles, clustering and change in a game, by least
+squares on the logarithms of all agents
+([Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)).
+This page shows the agents behind the four fits. And it finds that one of the
+exponents means something quite different from what it seems to say.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of Experiment 10
 ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). The pictures show every
@@ -2788,8 +2710,8 @@ these matters.
   the brains could make them differ
   ([What the brains are like](what-the-brains-are-like.md)).
 - **The stopping rule needs care.** A world at twenty agents is not
-  necessarily dying. Future experiments that care about extinction should run
-  a condition with the rule off, as Experiment 8 did.
+  necessarily dying. With the rule off, all 12 small worlds of Experiment 8
+  lived.
 
 ### How this was made (worlds of many sizes)
 `python3 gol_lab.py run E08` and `python3 gol_lab.py run E10` make the runs
@@ -3153,23 +3075,11 @@ they vary most.
 
 ### How many seeds an experiment needs
 
-From the spread follows how many worlds each condition needs. Say a setting
-changes the mean of a statistic by a share Δ: Δ = 0.1 for a change of a
-tenth. An experiment should find that change four times in five, with a test
-at the 5% level. If the worlds of a condition vary with a spread *c*, each
-condition needs about
-
-$$
-n = \frac{2\,(z_1 + z_2)^2\, c^2}{\Delta^2} \approx \frac{15.7\, c^2}{\Delta^2}
-$$
-
-worlds, rounded up. Here *z*₁ = 1.960 stands for the 5% level, and
-*z*₂ = 0.842 for the four times in five.
-[How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs) shows where the formula
-comes from. The seeds needed grow with the square of the spread, and fall with
-the square of the change. For the number of agents over the settled life,
-*c* = 0.11. So a change of a tenth needs *n* = 15.7 × 0.11² / 0.1² ≈ 19
-seeds:
+About 15.7 *c*²/Δ² seeds find a change Δ four times in five, at the 5% level,
+when worlds vary with a spread *c*
+([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs));
+here *c* = 0.11 for the number of agents over the settled life, so a change of
+a tenth needs 19 seeds:
 
 <!-- figure seed/seeds-needed -->
 ![Seeds a condition needs](../figures/seed/seeds-needed.svg)
@@ -3426,6 +3336,14 @@ written by `python3 gol_lab.py analyse E03`.
 - **11 November 2026.** The section Fitting a power law properly moved whole to
   Statistics, where the notebook keeps the methods it still uses; a short note
   and a link take its place here.
+- **12 November 2026.** The power-law fit is kept in [Measures of the archived
+  studies](measures-of-the-archived-studies.md#fitting-a-power-law-properly), not in
+  Statistics: it moved there from Statistics earlier the same day, and the In
+  short and the note still said Statistics. The measures this page used and the
+  reference pages define (the core, its trees and its onion, the cycle rank,
+  the rulers of dimension, the spectral gap, preferential attachment, the
+  scaling relations, the seeds an experiment needs) are a clause and a link
+  each, and a power law's background is told once, in Statistics.
 
 ## References
 
