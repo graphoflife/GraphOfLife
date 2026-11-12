@@ -835,7 +835,6 @@ of the messages' variety.
 - [Physical inspiration](physical-inspiration.md#a-speed-limit)
 - [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-contest-step-by-step)
-- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#playing-against-the-past)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)
 - [What a brain can compute](what-a-brain-can-compute.md#where-to-go-next)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
@@ -1144,7 +1143,6 @@ the rounding.
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-far-one-change-moves-a-brain)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-caution-about-names)
 - [How fast should brains change?](how-fast-should-brains-change.md#where-to-go-next)
-- [Every era against three](every-era-against-three.md#the-trials)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
 

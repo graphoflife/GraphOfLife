@@ -473,7 +473,6 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 - [Physical inspiration](physical-inspiration.md#agents-as-little-calculators)
 - [Particles: patterns that outlast what carries them](particles.md#how-a-ring-is-seen)
 - [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
-- [A source and a sink](a-source-and-a-sink.md#why-a-flow)
 
 > [!info]- And in the Archive (4)
 > [What B1 is, and what stood in its way](what-the-baseline-world-is.md#a-world-of-attack) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-picture) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#b1-the-network-size-and-scaling) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-the-pages-found)

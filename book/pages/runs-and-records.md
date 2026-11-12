@@ -136,7 +136,7 @@ and of [Other contests](another-game.md) run this way.
   starved and how many were cut off, and mutations.
 
   Every tenth row adds the network's health
-  ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)).
+  ([The health bar](measuring-health.md#the-health-bar)).
   That is the 2-core, the worst cut by one agent and by one connection, the
   best-connected agent's share, links per agent and the ball dimension.
   It also adds the sizes of groups: clones (neighbours with the same brain),
@@ -229,7 +229,7 @@ Every page with a box *The runs behind this page* reads the lab's runs.
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)
 - [Every era against three](every-era-against-three.md#how-this-was-made)
 - [A source and a sink](a-source-and-a-sink.md#where-a-source-could-sit)
-- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#what-we-expected-of-a-crowd)
 - [What a brain can compute](what-a-brain-can-compute.md#the-check)
 - [Other contests: a lottery, and alliances](another-game.md#in-short)
 - [Rules without numbers](rules-without-numbers.md#b3-b2-without-its-numbers)

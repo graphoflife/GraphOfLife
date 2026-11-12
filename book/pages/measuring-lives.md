@@ -374,7 +374,7 @@ Archive ([Lives and ages](measures-of-the-archived-studies.md#lives-and-ages)).
 - [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
 - [The world: tokens, agents and a network](the-world.md#agents-and-tokens)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#lifetimes-of-genotypes)
-- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#playing-against-the-past)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#the-verdict-of-experiment-16)
 - [How fast should brains change?](how-fast-should-brains-change.md#in-short)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 - [Other contests: a lottery, and alliances](another-game.md#does-a-world-of-allies-keep-evolving)

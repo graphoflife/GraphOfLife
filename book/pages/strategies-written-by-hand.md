@@ -67,40 +67,15 @@ The method has a page of its own ([The invasion test](measuring-evolution.md#the
 Take an evolved world: one of the ten B2 worlds of
 [Experiment 16](how-to-tell-a-world-that-keeps-evolving.md#the-runs-of-experiment-16),
 each of 10,000 tokens, as it stood at [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 2,000. This page calls each
-world by its [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") there: world 2 is the world of seed 2. Then:
-
-- **The patch.** Draw an agent at random, then take the agents nearest to
-  it, step by step, until the patch holds 5% of the world.
-- **The planting.** Give every agent of the patch a strategy instead of its
-  brain, and play on under the world's own rules. A strategy spreads as a
-  brain does: into a child, and into a node its owner takes. It never
-  mutates.
-- **The count.** Follow the share of the world's agents that carry the
-  strategy.
+world by its [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") there: world 2 is the world of seed 2. Each planting gives a
+patch of 5% of the world a strategy in place of its brains. A control plays
+the same patch with frozen copies of one resident's brain. A strategy reads and
+writes what a brain does. Twelve of a B2 brain's 16 units play the raider; no
+B2 brain can write the factory's [message](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.")
+([What a brain can compute](what-a-brain-can-compute.md)).
 
 Each planting has a seed of its own. It picks where the patch lies, and how
 every chance falls after that.
-
-A strategy's share means nothing on its own. A patch might grow or shrink
-whatever it does, because of where it was placed. So every patch is also
-played as a **control**. The same agents are given a copy of one resident's
-brain, the brain of an agent of the patch drawn at random. The copy is marked
-so it can be counted, and it never mutates. A strategy beats the residents if
-it holds more of the world than the resident patch played from the same place
-on the same seed.
-
-A strategy reads exactly what a brain reads, and writes exactly what a brain
-writes (`research/oee/pilots/manual.py`; the rules now live in the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s
-`gol_strategies.py`). It sees each [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")'s tokens, its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") and
-its [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."). Its decisions go through the same output rows that the engine
-turns into a child, its links, the stakes and the messages. So it reads and
-writes nothing an evolved brain could not.
-
-What it makes of what it reads is another matter. A rule written in Python
-can combine its inputs in ways a B2 brain cannot. The raider below is within a B2
-brain's reach: 12 of the brain's 16 hidden units, with weights set by hand,
-play it. The factory's message is not: no B2 brain of any size can compute
-it ([What a brain can compute](what-a-brain-can-compute.md)).
 
 ### Three strategies
 
@@ -111,7 +86,8 @@ it ([What a brain can compute](what-a-brain-can-compute.md)).
   home. And a holder's own stake on its node counts one and a half times. If
   70% of the raider's tokens are more than one and a half times the
   stranger's, they are sure to take its node. That holds even if the
-  stranger keeps everything at home. Then the raider stakes them all there;
+  stranger keeps everything at home. So against a neighbour of one token it
+  needs three. Then the raider stakes them all there;
   otherwise it keeps everything at home. When it has 30 tokens or more it
   has a child with a third of them, joined to every teammate next door.
 - **The factory** is a team with a pipeline. Every member works out how far
@@ -201,10 +177,7 @@ residents' own brains, never ended with more than 8%.
 
 So the answer is not one strategy that beats every evolved world. Evolved
 worlds differ in where they are weak. Some could be raided from where the
-patch happened to land; most could not be, by these two rules. But in three
-worlds of ten, a plain rule took 40 to 62% of the world from brains evolution
-had shaped for 2,000 iterations. The residents' own brains did nothing of the
-kind from the same places.
+patch happened to land; most could not be, by these two rules.
 
 **The evolved play is not the best there is.** That answers the question
 this page began with. The game had more to give, and evolution had not taken
@@ -219,7 +192,7 @@ The raider differs from a resident in two ways. It attacks the poorest
 neighbour it is sure to take. And it knows its teammates, and never attacks
 them. Which of the two wins?
 
-The **lone raider** keeps the first and drops the second. It attacks the
+The **raider without a password** keeps the first and drops the second. It attacks the
 poorest neighbour it is sure to take, whoever that is. It writes no password,
 and joins its children to nobody by choice. It was planted where the first
 test planted the raider: in worlds 1 and 2, on two seeds each. It grew a
@@ -293,13 +266,8 @@ In worlds 2 and 3, Experiment 29 plants patches of 1, 3, 10, 30 and 100
 raiders, and of 5% of the world. Each size goes into ten places. A patch of
 5% is also planted in five places in each of the other eight worlds. Every
 planting has a control: the same patch given frozen copies of one resident's
-brain. Each planting is an invasion test, played by the lab:
-- The world as it stood at iteration 2,000 is loaded.
-- A patch is chosen on the trial's place: an agent drawn at random, then its
-  nearest neighbours, step by step, to the patch's size.
-- The patch is given the strategy, which never mutates.
-- The world plays 300 iterations under its own rules, and the strategy's
-  agents and tokens are counted after every iteration.
+brain. Each planting is an invasion test, played by the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") for 300
+iterations from the world of iteration 2,000.
 
 A planting **takes hold** when, after 300 iterations, its raiders are alive,
 more than the patch began with, and more than the control holds there.
@@ -418,17 +386,9 @@ out, about a quarter of the crowd they needed.
 
 ## Why the raiders stopped winning
 
-A [raider written by hand](strategies-written-by-hand.md) took hold in young
-B2 worlds, but not in the same worlds grown older (Experiment 30). The worlds
-had not learned to defend themselves: their patches grew too poor, and a
-raider needs three tokens to take a neighbour of one. Raiders that pool their
-stakes (Experiment 33) and raiders that breed as the world's agents do
-(Experiment 34) failed there too. In a late patch few agents can stake at
-all, and almost none can afford a child. In B1, which has none of B2's rules
-against them, every strategy failed faster (Experiment 35), partly because B1
-cuts every connection carrying no tokens. So far nothing written by hand has
-taken hold in a late world of either [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), and each failure has a cause
-we can name.
+The raider took hold in young B2 worlds, but not in the same worlds grown
+older (Experiment 30). Crews, breeding raiders and B1 follow (Experiments 33 to
+35; [Crews, breeders and B1 raiders](crews-breeders-and-b1-raiders.md)).
 
 ### Does evolution close the door?
 
@@ -436,16 +396,8 @@ we can name.
 
 #### A raid that worked in young worlds
 
-The raider is a rule written by hand that takes the place of an agent's
-brain ([Strategies written by hand](strategies-written-by-hand.md)). It looks
-for the poorest neighbour that is not one of its team: a *stranger*. If it
-is sure to take that neighbour's node, it stakes all it can there; otherwise
-it keeps everything at home. When it holds 30 tokens or more, it has a child
-with a third of them. Raiders know their teammates by a password they write
-into their messages, so they never raid each other.
-
-Planted as 5% of an evolved B2 world at iteration 2,000, the raider took half
-of some worlds. Those worlds had never met a raider. Do worlds that evolve
+The raider of [Three strategies](#three-strategies) took half of some young
+worlds. Those worlds had never met a raider. Do worlds that evolve
 longer get harder to raid?
 
 Three answers are possible, and each says something different about
@@ -460,16 +412,8 @@ open-ended evolution:
 - **The door closes, and nothing opens.** Later worlds resist every raid
   tried: a top, at least for these brains.
 
-Each planting is an [invasion test](measuring-evolution.md#the-invasion-test):
-- **The patch.** An agent is drawn at random, then its nearest neighbours,
-  step by step, until the patch holds 5% of the world.
-- **The planting.** Every agent of the patch gets the raider's rule in place
-  of its brain. The world plays on for 300 iterations under its own rules.
-- **The control.** The same patch is played again with frozen copies of one
-  of its own agents' brains: what the patch would do anyway.
-- **Taking hold.** After 300 iterations, a planting takes hold if its raiders
-  are alive and more than the patch began with. They must also be more than
-  the control holds in the same place.
+Each planting is an invasion test with its control, and takes hold by the rule
+of [What we expected of a crowd](#what-we-expected-of-a-crowd).
 
 #### What we expected of older worlds
 
@@ -562,11 +506,8 @@ Over 120 iterations:
 > **To make it again:** `python3 book_figures.py door`.
 <!-- /figure -->
 
-The raider stakes only where it is sure to win. In B2, 30% of an agent's
-tokens stay at home, and a holder's own stake on its node counts one and a
-half times. So 70% of the raider's tokens has to come to more than one and a
-half times the neighbour's. Against a neighbour of one token, the raider
-needs three tokens to raid at all.
+The raider needs three tokens to raid a neighbour of one
+([Three strategies](#three-strategies)).
 
 So a raid depends on the patch's wealth: its tokens per agent when it is
 planted. Here is how often a patch of 5% took hold, by that wealth. The
@@ -607,9 +548,8 @@ It closed because the patches got poorer, not, as far as can be told,
 because the residents learned to resist a raid. A raid that needs three
 tokens a raider cannot start among agents that hold two.
 
-So a world of many small agents shuts out every lone raider. A node goes to
-the largest stake, and a holder's own stake counts one and a half times.
-With a token or two each, no single agent can take anything that holds as
+So a world of many small agents shuts out every lone raider. With a token or
+two each, no single agent can take anything that holds as
 much as it does.
 
 A strategy written by hand carries its own thresholds, the raider's three
@@ -635,21 +575,8 @@ Archive ([Crews, breeders and B1 raiders](crews-breeders-and-b1-raiders.md)).
   ([Raiders that breed](crews-breeders-and-b1-raiders.md#raiders-that-breed)).
 - **Experiment 35: in B1.** Without B2's rules, lone raiders and crews took
   hold in none of 18 plantings each, and failed sooner, partly by a rule of
-  B1's own: a connection that carries no tokens is cut
+  B1's own: a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that carries no tokens is cut
   ([Hand-written strategies in B1](crews-breeders-and-b1-raiders.md#hand-written-strategies-in-b1)).
-
-### What the raiders taught
-
-- **The door closed by poverty, not by a defence.** In B2 the raider took
-  hold in all 15 plantings at iteration 500 and in none of 30 at 5,000 and
-  10,000. A lone raider needs three tokens to take a neighbour of one, and a
-  late patch holds about two an agent. A world of many small agents shuts
-  out every lone raider.
-- **Nothing written by hand has yet taken hold in a late world**, of B2 or
-  of B1. Lone raiders, crews, breeding raiders and breeding turtles all
-  failed; the factory of Strategies written by hand was never planted in
-  one. Each failure has a cause we can name, and none of the causes is a
-  defence the residents were seen to evolve.
 
 ## What we learned
 
@@ -679,12 +606,15 @@ Archive ([Crews, breeders and B1 raiders](crews-breeders-and-b1-raiders.md)).
   ([A lifetime long](another-game.md#a-lifetime-long),
   [Does a world of allies keep evolving?](another-game.md#does-a-world-of-allies-keep-evolving)).
   Evolution went on there slowly, as in plain B2.
+- **The door closed by poverty, not by a defence.** In B2 the raider took
+  hold in all 15 plantings at iteration 500 and in none of 30 at 5,000 and
+  10,000. A late patch holds about two tokens an agent; a raid needs three.
+- **Nothing written by hand has yet taken hold in a late world**, of B2 or of
+  B1. Each failure has a cause we can name; none is a defence the residents
+  evolved.
 
 ## Where to go next
 
-- [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning): the
-  same raider in older worlds, in crews, breeding, and in B1. Its patches
-  grew too poor to raid.
 - [What a brain can compute](what-a-brain-can-compute.md): a B2 brain of 12
   units plays the raider, and no B2 brain can write the factory's message.
 - [The invasion test](measuring-evolution.md#the-invasion-test): the method in full, and how to read
@@ -713,7 +643,7 @@ Each figure says, folded beneath it, which plantings it reads and how.
   (`invade_B2_2000.json`).
 - **Ten worlds:** the raider, the factory and the control in all ten, on
   seed 1 (`invade_B2_2000_ten.json`).
-- **The password:** the lone raider in `-s001` and `-s002`, on seeds 1 and 2
+- **The password:** the raider without a password in `-s001` and `-s002`, on seeds 1 and 2
   (`invade_B2_2000_lone.json`).
 - **One raider alone:** a single raider and a single resident in `-s002`, on
   seeds 1 to 20: `--patch 0.0002 --T 200` (`invade_B2_2000_single.json`).
@@ -783,7 +713,7 @@ count each of them once.
   19 October,
   [What a brain can compute](what-a-brain-can-compute.md#what-no-brain-of-b2-can-compute)
   showed that this holds for the raider but not for the factory. Twelve of a
-  B2 brain's 16 units play the raider. But a brain scores each candidate's
+  B2 brain's 16 units play the raider. But a brain scores each [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.")'s
   column on its own. So no B2 brain of any size can write news of a third
   agent into a message. The factory's distance to its frontier is such news.
 - **24 October 2026.** When the pages were merged, their numbers were checked

@@ -43,11 +43,6 @@ asks the question this raises: a question the notebook can measure.
 > ([What a brain sees](rules-in-detail.md#what-a-brain-sees)). Every analogy below is offered as a
 > way to ask a sharper question, and the page says where each one stops.
 
-Two sets of rules recur on this page
-([B1 and B2: the two baselines](b1-and-b2.md)). **B1** is the world as it was
-first built: the original rules. **B2** is B1 with rules that keep its network
-from breaking, and with smaller brains that see.
-
 ## Space made of relations
 
 In everyday physics, space is the stage: things happen *in* it. Several
@@ -74,60 +69,21 @@ network that, seen from far away, looks like a space of three dimensions?**
 ### How to read a dimension off a network
 
 A network has no coordinates, but it has distances, and distances are enough.
-Here are four ways to measure a dimension. On a lattice of *d* dimensions,
-each gives exactly *d*
-([Three ways to measure a network's dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension)).
-
-- **How balls grow.** Count the agents within *r* steps of an agent: its
-  *ball*. In *d* dimensions, their number grows as *r*^*d*.
-- **How wide a lump is.** *N* agents packed into *d* dimensions span about
-  *N*^(1/*d*) steps. A cube of a thousand points is ten points wide.
-- **How many boxes cover it.** In *d* dimensions, boxes half as wide take
-  2^*d* times as many ([Box dimension](measuring-space.md#box-dimension)).
-- **How a random walker returns.** A walker that wanders at random is back
-  where it started after *t* steps with a probability that falls as
-  *t*^(−*d*/2). This is the **spectral dimension**, the one quantum-gravity
-  models measure. In causal dynamical triangulations it is about 4 at large
-  scales, and about 2 at the smallest (Ambjørn, Jurkiewicz and Loll 2005).
-
-On a tree in which every agent has two children or more, the first two give
-no finite answer at all. The number of agents within *r* steps grows faster
-than any power of *r*. A tree drawn at random among all trees is different. By
-theory it reads 2 by balls, and 4/3 by walks
-([The rulers, tried on known spaces](how-many-dimensions-does-a-world-have.md#the-rulers-tried-on-known-spaces)).
-On a regular grid, all four measures agree. On irregular networks they need
-not, and how they differ says what kind of space a network is.
+For instance, *N* agents packed into *d* dimensions span about *N*^(1/*d*)
+steps: a cube of a thousand points is ten points wide. On a lattice of *d*
+dimensions every ruler gives *d*; elsewhere they need not agree
+([Three rulers](measuring-space.md#three-rulers)). The spectral dimension, read
+off how a random walker returns, is the one quantum-gravity models measure: in
+causal dynamical triangulations it is about 4 at large scales, and about 2 at
+the smallest (Ambjørn, Jurkiewicz and Loll 2005).
 
 ### What the worlds turn out to be
 
-The worlds of B1 are about **three-dimensional** by the first two measures.
-Over their first few steps, their balls grow as *r*^3
-([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)).
-They do so at every size, from a few hundred agents to sixty thousand
-([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)). That
-is the reading of the Graph of Life viewer, which averages the balls of many
-agents. The few agents next to a hub, an agent with very many connections,
-pull that average up. A typical agent's ball grows more slowly in small
-worlds
-([The rulers, on the worlds](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds)).
-
-And the distance across a world, its diameter, grows as *N*^0.30 for *N*
-agents. That is how a body of 3.3 dimensions would grow, since 1/0.30 ≈ 3.3
-([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
-Read again with more worlds, at five moments of each, the diameter grows as
-*N*^0.26 to 0.27 and the typical distance as *N*^0.20 to 0.23: by width
-alone nearer four dimensions than three, which bigger hubs in bigger worlds
-could also make ([How wide a world is](space-at-scale.md#how-wide-a-world-is)).
-
-[Is a world a space?](how-many-dimensions-does-a-world-have.md) measured the
-dimension with two rulers, tried first on spaces whose dimension is known. By
-the room within *r* steps, worlds of 60,000 agents read 3.3 after their last
-game, steady from 3 steps to 14, and 3.0 to 3.2 over five moments of their
-settled lives ([Dimensions at scale](space-at-scale.md#dimensions-at-scale)). By how a random
-walker spreads, they read about 2. Networks with
-the same connections at every agent, wired at random, read neither. These
-[random twins](measuring-space.md#the-random-twin-is-a-world-a-space) are *small worlds*, in which everyone is a few
-steps from everyone.
+The worlds of B1 are spaces. By the room within *r* steps they read about
+three: 3.3 from 3 steps to 14 at 60,000 agents, and 3.0 to 3.2 over their
+settled lives. Their diameter grows as *N*^0.26 to 0.30. To a random walker they
+read about 2, and their random twins have no dimension at all
+([Is a world a space?](how-many-dimensions-does-a-world-have.md)).
 
 That the worlds are spaces at all is a surprise worth taking seriously, and
 also with care. By box covering, the worlds measure about 1.9. They are full
@@ -148,55 +104,18 @@ a fractal more than a solid.
 
 So the aim can be put precisely. Find rules under which a world grows into a
 network that is three-dimensional by every measure at large scales, and **well
-knit**. Bridges will always exist, but they should hold twigs, not half the
-world.
+knit**: bridges should hold twigs, not half the world
+([Cut risk](measuring-networks.md#cut-risk),
+[The spectral gap](measuring-networks.md#the-spectral-gap)).
 
-The tools are ready. There are the dimensions above. There is the cut risk:
-the largest share of a world that one bridge holds to the rest
-([Cut risk](measuring-networks.md#cut-risk)). And there is the spectral gap, which says
-how hard a network is to cut in two
-([The spectral gap](measuring-networks.md#the-spectral-gap)). For a *d*-dimensional
-body of *N* agents, it shrinks as *N*^(−2/*d*); for a network with cheap
-cuts, it is tiny. One hint came early: bigger worlds have more loops per
-connection, and fewer leaves
-([Is a big world the same kind of world?](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)).
-A leaf is an agent with a single connection.
-
-B2 was built with rules of this kind, all of them local
-([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)):
-
-- a newborn is joined to its parent and to two of its parent's [neighbours](the-world.md#the-network "An agent joined to another by a connection.");
-- when an agent dies, the groups its former neighbours fall into are joined
-  up in a ring: the death is **mended**;
-- an unused connection may lapse only where its two ends share two
-  neighbours;
-- a brain may choose at most eight connections.
-
-A mended death can never split the world, and such a lapse cannot either. So
-the cull, the rule that kills every piece cut off from the rest (below), is
-left with nothing to do. In a model without brains, mending brought the
-largest share of a world one agent's loss could cut off from 37% to 1.4%. The
-largest share one connection's loss could cut off fell from 12% to 1.2%, at a
-ball dimension of 3.7. With brains, in Experiment 14, not one agent of ten B2
-worlds was cut off from iteration 200 to 1,000.
-
-But a world that cannot break is not yet a space.
-[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)
-read B2's worlds with the full rulers. They are nearly small worlds: a typical
-agent is about as near to everyone as in the world's random twin. Every B2
-world starts as a space, and folds once its first generation dies of age. Each
-mended death joins agents that were two steps apart, through the one who died.
-A ball dimension like the 3.7 above is read off the first few steps. Such a
-reading cannot tell a space from a small world.
-
-So room and resilience pull apart. Mended in a ring, a world folds. Mended
-only where it would split, the model without brains stretches into a line.
-The nearest to this aim so far are B2 worlds in which the tokens of the dead
-go to the newborns, or to their parents. They cannot break, and they are
-spaces of about three dimensions. But nine agents in ten hold three tokens or
-fewer, and their evolution stops ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world
-that is a well-knit space, rich, and still evolving is yet to be found
-([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)).
+B2 was built with such rules, all of them local, and its worlds cannot break
+([B2](b1-and-b2.md#b2-a-world-that-cannot-break)). In a model without brains,
+mending cut the worst loss of one agent from 37% of a world to 1.4%. But a
+world that cannot break is not yet a space. B2 folds into a near small world
+once its first generation dies
+([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
+The B2 worlds whose estates go to births stay three-dimensional, but they are
+poor, and their evolution stops.
 
 ## A speed limit
 
@@ -210,7 +129,7 @@ reproduction and one of the game
 ([One iteration, step by step](one-iteration.md)). In one phase, an agent
 reads only a few things ([What a brain sees](rules-in-detail.md#what-a-brain-sees)):
 
-- itself and its neighbours;
+- itself and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.");
 - a summary of each neighbour's own neighbourhood;
 - messages written by itself and its neighbours ([Messages](rules-in-detail.md#messages)). In
   B1 they are written in a first look of the same phase, before anyone acts;
@@ -292,21 +211,12 @@ two changes, and all three together, are planned in
 
 [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)
 also proposed letting distant agents connect, to renew the world's shortcuts.
-Locality argues for care. A connection between two agents that were a hundred
-steps apart is a message that travelled a hundred steps in an instant.
-
-Births already respect the speed limit. A child joins its parent's
-neighbourhood, so any two agents it joins were at most two steps apart. New
-connections could do the same. They could form only between agents a few
-steps apart, or with a reach that costs tokens to extend.
-
-That is what was tried. In [Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers), the
-agents of B2 worlds could send a search through the network and propose a
-link where it ended. Its steps cost tokens, or were free. When a search cost
-tokens, hardly anyone paid for one; when it was free, agents reached all the
-time. Either way, the strangers they found were two or three steps away. The
-network grew denser where it already was, and its dimension did not change. A
-child joined to an agent anywhere in the world was never adopted.
+A connection between two agents that were a hundred steps apart is a message
+that travelled a hundred steps in an instant, so new connections should form
+only between agents a few steps apart. When B2's agents could search for
+strangers, the strangers they found were two or three steps away, and the
+world's dimension did not change
+([Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers)).
 
 ### A test: how far does a difference travel?
 
@@ -378,20 +288,12 @@ games.
 
 ### What the brains do, and what the rules do
 
-Do the brains, then, compute the heat equation? No.
-[What the brains are like](what-the-brains-are-like.md) found the evolved
-brains of B1 nearly blind. A change in what they see moves their outputs by
-about a thousandth of its size. In the median world, 42% of agents (58% at
-10,000 tokens) give every candidate a score of zero or below. The rules then
-split their tokens exactly evenly. The others give every candidate nearly the
-same score.
-
+Do the brains, then, compute the heat equation? No. The evolved brains of B1
+are nearly blind: they score every candidate alike, and the rules split their
+tokens evenly ([How often it happens](measuring-tokens.md#how-often-it-happens)).
 Selection set one constant: spread the stake. The heat equation is what the
-rules make of it.
-
-The brains of B2, which see, are different. They go all in on one node in
-nearly every case, so the even split hardly arises there
-([How often it happens](measuring-tokens.md#how-often-it-happens)).
+rules make of it. B2's brains go all in, so there the even split hardly
+arises.
 
 ### Heat, not waves
 
@@ -514,30 +416,14 @@ What the notebook has found is mixed
   few hundred iterations. It is not the 1/*f* noise of a critical system,
   which has memory on every time scale.
 
-But [Worlds of many sizes](b1-the-network-size-and-scaling.md#big-worlds-do-not-average-out)
-found a property that does not change with size. The mean game cuts off
-about 2% of a world, at five hundred agents and at sixty thousand, with no
-trend. The worst cuts off a third to a half, at every size. The whole
-distributions, compared since, are two things: their bulk of small pieces
-averages out as worlds grow, and their tail of big cuts does not
-([Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale)).
+Measured at many sizes and rescaled, three things have no scale but the
+world's ([Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale)):
+- its space: about *r*^3 agents within *r* steps, from 3 steps to 14;
+- the branches that hang from it by one connection;
+- the big cuts in which they fall away: the mean game cuts off about 2% of a
+  world and the worst a third to a half, from 500 agents to 60,000.
 
-Finding such scaleless properties systematically is now an aim of the
-notebook. Measure the same thing at many sizes, and ask whether, rescaled, it
-is the same
-([Which properties have no scale?](space-at-scale.md#which-properties-have-no-scale)). The
-answer so far: a world's space, the branches that hang from it by a single
-connection, and the big cuts in which they fall away have no scale but the
-world's; nothing else does, and nothing is critical, for likeness fades
-within a step or two at every size.
-
-Two measurements since sharpen the picture. What agents hold is correlated
-over one or two steps only. That is a short correlation length, the distance
-over which likeness fades, so the worlds are far from critical
-([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). But the space itself has no
-scale. Within *r* steps lie about *r*^3 agents, the same law from 3 steps to
-14 ([The rulers, on the worlds](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds),
-[Dimensions at scale](space-at-scale.md#dimensions-at-scale)).
+Nothing is critical: likeness fades within one or two steps at every size.
 
 ## Why life is possible: a flow of low entropy
 
@@ -573,9 +459,11 @@ There are two ways a gradient could be built in.
   They have not been tried yet.
 - **Sources and sinks.** A few "stars" would release tokens slowly, and there
   would be a way for tokens to leave: a driven, open world. Physics knows what
-  can form in such a flow: **dissipative structures** (Nicolis and Prigogine
-  1977). Examples are the hexagonal convection cells that appear in a pan of
-  oil heated from below.
+  can form in such a flow. Heat a thin layer of oil from below, and past a
+  point it turns over in hexagonal cells, which exist only while the heat
+  flows (Bénard 1900). Such patterns are **dissipative structures** (Nicolis
+  and Prigogine 1977). That a flow of energy through a system tends to
+  organise it is an old idea of biology too (Morowitz 1968).
 
 Either would make a world in which order can feed on a flow: the condition, on
 Earth, for life. A world fed at one place and drained everywhere is planned, as
@@ -608,31 +496,8 @@ What to look for:
 
 ### What has been found
 
-Nothing yet lasts in the way a glider does.
-
-- **Bound tokens.** Within one game, almost no tokens go round once the stakes
-  that come back have cancelled
-  ([Do tokens go round?](b1-the-game-and-its-flows.md#do-tokens-go-round)). Over
-  fifty games, more goes round than chance would make. But no ring of tokens
-  outlasts those fifty games
-  ([Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go)).
-- **Patterns that travel.** When an agent takes a neighbour's node with at
-  least half of its tokens, its wealth and a copy of its brain move together.
-  Such moves form chains far more often than chance would. In B1 they are
-  *gliders*, rich agents moving on; in B2, *puffers*, a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") copying itself
-  outward. But no chain keeps a direction; each wanders like a random walk
-  ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)).
-- **A beat.** The nodes that launch such chains fire without a rhythm. And the
-  two-game swing of the hubs is an overshoot, damped in every game.
-- **Groups.** The nearest thing is a star's **dynasty**, in B1
-  ([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
-  A centre joined to thousands of agents is handed down from parent to child,
-  in the longest dynasties for hundreds of iterations. Meanwhile the brain on
-  it changes nearly every game. It is a place that lasts, kept by the rules,
-  not a group that does anything together
-  ([Where the world stands on the ladder](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder)).
-  And families hold patches of a world that widen as their lines age.
-
+Nothing yet lasts as a glider does
+([Particles](particles.md#a-particle-in-a-world-like-this)).
 [Particles: patterns that outlast what carries them](particles.md) put three
 detectors, each with a null and a pattern planted to test it, on twelve
 worlds of B1 and of round 3. Nothing behaved like a particle: no ring of
@@ -841,6 +706,7 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
 - Ambjørn, J., Jurkiewicz, J. and Loll, R. (2005). Spectral dimension of the universe is scale dependent. *Physical Review Letters* 95, 171301.
 - Bak, P., Tang, C. and Wiesenfeld, K. (1987). Self-organized criticality: an explanation of 1/*f* noise. *Physical Review Letters* 59, 381–384.
 - Bak, P. and Sneppen, K. (1993). Punctuated equilibrium and criticality in a simple model of evolution. *Physical Review Letters* 71, 4083–4086.
+- Bénard, H. (1900). Les tourbillons cellulaires dans une nappe liquide. *Revue générale des sciences pures et appliquées* 11, 1261–1271 and 1309–1328.
 - Boltzmann, L. (1886). *Der zweite Hauptsatz der mechanischen Wärmetheorie*. Lecture to the Imperial Academy of Sciences, Vienna.
 - Bombelli, L., Lee, J., Meyer, D. and Sorkin, R. D. (1987). Space-time as a causal set. *Physical Review Letters* 59, 521–524.
 - Derrida, B. and Weisbuch, G. (1986). Evolution of overlaps between configurations in random Boolean networks. *Journal de Physique* 47, 1297–1303.
@@ -848,6 +714,7 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
 - Jefferson, D. R. (1985). Virtual time. *ACM Transactions on Programming Languages and Systems* 7, 404–425.
 - Langton, C. G. (1990). Computation at the edge of chaos: phase transitions and emergent computation. *Physica D* 42, 12–37.
 - Metz, J. A. J., Nisbet, R. M. and Geritz, S. A. H. (1992). How should we define 'fitness' for general ecological scenarios? *Trends in Ecology & Evolution* 7, 198–202.
+- Morowitz, H. J. (1968). *Energy Flow in Biology*. New York: Academic Press.
 - Nicolis, G. and Prigogine, I. (1977). *Self-Organization in Nonequilibrium Systems*. New York: Wiley.
 - Noether, E. (1918). Invariante Variationsprobleme. *Nachrichten von der Gesellschaft der Wissenschaften zu Göttingen, Mathematisch-Physikalische Klasse*, 235–257.
 - Salmon, J. K., Moraes, M. A., Dror, R. O. and Shaw, D. E. (2011). Parallel random numbers: as easy as 1, 2, 3. *Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis (SC11)*.

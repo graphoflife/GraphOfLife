@@ -7,14 +7,14 @@
 >   scale, and by every ruler?
 > - Is the dimension made by how the worlds are wired, or would any network
 >   with the same numbers of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") have it?
-> - Are [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds, and the others the notebook has made since, spaces too?
+> - Are B2's worlds, and the others the notebook has made since, spaces too?
 > - When does a world become a space, and when does it fold into a small
 >   world? Which rules decide it?
 
 ## In short
 
 The notebook's second aim is a world that grows a space of its own, like a
-plane or a room, from simple local rules. The worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."),
+plane or a room, from simple local rules. The worlds of the first baseline, B1,
 are spaces: about three dimensions by the room they hold, and two by how a
 random walker spreads. Random networks with the same links have no dimension:
 they are *small worlds*, in which everyone is a few steps from everyone. B2's
@@ -32,15 +32,10 @@ steps from everyone. Such a tangle is called a **small world**. A space is the
 opposite. Far places are far apart in it, and the farther out you look, the
 more room there is.
 
-**Why it matters.** Graph of Life was built with physics in mind
-([Physical inspiration](physical-inspiration.md)). Several attempts to unite
-gravity with quantum theory build space itself out of discrete pieces and the
-relations between them. A world whose simple, local rules grow a space of a
-few dimensions, three if possible, would be a small model of that idea. No
-geometry would have been put in by hand. This is the notebook's second aim,
-beside [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), and the two aims meet. In a space, distant
-regions are far apart, so they could evolve apart. In a small world,
-everything is near everything.
+**Why it matters.** A world whose local rules grow a space would be a small
+model of space built from relations
+([Physical inspiration](physical-inspiration.md#space-made-of-relations)). And in
+a space, distant regions are far apart, so they could evolve apart.
 
 This half of the page measures what the worlds of the first baseline, B1, have
 grown into. They are the thirty worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of
@@ -74,13 +69,10 @@ exactly *r*^*d*, it would read *d* at every radius.
 [Dimension and curvature from ball growth](measuring-space.md#three-ways-to-measure-a-networks-dimension)
 explains the idea in full.
 
-**The second ruler asks a walker.** A walker that steps at random through a
-space of *d* dimensions has, after *t* steps, spread over a region of about
-*t*^(*d*/2) points. So the chance that it is back where it started falls like
-*t*^(−*d*/2). The exponent read off that chance is the **spectral dimension**
-([The spectral dimension](measuring-space.md#the-spectral-dimension)). It measures how easily
-things spread through a space, where the first ruler measures how much room
-there is.
+**The second ruler** asks how often a random walker returns
+([The spectral dimension](measuring-space.md#why-returning-measures-dimension)):
+it measures how easily things spread through a space, where the first ruler
+measures how much room there is.
 
 On a regular grid the two rulers agree. On irregular spaces they need not, and
 how they differ says what kind of space it is.
@@ -256,10 +248,8 @@ walk is slow. A difference in tokens spreads through a world more slowly than
 through a grid of the same size. It spreads much more slowly than through a
 random network. Lines of descent spread in the same way
 ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
-Two agents up to about 7 steps apart share a family of 25 iterations back more
-often than chance. For a family of 200 iterations back, the excess over chance
-reaches about 12 steps. The patches widen as a random walk on these worlds
-would.
+Their families widen as patches, as a random walk on these worlds would
+([Everywhere the same](physical-inspiration.md#everywhere-the-same)).
 
 ### Over a world's life
 
@@ -296,19 +286,12 @@ B1's worlds are spaces, but full of dead ends. What rule would make the two
 rulers agree? Perhaps rules that close loops at long range, or that let dead
 ends wither, or that give every place the same number of neighbours.
 
-The second baseline, B2, has rules that close loops and leave no dead ends.
-They were made to keep a world from breaking
-([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)), and
-B2 has been the baseline of everything since:
+The second baseline, B2, has rules that close loops and leave no dead ends,
+made to keep a world from breaking. B2's rules keep the network whole: two
+random links at birth, deaths mended, only redundant links lapse, at most 8
+chosen links ([B2](b1-and-b2.md#b2-a-world-that-cannot-break)).
 
-- a newborn is joined to its parent and to two of its parent's neighbours;
-- when an agent dies, its former neighbours are joined up in a ring round the
-  gap, so that no death can split the world. This is **mending**
-  ([`mend_on_death`](settings.md#mend_on_death));
-- an unused link lapses only where its two ends share two neighbours;
-- a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") may choose at most 8 links.
-
-In a model without brains, the first two rules alone put 97% of agents in the
+In a model without [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), the first two rules alone put 97% of agents in the
 core, with a ball dimension of 3.7. In a first run of B2 with all four, every
 agent was in the core: no dead ends at all. Its ball dimension read 3.1 to
 3.7.
@@ -324,13 +307,9 @@ few steps only grows with the room it has.
 
 So this section reads B2's worlds, and the others the notebook has made since,
 with the full rulers above (`research/atlas/space.py`). It adds one number
-that sums a world up, its **width**. A world's typical distance is the number
-of steps within which a typical agent's ball holds half the world. Its width
-is its typical distance over its random twin's; the figures call it "typical
-distance, over the twin's". A small world is about as near as its twin, a
-width of about 1. A space is wider, because its distances grow as a power of
-its size, the twin's only as the logarithm. The notebook counts a world as a
-space when its width is at least 1.5 ([The random twin](measuring-space.md#the-random-twin-is-a-world-a-space)).
+that sums a world up, its **width**. Its width is its typical distance over its
+random twin's; at 1.5 or more it is a space
+([The typical distance](measuring-space.md#the-typical-distance)).
 
 ### B1 and B2 side by side
 
@@ -512,7 +491,7 @@ in so much cannot say; worlds without brains can
 
 Read at iteration 1,000, 498 worlds fall into two groups. They are the pilot
 batches read at that iteration, the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s B2 families at 10,000 tokens, and the first two rounds of
-the search by elimination. That search drew every setting at random. Round after
+the search by elimination. That search drew every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") at random. Round after
 round, it kept the values that did not make worlds worse
 ([The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds)).
 
@@ -629,11 +608,6 @@ parents are 15 to 28 iterations old at a birth, and the rule leaves them 13 to
 26. The dying still hold about eight links, gathered from their neighbours'
 children as much as from their own, and the worlds stay folded.
 
-Two things unfold the worlds whose estate goes to the newborns or the parents.
-Their parents are young, two or three iterations old, and their dying hold few
-links. They hold about six, in 5.4 groups, where the table of rings above puts
-the line between folded and not.
-
 ## What we learned
 
 - **B1's worlds are spaces.** Their dimension shows as a plateau, from radius
@@ -686,7 +660,7 @@ the line between folded and not.
   ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world that is a three-dimensional
   space and rich, and that keeps evolving, is still to be found
   ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)).
-- **Room for open-ended evolution.** In a space, distant places are far apart.
+- **Room for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.").** In a space, distant places are far apart.
   The diameter of a world grows as a power of its size, a small world's only
   as its logarithm. So a large world has room for regions that evolve apart.
   Lines of descent do hold patches, a dozen steps across. But what the agents

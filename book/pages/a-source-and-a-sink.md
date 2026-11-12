@@ -26,28 +26,9 @@ source runs down and dies.
 
 ## Why a flow
 
-Energy is conserved, and disorder always grows. How, then, is anything as
-ordered as life possible? Because the Earth is not closed
-([Why life is possible](physical-inspiration.md#why-life-is-possible-a-flow-of-low-entropy)).
-It takes in sunlight, a few energetic photons from a surface at about 5,800
-kelvin, and sends the same energy back to space as infrared, many feeble
-photons from a planet at about 255 kelvin. What leaves carries about twenty
-times the entropy of what arrives, and that export pays for every ordered
-thing on Earth, from a cloud to a cell (Boltzmann 1886; Schrödinger 1944).
-
-A world of Graph of Life has the conservation and not the flow. A token is a
-token, wherever it came from. In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") the game's [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly.") is a step of the
-heat equation, which smooths every difference away
-([Heat, not waves](physical-inspiration.md#heat-not-waves)): a closed world
-runs down towards a miniature heat death.
-
-Physics knows what can form where a flow runs through. Heat a thin layer of
-oil from below, gently, and the heat simply leaks through it. Heat it more,
-and the oil turns over in hexagonal cells, rising in their middles and falling
-at their edges (Bénard 1900). The cells exist only while the heat flows; stop
-it, and they are gone. Such patterns are called **dissipative structures**
-(Nicolis and Prigogine 1977). That a flow of energy through a system tends to
-organise it is an old idea of biology too (Morowitz 1968).
+Order can grow where a flow runs through, as on Earth
+([Why life is possible](physical-inspiration.md#why-life-is-possible-a-flow-of-low-entropy));
+a Graph of Life world has the conservation, not the flow.
 
 The same sum can be done for tokens, as an analogy only. A token that enters
 at one node and leaves from any of *N* agents arrives at a known place and
@@ -89,7 +70,7 @@ anyone looks, so its holder sees them and stakes them. That holder will be by
 far the richest agent of its world. In [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3026, fed 938 tokens a phase where
 the median agent holds 9, it could take every neighbour's node in every game,
 and its neighbours will fight for its own. A line that holds the source may
-hold it long, as a hub's place was handed down in B1
+hold it long, as a hub's place was handed down in [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")
 ([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 
 ## What a sink could be
@@ -345,14 +326,6 @@ under *A source and a sink*.
   zero-sum game is one of the candidate reasons why evolution levels off, and a
   world with a flow is the change of structure the notebook turns to if no
   change of settings lifts the plateau. The plan itself is as it was.
-
-## References
-
-- Bénard, H. (1900). Les tourbillons cellulaires dans une nappe liquide. *Revue générale des sciences pures et appliquées* 11, 1261–1271 and 1309–1328.
-- Boltzmann, L. (1886). *Der zweite Hauptsatz der mechanischen Wärmetheorie*. Lecture to the Imperial Academy of Sciences, Vienna.
-- Morowitz, H. J. (1968). *Energy Flow in Biology*. New York: Academic Press.
-- Nicolis, G. and Prigogine, I. (1977). *Self-Organization in Nonequilibrium Systems*. New York: Wiley.
-- Schrödinger, E. (1944). *What Is Life?* Cambridge: Cambridge University Press.
 
 <!-- turns -->
 ---

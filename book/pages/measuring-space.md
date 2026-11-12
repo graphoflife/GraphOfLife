@@ -301,7 +301,6 @@ ball growth, because large boxes count the long, thin branches
 ([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
 
 <!-- used box-dimension -->
-- [Physical inspiration](physical-inspiration.md#how-to-read-a-dimension-off-a-network)
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds)
 - [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
 
@@ -400,7 +399,6 @@ tells the story, with its numbers.
 - [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together)
 - [Measuring lives: births, deaths, ages and estates](measuring-lives.md#an-example-paying-for-births)
 - [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md#where-degree-is-used)
-- [Physical inspiration](physical-inspiration.md#what-the-worlds-turn-out-to-be)
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds)
 - [Measuring health: criteria, the health bar and diversity](measuring-health.md#read-it-with-care)
 
@@ -464,6 +462,6 @@ tells the story, with its numbers.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (12)
-> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

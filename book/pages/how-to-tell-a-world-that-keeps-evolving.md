@@ -64,7 +64,7 @@ Many numbers rise in any world, evolving or not. Four kinds deserve a warning,
 because each looks like the thing we want.
 
 1. **Records.** Think of the longest life ever lived, the largest family ever
-   seen, or the longest loop of tokens ever peeled. Each is the largest value
+   seen, or the longest [loop](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") of tokens ever peeled. Each is the largest value
    a fluctuating number has taken so far. A record keeps rising in a world that
    does not change at all, simply because the world keeps drawing new values.
    When a number keeps being drawn from the same distribution, and very large
@@ -111,27 +111,11 @@ The brains of one moment are an **era**, and a match between two eras is a
 tournament** (Cliff and Miller 1995). Stanley and Miikkulainen (2004) counted
 how many times in a run a new champion beat every champion before it. Miconi
 (2009) separates the kinds of progress such tournaments can show.
-[Eras and contests](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better) explains contests in full. Here a
-contest goes like this:
-
-1. Take the world as it stood at one archived moment: its network, its
-   tokens, the ages of its agents. A run keeps such worlds when it is made
-   with [`archive_every`](settings.md#archive_every).
-2. Give every agent a brain drawn at random from the agents of one era, A, or
-   of another, B: a coin each. Clear the [messages](rules-in-detail.md#messages) in flight, so
-   that neither side is primed.
-3. Switch mutation off, so that no brain can change and every copy of a brain
-   keeps the era it came from. Let the world play twenty iterations under its
-   own rules.
-4. The **score** of B is the share of the agents carrying a B brain at the
-   end. A score of 0.5 is a tie; above it, B's brains spread at A's expense.
-
-Every pair of eras plays twice, once in each era's world, so that neither
-plays only at home. A score is a share, so it can be read as odds: the chance
-that a B brain beats an A brain. From the odds, one **rating** per era is
-fitted to every contest at once. This is the model of Bradley and Terry, which
-chess calls **Elo**. The founders are rated 0. An era rated +200 beats them
-about three times in four, and one rated +400 ten times in eleven.
+A contest gives every agent a brain of era A or era B, a coin each, with
+mutation off. After 20 iterations, B's score is its share of the agents; 0.5
+is a tie ([A contest, step by step](measuring-evolution.md#a-contest-step-by-step)).
+One rating per era is fitted to all contests (Bradley–Terry, or Elo), with the
+founders at 0.
 
 The rating against the founders rises in every world that learns anything at
 all. The question is what it does after. A world still improving keeps rating
@@ -140,37 +124,17 @@ however far apart they are. Of the four warnings above, this answers the last
 three. A tournament counts nothing, and it has no floor to lean on. It plays
 the settled world against its own past, not against its boom.
 
-A contest must last as long as what it judges. Twenty iterations is long
-enough for most of a B1 world to change hands. It is not long enough for an
-agent of B2 to live its life, since there everyone dies at age 100. And what
-evolution improves there may pay off only over a whole life. Until 15 October
-2026 every contest of this notebook lasted 20 iterations. Since then, B2's
-worlds are also judged in contests a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long, of 100 iterations
-([Would we notice if it went on?](#would-we-notice-if-it-went-on)).
+A contest must last as long as what it judges: B2's agents live 100
+iterations, so since 15 October 2026 B2 is also judged in contests of 100
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 
 ### The network that holds, in numbers
 
-The second half of the goal is a property of the network. Every part of it can
-be measured on a single [frame](runs-and-records.md#what-a-run-records), one snapshot of a whole
-world. The **health bar** asks seven things of the network, each with a line
-to meet. [The health bar](measuring-health.md#the-health-bar) explains why each one is there.
-
-| what is asked | measured as | bar |
-|---|---|---|
-| one world | the pieces the cull leaves | always one |
-| not a tree | share of agents in the [2-core](measuring-networks.md#core-trees-and-leaves) — on a loop, or between loops | 0.8 or more |
-| few single points of failure | the largest share of the agents one agent's loss would cut off (`worst_node_cut_share`) | 2% or less |
-| | the same for one [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") ([cut risk](measuring-networks.md#cut-risk)) | 1% or less |
-| decentralised | the share of the others the best-connected agent is joined to | 5% or less |
-| neither a tree nor complete | connections per agent | 3 to 12 |
-| about three-dimensional | the [dimension of ball growth](measuring-space.md#three-ways-to-measure-a-networks-dimension) | 2.3 to 4 |
-
-B1 does not pass it. A pilot is a world made by hand to see whether an idea is
-worth an experiment ([Pilot worlds](runs-and-records.md#pilot-worlds)). Take a pilot of B1 at
-5,000 tokens (seed 1, iterations 200 to 999). There 59% of the agents sat in
-the 2-core, and the rest hung in trees. One connection could cut off 8% of the
-world. The best-connected agent was joined to 8% of the others, and there were
-3.3 connections per agent. Its dimension, 2.7, was fine.
+The second half of the goal is the **health bar**: seven marks of a world's
+network at one moment ([The seven marks](measuring-health.md#the-seven-marks)).
+A B1 pilot at 5,000 tokens (seed 1, iterations 200 to 999) fails three of
+them: 59% of its agents in the [2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them."), a link whose loss cuts off 8%, and a
+[hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") joined to 8% of the others ([Two examples](measuring-health.md#two-examples)).
 
 ### A first reading: the baseline
 
@@ -289,10 +253,8 @@ within a few hundred iterations, whichever length of contest asks.
 
 ### Finished, or running in place?
 
-A tie between two eras has two readings. The world may have **finished**: it
-found what it could, and nothing is left to find. Or it may be **running in
-place**. Then each era beats the one before at what the one before did, and
-loses to the one before that. No era gets ahead of all of them.
+A tie can mean finished or running in place
+([Playing against the past](#playing-against-the-past)).
 
 The step scores already argue against the second. An era that answered its
 predecessor would beat it, and the eras here tie with their predecessors too.
@@ -390,7 +352,7 @@ Two more things were measured along the way.
 or loses a hidden unit by mutation. It also carries a *shadow*, a size
 inherited and mutated exactly like the real one but used by nothing
 ([a null](#numbers-that-rise-and-mean-nothing)). Take four worlds without
-handover, where a parent cannot pass some of its connections to its newborn.
+handover, where a parent cannot pass some of its [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") to its newborn.
 In them the real size followed its shadow. What rose, rose because a size
 cannot fall below its floor, the left wall, and not because larger brains
 won.
@@ -408,28 +370,10 @@ Why should every world stop? Before Experiment 16, one answer looked likely.
 It starts from the game an agent plays
 ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). An agent divides its
 tokens between its own node and its neighbours' nodes, and each node goes to
-whoever stakes most on it. That is very nearly the oldest game in game theory
-with a name of its own: **Colonel Blotto** (Borel, 1921). Two colonels divide
-their soldiers between battlefields, and each battlefield goes to whoever
-sends more.
-
-Blotto has a peculiar property: **no division is best.** Take three
-battlefields and six soldiers each, and count the fields each side wins:
-
-- (3, 3, 0) beats the even division (2, 2, 2) — it wins the first two fields;
-- (4, 0, 2) beats (3, 3, 0) — the first and the third;
-- (1, 1, 4) beats (4, 0, 2) — the second and the third;
-- and the even division (2, 2, 2) beats (1, 1, 4) — the first and the second.
-
-The beatings go round in a circle, and there is no way out of it. Whatever
-division a colonel picks, some other division beats it, so a colonel who is
-predictable is beaten. The best a colonel can do is to be **unpredictable**: to draw a division at
-random from a well-chosen distribution, so that no opponent can aim at it. For two colonels such a *mixed strategy* exists, and
-against it no other strategy does better (Gross and Wagner, 1950; Roberson,
-2006). The agents' game is not exactly Blotto. It has many players, a node
-goes with every token staked on it, and the network decides where the
-battlefields are. But the circle is the same: a predictable agent is one its
-neighbours can aim at.
+whoever stakes most on it. That is nearly Colonel Blotto, where no division is
+best and the best play is to be unpredictable
+([The game: Colonel Blotto](the-ideas-this-builds-on.md#the-game-colonel-blotto)).
+A predictable agent is one its neighbours can aim at.
 
 Evolution seemed to find that. In pilot worlds under B2's rules, the brains'
 decisions were probed input by input. Take an evolved agent with at least
@@ -458,22 +402,9 @@ random inputs are redrawn. In a lottery contest, where dice are worthless,
 evolved brains use them as much. And a strategy written by hand took half of
 one of these worlds.
 [What the probes say about why](#what-the-probes-say-about-why) tells the
-story.
-
-### Room to go on
-
-If the contest for nodes had an answer, evolution would need a game without
-one. Games without a final answer are games whose payoffs depend on what the
-others have become. The richest kind are those in which agents can do better
-*together*. Then whom to trust, whom to join and how to coordinate become
-questions whose answers change as the population changes.
-
-Two things the pilots tried were meant to be such games. Both lacked the one
-thing cooperation needs, a **surplus**. Support counted less than a home
-stake. The yield on returned stakes went to whoever had most partners, so it
-built [stars](measuring-networks.md#stars-and-hubs) rather than partnerships. What a surplus
-could look like is the subject of [Alliances](another-game.md#alliances), and other
-contests are that of [Another game](another-game.md).
+story. What a game in which agents do better together could look like is the
+subject of [Other contests](another-game.md) and
+[Alliances](another-game.md#alliances).
 
 ### The thesis of Experiment 16
 
@@ -544,20 +475,12 @@ ratings, the median B2 world stood at +90 at iteration 100, +124 at 200 and
 +126 at 500. It stood at +128 at 1,000, and +120 at 1,500 and 2,000. Without
 random inputs it stood at +86, +121, +130, +162, +139 and +123.
 
-The third colour of the figure *Each era against the one before* was added
-later. It shows the same steps in contests a lifetime long, 100 iterations.
-None of them is a tie
-([Would we notice if it went on?](#would-we-notice-if-it-went-on)).
-
 **In short contests, later is a little worse.** In the median B2 world, the
 brains of iteration 2,000 held 0.482 of a world against those of iteration 500
 (0.471 to 0.502). They held less than half in nine of the ten worlds. Without
 random inputs the median was 0.477 (0.452 to 0.519), less than half in seven.
 The loss is small, about two points in a hundred, but it is nearly always a
-loss. At first this looked like a world slipping back. Its brains seemed worn
-down by mutation faster than selection could repair them, once there was
-little left to select for. Contests a lifetime long tell another story: the
-later brains start a little behind, and overtake over a life.
+loss.
 
 **The dominance tournament agrees.** It crowns the founders, the brains of
 iteration 100, and one or two later eras in every world. The last era crowned
@@ -578,11 +501,8 @@ random inputs. Both lie inside 0.45 to 0.55. In contests of 20 iterations, a
 world that cannot break stops improving within its first few hundred
 iterations. Taking the random inputs away does not change that.
 
-The verdict stands, but the reading does not. A contest of 20 iterations
-cannot see what pays off over an agent's life of 100. In contests of 100
-iterations the brains of iteration 2,000 beat those of 500 in all ten worlds
-(0.73), and those of 200 (0.82). Evolution did not stop at iteration 200 to
-500. It went on improving what a short contest cannot show.
+The verdict stands, but the reading does not: a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long, later brains
+win ([Would we notice if it went on?](#would-we-notice-if-it-went-on)).
 
 ### Would we notice if it went on?
 
@@ -771,7 +691,7 @@ and [Another game](another-game.md). What they could do together is that of
 
 ## How this was made
 
-The runs behind this page, how many and with which seeds, and every setting
+The runs behind this page, how many and with which seeds, and every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.")
 they were made with.
 
 ### The runs of Experiment 12
@@ -829,6 +749,6 @@ they were made with.
 
 [Does evolution keep going?](../README.md#does-evolution-keep-going) · [How fast should brains change?](how-fast-should-brains-change.md) →
 
-> [!info]- Pages that link here (30)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What the brains are like](what-the-brains-are-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
+> [!info]- Pages that link here (28)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What the brains are like](what-the-brains-are-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Other contests: a lottery, and alliances](another-game.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

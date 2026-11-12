@@ -12,7 +12,7 @@ B2, the world that cannot break, has seven numbers in its rules that were
 chosen by hand, and the notebook asks for rules without them. Taken away all
 at once, the numbers show what each was for: without alliances the worlds
 died out. With alliances, each lived as one peaceful alliance, but on a
-network that fails the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test."). The clearest replacement so far is a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
+network that fails the health bar. The clearest replacement so far is a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
 in every link: then no cap on links is needed. Nothing yet replaces the age
 limit.
 
@@ -160,7 +160,7 @@ left differed from world to world:
 <!-- /figure -->
 
 None of the six passes the health bar
-([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)).
+([The health bar](measuring-health.md#the-health-bar)).
 So none has the network the notebook asks of a world in which evolution is to
 work for long. The three that lived ended the fighting. With it went nearly
 all selection, except that between who has children and who does not.
