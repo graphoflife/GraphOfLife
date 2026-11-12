@@ -56,8 +56,6 @@ TOKENS, BIGGER, ITERATIONS, SEEDS = 10000, 4, 20000, "4601..4603"
 #: four days on the one worker it is given (the lab's runs have taken 0.8 to 1.0
 #: of the model's time). A world whose rules would take longer is passed over.
 HOURS = 100
-#: How a brain changes: what the faithful-copies arm takes from the world of round 3 whose copies are most faithful.
-MUTATION = ("mutate_on_replication", "mutation_probability", "mutation_noise_std", "mutation_sparsity")
 #: How often a mutated copy starts a family of its own, as the family-pool pilots had it (another-game.md).
 TAG_RATE = 0.05
 
@@ -145,9 +143,15 @@ def round3_spec(run_id: str) -> gol_plan.RunSpec:
     raise SystemExit(f"{run_id} is not a run of round 3")
 
 
-def revolts(drawn: Dict[str, Any], base: Dict[str, Any]) -> bool:
-    """Whether a world drawn with these settings plays with revolutions."""
-    return bool(drawn.get("allow_revolutions", base["allow_revolutions"]))
+def seldom(base: Dict[str, Any]) -> float:
+    """
+    How seldom brains change in the faithful-copies arm: as seldom as in any world
+    of round 3, the least mutation_probability its worlds drew. Its worlds that
+    changed their brains less often copied them more faithfully: the median
+    heredity on the brain tree is 0.99 at 0.1, 0.97 at 0.2, 0.93 at 0.4 and 0.74
+    at 0.8.
+    """
+    return min({**base, **round3_spec(w["id"]).lab["set"]}["mutation_probability"] for w in ranked())
 
 
 def arm(name: str, start: Dict[str, Any], change: Dict[str, Any], base: Dict[str, Any],
@@ -165,37 +169,22 @@ def arm(name: str, start: Dict[str, Any], change: Dict[str, Any], base: Dict[str
     return out
 
 
-def faithful(drawn: Dict[str, Any], base: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
-    """
-    The faithful-copies arm's change: how brains change in the world of round 3
-    whose brains are copied most faithfully (heredity on the brain tree), the
-    first such world that changes them otherwise than `drawn` does.
-    """
-    for world in sorted(ranked(), key=lambda w: -w["values"]["heredity"]):
-        theirs = {**base, **round3_spec(world["id"]).lab["set"]}
-        change = {k: theirs[k] for k in MUTATION if theirs[k] != drawn[k]}
-        if change:
-            return world["id"], change
-    raise SystemExit("every world of round 3 changes its brains as the chosen one does")
-
-
-def arms_of(spec: gol_plan.RunSpec, base: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], str]:
-    """Experiment 46's arms on one world's rules, and the world its faithful copies come from."""
+def arms_of(spec: gol_plan.RunSpec, base: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Experiment 46's arms on one world's rules."""
     start = condition(spec, TOKENS)
     drawn = {**base, **start["set"]}
-    copies_from, copies = faithful(drawn, base)
     other = {"own": "largest", "largest": "own"}[drawn["self_message"]]
     arms = [
         arm("control", start, {}, base),
         arm(f"{BIGGER} times the tokens", condition(spec, TOKENS * BIGGER), {}, base, [TOKENS * BIGGER]),
-        arm("faithful copies", start, copies, base),
+        arm("faithful copies", start, {"mutation_probability": seldom(base)}, base),
         arm(f"message to oneself: {other}", start, {"self_message": other}, base),
         arm("revolutionary tokens for the coalition alone", start, {"revolt_tokens": "separate"}, base),
     ]
     # Stakes pooled by family need every token staked at once (allocation full).
     if drawn["allocation"] == "full":
         arms.append(arm("stakes pooled by family", start, {"pool": "family", "tag_rate": TAG_RATE}, base))
-    return arms, copies_from
+    return arms
 
 
 def cost(arms: List[Dict[str, Any]], base: Dict[str, Any]) -> float:
@@ -230,11 +219,14 @@ def e46() -> Dict[str, Any]:
     """
     base = gol_plan.baseline("B1")
     passed = []
+    least = seldom(base)
     for world in ranked():
         spec = round3_spec(world["id"])
-        if not revolts(spec.lab["set"], base):
+        drawn = {**base, **spec.lab["set"]}
+        # Every arm must change something: revolutions to flag, brains that could change less often.
+        if not drawn["allow_revolutions"] or drawn["mutation_probability"] <= least:
             continue
-        arms, copies_from = arms_of(spec, base)
+        arms = arms_of(spec, base)
         if cost(arms, base) <= HOURS:
             break
         passed.append(world["id"])
@@ -243,8 +235,7 @@ def e46() -> Dict[str, Any]:
     return {
         "id": "E46", "title": "Why does evolution level off?",
         "thesis": {"claim": "", "why": "", "confirm": "", "refute": ""},
-        "chosen": {"world": world["id"], "rank": world["rank"], "passed over as too slow": passed,
-                   "faithful copies from": copies_from},
+        "chosen": {"world": world["id"], "rank": world["rank"], "passed over as too slow": passed},
         # One worker at a time: the lab starts the longest job first, so without a
         # cap these runs would hold every worker and Experiment 45's short
         # contests would wait for all of them.
