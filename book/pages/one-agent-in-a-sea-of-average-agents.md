@@ -74,7 +74,7 @@ iterations after it was planted
 ([How large a crowd a raider needs](strategies-written-by-hand.md#how-large-a-crowd-a-raider-needs)).
 In older worlds even the crowd failed, for want of tokens: a raider needs
 three to take a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") of one
-([What a raid starts from](does-evolution-close-the-door.md#what-a-raid-starts-from)).
+([What a raid starts from](strategies-written-by-hand.md#what-a-raid-starts-from)).
 
 **Two roads for a brain.** A brain spreads into a child at birth, and into a
 node its agent takes in a game. In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."), conquest spreads a brain seventeen
@@ -388,7 +388,7 @@ we define 'fitness' for general ecological scenarios?
 <!-- turns -->
 ---
 
-← [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Strategies written by hand](../README.md#strategies-written-by-hand)
+← [What a brain can compute](what-a-brain-can-compute.md) · [Strategies written by hand](../README.md#strategies-written-by-hand)
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 

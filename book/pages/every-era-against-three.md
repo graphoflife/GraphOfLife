@@ -282,7 +282,7 @@ little in one world, round a circle in the other.
   exploitability and the invasion test, in full.
 - [Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations):
   the two worlds played here, and the three that died out.
-- [Why the raiders stopped winning](does-evolution-close-the-door.md): does a
+- [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning): does a
   world that has stopped climbing still let a raider in?
 - [A hundred thousand iterations](a-hundred-thousand-iterations.md): one world
   planned twice as long.
@@ -335,5 +335,5 @@ its figure gives every step.
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 
 > [!info]- Pages that link here (10)
-> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

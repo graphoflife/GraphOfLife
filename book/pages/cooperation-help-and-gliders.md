@@ -218,7 +218,7 @@ about who takes a node.
 | **kin pooled**: sides made by descent, within two mutations | peace, sooner, with nobody deciding anything; but small sides, 2 to 14% of the world | [One alliance takes the world](another-game.md#one-alliance-takes-the-world) |
 | **alliances** by mutual consent | taken up at once: one alliance held 99% of the world by iteration 2,000 | [Alliances](another-game.md#alliances) |
 | alliances in worlds without B2's hand-set numbers | they made the difference between dying and living; whether also between living and evolving, two seeds cannot say | [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did) |
-| **crews**: raiders written by hand whose revolutionary stakes join against one stranger (Experiment 33) | no crew took hold, planted at iteration 2,000, 5,000 or 10,000 | [Raiders that pool their stakes](does-evolution-close-the-door.md#raiders-that-pool-their-stakes) |
+| **crews**: raiders written by hand whose revolutionary stakes join against one stranger (Experiment 33) | no crew took hold, planted at iteration 2,000, 5,000 or 10,000 | [Raiders that pool their stakes](strategies-written-by-hand.md#raiders-that-pool-their-stakes) |
 | a **sense of direction** and a **sense of who helped** | no gliders, and no more help | [Both inputs, tested](cooperation-help-and-gliders.md#both-inputs-tested) |
 
 **Pooled sides bring peace, not better play.** Pooling the stakes of clones,
@@ -255,7 +255,7 @@ B2's worlds at iterations 2,000, 5,000 and 10,000. None took hold, and they
 died before lone raiders in 42 of 45 places. A group helps only where it can
 gather. On B2's network, a stranger next to a patch touches only one or two
 of its agents
-([Why the raiders stopped winning](does-evolution-close-the-door.md#verdict-on-experiment-33-refuted)).
+([Why the raiders stopped winning](strategies-written-by-hand.md#verdict-on-experiment-33-refuted)).
 
 **More information made no cooperation.** The pilot worlds of batch P gave
 B2's brains two new inputs per neighbour. One was a sense of direction, *this

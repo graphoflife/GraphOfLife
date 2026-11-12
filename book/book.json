@@ -640,14 +640,21 @@
       "title": "Can a strategy written by hand beat evolution?",
       "file": "pages/strategies-written-by-hand.md",
       "topics": [
-        "strategies"
+        "strategies",
+        "evolution",
+        "groups",
+        "baselines"
       ],
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-15",
-      "summary": "Evolution in B2's worlds slows down as they age: is the play it has found the best there is? To find out, we planted rules written by hand as a patch in evolved B2 worlds.",
+      "summary": "Rules written by hand, planted in evolved B2 worlds, can beat evolution's play, given a raid, a password and a crowd of about a hundred (Experiment 29). In older worlds the raiders stopped winning: the worlds had grown too poor (Experiments 30 and 33 to 35).",
       "experiments": [
-        "E29"
+        "E29",
+        "E30",
+        "E33",
+        "E34",
+        "E35"
       ]
     },
     {
@@ -662,27 +669,6 @@
       "status": "analysed",
       "added": "2026-10-19",
       "summary": "A raider written in Python took 40% and 62% of two evolved B2 worlds, with play that evolution had never found. Yet 12 units of a B2 brain, with weights set by hand, decide as the rule does in all but eight of 62,114 situations."
-    },
-    {
-      "id": "does-evolution-close-the-door",
-      "title": "Why the raiders stopped winning",
-      "file": "pages/does-evolution-close-the-door.md",
-      "topics": [
-        "strategies",
-        "evolution",
-        "groups",
-        "baselines"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E30",
-        "E33",
-        "E34",
-        "E35"
-      ],
-      "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "A raider written by hand took hold in young B2 worlds, but not in the same worlds grown older (Experiment 30). The worlds had not learned to defend themselves: their patches grew too poor, and a raider needs three tokens to take a neighbour of one."
     },
     {
       "id": "one-agent-in-a-sea-of-average-agents",

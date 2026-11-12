@@ -103,10 +103,10 @@
   "94": "what-a-brain-can-compute",
   "95": "every-era-against-three",
   "96": "strategies-written-by-hand#how-large-a-crowd-a-raider-needs",
-  "97": "does-evolution-close-the-door",
-  "102": "does-evolution-close-the-door#a-crew-of-raiders",
-  "103": "does-evolution-close-the-door#raiders-that-breed",
-  "104": "does-evolution-close-the-door#hand-written-strategies-in-b1",
+  "97": "strategies-written-by-hand#why-the-raiders-stopped-winning",
+  "102": "strategies-written-by-hand#a-crew-of-raiders",
+  "103": "strategies-written-by-hand#raiders-that-breed",
+  "104": "strategies-written-by-hand#hand-written-strategies-in-b1",
   "106": "a-screen-of-random-worlds",
   "n-settings": "settings",
   "n-starting-ring": "rules-in-detail#the-starting-ring",
@@ -263,9 +263,9 @@
    "Chapter 51": "strategies-written-by-hand"
   },
   "E35": {
-   "Chapter 97": "does-evolution-close-the-door",
-   "Chapter 102": "does-evolution-close-the-door#a-crew-of-raiders",
-   "Chapter 103": "does-evolution-close-the-door#raiders-that-breed"
+   "Chapter 97": "strategies-written-by-hand#why-the-raiders-stopped-winning",
+   "Chapter 102": "strategies-written-by-hand#a-crew-of-raiders",
+   "Chapter 103": "strategies-written-by-hand#raiders-that-breed"
   },
   "E36": {
    "Chapter 101": "building-b2-and-the-search-for-a-healthy-rich-world#births-as-rich-as-the-neighbours"
@@ -301,9 +301,9 @@
   "the-geometry-of-a-world": "b1-the-network-size-and-scaling#the-geometry-of-a-world",
   "why-evolution-stops": "how-to-tell-a-world-that-keeps-evolving#why-evolution-stops",
   "what-folds-a-world": "how-many-dimensions-does-a-world-have#what-folds-a-world",
-  "a-crew-of-raiders": "does-evolution-close-the-door#a-crew-of-raiders",
-  "raiders-that-breed": "does-evolution-close-the-door#raiders-that-breed",
-  "hand-written-strategies-in-b1": "does-evolution-close-the-door#hand-written-strategies-in-b1",
+  "a-crew-of-raiders": "strategies-written-by-hand#a-crew-of-raiders",
+  "raiders-that-breed": "strategies-written-by-hand#raiders-that-breed",
+  "hand-written-strategies-in-b1": "strategies-written-by-hand#hand-written-strategies-in-b1",
   "alliances": "another-game#alliances",
   "how-large-a-crowd-a-raider-needs": "strategies-written-by-hand#how-large-a-crowd-a-raider-needs",
   "revolutions-with-every-other-rule": "what-the-switches-did-in-pilots#revolutions-with-every-other-rule",
@@ -437,6 +437,7 @@
   "what-goes-with-what": "measures-atlases-and-assembly#what-goes-with-what",
   "every-world-side-by-side": "measures-atlases-and-assembly#every-world-side-by-side",
   "one-world-many-colours": "measures-atlases-and-assembly#one-world-many-colours-what-the-viewer-can-colour-by",
-  "assembly-theory": "measures-atlases-and-assembly#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies"
+  "assembly-theory": "measures-atlases-and-assembly#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies",
+  "does-evolution-close-the-door": "strategies-written-by-hand#why-the-raiders-stopped-winning"
  }
 }

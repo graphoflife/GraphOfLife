@@ -1008,7 +1008,7 @@ with and without them was the same world in every measure
   whose agents are 7 to 13 iterations old on average.
 - [Revolutions, with every other rule](what-the-switches-did-in-pilots.md#revolutions-with-every-other-rule):
   the worlds near B2 in which revolutions do matter.
-- [A crew of raiders](does-evolution-close-the-door.md#a-crew-of-raiders): two raiders of two tokens each
+- [A crew of raiders](strategies-written-by-hand.md#a-crew-of-raiders): two raiders of two tokens each
   stake one on a stranger of one token. In B2 the stranger's home stake
   counts as 1.5, so neither raider can take the node alone, but together,
   with *R* = 2, they do.

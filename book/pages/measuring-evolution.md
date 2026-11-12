@@ -695,14 +695,14 @@ solved, but not that it is.
   measures it era by era in Experiment 16's B2 worlds.
   [How much room is left](every-era-against-three.md#how-much-room-is-left)
   measures it in every long world.
-  [Why the raiders stopped winning](does-evolution-close-the-door.md#what-we-expected-of-older-worlds)
+  [Why the raiders stopped winning](strategies-written-by-hand.md#what-we-expected-of-older-worlds)
   builds Experiment 30's expectation on it.
 - **The invasion test.**
   [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
   plants the first strategies, and measures how large a crowd the raider
   needs (Experiment 29). [What a brain can compute](what-a-brain-can-compute.md)
   plants a brain that plays the raider.
-  [Why the raiders stopped winning](does-evolution-close-the-door.md) plants
+  [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning) plants
   raiders in older worlds, crews of raiders and raiders that breed
   (Experiments 30, 33 and 34). It also plants them in B1 (Experiment 35).
   [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots) explains how the lab plays

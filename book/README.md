@@ -123,7 +123,6 @@ how the pages hang together.
 
 - [Can a strategy written by hand beat evolution?](pages/strategies-written-by-hand.md)
 - [What a brain can compute](pages/what-a-brain-can-compute.md)
-- [Why the raiders stopped winning](pages/does-evolution-close-the-door.md)
 - [One agent in a sea of average agents](pages/one-agent-in-a-sea-of-average-agents.md)
 
 ### Methods and look-up
