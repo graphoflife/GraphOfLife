@@ -185,10 +185,23 @@ Object.assign(Explain, {
       if (e.key === 'ArrowLeft') { this.go(-1); e.preventDefault(); }
       if (e.key === 'ArrowRight') { this.go(1); e.preventDefault(); }
     });
+
+    // The machine's digits behind the picture, as on the front page, even
+    // and fainter: a texture for the stage, not a second thing to read.
+    this.wall = new GlyphWall(document.getElementById('explainGlyphs'), this.canvas.parentElement, {
+      hole: -1, span: 1, density: 0.3, centreY: 0.5, faint: 0.03, range: 0.06, lit: 0.012,
+      changeEvery: 0.16, seed: 2718
+    });
+    window.addEventListener('resize', () => { if (this.active) this.wall.resize(); });
+    window.addEventListener('themechange', () => { if (this.active) this.wall.draw(); });
+    const query = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    this.calm = !!(query && query.matches);
+    query?.addEventListener?.('change', event => { this.calm = event.matches; });
   },
 
   setActive(active) {
     this.active = active;
+    if (active) requestAnimationFrame(() => this.wall?.resize());
     if (active && !this.stages && !this._loading) this.load();
   },
 
@@ -459,6 +472,8 @@ Object.assign(Explain, {
       `<h3 class="ex-title">${step.title}</h3>` +
       `<p class="ex-step">${where}</p>` +
       `<p>${step.text}</p>`;
+    // The title arrives as the front page's does, out of the machine's digits.
+    Decoder.decode(this.textEl.querySelector('.ex-title'));
     this.noteEl.style.backgroundImage = this.emblem(step.emblem);
     this._shownEmblem = step.emblem;
     // Only the emblem needs the room it takes; a step without one gets its
@@ -511,6 +526,8 @@ Object.assign(Explain, {
    */
   tick(elapsed, now) {
     const dt = Math.min(0.05, elapsed);
+    if (!this.calm) this.wall?.tick(dt);
+    if (this.view) this.view.calm = this.calm;
     if (this.view && this.stages) {
       StepView.tick(this.view, dt);
       StepView.gaze(this.view, now / 1000);

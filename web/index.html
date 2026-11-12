@@ -8,12 +8,19 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="favicon.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="favicon-180.png">
-<!-- The site's one typeface. Without the network the stylesheet falls back to
-     the system's own monospace. -->
+<!-- Three typefaces, each with one job. JetBrains Mono is the machine's voice:
+     every control, number and line of code, and every label a canvas draws.
+     Cinzel, cut from Roman inscriptions, sets the titles. Spectral, made for
+     reading on a screen, sets the long prose of the notebook and the
+     explanation. Without the network the stylesheet falls back to the
+     system's own faces. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&display=swap">
 <link rel="stylesheet" href="css/style.css">
+<!-- The theme this browser chose, put back before anything is painted, so a
+     white page does not flash dark on the way in (theme.js keeps it). -->
+<script>try { var t = localStorage.getItem('gol.theme'); if (t && t !== 'obsidian') document.documentElement.dataset.theme = t; } catch (e) { /* a private window: the default */ }</script>
 </head>
 <body>
 
@@ -59,22 +66,26 @@
 <header class="topbar">
   <!-- Inline rather than a file: it is a dozen shapes, it inherits the page's
        colours, and it costs no extra request. -->
-<svg class="brand-mark" aria-hidden="true"><use href="#gol-mark"/></svg>
+  <svg class="brand-mark" aria-hidden="true"><use href="#gol-mark"/></svg>
   <button class="brand" data-view="home" title="Home">
-    <h1>GraphOfLife</h1>
+    <h1>Graph of Life</h1>
   </button>
+  <!-- Four places. The Research tab's two halves live where they are used:
+       its instruments are ways of looking at a run, so they are the Viewer's
+       modes, and its documents are reading, so they are in the Notebook. -->
   <nav class="tabs">
     <button class="tab" data-view="explain">Explanation</button>
     <button class="tab" data-view="runs">Simulations</button>
     <button class="tab" data-view="viewer">Viewer</button>
-    <button class="tab" data-view="research">Research</button>
-    <button class="tab" data-view="book">Research Notebook</button>
+    <button class="tab" data-view="book"><span class="tab-long">Research&nbsp;</span>Notebook</button>
   </nav>
   <!-- What is loading, how far, and how to stop it. One bar, up here, because
        the question "is anything still working?" is asked from whichever tab
        you are on and used to be answerable only from the one that started it. -->
   <div class="job-bar" id="jobBar" hidden></div>
   <span class="run-label" id="activeRunLabel"></span>
+  <!-- The colour themes, one swatch each (theme.js). -->
+  <div class="theme-switch" id="themeSwitch" role="group" aria-label="Colour theme"></div>
   <!-- Who made this, at the right end of the bar. -->
   <span class="byline"><span>By Stefan Beeler,</span> <a href="mailto:beelerst@pm.me">beelerst@pm.me</a></span>
 </header>
@@ -86,14 +97,36 @@
          page has to open at once, and it must not leave a stray simulation
          behind on a machine that has a server. -->
     <canvas id="homeCanvas"></canvas>
+    <!-- The other backdrop: a living network of eyes, round one that looks
+         back (eyes.js). Only one of the two is ever drawn. -->
+    <canvas id="homeEyes" class="home-eyes" aria-hidden="true"></canvas>
+    <!-- A wall of the machine's digits half lost in the dark around the
+         edges, drawn once and then changing a few at a time (glyphwall.js). -->
+    <canvas id="homeGlyphs" class="home-glyphs" aria-hidden="true"></canvas>
     <div class="home-veil"></div>
 
+    <!-- Which backdrop: the recorded world, or the eyes. Kept in this browser. -->
+    <div class="home-backdrop seg" id="homeBackdrop" role="group" aria-label="Backdrop">
+      <button type="button" class="seg-btn" data-backdrop="world">World</button>
+      <button type="button" class="seg-btn" data-backdrop="eyes">Eyes</button>
+    </div>
+
     <div class="home-hero">
-      <div class="home-headline">
-        <h2 class="home-title">Graph of Life</h2>
-        <svg class="home-mark" aria-hidden="true"><use href="#gol-mark"/></svg>
+      <!-- The mark, lit from behind. Over the eyes it gives way to the great
+           eye drawn in its place. -->
+      <div class="home-seal" id="homeSeal" aria-hidden="true">
+        <svg class="home-mark"><use href="#gol-mark"/></svg>
       </div>
-      <p class="home-subtitle">An Artificial Life Algorithm</p>
+      <!-- The words are written here whole, so the title reads as itself
+           without script and to a screen reader; entrance.js decodes them
+           into place letter by letter. -->
+      <h2 class="home-title" id="homeTitle">Graph of Life</h2>
+      <p class="home-subtitle" id="homeSubtitle">An artificial life algorithm</p>
+      <nav class="home-doors" aria-label="Where to begin">
+        <button class="home-door" data-view="explain"><span class="home-door-no" aria-hidden="true">01</span>How it works</button>
+        <button class="home-door" data-view="book"><span class="home-door-no" aria-hidden="true">02</span>Read the notebook</button>
+        <button class="home-door" data-view="runs"><span class="home-door-no" aria-hidden="true">03</span>The simulations</button>
+      </nav>
     </div>
 
     <aside class="home-note">
@@ -101,6 +134,17 @@
         evolutionary game theory and neural networks. No optimization &mdash;
         just mutation, evolution and natural selection.</p>
     </aside>
+
+    <!-- What the world behind the title holds, read from the frame on
+         screen. It is a real run, and says so in numbers. -->
+    <div class="home-readout" id="homeReadout">
+      <p class="home-readout-head">A recorded world</p>
+      <dl>
+        <dt>Agents</dt><dd data-count="agents">&mdash;</dd>
+        <dt>Links</dt><dd data-count="links">&mdash;</dd>
+        <dt>Tokens</dt><dd data-count="tokens">&mdash;</dd>
+      </dl>
+    </div>
   </div>
 </main>
 
@@ -109,6 +153,8 @@
   <div class="ex">
     <div class="ex-body">
       <div class="ex-stage">
+        <!-- The machine's digits behind the picture, as on the front page. -->
+        <canvas id="explainGlyphs" class="ex-glyphs" aria-hidden="true"></canvas>
         <canvas id="explainCanvas"></canvas>
       </div>
       <!-- The words and the script share one column: the explanation on top of
@@ -146,12 +192,26 @@
   <div id="backendNotice" class="backend-notice hidden"></div>
 
   <!-- Simulations, and nothing else. Everything that acts on one lives on its
-       own card; everything that makes one lives behind the first cell. -->
-  <div class="sims-head">
-    <h2>Simulations</h2>
-    <button id="refreshRuns" class="ghost small">Refresh</button>
+       own card; making one is the button in the head. -->
+  <div class="page-head sims-head">
+    <div class="page-title">
+      <h2>Simulations</h2>
+      <p class="page-sub" id="simCount"></p>
+    </div>
+    <div class="page-actions">
+      <button id="refreshRuns" class="ghost">Refresh</button>
+      <button id="newRun" class="primary">New simulation</button>
+    </div>
   </div>
-  <div id="simGrid" class="sim-grid"></div>
+  <!-- Narrowing the list down: words to look for, a status, and what to
+       group the cards by. Kept in this browser (runs.js). -->
+  <div class="sims-tools" role="search">
+    <input type="search" id="simSearch" placeholder="Search names, ids and settings"
+           aria-label="Search the simulations" autocomplete="off">
+    <label class="sims-tool">Status <select id="simStatus" aria-label="Only simulations of a status"></select></label>
+    <label class="sims-tool">Group by <select id="simGroup" aria-label="Group the simulations by"></select></label>
+  </div>
+  <div id="simGrid" class="sim-groups"></div>
 </main>
 
 <!-- The settings, which are only ever wanted at the moment something is being
@@ -596,8 +656,30 @@
 </dialog>
 
 <!-- ==================== VIEWER VIEW ==================== -->
+<!-- One run, looked at in five ways. The network is the first and the one
+     the tab opens on; the other four were the Research tab's instruments and
+     use the same run, chosen once in the picker on the right. -->
 <main id="view-viewer" class="view">
-  <div class="viewer-layout" id="viewerLayout">
+  <div class="viewer-head">
+    <nav class="viewer-modes" id="viewerModes" aria-label="Ways of looking at a run">
+      <button type="button" class="viewer-mode active" data-mode="network">Network</button>
+      <button type="button" class="viewer-mode" data-mode="lineage">Lineage</button>
+      <button type="button" class="viewer-mode" data-mode="flow">Flow modules</button>
+      <button type="button" class="viewer-mode" data-mode="diagrams">Diagrams</button>
+      <button type="button" class="viewer-mode" data-mode="correlations">Correlations</button>
+    </nav>
+    <div class="run-inline">
+      <select id="runPicker" title="Which run to look at" aria-label="Simulation"></select>
+      <button id="btnReloadFrames" class="seg-btn standalone" title="Re-read frames from disk">Reload</button>
+      <button id="btnRunSettings" class="seg-btn standalone" title="Every setting of the run on screen, and what each means" disabled>Settings</button>
+    </div>
+  </div>
+
+  <!-- The network: the picture in the middle of the page, the play bar under
+       it, and everything else folded away until it is asked for — the
+       drawing settings in a panel that opens on the right, the statistics
+       and the charts in two folds below. -->
+  <div class="viewer-layout is-collapsed" id="viewerLayout">
 
     <div class="canvas-column">
       <div class="canvas-wrap">
@@ -626,117 +708,133 @@
         </label>
       </div>
 
-      <div class="view-toggles">
+      <div class="view-bar">
         <div class="seg" id="dimToggle" role="group" aria-label="Dimensions">
           <button class="seg-btn" data-dim="2">2D</button>
           <button class="seg-btn active" data-dim="3">3D</button>
         </div>
-        <div class="seg" id="phaseToggle" role="group" aria-label="Phase filter">
-          <button class="seg-btn active" data-phase="all">All phases</button>
-          <button class="seg-btn" data-phase="1">After reproduction</button>
-          <button class="seg-btn" data-phase="2">After game</button>
-        </div>
-        <div class="seg" role="group" aria-label="Layout actions">
-          <button class="seg-btn" id="btnReheat" title="Stir the layout without moving anything">Reheat</button>
-          <button class="seg-btn" id="btnRelayout" title="Scatter and start the layout over">Fresh layout</button>
+        <div class="seg" role="group" aria-label="Camera">
           <button class="seg-btn" id="btnFit" title="Keep the whole graph in view until you move the camera">Fit view</button>
           <button class="seg-btn" id="btnAutoRotate" aria-pressed="false"
                   title="Turn the view steadily, so a 3D graph reads as one">Auto-rotate</button>
-          <label class="seg-field" title="How fast it turns, in degrees a second">
-            <input type="number" id="rotateSpeed" min="1" max="120" step="1" value="10">
-            <span class="unit">&deg;/s</span>
-          </label>
-        </div>
-        <div class="seg" role="group" aria-label="Display">
           <button class="seg-btn" id="btnFullscreen" aria-pressed="false"
                   title="Fill the screen with the view (F, or Esc to leave)">Fullscreen</button>
         </div>
-        <div class="seg" role="group" aria-label="Focus">
-          <label class="seg-field" title="How many steps out from the clicked node to keep">
-            Focus steps
-            <input type="number" id="focusRadius" min="1" max="99" step="1">
-          </label>
-          <button class="seg-btn" id="btnClearFocus" title="Show the whole graph again" disabled>Show all</button>
-        </div>
-        <div class="seg" role="group" aria-label="k-core">
-          <label class="seg-field" id="kCoreField"
-                 title="Show only the k-core: what is left after repeatedly removing everyone with fewer than k connections, until nobody has fewer. Every statistic below is then measured on that alone. Unavailable while a single node is focused.">
-            <input type="checkbox" id="kCoreOn">
-            k-core
-            <input type="number" id="kCoreK" min="1" max="99" step="1" value="1">
-          </label>
-        </div>
         <span class="focus-note" id="focusNote"></span>
-        <div class="run-inline">
-          <select id="runPicker" title="Which run to inspect"></select>
-          <button id="btnReloadFrames" class="seg-btn standalone" title="Re-read frames from disk">Reload</button>
-          <button id="btnRunSettings" class="seg-btn standalone" title="Every setting of the run on screen, and what each means" disabled>Settings</button>
+        <span class="hint view-hint" id="dimHint">Drag to pan · alt-drag or middle-drag to orbit · scroll to zoom</span>
+        <button type="button" class="view-settings-toggle" id="btnViewSettings"
+                aria-expanded="false" aria-controls="viewerControls">View settings</button>
+      </div>
+
+      <details class="viewer-fold" id="foldStats">
+        <summary>Statistics <span class="hint">every number of the frame on screen, each with what it means</span></summary>
+        <div class="stats-groups" id="statsStrip"></div>
+      </details>
+
+      <details class="viewer-fold" id="foldCharts">
+        <summary>Charts <span class="hint">a distribution, two quantities against each other, and the run's path</span></summary>
+        <div class="charts">
+          <figure>
+            <figcaption>
+              <select id="distMetric" class="chart-metric" title="Which quantity to plot"></select>
+              <span class="axis-toggles">
+                <span class="axis-group" data-axis="distX">x
+                  <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+                </span>
+                <span class="axis-group" data-axis="distY">y
+                  <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+                </span>
+              </span>
+            </figcaption>
+            <canvas id="distHist" height="150"></canvas>
+          </figure>
+          <figure>
+            <figcaption>
+              <span class="chart-pair">
+                <select id="heatX" class="chart-metric" title="Horizontal axis"></select>
+                <select id="heatY" class="chart-metric" title="Vertical axis"></select>
+              </span>
+              <span class="axis-toggles">
+                <span class="axis-group" data-axis="heatX">x
+                  <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+                </span>
+                <span class="axis-group" data-axis="heatY">y
+                  <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+                </span>
+                <span class="axis-group" data-axis="heatCount">n
+                  <button class="axis-btn" data-scale="linear">lin</button><button class="axis-btn active" data-scale="log">log</button>
+                </span>
+              </span>
+            </figcaption>
+            <canvas id="heatMap" height="150"></canvas>
+          </figure>
+          <figure class="chart-wide">
+            <figcaption>
+              <span class="chart-pair">
+                <select id="trajX" class="chart-metric" title="Horizontal axis"></select>
+                <select id="trajY" class="chart-metric" title="Vertical axis"></select>
+              </span>
+              <span class="axis-toggles">
+                <span class="axis-group" data-axis="trajX">x
+                  <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+                </span>
+                <span class="axis-group" data-axis="trajY">y
+                  <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
+                </span>
+                <button class="axis-btn" id="btnTrajLoad"
+                        title="Summarise every recorded frame of this run. Slow the first time; kept afterwards.">Load history</button>
+              </span>
+            </figcaption>
+            <canvas id="trajectory" height="240"></canvas>
+          </figure>
         </div>
-        <span class="hint" id="dimHint">Drag to pan · alt-drag or middle-drag to orbit · scroll to zoom</span>
-      </div>
-
-      <div class="stats-groups" id="statsStrip"></div>
-
-      <div class="charts">
-        <figure>
-          <figcaption>
-            <select id="distMetric" class="chart-metric" title="Which quantity to plot"></select>
-            <span class="axis-toggles">
-              <span class="axis-group" data-axis="distX">x
-                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
-              </span>
-              <span class="axis-group" data-axis="distY">y
-                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
-              </span>
-            </span>
-          </figcaption>
-          <canvas id="distHist" height="150"></canvas>
-        </figure>
-        <figure>
-          <figcaption>
-            <span class="chart-pair">
-              <select id="heatX" class="chart-metric" title="Horizontal axis"></select>
-              <select id="heatY" class="chart-metric" title="Vertical axis"></select>
-            </span>
-            <span class="axis-toggles">
-              <span class="axis-group" data-axis="heatX">x
-                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
-              </span>
-              <span class="axis-group" data-axis="heatY">y
-                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
-              </span>
-              <span class="axis-group" data-axis="heatCount">n
-                <button class="axis-btn" data-scale="linear">lin</button><button class="axis-btn active" data-scale="log">log</button>
-              </span>
-            </span>
-          </figcaption>
-          <canvas id="heatMap" height="150"></canvas>
-        </figure>
-        <figure class="chart-wide">
-          <figcaption>
-            <span class="chart-pair">
-              <select id="trajX" class="chart-metric" title="Horizontal axis"></select>
-              <select id="trajY" class="chart-metric" title="Vertical axis"></select>
-            </span>
-            <span class="axis-toggles">
-              <span class="axis-group" data-axis="trajX">x
-                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
-              </span>
-              <span class="axis-group" data-axis="trajY">y
-                <button class="axis-btn active" data-scale="linear">lin</button><button class="axis-btn" data-scale="log">log</button>
-              </span>
-              <button class="axis-btn" id="btnTrajLoad"
-                      title="Summarise every recorded frame of this run. Slow the first time; kept afterwards.">Load history</button>
-            </span>
-          </figcaption>
-          <canvas id="trajectory" height="240"></canvas>
-        </figure>
-      </div>
+      </details>
     </div>
 
     <div class="resizer" id="viewerResizer" title="Drag to resize"></div>
 
     <aside class="controls" id="viewerControls">
+      <details class="control-group" open>
+        <summary><h3>View</h3></summary>
+        <div class="group-body view-group">
+          <span class="control-label">Phases shown</span>
+          <div class="seg" id="phaseToggle" role="group" aria-label="Phase filter">
+            <button class="seg-btn active" data-phase="all">All phases</button>
+            <button class="seg-btn" data-phase="1">After reproduction</button>
+            <button class="seg-btn" data-phase="2">After game</button>
+          </div>
+          <span class="control-label">Layout</span>
+          <div class="seg" role="group" aria-label="Layout actions">
+            <button class="seg-btn" id="btnReheat" title="Stir the layout without moving anything">Reheat</button>
+            <button class="seg-btn" id="btnRelayout" title="Scatter and start the layout over">Fresh layout</button>
+          </div>
+          <span class="control-label">Turning speed</span>
+          <div class="seg" role="group" aria-label="Turning speed">
+            <label class="seg-field" title="How fast it turns, in degrees a second">
+              <input type="number" id="rotateSpeed" min="1" max="120" step="1" value="10">
+              <span class="unit">&deg;/s</span>
+            </label>
+          </div>
+          <span class="control-label">Focus on a clicked agent</span>
+          <div class="seg" role="group" aria-label="Focus">
+            <label class="seg-field" title="How many steps out from the clicked node to keep">
+              Focus steps
+              <input type="number" id="focusRadius" min="1" max="99" step="1">
+            </label>
+            <button class="seg-btn" id="btnClearFocus" title="Show the whole graph again" disabled>Show all</button>
+          </div>
+          <span class="control-label">Only the k-core</span>
+          <div class="seg" role="group" aria-label="k-core">
+            <label class="seg-field" id="kCoreField"
+                   title="Show only the k-core: what is left after repeatedly removing everyone with fewer than k connections, until nobody has fewer. Every statistic below is then measured on that alone. Unavailable while a single node is focused.">
+              <input type="checkbox" id="kCoreOn">
+              k-core
+              <input type="number" id="kCoreK" min="1" max="99" step="1" value="1">
+            </label>
+          </div>
+        </div>
+      </details>
+
       <details class="control-group">
         <summary><h3>Nodes</h3></summary>
         <div class="group-body">
@@ -843,210 +941,182 @@
       </details>
     </aside>
   </div>
-</main>
 
-<!-- ==================== RESEARCH VIEW ==================== -->
-<main id="view-research" class="view">
-  <!-- Two levels, because the tab holds two different kinds of thing: an
-       instrument you point at a run, and a document you read. Mixing them in
-       one row of six buttons said they were the same kind of thing. Buttons
-       are built by research.js from its MODES table, so a new mode is an entry
-       there and nothing here. -->
-  <div class="research-bar">
-    <div class="research-modes" id="researchGroups"></div>
-    <span class="research-run" id="researchRunField">
-      <label for="researchRun">Simulation</label>
-      <select id="researchRun"></select>
-      <button id="researchRefresh" class="ghost small">Refresh</button>
-    </span>
-  </div>
-  <div class="research-bar research-modes research-submodes" id="researchModes"></div>
-
-  <!-- ---------------- lineage ---------------- -->
-  <section id="research-lineage" class="research-panel">
-    <div class="explain-intro">
-      <h2>Lineage</h2>
-      <p>Every genotype a run ever held, as a line: from the frame it first
-        appeared in to the last one it was seen in, thickening with how many
-        agents carried it, joined to the genotype it mutated from. Clades sit
-        together, so a family is a band.</p>
-      <p>Colour is ancestry. A founder is given a colour at random and every
-        mutation nudges its parent&rsquo;s, so relatedness is visible directly
-        &mdash; and a run that ends one colour is a run where one founder&rsquo;s
-        descendants took the world.</p>
-    </div>
-    <div class="lineage-bar">
-      <label for="lineageSpan" class="lineage-filter">Show
-        <input type="number" id="lineageSpan" min="5" max="2000" step="5" value="100">
-        iterations</label>
-      <label for="lineageWindow" class="lineage-filter lineage-scrub" hidden>from
-        <input type="range" id="lineageWindow" min="0" max="0" value="0" step="2">
-        <span id="lineageWindowValue"></span></label>
-      <span class="seg" id="lineagePhase" role="group" aria-label="Phase filter">
-        <button type="button" class="seg-btn active" data-phase="all">Both phases</button>
-        <button type="button" class="seg-btn" data-phase="1">Reproduction</button>
-        <button type="button" class="seg-btn" data-phase="2">Game</button>
-      </span>
-      <label for="lineageMinLife" class="lineage-filter">Lasted at least
-        <input type="range" id="lineageMinLife" min="1" max="12" value="2" step="1">
-        <span id="lineageMinLifeValue">2</span> frames</label>
-    </div>
-    <div class="lineage-stage">
-      <canvas id="lineageCanvas"></canvas>
-    </div>
-    <p class="lineage-note" id="lineageNote"></p>
-    <p class="lineage-readout" id="lineageReadout"></p>
-  </section>
-
-  <!-- ---------------- flow modules ---------------- -->
-  <section id="research-flow" class="research-panel" hidden>
-    <div class="explain-intro">
-      <h2>Flow modules</h2>
-      <p><b>What a module is.</b> A group of agents found by asking where the
-        tokens actually go &mdash; not who is joined to whom, which is the
-        graph, and not who is related to whom, which is the lineage. Only who
-        sends tokens to whom. A module is a set of agents that a token
-        wandering the flow tends to stay inside.</p>
-      <p><b>How they are found.</b> By the map equation: describe a random walk
-        on the flow as compactly as you can. If naming the groups and then
-        naming positions inside them takes fewer bits than naming every
-        position outright, the groups are carrying real structure. How much
-        shorter is the <em>compression</em> below &mdash; 0% means the flow has
-        no group structure at all, and the method is built so that flow without
-        structure gives back one module rather than inventing several.</p>
-      <p><b>Following them.</b> A module here and a module next iteration are
-        the same one when enough of their members overlap. That lets a module
-        keep its name while its agents are replaced one at a time, and lets it
-        drift across the graph. Which makes <em>turnover</em> the number worth
-        watching: a module that lives a long time while its members keep
-        changing is a pattern being carried by different matter each iteration
-        &mdash; a thing no definition based on who belongs to it could see.</p>
-      <p>Needs a run recorded with decisions, since that is where what crossed
-        each link is written down.</p>
-    </div>
-    <div class="lineage-bar">
-      <label for="flowSpan" class="lineage-filter">Show
-        <input type="number" id="flowSpan" min="5" max="2000" step="5" value="100">
-        iterations</label>
-      <label for="flowWindow" class="lineage-filter lineage-scrub" hidden>from
-        <input type="range" id="flowWindow" min="0" max="0" value="0" step="2">
-        <span id="flowWindowValue"></span></label>
-      <span class="seg" id="flowPhase" role="group" aria-label="Phase filter">
-        <button type="button" class="seg-btn active" data-phase="all">Both phases</button>
-        <button type="button" class="seg-btn" data-phase="1">Reproduction</button>
-        <button type="button" class="seg-btn" data-phase="2">Game</button>
-      </span>
-      <label for="flowFloor" class="lineage-filter">Same module above
-        <input type="range" id="flowFloor" min="10" max="70" value="30" step="5">
-        <span id="flowFloorValue">30</span>% overlap</label>
-      <label for="flowMinLife" class="lineage-filter">Lasted at least
-        <input type="range" id="flowMinLife" min="1" max="12" value="2" step="1">
-        <span id="flowMinLifeValue">2</span> frames</label>
-    </div>
-    <div class="lineage-stage">
-      <canvas id="flowCanvas"></canvas>
-    </div>
-    <div class="flow-facts" id="flowFacts"></div>
-    <p class="lineage-note" id="flowNote"></p>
-    <p class="lineage-readout" id="flowReadout"></p>
-  </section>
-
-  <!-- ---------------- correlations ---------------- -->
-  <section id="research-correlations" class="research-panel" hidden>
-    <div class="explain-intro">
-      <h2>Correlations</h2>
-      <p><b>What goes with what.</b> Every pair of quantities is correlated &mdash;
-        on linear axes, on logarithmic ones, and by rank &mdash; and the matrix shows
-        how strongly: red when one rises with the other, blue when it falls, pale
-        when they have nothing to do with each other. Click a cell, or a line of
-        the list, to see the pair: every point, and the mean of the one in bins
-        of the other, with the middle half as a band.</p>
-      <p><b>A point is</b> an agent in one game of the window (its tokens, its
-        neighbourhood, its place in the network, what it staked and what then
-        happened to it), one game of the run (the world&rsquo;s statistics after it),
-        the change from one game to the next (two quantities that both drift over a
-        run correlate whatever they have to do with each other; their changes do
-        not), or one whole simulation of those the notebook has measured. An outlined
-        cell is a pair related by how it is made &mdash; a change of tokens contains
-        the tokens held &mdash; so its correlation says little about the world. The
-        notebook&rsquo;s page <em>What goes with what</em> is what this showed in the baseline worlds.</p>
-    </div>
-    <div class="lineage-bar">
-      <span class="seg" id="atlasLevel" role="group" aria-label="What a point is">
-        <button type="button" class="seg-btn active" data-level="agents">Agents</button>
-        <button type="button" class="seg-btn" data-level="stats">World statistics</button>
-        <button type="button" class="seg-btn" data-level="changes">Their changes</button>
-        <button type="button" class="seg-btn" data-level="worlds">Every world</button>
-      </span>
-      <label for="atlasSpan" class="lineage-filter atlas-run">Show
-        <input type="number" id="atlasSpan" min="2" max="5000" step="1" value="20">
-        iterations</label>
-      <label for="atlasStep" class="lineage-filter atlas-run atlas-agents">one game in
-        <input type="number" id="atlasStep" min="1" max="100" step="1" value="2"></label>
-      <label for="atlasWindow" class="lineage-filter lineage-scrub atlas-run" hidden>from
-        <input type="range" id="atlasWindow" min="0" max="0" value="0" step="2">
-        <span id="atlasWindowValue"></span></label>
-      <label for="atlasPeriod" class="lineage-filter atlas-worlds" hidden>iterations
-        <select id="atlasPeriod"></select></label>
-    </div>
-    <div class="lineage-bar">
-      <span class="seg" id="atlasColour" role="group" aria-label="What a cell's colour is">
-        <button type="button" class="seg-btn active" data-colour="best">r on its best axes</button>
-        <button type="button" class="seg-btn" data-colour="linear">r on linear axes</button>
-        <button type="button" class="seg-btn" data-colour="rank">by rank</button>
-      </span>
-      <label for="atlasHide" class="lineage-filter"><input type="checkbox" id="atlasHide" checked>
-        outline the pairs related by how they are made</label>
-    </div>
-    <div class="atlas-stage">
-      <div class="atlas-box"><canvas id="atlasMatrix"></canvas></div>
-      <div class="atlas-box">
-        <div class="atlas-axes">
-          <label for="atlasXLog"><input type="checkbox" id="atlasXLog"> x logarithmic</label>
-          <label for="atlasYLog"><input type="checkbox" id="atlasYLog"> y logarithmic</label>
-          <button type="button" id="atlasSwap" class="small">swap axes</button>
-        </div>
-        <canvas id="atlasScatter"></canvas>
+  <!-- The four instruments, each drawing the run in the picker. Built by
+       research.js, shown one at a time in place of the network. -->
+  <div class="viewer-analysis" id="viewerAnalysis" hidden>
+    <!-- ---------------- lineage ---------------- -->
+    <section id="research-lineage" class="research-panel">
+      <div class="explain-intro">
+        <h2>Lineage</h2>
+        <p>Every genotype a run ever held, as a line: from the frame it first
+          appeared in to the last one it was seen in, thickening with how many
+          agents carried it, joined to the genotype it mutated from. Clades sit
+          together, so a family is a band.</p>
+        <p>Colour is ancestry. A founder is given a colour at random and every
+          mutation nudges its parent&rsquo;s, so relatedness is visible directly
+          &mdash; and a run that ends one colour is a run where one founder&rsquo;s
+          descendants took the world.</p>
       </div>
-    </div>
-    <p class="lineage-note" id="atlasNote"></p>
-    <p class="lineage-readout" id="atlasReadout"></p>
-    <div class="atlas-about" id="atlasAbout"></div>
-    <h3 class="atlas-list-head">The strongest pairs</h3>
-    <ol class="atlas-list" id="atlasList"></ol>
-  </section>
+      <div class="lineage-bar">
+        <label for="lineageSpan" class="lineage-filter">Show
+          <input type="number" id="lineageSpan" min="5" max="2000" step="5" value="100">
+          iterations</label>
+        <label for="lineageWindow" class="lineage-filter lineage-scrub" hidden>from
+          <input type="range" id="lineageWindow" min="0" max="0" value="0" step="2">
+          <span id="lineageWindowValue"></span></label>
+        <span class="seg" id="lineagePhase" role="group" aria-label="Phase filter">
+          <button type="button" class="seg-btn active" data-phase="all">Both phases</button>
+          <button type="button" class="seg-btn" data-phase="1">Reproduction</button>
+          <button type="button" class="seg-btn" data-phase="2">Game</button>
+        </span>
+        <label for="lineageMinLife" class="lineage-filter">Lasted at least
+          <input type="range" id="lineageMinLife" min="1" max="12" value="2" step="1">
+          <span id="lineageMinLifeValue">2</span> frames</label>
+      </div>
+      <div class="lineage-stage">
+        <canvas id="lineageCanvas"></canvas>
+      </div>
+      <p class="lineage-note" id="lineageNote"></p>
+      <p class="lineage-readout" id="lineageReadout"></p>
+    </section>
 
-  <!-- ---------------- literature ---------------- -->
-  <!-- Filled by Literature.render() from research/Literature.md. -->
-  <section id="research-literature" class="research-panel" hidden></section>
+    <!-- ---------------- flow modules ---------------- -->
+    <section id="research-flow" class="research-panel" hidden>
+      <div class="explain-intro">
+        <h2>Flow modules</h2>
+        <p><b>What a module is.</b> A group of agents found by asking where the
+          tokens actually go &mdash; not who is joined to whom, which is the
+          graph, and not who is related to whom, which is the lineage. Only who
+          sends tokens to whom. A module is a set of agents that a token
+          wandering the flow tends to stay inside.</p>
+        <p><b>How they are found.</b> By the map equation: describe a random walk
+          on the flow as compactly as you can. If naming the groups and then
+          naming positions inside them takes fewer bits than naming every
+          position outright, the groups are carrying real structure. How much
+          shorter is the <em>compression</em> below &mdash; 0% means the flow has
+          no group structure at all, and the method is built so that flow without
+          structure gives back one module rather than inventing several.</p>
+        <p><b>Following them.</b> A module here and a module next iteration are
+          the same one when enough of their members overlap. That lets a module
+          keep its name while its agents are replaced one at a time, and lets it
+          drift across the graph. Which makes <em>turnover</em> the number worth
+          watching: a module that lives a long time while its members keep
+          changing is a pattern being carried by different matter each iteration
+          &mdash; a thing no definition based on who belongs to it could see.</p>
+        <p>Needs a run recorded with decisions, since that is where what crossed
+          each link is written down.</p>
+      </div>
+      <div class="lineage-bar">
+        <label for="flowSpan" class="lineage-filter">Show
+          <input type="number" id="flowSpan" min="5" max="2000" step="5" value="100">
+          iterations</label>
+        <label for="flowWindow" class="lineage-filter lineage-scrub" hidden>from
+          <input type="range" id="flowWindow" min="0" max="0" value="0" step="2">
+          <span id="flowWindowValue"></span></label>
+        <span class="seg" id="flowPhase" role="group" aria-label="Phase filter">
+          <button type="button" class="seg-btn active" data-phase="all">Both phases</button>
+          <button type="button" class="seg-btn" data-phase="1">Reproduction</button>
+          <button type="button" class="seg-btn" data-phase="2">Game</button>
+        </span>
+        <label for="flowFloor" class="lineage-filter">Same module above
+          <input type="range" id="flowFloor" min="10" max="70" value="30" step="5">
+          <span id="flowFloorValue">30</span>% overlap</label>
+        <label for="flowMinLife" class="lineage-filter">Lasted at least
+          <input type="range" id="flowMinLife" min="1" max="12" value="2" step="1">
+          <span id="flowMinLifeValue">2</span> frames</label>
+      </div>
+      <div class="lineage-stage">
+        <canvas id="flowCanvas"></canvas>
+      </div>
+      <div class="flow-facts" id="flowFacts"></div>
+      <p class="lineage-note" id="flowNote"></p>
+      <p class="lineage-readout" id="flowReadout"></p>
+    </section>
 
-  <!-- ---------------- graphs ---------------- -->
-  <!-- Filled by Graphs.render() from research/Graphs.md. -->
-  <section id="research-graphs" class="research-panel" hidden></section>
+    <!-- ---------------- diagrams ---------------- -->
+    <!-- The Viewer's four charts, off the Viewer: pick the iterations and the
+         statistics rather than being tied to the frame on screen. Tabs, controls
+         and the saved-settings list are all built by diagrams.js. -->
+    <section id="research-diagrams" class="research-panel" hidden>
+      <div class="diagram-tabs" id="diagramTabs"></div>
+      <div class="lineage-bar diagram-controls" id="diagramControls"></div>
+      <div class="diagram-presets" id="diagramPresets"></div>
+      <div class="lineage-stage diagram-stage">
+        <canvas id="diagramCanvas"></canvas>
+      </div>
+      <p class="lineage-note" id="diagramNote"></p>
+      <!-- What each plotted statistic actually measures. Filled by diagrams.js
+           from the same text the Viewer's stat dialog shows, so a chart read on
+           its own does not need the reader to go and look them up. -->
+      <div class="diagram-legend-notes" id="diagramMeanings"></div>
+    </section>
 
-  <!-- ---------------- diagrams ---------------- -->
-  <!-- The Viewer's four charts, off the Viewer: pick the iterations and the
-       statistics rather than being tied to the frame on screen. Tabs, controls
-       and the saved-settings list are all built by diagrams.js. -->
-  <section id="research-diagrams" class="research-panel" hidden>
-    <div class="diagram-tabs" id="diagramTabs"></div>
-    <div class="lineage-bar diagram-controls" id="diagramControls"></div>
-    <div class="diagram-presets" id="diagramPresets"></div>
-    <div class="lineage-stage diagram-stage">
-      <canvas id="diagramCanvas"></canvas>
-    </div>
-    <p class="lineage-note" id="diagramNote"></p>
-    <!-- What each plotted statistic actually measures. Filled by diagrams.js
-         from the same text the Viewer's stat dialog shows, so a chart read on
-         its own does not need the reader to go and look them up. -->
-    <div class="diagram-legend-notes" id="diagramMeanings"></div>
-  </section>
-
-
-  <!-- ---------------- findings ---------------- -->
-  <!-- Filled by Notes.render() from research/Research.md, which is the
-       document itself rather than a copy of it. -->
-  <section id="research-notes" class="research-panel" hidden></section>
+    <!-- ---------------- correlations ---------------- -->
+    <section id="research-correlations" class="research-panel" hidden>
+      <div class="explain-intro">
+        <h2>Correlations</h2>
+        <p><b>What goes with what.</b> Every pair of quantities is correlated &mdash;
+          on linear axes, on logarithmic ones, and by rank &mdash; and the matrix shows
+          how strongly: red when one rises with the other, blue when it falls, pale
+          when they have nothing to do with each other. Click a cell, or a line of
+          the list, to see the pair: every point, and the mean of the one in bins
+          of the other, with the middle half as a band.</p>
+        <p><b>A point is</b> an agent in one game of the window (its tokens, its
+          neighbourhood, its place in the network, what it staked and what then
+          happened to it), one game of the run (the world&rsquo;s statistics after it),
+          the change from one game to the next (two quantities that both drift over a
+          run correlate whatever they have to do with each other; their changes do
+          not), or one whole simulation of those the notebook has measured. An outlined
+          cell is a pair related by how it is made &mdash; a change of tokens contains
+          the tokens held &mdash; so its correlation says little about the world. The
+          notebook&rsquo;s page <em>What goes with what</em> is what this showed in the baseline worlds.</p>
+      </div>
+      <div class="lineage-bar">
+        <span class="seg" id="atlasLevel" role="group" aria-label="What a point is">
+          <button type="button" class="seg-btn active" data-level="agents">Agents</button>
+          <button type="button" class="seg-btn" data-level="stats">World statistics</button>
+          <button type="button" class="seg-btn" data-level="changes">Their changes</button>
+          <button type="button" class="seg-btn" data-level="worlds">Every world</button>
+        </span>
+        <label for="atlasSpan" class="lineage-filter atlas-run">Show
+          <input type="number" id="atlasSpan" min="2" max="5000" step="1" value="20">
+          iterations</label>
+        <label for="atlasStep" class="lineage-filter atlas-run atlas-agents">one game in
+          <input type="number" id="atlasStep" min="1" max="100" step="1" value="2"></label>
+        <label for="atlasWindow" class="lineage-filter lineage-scrub atlas-run" hidden>from
+          <input type="range" id="atlasWindow" min="0" max="0" value="0" step="2">
+          <span id="atlasWindowValue"></span></label>
+        <label for="atlasPeriod" class="lineage-filter atlas-worlds" hidden>iterations
+          <select id="atlasPeriod"></select></label>
+      </div>
+      <div class="lineage-bar">
+        <span class="seg" id="atlasColour" role="group" aria-label="What a cell's colour is">
+          <button type="button" class="seg-btn active" data-colour="best">r on its best axes</button>
+          <button type="button" class="seg-btn" data-colour="linear">r on linear axes</button>
+          <button type="button" class="seg-btn" data-colour="rank">by rank</button>
+        </span>
+        <label for="atlasHide" class="lineage-filter"><input type="checkbox" id="atlasHide" checked>
+          outline the pairs related by how they are made</label>
+      </div>
+      <div class="atlas-stage">
+        <div class="atlas-box"><canvas id="atlasMatrix"></canvas></div>
+        <div class="atlas-box">
+          <div class="atlas-axes">
+            <label for="atlasXLog"><input type="checkbox" id="atlasXLog"> x logarithmic</label>
+            <label for="atlasYLog"><input type="checkbox" id="atlasYLog"> y logarithmic</label>
+            <button type="button" id="atlasSwap" class="small">swap axes</button>
+          </div>
+          <canvas id="atlasScatter"></canvas>
+        </div>
+      </div>
+      <p class="lineage-note" id="atlasNote"></p>
+      <p class="lineage-readout" id="atlasReadout"></p>
+      <div class="atlas-about" id="atlasAbout"></div>
+      <h3 class="atlas-list-head">The strongest pairs</h3>
+      <ol class="atlas-list" id="atlasList"></ol>
+    </section>
+  </div>
 </main>
 
 <!-- ==================== BOOK VIEW ==================== -->
@@ -1096,6 +1166,7 @@
 
 <script src="js/colormaps.js"></script>
 <script src="js/ink.js"></script>
+<script src="js/theme.js"></script>
 <script src="js/metrics.js"></script>
 <script src="js/runstats.js"></script>
 <script src="js/graphstats.js"></script>
@@ -1112,6 +1183,9 @@
 <script src="js/stepview.js"></script>
 <script src="js/emblems.js"></script>
 <script src="js/explain.js"></script>
+<script src="js/glyphwall.js"></script>
+<script src="js/entrance.js"></script>
+<script src="js/eyes.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runinfo.js"></script>
 <script src="js/runs.js"></script>

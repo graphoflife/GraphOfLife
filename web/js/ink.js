@@ -17,6 +17,7 @@ const Ink = {
     label: '--muted',        // tick values, legends, a line the reader added
     dim: '--muted-2',        // axis names, footnotes, an empty chart's message
     accent: '--accent',      // a lone series with no colour of its own
+    gold: '--gold',          // a mark that should read as old, not live
     grid: '--chart-grid',
     tick: '--chart-tick',
     axis: '--chart-axis',
@@ -26,17 +27,48 @@ const Ink = {
     exEdge: '--ex-edge', exNode: '--ex-node', exRich: '--ex-rich', exPale: '--ex-pale',
     exGood: '--ex-good', exWarn: '--ex-warn', exLost: '--ex-lost', exEye: '--ex-eye',
     exIris: '--ex-iris', exWhite: '--ex-white', exMutated: '--ex-mutated', exHot: '--ex-hot',
-    exShade: '--ex-shade', exHalo: '--ex-halo'
+    exShade: '--ex-shade', exHalo: '--ex-halo',
+    // The front page's network of eyes (eyes.js).
+    eyeBall: '--eye-ball', eyeIris: '--eye-iris', eyePupil: '--eye-pupil', eyeRim: '--eye-rim',
+    eyeLink: '--eye-link'
   },
 
   /**
    * Colours a line gets when several share one chart, in order: the Diagrams
    * tab's and the book's figures alike. Taken from the page's own palette
    * rather than a colormap, because a colormap is a gradient and these have
-   * to be told apart, not ordered.
+   * to be told apart, not ordered. Each theme sets its own (--line-1 to
+   * --line-8, since the yellow and the pale grey that read on a dark page
+   * vanish on a white one); these are what a page without the stylesheet
+   * falls back on.
    */
   LINES: ['#5ac8fa', '#ffd166', '#ff6b6b', '#7ee787', '#c792ea',
           '#f78c6c', '#89ddff', '#e5e5e5'],
+
+  /**
+   * Bumped whenever the theme changes, so anything that keeps its own copy
+   * of the inks (StepView does) can tell its copy is stale.
+   */
+  version: 0,
+
+  /**
+   * Forget every colour read so far: the theme has changed, and the next ask
+   * reads the stylesheet again.
+   */
+  reset() {
+    this._read = null;
+    this._lines = null;
+    this.version++;
+  },
+
+  /**
+   * Any custom property of the page, as written: a colour, a colour map's
+   * name, a number. For the network's own colours, which a theme sets and
+   * the Viewer and the front page apply as settings rather than as inks.
+   */
+  token(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  },
 
   /**
    * A colour of the palette at an opacity, for a glow or a fade: written as
@@ -50,10 +82,18 @@ const Ink = {
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   },
 
-  /** The colour of the `i`th line on a chart. */
+  /** The colour of the `i`th line on a chart, in the theme's set. */
   line(i) {
-    return this.LINES[i % this.LINES.length];
+    if (!this._lines) {
+      const style = typeof document !== 'undefined' && document.documentElement
+        ? getComputedStyle(document.documentElement) : null;
+      this._lines = this.LINES.map((fallback, k) =>
+        (style && style.getPropertyValue(`--line-${k + 1}`).trim()) || fallback);
+    }
+    return this._lines[i % this._lines.length];
   },
+
+  _lines: null,
 
   _read: null,
   _family: null,

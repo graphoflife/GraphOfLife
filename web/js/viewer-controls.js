@@ -149,8 +149,14 @@ Object.assign(Viewer, {
       if (e.target.value) this.load(e.target.value);
     });
 
+    // A built-in look is drawn in the page's colours: its background, links
+    // and outlines are the theme's, so Default on a white page is not a black
+    // square. A look somebody saved keeps the colours they saved it with.
     for (const btn of document.querySelectorAll('[data-preset]')) {
-      btn.addEventListener('click', () => this.applySettings(Presets.builtIn(btn.dataset.preset)));
+      btn.addEventListener('click', () => {
+        this.applySettings({ ...Presets.builtIn(btn.dataset.preset), ...this.themeLook() });
+        this._themeLook = this.themeLook();
+      });
     }
   },
 

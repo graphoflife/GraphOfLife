@@ -36,7 +36,8 @@ done
 # web/py already holds the one module that only makes sense in a browser —
 # gol_browser.py — and cp -r brought it along.
 
-# The notes the Research tab renders. Kept in research/ rather than web/,
+# The notes the Research Notebook reads as its Reading pages (Findings,
+# Literature, Graphs). Kept in research/ rather than web/,
 # because they are written for a reader with a text editor first and the site
 # second, and copying them means there is one document rather than a page and
 # a file that disagree. gol_server serves the same file from where it lives;

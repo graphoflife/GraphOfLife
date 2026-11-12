@@ -62,11 +62,23 @@ const Viewer = {
     kCore: 1
   },
 
+  /**
+   * Which way of looking at the run: the network, or one of the instruments
+   * research.js drives (Lineage, Flow modules, Diagrams, Correlations).
+   */
+  mode: 'network',
+
+  /** Whether the drawing settings stand open beside the picture, kept in this browser. */
+  PANEL: 'gol.viewer.panel',
+
   init() {
     // The starting look. Merged in rather than applied through applySettings,
     // because that reaches for the layout and the controls, and neither exists
     // yet — the pushes at the end of this function are what deliver it.
     Object.assign(this.settings, Presets.builtIn('default'));
+    // Then the theme's own colours for the picture: its background, links
+    // and outlines, which the default preset leaves to the page.
+    this.applyThemeLook();
 
     this.canvas = document.getElementById('graphCanvas');
     this.renderer = new GraphRenderer(this.canvas);
@@ -86,7 +98,10 @@ const Viewer = {
     this.bindToggles();
     this.bindPresets();
     this.bindAxisToggles();
+    this.bindModes();
+    this.bindPanels();
     this.refreshPresetList();
+    window.addEventListener('themechange', () => this.retheme());
 
     // The declared defaults are only values until something applies them, so
     // push them into the layout, the renderer and the controls up front.
@@ -115,7 +130,7 @@ const Viewer = {
     slider.addEventListener('input', () => this.goToPosition(Number(slider.value)));
 
     document.addEventListener('keydown', e => {
-      if (!this.active) return;
+      if (!this.active || this.mode !== 'network') return;
       const tag = document.activeElement && document.activeElement.tagName;
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
 
@@ -132,6 +147,114 @@ const Viewer = {
       }
       e.preventDefault();
     });
+  },
+
+  /**
+   * The picture's colours where nobody has chosen any: the theme's background,
+   * links and outline (--graph-* in style.css). A colour the reader has set
+   * is theirs and stays — only a setting that still holds the colour the last
+   * theme gave it follows the new one.
+   */
+  applyThemeLook() {
+    const look = this.themeLook();
+    const before = this._themeLook;
+    for (const [key, value] of Object.entries(look)) {
+      if (value === '' || value === undefined) continue;
+      if (!before || this.settings[key] === before[key]) this.settings[key] = value;
+    }
+    this._themeLook = look;
+  },
+
+  /** The colours the theme gives the picture, as settings. */
+  themeLook() {
+    const look = {
+      bgColorA: Ink.token('--graph-bg'), bgColorB: Ink.token('--graph-bg'),
+      edgeFlatColor: Ink.token('--graph-edge'),
+      nodeOutlineColor: Ink.token('--graph-outline'),
+      nodeOutline: Ink.token('--graph-outline-on') === '1'
+    };
+    // Without the stylesheet (a test, or a page that failed to load it) the
+    // preset's own colours stand.
+    return Object.fromEntries(Object.entries(look).filter(([key, value]) =>
+      key === 'nodeOutline' ? Ink.token('--graph-outline-on') !== '' : value !== ''));
+  },
+
+  /** The theme changed: the picture's own colours follow it, and everything drawn is drawn again. */
+  retheme() {
+    this.applyThemeLook();
+    this.syncControlsFromSettings();
+    this.redraw();
+    if (this.frame) this.updateCharts();
+  },
+
+  /** The five ways of looking, in the Viewer's head. */
+  bindModes() {
+    this.modeButtons = [...document.querySelectorAll('#viewerModes [data-mode]')];
+    for (const button of this.modeButtons) {
+      button.addEventListener('click', () => this.showMode(button.dataset.mode));
+    }
+  },
+
+  /**
+   * Show the network, or one of the instruments in its place. The
+   * instruments read the run in the picker; the network keeps its frame and
+   * its camera while they are open, and takes up where it was.
+   */
+  showMode(mode) {
+    if (mode === this.mode) return;
+    this.mode = mode;
+    for (const button of this.modeButtons) {
+      const on = button.dataset.mode === mode;
+      button.classList.toggle('active', on);
+      button.setAttribute('aria-pressed', String(on));
+    }
+    const network = mode === 'network';
+    document.getElementById('viewerLayout').hidden = !network;
+    document.getElementById('viewerAnalysis').hidden = network;
+    if (network) {
+      Research.leave();
+      this.resize();
+      requestAnimationFrame(() => this.resize());
+    } else if (this.active) {
+      Research.enter(mode);
+    }
+  },
+
+  /**
+   * The drawing settings, folded away until asked for: the picture stands in
+   * the middle of the page, and "View settings" opens them beside it. Which
+   * it was is kept in this browser. The statistics and the charts fold below
+   * the picture, closed at first, and draw when they are opened — a canvas
+   * drawn while folded away has no size to draw at.
+   */
+  bindPanels() {
+    this.layoutEl = document.getElementById('viewerLayout');
+    this.panelButton = document.getElementById('btnViewSettings');
+    let open = false;
+    try { open = localStorage.getItem(this.PANEL) === 'open'; } catch (err) { /* closed */ }
+    this.showPanel(open, false);
+    this.panelButton.addEventListener('click', () => {
+      this.showPanel(this.layoutEl.classList.contains('is-collapsed'));
+    });
+
+    document.getElementById('foldCharts').addEventListener('toggle', event => {
+      if (event.target.open && this.frame) requestAnimationFrame(() => this.updateCharts());
+    });
+    document.getElementById('foldStats').addEventListener('toggle', event => {
+      if (event.target.open && this.frame) this.updateStats();
+    });
+  },
+
+  showPanel(open, keep = true) {
+    this.layoutEl.classList.toggle('is-collapsed', !open);
+    this.panelButton.setAttribute('aria-expanded', String(open));
+    this.panelButton.classList.toggle('active', open);
+    if (keep) {
+      try { localStorage.setItem(this.PANEL, open ? 'open' : 'closed'); } catch (err) { /* not kept */ }
+    }
+    // The canvas has changed width; the observer catches it, but a frame
+    // drawn now saves one drawn stretched.
+    requestAnimationFrame(() => this.resize());
   },
 
   /** How many positions make up one whole iteration under the current filter. */
@@ -372,11 +495,19 @@ const Viewer = {
    */
   async setActive(active) {
     this.active = active;
-    if (!active) return;
-    this.resize();
-    if (this.frame) this.updateCharts();
-    requestAnimationFrame(() => this.resize());
-    this.resume();
+    if (!active) {
+      // An instrument that was open stops reading; it picks up on the way back.
+      if (this.mode !== 'network') Research.leave();
+      return;
+    }
+    if (this.mode !== 'network') {
+      Research.enter(this.mode);
+    } else {
+      this.resize();
+      if (this.frame) this.updateCharts();
+      requestAnimationFrame(() => this.resize());
+      this.resume();
+    }
     try {
       const data = await API.listRuns();
       this.syncRunPicker(data.runs || []);
@@ -385,9 +516,10 @@ const Viewer = {
     }
   },
 
-  /** Back from a hidden window: the open statistic's history, if cut short. */
+  /** Back from a hidden window: the open statistic's history, or the open instrument's load, if cut short. */
   resume() {
-    StatDetail.resume();
+    if (this.mode !== 'network') Research.resume();
+    else StatDetail.resume();
   },
 
   async load(runId) {
@@ -425,6 +557,8 @@ const Viewer = {
     this.showName();
     document.getElementById('btnRunSettings').disabled = false;
     document.getElementById('runPicker').value = runId;
+    // An instrument that is open reads the run now in the picker.
+    if (this.mode !== 'network' && this.active) Research.open(runId);
 
     if (!this.visible.length) {
       this.frame = null;
@@ -687,6 +821,10 @@ const Viewer = {
    * trying to animate. Playback stays where it is and picks up on return.
    */
   tick(dt) {
+    // An instrument stands where the picture was: nothing here is on screen,
+    // so nothing is drawn, and playback waits where it is.
+    if (this.mode !== 'network') return;
+
     // With a worker this returns immediately: the layout is advancing on its
     // own thread and the loop's only job is to draw what has arrived. Without
     // one it advances the layout here, as before.
