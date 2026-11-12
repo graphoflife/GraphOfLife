@@ -609,14 +609,15 @@ def draw(seed: int, rep: Any, inst: Any, n: int) -> np.ndarray:
     for: the position, among the living, of the instance's parent in that shadow. A hash (splitmix64) of the
     seed, the replicate and the instance, so that the backward and the forward walks meet the same parents.
     """
-    salt = (np.asarray(rep, np.uint64) + np.uint64(seed % (1 << 32)) * np.uint64(1 << 32)) * _M2
-    z = np.asarray(inst, np.uint64) * _G + salt
-    z = z ^ (z >> np.uint64(30))
-    z = z * _M1
-    z = z ^ (z >> np.uint64(27))
-    z = z * _M2
-    z = z ^ (z >> np.uint64(31))
-    return ((z >> np.uint64(32)) * np.uint64(n) >> np.uint64(32)).astype(np.int64)
+    with np.errstate(over="ignore"):                     # the hash wraps around 2**64 on purpose
+        salt = (np.asarray(rep, np.uint64) + np.uint64(seed % (1 << 32)) * np.uint64(1 << 32)) * _M2
+        z = np.asarray(inst, np.uint64) * _G + salt
+        z = z ^ (z >> np.uint64(30))
+        z = z * _M1
+        z = z ^ (z >> np.uint64(27))
+        z = z * _M2
+        z = z ^ (z >> np.uint64(31))
+        return ((z >> np.uint64(32)) * np.uint64(n) >> np.uint64(32)).astype(np.int64)
 
 
 # ---------------------------------------------------------------------------

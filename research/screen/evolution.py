@@ -47,7 +47,7 @@ import json
 import math
 import os
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -147,6 +147,34 @@ def values_of(have: Dict[str, Any], births_only: Dict[str, Any]) -> Dict[str, An
     }
 
 
+def rank(worlds: List[Dict[str, Any]], top: int = TOP) -> Tuple[List[Dict[str, Any]], Dict[str, List[str]]]:
+    """
+    Each world's shares of its readings (`values`), the three orders over them, its score and distinct rank;
+    the worlds sorted by rank, and the first `top` of each order. A reading not made scores as the worst.
+    """
+    if not worlds:
+        return [], {}
+    each = {k: shares([w["values"][k] if w["values"].get(k) is not None and math.isfinite(w["values"][k])
+                       else -math.inf for w in worlds]) for k in KEYS}
+    for i, w in enumerate(worlds):
+        s = {k: each[k][i] for k in KEYS}
+        w["shares"] = s
+        w["orders"] = {"product": float(math.prod(s.values()) ** (1 / len(s))),
+                       "sum": float(np.mean(list(s.values()))), "worst": float(min(s.values()))}
+        w["score"] = w["orders"]["product"]
+    worlds = sorted(worlds, key=lambda w: (-w["orders"]["product"], -w["orders"]["sum"], -w["orders"]["worst"],
+                                           w["id"]))
+    for i, w in enumerate(worlds, 1):
+        w["rank"] = i
+    bests = {}
+    for order in ("product", "sum", "worst"):
+        ranked = sorted(worlds, key=lambda w: (-w["orders"][order], -w["orders"]["product"], w["id"]))
+        bests[order] = [w["id"] for w in ranked[:top]]
+        for i, w in enumerate(ranked, 1):
+            w.setdefault("ranks", {})[order] = i
+    return worlds, bests
+
+
 def build() -> Dict[str, Any]:
     living = BT.living_worlds()
     with open(os.path.join(HERE, "health.json")) as fh:
@@ -172,27 +200,7 @@ def build() -> Dict[str, Any]:
                        "beside": values_of(have, (cand.get(run_id) or {}).get("numbers") or {}),
                        "health": {**(h.get("health") or {}), "ranks": h.get("ranks")},
                        "shortlisted": run_id in shortlist, "out": (cand.get(run_id) or {}).get("out")})
-    if worlds:
-        each = {k: shares([w["values"][k] if w["values"][k] is not None and math.isfinite(w["values"][k])
-                           else -math.inf for w in worlds]) for k in KEYS}
-        for i, w in enumerate(worlds):
-            s = {k: each[k][i] for k in KEYS}
-            w["shares"] = s
-            w["orders"] = {"product": float(math.prod(s.values()) ** (1 / len(s))),
-                           "sum": float(np.mean(list(s.values()))), "worst": float(min(s.values()))}
-            w["score"] = w["orders"]["product"]
-        worlds.sort(key=lambda w: (-w["orders"]["product"], -w["orders"]["sum"], -w["orders"]["worst"], w["id"]))
-        for i, w in enumerate(worlds, 1):
-            w["rank"] = i
-        ranks = {}
-        for order in ("product", "sum", "worst"):
-            ranked = sorted(worlds, key=lambda w: (-w["orders"][order], -w["orders"]["product"], w["id"]))
-            ranks[order] = [w["id"] for w in ranked]
-            for i, w in enumerate(ranked, 1):
-                w.setdefault("ranks", {})[order] = i
-        bests = {order: ids[:TOP] for order, ids in ranks.items()}
-    else:
-        bests = {}
+    worlds, bests = rank(worlds)
     return {"made": datetime.date.today().isoformat(), "provisional": bool(missing),
             "complete": len(done), "of": len(living), "missing": [r for r, _ in missing],
             "order": ORDER, "readings": READINGS, "top": TOP, "bests": bests,

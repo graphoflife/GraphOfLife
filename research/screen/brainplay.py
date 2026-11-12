@@ -196,6 +196,34 @@ def null_steps(line: List[Dict[str, Any]], mix_share: Optional[float], nulls: in
     return out
 
 
+def null_lines(first: Any, plans: List[List[str]], mates: Dict[int, List[Any]], cfg: Any,
+               rng: np.random.RandomState) -> List[List[Any]]:
+    """
+    The null lines: each starts from `first`, the real line's first brain, and makes its plan's changes in
+    order: a mutation of the world's own kind, made for sure (Brain.mutate under the world's mutation_noise_std
+    and mutation_sparsity, with mutation_probability 1), or a mix (Brain.mixed_with) with the next of the
+    contemporaries drawn for that era. One brain an era, the first the real line's own.
+    """
+    forced = dataclasses.replace(cfg, mutation_probability=1.0)
+    lines = []
+    used = {i: 0 for i in mates}
+    for plan in plans:
+        brain = _alone(first)
+        brain.cfg = forced
+        made = [_alone(brain)]
+        for i, steps in enumerate(plan):
+            for c in steps:
+                if c == "m":
+                    brain.mutate(1, rng)
+                else:
+                    brain = brain.mixed_with(mates[i][used[i]], rng)
+                    brain.cfg = forced
+                    used[i] += 1
+            made.append(_alone(brain))
+        lines.append(made)
+    return lines
+
+
 def novelty(D: np.ndarray, eras: Sequence[int], until: int) -> Dict[str, Any]:
     """A line's novelty, as funnel.py reads it: each era's distance from the nearest earlier era, late eras' mean."""
     near = [float(min(D[i, j] for j in range(i))) for i in range(1, len(eras))]
@@ -237,23 +265,7 @@ def line_and_null(run_id: str, line: List[Dict[str, Any]], mix_share: Optional[f
         places.append((sits, proxy(w, sits)))
         del w
     # The null lines: the first era's real brain, changed as the real line was.
-    forced = dataclasses.replace(cfg, mutation_probability=1.0)
-    lines = []
-    used = {i: 0 for i in mates}
-    for plan in plans:
-        brain = _alone(real[0])
-        brain.cfg = forced
-        made = [_alone(brain)]
-        for i, steps in enumerate(plan):
-            for c in steps:
-                if c == "m":
-                    brain.mutate(1, rng)
-                else:
-                    brain = brain.mixed_with(mates[i][used[i]], rng)
-                    brain.cfg = forced
-                    used[i] += 1
-            made.append(_alone(brain))
-        lines.append(made)
+    lines = null_lines(real[0], plans, mates, cfg, rng)
     brains = real + [b for made in lines for b in made]
     E = len(eras)
     total = np.zeros((len(brains), len(brains)))
