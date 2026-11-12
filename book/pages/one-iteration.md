@@ -92,7 +92,7 @@ parent chooses whom the child is joined to, and may hand it some of its own
 
 Exactly, the phase runs in six steps.
 
-1. **Measure.** The tokens and [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has.") of every agent, and the summaries of
+1. **Measure.** The tokens and [degree](measuring-networks.md#degree "The number of an agent's connections: how many neighbours it has.") of every agent, and the summaries of
    every neighbourhood, are measured once, now. Every decision in this phase
    reads these numbers. So the order in which agents act does not change what
    they see.

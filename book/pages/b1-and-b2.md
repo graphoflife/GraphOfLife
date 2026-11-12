@@ -99,16 +99,12 @@ B2's healthy but poor.
 
 ## Where it is used
 
-- **B1**, the world the notebook first set out to understand, is the start
-  of Experiments 1 to 8, 10, 12, 13 and 37; [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)
-  introduces its study.
-- **B2**, the ground for open-ended evolution, is the start of Experiments 9
-  and 14 to 21 and most later ones;
-  [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) asks the question it was
-  built for. [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)
-  asks a new world to be as diverse as B2's median world.
-- [Every simulation: what was run, and what was measured](every-simulation.md)
-  gives the baseline of every experiment and pilot batch.
+[Every simulation: what was run, and what was measured](every-simulation.md)
+gives the baseline of every experiment and pilot batch.
+
+<!-- used b1-and-b2-the-two-baselines -->
+- [Measuring tokens: inequality and flow](measuring-tokens.md#the-even-split)
+<!-- /used -->
 
 ## Where to go next
 

@@ -2475,7 +2475,7 @@ flat within what three seeds per size can see:
 
 | property | exponent against the tokens | 95% interval |
 |---|---|---|
-| inequality ([Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.")) | 0.003 | −0.022 to 0.026 |
+| inequality ([Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.")) | 0.003 | −0.022 to 0.026 |
 | share of stakes at home | −0.017 | −0.041 to 0.007 |
 | genotypes per agent | 0.003 | −0.017 to 0.024 |
 | births per 100 agents | −0.05 | −0.18 to 0.06 |

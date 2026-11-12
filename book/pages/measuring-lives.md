@@ -143,14 +143,15 @@ agent in a hundred has a child in each iteration. In the ten B2 worlds of
 1.00 to 1.05 per hundred agents. Not one agent starved or was cut off.
 
 ### Where it is used (births and the four ways to die)
-- [One iteration, step by step](one-iteration.md#what-an-iteration-does-on-average):
-  what an average iteration of a settled world does.
-- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
-  births and deaths in a world's youth.
-- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages): the rates over a
-  world's life.
-- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why):
-  which deaths a world needs.
+
+<!-- used births-and-the-four-ways-to-die -->
+- [One iteration, step by step](one-iteration.md#cleanup)
+- [Measuring tokens: inequality and flow](measuring-tokens.md#what-each-of-the-four-says)
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (2)
+> [B1: lives and wealth](b1-lives-and-wealth.md#four-ways-in-and-out) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#ways-to-die)
+<!-- /used -->
 
 ## The estate of the dead
 
@@ -239,11 +240,26 @@ estates paid for 51 to 53 births an iteration, where the same world without
 them had 12 to 23.
 
 ### Where it is used (the estate of the dead)
-- [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): four of the heirs, in B1 and in B2.
-- [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size): estates paid to
-  births among the rules that set how many agents a world holds.
-- [Where tokens go](b1-the-game-and-its-flows.md#the-estate-of-the-dead): the estate beside
-  the other flows of tokens.
+
+<!-- used the-estate-of-the-dead -->
+- [A screen of random worlds](a-screen-of-random-worlds.md#why-draw-worlds-at-random)
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#in-short)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)
+- [Questioning the mechanics](questioning-the-mechanics.md#the-share-out-lottery)
+- [Every setting](settings.md#redistribution)
+- [What keeps wealth spread?](what-keeps-wealth-spread.md#the-question)
+- [Physical inspiration](physical-inspiration.md#where-the-speed-limit-is-broken)
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#b1-and-b2-side-by-side)
+- [Measuring space: dimension and the random twin](measuring-space.md#examples)
+- [Local rules only](local-rules-only.md#local-rules-only)
+- [How big should a brain be?](how-big-should-a-brain-be.md#how-it-is-tested)
+- [A source and a sink](a-source-and-a-sink.md#where-a-source-could-sit)
+- [Rules without numbers](rules-without-numbers.md#links-that-hold-a-token)
+- [Measuring health: criteria, the health bar and diversity](measuring-health.md#examples)
+
+> [!info]- And in the Archive (4)
+> [B1: lives and wealth](b1-lives-and-wealth.md#the-tokens-of-the-dead) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-estate-of-the-dead) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#where-to-go-next) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#a-whole-world-over-time)
+<!-- /used -->
 
 ## Age, lifetime and survival curves
 
@@ -487,12 +503,24 @@ of its first 100 iterations. One born from iteration 500 on lived 28 to 31
 ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 ### Where it is used (age)
-- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages): how long agents live,
-  and how old the living are, in the B1 worlds.
-- [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life): the ages of the
-  living, the cohorts and the hazard, iteration by iteration.
-- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age):
-  a world in which every agent dies at 100.
+
+<!-- used age-lifetime-and-survival-curves -->
+- [The ideas this builds on](the-ideas-this-builds-on.md#measuring)
+- [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
+- [The world: tokens, agents and a network](the-world.md#agents-and-tokens)
+- [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#lifetimes-of-genotypes)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#playing-against-the-past)
+- [How fast should brains change?](how-fast-should-brains-change.md#in-short)
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
+- [Other contests: a lottery, and alliances](another-game.md#does-a-world-of-allies-keep-evolving)
+- [Rules without numbers](rules-without-numbers.md#did-the-worlds-that-lived-keep-evolving)
+- [How worlds are measured](how-worlds-are-measured.md#step-6--how-long-things-last)
+- [Every simulation: what was run, and what was measured](every-simulation.md#what-was-measured-on-what)
+- [Statistics: the tools of the notebook](statistics.md#distributions-on-loglog-axes)
+
+> [!info]- And in the Archive (5)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-baseline-world-in-numbers) · [B1: lives and wealth](b1-lives-and-wealth.md#the-picture) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#genotypes-come-and-go) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#agents)
+<!-- /used -->
 
 ## Reproduction statistics
 
@@ -593,10 +621,13 @@ Experiment 24 and in half the worlds of
 [A screen of random worlds](a-screen-of-random-worlds.md).
 
 ### Where it is used (reproduction statistics)
-- [How births build the network](b1-lives-and-wealth.md#how-births-build-the-network): these statistics
-  over a world's life, in the B1 worlds.
-- [What a run records](runs-and-records.md#what-a-run-records): every field of a run's
-  statistics.
+
+<!-- used reproduction-statistics -->
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (1)
+> [B1: lives and wealth](b1-lives-and-wealth.md#reproduction-over-a-worlds-life)
+<!-- /used -->
 
 ## Where to go next
 

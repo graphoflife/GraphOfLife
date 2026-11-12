@@ -219,7 +219,7 @@ criterion:
    ([Not a tree, and not crowded with links](which-worlds-are-healthy.md#not-a-tree-and-not-crowded-with-links)).
 3. **Estates given to the poorest make worlds even, crowded and less
    healthy.** Their median health is 0.34, against 0.40 to 0.49 under the
-   other five ways (chance 0.003, false discovery rate 0.04). The [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
+   other five ways (chance 0.003, false discovery rate 0.04). The [Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
    the tokens has a median of 0.32 where the estate goes to the poorest, 0.36
    where it is shared uniformly, and 0.42 to 0.53 under the other four ways
    (false discovery rate 0.002). Raising the poorest keeps many poor agents

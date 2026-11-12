@@ -248,11 +248,12 @@ Muller plot does not tell the two apart.
 
 #### Where Muller plots are used
 
-- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
-  the lines of the 100 founders in the first 300 iterations of the world with
-  seed 1.
-- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): the families of the
-  genotypes alive at a later moment, in two worlds.
+<!-- used muller-plots -->
+- [The ideas this builds on](the-ideas-this-builds-on.md#genealogy-and-chance)
+
+> [!info]- And in the Archive (1)
+> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#lines-take-over)
+<!-- /used -->
 
 ### The common ancestor of the living
 
@@ -682,31 +683,33 @@ solved, but not that it is.
 
 ### Where it is used
 
-- **Contests.**
-  [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#how-to-tell-a-world-that-keeps-evolving)
-  builds the yardstick on B1, and
-  [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
-  applies it to B2. [Every era against three](every-era-against-three.md)
-  plays fixed eras. [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)
-  compares rules by their contests. [Pilot worlds](runs-and-records.md#pilot-worlds) plays
-  the eras of pilots.
-- **Exploitability.**
-  [Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)
-  measures it era by era in Experiment 16's B2 worlds.
-  [How much room is left](every-era-against-three.md#how-much-room-is-left)
-  measures it in every long world.
-  [Why the raiders stopped winning](strategies-written-by-hand.md#what-we-expected-of-older-worlds)
-  builds Experiment 30's expectation on it.
-- **The invasion test.**
-  [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
-  plants the first strategies, and measures how large a crowd the raider
-  needs (Experiment 29). [What a brain can compute](what-a-brain-can-compute.md)
-  plants a brain that plays the raider.
-  [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning) plants
-  raiders in older worlds, crews of raiders and raiders that breed
-  (Experiments 30, 33 and 34). It also plants them in B1 (Experiment 35).
-  [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots) explains how the lab plays
-  invasions, like contests, as the trials of an experiment's plan.
+<!-- used eras-contests-and-invasions-does-a-world-keep-getting-better -->
+- [What this notebook is about](what-this-notebook-is-about.md#a-ladder-of-four-steps)
+- [The ideas this builds on](the-ideas-this-builds-on.md#where-to-go-next)
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#what-decides-how-a-world-evolves)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-could-be-played-next)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#where-to-go-next)
+- [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#where-to-go-next)
+- [Every setting](settings.md#archive_every)
+- [B1 and B2: the two baselines](b1-and-b2.md#where-to-go-next)
+- [What the brains are like](what-the-brains-are-like.md#when-the-brains-were-given-sight)
+- [Brains replaced by their average](brains-replaced-by-their-average.md#five-worlds-from-iteration-1500)
+- [How big should a brain be?](how-big-should-a-brain-be.md#a-planned-experiment-answered-from-round-3)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#playing-against-the-past)
+- [How fast should brains change?](how-fast-should-brains-change.md#how-the-rates-are-compared)
+- [Every era against three](every-era-against-three.md#where-to-go-next)
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)
+- [What a brain can compute](what-a-brain-can-compute.md#planted-in-its-place)
+- [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md#where-to-go-next)
+- [Other contests: a lottery, and alliances](another-game.md#what-the-contests-did)
+- [Rules without numbers](rules-without-numbers.md#did-the-worlds-that-lived-keep-evolving)
+- [How runs are made, recorded and costed](runs-and-records.md#runs-and-experiments)
+- [Every simulation: what was run, and what was measured](every-simulation.md#the-labs-experiments)
+
+> [!info]- And in the Archive (6)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: the game and its flows](b1-the-game-and-its-flows.md#what-we-learned-how-the-game-is-played) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-kills-a-world) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#does-evolution-go-on-eight-switches-at-once) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#both-inputs-tested) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#brains-as-assembled-objects)
+<!-- /used -->
 
 ## What would count as open-ended evolution
 

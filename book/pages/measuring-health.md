@@ -441,21 +441,22 @@ medians over many iterations.
   ([What makes a world interesting](measuring-health.md#the-six-criteria)).
 
 ### Where it is used (the health bar)
-- [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break): B2's rules were
-  built to meet it.
-- [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break):
-  no world there held.
-- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): every world read against it; on
-  17 October 2026, 99 of 624 met all seven marks.
-- [Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds),
-  [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again) and
-  [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world): theses
-  that ask for every mark.
-- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
-  [A screen of random worlds](a-screen-of-random-worlds.md): criteria built
-  on six of the marks.
-- [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution): every mark,
-  at every 10,000 iterations.
+
+<!-- used the-health-bar -->
+- [What this notebook is about](what-this-notebook-is-about.md#a-ladder-of-four-steps)
+- [Measuring lives: births, deaths, ages and estates](measuring-lives.md#an-example-paying-for-births)
+- [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md#where-degree-is-used)
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#what-folds-a-world)
+- [Measuring space: dimension and the random twin](measuring-space.md#folded)
+- [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#the-test)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)
+- [Other contests: a lottery, and alliances](another-game.md#networks-that-hold)
+- [Rules without numbers](rules-without-numbers.md#in-short)
+- [Every simulation: what was run, and what was measured](every-simulation.md#what-was-measured-on-what)
+
+> [!info]- And in the Archive (4)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#stars) · [B1: lives and wealth](b1-lives-and-wealth.md#where-to-go-next) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#worlds-that-cannot-break) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves)
+<!-- /used -->
 
 ## The diversity score
 
@@ -547,21 +548,14 @@ played, and averages each moment with the one 500 iterations before, since
 the kinds swing from moment to moment.
 
 ### Where it is used (the diversity score)
-- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves): where the score was
-  made.
-- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
-  [A screen of random worlds](a-screen-of-random-worlds.md): the criterion
-  *diverse*.
-- [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again) and
-  [Five more seeds for the rules that held](building-b2-and-the-search-for-a-healthy-rich-world.md#five-more-seeds-for-the-rules-that-held):
-  a world must score above B2's median world to be played on, and again to
-  hold.
-- [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world): what each
-  rule cost of the four parts.
-- [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours),
-  [The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds),
-  [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company):
-  worlds scored by it.
+
+<!-- used the-diversity-score -->
+- [Measuring tokens: inequality and flow](measuring-tokens.md#the-effective-number)
+- [Statistics: the tools of the notebook](statistics.md#where-to-go-next)
+
+> [!info]- And in the Archive (2)
+> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#three-ways-to-count) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves)
+<!-- /used -->
 
 ## Where to go next
 

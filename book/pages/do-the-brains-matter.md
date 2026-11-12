@@ -263,7 +263,7 @@ and the worlds without change are coloured by their kind.
   2.3 and 4.3. The worlds without change range from none at all to one per
   agent: a spread of 1.33, against 0.15.
 - **Inequality.** Wealth is spread more evenly without change, and most evenly
-  in the teeming worlds. The [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is 0 when every agent holds as
+  in the teeming worlds. The [Gini coefficient](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") is 0 when every agent holds as
   many tokens, and near 1 when one holds nearly all. Its median is 0.32
   without change, against 0.49. Set against the baseline world of the same
   seed, the difference is 0.17, with a 95% interval of 0.11 to 0.23 by the

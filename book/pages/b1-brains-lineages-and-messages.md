@@ -972,7 +972,7 @@ rather than taking their place. The notebook's evidence points four ways, and
 none of them needs a tuned number:
 
 1. **Places that differ in what pays.** B2's kinds already sit at different
-   [degrees](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has.") in the network
+   [degrees](measuring-networks.md#degree "The number of an agent's connections: how many neighbours it has.") in the network
    ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). That
    fits niches, but it fits families that live together too. To tell them
    apart, move a kind to another place, and see whether it does worse there.

@@ -556,6 +556,6 @@ them, so this page has no box of runs. They were made with
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
-> [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
+> [!info]- Pages that link here (5)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
 <!-- /turns -->

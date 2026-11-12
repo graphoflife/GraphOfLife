@@ -20,6 +20,7 @@ comment lines, which no reader shows:
                                       seeds, the command that runs it again
     <!-- contents -->                 every page, under its topic, from book.json
     <!-- turns -->                    the page's topic, and the pages before and after it there
+    <!-- used degree -->              the pages that link to a section, or to one within it
     <!-- costs -->                    what a simulation costs, as last fitted
     <!-- table chapter/name -->       a table a page's code made from the records
     <!-- glossary -->                 every term of terms.json, what it is, and its page
@@ -499,11 +500,15 @@ def contents(md: str, _: str) -> str:
 
 
 #: The pages that link to each page, by file, in reading order: what a page says,
-#: not how it is found, so the links of the navigation, the contents and the
-#: tables of settings are left out. fill() works it out once the other blocks
-#: are filled, and the navigation shows it.
+#: not how it is found, so the links of the navigation, the contents, the boxes
+#: of runs and the lists of where a section is used are left out. fill() works
+#: it out once the other blocks are filled, and the navigation shows it.
 BACKLINKS: Dict[str, List[str]] = {}
-NAVIGATION = ("turns", "contents", "runs")
+NAVIGATION = ("turns", "contents", "runs", "used")
+#: For every section a page's words link to, as (file, anchor), the pages whose
+#: words link to it and the section each link sits in, in reading order; the
+#: glossary, which links every term, aside. fill() works it out with BACKLINKS.
+USED: Dict[Tuple[str, str], List[Tuple[str, str]]] = {}
 
 
 def links_from(md: str, text: str) -> Set[str]:
@@ -525,6 +530,70 @@ def backlinks(texts: Dict[str, str]) -> Dict[str, List[str]]:
         for target in links_from(md, text):
             into.setdefault(target, []).append(md)
     return {target: sorted(sources, key=lambda m: (order.get(m, len(order)), m)) for target, sources in into.items()}
+
+
+def headings(text: str) -> List[Tuple[int, int, str]]:
+    """A page's headings: where each starts, its level and its id, as anchors() gives them."""
+    blank = re.sub(r"^```.*?^```", lambda m: re.sub(r"[^\n]", " ", m.group(0)), text, flags=re.S | re.M)
+    found = [(m.start(), len(m.group(1))) for m in re.finditer(r"^(#{1,6})\s+.*?\s*$", blank, re.M)]
+    return [(at, level, anchor) for (at, level), anchor in zip(found, anchors(text))]
+
+
+def used_by(texts: Dict[str, str]) -> Dict[Tuple[str, str], List[Tuple[str, str]]]:
+    """For every section that a page's words link to, the pages that link to it (see USED)."""
+    order = {c["file"]: i for i, c in enumerate(pages()) if c.get("file")}
+    into: Dict[Tuple[str, str], Dict[str, str]] = {}
+    for md, text in sorted(texts.items(), key=lambda kv: (order.get(kv[0], len(order)), kv[0])):
+        aside = [m.span() for m in BLOCK.finditer(text) if m.group(1) in NAVIGATION + ("glossary",)]
+        heads = headings(text)
+        for m in re.finditer(r"\]\(([^)\s#:]+\.md)#([^)\s]+)(?: \"[^\"]*\")?\)", text):
+            if any(a <= m.start() < b for a, b in aside):
+                continue
+            target = os.path.normpath(os.path.join(os.path.dirname(md), m.group(1))).replace(os.sep, "/")
+            if target != md:
+                under = [anchor for at, _, anchor in heads if at < m.start()]
+                into.setdefault((target, m.group(2)), {}).setdefault(md, under[-1] if under else "")
+    return {key: list(sources.items()) for key, sources in into.items()}
+
+
+def archived(md: str) -> bool:
+    """Whether a page is in the Archive: frozen, its home a topic of the Archive's part."""
+    shut = {t for part in parts() if part.get("id") == "archive" for t in part["topics"]}
+    return any(c.get("file") == md and c["topics"][0] in shut for c in pages())
+
+
+def used(md: str, anchor: str) -> str:
+    """
+    Where a section is used (`used anchor`): the pages whose words link to it, or
+    to a section within it, each at the section where the link is; the Archive's
+    folded apart.
+    """
+    with open(os.path.join(BOOK, md), encoding="utf-8") as f:
+        heads = headings(f.read())
+    at = next((i for i, (_, _, a) in enumerate(heads) if a == anchor), None)
+    if at is None:
+        raise KeyError(f"{md} has no section {anchor} to say where it is used")
+    within = [anchor]
+    for _, level, a in heads[at + 1:]:
+        if level <= heads[at][1]:
+            break
+        within.append(a)
+    order = {c["file"]: i for i, c in enumerate(pages()) if c.get("file")}
+    sources: Dict[str, str] = {}
+    for a in within:
+        for page, section in USED.get((md, a), []):
+            sources.setdefault(page, section)
+    titles = {c["file"]: c["title"] for c in pages() if c.get("file")}
+
+    def item(page: str) -> str:
+        return f"[{titles.get(page, page)}]({link(md, page)}{'#' + sources[page] if sources[page] else ''})"
+    ordered = sorted(sources, key=lambda m: (order.get(m, len(order)), m))
+    now = [f"- {item(page)}" for page in ordered if not archived(page)]
+    frozen = [item(page) for page in ordered if archived(page)]
+    lines = now or [f"No page{' outside the Archive' if frozen else ''} links here yet."]
+    if frozen:
+        lines += ["", quote(" · ".join(frozen), f"[!info]- And in the Archive ({len(frozen)})")]
+    return "\n".join(lines)
 
 
 def turns(md: str, _: str) -> str:
@@ -680,7 +749,7 @@ def glossary(md: str, _: str) -> str:
     return "\n".join(rows)
 
 
-MAKERS = {"figure": figure, "thesis": thesis, "runs": runs, "contents": contents, "turns": turns,
+MAKERS = {"figure": figure, "thesis": thesis, "runs": runs, "contents": contents, "turns": turns, "used": used,
           "costs": costs, "table": table, "glossary": glossary}
 #: The blocks a page can ask for, and how they are found in it.
 KINDS = tuple(MAKERS)
@@ -748,8 +817,9 @@ def fill(only: Optional[List[str]] = None, write: bool = True) -> int:
     """
     Fill every Markdown file of the notebook, or those named; the number changed
     (or, with write=False, that would change). Two passes: every block but the
-    navigation, then the navigation, which shows the pages that link to a page
-    and so needs every other block filled first. Filling them all also checks
+    navigation and the lists of where a section is used, then those two, which
+    show the pages that link to a page or a section and so need every other
+    block filled first. Filling them all also checks
     that every figure a page drew is shown somewhere: one that is not was drawn
     for nothing, or forgotten.
     """
@@ -760,13 +830,15 @@ def fill(only: Optional[List[str]] = None, write: bool = True) -> int:
     asked = only or list(texts)
     after = dict(texts)
     for md in asked:
-        after[md] = link_terms(md, fill_text(md, texts[md], tuple(k for k in KINDS if k != "turns")))
+        after[md] = link_terms(md, fill_text(md, texts[md], tuple(k for k in KINDS if k not in ("turns", "used"))))
     BACKLINKS.clear()
     BACKLINKS.update(backlinks(after))
+    USED.clear()
+    USED.update(used_by(after))
     changed = 0
     placed = set()
     for md in asked:
-        after[md] = fill_text(md, after[md], ("turns",))
+        after[md] = fill_text(md, after[md], ("turns", "used"))
         placed |= {arg.strip() for kind, arg in re.findall(r"^<!-- (\w+)((?: [^\n]*?)?) -->$", after[md], re.M)
                    if kind == "figure"}
         if after[md] != texts[md]:

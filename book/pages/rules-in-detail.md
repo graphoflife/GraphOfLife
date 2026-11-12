@@ -325,22 +325,17 @@ the revolutionary part of a stake end up the other way round, which *f*
 reads as 1 ([What the brains are like](what-the-brains-are-like.md)).
 
 ### Where it is used (the share function)
-- **The child's tokens.** A parent with τ tokens gives its child
-  ⌊*f*(*ā*, *b̄*) · τ⌋: the share of its tokens, rounded down to a whole
-  number. Here *ā* and *b̄* are its two reproduction outputs, averaged over
-  all its candidates ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network),
-  [One iteration, step by step](one-iteration.md)). B2 adds limits: a parent
-  keeps at least one token, a child needs at least 10, and an agent with 8
-  connections or more has no child
-  ([B1 and B2: the two baselines](b1-and-b2.md)).
-- **The revolutionary part of a stake.** Of *a* tokens staked on a node,
-  ⌊*f* · *a*⌋ are marked revolutionary ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
-- **A probability.** A yes-or-no decision read as a probability says yes
-  with probability *f*(*y*, *n*) ([A yes-or-no decision](rules-in-detail.md#a-yes-or-no-decision)).
-- **Rules of some experiments**, read the same way: how much of its tokens an
-  agent gives away as gifts ([`allow_gifting`](settings.md#allow_gifting)),
-  and how far it searches for strangers
-  ([`link_search`](settings.md#link_search)).
+
+<!-- used the-share-function-fa-b -->
+- [One iteration, step by step](one-iteration.md#three-tools-used-everywhere)
+- [The brain](the-brain.md#from-outputs-to-decisions)
+- [Questioning the mechanics](questioning-the-mechanics.md#the-share-function-jumps)
+- [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
+- [What a brain can compute](what-a-brain-can-compute.md#what-a-b2-brain-sees-and-does)
+
+> [!info]- And in the Archive (1)
+> [B1: lives and wealth](b1-lives-and-wealth.md#a-birth-decision-by-decision)
+<!-- /used -->
 
 In the code it is `_share_of_first(a, b)` in `GraphOfLife.py`.
 
@@ -415,19 +410,11 @@ an agent spreads its tokens over its candidates or puts them all on one
 ([One iteration, step by step](one-iteration.md)).
 
 ### Where it is used (a yes-or-no decision)
-- **Linking a newborn**: one decision per candidate of the parent, the
-  parent itself included — outputs 2–3 with mode 4–5. In the settled life of
-  the 30 B1 worlds of 100,000 tokens, 11.5% of children are joined to none of
-  their parent's candidates at birth
-  ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)). In B2 a newborn
-  is first joined to its parent and to two of the parent's neighbours, drawn
-  at random, and the brain decides about the others.
-- **Handing over a connection**: one decision per neighbour of the parent —
-  outputs 11–12 with mode 13–14. In those B1 worlds, 75% of parents hand over
-  no connection at all. B2 has no handovers.
-- **Rules of some experiments**: whether to give a gift to a neighbour
-  ([`allow_gifting`](settings.md#allow_gifting)), and whether to accept a
-  link with a stranger met in a search ([`link_search`](settings.md#link_search)).
+
+<!-- used a-yes-or-no-decision -->
+- [One iteration, step by step](one-iteration.md#three-tools-used-everywhere)
+- [The brain](the-brain.md#from-outputs-to-decisions)
+<!-- /used -->
 
 In the code it is `_choose_binary(yes, no, mode_yes, mode_no, rng)` in
 `GraphOfLife.py`. The uniform number comes from the world's random
@@ -510,19 +497,20 @@ agent's own node: 2 at home, 1 on the neighbour
 ([The even split](measuring-tokens.md#the-even-split)).
 
 ### Where it is used (splitting tokens into whole numbers)
-- **In the game**, when an agent **spreads** its stake: its τ tokens are
-  split over its candidates by their stake scores
-  ([One iteration, step by step](one-iteration.md)). Evolved B1 brains spread
-  in 98% of cases. In B2 nearly every agent puts all its tokens on one
-  candidate, spreading in only 0.1–4% of cases ([The even split](measuring-tokens.md#the-even-split)).
-  In B2, 30% of an agent's tokens (rounded up, at least one) also stay at
-  home before anything is split, and only the rest is staked by the brain.
-- **The even split.** In the median B1 world of 100,000 tokens, 42% of the
-  agents score every candidate at zero or below, and the rule splits their
-  tokens evenly ([The even split](measuring-tokens.md#the-even-split)).
-- **Gifts**, in the experiments that allow them: the tokens an agent gives
-  away are split over the neighbours it chose
-  ([`allow_gifting`](settings.md#allow_gifting)).
+
+It splits a stake in the game, when an agent spreads it, and in the even
+split, when every score is zero or below
+([How often it happens](measuring-tokens.md#how-often-it-happens)).
+
+<!-- used splitting-tokens-into-whole-numbers -->
+- [One iteration, step by step](one-iteration.md#three-tools-used-everywhere)
+- [The brain](the-brain.md#from-outputs-to-decisions)
+- [Measuring tokens: inequality and flow](measuring-tokens.md#the-rule)
+- [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
+
+> [!info]- And in the Archive (2)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#how-widely-agents-stake) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#kinds-of-behaviour)
+<!-- /used -->
 
 In the code it is `_apportion(weights, total)` in `GraphOfLife.py`.
 
@@ -643,18 +631,19 @@ drawing the five random numbers of every column again changes the stakes of
 changes only 1.5% ([What the brains are like](what-the-brains-are-like.md)).
 
 ### Where it is used (what a brain sees)
-- [What the brains are like](what-the-brains-are-like.md): an evolved B1
-  brain hears every group of inputs equally loudly. Each input is read by a
-  column of 50 first-layer weights, and that column's length is 0.67 for
-  every group, the random numbers included (0.57 in a founder).
-- [How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers): seeing is not
-  using. A change in these inputs reaches a B1 founder's outputs at a gain of
-  only 0.0006, and a B2 founder's at about 0.2
-  ([B1 and B2: the two baselines](b1-and-b2.md)).
-- [What a brain can compute](what-a-brain-can-compute.md): what a B2 brain
-  can and cannot work out from its 66 inputs.
-- [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): no input names a genotype,
-  so a brain cannot tell kin from stranger, except through messages.
+
+<!-- used what-a-brain-sees -->
+- [The brain](the-brain.md#one-look-a-column-per-candidate)
+- [Every setting](settings.md#random_input_amount)
+- [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md#where-degree-is-used)
+- [Physical inspiration](physical-inspiration.md#the-second-aim)
+- [What the brains are like](what-the-brains-are-like.md#how-a-brain-is-examined)
+- [What a brain can compute](what-a-brain-can-compute.md#what-a-b2-brain-sees-and-does)
+- [Statistics: the tools of the notebook](statistics.md#exactly-how-many-worlds-at-once)
+
+> [!info]- And in the Archive (2)
+> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#do-agents-treat-their-own-kind-differently)
+<!-- /used -->
 
 ## What a brain says
 
@@ -743,14 +732,18 @@ some experiments switch on add rows before the message: gifts add six, a
 search for strangers four ([Every setting](settings.md)).
 
 ### Where it is used (what a brain says)
-- [What the brains are like](what-the-brains-are-like.md): where selection
-  pushed each row in B1's worlds, and why the stake score barely changes
-  from one candidate to the next.
-- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): what rows 6–10 come to
-  in B1's worlds. From iteration 500 on, 98% of the agents spread their stake.
-- [What a brain can compute](what-a-brain-can-compute.md): a B2 brain whose
-  weights are set by hand so that its 19 outputs play a rule written in
-  Python.
+
+<!-- used what-a-brain-says -->
+- [One iteration, step by step](one-iteration.md#phase-1-reproduction)
+- [The brain](the-brain.md#from-outputs-to-decisions)
+- [Every setting](settings.md#link_search)
+- [Measuring tokens: inequality and flow](measuring-tokens.md#the-flow-of-a-game)
+- [Brains replaced by their average](brains-replaced-by-their-average.md#a-ladder-of-six-ways-to-decide)
+- [What a brain can compute](what-a-brain-can-compute.md#what-a-b2-brain-sees-and-does)
+
+> [!info]- And in the Archive (1)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#the-game-and-what-the-rules-leave-open)
+<!-- /used -->
 
 ## Messages
 
@@ -852,13 +845,27 @@ connections, and whether it is written to oneself — accounts for only 1.2%
 of the messages' variety.
 
 ### Where it is used (messages)
-- [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other): what
-  the messages of B1's worlds carry, number by number.
-- [What a brain can compute](what-a-brain-can-compute.md): why no message
-  can carry news of a third agent, and how `self_message` = largest would let
-  one.
-- [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): messages are the only way
-  a brain could tell kin from strangers.
+
+<!-- used messages -->
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#why-one-setting-can-be-looked-at-alone)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#did-something-new-appear)
+- [One iteration, step by step](one-iteration.md#phase-1-reproduction)
+- [The brain](the-brain.md#one-look-a-column-per-candidate)
+- [Every setting](settings.md#message_amount)
+- [B1 and B2: the two baselines](b1-and-b2.md#b1-the-rules-as-they-were-built)
+- [Physical inspiration](physical-inspiration.md#a-speed-limit)
+- [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
+- [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-contest-step-by-step)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#playing-against-the-past)
+- [What a brain can compute](what-a-brain-can-compute.md#where-to-go-next)
+- [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
+- [Measuring health: criteria, the health bar and diversity](measuring-health.md#the-same-position-share)
+- [How runs are made, recorded and costed](runs-and-records.md#an-example-experiment-1)
+
+> [!info]- And in the Archive (2)
+> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#notes-in-a-code-nobody-wrote) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-an-agent-can-give)
+<!-- /used -->
 
 ## How a coalition takes a node
 
@@ -1001,17 +1008,25 @@ with and without them was the same world in every measure
 ([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)).
 
 ### Where it is used (how a coalition takes a node)
-- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): who wins the nodes of
-  B1's worlds, and how.
-- [The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with):
-  B1 and B2 without revolutions. B1 without them becomes a world of mayflies,
-  whose agents are 7 to 13 iterations old on average.
-- [Revolutions, with every other rule](what-the-switches-did-in-pilots.md#revolutions-with-every-other-rule):
-  the worlds near B2 in which revolutions do matter.
-- [A crew of raiders](strategies-written-by-hand.md#a-crew-of-raiders): two raiders of two tokens each
-  stake one on a stranger of one token. In B2 the stranger's home stake
-  counts as 1.5, so neither raider can take the node alone, but together,
-  with *R* = 2, they do.
+
+<!-- used how-a-coalition-takes-a-node -->
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#fewer-mechanisms-worse-worlds)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-a-worlds-rules-make-possible)
+- [One iteration, step by step](one-iteration.md#phase-2-the-game)
+- [Questioning the mechanics](questioning-the-mechanics.md#hubs-are-places)
+- [Every setting](settings.md#allow_revolutions)
+- [B1 and B2: the two baselines](b1-and-b2.md#b1-the-rules-as-they-were-built)
+- [What keeps wealth spread?](what-keeps-wealth-spread.md#what-keeps-wealth-spread)
+- [Measuring tokens: inequality and flow](measuring-tokens.md#the-flow-of-a-game)
+- [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#what-the-probes-say-about-why)
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#raiders-that-pool-their-stakes)
+- [Other contests: a lottery, and alliances](another-game.md#the-contest-worlds)
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (5)
+> [B1: lives and wealth](b1-lives-and-wealth.md#the-bookkeeping-of-a-game) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-game-and-what-the-rules-leave-open) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#three-switches-and-two-more) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-helping-is-here)
+<!-- /used -->
 
 In the code it is `_resolve_winner(offers, revolutionaries, rng)` in
 `GraphOfLife.py`. With
@@ -1138,14 +1153,32 @@ decimal digits. The change is computed in 64 bits and the result stored in
 the rounding.
 
 ### Where it is used (how a brain changes)
-- [Do the brains matter?](do-the-brains-matter.md): B1 worlds whose brains
-  never change (*s* = 0), against B1 itself (Experiment 7).
-- [How fast should brains change?](how-fast-should-brains-change.md): B2
-  worlds at five chances of change, *p* from 0.05 to 0.8 (Experiment 9).
-- [Genotypes and the family tree](measuring-evolution.md#genotypes-families-and-the-common-ancestor): how the new genotype numbers
-  make a family tree.
-- [What the brains are like](what-the-brains-are-like.md): what mutation
-  alone does to the size of an evolved brain's weights.
+
+<!-- used how-a-brain-changes -->
+- [What this notebook is about](what-this-notebook-is-about.md#what-evolution-means-here)
+- [The ideas this builds on](the-ideas-this-builds-on.md#open-ended-evolution-what-it-would-mean)
+- [A screen of random worlds](a-screen-of-random-worlds.md#how-our-view-changed)
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#in-short)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-a-worlds-rules-make-possible)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#1--the-era-tournament)
+- [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#experiment-11-as-planned-on-9-october-2026)
+- [One iteration, step by step](one-iteration.md#phase-1-reproduction)
+- [The brain](the-brain.md#how-a-brain-changes)
+- [Questioning the mechanics](questioning-the-mechanics.md#variation-in-the-living)
+- [Every setting](settings.md#how-brains-change)
+- [B1 and B2: the two baselines](b1-and-b2.md#b1-the-rules-as-they-were-built)
+- [What the brains are like](what-the-brains-are-like.md#what-a-brain-listens-to)
+- [Do the brains matter?](do-the-brains-matter.md#the-three-conditions)
+- [How big should a brain be?](how-big-should-a-brain-be.md#how-far-one-change-moves-a-brain)
+- [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#how-genotypes-are-numbered)
+- [How fast should brains change?](how-fast-should-brains-change.md#copies-with-slips)
+- [Every era against three](every-era-against-three.md#the-trials)
+- [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
+
+> [!info]- And in the Archive (5)
+> [B1: lives and wealth](b1-lives-and-wealth.md#effective-numbers) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-lasts-long-enough-to-be-selected) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#where-to-go-next) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#brains-as-assembled-objects)
+<!-- /used -->
 
 In the code it is `Brain.mutate` and `Brain._perturb` in
 `GraphOfLife.py`. Every draw comes from the world's random stream
@@ -1222,15 +1255,19 @@ iteration numbered *N* − 1 was the last to run, and it ended with 20 agents or
 fewer.
 
 ### Where it is used (when a world ends)
-- [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world): the four B1 worlds of 10,000 tokens that
-  died out, one of them in its fourth iteration.
-- [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break):
-  four of ten worlds of 5,000 tokens died out when their brains could see, and
-  eight of ten when those brains also changed only when copied.
-- [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): all ten B2 worlds that kept
-  nothing at home died out, within 26 to 47 iterations.
-- [How this notebook is written](how-this-notebook-is-written.md): the rule
-  that the dead are counted apart.
+
+<!-- used when-a-world-ends -->
+- [How this notebook is written](how-this-notebook-is-written.md#the-rules-of-the-research)
+- [One iteration, step by step](one-iteration.md#cleanup)
+- [Every setting](settings.md#extinction_threshold)
+- [Brains replaced by their average](brains-replaced-by-their-average.md#what-is-measured)
+- [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did)
+- [How runs are made, recorded and costed](runs-and-records.md#runs-and-experiments)
+- [Statistics: the tools of the notebook](statistics.md#why-not-the-worlds-that-died)
+
+> [!info]- And in the Archive (4)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#what-this-changed-in-the-method) · [B1: lives and wealth](b1-lives-and-wealth.md#no-world-died--but-one-came-close) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#how-it-was-measured) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-thirty-worlds-did)
+<!-- /used -->
 
 ## Where to go next
 

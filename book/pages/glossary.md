@@ -40,7 +40,7 @@ there.
 - **[cross-time tournament](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)** (also era) — Brains of a world at two moments, its eras, played against each other: do the later ones win?
 - **[cut risk](measuring-networks.md#cut-risk)** — The largest share of a world that cutting one connection would cut off.
 - **[data collapse](space-at-scale.md#data-collapse)** (also finite-size scaling) — Curves of one quantity measured at many sizes that fall onto one another once its values are divided by a power of the size: then the size of the whole is its only scale.
-- **[degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling)** — The number of an agent's connections: how many neighbours it has.
+- **[degree](measuring-networks.md#degree)** — The number of an agent's connections: how many neighbours it has.
 - **[diameter](measuring-networks.md#radius-and-diameter)** — The longest of the shortest paths between two agents of a world.
 - **[dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension)** (also ball dimension) — How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.
 - **[diversity score](measuring-health.md#the-diversity-score)** — How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.
@@ -60,7 +60,7 @@ there.
 - **[frame](runs-and-records.md#what-a-run-records)** — A whole world as a run records it after one phase: every agent, its tokens and connections.
 - **[game](one-iteration.md#phase-2-the-game)** — The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.
 - **[genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor)** (also family tree) — The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.
-- **[Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility)** (also Gini, Lorenz curve) — How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.
+- **[Gini coefficient](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve)** (also Gini, Lorenz curve) — How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.
 - **[half-cut exponent](measuring-health.md#the-half-cut-exponent)** — How the links crossing the cheapest cut of a world into halves grow with its size: 2/3 for a space of three dimensions, near 0 for a bottleneck, near 1 for a folded world.
 - **[health bar](measuring-health.md#the-health-bar)** — The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.
 - **[healthy world](measuring-health.md#what-makes-a-world-interesting)** (also interesting world) — A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).
@@ -86,7 +86,7 @@ there.
 - **[neighbour](the-world.md#the-network)** — An agent joined to another by a connection.
 - **[open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)** — Evolution that keeps producing new things without end, not only up to a plateau.
 - **[participation ratio](statistics.md#how-many-directions-a-cloud-of-points-uses)** — How many directions a cloud of points really uses.
-- **[path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)** — How many connections the shortest way between two agents crosses.
+- **[path length](measuring-networks.md#path-length)** — How many connections the shortest way between two agents crosses.
 - **[permutation test](statistics.md#permutation-tests)** — Whether a difference could be chance, found by shuffling which world belongs to which condition.
 - **[pilot](runs-and-records.md#pilot-worlds)** — A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.
 - **[power law](statistics.md#fitting-a-power-law-properly)** — A quantity whose frequency falls as a power of its size: few huge values, many small ones.
@@ -107,7 +107,7 @@ there.
 - **[survival curve](measuring-lives.md#survival-curves-kaplanmeier)** (also Kaplan–Meier) — The share of lives that last at least so long, counted fairly when some are cut short by the end of a run.
 - **[token](the-world.md#agents-and-tokens)** — The one thing of value in a world: every agent holds a whole number of them, and their total never changes.
 - **[token curvature](b1-lives-and-wealth.md#token-curvature)** — How much richer an agent's neighbourhood is than the agent itself.
-- **[token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)** (also net flow) — The tokens a game moves along each connection, from the agent who stakes to the node staked on.
+- **[token flow](measuring-tokens.md#token-flow)** (also net flow) — The tokens a game moves along each connection, from the agent who stakes to the node staked on.
 - **[Wilson interval](statistics.md#the-wilson-interval)** — The range a share probably lies in, when it was counted in only a few worlds.
 - **[yes-or-no decision](rules-in-detail.md#a-yes-or-no-decision)** — A yes or no a brain gives from four numbers: how strongly it means yes and no, and whether the stronger always wins or chance decides in proportion.
 <!-- /glossary -->

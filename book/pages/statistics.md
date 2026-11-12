@@ -424,7 +424,7 @@ line on log–log axes, and its exponent is read off as the slope. Examples:
 
 #### Distributions on log–log axes
 
-To see the shape of a wide distribution, of [degrees](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has."), tokens or lifetimes, the
+To see the shape of a wide distribution, of [degrees](measuring-networks.md#degree "The number of an agent's connections: how many neighbours it has."), tokens or lifetimes, the
 notebook draws its **complementary cumulative distribution**. That is the
 share of values at least *x*, against *x*, with both axes logarithmic.
 Suppose the share of values equal to *x* follows a power law with the

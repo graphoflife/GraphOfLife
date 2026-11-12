@@ -132,18 +132,17 @@ At 10,000 tokens, these were 37%, 23%, 4% and 1,399.
 
 #### Where degree is used
 
-- **The [health bar](measuring-health.md#the-health-bar)** asks for 3 to 12 links per agent: a
-  mean degree in that range.
-- **The [even split](measuring-tokens.md#the-even-split).** An agent with *d* connections has
-  *d* + 1 candidates: its own node and its neighbours'. Under the even split,
-  it stakes about 1/(*d* + 1) of its tokens on each.
-- **The [random twin](measuring-space.md#the-random-twin-is-a-world-a-space)** keeps every agent's degree, and wires
-  the connections at random. What a world has and its twin lacks, the world's
-  rules built.
-- **[Brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")** read the logarithm of one plus the agent's own degree, and of
-  each candidate's ([What a brain sees](rules-in-detail.md#what-a-brain-sees)).
-- **How evenly connections are spread**: the entropy and evenness of the
-  degrees ([Entropy and evenness](measuring-tokens.md#entropy-and-evenness)).
+Degree enters the [health bar](measuring-health.md#the-health-bar), the [even split](measuring-tokens.md#the-even-split), the
+[random twin](measuring-space.md#the-random-twin-is-a-world-a-space) and
+[what a brain sees](rules-in-detail.md#what-a-brain-sees).
+
+<!-- used degree -->
+- [One iteration, step by step](one-iteration.md#phase-1-reproduction)
+- [Statistics: the tools of the notebook](statistics.md#distributions-on-loglog-axes)
+
+> [!info]- And in the Archive (2)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#what-a-power-law-is-and-why-it-is-hard-to-see) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-it-would-take)
+<!-- /used -->
 
 ### Clustering
 
@@ -233,16 +232,19 @@ it ([How far the trees hang](b1-the-network-size-and-scaling.md#how-far-the-tree
 
 #### Where clustering is used
 
-- **Experiment 5** predicted that clustering would stay below 0.1, in a world
-  of trees. It did: from iteration 100 on, a median of 0.077 at 10,000
-  tokens, and 0.043 at 100,000.
-  The thesis failed on the size of the core instead
-  ([Was the thesis right?](b1-the-network-size-and-scaling.md#was-the-thesis-right-the-shape-of-the-network)).
-- **The starting ring** is a small world: clustered like a neighbourhood, yet
-  short ([Why a small world?](rules-in-detail.md#why-a-small-world)).
-- **An agent's own coefficient** falls about as one over its connections, the
-  mark of a hierarchy of stars
-  ([How closely knit a neighbourhood is](b1-the-network-size-and-scaling.md#how-closely-knit-a-neighbourhood-is)).
+In B1's worlds clustering stays below 0.1, as Experiment 5 predicted
+([Was the thesis right?](b1-the-network-size-and-scaling.md#was-the-thesis-right-the-shape-of-the-network)).
+
+<!-- used clustering -->
+- [The ideas this builds on](the-ideas-this-builds-on.md#networks)
+- [The world: tokens, agents and a network](the-world.md#how-a-world-begins)
+- [The rules in detail](rules-in-detail.md#why-a-small-world)
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+- [How worlds are measured](how-worlds-are-measured.md#step-1--a-row-of-statistics-per-phase)
+
+> [!info]- And in the Archive (3)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#what-the-second-edition-changed) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#what-was-expected-the-shape-of-the-network) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#agents)
+<!-- /used -->
 
 ### Assortativity
 
@@ -389,7 +391,7 @@ So part of what the leaves gain may be handovers.
   [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one) had
   proposed preferential attachment, reached by copying, as the source of the
   heavy tail of the connections. There it is still a hypothesis.
-- **B2's links at birth.** A brain that chooses links meets the well
+- **B2's links at birth.** A [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") that chooses links meets the well
   connected among its candidates more often, whatever it favours. That is
   preferential attachment, and it grows hubs. So B2 draws two of a newborn's
   links at random, and caps the links a brain may choose
@@ -555,17 +557,26 @@ at random, a brain may choose at most 8 links
 
 ### Where it is used
 
-- [How the game is played](b1-the-game-and-its-flows.md#do-the-worlds-agree): the
-  stars play the game apart from the other worlds.
-- [Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk):
-  the even split fits the game with a slope of 0.94 without the stars, 0.65
-  with them.
-- [What goes with what](measures-atlases-and-assembly.md#between-worlds): the one
-  component that orders the thirty worlds by their largest hub holds 47% of
-  their differences.
-- [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution):
-  a dynasty is the nearest thing yet to a group that lasts while its members
-  change.
+<!-- used stars-and-hubs -->
+- [Welcome](../README.md#graph-of-life--the-research-notebook)
+- [What this notebook is about](what-this-notebook-is-about.md#in-short)
+- [How this notebook is written](how-this-notebook-is-written.md#the-rules-of-the-research)
+- [A screen of random worlds](a-screen-of-random-worlds.md#how-our-view-changed)
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#in-short)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#in-short)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#11--roles-in-the-network)
+- [Questioning the mechanics](questioning-the-mechanics.md#hubs-are-places)
+- [Every setting](settings.md#birth_links)
+- [What keeps wealth spread?](what-keeps-wealth-spread.md#without-coalitions)
+- [Measuring tokens: inequality and flow](measuring-tokens.md#a-lazy-random-walk)
+- [Particles: patterns that outlast what carries them](particles.md#in-short)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#room-to-go-on)
+- [Rules without numbers](rules-without-numbers.md#why-ask)
+- [Statistics: the tools of the notebook](statistics.md#what-thirty-seeds-can-see)
+
+> [!info]- And in the Archive (9)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#brains-that-cannot-see) · [B1: lives and wealth](b1-lives-and-wealth.md#stars) · [B1: the game and its flows](b1-the-game-and-its-flows.md#two-agents-of-one-module-games-later) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#the-worlds-of-a-giant-hub) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#but-some-genotypes-get-big) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay) · [Space at scale (side study)](space-at-scale.md#the-worlds-and-the-bodies-beside-them) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#between-worlds)
+<!-- /used -->
 
 ## Distances in a network: path length, radius and diameter, the spectral gap
 
@@ -669,29 +680,15 @@ apart ([The starting ring](rules-in-detail.md#the-starting-ring)).
 
 #### Where path length is used
 
-- **How stretched a world is.** Take B1's thirty worlds of 100,000 tokens
-  (Experiment 10), over their settled life, iterations 500 to 1,499. Two
-  agents are a median 17.7 steps apart. A random network with the
-  same *N* and *k̄* would have about 7.8. So the agents are 2.3 times as far
-  apart
-  ([How far apart are two agents?](b1-the-network-size-and-scaling.md#how-far-apart-are-two-agents)).
-  A token moves at most one connection in a game, so it needs about 18
-  games to go from one agent to another, on average.
-- **Smaller worlds.** In B1's worlds of 10,000 tokens (Experiment 2), the
-  settled life runs from iteration 500 to 2,999. Averaged over it, the mean
-  path length is 9.8 in the median world. It lies between 6.5 and 13.0 across
-  the 26 worlds that lived to the end, against about 6.0 for a random
-  network. A token there needs about 10 games to go from one agent to
-  another.
-- **Against the random twin.** Computed exactly after its last game, the
-  world of seed 1 of Experiment 10 has a mean path length of 27.9 steps. Its
-  random twin, the same agents with as many connections each but wired at
-  random, has 6.0
-  ([Distances](b1-the-network-size-and-scaling.md#distances)).
-- **As worlds grow.** Their distances grow like a power of the number of
-  agents, not like its logarithm. That is how distances grow in a body of
-  about three dimensions
-  ([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
+Two agents of a settled B1 world of 100,000 tokens are a median 17.7 steps
+apart, 2.3 times as far as in a random network
+([Distances](b1-the-network-size-and-scaling.md#distances)). At 10,000
+tokens it is 9.8 in the median world, and 6.5 to 13.0 across the 26 worlds
+that lived.
+
+<!-- used path-length -->
+No page links here yet.
+<!-- /used -->
 
 ### Radius and diameter
 
@@ -747,17 +744,16 @@ example above. A tenth serves the diameter alone.
 
 #### Where radius and diameter are used
 
-- **The thirty worlds.** Over the settled life of B1's worlds of 100,000
-  tokens, the median world has a radius of 36 and a diameter of 60. In
-  the worlds of 10,000 tokens they were 17 and 29, with a mean path length of
-  9.8: all three about half
-  ([Distances](b1-the-network-size-and-scaling.md#distances)).
-- **Against the random twin.** Computed exactly after its last game, the
-  world of seed 1 of Experiment 10 has a radius of 48 and a diameter of 96.
-  Its random twin has 8.6 and 16.
-- **As worlds grow.** The diameter grows like a power of the number of
-  agents, and more cleanly than the mean path length
-  ([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
+Over the settled life of B1's worlds of 100,000 tokens, the median world
+has a radius of 36 and a diameter of 60, about twice those at 10,000
+tokens ([Distances](b1-the-network-size-and-scaling.md#distances)).
+
+<!-- used radius-and-diameter -->
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (1)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#distances)
+<!-- /used -->
 
 ### The spectral gap
 
@@ -861,22 +857,17 @@ last digit.
 
 #### Where the spectral gap is used
 
-- **The thirty worlds.** A settled B1 world has a spectral gap of about
-  0.0012 at 100,000 tokens and 0.0026 at 10,000
-  ([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
-  So a random walk on it needs on the order of 1/0.0012 ≈ 800 steps to forget
-  its start (or 1/0.0026 ≈ 400).
-- **Bottlenecks.** After its last game, the world of seed 1 of Experiment 10
-  has λ₂ = 0.00095, and its random twin 0.031: thirty-three times larger. By Cheeger's inequality, part of the world
-  is joined to the rest by few connections
-  ([How easily a world could be cut](b1-the-network-size-and-scaling.md#how-easily-a-world-could-be-cut)).
-  [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks) finds those bottlenecks.
-- **Tokens.** A game moves tokens almost like a random walk
-  ([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
-  In the world of seed 1, such a walk needs about 1/0.00095, a thousand
-  steps, to forget its start. So tokens settle within a neighbourhood in a few
-  games, but could spread evenly across the whole world only over about a
-  thousand.
+A settled B1 world has a spectral gap of about 0.0012, so a random walk on
+it needs some 800 steps to forget its start
+([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
+
+<!-- used the-spectral-gap -->
+- [Physical inspiration](physical-inspiration.md#a-well-knit-world)
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (2)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-baseline-world-in-one-paragraph) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)
+<!-- /used -->
 
 ## Bridges, cut risk, loops and the core: how a network can be cut
 

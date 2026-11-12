@@ -203,10 +203,42 @@ caption and recipe, into the pages.
 ### Where it is used
 
 Every page with a box *The runs behind this page* reads the lab's runs.
-[Every simulation: what was run, and what was measured](every-simulation.md)
-lists every experiment and pilot batch. Pages built on pilots say so, as
-[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
-does.
+
+<!-- used the-lab-the-engine-and-pilots -->
+- [Welcome](../README.md#graph-of-life--the-research-notebook)
+- [What this notebook is about](what-this-notebook-is-about.md#how-to-read-a-page-and-how-to-make-it-again)
+- [How this notebook is written](how-this-notebook-is-written.md#where-to-go-next)
+- [A screen of random worlds](a-screen-of-random-worlds.md#looked-at-as-if-for-the-first-time)
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#few-tokens-culled)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-could-be-played-next)
+- [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#in-short)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#the-long-run-planned-again-on-round-3s-candidates)
+- [Questioning the mechanics](questioning-the-mechanics.md#how-to-question-a-rule)
+- [Is a run reproducible?](is-a-run-reproducible.md#where-to-go-next)
+- [Every setting](settings.md#where-to-go-next)
+- [The rules in detail](rules-in-detail.md#what-the-same-needs)
+- [B1 and B2: the two baselines](b1-and-b2.md#where-to-go-next)
+- [Measuring lives: births, deaths, ages and estates](measuring-lives.md#what-each-heir-did)
+- [What keeps wealth spread?](what-keeps-wealth-spread.md#the-question)
+- [Physical inspiration](physical-inspiration.md#what-this-asks-of-the-notebook)
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#every-world-at-iteration-1000)
+- [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
+- [What the brains are like](what-the-brains-are-like.md#how-a-brain-is-examined)
+- [Brains replaced by their average](brains-replaced-by-their-average.md#in-short)
+- [How big should a brain be?](how-big-should-a-brain-be.md#every-brain-of-round-3-responds)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)
+- [Every era against three](every-era-against-three.md#how-this-was-made)
+- [A source and a sink](a-source-and-a-sink.md#where-a-source-could-sit)
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)
+- [What a brain can compute](what-a-brain-can-compute.md#what-a-b2-brain-sees-and-does)
+- [Other contests: a lottery, and alliances](another-game.md#in-short)
+- [Rules without numbers](rules-without-numbers.md#b3-b2-without-its-numbers)
+- [Measuring health: criteria, the health bar and diversity](measuring-health.md#two-examples)
+- [Every simulation: what was run, and what was measured](every-simulation.md#where-to-go-next)
+
+> [!info]- And in the Archive (4)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#how-this-was-made-eight-switches-at-once) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay)
+<!-- /used -->
 
 ## What a run records
 

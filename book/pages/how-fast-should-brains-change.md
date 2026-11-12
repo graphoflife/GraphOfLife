@@ -191,7 +191,7 @@ agents in a hundred lost their node in each game.
 held 3,730 agents at *p* = 0.05, 3,250 in B2 and 2,600 at *p* = 0.8. The extra
 agents of a slowly changing world are poor ones. At 0.05 and 0.1, half of all
 agents or more held a single token. The median holding was 1.6 tokens at 0.4,
-and 2 at 0.8. Inequality, by its [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), was 0.50 to 0.52 at every
+and 2 at 0.8. Inequality, by its [Gini coefficient](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."), was 0.50 to 0.52 at every
 rate. Why a world of fast change keeps fewer poor agents alive is not measured
 here.
 
@@ -389,6 +389,6 @@ steps are Experiment 16's, in `GraphOfLifeRuns/.pilots/long_steps.json`.
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
-> [!info]- Pages that link here (9)
-> [The rules in detail](rules-in-detail.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [!info]- Pages that link here (8)
+> [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

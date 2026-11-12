@@ -307,7 +307,7 @@
       ],
       "page": "measuring-tokens",
       "says": "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.",
-      "anchor": "measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility"
+      "anchor": "the-gini-coefficient-and-the-lorenz-curve"
     },
     {
       "name": "richest tenth",
@@ -340,7 +340,7 @@
       "name": "degree",
       "page": "measuring-networks",
       "says": "The number of an agent's connections: how many neighbours it has.",
-      "anchor": "an-agents-connections-degree-clustering-assortativity-attachment-and-scaling"
+      "anchor": "degree"
     },
     {
       "name": "preferential attachment",
@@ -358,7 +358,7 @@
       "name": "path length",
       "page": "measuring-networks",
       "says": "How many connections the shortest way between two agents crosses.",
-      "anchor": "distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap"
+      "anchor": "path-length"
     },
     {
       "name": "2-core",
@@ -448,7 +448,7 @@
       ],
       "page": "measuring-tokens",
       "says": "The tokens a game moves along each connection, from the agent who stakes to the node staked on.",
-      "anchor": "measuring-the-flow-token-flow-lightning-and-circulation"
+      "anchor": "token-flow"
     },
     {
       "name": "lightning",

@@ -39,7 +39,9 @@ A **reference page** gathers the details of one family of rules or measures:
 the rules in detail, lives, [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), networks, space, evolution, health,
 statistics, and how runs are made. Each idea has a section of its own, as a
 short page had before 9 November 2026: the idea made precise, an example with
-real numbers, and **Where it is used**. A link to an idea leads to its section.
+real numbers, and **Where it is used**. That last is a list of the pages that
+link to the section, made by `python3 book_fill.py`, so it cannot fall behind.
+A link to an idea leads to its section.
 
 ## Parts, and what each page is
 
@@ -198,6 +200,6 @@ and the page that changed it. Nothing is quietly deleted.
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (4)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [The rules in detail](rules-in-detail.md) · [Rules without numbers](rules-without-numbers.md)
+> [!info]- Pages that link here (3)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [Rules without numbers](rules-without-numbers.md)
 <!-- /turns -->

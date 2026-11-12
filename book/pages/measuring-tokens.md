@@ -134,14 +134,23 @@ holds 60%.
 running sums of the sorted values. It is the same number as the formula
 above, rearranged, and it is recorded as `gini` after every phase.
 
-- In a settled B1 world of 100,000 tokens the Gini stays near 0.47. The
-  thirty worlds lie between 0.40 and 0.55
-  ([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
-- A healthy world must not be too even. Its Gini may be no lower than that
-  of B2's most even world at the same iteration: 0.46 at iteration 2,000
-  ([The six criteria](measuring-health.md#the-six-criteria)).
-- A Gini looks at one moment, so it cannot tell whether the same agents stay
-  rich. [Mobility](#mobility) compares two moments.
+In a settled B1 world of 100,000 tokens the Gini stays near 0.47, between
+0.40 and 0.55 across the thirty worlds
+([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
+
+<!-- used the-gini-coefficient-and-the-lorenz-curve -->
+- [A screen of random worlds](a-screen-of-random-worlds.md#what-round-3-found)
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#what-decides-how-healthy-a-living-world-grows)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#experiment-11-as-planned-on-9-october-2026)
+- [What keeps wealth spread?](what-keeps-wealth-spread.md#the-question)
+- [Local rules only](local-rules-only.md#in-short)
+- [Do the brains matter?](do-the-brains-matter.md#where-the-worlds-settle)
+- [Brains replaced by their average](brains-replaced-by-their-average.md#what-the-brains-of-round-3-are-like)
+- [How fast should brains change?](how-fast-should-brains-change.md#what-the-fifty-worlds-did)
+
+> [!info]- And in the Archive (2)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-record) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)
+<!-- /used -->
 
 ### The richest tenth's share
 
@@ -511,15 +520,18 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
 
 ### Where it is used
 
-- [Where the tokens flow](b1-the-game-and-its-flows.md#who-keeps-their-node): an
-  agent keeps its node about as often as one of *d* + 1 equal stakers would:
-  in 74% of games with one connection, 2.0% with fifty or more.
-- [Do the rich stay rich?](b1-lives-and-wealth.md#a-two-game-rhythm): on a hub
-  and its leaves the even split overshoots, and wealth swings with a period of
-  two games.
-- [Physical inspiration](physical-inspiration.md): an even split is one step of
-  the heat equation; [What goes with what](measures-atlases-and-assembly.md#token-curvature-and-token-change)
-  finds tokens running downhill at about a fifth of its pace.
+<!-- used the-even-split -->
+- [Questioning the mechanics](questioning-the-mechanics.md#what-we-learned)
+- [The rules in detail](rules-in-detail.md#zero-scores-and-ties)
+- [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md#where-degree-is-used)
+- [Physical inspiration](physical-inspiration.md#agents-as-little-calculators)
+- [Particles: patterns that outlast what carries them](particles.md#how-a-ring-is-seen)
+- [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
+- [A source and a sink](a-source-and-a-sink.md#why-a-flow)
+
+> [!info]- And in the Archive (4)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#a-world-of-attack) · [B1: the game and its flows](b1-the-game-and-its-flows.md#the-picture) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#b1-the-network-size-and-scaling) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-the-pages-found)
+<!-- /used -->
 
 ## Measuring the flow: token flow, lightning and circulation
 
@@ -609,21 +621,16 @@ reshuffled.
 
 #### Where token flow is used
 
-- **The budget of a game.** A settled B1 world of 100,000 tokens keeps 30% of
-  its tokens at home in a game. Another 51% are matched by a stake coming
-  back, and 20% go one way (49% and 21% at 10,000 tokens). So `totalFlow` is
-  about 71% of the tokens, and `netFlowShare` about 0.28
-  ([The budget of a game](b1-the-game-and-its-flows.md#the-budget-of-a-game-where-tokens-flow)).
-- **The connections.** Two connections in three carry one or two tokens a
-  game, most of them one each way. In B1, every connection that carried
-  nothing is cut
-  ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)).
-- **B2.** In B2's worlds almost nothing cancels: `netFlowShare` is about
-  0.95. A connection there can survive unused, and agents stake mostly on
-  others who do not stake back
-  ([Every world](b1-the-game-and-its-flows.md#every-world)).
-- **The viewer** can colour every connection by its token flow, both
-  directions together ([What the viewer can colour by](measures-atlases-and-assembly.md#what-the-viewer-can-colour-by)).
+A settled B1 world of 100,000 tokens keeps 30% of its tokens at home in a
+game, and about 71% cross a connection. In B2 almost nothing cancels
+([The budget of a game](b1-the-game-and-its-flows.md#the-budget-of-a-game-where-tokens-flow)).
+
+<!-- used token-flow -->
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
+
+> [!info]- And in the Archive (1)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#the-flow-of-one-game)
+<!-- /used -->
 
 ### Lightning: tokens that go round
 
@@ -875,16 +882,12 @@ another. Bronisław Malinowski described the classic case in *Argonauts of the
 Western Pacific* (1922): the Kula ring, whose armshells and necklaces pass
 from island to island.
 
-- [Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go)
-  splits the flow of 50 games in the twenty worlds of B1 and B2. Gifts run
-  downhill; takeovers go round, but never twice in the same place.
-- [A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one)
-  sets this split beside the greedy count of
-  [Lightning](#lightning-tokens-that-go-round). Over fifty games, 80% of
-  B1's net flow circulates, by energy, where random flow on the same network
-  would circulate about 60%.
-- [Help](cooperation-help-and-gliders.md#help) splits the net help between agents the same way, to look
-  for help that goes round.
+<!-- used flows-that-go-round -->
+- [Particles: patterns that outlast what carries them](particles.md#how-a-ring-is-seen)
+
+> [!info]- And in the Archive (2)
+> [B1: the game and its flows](b1-the-game-and-its-flows.md#do-tokens-go-round) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-helping-is-here)
+<!-- /used -->
 
 #### What it can and cannot say
 

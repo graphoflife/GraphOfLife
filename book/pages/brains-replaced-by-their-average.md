@@ -92,7 +92,7 @@ Their brains are another matter. The five worlds this plan would play show it:
   and the median change was nil
   ([Healthier or sicker with time?](which-worlds-are-healthy.md#healthier-or-sicker-with-time)).
   And how unequal a world is depends, more than on any other rule drawn, on
-  where the tokens of the dead go: a median [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.32 where they go to the
+  where the tokens of the dead go: a median [Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.32 where they go to the
   poorest, 0.53 where they flow to the nearest living
   ([What keeps wealth spread?](what-keeps-wealth-spread.md)).
 
