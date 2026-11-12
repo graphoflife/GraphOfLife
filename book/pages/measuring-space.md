@@ -471,3 +471,14 @@ by the rule that made them. The line of 1.5 lies between the two.
   networks. *Nature* 433, 392–395.
 - Wolfram, S. (2020). A class of models with the potential to represent
   fundamental physics. *Complex Systems* 29(2), 107–536.
+
+<!-- turns -->
+---
+
+← [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) →
+
+**Also about:** [Space and dimension](../README.md#space-and-dimension).
+
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

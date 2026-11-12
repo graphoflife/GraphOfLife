@@ -638,3 +638,13 @@ replaced it as simpler, read straight from what each run recorded.
   star, uniform or frozen are left out, and worlds are ranked by evolution. The
   orders are kept as they were.
 
+<!-- turns -->
+---
+
+← [A screen of random worlds](a-screen-of-random-worlds.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) →
+
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (13)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Particles: patterns that outlast what carries them](particles.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

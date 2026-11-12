@@ -639,3 +639,14 @@ Experiment 24 and in half the worlds of
 - Kaplan, E. L. and Meier, P. (1958). Nonparametric estimation from
   incomplete observations. *Journal of the American Statistical Association*
   53, 457–481.
+
+<!-- turns -->
+---
+
+← [The rules in detail](rules-in-detail.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Measuring tokens: inequality and flow](measuring-tokens.md) →
+
+**Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Changing the rules](../README.md#changing-the-rules), [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (19)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

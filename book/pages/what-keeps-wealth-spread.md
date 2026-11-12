@@ -309,3 +309,12 @@ To draw the figures again: `python3 book_figures.py wealthspread`
   because agents defend their own nodes, and coalitions looked like what held
   it back. Written from worlds already played, the answer is the other way
   round: without coalitions B1 is more even.
+
+<!-- turns -->
+---
+
+[Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
+
+> [!info]- Pages that link here (4)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+<!-- /turns -->

@@ -711,3 +711,14 @@ made again by `python3 book_figures.py particles` and kept in
 - Yule, G. U. (1927). On a method of investigating periodicities in disturbed
   series, with special reference to Wolfer's sunspot numbers. *Philosophical
   Transactions of the Royal Society of London A* 226, 267–298.
+
+<!-- turns -->
+---
+
+← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension)
+
+**Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
+
+> [!info]- Pages that link here (2)
+> [Physical inspiration](physical-inspiration.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->
