@@ -140,7 +140,7 @@ def fiveseeds(ch: F.Chapter) -> None:
         panel("Marks of the health bar met", "marks", "marks (of 7)", 7, lo=0, hi=7.5, guide_label="every mark")],
         columns=1, title="Experiment 21 at iteration 10,000",
         caption=("Each dot is a world at iteration 10,000, seeds 3 to 7 from left to right within each rule: green if "
-                 "it passed [Healthy and rich](healthy-and-rich.md)'s test of a long run — alive, every mark of the health bar met, more diverse than "
+                 "it passed [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s test of a long run — alive, every mark of the health bar met, more diverse than "
                  "B2's median world and poorer than none of B2's ten worlds played on to 10,000 — violet if it failed "
                  "it, red, at the top, if it died out before 10,000. Grey column: plain mixing, Experiment 17's worlds "
                  "of the same seeds."),

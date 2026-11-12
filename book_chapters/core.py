@@ -215,7 +215,7 @@ def core(ch: F.Chapter) -> None:
                 f"from how a random walk spreads — on {W.lived} after their last game (blue), on their cores alone "
                 "(green), and on their random twins (red); each line is the median of the worlds, the darker band "
                 "the middle half of them and the paler band nine in ten. Yellow: the cores of the three worlds of "
-                "409,600 tokens of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md).",
+                "409,600 tokens of [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes).",
         recipe=recipe(W.runs_text() + " " + BIG, FRAMES,
                       ["Read each run's last frame; build its network from `edges`; its core by peeling; its random "
                        "twin by `book_graph.degree_preserving` (seed 23).",

@@ -104,20 +104,27 @@ def _peak_megabytes() -> Optional[float]:
 class Recorder:
     """Writes a run's stats.jsonl as its frames are made."""
 
-    def __init__(self, run_id: str, heavy_every: int = HEAVY_EVERY, timed: bool = True) -> None:
+    def __init__(self, run_id: str, heavy_every: int = HEAVY_EVERY, timed: bool = True,
+                 frames_every: int = 1) -> None:
         self.run_id = run_id
         self.heavy_every = max(1, int(heavy_every))
         # Off when summarising afterwards: the time it takes to read a frame
         # back says nothing about what it cost to make.
         self.timed = timed
         self.previous: Optional[Dict[str, Any]] = None
-        self.families = gol_series.CladeWindow()
+        # Families need every iteration in order (gol_series.CladeWindow); a
+        # run that keeps a frame only every frames_every-th leaves them absent.
+        self.families = gol_series.CladeWindow() if int(frames_every) == 1 else None
         self.file = None
         self.clock = (time.perf_counter(), time.process_time())
+        # The iteration the clock started before: a row's cost is per
+        # iteration, over every iteration since, kept or not.
+        self.timed_from: Optional[int] = None
 
-    def start(self, cursor: int) -> None:
+    def start(self, cursor: int, iteration: Optional[int] = None) -> None:
         """
-        Pick up at frame `cursor`, which is where the run's frames now end.
+        Pick up at frame `cursor`, which is where the run's frames now end, with
+        `iteration` the next the world will live.
 
         Rows from frames past it describe iterations that are about to be lived
         again, and a half-written line is the remains of one, so the file is
@@ -127,12 +134,14 @@ class Recorder:
         """
         _cut_back(stats_path(self.run_id), cursor)
 
-        window = gol_series.CLADE_WINDOW * 2
+        window = gol_series.CLADE_WINDOW * 2 if self.families is not None else 1
         warm = list(stored_frames(self.run_id, max(0, cursor - window), cursor))
-        self.families.warm(warm)
+        if self.families is not None:
+            self.families.warm(warm)
         self.previous = warm[-1][1] if warm else None
         self.file = open(stats_path(self.run_id), "a")
         self.clock = (time.perf_counter(), time.process_time())
+        self.timed_from = iteration
 
     def observe(self, frames: Iterable[Tuple[int, Dict[str, Any]]]) -> None:
         """Summarise one iteration's frames, given with their indices, and write them out."""
@@ -141,15 +150,20 @@ class Recorder:
             iteration = int(frame.get("iteration", index // 2))
             heavy = iteration % self.heavy_every == 0
             row = gol_series.frame_stats(frame, self.previous, heavy)
-            row["cladesInWindow"] = self.families.count(frame, index)
+            row["cladesInWindow"] = self.families.count(frame, index) if self.families is not None else None
             row["_frame"] = index
             row["_heavy"] = heavy
             if self.timed and frame.get("phase") == 2:
                 wall, cpu = time.perf_counter(), time.process_time()
-                row["_seconds"] = round(wall - self.clock[0], 4)
-                row["_cpu"] = round(cpu - self.clock[1], 4)
+                # Per iteration: a run that keeps a frame only every so often
+                # lived every iteration since the last row, and the costs are
+                # fitted to iterations.
+                lived = max(1, iteration + 1 - self.timed_from) if self.timed_from is not None else 1
+                row["_seconds"] = round((wall - self.clock[0]) / lived, 4)
+                row["_cpu"] = round((cpu - self.clock[1]) / lived, 4)
                 row["_peakMB"] = _peak_megabytes()
                 self.clock = (wall, cpu)
+                self.timed_from = iteration + 1
             lines.append(json.dumps(_finite(row), separators=(",", ":")) + "\n")
             self.previous = frame
         self.file.writelines(lines)

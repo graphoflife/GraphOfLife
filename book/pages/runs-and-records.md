@@ -99,7 +99,7 @@ of two seeds suggested that [brains](the-brain.md) that see break worlds.
 Experiment 13 then ran ten seeds of each condition. Of the worlds whose
 brains see and change only when copied, eight in ten died out. None of B1's
 did
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)).
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)).
 
 #### What makes one
 
@@ -123,7 +123,7 @@ as which links a crowded newborn may still make. The switch
 unchanged, and only keep its books. A check, `research/oee/pilots/equiv.py`,
 makes sure that such a world stays identical to the engine's, iteration for
 iteration. The pilots of
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 and of [Other contests](another-game.md) run this way.
 
 #### What a pilot records
@@ -205,7 +205,7 @@ caption and recipe, into the pages.
 Every page with a box *The runs behind this page* reads the lab's runs.
 [Every simulation: what was run, and what was measured](every-simulation.md)
 lists every experiment and pilot batch. Pages built on pilots say so, as
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 does.
 
 ## What a run records
@@ -252,6 +252,17 @@ For the world as a whole, a frame holds:
 
 Frames are read with `gol_store.read_frame(run, index)`.
 
+A long run may keep a frame only every so often. A plan that asks for
+`frames_every` *n* in its `record` keeps the two frames of every *n*-th
+iteration, and the statistics file a line for each of those. What an
+iteration cost is still given per iteration, over every iteration since the
+last line. The families count (`cladesInWindow`) needs every iteration in
+order, so such a run leaves it empty. So do the analyses that follow every
+birth, which need every frame. The kept worlds (`archive_every`) are what
+contests and probes read, and they are kept as always. Added on
+11 November 2026, so that worlds of 20,000 iterations and more fit on the
+disk.
+
 ### The statistics file
 
 From every frame, a row of statistics is computed and appended to
@@ -277,9 +288,9 @@ the viewer charts, and every one has a note that says how it is computed.
 | `cladesInWindow` | families: ancestors eight iterations back | [Families](measuring-evolution.md#families) |
 | `births` | children born (phase 1 rows) | [Births and deaths](measuring-lives.md#births-and-the-four-ways-to-die) |
 | `starved`, `orphaned` | agents the cleanup removed for having no tokens, or for being cut off; deaths of age (B2's [`max_age`](settings.md#max_age)) are in no field, only in a frame's `cleanup.aged` | [Births and deaths](measuring-lives.md#births-and-the-four-ways-to-die) |
-| `gainers`, `losers`, `maxTokenAdded`, `maxTokenLost`, `redistributed` | who gained and who lost in the phase, the extremes, and the tokens of the dead dealt out | [Gains and losses](gains-and-losses.md#gains-losses-and-the-share-out) |
+| `gainers`, `losers`, `maxTokenAdded`, `maxTokenLost`, `redistributed` | who gained and who lost in the phase, the extremes, and the tokens of the dead dealt out | [Gains and losses](b1-lives-and-wealth.md#gains-losses-and-the-share-out) |
 | `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, `handovers` | how parents gave (phase 1) | [Reproduction statistics](measuring-lives.md#reproduction-statistics) |
-| `selfAllocationShare`, `heldHomeShare` | staking on one's own node, and keeping it (phase 2) | [Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node) |
+| `selfAllocationShare`, `heldHomeShare` | staking on one's own node, and keeping it (phase 2) | [Staking at home](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node) |
 | `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on neighbours, and the connections they keep alive (phase 2) | [Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation) |
 | `revolutions` | nodes won by a coalition (phase 2) | [Revolution](rules-in-detail.md#how-a-coalition-takes-a-node) |
 | `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup (in a game's row, after its unused connections are cut) | [Cut risk](measuring-networks.md#cut-risk) |
@@ -302,7 +313,7 @@ on other rows they are `null`:
 | `dimension`, `ricciCurvature` | dimension and curvature from how balls grow | [Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension) |
 | `boxDimension`, `boxDimensionR2` | dimension from covering the network with boxes | [Box dimension](measuring-space.md#box-dimension) |
 | `lightningScore`, `cyclingShare`, `lightningLongest`, `flowImbalance`, and the `net…` versions, `netFlowShare` | tokens that go round in loops (phase 2) | [Lightning](measuring-tokens.md#lightning-tokens-that-go-round) |
-| `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly) |
+| `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](statistics.md#fitting-a-power-law-properly) |
 | `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree`, `changeVsTokens`, and their `…R2` | how one property of agents grows with another | [Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties) |
 | `assortativity` | whether hubs join hubs | [Assortativity](measuring-networks.md#assortativity) |
 
@@ -387,14 +398,14 @@ what the estimates assume. The figure is redrawn by `python3 gol_lab.py costs`.
 
 Take the thirty runs of Experiment 2: 10,000 tokens and 3,000 iterations
 each. They are the worlds the study of the baseline was first written from
-([The life of a B1 world](a-worlds-life.md) lists their settings). They took
+([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world) lists their settings). They took
 26 hours of computing, done in 7.2 hours on four workers, and fill 7.8 GB. No
 run needed more than 651 MB of memory.
 
 That is the unit the experiments on the baseline are sized in: one condition
 of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 100,000 tokens, 1,500 iterations each
-([Thirty worlds](a-worlds-life.md#thirty-worlds)), took 211 hours and fill
+([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)), took 211 hours and fill
 58 GB.
 
 ### The rules for sizing an experiment
@@ -408,7 +419,7 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
   seconds per iteration. If the number of agents grows in step with the
   tokens, 200,000 tokens cost about 22. And it does: agents grow as the
   tokens to the power 1.00
-  ([Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)).
+  ([Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
 - Memory limits big worlds before time does. The lab starts a run only when
   its estimated peak fits next to the runs already going, in three quarters
   of the machine's memory.
@@ -426,12 +437,14 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 - [Many worlds at once](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread): how the rows of thirty runs
   become one figure.
 - [Every setting](settings.md): what a run was asked to play.
-- [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md): how a
+- [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes): how a
   world's number of agents follows its tokens.
 
 ## How our view changed
 
 - *What a run records*:
+  - **11 November 2026.** A plan may keep a frame only every `frames_every`-th
+    iteration, for long worlds that would not fit on the disk otherwise.
   - **23 October 2026.** This page said that the gift fields are `null` in
     every run of the notebook, since no run had gifts. In a run without gifts
     they are 0 in every reproduction row. Gifts have been switched on since
@@ -439,3 +452,14 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
     Experiment 24, and in half the worlds of
     [A screen of random worlds](a-screen-of-random-worlds.md). The table also
     did not say where deaths of age are counted. It does now.
+
+<!-- turns -->
+---
+
+← [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Statistics: the tools of the notebook](statistics.md) →
+
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics), [How the simulation works](../README.md#how-the-simulation-works).
+
+> [!info]- Pages that link here (32)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

@@ -65,7 +65,7 @@ the stake spread, every token revolutionary
 ([What evolution changed](what-the-brains-are-like.md#what-evolution-changed)).
 Two of its agents in the same place stake nearly seven times more alike than
 two brains drawn at random
-([Two agents in the same place](how-different-are-the-agents.md#two-agents-in-the-same-place)).
+([Two agents in the same place](b1-brains-lineages-and-messages.md#two-agents-in-the-same-place)).
 A world of such agents needs little more than their average.
 
 But since 7 November 2026 the notebook plays only worlds drawn at random and
@@ -144,7 +144,7 @@ world another run kept ([What has to be built first](#what-has-to-be-built-first
 
 **(b) A stranger's answers.** At iteration 1,500, where a world is taken up
 again, every living agent's own brain is run once on its own look, as
-[How different are the agents?](how-different-are-the-agents.md#the-experiment)
+[How different are the agents?](b1-brains-lineages-and-messages.md#the-experiment)
 runs brains in situations taken from the world itself. That gives a library of
 looks: for each agent, a column of answers for itself and one for each of its
 neighbours. From then on every look of every agent is answered from the
@@ -313,7 +313,7 @@ world's shape is its rules and its crowd's habits of answering, (d) is the
 world itself again. If it is its individuals (agents that keep one way of
 acting for life, sit where their way suits them, and pass it to their heirs),
 (d) drifts away. Agents of one kind sit in somewhat different places from
-another's ([Do kinds live in different places?](how-different-are-the-agents.md#do-kinds-live-in-different-places)),
+another's ([Do kinds live in different places?](b1-brains-lineages-and-messages.md#do-kinds-live-in-different-places)),
 and agents that keep their ways can hold a pattern that a crowd mixed afresh
 at every turn cannot, as cooperators hold out in space against defectors in
 the games of Nowak and May (1992). So the bet could well be lost.
@@ -341,7 +341,7 @@ from old ones.
 > in the same situation mostly act differently, so answers that ignore the
 > situation cannot stand in for them. But what holds a world's shape is
 > steadier than its individuals: health does not drift over a run, the
-> [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead sets how unequal a world is, and with 11
+> [share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead sets how unequal a world is, and with 11
 > to 263 effective ancestors, chance more than merit decides which line
 > carries the brains.
 >
@@ -467,7 +467,7 @@ as `random_decisions` shows: one switch at the place where a brain speaks.
   worlds whose brains never change.
 - [Did evolution happen?](did-evolution-happen.md): fourteen tests, two of
   which would share this plan's runs.
-- [How different are the agents?](how-different-are-the-agents.md): how much of
+- [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): how much of
   what an agent does comes from where it is, who it is, and chance.
 
 ## How this was made
@@ -493,7 +493,7 @@ and May, R. M. (1992), Evolutionary games and spatial chaos.
 <!-- turns -->
 ---
 
-← [Do the brains matter?](do-the-brains-matter.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [How different are the agents?](how-different-are-the-agents.md) →
+← [Do the brains matter?](do-the-brains-matter.md) · [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter) · [How big should a brain be?](how-big-should-a-brain-be.md) →
 
 > [!info]- Pages that link here (2)
 > [Do the brains matter?](do-the-brains-matter.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md)

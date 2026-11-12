@@ -82,7 +82,7 @@ because each looks like the thing we want.
    in the gutter anyway.
 4. **The first boom.** Everything a world does in its first hundred iterations
    is a world settling
-   ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
+   ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
    Numbers climb because the founders were unlike what the world becomes, and
    then they stop.
 
@@ -234,7 +234,7 @@ world beat their founders, with a rating of +207 to +465, and +361 in the
 median world. There the brains of iteration 50 held 0.90 of a world contested
 with the founders' brains: about nine-tenths. By iteration 100 the median world
 stood at +400. This is the first boom of
-[The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations),
+[The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations),
 seen from the brains' side. Whatever the founders do that does not pay, the
 first few dozen games remove.
 
@@ -350,9 +350,9 @@ B1's evolution stops early because its brains are nearly blind
 ([above](#what-it-means-for-the-search)). When brains were given sight, the
 worlds broke. So a world was built in which brains can see without the world
 breaking: **B2**, the second baseline.
-[Building B2: a world that cannot break](a-world-that-cannot-break.md) tells
-how, from [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
-to [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why). The
+[Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) tells
+how, from [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
+to [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why). The
 question now is the one B2 was built for: in such a world, does evolution keep
 going?
 
@@ -399,7 +399,7 @@ won.
 
 **Support was given up.** A stake marked as support adds to its target's
 defence instead of contesting the node. It is a gift, since the tokens go to
-the node's owner. And it buys nothing that a [home stake](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node) would
+the node's owner. And it buys nothing that a [home stake](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node) would
 not buy better. A home stake counts one and a half times, and support only
 once. Evolution gave it up: support fell from 200–300 tokens a game to about
 20 by iteration 600.
@@ -408,7 +408,7 @@ once. Evolution gave it up: support fell from 200–300 tokens a game to about
 
 Why should every world stop? Before Experiment 16, one answer looked likely.
 It starts from the game an agent plays
-([How the game is played](how-the-game-is-played.md)). An agent divides its
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). An agent divides its
 tokens between its own node and its neighbours' nodes, and each node goes to
 whoever stakes most on it. That is very nearly the oldest game in game theory
 with a name of its own: **Colonel Blotto** (Borel, 1921). Two colonels divide
@@ -739,7 +739,7 @@ rate. How large brains should be is the subject of
 [How big should a brain be?](how-big-should-a-brain-be.md), answered from round
 3: no shape of brain made a difference that could be told from chance. What
 the game asks of them is the subject of
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 and [Another game](another-game.md). What they could do together is that of
 [Alliances](another-game.md#alliances).
 
@@ -809,6 +809,8 @@ they were made with.
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
 > | [`contest`](settings.md#contest) | largest | Who takes a contested node: the `largest` stake as the game weighs it, or a staker drawn by `lottery` with a chance in proportion to its stake (needs revolutions off). |
 > | [`allocation`](settings.md#allocation) | full | How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played. |
+> | [`revolt_tokens`](settings.md#revolt_tokens) | both | What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim. |
+> | [`pool`](settings.md#pool) | off | Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side. |
 > | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
@@ -840,6 +842,7 @@ they were made with.
 > | [`mutation_probability`](settings.md#mutation_probability) | 0.2 | The probability that a brain changes when it is copied to a child, and again, for every brain, after every game. |
 > | [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.2 | How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer. |
 > | [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
+> | [`tag_rate`](settings.md#tag_rate) | 0.0 | Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's. |
 > | [`extinction_threshold`](settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 10 | one run per seed |
 > | iterations | 1,000 | how far each run goes, unless its world dies first |
@@ -877,6 +880,8 @@ they were made with.
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
 > | [`contest`](settings.md#contest) | largest | largest | Who takes a contested node: the `largest` stake as the game weighs it, or a staker drawn by `lottery` with a chance in proportion to its stake (needs revolutions off). |
 > | [`allocation`](settings.md#allocation) | full | full | How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played. |
+> | [`revolt_tokens`](settings.md#revolt_tokens) | both | both | What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim. |
+> | [`pool`](settings.md#pool) | off | off | Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side. |
 > | [`allow_gifting`](settings.md#allow_gifting) | off | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
@@ -908,6 +913,7 @@ they were made with.
 > | [`mutation_probability`](settings.md#mutation_probability) | 0.2 | 0.2 | The probability that a brain changes when it is copied to a child, and again, for every brain, after every game. |
 > | [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.2 | 0.2 | How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer. |
 > | [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.1 | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
+> | [`tag_rate`](settings.md#tag_rate) | 0.0 | 0.0 | Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's. |
 > | [`extinction_threshold`](settings.md#extinction_threshold) | 20 | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 10 | 1 to 10 | one run per seed |
 > | iterations | 2,000 | 2,000 | how far each run goes, unless its world dies first |
@@ -947,8 +953,6 @@ they were made with.
 
 [Does evolution keep going?](../README.md#does-evolution-keep-going) · [How fast should brains change?](how-fast-should-brains-change.md) →
 
-**Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
-
-> [!info]- Pages that link here (49)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Who helps whom](who-helps-whom.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Other contests: a lottery, and alliances](another-game.md) · [Gliders, and who helps whom](gliders-and-who-helps-whom.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [How runs are made, recorded and costed](runs-and-records.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (31)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [What the brains are like](what-the-brains-are-like.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

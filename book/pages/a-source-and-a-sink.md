@@ -90,7 +90,7 @@ far the richest agent of its world. In [seed](rules-in-detail.md#seeds-and-the-r
 the median agent holds 9, it could take every neighbour's node in every game,
 and its neighbours will fight for its own. A line that holds the source may
 hold it long, as a hub's place was handed down in B1
-([How a star is handed down](the-largest-and-the-smallest.md#how-a-star-is-handed-down)).
+([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 
 ## What a sink could be
 
@@ -135,7 +135,7 @@ Why the first?
 - **A piece cut off from the source runs down.** Each of its agents loses a
   token an iteration and none comes in, so the piece dies by itself. The
   islands that pieces living on would leave in a closed world
-  ([What we expect](local-rules-only.md#what-we-expect)) have a local death
+  ([Local rules only](local-rules-only.md#in-short)) have a local death
   here: the sink is a grave that needs no cull.
 - **It needs no new output from the brain**, so it can be added to any world
   of round 3 as it was drawn.
@@ -184,7 +184,7 @@ links.
 ### Three conditions
 
 1. **The local world, closed:** the control, played as condition 4 of
-   [Local rules only](local-rules-only.md#four-conditions-one-change-each).
+   [Local rules only](local-rules-only.md#in-short).
 2. **The local world, open:** the source on a node, fed *J* tokens an
    iteration, and every agent paying a token an iteration.
 3. **The same flow, spread everywhere:** the same inflow dealt out over every
@@ -263,7 +263,7 @@ measurements above will say.
 ## What has to be built first
 
 1. **The local world** of [Local rules only](local-rules-only.md), which is
-   also the closed control. In a world with the cull and a [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") over
+   also the closed control. In a world with the cull and a share-out over
    everyone, the estates of the dead would land anywhere at once, and wash any
    gradient out.
 2. **The source:** a new setting, off by default. Its inflow is
@@ -325,7 +325,7 @@ condition fills about 2.3 GB of disk.
   the light cone of the same worlds.
 - [Physical inspiration](physical-inspiration.md#why-life-is-possible-a-flow-of-low-entropy):
   why a flow of low entropy makes life possible.
-- [Where tokens flow](where-the-tokens-flow.md): the game as a random walk of
+- [Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): the game as a random walk of
   tokens, the closed world's heat.
 
 ## How this was made
@@ -338,6 +338,14 @@ table again: `python3 book_figures.py localrules`
 (`book_chapters/localrules.py`). The working notes are in `research/Plans.md`,
 under *A source and a sink*.
 
+## How our view changed
+
+- **11 November 2026.** Moved from Space and [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") to Does evolution keep
+  going?. It is the open-economy plan of the evolution track: a closed,
+  zero-sum game is one of the candidate reasons why evolution levels off, and a
+  world with a flow is the change of structure the notebook turns to if no
+  change of settings lifts the plateau. The plan itself is as it was.
+
 ## References
 
 - Bénard, H. (1900). Les tourbillons cellulaires dans une nappe liquide. *Revue générale des sciences pures et appliquées* 11, 1261–1271 and 1309–1328.
@@ -349,10 +357,10 @@ under *A source and a sink*.
 <!-- turns -->
 ---
 
-← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension) · [Particles: patterns that outlast what carries them](particles.md) →
+← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
 
-**Also about:** [Changing the rules](../README.md#changing-the-rules).
+**Also about:** [Space and dimension](../README.md#space-and-dimension), [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (3)
-> [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md)
+> [!info]- Pages that link here (4)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md)
 <!-- /turns -->

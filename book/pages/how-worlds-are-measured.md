@@ -65,8 +65,8 @@ where *m* is the number of rows in the stretch that hold the statistic.
 <!-- /figure -->
 A world spends its first hundred iterations or so in a **youth**, unlike the
 rest of its life
-([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
-Then it **wanders** ([The life of a B1 world](a-worlds-life.md)). So when the
+([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
+Then it **wanders** ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). So when the
 notebook asks where a world **settles**, it takes the mean from iteration
 500 to its end: its
 [settled life](statistics.md#the-settled-life-of-a-world).
@@ -77,7 +77,7 @@ Every world is a matter of chance. The [seed](rules-in-detail.md#seeds-and-the-r
 [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") and every random decision after. So the notebook makes many
 worlds: thirty for each [setting](settings.md "One number or switch of a run's rules, fixed before it starts."), with seeds 1, 2, …, 30, unless a page says
 otherwise. There are three per size in
-[Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md), and ten
+[Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes), and ten
 per condition for [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."). Drawn one line per world, they look like this:
 
 <!-- figure measure/thirty -->
@@ -86,7 +86,7 @@ per condition for [B2](b1-and-b2.md "The second baseline: B1 with the rules that
 **30 worlds, each a line.** The number of agents of each of the 30 baseline worlds, every line one world, averaged over stretches of 25 iterations so that the lines stay legible.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -107,7 +107,7 @@ in ten the paler band
 **The same 30 worlds, as a band.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -125,7 +125,7 @@ When the question is not *when* but *where*, the notebook draws a **dot
 plot**. It has one dot per world, at its mean over a stretch, and a short bar
 at the median. The dots are spread sideways at random only so that they do not
 hide each other; their sideways position means nothing.
-[How much does the seed decide?](how-much-does-the-seed-decide.md) and
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) and
 [Do the brains matter?](do-the-brains-matter.md) are full of them.
 
 ## Step 4 · How different are worlds?
@@ -195,14 +195,14 @@ makes the figures does nothing the recipe does not say. It is
   settled life and the spread, exactly.
 - [How sure can we be?](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds): the bootstrap, permutation tests and
   how many seeds.
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): all of
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): all of
   these at work on thirty worlds.
 
 <!-- turns -->
 ---
 
-← [Every world side by side](every-world-side-by-side.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) →
+[Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
 
 > [!info]- Pages that link here (1)
-> [How unequal is a world, and who stays rich](where-do-the-tokens-go.md)
+> [B1: lives and wealth](b1-lives-and-wealth.md)
 <!-- /turns -->

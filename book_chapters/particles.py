@@ -992,7 +992,7 @@ def particles(ch: F.Chapter) -> None:
                   "A brain: the nodes on which anyone staked over those taken by a neighbour.",
                   "An agent: the mean number of agents after a game over the mean number that were not alive "
                   "after the game before (Little's law).",
-                  "A group: flow modules followed as on [Flow modules](flow-modules.md#following-groups-through-time) "
+                  "A group: flow modules followed as on [Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time) "
                   "(web/js/flowmodules.js through tools/flowmodules_cli.js); the 99th percentile of their lives.",
                   "A place: after every game the agent with the most connections; a dynasty goes on while the "
                   "next one is the same agent or its child."]))
@@ -1229,7 +1229,7 @@ def particles(ch: F.Chapter) -> None:
                 "either way.",
                 "Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) "
                 "and follow the groups from game to game: best overlap first, each used once, none below 0.3 of "
-                "the members two modules share ([Flow modules](flow-modules.md#following-groups-through-time)).",
+                "the members two modules share ([Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time)).",
                 "Do the same with every agent's stakes on its neighbours dealt among them at random "
                 "(`--neighbours 1`) and with each game's agents dealt among modules of its sizes (`--shuffle 1`).",
                 "The share of modules followed for at least so many games; the median of each kind's worlds."]))

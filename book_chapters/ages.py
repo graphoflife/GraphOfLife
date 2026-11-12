@@ -257,7 +257,7 @@ def ages(ch: F.Chapter) -> None:
         caption=f"Of all agents born in each period of the {n} worlds' lives that were alive after at least one "
                 "game, the share that lived at least L iterations. A life is counted from the iteration of birth to the "
                 "last iteration after whose game the agent was alive, both included; lives still going at the end "
-                "of a run are counted as far as they went (Kaplan–Meier, as in [Births, deaths and ages](births-deaths-and-ages.md)). A period's line stops "
+                "of a run are counted as far as they went (Kaplan–Meier, as in [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). A period's line stops "
                 "at the longest life its agents could have had before the run ended. Both axes logarithmic.",
         recipe=recipe(W.runs_text(), LIFELINES,
                       ["For every agent, its birth iteration b and its last iteration alive d; d − b + 1 iterations "

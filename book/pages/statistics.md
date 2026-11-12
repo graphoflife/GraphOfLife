@@ -10,7 +10,11 @@
 
 ## In short
 
-The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation and fitted lines, how long a world remembers, how sure a number is, how a spread splits into parts, and how many kinds a world really holds.
+The statistics the notebook measures with, each explained from the start:
+medians and bands over many worlds, correlation and fitted lines, how to fit a
+power law, how long a world remembers, how sure a number is and how many seeds
+it takes, how a spread splits into parts, and how many kinds a world really
+holds.
 
 It gathers what were 6 pages of their own, one section each:
 
@@ -125,7 +129,7 @@ In the code, this is `bands` in `gol_analysis.py`.
 - A band says nothing about how a single world moves through time. A world
   near the top of the band at one moment can be near the bottom later. To show
   single worlds, the notebook draws them separately, as in
-  [The life of a B1 world](a-worlds-life.md).
+  [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world).
 - After a world dies, the band is made of fewer worlds. In the baseline of
   10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), four of thirty died, and its last thousand iterations are
   bands of 26. In the baseline of 100,000 tokens, none died.
@@ -152,22 +156,22 @@ life is 1,000 iterations long.
 
 A world's first few hundred iterations are unlike the rest of its life. It
 starts with a boom and a crash
-([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
+([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 Its births, deaths and structure take hundreds of iterations to settle into
 the ranges they keep
-([Births, deaths and ages](births-deaths-and-ages.md)). Averaging the youth
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). Averaging the youth
 in would mix two different things.
 
 #### Why a long mean, and not the end?
 
 A single world does not settle at one level. It **wanders**, up and down over
-hundreds of iterations ([The life of a B1 world](a-worlds-life.md)). Where it
+hundreds of iterations ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). Where it
 stands at iteration 2,999, or over its last few hundred iterations, is
 wherever the wander happens to have taken it. A mean over 2,500 iterations
 averages much of the wander away. So it says more about the world, and less
 about the moment.
 
-[How much does the seed decide?](how-much-does-the-seed-decide.md) measures
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measures
 how much. Measured over their last 100 iterations, the worlds' sizes differ by
 a third of the mean. Measured over their settled life, they differ by a
 sixth.
@@ -227,12 +231,12 @@ add up to 200,000. Divided by 4, that is 50,000, so *s* = √50,000 ≈ 224. So
 The notebook's "dot columns" show the same thing without summing it up. Each
 world is a dot at its level divided by the mean of all worlds. So 1 is the
 average world, and a column's height shows the spread
-([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### What the spread is used for
 
 - To say how much the seed decides
-  ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+  ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 - To work out how many seeds an experiment needs: the number grows with *c*²
   ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)).
 
@@ -287,7 +291,7 @@ this with a [permutation test](statistics.md#permutation-tests). It shuffles
 the *y* values against the *x* values many times, and sees how often the
 shuffled pairs give an *r* at least as large.
 
-In [How much does the seed decide?](how-much-does-the-seed-decide.md), take
+In [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide), take
 26 worlds. Their numbers of agents in the first and the second half of a run
 correlate at 0.12. Shuffled pairings reach that 28 times in 100: it is
 nothing. For [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") the correlation is 0.41, which shuffled pairings
@@ -295,7 +299,7 @@ reach only 2 times in 100.
 
 #### Correlation is not cause
 
-[How unequal is a world, and who stays rich](where-do-the-tokens-go.md) finds
+[How unequal is a world, and who stays rich](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) finds
 that agents with more connections hold more tokens. The correlation between
 the number of connections and the logarithm of the tokens is *r* = 0.50. That alone cannot say
 which way it works. Connections may make an agent rich, riches may bring
@@ -369,7 +373,7 @@ Two things to keep in mind:
 - **The line is pulled by where the points are.** Every point counts the
   same, so a crowd of points at small *x* decides the slope more than a few at
   large *x*. For distributions, this makes least squares a poor way to find an
-  exponent. [Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly) says what to do instead.
+  exponent. [Fitting a power law](#fitting-a-power-law-properly) says what to do instead.
 
 ### Logarithmic axes and power laws
 
@@ -390,7 +394,7 @@ Two things follow:
 - Take a quantity that grows by the same **factor** every step, doubling
   every three iterations say. Against time, on a logarithmic value axis, it is
   a **straight line**
-  ([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
+  ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 - Zero and negative numbers cannot be drawn: log 0 does not exist. Figures
   with logarithmic axes leave such values out, and say so.
 
@@ -413,7 +417,7 @@ line on log–log axes, and its exponent is read off as the slope. Examples:
 
 - *b* = 1: *y* grows in proportion to *x*: twice the tokens, twice the
   agents. That is the question of
-  [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md).
+  [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes).
 - *b* = −1: *y* halves when *x* doubles.
 - A curve that **bends** downward on log–log axes is not a power law. It falls
   faster and faster, as an exponential tail does.
@@ -434,12 +438,118 @@ distributions look straight over a decade or two. The notebook calls
 something a power law only when it holds over a wide range, and a bent
 alternative fits no better.
 
+### Fitting a power law properly
+
+Say the connections of a world follow a power law above some size. How is
+its exponent γ found, and where does the law begin? This section gives the
+method the literature recommends (Clauset, Shalizi and Newman 2009), with a
+small example. [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)
+applies it to the worlds of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.").
+
+#### The obvious way, and its problem
+
+The obvious way is to draw the CCDF on log–log axes and fit a straight line
+through it. The viewer's `degreeExponent` and `tokenExponent` are exactly
+that. Each is the [least-squares line](statistics.md#fitting-a-straight-line)
+of ln *P*(≥ *k*) on ln *k*, one point for each distinct value, and the
+exponent is 1 − slope.
+
+The trouble is in the points:
+
+- Neighbouring points of a cumulative distribution are not independent: each
+  contains the next.
+- The line counts every distinct value once. In the far tail each value
+  belongs to one agent or two, so a handful of agents make many of the
+  points.
+
+So the estimate wanders, and R² looks good whatever the truth. In the median
+B1 world of 100,000 tokens, the line through the whole degree distribution has
+R² = 0.96. Yet the distribution is not straight
+([The connections of one world](b1-the-network-size-and-scaling.md#the-connections-of-one-world)).
+
+#### Maximum likelihood
+
+Maximum likelihood asks a different question. If the values came from a
+power law with exponent γ, how probable would the values we see be? The best
+γ is the one that makes them most probable.
+
+Precisely: suppose the values *x*₁ … *x*ₙ from some *x*_min upward follow the
+density p(*x*) = (γ − 1) *x*_min^(γ−1) *x*^−γ. That is a power law, scaled
+so that its shares above *x*_min add up to one. The γ that makes the
+observed values most probable is
+
+$$
+\hat\gamma = 1 + n \Bigl[\sum_{i=1}^{n} \ln \frac{x_i}{x_{\min}}\Bigr]^{-1} .
+$$
+
+In words: take the logarithm of how many times over each value exceeds
+*x*_min, add these up, divide *n* by the sum, and add one. Values far above
+*x*_min make the sum large and the exponent small: that is a heavy tail. The
+estimate is uncertain by about (γ̂ − 1)/√*n*, its standard error.
+
+For whole numbers, like a degree, *x*_min is replaced by *x*_min − ½. That
+corrects most of the error of treating them as continuous.
+
+**Example.** Take a tail of four degrees, 2, 3, 4 and 8, with *k*_min = 2,
+so that the formula divides by 1.5. The logarithms of 2/1.5, 3/1.5, 4/1.5
+and 8/1.5 add up to 3.636. So γ̂ = 1 + 4/3.636 = 2.10. It is known to about
+±1.1/√4 = ±0.55, which is to say hardly at all. A tail needs many values.
+
+#### Where does the tail start?
+
+Real distributions are a power law, if at all, only above some *x*_min.
+Below it, the body bends away. So the fit tries many starts, and keeps the
+one whose fitted law sits closest to the data:
+
+1. Take up to 24 values of *k*_min, spread evenly over the distinct values.
+2. For each with at least 25 values at or above it, estimate γ̂ as above.
+3. Measure the **Kolmogorov–Smirnov distance**: the largest vertical gap
+   between the cumulative distribution of the tail and that of the fitted
+   law.
+4. Keep the *k*_min with the smallest distance.
+
+The viewer reports five numbers from this fit:
+
+- γ̂ (`degreeGamma`);
+- the *k*_min (`degreeKMin`);
+- the share of all agents in the tail (`degreeTailShare`);
+- the distance (`degreeGammaKS`);
+- R² of the CCDF over the tail (`degreeGammaR2`), which describes the fit
+  but does not test it.
+
+#### What this does not tell you
+
+The method finds the best power law. It does not prove there is one. Two
+more checks are needed.
+
+**Is the gap small enough?** Draw many samples from the fitted law, and fit
+each the same way. Then ask how often a sample fits its own law **worse**
+than the data fit theirs: how often its distance is at least the data's.
+This is the test of Clauset, Shalizi and Newman, and that share is its
+p-value. If it is 10% or less, the data are too far from a power law to be
+one. If it is larger, a power law is a plausible description, though another
+curve might be too.
+
+The viewer does not run this test; the analysis behind
+[Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)
+does. Each
+sample draws its values below *k*_min from the data's own, and its tail from
+the fitted law. The world of seed 1 gets 200 samples, and every other fit 100.
+
+**Does a different law fit as well?** A **log-normal**, a distribution whose
+logarithm is normal, often fits as well over the range one has. So does a
+power law with an exponential cut-off, which bends down at the top.
+
+And a tail is a small part of a world. In B1, the tail of the connections holds 5%
+of its agents at 10,000 tokens, and 1% at 100,000 tokens. A power law there
+says nothing about the rest.
+
 ## How long a world remembers: autocorrelation and the power spectrum
 
 A world wanders: its size, its inequality and its births go up and down over
 hundreds of iterations. The **autocorrelation** says how long it remembers
 where it was: the correlation of a world with itself, some time later. In
-[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") it falls from about 0.6 after 100 iterations to nothing after 300, so
+B1 it falls from about 0.6 after 100 iterations to nothing after 300, so
 levels 500 iterations apart are nearly independent. The **power spectrum**
 splits the wander into rhythms and says how much of it happens at each. A
 world's number of agents moves like a random walk on short scales, and is
@@ -475,7 +585,7 @@ others throughout would look like a world with a long memory.
 - In the baseline, for the number of agents: 0.61 after 100 iterations in the
   worlds of 100,000 tokens (0.68 in those of 10,000). About a third of that
   is left after 200, and nothing after 300
-  ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+  ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### Why it dips below zero
 
@@ -502,7 +612,7 @@ to −0.17.
 deeper: about −0.5 at 700 iterations. The formula assumes that the memory
 dies within a few stretches. A level that also drifts slowly over the 1,400
 iterations is pushed further by the centring.
-[How much does the seed decide?](how-much-does-the-seed-decide.md#a-world-forgets)
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#a-world-forgets)
 brackets it with two made-up levels measured the same way. A random walk
 falls to −0.66 at 900 iterations, and a level with no memory at all sits at
 −0.08.
@@ -516,6 +626,16 @@ ones. A world's settled life, iterations 500 to 2,999, is 25 stretches of
 look for a single stretch at the end. That is why the notebook measures
 worlds over their settled life
 ([The settled life of a world](statistics.md#the-settled-life-of-a-world)).
+
+#### What a B1 world remembers
+
+In B1's thirty worlds of 100,000 tokens, a world a hundred iterations on is
+still much where it was: the autocorrelation is 0.61 for the number of agents
+and 0.62 for inequality. Two hundred iterations on it is 0.21 for both, and
+three hundred on nothing is left. So a world forgets its level within about
+three hundred iterations, far faster than a random walk would
+([A world forgets](b1-the-network-size-and-scaling.md#a-world-forgets)). Two
+looks at one world that far apart are close to two looks at different worlds.
 
 ### The power spectrum of a time series
 
@@ -580,7 +700,7 @@ time *s* is *e*^(−*s*/τ) ([Autocorrelation](#autocorrelation)).
 The number of agents of the baseline worlds of 10,000 tokens has β ≈ −2.1
 for periods between 4 and 500 iterations. Its spectrum levels off for periods
 of 800 iterations and more. In the worlds of 100,000 tokens, β ≈ −1.8
-([Power laws, real and apparent](power-laws-real-and-apparent.md)). So a
+([Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)). So a
 world moves like a random walk on short scales, and is pulled back on long
 ones. Its τ is a few hundred iterations. In the small worlds, 70% of the
 variance lies at periods of 500 iterations or more, and 0.4% at periods
@@ -785,7 +905,7 @@ so 46 seeds per condition. Turned around: with 30 seeds, the smallest change
 found four times in five is Δ = (*z*₁ + *z*₂)·*c*·√(2/30) ≈ 0.12, that is
 12%. In the worlds of 100,000 tokens, measured over their settled life, *c*
 is 0.11, and 19 seeds are enough
-([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### Two lessons
 
@@ -797,8 +917,24 @@ is 0.11, and 19 seeds are enough
   needs four times the seeds.
 
 In the code, this is `seeds_needed` in `gol_analysis.py`.
-[How much does the seed decide?](how-much-does-the-seed-decide.md) draws *n*
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) draws *n*
 against Δ.
+
+#### What thirty seeds can see
+
+In B1's worlds of 100,000 tokens, measured over their settled life, thirty
+seeds per condition see a change of about 8% in the number of agents four
+times in five, 9% in connections and 5% in inequality. Measured over the last
+fifth of each run instead, a change of 10% in the number of agents takes 48
+seeds, not 19. Two more lessons came from the same worlds
+([How many seeds an experiment needs](b1-the-network-size-and-scaling.md#how-many-seeds-an-experiment-needs)):
+
+- **Pairing by seed helps little.** Two conditions run with the same seed
+  share their starting ring and founders, and little else. A comparison seed
+  by seed is about as noisy as one between unrelated worlds.
+- **Shape needs more seeds than size.** Only a few worlds in thirty grow a
+  giant [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."). A setting that made giant hubs twice as common would need far
+  more than thirty seeds to see.
 
 ## Splitting variation: where, who and chance, and between worlds and within them
 
@@ -877,7 +1013,7 @@ given in its own units. That is how far apart two agents in the same
 situation and draw are, as the standard deviation over agents. It is set
 against how far one brain is from itself over the draws.
 
-[How different are the agents?](how-different-are-the-agents.md) uses this
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) uses this
 split, with a small worked example.
 
 ### Between worlds and within them
@@ -924,7 +1060,7 @@ In the baseline worlds of 100,000 tokens the share between is a fifth to a
 quarter for most statistics: 21% for the number of agents. It is half for the
 share of agents in the core. At 10,000 tokens it is a tenth to a quarter, and
 17% for the number of agents
-([How much does the seed decide?](how-much-does-the-seed-decide.md)). So most
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)). So most
 of the variation is time, not seed.
 
 #### A caution
@@ -983,7 +1119,7 @@ use (Hill 1973). This one, of order 2, weighs the common kinds most.
 
 Two genotypes one mutation apart may act exactly alike. Counting them as two
 kinds overstates diversity. That is why
-[How different are the agents?](how-different-are-the-agents.md) groups
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) groups
 brains into kinds **by what they do**, not by their weights. Brains whose
 decisions in the same situations differ no more than a brain differs from
 itself, between two sets of random inputs, are one kind.
@@ -1047,7 +1183,7 @@ near 28 or 29.
 
 #### Where the participation ratio is used
 
-[What agents say to each other](what-agents-say-to-each-other.md) uses it on
+[What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) uses it on
 the messages agents write. There it counts how many of the 30 message numbers
 a world's messages actually use. The measure comes from physics, where it
 counts over how many sites a wave is spread (Bell and Dean 1970). In
@@ -1056,21 +1192,21 @@ neuroscience it measures the dimension of neural activity (Gao and others
 
 ## Where to go next
 
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): the
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): the
   spread of thirty worlds, statistic by statistic.
-- [The life of a B1 world](a-worlds-life.md): bands at work, and single
+- [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world): bands at work, and single
   worlds drawn one by one.
-- [Fitting a power law](power-laws-real-and-apparent.md#fitting-a-power-law-properly): how to find an exponent from a
-  distribution, and where its tail starts.
-- [How properties scale together](how-properties-scale-together.md): four
+- [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one):
+  the fit applied to the tokens, connections and cuts of B1's worlds.
+- [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together): four
   power laws fitted to every agent of a world.
 - [When a world ends](rules-in-detail.md#when-a-world-ends): the deaths of whole worlds, counted in
   shares like the one above.
-- [How different are the agents?](how-different-are-the-agents.md): the split
+- [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): the split
   of where, who and chance, measured in B1 and [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").
 - [Measuring inequality](measuring-tokens.md#entropy-and-evenness): entropy,
   evenness and 2^*H*, the effective number of order 1.
-- [What agents say to each other](what-agents-say-to-each-other.md): how many
+- [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other): how many
   directions a world's messages use.
 - [The diversity score](measuring-health.md#the-diversity-score): four spreads of a world in one
   number.
@@ -1083,14 +1219,20 @@ neuroscience it measures the dimension of neural activity (Gao and others
     *slightly* below zero, by about *S*/*m* ≈ 0.12. That holds for the worlds of
     10,000 tokens, with 29 stretches each. In the worlds of 100,000 tokens, with
     14, the dip reaches about −0.5 at 700 iterations
-    ([How much does the seed decide?](how-much-does-the-seed-decide.md#a-world-forgets)).
+    ([How much does the seed decide?](b1-the-network-size-and-scaling.md#a-world-forgets)).
 - *How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds*:
   - **24 October 2026.** The four notes became one page. The note on how many
     seeds an experiment needs had said that *c* is about 0.10 in the worlds of
     100,000 tokens. It also said that 19 seeds are enough. A spread of 0.10 would give
     16 seeds. The spread
-    [How much does the seed decide?](how-much-does-the-seed-decide.md) measures
+    [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measures
     is 0.11, and that gives 19.
+- **11 November 2026.** The pages on B1 moved to the Archive, and three methods
+  they explained, which the notebook still uses, moved here. [Fitting a power
+  law properly](#fitting-a-power-law-properly) came whole from Power laws, real
+  and apparent. [What a B1 world remembers](#what-a-b1-world-remembers) and
+  [What thirty seeds can see](#what-thirty-seeds-can-see) say in short what How
+  much does the seed decide? found.
 
 ## References
 
@@ -1116,3 +1258,14 @@ neuroscience it measures the dimension of neural activity (Gao and others
 - Hill, M. O. (1973). Diversity and evenness: a unifying notation and its
   consequences. *Ecology* 54, 427–432.
 - Simpson, E. H. (1949). Measurement of diversity. *Nature* 163, 688.
+
+<!-- turns -->
+---
+
+← [How runs are made, recorded and costed](runs-and-records.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail)
+
+**Also about:** [Methods and statistics](../README.md#methods-and-statistics), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
+
+> [!info]- Pages that link here (29)
+> [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Particles: patterns that outlast what carries them](particles.md) · [Do the brains matter?](do-the-brains-matter.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

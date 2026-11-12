@@ -533,3 +533,14 @@ settingseffects` draws this page.
   beyond chance (0.46 each, where before 0.12 and 0.15), nor mixing with
   resilience. The worlds with the fewest mechanisms have a mean health of
   0.45, where before 0.47. Everything else this page found stands.
+
+<!-- turns -->
+---
+
+← [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) →
+
+**Also about:** [Changing the rules](../README.md#changing-the-rules).
+
+> [!info]- Pages that link here (7)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

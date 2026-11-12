@@ -28,11 +28,11 @@ them. How unevenly they hold them is summed up by the
 [Gini coefficient](measuring-tokens.md#the-gini-coefficient): 0 if every agent
 held the same, near 1 if one held almost everything. B1's worlds of 100,000
 tokens settle near 0.47, and their richest tenth hold about 42% of the tokens
-([Where do the tokens go?](where-do-the-tokens-go.md)).
+([Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)).
 
 Nothing in the rules caps a fortune. In every game each agent stakes all it
 holds on its own node and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")', and whoever stakes most on a node
-takes it ([How the game is played](how-the-game-is-played.md)). A rich agent
+takes it ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). A rich agent
 can outstake its poorer neighbours everywhere at once. So why does wealth not
 pool in a few hands?
 
@@ -42,18 +42,18 @@ Four things could hold it back:
    neighbours sends its tokens out along every [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and receives theirs.
    Played over and over, this leaves each agent holding tokens in proportion to
    its connections plus one, as heat settles in a body
-   ([Rich agents are connected agents](where-do-the-tokens-go.md#rich-agents-are-connected-agents)).
+   ([Rich agents are connected agents](b1-lives-and-wealth.md#rich-agents-are-connected-agents)).
    Wealth is then as unequal as connections are.
 2. **Coalitions.** In B1, small stakers on a node can join to outweigh the
    largest one, and in every game they win about a third of all nodes
-   ([Revolutions, handover and gifts](the-switches-the-world-was-built-with.md#what-the-switches-did-to-the-world)).
+   ([Revolutions, handover and gifts](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world)).
    A rich agent cannot hold a node against a crowd.
 3. **Death and birth.** Agents die and newborns start small. The faster a
    world turns over, the less time a fortune has to grow.
-4. **The [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.").** The tokens of an agent that dies are handed on. In B1
+4. **The share-out.** The tokens of an agent that dies are handed on. In B1
    every survivor has the same chance at each token of an estate, rich or
    poor, which works like a basic income
-   ([The tokens of the dead](where-do-the-tokens-go.md#the-tokens-of-the-dead),
+   ([The tokens of the dead](b1-lives-and-wealth.md#the-tokens-of-the-dead),
    [The estate of the dead](measuring-lives.md#the-estate-of-the-dead)).
 
 This page was planned as an experiment on the second: B1 with coalitions
@@ -75,7 +75,7 @@ to its largest staker. The figure reads each over iterations 500 to 1,000.
 **Without coalitions, B1 grows more even, not less.** One dot per world (seeds 1 and 2), its median over iterations 500 to 1,000; the short bar is the middle of the two. Top: the Gini coefficient of the tokens (0 if every agent held the same, near 1 if one held all). Middle and bottom, on logarithmic axes: how many agents are born in an iteration, per hundred living, and how old the average agent is. "No coalitions": `allow_revolutions` off, so a node always goes to its largest staker. "Estates by wealth": the tokens of the dead shared out in proportion to what each survivor holds.
 
 > [!example]- How to make this figure
-> **Runs.** the pilot worlds of batch S ([Revolutions, handover and gifts](the-switches-the-world-was-built-with.md)): B1 and B2 at 10,000 tokens, each with and without coalitions (`allow_revolutions` off), and B2 with the estates of the dead shared out by wealth (`redistribution` `by_tokens`), seeds 1 and 2, played to iteration 1,000
+> **Runs.** the pilot worlds of batch S ([Revolutions, handover and gifts](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)): B1 and B2 at 10,000 tokens, each with and without coalitions (`allow_revolutions` off), and B2 with the estates of the dead shared out by wealth (`redistribution` `by_tokens`), seeds 1 and 2, played to iteration 1,000
 >
 > **Data.** From each pilot world's series, `GraphOfLifeRuns/.pilots/S/<world>-s<seed>/series.jsonl`, one row an iteration after its game (`gini`, `births`, `nodes`, `meanAge`).
 >
@@ -95,7 +95,7 @@ and the average agent is 6 to 12 iterations old. The page on the switches
 found more: nodes change hands more often without coalitions, and no agent is
 joined to more than 1% of the others, where with coalitions one agent was
 joined to 9 to 32% of them
-([What the switches did to the world](the-switches-the-world-was-built-with.md#what-the-switches-did-to-the-world)).
+([What the switches did to the world](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world)).
 
 So the guess had the cause the wrong way round. Coalitions do let a crowd beat
 the largest stake on one node. But the world they make is a calm one, of old
@@ -274,11 +274,11 @@ same thing.
 
 ## Where to go next
 
-- [Where do the tokens go?](where-do-the-tokens-go.md): B1's inequality, and
+- [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich): B1's inequality, and
   why tokens follow connections.
 - [The estate of the dead](measuring-lives.md#the-estate-of-the-dead): every rule for handing on an estate,
   and how each levels or pools.
-- [Revolutions, handover and gifts](the-switches-the-world-was-built-with.md):
+- [Revolutions, handover and gifts](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with):
   everything else that switching coalitions off does to a world.
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md):
   every setting of round 3, tested the same way.
@@ -291,7 +291,7 @@ To draw the figures again: `python3 book_figures.py wealthspread`
 - the pilot worlds of batch S, `GraphOfLifeRuns/.pilots/S/`: `S6-B1`,
   `S7-B1norev`, `S0-B2`, `S1-norev` and `S5-bytokens`, seeds 1 and 2, B1 or B2
   at 10,000 tokens, played to iteration 1,000
-  ([The pilots of batch S](the-switches-the-world-was-built-with.md#the-pilots-of-batch-s));
+  ([The pilots of batch S](what-the-switches-did-in-pilots.md#the-pilots-of-batch-s));
 - the worlds of Experiment 40 that lived to the end of their run, through
   their averages from iteration 100 on in `research/screen/health.json`, and
   their own statistics, `stats.jsonl`, for what each cleanup handed on;
@@ -309,3 +309,12 @@ To draw the figures again: `python3 book_figures.py wealthspread`
   because agents defend their own nodes, and coalitions looked like what held
   it back. Written from worlds already played, the answer is the other way
   round: without coalitions B1 is more even.
+
+<!-- turns -->
+---
+
+[Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
+
+> [!info]- Pages that link here (4)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+<!-- /turns -->

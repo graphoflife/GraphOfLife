@@ -98,7 +98,7 @@ def scaling(ch: F.Chapter) -> None:
                 "against ln(k) over all agents ([Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties)). Cyan: "
                 "tokens proportional to k + 1, through the median at k = 1 — where an even split of every "
                 "stake would leave the tokens on a network that held still "
-                "([Where the tokens flow](where-the-tokens-flow.md)).",
+                "([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read frame `{W.frame(LAST)}` of every run: each agent's tokens and its connections in `edges`.",
                        "Count the agents in each cell of the classes shown; colour by the count.",
@@ -685,7 +685,7 @@ def colours(ch: F.Chapter) -> None:
                 "connection between two of them a faint line, and the dots sit in the same places in all six pictures (a "
                 "ForceAtlas2 layout, seed 1, which pulls joined agents together). Each picture colours the "
                 "dots by one of the quantities the viewer offers ([What the viewer can colour by]"
-                "(one-world-many-colours.md#what-the-viewer-can-colour-by)): tokens and age on logarithmic scales; the change of tokens in "
+                "(measures-atlases-and-assembly.md#what-the-viewer-can-colour-by)): tokens and age on logarithmic scales; the change of tokens in "
                 "the last game and the token curvature at its start on a signed scale, blue below zero, red "
                 "above, dark at zero (both stretched logarithmically, the curvature cut at its 1st and 99th "
                 "percentile); the family — which of the genotypes alive 100 iterations earlier each agent's "
@@ -698,8 +698,8 @@ def colours(ch: F.Chapter) -> None:
                        f"Families: read frames {W.frame(LAST - 100)} to {W.frame(LAST)}, note each genotype's parent, "
                        "and climb from each "
                        f"living genotype to one alive after the game of iteration {LAST - 100:,}.",
-                       "Loops: as in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).",
-                       "Which agents are drawn: as in [What shape does the network take?](what-shape-does-the-network-take.md) (`book_chapters.society.shown`).",
+                       "Loops: as in [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world).",
+                       "Which agents are drawn: as in [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network) (`book_chapters.society.shown`).",
                        "Lay out with `networkx.forceatlas2_layout(G, max_iter=200, seed=1)` and colour."]))
     ch.number("six_views", {"agents": len(ids), "drawn": len(drawn), "piece": info,
                             "families": {str(k): v for k, v in shares.items()},

@@ -46,7 +46,7 @@ REPLAYED = {"K-reach-random-forced-s1": "B2-10000-e10e0d-s001", "Y-mix-keepone-s
 PENDING = {"Y-mix-lottery-s2", "Y-mix-unittoken-s2", "Y-mix-came-s1", "Y-mix-familysense-s1"}
 #: The steps judged: the brains of the later moment against those of the earlier.
 STEPS = [((500, 1000), "1,000/500"), ((2000, 5000), "5,000/2,000"), ((5000, 10000), "10,000/5,000")]
-RUNS = ("Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of [Healthy and rich](healthy-and-rich.md), B2 at 10,000 tokens with "
+RUNS = ("Batch LC's long runs (`GraphOfLifeRuns/.pilots/LC/`): each candidate of [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich), B2 at 10,000 tokens with "
         "the rules of the batch it came from, played on in a copy of its own from its checkpoint to 10,000 "
         "iterations (`research/oee/pilots/run.py --resume`), two of them finished by the lab from iteration 0 "
         "(Experiment 20: `B2-10000-e10e0d-s001`, `B2-10000-82bd1e-s001`); Experiment 17's ten mixed worlds "
@@ -210,7 +210,7 @@ def candidates(ch: F.Chapter) -> None:
               y={"label": "diversity score", "min": 0, "max": 1}, series=series,
               caption=("Each line is a candidate, from where it stood at iteration 1,000 (small grey dot) to where "
                        "it stood at 10,000 (large dot): green if it still met every mark of the health bar, was "
-                       "more diverse than B2's median world and poorer than none of B2's worlds — [Healthy and rich](healthy-and-rich.md)'s test "
+                       "more diverse than B2's median world and poorer than none of B2's worlds — [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s test "
                        "of a long run — violet if it fell back, red if it had died out on the way (20 agents or "
                        "fewer, the lab's line) and was refilled from its last agents. Yellow: B2's ten worlds "
                        "played on to 10,000; blue: Experiment 17's mixed worlds that lived to 10,000. The "

@@ -43,7 +43,7 @@ iterations, or until its world dies out ([The runs of Experiment
 7](#the-runs-of-experiment-7)).
 
 - **baseline**: B1 as it is. These are the thirty runs of 10,000 tokens of
-  Experiment 2 ([Two sizes of world](a-worlds-life.md#two-sizes-of-world)),
+  Experiment 2 ([Two sizes of world](b1-lives-and-wealth.md#two-sizes-of-world)),
   reused.
 - **brains never change**:
   [`mutation_sparsity`](settings.md#mutation_sparsity) = 0. A brain is still
@@ -66,7 +66,7 @@ iterations, or until its world dies out ([The runs of Experiment
 
 In the baseline the seed hardly matters. Thirty worlds that differ only in
 their seed all wander through the same range ([How much does the seed
-decide?](how-much-does-the-seed-decide.md)). Is evolution what keeps them
+decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)). Is evolution what keeps them
 alike? Two pilot worlds whose brains never change suggested so. They ended up
 nothing alike: one froze, with the same agents game after game, while the
 other boomed and crashed. Without new brains, it seemed, nothing can move a
@@ -90,7 +90,7 @@ it was written down:
 > [!quote] The thesis of Experiment 7, written down before any of its runs existed
 > **The claim.** Evolution is what makes the worlds alike. A world whose brains never change is stuck with the brain of whichever founder's line takes it over, and worlds of different seeds, stuck with different founders, end up far more different from each other than worlds that keep evolving: some still, some teeming.
 >
-> **Why it would be so.** In the baseline the seed hardly matters (Chapter [4](how-much-does-the-seed-decide.md)): every world wanders through the same range. Two pilots of a world without change, run to plan this chapter, ended up nothing alike. In one, the descendants of a single founder filled the world by iteration 50, and from about iteration 100 no one was born and no one died: the same 1,420 agents, game after game. In the other, a different founder's descendants kept the world in boom and bust, between about 1,000 and 3,200 agents, with hundreds of births in every iteration. With no new brains, nothing can move a world off the policy it was dealt.
+> **Why it would be so.** In the baseline the seed hardly matters (Chapter [4](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)): every world wanders through the same range. Two pilots of a world without change, run to plan this chapter, ended up nothing alike. In one, the descendants of a single founder filled the world by iteration 50, and from about iteration 100 no one was born and no one died: the same 1,420 agents, game after game. In the other, a different founder's descendants kept the world in boom and bust, between about 1,000 and 3,200 agents, with hundreds of births in every iteration. With no new brains, nothing can move a world off the policy it was dealt.
 >
 > **It holds if:** Over the settled life of the runs, from iteration 500 on: the number of agents varies across the surviving worlds without change by at least twice as much as across the baseline's (a spread, sd ÷ mean, of at least 0.34 against 0.17); births vary across them at least twice as much as well; and more than half of all the variation in a world's number of agents lies between the worlds rather than within each of them over time (against 0.17 in the baseline).
 >
@@ -147,7 +147,7 @@ parent gives its child. The share function turns two of the brain's numbers
 into that share. It gives all the parent's tokens when the first number is
 positive and the second is not. It gives exactly half when neither is positive
 ([A birth, decision by
-decision](how-agents-have-children.md#a-birth-decision-by-decision)). Drawn by
+decision](b1-lives-and-wealth.md#a-birth-decision-by-decision)). Drawn by
 chance, each happens about one time in four: far more often than in any
 settled world.
 
@@ -227,7 +227,7 @@ hundred agents. And not one of the thirty worlds without change died out,
 against four of the baseline's thirty.
 
 A frozen world is frozen in more than its numbers. [Flow modules: the groups
-tokens stay in](flow-modules.md#groups-in-every-world) followed five of these
+tokens stay in](b1-the-game-and-its-flows.md#groups-in-every-world) followed five of these
 worlds for fifty games. In four of them, the frozen ones, the groups that
 tokens stay in never changed either. The same agents played the same game,
 game after game.
@@ -353,7 +353,7 @@ In a world whose brains never change, the founders' lines still compete until
 one of them fills the world. In the median world that happens between
 iterations 75 and 100. In the baseline the median over all thirty worlds is
 iteration 175, as [Worlds of 100,000
-tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
 counts it. Among the 26 baseline worlds that lived to the end, it is 125. From
 then on, every agent of a world without change carries the same brain, and
 which genotype spreads is pure chance.
@@ -375,7 +375,7 @@ moves forward to a younger genotype. The figure counts those moves.
 >
 > **Data.** From the lineage analysis of Experiment 7, `book/results/E07.json` (`lineage.<condition>.runs.<run>.ancestor.moves`).
 >
-> 1. As in [Genotypes and lineages](genotypes-and-lineages.md), for every run.
+> 1. As in [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages), for every run.
 >
 > **To make it again:** `python3 book_figures.py brains`.
 <!-- /figure -->
@@ -390,14 +390,14 @@ ten times as often.
 
 So chance alone can make one line take a world over. It can do so much faster
 than in the baseline, or never, depending on how often agents are born and
-die. The sweeps of [Genotypes and lineages](genotypes-and-lineages.md) are
+die. The sweeps of [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) are
 therefore not, by themselves, evidence of selection. A fair comparison needs a
 world that is born and dies as the baseline does, while no brain is better
 than another. None of these worlds is one. The three breeding worlds come
 closest, with 0, 16 and 68 moves.
 
 The question was settled from the brains' side instead ([Selection, or
-chance?](genotypes-and-lineages.md#selection-or-chance)). Played against the
+chance?](b1-brains-lineages-and-messages.md#selection-or-chance)). Played against the
 brains of their own past, the brains of a settled B1 world only tie. So the
 lines that take a settled world over do not carry brains that play better.
 
@@ -433,7 +433,7 @@ lines that take a settled world over do not carry brains that play better.
 - **The wander needs evolution.** A world without change hardly wanders at
   all. But it is not the sweeps that drive the wander. In the large worlds of
   [Worlds of 100,000
-  tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens),
+  tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens),
   a world forgets its level within three hundred iterations. But a line needs
   about a thousand to take a world over. So the wander is faster than the
   sweeps, and not made by them ([One slow wander, in
@@ -443,9 +443,9 @@ lines that take a settled world over do not carry brains that play better.
 
 - [What the brains are like](what-the-brains-are-like.md): why B1's brains
   matter only as constants, and why they barely see.
-- [Genotypes and lineages](genotypes-and-lineages.md): how lines of descent
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): how lines of descent
   take worlds over, and whether the winners are better.
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): how
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): how
   alike thirty baseline worlds are, and how long each one remembers.
 - [How fast should brains change?](how-fast-should-brains-change.md): what the
   rate of change does to a world.
@@ -502,6 +502,8 @@ every run.
 > | [`allow_revolutions`](settings.md#allow_revolutions) | on | on | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
 > | [`contest`](settings.md#contest) | largest | largest | largest | Who takes a contested node: the `largest` stake as the game weighs it, or a staker drawn by `lottery` with a chance in proportion to its stake (needs revolutions off). |
 > | [`allocation`](settings.md#allocation) | full | full | full | How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played. |
+> | [`revolt_tokens`](settings.md#revolt_tokens) | both | both | both | What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim. |
+> | [`pool`](settings.md#pool) | off | off | off | Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side. |
 > | [`allow_gifting`](settings.md#allow_gifting) | off | off | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
 > | [`random_decisions`](settings.md#random_decisions) | off | off | **on** | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
 > | [`prune_after`](settings.md#prune_after) | blotto | blotto | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
@@ -533,6 +535,7 @@ every run.
 > | [`mutation_probability`](settings.md#mutation_probability) | 0.2 | 0.2 | 0.2 | The probability that a brain changes when it is copied to a child, and again, for every brain, after every game. |
 > | [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.2 | 0.2 | 0.2 | How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer. |
 > | [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.1 | **0** | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
+> | [`tag_rate`](settings.md#tag_rate) | 0.0 | 0.0 | 0.0 | Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's. |
 > | [`extinction_threshold`](settings.md#extinction_threshold) | 20 | 20 | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
 > | seeds | 1 to 30 | 1 to 30 | 1 to 30 | one run per seed |
 > | iterations | 3,000 | 3,000 | 3,000 | how far each run goes, unless its world dies first |
@@ -556,7 +559,7 @@ every run.
 - **14 October 2026.** From 8 October, this page gave iteration 125 as the
   baseline's median for one founder's line to fill a world. That is the median
   of the 26 worlds that lived to the end. [Worlds of 100,000
-  tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+  tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
   counts all thirty, and finds 175. The same pass made the two pages agree:
   this page now gives both.
 - **24 October 2026.** From 8 October, this page said that the 1,297 agents of
@@ -584,8 +587,8 @@ every run.
 <!-- turns -->
 ---
 
-← [What agents say to each other](what-agents-say-to-each-other.md) · [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
+← [What the brains are like](what-the-brains-are-like.md) · [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter) · [Brains replaced by their average](brains-replaced-by-their-average.md) →
 
-> [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [Where tokens flow](where-the-tokens-flow.md) · [Flow modules: the groups tokens stay in](flow-modules.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Genotypes and lineages](genotypes-and-lineages.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Every world side by side](every-world-side-by-side.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (17)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [What the brains are like](what-the-brains-are-like.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

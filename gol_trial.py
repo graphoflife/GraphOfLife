@@ -53,7 +53,8 @@ def contest(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional
     source = trial["run"]
     return gol_tournament.contest(store.source_config(source), store.kept_world(source, trial["home"]),
                                   store.kept_world(source, trial["a"]), store.kept_world(source, trial["b"]),
-                                  int(trial["T"]), int(trial["seed"]), on_step=stop)
+                                  int(trial["T"]), int(trial["seed"]), on_step=stop,
+                                  plant=trial.get("plant", "coin"))
 
 
 def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:

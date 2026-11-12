@@ -22,10 +22,18 @@ way, its blind brains first. Giving the brains sight broke the worlds, so the
 notebook built a second baseline, B2, that cannot break. There evolution goes
 on for thousands of iterations before it, too, slows to a plateau.
 
+This page is the summary of B1 as it stood in October 2026, kept in the Archive
+since 11 November 2026. The measurements it sums up are in four pages beside
+it: [B1: lives and wealth](b1-lives-and-wealth.md), [B1: the game and its
+flows](b1-the-game-and-its-flows.md), [B1: the network, size and
+scaling](b1-the-network-size-and-scaling.md) and [B1: brains, lineages and
+messages](b1-brains-lineages-and-messages.md). Round 3's worlds start from B1's
+rules but change many of them, so what is said here of B1 is not said of them.
+
 ## What the baseline world is
 
 Thirty worlds of the first baseline, [B1](b1-and-b2.md), have been looked at
-from every side ([Thirty worlds](a-worlds-life.md#thirty-worlds)). This section puts the
+from every side ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). This section puts the
 pieces together: what the theses predicted, what was found instead, what
 seems to hold across the pages, and what that changed in how the notebook
 measures.
@@ -33,8 +41,8 @@ measures.
 It was first written after Experiments 1 to 5, on worlds of 10,000 tokens,
 and kept up to date as more pages were written. Its second edition reads
 thirty worlds of 100,000 tokens. Two pages are new with it:
-[How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life) and
-[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world).
+[How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life) and
+[The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world).
 
 ### The record
 
@@ -46,20 +54,20 @@ tested it again on the worlds of 100,000.
 - [Is a run reproducible?](is-a-run-reproducible.md) Thesis **refuted**, but
   only in the last bits of a number, by how many threads the matrix library
   used. Every run now uses one thread, and is then exactly reproducible.
-- [A world's life](a-worlds-life.md). Thesis **refuted** at both sizes. At
+- [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world). Thesis **refuted** at both sizes. At
   10,000 tokens births fell by 41%, and 4 of 30 worlds died. At 100,000 none
   died and the typical world held its size; only the fall of births (28%)
   broke the thesis.
-- [How much does the seed decide?](how-much-does-the-seed-decide.md) Thesis
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) Thesis
   **refuted, narrowly**, at both sizes. The seed decides little: worlds differ
   mostly because each one wanders, not because of their seeds.
-- [Where do the tokens go?](where-do-the-tokens-go.md) Thesis **refuted** at
+- [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich) Thesis **refuted** at
   both sizes. Inequality is moderate and steady, with a [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") just
   under 0.5, and [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stake 70% of their tokens on their [neighbours](the-world.md#the-network "An agent joined to another by a connection.").
-- [What shape does the network take?](what-shape-does-the-network-take.md)
+- [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)
   Thesis **refuted**, narrowly at 10,000 tokens (a core of 53%) and more
   clearly at 100,000 (57%). The network is part tree, part web.
-- [Genotypes and lineages](genotypes-and-lineages.md). Thesis **refuted** at
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages). Thesis **refuted** at
   both sizes. A [genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") lasts two iterations. Lines of descent take the world
   over: again and again in a small world, about once a run in a large one.
 
@@ -74,30 +82,30 @@ the thirty worlds of each world's mean over iterations 500 to 1,499. The
 worlds of 10,000 tokens are given in brackets where they differ.
 
 - **About 14,400 agents** (1,300), with **3.5 [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.")** each (3.3)
-  ([A world's life](a-worlds-life.md),
-  [What shape does the network take?](what-shape-does-the-network-take.md)).
+  ([A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world),
+  [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 - **3.5 births** per hundred agents per iteration (3.1), and as many deaths.
   Three deaths in four are agents cut off from the network
-  ([Births, deaths and ages](births-deaths-and-ages.md)).
+  ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)).
 - **Ages that settle by iteration 500.** 2.4% of the living are newborns,
   and half are younger than 55 iterations. The risk of dying falls with age,
   to about one game in a hundred: there is no ageing. The ages of the living
   follow from the [lifetimes](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death."), as in a stationary population, one whose make-up
   holds still while its members come and go
-  ([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
+  ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 - **A Gini coefficient of wealth of 0.47** (0.49), with the [richest tenth](measuring-tokens.md#the-richest-tenths-share "The share of all tokens held by the richest tenth of the agents.")
   holding **42%** of the tokens (44%)
-  ([Where do the tokens go?](where-do-the-tokens-go.md)).
+  ([Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)).
 - **44%** of agents keep their node in a game (45%), and coalitions win
-  **half** of all nodes ([How the game is played](how-the-game-is-played.md)).
+  **half** of all nodes ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 - **26%** of connections are [bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut "A connection that lies on no loop: cut it and the network falls into two pieces.") (31%), **35%** of agents are leaves
   (36%), **57%** sit in a core of [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") (54%), and two agents are **18
   steps** apart (10)
-  ([What shape does the network take?](what-shape-does-the-network-take.md)).
+  ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
 - **A genotype for every 1.6 agents**, each lasting a couple of iterations,
   and lines that bring a whole world down to one founder's descendants by
   about iteration 1,000 (175 at 10,000 tokens)
-  ([Genotypes and lineages](genotypes-and-lineages.md)).
+  ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 - **Brains with a [gain](the-brain.md#how-a-signal-fades-through-layers) of 0.0015**: a change in what a
   brain sees reaches what it does at a seven-hundredth of its size. Selection
   has set their constants alike in every world: a child in 3.6% of cases, the
@@ -106,16 +114,16 @@ worlds of 10,000 tokens are given in brackets where they differ.
   ([What the brains are like](what-the-brains-are-like.md)).
 - **Messages that are names.** One agent's messages to two readers differ by
   0.0005, two agents' messages by 0.6, and agents of one genotype write the
-  same ([What agents say to each other](what-agents-say-to-each-other.md)).
+  same ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)).
 - **An order of wealth that is half forgotten in fifty to a hundred games**,
   and rich agents with one connection that die three times as often as other
-  leaves ([Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)).
+  leaves ([Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)).
 - **Connections gained in proportion to the connections an agent has**
   (as *k*^1.02) and lost faster (as *k*^1.20), and **no new connection ever
   bringing two agents closer**
-  ([How the network grows](how-agents-have-children.md#how-the-network-grows)).
+  ([How the network grows](b1-lives-and-wealth.md#how-the-network-grows)).
 - **Likeness that fades within two or three steps**: tokens, age,
-  connections and kin alike ([Like next to like](like-next-to-like.md)).
+  connections and kin alike ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)).
 - **A finite [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")**: 2.8 by how the room within *r* steps grows (2.3 at
   10,000 tokens, 3.3 in worlds of 60,000 agents), and about 1.9 by how a
   walker spreads. Random networks with the same connections have none
@@ -123,7 +131,7 @@ worlds of 10,000 tokens are given in brackets where they differ.
 - **A core** of three agents in five at the start of a game (57% after it,
   as above). It holds three quarters of the tokens and every loop. Its
   dimension by balls is a little lower than the whole world's (2.5), and the
-  same by walks ([The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
+  same by walks ([The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world)).
 
 ### What seems to hold across the pages
 
@@ -133,7 +141,7 @@ Six patterns run through the pages on B1.
 
 Watch one world's number of agents over its life: it drifts up and down,
 slowly, like the level of a lake.
-[How much does the seed decide?](how-much-does-the-seed-decide.md) measured
+[How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide) measured
 how long a world remembers its level, statistic by statistic. They all forget
 at much the same pace. A hundred iterations later a world's level is still
 clearly alike: correlations of 0.52 to 0.69 for the number of agents,
@@ -143,12 +151,12 @@ shape do not seem to wander each on its own schedule. They look like one slow
 process, seen through many windows.
 
 What could that process be? In the worlds of 10,000 tokens,
-[Genotypes and lineages](genotypes-and-lineages.md) found one with about that
+[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages) found one with about that
 rhythm. Every 350 iterations or so, one branch of the family tree outlived
 all the others, and the whole world descended from it. Was the wander made by
 these sweeps? The large worlds answer no. They forget their level within
 three hundred iterations, as the small ones do, but a line needs about a
-thousand to take one over ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+thousand to take one over ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 The wander is faster than the sweeps, and so not made by them.
 [Do the brains matter?](do-the-brains-matter.md) finds the other half of the
 answer: a world whose brains never change hardly wanders at all.
@@ -156,7 +164,7 @@ answer: a world whose brains never change hardly wanders at all.
 #### A world of attack
 
 Agents put only 29% of their staked tokens on their own node
-([How the game is played](how-the-game-is-played.md)). More than half of all
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). More than half of all
 nodes change hands in every game, and coalitions of smaller stakers take half
 of all nodes.
 
@@ -168,7 +176,7 @@ at 10,000 tokens it barely moved (25% to 30%), and defence got better all the
 same.
 
 What changed is how evenly agents stake
-([Where the tokens flow](where-the-tokens-flow.md)). Picture a node with *d*
+([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). Picture a node with *d*
 connections. Under the [even split](measuring-tokens.md#the-even-split "What the rules do when a brain scores no candidate above zero: the stake is spread evenly."), the agent living there is one of *d* + 1
 stakers on it, all staking about the same. So it keeps its node about one
 game in *d* + 1: in 74% of games with one connection, and in 2% with fifty or
@@ -184,7 +192,7 @@ Births fall long after a world's size has settled: by 28% from iterations
 the ages of the living rise. In a large world the change is over by
 iteration 500. From then on its births per agent, its lifetimes and its ages
 hold still, as a stationary population's do
-([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)). The small worlds
+([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)). The small worlds
 went on slowing until about iteration 1,250, and their living grew older than
 their lifetimes alone would make them.
 
@@ -208,17 +216,17 @@ measurements after them, follows from that one number:
 
 - The stakes are nearly even, so the game moves tokens almost as a random
   walk would: as if each token stepped, game after game, to its agent or to a
-  neighbour picked at random ([Where the tokens flow](where-the-tokens-flow.md)).
+  neighbour picked at random ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
   It does so down to the two-game rhythm of wealth that a random walk shows on
-  [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") and leaves ([Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)).
+  [hubs](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub.") and leaves ([Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)).
 - An agent's tokens are set by its place, its connections plus one, and not
-  by how it plays ([How properties scale together](how-properties-scale-together.md)).
+  by how it plays ([How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)).
   In the long run such a walk visits each agent in proportion to its
   connections plus one, its resting state; the rich are those it visits most.
 - Messages carry a name and nothing else
-  ([What agents say to each other](what-agents-say-to-each-other.md)). Kin
+  ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)). Kin
   could tell each other by it, but cannot use it
-  ([Do agents cooperate?](do-agents-cooperate.md)).
+  ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)).
 - Selection has acted, the same way in every world, but on constants: have
   few children, spread the stake, and mark every staked token revolutionary,
   so that it can join a coalition.
@@ -232,21 +240,21 @@ the notebook changed. It was not enough: it broke the worlds, as
 #### A space, not a small world
 
 New connections are only ever made inside a neighbourhood, and none brings
-two agents closer ([How the network grows](how-agents-have-children.md#how-the-network-grows)). So a
+two agents closer ([How the network grows](b1-lives-and-wealth.md#how-the-network-grows)). So a
 world grows as a body does. It does not become a "small world", in which
 everyone is a few steps from everyone. It has a finite dimension
 ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)),
 and its core is a space of the same kind
-([The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)). Its width grows with its
-size ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)),
+([The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world)). Its width grows with its
+size ([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)),
 where a random network with the same connections would be a small world.
 
 Yet nothing in this space keeps regions apart. Likeness fades within two or
-three steps ([Like next to like](like-next-to-like.md)). Lines of descent,
+three steps ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). Lines of descent,
 which last much longer than genotypes, do hold patches for a while. Two
 neighbours share a family of 25 iterations back 99 times as often as chance,
 and the excess reaches about 7 steps; for families of 200 iterations back,
-about 12 ([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). But a patch
+about 12 ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)). But a patch
 widens as a random walk on these worlds would, until one line holds the whole
 world. A world has room for regions that differ, and lines that make them for
 a while, but nothing that keeps them apart.
@@ -255,24 +263,24 @@ a while, but nothing that keeps them apart.
 
 Seven of the thirty large worlds condensed, for long stretches, around a
 single agent joined to a tenth of the world or more; in one, to more than
-half ([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+half ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 Such a world plays its game differently
-([How the game is played](how-the-game-is-played.md)). It also has a different
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). It also has a different
 shape: fewer agents in the core, and far more leaves and bridges
-([What shape does the network take?](what-shape-does-the-network-take.md)).
-[The largest and the smallest](the-largest-and-the-smallest.md) shows that
+([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
+[The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest) shows that
 the centre of a star is a place, handed down from parent to newborn child.
 
 Stars are not new with size: ten of the 26 worlds of 10,000 tokens had one by
 the same measure. But in a large world a star decides the world's whole
 shape. Across the thirty, the share of agents in the core follows the share
 joined to the largest hub almost exactly
-([How much does the seed decide?](how-much-does-the-seed-decide.md)).
+([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 B2 counts a star as a fault of the network. The [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") of
 [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)
 allows no agent to be joined to more than 5% of the others.
-[A world that cannot break](a-world-that-cannot-break.md) keeps hubs down: a
+[A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) keeps hubs down: a
 newborn's links to its parent's neighbours are drawn at random, and a brain
 may choose at most 8 links.
 
@@ -293,7 +301,7 @@ may choose at most 8 links.
   as absent.
 - **The dead are counted apart.** About one world in eight dies at 10,000
   tokens: it falls to 20 agents, which
-  [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+  [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
   later found is not always the end. None of thirty did at 100,000.
   Extinction is reported for every condition, but only a large change in it
   can be seen: from 13% to 30% would take about ninety seeds per condition
@@ -310,7 +318,7 @@ may choose at most 8 links.
 
 The measurements of B1 then read the same thirty worlds through every
 statistic the Graph of Life viewer offers: [entropy](measuring-tokens.md#entropy-and-evenness "How evenly something is shared out among the agents, from all in one place to spread perfectly evenly."), gains and losses, the
-flow of tokens, what crosses a connection, children, [power laws](power-laws-real-and-apparent.md#fitting-a-power-law-properly "A quantity whose frequency falls as a power of its size: few huge values, many small ones."), the largest
+flow of tokens, what crosses a connection, children, power laws, the largest
 and the smallest, scaling, geometry, how worlds break, pictures, cooperation.
 They closed with [Questioning the mechanics](questioning-the-mechanics.md),
 which questions the rules themselves, and with what all of it means for
@@ -323,9 +331,9 @@ important one was missing: a world in which the brains make no difference.
 So the control came first. [Do the brains matter?](do-the-brains-matter.md)
 runs worlds whose brains never change, and worlds in which every decision is
 drawn at random.
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 then asked, at the author's request, how a world's size follows its tokens.
-[Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) made the thirty worlds
+[Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens) made the thirty worlds
 this edition is written from, and asked of them the question they were made
 for: how a line takes over a world ten times the size.
 
@@ -336,7 +344,7 @@ since a brain that cannot see was the first thing to change. What happened
 when it changed is told in [The road from here](#the-road-from-here). The
 rate of mutation became [How fast should brains change?](how-fast-should-brains-change.md),
 coalitions switched off are among
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 and in [What keeps wealth spread?](what-keeps-wealth-spread.md), and
 [How big should a brain be?](how-big-should-a-brain-be.md) was answered from
 round 3's random worlds.
@@ -345,8 +353,8 @@ round 3's random worlds.
 
 The pages on B1 measured its world in every way the viewer can, and a few
 more. In the second edition they read thirty worlds of 100,000 tokens, with
-two new pages: [What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection) and
-[The largest and the smallest](the-largest-and-the-smallest.md). This section
+two new pages: [What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection) and
+[The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest). This section
 steps back and asks what all of it means for the question the notebook
 exists for: **can open-ended evolution happen in Graph of Life, and what
 would it take?**
@@ -392,27 +400,27 @@ agents are arranged and what they do to each other.
 Here is what the measurements found, put together. **Tokens** move almost as
 a random walk would, for the reason
 [Brains that cannot see](#brains-that-cannot-see) gives; they run downhill
-from rich neighbourhoods to poor ([Gains and losses](gains-and-losses.md)),
+from rich neighbourhoods to poor ([Gains and losses](b1-lives-and-wealth.md#gains-and-losses-who-gains-who-loses-and-the-share-out)),
 and never circulate. **Connections** have a price. Two connections in three
 carry one or two tokens a game, most of them one each way: an equal exchange
 that keeps the connection alive at its price of a token a game. Every
 connection that carries nothing is cut
-([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection),
-[Do agents cooperate?](do-agents-cooperate.md)). **The network** is a
+([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection),
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). **The network** is a
 stretched web of stars, grown locally by children joining their parents'
 neighbourhoods. It is four and a half times as long as a random network with
 the same connections, with a thirty-third of its [spectral gap](measuring-networks.md#the-spectral-gap "How hard a network is to cut into two halves, and how fast a walker on it forgets where it began.")
-([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)). It breaks along its
+([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)). It breaks along its
 poor regions, whose borders go quiet. Then the [cull](one-iteration.md#cleanup),
 the rule that only the largest piece of the network lives on, kills whatever
-fell off ([How a world breaks](how-a-world-breaks.md)). **Brains** spread by
+fell off ([How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks)). **Brains** spread by
 conquest seventeen times more than by birth, and change mostly in place, not
 when copied ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)).
 The brain on a hub is replaced almost every game, and the same two brains
-rarely face each other twice ([Where the tokens flow](where-the-tokens-flow.md),
-[Do agents cooperate?](do-agents-cooperate.md)). **Relatives** live together,
+rarely face each other twice ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow),
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). **Relatives** live together,
 but cannot recognise each other, and do not treat each other differently
-([Do agents cooperate?](do-agents-cooperate.md)). Almost every structural
+([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). Almost every structural
 statistic is the same in every world: it follows from the rules, not from
 what brains compute.
 
@@ -426,7 +434,7 @@ actors, the brains, change almost every game.
 whole worlds over
 ([One slow wander, in everything](#one-slow-wander-in-everything)).
 Families occupy regions that widen as their line ages, about as a random walk
-spreads ([One world, many colours](one-world-many-colours.md),
+spreads ([One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by),
 [A space, not a small world](#a-space-not-a-small-world)). And worlds whose
 brains never change end up in very different places, while worlds that
 evolve all end up alike ([Do the brains matter?](do-the-brains-matter.md)).
@@ -472,7 +480,7 @@ hubs with their stars. But nothing shows a group that persists while its
 members change. The nearest thing is a star's **dynasty**: a centre joined to
 thousands, passed from parent to newborn child for hundreds of iterations,
 while the brain on it changes every game
-([The largest and the smallest](the-largest-and-the-smallest.md)). It
+([The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)). It
 persists while its members come and go. But it is a place, kept by the rules
 of the even split, not a group that does anything together. The same two
 brains face each other one more game in only one case in twenty-five; no
@@ -485,7 +493,7 @@ last nearly as long when every agent's partners are dealt at random among its
 neighbours, and they outlast their first members only as a region outlasts
 its occupants. B2's agents add one thing of their own: pairs of partners
 that last a few games longer than chance would keep them
-([Flow modules: the groups tokens stay in](flow-modules.md)).
+([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)).
 
 **P4: out of reach** until P1 to P3 stand.
 
@@ -501,14 +509,14 @@ a time. Here each obstacle is said in a few lines, with what B2 did about it.
 were listed. But it comes before them. B1's brains barely respond to what
 they see ([Brains that cannot see](#brains-that-cannot-see)), and every remedy
 for the six needs brains that do: incumbency worth defending, tags that tell
-kin, cooperation that pays. [What agents say to each other](what-agents-say-to-each-other.md)
+kin, cooperation that pays. [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)
 adds that the tags already exist. A message is the name of its writer's
 genotype, and kin could tell each other by it, if a brain could compare what
 it reads. The remedy is in the architecture: fewer layers, a steeper
 squashing, larger starting weights
 ([How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers)).
 
-[Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
+[Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
 tried fewer layers, as the first step towards B2. One hidden layer of 16
 gives a founder a gain of about 0.2, against 0.0006 through B1's five layers.
 The worlds broke. At 5,000 tokens, four of ten seeing worlds died out, and
@@ -532,7 +540,7 @@ The six rules:
    meeting the same partner again, is about 0.04 (0.05 at 10,000 tokens)
    ([Hubs are places](questioning-the-mechanics.md#hubs-are-places)).
    *In B2* a home stake counts 1.5 times
-   ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How often the same two brains
+   ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). How often the same two brains
    meet again has not been measured there.
 4. **Nothing is positive-sum.** Tokens are conserved, and every stake is a
    transfer: no interaction makes anything that was not there before. So an
@@ -545,21 +553,21 @@ The six rules:
 5. **Nobody can tell kin from stranger.** Kin selection, help given to
    relatives who carry the same genes, has its precondition: relatives live
    together. But brains cannot see relatedness
-   ([Do agents cooperate?](do-agents-cooperate.md)). *In B2* brains that see
+   ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)). *In B2* brains that see
    could tell kin by the names in their messages
-   ([What agents say to each other](what-agents-say-to-each-other.md),
-   [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break));
+   ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other),
+   [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break));
    whether they do has not been measured. Given a sense of kin as an input,
    brains formed groups only where a rule pooled the stakes of kin
-   ([Who helps whom](who-helps-whom.md)).
+   ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 6. **The world can neither reach across nor split.** Growth is local only, so
    the network stretches, and its shortcuts are never renewed. The cull kills
    any part that separates, so populations can never diverge in isolation
    ([One rule reaches across the world](questioning-the-mechanics.md#one-rule-reaches-across-the-world)).
-   [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+   [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
    adds that a bigger world is no escape: distances grow like a power of its
    size, and the regions the cull removes grow with it. *In B2* worlds cannot
-   split at all ([A world that cannot break](a-world-that-cannot-break.md)),
+   split at all ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)),
    rather than living on apart, and long-range links were not adopted.
 
 ### What we propose to change
@@ -581,15 +589,15 @@ they are. Under each, **What came of it** says what has happened since.
 - **A germline** (§4.2), if that is not enough: every agent carries an
   unchanged copy of the brain it was born with, and passes that on.
 
-**What came of it.** [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
+**What came of it.** [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
 tried mutation at replication with brains that see (Experiment 13, ten
 worlds of 5,000 tokens). It made things worse: eight worlds died out instead
 of four ([What stands in the way](#what-stands-in-the-way)). A stricter
 variant, which changed a brain only when it was copied into a newborn, froze
 a pilot world into one genotype with no births at all. B2 keeps the rule,
 inside rules that stop worlds breaking and starving
-([A world that cannot break](a-world-that-cannot-break.md),
-[Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long a lineage now stays like
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break),
+[Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). How long a lineage now stays like
 its ancestor has not been measured. A germline has not been tried.
 
 #### Second: let individuals last
@@ -607,13 +615,13 @@ from 40–90% of the nodes a game to 15–25%, and births came back as the way
 brains spread. But one agent gathered 57% of all the tokens, staked them all
 at home where nobody could outbid them, and had child after child: a queen.
 B2 uses 1.5, with a share of every agent's tokens kept at home, and in the
-pilots no queen formed ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). How long
+pilots no queen formed ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). How long
 brains hold their nodes, and how long partners last, has not been measured.
 Under B2's cap on links no agent is joined to more than a few per cent of the
-others ([A world that cannot break](a-world-that-cannot-break.md)), so there
+others ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)), so there
 are no hubs to hold. Recombination at conquest has not been tried; brains
 have been mixed only at birth, a newborn's brain mixing its parent's with a
-neighbour's ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md)).
+neighbour's ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)).
 
 #### Third: let cooperation pay, and let kin find each other
 
@@ -634,7 +642,7 @@ holdings, was tried in the pilots for B2
 most partners, and built stars rather than partnerships. Evolution stopped as
 in every other pilot judged by short contests. Cooperation needs a surplus
 that pairs, not hubs, can earn. The messages already serve as tags
-([What agents say to each other](what-agents-say-to-each-other.md)). A family
+([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)). A family
 tag, inherited and changed now and then, was later tried in pilots
 ([Another game](another-game.md)). With a sense of family alone, the fighting
 stayed as it was; only where a rule pooled the stakes of a family did
@@ -656,7 +664,7 @@ families of hundreds form, rising and falling like empires.
 **What came of it.** The world closed instead. In the pilots for B2 an agent
 could pay tokens for a short walk through the network, and join an agent it
 met if both agreed. Few links were made, one to ten an iteration, and little
-changed. Later, [Links to strangers](links-to-strangers.md) let agents search
+changed. Later, [Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers) let agents search
 further. When a search cost tokens, hardly anyone paid for one; when it was
 free, agents reached all the time. Either way the median proposal went to an
 agent only two or three steps away. Yet every searching world evolved faster
@@ -664,7 +672,7 @@ than B2 did. B2 keeps every rule local
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md),
 [Physical inspiration](physical-inspiration.md)), so no child is joined to an
 agent anywhere. And it took the other road from letting pieces live:
-[A world that cannot break](a-world-that-cannot-break.md) adds local rules
+[A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) adds local rules
 under which worlds cannot split at all. A piece that lives on as a world of
 its own is planned for [Local rules only](local-rules-only.md). Several kinds of tokens have not
 been tried.
@@ -695,7 +703,7 @@ and the option to hold tokens back from the game
 **What came of them.** Only something like the last has been tried.
 [`keep_home`](settings.md#keep_home) keeps a share of every agent's tokens on
 its own node, so that no agent can stake itself to death
-([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)): held at home, not out of the
+([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)): held at home, not out of the
 game. The share function and the averaging of whole-agent decisions are
 unchanged.
 
@@ -713,7 +721,7 @@ measures, by rung of the ladder:
   the same world. A clean gradient, later beating earlier, is accumulation. A
   pattern of bands is cycling, as rock–paper–scissors would give.
 - **For cooperation**, the measures of
-  [Do agents cooperate?](do-agents-cooperate.md): kin discrimination;
+  [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): kin discrimination;
   Hamilton's accounting Σ(*rB* − *C*), which adds up, over every helping act,
   the benefit *B* to the one helped, weighted by how related *r* the two are,
   minus the cost *C* to the helper; reciprocity beyond the even split; the
@@ -740,11 +748,11 @@ It taught one lesson on the way: a contest must last as long as what it
 judges, in B2 an agent's lifetime. A neutral shadow judged brains that can
 grow ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). Flow modules have been
 read in worlds of every kind the notebook has made
-([Flow modules: the groups tokens stay in](flow-modules.md)). The heredity
+([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). The heredity
 half-life, selection ablation, the cooperation measures of
-[Do agents cooperate?](do-agents-cooperate.md) and evolutionary activity have
+[Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners) and evolutionary activity have
 not yet been used in the notebook. Help has been counted instead, exactly by
-the rules ([Who helps whom](who-helps-whom.md)).
+the rules ([Who helps whom](cooperation-help-and-gliders.md#who-helps-whom)).
 
 ### What the measurements changed in what this notebook teaches
 
@@ -752,15 +760,15 @@ Findings change the teaching, and the earlier pages have been brought up to
 date where they did:
 
 - **Wealth follows connections because of a law**, not a mystery: the even
-  split's resting state. [Where do the tokens go?](where-do-the-tokens-go.md)
-  now says so, and [Where the tokens flow](where-the-tokens-flow.md) derives
+  split's resting state. [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)
+  now says so, and [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow) derives
   it.
 - **"Keeping one's node" is about places**: hubs are nearly always taken
-  ([How the game is played](how-the-game-is-played.md)).
+  ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 - **The network's shape has a mechanism**: copying neighbourhoods at birth
   gives the stars, the triangles and the hierarchy
-  ([What shape does the network take?](what-shape-does-the-network-take.md),
-  [How properties scale together](how-properties-scale-together.md)).
+  ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network),
+  [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together)).
 - **"An agent" has two meanings**, the node and the brain, and the notebook
   now says which it means where it matters
   ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)).
@@ -773,7 +781,7 @@ been answered since, and one in part.
 - **Do family regions persist as organisations?** A region held by one
   lineage for hundreds of iterations, while its nodes turn over, would be a
   first candidate for P3, measurable against a null that shuffles lineages.
-  [Like next to like](like-next-to-like.md) found genotypes clustered within
+  [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) found genotypes clustered within
   two or three steps, and no territories. Lines, which last longer, sit in
   patches that widen as they age
   ([A space, not a small world](#a-space-not-a-small-world)). Whether a patch
@@ -787,18 +795,18 @@ been answered since, and one in part.
   almost nothing.
 - **Where are the old?** At 10,000 tokens a picture suggested the edges. At
   100,000 the old sit in clumps of their own
-  ([One world, many colours](one-world-many-colours.md)), as cohorts
-  ([Like next to like](like-next-to-like.md)). Age against distance from the
+  ([One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by)), as cohorts
+  ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). Age against distance from the
   hubs would say; it has not been measured.
 - **Why do worlds reproduce less as they age?** Births per agent fall over a
   world's first five hundred iterations and then, in a large world, hold
   still ([A turnover that settles late](#a-turnover-that-settles-late)).
   Founders reproduce twenty times as often as settled agents
-  ([How agents have children](how-agents-have-children.md)). That is a
+  ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)). That is a
   candidate for an adaptation, the clearest one the measurements saw, but one
   that is finished early. The cross-time tournament dates it: B1's brains
   beat their founders by iteration 50 and improve no further. And the births
-  probe of [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)
+  probe of [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)
   puts the change in the brains. Put back into their founders' world, the
   founders' own brains have a child in about three agent-iterations in four;
   B1's later brains, in 3 to 9 in a hundred.
@@ -809,22 +817,22 @@ Redoing the study of B1 on worlds ten times larger left most of it as it
 was, and that is itself a finding. Per agent, a world of 100,000 tokens does
 what a world of 10,000 does: the same births and deaths within a tenth, the
 same inequality, the same game, the same brains
-([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)). What changed is how
+([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)). What changed is how
 the agents are arranged, and how fast anything crosses a world:
 
 - **The shape changes.** Half the [clustering](measuring-networks.md#clustering "How often an agent's neighbours are also each other's neighbours."), more loops per agent, fewer
   bridges, distances twice as long, and a ball dimension that rises with size
   ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md),
-  [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)).
+  [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world)).
 - **Stars can take a world.** One world in four condensed around a single
   centre, and then everything about it, its core, its game, its cuts, follows
   from the star ([Stars](#stars),
-  [The largest and the smallest](the-largest-and-the-smallest.md)).
+  [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)).
 - **Lines take longer.** A takeover by one founder's line takes six times as
   long in a world ten times larger. So lines live side by side for most of a
   run, and the messages of a world speak more dialects
-  ([What agents say to each other](what-agents-say-to-each-other.md),
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+  ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other),
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 - **Demography settles.** In a large world, ages, lifetimes and births per
   agent hold still from iteration 500 on
   ([A turnover that settles late](#a-turnover-that-settles-late)).
@@ -851,18 +859,18 @@ above.
 The experiments did not keep this order. The notebook built its yardstick
 first ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 Then it gave the brains sight, with change only when copied
-([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break)),
+([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)),
 and the worlds broke. So it built rules that keep a world whole
-([A world that cannot break](a-world-that-cannot-break.md)) and keep agents
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)) and keep agents
 from staking or breeding themselves to death, with an incumbent's advantage
-of 1.5 ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)). Together these rules are
+of 1.5 ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)). Together these rules are
 the second baseline, B2. In B2 evolution goes on for thousands of
 iterations, more slowly as it goes, and then levels off
 ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)). What stops it is not that
 the game has no better play left: a strategy written by hand took half of a
 B2 world ([Strategies written by hand](strategies-written-by-hand.md)). The
 search runs out before the game does. What moved since is told in
-[Healthy and rich](healthy-and-rich.md) and [Rules in company](rules-in-company.md).
+[Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company).
 
 It is a long way. But the measurements have made it shorter in one important
 sense. They turned a vague hope, that interesting things might emerge if we
@@ -904,7 +912,7 @@ the rule changes of both aims will be tested together where they coincide.
   the yardstick for evolution, and how B1 fared by it.
 - [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): whether a world that cannot
   break keeps evolving.
-- [Thirty worlds](a-worlds-life.md#thirty-worlds): the thirty B1 worlds behind every number
+- [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds): the thirty B1 worlds behind every number
   here.
 
 ## How our view changed
@@ -916,20 +924,20 @@ the rule changes of both aims will be tested together where they coincide.
   that respond to what is around them.
 - **11 October 2026.** The study of B1 said that a world has room for regions
   that differ, "and nothing to make them".
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens) found that lines of
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens) found that lines of
   descent do make patches, for a while. What is missing is something to keep
   them apart.
 - **14 October 2026.** The study said that defence got better without agents
   staking more at home, and that what changed instead was not known. In the
   worlds of 100,000 tokens agents did stake more at home, but that is not the
   cause: defence got better because the stakes became even
-  ([Where the tokens flow](where-the-tokens-flow.md)).
+  ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
 - **14 October 2026.** The plan was to try single settings first, then the
   rules in the order of the proposals. The notebook built its yardstick
   first, then gave the brains sight, and the worlds broke. So it had to build
   a world that cannot break, B2, before anything else could be tried
-  ([Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break),
-  [A world that cannot break](a-world-that-cannot-break.md)).
+  ([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break),
+  [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 - **14 October 2026.** Mutation only when copied was proposed as the first
   step to real heredity. Tried with brains that see, it did harm: eight worlds
   in ten died out instead of four. B2 keeps it, but only beside rules that
@@ -937,7 +945,7 @@ the rule changes of both aims will be tested together where they coincide.
 - **14 October 2026.** Incumbency was proposed as a home stake that counts
   double. At double, one agent gathered 57% of all the tokens: a queen. B2
   uses 1.5, with 30% of every agent's tokens kept at home
-  ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
+  ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)).
 - **14 October 2026.** A yield on mutual flow was proposed to make
   cooperation pay. A yield on stakes returned went to whoever had the most
   partners, and built stars, not partnerships
@@ -945,7 +953,7 @@ the rule changes of both aims will be tested together where they coincide.
 - **14 October 2026.** The proposals would have opened the world: links to
   agents anywhere, and separated pieces that live on. B2 kept every rule local
   and made worlds that cannot split instead
-  ([A world that cannot break](a-world-that-cannot-break.md)).
+  ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 - **14 October 2026.** Blind brains were called the first obstacle, sitting
   "in the architecture, not in the world". But sight was not enough: in pilot
   worlds that could not break, seeing brains stopped improving within a few
@@ -963,14 +971,18 @@ the rule changes of both aims will be tested together where they coincide.
   runs out before the game does
   ([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops),
   [Strategies written by hand](strategies-written-by-hand.md)).
+- **11 November 2026.** Moved to the Archive as the summary of B1, beside the
+  four pages that hold its measurements. The pages it links to were merged into
+  those four, and every link leads to its section there. Its words are as they
+  were.
 
 <!-- turns -->
 ---
 
-← [B1 and B2: the two baselines](b1-and-b2.md) · [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2) · [The life of a B1 world](a-worlds-life.md) →
+[B1, as described in October 2026](../README.md#b1-as-described-in-october-2026) · [B1: lives and wealth](b1-lives-and-wealth.md) →
 
-**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
+**Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (21)
-> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [How unequal is a world, and who stays rich](where-do-the-tokens-go.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Where tokens flow](where-the-tokens-flow.md) · [Power laws, real and apparent, and how to fit one](power-laws-real-and-apparent.md) · [How properties scale together](how-properties-scale-together.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [What agents say to each other](what-agents-say-to-each-other.md) · [Do the brains matter?](do-the-brains-matter.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md)
+> [!info]- Pages that link here (15)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

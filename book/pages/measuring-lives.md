@@ -96,7 +96,7 @@ start of a reproduction phase, 3.1 have a child.
 Here are the five rates of a settled B1 world. Each is a world's mean over
 iterations 500 to 1,499. The table gives the median of the 30 worlds of
 100,000 tokens (Experiment 10;
-[Births, deaths and ages](births-deaths-and-ages.md)):
+[Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)):
 
 | per hundred agents | after reproduction | after the game |
 |---|---|---|
@@ -106,14 +106,14 @@ iterations 500 to 1,499. The table gives the median of the 30 worlds of
 
 About as many agents die as are born: the typical settled world hardly
 changes in size, while its members come and go
-([A world's life](a-worlds-life.md#a-worlds-life)). Three deaths in four are
+([A world's life](b1-lives-and-wealth.md#a-worlds-life)). Three deaths in four are
 cuts. The worlds of 10,000 tokens (Experiment 2) had a little less of
 everything: 3.1 births per hundred agents.
 
 ### In B2
 
 B2's rules were made so that none of the four can happen
-([Building B2: a world that cannot break](a-world-that-cannot-break.md#who-dies-and-why)):
+([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)):
 
 - **Nobody starves.** In the game a share of every agent's tokens stays on
   its own node, at least one token ([`keep_home`](settings.md#keep_home)).
@@ -145,11 +145,11 @@ agent in a hundred has a child in each iteration. In the ten B2 worlds of
 ### Where it is used (births and the four ways to die)
 - [One iteration, step by step](one-iteration.md#what-an-iteration-does-on-average):
   what an average iteration of a settled world does.
-- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations):
+- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
   births and deaths in a world's youth.
-- [Births, deaths and ages](births-deaths-and-ages.md): the rates over a
+- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages): the rates over a
   world's life.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md#who-dies-and-why):
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why):
   which deaths a world needs.
 
 ## The estate of the dead
@@ -174,18 +174,18 @@ Who leaves an estate depends on the rules. In B1 the starved hold nothing, so
 the estate is the tokens of the cut off, who make three deaths in four
 ([What the baseline world is](what-the-baseline-world-is.md)). In B2 no agent
 can starve or be cut off, and every agent dies at age 100, so the estate is the
-tokens of the old ([Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)).
+tokens of the old ([Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)).
 
 **The baseline rule**, `uniform`, deals the pool in one random draw, each token
 to a survivor drawn with equal chance. In the median settled B1 world of
 100,000 tokens that is about 1,300 tokens per game, 1.3% of all tokens
-([Where do the tokens go?](where-do-the-tokens-go.md#the-tokens-of-the-dead)).
+([Where do the tokens go?](b1-lives-and-wealth.md#the-tokens-of-the-dead)).
 Rich and poor have the same chance at every token, so the estate levels the
 world: in ten B1 worlds, the more of it a game scatters, the more the
 [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) falls, a correlation of −0.78 between
-the changes ([What goes with what](what-goes-with-what.md#a-whole-world-over-time)).
+the changes ([What goes with what](measures-atlases-and-assembly.md#a-whole-world-over-time)).
 In B2 worlds of 10,000 tokens the estate is small, about seventy tokens an
-iteration among 3,600 agents ([Who inherits?](who-inherits.md)).
+iteration among 3,600 agents ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)).
 
 ### Who may inherit
 
@@ -208,9 +208,9 @@ seeds each:
 
 - **By wealth** (B2, 1,000 iterations): the world held 2,450 and 2,800 agents
   against 3,400, and otherwise stayed as it was; its brains went on improving
-  ([The switches the world was built with](the-switches-the-world-was-built-with.md)).
+  ([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)).
 - **To the poorest** (2,000 iterations, as below;
-  [Who inherits?](who-inherits.md)): B2 barely changed, at 3,600 to 3,700
+  [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)): B2 barely changed, at 3,600 to 3,700
   agents. B1's worlds grew larger and younger: 2,100 to 2,300 agents against
   the controls' 800 to 1,400, and a mean age of 74 to 76 iterations against
   120 to 210.
@@ -228,21 +228,21 @@ seeds each:
 
 Experiment 31 paid the estate to the newborns, or to the parents, in B2 worlds
 whose brains are mixed at birth, with parents as mates
-([Room for the steadiest world](room-for-the-steadiest-world.md)). Its worlds
+([Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world)). Its worlds
 met every mark of the [health bar](measuring-health.md#the-health-bar) and were true spaces, 2.0 to
 2.65 times as wide as their [random twins](measuring-space.md#the-random-twin-is-a-world-a-space). But about 5,000
 agents shared the 10,000 tokens, 1.9 each, and the
 diversity score fell from 0.54–0.75 to 0.32–0.41. Experiment 32 found the
-arithmetic ([Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours)):
+arithmetic ([Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours)):
 such a world holds about a hundred agents for every birth an iteration, and the
 estates paid for 51 to 53 births an iteration, where the same world without
 them had 12 to 23.
 
 ### Where it is used (the estate of the dead)
-- [Who inherits?](who-inherits.md): four of the heirs, in B1 and in B2.
-- [What holds a world's size](what-holds-a-worlds-size.md): estates paid to
+- [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): four of the heirs, in B1 and in B2.
+- [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size): estates paid to
   births among the rules that set how many agents a world holds.
-- [Where tokens go](where-tokens-go.md#the-estate-of-the-dead): the estate beside
+- [Where tokens go](b1-the-game-and-its-flows.md#the-estate-of-the-dead): the estate beside
   the other flows of tokens.
 
 ## Age, lifetime and survival curves
@@ -287,7 +287,7 @@ An agent that never outlives a game has lifetime 0, and is not counted. That
 is a newborn cut off in the cleanup after its birth, or one that dies in the
 cleanup after its first game. There are many: in the settled B1 worlds of
 100,000 tokens, nearly a third of all newborns
-([Births, deaths and ages](births-deaths-and-ages.md)).
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)).
 
 ### Lives that have not ended
 
@@ -353,8 +353,8 @@ understate the long lives too.
 The curve *S*(*L*) starts at 1 and falls in steps. The notebook draws it on
 [logarithmic axes](statistics.md#logarithmic-axes-and-power-laws). Then both
 the many short lives and the few long ones are visible
-([Births, deaths and ages](births-deaths-and-ages.md),
-[Genotypes and lineages](genotypes-and-lineages.md)).
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages),
+[Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 The **median lifetime** is the smallest *L* with *S*(*L* + 1) ≤ ½: half of all
 lives end by then. In the code, this is `kaplan_meier(lives)` in
@@ -378,7 +378,7 @@ That is why the living look so old. In the 30 B1 worlds of 100,000 tokens
 (Experiment 10), about half of the agents that live through a game are gone
 within ten iterations. Two thirds are, if the newborns that never do are
 counted too. Yet the median age of the agents alive at the end is 54
-([Births, deaths and ages](births-deaths-and-ages.md)).
+([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)).
 
 In general, take a world in a steady state, where lifetimes *L* occur with
 frequency *p*(*L*) and have mean μ. The agents alive at a random moment have
@@ -396,7 +396,7 @@ point of its life. This is the *inspection paradox* of renewal theory.
 The B1 worlds of 10,000 tokens are not exactly in a steady state: their births
 slow down for over a thousand iterations. But the effect is the same in kind.
 Those of 100,000 tokens are in one from iteration 500 on
-([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
+([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 ### The ages of a steady world
 
@@ -422,13 +422,13 @@ Two examples. In the B1 worlds of 100,000 tokens, the lives begun from
 iteration 500 to 1,399 last 41.3 iterations on average. So the newborns should
 be 1/41.3 = 2.4% of the living, and the median age of the living 55. Over
 iterations 500 to 1,499 the worlds had 2.3 to 2.6% newborns, and a median age
-of 55 ([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
+of 55 ([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 In B2 every agent lives exactly 100 iterations. So in a steady B2 world, each
 age from 0 to 99 holds one agent in a hundred. Such a world keeps its size only
 if one agent in a hundred has a child in every iteration. B2's worlds in
 Experiment 14 had 1.00 to 1.05 births per hundred agents from iteration 200 to
-1,000 ([Building B2: a world that cannot break](a-world-that-cannot-break.md#old-age)).
+1,000 ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age)).
 
 ### The risk of dying at each age
 
@@ -461,7 +461,7 @@ the robust. A hazard that rises with age is ageing in the usual sense.
 
 The worlds show both ends. In the settled B1 worlds of 100,000 tokens the
 hazard falls at every age. It is 21% at age 1, 2.7% at 10 and 1.1% at 100
-([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)). In B2 it is 0 at
+([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)). In B2 it is 0 at
 every age below 100, and every agent that reaches 100 dies at it: ageing at
 its sharpest.
 
@@ -484,14 +484,14 @@ the area under the survival curve from *L* = 1 to 100. Every cohort born at
 least 100 iterations before the end can be measured by it in full. In the
 median B1 world of 100,000 tokens, an agent born in iterations 1 to 24 lived 5
 of its first 100 iterations. One born from iteration 500 on lived 28 to 31
-([How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life)).
+([How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life)).
 
 ### Where it is used (age)
-- [Births, deaths and ages](births-deaths-and-ages.md): how long agents live,
+- [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages): how long agents live,
   and how old the living are, in the B1 worlds.
-- [How ages change over a world's life](births-deaths-and-ages.md#how-ages-change-over-a-worlds-life): the ages of the
+- [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life): the ages of the
   living, the cohorts and the hazard, iteration by iteration.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md#old-age):
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#old-age):
   a world in which every agent dies at 100.
 
 ## Reproduction statistics
@@ -550,7 +550,7 @@ a world of 10,000 tokens, `reproTokenShare` = 13/10,000 = 0.0013.
 The baseline's worlds show the same gap. In the median B1 world of 100,000
 tokens, over its settled life, parents give 36% of what they hold. Yet all the
 tokens given to children in one phase are 1.3% of the world's
-([How births build the network](how-agents-have-children.md)).
+([How births build the network](b1-lives-and-wealth.md#how-births-build-the-network)).
 
 ### Links of a child
 
@@ -566,7 +566,7 @@ network. It dies in the cleanup that ends the phase
 100,000 tokens, 11.5% of children are joined to no candidate at birth. Two in
 five of these (39%) are handed a connection by their parent, and live. The
 rest, some 7% of all children, die at once
-([How births build the network](how-agents-have-children.md)).
+([How births build the network](b1-lives-and-wealth.md#how-births-build-the-network)).
 
 ### Handovers
 
@@ -588,26 +588,26 @@ field `gifts` counts the gifts paid, one for each giver and neighbour. The
 field `giftTokens` counts the tokens they carried, and `giftShare` is those
 tokens as a share of all tokens. Gifting is off in both baselines, so there
 all three are 0. It is on in some pilots
-([Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule)), in
+([Gifts, with every other rule](what-the-switches-did-in-pilots.md#gifts-with-every-other-rule)), in
 Experiment 24 and in half the worlds of
 [A screen of random worlds](a-screen-of-random-worlds.md).
 
 ### Where it is used (reproduction statistics)
-- [How births build the network](how-agents-have-children.md): these statistics
+- [How births build the network](b1-lives-and-wealth.md#how-births-build-the-network): these statistics
   over a world's life, in the B1 worlds.
 - [What a run records](runs-and-records.md#what-a-run-records): every field of a run's
   statistics.
 
 ## Where to go next
 
-- [Who inherits?](who-inherits.md): the experiment behind most of this page.
-- [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours): why
+- [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): the experiment behind most of this page.
+- [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours): why
   a world paid for its births fills with poor agents.
 - [Genotypes and the family tree](measuring-evolution.md#lifetimes-of-genotypes): the
   lifetimes of brains, rather than of agents.
 - [One iteration, step by step](one-iteration.md#phase-1-reproduction): the
   reproduction phase, rule by rule.
-- [How births build the network](how-agents-have-children.md): who has children,
+- [How births build the network](b1-lives-and-wealth.md#how-births-build-the-network): who has children,
   and how much they give.
 
 ## How our view changed
@@ -617,7 +617,7 @@ Experiment 24 and in half the worlds of
     four ways. It also said that a parent that gives a child at least one
     token has one.
   - **12 October 2026.** B2 was made
-    ([Building B2: a world that cannot break](a-world-that-cannot-break.md)).
+    ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
     Under its rules nobody starves or is cut off, and every agent dies of age,
     at 100. A birth needs at least ten tokens, from a parent with fewer than
     eight connections. Since 23 October 2026 the page says which rules each
@@ -626,7 +626,7 @@ Experiment 24 and in half the worlds of
   - **8 October 2026.** This page said that gifting was off in every run of the
     notebook, so that the three gift fields were absent.
   - **15 October 2026.** Pilots with gifts were played for
-    [The switches the world was built with](the-switches-the-world-was-built-with.md).
+    [The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with).
     More pilots followed, then Experiment 24 and half the worlds of
     [A screen of random worlds](a-screen-of-random-worlds.md).
   - **23 October 2026.** Reading the runs' statistics files showed that the gift
@@ -639,3 +639,14 @@ Experiment 24 and in half the worlds of
 - Kaplan, E. L. and Meier, P. (1958). Nonparametric estimation from
   incomplete observations. *Journal of the American Statistical Association*
   53, 457–481.
+
+<!-- turns -->
+---
+
+← [The rules in detail](rules-in-detail.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Measuring tokens: inequality and flow](measuring-tokens.md) →
+
+**Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Changing the rules](../README.md#changing-the-rules), [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (19)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

@@ -387,7 +387,7 @@ teammate, whether *u* has a stranger next door is news of a third agent. No
 B2 brain, of any size, can write it into a message. It could only show it
 through its own tokens or connections, at a cost. Raiders that pool their
 stakes would need the same kind of news to choose a target together
-([A crew of raiders](does-evolution-close-the-door.md#a-crew-of-raiders)).
+([A crew of raiders](strategies-written-by-hand.md#a-crew-of-raiders)).
 
 The raider needs nothing of the kind. Everything it decides comes from its
 own columns, and that is why its weights exist.
@@ -504,7 +504,7 @@ of thing.
 
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md):
   the raider, the factory, and the crowd a raid needs.
-- [Why the raiders stopped winning](does-evolution-close-the-door.md): the
+- [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning): the
   same raider in older worlds, where its patches grew too poor to raid.
 - [What a brain sees](rules-in-detail.md#what-a-brain-sees) and
   [What a brain says](rules-in-detail.md#what-a-brain-says): every input and output row of a
@@ -552,10 +552,10 @@ them, so this page has no box of runs. They were made with
 <!-- turns -->
 ---
 
-← [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [Why the raiders stopped winning](does-evolution-close-the-door.md) →
+← [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Strategies written by hand](../README.md#strategies-written-by-hand) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) →
 
-**Also about:** [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
+**Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
 > [!info]- Pages that link here (6)
-> [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
 <!-- /turns -->

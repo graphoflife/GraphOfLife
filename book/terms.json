@@ -67,7 +67,8 @@
         "nineteen candidates",
         "candidates of",
         "candidates for",
-        "equal candidates"
+        "equal candidates",
+        "round 3's candidate"
       ]
     },
     {
@@ -198,8 +199,9 @@
     },
     {
       "name": "effective kinds of staking",
-      "page": "how-different-are-the-agents",
-      "says": "How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each."
+      "page": "b1-brains-lineages-and-messages",
+      "says": "How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.",
+      "anchor": "how-different-are-the-agents"
     },
     {
       "name": "random twin",
@@ -324,13 +326,13 @@
     },
     {
       "name": "share-out",
-      "page": "gains-and-losses",
+      "page": "b1-lives-and-wealth",
       "says": "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.",
       "anchor": "gains-losses-and-the-share-out"
     },
     {
       "name": "home stake",
-      "page": "how-the-game-is-played",
+      "page": "b1-the-game-and-its-flows",
       "says": "The tokens an agent stakes on its own node, to keep it.",
       "anchor": "staking-at-home-and-keeping-ones-node"
     },
@@ -435,7 +437,7 @@
       "also": [
         "correlation function"
       ],
-      "page": "like-next-to-like",
+      "page": "b1-the-network-size-and-scaling",
       "says": "How far apart two agents can be and still be alike: how fast likeness fades with distance.",
       "anchor": "how-alike-at-a-distance"
     },
@@ -456,7 +458,7 @@
     },
     {
       "name": "token curvature",
-      "page": "gains-and-losses",
+      "page": "b1-lives-and-wealth",
       "says": "How much richer an agent's neighbourhood is than the agent itself.",
       "anchor": "token-curvature"
     },
@@ -471,7 +473,7 @@
       "also": [
         "map equation"
       ],
-      "page": "flow-modules",
+      "page": "b1-the-game-and-its-flows",
       "says": "A group of agents that a token, following the flow, tends to stay inside.",
       "anchor": "flow-modules-and-the-map-equation"
     },
@@ -591,7 +593,7 @@
     },
     {
       "name": "power law",
-      "page": "power-laws-real-and-apparent",
+      "page": "statistics",
       "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones.",
       "anchor": "fitting-a-power-law-properly"
     },
@@ -600,7 +602,7 @@
       "also": [
         "finite-size scaling"
       ],
-      "page": "which-properties-have-no-scale",
+      "page": "space-at-scale",
       "says": "Curves of one quantity measured at many sizes that fall onto one another once its values are divided by a power of the size: then the size of the whole is its only scale.",
       "anchor": "data-collapse"
     },
@@ -618,7 +620,7 @@
     },
     {
       "name": "fractional factorial",
-      "page": "eight-switches-at-once",
+      "page": "what-the-switches-did-in-pilots",
       "says": "A design that tests many switches together in few worlds, so that each one's effect can still be told apart.",
       "anchor": "many-switches-in-few-worlds-fractional-factorial-designs"
     },
@@ -642,7 +644,7 @@
     },
     {
       "name": "assembly theory",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "building-with-reusable-parts",
       "says": "A way to measure how much making went into a thing: the fewest steps that build it from basic parts, and how many copies of it there are."
     },
@@ -651,31 +653,31 @@
       "also": [
         "assembly indices"
       ],
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "the-assembly-index",
       "says": "The fewest joins that build an object from basic blocks, when anything built before can be used again."
     },
     {
       "name": "addition chain",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "the-assembly-index",
       "says": "Numbers from 1 in which each is the sum of two before it; the shortest one ending at m is the fewest joins m links can need."
     },
     {
       "name": "copy number",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "copy-number-and-assembly",
       "says": "How many identical copies of an object a collection holds."
     },
     {
       "name": "assembly",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "copy-number-and-assembly",
       "says": "Assembly theory's measure of a collection: each kind of object weighed by e to the power of its assembly index, times its copies beyond the first, over all the objects."
     },
     {
       "name": "ego network",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "ego-networks-as-molecules",
       "says": "An agent, its neighbours and the links among them: the network as one agent sees it."
     }
@@ -691,31 +693,10 @@
     "what-the-brains-are-like": [
       "dimension"
     ],
-    "one-world-many-colours": [
-      "dimension"
-    ],
     "physical-inspiration": [
       "entropy",
       "correlation",
       "hub"
-    ],
-    "every-world-side-by-side": [
-      "correlation"
-    ],
-    "power-laws-real-and-apparent": [
-      "extinction"
-    ],
-    "healthy-and-rich": [
-      "candidate"
-    ],
-    "the-candidates-played-on": [
-      "candidate"
-    ],
-    "mixed-at-birth-ten-long-worlds": [
-      "candidate"
-    ],
-    "room-for-the-steadiest-world": [
-      "candidate"
     ],
     "which-worlds-are-healthy": [
       "candidate"
@@ -743,14 +724,31 @@
     "how-this-notebook-is-written": [
       "candidate"
     ],
-    "mixing-with-every-other-rule": [
-      "candidate"
-    ],
     "measuring-evolution": [
       "hub"
     ],
-    "assembly-theory": [
+    "b1-the-network-size-and-scaling": [
+      "extinction"
+    ],
+    "what-the-switches-did-in-pilots": [
+      "candidate"
+    ],
+    "building-b2-and-the-search-for-a-healthy-rich-world": [
+      "candidate"
+    ],
+    "measures-atlases-and-assembly": [
+      "correlation",
+      "dimension",
       "hub"
+    ],
+    "README": [
+      "candidate"
+    ],
+    "round-3-eras-against-each-other": [
+      "candidate"
+    ],
+    "every-simulation": [
+      "candidate"
     ]
   }
 }

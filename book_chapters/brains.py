@@ -223,7 +223,7 @@ def brains(ch: F.Chapter) -> None:
                 "that founder's line fills the world, so which branch wins is chance.",
         recipe=recipe(E07_RUNS, "the lineage analysis of Experiment 7, `book/results/E07.json` "
                       "(`lineage.<condition>.runs.<run>.ancestor.moves`)",
-                      ["As in [Genotypes and lineages](genotypes-and-lineages.md), for every run."]))
+                      ["As in [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages), for every run."]))
     ch.number("moves", {c: describe(g) for c, g in zip(conds, groups)})
     by_kind = {}
     for run_id, v in lin["brains never change"]["runs"].items():

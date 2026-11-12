@@ -113,7 +113,7 @@ def longmixed(ch: F.Chapter) -> None:
              "y": {"label": "share of the agents", "min": 0, "max": 1}, "series": poor,
              "guides": [{"axis": "y", "at": 0.5, "label": "half"}]}],
             columns=2, title="Health and riches, every 500 iterations",
-            caption=("Each world read as [Healthy and rich](healthy-and-rich.md) reads every world, from the whole worlds the lab kept every 500 "
+            caption=("Each world read as [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) reads every world, from the whole worlds the lab kept every 500 "
                      "iterations from 10,500 on, while it lived. Left: how many of the seven marks of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)'s "
                      "health bar it meets (the dots of each world are set a little apart so that they do not hide each other). "
                      "Right: the share of its agents holding three tokens or fewer."),

@@ -4,7 +4,7 @@
     {
       "id": "start",
       "title": "Start here",
-      "about": "What this notebook is about, how to read it, and the question behind it: can evolution in a simulated world go on without end?"
+      "about": "What this notebook is about, how to read it, and the question behind it: does any set of Graph of Life's rules make worlds that pass the test of open-ended evolution over 100,000 iterations?"
     },
     {
       "id": "screen",
@@ -19,27 +19,12 @@
     {
       "id": "baselines",
       "title": "The baselines B1 and B2",
-      "about": "The two standard worlds every experiment starts from: B1, the original rules, and B2, a world that cannot break, and how it was built."
-    },
-    {
-      "id": "lives",
-      "title": "Agents' lives: births, deaths, ages",
-      "about": "Who is born, who dies and when, how old agents get, and how a world's ages change."
+      "about": "The two rule sets the notebook started from: B1, the original rules, and B2, a world that cannot break. Round 3's worlds start from B1's rules, changed as drawn; how B2 was built is in the Archive."
     },
     {
       "id": "wealth",
       "title": "Wealth: who holds the tokens",
-      "about": "How unequal a world is, who stays rich, and how gains and losses are shared out."
-    },
-    {
-      "id": "game",
-      "title": "The game and the flow of tokens",
-      "about": "How the game is played, where tokens flow, which loops they go round, and the groups they stay in."
-    },
-    {
-      "id": "network",
-      "title": "The shape and health of the network",
-      "about": "Degrees, cores, bridges, power laws and cuts: what shape the links take, and how a world breaks."
+      "about": "What keeps a world's wealth spread. B1's inequality, gains and losses, and its richest agents are in the Archive."
     },
     {
       "id": "space",
@@ -47,19 +32,14 @@
       "about": "Whether a world is a space, of how many dimensions, what folds it, and the physics the project hopes for."
     },
     {
-      "id": "size",
-      "title": "Size and riches of a world",
-      "about": "What sets how many agents a world holds, and how rich each is."
-    },
-    {
       "id": "brains",
-      "title": "Brains, and how alike agents are",
-      "about": "What the brains are and compute, the families they make, and how different agents really are."
+      "title": "Brains: what they are, and whether they matter",
+      "about": "What the brains are and compute, whether they matter, and how big they should be. B1's genotypes, lineages and messages are in the Archive."
     },
     {
       "id": "evolution",
       "title": "Does evolution keep going?",
-      "about": "How to tell whether evolution goes on, why it stops, and what would count as open-ended evolution."
+      "about": "How to tell whether evolution goes on, why it stops, and the open economy planned for when no setting lifts the plateau."
     },
     {
       "id": "strategies",
@@ -69,17 +49,12 @@
     {
       "id": "groups",
       "title": "Groups and cooperation",
-      "about": "Help, alliances, other contests and patterns that outlast their agents: do agents work together?"
+      "about": "Other contests, and alliances: do agents work together when the game lets them? Who helps whom, and the gliders, are in the Archive."
     },
     {
       "id": "rules",
       "title": "Changing the rules",
-      "about": "The switches of the engine, alone and in company: what each rule does to a world."
-    },
-    {
-      "id": "healthy",
-      "title": "Looking for a healthy, rich world",
-      "about": "The search for a world that is decentralised, resilient, about three-dimensional and full of different agents, and that keeps evolving."
+      "about": "Rules without tuned numbers. What each switch did in pilot worlds, alone and in company, is in the Archive."
     },
     {
       "id": "methods",
@@ -90,6 +65,21 @@
       "id": "reference",
       "title": "Reference: the rules and measures in detail",
       "about": "The details of the rules and of every measure the notebook uses, one reference page for each family of them, with a section for every term."
+    },
+    {
+      "id": "b1-history",
+      "title": "B1, as described in October 2026",
+      "about": "The first baseline, B1, measured from every side in October 2026: its agents' lives, its wealth, the game and where the tokens flow, the shape and size of its network, and its brains, lineages and messages."
+    },
+    {
+      "id": "history",
+      "title": "Building B2, the healthy and rich search, and the pilots",
+      "about": "How the second baseline, B2, was built so that its network cannot break; the search for a healthy world whose agents differ; and the pilots that tried the engine's switches, alone and in company."
+    },
+    {
+      "id": "side-studies",
+      "title": "Side studies",
+      "about": "Questions asked on the way that no longer bear on the main one: who helps whom, space at larger scales, atlases of measures, and assembly theory."
     }
   ],
   "pages": [
@@ -103,7 +93,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-02",
-      "summary": "The front page: what the notebook asks, where to begin, and every page by topic."
+      "summary": "The front page: the notebook's question, what it asks now, how worlds are chosen, where to begin, and every page by part and topic."
     },
     {
       "id": "what-this-notebook-is-about",
@@ -115,7 +105,7 @@
       "kind": "overview",
       "status": "written",
       "added": "2026-10-08",
-      "summary": "Living things have been inventing new kinds of things for about four billion years, and they have not stopped. No computer world has yet been shown to do the same. This notebook follows one computer world, Graph of Life."
+      "summary": "The notebook's question: does any set of Graph of Life's rules make worlds that pass the test of open-ended evolution over 100,000 iterations? Why evolution levels off, how worlds are chosen, when the notebook changes course, and the second aim."
     },
     {
       "id": "how-this-notebook-is-written",
@@ -148,8 +138,7 @@
       "title": "A screen of random worlds",
       "file": "pages/a-screen-of-random-worlds.md",
       "topics": [
-        "screen",
-        "healthy"
+        "screen"
       ],
       "kind": "experiment",
       "experiments": [
@@ -161,7 +150,7 @@
       ],
       "status": "analysed",
       "added": "2026-10-22",
-      "summary": "Round 1 of fifty worlds with every setting drawn at random found no healthy world and one interesting one: mended worlds are whole but folded, and the worlds that stay spaces break or are poor."
+      "summary": "Rounds of worlds with every setting drawn at random. Round 1 found no healthy world in fifty, round 2 was withdrawn unplayed, and round 3 drew a hundred worlds from the author's settings, of which 82 lived through their 3,000 iterations."
     },
     {
       "id": "which-worlds-are-healthy",
@@ -169,7 +158,6 @@
       "file": "pages/which-worlds-are-healthy.md",
       "topics": [
         "screen",
-        "healthy",
         "methods"
       ],
       "kind": "study",
@@ -180,7 +168,7 @@
       ],
       "status": "analysed",
       "added": "2026-11-07",
-      "summary": "Round 3's living worlds in three orders of health: every measure scored by the share of the worlds a world beats, the six criteria multiplied, added or the worst of them; few tokens culled is the sixth."
+      "summary": "Round 3's living worlds in three orders of health: every measure scored by the share of the worlds a world beats, the six criteria multiplied, added or the worst of them. Since 11 November 2026 health is only a filter, and worlds are ranked by evolution."
     },
     {
       "id": "how-the-drawn-settings-shape-a-world",
@@ -188,7 +176,6 @@
       "file": "pages/how-the-drawn-settings-shape-a-world.md",
       "topics": [
         "screen",
-        "healthy",
         "rules"
       ],
       "kind": "study",
@@ -207,8 +194,7 @@
       "file": "pages/candidates-for-open-ended-evolution.md",
       "topics": [
         "screen",
-        "evolution",
-        "healthy"
+        "evolution"
       ],
       "kind": "study",
       "experiments": [
@@ -228,7 +214,6 @@
       "topics": [
         "screen",
         "evolution",
-        "healthy",
         "methods"
       ],
       "kind": "method",
@@ -266,7 +251,7 @@
       ],
       "status": "draft",
       "added": "2026-10-09",
-      "summary": "A plan not yet played. Written on 9 October 2026 for one world of B1 at 204,800 tokens left for 100,000 iterations, it is now proposed again on round 3's candidates: three shortlisted worlds played on from iteration 3,000 to 100,000, which needs nothing new built and takes about two and a half days."
+      "summary": "A plan not yet played: three of round 3's shortlisted worlds played on from iteration 3,000 to 100,000, which needs nothing new built and takes about two and a half days. The first plan, of 9 October 2026, for one world of B1, is kept as its thesis."
     },
     {
       "id": "the-world",
@@ -387,102 +372,11 @@
       "summary": "The two sets of rules every experiment starts from: B1, the algorithm as a new run is offered it, and B2, built so that its network cannot break."
     },
     {
-      "id": "what-the-baseline-world-is",
-      "title": "What B1 is, and what stood in its way",
-      "file": "pages/what-the-baseline-world-is.md",
-      "topics": [
-        "baselines",
-        "evolution"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "The first baseline, B1, has been measured from every side, in thirty worlds of 100,000 tokens. All six theses written before its runs failed, and each failure taught something new about the world."
-    },
-    {
-      "id": "a-worlds-life",
-      "title": "The life of a B1 world",
-      "file": "pages/a-worlds-life.md",
-      "topics": [
-        "baselines",
-        "lives"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E02"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "The first baseline, B1, is studied through thirty worlds that differ only in their seed, each run for 1,500 iterations. In its youth a world booms from 1,000 founders to well over ten thousand agents, then crashes as its network breaks apart."
-    },
-    {
-      "id": "how-much-does-the-seed-decide",
-      "title": "How much does the seed decide?",
-      "file": "pages/how-much-does-the-seed-decide.md",
-      "topics": [
-        "baselines",
-        "methods"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E03"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "Thirty baseline worlds that differ only in their seed end up alike: at 100,000 tokens, their sizes vary by about a tenth of the mean."
-    },
-    {
-      "id": "a-world-that-cannot-break",
-      "title": "Building B2: a world that cannot break",
-      "file": "pages/a-world-that-cannot-break.md",
-      "topics": [
-        "baselines",
-        "network",
-        "rules",
-        "lives"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E13",
-        "E14",
-        "E15"
-      ],
-      "status": "analysed",
-      "added": "2026-10-14",
-      "summary": "B2, the notebook's second baseline, was built in three steps, each tested by an experiment. First, brains that see broke their worlds: not in one great cut, but by a steady bleeding of cut-off agents that births did not always replace (Experiment 13)."
-    },
-    {
-      "id": "births-deaths-and-ages",
-      "title": "Births, deaths and ages",
-      "file": "pages/births-deaths-and-ages.md",
-      "topics": [
-        "lives"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "From iteration 500 on, a world of 100,000 tokens keeps about 14,400 agents, but replaces about 3.5 in a hundred of them in every iteration. Three in four of those that die are cut off from the network, and the rest starve."
-    },
-    {
-      "id": "how-agents-have-children",
-      "title": "How births build the network",
-      "file": "pages/how-agents-have-children.md",
-      "topics": [
-        "lives",
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "In the first baseline, B1, every new node of a world's network is a newborn agent, and every new connection is made at a birth. Only three or four agents in a hundred have a child in an iteration, and connections raise the chance more than wealth does."
-    },
-    {
       "id": "measuring-lives",
       "title": "Measuring lives: births, deaths, ages and estates",
       "file": "pages/measuring-lives.md",
       "topics": [
         "reference",
-        "lives",
         "simulation",
         "rules",
         "methods"
@@ -491,47 +385,6 @@
       "status": "written",
       "added": "2026-11-09",
       "summary": "How the notebook counts the lives of agents: who is born and how, the four ways to die, where the tokens of the dead go, how old agents grow, and what every reproduction phase records.."
-    },
-    {
-      "id": "where-do-the-tokens-go",
-      "title": "How unequal is a world, and who stays rich",
-      "file": "pages/where-do-the-tokens-go.md",
-      "topics": [
-        "wealth"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E04"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "The founders of a world start equal, but the first births end that, and from then on a world is moderately unequal. Its Gini coefficient stays near 0.47, and the richest tenth of its agents hold about 42% of its tokens."
-    },
-    {
-      "id": "gains-and-losses",
-      "title": "Gains and losses: who gains, who loses, and the share-out",
-      "file": "pages/gains-and-losses.md",
-      "topics": [
-        "wealth",
-        "game"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Every token is staked in every game. Yet in a settled world nearly half the agents end a game with exactly what they had, because what they send out comes back."
-    },
-    {
-      "id": "the-largest-and-the-smallest",
-      "title": "The largest and the smallest",
-      "file": "pages/the-largest-and-the-smallest.md",
-      "topics": [
-        "wealth",
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-11",
-      "summary": "In a settled world, the richest agent holds about 2% of all tokens and the best-connected some 640 connections; the median agent has 2."
     },
     {
       "id": "what-keeps-wealth-spread",
@@ -553,7 +406,6 @@
         "reference",
         "wealth",
         "methods",
-        "game",
         "brains"
       ],
       "kind": "reference",
@@ -562,116 +414,11 @@
       "summary": "How the notebook measures who holds the tokens and where they go: the Gini coefficient and its companions, what the game does when a brain scores nothing, and the flow of tokens along the connections.."
     },
     {
-      "id": "where-tokens-go",
-      "title": "Where tokens go",
-      "file": "pages/where-tokens-go.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "overview",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "In every game each agent stakes all its tokens, on its own node and on its neighbours'. Seven pages measured where the tokens go, each with its own tool, and this page puts them side by side."
-    },
-    {
-      "id": "how-the-game-is-played",
-      "title": "How the game is played: what agents stake, and who wins the nodes",
-      "file": "pages/how-the-game-is-played.md",
-      "topics": [
-        "game",
-        "wealth"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "In every game, each agent stakes all its tokens on its own node and its neighbours' nodes. A node goes to its largest staker or to a coalition, and the winner's brain is copied into it. The founders' random brains play in every way there is."
-    },
-    {
-      "id": "where-the-tokens-flow",
-      "title": "Where tokens flow",
-      "file": "pages/where-the-tokens-flow.md",
-      "topics": [
-        "game"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "In every game, each agent stakes all its tokens on itself and its neighbours, and whoever wins a node keeps what was staked on it. In a settled B1 world, 30% of the tokens stay home, 51% are matched by a stake coming back, and only 20% move one way."
-    },
-    {
-      "id": "flow-modules",
-      "title": "Flow modules: the groups tokens stay in",
-      "file": "pages/flow-modules.md",
-      "topics": [
-        "game",
-        "groups"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "When an agent stakes tokens on a neighbour's node, the tokens flow along the connection between them. A flow module is a group of agents that a token wandering this flow tends to stay inside, and the map equation finds such groups."
-    },
-    {
-      "id": "what-shape-does-the-network-take",
-      "title": "The shape of the network",
-      "file": "pages/what-shape-does-the-network-take.md",
-      "topics": [
-        "network",
-        "space"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E05"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "Within a hundred iterations, the founders' ring with its few shortcuts becomes a mesh, the core, with small trees hanging off it. The core holds more than half of the agents, three quarters of the tokens and every loop."
-    },
-    {
-      "id": "power-laws-real-and-apparent",
-      "title": "Power laws, real and apparent, and how to fit one",
-      "file": "pages/power-laws-real-and-apparent.md",
-      "topics": [
-        "network",
-        "methods"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "A power law has no typical size, and on logarithmic axes it is a straight line. Least squares through such a plot gives a biased exponent."
-    },
-    {
-      "id": "how-properties-scale-together",
-      "title": "How properties scale together",
-      "file": "pages/how-properties-scale-together.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "On average, agents hold tokens in proportion to their connections plus one: the resting state of the even split. The exponent that least squares fits to this, 0.58, is no law; it says only that most agents have one or two connections."
-    },
-    {
-      "id": "how-a-world-breaks",
-      "title": "How a world breaks",
-      "file": "pages/how-a-world-breaks.md",
-      "topics": [
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Only the largest connected piece of a world's network survives each phase, so a whole region can die in one game. In a typical settled world one connection holds a ninth of it to the rest, yet such weak points almost never give way."
-    },
-    {
       "id": "measuring-networks",
       "title": "Measuring a network: connections, hubs, distances and cuts",
       "file": "pages/measuring-networks.md",
       "topics": [
         "reference",
-        "network",
-        "lives",
         "wealth",
         "space"
       ],
@@ -694,25 +441,11 @@
       "summary": "The rules of Graph of Life were chosen with physics in mind: they conserve the tokens, are the same everywhere, and are almost all local."
     },
     {
-      "id": "like-next-to-like",
-      "title": "Like next to like: how alike agents are at a distance",
-      "file": "pages/like-next-to-like.md",
-      "topics": [
-        "space",
-        "network"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "How alike are two agents a given number of steps apart, and up to how far? The correlation function and the correlation length measure it."
-    },
-    {
       "id": "how-many-dimensions-does-a-world-have",
       "title": "Is a world a space? Dimension, and what folds it",
       "file": "pages/how-many-dimensions-does-a-world-have.md",
       "topics": [
-        "space",
-        "healthy"
+        "space"
       ],
       "kind": "study",
       "status": "written",
@@ -725,41 +458,12 @@
       "file": "pages/measuring-space.md",
       "topics": [
         "reference",
-        "space",
-        "network"
+        "space"
       ],
       "kind": "reference",
       "status": "written",
       "added": "2026-11-09",
       "summary": "How the notebook reads a network as a space: three ways to measure its dimension, and the random twin, the same connections wired at random, that every reading is set against.."
-    },
-    {
-      "id": "dimensions-at-scale",
-      "title": "Dimensions at scale",
-      "file": "pages/dimensions-at-scale.md",
-      "topics": [
-        "space",
-        "size",
-        "healthy"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "Within one B1 world the dimension does not change with the scale beyond what a finite body shows: about 3 by balls and 2 by walks, as far as the rulers reach. Larger worlds read more over their first few steps, not because of their edge but because their hubs grow, and by their width they read four to five dimensions."
-    },
-    {
-      "id": "which-properties-have-no-scale",
-      "title": "Which properties have no scale?",
-      "file": "pages/which-properties-have-no-scale.md",
-      "topics": [
-        "space",
-        "size",
-        "methods"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "Measured at eight sizes and rescaled, most quantities of a B1 world keep a size of their own, and the small cuts of a game average out. But the branches behind bridges and the pieces a game cuts off follow P(s) ∝ s^−2 up to the size of the world, so a game cuts off a tenth of a world or more as often at 100,000 tokens as at 10,000."
     },
     {
       "id": "local-rules-only",
@@ -788,19 +492,6 @@
       "summary": "A plan: twin worlds that differ by one token moved between neighbours, played side by side from kept states of three candidate worlds, to measure the light cone (at most four steps a phase under local rules, which only 4 of the 24 shortlisted worlds would keep) and whether a difference grows or dies away, with heat spreading on the same network as the control."
     },
     {
-      "id": "a-source-and-a-sink",
-      "title": "A source and a sink",
-      "file": "pages/a-source-and-a-sink.md",
-      "topics": [
-        "space",
-        "rules"
-      ],
-      "kind": "experiment",
-      "status": "draft",
-      "added": "2026-10-09",
-      "summary": "A plan: tokens enter at one node, which passes to a neighbour only when it dies, and every agent pays a token an iteration that leaves the world, so the inflow replaces the total tokens as a world's one number. Tried on three candidate worlds in the local world, it expects a gradient around the source and a world that holds together without any cull."
-    },
-    {
       "id": "particles",
       "title": "Particles: patterns that outlast what carries them",
       "file": "pages/particles.md",
@@ -814,64 +505,6 @@
       "summary": "Patterns that keep their identity while what carries them is replaced, looked for in twelve worlds with three detectors, each beside a null and tried on a pattern known to be there: no ring of tokens outlasts the next stretch of games, no agent keeps a rhythm beyond a random walk's, and the groups that outlast their members are the network's own regions, which stay where they began. Only a world that froze keeps its patterns, as a crystal in which nothing is replaced."
     },
     {
-      "id": "what-holds-a-worlds-size",
-      "title": "What holds a world's size",
-      "file": "pages/what-holds-a-worlds-size.md",
-      "topics": [
-        "size",
-        "healthy"
-      ],
-      "kind": "overview",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Every agent of a B2 world dies at the age of 100, so a world keeps its size only if one agent in a hundred is born each iteration. How eagerly the agents breed decides how full the world gets; with its tokens fixed, a full world is a poor one."
-    },
-    {
-      "id": "how-does-a-worlds-size-follow-its-tokens",
-      "title": "Worlds of many sizes",
-      "file": "pages/how-does-a-worlds-size-follow-its-tokens.md",
-      "topics": [
-        "size",
-        "space"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E08",
-        "E10"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "Experiment 8 ran the first baseline, B1, at ten sizes, from 800 to 409,600 tokens. As its thesis said, agents and connections followed the tokens in proportion: about 0.14 agents per token."
-    },
-    {
-      "id": "how-alike-the-agents-are",
-      "title": "How alike the agents are",
-      "file": "pages/how-alike-the-agents-are.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Evolution can only choose among differences. The notebook has counted a world's agents in three ways. It counts the names of their brains, the numbers in them, and what they do."
-    },
-    {
-      "id": "genotypes-and-lineages",
-      "title": "Genotypes and lineages",
-      "file": "pages/genotypes-and-lineages.md",
-      "topics": [
-        "brains",
-        "evolution"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E06"
-      ],
-      "status": "analysed",
-      "added": "2026-10-08",
-      "summary": "A genotype names one exact brain, and in B1 brains change so often that a genotype lasts about two iterations. A world holds about five genotypes for every eight agents, and the most common one usually holds only about 1% of it."
-    },
-    {
       "id": "what-the-brains-are-like",
       "title": "What the brains are like",
       "file": "pages/what-the-brains-are-like.md",
@@ -882,18 +515,6 @@
       "status": "written",
       "added": "2026-10-09",
       "summary": "Every agent decides with a brain of 15,795 numbers, and we tested the brains of thirty B1 worlds at the end of their runs. They are nearly blind: a change in what a brain sees reaches what it does about a thousand times smaller."
-    },
-    {
-      "id": "what-agents-say-to-each-other",
-      "title": "What agents say to each other",
-      "file": "pages/what-agents-say-to-each-other.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-09",
-      "summary": "Each agent writes a message of 30 numbers to itself and to each neighbour, and nothing but the brains gives the numbers a meaning. At the end of thirty B1 worlds, two messages of one agent differ by 0.0005, while those of two agents differ by 0.60."
     },
     {
       "id": "do-the-brains-matter",
@@ -921,18 +542,6 @@
       "status": "draft",
       "added": "2026-10-09",
       "summary": "A plan not yet played: six ways for agents to decide, from chance to the world as it is, each played on from iteration 1,500 of five of round 3's shortlisted worlds beside the world's own replays. Its draft thesis expects that a world needs the way its crowd of brains answers what each agent sees, not who answers: a brain drawn afresh from the world's own at every look makes it itself again."
-    },
-    {
-      "id": "how-different-are-the-agents",
-      "title": "How different are the agents?",
-      "file": "pages/how-different-are-the-agents.md",
-      "topics": [
-        "brains"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "We put the brains of a world's agents into the same situations, with the same random numbers, and compare what they do. In B2 they do not act alike: nine pairs in ten stake measurably differently, in about 17 effective kinds of staking."
     },
     {
       "id": "how-big-should-a-brain-be",
@@ -970,8 +579,7 @@
       "title": "Does evolution keep going?",
       "file": "pages/how-to-tell-a-world-that-keeps-evolving.md",
       "topics": [
-        "evolution",
-        "healthy"
+        "evolution"
       ],
       "kind": "experiment",
       "experiments": [
@@ -1015,32 +623,39 @@
       "summary": "The notebook's two longest worlds are Experiment 18's, whose brains are mixed at birth, played to 50,000 iterations. Experiment 28 played the brains of every 2,500th iteration of each against the brains of three fixed moments: 2,500, 10,000 and 25,000."
     },
     {
-      "id": "assembly-theory",
-      "title": "Assembly theory: how many steps to make a thing, and how many copies",
-      "file": "pages/assembly-theory.md",
+      "id": "a-source-and-a-sink",
+      "title": "A source and a sink",
+      "file": "pages/a-source-and-a-sink.md",
       "topics": [
         "evolution",
         "space",
-        "methods"
+        "rules"
       ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-11-09",
-      "summary": "Assembly theory counts the fewest joins that build a thing from parts and how many copies of it exist. Tried on the agents' neighbourhoods, its index turns out to be set by how many links a neighbourhood has, and the worlds hold about as much assembly as random networks with the same degrees. Over every world of round 3, a world's assembly follows a cap on links, not its health."
+      "kind": "experiment",
+      "status": "draft",
+      "added": "2026-10-09",
+      "summary": "A plan: tokens enter at one node, which passes to a neighbour only when it dies, and every agent pays a token an iteration that leaves the world, so the inflow replaces the total tokens as a world's one number. Tried on three candidate worlds in the local world, it expects a gradient around the source and a world that holds together without any cull."
     },
     {
       "id": "strategies-written-by-hand",
       "title": "Can a strategy written by hand beat evolution?",
       "file": "pages/strategies-written-by-hand.md",
       "topics": [
-        "strategies"
+        "strategies",
+        "evolution",
+        "groups",
+        "baselines"
       ],
       "kind": "study",
       "status": "analysed",
       "added": "2026-10-15",
-      "summary": "Evolution in B2's worlds slows down as they age: is the play it has found the best there is? To find out, we planted rules written by hand as a patch in evolved B2 worlds.",
+      "summary": "Rules written by hand, planted in evolved B2 worlds, can beat evolution's play, given a raid, a password and a crowd of about a hundred (Experiment 29). In older worlds the raiders stopped winning: the worlds had grown too poor (Experiments 30 and 33 to 35).",
       "experiments": [
-        "E29"
+        "E29",
+        "E30",
+        "E33",
+        "E34",
+        "E35"
       ]
     },
     {
@@ -1057,27 +672,6 @@
       "summary": "A raider written in Python took 40% and 62% of two evolved B2 worlds, with play that evolution had never found. Yet 12 units of a B2 brain, with weights set by hand, decide as the rule does in all but eight of 62,114 situations."
     },
     {
-      "id": "does-evolution-close-the-door",
-      "title": "Why the raiders stopped winning",
-      "file": "pages/does-evolution-close-the-door.md",
-      "topics": [
-        "strategies",
-        "evolution",
-        "groups",
-        "baselines"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E30",
-        "E33",
-        "E34",
-        "E35"
-      ],
-      "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "A raider written by hand took hold in young B2 worlds, but not in the same worlds grown older (Experiment 30). The worlds had not learned to defend themselves: their patches grew too poor, and a raider needs three tokens to take a neighbour of one."
-    },
-    {
       "id": "one-agent-in-a-sea-of-average-agents",
       "title": "One agent in a sea of average agents",
       "file": "pages/one-agent-in-a-sea-of-average-agents.md",
@@ -1089,30 +683,6 @@
       "status": "draft",
       "added": "2026-10-09",
       "summary": "A plan not yet played: in a sea of agents that answer every look with a brain drawn afresh from the world's own, one agent planted as a leaf with a brain of its own, fixed and inherited (a brain of the sea, the world's main line's, or its future's), beside a marked agent of the sea in the same place. Its draft thesis expects that no brain gains by being an individual, and that none takes hold in more than one planting in ten."
-    },
-    {
-      "id": "who-helps-whom",
-      "title": "Who helps whom",
-      "file": "pages/who-helps-whom.md",
-      "topics": [
-        "groups"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Cooperation means paying a cost so that someone else gains, and in Graph of Life the only act is a stake. A stake helps a neighbour if, without it, the neighbour would have been more likely to lose its node."
-    },
-    {
-      "id": "do-agents-cooperate",
-      "title": "Do agents cooperate? Help, kin and partners",
-      "file": "pages/do-agents-cooperate.md",
-      "topics": [
-        "groups"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Cooperation means paying a cost so that someone else gains. In Graph of Life the only act is a stake. A stake on a neighbour's node helps if, without it, the neighbour would have been more likely to lose that node."
     },
     {
       "id": "another-game",
@@ -1128,43 +698,6 @@
       "summary": "In the game of Graph of Life, a node goes to whoever stakes most on it. This page changes that contest in pilot worlds, two seeds each, and asks whether evolution then goes on."
     },
     {
-      "id": "gliders-and-who-helps-whom",
-      "title": "Gliders, and who helps whom",
-      "file": "pages/gliders-and-who-helps-whom.md",
-      "topics": [
-        "groups",
-        "game"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-15",
-      "summary": "When an agent takes a neighbour's node with at least half of its tokens, its wealth and a copy of its brain move there together."
-    },
-    {
-      "id": "rules-in-company",
-      "title": "Rules in company",
-      "file": "pages/rules-in-company.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "overview",
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "Most experiments threw one rule at a time into B2. Six pilot batches threw them in together: four paired one rule with each of the others, and two threw eight in at once."
-    },
-    {
-      "id": "the-switches-the-world-was-built-with",
-      "title": "Revolutions, handover and gifts: the switches the world was built with",
-      "file": "pages/the-switches-the-world-was-built-with.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-15",
-      "summary": "The engine of Graph of Life came with three switches of its own. Revolutions let small stakers unite against the largest, handover lets a parent pass links to its child, and gifts let an agent pay a neighbour."
-    },
-    {
       "id": "rules-without-numbers",
       "title": "Rules without numbers",
       "file": "pages/rules-without-numbers.md",
@@ -1178,177 +711,17 @@
       "summary": "B2, the world that cannot break, has seven numbers in its rules that were chosen by hand, and the notebook asks for rules without them. Taken away all at once, the numbers show what each was for: without alliances the worlds died out."
     },
     {
-      "id": "who-inherits",
-      "title": "Who inherits?",
-      "file": "pages/who-inherits.md",
-      "topics": [
-        "rules",
-        "healthy"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "When an agent dies, the cleanup shares its tokens out among the survivors: until now evenly, every survivor with the same chance at every token. Four other rules were played in pilot worlds of B2 and B1."
-    },
-    {
-      "id": "mixed-brains-costly-units",
-      "title": "Brains mixed at birth, units that cost, an eye for raids on kin",
-      "file": "pages/mixed-brains-costly-units.md",
-      "topics": [
-        "rules",
-        "brains"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "Three changes to B2 were tried in pilot worlds, each aimed at a different part of how evolution works. Brains mixed at birth made the worlds small and combative, and in one of two worlds gave the largest steps of evolution yet."
-    },
-    {
-      "id": "links-to-strangers",
-      "title": "Links to strangers",
-      "file": "pages/links-to-strangers.md",
-      "topics": [
-        "rules",
-        "network"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Agents of B2 were given a way to look for a stranger and propose a link. It was a paid jump, a paid scout that walks step by step, or a free reach. When a search costs tokens, hardly anyone pays for it; when it is free, agents reach all the time."
-    },
-    {
-      "id": "mixing-with-every-other-rule",
-      "title": "Brains mixed at birth, with every other rule",
-      "file": "pages/mixing-with-every-other-rule.md",
-      "topics": [
-        "rules"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Mixing a newborn's brain from its parent's and a neighbour's makes B2's worlds rich, because agents put off having children. Batch Y played mixing together with 23 other rules, one at a time. With sixteen of them, mixing keeps its riches."
-    },
-    {
-      "id": "eight-switches-at-once",
-      "title": "Eight switches at once, and how sixteen worlds can test them",
-      "file": "pages/eight-switches-at-once.md",
-      "topics": [
-        "rules",
-        "methods"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-17",
-      "summary": "Most experiments threw one switch at a time into B2, the baseline whose network cannot break. Batch U threw eight together in sixteen worlds, chosen by a fractional factorial design so that each switch's effect can still be read."
-    },
-    {
-      "id": "healthy-and-rich",
-      "title": "Healthy and rich",
-      "file": "pages/healthy-and-rich.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "The author's picture of a world that might keep evolving has two halves: a decentralised, resilient, almost three-dimensional network, and agents that differ in almost everything."
-    },
-    {
       "id": "measuring-health",
       "title": "Measuring health: criteria, the health bar and diversity",
       "file": "pages/measuring-health.md",
       "topics": [
         "reference",
-        "healthy",
-        "network",
         "brains"
       ],
       "kind": "reference",
       "status": "written",
       "added": "2026-11-09",
-      "summary": "How the notebook judges whether a world is healthy and interesting: the author's criteria, the seven marks of the health bar that B2's worlds were held to, and the diversity score.."
-    },
-    {
-      "id": "mixed-at-birth-ten-long-worlds",
-      "title": "Brains mixed at birth, in long worlds",
-      "file": "pages/mixed-at-birth-ten-long-worlds.md",
-      "topics": [
-        "healthy",
-        "evolution"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E17",
-        "E18"
-      ],
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "Mixing a newborn's brain from its parent's and a neighbour's makes a B2 world smaller, so each of its agents holds more tokens."
-    },
-    {
-      "id": "mixed-at-birth-with-parents-as-mates",
-      "title": "Who may be a mate",
-      "file": "pages/mixed-at-birth-with-parents-as-mates.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E19",
-        "E22"
-      ],
-      "status": "analysed",
-      "added": "2026-10-16",
-      "summary": "When brains are mixed at birth, a child's brain is half its parent's and half a mate's, but only the parent pays for the child."
-    },
-    {
-      "id": "the-candidates-played-on",
-      "title": "The candidates, played on and played again",
-      "file": "pages/the-candidates-played-on.md",
-      "topics": [
-        "healthy"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E20",
-        "E21",
-        "E24"
-      ],
-      "status": "analysed",
-      "added": "2026-10-18",
-      "summary": "A candidate world meets every mark of the health bar at iteration 1,000, and its agents are more diverse than B2's. Played on to 10,000 iterations, most did not stay there: of nineteen, five held, eleven fell back and three died out."
-    },
-    {
-      "id": "room-for-the-steadiest-world",
-      "title": "Room and riches for the steadiest world",
-      "file": "pages/room-for-the-steadiest-world.md",
-      "topics": [
-        "healthy",
-        "space",
-        "size"
-      ],
-      "kind": "experiment",
-      "experiments": [
-        "E31",
-        "E32",
-        "E36",
-        "E37"
-      ],
-      "status": "analysed",
-      "added": "2026-10-19",
-      "summary": "The steadiest world the notebook has, Experiment 19's, lives long and its agents differ, but it is folded: a small world, not a space. Experiment 31 gave it, one at a time, four rules that keep a world's room; each gave room and took something else."
-    },
-    {
-      "id": "every-world-side-by-side",
-      "title": "Every world side by side",
-      "file": "pages/every-world-side-by-side.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Each page measures the worlds of one experiment or a few. This page puts every world in one table, measured the same way over the same stretches of iterations, and looks at them together."
+      "summary": "Health as defined on 9 November 2026, frozen since 11 November and used only as a filter (dead, star, uniform or frozen worlds are left out), with a table of its earlier versions: the health bar, the diversity score and the criteria of the screen."
     },
     {
       "id": "runs-and-records",
@@ -1377,30 +750,6 @@
       "summary": "A world of 10,000 tokens holds about 1,300 agents and lives 3,000 iterations: some four million agent-moments, recorded twice per iteration. The baseline worlds of 100,000 tokens hold about 14,000 agents for 1,500 iterations: some twenty million."
     },
     {
-      "id": "one-world-many-colours",
-      "title": "One world, many colours: what the viewer can colour by",
-      "file": "pages/one-world-many-colours.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Statistics average; a picture shows where things are. The viewer draws a world as dots and lines, and colours them by any quantity it measures. Each value is placed on a colour map, within the range of the frame on screen."
-    },
-    {
-      "id": "what-goes-with-what",
-      "title": "What goes with what",
-      "file": "pages/what-goes-with-what.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-15",
-      "summary": "This page is an atlas rather than an experiment. It sets every quantity measured for an agent against every other, in twenty worlds. And it sets every statistic of a whole world against every other."
-    },
-    {
       "id": "every-simulation",
       "title": "Every simulation: what was run, and what was measured",
       "file": "pages/every-simulation.md",
@@ -1424,7 +773,179 @@
       "kind": "reference",
       "status": "written",
       "added": "2026-11-09",
-      "summary": "The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation and fitted lines, how long a world remembers, how sure a number is, how a spread splits into parts, and how many kinds a world really holds.."
+      "summary": "The statistics the notebook measures with, each explained from the start: medians and bands over many worlds, correlation, fitted lines and power laws, how long a world remembers, how sure a number is and how many seeds it needs, how a spread splits into parts, and how many kinds a world really holds."
+    },
+    {
+      "id": "what-the-baseline-world-is",
+      "title": "What B1 is, and what stood in its way",
+      "file": "pages/what-the-baseline-world-is.md",
+      "topics": [
+        "b1-history",
+        "baselines",
+        "evolution"
+      ],
+      "kind": "overview",
+      "status": "written",
+      "added": "2026-10-08",
+      "summary": "The first baseline, B1, has been measured from every side, in thirty worlds of 100,000 tokens. All six theses written before its runs failed, and each failure taught something new about the world."
+    },
+    {
+      "id": "b1-lives-and-wealth",
+      "title": "B1: lives and wealth",
+      "file": "pages/b1-lives-and-wealth.md",
+      "topics": [
+        "b1-history",
+        "baselines",
+        "wealth"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "The first baseline, B1, as measured in October 2026: a world's life, births, deaths and ages, how births build the network, inequality, gains and losses, and the richest and best-connected agents.",
+      "experiments": [
+        "E02",
+        "E04"
+      ]
+    },
+    {
+      "id": "b1-the-game-and-its-flows",
+      "title": "B1: the game and its flows",
+      "file": "pages/b1-the-game-and-its-flows.md",
+      "topics": [
+        "b1-history",
+        "wealth",
+        "groups"
+      ],
+      "kind": "study",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "B1's game and its tokens, as measured in October 2026: what agents stake and who wins the nodes, where tokens flow, and the groups they stay in."
+    },
+    {
+      "id": "b1-the-network-size-and-scaling",
+      "title": "B1: the network, size and scaling",
+      "file": "pages/b1-the-network-size-and-scaling.md",
+      "topics": [
+        "b1-history",
+        "baselines",
+        "space",
+        "methods"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "B1's network as measured in October 2026: its shape and core, how it breaks, power laws, how properties scale together, likeness at a distance, worlds of many sizes, and how much the seed decides.",
+      "experiments": [
+        "E03",
+        "E05",
+        "E08",
+        "E10"
+      ]
+    },
+    {
+      "id": "b1-brains-lineages-and-messages",
+      "title": "B1: brains, lineages and messages",
+      "file": "pages/b1-brains-lineages-and-messages.md",
+      "topics": [
+        "b1-history",
+        "brains",
+        "evolution"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "Brains in B1, as measured in October 2026, and how alike the agents of B1, B2 and the pilots are: genotypes and lineages, the messages, and how differently agents play.",
+      "experiments": [
+        "E06"
+      ]
+    },
+    {
+      "id": "building-b2-and-the-search-for-a-healthy-rich-world",
+      "title": "Building B2, and the search for a healthy, rich world",
+      "file": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md",
+      "topics": [
+        "history",
+        "baselines",
+        "rules",
+        "evolution",
+        "space"
+      ],
+      "kind": "experiment",
+      "status": "analysed",
+      "added": "2026-10-14",
+      "summary": "How B2 was built so that it cannot break, and the search of October 2026 for a healthy, rich world: the best of many worlds is a lucky moment.",
+      "experiments": [
+        "E13",
+        "E14",
+        "E15",
+        "E17",
+        "E18",
+        "E19",
+        "E20",
+        "E21",
+        "E22",
+        "E24",
+        "E31",
+        "E32",
+        "E36",
+        "E37"
+      ]
+    },
+    {
+      "id": "what-the-switches-did-in-pilots",
+      "title": "What the switches did in pilots (indicative)",
+      "file": "pages/what-the-switches-did-in-pilots.md",
+      "topics": [
+        "history",
+        "rules",
+        "brains"
+      ],
+      "kind": "study",
+      "status": "analysed",
+      "added": "2026-10-15",
+      "summary": "The engine's switches tried in pilot worlds in October 2026, alone and in company: indicative only, from two seeds a condition, mostly 1,000 iterations, on B2."
+    },
+    {
+      "id": "cooperation-help-and-gliders",
+      "title": "Cooperation, help and gliders (side study)",
+      "file": "pages/cooperation-help-and-gliders.md",
+      "topics": [
+        "side-studies",
+        "groups"
+      ],
+      "kind": "study",
+      "status": "analysed",
+      "added": "2026-10-08",
+      "summary": "Whether agents cooperate, asked in October 2026 of B1, B2 and pilot worlds: help as the rules count it, kin and partners, and chains of takeovers."
+    },
+    {
+      "id": "space-at-scale",
+      "title": "Space at scale (side study)",
+      "file": "pages/space-at-scale.md",
+      "topics": [
+        "side-studies",
+        "space",
+        "methods"
+      ],
+      "kind": "study",
+      "status": "written",
+      "added": "2026-10-09",
+      "summary": "Two side studies for the second aim: whether B1's dimension changes with the scale, and which properties of a world have no scale of their own."
+    },
+    {
+      "id": "measures-atlases-and-assembly",
+      "title": "Measures, atlases and assembly (side studies)",
+      "file": "pages/measures-atlases-and-assembly.md",
+      "topics": [
+        "side-studies",
+        "methods",
+        "evolution",
+        "space"
+      ],
+      "kind": "study",
+      "status": "written",
+      "added": "2026-10-08",
+      "summary": "Side studies of many measures and worlds at once: an atlas of what goes with what, every world side by side, the viewer's colours, and assembly theory."
     }
   ],
   "parts": [
@@ -1442,7 +963,7 @@
       "id": "now",
       "title": "Now: round 3 and its candidates",
       "colour": "#f2cd5c",
-      "about": "The research of the moment: round 3 of the screen of random worlds, its healthiest worlds and its candidates for open-ended evolution, and what is played next.",
+      "about": "The research of the moment: round 3 of the screen of random worlds, its candidates for open-ended evolution, whether they evolved, and what is played next.",
       "topics": [
         "screen"
       ],
@@ -1463,13 +984,9 @@
       "id": "worlds",
       "title": "What the worlds do",
       "colour": "#4ccb60",
-      "about": "What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.",
+      "about": "What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests. What B1's worlds did is in the Archive.",
       "topics": [
-        "lives",
         "wealth",
-        "game",
-        "network",
-        "size",
         "brains",
         "groups"
       ],
@@ -1479,7 +996,7 @@
       "id": "physics",
       "title": "Space and physics",
       "colour": "#ab77f4",
-      "about": "The second aim: whether a world grows a space of its own, what has no scale, locality, flows and particles.",
+      "about": "The second aim, a track with its own question: does a world grow a space of its own, with locality and particles in it?",
       "topics": [
         "space"
       ],
@@ -1489,12 +1006,11 @@
       "id": "search",
       "title": "The search for open-ended evolution",
       "colour": "#e6a532",
-      "about": "Everything tried before round 3 to make evolution go on: tests of evolution, rules changed alone and together, strategies written by hand, and the hunt for a healthy, rich world.",
+      "about": "How to tell whether evolution goes on and why it stops, strategies written by hand, rules without tuned numbers, and the open economy planned for when no setting lifts the plateau.",
       "topics": [
         "evolution",
         "rules",
-        "strategies",
-        "healthy"
+        "strategies"
       ],
       "mark": "🟧"
     },
@@ -1508,6 +1024,18 @@
         "reference"
       ],
       "mark": "🔳"
+    },
+    {
+      "id": "archive",
+      "title": "Archive",
+      "colour": "#a3a3a3",
+      "about": "Frozen pages, kept so that every experiment can still be read and made again: what was done and found before 11 November 2026. They are not brought up to date as the research moves on.",
+      "topics": [
+        "b1-history",
+        "history",
+        "side-studies"
+      ],
+      "mark": "🗄️"
     }
   ]
 }

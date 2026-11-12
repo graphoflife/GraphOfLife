@@ -24,7 +24,7 @@ from book_figures import FRAMES, STATS_FILE, chapter, describe, line, mean_over,
 from book_chapters.common import BLUE, GREEN, GREY, ORANGE, RED, VIOLET, WORLD_SETS, YELLOW
 
 E08_WORDS = ("the baseline worlds of Experiment 8, three seeds at each of ten sizes from 800 to 409,600 tokens, "
-             "600 iterations each ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`)")
+             "600 iterations each ([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`)")
 
 
 @D.measure("lineage")
@@ -329,7 +329,7 @@ def ten_small(ch: F.Chapter) -> None:
                 "ran on to 2,999. On logarithmic axes, so that half as much and twice as much lie equally far from "
                 "1; each bar rises from 1 or falls from it. Blue: shares and rates per agent; green: the shape of the "
                 "network; orange: its distances; red: its largest single things; grey: totals. The dashed guides: no change; "
-                f"×{width:.1f}, the factor by which the width of a world grows (tokens^0.30, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)); and "
+                f"×{width:.1f}, the factor by which the width of a world grows (tokens^0.30, [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)); and "
                 f"×{agents:.0f}, the ratio of the agents.",
         recipe=recipe(f"{large.runs_text()} {small.surviving_text()}", STATS_FILE,
                       [f"For every run and statistic, the mean over the rows of iterations {COMPARED_WINDOW[0]} to "

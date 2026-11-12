@@ -138,7 +138,7 @@ def alike(ch: F.Chapter) -> None:
                 f"ln k), counting every connection both ways round. One dot per {W.per_lived}, the "
                 f"mean over five moments (after the games of iterations {listed(list(MOMENTS))}); the "
                 "bar is the median. The same values shuffled among a world's agents give correlations within "
-                "0.01 of zero in the median world, and within 0.09 in every world; the last column is the assortativity of [How properties scale together](how-properties-scale-together.md), taken of ln k instead of k.",
+                "0.01 of zero in the median world, and within 0.09 in every world; the last column is the assortativity of [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together), taken of ln k instead of k.",
         recipe=recipe(W.lived_text(), FRAMES,
                       [f"Read frames 2·t + 1 for t = {', '.join(f'{t:,}' for t in MOMENTS)}: `ids`, `tokens`, `ages`, "
                        "`brain_ids` and `edges`.",
@@ -417,7 +417,7 @@ PLATEAUS = {"E02": ((2, 6), (4, 64)), "E10": ((3, 10), (4, 160))}[W.experiment]
 
 RULERS = (("ball_r", "ball_d", "From balls", "radius r, steps (logarithmic)"),
           ("spec_t", "spec_d", "From a random walk", "steps of the walk t (logarithmic)"))
-BIG = ("The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); "
+BIG = ("The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); "
        "`python3 gol_lab.py run E08`), after their last game.")
 
 
@@ -484,7 +484,7 @@ def dimensions(ch: F.Chapter) -> None:
                 f"Blue: {W.lived} of {W.tokens:,} tokens (about {typical:,} agents each) — "
                 "the line is the median of the worlds, the darker band the middle half and the paler band nine in "
                 "ten. Red: for each, its random twin, a network with exactly as many connections at every agent "
-                "but wired at random. Yellow: the three worlds of 409,600 tokens of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) (about 60,000 "
+                "but wired at random. Yellow: the three worlds of 409,600 tokens of [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes) (about 60,000 "
                 "agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their "
                 "random twins."
                 + (f" Green dots: the median of the {len(smalls)} worlds of {other.tokens:,} tokens that lived to the "
@@ -555,7 +555,7 @@ def dimensions(ch: F.Chapter) -> None:
                 f"{W.lived}, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: "
                 "the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the "
                 "darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, "
-                "every 25 iterations, are drawn in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).",
+                "every 25 iterations, are drawn in [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world).",
         recipe=recipe(W.lived_text(), FRAMES,
                       ["Read frame 2·t + 1 for each t; take the largest piece of its network.",
                        "The rulers as in the first figure, the walk run for 128 steps "

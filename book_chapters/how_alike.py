@@ -154,7 +154,7 @@ def how_alike(ch: F.Chapter) -> None:
                      "green: B2 with lapsing links. B2 without random inputs is left out of both: without noise "
                      "every difference counts, and its kinds cannot be compared. " + NAMES),
             recipe=recipe(RUNS, f"`GraphOfLifeRuns/.pilots/diversity/across_lab.json`, `B1.json`, `B2.json` (`{CHECK}`)",
-                          METHOD + ["Count the kinds of staking as in [How different are the agents?](how-different-are-the-agents.md); divide the agents' total "
+                          METHOD + ["Count the kinds of staking as in [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents); divide the agents' total "
                                     "variation by the founders'."]))
 
     # 2. The rate of change: more mutation, more genotypes, more kinds.

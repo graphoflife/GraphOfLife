@@ -25,7 +25,7 @@ E08_RUNS = ("The 42 runs of Experiment 8 — B1 at 800 to 409,600 tokens, each s
             "tokens, `B1-800-57b358-s001` … `B1-6400-57b358-s003`. They are made with "
             "`python3 gol_lab.py run E08`; every setting is listed in the box of the runs behind this page.")
 WITH_E02 = (" As a check at 10,000 tokens, the 28 baseline runs of Experiment 2 that reached iteration 600 "
-            "(`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md)).")
+            "(`B1-10000-s001` … `-s030`, [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)).")
 WINDOW = (500, 599)          # the plan's window: a settled world
 LATE = (300, 599)            # the last 300 iterations, for how a world moves
 
@@ -96,7 +96,7 @@ def size(ch: F.Chapter) -> None:
                 "(at 1,600 tokens only one of three lived through its first iteration, and its dot lies under the "
                 "orange one of the same world; at 800 none did). Orange: "
                 "the same worlds of 800 and 1,600 tokens with the stopping rule switched off. Grey: the "
-                "baseline worlds of [A world's life](a-worlds-life.md), a check from another experiment. Red: the straight line "
+                "baseline worlds of [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world), a check from another experiment. Red: the straight line "
                 f"fitted to the blue dots from 3,200 tokens on, exponent {f['exponent']:.2f} (95% interval "
                 f"{f['interval'][0]:.2f} to {f['interval'][1]:.2f}). Dashed: exponent exactly 1.",
         recipe=recipe(E08_RUNS + WITH_E02, STATS_FILE,
@@ -133,7 +133,7 @@ def size(ch: F.Chapter) -> None:
         "per-token", panels, columns=3, title="The same law, seen through a magnifying glass",
         caption="The quantities of the figure above divided by what proportion would scale them by, so that "
                 "growth in proportion is a flat line. Blue: every baseline run of 3,200 tokens and more that "
-                "lived to iteration 600, its mean over iterations 500 to 599; grey: the 28 worlds of [A world's life](a-worlds-life.md) "
+                "lived to iteration 600, its mean over iterations 500 to 599; grey: the 28 worlds of [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world) "
                 "at 10,000 tokens; white: the median of the three runs of each size; dashed red: the power law "
                 "fitted to the runs, divided by the tokens (for connections per agent, the law fitted to the "
                 "connections per agent themselves, whose exponent says by how much they grow with size).",
@@ -167,9 +167,9 @@ def size(ch: F.Chapter) -> None:
         "lives", panels, columns=3, title="Six hundred iterations, at nine sizes",
         caption="The number of agents after every game, divided by the tokens of the world, over the 600 "
                 "iterations of every baseline run of 3,200 tokens and more — one panel per size, one line per "
-                "seed — and, in the third panel, the first three worlds of [A world's life](a-worlds-life.md) at 10,000 tokens, over "
+                "seed — and, in the third panel, the first three worlds of [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world) at 10,000 tokens, over "
                 "their first 600 iterations. The same vertical scale in every panel.",
-        recipe=recipe(E08_RUNS + " The runs of [A world's life](a-worlds-life.md) with seeds 1, 2 and 3.", STATS_FILE,
+        recipe=recipe(E08_RUNS + " The runs of [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world) with seeds 1, 2 and 3.", STATS_FILE,
                       ["Take `nodes` of every row with `phase` = 2 and `iteration` ≤ 599, divided by the "
                        "tokens of the world."]))
 
@@ -211,7 +211,7 @@ def size(ch: F.Chapter) -> None:
                           "y": [c[1] for c in cuts_max], "points": True, "size": 6, "colour": RED}])],
         columns=2, title="Big worlds do not average out",
         caption="Over the last 300 iterations (300 to 599) of every baseline run of 3,200 tokens and more, and "
-                "of the 28 worlds of [A world's life](a-worlds-life.md). Left: for each run, the standard deviation of the change in the "
+                "of the 28 worlds of [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world). Left: for each run, the standard deviation of the change in the "
                 "number of agents from one game to the next, divided by the mean number of agents — against "
                 "that mean, on logarithmic axes. If a world were made of independent parts, its relative "
                 "changes would shrink as one over the square root of its size (dashed, drawn through the runs "
@@ -275,7 +275,7 @@ def size(ch: F.Chapter) -> None:
         "same-world", panels, columns=3, title="Is a big world the same kind of world?",
         caption="Nine properties of a world that do not grow with its size by definition — shares, rates per "
                 "agent, a dimension. Blue: every baseline run of 3,200 tokens and more that lived to iteration "
-                "600, its mean over iterations 500 to 599; grey: the 28 worlds of [A world's life](a-worlds-life.md) at 10,000 tokens; "
+                "600, its mean over iterations 500 to 599; grey: the 28 worlds of [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world) at 10,000 tokens; "
                 "white: the median of each size. A world that is the same kind of world at every size gives a "
                 "flat cloud.",
         recipe=recipe(E08_RUNS + WITH_E02, STATS_FILE,
@@ -316,7 +316,7 @@ def size(ch: F.Chapter) -> None:
     ch.grid(
         "distances", panels, columns=2, title="How far apart agents are, as worlds grow",
         caption="Every baseline run of 3,200 tokens and more that lived to iteration 600, and the 28 worlds of "
-                "[A world's life](a-worlds-life.md): the mean number of agents over iterations 500 to 599, and over the same iterations "
+                "[A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world): the mean number of agents over iterations 500 to 599, and over the same iterations "
                 "the mean distance between two agents (left) and the largest distance found (right), both "
                 "estimated by the viewer from breadth-first searches out of 8 to 16 agents every 25 iterations "
                 "([Radius and diameter](measuring-networks.md#radius-and-diameter)). Red: a power law fitted to the "

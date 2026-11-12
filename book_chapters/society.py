@@ -285,7 +285,7 @@ def game(ch: F.Chapter) -> None:
                                 ["Take the rows with `phase` = 2 and the statistics "
                                  + ", ".join(f"`{s}`" for s, _ in stats)
                                  + " (`a/b` is the row's `a` divided by its `b`; "
-                                 "[Staking at home](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node) defines each).", *BAND_STEPS]))
+                                 "[Staking at home](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node) defines each).", *BAND_STEPS]))
 
     # Where each world settles, statistic by statistic.
     order = ["spreadShare", "revoltShare", "heldHomeShare", "revolutions/nodes_before", "selfAllocationShare"]
@@ -581,7 +581,7 @@ def lineage(ch: F.Chapter) -> None:
                        "and every agent (id in `ids`) note the first and last iteration it appears.",
                        f"Keep those first seen at iteration {W.settled} or later; one still present in the "
                        "last frame is censored.",
-                       "Kaplan–Meier as in [Births, deaths and ages](births-deaths-and-ages.md)."]))
+                       "Kaplan–Meier as in [Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)."]))
 
     top_seed = EXAMPLES["top"]
     example = F.world_pass(W.run(top_seed))

@@ -257,7 +257,7 @@ So after every phase, Σ τ(*u*) = *T*.
 ## What an iteration does, on average
 
 Once a world has settled, from about iteration 500 on
-([A world's life](a-worlds-life.md)), how many agents does one iteration add
+([A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)), how many agents does one iteration add
 and remove? Here is the average over iterations 500 to 2,999 of the 26
 [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds that lived that long. It is counted per hundred agents alive
 at the start of the phase:
@@ -268,7 +268,7 @@ at the start of the phase:
 **What one iteration does to a settled world.** Agents added (above zero) and removed (below), per 100 agents alive at the start of an iteration, averaged over iterations 500 to 2,999 of the 26 worlds that lived to the end, pooled: every iteration of every world counts once. The bars add up to 0.00: the population hardly changes from one iteration to the next, while about three in a hundred agents are replaced.
 
 > [!example]- How to make this figure
-> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](a-worlds-life.md)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** The 26 surviving ones of the 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -294,7 +294,7 @@ a hundred of its members are replaced.
 
 But the game changes far more than that. In a settled baseline world, only
 about 45% of agents keep their node through a game. The rest take on another
-agent's brain ([How the game is played](how-the-game-is-played.md)). The
+agent's brain ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). The
 members of a world stay; their brains are replaced all the time.
 
 ## Where to go next
@@ -304,7 +304,7 @@ members of a world stay; their brains are replaced all the time.
   and worked through.
 - [Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die): who dies where,
   and how often.
-- [How the game is played](how-the-game-is-played.md): what the baseline's
+- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): what the baseline's
   brains actually stake.
 
 <!-- turns -->
@@ -312,6 +312,6 @@ members of a world stay; their brains are replaced all the time.
 
 ← [The world: tokens, agents and a network](the-world.md) · [How the simulation works](../README.md#how-the-simulation-works) · [The brain](the-brain.md) →
 
-> [!info]- Pages that link here (31)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Births, deaths and ages](births-deaths-and-ages.md) · [How births build the network](how-agents-have-children.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [How the game is played: what agents stake, and who wins the nodes](how-the-game-is-played.md) · [The shape of the network](what-shape-does-the-network-take.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Do the brains matter?](do-the-brains-matter.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Do agents cooperate? Help, kin and partners](do-agents-cooperate.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md)
+> [!info]- Pages that link here (25)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Do the brains matter?](do-the-brains-matter.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->
