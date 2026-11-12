@@ -1,5 +1,5 @@
 {
- "about": "What every setting of a run means, in a line. The settings dialog of a run, in the Runs tab, shows each value beside these words; the settings page, book/pages/settings.md, explains each at length.",
+ "about": "What every setting of a run means, in a line (`meaning`), and in a few words (`glance`). The settings dialog of a run, in the Runs tab, shows each value beside its meaning; the settings page, book/pages/settings.md, explains each at length, and its table At a glance gives each one's few words.",
  "order": [
   "total_tokens",
   "n_nodes",
@@ -55,157 +55,208 @@
  ],
  "settings": {
   "total_tokens": {
-   "meaning": "The number of tokens in the world, *T*. It never changes during a run."
+   "meaning": "The number of tokens in the world, *T*. It never changes during a run.",
+   "glance": "tokens in the world, chosen per experiment"
   },
   "n_nodes": {
-   "meaning": "How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋."
+   "meaning": "How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋.",
+   "glance": "how many founders (0: one per 100 tokens)"
   },
   "k_neighbors": {
-   "meaning": "How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1."
+   "meaning": "How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1.",
+   "glance": "neighbours in the starting ring (0: by the founders' number)"
   },
   "rewire_p": {
-   "meaning": "In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz)."
+   "meaning": "In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz).",
+   "glance": "shortcuts in the starting ring"
   },
   "hidden_layers": {
-   "meaning": "The widths of the brain's hidden layers, in order from input to output."
+   "meaning": "The widths of the brain's hidden layers, in order from input to output.",
+   "glance": "the brain's hidden layers"
   },
   "brain_kind": {
-   "meaning": "How weights are stored: `float` (64-bit), `float16` (16-bit, computed in 64-bit) or `binary` (−1, 0, +1)."
+   "meaning": "How weights are stored: `float` (64-bit), `float16` (16-bit, computed in 64-bit) or `binary` (−1, 0, +1).",
+   "glance": "how weights are stored"
   },
   "brain_bits": {
-   "meaning": "Only for binary brains: how many input rows encode one number. Unused by float and float16 brains."
+   "meaning": "Only for binary brains: how many input rows encode one number. Unused by float and float16 brains.",
+   "glance": "only for binary brains"
   },
   "message_amount": {
-   "meaning": "How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase."
+   "meaning": "How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase.",
+   "glance": "numbers per message"
   },
   "random_input_amount": {
-   "meaning": "How many random numbers, drawn uniformly from −2 to 2, a brain reads per candidate, itself included, every time it looks."
+   "meaning": "How many random numbers, drawn uniformly from −2 to 2, a brain reads per candidate, itself included, every time it looks.",
+   "glance": "random inputs per look"
   },
   "exchange_messages": {
-   "meaning": "Whether agents send and read messages at all."
+   "meaning": "Whether agents send and read messages at all.",
+   "glance": "messages at all"
   },
   "message_prepass": {
-   "meaning": "Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase."
+   "meaning": "Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase.",
+   "glance": "a look that only talks"
   },
   "allow_handover": {
-   "meaning": "Whether a parent may move some of its own connections to its newborn child."
+   "meaning": "Whether a parent may move some of its own connections to its newborn child.",
+   "glance": "parents hand connections to children"
   },
   "allow_revolutions": {
-   "meaning": "Whether a coalition of smaller stakers can take a node from its largest staker (see *How a coalition takes a node* in Rules in detail)."
+   "meaning": "Whether a coalition of smaller stakers can take a node from its largest staker (see *How a coalition takes a node* in Rules in detail).",
+   "glance": "coalitions can take nodes"
   },
   "allow_gifting": {
-   "meaning": "Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen."
+   "meaning": "Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen.",
+   "glance": "gifts of tokens"
   },
   "random_decisions": {
-   "meaning": "The control: every number a brain would produce is replaced by a random draw from the standard normal distribution."
+   "meaning": "The control: every number a brain would produce is replaced by a random draw from the standard normal distribution.",
+   "glance": "the control without brains"
   },
   "prune_after": {
-   "meaning": "After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`."
+   "meaning": "After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`.",
+   "glance": "when unused connections are cut"
   },
   "inactive_window": {
-   "meaning": "How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases."
+   "meaning": "How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases.",
+   "glance": "how long a connection may be unused"
   },
   "redistribution": {
-   "meaning": "How the tokens of removed agents are shared: `uniform` gives every survivor the same chance at each token; `by_tokens` weights by what a survivor holds; `poorest` raises the poorest to one common level first; `newborns` gives them to this iteration's children, `parents` to their parents, once per child (both `uniform` in an iteration without births); `children` leaves each dead agent's estate to its own living children (`uniform` where there are none); `local` lets each estate flow through the network to the nearest living agents, split evenly at every step."
+   "meaning": "How the tokens of removed agents are shared: `uniform` gives every survivor the same chance at each token; `by_tokens` weights by what a survivor holds; `poorest` raises the poorest to one common level first; `newborns` gives them to this iteration's children, `parents` to their parents, once per child (both `uniform` in an iteration without births); `children` leaves each dead agent's estate to its own living children (`uniform` where there are none); `local` lets each estate flow through the network to the nearest living agents, split evenly at every step.",
+   "glance": "who gets the tokens of the dead"
   },
   "tokens_created_per_phase": {
-   "meaning": "Tokens added to the world at every cleanup. 0 keeps the supply fixed."
+   "meaning": "Tokens added to the world at every cleanup. 0 keeps the supply fixed.",
+   "glance": "new tokens per cleanup"
   },
   "mutation_probability": {
-   "meaning": "The probability that a brain changes when it is copied to a child, and again, for every brain, after every game."
+   "meaning": "The probability that a brain changes when it is copied to a child, and again, for every brain, after every game.",
+   "glance": "how often a brain changes"
   },
   "mutation_noise_std": {
-   "meaning": "How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer."
+   "meaning": "How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer.",
+   "glance": "how big a change is"
   },
   "mutation_sparsity": {
-   "meaning": "The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it."
+   "meaning": "The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it.",
+   "glance": "how many weights a change touches"
   },
   "extinction_threshold": {
-   "meaning": "A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer."
+   "meaning": "A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer.",
+   "glance": "when a world counts as dead"
   },
   "mutate_on_replication": {
-   "meaning": "Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits."
+   "meaning": "Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits.",
+   "glance": "brains change only when copied"
   },
   "incumbency": {
-   "meaning": "How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule."
+   "meaning": "How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule.",
+   "glance": "home advantage in the game"
   },
   "birth_links": {
-   "meaning": "How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice."
+   "meaning": "How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice.",
+   "glance": "links a newborn is born with"
   },
   "mend_on_death": {
-   "meaning": "Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces."
+   "meaning": "Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces.",
+   "glance": "no death splits the world"
   },
   "prune_needs": {
-   "meaning": "How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection."
+   "meaning": "How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection.",
+   "glance": "only redundant connections lapse"
   },
   "valence": {
-   "meaning": "The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child."
+   "meaning": "The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child.",
+   "glance": "most connections a brain may choose"
   },
   "max_age": {
-   "meaning": "The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent."
+   "meaning": "The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent.",
+   "glance": "the longest life"
   },
   "min_child": {
-   "meaning": "The fewest tokens a child can be born with; a parent that would give less has no child."
+   "meaning": "The fewest tokens a child can be born with; a parent that would give less has no child.",
+   "glance": "the smallest child"
   },
   "keep_home": {
-   "meaning": "The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule."
+   "meaning": "The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule.",
+   "glance": "a share of the tokens stays at home"
   },
   "mix_at_birth": {
-   "meaning": "Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain."
+   "meaning": "Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain.",
+   "glance": "a newborn's brain mixed from two"
   },
   "link_search": {
-   "meaning": "Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the share of what reproduction left it that its brain chooses. A paid step costs one token, paid to the agent it enters, and never the last."
+   "meaning": "Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the share of what reproduction left it that its brain chooses. A paid step costs one token, paid to the agent it enters, and never the last.",
+   "glance": "links to strangers, found by a search"
   },
   "link_steering": {
-   "meaning": "Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking)."
+   "meaning": "Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking).",
+   "glance": "which way a search steps"
   },
   "link_consent": {
-   "meaning": "Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way."
+   "meaning": "Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way.",
+   "glance": "who must agree to a link found"
   },
   "buy_life": {
-   "meaning": "Whether an agent that has reached max_age may live on by paying one token an iteration into the estate of the dead — never its last, so one with a single token left dies. Needs max_age."
+   "meaning": "Whether an agent that has reached max_age may live on by paying one token an iteration into the estate of the dead — never its last, so one with a single token left dies. Needs max_age.",
+   "glance": "the old may buy more life"
   },
   "mix_mates": {
-   "meaning": "Under mix_at_birth, who may be the mate: any neighbour of the parent, or only parents — a neighbour with a living child of its own (with none, the newborn's brain is a copy)."
+   "meaning": "Under mix_at_birth, who may be the mate: any neighbour of the parent, or only parents — a neighbour with a living child of its own (with none, the newborn's brain is a copy).",
+   "glance": "who may be the mate"
   },
   "self_message": {
-   "meaning": "What an agent writes to itself, which each neighbour reads: what its own column says (own), or the largest, number by number, of what it writes to anyone (largest), so that news one column marks reaches every neighbour."
+   "meaning": "What an agent writes to itself, which each neighbour reads: what its own column says (own), or the largest, number by number, of what it writes to anyone (largest), so that news one column marks reaches every neighbour.",
+   "glance": "what an agent writes to itself"
   },
   "proto": {
-   "meaning": "Rules first played in the pilots' prototype, by name: came_from and helped_by (an input row each), contest = lottery, pool by genotype or family, kin_sense, tag_rate, mate_pays, grow, unit_token, link_token. Empty in every run but those that ask for one; only the prototype's world plays them (see the settings page)."
+   "meaning": "Rules first played in the pilots' prototype, by name: came_from and helped_by (an input row each), contest = lottery, pool by genotype or family, kin_sense, tag_rate, mate_pays, grow, unit_token, link_token. Empty in every run but those that ask for one; only the prototype's world plays them (see the settings page).",
+   "glance": "the pilots' rules, by name"
   },
   "child_floor": {
-   "meaning": "The least a child may start with: min_child alone (fixed), or also the median holding of its parent's neighbours (neighbours), so that a world grows only as rich as it is."
+   "meaning": "The least a child may start with: min_child alone (fixed), or also the median holding of its parent's neighbours (neighbours), so that a world grows only as rich as it is.",
+   "glance": "the least a child may start with"
   },
   "hidden_activation": {
-   "meaning": "The curve each hidden unit applies to its sum: `sigmoid`, which passes on at most a quarter of a change, so that deep brains barely respond to what they see, or `tanh`, the same S-shape centred on zero, through which a change still passes in several layers."
+   "meaning": "The curve each hidden unit applies to its sum: `sigmoid`, which passes on at most a quarter of a change, so that deep brains barely respond to what they see, or `tanh`, the same S-shape centred on zero, through which a change still passes in several layers.",
+   "glance": "the curve of a hidden unit"
   },
   "contest": {
-   "meaning": "Who takes a contested node: the `largest` stake as the game weighs it, or a staker drawn by `lottery` with a chance in proportion to its stake (needs revolutions off)."
+   "meaning": "Who takes a contested node: the `largest` stake as the game weighs it, or a staker drawn by `lottery` with a chance in proportion to its stake (needs revolutions off).",
+   "glance": "who takes a contested node"
   },
   "link_token": {
-   "meaning": "Whether every link holds one token: its maker pays for it, a lapsing link gives it back to one of its ends, and a link of a dead agent to the end that lives on, so the links can never outnumber the tokens."
+   "meaning": "Whether every link holds one token: its maker pays for it, a lapsing link gives it back to one of its ends, and a link of a dead agent to the end that lives on, so the links can never outnumber the tokens.",
+   "glance": "every link holds a token"
   },
   "link_upkeep": {
-   "meaning": "Whether an agent may pay a token an iteration to keep a link, each brain deciding for each neighbour: `paid_or_used` keeps a link that was paid for or used, `paid_only` only one that was paid for; `off`, only use keeps a link."
+   "meaning": "Whether an agent may pay a token an iteration to keep a link, each brain deciding for each neighbour: `paid_or_used` keeps a link that was paid for or used, `paid_only` only one that was paid for; `off`, only use keeps a link.",
+   "glance": "links kept by paying for them"
   },
   "upkeep_to": {
-   "meaning": "Where a link's upkeep goes: to the link's other end (`end`), or into the estate of the dead (`estate`), shared out by the world's redistribution rule."
+   "meaning": "Where a link's upkeep goes: to the link's other end (`end`), or into the estate of the dead (`estate`), shared out by the world's redistribution rule.",
+   "glance": "where a link's upkeep goes"
   },
   "mate_pays": {
-   "meaning": "Under mix_at_birth, whether the mate pays the child as many tokens as the parent gave it, as far as it can and never its last."
+   "meaning": "Under mix_at_birth, whether the mate pays the child as many tokens as the parent gave it, as far as it can and never its last.",
+   "glance": "the mate pays for the child too"
   },
   "allocation": {
-   "meaning": "How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played."
+   "meaning": "How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played.",
+   "glance": "how the game's stakes are placed"
   },
   "revolt_tokens": {
-   "meaning": "What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim."
+   "meaning": "What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim.",
+   "glance": "what a revolutionary token counts for"
   },
   "pool": {
-   "meaning": "Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side."
+   "meaning": "Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side.",
+   "glance": "stakes pooled by kin"
   },
   "tag_rate": {
-   "meaning": "Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's."
+   "meaning": "Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's.",
+   "glance": "how often a change starts a family"
   }
  }
 }

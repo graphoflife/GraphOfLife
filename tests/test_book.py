@@ -222,6 +222,22 @@ def test_the_book_explains_every_setting_a_plan_can_set():
     assert set(order) <= headings, f"the settings note has no heading for {sorted(set(order) - headings)}"
 
 
+def test_at_a_glance_lists_every_setting_once_as_the_baselines_have_it():
+    # The settings page's table At a glance is made, not typed (catalogue.glance): one row for
+    # every setting of book/settings.json, in its order, with its value in B1 and in B2. A table
+    # typed by hand had missed a setting and counted the rest wrong.
+    import json
+    from book_chapters import catalogue
+    book = os.path.join(runner.ROOT, "book")
+    with open(os.path.join(book, "settings.json"), encoding="utf-8") as f:
+        order = json.load(f)["order"]
+    with open(os.path.join(book, "results", "catalogue.json"), encoding="utf-8") as f:
+        kept = json.load(f)["numbers"]["table:glance"]
+    assert [row[0]["text"].strip("`") for row in kept["rows"]] == order, \
+        "At a glance has not one row per setting of settings.json, in its order"
+    assert kept == catalogue.glance(), "At a glance is not what the plans say now: python3 book_figures.py catalogue"
+
+
 def test_every_link_between_the_books_pages_arrives():
     # The pages are research notes that point at one another; a link to a page
     # that is not there (renamed, merged, not written yet) is a click that leads

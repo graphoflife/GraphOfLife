@@ -128,6 +128,475 @@
     ]
    ]
   },
+  "table:glance": {
+   "head": [
+    "setting",
+    "B1",
+    "B2",
+    "in a few words"
+   ],
+   "rows": [
+    [
+     {
+      "text": "`total_tokens`",
+      "href": "pages/settings.md#total_tokens"
+     },
+     "10,000",
+     "10,000",
+     "tokens in the world, chosen per experiment"
+    ],
+    [
+     {
+      "text": "`n_nodes`",
+      "href": "pages/settings.md#n_nodes"
+     },
+     "0",
+     "0",
+     "how many founders (0: one per 100 tokens)"
+    ],
+    [
+     {
+      "text": "`k_neighbors`",
+      "href": "pages/settings.md#k_neighbors"
+     },
+     "0",
+     "0",
+     "neighbours in the starting ring (0: by the founders' number)"
+    ],
+    [
+     {
+      "text": "`rewire_p`",
+      "href": "pages/settings.md#rewire_p"
+     },
+     "0.2",
+     "0.2",
+     "shortcuts in the starting ring"
+    ],
+    [
+     {
+      "text": "`hidden_layers`",
+      "href": "pages/settings.md#hidden_layers"
+     },
+     "50, 45, 40, 35, 30",
+     "16",
+     "the brain's hidden layers"
+    ],
+    [
+     {
+      "text": "`hidden_activation`",
+      "href": "pages/settings.md#hidden_activation"
+     },
+     "sigmoid",
+     "sigmoid",
+     "the curve of a hidden unit"
+    ],
+    [
+     {
+      "text": "`brain_kind`",
+      "href": "pages/settings.md#brain_kind"
+     },
+     "float16",
+     "float16",
+     "how weights are stored"
+    ],
+    [
+     {
+      "text": "`brain_bits`",
+      "href": "pages/settings.md#brain_bits"
+     },
+     "16",
+     "16",
+     "only for binary brains"
+    ],
+    [
+     {
+      "text": "`message_amount`",
+      "href": "pages/settings.md#message_amount"
+     },
+     "30",
+     "8",
+     "numbers per message"
+    ],
+    [
+     {
+      "text": "`random_input_amount`",
+      "href": "pages/settings.md#random_input_amount"
+     },
+     "5",
+     "5",
+     "random inputs per look"
+    ],
+    [
+     {
+      "text": "`exchange_messages`",
+      "href": "pages/settings.md#exchange_messages"
+     },
+     "on",
+     "on",
+     "messages at all"
+    ],
+    [
+     {
+      "text": "`message_prepass`",
+      "href": "pages/settings.md#message_prepass"
+     },
+     "on",
+     "off",
+     "a look that only talks"
+    ],
+    [
+     {
+      "text": "`allow_handover`",
+      "href": "pages/settings.md#allow_handover"
+     },
+     "on",
+     "off",
+     "parents hand connections to children"
+    ],
+    [
+     {
+      "text": "`allow_revolutions`",
+      "href": "pages/settings.md#allow_revolutions"
+     },
+     "on",
+     "on",
+     "coalitions can take nodes"
+    ],
+    [
+     {
+      "text": "`contest`",
+      "href": "pages/settings.md#contest"
+     },
+     "largest",
+     "largest",
+     "who takes a contested node"
+    ],
+    [
+     {
+      "text": "`allocation`",
+      "href": "pages/settings.md#allocation"
+     },
+     "full",
+     "full",
+     "how the game's stakes are placed"
+    ],
+    [
+     {
+      "text": "`revolt_tokens`",
+      "href": "pages/settings.md#revolt_tokens"
+     },
+     "both",
+     "both",
+     "what a revolutionary token counts for"
+    ],
+    [
+     {
+      "text": "`pool`",
+      "href": "pages/settings.md#pool"
+     },
+     "off",
+     "off",
+     "stakes pooled by kin"
+    ],
+    [
+     {
+      "text": "`allow_gifting`",
+      "href": "pages/settings.md#allow_gifting"
+     },
+     "off",
+     "off",
+     "gifts of tokens"
+    ],
+    [
+     {
+      "text": "`random_decisions`",
+      "href": "pages/settings.md#random_decisions"
+     },
+     "off",
+     "off",
+     "the control without brains"
+    ],
+    [
+     {
+      "text": "`prune_after`",
+      "href": "pages/settings.md#prune_after"
+     },
+     "blotto",
+     "blotto",
+     "when unused connections are cut"
+    ],
+    [
+     {
+      "text": "`inactive_window`",
+      "href": "pages/settings.md#inactive_window"
+     },
+     "phase",
+     "phase",
+     "how long a connection may be unused"
+    ],
+    [
+     {
+      "text": "`redistribution`",
+      "href": "pages/settings.md#redistribution"
+     },
+     "uniform",
+     "uniform",
+     "who gets the tokens of the dead"
+    ],
+    [
+     {
+      "text": "`tokens_created_per_phase`",
+      "href": "pages/settings.md#tokens_created_per_phase"
+     },
+     "0",
+     "0",
+     "new tokens per cleanup"
+    ],
+    [
+     {
+      "text": "`mutate_on_replication`",
+      "href": "pages/settings.md#mutate_on_replication"
+     },
+     "off",
+     "on",
+     "brains change only when copied"
+    ],
+    [
+     {
+      "text": "`incumbency`",
+      "href": "pages/settings.md#incumbency"
+     },
+     "1",
+     "1.5",
+     "home advantage in the game"
+    ],
+    [
+     {
+      "text": "`birth_links`",
+      "href": "pages/settings.md#birth_links"
+     },
+     "0",
+     "2",
+     "links a newborn is born with"
+    ],
+    [
+     {
+      "text": "`mend_on_death`",
+      "href": "pages/settings.md#mend_on_death"
+     },
+     "off",
+     "on",
+     "no death splits the world"
+    ],
+    [
+     {
+      "text": "`prune_needs`",
+      "href": "pages/settings.md#prune_needs"
+     },
+     "0",
+     "2",
+     "only redundant connections lapse"
+    ],
+    [
+     {
+      "text": "`valence`",
+      "href": "pages/settings.md#valence"
+     },
+     "0",
+     "8",
+     "most connections a brain may choose"
+    ],
+    [
+     {
+      "text": "`link_token`",
+      "href": "pages/settings.md#link_token"
+     },
+     "off",
+     "off",
+     "every link holds a token"
+    ],
+    [
+     {
+      "text": "`link_upkeep`",
+      "href": "pages/settings.md#link_upkeep"
+     },
+     "off",
+     "off",
+     "links kept by paying for them"
+    ],
+    [
+     {
+      "text": "`upkeep_to`",
+      "href": "pages/settings.md#upkeep_to"
+     },
+     "end",
+     "end",
+     "where a link's upkeep goes"
+    ],
+    [
+     {
+      "text": "`keep_home`",
+      "href": "pages/settings.md#keep_home"
+     },
+     "0",
+     "0.3",
+     "a share of the tokens stays at home"
+    ],
+    [
+     {
+      "text": "`max_age`",
+      "href": "pages/settings.md#max_age"
+     },
+     "0",
+     "100",
+     "the longest life"
+    ],
+    [
+     {
+      "text": "`buy_life`",
+      "href": "pages/settings.md#buy_life"
+     },
+     "off",
+     "off",
+     "the old may buy more life"
+    ],
+    [
+     {
+      "text": "`min_child`",
+      "href": "pages/settings.md#min_child"
+     },
+     "1",
+     "10",
+     "the smallest child"
+    ],
+    [
+     {
+      "text": "`child_floor`",
+      "href": "pages/settings.md#child_floor"
+     },
+     "fixed",
+     "fixed",
+     "the least a child may start with"
+    ],
+    [
+     {
+      "text": "`mix_at_birth`",
+      "href": "pages/settings.md#mix_at_birth"
+     },
+     "off",
+     "off",
+     "a newborn's brain mixed from two"
+    ],
+    [
+     {
+      "text": "`mix_mates`",
+      "href": "pages/settings.md#mix_mates"
+     },
+     "any",
+     "any",
+     "who may be the mate"
+    ],
+    [
+     {
+      "text": "`mate_pays`",
+      "href": "pages/settings.md#mate_pays"
+     },
+     "off",
+     "off",
+     "the mate pays for the child too"
+    ],
+    [
+     {
+      "text": "`self_message`",
+      "href": "pages/settings.md#self_message"
+     },
+     "own",
+     "own",
+     "what an agent writes to itself"
+    ],
+    [
+     {
+      "text": "`link_search`",
+      "href": "pages/settings.md#link_search"
+     },
+     "off",
+     "off",
+     "links to strangers, found by a search"
+    ],
+    [
+     {
+      "text": "`link_steering`",
+      "href": "pages/settings.md#link_steering"
+     },
+     "random",
+     "random",
+     "which way a search steps"
+    ],
+    [
+     {
+      "text": "`link_consent`",
+      "href": "pages/settings.md#link_consent"
+     },
+     "mutual",
+     "mutual",
+     "who must agree to a link found"
+    ],
+    [
+     {
+      "text": "`proto`",
+      "href": "pages/settings.md#proto"
+     },
+     "none",
+     "none",
+     "the pilots' rules, by name"
+    ],
+    [
+     {
+      "text": "`mutation_probability`",
+      "href": "pages/settings.md#mutation_probability"
+     },
+     "0.2",
+     "0.2",
+     "how often a brain changes"
+    ],
+    [
+     {
+      "text": "`mutation_noise_std`",
+      "href": "pages/settings.md#mutation_noise_std"
+     },
+     "0.2",
+     "0.2",
+     "how big a change is"
+    ],
+    [
+     {
+      "text": "`mutation_sparsity`",
+      "href": "pages/settings.md#mutation_sparsity"
+     },
+     "0.1",
+     "0.1",
+     "how many weights a change touches"
+    ],
+    [
+     {
+      "text": "`tag_rate`",
+      "href": "pages/settings.md#tag_rate"
+     },
+     "0",
+     "0",
+     "how often a change starts a family"
+    ],
+    [
+     {
+      "text": "`extinction_threshold`",
+      "href": "pages/settings.md#extinction_threshold"
+     },
+     "20",
+     "20",
+     "when a world counts as dead"
+    ]
+   ]
+  },
   "table:lab": {
    "head": [
     "",

@@ -392,11 +392,33 @@ def baselines() -> Dict[str, Any]:
     return {"head": ["setting", "B1", "B2", "what it is"], "rows": rows}
 
 
+def _value(value: Any) -> str:
+    """A setting's value as a table of settings says it: on or off, 1 for 1.0, 10,000, none for no rules."""
+    if isinstance(value, dict):
+        return ", ".join(sorted(value)) or "none"
+    if isinstance(value, float) and value.is_integer():
+        value = int(value)
+    if isinstance(value, int) and not isinstance(value, bool):
+        return f"{value:,}"
+    return _show(value)
+
+
+def glance() -> Dict[str, Any]:
+    """Every setting a plan can set, in book/settings.json's order: its value in B1 and in B2, and its few words."""
+    b1 = _json(os.path.join(BOOK, "experiments", "B1.json"))["settings"]
+    b2 = _json(os.path.join(BOOK, "experiments", "B2.json"))["settings"]
+    glossary = _json(os.path.join(BOOK, "settings.json"))
+    rows = [[{"text": f"`{key}`", "href": f"pages/settings.md#{key}"}, _value(b1[key]), _value(b2[key]),
+             glossary["settings"][key]["glance"]] for key in glossary["order"]]
+    return {"head": ["setting", "B1", "B2", "in a few words"], "rows": rows}
+
+
 @chapter
 def catalogue(ch: F.Chapter) -> None:
     chapters = _chapters()
     done = measured()
     ch.number("table:baselines", baselines())
+    ch.number("table:glance", glance())
     lab, lab_measures = lab_rows(chapters, done)
     pilots, pilot_details, archived_details, pilot_measures = pilot_rows(chapters, done)
     ch.number("table:lab", lab)
