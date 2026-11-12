@@ -3723,6 +3723,14 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   .tabs { justify-content: space-between; margin: 6px -12px 0; padding: 2px 12px 8px; }
   .tab { padding: 7px 6px; font-size: 12px; letter-spacing: 0; }
   .tab-long { display: none; }
+  /* The Viewer's five ways of looking as three over two, each row full,
+     rather than four and one left over. */
+  .viewer-mode { flex: 1 1 28%; padding: 7px 6px; }
+  /* A new simulation's name gets a row of its own under the title, rather
+     than the sliver left beside it. */
+  .sim-dialog-head { flex-wrap: wrap; row-gap: 10px; padding: 12px 14px; }
+  .sim-dialog-head h2 { flex: 1 1 auto; }
+  .name-in-head { order: 3; flex: 1 1 100%; max-width: none; }
 }
 
 /* ==========================================================================
