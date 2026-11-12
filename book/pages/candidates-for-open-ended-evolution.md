@@ -15,31 +15,23 @@ from what it recorded; no world is played again.
   [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), four seemed to pass nothing on and five stand still. The other 72 are
   the *candidate worlds*.
 - **What descends is [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.").** A child gets a copy of its parent's brain, and
-  a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") won in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") gets a copy of the winner's. In round 3 the game
-  copies brains more often than births do, 1.4 times as often in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
-  world. On the brains' own family tree, children act almost exactly as their
-  parents, and the living descend from far fewer ancestors than chance would
-  leave.
+  a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") won in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") gets a copy of the winner's. In the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world the
+  game copies brains 1.4 times as often as births do. On the brains' own
+  family tree, children act almost exactly as their parents, and the living
+  descend from far fewer ancestors than chance would leave.
 - **The evolution rank** scores every world that lived by four readings, each
   set against a model of chance: lines that spread beyond luck, novelty beyond
-  [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") alone, selection on behaviour, and heredity. Eight of its
-  first ten are draws whose game is played a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at a time: [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 4003,
-  4002 and 4007 played both ways, 4008 played weakest first and 4006
-  strongest first; with them stand seeds 3037 and 3093. Selection is plain in
-  every world, but it holds behaviour in place: hardly any line of descent
-  finds more new behaviour than mutation alone would. Health and the rank do
-  not go together.
+  [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") alone, selection on behaviour, and heredity. Eight of its first ten
+  are draws that play the game a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at a time. Selection is plain in every
+  world, but it holds behaviour in place: hardly any line of descent finds
+  more new behaviour than mutation alone would.
 - **The shortlist** is drawn from health instead: every candidate world among
   the first 13 of any of health's three orders, 21 worlds. Four of them are
-  among the rank's first ten.
+  among the rank's first ten, and health and the rank do not go together.
 
-> [!info] Added later, 12 November 2026: what the births-only tree said
-> Until 12 November 2026 this page read a family tree of births alone. On it,
-> the 72 candidate worlds lived a median of 825 generations with an effective
-> population of only 14, and a child acted only partly like its parent (a
-> heredity index of 0.39), so chance seemed to decide much of which line
-> survives, and the healthiest worlds seemed to pass on less. That tree misses
-> every brain copied by a conquest. Each reading below says which tree it uses.
+Until 12 November 2026 this page read a family tree of births alone, which
+misses every brain copied by a conquest
+([How our view changed](#how-our-view-changed)).
 
 ## What evolution needs
 
@@ -48,10 +40,9 @@ needs them to last
 ([What evolution means here](what-this-notebook-is-about.md#what-evolution-means-here);
 [the open-ended test](measuring-evolution.md#what-would-count-as-open-ended-evolution)).
 A world that plainly misses one of them cannot evolve open-endedly however long
-it runs. So the worlds are treated as suspects in a line-up. Each is ruled out
-the first time it plainly misses one, with its reason. The rest are compared
-reading by reading, and every world that lived is ranked by evolution
-([The evolution rank](#the-evolution-rank)).
+it runs. So the worlds are treated as suspects in a line-up: each is ruled out
+the first time it plainly misses one, with its reason. Every world that lived
+is then ranked by evolution ([The evolution rank](#the-evolution-rank)).
 
 ## How each pillar is read
 
@@ -59,9 +50,9 @@ Every number comes from what a world recorded. No world is played again, only
 brains, in situations taken from the worlds themselves. Two family trees are
 read:
 - **the births-only tree**: who bore whom, from every birth of every
-  [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). It gives the rules that rule worlds out and the pillar-by-pillar
-  table below, as they stood on 9 November 2026. It misses every brain copied
-  by a conquest;
+  [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). It misses every brain copied by a conquest. Its readings of
+  9 November 2026 give the rules that rule worlds out, and the readings
+  [pillar by pillar](#the-candidates-pillar-by-pillar);
 - **the brain-copy tree**: every copy of a brain, by birth or by conquest
   ([The brains' own family tree](#the-brains-own-family-tree)). The evolution
   rank reads this one.
@@ -89,13 +80,13 @@ The readings, and the tree each uses:
 - **Fertility passed on** (the births-only tree). Selection changes a
   population only through differences in how many offspring its members
   leave, and only the differences that are passed on add up (Fisher's
-  fundamental theorem of natural selection). So we ask whether agents that
-  have many children have children that have many too: the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of a
-  parent's and its child's numbers of children, over every pair born from
-  iteration 100 to two thirds of the run, against the same correlation with
-  the children's counts shuffled among the children born in the same
-  iteration. The cause need not be in the brain: a rich parent can make rich
-  children, and a good place can favour its families.
+  fundamental theorem of natural selection). So we ask whether agents with
+  many children have children with many too: the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of a parent's
+  and its child's numbers of children, over every pair born from iteration
+  100 to two thirds of the run, against the same correlation with the
+  children's counts shuffled among the children born in the same iteration.
+  The cause need not be in the brain: a rich parent can make rich children,
+  and a good place can favour its families.
 - **The line of descent and its novelty** (both trees). At every world kept
   (every 250 iterations) we find the ancestor of most of the brains alive at
   the end, and keep its brain: one brain an era, the world's main line. All
@@ -124,31 +115,29 @@ meets, in this order (research/screen/funnel.py). The other 72 are the
 **candidate worlds**.
 - **It died** (18 worlds;
   [what became of them](a-screen-of-random-worlds.md#what-round-3-found)).
-- **It is a star** (1): seed 3020, where one agent is linked to 99.5% of the
+- **It is a star** (1): [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 3020, where one agent is linked to 99.5% of the
   others on average.
 - **Its agents hold one number of tokens** (none): 80% or more of the agents
   holding the same amount.
-- **It has no heredity** (4): children act like strangers, with a heredity
-  index below 0.1. In all four, brains change after every game and not only
-  when they are copied, and two mutate with a probability of 0.8. One of them
-  is seed 3077, the worked example of
+- **It has no heredity** (4): children act like strangers on the births-only
+  tree, with a heredity index below 0.1. In all four, brains change after
+  every game and not only when they are copied, and two mutate with a
+  probability of 0.8. One of them is seed 3077, the worked example of
   [Which worlds are healthy?](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together):
-  the first by the sum of its health's criteria, but with nothing for
-  evolution to build on.
+  the first by the sum of its health's criteria, the 80th of the 82 by
+  evolution.
 - **It stands still** (5): its line of descent hardly moves from era to era,
   and two agents of one era hardly act differently (both less than 0.05 above
   the noise of playing one brain twice). All five are crowded and poor: from
   6,470 to 21,298 agents, holding 1.4 to 4.6 tokens each on average. An agent
   with a token or two can hardly stake differently from another.
 
-> [!info] Added later, 12 November 2026: the four that seemed to pass nothing on
-> The rule of no heredity read the births-only tree, which played children
-> against agents whose brains had mostly been replaced by conquests since. On
-> the brains' own tree seeds 3066 and 3084 pass their brains on faithfully
-> (heredity indices of 0.97 and 0.96). Seeds 3044 and 3077, whose brains change
-> after every game with a probability of 0.8, keep a weak heredity (0.26 and
-> 0.29). So for the evolution rank this rule rules nothing out; the other four
-> still filter.
+Since 12 November 2026 the rule of no heredity rules nothing out of the
+evolution rank. It played children against agents whose brains conquests had
+mostly replaced since. On the brains' own tree, seeds 3066 and 3084 pass their
+brains on faithfully (heredity indices of 0.97 and 0.96), and seeds 3044 and
+3077, whose brains change after every game with a probability of 0.8, keep a
+weak heredity (0.26 and 0.29). The other four rules still filter.
 
 The ten worlds that lived and are ruled out:
 
@@ -169,47 +158,35 @@ The ten worlds that lived and are ruled out:
 
 ## The candidates, pillar by pillar
 
-On the births-only tree, as it was read on 9 November 2026, the 72 candidate
-worlds evolve fast, but in few lines.
-- **Many generations.** A median of 825 generations in 3,000 iterations: one
-  every 3.6 iterations.
-- **Few lines.** Going back from the living, all of them descend from one
-  ancestor a median of 23 generations earlier. That is an effective population
-  of about 14 in the median world: below 50 in 53 worlds, above 500 in only 8.
-  In most worlds, chance decides which line goes on, whatever its agents do.
-- **Children are like their parents, partly.** A median heredity index of 0.39,
-  from 0.12 to 0.86.
-- **Fertility runs in families.** In 65 of the 72 worlds a parent's number of
-  children says clearly more of its children's than chance would (a median of
-  0.18 above chance in the correlation).
-- **The line of descent moves slowly.** Its late eras lie a median of 0.08
-  above the noise from every earlier era, and in 15 worlds it never comes back
-  to behaviour it had shown before.
+These readings are of the births-only tree, as they stood on 9 November 2026.
+On 12 November 2026 the brain-copy tree replaced them for every reading but
+fertility ([The brains' own family tree](#the-brains-own-family-tree)), and
+this section was cut to its medians and its table. On the births-only tree,
+the median candidate world has:
+- **825 generations** in 3,000 iterations: one every 3.6 iterations;
+- **an effective population of about 14**: all the living descend from one
+  ancestor 23 generations earlier. It is below 50 in 53 worlds, above 500 in
+  only 8;
+- **a heredity index of 0.39**, from 0.12 to 0.86;
+- **a line of descent that moves slowly**: its late eras lie 0.08 above the
+  noise from every earlier era, and in 15 worlds it never comes back to
+  behaviour it had shown before.
 
-> [!info] Added later, 12 November 2026: read on the births-only tree
-> Generations, the effective population of about 14, heredity and novelty
-> above were read on the family tree of births alone, which misses every brain
-> copied by a conquest. In the median of the 82 worlds read on the brains'
-> own tree, a brain has 2,700 copies behind it; the effective population is
-> about 100; a child acts almost as its parent (0.96), since only 4% of the
-> pairs the births-only tree played still held parent and child brains; and
-> the line of descent moves a little less, 0.07 above the noise against 0.08
-> on the births-only line of the same worlds
-> ([The brains' own family tree](#the-brains-own-family-tree)).
+**Fertility runs in families**, and this reading stands, since it counts
+births: in 65 of the 72 worlds a parent's number of children says clearly more
+of its children's than chance would (a median of 0.18 above chance in the
+correlation).
 
-Three pulls show across the worlds on the births-only tree
-([rank correlations](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") over the 72):
-- **heredity against novelty (−0.37):** where children are most like their
-  parents, the line of descent changes least. Keeping what works and finding
-  something new pull against each other;
-- **health against heredity (−0.30):** the healthiest worlds pass on less;
-- **health with novelty (+0.23):** the healthiest worlds change a little more.
+Three pulls showed across the 72 worlds ([rank correlations](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.")): heredity against
+novelty (−0.37), health against heredity (−0.30), and health with novelty
+(+0.23). Where children were most like their parents, the line of descent
+changed least; and the healthiest worlds passed on less, but changed a little
+more.
 
-Each candidate world's readings on the births-only tree, with its rank in each
-in brackets, 1 the best. The table is sorted by the mean of those ranks; that
-mean is superseded by [the evolution rank](#the-evolution-rank), and so is the
-mean over six of them that research/screen/funnel.py keeps as
-`evolution_rank`.
+Each candidate world's births-only readings, with its rank in each in
+brackets, 1 the best. The table is sorted by the mean of those ranks; the
+[evolution rank](#the-evolution-rank) replaces that mean, and the mean over six
+of them that research/screen/funnel.py keeps as `evolution_rank`.
 
 <!-- table oeecandidates/ranks -->
 | world | round | agents | generations | heredity | effective population | novelty | contemporaries | fertility passed on | health | tokens an agent | mean rank | channels open |
@@ -335,20 +312,16 @@ Health comes in three orders: the six criteria multiplied, added, or the
 worst of them ([Which worlds are healthy?](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together)).
 The author (9 November 2026): "the union of the best of these rankings are
 candidates." So the **shortlist** is every candidate world among the first 13
-of any of the three orders. Its history, told here once:
-- On 9 November 2026 it held 24 worlds, and the author chose to play them
-  again with new seeds ([Experiment 43](#round-3s-best-worlds-played-again)).
-- Later that day health came to count agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link
-  ([Which worlds are healthy?](which-worlds-are-healthy.md)), and the shortlist
-  became 21 worlds: seeds 3004, 3016, 3026, 3030, 3051, 3094 and 3095 left it,
-  and seeds 3005, 3006, 3064 and 3093 joined it.
-- Experiment 43 took out three of its 24 whose links ran away (seeds 3094,
-  3030 and 3095) and added the four that joined: 25 [settings](settings.md "One number or switch of a run's rules, fixed before it starts.").
+of any of the three orders: 21 worlds since later on 9 November 2026, when
+health came to count agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link
+([Which worlds are healthy?](which-worlds-are-healthy.md)). Before, it held 24,
+and the author chose to play those again with new seeds
+([Experiment 43](#round-3s-best-worlds-played-again)); what changed is told in
+[How our view changed](#how-our-view-changed).
 
-Health chooses the shortlist, not evolution. The
-[evolution rank](#the-evolution-rank) orders the same worlds by evolution; the
-table gives each shortlisted world's place in it beside its health, and its
-births-only numbers.
+Health chooses the shortlist, not evolution. The table gives each shortlisted
+world's place in the [evolution rank](#the-evolution-rank) beside its health,
+and its births-only numbers.
 
 <!-- table oeecandidates/shortlist -->
 | world | round | among the first 13 by | health (product) | evolution rank | heredity (births only) | novelty (births only) | generations (births only) | effective population (births only) | fertility passed on | channels open |
@@ -383,18 +356,15 @@ births-only numbers.
   brain tree its children act almost as their parents (0.95), and it is the
   59th by evolution: selection on its behaviours is among the weakest of the
   round.
-- **Seed 3026 has some of the simplest rules of the round:**
-  [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), handing over, mending, [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the newborns, and a cap of 16 links that seldom binds; no search, no gifts,
-  no costs on links. The births-only categories put it first: the most
-  generations (2,159) and the line of descent reaching furthest into new
-  behaviour (0.26 above the noise). The evolution rank puts it 19th, its
-  children faithful copies (an index of 1.00). It just
+- **Seed 3026 has some of the simplest rules of the round:** [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."),
+  handing over, mending, [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the newborns, and a cap of 16 links that
+  seldom binds; no search, no gifts, no costs on links. The births-only
+  readings put it first: the most generations (2,159) and the line of descent
+  reaching furthest into new behaviour (0.26 above the noise). The evolution
+  rank puts it 19th, its children faithful copies (an index of 1.00). It just
   misses the shortlist: it is the 17th by its worst criterion of health, the
   23rd by the product and the 36th by the sum, since it culls 12% of its
   tokens in a game and its agents act alike.
-- **Many worlds that evolve well are not among the healthiest:** of the
-  evolution rank's first ten, six are not on the shortlist
-  ([The first ten](#the-first-ten)).
 - **Seed 3092, which meets every one of the author's lines, is not on the
   shortlist:** it is the 30th by the product, the 31st by the sum and the 31st
   by its worst criterion, and the 44th by evolution
@@ -402,18 +372,16 @@ births-only numbers.
 
 ## The brains' own family tree
 
-In November 2026 an independent review of this page found two things. The
-shortlist is drawn from health, not from evolution. And the numbers of
-evolution above were read on a family tree of births alone. But a world copies
-brains in two ways. A child gets a copy of its parent's brain, in some worlds
-mixed with a mate's, and the copy may change. And a node won in the
-game keeps its agent, but takes on a copy
-of the winner's brain. In the median world of round 3 a game makes 1.4 copies
-for every birth: from almost none in seed 3020, a star, to 14 in seed 3004.
-So what descends in a world is its brains, not its agents. The author
-approved a plan to rank round 3 by evolution on the brains' own family tree,
-every reading set against a model of what chance alone would do (11 November
-2026).
+A world copies brains in two ways. A child gets a copy of its parent's brain,
+in some worlds mixed with a mate's, and the copy may change. And a node won in
+the game keeps its agent, but takes on a copy of the winner's brain. In the
+median world of round 3 a game makes 1.4 copies for every birth: from almost
+none in seed 3020, a star, to 14 in seed 3004. So what descends in a world is
+its brains, not its agents. In November 2026 an independent review found that
+this page read its numbers of evolution on a family tree of births alone, and
+drew its shortlist from health, not from evolution. On 11 November 2026 the
+author approved a plan to rank round 3 by evolution on the brains' own family
+tree, every reading set against a model of what chance alone would do.
 
 The **brain-copy tree** follows every copy of a brain, an **instance**. An
 instance begins in one of three ways:
@@ -425,12 +393,12 @@ instance begins in one of three ways:
   node of one game is won with the brains the game started with.
 
 An instance lasts while it holds its node, until the node is won by another or
-dies. A mutation that changes a brain
-where it sits gives it a new genotype, but it is the same copy, so it counts as
-a change of that copy, not as a new branch. One pass over every [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") of a
-world builds the tree: from 2.7 million copies in the smallest world to 53
-million in the largest, 1.6 billion in all. Most copies are short-lived: a
-brain holds its node for about one iteration before a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") wins it.
+dies. A mutation that changes a brain where it sits gives it a new genotype,
+but it is the same copy, so it counts as a change of that copy, not as a new
+branch. One pass over every [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") of a world builds the tree: from 2.7 million
+copies in the smallest world to 53 million in the largest, 1.6 billion in all.
+Most copies are short-lived: a brain holds its node for about one iteration
+before a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") wins it.
 
 On this tree every number of evolution changes. In the median world of the 82
 that lived:
@@ -447,38 +415,32 @@ that lived:
 | copies made by conquest | — | 58% |
 <!-- /table -->
 
-- **Many more generations.** A brain of the last iteration has a median of
-  2,700 copies behind it, against 850 births on the births-only tree:
-  conquests copy more often than births do.
+- **Many more generations**: a brain of the last iteration has a median of
+  2,700 copies behind it, against 850 births on the births-only tree.
 - **More lines, but far fewer than chance leaves.** The effective population
-  is about 100, against 14 on the births-only tree. In a shadow world, where
-  every copy's parent is drawn at random among the living (below), it is
-  about 3,500. Going back from the living at the end, all of them descend from
-  one brain a median of 193 iterations earlier. In their shadows, the living
-  of most worlds do not meet one ancestor within the run's 3,000 iterations at
-  all.
-- **Children are copies.** On the brain tree a child acts almost exactly as
-  its parent does: a heredity index of 0.96, against 0.41 on the births-only
-  tree. The births-only tree played the wrong pairs. By the time a child and
-  the agent that bore it were played together, one of their nodes had nearly
-  always been won by a neighbour since. Only 4% of those pairs still held the
-  parent's brain and the child's.
-- **The line of descent moves somewhat less.** Its late eras lie a median of
-  0.07 above the noise from every earlier era, against 0.08 on the births-only
-  line.
+  is about 100, against about 3,500 in a shadow world, where every copy's
+  parent is drawn at random among the living (below). All the living at the
+  end descend from one brain a median of 193 iterations earlier; in their
+  shadows, the living of most worlds meet no one ancestor within the run's
+  3,000 iterations.
+- **Children are copies**, with a heredity index of 0.96. The births-only
+  tree played the wrong pairs: by the time a child and the agent that bore it
+  were played together, one of their nodes had nearly always been won by a
+  neighbour since. Only 4% of those pairs still held the parent's brain and
+  the child's.
+- **The line of descent moves somewhat less**: 0.07 above the noise from
+  every earlier era, against 0.08 on the births-only line.
 
 ## The evolution rank
 
 The **evolution rank** orders every world of round 3 that lived by four
 readings of evolution on the brain-copy tree, each set against a model of what
 would happen without evolution (research/screen/evolution.py, 12 November
-2026). It is the rank in force. The mean ranks over the births-only categories
-(the pillar-by-pillar table above, and the mean over six of them that
-research/screen/funnel.py keeps) are superseded. Health does not score it.
-Health of 9 November only filters, by the funnel's rules: a world that died
-(the dead are not ranked), a star, one holding, or a line that stands still.
-The rule of no heredity filters nothing, since it read the births-only tree
-([The worlds ruled out](#the-worlds-ruled-out)).
+2026). It replaces the mean ranks of the births-only readings
+([The candidates, pillar by pillar](#the-candidates-pillar-by-pillar)).
+Health does not score it. Health of 9 November only filters, by the funnel's
+rules: a world that died (the dead are not ranked), a star, one holding, or a
+line that stands still ([The worlds ruled out](#the-worlds-ruled-out)).
 
 The four readings and their nulls:
 
@@ -523,35 +485,29 @@ sum, then by the worst. The first ten of each of the three orders, together,
 are the rank's bests. Every world's readings, their z-scores and its rank are
 in `research/screen/evolution.json`.
 
-What the four readings say across round 3:
+What the four readings say across round 3 (tests 3 and 4 tell the first and
+the third in full):
 - **Lines spread beyond luck in 73 of the 82 worlds**, by more than two of
   the shadow's spreads, and in 69 the common ancestor of the living is more
-  recent than in any of its 100 shadows. Copies are made next door, and
-  locality alone makes lines meet and sweep more slowly than in a shadow whose
-  parents come from anywhere. So a world that beats its shadow does so in
-  spite of being local. Three worlds spread their lines more slowly than luck
-  would: seed 3077, whose brains change after every game with a probability
-  of 0.8, and seeds 3030 and 3094, whose agents are mostly newborns and whose
-  links are kept only while paid for (the two taken out of Experiment 43). The
-  reading grows with a world's size (a rank correlation of 0.67 with its
-  agents): luck narrows a large world's ancestry slowly, so a large world
-  beats its shadow by more, in effect as well as in its z-score.
+  recent than in any of its 100 shadows. Three worlds spread their lines more
+  slowly than luck would: seed 3077, whose brains change after every game
+  with a probability of 0.8, and seeds 3030 and 3094, whose agents are mostly
+  newborns and whose links are kept only while paid for (the two taken out of
+  Experiment 43). The reading grows with a world's size (a rank correlation
+  of 0.67 with its agents): luck narrows a large world's ancestry slowly, so a
+  large world beats its shadow by more, in effect as well as in its z-score.
 - **Hardly any line of descent finds more than mutation alone.** In 79 of
   the 82 worlds the line moves less far than lines that only mutate; in seeds
   3007, 3044 and 3077 a little further, by 0.01 to 0.02. Selection holds
   behaviour in place, rather than pushing it somewhere new.
 - **Selection on behaviour is plain, but behaviours do not follow it.**
   Spreading the stake brings more descendants in 99% of the eras of all the
-  worlds; more links for a newborn in four eras of five; a larger share for a
-  child fewer, in four of five. Yet a behaviour's mean does not move from era
-  to era the way its selection points (a rank correlation of 0.05 in the
-  median world). A copy lands in another node, with other tokens and
-  neighbours, and acts as its new place makes it act.
+  worlds; yet a behaviour's mean does not move from era to era the way its
+  selection points (a rank correlation of 0.05 in the median world).
 - **Heredity is near 1 in all but a few worlds**: 0.9 or more in 68 of the 82,
-  so on the brain tree copies are faithful, and this reading orders the worlds
-  little. The lowest are seeds 3044 and 3077, which change every brain after
-  every game with a probability of 0.8 (0.26 and 0.29), and seed 3020, the
-  star, whose brains are nearly never copied by conquest (0.50).
+  so this reading orders the worlds little. The lowest are seeds 3044 and
+  3077 (0.26 and 0.29), and seed 3020, the star, whose brains are nearly never
+  copied by conquest (0.50).
 
 ### The first ten
 
@@ -571,19 +527,17 @@ What the four readings say across round 3:
 <!-- /table -->
 
 - **Eight of the first ten play the game a token at a time.** Round 3 drew
-  eight such settings and played each twice, weakest first and strongest
+  eight such [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and played each twice, weakest first and strongest
   first; twelve of those worlds lived, and eight of them are here. The same
   draw lands near itself both ways: seeds 4003, 4002 and 4007 are in the first
   ten played either way. These twelve worlds beat the rest on all four
-  readings, most of all on heredity and novelty. Those two play each brain as
-  if it placed its stake all at once, as research/oee/checks/diversity.py
+  readings, most of all on heredity and novelty. But those two play each brain
+  as if it placed its stake all at once, as research/oee/checks/diversity.py
   plays every world's, so for these worlds they read a likeness of the brain
-  rather than the way it stakes; on the shadow and on selection, read from
-  what the worlds did, three of them are among the first ten.
-- **Four of the first ten are on today's shortlist:** seeds 4002 and 4008
-  played weakest first, 3093, and 4006 played strongest first. Six are not:
-  seeds 4003 played either way, 4007 played either way, 4002 played strongest
-  first, and 3037.
+  rather than the way it stakes. On the shadow and on selection, read from
+  what the worlds did, three of the twelve are among the first ten.
+- **Four of the first ten are on the shortlist:** seeds 4002 and 4008 played
+  weakest first, 3093, and 4006 played strongest first.
 - **Health filters one of them out:** seed 3037, a crowded and poor world
   whose line of descent stands still and whose agents act alike
   ([The worlds ruled out](#the-worlds-ruled-out)). Its shadow reading is among
@@ -787,19 +741,16 @@ settings, or was the luck of its seed:
 > **It fails if:** Either: the rank correlation is below 0.2, or the median difference between a setting's two new worlds is 0.11 or more. Then health is mostly the luck of a seed or the size of a world, and a world's place in round 3 says little about its settings.
 <!-- /thesis -->
 
-On 9 November 2026 three of the 24 settings whose links ran away were taken
-out (seeds 3094, 3030 and 3095), and the four worlds that had just joined the
-shortlist were added, so the experiment plays 25 settings in 50 runs. The
-thesis is judged over the 21 it was planned with, by health as it was then;
-the four are reported beside it, and the three settings without a hard limit
-on links (seeds 3016, 3042 and 3087) are played on, watched
-([How our view changed](#how-our-view-changed)).
-
-> [!info] Added later, 12 November 2026: 25 settings, not 24
-> The thesis names 24 worlds. Experiment 43 has played 25 settings since commit
-> `650c4ab` (9 November 2026): the 24 planned, less the three taken out, and the
-> four that joined the shortlist. The thesis keeps its words, and is still
-> judged over the 21 it was planned with.
+The thesis names 24 worlds. On 9 November 2026 three of them, whose links ran
+away, were taken out (seeds 3094, 3030 and 3095), and the four worlds that had
+just joined the shortlist were added: since commit `650c4ab` the experiment
+plays 25 settings in 50 runs. The thesis keeps its words. It is judged over
+the 21 it was planned with, by health as it was then, without agents on loops
+per link (the author's choice); the three taken out are neither counted as
+dead nor scored, and the four are reported beside it. The three settings
+without a hard limit on links (seeds 3016, 3042 and 3087) are played on,
+watched: a run whose links an agent climb past twice what its world held in
+round 3 is stopped and shown to the author.
 
 <!-- runs E43 -->
 > [!info]- The runs behind this page
@@ -836,22 +787,18 @@ on links (seeds 3016, 3042 and 3087) are played on, watched
 
 ## What we learned
 
-- **72 of round 3's hundred worlds are candidate worlds.** The others died,
-  are a star, seemed to pass nothing on, or stand still (all five are crowded
-  and poor).
-- **Brains descend through conquests as much as through births.** On the
-  brains' own family tree, children are faithful copies, and the living
-  descend from far fewer ancestors than luck would leave them.
-- **Selection is plain, but it holds behaviour in place.** Lines spread faster
-  than luck would spread them, and selection on behaviour shows in every
-  world; but hardly any line of descent finds more new behaviour than
+- **72 of round 3's hundred worlds are candidate worlds**; all five that stand
+  still are crowded and poor.
+- **Evolution must be read on the brains' own family tree.** Conquests copy
+  brains more often than births do, and a tree of births alone misreads both
+  heredity and how many lines go on.
+- **Selection is plain, but it holds behaviour in place.** Lines spread
+  faster than luck would spread them, and selection on behaviour shows in
+  every world; but hardly any line of descent finds more new behaviour than
   mutation alone, and the behaviours do not follow their selection.
-- **The evolution rank's first ten** are seeds 4003 played strongest first,
-  4002 and 4008 played weakest first, 4007 and 4003 played weakest first,
-  4007 and 4002 played strongest first, 3037, 3093, and 4006 played
-  strongest first: eight of them play the game a token at a time. Four are on
-  the shortlist, which health draws, and health and the rank do not go
-  together.
+- **Health does not pick the worlds that evolve.** Four of the evolution
+  rank's first ten are on the shortlist; eight of the ten play the game a
+  token at a time.
 - **Fertility runs in families in almost every world** (on the births-only
   tree); mending deaths weakens it.
 
@@ -921,23 +868,18 @@ themselves.
   of the plan, with seed 3095, the third shortlisted world of the kind; the
   stopped runs stay on disk (`B1-50000-4ac946-s4301` and `-s4302` at about
   iteration 670, `B1-50000-90fc91-s4301` at about 600). The four worlds that
-  had joined the shortlist, seeds 3005, 3006, 3064 and 3093, were added with
-  the same two seeds: 25 settings, 50 runs. The thesis keeps its words and is
-  judged over the 21 it was planned with, by health as it was then, without
-  agents on loops per link (the author's choice); the three taken out are
-  neither counted as dead nor scored. The three settings without a hard limit
-  on links (seeds 3016, 3042 and 3087) are played on, watched: a run whose
-  links an agent climb past twice what its world held in round 3 is stopped
-  and shown to the author.
+  had joined the shortlist were added with the same two seeds
+  ([Round 3's best worlds, played again](#round-3s-best-worlds-played-again)).
 - **12 November 2026.** An independent review found that the family tree of
   this page follows births only, though conquests copy brains as often or more,
   and that the shortlist ranks by health. On the brains' own family tree
-  ([The evolution rank](#the-evolution-rank)), over the 82 worlds that lived,
-  generations rise from a median of 850 to 2,700, the effective population
-  from about 14 to 100, and heredity from 0.41 to 0.96. Round 3 was ranked by
-  four readings of evolution against chance; health stands beside the rank
-  only as a filter. The rule of no heredity no longer rules a world out. The
-  reading took two goes: the drive holding 18 of the worlds failed in the
-  middle of it and was read again the same afternoon.
-
-
+  ([The brains' own family tree](#the-brains-own-family-tree)), over the 82
+  worlds that lived, generations rise from a median of 850 to 2,700, the
+  effective population from about 14 to 100, and heredity from 0.41 to 0.96.
+  Round 3 was ranked by four readings of evolution against chance
+  ([The evolution rank](#the-evolution-rank)); health stands beside the rank
+  only as a filter, and the rule of no heredity no longer rules a world out.
+  The same day the page was cut to say each thing once: the births-only
+  readings to their medians and their table
+  ([The candidates, pillar by pillar](#the-candidates-pillar-by-pillar)), and
+  the shortlist's and Experiment 43's history to this list.
