@@ -53,8 +53,8 @@ COINS, NOISE_COINS, T = "17..19", "17..20", 100
 #: Experiment 46: its size, how much bigger the bigger arm is, how long, its seeds.
 TOKENS, BIGGER, ITERATIONS, SEEDS = 10000, 4, 20000, "4601..4603"
 #: The most worker-hours, by the lab's cost model, Experiment 46 may take: about
-#: two days on the lab's two workers (its runs have taken 0.8 to 1.0 of the
-#: model's time). A world whose rules would take longer is passed over.
+#: four days on the one worker it is given (the lab's runs have taken 0.8 to 1.0
+#: of the model's time). A world whose rules would take longer is passed over.
 HOURS = 100
 #: How a brain changes: what the faithful-copies arm takes from the world of round 3 whose copies are most faithful.
 MUTATION = ("mutate_on_replication", "mutation_probability", "mutation_noise_std", "mutation_sparsity")
@@ -75,12 +75,12 @@ def lived_by_health() -> List[Dict[str, Any]]:
 
 
 def ranked() -> List[Dict[str, Any]]:
-    """Round 3's worlds that lived, most evolution first."""
+    """Round 3's worlds that lived and that health's filter lets through, most evolution first."""
     with open(EVOLUTION) as f:
         rank = json.load(f)
     if rank.get("provisional"):
         raise SystemExit(f"{EVOLUTION} is provisional: wait for the whole rank")
-    return sorted(rank["worlds"], key=lambda w: w["rank"])
+    return sorted((w for w in rank["worlds"] if not w["filter"]), key=lambda w: w["rank"])
 
 
 def chosen_worlds() -> Tuple[List[str], Dict[str, List[str]]]:
@@ -102,7 +102,10 @@ def e45() -> Dict[str, Any]:
         "id": "E45", "title": "Did the brains get better? Round 3's eras, with more coins",
         "thesis": {"claim": "", "why": "", "confirm": "", "refute": ""},
         "chosen": groups,
-        "trials": {"kind": "contest", "T": T, "sets": [
+        # Two workers at most, so that one is left for Experiment 46's runs and then
+        # Experiment 47's contests: the lab starts the longest job first, and those
+        # contests, shorter than these, would wait for all of them.
+        "trials": {"kind": "contest", "T": T, "workers": 2, "sets": [
             {"name": f"against {FIRST:,}",
              "grid": {"run": worlds, "pair": [[FIRST, e] for e in ERAS], "home": ["a", "b"], "seed": COINS}},
             {"name": f"against {MIDDLE:,}",
@@ -196,13 +199,28 @@ def arms_of(spec: gol_plan.RunSpec, base: Dict[str, Any]) -> Tuple[List[Dict[str
 
 
 def cost(arms: List[Dict[str, Any]], base: Dict[str, Any]) -> float:
-    """Worker-hours, by the lab's cost model, of every run of these arms."""
+    """
+    Worker-hours, by the lab's cost model, of every run of these arms. An arm
+    the lab has never measured goes at the pace of its world, the control's:
+    the model's average over all runs makes a world of round 3 between 12
+    times faster and 15 times slower than it goes.
+    """
     import gol_costs
     known = gol_costs.costs()
+    kinds = known.get("kinds", {})
+
+    def config(a: Dict[str, Any], tokens: int) -> Dict[str, Any]:
+        return {**base, **a["set"], **a.get("world", {}), "total_tokens": tokens}
+    own = kinds.get(gol_costs.kind_of(config(arms[0], TOKENS)), {})
     seeds = len(gol_plan.parse_seeds(SEEDS))
-    return sum(seeds * gol_costs.predict({**base, **a["set"], **a.get("world", {}), "total_tokens": tokens},
-                                         ITERATIONS, known)["seconds"] / 3600
-               for a in arms for tokens in a.get("sizes", [TOKENS]))
+    hours = 0.0
+    for a in arms:
+        for tokens in a.get("sizes", [TOKENS]):
+            c = config(a, tokens)
+            kind = gol_costs.kind_of(c)
+            paced = {**known, "kinds": {**kinds, kind: kinds.get(kind) or own}}
+            hours += seeds * gol_costs.predict(c, ITERATIONS, paced)["seconds"] / 3600
+    return hours
 
 
 def e46() -> Dict[str, Any]:
