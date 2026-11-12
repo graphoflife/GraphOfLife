@@ -1,6 +1,7 @@
 /*
- * The front page's other backdrop: a network of eyes, grown out of the
- * screen itself, round one great eye that looks back at you.
+ * The front page's first backdrop (the other is the recorded world): a
+ * network of eyes, grown out of the screen itself, round one great eye that
+ * looks back at you.
  *
  * The mark is six agents, each one an eye, the middle one joined to the rest;
  * this is the mark come alive. The great eye stands where the mark stands,

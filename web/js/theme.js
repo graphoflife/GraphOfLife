@@ -2,10 +2,11 @@
  * The colour themes, and the switch in the top bar that chooses one.
  *
  * A theme is a set of tokens in style.css, chosen by the name on <html
- * data-theme="…">; Obsidian, the default, has no name there. The choice is
- * kept in this browser (localStorage), and a two-line script in index.html's
- * <head> puts it back before anything is painted, so a white page never
- * flashes dark on the way in.
+ * data-theme="…">; Obsidian, the stylesheet's base, has no name there. The
+ * choice is kept in this browser (localStorage), and a two-line script in
+ * index.html's <head> puts it back before anything is painted, so a white
+ * page never flashes dark on the way in. Until a browser chooses, that script
+ * gives it Phosphor.
  *
  * Changing theme changes the stylesheet's colours at once, but not what was
  * painted on a canvas: those read their inks through Ink, once. So the change
@@ -19,7 +20,7 @@ const Theme = {
   THEMES: [['obsidian', 'Obsidian'], ['phosphor', 'Phosphor'],
            ['midnight', 'Midnight'], ['paper', 'Paper']],
 
-  current: 'obsidian',
+  current: 'phosphor',
 
   init() {
     const set = document.documentElement.dataset.theme;

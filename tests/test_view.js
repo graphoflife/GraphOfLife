@@ -1255,7 +1255,7 @@ function test_no_canvas_writes_a_colour_out() {
 
 function test_every_theme_sets_every_ink_a_canvas_reads() {
   // A theme restates the colours of the first block, and a colour it forgets
-  // comes through from the dark default: on the white theme that is a chart
+  // comes through from the dark base: on the white theme that is a chart
   // grid, a line or an eye nobody can see. Every ink a canvas reads (Ink.ROLES)
   // and every series colour has to be in every theme — unless the default
   // builds it from tokens of its own (var(...)), which the theme then sets.
@@ -1274,7 +1274,7 @@ function test_every_theme_sets_every_ink_a_canvas_reads() {
   for (const match of themes) {
     const own = tokens(block(match.index));
     const missing = needed.filter(token => !own.has(token));
-    assert(!missing.length, `the ${match[1]} theme leaves ${missing.join(', ')} to the dark default`);
+    assert(!missing.length, `the ${match[1]} theme leaves ${missing.join(', ')} to the dark base`);
   }
 }
 

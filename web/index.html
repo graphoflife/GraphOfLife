@@ -18,9 +18,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Spectral:ital,wght@0,400;0,600;1,400;1,600&display=swap">
 <link rel="stylesheet" href="css/style.css">
-<!-- The theme this browser chose, put back before anything is painted, so a
-     white page does not flash dark on the way in (theme.js keeps it). -->
-<script>try { var t = localStorage.getItem('gol.theme'); if (t && t !== 'obsidian') document.documentElement.dataset.theme = t; } catch (e) { /* a private window: the default */ }</script>
+<!-- The theme this browser chose, Phosphor until it chooses one, put back
+     before anything is painted, so a white page does not flash dark on the
+     way in (theme.js keeps it). -->
+<script>var t = 'phosphor'; try { t = localStorage.getItem('gol.theme') || t; } catch (e) { /* a private window: the default */ } if (t !== 'obsidian') document.documentElement.dataset.theme = t;</script>
 </head>
 <body>
 
@@ -106,20 +107,21 @@
 <!-- ==================== HOME VIEW ==================== -->
 <main id="view-home" class="view active">
   <div class="home-stage">
-    <!-- The background is a real run, recorded rather than computed here: the
+    <!-- One backdrop is a real run, recorded rather than computed here: the
          page has to open at once, and it must not leave a stray simulation
          behind on a machine that has a server. -->
     <canvas id="homeCanvas"></canvas>
-    <!-- The other backdrop: a living network of eyes, round one that looks
-         back (eyes.js). Only one of the two is ever drawn. -->
+    <!-- The other, and the one a first visit sees: a living network of eyes,
+         round one that looks back (eyes.js). Only one of the two is ever
+         drawn. -->
     <canvas id="homeEyes" class="home-eyes" aria-hidden="true"></canvas>
     <!-- A wall of the machine's digits half lost in the dark around the
          edges, drawn once and then changing a few at a time (glyphwall.js). -->
     <canvas id="homeGlyphs" class="home-glyphs" aria-hidden="true"></canvas>
     <div class="home-veil"></div>
-    <!-- The old tube television both backdrops are seen through: its glass,
-         still scan lines, and the page's own colour beyond it (tube.js). Over
-         the pictures, under the words. -->
+    <!-- The old tube television both backdrops are seen through: its glass
+         and still scan lines, out to the window's edges (tube.js). Over the
+         pictures, under the words. -->
     <canvas id="homeTube" class="home-tube" aria-hidden="true"></canvas>
 
     <div class="home-hero">

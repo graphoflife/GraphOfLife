@@ -4,12 +4,13 @@
  * Themes.
  *
  * Every colour on the page is a token here, and a theme is one set of them.
- * The first block is Obsidian, the default: near-black stone with a cold
- * verdigris cast, a phosphor accent, and gold for titles. Phosphor is a black
- * and green terminal, Midnight a deep indigo, and Paper is white. theme.js
+ * The first block is Obsidian, the base: near-black stone with a cold
+ * verdigris cast, a phosphor accent, and gold for titles. Phosphor, what a
+ * first visit sees, is a black and green terminal, Midnight a deep indigo,
+ * and Paper is white. theme.js
  * writes the chosen name on <html data-theme="…">, and each block after this
  * one restates every colour of its own — every one, because a colour a theme
- * forgot would come through from the dark default, and on a white page that
+ * forgot would come through from the dark base, and on a white page that
  * is a line nobody can see. tests/test_view.js holds every theme to it.
  *
  * Canvases read their inks from here too (ink.js), down to the network's

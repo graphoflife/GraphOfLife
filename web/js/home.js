@@ -75,9 +75,9 @@ const Home = {
   failed: false,
   full: false,                 // the backdrop alone, full screen (enterFull)
 
-  /** Which backdrop: the recorded world, or the network of eyes (eyes.js). */
+  /** Which backdrop: the network of eyes (eyes.js), or the recorded world. */
   BACKDROP: 'gol.home.backdrop',
-  backdrop: 'world',
+  backdrop: 'eyes',
 
   init() {
     this.canvas = document.getElementById('homeCanvas');
@@ -101,8 +101,8 @@ const Home = {
     Tube.init(document.getElementById('homeTube'), this.stage);
 
     try {
-      if (localStorage.getItem(this.BACKDROP) === 'eyes') this.backdrop = 'eyes';
-    } catch (err) { /* a private window: the world */ }
+      if (localStorage.getItem(this.BACKDROP) === 'world') this.backdrop = 'world';
+    } catch (err) { /* a private window: the eyes */ }
     this.switch = document.getElementById('homeBackdrop');
     for (const button of this.switch ? this.switch.querySelectorAll('[data-backdrop]') : []) {
       button.addEventListener('click', () => this.choose(button.dataset.backdrop));
