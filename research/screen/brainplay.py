@@ -59,6 +59,8 @@ import candidates as K  # noqa: E402
 SITUATIONS, LINE_SITUATIONS = K.SITUATIONS, K.LINE_SITUATIONS
 #: Null lines a world, and the seed of everything drawn here.
 NULLS, SEED = 6, 13
+#: Pairs shuffled into strangers for heredity's null.
+SHUFFLES = 200
 
 
 def _is_layer(key: str) -> bool:
@@ -152,8 +154,19 @@ def heredity(run_id: str, at: int, pairs: Dict[str, Any]) -> Dict[str, Any]:
     def index(child: float) -> Optional[float]:
         return (stranger - child) / (stranger - itself) if stranger > itself else None
 
+    # Against its null: children given another pair's parent at random, SHUFFLES times; the median distance
+    # those strangers lie at, and how many of its spreads the real median lies below it.
+    shuffled = []
+    order = np.arange(len(drawn))
+    for _ in range(SHUFFLES):
+        perm = rng.permutation(order)
+        while np.any(perm == order):                 # a derangement: nobody keeps its own parent
+            perm = rng.permutation(order)
+        shuffled.append(float(np.median(cross[perm, order])))
+    shuffled = np.array(shuffled)
+    z = (float(shuffled.mean()) - float(np.median(own))) / float(shuffled.std(ddof=1)) if shuffled.std() > 0 else None
     out = {"pairs": len(drawn), "agents": pairs["agents"], "itself": itself, "child": float(np.median(own)),
-           "stranger": stranger, "index": index(float(np.median(own)))}
+           "stranger": stranger, "index": index(float(np.median(own))), "z": z}
     for k in ("birth", "conquest"):
         mine = own[kinds == k]
         out[k] = {"pairs": int(mine.size), "child": float(np.median(mine)) if mine.size else None,
@@ -252,22 +265,23 @@ def line_and_null(run_id: str, line: List[Dict[str, Any]], mix_share: Optional[f
     total /= len(places)
     real_read = novelty(total[:E, :E], eras, until)
     null_reads = [novelty(total[E * (1 + r):E * (2 + r), E * (1 + r):E * (2 + r)], eras, until) for r in range(nulls)]
-    floor = real_read["itself"]
-    late_null = np.array([n["late"] for n in null_reads if n["late"] is not None], float)
-    above = None
-    z = None
-    if real_read["late"] is not None and late_null.size:
-        above = real_read["late"] - float(late_null.mean())
-        sd = float(late_null.std(ddof=1)) if late_null.size > 1 else 0.0
+    # Each line's novelty above its own noise, a brain's distance from itself between two halves of the draws:
+    # a mutated brain may be noisier than an evolved one, and noise is not novelty.
+    real_late = (real_read["late"] - real_read["itself"]) if real_read["late"] is not None else None
+    null_late = np.array([n["late"] - n["itself"] for n in null_reads if n["late"] is not None], float)
+    above = z = None
+    if real_late is not None and null_late.size:
+        above = real_late - float(null_late.mean())
+        sd = float(null_late.std(ddof=1)) if null_late.size > 1 else 0.0
         z = above / sd if sd > 0 else None
     return {"eras": eras, "distance": total[:E, :E].round(5).tolist(), "real": real_read,
-            "null": {"late": late_null.tolist(), "nearest": np.mean([n["nearest"] for n in null_reads], axis=0).tolist(),
+            "null": {"late": [n["late"] for n in null_reads], "late_above_noise": null_late.tolist(),
+                     "nearest": np.mean([n["nearest"] for n in null_reads], axis=0).tolist(),
                      "steps": np.mean([n["steps"] for n in null_reads], axis=0).tolist(),
                      "itself": float(np.mean([n["itself"] for n in null_reads]))},
             "changes": [len(s) for s in plans[0]], "mixes": [s.count("x") for s in plans[0]],
             "broken": sum(1 for row in line[1:] if row.get("events") is None),
-            "late_above_noise": real_read["late"] - floor if real_read["late"] is not None else None,
-            "late_above_null": above, "z": z, "nulls": nulls, "seed": seed}
+            "late_above_noise": real_late, "late_above_null": above, "z": z, "nulls": nulls, "seed": seed}
 
 
 def main() -> None:

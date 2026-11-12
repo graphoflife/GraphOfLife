@@ -275,16 +275,17 @@ class Pass:
         d = frame["decisions"]
         births = d["births"]
         k = len(births)
-        parent = np.fromiter((b["agent"] for b in births), np.int64, k)
-        child = np.fromiter((b["child"] for b in births), np.int64, k)
+        parent = np.array([b["agent"] for b in births], np.int64)
+        child = np.array([b["child"] for b in births], np.int64)
         if k and np.any(np.diff(child) <= 0):
             raise ValueError(f"frame {f}: children's ids not in order")
         pp = _need(self.ids, parent, f"frame {f} births")
         made = self._new(self.inst[pp], f)
         # The units' decisions at birth: an agent has at most one child in a phase.
         unit = self.unit[pp]
-        self.z["child_share"][unit] = np.fromiter((b["invested"] / b["tokens_before"] for b in births), float, k)
-        self.z["links"][unit] = np.fromiter((len(b["links"]) for b in births), float, k)
+        self.z["child_share"][unit] = (np.array([b["invested"] for b in births], float)
+                                       / np.maximum(np.array([b["tokens_before"] for b in births], float), 1.0))
+        self.z["links"][unit] = np.array([len(b["links"]) for b in births], float)
         mates = d.get("mate_paid") or []
         if mates:
             m = np.asarray(mates, np.int64).reshape(-1, 3)
@@ -358,8 +359,8 @@ class Pass:
     def _game(self, f: int, frame: Dict[str, Any]) -> None:
         d = frame["decisions"]
         won = d["winners"]
-        node = np.fromiter((w["node"] for w in won), np.int64, len(won))
-        winner = np.fromiter((w["winner"] for w in won), np.int64, len(won))
+        node = np.array([w["node"] for w in won], np.int64)
+        winner = np.array([w["winner"] for w in won], np.int64)
         taken = node != winner
         pn = _need(self.ids, node[taken], f"frame {f} conquered nodes")
         pw = _need(self.ids, winner[taken], f"frame {f} winners")
@@ -379,12 +380,13 @@ class Pass:
         chg[pn] = 0
         born[pn] = f
         # The units' stakes: only an agent that is still its census self (a newborn of this iteration is not).
-        stakes = d["allocations"]
+        # A lean read of the frames leaves most games' stakes unread (None): their traits are not seen.
+        stakes = d.get("allocations")
         if stakes:
-            agent = np.fromiter((a["agent"] for a in stakes), np.int64, len(stakes))
-            held = np.fromiter((a["tokens"] for a in stakes), float, len(stakes))
-            spread = np.fromiter((bool(a["spread"]) for a in stakes), float, len(stakes))
-            home = np.fromiter((a["alloc"][0] for a in stakes), float, len(stakes))
+            agent = np.array([a["agent"] for a in stakes], np.int64)
+            held = np.array([a["tokens"] for a in stakes], float)
+            spread = np.array([a["spread"] for a in stakes], float)
+            home = np.array([a["alloc"][0] for a in stakes], float)
             pa = _need(self.ids, agent, f"frame {f} stakes")
             u = self.unit[pa]
             own = (u >= 0) & (self.inst[pa] == self.unit_inst[np.maximum(u, 0)])
@@ -464,9 +466,51 @@ class Pass:
         return summary
 
 
-def frames_of(run_id: str, count: int) -> Iterator[Tuple[int, Dict[str, Any]]]:
+#: The games whose stakes the pass reads: every STAKES-th. A game frame's stakes are half its text, only test 4
+#: reads them, and the tree needs none; the births, which test 4 also reads, come with every reproduction frame.
+STAKES = 5
+
+
+def _flat(text: bytes, key: bytes) -> List[int]:
+    """A flat list of numbers under a top-level key of a frame's compact JSON, parsed alone."""
+    start = text.index(b'"' + key + b'":[') + len(key) + 3
+    return json.loads(text[start:text.index(b"]", start) + 1])
+
+
+def _until(text: bytes, key: bytes, after: bytes) -> Any:
+    """The list under `key`, which the key `after` follows, parsed alone."""
+    start = text.index(b'"' + key + b'":[') + len(key) + 3
+    return json.loads(text[start:text.index(b'],"' + after + b'":', start) + 1])
+
+
+def lean_frame(run_id: str, f: int, stakes: bool) -> Dict[str, Any]:
+    """
+    What the pass reads of a frame, cut out of its text and parsed alone: gol_store writes a frame as compact
+    JSON with its keys in a fixed order (GraphOfLife._frame), so each list can be found by its key. The links,
+    ages, gifts and the like are never parsed, and a game's stakes only where `stakes` asks for them.
+    """
+    import zlib
+    with open(gol_store.frame_path(run_id, f), "rb") as fh:
+        text = zlib.decompress(fh.read(), 31)
+    head = json.loads(text[:text.index(b',"nodes_before":')] + b"}")
+    out = {"iteration": head["iteration"], "phase": head["phase"]}
+    for key in ("ids", "tokens", "brain_ids", "parent_brain_ids", "parent_ids"):
+        out[key] = _flat(text, key.encode())
+    if out["phase"] == 1:
+        d = {"births": _until(text, b"births", b"gifts")}
+        if b'"mate_paid":[' in text:
+            d["mate_paid"] = _until(text, b"mate_paid", b"pruned_edges")
+    else:
+        d = {"winners": _until(text, b"winners", b"pruned_edges"),
+             "allocations": _until(text, b"allocations", b"winners") if stakes else None}
+    out["decisions"] = d
+    return out
+
+
+def frames_of(run_id: str, count: int, lean: bool = True) -> Iterator[Tuple[int, Dict[str, Any]]]:
+    """A run's frames in order: leanly read (`lean_frame`, the stakes of every STAKES-th game), or whole."""
     for f in range(count):
-        yield f, gol_store.read_frame(run_id, f)
+        yield f, (lean_frame(run_id, f, (f // 2) % STAKES == 0) if lean else gol_store.read_frame(run_id, f))
 
 
 def config_of(run_id: str) -> SimConfig:
@@ -781,7 +825,10 @@ def copies(rows: Dict[str, np.ndarray], eras: Sequence[int], p: float, mixing: b
         one = float(rows["one"].sum()) / lived
         r = min(1.0, q * (1 - p) / one) if one > 0 else 0.0
     games = rows["census"] > 0
+    # The games the independent review read (frames 3999 to 4001 in a world of 3,000 iterations).
+    spot = np.flatnonzero(np.isin(t, (1999, 2000, 2001)) & games)
     return {"births": b, "conquests": c, "birth_share": b / (b + c) if b + c else None,
+            "conquests_per_agent_2000": float(np.mean(rows["conquests"][spot] / census[spot])) if spot.size else None,
             "conquest_share": c / (b + c) if b + c else None,
             "births_lived": float(rows["births_lived"].sum()), "conquests_lived": float(rows["conquests_lived"].sum()),
             "births_per_agent": float(np.mean(rows["births"][games] / census[games])),
@@ -1148,6 +1195,14 @@ def main() -> None:
         except Exception as e:  # noqa: BLE001 - the others go on; listed at the end
             failed.append((run_id, repr(e)))
             print(f"[{i}/{len(todo)}] {run_id} FAILED: {e!r}", flush=True)
+        # The rank as it stands, from every world read so far (research/screen/evolution.py, read afresh each
+        # time, so that it can be mended while the pass goes on).
+        try:
+            import importlib
+            import evolution
+            importlib.reload(evolution).write()
+        except Exception as e:  # noqa: BLE001 - the rank is remade at the end in any case
+            print(f"  the rank was not written: {e!r}", flush=True)
     if failed:
         print(f"{len(failed)} failed: " + "; ".join(f"{r} {e}" for r, e in failed))
         raise SystemExit(1)

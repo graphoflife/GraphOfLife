@@ -1,0 +1,218 @@
+{
+ "made": "2026-11-12",
+ "provisional": true,
+ "complete": 1,
+ "of": 82,
+ "missing": [
+  "B1-30000-17ac6e-s4004",
+  "B1-30000-4108dd-s3058",
+  "B1-30000-2bac4d-s4004",
+  "B1-30000-f6d23f-s3045",
+  "B1-30000-b23381-s3016",
+  "B1-30000-ad76aa-s3084",
+  "B1-30000-05ba40-s3090",
+  "B1-30000-7d5208-s3004",
+  "B1-30000-b0f6e3-s3023",
+  "B1-30000-631e49-s3033",
+  "B1-30000-dd27b6-s3078",
+  "B1-30000-4aff7d-s3021",
+  "B1-30000-625bc7-s3080",
+  "B1-30000-e19f2d-s3008",
+  "B1-30000-d6955f-s3026",
+  "B1-30000-ba3afe-s3065",
+  "B1-30000-42d88d-s3091",
+  "B1-30000-27bd64-s3046",
+  "B1-30000-02fa53-s3012",
+  "B1-30000-cca771-s3055",
+  "B1-30000-02ed17-s3043",
+  "B1-30000-def151-s3062",
+  "B1-30000-af1e28-s3018",
+  "B1-30000-b1209a-s3019",
+  "B1-30000-1141ea-s3082",
+  "B1-30000-00e3c8-s3061",
+  "B1-30000-3e5856-s3095",
+  "B1-30000-d9254e-s3054",
+  "B1-30000-ebe08c-s3050",
+  "B1-30000-8119cd-s3007",
+  "B1-30000-26a341-s3093",
+  "B1-30000-63827e-s3044",
+  "B1-30000-10c9f1-s3047",
+  "B1-30000-43985b-s3056",
+  "B1-30000-6f6c09-s4005",
+  "B1-30000-36d076-s3040",
+  "B1-30000-c18a1f-s3005",
+  "B1-30000-2ec87a-s3059",
+  "B1-30000-801b34-s3085",
+  "B1-30000-0d7e0c-s3083",
+  "B1-30000-965f1e-s3041",
+  "B1-30000-66c764-s3076",
+  "B1-30000-f05874-s3024",
+  "B1-30000-38aee9-s3057",
+  "B1-30000-794ae8-s3098",
+  "B1-30000-1cfaa4-s4008",
+  "B1-30000-c51eb8-s3049",
+  "B1-30000-5379e2-s4002",
+  "B1-30000-a6a7ec-s3064",
+  "B1-30000-298337-s3022",
+  "B1-30000-645972-s4008",
+  "B1-30000-77ad6a-s3089",
+  "B1-30000-192733-s4002",
+  "B1-30000-2eef58-s3028",
+  "B1-30000-605c0d-s3071",
+  "B1-30000-7fc03f-s3092",
+  "B1-30000-1ad8a9-s3038",
+  "B1-30000-04d3eb-s4007",
+  "B1-30000-a8a2d2-s4007",
+  "B1-30000-023c0a-s3006",
+  "B1-30000-8526cf-s4006",
+  "B1-30000-22865f-s3032",
+  "B1-30000-0d058a-s3052",
+  "B1-30000-a4d3a0-s3070",
+  "B1-30000-d6eabf-s3077",
+  "B1-30000-fffc7d-s4003",
+  "B1-30000-511930-s3020",
+  "B1-30000-dfd51b-s3066",
+  "B1-30000-845393-s3037",
+  "B1-30000-363694-s3087",
+  "B1-30000-9efb1d-s4003",
+  "B1-30000-7f7cd5-s3013",
+  "B1-30000-7d129f-s3014",
+  "B1-30000-b82ad0-s3042",
+  "B1-30000-4ac946-s3094",
+  "B1-30000-924e70-s3063",
+  "B1-30000-4bee8e-s3067",
+  "B1-30000-68cda7-s3001",
+  "B1-30000-f05562-s3072",
+  "B1-30000-90fc91-s3030",
+  "B1-30000-1ab8a0-s3099"
+ ],
+ "order": "score is the product of the four readings' shares (each the share of the 82 worlds it beats: the best 1, the worst 1/n), read as their geometric average; rank orders by score, then by the sum of the shares (as their average), then by the worst share, then by the world's id. The orders by the sum and by the worst are kept beside it, and the union of the first ten of each (bests).",
+ "readings": [
+  {
+   "key": "shadow",
+   "name": "lines spread beyond luck",
+   "better": "more",
+   "null": "the shadow world of pure luck: the same copies at the same moments and the same living, every copy's parent drawn uniformly among the living (100 replicates); the mean over the twelve eras of the z-scores of how much shorter the clades of the era's first living live, how much larger the largest clade is at the era's end, and how much more of the evolutionary activity is held by clades more active than 99% of the shadow's"
+  },
+  {
+   "key": "novelty",
+   "name": "novelty above the mutation-only null",
+   "better": "more",
+   "null": "six lines that start from the line of descent's brain at iteration 250 and make, era by era, as many changes of the world's own kind as the real line made, at random (mutations by the world's mutation_noise_std and mutation_sparsity; mixes with a contemporary drawn at random); the real line's late novelty above its own noise, less the null lines' mean (z: in the null lines' spreads)"
+  },
+  {
+   "key": "selection",
+   "name": "selection-gradient strength",
+   "better": "more",
+   "null": "fitness (descendants at the next iteration on the brain tree) shuffled among the agents of each iteration, whose mean (0) and variance the permutation fixes exactly; the value is the mean size of the standardized gradient, wealth held fixed, over four behaviours and twelve eras; z is the root mean square of the eras' gradient z-scores"
+  },
+  {
+   "key": "heredity",
+   "name": "heredity on the brain tree",
+   "better": "more",
+   "null": "children given another pair's parent at random (200 shuffles): an index of 0 means a child acts like a stranger, 1 like its parent; z is how many spreads of the shuffled medians the real median child-parent distance lies below them"
+  }
+ ],
+ "top": 10,
+ "bests": {
+  "product": [
+   "B1-30000-b5a76a-s3051"
+  ],
+  "sum": [
+   "B1-30000-b5a76a-s3051"
+  ],
+  "worst": [
+   "B1-30000-b5a76a-s3051"
+  ]
+ },
+ "union": [
+  "B1-30000-b5a76a-s3051"
+ ],
+ "worlds": [
+  {
+   "id": "B1-30000-b5a76a-s3051",
+   "round": "E40",
+   "seed": 3051,
+   "conquest_share": 0.8257839412664468,
+   "z": {
+    "shadow": 4.828892633561628,
+    "novelty": -3.0927579856655143,
+    "selection": 19.22190774496802,
+    "heredity": 14.234791868769554
+   },
+   "values": {
+    "shadow": 4.828892633561628,
+    "novelty": -0.10693607083648111,
+    "selection": 0.08172203488312875,
+    "heredity": 0.94979028435359
+   },
+   "beside": {
+    "birth_share": 0.17421605873355314,
+    "conquests_per_agent": 0.688022863145477,
+    "conquests_per_agent_2000": 0.757068754200341,
+    "births_per_agent": 0.1409145369471624,
+    "conquests_per_birth": 4.7399989832705645,
+    "generations": 2137.3284132841327,
+    "births_on_path": 10.375461254612546,
+    "conquests_on_path": 2126.9529520295205,
+    "generations_births_only": 140.65774907749076,
+    "common_ancestor_age": 125.0,
+    "common_ancestor_age_shadow": 1390.0,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 43.7045244690674,
+    "effective_population_shadow": 420.4242843951986,
+    "effective_population_births_only": 4.3288745387453815,
+    "heredity_births_only": 0.4092231496679041,
+    "heredity_birth_pairs": 1.1272487499658925,
+    "heredity_conquest_pairs": 0.9426449284238092,
+    "births_only_pairs_still_brain_pairs": 0.017699782713664895,
+    "novelty_above_noise": 0.061333216870421634,
+    "novelty_null_above_noise": 0.16826928770690275,
+    "novelty_births_only": 0.09227184331107258,
+    "shadow_z": {
+     "persist": 4.032356263981989,
+     "top": 5.08459255258661,
+     "life": 6.967479884322451,
+     "active_share": 2.434605463775823,
+     "active_count": -3.3057786631422577,
+     "top_activity": 9.63176384375189
+    },
+    "selection_visible": 22.495638404146167,
+    "selection_clear": 47,
+    "selection_cells": 48,
+    "selection_follows": 0.13431994362226918,
+    "selection_same_sign": 0.5454545454545454
+   },
+   "health": {
+    "product": 0.5036635119701268,
+    "sum": 0.5526348740549546,
+    "worst": 0.1981472781618527,
+    "ranks": {
+     "product": 16,
+     "sum": 19,
+     "worst": 26
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 1.0,
+    "novelty": 1.0,
+    "selection": 1.0,
+    "heredity": 1.0
+   },
+   "orders": {
+    "product": 1.0,
+    "sum": 1.0,
+    "worst": 1.0
+   },
+   "score": 1.0,
+   "rank": 1,
+   "ranks": {
+    "product": 1,
+    "sum": 1,
+    "worst": 1
+   }
+  }
+ ]
+}
