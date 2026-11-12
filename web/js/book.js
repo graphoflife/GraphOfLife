@@ -48,6 +48,12 @@ const Book = {
           ['reference', 'Reference'], ['guide', 'Guide']],
   /** The parts the reader left open, kept from one visit to the next; Start and round 3's at first. */
   OPENED: 'gol.book.open',
+  /**
+   * The research's three documents, read here as pages of the notebook (they
+   * were the Research tab's second half): the findings, the reading list and
+   * the notes on graphs. By the name docpage.js keeps each under.
+   */
+  READING: ['notes', 'literature', 'graphs'],
   STATUSES: [['analysed', 'Analysed'], ['ready', 'Ready to run'], ['draft', 'Drafts'],
              ['written', 'Written'], ['planned', 'Not written yet']],
   /** How the reader asked for the contents: an order, three filters and words to look for. */
@@ -84,6 +90,13 @@ const Book = {
         this.keepOpen(summary.parentElement.dataset.part, !summary.parentElement.open);
         return;
       }
+      const doc = event.target.closest('[data-doc]');
+      if (doc) {
+        event.preventDefault();
+        this.showToc(false);
+        this.showDoc(doc.dataset.doc);
+        return;
+      }
       const link = event.target.closest('[data-chapter]');
       if (!link) return;
       event.preventDefault();
@@ -109,6 +122,8 @@ const Book = {
     this.timer = null;
     if (!active) return;
     await this.load();
+    // The notebook's title arrives out of the machine's digits, every visit.
+    if (typeof Decoder !== 'undefined') Decoder.decode(document.getElementById('bookTitle'));
     await this.refreshLab();
     // Only while the book is on screen, and only where there is a lab.
     if (this.lab) this.timer = setInterval(() => this.refreshLab(), this.POLL_MS);
@@ -250,9 +265,48 @@ const Book = {
     for (const [key, el] of Object.entries(this.choices)) el.value = this.view[key];
     let remembered = null;
     try { remembered = localStorage.getItem(this.STORE); } catch (err) { /* private window */ }
+    if (remembered && remembered.startsWith('doc:') && this.documents()[remembered.slice(4)]) {
+      await this.showDoc(remembered.slice(4));
+      return true;
+    }
     const first = this.pages().find(c => c.file);
     await this.open(this.chapter(remembered)?.file ? remembered : first.id);
     return true;
+  },
+
+  /** The documents docpage.js holds, by name; none where it is not loaded. */
+  documents() {
+    if (typeof DocPage === 'undefined') return {};
+    return { notes: Notes, literature: Literature, graphs: Graphs };
+  },
+
+  /**
+   * One of the research's documents, as a page of the notebook. It is not one
+   * of book.json's pages, so it has no part and no kicker of its own: the
+   * kicker says it is reading, and which.
+   */
+  async showDoc(id) {
+    const doc = this.documents()[id];
+    if (!doc) return;
+    this.current = `doc:${id}`;
+    this.file = null;
+    try { localStorage.setItem(this.STORE, this.current); } catch (err) { /* private window */ }
+    this.renderToc();
+    this.page.style.setProperty('--part', 'transparent');
+    this.page.innerHTML = '<p class="md-status">Reading…</p>';
+    let source;
+    try {
+      source = await doc.read();
+    } catch (err) {
+      this.page.innerHTML = `<p class="md-status">Could not read ${Markdown.escape(doc.source)}: ${
+        Markdown.escape(String(err.message))}</p>`;
+      return;
+    }
+    if (this.current !== `doc:${id}`) return;      // another page was opened meanwhile
+    this.page.innerHTML = `<p class="book-kicker">Reading · ${Markdown.escape(doc.title)}</p>`
+      + Markdown.render(source);
+    window.scrollTo(0, 0);
+    Markdown.typeset(this.page);
   },
 
   /** The page that explains every setting. */
@@ -419,6 +473,8 @@ const Book = {
     if (!this.toggle || !this.index) return;
     const chapter = this.pages().find(c => c.id === this.current);
     const text = this.toggle.querySelector('.book-toc-toggle-text');
+    const doc = String(this.current || '').startsWith('doc:') && this.documents()[this.current.slice(4)];
+    if (doc) { text.textContent = doc.title; return; }
     if (!chapter) { text.textContent = 'Contents'; return; }
     text.textContent = chapter.title.replace(/[*_`]/g, '');
   },
@@ -534,7 +590,26 @@ const Book = {
     }).join('');
     const legend = `<p class="book-legend">${this.MARKS.map(([id, words]) =>
       `<span><span class="book-mark book-mark-${id}"></span>${Markdown.escape(words.split(',')[0])}</span>`).join('')}</p>`;
-    this.list.innerHTML = legend + (groups || '<p class="book-toc-empty">No page matches.</p>');
+    this.list.innerHTML = legend + (groups || '<p class="book-toc-empty">No page matches.</p>') + this.readingToc();
+  },
+
+  /**
+   * The research's documents, after the parts: shown unless the reader has
+   * narrowed the contents to a topic, a kind or a status they do not have,
+   * and matched against the words looked for like any page.
+   */
+  readingToc() {
+    const docs = this.documents();
+    const view = this.view;
+    if (view.topic || view.kind || view.status) return '';
+    const words = view.query.toLowerCase().split(/\s+/).filter(Boolean);
+    const items = this.READING.filter(id => docs[id]).map(id => [id, docs[id]])
+      .filter(([, doc]) => words.every(w => `${doc.title} ${doc.about}`.toLowerCase().includes(w)))
+      .map(([id, doc]) => `<a href="#" data-doc="${id}" class="book-toc-item book-doc${
+        this.current === `doc:${id}` ? ' active' : ''}" title="${Markdown.escape(doc.about)}">`
+        + `<span class="book-toc-title"><span class="book-mark book-mark-reference"></span>${
+          Markdown.escape(doc.title)}</span></a>`).join('');
+    return items ? `<div class="book-reading"><h3 class="book-reading-head">Reading</h3>${items}</div>` : '';
   },
 
   /**

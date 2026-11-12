@@ -224,7 +224,7 @@ directly.
 >   world; more links for a newborn in five of six; a larger share for a child
 >   fewer, in four of five; and staking at home slightly fewer.
 > - **The behaviours do not follow it.** A behaviour's mean does not move from
->   era to era the way its selection points: the rank [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") between the
+>   era to era the way its selection points: the [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") between the
 >   two is 0.06 in the median world, and the signs agree about half the time.
 >   A copy lands in another node, with other tokens and [neighbours](the-world.md#the-network "An agent joined to another by a connection."), and acts as
 >   its new place makes it act. The brain is passed on (a heredity index near 1

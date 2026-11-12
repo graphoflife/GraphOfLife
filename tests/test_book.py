@@ -385,6 +385,49 @@ def test_every_page_is_filled_as_the_notebook_says():
     assert stale == 0, f"{stale} pages are not filled as book_fill would fill them: run python3 book_fill.py"
 
 
+def test_where_a_section_is_used_names_every_page_that_links_it_and_no_other():
+    # "Where it is used" is made, not typed (book_fill's `used` block): the
+    # pages whose words link to the section, or to a section within it. The
+    # lists kept by hand fell behind as pages were written. The links of the
+    # navigation, the boxes of runs, the glossary and such lists themselves are
+    # not a page's words, and do not count.
+    import glob
+    import re
+    import book_fill
+    book = os.path.join(runner.ROOT, "book")
+    texts = {}
+    for path in glob.glob(os.path.join(book, "**", "*.md"), recursive=True):
+        with open(path, encoding="utf-8") as f:
+            texts[os.path.relpath(path, book)] = f.read()
+    aside = re.compile(r"^<!-- (turns|contents|runs|used|glossary)\b[^\n]*-->\n.*?^<!-- /\1 -->", re.S | re.M)
+    checked = 0
+    for md, text in texts.items():
+        bare = re.sub(r"^```.*?^```", "", text, flags=re.S | re.M)
+        levels = [len(h) for h in re.findall(r"^(#{1,6})\s+.*?\s*$", bare, re.M)]
+        ids = book_fill.anchors(text)
+        for m in re.finditer(r"^<!-- used (\S+) -->\n(.*?)^<!-- /used -->", text, re.S | re.M):
+            anchor, block = m.groups()
+            assert anchor in ids, f"{md}: a list of where {anchor} is used, but no such section"
+            at = ids.index(anchor)
+            within = {anchor}
+            for i in range(at + 1, len(ids)):
+                if levels[i] <= levels[at]:
+                    break
+                within.add(ids[i])
+            linking = set()
+            for other, words in texts.items():
+                for href, part in re.findall(r"\]\(([^)#\s:]+\.md)#([^)\s]+)", aside.sub("", words)):
+                    target = os.path.normpath(os.path.join(os.path.dirname(other), href))
+                    if other != md and target == md and part in within:
+                        linking.add(other)
+            listed = {os.path.normpath(os.path.join(os.path.dirname(md), href))
+                      for href in re.findall(r"\]\(([^)#\s:]+\.md)[#)]", block)}
+            assert listed == linking, (f"{md}#{anchor}: listed but not linking {sorted(listed - linking)}, "
+                                       f"linking but not listed {sorted(linking - listed)}")
+            checked += 1
+    assert checked >= 30, f"only {checked} lists of where a section is used"
+
+
 def test_every_number_a_thesis_cites_has_its_page():
     # A thesis keeps the chapter numbers of the day it was written; each must
     # be mapped to the page it meant, or it would link nowhere.

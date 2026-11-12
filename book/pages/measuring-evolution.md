@@ -10,14 +10,11 @@
 
 How the notebook follows evolution: genotypes, families and the common ancestor; eras of a world played against each other; and the test, written down before the long runs, of what would count as open-ended evolution.
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [Genotypes, families and the common ancestor](#genotypes-families-and-the-common-ancestor): Every brain carries a whole number, its genotype, which a copy keeps and a change replaces.
-- [Eras, contests and invasions: does a world keep getting better?](#eras-contests-and-invasions-does-a-world-keep-getting-better): A world whose numbers have settled may have stopped evolving, or may still be improving in ways no single moment shows.
-- [What would count as open-ended evolution](#what-would-count-as-open-ended-evolution): No run can show that evolution goes on for ever.
-
-A fourth section, added on 9 November 2026, says what assembly theory
-measures: [Assembly index and assembly](#assembly-index-and-assembly).
+- [Genotypes, families and the common ancestor](#genotypes-families-and-the-common-ancestor)
+- [Eras, contests and invasions: does a world keep getting better?](#eras-contests-and-invasions-does-a-world-keep-getting-better)
+- [What would count as open-ended evolution](#what-would-count-as-open-ended-evolution)
 
 ## Genotypes, families and the common ancestor
 
@@ -52,16 +49,9 @@ brains with exactly the same weights, because they hold copies of one brain.
   Numbers are never reused, and a parent always has a smaller number than its
   child.
 
-A brain is offered a change only at set moments, and changes with
-probability 0.2 each time ([How a brain changes](rules-in-detail.md#how-a-brain-changes)):
-
-- **in both baselines**, a newborn's brain, just copied from its parent;
-- **in B1**, also every surviving brain after every game, wherever it sits;
-- **in B2**, instead, the copy a node takes on when another agent wins it
-  ([`mutate_on_replication`](settings.md#mutate_on_replication)). A brain
-  that stays where it is never changes.
-
-B2 has that rule because in B1, 97% of new genotypes are made in brains that
+A brain is offered a change at birth. In B1 it is also offered one after every
+game; in B2 instead, whenever a won node copies it. It changes with
+probability 0.2 each time ([When](rules-in-detail.md#when)). B2 has that rule because in B1, 97% of new genotypes are made in brains that
 are not being copied
 ([Variation in the living](questioning-the-mechanics.md#variation-in-the-living)).
 
@@ -248,11 +238,12 @@ Muller plot does not tell the two apart.
 
 #### Where Muller plots are used
 
-- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
-  the lines of the 100 founders in the first 300 iterations of the world with
-  seed 1.
-- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): the families of the
-  genotypes alive at a later moment, in two worlds.
+<!-- used muller-plots -->
+- [The ideas this builds on](the-ideas-this-builds-on.md#genealogy-and-chance)
+
+> [!info]- And in the Archive (1)
+> [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#lines-take-over)
+<!-- /used -->
 
 ### The common ancestor of the living
 
@@ -379,7 +370,7 @@ genotypes**, 2^*H* with *H* the entropy of the genotypes' shares, weighs the
 common ones more
 ([Entropy and evenness](measuring-tokens.md#entropy-and-evenness)). It is
 how many equally common genotypes would be as diverse as the ones there are
-([Effective numbers](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)).
+([Effective numbers](statistics.md#effective-numbers-how-many-kinds)).
 
 In the example of eight agents, the shares are one half and four eighths.
 Each share *p* adds *p* · log₂(1/*p*) to *H*: the half adds ½ · 1, each
@@ -397,8 +388,8 @@ A genotype number changes whenever a brain is offered a change and takes it
 changes nothing, yet the number still changes. Counting genotypes counts
 names; whether different names are different brains has to be checked
 separately ([Do the brains matter?](do-the-brains-matter.md)).
-[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) counts kinds
-of behaviour instead, and compares them with the genotypes.
+The [effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking) count
+kinds of behaviour instead, and compare them with the genotypes.
 
 ## Eras, contests and invasions: does a world keep getting better?
 
@@ -609,26 +600,8 @@ outputs a brain writes. So it sees nothing a brain could not see. It acts
 only through the outputs a brain has, which the engine turns into a child,
 its links, the stakes and the messages.
 
-What it makes of what it reads is another matter. A rule written in Python
-can combine its inputs in ways a brain cannot. A B2 brain reads one column
-of inputs for each candidate, the agent itself and each neighbour. It
-scores each column on its own, with the same weights, and no unit sees two
-columns. Two of the
-[three strategies](strategies-written-by-hand.md#three-strategies) first
-planted show the difference:
-- **The raider** stakes all it can on the poorest neighbour outside its
-  team, if it is sure to take it. Twelve of a B2 brain's 16 units, with
-  weights set by hand, play it
-  ([A raider in a brain's weights](what-a-brain-can-compute.md#a-raider-in-a-brains-weights)).
-- **The factory** is a team whose members write into their messages how far
-  they are from the team's frontier, where strangers begin. A member with a
-  stranger next door writes 0 to its teammates: news of a third agent, the
-  stranger. No B2 brain of any size can put such news into a message
-  ([What no brain of B2 can compute](what-a-brain-can-compute.md#what-no-brain-of-b2-can-compute)).
-
-So a strategy that wins shows that the game holds better play than
-evolution found. Whether a brain of that world could play it is a separate
-question, answered for the raider by building the brain.
+A rule written by hand can combine its inputs as no brain can; whether a brain
+could play it is answered in [What a brain can compute](what-a-brain-can-compute.md).
 
 #### The control
 
@@ -658,7 +631,7 @@ control holds there.
   that does well only in numbers. Evolution, which tries one agent at a
   time, can miss such a strategy although it is better.
 - **A strategy's parts** can be tested one at a time by dropping them. The
-  raider without its password
+  raider without a password
   ([The password](strategies-written-by-hand.md#the-password)) shows which
   part wins.
 
@@ -668,13 +641,9 @@ and 50% of the world. The control, the residents' own brains planted in the
 same places, ended with 7% and 1%
 ([What the strategies did](strategies-written-by-hand.md#what-the-strategies-did)).
 
-**One planting says little.** The raider's rule and the brain that plays it
-choose differently in only one or two situations in a hundred. Yet planted
-on the same seed in world 3, the rule died out while the brain took 59% of
-the world. Their worlds part ways within a few iterations, and from there
-chance decides whether a patch takes hold
-([A raider in a brain's weights](what-a-brain-can-compute.md#a-raider-in-a-brains-weights)).
-So the lab's tests plant a strategy in several places in each world.
+Rule and brain part ways within a few iterations, so one planting says little
+([Planted in its place](what-a-brain-can-compute.md#planted-in-its-place)). So
+the lab's tests plant a strategy in several places in each world.
 
 A strategy that dies out says at most that *this* strategy is worse, never
 that nothing better exists. An invasion test can show that a game is not
@@ -682,57 +651,48 @@ solved, but not that it is.
 
 ### Where it is used
 
-- **Contests.**
-  [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#how-to-tell-a-world-that-keeps-evolving)
-  builds the yardstick on B1, and
-  [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
-  applies it to B2. [Every era against three](every-era-against-three.md)
-  plays fixed eras. [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)
-  compares rules by their contests. [Pilot worlds](runs-and-records.md#pilot-worlds) plays
-  the eras of pilots.
-- **Exploitability.**
-  [Would we notice if it went on?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)
-  measures it era by era in Experiment 16's B2 worlds.
-  [How much room is left](every-era-against-three.md#how-much-room-is-left)
-  measures it in every long world.
-  [Why the raiders stopped winning](strategies-written-by-hand.md#what-we-expected-of-older-worlds)
-  builds Experiment 30's expectation on it.
-- **The invasion test.**
-  [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
-  plants the first strategies, and measures how large a crowd the raider
-  needs (Experiment 29). [What a brain can compute](what-a-brain-can-compute.md)
-  plants a brain that plays the raider.
-  [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning) plants
-  raiders in older worlds, crews of raiders and raiders that breed
-  (Experiments 30, 33 and 34). It also plants them in B1 (Experiment 35).
-  [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots) explains how the lab plays
-  invasions, like contests, as the trials of an experiment's plan.
+<!-- used eras-contests-and-invasions-does-a-world-keep-getting-better -->
+- [What this notebook is about](what-this-notebook-is-about.md#a-ladder-of-four-steps)
+- [The ideas this builds on](the-ideas-this-builds-on.md#where-to-go-next)
+- [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#what-decides-how-a-world-evolves)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#where-to-go-next)
+- [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#where-to-go-next)
+- [Every setting](settings.md#archive_every)
+- [B1 and B2: the two baselines](b1-and-b2.md#where-to-go-next)
+- [What the brains are like](what-the-brains-are-like.md#when-the-brains-were-given-sight)
+- [Brains replaced by their average](brains-replaced-by-their-average.md#five-worlds-from-iteration-1500)
+- [How big should a brain be?](how-big-should-a-brain-be.md#a-planned-experiment-answered-from-round-3)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#where-to-go-next)
+- [How fast should brains change?](how-fast-should-brains-change.md#how-the-rates-are-compared)
+- [Every era against three](every-era-against-three.md#where-to-go-next)
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)
+- [What a brain can compute](what-a-brain-can-compute.md#planted-in-its-place)
+- [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md#where-to-go-next)
+- [Other contests: a lottery, and alliances](another-game.md#what-the-contests-did)
+- [Rules without numbers](rules-without-numbers.md#did-the-worlds-that-lived-keep-evolving)
+- [How runs are made, recorded and costed](runs-and-records.md#runs-and-experiments)
+- [Every simulation: what was run, and what was measured](every-simulation.md#the-labs-experiments)
+
+> [!info]- And in the Archive (7)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: the game and its flows](b1-the-game-and-its-flows.md#what-we-learned-how-the-game-is-played) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-kills-a-world) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#does-evolution-go-on-eight-switches-at-once) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#where-to-go-next) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#both-inputs-tested) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#brains-as-assembled-objects)
+<!-- /used -->
 
 ## What would count as open-ended evolution
 
-No run can show that evolution goes on for ever. So the notebook writes
-down, before the long runs exist, what a run would have to show. A configuration of
-rules passes when at least two of three new worlds pass four parts. Their
-brains beat the best mixture of their whole past, and their ratings keep
-rising. They keep doing new things, faster than mutation alone would. And
-they stay worlds in which much can happen. Each part closes one way of being
-fooled. They are a circle, a plateau and an arms race that swaps two
-answers. The fourth is a world that evolves only because it is poor in all
-else.
+No run can show that evolution goes on for ever. So the notebook writes down,
+before the long runs, what a run would have to show. A configuration of rules
+passes when at least two of three new worlds pass four parts, each closing one
+way of being fooled.
 
 ### Why write the test first
 
-No run can show that evolution goes on for ever. A run is finite, and so is
-the budget. A world of 10,000 tokens runs about 100,000 iterations in a day
+A run is finite, and so is the budget. A world of 10,000 tokens runs about 100,000 iterations in a day
 and a half. A world of 100,000 tokens runs a tenth as far in two days
 ([What a simulation costs](runs-and-records.md#what-a-simulation-costs)). What a run can show
-is that, as far as it went, nothing stopped:
-- later brains beat their whole past;
-- they keep getting better;
-- they keep doing new things;
-- the world stays one in which much can happen.
+is that, as far as it went, nothing stopped.
 
-This page writes the test down before any of the long runs it will judge
+The notebook writes the test down before any of the long runs it will judge
 exists. A thesis written after its results can be bent to fit them; one
 written before cannot.
 
@@ -746,10 +706,7 @@ run can show it.
   own seed says nothing about that.
 - Every world played counts, the ones that fail included.
 
-The four parts use the contests of
-[Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better). An **era** is the
-brains of one moment of a world. A **contest** plays two eras against each
-other in the same world, and scores the share of it the later one holds.
+The four parts use the [contests](#a-contest-step-by-step) above.
 
 1. **It beats its whole past.** At every 10,000 iterations, the brains of
    that moment beat the best mixture of all earlier eras. They do so in
@@ -770,7 +727,7 @@ other in the same world, and scores the share of it the later one holds.
 3. **It keeps doing new things.** New kinds of behaviour appear faster than
    they would by mutation alone, and the old ones do not simply come back.
    - Kinds of behaviour means two things. One is kinds of staking
-     ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). The
+     ([The effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking)). The
      other is the signatures of the strategies written by hand: how a
      strategy answers a fixed set of situations
      ([What a brain can compute](what-a-brain-can-compute.md)).
@@ -781,10 +738,10 @@ other in the same world, and scores the share of it the later one holds.
 4. **It stays a world in which much can happen**
    ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)):
    - it never falls to 20 agents;
-   - it meets every mark of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at every 10,000 iterations;
+   - it meets every mark of the health bar at every 10,000 iterations;
    - its agents are more diverse than those of B2's median world;
    - its tokens are no more even than B2's: a
-     [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) no lower than the least of
+     [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) no lower than the least of
      B2's worlds read at the same iteration.
 
 ### What it does not ask
@@ -810,45 +767,6 @@ Each part closes a way to be fooled:
 - **Room** closes worlds that evolve only because they are poor in
   everything else, such as a few hundred agents holding everything evenly.
 
-## Assembly index and assembly
-
-How many steps does it take to make a thing, and how many copies of it are
-there? **Assembly theory** asks both (Marshall and others 2021; Sharma and
-others 2023). It builds an object from basic blocks by **joins**: a join lays
-two pieces already made together, and whatever is made can be used again for
-free. The **assembly index** *a* of an object is the fewest joins that make
-it. Its **copy number** *n* is how many identical copies of it a collection
-holds. The **assembly** of the collection adds up its kinds of object,
-weighing each by e to the power of its index and counting only its copies
-beyond the first:
-
-$$
-A = \sum_i e^{a_i} \, \frac{n_i - 1}{N_T},
-$$
-
-with *N_T* the objects in all. The theory reads many copies of objects with a
-high index as the mark of selection: chance alone seldom makes the same
-complicated thing twice.
-
-### An example of the index
-
-In a network the block is one link, and an object can be an agent's **ego
-network**: the agent, its neighbours and the links among them. A star of
-eight links takes three joins: two links make a star of two, two of those a
-star of four, two of those a star of eight. A star of seven links takes four,
-for each join can only add two sizes already made (1, 2, 3, 4, 7): the fewest
-joins for *m* links is the length of the shortest **addition chain** to *m*,
-written l(*m*). In a triangular lattice every agent's ego network is the same
-wheel of six spokes, twelve links built in four joins, so its 10,000 copies
-give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
-
-### Where it is used
-
-- [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): the index and the assembly of the
-  ego networks of B1, B2 and round 3, each against its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") and four
-  networks with no history; and why a genotype's path in the family tree
-  gives no index worth the name.
-
 ## Where to go next
 
 - [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): all of these at work in
@@ -870,7 +788,9 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 - [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): what a world in which much can
   happen looks like.
 - [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): how many steps an agent's
-  neighbourhood takes to make, and how many agents share its shape.
+  neighbourhood takes to make, and how many agents share its shape. What the
+  index and assembly are is in
+  [Measures of the archived studies](measures-of-the-archived-studies.md#assembly-index-and-assembly).
 
 ## How our view changed
 
@@ -923,6 +843,9 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
     only 154 to 274 agents held that many. And the plays searched for the best
     reply include the agent's own stakes of each draw, which the note did not
     list.
+- **12 November 2026.** Moved to [Measures of the archived
+  studies](measures-of-the-archived-studies.md): the section on the assembly
+  index and assembly, which only pages of the Archive use.
 
 ## References
 
@@ -932,14 +855,6 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 - Balduzzi, D., Tuyls, K., Pérolat, J. and Graepel, T. (2018). Re-evaluating
   evaluation. *Advances in Neural Information Processing Systems* 31.
 
-- Marshall, S. M., Mathis, C., Carrick, E. and others (2021). Identifying
-  molecules as biosignatures with assembly theory and mass spectrometry.
-  *Nature Communications* 12, 3033.
-
-- Sharma, A., Czégel, D., Lachmann, M., Kempes, C. P., Walker, S. I. and
-  Cronin, L. (2023). Assembly theory explains and quantifies selection and
-  evolution. *Nature* 622, 321–328.
-
 <!-- turns -->
 ---
 
@@ -947,6 +862,6 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter), [How the simulation works](../README.md#how-the-simulation-works), [Does evolution keep going?](../README.md#does-evolution-keep-going), [Methods and statistics](../README.md#methods-and-statistics), [Strategies written by hand](../README.md#strategies-written-by-hand), [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (35)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (36)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

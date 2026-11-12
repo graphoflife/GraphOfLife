@@ -16,10 +16,11 @@ comment lines, which no reader shows:
     <!-- /figure -->
 
     <!-- thesis E04 -->               an experiment's claim, quoted from its plan
-    <!-- runs E02 -->                 what was run: every setting, the seeds, the
-                                      command that runs it again
+    <!-- runs E02 -->                 what was run: what each condition changes, the
+                                      seeds, the command that runs it again
     <!-- contents -->                 every page, under its topic, from book.json
     <!-- turns -->                    the page's topic, and the pages before and after it there
+    <!-- used degree -->              the pages that link to a section, or to one within it
     <!-- costs -->                    what a simulation costs, as last fitted
     <!-- table chapter/name -->       a table a page's code made from the records
     <!-- glossary -->                 every term of terms.json, what it is, and its page
@@ -90,6 +91,34 @@ def anchors(md_text: str) -> List[str]:
 # The blocks
 # ---------------------------------------------------------------------------
 
+#: What the blocks made so far on the page being filled know of one another, so
+#: that a page does not say the same thing twice: the runs and data of the last
+#: figure, and the screens whose worlds it has listed. fill_text starts it anew.
+PAGE: Dict[str, Any] = {}
+
+
+def recipe_of(md: str, title: str, recipe: str) -> str:
+    """
+    A figure's recipe, with its runs and its data said once on a page: a figure
+    that reads the same runs and data as the figure before it says so in a line.
+    """
+    paragraphs = recipe.split("\n\n")
+    last = PAGE.get("figure") or {}
+    said, source = {}, {}
+    for key in ("Runs", "Data"):
+        said[key] = next((p for p in paragraphs if p.startswith(f"**{key}.**")), None)
+        before = last.get(key) or (None, None)
+        source[key] = before[1] if said[key] and said[key] == before[0] else title
+    PAGE["figure"] = {key: (said[key], source[key]) for key in said}
+    if not said["Runs"] or source["Runs"] == title:
+        return recipe
+    both = source["Data"] == source["Runs"]
+    line = f"**{'Runs and data' if both else 'Runs'}.** As for the figure *{source['Runs'].rstrip('.')}* above."
+    if len(line) >= len(said["Runs"]) + (len(said["Data"]) if both else 0):
+        return recipe                                  # said again in fewer words than pointing back
+    return "\n\n".join(line if p == said["Runs"] else p for p in paragraphs if not (both and p == said["Data"]))
+
+
 def figure(md: str, name: str) -> str:
     """A figure, its caption and how to make it; their links are written as from a page in book/pages/."""
     chapter, fig = name.split("/")
@@ -98,7 +127,7 @@ def figure(md: str, name: str) -> str:
         raise KeyError(f"no figure {name}: run `python3 book_figures.py {chapter}`")
     return (f"![{made['title']}]({link(md, f'figures/{chapter}/{fig}.svg')})\n\n"
             f"**{made['title']}{'' if made['title'][-1:] in '.?!' else '.'}** {made['caption']}\n\n"
-            + quote(made["recipe"], "[!example]- How to make this figure"))
+            + quote(recipe_of(md, made["title"], made["recipe"]), "[!example]- How to make this figure"))
 
 
 def thesis(md: str, name: str) -> str:
@@ -213,13 +242,46 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
     return quote("\n".join(lines), "[!info]- The trials behind this page")
 
 
+def same_draws(name: str, other: str) -> bool:
+    """
+    Whether two screens drew the same worlds, seed for seed and setting for
+    setting, but for what each forces on all its worlds (`fixed`).
+    """
+    import gol_plan
+    a, b = read_json(f"experiments/{name}.json")["screen"], read_json(f"experiments/{other}.json")["screen"]
+    if any(a.get(k) != b.get(k) for k in ("sampler", "seed", "worlds", "tokens", "iterations", "skip",
+                                          "budget_hours", "forced", "references")):
+        return False
+    fixed = set(a.get("fixed") or {}) | set(b.get("fixed") or {})
+
+    def drawn(plan: str) -> List[Tuple[int, Dict[str, Any]]]:
+        return [(d["seed"], {k: v for k, v in d["set"].items() if k not in fixed})
+                for d in gol_plan.screen_draws(plan)]
+    return drawn(name) == drawn(other)
+
+
 def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
-    """The worlds of a screen: how their settings were drawn, and each one's, world by world."""
+    """
+    The worlds of a screen: how their settings were drawn, and each one's, world
+    by world; or, where the page has listed the same draws for another screen
+    already, what this one changed in all of them.
+    """
     import gol_plan
     import gol_screen
     sc = plan["screen"]
     found = gol_plan.screen_draws(name)
     ids = {s.lab["seed"]: s.run_id for s in gol_plan.experiment_runs(name)}
+    again = next((other for other in PAGE.setdefault("screens", []) if same_draws(name, other)), None)
+    PAGE["screens"].append(name)
+    if again:
+        fixed = "; ".join(f"`{key}` = {show(value)}" for key, value in sorted((sc.get("fixed") or {}).items()))
+        lines = [f"**{number(len(found))} worlds**: the worlds of Experiment {int(again[1:])} above, drawn "
+                 f"alike (sampler {sc['sampler']}, round seed {sc['seed']}) and played alike, "
+                 + (f"but with {fixed} in every world. " if fixed else "")
+                 + "Runs, world by world: " + ", ".join(f"`{ids[d['seed']]}`" for d in found) + ".\n",
+                 f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook "
+                 "tab of a computer running `gol_server.py`."]
+        return quote("\n".join(lines), "[!info]- The worlds behind this page")
     budget = (f", or until {sc['budget_hours']:g} hours of playing have gone by: a world that slow stops "
               "as too slow" if sc.get("budget_hours") else "")
     how, only = gol_screen.WORDS[int(sc["sampler"])]
@@ -260,16 +322,62 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     return f"{summary}\n\n{every}"
 
 
+def box_of(experiment: str) -> str:
+    """Where an experiment's box of runs is, as a path under book/ and the section it sits in."""
+    home = home_of(experiment)["file"]
+    with open(os.path.join(BOOK, home), encoding="utf-8") as f:
+        text = f.read()
+    at = text.find(f"<!-- runs {experiment} -->")
+    heads = len(re.findall(r"^#{1,6}\s", re.sub(r"^```.*?^```", "", text[:at], flags=re.S | re.M), re.M))
+    return home + (f"#{anchors(text)[heads - 1]}" if at > 0 and heads else "")
+
+
+#: Every screen's drawn worlds, by plan: drawn once, as every box of runs asks.
+DRAWS: Dict[str, List[Dict[str, Any]]] = {}
+
+
+def drawn_as(condition: Dict[str, Any], base: Dict[str, Any]) -> Optional[Tuple[str, Dict[str, Any], Dict[str, Any]]]:
+    """
+    The world of a screen whose drawn settings a condition of B1 plays again, if
+    any: the screen, the draw, and what the condition plays otherwise (its
+    founders, say, for a world played at another size).
+    """
+    import gol_plan
+    plays = {**(condition.get("set") or {}), **(condition.get("world") or {})}
+    rules = {k: v for k, v in plays.items() if k not in gol_plan.WORLD}
+    if base["id"] != "B1" or not rules:                # a screen's worlds are B1's rules, changed as drawn
+        return None
+    if not DRAWS:
+        for f in sorted(os.listdir(os.path.join(BOOK, "experiments"))):
+            if f.startswith("E") and f.endswith(".json") and "screen" in read_json(f"experiments/{f}"):
+                DRAWS[f[:-5]] = gol_plan.screen_draws(f[:-5])
+    for plan, found in DRAWS.items():
+        for d in found:
+            if {k: v for k, v in d["set"].items() if k not in gol_plan.WORLD} == rules:
+                world = [k for k in gol_plan.WORLD if k != "total_tokens"]
+                other = {k: plays.get(k, base["settings"][k]) for k in world
+                         if plays.get(k, base["settings"][k]) != d["set"].get(k, base["settings"][k])}
+                return plan, d, other
+    return None
+
+
+def withdrawn(plan: Dict[str, Any], what: str) -> str:
+    """A plan given up before any of its runs was made: why, in one line."""
+    note = plan["withdrawn"]
+    return quote(f"None: {note[0].lower()}{note[1:]}", f"[!info] The {what} behind this page")
+
+
 def runs(md: str, name: str) -> str:
     import gol_plan                                    # only here: it reads the runs folder
     plan, borrowed = resolve(name)
+    if plan.get("withdrawn"):
+        return withdrawn(plan, "trials" if "trials" in plan else "worlds" if "screen" in plan else "runs")
     if "trials" in plan:
         return trials(md, borrowed or name, plan)
     if "screen" in plan:
         return screen(md, borrowed or name, plan)
     spec = plan["runs"]
     base = read_json(f"experiments/{spec['baseline']}.json")
-    glossary = read_json("settings.json")
     conditions = spec["conditions"]
     world = spec["world"]["total_tokens"]
 
@@ -297,14 +405,23 @@ def runs(md: str, name: str) -> str:
                  + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
                                  else "") + f", for {number(spec['iterations'])} iterations — or "
                  "until its world dies out. Every setting is that of the baseline "
-                 f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it.\n")
+                 f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it "
+                 f"([At a glance]({link(md, page_file('settings'))}#at-a-glance)).\n")
     for c in conditions:
         # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
-        changed = ", ".join(f"`{k}` = {show(v)}" for k, v in {**(c.get("set") or {}), **(c.get("world") or {})}.items()) \
-            or f"nothing: {base['id']} as it is"
+        drawn = drawn_as(c, base)
+        if drawn:
+            plan_id, d, other = drawn
+            changed = (f"the settings of world {d['world']} of [Experiment {int(plan_id[1:])}]"
+                       f"({link(md, box_of(plan_id))}) (seed {d['seed']}), as drawn"
+                       + (" but with " + ", ".join(f"`{k}` = {show(v)}" for k, v in other.items()) if other else ""))
+        else:
+            changed = "changes " + (", ".join(f"`{k}` = {show(v)}" for k, v in
+                                              {**(c.get("set") or {}), **(c.get("world") or {})}.items())
+                                    or f"nothing: {base['id']} as it is")
         named = ids.get(c["name"], [])
         where = f" Runs `{named[0]}` … `{named[-1]}`." if named else ""
-        lines.append(f"- **{c['name']}** — changes {changed}; {', '.join(number(s) for s in sizes(c))} "
+        lines.append(f"- **{c['name']}** — {changed}; {', '.join(number(s) for s in sizes(c))} "
                      f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
     lines.append(f"To make these runs again: `python3 gol_lab.py run {borrowed or name}`, or ▶ in "
@@ -316,34 +433,7 @@ def runs(md: str, name: str) -> str:
         lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "
                      "the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics "
                      "every iteration (`series.jsonl`) and a whole world at every checkpoint.")
-    summary = quote("\n".join(lines), "[!info]- The runs behind this page")
-
-    head = "| setting | " + " | ".join(c["name"] for c in conditions) + " | what it is |"
-    rule = "|---" * (len(conditions) + 2) + "|"
-    rows = []
-    keys = glossary["order"] + [k for k in base["settings"] if k not in glossary["order"]]
-    for key in keys:
-        if key not in base["settings"]:
-            continue
-        cells = []
-        for c in conditions:
-            if key == "total_tokens":
-                cells.append(", ".join(number(s) for s in sizes(c)))
-                continue
-            value = (c.get("set") or {}).get(key, (c.get("world") or {}).get(
-                key, spec.get("world", {}).get(key, base["settings"][key])))
-            text = show(value)
-            cells.append(f"**{text}**" if value != base["settings"][key] else text)
-        meaning = (glossary["settings"].get(key) or {}).get("meaning", "")
-        rows.append(f"| [`{key}`]({link(md, page_file('settings'))}#{key}) | " + " | ".join(cells)
-                    + f" | {meaning} |")
-    rows.append("| seeds | " + " | ".join(seeds_of(c)[0] for c in conditions) + " | one run per seed |")
-    rows.append("| iterations | " + " | ".join(number(spec["iterations"]) for _ in conditions)
-                + " | how far each run goes, unless its world dies first |")
-    table = "\n".join([head, rule, *rows])
-    every = quote(table + "\n\nA value in **bold** differs from the baseline "
-                  f"{base['id']}.", "[!info]- Every setting of these runs")
-    return f"{summary}\n\n{every}"
+    return quote("\n".join(lines), "[!info]- The runs behind this page")
 
 
 def pages() -> List[Dict[str, Any]]:
@@ -410,11 +500,15 @@ def contents(md: str, _: str) -> str:
 
 
 #: The pages that link to each page, by file, in reading order: what a page says,
-#: not how it is found, so the links of the navigation, the contents and the
-#: tables of settings are left out. fill() works it out once the other blocks
-#: are filled, and the navigation shows it.
+#: not how it is found, so the links of the navigation, the contents, the boxes
+#: of runs and the lists of where a section is used are left out. fill() works
+#: it out once the other blocks are filled, and the navigation shows it.
 BACKLINKS: Dict[str, List[str]] = {}
-NAVIGATION = ("turns", "contents", "runs")
+NAVIGATION = ("turns", "contents", "runs", "used")
+#: For every section a page's words link to, as (file, anchor), the pages whose
+#: words link to it and the section each link sits in, in reading order; the
+#: glossary, which links every term, aside. fill() works it out with BACKLINKS.
+USED: Dict[Tuple[str, str], List[Tuple[str, str]]] = {}
 
 
 def links_from(md: str, text: str) -> Set[str]:
@@ -436,6 +530,70 @@ def backlinks(texts: Dict[str, str]) -> Dict[str, List[str]]:
         for target in links_from(md, text):
             into.setdefault(target, []).append(md)
     return {target: sorted(sources, key=lambda m: (order.get(m, len(order)), m)) for target, sources in into.items()}
+
+
+def headings(text: str) -> List[Tuple[int, int, str]]:
+    """A page's headings: where each starts, its level and its id, as anchors() gives them."""
+    blank = re.sub(r"^```.*?^```", lambda m: re.sub(r"[^\n]", " ", m.group(0)), text, flags=re.S | re.M)
+    found = [(m.start(), len(m.group(1))) for m in re.finditer(r"^(#{1,6})\s+.*?\s*$", blank, re.M)]
+    return [(at, level, anchor) for (at, level), anchor in zip(found, anchors(text))]
+
+
+def used_by(texts: Dict[str, str]) -> Dict[Tuple[str, str], List[Tuple[str, str]]]:
+    """For every section that a page's words link to, the pages that link to it (see USED)."""
+    order = {c["file"]: i for i, c in enumerate(pages()) if c.get("file")}
+    into: Dict[Tuple[str, str], Dict[str, str]] = {}
+    for md, text in sorted(texts.items(), key=lambda kv: (order.get(kv[0], len(order)), kv[0])):
+        aside = [m.span() for m in BLOCK.finditer(text) if m.group(1) in NAVIGATION + ("glossary",)]
+        heads = headings(text)
+        for m in re.finditer(r"\]\(([^)\s#:]+\.md)#([^)\s]+)(?: \"[^\"]*\")?\)", text):
+            if any(a <= m.start() < b for a, b in aside):
+                continue
+            target = os.path.normpath(os.path.join(os.path.dirname(md), m.group(1))).replace(os.sep, "/")
+            if target != md:
+                under = [anchor for at, _, anchor in heads if at < m.start()]
+                into.setdefault((target, m.group(2)), {}).setdefault(md, under[-1] if under else "")
+    return {key: list(sources.items()) for key, sources in into.items()}
+
+
+def archived(md: str) -> bool:
+    """Whether a page is in the Archive: frozen, its home a topic of the Archive's part."""
+    shut = {t for part in parts() if part.get("id") == "archive" for t in part["topics"]}
+    return any(c.get("file") == md and c["topics"][0] in shut for c in pages())
+
+
+def used(md: str, anchor: str) -> str:
+    """
+    Where a section is used (`used anchor`): the pages whose words link to it, or
+    to a section within it, each at the section where the link is; the Archive's
+    folded apart.
+    """
+    with open(os.path.join(BOOK, md), encoding="utf-8") as f:
+        heads = headings(f.read())
+    at = next((i for i, (_, _, a) in enumerate(heads) if a == anchor), None)
+    if at is None:
+        raise KeyError(f"{md} has no section {anchor} to say where it is used")
+    within = [anchor]
+    for _, level, a in heads[at + 1:]:
+        if level <= heads[at][1]:
+            break
+        within.append(a)
+    order = {c["file"]: i for i, c in enumerate(pages()) if c.get("file")}
+    sources: Dict[str, str] = {}
+    for a in within:
+        for page, section in USED.get((md, a), []):
+            sources.setdefault(page, section)
+    titles = {c["file"]: c["title"] for c in pages() if c.get("file")}
+
+    def item(page: str) -> str:
+        return f"[{titles.get(page, page)}]({link(md, page)}{'#' + sources[page] if sources[page] else ''})"
+    ordered = sorted(sources, key=lambda m: (order.get(m, len(order)), m))
+    now = [f"- {item(page)}" for page in ordered if not archived(page)]
+    frozen = [item(page) for page in ordered if archived(page)]
+    lines = now or [f"No page{' outside the Archive' if frozen else ''} links here yet."]
+    if frozen:
+        lines += ["", quote(" · ".join(frozen), f"[!info]- And in the Archive ({len(frozen)})")]
+    return "\n".join(lines)
 
 
 def turns(md: str, _: str) -> str:
@@ -591,7 +749,7 @@ def glossary(md: str, _: str) -> str:
     return "\n".join(rows)
 
 
-MAKERS = {"figure": figure, "thesis": thesis, "runs": runs, "contents": contents, "turns": turns,
+MAKERS = {"figure": figure, "thesis": thesis, "runs": runs, "contents": contents, "turns": turns, "used": used,
           "costs": costs, "table": table, "glossary": glossary}
 #: The blocks a page can ask for, and how they are found in it.
 KINDS = tuple(MAKERS)
@@ -635,6 +793,8 @@ def outside(text: str, change: Callable[[str], str], links: bool = True) -> str:
 
 def fill_text(md: str, text: str, kinds: Tuple[str, ...] = KINDS) -> str:
     """A page with its blocks of these kinds made anew; the others as they are."""
+    PAGE.clear()
+
     def made(match: "re.Match[str]") -> str:
         kind, arg = match.group(1), match.group(2).strip()
         if kind not in kinds:
@@ -657,8 +817,9 @@ def fill(only: Optional[List[str]] = None, write: bool = True) -> int:
     """
     Fill every Markdown file of the notebook, or those named; the number changed
     (or, with write=False, that would change). Two passes: every block but the
-    navigation, then the navigation, which shows the pages that link to a page
-    and so needs every other block filled first. Filling them all also checks
+    navigation and the lists of where a section is used, then those two, which
+    show the pages that link to a page or a section and so need every other
+    block filled first. Filling them all also checks
     that every figure a page drew is shown somewhere: one that is not was drawn
     for nothing, or forgotten.
     """
@@ -669,13 +830,15 @@ def fill(only: Optional[List[str]] = None, write: bool = True) -> int:
     asked = only or list(texts)
     after = dict(texts)
     for md in asked:
-        after[md] = link_terms(md, fill_text(md, texts[md], tuple(k for k in KINDS if k != "turns")))
+        after[md] = link_terms(md, fill_text(md, texts[md], tuple(k for k in KINDS if k not in ("turns", "used"))))
     BACKLINKS.clear()
     BACKLINKS.update(backlinks(after))
+    USED.clear()
+    USED.update(used_by(after))
     changed = 0
     placed = set()
     for md in asked:
-        after[md] = fill_text(md, after[md], ("turns",))
+        after[md] = fill_text(md, after[md], ("turns", "used"))
         placed |= {arg.strip() for kind, arg in re.findall(r"^<!-- (\w+)((?: [^\n]*?)?) -->$", after[md], re.M)
                    if kind == "figure"}
         if after[md] != texts[md]:

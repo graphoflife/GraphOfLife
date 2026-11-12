@@ -4,8 +4,10 @@
 
 A **baseline** is a stated set of rules: every [setting](settings.md) of a
 [world](the-world.md), written down in one file. An
-[experiment](runs-and-records.md#runs-and-experiments) changes one thing of its
-baseline, so that whatever differs comes from that change. **B1** is the
+[experiment](runs-and-records.md#runs-and-experiments) of October 2026 changed
+one thing of its baseline, so that whatever differed came from that change.
+The worlds drawn at random since are stored as changes from B1, and judged
+against each other, not against B1. **B1** is the
 algorithm exactly as a new run is offered it: the original rules. **B2** is
 B1 with rules that keep the network from breaking and agents from staking or
 breeding themselves to death, and with smaller [brains](the-brain.md) that
@@ -19,6 +21,11 @@ except what a condition changes. A run's name
 starts with its baseline: `B2-5000-d6b607-s001` is B2 at 5,000 tokens with
 one change (deaths not mended), [seed](rules-in-detail.md#seeds-and-the-random-stream) 1. The baselines
 are kept as plans, `book/experiments/B1.json` and `B2.json`.
+
+The worlds of the [screen of random worlds](a-screen-of-random-worlds.md) are
+stored the same way: a drawn world is B1's rules with every setting the draw
+changed, which is why their run names begin "B1-". But they are judged against
+each other, not against B1.
 
 ## B1: the rules as they were built
 
@@ -99,16 +106,10 @@ B2's healthy but poor.
 
 ## Where it is used
 
-- **B1**, the world the notebook first set out to understand, is the start
-  of Experiments 1 to 8, 10, 12, 13 and 37; [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)
-  introduces its study.
-- **B2**, the ground for open-ended evolution, is the start of Experiments 9
-  and 14 to 21 and most later ones;
-  [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops) asks the question it was
-  built for. [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)
-  asks a new world to be as diverse as B2's median world.
-- [Every simulation: what was run, and what was measured](every-simulation.md)
-  gives the baseline of every experiment and pilot batch.
+[Every simulation: what was run, and what was measured](every-simulation.md)
+gives the baseline of every experiment and pilot batch.
+
+The pages that use them link here, and are listed at the foot of this page.
 
 ## Where to go next
 
@@ -123,6 +124,6 @@ B2's healthy but poor.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (18)
-> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
+> [!info]- Pages that link here (22)
+> [How this notebook is written](how-this-notebook-is-written.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Other contests: a lottery, and alliances](another-game.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
 <!-- /turns -->

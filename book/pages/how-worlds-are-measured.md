@@ -10,7 +10,7 @@
 
 A world of 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") holds about 1,300 [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") and lives 3,000
 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): some four million agent-moments, recorded twice per iteration.
-The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds of 100,000 tokens hold about 14,000 agents for 1,500
+The [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") worlds of 100,000 tokens hold about 14,000 agents for 1,500
 iterations: some twenty million. This page follows, step by step, how that
 becomes the numbers and figures of the rest of the notebook. A world is
 recorded after every phase and summed up as means over stretches. Thirty
@@ -67,9 +67,9 @@ A world spends its first hundred iterations or so in a **youth**, unlike the
 rest of its life
 ([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 Then it **wanders** ([The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)). So when the
-notebook asks where a world **settles**, it takes the mean from iteration
-500 to its end: its
-[settled life](statistics.md#the-settled-life-of-a-world).
+notebook asks where a world **settles**, it takes the mean over its
+[settled life](statistics.md#the-settled-life-of-a-world): from iteration 500
+to its end in the baselines, and from 100 in round 3 of the screen.
 
 ## Step 3 · Many worlds: lines, bands and dots
 
@@ -107,7 +107,7 @@ in ten the paler band
 **The same 30 worlds, as a band.** The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-10000-s001` … `B1-10000-s030`: the baseline B1 at 10,000 tokens, seeds 1 to 30, 3,000 iterations each (every setting is listed in [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)). They are made with `python3 gol_lab.py run E02`.
+> **Runs.** As for the figure *30 worlds, each a line* above.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
 >
@@ -144,8 +144,8 @@ hide each other; their sideways position means nothing.
 
 ## Step 5 · Comparing two kinds of world
 
-An experiment changes one setting, and compares the worlds made with it
-against the baseline's. Each world is summed up by its level. The question is
+The experiments of October 2026 changed one setting, and compared the worlds
+made with it against the baseline's. Each world is summed up by its level. The question is
 whether the two groups of levels differ by more than chance would make them
 differ.
 
@@ -158,11 +158,9 @@ differ.
    setting made no difference, the labels "baseline" and "changed" would be
    arbitrary. So shuffle them 10,000 times, and see how often a difference at
    least as large appears. That share is the *p*-value.
-3. **Enough seeds?** A change of a given size needs a certain number of
-   worlds per condition to be found four times in five
+3. **Enough seeds?** Results from fewer than thirty seeds per condition are
+   called **indicative**, not effects, in the plans that ask for them
    ([How many seeds](statistics.md#how-many-seeds-an-experiment-needs)).
-   Results from fewer than thirty seeds per condition are called
-   **indicative**, not effects.
 
 Worlds that died out are not averaged in. They are an outcome of their own,
 counted with a [Wilson interval](statistics.md#the-wilson-interval) for the
@@ -179,13 +177,10 @@ and many distributions, are drawn on
 
 ## Every figure can be made again
 
-Under every figure, folded away, is **how to make this figure**. It names the
-runs, the file and fields it reads, and each step of the calculation in the
-words of this page. And it gives the command that makes it from the runs:
-`python3 book_figures.py` followed by the page's short name. The program that
-makes the figures does nothing the recipe does not say. It is
-`book_figures.py`, with the package `book_chapters/`, drawing with
-`book_svg.py`.
+Under every figure, folded away, is how to make it, with the command that
+draws it again ([Figures](how-this-notebook-is-written.md#figures)). The
+program that makes the figures is `book_figures.py`, with the package
+`book_chapters/`, drawing with `book_svg.py`.
 
 ## Where to go next
 

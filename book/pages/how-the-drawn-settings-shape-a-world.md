@@ -43,37 +43,13 @@ twice, so they are looked at apart, [at the end](#a-token-at-a-time).
 
 ## How a setting is tested
 
-For every setting and every outcome of the worlds:
-- for **whether a world died**, we count the deaths under each value;
-- for **a number** (a living world's [health](which-worlds-are-healthy.md),
-  each of its criteria, its size, how differently its agents act, how much
-  children act like their parents, ...), we take its median under each value.
-
-Then the outcome is **shuffled** among the worlds, 20,000 times, as if the
-setting had nothing to do with it. Each shuffle keeps how many worlds had each
-value and hands the outcomes out at random. The **chance** of a difference is
-the share of shuffles in which the values differ at least as much as they do in
-the real worlds: a [permutation test](statistics.md#permutation-tests). The
-difference is measured by the chi-square statistic for deaths, and by the
-Kruskal-Wallis statistic of the ranks for numbers. A chance of 0.01 means one
-shuffle in a hundred does as well by luck alone.
-
-Many settings are tested on many outcomes, so a few small chances turn up by
-luck. Every test therefore also has a **false discovery rate**: among all the
-settings tested on that outcome, how often a result this strong would be a
-false alarm (the rule of Benjamini and Hochberg, 1995). We call a result a
-**finding** only when that rate is below 0.1. Every test also gives its
-**size**: the share of the outcome's spread that the setting's values account
-for, from 0 (none) to 1 (all of it).
-
-**An example.** Of the 41 worlds drawn with gifts, 2 died; of the 43 drawn
-without, 12. Shuffle the 14 deaths at random among the 84 worlds, keeping 41
-worlds in one group and 43 in the other, and count how often the two groups
-end up at least this far apart: about 140 times in 20,000 shuffles, a chance of
-0.007. But 25 settings were tested on deaths, so a chance that small could turn
-up by luck in one of them. The false discovery rate says how likely that is
-here: 0.09, below 0.1, so it counts as a finding. Gifts or none account for a
-tenth of the spread of deaths across the worlds (a size of 0.10).
+Every setting is tested on every outcome by shuffling the outcome among the
+worlds, 20,000 times, as if the setting had nothing to do with it. A result
+is a **finding** only when its false discovery rate is below 0.1; its size is
+the share of the outcome's spread the setting accounts for
+([Testing many settings at once](statistics.md#testing-many-settings-at-once)).
+Of the 41 worlds drawn with gifts, 2 died; of the 43 drawn without, 12: a
+finding.
 
 ## Which settings matter for what
 
@@ -146,9 +122,7 @@ Of Experiment 40's 84 worlds, 14 died
 **Which worlds died.** For four settings, the share of Experiment 40's worlds drawn with each value that died; the number in brackets is how many worlds had that value. A cap of two links killed every world it was drawn in, so the three charts marked * leave those six worlds out. Each title gives the chance of differences this large by shuffling the deaths among the worlds.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end
->
-> **Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.
+> **Runs and data.** As for the figure *Which settings matter for what* above.
 >
 > 1. For each value, the deaths over the worlds drawn with it.
 > 2. The chance: the share of 20,000 shuffles of the deaths with a chi-square statistic at least as large.
@@ -221,7 +195,7 @@ criterion:
    ([Not a tree, and not crowded with links](which-worlds-are-healthy.md#not-a-tree-and-not-crowded-with-links)).
 3. **Estates given to the poorest make worlds even, crowded and less
    healthy.** Their median health is 0.34, against 0.40 to 0.49 under the
-   other five ways (chance 0.003, false discovery rate 0.04). The [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
+   other five ways (chance 0.003, false discovery rate 0.04). The [Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of
    the tokens has a median of 0.32 where the estate goes to the poorest, 0.36
    where it is shared uniformly, and 0.42 to 0.53 under the other four ways
    (false discovery rate 0.002). Raising the poorest keeps many poor agents
@@ -335,9 +309,7 @@ estates) is no finding.
 **Do worlds with more mechanisms switched on do better?** Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation 0.09.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end
->
-> **Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.
+> **Runs and data.** As for the figure *Which settings matter for what* above.
 >
 > 1. Count each world's drawn values that differ from `SIMPLEST` in effects.py.
 > 2. Plot against its health; the Spearman correlation of the two.
@@ -352,7 +324,7 @@ mixing, estates other than uniform, search, a cap on links, a token in every
 link, upkeep, and a game in rounds), the drawn worlds switched on 5 to 11. The
 four worlds with only 5 have a mean health of 0.45, the most of any count,
 and the rank correlation of mechanisms with health is 0.09: more mechanisms
-go with no more health. No mechanism is needed for a [healthy world](measuring-health.md#what-makes-a-world-interesting "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).") in round 3; a
+go with no more health. No mechanism is needed for a [healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026 "A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.") in round 3; a
 few ([above](#what-decides-how-healthy-a-living-world-grows)) do harm.
 
 ## A token at a time
@@ -494,7 +466,7 @@ only over far longer runs than ours, messages above all
 
 ## Where to go next
 
-- [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md):
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md):
   the health every comparison here reads.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
   the living worlds read for heredity, selection and change.
@@ -542,5 +514,5 @@ settingseffects` draws this page.
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (7)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Statistics: the tools of the notebook](statistics.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

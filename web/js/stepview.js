@@ -22,15 +22,23 @@ const StepView = {
    * stage was painted a different dark from the panel around it.
    */
   get ink() {
-    if (!this._ink) {
+    // Read again after a change of theme, which bumps Ink's version.
+    if (!this._ink || this._inkVersion !== Ink.version) {
+      this._inkVersion = Ink.version;
       this._ink = { bg: Ink.of('stage') };
       for (const name of ['edge', 'node', 'rich', 'pale', 'good', 'warn', 'lost', 'eye', 'iris',
                           'white', 'mutated', 'hot', 'shade', 'halo']) {
         this._ink[name] = Ink.of(`ex${name[0].toUpperCase()}${name.slice(1)}`);
       }
+      // The machine's own light, for what passes over the picture: the scan
+      // that reads a new step in, and the pulses that run along the links.
+      this._ink.scan = Ink.of('accent');
     }
     return this._ink;
   },
+
+  /** How long the scan takes to cross the stage when a step is opened, in seconds. */
+  SCAN: 0.95,
   _ink: null,
 
   // How fast a value closes the gap to its target, per second. Low enough to
@@ -245,18 +253,44 @@ const StepView = {
       canvas.height = h * dpr;
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.fillStyle = this.ink.bg;
-    ctx.fillRect(0, 0, w, h);
+    // Cleared rather than painted: the stage behind the canvas is the page's
+    // colour, with the machine's digits on it (explain.js), and the picture
+    // is drawn over both.
+    ctx.clearRect(0, 0, w, h);
     if (!view.stage || !view.shown.size) return;
 
     const place = this._camera(view, w, h, dt);
     const role = this._roles(view.stage);
 
-    this._edges(ctx, view, place, role);
+    this._edges(ctx, view, place, role, time);
     this._scan(ctx, view, place);
     this._conquest(view, role);
     this._nodes(ctx, view, place, role, time, dt);
     this._effect(ctx, view, place, role, time, w, h);
+    this._sweep(ctx, view, w, h);
+  },
+
+  /**
+   * A new step, read in: a line of the machine's light runs down the stage
+   * once, with a soft wake above it, the way a screen redraws. Over in under
+   * a second, and not drawn at all for a reader who asked for less motion.
+   */
+  _sweep(ctx, view, w, h) {
+    if (view.calm || view.since >= this.SCAN) return;
+    const t = view.since / this.SCAN;
+    const y = h * t * t * (3 - 2 * t);
+    const fade = Math.min(1, (1 - t) * 3);
+    const wake = Math.min(90, h * 0.18);
+    ctx.save();
+    const glow = ctx.createLinearGradient(0, y - wake, 0, y);
+    glow.addColorStop(0, Ink.alpha(this.ink.scan, 0));
+    glow.addColorStop(1, Ink.alpha(this.ink.scan, (0.16 * fade).toFixed(3)));
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, y - wake, w, wake);
+    ctx.globalAlpha = 0.65 * fade;
+    ctx.fillStyle = this.ink.scan;
+    ctx.fillRect(0, y - 1, w, 1.5);
+    ctx.restore();
   },
 
   /**
@@ -341,11 +375,12 @@ const StepView = {
     };
   },
 
-  _edges(ctx, view, place, role) {
+  _edges(ctx, view, place, role, time = 0) {
     // Links thicken with the view like everything else on it. Held at a fixed
     // number of pixels they turned into hairlines across a zoomed-out graph
     // and into cables across a zoomed-in one.
     const zoom = this.zoom(view);
+    const pulses = [];
     for (const [a, b] of view.stage.edges) {
       const p = place(a), q = place(b);
       if (!p || !q) continue;
@@ -382,6 +417,25 @@ const StepView = {
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(q.x, q.y);
       ctx.stroke();
+
+      // A pulse of the machine's light running along the link, now and then:
+      // the network is alive between steps too. Each link has its own pace
+      // and phase, from its ends, so they never march in step.
+      if (!view.calm && alpha > 0.3) {
+        const seed = this._hash(a * 31 + b);
+        const run = (time * (0.16 + 0.12 * seed) + seed) % 1;
+        if (run < 0.55) pulses.push([p, q, run / 0.55, alpha]);
+      }
+    }
+    if (pulses.length) {
+      ctx.fillStyle = this.ink.scan;
+      const r = Math.max(1.1, 2 * zoom);
+      for (const [p, q, s, alpha] of pulses) {
+        ctx.globalAlpha = alpha * 0.7 * Math.sin(Math.PI * s);
+        ctx.beginPath();
+        ctx.arc(p.x + (q.x - p.x) * s, p.y + (q.y - p.y) * s, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
     ctx.globalAlpha = 1;
   },

@@ -9,11 +9,11 @@
 
 How every simulation of the notebook is made and kept, so that it can be made again: the lab and the engine, what a run records, and what a simulation costs.
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [The lab, the engine and pilots](#the-lab-the-engine-and-pilots): The engine is the program that plays a world.
-- [What a run records](#what-a-run-records): Everything the notebook shows is computed from two kinds of record that every run writes into its folder, GraphOfLifeRuns/<run>/.
-- [What a simulation costs](#what-a-simulation-costs): Every experiment of the notebook is sized by what it costs.
+- [The lab, the engine and pilots](#the-lab-the-engine-and-pilots)
+- [What a run records](#what-a-run-records)
+- [What a simulation costs](#what-a-simulation-costs)
 
 ## The lab, the engine and pilots
 
@@ -71,18 +71,9 @@ other library versions, or on another processor.
 
 ### An example: Experiment 1
 
-Experiment 1 tested the lab itself. Three seeds of B1 were each run four
-ways for 30 iterations:
-- straight through;
-- stopped at iteration 10, and continued in a new process;
-- killed without saving at 15, and resumed from its save at 10;
-- and with the matrix library on every core.
-
-The first three ways recorded the same frames, bit for bit. On every core the
-frames were the same too. But in two seeds the [messages](rules-in-detail.md#messages) in
-flight at the end differed in their last bits
-([Is a run reproducible?](is-a-run-reproducible.md)). All twelve runs were
-made on the snapshot `f39288e90b003df0`, from commit `ccba58f`.
+Experiment 1 tested the lab: stopped, killed or resumed runs record the same
+frames bit for bit, and one thread keeps even the last bits
+([Is a run reproducible?](is-a-run-reproducible.md#the-experiment)).
 
 ### Pilot worlds
 
@@ -136,7 +127,7 @@ and of [Other contests](another-game.md) run this way.
   starved and how many were cut off, and mutations.
 
   Every tenth row adds the network's health
-  ([Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md)).
+  ([The health bar](measuring-health.md#the-health-bar)).
   That is the 2-core, the worst cut by one agent and by one connection, the
   best-connected agent's share, links per agent and the ball dimension.
   It also adds the sizes of groups: clones (neighbours with the same brain),
@@ -203,10 +194,39 @@ caption and recipe, into the pages.
 ### Where it is used
 
 Every page with a box *The runs behind this page* reads the lab's runs.
-[Every simulation: what was run, and what was measured](every-simulation.md)
-lists every experiment and pilot batch. Pages built on pilots say so, as
-[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
-does.
+
+<!-- used the-lab-the-engine-and-pilots -->
+- [Welcome](../README.md#graph-of-life--the-research-notebook)
+- [What this notebook is about](what-this-notebook-is-about.md#how-to-read-a-page-and-how-to-make-it-again)
+- [How this notebook is written](how-this-notebook-is-written.md#where-to-go-next)
+- [A screen of random worlds](a-screen-of-random-worlds.md#looked-at-as-if-for-the-first-time)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#how-our-view-changed)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#how-this-was-made)
+- [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#in-short)
+- [Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)
+- [Is a run reproducible?](is-a-run-reproducible.md#where-to-go-next)
+- [Every setting](settings.md#where-to-go-next)
+- [The rules in detail](rules-in-detail.md#what-the-same-needs)
+- [B1 and B2: the two baselines](b1-and-b2.md#where-to-go-next)
+- [Measuring lives: births, deaths, ages and estates](measuring-lives.md#what-each-heir-did)
+- [What keeps wealth spread?](what-keeps-wealth-spread.md#the-question)
+- [Physical inspiration](physical-inspiration.md#what-this-asks-of-the-notebook)
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#every-world-at-iteration-1000)
+- [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
+- [What the brains are like](what-the-brains-are-like.md#how-a-brain-is-examined)
+- [How big should a brain be?](how-big-should-a-brain-be.md#every-brain-of-round-3-responds)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)
+- [Every era against three](every-era-against-three.md#how-this-was-made)
+- [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#what-we-expected-of-a-crowd)
+- [What a brain can compute](what-a-brain-can-compute.md#the-check)
+- [Other contests: a lottery, and alliances](another-game.md#in-short)
+- [Rules without numbers](rules-without-numbers.md#b3-b2-without-its-numbers)
+- [Measuring health: criteria, the health bar and diversity](measuring-health.md#two-examples)
+- [Every simulation: what was run, and what was measured](every-simulation.md#where-to-go-next)
+
+> [!info]- And in the Archive (5)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#how-this-was-made-eight-switches-at-once) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#how-this-was-made) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay)
+<!-- /used -->
 
 ## What a run records
 
@@ -279,10 +299,10 @@ the viewer charts, and every one has a note that says how it is computed.
 | `nodes_before` | agents alive when the phase began | |
 | `tokens` | all tokens in the world (the same on every row) | |
 | `meanTokens`, `medianTokens`, `minTokens`, `maxTokens` | tokens per agent | [Tokens per agent](measuring-tokens.md#tokens-per-agent-mean-median-extremes) |
-| `gini` | inequality of tokens | [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) |
+| `gini` | inequality of tokens | [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) |
 | `topDecileShare` | share of all tokens held by the richest tenth | [The richest tenth](measuring-tokens.md#the-richest-tenths-share) |
 | `tokenEntropy`, `tokenEvenness`, `degreeEntropy`, `degreeEvenness` | how evenly tokens and connections are spread, in bits and as a share of the most even | [Entropy and evenness](measuring-tokens.md#entropy-and-evenness) |
-| `meanDegree`, `medianDegree`, `minDegree`, `maxDegree`, `density` | connections per agent; `density` is the share of all possible pairs that are joined | [Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling) |
+| `meanDegree`, `medianDegree`, `minDegree`, `maxDegree`, `density` | connections per agent; `density` is the share of all possible pairs that are joined | [Degree](measuring-networks.md#an-agents-connections-degree-and-clustering) |
 | `leaves` | agents with exactly one connection | [Core, trees and leaves](measuring-networks.md#core-trees-and-leaves) |
 | `distinctBrains`, `distinctParents`, `brainDiversity` | genotypes among the living, their parent genotypes, genotypes per agent | [Brain diversity](measuring-evolution.md#brain-diversity) |
 | `cladesInWindow` | families: ancestors eight iterations back | [Families](measuring-evolution.md#families) |
@@ -291,7 +311,7 @@ the viewer charts, and every one has a note that says how it is computed.
 | `gainers`, `losers`, `maxTokenAdded`, `maxTokenLost`, `redistributed` | who gained and who lost in the phase, the extremes, and the tokens of the dead dealt out | [Gains and losses](b1-lives-and-wealth.md#gains-losses-and-the-share-out) |
 | `meanInvestedShare`, `reproTokenShare`, `meanChildLinks`, `handovers` | how parents gave (phase 1) | [Reproduction statistics](measuring-lives.md#reproduction-statistics) |
 | `selfAllocationShare`, `heldHomeShare` | staking on one's own node, and keeping it (phase 2) | [Staking at home](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node) |
-| `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on neighbours, and the connections they keep alive (phase 2) | [Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation) |
+| `spreadShare`, `revoltShare`, `totalFlow`, `meanEdgeFlow`, `maxEdgeFlow`, `prunedEdges` | the stakes on neighbours, and the connections they keep alive (phase 2) | [Token flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation) |
 | `revolutions` | nodes won by a coalition (phase 2) | [Revolution](rules-in-detail.md#how-a-coalition-takes-a-node) |
 | `cutRiskBefore` | the largest share of the world one cut could sever, before the cleanup (in a game's row, after its unused connections are cut) | [Cut risk](measuring-networks.md#cut-risk) |
 | `gifts`, `giftTokens`, `giftShare` | gifts of tokens (phase 1): 0 in a run without gifts, `null` in the game's rows ([`allow_gifting`](settings.md#allow_gifting)) | [Reproduction statistics](measuring-lives.md#reproduction-statistics) |
@@ -312,10 +332,10 @@ on other rows they are `null`:
 | `spectralGap` | how hard the network is to cut in two; how fast a random walk forgets | [The spectral gap](measuring-networks.md#the-spectral-gap) |
 | `dimension`, `ricciCurvature` | dimension and curvature from how balls grow | [Dimension and curvature](measuring-space.md#three-ways-to-measure-a-networks-dimension) |
 | `boxDimension`, `boxDimensionR2` | dimension from covering the network with boxes | [Box dimension](measuring-space.md#box-dimension) |
-| `lightningScore`, `cyclingShare`, `lightningLongest`, `flowImbalance`, and the `net…` versions, `netFlowShare` | tokens that go round in loops (phase 2) | [Lightning](measuring-tokens.md#lightning-tokens-that-go-round) |
-| `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](statistics.md#fitting-a-power-law-properly) |
-| `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree`, `changeVsTokens`, and their `…R2` | how one property of agents grows with another | [Scaling relations](measuring-networks.md#scaling-relations-between-agents-properties) |
-| `assortativity` | whether hubs join hubs | [Assortativity](measuring-networks.md#assortativity) |
+| `lightningScore`, `cyclingShare`, `lightningLongest`, `flowImbalance`, and the `net…` versions, `netFlowShare` | tokens that go round in loops (phase 2) | [Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round) |
+| `degreeExponent`, `tokenExponent`, `degreeGamma`, `degreeKMin`, `degreeTailShare`, `degreeGammaKS`, and their `…R2` | power-law tails of the degrees and tokens | [Fitting a power law](measures-of-the-archived-studies.md#fitting-a-power-law-properly) |
+| `tokensVsDegree`, `trianglesVsDegree`, `clusteringVsDegree`, `changeVsTokens`, and their `…R2` | how one property of agents grows with another | [Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties) |
+| `assortativity` | whether hubs join hubs | [Assortativity](measures-of-the-archived-studies.md#assortativity) |
 
 Fields beginning with `_` (`_seconds`, `_cpu`, `_peakMB`, …) are the costs of
 the run, not of the world ([What a simulation costs](runs-and-records.md#what-a-simulation-costs)).
@@ -338,7 +358,9 @@ hours a computer spends on it, the memory a run needs, and the disk its
 frames take. These costs are measured, not guessed. A run's time is close to
 proportional to its number of agents and the size of their brains. A B1
 world of 10,000 tokens takes about a second per iteration. An experiment takes about 12 hours
-of the computer, and never more than two days.
+of the computer, and never more than two days. A plan gives its cost in
+worker-hours, the hours of one of the lab's workers. Since 11 November 2026
+the lab plays on two workers at once, while a separate agent uses a core.
 
 ### Measured, not guessed
 
@@ -460,6 +482,6 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics), [How the simulation works](../README.md#how-the-simulation-works).
 
-> [!info]- Pages that link here (32)
-> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (37)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A source and a sink](a-source-and-a-sink.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How worlds are measured](how-worlds-are-measured.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

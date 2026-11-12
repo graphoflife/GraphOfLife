@@ -19,12 +19,12 @@
     {
       "id": "baselines",
       "title": "The baselines B1 and B2",
-      "about": "The two rule sets the notebook started from: B1, the original rules, and B2, a world that cannot break. Round 3's worlds start from B1's rules, changed as drawn; how B2 was built is in the Archive."
+      "about": "The two rule sets the notebook started from: B1, the original rules, and B2, a world that cannot break. Round 3's worlds start from B1's rules, changed as drawn."
     },
     {
       "id": "wealth",
       "title": "Wealth: who holds the tokens",
-      "about": "What keeps a world's wealth spread. B1's inequality, gains and losses, and its richest agents are in the Archive."
+      "about": "What keeps a world's wealth spread."
     },
     {
       "id": "space",
@@ -34,7 +34,7 @@
     {
       "id": "brains",
       "title": "Brains: what they are, and whether they matter",
-      "about": "What the brains are and compute, whether they matter, and how big they should be. B1's genotypes, lineages and messages are in the Archive."
+      "about": "What the brains are and compute, whether they matter, and how big they should be."
     },
     {
       "id": "evolution",
@@ -49,12 +49,12 @@
     {
       "id": "groups",
       "title": "Groups and cooperation",
-      "about": "Other contests, and alliances: do agents work together when the game lets them? Who helps whom, and the gliders, are in the Archive."
+      "about": "Other contests, and alliances: do agents work together when the game lets them?"
     },
     {
       "id": "rules",
       "title": "Changing the rules",
-      "about": "Rules without tuned numbers. What each switch did in pilot worlds, alone and in company, is in the Archive."
+      "about": "Rules without tuned numbers."
     },
     {
       "id": "methods",
@@ -142,8 +142,6 @@
       ],
       "kind": "experiment",
       "experiments": [
-        "E38",
-        "E39",
         "E40",
         "E41",
         "E42"
@@ -652,10 +650,7 @@
       "summary": "Rules written by hand, planted in evolved B2 worlds, can beat evolution's play, given a raid, a password and a crowd of about a hundred (Experiment 29). In older worlds the raiders stopped winning: the worlds had grown too poor (Experiments 30 and 33 to 35).",
       "experiments": [
         "E29",
-        "E30",
-        "E33",
-        "E34",
-        "E35"
+        "E30"
       ]
     },
     {
@@ -892,6 +887,23 @@
       ]
     },
     {
+      "id": "rounds-1-and-2-of-the-screen",
+      "title": "Rounds 1 and 2 of the screen, and the criteria they were judged by",
+      "file": "pages/rounds-1-and-2-of-the-screen.md",
+      "topics": [
+        "history",
+        "screen"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E38",
+        "E39"
+      ],
+      "status": "analysed",
+      "added": "2026-11-12",
+      "summary": "Rounds 1 and 2 of the screen of random worlds, with their theses and runs: round 1 found no healthy world in fifty, round 2 was withdrawn unplayed. And the criteria worlds were judged by before 9 November 2026, with their lines and the rule that marked a value bad."
+    },
+    {
       "id": "what-the-switches-did-in-pilots",
       "title": "What the switches did in pilots (indicative)",
       "file": "pages/what-the-switches-did-in-pilots.md",
@@ -904,6 +916,24 @@
       "status": "analysed",
       "added": "2026-10-15",
       "summary": "The engine's switches tried in pilot worlds in October 2026, alone and in company: indicative only, from two seeds a condition, mostly 1,000 iterations, on B2."
+    },
+    {
+      "id": "crews-breeders-and-b1-raiders",
+      "title": "Crews, breeders and B1 raiders: Experiments 33 to 35",
+      "file": "pages/crews-breeders-and-b1-raiders.md",
+      "topics": [
+        "side-studies",
+        "strategies"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E33",
+        "E34",
+        "E35"
+      ],
+      "status": "analysed",
+      "added": "2026-11-12",
+      "summary": "Three strategies planted in late worlds after the lone raider stopped winning: crews that pool their stakes, raiders that breed as the world does, and every strategy in B1. All three theses refuted; the door closed by poverty."
     },
     {
       "id": "cooperation-help-and-gliders",
@@ -946,6 +976,19 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "Side studies of many measures and worlds at once: an atlas of what goes with what, every world side by side, the viewer's colours, and assembly theory."
+    },
+    {
+      "id": "measures-of-the-archived-studies",
+      "title": "Measures of the archived studies",
+      "file": "pages/measures-of-the-archived-studies.md",
+      "topics": [
+        "side-studies",
+        "methods"
+      ],
+      "kind": "reference",
+      "status": "written",
+      "added": "2026-11-12",
+      "summary": "The measures only the Archive's pages use, kept as they were written: fitting a power law, splitting a decision's variance, the participation ratio, assortativity, preferential attachment, scaling relations, mobility, lightning, four measures of age, and assembly."
     }
   ],
   "parts": [
@@ -984,7 +1027,7 @@
       "id": "worlds",
       "title": "What the worlds do",
       "colour": "#4ccb60",
-      "about": "What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests. What B1's worlds did is in the Archive.",
+      "about": "What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests.",
       "topics": [
         "wealth",
         "brains",
@@ -1029,7 +1072,7 @@
       "id": "archive",
       "title": "Archive",
       "colour": "#a3a3a3",
-      "about": "Frozen pages, kept so that every experiment can still be read and made again: what was done and found before 11 November 2026. They are not brought up to date as the research moves on.",
+      "about": "Frozen pages: what was done and found before 11 November 2026. B1 as it was described in October, how B2 was built, the search for a healthy, rich world with its pilots, the strategies planted in late worlds, rounds 1 and 2 of the screen, and side studies. They are kept so that every experiment can still be read and made again, and are not brought up to date as the research moves on.",
       "topics": [
         "b1-history",
         "history",

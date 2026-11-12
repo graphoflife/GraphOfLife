@@ -3,8 +3,8 @@ Which worlds are healthy? The three orders of research/screen/health.py, for
 the author to check (2026-11-07; 2026-11-09: no lines, every measure a score
 that is better or worse, and health by the sum, the product and the worst of the
 criteria): every world drawn at random in round 3 (Experiments 40 to 42; the
-author, 2026-11-08: round 3 only), as a heat map of its criteria, a table with
-every number and a link that opens the world in the viewer, the first of each
+author, 2026-11-08: round 3 only), as a heat map of its criteria, a table of
+its health and a link that opens the world in the viewer, the first of each
 order, every measure against the worlds, what the worlds lose in their culls,
 and the health of each run's two halves. Nothing is read here but health.json.
 """
@@ -30,7 +30,7 @@ ORDER_NAMES = {"product": "by the product", "sum": "by the sum", "worst": "by th
 TOP = 13
 #: How the rounds' worlds are told apart where their seeds are the same.
 TAG = {"E41": "w", "E42": "s"}
-#: The page's worked example: first by the sum, far down by the worst criterion.
+#: The page's worked example: third by the sum, far down by the worst criterion.
 EXAMPLE = ("E40", 3077)
 ROUND = {"E40": "round 3", "E41": "round 3, weakest first", "E42": "round 3, strongest first"}
 
@@ -117,22 +117,16 @@ def healthorder(ch: F.Chapter) -> None:
             recipe=recipe(RUNS, DATA, SCORING + ["Rank the living worlds by the product, ties by their weakest "
                                                  "criterion."]))
 
-    # The three orders, as a table: every number, and a link that opens each world.
+    # The three orders, as a table, and a link that opens each world. Its criteria are the heat map's, its
+    # two halves the figure of the halves, and the worlds that died are listed with round 3 (roundthree.py).
     ch.number("table:order", {
         "head": ["rank by the product", "world", "round", "by the product", "by the sum", "by the worst",
-                 "rank by the sum", "rank by the worst"]
-                + [NAMES[c] for c in criteria] + ["agents", "first half → second", "weakest criterion"],
+                 "rank by the sum", "rank by the worst", "agents", "weakest criterion"],
         "rows": [[w["ranks"]["product"], world_link(w), ROUND[w["round"]]]
                  + [f"{w['health'][key]:.3f}" for key in ("product", "sum", "worst")]
                  + [w["ranks"]["sum"], w["ranks"]["worst"]]
-                 + [f"{w['criteria'][c]:.2f}" for c in criteria]
-                 + [f"{w['averages']['median_agents']:,.0f}",
-                    f"{w['halves'][0]['product']:.3f} → {w['halves'][1]['product']:.3f}", weakest(w)]
+                 + [f"{w['averages']['median_agents']:,.0f}", weakest(w)]
                  for w in by["product"]]})
-    ch.number("table:dead", {
-        "head": ["world", "round", "died at iteration"],
-        "rows": [[world_link(w), ROUND[w["round"]], f"{w['ended_at']:,}"] for w in dead]
-                + [[world_link(w), ROUND[w["round"]], f"stopped as too slow at {w['ended_at']:,}"] for w in stopped]})
     # The first of each order, side by side.
     ch.number("table:first", {
         "head": ["place"] + [ORDER_NAMES[key] for key in d["orders"]],
@@ -226,7 +220,7 @@ def healthorder(ch: F.Chapter) -> None:
     ch.number("table:dropped", {
         "head": ["left out", "why"], "rows": [[k, why] for k, why in d["dropped"].items()]})
 
-    # One world's scores, as a worked example: first by the sum, far down by its worst criterion.
+    # One world's scores, as a worked example: third by the sum, far down by its worst criterion.
     example = next(w for w in living if w["round"] == EXAMPLE[0] and w["seed"] == EXAMPLE[1])
     ch.number("example", {"world": label(example), "id": example["id"], "ranks": example["ranks"],
                           "health": example["health"], "criteria": example["criteria"],

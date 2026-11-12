@@ -1253,6 +1253,44 @@ function test_no_canvas_writes_a_colour_out() {
   assert(!found.length, `colours written out where a retheme cannot reach them: ${found.join(', ')}`);
 }
 
+function test_every_theme_sets_every_ink_a_canvas_reads() {
+  // A theme restates the colours of the first block, and a colour it forgets
+  // comes through from the dark default: on the white theme that is a chart
+  // grid, a line or an eye nobody can see. Every ink a canvas reads (Ink.ROLES)
+  // and every series colour has to be in every theme — unless the default
+  // builds it from tokens of its own (var(...)), which the theme then sets.
+  const Ink = new Function(
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'ink.js'), 'utf8')}; return Ink;`)();
+  const css = fs.readFileSync(path.join(root, 'web', 'css', 'style.css'), 'utf8');
+  const block = start => css.slice(start, css.indexOf('\n}', start));
+  const tokens = text => new Map([...text.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].map(m => [m[1], m[2].trim()]));
+  const base = tokens(block(css.indexOf(':root {')));
+  const needed = [...Object.values(Ink.ROLES), ...Ink.LINES.map((_, i) => `--line-${i + 1}`),
+                  '--graph-bg', '--graph-edge', '--graph-outline', '--home-colormap', '--home-edge']
+    .filter(token => !/var\(/.test(base.get(token) || ''));
+  const themes = [...css.matchAll(/:root\[data-theme="([\w-]+)"\] \{/g)];
+  assert(themes.length >= 3, `the stylesheet offers ${themes.length} themes`);
+  assert(themes.some(m => m[1] === 'paper'), 'there is no white theme');
+  for (const match of themes) {
+    const own = tokens(block(match.index));
+    const missing = needed.filter(token => !own.has(token));
+    assert(!missing.length, `the ${match[1]} theme leaves ${missing.join(', ')} to the dark default`);
+  }
+}
+
+function test_the_theme_switch_offers_every_theme_the_stylesheet_has() {
+  // A theme in the stylesheet that the switch does not offer can never be
+  // chosen; one the switch offers that the stylesheet lacks is the default
+  // under another name.
+  const css = fs.readFileSync(path.join(root, 'web', 'css', 'style.css'), 'utf8');
+  const Theme = new Function('Ink',
+    `${fs.readFileSync(path.join(root, 'web', 'js', 'theme.js'), 'utf8')}; return Theme;`)({});
+  const styled = new Set(['obsidian', ...[...css.matchAll(/:root\[data-theme="([\w-]+)"\] \{/g)].map(m => m[1])]);
+  const offered = new Set(Theme.THEMES.map(([name]) => name));
+  assert([...styled].sort().join() === [...offered].sort().join(),
+    `the stylesheet has ${[...styled].sort()} and the switch offers ${[...offered].sort()}`);
+}
+
 function test_no_canvas_writes_a_font_out() {
   // The site has one typeface, set once in the stylesheet as --font. A family
   // written into a canvas call is one the stylesheet cannot reach: eighteen

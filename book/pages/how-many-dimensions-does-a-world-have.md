@@ -7,14 +7,14 @@
 >   scale, and by every ruler?
 > - Is the dimension made by how the worlds are wired, or would any network
 >   with the same numbers of [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") have it?
-> - Are [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds, and the others the notebook has made since, spaces too?
+> - Are B2's worlds, and the others the notebook has made since, spaces too?
 > - When does a world become a space, and when does it fold into a small
 >   world? Which rules decide it?
 
 ## In short
 
 The notebook's second aim is a world that grows a space of its own, like a
-plane or a room, from simple local rules. The worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2."), [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it."),
+plane or a room, from simple local rules. The worlds of the first baseline, B1,
 are spaces: about three dimensions by the room they hold, and two by how a
 random walker spreads. Random networks with the same links have no dimension:
 they are *small worlds*, in which everyone is a few steps from everyone. B2's
@@ -32,15 +32,10 @@ steps from everyone. Such a tangle is called a **small world**. A space is the
 opposite. Far places are far apart in it, and the farther out you look, the
 more room there is.
 
-**Why it matters.** Graph of Life was built with physics in mind
-([Physical inspiration](physical-inspiration.md)). Several attempts to unite
-gravity with quantum theory build space itself out of discrete pieces and the
-relations between them. A world whose simple, local rules grow a space of a
-few dimensions, three if possible, would be a small model of that idea. No
-geometry would have been put in by hand. This is the notebook's second aim,
-beside [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau."), and the two aims meet. In a space, distant
-regions are far apart, so they could evolve apart. In a small world,
-everything is near everything.
+**Why it matters.** A world whose local rules grow a space would be a small
+model of space built from relations
+([Physical inspiration](physical-inspiration.md#space-made-of-relations)). And in
+a space, distant regions are far apart, so they could evolve apart.
 
 This half of the page measures what the worlds of the first baseline, B1, have
 grown into. They are the thirty worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of
@@ -50,7 +45,7 @@ their end. Besides them, it measures the three worlds of 409,600 tokens of
 (`B1-409600-s001` … `-s003`, `python3 gol_lab.py run E08`). They held about
 60,000 agents each after 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). And it measures the worlds of 10,000
 tokens it was first written from: the 26 of thirty that lived to the end. They
-held about 1,500 agents each at their end (1,300 over their [settled life](statistics.md#the-settled-life-of-a-world "A world from iteration 500 to its end, after its youth, where it is measured.")).
+held about 1,500 agents each at their end (1,300 over their [settled life](statistics.md#the-settled-life-of-a-world "A world after its youth, where it is measured: from iteration 500 to its end in the baselines, from 100 in round 3 of the screen.")).
 That makes three sizes, each four to ten times the one before.
 [How this was made](#how-this-was-made) lists every run.
 
@@ -74,13 +69,10 @@ exactly *r*^*d*, it would read *d* at every radius.
 [Dimension and curvature from ball growth](measuring-space.md#three-ways-to-measure-a-networks-dimension)
 explains the idea in full.
 
-**The second ruler asks a walker.** A walker that steps at random through a
-space of *d* dimensions has, after *t* steps, spread over a region of about
-*t*^(*d*/2) points. So the chance that it is back where it started falls like
-*t*^(−*d*/2). The exponent read off that chance is the **spectral dimension**
-([The spectral dimension](measuring-space.md#the-spectral-dimension)). It measures how easily
-things spread through a space, where the first ruler measures how much room
-there is.
+**The second ruler** asks how often a random walker returns
+([The spectral dimension](measuring-space.md#why-returning-measures-dimension)):
+it measures how easily things spread through a space, where the first ruler
+measures how much room there is.
 
 On a regular grid the two rulers agree. On irregular spaces they need not, and
 how they differ says what kind of space it is.
@@ -256,10 +248,8 @@ walk is slow. A difference in tokens spreads through a world more slowly than
 through a grid of the same size. It spreads much more slowly than through a
 random network. Lines of descent spread in the same way
 ([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
-Two agents up to about 7 steps apart share a family of 25 iterations back more
-often than chance. For a family of 200 iterations back, the excess over chance
-reaches about 12 steps. The patches widen as a random walk on these worlds
-would.
+Their families widen as patches, as a random walk on these worlds would
+([Everywhere the same](physical-inspiration.md#everywhere-the-same)).
 
 ### Over a world's life
 
@@ -296,19 +286,12 @@ B1's worlds are spaces, but full of dead ends. What rule would make the two
 rulers agree? Perhaps rules that close loops at long range, or that let dead
 ends wither, or that give every place the same number of neighbours.
 
-The second baseline, B2, has rules that close loops and leave no dead ends.
-They were made to keep a world from breaking
-([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)), and
-B2 has been the baseline of everything since:
+The second baseline, B2, has rules that close loops and leave no dead ends,
+made to keep a world from breaking. B2's rules keep the network whole: two
+random links at birth, deaths mended, only redundant links lapse, at most 8
+chosen links ([B2](b1-and-b2.md#b2-a-world-that-cannot-break)).
 
-- a newborn is joined to its parent and to two of its parent's neighbours;
-- when an agent dies, its former neighbours are joined up in a ring round the
-  gap, so that no death can split the world. This is **mending**
-  ([`mend_on_death`](settings.md#mend_on_death));
-- an unused link lapses only where its two ends share two neighbours;
-- a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") may choose at most 8 links.
-
-In a model without brains, the first two rules alone put 97% of agents in the
+In a model without [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."), the first two rules alone put 97% of agents in the
 core, with a ball dimension of 3.7. In a first run of B2 with all four, every
 agent was in the core: no dead ends at all. Its ball dimension read 3.1 to
 3.7.
@@ -324,13 +307,9 @@ few steps only grows with the room it has.
 
 So this section reads B2's worlds, and the others the notebook has made since,
 with the full rulers above (`research/atlas/space.py`). It adds one number
-that sums a world up, its **width**. A world's typical distance is the number
-of steps within which a typical agent's ball holds half the world. Its width
-is its typical distance over its random twin's; the figures call it "typical
-distance, over the twin's". A small world is about as near as its twin, a
-width of about 1. A space is wider, because its distances grow as a power of
-its size, the twin's only as the logarithm. The notebook counts a world as a
-space when its width is at least 1.5 ([The random twin](measuring-space.md#the-random-twin-is-a-world-a-space)).
+that sums a world up, its **width**. Its width is its typical distance over its
+random twin's; at 1.5 or more it is a space
+([The typical distance](measuring-space.md#the-typical-distance)).
 
 ### B1 and B2 side by side
 
@@ -512,7 +491,7 @@ in so much cannot say; worlds without brains can
 
 Read at iteration 1,000, 498 worlds fall into two groups. They are the pilot
 batches read at that iteration, the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s B2 families at 10,000 tokens, and the first two rounds of
-the search by elimination. That search drew every setting at random. Round after
+the search by elimination. That search drew every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") at random. Round after
 round, it kept the values that did not make worlds worse
 ([The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds)).
 
@@ -522,7 +501,7 @@ round, it kept the values that did not make worlds worse
   (2.22), and the 18 in which every unused link lapses (3.63). And the 59
   whose deaths are not mended, on B1's rules or drawn so by the search (2.09).
 
-Across them all, the width goes with fewer links per agent: a rank correlation
+Across them all, the width goes with fewer links per agent: a [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.")
 of −0.51. That is the correlation of the worlds' ranks, not of their values.
 The width goes hardly at all with how poor the agents are (+0.09), how many
 they are (+0.06) or how many tokens each holds (−0.09). Being a space is not a
@@ -629,11 +608,6 @@ parents are 15 to 28 iterations old at a birth, and the rule leaves them 13 to
 26. The dying still hold about eight links, gathered from their neighbours'
 children as much as from their own, and the worlds stay folded.
 
-Two things unfold the worlds whose estate goes to the newborns or the parents.
-Their parents are young, two or three iterations old, and their dying hold few
-links. They hold about six, in 5.4 groups, where the table of rings above puts
-the line between folded and not.
-
 ## What we learned
 
 - **B1's worlds are spaces.** Their dimension shows as a plateau, from radius
@@ -686,7 +660,7 @@ the line between folded and not.
   ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world that is a three-dimensional
   space and rich, and that keeps evolving, is still to be found
   ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)).
-- **Room for open-ended evolution.** In a space, distant places are far apart.
+- **Room for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.").** In a space, distant places are far apart.
   The diameter of a world grows as a power of its size, a small world's only
   as its logarithm. So a large world has room for regions that evolve apart.
   Lines of descent do hold patches, a dozen steps across. But what the agents
@@ -742,70 +716,11 @@ iterations each.
 
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
 >
 > - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
 >
 > To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
-
-> [!info]- Every setting of these runs
-> | setting | baseline | what it is |
-> |---|---|---|
-> | [`total_tokens`](settings.md#total_tokens) | 100,000 | The number of tokens in the world, *T*. It never changes during a run. |
-> | [`n_nodes`](settings.md#n_nodes) | 0 | How many founders the world starts with. 0 means one founder per hundred tokens: *n* = ⌊*T* / 100⌋. |
-> | [`k_neighbors`](settings.md#k_neighbors) | 0 | How many neighbours each founder starts with in the ring. 0 means *k* = max(⌊*n* / 100⌋, 5); an odd *k* is wired as *k* − 1. |
-> | [`rewire_p`](settings.md#rewire_p) | 0.2 | In the starting ring, the probability that a connection is moved to a founder chosen at random (Watts–Strogatz). |
-> | [`hidden_layers`](settings.md#hidden_layers) | 50, 45, 40, 35, 30 | The widths of the brain's hidden layers, in order from input to output. |
-> | [`hidden_activation`](settings.md#hidden_activation) | sigmoid | The curve each hidden unit applies to its sum: `sigmoid`, which passes on at most a quarter of a change, so that deep brains barely respond to what they see, or `tanh`, the same S-shape centred on zero, through which a change still passes in several layers. |
-> | [`brain_kind`](settings.md#brain_kind) | float16 | How weights are stored: `float` (64-bit), `float16` (16-bit, computed in 64-bit) or `binary` (−1, 0, +1). |
-> | [`brain_bits`](settings.md#brain_bits) | 16 | Only for binary brains: how many input rows encode one number. Unused by float and float16 brains. |
-> | [`message_amount`](settings.md#message_amount) | 30 | How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase. |
-> | [`random_input_amount`](settings.md#random_input_amount) | 5 | How many random numbers, drawn uniformly from −2 to 2, a brain reads per neighbour, every time it looks. |
-> | [`exchange_messages`](settings.md#exchange_messages) | on | Whether agents send and read messages at all. |
-> | [`message_prepass`](settings.md#message_prepass) | on | Whether every phase begins with an extra look in which agents only write messages, so the look that acts reads messages written this phase. |
-> | [`allow_handover`](settings.md#allow_handover) | on | Whether a parent may move some of its own connections to its newborn child. |
-> | [`allow_revolutions`](settings.md#allow_revolutions) | on | Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*). |
-> | [`contest`](settings.md#contest) | largest | Who takes a contested node: the `largest` stake as the game weighs it, or a staker drawn by `lottery` with a chance in proportion to its stake (needs revolutions off). |
-> | [`allocation`](settings.md#allocation) | full | How the game's stakes are placed: all at once (`full`), or a token at a time in rounds with the game as it stands in view, the poorest done first (`weakest_first`) or the richest starting alone (`strongest_first`), as the original engine played. |
-> | [`revolt_tokens`](settings.md#revolt_tokens) | both | What a token flagged revolutionary counts for: its staker's claim to be the largest and the coalition both (`both`, the rule since the simple engine), or the coalition alone (`separate`), so that flagging gives up the staker's own claim. |
-> | [`pool`](settings.md#pool) | off | Whose stakes on a node count as one side's: nobody's (`off`), one genotype's (`genotype`) or one family's (`family`, by family tag). The side with most takes the node, and a brain sees whether a candidate is on its side. |
-> | [`allow_gifting`](settings.md#allow_gifting) | off | Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen. |
-> | [`random_decisions`](settings.md#random_decisions) | off | The control: every number a brain would produce is replaced by a random draw from the standard normal distribution. |
-> | [`prune_after`](settings.md#prune_after) | blotto | After which phase connections that carried no tokens are cut: `blotto` (the game), `reproduction`, or `both`. |
-> | [`inactive_window`](settings.md#inactive_window) | phase | How long a connection may go unused: `phase` means it must carry tokens in the phase being judged; `iteration` allows the two last phases. |
-> | [`redistribution`](settings.md#redistribution) | uniform | How the tokens of removed agents are shared: `uniform` gives every survivor the same chance at each token; `by_tokens` weights by what a survivor holds; `poorest` raises the poorest to one common level first; `newborns` gives them to this iteration's children, `parents` to their parents, once per child (both `uniform` in an iteration without births); `children` leaves each dead agent's estate to its own living children (`uniform` where there are none); `local` lets each estate flow through the network to the nearest living agents, split evenly at every step. |
-> | [`tokens_created_per_phase`](settings.md#tokens_created_per_phase) | 0 | Tokens added to the world at every cleanup. 0 keeps the supply fixed. |
-> | [`mutate_on_replication`](settings.md#mutate_on_replication) | off | Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits. |
-> | [`incumbency`](settings.md#incumbency) | 1.0 | How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule. |
-> | [`birth_links`](settings.md#birth_links) | 0 | How many of its parent's neighbours a newborn is joined to, drawn at random, besides its parent itself; 0 leaves every link to the brain's choice. |
-> | [`mend_on_death`](settings.md#mend_on_death) | off | Whether the neighbours of an agent that dies are joined up where its death would leave them in separate pieces. |
-> | [`prune_needs`](settings.md#prune_needs) | 0 | How many neighbours the two ends of an unused connection must share for it to be cut; 0 cuts every unused connection. |
-> | [`valence`](settings.md#valence) | 0 | The most connections an agent's brain may choose to hold (0 = no limit). An agent at its limit cannot have a child. |
-> | [`link_token`](settings.md#link_token) | off | Whether every link holds one token: its maker pays for it, a lapsing link gives it back to one of its ends, and a link of a dead agent to the end that lives on, so the links can never outnumber the tokens. |
-> | [`link_upkeep`](settings.md#link_upkeep) | off | Whether an agent may pay a token an iteration to keep a link, each brain deciding for each neighbour: `paid_or_used` keeps a link that was paid for or used, `paid_only` only one that was paid for; `off`, only use keeps a link. |
-> | [`upkeep_to`](settings.md#upkeep_to) | end | Where a link's upkeep goes: to the link's other end (`end`), or into the estate of the dead (`estate`), shared out by the world's redistribution rule. |
-> | [`keep_home`](settings.md#keep_home) | 0.0 | The share of an agent's tokens — rounded up, never less than one — that stays on its own node whatever its brain says; a parent also keeps one. 0 is the old rule. |
-> | [`max_age`](settings.md#max_age) | 0 | The age at which an agent dies (0 = never); its tokens are shared out like those of any other dead agent. |
-> | [`buy_life`](settings.md#buy_life) | off | Whether an agent that has reached max_age may live on by paying one token an iteration into the estate of the dead — never its last, so one with a single token left dies. Needs max_age. |
-> | [`min_child`](settings.md#min_child) | 1 | The fewest tokens a child can be born with; a parent that would give less has no child. |
-> | [`child_floor`](settings.md#child_floor) | fixed | The least a child may start with: min_child alone (fixed), or also the median holding of its parent's neighbours (neighbours), so that a world grows only as rich as it is. |
-> | [`mix_at_birth`](settings.md#mix_at_birth) | off | Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain. |
-> | [`mix_mates`](settings.md#mix_mates) | any | Under mix_at_birth, who may be the mate: any neighbour of the parent, or only parents — a neighbour with a living child of its own (with none, the newborn's brain is a copy). |
-> | [`mate_pays`](settings.md#mate_pays) | off | Under mix_at_birth, whether the mate pays the child as many tokens as the parent gave it, as far as it can and never its last. |
-> | [`self_message`](settings.md#self_message) | own | What an agent writes to itself, which each neighbour reads: what its own column says (own), or the largest, number by number, of what it writes to anyone (largest), so that news one column marks reaches every neighbour. |
-> | [`link_search`](settings.md#link_search) | off | Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the tokens it holds would pay for. A paid step costs one token, paid to the agent it enters, and never the last. |
-> | [`link_steering`](settings.md#link_steering) | random | Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking). |
-> | [`link_consent`](settings.md#link_consent) | mutual | Who has to agree to a link a search proposes: both ends (mutual), or only the one who proposes (forced). Nobody at its valence gets a new link either way. |
-> | [`proto`](settings.md#proto) | none | Rules first played in the pilots' prototype, by name: came_from and helped_by (an input row each), contest = lottery, pool by genotype or family, kin_sense, tag_rate, mate_pays, grow, unit_token, link_token. Empty in every run but those that ask for one; only the prototype's world plays them (see the settings note). |
-> | [`mutation_probability`](settings.md#mutation_probability) | 0.2 | The probability that a brain changes when it is copied to a child, and again, for every brain, after every game. |
-> | [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.2 | How large a change to one weight is: a normal draw with standard deviation this times 1/√(fan-in) of its layer. |
-> | [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.1 | The share of a brain's numbers a change touches; also the probability, for each weight matrix and bias vector, of a rarer reset that redraws that share of it. |
-> | [`tag_rate`](settings.md#tag_rate) | 0.0 | Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's. |
-> | [`extinction_threshold`](settings.md#extinction_threshold) | 20 | A run stops, as extinct, when an iteration ends (after its game) with this many agents or fewer. |
-> | seeds | 1 to 30 | one run per seed |
-> | iterations | 1,500 | how far each run goes, unless its world dies first |
->
-> A value in **bold** differs from the baseline B1.
 <!-- /runs -->
 
 ## How our view changed
@@ -863,6 +778,6 @@ iterations each.
 
 ← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [Local rules only](local-rules-only.md) →
 
-> [!info]- Pages that link here (12)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Space at scale (side study)](space-at-scale.md)
+> [!info]- Pages that link here (15)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [What the brains are like](what-the-brains-are-like.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->

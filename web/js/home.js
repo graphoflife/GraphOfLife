@@ -74,6 +74,10 @@ const Home = {
   loaded: false,
   failed: false,
 
+  /** Which backdrop: the recorded world, or the network of eyes (eyes.js). */
+  BACKDROP: 'gol.home.backdrop',
+  backdrop: 'world',
+
   init() {
     this.canvas = document.getElementById('homeCanvas');
     this.stage = document.querySelector('.home-stage');
@@ -87,23 +91,91 @@ const Home = {
       showEdgeLegend: false,
       autoFit: false,        // framed here instead, so it can be held closer
       layoutCarry: true,
-      // Quieter than the Viewer's. At several thousand agents the default edge
-      // opacity makes a bright mesh, and white text on a bright mesh is not
-      // text. The agents stay as they are, so the structure still reads.
-      edgeAlpha: 0.52,
-      nodeAlpha: 1,
-      // The page's own colour. The veil above the canvas is mixed to match it
-      // exactly, so it darkens the graph without ever tinting the background.
-      bgColorA: '#0d1117',
-      bgColorB: '#0d1117'
+      nodeAlpha: 1
     });
+    this.colour();
+
+    Entrance.init(this.stage);
+    Eyes.init(document.getElementById('homeEyes'), this.stage, document.getElementById('homeSeal'));
+
+    try {
+      if (localStorage.getItem(this.BACKDROP) === 'eyes') this.backdrop = 'eyes';
+    } catch (err) { /* a private window: the world */ }
+    this.switch = document.getElementById('homeBackdrop');
+    for (const button of this.switch ? this.switch.querySelectorAll('[data-backdrop]') : []) {
+      button.addEventListener('click', () => this.choose(button.dataset.backdrop));
+    }
+    this.markBackdrop();
 
     if (window.ResizeObserver) {
       this._observer = new ResizeObserver(() => this.resize());
       this._observer.observe(this.stage || this.canvas.parentElement);
     }
     window.addEventListener('resize', () => this.resize());
+    window.addEventListener('themechange', () => this.repaint());
+  },
 
+  /**
+   * The world in the theme's inks: wealth along its colour map, from the dark
+   * of the wall (or the light of the paper) to the brightest colour the map
+   * has, so the poorest agents sink into the background and the rich ones
+   * burn; links in a quiet thread of the accent, since at a thousand agents
+   * the Viewer's white makes a bright mesh, and words on a bright mesh are not
+   * words. Still tokens on a log scale: the same picture of the same world.
+   * The background is the stage's own colour, which the veil above the canvas
+   * is mixed in, so it darkens the graph without ever tinting the background.
+   */
+  colour() {
+    const stage = Ink.token('--stage') || this.settings.bgColorA;
+    Object.assign(this.settings, {
+      nodeColormap: Ink.token('--home-colormap') || this.settings.nodeColormap,
+      nodeColorReverse: Ink.token('--home-reverse') === '1',
+      edgeFlatColor: Ink.token('--home-edge') || this.settings.edgeFlatColor,
+      edgeAlpha: Number(Ink.token('--home-edge-alpha')) || 0.34,
+      bgColorA: stage,
+      bgColorB: stage
+    });
+  },
+
+  /** The theme changed: the world, the wall and the eyes in its inks. */
+  repaint() {
+    this.colour();
+    if (this.frame) this.metrics = new FrameMetrics(this.frame, this.settings);
+    if (!this.active) return;
+    Entrance.repaint();
+    Eyes.repaint();
+  },
+
+  /** Say which backdrop is showing, on the switch and to the stylesheet. */
+  markBackdrop() {
+    this.stage?.classList.toggle('backdrop-eyes', this.backdrop === 'eyes');
+    for (const button of this.switch ? this.switch.querySelectorAll('[data-backdrop]') : []) {
+      const on = button.dataset.backdrop === this.backdrop;
+      button.classList.toggle('active', on);
+      button.setAttribute('aria-pressed', String(on));
+    }
+  },
+
+  /**
+   * The reader chose a backdrop. Only one is ever running: choosing the eyes
+   * gives back the world's layout worker and frames, as leaving the page
+   * does, and choosing the world stops the eyes.
+   */
+  choose(backdrop) {
+    if (backdrop === this.backdrop) return;
+    this.backdrop = backdrop;
+    try { localStorage.setItem(this.BACKDROP, backdrop); } catch (err) { /* kept for the visit */ }
+    this.markBackdrop();
+    if (!this.active) return;
+    if (backdrop === 'eyes') {
+      this.unload();
+      Eyes.start();
+    } else {
+      Eyes.stop();
+      this.build();
+      this.resize();
+      if (!this.loaded && !this._loading) this.load();
+    }
   },
 
   /**
@@ -116,11 +188,13 @@ const Home = {
   setActive(active) {
     this.active = active;
     if (!active) {
+      Entrance.stop();
+      Eyes.stop();
       this.unload();
       return;
     }
 
-    // Replay the titles by taking the class off and putting it back, which is
+    // Replay the arrival by taking the class off and putting it back, which is
     // the only way to restart a CSS animation.
     if (this.stage) {
       this.stage.classList.remove('play');
@@ -128,6 +202,11 @@ const Home = {
       this.stage.classList.add('play');
     }
 
+    Entrance.start();
+    if (this.backdrop === 'eyes') {
+      Eyes.start();
+      return;
+    }
     this.build();
     this.resize();
     if (!this.loaded && !this._loading) this.load();
@@ -193,6 +272,10 @@ const Home = {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         this.buffer = await response.arrayBuffer();
       }
+      // Left while it was on its way, which the doors make easy to do: the
+      // layout is already given back, so keep what was fetched and play it
+      // the next time the page is opened.
+      if (!this.active || !this.layout) return;
       this.frames = this.decode(this.buffer);
       if (!this.frames.length) throw new Error('the recording has no frames');
 
@@ -282,15 +365,25 @@ const Home = {
     this.metrics = new FrameMetrics(frame, this.settings);
     this.layout.setFrame(frame.ids, frame.edges, frame.parent_ids, carry);
     this.layout.reheat(carry ? 0.3 : 1);
+    Entrance.report(frame);
   },
 
   resize() {
+    Entrance.resize();
+    Eyes.resize();
     if (!this.renderer) return;
     this.renderer.resize();
   },
 
   /** One animation frame, handed over by App while the front page is shown. */
   tick(dt) {
+    // The entrance first: the title decodes while the recording is still on
+    // its way, which is exactly when there is nothing else to look at.
+    Entrance.tick(dt);
+    if (this.backdrop === 'eyes') {
+      Eyes.tick(dt);
+      return;
+    }
     if (!this.loaded || !this.layout || !this.renderer) return;
 
     // Move to the next frame first, so the check below sees it.
@@ -324,8 +417,10 @@ const Home = {
     if (!(this.renderer.cssWidth > 0)) this.resize();
 
     // The camera does not depend on which frame is showing, so it keeps
-    // gliding through the wait rather than stalling for it.
-    this.renderer.rotate(this.ROTATION * step, 0);
+    // gliding through the wait rather than stalling for it. Held still for a
+    // reader who has asked for less motion: a whole picture turning is the
+    // kind of movement that setting exists to stop.
+    if (!Entrance.calm) this.renderer.rotate(this.ROTATION * step, 0);
 
     // Until the coordinates belong to the frame we are holding, the canvas
     // simply keeps what it already shows.

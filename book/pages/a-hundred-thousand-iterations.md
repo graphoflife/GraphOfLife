@@ -16,26 +16,25 @@ decide. Three of round 3's shortlisted worlds would be played on from iteration
 time is what is missing. Its draft thesis expects that it is not: each world
 keeps its health, and its brains stop getting better long before the end, as
 the notebook's longest worlds did. It needs nothing new built, and takes about
-two and a half days. The first plan, of 9 October 2026, was one world of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at
-204,800 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") for 100,000 iterations (Experiment 11). It is kept here as its
-thesis and a paragraph; the rest of it is in the notebook's history.
+115 worker-hours.
 
 ## The long run, planned again on round 3's candidates
 
 Since 7 November 2026 only two kinds of world are played: more worlds drawn at
 random, and worlds that follow a promising candidate ([What could be played
 next](candidates-for-open-ended-evolution.md#what-could-be-played-next)). B1 is
-no longer a [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") anything is measured against. So a long run made now would
+no longer a baseline anything is measured against
+([What a baseline is](b1-and-b2.md#what-a-baseline-is)). So a long run made now would
 be one of round 3's candidates, played on. Three things make it far easier than
 the plan of 9 October, below.
 
-- **Nothing has to be built.** The [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can play a kept world on from its last
+- **Nothing has to be built.** The lab can play a kept world on from its last
   state, iteration 3,000, under its own [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). It records every
   iteration as round 3 did, and it keeps whole worlds, brains included, as
-  often as the plan asks ([Eras](measuring-evolution.md#eras)). [Frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") for
+  often as the plan asks ([Eras](measuring-evolution.md#eras)). Frames for
   every iteration cost a candidate 0.15 to 0.22 MB an iteration, so no
   windows are needed.
-- **The worlds are small and fast.** Round 3's worlds hold 30,000 tokens. The
+- **The worlds are small and fast.** Round 3's worlds hold 30,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."). The
   fastest of the shortlist play an iteration in under a second or two, where
   B1 at 204,800 tokens took 25.
 - **The tests exist.** Contests between eras, a shadow world of pure luck and
@@ -50,13 +49,13 @@ more eras each.
 
 | world | why this one | health's ranks (product, sum, worst) | generations in its first 3,000 iterations | seconds an iteration | 97,000 iterations more |
 |---|---|---|---|---|---|
-| seed 3080 | the healthiest of the fast worlds | 4, 19, 4 | 121 | 0.87 | about a day |
-| seed 3008 | healthy, and its children act most like their parents (heredity index 0.62) | 7, 28, 8 | 947 | 1.32 | a day and a half |
-| seed 3026 | evolves the most: 2,159 generations, and its line never comes back to where it was | 27, 41, 13 | 2,159 | 2.05 | two and a third days |
+| seed 3080 | the healthiest of the fast worlds | 4, 10, 4 | 121 | 0.87 | about a day |
+| seed 3008 | healthy, and its children act most like their parents (heredity index 0.62) | 10, 20, 10 | 947 | 1.32 | a day and a half |
+| seed 3026 | evolves the most: 2,159 generations, and its line never comes back to where it was | 23, 36, 17 | 2,159 | 2.05 | two and a third days |
 
-On three workers side by side that is about two and a half days, and about
-60 GB of disk. All three runs already live on the external drive, with 408 GB
-free, so they would grow there. The seconds are each world's own, over its iterations 2,000 to 3,000;
+That is about 115 worker-hours and about 60 GB of disk
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)). The
+seconds are each world's own, over its iterations 2,000 to 3,000;
 the ranks and generations are from
 [Which worlds are healthy?](which-worlds-are-healthy.md) and
 [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md).
@@ -66,7 +65,7 @@ the ranks and generations are from
 > played on to 100,000 iterations keeps its health, and its brains stop
 > getting better long before the end, as the notebook's longest worlds did.
 >
-> **Why.** The two worlds of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") played to 50,000 iterations climbed for 20,000
+> **Why.** The two worlds of B2 played to 50,000 iterations climbed for 20,000
 > to 25,000 and then only wandered
 > ([Every era against three](every-era-against-three.md)). Round 3's worlds
 > are smaller still: about fourteen ancestors share each world's future, so
@@ -85,8 +84,8 @@ the ranks and generations are from
 > decides nothing.
 
 **Choices for the author.** Which worlds: these three, others of the
-shortlist, or none until Experiment 43 has shown which settings stay healthy
-with new seeds. How long: 100,000 iterations, or 25,000 first. And the
+shortlist, or none until [Experiment 43](candidates-for-open-ended-evolution.md)
+shows which settings stay healthy with new seeds. How long: 100,000 iterations, or 25,000 first. And the
 lines of the thesis: 0.1 of health and 0.55 of a contest are proposals.
 
 ## Experiment 11, as planned on 9 October 2026
@@ -98,8 +97,7 @@ stops it when something goes wrong and flags it when something stands out, and
 keep frames only in short windows. It needed three things the lab could not do
 on 9 October; of these, only kept checkpoints have been built since. Contests
 then showed that B1's brains learn nothing after their first 50 to 100
-iterations, and B1 is no longer a baseline anything is measured against. So the
-plan is obsolete. Its plan file is `book/experiments/drafts/E11.json`. The
+iterations, and B1 is no longer measured against. So the plan is obsolete. Its plan file is `book/experiments/drafts/E11.json`. The
 whole plan of 9 October, with its reasons, method, sentinel and costs, is in
 the notebook's history: `git show
 9ec755d:book/pages/a-hundred-thousand-iterations.md`. Its thesis stays here,
@@ -110,35 +108,11 @@ word for word, because the draft thesis above uses its first part.
 >
 > **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)): a node's brain is replaced almost every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), so nobody meets anybody twice ([Chapter 38](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single [founder](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") every few hundred iterations ([Chapter 18](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
 >
-> **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent; [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."); births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
+> **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent; [Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."); births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
 >
 > **It fails if:** Any one of: for two or more of the eight statistics, the difference at 20,000 to 50,000 iterations is more than twice that at 2,000 to 5,000, so the world goes on moving on scales the shorter runs could not see; or the kin ratio or the share of lasting partners crosses its line in three successive windows, so cooperation has appeared; or the median gain passes 0.005, so the brains have begun to see. A world that dies, or is stopped, before iteration 52,000 decides nothing.
 
 *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
-
-### Why "twice"?
-
-The first test compares how far apart a world's block means are at two
-lags. Blocks 2,000 to 5,000 iterations apart are about 3,500 apart on
-average; blocks 20,000 to 50,000 apart, about 35,000, ten times as far.
-Three kinds of world set the scale.
-
-- **A world at rest** gives differences that no longer grow at all: the
-  ratio is 1.
-- **A random walk**, which never forgets, gives differences that grow as
-  the square root of the lag: √10 ≈ 3.2 times.
-- **A world that wanders as the baseline does**, slowly but pulled back to
-  its level, stays close to 1. Its differences stop growing at lags beyond
-  its memory of a few hundred iterations. Even a wander with *H* ≈ 0.85 at
-  every scale would give only about 1.1 times.
-
-Twice lies between a world at rest and a random walk. So the first test
-asks whether a new, slower drift appears, one that 3,000 iterations could
-not show.
-
-## Results
-
-None yet: neither the plan of 9 October nor the new one has been played.
 
 ## Where to go next
 
@@ -154,18 +128,9 @@ None yet: neither the plan of 9 October nor the new one has been played.
 
 ## How this was made
 
-No run of this experiment exists, so this page has no box of runs. The plan,
-`book/experiments/drafts/E11.json`, holds every setting named above, and
-asks for one worker. It also records the graph statistics, which cost many times the
-rest, every 25 iterations, and starts its analysis at iteration 2,000.
-
-The numbers behind the plan were measured on 9 October 2026. They are the
-wander, the trial of a simpler sentinel, the ranges of cooperation and of
-the gain, and the sizes on disk. They come from the 26 worlds of
-Experiment 2 that lived to the end, and from Experiment 8's worlds of
-204,800 tokens. The costs come from the lab's model. The working notes,
-`research/Plans.md`, list them all, to be measured again when the run is
-built.
+No run of either plan exists, so this page has no box of runs. The obsolete
+plan of 9 October is `book/experiments/drafts/E11.json`; its working numbers
+are in `research/Plans.md`.
 
 ## How our view changed
 
@@ -187,7 +152,7 @@ built.
   world of the notebook had lived was 3,000 iterations. Its questions called
   a hundred thousand "thirty times longer than any world". That held until
   15 October 2026. That night the first of B2's worlds played on from
-  Experiment 16 reached 10,000 iterations, and two of B1 followed as [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")
+  Experiment 16 reached 10,000 iterations, and two of B1 followed as pilots
   ([Every simulation](every-simulation.md#the-pilot-batches)). By 17 October
   two worlds of Experiment 18 had lived 50,000
   ([Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)).
@@ -212,6 +177,20 @@ built.
   first plan as its thesis, word for word, and one paragraph. Its reasons,
   method, sentinel, costs and what had to be built are in the notebook's
   history (git show 9ec755d:book/pages/a-hundred-thousand-iterations.md).
+- **12 November 2026.** The section Why "twice"?, which explained the
+  threshold of Experiment 11's first test, is cut: block means 2,000 to 5,000
+  iterations apart are about 3,500 apart, and 20,000 to 50,000 apart about
+  35,000. Over that tenfold lag the differences grow 1 time for a world at rest,
+  √10 ≈ 3.2 times for a random walk, and about 1.1 times for a wander like
+  B1's, so twice lies between. It is in the notebook's history (git show
+  c09615c:book/pages/a-hundred-thousand-iterations.md). The section Results,
+  which said that none of the runs had been played, is cut too.
+- **12 November 2026.** The table gave health's ranks (product, sum, worst) of
+  an earlier order: 4, 19, 4 for seed 3080; 7, 28, 8 for seed 3008; and 27,
+  41, 13 for seed 3026. The order of 9 November reads 4, 10, 4; 10, 20, 10;
+  and 23, 36, 17 ([Which worlds are healthy?](which-worlds-are-healthy.md)).
+  The time on the lab's workers is now given in worker-hours. On 9 November
+  the external drive the three runs live on had 408 GB free.
 
 <!-- turns -->
 ---

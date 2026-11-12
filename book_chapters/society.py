@@ -63,7 +63,7 @@ def tokens(ch: F.Chapter) -> None:
                 "is the median over the worlds at each x; the dashed diagonal is a world where "
                 "everyone holds the same. The further a curve sags below the diagonal, the more "
                 "unequal the world (the diagram above; [The Gini coefficient]"
-                "(measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility)).",
+                "(measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy)).",
         recipe=recipe(W.surviving_text(), FRAMES,
                       [f"Read each run's last frame (iteration {W.last:,}, `phase` 2) and its `tokens`.",
                        "Sort the tokens from smallest to largest; the curve passes through the "
