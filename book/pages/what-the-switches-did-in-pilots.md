@@ -2516,7 +2516,7 @@ number appears during one.
 <!-- turns -->
 ---
 
-[Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) →
+← [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots)
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules), [Brains, and how alike agents are](../README.md#brains-and-how-alike-agents-are).
 

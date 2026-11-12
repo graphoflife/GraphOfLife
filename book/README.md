@@ -181,8 +181,8 @@ view shows how the pages hang together.
 
 #### Building B2, the healthy and rich search, and the pilots
 
-- [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
 - [Building B2, and the search for a healthy, rich world](pages/building-b2-and-the-search-for-a-healthy-rich-world.md)
+- [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
 
 #### Side studies
 

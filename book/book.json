@@ -860,20 +860,6 @@
       ]
     },
     {
-      "id": "what-the-switches-did-in-pilots",
-      "title": "What the switches did in pilots (indicative)",
-      "file": "pages/what-the-switches-did-in-pilots.md",
-      "topics": [
-        "history",
-        "rules",
-        "brains"
-      ],
-      "kind": "study",
-      "status": "analysed",
-      "added": "2026-10-15",
-      "summary": "The engine's switches tried in pilot worlds in October 2026, alone and in company: indicative only, from two seeds a condition, mostly 1,000 iterations, on B2."
-    },
-    {
       "id": "building-b2-and-the-search-for-a-healthy-rich-world",
       "title": "Building B2, and the search for a healthy, rich world",
       "file": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md",
@@ -904,6 +890,20 @@
         "E36",
         "E37"
       ]
+    },
+    {
+      "id": "what-the-switches-did-in-pilots",
+      "title": "What the switches did in pilots (indicative)",
+      "file": "pages/what-the-switches-did-in-pilots.md",
+      "topics": [
+        "history",
+        "rules",
+        "brains"
+      ],
+      "kind": "study",
+      "status": "analysed",
+      "added": "2026-10-15",
+      "summary": "The engine's switches tried in pilot worlds in October 2026, alone and in company: indicative only, from two seeds a condition, mostly 1,000 iterations, on B2."
     },
     {
       "id": "cooperation-help-and-gliders",

@@ -5585,7 +5585,7 @@ iteration's frame.
 <!-- turns -->
 ---
 
-← [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots)
+[Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) →
 
 **Also about:** [The baselines B1 and B2](../README.md#the-baselines-b1-and-b2), [Changing the rules](../README.md#changing-the-rules), [Does evolution keep going?](../README.md#does-evolution-keep-going), [Space and dimension](../README.md#space-and-dimension).
 
