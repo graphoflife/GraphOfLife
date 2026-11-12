@@ -17,8 +17,7 @@ It booms and crashes in its first hundred iterations, and by iteration 500 its
 births, ages and lifetimes have stopped changing. Its Gini coefficient stays
 near 0.47. And it is a world of places more than of individuals. Most agents
 die young, cut off from the network. Wealth follows connections, as in a random
-walk, and who is rich keeps changing. Round 3's worlds start from B1's rules
-but change many of them, so the numbers here describe B1 alone.
+walk, and who is rich keeps changing.
 
 It gathers what were 6 pages of their own, one section each:
 
