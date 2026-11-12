@@ -20,11 +20,14 @@ lists the earlier versions. They are kept in full below, because round 3's
 pages were written with them and the open-ended test still asks for the health
 bar and the diversity score.
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [What makes a world interesting](#what-makes-a-world-interesting): What do we look for in a world before we ask how it evolves?
-- [The health bar](#the-health-bar): The seven marks a world's network must meet to count as healthy, why each is there, and how a world is read against them.
-- [The diversity score](#the-diversity-score): How much the agents of a world differ, in one number, and how much their decisions differ.
+- [From 11 November 2026: health as a filter](#from-11-november-2026-health-as-a-filter)
+- [The definition in force: health of 9 November 2026](#the-definition-in-force-health-of-9-november-2026)
+- [Earlier versions](#earlier-versions)
+- [What makes a world interesting](#what-makes-a-world-interesting)
+- [The health bar](#the-health-bar)
+- [The diversity score](#the-diversity-score)
 
 ## From 11 November 2026: health as a filter
 

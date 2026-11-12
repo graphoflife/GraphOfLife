@@ -16,14 +16,14 @@ power law, how long a world remembers, how sure a number is and how many seeds
 it takes, how a spread splits into parts, and how many kinds a world really
 holds.
 
-It gathers what were 6 pages of their own, one section each:
+Its sections:
 
-- [Many worlds at once: the median, bands, the settled life and the spread](#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread): The notebook rarely looks at one world.
-- [Two numbers together: correlation, a fitted line and logarithmic axes](#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes): Much of the notebook asks how one number goes with another.
-- [How long a world remembers: autocorrelation and the power spectrum](#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum): A world wanders: its size, its inequality and its births go up and down over hundreds of iterations.
-- [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds): Every number the notebook reports comes from a few dozen worlds, and another few dozen would give a somewhat different number.
-- [Splitting variation: where, who and chance, and between worlds and within them](#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them): A spread of numbers can often be split exactly into parts with different causes.
-- [Effective numbers: how many kinds, and how many directions](#effective-numbers-how-many-kinds-and-how-many-directions): Counting kinds can mislead: one kind may hold half the agents and the rest one agent each.
+- [Many worlds at once: the median, bands, the settled life and the spread](#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread)
+- [Two numbers together: correlation, a fitted line and logarithmic axes](#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes)
+- [How long a world remembers: autocorrelation and the power spectrum](#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum)
+- [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds)
+- [Splitting variation: where, who and chance, and between worlds and within them](#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them)
+- [Effective numbers: how many kinds, and how many directions](#effective-numbers-how-many-kinds-and-how-many-directions)
 
 ## Many worlds at once: the median, bands, the settled life and the spread
 

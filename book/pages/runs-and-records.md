@@ -9,11 +9,11 @@
 
 How every simulation of the notebook is made and kept, so that it can be made again: the lab and the engine, what a run records, and what a simulation costs.
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [The lab, the engine and pilots](#the-lab-the-engine-and-pilots): The engine is the program that plays a world.
-- [What a run records](#what-a-run-records): Everything the notebook shows is computed from two kinds of record that every run writes into its folder, GraphOfLifeRuns/<run>/.
-- [What a simulation costs](#what-a-simulation-costs): Every experiment of the notebook is sized by what it costs.
+- [The lab, the engine and pilots](#the-lab-the-engine-and-pilots)
+- [What a run records](#what-a-run-records)
+- [What a simulation costs](#what-a-simulation-costs)
 
 ## The lab, the engine and pilots
 

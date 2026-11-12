@@ -10,14 +10,12 @@
 
 How the notebook follows evolution: genotypes, families and the common ancestor; eras of a world played against each other; and the test, written down before the long runs, of what would count as open-ended evolution.
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [Genotypes, families and the common ancestor](#genotypes-families-and-the-common-ancestor): Every brain carries a whole number, its genotype, which a copy keeps and a change replaces.
-- [Eras, contests and invasions: does a world keep getting better?](#eras-contests-and-invasions-does-a-world-keep-getting-better): A world whose numbers have settled may have stopped evolving, or may still be improving in ways no single moment shows.
-- [What would count as open-ended evolution](#what-would-count-as-open-ended-evolution): No run can show that evolution goes on for ever.
-
-A fourth section, added on 9 November 2026, says what assembly theory
-measures: [Assembly index and assembly](#assembly-index-and-assembly).
+- [Genotypes, families and the common ancestor](#genotypes-families-and-the-common-ancestor)
+- [Eras, contests and invasions: does a world keep getting better?](#eras-contests-and-invasions-does-a-world-keep-getting-better)
+- [What would count as open-ended evolution](#what-would-count-as-open-ended-evolution)
+- [Assembly index and assembly](#assembly-index-and-assembly): what assembly theory measures
 
 ## Genotypes, families and the common ancestor
 

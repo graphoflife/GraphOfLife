@@ -9,18 +9,18 @@
 
 How the notebook measures who holds the tokens and where they go: the Gini coefficient and its companions, what the game does when a brain scores nothing, and the flow of tokens along the [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.").
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility): Four kinds of number say how unequally a world's tokens are held, and the notebook records them after every phase.
-- [The even split](#the-even-split): What the rules do when a brain scores no candidate above zero, how often that happens, and why it makes the game almost a random walk.
-- [Measuring the flow: token flow, lightning and circulation](#measuring-the-flow-token-flow-lightning-and-circulation): In every game, the tokens an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") stakes on a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s node flow along the connection between them: that is the token flow.
+- [Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility](#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility)
+- [The even split](#the-even-split): when a brain scores no candidate above zero
+- [Measuring the flow: token flow, lightning and circulation](#measuring-the-flow-token-flow-lightning-and-circulation)
 
 ## Measuring inequality: the Gini coefficient, the richest tenth, entropy and mobility
 
 Four kinds of number say how unequally a world's tokens are held, and the
 notebook records them after every phase. The **Gini coefficient** sums up the
 whole Lorenz curve in one number, and the **richest tenth's share** reads one
-point of it. The **mean, median, richest and poorest** describe the agents
+point of it. The **mean, median, richest and poorest** describe the [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.")
 directly, while **entropy** and **evenness** say how evenly anything is
 spread, connections and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.") too. **Mobility** compares two moments: whether the same agents
 stay rich. In a settled B1 world of 100,000
@@ -426,7 +426,7 @@ measures all three in the baseline worlds.
 ## The even split
 
 In every [game](one-iteration.md#phase-2-the-game) an agent stakes all its
-tokens on its own node and its neighbours' nodes, guided by its
+tokens on its own node and its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' nodes, guided by its
 [brain](the-brain.md)'s score for each. When a brain that spreads its stake
 scores every node at zero or below, the rules split the tokens evenly: the
 **even split**. It is common in the

@@ -10,17 +10,17 @@
 
 How the notebook measures the shape of a world's network: how many connections agents have and how they cluster, the hubs and stars, how far apart agents are, and where a network can be cut.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [An agent's connections: degree, clustering, assortativity, attachment and scaling](#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling): An agent's degree is the number of its connections; in a settled [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000 tokens, the mean is about 3.5.
-- [Stars and hubs](#stars-and-hubs): Agents joined to far more agents than most, and worlds held together by a single one of them.
-- [Distances in a network: path length, radius and diameter, the spectral gap](#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap): The distance between two agents is the fewest connections on a path from one to the other.
-- [Bridges, cut risk, loops and the core: how a network can be cut](#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut): A bridge is a connection on no loop: cut it, and the network falls into two pieces.
+- [An agent's connections: degree, clustering, assortativity, attachment and scaling](#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling)
+- [Stars and hubs](#stars-and-hubs)
+- [Distances in a network: path length, radius and diameter, the spectral gap](#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)
+- [Bridges, cut risk, loops and the core: how a network can be cut](#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)
 
 ## An agent's connections: degree, clustering, assortativity, attachment and scaling
 
 An agent's **degree** is the number of its connections; in a settled
-B1 world of 100,000 tokens, the mean is about 3.5. Most agents have one
+[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000 tokens, the mean is about 3.5. Most agents have one
 or two, and a few **hubs** hundreds or thousands. **Clustering** and
 **assortativity** say how the connections are arranged: whether an agent's
 neighbours are joined to each other, and whether hubs are joined to hubs.

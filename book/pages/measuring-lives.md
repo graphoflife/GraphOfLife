@@ -10,12 +10,12 @@
 
 How the notebook counts the lives of agents: who is born and how, the four ways to die, where the tokens of the dead go, how old agents grow, and what every reproduction phase records.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [Births and the four ways to die](#births-and-the-four-ways-to-die): After a world's founders, every agent enters it the same way: a parent gives it tokens in a reproduction phase, and it is born.
-- [The estate of the dead](#the-estate-of-the-dead): What happens to the tokens of an agent that dies, and the other ways of passing them on that the notebook tried.
-- [Age, lifetime and survival curves](#age-lifetime-and-survival-curves): An agent's age is how many iterations ago it was born; its lifetime is how many games it lives through.
-- [Reproduction statistics](#reproduction-statistics): Every reproduction phase records each birth.
+- [Births and the four ways to die](#births-and-the-four-ways-to-die)
+- [The estate of the dead](#the-estate-of-the-dead)
+- [Age, lifetime and survival curves](#age-lifetime-and-survival-curves)
+- [Reproduction statistics](#reproduction-statistics)
 
 ## Births and the four ways to die
 

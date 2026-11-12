@@ -8,10 +8,10 @@
 
 How the notebook reads a network as a space: three ways to measure its dimension, and the random twin, the same [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") wired at random, that every reading is set against.
 
-It gathers what were 2 pages of their own, one section each:
+Its sections:
 
-- [Three ways to measure a network's dimension](#three-ways-to-measure-a-networks-dimension): A network has no coordinates, only links, yet it can be shaped like a line, a sheet or a solid.
-- [The random twin: is a world a space?](#the-random-twin-is-a-world-a-space): A world's network wired again at random, with as many links per [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."): what a world would be if it were no space, and how wide a world is beside it.
+- [Three ways to measure a network's dimension](#three-ways-to-measure-a-networks-dimension)
+- [The random twin: is a world a space?](#the-random-twin-is-a-world-a-space)
 
 ## Three ways to measure a network's dimension
 
@@ -25,7 +25,7 @@ lays all three on the worlds.
 
 ### Three rulers
 
-Stand on an agent of a network and look around. There is no map
+Stand on an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") of a network and look around. There is no map
 and no ruler, only links. The distance between two agents is the number of
 links on the shortest path between them ([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)). That
 is enough to tell a line from a sheet or a solid, in three ways. On a grid of

@@ -17,19 +17,19 @@
 
 The rules of a world, one detail at a time: how the first network is built, where chance comes in, how a brain's numbers become shares and decisions, what agents tell each other, how a coalition takes a node, how a brain changes, and when a world ends.
 
-It gathers what were 11 pages of their own, one section each:
+Its sections:
 
-- [The starting ring](#the-starting-ring): Every world starts as a ring of founders with a few shortcuts, the "small-world" network of Watts and Strogatz (1998).
-- [Seeds and the random stream](#seeds-and-the-random-stream): Graph of Life is full of chance: random starting brains, random tie-breaks, probabilistic decisions, random inputs, random sharing out of tokens.
-- [The share function f(a, b)](#the-share-function-fa-b): A brain often answers with two numbers where the rules need one share between 0 and 1.
-- [A yes-or-no decision](#a-yes-or-no-decision): Some decisions are a plain yes or no, such as whether to join a newborn to a neighbour, or to hand it a connection.
-- [Splitting tokens into whole numbers](#splitting-tokens-into-whole-numbers): Tokens are whole: an agent cannot stake 3.7 tokens.
-- [What a brain sees](#what-a-brain-sees): Every time an agent decides anything, its brain looks at its candidates: the agent itself first, then each of its neighbours in increasing order of id.
-- [What a brain says](#what-a-brain-says): For every candidate it looks at — itself and each neighbour — a brain produces one column of numbers: 45 in B1, 19 in B2.
-- [Messages](#messages): Agents can say things to each other: every time an agent looks at its neighbours, it writes a message to each of them, and one to itself.
-- [How a coalition takes a node](#how-a-coalition-takes-a-node): In the game every node goes to someone, usually whoever staked the most on it: the hegemon.
-- [How a brain changes](#how-a-brain-changes): Brains change: this is the variation that evolution needs (What this notebook is about).
-- [When a world ends](#when-a-world-ends): A run goes for a fixed number of iterations, unless its world dies out first.
+- [The starting ring](#the-starting-ring): the first network of every world
+- [Seeds and the random stream](#seeds-and-the-random-stream)
+- [The share function f(a, b)](#the-share-function-fa-b): two numbers made into one share
+- [A yes-or-no decision](#a-yes-or-no-decision)
+- [Splitting tokens into whole numbers](#splitting-tokens-into-whole-numbers)
+- [What a brain sees](#what-a-brain-sees)
+- [What a brain says](#what-a-brain-says)
+- [Messages](#messages)
+- [How a coalition takes a node](#how-a-coalition-takes-a-node)
+- [How a brain changes](#how-a-brain-changes)
+- [When a world ends](#when-a-world-ends)
 
 ## The starting ring
 
