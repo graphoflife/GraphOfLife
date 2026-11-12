@@ -16,15 +16,13 @@ decide. Three of round 3's shortlisted worlds would be played on from iteration
 time is what is missing. Its draft thesis expects that it is not: each world
 keeps its health, and its brains stop getting better long before the end, as
 the notebook's longest worlds did. It needs nothing new built, and takes about
-two and a half days. The first plan, of 9 October 2026, was one world of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") at
-204,800 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") for 100,000 iterations (Experiment 11). It is kept here as its
-thesis and a paragraph; the rest of it is in the notebook's history.
+two and a half days.
 
 ## The long run, planned again on round 3's candidates
 
 Since 7 November 2026 only two kinds of world are played: more worlds drawn at
 random, and worlds that follow a promising candidate ([What could be played
-next](candidates-for-open-ended-evolution.md#what-could-be-played-next)). B1 is
+next](candidates-for-open-ended-evolution.md#what-could-be-played-next)). [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") is
 no longer a [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") anything is measured against. So a long run made now would
 be one of round 3's candidates, played on. Three things make it far easier than
 the plan of 9 October, below.
@@ -35,7 +33,7 @@ the plan of 9 October, below.
   often as the plan asks ([Eras](measuring-evolution.md#eras)). [Frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") for
   every iteration cost a candidate 0.15 to 0.22 MB an iteration, so no
   windows are needed.
-- **The worlds are small and fast.** Round 3's worlds hold 30,000 tokens. The
+- **The worlds are small and fast.** Round 3's worlds hold 30,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."). The
   fastest of the shortlist play an iteration in under a second or two, where
   B1 at 204,800 tokens took 25.
 - **The tests exist.** Contests between eras, a shadow world of pure luck and
@@ -116,30 +114,6 @@ word for word, because the draft thesis above uses its first part.
 
 *Written while the notebook still numbered its chapters: each number is a link to the page it meant that day.*
 
-### Why "twice"?
-
-The first test compares how far apart a world's block means are at two
-lags. Blocks 2,000 to 5,000 iterations apart are about 3,500 apart on
-average; blocks 20,000 to 50,000 apart, about 35,000, ten times as far.
-Three kinds of world set the scale.
-
-- **A world at rest** gives differences that no longer grow at all: the
-  ratio is 1.
-- **A random walk**, which never forgets, gives differences that grow as
-  the square root of the lag: √10 ≈ 3.2 times.
-- **A world that wanders as the baseline does**, slowly but pulled back to
-  its level, stays close to 1. Its differences stop growing at lags beyond
-  its memory of a few hundred iterations. Even a wander with *H* ≈ 0.85 at
-  every scale would give only about 1.1 times.
-
-Twice lies between a world at rest and a random walk. So the first test
-asks whether a new, slower drift appears, one that 3,000 iterations could
-not show.
-
-## Results
-
-None yet: neither the plan of 9 October nor the new one has been played.
-
 ## Where to go next
 
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md):
@@ -154,18 +128,9 @@ None yet: neither the plan of 9 October nor the new one has been played.
 
 ## How this was made
 
-No run of this experiment exists, so this page has no box of runs. The plan,
-`book/experiments/drafts/E11.json`, holds every setting named above, and
-asks for one worker. It also records the graph statistics, which cost many times the
-rest, every 25 iterations, and starts its analysis at iteration 2,000.
-
-The numbers behind the plan were measured on 9 October 2026. They are the
-wander, the trial of a simpler sentinel, the ranges of cooperation and of
-the gain, and the sizes on disk. They come from the 26 worlds of
-Experiment 2 that lived to the end, and from Experiment 8's worlds of
-204,800 tokens. The costs come from the lab's model. The working notes,
-`research/Plans.md`, list them all, to be measured again when the run is
-built.
+No run of either plan exists, so this page has no box of runs. The obsolete
+plan of 9 October is `book/experiments/drafts/E11.json`; its working numbers
+are in `research/Plans.md`.
 
 ## How our view changed
 
@@ -212,6 +177,14 @@ built.
   first plan as its thesis, word for word, and one paragraph. Its reasons,
   method, sentinel, costs and what had to be built are in the notebook's
   history (git show 9ec755d:book/pages/a-hundred-thousand-iterations.md).
+- **12 November 2026.** The section Why "twice"?, which explained the
+  threshold of Experiment 11's first test, is cut: block means 2,000 to 5,000
+  iterations apart are about 3,500 apart, and 20,000 to 50,000 apart about
+  35,000. Over that tenfold lag the differences grow 1 time for a world at rest,
+  √10 ≈ 3.2 times for a random walk, and about 1.1 times for a wander like
+  B1's, so twice lies between. It is in the notebook's history (git show
+  c09615c:book/pages/a-hundred-thousand-iterations.md). The section Results,
+  which said that none of the runs had been played, is cut too.
 
 <!-- turns -->
 ---
