@@ -829,6 +829,7 @@ of the messages' variety.
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#why-one-setting-can-be-looked-at-alone)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#the-shortlist)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#did-something-new-appear)
+- [Why does evolution level off?](why-does-evolution-level-off.md#the-arms)
 - [One iteration, step by step](one-iteration.md#phase-1-reproduction)
 - [Every setting](settings.md#message_amount)
 - [B1 and B2: the two baselines](b1-and-b2.md#b1-the-rules-as-they-were-built)
@@ -986,6 +987,7 @@ with and without them was the same world in every measure
 <!-- used how-a-coalition-takes-a-node -->
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#fewer-mechanisms-worse-worlds)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-a-worlds-rules-make-possible)
+- [Why does evolution level off?](why-does-evolution-level-off.md#the-world)
 - [One iteration, step by step](one-iteration.md#phase-2-the-game)
 - [Questioning the mechanics](questioning-the-mechanics.md#hubs-are-places)
 - [Every setting](settings.md#allow_revolutions)
@@ -1131,6 +1133,7 @@ the rounding.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#in-short)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#in-short)
 - [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
+- [Why does evolution level off?](why-does-evolution-level-off.md#the-arms)
 - [A hundred thousand iterations](a-hundred-thousand-iterations.md#experiment-11-as-planned-on-9-october-2026)
 - [One iteration, step by step](one-iteration.md#phase-1-reproduction)
 - [The brain](the-brain.md#how-a-brain-changes)

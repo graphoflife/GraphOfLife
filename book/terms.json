@@ -699,6 +699,39 @@
       "page": "measures-atlases-and-assembly",
       "anchor": "ego-networks-as-molecules",
       "says": "An agent, its neighbours and the links among them: the network as one agent sees it."
+    },
+    {
+      "name": "evolution rank",
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "the-evolution-rank",
+      "says": "Round 3's worlds that lived, ordered by four readings of evolution on the brain-copy tree, each against a world without evolution: lines that spread beyond luck, behaviour new beyond mutation alone, selection on behaviour, and children that play like their parents."
+    },
+    {
+      "name": "brain-copy tree",
+      "also": [
+        "brain tree"
+      ],
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "the-brains-own-family-tree",
+      "says": "The family tree of brains, not of agents: a brain is copied to a newborn at birth and to the node its owner wins in a game, and both copies count."
+    },
+    {
+      "name": "births-only tree",
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "how-each-pillar-is-read",
+      "says": "Round 3's first family tree, which counted births alone, though in most of its worlds conquests copy brains more often."
+    },
+    {
+      "name": "shadow world",
+      "page": "did-evolution-happen",
+      "anchor": "3--a-shadow-world-of-pure-luck",
+      "says": "A world's copies replayed with each parent drawn at random among the living: the same world with selection taken out, so that luck alone decides which lines spread."
+    },
+    {
+      "name": "selection gradient",
+      "page": "did-evolution-happen",
+      "anchor": "4--selection-on-behaviour-measured",
+      "says": "How much more a brain is copied for doing more of one thing, with its other behaviours and its wealth held fixed."
     }
   ],
   "skip": {

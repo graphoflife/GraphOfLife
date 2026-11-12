@@ -23,10 +23,12 @@ there.
 - **[B1](b1-and-b2.md)** — The first baseline: the algorithm exactly as a new run is offered it.
 - **[B2](b1-and-b2.md)** — The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.
 - **[baseline](b1-and-b2.md)** — The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.
+- **[births-only tree](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — Round 3's first family tree, which counted births alone, though in most of its worlds conquests copy brains more often.
 - **[bootstrap](statistics.md#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds)** — How sure a number is, found by redrawing the worlds it came from many times.
 - **[box dimension](measuring-space.md#box-dimension)** — A network's dimension read from how many boxes of a given size it takes to cover it.
 - **[brain](the-brain.md)** — The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.
 - **[brain diversity](measuring-evolution.md#brain-diversity)** — How many different brains, or genotypes, a world holds.
+- **[brain-copy tree](candidates-for-open-ended-evolution.md#the-brains-own-family-tree)** (also brain tree) — The family tree of brains, not of agents: a brain is copied to a newborn at birth and to the node its owner wins in a game, and both copies count.
 - **[bridge](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)** — A connection that lies on no loop: cut it and the network falls into two pieces.
 - **[candidate](one-iteration.md#phase-1-reproduction)** — An agent itself and each of its neighbours, the ones its brain looks at when it decides.
 - **[candidate world](candidates-for-open-ended-evolution.md#the-worlds-ruled-out)** (also candidates for open-ended evolution) — A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still.
@@ -52,6 +54,7 @@ there.
 - **[entropy](measuring-tokens.md#entropy-and-evenness)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
 - **[estate](measuring-lives.md#the-estate-of-the-dead)** (also share-out) — The tokens a dead agent leaves, and who gets them.
 - **[even split](measuring-tokens.md#the-even-split)** — What the rules do when a brain scores no candidate above zero: the stake is spread evenly.
+- **[evolution rank](candidates-for-open-ended-evolution.md#the-evolution-rank)** — Round 3's worlds that lived, ordered by four readings of evolution on the brain-copy tree, each against a world without evolution: lines that spread beyond luck, behaviour new beyond mutation alone, selection on behaviour, and children that play like their parents.
 - **[exploitability](measuring-evolution.md#exploitability)** (also best reply) — How much better than a world's brains the best reply to them would do: zero only at the top.
 - **[extinction](rules-in-detail.md#when-a-world-ends)** (also extinct) — A world's end before its last iteration: it has dropped to its threshold of agents or fewer.
 - **[false discovery rate](statistics.md#testing-many-settings-at-once)** — Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg).
@@ -102,8 +105,10 @@ there.
 - **[same-position share](measuring-health.md#the-same-position-share)** — Of two agents put in the same situation, how often they stake their tokens measurably differently.
 - **[scaling relation](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties)** — How one property of an agent grows with another, as a power.
 - **[seed](rules-in-detail.md#seeds-and-the-random-stream)** — The number that fixes every random choice of a run: the same settings and the same seed make the same world.
+- **[selection gradient](did-evolution-happen.md#4--selection-on-behaviour-measured)** — How much more a brain is copied for doing more of one thing, with its other behaviours and its wealth held fixed.
 - **[setting](settings.md)** — One number or switch of a run's rules, fixed before it starts.
 - **[settled life](statistics.md#the-settled-life-of-a-world)** — A world after its youth, where it is measured: from iteration 500 to its end in the baselines, from 100 in round 3 of the screen.
+- **[shadow world](did-evolution-happen.md#3--a-shadow-world-of-pure-luck)** — A world's copies replayed with each parent drawn at random among the living: the same world with selection taken out, so that luck alone decides which lines spread.
 - **[share function](rules-in-detail.md#the-share-function-fa-b)** — How a brain's two numbers become one share between 0 and 1: of tokens for a child, or of a stake marked revolutionary.
 - **[shortlist](candidates-for-open-ended-evolution.md#the-shortlist)** — The candidate worlds of round 3 among the first 13 of any of health's three orders: the worlds chosen to be played again.
 - **[spectral dimension](measuring-space.md#the-spectral-dimension)** — A network's dimension read from how a random walker spreads over it.

@@ -229,11 +229,29 @@
       ],
       "kind": "experiment",
       "experiments": [
+        "E45",
         "E44"
       ],
       "status": "ready",
       "added": "2026-11-09",
-      "summary": "Experiment 44, ready to play: in each of the 21 worlds of round 3's shortlist, the brains of every era played against those of iterations 250, 1,500 and 3,000, in the world itself; 1,512 contests. The thesis: most worlds got better early and had stopped by the middle of their runs."
+      "summary": "Experiment 45, ready to play: in 17 worlds of round 3, the ten the evolution rank puts first and the five healthiest and five least healthy, the brains of iterations 500 to 3,000 play those of 250 and 1,500 in the world itself, three coins on each era's world; 1,326 contests. The thesis: the brains got better early, had stopped by the middle, and gained as the rank says, not as health says. Experiment 44, the same on health's shortlist, was withdrawn unplayed."
+    },
+    {
+      "id": "why-does-evolution-level-off",
+      "title": "Why does evolution level off?",
+      "file": "pages/why-does-evolution-level-off.md",
+      "topics": [
+        "evolution",
+        "rules"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E46",
+        "E47"
+      ],
+      "status": "ready",
+      "added": "2026-11-12",
+      "summary": "Experiment 46, ready to play: the rules of round 3's world s3058 at 10,000 tokens, once as they are and five times with one thing changed (four times the tokens, brains that change half as often, the other message to oneself, revolutionary tokens for the coalition alone, stakes pooled by family), three seeds of 20,000 iterations each. Experiment 47's contests then find where each levelled off. The thesis: the game stops evolution, not the population."
     },
     {
       "id": "a-hundred-thousand-iterations",

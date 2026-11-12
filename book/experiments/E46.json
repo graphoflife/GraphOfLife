@@ -1,0 +1,198 @@
+{
+ "id": "E46",
+ "title": "Why does evolution level off?",
+ "thesis": {
+  "claim": "Evolution stops because of the game, not because of the population. Under the rules of round 3's world s3058 at 10,000 tokens, evolution has levelled off by 5,000 iterations. Four times the tokens, and brains that change half as often, level off no later than the control does. At least one of the three changes to the game, the other message to oneself, revolutionary tokens that count for the coalition alone, or stakes pooled by family, levels off later.",
+  "why": "On round 3's brain-copy trees conquests make most copies (58% in the median world, 80% in s3058), and the living meet one ancestor far sooner than in shadow worlds of random parents: 224 iterations back in s3058, against 2,356 in its shadows. The effective population is small because winners sweep, not because the world is small (70 in s3058, against 743 in its shadows), so a world four times larger should sweep as fast. Children already play like their parents (heredity 0.96 in s3058 and in the median world), so brains that change less have little to save. Selection on what the brains do is strong almost everywhere, yet the behaviours do not follow it, and the line of descent moves less than mutation alone would move it in 79 of round 3's 82 worlds (Did evolution happen? Fourteen ways to find out): the brains are held where they are. Better play exists that a single new brain cannot reach: in young worlds of B2, strategies written by hand took over from evolved brains, but only with about a hundred of their kind starting together (Can a strategy written by hand beat evolution?). A brain scores each neighbour from that neighbour's column alone and cannot compare neighbours (What a brain can compute), and flagging a token as revolutionary costs nothing, so every brain can make the same free move. These are limits of the game. A change that lets a brain tell its neighbours about a third agent, gives the flag a price, or lets kin stake as one should leave more to be found.",
+  "confirm": "All three, with every arm read as How it is read says, in Experiment 47's contests; an arm levels off where the middle one of its three runs does. (1) The control has levelled off by 5,000. (2) The arm with four times the tokens and the arm whose brains change half as often each level off no later than the control. (3) At least one of the arms with the other message to oneself, with revolutionary tokens for the coalition alone, and with stakes pooled by family levels off later than the control.",
+  "refute": "Any of these. (1) The control has not levelled off by 10,000: its step from 10,000 to 20,000 is still a step up. (2) The arm with four times the tokens, or the arm whose brains change half as often, levels off later than the control. (3) None of the three arms that change the game levels off later than the control. If the control levels off by 10,000 but not by 5,000, the thesis is undecided. A run that dies out, or whose kept worlds cannot be played, decides nothing; an arm with fewer than two runs left decides nothing."
+ },
+ "chosen": {
+  "world": "B1-30000-4108dd-s3058",
+  "rank": 28,
+  "passed over as too slow": [
+   "B1-30000-68cda7-s3001",
+   "B1-30000-def151-s3062"
+  ]
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "4601..4603",
+  "iterations": 20000,
+  "record": {
+   "heavy_every": 25,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 1,
+  "conditions": [
+   {
+    "name": "control",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   },
+   {
+    "name": "4 times the tokens",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true
+    },
+    "sizes": [
+     40000
+    ],
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "faithful copies",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_probability": 0.1
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   },
+   {
+    "name": "message to oneself: largest",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "self_message": "largest"
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   },
+   {
+    "name": "revolutionary tokens for the coalition alone",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "revolt_tokens": "separate"
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   },
+   {
+    "name": "stakes pooled by family",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "pool": "family",
+     "tag_rate": 0.05
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   }
+  ]
+ }
+}

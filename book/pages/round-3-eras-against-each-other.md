@@ -1,24 +1,30 @@
 # Did the brains get better? Round 3's eras against each other
 
 > [!question] Questions of this page
-> - Do the later [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of round 3's best worlds beat their earlier brains?
+> - Do the later [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") of round 3's worlds beat their earlier brains?
 > - If they do, did they keep getting better to the end of their runs, or
 >   stop by the middle?
-> - What would tell a real improvement from a contest's own noise?
+> - Does the evolution rank tell which worlds got better? Does health?
 
-<!-- experiment E44 -->
+<!-- experiment E45 -->
 
 ## In short
 
-This is a plan, ready to play: Experiment 44, the first of the fourteen tests
-of [Did evolution happen?](did-evolution-happen.md), and the one the author
-liked best. Every world of round 3 kept its whole state every 250 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."),
-brains included. In each of the 21 worlds of round 3's shortlist, the brains
-of every era are played against the brains of three fixed eras, 250, 1,500
-and 3,000, in the world itself: 1,512 contests of 100 iterations, about two
-and a half days on the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s three workers, after Experiment 43. The thesis, written
-before any contest: most worlds got better early and had stopped by the
-middle of their runs.
+This is a plan, ready to play: Experiment 45, the first of the fourteen tests
+of [Did evolution happen?](did-evolution-happen.md). It plays 17 worlds of
+round 3: the ten the evolution rank puts first
+([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)),
+and the five healthiest and the five least healthy that lived; three are in
+two of these groups. In each, the
+brains of [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to 3,000 play those of 250 and those of 1,500, in the
+world itself. Each pair plays six times, with three coins on each era's world:
+1,326 contests of 100 iterations. The thesis, written before any contest:
+the brains got better early and had stopped by the middle of the runs, and how
+much a world's brains got better follows its evolution rank, not its health.
+
+It replaces Experiment 44, the same tournament with one coin on each era's
+world, played on the shortlist chosen by health. Experiment 44 was withdrawn
+unplayed ([below](#experiment-44-withdrawn-unplayed)).
 
 ## Why play eras against each other
 
@@ -34,33 +40,76 @@ era's expense ([A contest, step by step](measuring-evolution.md#a-contest-step-b
 A hundred iterations is a [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") or more in round 3's worlds, where most
 agents live a few [games](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").
 
-Round 3's worlds evolve fast and narrowly: hundreds of generations in 3,000
-iterations, but an effective population of about fourteen
+Round 3's worlds evolve fast and narrowly. Counted on the brain-copy tree,
+where conquests make most of the copies, the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world lives through about
+2,700 generations in 3,000 iterations, with an effective population of about
+100, against about 3,500 in shadow worlds of pure luck
 ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)).
 So a line can sweep a world by luck, and a world's numbers alone cannot say
 whether its brains got better. The contests can.
 
+
 ## The plan
 
-- **The worlds:** the 21 of round 3's shortlist, every candidate among the
-  first 13 of any of health's three orders
-  ([The shortlist](candidates-for-open-ended-evolution.md#the-shortlist)),
-  each with its own rules and its own kept worlds.
-- **The eras:** the brains of iterations 250, 500, …, 3,000, twelve a world.
-- **Every era against three:** each era against 250 (did it get better at
-  all?), against 1,500 (was it still getting better at the middle?) and
-  against 3,000 (how far from the end is it?), as Experiment 28 played the
-  notebook's longest worlds ([Every era against three](every-era-against-three.md)).
-  Each pair is played twice, once on each era's world, so that neither plays
-  only at home; an era's score is the mean of the two.
-- **The noise:** each of the three fixed eras is also played against itself,
-  four times with different coins. A contest of one era against itself should
-  end at 0.5; how far its four end from 0.5 is the noise of a contest in that
-  world. A score counts as a win only beyond 0.5 plus twice that spread.
+- **The worlds:** the ten worlds the evolution rank puts first, leaving out
+  those health's filter marks (s3037, eighth, stands still), and the five
+  healthiest and the five least healthy of those that lived. A world in two of
+  these groups is played once. Each plays with its own rules and its own kept
+  worlds.
+- **The eras:** 250, 500, 1,000, 1,500, 2,000, 2,500 and 3,000.
+- **Two fixed eras:**
+  - every later era plays 250: did the brains get better at all?
+  - every other era plays 1,500: were they still getting better at the middle?
 
-That makes 72 contests a world and 1,512 in all. Contests keep no [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."), and
-the kept worlds they start from are already on disk, so nothing is played but
-the contests themselves.
+  Each pair plays on both eras' worlds, three coins each. An era's score is the
+  mean of the six.
+- **The noise:** 250, 1,500 and 3,000 each play themselves, four coins each.
+  A contest of an era against itself should end at 0.5, so the spread of these
+  twelve contests is the noise of that world. A score counts as a win only
+  above 0.5 plus twice that spread.
+- **Does the rank tell?** A world's **gain** is the median score of its eras
+  against 250. Across the worlds, the gain is set against the evolution rank's
+  score, and against health.
+
+<!-- thesis E45 -->
+> [!quote] The thesis of Experiment 45, written down before any of its runs existed
+> **The claim.** Round 3's brains got better early and had stopped getting better by the middle of their runs; and how much a world's brains got better follows its place in the evolution rank, not its health. In most of the worlds the brains of every later era beat those of iteration 250 beyond a contest's own noise; against the brains of iteration 1,500, the eras after it do no better than that noise; and the worlds the rank puts first gained the most.
+>
+> **Why it would be so.** On the brain-copy tree, where conquests make 58% of the copies in the median world, round 3's worlds live through about 2,700 generations in 3,000 iterations, and their ancestry narrows far faster than chance allows: in 69 of the 82 worlds that lived, the living meet one ancestor sooner than in any of 100 shadow worlds of random parents (Candidates for open-ended evolution). Selection on what the brains do is beyond chance almost everywhere, yet the line of descent moves less than mutation alone would move it in 79 of the 82 worlds (Did evolution happen? Fourteen ways to find out): the brains are held in place, as they are once selection has found what it can. The notebook's two longest worlds, of B2 with brains mixed at birth, climbed for 20,000 to 25,000 iterations and then only wandered (Every era against three, Experiment 28); round 3's worlds copy brains several times as often, so they should reach their plateau within their 3,000 iterations. The evolution rank reads what an improvement needs: lines that spread beyond what luck spreads, behaviour new beyond what mutation alone makes, brains copied in proportion to what they do, and children that play like their parents. Health reads the shape of a world, and is unrelated to the rank (rank correlation -0.01). Against this: some lines never return to behaviour they had shown, so some worlds may still climb at the end; and eight of the rank's first ten stake a token at a time, for which two of its four readings are only approximations.
+>
+> **It holds if:** All three. (1) In at least two thirds of the worlds, the median score of the eras 500 to 3,000 against 250 lies above the world's noise band: above 0.5 plus twice the standard deviation of its twelve contests of an era against itself (250, 1,500 and 3,000, four coins each). An era's score is the share of the agents that hold the later era's brains at the end, the mean of its six contests, three coins on each era's world. (2) In at least two thirds of the worlds, the median score of the eras 2,000 to 3,000 against 1,500 lies within the band, between 0.5 minus and 0.5 plus twice that deviation. (3) A world's gain is the median score of its eras 500 to 3,000 against 250. Across the worlds, the gain rises with the evolution rank's score (research/screen/evolution.json of 12 November 2026): Spearman's rho above 0, with a one-sided permutation p below 0.05 (10,000 permutations); and the gain's rho with health's product is smaller than its rho with the evolution score.
+>
+> **It fails if:** Any of: (1) in fewer than half of the worlds do the eras 500 to 3,000 score above the band against 250, so most worlds did not get better at all; (2) in half of the worlds or more, the eras 2,000 to 3,000 score above the band against 1,500, so most were still getting better in the middle of their runs; (3) the gain does not rise with the evolution score (rho at 0 or below), or its rho with health's product is larger. Between these, the thesis is undecided. A world whose contests cannot be played decides nothing and is left out of every count.
+<!-- /thesis -->
+
+## What it costs
+
+A contest plays 100 iterations of one world. At each world's pace in its last
+thousand iterations, the 17 worlds' 78 contests a world take about 303
+worker-hours in all. The rank's first worlds are among the slowest: eight of
+its ten stake a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at a time, at 5 to 19 seconds an iteration. The [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")
+gives this experiment two of its three workers at most, so that the third is
+free for Experiment 46 and the contests that read it
+([Why does evolution level off?](why-does-evolution-level-off.md)): about six
+days, a little less since contests write no [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.").
+
+## Experiment 44, withdrawn unplayed
+
+<!-- experiment E44 -->
+
+Experiment 44 was the same tournament on the 21 worlds of round 3's shortlist
+by health. Each pair played once on each era's world, and every era also
+played 3,000.
+
+It was withdrawn unplayed on 12 November 2026, with the author's agreement,
+after an independent review found two problems:
+- In round 3, health runs against heredity, generations and fertility, yet
+  health chose these worlds.
+- The family trees behind that choice counted births only, though conquests
+  copy brains more often
+  ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)).
+
+Its thesis stays as it was written:
 
 <!-- thesis E44 -->
 > [!quote] The thesis of Experiment 44, written down before any of its runs existed
@@ -73,16 +122,6 @@ the contests themselves.
 > **It fails if:** Either: (1) in fewer than 11 of the 21 worlds do the later eras score above the band against 250, so most worlds did not get better at all; or (2) in 11 or more of the 21 the eras after 1,500 score above the band against 1,500, so most worlds were still getting better at the middle of their runs. Between the two, the thesis is undecided. A world whose contests cannot be played (its kept worlds unreadable) decides nothing, and is left out of both counts.
 <!-- /thesis -->
 
-## What it costs
-
-A contest plays 100 iterations of one world. Played as round 3 recorded them,
-the 21 worlds took from 0.6 to 14 seconds an iteration in their last thousand
-iterations, 3.1 in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above."); the worlds that stake a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at a time are
-among the slowest. All told, about 170 hours of computing: about two and a half
-days on the lab's three workers, a little less since contests write no
-frames. The lab plays
-it after Experiment 43, whose runs come first in its queue.
-
 ## Where to go next
 
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md):
@@ -90,16 +129,33 @@ it after Experiment 43, whose runs come first in its queue.
 - [Every era against three](every-era-against-three.md): the same tournament on
   the notebook's two longest worlds of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.").
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
-  the 21 worlds, and how they evolve.
+  the evolution rank, and the worlds' brain trees.
+- [Why does evolution level off?](why-does-evolution-level-off.md):
+  Experiment 46, which changes one thing at a time to find what stops it.
 
 ## How this was made
 
-The plan is `book/experiments/E44.json`: 21 runs of round 3 (Experiments 40,
-41 and 42), named by the shortlist in `research/screen/candidates.json` on
-9 November 2026, after health came to count agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link. One
-contest of 20 iterations was played as a check on two of the worlds before
-the plan was written, one of them staking a token at a time; nothing else was
-played.
+The plan is `book/experiments/E45.json`. `research/screen/evolution_plans.py`
+wrote it on 12 November 2026 from two files:
+- the evolution rank, `research/screen/evolution.json`, made by
+  `research/screen/braintree.py`;
+- health of 9 November, `research/screen/health.json`.
+
+Nothing was played before the plan was written. Experiment 44's plan,
+`book/experiments/E44.json`, is kept as it was, marked withdrawn; before it
+was written, one contest of 20 iterations was played as a check on two of its
+worlds, one of them staking a token at a time.
+
+<!-- runs E45 -->
+> [!info]- The trials behind this page
+> **1,326 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
+>
+> - **against 250** — 612 trials: worlds `B1-30000-04d3eb-s4007`, `B1-30000-10c9f1-s3047`, `B1-30000-192733-s4002`, `B1-30000-1ad8a9-s3038`, `B1-30000-1cfaa4-s4008`, `B1-30000-26a341-s3093`, `B1-30000-511930-s3020`, `B1-30000-5379e2-s4002`, `B1-30000-625bc7-s3080`, `B1-30000-66c764-s3076`, `B1-30000-77ad6a-s3089`, `B1-30000-8526cf-s4006`, `B1-30000-9efb1d-s4003`, `B1-30000-a8a2d2-s4007`, `B1-30000-af1e28-s3018`, `B1-30000-b82ad0-s3042`, `B1-30000-fffc7d-s4003`; eras 250, 500, 1,000, 1,500, 2,000, 2,500, 3,000; coins 17, 18, 19.
+> - **against 1,500** — 510 trials: worlds `B1-30000-04d3eb-s4007`, `B1-30000-10c9f1-s3047`, `B1-30000-192733-s4002`, `B1-30000-1ad8a9-s3038`, `B1-30000-1cfaa4-s4008`, `B1-30000-26a341-s3093`, `B1-30000-511930-s3020`, `B1-30000-5379e2-s4002`, `B1-30000-625bc7-s3080`, `B1-30000-66c764-s3076`, `B1-30000-77ad6a-s3089`, `B1-30000-8526cf-s4006`, `B1-30000-9efb1d-s4003`, `B1-30000-a8a2d2-s4007`, `B1-30000-af1e28-s3018`, `B1-30000-b82ad0-s3042`, `B1-30000-fffc7d-s4003`; eras 500 to 3,000, every 500; coins 17, 18, 19.
+> - **each against itself** — 204 trials: worlds `B1-30000-04d3eb-s4007`, `B1-30000-10c9f1-s3047`, `B1-30000-192733-s4002`, `B1-30000-1ad8a9-s3038`, `B1-30000-1cfaa4-s4008`, `B1-30000-26a341-s3093`, `B1-30000-511930-s3020`, `B1-30000-5379e2-s4002`, `B1-30000-625bc7-s3080`, `B1-30000-66c764-s3076`, `B1-30000-77ad6a-s3089`, `B1-30000-8526cf-s4006`, `B1-30000-9efb1d-s4003`, `B1-30000-a8a2d2-s4007`, `B1-30000-af1e28-s3018`, `B1-30000-b82ad0-s3042`, `B1-30000-fffc7d-s4003`; eras 250, 1,500, 3,000; coins 17, 18, 19, 20.
+>
+> To play these trials again: `python3 gol_lab.py run E45`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+<!-- /runs -->
 
 <!-- runs E44 -->
 > [!info] The trials behind this page
