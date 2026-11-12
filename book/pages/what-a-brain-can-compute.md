@@ -387,7 +387,7 @@ teammate, whether *u* has a stranger next door is news of a third agent. No
 B2 brain, of any size, can write it into a message. It could only show it
 through its own tokens or connections, at a cost. Raiders that pool their
 stakes would need the same kind of news to choose a target together
-([A crew of raiders](strategies-written-by-hand.md#a-crew-of-raiders)).
+([A crew of raiders](crews-breeders-and-b1-raiders.md#a-crew-of-raiders)).
 
 The raider needs nothing of the kind. Everything it decides comes from its
 own columns, and that is why its weights exist.
@@ -556,6 +556,6 @@ them, so this page has no box of runs. They were made with
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
-> [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
+> [!info]- Pages that link here (6)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md)
 <!-- /turns -->

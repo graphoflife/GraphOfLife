@@ -186,6 +186,7 @@ view shows how the pages hang together.
 
 #### Side studies
 
+- [Crews, breeders and B1 raiders: Experiments 33 to 35](pages/crews-breeders-and-b1-raiders.md)
 - [Cooperation, help and gliders (side study)](pages/cooperation-help-and-gliders.md)
 - [Space at scale (side study)](pages/space-at-scale.md)
 - [Measures, atlases and assembly (side studies)](pages/measures-atlases-and-assembly.md)

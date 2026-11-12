@@ -652,10 +652,7 @@
       "summary": "Rules written by hand, planted in evolved B2 worlds, can beat evolution's play, given a raid, a password and a crowd of about a hundred (Experiment 29). In older worlds the raiders stopped winning: the worlds had grown too poor (Experiments 30 and 33 to 35).",
       "experiments": [
         "E29",
-        "E30",
-        "E33",
-        "E34",
-        "E35"
+        "E30"
       ]
     },
     {
@@ -904,6 +901,24 @@
       "status": "analysed",
       "added": "2026-10-15",
       "summary": "The engine's switches tried in pilot worlds in October 2026, alone and in company: indicative only, from two seeds a condition, mostly 1,000 iterations, on B2."
+    },
+    {
+      "id": "crews-breeders-and-b1-raiders",
+      "title": "Crews, breeders and B1 raiders: Experiments 33 to 35",
+      "file": "pages/crews-breeders-and-b1-raiders.md",
+      "topics": [
+        "side-studies",
+        "strategies"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E33",
+        "E34",
+        "E35"
+      ],
+      "status": "analysed",
+      "added": "2026-11-12",
+      "summary": "Three strategies planted in late worlds after the lone raider stopped winning: crews that pool their stakes, raiders that breed as the world does, and every strategy in B1. All three theses refuted; the door closed by poverty."
     },
     {
       "id": "cooperation-help-and-gliders",
