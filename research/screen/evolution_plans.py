@@ -12,7 +12,8 @@ health of 9 November (research/screen/health.json), which now only filters:
 - Experiment 46, why evolution levels off: the rules of the best world by the
   rank that has revolutions on, at 10,000 tokens, and arms that each change
   one thing — four times the tokens, faithful copies, the other kind of message
-  to oneself, and revolutionary tokens that count for the coalition alone.
+  to oneself, revolutionary tokens that count for the coalition alone, and
+  stakes pooled by family.
 
 A plan is written with an empty thesis, to be written into it by hand before
 any run, and a plan already written is never written over. Experiment 47, the
@@ -55,6 +56,15 @@ TOKENS, BIGGER, ITERATIONS, SEEDS = 10000, 4, 20000, "4601..4603"
 #: three days on the lab's two workers at the pace the lab has measured, which
 #: has run well behind the model. A world whose rules would take longer is passed over.
 HOURS = 100
+#: How a brain changes: what the faithful-copies arm takes from the world of round 3 whose copies are most faithful.
+MUTATION = ("mutate_on_replication", "mutation_probability", "mutation_noise_std", "mutation_sparsity")
+#: How often a mutated copy starts a family of its own, as the family-pool pilots had it (another-game.md).
+TAG_RATE = 0.05
+
+#: Experiment 47, the contests that read Experiment 46: its eras, each played
+#: against the one before it, and the eras played against themselves for the noise.
+STEPS = [500, 1000, 2500, 5000, 10000, 20000]
+STILL = [1000, 5000, 20000]
 
 
 def lived_by_health() -> List[Dict[str, Any]]:
@@ -152,12 +162,6 @@ def arm(name: str, start: Dict[str, Any], change: Dict[str, Any], base: Dict[str
     return out
 
 
-#: How a brain changes: what the faithful-copies arm takes from the world of round 3 whose copies are most faithful.
-MUTATION = ("mutate_on_replication", "mutation_probability", "mutation_noise_std", "mutation_sparsity")
-#: How often a mutated copy starts a family of its own, as the family-pool pilots had it (another-game.md).
-TAG_RATE = 0.05
-
-
 def faithful(drawn: Dict[str, Any], base: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
     """
     The faithful-copies arm's change: how brains change in the world of round 3
@@ -172,38 +176,15 @@ def faithful(drawn: Dict[str, Any], base: Dict[str, Any]) -> Tuple[str, Dict[str
     raise SystemExit("every world of round 3 changes its brains as the chosen one does")
 
 
-def cost(spec: gol_plan.RunSpec, runs: int) -> float:
-    """Worker-hours, by the lab's cost model, of `runs` runs of a world's rules at TOKENS, three of them BIGGER."""
-    import gol_costs
-    known = gol_costs.costs()
-
-    def hours(tokens: int) -> float:
-        config = {**spec.config, **condition(spec, tokens).get("world", {}), "total_tokens": tokens}
-        return gol_costs.predict(config, ITERATIONS, known)["seconds"] / 3600
-    seeds = len(gol_plan.parse_seeds(SEEDS))
-    return (runs - seeds) * hours(TOKENS) + seeds * hours(TOKENS * BIGGER)
-
-
-def e46() -> Dict[str, Any]:
-    base = gol_plan.baseline("B1")
-    passed = []
-    for world in ranked():
-        spec = round3_spec(world["id"])
-        if not revolts(spec.lab["set"], base):
-            continue
-        if cost(spec, 6 * len(gol_plan.parse_seeds(SEEDS))) <= HOURS:
-            break
-        passed.append(world["id"])
-    else:
-        raise SystemExit(f"no world of the rank plays with revolutions within {HOURS} worker-hours")
+def arms_of(spec: gol_plan.RunSpec, base: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], str]:
+    """Experiment 46's arms on one world's rules, and the world its faithful copies come from."""
     start = condition(spec, TOKENS)
     drawn = {**base, **start["set"]}
     copies_from, copies = faithful(drawn, base)
     other = {"own": "largest", "largest": "own"}[drawn["self_message"]]
-    bigger = condition(spec, TOKENS * BIGGER)
     arms = [
         arm("control", start, {}, base),
-        arm(f"{BIGGER} times the tokens", bigger, {}, base, [TOKENS * BIGGER]),
+        arm(f"{BIGGER} times the tokens", condition(spec, TOKENS * BIGGER), {}, base, [TOKENS * BIGGER]),
         arm("faithful copies", start, copies, base),
         arm(f"message to oneself: {other}", start, {"self_message": other}, base),
         arm("revolutionary tokens for the coalition alone", start, {"revolt_tokens": "separate"}, base),
@@ -211,6 +192,36 @@ def e46() -> Dict[str, Any]:
     # Stakes pooled by family need every token staked at once (allocation full).
     if drawn["allocation"] == "full":
         arms.append(arm("stakes pooled by family", start, {"pool": "family", "tag_rate": TAG_RATE}, base))
+    return arms, copies_from
+
+
+def cost(arms: List[Dict[str, Any]], base: Dict[str, Any]) -> float:
+    """Worker-hours, by the lab's cost model, of every run of these arms."""
+    import gol_costs
+    known = gol_costs.costs()
+    seeds = len(gol_plan.parse_seeds(SEEDS))
+    return sum(seeds * gol_costs.predict({**base, **a["set"], **a.get("world", {}), "total_tokens": tokens},
+                                         ITERATIONS, known)["seconds"] / 3600
+               for a in arms for tokens in a.get("sizes", [TOKENS]))
+
+
+def e46() -> Dict[str, Any]:
+    """
+    Experiment 46 on the rules of the rank's best world with revolutions (so that
+    every arm applies) whose runs fit in HOURS; the slower ones are named.
+    """
+    base = gol_plan.baseline("B1")
+    passed = []
+    for world in ranked():
+        spec = round3_spec(world["id"])
+        if not revolts(spec.lab["set"], base):
+            continue
+        arms, copies_from = arms_of(spec, base)
+        if cost(arms, base) <= HOURS:
+            break
+        passed.append(world["id"])
+    else:
+        raise SystemExit(f"no world of the rank plays with revolutions within {HOURS} worker-hours")
     return {
         "id": "E46", "title": "Why does evolution level off?",
         "thesis": {"claim": "", "why": "", "confirm": "", "refute": ""},
@@ -220,11 +231,6 @@ def e46() -> Dict[str, Any]:
                  "record": {"heavy_every": 25, "checkpoint_every": 100, "archive_every": 500},
                  "conditions": arms}}
 
-
-#: Experiment 47, the contests that read Experiment 46: its eras, each played
-#: against the one before it, and the eras played against themselves for the noise.
-STEPS = [500, 1000, 2500, 5000, 10000, 20000]
-STILL = [1000, 5000, 20000]
 
 
 def e47(runs: List[str]) -> Dict[str, Any]:
@@ -247,31 +253,32 @@ def e47(runs: List[str]) -> Dict[str, Any]:
 
 
 
+def write(plan: Dict[str, Any], show: bool) -> None:
+    """Write a plan, or show it; a plan already written is left as it is."""
+    path = os.path.join(ROOT, "book", "experiments", f"{plan['id']}.json")
+    text = json.dumps(plan, indent=1) + "\n"
+    if show:
+        print(text)
+    elif os.path.exists(path):
+        print(f"{path} is written already: left as it is")
+    else:
+        with open(path, "w") as f:
+            f.write(text)
+        print(f"wrote {path}")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--show", action="store_true")
     a = ap.parse_args()
     first = e45()
-    worlds = len(first["trials"]["sets"][0]["grid"]["run"])
-    print(f"E45: {worlds} worlds, {contests_a_world(first)} contests each, "
-          f"about {hours(first):.0f} worker-hours at the worlds' own pace")
-    for plan in (first, e46(), None):
-        if plan is None:
-            # Experiment 47 plays in Experiment 46's runs, named by its plan as written.
-            if not os.path.exists(os.path.join(ROOT, "book", "experiments", "E46.json")):
-                print("E47 is written once E46 is")
-                continue
-            plan = e47([spec.run_id for spec in gol_plan.experiment_runs("E46")])
-        path = os.path.join(ROOT, "book", "experiments", f"{plan['id']}.json")
-        text = json.dumps(plan, indent=1) + "\n"
-        if a.show:
-            print(text)
-        elif os.path.exists(path):
-            print(f"{path} is written already: left as it is")
-        else:
-            with open(path, "w") as f:
-                f.write(text)
-            print(f"wrote {path}")
+    print(f"E45: {len(first['trials']['sets'][0]['grid']['run'])} worlds, {contests_a_world(first)} contests "
+          f"each, about {hours(first):.0f} worker-hours at the worlds' own pace")
+    write(first, a.show)
+    write(e46(), a.show)
+    # Experiment 47 plays in Experiment 46's runs, as its plan names them once written.
+    if os.path.exists(os.path.join(ROOT, "book", "experiments", "E46.json")):
+        write(e47([spec.run_id for spec in gol_plan.experiment_runs("E46")]), a.show)
 
 
 if __name__ == "__main__":
