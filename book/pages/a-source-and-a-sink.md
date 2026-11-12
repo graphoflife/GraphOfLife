@@ -135,7 +135,7 @@ Why the first?
 - **A piece cut off from the source runs down.** Each of its agents loses a
   token an iteration and none comes in, so the piece dies by itself. The
   islands that pieces living on would leave in a closed world
-  ([What we expect](local-rules-only.md#what-we-expect)) have a local death
+  ([Local rules only](local-rules-only.md#in-short)) have a local death
   here: the sink is a grave that needs no cull.
 - **It needs no new output from the brain**, so it can be added to any world
   of round 3 as it was drawn.
@@ -184,7 +184,7 @@ links.
 ### Three conditions
 
 1. **The local world, closed:** the control, played as condition 4 of
-   [Local rules only](local-rules-only.md#four-conditions-one-change-each).
+   [Local rules only](local-rules-only.md#in-short).
 2. **The local world, open:** the source on a node, fed *J* tokens an
    iteration, and every agent paying a token an iteration.
 3. **The same flow, spread everywhere:** the same inflow dealt out over every
@@ -338,6 +338,14 @@ table again: `python3 book_figures.py localrules`
 (`book_chapters/localrules.py`). The working notes are in `research/Plans.md`,
 under *A source and a sink*.
 
+## How our view changed
+
+- **11 November 2026.** Moved from Space and [dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.") to Does evolution keep
+  going?. It is the open-economy plan of the evolution track: a closed,
+  zero-sum game is one of the candidate reasons why evolution levels off, and a
+  world with a flow is the change of structure the notebook turns to if no
+  change of settings lifts the plateau. The plan itself is as it was.
+
 ## References
 
 - Bénard, H. (1900). Les tourbillons cellulaires dans une nappe liquide. *Revue générale des sciences pures et appliquées* 11, 1261–1271 and 1309–1328.
@@ -349,9 +357,9 @@ under *A source and a sink*.
 <!-- turns -->
 ---
 
-← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension) · [Particles: patterns that outlast what carries them](particles.md) →
+← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
 
-**Also about:** [Changing the rules](../README.md#changing-the-rules).
+**Also about:** [Space and dimension](../README.md#space-and-dimension), [Changing the rules](../README.md#changing-the-rules).
 
 > [!info]- Pages that link here (3)
 > [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md)

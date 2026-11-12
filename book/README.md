@@ -102,7 +102,6 @@ how the pages hang together.
 - [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
 - [Local rules only](pages/local-rules-only.md)
 - [How far does a difference travel?](pages/how-far-does-a-difference-travel.md)
-- [A source and a sink](pages/a-source-and-a-sink.md)
 - [Particles: patterns that outlast what carries them](pages/particles.md)
 
 ### The search for open-ended evolution
@@ -114,6 +113,7 @@ how the pages hang together.
 - [Does evolution keep going?](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
 - [Every era against three](pages/every-era-against-three.md)
+- [A source and a sink](pages/a-source-and-a-sink.md)
 
 #### Changing the rules
 
