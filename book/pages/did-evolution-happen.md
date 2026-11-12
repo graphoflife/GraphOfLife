@@ -14,7 +14,7 @@ Is that evolution by selection, or luck? This page lists fourteen tests,
 grouped by six questions: did the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") get better, was it selection or luck,
 does it keep going, did something new appear, would it happen again, and is
 evolution what makes the world. Eleven need only what the worlds recorded.
-Two have been run on the brains' own family tree of all 82 worlds that lived
+Two have been run, on the brains' own family tree of all 82 worlds that lived
 (12 November 2026):
 - **Test 3, the shadow world:** lines spread faster than luck would spread
   them. In 69 of the 82 worlds the living meet their common ancestor sooner
@@ -22,19 +22,9 @@ Two have been run on the brains' own family tree of all 82 worlds that lived
 - **Test 4, selection on behaviour:** selection is plain in every world, but
   the behaviours do not move the way it points.
 
-And hardly any line of descent finds more new behaviour than [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") alone would.
-Selection, so far, holds brains in place. The era tournament comes next.
-
-> [!info] Added later, 12 November 2026: fourteen ancestors, on the births-only tree
-> Written on 9 November 2026, this page said that a world whose whole
-> population descends from about fourteen ancestors can be swept by a line
-> that was only lucky, and that a child acts more like its parent than like a
-> stranger with a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") heredity index of 0.39. Both numbers were read on a
-> family tree of births alone. On the brains' own family tree, where a node
-> won in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") takes on the winner's brain, the median world has
-> an effective population of about 100, against about 3,500 in its shadows,
-> and a heredity index of 0.96
-> ([The brains' own family tree](candidates-for-open-ended-evolution.md#the-brains-own-family-tree)).
+And in 79 of the 82 worlds the line of descent moves less far than lines that
+only mutate. Selection, so far, holds brains in place. The era tournament,
+test 1, comes next.
 
 ## Why it is not obvious
 
@@ -65,7 +55,7 @@ Most tests need no new runs, because round 3 kept a great deal:
   played again, and so can the founders of iteration 0
   ([Eras](measuring-evolution.md#eras)).
 - **Every birth and every conquest.** Each birth names its parent and child,
-  and each game the winner of every node, so each world has its whole
+  and each [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") the winner of every node, so each world has its whole
   brain-copy tree.
 - **Every decision.** Each phase's decisions are in the record: who staked
   what where, who had a child and how much it was given, which links were made
@@ -87,7 +77,7 @@ world plays than earlier ones. These two tests play eras against each other.
 
 - **Asks:** do later brains beat earlier brains of the same world?
 - **How:** play every era against every other era inside the world itself,
-  half the agents with one era's brains and half with the other's, mutation
+  half the agents with one era's brains and half with the other's, [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.")
   off, and see whose brains hold more of the world at the end
   ([A contest, step by step](measuring-evolution.md#a-contest-step-by-step)).
   Twelve eras make 66 pairs.
@@ -127,8 +117,9 @@ world plays than earlier ones. These two tests play eras against each other.
 
 ## Was it selection, or luck?
 
-With an effective population of about fourteen, chance alone can carry a line
-across a world. These three tests take chance out, or measure selection
+In a small population chance alone can carry a line across a world, and
+round 3's [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world has an effective population of about 100 on the
+brain-copy tree. These three tests take chance out, or measure selection
 directly.
 
 ### 3 · A shadow world of pure luck
@@ -138,26 +129,23 @@ directly.
 - **How:** replay each world's family tree (on the
   [brain-copy tree](candidates-for-open-ended-evolution.md#the-brains-own-family-tree),
   births and conquests both) with every copy given a parent drawn at random
-  among the living, keeping the same copies and deaths in the same iterations. That is the world with selection taken out: a shadow.
-  Compare how long lines last, and how fast one takes a world over, in the
-  real tree and in many shadow trees.
+  among the brains alive just before it, keeping the same copies and deaths
+  in the same iterations. That is the world with selection taken out: a
+  shadow. Compare how long lines last, and how fast one takes a world over, in
+  the real tree and in many shadow trees.
 - **Yes would look like:** real lines last longer and sweep faster than shadow
   lines do. New lines rising above the shadow again and again would also say
   that evolution keeps going.
 - **No would look like:** the real tree looks like a shadow tree.
-- **Cost:** minutes a world, from the family tree alone.
+- **Cost:** minutes a world, from the family tree alone: only the copies'
+  parents are shuffled, never the brains, so a shadow costs seconds.
 - **From:** the evolutionary activity of Bedau and Packard (1992), and the
   shadow models of Bedau, Snyder and Packard (1998).
-- **Done:** 12 November 2026, on the brains' own family tree of all 82 worlds
-  that lived, with 100 shadows a world
+- **Done:** 12 November 2026, on all 82 worlds that lived, with 100 shadows a
+  world
   ([The evolution rank](candidates-for-open-ended-evolution.md#the-evolution-rank)).
 
-> [!info] What it found (12 November 2026)
-> Each shadow keeps every copy of the
-> [brain-copy tree](candidates-for-open-ended-evolution.md#the-brains-own-family-tree)
-> at its moment, and every death, but draws each copy's parent at random among
-> the brains alive just before it. Only the copies' parents are shuffled, never
-> the brains, so a shadow costs seconds.
+> [!info] What it found
 > - **The living meet their ancestor sooner than luck allows.** In the median
 >   world, all the brains alive at the end descend from one brain of 193
 >   iterations before; in most worlds' shadows, they meet none within the run.
@@ -166,15 +154,14 @@ directly.
 >   of the brains alive at its start, fewer have descendants at its end than in
 >   the shadow, and the largest family is larger: by more than two of the
 >   shadow's spreads, on average over the eras, in 73 of the 82 worlds. Three
->   spread their lines more slowly than luck: seed 3077, whose brains change
->   after every game with a probability of 0.8, and seeds 3030 and 3094, whose
->   agents are mostly newborns and whose links are kept only while paid for.
+>   worlds spread their lines more slowly than luck
+>   ([which, and why](candidates-for-open-ended-evolution.md#the-evolution-rank)).
 > - **But not in every way luck is beaten.** In 10 of the 82 worlds the average
->   family lives *longer* than in its shadow. Copies are made next door, so kin often
->   take kin's nodes, and a family loses nothing when they do. A shadow draws
->   parents from anywhere, so it cannot see that. Locality alone makes lines
->   meet and sweep more slowly, so where a world beats its shadow, it does so in
->   spite of being local.
+>   family lives *longer* than in its shadow. Copies are made next door, so kin
+>   often take kin's nodes, and a family loses nothing when they do. A shadow
+>   draws parents from anywhere, so it cannot see that. Locality alone makes
+>   lines meet and sweep more slowly, so where a world beats its shadow, it does
+>   so in spite of being local.
 >
 > So yes: lines spread faster than luck would spread them. This does not yet
 > say why. A rich agent has more children whether or not its brain is good, and
@@ -185,12 +172,19 @@ directly.
 
 - **Asks:** which behaviours bring more children, and does the population
   move the way that predicts?
-- **How:** from the recorded decisions, give each agent a few behaviour
-  numbers: how much it gives a child, how widely it spreads its stakes, how
-  many links it makes or keeps. In each era, measure how strongly each number
-  goes with having children (selection) and how much children resemble their
-  parents in it (heredity). Together they predict how the average should move
-  by the next era. Then check the prediction against what happened.
+- **How:** from the recorded decisions, give each agent alive at the start
+  of an iteration four behaviour numbers: the share of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") it gave a
+  child, the links its newborn got, whether it spread its stake over several
+  nodes, and the share it staked on its own node. Its fitness is its
+  descendants alive at the start of the next iteration on the brain-copy
+  tree: itself if its brain still holds its node, and the children and won
+  nodes that live. Selection is how strongly a behaviour goes with fitness:
+  the *selection differential* is their covariance (Price), and the
+  *gradient* the same with the agent's wealth held fixed. Chance is fitness
+  shuffled among the agents of an iteration, whose mean and spread are known
+  exactly, so no shuffle needs to be made. Where children play like their
+  parents, a behaviour's average should move from era to era the way its
+  selection points: check whether it does.
 - **Yes would look like:** the predictions come true: behaviours move the way
   selection and heredity say. That is natural selection, measured behaviour by
   behaviour.
@@ -207,17 +201,7 @@ directly.
   (the stakes in every fifth game)
   ([The evolution rank](candidates-for-open-ended-evolution.md#the-evolution-rank)).
 
-> [!info] What it found (12 November 2026)
-> Four behaviours were read for every agent alive at the start of an iteration:
-> the share of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") it gave a child, the links its newborn got, whether
-> it spread its stake over several nodes, and the share it staked on its own
-> node. Its fitness is its descendants alive at the start of the next
-> iteration on the brain tree: itself if its brain still holds its node, and
-> the children and won nodes that live. The *selection differential* is the
-> covariance of fitness with a behaviour (Price), and the *gradient* the same
-> with the agent's wealth held fixed. Chance is fitness shuffled among the
-> agents of an iteration: its mean and spread are known exactly, so no shuffle
-> needs to be made.
+> [!info] What it found
 > - **Selection is plain.** In 3,631 of the 3,936 pairs of behaviour and era of
 >   the 82 worlds, the gradient lies more than 3.3 of chance's spreads from 0.
 >   Spreading the stake brings more descendants in 99% of the eras; more links
@@ -414,9 +398,10 @@ Six of the fourteen, in this order, each for a reason:
 1. **The era tournament.** Its tool is built, it uses data we have, and it
    answers the plainest question: did the brains get better?
 2. **The shadow world.** Minutes a world. It tells selection from luck, which
-   matters most where populations are small.
+   matters most where populations are small. Run on 12 November 2026.
 3. **Selection on behaviour, measured.** It names the behaviours selection
-   favoured, and checks that the population moved accordingly.
+   favoured, and checks that the population moved accordingly. Run on 12
+   November 2026.
 4. **The messages.** If a code evolved anywhere, it would be the most striking
    new thing round 3 could show.
 5. **Change, novelty, ecology, complexity.** One profile of open-endedness for
@@ -426,14 +411,6 @@ Six of the fourteen, in this order, each for a reason:
 
 The author read the fourteen on 9 November 2026 and found them right; of the
 ideas put before, the era contests were the one they liked best.
-
-> [!info] Added later, 12 November 2026: the second and third have been run
-> The shadow world and selection on behaviour were run on every world that
-> lived, on the brains' own family tree, together with a third reading the list
-> did not name: the line of descent's novelty against lines that only mutate.
-> Round 3 was then ranked by the four readings (with heredity on that tree),
-> each against chance
-> ([The evolution rank](candidates-for-open-ended-evolution.md#the-evolution-rank)).
 
 ## What it would take to say yes
 
@@ -445,13 +422,10 @@ selection and heredity predict (test 4). It would pass the test of
 come to rest by the last era (tests 1, 6 and 7), and something new appeared
 along the way (tests 8 to 11).
 
-> [!info] Added later, 12 November 2026: two of the three read
-> Lines spread faster than their shadows' in round 3 (test 3), and selection
-> on behaviour is plain (test 4); but the behaviours did not move where
-> selection points, and no line of descent found more new behaviour than
-> mutation alone would. So far round 3 shows selection that holds brains in
-> place rather than one that takes them somewhere. The era tournament (test 1)
-> is still to say whether the later brains are nonetheless better.
+Read on 12 November 2026, round 3 meets the second of the three but not the
+third: its behaviours did not move where selection points. Whether its later
+eras beat its earlier ones is Experiment 45's question
+([Did the brains get better?](round-3-eras-against-each-other.md)).
 
 ## Where to go next
 
@@ -475,17 +449,16 @@ the last thousand iterations of each shortlisted world (the field `_seconds`
 of each run's `stats.jsonl`, both phases of an iteration added). Contests play
 without recording [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."), so they run somewhat faster than that.
 
-Tests 3 and 4 were run on 12 November 2026 by
-`python3 research/screen/braintree.py`, which reads each world in one pass
-over its frames: the brain-copy tree, the shadows (`trace_back` and
-`era_clades`, whose shadow parents are a hash of the seed, the shadow and the
-copy, so that the walk back from the living and the count forward through
-each era meet the same parents), and the rows of test 4
-(`research/screen/selection.py`). The line of descent and its null lines are
-played by `research/screen/brainplay.py`. The readings are ranked by
-`research/screen/evolution.py` into `research/screen/evolution.json`. The 82
-worlds took about 4.6 hours on one process, in two goes (the drive holding 18
-of them failed in between), beside the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s two workers.
+Tests 3 and 4 were run on 12 November 2026 in the pass that makes the
+evolution rank
+([How this was made](candidates-for-open-ended-evolution.md#how-this-was-made)):
+`python3 research/screen/braintree.py` reads each world in one pass over its
+frames, and `research/screen/selection.py` makes the rows of test 4. A
+shadow's parents are a hash of the seed, the shadow and the copy, so that the
+walk back from the living (`trace_back`) and the count forward through each
+era (`era_clades`) meet the same parents. The 82 worlds took about 4.6 hours
+on one process, in two goes (the drive holding 18 of them failed in between),
+beside the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s two workers.
 
 **References.** Bedau, M. A. and Packard, N. H. (1992), Measurement of
 evolutionary activity, teleology, and life. Bedau, M. A., Snyder, E. and
@@ -506,3 +479,30 @@ evolution in *Escherichia coli*. Lewis, D. (1969), *Convention*. Lewontin, R. C.
 (1970), The units of selection. Maynard Smith, J. and Szathmáry, E. (1995),
 *The Major Transitions in Evolution*. Price, G. R. (1970), Selection and
 covariance. Skyrms, B. (2010), *Signals*.
+
+## How our view changed
+
+- **12 November 2026.** Written on 9 November 2026, this page said that a
+  world whose whole population descends from about fourteen ancestors can be
+  swept by a line that was only lucky, and that a child acts more like its
+  parent than like a stranger with a median heredity index of 0.39. Both
+  numbers were read on a family tree of births alone. On the brains' own
+  family tree the median world has an effective population of about 100,
+  against about 3,500 in its shadows, and a heredity index of 0.96
+  ([The brains' own family tree](candidates-for-open-ended-evolution.md#the-brains-own-family-tree)).
+  Tests 3 and 4 were run on that tree, and their How now says how. With them
+  came a reading the list did not name, the line of descent's novelty against
+  lines that only mutate, and round 3 was ranked by four readings, each
+  against chance, heredity on that tree among them
+  ([The evolution rank](candidates-for-open-ended-evolution.md#the-evolution-rank)).
+
+<!-- turns -->
+---
+
+← [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) →
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going), [Methods and statistics](../README.md#methods-and-statistics).
+
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Glossary](glossary.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

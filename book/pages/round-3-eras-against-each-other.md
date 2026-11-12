@@ -48,7 +48,6 @@ where conquests make most of the copies, the [median](statistics.md#many-worlds-
 So a line can sweep a world by luck, and a world's numbers alone cannot say
 whether its brains got better. The contests can.
 
-
 ## The plan
 
 - **The worlds:** the ten worlds the evolution rank puts first, leaving out
@@ -138,7 +137,8 @@ Its thesis stays as it was written:
 The plan is `book/experiments/E45.json`. `research/screen/evolution_plans.py`
 wrote it on 12 November 2026 from two files:
 - the evolution rank, `research/screen/evolution.json`, made by
-  `research/screen/braintree.py`;
+  `research/screen/evolution.py` from what `research/screen/braintree.py`
+  read;
 - health of 9 November, `research/screen/health.json`.
 
 Nothing was played before the plan was written. Experiment 44's plan,
@@ -161,3 +161,14 @@ worlds, one of them staking a token at a time.
 > [!info] The trials behind this page
 > None: withdrawn unplayed on 12 November 2026, with the author's agreement, after an independent review (11 November): health, which chose its 21 worlds, runs against heredity, generations and fertility in round 3, and the family trees behind that choice counted births only, though conquests copy brains more often. Experiment 45 plays the same tournament with three coins on each era's world, on the worlds the evolution rank puts first and on the healthiest and least healthy.
 <!-- /runs -->
+
+<!-- turns -->
+---
+
+← [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Round 3 of the random screen](../README.md#round-3-of-the-random-screen) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) →
+
+**Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
+
+> [!info]- Pages that link here (5)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+<!-- /turns -->

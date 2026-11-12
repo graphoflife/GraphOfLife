@@ -164,3 +164,14 @@ runs are done: its contests start from their kept worlds.
 >
 > To play these trials again: `python3 gol_lab.py run E47`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
+
+<!-- turns -->
+---
+
+← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [A source and a sink](a-source-and-a-sink.md) →
+
+**Also about:** [Changing the rules](../README.md#changing-the-rules).
+
+> [!info]- Pages that link here (1)
+> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md)
+<!-- /turns -->
