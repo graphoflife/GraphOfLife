@@ -241,13 +241,46 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
     return quote("\n".join(lines), "[!info]- The trials behind this page")
 
 
+def same_draws(name: str, other: str) -> bool:
+    """
+    Whether two screens drew the same worlds, seed for seed and setting for
+    setting, but for what each forces on all its worlds (`fixed`).
+    """
+    import gol_plan
+    a, b = read_json(f"experiments/{name}.json")["screen"], read_json(f"experiments/{other}.json")["screen"]
+    if any(a.get(k) != b.get(k) for k in ("sampler", "seed", "worlds", "tokens", "iterations", "skip",
+                                          "budget_hours", "forced", "references")):
+        return False
+    fixed = set(a.get("fixed") or {}) | set(b.get("fixed") or {})
+
+    def drawn(plan: str) -> List[Tuple[int, Dict[str, Any]]]:
+        return [(d["seed"], {k: v for k, v in d["set"].items() if k not in fixed})
+                for d in gol_plan.screen_draws(plan)]
+    return drawn(name) == drawn(other)
+
+
 def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
-    """The worlds of a screen: how their settings were drawn, and each one's, world by world."""
+    """
+    The worlds of a screen: how their settings were drawn, and each one's, world
+    by world; or, where the page has listed the same draws for another screen
+    already, what this one changed in all of them.
+    """
     import gol_plan
     import gol_screen
     sc = plan["screen"]
     found = gol_plan.screen_draws(name)
     ids = {s.lab["seed"]: s.run_id for s in gol_plan.experiment_runs(name)}
+    again = next((other for other in PAGE.setdefault("screens", []) if same_draws(name, other)), None)
+    PAGE["screens"].append(name)
+    if again:
+        fixed = "; ".join(f"`{key}` = {show(value)}" for key, value in sorted((sc.get("fixed") or {}).items()))
+        lines = [f"**{number(len(found))} worlds**: the worlds of Experiment {int(again[1:])} above, drawn "
+                 f"alike (sampler {sc['sampler']}, round seed {sc['seed']}) and played alike, "
+                 + (f"but with {fixed} in every world. " if fixed else "")
+                 + "Runs, world by world: " + ", ".join(f"`{ids[d['seed']]}`" for d in found) + ".\n",
+                 f"To make these worlds again: `python3 gol_lab.py run {name}`, or ▶ in the Research Notebook "
+                 "tab of a computer running `gol_server.py`."]
+        return quote("\n".join(lines), "[!info]- The worlds behind this page")
     budget = (f", or until {sc['budget_hours']:g} hours of playing have gone by: a world that slow stops "
               "as too slow" if sc.get("budget_hours") else "")
     how, only = gol_screen.WORDS[int(sc["sampler"])]
