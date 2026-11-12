@@ -1,8 +1,24 @@
 # Graph of Life — the Research Notebook
 
-This notebook is a research programme, written down while it is carried out:
-what the Graph of Life algorithm does, and whether a world of it can keep
-producing new things without end — what is called *[open-ended evolution](pages/measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.")*.
+This notebook is a research programme, written down while it is carried out.
+It asks one question: does any set of Graph of Life's rules make worlds that
+pass the notebook's test of *open-ended evolution* over 100,000 [iterations](pages/one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")?
+Open-ended evolution is evolution that keeps producing new things without end,
+and [What would count as open-ended evolution](pages/measuring-evolution.md#what-would-count-as-open-ended-evolution)
+writes the test down.
+
+- **What it asks now.** In every world played so far, evolution levels off.
+  Why? The candidates are drift, valleys that need a crowd to cross, a fixed
+  space of strategies, and a closed, zero-sum [game](pages/one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").
+- **How worlds are chosen.** By how they evolve first, against null models.
+  Health only rules out worlds that are dead, a [star](pages/measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen.
+- **When it changes course.** If the experiment on why evolution levels off
+  finds no arm that delays or lifts the plateau, the next step changes how a
+  world is built, with an open economy or [brains](pages/the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") that can grow, and not its
+  [settings](pages/settings.md "One number or switch of a run's rules, fixed before it starts.").
+- **A second aim.** Whether such rules grow a space of their own, with
+  particles in it, is a separate track with its own question, in its own
+  part.
 
 Start anywhere. Every page says what it asks, and every word that needs
 explaining links to the page that explains it. If you want a beginning, read
@@ -10,24 +26,28 @@ explaining links to the page that explains it. If you want a beginning, read
 pages on [how the simulation works](#how-the-simulation-works).
 
 - [What this notebook is about](pages/what-this-notebook-is-about.md): the
-  question, the world in one paragraph, and how to read and check a page.
+  question, why it is asked, and how to read and check a page.
+- [Candidates for open-ended evolution](pages/candidates-for-open-ended-evolution.md):
+  the worlds of round 3 that might keep evolving.
 - [Glossary](pages/glossary.md): every term in one line.
 - [How this notebook is written](pages/how-this-notebook-is-written.md): the
   rules of the research, and of its pages.
 - [The lab, the engine and pilots](pages/runs-and-records.md#the-lab-the-engine-and-pilots): how an experiment is run
   and made again.
 
-The pages fall into seven parts, each with its colour: where to start; the
+The pages fall into eight parts, each with its colour: where to start; the
 research of the moment, round 3 of the screen of random worlds and its
-[candidates](pages/one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."); the rules; what the worlds do; space and physics; the search for
-open-ended evolution that came before round 3; and methods and look-up, where
-every rule and measure is explained in detail. In the Research Notebook tab
-each part opens and shuts, every page wears its part's colour, and a mark says
-what kind of page it is: a study, an experiment, a plan not played yet, a
-reference page or a guide. The contents can also be sorted by date, by title
-or by kind, filtered, and searched. In **Obsidian**, open the folder `book/` as
-a vault: every link, figure and formula works there, and the graph view shows
-how the pages hang together.
+candidates for open-ended evolution; the rules; what the worlds do; space and
+physics; the search for open-ended evolution; methods and look-up, where every
+rule and measure is explained in detail; and the Archive. The Archive keeps
+frozen pages, what was done and found before 11 November 2026, so that every
+experiment can still be read and made again; it starts shut. In the Research
+Notebook tab each part opens and shuts, every page wears its part's colour, and
+a mark says what kind of page it is: a study, an experiment, a plan not played
+yet, a reference page or a guide. The contents can also be sorted by date, by
+title or by kind, filtered, and searched. In **Obsidian**, open the folder
+`book/` as a vault: every link, figure and formula works there, and the graph
+view shows how the pages hang together.
 
 ## Contents
 
@@ -44,7 +64,7 @@ how the pages hang together.
 
 ### Now: round 3 and its candidates
 
-🟨 The research of the moment: round 3 of the screen of random worlds, its healthiest worlds and its candidates for open-ended evolution, and what is played next.
+🟨 The research of the moment: round 3 of the screen of random worlds, its candidates for open-ended evolution, whether they evolved, and what is played next.
 
 #### Round 3 of the random screen
 
@@ -72,116 +92,58 @@ how the pages hang together.
 #### The baselines B1 and B2
 
 - [B1 and B2: the two baselines](pages/b1-and-b2.md)
-- [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
-- [The life of a B1 world](pages/a-worlds-life.md)
-- [How much does the seed decide?](pages/how-much-does-the-seed-decide.md)
-- [Building B2: a world that cannot break](pages/a-world-that-cannot-break.md)
 
 ### What the worlds do
 
-🟩 What the worlds turned out to do: lives, wealth, the game and its flows, the network, size, brains, and groups.
-
-#### Agents' lives: births, deaths, ages
-
-- [Births, deaths and ages](pages/births-deaths-and-ages.md)
-- [How births build the network](pages/how-agents-have-children.md)
+🟩 What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests. What B1's worlds did is in the Archive.
 
 #### Wealth: who holds the tokens
 
-- [How unequal is a world, and who stays rich](pages/where-do-the-tokens-go.md)
-- [Gains and losses: who gains, who loses, and the share-out](pages/gains-and-losses.md)
-- [The largest and the smallest](pages/the-largest-and-the-smallest.md)
 - [What keeps wealth spread?](pages/what-keeps-wealth-spread.md)
 
-#### The game and the flow of tokens
+#### Brains: what they are, and whether they matter
 
-- [Where tokens go](pages/where-tokens-go.md)
-- [How the game is played: what agents stake, and who wins the nodes](pages/how-the-game-is-played.md)
-- [Where tokens flow](pages/where-the-tokens-flow.md)
-- [Flow modules: the groups tokens stay in](pages/flow-modules.md)
-
-#### The shape and health of the network
-
-- [The shape of the network](pages/what-shape-does-the-network-take.md)
-- [Power laws, real and apparent, and how to fit one](pages/power-laws-real-and-apparent.md)
-- [How properties scale together](pages/how-properties-scale-together.md)
-- [How a world breaks](pages/how-a-world-breaks.md)
-
-#### Size and riches of a world
-
-- [What holds a world's size](pages/what-holds-a-worlds-size.md)
-- [Worlds of many sizes](pages/how-does-a-worlds-size-follow-its-tokens.md)
-
-#### Brains, and how alike agents are
-
-- [How alike the agents are](pages/how-alike-the-agents-are.md)
-- [Genotypes and lineages](pages/genotypes-and-lineages.md)
 - [What the brains are like](pages/what-the-brains-are-like.md)
-- [What agents say to each other](pages/what-agents-say-to-each-other.md)
 - [Do the brains matter?](pages/do-the-brains-matter.md)
 - [Brains replaced by their average](pages/brains-replaced-by-their-average.md)
-- [How different are the agents?](pages/how-different-are-the-agents.md)
 - [How big should a brain be?](pages/how-big-should-a-brain-be.md)
 
 #### Groups and cooperation
 
-- [Who helps whom](pages/who-helps-whom.md)
-- [Do agents cooperate? Help, kin and partners](pages/do-agents-cooperate.md)
 - [Other contests: a lottery, and alliances](pages/another-game.md)
-- [Gliders, and who helps whom](pages/gliders-and-who-helps-whom.md)
 
 ### Space and physics
 
-🟪 The second aim: whether a world grows a space of its own, what has no scale, locality, flows and particles.
+🟪 The second aim, a track with its own question: does a world grow a space of its own, with locality and particles in it?
 
 #### Space and dimension
 
 - [Physical inspiration](pages/physical-inspiration.md)
-- [Like next to like: how alike agents are at a distance](pages/like-next-to-like.md)
 - [Is a world a space? Dimension, and what folds it](pages/how-many-dimensions-does-a-world-have.md)
-- [Dimensions at scale](pages/dimensions-at-scale.md)
-- [Which properties have no scale?](pages/which-properties-have-no-scale.md)
 - [Local rules only](pages/local-rules-only.md)
 - [How far does a difference travel?](pages/how-far-does-a-difference-travel.md)
-- [A source and a sink](pages/a-source-and-a-sink.md)
 - [Particles: patterns that outlast what carries them](pages/particles.md)
 
 ### The search for open-ended evolution
 
-🟧 Everything tried before round 3 to make evolution go on: tests of evolution, rules changed alone and together, strategies written by hand, and the hunt for a healthy, rich world.
+🟧 How to tell whether evolution goes on and why it stops, strategies written by hand, rules without tuned numbers, and the open economy planned for when no setting lifts the plateau.
 
 #### Does evolution keep going?
 
 - [Does evolution keep going?](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
 - [Every era against three](pages/every-era-against-three.md)
-- [Assembly theory: how many steps to make a thing, and how many copies](pages/assembly-theory.md)
+- [A source and a sink](pages/a-source-and-a-sink.md)
 
 #### Changing the rules
 
-- [Rules in company](pages/rules-in-company.md)
-- [Revolutions, handover and gifts: the switches the world was built with](pages/the-switches-the-world-was-built-with.md)
 - [Rules without numbers](pages/rules-without-numbers.md)
-- [Who inherits?](pages/who-inherits.md)
-- [Brains mixed at birth, units that cost, an eye for raids on kin](pages/mixed-brains-costly-units.md)
-- [Links to strangers](pages/links-to-strangers.md)
-- [Brains mixed at birth, with every other rule](pages/mixing-with-every-other-rule.md)
-- [Eight switches at once, and how sixteen worlds can test them](pages/eight-switches-at-once.md)
 
 #### Strategies written by hand
 
 - [Can a strategy written by hand beat evolution?](pages/strategies-written-by-hand.md)
 - [What a brain can compute](pages/what-a-brain-can-compute.md)
-- [Why the raiders stopped winning](pages/does-evolution-close-the-door.md)
 - [One agent in a sea of average agents](pages/one-agent-in-a-sea-of-average-agents.md)
-
-#### Looking for a healthy, rich world
-
-- [Healthy and rich](pages/healthy-and-rich.md)
-- [Brains mixed at birth, in long worlds](pages/mixed-at-birth-ten-long-worlds.md)
-- [Who may be a mate](pages/mixed-at-birth-with-parents-as-mates.md)
-- [The candidates, played on and played again](pages/the-candidates-played-on.md)
-- [Room and riches for the steadiest world](pages/room-for-the-steadiest-world.md)
 
 ### Methods and look-up
 
@@ -189,10 +151,7 @@ how the pages hang together.
 
 #### Methods and statistics
 
-- [Every world side by side](pages/every-world-side-by-side.md)
 - [How worlds are measured](pages/how-worlds-are-measured.md)
-- [One world, many colours: what the viewer can colour by](pages/one-world-many-colours.md)
-- [What goes with what](pages/what-goes-with-what.md)
 - [Every simulation: what was run, and what was measured](pages/every-simulation.md)
 
 #### Reference: the rules and measures in detail
@@ -207,4 +166,37 @@ how the pages hang together.
 - [Measuring health: criteria, the health bar and diversity](pages/measuring-health.md)
 - [How runs are made, recorded and costed](pages/runs-and-records.md)
 - [Statistics: the tools of the notebook](pages/statistics.md)
+
+### Archive
+
+🗄️ Frozen pages, kept so that every experiment can still be read and made again: what was done and found before 11 November 2026. They are not brought up to date as the research moves on.
+
+#### B1, as described in October 2026
+
+- [What B1 is, and what stood in its way](pages/what-the-baseline-world-is.md)
+- [B1: lives and wealth](pages/b1-lives-and-wealth.md)
+- [B1: the game and its flows](pages/b1-the-game-and-its-flows.md)
+- [B1: the network, size and scaling](pages/b1-the-network-size-and-scaling.md)
+- [B1: brains, lineages and messages](pages/b1-brains-lineages-and-messages.md)
+
+#### Building B2, the healthy and rich search, and the pilots
+
+- [Building B2, and the search for a healthy, rich world](pages/building-b2-and-the-search-for-a-healthy-rich-world.md)
+- [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
+
+#### Side studies
+
+- [Cooperation, help and gliders (side study)](pages/cooperation-help-and-gliders.md)
+- [Space at scale (side study)](pages/space-at-scale.md)
+- [Measures, atlases and assembly (side studies)](pages/measures-atlases-and-assembly.md)
 <!-- /contents -->
+
+## How our view changed
+
+- **11 November 2026.** The front page now states the notebook's question as
+  it stands: the open-ended test over 100,000 iterations, why evolution levels
+  off, how worlds are chosen, when the notebook changes course, and the second
+  aim. Until then it said that the notebook asks what the Graph of Life
+  algorithm does, and whether a world of it can keep producing new things
+  without end. Since this day the pages fall into eight parts, the last an
+  Archive of frozen pages.

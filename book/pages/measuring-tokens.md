@@ -101,7 +101,7 @@ same agent may be picked twice.)
 Chance alone leaves a world unequal. A random exchange of tokens would leave
 a Gini of (*m* − 1)/(2*m* − 1), with *m* tokens per agent on average. That is
 0.40 at three tokens per agent, and 0.46 at seven
-([Too even, not too poor](healthy-and-rich.md#too-even-not-too-poor)).
+([Too even, not too poor](building-b2-and-the-search-for-a-healthy-rich-world.md#too-even-not-too-poor-healthy-and-rich)).
 
 #### The Gini coefficient: a worked example
 
@@ -136,7 +136,7 @@ above, rearranged, and it is recorded as `gini` after every phase.
 
 - In a settled B1 world of 100,000 tokens the Gini stays near 0.47. The
   thirty worlds lie between 0.40 and 0.55
-  ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
+  ([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
 - A healthy world must not be too even. Its Gini may be no lower than that
   of B2's most even world at the same iteration: 0.46 at iteration 2,000
   ([The six criteria](measuring-health.md#the-six-criteria)).
@@ -186,7 +186,7 @@ reads one point of it, the one people most often ask about.
 
 In a settled B1 world of 100,000 tokens the richest tenth hold about 42% of
 all tokens. Between worlds it ranges from 33% to 50%
-([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
+([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
 
 ### Tokens per agent: mean, median, extremes
 
@@ -215,10 +215,10 @@ values.
   agents. It rises when agents die and falls when they are born. A world
   holds 10,000 tokens unless its plan names another size. The thirty B1
   worlds of Experiment 10, which most measurements of B1 read, hold 100,000
-  ([Thirty worlds](a-worlds-life.md#thirty-worlds)). A settled B1 world has
+  ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). A settled B1 world has
   a mean of about 7 at 100,000 tokens, 9 at 10,000. B2's worlds hold only
   about three tokens per agent
-  ([Too even, not too poor](healthy-and-rich.md#too-even-not-too-poor)).
+  ([Too even, not too poor](building-b2-and-the-search-for-a-healthy-rich-world.md#too-even-not-too-poor-healthy-and-rich)).
 - **The median is the typical agent.** About 4.5 in a settled B1 world of
   100,000 tokens (5 at 10,000 tokens). The gap between mean and median is
   itself a reading of inequality. A few rich agents pull the mean up, and
@@ -228,13 +228,13 @@ values.
   some 2,100. At 10,000 tokens it holds about 7%, some 690, over the same
   iterations, 500 to 1,499. Over those worlds' longer settled life, to
   iteration 2,999, it holds about 8%, some 800
-  ([Inequality over time](where-do-the-tokens-go.md#inequality-over-time)).
+  ([Inequality over time](b1-lives-and-wealth.md#inequality-over-time)).
 - **The poorest is almost always 1.** An agent left with 0 tokens is removed
   by the cleanup at the end of the phase. So the poorest survivor holds at
   least 1 ([Births and the four ways to die](measuring-lives.md#births-and-the-four-ways-to-die)).
   Averaged over the settled life, the poorest agent of the median B1 world
   holds 1.001 tokens
-  ([The largest, over a world's life](the-largest-and-the-smallest.md#the-largest-over-a-worlds-life)).
+  ([The largest, over a world's life](b1-lives-and-wealth.md#the-largest-over-a-worlds-life)).
 
 #### Tokens per agent: an example
 
@@ -295,7 +295,7 @@ no questioner gets that low: the best needs 5/3 ≈ 1.67 questions on average.
 |---|---|---|---|
 | tokens over agents | τᵢ / *T*, one per agent | `tokenEntropy` | log₂ *n* (*n* agents) |
 | agents over degrees | share of agents with exactly *d* connections, one per *d* that occurs | `degreeEntropy` | log₂ (number of distinct degrees) |
-| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)) | log₂ *n* |
+| agents over genotypes | share of agents carrying genotype *g*, one per genotype | (computed for [How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)) | log₂ *n* |
 
 For tokens the question is: *if you pick one token at random, whose is it?*
 
@@ -316,7 +316,7 @@ log₂ of the number of distinct degrees.
 In a settled B1 world of 100,000 tokens the token evenness is 0.91. The
 degree evenness is only 0.47. Agents pile up on a few numbers of
 connections, while hubs add rare numbers that raise the ceiling
-([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
+([How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)).
 
 #### The effective number
 
@@ -333,7 +333,7 @@ equal shares, would spread the tokens as evenly as they are spread.
 
 The tokens of a settled B1 world are as even as if 47% of its agents held
 them in equal shares
-([Effective numbers](where-do-the-tokens-go.md#effective-numbers)). The
+([Effective numbers](b1-lives-and-wealth.md#effective-numbers)). The
 [diversity score](measuring-health.md#the-diversity-score) reads three of its four spreads in the
 same way.
 
@@ -346,7 +346,7 @@ is more sensitive to the many small holdings, and less to the few large ones.
 Two worlds with the same Gini can have different evenness. Across 1,200
 looks at thirty B1 worlds the two correlate at −0.72. But they do not lie on
 one curve
-([Two measures of the same inequality](where-do-the-tokens-go.md#two-measures-of-the-same-inequality)).
+([Two measures of the same inequality](b1-lives-and-wealth.md#two-measures-of-the-same-inequality)).
 
 #### Entropy in the code
 
@@ -411,7 +411,7 @@ the order tends to reverse.
 
 #### Where mobility is used
 
-[Do the rich stay rich?](where-do-the-tokens-go.md#do-the-rich-stay-rich)
+[Do the rich stay rich?](b1-lives-and-wealth.md#do-the-rich-stay-rich)
 measures all three in the baseline worlds.
 
 ## The even split
@@ -442,12 +442,12 @@ the τ tokens are split evenly
 2. the tokens left over, fewer than *d* + 1, go one each down the list of
    candidates. Their remainders are all equal, so the order of the list
    decides, and the agent's own node is first
-   ([Where the tokens flow](where-the-tokens-flow.md#how-widely-agents-stake)).
+   ([Where the tokens flow](b1-the-game-and-its-flows.md#how-widely-agents-stake)).
 
 With 3 tokens and one neighbour, an agent stakes 2 at home and 1 on the
 neighbour, so whole tokens tilt the split towards home. The share staked at
 home, by [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling), in the thirty baseline worlds of 100,000 tokens of
-Experiment 10 ([Thirty worlds](a-worlds-life.md#thirty-worlds)):
+Experiment 10 ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)):
 
 | connections | 1 | 2 | 3–4 | 5–9 | 10–49 | 50+ |
 |---|---|---|---|---|---|---|
@@ -467,7 +467,7 @@ their nearly blind brains give all candidates almost the same score
 
 In [B2](b1-and-b2.md#b2-a-world-that-cannot-break), where nearly every agent goes all in
 (spreading in 0.1–4% of cases), the even split hardly arises
-([How different are the agents?](how-different-are-the-agents.md)).
+([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)).
 
 ### A lazy random walk
 
@@ -478,7 +478,7 @@ at each step a token stays where it is or moves to a neighbour. The walk is
 *lazy* because staying is one of the choices.
 
 How close is the real game?
-[Where the tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)
+[Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)
 compares, agent by agent, the balance an exact even split would give with the
 real one. In the 23 worlds without a
 [star](measuring-networks.md#stars-and-hubs), the real balances follow the even split's with a
@@ -506,19 +506,19 @@ so every agent holds the same number of tokens for each of its candidates. The
 worlds come close. Among the 394,056 agents alive after the last game of the
 thirty, rest would mean 1.70 tokens per candidate; the mean of each class runs
 from 2.28 for agents with one connection to 1.43–1.51 for those with ten or
-more ([How properties scale together](how-properties-scale-together.md#tokens-and-connections)).
+more ([How properties scale together](b1-the-network-size-and-scaling.md#tokens-and-connections)).
 The network keeps changing under the tokens, so no world is ever quite at rest.
 
 ### Where it is used
 
-- [Where the tokens flow](where-the-tokens-flow.md#who-keeps-their-node): an
+- [Where the tokens flow](b1-the-game-and-its-flows.md#who-keeps-their-node): an
   agent keeps its node about as often as one of *d* + 1 equal stakers would:
   in 74% of games with one connection, 2.0% with fifty or more.
-- [Do the rich stay rich?](where-do-the-tokens-go.md#a-two-game-rhythm): on a hub
+- [Do the rich stay rich?](b1-lives-and-wealth.md#a-two-game-rhythm): on a hub
   and its leaves the even split overshoots, and wealth swings with a period of
   two games.
 - [Physical inspiration](physical-inspiration.md): an even split is one step of
-  the heat equation; [What goes with what](what-goes-with-what.md#token-curvature-and-token-change)
+  the heat equation; [What goes with what](measures-atlases-and-assembly.md#token-curvature-and-token-change)
   finds tokens running downhill at about a fifth of its pace.
 
 ## Measuring the flow: token flow, lightning and circulation
@@ -554,7 +554,7 @@ agents staked, and which connections the game cut.
 | `netFlowShare` | the share of `totalFlow` left after cancelling each pair's two directions against each other ([below](#cancelling-the-net-flow)) |
 | `flowImbalance` | the share of `totalFlow` that must flow one way ([The ceiling: what conservation forbids](#the-ceiling-what-conservation-forbids)) |
 | `spreadShare` | the share of the agents that staked who spread their tokens rather than going all in ([What a brain says](rules-in-detail.md#what-a-brain-says)) |
-| `revoltShare` | the share of all staked tokens, [home stakes](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node "The tokens an agent stakes on its own node, to keep it.") included, marked revolutionary ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)) |
+| `revoltShare` | the share of all staked tokens, home stakes included, marked revolutionary ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)) |
 | `prunedEdges` | the connections cut at the end of the game because nothing crossed them ([Why flow matters](#why-flow-matters)) |
 
 A run records the first three and the last three after every game. The
@@ -613,17 +613,17 @@ reshuffled.
   its tokens at home in a game. Another 51% are matched by a stake coming
   back, and 20% go one way (49% and 21% at 10,000 tokens). So `totalFlow` is
   about 71% of the tokens, and `netFlowShare` about 0.28
-  ([The budget of a game](where-the-tokens-flow.md#the-budget-of-a-game)).
+  ([The budget of a game](b1-the-game-and-its-flows.md#the-budget-of-a-game-where-tokens-flow)).
 - **The connections.** Two connections in three carry one or two tokens a
   game, most of them one each way. In B1, every connection that carried
   nothing is cut
-  ([What crosses a connection](where-the-tokens-flow.md#what-crosses-a-connection)).
+  ([What crosses a connection](b1-the-game-and-its-flows.md#what-crosses-a-connection)).
 - **B2.** In B2's worlds almost nothing cancels: `netFlowShare` is about
   0.95. A connection there can survive unused, and agents stake mostly on
   others who do not stake back
-  ([Every world](where-the-tokens-flow.md#every-world)).
+  ([Every world](b1-the-game-and-its-flows.md#every-world)).
 - **The viewer** can colour every connection by its token flow, both
-  directions together ([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)).
+  directions together ([What the viewer can colour by](measures-atlases-and-assembly.md#what-the-viewer-can-colour-by)).
 
 ### Lightning: tokens that go round
 
@@ -735,14 +735,14 @@ A run records these statistics after the games of every 25th iteration
   stake is a loop of two. So between 72% and 77% of the flow as staked goes
   round, yet the greedy peel finds only 13%: a weak floor. After cancelling,
   it finds 0.3% of the net flow on loops, where the ceiling allows 16%
-  ([Do tokens go round?](where-the-tokens-flow.md#do-tokens-go-round)).
-- **Every world.** [Lightning in every world](where-the-tokens-flow.md#lightning-in-every-world)
+  ([Do tokens go round?](b1-the-game-and-its-flows.md#do-tokens-go-round)).
+- **Every world.** [Lightning in every world](b1-the-game-and-its-flows.md#lightning-in-every-world)
   reads the floor in every world the notebook has made. One rule decides how
   much goes round: whether a connection must carry tokens to survive. And the
   longest loop found is as long as a world is wide.
 - **Over many games.** The greedy count of single games is set beside the
   exact split of fifty games in
-  [A greedy count and an exact one](where-the-tokens-flow.md#a-greedy-count-and-an-exact-one).
+  [A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one).
   The split is explained under [Flows that go round](#flows-that-go-round).
 - **A yardstick for evolution.** How much of the flow goes round is one
   statistic that might keep rising in a world that keeps evolving
@@ -847,7 +847,7 @@ on it alone would go round, as a share of the whole energy. In the example it
 is $(9 + 9 + 1)/3/23 = 19/69 \approx 0.28$. Averaging over all sixteen ways of
 flipping the four directions gives the same. In a world it is estimated by
 flipping the directions at random a few times: four, in
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go).
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#where-the-tokens-go).
 
 The example's 0.71 is far above both levels: its flow goes round. A share
 *below* the sign-flip level means the opposite. The flow's directions line up
@@ -858,7 +858,7 @@ downhill more than chance: tokens run from some agents to others.
 A ring that is there in one stretch of games and gone in the next is an
 accident of those games. A ring that **persists** is a structure. Split the
 flow of two consecutive stretches, 50 games each in
-[Gliders, and who helps whom](gliders-and-who-helps-whom.md). Then, over the
+[Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom). Then, over the
 connections both stretches used, take the correlation of their circulations,
 and of their gradient parts. A correlation near zero means each stretch's
 rings are new. A positive one means rings or slopes that come back on the
@@ -875,15 +875,15 @@ another. Bronisław Malinowski described the classic case in *Argonauts of the
 Western Pacific* (1922): the Kula ring, whose armshells and necklaces pass
 from island to island.
 
-- [Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go)
+- [Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go)
   splits the flow of 50 games in the twenty worlds of B1 and B2. Gifts run
   downhill; takeovers go round, but never twice in the same place.
-- [A greedy count and an exact one](where-the-tokens-flow.md#a-greedy-count-and-an-exact-one)
+- [A greedy count and an exact one](b1-the-game-and-its-flows.md#a-greedy-count-and-an-exact-one)
   sets this split beside the greedy count of
   [Lightning](#lightning-tokens-that-go-round). Over fifty games, 80% of
   B1's net flow circulates, by energy, where random flow on the same network
   would circulate about 60%.
-- [Help](do-agents-cooperate.md#help) splits the net help between agents the same way, to look
+- [Help](cooperation-help-and-gliders.md#help) splits the net help between agents the same way, to look
   for help that goes round.
 
 #### What it can and cannot say
@@ -906,22 +906,22 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
 
 ## Where to go next
 
-- [How unequal is a world, and who stays rich](where-do-the-tokens-go.md):
+- [How unequal is a world, and who stays rich](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich):
   each of these measures, read in thirty B1 worlds.
 - [Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions):
   the effective number beside other ways of counting kinds.
 - [What a run records](runs-and-records.md#what-a-run-records): every number recorded after a
   phase, these among them.
 - [Splitting tokens into whole numbers](rules-in-detail.md#splitting-tokens-into-whole-numbers): the rounding.
-- [Where the tokens flow](where-the-tokens-flow.md): the random walk, measured.
+- [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): the random walk, measured.
 - [What the brains are like](what-the-brains-are-like.md): why brains score
   alike.
 - [Stars and hubs](measuring-networks.md#stars-and-hubs): where the walk fits worst.
-- [Gliders, and who helps whom](gliders-and-who-helps-whom.md#where-the-tokens-go):
+- [Gliders, and who helps whom](cooperation-help-and-gliders.md#where-the-tokens-go):
   the flow of fifty games split exactly, gifts and takeovers apart.
-- [Flow modules: the groups tokens stay in](flow-modules.md): who trades with
+- [Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in): who trades with
   whom, and for how long.
-- [Where tokens go](where-tokens-go.md): every measure of the flow in the
+- [Where tokens go](b1-the-game-and-its-flows.md#where-tokens-go): every measure of the flow in the
   notebook, side by side.
 
 ## How our view changed
@@ -973,3 +973,14 @@ The rest is circulation. So coherent routes, not only closed rings, raise the sh
   Technical Journal* 27, 379–423 and 623–656.
 - Shorrocks, A. F. (1978). The measurement of mobility. *Econometrica* 46,
   1013–1024.
+
+<!-- turns -->
+---
+
+← [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) →
+
+**Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Methods and statistics](../README.md#methods-and-statistics), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
+
+> [!info]- Pages that link here (19)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

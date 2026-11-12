@@ -232,7 +232,7 @@ tests look for behaviour that uses them in ways nobody wrote in.
   listeners use it. That would be the evolution of communication.
 - **No would look like:** listeners ignore the messages, or the messages are
   noise. In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") the messages were only the sender's name, a label of its
-  genotype ([What agents say to each other](what-agents-say-to-each-other.md)).
+  genotype ([What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other)).
 - **Cost:** modest: tests on the kept brains.
 - **From:** the signalling games of Lewis (1969) and Skyrms (2010).
 
@@ -247,7 +247,7 @@ tests look for behaviour that uses them in ways nobody wrote in.
   Hamilton's rule predicts.
 - **No would look like:** gifts go to whoever is near, kin or not, as
   stakes do in B1, whose brains stake on kin as on strangers
-  ([Do agents cooperate?](do-agents-cooperate.md)).
+  ([Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)).
 - **Cost:** small: the record and the family tree.
 - **From:** Hamilton (1964).
 

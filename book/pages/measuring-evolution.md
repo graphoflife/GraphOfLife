@@ -95,7 +95,7 @@ Two different counts follow:
   ([Brain diversity](#brain-diversity)).
 
 A settled B1 world of some 14,400 agents holds about 9,000 different
-genotypes at once ([Genotypes and lineages](genotypes-and-lineages.md)).
+genotypes at once ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 #### The family tree
 
@@ -134,7 +134,7 @@ counted as an agent's lifetime is ([Age and lifetime](measuring-lives.md#age-lif
 Genotypes are short-lived. In the B1 worlds of 100,000 tokens the median
 genotype lasts two iterations. Of the agents that live through their first
 game, 48% last at least ten
-([Genotypes and lineages](genotypes-and-lineages.md)).
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 ### Families
 
@@ -186,9 +186,9 @@ passes through a birth. The climb usually goes a few steps.
 Other pages fix the ancestors at another moment, with the same idea:
 
 - the genotypes alive 100 iterations earlier
-  ([One world, many colours](one-world-many-colours.md));
+  ([One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by));
 - those alive at one chosen iteration
-  ([Genotypes and lineages](genotypes-and-lineages.md));
+  ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages));
 - the founders ([Muller plots](#muller-plots)).
 
 #### Early in a run
@@ -198,12 +198,12 @@ climb ends at the founders, and the count is how many of them still have
 descendants. In the median B1 world of 100,000 tokens, around iteration
 8, the living descend from about 390 of the 1,000 founders. The worlds of
 10,000 tokens kept about 19 of their 100
-([The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations)).
+([The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations)).
 
 Later the count rises again, as the surviving lines branch. From iteration
 100 on, the B1 worlds hold a median of 3,300 families at 100,000 tokens, and
 315 at 10,000. Experiment 6 tested its thesis on this count
-([Genotypes and lineages](genotypes-and-lineages.md)).
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 #### Families in the code
 
@@ -243,15 +243,15 @@ H. J. Muller, who drew such pictures in 1932.
 
 A line spreads in two ways in Graph of Life. One is births. The other, far
 more often, is winning nodes in the game, which copies its brain onto the
-conquered node ([How the game is played](how-the-game-is-played.md)). A
+conquered node ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). A
 Muller plot does not tell the two apart.
 
 #### Where Muller plots are used
 
-- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations):
+- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations):
   the lines of the 100 founders in the first 300 iterations of the world with
   seed 1.
-- [Genotypes and lineages](genotypes-and-lineages.md): the families of the
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): the families of the
   genotypes alive at a later moment, in two worlds.
 
 ### The common ancestor of the living
@@ -327,7 +327,7 @@ line: one genotype, a few iterations ago, took over — a **sweep**. A deep one
 means several lines have coexisted for a long time. In B1 the depth for all
 of the living rises and falls in a saw-tooth. It grows by one per iteration
 while no line takes over, and drops when one does
-([Genotypes and lineages](genotypes-and-lineages.md)).
+([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)).
 
 From iteration 500 on, all the living of the B1 worlds of 100,000 tokens
 shared one ancestor a median of 946 iterations back. For many worlds that is
@@ -335,7 +335,7 @@ the age of the world itself, since their living did not yet all descend from
 one founder. Nine in ten shared one from 745 iterations back, and half from
 468 (at 10,000 tokens: 730, 590 and 300). The first drop is the moment
 everyone alive descends from one founder
-([One founder for everyone](a-worlds-life.md#one-founder-for-everyone)).
+([One founder for everyone](b1-lives-and-wealth.md#one-founder-for-everyone)).
 [Do the brains matter?](do-the-brains-matter.md) counts the drops in worlds
 whose brains never change. Once one founder's line fills such a world, every
 sweep is chance.
@@ -356,7 +356,7 @@ genotypes, in every frame.
 - `brainDiversity` = 1 means no two agents share a genotype; a small value
   means a few genotypes have been copied over much of the world. A settled
   B1 world has about 0.63: on average a genotype is carried by about 1.6
-  agents ([Genotypes and lineages](genotypes-and-lineages.md)). In B2, where
+  agents ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages)). In B2, where
   a brain changes only when it is copied, ten worlds of 10,000 tokens held
   0.46 ([How fast should brains change?](how-fast-should-brains-change.md)).
 - `distinctParents` looks one step up the family tree. It is deliberately
@@ -388,7 +388,7 @@ genotypes are as diverse as four equally common ones would be.
 
 In a settled B1 world the effective number is about 0.45 per agent at 100,000
 tokens, and 0.49 at 10,000. The distinct genotypes number 0.63 per agent at
-both sizes ([How even is a world?](where-do-the-tokens-go.md#how-even-is-a-world)).
+both sizes ([How even is a world?](b1-lives-and-wealth.md#how-even-is-a-world)).
 
 #### A caution about names
 
@@ -397,7 +397,7 @@ A genotype number changes whenever a brain is offered a change and takes it
 changes nothing, yet the number still changes. Counting genotypes counts
 names; whether different names are different brains has to be checked
 separately ([Do the brains matter?](do-the-brains-matter.md)).
-[How different are the agents?](how-different-are-the-agents.md) counts kinds
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) counts kinds
 of behaviour instead, and compares them with the genotypes.
 
 ## Eras, contests and invasions: does a world keep getting better?
@@ -687,7 +687,7 @@ solved, but not that it is.
   builds the yardstick on B1, and
   [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)
   applies it to B2. [Every era against three](every-era-against-three.md)
-  plays fixed eras. [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why)
+  plays fixed eras. [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why)
   compares rules by their contests. [Pilot worlds](runs-and-records.md#pilot-worlds) plays
   the eras of pilots.
 - **Exploitability.**
@@ -695,14 +695,14 @@ solved, but not that it is.
   measures it era by era in Experiment 16's B2 worlds.
   [How much room is left](every-era-against-three.md#how-much-room-is-left)
   measures it in every long world.
-  [Why the raiders stopped winning](does-evolution-close-the-door.md#what-we-expected-of-older-worlds)
+  [Why the raiders stopped winning](strategies-written-by-hand.md#what-we-expected-of-older-worlds)
   builds Experiment 30's expectation on it.
 - **The invasion test.**
   [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
   plants the first strategies, and measures how large a crowd the raider
   needs (Experiment 29). [What a brain can compute](what-a-brain-can-compute.md)
   plants a brain that plays the raider.
-  [Why the raiders stopped winning](does-evolution-close-the-door.md) plants
+  [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning) plants
   raiders in older worlds, crews of raiders and raiders that breed
   (Experiments 30, 33 and 34). It also plants them in B1 (Experiment 35).
   [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots) explains how the lab plays
@@ -770,7 +770,7 @@ other in the same world, and scores the share of it the later one holds.
 3. **It keeps doing new things.** New kinds of behaviour appear faster than
    they would by mutation alone, and the old ones do not simply come back.
    - Kinds of behaviour means two things. One is kinds of staking
-     ([How different are the agents?](how-different-are-the-agents.md)). The
+     ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). The
      other is the signatures of the strategies written by hand: how a
      strategy answers a fixed set of situations
      ([What a brain can compute](what-a-brain-can-compute.md)).
@@ -779,7 +779,7 @@ other in the same world, and scores the share of it the later one holds.
      selection.
    - A world whose kinds come and go in a cycle does not pass.
 4. **It stays a world in which much can happen**
-   ([Healthy and rich](healthy-and-rich.md)):
+   ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)):
    - it never falls to 20 agents;
    - it meets every mark of the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.") at every 10,000 iterations;
    - its agents are more diverse than those of B2's median world;
@@ -844,18 +844,18 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 
 ### Where it is used
 
-- [Assembly theory](assembly-theory.md): the index and the assembly of the
+- [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): the index and the assembly of the
   ego networks of B1, B2 and round 3, each against its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") and four
   networks with no history; and why a genotype's path in the family tree
   gives no index worth the name.
 
 ## Where to go next
 
-- [Genotypes and lineages](genotypes-and-lineages.md): all of these at work in
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): all of these at work in
   the B1 worlds — how long genotypes last, and how lines take worlds over.
 - [How a brain changes](rules-in-detail.md#how-a-brain-changes): when a brain changes in B1 and in B2,
   and what a change does to it.
-- [One world, many colours](one-world-many-colours.md): families drawn in
+- [One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by): families drawn in
   colour on the network itself.
 - [What a run records](runs-and-records.md#what-a-run-records): the frames and statistics that
   all these counts are read from.
@@ -867,9 +867,9 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
   the first invasion tests, and what a raider needs to win.
 - [What a brain can compute](what-a-brain-can-compute.md): the strategies
   whose signatures count as new things.
-- [Healthy and rich](healthy-and-rich.md): what a world in which much can
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): what a world in which much can
   happen looks like.
-- [Assembly theory](assembly-theory.md): how many steps an agent's
+- [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): how many steps an agent's
   neighbourhood takes to make, and how many agents share its shape.
 
 ## How our view changed
@@ -939,3 +939,14 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 - Sharma, A., Czégel, D., Lachmann, M., Kempes, C. P., Walker, S. I. and
   Cronin, L. (2023). Assembly theory explains and quantifies selection and
   evolution. *Nature* 622, 321–328.
+
+<!-- turns -->
+---
+
+← [Measuring space: dimension and the random twin](measuring-space.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) →
+
+**Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter), [How the simulation works](../README.md#how-the-simulation-works), [Does evolution keep going?](../README.md#does-evolution-keep-going), [Methods and statistics](../README.md#methods-and-statistics), [Strategies written by hand](../README.md#strategies-written-by-hand), [Start here](../README.md#start-here).
+
+> [!info]- Pages that link here (35)
+> [Welcome](../README.md) · [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

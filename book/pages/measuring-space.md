@@ -120,7 +120,7 @@ In [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is 
 from −1.7 in the starting ring after the first [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."). There it mostly means
 that the bushy neighbourhoods of hubs fill a ball's first steps, and the
 growth slows after them. Read it as "the growth slows", not as a sphere
-([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
+([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
 
 #### A caution
 
@@ -136,7 +136,7 @@ that holds steady over many scales
 
 - **The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.** In B1's worlds of 100,000 tokens the dimension is
   3.4 in the median world (3.0 at 10,000 tokens).
-  [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)
+  [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)
   reads it beside a picture of the ball growth itself.
 - **The health bar** asks for a dimension of 2.3 to 4
   ([The health bar](measuring-health.md#the-health-bar)). It cannot tell a space from a small
@@ -235,7 +235,7 @@ whose dimension is known, of about 2,000 points each. By walks, a ring reads
 B1's worlds of 100,000 tokens read 1.9 by walks, flat from 4 to 160 steps,
 against 2.8 by balls. They have room, but dead ends and narrow passages slow
 a walker. In the game, tokens move almost as a random walk would
-([Where the tokens flow](where-the-tokens-flow.md#the-game-as-a-random-walk)).
+([Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
 So a difference in tokens spreads slowly through these worlds too.
 
 ### Box dimension
@@ -292,7 +292,7 @@ after its last game. Of size 1, every agent is a box alone:
 On logarithmic axes these lie close to a line of slope about −2: a box
 dimension of about 2. The world of seed 1 at 100,000 tokens, 14,870 agents,
 reads 1.70
-([Covering a world with boxes](what-shape-does-the-network-take.md#covering-a-world-with-boxes)).
+([Covering a world with boxes](b1-the-network-size-and-scaling.md#covering-a-world-with-boxes)).
 
 #### Reading the R²
 
@@ -310,7 +310,7 @@ same worlds. Over the thirty worlds it runs from 1.66 to 2.58, and in worlds
 of 10,000 tokens it is 1.85. The two dimensions look at different scales. Box
 covering runs to size 33, and at large sizes it counts the long, thin
 branches
-([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
+([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
 
 ## The random twin: is a world a space?
 
@@ -405,19 +405,19 @@ by the rule that made them. The line of 1.5 lies between the two.
 ### Where it is used
 
 - [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world): B1's worlds and their
+  and [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world): B1's worlds and their
   cores have a dimension; their twins have none.
-- [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world): a B1 world with a
+- [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world): a B1 world with a
   mean [path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap) of 27.9 steps, against 6.0 when wired at
   random.
 - [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): the width of every kind of
   world, and what folds it.
-- [Healthy and rich](healthy-and-rich.md), [Rules in company](rules-in-company.md)
-  and [The candidates, played on](the-candidates-played-on.md): which worlds
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich), [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)
+  and [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again): which worlds
   are spaces.
-- [Room for the steadiest world](room-for-the-steadiest-world.md),
-  [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours) and
-  [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds):
+- [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world),
+  [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours) and
+  [The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds):
   theses that ask for a width of at least 1.5.
 - [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
   [A screen of random worlds](a-screen-of-random-worlds.md): the criterion
@@ -427,7 +427,7 @@ by the rule that made them. The line of 1.5 lies between the two.
 
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
   the rulers on the worlds, and what folds a world into a small world.
-- [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world):
+- [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world):
   the viewer's measures on the baseline worlds.
 - [Physical inspiration](physical-inspiration.md#space-made-of-relations): why
   the notebook asks how many dimensions a world has.
@@ -471,3 +471,14 @@ by the rule that made them. The line of 1.5 lies between the two.
   networks. *Nature* 433, 392–395.
 - Wolfram, S. (2020). A class of models with the potential to represent
   fundamental physics. *Complex Systems* 29(2), 107–536.
+
+<!-- turns -->
+---
+
+← [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) →
+
+**Also about:** [Space and dimension](../README.md#space-and-dimension).
+
+> [!info]- Pages that link here (12)
+> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

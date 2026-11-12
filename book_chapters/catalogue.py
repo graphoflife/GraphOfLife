@@ -18,11 +18,13 @@ import subprocess
 from typing import Any, Dict, List, Set, Tuple
 
 import book_figures as F
+import gol_store
 from book_figures import chapter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOOK = os.path.join(ROOT, "book")
-RUNS = os.path.join(ROOT, "GraphOfLifeRuns")
+#: The runs folder, wherever GOL_RUNS_DIR puts it, as for every other figure.
+RUNS = gol_store.BASE_DIR
 PILOTS = os.path.join(RUNS, ".pilots")
 JOBS = os.path.join(ROOT, "research", "oee", "pilots")
 #: Settings that say how a world is kept, not what happens in it.
@@ -40,35 +42,37 @@ BATCHES: Dict[str, Tuple[str, List[str]]] = {
           ["another-game", "rules-without-numbers"]),
     "S": ("The switches the world was built with (revolutions, gifts, lapsing links, estates by wealth) and other "
           "contests (a lottery, sides pooled by genotype or family, kin and family senses)",
-          ["the-switches-the-world-was-built-with", "another-game"]),
+          ["what-the-switches-did-in-pilots", "another-game"]),
     "L": ("Long runs: Experiment 16's B2 worlds played on to 10,000 iterations, B1 to 10,000, B1 without "
           "revolutions to 3,000", ["how-to-tell-a-world-that-keeps-evolving", "a-hundred-thousand-iterations"]),
     "P": ("Two inputs (where my brain came from, who helped me) and links that hold a token",
-          ["rules-without-numbers", "gliders-and-who-helps-whom"]),
+          ["rules-without-numbers", "cooperation-help-and-gliders"]),
     "Q": ("Brains mixed at birth, brain units that hold a token, an eye for raids on kin, and links that hold a "
-          "token without old age", ["mixed-brains-costly-units"]),
-    "R": ("Who inherits the estate of the dead: the poorest, the newborns, their parents", ["who-inherits"]),
-    "T": ("Gifts together with each other switch", ["the-switches-the-world-was-built-with"]),
-    "U": ("Eight switches in combination on B2: a fractional factorial design", ["eight-switches-at-once"]),
-    "V": ("Eight switches in combination on B1: a fractional factorial design", ["eight-switches-at-once"]),
-    "W": ("No revolutions together with each other switch, on B2", ["the-switches-the-world-was-built-with"]),
-    "X": ("Handover together with each other switch, on B2", ["the-switches-the-world-was-built-with"]),
-    "Y": ("Brains mixed at birth together with each other switch, on B2", ["mixing-with-every-other-rule"]),
+          "token without old age", ["what-the-switches-did-in-pilots"]),
+    "R": ("Who inherits the estate of the dead: the poorest, the newborns, their parents", ["what-the-switches-did-in-pilots"]),
+    "T": ("Gifts together with each other switch", ["what-the-switches-did-in-pilots"]),
+    "U": ("Eight switches in combination on B2: a fractional factorial design", ["what-the-switches-did-in-pilots"]),
+    "V": ("Eight switches in combination on B1: a fractional factorial design", ["what-the-switches-did-in-pilots"]),
+    "W": ("No revolutions together with each other switch, on B2", ["what-the-switches-did-in-pilots"]),
+    "X": ("Handover together with each other switch, on B2", ["what-the-switches-did-in-pilots"]),
+    "Y": ("Brains mixed at birth together with each other switch, on B2", ["what-the-switches-did-in-pilots"]),
     "K": ("Links to strangers on B2: every search (jump, walk, reach) with every steering and consent",
-          ["links-to-strangers"]),
+          ["what-the-switches-did-in-pilots"]),
     "Z": ("Settings drawn at random from every value the notebook has used, the values that make worlds worse "
-          "dropped round after round (research/oee/search.md)", []),
+          "dropped round after round (research/oee/search.md)", ["building-b2-and-the-search-for-a-healthy-rich-world"]),
     "LC": ("The candidates, the worlds closest to the author's picture of one that might keep evolving, played on "
-           "to 10,000 iterations", ["healthy-and-rich", "the-candidates-played-on"]),
+           "to 10,000 iterations", ["building-b2-and-the-search-for-a-healthy-rich-world"]),
     "SW": ("Mixing switched at a moment: off in the five worlds of Experiment 17 that met every mark, at 5,000; on "
-           "in five of B2's worlds, at 2,000", ["mixed-at-birth-ten-long-worlds"]),
+           "in five of B2's worlds, at 2,000", ["building-b2-and-the-search-for-a-healthy-rich-world"]),
     "M": ("Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, "
           "searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as "
-          "mates (MP) and a bought life (BL)", ["what-holds-a-worlds-size", "mixed-at-birth-with-parents-as-mates"]),
+          "mates (MP) and a bought life (BL)", ["building-b2-and-the-search-for-a-healthy-rich-world"]),
     "YB": ("Who breeds: only the young or only the old, in B2 and in B2 with brains mixed at birth",
            ["how-many-dimensions-does-a-world-have"]),
     "BIG": ("B2 at 100,000 tokens, one world to 1,000 iterations", ["how-many-dimensions-does-a-world-have"]),
 }
+#: More conditions than this, each a world played again with settings of its own, are named, not spelt out.
+MANY = 8
 #: Batches whose every world draws settings of its own: one line in the table of conditions.
 DRAWN = {"Z": "each world its settings drawn at random from the values the notebook has used (research/oee/search.md)"}
 #: The measures, by what to call them; each finds the worlds it was taken on.
@@ -172,6 +176,11 @@ def lab_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any]]:
             rows.append(_trial_row(plan, chapters, by_experiment))
             measures.append([name] + ["" for _ in MEASURES])
             continue
+        if "screen" in plan:
+            row, present = _screen_row(plan, chapters, by_experiment)
+            rows.append(row)
+            measures.append([name] + [str(sum(i in done[m] for i in present)) for m in MEASURES])
+            continue
         spec, borrowed = plan.get("runs"), None
         while isinstance(spec, str):
             borrowed = spec.replace("same as ", "")
@@ -185,6 +194,10 @@ def lab_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         for c in spec["conditions"]:
             changed = ", ".join(f"{k} = {_show(v)}" for k, v in (c.get("set") or {}).items())
             conditions.append(f"*{c['name']}*" + (f" ({changed})" if changed else ""))
+        if len(conditions) > MANY:
+            # Worlds played again, each with settings of its own: their names, and the page for the rest.
+            conditions = [f"{len(conditions)} conditions, each a world with its own settings (every setting on "
+                          "the page): " + ", ".join(f"*{c['name']}*" for c in spec["conditions"])]
         tokens = spec["world"]["total_tokens"]
         rows.append([name, plan["title"], spec["baseline"],
                      ("the runs of " + borrowed + "; " if borrowed else "") + "; ".join(conditions),
@@ -197,6 +210,29 @@ def lab_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any]]:
             "runs on disk", "page"]
     return ({"head": head, "rows": rows},
             {"rows": measures})
+
+
+def _screen_row(plan, chapters, by_experiment) -> Tuple[List[Any], List[str]]:
+    """A round of the screen of random worlds (gol_screen.py): its drawn worlds, and the runs of them on disk."""
+    import gol_plan
+    name, sc = plan["id"], plan["screen"]
+    found = gol_plan.screen_draws(name)
+    ids = [r.run_id for r in gol_plan.experiment_runs(name)]
+    present = [i for i in ids if os.path.exists(os.path.join(RUNS, i, "meta.json"))]
+    seeds = sorted(int(d["seed"]) for d in found)
+    what = (f"{len(found):,} worlds, each with its settings drawn at random (sampler {sc['sampler']}, "
+            f"round seed {sc['seed']})")
+    refs = sc.get("references") or {}
+    if refs:
+        what += "; beside them " + ", ".join(f"{n} world{'s' if n > 1 else ''} of {base}" for base, n in refs.items())
+    if sc.get("skip"):
+        what += f"; {len(sc['skip'])} of the {sc['worlds']} drawn given up unplayed"
+    if plan.get("withdrawn"):
+        what += "; withdrawn unplayed"
+    row = [name, plan["title"], "B1, as drawn", what, f"{seeds[0]}–{seeds[-1]}" if seeds else "—",
+           f"{int(sc['tokens']):,}", f"{int(sc['iterations']):,}", str(len(present)),
+           _cell_chapters([by_experiment[name]] if name in by_experiment else [], chapters)]
+    return row, present
 
 
 def _trial_row(plan, chapters, by_experiment) -> List[str]:
@@ -364,6 +400,6 @@ def catalogue(ch: F.Chapter) -> None:
     ch.number("table:measures", {"head": ["", *MEASURES],
                                  "rows": lab_measures["rows"] + pilot_measures["rows"]})
     ch.number("totals", {"lab experiments": len(lab["rows"]),
-                         "lab runs on disk": sum(int(r[7]) for r in lab["rows"]),
+                         "lab runs on disk": sum(int(r[7]) for r in lab["rows"] if str(r[7]).isdigit()),
                          "pilot batches": len(pilots["rows"]),
                          "pilot worlds": sum(int(r[3]) for r in pilots["rows"])})

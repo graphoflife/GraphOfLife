@@ -42,7 +42,7 @@ whether its brains got better. The contests can.
 
 ## The plan
 
-- **The worlds:** the 21 of round 3's shortlist, every [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") among the
+- **The worlds:** the 21 of round 3's shortlist, every candidate among the
   first 13 of any of health's three orders
   ([The shortlist](candidates-for-open-ended-evolution.md#the-shortlist)),
   each with its own rules and its own kept worlds.

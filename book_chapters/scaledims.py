@@ -468,7 +468,7 @@ def e08_text(rows: List[Dict[str, Any]]) -> str:
     runs = [w["run"] for w in rows if w["experiment"] == "E08"]
     return (f"The {len(runs)} baseline worlds of Experiment 8 that lived to iteration 600 — B1 at 1,600 to 409,600 "
             f"tokens, seeds 1 to 3, of which one world of 1,600 tokens and all of 3,200 tokens and more (`{runs[0]}`, "
-            f"`{runs[1]}` … `{runs[-1]}`; [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md); "
+            f"`{runs[1]}` … `{runs[-1]}`; [Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); "
             "`python3 gol_lab.py run E08`), after the game of iteration 599.")
 
 

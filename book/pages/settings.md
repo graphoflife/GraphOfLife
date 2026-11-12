@@ -105,7 +105,7 @@ one token, so a world can never hold more than *T* agents.
 
 The pages on how the simulation works teach with *T* = 10,000. The study of
 the baseline uses *T* = 100,000.
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 varies it from 800 to 409,600.
 
 **B1 and B2:** 10,000 for a plan that names no size; every experiment chooses
@@ -239,7 +239,7 @@ differently in situations that look the same
 The rules the [engine](runs-and-records.md#the-engine) had from the start, with
 switches to turn them off or change them. In B1 every one of them is at the
 engine's first rule.
-[The switches the world was built with](the-switches-the-world-was-built-with.md)
+[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
 tries several of them in B2.
 
 ### exchange_messages
@@ -383,7 +383,7 @@ under `pool` = family.
 
 Whether agents may give tokens to their neighbours during reproduction. Off,
 the brain has neither the gift inputs nor the gift outputs.
-[Gifts, with every other rule](the-switches-the-world-was-built-with.md#gifts-with-every-other-rule) turns it on,
+[Gifts, with every other rule](what-the-switches-did-in-pilots.md#gifts-with-every-other-rule) turns it on,
 beside each of the other rules in turn.
 
 **B1 and B2:** off.
@@ -468,7 +468,7 @@ anything else.
 Nine rules were added for [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") on 12 October 2026. Each
 answers one way a world was seen to fail once its brains could see. A tenth,
 `mix_at_birth`, came later from the pilots of
-[Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md).
+[Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin).
 Four more followed: `buy_life`, `mix_mates`, `self_message` and
 `child_floor`.
 
@@ -525,7 +525,7 @@ With it on, no death can split the world. So the cleanup, which keeps only
 the largest connected piece, never removes a piece cut off by a death.
 Cutting unused connections can still split a world, unless
 [`prune_needs`](#prune_needs) is at least 1
-([A world that cannot break](a-world-that-cannot-break.md)).
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
 
 **B1:** off. **B2:** on.
 
@@ -657,21 +657,21 @@ The least a child may start with:
 Where births are cheap, a world fills with children, each with a token or
 two. Births are cheap, for example, when the estate of the dead is paid to the
 newborns. Then almost every agent holds the same few tokens
-([Room for the steadiest world](room-for-the-steadiest-world.md)). Under
+([Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world)). Under
 `neighbours`, a child never starts with less than the median holding of the
 agents it is born among. So a world can grow only as rich as it is. The rule
 reads the parent's neighbourhood and nothing further, and has no number of
 its own.
 
 In the worlds of
-[Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours) it
+[Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours) it
 changed nothing measurable. Their neighbours were as poor as the world, and
 every child already started with B2's 10 tokens.
 It was as idle in plain B2. In B1, where a child may start with a single
 token, it binds: most agents may not have a child, children start three to
 nine times as rich, lives are short, and both worlds ended small, around a few
 hubs that give their whole fortune to one child every iteration
-([The floor in plain B2 and in B1](room-for-the-steadiest-world.md#the-floor-in-plain-b2-and-in-b1)).
+([The floor in plain B2 and in B1](building-b2-and-the-search-for-a-healthy-rich-world.md#the-floor-in-plain-b2-and-in-b1)).
 
 **B1 and B2:** `fixed`.
 
@@ -691,9 +691,9 @@ is when the mate has the parent's genotype. A parent without a neighbour
 gives its newborn a copy. Off, a newborn has a copy of its parent's brain.
 
 The rule was first played in the pilots of
-[Brains mixed at birth, units that cost, an eye for raids on kin](mixed-brains-costly-units.md).
+[Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin).
 In those pilots and in the batches after them, worlds with it came closest to
-a healthy and diverse world ([Healthy and rich](healthy-and-rich.md)).
+a healthy and diverse world ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)).
 
 **B1 and B2:** off.
 
@@ -719,7 +719,7 @@ too. Once every birth of the phase is made, each mate gives its child as many
 tokens as the parent gave it, as far as it can and never its last. A mate's
 half of the brain then costs it something, and a child's price is shared. It
 needs `mix_at_birth`. It was first played in pilot worlds, where it steadied
-the size of mixed worlds ([Who may be a mate](mixed-at-birth-with-parents-as-mates.md)),
+the size of mixed worlds ([Who may be a mate](building-b2-and-the-search-for-a-healthy-rich-world.md#who-may-be-a-mate)),
 and moved into the engine on 24 October 2026.
 
 **B1 and B2:** off.
@@ -749,7 +749,7 @@ an agent's message to itself is then at least what it tells any neighbour.
 Without these three settings, every link an agent makes stays within its own
 neighbourhood: a newborn's links go to its parent's neighbours. With them, an
 agent can reach further, mostly at a price
-([Links to strangers](links-to-strangers.md)).
+([Links to strangers](what-the-switches-did-in-pilots.md#links-to-strangers)).
 
 ### link_search
 
@@ -930,7 +930,7 @@ A plan asks for it in its `record` block.
   `mend_on_death` said that with mending on, the cleanup never removes a piece
   cut off from the world. It never does so *because of a death*. Cutting
   unused connections can still split a world unless `prune_needs` is at least
-  1, as [A world that cannot break](a-world-that-cannot-break.md) shows. The
+  1, as [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break) shows. The
   entry was corrected when this page was rewritten, on 23 October 2026.
 
 <!-- turns -->
@@ -938,6 +938,6 @@ A plan asks for it in its `record` block.
 
 ← [Is a run reproducible?](is-a-run-reproducible.md) · [How the simulation works](../README.md#how-the-simulation-works)
 
-> [!info]- Pages that link here (48)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Gains and losses: who gains, who loses, and the share-out](gains-and-losses.md) · [The largest and the smallest](the-largest-and-the-smallest.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Where tokens flow](where-the-tokens-flow.md) · [How a world breaks](how-a-world-breaks.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How different are the agents?](how-different-are-the-agents.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Rules without numbers](rules-without-numbers.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Brains mixed at birth, with every other rule](mixing-with-every-other-rule.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (35)
+> [What this notebook is about](what-this-notebook-is-about.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [The world: tokens, agents and a network](the-world.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [A source and a sink](a-source-and-a-sink.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

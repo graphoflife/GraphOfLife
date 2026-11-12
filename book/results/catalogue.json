@@ -168,8 +168,8 @@
      "30",
      [
       {
-       "text": "A world's life",
-       "href": "pages/a-worlds-life.md"
+       "text": "B1: lives and wealth",
+       "href": "pages/b1-lives-and-wealth.md"
       }
      ]
     ],
@@ -184,8 +184,8 @@
      "30",
      [
       {
-       "text": "How much does the seed decide?",
-       "href": "pages/how-much-does-the-seed-decide.md"
+       "text": "B1: the network, size and scaling",
+       "href": "pages/b1-the-network-size-and-scaling.md"
       }
      ]
     ],
@@ -200,8 +200,8 @@
      "30",
      [
       {
-       "text": "Where do the tokens go?",
-       "href": "pages/where-do-the-tokens-go.md"
+       "text": "B1: lives and wealth",
+       "href": "pages/b1-lives-and-wealth.md"
       }
      ]
     ],
@@ -216,8 +216,8 @@
      "30",
      [
       {
-       "text": "What shape does the network take?",
-       "href": "pages/what-shape-does-the-network-take.md"
+       "text": "B1: the network, size and scaling",
+       "href": "pages/b1-the-network-size-and-scaling.md"
       }
      ]
     ],
@@ -232,8 +232,8 @@
      "30",
      [
       {
-       "text": "Genotypes and lineages",
-       "href": "pages/genotypes-and-lineages.md"
+       "text": "B1: brains, lineages and messages",
+       "href": "pages/b1-brains-lineages-and-messages.md"
       }
      ]
     ],
@@ -264,8 +264,8 @@
      "42",
      [
       {
-       "text": "How does a world's size follow its tokens?",
-       "href": "pages/how-does-a-worlds-size-follow-its-tokens.md"
+       "text": "B1: the network, size and scaling",
+       "href": "pages/b1-the-network-size-and-scaling.md"
       }
      ]
     ],
@@ -296,8 +296,8 @@
      "30",
      [
       {
-       "text": "Worlds of 100,000 tokens",
-       "href": "pages/how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens"
+       "text": "B1: the network, size and scaling",
+       "href": "pages/b1-the-network-size-and-scaling.md"
       }
      ]
     ],
@@ -312,7 +312,7 @@
      "10",
      [
       {
-       "text": "How to tell a world that keeps evolving",
+       "text": "Does evolution keep going?",
        "href": "pages/how-to-tell-a-world-that-keeps-evolving.md"
       }
      ]
@@ -328,8 +328,8 @@
      "30",
      [
       {
-       "text": "Brains that see, and worlds that break",
-       "href": "pages/a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -344,8 +344,8 @@
      "60",
      [
       {
-       "text": "A world that cannot break",
-       "href": "pages/a-world-that-cannot-break.md"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -360,8 +360,8 @@
      "60",
      [
       {
-       "text": "Who dies, and why",
-       "href": "pages/a-world-that-cannot-break.md#who-dies-and-why"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -376,8 +376,8 @@
      "20",
      [
       {
-       "text": "Why evolution stops",
-       "href": "pages/how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops"
+       "text": "Does evolution keep going?",
+       "href": "pages/how-to-tell-a-world-that-keeps-evolving.md"
       }
      ]
     ],
@@ -392,8 +392,8 @@
      "10",
      [
       {
-       "text": "Mixed at birth: ten long worlds",
-       "href": "pages/mixed-at-birth-ten-long-worlds.md"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -408,8 +408,8 @@
      "5",
      [
       {
-       "text": "Five mixed worlds, fifty thousand iterations",
-       "href": "pages/mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -424,8 +424,8 @@
      "10",
      [
       {
-       "text": "Mixed at birth, with parents as mates",
-       "href": "pages/mixed-at-birth-with-parents-as-mates.md"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -440,8 +440,8 @@
      "2",
      [
       {
-       "text": "The candidates, played on",
-       "href": "pages/the-candidates-played-on.md"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -456,8 +456,312 @@
      "20",
      [
       {
-       "text": "Five more seeds for the rules that held",
-       "href": "pages/the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
+    ],
+    [
+     "E22",
+     "A mate that pays its share",
+     "B2",
+     "*mixed at birth, the mate pays* (mix_at_birth = on, extinction_threshold = 0, proto = {'mate_pays': True})",
+     "1\u20134",
+     "10,000",
+     "5,000",
+     "4",
+     [
+      {
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
+    ],
+    [
+     "E24",
+     "The search's best world, in new seeds",
+     "B2",
+     "*the search's configuration* (hidden_layers = 32, random_input_amount = 0, message_prepass = on, allow_gifting = on, prune_after = reproduction, inactive_window = iteration, incumbency = 1.0, birth_links = 0, mend_on_death = off, prune_needs = 0, keep_home = 0.0, max_age = 0, link_search = walk, mutation_probability = 0.4, extinction_threshold = 0, proto = {'came_from': True, 'contest': 'lottery', 'pool': 'genotype', 'grow': True}); *the search's own world* (hidden_layers = 32, random_input_amount = 0, message_prepass = on, allow_gifting = on, prune_after = reproduction, inactive_window = iteration, incumbency = 1.0, birth_links = 0, mend_on_death = off, prune_needs = 0, keep_home = 0.0, max_age = 0, link_search = walk, mutation_probability = 0.4, extinction_threshold = 0, proto = {'came_from': True, 'contest': 'lottery', 'pool': 'genotype', 'grow': True})",
+     "1\u20135",
+     "10,000",
+     "2,000",
+     "6",
+     [
+      {
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
+    ],
+    [
+     "E28",
+     "Every era against three",
+     "trials",
+     "240 contests from 2 worlds: *against 2,500*; *against 10,000*; *against 25,000*; *each against itself*",
+     "\u2014",
+     "as their worlds",
+     "100 each",
+     "240 played",
+     [
+      {
+       "text": "Every era against three",
+       "href": "pages/every-era-against-three.md"
+      }
+     ]
+    ],
+    [
+     "E29",
+     "How large a crowd a raider needs",
+     "trials",
+     "320 invasions from 10 worlds: *raiders, worlds 2 and 3*; *controls, worlds 2 and 3*; *raiders, the other eight worlds*; *controls, the other eight worlds*",
+     "\u2014",
+     "as their worlds",
+     "300 each",
+     "320 played",
+     [
+      {
+       "text": "Can a strategy written by hand beat evolution?",
+       "href": "pages/strategies-written-by-hand.md"
+      }
+     ]
+    ],
+    [
+     "E30",
+     "Does evolution close the door?",
+     "trials",
+     "120 invasions from 5 worlds: *raiders*; *controls*",
+     "\u2014",
+     "as their worlds",
+     "300 each",
+     "120 played",
+     [
+      {
+       "text": "Can a strategy written by hand beat evolution?",
+       "href": "pages/strategies-written-by-hand.md"
+      }
+     ]
+    ],
+    [
+     "E31",
+     "Room for the steadiest world",
+     "B2",
+     "*estate to the newborns* (mix_at_birth = on, mix_mates = parents, redistribution = newborns); *estate to the parents* (mix_at_birth = on, mix_mates = parents, redistribution = parents); *no old age* (mix_at_birth = on, mix_mates = parents, max_age = 0); *deaths not mended* (mix_at_birth = on, mix_mates = parents, mend_on_death = off)",
+     "1\u20132",
+     "10,000",
+     "3,000",
+     "8",
+     [
+      {
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
+    ],
+    [
+     "E32",
+     "Births as rich as the neighbours",
+     "B2",
+     "*estate to the newborns, a child as rich as its neighbours* (mix_at_birth = on, mix_mates = parents, redistribution = newborns, child_floor = neighbours); *estate to the parents, a child as rich as its neighbours* (mix_at_birth = on, mix_mates = parents, redistribution = parents, child_floor = neighbours); *a child as rich as its neighbours* (mix_at_birth = on, mix_mates = parents, child_floor = neighbours)",
+     "1\u20132",
+     "10,000",
+     "3,000",
+     "6",
+     [
+      {
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
+    ],
+    [
+     "E33",
+     "A crew of raiders",
+     "trials",
+     "135 invasions from 5 worlds: *crews*; *lone raiders*; *controls*",
+     "\u2014",
+     "as their worlds",
+     "300 each",
+     "135 played",
+     [
+      {
+       "text": "Can a strategy written by hand beat evolution?",
+       "href": "pages/strategies-written-by-hand.md"
+      }
+     ]
+    ],
+    [
+     "E34",
+     "Raiders that breed",
+     "trials",
+     "180 invasions from 5 worlds: *breeding raiders*; *breeding turtles*; *lone raiders*; *controls*",
+     "\u2014",
+     "as their worlds",
+     "300 each",
+     "180 played",
+     [
+      {
+       "text": "Can a strategy written by hand beat evolution?",
+       "href": "pages/strategies-written-by-hand.md"
+      }
+     ]
+    ],
+    [
+     "E35",
+     "Hand-written strategies in B1",
+     "trials",
+     "90 invasions from 2 worlds: *crews*; *breeding raiders*; *breeding turtles*; *lone raiders*; *controls*",
+     "\u2014",
+     "as their worlds",
+     "300 each",
+     "90 played",
+     [
+      {
+       "text": "Can a strategy written by hand beat evolution?",
+       "href": "pages/strategies-written-by-hand.md"
+      }
+     ]
+    ],
+    [
+     "E36",
+     "The floor in plain B2",
+     "B2",
+     "*a child as rich as its neighbours* (child_floor = neighbours)",
+     "1\u20132",
+     "10,000",
+     "3,000",
+     "2",
+     [
+      {
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
+    ],
+    [
+     "E37",
+     "The floor in B1",
+     "B1",
+     "*a child as rich as its neighbours* (child_floor = neighbours)",
+     "1\u20132",
+     "10,000",
+     "3,000",
+     "2",
+     [
+      {
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
+    ],
+    [
+     "E38",
+     "A screen of random worlds, round 1",
+     "B1, as drawn",
+     "50 worlds, each with its settings drawn at random (sampler 1, round seed 1); beside them 2 worlds of B2",
+     "1001\u20131050",
+     "20,000",
+     "2,000",
+     "52",
+     [
+      {
+       "text": "A screen of random worlds",
+       "href": "pages/a-screen-of-random-worlds.md"
+      }
+     ]
+    ],
+    [
+     "E39",
+     "A screen of random worlds, round 2",
+     "B1, as drawn",
+     "50 worlds, each with its settings drawn at random (sampler 1, round seed 2); beside them 2 worlds of B2; withdrawn unplayed",
+     "2001\u20132050",
+     "20,000",
+     "2,000",
+     "0",
+     [
+      {
+       "text": "A screen of random worlds",
+       "href": "pages/a-screen-of-random-worlds.md"
+      }
+     ]
+    ],
+    [
+     "E40",
+     "A screen of random worlds, round 3: the author's settings",
+     "B1, as drawn",
+     "84 worlds, each with its settings drawn at random (sampler 2, round seed 3); 16 of the 100 drawn given up unplayed",
+     "3001\u20133100",
+     "30,000",
+     "3,000",
+     "84",
+     [
+      {
+       "text": "A screen of random worlds",
+       "href": "pages/a-screen-of-random-worlds.md"
+      }
+     ]
+    ],
+    [
+     "E41",
+     "Round 3, a token at a time: weakest first",
+     "B1, as drawn",
+     "8 worlds, each with its settings drawn at random (sampler 2, round seed 4)",
+     "4001\u20134008",
+     "30,000",
+     "3,000",
+     "8",
+     [
+      {
+       "text": "A screen of random worlds",
+       "href": "pages/a-screen-of-random-worlds.md"
+      }
+     ]
+    ],
+    [
+     "E42",
+     "Round 3, a token at a time: strongest first",
+     "B1, as drawn",
+     "8 worlds, each with its settings drawn at random (sampler 2, round seed 4)",
+     "4001\u20134008",
+     "30,000",
+     "3,000",
+     "8",
+     [
+      {
+       "text": "A screen of random worlds",
+       "href": "pages/a-screen-of-random-worlds.md"
+      }
+     ]
+    ],
+    [
+     "E43",
+     "Round 3's best worlds, again: new seeds and more tokens",
+     "B1",
+     "25 conditions, each a world with its own settings (every setting on the page): *s3004*, *s3008*, *s3016*, *s3018*, *s3019*, *s3022*, *s3023*, *s3024*, *s3026*, *s3042*, *s3045*, *s3051*, *s3054*, *s3057*, *s3058*, *s3080*, *s3087*, *s4002 weakest first*, *s4004 weakest first*, *s4006 strongest first*, *s4008 weakest first*, *s3005*, *s3006*, *s3064*, *s3093*",
+     "4301\u20134302",
+     "50,000",
+     "5,000",
+     "14",
+     [
+      {
+       "text": "Candidates for open-ended evolution",
+       "href": "pages/candidates-for-open-ended-evolution.md"
+      }
+     ]
+    ],
+    [
+     "E44",
+     "Did the brains get better? Round 3's eras against each other",
+     "trials",
+     "1,512 contests from 21 worlds: *against 250*; *against 1,500*; *against 3,000*; *each against itself*",
+     "\u2014",
+     "as their worlds",
+     "100 each",
+     "0 played",
+     [
+      {
+       "text": "Did the brains get better? Round 3's eras against each other",
+       "href": "pages/round-3-eras-against-each-other.md"
       }
      ]
     ]
@@ -485,8 +789,8 @@
      "5 done, 3 stopped early",
      [
       {
-       "text": "Alliances",
-       "href": "pages/another-game.md#alliances"
+       "text": "Other contests: a lottery, and alliances",
+       "href": "pages/another-game.md"
       }
      ]
     ],
@@ -500,8 +804,8 @@
      "done",
      [
       {
-       "text": "Alliances",
-       "href": "pages/another-game.md#alliances"
+       "text": "Other contests: a lottery, and alliances",
+       "href": "pages/another-game.md"
       }
      ]
     ],
@@ -515,8 +819,8 @@
      "done",
      [
       {
-       "text": "Alliances",
-       "href": "pages/another-game.md#alliances"
+       "text": "Other contests: a lottery, and alliances",
+       "href": "pages/another-game.md"
       }
      ]
     ],
@@ -530,8 +834,8 @@
      "done",
      [
       {
-       "text": "Alliances",
-       "href": "pages/another-game.md#alliances"
+       "text": "Other contests: a lottery, and alliances",
+       "href": "pages/another-game.md"
       },
       {
        "text": "Rules without numbers",
@@ -549,11 +853,11 @@
      "done",
      [
       {
-       "text": "The switches the world was built with",
-       "href": "pages/the-switches-the-world-was-built-with.md"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       },
       {
-       "text": "Another game",
+       "text": "Other contests: a lottery, and alliances",
        "href": "pages/another-game.md"
       }
      ]
@@ -568,8 +872,8 @@
      "10 done, 3 stopped early",
      [
       {
-       "text": "Why evolution stops",
-       "href": "pages/how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops"
+       "text": "Does evolution keep going?",
+       "href": "pages/how-to-tell-a-world-that-keeps-evolving.md"
       },
       {
        "text": "A hundred thousand iterations",
@@ -591,8 +895,8 @@
        "href": "pages/rules-without-numbers.md"
       },
       {
-       "text": "Gliders, and who helps whom",
-       "href": "pages/gliders-and-who-helps-whom.md"
+       "text": "Cooperation, help and gliders (side study)",
+       "href": "pages/cooperation-help-and-gliders.md"
       }
      ]
     ],
@@ -606,8 +910,8 @@
      "done",
      [
       {
-       "text": "Brains mixed at birth, units that cost, an eye for raids on kin",
-       "href": "pages/mixed-brains-costly-units.md"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -621,8 +925,8 @@
      "done",
      [
       {
-       "text": "Who inherits?",
-       "href": "pages/who-inherits.md"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -636,8 +940,8 @@
      "done",
      [
       {
-       "text": "Gifts, with every other rule",
-       "href": "pages/the-switches-the-world-was-built-with.md#gifts-with-every-other-rule"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -651,8 +955,8 @@
      "done",
      [
       {
-       "text": "Eight switches at once",
-       "href": "pages/eight-switches-at-once.md"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -666,8 +970,8 @@
      "done",
      [
       {
-       "text": "Eight switches at once",
-       "href": "pages/eight-switches-at-once.md"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -681,8 +985,8 @@
      "done",
      [
       {
-       "text": "Revolutions, with every other rule",
-       "href": "pages/the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -696,8 +1000,8 @@
      "done",
      [
       {
-       "text": "Handover, with every other rule",
-       "href": "pages/the-switches-the-world-was-built-with.md#handover-with-every-other-rule"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -711,8 +1015,8 @@
      "done",
      [
       {
-       "text": "Brains mixed at birth, with every other rule",
-       "href": "pages/mixing-with-every-other-rule.md"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -726,8 +1030,8 @@
      "done",
      [
       {
-       "text": "Links to strangers",
-       "href": "pages/links-to-strangers.md"
+       "text": "What the switches did in pilots (indicative)",
+       "href": "pages/what-the-switches-did-in-pilots.md"
       }
      ]
     ],
@@ -739,7 +1043,12 @@
      "10,000",
      "1,000",
      "62 done, 2 stopped early",
-     []
+     [
+      {
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
+      }
+     ]
     ],
     [
      "LC",
@@ -751,12 +1060,8 @@
      "23 done, 2 stopped early",
      [
       {
-       "text": "Healthy and rich",
-       "href": "pages/healthy-and-rich.md"
-      },
-      {
-       "text": "The candidates, played on",
-       "href": "pages/the-candidates-played-on.md"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -770,8 +1075,8 @@
      "done",
      [
       {
-       "text": "Mixed at birth: ten long worlds",
-       "href": "pages/mixed-at-birth-ten-long-worlds.md"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -785,12 +1090,8 @@
      "24 done, 2 queued, 2 stopped early",
      [
       {
-       "text": "What holds a world's size",
-       "href": "pages/what-holds-a-worlds-size.md"
-      },
-      {
-       "text": "Mixed at birth, with parents as mates",
-       "href": "pages/mixed-at-birth-with-parents-as-mates.md"
+       "text": "Building B2, and the search for a healthy, rich world",
+       "href": "pages/building-b2-and-the-search-for-a-healthy-rich-world.md"
       }
      ]
     ],
@@ -804,8 +1105,8 @@
      "done",
      [
       {
-       "text": "What folds a world",
-       "href": "pages/how-many-dimensions-does-a-world-have.md#what-folds-a-world"
+       "text": "Is a world a space? Dimension, and what folds it",
+       "href": "pages/how-many-dimensions-does-a-world-have.md"
       }
      ]
     ],
@@ -819,8 +1120,8 @@
      "done",
      [
       {
-       "text": "What folds a world",
-       "href": "pages/how-many-dimensions-does-a-world-have.md#what-folds-a-world"
+       "text": "Is a world a space? Dimension, and what folds it",
+       "href": "pages/how-many-dimensions-does-a-world-have.md"
       }
      ]
     ]
@@ -2854,6 +3155,177 @@
      "0"
     ],
     [
+     "E22",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E24",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E28",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E29",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E30",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E31",
+     "8",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E32",
+     "6",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E33",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E34",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E35",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E36",
+     "2",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E37",
+     "2",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E38",
+     "52",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E39",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E40",
+     "84",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E41",
+     "8",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E42",
+     "8",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E43",
+     "14",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E44",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
      "A3k",
      "8",
      "0",
@@ -3054,8 +3526,8 @@
    ]
   },
   "totals": {
-   "lab experiments": 20,
-   "lab runs on disk": 601,
+   "lab experiments": 39,
+   "lab runs on disk": 795,
    "pilot batches": 22,
    "pilot worlds": 486
   }

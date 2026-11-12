@@ -13,6 +13,10 @@ statement, and links every word that needs explaining to the page that
 explains it. A result is never shown without the worlds it comes from and the
 way to make it again. And when we learn that something we wrote was wrong, the
 page says what we know now, and keeps what we thought before, with its date.
+Worlds are chosen by how they evolve, each measure beside what chance alone
+would make of it. And pages whose worlds no longer bear on the question are
+not deleted but frozen, in an Archive, so that every experiment can still be
+made again.
 
 ## A page, from top to bottom
 
@@ -39,15 +43,17 @@ real numbers, and **Where it is used**. A link to an idea leads to its section.
 
 ## Parts, and what each page is
 
-The pages fall into seven **parts**, each with its colour: Start; Now, the
-research of the moment (round 3 of the random screen and its candidates); The
-rules; What the worlds do; Space and physics; The search for [open-ended
-evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") that came before round 3; and Methods and look-up. A part holds a
-few **topics**, and a page belongs to the part of its first topic, its home.
-In the Research Notebook tab a part opens and shuts, a page wears its part's
-colour as a band above its title, and a mark beside it in the contents says
-what it is: a **study** of worlds already played, an **experiment** with its
-own runs, a **plan** that has not been played, a **reference** page, or a
+The pages fall into eight **parts**, each with its colour: Start; Now, the
+research of the moment (round 3 of the random screen and its candidates for
+[open-ended
+evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution));
+The rules; What the worlds do; Space and physics; The search for open-ended
+evolution; Methods and look-up; and the Archive, which starts shut. A part
+holds a few **topics**, and a page belongs to the part of its first topic, its
+home. In the Research Notebook tab a part opens and shuts, a page wears its
+part's colour as a band above its title, and a mark beside it in the contents
+says what it is: a **study** of worlds already played, an **experiment** with
+its own runs, a **plan** that has not been played, a **reference** page, or a
 **guide** to read first (the author, 9 November 2026: fewer pages, better
 sorted, in colours).
 
@@ -60,8 +66,9 @@ sorted, in colours).
 - **Pages are named by their titles**, never by a number: a link reads like the
   page it leads to. Experiments keep their numbers, "Experiment 16", because
   the lab knows them by those.
-- **The baselines** are B1 and B2 ([B1 and B2: the two baselines](b1-and-b2.md)),
-  and every experiment says which it starts from.
+- **Every plan says where its worlds start**: from B1 or B2
+  ([B1 and B2: the two baselines](b1-and-b2.md)), or, in the screen of random
+  worlds, from B1's rules changed as the draw says.
 
 ## Figures
 
@@ -88,8 +95,18 @@ it again.
 
 ## The rules of the research
 
-- **One change at a time.** An experiment changes one setting of a stated
-  baseline and keeps everything else.
+- **Evolution first.** Worlds are chosen and ranked by how they evolve:
+  whether later [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") beat earlier ones, whether selection beat luck, and
+  whether new things appeared
+  ([Did evolution happen?](did-evolution-happen.md)). Health only rules out
+  worlds that are dead, a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen
+  ([Health as a filter](measuring-health.md#from-11-november-2026-health-as-a-filter)).
+- **A stated start, and what changes.** A plan says the rules its worlds start
+  from, and what it changes: one setting of a baseline, as the early
+  experiments did, or every setting drawn at random, as the screen does
+  ([A screen of random worlds](a-screen-of-random-worlds.md)).
+- **New seeds for a find.** A world chosen as the best of many is lucky as
+  well as good, so it counts only once new seeds have played it again.
 - **The thesis comes first.** It is fixed in the plan before the runs start.
 - **Enough seeds.** A difference seen in fewer than thirty seeds per
   condition is called *indicative*, not an effect
@@ -101,7 +118,8 @@ it again.
 - **The dead are counted apart.** A world that dies out is an outcome of its
   own, not a world that ended up somewhere
   ([When a world ends](rules-in-detail.md#when-a-world-ends)).
-- **A run is measured over its settled life**, from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to its end
+- **A run is measured over its settled life**: from [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") 500 to its end
+  in the early experiments, from iteration 100 in round 3
   ([The settled life of a world](statistics.md#the-settled-life-of-a-world)).
 - **Runs are shared.** A run is named for what it is — baseline, world size,
   what differs, seed — so an experiment that needs runs which already exist
@@ -110,6 +128,26 @@ it again.
   hand-set factor beyond the tokens and the mutation's parameters: what a
   world does should emerge. ([Rules without numbers](rules-without-numbers.md)
   shows what the numbers B2 was built with do.)
+- **When settings run out, change the structure.** If no change of settings
+  delays or lifts the plateau of evolution, the next step changes how a world
+  is built, with an open economy or brains that can grow
+  ([When the notebook changes course](what-this-notebook-is-about.md#when-the-notebook-changes-course)).
+
+## Frozen pages and the Archive
+
+Pages whose worlds or questions no longer bear on the notebook's question are
+not deleted. Pages that tell one story are merged into one, and moved to the
+**Archive**, the last part, which starts shut. An archived page is frozen: it
+is not brought up to date as the research moves on, but every link, figure,
+thesis and box of runs on it still works, so every experiment it reports can
+still be read and made again. Its In short says what still matters, and its
+How our view changed records the day it was archived.
+
+A method an archived page explained that the notebook still uses moves to a
+reference page ([Statistics](statistics.md)). A draft plan that was not chosen
+keeps its questions, one paragraph and its thesis, and says where in git
+history its full draft is. Nothing is lost: what a page no longer shows, git
+keeps.
 
 ## Where things are
 
@@ -121,7 +159,8 @@ it again.
   page with its topics, kind and summary, from which the contents are made;
 - `book/terms.json` — the terms, linked where a page first uses them;
 - `book/legacy.json` — the chapter numbers the notebook had until
-  23 October 2026, and the page each became;
+  23 October 2026, and the page each became, and every page merged into
+  another, with where it went;
 - `GraphOfLifeRuns/` — the runs themselves, on the machine that ran them.
 
 The programme the notebook follows, and what is already known, is in
@@ -140,6 +179,17 @@ and the page that changed it. Nothing is quietly deleted.
   behind it all.
 - [Glossary](glossary.md): every term in one line.
 - [The lab, the engine and pilots](runs-and-records.md#the-lab-the-engine-and-pilots): how an experiment is run.
+
+## How our view changed
+
+- **11 November 2026.** The rules of the research said "one change at a
+  time": an experiment changes one setting "of a stated baseline". That
+  described the experiments of October, not the screen of random worlds,
+  which draws every setting at once, nor round 3, which has no baseline. The
+  rules now say what is practised: evolution first, with health only as a
+  filter; a stated start; new seeds for a find; and a change of structure when
+  settings run out. A section says how pages are frozen in the Archive, and
+  the parts are eight.
 
 <!-- turns -->
 ---

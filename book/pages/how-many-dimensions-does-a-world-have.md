@@ -44,9 +44,9 @@ everything is near everything.
 
 This half of the page measures what the worlds of the first baseline, B1, have
 grown into. They are the thirty worlds of 100,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of
-[Thirty worlds](a-worlds-life.md#thirty-worlds), about 13,800 agents each at
+[Thirty worlds](b1-lives-and-wealth.md#thirty-worlds), about 13,800 agents each at
 their end. Besides them, it measures the three worlds of 409,600 tokens of
-[Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md)
+[Worlds of many sizes](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 (`B1-409600-s001` … `-s003`, `python3 gol_lab.py run E08`). They held about
 60,000 agents each after 600 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). And it measures the worlds of 10,000
 tokens it was first written from: the 26 of thirty that lived to the end. They
@@ -133,10 +133,10 @@ mark of a network that is not a space at all.
 <!-- figure dimensions/worlds -->
 ![The same rulers, on the worlds](../figures/dimensions/worlds.svg)
 
-**The same rulers, on the worlds.** The two rulers of the figure above, on the largest piece of each world after its last game. Blue: the 30 worlds of 100,000 tokens (about 13,800 agents each) — the line is the median of the worlds, the darker band the middle half and the paler band nine in ten. Red: for each, its random twin, a network with exactly as many connections at every agent but wired at random. Yellow: the three worlds of 409,600 tokens of [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md) (about 60,000 agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their random twins. Green dots: the median of the 26 worlds of 10,000 tokens that lived to the end, read the same way.
+**The same rulers, on the worlds.** The two rulers of the figure above, on the largest piece of each world after its last game. Blue: the 30 worlds of 100,000 tokens (about 13,800 agents each) — the line is the median of the worlds, the darker band the middle half and the paler band nine in ten. Red: for each, its random twin, a network with exactly as many connections at every agent but wired at random. Yellow: the three worlds of 409,600 tokens of [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes) (about 60,000 agents each), measured from 100 balls and 48 walks of up to 1,024 steps; dashed orange, their random twins. Green dots: the median of the 26 worlds of 10,000 tokens that lived to the end, read the same way.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`). The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [A world's life](a-worlds-life.md); `python3 gol_lab.py run E02`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`). The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`), after their last game. The 26 baseline worlds that lived to the end (`B1-10000-s001` … `-s030`, [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world); `python3 gol_lab.py run E02`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -178,7 +178,7 @@ four steps, and climb past 6 by walks.
 **How a large world fills out.** The typical number of agents within r steps (the geometric mean over 100 agents drawn at random) in the three worlds of 409,600 tokens after their last game (yellow), and in their random twins (dashed orange), on logarithmic axes, until the ball holds the whole world. In a space of dimension d, the number grows like r^d, a straight line of slope d: in grey, r² (dotted, the shallower) and r³ (dashed, the steeper), drawn through the worlds' typical ball of radius 4.
 
 > [!example]- How to make this figure
-> **Runs.** The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md); `python3 gol_lab.py run E08`), after their last game.
+> **Runs.** The three worlds of 409,600 tokens of Experiment 8 (`B1-409600-s001` … `-s003`, [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes); `python3 gol_lab.py run E08`), after their last game.
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -204,7 +204,7 @@ or settles near 3.3, these three sizes cannot tell.
 
 **The viewer's own dimensions.** The Graph of Life viewer records a dimension
 of its own. In these worlds it is about 3.4, and 3.0 at 10,000 tokens
-([The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world)).
+([The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)).
 It is fitted to the **mean** ball over radii 1 to 5. The mean is pulled up by
 the few agents next to a hub. The rulers here use the **typical** ball over 40
 to 100 agents. That is the geometric mean of their balls: the mean taken on a
@@ -217,7 +217,7 @@ each holding the agents within a few steps of its centre, and counts how many
 it takes. In *d* dimensions, boxes half as wide take 2^*d* times as many
 ([Box dimension](measuring-space.md#box-dimension)). It reads 1.88 in the median world, for at
 large sizes it counts the long, thin branches
-([Four measures of a world's shape](what-shape-does-the-network-take.md#four-measures-of-a-worlds-shape)).
+([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
 
 ### Two dimensions that disagree
 
@@ -247,15 +247,15 @@ and 2.0 by walks at short range. That is over radii 3 to 6, and walks of up to
 64 steps. Over the whole range of scales it reads 2.7 and 1.5. Its loops close
 at short range, and over long distances it seems to branch more than it
 meshes.
-[The core of a world](what-shape-does-the-network-take.md#the-core-of-a-world)
+[The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world)
 takes the core apart.
 
 This matters beyond geometry. In the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), tokens move almost as a random walk
-would ([Where tokens flow](where-the-tokens-flow.md)). On these worlds that
+would ([Where tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)). On these worlds that
 walk is slow. A difference in tokens spreads through a world more slowly than
 through a grid of the same size. It spreads much more slowly than through a
 random network. Lines of descent spread in the same way
-([Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)).
+([Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)).
 Two agents up to about 7 steps apart share a family of 25 iterations back more
 often than chance. For a family of 200 iterations back, the excess over chance
 reaches about 12 steps. The patches widen as a random walk on these worlds
@@ -266,10 +266,10 @@ would.
 <!-- figure dimensions/life -->
 ![Dimension over a world's life](../figures/dimensions/life.svg)
 
-**Dimension over a world's life.** The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, 500, 750, 1,000 and 1,499 of the 30 worlds, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, every 25 iterations, are drawn in [The geometry of a world](what-shape-does-the-network-take.md#the-geometry-of-a-world).
+**Dimension over a world's life.** The two rulers, each read at one scale, after the games of iterations 10, 25, 50, 100, 200, 300, 500, 750, 1,000 and 1,499 of the 30 worlds, on a logarithmic axis of time. Left: the local dimension from balls between radius 2 and 3; right: the spectral dimension from walks of 4 to 8 steps. The line is the median of the worlds, the darker band the middle half of them and the paler band nine in ten. The viewer's own dimensions, every 25 iterations, are drawn in [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](a-worlds-life.md#thirty-worlds); `python3 gol_lab.py run E10`).
+> **Runs.** The 30 baseline worlds that lived to the end (`B1-100000-s001` … `-s030`, [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds); `python3 gol_lab.py run E10`).
 >
 > **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
 >
@@ -298,7 +298,7 @@ ends wither, or that give every place the same number of neighbours.
 
 The second baseline, B2, has rules that close loops and leave no dead ends.
 They were made to keep a world from breaking
-([Building B2: a world that cannot break](a-world-that-cannot-break.md)), and
+([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)), and
 B2 has been the baseline of everything since:
 
 - a newborn is joined to its parent and to two of its parent's neighbours;
@@ -318,7 +318,7 @@ But those readings are of the kind the health bar uses. The
 them is a dimension, read off the mean ball over radii 1 to 5. Until this
 section, B2's network had been read only through that one number. And it rose
 with a world's size
-([What holds a world's size](what-holds-a-worlds-size.md)), as a small world's
+([What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size)), as a small world's
 would. A small world has no dimension to find; the number read off its first
 few steps only grows with the room it has.
 
@@ -364,11 +364,11 @@ space when its width is at least 1.5 ([The random twin](measuring-space.md#the-r
 - **Brains mixed at birth do not change that.** Experiment 17's worlds read
   1.21, at 630 agents. There each newborn's brain is mixed from its parent's
   and a neighbour's
-  ([Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md)).
+  ([Brains mixed at birth, in long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds)).
 - **But B2 is a space, and one of about three dimensions, when the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of
   the dead goes to the newborns or to the parents.** The estate is the tokens
   a dead agent leaves. Here it goes to the iteration's newborns, or to their
-  parents ([Who inherits?](who-inherits.md)). These worlds' local dimension
+  parents ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). These worlds' local dimension
   rises to 3.1 at radius 3 and 3.5 at 4 to 5, then falls to 2.7 by radius 7. A
   typical agent needs 11.2 steps to reach half of its 5,200 agents, its twin
   4.7: a width of 2.4, as wide as B1. The twins' dimension climbs past 5.7
@@ -446,7 +446,7 @@ age. How does a world become what it is?
 
 The lower panel holds the worlds of Experiment 14, at 5,000 tokens, each
 without one of B2's rules
-([A world that cannot break](a-world-that-cannot-break.md#a-world-that-cannot-break)).
+([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#a-world-that-cannot-break)).
 B2 itself folds there too, from 1.54 to about 1.25. Without links at birth it
 folds a little less (1.35 to 1.45), and without the cap on links a little more
 (1.13 to 1.28). With handover, in which a parent passes some of its links to
@@ -514,7 +514,7 @@ Read at iteration 1,000, 498 worlds fall into two groups. They are the pilot
 batches read at that iteration, the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s B2 families at 10,000 tokens, and the first two rounds of
 the search by elimination. That search drew every setting at random. Round after
 round, it kept the values that did not make worlds worse
-([The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds)).
+([The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds)).
 
 - **Folded**: the 284 worlds of B2 with other rules (a median width of 1.27)
   and the 87 with brains mixed at birth (1.26).
@@ -558,7 +558,7 @@ three worlds read 1.14. The third, at 2.40, is the one exception.
 
 The worlds above differ in many things at once. To see whether who breeds is
 enough, the rules of space were played alone, as in
-[Space alone](a-world-that-cannot-break.md#space-alone). There are no brains
+[Space alone](building-b2-and-the-search-for-a-healthy-rich-world.md#space-alone). There are no brains
 and no tokens. A newborn is joined to its parent and two of the parent's
 neighbours, and every agent dies at age 100, as in B2. Births balance deaths
 at about 1,500 agents. The one thing changed is who may have a child. It is
@@ -572,7 +572,7 @@ iterations each:
 | deaths mended in a ring, only the young breed | 1.71 (1.50 to 2.05) | 3.8 | 3% |
 | deaths mended in a ring, only the old breed | 1.02 (1.02 to 1.06) | 7.6 | 0.1% |
 | deaths not mended, anyone breeds | 2.36 (2.09 to 2.52) | 1.2 | 37% |
-| the model of [Space alone](a-world-that-cannot-break.md#space-alone): agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
+| the model of [Space alone](building-b2-and-the-search-for-a-healthy-rich-world.md#space-alone): agents die by chance, mended in a ring | 1.24 (1.13 to 1.31) | 7.4 | 1.5% |
 | only the pieces a death would split joined, anyone breeds | 5.1 to 5.6 (two seeds of five: beyond reach) | 1.9 | 47% |
 | the same, only the young breed | 4.22 (3.62 to 4.83) | 2.0 | 48% |
 | the same, only the old breed | beyond reach in all five | 1.8 | 46% |
@@ -641,16 +641,16 @@ the line between folded and not.
   the same connections per agent, have none. The dimension is made by how the
   worlds are wired. Every new connection is made inside a neighbourhood, and
   none ever brings two agents closer together
-  ([How the network grows](how-agents-have-children.md#how-the-network-grows)).
+  ([How the network grows](b1-lives-and-wealth.md#how-the-network-grows)).
   So a world can only grow as a body grows, outwards, never by shortcuts.
 - **About three dimensions of room.** At 14,000 agents the worlds hold about
   as much within *r* steps as a three-dimensional body does, from 5 to 10
   steps. At 60,000 agents they hold somewhat more: 3.3 after their last game,
   steady from 3 to 14 steps, and 3.0 to 3.2 over five moments of their
-  settled lives ([Dimensions at scale](dimensions-at-scale.md)). Their
+  settled lives ([Dimensions at scale](space-at-scale.md#dimensions-at-scale)). Their
   diameters grow as agents^0.26 to 0.30
-  ([Distances grow like a power](how-does-a-worlds-size-follow-its-tokens.md#distances-grow-like-a-power),
-  [How wide a world is](dimensions-at-scale.md#how-wide-a-world-is)).
+  ([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power),
+  [How wide a world is](space-at-scale.md#how-wide-a-world-is)).
   It is the first sign that something like three-dimensional space can emerge
   from these rules, with no geometry put in.
 - **But not our kind of space.** A walker reads only two dimensions. The
@@ -661,7 +661,7 @@ the line between folded and not.
   world, it does not, beyond what any finite body shows: by balls a plateau,
   by walks 1.7 to 2.0, out to walks of 8,192 steps. Larger worlds read more
   at the same radius, through their bigger hubs
-  ([Dimensions at scale](dimensions-at-scale.md)).
+  ([Dimensions at scale](space-at-scale.md#dimensions-at-scale)).
 - **B2 is not a space**, at any size measured, up to 30,700 agents. Its worlds
   are nearly small worlds: a typical agent is about as near to everyone as in
   a random network with the same links. That is why the health bar's dimension
@@ -683,15 +683,15 @@ the line between folded and not.
   the newborns or the parents is a space of about three dimensions, as the
   notebook's second aim asks. But nine in ten of its agents hold three tokens
   or fewer, its agents are alike, and its evolution stops
-  ([Who inherits?](who-inherits.md)). A world that is a three-dimensional
+  ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)). A world that is a three-dimensional
   space and rich, and that keeps evolving, is still to be found
-  ([Healthy and rich](healthy-and-rich.md)).
+  ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)).
 - **Room for open-ended evolution.** In a space, distant places are far apart.
   The diameter of a world grows as a power of its size, a small world's only
   as its logarithm. So a large world has room for regions that evolve apart.
   Lines of descent do hold patches, a dozen steps across. But what the agents
   hold, their tokens, ages and [genotypes](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from."), is alike only within three steps
-  ([Like next to like](like-next-to-like.md)).
+  ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)).
 - **Open**: rules that would keep a world's dying from gathering wide rings in
   a rich world, or keep a world whole without folding it. Mending would add
   nothing where a dying agent's neighbours are already linked to one another,
@@ -703,9 +703,9 @@ the line between folded and not.
 
 - [The random twin: is a world a space?](measuring-space.md#the-random-twin-is-a-world-a-space): the width, and the
   line of 1.5 between a space and a folded world.
-- [Building B2: a world that cannot break](a-world-that-cannot-break.md): the
+- [Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break): the
   rules of B2, mending among them, and what each one does.
-- [Who inherits?](who-inherits.md): the estates that keep a world a space, and
+- [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits): the estates that keep a world a space, and
   why their worlds stay poor.
 - [Physical inspiration](physical-inspiration.md): the physics behind the aim,
   and what else a world might grow.
@@ -722,7 +722,7 @@ The first half reads three sets of B1 worlds:
 - the three worlds of 409,600 tokens of Experiment 8
   (`python3 gol_lab.py run E08`);
 - the worlds of 10,000 tokens of Experiment 2 (`python3 gol_lab.py run E02`,
-  [The life of a B1 world](a-worlds-life.md)).
+  [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world)).
 
 The second half measures each world and its random twin with
 `research/atlas/space.py`, and counts the groups of a dying agent's neighbours
@@ -732,7 +732,7 @@ with `research/atlas/rings.py`. It reads Experiment 2's B1 worlds, Experiments
 (`GraphOfLifeRuns/.pilots/BIG/B2-100000-s1`). That world was still being
 played when What folds a world was first written, and its reading was added
 the same day, 17 October 2026. The worlds without brains come from the model
-of [Space alone](a-world-that-cannot-break.md#space-alone),
+of [Space alone](building-b2-and-the-search-for-a-healthy-rich-world.md#space-alone),
 `research/oee/fold.py`.
 
 ### The runs of Experiment 10
@@ -812,7 +812,7 @@ iterations each.
 
 - **9 November 2026.** From 9 October, this page gave the worlds of 409,600
   tokens a dimension of 3.3 by balls, read after their last game.
-  [Dimensions at scale](dimensions-at-scale.md) read them at five moments of
+  [Dimensions at scale](space-at-scale.md#dimensions-at-scale) read them at five moments of
   their settled lives: 3.0 to 3.2 in the median from radius 3 to 14, and 3.04
   over radii 3 to 6, where one look gave 3.3. One look at a world is one draw:
   between five moments, a world's reading over radii 3 to 6 varies by 0.8.
@@ -821,9 +821,9 @@ iterations each.
   readings of the last game.
 - **14 October 2026.** From 9 October, the first half of this page said that
   nothing held regions of a world apart.
-  [Like next to like](like-next-to-like.md) had found likeness gone within
+  [Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance) had found likeness gone within
   three steps.
-  [Worlds of 100,000 tokens](how-does-a-worlds-size-follow-its-tokens.md#worlds-of-100000-tokens)
+  [Worlds of 100,000 tokens](b1-the-network-size-and-scaling.md#worlds-of-100000-tokens)
   found that lines of descent do hold regions: patches of kin up to about 12
   steps wide ([Two dimensions that disagree](#two-dimensions-that-disagree)).
 - **17 October 2026.** From 14 October, this page said that B2's rules leave
@@ -861,10 +861,8 @@ iterations each.
 <!-- turns -->
 ---
 
-← [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Space and dimension](../README.md#space-and-dimension) · [Dimensions at scale](dimensions-at-scale.md) →
+← [Physical inspiration](physical-inspiration.md) · [Space and dimension](../README.md#space-and-dimension) · [Local rules only](local-rules-only.md) →
 
-**Also about:** [Looking for a healthy, rich world](../README.md#looking-for-a-healthy-rich-world).
-
-> [!info]- Pages that link here (27)
-> [A screen of random worlds](a-screen-of-random-worlds.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [The life of a B1 world](a-worlds-life.md) · [Building B2: a world that cannot break](a-world-that-cannot-break.md) · [How births build the network](how-agents-have-children.md) · [Where tokens flow](where-the-tokens-flow.md) · [The shape of the network](what-shape-does-the-network-take.md) · [Physical inspiration](physical-inspiration.md) · [Like next to like: how alike agents are at a distance](like-next-to-like.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Dimensions at scale](dimensions-at-scale.md) · [Which properties have no scale?](which-properties-have-no-scale.md) · [Local rules only](local-rules-only.md) · [What holds a world's size](what-holds-a-worlds-size.md) · [Worlds of many sizes](how-does-a-worlds-size-follow-its-tokens.md) · [Rules in company](rules-in-company.md) · [Revolutions, handover and gifts: the switches the world was built with](the-switches-the-world-was-built-with.md) · [Who inherits?](who-inherits.md) · [Links to strangers](links-to-strangers.md) · [Eight switches at once, and how sixteen worlds can test them](eight-switches-at-once.md) · [Healthy and rich](healthy-and-rich.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md) · [Who may be a mate](mixed-at-birth-with-parents-as-mates.md) · [The candidates, played on and played again](the-candidates-played-on.md) · [Room and riches for the steadiest world](room-for-the-steadiest-world.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (12)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->

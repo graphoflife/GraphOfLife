@@ -40,7 +40,7 @@ RULES = [("uniform", "evenly over all", BLUE), ("poorest", "to the poorest", GRE
 GAMES = [("largest stake, with coalitions", ORANGE), ("largest stake, no coalitions", RED), ("lottery", BLUE)]
 FROM = 100  # round 3 is read from iteration 100 on, as its health is
 
-PILOT_RUNS = ("the pilot worlds of batch S ([Revolutions, handover and gifts](the-switches-the-world-was-built-with.md)): "
+PILOT_RUNS = ("the pilot worlds of batch S ([Revolutions, handover and gifts](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)): "
               "B1 and B2 at 10,000 tokens, each with and without coalitions (`allow_revolutions` off), and B2 with "
               "the estates of the dead shared out by wealth (`redistribution` `by_tokens`), seeds 1 and 2, played "
               "to iteration 1,000")

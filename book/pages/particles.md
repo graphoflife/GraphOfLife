@@ -37,7 +37,7 @@ and falls where it is, and the wave travels on. In Conway's Game of Life
 (Gardner 1970) the same thing happens on a grid. A glider is five live cells
 that rebuild themselves one cell further on every four generations. The cells
 are born and die, and the glider goes on
-([Patterns that outlast their parts](gliders-and-who-helps-whom.md#patterns-that-outlast-their-parts)).
+([Patterns that outlast their parts](cooperation-help-and-gliders.md#patterns-that-outlast-their-parts)).
 
 That is what a particle would be in Graph of Life: a **pattern that keeps
 its identity while what carries it is replaced**. Three things carry
@@ -63,11 +63,11 @@ there", not "a test that cannot see".
 
 The answers so far were negative, but partial. No ring of tokens lasted fifty
 games in the worlds of 10,000 tokens, and chains of takeovers wander like a
-drunkard ([Gliders, and who helps whom](gliders-and-who-helps-whom.md)). A
+drunkard ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)). A
 star's centre is a place handed from parent to child
-([How a star is handed down](the-largest-and-the-smallest.md#how-a-star-is-handed-down)).
+([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 Groups of the flow are the network's regions
-([Flow modules](flow-modules.md)). This page asks the question again of the
+([Flow modules](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). This page asks the question again of the
 largest worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") and of the healthiest worlds found
 since, with detectors that come with their own controls.
 
@@ -80,11 +80,11 @@ passing: twelve worlds, each over the last 500 games of its run.
 
 - **B1 at 100,000 tokens** (Experiment 10, iterations 1,000 to 1,499). Its
   thirty worlds all play the same game, apart from their stars
-  ([Do the worlds agree?](how-the-game-is-played.md#do-the-worlds-agree)).
+  ([Do the worlds agree?](b1-the-game-and-its-flows.md#do-the-worlds-agree)).
   So five stand for them: the first five [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") whose world is not held
   together by one hub, 1, 3, 4, 5 and 6. Beside them stands the largest star,
   seed 28, whose centre was joined to three agents in four in the games read
-  ([Stars](the-largest-and-the-smallest.md#stars)).
+  ([Stars](b1-lives-and-wealth.md#stars)).
 - **The five healthiest worlds of round 3**, by the product of their six
   criteria ([Which worlds are healthy?](which-worlds-are-healthy.md)): s3042,
   s4006 played strongest first, s3018, s3080 and s3057, each of 30,000 tokens
@@ -122,7 +122,7 @@ world?
 > 1. A token: 1/(1 − h), with h the share of all tokens staked in the games that went to the staker's own node.
 > 2. A brain: the nodes on which anyone staked over those taken by a neighbour.
 > 3. An agent: the mean number of agents after a game over the mean number that were not alive after the game before (Little's law).
-> 4. A group: flow modules followed as on [Flow modules](flow-modules.md#following-groups-through-time) (web/js/flowmodules.js through tools/flowmodules_cli.js); the 99th percentile of their lives.
+> 4. A group: flow modules followed as on [Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time) (web/js/flowmodules.js through tools/flowmodules_cli.js); the 99th percentile of their lives.
 > 5. A place: after every game the agent with the most connections; a dynasty goes on while the next one is the same agent or its child.
 >
 > **To make it again:** `python3 book_figures.py particles`.
@@ -228,7 +228,7 @@ a ring. Only in the star does the downhill part last a little (0.06 over two
 games, 0.13 over fifty), as its leaves keep paying into one centre. (In the
 worlds of 10,000 tokens, the downhill part of the gifts alone, the stakes
 that took no node, lasts as well:
-[Where the tokens go](gliders-and-who-helps-whom.md#where-the-tokens-go).)
+[Where the tokens go](cooperation-help-and-gliders.md#where-the-tokens-go).)
 
 In the frozen world the circulation of each game is the exact reverse of the
 one before, a correlation of −1. Over any even number of games, every token
@@ -253,12 +253,12 @@ of that series: how much of its ups and downs happen at each period. A beat
 is a period that holds more than its share.
 
 More than what share? Tokens move almost as a random walk does
-([The game as a random walk](where-the-tokens-flow.md#the-game-as-a-random-walk)),
+([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)),
 and a random walk held near a level, the dog on the leash, has a spectrum of
 its own. An agent's tokens have two such memories at once. They drift
 slowly, as its connections change. And they swing from one game to the next,
 where the even split overshoots: tokens slosh from a hub to its leaves and
-back ([A two-game rhythm](where-do-the-tokens-go.md#a-two-game-rhythm)). A
+back ([A two-game rhythm](b1-lives-and-wealth.md#a-two-game-rhythm)). A
 memory says how much of a departure from the level is left a game later:
 near 1 for the slow drift, below 0 for the swing, whose sign flips every
 game. In the median stretch of 128 games of B1's worlds, the slow memory is
@@ -297,7 +297,7 @@ The swing itself cannot stand up out of the quotient: a random walk with a
 memory near −1 *is* a swing of two games. So the swing is read from its
 memory instead. How hard can the even split make tokens swing? For a hub
 whose *k* neighbours are leaves,
-[A two-game rhythm](where-do-the-tokens-go.md#a-two-game-rhythm) works it
+[A two-game rhythm](b1-lives-and-wealth.md#a-two-game-rhythm) works it
 out: every departure from rest is multiplied, game by game, by
 1/(*k* + 1) − 1/2. That is never below −1/2: of a swing, at most half is left
 a game later. A swing memory far below −1/2 is a swing that dies away more
@@ -398,7 +398,7 @@ and the plainest kind of particle.
 
 The groups are the **flow modules** of each game: sets of agents that a token
 wandering the flow tends to stay inside, found by the map equation of Rosvall
-and Bergstrom (2008) ([Flow modules](flow-modules.md)). A module of one game
+and Bergstrom (2008) ([Flow modules](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). A module of one game
 and a module of the next are the same module if they share enough members,
 at least 0.3 of the agents in either. So a module can go on while its members
 change, one by one, and even when none of the agents it began with is left.
@@ -428,7 +428,7 @@ of its modules should last all fifty games read.
 > **Data.** From each run's frames, read once by `particles_pass` in `book_chapters/particles.py` (every game's `decisions.allocations` and `decisions.winners`, and the agents, tokens, connections and parents after it) and kept in `GraphOfLifeRuns/.book/<run>.particles.json`.
 >
 > 1. For each of the last 50 games, the flow between each pair of neighbours: the tokens staked either way.
-> 2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) and follow the groups from game to game: best overlap first, each used once, none below 0.3 of the members two modules share ([Flow modules](flow-modules.md#following-groups-through-time)).
+> 2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) and follow the groups from game to game: best overlap first, each used once, none below 0.3 of the members two modules share ([Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time)).
 > 3. Do the same with every agent's stakes on its neighbours dealt among them at random (`--neighbours 1`) and with each game's agents dealt among modules of its sizes (`--shuffle 1`).
 > 4. The share of modules followed for at least so many games; the median of each kind's worlds.
 >
@@ -441,7 +441,7 @@ for forty. Members dealt at random make none that last ten: B1's modules are
 no accident of their sizes. But partners dealt make nearly as many, 13% and
 1.6%. Agents that keep favouring the same neighbours add about a fifth to the
 modules that last ten games; the network's regions make the rest, as
-[Flow modules](flow-modules.md#how-long-modules-live) found in two worlds of
+[Flow modules](b1-the-game-and-its-flows.md#how-long-modules-live) found in two worlds of
 the same experiment, five hundred games earlier. The star is no different:
 10% of its modules last ten games, 8% with partners dealt.
 
@@ -568,13 +568,13 @@ A particle would need something that binds. Three places to look next:
 
 - **Stakes that do not spread.** In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") nearly every agent stakes all in, so
   tokens travel in bundles, the puffers of
-  [Gliders, and who helps whom](gliders-and-who-helps-whom.md#puffers-in-b2-gliders-in-b1).
+  [Gliders, and who helps whom](cooperation-help-and-gliders.md#puffers-in-b2-gliders-in-b1).
   The detectors of this page, run on B2's worlds, would show whether a bundle
   can outlast the agents that carry it.
 - **A flow through the world.** Order that feeds on a flow, like the
   convection cells of a pan of oil heated from below, needs a source and a
   sink: the planned study *A source and a sink*.
-- **Local rules.** The [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the dead and the single random stream
+- **Local rules.** The share-out of the dead and the single random stream
   still reach across a whole world at once
   ([What this asks of the notebook](physical-inspiration.md#what-this-asks-of-the-notebook)).
   A thing that keeps its form while it moves needs a world in which what
@@ -602,7 +602,7 @@ have one answer.
 
 A group of the agents' own needs a rule that makes staying together pay,
 which none of these worlds has
-([What would have to change](who-helps-whom.md#what-would-have-to-change)).
+([What would have to change](cooperation-help-and-gliders.md#what-would-have-to-change)).
 The detectors of this page are ready for one: a world with such a rule should
 show modules that outlast partners dealt, and perhaps modules that move.
 
@@ -638,11 +638,11 @@ show modules that outlast partners dealt, and perhaps modules that move.
 
 - [Physical inspiration](physical-inspiration.md#particles-stable-things-in-a-restless-world):
   the physics aim, and why a particle would be a win for both aims.
-- [Flow modules: the groups tokens stay in](flow-modules.md): the groups
+- [Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in): the groups
   followed here, in 183 worlds of every kind.
-- [Gliders, and who helps whom](gliders-and-who-helps-whom.md): packets of
+- [Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom): packets of
   tokens and brain that move, and the rings of the worlds of 10,000 tokens.
-- [Who helps whom](who-helps-whom.md): why nothing in the game rewards
+- [Who helps whom](cooperation-help-and-gliders.md#who-helps-whom): why nothing in the game rewards
   keeping a partner, and what would have to change.
 
 ## How this was made
@@ -711,3 +711,14 @@ made again by `python3 book_figures.py particles` and kept in
 - Yule, G. U. (1927). On a method of investigating periodicities in disturbed
   series, with special reference to Wolfer's sunspot numbers. *Philosophical
   Transactions of the Royal Society of London A* 226, 267–298.
+
+<!-- turns -->
+---
+
+← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension)
+
+**Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
+
+> [!info]- Pages that link here (2)
+> [Physical inspiration](physical-inspiration.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->

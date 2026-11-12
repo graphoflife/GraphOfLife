@@ -33,7 +33,7 @@ Every long world the notebook has played says the same thing in its contests:
 later brains beat earlier ones, by less and less.
 
 The two longest are Experiment 18's
-([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)).
+([Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)).
 They are [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") worlds whose brains are mixed at birth. A newborn takes each
 hidden unit of its brain from its parent or from a [neighbour](the-world.md#the-network "An agent joined to another by a connection."), by a coin. They
 were played to 50,000 iterations. In their own contests, the brains of 25,000
@@ -136,7 +136,7 @@ itself:
 > [!quote] The thesis of Experiment 28, written down before any of its runs existed
 > **The claim.** Evolution in Experiment 18's two longest worlds had stopped climbing by iteration 25,000. Against the brains of 25,000, the brains of the ten eras after it (27,500 to 50,000) do no better than a contest's own noise: their median score lies within the band an era scores against itself. Against the brains of 2,500, every era from 5,000 on still wins, beyond that band.
 >
-> **Why it would be so.** The two worlds' own contests (Chapter [81](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations)), 100 iterations each on both eras' worlds with two coins: in seed 5 the brains of 25,000 scored a median of 0.56 against those of 10,000, and those of 50,000 scored 0.54 against those of 25,000; in seed 6, 0.72 and then 0.42. Later brains beat earlier ones by less and less in every long world the book has played (Chapter [92](the-candidates-played-on.md); Experiment 19, 0.78 falling to 0.55). If the game these brains play still had room within their reach, the eras after 25,000 would pull ahead of 25,000 as the eras before it pulled ahead of 2,500.
+> **Why it would be so.** The two worlds' own contests (Chapter [81](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)), 100 iterations each on both eras' worlds with two coins: in seed 5 the brains of 25,000 scored a median of 0.56 against those of 10,000, and those of 50,000 scored 0.54 against those of 25,000; in seed 6, 0.72 and then 0.42. Later brains beat earlier ones by less and less in every long world the book has played (Chapter [92](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again); Experiment 19, 0.78 falling to 0.55). If the game these brains play still had room within their reach, the eras after 25,000 would pull ahead of 25,000 as the eras before it pulled ahead of 2,500.
 >
 > **It holds if:** In both worlds the median score of the eras 27,500 to 50,000 against 25,000 (each era's score the mean of its two contests) lies within the noise band, 0.5 plus or minus twice the standard deviation of the world's twelve contests of an era against itself (2,500, 10,000 and 25,000, four coins each); and every era from 5,000 to 50,000 scores above that band against 2,500.
 >
@@ -265,7 +265,7 @@ little in one world, round a circle in the other.
   ([Strategies written by hand](strategies-written-by-hand.md),
   [What a brain can compute](what-a-brain-can-compute.md)).
 - **A chain of contests hides circles.** Contests between neighbours in time
-  ([Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations))
+  ([Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations))
   said that later brains win by less and less. Fixed eras show that later
   brains can win against their parents and still lose ground against their
   ancestors. That is why the test of open-ended evolution asks for wins
@@ -280,9 +280,9 @@ little in one world, round a circle in the other.
 
 - [Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better): contests, ratings,
   exploitability and the invasion test, in full.
-- [Five mixed worlds, fifty thousand iterations](mixed-at-birth-ten-long-worlds.md#five-mixed-worlds-fifty-thousand-iterations):
+- [Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations):
   the two worlds played here, and the three that died out.
-- [Why the raiders stopped winning](does-evolution-close-the-door.md): does a
+- [Why the raiders stopped winning](strategies-written-by-hand.md#why-the-raiders-stopped-winning): does a
   world that has stopped climbing still let a raider in?
 - [A hundred thousand iterations](a-hundred-thousand-iterations.md): one world
   planned twice as long.
@@ -330,10 +330,10 @@ its figure gives every step.
 <!-- turns -->
 ---
 
-← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) →
+← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [A source and a sink](a-source-and-a-sink.md) →
 
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 
-> [!info]- Pages that link here (10)
-> [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [How alike the agents are](how-alike-the-agents-are.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Why the raiders stopped winning](does-evolution-close-the-door.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Brains mixed at birth, in long worlds](mixed-at-birth-ten-long-worlds.md)
+> [!info]- Pages that link here (11)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

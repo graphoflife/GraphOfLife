@@ -2,12 +2,23 @@
 
 > [!question] Questions of this page
 > - What do we look for in a world before we ask how it evolves?
+> - How is health measured now, and what is it used for since 11 November 2026?
 > - What were the seven marks of the health bar?
 > - How much do a world's [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") differ, in one number?
 
 ## In short
 
-How the notebook judges whether a world is healthy and interesting: the author's criteria, the seven marks of the health bar that [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds were held to, and the diversity score.
+Health says whether a world could hold long evolution at all: whether it lives,
+holds together, has room, and has agents that differ. The definition in force
+is the author's of 9 November 2026. It scores fifteen measures by how many of
+round 3's living worlds a world does better than, and puts six criteria
+together in three ways ([Which worlds are
+healthy?](which-worlds-are-healthy.md)). From 11 November 2026 health is frozen
+at that version and used only as a filter: worlds that are dead, a star,
+uniform or frozen are left out, and worlds are ranked by evolution. A table
+lists the earlier versions. They are kept in full below, because round 3's
+pages were written with them and the open-ended test still asks for the health
+bar and the diversity score.
 
 It gathers what were 3 pages of their own, one section each:
 
@@ -15,13 +26,74 @@ It gathers what were 3 pages of their own, one section each:
 - [The health bar](#the-health-bar): The seven marks a world's network must meet to count as healthy, why each is there, and how a world is read against them.
 - [The diversity score](#the-diversity-score): How much the agents of a world differ, in one number, and how much their decisions differ.
 
+## From 11 November 2026: health as a filter
+
+From 11 November 2026, health is frozen at the version of 9 November and used
+only as a filter. Worlds that are dead, a star, uniform or frozen are left out.
+The worlds that are left are ranked by evolution, against null models, and not
+by health ([What this notebook is about](what-this-notebook-is-about.md)). So a
+world is chosen for what the notebook asks, whether it keeps evolving, and not
+for how healthy it looks.
+
+## The definition in force: health of 9 November 2026
+
+Health, as the author defined it on 9 November 2026, reads six criteria from
+fifteen measures of a world. Each measure is averaged over the world's run,
+from iteration 100 to its end ([Every measure, a score from 0 to
+1](which-worlds-are-healthy.md#every-measure-a-score-from-0-to-1) lists them):
+
+- **decentralised:** the links of the best-linked agent, and the [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") of the
+  richest, each as a share;
+- **resilient:** the share of the agents in the 2-core, the most of the world
+  that one agent's or one link's loss cuts off, and agents on loops per link,
+  which is low both for a tree and for a world crowded with links;
+- **almost three-dimensional:** the typical distance over the random twin's,
+  and a dimension near three;
+- **diverse:** the [same-position share](#the-same-position-share), and how
+  alike the agents are in tokens, in the links of the 2-core, in age and in the
+  choice to have a child;
+- **not too even:** the Gini of the tokens over the Gini of the same tokens
+  dealt out at random;
+- **few tokens culled:** the share of all the tokens culled in a game ([Few
+  tokens culled](which-worlds-are-healthy.md#few-tokens-culled)).
+
+No measure has a line. A world's score in a measure is the share of round 3's
+living worlds it does better than, so every score is positive, and a bigger one
+is always better. A criterion is the geometric mean of its measures' scores.
+The six criteria are put together in three ways, each an order of its own:
+multiplied, added, or the worst of them ([Three ways to put the criteria
+together](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together)).
+Four measures of the version before are left out, each for its reason: links
+per agent, the largest holding, how many agents share a genotype, and [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s line
+for the Gini.
+
+## Earlier versions
+
+| version | in use | what it asked | what it judged |
+|---|---|---|---|
+| [The health bar](#the-health-bar) | from 12 October 2026 | seven marks of a world's network at one moment, each met or missed | B2 and the worlds built from it; part 4 of the [open-ended test](measuring-evolution.md#what-would-count-as-open-ended-evolution) still asks for every mark |
+| [The diversity score](#the-diversity-score) | from 16 October 2026 | four spreads of a world's agents in one number, ranked among frozen worlds | the search for a healthy, rich world; part 4 of the open-ended test |
+| [The criteria of rounds 1 and 2](#the-criteria-of-rounds-1-and-2) | 23 October 2026 | six criteria read at iteration 2,000, each a yes or a no | round 1 of the screen (Experiment 38) |
+| [The six criteria of round 3](#what-makes-a-world-interesting) | 24 October to 7 November 2026 | the same six, averaged over iterations 100 to 3,000, with looser lines | round 3, as first judged (Experiments 40 to 42) |
+| a first order | 7 to 9 November 2026 | each line read as the share of what it asks, up to the line | round 3; the author found it still a yes or a no past the lines |
+| [the definition in force](#the-definition-in-force-health-of-9-november-2026) | from 9 November 2026 | fifteen measures, each scored against round 3's living worlds; six criteria; three orders | round 3's orders and shortlist (Experiment 43); from 11 November, a filter only |
+
+The earlier versions are kept below as they were. Round 3's pages and the
+theses of their day were written with them, and the open-ended test still asks
+for the health bar and the diversity score.
+
 ## What makes a world interesting
+
+*This is how health was judged from 24 October to 7 November 2026, as round 3
+was first judged. [The definition in
+force](#the-definition-in-force-health-of-9-november-2026) replaced it on 9
+November.*
 
 We are looking for worlds in which evolution could go on for a very long
 time. Such a world has to stay alive. It must not hang on a few agents, and it
 must not fall apart when one agent dies. It should look like a space of about
 three dimensions, as our own world does. And its agents should differ from
-one another, in [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), links, age, genes and decisions, without the tokens
+one another, in tokens, links, age, genes and decisions, without the tokens
 being spread too evenly.
 
 We turn this picture into six criteria. From round 3 of the screen on, every
@@ -201,7 +273,7 @@ one of those agents' [brains](the-brain.md "The neural network each agent decide
 stakes differ by more than one brain differs from itself between two tries.
 In a world where every agent would act alike in the same place the share is
 near 0; in a world of many kinds of behaviour it is near 1. It is the measure
-of [How different are the agents?](how-different-are-the-agents.md), read at
+of [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents), read at
 every world kept.
 
 ### Healthy, and interesting
@@ -216,15 +288,13 @@ author once round 3 has run and we have looked at its worlds. Until then the
 judge counts a world as interesting when it is alive and misses at most two of
 criteria 2 to 6, the author's first answer.
 
-> [!note] Added later (7 November 2026)
-> Round 3 has run. Instead of a verdict, the author asked for an order of
-> every world drawn at random, from the most healthy to the least, by a
-> definition they can check:
-> [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md)
-> reads each line of this page as how much of what it asks a world has, and
-> proposes lines for the two numbers reported here, a line for *not too even*
-> drawn by chance instead of by B2, and two other changes. Until the author
-> has decided on them, the lines on this page stay as they are.
+Round 3 has run. Instead of a verdict, the author then asked (7 November
+2026) for an order of every world drawn at random, from the most healthy to
+the least, by a definition they can check
+([Which worlds are healthy?](which-worlds-are-healthy.md)). Its definition of
+9 November is now
+[the definition in force](#the-definition-in-force-health-of-9-november-2026),
+and the lines of this section are an earlier version.
 
 ### When a setting is marked bad
 
@@ -359,7 +429,7 @@ medians over many iterations.
   In the mixed worlds of Experiment 17, the hub mark failed at 96% of the
   moments below 300 agents, while worlds of 600 to 1,000 agents met every
   mark at 98% of their moments
-  ([Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md#the-marks-a-world-misses)).
+  ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-marks-a-world-misses)).
 - **The dimension mark cannot tell a space from a small world.** A B2 world
   of 600 to 1,500 agents passes it because it is small
   ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). So the
@@ -371,15 +441,15 @@ medians over many iterations.
   ([What makes a world interesting](measuring-health.md#the-six-criteria)).
 
 ### Where it is used (the health bar)
-- [A world that cannot break](a-world-that-cannot-break.md): B2's rules were
+- [A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break): B2's rules were
   built to meet it.
-- [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
+- [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break):
   no world there held.
-- [Healthy and rich](healthy-and-rich.md): every world read against it; on
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): every world read against it; on
   17 October 2026, 99 of 624 met all seven marks.
-- [Mixed at birth: ten long worlds](mixed-at-birth-ten-long-worlds.md),
-  [The candidates, played on](the-candidates-played-on.md) and
-  [Room for the steadiest world](room-for-the-steadiest-world.md): theses
+- [Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-mixed-at-birth-in-long-worlds),
+  [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again) and
+  [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world): theses
   that ask for every mark.
 - [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
   [A screen of random worlds](a-screen-of-random-worlds.md): criteria built
@@ -395,7 +465,7 @@ tokens, their links, their ages and their [genotypes](measuring-evolution.md#gen
 the four is counted without drawing any line, then ranked among a fixed set
 of 653 worlds; the score is the mean of the four ranks. How differently the
 agents *decide* is a separate measure: the
-[effective kinds of staking](how-different-are-the-agents.md#kinds-of-behaviour).
+[effective kinds of staking](b1-brains-lineages-and-messages.md#kinds-of-behaviour).
 
 ### Four spreads
 
@@ -430,7 +500,7 @@ tokens are shared; that is the [Gini coefficient](measuring-tokens.md#measuring-
 
 ### Examples
 
-From [Healthy and rich](healthy-and-rich.md):
+From [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich):
 
 - **B1's worlds** spread widely, their ages over 5.6 to 6.9 classes and their
   tokens over 3.5 to 4.1, and score 0.67 to 0.75.
@@ -457,14 +527,14 @@ both lines:
 
 Other pages draw the line at other moments: 0.54 for B2's ten worlds played
 on and read at iteration 3,000
-([Room for the steadiest world](room-for-the-steadiest-world.md)).
+([Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world)).
 
 ### Decisions: the effective kinds of staking
 
 The score sees what agents hold and what they are, not what they do, and two
 genotypes may act exactly alike: a B2 world of 3,400 agents holds about 950
 effective genotypes but about 17 kinds of staking.
-[How different are the agents?](how-different-are-the-agents.md) puts the
+[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) puts the
 brains of 400 agents into the same 200 situations, with the same random
 inputs. Two brains act differently when their stakes are further apart than
 95% of brains are from themselves between two halves of the random draws;
@@ -477,20 +547,20 @@ played, and averages each moment with the one 500 iterations before, since
 the kinds swing from moment to moment.
 
 ### Where it is used (the diversity score)
-- [Healthy and rich](healthy-and-rich.md#two-halves): where the score was
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves): where the score was
   made.
 - [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
   [A screen of random worlds](a-screen-of-random-worlds.md): the criterion
   *diverse*.
-- [The candidates, played on](the-candidates-played-on.md) and
-  [Five more seeds for the rules that held](the-candidates-played-on.md#five-more-seeds-for-the-rules-that-held):
+- [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again) and
+  [Five more seeds for the rules that held](building-b2-and-the-search-for-a-healthy-rich-world.md#five-more-seeds-for-the-rules-that-held):
   a world must score above B2's median world to be played on, and again to
   hold.
-- [Room for the steadiest world](room-for-the-steadiest-world.md): what each
+- [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world): what each
   rule cost of the four parts.
-- [Births as rich as the neighbours](room-for-the-steadiest-world.md#births-as-rich-as-the-neighbours),
-  [The search's best world, in new seeds](the-candidates-played-on.md#the-searchs-best-world-in-new-seeds),
-  [Who inherits?](who-inherits.md) and [Rules in company](rules-in-company.md):
+- [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours),
+  [The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds),
+  [Who inherits?](what-the-switches-did-in-pilots.md#who-inherits) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company):
   worlds scored by it.
 
 ## Where to go next
@@ -499,9 +569,9 @@ the kinds swing from moment to moment.
   the rounds, and what each found.
 - [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md):
   where the health bar comes from.
-- [Healthy and rich](healthy-and-rich.md): how the
+- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): how the
   diversity score was made, and every world scored by it.
-- [How different are the agents?](how-different-are-the-agents.md): the
+- [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): the
   measure behind the same-position share.
 - [What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution): the test a
   healthy world's long run will face.
@@ -542,3 +612,20 @@ the kinds swing from moment to moment.
     but reads them as shares, draws lines for the half-cut exponent and the
     same-position share, and would replace B2's Gini line by one drawn by chance.
     This page's lines stand until the author decides.
+- **11 November 2026.** This page now opens with the definition in force, of 9
+  November 2026, until then only on Which worlds are healthy?, and a table of
+  the earlier versions. From this day health is frozen at that version and used
+  only as a filter: worlds that are dead, a star, uniform or frozen are left
+  out, and worlds are ranked by evolution. The earlier versions are kept as
+  they were.
+
+<!-- turns -->
+---
+
+← [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [How runs are made, recorded and costed](runs-and-records.md) →
+
+**Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
+
+> [!info]- Pages that link here (16)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [A screen of random worlds](a-screen-of-random-worlds.md) · [Which worlds are healthy? Three orders](which-worlds-are-healthy.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Statistics: the tools of the notebook](statistics.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md)
+<!-- /turns -->

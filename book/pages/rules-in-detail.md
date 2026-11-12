@@ -130,7 +130,7 @@ clustering fell to 0.27: about half was lost, but it is still far above the
 In B1, every game cuts the connections that carried no tokens in it, so the
 ring is forgotten within a few iterations. It matters mainly as a fair,
 connected start: every founder can reach every other.
-[The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations) follows what
+[The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations) follows what
 the founders make of it.
 
 ## Seeds and the random stream
@@ -170,7 +170,7 @@ written down with the run. From the seed, two streams are started:
    numpy's `RandomState` (the Mersenne Twister algorithm), seeded with the
    run's seed. It gives the founders' brains, every tie broken at random and
    every probabilistic yes-or-no decision. It also gives every random input of
-   a brain, every [share-out](gains-and-losses.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of tokens and every mutation.
+   a brain, every share-out of tokens and every mutation.
 
 The program always takes its draws in the same order: agents are visited in
 increasing order of id, and so are neighbours. So the whole history of a world
@@ -328,7 +328,7 @@ reads as 1 ([What the brains are like](what-the-brains-are-like.md)).
 - **The child's tokens.** A parent with τ tokens gives its child
   ⌊*f*(*ā*, *b̄*) · τ⌋: the share of its tokens, rounded down to a whole
   number. Here *ā* and *b̄* are its two reproduction outputs, averaged over
-  all its candidates ([How agents have children](how-agents-have-children.md),
+  all its candidates ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network),
   [One iteration, step by step](one-iteration.md)). B2 adds limits: a parent
   keeps at least one token, a child needs at least 10, and an agent with 8
   connections or more has no child
@@ -419,7 +419,7 @@ an agent spreads its tokens over its candidates or puts them all on one
   parent itself included — outputs 2–3 with mode 4–5. In the settled life of
   the 30 B1 worlds of 100,000 tokens, 11.5% of children are joined to none of
   their parent's candidates at birth
-  ([How agents have children](how-agents-have-children.md)). In B2 a newborn
+  ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)). In B2 a newborn
   is first joined to its parent and to two of the parent's neighbours, drawn
   at random, and the brain decides about the others.
 - **Handing over a connection**: one decision per neighbour of the parent —
@@ -501,7 +501,7 @@ candidate 4's, 0.571, and candidate 4 gets the eleventh token.
   rule stays reproducible. In an even split every remainder is the same, and
   the leftovers go down the list of candidates in order. The agent's own node
   is first in that list, so it gets the first leftover token
-  ([Where the tokens flow](where-the-tokens-flow.md)).
+  ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)).
 
 An agent with 3 tokens and one neighbour that splits evenly shows both.
 Each of its two candidates has an exact share of 1.5 tokens, and rounded
@@ -653,7 +653,7 @@ changes only 1.5% ([What the brains are like](what-the-brains-are-like.md)).
   ([B1 and B2: the two baselines](b1-and-b2.md)).
 - [What a brain can compute](what-a-brain-can-compute.md): what a B2 brain
   can and cannot work out from its 66 inputs.
-- [Do agents cooperate?](do-agents-cooperate.md): no input names a genotype,
+- [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): no input names a genotype,
   so a brain cannot tell kin from stranger, except through messages.
 
 ## What a brain says
@@ -746,7 +746,7 @@ search for strangers four ([Every setting](settings.md)).
 - [What the brains are like](what-the-brains-are-like.md): where selection
   pushed each row in B1's worlds, and why the stake score barely changes
   from one candidate to the next.
-- [How the game is played](how-the-game-is-played.md): what rows 6–10 come to
+- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): what rows 6–10 come to
   in B1's worlds. From iteration 500 on, 98% of the agents spread their stake.
 - [What a brain can compute](what-a-brain-can-compute.md): a B2 brain whose
   weights are set by hand so that its 19 outputs play a rule written in
@@ -841,7 +841,7 @@ read messages: more than a third of all the brain's 15,550 weights. In B2,
 ### What the messages say
 
 Do the messages carry anything useful? For B1,
-[What agents say to each other](what-agents-say-to-each-other.md) answered:
+[What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) answered:
 hardly. It read every message of the 30 B1 worlds of 100,000 tokens at their
 end. Two messages written by one agent to two readers differ by 0.0005, as
 the root mean square of the differences of their 30 numbers. Messages written
@@ -852,12 +852,12 @@ connections, and whether it is written to oneself — accounts for only 1.2%
 of the messages' variety.
 
 ### Where it is used (messages)
-- [What agents say to each other](what-agents-say-to-each-other.md): what
+- [What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other): what
   the messages of B1's worlds carry, number by number.
 - [What a brain can compute](what-a-brain-can-compute.md): why no message
   can carry news of a third agent, and how `self_message` = largest would let
   one.
-- [Do agents cooperate?](do-agents-cooperate.md): messages are the only way
+- [Do agents cooperate?](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): messages are the only way
   a brain could tell kin from strangers.
 
 ## How a coalition takes a node
@@ -995,20 +995,20 @@ decides about half of all nodes. In the last game of the 30 B1 worlds of
 anyone staked. The winning member was the agent living on the node for 12%
 of all those nodes, and a neighbour for 40%. By then 97% of all staked tokens
 are marked revolutionary
-([How the game is played](how-the-game-is-played.md)). In B2's pilot worlds
+([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)). In B2's pilot worlds
 of 10,000 tokens, coalitions won about one node in three hundred a game. B2
 with and without them was the same world in every measure
-([The switches the world was built with](the-switches-the-world-was-built-with.md)).
+([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)).
 
 ### Where it is used (how a coalition takes a node)
-- [How the game is played](how-the-game-is-played.md): who wins the nodes of
+- [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): who wins the nodes of
   B1's worlds, and how.
-- [The switches the world was built with](the-switches-the-world-was-built-with.md):
+- [The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with):
   B1 and B2 without revolutions. B1 without them becomes a world of mayflies,
   whose agents are 7 to 13 iterations old on average.
-- [Revolutions, with every other rule](the-switches-the-world-was-built-with.md#revolutions-with-every-other-rule):
+- [Revolutions, with every other rule](what-the-switches-did-in-pilots.md#revolutions-with-every-other-rule):
   the worlds near B2 in which revolutions do matter.
-- [A crew of raiders](does-evolution-close-the-door.md#a-crew-of-raiders): two raiders of two tokens each
+- [A crew of raiders](strategies-written-by-hand.md#a-crew-of-raiders): two raiders of two tokens each
   stake one on a stranger of one token. In B2 the stranger's home stake
   counts as 1.5, so neither raider can take the node alone, but together,
   with *R* = 2, they do.
@@ -1188,7 +1188,7 @@ statistics — inequality, clustering, families — mean little. Stopping at 20
 also saves running a dying world to its end.
 
 But a world at 20 agents is not always dying.
-[How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)
+[How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 ran small worlds with the threshold at 0. All six worlds of 800 and 1,600
 tokens lived to iteration 600, and five of them were worlds the threshold had
 stopped after their first game. One of them fell to 4 agents and came back.
@@ -1215,19 +1215,19 @@ their own ([The settled life of a world](statistics.md#the-settled-life-of-a-wor
 
 Of the 30 baseline worlds of 10,000 tokens, four died: after 4, 313, 1,547
 and 2,184 iterations. Of the 30 of 100,000 tokens, none did
-([A world's life](a-worlds-life.md)).
+([A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world)).
 
 Iterations are numbered from 0. So "died after *N* iterations" means that the
 iteration numbered *N* − 1 was the last to run, and it ended with 20 agents or
 fewer.
 
 ### Where it is used (when a world ends)
-- [A world's life](a-worlds-life.md): the four B1 worlds of 10,000 tokens that
+- [A world's life](b1-lives-and-wealth.md#the-life-of-a-b1-world): the four B1 worlds of 10,000 tokens that
   died out, one of them in its fourth iteration.
-- [Brains that see, and worlds that break](a-world-that-cannot-break.md#brains-that-see-and-worlds-that-break):
+- [Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break):
   four of ten worlds of 5,000 tokens died out when their brains could see, and
   eight of ten when those brains also changed only when copied.
-- [Who dies, and why](a-world-that-cannot-break.md#who-dies-and-why): all ten B2 worlds that kept
+- [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): all ten B2 worlds that kept
   nothing at home died out, within 26 to 47 iterations.
 - [How this notebook is written](how-this-notebook-is-written.md): the rule
   that the dead are counted apart.
@@ -1238,32 +1238,32 @@ fewer.
   ring starts, with the real ring of seed 1 drawn.
 - [Clustering](measuring-networks.md#clustering) and [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap): the two
   measures a small world is judged by.
-- [The first hundred iterations](a-worlds-life.md#the-first-hundred-iterations): how the
+- [The first hundred iterations](b1-lives-and-wealth.md#the-first-hundred-iterations): how the
   founders become a world.
 - [Is a run reproducible?](is-a-run-reproducible.md): the experiment that
   tested all this, and found the threads.
-- [How much does the seed decide?](how-much-does-the-seed-decide.md): how
+- [How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide): how
   differently thirty worlds of the same settings turn out.
 - [How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs): why an experiment
   runs many seeds.
-- [How agents have children](how-agents-have-children.md): the decisions of
+- [How agents have children](b1-lives-and-wealth.md#how-births-build-the-network): the decisions of
   a birth, in the worlds.
 - [The even split](measuring-tokens.md#the-even-split): what the rule does when no score is above
   zero, and why that is common.
-- [Where the tokens flow](where-the-tokens-flow.md): how the rounding tilts
+- [Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow): how the rounding tilts
   stakes towards home.
 - [Median and quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread): quantiles, as the
   notebook uses them to measure worlds.
 - [The brain](the-brain.md): the network between the inputs and the outputs.
 - [One iteration, step by step](one-iteration.md): when the looks happen in
   an iteration.
-- [Staking at home, and keeping one's node](how-the-game-is-played.md#staking-at-home-and-keeping-ones-node): how often an
+- [Staking at home, and keeping one's node](b1-the-game-and-its-flows.md#staking-at-home-and-keeping-ones-node): how often an
   agent keeps its own node.
-- [Genotypes and lineages](genotypes-and-lineages.md): the family trees that
+- [Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages): the family trees that
   the changes grow.
 - [Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops): what changing brains find,
   and where they stop.
-- [How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md):
+- [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes):
   small worlds near the line, and below it.
 
 ## How our view changed
@@ -1279,20 +1279,31 @@ fewer.
 - *How a coalition takes a node*:
   - **8 October 2026.** This page said that most nodes are not contested by a
     coalition.
-  - **23 October 2026.** Corrected. [How the game is played](how-the-game-is-played.md),
+  - **23 October 2026.** Corrected. [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes),
     written the same day as that sentence, measured the opposite in B1: in its
     settled worlds coalitions decide about half of all nodes. In B2's pilot
     worlds they won only about one node in three hundred a game
-    ([The switches the world was built with](the-switches-the-world-was-built-with.md),
+    ([The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with),
     15 October 2026).
 - *When a world ends*:
   - **9 October 2026.** The page first gave a single reason for stopping at 20:
     it saves running a dying world to its end. Small worlds run with the
     threshold at 0 then showed that a world at 20 agents is not always dying:
     all six of 800 and 1,600 tokens lived on
-    ([How does a world's size follow its tokens?](how-does-a-worlds-size-follow-its-tokens.md)).
+    ([How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)).
   - **23 October 2026.** Until now the page said that a world which falls to 20
     agents or fewer in the reproduction phase, and recovers in the game, is not
     extinct. No world can do that, because a game adds no agents: only the
     reproduction phase makes children (`GraphOfLife.py`, read when this
     page was rewritten). The count after the game misses no world.
+
+<!-- turns -->
+---
+
+← [Glossary](glossary.md) · [Reference: the rules and measures in detail](../README.md#reference-the-rules-and-measures-in-detail) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) →
+
+**Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
+
+> [!info]- Pages that link here (35)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+<!-- /turns -->
