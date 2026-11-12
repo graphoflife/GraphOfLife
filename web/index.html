@@ -84,6 +84,19 @@
        you are on and used to be answerable only from the one that started it. -->
   <div class="job-bar" id="jobBar" hidden></div>
   <span class="run-label" id="activeRunLabel"></span>
+  <!-- The front page's own controls, shown only while it is (home.js): which
+       backdrop, kept in this browser, and the backdrop alone, full screen,
+       without a word on it. -->
+  <div class="home-controls" id="homeControls" hidden>
+    <div class="home-backdrop seg" id="homeBackdrop" role="group" aria-label="Backdrop">
+      <button type="button" class="seg-btn" data-backdrop="world">World</button>
+      <button type="button" class="seg-btn" data-backdrop="eyes">Eyes</button>
+    </div>
+    <button type="button" class="home-full" id="homeFull" title="Full screen, without the words"
+            aria-label="Show the backdrop full screen, without the words">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 5.5v-4h4M10.5 1.5h4v4M14.5 10.5v4h-4M5.5 14.5h-4v-4"/></svg>
+    </button>
+  </div>
   <!-- The colour themes, one swatch each (theme.js). -->
   <div class="theme-switch" id="themeSwitch" role="group" aria-label="Colour theme"></div>
   <!-- Who made this, at the right end of the bar. -->
@@ -104,12 +117,10 @@
          edges, drawn once and then changing a few at a time (glyphwall.js). -->
     <canvas id="homeGlyphs" class="home-glyphs" aria-hidden="true"></canvas>
     <div class="home-veil"></div>
-
-    <!-- Which backdrop: the recorded world, or the eyes. Kept in this browser. -->
-    <div class="home-backdrop seg" id="homeBackdrop" role="group" aria-label="Backdrop">
-      <button type="button" class="seg-btn" data-backdrop="world">World</button>
-      <button type="button" class="seg-btn" data-backdrop="eyes">Eyes</button>
-    </div>
+    <!-- The old tube television both backdrops are seen through: its glass,
+         still scan lines, and the page's own colour beyond it (tube.js). Over
+         the pictures, under the words. -->
+    <canvas id="homeTube" class="home-tube" aria-hidden="true"></canvas>
 
     <div class="home-hero">
       <!-- The mark, lit from behind. Over the eyes it gives way to the great
@@ -123,12 +134,6 @@
       <h2 class="home-title" id="homeTitle">Graph of Life</h2>
       <p class="home-subtitle" id="homeSubtitle">An artificial life algorithm</p>
     </div>
-
-    <aside class="home-note">
-      <p>An attempt at finding <b>Open Ended Evolution</b> with graph theory,
-        evolutionary game theory and neural networks. No optimization &mdash;
-        just mutation, evolution and natural selection.</p>
-    </aside>
 
     <!-- What the world behind the title holds, read from the frame on
          screen. It is a real run, and says so in numbers. -->
@@ -1180,6 +1185,7 @@
 <script src="js/explain.js"></script>
 <script src="js/glyphwall.js"></script>
 <script src="js/entrance.js"></script>
+<script src="js/tube.js"></script>
 <script src="js/eyes.js"></script>
 <script src="js/home.js"></script>
 <script src="js/runinfo.js"></script>

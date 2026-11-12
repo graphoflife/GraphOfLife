@@ -73,6 +73,7 @@ const Home = {
   active: false,
   loaded: false,
   failed: false,
+  full: false,                 // the backdrop alone, full screen (enterFull)
 
   /** Which backdrop: the recorded world, or the network of eyes (eyes.js). */
   BACKDROP: 'gol.home.backdrop',
@@ -97,6 +98,7 @@ const Home = {
 
     Entrance.init(this.stage);
     Eyes.init(document.getElementById('homeEyes'), this.stage, document.getElementById('homeSeal'));
+    Tube.init(document.getElementById('homeTube'), this.stage);
 
     try {
       if (localStorage.getItem(this.BACKDROP) === 'eyes') this.backdrop = 'eyes';
@@ -106,6 +108,15 @@ const Home = {
       button.addEventListener('click', () => this.choose(button.dataset.backdrop));
     }
     this.markBackdrop();
+
+    // The page's own controls live in the top bar, shown only while it is.
+    this.controls = document.getElementById('homeControls');
+    document.getElementById('homeFull')?.addEventListener('click', () => this.enterFull());
+    // Full screen is left the way it was entered, or by any click or tap on it,
+    // or by Esc — which the browser's own full screen already takes.
+    this.stage.addEventListener('click', () => this.leaveFull());
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') this.leaveFull(); });
+    document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) this.leaveFull(); });
 
     if (window.ResizeObserver) {
       this._observer = new ResizeObserver(() => this.resize());
@@ -144,6 +155,7 @@ const Home = {
     if (!this.active) return;
     Entrance.repaint();
     Eyes.repaint();
+    Tube.repaint();
   },
 
   /** Say which backdrop is showing, on the switch and to the stylesheet. */
@@ -154,6 +166,30 @@ const Home = {
       button.classList.toggle('active', on);
       button.setAttribute('aria-pressed', String(on));
     }
+  },
+
+  /**
+   * The backdrop alone, filling the screen, without a word on it: no top bar,
+   * no title, no numbers, no switches. The browser's own full screen where it
+   * has one; where it has not (Safari on a phone) the stage fills the window
+   * instead. The great eye, with no title to make room for, moves to the
+   * middle (eyes.js), since the page measures itself again on the way in.
+   */
+  enterFull() {
+    if (!this.stage || this.full) return;
+    this.full = true;
+    this.stage.classList.add('is-full');
+    const fill = () => this.stage.classList.add('is-filling');
+    if (document.fullscreenEnabled && this.stage.requestFullscreen) this.stage.requestFullscreen().catch(fill);
+    else fill();
+  },
+
+  /** Back to the page as it was. */
+  leaveFull() {
+    if (!this.full) return;
+    this.full = false;
+    this.stage.classList.remove('is-full', 'is-filling');
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
   },
 
   /**
@@ -187,12 +223,15 @@ const Home = {
    */
   setActive(active) {
     this.active = active;
+    if (this.controls) this.controls.hidden = !active;
     if (!active) {
+      this.leaveFull();
       Entrance.stop();
       Eyes.stop();
       this.unload();
       return;
     }
+    Tube.resize();
 
     // Replay the arrival by taking the class off and putting it back, which is
     // the only way to restart a CSS animation.
@@ -371,6 +410,7 @@ const Home = {
   resize() {
     Entrance.resize();
     Eyes.resize();
+    if (this.active) Tube.resize();
     if (!this.renderer) return;
     this.renderer.resize();
   },

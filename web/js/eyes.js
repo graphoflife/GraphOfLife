@@ -7,23 +7,22 @@
  * over the title, and stares straight out: its pupil sits in the middle of
  * the ball and will not keep still, trembling a little every frame and now
  * and then darting. The eye itself holds its place, inside a small clear ring
- * that no other eye enters. None of the others looks at you; they look at the
- * great eye — the small ones calmly, the big ones nervously, in quick glances
- * at it and away. The threads between them are straight, and tremble a little
- * at random, as a wire does.
+ * that no other eye enters. None of the others looks at you: every one of
+ * them, down to the pixels at the edge, looks at the great eye, always — the
+ * bigger ones with a little tremble, as if they could not quite hold still
+ * under it. The threads between them are straight, and tremble a little at
+ * random, as a wire does.
  *
- * The screen is an old tube monitor, and its pixels are eyes. Its glass is a
- * rounded square, bulging a little, so the picture bends in towards the
- * corners; round it runs a dark rim. Along the edge the eyes sit still in a
- * raster, tiny and in rows, with a line along every row, a wash and a grain
- * in the eyes' own colour and the rim's shadow on the glass — strongest at
- * the edge and gone well before the middle. None of it moves: the edge is a
- * screen standing still. Inwards the raster loosens and the eyes come free,
- * take threads, and grow in a straight line all the way to the clear ring. An
- * eye's size is where it is, so one that travels in grows, and one that
- * travels out shrinks until it sinks back among the pixels. The words lie
- * over the web and do not part it; the title carries its own shadow
- * (style.css).
+ * The screen is an old tube television (tube.js), and its pixels are eyes.
+ * Its glass is a rounded square, bulging a little, so the picture bends in
+ * towards the corners, and the tube's look grows stronger towards its edge.
+ * There the eyes sit still in a raster, tiny and in rows. None of it moves:
+ * the edge is a screen standing still. Inwards the raster loosens and the
+ * eyes come free, take threads, and grow in a straight line all the way to
+ * the clear ring. An eye's size is where it is, so one that travels in grows,
+ * and one that travels out shrinks until it sinks back among the pixels. The
+ * words lie over the web and do not part it; the title carries its own
+ * shadow (style.css).
  *
  * Every free eye travels. Slow currents, shared by neighbours, carry them
  * round the screen, each with a wander of its own on top, fastest halfway in
@@ -33,13 +32,14 @@
  * are always being made and let go: a new one grows out of the eye that
  * reached for it, an old one draws back into it as it frays.
  *
- * Cheap on purpose. The tube — rim, glass and raster — is drawn once into a
- * picture kept aside and laid down every frame. The free eyes, a thousand or
- * so on a large screen, live in typed arrays and in a grid rebuilt every
- * frame; each works out the stream and looks round itself every other frame,
- * and they are drawn with their threads in a few batches, at most thirty
- * times a second, and only from Home.tick — so only while the front page is
- * on screen. For a reader who asks for less motion it is one still picture,
+ * Cheap on purpose. The raster at the edge is drawn once into a picture
+ * kept aside and laid down every frame, and the tube's glass lies
+ * over everything on a canvas of its own. The free eyes, a thousand or so on
+ * a large screen, live in typed arrays and in a grid rebuilt every frame;
+ * each works out the stream and looks round itself every other frame, and
+ * they are drawn with their threads in a few batches, at most thirty times a
+ * second, and only from Home.tick — so only while the front page is on
+ * screen. For a reader who asks for less motion it is one still picture,
  * drawn again only when the page changes size or colour.
  */
 const Eyes = {
@@ -83,8 +83,6 @@ const Eyes = {
   /** Threads an eye keeps track of: its nearest three, and room for those still fading. */
   SLOTS: 8,
 
-  /** How far the picture bends in towards the corners of the bulging glass, as a share of the half-width. */
-  BULGE: 0.04,
 
   canvas: null,
   host: null,
@@ -158,21 +156,19 @@ const Eyes = {
     this.width = width;
     this.height = height;
 
-    // The tube's face: just inside the stage, leaving a rim at the middle of
-    // each side and more at the rounded corners.
-    this.rim = Math.max(5, Math.min(14, Math.round(Math.min(width, height) * 0.012)));
-    this.ax = width / 2 - this.rim;
-    this.ay = height / 2 - this.rim;
+    // The tube's glass, for this size (tube.js).
+    Tube.shape(width, height);
 
-    // Where the great eye stands on the glass: where the mark is, or the
-    // middle. Its place in the picture is that point with the bulge undone.
+    // Where the great eye stands on the glass: where the mark is, or — with
+    // the words put away, full screen — the very middle. Its place in the
+    // picture is that point with the bulge undone.
     const box = host.getBoundingClientRect();
     const mark = this.anchor ? this.anchor.getBoundingClientRect() : null;
     const showX = mark && mark.width ? mark.left + mark.width / 2 - box.left : width / 2;
-    const showY = mark && mark.height ? mark.top + mark.height / 2 - box.top : height * 0.55;
+    const showY = mark && mark.height ? mark.top + mark.height / 2 - box.top : height / 2;
     const big = Math.max(34, Math.min(96, (mark && mark.width ? mark.width : 140) * 0.42));
-    this.unwarp(showX, showY);
-    const cx = this.atX, cy = this.atY;
+    Tube.unwarp(showX, showY);
+    const cx = Tube.atX, cy = Tube.atY;
     this.cx = cx;
     this.cy = cy;
     this.big = big;
@@ -184,10 +180,11 @@ const Eyes = {
     this.ring = this.clear + this.rNext;
     this.gNext = this.rNext * this.ROOM;
 
-    // The raster: a pixel-eye every `pitch` pixels, ROWS rows deep. The free
-    // eyes begin just inside it, a little looser and a little bigger than its
-    // pixels, and grow in a straight line from there to the ring.
-    const pitch = Math.max(4, Math.min(7, Math.round(Math.min(width, height) / 170)));
+    // The raster: a pixel-eye every `pitch` pixels — the tube's own pitch, so
+    // its scan lines run through and between the rows — ROWS rows deep. The
+    // free eyes begin just inside it, a little looser and a little bigger than
+    // its pixels, and grow in a straight line from there to the ring.
+    const pitch = Tube.pitch;
     this.pitch = pitch;
     this.depth = pitch * this.ROWS;
     this.gEdge = pitch * 1.5;
@@ -260,8 +257,8 @@ const Eyes = {
       for (let i = 0; (i + 0.5) * pitch < width; i++) {
         const px = (i + 0.5) * pitch, py = (j + 0.5) * pitch;
         const e = this.inset(px, py);
-        // Out to a little beyond the face's outline, under the rim, so the
-        // glass is full to its edge.
+        // Out to a little beyond the glass's outline, under the tube's fill,
+        // so the glass is full to its edge.
         if (e >= depth || e < -pitch || Math.hypot(px - cx, py - cy) < ring) continue;
         const loose = (Math.max(0, e) / depth) ** 2;
         raster.push(px + (rand() - 0.5) * 0.7 * pitch * loose, py + (rand() - 0.5) * 0.7 * pitch * loose, loose);
@@ -282,7 +279,6 @@ const Eyes = {
       vx: own(), vy: own(),             // how it is travelling
       wx: own(), wy: own(),             // its own wander
       tx: own(), ty: own(), roam: own(), // where the stream pulls it, and how far its wander reaches
-      gaze: own(), gazeTo: own(), gazeAt: new Float64Array(F + 1),
       blink: own(), blinkAt: own(),
       ix: own(), iy: own(), open: own(), // where the pupil is and how open the eye, this frame
       // Its threads, held by the eye that reached for them: who is at the
@@ -314,16 +310,15 @@ const Eyes = {
       // When it blinks: every few seconds, a different few for each.
       this.blink[e] = 2.5 + 7 * rand();
       this.blinkAt[e] = rand() * 9;
-      this.gazeAt[e] = rand() * 2;
     });
     this.size();
     for (let q = 0; q < R; q++) {
       const e = 1 + F + q, loose = raster[3 * q + 2];
       this.x[e] = raster[3 * q];
       this.y[e] = raster[3 * q + 1];
-      this.warp(this.x[e], this.y[e]);
-      this.sx[e] = this.atX;
-      this.sy[e] = this.atY;
+      Tube.warp(this.x[e], this.y[e]);
+      this.sx[e] = Tube.atX;
+      this.sy[e] = Tube.atY;
       this.r[e] = pitch * (0.27 + 0.1 * loose) * (0.9 + 0.2 * rand());
       this.alpha[e] = 0.75 - 0.4 * loose;
       this.gap[e] = pitch;
@@ -450,51 +445,9 @@ const Eyes = {
     return 0.08 + 0.92 * k * k * (3 - 2 * k);
   },
 
-  /**
-   * How far a point of the picture lies inside the tube's face, near enough:
-   * how far short of the outline it is, over how fast that changes. The face
-   * is |X|⁶ + |Y|⁶ = 1 on the stage's half-sizes less the rim — a square with
-   * well rounded corners. Leaves the way inwards in `inX`, `inY`.
-   */
-  face(x, y) {
-    const X = (x - this.width / 2) / this.ax, Y = (y - this.height / 2) / this.ay;
-    const X2 = X * X, Y2 = Y * Y, X4 = X2 * X2, Y4 = Y2 * Y2, sum = X4 * X2 + Y4 * Y2;
-    if (sum < 1e-12) { this.inX = 0; this.inY = 0; return Math.min(this.ax, this.ay); }
-    const rho = Math.cbrt(Math.sqrt(sum)), r5 = rho * rho * rho * rho * rho;
-    const gx = X4 * X / (this.ax * r5), gy = Y4 * Y / (this.ay * r5);
-    const slope = Math.sqrt(gx * gx + gy * gy) || 1e-9;
-    this.inX = -gx / slope;
-    this.inY = -gy / slope;
-    return (1 - rho) / slope;
-  },
-
-  /** How far a point lies inside the tube's face; negative outside it. */
+  /** How far a point of the picture lies inside the tube's glass (tube.js); negative outside it. */
   inset(x, y) {
-    return this.face(x, y);
-  },
-
-  /**
-   * Where a point of the picture shows on the bulging glass, left in `atX`,
-   * `atY`: pulled in towards the corners, the more the further out.
-   */
-  warp(x, y) {
-    const hw = this.width / 2, hh = this.height / 2, b = this.BULGE;
-    const X = (x - hw) / hw, Y = (y - hh) / hh;
-    this.atX = hw + X * (1 - b * Y * Y) * hw;
-    this.atY = hh + Y * (1 - b * X * X) * hh;
-  },
-
-  /** The point of the picture that shows at (x, y) on the glass, left in `atX`, `atY`: the bulge undone, by a few steps of guessing. */
-  unwarp(x, y) {
-    const hw = this.width / 2, hh = this.height / 2, b = this.BULGE;
-    const Xs = (x - hw) / hw, Ys = (y - hh) / hh;
-    let X = Xs, Y = Ys;
-    for (let i = 0; i < 3; i++) {
-      X = Xs / (1 - b * Y * Y);
-      Y = Ys / (1 - b * X * X);
-    }
-    this.atX = hw + X * hw;
-    this.atY = hh + Y * hh;
+    return Tube.face(x, y);
   },
 
   /** How solid an eye is this deep: faint where it has just come off the raster. */
@@ -536,7 +489,7 @@ const Eyes = {
   stream(e, t) {
     const px = this.x[e], py = this.y[e];
     // How deep it is, k, and which way is deeper.
-    const edge = this.face(px, py), ex = this.inX, ey = this.inY;
+    const edge = Tube.face(px, py), ex = Tube.inX, ey = Tube.inY;
     const ox = px - this.cx, oy = py - this.cy, dist = Math.sqrt(ox * ox + oy * oy) || 1;
     const a = Math.max(0, edge - this.depth), b = Math.max(0, dist - this.ring), sum = a + b || 1;
     const k = a / sum, kx = (b * ex - a * ox / dist) / (sum * sum), ky = (b * ey - a * oy / dist) / (sum * sum);
@@ -573,7 +526,7 @@ const Eyes = {
    * One step of the web: every free eye carried on by the currents and its
    * own wander, given room by its neighbours, kept off the raster and out of
    * the clear ring, and sized for where it now is; its threads chosen again
-   * and grown or frayed towards what it chose; its gaze moved on. `settle`
+   * and grown or frayed towards what it chose. `settle`
    * puts every thread straight where it belongs and moves nothing, for a
    * first frame or a still picture.
    */
@@ -709,9 +662,9 @@ const Eyes = {
       const depth = this.depth, cx = this.cx, cy = this.cy, ring = this.ring;
       for (let e = 1; e <= F; e++) {
         let px = x[e] + vx[e] * dt, py = y[e] + vy[e] * dt;
-        const within = this.face(px, py);
+        const within = Tube.face(px, py);
         if (within < depth) {
-          const nx = this.inX, ny = this.inY;
+          const nx = Tube.inX, ny = Tube.inY;
           px += nx * (depth - within);
           py += ny * (depth - within);
           const outward = -(vx[e] * nx + vy[e] * ny);
@@ -729,24 +682,6 @@ const Eyes = {
       }
     }
     this.size();
-
-    // ---- where each whole eye looks ----
-    // At the great eye, or away from it. The bigger the eye, the more often it
-    // looks somewhere new, the quicker it gets there and the further away it
-    // looks: the small ones gaze, the big ones cannot settle.
-    if (calm) return;
-    const { gaze, gazeTo, gazeAt } = this;
-    for (let e = 1; e <= F; e++) {
-      if (r[e] < this.WHOLE) continue;
-      const fear = this.nerves(r[e]);
-      if (t >= gazeAt[e]) {
-        const at = Math.random() < 0.8 - 0.3 * fear;
-        gazeTo[e] = at ? (Math.random() - 0.5) * (0.9 - 0.7 * fear)
-                       : (Math.random() < 0.5 ? -1 : 1) * (0.7 + 1.5 * fear + 0.5 * Math.random());
-        gazeAt[e] = t + (2.8 - 2.45 * fear) * (0.4 + 1.2 * Math.random());
-      }
-      gaze[e] += (gazeTo[e] - gaze[e]) * (1 - Math.exp(-(2.5 + 30 * fear * fear) * dt));
-    }
   },
 
   /** The inks of the eyes and of the page, as the theme has them now. */
@@ -755,33 +690,21 @@ const Eyes = {
              rim: Ink.of('eyeRim'), link: Ink.of('eyeLink'), stage: Ink.of('stage') };
   },
 
-  /** A colour written as #rgb or #rrggbb, as red, green and blue. */
-  rgb(colour) {
-    const hex = String(colour).trim().replace(/^#/, '');
-    const full = hex.length === 3 ? [...hex].map(c => c + c).join('') : hex;
-    const [r, g, b] = [0, 2, 4].map(i => parseInt(full.slice(i, i + 2), 16));
-    return [r, g, b].map(v => (Number.isFinite(v) ? v : 128));
-  },
-
   /**
-   * The tube, which never moves, drawn once into a picture kept aside —
-   * draw() lays it down every frame, faded in as the web comes up. Its glass
-   * is a wash of the eyes' colour, a line along every row of the raster and a
-   * still grain, cut down to how strongly the glass shows at each point; on it
+   * The edge of the screen, which never moves, drawn once into a picture kept
+   * aside — draw() lays it down every frame, faded in as the web comes up:
    * the raster's pixel-eyes, each an iris and a pupil, with the threads that
-   * start among the loosest, all bent with the bulge; and round it the rim,
-   * whose shadow darkens the glass along its edge — on Paper, where a dark
-   * shadow would be dirt, the rim is pale and its shadow the eyes' blue — with
-   * a thin catch of light along the glass's edge and, on a dark screen, a
-   * faint sheen high on the left. Beside it, at a quarter size, the glass's
-   * colour, which draw() lays over the free eyes near the edge.
+   * start among the loosest, all bent with the bulge of the tube's glass. The
+   * tube's own scan lines, grain, glow and outline lie over everything
+   * (tube.js). Beside it, at a small size, the edge's colour, which draw()
+   * lays over the free eyes near the edge.
    */
   paintStill() {
     if (!this.ctx || !this.n) return;
     const W = this.width, H = this.height, dpr = this.dpr, P = this.pitch;
     const ink = this.inks();
-    const [ir, ig, ib] = this.rgb(ink.iris);
-    const [sr, sg, sb] = this.rgb(ink.stage);
+    const [ir, ig, ib] = Tube.rgb(ink.iris);
+    const [sr, sg, sb] = Tube.rgb(ink.stage);
     const light = sr * 0.299 + sg * 0.587 + sb * 0.114 > 128;
     const make = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
 
@@ -792,71 +715,19 @@ const Eyes = {
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.clearRect(0, 0, W, H);
 
-    // How strongly the glass shows at each point of it, and whether the
-    // raster lies there: worked out on a coarse grid, the bulge undone at
-    // each, and stretched — it changes slowly, and the stretching smooths it.
-    // The rim's shadow is worked out here too: dark just inside the outline,
-    // gone a raster's depth in.
+    // How strongly the edge shows at each point, and whether the raster lies
+    // there: worked out on a coarse grid, the bulge undone at each, and
+    // stretched — it changes slowly, and the stretching smooths it.
     const Q = 6, mw = Math.ceil(W / Q) + 1, mh = Math.ceil(H / Q) + 1;
-    const strength = new Float32Array(mw * mh), raster = new Uint8Array(mw * mh), shadow = new Float32Array(mw * mh);
+    const strength = new Float32Array(mw * mh), raster = new Uint8Array(mw * mh);
     for (let v = 0; v < mh; v++) {
       for (let u = 0; u < mw; u++) {
-        this.unwarp(u * Q, v * Q);
-        const inset = this.face(this.atX, this.atY), i = v * mw + u;
+        Tube.unwarp(u * Q, v * Q);
+        const inset = Tube.face(Tube.atX, Tube.atY), i = v * mw + u;
         strength[i] = this.glass(inset);
         raster[i] = inset < this.depth - 0.1 * P ? 1 : 0;
-        const fall = Math.max(0, Math.min(1, inset / this.depth));
-        shadow[i] = (1 - fall) * (1 - fall) * (1 - fall);
       }
     }
-    const mask = make(mw, mh), mc = mask.getContext('2d'), md = mc.createImageData(mw, mh);
-    for (let i = 0; i < mw * mh; i++) md.data[4 * i + 3] = Math.round(255 * strength[i]);
-    mc.putImageData(md, 0, 0);
-
-    // The glass, on a layer of its own: the wash, a line along every row of
-    // the raster bent with the bulge, and the grain, a small tile of specks
-    // laid edge to edge; then cut down to its strength.
-    const layer = make(cache.width, cache.height), l = layer.getContext('2d');
-    l.setTransform(dpr, 0, 0, dpr, 0, 0);
-    l.fillStyle = ink.iris;
-    l.globalAlpha = light ? 0.09 : 0.07;
-    l.fillRect(0, 0, W, H);
-    l.strokeStyle = ink.iris;
-    l.lineWidth = 1;
-    l.globalAlpha = light ? 0.22 : 0.18;
-    l.beginPath();
-    const STEP = 24;
-    for (let row = P / 2; row < H; row += P) {
-      for (let col = 0; col < W + STEP; col += STEP) {
-        this.warp(Math.min(col, W), row);
-        if (col === 0) l.moveTo(this.atX, this.atY);
-        else l.lineTo(this.atX, this.atY);
-      }
-    }
-    l.stroke();
-    const TILE = 192;
-    const grain = make(TILE, TILE), gc = grain.getContext('2d'), gd = gc.createImageData(TILE, TILE);
-    const rand = seededRandom(977);
-    for (let i = 0; i < TILE * TILE; i++) {
-      const speck = rand();
-      gd.data[4 * i] = ir;
-      gd.data[4 * i + 1] = ig;
-      gd.data[4 * i + 2] = ib;
-      gd.data[4 * i + 3] = Math.round(255 * speck * speck * speck * (light ? 0.45 : 0.5));
-    }
-    gc.putImageData(gd, 0, 0);
-    // Each speck two pixels across, as a tube's grain is coarser than its glass.
-    const specks = l.createPattern(grain, 'repeat');
-    specks.setTransform(new DOMMatrix().scale(2));
-    l.globalAlpha = 1;
-    l.fillStyle = specks;
-    l.fillRect(0, 0, W, H);
-    l.globalCompositeOperation = 'destination-in';
-    l.setTransform(1, 0, 0, 1, 0, 0);
-    l.drawImage(mask, 0, 0, mw * Q * dpr, mh * Q * dpr);
-    g.setTransform(1, 0, 0, 1, 0, 0);
-    g.drawImage(layer, 0, 0);
-    g.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const { sx, sy, r, alpha, F, n, fixed } = this;
     const LEVELS = 8;
@@ -889,77 +760,22 @@ const Eyes = {
       g.stroke();
     });
 
-    // The pixels: each a tiny eye, an iris and a pupil, in its row.
+    // The pixels: each a tiny eye, an iris and a pupil, in its row, and each
+    // looking at the great eye — for good, since neither of them moves.
     const pixels = [];
     for (let e = 1 + F; e < n; e++) pixels.push({ e, a: alpha[e] });
     g.fillStyle = ink.iris;
     shade(pixels, ({ e }) => { g.moveTo(sx[e] + r[e], sy[e]); g.arc(sx[e], sy[e], r[e], 0, Math.PI * 2); }, () => g.fill());
     g.fillStyle = ink.pupil;
-    shade(pixels, ({ e }) => { g.moveTo(sx[e] + r[e] * 0.45, sy[e]); g.arc(sx[e], sy[e], r[e] * 0.45, 0, Math.PI * 2); },
-          () => g.fill());
+    shade(pixels, ({ e }) => {
+      const dx = sx[0] - sx[e], dy = sy[0] - sy[e], d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const px = sx[e] + dx / d * r[e] * 0.35, py = sy[e] + dy / d * r[e] * 0.35;
+      g.moveTo(px + r[e] * 0.45, py);
+      g.arc(px, py, r[e] * 0.45, 0, Math.PI * 2);
+    }, () => g.fill());
 
-    // The face's outline on the glass: the rounded square, bent with the bulge.
-    const outline = [];
-    for (let i = 0; i < 400; i++) {
-      const a = (i / 400) * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
-      this.warp(W / 2 + Math.cbrt(c) * this.ax, H / 2 + Math.cbrt(s) * this.ay);
-      outline.push(this.atX, this.atY);
-    }
-    const trace = c => {
-      c.moveTo(outline[0], outline[1]);
-      for (let i = 2; i < outline.length; i += 2) c.lineTo(outline[i], outline[i + 1]);
-      c.closePath();
-    };
-
-    // The rim's shadow on the glass: black, or on Paper the eyes' blue.
-    const dark = make(mw, mh), hc = dark.getContext('2d'), hd = hc.createImageData(mw, mh);
-    const [hr, hg, hb] = light ? [ir, ig, ib] : [0, 0, 0];
-    for (let i = 0; i < mw * mh; i++) {
-      hd.data[4 * i] = hr;
-      hd.data[4 * i + 1] = hg;
-      hd.data[4 * i + 2] = hb;
-      hd.data[4 * i + 3] = Math.round(255 * shadow[i] * (light ? 0.55 : 0.85));
-    }
-    hc.putImageData(hd, 0, 0);
-    g.globalAlpha = 1;
-    g.drawImage(dark, 0, 0, mw * Q, mh * Q);
-
-    // The rim: everything beyond the glass — on a dark screen the page's own
-    // dark, deeper still, as a tube's black; on Paper a pale blue-grey.
-    const [rr, rg, rb] = light
-      ? [sr * 0.82 + ir * 0.18, sg * 0.82 + ig * 0.18, sb * 0.82 + ib * 0.18]
-      : [sr * 0.3, sg * 0.3, sb * 0.3];
-    g.fillStyle = `rgb(${Math.round(rr)}, ${Math.round(rg)}, ${Math.round(rb)})`;
-    g.beginPath();
-    g.rect(-40, -40, W + 80, H + 80);
-    trace(g);
-    g.fill('evenodd');
-    // A thin catch of light along the glass's edge, in the eyes' white, or
-    // on Paper their blue.
-    g.strokeStyle = light ? ink.iris : ink.ball;
-    g.globalAlpha = light ? 0.4 : 0.14;
-    g.lineWidth = 1.2;
-    g.beginPath();
-    trace(g);
-    g.stroke();
-    // A faint sheen on a dark glass, high on its left.
-    if (!light) {
-      g.save();
-      g.beginPath();
-      trace(g);
-      g.clip();
-      const sheen = g.createRadialGradient(W * 0.2, H * 0.12, 0, W * 0.2, H * 0.12, W * 0.45);
-      sheen.addColorStop(0, Ink.alpha(ink.ball, 0.05));
-      sheen.addColorStop(1, Ink.alpha(ink.ball, 0));
-      g.globalAlpha = 1;
-      g.fillStyle = sheen;
-      g.fillRect(0, 0, W, H);
-      g.restore();
-    }
-    g.globalAlpha = 1;
-
-    // The glass's own colour, laid over the free eyes and their threads near
-    // the edge (draw()): an eye just come off the raster still shows in the
+    // The edge's own colour, laid over the free eyes and their threads near
+    // it (draw()): an eye just come off the raster still shows in the
     // screen's colour, and turns white only further in. From the inside of
     // the raster on, so the pixels keep their dark pupils.
     const tint = this.tint || (this.tint = make(1, 1));
@@ -1001,9 +817,9 @@ const Eyes = {
 
     // Where each free eye shows on the bulging glass.
     for (let e = 1; e <= F; e++) {
-      this.warp(x[e], y[e]);
-      sx[e] = this.atX;
-      sy[e] = this.atY;
+      Tube.warp(x[e], y[e]);
+      sx[e] = Tube.atX;
+      sy[e] = Tube.atY;
     }
 
     // ---- the threads, in a few strengths so each is one stroke call ----
@@ -1068,8 +884,8 @@ const Eyes = {
     });
 
     // ---- the free eyes, sorted by size and strength ----
-    const { ix, iy, open, gaze, blink, blinkAt } = this;
-    // Gazes are aimed where the great eye shows.
+    const { ix, iy, open, blink, blinkAt } = this;
+    // Every eye looks where the great eye shows.
     const cx = sx[0], cy = sy[0];
     for (let e = 1; e <= F; e++) {
       const a = alpha[e] * fade;
@@ -1082,15 +898,14 @@ const Eyes = {
       const phase = (t + blinkAt[e]) % blink[e];
       const shut = calm ? 1 : (phase < 0.16 ? Math.abs(Math.cos(Math.PI * phase / 0.16)) : 1);
       open[e] = Math.max(0.06, shut);
-      // Towards the great eye, or off it, as move() has it; a nervous eye's
-      // pupil shakes as well, once it is big enough for the shaking to show.
+      // Straight at the great eye. A big eye's pupil trembles a little round
+      // that line — the bigger, the more — but never leaves it.
       const fear = calm ? 0 : this.nerves(re);
       const shake = fear * re > 3 ? fear : 0;
-      const look = Math.atan2(cy - sy[e], cx - sx[e]) + (calm ? 0 : gaze[e])
-                 + (shake ? (Math.random() - 0.5) * shake * 0.3 : 0);
+      const look = Math.atan2(cy - sy[e], cx - sx[e]) + (shake ? (Math.random() - 0.5) * shake * 0.16 : 0);
       const off = (0.3 + 0.06 * fear) * re;
-      ix[e] = sx[e] + Math.cos(look) * off + (shake ? (Math.random() - 0.5) * shake * re * 0.05 : 0);
-      iy[e] = sy[e] + Math.sin(look) * off * open[e] + (shake ? (Math.random() - 0.5) * shake * re * 0.05 : 0);
+      ix[e] = sx[e] + Math.cos(look) * off + (shake ? (Math.random() - 0.5) * shake * re * 0.03 : 0);
+      iy[e] = sy[e] + Math.sin(look) * off * open[e] + (shake ? (Math.random() - 0.5) * shake * re * 0.03 : 0);
       if (re < this.LARGE) whole[level].push(e);
       else this.large.push(e);
     }
@@ -1117,10 +932,14 @@ const Eyes = {
       ctx.beginPath();
       for (const e of list) { ctx.moveTo(sx[e] + r[e], sy[e]); ctx.arc(sx[e], sy[e], r[e], 0, TAU); }
       ctx.fill();
-      // A pupil a pixel or two across is as round as a square of that size.
+      // A pupil a pixel or two across is as round as a square of that size,
+      // and it too is turned towards the great eye.
       ctx.fillStyle = ink.pupil;
       ctx.beginPath();
-      for (const e of list) { const p = r[e] * 0.8; ctx.rect(sx[e] - p / 2, sy[e] - p / 2, p, p); }
+      for (const e of list) {
+        const dx = cx - sx[e], dy = cy - sy[e], d = Math.sqrt(dx * dx + dy * dy) || 1, p = r[e] * 0.8;
+        ctx.rect(sx[e] + dx / d * r[e] * 0.3 - p / 2, sy[e] + dy / d * r[e] * 0.3 - p / 2, p, p);
+      }
       ctx.fill();
     });
 

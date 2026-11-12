@@ -38,6 +38,15 @@ const Explain = {
   },
 
   /**
+   * What the whole project is after, in a sentence, read before the first
+   * step's own words and only there. It stood on the front page until the
+   * front page became a picture alone.
+   */
+  LEAD: `An attempt at finding <b>Open Ended Evolution</b> with graph theory,
+    evolutionary game theory and neural networks. No optimization &mdash; just
+    mutation, evolution and natural selection.`,
+
+  /**
    * The walk-through.
    *
    * `stage` names the recorded snapshot to draw and `effect` the animation laid
@@ -469,6 +478,7 @@ Object.assign(Explain, {
       ? 'Before the loop'
       : `Step ${this.at - first + 1} / ${this.STEPS.length - first}`;
     this.textEl.innerHTML =
+      (this.at === 0 ? `<p class="ex-lead">${this.LEAD}</p>` : '') +
       `<h3 class="ex-title">${step.title}</h3>` +
       `<p class="ex-step">${where}</p>` +
       `<p>${step.text}</p>`;

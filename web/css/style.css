@@ -2909,9 +2909,11 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
    The entrance. A dark wall with the machine's digits at its edges; the mark,
    lit from behind; the title decoded out of hexadecimal; and, rising out of
    the dark behind it all, one of two backdrops — a world that is actually
-   running, or a network of eyes round one that looks back. The order things
-   arrive in is the story — the wall, the word, the world, and last the note —
-   and it takes three seconds. The tabs in the bar above are the ways in.
+   running, or a network of eyes round one that looks back — both seen through
+   the glass of an old tube television (tube.js). The order things arrive in
+   is the story — the wall, the word, the world, and last the numbers — and it
+   takes three seconds. The tabs in the bar above are the ways in; beside
+   them, while this page shows, are its own two switches.
 
    Every arrival is an opacity or a transform, which the compositor plays
    without asking the page to paint; the one exception, the title's letters,
@@ -2924,10 +2926,10 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
    usual padding would put a frame around something meant to be a backdrop. */
 #view-home { padding: 0; }
 
-/* The title in the space above a foot that holds the note and the numbers: a
-   grid rather than everything placed over everything, so on a short screen
-   the title can never land on the note. The picture, the wall and the veil
-   lie under all of it. */
+/* The title in the space above a foot that holds the numbers: a grid rather
+   than everything placed over everything, so on a short screen the title can
+   never land on them. The pictures, the wall, the veil and the tube lie under
+   all of it. */
 .home-stage {
   position: relative;
   display: grid;
@@ -2961,7 +2963,7 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
 .home-stage.backdrop-eyes .home-readout { display: none; }
 
 /* Darkened towards the middle, where the words are, and at the foot and the
-   corners, where the note and the numbers are: words on a bright cluster of
+   corners, where the numbers are: words on a bright cluster of
    agents are otherwise unreadable. Mixed in the stage's own colour, so an
    empty patch of canvas stays exactly the stage colour no matter how heavily
    the veil sits on it. Over the eyes only the foot is darkened: the great
@@ -2976,8 +2978,8 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
     radial-gradient(140% 120% at 50% 45%, rgba(var(--stage-rgb), 0) 52%, rgba(var(--stage-rgb), 0.7) 100%),
     linear-gradient(to top, rgba(var(--stage-rgb), 0.72) 0%, rgba(var(--stage-rgb), 0) 30%);
 }
-/* Over the eyes the screen is a tube with a rim round it, standing still, so
-   nothing is laid over it: no darkening at the foot and no digits on the rim. */
+/* Over the eyes nothing is laid over the picture: the screen's own pixels
+   are at its edge, standing still, so no darkening at the foot and no digits. */
 .home-stage.backdrop-eyes .home-veil,
 .home-stage.backdrop-eyes .home-glyphs { display: none; }
 
@@ -2992,16 +2994,62 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   pointer-events: none;
 }
 
-/* Which backdrop, in the top corner: quiet until it is wanted. */
-.home-backdrop {
+/* The tube both backdrops are seen through (tube.js): over the pictures and
+   the wall, under the words, and never in the way of a click. */
+.home-tube {
   position: absolute;
-  top: 18px;
-  right: 20px;
-  z-index: 4;
-  background: rgba(var(--stage-rgb), 0.7);
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
 }
-.home-backdrop .seg-btn { padding: 4px 12px; font-size: 11.5px; background: transparent; }
+
+/* The front page's own switches, in the top bar beside the swatches and only
+   while the page shows (home.js): which backdrop, and the backdrop alone, full
+   screen. Small, as the swatches are. */
+.home-controls { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; margin-left: 16px; }
+.home-controls[hidden] { display: none; }
+.home-backdrop .seg-btn { min-height: 0; padding: 3px 10px; font-size: 11.5px; background: transparent; }
 .home-backdrop .seg-btn.active { background: var(--accent-dim); color: var(--on-accent); }
+.home-full {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 24px;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+.home-full:hover:not(:disabled) { color: var(--text-strong); border-color: var(--accent); background: var(--panel-3); }
+.home-full svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* The backdrop alone, full screen (home.js): not a word on it — the title,
+   the numbers, the veil kept for the words and the wall of digits all step
+   aside. Where the browser has no full screen of its own, the stage fills the
+   window, over the top bar, instead. Any click or tap, or Esc, leaves. */
+.home-stage.is-full .home-hero,
+.home-stage.is-full .home-readout,
+.home-stage.is-full .home-veil,
+.home-stage.is-full .home-glyphs { display: none; }
+.home-stage.is-filling {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  min-height: 0;
+  height: 100%;
+}
+/* The page keeps a gutter for its scroll bar. The front page never scrolls,
+   and there the gutter would be a strip down the right beside the tube, so it
+   is let go; full screen, the page cannot scroll at all. */
+html:has(#view-home.active) { scrollbar-gutter: auto; }
+html:has(.home-stage.is-full) { overflow: hidden; }
 
 .home-hero {
   position: relative;
@@ -3123,7 +3171,7 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
    great eye is drawn where the mark's box is (eyes.js), so it moves with it. */
 .home-stage.backdrop-eyes .home-hero {
   justify-content: flex-end;
-  padding-bottom: clamp(10px, 2.5vh, 30px);
+  padding-bottom: 18vh;
 }
 
 /* Over the eyes the web runs on through the words instead of parting round
@@ -3159,37 +3207,7 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   pointer-events: none;
 }
 
-/* ---- the note and the numbers ---- */
-
-/* A card with two corners marked in the accent, the way a plate in an old
-   atlas is framed. */
-.home-note {
-  position: relative;
-  z-index: 3;
-  grid-column: 1;
-  grid-row: 2;
-  justify-self: start;
-  align-self: end;
-  margin: 16px 24px 24px;
-  max-width: 370px;
-  padding: 14px 18px;
-  border: 1px solid rgba(var(--mist-rgb), 0.1);
-  border-radius: 3px;
-  background:
-    linear-gradient(var(--accent), var(--accent)) top left / 14px 1px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) top left / 1px 14px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) bottom right / 14px 1px no-repeat,
-    linear-gradient(var(--accent), var(--accent)) bottom right / 1px 14px no-repeat,
-    rgba(var(--stage-rgb), 0.82);
-}
-.home-note p {
-  margin: 0;
-  font-family: var(--font-read);
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--text-soft);
-}
-.home-note b { color: var(--ivory); font-weight: 600; }
+/* ---- the numbers ---- */
 
 /* The world's numbers, as the machine reports them. */
 .home-readout {
@@ -3260,9 +3278,7 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   .home-stage.play .home-glyphs { animation: home-appear 2200ms ease-out both; }
   .home-stage.play #homeCanvas { animation: home-world 3400ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms both; }
   .home-stage.play .home-mark { animation: home-mark-in 1700ms cubic-bezier(0.16, 0.84, 0.24, 1) 600ms both; }
-  .home-stage.play .home-note { animation: home-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 2700ms both; }
   .home-stage.play .home-readout { animation: home-appear 1200ms ease-out 2900ms both; }
-  .home-stage.play .home-backdrop { animation: home-appear 1200ms ease-out 3000ms both; }
   .home-caret.is-done::after { opacity: 1; animation: home-blink 0.9s step-end 3 forwards; }
   .home-readout dd.is-new { animation: home-tick 800ms ease-out; }
   /* A letter landing: a flash of phosphor that cools into the letter. */
@@ -3276,23 +3292,18 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
 @keyframes home-appear { from { opacity: 0; } }
 @keyframes home-world { from { opacity: 0; transform: scale(1.05); } }
 @keyframes home-mark-in { from { opacity: 0; transform: scale(0.6) rotate(-30deg); } }
-@keyframes home-rise { from { opacity: 0; transform: translateY(12px); } }
 @keyframes home-blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; } }
 @keyframes home-tick { from { color: var(--text-strong); text-shadow: 0 0 14px var(--accent); } }
 @keyframes glyph-land { from { color: var(--accent); text-shadow: 0 0 20px rgba(var(--accent-rgb), 0.9); } }
 
-/* A phone: one column — the mark and the title, and the note across the
-   foot. The numbers step aside. */
+/* A phone: one column — the mark and the title. The numbers step aside. */
 @media (max-width: 640px) {
   .home-stage { grid-template-columns: minmax(0, 1fr); }
   .home-hero { padding: 56px 16px 24px; }
   .home-seal { width: 104px; }
   .home-title { font-size: clamp(30px, 10vw, 44px); }
   .home-subtitle { letter-spacing: 0.22em; margin-right: -0.22em; }
-  .home-note { justify-self: stretch; margin: 0 16px 20px; max-width: none; }
-  .home-note p { font-size: 14.5px; }
   .home-readout { display: none; }
-  .home-backdrop { top: 12px; right: 12px; }
 }
 
 /* ==========================================================================
@@ -3459,6 +3470,9 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   hyphens: auto;
 }
 .ex-note p:last-child { margin-bottom: 0; }
+/* The project in a sentence, read before the first step (explain.js), and set
+   off from the step below it by a rule. */
+.ex-note p.ex-lead { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
 .ex-note b { color: var(--text-strong); font-weight: 600; }
 .ex-note em { color: var(--accent); font-style: normal; }
 
@@ -3629,6 +3643,12 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   .job-bar { grid-area: job; justify-self: end; margin-left: 0; max-width: 100%; }
   .byline { grid-area: byline; margin-left: 0; }
   .theme-switch { grid-area: theme; margin: 0 0 6px; }
+  /* On the front page its switches stand before the swatches. */
+  .home-controls { grid-area: controls; margin: 0 0 6px; }
+  .topbar:has(.home-controls:not([hidden])) {
+    grid-template-columns: auto auto minmax(0, 1fr) auto auto;
+    grid-template-areas: "mark brand job job byline" "tabs tabs tabs controls theme";
+  }
   .tabs {
     grid-area: tabs;
     gap: 2px;
@@ -3727,6 +3747,17 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   .job-stop { min-height: 24px; padding: 2px 10px; }
   .topbar:has(.job-bar:not([hidden])) .brand { display: none; }
   .theme-switch { margin: 0; gap: 7px; }
+  /* On the front page its switches take the swatches' place at the top
+     right, and the swatches step down beside the byline. */
+  .topbar:has(.home-controls:not([hidden])) {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "mark brand controls" "mark byline theme" "tabs tabs tabs";
+  }
+  .topbar:has(.home-controls:not([hidden])) .theme-switch { justify-self: end; gap: 6px; }
+  .topbar:has(.home-controls:not([hidden])) .theme-swatch { width: 20px; height: 20px; }
+  .home-controls { justify-self: end; margin: 0; gap: 6px; }
+  .home-backdrop .seg-btn { min-height: 30px; padding: 4px 9px; font-size: 11px; }
+  .home-full { width: 32px; height: 30px; }
   .tabs { justify-content: space-between; margin: 6px -12px 0; padding: 2px 12px 8px; }
   .tab { padding: 7px 6px; font-size: 12px; letter-spacing: 0; }
   .tab-long { display: none; }

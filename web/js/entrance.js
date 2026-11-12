@@ -11,7 +11,7 @@
  * Every moving part is advanced from Home.tick, which App calls only while the
  * front page is on screen and the browser is drawing it. So nothing here runs
  * behind another tab or in a hidden window: there are no timers of its own to
- * forget. CSS does the rest of the arrival (the world fading up, the note),
+ * forget. CSS does the rest of the arrival (the world fading up, the numbers),
  * and the stylesheet holds all of that still for a reader who has asked for
  * less motion — as this does for the parts it moves.
  *
