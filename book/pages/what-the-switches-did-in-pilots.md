@@ -633,12 +633,9 @@ of the others. It was still rich and diverse: 4% of its 399 agents held
 three tokens or fewer, at a diversity score of 0.66.
 
 ### Does evolution go on? (eight switches at once)
-Do the brains of these worlds still get better? To tell, each world's brains
-of iteration 1,000 are played against its brains of iteration 500
-([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). Every agent gets a
-brain of one era or the other. Then the world plays on for 100 iterations, a
-lifetime of B2 ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
-If the later brains then hold more than half of the world, they are better.
+Do the brains of these worlds still get better? Each world's brains of
+iteration 1,000 play its brains of iteration 500 in a lifetime contest
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
 
 <!-- figure eightswitches/evolution -->
 ![Do the brains of 1,000 beat those of 500?](../figures/eightswitches/evolution.svg)
@@ -891,25 +888,19 @@ beating its own past
 The switches the engine was built with were never judged that way. Some were
 set for other reasons. Handover was taken out of B2 because it breaks the
 network ([Building B2: a world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)).
-Revolutions are to be turned off in a page still to be written, *What keeps
-wealth spread?*, for what they do to wealth. And gifts had been off in every
+[What keeps wealth spread?](what-keeps-wealth-spread.md) later turned them off,
+for what they do to wealth. And gifts had been off in every
 run of the notebook. The author asked whether these switches had been tested
 for open-ended evolution. They had not, and each has a reason it might
 matter. So a batch of pilot worlds, batch S, threw them into B1 and B2.
 
 #### Three switches, and two more
 
-**Revolutions.** Think of a hill that goes to the largest army marching on
-it. Smaller armies can band together against that army, each swearing part
-of its troops to the band. If the sworn troops together outnumber the largest
-army, the band takes the hill.
-
-In the game a node goes to whoever staked the most on it, and a revolution is
-such a band. A staker may mark part of its stake on a node as revolutionary.
-If the marked parts of the smaller stakers together exceed the largest single
-stake, they take the node ([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node)).
-With the switch off ([`allow_revolutions`](settings.md#allow_revolutions)),
-every node goes to whoever staked the most on it.
+**Revolutions.** A band of smaller stakers whose revolutionary parts outweigh
+the largest stake takes the node
+([How a coalition takes a node](rules-in-detail.md#how-a-coalition-takes-a-node));
+off ([`allow_revolutions`](settings.md#allow_revolutions)), the largest stake
+wins.
 
 Revolutions are the one form of collective action the original game has. A
 rule that rewards standing together is the kind of rule
@@ -1046,12 +1037,9 @@ against 3,400, and otherwise left it as it was.
 
 #### Does any switch keep evolution going?
 
-How can one tell whether evolution goes on? Play a world against its own
-past. Take the brains of one world at two moments, two eras. Give every agent
-a brain drawn from one era or the other, switch mutation off, and play on
-under the world's own rules. If the later brains end up holding more than
-half of the world, they are better
-([Eras and contests: does a world keep getting better?](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)).
+A world is played against its own past: its agents are given brains of two
+eras, with mutation off, and the later era's share of the world says which is
+better ([A contest, step by step](measuring-evolution.md#a-contest-step-by-step)).
 The first contests here lasted 20 iterations, and from them each era gets a
 rating, the founders' at 0.
 
@@ -1722,14 +1710,10 @@ as fast as in B2 itself.
 
 ### Where the tokens of the dead go
 
-An agent dies of age in B2. In B1 it dies when it loses its node, or when the
-piece of the world it is on is cut off. Either way its tokens do not vanish:
-the cleanup pools them and shares them out among the survivors. Until now
-every world of this notebook shared them out **evenly**: every survivor had
-the same chance at every token
-([`redistribution`](settings.md#redistribution) = `uniform`;
-[The share-out](b1-lives-and-wealth.md#the-share-out)). The author asked for
-other ways, and each has a reading of its own:
+The cleanup shares out the tokens of the dead, and until then every world of
+this notebook shared them out **evenly**
+([`redistribution`](settings.md#redistribution) = `uniform`). The author asked
+for other ways, and each has a reading of its own:
 
 - **to the poorest**: a safety net. The pool raises the poorest survivors to
   one common level, as far as it reaches, like water poured on an uneven
@@ -1743,9 +1727,6 @@ other ways, and each has a reading of its own:
   finds no living child is shared out evenly among everyone, as before
   (`redistribution` = `children`). This fourth rule followed on 17 October
   2026.
-
-None of them has a number of its own. In an iteration without a birth, the
-newborns' and the parents' rules share the pool out evenly, as before.
 
 ### The worlds (who inherits)
 Each rule was played in pilot worlds of 10,000 tokens for 2,000 iterations,
@@ -1968,24 +1949,11 @@ It might jump or walk step by step, at random or looking where it is going.
 And it might propose a link, or force one.
 
 ### What was built (links to strangers)
-Three settings of the engine do it, all off unless a run turns them on
-([`link_search`](settings.md#link_search),
-[`link_steering`](settings.md#link_steering),
-[`link_consent`](settings.md#link_consent)). After a reproduction phase, an
-agent's brain says how many of its tokens it spends on a search:
-
-| search | what the agent does |
-|---|---|
-| **jump** | a walk as many steps long as the tokens it spends, all in one iteration; a link is proposed where the walk ends, if it ends at a stranger |
-| **walk** | a scout that goes one step further in every iteration the agent pays for, and proposes where it stands when that is a stranger |
-| **reach** | a jump whose steps are free, as many as the tokens it holds would pay for |
-
-A paid step costs one token, paid to the agent the step enters; nobody pays
-its last token. Each step goes to a neighbour drawn at random. Or, when the
-search is **looking**, it goes to the neighbour the searcher would most like a
-link with. A proposal becomes a link if both ends agree (**mutual**), or if
-the proposer alone wants it (**forced**). Either way, nobody at its valence
-of eight links gets a new one.
+Three settings of the engine do it, all off unless a run turns them on: a
+search by jump, walk or free reach ([`link_search`](settings.md#link_search)),
+steered at random or by looking ([`link_steering`](settings.md#link_steering)),
+and a link made where both ends agree or by the proposer alone
+([`link_consent`](settings.md#link_consent)).
 
 ### The worlds (links to strangers)
 Batch K plays B2 at 10,000 tokens with every search, every steering and every
@@ -2149,14 +2117,9 @@ Every world is B2 at 10,000 tokens, with Experiment 16's settings, played for
 | `unit_token` | Brains that can grow (up to 32 hidden units, switched on and off by mutation), where every active unit holds one of its agent's tokens. A unit switched on is paid for, one switched off pays its token back, and what an agent cannot pay for stays off. | the same growable brains with units free |
 | `link_token`, no old age | Every link holds a token, paid by whoever makes it; no cap on links (valence 0) and no age limit. | — |
 
-Each is judged by **lifetime contests**, as
-[The switches the world was built with](what-the-switches-did-in-pilots.md#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
-judged the switches. The brains of a later moment play those of an earlier
-one, half and half on the same world. They play for 100 iterations
-([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
-Each pair plays once in each moment's world.
-If the later brains hold more than half of the nodes at the end, evolution
-went somewhere between the two moments.
+Each is judged by **lifetime contests**
+([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)),
+each pair played once in each moment's world.
 
 <!-- figure ideas/contests -->
 ![Does evolution go on?](../figures/ideas/contests.svg)

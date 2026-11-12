@@ -48,19 +48,9 @@ nearly a small world, where everyone is a few steps from everyone.
 
 <!-- experiment E13 -->
 
-Imagine nudging what a brain sees, and watching how far its decisions move. In
-B1, the first baseline, they hardly move at all. A change in what a brain sees
-reaches what it does about a thousand times smaller. How much of a change gets
-through is the brain's **gain**: 0.0015 in the evolved worlds, and 0.0006 in a
-founder ([What the brains are like](what-the-brains-are-like.md)).
-
-The reason is the depth of B1's brain. What it sees passes through five hidden
-layers of units before it decides. Each layer ends in a sigmoid, an S-shaped
-function whose slope is at most a quarter. So each layer passes on about a
-quarter of a change, and five quarters multiply to a thousandth ([How a signal
-fades through layers](the-brain.md#how-a-signal-fades-through-layers)). Whatever evolution has done in
-B1, it has done to a brain that responds to almost nothing. Its decisions are
-near enough constants.
+In B1 a change in what a brain sees reaches what it does at a gain of 0.0015
+evolved, 0.0006 in a founder, as each of five sigmoid layers passes on about a
+quarter ([How a signal fades through layers](the-brain.md#how-a-signal-fades-through-layers)).
 
 [Open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.") needs agents whose behaviour depends on their world: kin
 recognised, partners answered, threats met. So the first step towards it is to
@@ -68,7 +58,7 @@ give the brains sight, and the cheapest way is to take layers away. With one
 hidden layer of 16 units, a founder's gain is about 0.2, some three hundred
 times a B1 founder's 0.0006. With no hidden layer at all, it is about 1:
 
-| hidden layers | founders' gain (median of 30 brains) |
+| hidden layers | founders' gain ([median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of 30 brains) |
 |---|---|
 | 50, 45, 40, 35, 30 (B1) | 0.0006 |
 | 16, 16 | 0.04 |
@@ -311,14 +301,6 @@ vortex** (Gilpin and Soulé, 1986).
 
 #### What sight teaches
 
-Sight breaks worlds, but not quite the way the pilots suggested. Every world
-of 5,000 tokens, blind or seeing, loses two to five agents in every hundred to
-the cull in every iteration. Its network is fragile: half its agents hang in
-trees outside the 2-core, and the rest is held together by narrow necks. B1
-lives with that because its blind brains keep having children at a steady
-rate. Brains that see make having children a real decision, one that evolution
-can take away. And a world whose children no longer replace its losses dies.
-
 Two things follow for the rules a world needs before anything can evolve in
 it. Its network must stop killing: no agent should be lost because a link or a
 neighbour vanished. That is what the rules of [the next
@@ -330,24 +312,9 @@ subject of [the last section](#who-dies-and-why).
 
 <!-- experiment E14 -->
 
-The seeing worlds bled: agents were cut off in every iteration, and a world
-lived only while its births kept up. Nothing can evolve for long in a world
-like that. A world that holds only while its brains keep breeding is at the
-mercy of what evolution does to their breeding.
-
-So before asking evolution to build anything, this section builds the ground
-it stands on: rules that keep the network whole *however the agents play*. The
-target is the health bar of [How to tell a world that keeps
-evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
-seven marks that a healthy network meets:
-
-- one piece;
-- at least 80% of agents in the 2-core;
-- no agent whose loss cuts off more than 2% of the others;
-- no connection whose loss cuts off more than 1%;
-- no agent joined to more than 5% of the others;
-- 3 to 12 connections per agent;
-- a ball dimension between 2.3 and 4.
+Before asking evolution to build anything, this section builds the ground it
+stands on: rules that keep the network whole *however the agents play*. The
+target is the health bar's seven marks ([The seven marks](measuring-health.md#the-seven-marks)).
 
 And every rule has to be **local**: it may only look at an agent and its
 neighbours.
@@ -552,13 +519,12 @@ paths of two steps remain. Then a lapse can neither cut the world nor leave
 two agents hanging on one agent between them. Links that carry tokens are
 never touched.
 
-**Brains like some neighbours more.** When a brain chooses whom to link to, it
-ranks its candidates by what it sees of them. Whatever it favours, agents that
-already have many links are offered as candidates more often, because they are
-the neighbours of more agents. That is preferential attachment, and it grows
-hubs ([Preferential attachment](measures-of-the-archived-studies.md#preferential-attachment-and-its-kernel)). In pilots where
-the brains chose a newborn's two extra links, the best-connected agent was
-joined to 30% of the world.
+**Brains like some neighbours more.** A brain that chooses whom to link to
+meets the well connected among its candidates more often, whatever it
+favours: preferential attachment, which grows hubs
+([Where preferential attachment is used](measures-of-the-archived-studies.md#where-preferential-attachment-is-used)).
+In pilots where the brains chose a newborn's two extra links, the
+best-connected agent was joined to 30% of the world.
 
 Two rules answer it. The newborn's [`birth_links`](settings.md#birth_links)
 are drawn at random rather than chosen. And [`valence`](settings.md#valence) =
@@ -574,19 +540,11 @@ one. B2 switches it off.
 
 #### B2, rule by rule
 
-**B2** is the second baseline, built for open-ended evolution. It is B1 with
-these changes:
-
-- brains of one hidden layer of 16 units, which change only when copied
-  ([above](#brains-that-see-and-worlds-that-break));
-- shorter messages: 8 numbers, and no extra look before acting;
-- an agent's stake on its own node counting 1.5 times
-  ([`incumbency`](settings.md#incumbency));
-- the rules of space of this section: links at birth 2, mending in a ring,
-  `prune_needs` 2, valence 8, no handover;
-- the rules of death of [Who dies, and why](#who-dies-and-why), below: 30% of
-  an agent's tokens kept at home, so that nobody stakes itself to death;
-  children of at least 10 tokens; and death at age 100.
+**B2** is the second baseline, built for open-ended evolution: B1 with brains
+of one hidden layer that change only when copied, shorter messages, a home
+stake that counts 1.5 times, the rules of space of this section and the rules
+of death of [Who dies, and why](#who-dies-and-why)
+([B1 and B2: the two baselines](b1-and-b2.md)).
 
 B2 keeps change only when copied, although Experiment 13 found it harmful. It
 is what heredity means: a brain that is not copied stays itself. And the harm
@@ -735,28 +693,8 @@ brains that see, at every frame of every world. Each answers one force:
 - a cap on the links a brain chooses: the brains cannot pile links on a few
   agents.
 
-What they do not make is a space of three dimensions. By the health bar's
-measure, B2's worlds sit at 3.4 to 4.2, at the top of the bar. The model shows
-why: every mending adds links where a neighbourhood was, and a world that is
-mended everywhere is drawn together. [What folds a
-world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) later read B2's worlds with fuller rulers. They
-are not spaces at all, but nearly small worlds: a typical agent is about as
-near to everyone as in a random network with the same links. Deaths mended in
-a ring fold a world once its first generation dies. And the dimension the bar
-reads off the first few steps grows with the room a world has.
-
-A world closer to three dimensions would need fewer links at birth, or sparser
-mending. The model says what fewer links cost: with one link at birth, cuts of
-2% instead of 1.4%. And in the model without brains, the sparsest mending that
-keeps a world whole stretches it into a line ([What folds a
-world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)). That mending joins only the pieces a death
-would split the world into. A world that is a space of three dimensions, and
-that no single loss can cut, has to sit between the two.
-
-The next experiments keep B2 as it is: a world in which no agent is ever lost
-to a cut. So every death that remains is a death of age, and every change in a
-population is evolution's. Which deaths a world needs is the subject of the
-next section.
+They do not make a space of three dimensions
+([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
 
 ### Who dies, and why
 
@@ -1126,7 +1064,7 @@ held pilot worlds steady at about two thousand agents, six in ten of them poor
 
 The author's picture of a world that might keep evolving has two halves: a
 decentralised, resilient, almost three-dimensional network, and agents that
-differ in almost everything. This page reads the 624 worlds counted on
+differ in almost everything. This section reads the 624 worlds counted on
 17 October 2026 against both halves: B1's are rich but fragile, B2's healthy
 but poor, and none has both. The worlds that come closest mix their brains
 at birth. Played on to 10,000 iterations, most of them did not hold, and
@@ -1146,7 +1084,7 @@ Three days later the author made that first worry sharper. What looks
 unhealthy is not that agents hold few tokens, but that they all hold the
 same few ([Too even, not too poor](#too-even-not-too-poor-healthy-and-rich)).
 
-This page turns the picture into measurements and reads every world the
+This section turns the picture into measurements and reads every world the
 notebook has made against them. When they were last counted, on 17 October
 2026, they were 624 worlds. The lab's runs are read at their end. The pilot
 worlds, made by hand in batches, are read at their last checkpoint: the
@@ -1161,55 +1099,12 @@ together: no single agent or link whose loss cuts off much of it, and no
 hub it hangs on. And its agents must differ, or selection has nothing to
 choose from. Each half has a measure of its own.
 
-**The network: the health bar.** [The health bar](measuring-health.md#the-health-bar), set in
-[How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers),
-already says what a decentralised, resilient network is. It has seven
-marks, each checked on a world at one moment:
-
-1. one piece;
-2. a 2-core, the agents on loops or between them, holding at least 0.8 of
-   the agents;
-3. no agent whose loss cuts off more than 2% of the others;
-4. no link whose loss cuts off more than 1%;
-5. no agent joined to more than 5% of the others;
-6. 3 to 12 links per agent;
-7. a dimension between 2.3 and 4: the number of agents within *r* steps
-   grows about as fast as *r* to that power
-   ([How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)).
-
-The author's "almost three" is the middle of that range. The tables below
-give the marks a world meets as "marks (of 7)", and the health bar's own
-page says why each mark is there.
-
-One mark needs care. A tangle in which everyone is a few steps from
-everyone can also read "three dimensions" over its first few steps. Telling
-the two apart takes a second test, the [random twin](measuring-space.md#the-random-twin-is-a-world-a-space)
-([Healthy, but not a space](#healthy-but-not-a-space)).
-
-**The agents: the diversity score.** How much the agents differ is counted
-without drawing any line ([The diversity score](measuring-health.md#the-diversity-score)). For
-tokens, links and ages, the agents are sorted into doubling classes: 1,
-2–3, 4–7, 8–15, and so on. The **spread** is the effective number of
-classes they fill
-([Effective numbers: how many kinds there really are](statistics.md#effective-numbers-how-many-kinds)).
-It is 1 if every agent is in one class, and *k* if they are spread evenly
-over *k*. Agents holding one to three tokens fill at most two, the classes 1
-and 2–3. Genotypes are counted as an effective number per agent: 1 when
-every agent has a genotype of its own, near 0 when one genotype is
-everywhere.
-
-Each spread is then ranked. A world's percentile on it is the share of a
-set of reference worlds whose agents spread less widely. A world's
-**diversity score** is the mean of its four percentiles: 1 for a world at
-the top of all four, 0 for one at the bottom of all four.
-
-The reference is frozen: the 653 worlds read on 17 October 2026. A later
-world gets the percentile its spreads would have among them, so no score
-moves unless the set is deliberately made again.
-
-The score sees what the agents hold and what they are, not what they do.
-How differently they decide is measured apart, as kinds of staking
-([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)).
+The network half is the health bar's seven marks
+([The seven marks](measuring-health.md#the-seven-marks)), whose dimension mark
+cannot tell a space from a small world
+([Read it with care](measuring-health.md#read-it-with-care)); the agents' half
+is the diversity score, four spreads ranked among the 653 worlds frozen on
+17 October 2026 ([The diversity score](measuring-health.md#the-diversity-score)).
 
 ### Every world on both halves
 
@@ -1306,7 +1201,7 @@ hold the same and near 1 when one agent holds nearly all. It also carries
 the share of all tokens that its richest tenth hold.
 
 Across the 502 worlds read at iteration 1,000, the share at three or fewer
-follows the tokens per agent: a correlation of −0.77, and −0.92 across the
+follows the tokens per agent: a [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of −0.77, and −0.92 across the
 54 read at 10,000. It does not follow the Gini: 0.01, and 0.52 at 10,000.
 It counts how many agents share the tokens, not how evenly they share
 them.
@@ -1346,41 +1241,11 @@ changes.
 
 #### What B2's dimension measures
 
-How can a network without positions have a dimension? Count the agents
-within one step of an agent, within two steps, within three. In a plane the
-count grows like the square of the steps, in space like their cube. The
-power is the dimension, and the health bar reads it over the first five
-steps.
-
-In B2's kind of network that number rises with the number of agents
-([The marks a world misses](building-b2-and-the-search-for-a-healthy-rich-world.md#the-marks-a-world-misses)).
-B2 at 5,000 tokens, with 1,200 to 1,800 agents, reads 3.6 to 4.1, and six
-of its ten worlds meet every mark. The worlds of Experiment 17, B2 with
-brains mixed at birth, read about 3.1 below 300 agents and 4 above 1,500.
-That is a correlation of 0.78 with the logarithm of the size. B1's does not
-rise: from 40 agents to 70,000 it stays between about 2.5 and 4.
-
-So for B2's kind of network, two marks of the bar are partly marks of size.
-The dimension fails a large world. The hub mark fails a small one, where a
-single well-linked agent is already more than 5% of the world. Worlds of
-600 to 1,000 agents met both at 98% of their moments. Health compared
-between worlds of different sizes has to be read with that in mind.
-
-[What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world) found why. B2's networks are
-nearly small worlds, not spaces: everyone is a few steps from everyone. A
-typical agent's ball grows four to six times a step, and holds a quarter of
-a world of 3,400 agents within four steps. A typical agent is about as near
-to everyone as in a random network with the same links: 1.18 times as far,
-against 2.3 in B1. A small world has no dimension to find, and the number
-read off its first few steps grows with the room it has.
-
-B2's worlds start as spaces. They fold once their first generation dies,
-because each death is mended with a ring of links among the dead agent's
-neighbours. The rise with size holds for B2 itself and for its mixed
-worlds, but not for every variant of B2. With the estate of the dead left
-to the newborns or to the parents, B2's worlds hold more than 5,000 agents
-at a dimension of 3.4 to 3.9. They stay spaces, of about three dimensions
-([Who inherits?](what-the-switches-did-in-pilots.md#healthy-and-diverse)).
+In B2's kind of network the dimension mark rises with size and the hub mark
+fails small worlds ([The marks a world misses](#the-marks-a-world-misses)); B2
+at 5,000 tokens reads 3.6 to 4.1 and Experiment 17's worlds about 3.1 below
+300 agents, because the networks are folded
+([Folded](measuring-space.md#folded)).
 
 ### The worlds that come closest
 
@@ -1425,10 +1290,8 @@ meet every mark are:
 | `Y/mix-nodice-s2` | B2 pil. | 1,000 | 7 | 0.63 | 3 | 53% | 3.5 | 1,468 |
 <!-- /table -->
 
-Every one of the twelve mixes its brains at birth. A newborn's brain then
-comes from two agents: its parent, and a mate among the parent's
-neighbours. Each hidden unit of the brain comes whole from one or the other
-([Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)).
+Every one of the twelve mixes its brains at birth: a newborn's brain is mixed
+from its parent's and a mate's, a neighbour drawn at random ([`mix_at_birth`](settings.md#mix_at_birth)).
 Each world also changes something else. The two at the top add a faster
 change of brains, a mutation probability of 0.8 where B2 has 0.2. They have
 diversity scores of 0.79 and 0.78, with about 40% of their agents at three
@@ -1514,51 +1377,16 @@ Since 19 October 2026 the last line asks instead for tokens no more even
 than in B2's most even world
 ([Too even, not too poor](#too-even-not-too-poor-healthy-and-rich)).
 
-The long runs were planned in three steps. Here is what each found.
-
-1. **Every candidate to 10,000 iterations.** A candidate that falls back
-   towards B2's poverty, or loses a mark, says its rule does not hold.
-   Nineteen more candidates followed the first six, most of them mixed
-   worlds of batch Y. By 19 October 2026 every candidate that could be read
-   at 10,000 iterations had been: again nineteen worlds, the four above
-   among them. Five held, eleven fell back — most of them into B2's poverty
-   — and three died out on the way. All five that held mix their brains at
-   birth. By the clarified test of evenness, three held. Four candidates
-   whose rules exist only in the pilots' prototype wait for Experiment 23
-   ([The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on)).
-2. **More seeds for what holds.** One world can be luck. A rule whose
-   candidate is still healthy and diverse at 10,000 iterations gets five
-   seeds more, from the start, to 10,000. Experiment 21 gave three such
-   rules five new seeds each, and none held more often than mixing alone
-   ([Five more seeds for the rules that held](building-b2-and-the-search-for-a-healthy-rich-world.md#five-more-seeds-for-the-rules-that-held)).
-3. **A pre-registered lab experiment** for what holds in most seeds: ten
-   seeds to 10,000 iterations, and the best world on to a hundred thousand,
-   as [A hundred thousand iterations](a-hundred-thousand-iterations.md)
-   plans for one world. Mixing alone went first. It became a setting of the
-   engine, [`mix_at_birth`](settings.md#mix_at_birth), off unless a run
-   turns it on. Experiment 17 played ten worlds of B2 with mixing for
-   10,000 iterations
-   ([Mixed at birth: ten long worlds](building-b2-and-the-search-for-a-healthy-rich-world.md#mixed-at-birth-ten-long-worlds)).
-   They are rich: 11% of the agents hold three tokens or fewer in the
-   median world at 10,000 iterations. But only five of the ten met every
-   mark, so its thesis is refuted. Experiment 18 played those five on to
-   50,000 iterations, and they did not stay healthy. Three died out, and
-   the two that lived ended between the mixed worlds' riches and B2's
-   poverty
-   ([Five mixed worlds, fifty thousand iterations](building-b2-and-the-search-for-a-healthy-rich-world.md#five-mixed-worlds-fifty-thousand-iterations)).
-   Since no rule held more often than mixing alone, step 3 has no rule to
-   take up yet.
-
-The pilot batches T to Y
-([Every simulation: what was run, and what was measured](every-simulation.md))
-and the search for settings by elimination added candidates as they
-finished. The search, batch Z, drew every setting of a world at random, and
-dropped the values that made worlds worse, round after round. Experiment 24
-played the settings of its best world again, in new seeds. They made
-diverse, wide and rich worlds, but thin, easily cut and too even ones
-([The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds)).
-The same idea is now a lab experiment:
-[A screen of random worlds](a-screen-of-random-worlds.md).
+The long runs went in three steps, each told in its own section below: every
+candidate to 10,000 iterations ([The candidates, played on](#the-candidates-played-on));
+five more seeds for each rule that held
+([Five more seeds for the rules that held](#five-more-seeds-for-the-rules-that-held));
+and mixing alone in the lab, ten seeds to 10,000 iterations and five of them on
+to 50,000 ([Brains mixed at birth, in long worlds](#brains-mixed-at-birth-in-long-worlds)).
+The random search's best world was played again in new seeds
+([The search's best world, in new seeds](#the-searchs-best-world-in-new-seeds)),
+and the same idea became the lab's screen
+([A screen of random worlds](a-screen-of-random-worlds.md)).
 
 ### Healthy, but not a space
 
@@ -1657,23 +1485,12 @@ the two that lived stayed large and fairly poor, and evolution faded.
 <!-- experiment E17 -->
 
 In B2, a newborn's brain is a copy of its parent's, changed now and then by
-mutation. With brains **mixed at birth**, a newborn's brain comes from two
-agents: its parent and a *mate*, one of the parent's neighbours drawn at
-random. For each hidden unit of the brain, a fair coin decides whether the
-newborn takes it from the parent or from the mate. B2's brain has a single
-hidden layer of 16 units. A unit is taken whole: the weights that lead into
-it, its bias, and the weights that lead out of it. So a unit that works
-arrives with everything it needs. Then the new brain mutates as usual.
-
-[Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) read every world the notebook had made
-against the author's picture of a world that might keep evolving. The picture
-has two halves: a network that is decentralised, resilient and nearly
-three-dimensional, and agents that differ in almost every statistic. B2's
-worlds meet six of the seven marks of the health bar, the notebook's test of a
-healthy network. But their agents do not differ: three in four hold three
-tokens or fewer. The worlds that came closest to both halves were those whose
-brains are mixed at birth ([Brains mixed at birth, units that cost, an eye for
-raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)).
+mutation. With brains **mixed at birth**, a newborn's brain is mixed from its
+parent's and a mate's, a neighbour drawn at random, unit by unit, before it
+mutates ([`mix_at_birth`](settings.md#mix_at_birth)). The worlds that came closest to the author's picture
+([Healthy and rich](#healthy-and-rich)) were of this kind; B2's own meet six of
+the seven marks of the health bar, but three in four of their agents hold
+three tokens or fewer.
 
 Those were pilots. Batch Q made two worlds with mixing, later batches combined
 mixing with other rules, and the two worlds of batch Q were played on
@@ -2312,9 +2129,7 @@ at about 2,000 agents, six in ten of them poor.
 ### One number behind riches and health
 
 The author's picture of a world that might keep evolving has two halves
-([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)). Its network is decentralised,
-resilient and almost three-dimensional. And its agents differ: it is not a
-world where everyone holds one to three tokens.
+([Healthy and rich](#healthy-and-rich)).
 
 Across the experiments with brains mixed at birth
 ([below](#three-kinds-of-world)), one quantity decided both halves more than
@@ -2532,7 +2347,7 @@ If the mate gives the child tokens too, the free ride ends. But a child that
 two pay for is cheaper to each of them, and that pushes the other way.
 
 Experiment 22 tried it later, in four worlds of 5,000 iterations
-([A mate that pays its share](building-b2-and-the-search-for-a-healthy-rich-world.md#who-may-be-a-mate)).
+([Who may be a mate](building-b2-and-the-search-for-a-healthy-rich-world.md#who-may-be-a-mate)).
 The mate gave the child as many tokens as the parent did, as far as it could
 and never its last. Every world held its size more steadily than Experiment
 17's world of the same seed, whose mate pays nothing, and none came near dying
@@ -2655,12 +2470,8 @@ unfolds its network into a space.
 
 <!-- experiment E19 -->
 
-In B2, the notebook's second baseline, a newborn gets a copy of its parent's
-brain, sometimes slightly changed. With brains **mixed at birth**
-([`mix_at_birth`](settings.md#mix_at_birth)), a newborn has, in a sense, two
-parents. Each hidden unit of its brain, one of the brain's inner neurons,
-comes whole from its parent or from a **mate**, by an even chance. The mate
-is one of the parent's neighbours, drawn at random. Yet only the parent pays:
+With brains **mixed at birth**, a newborn's brain is mixed from its parent's
+and a mate's, a neighbour drawn at random ([`mix_at_birth`](settings.md#mix_at_birth)). Yet only the parent pays:
 every token the child starts with comes from the parent.
 
 Brains mixed at birth made the richest healthy worlds the notebook had found
@@ -2673,13 +2484,8 @@ iterations and then dies of age. So a world must see one birth per hundred
 agents in every iteration to keep its size. These worlds fell below that line
 and stayed below, though many of their agents could have afforded a child.
 
-[What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size) offers a reason: a
-**free ride**. A newborn's mixed brain is half its parent's and half its
-mate's, yet the mate pays nothing for the child. So an agent that never breeds
-still spreads its brain, through other agents' children. The parent pays the
-whole price for half a brain's worth of offspring. Selection then rewards
-keeping tokens over spending them on children. And nothing stops that
-reluctance at the point where the world can no longer replace its dead.
+[Why mixing makes agents reluctant](#why-mixing-makes-agents-reluctant) offers
+a reason: the mate's free ride.
 
 If that is the reason, it can be taken away. Let only a parent — a neighbour
 with a living child of its own — be a mate. Then being a mate is no free ride
@@ -2850,11 +2656,9 @@ agents breed sets how full a world becomes, and a full world is a poor one.
 > **To make it again:** `python3 book_figures.py mixparents`.
 <!-- /figure -->
 
-**Evolution goes on, as it did with any mate.** To see whether brains still
-improve, the brains of a later era meet those of an earlier one. They are
-dealt to the agents of a world by a coin each and played for a lifetime, 100
-iterations. If the later brains then hold more than half the world, they are
-better. The brains of 1,000 beat those of 500 in every world (a median of
+**Evolution goes on, as it did with any mate.** In lifetime contests
+([Why mixing makes agents reluctant](#why-mixing-makes-agents-reluctant)), the
+brains of 1,000 beat those of 500 in every world (a median of
 0.78 of a contested world, against 0.84 with any mate). Those of 5,000 beat
 those of 2,000 in every world (0.65, against 0.66). Those of 10,000 beat those
 of 5,000 in eight of the ten (0.56, against 0.54). And those of 20,000 beat
@@ -3064,41 +2868,15 @@ Picture a world caught at a good moment. At iteration 1,000 its network is
 sound and its agents differ. Will it still look like that 9,000 iterations
 later?
 
-The author's picture of a world that might keep evolving asks for both at
-once ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)). A world that comes close at
-iteration 1,000 is a **candidate world**. First, it meets every mark of the
-health bar, the seven marks of a sound network:
-- one piece;
-- at least 80% of its agents on loops or between them (the 2-core);
-- no agent whose loss cuts off more than 2% of the others, and no link
-  whose loss cuts off more than 1%;
-- no agent joined to more than 5% of the others;
-- 3 to 12 links per agent;
-- a dimension between 2.3 and 4.
+A world that comes close at iteration 1,000 is a **candidate world**
+([Candidates and long runs](#candidates-and-long-runs)): it meets every mark of
+the health bar and is more diverse than B2's median world. Most mix their
+brains at birth, and such worlds drift in size
+([What holds a world's size](#what-holds-a-worlds-size)).
 
-Second, its diversity score is above that of B2's median world. The
-diversity score says, in one number from 0 to 1, how much a world's agents
-differ in tokens, links, ages and genotypes. B2 is the second baseline, the
-world built so that its network cannot break.
-
-One moment says little. Most candidate worlds have brains **mixed at
-birth**. A newborn's brain is then its parent's mixed with a mate's, one of
-the parent's neighbours. Each hidden unit is taken whole from one or the
-other. Such mixed worlds drift in size, and their riches drift with it
-([What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size)).
-
-So every candidate world is played on to 10,000 iterations. There it is
-read by [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s **test of a long run**. A
-world passes if, at iteration 10,000:
-- it is still alive: it never fell to 20 agents or fewer, where the lab
-  calls a world extinct;
-- it meets every mark of the health bar;
-- it is more diverse than B2's median world at 10,000 (a diversity score
-  of 0.49);
-- it holds a smaller share of its agents at three tokens or fewer than the
-  least poor of B2's ten worlds (66%).
-
-B2's own ten worlds, played on to 10,000 iterations, are the yardstick.
+So every candidate world is played on to 10,000 iterations and read by the
+test of a long run ([Candidates and long runs](#candidates-and-long-runs)),
+with B2's own ten worlds as the yardstick.
 
 #### Six worlds left unfinished
 
@@ -3235,7 +3013,7 @@ genotype (0.34).
 **Rich and small, or large and poor.** Sizes wandered: several worlds
 shrank to a few hundred agents and grew back. Where a world ended, its
 riches went with its size. Across the nineteen at 10,000, the more agents,
-the poorer they were (a rank correlation of 0.85). The five that held had
+the poorer they were (a [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") of 0.85). The five that held had
 372 to 1,244 agents. The eight largest that lived, with 1,846 to 3,097
 agents, all fell back, seven of them into poverty. It is the finding of
 [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size) again. A world's
@@ -3310,13 +3088,10 @@ tokens are spread: 0.46 with the Gini. The small rich worlds are the even
 ones; the large poor ones are not.
 
 #### Does evolution go on? (the candidates)
-Are the brains still getting better after thousands of iterations? A
-contest tells. Take a world's brains at two moments, say iterations 500 and
-1,000. Deal them to the agents of the world as it was at one of those
-moments, by a coin for each agent, and play 100 iterations. That is about a lifetime: in B2 every
-agent dies by age 100. Then count the share of agents the later brains hold. Above one half, the later brains are
-the better players. Each world plays two such contests, one in each
-moment's world, and the figure shows their mean.
+Are the brains still getting better after thousands of iterations? Each world
+plays two lifetime contests
+([Why mixing makes agents reluctant](#why-mixing-makes-agents-reluctant)), one in
+each moment's world, and the figure shows their mean.
 
 <!-- figure candidates/evolution -->
 ![Do later brains beat earlier ones?](../figures/candidates/evolution.svg)
@@ -3754,13 +3529,8 @@ same moment:
   ([Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)). What looks unhealthy is a world
   where almost every agent holds the same few tokens.
 
-*A space* needs a picture. In a space, far places are far apart: to cross a
-city, you walk through many streets. In a *small world*, everyone is a few
-steps from everyone, as through friends of friends. To tell the two apart,
-the notebook sets each world beside its random twin. The twin has the same
-agents, each with as many links, but wired at random; and a random network
-is a small world. A world counts as a space when a typical agent needs at
-least 1.5 times the twin's steps to reach half the world.
+A world counts as a space when its typical distance is at least 1.5 times its
+random twin's ([The random twin](measuring-space.md#the-random-twin-is-a-world-a-space)).
 
 Read by all four, few worlds pass even for a moment:
 - **At 1,000 iterations:** three of the 466 worlds measured, each with
@@ -3773,10 +3543,9 @@ Read by all four, few worlds pass even for a moment:
 #### The steadiest world, and what it misses
 
 The steadiest configuration the notebook has is
-[Experiment 19](building-b2-and-the-search-for-a-healthy-rich-world.md#who-may-be-a-mate)'s. In it, a
-newborn's brain is mixed at birth: part its parent's, part a mate's, and the
-mate is one of the parent's neighbours. And only parents may be mates: a
-neighbour with a living child of its own.
+[Experiment 19](building-b2-and-the-search-for-a-healthy-rich-world.md#who-may-be-a-mate)'s:
+brains mixed at birth ([`mix_at_birth`](settings.md#mix_at_birth)), and only parents as mates, neighbours with a
+living child of their own.
 - **What it has.** All ten of its worlds lived to 20,000 iterations, at
   about 2,000 agents each. They stay diverse: at 20,000 their diversity
   scores are 0.52 to 0.69, against 0.49 for B2's median world at 10,000.

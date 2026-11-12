@@ -400,7 +400,7 @@ tells the story, with its numbers.
 - [Measuring health: criteria, the health bar and diversity](measuring-health.md#read-it-with-care)
 
 > [!info]- And in the Archive (6)
-> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#how-many-dimensions-the-core-has) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#the-six-criteria) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#nearer-the-authors-picture) · [Space at scale (side study)](space-at-scale.md#the-rulers-at-every-size) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#nulls-and-controls)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#how-many-dimensions-the-core-has) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-but-not-a-space) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#the-six-criteria) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#nearer-the-authors-picture) · [Space at scale (side study)](space-at-scale.md#the-rulers-at-every-size) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#nulls-and-controls)
 <!-- /used -->
 
 ## Where to go next
