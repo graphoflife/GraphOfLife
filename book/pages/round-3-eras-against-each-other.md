@@ -48,7 +48,6 @@ where conquests make most of the copies, the [median](statistics.md#many-worlds-
 So a line can sweep a world by luck, and a world's numbers alone cannot say
 whether its brains got better. The contests can.
 
-
 ## The plan
 
 - **The worlds:** the ten worlds the evolution rank puts first, leaving out
@@ -138,7 +137,8 @@ Its thesis stays as it was written:
 The plan is `book/experiments/E45.json`. `research/screen/evolution_plans.py`
 wrote it on 12 November 2026 from two files:
 - the evolution rank, `research/screen/evolution.json`, made by
-  `research/screen/braintree.py`;
+  `research/screen/evolution.py` from what `research/screen/braintree.py`
+  read;
 - health of 9 November, `research/screen/health.json`.
 
 Nothing was played before the plan was written. Experiment 44's plan,
