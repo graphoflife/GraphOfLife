@@ -9,11 +9,13 @@ brain-copy tree, each reading set against a null model:
 
   shadow     lines spread beyond luck: the shadow world keeps the same copies
              and the same living but draws every copy's parent at random among
-             the living; the mean over the eras of three z-scores, how much
-             shorter the first living's clades live, how much larger the
-             largest clade is at the era's end, and how much more of the
-             evolutionary activity lies in clades more active than 99% of the
-             shadow's (Bedau and Packard)
+             the living; the mean over the eras of three z-scores, how many
+             fewer of the first living's clades still have descendants at the
+             era's end, how much larger the largest clade is then, and how much
+             more of the evolutionary activity lies in clades more active than
+             99% of the shadow's (Bedau and Packard). How long the average
+             clade lives is read but not scored: copies are local, and kin
+             taking kin's nodes makes clades last longer whatever selection does
   novelty    the line of descent's late novelty, above its own noise, less that
              of lines that start from its brain at iteration 250 and make the
              same changes at random (the mutation-only null)
@@ -64,9 +66,9 @@ READINGS = [
     {"key": "shadow", "name": "lines spread beyond luck", "better": "more",
      "null": "the shadow world of pure luck: the same copies at the same moments and the same living, every "
              "copy's parent drawn uniformly among the living (100 replicates); the mean over the twelve eras of the "
-             "z-scores of how much shorter the clades of the era's first living live, how much larger the largest "
-             "clade is at the era's end, and how much more of the evolutionary activity is held by clades more "
-             "active than 99% of the shadow's"},
+             "z-scores of how many fewer of the clades of the era's first living still have descendants at its "
+             "end, how much larger the largest clade is then, and how much more of the evolutionary activity is "
+             "held by clades more active than 99% of the shadow's"},
     {"key": "novelty", "name": "novelty above the mutation-only null", "better": "more",
      "null": "six lines that start from the line of descent's brain at iteration 250 and make, era by era, as many "
              "changes of the world's own kind as the real line made, at random (mutations by the world's "
@@ -103,7 +105,11 @@ def _mean(values: List[Optional[float]]) -> Optional[float]:
 def readings_of(have: Dict[str, Any]) -> Dict[str, Dict[str, Optional[float]]]:
     """A world's four readings: each its value (the one scored) and its z against its null."""
     sh = have["shadow"]["z"]
-    shadow = _mean([sh.get("life"), sh.get("top"), sh.get("active_share")])
+    # How long the average clade lives is left out: copies are made next door, kin taking kin's nodes, and that
+    # alone makes clades last longer than in a shadow whose parents come from anywhere, whatever selection does.
+    # The three kept are the ones locality pushes the other way (as in a voter model, lines meet and sweep more
+    # slowly where copies are local), so a world that beats its shadow on them does so in spite of its locality.
+    shadow = _mean([sh.get("persist"), sh.get("top"), sh.get("active_share")])
     line = have.get("line") or {}
     sel = have.get("selection") or {}
     her = [h for h in (have.get("heredity") or {}).values() if isinstance(h, dict)]

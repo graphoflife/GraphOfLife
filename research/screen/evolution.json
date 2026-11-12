@@ -1,15 +1,9 @@
 {
  "made": "2026-11-12",
  "provisional": true,
- "complete": 1,
+ "complete": 7,
  "of": 82,
  "missing": [
-  "B1-30000-17ac6e-s4004",
-  "B1-30000-4108dd-s3058",
-  "B1-30000-2bac4d-s4004",
-  "B1-30000-f6d23f-s3045",
-  "B1-30000-b23381-s3016",
-  "B1-30000-ad76aa-s3084",
   "B1-30000-05ba40-s3090",
   "B1-30000-7d5208-s3004",
   "B1-30000-b0f6e3-s3023",
@@ -92,7 +86,7 @@
    "key": "shadow",
    "name": "lines spread beyond luck",
    "better": "more",
-   "null": "the shadow world of pure luck: the same copies at the same moments and the same living, every copy's parent drawn uniformly among the living (100 replicates); the mean over the twelve eras of the z-scores of how much shorter the clades of the era's first living live, how much larger the largest clade is at the era's end, and how much more of the evolutionary activity is held by clades more active than 99% of the shadow's"
+   "null": "the shadow world of pure luck: the same copies at the same moments and the same living, every copy's parent drawn uniformly among the living (100 replicates); the mean over the twelve eras of the z-scores of how many fewer of the clades of the era's first living still have descendants at its end, how much larger the largest clade is then, and how much more of the evolutionary activity is held by clades more active than 99% of the shadow's"
   },
   {
    "key": "novelty",
@@ -116,32 +110,396 @@
  "top": 10,
  "bests": {
   "product": [
-   "B1-30000-b5a76a-s3051"
+   "B1-30000-4108dd-s3058",
+   "B1-30000-2bac4d-s4004",
+   "B1-30000-17ac6e-s4004",
+   "B1-30000-f6d23f-s3045",
+   "B1-30000-b5a76a-s3051",
+   "B1-30000-b23381-s3016",
+   "B1-30000-ad76aa-s3084"
   ],
   "sum": [
-   "B1-30000-b5a76a-s3051"
+   "B1-30000-2bac4d-s4004",
+   "B1-30000-4108dd-s3058",
+   "B1-30000-17ac6e-s4004",
+   "B1-30000-b23381-s3016",
+   "B1-30000-f6d23f-s3045",
+   "B1-30000-b5a76a-s3051",
+   "B1-30000-ad76aa-s3084"
   ],
   "worst": [
-   "B1-30000-b5a76a-s3051"
+   "B1-30000-4108dd-s3058",
+   "B1-30000-b5a76a-s3051",
+   "B1-30000-2bac4d-s4004",
+   "B1-30000-f6d23f-s3045",
+   "B1-30000-17ac6e-s4004",
+   "B1-30000-b23381-s3016",
+   "B1-30000-ad76aa-s3084"
   ]
  },
  "union": [
-  "B1-30000-b5a76a-s3051"
+  "B1-30000-17ac6e-s4004",
+  "B1-30000-2bac4d-s4004",
+  "B1-30000-4108dd-s3058",
+  "B1-30000-ad76aa-s3084",
+  "B1-30000-b23381-s3016",
+  "B1-30000-b5a76a-s3051",
+  "B1-30000-f6d23f-s3045"
  ],
  "worlds": [
+  {
+   "id": "B1-30000-4108dd-s3058",
+   "round": "E40",
+   "seed": 3058,
+   "conquest_share": 0.8003651461989646,
+   "z": {
+    "shadow": 4.426254944544974,
+    "novelty": -1.2457759366823944,
+    "selection": 22.50516811413792,
+    "heredity": 23.13079136141975
+   },
+   "values": {
+    "shadow": 4.426254944544974,
+    "novelty": -0.06081731790419195,
+    "selection": 0.09325403113855404,
+    "heredity": 0.9630049999792478
+   },
+   "beside": {
+    "birth_share": 0.19963485380103546,
+    "conquests_per_agent": 0.7281120949284278,
+    "conquests_per_agent_2000": 0.753431211533581,
+    "births_per_agent": 0.17001205866344343,
+    "conquests_per_birth": 4.009145351926584,
+    "generations": 2303.0832328106153,
+    "births_on_path": 35.52593486127865,
+    "conquests_on_path": 2267.5572979493368,
+    "generations_births_only": 142.15078407720145,
+    "common_ancestor_age": 224.0,
+    "common_ancestor_age_shadow": 2356.0,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 69.62560386473429,
+    "effective_population_shadow": 743.0452898550725,
+    "effective_population_births_only": 9.575392038600725,
+    "heredity_births_only": 0.46203822086160284,
+    "heredity_birth_pairs": 0.7230732314799415,
+    "heredity_conquest_pairs": 0.9684748041822244,
+    "births_only_pairs_still_brain_pairs": 0.012294395582645237,
+    "novelty_above_noise": 0.11412878035273191,
+    "novelty_null_above_noise": 0.17494609825692387,
+    "novelty_births_only": 0.13212431829822796,
+    "shadow_z": {
+     "persist": 4.201727109905216,
+     "top": 6.210738583615741,
+     "life": 7.6308618950933065,
+     "active_share": 2.866299140113965,
+     "active_count": -3.4791428622670395,
+     "top_activity": 9.893388537804524
+    },
+    "selection_visible": 24.17651277635233,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": 0.1226215644820296,
+    "selection_same_sign": 0.5909090909090909
+   },
+   "health": {
+    "product": 0.4732213214231015,
+    "sum": 0.5573719516868723,
+    "worst": 0.10907648670730681,
+    "ranks": {
+     "product": 27,
+     "sum": 15,
+     "worst": 54
+    }
+   },
+   "shortlisted": true,
+   "out": null,
+   "shares": {
+    "shadow": 0.8571428571428571,
+    "novelty": 0.5714285714285714,
+    "selection": 0.5714285714285714,
+    "heredity": 0.8571428571428571
+   },
+   "orders": {
+    "product": 0.6998542122237651,
+    "sum": 0.7142857142857142,
+    "worst": 0.5714285714285714
+   },
+   "score": 0.6998542122237651,
+   "rank": 1,
+   "ranks": {
+    "product": 1,
+    "sum": 2,
+    "worst": 1
+   }
+  },
+  {
+   "id": "B1-30000-2bac4d-s4004",
+   "round": "E42",
+   "seed": 4004,
+   "conquest_share": 0.5415968540062652,
+   "z": {
+    "shadow": 4.478227746711763,
+    "novelty": -1.4737242121508662,
+    "selection": 43.90674299304137,
+    "heredity": 17.72944571824262
+   },
+   "values": {
+    "shadow": 4.478227746711763,
+    "novelty": -0.04632121513454912,
+    "selection": 0.13296910762228442,
+    "heredity": 0.8980642625905817
+   },
+   "beside": {
+    "birth_share": 0.4584031459937348,
+    "conquests_per_agent": 0.9284620346302742,
+    "conquests_per_agent_2000": 1.0467702708169253,
+    "births_per_agent": 0.767104880557033,
+    "conquests_per_birth": 1.1814859010886185,
+    "generations": 3774.3716216216217,
+    "births_on_path": 1544.445945945946,
+    "conquests_on_path": 2229.925675675676,
+    "generations_births_only": 1392.0168918918919,
+    "common_ancestor_age": 41.0,
+    "common_ancestor_age_shadow": 1125.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 25.772881355932203,
+    "effective_population_shadow": 680.4652542372881,
+    "effective_population_births_only": 6.008445945945937,
+    "heredity_births_only": 0.2853266994302763,
+    "heredity_birth_pairs": 0.5149846431666367,
+    "heredity_conquest_pairs": 0.9067805874596153,
+    "births_only_pairs_still_brain_pairs": 0.042528031024333404,
+    "novelty_above_noise": 0.10311559608761175,
+    "novelty_null_above_noise": 0.14943681122216088,
+    "novelty_births_only": 0.12387172386466522,
+    "shadow_z": {
+     "persist": 3.393813337045067,
+     "top": 4.330018552500756,
+     "life": 15.859698283384702,
+     "active_share": 5.710851350589465,
+     "active_count": -5.6765493840673535,
+     "top_activity": 11.895452912270825
+    },
+    "selection_visible": 52.94081105472425,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": 0.16208597603946442,
+    "selection_same_sign": 0.5681818181818182
+   },
+   "health": {
+    "product": 0.30257948338522406,
+    "sum": 0.3225779692042431,
+    "worst": 0.14634146341463414,
+    "ranks": {
+     "product": 71,
+     "sum": 78,
+     "worst": 40
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 1.0,
+    "novelty": 0.7142857142857143,
+    "selection": 1.0,
+    "heredity": 0.2857142857142857
+   },
+   "orders": {
+    "product": 0.672126440078521,
+    "sum": 0.75,
+    "worst": 0.2857142857142857
+   },
+   "score": 0.672126440078521,
+   "rank": 2,
+   "ranks": {
+    "product": 2,
+    "sum": 1,
+    "worst": 3
+   }
+  },
+  {
+   "id": "B1-30000-17ac6e-s4004",
+   "round": "E41",
+   "seed": 4004,
+   "conquest_share": 0.5474987997644188,
+   "z": {
+    "shadow": 4.2223534838093295,
+    "novelty": -0.7059745957394812,
+    "selection": 40.18166664295084,
+    "heredity": 16.329890727260853
+   },
+   "values": {
+    "shadow": 4.2223534838093295,
+    "novelty": -0.017863158579051047,
+    "selection": 0.12814482266564195,
+    "heredity": 0.8899483011748557
+   },
+   "beside": {
+    "birth_share": 0.4525012002355811,
+    "conquests_per_agent": 0.8988735307197505,
+    "conquests_per_agent_2000": 1.0314850740359491,
+    "births_per_agent": 0.7291968664850563,
+    "conquests_per_birth": 1.2099388896192542,
+    "generations": 3738.3943943943946,
+    "births_on_path": 1461.083083083083,
+    "conquests_on_path": 2277.3113113113113,
+    "generations_births_only": 1308.868868868869,
+    "common_ancestor_age": 26.0,
+    "common_ancestor_age_shadow": 1104.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 15.212424849699397,
+    "effective_population_shadow": 638.9872244488977,
+    "effective_population_births_only": 5.434434434434479,
+    "heredity_births_only": 0.33679893741408595,
+    "heredity_birth_pairs": 0.8011362194048918,
+    "heredity_conquest_pairs": 0.8887048199624794,
+    "births_only_pairs_still_brain_pairs": 0.039283481794030316,
+    "novelty_above_noise": 0.13490571795814668,
+    "novelty_null_above_noise": 0.15276887653719773,
+    "novelty_births_only": 0.1413561846520618,
+    "shadow_z": {
+     "persist": 3.350566100892561,
+     "top": 3.98242612207039,
+     "life": 13.522759387704816,
+     "active_share": 5.3340682284650365,
+     "active_count": -5.202708989260315,
+     "top_activity": 9.759360278618884
+    },
+    "selection_visible": 49.316920244972586,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": 0.03537702607470049,
+    "selection_same_sign": 0.5909090909090909
+   },
+   "health": {
+    "product": 0.34529812617423583,
+    "sum": 0.3501940706972568,
+    "worst": 0.25609756097560976,
+    "ranks": {
+     "product": 61,
+     "sum": 72,
+     "worst": 13
+    }
+   },
+   "shortlisted": true,
+   "out": null,
+   "shares": {
+    "shadow": 0.7142857142857143,
+    "novelty": 1.0,
+    "selection": 0.8571428571428571,
+    "heredity": 0.14285714285714285
+   },
+   "orders": {
+    "product": 0.5438220136913314,
+    "sum": 0.6785714285714286,
+    "worst": 0.14285714285714285
+   },
+   "score": 0.5438220136913314,
+   "rank": 3,
+   "ranks": {
+    "product": 3,
+    "sum": 3,
+    "worst": 5
+   }
+  },
+  {
+   "id": "B1-30000-f6d23f-s3045",
+   "round": "E40",
+   "seed": 3045,
+   "conquest_share": 0.5109105439142662,
+   "z": {
+    "shadow": 1.6781877248174786,
+    "novelty": -1.1987847074932598,
+    "selection": 33.532395505772016,
+    "heredity": 24.874177023306217
+   },
+   "values": {
+    "shadow": 1.6781877248174786,
+    "novelty": -0.026641257177056343,
+    "selection": 0.07576961626338403,
+    "heredity": 0.9505741548106341
+   },
+   "beside": {
+    "birth_share": 0.4890894560857339,
+    "conquests_per_agent": 0.688923214243272,
+    "conquests_per_agent_2000": 0.6730179237170558,
+    "births_per_agent": 0.6562283610718644,
+    "conquests_per_birth": 1.044615739630067,
+    "generations": 2874.2254213483147,
+    "births_on_path": 561.754213483146,
+    "conquests_on_path": 2312.4712078651687,
+    "generations_births_only": 1236.5287921348315,
+    "common_ancestor_age": 452.0,
+    "common_ancestor_age_shadow": 1741.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 202.25474349964864,
+    "effective_population_shadow": 850.0244202389318,
+    "effective_population_births_only": 489.76439606741576,
+    "heredity_births_only": 0.21860579790271117,
+    "heredity_birth_pairs": 0.8783479947069981,
+    "heredity_conquest_pairs": 0.9677989988217337,
+    "births_only_pairs_still_brain_pairs": 0.06506121420100716,
+    "novelty_above_noise": 0.11450409994890579,
+    "novelty_null_above_noise": 0.14114535712596213,
+    "novelty_births_only": 0.13526416496998786,
+    "shadow_z": {
+     "persist": 2.3515248517688403,
+     "top": 3.6933494374761238,
+     "life": -5.084101078176751,
+     "active_share": -1.0103111147925279,
+     "active_count": -1.9855144206952202,
+     "top_activity": 3.834501187898839
+    },
+    "selection_visible": 44.90741444117503,
+    "selection_clear": 42,
+    "selection_cells": 48,
+    "selection_follows": 0.05243128964059196,
+    "selection_same_sign": 0.45454545454545453
+   },
+   "health": {
+    "product": 0.4759141898689069,
+    "sum": 0.5613017575015098,
+    "worst": 0.20038630152628026,
+    "ranks": {
+     "product": 26,
+     "sum": 11,
+     "worst": 25
+    }
+   },
+   "shortlisted": true,
+   "out": null,
+   "shares": {
+    "shadow": 0.42857142857142855,
+    "novelty": 0.8571428571428571,
+    "selection": 0.2857142857142857,
+    "heredity": 0.5714285714285714
+   },
+   "orders": {
+    "product": 0.4948716593053935,
+    "sum": 0.5357142857142856,
+    "worst": 0.2857142857142857
+   },
+   "score": 0.4948716593053935,
+   "rank": 4,
+   "ranks": {
+    "product": 4,
+    "sum": 5,
+    "worst": 4
+   }
+  },
   {
    "id": "B1-30000-b5a76a-s3051",
    "round": "E40",
    "seed": 3051,
    "conquest_share": 0.8257839412664468,
    "z": {
-    "shadow": 4.828892633561628,
+    "shadow": 3.8505180934481404,
     "novelty": -3.0927579856655143,
     "selection": 19.22190774496802,
     "heredity": 14.234791868769554
    },
    "values": {
-    "shadow": 4.828892633561628,
+    "shadow": 3.8505180934481404,
     "novelty": -0.10693607083648111,
     "selection": 0.08172203488312875,
     "heredity": 0.94979028435359
@@ -196,22 +554,192 @@
    "shortlisted": false,
    "out": null,
    "shares": {
-    "shadow": 1.0,
-    "novelty": 1.0,
-    "selection": 1.0,
+    "shadow": 0.5714285714285714,
+    "novelty": 0.42857142857142855,
+    "selection": 0.42857142857142855,
+    "heredity": 0.42857142857142855
+   },
+   "orders": {
+    "product": 0.4605299707815179,
+    "sum": 0.4642857142857143,
+    "worst": 0.42857142857142855
+   },
+   "score": 0.4605299707815179,
+   "rank": 5,
+   "ranks": {
+    "product": 5,
+    "sum": 6,
+    "worst": 2
+   }
+  },
+  {
+   "id": "B1-30000-b23381-s3016",
+   "round": "E40",
+   "seed": 3016,
+   "conquest_share": 0.4361691625349604,
+   "z": {
+    "shadow": 0.6960252464113069,
+    "novelty": -2.379189882290808,
+    "selection": 32.98015701553109,
+    "heredity": 16.785145922116136
+   },
+   "values": {
+    "shadow": 0.6960252464113069,
+    "novelty": -0.16350860115237503,
+    "selection": 0.10349760240907216,
+    "heredity": 1.0
+   },
+   "beside": {
+    "birth_share": 0.5638308374650396,
+    "conquests_per_agent": 0.5339720638323112,
+    "conquests_per_agent_2000": 0.5247189250041778,
+    "births_per_agent": 0.5975661092014013,
+    "conquests_per_birth": 0.7735816020563173,
+    "generations": 1926.186090225564,
+    "births_on_path": 1075.3176691729323,
+    "conquests_on_path": 850.8684210526316,
+    "generations_births_only": 1071.156015037594,
+    "common_ancestor_age": 167.0,
+    "common_ancestor_age_shadow": 1864.5,
+    "coalescence_p": 0.009900990099009901,
+    "effective_population": 75.23446327683615,
+    "effective_population_shadow": 715.1586629001883,
+    "effective_population_births_only": 30.578007518796994,
+    "heredity_births_only": 0.28468054600144216,
+    "heredity_birth_pairs": 1.0,
+    "heredity_conquest_pairs": 1.0,
+    "births_only_pairs_still_brain_pairs": 0.12272612748803224,
+    "novelty_above_noise": 0.09071696623491375,
+    "novelty_null_above_noise": 0.2542255673872888,
+    "novelty_births_only": 0.05141166666666666,
+    "shadow_z": {
+     "persist": 0.7064443944062445,
+     "top": 2.5099762579789497,
+     "life": -9.11568241039643,
+     "active_share": -1.1283449131512735,
+     "active_count": -1.7200850152031706,
+     "top_activity": 5.986956702694815
+    },
+    "selection_visible": 40.18286256597436,
+    "selection_clear": 40,
+    "selection_cells": 48,
+    "selection_follows": 0.16293164200140942,
+    "selection_same_sign": 0.5
+   },
+   "health": {
+    "product": 0.4316946407138583,
+    "sum": 0.5540300118508245,
+    "worst": 0.09446300844408334,
+    "ranks": {
+     "product": 35,
+     "sum": 17,
+     "worst": 57
+    }
+   },
+   "shortlisted": false,
+   "out": null,
+   "shares": {
+    "shadow": 0.2857142857142857,
+    "novelty": 0.14285714285714285,
+    "selection": 0.7142857142857143,
     "heredity": 1.0
    },
    "orders": {
-    "product": 1.0,
-    "sum": 1.0,
-    "worst": 1.0
+    "product": 0.41321537264558256,
+    "sum": 0.5357142857142857,
+    "worst": 0.14285714285714285
    },
-   "score": 1.0,
-   "rank": 1,
+   "score": 0.41321537264558256,
+   "rank": 6,
    "ranks": {
-    "product": 1,
-    "sum": 1,
-    "worst": 1
+    "product": 6,
+    "sum": 4,
+    "worst": 6
+   }
+  },
+  {
+   "id": "B1-30000-ad76aa-s3084",
+   "round": "E40",
+   "seed": 3084,
+   "conquest_share": 0.5876888805668498,
+   "z": {
+    "shadow": 0.10200221513131684,
+    "novelty": -5.050898737072587,
+    "selection": 26.277516835283606,
+    "heredity": 16.513809427845683
+   },
+   "values": {
+    "shadow": 0.10200221513131684,
+    "novelty": -0.12003591020336078,
+    "selection": 0.06560420434281243,
+    "heredity": 0.9629337568737805
+   },
+   "beside": {
+    "birth_share": 0.41231111943315024,
+    "conquests_per_agent": 0.8518406354688892,
+    "conquests_per_agent_2000": 0.7885472482727502,
+    "births_per_agent": 0.5830675708379496,
+    "conquests_per_birth": 1.4253529746537292,
+    "generations": 3157.03007518797,
+    "births_on_path": 330.1493018259936,
+    "conquests_on_path": 2826.8807733619765,
+    "generations_births_only": 976.4350161117078,
+    "common_ancestor_age": 781.0,
+    "common_ancestor_age_shadow": 1705.0,
+    "coalescence_p": 0.07920792079207921,
+    "effective_population": 415.4612903225806,
+    "effective_population_shadow": 1011.7997311827955,
+    "effective_population_births_only": 178.7175080558539,
+    "heredity_births_only": 0.07521965968696809,
+    "heredity_birth_pairs": 0.811951604310117,
+    "heredity_conquest_pairs": 0.9799897460633068,
+    "births_only_pairs_still_brain_pairs": 0.023289432732157188,
+    "novelty_above_noise": 0.09331827802519187,
+    "novelty_null_above_noise": 0.21335418822855265,
+    "novelty_births_only": 0.15916289253508809,
+    "shadow_z": {
+     "persist": 0.39329386273262146,
+     "top": 1.535948223963102,
+     "life": -11.211313743414555,
+     "active_share": -1.6232354413017729,
+     "active_count": -0.8640544963933788,
+     "top_activity": 2.2615288016273456
+    },
+    "selection_visible": 25.686920878869003,
+    "selection_clear": 48,
+    "selection_cells": 48,
+    "selection_follows": -0.0518675123326286,
+    "selection_same_sign": 0.4318181818181818
+   },
+   "health": {
+    "product": 0.39559421322765315,
+    "sum": 0.5577603055493437,
+    "worst": 0.08536585365853658,
+    "ranks": {
+     "product": 44,
+     "sum": 14,
+     "worst": 61
+    }
+   },
+   "shortlisted": false,
+   "out": "no heredity: children act like strangers (index 0.08)",
+   "shares": {
+    "shadow": 0.14285714285714285,
+    "novelty": 0.2857142857142857,
+    "selection": 0.14285714285714285,
+    "heredity": 0.7142857142857143
+   },
+   "orders": {
+    "product": 0.2540399157198461,
+    "sum": 0.3214285714285714,
+    "worst": 0.14285714285714285
+   },
+   "score": 0.2540399157198461,
+   "rank": 7,
+   "ranks": {
+    "product": 7,
+    "sum": 7,
+    "worst": 7
    }
   }
  ]
