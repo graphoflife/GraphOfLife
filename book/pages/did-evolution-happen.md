@@ -14,11 +14,10 @@ Is that evolution by selection, or luck? This page lists fourteen tests,
 grouped by six questions: did the [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") get better, was it selection or luck,
 does it keep going, did something new appear, would it happen again, and is
 evolution what makes the world. Eleven need only what the worlds recorded.
-Two have been run on the brains' own family tree, in 64 of the 82 worlds that
-lived; the other 18 wait for the drive their records are kept on (12 November
-2026):
+Two have been run on the brains' own family tree of all 82 worlds that lived
+(12 November 2026):
 - **Test 3, the shadow world:** lines spread faster than luck would spread
-  them. In 53 of the 64 worlds the living meet their common ancestor sooner
+  them. In 69 of the 82 worlds the living meet their common ancestor sooner
   than in any of 100 shadows.
 - **Test 4, selection on behaviour:** selection is plain in every world, but
   the behaviours do not move the way it points.
@@ -32,9 +31,9 @@ Selection, so far, holds brains in place. The era tournament comes next.
 > that was only lucky, and that a child acts more like its parent than like a
 > stranger with a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") heredity index of 0.39. Both numbers were read on a
 > family tree of births alone. On the brains' own family tree, where a node
-> won in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") takes on the winner's brain, the median world read
-> has an effective population of about 100, against about 3,000 in its
-> shadows, and a heredity index of 0.96
+> won in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") takes on the winner's brain, the median world has
+> an effective population of about 100, against about 3,500 in its shadows,
+> and a heredity index of 0.96
 > ([The brains' own family tree](candidates-for-open-ended-evolution.md#the-brains-own-family-tree)).
 
 ## Why it is not obvious
@@ -160,16 +159,17 @@ directly.
 > the brains alive just before it. Only the copies' parents are shuffled, never
 > the brains, so a shadow costs seconds.
 > - **The living meet their ancestor sooner than luck allows.** In the median
->   world read, all the brains alive at the end descend from one brain of 205
+>   world, all the brains alive at the end descend from one brain of 193
 >   iterations before; in most worlds' shadows, they meet none within the run.
->   In 53 of the 64 worlds read, no shadow of 100 met its ancestor as soon.
+>   In 69 of the 82 worlds, no shadow of 100 met its ancestor as soon.
 > - **A few lines take the world, and the rest die out sooner.** In each era,
 >   of the brains alive at its start, fewer have descendants at its end than in
 >   the shadow, and the largest family is larger: by more than two of the
->   shadow's spreads, on average over the eras, in 57 of the 64 worlds. Only
->   seed 3077, whose brains change after every game with a probability of 0.8,
->   spreads its lines more slowly than luck.
-> - **But not in every way luck is beaten.** In 7 of the 64 worlds the average
+>   shadow's spreads, on average over the eras, in 73 of the 82 worlds. Three
+>   spread their lines more slowly than luck: seed 3077, whose brains change
+>   after every game with a probability of 0.8, and seeds 3030 and 3094, whose
+>   agents are mostly newborns and whose links are kept only while paid for.
+> - **But not in every way luck is beaten.** In 10 of the 82 worlds the average
 >   family lives *longer* than in its shadow. Copies are made next door, so kin often
 >   take kin's nodes, and a family loses nothing when they do. A shadow draws
 >   parents from anywhere, so it cannot see that. Locality alone makes lines
@@ -218,14 +218,14 @@ directly.
 > with the agent's wealth held fixed. Chance is fitness shuffled among the
 > agents of an iteration: its mean and spread are known exactly, so no shuffle
 > needs to be made.
-> - **Selection is plain.** In 2,803 of the 3,072 pairs of behaviour and era of
->   the 64 worlds read, the gradient lies more than 3.3 of chance's spreads
->   from 0. Spreading the stake brings more descendants in every era of every
->   world; more links for a newborn in five of six; a larger share for a child
->   fewer, in four of five; and staking at home slightly fewer.
+> - **Selection is plain.** In 3,631 of the 3,936 pairs of behaviour and era of
+>   the 82 worlds, the gradient lies more than 3.3 of chance's spreads from 0.
+>   Spreading the stake brings more descendants in 99% of the eras; more links
+>   for a newborn in four of five; a larger share for a child fewer, in four of
+>   five; and staking at home slightly fewer.
 > - **The behaviours do not follow it.** A behaviour's mean does not move from
 >   era to era the way its selection points: the [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") between the
->   two is 0.06 in the median world, and the signs agree about half the time.
+>   two is 0.05 in the median world, and the signs agree about half the time.
 >   A copy lands in another node, with other tokens and [neighbours](the-world.md#the-network "An agent joined to another by a connection."), and acts as
 >   its new place makes it act. The brain is passed on (a heredity index near 1
 >   in the same situations), but these behaviours belong as much to the place
@@ -483,8 +483,9 @@ copy, so that the walk back from the living and the count forward through
 each era meet the same parents), and the rows of test 4
 (`research/screen/selection.py`). The line of descent and its null lines are
 played by `research/screen/brainplay.py`. The readings are ranked by
-`research/screen/evolution.py` into `research/screen/evolution.json`. The 64
-worlds read took about 2.7 hours on one process, beside the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s two workers.
+`research/screen/evolution.py` into `research/screen/evolution.json`. The 82
+worlds took about 4.6 hours on one process, in two goes (the drive holding 18
+of them failed in between), beside the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s two workers.
 
 **References.** Bedau, M. A. and Packard, N. H. (1992), Measurement of
 evolutionary activity, teleology, and life. Bedau, M. A., Snyder, E. and

@@ -16,21 +16,22 @@ from what it recorded; no world is played again.
   the *candidate worlds*.
 - **What descends is [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.").** A child gets a copy of its parent's brain, and
   a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") won in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") gets a copy of the winner's. In round 3 the game
-  copies brains more often than births do, 1.7 times as often in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
+  copies brains more often than births do, 1.4 times as often in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
   world. On the brains' own family tree, children act almost exactly as their
   parents, and the living descend from far fewer ancestors than chance would
   leave.
 - **The evolution rank** scores every world that lived by four readings, each
   set against a model of chance: lines that spread beyond luck, novelty beyond
-  [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") alone, selection on behaviour, and heredity. 64 of the 82 have
-  been read; the other 18 wait for the drive their records are kept on. So
-  far its first ten are [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 4002 and 4008 played weakest first, 4002 played
-  strongest first, 3093, 3052, 3037, 3047, 3071, 3057 and 3050. Selection is
-  plain in every world, but it holds behaviour in place: hardly any line of
-  descent finds more new behaviour than mutation alone would.
+  [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") alone, selection on behaviour, and heredity. Eight of its
+  first ten are draws whose game is played a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at a time: [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 4003,
+  4002 and 4007 played both ways, 4008 played weakest first and 4006
+  strongest first; with them stand seeds 3037 and 3093. Selection is plain in
+  every world, but it holds behaviour in place: hardly any line of descent
+  finds more new behaviour than mutation alone would. Health and the rank do
+  not go together.
 - **The shortlist** is drawn from health instead: every candidate world among
   the first 13 of any of health's three orders, 21 worlds. Four of them are
-  among the rank's first ten so far.
+  among the rank's first ten.
 
 > [!info] Added later, 12 November 2026: what the births-only tree said
 > Until 12 November 2026 this page read a family tree of births alone. On it,
@@ -125,7 +126,7 @@ meets, in this order (research/screen/funnel.py). The other 72 are the
   [what became of them](a-screen-of-random-worlds.md#what-round-3-found)).
 - **It is a star** (1): seed 3020, where one agent is linked to 99.5% of the
   others on average.
-- **Its agents hold one number of [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")** (none): 80% or more of the agents
+- **Its agents hold one number of tokens** (none): 80% or more of the agents
   holding the same amount.
 - **It has no heredity** (4): children act like strangers, with a heredity
   index below 0.1. In all four, brains change after every game and not only
@@ -188,12 +189,12 @@ worlds evolve fast, but in few lines.
 > [!info] Added later, 12 November 2026: read on the births-only tree
 > Generations, the effective population of about 14, heredity and novelty
 > above were read on the family tree of births alone, which misses every brain
-> copied by a conquest. In the median of the 64 worlds read on the brains'
-> own tree so far, a brain has 2,800 copies behind it; the effective
-> population is about 100; a child acts almost as its parent (0.96), since only
-> 3% of the pairs the births-only tree played still held parent and child
-> brains; and the line of descent moves a little less, 0.07 above the noise
-> against 0.09 on the births-only line of the same worlds
+> copied by a conquest. In the median of the 82 worlds read on the brains'
+> own tree, a brain has 2,700 copies behind it; the effective population is
+> about 100; a child acts almost as its parent (0.96), since only 4% of the
+> pairs the births-only tree played still held parent and child brains; and
+> the line of descent moves a little less, 0.07 above the noise against 0.08
+> on the births-only line of the same worlds
 > ([The brains' own family tree](#the-brains-own-family-tree)).
 
 Three pulls show across the worlds on the births-only tree
@@ -352,49 +353,51 @@ births-only numbers.
 <!-- table oeecandidates/shortlist -->
 | world | round | among the first 13 by | health (product) | evolution rank | heredity (births only) | novelty (births only) | generations (births only) | effective population (births only) | fertility passed on | channels open |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | product, sum, worst | 0.606 | — | 0.14 | 0.15 | 1,180 | 247 | 0.04 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
-| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | product, sum, worst | 0.587 | — | 0.51 | 0.07 | 940 | 30 | 0.12 | messages, gifts, handover, upkeep, revolutions |
-| [s3018](run:B1-30000-af1e28-s3018) | round 3 | product, sum, worst | 0.565 | 56 | 0.16 | 0.10 | 313 | 263 | 0.06 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s3080](run:B1-30000-625bc7-s3080) | round 3 | product, sum, worst | 0.549 | 63 | 0.34 | 0.11 | 121 | 11 | 0.04 | messages, gifts, handover, partner search, revolutions |
-| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | product, sum | 0.544 | 1 | 0.22 | 0.22 | 822 | 8 | 0.37 | messages, gifts, mates pay, partner search, mixing |
-| [s3057](run:B1-30000-38aee9-s3057) | round 3 | product, sum, worst | 0.541 | 9 | 0.14 | 0.07 | 597 | 11 | 0.26 | messages, partner search, mixing |
-| [s3024](run:B1-30000-f05874-s3024) | round 3 | product, worst | 0.536 | 41 | 0.44 | 0.11 | 878 | 12 | 0.12 | messages, gifts, handover, upkeep, revolutions |
-| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | product, sum | 0.528 | 2 | 0.23 | 0.23 | 662 | 12 | 0.42 | messages, gifts |
-| [s3006](run:B1-30000-023c0a-s3006) | round 3 | product, sum | 0.526 | — | 0.48 | 0.05 | 652 | 59 | 0.09 | messages, gifts, handover, partner search, upkeep |
-| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | product, worst | 0.526 | 52 | 0.62 | 0.14 | 947 | 24 | 0.01 | messages, gifts, partner search, revolutions |
-| [s3022](run:B1-30000-298337-s3022) | round 3 | product, worst | 0.525 | 37 | 0.22 | 0.07 | 199 | 9 | 0.25 | messages, partner search |
-| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | product, worst | 0.515 | 38 | 0.34 | 0.06 | 955 | 22 | 0.19 | messages, gifts, upkeep |
-| [s3054](run:B1-30000-d9254e-s3054) | round 3 | product, sum | 0.513 | 12 | 0.63 | 0.05 | 224 | 34 | 0.07 | messages, partner search, upkeep |
-| [s3087](run:B1-30000-363694-s3087) | round 3 | sum | 0.511 | — | 0.54 | 0.04 | 1,179 | 12 | 0.31 | messages, handover, partner search, upkeep |
-| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | sum | 0.511 | 43 | 0.13 | 0.10 | 232 | 2,072 | 0.09 | messages, handover, partner search |
-| [s3019](run:B1-30000-b1209a-s3019) | round 3 | worst | 0.485 | 57 | 0.13 | 0.05 | 101 | 1,526 | -0.03 | messages, handover, partner search, upkeep |
-| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | worst | 0.481 | 22 | 0.51 | 0.08 | 950 | 35 | -0.05 | messages, handover, mixing |
-| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | sum | 0.476 | 45 | 0.22 | 0.14 | 1,237 | 490 | 0.08 | messages, gifts, handover, partner search, upkeep, revolutions |
-| [s3058](run:B1-30000-4108dd-s3058) | round 3 | sum | 0.473 | 19 | 0.46 | 0.13 | 142 | 10 | 0.12 | messages, partner search, revolutions |
-| [s3093](run:B1-30000-26a341-s3093) | round 3 | worst | 0.457 | 4 | 0.61 | 0.05 | 207 | 9 | 0.08 | messages, gifts, handover, partner search |
-| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | worst | 0.345 | 36 | 0.34 | 0.14 | 1,309 | 5 | 0.35 | messages, handover, mates pay, partner search, mixing |
+| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | product, sum, worst | 0.606 | 59 | 0.14 | 0.15 | 1,180 | 247 | 0.04 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
+| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | product, sum, worst | 0.587 | 10 | 0.51 | 0.07 | 940 | 30 | 0.12 | messages, gifts, handover, upkeep, revolutions |
+| [s3018](run:B1-30000-af1e28-s3018) | round 3 | product, sum, worst | 0.565 | 75 | 0.16 | 0.10 | 313 | 263 | 0.06 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3080](run:B1-30000-625bc7-s3080) | round 3 | product, sum, worst | 0.549 | 81 | 0.34 | 0.11 | 121 | 11 | 0.04 | messages, gifts, handover, partner search, revolutions |
+| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | product, sum | 0.544 | 2 | 0.22 | 0.22 | 822 | 8 | 0.37 | messages, gifts, mates pay, partner search, mixing |
+| [s3057](run:B1-30000-38aee9-s3057) | round 3 | product, sum, worst | 0.541 | 16 | 0.14 | 0.07 | 597 | 11 | 0.26 | messages, partner search, mixing |
+| [s3024](run:B1-30000-f05874-s3024) | round 3 | product, worst | 0.536 | 51 | 0.44 | 0.11 | 878 | 12 | 0.12 | messages, gifts, handover, upkeep, revolutions |
+| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | product, sum | 0.528 | 3 | 0.23 | 0.23 | 662 | 12 | 0.42 | messages, gifts |
+| [s3006](run:B1-30000-023c0a-s3006) | round 3 | product, sum | 0.526 | 43 | 0.48 | 0.05 | 652 | 59 | 0.09 | messages, gifts, handover, partner search, upkeep |
+| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | product, worst | 0.526 | 67 | 0.62 | 0.14 | 947 | 24 | 0.01 | messages, gifts, partner search, revolutions |
+| [s3022](run:B1-30000-298337-s3022) | round 3 | product, worst | 0.525 | 45 | 0.22 | 0.07 | 199 | 9 | 0.25 | messages, partner search |
+| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | product, worst | 0.515 | 46 | 0.34 | 0.06 | 955 | 22 | 0.19 | messages, gifts, upkeep |
+| [s3054](run:B1-30000-d9254e-s3054) | round 3 | product, sum | 0.513 | 20 | 0.63 | 0.05 | 224 | 34 | 0.07 | messages, partner search, upkeep |
+| [s3087](run:B1-30000-363694-s3087) | round 3 | sum | 0.511 | 60 | 0.54 | 0.04 | 1,179 | 12 | 0.31 | messages, handover, partner search, upkeep |
+| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | sum | 0.511 | 56 | 0.13 | 0.10 | 232 | 2,072 | 0.09 | messages, handover, partner search |
+| [s3019](run:B1-30000-b1209a-s3019) | round 3 | worst | 0.485 | 73 | 0.13 | 0.05 | 101 | 1,526 | -0.03 | messages, handover, partner search, upkeep |
+| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | worst | 0.481 | 26 | 0.51 | 0.08 | 950 | 35 | -0.05 | messages, handover, mixing |
+| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | sum | 0.476 | 55 | 0.22 | 0.14 | 1,237 | 490 | 0.08 | messages, gifts, handover, partner search, upkeep, revolutions |
+| [s3058](run:B1-30000-4108dd-s3058) | round 3 | sum | 0.473 | 28 | 0.46 | 0.13 | 142 | 10 | 0.12 | messages, partner search, revolutions |
+| [s3093](run:B1-30000-26a341-s3093) | round 3 | worst | 0.457 | 9 | 0.61 | 0.05 | 207 | 9 | 0.08 | messages, gifts, handover, partner search |
+| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | worst | 0.345 | 42 | 0.34 | 0.14 | 1,309 | 5 | 0.35 | messages, handover, mates pay, partner search, mixing |
 <!-- /table -->
 
 - **Five worlds are among the first 13 of all three orders:** seeds 3042,
   4006 played strongest first, 3018, 3080 and 3057. Seed 3042 is the
   healthiest by the product. The births-only tree gave it a large effective
   population (247) but children little like their parents (0.14). On the
-  brain tree it is one of the 18 worlds not yet read.
+  brain tree its children act almost as their parents (0.95), and it is the
+  59th by evolution: selection on its behaviours is among the weakest of the
+  round.
 - **Seed 3026 has some of the simplest rules of the round:**
   [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), handing over, mending, [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the newborns, and a cap of 16 links that seldom binds; no search, no gifts,
   no costs on links. The births-only categories put it first: the most
   generations (2,159) and the line of descent reaching furthest into new
-  behaviour (0.26 above the noise). The evolution rank puts it 13th of the 64
-  worlds read so far, its children faithful copies (an index of 1.00). It just
+  behaviour (0.26 above the noise). The evolution rank puts it 19th, its
+  children faithful copies (an index of 1.00). It just
   misses the shortlist: it is the 17th by its worst criterion of health, the
   23rd by the product and the 36th by the sum, since it culls 12% of its
   tokens in a game and its agents act alike.
 - **Many worlds that evolve well are not among the healthiest:** of the
-  evolution rank's first ten so far, six are not on the shortlist
+  evolution rank's first ten, six are not on the shortlist
   ([The first ten](#the-first-ten)).
 - **Seed 3092, which meets every one of the author's lines, is not on the
   shortlist:** it is the 30th by the product, the 31st by the sum and the 31st
-  by its worst criterion
+  by its worst criterion, and the 44th by evolution
   ([Which worlds are healthy?](which-worlds-are-healthy.md#what-the-orders-show)).
 
 ## The brains' own family tree
@@ -405,17 +408,12 @@ evolution above were read on a family tree of births alone. But a world copies
 brains in two ways. A child gets a copy of its parent's brain, in some worlds
 mixed with a mate's, and the copy may change. And a node won in the
 game keeps its agent, but takes on a copy
-of the winner's brain. In the median world of round 3 a game makes 1.7 copies
-for every birth, and from half as many to 14 times as many in the others. So
-what descends in a world is its brains, not its agents. The author approved a
-plan to rank round 3 by evolution on the brains' own family tree, every
-reading set against a model of what chance alone would do (11 November 2026).
-
-> [!info] Provisional, 12 November 2026: 64 of the 82 worlds read
-> The drive that keeps the records of the other 18 worlds, the largest of the
-> round and among them seed 3042, failed during the reading. The numbers below
-> and the rank are those of the 64 worlds read; they will change when the 18
-> are read.
+of the winner's brain. In the median world of round 3 a game makes 1.4 copies
+for every birth: from almost none in seed 3020, a star, to 14 in seed 3004.
+So what descends in a world is its brains, not its agents. The author
+approved a plan to rank round 3 by evolution on the brains' own family tree,
+every reading set against a model of what chance alone would do (11 November
+2026).
 
 The **brain-copy tree** follows every copy of a brain, an **instance**. An
 instance begins in one of three ways:
@@ -430,43 +428,43 @@ An instance lasts while it holds its node, until the node is won by another or
 dies. A mutation that changes a brain
 where it sits gives it a new genotype, but it is the same copy, so it counts as
 a change of that copy, not as a new branch. One pass over every [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") of a
-world builds the tree: from 2.7 million copies in the smallest world to 41
-million in the largest read. Most copies are short-lived: a brain holds its
-node for about one iteration before a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") wins it.
+world builds the tree: from 2.7 million copies in the smallest world to 53
+million in the largest, 1.6 billion in all. Most copies are short-lived: a
+brain holds its node for about one iteration before a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") wins it.
 
-On this tree every number of evolution changes. In the median of the 64
-worlds read:
+On this tree every number of evolution changes. In the median world of the 82
+that lived:
 
 <!-- table evolutionrank/changed -->
 | in the median world | births-only tree | brain-copy tree |
 |---|---|---|
-| generations by the end | 748 | 2,817 |
-| births on the way | — | 828 |
-| effective population | 14 | 103 |
-| heredity index | 0.34 | 0.96 |
-| late novelty above noise | 0.09 | 0.07 |
-| shadow worlds' effective population | — | 2,960 |
-| copies made by conquest | — | 63% |
+| generations by the end | 849 | 2,739 |
+| births on the way | — | 959 |
+| effective population | 14 | 100 |
+| heredity index | 0.41 | 0.96 |
+| late novelty above noise | 0.08 | 0.07 |
+| shadow worlds' effective population | — | 3,459 |
+| copies made by conquest | — | 58% |
 <!-- /table -->
 
 - **Many more generations.** A brain of the last iteration has a median of
-  2,800 copies behind it, against 750 births on the births-only tree:
+  2,700 copies behind it, against 850 births on the births-only tree:
   conquests copy more often than births do.
 - **More lines, but far fewer than chance leaves.** The effective population
   is about 100, against 14 on the births-only tree. In a shadow world, where
   every copy's parent is drawn at random among the living (below), it is
-  about 3,000. Going back from the living at the end, all of them descend from
-  one brain a median of 205 iterations earlier. In their shadows, the living
+  about 3,500. Going back from the living at the end, all of them descend from
+  one brain a median of 193 iterations earlier. In their shadows, the living
   of most worlds do not meet one ancestor within the run's 3,000 iterations at
   all.
 - **Children are copies.** On the brain tree a child acts almost exactly as
-  its parent does: a heredity index of 0.96, against 0.34 on the births-only
+  its parent does: a heredity index of 0.96, against 0.41 on the births-only
   tree. The births-only tree played the wrong pairs. By the time a child and
   the agent that bore it were played together, one of their nodes had nearly
-  always been won by a neighbour since. Only 3% of those pairs still held the
+  always been won by a neighbour since. Only 4% of those pairs still held the
   parent's brain and the child's.
 - **The line of descent moves somewhat less.** Its late eras lie a median of
-  0.07 above the noise from every earlier era, against 0.09 on the births-only
+  0.07 above the noise from every earlier era, against 0.08 on the births-only
   line.
 
 ## The evolution rank
@@ -525,62 +523,77 @@ sum, then by the worst. The first ten of each of the three orders, together,
 are the rank's bests. Every world's readings, their z-scores and its rank are
 in `research/screen/evolution.json`.
 
-What the four readings say across the 64 worlds read:
-- **Lines spread beyond luck in 57 of them**, by more than two of the
-  shadow's spreads, and in 53 the common ancestor of the living is more recent
-  than in any of its 100 shadows. Copies are made next door, and locality
-  alone makes lines meet and sweep more slowly than in a shadow whose parents
-  come from anywhere. So a world that beats its shadow does so in spite of
-  being local. Only seed 3077, whose brains change after every game with a
-  probability of 0.8, spreads its lines more slowly than luck would. The
-  reading grows with a world's size (a rank correlation of 0.77 with its
+What the four readings say across round 3:
+- **Lines spread beyond luck in 73 of the 82 worlds**, by more than two of
+  the shadow's spreads, and in 69 the common ancestor of the living is more
+  recent than in any of its 100 shadows. Copies are made next door, and
+  locality alone makes lines meet and sweep more slowly than in a shadow whose
+  parents come from anywhere. So a world that beats its shadow does so in
+  spite of being local. Three worlds spread their lines more slowly than luck
+  would: seed 3077, whose brains change after every game with a probability
+  of 0.8, and seeds 3030 and 3094, whose agents are mostly newborns and whose
+  links are kept only while paid for (the two taken out of Experiment 43). The
+  reading grows with a world's size (a rank correlation of 0.67 with its
   agents): luck narrows a large world's ancestry slowly, so a large world
   beats its shadow by more, in effect as well as in its z-score.
-- **Hardly any line of descent finds more than mutation alone.** In 61 of
-  the 64 worlds the line moves less far than lines that only mutate; in seeds
+- **Hardly any line of descent finds more than mutation alone.** In 79 of
+  the 82 worlds the line moves less far than lines that only mutate; in seeds
   3007, 3044 and 3077 a little further, by 0.01 to 0.02. Selection holds
   behaviour in place, rather than pushing it somewhere new.
 - **Selection on behaviour is plain, but behaviours do not follow it.**
-  Spreading the stake brings more descendants in every era of every world;
-  more links for a newborn in five eras of six; a larger share for a child
-  fewer, in four of five. Yet a behaviour's mean does not move from era to
-  era the way its selection points (a rank correlation of 0.06 in the median
-  world). A copy lands in another node, with other tokens and neighbours, and
-  acts as its new place makes it act.
-- **Heredity is near 1 in all but two worlds**, from 0.70 to 1.00: on the
-  brain tree copies are faithful, and this reading orders the worlds little.
-  The two, seeds 3044 and 3077, change every brain after every game with a
-  probability of 0.8 (0.26 and 0.29).
+  Spreading the stake brings more descendants in 99% of the eras of all the
+  worlds; more links for a newborn in four eras of five; a larger share for a
+  child fewer, in four of five. Yet a behaviour's mean does not move from era
+  to era the way its selection points (a rank correlation of 0.05 in the
+  median world). A copy lands in another node, with other tokens and
+  neighbours, and acts as its new place makes it act.
+- **Heredity is near 1 in all but a few worlds**: 0.9 or more in 68 of the 82,
+  so on the brain tree copies are faithful, and this reading orders the worlds
+  little. The lowest are seeds 3044 and 3077, which change every brain after
+  every game with a probability of 0.8 (0.26 and 0.29), and seed 3020, the
+  star, whose brains are nearly never copied by conquest (0.50).
 
 ### The first ten
 
 <!-- table evolutionrank/top -->
 | rank | world | round | score | among the first 10 by | lines beyond luck (z) | novelty above the null | selection strength | heredity | copies by conquest | health's rank | on the shortlist | health filters it out |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | 0.760 | product, sum, worst | 14.3 | -0.021 | 0.068 | 1.00 | 67% | 5 | yes | — |
-| 2 | [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | 0.746 | product, sum, worst | 14.0 | -0.053 | 0.070 | 1.00 | 64% | 8 | yes | — |
-| 3 | [s4002 s](run:B1-30000-192733-s4002) | round 3, strongest first | 0.672 | product, sum, worst | 14.7 | -0.085 | 0.068 | 1.00 | 66% | 33 | no | — |
-| 4 | [s3093](run:B1-30000-26a341-s3093) | round 3 | 0.653 | product, sum, worst | 8.1 | -0.087 | 0.091 | 0.98 | 78% | 31 | yes | — |
-| 5 | [s3052](run:B1-30000-0d058a-s3052) | round 3 | 0.630 | product, sum, worst | 19.4 | -0.106 | 0.084 | 0.97 | 65% | 67 | no | — |
-| 6 | [s3037](run:B1-30000-845393-s3037) | round 3 | 0.629 | product, sum | 32.8 | -0.067 | 0.050 | 1.00 | 66% | 74 | no | standing still |
-| 7 | [s3047](run:B1-30000-10c9f1-s3047) | round 3 | 0.628 | product, worst | 7.8 | -0.079 | 0.086 | 0.97 | 66% | 21 | no | — |
-| 8 | [s3071](run:B1-30000-605c0d-s3071) | round 3 | 0.628 | product, sum | 15.4 | -0.114 | 0.200 | 0.97 | 75% | 52 | no | — |
-| 9 | [s3057](run:B1-30000-38aee9-s3057) | round 3 | 0.606 | product, sum | 13.3 | -0.071 | 0.185 | 0.92 | 66% | 6 | yes | — |
-| 10 | [s3050](run:B1-30000-ebe08c-s3050) | round 3 | 0.606 | product | 9.6 | -0.045 | 0.088 | 0.94 | 64% | 56 | no | — |
+| 1 | [s4003 s](run:B1-30000-fffc7d-s4003) | round 3, strongest first | 0.779 | product, sum, worst | 21.4 | -0.032 | 0.081 | 0.98 | 58% | 18 | no | — |
+| 2 | [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | 0.732 | product, sum, worst | 14.3 | -0.021 | 0.068 | 1.00 | 67% | 5 | yes | — |
+| 3 | [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | 0.703 | product, sum, worst | 14.0 | -0.053 | 0.070 | 1.00 | 64% | 8 | yes | — |
+| 4 | [s4007 w](run:B1-30000-04d3eb-s4007) | round 3, weakest first | 0.674 | product, sum, worst | 16.5 | -0.051 | 0.086 | 0.96 | 61% | 80 | no | — |
+| 5 | [s4003 w](run:B1-30000-9efb1d-s4003) | round 3, weakest first | 0.656 | product, sum | 28.1 | -0.102 | 0.072 | 1.00 | 45% | 29 | no | — |
+| 6 | [s4007 s](run:B1-30000-a8a2d2-s4007) | round 3, strongest first | 0.654 | product, sum, worst | 17.4 | -0.056 | 0.084 | 0.96 | 61% | 77 | no | — |
+| 7 | [s4002 s](run:B1-30000-192733-s4002) | round 3, strongest first | 0.639 | product, sum, worst | 14.7 | -0.085 | 0.068 | 1.00 | 66% | 33 | no | — |
+| 8 | [s3037](run:B1-30000-845393-s3037) | round 3 | 0.620 | product, sum | 32.8 | -0.067 | 0.050 | 1.00 | 66% | 74 | no | standing still |
+| 9 | [s3093](run:B1-30000-26a341-s3093) | round 3 | 0.617 | product, worst | 8.1 | -0.087 | 0.091 | 0.98 | 78% | 31 | yes | — |
+| 10 | [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | 0.596 | product | 15.0 | -0.058 | 0.050 | 0.99 | 45% | 2 | yes | — |
 <!-- /table -->
 
+- **Eight of the first ten play the game a token at a time.** Round 3 drew
+  eight such settings and played each twice, weakest first and strongest
+  first; twelve of those worlds lived, and eight of them are here. The same
+  draw lands near itself both ways: seeds 4003, 4002 and 4007 are in the first
+  ten played either way. These twelve worlds beat the rest on all four
+  readings, most of all on heredity and novelty. Those two play each brain as
+  if it placed its stake all at once, as research/oee/checks/diversity.py
+  plays every world's, so for these worlds they read a likeness of the brain
+  rather than the way it stakes; on the shadow and on selection, read from
+  what the worlds did, three of them are among the first ten.
 - **Four of the first ten are on today's shortlist:** seeds 4002 and 4008
-  played weakest first, 3093 and 3057. Six are not: seeds 4002 played strongest
-  first, 3052, 3037, 3047, 3071 and 3050.
+  played weakest first, 3093, and 4006 played strongest first. Six are not:
+  seeds 4003 played either way, 4007 played either way, 4002 played strongest
+  first, and 3037.
 - **Health filters one of them out:** seed 3037, a crowded and poor world
   whose line of descent stands still and whose agents act alike
-  ([The worlds ruled out](#the-worlds-ruled-out)). Its shadow reading is the
-  round's highest, which says its lines sweep, not that they find anything.
-- **The same rules played two ways agree:** seed 4002 is first played weakest
-  first and third played strongest first.
-- **The first ten of each of the three orders together hold 16 worlds**, five
-  of them on the shortlist. The shortlist's other worlds read so far stand
-  from 12th to 63rd.
+  ([The worlds ruled out](#the-worlds-ruled-out)). Its shadow reading is among
+  the round's highest, which says its lines sweep, not that they find
+  anything new.
+- **Health and evolution do not go together.** The rank correlation between
+  health's product and the evolution score, over the 82 worlds, is −0.01. The
+  first ten of each of the evolution rank's three orders together hold 15
+  worlds, five of them on the shortlist; the shortlist's other worlds stand
+  from 16th to 81st.
 
 <!-- figure evolutionrank/heredity -->
 ![Is a child's brain like its parent's?](../figures/evolutionrank/heredity.svg)
@@ -636,70 +649,88 @@ effective population.
 <!-- table evolutionrank/all -->
 | rank | world | score | ranks by product, sum, worst | lines beyond luck (z) | novelty above the null | selection strength | heredity | copies by conquest | generations (births only) | effective population (births only, shadow) | on the shortlist | health filters it out |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | [s4002 w](run:B1-30000-5379e2-s4002) | 0.760 | 1, 1, 3 | 14.3 | -0.021 | 0.068 | 1.00 | 67% | 4,014 (822) | 77 (8, 5,473) | yes | — |
-| 2 | [s4008 w](run:B1-30000-1cfaa4-s4008) | 0.746 | 2, 2, 1 | 14.0 | -0.053 | 0.070 | 1.00 | 64% | 4,014 (662) | 63 (12, 5,724) | yes | — |
-| 3 | [s4002 s](run:B1-30000-192733-s4002) | 0.672 | 3, 4, 4 | 14.7 | -0.085 | 0.068 | 1.00 | 66% | 4,225 (953) | 19 (7, 5,588) | no | — |
-| 4 | [s3093](run:B1-30000-26a341-s3093) | 0.653 | 4, 7, 5 | 8.1 | -0.087 | 0.091 | 0.98 | 78% | 2,323 (207) | 197 (9, 2,464) | yes | — |
-| 5 | [s3052](run:B1-30000-0d058a-s3052) | 0.630 | 5, 6, 10 | 19.4 | -0.106 | 0.084 | 0.97 | 65% | 3,088 (387) | 129 (15, 6,094) | no | — |
-| 6 | [s3037](run:B1-30000-845393-s3037) | 0.629 | 6, 3, 19 | 32.8 | -0.067 | 0.050 | 1.00 | 66% | 1,600 (347) | 43 (5, 5,388) | no | standing still |
-| 7 | [s3047](run:B1-30000-10c9f1-s3047) | 0.628 | 7, 12, 2 | 7.8 | -0.079 | 0.086 | 0.97 | 66% | 3,695 (662) | 57 (9, 1,416) | no | — |
-| 8 | [s3071](run:B1-30000-605c0d-s3071) | 0.628 | 8, 5, 16 | 15.4 | -0.114 | 0.200 | 0.97 | 75% | 2,603 (109) | 145 (14, 4,355) | no | — |
-| 9 | [s3057](run:B1-30000-38aee9-s3057) | 0.606 | 9, 8, 17 | 13.3 | -0.071 | 0.185 | 0.92 | 66% | 3,263 (597) | 51 (11, 4,477) | yes | — |
-| 10 | [s3050](run:B1-30000-ebe08c-s3050) | 0.606 | 10, 11, 11 | 9.6 | -0.045 | 0.088 | 0.94 | 64% | 2,900 (926) | 48 (6, 2,636) | no | — |
-| 11 | [s3062](run:B1-30000-def151-s3062) | 0.583 | 11, 9, 21 | 7.2 | -0.006 | 0.141 | 0.91 | 52% | 4,034 (993) | 36 (11, 1,202) | no | — |
-| 12 | [s3054](run:B1-30000-d9254e-s3054) | 0.582 | 12, 16, 6 | 7.2 | -0.095 | 0.085 | 0.98 | 75% | 2,233 (224) | 491 (34, 2,462) | yes | — |
-| 13 | [s3026](run:B1-30000-d6955f-s3026) | 0.577 | 13, 14, 18 | 4.4 | -0.056 | 0.071 | 1.00 | 50% | 5,232 (2,159) | 181 (78, 1,279) | no | — |
-| 14 | [s3076](run:B1-30000-66c764-s3076) | 0.570 | 14, 10, 30 | 12.4 | -0.055 | 0.048 | 1.00 | 44% | 3,351 (1,198) | 16 (9, 3,131) | no | — |
-| 15 | [s4005 s](run:B1-30000-6f6c09-s4005) | 0.559 | 15, 17, 8 | 11.1 | -0.013 | 0.056 | 0.96 | 54% | 2,718 (646) | 31 (10, 3,944) | no | — |
-| 16 | [s3032](run:B1-30000-22865f-s3032) | 0.534 | 16, 15, 31 | 14.8 | -0.080 | 0.086 | 0.90 | 69% | 2,636 (401) | 409 (67, 5,716) | no | — |
-| 17 | [s3049](run:B1-30000-c51eb8-s3049) | 0.526 | 17, 29, 7 | 5.8 | -0.082 | 0.073 | 0.97 | 80% | 2,701 (236) | 2,702 (60, 3,954) | no | — |
-| 18 | [s3028](run:B1-30000-2eef58-s3028) | 0.515 | 18, 20, 13 | 14.9 | -0.111 | 0.052 | 0.99 | 40% | 3,222 (1,437) | 264 (37, 4,287) | no | — |
-| 19 | [s3058](run:B1-30000-4108dd-s3058) | 0.493 | 19, 34, 14 | 4.4 | -0.061 | 0.070 | 0.96 | 80% | 2,303 (142) | 70 (10, 743) | yes | — |
-| 20 | [s3012](run:B1-30000-02fa53-s3012) | 0.487 | 20, 39, 9 | 7.7 | -0.073 | 0.067 | 0.95 | 70% | 2,322 (327) | 101 (9, 2,309) | no | — |
-| 21 | [s3038](run:B1-30000-1ad8a9-s3038) | 0.485 | 21, 18, 37 | 19.9 | -0.064 | 0.044 | 0.96 | 63% | 2,158 (858) | 25 (7, 4,869) | no | standing still |
-| 22 | [s3005](run:B1-30000-c18a1f-s3005) | 0.479 | 22, 27, 33 | 11.6 | -0.041 | 0.047 | 0.96 | 69% | 3,293 (950) | 104 (35, 3,601) | yes | — |
-| 23 | [s3091](run:B1-30000-42d88d-s3091) | 0.476 | 23, 19, 39 | 7.6 | -0.043 | 0.111 | 0.88 | 57% | 3,642 (1,173) | 16 (5, 1,580) | no | — |
-| 24 | [s3056](run:B1-30000-43985b-s3056) | 0.474 | 24, 38, 12 | 4.4 | -0.081 | 0.084 | 0.95 | 80% | 2,414 (361) | 119 (16, 3,646) | no | — |
-| 25 | [s3041](run:B1-30000-965f1e-s3041) | 0.474 | 25, 35, 15 | 5.0 | -0.066 | 0.051 | 0.98 | 82% | 2,177 (212) | 566 (22, 3,016) | no | — |
-| 26 | [s3098](run:B1-30000-794ae8-s3098) | 0.471 | 26, 28, 26 | 16.3 | -0.102 | 0.073 | 0.90 | 46% | 2,012 (256) | 42 (6, 2,595) | no | — |
-| 27 | [s3061](run:B1-30000-00e3c8-s3061) | 0.471 | 27, 31, 20 | 8.9 | -0.104 | 0.116 | 0.92 | 57% | 3,933 (1,092) | 32 (8, 2,626) | no | — |
-| 28 | [s3007](run:B1-30000-8119cd-s3007) | 0.462 | 28, 32, 24 | 6.9 | +0.021 | 0.059 | 0.91 | 48% | 3,807 (1,434) | 89 (37, 884) | no | — |
-| 29 | [s4004 s](run:B1-30000-2bac4d-s4004) | 0.460 | 29, 26, 34 | 4.5 | -0.046 | 0.140 | 0.90 | 54% | 3,774 (1,392) | 26 (6, 680) | no | — |
-| 30 | [s3083](run:B1-30000-0d7e0c-s3083) | 0.457 | 30, 36, 32 | 11.1 | -0.127 | 0.078 | 0.96 | 66% | 1,987 (389) | 137 (11, 2,927) | no | — |
-| 31 | [s3078](run:B1-30000-dd27b6-s3078) | 0.454 | 31, 21, 41 | 6.2 | -0.008 | 0.043 | 0.99 | 49% | 3,480 (422) | 23 (5, 668) | no | — |
-| 32 | [s3089](run:B1-30000-77ad6a-s3089) | 0.454 | 32, 22, 43 | 15.8 | -0.066 | 0.041 | 0.97 | 35% | 2,185 (844) | 104 (133, 3,522) | no | — |
-| 33 | [s3043](run:B1-30000-02ed17-s3043) | 0.446 | 33, 30, 40 | 2.7 | -0.081 | 0.079 | 0.98 | 91% | 2,394 (73) | 663 (904, 2,119) | no | — |
-| 34 | [s3092](run:B1-30000-7fc03f-s3092) | 0.446 | 34, 41, 27 | 6.1 | -0.126 | 0.084 | 0.96 | 77% | 2,760 (253) | 1,144 (74, 5,441) | no | — |
-| 35 | [s4008 s](run:B1-30000-645972-s4008) | 0.443 | 35, 23, 44 | 14.2 | -0.137 | 0.061 | 1.00 | 66% | 3,883 (691) | 32 (14, 5,758) | no | — |
-| 36 | [s4004 w](run:B1-30000-17ac6e-s4004) | 0.433 | 36, 24, 38 | 4.2 | -0.018 | 0.138 | 0.89 | 55% | 3,738 (1,309) | 15 (5, 639) | yes | — |
-| 37 | [s3022](run:B1-30000-298337-s3022) | 0.432 | 37, 25, 42 | 14.6 | -0.103 | 0.124 | 0.87 | 69% | 2,579 (199) | 103 (9, 4,127) | yes | — |
-| 38 | [s3023](run:B1-30000-b0f6e3-s3023) | 0.414 | 38, 42, 28 | 4.9 | -0.018 | 0.048 | 0.96 | 49% | 3,875 (955) | 99 (22, 1,080) | yes | — |
-| 39 | [s3082](run:B1-30000-1141ea-s3082) | 0.406 | 39, 40, 35 | 9.5 | -0.129 | 0.050 | 1.00 | 47% | 3,238 (1,411) | 59 (26, 3,053) | no | — |
-| 40 | [s3021](run:B1-30000-4aff7d-s3021) | 0.386 | 40, 46, 22 | 4.2 | -0.038 | 0.054 | 0.93 | 48% | 3,571 (1,064) | 214 (27, 1,108) | no | — |
-| 41 | [s3024](run:B1-30000-f05874-s3024) | 0.382 | 41, 47, 23 | 11.2 | -0.097 | 0.048 | 0.93 | 46% | 2,702 (878) | 75 (12, 3,689) | yes | — |
-| 42 | [s3040](run:B1-30000-36d076-s3040) | 0.374 | 42, 43, 47 | 10.6 | -0.139 | 0.078 | 0.96 | 39% | 3,085 (805) | 188 (10, 2,993) | no | — |
-| 43 | [s3064](run:B1-30000-a6a7ec-s3064) | 0.367 | 43, 50, 29 | 3.8 | -0.089 | 0.069 | 0.94 | 82% | 2,526 (232) | 458 (2,072, 5,115) | yes | — |
-| 44 | [s3046](run:B1-30000-27bd64-s3046) | 0.351 | 44, 37, 52 | 6.6 | -0.159 | 0.071 | 1.00 | 51% | 4,198 (1,321) | 173 (51, 1,340) | no | — |
-| 45 | [s3045](run:B1-30000-f6d23f-s3045) | 0.348 | 45, 45, 45 | 1.7 | -0.027 | 0.058 | 0.95 | 51% | 2,874 (1,237) | 202 (490, 850) | yes | — |
-| 46 | [s3013](run:B1-30000-7f7cd5-s3013) | 0.318 | 46, 44, 46 | 30.6 | -0.131 | 0.072 | 0.85 | 45% | 2,163 (500) | 20 (5, 6,613) | no | — |
-| 47 | [s3051](run:B1-30000-b5a76a-s3051) | 0.315 | 47, 59, 25 | 3.9 | -0.107 | 0.055 | 0.95 | 83% | 2,137 (141) | 44 (4, 420) | no | — |
-| 48 | [s3044](run:B1-30000-63827e-s3044) | 0.308 | 48, 13, 61 | 10.9 | +0.022 | 0.110 | 0.26 | 56% | 3,708 (916) | 26 (7, 3,396) | no | — |
-| 49 | [s3059](run:B1-30000-2ec87a-s3059) | 0.303 | 49, 33, 59 | 11.6 | -0.195 | 0.056 | 1.00 | 75% | 2,321 (310) | 93 (12, 3,179) | no | — |
-| 50 | [s3090](run:B1-30000-05ba40-s3090) | 0.299 | 50, 58, 36 | 3.3 | -0.117 | 0.051 | 0.97 | 77% | 2,590 (14) | 279 (365, 959) | no | — |
-| 51 | [s3066](run:B1-30000-dfd51b-s3066) | 0.267 | 51, 52, 49 | 0.7 | -0.073 | 0.044 | 0.97 | 58% | 3,837 (1,821) | 5,757 (7,585, 8,835) | no | — |
-| 52 | [s3008](run:B1-30000-e19f2d-s3008) | 0.258 | 52, 56, 48 | 5.3 | -0.127 | 0.037 | 0.98 | 60% | 3,160 (947) | 706 (24, 1,056) | yes | — |
-| 53 | [s3004](run:B1-30000-7d5208-s3004) | 0.251 | 53, 48, 50 | 1.7 | -0.146 | 0.081 | 0.98 | 93% | 2,562 (23) | 395 (18, 1,078) | no | — |
-| 54 | [s3065](run:B1-30000-ba3afe-s3065) | 0.250 | 54, 55, 51 | 3.4 | -0.100 | 0.034 | 0.98 | 92% | 2,351 (54) | 689 (1,147, 2,143) | no | — |
-| 55 | [s3033](run:B1-30000-631e49-s3033) | 0.237 | 55, 51, 55 | 0.6 | -0.022 | 0.060 | 0.89 | 52% | 2,628 (1,083) | 649 (988, 1,050) | no | — |
-| 56 | [s3018](run:B1-30000-af1e28-s3018) | 0.216 | 56, 60, 53 | 3.6 | -0.125 | 0.082 | 0.74 | 79% | 2,452 (313) | 754 (263, 2,465) | yes | — |
-| 57 | [s3019](run:B1-30000-b1209a-s3019) | 0.201 | 57, 54, 60 | 2.9 | -0.094 | 0.027 | 0.98 | 88% | 2,317 (101) | 830 (1,526, 3,139) | yes | — |
-| 58 | [s3085](run:B1-30000-801b34-s3085) | 0.189 | 58, 57, 56 | 11.5 | -0.087 | 0.028 | 0.79 | 42% | 3,195 (1,303) | 13 (5, 3,058) | no | — |
-| 59 | [s3016](run:B1-30000-b23381-s3016) | 0.185 | 59, 53, 57 | 0.7 | -0.164 | 0.059 | 1.00 | 44% | 1,926 (1,071) | 75 (31, 715) | no | — |
-| 60 | [s3095](run:B1-30000-3e5856-s3095) | 0.172 | 60, 61, 54 | 2.7 | -0.133 | 0.029 | 0.99 | 49% | 1,372 (1,338) | 509 (1,219, 2,663) | no | — |
-| 61 | [s3055](run:B1-30000-cca771-s3055) | 0.167 | 61, 62, 58 | 7.9 | -0.134 | 0.048 | 0.70 | 52% | 3,131 (1,033) | 43 (6, 3,010) | no | — |
-| 62 | [s3077](run:B1-30000-d6eabf-s3077) | 0.131 | 62, 49, 62 | -5.4 | +0.013 | 0.073 | 0.29 | 55% | 3,778 (840) | 18,913 (2,696, 6,618) | no | — |
-| 63 | [s3080](run:B1-30000-625bc7-s3080) | 0.096 | 63, 64, 63 | 6.1 | -0.248 | 0.044 | 0.85 | 83% | 2,254 (121) | 165 (11, 1,759) | yes | — |
-| 64 | [s3084](run:B1-30000-ad76aa-s3084) | 0.088 | 64, 63, 64 | 0.1 | -0.120 | 0.013 | 0.96 | 59% | 3,157 (976) | 415 (179, 1,012) | no | — |
+| 1 | [s4003 s](run:B1-30000-fffc7d-s4003) | 0.779 | 1, 1, 1 | 21.4 | -0.032 | 0.081 | 0.98 | 58% | 3,317 (1,131) | 81 (9, 6,828) | no | — |
+| 2 | [s4002 w](run:B1-30000-5379e2-s4002) | 0.732 | 2, 2, 3 | 14.3 | -0.021 | 0.068 | 1.00 | 67% | 4,014 (822) | 77 (8, 5,473) | yes | — |
+| 3 | [s4008 w](run:B1-30000-1cfaa4-s4008) | 0.703 | 3, 4, 2 | 14.0 | -0.053 | 0.070 | 1.00 | 64% | 4,014 (662) | 63 (12, 5,724) | yes | — |
+| 4 | [s4007 w](run:B1-30000-04d3eb-s4007) | 0.674 | 4, 6, 8 | 16.5 | -0.051 | 0.086 | 0.96 | 61% | 3,654 (828) | 23 (9, 5,628) | no | — |
+| 5 | [s4003 w](run:B1-30000-9efb1d-s4003) | 0.656 | 5, 5, 11 | 28.1 | -0.102 | 0.072 | 1.00 | 45% | 1,881 (1,189) | 21 (9, 6,963) | no | — |
+| 6 | [s4007 s](run:B1-30000-a8a2d2-s4007) | 0.654 | 6, 8, 7 | 17.4 | -0.056 | 0.084 | 0.96 | 61% | 3,775 (855) | 35 (7, 5,694) | no | — |
+| 7 | [s4002 s](run:B1-30000-192733-s4002) | 0.639 | 7, 9, 4 | 14.7 | -0.085 | 0.068 | 1.00 | 66% | 4,225 (953) | 19 (7, 5,588) | no | — |
+| 8 | [s3037](run:B1-30000-845393-s3037) | 0.620 | 8, 7, 19 | 32.8 | -0.067 | 0.050 | 1.00 | 66% | 1,600 (347) | 43 (5, 5,388) | no | standing still |
+| 9 | [s3093](run:B1-30000-26a341-s3093) | 0.617 | 9, 12, 5 | 8.1 | -0.087 | 0.091 | 0.98 | 78% | 2,323 (207) | 197 (9, 2,464) | yes | — |
+| 10 | [s4006 s](run:B1-30000-8526cf-s4006) | 0.596 | 10, 13, 15 | 15.0 | -0.058 | 0.050 | 0.99 | 45% | 3,126 (940) | 119 (30, 5,937) | yes | — |
+| 11 | [s3047](run:B1-30000-10c9f1-s3047) | 0.587 | 11, 23, 6 | 7.8 | -0.079 | 0.086 | 0.97 | 66% | 3,695 (662) | 57 (9, 1,416) | no | — |
+| 12 | [s3052](run:B1-30000-0d058a-s3052) | 0.584 | 12, 14, 18 | 19.4 | -0.106 | 0.084 | 0.97 | 65% | 3,088 (387) | 129 (15, 6,094) | no | — |
+| 13 | [s3071](run:B1-30000-605c0d-s3071) | 0.583 | 13, 10, 24 | 15.4 | -0.114 | 0.200 | 0.97 | 75% | 2,603 (109) | 145 (14, 4,355) | no | — |
+| 14 | [s3050](run:B1-30000-ebe08c-s3050) | 0.577 | 14, 18, 13 | 9.6 | -0.045 | 0.088 | 0.94 | 64% | 2,900 (926) | 48 (6, 2,636) | no | — |
+| 15 | [s3001](run:B1-30000-68cda7-s3001) | 0.568 | 15, 3, 52 | 50.2 | -0.013 | 0.034 | 1.00 | 21% | 1,535 (1,138) | 25 (15, 7,246) | no | — |
+| 16 | [s3057](run:B1-30000-38aee9-s3057) | 0.566 | 16, 15, 20 | 13.3 | -0.071 | 0.185 | 0.92 | 66% | 3,263 (597) | 51 (11, 4,477) | yes | — |
+| 17 | [s3076](run:B1-30000-66c764-s3076) | 0.556 | 17, 16, 30 | 12.4 | -0.055 | 0.048 | 1.00 | 44% | 3,351 (1,198) | 16 (9, 3,131) | no | — |
+| 18 | [s3062](run:B1-30000-def151-s3062) | 0.555 | 18, 11, 27 | 7.2 | -0.006 | 0.141 | 0.91 | 52% | 4,034 (993) | 36 (11, 1,202) | no | — |
+| 19 | [s3026](run:B1-30000-d6955f-s3026) | 0.550 | 19, 19, 28 | 4.4 | -0.056 | 0.071 | 1.00 | 50% | 5,232 (2,159) | 181 (78, 1,279) | no | — |
+| 20 | [s3054](run:B1-30000-d9254e-s3054) | 0.548 | 20, 25, 9 | 7.2 | -0.095 | 0.085 | 0.98 | 75% | 2,233 (224) | 491 (34, 2,462) | yes | — |
+| 21 | [s4005 s](run:B1-30000-6f6c09-s4005) | 0.546 | 21, 24, 10 | 11.1 | -0.013 | 0.056 | 0.96 | 54% | 2,718 (646) | 31 (10, 3,944) | no | — |
+| 22 | [s3014](run:B1-30000-7d129f-s3014) | 0.504 | 22, 22, 35 | 30.1 | -0.101 | 0.113 | 0.90 | 41% | 2,309 (1,242) | 22 (14, 7,246) | no | — |
+| 23 | [s3032](run:B1-30000-22865f-s3032) | 0.496 | 23, 28, 38 | 14.8 | -0.080 | 0.086 | 0.90 | 69% | 2,636 (401) | 409 (67, 5,716) | no | — |
+| 24 | [s3049](run:B1-30000-c51eb8-s3049) | 0.494 | 24, 41, 14 | 5.8 | -0.082 | 0.073 | 0.97 | 80% | 2,701 (236) | 2,702 (60, 3,954) | no | — |
+| 25 | [s3028](run:B1-30000-2eef58-s3028) | 0.482 | 25, 35, 21 | 14.9 | -0.111 | 0.052 | 0.99 | 40% | 3,222 (1,437) | 264 (37, 4,287) | no | — |
+| 26 | [s3005](run:B1-30000-c18a1f-s3005) | 0.479 | 26, 36, 32 | 11.6 | -0.041 | 0.047 | 0.96 | 69% | 3,293 (950) | 104 (35, 3,601) | yes | — |
+| 27 | [s3038](run:B1-30000-1ad8a9-s3038) | 0.478 | 27, 31, 41 | 19.9 | -0.064 | 0.044 | 0.96 | 63% | 2,158 (858) | 25 (7, 4,869) | no | standing still |
+| 28 | [s3058](run:B1-30000-4108dd-s3058) | 0.467 | 28, 46, 25 | 4.4 | -0.061 | 0.070 | 0.96 | 80% | 2,303 (142) | 70 (10, 743) | yes | — |
+| 29 | [s3012](run:B1-30000-02fa53-s3012) | 0.466 | 29, 52, 12 | 7.7 | -0.073 | 0.067 | 0.95 | 70% | 2,322 (327) | 101 (9, 2,309) | no | — |
+| 30 | [s3078](run:B1-30000-dd27b6-s3078) | 0.461 | 30, 26, 44 | 6.2 | -0.008 | 0.043 | 0.99 | 49% | 3,480 (422) | 23 (5, 668) | no | — |
+| 31 | [s3089](run:B1-30000-77ad6a-s3089) | 0.458 | 31, 34, 47 | 15.8 | -0.066 | 0.041 | 0.97 | 35% | 2,185 (844) | 104 (133, 3,522) | no | — |
+| 32 | [s3091](run:B1-30000-42d88d-s3091) | 0.458 | 32, 29, 48 | 7.6 | -0.043 | 0.111 | 0.88 | 57% | 3,642 (1,173) | 16 (5, 1,580) | no | — |
+| 33 | [s3041](run:B1-30000-965f1e-s3041) | 0.458 | 33, 47, 16 | 5.0 | -0.066 | 0.051 | 0.98 | 82% | 2,177 (212) | 566 (22, 3,016) | no | — |
+| 34 | [s3056](run:B1-30000-43985b-s3056) | 0.450 | 34, 50, 22 | 4.4 | -0.081 | 0.084 | 0.95 | 80% | 2,414 (361) | 119 (16, 3,646) | no | — |
+| 35 | [s3007](run:B1-30000-8119cd-s3007) | 0.445 | 35, 40, 31 | 6.9 | +0.021 | 0.059 | 0.91 | 48% | 3,807 (1,434) | 89 (37, 884) | no | — |
+| 36 | [s3098](run:B1-30000-794ae8-s3098) | 0.444 | 36, 43, 33 | 16.3 | -0.102 | 0.073 | 0.90 | 46% | 2,012 (256) | 42 (6, 2,595) | no | — |
+| 37 | [s3061](run:B1-30000-00e3c8-s3061) | 0.442 | 37, 44, 26 | 8.9 | -0.104 | 0.116 | 0.92 | 57% | 3,933 (1,092) | 32 (8, 2,626) | no | — |
+| 38 | [s4004 s](run:B1-30000-2bac4d-s4004) | 0.441 | 38, 32, 42 | 4.5 | -0.046 | 0.140 | 0.90 | 54% | 3,774 (1,392) | 26 (6, 680) | no | — |
+| 39 | [s4008 s](run:B1-30000-645972-s4008) | 0.435 | 39, 33, 53 | 14.2 | -0.137 | 0.061 | 1.00 | 66% | 3,883 (691) | 32 (14, 5,758) | no | — |
+| 40 | [s3043](run:B1-30000-02ed17-s3043) | 0.435 | 40, 38, 49 | 2.7 | -0.081 | 0.079 | 0.98 | 91% | 2,394 (73) | 663 (904, 2,119) | no | — |
+| 41 | [s3083](run:B1-30000-0d7e0c-s3083) | 0.432 | 41, 51, 39 | 11.1 | -0.127 | 0.078 | 0.96 | 66% | 1,987 (389) | 137 (11, 2,927) | no | — |
+| 42 | [s4004 w](run:B1-30000-17ac6e-s4004) | 0.423 | 42, 30, 45 | 4.2 | -0.018 | 0.138 | 0.89 | 55% | 3,738 (1,309) | 15 (5, 639) | yes | — |
+| 43 | [s3006](run:B1-30000-023c0a-s3006) | 0.419 | 43, 58, 17 | 15.7 | -0.105 | 0.056 | 0.94 | 46% | 1,892 (652) | 113 (59, 4,598) | yes | — |
+| 44 | [s3092](run:B1-30000-7fc03f-s3092) | 0.419 | 44, 55, 36 | 6.1 | -0.126 | 0.084 | 0.96 | 77% | 2,760 (253) | 1,144 (74, 5,441) | no | — |
+| 45 | [s3022](run:B1-30000-298337-s3022) | 0.416 | 45, 37, 50 | 14.6 | -0.103 | 0.124 | 0.87 | 69% | 2,579 (199) | 103 (9, 4,127) | yes | — |
+| 46 | [s3023](run:B1-30000-b0f6e3-s3023) | 0.413 | 46, 53, 29 | 4.9 | -0.018 | 0.048 | 0.96 | 49% | 3,875 (955) | 99 (22, 1,080) | yes | — |
+| 47 | [s3082](run:B1-30000-1141ea-s3082) | 0.389 | 47, 54, 43 | 9.5 | -0.129 | 0.050 | 1.00 | 47% | 3,238 (1,411) | 59 (26, 3,053) | no | — |
+| 48 | [s3021](run:B1-30000-4aff7d-s3021) | 0.379 | 48, 61, 34 | 4.2 | -0.038 | 0.054 | 0.93 | 48% | 3,571 (1,064) | 214 (27, 1,108) | no | — |
+| 49 | [s3067](run:B1-30000-4bee8e-s3067) | 0.372 | 49, 17, 73 | 34.5 | -0.211 | 0.089 | 0.97 | 15% | 3,289 (908) | 76 (24, 9,678) | no | standing still |
+| 50 | [s3040](run:B1-30000-36d076-s3040) | 0.371 | 50, 59, 55 | 10.6 | -0.139 | 0.078 | 0.96 | 39% | 3,085 (805) | 188 (10, 2,993) | no | — |
+| 51 | [s3024](run:B1-30000-f05874-s3024) | 0.369 | 51, 66, 23 | 11.2 | -0.097 | 0.048 | 0.93 | 46% | 2,702 (878) | 75 (12, 3,689) | yes | — |
+| 52 | [s3099](run:B1-30000-1ab8a0-s3099) | 0.362 | 52, 21, 74 | 62.1 | -0.042 | 0.019 | 0.97 | 18% | 375 (2,764) | 27 (350, 7,188) | no | standing still |
+| 53 | [s3046](run:B1-30000-27bd64-s3046) | 0.361 | 53, 49, 61 | 6.6 | -0.159 | 0.071 | 1.00 | 51% | 4,198 (1,321) | 173 (51, 1,340) | no | — |
+| 54 | [s3072](run:B1-30000-f05562-s3072) | 0.355 | 54, 39, 58 | 42.0 | -0.043 | 0.046 | 0.81 | 16% | 1,013 (1,894) | 60 (86, 8,571) | no | standing still |
+| 55 | [s3045](run:B1-30000-f6d23f-s3045) | 0.355 | 55, 60, 56 | 1.7 | -0.027 | 0.058 | 0.95 | 51% | 2,874 (1,237) | 202 (490, 850) | yes | — |
+| 56 | [s3064](run:B1-30000-a6a7ec-s3064) | 0.354 | 56, 69, 40 | 3.8 | -0.089 | 0.069 | 0.94 | 82% | 2,526 (232) | 458 (2,072, 5,115) | yes | — |
+| 57 | [s3059](run:B1-30000-2ec87a-s3059) | 0.326 | 57, 45, 70 | 11.6 | -0.195 | 0.056 | 1.00 | 75% | 2,321 (310) | 93 (12, 3,179) | no | — |
+| 58 | [s3013](run:B1-30000-7f7cd5-s3013) | 0.322 | 58, 57, 54 | 30.6 | -0.131 | 0.072 | 0.85 | 45% | 2,163 (500) | 20 (5, 6,613) | no | — |
+| 59 | [s3042](run:B1-30000-b82ad0-s3042) | 0.317 | 59, 67, 59 | 10.5 | -0.074 | 0.033 | 0.95 | 63% | 3,369 (1,180) | 1,390 (247, 9,019) | yes | — |
+| 60 | [s3087](run:B1-30000-363694-s3087) | 0.317 | 60, 62, 62 | 23.8 | -0.086 | 0.029 | 0.92 | 59% | 4,035 (1,179) | 115 (12, 8,922) | yes | — |
+| 61 | [s3070](run:B1-30000-a4d3a0-s3070) | 0.311 | 61, 27, 76 | 20.3 | -0.228 | 0.065 | 1.00 | 56% | 2,109 (774) | 35 (12, 4,803) | no | — |
+| 62 | [s3020](run:B1-30000-511930-s3020) | 0.303 | 62, 42, 75 | 20.8 | -0.047 | 0.053 | 0.50 | 1% | 837 (826) | 410 (736, 5,038) | no | a star |
+| 63 | [s3051](run:B1-30000-b5a76a-s3051) | 0.302 | 63, 76, 37 | 3.9 | -0.107 | 0.055 | 0.95 | 83% | 2,137 (141) | 44 (4, 420) | no | — |
+| 64 | [s3090](run:B1-30000-05ba40-s3090) | 0.289 | 64, 75, 46 | 3.3 | -0.117 | 0.051 | 0.97 | 77% | 2,590 (14) | 279 (365, 959) | no | — |
+| 65 | [s3066](run:B1-30000-dfd51b-s3066) | 0.278 | 65, 71, 63 | 0.7 | -0.073 | 0.044 | 0.97 | 58% | 3,837 (1,821) | 5,757 (7,585, 8,835) | no | — |
+| 66 | [s3044](run:B1-30000-63827e-s3044) | 0.277 | 66, 20, 79 | 10.9 | +0.022 | 0.110 | 0.26 | 56% | 3,708 (916) | 26 (7, 3,396) | no | — |
+| 67 | [s3008](run:B1-30000-e19f2d-s3008) | 0.268 | 67, 74, 51 | 5.3 | -0.127 | 0.037 | 0.98 | 60% | 3,160 (947) | 706 (24, 1,056) | yes | — |
+| 68 | [s3030](run:B1-30000-90fc91-s3030) | 0.266 | 68, 48, 77 | -4.6 | -0.105 | 0.115 | 0.98 | 29% | 2,535 (761) | 2,536 (12,248, 11,287) | no | — |
+| 69 | [s3004](run:B1-30000-7d5208-s3004) | 0.266 | 69, 63, 60 | 1.7 | -0.146 | 0.081 | 0.98 | 93% | 2,562 (23) | 395 (18, 1,078) | no | — |
+| 70 | [s3065](run:B1-30000-ba3afe-s3065) | 0.265 | 70, 73, 57 | 3.4 | -0.100 | 0.034 | 0.98 | 92% | 2,351 (54) | 689 (1,147, 2,143) | no | — |
+| 71 | [s3033](run:B1-30000-631e49-s3033) | 0.255 | 71, 65, 66 | 0.6 | -0.022 | 0.060 | 0.89 | 52% | 2,628 (1,083) | 649 (988, 1,050) | no | — |
+| 72 | [s3063](run:B1-30000-924e70-s3063) | 0.237 | 72, 56, 67 | 37.2 | -0.178 | 0.083 | 0.78 | 30% | 1,963 (1,053) | 19 (8, 8,339) | no | — |
+| 73 | [s3019](run:B1-30000-b1209a-s3019) | 0.220 | 73, 72, 71 | 2.9 | -0.094 | 0.027 | 0.98 | 88% | 2,317 (101) | 830 (1,526, 3,139) | yes | — |
+| 74 | [s3016](run:B1-30000-b23381-s3016) | 0.217 | 74, 68, 64 | 0.7 | -0.164 | 0.059 | 1.00 | 44% | 1,926 (1,071) | 75 (31, 715) | no | — |
+| 75 | [s3018](run:B1-30000-af1e28-s3018) | 0.205 | 75, 78, 68 | 3.6 | -0.125 | 0.082 | 0.74 | 79% | 2,452 (313) | 754 (263, 2,465) | yes | — |
+| 76 | [s3085](run:B1-30000-801b34-s3085) | 0.195 | 76, 77, 69 | 11.5 | -0.087 | 0.028 | 0.79 | 42% | 3,195 (1,303) | 13 (5, 3,058) | no | — |
+| 77 | [s3095](run:B1-30000-3e5856-s3095) | 0.179 | 77, 79, 65 | 2.7 | -0.133 | 0.029 | 0.99 | 49% | 1,372 (1,338) | 509 (1,219, 2,663) | no | — |
+| 78 | [s3055](run:B1-30000-cca771-s3055) | 0.167 | 78, 80, 72 | 7.9 | -0.134 | 0.048 | 0.70 | 52% | 3,131 (1,033) | 43 (6, 3,010) | no | — |
+| 79 | [s3094](run:B1-30000-4ac946-s3094) | 0.147 | 79, 70, 78 | -2.3 | -0.052 | 0.018 | 0.98 | 49% | 4,447 (1,509) | 4,448 (11,316, 10,439) | no | — |
+| 80 | [s3077](run:B1-30000-d6eabf-s3077) | 0.116 | 80, 64, 80 | -5.4 | +0.013 | 0.073 | 0.29 | 55% | 3,778 (840) | 18,913 (2,696, 6,618) | no | — |
+| 81 | [s3080](run:B1-30000-625bc7-s3080) | 0.094 | 81, 82, 81 | 6.1 | -0.248 | 0.044 | 0.85 | 83% | 2,254 (121) | 165 (11, 1,759) | yes | — |
+| 82 | [s3084](run:B1-30000-ad76aa-s3084) | 0.091 | 82, 81, 82 | 0.1 | -0.120 | 0.013 | 0.96 | 59% | 3,157 (976) | 415 (179, 1,012) | no | — |
 <!-- /table -->
 
 ## What a world's rules make possible
@@ -817,12 +848,14 @@ on links (seeds 3016, 3042 and 3087) are played on, watched
   descend from far fewer ancestors than luck would leave them.
 - **Selection is plain, but it holds behaviour in place.** Lines spread faster
   than luck would spread them, and selection on behaviour shows in every
-  world; but no line of descent finds more new behaviour than mutation alone,
-  and the behaviours do not follow their selection.
-- **The evolution rank's first ten**, of the 64 worlds read so far, are seeds
-  4002 and 4008 played weakest first, 4002 played strongest first, 3093, 3052,
-  3037, 3047, 3071, 3057 and 3050. Four of them are on the shortlist, which
-  health draws.
+  world; but hardly any line of descent finds more new behaviour than
+  mutation alone, and the behaviours do not follow their selection.
+- **The evolution rank's first ten** are seeds 4003 played strongest first,
+  4002 and 4008 played weakest first, 4007 and 4003 played weakest first,
+  4007 and 4002 played strongest first, 3037, 3093, and 4006 played
+  strongest first: eight of them play the game a token at a time. Four are on
+  the shortlist, which health draws, and health and the rank do not go
+  together.
 - **Fertility runs in families in almost every world** (on the births-only
   tree); mending deaths weakens it.
 
@@ -903,10 +936,12 @@ themselves.
 - **12 November 2026.** An independent review found that the family tree of
   this page follows births only, though conquests copy brains as often or more,
   and that the shortlist ranks by health. On the brains' own family tree
-  ([The evolution rank](#the-evolution-rank)), in the 64 worlds read so far,
-  generations rise from a median of 750 to 2,800, the effective population
-  from about 14 to 100, and heredity from 0.34 to 0.96. Round 3 was ranked by
+  ([The evolution rank](#the-evolution-rank)), over the 82 worlds that lived,
+  generations rise from a median of 850 to 2,700, the effective population
+  from about 14 to 100, and heredity from 0.41 to 0.96. Round 3 was ranked by
   four readings of evolution against chance; health stands beside the rank
-  only as a filter. The rule of no heredity no longer rules a world out.
+  only as a filter. The rule of no heredity no longer rules a world out. The
+  reading took two goes: the drive holding 18 of the worlds failed in the
+  middle of it and was read again the same afternoon.
 
 
