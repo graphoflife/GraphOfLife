@@ -299,7 +299,7 @@ of the three orders that the candidates' own rules do not rule out: 21 worlds
 **The living worlds, healthiest first.** Each of the 82 worlds that lived to the end of its run is a row, in the order of its health by the product of its six criteria; each criterion is a column, coloured by the world's score in it, from dark (worse than nearly every world) to bright yellow (better than every other). A world named "w" or "s" is one of the eight draws played a token at a time, weakest first or strongest first. The 18 worlds that died are not shown: they come last in every order.
 
 > [!example]- How to make this figure
-> **Runs.** every world of round 3 of the screen of random worlds (Experiments 40, 41 and 42: 100 worlds of 30,000 tokens, played for 3,000 iterations)
+> **Runs.** As for the figure *Leaves or branches: what the worlds lose in their culls* above.
 >
 > **Data.** From the screen's readings of every world, `GraphOfLifeRuns/.pilots/screen/worlds/<run>.json` (research/screen/measures.py: every iteration's statistics, every 25th iteration's frame, every kept world), and each run's own statistics for its culls, scored by `research/screen/health.py` into `research/screen/health.json`.
 >
@@ -470,7 +470,7 @@ quarter of all their tokens in every game.
 **Healthier or sicker with time?** Each dot is a living world: its health by the product, scored over the first half of its run (iterations 100 to the middle) and over the second (the middle to the end), every half against every half of every world. Above the dashed diagonal a world grew healthier; below it, sicker.
 
 > [!example]- How to make this figure
-> **Runs.** every world of round 3 of the screen of random worlds (Experiments 40, 41 and 42: 100 worlds of 30,000 tokens, played for 3,000 iterations)
+> **Runs.** As for the figure *Leaves or branches: what the worlds lose in their culls* above.
 >
 > **Data.** From the screen's readings of every world, `GraphOfLifeRuns/.pilots/screen/worlds/<run>.json` (research/screen/measures.py: every iteration's statistics, every 25th iteration's frame, every kept world), and each run's own statistics for its culls, scored by `research/screen/health.py` into `research/screen/health.json`.
 >
@@ -493,7 +493,7 @@ were; the median change is nil.
 **Every measure, against the living worlds.** One chart a measure: each dot is a living world's average of it, from iteration 100 to the end of its run; the short bar is the median. The title says which criterion the measure belongs to and which way is better. A world's score in a measure is the share of the other worlds it does better than, so only the order of the dots counts. The dots are spread sideways only so that they do not hide each other.
 
 > [!example]- How to make this figure
-> **Runs.** every world of round 3 of the screen of random worlds (Experiments 40, 41 and 42: 100 worlds of 30,000 tokens, played for 3,000 iterations)
+> **Runs.** As for the figure *Leaves or branches: what the worlds lose in their culls* above.
 >
 > **Data.** From the screen's readings of every world, `GraphOfLifeRuns/.pilots/screen/worlds/<run>.json` (research/screen/measures.py: every iteration's statistics, every 25th iteration's frame, every kept world), and each run's own statistics for its culls, scored by `research/screen/health.py` into `research/screen/health.json`.
 >

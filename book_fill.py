@@ -90,6 +90,34 @@ def anchors(md_text: str) -> List[str]:
 # The blocks
 # ---------------------------------------------------------------------------
 
+#: What the blocks made so far on the page being filled know of one another, so
+#: that a page does not say the same thing twice: the runs and data of the last
+#: figure, and the screens whose worlds it has listed. fill_text starts it anew.
+PAGE: Dict[str, Any] = {}
+
+
+def recipe_of(md: str, title: str, recipe: str) -> str:
+    """
+    A figure's recipe, with its runs and its data said once on a page: a figure
+    that reads the same runs and data as the figure before it says so in a line.
+    """
+    paragraphs = recipe.split("\n\n")
+    last = PAGE.get("figure") or {}
+    said, source = {}, {}
+    for key in ("Runs", "Data"):
+        said[key] = next((p for p in paragraphs if p.startswith(f"**{key}.**")), None)
+        before = last.get(key) or (None, None)
+        source[key] = before[1] if said[key] and said[key] == before[0] else title
+    PAGE["figure"] = {key: (said[key], source[key]) for key in said}
+    if not said["Runs"] or source["Runs"] == title:
+        return recipe
+    both = source["Data"] == source["Runs"]
+    line = f"**{'Runs and data' if both else 'Runs'}.** As for the figure *{source['Runs'].rstrip('.')}* above."
+    if len(line) >= len(said["Runs"]) + (len(said["Data"]) if both else 0):
+        return recipe                                  # said again in fewer words than pointing back
+    return "\n\n".join(line if p == said["Runs"] else p for p in paragraphs if not (both and p == said["Data"]))
+
+
 def figure(md: str, name: str) -> str:
     """A figure, its caption and how to make it; their links are written as from a page in book/pages/."""
     chapter, fig = name.split("/")
@@ -98,7 +126,7 @@ def figure(md: str, name: str) -> str:
         raise KeyError(f"no figure {name}: run `python3 book_figures.py {chapter}`")
     return (f"![{made['title']}]({link(md, f'figures/{chapter}/{fig}.svg')})\n\n"
             f"**{made['title']}{'' if made['title'][-1:] in '.?!' else '.'}** {made['caption']}\n\n"
-            + quote(made["recipe"], "[!example]- How to make this figure"))
+            + quote(recipe_of(md, made["title"], made["recipe"]), "[!example]- How to make this figure"))
 
 
 def thesis(md: str, name: str) -> str:
@@ -663,6 +691,8 @@ def outside(text: str, change: Callable[[str], str], links: bool = True) -> str:
 
 def fill_text(md: str, text: str, kinds: Tuple[str, ...] = KINDS) -> str:
     """A page with its blocks of these kinds made anew; the others as they are."""
+    PAGE.clear()
+
     def made(match: "re.Match[str]") -> str:
         kind, arg = match.group(1), match.group(2).strip()
         if kind not in kinds:

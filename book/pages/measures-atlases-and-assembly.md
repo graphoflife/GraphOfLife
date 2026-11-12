@@ -171,9 +171,7 @@ Having a child next is hardly predictable in either world (at most 0.18).
 **Tokens run downhill.** One dot per world, the bar the median of ten. Token curvature is the sum, over an agent's neighbours, of their tokens minus its own (the note *Token curvature*): below zero an agent is a peak, above zero a valley. Left: of the agents in a class, the share whose node held more tokens after the game than before, minus the share whose node held fewer; most hold the same. Right: the share of agents that kept their own node. A class with fewer than 50 agents in a world has no dot for it.
 
 > [!example]- How to make this figure
-> **Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of B1's baseline set, `B1-10000-s001` … `-s010` (Experiment 2): 10,000 tokens each, every game recorded with every agent's stakes.
->
-> **Data.** From the runs' recorded frames.
+> **Runs and data.** As for the figure *What comes before, and what follows* above.
 >
 > 1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).
 > 2. Sort the rows by curvature into the classes on the axis; in each, count the agents whose node gained tokens over the game and those whose node lost, and those that kept their own node.
@@ -217,9 +215,7 @@ logarithmic axes.
 **What the logarithm reveals.** One dot per pair of quantities that are not made from the same numbers. Across, Pearson's correlation on linear axes; up, on whichever axes give the strongest: linear or logarithmic on either. Dots far above the dashed diagonal are relations a linear plot hides: power laws, and quantities whose few large values swamp the rest.
 
 > [!example]- How to make this figure
-> **Runs.** The ten B2 worlds of Experiment 16, `B2-10000-s001` … `-s010`, and the first ten worlds of B1's baseline set, `B1-10000-s001` … `-s010` (Experiment 2): 10,000 tokens each, every game recorded with every agent's stakes.
->
-> **Data.** From the runs' recorded frames.
+> **Runs and data.** As for the figure *What comes before, and what follows* above.
 >
 > 1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).
 > 2. For every pair, Pearson's r with each quantity on a linear axis or a logarithmic one: the logarithm of a positive quantity, log(1 + x) of a count, sign(x) log(1 + |x|) of a signed one; shares and yes-or-no stay linear. The median over ten worlds for each choice of axes.
@@ -703,9 +699,7 @@ same places in every picture. What each colouring shows:
 **Where the tokens went in the last game.** The same world and layout; every connection is coloured by how many tokens crossed it in the last game, in both directions together, and drawn the wider the more crossed. Every connection that is left carried at least one token — the others were cut at the end of the game. Agents are small dots.
 
 > [!example]- How to make this figure
-> **Runs.** `B1-100000-s001`.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *The world of seed 1 after its last game, six ways* above.
 >
 > 1. In frame `2999`, read `decisions.allocations`: for every agent and target ≠ itself, add the `alloc` to the connection between them.
 > 2. Colour each connection of `edges` by its class.

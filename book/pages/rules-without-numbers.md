@@ -152,9 +152,7 @@ left differed from world to world:
 **How old the agents are.** One line per world while it had more than 20 agents, each a mean over 10 iterations. In B2 every agent dies at 100, so the mean age settles near 50.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, kept in `GraphOfLifeRuns/.pilots/N`: `B3a-s1`, `-s2`, `B3b-s1`, `-s2` and `B3c-s1`, `-s2`, at 10,000 tokens for 1,000 iterations. Settings: one hidden layer of 16, messages of 8 numbers, no pre-pass, no handover, revolutions off, and every number of B2 at its original value; prototype switches `mor=all repair=true memory=true`, with `allies=true` (B3a), `allies=true birth_allies=true` (B3b), or neither (B3c).
->
-> **Data.** From each world's `series.jsonl`.
+> **Runs and data.** As for the figure *Worlds without numbers* above.
 >
 > 1. Take the mean age of the agents after each game (`meanAge`) while the world has more than 20 agents, and average over stretches of 10 iterations.
 >

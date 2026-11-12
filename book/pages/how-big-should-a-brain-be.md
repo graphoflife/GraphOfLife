@@ -153,9 +153,7 @@ outputs together: a median gain of 0.29 in founders and 0.45 when evolved.
 **Layer by layer.** How a small change of the inputs grows or shrinks through each layer of the brain: the root-mean-square change after the layer over that before it, the median over the agents probed of a world and then over the living worlds of each depth. Every hidden layer (1 to 5) ends in tanh; the output layer (out) is linear. Grey: fresh founders' brains; blue: the agents' own brains at the end. The lower dashed line is the most a sigmoid layer could pass on.
 
 > [!example]- How to make this figure
-> **Runs.** Round 3 of the random screen: Experiment 40's 84 worlds, each a draw of its own, and the 16 of Experiments 41 and 42, eight draws played twice with the stakes placed a token at a time (30,000 tokens, 3,000 iterations; [A screen of random worlds](a-screen-of-random-worlds.md))
->
-> **Data.** From each living world's checkpoint, `GraphOfLifeRuns/<run>/checkpoint.npz` (the world after its last iteration), and its archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz` (the whole world every 250 iterations, from the founders on), read by `book_chapters.brainsize.kept_world` with the brains of the agents probed only.
+> **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
 > 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
 > 2. With ε as for the gain, follow X and X + ε through the brain one layer at a time, and divide the root-mean-square difference after each layer by that before it (`through_layers`).
@@ -192,9 +190,7 @@ here, whose agents place all their stakes at once, as the probe does.
 **What changes a decision.** One dot per living world of Experiment 40, whose agents place all their stakes at once: the share of the agents probed whose stakes would differ at all if one thing about their inputs were different. Left: every neighbour's tokens, as the agent sees them, doubled; middle: the random numbers of every column drawn again (only in worlds whose brains read random numbers); right: every message read set to 0 (only in worlds with messages). Grey: fresh founders' brains; cyan: founders' brains taken to mutation's balance, where its changes alone would bring them, with nothing selected (see the text); blue: the agents' own brains; the bar is the median. The dashed line is B1's evolved brains.
 
 > [!example]- How to make this figure
-> **Runs.** Round 3 of the random screen: Experiment 40's 84 worlds, each a draw of its own, and the 16 of Experiments 41 and 42, eight draws played twice with the stakes placed a token at a time (30,000 tokens, 3,000 iterations; [A screen of random worlds](a-screen-of-random-worlds.md))
->
-> **Data.** From each living world's checkpoint, `GraphOfLifeRuns/<run>/checkpoint.npz` (the world after its last iteration), and its archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz` (the whole world every 250 iterations, from the founders on), read by `book_chapters.brainsize.kept_world` with the brains of the agents probed only.
+> **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
 > 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
 > 2. Each brain's stakes by the engine's rules (`_apportion`, or all on the best-scored candidate), once on X and once on X with one thing changed: row `its_tokens` of every neighbour's column replaced by ln(1 + 2·(eˣ − 1)); the noise rows drawn again, uniform on (−2, 2) (seed 5302); the message rows set to 0.
@@ -265,9 +261,7 @@ changes, with nothing selected. We showed it the same inputs.
 **What evolution did to the gain.** Left: the brains of every world kept along the way (one every 250 iterations, the founders first, the agents' own at the end) shown the same inputs, those of the world's end, and their gain over the founders' gain; the line is the median of the 82 living worlds, the band holds the middle half of them. The upper dashed line is the median gain, over the founders', of founders' brains taken to mutation's balance: where its changes alone would bring them after very many, with nothing selected. Middle: one dot per world, the gain of its evolved brains against that of brains at its mutation's balance; on the dashed line the two are equal. Right: each world's evolved weights, the median over layers of their size as a multiple of a founder's, against the size mutation alone would bring them to.
 
 > [!example]- How to make this figure
-> **Runs.** Round 3 of the random screen: Experiment 40's 84 worlds, each a draw of its own, and the 16 of Experiments 41 and 42, eight draws played twice with the stakes placed a token at a time (30,000 tokens, 3,000 iterations; [A screen of random worlds](a-screen-of-random-worlds.md))
->
-> **Data.** From each living world's checkpoint, `GraphOfLifeRuns/<run>/checkpoint.npz` (the world after its last iteration), and its archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz` (the whole world every 250 iterations, from the founders on), read by `book_chapters.brainsize.kept_world` with the brains of the agents probed only.
+> **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
 > 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
 > 2. For every kept world of the run, 300 brains of agents holding a token, drawn at random (seed 5304 + the iteration), each shown one agent's inputs; their gain as for the figure above.
@@ -312,9 +306,7 @@ brain takes more jitters on the way from what it sees to what it does.
 **How far one change moves a brain.** One dot per living world, by the depth of its brains: how much one change of a brain ([How a brain changes](rules-in-detail.md#how-a-brain-changes), made for sure, with the world's own settings) moves the outputs that make decisions, over how much the brain of a stranger differs from it, on the same inputs — the root-mean-square differences, the median over the agents probed. Grey: fresh founders' brains, each against another founder's; blue: the agents' own brains at the end, each against another agent's of the same world; the bar is the median. The dots high above the rest are the worlds whose changes touch three numbers in ten (a mutation sparsity of 0.3).
 
 > [!example]- How to make this figure
-> **Runs.** Round 3 of the random screen: Experiment 40's 84 worlds, each a draw of its own, and the 16 of Experiments 41 and 42, eight draws played twice with the stakes placed a token at a time (30,000 tokens, 3,000 iterations; [A screen of random worlds](a-screen-of-random-worlds.md))
->
-> **Data.** From each living world's checkpoint, `GraphOfLifeRuns/<run>/checkpoint.npz` (the world after its last iteration), and its archive, `GraphOfLifeRuns/<run>/archive/world_<iteration>.npz` (the whole world every 250 iterations, from the founders on), read by `book_chapters.brainsize.kept_world` with the brains of the agents probed only.
+> **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
 > 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
 > 2. Each brain changed once with the world's own mutation settings (seed 5305; `mutated`), and both shown the agent's inputs; the stranger is the agent probed half the sample away in the order of their ids, so that it was born far from it in time.
@@ -369,7 +361,7 @@ draw of its own, as on
 **What the shape did to the worlds.** Experiment 40's worlds by the depth of their brains (orange: 3, 4 or 5 hidden layers) and by their width (green: 16, 32 or 50 units a layer): the share that died, of all 84; and for the 70 living worlds, one dot each with a bar at the median, their health (the six criteria multiplied, as their geometric average), how much children act like their parents, how many generations they lived in 3,000 iterations, their effective population, and how far their line of descent kept moving into new behaviour ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)). The table below gives, for each, the chance by shuffling of a trend with depth or with width at least as strong, with the settings already known to matter for that outcome taken into account.
 
 > [!example]- How to make this figure
-> **Runs.** Round 3 of the random screen: Experiment 40's 84 worlds, each a draw of its own, and the 16 of Experiments 41 and 42, eight draws played twice with the stakes placed a token at a time (30,000 tokens, 3,000 iterations; [A screen of random worlds](a-screen-of-random-worlds.md))
+> **Runs.** As for the figure *Every brain of round 3 responds* above.
 >
 > **Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`) and what the screen measured of it: whether it died, and for the living its health (`research/screen/health.json`) and how it evolved (`research/screen/effects.json`, from each world's dossier).
 >
@@ -427,7 +419,7 @@ three do. They are worth looking at again, not yet worth believing.
 **What a brain costs.** One dot per living world of Experiment 40: the number of weights and biases in each of its brains, against the processor time its run took per agent and iteration — the seconds of every session of the run, over 3,000 iterations times the world's mean number of agents. The dashed line is a straight line fitted to the logarithms of both.
 
 > [!example]- How to make this figure
-> **Runs.** Round 3 of the random screen: Experiment 40's 84 worlds, each a draw of its own, and the 16 of Experiments 41 and 42, eight draws played twice with the stakes placed a token at a time (30,000 tokens, 3,000 iterations; [A screen of random worlds](a-screen-of-random-worlds.md))
+> **Runs.** As for the figure *Every brain of round 3 responds* above.
 >
 > **Data.** From each run's `GraphOfLifeRuns/<run>/provenance.json` (the processor seconds of each of its sessions), its settings, and its mean number of agents from iteration 100 on (`research/screen/health.json`).
 >

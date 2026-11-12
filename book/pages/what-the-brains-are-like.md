@@ -117,9 +117,7 @@ evenly.
 **What evolution changed.** One dot per world: of its agents with a token or more at the end, the share whose brain would spread its stakes rather than go all in; the share that would have a child (a share of its tokens of at least one token); and the share whose every stake score is zero or below, so that the rules split its tokens evenly over all its candidates. Blue: the agents' own brains; grey: a fresh founder's brain — weights drawn as for the founders of a world, normal with standard deviation 1/√(fan-in), biases 0 — given exactly the same inputs.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end.
->
-> **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
+> **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
 > 1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).
 > 2. Spread: the mean of the two BLOTTO_MODE outputs over the columns, first larger than second. Child: ⌊f(ā, b̄) · tokens⌋ ≥ 1 with ā, b̄ the REPRO_FRACTION outputs averaged over the columns. Even by default: every BLOTTO score ≤ 0 (`book_chapters.inner.probe`).
@@ -159,9 +157,7 @@ them.
 **Where selection pushed.** One dot per world: the mean, over its agents and their columns, of each of the brain's outputs that make decisions ([The brain](the-brain.md)). A founder's brain averages 0 on every one of them (the dashed line). A child's share is f(a, b), the share of the positive part of a in the positive parts of a and b ([The share function](rules-in-detail.md#the-share-function-fa-b)): a below 0 and b above it means no child. Likewise for the revolutionary part of a stake; spread or all in follows whichever of its two outputs is larger.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end.
->
-> **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
+> **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
 > 1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).
 > 2. For each agent, the mean over its columns of output rows 0–14 (`World.heads`: REPRO_FRACTION 0–1, LINK 2–3, LINK_MODE 4–5, BLOTTO 6, BLOTTO_MODE 7–8, REV_FRACTION 9–10, HANDOVER 11–12, HANDOVER_MODE 13–14); then the mean over agents.
@@ -210,9 +206,7 @@ thing about what the brain reads, and see whether its stakes change at all.
 **What changes a decision.** One dot per world: the share of its agents whose stakes would differ at all if one thing about their inputs were different — every message they read set to 0; the five random numbers of every column drawn again; or every neighbour's tokens, as the agent sees them, doubled. Blue: the agents' own brains; grey: a fresh founder's brain — weights drawn as for the founders of a world, normal with standard deviation 1/√(fan-in), biases 0 — given exactly the same inputs.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end.
->
-> **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
+> **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
 > 1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).
 > 2. Change the inputs — rows 29–148 set to 0; rows 149–153 drawn again, uniform on (−2, 2); row 2 of every neighbour's column replaced by ln(1 + 2·(e^x − 1)) — and decide again; count the agents whose shares of stake differ in any candidate.
@@ -257,9 +251,7 @@ brain. It is the square root of the sum of its squared weights.
 **What a brain listens to.** For each group of the brain's inputs ([What a brain sees](rules-in-detail.md#what-a-brain-sees)) — whether the candidate is the agent itself; the agent's and the candidate's tokens and connections; the summaries of both neighbourhoods (around); the four messages, from writer to reader (I→me is what the agent wrote to itself, it→me what the candidate wrote to it, and so on); and the random numbers — the size of the first layer's weights that read it: for each input, the length of its column of 50 weights, averaged over the inputs of the group and the agents of the world; one dot per world. Lower dashed line: the same for founders' brains. Upper: what the changes of [How a brain changes](rules-in-detail.md#how-a-brain-changes) alone would bring every weight to, whatever it reads — its jitters adding variance, its resets drawing weights back — at the balance of the two.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end.
->
-> **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
+> **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
 > 1. Read the first weight matrix W0 (agents × 50 × 154) from the checkpoint; for each input the norm of its column; average within each group of inputs and over agents.
 > 2. Mutation alone: each change jitters a weight with probability 0.1 by a normal amount of variance 0.2²/k and redraws it with probability 0.1 · 0.1 from variance 1/k; the variance v at balance satisfies v = 0.99 (v + 0.004/k) + 0.01/k, so v = 1.396/k: √1.396 = 1.18 times a founder's.
@@ -310,9 +302,7 @@ brains as the root mean square of the differences of all their 15,795 numbers.
 **How far apart brains are.** The difference between two brains: the root mean square of the differences of all their 15,795 numbers (weights and biases). Left: a genotype and its parent genotype, where both are alive at the end of a world — one change apart; one dot per world, the median of its pairs. Middle: two agents drawn at random from one world; one dot per world, the median of 3,000 pairs. Right: two fresh founders' brains, one dot per pair (200 pairs).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end.
->
-> **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
+> **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
 > 1. Concatenate every weight matrix and bias vector of a brain into one vector of 15,795 numbers; the difference of two brains is the root mean square of the difference of their vectors (`book_chapters.inner.weights`).
 >

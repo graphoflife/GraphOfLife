@@ -146,9 +146,7 @@ Of Experiment 40's 84 worlds, 14 died
 **Which worlds died.** For four settings, the share of Experiment 40's worlds drawn with each value that died; the number in brackets is how many worlds had that value. A cap of two links killed every world it was drawn in, so the three charts marked * leave those six worlds out. Each title gives the chance of differences this large by shuffling the deaths among the worlds.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end
->
-> **Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.
+> **Runs and data.** As for the figure *Which settings matter for what* above.
 >
 > 1. For each value, the deaths over the worlds drawn with it.
 > 2. The chance: the share of 20,000 shuffles of the deaths with a chi-square statistic at least as large.
@@ -335,9 +333,7 @@ estates) is no finding.
 **Do worlds with more mechanisms switched on do better?** Each dot is a living world of Experiment 40, placed by how many of 14 mechanisms it switches on beyond the simplest rules (no messages, no noise inputs, the largest stake wins, no coalitions, no handing over, no gifts, no mending, no mixing, estates shared uniformly, no search, no cap on links, no token in links, no upkeep) and by its health; the bar is the median. Rank correlation 0.09.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 40's 84 worlds, each with its settings drawn at random by the screen's second sampler (30,000 tokens, 3,000 iterations); 14 died and 70 lived to the end
->
-> **Data.** From each world's drawn settings (its plan, `book/experiments/E40.json`, drawn by `gol_screen.py`), and its outcomes: whether it died, and, for the living, its health and numbers (`research/screen/health.json`) and its dossier (`GraphOfLifeRuns/.pilots/screen/candidates/<run>.json`), tested by `research/screen/effects.py` into `research/screen/effects.json`.
+> **Runs and data.** As for the figure *Which settings matter for what* above.
 >
 > 1. Count each world's drawn values that differ from `SIMPLEST` in effects.py.
 > 2. Plot against its health; the Spearman correlation of the two.

@@ -138,9 +138,7 @@ Two more pairs of worlds, with families, came later
 **How large a group of clones is.** One line per world, every 10th iteration: the agents of an agent's connected group of neighbours with the same brain, averaged over agents.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).
->
-> **Data.** From each world's `series.jsonl`.
+> **Runs and data.** As for the figure *How much changes hands* above.
 >
 > 1. Every 10th iteration, join neighbours with the same brain and take the size of each agent's group, averaged over agents (`organisation`, `cloneMean`).
 >
@@ -153,7 +151,7 @@ Two more pairs of worlds, with families, came later
 **How much better than the founders.** One line per world, its eras played against each other, four contests per pair.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).
+> **Runs.** As for the figure *How much changes hands* above.
 >
 > **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.
 >
@@ -442,9 +440,7 @@ says yes too, and stands with them when they attack.
 **How much changes hands.** One line per world, each a mean over 50 iterations.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in `GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances (`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled (`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 (`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 (`N/N0-s1`, `-s2`). Every one under B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of 8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes (memory=true).
->
-> **Data.** From each world's `series.jsonl`.
+> **Runs and data.** As for the figure *The largest alliance's share of the world* above.
 >
 > 1. Count the nodes whose winner was not their owner in each game (`conquests`), per 100 agents, and average over consecutive stretches of 50 iterations.
 >
@@ -507,7 +503,7 @@ remains is on how an agent breeds.
 **How much better than the founders.** One world of each kind, seed 1 (seed 3 for the long one), its eras played against each other two contests per pair in each era's world.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in `GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances (`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled (`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 (`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 (`N/N0-s1`, `-s2`). Every one under B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of 8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes (memory=true).
+> **Runs.** As for the figure *The largest alliance's share of the world* above.
 >
 > **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`, every 100 iterations.
 >

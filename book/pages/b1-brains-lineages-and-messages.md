@@ -157,9 +157,7 @@ in the median world, between 0.61 and 0.66 across the thirty, and 0.63 at
 **The most common genotype's share of the world.** After every game, the share of the living that carry the most common genotype. The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). The yellow line is the single world with seed 28.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
->
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Runs and data.** As for the figure *How long genotypes and agents last* above.
 >
 > 1. After every game, count the agents per genotype in `brain_ids`; the largest count divided by the number of agents.
 > 2. Cut the 1,500 iterations into 600 stretches of 2.5 and take each world's mean in each stretch.
@@ -541,9 +539,7 @@ figure answers three questions, one per panel.
 **What the messages carry.** One dot per world. Left: of how much the agents' messages differ from one agent to the next, the share that lies between genotypes — 1 if agents of one genotype write exactly alike — against the same share with the genotypes shuffled among the agents (the median of 50 shuffles). Middle: the effective number of independent numbers the messages use, of their 30 (the participation ratio of the eigenvalues of their covariance). Right: the share of the messages' variety that a straight-line fit on the writer's and reader's tokens and connections (their logarithms) and whether the message is to itself accounts for. Blue: the agents' own brains; grey: a fresh founder's brain — weights drawn as for the founders of a world, normal with standard deviation 1/√(fan-in), biases 0 — given exactly the same inputs.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end.
->
-> **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
+> **Runs and data.** As for the figure *A name, not news* above.
 >
 > 1. As in the figure above, every message an agent's brain writes to each candidate.
 > 2. Kin: each writer's mean message; between-genotype sum of squares of those means over their total; the null shuffles the genotypes among writers.
@@ -600,9 +596,7 @@ What values do the 30 numbers of a message take?
 **The numbers in a message.** Every one of the 30 numbers of every message written at the end of the 30 worlds, in bins 0.05 wide: by the agents' own brains (blue) and by a fresh founder's brain — weights drawn as for the founders of a world, normal with standard deviation 1/√(fan-in), biases 0 — given exactly the same inputs (grey, dashed).
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline worlds that lived to the end.
->
-> **Data.** From the final checkpoint of each run, `GraphOfLifeRuns/<run>/checkpoint.npz`, read with `gol_store.load_checkpoint(run, config)`: the world after its last iteration, every living agent's brain and every message in flight.
+> **Runs and data.** As for the figure *A name, not news* above.
 >
 > 1. As above; count the numbers in 40 bins from −1 to 1 and divide by all numbers.
 >

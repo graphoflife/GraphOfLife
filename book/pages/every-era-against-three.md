@@ -193,9 +193,7 @@ pulled ahead of the brains of 2,500.
 **Each era's rating, from every contest.** One rating per era and world, fitted to every contest of that world by least squares on the log-odds of the scores (Bradley–Terry): +100 means the era's brains beat the brains of 2,500 about 64 times in a hundred.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 28's 240 contests (`python3 gol_lab.py run E28`): every 2,500th era of Experiment 18's two worlds played to 50,000 iterations (`B2-10000-4af4a3-s005`, `-s006`) against the eras of 2,500, 10,000 and 25,000, each pair once on each era's world (coin 17), and each of those three eras against itself four times (coins 17 to 20).
->
-> **Data.** From each trial's `result.json`.
+> **Runs and data.** As for the figure *Every era against three fixed eras* above.
 >
 > 1. For each pair of eras, the mean share of the later era over its two contests.
 > 2. Fit one rating per era so that the log-odds of every score is the difference of the two ratings, the era of 2,500 at 0 (`gol_tournament.ratings`); shown in Elo points.
