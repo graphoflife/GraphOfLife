@@ -412,5 +412,242 @@ def test_the_shortlist_is_every_candidate_among_the_first_of_any_order():
     assert FUNNEL.tops(worlds, 2)["product"] == ["a", "b"]
 
 
+# ---------------------------------------------------------------------------
+# The brain-copy tree, its shadow world, selection, and the rank by evolution (2026-11-11)
+# ---------------------------------------------------------------------------
+
+sys.path.insert(0, os.path.join(runner.ROOT, "research", "screen"))
+import braintree as BT  # noqa: E402
+import evolution as EVO  # noqa: E402
+import selection as SEL  # noqa: E402
+from gol_config import SimConfig  # noqa: E402
+
+
+def _hand_frames():
+    """
+    Two iterations of a world of three founders (agents 0, 1, 2 with genotypes 1, 2, 3), made by hand:
+      iteration 0  founder 0 has child 3 (instance 3, a copy of genotype 1); in the game 3 takes node 1
+                   (instance 4, from instance 3) and 0 takes node 2 (instance 5, from instance 0); node 0's
+                   brain mutates in place to genotype 4
+      iteration 1  node 1 has child 4 (instance 6, from instance 4; mutated to genotype 5); in the game 4 takes
+                   node 0 (instance 7, from instance 6), 1 takes node 3 (instance 8, from instance 4), and node 2,
+                   staked on by nobody, starves
+    """
+    def frame(it, phase, ids, geno, pgeno, parents, decisions):
+        return {"iteration": it, "phase": phase, "ids": ids, "tokens": [2] * len(ids), "brain_ids": geno,
+                "parent_brain_ids": pgeno, "parent_ids": parents, "decisions": decisions}
+
+    def birth(agent, child):
+        return {"agent": agent, "child": child, "invested": 1, "tokens_before": 2, "links": [agent],
+                "handed_over": []}
+
+    def won(node, winner):
+        return {"node": node, "winner": winner, "amount": 1}
+
+    def stakes(ids):
+        return [{"agent": u, "tokens": 2, "spread": False, "targets": [u], "alloc": [2]} for u in ids]
+
+    return [
+        (0, frame(0, 1, [0, 1, 2, 3], [1, 2, 3, 1], [-1, -1, -1, -1], [-1, -1, -1, 0], {"births": [birth(0, 3)]})),
+        (1, frame(0, 2, [0, 1, 2, 3], [4, 1, 1, 1], [1, -1, -1, -1], [-1, -1, -1, 0],
+                  {"winners": [won(0, 0), won(1, 3), won(2, 0), won(3, 3)], "allocations": stakes([0, 1, 2, 3])})),
+        (2, frame(1, 1, [0, 1, 2, 3, 4], [4, 1, 1, 1, 5], [1, -1, -1, -1, 1], [-1, -1, -1, 0, 1],
+                  {"births": [birth(1, 4)]})),
+        (3, frame(1, 2, [0, 1, 3, 4], [5, 1, 1, 5], [1, -1, -1, 1], [-1, -1, 0, 1],
+                  {"winners": [won(0, 4), won(1, 1), won(3, 1), won(4, 4)], "allocations": stakes([0, 1, 3, 4])})),
+    ]
+
+
+def _built(frames, founders, until, eras, folder):
+    cfg = SimConfig(n_nodes=founders, total_tokens=2 * founders)
+    BT.build("made-up", until, frames=frames, cfg=cfg, eras=eras, folder=folder)
+    return BT.Built(folder), cfg
+
+
+def test_the_brain_tree_follows_births_and_conquests():
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        b, cfg = _built(_hand_frames(), 3, 2, [1, 2], tmp)
+        # Every instance's parent and the phase that made it: founders, then births and conquests in order.
+        assert np.asarray(b.parent).tolist() == [-1, -1, -1, 0, 3, 0, 4, 6, 4], np.asarray(b.parent).tolist()
+        assert np.asarray(b.start).tolist() == [-1, -1, -1, 0, 1, 1, 2, 3, 3]
+        assert b.alive_at(-1).tolist() == [0, 1, 2] and b.alive_at(1).tolist() == [0, 4, 5, 3]
+        assert b.alive_at(3).tolist() == [7, 4, 8, 6]
+        # The genotype forest: the mutation in place and the child's mutation, each with its parent.
+        gparent, gkind = (np.load(os.path.join(tmp, f"{n}.npy")) for n in ("gparent", "gkind"))
+        assert gparent[4] == 1 and gparent[5] == 1 and gkind[4] == BT.MUTATION and gkind[5] == BT.MUTATION
+        assert not b.summary["anomalies"], b.summary["anomalies"]
+        tree = BT.tree_readings(b, cfg, 2)
+        c = tree["copies"]
+        assert (c["births"], c["conquests"]) == (2, 4) and abs(c["birth_share"] - 1 / 3) < 1e-12
+        assert abs(c["conquests_per_agent"] - (2 / 3 + 2 / 4) / 2) < 1e-12      # per agent at each iteration's start
+        # Generations: copy events from the founders, births and conquests apart (paths 4, 2, 3, 3).
+        end = tree["generations"]["2"]
+        assert (end["mean"], end["min"], end["max"], end["births"], end["conquests"]) == (3.0, 2, 4, 1.5, 1.5), end
+        # All four final brains descend from instance 4 alone from iteration 1 on, one copy from it on average.
+        assert tree["common_ancestor_at"] == 1 and tree["common_ancestor_age"] == 1.0
+        assert tree["common_ancestor_copies"] == 1.0
+        assert abs(tree["effective_population"] - 1.0 / (2 * (1 - 1 / 4))) < 1e-12
+        assert tree["ancestors"] == {"1": 1}
+        line = tree["line"]
+        assert [(r["era"], r["instance"], r["node"], r["share"]) for r in line] == [(1, 4, 1, 1.0), (2, 4, 1, 0.25)]
+        assert line[1]["nested"] and line[1]["events"] == ""
+        # Parent and child instances alive together, and the births-only tree's pairs that are still the brain's.
+        one, two = tree["pairs"]["1"], tree["pairs"]["2"]
+        assert (one["pairs"], one["birth_pairs"], one["conquest_pairs"]) == (3, 1, 2)
+        assert (two["pairs"], two["birth_pairs"], two["conquest_pairs"]) == (3, 1, 2)
+        assert one["births_only_still_brain_pairs"] == 1.0 and two["births_only_still_brain_pairs"] == 0.5
+
+
+def _drawn_frames(founders, iterations, seed, step=0.0):
+    """
+    Frames of a made-up world whose every copy draws its parent among the living: at random, or (`step` above 0)
+    in proportion to a fitness each brain inherits, its log a parent's plus a normal step of that size, so that
+    fitter lines keep arising and spreading. Births about a third of the living an iteration, conquests half of
+    them; the cleanup keeps the world at its founders' number.
+    """
+    rng = np.random.RandomState(seed)
+    alive = list(range(founders))
+    log_fit = {u: 0.0 for u in alive}
+
+    def inherit(parent):
+        return parent + rng.normal(0.0, step) if step else parent
+
+    def chances(agents):
+        g = np.array([log_fit[u] for u in agents])
+        p = np.exp(g - g.max())
+        return p / p.sum()
+
+    nxt = founders
+    for t in range(iterations):
+        parents = sorted(rng.choice(alive, size=rng.poisson(0.3 * len(alive)), p=chances(alive)).tolist())
+        births = []
+        for p in parents:
+            births.append({"agent": p, "child": nxt, "invested": 1, "tokens_before": 2, "links": [p],
+                           "handed_over": []})
+            log_fit[nxt] = inherit(log_fit[p])
+            nxt += 1
+        everyone = alive + [x["child"] for x in births]
+        alive = sorted(rng.choice(everyone, size=min(len(everyone), founders), replace=False).tolist())
+        yield 2 * t, {"iteration": t, "phase": 1, "ids": alive, "tokens": [2] * len(alive),
+                      "brain_ids": [1] * len(alive), "parent_brain_ids": [-1] * len(alive),
+                      "parent_ids": [-1] * len(alive), "decisions": {"births": births}}
+        weights = chances(alive)
+        winners = {}
+        for v in rng.choice(alive, size=len(alive) // 2, replace=False):
+            w = v
+            while w == v:
+                w = alive[rng.choice(len(alive), p=weights)]
+            winners[int(v)] = int(w)
+        before = dict(log_fit)
+        for v, w in winners.items():
+            log_fit[v] = inherit(before[w])
+        won = [{"node": v, "winner": winners.get(v, v), "amount": 1} for v in alive]
+        yield 2 * t + 1, {"iteration": t, "phase": 2, "ids": alive, "tokens": [2] * len(alive),
+                          "brain_ids": [1] * len(alive), "parent_brain_ids": [-1] * len(alive),
+                          "parent_ids": [-1] * len(alive),
+                          "decisions": {"winners": won, "allocations": [
+                              {"agent": u, "tokens": 2, "spread": bool(u % 2), "targets": [u], "alloc": [2]}
+                              for u in alive]}}
+
+
+def test_the_shadow_world_sees_luck_as_luck_and_selection_as_selection():
+    import tempfile
+    eras = list(range(25, 151, 25))
+    with tempfile.TemporaryDirectory() as tmp:
+        b, _ = _built(_drawn_frames(120, 150, 3), 120, 150, eras, os.path.join(tmp, "luck"))
+        luck = BT.shadow_readings(b, 150, reps=60)
+        b, _ = _built(_drawn_frames(120, 150, 3, step=0.5), 120, 150, eras, os.path.join(tmp, "fit"))
+        fit = BT.shadow_readings(b, 150, reps=60)
+    # A world whose parents are drawn as the shadow draws them looks like its shadow ...
+    for key in ("persist", "top", "life", "active_share"):
+        assert abs(luck["z"][key]) < 3, (key, luck["z"])
+    assert luck["coalescence"]["p"] is None or luck["coalescence"]["p"] > 0.01, luck["coalescence"]
+    # ... and one whose fitter brains are copied more often sweeps far faster than luck would.
+    assert fit["z"]["top"] > 3 and fit["z"]["life"] > 3, fit["z"]
+
+
+def test_the_shadow_and_the_null_lines_come_again_from_their_seed():
+    import tempfile
+    from GraphOfLife import make_brain
+    import brainplay as BP
+    eras = list(range(25, 101, 25))
+    with tempfile.TemporaryDirectory() as tmp:
+        b, _ = _built(_drawn_frames(80, 100, 5), 80, 100, eras, tmp)
+        once, again, other = (BT.shadow_readings(b, 100, reps=20, seed=s) for s in (11, 11, 12))
+    assert once["z"] == again["z"] and once["eras"] == again["eras"], "the same seed drew another shadow"
+    assert once["z"] != other["z"], "another seed drew the same shadow"
+    assert BT.draw(11, 3, np.arange(5), 7).tolist() == BT.draw(11, 3, np.arange(5), 7).tolist()
+    # The null lines: the same plan and seed make the same brains, another seed others.
+    cfg = SimConfig(hidden_layers=[6, 5], message_amount=2, random_input_amount=2, mix_at_birth=True)
+    first = make_brain(cfg, 1, np.random.RandomState(1))
+    mates = {0: [make_brain(cfg, 2, np.random.RandomState(2))]}
+    line = [{"era": 1}, {"era": 2, "events": "mmeexm"}]
+    plans = BP.null_steps(line, 0.5, 2, seed=4)
+    assert plans == BP.null_steps(line, 0.5, 2, seed=4) and all(len(p[0]) == 6 for p in plans)
+    weights = lambda lines: [np.concatenate([w.ravel() for w in brain.weights]) for made in lines for brain in made]
+    needed = {0: mates[0] * sum(p[0].count("x") for p in plans)}
+    a = weights(BP.null_lines(first, plans, needed, cfg, np.random.RandomState(9)))
+    b2 = weights(BP.null_lines(first, plans, needed, cfg, np.random.RandomState(9)))
+    c = weights(BP.null_lines(first, plans, needed, cfg, np.random.RandomState(10)))
+    assert all(np.array_equal(x, y) for x, y in zip(a, b2))
+    assert not all(np.array_equal(x, y) for x, y in zip(a, c))
+    assert np.array_equal(a[0], np.concatenate([w.ravel() for w in first.weights]))  # each line starts as the real
+
+
+def test_the_permutation_null_of_a_selection_differential_is_exact():
+    rng = np.random.RandomState(8)
+    n = 400
+    z = rng.normal(size=n)
+    x = rng.normal(size=n)
+    w = rng.poisson(1.5, size=n).astype(float)
+    s = (rng.rand(n) < 0.6).astype(float)
+    row = [n, z.sum(), (z * z).sum(), w.sum(), (w * w).sum(), (w * z).sum(), s.sum(), (s * z).sum(), x.sum(),
+           (x * x).sum(), (w * x).sum(), (z * x).sum(), (s * x).sum()]
+    terms = SEL.iteration_terms(np.array([row]))
+    shuffled = []
+    for _ in range(4000):
+        ws = rng.permutation(w)
+        shuffled.append(np.mean((ws - ws.mean()) * (z - z.mean())) / ws.mean())
+    assert abs(terms["var_S"][0] / np.var(shuffled) - 1) < 0.08, (terms["var_S"][0], np.var(shuffled))
+    # A fitness that follows the trait is selection far beyond chance; the gradient holds wealth fixed.
+    w2 = rng.poisson(np.exp(0.5 * z)).astype(float)
+    row2 = list(row)
+    row2[3:6] = [w2.sum(), (w2 * w2).sum(), (w2 * z).sum()]
+    row2[10] = (w2 * x).sum()
+    t2 = SEL.iteration_terms(np.array([row2]))
+    assert t2["S"][0] / np.sqrt(t2["var_S"][0]) > 5 and t2["beta"][0] > 0
+
+
+def test_worlds_are_ranked_by_the_shares_of_their_readings_three_ways():
+    worlds = [{"id": i, "values": dict(zip(EVO.KEYS, v))} for i, v in
+              (("a", (3, 0.1, 0.2, 0.9)), ("b", (2, 0.3, 0.1, 0.8)), ("c", (1, 0.2, 0.3, None)))]
+    ranked, bests = EVO.rank(worlds, top=1)
+    assert [w["rank"] for w in ranked] == [1, 2, 3] and len({w["id"] for w in ranked}) == 3
+    a = next(w for w in ranked if w["id"] == "a")
+    assert a["shares"] == {"shadow": 1.0, "novelty": 1 / 3, "selection": 2 / 3, "heredity": 1.0}
+    assert abs(a["score"] - (1 / 3 * 2 / 3) ** 0.25) < 1e-12 and a["orders"]["worst"] == 1 / 3
+    c = next(w for w in ranked if w["id"] == "c")
+    assert c["shares"]["heredity"] == 1 / 3                                     # a reading not made is the worst
+    assert set(bests) == {"product", "sum", "worst"} and all(len(v) == 1 for v in bests.values())
+
+
+def test_conquests_per_agent_are_what_the_review_measured():
+    # On the recorded worlds themselves, where they can be read: GOL_SPOT_RUNS names the runs folder.
+    folder = os.environ.get("GOL_SPOT_RUNS")
+    if not folder or not all(os.path.isdir(os.path.join(folder, run, "frames")) for run in BT.SPOT):
+        print("(skipped: set GOL_SPOT_RUNS to a runs folder holding round 3)", end=" ")
+        return
+    original = gol_store.BASE_DIR
+    gol_store.BASE_DIR = folder
+    try:
+        for run, review in BT.SPOT.items():
+            # A few games across the run: the rate wanders by a few hundredths from one window to the next.
+            got = BT.conquests_per_agent(run, (500, 1000, 1500, 2000, 2500))["mean"]
+            assert abs(got - review) < 0.05, (run, got, review)
+    finally:
+        gol_store.BASE_DIR = original
+
+
 if __name__ == "__main__":
     sys.exit(runner.main(globals()))

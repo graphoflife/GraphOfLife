@@ -654,7 +654,6 @@ solved, but not that it is.
 - [What this notebook is about](what-this-notebook-is-about.md#a-ladder-of-four-steps)
 - [The ideas this builds on](the-ideas-this-builds-on.md#where-to-go-next)
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#what-decides-how-a-world-evolves)
-- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-could-be-played-next)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#where-to-go-next)
 - [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
 - [A hundred thousand iterations](a-hundred-thousand-iterations.md#where-to-go-next)

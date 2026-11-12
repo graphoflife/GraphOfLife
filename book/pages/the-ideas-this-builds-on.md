@@ -269,6 +269,6 @@ several agents acting together.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (5)
-> [What this notebook is about](what-this-notebook-is-about.md) · [One iteration, step by step](one-iteration.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
+> [!info]- Pages that link here (7)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [One iteration, step by step](one-iteration.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md)
 <!-- /turns -->

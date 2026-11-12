@@ -7,82 +7,110 @@
 
 ## In short
 
-Evolution needs variation, heredity and selection, and open-ended evolution
-needs them to last. Each of round 3's hundred worlds was read for them from
-what it recorded: its whole family tree, how much children act like their
-parents, whether having children runs in families, and how far its main line
-of descent keeps moving into new behaviour. Of the hundred, 28 are ruled out:
-18 died, one is a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), four pass nothing on and five stand still. The other
-72 evolve fast but narrowly: a [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of 825 generations in 3,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."),
-but an effective population of only 14, so chance decides much of which line
-survives. The healthiest worlds change a little more than the rest, but they
-pass on less. The shortlist is every candidate among the first 13 of any of
-health's three orders. On 9 November 2026 it held 24 worlds, which the author
-chose to play again with new [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") (Experiment 43, less three that grow far
-too many links). Since health also counts [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link, it holds
-21. Seeds 3042, 4006 played strongest first, 3018, 3080 and 3057 are among the
-first of all three orders; seed 3026, with some of the simplest rules of the
-round, evolves the most, and now just misses the shortlist.
+Round 3 drew a hundred worlds at random. This page asks which of them could
+evolve without end, and ranks them by how much they evolve. Each world is read
+from what it recorded; no world is played again.
+
+- **Ruled out:** 28 of the hundred plainly miss something. 18 died, one is a
+  [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), four seemed to pass nothing on and five stand still. The other 72 are
+  the *candidate worlds*.
+- **What descends is [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.").** A child gets a copy of its parent's brain, and
+  a [node](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") won in the [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") gets a copy of the winner's. In round 3 the game
+  copies brains more often than births do, 1.4 times as often in the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.")
+  world. On the brains' own family tree, children act almost exactly as their
+  parents, and the living descend from far fewer ancestors than chance would
+  leave.
+- **The evolution rank** scores every world that lived by four readings, each
+  set against a model of chance: lines that spread beyond luck, novelty beyond
+  [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") alone, selection on behaviour, and heredity. Eight of its
+  first ten are draws whose game is played a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at a time: [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 4003,
+  4002 and 4007 played both ways, 4008 played weakest first and 4006
+  strongest first; with them stand seeds 3037 and 3093. Selection is plain in
+  every world, but it holds behaviour in place: hardly any line of descent
+  finds more new behaviour than mutation alone would. Health and the rank do
+  not go together.
+- **The shortlist** is drawn from health instead: every candidate world among
+  the first 13 of any of health's three orders, 21 worlds. Four of them are
+  among the rank's first ten.
+
+> [!info] Added later, 12 November 2026: what the births-only tree said
+> Until 12 November 2026 this page read a family tree of births alone. On it,
+> the 72 candidate worlds lived a median of 825 generations with an effective
+> population of only 14, and a child acted only partly like its parent (a
+> heredity index of 0.39), so chance seemed to decide much of which line
+> survives, and the healthiest worlds seemed to pass on less. That tree misses
+> every brain copied by a conquest. Each reading below says which tree it uses.
 
 ## What evolution needs
 
-Evolution needs three things, and open-ended evolution needs them to last
-([The open-ended test](measuring-evolution.md#what-would-count-as-open-ended-evolution)):
-- **variation:** the agents differ, in what they are and in what they do;
-- **heredity:** children are like their parents;
-- **selection:** some agents leave more descendants than others *because of*
-  what they are, and not by luck alone.
-
-Where all three hold, a population adapts. For it to keep finding new things,
-the world must also last, and what its agents do must keep changing rather
-than coming to rest or going round in circles. A world that plainly misses one
-of these cannot evolve open-endedly however long it runs. So the worlds are
-treated as suspects in a line-up: each is ruled out the first time it plainly
-misses one, with its reason, and the rest are ranked pillar by pillar, with no
-single verdict over all of them.
+Evolution needs variation, heredity and selection, and open-ended evolution
+needs them to last
+([What evolution means here](what-this-notebook-is-about.md#what-evolution-means-here);
+[the open-ended test](measuring-evolution.md#what-would-count-as-open-ended-evolution)).
+A world that plainly misses one of them cannot evolve open-endedly however long
+it runs. So the worlds are treated as suspects in a line-up. Each is ruled out
+the first time it plainly misses one, with its reason. The rest are compared
+reading by reading, and every world that lived is ranked by evolution
+([The evolution rank](#the-evolution-rank)).
 
 ## How each pillar is read
 
-Every number comes from what a world recorded. No world is played again.
+Every number comes from what a world recorded. No world is played again, only
+brains, in situations taken from the worlds themselves. Two family trees are
+read:
+- **the births-only tree**: who bore whom, from every birth of every
+  [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). It gives the rules that rule worlds out and the pillar-by-pillar
+  table below, as they stood on 9 November 2026. It misses every brain copied
+  by a conquest;
+- **the brain-copy tree**: every copy of a brain, by birth or by conquest
+  ([The brains' own family tree](#the-brains-own-family-tree)). The evolution
+  rank reads this one.
 
-- **The family tree.** A world's [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") hold every birth of every iteration,
-  so its whole family tree can be built: who descends from whom, and how many
-  generations separate the living from the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts."). Going back from the agents
-  alive at the end, their ancestors grow fewer and fewer, until all of them
-  descend from one. In a population of *N* agents left to chance this takes
+The family tree of genotypes in
+[Measuring evolution](measuring-evolution.md#the-family-tree) is a third: it
+includes conquest copies, but it branches at every mutation, so a brain that
+changes where it sits starts a new genotype there.
+
+The readings, and the tree each uses:
+- **Generations and the effective population** (both trees). Going back from
+  the brains alive at the end, their ancestors grow fewer and fewer, until all
+  of them descend from one. In a population of *N* left to chance this takes
   about 2*N* generations. Where it takes a few dozen, the **effective
   population** is tiny, and chance decides which line survives, whatever its
-  agents are.
-- **Heredity.** In the worlds kept at the middle of the run and at its end,
-  children and parents alive together are played in the same situations
-  ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)). The
-  **heredity index** is 1 when a child acts as its parent does (as the parent
-  acts like itself from one try to the next), and 0 when it acts like a
-  stranger.
-- **Fertility passed on.** Selection changes a population only through
-  differences in how many children its members leave, and only the differences
-  that are passed on add up over the generations (Fisher's fundamental theorem
-  of natural selection). So we ask whether agents that have many children have
-  children that have many too: the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of a parent's and its child's
-  numbers of children, over every pair born from iteration 100 to two thirds of
-  the run, against the same correlation with the children's counts shuffled
-  among the children born in the same iteration. Where it is clearly above
-  chance, families differ in how fertile they are, and selection has
-  something to work with. The cause need not be in the [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions."): a rich parent
-  can make rich children, and a good place can favour its families.
-- **The line of descent.** At every world kept (every 250 iterations) we find
-  the ancestor of most of the agents alive at the end, and keep its brain: one
-  brain an era, the world's main line. All of them are played in the same
-  situations. How far each era lies from every earlier one says whether the
-  line keeps reaching behaviour it has not shown before (**novelty**), stands
-  still, or comes back to where it was.
-- **Contemporaries.** How differently two agents of the same era act, above
-  the noise of one brain played twice: the variation selection has to choose
-  from.
-- **Health**, by the [proposed order](which-worlds-are-healthy.md).
+  brains are.
+- **Heredity** (both trees). In the worlds kept at the middle of the run and
+  at its end, parents and children alive together are played in the same
+  situations
+  ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)).
+  The **heredity index** is 1 when a child acts as its parent does (as the
+  parent acts like itself from one try to the next), and 0 when it acts like a
+  stranger. On the births-only tree a child is played against the agent that
+  bore it; on the brain tree, against the brain it was copied from.
+- **Fertility passed on** (the births-only tree). Selection changes a
+  population only through differences in how many offspring its members
+  leave, and only the differences that are passed on add up (Fisher's
+  fundamental theorem of natural selection). So we ask whether agents that
+  have many children have children that have many too: the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of a
+  parent's and its child's numbers of children, over every pair born from
+  iteration 100 to two thirds of the run, against the same correlation with
+  the children's counts shuffled among the children born in the same
+  iteration. The cause need not be in the brain: a rich parent can make rich
+  children, and a good place can favour its families.
+- **The line of descent and its novelty** (both trees). At every world kept
+  (every 250 iterations) we find the ancestor of most of the brains alive at
+  the end, and keep its brain: one brain an era, the world's main line. All
+  of them are played in the same situations. How far each era lies from every
+  earlier one says whether the line keeps reaching behaviour it has not shown
+  before (**novelty**), stands still, or comes back to where it was. The rank
+  sets it against lines that only mutate.
+- **Contemporaries** (no tree). How differently two agents of the same era
+  act, above the noise of one brain played twice: the variation selection has
+  to choose from.
+- **Health** (no tree), by the [proposed order](which-worlds-are-healthy.md).
+  It draws the shortlist, and for the rank it only filters.
 
 These follow the measures of the MODES toolbox for open-ended dynamics
-(Dolson, Vostinar, Wiser and Ofria, 2019), read on what GraphOfLife records:
+([Open-ended evolution: what it would mean](the-ideas-this-builds-on.md#open-ended-evolution-what-it-would-mean)):
 *change* and *novelty* along the line of descent, and *ecology* in how many
 kinds of behaviour live side by side (the
 [same-position share](measuring-health.md#the-same-position-share)
@@ -92,15 +120,16 @@ read yet.
 ## The worlds ruled out
 
 Of round 3's hundred worlds, 28 are ruled out, each for the first reason it
-meets, in this order:
+meets, in this order (research/screen/funnel.py). The other 72 are the
+**candidate worlds**.
 - **It died** (18 worlds;
   [what became of them](a-screen-of-random-worlds.md#what-round-3-found)).
 - **It is a star** (1): seed 3020, where one agent is linked to 99.5% of the
   others on average.
-- **Its agents hold one number of [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")** (none): 80% or more of the agents
+- **Its agents hold one number of tokens** (none): 80% or more of the agents
   holding the same amount.
 - **It has no heredity** (4): children act like strangers, with a heredity
-  index below 0.1. In all four, brains change after every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") and not only
+  index below 0.1. In all four, brains change after every game and not only
   when they are copied, and two mutate with a probability of 0.8. One of them
   is seed 3077, the worked example of
   [Which worlds are healthy?](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together):
@@ -112,42 +141,36 @@ meets, in this order:
   6,470 to 21,298 agents, holding 1.4 to 4.6 tokens each on average. An agent
   with a token or two can hardly stake differently from another.
 
+> [!info] Added later, 12 November 2026: the four that seemed to pass nothing on
+> The rule of no heredity read the births-only tree, which played children
+> against agents whose brains had mostly been replaced by conquests since. On
+> the brains' own tree seeds 3066 and 3084 pass their brains on faithfully
+> (heredity indices of 0.97 and 0.96). Seeds 3044 and 3077, whose brains change
+> after every game with a probability of 0.8, keep a weak heredity (0.26 and
+> 0.29). So for the evolution rank this rule rules nothing out; the other four
+> still filter.
+
+The ten worlds that lived and are ruled out:
+
 <!-- table oeecandidates/out -->
 | world | round | why it is ruled out |
 |---|---|---|
-| [s3009](run:B1-30000-f1b401-s3009) | round 3 | died at iteration 920 |
-| [s3010](run:B1-30000-30d3da-s3010) | round 3 | died at iteration 202 |
-| [s3015](run:B1-30000-f05b17-s3015) | round 3 | died at iteration 214 |
-| [s3017](run:B1-30000-44f693-s3017) | round 3 | died at iteration 94 |
 | [s3020](run:B1-30000-511930-s3020) | round 3 | a star: one agent linked to 99.5% of the others on average |
-| [s3027](run:B1-30000-be02ce-s3027) | round 3 | died at iteration 26 |
-| [s3031](run:B1-30000-caf1c5-s3031) | round 3 | died at iteration 142 |
-| [s3036](run:B1-30000-1d8c54-s3036) | round 3 | died at iteration 115 |
 | [s3037](run:B1-30000-845393-s3037) | round 3 | standing still: its line of descent does not move and its agents act alike (steps 0.01, contemporaries 0.03 above the noise) |
 | [s3038](run:B1-30000-1ad8a9-s3038) | round 3 | standing still: its line of descent does not move and its agents act alike (steps 0.01, contemporaries 0.01 above the noise) |
 | [s3044](run:B1-30000-63827e-s3044) | round 3 | no heredity: children act like strangers (index 0.01) |
 | [s3066](run:B1-30000-dfd51b-s3066) | round 3 | no heredity: children act like strangers (index 0.07) |
 | [s3067](run:B1-30000-4bee8e-s3067) | round 3 | standing still: its line of descent does not move and its agents act alike (steps 0.02, contemporaries 0.03 above the noise) |
-| [s3069](run:B1-30000-033fbf-s3069) | round 3 | died at iteration 2,442 |
 | [s3072](run:B1-30000-f05562-s3072) | round 3 | standing still: its line of descent does not move and its agents act alike (steps 0.02, contemporaries 0.01 above the noise) |
-| [s3074](run:B1-30000-165142-s3074) | round 3 | died at iteration 12 |
 | [s3077](run:B1-30000-d6eabf-s3077) | round 3 | no heredity: children act like strangers (index 0.06) |
-| [s3079](run:B1-30000-afe35f-s3079) | round 3 | died at iteration 210 |
-| [s3081](run:B1-30000-378f0a-s3081) | round 3 | died at iteration 167 |
 | [s3084](run:B1-30000-ad76aa-s3084) | round 3 | no heredity: children act like strangers (index 0.08) |
-| [s3086](run:B1-30000-1393f4-s3086) | round 3 | died at iteration 719 |
-| [s3096](run:B1-30000-76ca8e-s3096) | round 3 | died at iteration 1,030 |
 | [s3099](run:B1-30000-1ab8a0-s3099) | round 3 | standing still: its line of descent does not move and its agents act alike (steps 0.01, contemporaries 0.02 above the noise) |
-| [s3100](run:B1-30000-13bb83-s3100) | round 3 | died at iteration 1,815 |
-| [s4001 w](run:B1-30000-1da684-s4001) | round 3, weakest first | died at iteration 144 |
-| [s4005 w](run:B1-30000-a6c23a-s4005) | round 3, weakest first | died at iteration 230 |
-| [s4006 w](run:B1-30000-673ef1-s4006) | round 3, weakest first | died at iteration 1,445 |
-| [s4001 s](run:B1-30000-ec8a95-s4001) | round 3, strongest first | died at iteration 387 |
 <!-- /table -->
 
 ## The candidates, pillar by pillar
 
-The 72 candidates evolve fast, but in few lines.
+On the births-only tree, as it was read on 9 November 2026, the 72 candidate
+worlds evolve fast, but in few lines.
 - **Many generations.** A median of 825 generations in 3,000 iterations: one
   every 3.6 iterations.
 - **Few lines.** Going back from the living, all of them descend from one
@@ -163,90 +186,106 @@ The 72 candidates evolve fast, but in few lines.
   above the noise from every earlier era, and in 15 worlds it never comes back
   to behaviour it had shown before.
 
-Three pulls show across the worlds ([rank correlations](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") over the 72):
+> [!info] Added later, 12 November 2026: read on the births-only tree
+> Generations, the effective population of about 14, heredity and novelty
+> above were read on the family tree of births alone, which misses every brain
+> copied by a conquest. In the median of the 82 worlds read on the brains'
+> own tree, a brain has 2,700 copies behind it; the effective population is
+> about 100; a child acts almost as its parent (0.96), since only 4% of the
+> pairs the births-only tree played still held parent and child brains; and
+> the line of descent moves a little less, 0.07 above the noise against 0.08
+> on the births-only line of the same worlds
+> ([The brains' own family tree](#the-brains-own-family-tree)).
+
+Three pulls show across the worlds on the births-only tree
+([rank correlations](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") over the 72):
 - **heredity against novelty (−0.37):** where children are most like their
   parents, the line of descent changes least. Keeping what works and finding
   something new pull against each other;
 - **health against heredity (−0.30):** the healthiest worlds pass on less;
 - **health with novelty (+0.23):** the healthiest worlds change a little more.
 
-Each world's rank in every category, 1 the best:
+Each candidate world's readings on the births-only tree, with its rank in each
+in brackets, 1 the best. The table is sorted by the mean of those ranks; that
+mean is superseded by [the evolution rank](#the-evolution-rank), and so is the
+mean over six of them that research/screen/funnel.py keeps as
+`evolution_rank`.
 
 <!-- table oeecandidates/ranks -->
-| world | round | size | generations | heredity | population | novelty | contemporaries | fertility | health | riches | mean rank | channels open |
+| world | round | agents | generations | heredity | effective population | novelty | contemporaries | fertility passed on | health | tokens an agent | mean rank | channels open |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| [s3026](run:B1-30000-d6955f-s3026) | round 3 | 58 | 1 | 47 | 14 | 1 | 2 | 42 | 23 | 15 | 22.6 | messages, handover |
-| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | 28 | 43 | 55 | 41 | 2 | 10 | 4 | 8 | 45 | 26.2 | messages, gifts |
-| [s4008 s](run:B1-30000-645972-s4008) | round 3, strongest first | 23 | 41 | 52 | 37 | 8 | 8 | 6 | 17 | 50 | 26.9 | messages, gifts |
-| [s4003 s](run:B1-30000-fffc7d-s4003) | round 3, strongest first | 10 | 19 | 39 | 53 | 5 | 17 | 19 | 18 | 63 | 27.0 | messages, gifts, handover, upkeep |
-| [s4003 w](run:B1-30000-9efb1d-s4003) | round 3, weakest first | 8 | 14 | 22 | 51 | 18 | 23 | 16 | 28 | 65 | 27.2 | messages, gifts, handover, upkeep |
-| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | 26 | 37 | 57 | 58 | 4 | 6 | 12 | 5 | 47 | 28.0 | messages, gifts, mates pay, partner search, mixing |
-| [s3021](run:B1-30000-4aff7d-s3021) | round 3 | 61 | 23 | 46 | 26 | 11 | 16 | 30 | 27 | 12 | 28.0 | messages, handover, partner search, upkeep |
-| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | 5 | 15 | 66 | 12 | 10 | 20 | 58 | 1 | 68 | 28.3 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
-| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | 68 | 12 | 58 | 9 | 16 | 18 | 51 | 25 | 5 | 29.1 | messages, gifts, handover, partner search, upkeep, revolutions |
-| [s3024](run:B1-30000-f05874-s3024) | round 3 | 31 | 33 | 34 | 38 | 23 | 11 | 44 | 7 | 42 | 29.2 | messages, gifts, handover, upkeep, revolutions |
-| [s3062](run:B1-30000-def151-s3062) | round 3 | 51 | 26 | 61 | 45 | 3 | 5 | 26 | 24 | 22 | 29.2 | messages, handover, partner search, upkeep, revolutions |
-| [s3082](run:B1-30000-1141ea-s3082) | round 3 | 48 | 5 | 3 | 27 | 29 | 44 | 38 | 47 | 25 | 29.6 | messages, upkeep |
-| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | 59 | 30 | 13 | 28 | 15 | 35 | 64 | 10 | 14 | 29.8 | messages, gifts, partner search, revolutions |
-| [s4002 s](run:B1-30000-192733-s4002) | round 3, strongest first | 21 | 28 | 56 | 62 | 7 | 4 | 10 | 32 | 52 | 30.2 | messages, gifts, mates pay, partner search, mixing |
-| [s3028](run:B1-30000-2eef58-s3028) | round 3 | 20 | 3 | 2 | 20 | 45 | 72 | 17 | 46 | 53 | 30.9 | messages, gifts, handover, partner search, upkeep, revolutions |
-| [s3095](run:B1-30000-3e5856-s3095) | round 3 | 46 | 7 | 53 | 5 | 9 | 3 | 70 | 60 | 27 | 31.1 | messages, handover, partner search, upkeep |
-| [s3046](run:B1-30000-27bd64-s3046) | round 3 | 55 | 8 | 54 | 19 | 26 | 27 | 36 | 41 | 18 | 31.6 | messages, gifts, partner search, upkeep |
-| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | 71 | 9 | 43 | 68 | 12 | 12 | 15 | 58 | 2 | 32.2 | messages, handover, mates pay, partner search, mixing |
-| [s3055](run:B1-30000-cca771-s3055) | round 3 | 53 | 25 | 38 | 65 | 21 | 14 | 21 | 34 | 20 | 32.3 | messages, handover, revolutions |
-| [s3030](run:B1-30000-90fc91-s3030) | round 3 | 1 | 40 | 6 | 1 | 57 | 25 | 35 | 56 | 72 | 32.6 | messages, upkeep |
-| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | 14 | 31 | 24 | 25 | 49 | 45 | 46 | 2 | 59 | 32.8 | messages, gifts, handover, upkeep, revolutions |
-| [s3033](run:B1-30000-631e49-s3033) | round 3 | 63 | 21 | 65 | 7 | 6 | 7 | 68 | 54 | 10 | 33.4 | handover, partner search, upkeep, revolutions |
-| [s4004 s](run:B1-30000-2bac4d-s4004) | round 3, strongest first | 69 | 6 | 48 | 63 | 19 | 15 | 13 | 66 | 4 | 33.7 | messages, handover, mates pay, partner search, mixing |
-| [s3094](run:B1-30000-4ac946-s3094) | round 3 | 4 | 2 | 68 | 2 | 40 | 13 | 41 | 64 | 69 | 33.7 | messages, gifts, partner search, upkeep |
-| [s3006](run:B1-30000-023c0a-s3006) | round 3 | 15 | 44 | 27 | 18 | 58 | 29 | 50 | 9 | 58 | 34.2 | messages, gifts, handover, partner search, upkeep |
-| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | 64 | 27 | 44 | 29 | 52 | 40 | 34 | 12 | 9 | 34.6 | messages, gifts, upkeep |
-| [s3091](run:B1-30000-42d88d-s3091) | round 3 | 56 | 17 | 51 | 70 | 14 | 22 | 14 | 55 | 17 | 35.1 | messages, gifts, handover, partner search, mixing |
-| [s3087](run:B1-30000-363694-s3087) | round 3 | 9 | 16 | 19 | 40 | 65 | 70 | 20 | 14 | 64 | 35.2 | messages, handover, partner search, upkeep |
-| [s3016](run:B1-30000-b23381-s3016) | round 3 | 67 | 22 | 49 | 24 | 56 | 1 | 60 | 33 | 6 | 35.3 | messages, partner search, upkeep |
-| [s4005 s](run:B1-30000-6f6c09-s4005) | round 3, strongest first | 39 | 45 | 45 | 47 | 13 | 9 | 39 | 50 | 34 | 35.7 | messages, gifts, partner search |
-| [s3018](run:B1-30000-af1e28-s3018) | round 3 | 50 | 54 | 64 | 11 | 28 | 33 | 55 | 3 | 23 | 35.7 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s3032](run:B1-30000-22865f-s3032) | round 3 | 13 | 49 | 50 | 16 | 35 | 26 | 37 | 36 | 60 | 35.8 | messages, gifts, handover, partner search |
-| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | 25 | 59 | 71 | 3 | 25 | 28 | 48 | 15 | 48 | 35.8 | messages, handover, partner search |
-| [s3007](run:B1-30000-8119cd-s3007) | round 3 | 43 | 4 | 18 | 21 | 66 | 56 | 29 | 61 | 30 | 36.4 | messages, gifts, handover, mates pay, upkeep, mixing |
-| [s3057](run:B1-30000-38aee9-s3057) | round 3 | 30 | 46 | 67 | 43 | 47 | 21 | 27 | 6 | 43 | 36.7 | messages, partner search, mixing |
-| [s4007 w](run:B1-30000-04d3eb-s4007) | round 3, weakest first | 17 | 36 | 20 | 56 | 36 | 37 | 3 | 71 | 56 | 36.9 | messages, handover, partner search |
-| [s3058](run:B1-30000-4108dd-s3058) | round 3 | 70 | 64 | 32 | 49 | 17 | 30 | 43 | 26 | 3 | 37.1 | messages, partner search, revolutions |
-| [s3076](run:B1-30000-66c764-s3076) | round 3 | 32 | 13 | 8 | 55 | 51 | 63 | 2 | 70 | 41 | 37.2 | messages, gifts, handover, mixing |
-| [s3014](run:B1-30000-7d129f-s3014) | round 3 | 6 | 11 | 21 | 35 | 64 | 66 | 1 | 65 | 67 | 37.3 | messages, handover, partner search, upkeep |
-| [s3080](run:B1-30000-625bc7-s3080) | round 3 | 60 | 66 | 42 | 46 | 22 | 24 | 59 | 4 | 13 | 37.3 | messages, gifts, handover, partner search, revolutions |
-| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | 37 | 29 | 23 | 22 | 44 | 53 | 72 | 22 | 36 | 37.6 | messages, handover, mixing |
-| [s3047](run:B1-30000-10c9f1-s3047) | round 3 | 41 | 42 | 15 | 57 | 43 | 64 | 23 | 21 | 32 | 37.6 | messages, gifts, handover, partner search |
-| [s3049](run:B1-30000-c51eb8-s3049) | round 3 | 27 | 58 | 63 | 17 | 20 | 31 | 45 | 31 | 46 | 37.6 | messages, gifts, handover, partner search |
-| [s4007 s](run:B1-30000-a8a2d2-s4007) | round 3, strongest first | 16 | 34 | 37 | 61 | 24 | 34 | 7 | 69 | 57 | 37.7 | messages, handover, partner search |
-| [s3054](run:B1-30000-d9254e-s3054) | round 3 | 45 | 60 | 12 | 23 | 55 | 52 | 53 | 13 | 28 | 37.9 | messages, partner search, upkeep |
-| [s3061](run:B1-30000-00e3c8-s3061) | round 3 | 47 | 20 | 62 | 60 | 54 | 19 | 18 | 35 | 26 | 37.9 | gifts, mates pay, partner search, revolutions, mixing |
-| [s3078](run:B1-30000-dd27b6-s3078) | round 3 | 62 | 48 | 10 | 69 | 33 | 67 | 5 | 40 | 11 | 38.3 | messages, gifts, partner search |
-| [s3001](run:B1-30000-68cda7-s3001) | round 3 | 2 | 18 | 4 | 33 | 63 | 71 | 22 | 62 | 71 | 38.4 | messages, handover, mates pay, upkeep, revolutions, mixing |
-| [s3089](run:B1-30000-77ad6a-s3089) | round 3 | 22 | 35 | 1 | 13 | 34 | 62 | 67 | 72 | 51 | 39.7 | messages, partner search, upkeep |
-| [s3050](run:B1-30000-ebe08c-s3050) | round 3 | 44 | 32 | 31 | 64 | 41 | 42 | 25 | 53 | 29 | 40.1 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s3092](run:B1-30000-7fc03f-s3092) | round 3 | 18 | 57 | 60 | 15 | 42 | 32 | 54 | 29 | 55 | 40.2 | messages, partner search, upkeep |
-| [s3059](run:B1-30000-2ec87a-s3059) | round 3 | 36 | 55 | 29 | 39 | 32 | 36 | 57 | 42 | 37 | 40.3 | messages, gifts, handover, mixing |
-| [s3071](run:B1-30000-605c0d-s3071) | round 3 | 19 | 67 | 30 | 36 | 27 | 48 | 33 | 49 | 54 | 40.3 | messages, partner search |
-| [s3052](run:B1-30000-0d058a-s3052) | round 3 | 12 | 51 | 35 | 34 | 37 | 49 | 24 | 63 | 61 | 40.7 | messages, gifts, handover, partner search |
-| [s3070](run:B1-30000-a4d3a0-s3070) | round 3 | 11 | 39 | 7 | 42 | 48 | 69 | 47 | 44 | 62 | 41.0 | messages, gifts, partner search, upkeep |
-| [s3063](run:B1-30000-924e70-s3063) | round 3 | 3 | 24 | 28 | 59 | 60 | 59 | 8 | 59 | 70 | 41.1 | messages, handover, partner search, upkeep |
-| [s3022](run:B1-30000-298337-s3022) | round 3 | 24 | 63 | 59 | 52 | 46 | 39 | 28 | 11 | 49 | 41.2 | messages, partner search |
-| [s3040](run:B1-30000-36d076-s3040) | round 3 | 38 | 38 | 40 | 48 | 31 | 41 | 32 | 68 | 35 | 41.2 | messages, gifts, partner search, upkeep |
-| [s3085](run:B1-30000-801b34-s3085) | round 3 | 35 | 10 | 33 | 71 | 69 | 38 | 11 | 67 | 38 | 41.3 | messages, handover, partner search, upkeep |
-| [s3051](run:B1-30000-b5a76a-s3051) | round 3 | 72 | 65 | 36 | 72 | 30 | 51 | 40 | 16 | 1 | 42.6 | messages, gifts, partner search, upkeep, revolutions |
-| [s3083](run:B1-30000-0d7e0c-s3083) | round 3 | 34 | 50 | 11 | 44 | 38 | 47 | 69 | 51 | 39 | 42.6 | messages, gifts, handover, mates pay, upkeep, mixing |
-| [s3004](run:B1-30000-7d5208-s3004) | round 3 | 65 | 71 | 25 | 31 | 39 | 68 | 61 | 20 | 8 | 43.1 | messages, gifts |
-| [s3056](run:B1-30000-43985b-s3056) | round 3 | 40 | 52 | 16 | 32 | 62 | 60 | 56 | 37 | 33 | 43.1 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s3013](run:B1-30000-7f7cd5-s3013) | round 3 | 7 | 47 | 17 | 67 | 71 | 61 | 9 | 48 | 66 | 43.7 | messages, partner search, upkeep |
-| [s3093](run:B1-30000-26a341-s3093) | round 3 | 42 | 62 | 14 | 50 | 59 | 54 | 52 | 30 | 31 | 43.8 | messages, gifts, handover, partner search |
-| [s3012](run:B1-30000-02fa53-s3012) | round 3 | 54 | 53 | 9 | 54 | 50 | 46 | 63 | 52 | 19 | 44.4 | messages, gifts, partner search, upkeep, mixing |
-| [s3019](run:B1-30000-b1209a-s3019) | round 3 | 49 | 68 | 69 | 4 | 53 | 43 | 71 | 19 | 24 | 44.4 | messages, handover, partner search, upkeep |
-| [s3041](run:B1-30000-965f1e-s3041) | round 3 | 33 | 61 | 5 | 30 | 68 | 57 | 65 | 43 | 40 | 44.7 | messages, gifts, mates pay, partner search, mixing |
-| [s3043](run:B1-30000-02ed17-s3043) | round 3 | 52 | 69 | 41 | 8 | 70 | 65 | 49 | 39 | 21 | 46.0 | messages, gifts, handover, partner search, upkeep |
-| [s3098](run:B1-30000-794ae8-s3098) | round 3 | 29 | 56 | 26 | 66 | 61 | 55 | 31 | 57 | 44 | 47.2 | messages, gifts, handover, partner search, revolutions |
-| [s3065](run:B1-30000-ba3afe-s3065) | round 3 | 57 | 70 | 72 | 6 | 67 | 50 | 66 | 38 | 16 | 49.1 | messages, handover, partner search, upkeep, mixing |
-| [s3090](run:B1-30000-05ba40-s3090) | round 3 | 66 | 72 | 70 | 10 | 72 | 58 | 62 | 45 | 7 | 51.3 | messages, partner search, upkeep, mixing |
+| [s3026](run:B1-30000-d6955f-s3026) | round 3 | 2,068 (58) | 2,159 (1) | 0.30 (47) | 78 (14) | 0.26 (1) | 0.31 (2) | 0.12 (42) | 0.48 (23) | 14.5 (15) | 22.6 | messages, handover |
+| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | 5,120 (28) | 662 (43) | 0.23 (55) | 12 (41) | 0.23 (2) | 0.26 (10) | 0.42 (4) | 0.53 (8) | 5.9 (45) | 26.2 | messages, gifts |
+| [s4008 s](run:B1-30000-645972-s4008) | round 3, strongest first | 5,402 (23) | 691 (41) | 0.25 (52) | 14 (37) | 0.17 (8) | 0.27 (8) | 0.40 (6) | 0.50 (17) | 5.6 (50) | 26.9 | messages, gifts |
+| [s4003 s](run:B1-30000-fffc7d-s4003) | round 3, strongest first | 8,805 (10) | 1,131 (19) | 0.36 (39) | 9 (53) | 0.19 (5) | 0.23 (17) | 0.33 (19) | 0.50 (18) | 3.4 (63) | 27.0 | messages, gifts, handover, upkeep |
+| [s4003 w](run:B1-30000-9efb1d-s4003) | round 3, weakest first | 10,264 (8) | 1,189 (14) | 0.52 (22) | 9 (51) | 0.13 (18) | 0.19 (23) | 0.34 (16) | 0.47 (28) | 2.9 (65) | 27.2 | messages, gifts, handover, upkeep |
+| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | 5,278 (26) | 822 (37) | 0.22 (57) | 8 (58) | 0.22 (4) | 0.28 (6) | 0.37 (12) | 0.54 (5) | 5.7 (47) | 28.0 | messages, gifts, mates pay, partner search, mixing |
+| [s3021](run:B1-30000-4aff7d-s3021) | round 3 | 1,715 (61) | 1,064 (23) | 0.32 (46) | 27 (26) | 0.14 (11) | 0.23 (16) | 0.22 (30) | 0.47 (27) | 17.5 (12) | 28.0 | messages, handover, partner search, upkeep |
+| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | 11,125 (5) | 1,180 (15) | 0.14 (66) | 247 (12) | 0.15 (10) | 0.21 (20) | 0.04 (58) | 0.61 (1) | 2.7 (68) | 28.3 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
+| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | 1,411 (68) | 1,237 (12) | 0.22 (58) | 490 (9) | 0.14 (16) | 0.22 (18) | 0.08 (51) | 0.48 (25) | 21.3 (5) | 29.1 | messages, gifts, handover, partner search, upkeep, revolutions |
+| [s3024](run:B1-30000-f05874-s3024) | round 3 | 4,614 (31) | 878 (33) | 0.44 (34) | 12 (38) | 0.11 (23) | 0.26 (11) | 0.12 (44) | 0.54 (7) | 6.5 (42) | 29.2 | messages, gifts, handover, upkeep, revolutions |
+| [s3062](run:B1-30000-def151-s3062) | round 3 | 2,569 (51) | 993 (26) | 0.19 (61) | 11 (45) | 0.22 (3) | 0.28 (5) | 0.27 (26) | 0.48 (24) | 11.7 (22) | 29.2 | messages, handover, partner search, upkeep, revolutions |
+| [s3082](run:B1-30000-1141ea-s3082) | round 3 | 3,207 (48) | 1,411 (5) | 0.84 (3) | 26 (27) | 0.09 (29) | 0.12 (44) | 0.14 (38) | 0.38 (47) | 9.4 (25) | 29.6 | messages, upkeep |
+| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | 2,063 (59) | 947 (30) | 0.62 (13) | 24 (28) | 0.14 (15) | 0.15 (35) | 0.01 (64) | 0.53 (10) | 14.5 (14) | 29.8 | messages, gifts, partner search, revolutions |
+| [s4002 s](run:B1-30000-192733-s4002) | round 3, strongest first | 5,705 (21) | 953 (28) | 0.22 (56) | 7 (62) | 0.17 (7) | 0.29 (4) | 0.39 (10) | 0.44 (32) | 5.3 (52) | 30.2 | messages, gifts, mates pay, partner search, mixing |
+| [s3028](run:B1-30000-2eef58-s3028) | round 3 | 5,736 (20) | 1,437 (3) | 0.84 (2) | 37 (20) | 0.07 (45) | 0.05 (72) | 0.33 (17) | 0.38 (46) | 5.2 (53) | 30.9 | messages, gifts, handover, partner search, upkeep, revolutions |
+| [s3095](run:B1-30000-3e5856-s3095) | round 3 | 3,265 (46) | 1,338 (7) | 0.25 (53) | 1,219 (5) | 0.15 (9) | 0.29 (3) | -0.02 (70) | 0.34 (60) | 9.2 (27) | 31.1 | messages, handover, partner search, upkeep |
+| [s3046](run:B1-30000-27bd64-s3046) | round 3 | 2,418 (55) | 1,321 (8) | 0.23 (54) | 51 (19) | 0.10 (26) | 0.18 (27) | 0.18 (36) | 0.40 (41) | 12.4 (18) | 31.6 | messages, gifts, partner search, upkeep |
+| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | 1,186 (71) | 1,309 (9) | 0.34 (43) | 5 (68) | 0.14 (12) | 0.25 (12) | 0.35 (15) | 0.35 (58) | 25.3 (2) | 32.2 | messages, handover, mates pay, partner search, mixing |
+| [s3055](run:B1-30000-cca771-s3055) | round 3 | 2,507 (53) | 1,033 (25) | 0.36 (38) | 6 (65) | 0.11 (21) | 0.24 (14) | 0.31 (21) | 0.42 (34) | 12.0 (20) | 32.3 | messages, handover, revolutions |
+| [s3030](run:B1-30000-90fc91-s3030) | round 3 | 19,951 (1) | 761 (40) | 0.68 (6) | 12,248 (1) | 0.05 (57) | 0.18 (25) | 0.18 (35) | 0.35 (56) | 1.5 (72) | 32.6 | messages, upkeep |
+| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | 7,009 (14) | 940 (31) | 0.51 (24) | 30 (25) | 0.07 (49) | 0.12 (45) | 0.12 (46) | 0.59 (2) | 4.3 (59) | 32.8 | messages, gifts, handover, upkeep, revolutions |
+| [s3033](run:B1-30000-631e49-s3033) | round 3 | 1,639 (63) | 1,083 (21) | 0.15 (65) | 988 (7) | 0.19 (6) | 0.27 (7) | -0.00 (68) | 0.36 (54) | 18.3 (10) | 33.4 | handover, partner search, upkeep, revolutions |
+| [s4004 s](run:B1-30000-2bac4d-s4004) | round 3, strongest first | 1,349 (69) | 1,392 (6) | 0.29 (48) | 6 (63) | 0.12 (19) | 0.23 (15) | 0.37 (13) | 0.30 (66) | 22.2 (4) | 33.7 | messages, handover, mates pay, partner search, mixing |
+| [s3094](run:B1-30000-4ac946-s3094) | round 3 | 11,256 (4) | 1,509 (2) | 0.13 (68) | 11,316 (2) | 0.08 (40) | 0.24 (13) | 0.14 (41) | 0.32 (64) | 2.7 (69) | 33.7 | messages, gifts, partner search, upkeep |
+| [s3006](run:B1-30000-023c0a-s3006) | round 3 | 6,774 (15) | 652 (44) | 0.48 (27) | 59 (18) | 0.05 (58) | 0.17 (29) | 0.09 (50) | 0.53 (9) | 4.4 (58) | 34.2 | messages, gifts, handover, partner search, upkeep |
+| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | 1,612 (64) | 955 (27) | 0.34 (44) | 22 (29) | 0.06 (52) | 0.14 (40) | 0.19 (34) | 0.51 (12) | 18.6 (9) | 34.6 | messages, gifts, upkeep |
+| [s3091](run:B1-30000-42d88d-s3091) | round 3 | 2,361 (56) | 1,173 (17) | 0.25 (51) | 5 (70) | 0.14 (14) | 0.20 (22) | 0.36 (14) | 0.36 (55) | 12.7 (17) | 35.1 | messages, gifts, handover, partner search, mixing |
+| [s3087](run:B1-30000-363694-s3087) | round 3 | 10,034 (9) | 1,179 (16) | 0.54 (19) | 12 (40) | 0.04 (65) | 0.06 (70) | 0.31 (20) | 0.51 (14) | 3.0 (64) | 35.2 | messages, handover, partner search, upkeep |
+| [s3016](run:B1-30000-b23381-s3016) | round 3 | 1,486 (67) | 1,071 (22) | 0.28 (49) | 31 (24) | 0.05 (56) | 0.34 (1) | 0.04 (60) | 0.43 (33) | 20.2 (6) | 35.3 | messages, partner search, upkeep |
+| [s4005 s](run:B1-30000-6f6c09-s4005) | round 3, strongest first | 3,866 (39) | 646 (45) | 0.33 (45) | 10 (47) | 0.14 (13) | 0.26 (9) | 0.14 (39) | 0.37 (50) | 7.8 (34) | 35.7 | messages, gifts, partner search |
+| [s3018](run:B1-30000-af1e28-s3018) | round 3 | 2,861 (50) | 313 (54) | 0.16 (64) | 263 (11) | 0.10 (28) | 0.16 (33) | 0.06 (55) | 0.56 (3) | 10.5 (23) | 35.7 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3032](run:B1-30000-22865f-s3032) | round 3 | 7,263 (13) | 401 (49) | 0.28 (50) | 67 (16) | 0.08 (35) | 0.18 (26) | 0.18 (37) | 0.41 (36) | 4.1 (60) | 35.8 | messages, gifts, handover, partner search |
+| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | 5,290 (25) | 232 (59) | 0.13 (71) | 2,072 (3) | 0.10 (25) | 0.18 (28) | 0.09 (48) | 0.51 (15) | 5.7 (48) | 35.8 | messages, handover, partner search |
+| [s3007](run:B1-30000-8119cd-s3007) | round 3 | 3,382 (43) | 1,434 (4) | 0.57 (18) | 37 (21) | 0.04 (66) | 0.09 (56) | 0.23 (29) | 0.34 (61) | 8.9 (30) | 36.4 | messages, gifts, handover, mates pay, upkeep, mixing |
+| [s3057](run:B1-30000-38aee9-s3057) | round 3 | 4,802 (30) | 597 (46) | 0.14 (67) | 11 (43) | 0.07 (47) | 0.20 (21) | 0.26 (27) | 0.54 (6) | 6.2 (43) | 36.7 | messages, partner search, mixing |
+| [s4007 w](run:B1-30000-04d3eb-s4007) | round 3, weakest first | 6,489 (17) | 828 (36) | 0.53 (20) | 9 (56) | 0.08 (36) | 0.14 (37) | 0.43 (3) | 0.16 (71) | 4.6 (56) | 36.9 | messages, handover, partner search |
+| [s3058](run:B1-30000-4108dd-s3058) | round 3 | 1,257 (70) | 142 (64) | 0.46 (32) | 10 (49) | 0.13 (17) | 0.17 (30) | 0.12 (43) | 0.47 (26) | 23.9 (3) | 37.1 | messages, partner search, revolutions |
+| [s3076](run:B1-30000-66c764-s3076) | round 3 | 4,525 (32) | 1,198 (13) | 0.66 (8) | 9 (55) | 0.06 (51) | 0.08 (63) | 0.44 (2) | 0.19 (70) | 6.6 (41) | 37.2 | messages, gifts, handover, mixing |
+| [s3014](run:B1-30000-7d129f-s3014) | round 3 | 10,836 (6) | 1,242 (11) | 0.53 (21) | 14 (35) | 0.04 (64) | 0.07 (66) | 0.45 (1) | 0.31 (65) | 2.8 (67) | 37.3 | messages, handover, partner search, upkeep |
+| [s3080](run:B1-30000-625bc7-s3080) | round 3 | 1,985 (60) | 121 (66) | 0.34 (42) | 11 (46) | 0.11 (22) | 0.18 (24) | 0.04 (59) | 0.55 (4) | 15.1 (13) | 37.3 | messages, gifts, handover, partner search, revolutions |
+| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | 4,022 (37) | 950 (29) | 0.51 (23) | 35 (22) | 0.08 (44) | 0.10 (53) | -0.05 (72) | 0.48 (22) | 7.5 (36) | 37.6 | messages, handover, mixing |
+| [s3047](run:B1-30000-10c9f1-s3047) | round 3 | 3,607 (41) | 662 (42) | 0.61 (15) | 9 (57) | 0.08 (43) | 0.08 (64) | 0.29 (23) | 0.48 (21) | 8.3 (32) | 37.6 | messages, gifts, handover, partner search |
+| [s3049](run:B1-30000-c51eb8-s3049) | round 3 | 5,163 (27) | 236 (58) | 0.17 (63) | 60 (17) | 0.11 (20) | 0.17 (31) | 0.12 (45) | 0.45 (31) | 5.8 (46) | 37.6 | messages, gifts, handover, partner search |
+| [s4007 s](run:B1-30000-a8a2d2-s4007) | round 3, strongest first | 6,653 (16) | 855 (34) | 0.37 (37) | 7 (61) | 0.11 (24) | 0.15 (34) | 0.40 (7) | 0.20 (69) | 4.5 (57) | 37.7 | messages, handover, partner search |
+| [s3054](run:B1-30000-d9254e-s3054) | round 3 | 3,309 (45) | 224 (60) | 0.63 (12) | 34 (23) | 0.05 (55) | 0.10 (52) | 0.07 (53) | 0.51 (13) | 9.1 (28) | 37.9 | messages, partner search, upkeep |
+| [s3061](run:B1-30000-00e3c8-s3061) | round 3 | 3,236 (47) | 1,092 (20) | 0.17 (62) | 8 (60) | 0.05 (54) | 0.22 (19) | 0.33 (18) | 0.41 (35) | 9.3 (26) | 37.9 | gifts, mates pay, partner search, revolutions, mixing |
+| [s3078](run:B1-30000-dd27b6-s3078) | round 3 | 1,672 (62) | 422 (48) | 0.65 (10) | 5 (69) | 0.09 (33) | 0.07 (67) | 0.40 (5) | 0.40 (40) | 17.9 (11) | 38.3 | messages, gifts, partner search |
+| [s3001](run:B1-30000-68cda7-s3001) | round 3 | 17,266 (2) | 1,138 (18) | 0.83 (4) | 15 (33) | 0.04 (63) | 0.05 (71) | 0.29 (22) | 0.33 (62) | 1.7 (71) | 38.4 | messages, handover, mates pay, upkeep, revolutions, mixing |
+| [s3089](run:B1-30000-77ad6a-s3089) | round 3 | 5,521 (22) | 844 (35) | 0.86 (1) | 133 (13) | 0.09 (34) | 0.09 (62) | -0.00 (67) | 0.13 (72) | 5.4 (51) | 39.7 | messages, partner search, upkeep |
+| [s3050](run:B1-30000-ebe08c-s3050) | round 3 | 3,312 (44) | 926 (32) | 0.47 (31) | 6 (64) | 0.08 (41) | 0.13 (42) | 0.28 (25) | 0.36 (53) | 9.1 (29) | 40.1 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3092](run:B1-30000-7fc03f-s3092) | round 3 | 6,165 (18) | 253 (57) | 0.20 (60) | 74 (15) | 0.08 (42) | 0.17 (32) | 0.07 (54) | 0.46 (29) | 4.9 (55) | 40.2 | messages, partner search, upkeep |
+| [s3059](run:B1-30000-2ec87a-s3059) | round 3 | 4,136 (36) | 310 (55) | 0.47 (29) | 12 (39) | 0.09 (32) | 0.15 (36) | 0.05 (57) | 0.40 (42) | 7.3 (37) | 40.3 | messages, gifts, handover, mixing |
+| [s3071](run:B1-30000-605c0d-s3071) | round 3 | 6,070 (19) | 109 (67) | 0.47 (30) | 14 (36) | 0.10 (27) | 0.11 (48) | 0.19 (33) | 0.38 (49) | 4.9 (54) | 40.3 | messages, partner search |
+| [s3052](run:B1-30000-0d058a-s3052) | round 3 | 7,368 (12) | 387 (51) | 0.42 (35) | 15 (34) | 0.08 (37) | 0.11 (49) | 0.28 (24) | 0.33 (63) | 4.1 (61) | 40.7 | messages, gifts, handover, partner search |
+| [s3070](run:B1-30000-a4d3a0-s3070) | round 3 | 7,767 (11) | 774 (39) | 0.67 (7) | 12 (42) | 0.07 (48) | 0.06 (69) | 0.11 (47) | 0.39 (44) | 3.9 (62) | 41.0 | messages, gifts, partner search, upkeep |
+| [s3063](run:B1-30000-924e70-s3063) | round 3 | 14,473 (3) | 1,053 (24) | 0.47 (28) | 8 (59) | 0.05 (60) | 0.09 (59) | 0.39 (8) | 0.34 (59) | 2.1 (70) | 41.1 | messages, handover, partner search, upkeep |
+| [s3022](run:B1-30000-298337-s3022) | round 3 | 5,394 (24) | 199 (63) | 0.22 (59) | 9 (52) | 0.07 (46) | 0.14 (39) | 0.25 (28) | 0.53 (11) | 5.6 (49) | 41.2 | messages, partner search |
+| [s3040](run:B1-30000-36d076-s3040) | round 3 | 3,904 (38) | 805 (38) | 0.35 (40) | 10 (48) | 0.09 (31) | 0.14 (41) | 0.21 (32) | 0.24 (68) | 7.7 (35) | 41.2 | messages, gifts, partner search, upkeep |
+| [s3085](run:B1-30000-801b34-s3085) | round 3 | 4,156 (35) | 1,303 (10) | 0.44 (33) | 5 (71) | 0.02 (69) | 0.14 (38) | 0.39 (11) | 0.28 (67) | 7.2 (38) | 41.3 | messages, handover, partner search, upkeep |
+| [s3051](run:B1-30000-b5a76a-s3051) | round 3 | 1,091 (72) | 141 (65) | 0.41 (36) | 4 (72) | 0.09 (30) | 0.11 (51) | 0.14 (40) | 0.50 (16) | 27.5 (1) | 42.6 | messages, gifts, partner search, upkeep, revolutions |
+| [s3083](run:B1-30000-0d7e0c-s3083) | round 3 | 4,159 (34) | 389 (50) | 0.63 (11) | 11 (44) | 0.08 (38) | 0.11 (47) | -0.01 (69) | 0.37 (51) | 7.2 (39) | 42.6 | messages, gifts, handover, mates pay, upkeep, mixing |
+| [s3004](run:B1-30000-7d5208-s3004) | round 3 | 1,581 (65) | 23 (71) | 0.51 (25) | 18 (31) | 0.08 (39) | 0.07 (68) | 0.04 (61) | 0.49 (20) | 19.0 (8) | 43.1 | messages, gifts |
+| [s3056](run:B1-30000-43985b-s3056) | round 3 | 3,649 (40) | 361 (52) | 0.60 (16) | 16 (32) | 0.04 (62) | 0.09 (60) | 0.05 (56) | 0.40 (37) | 8.2 (33) | 43.1 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3013](run:B1-30000-7f7cd5-s3013) | round 3 | 10,511 (7) | 500 (47) | 0.58 (17) | 5 (67) | 0.02 (71) | 0.09 (61) | 0.39 (9) | 0.38 (48) | 2.9 (66) | 43.7 | messages, partner search, upkeep |
+| [s3093](run:B1-30000-26a341-s3093) | round 3 | 3,387 (42) | 207 (62) | 0.61 (14) | 9 (50) | 0.05 (59) | 0.10 (54) | 0.08 (52) | 0.46 (30) | 8.9 (31) | 43.8 | messages, gifts, handover, partner search |
+| [s3012](run:B1-30000-02fa53-s3012) | round 3 | 2,487 (54) | 327 (53) | 0.65 (9) | 9 (54) | 0.06 (50) | 0.12 (46) | 0.02 (63) | 0.36 (52) | 12.1 (19) | 44.4 | messages, gifts, partner search, upkeep, mixing |
+| [s3019](run:B1-30000-b1209a-s3019) | round 3 | 3,019 (49) | 101 (68) | 0.13 (69) | 1,526 (4) | 0.05 (53) | 0.13 (43) | -0.03 (71) | 0.49 (19) | 9.9 (24) | 44.4 | messages, handover, partner search, upkeep |
+| [s3041](run:B1-30000-965f1e-s3041) | round 3 | 4,464 (33) | 212 (61) | 0.74 (5) | 22 (30) | 0.03 (68) | 0.09 (57) | 0.00 (65) | 0.39 (43) | 6.7 (40) | 44.7 | messages, gifts, mates pay, partner search, mixing |
+| [s3043](run:B1-30000-02ed17-s3043) | round 3 | 2,520 (52) | 73 (69) | 0.35 (41) | 904 (8) | 0.02 (70) | 0.07 (65) | 0.09 (49) | 0.40 (39) | 11.9 (21) | 46.0 | messages, gifts, handover, partner search, upkeep |
+| [s3098](run:B1-30000-794ae8-s3098) | round 3 | 4,806 (29) | 256 (56) | 0.49 (26) | 6 (66) | 0.04 (61) | 0.10 (55) | 0.21 (31) | 0.35 (57) | 6.2 (44) | 47.2 | messages, gifts, handover, partner search, revolutions |
+| [s3065](run:B1-30000-ba3afe-s3065) | round 3 | 2,104 (57) | 54 (70) | 0.12 (72) | 1,147 (6) | 0.03 (67) | 0.11 (50) | -0.00 (66) | 0.40 (38) | 14.3 (16) | 49.1 | messages, handover, partner search, upkeep, mixing |
+| [s3090](run:B1-30000-05ba40-s3090) | round 3 | 1,521 (66) | 14 (72) | 0.13 (70) | 365 (10) | -0.00 (72) | 0.09 (58) | 0.03 (62) | 0.38 (45) | 19.7 (7) | 51.3 | messages, partner search, upkeep, mixing |
 <!-- /table -->
 
 <!-- figure oeecandidates/heredity_novelty -->
@@ -259,7 +298,7 @@ Each world's rank in every category, 1 the best:
 >
 > **Data.** From each world's dossier, `GraphOfLifeRuns/.pilots/screen/candidates/<run>.json` (research/screen/candidates.py: the family tree from every birth, heredity in two kept worlds, the line of descent played in every kept world), its families, `.pilots/screen/families/<run>.json` (research/screen/families.py), and its health (research/screen/health.json), gathered by `research/screen/funnel.py` into `research/screen/candidates.json`.
 >
-> 1. Read each candidate's heredity index (the mean of its kept worlds read) and late novelty from `candidates.json`.
+> 1. Read each candidate world's heredity index (the mean of its kept worlds read) and late novelty from `candidates.json`.
 >
 > **To make it again:** `python3 book_figures.py oeecandidates`.
 <!-- /figure -->
@@ -272,7 +311,7 @@ Each world's rank in every category, 1 the best:
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Like their parents, yet still changing?* above.
 >
-> 1. Read each candidate's generations and effective population from `candidates.json` (`numbers`).
+> 1. Read each candidate world's generations and effective population from `candidates.json` (`numbers`).
 >
 > **To make it again:** `python3 book_figures.py oeecandidates`.
 <!-- /figure -->
@@ -285,150 +324,410 @@ Each world's rank in every category, 1 the best:
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Like their parents, yet still changing?* above.
 >
-> 1. Read each candidate's `fertility` from `candidates.json` (families.py: correlation less the shuffled mean).
+> 1. Read each candidate world's `fertility` from `candidates.json` (families.py: correlation less the shuffled mean).
 >
 > **To make it again:** `python3 book_figures.py oeecandidates`.
 <!-- /figure -->
-
-The numbers behind the ranks:
-
-<!-- table oeecandidates/numbers -->
-| world | agents | generations | effective population | heredity | fertility passed on | novelty | contemporaries | health |
-|---|---|---|---|---|---|---|---|---|
-| [s3026](run:B1-30000-d6955f-s3026) | 2,068 | 2159 | 78 | 0.30 | 0.12 | 0.26 | 0.31 | 0.48 |
-| [s4008 w](run:B1-30000-1cfaa4-s4008) | 5,120 | 662 | 12 | 0.23 | 0.42 | 0.23 | 0.26 | 0.53 |
-| [s4008 s](run:B1-30000-645972-s4008) | 5,402 | 691 | 14 | 0.25 | 0.40 | 0.17 | 0.27 | 0.50 |
-| [s4003 s](run:B1-30000-fffc7d-s4003) | 8,805 | 1131 | 9 | 0.36 | 0.33 | 0.19 | 0.23 | 0.50 |
-| [s4003 w](run:B1-30000-9efb1d-s4003) | 10,264 | 1189 | 9 | 0.52 | 0.34 | 0.13 | 0.19 | 0.47 |
-| [s4002 w](run:B1-30000-5379e2-s4002) | 5,278 | 822 | 8 | 0.22 | 0.37 | 0.22 | 0.28 | 0.54 |
-| [s3021](run:B1-30000-4aff7d-s3021) | 1,715 | 1064 | 27 | 0.32 | 0.22 | 0.14 | 0.23 | 0.47 |
-| [s3042](run:B1-30000-b82ad0-s3042) | 11,125 | 1180 | 247 | 0.14 | 0.04 | 0.15 | 0.21 | 0.61 |
-| [s3045](run:B1-30000-f6d23f-s3045) | 1,411 | 1237 | 490 | 0.22 | 0.08 | 0.14 | 0.22 | 0.48 |
-| [s3024](run:B1-30000-f05874-s3024) | 4,614 | 878 | 12 | 0.44 | 0.12 | 0.11 | 0.26 | 0.54 |
-| [s3062](run:B1-30000-def151-s3062) | 2,569 | 993 | 11 | 0.19 | 0.27 | 0.22 | 0.28 | 0.48 |
-| [s3082](run:B1-30000-1141ea-s3082) | 3,207 | 1411 | 26 | 0.84 | 0.14 | 0.09 | 0.12 | 0.38 |
-| [s3008](run:B1-30000-e19f2d-s3008) | 2,063 | 947 | 24 | 0.62 | 0.01 | 0.14 | 0.15 | 0.53 |
-| [s4002 s](run:B1-30000-192733-s4002) | 5,705 | 953 | 7 | 0.22 | 0.39 | 0.17 | 0.29 | 0.44 |
-| [s3028](run:B1-30000-2eef58-s3028) | 5,736 | 1437 | 37 | 0.84 | 0.33 | 0.07 | 0.05 | 0.38 |
-| [s3095](run:B1-30000-3e5856-s3095) | 3,265 | 1338 | 1,219 | 0.25 | -0.02 | 0.15 | 0.29 | 0.34 |
-| [s3046](run:B1-30000-27bd64-s3046) | 2,418 | 1321 | 51 | 0.23 | 0.18 | 0.10 | 0.18 | 0.40 |
-| [s4004 w](run:B1-30000-17ac6e-s4004) | 1,186 | 1309 | 5 | 0.34 | 0.35 | 0.14 | 0.25 | 0.35 |
-| [s3055](run:B1-30000-cca771-s3055) | 2,507 | 1033 | 6 | 0.36 | 0.31 | 0.11 | 0.24 | 0.42 |
-| [s3030](run:B1-30000-90fc91-s3030) | 19,951 | 761 | 12,248 | 0.68 | 0.18 | 0.05 | 0.18 | 0.35 |
-| [s4006 s](run:B1-30000-8526cf-s4006) | 7,009 | 940 | 30 | 0.51 | 0.12 | 0.07 | 0.12 | 0.59 |
-| [s3033](run:B1-30000-631e49-s3033) | 1,639 | 1083 | 988 | 0.15 | -0.00 | 0.19 | 0.27 | 0.36 |
-| [s4004 s](run:B1-30000-2bac4d-s4004) | 1,349 | 1392 | 6 | 0.29 | 0.37 | 0.12 | 0.23 | 0.30 |
-| [s3094](run:B1-30000-4ac946-s3094) | 11,256 | 1509 | 11,316 | 0.13 | 0.14 | 0.08 | 0.24 | 0.32 |
-| [s3006](run:B1-30000-023c0a-s3006) | 6,774 | 652 | 59 | 0.48 | 0.09 | 0.05 | 0.17 | 0.53 |
-| [s3023](run:B1-30000-b0f6e3-s3023) | 1,612 | 955 | 22 | 0.34 | 0.19 | 0.06 | 0.14 | 0.51 |
-| [s3091](run:B1-30000-42d88d-s3091) | 2,361 | 1173 | 5 | 0.25 | 0.36 | 0.14 | 0.20 | 0.36 |
-| [s3087](run:B1-30000-363694-s3087) | 10,034 | 1179 | 12 | 0.54 | 0.31 | 0.04 | 0.06 | 0.51 |
-| [s3016](run:B1-30000-b23381-s3016) | 1,486 | 1071 | 31 | 0.28 | 0.04 | 0.05 | 0.34 | 0.43 |
-| [s4005 s](run:B1-30000-6f6c09-s4005) | 3,866 | 646 | 10 | 0.33 | 0.14 | 0.14 | 0.26 | 0.37 |
-| [s3018](run:B1-30000-af1e28-s3018) | 2,861 | 313 | 263 | 0.16 | 0.06 | 0.10 | 0.16 | 0.56 |
-| [s3032](run:B1-30000-22865f-s3032) | 7,263 | 401 | 67 | 0.28 | 0.18 | 0.08 | 0.18 | 0.41 |
-| [s3064](run:B1-30000-a6a7ec-s3064) | 5,290 | 232 | 2,072 | 0.13 | 0.09 | 0.10 | 0.18 | 0.51 |
-| [s3007](run:B1-30000-8119cd-s3007) | 3,382 | 1434 | 37 | 0.57 | 0.23 | 0.04 | 0.09 | 0.34 |
-| [s3057](run:B1-30000-38aee9-s3057) | 4,802 | 597 | 11 | 0.14 | 0.26 | 0.07 | 0.20 | 0.54 |
-| [s4007 w](run:B1-30000-04d3eb-s4007) | 6,489 | 828 | 9 | 0.53 | 0.43 | 0.08 | 0.14 | 0.16 |
-| [s3058](run:B1-30000-4108dd-s3058) | 1,257 | 142 | 10 | 0.46 | 0.12 | 0.13 | 0.17 | 0.47 |
-| [s3076](run:B1-30000-66c764-s3076) | 4,525 | 1198 | 9 | 0.66 | 0.44 | 0.06 | 0.08 | 0.19 |
-| [s3014](run:B1-30000-7d129f-s3014) | 10,836 | 1242 | 14 | 0.53 | 0.45 | 0.04 | 0.07 | 0.31 |
-| [s3080](run:B1-30000-625bc7-s3080) | 1,985 | 121 | 11 | 0.34 | 0.04 | 0.11 | 0.18 | 0.55 |
-| [s3005](run:B1-30000-c18a1f-s3005) | 4,022 | 950 | 35 | 0.51 | -0.05 | 0.08 | 0.10 | 0.48 |
-| [s3047](run:B1-30000-10c9f1-s3047) | 3,607 | 662 | 9 | 0.61 | 0.29 | 0.08 | 0.08 | 0.48 |
-| [s3049](run:B1-30000-c51eb8-s3049) | 5,163 | 236 | 60 | 0.17 | 0.12 | 0.11 | 0.17 | 0.45 |
-| [s4007 s](run:B1-30000-a8a2d2-s4007) | 6,653 | 855 | 7 | 0.37 | 0.40 | 0.11 | 0.15 | 0.20 |
-| [s3054](run:B1-30000-d9254e-s3054) | 3,309 | 224 | 34 | 0.63 | 0.07 | 0.05 | 0.10 | 0.51 |
-| [s3061](run:B1-30000-00e3c8-s3061) | 3,236 | 1092 | 8 | 0.17 | 0.33 | 0.05 | 0.22 | 0.41 |
-| [s3078](run:B1-30000-dd27b6-s3078) | 1,672 | 422 | 5 | 0.65 | 0.40 | 0.09 | 0.07 | 0.40 |
-| [s3001](run:B1-30000-68cda7-s3001) | 17,266 | 1138 | 15 | 0.83 | 0.29 | 0.04 | 0.05 | 0.33 |
-| [s3089](run:B1-30000-77ad6a-s3089) | 5,521 | 844 | 133 | 0.86 | -0.00 | 0.09 | 0.09 | 0.13 |
-| [s3050](run:B1-30000-ebe08c-s3050) | 3,312 | 926 | 6 | 0.47 | 0.28 | 0.08 | 0.13 | 0.36 |
-| [s3092](run:B1-30000-7fc03f-s3092) | 6,165 | 253 | 74 | 0.20 | 0.07 | 0.08 | 0.17 | 0.46 |
-| [s3059](run:B1-30000-2ec87a-s3059) | 4,136 | 310 | 12 | 0.47 | 0.05 | 0.09 | 0.15 | 0.40 |
-| [s3071](run:B1-30000-605c0d-s3071) | 6,070 | 109 | 14 | 0.47 | 0.19 | 0.10 | 0.11 | 0.38 |
-| [s3052](run:B1-30000-0d058a-s3052) | 7,368 | 387 | 15 | 0.42 | 0.28 | 0.08 | 0.11 | 0.33 |
-| [s3070](run:B1-30000-a4d3a0-s3070) | 7,767 | 774 | 12 | 0.67 | 0.11 | 0.07 | 0.06 | 0.39 |
-| [s3063](run:B1-30000-924e70-s3063) | 14,473 | 1053 | 8 | 0.47 | 0.39 | 0.05 | 0.09 | 0.34 |
-| [s3022](run:B1-30000-298337-s3022) | 5,394 | 199 | 9 | 0.22 | 0.25 | 0.07 | 0.14 | 0.53 |
-| [s3040](run:B1-30000-36d076-s3040) | 3,904 | 805 | 10 | 0.35 | 0.21 | 0.09 | 0.14 | 0.24 |
-| [s3085](run:B1-30000-801b34-s3085) | 4,156 | 1303 | 5 | 0.44 | 0.39 | 0.02 | 0.14 | 0.28 |
-| [s3051](run:B1-30000-b5a76a-s3051) | 1,091 | 141 | 4 | 0.41 | 0.14 | 0.09 | 0.11 | 0.50 |
-| [s3083](run:B1-30000-0d7e0c-s3083) | 4,159 | 389 | 11 | 0.63 | -0.01 | 0.08 | 0.11 | 0.37 |
-| [s3004](run:B1-30000-7d5208-s3004) | 1,581 | 23 | 18 | 0.51 | 0.04 | 0.08 | 0.07 | 0.49 |
-| [s3056](run:B1-30000-43985b-s3056) | 3,649 | 361 | 16 | 0.60 | 0.05 | 0.04 | 0.09 | 0.40 |
-| [s3013](run:B1-30000-7f7cd5-s3013) | 10,511 | 500 | 5 | 0.58 | 0.39 | 0.02 | 0.09 | 0.38 |
-| [s3093](run:B1-30000-26a341-s3093) | 3,387 | 207 | 9 | 0.61 | 0.08 | 0.05 | 0.10 | 0.46 |
-| [s3012](run:B1-30000-02fa53-s3012) | 2,487 | 327 | 9 | 0.65 | 0.02 | 0.06 | 0.12 | 0.36 |
-| [s3019](run:B1-30000-b1209a-s3019) | 3,019 | 101 | 1,526 | 0.13 | -0.03 | 0.05 | 0.13 | 0.49 |
-| [s3041](run:B1-30000-965f1e-s3041) | 4,464 | 212 | 22 | 0.74 | 0.00 | 0.03 | 0.09 | 0.39 |
-| [s3043](run:B1-30000-02ed17-s3043) | 2,520 | 73 | 904 | 0.35 | 0.09 | 0.02 | 0.07 | 0.40 |
-| [s3098](run:B1-30000-794ae8-s3098) | 4,806 | 256 | 6 | 0.49 | 0.21 | 0.04 | 0.10 | 0.35 |
-| [s3065](run:B1-30000-ba3afe-s3065) | 2,104 | 54 | 1,147 | 0.12 | -0.00 | 0.03 | 0.11 | 0.40 |
-| [s3090](run:B1-30000-05ba40-s3090) | 1,521 | 14 | 365 | 0.13 | 0.03 | -0.00 | 0.09 | 0.38 |
-<!-- /table -->
 
 ## The shortlist
 
 Health comes in three orders: the six criteria multiplied, added, or the
 worst of them ([Which worlds are healthy?](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together)).
 The author (9 November 2026): "the union of the best of these rankings are
-candidates." So the shortlist is every candidate, of the 72 the rules above
-leave, among the first 13 of any of the three orders. On 9 November 2026 that
-made 24 worlds, the ones the author chose to play again in Experiment 43. Since
-health also counts agents on loops per link (the same day, later), it makes 21:
-seeds 3004, 3016, 3026, 3030, 3051, 3094 and 3095 left it, and seeds 3005, 3006,
-3064 and 3093 joined it. Evolution does not choose them: the
-rules above rule out the worlds that cannot evolve, and the table gives each
-shortlisted world's evolution beside its health.
+candidates." So the **shortlist** is every candidate world among the first 13
+of any of the three orders. Its history, told here once:
+- On 9 November 2026 it held 24 worlds, and the author chose to play them
+  again with new seeds ([Experiment 43](#round-3s-best-worlds-played-again)).
+- Later that day health came to count agents on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") per link
+  ([Which worlds are healthy?](which-worlds-are-healthy.md)), and the shortlist
+  became 21 worlds: seeds 3004, 3016, 3026, 3030, 3051, 3094 and 3095 left it,
+  and seeds 3005, 3006, 3064 and 3093 joined it.
+- Experiment 43 took out three of its 24 whose links ran away (seeds 3094,
+  3030 and 3095) and added the four that joined: 25 [settings](settings.md "One number or switch of a run's rules, fixed before it starts.").
+
+Health chooses the shortlist, not evolution. The
+[evolution rank](#the-evolution-rank) orders the same worlds by evolution; the
+table gives each shortlisted world's place in it beside its health, and its
+births-only numbers.
 
 <!-- table oeecandidates/shortlist -->
-| world | round | among the first 13 by | health (product) | evolution's mean rank | heredity | novelty | generations | effective population | fertility passed on | channels open |
+| world | round | among the first 13 by | health (product) | evolution rank | heredity (births only) | novelty (births only) | generations (births only) | effective population (births only) | fertility passed on | channels open |
 |---|---|---|---|---|---|---|---|---|---|---|
-| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | product, sum, worst | 0.606 | 30.2 | 0.14 | 0.15 | 1,180 | 247 | 0.04 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
-| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | product, sum, worst | 0.587 | 36.7 | 0.51 | 0.07 | 940 | 30 | 0.12 | messages, gifts, handover, upkeep, revolutions |
-| [s3018](run:B1-30000-af1e28-s3018) | round 3 | product, sum, worst | 0.565 | 40.8 | 0.16 | 0.10 | 313 | 263 | 0.06 | messages, gifts, handover, mates pay, partner search, mixing |
-| [s3080](run:B1-30000-625bc7-s3080) | round 3 | product, sum, worst | 0.549 | 43.2 | 0.34 | 0.11 | 121 | 11 | 0.04 | messages, gifts, handover, partner search, revolutions |
-| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | product, sum | 0.544 | 29.0 | 0.22 | 0.22 | 822 | 8 | 0.37 | messages, gifts, mates pay, partner search, mixing |
-| [s3057](run:B1-30000-38aee9-s3057) | round 3 | product, sum, worst | 0.541 | 41.8 | 0.14 | 0.07 | 597 | 11 | 0.26 | messages, partner search, mixing |
-| [s3024](run:B1-30000-f05874-s3024) | round 3 | product, worst | 0.536 | 30.5 | 0.44 | 0.11 | 878 | 12 | 0.12 | messages, gifts, handover, upkeep, revolutions |
-| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | product, sum | 0.528 | 25.8 | 0.23 | 0.23 | 662 | 12 | 0.42 | messages, gifts |
-| [s3006](run:B1-30000-023c0a-s3006) | round 3 | product, sum | 0.526 | 37.7 | 0.48 | 0.05 | 652 | 59 | 0.09 | messages, gifts, handover, partner search, upkeep |
-| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | product, worst | 0.526 | 30.8 | 0.62 | 0.14 | 947 | 24 | 0.01 | messages, gifts, partner search, revolutions |
-| [s3022](run:B1-30000-298337-s3022) | round 3 | product, worst | 0.525 | 47.8 | 0.22 | 0.07 | 199 | 9 | 0.25 | messages, partner search |
-| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | product, worst | 0.515 | 37.7 | 0.34 | 0.06 | 955 | 22 | 0.19 | messages, gifts, upkeep |
-| [s3054](run:B1-30000-d9254e-s3054) | round 3 | product, sum | 0.513 | 42.5 | 0.63 | 0.05 | 224 | 34 | 0.07 | messages, partner search, upkeep |
-| [s3087](run:B1-30000-363694-s3087) | round 3 | sum | 0.511 | 38.3 | 0.54 | 0.04 | 1,179 | 12 | 0.31 | messages, handover, partner search, upkeep |
-| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | sum | 0.511 | 39.0 | 0.13 | 0.10 | 232 | 2,072 | 0.09 | messages, handover, partner search |
-| [s3019](run:B1-30000-b1209a-s3019) | round 3 | worst | 0.485 | 51.3 | 0.13 | 0.05 | 101 | 1,526 | -0.03 | messages, handover, partner search, upkeep |
-| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | worst | 0.481 | 40.5 | 0.51 | 0.08 | 950 | 35 | -0.05 | messages, handover, mixing |
-| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | sum | 0.476 | 27.3 | 0.22 | 0.14 | 1,237 | 490 | 0.08 | messages, gifts, handover, partner search, upkeep, revolutions |
-| [s3058](run:B1-30000-4108dd-s3058) | round 3 | sum | 0.473 | 39.2 | 0.46 | 0.13 | 142 | 10 | 0.12 | messages, partner search, revolutions |
-| [s3093](run:B1-30000-26a341-s3093) | round 3 | worst | 0.457 | 48.5 | 0.61 | 0.05 | 207 | 9 | 0.08 | messages, gifts, handover, partner search |
-| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | worst | 0.345 | 26.5 | 0.34 | 0.14 | 1,309 | 5 | 0.35 | messages, handover, mates pay, partner search, mixing |
+| [s3042](run:B1-30000-b82ad0-s3042) | round 3 | product, sum, worst | 0.606 | 59 | 0.14 | 0.15 | 1,180 | 247 | 0.04 | messages, gifts, handover, mates pay, partner search, upkeep, mixing |
+| [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | product, sum, worst | 0.587 | 10 | 0.51 | 0.07 | 940 | 30 | 0.12 | messages, gifts, handover, upkeep, revolutions |
+| [s3018](run:B1-30000-af1e28-s3018) | round 3 | product, sum, worst | 0.565 | 75 | 0.16 | 0.10 | 313 | 263 | 0.06 | messages, gifts, handover, mates pay, partner search, mixing |
+| [s3080](run:B1-30000-625bc7-s3080) | round 3 | product, sum, worst | 0.549 | 81 | 0.34 | 0.11 | 121 | 11 | 0.04 | messages, gifts, handover, partner search, revolutions |
+| [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | product, sum | 0.544 | 2 | 0.22 | 0.22 | 822 | 8 | 0.37 | messages, gifts, mates pay, partner search, mixing |
+| [s3057](run:B1-30000-38aee9-s3057) | round 3 | product, sum, worst | 0.541 | 16 | 0.14 | 0.07 | 597 | 11 | 0.26 | messages, partner search, mixing |
+| [s3024](run:B1-30000-f05874-s3024) | round 3 | product, worst | 0.536 | 51 | 0.44 | 0.11 | 878 | 12 | 0.12 | messages, gifts, handover, upkeep, revolutions |
+| [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | product, sum | 0.528 | 3 | 0.23 | 0.23 | 662 | 12 | 0.42 | messages, gifts |
+| [s3006](run:B1-30000-023c0a-s3006) | round 3 | product, sum | 0.526 | 43 | 0.48 | 0.05 | 652 | 59 | 0.09 | messages, gifts, handover, partner search, upkeep |
+| [s3008](run:B1-30000-e19f2d-s3008) | round 3 | product, worst | 0.526 | 67 | 0.62 | 0.14 | 947 | 24 | 0.01 | messages, gifts, partner search, revolutions |
+| [s3022](run:B1-30000-298337-s3022) | round 3 | product, worst | 0.525 | 45 | 0.22 | 0.07 | 199 | 9 | 0.25 | messages, partner search |
+| [s3023](run:B1-30000-b0f6e3-s3023) | round 3 | product, worst | 0.515 | 46 | 0.34 | 0.06 | 955 | 22 | 0.19 | messages, gifts, upkeep |
+| [s3054](run:B1-30000-d9254e-s3054) | round 3 | product, sum | 0.513 | 20 | 0.63 | 0.05 | 224 | 34 | 0.07 | messages, partner search, upkeep |
+| [s3087](run:B1-30000-363694-s3087) | round 3 | sum | 0.511 | 60 | 0.54 | 0.04 | 1,179 | 12 | 0.31 | messages, handover, partner search, upkeep |
+| [s3064](run:B1-30000-a6a7ec-s3064) | round 3 | sum | 0.511 | 56 | 0.13 | 0.10 | 232 | 2,072 | 0.09 | messages, handover, partner search |
+| [s3019](run:B1-30000-b1209a-s3019) | round 3 | worst | 0.485 | 73 | 0.13 | 0.05 | 101 | 1,526 | -0.03 | messages, handover, partner search, upkeep |
+| [s3005](run:B1-30000-c18a1f-s3005) | round 3 | worst | 0.481 | 26 | 0.51 | 0.08 | 950 | 35 | -0.05 | messages, handover, mixing |
+| [s3045](run:B1-30000-f6d23f-s3045) | round 3 | sum | 0.476 | 55 | 0.22 | 0.14 | 1,237 | 490 | 0.08 | messages, gifts, handover, partner search, upkeep, revolutions |
+| [s3058](run:B1-30000-4108dd-s3058) | round 3 | sum | 0.473 | 28 | 0.46 | 0.13 | 142 | 10 | 0.12 | messages, partner search, revolutions |
+| [s3093](run:B1-30000-26a341-s3093) | round 3 | worst | 0.457 | 9 | 0.61 | 0.05 | 207 | 9 | 0.08 | messages, gifts, handover, partner search |
+| [s4004 w](run:B1-30000-17ac6e-s4004) | round 3, weakest first | worst | 0.345 | 42 | 0.34 | 0.14 | 1,309 | 5 | 0.35 | messages, handover, mates pay, partner search, mixing |
 <!-- /table -->
 
 - **Five worlds are among the first 13 of all three orders:** seeds 3042,
   4006 played strongest first, 3018, 3080 and 3057. Seed 3042 is the
-  healthiest by the product, with a large effective population (247) but
-  children little like their parents (a heredity index of 0.14).
-- **Seed 3026 is the most evolving world of the round:** it lives the most
-  generations (2,159), and its line of descent reaches furthest into new
-  behaviour (0.26 above the noise) and never comes back. Its rules are among the
-  simplest the round drew: [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), handing over, mending, [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the
-  newborns, and a cap of 16 links that seldom binds; no search, no gifts, no
-  costs on links. It was on the shortlist by its worst criterion until health
-  counted agents on loops per link; now it is the 17th by its worst criterion,
-  the 23rd by the product and the 36th by the sum, and just misses it: it
-  culls 12% of its tokens in a game, and its agents act alike.
-- **Some worlds evolve well but are not among the healthiest:** of the five
-  worlds with the best mean rank in evolution, four are not on the shortlist:
-  seeds 3026, 4008 played strongest first, and 4003 played either way.
+  healthiest by the product. The births-only tree gave it a large effective
+  population (247) but children little like their parents (0.14). On the
+  brain tree its children act almost as their parents (0.95), and it is the
+  59th by evolution: selection on its behaviours is among the weakest of the
+  round.
+- **Seed 3026 has some of the simplest rules of the round:**
+  [messages](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read."), handing over, mending, [estates](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") to the newborns, and a cap of 16 links that seldom binds; no search, no gifts,
+  no costs on links. The births-only categories put it first: the most
+  generations (2,159) and the line of descent reaching furthest into new
+  behaviour (0.26 above the noise). The evolution rank puts it 19th, its
+  children faithful copies (an index of 1.00). It just
+  misses the shortlist: it is the 17th by its worst criterion of health, the
+  23rd by the product and the 36th by the sum, since it culls 12% of its
+  tokens in a game and its agents act alike.
+- **Many worlds that evolve well are not among the healthiest:** of the
+  evolution rank's first ten, six are not on the shortlist
+  ([The first ten](#the-first-ten)).
 - **Seed 3092, which meets every one of the author's lines, is not on the
   shortlist:** it is the 30th by the product, the 31st by the sum and the 31st
-  by its worst criterion
+  by its worst criterion, and the 44th by evolution
   ([Which worlds are healthy?](which-worlds-are-healthy.md#what-the-orders-show)).
+
+## The brains' own family tree
+
+In November 2026 an independent review of this page found two things. The
+shortlist is drawn from health, not from evolution. And the numbers of
+evolution above were read on a family tree of births alone. But a world copies
+brains in two ways. A child gets a copy of its parent's brain, in some worlds
+mixed with a mate's, and the copy may change. And a node won in the
+game keeps its agent, but takes on a copy
+of the winner's brain. In the median world of round 3 a game makes 1.4 copies
+for every birth: from almost none in seed 3020, a star, to 14 in seed 3004.
+So what descends in a world is its brains, not its agents. The author
+approved a plan to rank round 3 by evolution on the brains' own family tree,
+every reading set against a model of what chance alone would do (11 November
+2026).
+
+The **brain-copy tree** follows every copy of a brain, an **instance**. An
+instance begins in one of three ways:
+- **as a [founder](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")'s brain**, at the start;
+- **at a birth**: a copy of the brain of the parent that pays for the child
+  (mixed with a mate's in the worlds that mix at birth, and the mate is
+  recorded where the mate pays);
+- **at a conquest**: a copy of the winner's brain, as the game began. Every
+  node of one game is won with the brains the game started with.
+
+An instance lasts while it holds its node, until the node is won by another or
+dies. A mutation that changes a brain
+where it sits gives it a new genotype, but it is the same copy, so it counts as
+a change of that copy, not as a new branch. One pass over every [frame](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") of a
+world builds the tree: from 2.7 million copies in the smallest world to 53
+million in the largest, 1.6 billion in all. Most copies are short-lived: a
+brain holds its node for about one iteration before a [neighbour](the-world.md#the-network "An agent joined to another by a connection.") wins it.
+
+On this tree every number of evolution changes. In the median world of the 82
+that lived:
+
+<!-- table evolutionrank/changed -->
+| in the median world | births-only tree | brain-copy tree |
+|---|---|---|
+| generations by the end | 849 | 2,739 |
+| births on the way | — | 959 |
+| effective population | 14 | 100 |
+| heredity index | 0.41 | 0.96 |
+| late novelty above noise | 0.08 | 0.07 |
+| shadow worlds' effective population | — | 3,459 |
+| copies made by conquest | — | 58% |
+<!-- /table -->
+
+- **Many more generations.** A brain of the last iteration has a median of
+  2,700 copies behind it, against 850 births on the births-only tree:
+  conquests copy more often than births do.
+- **More lines, but far fewer than chance leaves.** The effective population
+  is about 100, against 14 on the births-only tree. In a shadow world, where
+  every copy's parent is drawn at random among the living (below), it is
+  about 3,500. Going back from the living at the end, all of them descend from
+  one brain a median of 193 iterations earlier. In their shadows, the living
+  of most worlds do not meet one ancestor within the run's 3,000 iterations at
+  all.
+- **Children are copies.** On the brain tree a child acts almost exactly as
+  its parent does: a heredity index of 0.96, against 0.41 on the births-only
+  tree. The births-only tree played the wrong pairs. By the time a child and
+  the agent that bore it were played together, one of their nodes had nearly
+  always been won by a neighbour since. Only 4% of those pairs still held the
+  parent's brain and the child's.
+- **The line of descent moves somewhat less.** Its late eras lie a median of
+  0.07 above the noise from every earlier era, against 0.08 on the births-only
+  line.
+
+## The evolution rank
+
+The **evolution rank** orders every world of round 3 that lived by four
+readings of evolution on the brain-copy tree, each set against a model of what
+would happen without evolution (research/screen/evolution.py, 12 November
+2026). It is the rank in force. The mean ranks over the births-only categories
+(the pillar-by-pillar table above, and the mean over six of them that
+research/screen/funnel.py keeps) are superseded. Health does not score it.
+Health of 9 November only filters, by the funnel's rules: a world that died
+(the dead are not ranked), a star, one holding, or a line that stands still.
+The rule of no heredity filters nothing, since it read the births-only tree
+([The worlds ruled out](#the-worlds-ruled-out)).
+
+The four readings and their nulls:
+
+1. **Lines beyond luck.** The shadow world of pure luck
+   ([test 3](did-evolution-happen.md#3--a-shadow-world-of-pure-luck)): the
+   same copies at the same moments into the same living, but each copy's
+   parent drawn at random among the living, 100 times. In each era, the
+   clades of the era's first brains are followed to its end: how many still
+   have descendants, how large the largest is, and how much of the
+   *evolutionary activity* (a clade's size summed over the era, after Bedau
+   and Packard) lies in clades more active than 99% of the shadow's. Each is a
+   z-score: how many of the shadow's own spreads the real tree lies beyond it.
+   The reading is their mean over the twelve eras.
+2. **Novelty beyond mutation alone.** The line of descent's brain of
+   iteration 250 is given, era by era, as many random changes as the real
+   line made, of the world's own kind: six such lines a world. All are played
+   in the same situations of every kept world. The reading is the real line's
+   late novelty above its noise, less the null lines'. Above 0, the line found
+   more new behaviour than mutation alone would; below 0, selection held its
+   behaviour in place.
+3. **Selection on behaviour**
+   ([test 4](did-evolution-happen.md#4--selection-on-behaviour-measured)): in
+   every iteration, how strongly four behaviours go with a brain's
+   descendants at the next iteration, with its wealth held fixed. The reading
+   is the median size of that selection gradient over the four behaviours and
+   twelve eras, in standard deviations of the behaviour; a median, since the
+   links a newborn gets are heavy-tailed, and a few newborns with dozens would
+   otherwise decide it. Its null: the descendants shuffled among the agents of
+   each iteration.
+4. **Heredity on the brain tree**: the heredity index, played on the tree's
+   own parent and child brains, alive together in the worlds kept at
+   iterations 1,500 and 3,000. Its null: each child given another pair's
+   parent at random, 200 times.
+
+Each reading is scored as the share of the worlds it beats: the best 1, the
+worst 1 over their number, as health's measures are scored
+([Which worlds are healthy?](which-worlds-are-healthy.md)). The four scores are
+combined three ways, as the author asked for health (9 November 2026):
+multiplied, added, and the worst of them. A world's score is the product, read
+as the four's geometric average, and its rank orders by it; ties go by the
+sum, then by the worst. The first ten of each of the three orders, together,
+are the rank's bests. Every world's readings, their z-scores and its rank are
+in `research/screen/evolution.json`.
+
+What the four readings say across round 3:
+- **Lines spread beyond luck in 73 of the 82 worlds**, by more than two of
+  the shadow's spreads, and in 69 the common ancestor of the living is more
+  recent than in any of its 100 shadows. Copies are made next door, and
+  locality alone makes lines meet and sweep more slowly than in a shadow whose
+  parents come from anywhere. So a world that beats its shadow does so in
+  spite of being local. Three worlds spread their lines more slowly than luck
+  would: seed 3077, whose brains change after every game with a probability
+  of 0.8, and seeds 3030 and 3094, whose agents are mostly newborns and whose
+  links are kept only while paid for (the two taken out of Experiment 43). The
+  reading grows with a world's size (a rank correlation of 0.67 with its
+  agents): luck narrows a large world's ancestry slowly, so a large world
+  beats its shadow by more, in effect as well as in its z-score.
+- **Hardly any line of descent finds more than mutation alone.** In 79 of
+  the 82 worlds the line moves less far than lines that only mutate; in seeds
+  3007, 3044 and 3077 a little further, by 0.01 to 0.02. Selection holds
+  behaviour in place, rather than pushing it somewhere new.
+- **Selection on behaviour is plain, but behaviours do not follow it.**
+  Spreading the stake brings more descendants in 99% of the eras of all the
+  worlds; more links for a newborn in four eras of five; a larger share for a
+  child fewer, in four of five. Yet a behaviour's mean does not move from era
+  to era the way its selection points (a rank correlation of 0.05 in the
+  median world). A copy lands in another node, with other tokens and
+  neighbours, and acts as its new place makes it act.
+- **Heredity is near 1 in all but a few worlds**: 0.9 or more in 68 of the 82,
+  so on the brain tree copies are faithful, and this reading orders the worlds
+  little. The lowest are seeds 3044 and 3077, which change every brain after
+  every game with a probability of 0.8 (0.26 and 0.29), and seed 3020, the
+  star, whose brains are nearly never copied by conquest (0.50).
+
+### The first ten
+
+<!-- table evolutionrank/top -->
+| rank | world | round | score | among the first 10 by | lines beyond luck (z) | novelty above the null | selection strength | heredity | copies by conquest | health's rank | on the shortlist | health filters it out |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | [s4003 s](run:B1-30000-fffc7d-s4003) | round 3, strongest first | 0.779 | product, sum, worst | 21.4 | -0.032 | 0.081 | 0.98 | 58% | 18 | no | — |
+| 2 | [s4002 w](run:B1-30000-5379e2-s4002) | round 3, weakest first | 0.732 | product, sum, worst | 14.3 | -0.021 | 0.068 | 1.00 | 67% | 5 | yes | — |
+| 3 | [s4008 w](run:B1-30000-1cfaa4-s4008) | round 3, weakest first | 0.703 | product, sum, worst | 14.0 | -0.053 | 0.070 | 1.00 | 64% | 8 | yes | — |
+| 4 | [s4007 w](run:B1-30000-04d3eb-s4007) | round 3, weakest first | 0.674 | product, sum, worst | 16.5 | -0.051 | 0.086 | 0.96 | 61% | 80 | no | — |
+| 5 | [s4003 w](run:B1-30000-9efb1d-s4003) | round 3, weakest first | 0.656 | product, sum | 28.1 | -0.102 | 0.072 | 1.00 | 45% | 29 | no | — |
+| 6 | [s4007 s](run:B1-30000-a8a2d2-s4007) | round 3, strongest first | 0.654 | product, sum, worst | 17.4 | -0.056 | 0.084 | 0.96 | 61% | 77 | no | — |
+| 7 | [s4002 s](run:B1-30000-192733-s4002) | round 3, strongest first | 0.639 | product, sum, worst | 14.7 | -0.085 | 0.068 | 1.00 | 66% | 33 | no | — |
+| 8 | [s3037](run:B1-30000-845393-s3037) | round 3 | 0.620 | product, sum | 32.8 | -0.067 | 0.050 | 1.00 | 66% | 74 | no | standing still |
+| 9 | [s3093](run:B1-30000-26a341-s3093) | round 3 | 0.617 | product, worst | 8.1 | -0.087 | 0.091 | 0.98 | 78% | 31 | yes | — |
+| 10 | [s4006 s](run:B1-30000-8526cf-s4006) | round 3, strongest first | 0.596 | product | 15.0 | -0.058 | 0.050 | 0.99 | 45% | 2 | yes | — |
+<!-- /table -->
+
+- **Eight of the first ten play the game a token at a time.** Round 3 drew
+  eight such settings and played each twice, weakest first and strongest
+  first; twelve of those worlds lived, and eight of them are here. The same
+  draw lands near itself both ways: seeds 4003, 4002 and 4007 are in the first
+  ten played either way. These twelve worlds beat the rest on all four
+  readings, most of all on heredity and novelty. Those two play each brain as
+  if it placed its stake all at once, as research/oee/checks/diversity.py
+  plays every world's, so for these worlds they read a likeness of the brain
+  rather than the way it stakes; on the shadow and on selection, read from
+  what the worlds did, three of them are among the first ten.
+- **Four of the first ten are on today's shortlist:** seeds 4002 and 4008
+  played weakest first, 3093, and 4006 played strongest first. Six are not:
+  seeds 4003 played either way, 4007 played either way, 4002 played strongest
+  first, and 3037.
+- **Health filters one of them out:** seed 3037, a crowded and poor world
+  whose line of descent stands still and whose agents act alike
+  ([The worlds ruled out](#the-worlds-ruled-out)). Its shadow reading is among
+  the round's highest, which says its lines sweep, not that they find
+  anything new.
+- **Health and evolution do not go together.** The rank correlation between
+  health's product and the evolution score, over the 82 worlds, is −0.01. The
+  first ten of each of the evolution rank's three orders together hold 15
+  worlds, five of them on the shortlist; the shortlist's other worlds stand
+  from 16th to 81st.
+
+<!-- figure evolutionrank/heredity -->
+![Is a child's brain like its parent's?](../figures/evolutionrank/heredity.svg)
+
+**Is a child's brain like its parent's?** Each dot is a world of round 3 that lived. Across: the heredity index as the births-only tree read it, playing a child against the agent that bore it. Up: the same index on the brain-copy tree, playing each brain against the brain it was copied from, by birth or by conquest. 1 means a child acts as its parent does, 0 as a stranger does.
+
+> [!example]- How to make this figure
+> **Runs.** As for the figure *Like their parents, yet still changing?* above.
+>
+> **Data.** From each world's readings on its brain-copy tree, `GraphOfLifeRuns/.pilots/screen/braintree/<run>.json` (research/screen/braintree.py: one pass over every frame, births and conquests both copying brains, and 100 shadow worlds of pure luck; selection.py; brainplay.py, brains of the kept worlds played), gathered by `research/screen/evolution.py` into `research/screen/evolution.json`, with the births-only numbers of `research/screen/candidates.json` beside them.
+>
+> 1. Read each world's `heredity_births_only` (`beside`) and its brain-tree heredity (`values`) from `evolution.json`.
+>
+> **To make it again:** `python3 book_figures.py evolutionrank`.
+<!-- /figure -->
+
+<!-- figure evolutionrank/ancestry -->
+![How far back do the living meet one ancestor?](../figures/evolutionrank/ancestry.svg)
+
+**How far back do the living meet one ancestor?** Each dot is a world of round 3 that lived. Across: how many iterations before the end all its last agents' brains descend from one brain. Up: the same in 100 shadow worlds, whose copies are made at the same moments into the same living but from parents drawn at random (the median; a world whose shadows mostly never meet one ancestor within the run is drawn at 3,000). A dot above the line: the real ancestry narrows faster than luck would narrow it.
+
+> [!example]- How to make this figure
+> **Runs and data.** As for the figure *Is a child's brain like its parent's?* above.
+>
+> 1. Read each world's `common_ancestor_age` and `common_ancestor_age_shadow` (`beside`) from `evolution.json`.
+>
+> **To make it again:** `python3 book_figures.py evolutionrank`.
+<!-- /figure -->
+
+<!-- figure evolutionrank/novelty -->
+![Does the line of descent find more than mutation alone?](../figures/evolutionrank/novelty.svg)
+
+**Does the line of descent find more than mutation alone?** Each dot is a world of round 3 that lived. Across: how far the later eras of its line of descent, on the brain-copy tree, lie from every earlier era in the same situations, above the noise of playing one brain twice. Up: the same for six lines that start from the line's brain of iteration 250 and make as many changes as it made, at random. A dot below the line: the real line moved further than mutation alone would take it; above it, less far.
+
+> [!example]- How to make this figure
+> **Runs and data.** As for the figure *Is a child's brain like its parent's?* above.
+>
+> 1. Read each world's `novelty_above_noise` and `novelty_null_above_noise` (`beside`) from `evolution.json`.
+>
+> **To make it again:** `python3 book_figures.py evolutionrank`.
+<!-- /figure -->
+
+### Every world, by evolution
+
+Every world that lived, best first. Beside the brain tree's generations and
+effective population stand the births-only tree's, and the shadow's
+effective population.
+
+<!-- table evolutionrank/all -->
+| rank | world | score | ranks by product, sum, worst | lines beyond luck (z) | novelty above the null | selection strength | heredity | copies by conquest | generations (births only) | effective population (births only, shadow) | on the shortlist | health filters it out |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | [s4003 s](run:B1-30000-fffc7d-s4003) | 0.779 | 1, 1, 1 | 21.4 | -0.032 | 0.081 | 0.98 | 58% | 3,317 (1,131) | 81 (9, 6,828) | no | — |
+| 2 | [s4002 w](run:B1-30000-5379e2-s4002) | 0.732 | 2, 2, 3 | 14.3 | -0.021 | 0.068 | 1.00 | 67% | 4,014 (822) | 77 (8, 5,473) | yes | — |
+| 3 | [s4008 w](run:B1-30000-1cfaa4-s4008) | 0.703 | 3, 4, 2 | 14.0 | -0.053 | 0.070 | 1.00 | 64% | 4,014 (662) | 63 (12, 5,724) | yes | — |
+| 4 | [s4007 w](run:B1-30000-04d3eb-s4007) | 0.674 | 4, 6, 8 | 16.5 | -0.051 | 0.086 | 0.96 | 61% | 3,654 (828) | 23 (9, 5,628) | no | — |
+| 5 | [s4003 w](run:B1-30000-9efb1d-s4003) | 0.656 | 5, 5, 11 | 28.1 | -0.102 | 0.072 | 1.00 | 45% | 1,881 (1,189) | 21 (9, 6,963) | no | — |
+| 6 | [s4007 s](run:B1-30000-a8a2d2-s4007) | 0.654 | 6, 8, 7 | 17.4 | -0.056 | 0.084 | 0.96 | 61% | 3,775 (855) | 35 (7, 5,694) | no | — |
+| 7 | [s4002 s](run:B1-30000-192733-s4002) | 0.639 | 7, 9, 4 | 14.7 | -0.085 | 0.068 | 1.00 | 66% | 4,225 (953) | 19 (7, 5,588) | no | — |
+| 8 | [s3037](run:B1-30000-845393-s3037) | 0.620 | 8, 7, 19 | 32.8 | -0.067 | 0.050 | 1.00 | 66% | 1,600 (347) | 43 (5, 5,388) | no | standing still |
+| 9 | [s3093](run:B1-30000-26a341-s3093) | 0.617 | 9, 12, 5 | 8.1 | -0.087 | 0.091 | 0.98 | 78% | 2,323 (207) | 197 (9, 2,464) | yes | — |
+| 10 | [s4006 s](run:B1-30000-8526cf-s4006) | 0.596 | 10, 13, 15 | 15.0 | -0.058 | 0.050 | 0.99 | 45% | 3,126 (940) | 119 (30, 5,937) | yes | — |
+| 11 | [s3047](run:B1-30000-10c9f1-s3047) | 0.587 | 11, 23, 6 | 7.8 | -0.079 | 0.086 | 0.97 | 66% | 3,695 (662) | 57 (9, 1,416) | no | — |
+| 12 | [s3052](run:B1-30000-0d058a-s3052) | 0.584 | 12, 14, 18 | 19.4 | -0.106 | 0.084 | 0.97 | 65% | 3,088 (387) | 129 (15, 6,094) | no | — |
+| 13 | [s3071](run:B1-30000-605c0d-s3071) | 0.583 | 13, 10, 24 | 15.4 | -0.114 | 0.200 | 0.97 | 75% | 2,603 (109) | 145 (14, 4,355) | no | — |
+| 14 | [s3050](run:B1-30000-ebe08c-s3050) | 0.577 | 14, 18, 13 | 9.6 | -0.045 | 0.088 | 0.94 | 64% | 2,900 (926) | 48 (6, 2,636) | no | — |
+| 15 | [s3001](run:B1-30000-68cda7-s3001) | 0.568 | 15, 3, 52 | 50.2 | -0.013 | 0.034 | 1.00 | 21% | 1,535 (1,138) | 25 (15, 7,246) | no | — |
+| 16 | [s3057](run:B1-30000-38aee9-s3057) | 0.566 | 16, 15, 20 | 13.3 | -0.071 | 0.185 | 0.92 | 66% | 3,263 (597) | 51 (11, 4,477) | yes | — |
+| 17 | [s3076](run:B1-30000-66c764-s3076) | 0.556 | 17, 16, 30 | 12.4 | -0.055 | 0.048 | 1.00 | 44% | 3,351 (1,198) | 16 (9, 3,131) | no | — |
+| 18 | [s3062](run:B1-30000-def151-s3062) | 0.555 | 18, 11, 27 | 7.2 | -0.006 | 0.141 | 0.91 | 52% | 4,034 (993) | 36 (11, 1,202) | no | — |
+| 19 | [s3026](run:B1-30000-d6955f-s3026) | 0.550 | 19, 19, 28 | 4.4 | -0.056 | 0.071 | 1.00 | 50% | 5,232 (2,159) | 181 (78, 1,279) | no | — |
+| 20 | [s3054](run:B1-30000-d9254e-s3054) | 0.548 | 20, 25, 9 | 7.2 | -0.095 | 0.085 | 0.98 | 75% | 2,233 (224) | 491 (34, 2,462) | yes | — |
+| 21 | [s4005 s](run:B1-30000-6f6c09-s4005) | 0.546 | 21, 24, 10 | 11.1 | -0.013 | 0.056 | 0.96 | 54% | 2,718 (646) | 31 (10, 3,944) | no | — |
+| 22 | [s3014](run:B1-30000-7d129f-s3014) | 0.504 | 22, 22, 35 | 30.1 | -0.101 | 0.113 | 0.90 | 41% | 2,309 (1,242) | 22 (14, 7,246) | no | — |
+| 23 | [s3032](run:B1-30000-22865f-s3032) | 0.496 | 23, 28, 38 | 14.8 | -0.080 | 0.086 | 0.90 | 69% | 2,636 (401) | 409 (67, 5,716) | no | — |
+| 24 | [s3049](run:B1-30000-c51eb8-s3049) | 0.494 | 24, 41, 14 | 5.8 | -0.082 | 0.073 | 0.97 | 80% | 2,701 (236) | 2,702 (60, 3,954) | no | — |
+| 25 | [s3028](run:B1-30000-2eef58-s3028) | 0.482 | 25, 35, 21 | 14.9 | -0.111 | 0.052 | 0.99 | 40% | 3,222 (1,437) | 264 (37, 4,287) | no | — |
+| 26 | [s3005](run:B1-30000-c18a1f-s3005) | 0.479 | 26, 36, 32 | 11.6 | -0.041 | 0.047 | 0.96 | 69% | 3,293 (950) | 104 (35, 3,601) | yes | — |
+| 27 | [s3038](run:B1-30000-1ad8a9-s3038) | 0.478 | 27, 31, 41 | 19.9 | -0.064 | 0.044 | 0.96 | 63% | 2,158 (858) | 25 (7, 4,869) | no | standing still |
+| 28 | [s3058](run:B1-30000-4108dd-s3058) | 0.467 | 28, 46, 25 | 4.4 | -0.061 | 0.070 | 0.96 | 80% | 2,303 (142) | 70 (10, 743) | yes | — |
+| 29 | [s3012](run:B1-30000-02fa53-s3012) | 0.466 | 29, 52, 12 | 7.7 | -0.073 | 0.067 | 0.95 | 70% | 2,322 (327) | 101 (9, 2,309) | no | — |
+| 30 | [s3078](run:B1-30000-dd27b6-s3078) | 0.461 | 30, 26, 44 | 6.2 | -0.008 | 0.043 | 0.99 | 49% | 3,480 (422) | 23 (5, 668) | no | — |
+| 31 | [s3089](run:B1-30000-77ad6a-s3089) | 0.458 | 31, 34, 47 | 15.8 | -0.066 | 0.041 | 0.97 | 35% | 2,185 (844) | 104 (133, 3,522) | no | — |
+| 32 | [s3091](run:B1-30000-42d88d-s3091) | 0.458 | 32, 29, 48 | 7.6 | -0.043 | 0.111 | 0.88 | 57% | 3,642 (1,173) | 16 (5, 1,580) | no | — |
+| 33 | [s3041](run:B1-30000-965f1e-s3041) | 0.458 | 33, 47, 16 | 5.0 | -0.066 | 0.051 | 0.98 | 82% | 2,177 (212) | 566 (22, 3,016) | no | — |
+| 34 | [s3056](run:B1-30000-43985b-s3056) | 0.450 | 34, 50, 22 | 4.4 | -0.081 | 0.084 | 0.95 | 80% | 2,414 (361) | 119 (16, 3,646) | no | — |
+| 35 | [s3007](run:B1-30000-8119cd-s3007) | 0.445 | 35, 40, 31 | 6.9 | +0.021 | 0.059 | 0.91 | 48% | 3,807 (1,434) | 89 (37, 884) | no | — |
+| 36 | [s3098](run:B1-30000-794ae8-s3098) | 0.444 | 36, 43, 33 | 16.3 | -0.102 | 0.073 | 0.90 | 46% | 2,012 (256) | 42 (6, 2,595) | no | — |
+| 37 | [s3061](run:B1-30000-00e3c8-s3061) | 0.442 | 37, 44, 26 | 8.9 | -0.104 | 0.116 | 0.92 | 57% | 3,933 (1,092) | 32 (8, 2,626) | no | — |
+| 38 | [s4004 s](run:B1-30000-2bac4d-s4004) | 0.441 | 38, 32, 42 | 4.5 | -0.046 | 0.140 | 0.90 | 54% | 3,774 (1,392) | 26 (6, 680) | no | — |
+| 39 | [s4008 s](run:B1-30000-645972-s4008) | 0.435 | 39, 33, 53 | 14.2 | -0.137 | 0.061 | 1.00 | 66% | 3,883 (691) | 32 (14, 5,758) | no | — |
+| 40 | [s3043](run:B1-30000-02ed17-s3043) | 0.435 | 40, 38, 49 | 2.7 | -0.081 | 0.079 | 0.98 | 91% | 2,394 (73) | 663 (904, 2,119) | no | — |
+| 41 | [s3083](run:B1-30000-0d7e0c-s3083) | 0.432 | 41, 51, 39 | 11.1 | -0.127 | 0.078 | 0.96 | 66% | 1,987 (389) | 137 (11, 2,927) | no | — |
+| 42 | [s4004 w](run:B1-30000-17ac6e-s4004) | 0.423 | 42, 30, 45 | 4.2 | -0.018 | 0.138 | 0.89 | 55% | 3,738 (1,309) | 15 (5, 639) | yes | — |
+| 43 | [s3006](run:B1-30000-023c0a-s3006) | 0.419 | 43, 58, 17 | 15.7 | -0.105 | 0.056 | 0.94 | 46% | 1,892 (652) | 113 (59, 4,598) | yes | — |
+| 44 | [s3092](run:B1-30000-7fc03f-s3092) | 0.419 | 44, 55, 36 | 6.1 | -0.126 | 0.084 | 0.96 | 77% | 2,760 (253) | 1,144 (74, 5,441) | no | — |
+| 45 | [s3022](run:B1-30000-298337-s3022) | 0.416 | 45, 37, 50 | 14.6 | -0.103 | 0.124 | 0.87 | 69% | 2,579 (199) | 103 (9, 4,127) | yes | — |
+| 46 | [s3023](run:B1-30000-b0f6e3-s3023) | 0.413 | 46, 53, 29 | 4.9 | -0.018 | 0.048 | 0.96 | 49% | 3,875 (955) | 99 (22, 1,080) | yes | — |
+| 47 | [s3082](run:B1-30000-1141ea-s3082) | 0.389 | 47, 54, 43 | 9.5 | -0.129 | 0.050 | 1.00 | 47% | 3,238 (1,411) | 59 (26, 3,053) | no | — |
+| 48 | [s3021](run:B1-30000-4aff7d-s3021) | 0.379 | 48, 61, 34 | 4.2 | -0.038 | 0.054 | 0.93 | 48% | 3,571 (1,064) | 214 (27, 1,108) | no | — |
+| 49 | [s3067](run:B1-30000-4bee8e-s3067) | 0.372 | 49, 17, 73 | 34.5 | -0.211 | 0.089 | 0.97 | 15% | 3,289 (908) | 76 (24, 9,678) | no | standing still |
+| 50 | [s3040](run:B1-30000-36d076-s3040) | 0.371 | 50, 59, 55 | 10.6 | -0.139 | 0.078 | 0.96 | 39% | 3,085 (805) | 188 (10, 2,993) | no | — |
+| 51 | [s3024](run:B1-30000-f05874-s3024) | 0.369 | 51, 66, 23 | 11.2 | -0.097 | 0.048 | 0.93 | 46% | 2,702 (878) | 75 (12, 3,689) | yes | — |
+| 52 | [s3099](run:B1-30000-1ab8a0-s3099) | 0.362 | 52, 21, 74 | 62.1 | -0.042 | 0.019 | 0.97 | 18% | 375 (2,764) | 27 (350, 7,188) | no | standing still |
+| 53 | [s3046](run:B1-30000-27bd64-s3046) | 0.361 | 53, 49, 61 | 6.6 | -0.159 | 0.071 | 1.00 | 51% | 4,198 (1,321) | 173 (51, 1,340) | no | — |
+| 54 | [s3072](run:B1-30000-f05562-s3072) | 0.355 | 54, 39, 58 | 42.0 | -0.043 | 0.046 | 0.81 | 16% | 1,013 (1,894) | 60 (86, 8,571) | no | standing still |
+| 55 | [s3045](run:B1-30000-f6d23f-s3045) | 0.355 | 55, 60, 56 | 1.7 | -0.027 | 0.058 | 0.95 | 51% | 2,874 (1,237) | 202 (490, 850) | yes | — |
+| 56 | [s3064](run:B1-30000-a6a7ec-s3064) | 0.354 | 56, 69, 40 | 3.8 | -0.089 | 0.069 | 0.94 | 82% | 2,526 (232) | 458 (2,072, 5,115) | yes | — |
+| 57 | [s3059](run:B1-30000-2ec87a-s3059) | 0.326 | 57, 45, 70 | 11.6 | -0.195 | 0.056 | 1.00 | 75% | 2,321 (310) | 93 (12, 3,179) | no | — |
+| 58 | [s3013](run:B1-30000-7f7cd5-s3013) | 0.322 | 58, 57, 54 | 30.6 | -0.131 | 0.072 | 0.85 | 45% | 2,163 (500) | 20 (5, 6,613) | no | — |
+| 59 | [s3042](run:B1-30000-b82ad0-s3042) | 0.317 | 59, 67, 59 | 10.5 | -0.074 | 0.033 | 0.95 | 63% | 3,369 (1,180) | 1,390 (247, 9,019) | yes | — |
+| 60 | [s3087](run:B1-30000-363694-s3087) | 0.317 | 60, 62, 62 | 23.8 | -0.086 | 0.029 | 0.92 | 59% | 4,035 (1,179) | 115 (12, 8,922) | yes | — |
+| 61 | [s3070](run:B1-30000-a4d3a0-s3070) | 0.311 | 61, 27, 76 | 20.3 | -0.228 | 0.065 | 1.00 | 56% | 2,109 (774) | 35 (12, 4,803) | no | — |
+| 62 | [s3020](run:B1-30000-511930-s3020) | 0.303 | 62, 42, 75 | 20.8 | -0.047 | 0.053 | 0.50 | 1% | 837 (826) | 410 (736, 5,038) | no | a star |
+| 63 | [s3051](run:B1-30000-b5a76a-s3051) | 0.302 | 63, 76, 37 | 3.9 | -0.107 | 0.055 | 0.95 | 83% | 2,137 (141) | 44 (4, 420) | no | — |
+| 64 | [s3090](run:B1-30000-05ba40-s3090) | 0.289 | 64, 75, 46 | 3.3 | -0.117 | 0.051 | 0.97 | 77% | 2,590 (14) | 279 (365, 959) | no | — |
+| 65 | [s3066](run:B1-30000-dfd51b-s3066) | 0.278 | 65, 71, 63 | 0.7 | -0.073 | 0.044 | 0.97 | 58% | 3,837 (1,821) | 5,757 (7,585, 8,835) | no | — |
+| 66 | [s3044](run:B1-30000-63827e-s3044) | 0.277 | 66, 20, 79 | 10.9 | +0.022 | 0.110 | 0.26 | 56% | 3,708 (916) | 26 (7, 3,396) | no | — |
+| 67 | [s3008](run:B1-30000-e19f2d-s3008) | 0.268 | 67, 74, 51 | 5.3 | -0.127 | 0.037 | 0.98 | 60% | 3,160 (947) | 706 (24, 1,056) | yes | — |
+| 68 | [s3030](run:B1-30000-90fc91-s3030) | 0.266 | 68, 48, 77 | -4.6 | -0.105 | 0.115 | 0.98 | 29% | 2,535 (761) | 2,536 (12,248, 11,287) | no | — |
+| 69 | [s3004](run:B1-30000-7d5208-s3004) | 0.266 | 69, 63, 60 | 1.7 | -0.146 | 0.081 | 0.98 | 93% | 2,562 (23) | 395 (18, 1,078) | no | — |
+| 70 | [s3065](run:B1-30000-ba3afe-s3065) | 0.265 | 70, 73, 57 | 3.4 | -0.100 | 0.034 | 0.98 | 92% | 2,351 (54) | 689 (1,147, 2,143) | no | — |
+| 71 | [s3033](run:B1-30000-631e49-s3033) | 0.255 | 71, 65, 66 | 0.6 | -0.022 | 0.060 | 0.89 | 52% | 2,628 (1,083) | 649 (988, 1,050) | no | — |
+| 72 | [s3063](run:B1-30000-924e70-s3063) | 0.237 | 72, 56, 67 | 37.2 | -0.178 | 0.083 | 0.78 | 30% | 1,963 (1,053) | 19 (8, 8,339) | no | — |
+| 73 | [s3019](run:B1-30000-b1209a-s3019) | 0.220 | 73, 72, 71 | 2.9 | -0.094 | 0.027 | 0.98 | 88% | 2,317 (101) | 830 (1,526, 3,139) | yes | — |
+| 74 | [s3016](run:B1-30000-b23381-s3016) | 0.217 | 74, 68, 64 | 0.7 | -0.164 | 0.059 | 1.00 | 44% | 1,926 (1,071) | 75 (31, 715) | no | — |
+| 75 | [s3018](run:B1-30000-af1e28-s3018) | 0.205 | 75, 78, 68 | 3.6 | -0.125 | 0.082 | 0.74 | 79% | 2,452 (313) | 754 (263, 2,465) | yes | — |
+| 76 | [s3085](run:B1-30000-801b34-s3085) | 0.195 | 76, 77, 69 | 11.5 | -0.087 | 0.028 | 0.79 | 42% | 3,195 (1,303) | 13 (5, 3,058) | no | — |
+| 77 | [s3095](run:B1-30000-3e5856-s3095) | 0.179 | 77, 79, 65 | 2.7 | -0.133 | 0.029 | 0.99 | 49% | 1,372 (1,338) | 509 (1,219, 2,663) | no | — |
+| 78 | [s3055](run:B1-30000-cca771-s3055) | 0.167 | 78, 80, 72 | 7.9 | -0.134 | 0.048 | 0.70 | 52% | 3,131 (1,033) | 43 (6, 3,010) | no | — |
+| 79 | [s3094](run:B1-30000-4ac946-s3094) | 0.147 | 79, 70, 78 | -2.3 | -0.052 | 0.018 | 0.98 | 49% | 4,447 (1,509) | 4,448 (11,316, 10,439) | no | — |
+| 80 | [s3077](run:B1-30000-d6eabf-s3077) | 0.116 | 80, 64, 80 | -5.4 | +0.013 | 0.073 | 0.29 | 55% | 3,778 (840) | 18,913 (2,696, 6,618) | no | — |
+| 81 | [s3080](run:B1-30000-625bc7-s3080) | 0.094 | 81, 82, 81 | 6.1 | -0.248 | 0.044 | 0.85 | 83% | 2,254 (121) | 165 (11, 1,759) | yes | — |
+| 82 | [s3084](run:B1-30000-ad76aa-s3084) | 0.091 | 82, 81, 82 | 0.1 | -0.120 | 0.013 | 0.96 | 59% | 3,157 (976) | 415 (179, 1,012) | no | — |
+<!-- /table -->
 
 ## What a world's rules make possible
 
@@ -440,7 +739,7 @@ screen draws opens a channel, and most have a price.
 
 | mechanism | what it makes possible | its price |
 |---|---|---|
-| messages (4 to 30 numbers to each [neighbour](the-world.md#the-network "An agent joined to another by a connection.")) | signals: agents can tell neighbours apart, warn, coordinate their stakes, recognise their kin by a code they learn | a code only works once senders and listeners have evolved it together |
+| messages (4 to 30 numbers to each neighbour) | signals: agents can tell neighbours apart, warn, coordinate their stakes, recognise their kin by a code they learn | a code only works once senders and listeners have evolved it together |
 | messages before the game | a round of talk before acting: a stake can answer what a neighbour has just said | — |
 | noise inputs (2 to 10 random numbers a neighbour) | a brain can randomise. In a game like Colonel Blotto every fixed way of staking can be beaten by another, so chance in the stakes is worth having | two copies of one brain act differently: behaviour is less heritable |
 | gifts | an agent can give tokens: help, payment, support of kin — the raw stuff of cooperation | what is given is lost to the giver |
@@ -454,59 +753,28 @@ screen draws opens a channel, and most have a price.
 | estates to the poor, the young, the family or the neighbours | where the wealth of the dead goes shapes who can have children next | — |
 | a cap on links (valence) | no hubs, by rule | at 2, chains and rings only, and an agent at its cap has no child |
 | a game in rounds, weakest or strongest first | agents see the board before each token and can answer each other's stakes | — |
-| [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") only when copied | a brain changes only when it is copied, into a child or into a node its owner wins, and never while it sits: a genotype lasts, and can be selected | — |
+| mutation only when copied | a brain changes only when it is copied, into a child or into a node its owner wins, and never while it sits: a genotype lasts, and can be selected | — |
 | larger brains (3 to 5 layers of 16 to 50) | more complicated behaviour can be represented | — |
 
 ## What could be played next
 
-From now on only two kinds of world are played (the author, 7 November
-2026): more worlds drawn at random as before, and worlds made to follow a
-promising candidate. Five ways to go on were put to the author, and the
-author chose the second, larger (8 and 9 November 2026): the [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") of the
-shortlist's 24 worlds again, with two new seeds each, at 50,000 tokens and for
-5,000 iterations ([Round 3's best worlds, played again](#round-3s-best-worlds-played-again)).
-The five ways:
-
-1. **Play the shortlist on.** Every shortlisted world kept its last state, so
-   the [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") can play it on from iteration 3,000, to 10,000 say, without playing
-   its first 3,000 again. Does its health hold? Does its line of descent keep
-   reaching new behaviour, or come to rest? A typical world of round 3 took
-   about two and a half hours for its 3,000 iterations on one worker, so 7,000
-   more take most of a day each.
-2. **Play the shortlist's settings again, with fresh seeds.** A world may be
-   healthy by its settings or by the luck of its seed. Three new seeds for each
-   shortlisted setting say which: a setting that gives a healthy, evolving
-   world in two of three is one to keep (the author, 19 October 2026: a few
-   seeds are enough to show that something is possible).
-3. **Play the eight draws of the game in rounds once more, with every token
-   placed at once**, so that each draw is seen in all three ways of staking
-   ([A token at a time](how-the-drawn-settings-shape-a-world.md#a-token-at-a-time)).
-4. **Draw a fourth round**, as round 3 was drawn but without what this round
-   ruled out ([What could be set aside](how-the-drawn-settings-shape-a-world.md#what-could-be-set-aside-and-what-could-be-simplified)).
-5. **Play each shortlisted world's eras against each other.** Every world of
-   round 3 kept its whole state every 250 iterations: twelve eras. A contest
-   between two eras plays their brains against each other in the same world
-   ([Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)). If every later era
-   beats every earlier one, the world keeps getting better; if the eras win
-   and lose in bands, it goes round in circles. The notebook's programme calls
-   this the test that a forgetful world cannot pass (`research/Research.md`,
-   the cross-time tournament of Cliff and Miller, 1995). It needs no new world,
-   only contests: in Experiment 28 one took about half a minute. It is the
-   first of fourteen tests of whether evolution happened at all, gathered in
-   [Did evolution happen?](did-evolution-happen.md)
+Of the five ways to go on put to the author on 8 November 2026, the author
+chose to play the shortlist's settings again with fresh seeds: Experiment 43
+([Round 3's best worlds, played again](#round-3s-best-worlds-played-again)).
+Playing each world's eras against each other, the first test of whether
+evolution happened at all, is planned as Experiment 45
+([Did the brains get better?](round-3-eras-against-each-other.md)).
 
 ## Round 3's best worlds, played again
 
 <!-- experiment E43 -->
 
-Experiment 43 plays every world of the shortlist again: each with its own
-drawn settings, exactly as round 3 drew them (the way of staking too, for the
-draws played a token at a time), and with as many founders a token as it had.
-Each is played twice, with seeds 4301 and 4302, at 50,000 tokens and for 5,000
-iterations: 48 runs, about 11 days on the lab's three workers and about 340 GB
-of disk, as planned; since three settings were taken out and four added
-(below), 50 runs. It asks whether a world's health belongs to its settings, or
-was the luck of its seed:
+Experiment 43 plays the shortlist of 9 November 2026 again: each world with
+its own drawn settings, exactly as round 3 drew them (the way of staking too,
+for the draws played a token at a time), and with as many founders a token as
+it had. Each is played twice, with seeds 4301 and 4302, at 50,000 tokens and
+for 5,000 iterations. It asks whether a world's health belongs to its
+settings, or was the luck of its seed:
 
 <!-- thesis E43 -->
 > [!quote] The thesis of Experiment 43, written down before any of its runs existed
@@ -519,37 +787,19 @@ was the luck of its seed:
 > **It fails if:** Either: the rank correlation is below 0.2, or the median difference between a setting's two new worlds is 0.11 or more. Then health is mostly the luck of a seed or the size of a world, and a world's place in round 3 says little about its settings.
 <!-- /thesis -->
 
-> [!info] Added later, 9 November 2026: three settings taken out
-> The lab began with the slowest worlds, and eight hours in the author saw that
-> they were not healthy. Seeds 3094 and 3030 of round 3, played again, held 10
-> to 32 links an agent, where [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds hold about 3.5, and took 50 to 100
-> seconds an iteration. Both drew `link_upkeep` `paid_only`: a link lives only
-> while one of its ends pays a token for it every iteration, used or not, and a
-> new link counts as paid for the iteration it is made in. In these worlds most
-> agents are newborns in every iteration (seed 3094: about 12,800 births an
-> iteration among 15,000 agents), each joined to about 25 of its parent's
-> neighbours, with no cap on links drawn; those fresh links all stand through
-> their first game, where B1's rule would cut every one that carried no stake.
-> Round 3 had them dense already, 28 and 10 links an agent against a median of
-> 3.6, and health's orders did not see it, since links an agent was left out of
-> them ([Which worlds are healthy?](which-worlds-are-healthy.md)). The author
-> asked for it to be fixed: these two settings were taken out of the plan, and
-> with them seed 3095, the third shortlisted world of the kind (`paid_only`,
-> 11 links an agent in round 3), which had not started. So 21 settings and 42
-> runs are played. The stopped runs stay on disk: `B1-50000-4ac946-s4301` and
-> `-s4302` at about iteration 670, `B1-50000-90fc91-s4301` at about 600. The
-> thesis keeps its words, and is judged over the 21 settings played; the three
-> taken out are neither counted as dead nor scored. Later that day health came
-> to count agents on loops per link, and the shortlist changed; Experiment 43
-> plays the shortlist as it was planned, and is judged by health as it was
-> then, without that measure (the author's choice). The four worlds that joined
-> the shortlist, seeds 3005, 3006, 3064 and 3093, were added to the plan, with
-> the same two seeds (the author, the same evening): 25 settings, 50 runs. The
-> thesis is judged over the 21 it was planned with; the four are reported beside
-> it. And the three settings left without a hard limit on links (seeds 3016,
-> 3042 and 3087, whose links are kept while paid for or used, with no token in
-> each) are played on, watched: a run whose links an agent climb past twice what
-> its world held in round 3 is stopped and shown to the author.
+On 9 November 2026 three of the 24 settings whose links ran away were taken
+out (seeds 3094, 3030 and 3095), and the four worlds that had just joined the
+shortlist were added, so the experiment plays 25 settings in 50 runs. The
+thesis is judged over the 21 it was planned with, by health as it was then;
+the four are reported beside it, and the three settings without a hard limit
+on links (seeds 3016, 3042 and 3087) are played on, watched
+([How our view changed](#how-our-view-changed)).
+
+> [!info] Added later, 12 November 2026: 25 settings, not 24
+> The thesis names 24 worlds. Experiment 43 has played 25 settings since commit
+> `650c4ab` (9 November 2026): the 24 planned, less the three taken out, and the
+> four that joined the shortlist. The thesis keeps its words, and is still
+> judged over the 21 it was planned with.
 
 <!-- runs E43 -->
 > [!info]- The runs behind this page
@@ -586,28 +836,31 @@ was the luck of its seed:
 
 ## What we learned
 
-- **72 of round 3's hundred worlds remain candidates.** The others died, are a
-  star, pass nothing on (all four have brains that change after every game) or
-  stand still (all five are crowded and poor).
-- **Evolution in round 3 is fast and narrow:** hundreds of generations, but a
-  handful of lines, so chance rules which line survives.
-- **Heredity and novelty pull against each other,** and health goes with
-  novelty, against heredity.
-- **Fertility runs in families in almost every world;** mending deaths weakens
-  it.
-- **The shortlist is 21 worlds,** every candidate among the first 13 of any
-  of health's three orders, now that health counts agents on loops per link.
-  The 24 it held before are played again with two new seeds, larger and
-  longer, less three whose links ran away (Experiment 43).
-- **Seed 3026, with simple rules, evolves the most,** and has just left the
-  shortlist: it culls 12% of its tokens in a game.
+- **72 of round 3's hundred worlds are candidate worlds.** The others died,
+  are a star, seemed to pass nothing on, or stand still (all five are crowded
+  and poor).
+- **Brains descend through conquests as much as through births.** On the
+  brains' own family tree, children are faithful copies, and the living
+  descend from far fewer ancestors than luck would leave them.
+- **Selection is plain, but it holds behaviour in place.** Lines spread faster
+  than luck would spread them, and selection on behaviour shows in every
+  world; but hardly any line of descent finds more new behaviour than
+  mutation alone, and the behaviours do not follow their selection.
+- **The evolution rank's first ten** are seeds 4003 played strongest first,
+  4002 and 4008 played weakest first, 4007 and 4003 played weakest first,
+  4007 and 4002 played strongest first, 3037, 3093, and 4006 played
+  strongest first: eight of them play the game a token at a time. Four are on
+  the shortlist, which health draws, and health and the rank do not go
+  together.
+- **Fertility runs in families in almost every world** (on the births-only
+  tree); mending deaths weakens it.
 
 ## Where to go next
 
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md):
-  how to tell selection from luck in these candidates.
+  how to tell selection from luck in these worlds.
 - [Which worlds are healthy? A proposed order](which-worlds-are-healthy.md):
-  the health each candidate brings.
+  the health each world brings.
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md):
   which settings give heredity, selection and change.
 - [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md):
@@ -615,7 +868,7 @@ was the luck of its seed:
 
 ## How this was made
 
-The candidates are every world of round 3 of the screen that lived to the end
+The worlds read are every world of round 3 of the screen that lived to the end
 of its run (Experiments 40, 41 and 42); round 1, drawn from an older list of
 settings, is left out (the author, 8 November 2026).
 Nothing is played again but brains, in situations taken from the worlds
@@ -633,6 +886,18 @@ themselves.
   ranks the rest, finds the shortlist and writes
   `research/screen/candidates.json`, from which
   `python3 book_figures.py oeecandidates` draws this page.
+- `python3 research/screen/braintree.py` (12 November 2026) reads every
+  living world of round 3, one at a time, in one pass over its frames: its
+  brain-copy tree, 100 shadow worlds of pure luck, selection on four
+  behaviours (`research/screen/selection.py`), and its brains played:
+  heredity on the tree and the line of descent against six lines that only
+  mutate (`research/screen/brainplay.py`). Each world's readings are kept in
+  `GraphOfLifeRuns/.pilots/screen/braintree/<run>.json`. The pass reads only
+  the parts of a frame the tree needs, and the stakes of every fifth game.
+  `python3 research/screen/evolution.py` ranks the worlds into
+  `research/screen/evolution.json`, from which
+  `python3 book_figures.py evolutionrank` draws the section
+  [The evolution rank](#the-evolution-rank).
 
 ## How our view changed
 
@@ -642,5 +907,37 @@ themselves.
   3094 and 3095 left it, and seeds 3005, 3006, 3064 and 3093 joined it. Five
   worlds, not three, are among the first 13 of all three orders. Health
   against heredity reads −0.30, where it read −0.37.
+- **9 November 2026, evening: Experiment 43 changed.** The [lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") began with the
+  slowest worlds, and eight hours in the author saw that they were not
+  healthy. Seeds 3094 and 3030, played again, held 10 to 32 links an agent,
+  where [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s worlds hold about 3.5, and took 50 to 100 seconds an iteration.
+  Both drew `link_upkeep` `paid_only`: a link lives only while one of its ends
+  pays a token for it every iteration, and a new link counts as paid for the
+  iteration it is made in. In these worlds most agents are newborns in every
+  iteration, each joined to about 25 of its parent's neighbours, and those
+  fresh links all stand through their first game. Round 3 had them dense
+  already (28 and 10 links an agent against a median of 3.6), and health's
+  orders did not see it. On the author's word the two settings were taken out
+  of the plan, with seed 3095, the third shortlisted world of the kind; the
+  stopped runs stay on disk (`B1-50000-4ac946-s4301` and `-s4302` at about
+  iteration 670, `B1-50000-90fc91-s4301` at about 600). The four worlds that
+  had joined the shortlist, seeds 3005, 3006, 3064 and 3093, were added with
+  the same two seeds: 25 settings, 50 runs. The thesis keeps its words and is
+  judged over the 21 it was planned with, by health as it was then, without
+  agents on loops per link (the author's choice); the three taken out are
+  neither counted as dead nor scored. The three settings without a hard limit
+  on links (seeds 3016, 3042 and 3087) are played on, watched: a run whose
+  links an agent climb past twice what its world held in round 3 is stopped
+  and shown to the author.
+- **12 November 2026.** An independent review found that the family tree of
+  this page follows births only, though conquests copy brains as often or more,
+  and that the shortlist ranks by health. On the brains' own family tree
+  ([The evolution rank](#the-evolution-rank)), over the 82 worlds that lived,
+  generations rise from a median of 850 to 2,700, the effective population
+  from about 14 to 100, and heredity from 0.41 to 0.96. Round 3 was ranked by
+  four readings of evolution against chance; health stands beside the rank
+  only as a filter. The rule of no heredity no longer rules a world out. The
+  reading took two goes: the drive holding 18 of the worlds failed in the
+  middle of it and was read again the same afternoon.
 
 

@@ -55,32 +55,45 @@ def oeecandidates(ch: F.Chapter) -> None:
     ch.number("counts", {"worlds": len(worlds), "out": len(gone), "left": len(left),
                          "reasons": {r: sum(1 for w in gone if w["out"].startswith(r.split()[0]))
                                      for r in ("died", "a star", "one holding", "no heredity", "standing still")}})
+    # The worlds that lived and are ruled out; the dead are listed with what became of them on the screen's page.
     ch.number("table:out", {
         "head": ["world", "round", "why it is ruled out"],
-        "rows": [[link(w), ROUND[w["round"]], w["out"]] for w in sorted(gone, key=lambda w: (w["round"], w["seed"]))]})
+        "rows": [[link(w), ROUND[w["round"]], w["out"]]
+                 for w in sorted((w for w in gone if w["fate"] != "died"), key=lambda w: (w["round"], w["seed"]))]})
 
+    # Every candidate world's readings on the births-only tree, each with its rank among them (1 the best).
     mean_rank = lambda w: sum(w.get("ranks", {}).get(k, len(left)) for k in keys) / len(keys)
     ranked = sorted(left, key=mean_rank)
-    ch.number("table:ranks", {
-        "head": ["world", "round"] + [c["key"] for c in d["categories"]] + ["mean rank", "channels open"],
-        "rows": [[link(w), ROUND[w["round"]]] + [w.get("ranks", {}).get(k, "—") for k in keys]
-                 + [f"{mean_rank(w):.1f}", ", ".join(w["capability"]["channels"]) or "none"] for w in ranked]})
-    ch.number("table:numbers", {
-        "head": ["world", "agents", "generations", "effective population", "heredity", "fertility passed on",
-                 "novelty", "contemporaries", "health"],
-        "rows": [[link(w), _f(w["numbers"].get("agents"), "{:,.0f}"), _f(w["numbers"].get("generations"), "{:.0f}"),
-                  _f(w["numbers"].get("effective_population"), "{:,.0f}"), _f(w["numbers"].get("heredity")),
-                  _f(w["numbers"].get("fertility")), _f(w["numbers"].get("late_novelty")),
-                  _f(w["numbers"].get("contemporaries")), _f(w["numbers"].get("health"))] for w in ranked]})
+    form = {"agents": "{:,.0f}", "generations": "{:,.0f}", "effective_population": "{:,.0f}",
+            "tokens_per_agent": "{:.1f}"}
+    named = {"size": "agents", "population": "effective population", "fertility": "fertility passed on",
+             "riches": "tokens an agent"}
 
-    # The shortlist: every candidate among the first of any of health's three orders.
+    def cell(w: Dict[str, Any], c: Dict[str, Any]) -> str:
+        value = _f(w["numbers"].get(c["measure"]), form.get(c["measure"], "{:.2f}"))
+        rank = w.get("ranks", {}).get(c["key"])
+        return f"{value} ({rank})" if rank is not None else value
+
+    ch.number("table:ranks", {
+        "head": ["world", "round"] + [named.get(c["key"], c["key"]) for c in d["categories"]]
+                + ["mean rank", "channels open"],
+        "rows": [[link(w), ROUND[w["round"]]] + [cell(w, c) for c in d["categories"]]
+                 + [f"{mean_rank(w):.1f}", ", ".join(w["capability"]["channels"]) or "none"] for w in ranked]})
+
+    # The shortlist: every candidate world among the first of any of health's three orders, with its place in the
+    # evolution rank now in force (research/screen/evolution.json), where that has been read.
+    evolution = {}
+    rank_file = os.path.join(SCREEN, "evolution.json")
+    if os.path.exists(rank_file):
+        evolution = {w["id"]: w["rank"] for w in json.load(open(rank_file))["worlds"]}
     short = sorted((w for w in left if w.get("shortlisted")), key=lambda w: -w["numbers"]["health"])
     among = {"product": "product", "sum": "sum", "worst": "worst"}
     ch.number("table:shortlist", {
-        "head": ["world", "round", f"among the first {d['top']} by", "health (product)", "evolution's mean rank",
-                 "heredity", "novelty", "generations", "effective population", "fertility passed on", "channels open"],
+        "head": ["world", "round", f"among the first {d['top']} by", "health (product)", "evolution rank",
+                 "heredity (births only)", "novelty (births only)", "generations (births only)",
+                 "effective population (births only)", "fertility passed on", "channels open"],
         "rows": [[link(w), ROUND[w["round"]], ", ".join(among[o] for o in w["top_of"]),
-                  _f(w["numbers"].get("health"), "{:.3f}"), f"{w['evolution_rank']:.1f}",
+                  _f(w["numbers"].get("health"), "{:.3f}"), str(evolution.get(w["id"], "—")),
                   _f(w["numbers"].get("heredity")), _f(w["numbers"].get("late_novelty")),
                   _f(w["numbers"].get("generations"), "{:,.0f}"), _f(w["numbers"].get("effective_population"), "{:,.0f}"),
                   _f(w["numbers"].get("fertility")), ", ".join(w["capability"]["channels"]) or "none"] for w in short]})
@@ -99,7 +112,7 @@ def oeecandidates(ch: F.Chapter) -> None:
                       "stranger, in the same situations. Up: how far the later eras of its line of descent lie from "
                       "every earlier era, above the noise of playing one brain twice. A world in the top right passes "
                       "on what its agents do and keeps changing it.",
-              recipe=recipe(RUNS, DATA, ["Read each candidate's heredity index (the mean of its kept worlds read) and "
+              recipe=recipe(RUNS, DATA, ["Read each candidate world's heredity index (the mean of its kept worlds read) and "
                                          "late novelty from `candidates.json`."]))
 
     have = [w for w in left if w["numbers"].get("generations") and w["numbers"].get("effective_population")]
@@ -114,7 +127,7 @@ def oeecandidates(ch: F.Chapter) -> None:
                       "many births separate them from the founders). Up: a rough effective population, from how fast "
                       "the ancestry of the living narrows: the smaller it is, the more chance decides which line "
                       "survives, and the larger a difference selection needs before it can see it.",
-              recipe=recipe(RUNS, DATA, ["Read each candidate's generations and effective population from "
+              recipe=recipe(RUNS, DATA, ["Read each candidate world's generations and effective population from "
                                          "`candidates.json` (`numbers`)."]))
 
     have = [w for w in left if w["numbers"].get("fertility") is not None]
@@ -128,5 +141,5 @@ def oeecandidates(ch: F.Chapter) -> None:
                       "the child had, less the same correlation with the children's counts shuffled among the "
                       "children born in the same iteration. Above zero, families differ in how fertile they are, and "
                       "selection has something to work on.",
-              recipe=recipe(RUNS, DATA, ["Read each candidate's `fertility` from `candidates.json` "
+              recipe=recipe(RUNS, DATA, ["Read each candidate world's `fertility` from `candidates.json` "
                                          "(families.py: correlation less the shuffled mean)."]))
