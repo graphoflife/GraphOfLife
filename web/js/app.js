@@ -13,6 +13,9 @@ const App = {
   views: null,
 
   init() {
+    // The colours first, so everything after draws in the reader's theme.
+    Theme.init();
+
     // The wordmark carries data-view too, so it is a way back to the front
     // page rather than decoration.
     for (const tab of document.querySelectorAll('[data-view]')) {
@@ -41,11 +44,12 @@ const App = {
     StatDetail.init();
     RunsView.init();
     Explain.init();
+    // The Research tab's instruments are the Viewer's modes now (research.js
+    // drives them for it), and its documents are pages of the Notebook.
     Research.init();
     Book.init();
     Home.init();
-    this.views = { home: Home, explain: Explain, runs: RunsView, viewer: Viewer,
-                   research: Research, book: Book };
+    this.views = { home: Home, explain: Explain, runs: RunsView, viewer: Viewer, book: Book };
 
     // Both layouts are two panes plus a drag handle; the handle sets the width
     // of the second column and the choice is remembered per layout.
@@ -103,8 +107,12 @@ const App = {
 
     const clamp = w => Math.max(min, Math.min(max, w));
     const apply = w => { layout.style.gridTemplateColumns = `1fr 6px ${clamp(w)}px`; };
+    // A private window can refuse storage outright; the width is then the
+    // default, and forgotten.
+    const keep = w => { try { localStorage.setItem(storageKey, String(w)); } catch (err) { /* not kept */ } };
 
-    const stored = Number(localStorage.getItem(storageKey));
+    let stored = NaN;
+    try { stored = Number(localStorage.getItem(storageKey)); } catch (err) { /* nothing kept */ }
     apply(Number.isFinite(stored) && stored > 0 ? stored : fallback);
 
     let dragging = false;
@@ -127,12 +135,12 @@ const App = {
       document.body.classList.remove('resizing');
 
       const width = parseInt(layout.style.gridTemplateColumns.split(' ').pop(), 10);
-      if (Number.isFinite(width)) localStorage.setItem(storageKey, String(width));
+      if (Number.isFinite(width)) keep(width);
     });
 
     resizer.addEventListener('dblclick', () => {
       apply(fallback);
-      localStorage.setItem(storageKey, String(fallback));
+      keep(fallback);
     });
   },
 

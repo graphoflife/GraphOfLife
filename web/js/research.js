@@ -1,191 +1,109 @@
 /*
- * The Research tab: point an instrument at a run, or read a document.
+ * The Viewer's four instruments: Lineage, Flow modules, Diagrams and
+ * Correlations, each a way of looking at one run other than its network.
  *
- * The run list and the picker live here rather than in any one view, so there
- * is one list, one fetch, and switching between views reloads nothing.
+ * They were a tab of their own, Research, with a run picker of their own; one
+ * run chosen twice, in two places, was two pickers to keep in step and a
+ * question every visitor had to answer again. They live in the Viewer now as
+ * its modes, and look at whatever run the Viewer has — the picker at the top
+ * of the Viewer is the only one. (The tab's other half, its documents, are
+ * pages of the Research Notebook: see book.js.)
  *
- * The modes are a table rather than a chain of comparisons. A mode is one of
- * two kinds, and the table says which by naming the module that implements it:
- *
- *   view  a way of looking at one run. Lineage, FlowView and Diagrams share the
- *         same six methods — init, setRuns, say, resize, draw, load — and this
- *         is where that becomes an interface instead of a coincidence.
- *   page  words on a screen. No run, so no picker, no run list, nothing to
- *         resize; it is painted once, the first time it is asked for.
- *
- * They are also grouped, and the grouping is the same distinction one level
- * up: **analysis** is the instruments, **reading** is the documents. Six
- * buttons in one row said those were the same kind of thing, which made the
- * tab read as a list of features rather than as two places.
- *
- * Everything below iterates the table rather than naming a mode, so another
- * one is an entry here and a section in index.html — including its buttons,
- * which are built from this rather than written out twice.
+ * The modes are a table rather than a chain of comparisons. Each names the
+ * module that implements it, and Lineage, FlowView, Diagrams and Correlations
+ * share the same six methods — init, setRuns, say, resize, draw, load — which
+ * is where that becomes an interface instead of a coincidence. Everything
+ * below iterates the table rather than naming a mode, so another one is an
+ * entry here, a section in index.html and a button in the Viewer's head.
  */
 const Research = {
-  GROUPS: [
-    { id: 'analysis', label: 'Analysis' },
-    { id: 'reading',  label: 'Reading' }
-  ],
-
   MODES: {
     lineage:    { group: 'analysis', label: 'Lineage',      view: Lineage },
     flow:       { group: 'analysis', label: 'Flow modules', view: FlowView },
-    // `choose` means no run is opened until one is picked. The others show
-    // something the moment they have a run; this one starts a minutes-long
-    // summary of whatever happened to be first in the list, which is a slow
-    // answer to a question nobody asked. The theses live here now, as
-    // ready-made time series.
-    diagrams:   { group: 'analysis', label: 'Diagrams',     view: Diagrams, choose: true },
-    // Correlating a window is seconds of work on a large world, so it too
-    // waits for a run to be picked.
-    correlations: { group: 'analysis', label: 'Correlations', view: Correlations, choose: true },
-    notes:      { group: 'reading',  label: 'Findings',     page: Notes },
-    literature: { group: 'reading',  label: 'Literature',   page: Literature },
-    graphs:     { group: 'reading',  label: 'Graphs',       page: Graphs }
+    // Both of these summarise or correlate a whole window of the run, which is
+    // minutes of work on a large world: they only start when this mode is
+    // opened on a run, never in the background. The theses live in Diagrams,
+    // as ready-made time series.
+    diagrams:   { group: 'analysis', label: 'Diagrams',     view: Diagrams },
+    correlations: { group: 'analysis', label: 'Correlations', view: Correlations }
   },
 
   runs: [],
   runId: null,
-  mode: 'lineage',
+  mode: null,
+  active: false,
 
-  /** The modes that are about a run, which is every mode that has a view. */
+  /** The modes, each with its view. */
   get runModes() {
-    return Object.values(this.MODES).filter(m => m.view);
+    return Object.values(this.MODES);
   },
 
-  get view() { return this.MODES[this.mode].view; },
-  get group() { return this.MODES[this.mode].group; },
+  get view() { return this.mode ? this.MODES[this.mode].view : null; },
 
   init() {
-    this.picker = document.getElementById('researchRun');
-    if (!this.picker) return;
     for (const { view } of this.runModes) view.init();
-
-    this.groupBar = document.getElementById('researchGroups');
-    this.modeBar = document.getElementById('researchModes');
-
-    this.groupBar.replaceChildren(...this.GROUPS.map(group => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.textContent = group.label;
-      button.dataset.group = group.id;
-      // Picking a group lands on its first mode, so a group is never selected
-      // with nothing shown under it.
-      button.addEventListener('click', () => this.show(this.firstIn(group.id)));
-      return button;
-    }));
-
-    this.modeBar.replaceChildren(...Object.entries(this.MODES).map(([name, mode]) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.textContent = mode.label;
-      button.dataset.mode = name;
-      button.dataset.group = mode.group;
-      button.addEventListener('click', () => this.show(name));
-      return button;
-    }));
-
-    // An explicit choice sticks. `choose` means "do not pick one for them",
-    // not "throw away the one they picked" — clearing it on every visit back
-    // to the tab would be its own kind of rude.
-    this.picker.addEventListener('change', () => {
-      this.userPicked = !!this.picker.value;
-      this.open(this.picker.value);
-    });
-    document.getElementById('researchRefresh')
-      .addEventListener('click', () => this.listRuns());
-
-    this.show(this.mode);
-  },
-
-  firstIn(group) {
-    return Object.keys(this.MODES).find(name => this.MODES[name].group === group);
+    // A theme change repaints whichever instrument is open; the others draw
+    // in the new inks when they are next shown.
+    window.addEventListener('themechange', () => { if (this.active) this.view?.draw(); });
   },
 
   /**
-   * Re-read the list of runs on the way into the tab, every time.
-   *
-   * It used to list once per page load. A simulation created afterwards — or
-   * one that had not yet recorded the two frames these views need, which is
-   * every simulation for its first moments — never appeared in the picker, and
-   * the only way to see it was to notice the Refresh button. Listing costs one
-   * request and does not start the engine.
-   *
-   * Listing takes a moment, and the tab may have been left by the time it
-   * answers. Starting a load then — which cancels everything else — took the
-   * Viewer's load away from someone who had already gone back to it.
+   * One of the instruments was chosen in the Viewer's head. The list of runs
+   * is read on the way in, every time, because it goes stale the moment a
+   * simulation is created or records its first frames — and listing costs
+   * one request and does not start the engine.
    */
-  async setActive(active) {
-    this.active = active;
-    if (!active) return;
-    await this.listRuns();
-    if (this.active) this.resume();
-  },
-
-  /**
-   * Pick up a load that was cut short.
-   *
-   * Leaving the tab — or hiding the browser window — cancels whatever this
-   * view was reading, which is what keeps the rest of the site responsive. But
-   * listRuns only reloads when the chosen run *changed*, so without this a
-   * view cancelled halfway through came back blank and stayed that way — the
-   * exact "lineage does not load" this was meant to fix, made worse.
-   */
-  resume() {
-    const { view } = this.MODES[this.mode];
-    if (view && Jobs.due(view)) this.show(this.mode);
-  },
-
-  show(mode) {
+  async enter(mode) {
     this.mode = mode;
-    // Whatever the mode you just left was reading, it is not what you are
-    // looking at now. This is the whole of the fix: one line, in the one place
-    // that knows the view changed, rather than each view checking an epoch it
-    // might forget to check — and two of the four did forget. A view owns its
-    // own loads, so the view is what to keep; a page of words owns none.
-    Jobs.only(this.MODES[mode].view);
-    const group = this.group;
-
-    for (const button of this.groupBar.querySelectorAll('button')) {
-      button.classList.toggle('active', button.dataset.group === group);
-    }
-    for (const button of this.modeBar.querySelectorAll('button')) {
-      button.classList.toggle('active', button.dataset.mode === mode);
-      button.hidden = button.dataset.group !== group;
-    }
+    this.active = true;
     for (const name of Object.keys(this.MODES)) {
       document.getElementById(`research-${name}`).hidden = name !== mode;
     }
-
-    const { view, page, choose } = this.MODES[mode];
-    // Only a run has a run to pick.
-    document.getElementById('researchRunField').hidden = !view;
-
-    // Painted on the way in rather than at startup: it is the same words every
-    // time, and a visitor who never opens this tab should not be building them.
-    page?.render();
-    if (!view) return;
-
+    const { view } = this.MODES[mode];
+    // Whatever the mode you just left was reading, it is not what you are
+    // looking at now. A view owns its own loads, so the view is what to keep.
+    Jobs.only(view);
     // A canvas sized while it was hidden has no size, so a view measures
     // itself again on the way in.
     view.resize();
     view.draw();
 
-    // The picker shows nothing chosen for a mode that waits to be asked, so
-    // entering it does not silently begin summarising a run that takes minutes
-    // and that nobody asked about.
-    const waiting = choose && !this.userPicked;
-    this.picker.value = waiting ? '' : (this.runId || '');
+    await this.listRuns();
+    if (!this.active || this.mode !== mode) return;
+    this.open(Viewer.runId);
+  },
 
-    // Coming back to a view that has read this run, or is still reading it,
-    // is coming back to a picture it has or is about to have, and the draw
-    // above was all it needed. Every mode switch used to read again: the
-    // lineage window's whole server build for the same picture, Diagrams'
-    // frames, and Flow modules kept a special case of its own to dodge it.
-    // Another run, or a read that was cut short or failed, is read.
-    const target = waiting ? null : (this.runId || null);
-    if (view.runId !== target || Jobs.due(view)) view.load(target);
+  /** Back to the network, or away from the Viewer: whatever was being read stops. */
+  leave() {
+    this.active = false;
+    if (this.view) Jobs.cancel(this.view);
+  },
+
+  /** Back from a hidden window: pick up a load that hiding cut short. */
+  resume() {
+    if (this.active && this.view && Jobs.due(this.view)) this.open(this.runId);
+  },
+
+  /**
+   * The run to read, as the Viewer has it. Coming back to a view that has
+   * read this run, or is still reading it, is coming back to a picture it has
+   * or is about to have; another run, or a read cut short, is read.
+   */
+  open(runId) {
+    this.runId = runId || null;
+    const view = this.view;
+    if (!view) return;
+    if (!this.runId) {
+      view.say('Choose a simulation in the picker above.');
+      return;
+    }
+    Jobs.only(view);
+    if (view.runId !== this.runId || Jobs.due(view)) view.load(this.runId);
+  },
+
+  /** Choose a run for the reader, as a saved diagram does: the Viewer takes it, and so do the views. */
+  pick(runId) {
+    return Viewer.load(runId);
   },
 
   async listRuns() {
@@ -194,59 +112,22 @@ const Research = {
     const say = (text) => {
       for (const { view } of this.runModes) view.say(text);
     };
-    // Only said while there is nothing on screen yet. Re-entering the tab
-    // relists, and overwriting a drawn view's note with "Looking for
-    // simulations…" every time reads as though it were about to reload.
+    // Only said while there is nothing on screen yet: overwriting a drawn
+    // view's note every time reads as though it were about to reload.
     if (!this.runId) say('Looking for simulations…');
     try {
       await API.choose();
       const data = await API.listRuns();
-      // Both views need at least two frames to compare anything, so a
+      // Every instrument needs at least two frames to compare anything, so a
       // simulation that has just started is not offered until it has some.
       this.runs = (data.runs || []).filter(r => r.frame_count > 1);
       for (const { view } of this.runModes) view.setRuns(this.runs);
-
-      const blank = document.createElement('option');
-      blank.value = '';
-      blank.textContent = 'Choose a simulation…';
-      this.picker.replaceChildren(blank, ...this.runs.map(run => {
-        const option = document.createElement('option');
-        option.value = run.id;
-        option.textContent = `${run.name} — ${formatNumber(run.frame_count)} frames`;
-        return option;
-      }));
       if (!this.runs.length) {
         say('No simulation has recorded enough frames yet. '
           + 'Run one from the Simulations tab and come back.');
-        return;
       }
-
-      const waiting = this.MODES[this.mode].choose && !this.userPicked;
-      // Keep whatever was being looked at, if it is still there.
-      const had = this.runId;
-      const wanted = this.runs.some(r => r.id === had) ? had
-                   : (waiting ? '' : this.runs[0].id);
-      this.picker.value = wanted;
-      // Only load when the choice actually changed. Re-entering the tab should
-      // not refetch a window that is already drawn — the lineage window is one
-      // long build on the server, and that would be the whole of it again for
-      // the same picture.
-      if (wanted !== had && this.active) await this.open(wanted);
     } catch (err) {
       say(`Could not reach the simulations: ${err.message}`);
     }
-  },
-
-  async open(runId) {
-    this.runId = runId || null;
-    Jobs.only(this.view);
-    await this.view?.load(this.runId);
-  },
-
-  /** Choose a run for the reader, as though they had picked it themselves. */
-  pick(runId) {
-    this.picker.value = runId;
-    this.userPicked = true;
-    return this.open(runId);
   }
 };

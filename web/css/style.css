@@ -1,25 +1,33 @@
 /* GraphOfLife — the site's styling. Dark by default; the canvas is the star. */
 
 /*
- * Obsidian, phosphor and gold.
+ * Themes.
  *
- * The look is of something found rather than made: a dark wall, an inscription
- * on it, and a light behind the inscription. Three inks carry that and nothing
- * else does. The surfaces are near-black with a cold verdigris cast, the way
- * old stone and old screens are; the accent is a phosphor green, the colour of
- * the machine; and gold is kept for the runes, the titles and the few marks
- * that say "this is the old part". The mystery lives on the front page and in
- * those accents. The working tabs are calm: the same inks, at reading contrast.
+ * Every colour on the page is a token here, and a theme is one set of them.
+ * The first block is Obsidian, the default: near-black stone with a cold
+ * verdigris cast, a phosphor accent, and gold for titles. Phosphor is a black
+ * and green terminal, Midnight a deep indigo, and Paper is white. theme.js
+ * writes the chosen name on <html data-theme="…">, and each block after this
+ * one restates every colour of its own — every one, because a colour a theme
+ * forgot would come through from the dark default, and on a white page that
+ * is a line nobody can see. tests/test_view.js holds every theme to it.
  *
- * One ramp of surfaces, each a fixed step above the last — about 1.15 to 1.2
- * times on (L + 0.05), which is the term contrast is measured in. Deeper than
- * the slate it replaced, so a panel is told from the page by a hairline edge
- * and a faint lift at its top, not by being grey. Text stays above 10:1 on
- * every surface, the muted tier above 5:1, and the dimmest tier above 4.5:1
- * everywhere it is set except the raised hover surface, where it never sits
- * for long.
+ * Canvases read their inks from here too (ink.js), down to the network's
+ * background and the colours of its lines, so a theme reaches the charts and
+ * the pictures as well as the page.
+ *
+ * A translucent colour is written rgba(var(--accent-rgb), a): the channels
+ * are a token of their own, so a wash of the accent is the accent's in every
+ * theme, and the tokens built from them (the lit edge, the glow, a chart's
+ * grid, the shadows) follow a theme without being restated.
+ *
+ * Contrast, in every theme: body text at least 15:1 on every surface, the
+ * muted tier above 5:1, the dimmest above 4.5:1 wherever it is set.
  */
 :root {
+  /* Native controls (a checkbox, a menu's open list, a scrollbar) drawn
+     dark to match; Paper says light. */
+  color-scheme: dark;
   /* The machine's typeface — controls, numbers, code, and every label a
      canvas draws (ink.js reads it from here). JetBrains Mono comes from Google
      Fonts (index.html); offline, the system's own monospace stands in. */
@@ -33,122 +41,469 @@
      for the next line. */
   --font-read: "Spectral", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
 
-  /* Behind the graph itself, and deliberately the darkest thing here: the
+  /* ---- surfaces, darkest first ---- */
+  /* Behind the pictures, and deliberately the darkest thing here: the
      visualisation is the picture, and everything else is the frame. */
   --stage: #05080b;
-
-  /* The explanation's own marks, drawn on that stage (stepview.js reads them
-     through ink.js): an agent, a rich one, a newborn or a winner, a warning,
-     one removed, the eye that looks and its iris, a mutation, the struck tooth
-     of a gear, the shade between its teeth, and a halo's white. */
-  --ex-edge: rgba(190, 200, 215, 0.34);
-  --ex-node: #8fa8e8;
-  --ex-rich: #f0a878;
-  --ex-pale: #e8eef8;
-  --ex-good: #7fd4a0;
-  --ex-warn: #e8896b;
-  --ex-lost: #ef5f52;
-  --ex-eye: #05070a;
-  --ex-iris: #5ab6ef;
-  --ex-white: #f2f6fb;
-  --ex-mutated: #f2cd5c;
-  --ex-hot: #ff5b52;
-  --ex-shade: #0a0e14;
-  --ex-halo: #ffffff;
-
   --bg: #080d11;
   --panel: #111c22;
   --panel-2: #1a2a32;
   /* Raised: hover and active states, where the text on top is --text rather
      than --muted, which is what lets it go this light. */
   --panel-3: #243841;
-
   --border: #2c434b;
   --border-strong: #46636c;
-  /* An edge that is lit rather than drawn: the accent at a whisper, for the
-     frame of something the eye should find first. */
-  --border-lit: rgba(95, 224, 198, 0.32);
+  --stage-rgb: 5, 8, 11;
+  --bg-rgb: 8, 13, 17;
+  --panel-rgb: 17, 28, 34;
+  --panel-2-rgb: 26, 42, 50;
+  --border-rgb: 44, 67, 75;
 
+  /* ---- ink ---- */
   --text: #e9f1ef;
+  /* Emphasis: bold words, the tab you are on. White here, black on Paper. */
+  --text-strong: #ffffff;
+  /* Body text one step softer than --text, for prose inside a panel. */
+  --text-soft: #c4d3d1;
+  /* The notebook's running text: softer again, because a page of pure white
+     on near-black glares. */
+  --text-read: #d5e0dd;
   --muted: #98aeac;
-  /* The dimmest tier: unit names, ids, field hints, axis labels. It was three
-     hard-coded greys that differed by less than one contrast step, so nothing
-     ever told them apart, and all three read below 4.5:1 even against the old
-     darker panels. One tier, light enough to clear it. */
+  /* The dimmest tier: unit names, ids, field hints, axis labels. One tier,
+     light enough to clear 4.5:1. */
   --muted-2: #869c9c;
+  /* A word of code inside prose. */
+  --code-ink: #d3ece6;
+
   /* Phosphor: links, the tab you are on, focus, the one series a chart draws
      in no colour of its own. */
   --accent: #5fe0c6;
+  --accent-rgb: 95, 224, 198;
   /* Deepened from the accent so white sits on it at 5.9:1 — it is a button
      fill before it is a hue. */
   --accent-dim: #13715f;
-  /* The accent as light rather than ink: a glow behind something lit. */
-  --glow: rgba(95, 224, 198, 0.28);
-  /* Gold, for the runes and the titles. As ink it reads at 7:1 or better on
-     every surface; it is never a fill. */
+  /* What is written on that fill. */
+  --on-accent: #ffffff;
+  /* Gold, for titles and the few marks that say "this is the old part". */
   --gold: #e2bf7a;
+  --gold-rgb: 226, 191, 122;
   /* The front page's lettering: white with the warmth of old paper in it. */
   --ivory: #f4efe3;
-  /* State, as ink and as fill.
-   *
-   * A state has two jobs and they want different colours: a word coloured on
-   * a panel has to carry against that panel, and a button filled with the
-   * same idea has to carry white. The amber fill is dark for exactly that
-   * reason — white reads on it at 7.5:1, where the amber used for *text*
-   * would give 1.9:1 — so they are named apart rather than one being a
-   * shade of the other. */
+  /* A wash of light over a dark page — a hover, the lift along a panel's top.
+     On Paper it is a wash of dark over a light one. */
+  --mist-rgb: 214, 245, 236;
+  /* What parts words from a busy picture behind them: dark here, light on
+     Paper, where a dark glow behind dark words would be a smudge. */
+  --halo-rgb: 0, 0, 0;
+  /* Shadow, and how strong: a dark page needs deep ones, a white page faint. */
+  --shade-rgb: 0, 0, 0;
+  --shade-k: 1;
+
+  /* State, as ink and as fill. A word coloured on a panel has to carry
+     against that panel, and a button filled with the same idea has to carry
+     white, so they are named apart rather than one being a shade of the
+     other. */
   --danger: #ff7a6e;
-  /* A yellower green than the accent, so "running" is never mistaken for
-     "selected". */
+  --danger-rgb: 255, 122, 110;
+  /* A yellower green than the accent, so "running" is never "selected". */
   --ok: #8fd16a;
   --warn: #e9b04a;
   --info: #b79cf6;
-
-  /* Red as text. The second is for the one place it sits on a red tint
-     rather than on a panel, where it has to be lighter to clear it. */
   --danger-text: #ffa196;
   --danger-on-tint: #ffb7ad;
-
-  /* Amber as a fill, with the edge and hover that go with it. Deliberately
-     much darker than --warn: this one carries white ink. */
   --warn-fill: #7a4a12;
   --warn-fill-hover: #96591a;
   --warn-edge: #9a5d17;
 
-  /* Body text one step softer than --text, for prose inside a dialog. */
-  --text-soft: #c4d3d1;
-  /* The notebook's running text: softer again than --text, because a page of
-     pure white on near-black glares, and still 12.8:1 on a panel. */
-  --text-read: #d5e0dd;
-  /* The lines of a chart's frame, for canvases, which read them through
-     ink.js. Translucent, so they sit the same step above whichever surface the
-     chart is drawn on rather than being tuned to one; tinted towards the
-     page's green so a chart sits in its panel rather than on it. */
-  --chart-grid: rgba(214, 245, 236, 0.07);
-  --chart-tick: rgba(214, 245, 236, 0.36);
-  --chart-axis: rgba(214, 245, 236, 0.18);
+  /* ---- the canvases' inks, read through ink.js ---- */
+  /* The lines of a chart's frame, translucent so they sit the same step above
+     whichever surface the chart is drawn on. */
+  --chart-grid: rgba(var(--mist-rgb), 0.07);
+  --chart-tick: rgba(var(--mist-rgb), 0.36);
+  --chart-axis: rgba(var(--mist-rgb), 0.18);
   /* Under a legend drawn over a picture, so it reads whatever is beneath. */
   --chart-veil: rgba(2, 5, 7, 0.55);
+  /* The colours lines take when several share one chart, in order. */
+  --line-1: #5ac8fa;
+  --line-2: #ffd166;
+  --line-3: #ff6b6b;
+  --line-4: #7ee787;
+  --line-5: #c792ea;
+  --line-6: #f78c6c;
+  --line-7: #89ddff;
+  --line-8: #e5e5e5;
 
-  /* The code viewer. Its syntax colours are a self-contained scheme — the
-     family GitHub uses, which is where most people last read Python — and are
-     left where they are used. These two are not part of that scheme: they are
-     the script's own body text and its line-number gutter, and both are tuned
-     against --panel, so they are the pair to revisit if that surface moves. */
+  /* The network's own colours where nobody has chosen any: the Viewer's
+     background, its links and the outline of an agent, and the front page's
+     world (its colour map, whether that map runs backwards, and its links).
+     An outline is on where agents would otherwise melt into the paper. */
+  --graph-bg: #05080b;
+  --graph-edge: #ffffff;
+  --graph-outline: #ffffff;
+  --graph-outline-on: 0;
+  --home-colormap: viridis;
+  --home-reverse: 0;
+  --home-edge: #7fe6cf;
+  --home-edge-alpha: 0.34;
+
+  /* The explanation's own marks, drawn on the stage (stepview.js): an agent,
+     a rich one, a newborn or a winner, a warning, one removed, the eye that
+     looks and its iris, a mutation, the struck tooth of a gear, the shade
+     between its teeth, and a halo's white. */
+  --ex-edge: rgba(150, 230, 215, 0.3);
+  --ex-node: #5ec8e0;
+  --ex-rich: #e9b25a;
+  --ex-pale: #e8f4f1;
+  --ex-good: #8ef08a;
+  --ex-warn: #f08a5d;
+  --ex-lost: #ff5f57;
+  --ex-eye: #04070a;
+  --ex-iris: #5ab6ef;
+  --ex-white: #f2f8f6;
+  --ex-mutated: #f2cd5c;
+  --ex-hot: #ff5b52;
+  --ex-shade: #071014;
+  --ex-halo: #ffffff;
+
+  /* The front page's network of eyes (eyes.js): the white of an eye, its
+     iris and pupil, the rim round it, and the threads between them. */
+  --eye-ball: #eef3f1;
+  --eye-iris: #5ab6ef;
+  --eye-pupil: #04070a;
+  --eye-rim: #0b1418;
+  --eye-link: #5fe0c6;
+
+  /* ---- the code viewer and the notebook's marks ---- */
+  /* The script's own body text and line numbers; its syntax colours are the
+     family GitHub uses, which is where most people last read Python. */
   --code-text: #a3b6b3;
   --code-gutter: #677f7e;
+  --tok-com: #8b949e;
+  --tok-str: #a5d6ff;
+  --tok-kw: #ff7b72;
+  --tok-num: #79c0ff;
+  --tok-def: #d2a8ff;
+  --tok-bi: #79c0ff;
+  --tok-self: #ffa657;
+  /* The mark beside a page in the contents: a study, an experiment or a
+     plan, a reference page, a guide. */
+  --mark-study: #eef4fa;
+  --mark-experiment: #f0a878;
+  --mark-reference: #9ab0c3;
+  --mark-guide: #8fa8e8;
+  /* How much of a part's own colour its words keep: all of it on a dark
+     page; on Paper they are darkened until they read. */
+  --part-keep: 100%;
 
-  /* Depth, in three steps. A dark interface cannot lean on shadow the way a
-     light one does — there is little left to darken — so these are shallow and
-     wide, enough to detach a card from the page without looking dropped. The
-     inset line is the lift: a panel catches a little light along its top edge,
-     the way a plate of glass or stone does. */
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-2: 0 6px 18px rgba(0, 0, 0, 0.5);
-  --shadow-3: 0 18px 48px rgba(0, 0, 0, 0.62);
-  --lift: inset 0 1px 0 rgba(214, 245, 236, 0.05);
+  /* ---- built from the above, so every theme gets them ---- */
+  /* An edge that is lit rather than drawn. */
+  --border-lit: rgba(var(--accent-rgb), 0.32);
+  /* The accent as light rather than ink: a glow behind something lit. */
+  --glow: rgba(var(--accent-rgb), 0.28);
+  /* Depth, in three steps, and the lift a panel catches along its top edge.
+     A dark interface cannot lean on shadow the way a light one does, so
+     these are shallow and wide. */
+  --shadow-1: 0 1px 2px rgba(var(--shade-rgb), calc(0.5 * var(--shade-k)));
+  --shadow-2: 0 6px 18px rgba(var(--shade-rgb), calc(0.5 * var(--shade-k)));
+  --shadow-3: 0 18px 48px rgba(var(--shade-rgb), calc(0.62 * var(--shade-k)));
+  --lift: inset 0 1px 0 rgba(var(--mist-rgb), 0.05);
 
   --radius: 6px;
+}
+
+/* Phosphor: a terminal in a dark room. Black, green, and a pale lime where
+   the other themes have gold. */
+:root[data-theme="phosphor"] {
+  --stage: #000402;
+  --bg: #010603;
+  --panel: #07130b;
+  --panel-2: #0c1f13;
+  --panel-3: #132c1b;
+  --border: #1b3d27;
+  --border-strong: #2b5c3b;
+  --stage-rgb: 0, 4, 2;
+  --bg-rgb: 1, 6, 3;
+  --panel-rgb: 7, 19, 11;
+  --panel-2-rgb: 12, 31, 19;
+  --border-rgb: 27, 61, 39;
+  --text: #d4ffe0;
+  --text-strong: #ffffff;
+  --text-soft: #b2e8c3;
+  --text-read: #c3f2d1;
+  --muted: #84c497;
+  --muted-2: #6aa77e;
+  --code-ink: #c3f2d1;
+  --accent: #3dff8f;
+  --accent-rgb: 61, 255, 143;
+  --accent-dim: #0a6a35;
+  --on-accent: #ffffff;
+  --gold: #d4f78a;
+  --gold-rgb: 212, 247, 138;
+  --ivory: #e9ffef;
+  --mist-rgb: 200, 255, 220;
+  --halo-rgb: 0, 0, 0;
+  --shade-rgb: 0, 0, 0;
+  --shade-k: 1;
+  --danger: #ff6e6e;
+  --danger-rgb: 255, 110, 110;
+  --ok: #d7f56a;
+  --warn: #ffd25a;
+  --info: #7fd6ff;
+  --danger-text: #ff9a9a;
+  --danger-on-tint: #ffb3b3;
+  --warn-fill: #6b4a00;
+  --warn-fill-hover: #855c00;
+  --warn-edge: #8a6000;
+  --chart-grid: rgba(var(--mist-rgb), 0.07);
+  --chart-tick: rgba(var(--mist-rgb), 0.36);
+  --chart-axis: rgba(var(--mist-rgb), 0.18);
+  --chart-veil: rgba(0, 4, 2, 0.6);
+  --line-1: #3dff8f;
+  --line-2: #ffd25a;
+  --line-3: #ff6e6e;
+  --line-4: #7fd6ff;
+  --line-5: #c79bff;
+  --line-6: #ff9f5a;
+  --line-7: #d7f56a;
+  --line-8: #e8e8e8;
+  --graph-bg: #000402;
+  --graph-edge: #9dffc4;
+  --graph-outline: #9dffc4;
+  --graph-outline-on: 0;
+  --home-colormap: phosphor;
+  --home-reverse: 0;
+  --home-edge: #3dff8f;
+  --home-edge-alpha: 0.3;
+  --ex-edge: rgba(80, 255, 150, 0.26);
+  --ex-node: #1fb86a;
+  --ex-rich: #f4e65a;
+  --ex-pale: #e6ffee;
+  --ex-good: #b4ff8a;
+  --ex-warn: #ffb45a;
+  --ex-lost: #ff5c5c;
+  --ex-eye: #010603;
+  --ex-iris: #3dff8f;
+  --ex-white: #eafff1;
+  --ex-mutated: #ffe45a;
+  --ex-hot: #ff4f4f;
+  --ex-shade: #02100a;
+  --ex-halo: #ffffff;
+  --eye-ball: #e6ffee;
+  --eye-iris: #3dff8f;
+  --eye-pupil: #010603;
+  --eye-rim: #0a3a1c;
+  --eye-link: #3dff8f;
+  --code-text: #9fd6b0;
+  --code-gutter: #4f8a63;
+  --tok-com: #6aa77e;
+  --tok-str: #c3f2d1;
+  --tok-kw: #ffd25a;
+  --tok-num: #7fd6ff;
+  --tok-def: #3dff8f;
+  --tok-bi: #7fd6ff;
+  --tok-self: #ff9f5a;
+  --mark-study: #e6ffee;
+  --mark-experiment: #ffb070;
+  --mark-reference: #84c497;
+  --mark-guide: #7fd6ff;
+  --part-keep: 100%;
+}
+
+/* Midnight: deep indigo, with periwinkle for the live and gold for titles. */
+:root[data-theme="midnight"] {
+  --stage: #05060f;
+  --bg: #080a17;
+  --panel: #10132a;
+  --panel-2: #181c3a;
+  --panel-3: #222850;
+  --border: #2a3060;
+  --border-strong: #424b8a;
+  --stage-rgb: 5, 6, 15;
+  --bg-rgb: 8, 10, 23;
+  --panel-rgb: 16, 19, 42;
+  --panel-2-rgb: 24, 28, 58;
+  --border-rgb: 42, 48, 96;
+  --text: #eceefe;
+  --text-strong: #ffffff;
+  --text-soft: #c7cbf0;
+  --text-read: #d6d9f7;
+  --muted: #a2a8d8;
+  --muted-2: #8a90c4;
+  --code-ink: #d6d9f7;
+  --accent: #8fa2ff;
+  --accent-rgb: 143, 162, 255;
+  --accent-dim: #3a49b8;
+  --on-accent: #ffffff;
+  --gold: #f0c27a;
+  --gold-rgb: 240, 194, 122;
+  --ivory: #f3f1ff;
+  --mist-rgb: 210, 214, 255;
+  --halo-rgb: 0, 0, 0;
+  --shade-rgb: 0, 0, 0;
+  --shade-k: 1;
+  --danger: #ff7b8a;
+  --danger-rgb: 255, 123, 138;
+  --ok: #7fe0a6;
+  --warn: #f0b65a;
+  --info: #c9a0ff;
+  --danger-text: #ffa3ad;
+  --danger-on-tint: #ffbcc4;
+  --warn-fill: #6e4612;
+  --warn-fill-hover: #8a5718;
+  --warn-edge: #93601c;
+  --chart-grid: rgba(var(--mist-rgb), 0.07);
+  --chart-tick: rgba(var(--mist-rgb), 0.36);
+  --chart-axis: rgba(var(--mist-rgb), 0.18);
+  --chart-veil: rgba(5, 6, 15, 0.6);
+  --line-1: #8fa2ff;
+  --line-2: #f0c27a;
+  --line-3: #ff7b8a;
+  --line-4: #7fe0a6;
+  --line-5: #d6a0ff;
+  --line-6: #ff9f6a;
+  --line-7: #6fd8ff;
+  --line-8: #e6e6f0;
+  --graph-bg: #05060f;
+  --graph-edge: #e6e8ff;
+  --graph-outline: #e6e8ff;
+  --graph-outline-on: 0;
+  --home-colormap: plasma;
+  --home-reverse: 0;
+  --home-edge: #9fb0ff;
+  --home-edge-alpha: 0.32;
+  --ex-edge: rgba(185, 190, 245, 0.3);
+  --ex-node: #8fa2ff;
+  --ex-rich: #f0b878;
+  --ex-pale: #eef0ff;
+  --ex-good: #7fe0a6;
+  --ex-warn: #f08a6b;
+  --ex-lost: #ff5f6e;
+  --ex-eye: #05060f;
+  --ex-iris: #a9b6ff;
+  --ex-white: #f4f5ff;
+  --ex-mutated: #f2d35c;
+  --ex-hot: #ff5b6a;
+  --ex-shade: #0a0c1c;
+  --ex-halo: #ffffff;
+  --eye-ball: #f1f2ff;
+  --eye-iris: #8fa2ff;
+  --eye-pupil: #05060f;
+  --eye-rim: #20244a;
+  --eye-link: #8fa2ff;
+  --code-text: #b3b8e0;
+  --code-gutter: #6c72a8;
+  --tok-com: #8a90c4;
+  --tok-str: #a5d6ff;
+  --tok-kw: #ff8fa0;
+  --tok-num: #8fd0ff;
+  --tok-def: #d6a0ff;
+  --tok-bi: #8fd0ff;
+  --tok-self: #f0b878;
+  --mark-study: #f3f1ff;
+  --mark-experiment: #f0b878;
+  --mark-reference: #a2a8d8;
+  --mark-guide: #8fa2ff;
+  --part-keep: 100%;
+}
+
+/* Paper: white. Ink on paper, the accent deepened to a teal that reads on
+   white, gold to an amber-brown; shadows faint, and words parted from a
+   busy picture by white rather than by black. */
+:root[data-theme="paper"] {
+  color-scheme: light;
+  --stage: #ffffff;
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --panel-2: #f3f5f6;
+  --panel-3: #e8ecee;
+  --border: #dce2e5;
+  --border-strong: #b9c3c8;
+  --stage-rgb: 255, 255, 255;
+  --bg-rgb: 255, 255, 255;
+  --panel-rgb: 255, 255, 255;
+  --panel-2-rgb: 243, 245, 246;
+  --border-rgb: 220, 226, 229;
+  --text: #10181c;
+  --text-strong: #000000;
+  --text-soft: #2c3a40;
+  --text-read: #1c282d;
+  --muted: #54656c;
+  --muted-2: #63737a;
+  --code-ink: #1d3a40;
+  --accent: #0a7c66;
+  --accent-rgb: 10, 124, 102;
+  --accent-dim: #0a6e5b;
+  --on-accent: #ffffff;
+  --gold: #8a5b00;
+  --gold-rgb: 138, 91, 0;
+  --ivory: #10181c;
+  --mist-rgb: 16, 24, 28;
+  --halo-rgb: 255, 255, 255;
+  --shade-rgb: 16, 24, 28;
+  --shade-k: 0.28;
+  --danger: #c4321f;
+  --danger-rgb: 196, 50, 31;
+  --ok: #2f7d1b;
+  --warn: #9a5b00;
+  --info: #6a3fc4;
+  --danger-text: #b42b1a;
+  --danger-on-tint: #9e2416;
+  --warn-fill: #a35d00;
+  --warn-fill-hover: #b86a00;
+  --warn-edge: #8a4f00;
+  --chart-grid: rgba(var(--mist-rgb), 0.08);
+  --chart-tick: rgba(var(--mist-rgb), 0.45);
+  --chart-axis: rgba(var(--mist-rgb), 0.25);
+  --chart-veil: rgba(255, 255, 255, 0.82);
+  --line-1: #0a7c66;
+  --line-2: #b07800;
+  --line-3: #d6453d;
+  --line-4: #2f7d1b;
+  --line-5: #7a4fd1;
+  --line-6: #d9652a;
+  --line-7: #2f78c4;
+  --line-8: #4a5459;
+  --graph-bg: #ffffff;
+  --graph-edge: #1d2b33;
+  --graph-outline: #1d2b33;
+  --graph-outline-on: 1;
+  --home-colormap: viridis;
+  --home-reverse: 1;
+  --home-edge: #2a6b5e;
+  --home-edge-alpha: 0.3;
+  --ex-edge: rgba(30, 45, 55, 0.32);
+  --ex-node: #3d79d6;
+  --ex-rich: #d8812a;
+  --ex-pale: #24343b;
+  --ex-good: #2f9e5b;
+  --ex-warn: #d9772b;
+  --ex-lost: #d63a2f;
+  --ex-eye: #0b0f12;
+  --ex-iris: #2f86d6;
+  --ex-white: #ffffff;
+  --ex-mutated: #c99a00;
+  --ex-hot: #e03a2f;
+  --ex-shade: #0b1418;
+  --ex-halo: #9cc3ff;
+  --eye-ball: #ffffff;
+  --eye-iris: #2f86d6;
+  --eye-pupil: #0b0f12;
+  --eye-rim: #33454c;
+  --eye-link: #2a6b5e;
+  --code-text: #33464c;
+  --code-gutter: #8b9aa0;
+  --tok-com: #6e7781;
+  --tok-str: #0a3069;
+  --tok-kw: #cf222e;
+  --tok-num: #0550ae;
+  --tok-def: #8250df;
+  --tok-bi: #0550ae;
+  --tok-self: #953800;
+  --mark-study: #10181c;
+  --mark-experiment: #d9772b;
+  --mark-reference: #6b7b82;
+  --mark-guide: #3d6fd6;
+  --part-keep: 55%;
 }
 
 * { box-sizing: border-box; }
@@ -193,7 +548,7 @@ html { scrollbar-gutter: stable; }
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 420px at 50% -260px, rgba(95, 224, 198, 0.045), transparent 70%),
+    radial-gradient(1200px 420px at 50% -260px, rgba(var(--accent-rgb), 0.045), transparent 70%),
     var(--bg);
   background-repeat: no-repeat;
   background-color: var(--bg);
@@ -203,7 +558,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-::selection { background: rgba(95, 224, 198, 0.3); color: #fff; }
+::selection { background: rgba(var(--accent-rgb), 0.3); color: var(--text-strong); }
 
 /* Code and its kin would otherwise take the browser's own monospace. */
 code, pre, kbd, samp { font-family: var(--font); }
@@ -229,28 +584,34 @@ h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color
   border: 0;
 }
 
-/* A rune from the page's sprite (index.html): strokes only, in the colour of
-   whatever it is set in, at the height of a capital. */
-.rune {
-  width: 0.62em;
-  height: 1em;
-  flex: none;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.35;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  overflow: visible;
-}
-
 /* A view's own title: carved, not printed. */
-.sims-head h2,
+.page-head h2,
 .explain-intro h2 {
   font-family: var(--font-display);
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--ivory);
 }
+
+/* The head of a page: its title and a line under it on the left, what can be
+   done from here on the right, and a hairline beneath that fades out — the
+   same on every page, so each opens the same way. */
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 1240px;
+  margin: 0 auto 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, rgba(var(--accent-rgb), 0.35), rgba(var(--accent-rgb), 0) 70%) 1;
+}
+.page-head h2 { margin: 0; font-size: 26px; line-height: 1.2; }
+.page-sub { margin: 6px 0 0; color: var(--muted); font-size: 12px; letter-spacing: 0.04em; }
+.page-sub:empty { display: none; }
+.page-actions { display: flex; gap: 10px; align-items: center; }
 
 /* ---- top bar ---- */
 /* A dark band with a lit seam beneath it: gold fading into the accent and out
@@ -261,8 +622,8 @@ h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color
   gap: 20px;
   padding: 9px 18px;
   background: var(--bg);
-  border-bottom: 1px solid rgba(95, 224, 198, 0.1);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.1);
+  box-shadow: 0 1px 0 rgba(var(--shade-rgb), calc(0.6 * var(--shade-k))), 0 8px 24px rgba(var(--shade-rgb), calc(0.35 * var(--shade-k)));
   position: sticky;
   top: 0;
   z-index: 20;
@@ -274,8 +635,8 @@ h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color
   right: 8%;
   bottom: -1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(226, 191, 122, 0.45) 30%,
-                              rgba(95, 224, 198, 0.55) 62%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--gold-rgb), 0.45) 30%,
+                              rgba(var(--accent-rgb), 0.55) 62%, transparent);
   pointer-events: none;
 }
 
@@ -344,42 +705,56 @@ h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color
 /* The label beside the bar is pushed across by the bar now, not by itself. */
 .job-bar:not([hidden]) + .run-label { margin-left: 12px; }
 
-/* Each tab a rune and a word. The rune is gold and dim until the tab is
-   wanted, so the row reads as five words with marks beside them, not as ten
-   things. */
 .tab {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   background: transparent;
   border: 1px solid transparent;
   color: var(--muted);
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: var(--radius);
   cursor: pointer;
   font-size: 12.5px;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
-.tab .rune { width: 7px; height: 12px; color: var(--gold); opacity: 0.45; transition: opacity 0.2s ease; }
-.tab:hover { color: var(--text); border-color: transparent; background: rgba(214, 245, 236, 0.05); }
-.tab:hover .rune { opacity: 0.85; }
-/* The tab you are on, said plainly: bright, its rune lit, and a seam of the
-   accent beneath it. A border the same grey as every other panel edge did the
-   job in principle and not in practice — at a glance the row read as five
-   tabs of equal weight. */
+.tab:hover { color: var(--text); border-color: transparent; background: rgba(var(--mist-rgb), 0.05); }
+/* The tab you are on, said plainly: bright, and a seam of the accent beneath
+   it. A border the same grey as every other panel edge did the job in
+   principle and not in practice — at a glance the row read as tabs of equal
+   weight. */
 .tab.active {
-  background: rgba(95, 224, 198, 0.07);
-  color: #fff;
+  background: rgba(var(--accent-rgb), 0.07);
+  color: var(--text-strong);
   font-weight: 600;
 }
-.tab.active .rune { opacity: 1; filter: drop-shadow(0 0 4px rgba(226, 191, 122, 0.55)); }
-/* A laptop's width: the runes cost the bar about ninety pixels, which the
-   label of the open run would otherwise give up entirely. */
 @media (max-width: 1200px) {
   .topbar { gap: 14px; }
-  .tab { padding: 6px 8px; gap: 6px; }
+  .tab { padding: 7px 10px; }
 }
+
+/* The colour themes: one swatch each, a disc of the theme's own page with
+   its accent in it, so the choice is seen rather than read. */
+.theme-switch { display: inline-flex; gap: 6px; align-items: center; flex-shrink: 0; margin-left: 16px; }
+.theme-swatch {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  flex: none;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  background: var(--swatch-bg);
+  box-shadow: inset 0 0 0 3px var(--swatch-bg), inset 0 0 0 9px var(--swatch-ink);
+}
+.theme-swatch:hover:not(:disabled) { border-color: var(--text); background: var(--swatch-bg); }
+.theme-swatch[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.35), inset 0 0 0 3px var(--swatch-bg), inset 0 0 0 9px var(--swatch-ink); }
+.theme-swatch-obsidian { --swatch-bg: #080d11; --swatch-ink: #5fe0c6; }
+.theme-swatch-phosphor { --swatch-bg: #010603; --swatch-ink: #3dff8f; }
+.theme-swatch-midnight { --swatch-bg: #080a17; --swatch-ink: #8fa2ff; }
+.theme-swatch-paper { --swatch-bg: #ffffff; --swatch-ink: #0a7c66; }
 
 /* One line, shortened rather than wrapped when the loading bar and the byline
    share the bar with it. */
@@ -403,7 +778,7 @@ h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color
   font-size: 11.5px;
   letter-spacing: 0.01em;
 }
-.byline a { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(226, 191, 122, 0.55); }
+.byline a { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(var(--gold-rgb), 0.55); }
 .byline a:hover { color: var(--gold); border-bottom-color: var(--gold); }
 /* In two short lines when the bar is crowded: beside a loading bar, and on
    windows too narrow for the tabs and the byline in one line. */
@@ -415,10 +790,12 @@ h3 { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color
 }
 
 /* ---- views ---- */
-.view { display: none; padding: 18px; }
+/* Every page sits in the same margins: room on all sides, so nothing on it
+   touches the edge of the window. */
+.view { display: none; padding: 28px 32px 48px; }
 .view.active { display: block; }
 
-#view-viewer { padding: 12px; }
+#view-viewer { padding: 20px 24px 40px; }
 
 .panel {
   background: var(--panel);
@@ -467,7 +844,7 @@ input[type="text"], input[type="number"], input[type="search"], select {
   font-size: 13px;
   font-family: inherit;
 }
-input:focus, select:focus { outline: none; border-color: var(--accent-dim); box-shadow: 0 0 0 3px rgba(95, 224, 198, 0.12); }
+input:focus, select:focus { outline: none; border-color: var(--accent-dim); box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.12); }
 select option { background: var(--panel); color: var(--text); }
 
 input[type="color"] { width: 100%; height: 28px; background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 2px; }
@@ -496,7 +873,7 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
    bright one it would read at 1.6:1, which is why the hover state takes dark
    text instead of keeping white and becoming the least legible thing on the
    page. */
-button.primary { background: var(--accent-dim); border-color: rgba(95, 224, 198, 0.55); color: #fff; }
+button.primary { background: var(--accent-dim); border-color: rgba(var(--accent-rgb), 0.55); color: var(--on-accent); }
 button.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--stage); box-shadow: 0 0 16px var(--glow); }
 button.danger:hover { border-color: var(--danger); color: var(--danger); }
 button.ghost { background: transparent; }
@@ -534,9 +911,9 @@ button.small { padding: 4px 9px; font-size: 12px; }
   background: var(--stage);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), var(--shadow-1);
+  box-shadow: inset 0 0 0 1px rgba(var(--shade-rgb), calc(0.4 * var(--shade-k))), var(--shadow-1);
   overflow: hidden;
-  height: min(64vh, 720px);
+  height: min(68vh, 780px);
 }
 
 /* touch-action: the canvas takes every finger itself (viewer.js pans and zooms
@@ -561,7 +938,7 @@ button.small { padding: 4px 9px; font-size: 12px; }
    a backdrop blur would be recomputed with it. */
 .hover-card {
   position: absolute;
-  background: rgba(5, 8, 11, 0.93);
+  background: rgba(var(--stage-rgb), 0.93);
   border: 1px solid var(--border-lit);
   border-radius: 5px;
   box-shadow: var(--shadow-2);
@@ -746,7 +1123,6 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 .preset-name { width: 100%; }
 
 /* Segmented toggles */
-.view-toggles { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
 .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; background: var(--panel); }
 .seg-btn {
   background: var(--panel);
@@ -758,7 +1134,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 }
 .seg-btn + .seg-btn { border-left: 1px solid var(--border); }
 .seg-btn:hover { color: var(--text); background: var(--panel-3); }
-.seg-btn.active { background: var(--accent-dim); color: #fff; box-shadow: inset 0 0 0 1px rgba(95, 224, 198, 0.35); }
+.seg-btn.active { background: var(--accent-dim); color: var(--on-accent); box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.35); }
 
 /* Fixed-width slots so the bar cannot reflow while playing. */
 .frame-label {
@@ -797,7 +1173,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   border: 1px solid var(--border-lit);
   border-radius: var(--radius);
   padding: 14px;
-  box-shadow: var(--shadow-3), 0 0 0 1px rgba(0, 0, 0, 0.5), 0 0 40px rgba(95, 224, 198, 0.06);
+  box-shadow: var(--shadow-3), 0 0 0 1px rgba(var(--shade-rgb), calc(0.5 * var(--shade-k))), 0 0 40px rgba(var(--accent-rgb), 0.06);
   z-index: 40;
 }
 .stat-detail-head h3 { color: var(--gold); }
@@ -830,7 +1206,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 .stat-val { white-space: nowrap; }
 
 /* The Fit view button is sticky, so it needs an on state. */
-#btnFit.active { background: var(--accent-dim); color: #fff; }
+#btnFit.active { background: var(--accent-dim); color: var(--on-accent); }
 
 /* Hover card sections and verdicts. */
 .hover-card hr {
@@ -856,8 +1232,6 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   border-radius: 5px;
 }
 
-/* The toggle row carries more now, so let it wrap tidily. */
-.view-toggles { row-gap: 8px; }
 
 /* Chart headers: the metric pickers sit in the caption, scales on the right. */
 .charts figcaption {
@@ -881,7 +1255,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   cursor: pointer;
   flex: none;
 }
-.step-btn:hover:not(:disabled) { color: #fff; border-color: var(--accent); }
+.step-btn:hover:not(:disabled) { color: var(--text-strong); border-color: var(--accent); }
 .step-btn:disabled { opacity: 0.3; cursor: default; }
 
 .chart-pair { display: inline-flex; gap: 4px; align-items: center; min-width: 0; }
@@ -909,7 +1283,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   border-radius: 4px;
   line-height: 1.4;
 }
-.axis-btn.active { background: var(--accent-dim); color: #fff; border-color: var(--accent-dim); }
+.axis-btn.active { background: var(--accent-dim); color: var(--on-accent); border-color: var(--accent-dim); }
 
 /* Statistics, grouped into collapsible categories */
 .stats-groups { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
@@ -993,7 +1367,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 .viewer-layout:fullscreen { background: var(--bg); }
 .viewer-layout:-webkit-full-screen { background: var(--bg); }
 
-#btnFullscreen[aria-pressed="true"] { background: var(--accent-dim); color: #fff; }
+#btnFullscreen[aria-pressed="true"] { background: var(--accent-dim); color: var(--on-accent); }
 
 /* Focus: the clicked node's neighbourhood, and how far out it reaches. */
 .seg-field {
@@ -1034,11 +1408,12 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
    there. On a static host the first visit spends several seconds fetching a
    Python runtime, and silence for that long reads as a broken page. */
 .backend-notice {
-  margin: 0 0 12px;
+  max-width: 1240px;
+  margin: 0 auto 20px;
   padding: 9px 12px;
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
   background: var(--panel);
   font-size: 12px;
   color: var(--muted);
@@ -1089,63 +1464,134 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 .explain-intro b { color: var(--text); font-weight: 600; }
 
 /* ==========================================================================
-   Research
+   The Viewer: its head, the view bar, the folds and the instruments
    ==========================================================================
-   One run picker and a switch between the ways of looking at a run — plus the
-   reading list, which is a page rather than a view and so has neither. */
+   One run, looked at in five ways: the ways on the left of the head, the run
+   on the right. The network opens first, alone in the middle of the page with
+   its play bar; the drawing settings open beside it when asked for, and the
+   statistics and the charts fold away beneath it. The other four ways are
+   the instruments that were the Research tab, drawn in the network's place. */
 
-.research-bar {
-  max-width: 1080px;
-  margin: 0 auto 16px;
+.viewer-head {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  gap: 12px 20px;
   flex-wrap: wrap;
-  font-size: 12px;
-  color: var(--muted);
+  max-width: 1400px;
+  margin: 0 auto 16px;
 }
-.research-bar select { width: auto; min-width: 240px; max-width: 400px; }
-
-.research-modes { display: flex; gap: 4px; margin-right: auto; }
-.research-modes button {
+.viewer-modes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--lift);
+}
+.viewer-mode {
   background: transparent;
-  border: 1px solid transparent;
-  color: var(--muted);
-  padding: 5px 13px;
-  border-radius: var(--radius);
-  font-size: 13px;
-  cursor: pointer;
-}
-.research-modes button:hover { color: var(--text); border-color: var(--border); }
-.research-modes button.active {
-  background: rgba(95, 224, 198, 0.07);
-  color: #fff;
-  border-color: var(--border-lit);
-  font-weight: 600;
-}
-.research-panel[hidden] { display: none; }
-
-/* The second level. Quieter than the group above it, and underlined rather
-   than boxed, so the two rows read as an outline and not as ten equal tabs. */
-.research-submodes { margin: -8px auto 16px; }
-.research-submodes button {
-  padding: 3px 10px;
-  font-size: 12.5px;
-  border-radius: 0;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  color: var(--muted);
 }
-.research-submodes button:hover { border-color: transparent; color: var(--text); }
-.research-submodes button.active {
-  background: transparent;
-  border-bottom-color: var(--accent);
-  color: #fff;
+.viewer-mode:hover:not(:disabled) { background: rgba(var(--mist-rgb), 0.06); color: var(--text); }
+.viewer-mode.active,
+.viewer-mode.active:hover:not(:disabled) {
+  background: var(--accent-dim);
+  color: var(--on-accent);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.18);
 }
-.research-submodes button[hidden] { display: none; }
+.viewer-layout[hidden],
+.viewer-analysis[hidden],
+.research-panel[hidden] { display: none; }
+.viewer-analysis { max-width: 1400px; margin: 0 auto; }
 
-/* The run picker, hidden for a mode that is not about one run. */
-.research-run { display: inline-flex; align-items: center; gap: 8px; }
-.research-run[hidden] { display: none; }
+/* Closed, the settings panel and its handle give their column back and the
+   picture stands in the middle of the page. !important because the handle's
+   width is written on the element itself (app.js). */
+.viewer-layout.is-collapsed { grid-template-columns: minmax(0, 1fr) !important; }
+.viewer-layout.is-collapsed > .resizer,
+.viewer-layout.is-collapsed > .controls { display: none; }
+.viewer-layout.is-collapsed > .canvas-column { width: 100%; max-width: 1400px; margin: 0 auto; }
+
+/* Under the play bar: the camera, the hint, and the way to the settings. */
+.view-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.view-hint { margin-left: auto; color: var(--muted-2); }
+.view-settings-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  font-size: 12px;
+  background: var(--panel);
+}
+.view-settings-toggle::before {
+  content: '';
+  width: 12px;
+  height: 10px;
+  background:
+    linear-gradient(currentColor 0 0) 0 0 / 100% 1.5px no-repeat,
+    linear-gradient(currentColor 0 0) 0 50% / 100% 1.5px no-repeat,
+    linear-gradient(currentColor 0 0) 0 100% / 100% 1.5px no-repeat;
+}
+.view-settings-toggle.active { border-color: var(--border-lit); color: var(--text-strong); background: rgba(var(--accent-rgb), 0.08); }
+
+/* The two folds under the picture: shut at first, each a row that says what
+   it holds, open on a click. */
+.viewer-fold {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--lift);
+}
+.viewer-fold > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 16px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+.viewer-fold > summary::-webkit-details-marker { display: none; }
+.viewer-fold > summary::before { content: '\25B8'; color: var(--accent); transition: transform 0.15s; }
+.viewer-fold[open] > summary::before { transform: rotate(90deg); }
+.viewer-fold > summary:hover { color: var(--text-strong); }
+.viewer-fold > summary .hint { font-weight: 400; text-transform: none; letter-spacing: 0; }
+.viewer-fold > .stats-groups,
+.viewer-fold > .charts { margin: 0; padding: 0 14px 14px; }
+
+/* The View group at the top of the settings: a label over each control. */
+.view-group { display: grid; gap: 6px; justify-items: start; }
+.control-label {
+  margin-top: 6px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.view-group .control-label:first-child { margin-top: 0; }
+.view-group .seg { flex-wrap: wrap; }
+/* Three phases with long names: a short list rather than a row that breaks. */
+.view-group #phaseToggle { flex-direction: column; justify-self: stretch; }
+.view-group #phaseToggle .seg-btn { text-align: left; }
+.view-group #phaseToggle .seg-btn + .seg-btn { border-left: none; border-top: 1px solid var(--border); }
 
 /* ==========================================================================
    Rendered notes
@@ -1205,8 +1651,8 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   height: 7px;
   margin-top: 14px;
   background:
-    radial-gradient(circle, var(--gold) 0 2px, rgba(226, 191, 122, 0.35) 2.5px, transparent 3.5px) right center / 7px 7px no-repeat,
-    linear-gradient(90deg, rgba(226, 191, 122, 0), rgba(226, 191, 122, 0.8)) left center / 86px 1px no-repeat;
+    radial-gradient(circle, var(--gold) 0 2px, rgba(var(--gold-rgb), 0.35) 2.5px, transparent 3.5px) right center / 7px 7px no-repeat,
+    linear-gradient(90deg, rgba(var(--gold-rgb), 0), rgba(var(--gold-rgb), 0.8)) left center / 86px 1px no-repeat;
 }
 /* A section: in the titles' face, in gold — the rubric of an old book, where
    the headings were the one thing written in a second ink. */
@@ -1220,7 +1666,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   margin: 46px 0 14px;
   padding-bottom: 9px;
   border-bottom: 1px solid transparent;
-  border-image: linear-gradient(90deg, rgba(226, 191, 122, 0.45), rgba(226, 191, 122, 0) 70%) 1;
+  border-image: linear-gradient(90deg, rgba(var(--gold-rgb), 0.45), rgba(var(--gold-rgb), 0) 70%) 1;
 }
 .md h4 { font-size: 19px; font-weight: 600; line-height: 1.4; color: var(--text); margin: 30px 0 8px; }
 .md h5, .md h6 {
@@ -1243,12 +1689,12 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   height: 7px;
   margin: 40px auto;
   background:
-    radial-gradient(circle, var(--gold) 0 2px, rgba(226, 191, 122, 0.35) 2.5px, transparent 3.5px) center / 7px 7px no-repeat,
-    linear-gradient(90deg, transparent, rgba(226, 191, 122, 0.45) 46%, transparent 46%, transparent 54%, rgba(226, 191, 122, 0.45) 54%, transparent) center / 100% 1px no-repeat;
+    radial-gradient(circle, var(--gold) 0 2px, rgba(var(--gold-rgb), 0.35) 2.5px, transparent 3.5px) center / 7px 7px no-repeat,
+    linear-gradient(90deg, transparent, rgba(var(--gold-rgb), 0.45) 46%, transparent 46%, transparent 54%, rgba(var(--gold-rgb), 0.45) 54%, transparent) center / 100% 1px no-repeat;
 }
 .md a {
   color: var(--accent);
-  text-decoration-color: rgba(95, 224, 198, 0.4);
+  text-decoration-color: rgba(var(--accent-rgb), 0.4);
   text-underline-offset: 3px;
 }
 .md a:hover { text-decoration-color: var(--accent); }
@@ -1258,27 +1704,27 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 .md a[title][data-md] {
   color: inherit;
   text-decoration: underline dotted;
-  text-decoration-color: rgba(95, 224, 198, 0.75);
+  text-decoration-color: rgba(var(--accent-rgb), 0.75);
   text-underline-offset: 4px;
 }
 .md a[title][data-md]:hover { color: var(--accent); }
-.md b { color: #fff; font-weight: 600; }
+.md b { color: var(--text-strong); font-weight: 600; }
 
 .md blockquote {
   margin: 0 0 1.05em;
   padding: 2px 0 2px 18px;
-  border-left: 2px solid rgba(226, 191, 122, 0.6);
+  border-left: 2px solid rgba(var(--gold-rgb), 0.6);
   color: var(--text-soft);
   font-style: italic;
 }
 .md code {
   font-family: var(--font);
-  background: rgba(214, 245, 236, 0.06);
-  border: 1px solid rgba(214, 245, 236, 0.08);
+  background: rgba(var(--mist-rgb), 0.06);
+  border: 1px solid rgba(var(--mist-rgb), 0.08);
   border-radius: 4px;
   padding: 1px 5px;
   font-size: 0.76em;
-  color: #d3ece6;
+  color: var(--code-ink);
   overflow-wrap: anywhere;
 }
 .md pre {
@@ -1300,11 +1746,11 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   margin: 6px 0 22px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(17, 28, 34, 0.55);
+  background: rgba(var(--panel-rgb), 0.55);
 }
 /* A long table sorts by the column whose head is clicked (Book.sortable). */
 .md-sortable th { cursor: pointer; user-select: none; }
-.md-sortable th:hover { color: #fff; }
+.md-sortable th:hover { color: var(--text-strong); }
 .md-sortable th[data-sort="up"]::after { content: " ▲"; }
 .md-sortable th[data-sort="down"]::after { content: " ▼"; }
 .md table {
@@ -1318,21 +1764,21 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 }
 .md th, .md td {
   border: none;
-  border-bottom: 1px solid rgba(44, 67, 75, 0.7);
+  border-bottom: 1px solid rgba(var(--border-rgb), 0.7);
   padding: 7px 12px;
   text-align: left;
   vertical-align: top;
 }
 .md tbody tr:last-child td { border-bottom: none; }
 .md th {
-  background: rgba(26, 42, 50, 0.7);
+  background: rgba(var(--panel-2-rgb), 0.7);
   color: var(--gold);
   font-weight: 600;
   white-space: nowrap;
-  border-bottom-color: rgba(226, 191, 122, 0.35);
+  border-bottom-color: rgba(var(--gold-rgb), 0.35);
 }
-.md tbody tr:hover td { background: rgba(95, 224, 198, 0.045); }
-.md td b { color: #fff; }
+.md tbody tr:hover td { background: rgba(var(--accent-rgb), 0.045); }
+.md td b { color: var(--text-strong); }
 .md-status { color: var(--muted); font-family: var(--font); font-size: 13px; }
 /* A heading someone links to lands below the sticky top bar, not under it. */
 .md h2, .md h3, .md h4 { scroll-margin-top: 72px; }
@@ -1379,7 +1825,7 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   border-radius: 5px;
   font: inherit;
 }
-.book-search:focus { outline: none; border-color: var(--accent-dim); box-shadow: 0 0 0 3px rgba(95, 224, 198, 0.12); }
+.book-search:focus { outline: none; border-color: var(--accent-dim); box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.12); }
 .book-toc-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .book-toc-filters select { min-width: 0; padding: 4px 6px; font-size: 12px; }
 .book-toc-date { font-family: var(--font); color: var(--muted); font-size: 11px; }
@@ -1399,8 +1845,8 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   font-size: 14.5px;
   line-height: 1.35;
 }
-.book-toc-item:hover { background: rgba(214, 245, 236, 0.05); color: var(--text); }
-.book-toc-item.active { background: rgba(95, 224, 198, 0.09); color: #fff; box-shadow: inset 0 0 0 1px rgba(95, 224, 198, 0.18); }
+.book-toc-item:hover { background: rgba(var(--mist-rgb), 0.05); color: var(--text); }
+.book-toc-item.active { background: rgba(var(--accent-rgb), 0.09); color: var(--text-strong); box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.18); }
 .book-toc-item.unwritten { color: var(--muted-2); }
 .book-toc-item .book-chip { justify-self: start; margin-top: 4px; }
 
@@ -1434,7 +1880,9 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 }
 .book-kicker a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
 .book-kicker a:hover { color: var(--text); border-bottom-color: var(--text); }
-.book-kicker-part { color: var(--part, inherit); font-weight: 600; }
+/* A part's own colour, as words: whole on a dark page, darkened on Paper
+   (--part-keep) until it reads on white. */
+.book-kicker-part { color: color-mix(in srgb, var(--part, var(--muted)) var(--part-keep), #000); font-weight: 600; }
 
 /* The parts of the notebook, each in its colour (the author, 2026-11-09: seven parts,
    the part's colour as a stripe, and a mark for the kind of page). A page wears its
@@ -1473,12 +1921,12 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   font-size: 11px;
   letter-spacing: 0.11em;
   text-transform: uppercase;
-  color: var(--part, var(--text));
+  color: color-mix(in srgb, var(--part, var(--text)) var(--part-keep), #000);
 }
 .book-section > summary::-webkit-details-marker { display: none; }
 .book-section > summary::before { content: "\25B8"; font-size: 10px; transition: transform 0.15s; }
 .book-section[open] > summary::before { transform: rotate(90deg); }
-.book-section > summary:hover { background: rgba(214, 245, 236, 0.04); }
+.book-section > summary:hover { background: rgba(var(--mist-rgb), 0.04); }
 .book-section-title { flex: 1; }
 .book-section-count { color: var(--muted); font-weight: 400; letter-spacing: 0; }
 .book-topic-head {
@@ -1490,6 +1938,21 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   color: var(--muted-2);
 }
 .book-part .book-toc-item { border-left: 2px solid var(--part, transparent); border-radius: 0 5px 5px 0; }
+
+/* The research's documents, after the parts: the findings, the reading list
+   and the notes on graphs, which were the Research tab's reading. */
+.book-reading {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, rgba(var(--accent-rgb), 0.3), rgba(var(--accent-rgb), 0)) 1;
+}
+.book-reading-head {
+  margin: 0 0 6px 8px;
+  font-size: 11px;
+  letter-spacing: 0.11em;
+  color: var(--text-soft);
+}
 .book-mark {
   display: inline-block;
   width: 8px;
@@ -1498,11 +1961,11 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
   vertical-align: 1px;
   box-sizing: border-box;
 }
-.book-mark-study { background: #eef4fa; border-radius: 50%; }
-.book-mark-experiment { background: #f0a878; border-radius: 2px; }
-.book-mark-plan { border: 1.5px solid #f0a878; border-radius: 2px; }
-.book-mark-reference { width: 7px; height: 7px; background: #9ab0c3; transform: rotate(45deg); }
-.book-mark-guide { background: #8fa8e8; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.book-mark-study { background: var(--mark-study); border-radius: 50%; }
+.book-mark-experiment { background: var(--mark-experiment); border-radius: 2px; }
+.book-mark-plan { border: 1.5px solid var(--mark-experiment); border-radius: 2px; }
+.book-mark-reference { width: 7px; height: 7px; background: var(--mark-reference); transform: rotate(45deg); }
+.book-mark-guide { background: var(--mark-guide); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .book-note { color: var(--muted); font-size: 12.5px; }
 .book-reason { color: var(--warn); font-size: 12.5px; }
 
@@ -1691,7 +2154,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   background: var(--stage);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4), var(--shadow-1);
+  box-shadow: inset 0 0 0 1px rgba(var(--shade-rgb), calc(0.4 * var(--shade-k))), var(--shadow-1);
   overflow: hidden;
 }
 #lineageCanvas,
@@ -1773,9 +2236,9 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 }
 .diagram-tabs button:hover { color: var(--text); }
 .diagram-tabs button.active {
-  background: rgba(95, 224, 198, 0.07);
+  background: rgba(var(--accent-rgb), 0.07);
   border-color: var(--border-lit);
-  color: #fff;
+  color: var(--text-strong);
   font-weight: 600;
 }
 
@@ -1857,7 +2320,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   cursor: pointer;
   padding: 1px 5px;
 }
-.diagram-drop:hover { color: #fff; }
+.diagram-drop:hover { color: var(--text-strong); }
 .diagram-preset-title { color: var(--muted); }
 
 .diagram-preset {
@@ -1878,7 +2341,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   padding: 1px 4px;
 }
 .diagram-preset button:first-child { color: var(--text); }
-.diagram-preset button:hover { color: #fff; }
+.diagram-preset button:hover { color: var(--text-strong); }
 
 /* --- Theses, as the time series they are --------------------------------
    The claim sits above the evidence for it. Set as reading text, because it
@@ -1926,81 +2389,91 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 /* ==========================================================================
    Simulations
    ==========================================================================
-   A grid of cards and nothing else. Everything that acts on a simulation is
-   on its card; everything that makes one is behind the first cell. */
+   The simulations as cards, and the means of finding one among many: words
+   to look for, a status, and what to group them by. Everything that acts on
+   a simulation is on its card; making one is the button in the head. */
 
-.sims-head {
+.sims-tools {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
   max-width: 1240px;
-  margin: 0 auto 14px;
+  margin: 0 auto 26px;
 }
-.sims-head h2 { margin: 0; font-size: 24px; }
+.sims-tools input[type="search"] {
+  flex: 1 1 300px;
+  max-width: 440px;
+  padding: 8px 12px 8px 32px;
+  /* A lens, drawn rather than typed, so it sits right in any font. */
+  background:
+    radial-gradient(circle at 15px 50%, transparent 4.5px, var(--muted-2) 4.6px, var(--muted-2) 5.9px, transparent 6px) no-repeat,
+    linear-gradient(45deg, transparent 47%, var(--muted-2) 47%, var(--muted-2) 53%, transparent 53%) 19px calc(50% + 5px) / 6px 6px no-repeat,
+    var(--bg);
+}
+.sims-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sims-tool select { width: auto; min-width: 140px; text-transform: none; letter-spacing: 0; }
+
+.sim-groups { max-width: 1240px; margin: 0 auto; display: grid; gap: 30px; }
+/* A group's head: its name in the machine's capitals, how many it holds, and
+   a hairline running out to the right. */
+.sim-group-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 12px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--text-soft);
+}
+.sim-group-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.3), rgba(var(--accent-rgb), 0));
+}
+.sim-group-count {
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--accent);
+  letter-spacing: 0;
+}
 
 .sim-grid {
-  max-width: 1240px;
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
   align-items: stretch;
 }
 
-/* A plate: lit a little along its top, as every panel here is, with a seam of
-   gold-to-green that only shows when the pointer is on it. */
+/* A plate: lit a little along its top, as every panel here is, with the edge
+   lit in the accent while the pointer is on it. */
 .sim-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
-  padding: 15px 16px;
-  background: linear-gradient(180deg, rgba(214, 245, 236, 0.025), rgba(214, 245, 236, 0) 46%), var(--panel);
+  padding: 18px 18px 16px;
+  background: linear-gradient(180deg, rgba(var(--mist-rgb), 0.025), rgba(var(--mist-rgb), 0) 46%), var(--panel);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 8px;
   box-shadow: var(--lift), var(--shadow-1);
   transition: box-shadow 0.15s, border-color 0.15s, background 0.15s;
 }
 .sim-card:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--lift), var(--shadow-2);
+  border-color: var(--border-lit);
+  box-shadow: var(--lift), var(--shadow-2), 0 0 24px rgba(var(--accent-rgb), 0.06);
 }
-
-/* The one cell that is a button rather than a card. Dashed, because it is an
-   outline of a simulation rather than one. */
-.sim-card-new {
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  min-height: 190px;
-  background: transparent;
-  border: 1px dashed var(--border-strong);
-  color: var(--muted);
-  font: inherit;
-  font-size: 13.5px;
-  cursor: pointer;
-  box-shadow: none;
-  transition: border-color 0.15s, color 0.15s, background 0.15s, box-shadow 0.15s;
-}
-.sim-card-new:hover {
-  border-color: var(--accent);
-  color: var(--text);
-  background: rgba(95, 224, 198, 0.04);
-  box-shadow: 0 0 28px rgba(95, 224, 198, 0.08), inset 0 0 22px rgba(95, 224, 198, 0.04);
-}
-.sim-new-mark {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  border: 1px solid currentColor;
-  color: var(--gold);
-}
-.sim-card-new:hover .sim-new-mark { box-shadow: 0 0 14px rgba(226, 191, 122, 0.35); }
-.sim-new-mark svg { width: 17px; height: 17px; }
 
 /* ---- the head: what it is called, and the way to everything else ---- */
 
@@ -2030,6 +2503,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   border-radius: 999px;
   color: var(--accent);
 }
+.sim-id + .sim-lab { margin-left: 7px; }
 
 .icon-button {
   flex: 0 0 auto;
@@ -2133,7 +2607,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   font-size: 10.5px;
   line-height: 1.45;
   color: var(--danger-on-tint);
-  background: rgba(248, 81, 73, 0.08);
+  background: rgba(var(--danger-rgb), 0.08);
   border-radius: 6px;
   white-space: pre-wrap;
 }
@@ -2159,7 +2633,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 .sim-icon { display: inline-grid; place-items: center; flex: 0 0 auto; }
 .sim-icon svg { width: 15px; height: 15px; display: block; }
 
-.sim-run { background: var(--accent-dim); border-color: rgba(95, 224, 198, 0.55); color: #fff; }
+.sim-run { background: var(--accent-dim); border-color: rgba(var(--accent-rgb), 0.55); color: var(--on-accent); }
 /* Dark ink on the bright fill, for the reason button.primary takes it. */
 .sim-run:hover { background: var(--accent); color: var(--stage); box-shadow: 0 0 16px var(--glow); }
 .sim-run.is-running { background: var(--warn-fill); border-color: var(--warn-edge); }
@@ -2194,7 +2668,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   border-radius: 6px;
   cursor: pointer;
 }
-.sim-menu button:hover { background: rgba(214, 245, 236, 0.06); }
+.sim-menu button:hover { background: rgba(var(--mist-rgb), 0.06); }
 .sim-menu b { display: block; font-size: 12.5px; font-weight: 600; color: var(--text); }
 .sim-menu i {
   display: block;
@@ -2205,9 +2679,9 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   color: var(--muted);
 }
 .sim-menu button.danger b { color: var(--danger-text); }
-.sim-menu button.danger:hover { background: rgba(248, 81, 73, 0.1); }
+.sim-menu button.danger:hover { background: rgba(var(--danger-rgb), 0.1); }
 
-.sim-empty { grid-column: 1 / -1; color: var(--muted); margin: 8px 0 0; }
+.sim-empty { color: var(--muted); margin: 8px 0 0; font-size: 13px; }
 
 /* ---- the settings, which only appear when something is being made ---- */
 
@@ -2221,13 +2695,13 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   border-radius: 10px;
   background: var(--panel);
   color: var(--text);
-  box-shadow: var(--lift), var(--shadow-3), 0 0 60px rgba(95, 224, 198, 0.05);
+  box-shadow: var(--lift), var(--shadow-3), 0 0 60px rgba(var(--accent-rgb), 0.05);
   /* clip, not hidden: a box that hides its overflow can still be scrolled by
      script, and focusing a button far out to the right once scrolled a whole
      dialog sideways, its contents out of view. */
   overflow: clip;
 }
-.sim-dialog::backdrop { background: rgba(2, 4, 6, 0.72); backdrop-filter: blur(3px); }
+.sim-dialog::backdrop { background: rgba(var(--stage-rgb), 0.72); backdrop-filter: blur(3px); }
 /* A dialog is display:block when open and display:none when closed, so the
    column has to be attached to [open] or it would show while shut. */
 .sim-dialog[open] { display: flex; flex-direction: column; }
@@ -2257,7 +2731,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   gap: 16px;
   padding: 14px 18px;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(214, 245, 236, 0.03), rgba(214, 245, 236, 0));
+  background: linear-gradient(180deg, rgba(var(--mist-rgb), 0.03), rgba(var(--mist-rgb), 0));
 }
 .sim-dialog-head h2 {
   margin: 0;
@@ -2311,6 +2785,68 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   background: var(--panel);
 }
 .sim-dialog .form-error { flex: 1 1 auto; min-width: 0; }
+
+/* ---- what a setting means, behind a question mark ---- */
+
+/* The label and its mark share a line; the field runs full width beneath.
+   Only once runs.js has put the mark there: without script the explanation
+   stays where it was written, under the field. */
+.field.has-help {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 8px;
+  align-items: center;
+}
+.field.has-help > :not(label):not(.field-help):not(.field-help-text) { grid-column: 1 / -1; }
+.field-help {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: help;
+}
+.field-help:hover:not(:disabled),
+.is-open > .field-help,
+.is-open > legend > .field-help {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+}
+legend .field-help { margin-left: 8px; vertical-align: 1px; text-transform: none; letter-spacing: 0; }
+/* The explanation itself: a small card over what follows, shown while the
+   mark is pointed at or focused, and held by a tap. */
+.field-help-text {
+  display: none !important;
+  position: absolute;
+  z-index: 12;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  margin: 0 !important;
+  padding: 9px 11px !important;
+  background: var(--panel-3);
+  border: 1px solid var(--border-lit);
+  border-radius: 6px;
+  box-shadow: var(--shadow-2);
+  color: var(--text-soft) !important;
+  font-size: 11.5px !important;
+  line-height: 1.5 !important;
+  text-transform: none;
+  letter-spacing: 0;
+}
+fieldset.has-help { position: relative; }
+fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
+.is-open > .field-help-text { display: block !important; }
 
 .settings-dialog { width: min(980px, calc(100vw - 40px)); }
 .settings-body {
@@ -2367,19 +2903,20 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 /* ==========================================================================
    Home
    ==========================================================================
-   The entrance. A dark wall with an inscription at its edges; a seal of runes
-   around the mark; the title decoded out of the machine's digits and the old
-   script; and, rising out of the dark behind it all, a world that is actually
-   running. The order things arrive in is the story — the wall, the seal, the
-   word, the world, and last the ways in — and it takes three seconds, during
-   which everything can already be clicked.
+   The entrance. A dark wall with the machine's digits at its edges; the mark,
+   lit from behind; the title decoded out of hexadecimal; and, rising out of
+   the dark behind it all, one of two backdrops — a world that is actually
+   running, or a network of eyes round one that looks back. The order things
+   arrive in is the story — the wall, the word, the world, and last the ways
+   in — and it takes three seconds, during which everything can already be
+   clicked.
 
    Every arrival is an opacity or a transform, which the compositor plays
-   without asking the page to paint; the two exceptions, the ring drawing its
-   circles and the title's letters, are small and over in two seconds. None of
-   it sits behind a blur, because behind everything here is a canvas redrawn
-   thirty times a second and a blur over it would be redone with it. A reader
-   who asks for less motion gets the page as it ends, with nothing turning. */
+   without asking the page to paint; the one exception, the title's letters,
+   is small and over in two seconds. None of it sits behind a blur, because
+   behind everything here is a canvas redrawn thirty times a second and a blur
+   over it would be redone with it. A reader who asks for less motion gets the
+   page as it ends, with nothing turning and the eyes holding still. */
 
 /* The stage fills what is left under the top bar, edge to edge: the view's
    usual padding would put a frame around something meant to be a backdrop. */
@@ -2387,8 +2924,8 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 
 /* The title in the space above a foot that holds the note and the numbers: a
    grid rather than everything placed over everything, so on a short screen
-   the ways in can never land on the note. The picture, the inscription and
-   the veil lie under all of it. */
+   the ways in can never land on the note. The picture, the wall and the veil
+   lie under all of it. */
 .home-stage {
   position: relative;
   display: grid;
@@ -2404,9 +2941,11 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   isolation: isolate;
 }
 
-/* Not interactive, and it says so: no pointer events at all, so a click or a
-   drag falls through to the page rather than half-working. */
-#homeCanvas {
+/* Not interactive, and they say so: no pointer events at all, so a click or
+   a drag falls through to the page rather than half-working. Only one of the
+   two backdrops is ever shown. */
+#homeCanvas,
+.home-eyes {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2414,24 +2953,32 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   display: block;
   pointer-events: none;
 }
+.home-eyes { display: none; }
+.home-stage.backdrop-eyes .home-eyes { display: block; }
+.home-stage.backdrop-eyes #homeCanvas,
+.home-stage.backdrop-eyes .home-readout { display: none; }
 
 /* Darkened towards the middle, where the words are, and at the foot and the
-   corners, where the note and the numbers are: white on a bright cluster of
-   agents is otherwise unreadable. Mixed in the stage's own colour, so an
+   corners, where the note and the numbers are: words on a bright cluster of
+   agents are otherwise unreadable. Mixed in the stage's own colour, so an
    empty patch of canvas stays exactly the stage colour no matter how heavily
-   the veil sits on it. */
+   the veil sits on it. Over the eyes only the foot is darkened: the great
+   eye is meant to be seen. */
 .home-veil {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(64% 56% at 50% 47%, rgba(5, 8, 11, 0.66) 0%, rgba(5, 8, 11, 0.3) 48%, rgba(5, 8, 11, 0) 76%),
-    radial-gradient(140% 120% at 50% 45%, rgba(5, 8, 11, 0) 52%, rgba(5, 8, 11, 0.7) 100%),
-    linear-gradient(to top, rgba(5, 8, 11, 0.72) 0%, rgba(5, 8, 11, 0) 30%);
+    radial-gradient(64% 56% at 50% 47%, rgba(var(--stage-rgb), 0.66) 0%, rgba(var(--stage-rgb), 0.3) 48%, rgba(var(--stage-rgb), 0) 76%),
+    radial-gradient(140% 120% at 50% 45%, rgba(var(--stage-rgb), 0) 52%, rgba(var(--stage-rgb), 0.7) 100%),
+    linear-gradient(to top, rgba(var(--stage-rgb), 0.72) 0%, rgba(var(--stage-rgb), 0) 30%);
+}
+.home-stage.backdrop-eyes .home-veil {
+  background: linear-gradient(to top, rgba(var(--stage-rgb), 0.7) 0%, rgba(var(--stage-rgb), 0) 26%);
 }
 
-/* The inscription, over the world and under the words. */
+/* The wall of digits, over the backdrop and under the words. */
 .home-glyphs {
   position: absolute;
   inset: 0;
@@ -2441,6 +2988,17 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   display: block;
   pointer-events: none;
 }
+
+/* Which backdrop, in the top corner: quiet until it is wanted. */
+.home-backdrop {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  z-index: 4;
+  background: rgba(var(--stage-rgb), 0.7);
+}
+.home-backdrop .seg-btn { padding: 4px 12px; font-size: 11.5px; background: transparent; }
+.home-backdrop .seg-btn.active { background: var(--accent-dim); color: var(--on-accent); }
 
 .home-hero {
   position: relative;
@@ -2456,53 +3014,35 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   padding: 28px 24px 8px;
 }
 
-/* ---- the seal ---- */
+/* ---- the mark ---- */
 
+/* Its box is also where the great eye stands when the eyes are shown
+   (eyes.js reads it), so it keeps its size when the mark gives way. */
 .home-seal {
   position: relative;
-  width: clamp(112px, 19vmin, 204px);
+  width: clamp(104px, 17vmin, 176px);
   aspect-ratio: 1;
-  margin-bottom: clamp(16px, 3.2vh, 32px);
+  margin-bottom: clamp(14px, 3vh, 30px);
 }
-/* Each band its own layer, so turning it is the compositor's work alone. */
-.home-ring {
+.home-seal::before {
+  content: '';
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  will-change: transform;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(var(--accent-rgb), 0.16), rgba(var(--accent-rgb), 0));
 }
-.home-ring-outer { color: var(--gold); }
-.home-ring-line {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 0.7;
-  stroke-dasharray: 1;
-  opacity: 0.5;
-}
-.home-ring-band use {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.9;
-}
-.home-ring-point { fill: currentColor; opacity: 0.55; }
-.home-ring-notch { fill: currentColor; opacity: 0.85; }
-.home-ring-inner circle { fill: none; stroke: var(--accent); stroke-width: 0.6; opacity: 0.4; stroke-dasharray: 1; }
-.home-ring-inner .home-ring-dots { stroke-width: 1.3; stroke-dasharray: 0.4 5.6; stroke-linecap: round; opacity: 0.6; }
-
-/* The six agents at the centre, lit faintly from behind. */
+/* The six agents, lit faintly from behind. */
 .home-mark {
   position: absolute;
-  inset: 26%;
-  width: 48%;
-  height: 48%;
+  inset: 20%;
+  width: 60%;
+  height: 60%;
   color: var(--ivory);
-  filter: drop-shadow(0 0 16px rgba(95, 224, 198, 0.3));
+  filter: drop-shadow(0 0 16px rgba(var(--accent-rgb), 0.3));
+  transition: opacity 0.6s ease;
 }
+.home-stage.backdrop-eyes .home-mark,
+.home-stage.backdrop-eyes .home-seal::before { opacity: 0; }
 
 /* ---- the title ---- */
 
@@ -2517,44 +3057,32 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   line-height: 1.05;
   letter-spacing: 0.08em;
   color: var(--ivory);
-  text-shadow: 0 0 36px rgba(226, 191, 122, 0.3), 0 2px 30px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 0 36px rgba(var(--accent-rgb), 0.22), 0 2px 30px rgba(var(--halo-rgb), 0.85);
 }
 .home-word { display: inline-block; white-space: nowrap; }
-/* A letter in disguise keeps its own width — it is there, only unseen — so
-   the title is its final size from the first frame and nothing shifts as it
-   resolves. The cover over it shows what it is pretending to be. */
-.home-title .glyph { position: relative; display: inline-block; }
-.home-title .glyph.is-hidden { color: transparent; text-shadow: none; }
+
+/* A letter in disguise keeps its own width — it is there, only unseen — so a
+   decoding title is its final size from the first frame and nothing shifts as
+   it resolves. The cover over it shows the digit it is pretending to be. The
+   Explanation's step titles decode the same way. */
+.glyph { position: relative; display: inline-block; }
+.glyph.is-hidden { color: transparent; text-shadow: none; }
 .glyph-cover {
   position: absolute;
   inset: 0;
   display: none;
   align-items: center;
   justify-content: center;
-  font-style: normal;
-  pointer-events: none;
-}
-.glyph-cover[data-mode="digit"],
-.glyph-cover[data-mode="rune"] { display: flex; }
-.glyph-cover b {
-  display: none;
   font-family: var(--font);
-  font-size: 0.6em;
+  font-size: 0.62em;
+  font-style: normal;
   font-weight: 300;
   letter-spacing: 0;
   color: var(--accent);
-  text-shadow: 0 0 14px rgba(95, 224, 198, 0.75);
+  text-shadow: 0 0 14px rgba(var(--accent-rgb), 0.75);
+  pointer-events: none;
 }
-.glyph-cover[data-mode="digit"] b { display: block; }
-.glyph-cover .rune {
-  display: none;
-  width: 0.42em;
-  height: 0.68em;
-  color: var(--gold);
-  stroke-width: 1.15;
-  filter: drop-shadow(0 0 6px rgba(226, 191, 122, 0.65));
-}
-.glyph-cover[data-mode="rune"] .rune { display: block; }
+.glyph.is-hidden > .glyph-cover { display: flex; }
 
 /* ---- the subtitle, typed ---- */
 
@@ -2566,7 +3094,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--accent);
-  text-shadow: 0 0 18px rgba(95, 224, 198, 0.45), 0 2px 18px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 18px rgba(var(--accent-rgb), 0.45), 0 2px 18px rgba(var(--halo-rgb), 0.9);
 }
 /* What is still to come is already there, unseen, so the line is its full
    width from the start and stays centred as it types. */
@@ -2595,35 +3123,36 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   margin-top: clamp(26px, 5.4vh, 50px);
   pointer-events: auto;
 }
-/* Doors rather than buttons: a dark lintel with a gold edge, the rune of the
-   tab it opens, and light behind it when the pointer comes near. Opaque
+/* Doors rather than buttons: a dark lintel with a lit edge, a number in the
+   machine's face, and light behind it when the pointer comes near. Opaque
    rather than blurred, for the reason the section gives. */
 .home-door {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
-  padding: 10px 18px 10px 16px;
-  background: rgba(5, 8, 11, 0.78);
-  border: 1px solid rgba(226, 191, 122, 0.32);
+  padding: 10px 18px 10px 14px;
+  background: rgba(var(--stage-rgb), 0.8);
+  border: 1px solid rgba(var(--accent-rgb), 0.32);
   border-radius: 3px;
   color: var(--text-soft);
   font-size: 12.5px;
   letter-spacing: 0.06em;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 6px 22px rgba(var(--shade-rgb), calc(0.45 * var(--shade-k)));
 }
-.home-door .rune { width: 8px; height: 13px; color: var(--gold); opacity: 0.75; transition: opacity 0.2s ease; }
+.home-door-no { font-size: 10.5px; color: var(--accent); opacity: 0.8; letter-spacing: 0.04em; }
 .home-door:hover:not(:disabled) {
-  background: rgba(10, 18, 22, 0.92);
-  border-color: var(--gold);
-  color: #fff;
-  box-shadow: 0 0 0 1px rgba(226, 191, 122, 0.25), 0 0 26px rgba(226, 191, 122, 0.18), 0 6px 22px rgba(0, 0, 0, 0.45);
+  background: rgba(var(--panel-rgb), 0.95);
+  border-color: var(--accent);
+  color: var(--text-strong);
+  box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.25), 0 0 26px rgba(var(--accent-rgb), 0.18),
+              0 6px 22px rgba(var(--shade-rgb), calc(0.45 * var(--shade-k)));
 }
-.home-door:hover .rune { opacity: 1; }
+.home-door:hover .home-door-no { opacity: 1; }
 
 /* ---- the note and the numbers ---- */
 
-/* A card with two corners marked in gold, the way a plate in an old atlas is
-   framed. */
+/* A card with two corners marked in the accent, the way a plate in an old
+   atlas is framed. */
 .home-note {
   position: relative;
   z-index: 3;
@@ -2634,14 +3163,14 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   margin: 16px 24px 24px;
   max-width: 370px;
   padding: 14px 18px;
-  border: 1px solid rgba(214, 245, 236, 0.1);
+  border: 1px solid rgba(var(--mist-rgb), 0.1);
   border-radius: 3px;
   background:
-    linear-gradient(var(--gold), var(--gold)) top left / 14px 1px no-repeat,
-    linear-gradient(var(--gold), var(--gold)) top left / 1px 14px no-repeat,
-    linear-gradient(var(--gold), var(--gold)) bottom right / 14px 1px no-repeat,
-    linear-gradient(var(--gold), var(--gold)) bottom right / 1px 14px no-repeat,
-    rgba(5, 8, 11, 0.8);
+    linear-gradient(var(--accent), var(--accent)) top left / 14px 1px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top left / 1px 14px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 14px 1px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 1px 14px no-repeat,
+    rgba(var(--stage-rgb), 0.82);
 }
 .home-note p {
   margin: 0;
@@ -2685,7 +3214,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   text-align: right;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 10px rgba(95, 224, 198, 0.35);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.35);
 }
 
 /* ---- the wordmark in the bar ---- */
@@ -2710,54 +3239,45 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 .brand:hover:not(:disabled) { border-color: transparent; background: none; }
-.brand:hover h1 { color: #fff; text-shadow: 0 0 14px rgba(226, 191, 122, 0.45); }
-.brand.active h1 { color: var(--gold); }
+.brand:hover h1 { color: var(--text-strong); text-shadow: 0 0 14px rgba(var(--accent-rgb), 0.4); }
+.brand.active h1 { color: var(--accent); }
 
 /* ---- the arrival ---- */
 
 /* Restarted by re-adding the class whenever the tab is opened, so it plays
-   every time rather than only on the first load. The two bands of the seal
-   turn for as long as the page is open, which is the one thing here that
-   does not stop — and it is a transform of a layer of its own. */
+   every time rather than only on the first load. */
 @media (prefers-reduced-motion: no-preference) {
-  .home-ring-outer { animation: home-turn 240s linear infinite; }
-  .home-ring-inner { animation: home-turn 150s linear infinite reverse; }
-
   .home-stage.play .home-glyphs { animation: home-appear 2200ms ease-out both; }
   .home-stage.play #homeCanvas { animation: home-world 3400ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms both; }
-  .home-stage.play .home-ring-line { animation: home-draw 1900ms cubic-bezier(0.6, 0.05, 0.2, 1) 120ms both; }
-  .home-stage.play .home-ring-inner circle:first-child { animation: home-draw 1500ms cubic-bezier(0.6, 0.05, 0.2, 1) 450ms both; }
-  .home-stage.play .home-ring-dots { animation: home-appear 1200ms ease-out 900ms both; }
-  .home-stage.play .home-ring-band > * { animation: home-glint 1000ms ease-out both; animation-delay: calc(420ms + var(--i) * 55ms); }
-  .home-stage.play .home-ring-notch { animation: home-appear 800ms ease-out 1500ms both; }
-  .home-stage.play .home-mark { animation: home-mark-in 1700ms cubic-bezier(0.16, 0.84, 0.24, 1) 900ms both; }
+  .home-stage.play .home-mark { animation: home-mark-in 1700ms cubic-bezier(0.16, 0.84, 0.24, 1) 600ms both; }
   .home-stage.play .home-doors { animation: home-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 2300ms both; }
   .home-stage.play .home-note { animation: home-rise 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 2700ms both; }
   .home-stage.play .home-readout { animation: home-appear 1200ms ease-out 2900ms both; }
+  .home-stage.play .home-backdrop { animation: home-appear 1200ms ease-out 3000ms both; }
   .home-caret.is-done::after { opacity: 1; animation: home-blink 0.9s step-end 3 forwards; }
   .home-readout dd.is-new { animation: home-tick 800ms ease-out; }
+  /* A letter landing: a flash of phosphor that cools into the letter. */
+  .glyph.is-landed { animation: glyph-land 700ms ease-out; }
 }
 /* Nothing typed, nothing blinking: the words are simply there. */
 @media (prefers-reduced-motion: reduce) {
   .home-caret { display: none; }
 }
 
-@keyframes home-turn { to { transform: rotate(360deg); } }
 @keyframes home-appear { from { opacity: 0; } }
 @keyframes home-world { from { opacity: 0; transform: scale(1.05); } }
-@keyframes home-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-@keyframes home-glint { from { opacity: 0; } 35% { opacity: 1; } }
 @keyframes home-mark-in { from { opacity: 0; transform: scale(0.6) rotate(-30deg); } }
 @keyframes home-rise { from { opacity: 0; transform: translateY(12px); } }
 @keyframes home-blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 0; } }
-@keyframes home-tick { from { color: #fff; text-shadow: 0 0 14px var(--accent); } }
+@keyframes home-tick { from { color: var(--text-strong); text-shadow: 0 0 14px var(--accent); } }
+@keyframes glyph-land { from { color: var(--accent); text-shadow: 0 0 20px rgba(var(--accent-rgb), 0.9); } }
 
-/* A phone: one column — the seal, the title, the ways in stacked one above
+/* A phone: one column — the mark, the title, the ways in stacked one above
    another, and the note across the foot. The numbers step aside. */
 @media (max-width: 640px) {
   .home-stage { grid-template-columns: minmax(0, 1fr); }
-  .home-hero { padding: 40px 16px 24px; }
-  .home-seal { width: 108px; }
+  .home-hero { padding: 56px 16px 24px; }
+  .home-seal { width: 104px; }
   .home-title { font-size: clamp(30px, 10vw, 44px); }
   .home-subtitle { letter-spacing: 0.22em; margin-right: -0.22em; }
   .home-doors { flex-direction: column; align-items: stretch; width: min(100%, 290px); gap: 10px; }
@@ -2765,6 +3285,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   .home-note { justify-self: stretch; margin: 0 16px 20px; max-width: none; }
   .home-note p { font-size: 14.5px; }
   .home-readout { display: none; }
+  .home-backdrop { top: 12px; right: 12px; }
 }
 
 /* ==========================================================================
@@ -2777,7 +3298,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   height: calc(100vh - var(--topbar-h, 47px));
   display: flex;
   flex-direction: column;
-  padding: 14px 18px 10px;
+  padding: 24px 28px 18px;
   gap: 10px;
 }
 
@@ -2820,7 +3341,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 .ex-nav button:hover { border-color: var(--accent); background: var(--panel-3); box-shadow: 0 0 14px var(--glow); }
 .ex-nav button:active { transform: translateY(1px); }
 .ex-nav svg { width: 13px; height: 13px; fill: var(--text); }
-.ex-nav button:hover svg { fill: #fff; }
+.ex-nav button:hover svg { fill: var(--text-strong); }
 
 /* Nothing but the two arrows. A row of thirteen dots was a second thing to
    read before the reader had read the first. */
@@ -2847,7 +3368,14 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 }
 
 .ex-stage { position: relative; overflow: hidden; background: var(--stage); }
-#explainCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* The machine's digits under the picture, and the picture over them, drawn
+   on a clear canvas (stepview.js). */
+#explainCanvas,
+.ex-glyphs { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ex-glyphs { pointer-events: none; }
+/* A decoded title (glyphwall.js's Decoder) wraps between its words, never
+   inside one. */
+.decoded-word { display: inline-block; white-space: nowrap; }
 
 .ex-side {
   display: flex;
@@ -2871,7 +3399,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   overflow: hidden;
   padding: 15px 17px;
   padding-right: 94px;
-  border: 1px solid rgba(214, 245, 236, 0.1);
+  border: 1px solid rgba(var(--mist-rgb), 0.1);
   border-left: 2px solid var(--accent);
   border-radius: 0 var(--radius) var(--radius) 0;
   box-shadow: var(--lift), var(--shadow-1);
@@ -2924,7 +3452,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   hyphens: auto;
 }
 .ex-note p:last-child { margin-bottom: 0; }
-.ex-note b { color: #fff; font-weight: 600; }
+.ex-note b { color: var(--text-strong); font-weight: 600; }
 .ex-note em { color: var(--accent); font-style: normal; }
 
 /* The script, whole, with the lines under discussion lit and the rest left
@@ -2953,19 +3481,19 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
    still reads as a syntax-highlighted file all the way down instead of turning
    grey outside the part being discussed. */
 .explain-line { transition: opacity 140ms ease; opacity: 0.42; }
-.explain-line.lit { opacity: 1; background: rgba(95, 224, 198, 0.07); }
+.explain-line.lit { opacity: 1; background: rgba(var(--accent-rgb), 0.07); }
 .explain-line.lit .explain-no { color: var(--accent); }
 
 /* Token colours. The same family GitHub uses on this background, which is
    where most people will have read Python last. */
-.tok-com  { color: #8b949e; font-style: italic; }
-.tok-str  { color: #a5d6ff; }
-.tok-kw   { color: #ff7b72; }
-.tok-num  { color: #79c0ff; }
-.tok-def  { color: #d2a8ff; }
-.tok-dec  { color: #d2a8ff; }
-.tok-bi   { color: #79c0ff; }
-.tok-self { color: #ffa657; }
+.tok-com  { color: var(--tok-com); font-style: italic; }
+.tok-str  { color: var(--tok-str); }
+.tok-kw   { color: var(--tok-kw); }
+.tok-num  { color: var(--tok-num); }
+.tok-def  { color: var(--tok-def); }
+.tok-dec  { color: var(--tok-def); }
+.tok-bi   { color: var(--tok-bi); }
+.tok-self { color: var(--tok-self); }
 
 .ex-foot { margin: 0; font-size: 11.5px; color: var(--muted); }
 .ex-foot code {
@@ -3011,7 +3539,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 6px 18px rgba(var(--shade-rgb), calc(0.35 * var(--shade-k)));
     font: 600 13px/1.3 var(--font);
     text-align: left;
     cursor: pointer;
@@ -3043,7 +3571,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
     padding: 18px 14px 28px;
     background: var(--panel);
     border-right: 1px solid var(--border);
-    box-shadow: 0 0 44px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 44px rgba(var(--shade-rgb), calc(0.6 * var(--shade-k)));
     transform: translateX(-105%);
     visibility: hidden;
     transition: transform 0.22s ease, visibility 0s linear 0.22s;
@@ -3055,7 +3583,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
     position: fixed;
     inset: 0;
     z-index: 39;
-    background: rgba(5, 7, 10, 0.62);
+    background: rgba(var(--stage-rgb), 0.62);
     backdrop-filter: blur(2px);
   }
 }
@@ -3075,16 +3603,29 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 }
 
 /* The top bar in two rows once one no longer holds the wordmark, the tabs and
-   the byline: the mark, the wordmark and the byline keep the first line; the
-   tabs get a row of their own, which slides sideways when they do not all fit.
-   While something is loading, the bar has the byline's place. */
+   the byline: the mark, the wordmark and the byline keep the first row; the
+   tabs get the second, sliding sideways when they do not all fit, with the
+   theme's swatches at its end. A grid rather than a wrapping row, so each
+   thing has its place whatever else is showing. While something is loading,
+   the bar has the byline's place. */
 @media (max-width: 900px) {
-  .topbar { flex-wrap: wrap; gap: 4px 10px; padding: 8px 12px 0; }
+  .topbar {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    grid-template-areas: "mark brand job byline" "tabs tabs tabs theme";
+    gap: 4px 10px;
+    padding: 8px 12px 0;
+    align-items: center;
+  }
+  .brand-mark { grid-area: mark; }
+  .brand { grid-area: brand; justify-self: start; }
+  .job-bar { grid-area: job; justify-self: end; margin-left: 0; max-width: 100%; }
+  .byline { grid-area: byline; margin-left: 0; }
+  .theme-switch { grid-area: theme; margin: 0 0 6px; }
   .tabs {
-    order: 3;
-    flex: 1 0 100%;
+    grid-area: tabs;
     gap: 2px;
-    margin: 0 -12px;
+    margin: 0 0 0 -12px;
     padding: 3px 12px 8px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
@@ -3093,10 +3634,8 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   }
   .tabs::-webkit-scrollbar { display: none; }
   .tab { flex: 0 0 auto; padding: 7px 12px; }
-  .job-bar { order: 2; margin-left: auto; max-width: calc(100vw - 196px); }
   .job-track { flex-basis: 40px; }
   .run-label { display: none; }
-  .byline { order: 1; margin-left: auto; }
   .job-bar:not([hidden]) ~ .byline { display: none; }
 }
 
@@ -3104,7 +3643,8 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   html { scrollbar-gutter: auto; }
 
 
-  .view { padding: 12px 10px; }
+  .view { padding: 16px 14px 32px; }
+  #view-viewer { padding: 14px 12px 28px; }
   .panel { padding: 12px; }
 
   /* Explanation: the picture first, then the words, then the script. */
@@ -3123,10 +3663,10 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
   .stat { min-width: 0; }
   .stat-detail { right: 8px; left: 8px; bottom: 8px; width: auto; }
 
-  /* Research: the pickers take the whole width. */
-  .research-bar { flex-wrap: wrap; }
-  .research-bar select { min-width: 0; max-width: none; width: 100%; }
-  .research-run { flex-wrap: wrap; }
+  /* The Viewer's ways of looking share the width between them. */
+  .viewer-head { align-items: stretch; }
+  .viewer-modes { width: 100%; }
+  .viewer-mode { flex: 1 1 auto; padding: 7px 8px; }
 
   /* Book: tables and wide formulas scroll inside themselves, not the page;
      the reading size steps down with the column, keeping its measure near
@@ -3142,6 +3682,47 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
 
   /* Fingers are wider than a mouse pointer. */
   button, select, input[type="text"], input[type="number"] { min-height: 34px; }
+  /* Round still, and a little bigger for a finger. */
+  .theme-swatch { width: 22px; height: 22px; }
+  .tab { padding: 7px 10px; }
+}
+
+/* A phone: the mark beside the wordmark with the byline beneath it, like a
+   seal and its legend, the swatches across from them, and the second row the
+   tabs' alone, so all four are in sight rather than one swipe away. The
+   notebook's tab says "Notebook" here, which is what fits. */
+@media (max-width: 600px) {
+  .topbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "mark brand theme" "mark byline byline" "tabs tabs tabs";
+    row-gap: 0;
+    column-gap: 10px;
+  }
+  .brand-mark { align-self: center; margin-right: 0; }
+  .brand { align-self: end; }
+  .byline,
+  .job-bar:not([hidden]) ~ .byline {
+    display: block;
+    grid-area: byline;
+    justify-self: start;
+    align-self: start;
+    white-space: nowrap;
+    text-align: left;
+    font-size: 10.5px;
+    line-height: 1.5;
+    padding-left: 2px;
+  }
+  .byline > span,
+  .job-bar:not([hidden]) ~ .byline > span { display: inline; }
+  /* While something loads, its bar stands in the wordmark's place, no taller
+     than the wordmark, and the byline stays. */
+  .job-bar { grid-area: brand; justify-self: stretch; align-self: center; min-height: 34px; padding: 2px 4px 2px 10px; gap: 8px; font-size: 11px; }
+  .job-stop { min-height: 24px; padding: 2px 10px; }
+  .topbar:has(.job-bar:not([hidden])) .brand { display: none; }
+  .theme-switch { margin: 0; gap: 7px; }
+  .tabs { justify-content: space-between; margin: 6px -12px 0; padding: 2px 12px 8px; }
+  .tab { padding: 7px 6px; font-size: 12px; letter-spacing: 0; }
+  .tab-long { display: none; }
 }
 
 /* ==========================================================================
@@ -3153,7 +3734,7 @@ details.md-callout:not([open]) > summary { margin: 0 !important; }
    ========================================================================== */
 
 .topbar {
-  background: rgba(8, 13, 17, 0.86);
+  background: rgba(var(--bg-rgb), 0.86);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   backdrop-filter: saturate(140%) blur(10px);
 }
@@ -3172,7 +3753,7 @@ button:active:not(:disabled) { transform: translateY(1px); }
    unmistakable at a glance, and calmer than a white box. */
 .tab.active {
   border-color: transparent;
-  background: rgba(95, 224, 198, 0.07);
+  background: rgba(var(--accent-rgb), 0.07);
   box-shadow: inset 0 -2px 0 var(--accent);
 }
 
@@ -3196,6 +3777,14 @@ input:focus-visible, select:focus-visible { outline-offset: 0; }
   .tabs {
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
     mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 28px), transparent 100%);
+  }
+}
+/* On a phone all four fit, so the fade keeps to the strip's own margins and
+   only shows on a screen too narrow even for that. */
+@media (max-width: 600px) {
+  .tabs {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
   }
 }
 

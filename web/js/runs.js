@@ -43,6 +43,9 @@ const RunsView = {
     this.form.addEventListener('submit', e => this.onCreate(e));
     document.getElementById('resetDefaults').addEventListener('click', () => this.applyDefaults());
     document.getElementById('refreshRuns').addEventListener('click', () => this.refresh());
+    document.getElementById('newRun').addEventListener('click', () => this.openDialog());
+    this.bindTools();
+    this.helpify(this.form);
     document.getElementById('simDialogClose').addEventListener('click', () => this.closeDialog());
     document.getElementById('simDialogCancel').addEventListener('click', () => this.closeDialog());
     document.getElementById('settingsDialogClose')
@@ -145,6 +148,8 @@ const RunsView = {
    * now downloads no Python at all.
    */
   async setActive(active) {
+    // The page's title arrives out of the machine's digits, every visit.
+    if (active) Decoder.decode(document.querySelector('#view-runs .page-head h2'));
     if (!active || this._activated) return;
     this._activated = true;
 
@@ -328,7 +333,7 @@ const RunsView = {
    */
   settingGroups() {
     return [...this.form.querySelectorAll('fieldset')]
-      .map(fieldset => [fieldset.querySelector('legend')?.textContent.trim() ?? '',
+      .map(fieldset => [this.words(fieldset.querySelector('legend')),
                         [...fieldset.querySelectorAll('[data-cfg]')]
                           .map(input => [input.dataset.cfg, this.labelOf(input)])])
       .filter(([, rows]) => rows.length);
@@ -338,9 +343,83 @@ const RunsView = {
   labelOf(input) {
     const label = input.closest('label') || this.form.querySelector(`label[for="${input.id}"]`);
     if (!label) return input.dataset.cfg;
-    const words = label.cloneNode(true);
-    words.querySelectorAll('input, select, .hint').forEach(node => node.remove());
+    return this.words(label);
+  },
+
+  /** An element's own words: without the fields, hints and help buttons set in it. */
+  words(el) {
+    if (!el) return '';
+    const words = el.cloneNode(true);
+    words.querySelectorAll('input, select, .hint, .field-help').forEach(node => node.remove());
     return words.textContent.trim();
+  },
+
+  /**
+   * Every setting's explanation behind a question mark. The words stay in the
+   * form, where the run's settings are read from (settingGroups), and are
+   * shown beside the mark while the pointer is on it or the keyboard is, and
+   * held open by a tap — a touch screen has no hover — until a tap elsewhere
+   * or Escape. A fieldset's own note goes behind a mark on its legend.
+   */
+  helpify(form) {
+    let count = 0;
+    const attach = (host, text, place, label) => {
+      text.id = text.id || `setting-help-${++count}`;
+      text.classList.add('field-help-text');
+      text.setAttribute('role', 'tooltip');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'field-help';
+      button.textContent = '?';
+      button.setAttribute('aria-label', `About ${label}`);
+      button.setAttribute('aria-describedby', text.id);
+      button.setAttribute('aria-expanded', 'false');
+      place(button);
+      const show = (open, held = false) => {
+        if (!open && host.classList.contains('is-held') && !held) return;
+        host.classList.toggle('is-open', open);
+        host.classList.toggle('is-held', open && held);
+        button.setAttribute('aria-expanded', String(open));
+      };
+      button.addEventListener('mouseenter', () => show(true));
+      button.addEventListener('mouseleave', () => show(false));
+      button.addEventListener('focus', () => show(true));
+      button.addEventListener('blur', () => show(false, true));
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        show(!host.classList.contains('is-held'), true);
+      });
+      button.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && host.classList.contains('is-open')) {
+          event.stopPropagation();            // the dialog stays open; only the help closes
+          show(false, true);
+        }
+      });
+    };
+    for (const field of form.querySelectorAll('.field')) {
+      const text = field.querySelector(':scope > small');
+      const label = field.querySelector(':scope > label');
+      if (!text || !label) continue;
+      field.classList.add('has-help');
+      // Beside the label rather than in it: a click inside a checkbox's label
+      // would tick the box.
+      attach(field, text, button => label.after(button), this.words(label));
+    }
+    for (const fieldset of form.querySelectorAll('fieldset')) {
+      const note = fieldset.querySelector(':scope > .fieldset-note');
+      const legend = fieldset.querySelector(':scope > legend');
+      if (!note || !legend) continue;
+      fieldset.classList.add('has-help');
+      attach(fieldset, note, button => legend.append(button), this.words(legend));
+    }
+    // A tap anywhere else lets go of the one held open.
+    document.addEventListener('click', event => {
+      if (event.target.closest('.field-help')) return;
+      for (const held of form.querySelectorAll('.is-held')) {
+        held.classList.remove('is-open', 'is-held');
+        held.querySelector('.field-help')?.setAttribute('aria-expanded', 'false');
+      }
+    });
   },
 
   fillForm(cfg) {
@@ -352,6 +431,12 @@ const RunsView = {
         input.dataset.rules = JSON.stringify(value || {});
         input.value = this.rulesText(value);
       } else if (Array.isArray(value)) input.value = value.join(', ');
+      // A menu for a setting the engine does not send keeps the choice it was
+      // written with: blank, it would read as broken, and a blank is sent as
+      // "the default" anyway.
+      else if (input.tagName === 'SELECT' && (value === null || value === undefined)) {
+        input.value = (input.querySelector('option[selected]') || input.options[0])?.value ?? '';
+      }
       else input.value = (value === null || value === undefined) ? '' : value;
     }
     this.syncDependentFields();
@@ -520,7 +605,7 @@ const RunsView = {
       const p = document.createElement('p');
       p.className = 'sim-empty';
       p.textContent = `Could not load simulations: ${err.message}`;
-      this.grid.replaceChildren(this.newCard(), p);
+      this.grid.replaceChildren(p);
     }
     this.schedulePoll();
   },
@@ -539,23 +624,172 @@ const RunsView = {
     this.pollTimer = setTimeout(() => this.refresh(), delay);
   },
 
-  render() {
-    const open = this.openMenuFor;          // survive a redraw mid-poll
-    this.grid.replaceChildren(this.newCard(), ...this.runs.map(run => this.card(run)));
-    if (open) this.toggleMenu(open, true);
+  // ---- finding a simulation among many -----------------------------------
+
+  LISTING: 'gol.sims.listing',
+
+  /** What the cards can be grouped by: [value, the words the reader chooses it by]. */
+  GROUPS: [['', 'Nothing'], ['experiment', 'Experiment'], ['baseline', 'Baseline'],
+           ['status', 'Status'], ['size', 'World size']],
+
+  /** Words looked for, a status, and what the cards are grouped by. */
+  listing: { query: '', status: '', group: '' },
+
+  /** Which experiments each run belongs to, from the lab, when there is one. */
+  labRuns: null,
+
+  bindTools() {
+    this.tools = { query: document.getElementById('simSearch'), status: document.getElementById('simStatus'),
+                   group: document.getElementById('simGroup') };
+    try {
+      const kept = JSON.parse(localStorage.getItem(this.LISTING));
+      if (kept && typeof kept === 'object') {
+        for (const key of Object.keys(this.listing)) {
+          if (typeof kept[key] === 'string') this.listing[key] = kept[key];
+        }
+      }
+    } catch (err) { /* nothing kept, or a private window */ }
+    this.tools.group.innerHTML = this.GROUPS.map(([value, words]) =>
+      `<option value="${value}">${words}</option>`).join('');
+    this.tools.group.value = this.listing.group;
+    this.tools.query.value = this.listing.query;
+    for (const [key, el] of Object.entries(this.tools)) {
+      el.addEventListener(key === 'query' ? 'input' : 'change', () => {
+        this.listing = { ...this.listing, [key]: el.value };
+        try { localStorage.setItem(this.LISTING, JSON.stringify(this.listing)); } catch (err) { /* not kept */ }
+        if (key === 'group' && el.value === 'experiment') this.readLab();
+        this.render();
+      });
+    }
+    if (this.listing.group === 'experiment') this.readLab();
   },
 
-  /** The first cell: the only way to make a simulation. */
-  newCard() {
-    const el = document.createElement('button');
-    el.type = 'button';
-    el.className = 'sim-card sim-card-new';
-    el.append(
-      icon('<path d="M12 5v14M5 12h14"/>', 'sim-new-mark'),
-      Object.assign(document.createElement('span'), { textContent: 'Create new Simulation' })
-    );
-    el.addEventListener('click', () => this.openDialog());
-    return el;
+  /**
+   * Which experiments hold which runs, from the lab's own account of itself.
+   * Only a machine with a server has a lab; without one there is nothing to
+   * group by, and the groups say so.
+   */
+  async readLab() {
+    if (this._readingLab) return;
+    this._readingLab = true;
+    try {
+      const status = await API.labStatus();
+      const map = new Map();
+      for (const [name, experiment] of Object.entries(status.experiments || {})) {
+        for (const run of experiment.runs || []) {
+          const id = typeof run === 'string' ? run : run.id;
+          if (!map.has(id)) map.set(id, []);
+          map.get(id).push(name);
+        }
+      }
+      this.labRuns = map;
+    } catch (err) {
+      this.labRuns = new Map();
+      this.labMissing = true;
+    } finally {
+      this._readingLab = false;
+    }
+    this.render();
+  },
+
+  /** The status a card shows, as the filter knows it. */
+  stateOf(run) {
+    return (run.running && this.stopping.has(run.id)) ? 'stopping' : (run.status || 'idle');
+  },
+
+  /** The group a run falls in, as [order, heading]. */
+  groupOf(run) {
+    const by = this.listing.group;
+    if (by === 'experiment') {
+      const names = this.labRuns ? (this.labRuns.get(run.id) || []) : [];
+      if (!names.length) {
+        return ['~', this.labMissing ? 'No lab here to say which experiment' : 'In no experiment'];
+      }
+      return [names[0], `${names.length > 1 ? 'Experiments' : 'Experiment'} ${names.join(', ')}`];
+    }
+    if (by === 'baseline') {
+      const base = run.lab && run.lab.baseline;
+      return base ? [base, `Baseline ${base}`] : ['~', 'Own settings'];
+    }
+    if (by === 'status') {
+      const state = this.stateOf(run);
+      return [state, state[0].toUpperCase() + state.slice(1)];
+    }
+    if (by === 'size') {
+      const tokens = Number((run.config || {}).total_tokens) || 0;
+      return [String(tokens).padStart(12, '0'), `${formatNumber(tokens)} tokens`];
+    }
+    return ['', ''];
+  },
+
+  /** The runs the reader is looking for: every word in the name, the id or the settings, and the status asked for. */
+  shown() {
+    const words = this.listing.query.toLowerCase().split(/\s+/).filter(Boolean);
+    return this.runs.filter(run => {
+      if (this.listing.status && this.stateOf(run) !== this.listing.status) return false;
+      const text = `${run.name} ${run.id} ${run.strain || ''} ${(run.lab && run.lab.baseline) || ''}`.toLowerCase();
+      return words.every(w => text.includes(w));
+    });
+  },
+
+  render() {
+    const open = this.openMenuFor;          // survive a redraw mid-poll
+
+    // The statuses on offer are the ones there are, so the filter never offers
+    // an empty list; one chosen before and gone now is kept, and says so.
+    const states = [...new Set(this.runs.map(run => this.stateOf(run)))].sort();
+    if (this.listing.status && !states.includes(this.listing.status)) states.push(this.listing.status);
+    const status = this.tools.status;
+    status.innerHTML = '<option value="">Any</option>' + states.map(s =>
+      `<option value="${s}">${s[0].toUpperCase() + s.slice(1)}</option>`).join('');
+    status.value = this.listing.status;
+
+    const shown = this.shown();
+    const count = document.getElementById('simCount');
+    if (count) {
+      const total = this.runs.length;
+      count.textContent = total === shown.length
+        ? `${formatNumber(total)} simulation${total === 1 ? '' : 's'}`
+        : `${formatNumber(shown.length)} of ${formatNumber(total)} simulations`;
+    }
+
+    if (!shown.length) {
+      const p = document.createElement('p');
+      p.className = 'sim-empty';
+      p.textContent = this.runs.length
+        ? 'No simulation matches. Clear the search or the status to see them all.'
+        : 'No simulation yet. Make one with New simulation, above.';
+      this.grid.replaceChildren(p);
+      return;
+    }
+
+    const groups = new Map();
+    for (const run of shown) {
+      const [order, heading] = this.groupOf(run);
+      if (!groups.has(order)) groups.set(order, { heading, runs: [] });
+      groups.get(order).runs.push(run);
+    }
+    const sections = [...groups.entries()]
+      .sort(([a], [b]) => a.localeCompare(b, 'en', { numeric: true }))
+      .map(([, group]) => {
+        const section = document.createElement('section');
+        section.className = 'sim-group';
+        if (group.heading) {
+          const head = document.createElement('h3');
+          head.className = 'sim-group-head';
+          head.append(Object.assign(document.createElement('span'), { textContent: group.heading }),
+                      Object.assign(document.createElement('span'),
+                                    { className: 'sim-group-count', textContent: String(group.runs.length) }));
+          section.append(head);
+        }
+        const grid = document.createElement('div');
+        grid.className = 'sim-grid';
+        grid.append(...group.runs.map(run => this.card(run)));
+        section.append(grid);
+        return section;
+      });
+    this.grid.replaceChildren(...sections);
+    if (open) this.toggleMenu(open, true);
   },
 
   card(run) {
