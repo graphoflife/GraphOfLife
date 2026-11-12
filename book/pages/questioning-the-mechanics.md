@@ -253,7 +253,7 @@ positive parts, or ½ when neither is positive
 > [!example]- How to make this figure
 > **Runs.** The 30 baseline runs, left and right.
 >
-> **Data.** From each run's frames, read every 25 iterations by `book_figures.sample_pass` (frame `2·t` after the reproduction phase of iteration *t*, frame `2·t + 1` after its game; `gol_store.read_frame(run, index)`).
+> **Data.** As for the figure *How brains spread, and where new ones come from* above.
 >
 > 1. Read `decisions.births` of frame 0 (left) and of frame `2·t` for every 100th iteration t from 500 on (right): `invested` / `tokens_before` for every birth.
 > 2. Count in classes of 0.02 and divide by the births.

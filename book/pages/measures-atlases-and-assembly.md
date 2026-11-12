@@ -173,7 +173,8 @@ Having a child next is hardly predictable in either world (at most 0.18).
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *What comes before, and what follows* above.
 >
-> 1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).
+> Step 1 as for the figure *What comes before, and what follows* above.
+>
 > 2. Sort the rows by curvature into the classes on the axis; in each, count the agents whose node gained tokens over the game and those whose node lost, and those that kept their own node.
 >
 > **To make it again:** `python3 book_figures.py atlas`.
@@ -217,7 +218,8 @@ logarithmic axes.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *What comes before, and what follows* above.
 >
-> 1. For every 20th game from iteration 1,000 to 2,000, one row per agent alive at the start of the game, from the frames after the reproduction phase and after the game, of the next iteration's reproduction and of ten iterations later: the 29 quantities of the table in the text (`python3 research/atlas/correlations.py extract <run> --from 1000 --to 2000 --step 20`).
+> Step 1 as for the figure *What comes before, and what follows* above.
+>
 > 2. For every pair, Pearson's r with each quantity on a linear axis or a logarithmic one: the logarithm of a positive quantity, log(1 + x) of a count, sign(x) log(1 + |x|) of a signed one; shares and yes-or-no stay linear. The median over ten worlds for each choice of axes.
 > 3. Leave out the pairs made from the same numbers (tokens and tokens per link, say).
 >
@@ -1054,12 +1056,10 @@ against 121 in its twin, and 352 against 37 in round 3's healthiest.
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`, `B2-10000-s001` and `B1-30000-b82ad0-s3042` after their last games (iterations 1,499, 1,999 and 2,999), and a random space of 10,000 points (seed 23).
 >
-> **Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`.
+> **Data.** As for the figure *The index of an ego network is set by how many links it has* above.
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. One dot per shape: its index and its copies.
 >
 > **To make it again:** `python3 book_figures.py assembly`.
@@ -1085,12 +1085,10 @@ of index 0, and the hub's star of 8,118 links has only one copy.
 > [!example]- How to make this figure
 > **Runs.** The thirty worlds of B1 at 100,000 tokens (Experiment 10, `B1-100000-s001` … `-s030`) after the game of iteration 1,499; the ten worlds of B2 at 10,000 tokens (Experiment 16, `B2-10000-s001` … `-s010`) after the game of iteration 1,999; and seven worlds of round 3 of the screen, 30,000 tokens each, after the game of iteration 2,999: the five healthiest by the product (`B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006` played strongest first, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080`, `B1-30000-38aee9-s3057`), the densest (`B1-30000-4ac946-s3094`) and the star (`B1-30000-511930-s3020`).
 >
-> **Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`.
+> **Data.** As for the figure *The index of an ego network is set by how many links it has* above.
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. A = Σ e^{a_i} (n_i − 1) / N_T over the shapes.
 > 6. The networks with no history are made by `book_chapters/assembly.py` (`triangular_lattice`, `cubic_lattice`, `random_tree`, `random_space`) and read the same way.
 >
@@ -1163,10 +1161,8 @@ and left no network to read.
 >
 > **Data.** From each run's last frame, `GraphOfLifeRuns/<run>/frames/`, read with `book_data.frame_at(run, t, 2)` (the agents and their connections after the game); the shapes are kept in `GraphOfLifeRuns/.book/<run>.assembly.json`; each world's health from `research/screen/health.json` (`health.product`).
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. A = Σ e^{a_i} (n_i − 1) / N_T over the shapes, for the world and for its twin.
 > 6. Left: the world's A against its twin's. Right: their ratio against the world's health.
 >
@@ -1258,10 +1254,8 @@ built.
 >
 > **Data.** From each run's frames, read with `book_data.frame_at(run, t, 2)`; kept in `GraphOfLifeRuns/.book/<run>.assembly-life.json`.
 >
-> 1. For every agent, its ego network: its links to its neighbours, and the links among those neighbours (`book_assembly.ego_links`).
-> 2. Sort the ego networks into shapes, one for each class of isomorphic graphs (`book_assembly.Shapes`: a canonical form, as nauty makes one, with twins skipped; above 16 links a Weisfeiler–Lehman hash first). A shape's copy number is how many agents have it.
-> 3. Each shape's assembly index (`book_assembly.Assembler`): the fewest joins that build it from single links, reusing anything built, found by a search from the shape down, deepening from the addition-chain bound l(m) of its m links. Exact for every shape of at most 16 links; for a larger shape that two or more agents share, exact when the search ends within 20,000 units of work, and otherwise an interval; for a larger star, l(d).
-> 4. The twin: the same agents with as many links each, wired at random (`book_graph.degree_preserving`, seed 23), read the same way.
+> Steps 1–4 as for the figure *The index of an ego network is set by how many links it has* above.
+>
 > 5. A at each moment read, for the world and for its twin made then.
 >
 > **To make it again:** `python3 book_figures.py assembly`.

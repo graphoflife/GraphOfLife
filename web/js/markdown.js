@@ -229,13 +229,20 @@ const Markdown = {
       }
 
       const bullet = line.match(/^\s*[-*]\s+(.*)$/);
-      const numbered = line.match(/^\s*\d+\.\s+(.*)$/);
+      const numbered = line.match(/^\s*(\d+)\.\s+(.*)$/);
       if (bullet || numbered) {
         closeParagraph();
         closeItem();
         const want = bullet ? 'ul' : 'ol';
-        if (list !== want) { closeList(); out.push(`<${want}>`); list = want; }
-        item = (bullet || numbered)[1];
+        if (list !== want) {
+          closeList();
+          // A numbered list starts at its first number, as on GitHub: a figure's
+          // steps go on from those told for a figure above.
+          const start = numbered ? Number(numbered[1]) : 1;
+          out.push(start !== 1 ? `<ol start="${start}">` : `<${want}>`);
+          list = want;
+        }
+        item = bullet ? bullet[1] : numbered[2];
         continue;
       }
 

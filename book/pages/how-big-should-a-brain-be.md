@@ -152,7 +152,8 @@ outputs together: a median gain of 0.29 in founders and 0.45 when evolved.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
-> 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
+> Step 1 as for the figure *Every brain of round 3 responds* above.
+>
 > 2. With ε as for the gain, follow X and X + ε through the brain one layer at a time, and divide the root-mean-square difference after each layer by that before it (`through_layers`).
 >
 > **To make it again:** `python3 book_figures.py brainsize`.
@@ -189,7 +190,8 @@ here, whose agents place all their stakes at once, as the probe does.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
-> 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
+> Step 1 as for the figure *Every brain of round 3 responds* above.
+>
 > 2. Each brain's stakes by the engine's rules (`_apportion`, or all on the best-scored candidate), once on X and once on X with one thing changed: row `its_tokens` of every neighbour's column replaced by ln(1 + 2·(eˣ − 1)); the noise rows drawn again, uniform on (−2, 2) (seed 5302); the message rows set to 0.
 > 3. Count the agents whose stakes differ in any candidate.
 >
@@ -256,7 +258,8 @@ changes, with nothing selected. We showed it the same inputs.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
-> 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
+> Step 1 as for the figure *Every brain of round 3 responds* above.
+>
 > 2. For every kept world of the run, 300 brains of agents holding a token, drawn at random (seed 5304 + the iteration), each shown one agent's inputs; their gain as for the figure above.
 > 3. Mutation's balance (`balance`): a change jitters a share s of the numbers by a normal amount of standard deviation σ/√k and, with chance s, redraws a share s of a matrix at the founders' 1/√k; the variance of a weight settles at (1 + (1 − s²)σ²/s)/k, and of a bias at σ²(1 + (1 − s²)/s)/k. A founder's weights scaled to it, and biases drawn at it (`drifted`).
 > 4. The weights' size: the root mean square of a layer's weights times √(fan-in), the median over the layers and the agents.
@@ -301,7 +304,8 @@ brain takes more jitters on the way from what it sees to what it does.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Every brain of round 3 responds* above.
 >
-> 1. For 300 agents drawn at random among those holding a token or more (seed 53), their inputs exactly as the engine builds them for a look at their candidates (`World._precompute_features`, `World._inputs`).
+> Step 1 as for the figure *Every brain of round 3 responds* above.
+>
 > 2. Each brain changed once with the world's own mutation settings (seed 5305; `mutated`), and both shown the agent's inputs; the stranger is the agent probed half the sample away in the order of their ids, so that it was born far from it in time.
 > 3. The ratio of the two differences, per world (`_stake_change`).
 >

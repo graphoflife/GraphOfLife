@@ -219,7 +219,8 @@ iteration 50 had scored 0.90.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *How much better than the founders* above.
 >
-> 1. For every pair of the eras 0, 50, 100, 200, 300, 500, 700, 1000 play two contests, one in each era's world: give every agent a brain drawn at random from one era or the other, a coin each, clear the messages, switch mutation off and run 20 iterations (`gol_tournament.contest`). The later era's score is the share of agents carrying one of its brains at the end.
+> Step 1 as for the figure *How much better than the founders* above.
+>
 > 2. For each world and each pair, average its two contests.
 > 3. Take the median over the ten worlds, and colour the pair's square by it.
 >

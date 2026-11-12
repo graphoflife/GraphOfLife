@@ -92,31 +92,55 @@ def anchors(md_text: str) -> List[str]:
 # ---------------------------------------------------------------------------
 
 #: What the blocks made so far on the page being filled know of one another, so
-#: that a page does not say the same thing twice: the runs and data of the last
-#: figure, and the screens whose worlds it has listed. fill_text starts it anew.
+#: that a page does not say the same thing twice: the recipes of the figures above,
+#: the screens whose worlds it has listed, and the sentences its boxes of runs and
+#: its theses have said. fill_text starts it anew.
 PAGE: Dict[str, Any] = {}
 
 
 def recipe_of(md: str, title: str, recipe: str) -> str:
     """
-    A figure's recipe, with its runs and its data said once on a page: a figure
-    that reads the same runs and data as the figure before it says so in a line.
+    A figure's recipe, with its runs, its data and its steps said once on a page:
+    what a figure above said already, word for word, is pointed to instead (the
+    first figure that said it), wherever the pointer is the shorter. Its steps are
+    pointed to as far as they begin as that figure's did.
     """
     paragraphs = recipe.split("\n\n")
-    last = PAGE.get("figure") or {}
-    said, source = {}, {}
-    for key in ("Runs", "Data"):
-        said[key] = next((p for p in paragraphs if p.startswith(f"**{key}.**")), None)
-        before = last.get(key) or (None, None)
-        source[key] = before[1] if said[key] and said[key] == before[0] else title
-    PAGE["figure"] = {key: (said[key], source[key]) for key in said}
-    if not said["Runs"] or source["Runs"] == title:
-        return recipe
-    both = source["Data"] == source["Runs"]
-    line = f"**{'Runs and data' if both else 'Runs'}.** As for the figure *{source['Runs'].rstrip('.')}* above."
-    if len(line) >= len(said["Runs"]) + (len(said["Data"]) if both else 0):
-        return recipe                                  # said again in fewer words than pointing back
-    return "\n\n".join(line if p == said["Runs"] else p for p in paragraphs if not (both and p == said["Data"]))
+    said = {key: next((p for p in paragraphs if p.startswith(f"**{key}.**")), None) for key in ("Runs", "Data")}
+    listed = next((p for p in paragraphs if re.match(r"1\. ", p)), None)
+    steps = listed.split("\n") if listed else []
+    plain = [re.sub(r"^\d+\. ", "", s) for s in steps]
+    above = PAGE.setdefault("figures", [])
+    above.append((title.rstrip("."), said, plain))
+    first = {key: next((t for t, s, _ in above[:-1] if said[key] and s[key] == said[key]), None) for key in said}
+    # Runs and data together point to the first figure that read both, though it may point on for its runs.
+    first["both"] = next((t for t, s, _ in above[:-1] if said["Runs"] and s == said), None)
+    shared, source = 0, None                           # the longest beginning of the steps a figure above had
+    for name, _, theirs in above[:-1]:
+        k = next((i for i, (a, b) in enumerate(zip(plain, theirs)) if a != b), min(len(plain), len(theirs)))
+        if k > shared:
+            shared, source = k, name
+
+    def as_for(name: Optional[str]) -> str:
+        return f"As for the figure *{name}* above."
+    out: Dict[str, Optional[str]] = {p: p for p in paragraphs}
+    if steps and shared == len(steps) and first["both"] == source:
+        out[said["Runs"]] = f"**Runs, data and steps.** {as_for(source)}"
+        out[said["Data"]] = out[listed] = None
+    else:
+        both = f"**Runs and data.** {as_for(first['both'])}"
+        if first["both"] and len(both) < len(said["Runs"]) + len(said["Data"]):
+            out[said["Runs"]], out[said["Data"]] = both, None
+        else:
+            for key, paragraph in said.items():
+                line = f"**{key}.** {as_for(first[key])}"
+                if first[key] and len(line) < len(paragraph):
+                    out[paragraph] = line
+        line = f"{'Step 1' if shared == 1 else f'Steps 1–{shared}'} as for the figure *{source}* above."
+        if shared and len(line) < len("\n".join(steps[:shared])):
+            # The steps after them keep their numbers: the list goes on from those told above.
+            out[listed] = "\n\n".join([line] + (["\n".join(steps[shared:])] if shared < len(steps) else []))
+    return "\n\n".join(p for p in (out[p] for p in paragraphs) if p is not None)
 
 
 def figure(md: str, name: str) -> str:

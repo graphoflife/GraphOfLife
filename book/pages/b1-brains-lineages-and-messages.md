@@ -209,7 +209,7 @@ replaced all the others: a **sweep**.
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`, `-s012` and `-s017`.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *How long genotypes and agents last* above.
 >
 > 1. Read every frame in order; remember each genotype's parent and the iteration it first appeared.
 > 2. Every 25 iterations, after the game, count the agents per living genotype and climb the family tree from them, newest genotype first, adding each genotype's count to its parent's ([The common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living)).
@@ -250,7 +250,7 @@ one on top of the other ([Muller plots](measuring-evolution.md#muller-plots)):
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s012`.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *How long genotypes and agents last* above.
 >
 > 1. Note the genotypes alive after the game of iteration 550.
 > 2. After every later game, follow each living agent's genotype up its parents until one of those is reached; count the agents per family and divide by the number of agents.
@@ -276,7 +276,7 @@ the same seed, a family went from nothing to all in about 270.)
 > [!example]- How to make this figure
 > **Runs.** `B1-100000-s001`.
 >
-> **Data.** From each run's frames, `GraphOfLifeRuns/<run>/frames/`, read with `gol_store.read_frame(run, index)`; frame `2·t` is iteration *t* after reproduction and frame `2·t + 1` after the game.
+> **Data.** As for the figure *How long genotypes and agents last* above.
 >
 > 1. Note the genotypes alive after the game of iteration 1,000.
 > 2. After every later game, follow each living agent's genotype up its parents until one of those is reached; count the agents per family and divide by the number of agents.
@@ -298,7 +298,7 @@ world:
 **How often one branch replaces all others.** One dot per world: how many times, between iteration 100 and the end, the newest common ancestor of all the living moved forward to a younger genotype (one of the drops in the figure above). The bar is the median.
 
 > [!example]- How to make this figure
-> **Runs.** The 30 baseline runs `B1-100000-s001` … `B1-100000-s030`: the baseline B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each (every setting is listed in [Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). They are made with `python3 gol_lab.py run E10`.
+> **Runs.** As for the figure *How long genotypes and agents last* above.
 >
 > **Data.** From the lineage analysis of Experiment 10 (`python3 gol_lab.py analyse E10`), in `book/results/E10.json` (`ancestor.moves` of every run).
 >
@@ -880,9 +880,7 @@ moves it most.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/across_lab.json` and `B2_1500.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
 >
 > **To make it again:** `python3 book_figures.py how_alike`.
 <!-- /figure -->
@@ -925,9 +923,7 @@ Three other rules make the agents more alike, though not nearly as much:
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/across_pilots.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
 >
 > **To make it again:** `python3 book_figures.py how_alike`.
 <!-- /figure -->
@@ -1156,9 +1152,8 @@ middle parts are small.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/B2.json` and `B1.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
+>
 > 4. Split each decision's variance over brains, situations and draws into the four parts (the note *Where, who and chance*); take the median over worlds.
 >
 > **To make it again:** `python3 book_figures.py diversity`.
@@ -1250,9 +1245,8 @@ numbers change: its own noise.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/B2.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
+>
 > 4. Two brains are of one kind while their stakes differ by no more than 95% of brains differ from themselves between two halves of the draws; count the kinds by their carriers (1 / sum of squared shares).
 >
 > **To make it again:** `python3 book_figures.py diversity`.
@@ -1357,9 +1351,7 @@ next ([The diversity score](measuring-health.md#the-diversity-score)).
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/*.json` (`research/oee/checks/diversity.py`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
-> 3. Put the brains of 400 agents drawn at random, and 400 fresh founder brains, into every situation and draw, and turn their outputs into decisions by the engine's rules.
+> Steps 1–3 as for the figure *How alike the agents are, in every lab condition* above.
 >
 > **To make it again:** `python3 book_figures.py diversity`.
 <!-- /figure -->
@@ -1410,8 +1402,8 @@ twice. In B2 at 1,000 iterations, 0.68 of the agents' kinds are found again
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/diversity/persist.json` and `persist_gaps.json` (`research/oee/checks/diversity.py --persist`).
 >
-> 1. Load the world and play one game, so its messages are fresh (`research/oee/checks/diversity.py`).
-> 2. Take what 200 living agents read, and draw their random input rows 8 times, the same draws for every brain.
+> Steps 1–2 as for the figure *How alike the agents are, in every lab condition* above.
+>
 > 3. Draw 200 agents from each moment and put their brains into the first moment's situations and draws.
 > 4. Group the brains of both moments together, over the stake and the five decisions; ask which kinds of the first are found in the second.
 >

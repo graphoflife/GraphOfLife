@@ -792,8 +792,8 @@ spread. Against it, few switches stand out:
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `batch_TUVWX4_T100.json`, `batch_TUVWX5_T100.json` and `rejudge_T100.json` (`research/oee/checks/rejudge.py`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
-> 2. Count the agents the later era's brains hold, as a share of all.
+> Steps 1–2 as for the figure *Do the brains of 1,000 beat those of 500?* above.
+>
 > 3. A switch's main effect: the mean of the worlds with it on, minus those with it off.
 >
 > **To make it again:** `python3 book_figures.py eightswitches`.
@@ -1332,11 +1332,9 @@ alone.
 > [!example]- How to make this figure
 > **Runs.** Batch X's pilot worlds (B2 at 10,000 tokens, handover and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/X/`) and their controls: the same rule alone, from the batch or lab experiment that made it.
 >
-> **Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`) and the contests in `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`.
+> **Data.** As for the figure *Each rule, with no revolutions and without* above.
 >
-> 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Subtract the world with the rule alone from the world with both, seed by seed.
-> 3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.
+> Steps 1–3 as for the figure *Each rule, with no revolutions and without* above.
 >
 > **To make it again:** `python3 book_figures.py handovercombos`.
 <!-- /figure -->
@@ -1428,11 +1426,9 @@ those links alive.
 > [!example]- How to make this figure
 > **Runs.** Batch T's pilot worlds (B2 at 10,000 tokens, gifts and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/T/`) and their controls: the same rule alone, from the batch or lab experiment that made it.
 >
-> **Data.** From each world's checkpoint at iteration 1,000 (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`) and the contests in `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and `rejudge_T100.json`.
+> **Data.** As for the figure *Each rule, with no revolutions and without* above.
 >
-> 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Subtract the world with the rule alone from the world with both, seed by seed.
-> 3. Seat the brains of the two eras on alternate agents of each era's world, play 100 iterations, and count the agents the later brains hold.
+> Steps 1–3 as for the figure *Each rule, with no revolutions and without* above.
 >
 > **To make it again:** `python3 book_figures.py giftcombos`.
 <!-- /figure -->
@@ -1626,7 +1622,7 @@ Every corner is read at iteration 1,000, the same moment in each, as
 > [!example]- How to make this figure
 > **Runs.** Batch Y's 46 pilot worlds (B2 at 10,000 tokens, brains mixed at birth and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/Y/`) and their controls: the same rule alone, from the batch or lab experiment that made it, and, of the same seeds, B2 itself (Experiment 16's lab worlds) and B2 with brains mixed at birth alone (Experiment 17's lab worlds).
 >
-> **Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
+> **Data.** As for the figure *What each switch does, among the sixteen and alone* above.
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
 > 2. Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean.
@@ -1674,10 +1670,7 @@ show.
 **How much the agents differ.** Each grey dot is a world of B2 with one other rule, each orange dot the same rule with brains mixed at birth as well (batch Y), seeds 1 and 2, read at iteration 1,000; the short bars are the means. The dashed lines are B2 itself and B2 with mixing alone, the means of the same seeds. The rules are in the order of the orange means.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *Agents holding three tokens or fewer* above.
->
-> 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean.
+> **Runs, data and steps.** As for the figure *Agents holding three tokens or fewer* above.
 >
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
@@ -1721,8 +1714,7 @@ hold a token, and 366 with brains that grow. And small mixed worlds are the ones
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json`, `rejudge_T100.json`, `long_steps.json` and `e17_T100.json` (`research/oee/checks/rejudge.py`).
 >
-> 1. Seat the brains of the two eras on alternate agents of each era's world and play 100 iterations.
-> 2. Count the agents the later era's brains hold, as a share of all.
+> Steps 1–2 as for the figure *Do the brains of 1,000 beat those of 500?* above.
 >
 > **To make it again:** `python3 book_figures.py mixcombos`.
 <!-- /figure -->
@@ -1862,10 +1854,7 @@ scattered evenly go to the very agents that will breed.
 **B1 worlds, by who inherits.** B1 worlds of 10,000 tokens, two seeds of each rule, through 2,000 iterations (means over blocks of 20 iterations). Grey: the estate shared evenly, the control; green: to the poorest; violet: to the children born that iteration; red: to their parents; blue (added later): each estate to the dead agent's own living children.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *B2 worlds, by who inherits* above.
->
-> 1. Read agents, births, the Gini coefficient and mean age every iteration.
-> 2. Average over blocks of 20 iterations and draw a line per world.
+> **Runs, data and steps.** As for the figure *B2 worlds, by who inherits* above.
 >
 > **To make it again:** `python3 book_figures.py inherit`.
 <!-- /figure -->

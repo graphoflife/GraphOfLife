@@ -106,7 +106,8 @@ evenly.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
-> 1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).
+> Step 1 as for the figure *How much of what a brain sees reaches what it does* above.
+>
 > 2. Spread: the mean of the two BLOTTO_MODE outputs over the columns, first larger than second. Child: ⌊f(ā, b̄) · tokens⌋ ≥ 1 with ā, b̄ the REPRO_FRACTION outputs averaged over the columns. Even by default: every BLOTTO score ≤ 0 (`book_chapters.inner.probe`).
 >
 > **To make it again:** `python3 book_figures.py minds`.
@@ -146,7 +147,8 @@ them.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
-> 1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).
+> Step 1 as for the figure *How much of what a brain sees reaches what it does* above.
+>
 > 2. For each agent, the mean over its columns of output rows 0–14 (`World.heads`: REPRO_FRACTION 0–1, LINK 2–3, LINK_MODE 4–5, BLOTTO 6, BLOTTO_MODE 7–8, REV_FRACTION 9–10, HANDOVER 11–12, HANDOVER_MODE 13–14); then the mean over agents.
 >
 > **To make it again:** `python3 book_figures.py minds`.
@@ -195,7 +197,8 @@ thing about what the brain reads, and see whether its stakes change at all.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *How much of what a brain sees reaches what it does* above.
 >
-> 1. For every agent of the world with at least one token, its inputs exactly as the engine builds them for a look at its candidates (`World._precompute_features` and `World._inputs`), and its brain's outputs (`Brain.forward`); the decisions follow by the engine's own rules (`_apportion` for the stakes, `_share_of_first` for a child's share).
+> Step 1 as for the figure *How much of what a brain sees reaches what it does* above.
+>
 > 2. Change the inputs — rows 29–148 set to 0; rows 149–153 drawn again, uniform on (−2, 2); row 2 of every neighbour's column replaced by ln(1 + 2·(e^x − 1)) — and decide again; count the agents whose shares of stake differ in any candidate.
 >
 > **To make it again:** `python3 book_figures.py minds`.

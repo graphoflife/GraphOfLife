@@ -156,11 +156,7 @@ ten B2 worlds of Experiment 16, on seed 1.
 **Ten evolved worlds, a patch of 5% each.** One dot per world, the bar the median of ten.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *The share of two evolved worlds held by a strategy* above.
->
-> 1. Load the world of iteration 2,000 (`GraphOfLife.from_checkpoint`). On seed *s*, draw an agent at random and take the agents nearest to it, step by step, until the patch holds the share asked for (5%, or one agent).
-> 2. Give each agent of that patch the strategy (`manual.py`), or, for the control, a frozen copy of the brain of one agent of the patch drawn at random; neither ever mutates.
-> 3. Play on under the world's own rules and count, after each iteration, the agents carrying the strategy, as a share of all agents.
+> **Runs, data and steps.** As for the figure *The share of two evolved worlds held by a strategy* above.
 >
 > **To make it again:** `python3 book_figures.py handmade`.
 <!-- /figure -->
@@ -339,12 +335,7 @@ A raid is either joined by enough raiders or it dies.
 **A patch of 5% in every world.** Each dot is one planting of a patch of 5% of the world at iteration 2,000: left of each world, the raiders (filled where they took hold), right of it, the control planted in the same place. Worlds 2 and 3 have ten places, the others five.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *How many plantings took hold, by the size of the patch* above.
->
-> 1. Load the world of iteration 2,000; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch has its size.
-> 2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control; neither ever mutates.
-> 3. Play 300 iterations under the world's own rules, counting the patch's agents after every iteration.
-> 4. A planting takes hold when, after 300 iterations, its raiders are alive, more than the patch began with, and more than the control holds there.
+> **Runs, data and steps.** As for the figure *How many plantings took hold, by the size of the patch* above.
 >
 > **To make it again:** `python3 book_figures.py crowd`.
 <!-- /figure -->
@@ -494,14 +485,7 @@ Over 120 iterations:
 **What a raid starts from.** Each dot is one planting of 5% of a world, from Experiments 29 and 30, each counted once, by the patch's tokens per agent when it was planted and the raiders' share of the world 300 iterations later.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *The same raid, planted in older worlds* above.
->
-> **Data.** From each trial's `result.json`.
->
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the raider ([Strategies written by hand](strategies-written-by-hand.md)'s rule), or the control, frozen copies of one patch member's brain.
-> 3. Play 300 iterations under the world's own rules; a planting takes hold when its raiders are then alive, more than the patch began with, and more than the control holds.
-> 4. A patch's wealth is its tokens over its agents when it is planted.
+> **Runs, data and steps.** As for the figure *The same raid, planted in older worlds* above.
 >
 > **To make it again:** `python3 book_figures.py door`.
 <!-- /figure -->

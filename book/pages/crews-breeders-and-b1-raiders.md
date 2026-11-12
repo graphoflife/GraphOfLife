@@ -106,10 +106,7 @@ before the lone raiders planted there. That was so in 15 of 15 places at
 **What became of the patches planted at 5,000 and 10,000.** The median over the thirty plantings at 5,000 and 10,000 of each kind: crews (orange), lone raiders (violet), controls (grey). Left: the patch's strategy's agents as a share of the patch planted (0 once it has died out). Right: their tokens per agent, over the plantings still alive.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *Crews and lone raiders, planted in the same places* above.
->
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy and its tokens after every iteration.
+> **Runs, data and steps.** As for the figure *Crews and lone raiders, planted in the same places* above.
 >
 > **To make it again:** `python3 book_figures.py crews`.
 <!-- /figure -->
@@ -265,7 +262,8 @@ anything to the breeding.
 >
 > **Data.** From each trial's `result.json`.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
+> Step 1 as for the figure *Crews and lone raiders, planted in the same places* above.
+>
 > 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
 > 3. A planting takes hold when its strategy is alive after 300 iterations, holds more agents than the patch began with, and more than the control planted in the same place; count the plantings of each era that took hold, and those alive at all.
 >
@@ -299,8 +297,8 @@ planted with, one more, for one iteration.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
+> Steps 1–2 as for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
+>
 > 3. At each iteration after planting, take the median over the thirty plantings of the strategy's agents over the patch planted, and of its tokens per agent over the plantings still alive.
 >
 > **To make it again:** `python3 book_figures.py breeders`.
@@ -418,8 +416,8 @@ expected lone raiders to take hold in B1, and crews at least as often.
 >
 > **Data.** From each trial's `result.json`.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
+> Steps 1–2 as for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
+>
 > 3. Count the plantings of each era whose strategy is alive after 300 iterations, and take the median of the iteration each planting's last agent died in (300 if it lived to the end).
 >
 > **To make it again:** `python3 book_figures.py b1raiders`.
@@ -442,12 +440,10 @@ iterations, crews 76 to 120, the controls 130 to 237.
 **What became of the patches in B1.** The median over the eighteen plantings of each kind, at each iteration after planting: the strategy's tokens (left) and agents (right) as a share of what the patch began with, 0 once it has died out.
 
 > [!example]- How to make this figure
-> **Runs.** As for the figure *Every strategy in B1's two long worlds* above.
+> **Runs and data.** As for the figure *Every strategy in B1's two long worlds* above.
 >
-> **Data.** From each trial's `result.json`.
+> Steps 1–2 as for the figure *Breeding raiders, beside barren raiders, breeding turtles and controls* above.
 >
-> 1. Load the world of the era; on place p, draw an agent at random and take its nearest neighbours, step by step, until the patch holds 5% of the world.
-> 2. Give the patch the rule, or the control; play 300 iterations under the world's own rules, counting the patch's strategy's agents and their tokens after every iteration (each trial's `result.json`).
 > 3. At each iteration after planting, take the median over the eighteen plantings of the strategy's tokens over the patch's tokens at planting, and of its agents over the patch planted.
 >
 > **To make it again:** `python3 book_figures.py b1raiders`.

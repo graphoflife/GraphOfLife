@@ -476,11 +476,7 @@ agents, because the cull has nothing left to do.
 **Mended in a ring.** A world of the model aiming at 600 agents (637 at the end): the same, and every death mended in a ring. Of seeds 1 to 5, the world that ended largest. Agents and links whose loss alone would split the world are drawn in the second colour, the links wider; the worst of them cuts off 2.8% of the world.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *A tree of blobs* above.
->
-> 1. A world of no brains (`research/oee/space.py`): it starts as a ring of 50 agents, each joined to its 6 nearest (Watts–Strogatz, rewiring 0.2). Every iteration each agent has a child with probability 0.02 × 600 / *n*, plus 0.05 while there are fewer than 600 agents, and then dies with probability 0.02; after both, only the largest piece is kept. 300 iterations.
-> 2. Keep the world that ended with the most agents.
-> 3. Find the bridges and the cut vertices (`networkx.bridges`, `networkx.articulation_points`), lay the network out with `networkx.forceatlas2_layout(G, max_iter=300, seed=1)` and draw it.
+> **Runs, data and steps.** As for the figure *A tree of blobs* above.
 >
 > **To make it again:** `python3 book_figures.py unbreakable`.
 <!-- /figure -->
@@ -641,7 +637,7 @@ came apart and the cull removed every piece but the largest.
 > [!example]- How to make this figure
 > **Runs.** The 60 runs of Experiment 14 — B2 at 5,000 tokens, seeds 1 to 10, 1,000 iterations — in six conditions: all the rules of B2, and B2 with one of them taken away or changed. They are made with `python3 gol_lab.py run E14`.
 >
-> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, which holds one row per recorded phase: `phase` 1 is the world just after reproduction, `phase` 2 just after the game, and every statistic is a field of the row (see [What a run records](runs-and-records.md#what-a-run-records)).
+> **Data.** As for the figure *Agents alive* above.
 >
 > 1. Sum `orphaned` over the rows of both phases with 200 ≤ `iteration` ≤ 1,000.
 > 2. Add one, and draw a dot per world.
@@ -711,8 +707,7 @@ Each condition broke something different.
 > [!example]- How to make this figure
 > **Runs and data.** As for the figure *Agents cut off from iteration 200 to 1,000* above.
 >
-> 1. Take `nodes` of the rows with `phase` = 2, one line per run.
-> 2. For each condition, the median, quartiles and 5th and 95th percentiles of the runs at each iteration (`book_figures.band_series`).
+> Steps 1–2 as for the figure *Agents alive* above.
 >
 > **To make it again:** `python3 book_figures.py unbreakable`.
 <!-- /figure -->
@@ -2038,7 +2033,7 @@ and meets every mark ([Who inherits?](what-the-switches-did-in-pilots.md#healthy
 **Do later brains beat earlier ones?** Each dot is a world: the share of a world the later era's brains hold after 100 iterations against the earlier era's, the mean of two contests, one in each era's world; the bar is the median world. Orange: the mixed worlds of Experiment 17; grey: B2 — its ten worlds for 1,000 against 500, three of their continuations for the later pairs.
 
 > [!example]- How to make this figure
-> **Runs.** The ten runs of Experiment 17 — B2 at 10,000 tokens with brains mixed at birth, seeds 1 to 10, 10,000 iterations (`python3 gol_lab.py run E17`) — and B2 itself: Experiment 16's ten worlds to 2,000 iterations and the same worlds played on to 10,000 as pilots (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s010`).
+> **Runs.** As for the figure *Agents alive, world by world* above.
 >
 > **Data.** From each run's whole worlds every 500 iterations (`GraphOfLifeRuns/.pilots/e17_T100.json`, `long_steps.json`, `long_rejudge_T100.json`).
 >
@@ -2221,7 +2216,8 @@ the living ones poorer the larger they grew.
 >
 > **Data.** From each run's whole worlds and births (`research/oee/checks/e17_breeding.py --seeds 2,4,10 --from 10000 --to 50000`).
 >
-> 1. In each whole world, count the agents with 11 tokens or more and fewer than 8 links.
+> Step 1 as for the figure *Who could have a child, and who has one* above.
+>
 > 2. Divide the births per iteration of the next 50 iterations by them.
 >
 > **To make it again:** `python3 book_figures.py longmixed`.
@@ -2889,7 +2885,8 @@ makes a new genotype
 >
 > **Data.** From each world kept whole every 500 iterations, and each run's births (`research/oee/checks/e17_breeding.py`, `GraphOfLifeRuns/.pilots/e17_breeding.json` and `e19_breeding.json`).
 >
-> 1. In each whole world, count the agents with 11 tokens or more and fewer than 8 links.
+> Step 1 as for the figure *Who could have a child, and who has one* above.
+>
 > 2. Read the births of the 50 reproduction phases that follow.
 > 3. Divide their mean per iteration by the agents counted.
 >
@@ -2944,8 +2941,7 @@ Evolution is slowing, but not stopping.
 >
 > **Data.** From each run's whole world kept at 20,000 (`archive/world_020000.npz`) and `GraphOfLifeRuns/.pilots/e19_health.json` (`research/oee/checks/e17_health.py --family B2-10000-bcc1bc`).
 >
-> 1. Count the agents holding three tokens or fewer, as a share of all.
-> 2. Measure the seven marks as `research/atlas/profile.py` does.
+> Steps 1–2 as for the figure *Experiment 17 at iteration 10,000* above.
 >
 > **To make it again:** `python3 book_figures.py mixparents`.
 <!-- /figure -->
@@ -3499,8 +3495,8 @@ three of the same five seeds.
 >
 > **Data.** From each run's whole world kept at iteration 10,000 (`archive/world_010000.npz`, read by `research/atlas/at.py --at 10000`, `GraphOfLifeRuns/.pilots/atlas/at10000.json`).
 >
-> 1. Read each world as `research/atlas/profile.py` reads every world.
-> 2. Rank its four spreads among the frozen reference worlds; the diversity score is their mean.
+> Steps 1–2 as for the figure *From 1,000 iterations to 10,000* above.
+>
 > 3. A world that died out (20 agents or fewer) fails.
 >
 > **To make it again:** `python3 book_figures.py fiveseeds`.
@@ -3545,8 +3541,7 @@ lost none of the same seeds.
 >
 > **Data.** From each run's `stats.jsonl`.
 >
-> 1. Read the agents after each game (`nodes`, phase 2).
-> 2. Average over stretches of 50 iterations.
+> Steps 1–2 as for the figure *Agents alive, world by world* above.
 >
 > **To make it again:** `python3 book_figures.py fiveseeds`.
 <!-- /figure -->
@@ -4006,9 +4001,7 @@ At iteration 3,000:
 **What each rule costs of the diversity.** The four parts of the diversity score, each world's percentile among the frozen reference worlds: how many doubling classes its agents' tokens, links and ages fill, and its effective number of genotypes per agent. Each dot is one world at iteration 3,000.
 
 > [!example]- How to make this figure
-> **Runs and data.** As for the figure *Experiment 19's world, given room* above.
->
-> 1. Read each world as `research/atlas/profile.py` reads every world: the seven marks, the four spreads ranked among the frozen reference worlds (their mean is the diversity score), the Gini of the tokens.
+> **Runs, data and steps.** As for the figure *Experiment 19's world, given room* above.
 >
 > **To make it again:** `python3 book_figures.py room`.
 <!-- /figure -->
