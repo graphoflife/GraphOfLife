@@ -19,6 +19,7 @@
    "checkpoint_every": 100,
    "archive_every": 250
   },
+  "workers": 1,
   "conditions": [
    {
     "name": "s3004",
