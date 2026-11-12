@@ -260,9 +260,17 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     return f"{summary}\n\n{every}"
 
 
+def withdrawn(plan: Dict[str, Any], what: str) -> str:
+    """A plan given up before any of its runs was made: why, in one line."""
+    note = plan["withdrawn"]
+    return quote(f"None: {note[0].lower()}{note[1:]}", f"[!info] The {what} behind this page")
+
+
 def runs(md: str, name: str) -> str:
     import gol_plan                                    # only here: it reads the runs folder
     plan, borrowed = resolve(name)
+    if plan.get("withdrawn"):
+        return withdrawn(plan, "trials" if "trials" in plan else "worlds" if "screen" in plan else "runs")
     if "trials" in plan:
         return trials(md, borrowed or name, plan)
     if "screen" in plan:
