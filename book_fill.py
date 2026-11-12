@@ -260,6 +260,45 @@ def screen(md: str, name: str, plan: Dict[str, Any]) -> str:
     return f"{summary}\n\n{every}"
 
 
+def box_of(experiment: str) -> str:
+    """Where an experiment's box of runs is, as a path under book/ and the section it sits in."""
+    home = home_of(experiment)["file"]
+    with open(os.path.join(BOOK, home), encoding="utf-8") as f:
+        text = f.read()
+    at = text.find(f"<!-- runs {experiment} -->")
+    heads = len(re.findall(r"^#{1,6}\s", re.sub(r"^```.*?^```", "", text[:at], flags=re.S | re.M), re.M))
+    return home + (f"#{anchors(text)[heads - 1]}" if at > 0 and heads else "")
+
+
+#: Every screen's drawn worlds, by plan: drawn once, as every box of runs asks.
+DRAWS: Dict[str, List[Dict[str, Any]]] = {}
+
+
+def drawn_as(condition: Dict[str, Any], base: Dict[str, Any]) -> Optional[Tuple[str, Dict[str, Any], Dict[str, Any]]]:
+    """
+    The world of a screen whose drawn settings a condition of B1 plays again, if
+    any: the screen, the draw, and what the condition plays otherwise (its
+    founders, say, for a world played at another size).
+    """
+    import gol_plan
+    plays = {**(condition.get("set") or {}), **(condition.get("world") or {})}
+    rules = {k: v for k, v in plays.items() if k not in gol_plan.WORLD}
+    if base["id"] != "B1" or not rules:                # a screen's worlds are B1's rules, changed as drawn
+        return None
+    if not DRAWS:
+        for f in sorted(os.listdir(os.path.join(BOOK, "experiments"))):
+            if f.startswith("E") and f.endswith(".json") and "screen" in read_json(f"experiments/{f}"):
+                DRAWS[f[:-5]] = gol_plan.screen_draws(f[:-5])
+    for plan, found in DRAWS.items():
+        for d in found:
+            if {k: v for k, v in d["set"].items() if k not in gol_plan.WORLD} == rules:
+                world = [k for k in gol_plan.WORLD if k != "total_tokens"]
+                other = {k: plays.get(k, base["settings"][k]) for k in world
+                         if plays.get(k, base["settings"][k]) != d["set"].get(k, base["settings"][k])}
+                return plan, d, other
+    return None
+
+
 def withdrawn(plan: Dict[str, Any], what: str) -> str:
     """A plan given up before any of its runs was made: why, in one line."""
     note = plan["withdrawn"]
@@ -308,11 +347,19 @@ def runs(md: str, name: str) -> str:
                  f"([At a glance]({link(md, page_file('settings'))}#at-a-glance)).\n")
     for c in conditions:
         # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
-        changed = ", ".join(f"`{k}` = {show(v)}" for k, v in {**(c.get("set") or {}), **(c.get("world") or {})}.items()) \
-            or f"nothing: {base['id']} as it is"
+        drawn = drawn_as(c, base)
+        if drawn:
+            plan_id, d, other = drawn
+            changed = (f"the settings of world {d['world']} of [Experiment {int(plan_id[1:])}]"
+                       f"({link(md, box_of(plan_id))}) (seed {d['seed']}), as drawn"
+                       + (" but with " + ", ".join(f"`{k}` = {show(v)}" for k, v in other.items()) if other else ""))
+        else:
+            changed = "changes " + (", ".join(f"`{k}` = {show(v)}" for k, v in
+                                              {**(c.get("set") or {}), **(c.get("world") or {})}.items())
+                                    or f"nothing: {base['id']} as it is")
         named = ids.get(c["name"], [])
         where = f" Runs `{named[0]}` … `{named[-1]}`." if named else ""
-        lines.append(f"- **{c['name']}** — changes {changed}; {', '.join(number(s) for s in sizes(c))} "
+        lines.append(f"- **{c['name']}** — {changed}; {', '.join(number(s) for s in sizes(c))} "
                      f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
     lines.append(f"To make these runs again: `python3 gol_lab.py run {borrowed or name}`, or ▶ in "
