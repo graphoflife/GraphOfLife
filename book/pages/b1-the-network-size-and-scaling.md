@@ -1186,8 +1186,6 @@ more, it compares the world before the game with the world after it. Then it
 counts the border. Each figure says, folded beneath it, which runs it reads
 and how.
 
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the shape of the network)](#the-runs-of-experiment-10-the-shape-of-the-network).
-
 ## Power laws, real and apparent, and how to fit one
 
 A power law has no typical size, and on logarithmic axes it is a straight
@@ -1558,8 +1556,6 @@ figure, `book/figures/powerlaws/tokens-fit.svg`, against its red line. The
 same figure drawn from the worlds of 10,000 tokens is in the notebook's
 history (`git show 82062d7:book/figures/powerlaws/tokens-fit.svg`).
 
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the shape of the network)](#the-runs-of-experiment-10-the-shape-of-the-network).
-
 ## How properties scale together
 
 On average, agents hold tokens in proportion to their connections plus one:
@@ -1824,8 +1820,6 @@ Experiment 2 that lived to the end (`python3 gol_lab.py run E02`).
 The command `python3 book_figures.py scaling` draws every figure of this page,
 and writes its numbers to `book/results/scaling.json`. Each figure says,
 folded beneath it, which runs it reads and how.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the shape of the network)](#the-runs-of-experiment-10-the-shape-of-the-network).
 
 ## Like next to like: how alike agents are at a distance
 
@@ -2148,12 +2142,6 @@ The numbers for the worlds of 10,000 tokens come from the same measurement on
 Experiment 2: thirty worlds, `B1-10000-s001` … `-s030`, of 3,000 iterations
 each (`python3 gol_lab.py run E02`). The 26 that lived to the end were read at
 five moments, from iteration 1,000 to 2,999.
-
-#### The runs of Experiment 10 (like next to like)
-Experiment 10 is 30 runs: B1 at 100,000 tokens, seeds 1 to 30, 1,500
-iterations each.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the shape of the network)](#the-runs-of-experiment-10-the-shape-of-the-network).
 
 ## Worlds of many sizes
 
@@ -2962,8 +2950,6 @@ iterations each.
   [Worlds of 100,000 tokens](#worlds-of-100000-tokens) with
   `python3 book_figures.py takeover`.
 
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the shape of the network)](#the-runs-of-experiment-10-the-shape-of-the-network).
-
 ## How much does the seed decide?
 
 Thirty baseline worlds that differ only in their seed end up alike: at
@@ -3364,13 +3350,9 @@ over their settled life, from iteration 500 on.
   in the number of agents then takes 19 seeds, not 48.
 
 ### How this was made (how much does the seed decide)
-This page reads two sets of runs. The thirty worlds of 100,000 tokens are the
-runs of Experiment 10:
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the shape of the network)](#the-runs-of-experiment-10-the-shape-of-the-network).
-
-The thirty worlds of 10,000 tokens, on which the thesis was first tested, are
-the runs of Experiment 2:
+The thirty worlds of 100,000 tokens are those of Experiment 10
+([How this was made](#how-this-was-made-the-shape-of-the-network)); the thirty of
+10,000 tokens, on which the thesis was first tested, those of Experiment 2:
 
 <!-- runs E03 -->
 > [!info]- The runs behind this page

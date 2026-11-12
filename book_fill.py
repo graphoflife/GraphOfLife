@@ -439,6 +439,8 @@ def runs(md: str, name: str) -> str:
         return withdrawn(plan, "trials" if "trials" in plan else "worlds" if "screen" in plan else "runs")
     if borrowed:                                       # a plan that reads another's runs: one line, to their box
         return listed_at(md, borrowed, "; nothing new was run")
+    if archived(md) and home_of(name)["file"] != md:   # the Archive lists an experiment's runs on its own page
+        return listed_at(md, name, ", listed on the page that reports it")
     if "trials" in plan:
         return trials(md, name, plan)
     if "screen" in plan:

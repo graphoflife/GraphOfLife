@@ -542,9 +542,7 @@ figures again: `python3 book_figures.py scaledims`; the code is
   `python3 gol_lab.py run E08`), Experiment 2's 26 worlds of 10,000 tokens
   that lived to iteration 3,000 (`B1-10000-s001` … `-s030`;
   `python3 gol_lab.py run E02`) and Experiment 10's 30 worlds of 100,000
-  tokens (`B1-100000-s001` … `-s030`; `python3 gol_lab.py run E10`). The
-  [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") of Experiments 8 and 10 are listed below, Experiment 2's in
-  [The life of a B1 world](b1-lives-and-wealth.md#the-life-of-a-b1-world).
+  tokens (`B1-100000-s001` … `-s030`; `python3 gol_lab.py run E10`).
 - **After the last game.** Each world's largest piece and its random twin,
   by balls from 100 agents drawn at random, all the way out, and by a lazy
   random walk from 48 agents for up to 1,024 steps; in the three worlds of
@@ -568,25 +566,14 @@ figures again: `python3 book_figures.py scaledims`; the code is
 Every random choice is seeded with 23, so the same runs give the same
 figures.
 
-#### The runs of Experiment 8 (dimensions at scale)
 <!-- runs E08 -->
 > [!info]- The runs behind this page
-> **42 runs.** Every condition below is run once for every seed (1 to 3) and every number of tokens it lists, for 600 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 800, 1,600, 3,200, 6,400, 12,800, 25,600, 51,200, 102,400, 204,800, 409,600 tokens. Runs `B1-800-s001` … `B1-409600-s003`.
-> - **stopped only when empty** — changes `extinction_threshold` = 0; 800, 1,600, 3,200, 6,400 tokens. Runs `B1-800-57b358-s001` … `B1-6400-57b358-s003`.
->
-> To make these runs again: `python3 gol_lab.py run E08`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 8](b1-the-network-size-and-scaling.md#the-runs-of-experiment-8), listed on the page that reports it. To make them again: `python3 gol_lab.py run E08`.
 <!-- /runs -->
 
-#### The runs of Experiment 10 (dimensions at scale)
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is B1's unless the condition changes it.
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`.
+> These are the runs of [Experiment 10](b1-the-network-size-and-scaling.md#the-runs-of-experiment-10-the-shape-of-the-network), listed on the page that reports it. To make them again: `python3 gol_lab.py run E10`.
 <!-- /runs -->
 
 ## Which properties have no scale?
@@ -1118,20 +1105,10 @@ tokens did not live, and its second condition is not read); the 28 worlds of
 Experiment 2 that lived past iteration 1,499; and the 30 worlds of
 Experiment 10.
 
-The runs of Experiment 8 are listed once on this page, under [The runs of Experiment 8 (dimensions at scale)](#the-runs-of-experiment-8-dimensions-at-scale).
-
-#### The runs of Experiment 2
-
 <!-- runs E02 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is B1's unless the condition changes it.
->
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E02`.
+> These are the runs of [Experiment 2](b1-lives-and-wealth.md#the-runs-of-experiment-2), listed on the page that reports it. To make them again: `python3 gol_lab.py run E02`.
 <!-- /runs -->
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (dimensions at scale)](#the-runs-of-experiment-10-dimensions-at-scale).
 
 ## Where to go next
 

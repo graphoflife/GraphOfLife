@@ -689,14 +689,9 @@ the worlds of every size of
 [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes)
 (`python3 gol_lab.py run E08`).
 
-#### The runs of Experiment 10 (the life of a B1 world)
 <!-- runs E10 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 1,500 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
->
-> - **baseline** — changes nothing: B1 as it is; 100,000 tokens. Runs `B1-100000-s001` … `B1-100000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E10`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> These are the runs of [Experiment 10](b1-the-network-size-and-scaling.md#the-runs-of-experiment-10-the-shape-of-the-network), listed on the page that reports it. To make them again: `python3 gol_lab.py run E10`.
 <!-- /runs -->
 
 #### The runs of Experiment 2
@@ -706,11 +701,11 @@ first tested:
 
 <!-- runs E02 -->
 > [!info]- The runs behind this page
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is B1's unless the condition changes it.
+> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
 >
 > - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
 >
-> To make these runs again: `python3 gol_lab.py run E02`.
+> To make these runs again: `python3 gol_lab.py run E02`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 <!-- /runs -->
 
 ## Births, deaths and ages
@@ -1342,8 +1337,6 @@ ages` draws those of [How ages change over a world's
 life](#how-ages-change-over-a-worlds-life). Each figure says, folded beneath
 it, which runs it reads and how.
 
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
-
 ## How births build the network
 
 In the first baseline, B1, every new node of a world's network is a newborn
@@ -1772,8 +1765,6 @@ connection.
 The values given for the worlds of 10,000 tokens were measured the same way,
 in the thirty worlds of Experiment 2 (`python3 gol_lab.py run E02`). They
 date from when the two pages this one joins were first written.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
 
 ## How unequal is a world, and who stays rich
 
@@ -2491,8 +2482,6 @@ tokens of Experiment 2, listed last. There the command
 `python3 gol_lab.py analyse E04` checks it. In the worlds of 100,000 tokens,
 `python3 book_figures.py tokens` checks it again.
 
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
-
 #### The runs of Experiment 4
 
 The thirty worlds of 10,000 tokens, on which the thesis of Experiment 4 was
@@ -2936,8 +2925,6 @@ Each figure says, folded beneath it, which runs it reads and how. The numbers
 given for the worlds of 10,000 tokens come from the thirty runs of
 Experiment 2, from which this page was first written.
 
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
-
 ## The largest and the smallest
 
 In a settled world, the richest agent holds about 2% of all tokens and the
@@ -3249,8 +3236,6 @@ Experiment 2 that lived to the end (`python3 gol_lab.py run E02`). The figure
 by size reads the worlds of Experiment 8 (`python3 gol_lab.py run E08`). The
 command `python3 book_figures.py extremes` draws every figure of this page.
 Each figure says, folded beneath it, which runs it reads and how.
-
-The runs of Experiment 10 are listed once on this page, under [The runs of Experiment 10 (the life of a B1 world)](#the-runs-of-experiment-10-the-life-of-a-b1-world).
 
 ## Where to go next
 
