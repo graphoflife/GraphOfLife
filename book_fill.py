@@ -421,15 +421,23 @@ def withdrawn(plan: Dict[str, Any], what: str) -> str:
     return quote(f"None: {note[0].lower()}{note[1:]}", f"[!info] The {what} behind this page")
 
 
+def listed_at(md: str, name: str, why: str) -> str:
+    """A box of runs that would list again what another box lists: whose runs they are, a link there, the command."""
+    return quote(f"These are the runs of [Experiment {int(name[1:])}]({link(md, box_of(name))}){why}. "
+                 f"To make them again: `python3 gol_lab.py run {name}`.", "[!info]- The runs behind this page")
+
+
 def runs(md: str, name: str) -> str:
     import gol_plan                                    # only here: it reads the runs folder
     plan, borrowed = resolve(name)
     if plan.get("withdrawn"):
         return withdrawn(plan, "trials" if "trials" in plan else "worlds" if "screen" in plan else "runs")
+    if borrowed:                                       # a plan that reads another's runs: one line, to their box
+        return listed_at(md, borrowed, "; nothing new was run")
     if "trials" in plan:
-        return trials(md, borrowed or name, plan)
+        return trials(md, name, plan)
     if "screen" in plan:
-        return screen(md, borrowed or name, plan)
+        return screen(md, name, plan)
     spec = plan["runs"]
     base = read_json(f"experiments/{spec['baseline']}.json")
     conditions = spec["conditions"]
@@ -446,13 +454,10 @@ def runs(md: str, name: str) -> str:
         return seeds_text(c.get("seeds", spec["seeds"]))
 
     ids: Dict[str, List[str]] = {}
-    for r in gol_plan.experiment_runs(borrowed or name):
+    for r in gol_plan.experiment_runs(name):
         ids.setdefault(r.condition, []).append(r.run_id)
 
     lines = []
-    if borrowed:
-        lines.append(f"These are the runs of Experiment {int(borrowed[1:])}; nothing new was run for "
-                     "this page.\n")
     worlds = sum(len(sizes(c)) * seeds_of(c)[1] for c in conditions)
     lines.append(f"**{number(worlds)} runs.** Every condition below is run once for "
                  + ("each of its seeds" if own else f"every seed ({seeds})")
@@ -476,7 +481,7 @@ def runs(md: str, name: str) -> str:
         lines.append(f"- **{c['name']}** — {changed}; {', '.join(number(s) for s in sizes(c))} "
                      f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
-    lines.append(made_again("make these runs", borrowed or name, WRITES))
+    lines.append(made_again("make these runs", name, WRITES))
     if any((c.get("set") or {}).get("proto") for c in conditions) and once("proto"):
         lines.append("")
         lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "

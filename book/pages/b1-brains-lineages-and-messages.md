@@ -441,13 +441,7 @@ iterations.
 
 <!-- runs E06 -->
 > [!info]- The runs behind this page
-> These are the runs of Experiment 2; nothing new was run for this page.
->
-> **30 runs.** Every condition below is run once for every seed (1 to 30), for 3,000 iterations — or until its world dies out. Every setting is B1's unless the condition changes it.
->
-> - **baseline** — changes nothing: B1 as it is; 10,000 tokens. Runs `B1-10000-s001` … `B1-10000-s030`.
->
-> To make these runs again: `python3 gol_lab.py run E02`.
+> These are the runs of [Experiment 2](b1-lives-and-wealth.md#the-runs-of-experiment-2); nothing new was run. To make them again: `python3 gol_lab.py run E02`.
 <!-- /runs -->
 
 ## What agents say to each other
