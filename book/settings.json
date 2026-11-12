@@ -1,5 +1,5 @@
 {
- "about": "What every setting of a run means, in a line. The book's runs blocks show each run's value beside these words; the note book/notes/settings.md explains each at length.",
+ "about": "What every setting of a run means, in a line. The settings dialog of a run, in the Runs tab, shows each value beside these words; the settings page, book/pages/settings.md, explains each at length.",
  "order": [
   "total_tokens",
   "n_nodes",
@@ -79,7 +79,7 @@
    "meaning": "How many numbers one message holds. Each agent sends one message to itself and one to each neighbour, every phase."
   },
   "random_input_amount": {
-   "meaning": "How many random numbers, drawn uniformly from −2 to 2, a brain reads per neighbour, every time it looks."
+   "meaning": "How many random numbers, drawn uniformly from −2 to 2, a brain reads per candidate, itself included, every time it looks."
   },
   "exchange_messages": {
    "meaning": "Whether agents send and read messages at all."
@@ -91,7 +91,7 @@
    "meaning": "Whether a parent may move some of its own connections to its newborn child."
   },
   "allow_revolutions": {
-   "meaning": "Whether a coalition of smaller stakers can take a node from its largest staker (see the note *How a coalition takes a node*)."
+   "meaning": "Whether a coalition of smaller stakers can take a node from its largest staker (see *How a coalition takes a node* in Rules in detail)."
   },
   "allow_gifting": {
    "meaning": "Whether agents may give tokens to neighbours during reproduction. Off in both baselines; on in a few pilots, in Experiment 24 and in half the worlds of the screen."
@@ -154,7 +154,7 @@
    "meaning": "Whether a newborn's brain is its parent's mixed with a mate's — one of the parent's neighbours, drawn at random — each hidden unit whole from one or the other by an even chance, before it mutates; off, a newborn has a copy of its parent's brain."
   },
   "link_search": {
-   "meaning": "Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the tokens it holds would pay for. A paid step costs one token, paid to the agent it enters, and never the last."
+   "meaning": "Whether an agent may reach beyond its neighbours to propose a link: off; jump, a walk as many steps long as the tokens it spends in one iteration, with a link proposed where it ends; walk, a scout that goes one step further in every iteration it pays for; or reach, a jump whose steps are free, as many as the share of what reproduction left it that its brain chooses. A paid step costs one token, paid to the agent it enters, and never the last."
   },
   "link_steering": {
    "meaning": "Which way each step of a search goes: to a neighbour drawn at random, or to the one the searcher would most like a link with (looking)."
@@ -172,7 +172,7 @@
    "meaning": "What an agent writes to itself, which each neighbour reads: what its own column says (own), or the largest, number by number, of what it writes to anyone (largest), so that news one column marks reaches every neighbour."
   },
   "proto": {
-   "meaning": "Rules first played in the pilots' prototype, by name: came_from and helped_by (an input row each), contest = lottery, pool by genotype or family, kin_sense, tag_rate, mate_pays, grow, unit_token, link_token. Empty in every run but those that ask for one; only the prototype's world plays them (see the settings note)."
+   "meaning": "Rules first played in the pilots' prototype, by name: came_from and helped_by (an input row each), contest = lottery, pool by genotype or family, kin_sense, tag_rate, mate_pays, grow, unit_token, link_token. Empty in every run but those that ask for one; only the prototype's world plays them (see the settings page)."
   },
   "child_floor": {
    "meaning": "The least a child may start with: min_child alone (fixed), or also the median holding of its parent's neighbours (neighbours), so that a world grows only as rich as it is."

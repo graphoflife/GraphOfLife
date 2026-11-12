@@ -64,10 +64,10 @@ MECHANICS: Dict[str, Any] = {
     "inactive_window": "phase",
     "redistribution": "uniform",
 
-    # ---- open-ended evolution (Part V of the book) ---------------------------
+    # ---- open-ended evolution (book/pages/settings.md#rules-added-for-open-ended-evolution)
     #
     # Each of these answers one way the pilots of research/oee/ saw a world
-    # fail; research/strains.md says which, and the book's Part V teaches it.
+    # fail; research/strains.md says which, and the settings page explains each.
     # All off, so that `gol-1` keeps naming the algorithm it always named.
     "mutate_on_replication": False,
     "incumbency": 1.0,
@@ -121,8 +121,8 @@ MECHANICS: Dict[str, Any] = {
     # ---- stakes pooled by kin (2026-11-11) ---------------------------------------
     #
     # The pilots' pools (research/oee/pilots/proto.py, `pool`), in the engine so
-    # that a world playing them keeps its worlds and can be contested. Off here,
-    # so `gol-1` keeps naming what it always named.
+    # that a world playing them keeps its frames and archive and can be
+    # contested. Off here, so `gol-1` keeps naming what it always named.
     "pool": "off",
 
     # ---- the pilots' rules ---------------------------------------------------
@@ -482,8 +482,9 @@ class SimConfig:
     # descended from one family tag (tag_rate). The side with most takes the
     # node, the owner keeps it if its own side wins, and a brain sees one input
     # more: whether a candidate is on its side. The pilots' rule, in the engine
-    # since 11 November 2026, so that its worlds keep their worlds and can be
-    # contested. It needs the stakes placed all at once (allocation = full).
+    # since 11 November 2026, so that its worlds keep their frames and archive
+    # and can be contested. It needs the stakes placed all at once
+    # (allocation = full).
     pool: str = "off"
     # The chance that a brain which mutates starts a family of its own; else it
     # stays in its parent's family. A mutation parameter, read only under
@@ -552,11 +553,13 @@ class SimConfig:
 
     # ---- Open-ended evolution ----
     #
-    # Nine rules, each the answer to a way a world was seen to fail when brains
-    # could see (research/oee/LOG.md, the book's Part V), and a tenth from the
-    # pilots that followed (mix_at_birth). Every one is off by default and
-    # local: it reads an agent, its links and its neighbours, and nothing
-    # further away.
+    # Rules each the answer to a way a world was seen to fail when brains could
+    # see (research/oee/pilots/LOG.md): nine at first, then mix_at_birth from
+    # the pilots that followed, and eight more since; the settings page says
+    # what each does and why, under
+    # book/pages/settings.md#rules-added-for-open-ended-evolution. Every one is
+    # off by default and local: it reads an agent, its links and its
+    # neighbours, and nothing further away.
 
     # Heredity. A brain changes only when it is copied — into a newborn, or into
     # a node its owner won — and no longer after every game wherever it sits.
@@ -632,7 +635,8 @@ class SimConfig:
     # With `neighbours`, a child must also start with at least the median holding
     # of its parent's neighbours: a world whose births are cheap (an estate paid
     # to the newborns, say) can then grow only as rich as it is, rather than
-    # filling with paupers (Chapter 100). Local and without a number of its own.
+    # filling with paupers (book/pages/settings.md#child_floor). Local and
+    # without a number of its own.
     # `fixed`, the old rule, asks only min_child.
     child_floor: str = "fixed"
 
@@ -645,7 +649,7 @@ class SimConfig:
     # the rest of the brain it arose in. The mixture is a new genotype unless
     # it is the parent's brain again, as it is with a mate of the same
     # genotype; a parent without a neighbour has a copy. Off is the old rule.
-    # The pilots of the book's Chapter 78 found it.
+    # The pilots found it (book/pages/settings.md#mix_at_birth).
     mix_at_birth: bool = False
     # Under mix_at_birth, who may be the mate: `any` neighbour of the parent,
     # or only `parents` — a neighbour with a living child of its own, so that
@@ -662,10 +666,11 @@ class SimConfig:
     # Reach beyond a pair. A brain scores each candidate from that candidate's
     # column alone, so what it writes to one neighbour can never carry news of
     # another, and no message ever says "a stranger is next door to me"
-    # (Chapter 94). With `largest`, what an agent writes to itself — which each
-    # of its neighbours reads as one of its inputs — is the largest, number by
-    # number, of what it writes to all its candidates, itself included: what one
-    # column marks reaches every neighbour a phase later. `own`, the old rule,
+    # (book/pages/settings.md#self_message). With `largest`, what an agent
+    # writes to itself — which each of its neighbours reads as one of its
+    # inputs — is the largest, number by number, of what it writes to all its
+    # candidates, itself included: what one column marks reaches every
+    # neighbour a phase later. `own`, the old rule,
     # is what its own column says.
     self_message: str = "own"
 
@@ -742,7 +747,8 @@ class SimConfig:
     # There is no iteration ceiling: a run goes until it is stopped or the
     # population dies out. How long it is worth running is a judgement made
     # while watching it, not one that can be guessed when it is created.
-    # Below this node count the run is declared extinct and stops.
+    # At or below this node count, after a game, the run is declared extinct and
+    # stops.
     extinction_threshold: int = 20
     # Write a resume checkpoint every N iterations. 0 disables checkpointing.
     checkpoint_every: int = 20

@@ -365,8 +365,8 @@ The side with the most takes the node, and the owner keeps it if its own side
 wins. A brain sees one more input: whether a candidate is on its side. First
 played in pilot worlds ([Other contests: a lottery, and alliances](another-game.md)),
 where families of 150 to 490 agents rose and fell like empires; moved into the
-engine on 11 November 2026, so that such a world keeps its worlds and can be
-contested. It needs the stakes placed all at once ([`allocation`](#allocation) = full).
+engine on 11 November 2026, so that such a world keeps its frames and archive
+and can be contested. It needs the stakes placed all at once ([`allocation`](#allocation) = full).
 
 **B1 and B2:** `off`.
 
@@ -469,8 +469,8 @@ Nine rules were added for [open-ended evolution](measuring-evolution.md#what-wou
 answers one way a world was seen to fail once its brains could see. A tenth,
 `mix_at_birth`, came later from the pilots of
 [Brains mixed at birth, units that cost, an eye for raids on kin](what-the-switches-did-in-pilots.md#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin).
-Four more followed: `buy_life`, `mix_mates`, `self_message` and
-`child_floor`.
+Eight more followed: `buy_life`, `mix_mates`, `self_message`, `child_floor`,
+`link_token`, `link_upkeep`, `upkeep_to` and `mate_pays`.
 
 Every one is off in B1, at the old rule, and in every run made before B2, so
 those runs are unchanged by them. B2 turns on all nine of the first ones. All
