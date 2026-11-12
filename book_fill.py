@@ -16,8 +16,8 @@ comment lines, which no reader shows:
     <!-- /figure -->
 
     <!-- thesis E04 -->               an experiment's claim, quoted from its plan
-    <!-- runs E02 -->                 what was run: every setting, the seeds, the
-                                      command that runs it again
+    <!-- runs E02 -->                 what was run: what each condition changes, the
+                                      seeds, the command that runs it again
     <!-- contents -->                 every page, under its topic, from book.json
     <!-- turns -->                    the page's topic, and the pages before and after it there
     <!-- costs -->                    what a simulation costs, as last fitted
@@ -269,7 +269,6 @@ def runs(md: str, name: str) -> str:
         return screen(md, borrowed or name, plan)
     spec = plan["runs"]
     base = read_json(f"experiments/{spec['baseline']}.json")
-    glossary = read_json("settings.json")
     conditions = spec["conditions"]
     world = spec["world"]["total_tokens"]
 
@@ -297,7 +296,8 @@ def runs(md: str, name: str) -> str:
                  + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
                                  else "") + f", for {number(spec['iterations'])} iterations — or "
                  "until its world dies out. Every setting is that of the baseline "
-                 f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it.\n")
+                 f"**{base['id']}** ({base['title'].lower()}) unless the condition changes it "
+                 f"([At a glance]({link(md, page_file('settings'))}#at-a-glance)).\n")
     for c in conditions:
         # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
         changed = ", ".join(f"`{k}` = {show(v)}" for k, v in {**(c.get("set") or {}), **(c.get("world") or {})}.items()) \
@@ -316,34 +316,7 @@ def runs(md: str, name: str) -> str:
         lines.append("Runs that ask for the pilots' rules are played by the research prototype, frozen beside "
                      "the engine (`gol_pilot.py`): they keep no frames, but one row of the world's statistics "
                      "every iteration (`series.jsonl`) and a whole world at every checkpoint.")
-    summary = quote("\n".join(lines), "[!info]- The runs behind this page")
-
-    head = "| setting | " + " | ".join(c["name"] for c in conditions) + " | what it is |"
-    rule = "|---" * (len(conditions) + 2) + "|"
-    rows = []
-    keys = glossary["order"] + [k for k in base["settings"] if k not in glossary["order"]]
-    for key in keys:
-        if key not in base["settings"]:
-            continue
-        cells = []
-        for c in conditions:
-            if key == "total_tokens":
-                cells.append(", ".join(number(s) for s in sizes(c)))
-                continue
-            value = (c.get("set") or {}).get(key, (c.get("world") or {}).get(
-                key, spec.get("world", {}).get(key, base["settings"][key])))
-            text = show(value)
-            cells.append(f"**{text}**" if value != base["settings"][key] else text)
-        meaning = (glossary["settings"].get(key) or {}).get("meaning", "")
-        rows.append(f"| [`{key}`]({link(md, page_file('settings'))}#{key}) | " + " | ".join(cells)
-                    + f" | {meaning} |")
-    rows.append("| seeds | " + " | ".join(seeds_of(c)[0] for c in conditions) + " | one run per seed |")
-    rows.append("| iterations | " + " | ".join(number(spec["iterations"]) for _ in conditions)
-                + " | how far each run goes, unless its world dies first |")
-    table = "\n".join([head, rule, *rows])
-    every = quote(table + "\n\nA value in **bold** differs from the baseline "
-                  f"{base['id']}.", "[!info]- Every setting of these runs")
-    return f"{summary}\n\n{every}"
+    return quote("\n".join(lines), "[!info]- The runs behind this page")
 
 
 def pages() -> List[Dict[str, Any]]:

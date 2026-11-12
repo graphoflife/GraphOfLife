@@ -235,8 +235,8 @@ Everything in this notebook can be made again on any computer with Python 3,
 numpy and networkx. Each page that reads runs shows two things:
 
 - **the runs behind it**, in a box: which runs it reads, how many, with which
-  seeds and for how many iterations, and the command that makes them. Folded
-  beneath it is every setting of those runs.
+  seeds and for how many iterations, what each condition changes in its
+  baseline, and the command that makes them.
 - under every **figure**, what it shows: what each line, band, bar or dot is.
   Folded away is **how to make this figure**: which runs, which file, which
   fields, every step of the calculation, and the command that draws it again.

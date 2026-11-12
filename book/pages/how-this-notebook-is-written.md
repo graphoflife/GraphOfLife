@@ -88,8 +88,8 @@ what would refute it. A thesis is never reworded once the results are in. A
 thesis written while the notebook still numbered its chapters keeps those
 numbers, and each links to the page it meant that day.
 
-The runs behind a page — how many, which seeds, every [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") — are listed in
-a box that folds away, in a last section, **How this was made**, so that the
+The runs behind a page — how many, which seeds, and what each condition
+changes in its baseline — are listed in a box that folds away, in a last section, **How this was made**, so that the
 page reads as an argument and the details are there for whoever wants to make
 it again.
 
@@ -102,7 +102,7 @@ it again.
   worlds that are dead, a [star](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen
   ([Health as a filter](measuring-health.md#from-11-november-2026-health-as-a-filter)).
 - **A stated start, and what changes.** A plan says the rules its worlds start
-  from, and what it changes: one setting of a baseline, as the early
+  from, and what it changes: one [setting](settings.md "One number or switch of a run's rules, fixed before it starts.") of a baseline, as the early
   experiments did, or every setting drawn at random, as the screen does
   ([A screen of random worlds](a-screen-of-random-worlds.md)).
 - **New seeds for a find.** A world chosen as the best of many is lucky as
