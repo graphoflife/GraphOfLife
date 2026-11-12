@@ -135,9 +135,10 @@ directly.
 
 - **Asks:** did some lines of descent spread because of what they did, or by
   chance alone?
-- **How:** replay each world's family tree with every child given a parent
-  drawn at random among the living, keeping the same births and deaths in
-  the same iterations. That is the world with selection taken out: a shadow.
+- **How:** replay each world's family tree (on the
+  [brain-copy tree](candidates-for-open-ended-evolution.md#the-brains-own-family-tree),
+  births and conquests both) with every copy given a parent drawn at random
+  among the living, keeping the same copies and deaths in the same iterations. That is the world with selection taken out: a shadow.
   Compare how long lines last, and how fast one takes a world over, in the
   real tree and in many shadow trees.
 - **Yes would look like:** real lines last longer and sweep faster than shadow

@@ -62,6 +62,11 @@ read:
   ([The brains' own family tree](#the-brains-own-family-tree)). The evolution
   rank reads this one.
 
+The family tree of genotypes in
+[Measuring evolution](measuring-evolution.md#the-family-tree) is a third: it
+includes conquest copies, but it branches at every mutation, so a brain that
+changes where it sits starts a new genotype there.
+
 The readings, and the tree each uses:
 - **Generations and the effective population** (both trees). Going back from
   the brains alive at the end, their ancestors grow fewer and fewer, until all
