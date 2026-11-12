@@ -636,20 +636,6 @@
       "summary": "The notebook's two longest worlds are Experiment 18's, whose brains are mixed at birth, played to 50,000 iterations. Experiment 28 played the brains of every 2,500th iteration of each against the brains of three fixed moments: 2,500, 10,000 and 25,000."
     },
     {
-      "id": "assembly-theory",
-      "title": "Assembly theory: how many steps to make a thing, and how many copies",
-      "file": "pages/assembly-theory.md",
-      "topics": [
-        "evolution",
-        "space",
-        "methods"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-11-09",
-      "summary": "Assembly theory counts the fewest joins that build a thing from parts and how many copies of it exist. Tried on the agents' neighbourhoods, its index turns out to be set by how many links a neighbourhood has, and the worlds hold about as much assembly as random networks with the same degrees. Over every world of round 3, a world's assembly follows a cap on links, not its health."
-    },
-    {
       "id": "strategies-written-by-hand",
       "title": "Can a strategy written by hand beat evolution?",
       "file": "pages/strategies-written-by-hand.md",
@@ -751,18 +737,6 @@
       "summary": "How the notebook judges whether a world is healthy and interesting: the author's criteria, the seven marks of the health bar that B2's worlds were held to, and the diversity score.."
     },
     {
-      "id": "every-world-side-by-side",
-      "title": "Every world side by side",
-      "file": "pages/every-world-side-by-side.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "overview",
-      "status": "written",
-      "added": "2026-10-16",
-      "summary": "Each page measures the worlds of one experiment or a few. This page puts every world in one table, measured the same way over the same stretches of iterations, and looks at them together."
-    },
-    {
       "id": "runs-and-records",
       "title": "How runs are made, recorded and costed",
       "file": "pages/runs-and-records.md",
@@ -787,30 +761,6 @@
       "status": "written",
       "added": "2026-10-08",
       "summary": "A world of 10,000 tokens holds about 1,300 agents and lives 3,000 iterations: some four million agent-moments, recorded twice per iteration. The baseline worlds of 100,000 tokens hold about 14,000 agents for 1,500 iterations: some twenty million."
-    },
-    {
-      "id": "one-world-many-colours",
-      "title": "One world, many colours: what the viewer can colour by",
-      "file": "pages/one-world-many-colours.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "method",
-      "status": "written",
-      "added": "2026-10-08",
-      "summary": "Statistics average; a picture shows where things are. The viewer draws a world as dots and lines, and colours them by any quantity it measures. Each value is placed on a colour map, within the range of the frame on screen."
-    },
-    {
-      "id": "what-goes-with-what",
-      "title": "What goes with what",
-      "file": "pages/what-goes-with-what.md",
-      "topics": [
-        "methods"
-      ],
-      "kind": "study",
-      "status": "written",
-      "added": "2026-10-15",
-      "summary": "This page is an atlas rather than an experiment. It sets every quantity measured for an agent against every other, in twenty worlds. And it sets every statistic of a whole world against every other."
     },
     {
       "id": "every-simulation",
@@ -994,6 +944,21 @@
       "status": "written",
       "added": "2026-10-09",
       "summary": "Two side studies for the second aim: whether B1's dimension changes with the scale, and which properties of a world have no scale of their own."
+    },
+    {
+      "id": "measures-atlases-and-assembly",
+      "title": "Measures, atlases and assembly (side studies)",
+      "file": "pages/measures-atlases-and-assembly.md",
+      "topics": [
+        "side-studies",
+        "methods",
+        "evolution",
+        "space"
+      ],
+      "kind": "study",
+      "status": "written",
+      "added": "2026-10-08",
+      "summary": "Side studies of many measures and worlds at once: an atlas of what goes with what, every world side by side, the viewer's colours, and assembly theory."
     }
   ],
   "parts": [

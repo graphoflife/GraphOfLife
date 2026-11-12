@@ -13,11 +13,11 @@ there.
 
 <!-- glossary -->
 - **[2-core](measuring-networks.md#core-trees-and-leaves)** (also hanging tree) — What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.
-- **[addition chain](assembly-theory.md#the-assembly-index)** — Numbers from 1 in which each is the sum of two before it; the shortest one ending at m is the fewest joins m links can need.
+- **[addition chain](measures-atlases-and-assembly.md#the-assembly-index)** — Numbers from 1 in which each is the sum of two before it; the shortest one ending at m is the fewest joins m links can need.
 - **[agent](the-world.md#agents-and-tokens)** (also node) — One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.
-- **[assembly](assembly-theory.md#copy-number-and-assembly)** — Assembly theory's measure of a collection: each kind of object weighed by e to the power of its assembly index, times its copies beyond the first, over all the objects.
-- **[assembly index](assembly-theory.md#the-assembly-index)** (also assembly indices) — The fewest joins that build an object from basic blocks, when anything built before can be used again.
-- **[assembly theory](assembly-theory.md#building-with-reusable-parts)** — A way to measure how much making went into a thing: the fewest steps that build it from basic parts, and how many copies of it there are.
+- **[assembly](measures-atlases-and-assembly.md#copy-number-and-assembly)** — Assembly theory's measure of a collection: each kind of object weighed by e to the power of its assembly index, times its copies beyond the first, over all the objects.
+- **[assembly index](measures-atlases-and-assembly.md#the-assembly-index)** (also assembly indices) — The fewest joins that build an object from basic blocks, when anything built before can be used again.
+- **[assembly theory](measures-atlases-and-assembly.md#building-with-reusable-parts)** — A way to measure how much making went into a thing: the fewest steps that build it from basic parts, and how many copies of it there are.
 - **[assortativity](measuring-networks.md#assortativity)** — Whether agents tend to be joined to agents like them: the well connected to the well connected.
 - **[autocorrelation](statistics.md#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum)** — How much a world's value now still says about its value some iterations later.
 - **[B1](b1-and-b2.md)** — The first baseline: the algorithm exactly as a new run is offered it.
@@ -34,7 +34,7 @@ there.
 - **[clustering](measuring-networks.md#clustering)** — How often an agent's neighbours are also each other's neighbours.
 - **[common ancestor](measuring-evolution.md#the-common-ancestor-of-the-living)** — The genotype every living agent descends from, and how far back it lies.
 - **[connection](the-world.md#the-network)** — A link between two agents of the network: they are neighbours, and can stake on each other's nodes.
-- **[copy number](assembly-theory.md#copy-number-and-assembly)** — How many identical copies of an object a collection holds.
+- **[copy number](measures-atlases-and-assembly.md#copy-number-and-assembly)** — How many identical copies of an object a collection holds.
 - **[correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes)** — Whether two quantities go up and down together, from −1 to 1.
 - **[correlation length](b1-the-network-size-and-scaling.md#how-alike-at-a-distance)** (also correlation function) — How far apart two agents can be and still be alike: how fast likeness fades with distance.
 - **[cross-time tournament](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better)** (also era) — Brains of a world at two moments, its eras, played against each other: do the later ones win?
@@ -47,7 +47,7 @@ there.
 - **[effective kinds of staking](b1-brains-lineages-and-messages.md#how-different-are-the-agents)** — How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.
 - **[effective number](statistics.md#effective-numbers-how-many-kinds-and-how-many-directions)** — How many kinds there really are, when kinds are counted by how much of the population they hold.
 - **[effective population](candidates-for-open-ended-evolution.md#how-each-pillar-is-read)** — The size of a population left to chance that would lose its lines as fast: the smaller it is, the more chance decides which line survives.
-- **[ego network](assembly-theory.md#ego-networks-as-molecules)** — An agent, its neighbours and the links among them: the network as one agent sees it.
+- **[ego network](measures-atlases-and-assembly.md#ego-networks-as-molecules)** — An agent, its neighbours and the links among them: the network as one agent sees it.
 - **[entropy](measuring-tokens.md#entropy-and-evenness)** (also evenness) — How evenly something is shared out among the agents, from all in one place to spread perfectly evenly.
 - **[estate](measuring-lives.md#the-estate-of-the-dead)** — The tokens a dead agent leaves, and who gets them.
 - **[even split](measuring-tokens.md#the-even-split)** — What the rules do when a brain scores no candidate above zero: the stake is spread evenly.

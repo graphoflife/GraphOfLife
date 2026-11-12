@@ -470,7 +470,7 @@ Births and deaths run a little faster in larger worlds: 13 to 21% more per
 agent at 100,000 tokens than at 10,000.
 
 Structure, where there is any, shows only in collective patterns: families
-side by side ([One world, many colours](one-world-many-colours.md)), hubs with
+side by side ([One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by)), hubs with
 their stars. And most of it does not reach far.
 [Like next to like](b1-the-network-size-and-scaling.md#how-alike-at-a-distance) measured how
 alike agents are at a distance. Tokens, ages and connections are alike only

@@ -201,7 +201,7 @@ makes the figures does nothing the recipe does not say. It is
 <!-- turns -->
 ---
 
-← [Every world side by side](every-world-side-by-side.md) · [Methods and statistics](../README.md#methods-and-statistics) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) →
+[Methods and statistics](../README.md#methods-and-statistics) · [Every simulation: what was run, and what was measured](every-simulation.md) →
 
 > [!info]- Pages that link here (1)
 > [B1: lives and wealth](b1-lives-and-wealth.md)

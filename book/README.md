@@ -114,7 +114,6 @@ how the pages hang together.
 - [Does evolution keep going?](pages/how-to-tell-a-world-that-keeps-evolving.md)
 - [How fast should brains change?](pages/how-fast-should-brains-change.md)
 - [Every era against three](pages/every-era-against-three.md)
-- [Assembly theory: how many steps to make a thing, and how many copies](pages/assembly-theory.md)
 
 #### Changing the rules
 
@@ -133,10 +132,7 @@ how the pages hang together.
 
 #### Methods and statistics
 
-- [Every world side by side](pages/every-world-side-by-side.md)
 - [How worlds are measured](pages/how-worlds-are-measured.md)
-- [One world, many colours: what the viewer can colour by](pages/one-world-many-colours.md)
-- [What goes with what](pages/what-goes-with-what.md)
 - [Every simulation: what was run, and what was measured](pages/every-simulation.md)
 
 #### Reference: the rules and measures in detail
@@ -173,4 +169,5 @@ how the pages hang together.
 
 - [Cooperation, help and gliders (side study)](pages/cooperation-help-and-gliders.md)
 - [Space at scale (side study)](pages/space-at-scale.md)
+- [Measures, atlases and assembly (side studies)](pages/measures-atlases-and-assembly.md)
 <!-- /contents -->

@@ -471,7 +471,7 @@ of the points are.
   agents behind each of the four fits, in B1's thirty worlds of 100,000
   tokens. All four are nearly the same in every world: they belong to the
   rules, not to what the brains compute.
-- [What goes with what](what-goes-with-what.md#between-worlds): how clustering
+- [What goes with what](measures-atlases-and-assembly.md#between-worlds): how clustering
   and triangles grow with an agent's connections is the second of the
   components that tell those thirty worlds apart.
 
@@ -560,7 +560,7 @@ at random, a brain may choose at most 8 links
 - [Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk):
   the even split fits the game with a slope of 0.94 without the stars, 0.65
   with them.
-- [What goes with what](what-goes-with-what.md#between-worlds): the one
+- [What goes with what](measures-atlases-and-assembly.md#between-worlds): the one
   component that orders the thirty worlds by their largest hub holds 47% of
   their differences.
 - [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution):
@@ -972,7 +972,7 @@ Experiment 5 predicted that more than a fifth of all connections would be
 bridges, and in every world they were
 ([Was the thesis right?](b1-the-network-size-and-scaling.md#was-the-thesis-right-the-shape-of-the-network)).
 The viewer can colour every connection by whether it is a bridge
-([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)).
+([What the viewer can colour by](measures-atlases-and-assembly.md#what-the-viewer-can-colour-by)).
 
 A count of bridges does not say how much hangs on each. For every bridge, the
 program also works out how many agents lie behind it. The largest share of

@@ -1363,7 +1363,7 @@ The runs of Experiment 10 are listed once on this page, under [The runs of Exper
 <!-- turns -->
 ---
 
-← [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Side studies](../README.md#side-studies)
+← [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Side studies](../README.md#side-studies) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) →
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Methods and statistics](../README.md#methods-and-statistics).
 

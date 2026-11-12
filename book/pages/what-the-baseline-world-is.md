@@ -434,7 +434,7 @@ actors, the brains, change almost every game.
 whole worlds over
 ([One slow wander, in everything](#one-slow-wander-in-everything)).
 Families occupy regions that widen as their line ages, about as a random walk
-spreads ([One world, many colours](one-world-many-colours.md),
+spreads ([One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by),
 [A space, not a small world](#a-space-not-a-small-world)). And worlds whose
 brains never change end up in very different places, while worlds that
 evolve all end up alike ([Do the brains matter?](do-the-brains-matter.md)).
@@ -795,7 +795,7 @@ been answered since, and one in part.
   almost nothing.
 - **Where are the old?** At 10,000 tokens a picture suggested the edges. At
   100,000 the old sit in clumps of their own
-  ([One world, many colours](one-world-many-colours.md)), as cohorts
+  ([One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by)), as cohorts
   ([Like next to like](b1-the-network-size-and-scaling.md#like-next-to-like-how-alike-agents-are-at-a-distance)). Age against distance from the
   hubs would say; it has not been measured.
 - **Why do worlds reproduce less as they age?** Births per agent fall over a

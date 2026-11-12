@@ -330,7 +330,7 @@ its figure gives every step.
 <!-- turns -->
 ---
 
-← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [Assembly theory: how many steps to make a thing, and how many copies](assembly-theory.md) →
+← [How fast should brains change?](how-fast-should-brains-change.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
 
 **Also about:** [Strategies written by hand](../README.md#strategies-written-by-hand).
 

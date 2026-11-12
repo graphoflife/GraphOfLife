@@ -38,7 +38,7 @@
   "34": "b1-the-network-size-and-scaling#how-properties-scale-together",
   "35": "b1-the-network-size-and-scaling#the-geometry-of-a-world",
   "36": "b1-the-network-size-and-scaling#how-a-world-breaks",
-  "37": "one-world-many-colours",
+  "37": "measures-atlases-and-assembly#one-world-many-colours-what-the-viewer-can-colour-by",
   "38": "cooperation-help-and-gliders#do-agents-cooperate-help-kin-and-partners",
   "39": "questioning-the-mechanics",
   "40": "what-the-baseline-world-is#what-the-measurements-say-about-open-ended-evolution",
@@ -93,7 +93,7 @@
   "81": "building-b2-and-the-search-for-a-healthy-rich-world#five-mixed-worlds-fifty-thousand-iterations",
   "92": "building-b2-and-the-search-for-a-healthy-rich-world#the-candidates-played-on-and-played-again",
   "93": "building-b2-and-the-search-for-a-healthy-rich-world#five-more-seeds-for-the-rules-that-held",
-  "74": "every-world-side-by-side",
+  "74": "measures-atlases-and-assembly#every-world-side-by-side",
   "75": "b1-the-game-and-its-flows#where-tokens-go",
   "76": "cooperation-help-and-gliders#who-helps-whom",
   "77": "b1-brains-lineages-and-messages#how-alike-the-agents-are",
@@ -154,7 +154,7 @@
   "n-scaling-relations": "measuring-networks#scaling-relations-between-agents-properties",
   "n-assortativity": "measuring-networks#assortativity",
   "n-correlation-function": "b1-the-network-size-and-scaling#how-alike-at-a-distance",
-  "n-viewer-colours": "one-world-many-colours#what-the-viewer-can-colour-by",
+  "n-viewer-colours": "measures-atlases-and-assembly#what-the-viewer-can-colour-by",
   "n-pilot-worlds": "runs-and-records#pilot-worlds",
   "n-invasion-test": "measuring-evolution#the-invasion-test",
   "n-exploitability": "measuring-evolution#exploitability",
@@ -186,7 +186,7 @@
   "n-effective-number": "statistics#effective-numbers-how-many-kinds-and-how-many-directions",
   "n-fractional-factorial": "what-the-switches-did-in-pilots#many-switches-in-few-worlds-fractional-factorial-designs",
   "A": "runs-and-records#what-a-simulation-costs",
-  "B": "what-goes-with-what",
+  "B": "measures-atlases-and-assembly#what-goes-with-what",
   "C": "every-simulation"
  },
  "theses": {
@@ -354,7 +354,7 @@
   "pilot-worlds": "runs-and-records#pilot-worlds",
   "power-law-fit": "b1-the-network-size-and-scaling#fitting-a-power-law-properly",
   "fractional-factorial": "what-the-switches-did-in-pilots#many-switches-in-few-worlds-fractional-factorial-designs",
-  "viewer-colours": "one-world-many-colours#what-the-viewer-can-colour-by",
+  "viewer-colours": "measures-atlases-and-assembly#what-the-viewer-can-colour-by",
   "starting-ring": "rules-in-detail#the-starting-ring",
   "random-numbers": "rules-in-detail#seeds-and-the-random-stream",
   "share-function": "rules-in-detail#the-share-function-fa-b",
@@ -433,6 +433,10 @@
   "do-agents-cooperate": "cooperation-help-and-gliders#do-agents-cooperate-help-kin-and-partners",
   "gliders-and-who-helps-whom": "cooperation-help-and-gliders#gliders-and-who-helps-whom",
   "dimensions-at-scale": "space-at-scale#dimensions-at-scale",
-  "which-properties-have-no-scale": "space-at-scale#which-properties-have-no-scale"
+  "which-properties-have-no-scale": "space-at-scale#which-properties-have-no-scale",
+  "what-goes-with-what": "measures-atlases-and-assembly#what-goes-with-what",
+  "every-world-side-by-side": "measures-atlases-and-assembly#every-world-side-by-side",
+  "one-world-many-colours": "measures-atlases-and-assembly#one-world-many-colours-what-the-viewer-can-colour-by",
+  "assembly-theory": "measures-atlases-and-assembly#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies"
  }
 }

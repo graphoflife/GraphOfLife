@@ -85,7 +85,7 @@ So in B1, wealth is a matter of place. Tokens and connections go together (a
 rank correlation of +0.56). A rich agent is still rich ten games later
 (+0.78). The richest tenth hold about two fifths of the tokens, 39% to 44%
 ([Rich agents are connected agents](b1-lives-and-wealth.md#rich-agents-are-connected-agents),
-[What goes with what](what-goes-with-what.md#the-agents)).
+[What goes with what](measures-atlases-and-assembly.md#the-agents)).
 
 But the place is rich, not whoever sits on it. The more connections a node
 has, the more often its agent loses it. An agent with one connection keeps its
@@ -97,7 +97,7 @@ In [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its netwo
 each other (−0.18), and wealth sticks half as well (+0.41 over ten games).
 B2's agents keep their nodes, 88% to 98% of the time, and tokens move through
 stakes that fail instead
-([What goes with what](what-goes-with-what.md#token-curvature-and-token-change)).
+([What goes with what](measures-atlases-and-assembly.md#token-curvature-and-token-change)).
 
 ### Downhill
 
@@ -105,7 +105,7 @@ Tokens run from peaks to valleys. An agent that holds more than its neighbours
 loses, on average, and one that holds less gains. They do so at about a fifth
 of the pace a plain even split would give: a slope of 0.20 in B2 and 0.21 in
 B1, where the even split would give 1
-([What goes with what](what-goes-with-what.md#token-curvature-and-token-change)).
+([What goes with what](measures-atlases-and-assembly.md#token-curvature-and-token-change)).
 
 The two [baselines](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") run downhill in different ways
 ([Chains of takeovers](cooperation-help-and-gliders.md#chains-of-takeovers)):
@@ -171,7 +171,7 @@ In B1 that is 1.3% of the tokens in every game, handed out one token at a
 time, and it levels the world: over a world's life, the estate goes with
 falling inequality
 ([The tokens of the dead](b1-lives-and-wealth.md#the-tokens-of-the-dead),
-[What goes with what](what-goes-with-what.md#a-whole-world-over-time)). In B2
+[What goes with what](measures-atlases-and-assembly.md#a-whole-world-over-time)). In B2
 the pool is small, about seventy tokens an iteration among 3,600 agents. There
 where it goes matters more than how much it is: **an estate that pays for
 births fills a world**, to half as many agents again, and poorer ones
@@ -1133,7 +1133,7 @@ are tokens really going round, but they carry almost nothing.
 
 Is it the same in every world the notebook has made? The table of every world
 (`research/atlas/across.py`;
-[Every world side by side](every-world-side-by-side.md)) holds these numbers
+[Every world side by side](measures-atlases-and-assembly.md#every-world-side-by-side)) holds these numbers
 for each of them.
 
 <!-- figure lightning/every_world -->
@@ -1363,7 +1363,7 @@ commands draw the figures:
 The rest of [Lightning in every world](#lightning-in-every-world) reads every
 world the notebook has made, from the table `book/results/worlds.json`. The
 commands `python3 research/atlas/across.py lab`, `pilots` and `write` make
-that table ([Every world side by side](every-world-side-by-side.md)). The
+that table ([Every world side by side](measures-atlases-and-assembly.md#every-world-side-by-side)). The
 exact split of fifty games comes from `research/oee/checks/circulation.py`.
 The command `python3 book_figures.py lightning` draws these figures. Each
 figure says, folded beneath it, which runs it reads and how.
@@ -1966,6 +1966,6 @@ reads and how.
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (30)
-> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
+> [!info]- Pages that link here (28)
+> [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [A source and a sink](a-source-and-a-sink.md) · [Particles: patterns that outlast what carries them](particles.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

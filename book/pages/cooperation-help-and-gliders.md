@@ -582,7 +582,7 @@ a parent genotype. Then 20% of neighbours are kin, against 0.12% of random
 pairs. The share of kin among neighbours is the same at both sizes. What a
 larger world changes is how rare kin are far away.
 
-This is the picture of [One world, many colours](one-world-many-colours.md) in
+This is the picture of [One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by) in
 numbers: families live together. A brain's copies sit next to it, for two
 reasons. A brain spreads by taking neighbouring nodes
 ([Where the tokens flow](b1-the-game-and-its-flows.md#where-tokens-flow)), and children are joined
@@ -759,7 +759,7 @@ frames every run already writes:
    nodes again and again.
 6. **Groups that win.** Whether regions held by one family grow, survive or
    split more than mixed regions. That is selection between groups. It can be
-   read from the families of [One world, many colours](one-world-many-colours.md)
+   read from the families of [One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by)
    and the breaks of [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks).
 
 None of the six has been computed in the form given here. The work on the
@@ -1657,6 +1657,6 @@ kept in `book/results/patterns.json`.
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (19)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every world side by side](every-world-side-by-side.md) · [One world, many colours: what the viewer can colour by](one-world-many-colours.md) · [What goes with what](what-goes-with-what.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [!info]- Pages that link here (17)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Particles: patterns that outlast what carries them](particles.md) · [Other contests: a lottery, and alliances](another-game.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

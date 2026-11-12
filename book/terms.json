@@ -643,7 +643,7 @@
     },
     {
       "name": "assembly theory",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "building-with-reusable-parts",
       "says": "A way to measure how much making went into a thing: the fewest steps that build it from basic parts, and how many copies of it there are."
     },
@@ -652,31 +652,31 @@
       "also": [
         "assembly indices"
       ],
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "the-assembly-index",
       "says": "The fewest joins that build an object from basic blocks, when anything built before can be used again."
     },
     {
       "name": "addition chain",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "the-assembly-index",
       "says": "Numbers from 1 in which each is the sum of two before it; the shortest one ending at m is the fewest joins m links can need."
     },
     {
       "name": "copy number",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "copy-number-and-assembly",
       "says": "How many identical copies of an object a collection holds."
     },
     {
       "name": "assembly",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "copy-number-and-assembly",
       "says": "Assembly theory's measure of a collection: each kind of object weighed by e to the power of its assembly index, times its copies beyond the first, over all the objects."
     },
     {
       "name": "ego network",
-      "page": "assembly-theory",
+      "page": "measures-atlases-and-assembly",
       "anchor": "ego-networks-as-molecules",
       "says": "An agent, its neighbours and the links among them: the network as one agent sees it."
     }
@@ -692,16 +692,10 @@
     "what-the-brains-are-like": [
       "dimension"
     ],
-    "one-world-many-colours": [
-      "dimension"
-    ],
     "physical-inspiration": [
       "entropy",
       "correlation",
       "hub"
-    ],
-    "every-world-side-by-side": [
-      "correlation"
     ],
     "which-worlds-are-healthy": [
       "candidate"
@@ -732,9 +726,6 @@
     "measuring-evolution": [
       "hub"
     ],
-    "assembly-theory": [
-      "hub"
-    ],
     "b1-the-network-size-and-scaling": [
       "extinction"
     ],
@@ -743,6 +734,11 @@
     ],
     "building-b2-and-the-search-for-a-healthy-rich-world": [
       "candidate"
+    ],
+    "measures-atlases-and-assembly": [
+      "correlation",
+      "dimension",
+      "hub"
     ]
   }
 }

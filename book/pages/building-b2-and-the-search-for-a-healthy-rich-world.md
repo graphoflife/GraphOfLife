@@ -1359,7 +1359,7 @@ notebook has made against them. When they were last counted, on 17 October
 2026, they were 624 worlds. The lab's runs are read at their end. The pilot
 worlds, made by hand in batches, are read at their last checkpoint: the
 last whole world the run saved. Each world is counted once.
-[Every world side by side](every-world-side-by-side.md) compares the same
+[Every world side by side](measures-atlases-and-assembly.md#every-world-side-by-side) compares the same
 kinds of world through the statistics a run records.
 
 ### Two halves

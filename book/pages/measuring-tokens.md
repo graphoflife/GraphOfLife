@@ -518,7 +518,7 @@ The network keeps changing under the tokens, so no world is ever quite at rest.
   and its leaves the even split overshoots, and wealth swings with a period of
   two games.
 - [Physical inspiration](physical-inspiration.md): an even split is one step of
-  the heat equation; [What goes with what](what-goes-with-what.md#token-curvature-and-token-change)
+  the heat equation; [What goes with what](measures-atlases-and-assembly.md#token-curvature-and-token-change)
   finds tokens running downhill at about a fifth of its pace.
 
 ## Measuring the flow: token flow, lightning and circulation
@@ -623,7 +623,7 @@ reshuffled.
   others who do not stake back
   ([Every world](b1-the-game-and-its-flows.md#every-world)).
 - **The viewer** can colour every connection by its token flow, both
-  directions together ([What the viewer can colour by](one-world-many-colours.md#what-the-viewer-can-colour-by)).
+  directions together ([What the viewer can colour by](measures-atlases-and-assembly.md#what-the-viewer-can-colour-by)).
 
 ### Lightning: tokens that go round
 

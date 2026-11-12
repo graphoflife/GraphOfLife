@@ -186,7 +186,7 @@ passes through a birth. The climb usually goes a few steps.
 Other pages fix the ancestors at another moment, with the same idea:
 
 - the genotypes alive 100 iterations earlier
-  ([One world, many colours](one-world-many-colours.md));
+  ([One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by));
 - those alive at one chosen iteration
   ([Genotypes and lineages](b1-brains-lineages-and-messages.md#genotypes-and-lineages));
 - the founders ([Muller plots](#muller-plots)).
@@ -844,7 +844,7 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
 
 ### Where it is used
 
-- [Assembly theory](assembly-theory.md): the index and the assembly of the
+- [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): the index and the assembly of the
   ego networks of B1, B2 and round 3, each against its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") and four
   networks with no history; and why a genotype's path in the family tree
   gives no index worth the name.
@@ -855,7 +855,7 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
   the B1 worlds — how long genotypes last, and how lines take worlds over.
 - [How a brain changes](rules-in-detail.md#how-a-brain-changes): when a brain changes in B1 and in B2,
   and what a change does to it.
-- [One world, many colours](one-world-many-colours.md): families drawn in
+- [One world, many colours](measures-atlases-and-assembly.md#one-world-many-colours-what-the-viewer-can-colour-by): families drawn in
   colour on the network itself.
 - [What a run records](runs-and-records.md#what-a-run-records): the frames and statistics that
   all these counts are read from.
@@ -869,7 +869,7 @@ give A = e⁴ · 9,999 / 10,000 ≈ 54.6.
   whose signatures count as new things.
 - [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): what a world in which much can
   happen looks like.
-- [Assembly theory](assembly-theory.md): how many steps an agent's
+- [Assembly theory](measures-atlases-and-assembly.md#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): how many steps an agent's
   neighbourhood takes to make, and how many agents share its shape.
 
 ## How our view changed

@@ -388,7 +388,7 @@ many worlds of that experiment or batch the measure has been taken on:
   ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents));
 - **the table of every world**: every statistic over the same stretches of
   iterations, side by side
-  ([Every world side by side](every-world-side-by-side.md)).
+  ([Every world side by side](measures-atlases-and-assembly.md#every-world-side-by-side)).
 
 <!-- table catalogue/measures -->
 |  | the record of every game | lifetime contests (T = 100) | games recorded and read again | flow modules | how different the agents are | the table of every world |
@@ -443,7 +443,7 @@ Older yardsticks are not counted here:
   [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md),
   taken on every world from Experiment 12 on;
 - and the [correlations](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") among agents of
-  [What goes with what](what-goes-with-what.md): ten B1 and ten B2 worlds, and
+  [What goes with what](measures-atlases-and-assembly.md#what-goes-with-what): ten B1 and ten B2 worlds, and
   any run in the Research tab.
 
 ## Where to go next
@@ -452,14 +452,14 @@ Older yardsticks are not counted here:
   made.
 - [B1 and B2: the two baselines](b1-and-b2.md): the two rule sets in plain
   words.
-- [Every world side by side](every-world-side-by-side.md): every statistic of
+- [Every world side by side](measures-atlases-and-assembly.md#every-world-side-by-side): every statistic of
   every world, in one table.
 
 <!-- turns -->
 ---
 
-← [What goes with what](what-goes-with-what.md) · [Methods and statistics](../README.md#methods-and-statistics)
+← [How worlds are measured](how-worlds-are-measured.md) · [Methods and statistics](../README.md#methods-and-statistics)
 
 > [!info]- Pages that link here (7)
-> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [Every world side by side](every-world-side-by-side.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

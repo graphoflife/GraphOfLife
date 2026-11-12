@@ -183,7 +183,7 @@ to a survivor drawn with equal chance. In the median settled B1 world of
 Rich and poor have the same chance at every token, so the estate levels the
 world: in ten B1 worlds, the more of it a game scatters, the more the
 [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) falls, a correlation of −0.78 between
-the changes ([What goes with what](what-goes-with-what.md#a-whole-world-over-time)).
+the changes ([What goes with what](measures-atlases-and-assembly.md#a-whole-world-over-time)).
 In B2 worlds of 10,000 tokens the estate is small, about seventy tokens an
 iteration among 3,600 agents ([Who inherits?](what-the-switches-did-in-pilots.md#who-inherits)).
 
