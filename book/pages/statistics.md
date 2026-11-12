@@ -16,14 +16,14 @@ power law, how long a world remembers, how sure a number is and how many seeds
 it takes, how a spread splits into parts, and how many kinds a world really
 holds.
 
-It gathers what were 6 pages of their own, one section each:
+Its sections:
 
-- [Many worlds at once: the median, bands, the settled life and the spread](#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread): The notebook rarely looks at one world.
-- [Two numbers together: correlation, a fitted line and logarithmic axes](#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes): Much of the notebook asks how one number goes with another.
-- [How long a world remembers: autocorrelation and the power spectrum](#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum): A world wanders: its size, its inequality and its births go up and down over hundreds of iterations.
-- [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds): Every number the notebook reports comes from a few dozen worlds, and another few dozen would give a somewhat different number.
-- [Splitting variation: where, who and chance, and between worlds and within them](#splitting-variation-where-who-and-chance-and-between-worlds-and-within-them): A spread of numbers can often be split exactly into parts with different causes.
-- [Effective numbers: how many kinds, and how many directions](#effective-numbers-how-many-kinds-and-how-many-directions): Counting kinds can mislead: one kind may hold half the agents and the rest one agent each.
+- [Many worlds at once: the median, bands, the settled life and the spread](#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread)
+- [Two numbers together: correlation, a fitted line and logarithmic axes](#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes)
+- [How long a world remembers: autocorrelation and the power spectrum](#how-long-a-world-remembers-autocorrelation-and-the-power-spectrum)
+- [How sure can we be? The bootstrap, permutation tests, the Wilson interval and how many seeds](#how-sure-can-we-be-the-bootstrap-permutation-tests-the-wilson-interval-and-how-many-seeds)
+- [Splitting variation: between worlds and within them](#splitting-variation-between-worlds-and-within-them)
+- [Effective numbers: how many kinds](#effective-numbers-how-many-kinds)
 
 ## Many worlds at once: the median, bands, the settled life and the spread
 
@@ -31,8 +31,8 @@ The notebook rarely looks at one world. It runs thirty, with different
 seeds, and sums them up in four steps. The **median** and other
 **quantiles** describe a set of numbers without letting one extreme decide.
 A **band** draws thirty worlds through time as one line and two shaded
-regions. A world's **settled life**, from iteration 500 to its end, gives it
-one number per statistic. And the **spread** says how far the worlds' numbers
+regions. A world's **settled life**, from iteration 500 to its end (from 100
+in round 3 of the screen), gives it one number per statistic. And the **spread** says how far the worlds' numbers
 lie from each other, as a share of their mean.
 
 ### Median and quantiles
@@ -100,7 +100,7 @@ others spread around it.
 #### How a band is made
 
 Take a statistic and a set of runs: say, the number of agents after every
-[game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in the 30 [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") runs.
+[game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.") in the 30 [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") runs.
 
 1. **Stretches.** Cut the iterations into up to 600 stretches of equal
    length. A statistic measured every iteration over 3,000 iterations gets 600
@@ -142,10 +142,15 @@ rule the notebook uses, and why.
 
 #### The rule
 
-> A world's level for a statistic is its **mean over iterations 500 to the
-> end of the run** (2,999 for the baseline runs), over the rows of the phase
-> the statistic belongs to. Only worlds that lived to the end are measured
-> this way; worlds that died are counted apart.
+> A world's level for a statistic is its **mean over its settled life**, over
+> the rows of the phase the statistic belongs to:
+> - in the baselines and the experiments built on them, iterations **500 to
+>   the end** of the run (2,999 for the baseline runs);
+> - in round 3 of the screen and the worlds that follow it, since 24 October
+>   2026, iterations **100 to the end**.
+>
+> Only worlds that lived to the end are measured this way; worlds that died
+> are counted apart.
 
 For the baseline runs of 10,000 tokens, that is the mean over 2,500 game
 rows. For a graph statistic, measured every 25 iterations, it is the mean
@@ -162,6 +167,12 @@ the ranges they keep
 ([Births, deaths and ages](b1-lives-and-wealth.md#births-deaths-and-ages)). Averaging the youth
 in would mix two different things.
 
+Round 3 of the screen starts at iteration 100 instead, by the author's
+walkthrough of 24 October 2026 (`research/screen/walkthrough.md`). Every
+world starts the same way, so its first hundred iterations are always left
+out. But a drawn world is judged by its whole run after them, not by a
+reading at one moment.
+
 #### Why a long mean, and not the end?
 
 A single world does not settle at one level. It **wanders**, up and down over
@@ -175,10 +186,6 @@ about the moment.
 how much. Measured over their last 100 iterations, the worlds' sizes differ by
 a third of the mean. Measured over their settled life, they differ by a
 sixth.
-
-Pages written before this rule, the first analyses of Experiments 2 to 6,
-used the last fifth of a run: iterations 2,400 to 2,999. Where this notebook
-checks a thesis that was written with the last fifth in mind, it says so.
 
 #### Why not the worlds that died?
 
@@ -305,6 +312,21 @@ the number of connections and the logarithm of the tokens is *r* = 0.50. That al
 which way it works. Connections may make an agent rich, riches may bring
 connections, or something else may bring both.
 
+#### Rank correlation
+
+**Spearman's rank correlation** ρ is the ordinary correlation of two lists of
+ranks. Put each list of values in order, give each value its place, with
+equal values sharing the mean of their places, and correlate the places:
+
+- ρ = 1: the two orders agree;
+- ρ = 0: one order says nothing about the other;
+- ρ < 0: one order turns the other round.
+
+Ranks make ρ deaf to the sizes of the values, so a few very large ones cannot
+decide it. Experiment 43 compares the order of health in round 3 with the
+order in its new worlds this way. The studies of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") used it for whether the
+rich stay rich ([Mobility](measures-of-the-archived-studies.md#mobility)).
+
 ### Fitting a straight line
 
 Many figures of this notebook draw a straight line through a cloud of points.
@@ -373,7 +395,7 @@ Two things to keep in mind:
 - **The line is pulled by where the points are.** Every point counts the
   same, so a crowd of points at small *x* decides the slope more than a few at
   large *x*. For distributions, this makes least squares a poor way to find an
-  exponent. [Fitting a power law](#fitting-a-power-law-properly) says what to do instead.
+  exponent. [Fitting a power law](measures-of-the-archived-studies.md#fitting-a-power-law-properly) says what to do instead.
 
 ### Logarithmic axes and power laws
 
@@ -424,7 +446,7 @@ line on log–log axes, and its exponent is read off as the slope. Examples:
 
 #### Distributions on log–log axes
 
-To see the shape of a wide distribution, of [degrees](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling "The number of an agent's connections: how many neighbours it has."), tokens or lifetimes, the
+To see the shape of a wide distribution, of [degrees](measuring-networks.md#degree "The number of an agent's connections: how many neighbours it has."), tokens or lifetimes, the
 notebook draws its **complementary cumulative distribution**. That is the
 share of values at least *x*, against *x*, with both axes logarithmic.
 Suppose the share of values equal to *x* follows a power law with the
@@ -432,117 +454,12 @@ exponent −γ. Then the share at least *x* follows one with the exponent
 −(γ − 1), and is a straight line. A survival curve
 ([Kaplan–Meier](measuring-lives.md#survival-curves-kaplanmeier)) is the same kind of picture for lifetimes.
 
-Clauset, Shalizi and Newman (2009) give a caution. A stretch of a curve that
-looks straight on log–log axes is weak evidence of a power law. Many
-distributions look straight over a decade or two. The notebook calls
+Clauset, Shalizi and Newman (2009) give a caution, so the notebook calls
 something a power law only when it holds over a wide range, and a bent
-alternative fits no better.
-
-### Fitting a power law properly
-
-Say the connections of a world follow a power law above some size. How is
-its exponent γ found, and where does the law begin? This section gives the
-method the literature recommends (Clauset, Shalizi and Newman 2009), with a
-small example. [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)
-applies it to the worlds of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.").
-
-#### The obvious way, and its problem
-
-The obvious way is to draw the CCDF on log–log axes and fit a straight line
-through it. The viewer's `degreeExponent` and `tokenExponent` are exactly
-that. Each is the [least-squares line](statistics.md#fitting-a-straight-line)
-of ln *P*(≥ *k*) on ln *k*, one point for each distinct value, and the
-exponent is 1 − slope.
-
-The trouble is in the points:
-
-- Neighbouring points of a cumulative distribution are not independent: each
-  contains the next.
-- The line counts every distinct value once. In the far tail each value
-  belongs to one agent or two, so a handful of agents make many of the
-  points.
-
-So the estimate wanders, and R² looks good whatever the truth. In the median
-B1 world of 100,000 tokens, the line through the whole degree distribution has
-R² = 0.96. Yet the distribution is not straight
-([The connections of one world](b1-the-network-size-and-scaling.md#the-connections-of-one-world)).
-
-#### Maximum likelihood
-
-Maximum likelihood asks a different question. If the values came from a
-power law with exponent γ, how probable would the values we see be? The best
-γ is the one that makes them most probable.
-
-Precisely: suppose the values *x*₁ … *x*ₙ from some *x*_min upward follow the
-density p(*x*) = (γ − 1) *x*_min^(γ−1) *x*^−γ. That is a power law, scaled
-so that its shares above *x*_min add up to one. The γ that makes the
-observed values most probable is
-
-$$
-\hat\gamma = 1 + n \Bigl[\sum_{i=1}^{n} \ln \frac{x_i}{x_{\min}}\Bigr]^{-1} .
-$$
-
-In words: take the logarithm of how many times over each value exceeds
-*x*_min, add these up, divide *n* by the sum, and add one. Values far above
-*x*_min make the sum large and the exponent small: that is a heavy tail. The
-estimate is uncertain by about (γ̂ − 1)/√*n*, its standard error.
-
-For whole numbers, like a degree, *x*_min is replaced by *x*_min − ½. That
-corrects most of the error of treating them as continuous.
-
-**Example.** Take a tail of four degrees, 2, 3, 4 and 8, with *k*_min = 2,
-so that the formula divides by 1.5. The logarithms of 2/1.5, 3/1.5, 4/1.5
-and 8/1.5 add up to 3.636. So γ̂ = 1 + 4/3.636 = 2.10. It is known to about
-±1.1/√4 = ±0.55, which is to say hardly at all. A tail needs many values.
-
-#### Where does the tail start?
-
-Real distributions are a power law, if at all, only above some *x*_min.
-Below it, the body bends away. So the fit tries many starts, and keeps the
-one whose fitted law sits closest to the data:
-
-1. Take up to 24 values of *k*_min, spread evenly over the distinct values.
-2. For each with at least 25 values at or above it, estimate γ̂ as above.
-3. Measure the **Kolmogorov–Smirnov distance**: the largest vertical gap
-   between the cumulative distribution of the tail and that of the fitted
-   law.
-4. Keep the *k*_min with the smallest distance.
-
-The viewer reports five numbers from this fit:
-
-- γ̂ (`degreeGamma`);
-- the *k*_min (`degreeKMin`);
-- the share of all agents in the tail (`degreeTailShare`);
-- the distance (`degreeGammaKS`);
-- R² of the CCDF over the tail (`degreeGammaR2`), which describes the fit
-  but does not test it.
-
-#### What this does not tell you
-
-The method finds the best power law. It does not prove there is one. Two
-more checks are needed.
-
-**Is the gap small enough?** Draw many samples from the fitted law, and fit
-each the same way. Then ask how often a sample fits its own law **worse**
-than the data fit theirs: how often its distance is at least the data's.
-This is the test of Clauset, Shalizi and Newman, and that share is its
-p-value. If it is 10% or less, the data are too far from a power law to be
-one. If it is larger, a power law is a plausible description, though another
-curve might be too.
-
-The viewer does not run this test; the analysis behind
-[Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one)
-does. Each
-sample draws its values below *k*_min from the data's own, and its tail from
-the fitted law. The world of seed 1 gets 200 samples, and every other fit 100.
-
-**Does a different law fit as well?** A **log-normal**, a distribution whose
-logarithm is normal, often fits as well over the range one has. So does a
-power law with an exponential cut-off, which bends down at the top.
-
-And a tail is a small part of a world. In B1, the tail of the connections holds 5%
-of its agents at 10,000 tokens, and 1% at 100,000 tokens. A power law there
-says nothing about the rest.
+alternative fits no better. How to fit one properly, and where its tail
+starts, is in
+[Measures of the archived studies](measures-of-the-archived-studies.md#fitting-a-power-law-properly):
+only pages of the Archive fit one.
 
 ## How long a world remembers: autocorrelation and the power spectrum
 
@@ -582,10 +499,6 @@ others throughout would look like a world with a long memory.
 
 - Close to 1: a world is still where it was.
 - Close to 0: where a world was says nothing about where it will be.
-- In the baseline, for the number of agents: 0.61 after 100 iterations in the
-  worlds of 100,000 tokens (0.68 in those of 10,000). About a third of that
-  is left after 200, and nothing after 300
-  ([How much does the seed decide?](b1-the-network-size-and-scaling.md#how-much-does-the-seed-decide)).
 
 #### Why it dips below zero
 
@@ -631,7 +544,7 @@ worlds over their settled life
 
 In B1's thirty worlds of 100,000 tokens, a world a hundred iterations on is
 still much where it was: the autocorrelation is 0.61 for the number of agents
-and 0.62 for inequality. Two hundred iterations on it is 0.21 for both, and
+(0.68 at 10,000 tokens) and 0.62 for inequality. Two hundred iterations on it is 0.21 for both, and
 three hundred on nothing is left. So a world forgets its level within about
 three hundred iterations, far faster than a random walk would
 ([A world forgets](b1-the-network-size-and-scaling.md#a-world-forgets)). Two
@@ -803,6 +716,36 @@ never exactly 0.
   worlds; then recompute the [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes). Here the test is
   one-sided: how often is the shuffled *r* at least as large as the real one?
 
+#### Testing many settings at once
+
+The screen of random worlds tests every setting on every outcome of its worlds
+([How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md)):
+- for **whether a world died**, it counts the deaths under each value of the
+  setting;
+- for **a number**, it takes the median under each value.
+
+Then the outcome is shuffled among the worlds, 20,000 times, keeping how many
+worlds had each value. The chance is the share of shuffles in which the values
+differ at least as much as in the real worlds. The difference is measured by
+the **chi-square** statistic for deaths, and by the **Kruskal–Wallis**
+statistic of the ranks for numbers.
+
+Many settings are tested on many outcomes, so a few small chances turn up by
+luck. So every test also has a **false discovery rate**: among all the
+settings tested on that outcome, how often a result this strong would be a
+false alarm (Benjamini and Hochberg 1995). A result is a **finding** only when
+that rate is below 0.1. Every test also gives its **size**: the share of the
+outcome's spread that the setting's values account for, from 0 (none) to 1
+(all of it).
+
+**An example.** Of the 41 worlds of round 3 drawn with gifts, 2 died; of the 43
+drawn without, 12. Shuffled at random among the 84 worlds, keeping the two
+groups' sizes, the 14 deaths end up at least this far apart about 140 times in
+20,000: a chance of 0.007. But 25 settings were tested on deaths, so a chance
+that small could turn up by luck in one of them. The false discovery rate is
+0.09, below 0.1, so it counts as a finding. Gifts or none account for a tenth
+of the spread of deaths across the worlds (a size of 0.10).
+
 #### Reading a p-value
 
 A *p*-value is not the probability that the difference is real. It is how
@@ -856,6 +799,19 @@ An experiment changes one setting and asks whether the worlds change. Worlds
 differ by chance anyway, so a small change can hide in the noise. How many
 worlds, that is seeds, does each condition need for a change of a given size
 to be **found**, most of the time?
+
+The rule of the notebook: a difference seen in fewer than thirty seeds per
+condition is called *indicative*, not an effect. The rule is for plans that ask
+whether a change moves worlds on average. Three kinds of plan ask something
+else, and use fewer seeds:
+- a **screen** plays each drawn world once, with a seed of its own: what a
+  setting does is read across the many worlds that drew it;
+- a **replay** of chosen worlds, such as Experiment 43, plays each with two
+  new seeds, to see whether its health belongs to its settings;
+- the **open-ended test** asks what a configuration can do, not what it
+  usually does, so two worlds of three are enough (the author, 19 October
+  2026: a configuration that shows open-ended evolution in a few seeds is
+  enough; [The test](measuring-evolution.md#the-test)).
 
 #### The formula for the seeds
 
@@ -936,85 +892,16 @@ seeds, not 19. Two more lessons came from the same worlds
   giant [hub](measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."). A setting that made giant hubs twice as common would need far
   more than thirty seeds to see.
 
-## Splitting variation: where, who and chance, and between worlds and within them
+## Splitting variation: between worlds and within them
 
 A spread of numbers can often be split exactly into parts with different
-causes. The notebook does it twice. For a decision, put every brain into
-every situation with the same random draws. The variance then splits into
-**where** an agent is, **who** it is, **who it is, there**, and **chance**.
-For a statistic of many worlds, cut each world's life into stretches. The
-variance then splits into what lies **between** the worlds, fixed by the
-seed, and what lies **within** each: its wander over time. In B1 most of the variation
-of a world is time, not seed.
-
-### Where, who and chance: splitting a decision's variance
-
-Agents decide differently from one another. There are four possible reasons:
-- they are in different situations (**where**);
-- their brains differ (**who**);
-- each brain reacts differently to the situation it is in (**who, there**);
-- or the random inputs every brain reads differ (**chance**).
-
-This section shows how the variance of a decision splits into those four
-parts.
-
-#### The design
-
-Take *B* brains and *S* situations. Put every brain into every situation *K*
-times, each time with fresh random inputs. But use the *same* *K* draws for
-every brain, so that the brains meet exactly the same inputs. Write *d*_{bsk}
-for what brain *b* decides in situation *s* on draw *k*. It may be a share of
-tokens, or a yes or no as 1 or 0. Then take the averages:
-
-- *d̄*_b: brain *b* over all situations and draws;
-- *d̄*_s: situation *s* over all brains and draws;
-- *d̄*_{bs}: brain *b* in situation *s*, over its draws;
-- *d̄*: everything.
-
-They split the sum of squared deviations from the grand mean exactly into
-four parts. Statisticians call this a two-way analysis of variance with
-replicates:
-
-$$
-\begin{aligned}
-\text{situation} &= B K \sum_s (\bar d_s - \bar d)^2 \\
-\text{brain} &= S K \sum_b (\bar d_b - \bar d)^2 \\
-\text{brain in situation} &= K \sum_{b,s} (\bar d_{bs} - \bar d_b - \bar d_s + \bar d)^2 \\
-\text{chance} &= \sum_{b,s,k} (d_{bsk} - \bar d_{bs})^2
-\end{aligned}
-$$
-
-In words: the first two parts say how far each situation's average lies
-from the grand mean, and each brain's. The third says how far each brain in
-each situation lies from what those two would predict. The last says how far
-each draw lies from its brain's average in its situation. Each part divided by their sum is a **share** of the variance.
-
-#### How to read the shares
-
-- **Situation** large: every brain does the same thing in the same place,
-  and agents differ because their places do.
-- **Brain** large: some brains always do more of it than others, wherever
-  they are. It is a trait, like a temperament.
-- **Brain in situation** large: brains differ in *how they respond*. One
-  gives more when rich, another when poor.
-- **Chance** large: the random inputs decide, and a brain does not do the
-  same thing twice.
-
-"Do agents behave the same in the same circumstance?" is answered by the last
-three together, against chance alone. If brain and brain in situation are
-small, agents in the same place act alike, and their differences are the
-dice.
-
-#### Units as well as shares
-
-Shares hide sizes. A decision every agent makes the same way has a tiny
-variance, and its shares can be anything. So the decision's spread is also
-given in its own units. That is how far apart two agents in the same
-situation and draw are, as the standard deviation over agents. It is set
-against how far one brain is from itself over the draws.
-
-[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) uses this
-split, with a small worked example.
+causes. For a statistic of many worlds, cut each world's life into stretches.
+The variance then splits into what lies **between** the worlds, fixed by the
+seed, and what lies **within** each: its wander over time. In B1 most of the
+variation of a world is time, not seed. A decision's variance splits too,
+into **where** an agent is, **who** it is, **who it is, there**, and
+**chance**; only pages of the Archive use that split
+([Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance)).
 
 ### Between worlds and within them
 
@@ -1071,22 +958,18 @@ between of 17% is an upper bound on what the seed itself decides. The sharper
 test asks whether a world's first half predicts its second half, across
 worlds ([Is a correlation real?](statistics.md#is-a-correlation-real)).
 
-## Effective numbers: how many kinds, and how many directions
+## Effective numbers: how many kinds
 
 Counting kinds can mislead: one kind may hold half the agents and the rest
 one agent each. An **effective number** counts kinds by how much of the
 population they hold. It is the number of equally common kinds that would be
-as diverse. The same idea counts directions. The **participation ratio**
-says over how many equally important directions a cloud of points really
-spreads, such as a world's messages. Both run from 1, when one kind or one
-direction holds everything, to the full count, when all are equal.
+as diverse. It runs from 1, when one kind holds everything, to the full count,
+when all are equal. The same idea counts the directions a cloud of points
+spreads over, such as a world's messages: the **participation ratio**, which
+only pages of the Archive use
+([How many directions a cloud of points uses](measures-of-the-archived-studies.md#how-many-directions-a-cloud-of-points-uses)).
 
 ### Effective numbers: how many kinds there really are
-
-A world has 1,600 genotypes. Does it have 1,600 kinds of agents? Not if one
-genotype is carried by half the agents, and the rest by one agent each. The
-**effective number** of kinds counts kinds by how much of the population they
-hold.
 
 #### The count
 
@@ -1105,7 +988,6 @@ properties make *D* the right count:
 - if one kind holds nearly everyone, then *D* is close to 1, however many rare
   kinds there are.
 
-So *D* is "the number of equally common kinds that would be as diverse".
 
 **Example.** Ten agents fall into two kinds of five: *D* = 1/(0.5² + 0.5²) =
 2. Now let eight be of one kind, and one each of two others:
@@ -1118,8 +1000,8 @@ use (Hill 1973). This one, of order 2, weighs the common kinds most.
 #### Kinds that are similar
 
 Two genotypes one mutation apart may act exactly alike. Counting them as two
-kinds overstates diversity. That is why
-[How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents) groups
+kinds overstates diversity. That is why the
+[effective kinds of staking](measuring-health.md#decisions-the-effective-kinds-of-staking) group
 brains into kinds **by what they do**, not by their weights. Brains whose
 decisions in the same situations differ no more than a brain differs from
 itself, between two sets of random inputs, are one kind.
@@ -1137,58 +1019,6 @@ Hill number of order 1, which weighs rare kinds a little more than *D*, of
 order 2, does. Both are 1 for a single kind and *n* for *n* equally common
 ones. On a population with many rare kinds, 2^*H* is the larger. Where the
 notebook gives an effective number, it says which.
-
-### How many directions a cloud of points uses
-
-A message of B1 has 30 numbers, so the messages of a world are points in a
-space of 30 [dimensions](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space."). They need not use all 30. Suppose every message were
-the same except for one number. Then the messages would vary along a single
-direction, and the other 29 numbers would carry nothing. The **participation
-ratio** counts how many directions the variety is really spread over.
-
-#### The recipe
-
-1. **Covariance.** Take the points *x*₁, …, *x*ₙ, each a list of *d*
-   numbers. Compute the *d* × *d* covariance matrix *C*. Its entry *Cᵢⱼ* is
-   the covariance of number *i* with number *j* over the points.
-2. **Principal directions.** The eigenvectors of *C* are the directions along
-   which the cloud of points spreads, independently of each other: the
-   principal components. The eigenvalue λₖ of each is the variance of the
-   points along it. The eigenvalues add up to the total variance.
-3. **Count them, weighted:**
-
-$$
-\text{PR} = \frac{\left(\sum_k \lambda_k\right)^2}{\sum_k \lambda_k^2} .
-$$
-
-In words: the square of the total variance, over the sum of the squared
-variances of the directions. It is the effective number *D* above, with each
-direction's share of the variance as its *p*.
-
-#### Reading the participation ratio
-
-- If the variance is spread equally over *m* directions and the rest have
-  none, then PR = *m*. For example, *m* eigenvalues of 1 give *m*²/*m* = *m*.
-- If one direction holds almost everything, PR is close to 1.
-- In between, PR is an **effective number** of directions, in the same sense
-  as 2^*H* is an effective number of kinds
-  ([Entropy and evenness](measuring-tokens.md#entropy-and-evenness)). It is
-  how many equally important directions would spread the cloud as unevenly
-  as it is spread.
-
-So PR runs from 1 to *d*. For random points with independent numbers of equal
-variance, it is close to *d*, and a little less because of sampling noise.
-For 30 independent numbers measured on a few thousand points, it comes out
-near 28 or 29.
-
-#### Where the participation ratio is used
-
-[What agents say to each other](b1-brains-lineages-and-messages.md#what-agents-say-to-each-other) uses it on
-the messages agents write. There it counts how many of the 30 message numbers
-a world's messages actually use. The measure comes from physics, where it
-counts over how many sites a wave is spread (Bell and Dean 1970). In
-neuroscience it measures the dimension of neural activity (Gao and others
-2017).
 
 ## Where to go next
 
@@ -1229,10 +1059,19 @@ neuroscience it measures the dimension of neural activity (Gao and others
     is 0.11, and that gives 19.
 - **11 November 2026.** The pages on B1 moved to the Archive, and three methods
   they explained, which the notebook still uses, moved here. [Fitting a power
-  law properly](#fitting-a-power-law-properly) came whole from Power laws, real
+  law properly](measures-of-the-archived-studies.md#fitting-a-power-law-properly) came whole from Power laws, real
   and apparent. [What a B1 world remembers](#what-a-b1-world-remembers) and
   [What thirty seeds can see](#what-thirty-seeds-can-see) say in short what How
   much does the seed decide? found.
+- **12 November 2026.** Moved to [Measures of the archived
+  studies](measures-of-the-archived-studies.md): three sections that only pages
+  of the Archive use: fitting a power law properly; where, who and chance; and
+  how many directions a cloud of points uses.
+- **12 November 2026.** The rule of the settled life said that pages written
+  before it, the first analyses of Experiments 2 to 6, used the last fifth of
+  a run: iterations 2,400 to 2,999. Where the notebook checks a thesis written
+  with the last fifth in mind, it says so. That note now stands here, and the
+  rule names the window round 3 uses, from iteration 100.
 
 ## References
 
@@ -1244,17 +1083,15 @@ neuroscience it measures the dimension of neural activity (Gao and others
 - Marriott, F. H. C. and Pope, J. A. (1954). Bias in the estimation of
   autocorrelations. *Biometrika* 41, 390–402.
 
+- Benjamini, Y. and Hochberg, Y. (1995). Controlling the false discovery rate:
+  a practical and powerful approach to multiple testing. *Journal of the Royal
+  Statistical Society B* 57, 289–300.
 - Efron, B. (1979). Bootstrap methods: another look at the jackknife.
   *The Annals of Statistics* 7, 1–26.
 - Wilson, E. B. (1927). Probable inference, the law of succession, and
   statistical inference. *Journal of the American Statistical Association*
   22, 209–212.
 
-- Bell, R. J. and Dean, P. (1970). Atomic vibrations in vitreous silica.
-  *Discussions of the Faraday Society* 50, 55–61.
-- Gao, P., Trautmann, E., Yu, B., Santhanam, G., Ryu, S., Shenoy, K. and
-  Ganguli, S. (2017). A theory of multineuronal dimensionality, dynamics and
-  measurement. *bioRxiv* 214262.
 - Hill, M. O. (1973). Diversity and evenness: a unifying notation and its
   consequences. *Ecology* 54, 427–432.
 - Simpson, E. H. (1949). Measurement of diversity. *Nature* 163, 688.
@@ -1266,6 +1103,6 @@ neuroscience it measures the dimension of neural activity (Gao and others
 
 **Also about:** [Methods and statistics](../README.md#methods-and-statistics), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
-> [!info]- Pages that link here (29)
-> [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Particles: patterns that outlast what carries them](particles.md) · [Do the brains matter?](do-the-brains-matter.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (30)
+> [How this notebook is written](how-this-notebook-is-written.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Particles: patterns that outlast what carries them](particles.md) · [Do the brains matter?](do-the-brains-matter.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [How worlds are measured](how-worlds-are-measured.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

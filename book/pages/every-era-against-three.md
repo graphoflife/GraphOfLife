@@ -40,20 +40,9 @@ were played to 50,000 iterations. In their own contests, the brains of 25,000
 beat those of 10,000. Then those of 50,000 scored 0.54 and 0.42 against those
 of 25,000, each the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of four contests.
 
-Contests between neighbours in time cannot tell three different stories apart:
-- **a plateau**, where evolution has stopped;
-- **a slow climb**, where each step gains a little and many little steps add
-  up;
-- **a circle**, where each step beats the one before and loses to one long
-  gone.
-
-Rock, paper and scissors each beat the one before, for ever, and get nowhere
-([What would count as open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution)).
-
-Playing every era against the same few fixed eras tells the three apart:
-- **On a plateau**, the scores against a fixed era stop rising.
-- **On a slow climb**, they keep rising, however little each step gained.
-- **In a circle**, they rise and fall again as the eras go round.
+Contests between neighbouring eras cannot tell a plateau, a slow climb and a
+circle apart; playing every era against fixed eras can
+([Plateau, climb or circle](measuring-evolution.md#plateau-climb-or-circle)).
 
 This experiment plays every 2,500th era of the two worlds against three fixed
 ones: 2,500, 10,000 and 25,000.
@@ -61,13 +50,8 @@ ones: 2,500, 10,000 and 25,000.
 ## How much room is left
 
 One thing can be measured before any contest: how far each era's play is from
-an equilibrium. Picture one agent while every other agent keeps its play. Some
-way of staking does best against them: the agent's **best reply**. At an
-**equilibrium**, no agent could do better by playing differently while the
-rest keep their play.
-
-So the distance from an equilibrium is how much an agent *would* gain by its
-best reply to the others: its **exploitability**
+an equilibrium. Its exploitability is what an agent would gain by its best
+reply to the others, a lower bound found among four plays over eight draws
 ([Exploitability](measuring-evolution.md#exploitability)). A population that
 evolution drives towards a top becomes less exploitable, era after era.
 
@@ -108,15 +92,6 @@ So evolution in these worlds is not approaching a top that would leave nothing
 to gain. Better play lies a single step away from every agent, at every era.
 Whether later brains still find any of it is the contests' question.
 
-The best reply here is the best of a few plays the program tries:
-- everything at home;
-- the cheapest way to keep one's node and take the cheapest neighbours;
-- the same without defending;
-- the agent's own stakes of each draw.
-
-Each is scored over eight draws of the others' play, so it does not need to
-know which draw comes. The true best reply can only gain more.
-
 ## What we expected
 
 We expected a plateau. The worlds' own contests had shrunk step by step. In
@@ -147,16 +122,8 @@ itself:
 
 ## The trials
 
-Each contest is the notebook's lifetime contest
+Each contest is the notebook's lifetime contest, 100 iterations long
 ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)).
-In B2 every agent dies at age 100, so a contest lasts 100 iterations, a whole
-life:
-- The world of one era is given brains drawn by coin from two eras.
-- Every [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") is off: no copied brain is changed, so every copy keeps its
-  era.
-- The world plays 100 iterations, and the later era's share of the agents is
-  its score.
-
 Every pair is played twice, once on each era's world. Each fixed era also
 plays against itself four times, each time with other coins. Those
 self-contests show how far a score strays by chance. A score within twice
@@ -193,9 +160,7 @@ pulled ahead of the brains of 2,500.
 **Each era's rating, from every contest.** One rating per era and world, fitted to every contest of that world by least squares on the log-odds of the scores (Bradley–Terry): +100 means the era's brains beat the brains of 2,500 about 64 times in a hundred.
 
 > [!example]- How to make this figure
-> **Runs.** Experiment 28's 240 contests (`python3 gol_lab.py run E28`): every 2,500th era of Experiment 18's two worlds played to 50,000 iterations (`B2-10000-4af4a3-s005`, `-s006`) against the eras of 2,500, 10,000 and 25,000, each pair once on each era's world (coin 17), and each of those three eras against itself four times (coins 17 to 20).
->
-> **Data.** From each trial's `result.json`.
+> **Runs and data.** As for the figure *Every era against three fixed eras* above.
 >
 > 1. For each pair of eras, the mean share of the later era over its two contests.
 > 2. Fit one rating per era so that the log-odds of every score is the difference of the two ratings, the era of 2,500 at 0 (`gol_tournament.ratings`); shown in Elo points.

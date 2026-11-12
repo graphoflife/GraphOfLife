@@ -199,9 +199,7 @@ tokens a cleanup hands on against each world's inequality.
 **Where more tokens pass from the dead to the living, worlds tend to be more even.** Each dot is a world of Experiment 40 that lived, coloured by its share-out rule. Across, on a logarithmic axis: the share of all the world's tokens that a cleanup hands on from the dead to the living, averaged over every phase from iteration 100 to the end; it counts the estates of every agent that died, culled or starved (the starved hold nothing). Up: the world's Gini coefficient, averaged over the same stretch.
 
 > [!example]- How to make this figure
-> **Runs.** the worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiment 40: 30,000 tokens, every setting drawn at random)
->
-> **Data.** From each world's averages over iterations 100 to the end, `research/screen/health.json` (from the screen's readings, `research/screen/measures.py`), and each run's own statistics, `GraphOfLifeRuns/<run>/stats.jsonl` (`redistributed`, `tokens`).
+> **Runs and data.** As for the figure *In round 3, the share-out of estates sets inequality; coalitions do not* above.
 >
 > 1. For every phase from iteration 100 on: `redistributed` over `tokens` (the cleanup's handed-on tokens over all of them). Average over the phases.
 > 2. Plot against the world's average Gini coefficient; colour by `redistribution`.
@@ -315,6 +313,6 @@ To draw the figures again: `python3 book_figures.py wealthspread`
 
 [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens)
 
-> [!info]- Pages that link here (4)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
+> [!info]- Pages that link here (5)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Physical inspiration](physical-inspiration.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md)
 <!-- /turns -->

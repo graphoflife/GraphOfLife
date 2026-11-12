@@ -24,20 +24,16 @@ count their stakes as one builds bodies and brings peace, but finds no better
 play. **Alliances**, which two [neighbours](the-world.md#the-network "An agent joined to another by a connection.") choose together, are taken up at
 once: one alliance spreads until it holds nearly the whole world, and the
 fighting ends. Its brains keep improving slowly, as they do without alliances,
-but one habit spreading once is not [open-ended evolution](measuring-evolution.md#what-would-count-as-open-ended-evolution "Evolution that keeps producing new things without end, not only up to a plateau.").
+but one habit spreading once is not open-ended evolution.
 
 ## Another game
 
-Why does evolution slow down in the worlds of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")? An early answer blamed the
-contest for nodes
-([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
-A node goes to whoever stakes most on it. That makes the agents' game a
-**Colonel Blotto** game, *Blotto* for short. It is the old puzzle of two
-colonels who divide their soldiers between battlefields, where each field goes
-to whoever sends more. In such a game no division is best, so the best play is
-to be unpredictable. Evolution, the answer went, finds that in a few hundred
-iterations, through the random inputs every brain reads. Then nothing better is
-left to select.
+Why does evolution slow down in B2? An early answer blamed the contest. A node
+goes to the largest stake, which makes the game Colonel Blotto, whose best play
+is to be unpredictable
+([Does the game have an answer?](how-to-tell-a-world-that-keeps-evolving.md#does-the-game-have-an-answer)).
+Evolution, the answer went, finds that through the brains' random inputs, and
+then stops.
 
 If that is the reason, a different contest should change the outcome. Two
 changes are worth making first. Neither adds a number to the rules, which is a
@@ -64,8 +60,8 @@ Blotto: any contest whose best play can be found will be found.
 
 ### Stakes counted by genotype
 
-**A contest that lets a [lineage](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") act as one.** Let stakes count by
-**[genotype](measuring-evolution.md#genotypes-families-and-the-common-ancestor "The identity of a brain: a number that a copy keeps and a change replaces, and that remembers the genotype it came from.")**, the identity of a brain. Every stake on a node made by agents
+**A contest that lets a lineage act as one.** Let stakes count by
+**genotype**, the identity of a brain. Every stake on a node made by agents
 with exactly the same brain counts as one side's. The side with the largest
 total takes the node, and the owner keeps it if its own genotype wins. Each
 agent also sees, for every [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), whether it carries the same brain.
@@ -138,9 +134,7 @@ Two more pairs of worlds, with families, came later
 **How large a group of clones is.** One line per world, every 10th iteration: the agents of an agent's connected group of neighbours with the same brain, averaged over agents.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).
->
-> **Data.** From each world's `series.jsonl`.
+> **Runs and data.** As for the figure *How much changes hands* above.
 >
 > 1. Every 10th iteration, join neighbours with the same brain and take the size of each agent's group, averaged over agents (`organisation`, `cloneMean`).
 >
@@ -153,7 +147,7 @@ Two more pairs of worlds, with families, came later
 **How much better than the founders.** One line per world, its eras played against each other, four contests per pair.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code, kept in `GraphOfLifeRuns/.pilots/S`, two seeds each, at 10,000 tokens for 1,000 iterations with a whole world every 100: B2 without revolutions (`--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10 allow_revolutions=false --proto engine=true`, worlds `S1-norev`), the same with a lottery contest (`contest=lottery`, `G1-lottery`), with stakes pooled by genotype (`pool=genotype`, `G2-genotype`), with only the sense of which neighbours carry one's own brain (`kin_sense=true`, `G3-kinsense`), and with family tags (`tag_rate=0.05`) sensed (`kin_sense=true`, `G4-familysense`) or pooled (`pool=family`, `G5-familypool`).
+> **Runs.** As for the figure *How much changes hands* above.
 >
 > **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.
 >
@@ -163,11 +157,10 @@ Two more pairs of worlds, with families, came later
 > **To make it again:** `python3 book_figures.py games`.
 <!-- /figure -->
 
-The last figure plays each world's [eras](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better "Brains of a world at two moments, its eras, played against each other: do the later ones win?"), its brains at different moments,
-against each other. In each contest every agent gets a brain from one era or
-the other, by the toss of a coin, and 20 iterations are played. Each era gets
-a rating in Elo points, with the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") at 0. A **step score** is an era's
-share of the world against the era just before it; one half is a tie.
+The last figure plays each world's eras against each other, in contests of 20
+iterations ([A contest, step by step](measuring-evolution.md#a-contest-step-by-step)).
+Ratings are Elo points, with the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") at 0. A step score is an era's share
+against the era before; one half is a tie.
 
 **The lottery leaves almost nothing to learn.** Under a lottery, the brains of
 iteration 1,000 rated +23 and +14 against the founders, against +139 and +100
@@ -263,7 +256,7 @@ when one copy in twenty changes. It finds no better play either
 Every one of these worlds kept a network that holds. The loss of no single
 agent or link would cut it, and agents had five or six links on average. Their
 [ball dimension](measuring-space.md#three-ways-to-measure-a-networks-dimension "How fast the number of agents within a distance grows with the distance: as its square in a plane, its cube in space.")
-was 4.1 to 4.4 in eleven of the twelve worlds, a little above the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.")'s
+was 4.1 to 4.4 in eleven of the twelve worlds, a little above the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.")'s
 4, as in B2. The twelfth, a world with the family sense, read 3.8, inside the
 bar.
 
@@ -361,20 +354,10 @@ Two other ways to cooperate ran beside it, as controls:
 
 ### The alliance worlds
 
-These, too, are pilots, two seeds per kind. Every world runs under B2's rules,
-as the pilots' prototype states them:
-
-- a newborn is joined to its parent and two of its parent's neighbours;
-- a death is mended, and only redundant links lapse;
-- an agent's brain may choose at most 8 links, its valence;
-- a child starts with at least 10 tokens;
-- 30% of every agent's tokens stay at home;
-- every agent dies at age 100;
-- a brain mutates only when it is copied;
-- an agent's own stake counts one and a half times.
-
-Brains have one hidden layer of 16 units, and a memory of the last game's
-stakes. Revolutions are off. The worlds:
+These, too, are pilots, two seeds per kind. Every world runs under B2's rules
+([B2](b1-and-b2.md#b2-a-world-that-cannot-break)), in the pilots' prototype,
+with one hidden layer of 16, a memory of the last game, and no revolutions.
+The worlds:
 
 - at 10,000 tokens for 1,000 iterations: no alliances, alliances, kin pooled,
   and support counted twice;
@@ -442,9 +425,7 @@ says yes too, and stands with them when they attack.
 **How much changes hands.** One line per world, each a mean over 50 iterations.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in `GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances (`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled (`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 (`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 (`N/N0-s1`, `-s2`). Every one under B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of 8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes (memory=true).
->
-> **Data.** From each world's `series.jsonl`.
+> **Runs and data.** As for the figure *The largest alliance's share of the world* above.
 >
 > 1. Count the nodes whose winner was not their owner in each game (`conquests`), per 100 agents, and average over consecutive stretches of 50 iterations.
 >
@@ -507,7 +488,7 @@ remains is on how an agent breeds.
 **How much better than the founders.** One world of each kind, seed 1 (seed 3 for the long one), its eras played against each other two contests per pair in each era's world.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, two seeds each, kept in `GraphOfLifeRuns/.pilots`: at 10,000 tokens for 1,000 iterations without alliances (`A10k/ctrl-s1`, `-s2`), with them (`A10k/allies-s1`, `-s2`), with kin pooled (`A10k/kin-s1`, `-s2`) and with support counted twice (`A10k/gain-s1`, `-s2`); with alliances for 3,000 iterations (`AL/allies10k-s3`, `-s4`), at 20,000 tokens for 2,000 (`AL/allies20k-s1`, `-s2`), and without the home advantage, incumbency 1, for 1,000 (`N/N0-s1`, `-s2`). Every one under B2's rules as the pilots' prototype states them (`research/oee/pilots/proto.py`: mor=all incumbency=1.5 birth_links=2 repair=true safe_prune=2 max_age=100 valence=8 valence_mode=optional min_child=10 keep_frac=0.3), with one hidden layer of 16, messages of 8 numbers and no pre-pass, revolutions off, and a memory of the last game's stakes (memory=true).
+> **Runs.** As for the figure *The largest alliance's share of the world* above.
 >
 > **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`, every 100 iterations.
 >
@@ -536,21 +517,15 @@ mixed world against those of iteration 100. That is a slow creep. Its ratings
 moved by about 10 points per 500 iterations, less than a tournament of this
 size can tell from nothing.
 
-A contest of coins has a weakness here. It gives every agent a brain from one
-era or the other at random. So every alliance of the contested world is cut
-through the middle, and whatever an era's brains know about standing together
-is tested against strangers. A **territorial** contest is fairer to alliances.
-Each era gets a contiguous half of the world, the half nearest an agent drawn
-at random (`tourney.py --layout halves`), and 50 iterations are played. In the
-world of alliances, the brains of iteration 1,000 held 0.41 against those of
-500; in the control they held 0.42.
-
-A **turf** contest goes one step further. The era whose world it is keeps its
-own brains where they are, so its alliances stand as they stood. On turf, the
-brains of iteration 1,000 held 0.39 against those of iteration 500 in the
-world of alliances, and 0.42 in the control. In contests of 50 iterations the
-later brains lost every way they were played. Whatever they had become, it did
-not make them better at war within half a life, alone or together.
+A coin per agent cuts every alliance in two, so these contests were also played
+as territories and on turf
+([Tournaments between its eras](runs-and-records.md#tournaments-between-its-eras)).
+As territories, in contests of 50 iterations, the brains of iteration 1,000
+held 0.41 against those of 500 in the world of alliances, and 0.42 in the
+control. On turf they held 0.39, and 0.42 in the control. In contests of 50
+iterations the later brains lost every way they were played. Whatever they had
+become, it did not make them better at war within half a life, alone or
+together.
 
 **A [lifetime](measuring-lives.md#age-lifetime-and-survival-curves "How many iterations an agent lives, from its birth to its death.") long, they win.** Contests of 20 or 50 iterations are shorter than
 a life of 100, and miss what pays off over a life

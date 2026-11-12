@@ -52,22 +52,29 @@
       ]
     },
     {
+      "name": "candidate world",
+      "also": [
+        "candidates for open-ended evolution"
+      ],
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "the-worlds-ruled-out",
+      "says": "A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still."
+    },
+    {
+      "name": "shortlist",
+      "page": "candidates-for-open-ended-evolution",
+      "anchor": "the-shortlist",
+      "says": "The candidate worlds of round 3 among the first 13 of any of health's three orders: the worlds chosen to be played again."
+    },
+    {
       "name": "candidate",
       "page": "one-iteration",
       "anchor": "phase-1-reproduction",
       "says": "An agent itself and each of its neighbours, the ones its brain looks at when it decides.",
       "not": [
         "candidate world",
-        "candidate cause",
-        "candidates that",
-        "candidate for",
-        "One candidate",
-        "five candidates",
         "the candidates",
-        "nineteen candidates",
-        "candidates of",
         "candidates for",
-        "equal candidates",
         "round 3's candidate"
       ]
     },
@@ -183,12 +190,18 @@
     {
       "name": "baseline",
       "page": "b1-and-b2",
-      "says": "The stated rules an experiment starts from and changes one thing of: B1 or B2."
+      "says": "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."
+    },
+    {
+      "name": "health filter",
+      "page": "measuring-health",
+      "anchor": "from-11-november-2026-health-as-a-filter",
+      "says": "Health's only use since 11 November 2026: a world that died, is a star (one agent linked to half of it), holds all alike or stands still is left out."
     },
     {
       "name": "health bar",
       "page": "measuring-health",
-      "says": "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4.",
+      "says": "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.",
       "anchor": "the-health-bar"
     },
     {
@@ -199,9 +212,9 @@
     },
     {
       "name": "effective kinds of staking",
-      "page": "b1-brains-lineages-and-messages",
+      "page": "measuring-health",
       "says": "How many different ways of staking a world's brains have, when all are put in the same situations, counted by how many agents use each.",
-      "anchor": "how-different-are-the-agents"
+      "anchor": "decisions-the-effective-kinds-of-staking"
     },
     {
       "name": "random twin",
@@ -217,6 +230,9 @@
     },
     {
       "name": "estate",
+      "also": [
+        "share-out"
+      ],
       "page": "measuring-lives",
       "says": "The tokens a dead agent leaves, and who gets them.",
       "anchor": "the-estate-of-the-dead"
@@ -280,12 +296,15 @@
     },
     {
       "name": "healthy world",
-      "also": [
-        "interesting world"
-      ],
       "page": "measuring-health",
-      "says": "A world that meets all six criteria of the screen of random worlds; an interesting one is alive and misses only a few (at most two, provisionally, from round 3).",
-      "anchor": "what-makes-a-world-interesting"
+      "says": "A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.",
+      "anchor": "the-definition-in-force-health-of-9-november-2026"
+    },
+    {
+      "name": "interesting world",
+      "page": "rounds-1-and-2-of-the-screen",
+      "says": "By the screen's criteria of October 2026, a world that is alive and misses at most two of the other five criteria (at most one in rounds 1 and 2).",
+      "anchor": "healthy-and-interesting"
     },
     {
       "name": "half-cut exponent",
@@ -307,7 +326,7 @@
       ],
       "page": "measuring-tokens",
       "says": "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.",
-      "anchor": "measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility"
+      "anchor": "the-gini-coefficient-and-the-lorenz-curve"
     },
     {
       "name": "richest tenth",
@@ -325,12 +344,6 @@
       "anchor": "entropy-and-evenness"
     },
     {
-      "name": "share-out",
-      "page": "b1-lives-and-wealth",
-      "says": "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.",
-      "anchor": "gains-losses-and-the-share-out"
-    },
-    {
       "name": "home stake",
       "page": "b1-the-game-and-its-flows",
       "says": "The tokens an agent stakes on its own node, to keep it.",
@@ -340,11 +353,11 @@
       "name": "degree",
       "page": "measuring-networks",
       "says": "The number of an agent's connections: how many neighbours it has.",
-      "anchor": "an-agents-connections-degree-clustering-assortativity-attachment-and-scaling"
+      "anchor": "degree"
     },
     {
       "name": "preferential attachment",
-      "page": "measuring-networks",
+      "page": "measures-of-the-archived-studies",
       "says": "The well connected gaining new connections faster than the poorly connected.",
       "anchor": "preferential-attachment-and-its-kernel"
     },
@@ -358,7 +371,7 @@
       "name": "path length",
       "page": "measuring-networks",
       "says": "How many connections the shortest way between two agents crosses.",
-      "anchor": "distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap"
+      "anchor": "path-length"
     },
     {
       "name": "2-core",
@@ -422,13 +435,13 @@
     },
     {
       "name": "scaling relation",
-      "page": "measuring-networks",
+      "page": "measures-of-the-archived-studies",
       "says": "How one property of an agent grows with another, as a power.",
       "anchor": "scaling-relations-between-agents-properties"
     },
     {
       "name": "assortativity",
-      "page": "measuring-networks",
+      "page": "measures-of-the-archived-studies",
       "says": "Whether agents tend to be joined to agents like them: the well connected to the well connected.",
       "anchor": "assortativity"
     },
@@ -448,11 +461,11 @@
       ],
       "page": "measuring-tokens",
       "says": "The tokens a game moves along each connection, from the agent who stakes to the node staked on.",
-      "anchor": "measuring-the-flow-token-flow-lightning-and-circulation"
+      "anchor": "token-flow"
     },
     {
       "name": "lightning",
-      "page": "measuring-tokens",
+      "page": "measures-of-the-archived-studies",
       "says": "A closed loop of the flow of a game: tokens that go round and come back where they started.",
       "anchor": "lightning-tokens-that-go-round"
     },
@@ -507,7 +520,7 @@
     {
       "name": "settled life",
       "page": "statistics",
-      "says": "A world from iteration 500 to its end, after its youth, where it is measured.",
+      "says": "A world after its youth, where it is measured: from iteration 500 to its end in the baselines, from 100 in round 3 of the screen.",
       "anchor": "the-settled-life-of-a-world"
     },
     {
@@ -518,6 +531,12 @@
       "page": "statistics",
       "says": "The middle value: half of the numbers lie below it and half above.",
       "anchor": "many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread"
+    },
+    {
+      "name": "rank correlation",
+      "page": "statistics",
+      "anchor": "rank-correlation",
+      "says": "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other."
     },
     {
       "name": "correlation",
@@ -533,13 +552,13 @@
     },
     {
       "name": "mobility",
-      "page": "measuring-tokens",
+      "page": "measures-of-the-archived-studies",
       "says": "Whether the rich stay rich, or who holds the wealth keeps changing.",
       "anchor": "mobility"
     },
     {
       "name": "participation ratio",
-      "page": "statistics",
+      "page": "measures-of-the-archived-studies",
       "says": "How many directions a cloud of points really uses.",
       "anchor": "how-many-directions-a-cloud-of-points-uses"
     },
@@ -595,7 +614,7 @@
       "name": "power law",
       "page": "statistics",
       "says": "A quantity whose frequency falls as a power of its size: few huge values, many small ones.",
-      "anchor": "fitting-a-power-law-properly"
+      "anchor": "logarithmic-axes-and-power-laws"
     },
     {
       "name": "data collapse",
@@ -616,7 +635,7 @@
       "name": "effective number",
       "page": "statistics",
       "says": "How many kinds there really are, when kinds are counted by how much of the population they hold.",
-      "anchor": "effective-numbers-how-many-kinds-and-how-many-directions"
+      "anchor": "effective-numbers-how-many-kinds"
     },
     {
       "name": "fractional factorial",
@@ -626,8 +645,8 @@
     },
     {
       "name": "false discovery rate",
-      "page": "how-the-drawn-settings-shape-a-world",
-      "anchor": "how-a-setting-is-tested",
+      "page": "statistics",
+      "anchor": "testing-many-settings-at-once",
       "says": "Among many tests at once, how often a result as strong as this one would be a false alarm (the rule of Benjamini and Hochberg)."
     },
     {
@@ -698,19 +717,7 @@
       "correlation",
       "hub"
     ],
-    "which-worlds-are-healthy": [
-      "candidate"
-    ],
-    "how-the-drawn-settings-shape-a-world": [
-      "candidate"
-    ],
     "candidates-for-open-ended-evolution": [
-      "candidate"
-    ],
-    "local-rules-only": [
-      "candidate"
-    ],
-    "how-far-does-a-difference-travel": [
       "candidate"
     ],
     "a-source-and-a-sink": [
@@ -721,33 +728,18 @@
     "did-evolution-happen": [
       "candidate"
     ],
-    "how-this-notebook-is-written": [
-      "candidate"
-    ],
     "measuring-evolution": [
       "hub"
     ],
     "b1-the-network-size-and-scaling": [
       "extinction"
     ],
-    "what-the-switches-did-in-pilots": [
-      "candidate"
-    ],
-    "building-b2-and-the-search-for-a-healthy-rich-world": [
-      "candidate"
-    ],
     "measures-atlases-and-assembly": [
       "correlation",
       "dimension",
       "hub"
     ],
-    "README": [
-      "candidate"
-    ],
     "round-3-eras-against-each-other": [
-      "candidate"
-    ],
-    "every-simulation": [
       "candidate"
     ]
   }

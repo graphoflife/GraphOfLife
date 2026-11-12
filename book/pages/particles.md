@@ -68,7 +68,7 @@ star's centre is a place handed from parent to child
 ([How a star is handed down](b1-lives-and-wealth.md#how-a-star-is-handed-down)).
 Groups of the flow are the network's regions
 ([Flow modules](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)). This page asks the question again of the
-largest worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") and of the healthiest worlds found
+largest worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") and of the healthiest worlds found
 since, with detectors that come with their own controls.
 
 ## Twelve worlds, read game by game
@@ -158,7 +158,7 @@ world, and the ring would last while the tokens in it changed.
 ### How a ring is seen
 
 Add up, over a stretch of games, the tokens each [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") carried one way,
-minus what came back: the connection's [net flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation). Every net
+minus what came back: the connection's [net flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation). Every net
 flow splits exactly into two parts
 ([Flows that go round](measuring-tokens.md#flows-that-go-round); Jiang, Lim, Yao
 and Ye 2011). One runs **downhill**, from some agents to others, as if each
@@ -190,9 +190,7 @@ out of the noise in the long ones.
 **Do tokens go round the same loops?** The net flow of a stretch of games (what each connection carried one way, minus what came back) is split into a part that runs downhill and a part that goes round loops, the circulation. Left: the correlation of the circulation of one stretch with that of the next, over the connections both used; a ring that lasts gives two stretches the same circulation, and a correlation near 1. Each line is a world (orange: B1; red: its largest star; green: round 3; violet: the frozen world, whose circulation turns round every game, and whose net flow over any even number of games is nothing at all). Grey: the median of the eleven worlds that are not frozen, with rings planted on triangles and squares of the connections both stretches used, the same rings in both, carrying 5% or 20% of the circulation there. Right: the same for the downhill part. A swing of the flow back and forth from one game to the next shows at one game, below 0, and cancels in the stretches of an even number of games.
 
 > [!example]- How to make this figure
-> **Runs.** Twelve worlds, each read over the last 500 games of its run. Five worlds of B1 at 100,000 tokens (Experiment 10: `B1-100000-s001`, `B1-100000-s003`, `B1-100000-s004`, `B1-100000-s005` and `B1-100000-s006`, the first five seeds whose world is not held together by one hub) and its largest star (`B1-100000-s028`), iterations 1,000 to 1,499. The five healthiest worlds of round 3 by the product ([Which worlds are healthy?](which-worlds-are-healthy.md); Experiments 40 and 42: `B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006`, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080` and `B1-30000-38aee9-s3057`), 30,000 tokens, iterations 2,500 to 2,999. And a world whose brains never change and which froze long before its end (Experiment 7, `B1-10000-a8525d-s002`), iterations 2,500 to 2,999.
->
-> **Data.** From each run's frames, read once by `particles_pass` in `book_chapters/particles.py` (every game's `decisions.allocations` and `decisions.winners`, and the agents, tokens, connections and parents after it) and kept in `GraphOfLifeRuns/.book/<run>.particles.json`.
+> **Runs and data.** As for the figure *How long things last* above.
 >
 > 1. For every game, the tokens each agent staked on each neighbour's node.
 > 2. Add them up over stretches of 1, 2, 10 and 50 games, one way minus the other: the net flow of each connection (from the first game read, at most 101 stretches in a row).
@@ -326,9 +324,7 @@ the line is a suspect, not yet a beat.
 **Does anything keep a rhythm?** Top: the spectrum of agents' tokens, game by game, divided by the spectrum of a random walk with the same two memories, one slow and one that swings back and forth, fitted to each stretch; averaged over all the stretches of a world, at periods from two games to half a stretch (anything slower is a trend inside the stretch). Flat means no rhythm beyond the random walk's. Each line is a world (orange: B1; red: its largest star; green: the round-3 worlds with at least 100 stretches). Dashed grey: the same with a weak beat of 5 games planted in every stretch, carrying a sixteenth of its variance (the median of the worlds). Bottom left: the share of stretches with a peak, at a period from 3 games to half the stretch, that a random walk makes less than once in a hundred; at 0, the real stretches; further right, with a beat of a random period planted in each, carrying that share of its variance (the median of the worlds). Bottom right: the swing memory of agents' tokens, by their connections: how much of a swing is left a game later, with its sign (stretches of 128 games; 32 in round 3, drawn a little to the right); one dot per world and class, the median. Dashed: what the even split leaves of a swing between a hub and its leaves alone; below the dotted line, a swing that lasts longer than any such hub's.
 
 > [!example]- How to make this figure
-> **Runs.** Twelve worlds, each read over the last 500 games of its run. Five worlds of B1 at 100,000 tokens (Experiment 10: `B1-100000-s001`, `B1-100000-s003`, `B1-100000-s004`, `B1-100000-s005` and `B1-100000-s006`, the first five seeds whose world is not held together by one hub) and its largest star (`B1-100000-s028`), iterations 1,000 to 1,499. The five healthiest worlds of round 3 by the product ([Which worlds are healthy?](which-worlds-are-healthy.md); Experiments 40 and 42: `B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006`, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080` and `B1-30000-38aee9-s3057`), 30,000 tokens, iterations 2,500 to 2,999. And a world whose brains never change and which froze long before its end (Experiment 7, `B1-10000-a8525d-s002`), iterations 2,500 to 2,999.
->
-> **Data.** From each run's frames, read once by `particles_pass` in `book_chapters/particles.py` (every game's `decisions.allocations` and `decisions.winners`, and the agents, tokens, connections and parents after it) and kept in `GraphOfLifeRuns/.book/<run>.particles.json`.
+> **Runs and data.** As for the figure *How long things last* above.
 >
 > 1. For every agent, its tokens after every game it was alive in the games read.
 > 2. Cut each agent's life into stretches of 32 and of 128 games, back to back; leave out the stretches in which its tokens never change.
@@ -423,9 +419,7 @@ of its modules should last all fifty games read.
 **Groups that last.** Of all the flow modules of the last 50 games of each world, the share followed for at least so many games (the median of each kind's worlds; logarithmic axes, a share of 0 drawn at the bottom). The flow: as it was. Partners dealt: the same games with every agent's stakes on its neighbours dealt among the same neighbours at random, which keeps the network and undoes the agents' choice of whom to stake on. Members dealt: the real modules with their agents dealt among them at random, game by game, which keeps only their sizes. B1: five worlds of B1 at 100,000 tokens; B1 star: its largest star; round 3: the five healthiest worlds of round 3; frozen: a world whose brains never change, the positive control, whose modules all last.
 
 > [!example]- How to make this figure
-> **Runs.** Twelve worlds, each read over the last 500 games of its run. Five worlds of B1 at 100,000 tokens (Experiment 10: `B1-100000-s001`, `B1-100000-s003`, `B1-100000-s004`, `B1-100000-s005` and `B1-100000-s006`, the first five seeds whose world is not held together by one hub) and its largest star (`B1-100000-s028`), iterations 1,000 to 1,499. The five healthiest worlds of round 3 by the product ([Which worlds are healthy?](which-worlds-are-healthy.md); Experiments 40 and 42: `B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006`, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080` and `B1-30000-38aee9-s3057`), 30,000 tokens, iterations 2,500 to 2,999. And a world whose brains never change and which froze long before its end (Experiment 7, `B1-10000-a8525d-s002`), iterations 2,500 to 2,999.
->
-> **Data.** From each run's frames, read once by `particles_pass` in `book_chapters/particles.py` (every game's `decisions.allocations` and `decisions.winners`, and the agents, tokens, connections and parents after it) and kept in `GraphOfLifeRuns/.book/<run>.particles.json`.
+> **Runs and data.** As for the figure *How long things last* above.
 >
 > 1. For each of the last 50 games, the flow between each pair of neighbours: the tokens staked either way.
 > 2. Group the agents by the map equation (web/js/flowmodules.js, through tools/flowmodules_cli.js) and follow the groups from game to game: best overlap first, each used once, none below 0.3 of the members two modules share ([Flow modules](b1-the-game-and-its-flows.md#following-groups-through-time)).
@@ -478,9 +472,7 @@ where it began. One that travelled is further.
 **Groups that outlast their members, and whether they move.** Of the flow modules of the last 50 games followed for 10 games or more, in each world (the worlds' short names; B1 at 100,000 tokens, its star s28, the five round-3 worlds, and the frozen world). Top: the share whose members at the end included none of those it began with. Bottom: how far its last members stood from its first when it began, in steps through the network of its first game; a member born since stands where its nearest forebear alive then stood; the median over the last members, averaged over the modules. Coloured: the flow as it was; grey: with every agent's partners dealt at random among its neighbours, the network's own regions.
 
 > [!example]- How to make this figure
-> **Runs.** Twelve worlds, each read over the last 500 games of its run. Five worlds of B1 at 100,000 tokens (Experiment 10: `B1-100000-s001`, `B1-100000-s003`, `B1-100000-s004`, `B1-100000-s005` and `B1-100000-s006`, the first five seeds whose world is not held together by one hub) and its largest star (`B1-100000-s028`), iterations 1,000 to 1,499. The five healthiest worlds of round 3 by the product ([Which worlds are healthy?](which-worlds-are-healthy.md); Experiments 40 and 42: `B1-30000-b82ad0-s3042`, `B1-30000-8526cf-s4006`, `B1-30000-af1e28-s3018`, `B1-30000-625bc7-s3080` and `B1-30000-38aee9-s3057`), 30,000 tokens, iterations 2,500 to 2,999. And a world whose brains never change and which froze long before its end (Experiment 7, `B1-10000-a8525d-s002`), iterations 2,500 to 2,999.
->
-> **Data.** From each run's frames, read once by `particles_pass` in `book_chapters/particles.py` (every game's `decisions.allocations` and `decisions.winners`, and the agents, tokens, connections and parents after it) and kept in `GraphOfLifeRuns/.book/<run>.particles.json`.
+> **Runs and data.** As for the figure *How long things last* above.
 >
 > 1. Follow the flow modules of the last 50 games as for the figure above, the real ones and those of the flow with partners dealt.
 > 2. For every module followed 10 games or more: its members in the first game and in the last.
@@ -574,7 +566,7 @@ A particle would need something that binds. Three places to look next:
 - **A flow through the world.** Order that feeds on a flow, like the
   convection cells of a pan of oil heated from below, needs a source and a
   sink: the planned study *A source and a sink*.
-- **Local rules.** The share-out of the dead and the single random stream
+- **Local rules.** The [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead and the single random stream
   still reach across a whole world at once
   ([What this asks of the notebook](physical-inspiration.md#what-this-asks-of-the-notebook)).
   A thing that keeps its form while it moves needs a world in which what

@@ -344,7 +344,7 @@ def flow(ch: F.Chapter) -> None:
         caption="Every token is staked in every game. Yellow: the share staked by agents on their own node. "
                 "Cyan: staked on a neighbour's node, but cancelled by what that neighbour staked back — if A "
                 "puts 5 on B's node and B puts 3 on A's, 3 tokens each way cancel. Red: what is left after "
-                "cancelling, flow with a direction ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-lightning-and-circulation)). Left: the game of "
+                "cancelling, flow with a direction ([Token flow](measuring-tokens.md#measuring-the-flow-token-flow-and-circulation)). Left: the game of "
                 f"iteration 0, pooled over the {len(specs)} worlds; right: every game from iteration 500 on of "
                 f"{W.lived}, pooled. Exactly {W.tokens:,} tokens are staked in each game.",
         recipe=recipe(W.runs_text(), STATS_FILE,
@@ -509,7 +509,7 @@ def flow(ch: F.Chapter) -> None:
     ch.grid(
         "circulation", panels, columns=2, title="Do tokens go round?",
         caption="Left, on the flow as staked: the share of all tokens staked on neighbours that a greedy search "
-                "could place in closed loops (blue; [Lightning](measuring-tokens.md#lightning-tokens-that-go-round)), and the share that "
+                "could place in closed loops (blue; [Lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)), and the share that "
                 "conservation forbids from ever going round, because some agents receive more than they send "
                 "(red) — so at most 1 − red can circulate. Right, after cancelling every stake against the one "
                 "coming back: the share of the flow left (cyan), and of that, the share found in loops "
@@ -716,7 +716,7 @@ def powerlaws(ch: F.Chapter) -> None:
                 "least squares fits through all the dots, whose slope is 1 − γ for a power law of exponent γ "
                 "(the viewer's `degreeExponent`). Red: the power law fitted by maximum likelihood to the "
                 f"tail from the k that fits best, k = {mle['kMin']:.0f} (`degreeGamma`, `degreeKMin`), which "
-                f"holds {100 * tail:.1f}% of the agents ([Fitting a power law](statistics.md#fitting-a-power-law-properly)).",
+                f"holds {100 * tail:.1f}% of the agents ([Fitting a power law](measures-of-the-archived-studies.md#fitting-a-power-law-properly)).",
         recipe=recipe(f"`{W.run(1)}`.", FRAMES,
                       [f"Read the last frame after a game (`{W.frame(W.last)}`) and count every agent's connections in `edges`.",
                        "Dots: for each distinct count k, the share of agents with at least k.",

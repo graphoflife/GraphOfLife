@@ -178,15 +178,9 @@ def compose(new: str, title: str, intro: str, olds: List[str]) -> Tuple[str, Dic
     questions = [parts[old][1][0] for old in olds if parts[old][1]]
     lines = [f"# {title}", "", "> [!question] Questions of this page"]
     lines += [f"> - {q}" for q in questions]
-    lines += ["", "## In short", "", intro.strip(), "", f"It gathers what were {len(olds)} pages of their own, "
-              "one section each:", ""]
-    for old in olds:
-        # The first sentence of the page's own In short (its index summary may be cut short).
-        short = next((body for h, body in parts[old][2] if h.lower() == "in short"), "")
-        flat = " ".join(short.split())
-        found = re.match(r"(.+?[.!?])(?:\s|$)(?![^(]*\))", flat)
-        first = found.group(1) if found else (index.get(old, {}).get("summary") or "").strip()
-        lines.append(f"- [{parts[old][0]}](#{section_of[old]}){': ' + first if first else ''}")
+    # Each old page is a section now; its title says what it holds, and the section opens with the rest.
+    lines += ["", "## In short", "", intro.strip(), "", "Its sections:", ""]
+    lines += [f"- [{parts[old][0]}](#{section_of[old]})" for old in olds]
     lines.append("")
     text = "\n".join(lines) + "\n" + "\n".join(body_parts)
     if onward:

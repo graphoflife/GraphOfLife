@@ -12,19 +12,12 @@
 
 ## In short
 
-This page is a plan that has not been played: a draft for the author, written
-on 9 November 2026. Decisions by chance killed every world of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") within three
-[iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). But chance is a crude control: it takes away the brains' habits
-along with everything else. The plan replaces it with a ladder of six ways to
-decide, from dice to the world as it is, each taking away a little less than
-the one below it. Every way is played on from the world kept at iteration
-1,500 of five of round 3's shortlisted worlds, and its health is set beside
-the health of the world's own replays. The draft thesis: chance kills; answers
-borrowed from other agents keep a world alive but make it another world; and a
-brain drawn afresh from the world's own at every look makes it itself again.
-Three of the six ways need building, and all six need a run that can start
-from a kept world. The runs would take about a day and a half on the
-[lab](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.")'s three workers.
+A plan, not played: a draft for the author of 9 November 2026. Decisions by
+chance killed every world of [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") within three [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), but chance takes away
+the brains' habits with everything else. The plan replaces it with a ladder of
+six ways to decide. Each is played on from iteration 1,500 of five shortlisted
+worlds of round 3, in about 103 worker-hours
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)).
 
 ## Why chance is not enough
 
@@ -92,7 +85,7 @@ Their brains are another matter. The five worlds this plan would play show it:
   and the median change was nil
   ([Healthier or sicker with time?](which-worlds-are-healthy.md#healthier-or-sicker-with-time)).
   And how unequal a world is depends, more than on any other rule drawn, on
-  where the tokens of the dead go: a median [Gini](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.32 where they go to the
+  where the tokens of the dead go: a median [Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of 0.32 where they go to the
   poorest, 0.53 where they flow to the nearest living
   ([What keeps wealth spread?](what-keeps-wealth-spread.md)).
 
@@ -114,9 +107,6 @@ take it away in steps:
   reads the question itself: the class's knowledge, with nobody's own;
 - every pupil answers for herself, but nobody learns anything new;
 - the class as it is.
-
-Each step gives back one thing: habits, a sense of one's own seat, a sense of
-the whole question, a mind of one's own that lasts, and learning.
 
 In a world, a pupil's questions are an agent's **look**: one column of inputs
 for each of its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."), itself and each [neighbour](the-world.md#the-network "An agent joined to another by a connection.")
@@ -218,11 +208,11 @@ counts agents on [loops](measuring-networks.md#loops "A path through the network
 
 | world | why this one | health's ranks (product, sum, worst) | agents | median tokens | heredity index | effective population | seconds an iteration | 1,500 iterations |
 |---|---|---|---|---|---|---|---|---|
-| seed 3042 | the healthiest by the product, and among the first 13 of all three orders | 1, 3, 2 | 12,390 | 2 | 0.14 | 247 | 12.0 | 5.0 hours |
-| seed 3018 | third by the product; mixes brains at birth, and allows 8 links an agent at most | 3, 18, 3 | 2,853 | 7 | 0.16 | 263 | 4.7 | 2.0 hours |
-| seed 3080 | the healthiest of the fast worlds | 4, 19, 4 | 2,154 | 8 | 0.34 | 11 | 0.9 | 23 minutes |
-| seed 3057 | fifth by the product; the one of the five that does not mend its dead | 5, 26, 5 | 4,915 | 5 | 0.14 | 11 | 3.0 | 1.2 hours |
-| seed 3026 | evolves the most of the round: 2,159 generations, and its line never comes back | 27, 41, 13 | 2,273 | 9 | 0.30 | 78 | 1.9 | 49 minutes |
+| seed 3042 | the healthiest by the product, and among the first 13 of all three orders | 1, 2, 2 | 12,390 | 2 | 0.14 | 247 | 12.0 | 5.0 hours |
+| seed 3018 | third by the product; mixes brains at birth, and allows 8 links an agent at most | 3, 6, 3 | 2,853 | 7 | 0.16 | 263 | 4.7 | 2.0 hours |
+| seed 3080 | the healthiest of the fast worlds | 4, 10, 4 | 2,154 | 8 | 0.34 | 11 | 0.9 | 23 minutes |
+| seed 3057 | sixth by the product; the one of the five that does not mend its dead | 6, 13, 5 | 4,915 | 5 | 0.14 | 11 | 3.0 | 1.2 hours |
+| seed 3026 | evolves the most of the round: 2,159 generations, and its line never comes back | 23, 36, 17 | 2,273 | 9 | 0.30 | 78 | 1.9 | 49 minutes |
 
 The agents and their median tokens are those of the world kept at iteration
 1,500. The seconds are each world's own, averaged over its iterations 1,500 to
@@ -341,7 +331,7 @@ from old ones.
 > in the same situation mostly act differently, so answers that ignore the
 > situation cannot stand in for them. But what holds a world's shape is
 > steadier than its individuals: health does not drift over a run, the
-> [share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead sets how unequal a world is, and with 11
+> [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the tokens of the dead sets how unequal a world is, and with 11
 > to 263 effective ancestors, chance more than merit decides which line
 > carries the brains.
 >
@@ -376,7 +366,7 @@ history.
    families can be counted on from there. And the viewer must show such a run
    from where it begins. **Its check:** started from the kept world with
    nothing changed and the kept world's own random stream, it must make the
-   original run's [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") again, frame for frame, to iteration 3,000, as a run
+   original run's frames again, frame for frame, to iteration 3,000, as a run
    resumed from a checkpoint must ([Is a run reproducible?](is-a-run-reproducible.md)).
    The same piece serves tests 12 and 14 of
    [Did evolution happen?](did-evolution-happen.md).
@@ -408,8 +398,8 @@ history.
 continuation of 1,500 iterations takes 5.0 hours for seed 3042, 2.0 for seed
 3018, 1.2 for seed 3057, 49 minutes for seed 3026 and 23 minutes for seed
 3080: 9.4 hours for one of each. The eleven continuations a world that should
-live, all but chance's, make about 103 hours of computing: about a day and a
-half on the lab's three workers. Seed 3042 alone is more than half of it;
+live, all but chance's, make about 103 worker-hours
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)). Seed 3042 alone is more than half of it;
 without it, the rest take about 16 hours.
 
 These are the worlds' own costs. Ways (a) to (c) run no brain, so an
@@ -419,10 +409,11 @@ that grows under a new way costs more, and one that shrinks less.
 **Disk.** A continuation keeps its frames, from 0.15 MB an iteration (seed
 3080) to 1.15 MB (seed 3042), and six whole worlds, from 8 MB each (seed 3080)
 to 400 MB (seed 3042). That is about 7 GB for one continuation of each world,
-and about 75 GB for the 55 that should live, 45 GB of it seed 3042's. The
-external drive that holds round 3's runs had 408 GB free on 9 November 2026,
-but Experiment 43, still playing, is expected to fill about 340 GB of it. The
-disk inside the computer had 166 GB free.
+and about 75 GB for the 55 that should live, 45 GB of it seed 3042's. On 9
+November 2026 the external drive that holds round 3's runs had 408 GB free,
+about 340 GB of it expected to go to
+[Experiment 43](candidates-for-open-ended-evolution.md), and the disk inside
+the computer 166 GB.
 
 **Building.** The run that starts from a kept world is the largest piece, as
 it touches the lab, the recorder and the viewer. The three new ways are small,
@@ -430,8 +421,8 @@ as `random_decisions` shows: one switch at the place where a brain speaks.
 
 ## Choices for the author
 
-- **Which worlds.** All five, about a day and a half on three workers; or the
-  four without seed 3042, about 16 hours.
+- **Which worlds.** All five, about 103 worker-hours; or the four without seed
+  3042, about 16.
 - **Where to start.** At iteration 1,500, as proposed, where the world's own
   second half is a replay and tests 12 and 14 share the runs; or at 3,000,
   where the runs ended. Then the world as it was played must be played on
@@ -467,7 +458,7 @@ as `random_decisions` shows: one switch at the place where a brain speaks.
   worlds whose brains never change.
 - [Did evolution happen?](did-evolution-happen.md): fourteen tests, two of
   which would share this plan's runs.
-- [How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents): how much of
+- [Where, who and chance](measures-of-the-archived-studies.md#where-who-and-chance-splitting-a-decisions-variance): how much of
   what an agent does comes from where it is, who it is, and chance.
 
 ## How this was made
@@ -489,6 +480,16 @@ each run. The same-position shares are the five worlds' averages in
 
 **References.** Lewontin, R. C. (1970), The units of selection. Nowak, M. A.
 and May, R. M. (1992), Evolutionary games and spatial chaos.
+
+## How our view changed
+
+- **12 November 2026.** The table gave health's ranks (product, sum, worst) of
+  an earlier order: 1, 3, 2 for seed 3042; 3, 18, 3 for seed 3018; 4, 19, 4
+  for seed 3080; 5, 26, 5 for seed 3057, "fifth by the product"; and 27, 41,
+  13 for seed 3026. The order of 9 November reads 1, 2, 2; 3, 6, 3; 4, 10, 4;
+  6, 13, 5; and 23, 36, 17
+  ([Which worlds are healthy?](which-worlds-are-healthy.md)). Its time is now
+  given in worker-hours.
 
 <!-- turns -->
 ---

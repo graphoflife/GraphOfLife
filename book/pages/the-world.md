@@ -23,14 +23,8 @@ player, an **agent**. It holds a purse of coins, its **tokens**, and a small
 rulebook, its **brain**. An agent deals only with the agents tied to its own
 knot. Coins pass from hand to hand, but no coin is ever minted or melted.
 
-Time runs in steps called **iterations**, and each has two **phases**. In the
-first, **reproduction**, an agent may give some of its coins to a child. The
-child gets a knot of its own, tied into its parent's part of the net. In the
-second, **the game**, every agent stakes all its coins on its own knot and its
-neighbours' knots. Each knot goes to whoever staked most on it, or sometimes
-to a coalition of smaller stakers. Strings that carried no coins in the game
-are cut. An agent left with no coins dies, and so does every part of the net
-that has come loose from the rest.
+Time runs in iterations of two phases, reproduction and the game
+([One iteration](one-iteration.md#the-picture)).
 
 This page says exactly what a world is made of and how it begins.
 [One iteration, step by step](one-iteration.md) says how it changes, and
@@ -72,7 +66,7 @@ $$
 \bar k = \frac{1}{|V|} \sum_{u \in V} \deg(u) = \frac{2\,|E|}{|V|} .
 $$
 
-In the example, *k̄* = 8 / 4 = 2. [Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling) says more about
+In the example, *k̄* = 8 / 4 = 2. [Degree](measuring-networks.md#an-agents-connections-degree-and-clustering) says more about
 degrees.
 
 Every node carries a whole-number **id**. Ids are handed out in increasing
@@ -131,54 +125,17 @@ whole number that fixes every random choice of the run.
 The settings that shape the start are the number of tokens *T*, the number of
 founders and their ring. These pages teach with worlds of *T* = 10,000 tokens.
 The study of the baseline reads the same baseline at *T* = 100,000. That is
-ten times as many founders of 100 tokens each, on a denser ring (step 2
-below). [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) shows what the
+ten times as many founders of 100 tokens each, on a denser ring. [How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes) shows what the
 denser ring changes in the first game.
 
-From the settings and the seed, the world is built in three steps.
-
-**1. The founders.** The world starts with
-
-$$
-n = \left\lfloor \frac{T}{100} \right\rfloor
-$$
-
-agents, the **founders**: one for every hundred tokens (⌊*x*⌋ is *x* rounded
-down). With *T* = 10,000 there are 100 founders, with ids 0 to 99. Each gets
-⌊*T* / *n*⌋ tokens, here exactly 100. When *T* is not a multiple of *n*, a few
-tokens are left over. They are dealt out at random, every founder equally
-likely to get each one. Each founder also gets a brain whose weights are drawn
-at random ([The brain](the-brain.md)). So every founder starts with a genotype
-of its own, numbered 1 to 100.
-
-**2. The ring.** The founders are joined into a **small-world ring**, the
-construction of Watts and Strogatz (1998). Picture them on a circle, in order
-of id. Each is joined to its ⌊*k*/2⌋ nearest neighbours on either side,
-where
-
-$$
-k = \max\!\left( \left\lfloor \frac{n}{100} \right\rfloor ,\ 5 \right).
-$$
-
-In words: *k* is one for every hundred founders, but at least five. An odd
-*k* loses one, so that both sides get as many. With 100
-founders *k* = 5, so every founder is joined to 2 on each side. It starts
-with degree 4, and the ring has 100 · 4 / 2 = 200 connections. With the 1,000
-founders of *T* = 100,000, *k* = 10: every founder starts with 10 neighbours,
-not 4 ([Every setting](settings.md#k_neighbors)).
-
-Then each connection is, with probability 0.2, **rewired**: one of its ends
-is moved to a founder chosen at random. Rewiring moves connections but never
-adds or removes one. [The starting ring](rules-in-detail.md#the-starting-ring) gives the exact
-procedure.
-
-![The founders' ring](../diagrams/ring.svg)
-
-Why a small world? A ring lattice is **clustered**: two neighbours of a
-founder are usually neighbours of each other. But it is **long**: getting
-from one side of the circle to the other takes many steps. A handful of
-random shortcuts keeps most of the clustering and makes every distance short.
-Here is the real starting network of one baseline run:
+From the settings and the seed: *T*/100 founders of 100 tokens, each with a
+random brain, on a Watts–Strogatz ring whose connections are rewired with
+probability 0.2. Every later choice comes from one random stream, so a run
+depends on its settings and its seed alone
+([The starting ring](rules-in-detail.md#step-by-step),
+[Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream);
+[Is a run reproducible?](is-a-run-reproducible.md) tests it). Here is the real
+starting network of one baseline run:
 
 <!-- figure world/ring -->
 ![The 100 founders of the world with seed 1](../figures/world/ring.svg)
@@ -196,21 +153,8 @@ Here is the real starting network of one baseline run:
 > **To make it again:** `python3 book_figures.py world`.
 <!-- /figure -->
 
-Without rewiring, this ring would have a clustering of 0.5
-([Clustering](measuring-networks.md#clustering)), and its founders would be 12.9 steps apart on
-average ([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)). Rewired, 37 of its 200 connections
-are shortcuts. The clustering falls to 0.27, and the average distance to 4.4
-steps.
-
-**3. The random stream.** The ring is drawn by the networkx library, from a
-random generator of its own, started from the seed. Every other random choice
-a world ever makes is drawn from one stream of pseudo-random numbers. These
-look random, but are computed one after another from the same seed. That
-stream gives the founders' brains and every change of a brain. It gives every
-probabilistic decision and tie-break, every random input of a brain, and every
-[share-out](b1-lives-and-wealth.md#gains-losses-and-the-share-out "How a cleanup deals the tokens of the dead out among the living: in the baseline, each token to a survivor drawn at random.") of the tokens of the dead. So a run depends on its settings and its
-seed, and on nothing else ([Seeds and the random stream](rules-in-detail.md#seeds-and-the-random-stream)).
-[Is a run reproducible?](is-a-run-reproducible.md) tests this.
+Rewired, 37 of its 200 connections are shortcuts: the clustering falls from
+0.5 to 0.27, and the average distance from 12.9 steps to 4.4.
 
 ## What is recorded
 

@@ -82,16 +82,27 @@ reward of any kind. And unlike Tierra or Geb, its genomes cannot grow.
 In **Colonel Blotto** (Borel 1921), two commanders divide a fixed force
 between several battlefields, without seeing each other's division. Each
 battlefield goes to whoever sent more. Every fixed division can be beaten: give
-up a little where the other is strong, and send more where it is weak. So there
-is no single best division. Only a mixture of divisions, played at random, can
-be optimal; Roberson (2006) worked out that mixture for two players.
+up a little where the other is strong, and send more where it is weak. Take
+three battlefields and six soldiers each, and count the fields each side wins:
+
+- (3, 3, 0) beats the even division (2, 2, 2): it wins the first two fields;
+- (4, 0, 2) beats (3, 3, 0): the first and the third;
+- (1, 1, 4) beats (4, 0, 2): the second and the third;
+- and the even division (2, 2, 2) beats (1, 1, 4): the first and the second.
+
+The beatings go round in a circle, so there is no single best division. The
+best a commander can do is to be **unpredictable**: to draw a division at
+random from a well-chosen mixture, which no other strategy beats (Gross and
+Wagner 1950). Roberson (2006) worked out that mixture for two players.
 
 The game of [One iteration, step by step](one-iteration.md#phase-2-the-game) is
 a Blotto game with three differences that the theory does not cover:
 
 1. there are many players;
-2. each can reach only the battlefields of its neighbourhood, and they change;
-3. what is won — tokens — is the next game's force, so success compounds.
+2. each can reach only the battlefields of its neighbourhood, where the
+   network, which changes, puts them;
+3. a node goes with every token staked on it, and what is won is the next
+   game's force, so success compounds.
 
 Two more ideas belong here. Games without a best strategy can keep a
 population moving. Rock–paper–scissors among three strains of *E. coli* keeps
@@ -102,7 +113,7 @@ buys a lasting advantage. A fixed supply of tokens fought over by neighbours is
 such a setting.
 
 In this world the game has not kept the population moving. Played against the
-brains of earlier eras, the [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.")'s brains stop improving within their first
+brains of earlier eras, the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.")'s brains stop improving within their first
 hundred iterations. Later brains neither beat the ones before them nor go round
 in a circle: they tie
 ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
@@ -119,7 +130,7 @@ several agents acting together.
   its nearest few, with a few random shortcuts, is both clustered and short.
   It is the [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.")' ring of [The world: tokens, agents and a network](the-world.md).
 - **Measures of a network** — degree, clustering, distances, bridges, the
-  2-core — are standard (Newman 2003). [Degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling),
+  2-core — are standard (Newman 2003). [Degree](measuring-networks.md#an-agents-connections-degree-and-clustering),
   [Clustering](measuring-networks.md#clustering), [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap),
   [Bridges](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut) and [Core, trees and leaves](measuring-networks.md#core-trees-and-leaves)
   define each. The bridges are found by depth-first search (Tarjan 1974), the
@@ -158,7 +169,7 @@ several agents acting together.
 
 - **Inequality**: the **Lorenz curve** (Lorenz 1905) and the **Gini
   coefficient** (Gini 1912): [Where do the tokens go?](b1-lives-and-wealth.md#how-unequal-is-a-world-and-who-stays-rich)
-  and [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility).
+  and [The Gini coefficient and the Lorenz curve](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy).
 - **Lifetimes with censoring**: the Kaplan–Meier estimate (Kaplan and Meier
   1958): [Survival curves](measuring-lives.md#survival-curves-kaplanmeier).
 - **Intervals by resampling**: the bootstrap (Efron 1979). **Intervals for
@@ -221,6 +232,7 @@ several agents acting together.
 - Efron, B. (1979). Bootstrap methods: another look at the jackknife. *The Annals of Statistics* 7(1), 1–26.
 - Fisher, R. A. (1935). *The Design of Experiments*. Edinburgh: Oliver and Boyd.
 - Gini, C. (1912). *Variabilità e mutabilità*. Bologna: Cuppini.
+- Gross, O. and Wagner, R. (1950). *A Continuous Colonel Blotto Game*. RAND Research Memorandum RM-408.
 - Holland, J. H. (1995). *Hidden Order: How Adaptation Builds Complexity*. Addison-Wesley.
 - Jacomy, M., Venturini, T., Heymann, S. and Bastian, M. (2014). ForceAtlas2, a continuous graph layout algorithm for handy network visualization designed for the Gephi software. *PLoS ONE* 9(6), e98679.
 - Kaplan, E. L. and Meier, P. (1958). Nonparametric estimation from incomplete observations. *Journal of the American Statistical Association* 53(282), 457–481.

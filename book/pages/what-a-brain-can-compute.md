@@ -47,41 +47,22 @@ compute, and names the smallest change to the rules that would let one.
 
 ## What a B2 brain sees and does
 
-When an agent decides anything, it looks at its [candidates](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides."): itself first, then
-each of its neighbours. For each candidate its brain gets one column of 66
-numbers ([What a brain sees](rules-in-detail.md#what-a-brain-sees)):
-- whether the candidate is the agent itself: 1 or 0;
-- the agent's [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), and the candidate's, on a logarithmic
-  scale, as ln(1 + count);
-- six [quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of the tokens of the agent's neighbours, six of their
-  connections, and the same for the candidate's neighbours;
-- four messages of eight numbers each: the agent's to itself and to the
-  candidate, and the candidate's to the agent and to itself;
-- five random numbers.
+For each [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") a B2 brain reads one column of 66 numbers
+([What a brain sees](rules-in-detail.md#the-inputs)):
+- whether the candidate is the agent itself, and both agents' [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and
+  [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes."), as logarithms;
+- six [quantiles](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") of each neighbourhood;
+- four messages of 8 numbers, and five random numbers.
 
-A B2 brain is small. One hidden layer of 16 units reads the column, and 19
-outputs read the units ([What a brain says](rules-in-detail.md#what-a-brain-says)). The same
-weights score every column. They are kept in half precision (float16), which
-holds about three significant digits. B2 has one hidden layer where [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") has
-five, so that a change in what a brain sees reaches what it does
-([Why evolution stops](how-to-tell-a-world-that-keeps-evolving.md#why-evolution-stops)).
+One hidden layer of 16 units, the same weights for every column, gives 19
+outputs ([What a brain says](rules-in-detail.md#what-a-brain-says)):
+- the stake, all on one candidate or spread, of at most 70% of the agent's
+  tokens;
+- the child and its links;
+- how much of each stake is revolutionary, and the messages.
 
-The [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") turns the outputs into decisions:
-- **The stake.** Everything the agent may stake goes all on the column with
-  the highest stake score, or is spread in proportion to the scores. A pair
-  of outputs, averaged over the columns, decides which. Under B2 an agent may
-  stake 70% of its tokens; 30%, rounded up and at least one token, stays at
-  home.
-- **The child.** A pair of outputs, averaged over the columns, gives the share
-  of its tokens the agent gives a child
-  ([The share function](rules-in-detail.md#the-share-function-fa-b)). Under B2 a child needs at least
-  10 tokens, or there is none.
-- **The child's links.** Each column says yes or no to joining the child to
-  that candidate.
-- **Revolutions.** A pair of outputs per column says how much of the stake on
-  that candidate is marked revolutionary.
-- **The messages.** Each column's eight message outputs, squashed by tanh into
-  the range from −1 to 1, are what the agent writes to that candidate.
+The weights are kept in half precision (float16), about three significant
+digits.
 
 ## A brain's arithmetic
 
@@ -105,7 +86,7 @@ pushes the verdict up as its input grows, and a negative one pushes it down.
 A weight of zero means the unit ignores that input. The bias sets where the
 verdict tips: σ(0) = 0.5, σ(2) = 0.88 and σ(−2) = 0.12.
 [The brain](the-brain.md#the-neural-network) describes the same arithmetic
-for B1's larger brains.
+for [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s larger brains.
 
 ### Large weights make a switch
 
@@ -264,7 +245,7 @@ B2 worlds, at iteration 2,000. Every situation a raider met in their first 40
 iterations was kept. A situation is one look: a column for each candidate, as
 the raider read it. That gives 62,114 situations. Each was given to the rule
 and to the brain, and the two were compared decision by decision, as the
-engine would read them.
+[engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") would read them.
 
 | world | situations | every decision the same | the stake on the very same candidate |
 |---|---|---|---|
@@ -387,7 +368,7 @@ teammate, whether *u* has a stranger next door is news of a third agent. No
 B2 brain, of any size, can write it into a message. It could only show it
 through its own tokens or connections, at a cost. Raiders that pool their
 stakes would need the same kind of news to choose a target together
-([A crew of raiders](strategies-written-by-hand.md#a-crew-of-raiders)).
+([A crew of raiders](crews-breeders-and-b1-raiders.md#a-crew-of-raiders)).
 
 The raider needs nothing of the kind. Everything it decides comes from its
 own columns, and that is why its weights exist.
@@ -557,5 +538,5 @@ them, so this page has no box of runs. They were made with
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
 > [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [The rules in detail](rules-in-detail.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Every setting](settings.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Every era against three](every-era-against-three.md) · [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md)
 <!-- /turns -->

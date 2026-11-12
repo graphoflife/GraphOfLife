@@ -117,7 +117,7 @@ small and rich, revolutions are five to ten times as common, and hold the
 world small.
 
 **Rules that reshape the network do so everywhere.** Handover costs two marks
-of the health bar with nearly every companion. It thins the network into trees
+of the [health bar](measuring-health.md#the-health-bar "The seven marks, of 12 October 2026, a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4. Still part 4 of the open-ended test.") with nearly every companion. It thins the network into trees
 on single links, and unfolds it a little
 ([Handover, with every other rule](what-the-switches-did-in-pilots.md#handover-with-every-other-rule)).
 Every unused link lapsing makes worlds rich, small and about two-dimensional,
@@ -179,7 +179,7 @@ The author's picture is a world with four things at once
 None of these combinations is all of that. The best of the sixteen on B2 has
 no revolutions, no random inputs, links that hold a token and mixing. It
 meets every mark of the health bar, with a quarter of its agents poor and a
-diversity score of 0.68. But its network is folded. A typical agent reaches
+[diversity score](measuring-health.md#the-diversity-score "How much the agents of a world differ, in one number from 0 to 1: in tokens, links, ages and genotypes.") of 0.68. But its network is folded. A typical agent reaches
 half the world in 1.19 times the steps its [random twin](measuring-space.md#the-random-twin-is-a-world-a-space "A network with the same agents and as many links each, wired at random: what a world would be if it were no space at all.") needs. That is as in
 nearly every B2 world
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
@@ -199,7 +199,7 @@ that are spaces:
 | deaths not mended, as in B1 | 44 | 51% | 0.39 | 0.66 | 4 | 2.6 |
 
 To read it, take B2's own lines at iteration 1,000
-([What makes a world interesting](measuring-health.md#the-lines-we-compare-with)).
+([What makes a world interesting](rounds-1-and-2-of-the-screen.md#the-lines-we-compare-with)).
 B2's median world has a diversity score of 0.53. Its most even world has a
 Gini of 0.49, and its ten worlds read 0.49 to 0.56. A random exchange of
 tokens would leave 0.33 to 0.42 at two to four tokens per agent.
@@ -481,7 +481,7 @@ neighbours during reproduction
 A link is then cut only once it has gone unused for a whole iteration, so a
 gift can keep it alive.
 **Random inputs** are five random numbers that a brain reads, fresh every
-time, for each candidate it looks at. Without them it reads none.
+time, for each [candidate](one-iteration.md#phase-1-reproduction "An agent itself and each of its neighbours, the ones its brain looks at when it decides.") it looks at. Without them it reads none.
 
 A, B, C and D are on and off in all sixteen combinations. E, F, G and H are
 set from them: E = BCD, F = ACD, G = ABC and H = ABD. Each world is B2 at 10,000 tokens, seed 1, played for
@@ -590,9 +590,7 @@ no pair of switches acts together. Here pairs do:
 **Switches that act together.** The seven chains of pairs of batch U (book/notes/fractional-factorial.md): for each, the mean of the eight worlds where the product of the pair's two switches is +1, minus the mean of the other eight — the sum of the four pairs' effects that one chain cannot tell apart. The grey band: the seed's own noise, as in the figure above.
 
 > [!example]- How to make this figure
-> **Runs.** Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each switch alone in B2, seeds 1 and 2, from the batch or lab experiment that made it; and the lab's ten B2 worlds (Experiment 16) for the seed's own noise.
->
-> **Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
+> **Runs and data.** As for the figure *What each switch does, among the sixteen and alone* above.
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
 > 2. A chain's effect: the mean of the eight worlds where the product of a pair's switches is +1, minus the mean of the other eight.
@@ -638,14 +636,14 @@ revolutions, no random inputs, links that hold a token, and mixing. It
 meets the author's picture better than any of the sixteen. It meets all
 seven marks at a dimension of 3.7. A quarter of its 652 agents hold three
 tokens or fewer, and its diversity score is 0.68. Its tokens are not too
-even either: their [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-entropy-and-mobility) is 0.53, within
+even either: their [Gini coefficient](measuring-tokens.md#measuring-inequality-the-gini-coefficient-the-richest-tenth-and-entropy) is 0.53, within
 the 0.49 to 0.56 of B2's ten worlds at iteration 1,000
 (`GraphOfLifeRuns/.pilots/atlas/at1000.json`).
 
 But it is one world of one seed, and its network is folded. A typical agent
 reaches half the world in 1.19 times the steps its random twin needs
 ([What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)).
-Played on to 10,000 iterations as a candidate world
+Played on to 10,000 iterations as a [candidate world](candidates-for-open-ended-evolution.md#the-worlds-ruled-out "A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still.")
 ([The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on)),
 it fell back on a single mark. One agent came to be joined to more than 5%
 of the others. It was still rich and diverse: 4% of its 399 agents held
@@ -665,7 +663,7 @@ If the later brains then hold more than half of the world, they are better.
 **Do the brains of 1,000 beat those of 500?** Above: each world of batch U, the share of a contested world its brains of iteration 1,000 hold after 100 iterations against those of 500, the mean of two contests, one in each era's world; the dashed line marked B2 is the median of the lab's ten B2 worlds, played the same way. Below: each switch's main effect on that share; the grey band is the spread of the ten B2 worlds (one standard deviation), twice the noise of a main effect.
 
 > [!example]- How to make this figure
-> **Runs.** Batch U's sixteen pilot worlds (`GraphOfLifeRuns/.pilots/U/`): B2 at 10,000 tokens, seed 1, 1,000 iterations, with each of eight switches on in eight of them (`research/oee/pilots/make_jobs_TU.py`); each switch alone in B2, seeds 1 and 2, from the batch or lab experiment that made it; and the lab's ten B2 worlds (Experiment 16) for the seed's own noise.
+> **Runs.** As for the figure *What each switch does, among the sixteen and alone* above.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_TUV_T100.json` and, for B2, `long_steps.json` (`research/oee/checks/rejudge.py`).
 >
@@ -1039,9 +1037,7 @@ bar, the marks a healthy network must meet.
 **Each switch against the health bar.** One dot per world, at its median over iterations 500 to 1,000; the bar is the median of the two; dashed lines are the health bar of [How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md). *−rev*: no revolutions; *gifts, lapse*: gifts, and every unused link lapses; *lapse*: every unused link lapses; *by wealth*: estates shared by wealth. Cut shares and the best-connected agent's share are drawn on logarithmic axes, a cut of nothing at 0.0001.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of the study of the baseline), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
->
-> **Data.** From each world's `series.jsonl`.
+> **Runs and data.** As for the figure *How each switch changes a world's life* above.
 >
 > 1. Of the rows from iteration 500 to 1,000 that measured the network (every 10th), take the median of the worst share of the others one agent's loss cuts off (`nodeCutRisk`), the same for one link (`cutRisk`), the 2-core (`coreShare`), links per agent (`meanDegree`), the ball dimension and the best-connected agent's share (`maxDegreeShare`).
 >
@@ -1097,7 +1093,7 @@ rating, the founders' at 0.
 **Does any switch keep evolution going?** One dot per world. Top: the rating of the brains of iteration 1,000 against the founders'. Bottom: their share of a world contested with the brains of iteration 500 of the same world.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py` in the engine's own code (`--proto engine=true`), kept in `GraphOfLifeRuns/.pilots/S`, two seeds each (`-s1`, `-s2`), at 10,000 tokens for 1,000 iterations with a whole world every 100 (`--ckpt 100`): B1 (`S6-B1`, the settings of the study of the baseline), B1 without revolutions (`S7-B1norev`), B2 (`S0-B2`: `--set hidden_layers=16 message_amount=8 message_prepass=false allow_handover=false mutate_on_replication=true incumbency=1.5 birth_links=2 mend_on_death=true prune_needs=2 valence=8 keep_home=0.3 max_age=100 min_child=10`), B2 without revolutions (`S1-norev`), B2 with gifts (`S2-gifts`: `allow_gifting=true prune_after=reproduction inactive_window=iteration`), the same with every unused link lapsing (`S3-giftslapse`: also `prune_needs=0`), B2 with every unused link lapsing (`S4-lapse`) and B2 with estates shared by wealth (`S5-bytokens`: `redistribution=by_tokens`). The jobs are listed in `research/oee/pilots/jobs_S.txt`.
+> **Runs.** As for the figure *How each switch changes a world's life* above.
 >
 > **Data.** From each world's checkpoints, `ckpt_<iteration>.npz`.
 >
@@ -1678,9 +1674,7 @@ show.
 **How much the agents differ.** Each grey dot is a world of B2 with one other rule, each orange dot the same rule with brains mixed at birth as well (batch Y), seeds 1 and 2, read at iteration 1,000; the short bars are the means. The dashed lines are B2 itself and B2 with mixing alone, the means of the same seeds. The rules are in the order of the orange means.
 
 > [!example]- How to make this figure
-> **Runs.** Batch Y's 46 pilot worlds (B2 at 10,000 tokens, brains mixed at birth and one other rule, seeds 1 and 2, `GraphOfLifeRuns/.pilots/Y/`) and their controls: the same rule alone, from the batch or lab experiment that made it, and, of the same seeds, B2 itself (Experiment 16's lab worlds) and B2 with brains mixed at birth alone (Experiment 17's lab worlds).
->
-> **Data.** From each world's checkpoint at iteration 1,000, or the lab's whole world kept then (`research/atlas/at.py --at 1000`, `GraphOfLifeRuns/.pilots/atlas/at1000.json`).
+> **Runs and data.** As for the figure *Agents holding three tokens or fewer* above.
 >
 > 1. Read each world as `research/atlas/profile.py` reads every world.
 > 2. Rank its four spreads among [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich)'s worlds; the diversity score is the mean.
@@ -1868,9 +1862,7 @@ scattered evenly go to the very agents that will breed.
 **B1 worlds, by who inherits.** B1 worlds of 10,000 tokens, two seeds of each rule, through 2,000 iterations (means over blocks of 20 iterations). Grey: the estate shared evenly, the control; green: to the poorest; violet: to the children born that iteration; red: to their parents; blue (added later): each estate to the dead agent's own living children.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of 10,000 tokens, two seeds each: B2's settings (as in Experiment 16) and B1's, with `redistribution` = `poorest`, `newborns`, `parents` or `children` (`GraphOfLifeRuns/.pilots/R/`); the controls are the same settings and seeds with the estate shared evenly, `P/B2-s1`, `-s2` and the first 2,000 iterations of `L/B1-long-s1`, `-s2`.
->
-> **Data.** From each world's `series.jsonl`, one row per iteration.
+> **Runs and data.** As for the figure *B2 worlds, by who inherits* above.
 >
 > 1. Read agents, births, the Gini coefficient and mean age every iteration.
 > 2. Average over blocks of 20 iterations and draw a line per world.
@@ -1900,7 +1892,7 @@ almost as fast as they come.
 **Does evolution go on?** Lifetime contests (T = 100 iterations): the brains of a later moment against those of an earlier one, half and half on the same world, once in each moment's world; the share of nodes the later brains hold at the end, averaged over the two. Above a half, the later brains are better. Each dot is a world.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of 10,000 tokens, two seeds each: B2's settings (as in Experiment 16) and B1's, with `redistribution` = `poorest`, `newborns`, `parents` or `children` (`GraphOfLifeRuns/.pilots/R/`); the controls are the same settings and seeds with the estate shared evenly, `P/B2-s1`, `-s2` and the first 2,000 iterations of `L/B1-long-s1`, `-s2`.
+> **Runs.** As for the figure *B2 worlds, by who inherits* above.
 >
 > **Data.** From `GraphOfLifeRuns/.pilots/batch_R_T100.json` and `batch_P_T100.json` (`research/oee/checks/rejudge.py --T 100`).
 >
@@ -2127,7 +2119,7 @@ five or six links rarely leaves the neighbourhood.
 **What a search does to a world.** Each dot is a world: grey, B2 itself; the others, the eight worlds of each search (two steerings, two consents, two seeds). Links per agent and the mean path length are means of the network measures every 50 iterations from 500 to 1,000; agents too; the poor are the share of the agents holding three tokens or fewer at 1,000.
 
 > [!example]- How to make this figure
-> **Runs.** Batch K's 24 pilot worlds — B2 at 10,000 tokens with `link_search` = jump, walk or reach, `link_steering` = random or looking and `link_consent` = mutual or forced, seeds 1 and 2, 1,000 iterations (`GraphOfLifeRuns/.pilots/K/`, `research/oee/pilots/make_jobs_TU.py`) — and B2 itself with the same seeds (`P/B2-s1`, `-s2`).
+> **Runs.** As for the figure *How much the agents search* above.
 >
 > **Data.** From each world's `series.jsonl` and its checkpoint at 1,000 (`GraphOfLifeRuns/.pilots/k_links.json`).
 >
@@ -2310,7 +2302,7 @@ nothing, a larger brain is selected for.
 **How many units brains use.** Growable brains of up to 32 hidden units, where switching a unit on is free (blue) and where every active unit holds one of its agent's tokens (green). The dashed lines are each world's neutral shadow: the same count for a unit that mutates but does nothing, which is where the number would sit if selection did not care.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of 10,000 tokens with B2's settings, two seeds each, 2,000 iterations (`GraphOfLifeRuns/.pilots/Q/`, `research/oee/pilots/jobs_Q.txt`): `mix`, `took_kin`, growable brains (`brain_kind = grow`, up to 32 units) with units free and with `unit_token`, and `link_token` with `valence = 0` and `max_age = 0`; the control is batch P's B2 worlds of the same settings and seeds.
+> **Runs.** As for the figure *Does evolution go on?* above.
 >
 > **Data.** From each world's `series.jsonl` (`activeMean`, `shadowMean`).
 >
@@ -2396,6 +2388,219 @@ the brain it was copied from. All of the mixed worlds were judged again. No
 other contest was touched: without mutation, mixing is the only way a new
 number appears during one.
 
+## Every condition of the archived batches
+
+What each condition of the pilot batches this Archive reports changes,
+against the rule set it starts from: the settings that differ from B1 or B2,
+and the prototype's own switches. Batches Z, LC, SW and M are reported in
+[Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md);
+the others on this page. The batches reported outside the Archive are listed in
+[Every pilot condition](every-simulation.md#every-pilot-condition).
+
+<!-- table catalogue/pilot_conditions_archive -->
+| batch | condition | on | what it changes | seeds | iterations |
+|---|---|---|---|---|---|
+| S | G1-lottery | B2 | allow_revolutions = off, contest = lottery | 1, 2 | 1,000 |
+| S | G2-genotype | B2 | allow_revolutions = off, pool = genotype | 1, 2 | 1,000 |
+| S | G3-kinsense | B2 | allow_revolutions = off, kin_sense = on | 1, 2 | 1,000 |
+| S | G4-familysense | B2 | allow_revolutions = off, kin_sense = on, tag_rate = 0.05 | 1, 2 | 1,000 |
+| S | G5-familypool | B2 | allow_revolutions = off, pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
+| S | S0-B2 | B2 | nothing: B2 itself | 1, 2 | 1,000 |
+| S | S1-norev | B2 | allow_revolutions = off | 1, 2 | 1,000 |
+| S | S2-gifts | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
+| S | S3-giftslapse | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, prune_needs = 0 | 1, 2 | 1,000 |
+| S | S4-lapse | B2 | prune_needs = 0 | 1, 2 | 1,000 |
+| S | S5-bytokens | B2 | redistribution = by_tokens | 1, 2 | 1,000 |
+| S | S6-B1 | B1 | nothing: B1 itself | 1, 2 | 1,000 |
+| S | S7-B1norev | B1 | allow_revolutions = off | 1, 2 | 1,000 |
+| Q | grow | B2 | brain_kind = grow, hidden_layers = 32 | 1, 2 | 2,000 |
+| Q | linknoage | B2 | max_age = 0, valence = 0, link_token = on | 1, 2 | 2,000 |
+| Q | mix | B2 | mix = on | 1, 2 | 2,000 |
+| Q | tookkin | B2 | took_kin = on | 1, 2 | 2,000 |
+| Q | unittoken | B2 | brain_kind = grow, hidden_layers = 32, unit_token = on | 1, 2 | 2,000 |
+| R | B1-children | B1 | redistribution = children | 1, 2 | 2,000 |
+| R | B1-newborns | B1 | redistribution = newborns | 1, 2 | 2,000 |
+| R | B1-parents | B1 | redistribution = parents | 1, 2 | 2,000 |
+| R | B1-poorest | B1 | redistribution = poorest | 1, 2 | 2,000 |
+| R | B2-buylife | B2 | buy_life = on | 1, 2 | 2,000 |
+| R | B2-children | B2 | redistribution = children | 1, 2 | 2,000 |
+| R | B2-newborns | B2 | redistribution = newborns | 1, 2 | 2,000 |
+| R | B2-parents | B2 | redistribution = parents | 1, 2 | 2,000 |
+| R | B2-poorest | B2 | redistribution = poorest | 1, 2 | 2,000 |
+| T | gifts-B1 | B1 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-B1norev | B1 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-anychild | B2 | allow_gifting = on, inactive_window = iteration, min_child = 1, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-bytokens | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = by_tokens | 1, 2 | 1,000 |
+| T | gifts-came | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, came_from = on | 1, 2 | 1,000 |
+| T | gifts-grow | B2 | allow_gifting = on, brain_kind = grow, hidden_layers = 32, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-handover | B2 | allow_gifting = on, allow_handover = on, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-helped | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, helped_by = on | 1, 2 | 1,000 |
+| T | gifts-keephalf | B2 | allow_gifting = on, inactive_window = iteration, keep_home = 0.5, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-keepone | B2 | allow_gifting = on, inactive_window = iteration, keep_home = 0.01, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-linktoken | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, valence = 0, link_token = on | 1, 2 | 1,000 |
+| T | gifts-lottery | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, contest = lottery | 1, 2 | 1,000 |
+| T | gifts-mix | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, mix = on | 1, 2 | 1,000 |
+| T | gifts-mut05 | B2 | allow_gifting = on, inactive_window = iteration, mutation_probability = 0.05, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-mut80 | B2 | allow_gifting = on, inactive_window = iteration, mutation_probability = 0.8, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-newborns | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = newborns | 1, 2 | 1,000 |
+| T | gifts-noage | B2 | allow_gifting = on, inactive_window = iteration, max_age = 0, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-nodice | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0 | 1, 2 | 1,000 |
+| T | gifts-norev | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction | 1, 2 | 1,000 |
+| T | gifts-parents | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = parents | 1, 2 | 1,000 |
+| T | gifts-pool | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, pool = genotype | 1, 2 | 1,000 |
+| T | gifts-poorest | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, redistribution = poorest | 1, 2 | 1,000 |
+| T | gifts-unittoken | B2 | allow_gifting = on, brain_kind = grow, hidden_layers = 32, inactive_window = iteration, prune_after = reproduction, unit_token = on | 1, 2 | 1,000 |
+| T | handover | B2 | allow_handover = on | 1, 2 | 1,000 |
+| U | U-ABCDEFGH | B2 | allow_gifting = on, allow_handover = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, random_input_amount = 0, redistribution = newborns, valence = 0, link_token = on, mix = on | 1 | 1,000 |
+| U | U-ABCG | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, mix = on | 1 | 1,000 |
+| U | U-ABDH | B2 | allow_gifting = on, allow_handover = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0 | 1 | 1,000 |
+| U | U-ABEF | B2 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, redistribution = newborns, valence = 0, link_token = on | 1 | 1,000 |
+| U | U-ACDF | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, random_input_amount = 0, valence = 0, link_token = on | 1 | 1,000 |
+| U | U-ACEH | B2 | allow_gifting = on, allow_handover = on, inactive_window = iteration, prune_after = reproduction, prune_needs = 0, redistribution = newborns | 1 | 1,000 |
+| U | U-ADEG | B2 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0, redistribution = newborns, mix = on | 1 | 1,000 |
+| U | U-AFGH | B2 | allow_gifting = on, allow_handover = on, inactive_window = iteration, prune_after = reproduction, valence = 0, link_token = on, mix = on | 1 | 1,000 |
+| U | U-BCDE | B2 | allow_revolutions = off, prune_needs = 0, random_input_amount = 0, redistribution = newborns | 1 | 1,000 |
+| U | U-BCFH | B2 | allow_handover = on, allow_revolutions = off, prune_needs = 0, valence = 0, link_token = on | 1 | 1,000 |
+| U | U-BDFG | B2 | allow_revolutions = off, random_input_amount = 0, valence = 0, link_token = on, mix = on | 1 | 1,000 |
+| U | U-BEGH | B2 | allow_handover = on, allow_revolutions = off, redistribution = newborns, mix = on | 1 | 1,000 |
+| U | U-CDGH | B2 | allow_handover = on, prune_needs = 0, random_input_amount = 0, mix = on | 1 | 1,000 |
+| U | U-CEFG | B2 | prune_needs = 0, redistribution = newborns, valence = 0, link_token = on, mix = on | 1 | 1,000 |
+| U | U-DEFH | B2 | allow_handover = on, random_input_amount = 0, redistribution = newborns, valence = 0, link_token = on | 1 | 1,000 |
+| U | U-none | B2 | nothing: B2 itself | 1 | 1,000 |
+| V | V-ABCDEFGH | B1 | allow_gifting = on, allow_handover = off, allow_revolutions = off, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, random_input_amount = 0, redistribution = newborns, link_token = on, mix = on | 1 | 1,000 |
+| V | V-ABCG | B1 | allow_gifting = on, allow_handover = off, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, mix = on | 1 | 1,000 |
+| V | V-ABDH | B1 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0, link_token = on | 1 | 1,000 |
+| V | V-ABEF | B1 | allow_gifting = on, allow_revolutions = off, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, redistribution = newborns | 1 | 1,000 |
+| V | V-ACDF | B1 | allow_gifting = on, allow_handover = off, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, random_input_amount = 0 | 1 | 1,000 |
+| V | V-ACEH | B1 | allow_gifting = on, allow_handover = off, inactive_window = iteration, prune_after = reproduction, redistribution = newborns, link_token = on | 1 | 1,000 |
+| V | V-ADEG | B1 | allow_gifting = on, inactive_window = iteration, prune_after = reproduction, random_input_amount = 0, redistribution = newborns, mix = on | 1 | 1,000 |
+| V | V-AFGH | B1 | allow_gifting = on, inactive_window = iteration, mutate_on_replication = on, prune_after = reproduction, link_token = on, mix = on | 1 | 1,000 |
+| V | V-BCDE | B1 | allow_handover = off, allow_revolutions = off, random_input_amount = 0, redistribution = newborns | 1 | 1,000 |
+| V | V-BCFH | B1 | allow_handover = off, allow_revolutions = off, mutate_on_replication = on, link_token = on | 1 | 1,000 |
+| V | V-BDFG | B1 | allow_revolutions = off, mutate_on_replication = on, random_input_amount = 0, mix = on | 1 | 1,000 |
+| V | V-BEGH | B1 | allow_revolutions = off, redistribution = newborns, link_token = on, mix = on | 1 | 1,000 |
+| V | V-CDGH | B1 | allow_handover = off, random_input_amount = 0, link_token = on, mix = on | 1 | 1,000 |
+| V | V-CEFG | B1 | allow_handover = off, mutate_on_replication = on, redistribution = newborns, mix = on | 1 | 1,000 |
+| V | V-DEFH | B1 | mutate_on_replication = on, random_input_amount = 0, redistribution = newborns, link_token = on | 1 | 1,000 |
+| V | V-none | B1 | nothing: B1 itself | 1 | 1,000 |
+| W | norev-anychild | B2 | allow_revolutions = off, min_child = 1 | 1, 2 | 1,000 |
+| W | norev-bytokens | B2 | allow_revolutions = off, redistribution = by_tokens | 1, 2 | 1,000 |
+| W | norev-came | B2 | allow_revolutions = off, came_from = on | 1, 2 | 1,000 |
+| W | norev-grow | B2 | allow_revolutions = off, brain_kind = grow, hidden_layers = 32 | 1, 2 | 1,000 |
+| W | norev-handover | B2 | allow_handover = on, allow_revolutions = off | 1, 2 | 1,000 |
+| W | norev-helped | B2 | allow_revolutions = off, helped_by = on | 1, 2 | 1,000 |
+| W | norev-keephalf | B2 | allow_revolutions = off, keep_home = 0.5 | 1, 2 | 1,000 |
+| W | norev-keepone | B2 | allow_revolutions = off, keep_home = 0.01 | 1, 2 | 1,000 |
+| W | norev-lapse | B2 | allow_revolutions = off, prune_needs = 0 | 1, 2 | 1,000 |
+| W | norev-linktoken | B2 | allow_revolutions = off, valence = 0, link_token = on | 1, 2 | 1,000 |
+| W | norev-mix | B2 | allow_revolutions = off, mix = on | 1, 2 | 1,000 |
+| W | norev-mut05 | B2 | allow_revolutions = off, mutation_probability = 0.05 | 1, 2 | 1,000 |
+| W | norev-mut80 | B2 | allow_revolutions = off, mutation_probability = 0.8 | 1, 2 | 1,000 |
+| W | norev-newborns | B2 | allow_revolutions = off, redistribution = newborns | 1, 2 | 1,000 |
+| W | norev-noage | B2 | allow_revolutions = off, max_age = 0 | 1, 2 | 1,000 |
+| W | norev-nodice | B2 | allow_revolutions = off, random_input_amount = 0 | 1, 2 | 1,000 |
+| W | norev-parents | B2 | allow_revolutions = off, redistribution = parents | 1, 2 | 1,000 |
+| W | norev-poorest | B2 | allow_revolutions = off, redistribution = poorest | 1, 2 | 1,000 |
+| W | norev-unittoken | B2 | allow_revolutions = off, brain_kind = grow, hidden_layers = 32, unit_token = on | 1, 2 | 1,000 |
+| W | rev-familypool | B2 | pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
+| W | rev-familysense | B2 | kin_sense = on, tag_rate = 0.05 | 1, 2 | 1,000 |
+| W | rev-kinsense | B2 | kin_sense = on | 1, 2 | 1,000 |
+| W | rev-lottery | B2 | contest = lottery | 1, 2 | 1,000 |
+| W | rev-pool | B2 | pool = genotype | 1, 2 | 1,000 |
+| X | handover-anychild | B2 | allow_handover = on, min_child = 1 | 1, 2 | 1,000 |
+| X | handover-bytokens | B2 | allow_handover = on, redistribution = by_tokens | 1, 2 | 1,000 |
+| X | handover-came | B2 | allow_handover = on, came_from = on | 1, 2 | 1,000 |
+| X | handover-familypool | B2 | allow_handover = on, pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
+| X | handover-familysense | B2 | allow_handover = on, kin_sense = on, tag_rate = 0.05 | 1, 2 | 1,000 |
+| X | handover-grow | B2 | allow_handover = on, brain_kind = grow, hidden_layers = 32 | 1, 2 | 1,000 |
+| X | handover-helped | B2 | allow_handover = on, helped_by = on | 1, 2 | 1,000 |
+| X | handover-keephalf | B2 | allow_handover = on, keep_home = 0.5 | 1, 2 | 1,000 |
+| X | handover-keepone | B2 | allow_handover = on, keep_home = 0.01 | 1, 2 | 1,000 |
+| X | handover-kinsense | B2 | allow_handover = on, kin_sense = on | 1, 2 | 1,000 |
+| X | handover-lapse | B2 | allow_handover = on, prune_needs = 0 | 1, 2 | 1,000 |
+| X | handover-linktoken | B2 | allow_handover = on, valence = 0, link_token = on | 1, 2 | 1,000 |
+| X | handover-lottery | B2 | allow_handover = on, contest = lottery | 1, 2 | 1,000 |
+| X | handover-mix | B2 | allow_handover = on, mix = on | 1, 2 | 1,000 |
+| X | handover-mut05 | B2 | allow_handover = on, mutation_probability = 0.05 | 1, 2 | 1,000 |
+| X | handover-mut80 | B2 | allow_handover = on, mutation_probability = 0.8 | 1, 2 | 1,000 |
+| X | handover-newborns | B2 | allow_handover = on, redistribution = newborns | 1, 2 | 1,000 |
+| X | handover-noage | B2 | allow_handover = on, max_age = 0 | 1, 2 | 1,000 |
+| X | handover-nodice | B2 | allow_handover = on, random_input_amount = 0 | 1, 2 | 1,000 |
+| X | handover-parents | B2 | allow_handover = on, redistribution = parents | 1, 2 | 1,000 |
+| X | handover-pool | B2 | allow_handover = on, pool = genotype | 1, 2 | 1,000 |
+| X | handover-poorest | B2 | allow_handover = on, redistribution = poorest | 1, 2 | 1,000 |
+| X | handover-unittoken | B2 | allow_handover = on, brain_kind = grow, hidden_layers = 32, unit_token = on | 1, 2 | 1,000 |
+| Y | mix-anychild | B2 | min_child = 1, mix = on | 1, 2 | 1,000 |
+| Y | mix-bytokens | B2 | redistribution = by_tokens, mix = on | 1, 2 | 1,000 |
+| Y | mix-came | B2 | came_from = on, mix = on | 1, 2 | 1,000 |
+| Y | mix-familypool | B2 | mix = on, pool = family, tag_rate = 0.05 | 1, 2 | 1,000 |
+| Y | mix-familysense | B2 | kin_sense = on, mix = on, tag_rate = 0.05 | 1, 2 | 1,000 |
+| Y | mix-grow | B2 | brain_kind = grow, hidden_layers = 32, mix = on | 1, 2 | 1,000 |
+| Y | mix-handover | B2 | allow_handover = on, mix = on | 1, 2 | 1,000 |
+| Y | mix-helped | B2 | helped_by = on, mix = on | 1, 2 | 1,000 |
+| Y | mix-keephalf | B2 | keep_home = 0.5, mix = on | 1, 2 | 1,000 |
+| Y | mix-keepone | B2 | keep_home = 0.01, mix = on | 1, 2 | 1,000 |
+| Y | mix-kinsense | B2 | kin_sense = on, mix = on | 1, 2 | 1,000 |
+| Y | mix-lapse | B2 | prune_needs = 0, mix = on | 1, 2 | 1,000 |
+| Y | mix-linktoken | B2 | valence = 0, link_token = on, mix = on | 1, 2 | 1,000 |
+| Y | mix-lottery | B2 | contest = lottery, mix = on | 1, 2 | 1,000 |
+| Y | mix-mut05 | B2 | mutation_probability = 0.05, mix = on | 1, 2 | 1,000 |
+| Y | mix-mut80 | B2 | mutation_probability = 0.8, mix = on | 1, 2 | 1,000 |
+| Y | mix-newborns | B2 | redistribution = newborns, mix = on | 1, 2 | 1,000 |
+| Y | mix-noage | B2 | max_age = 0, mix = on | 1, 2 | 1,000 |
+| Y | mix-nodice | B2 | random_input_amount = 0, mix = on | 1, 2 | 1,000 |
+| Y | mix-parents | B2 | redistribution = parents, mix = on | 1, 2 | 1,000 |
+| Y | mix-pool | B2 | mix = on, pool = genotype | 1, 2 | 1,000 |
+| Y | mix-poorest | B2 | redistribution = poorest, mix = on | 1, 2 | 1,000 |
+| Y | mix-unittoken | B2 | brain_kind = grow, hidden_layers = 32, mix = on, unit_token = on | 1, 2 | 1,000 |
+| K | jump-looking-forced | B2 | link_consent = forced, link_search = jump, link_steering = looking | 1, 2 | 1,000 |
+| K | jump-looking-mutual | B2 | link_search = jump, link_steering = looking | 1, 2 | 1,000 |
+| K | jump-random-forced | B2 | link_consent = forced, link_search = jump | 1, 2 | 1,000 |
+| K | jump-random-mutual | B2 | link_search = jump | 1, 2 | 1,000 |
+| K | reach-looking-forced | B2 | link_consent = forced, link_search = reach, link_steering = looking | 1, 2 | 1,000 |
+| K | reach-looking-mutual | B2 | link_search = reach, link_steering = looking | 1, 2 | 1,000 |
+| K | reach-random-forced | B2 | link_consent = forced, link_search = reach | 1, 2 | 1,000 |
+| K | reach-random-mutual | B2 | link_search = reach | 1, 2 | 1,000 |
+| K | walk-looking-forced | B2 | link_consent = forced, link_search = walk, link_steering = looking | 1, 2 | 1,000 |
+| K | walk-looking-mutual | B2 | link_search = walk, link_steering = looking | 1, 2 | 1,000 |
+| K | walk-random-forced | B2 | link_consent = forced, link_search = walk | 1, 2 | 1,000 |
+| K | walk-random-mutual | B2 | link_search = walk | 1, 2 | 1,000 |
+| Z | every world its own | B2 | each world its settings drawn at random from the values the notebook has used (research/oee/search.md) | 1001 to 2032 | 1,000 |
+| LC | K-reach-random-forced | B2 | link_consent = forced, link_search = reach | 1 | 10,000 |
+| LC | M-mix-children | B2 | mix_at_birth = on, redistribution = children | 2 | 10,000 |
+| LC | Q-mix | B2 | mix = on | 1, 2 | 10,000 |
+| LC | S-G4-familysense | B2 | allow_revolutions = off, kin_sense = on, tag_rate = 0.05 | 2 | 10,000 |
+| LC | U-U-BDFG | B2 | allow_revolutions = off, random_input_amount = 0, valence = 0, link_token = on, mix = on | 1 | 10,000 |
+| LC | W-norev-linktoken | B2 | allow_revolutions = off, valence = 0, link_token = on | 1 | 10,000 |
+| LC | W-norev-mix | B2 | allow_revolutions = off, mix = on | 1, 2 | 10,000 |
+| LC | Y-mix-came | B2 | came_from = on, mix = on | 1, 2 | 1,000 |
+| LC | Y-mix-familysense | B2 | kin_sense = on, mix = on, tag_rate = 0.05 | 1 | 1,000 |
+| LC | Y-mix-grow | B2 | brain_kind = grow, hidden_layers = 32, mix = on | 1 | 10,000 |
+| LC | Y-mix-helped | B2 | helped_by = on, mix = on | 1 | 10,000 |
+| LC | Y-mix-keepone | B2 | keep_home = 0.01, mix = on | 1, 2 | 10,000 |
+| LC | Y-mix-kinsense | B2 | kin_sense = on, mix = on | 2 | 10,000 |
+| LC | Y-mix-linktoken | B2 | valence = 0, link_token = on, mix = on | 1 | 10,000 |
+| LC | Y-mix-lottery | B2 | contest = lottery, mix = on | 2 | 1,000 |
+| LC | Y-mix-mut80 | B2 | mutation_probability = 0.8, mix = on | 1, 2 | 10,000 |
+| LC | Y-mix-nodice | B2 | random_input_amount = 0, mix = on | 2 | 10,000 |
+| LC | Y-mix-pool | B2 | mix = on, pool = genotype | 1 | 10,000 |
+| LC | Y-mix-poorest | B2 | redistribution = poorest, mix = on | 1 | 10,000 |
+| LC | Y-mix-unittoken | B2 | brain_kind = grow, hidden_layers = 32, mix = on, unit_token = on | 2 | 1,000 |
+| SW | mixoff | B2 | nothing: B2 itself | 2, 4, 5, 6, 10 | 7,000 |
+| SW | mixon | B2 | mix_at_birth = on | 1, 2, 3, 4, 5 | 4,000 |
+| M | mix-buylife | B2 | buy_life = on, mix_at_birth = on | 1, 2, 3, 4 | 5,000 |
+| M | mix-children | B2 | mix_at_birth = on, redistribution = children | 1, 2 | 5,000 |
+| M | mix-keephalf | B2 | keep_home = 0.5, mix_at_birth = on | 1, 2 | 5,000 |
+| M | mix-mateparents | B2 | mates = parents, mix = on | 1, 2, 3, 4 | 5,000 |
+| M | mix-matepays | B2 | mate_pays = on, mix = on | 1, 2 | 5,000 |
+| M | mix-mut05 | B2 | mix_at_birth = on, mutation_probability = 0.05 | 1, 2 | 5,000 |
+| M | mix-newborns | B2 | mix_at_birth = on, redistribution = newborns | 1, 2 | 5,000 |
+| M | mix-parents | B2 | mix_at_birth = on, redistribution = parents | 1, 2 | 5,000 |
+| M | mix-poorest | B2 | mix_at_birth = on, redistribution = poorest | 1, 2 | 5,000 |
+| M | mix-reach | B2 | link_consent = forced, link_search = reach, mix_at_birth = on | 1, 2 | 5,000 |
+| M | mix-walk | B2 | link_search = walk, mix_at_birth = on | 1, 2 | 5,000 |
+<!-- /table -->
+
 ## Where to go next
 
 - [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich): the author's picture, and the worlds
@@ -2415,7 +2620,7 @@ number appears during one.
 - [Who dies, and why](building-b2-and-the-search-for-a-healthy-rich-world.md#who-dies-and-why): the
   deaths that make the estate in B2.
 - [Room and riches for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world):
-  the estates played again, in the search for a healthy world.
+  the estates played again, in the search for a [healthy world](measuring-health.md#the-definition-in-force-health-of-9-november-2026 "A world scored high by health as the author defined it on 9 November 2026: six criteria from fifteen measures, each against round 3's living worlds. Since 11 November health only filters.").
 - [Every setting](settings.md#link_search): the three settings of the search,
   exactly.
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
@@ -2516,10 +2721,10 @@ number appears during one.
 <!-- turns -->
 ---
 
-← [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots)
+← [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [Building B2, the healthy and rich search, and the pilots](../README.md#building-b2-the-healthy-and-rich-search-and-the-pilots)
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
-> [!info]- Pages that link here (20)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
+> [!info]- Pages that link here (18)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [What keeps wealth spread?](what-keeps-wealth-spread.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Other contests: a lottery, and alliances](another-game.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md)
 <!-- /turns -->

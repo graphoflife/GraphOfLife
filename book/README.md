@@ -10,8 +10,8 @@ writes the test down.
 - **What it asks now.** In every world played so far, evolution levels off.
   Why? The candidates are drift, valleys that need a crowd to cross, a fixed
   space of strategies, and a closed, zero-sum [game](pages/one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone.").
-- **How worlds are chosen.** By how they evolve first, against null models.
-  Health only rules out worlds that are dead, a [star](pages/measuring-networks.md#stars-and-hubs "An agent joined to far more agents than most; a star is a world held together by a single hub."), uniform or frozen.
+- **How worlds are chosen.** By how they evolve, against null models; health
+  only filters ([the health filter](pages/measuring-health.md#from-11-november-2026-health-as-a-filter)).
 - **When it changes course.** If the experiment on why evolution levels off
   finds no arm that delays or lifts the plateau, the next step changes how a
   world is built, with an open economy or [brains](pages/the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") that can grow, and not its
@@ -35,14 +35,10 @@ pages on [how the simulation works](#how-the-simulation-works).
 - [The lab, the engine and pilots](pages/runs-and-records.md#the-lab-the-engine-and-pilots): how an experiment is run
   and made again.
 
-The pages fall into eight parts, each with its colour: where to start; the
-research of the moment, round 3 of the screen of random worlds and its
-candidates for open-ended evolution; the rules; what the worlds do; space and
-physics; the search for open-ended evolution; methods and look-up, where every
-rule and measure is explained in detail; and the Archive. The Archive keeps
-frozen pages, what was done and found before 11 November 2026, so that every
-experiment can still be read and made again; it starts shut. In the Research
-Notebook tab each part opens and shuts, every page wears its part's colour, and
+The pages fall into eight parts, each with its colour
+([Parts, and what each page is](pages/how-this-notebook-is-written.md#parts-and-what-each-page-is)).
+The Archive keeps what was done and found before 11 November 2026, and starts
+shut. In the Research Notebook tab each part opens and shuts, every page wears its part's colour, and
 a mark says what kind of page it is: a study, an experiment, a plan not played
 yet, a reference page or a guide. The contents can also be sorted by date, by
 title or by kind, filtered, and searched. In **Obsidian**, open the folder
@@ -95,7 +91,7 @@ view shows how the pages hang together.
 
 ### What the worlds do
 
-🟩 What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests. What B1's worlds did is in the Archive.
+🟩 What the worlds do, where it still bears on the question: what the brains are and whether they matter, what keeps wealth spread, and other contests.
 
 #### Wealth: who holds the tokens
 
@@ -169,7 +165,7 @@ view shows how the pages hang together.
 
 ### Archive
 
-🗄️ Frozen pages, kept so that every experiment can still be read and made again: what was done and found before 11 November 2026. They are not brought up to date as the research moves on.
+🗄️ Frozen pages: what was done and found before 11 November 2026. B1 as it was described in October, how B2 was built, the search for a healthy, rich world with its pilots, the strategies planted in late worlds, rounds 1 and 2 of the screen, and side studies. They are kept so that every experiment can still be read and made again, and are not brought up to date as the research moves on.
 
 #### B1, as described in October 2026
 
@@ -182,13 +178,16 @@ view shows how the pages hang together.
 #### Building B2, the healthy and rich search, and the pilots
 
 - [Building B2, and the search for a healthy, rich world](pages/building-b2-and-the-search-for-a-healthy-rich-world.md)
+- [Rounds 1 and 2 of the screen, and the criteria they were judged by](pages/rounds-1-and-2-of-the-screen.md)
 - [What the switches did in pilots (indicative)](pages/what-the-switches-did-in-pilots.md)
 
 #### Side studies
 
+- [Crews, breeders and B1 raiders: Experiments 33 to 35](pages/crews-breeders-and-b1-raiders.md)
 - [Cooperation, help and gliders (side study)](pages/cooperation-help-and-gliders.md)
 - [Space at scale (side study)](pages/space-at-scale.md)
 - [Measures, atlases and assembly (side studies)](pages/measures-atlases-and-assembly.md)
+- [Measures of the archived studies](pages/measures-of-the-archived-studies.md)
 <!-- /contents -->
 
 ## How our view changed

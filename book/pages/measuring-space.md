@@ -8,10 +8,10 @@
 
 How the notebook reads a network as a space: three ways to measure its dimension, and the random twin, the same [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") wired at random, that every reading is set against.
 
-It gathers what were 2 pages of their own, one section each:
+Its sections:
 
-- [Three ways to measure a network's dimension](#three-ways-to-measure-a-networks-dimension): A network has no coordinates, only links, yet it can be shaped like a line, a sheet or a solid.
-- [The random twin: is a world a space?](#the-random-twin-is-a-world-a-space): A world's network wired again at random, with as many links per [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."): what a world would be if it were no space, and how wide a world is beside it.
+- [Three ways to measure a network's dimension](#three-ways-to-measure-a-networks-dimension)
+- [The random twin: is a world a space?](#the-random-twin-is-a-world-a-space)
 
 ## Three ways to measure a network's dimension
 
@@ -25,7 +25,7 @@ lays all three on the worlds.
 
 ### Three rulers
 
-Stand on an agent of a network and look around. There is no map
+Stand on an [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") of a network and look around. There is no map
 and no ruler, only links. The distance between two agents is the number of
 links on the shortest path between them ([Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)). That
 is enough to tell a line from a sheet or a solid, in three ways. On a grid of
@@ -134,22 +134,13 @@ that holds steady over many scales
 
 #### Where the ball dimension is used
 
-- **The [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") worlds.** In B1's worlds of 100,000 tokens the dimension is
-  3.4 in the median world (3.0 at 10,000 tokens).
-  [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world)
-  reads it beside a picture of the ball growth itself.
-- **The health bar** asks for a dimension of 2.3 to 4
-  ([The health bar](measuring-health.md#the-health-bar)). It cannot tell a space from a small
-  world. [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s worlds of 5,000 tokens (Experiment 14) read 3.45 to 4.19, yet
-  they are hardly wider than their random twins
-  ([Folded](measuring-space.md#folded)).
-- **The two rulers** of
-  [Is a world a space?](how-many-dimensions-does-a-world-have.md#two-rulers)
-  read the same growth radius by radius, and look for a plateau. They use the
-  typical ball, the geometric mean over 40 to 100 agents. Between radii 3 and
-  10 they read B1's worlds of 100,000 tokens as 2.8. The viewer reads 3.4 from
-  the mean ball over radii 1 to 5, which the few agents next to a hub pull
-  up.
+The viewer reads B1's worlds of 100,000 tokens as 3.4, from the mean ball
+over radii 1 to 5. The typical ball between radii 3 and 10 reads them as
+2.8 ([Two rulers](how-many-dimensions-does-a-world-have.md#two-rulers)).
+
+<!-- used dimension-and-curvature-from-ball-growth -->
+No page links here yet.
+<!-- /used -->
 
 ### The spectral dimension
 
@@ -228,15 +219,16 @@ same. On irregular spaces they differ, and how they differ is informative:
 
 #### Where the spectral dimension is used
 
-[Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#how-many-dimensions-does-a-world-have)
-measures both dimensions on the worlds, after calibrating them on spaces
-whose dimension is known, of about 2,000 points each. By walks, a ring reads
-1 there, a square grid 2.1, a cubic grid 3.2 and a tree drawn at random 1.2.
-B1's worlds of 100,000 tokens read 1.9 by walks, flat from 4 to 160 steps,
-against 2.8 by balls. They have room, but dead ends and narrow passages slow
-a walker. In the game, tokens move almost as a random walk would
-([Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
-So a difference in tokens spreads slowly through these worlds too.
+[Is a world a space?](how-many-dimensions-does-a-world-have.md#how-many-dimensions-does-a-world-have)
+calibrates it on rings and grids, and reads B1's worlds as 1.9 by walks
+against 2.8 by balls: they have room, but dead ends slow a walker.
+
+<!-- used the-spectral-dimension -->
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#two-rulers)
+
+> [!info]- And in the Archive (1)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#how-many-dimensions-the-core-has)
+<!-- /used -->
 
 ### Box dimension
 
@@ -304,13 +296,17 @@ the dimension to mean something, but not sufficient.
 #### Where the box dimension is used
 
 The viewer records `boxDimension` and `boxDimensionR2` on every 25th
-iteration. In the median B1 world of 100,000 tokens, the box dimension is
-1.88, with R² = 0.96. That is far below the 3.4 that ball growth gives the
-same worlds. Over the thirty worlds it runs from 1.66 to 2.58, and in worlds
-of 10,000 tokens it is 1.85. The two dimensions look at different scales. Box
-covering runs to size 33, and at large sizes it counts the long, thin
-branches
+iteration. In the median B1 world it is about 1.9, far below the 3.4 of
+ball growth, because large boxes count the long, thin branches
 ([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
+
+<!-- used box-dimension -->
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds)
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (1)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)
+<!-- /used -->
 
 ## The random twin: is a world a space?
 
@@ -328,7 +324,7 @@ Give every agent as many link ends as it has links, put all the ends in one
 pile, and join them in pairs drawn at random: a *configuration model*. A pair
 that would join an agent to itself is dropped, and so is a second link
 between the same two agents (`book_graph.degree_preserving`, seed 23). Apart
-from those, every agent keeps its number of links, its [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling),
+from those, every agent keeps its number of links, its [degree](measuring-networks.md#an-agents-connections-degree-and-clustering),
 and nothing else of the world is kept. So whatever a world has and its twin
 lacks was built by the world's rules.
 
@@ -370,7 +366,7 @@ median of each kind of world:
 | worlds | typical distance | the twin's | width |
 |---|---|---|---|
 | B1 at 10,000 tokens (Experiment 2) | 10.5 steps | 4.5 steps | 2.3 |
-| B2 at 10,000 tokens, iteration 2,000 (Experiment 16) | 5.0 steps | 4.2 steps | 1.18 |
+| [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.") at 10,000 tokens, iteration 2,000 (Experiment 16) | 5.0 steps | 4.2 steps | 1.18 |
 | B2 with the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead to the newborns or the parents (pilots, batch R) | 11.2 steps | 4.7 steps | 2.4 |
 
 B1's width grows with its size, as a space's must: 2.3 at 1,500 agents, 3.7
@@ -390,45 +386,32 @@ steps out, a typical agent's ball holds a quarter of the world. A small world
 has no dimension to find, which is why the health bar's dimension rose with
 the size of B2's worlds.
 
-The word says how it happens. Every B2 world starts as a space, 1.68 times as
-wide as its twin at iteration 100, and folds to 1.24 by iteration 300, once
-its first generation dies of age. Each death is mended with a ring of links
-among the dead agent's neighbours
-([`mend_on_death`](settings.md#mend_on_death)), which joins agents that were
-two steps apart. Worlds without old age, without mending, or whose unused
-links lapse keep their room.
-
-Read at iteration 1,000, 498 worlds fell into two groups: 371 folded, with
-median widths of 1.26 and 1.27, and 127 spaces, with medians of 2.09 to 3.63
-by the rule that made them. The line of 1.5 lies between the two.
+The word says how it happens. Every B2 world starts as a space and folds once
+its first generation dies of age. Each death is mended by joining the separate
+groups the dead agent's neighbours fall into
+([`mend_on_death`](settings.md#mend_on_death)), which links agents that were
+two steps apart. [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world)
+tells the story, with its numbers.
 
 ### Where it is used
 
-- [How many dimensions does a world have?](how-many-dimensions-does-a-world-have.md)
-  and [The core of a world](b1-the-network-size-and-scaling.md#the-core-of-a-world): B1's worlds and their
-  cores have a dimension; their twins have none.
-- [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world): a B1 world with a
-  mean [path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap) of 27.9 steps, against 6.0 when wired at
-  random.
-- [What folds a world](how-many-dimensions-does-a-world-have.md#what-folds-a-world): the width of every kind of
-  world, and what folds it.
-- [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich), [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company)
-  and [The candidates, played on](building-b2-and-the-search-for-a-healthy-rich-world.md#the-candidates-played-on-and-played-again): which worlds
-  are spaces.
-- [Room for the steadiest world](building-b2-and-the-search-for-a-healthy-rich-world.md#room-and-riches-for-the-steadiest-world),
-  [Births as rich as the neighbours](building-b2-and-the-search-for-a-healthy-rich-world.md#births-as-rich-as-the-neighbours) and
-  [The search's best world, in new seeds](building-b2-and-the-search-for-a-healthy-rich-world.md#the-searchs-best-world-in-new-seeds):
-  theses that ask for a width of at least 1.5.
-- [What makes a world interesting](measuring-health.md#what-makes-a-world-interesting) and
-  [A screen of random worlds](a-screen-of-random-worlds.md): the criterion
-  *almost three-dimensional*.
+<!-- used the-random-twin-is-a-world-a-space -->
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#three-ways-to-put-the-criteria-together)
+- [Measuring lives: births, deaths, ages and estates](measuring-lives.md#an-example-paying-for-births)
+- [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md#where-degree-is-used)
+- [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#the-rulers-on-the-worlds)
+- [Measuring health: criteria, the health bar and diversity](measuring-health.md#read-it-with-care)
+
+> [!info]- And in the Archive (7)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#how-many-dimensions-the-core-has) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#two-halves) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#the-six-criteria) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#nearer-the-authors-picture) · [Space at scale (side study)](space-at-scale.md#the-rulers-at-every-size) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#nulls-and-controls) · [Measures of the archived studies](measures-of-the-archived-studies.md#where-it-is-used)
+<!-- /used -->
 
 ## Where to go next
 
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md):
   the rulers on the worlds, and what folds a world into a small world.
 - [The geometry of a world](b1-the-network-size-and-scaling.md#the-geometry-of-a-world):
-  the viewer's measures on the baseline worlds.
+  the viewer's measures on the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") worlds.
 - [Physical inspiration](physical-inspiration.md#space-made-of-relations): why
   the notebook asks how many dimensions a world has.
 - [Path length](measuring-networks.md#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap): distances in a network.
@@ -479,6 +462,6 @@ by the rule that made them. The line of 1.5 lies between the two.
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (12)
-> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (11)
+> [Glossary](glossary.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

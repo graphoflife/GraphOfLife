@@ -305,7 +305,7 @@ def _length(meta: Dict[str, Any]) -> int:
     return max(ends)
 
 
-def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
+def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
     base = {b: _json(os.path.join(BOOK, "experiments", f"{b}.json"))["settings"] for b in ("B1", "B2")}
     busy = _running()
     batches: Dict[str, List[Tuple[str, str, Dict[str, Any]]]] = {}
@@ -346,8 +346,8 @@ def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str
         planned = len(names)
         if batch in DRAWN:
             seeds = sorted(int(m["cfg"].get("seed") or 0) for _, _, m in worlds)
-            details.append([batch, "every world its own", "B2", DRAWN[batch],
-                            f"{seeds[0]} to {seeds[-1]}" if seeds else "", ", ".join(f"{i:,}" for i in iters)])
+            details.append((batch, [batch, "every world its own", "B2", DRAWN[batch],
+                                    f"{seeds[0]} to {seeds[-1]}" if seeds else "", ", ".join(f"{i:,}" for i in iters)]))
             conditions = {}
         for cond, members in sorted(conditions.items()):
             meta = members[0][2]
@@ -358,17 +358,22 @@ def pilot_rows(chapters, done) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str
                        if k not in BOOKKEEPING and k in base[on] and v != base[on][k]]
             changed += [f"{k} = {_show(v)}" for k, v in sorted(proto.items())]
             seeds = sorted(int(m["cfg"].get("seed") or 0) for _, _, m in members)
-            details.append([batch, cond, on + ("" if engine else " (the prototype's own code)"),
-                            ", ".join(changed) or f"nothing: {on} itself",
-                            ", ".join(str(s) for s in seeds), f"{_length(meta):,}"])
+            details.append((batch, [batch, cond, on + ("" if engine else " (the prototype's own code)"),
+                                    ", ".join(changed) or f"nothing: {on} itself",
+                                    ", ".join(str(s) for s in seeds), f"{_length(meta):,}"]))
         rows.append([batch, BATCHES[batch][0], str(len({re.sub(r"-s\d+$", "", n) for n in names})), str(planned),
                      ", ".join(f"{t:,}" for t in tokens), ", ".join(f"{i:,}" for i in iters), status,
                      _cell_chapters(BATCHES[batch][1], chapters)])
         ids = [f"{batch}/{name}" for name, _, _ in worlds]
         measures.append([batch] + [str(sum(i in done[m] for i in ids)) for m in MEASURES])
+    # A batch whose page is in the Archive has its conditions listed there (What the switches did in pilots).
+    import book_fill
+    shut = {b for b in BATCHES if BATCHES[b][1][0] in chapters and book_fill.archived(chapters[BATCHES[b][1][0]]["file"])}
+    head = ["batch", "condition", "on", "what it changes", "seeds", "iterations"]
     return ({"head": ["batch", "what it asks", "conditions", "worlds", "tokens", "iterations", "status", "page"],
              "rows": rows},
-            {"head": ["batch", "condition", "on", "what it changes", "seeds", "iterations"], "rows": details},
+            {"head": head, "rows": [row for b, row in details if b not in shut]},
+            {"head": head, "rows": [row for b, row in details if b in shut]},
             {"rows": measures})
 
 
@@ -393,10 +398,11 @@ def catalogue(ch: F.Chapter) -> None:
     done = measured()
     ch.number("table:baselines", baselines())
     lab, lab_measures = lab_rows(chapters, done)
-    pilots, pilot_details, pilot_measures = pilot_rows(chapters, done)
+    pilots, pilot_details, archived_details, pilot_measures = pilot_rows(chapters, done)
     ch.number("table:lab", lab)
     ch.number("table:pilots", pilots)
     ch.number("table:pilot_conditions", pilot_details)
+    ch.number("table:pilot_conditions_archive", archived_details)
     ch.number("table:measures", {"head": ["", *MEASURES],
                                  "rows": lab_measures["rows"] + pilot_measures["rows"]})
     ch.number("totals", {"lab experiments": len(lab["rows"]),

@@ -12,7 +12,7 @@ B2, the world that cannot break, has seven numbers in its rules that were
 chosen by hand, and the notebook asks for rules without them. Taken away all
 at once, the numbers show what each was for: without alliances the worlds
 died out. With alliances, each lived as one peaceful alliance, but on a
-network that fails the [health bar](measuring-health.md#the-health-bar "The seven marks a world's network must meet to count as healthy: one piece, mostly on loops, no fatal cut, no hub, three to twelve links per agent, a dimension of 2.3 to 4."). The clearest replacement so far is a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
+network that fails the health bar. The clearest replacement so far is a [token](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.")
 in every link: then no cap on links is needed. Nothing yet replaces the age
 limit.
 
@@ -152,9 +152,7 @@ left differed from world to world:
 **How old the agents are.** One line per world while it had more than 20 agents, each a mean over 10 iterations. In B2 every agent dies at 100, so the mean age settles near 50.
 
 > [!example]- How to make this figure
-> **Runs.** Pilot worlds of `research/oee/pilots/run.py`, kept in `GraphOfLifeRuns/.pilots/N`: `B3a-s1`, `-s2`, `B3b-s1`, `-s2` and `B3c-s1`, `-s2`, at 10,000 tokens for 1,000 iterations. Settings: one hidden layer of 16, messages of 8 numbers, no pre-pass, no handover, revolutions off, and every number of B2 at its original value; prototype switches `mor=all repair=true memory=true`, with `allies=true` (B3a), `allies=true birth_allies=true` (B3b), or neither (B3c).
->
-> **Data.** From each world's `series.jsonl`.
+> **Runs and data.** As for the figure *Worlds without numbers* above.
 >
 > 1. Take the mean age of the agents after each game (`meanAge`) while the world has more than 20 agents, and average over stretches of 10 iterations.
 >
@@ -162,7 +160,7 @@ left differed from world to world:
 <!-- /figure -->
 
 None of the six passes the health bar
-([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)).
+([The health bar](measuring-health.md#the-health-bar)).
 So none has the network the notebook asks of a world in which evolution is to
 work for long. The three that lived ended the fighting. With it went nearly
 all selection, except that between who has children and who does not.

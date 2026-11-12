@@ -10,29 +10,29 @@
 
 How the notebook measures the shape of a world's network: how many connections agents have and how they cluster, the hubs and stars, how far apart agents are, and where a network can be cut.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [An agent's connections: degree, clustering, assortativity, attachment and scaling](#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling): An agent's degree is the number of its connections; in a settled [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000 tokens, the mean is about 3.5.
-- [Stars and hubs](#stars-and-hubs): Agents joined to far more agents than most, and worlds held together by a single one of them.
-- [Distances in a network: path length, radius and diameter, the spectral gap](#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap): The distance between two agents is the fewest connections on a path from one to the other.
-- [Bridges, cut risk, loops and the core: how a network can be cut](#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut): A bridge is a connection on no loop: cut it, and the network falls into two pieces.
+- [An agent's connections: degree and clustering](#an-agents-connections-degree-and-clustering)
+- [Stars and hubs](#stars-and-hubs)
+- [Distances in a network: path length, radius and diameter, the spectral gap](#distances-in-a-network-path-length-radius-and-diameter-the-spectral-gap)
+- [Bridges, cut risk, loops and the core: how a network can be cut](#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)
 
-## An agent's connections: degree, clustering, assortativity, attachment and scaling
+## An agent's connections: degree and clustering
 
 An agent's **degree** is the number of its connections; in a settled
-B1 world of 100,000 tokens, the mean is about 3.5. Most agents have one
-or two, and a few **hubs** hundreds or thousands. **Clustering** and
-**assortativity** say how the connections are arranged: whether an agent's
-neighbours are joined to each other, and whether hubs are joined to hubs.
-The **attachment kernel** says who gains new connections, and **scaling
-relations** how an agent's tokens and triangles grow with its connections.
+[B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.") world of 100,000 tokens, the mean is about 3.5. Most agents have one
+or two, and a few **hubs** hundreds or thousands. **Clustering** says how
+the connections are arranged: whether an agent's neighbours are joined to each
+other. Whether hubs are joined to hubs, who gains new connections and how an
+agent's tokens and triangles grow with its connections were measured only by
+studies now in the Archive. Their sections, assortativity, preferential
+attachment and scaling relations, are in
+[Measures of the archived studies](measures-of-the-archived-studies.md#networks).
 
 ### Degree
 
-The **degree** of an agent is the number of connections it has, which is the
-number of its neighbours. It is the simplest thing to know about a place in a
-network, and much depends on it. An agent stakes only on its own node and its
-neighbours' nodes, and only its neighbours can stake on its node.
+An agent stakes only on its own node and its neighbours' nodes, and only its
+neighbours can stake on its node.
 
 #### Degree, mean degree and density
 
@@ -58,7 +58,7 @@ recorded as `meanDegree`.
 triangle, and *d* hangs on *c*. Their degrees are 2, 2, 3 and 1. These add up
 to 8, twice the 4 connections, so the mean degree is 8 / 4 = 2.
 
-A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from and changes one thing of: B1 or B2.") world has about 1.7 connections for every agent at
+A settled [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") world has about 1.7 connections for every agent at
 100,000 tokens (1.6 at 10,000). Each connection has two ends, so the mean
 degree is about 3.5 (3.3). This is what the notebook means by *links per
 agent*.
@@ -132,18 +132,17 @@ At 10,000 tokens, these were 37%, 23%, 4% and 1,399.
 
 #### Where degree is used
 
-- **The [health bar](measuring-health.md#the-health-bar)** asks for 3 to 12 links per agent: a
-  mean degree in that range.
-- **The [even split](measuring-tokens.md#the-even-split).** An agent with *d* connections has
-  *d* + 1 candidates: its own node and its neighbours'. Under the even split,
-  it stakes about 1/(*d* + 1) of its tokens on each.
-- **The [random twin](measuring-space.md#the-random-twin-is-a-world-a-space)** keeps every agent's degree, and wires
-  the connections at random. What a world has and its twin lacks, the world's
-  rules built.
-- **[Brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.")** read the logarithm of one plus the agent's own degree, and of
-  each candidate's ([What a brain sees](rules-in-detail.md#what-a-brain-sees)).
-- **How evenly connections are spread**: the entropy and evenness of the
-  degrees ([Entropy and evenness](measuring-tokens.md#entropy-and-evenness)).
+Degree enters the [health bar](measuring-health.md#the-health-bar), the [even split](measuring-tokens.md#the-even-split), the
+[random twin](measuring-space.md#the-random-twin-is-a-world-a-space) and
+[what a brain sees](rules-in-detail.md#what-a-brain-sees).
+
+<!-- used degree -->
+- [One iteration, step by step](one-iteration.md#phase-1-reproduction)
+- [Statistics: the tools of the notebook](statistics.md#distributions-on-loglog-axes)
+
+> [!info]- And in the Archive (4)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#what-a-power-law-is-and-why-it-is-hard-to-see) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#what-it-would-take) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#children-as-missiles) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-idea-of-assortativity)
+<!-- /used -->
 
 ### Clustering
 
@@ -186,7 +185,7 @@ An agent's own **clustering coefficient** asks the same of its neighbours
 alone. For an agent with *k* ≥ 2 neighbours, it is its triangles divided by
 its *k*(*k* − 1)/2 pairs of neighbours. The transitivity is the mean of these
 coefficients, each weighted by the agent's pairs, so the hubs weigh most.
-[Scaling relations](#scaling-relations-between-agents-properties) follow how
+[Scaling relations](measures-of-the-archived-studies.md#scaling-relations-between-agents-properties) follow how
 the coefficient falls with *k*.
 
 #### Examples of clustering
@@ -233,265 +232,30 @@ it ([How far the trees hang](b1-the-network-size-and-scaling.md#how-far-the-tree
 
 #### Where clustering is used
 
-- **Experiment 5** predicted that clustering would stay below 0.1, in a world
-  of trees. It did: from iteration 100 on, a median of 0.077 at 10,000
-  tokens, and 0.043 at 100,000.
-  The thesis failed on the size of the core instead
-  ([Was the thesis right?](b1-the-network-size-and-scaling.md#was-the-thesis-right-the-shape-of-the-network)).
-- **The starting ring** is a small world: clustered like a neighbourhood, yet
-  short ([Why a small world?](rules-in-detail.md#why-a-small-world)).
-- **An agent's own coefficient** falls about as one over its connections, the
-  mark of a hierarchy of stars
-  ([How closely knit a neighbourhood is](b1-the-network-size-and-scaling.md#how-closely-knit-a-neighbourhood-is)).
+In B1's worlds clustering stays below 0.1, as Experiment 5 predicted
+([Was the thesis right?](b1-the-network-size-and-scaling.md#was-the-thesis-right-the-shape-of-the-network)).
 
-### Assortativity
+<!-- used clustering -->
+- [The ideas this builds on](the-ideas-this-builds-on.md#networks)
+- [The rules in detail](rules-in-detail.md#why-a-small-world)
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+- [How worlds are measured](how-worlds-are-measured.md#step-1--a-row-of-statistics-per-phase)
 
-Do well-connected agents connect to other well-connected agents, or to poorly
-connected ones? **Assortativity** answers with one number between −1 and 1
-(Newman 2002).
-
-#### The idea of assortativity
-
-Look at every connection and write down the [degrees](#degree) of its two
-ends: a pair (*j*, *k*). Then ask whether *j* and *k* go together: the
-[correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes) of the two ends over all connections.
-
-- **Positive** (assortative): like joins like, hubs to hubs and the sparsely
-  connected among themselves. Networks of people often are. In networks of
-  scientists who wrote papers together, or of actors who played in the same
-  films, *r* is about +0.1 to +0.4 (Newman 2002).
-- **Negative** (disassortative): hubs sit among the sparsely connected, like
-  the centre of a star. The internet, networks of proteins and nerve cells,
-  and food webs are so, at about −0.15 to −0.3. The web reads −0.07.
-- **Zero**: the degree of one end says nothing about the other.
-
-#### The formula for assortativity
-
-A connection has no first and second end, so every connection is counted
-both ways round, as (*j*, *k*) and (*k*, *j*). With *M* connections, the
-correlation of these 2*M* pairs is
-
-$$
-r = \frac{\frac{1}{M}\sum_e j_e k_e - \Bigl[\frac{1}{M}\sum_e \tfrac12 (j_e + k_e)\Bigr]^2}
-         {\frac{1}{M}\sum_e \tfrac12 (j_e^2 + k_e^2) - \Bigl[\frac{1}{M}\sum_e \tfrac12 (j_e + k_e)\Bigr]^2} .
-$$
-
-The numerator is the covariance of the two ends: the mean product of their
-degrees, less the square of the mean degree at an end. The denominator is the
-variance of the degree at one end of a connection: the mean of its square,
-less the same square. The viewer's `assortativity` is *r* over a
-frame's connections, recorded on every 25th iteration.
-
-#### Two examples of assortativity
-
-- **A star**: one hub joined to three leaves. Every connection is (3, 1), so
-  Σ *jk* / *M* = 3. The mean end degree is (3 + 1)/2 = 2, and the mean
-  squared end degree is (9 + 1)/2 = 5. So *r* = (3 − 4)/(5 − 4) = **−1**:
-  perfectly disassortative.
-- **A path of four**, a–b–c–d, degrees 1, 2, 2, 1. The connections are
-  (1, 2), (2, 2) and (2, 1), so Σ *jk* / *M* = 8/3. The mean end degree is
-  10/6, and the mean squared end degree 18/6 = 3. So
-  *r* = (8/3 − 25/9)/(3 − 25/9) = **−0.5**.
-
-#### A caution about assortativity
-
-Suppose a few hubs hold many of the connections. Then there are not enough
-hubs for every hub to have hubs as neighbours: most of a hub's neighbours
-*must* be small. So a network with a heavy-tailed degree distribution tends
-to come out disassortative, even if it is wired at random given its degrees.
-A negative *r* is only interesting beyond that pull.
-
-#### Where assortativity is used
-
-A settled baseline world has an assortativity of about −0.07 at 100,000
-tokens, and −0.11 at 10,000. Across the thirty worlds of 100,000 tokens it
-runs from −0.47 to +0.02. That is mildly negative, and partly the pull above.
-A curve says more: the mean degree of an agent's neighbours, for each class
-of its own degree. It shows leaves hanging on hubs, and hubs surrounded by
-leaves
-([Whom the well-connected are joined to](b1-the-network-size-and-scaling.md#whom-the-well-connected-are-joined-to)).
-Taken of the logarithm of the degree, which the hubs sway less, the same
-correlation reads −0.20 in the median world
-([Like next to like](b1-the-network-size-and-scaling.md#neighbours)).
-[How alike at a distance](b1-the-network-size-and-scaling.md#how-alike-at-a-distance) carries it on to agents
-several steps apart.
-
-### Preferential attachment and its kernel
-
-In many growing networks, the well connected gain new connections faster than
-the poorly connected. Popular web pages are linked to more, and much-cited
-papers are cited more. Suppose the rate at which an agent gains connections
-is proportional to the connections it has. Then the network grows by
-**preferential attachment** (Barabási and Albert 1999). It is the same idea
-as Price's cumulative advantage (Price 1976), and as Simon's model of word
-frequencies (Simon 1955).
-
-#### The attachment kernel
-
-The general form is the **attachment kernel** Π(*k*): the expected number of
-new connections an agent with *k* connections gains in one step. It is
-measured directly. Take all agents at the start of a step, and sort them by
-*k*. Count the connections each class gains during the step, and divide by
-the agents in the class (Newman 2001; Jeong, Néda and Barabási 2003). A
-kernel that grows as a power of *k*, Π(*k*) ∝ *k*^α, is a straight line of
-slope α on logarithmic axes:
-
-- α = 0: every agent gains alike, whatever it has. The degrees stay narrow,
-  as in a random network.
-- α = 1: **linear** preferential attachment. A growing network gets a
-  power-law tail of degrees, with exponent 3 if nothing is ever lost
-  (Barabási and Albert 1999).
-- α < 1 (sublinear): the tail is cut off and bends down, close to a
-  stretched exponential.
-- α > 1 (superlinear): one agent ends up joined to nearly everyone
-  (Krapivsky, Redner and Leyvraz 2000).
-
-#### A kernel, worked out
-
-Say that at the start of a step, 1,000 agents have one connection and 100
-have ten. During the step the first class gains 50 new connections in all,
-and the second class 50 too. Then Π(1) = 50 / 1,000 = 0.05, and
-Π(10) = 50 / 100 = 0.5. The two classes gained alike, but each agent with ten
-connections gained ten times as much as each agent with one. Ten times the
-connections bring ten times the gains: α = 1, linear preferential attachment.
-
-#### Losses too
-
-A network that also loses connections has a **loss kernel** as well: the
-expected connections lost per agent with *k*. If both gains and losses are
-proportional to *k*, every agent's connections change by a random factor
-from step to step, multiplied rather than added. This is Gibrat's law of
-proportionate growth, applied to connections
-([Reading an exponent](#reading-an-exponent)). Whether a heavy tail forms
-then depends on how gains and losses balance, and on what stops the poorest
-from vanishing.
-
-#### The kernels in the worlds
-
-[Who gains and who loses](b1-lives-and-wealth.md#who-gains-and-who-loses)
-measures both kernels in the thirty B1 worlds of 100,000 tokens. It counts
-what each class of agents gains in a reproduction phase, sorted by their
-connections at its start. And it counts what they lose in the game that
-follows, sorted by their connections at the start of that game. Gains grow as
-*k*^1.02, and losses a little faster, as *k*^1.20. So the well connected
-drift back down, and no agent runs away with the network.
-
-One caution holds for the gains. Say a parent hands a connection over to its
-newborn child. Then the neighbour at the other end is counted as gaining one,
-though the connection only changed hands. The parent's loss is not counted.
-So part of what the leaves gain may be handovers.
-
-#### Where preferential attachment is used
-
-- **The tail of the connections.** A child is joined to some of its parent's
-  candidates. So an agent gains a connection whenever a neighbour has a child
-  that is joined to it too. Twice the neighbours bring twice the chances.
-  [Power laws, real and apparent](b1-the-network-size-and-scaling.md#power-laws-real-and-apparent-and-how-to-fit-one) had
-  proposed preferential attachment, reached by copying, as the source of the
-  heavy tail of the connections. There it is still a hypothesis.
-- **B2's links at birth.** A brain that chooses links meets the well
-  connected among its candidates more often, whatever it favours. That is
-  preferential attachment, and it grows hubs. So B2 draws two of a newborn's
-  links at random, and caps the links a brain may choose
-  ([What the game adds](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-game-adds)).
-- **Age.** In the model of Barabási and Albert, the oldest nodes are the
-  hubs. In B1, age gives an agent no connections; connections give it age
-  ([Connections and age](b1-lives-and-wealth.md#connections-and-age)).
-
-### Scaling relations between agents' properties
-
-How does one property of an agent grow with another: its tokens with its
-connections, say? On every 25th iteration, the viewer fits four **scaling
-relations** of the form
-
-$$
-y \approx a\, x^{b} .
-$$
-
-It fits them by least squares on the logarithms of all agents of the frame.
-That is, it fits the straight line ln *y* = ln *a* + *b* ln *x*
-([Fitting a straight line](statistics.md#fitting-a-straight-line)). In words: drawn on
-logarithmic axes, the agents form a cloud, and the fit is the straight line
-through it. Its slope, the **exponent** *b*, says how *y* grows with *x*. R²
-says how tightly the agents follow the line. Agents with *x* = 0 or *y* = 0
-are left out, since a logarithm of 0 does not exist.
-
-#### The four relations
-
-| field | *y* | *x* | what an exponent would mean |
-|---|---|---|---|
-| `tokensVsDegree` | tokens | connections | 1: tokens in proportion to connections; 0: connections buy nothing |
-| `trianglesVsDegree` | triangles the agent is a corner of | connections | 2: neighbourhoods wired at random (pairs of neighbours grow as k²) |
-| `clusteringVsDegree` | [clustering](#clustering) coefficient (agents with ≥ 2 connections) | connections | −1: a hierarchical network — dense small groups inside sparser large ones (Ravasz and Barabási 2003) |
-| `changeVsTokens` | the size \|Δ\| of the change in tokens over the phase | tokens after the phase | 1: everyone risks the same fraction of what they hold (Gibrat's law) |
-
-Each is reported with its R² (`tokensVsDegreeR2`, …).
-
-#### Reading an exponent
-
-- For **tokens and connections**: take *b* = 0.6. An agent with ten times the
-  connections then holds 10^0.6 ≈ 4 times the tokens: more, but less than in
-  proportion.
-- For **clustering**: an agent's clustering coefficient is its triangles
-  divided by its *k*(*k* − 1)/2 pairs of neighbours. The two fits run over the
-  same agents, those in at least one triangle. So `clusteringVsDegree` is
-  exactly `trianglesVsDegree` minus the exponent of the pairs over those
-  agents. That exponent is 2 only for large *k*: from two connections to
-  three, the pairs triple, where *k*² grows 2.25 times. Over the agents of
-  B1's worlds of 100,000 tokens it is 2.27. Triangles grow as *k*^0.99, and
-  clustering falls as *k*^−1.28
-  ([How closely knit a neighbourhood is](b1-the-network-size-and-scaling.md#how-closely-knit-a-neighbourhood-is)).
-- For **changes**: Gibrat's law of proportionate growth (Gibrat 1931) says the
-  change of a firm's size is proportional to its size. So *b* < 1 means that
-  the rich change by a smaller fraction than the poor.
-
-#### Two cautions about the fits
-
-- **R² is about scatter, not about power laws.** Many curved relations look
-  straight over a decade or two of logarithmic axes. Read R² as "how much of
-  the spread does this line account for", not as proof of a law.
-- **The fit is over agents, and most agents are small.** Thousands of agents
-  with one or two connections dominate the least-squares sum; a handful of
-  hubs barely moves it.
-
-**An example.** In B1's worlds, agents hold on average tokens in proportion
-to *k* + 1, the number of their candidates. That is not a power of *k*. From
-*k* = 1 to *k* = 2, *k* doubles, but *k* + 1 grows by a factor of only 1.5.
-That is a local exponent of ln 1.5 / ln 2 = 0.58. Most agents have one or two
-connections. So even if every agent held exactly its share, the fit over them
-would report 0.73, not 1. It reports 0.58, because the poorly connected also
-hold a little more per candidate
-([Tokens and connections](b1-the-network-size-and-scaling.md#tokens-and-connections)).
-An exponent fitted to a relation that is not a power law reports where most
-of the points are.
-
-#### Where scaling relations are used
-
-- [How properties scale together](b1-the-network-size-and-scaling.md#how-properties-scale-together) shows the
-  agents behind each of the four fits, in B1's thirty worlds of 100,000
-  tokens. All four are nearly the same in every world: they belong to the
-  rules, not to what the brains compute.
-- [What goes with what](measures-atlases-and-assembly.md#between-worlds): how clustering
-  and triangles grow with an agent's connections is the second of the
-  components that tell those thirty worlds apart.
+> [!info]- And in the Archive (4)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#what-the-second-edition-changed) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#what-was-expected-the-shape-of-the-network) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#agents) · [Measures of the archived studies](measures-of-the-archived-studies.md#the-four-relations)
+<!-- /used -->
 
 ## Stars and hubs
 
-Most agents have one or two connections; a few, the **hubs**, have hundreds or
-thousands. A world whose best-connected agent is joined to a tenth of it or
-more is a **star**, and seven of the thirty baseline worlds of 100,000 tokens
-were. A star's centre is a place, not an individual: the brain on it changes
-nearly every game, while its connections pass from parent to newborn child. The
-[health bar](measuring-health.md#the-health-bar) counts any agent joined to more than 5% of the others as a fault.
+A few agents, the **hubs**, have hundreds or thousands of connections. A star's
+centre is a place, not an individual: the [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") on it changes nearly every
+game, while its connections pass from parent to newborn child.
 
 ### Hubs
 
-An agent's [degree](measuring-networks.md#an-agents-connections-degree-clustering-assortativity-attachment-and-scaling) is its number of connections. In a settled
-baseline world of 100,000 tokens the median agent has 2 and the mean is 3.5, but
+In a settled baseline world of 100,000 tokens the median agent has 2 and the mean is 3.5, but
 the best-connected agent of the median world has 640 (from 130 to 11,000
 between worlds; [The largest and the smallest](b1-lives-and-wealth.md#the-largest-and-the-smallest)).
-An agent that far above the rest is a **hub**. There is no exact line for a hub;
-there is one for a star.
 
 Hubs are places. Under the near-[even split](measuring-tokens.md#the-even-split), the agent on a node
 with *d* connections is one of *d* + 1 stakers of about equal size, and keeps
@@ -521,10 +285,9 @@ on, and the node carried 78 different [genotypes](measuring-evolution.md#genotyp
 
 ### How a star is handed down
 
-An agent gains connections as its neighbours have children, about in
-proportion to those it has, but loses them a little faster, so the well
-connected drift back down
-([How the network grows](b1-lives-and-wealth.md#who-gains-and-who-loses)).
+The well connected drift back down: they lose connections a little faster
+than they gain them
+([The kernels in the worlds](measures-of-the-archived-studies.md#the-kernels-in-the-worlds)).
 
 A star's centre is kept another way. Now and then it has a child and hands it
 nearly all its connections ([How agents have children](b1-lives-and-wealth.md#how-births-build-the-network)):
@@ -537,14 +300,9 @@ of 7 iterations, and the longest 942.
 
 ### Why the health bar counts a hub as a fault
 
-The author's picture of a world that might keep evolving asks for a network
-that is resilient, decentralised and close to three-dimensional, with few
-single points of failure. So the
-[health bar](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)
-allows no agent to be joined to more than 5% of the others. If one agent holds
-links to many others, the world depends on it: when that hub dies, everything
-changes at once ([What makes a world interesting](measuring-health.md#the-six-criteria)).
-And a star is mostly leaves, and short: in seed 28 only 19% of the agents were
+The health bar allows no agent to be joined to more than 5% of the others
+([Why each mark is there](measuring-health.md#why-each-mark-is-there)). A star
+is mostly leaves, and short: in seed 28 only 19% of the agents were
 in the core and 72% were leaves, and two agents were 4.2 steps apart on
 average, against 12 to 26 steps in the worlds without a star
 ([What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network)).
@@ -555,17 +313,23 @@ at random, a brain may choose at most 8 links
 
 ### Where it is used
 
-- [How the game is played](b1-the-game-and-its-flows.md#do-the-worlds-agree): the
-  stars play the game apart from the other worlds.
-- [Where the tokens flow](b1-the-game-and-its-flows.md#the-game-as-a-random-walk):
-  the even split fits the game with a slope of 0.94 without the stars, 0.65
-  with them.
-- [What goes with what](measures-atlases-and-assembly.md#between-worlds): the one
-  component that orders the thirty worlds by their largest hub holds 47% of
-  their differences.
-- [What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution):
-  a dynasty is the nearest thing yet to a group that lasts while its members
-  change.
+<!-- used stars-and-hubs -->
+- [Which worlds are healthy? Three orders](which-worlds-are-healthy.md#every-measure-a-score-from-0-to-1)
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#in-short)
+- [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#11--roles-in-the-network)
+- [Questioning the mechanics](questioning-the-mechanics.md#hubs-are-places)
+- [Every setting](settings.md#birth_links)
+- [What keeps wealth spread?](what-keeps-wealth-spread.md#without-coalitions)
+- [Measuring tokens: inequality and flow](measuring-tokens.md#a-lazy-random-walk)
+- [Particles: patterns that outlast what carries them](particles.md#in-short)
+- [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)
+- [Rules without numbers](rules-without-numbers.md#why-ask)
+- [Measuring health: criteria, the health bar and diversity](measuring-health.md#from-11-november-2026-health-as-a-filter)
+- [Statistics: the tools of the notebook](statistics.md#what-thirty-seeds-can-see)
+
+> [!info]- And in the Archive (11)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#brains-that-cannot-see) · [B1: lives and wealth](b1-lives-and-wealth.md#stars) · [B1: the game and its flows](b1-the-game-and-its-flows.md#two-agents-of-one-module-games-later) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#the-worlds-of-a-giant-hub) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#but-some-genotypes-get-big) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-the-pilots-showed) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#the-six-criteria) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay) · [Space at scale (side study)](space-at-scale.md#the-worlds-and-the-bodies-beside-them) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md#between-worlds)
+<!-- /used -->
 
 ## Distances in a network: path length, radius and diameter, the spectral gap
 
@@ -669,37 +433,21 @@ apart ([The starting ring](rules-in-detail.md#the-starting-ring)).
 
 #### Where path length is used
 
-- **How stretched a world is.** Take B1's thirty worlds of 100,000 tokens
-  (Experiment 10), over their settled life, iterations 500 to 1,499. Two
-  agents are a median 17.7 steps apart. A random network with the
-  same *N* and *k̄* would have about 7.8. So the agents are 2.3 times as far
-  apart
-  ([How far apart are two agents?](b1-the-network-size-and-scaling.md#how-far-apart-are-two-agents)).
-  A token moves at most one connection in a game, so it needs about 18
-  games to go from one agent to another, on average.
-- **Smaller worlds.** In B1's worlds of 10,000 tokens (Experiment 2), the
-  settled life runs from iteration 500 to 2,999. Averaged over it, the mean
-  path length is 9.8 in the median world. It lies between 6.5 and 13.0 across
-  the 26 worlds that lived to the end, against about 6.0 for a random
-  network. A token there needs about 10 games to go from one agent to
-  another.
-- **Against the random twin.** Computed exactly after its last game, the
-  world of seed 1 of Experiment 10 has a mean path length of 27.9 steps. Its
-  random twin, the same agents with as many connections each but wired at
-  random, has 6.0
-  ([Distances](b1-the-network-size-and-scaling.md#distances)).
-- **As worlds grow.** Their distances grow like a power of the number of
-  agents, not like its logarithm. That is how distances grow in a body of
-  about three dimensions
-  ([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
+Two agents of a settled B1 world of 100,000 tokens are a median 17.7 steps
+apart, 2.3 times as far as in a random network
+([Distances](b1-the-network-size-and-scaling.md#distances)). At 10,000
+tokens it is 9.8 in the median world, and 6.5 to 13.0 across the 26 worlds
+that lived.
+
+<!-- used path-length -->
+No page links here yet.
+<!-- /used -->
 
 ### Radius and diameter
 
 The mean path length is a typical distance. Two more numbers describe the
 extremes. How far apart are the two agents furthest from each other? And how
-far must the most central agent reach to touch everyone? Both start from the
-distance d(*u*, *v*): the fewest connections on a path from *u* to *v*
-([Path length](#path-length)).
+far must the most central agent reach to touch everyone?
 
 #### Eccentricity
 
@@ -729,10 +477,8 @@ other through the most central one takes at most twice the radius.
 
 #### How the viewer estimates them
 
-Exact values need a breadth-first search from every agent: too slow for a
-world of thousands, every 25 iterations. So the program reuses the searches
-of the mean path length
-([The estimate the notebook uses](#the-estimate-the-notebook-uses)). Then it
+The program reuses the searches of the mean path length
+([The estimate the notebook uses](#the-estimate-the-notebook-uses)), then
 searches once more, from the furthest agent any of them reached. This
 "double sweep" is exact on a tree. There, whichever agent a search starts
 from, the agent furthest from it is one end of a longest path. So:
@@ -747,17 +493,16 @@ example above. A tenth serves the diameter alone.
 
 #### Where radius and diameter are used
 
-- **The thirty worlds.** Over the settled life of B1's worlds of 100,000
-  tokens, the median world has a radius of 36 and a diameter of 60. In
-  the worlds of 10,000 tokens they were 17 and 29, with a mean path length of
-  9.8: all three about half
-  ([Distances](b1-the-network-size-and-scaling.md#distances)).
-- **Against the random twin.** Computed exactly after its last game, the
-  world of seed 1 of Experiment 10 has a radius of 48 and a diameter of 96.
-  Its random twin has 8.6 and 16.
-- **As worlds grow.** The diameter grows like a power of the number of
-  agents, and more cleanly than the mean path length
-  ([Distances grow like a power](b1-the-network-size-and-scaling.md#distances-grow-like-a-power)).
+Over the settled life of B1's worlds of 100,000 tokens, the median world
+has a radius of 36 and a diameter of 60, about twice those at 10,000
+tokens ([Distances](b1-the-network-size-and-scaling.md#distances)).
+
+<!-- used radius-and-diameter -->
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (2)
+> [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#distances) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#mending-a-death)
+<!-- /used -->
 
 ### The spectral gap
 
@@ -861,22 +606,17 @@ last digit.
 
 #### Where the spectral gap is used
 
-- **The thirty worlds.** A settled B1 world has a spectral gap of about
-  0.0012 at 100,000 tokens and 0.0026 at 10,000
-  ([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
-  So a random walk on it needs on the order of 1/0.0012 ≈ 800 steps to forget
-  its start (or 1/0.0026 ≈ 400).
-- **Bottlenecks.** After its last game, the world of seed 1 of Experiment 10
-  has λ₂ = 0.00095, and its random twin 0.031: thirty-three times larger. By Cheeger's inequality, part of the world
-  is joined to the rest by few connections
-  ([How easily a world could be cut](b1-the-network-size-and-scaling.md#how-easily-a-world-could-be-cut)).
-  [How a world breaks](b1-the-network-size-and-scaling.md#how-a-world-breaks) finds those bottlenecks.
-- **Tokens.** A game moves tokens almost like a random walk
-  ([The game as a random walk](b1-the-game-and-its-flows.md#the-game-as-a-random-walk)).
-  In the world of seed 1, such a walk needs about 1/0.00095, a thousand
-  steps, to forget its start. So tokens settle within a neighbourhood in a few
-  games, but could spread evenly across the whole world only over about a
-  thousand.
+A settled B1 world has a spectral gap of about 0.0012, so a random walk on
+it needs some 800 steps to forget its start
+([Four measures of a world's shape](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)).
+
+<!-- used the-spectral-gap -->
+- [Physical inspiration](physical-inspiration.md#a-well-knit-world)
+- [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
+
+> [!info]- And in the Archive (2)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-baseline-world-in-one-paragraph) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#four-measures-of-a-worlds-shape)
+<!-- /used -->
 
 ## Bridges, cut risk, loops and the core: how a network can be cut
 
@@ -1176,15 +916,7 @@ connection, after every phase.
 
 #### An example of peeling
 
-Take the network of [What a bridge is](#what-a-bridge-is) again:
-
-```
-  a — b — c — d
-  |       |
-  e ——————f — g — h
-              |
-              i
-```
+Take the network drawn under [Bridges](#bridges).
 
 The loop a–b–c–f–e–a is the core, with its members' connections among
 themselves. Peeling removes d, h and i, which have one connection each, in
@@ -1200,9 +932,8 @@ Every other connection is a [bridge](#bridges). A bridge of a tree cuts off
 everything beyond it. A bridge on a path between two loops of the core cuts
 the core itself in two. The cleanup then removes whatever is no longer joined
 to the largest piece. So a single cut can lose any tree whole, and, through a
-bridge of the core, part of the core too. B2 cuts an unused connection only
-where its two ends share two neighbours, so it never cuts a bridge
-([`prune_needs`](settings.md#prune_needs)).
+bridge of the core, part of the core too. B2 never cuts a bridge
+([Why the cut risk matters](#why-the-cut-risk-matters)).
 
 In a settled B1 world of 100,000 tokens, about 57% of the agents are in the
 core, and 35% are leaves. The rest lie in trees. At 10,000 tokens it is 54%
@@ -1322,27 +1053,16 @@ deeper cores, the trees and the dimension of the core are measured in
     - The note on loops said that an agent on no loop at all hangs on a tree.
       It may also lie in the core, on a path between loops. In the world of
       seed 1 after its last game, 114 agents do.
+- **12 November 2026.** Moved to [Measures of the archived
+  studies](measures-of-the-archived-studies.md): three sections that only pages
+  of the Archive use: assortativity, preferential attachment and its kernel, and
+  scaling relations between agents' properties. The family heading above them
+  now names degree and clustering alone.
 
 ## References
 
-- Barabási, A.-L. and Albert, R. (1999). Emergence of scaling in random
-  networks. *Science* 286, 509–512.
-- Gibrat, R. (1931). *Les inégalités économiques*. Paris: Sirey.
-- Jeong, H., Néda, Z. and Barabási, A.-L. (2003). Measuring preferential
-  attachment in evolving networks. *Europhysics Letters* 61, 567–572.
-- Krapivsky, P. L., Redner, S. and Leyvraz, F. (2000). Connectivity of
-  growing random networks. *Physical Review Letters* 85, 4629–4632.
-- Newman, M. E. J. (2001). Clustering and preferential attachment in growing
-  networks. *Physical Review E* 64, 025102.
 - Newman, M. E. J. (2002). Assortative mixing in networks. *Physical Review
   Letters* 89, 208701.
-- Price, D. de S. (1976). A general theory of bibliometric and other
-  cumulative advantage processes. *Journal of the American Society for
-  Information Science* 27, 292–306.
-- Ravasz, E. and Barabási, A.-L. (2003). Hierarchical organization in complex
-  networks. *Physical Review E* 67, 026112.
-- Simon, H. A. (1955). On a class of skew distribution functions.
-  *Biometrika* 42, 425–440.
 
 - Chung, F. R. K. (1997). *Spectral Graph Theory*. CBMS Regional Conference
   Series in Mathematics 92, American Mathematical Society.
@@ -1359,6 +1079,6 @@ deeper cores, the trees and the dimension of the core are measured in
 
 **Also about:** [Wealth: who holds the tokens](../README.md#wealth-who-holds-the-tokens), [Space and dimension](../README.md#space-and-dimension).
 
-> [!info]- Pages that link here (20)
-> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (19)
+> [The ideas this builds on](the-ideas-this-builds-on.md) · [The world: tokens, agents and a network](the-world.md) · [Glossary](glossary.md) · [The rules in detail](rules-in-detail.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Physical inspiration](physical-inspiration.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Do the brains matter?](do-the-brains-matter.md) · [A source and a sink](a-source-and-a-sink.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [How runs are made, recorded and costed](runs-and-records.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Space at scale (side study)](space-at-scale.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->
