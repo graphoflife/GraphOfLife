@@ -16,10 +16,10 @@ but the world's. The physics track's own question, whether a world grows a
 space, is asked on [Is a world a
 space?](how-many-dimensions-does-a-world-have.md).
 
-It gathers what were 2 pages of their own, one section each:
+Its sections:
 
-- [Dimensions at scale](#dimensions-at-scale): Within one world, B1's dimension changes with the scale no more than a finite body's does.
-- [Which properties have no scale?](#which-properties-have-no-scale): A quantity has no scale when it has no typical size of its own: measured in worlds of many sizes and divided by the right power of the size, its distributions fall onto one curve, a data collapse.
+- [Dimensions at scale](#dimensions-at-scale)
+- [Which properties have no scale?](#which-properties-have-no-scale)
 
 ## Dimensions at scale
 
@@ -532,8 +532,7 @@ which it widens faster as it grows.
   the sizes there are.
 
 ### How this was made (dimensions at scale)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. No world was played for it: it reads saved runs only. To draw its
+No world was played for this section: it reads saved runs only. To draw its
 figures again: `python3 book_figures.py scaledims`; the code is
 `book_chapters/scaledims.py`.
 
@@ -1086,10 +1085,9 @@ experiment, not a finding.
   reaches across the whole world, and perhaps from the way trees grow.
 
 ### How this was made (which properties have no scale)
-Every figure and number of this page comes from the command
+Every figure and number of this section comes from the command
 `python3 book_figures.py noscale`, which writes the numbers to
-`book/results/noscale.json`; each figure says, folded beneath it, which runs
-it reads and how. The share each game cut off and starved is read from the
+`book/results/noscale.json`. The share each game cut off and starved is read from the
 runs' recorded statistics. The pieces a game cut off, the branches behind
 bridges, the tokens and connections, and the likeness at a distance are read
 from the frames, once per run, by `noscale_pass` in `book_chapters/noscale.py`,
@@ -1099,7 +1097,7 @@ its last 100 games: iterations 500 to 599 for Experiment 8, and 1,400 to
 tree are drawn by the same file, every random choice from a fixed seed, so the
 same command makes the same figures.
 
-No simulation was run for this page. It reads three experiments: the 24
+No simulation was run for this section. It reads three experiments: the 24
 worlds of Experiment 8 from 3,200 tokens up (its worlds of 800 and 1,600
 tokens did not live, and its second condition is not read); the 28 worlds of
 Experiment 2 that lived past iteration 1,499; and the 30 worlds of

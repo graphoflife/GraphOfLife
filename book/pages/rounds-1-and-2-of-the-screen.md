@@ -83,21 +83,10 @@ the same way, and a world shows what it is only once it has settled.
 Each criterion is made of one or more **lines**: a number, and which side of
 it passes. The author controls every line, sees every world's value beside
 it, and sees how many worlds would pass if it moved. Rounds 1 and 2 were
-judged by stricter criteria, at a single moment; they are kept at the
+judged by stricter criteria, at a single moment; they are kept
 [below](#the-criteria-of-rounds-1-and-2).
 
 ### The six criteria
-
-<!-- table criteria/criteria -->
-| criterion | what it asks |
-|---|---|
-| alive | played to the end of its run (3,000 iterations in round 3) and never down to 20 agents |
-| decentralised | no agent linked to more than 5% of the others, and 3 to 12 links per agent |
-| resilient | at least 80% of the agents in the 2-core, and no single agent's loss cuts off more than 15% of the world, nor a single link's more than 15% (the rules keep a world in one piece) |
-| almost three-dimensional | a typical distance at least 1.3 times its random twin's, and a dimension of 2 to 5 |
-| diverse | statistic by statistic: fewer than 80% of the agents hold the same number of tokens, and some agent holds more than 3; fewer than 80% of the 2-core's agents have the same number of links; fewer than 80% have the same age, and fewer than 80% the same genotype; and fewer than 95% make the same choice, to have a child or not |
-| not too even | a Gini of the tokens of at least 0.46 (B2's most even world in Experiment 16) |
-<!-- /table -->
 
 Each criterion stands for one part of the picture.
 
@@ -112,7 +101,7 @@ Each criterion stands for one part of the picture.
    link disappears. We ask that most agents (80%) sit on [loops](measuring-networks.md#loops "A path through the network that comes back to where it started without using a connection twice.") (the
    *[2-core](measuring-networks.md#core-trees-and-leaves "What is left of a network when agents with one connection or none are peeled away again and again: the agents on loops or between them.")*), and that no single loss cuts off more than 15% of the agents.
    The worlds are small, a few thousand agents, so the author allows a larger
-   share than the [health bar](how-to-tell-a-world-that-keeps-evolving.md)'s 2%
+   share than the [health bar](measuring-health.md#the-health-bar)'s 2%
    and 1%. A world is always in one piece: whatever is cut off from its
    largest piece dies at once.
 4. **Almost three-dimensional.** The physical side of the project asks
@@ -198,10 +187,9 @@ A world that meets all six criteria is healthy.
 Worlds made with the same settings but different seeds differ. A setting
 that gives a healthy world in one seed may miss a line in another, and we do
 not want to throw it away for that. So a world may miss some criteria and
-still be **interesting**. How many, and which, will be decided with the
-author once round 3 has run and we have looked at its worlds. Until then the
-judge counts a world as interesting when it is alive and misses at most two of
-criteria 2 to 6, the author's first answer.
+still be **interesting**. Until round 3 had run, the judge counted a world as
+interesting when it was alive and missed at most two of criteria 2 to 6, the
+author's first answer.
 
 Round 3 has run. Instead of a verdict, the author then asked (7 November
 2026) for an order of every world drawn at random, from the most healthy to
@@ -278,11 +266,9 @@ read in the same way and at the same iterations.
 
 ## How this was made
 
-Round 1 is the plan of Experiment 38 (`book/experiments/E38.json`): sampler 1,
-round seed 1, fifty worlds of B1's rules changed as drawn, at 20,000 tokens,
-for 2,000 iterations or four hours, and two worlds of B2 beside them. World *i*
+Round 1 is the plan of Experiment 38 (`book/experiments/E38.json`). World *i*
 of a round with seed *s* has seed 1000·*s* + *i*, so round 1's worlds have
-seeds 1001 to 1050, and the worlds of B2 1901 and 1902.
+seeds 1001 to 1050.
 
 The judge plays nothing: it reads every world from its archives, the whole
 world, [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") included ([`archive_every`](settings.md#archive_every)). `python3

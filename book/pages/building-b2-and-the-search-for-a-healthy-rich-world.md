@@ -21,15 +21,15 @@ is a lucky moment. The best of 63 drawn worlds, played again in five new seeds,
 passed in none of them (Experiment 24). Only new seeds can tell a configuration
 from a lucky draw.
 
-It gathers what were 7 pages of their own, one section each:
+Its sections:
 
-- [Building B2: a world that cannot break](#building-b2-a-world-that-cannot-break): B2, the notebook's second [baseline](b1-and-b2.md), was built in three steps, each tested by an experiment.
-- [Healthy and rich](#healthy-and-rich): The author's picture of a world that might keep evolving has two halves: a decentralised, resilient, almost three-dimensional network, and agents that differ in almost everything.
-- [Brains mixed at birth, in long worlds](#brains-mixed-at-birth-in-long-worlds): Mixing a newborn's brain from its parent's and a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s makes a B2 world smaller, so each of its agents holds more tokens.
-- [What holds a world's size](#what-holds-a-worlds-size): Every agent of a B2 world dies at the age of 100, so a world keeps its size only if one agent in a hundred is born each iteration.
-- [Who may be a mate](#who-may-be-a-mate): When brains are mixed at birth, a child's brain is half its parent's and half a mate's, but only the parent pays for the child.
-- [The candidates, played on and played again](#the-candidates-played-on-and-played-again): A **candidate world** meets every mark of the health bar at iteration 1,000, and its agents are more diverse than B2's.
-- [Room and riches for the steadiest world](#room-and-riches-for-the-steadiest-world): The steadiest world the notebook has, Experiment 19's, lives long and its agents differ, but it is folded: a small world, not a space.
+- [Building B2: a world that cannot break](#building-b2-a-world-that-cannot-break)
+- [Healthy and rich](#healthy-and-rich)
+- [Brains mixed at birth, in long worlds](#brains-mixed-at-birth-in-long-worlds)
+- [What holds a world's size](#what-holds-a-worlds-size)
+- [Who may be a mate](#who-may-be-a-mate)
+- [The candidates, played on and played again](#the-candidates-played-on-and-played-again)
+- [Room and riches for the steadiest world](#room-and-riches-for-the-steadiest-world)
 
 ## Building B2: a world that cannot break
 
@@ -96,7 +96,7 @@ to 15 agents and dwindled to 25 by the end. The other fell to a single agent
 for good.
 
 **The pilots blamed the network.** An agent whose stake follows what it sees
-puts it where it matters: on one neighbour, or two. And a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that
+puts it where it matters: on one [neighbour](the-world.md#the-network "An agent joined to another by a connection."), or two. And a [connection](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") that
 carries no tokens in a game is cut at the game's end ([One iteration, step by
 step](one-iteration.md)). So the seeing worlds kept few connections. The
 worlds that crashed had as few as 1.3 to 1.9 per agent, against 3.2 in B1.
@@ -129,9 +129,8 @@ The pilots suggested a simple story. B1 holds together because its agents are
 blind: they spread their stakes evenly over every neighbour, so every
 connection carries tokens, and the network keeps its loops. Sight is the
 precondition of anything evolution might build, and the first thing it does is
-break the world it lives in. So we expected brains that see to break most of
-ten worlds, and B1's blind brains hardly any. Experiment 13 tested this, and
-asked what, exactly, kills a world.
+break the world it lives in. Experiment 13 tested this, and asked what,
+exactly, kills a world.
 
 <!-- thesis E13 -->
 > [!quote] The thesis of Experiment 13, written down before any of its runs existed
@@ -606,9 +605,7 @@ cut off 2–3%, above the bar.
 
 One world is a hint. Experiment 14 runs B2 ten times at 5,000 tokens for 1,000
 iterations. Five more conditions each take one rule away (or, for handover,
-put one back), to see whether every rule is needed. We expected every B2 world
-to pass the whole health bar, with nobody cut off. And we expected each
-condition without one of the rules to fail some mark in most of its worlds.
+put one back), to see whether every rule is needed.
 
 <!-- thesis E14 -->
 > [!quote] The thesis of Experiment 14, written down before any of its runs existed
@@ -908,10 +905,7 @@ It changes one rule of death at a time:
 - children of any size;
 - no old age.
 
-The pilots suggested that what an agent keeps at home decides who is left to
-play. So we expected fewer than half of B2's agents to hold a single token,
-and more than two in three when only the last token is kept. Worlds that keep
-nothing, we expected, would starve.
+Experiment 15 tested what the pilots suggested:
 
 <!-- thesis E15 -->
 > [!quote] The thesis of Experiment 15, written down before any of its runs existed
@@ -1755,13 +1749,7 @@ and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-ric
 B2's own worlds are not run again. Experiment 16 ran them to 2,000 iterations,
 and their continuations to 10,000, played as pilots, are the comparison.
 
-So we expected the ten worlds to do what the pilots did: stay small and rich,
-and meet every mark of the health bar. A unit of a brain that works can also
-spread from one line of descent to another. But one pilot world swung back
-towards B2's poverty for a while, so the riches might not last. The thesis
-drew two lines at iteration 10,000. In the median world, fewer than half the
-agents should hold three tokens or fewer. And at least seven of the ten worlds
-should meet every mark.
+Experiment 17 tested whether the ten worlds do what the pilots did:
 
 <!-- thesis E17 -->
 > [!quote] The thesis of Experiment 17, written down before any of its runs existed
@@ -2084,8 +2072,8 @@ misses](#the-marks-a-world-misses)). One world in ten died out, and two others
 fell below a hundred agents before they came back ([What the ten worlds
 did](#what-the-ten-worlds-did-brains-mixed-at-birth)). So whether a mixed world stays healthy and
 rich depends on where its drift takes it. Ten thousand iterations showed each
-world wandering through a range of sizes. Fifty thousand will show whether
-that range has edges.
+world wandering through a range of sizes. Experiment 18 asked whether that
+range has edges.
 
 #### Five worlds played on
 
@@ -2110,12 +2098,7 @@ at iteration 10,000:
 | seed 6 | 1,302 | 4 | 42% | 11 | 188–1,688 |
 | seed 10 | 618 | 10 | 15% | 16 | 296–1,649 |
 
-We expected the five worlds to stay mostly healthy and rich, because health
-came back. Over the first 10,000 iterations, a world that met every mark still
-met them 500 iterations later four times in five. A world that missed a mark
-met them all again a third of the time. But forty thousand iterations more is
-time for each of the five to drift through every size. It might grow small
-enough to miss the hub, or large and poor enough to miss the dimension.
+Experiment 18 tested whether their health lasts:
 
 <!-- thesis E18 -->
 > [!quote] The thesis of Experiment 18, written down before any of its runs existed
@@ -2309,8 +2292,7 @@ ten runs of Experiment 17. Beside them they read B2's own worlds: Experiment
 figure names. `python3 book_figures.py mixedlong` draws them. The figures of
 [the second section](#five-mixed-worlds-fifty-thousand-iterations) read the
 five runs of Experiment 18, and `python3 book_figures.py longmixed` draws
-them. Each figure says, folded beneath it, which runs it reads and how. A lab
-run records every game, so the plans reckoned with about 9 GB of disk for
+them. A lab run records every game, so the plans reckoned with about 9 GB of disk for
 Experiment 17's ten runs, and 16 GB more for Experiment 18's five.
 
 #### The runs of Experiment 17
@@ -2787,14 +2769,7 @@ those moments as [Healthy and rich](building-b2-and-the-search-for-a-healthy-ric
 And its brains of one moment, or era, can be played against those of another.
 Experiment 17's ten worlds, with any neighbour as a mate, are the comparison.
 
-We expected parents as mates to keep every mixed world alive. If the free
-ride makes agents reluctant to breed, ending it should keep births above the
-line that replaces the dead. We also expected the worlds to stay richer than
-B2's. They might be less rich than mixed worlds with a free mate, as three of
-the four pilots warned. So the thesis asks two things. No world may die out.
-And at iteration 20,000, the median world's share of poor agents must be below
-0.66. That is the share in the least poor of B2's ten worlds, at 10,000
-iterations.
+Experiment 19 tested whether parents as mates keep every mixed world alive:
 
 <!-- thesis E19 -->
 > [!quote] The thesis of Experiment 19, written down before any of its runs existed
@@ -2991,14 +2966,8 @@ Experiment 22 plays the paying mate in B2 at 10,000 tokens, with brains mixed
 at birth: four seeds, for 5,000 iterations each. Experiment 17's worlds of
 the same seeds, whose mates pay nothing, are the comparison.
 
-We expected the paying mate to steady a mixed world, as parents as mates had.
-With no free ride, reluctance should no longer pay, and we expected that to
-outweigh the cheaper child. We also expected the lab to play the two stopped
-pilots exactly again, since the same settings and the same seed make the same
-world. So the thesis asks three things:
-- at least three of the four worlds steadier than their Experiment 17 world;
-- no world down to 20 agents;
-- the first two worlds the same as the pilots, game for game.
+Experiment 22 tested whether the paying mate steadies a mixed world, as
+parents as mates had:
 
 <!-- thesis E22 -->
 > [!quote] The thesis of Experiment 22, written down before any of its runs existed
@@ -3206,15 +3175,10 @@ The other four use rules that so far exist only in the pilots' prototype:
 - an input that tells where a brain came from;
 - a family tag.
 
-They follow once those rules are part of the engine; Experiment 23 is to
-play them.
+Experiment 23 was to play them once the engine had those rules; it was never
+written.
 
-**Experiment 20** plays the first two in the lab, from iteration 0. We
-expected the lab's two worlds to be the pilots' two worlds again, game for
-game. A pilot plays the engine's own game, so a pilot with a lab world's
-settings and seed is that lab world. It had happened before: the two mixed
-worlds of batch Q are Experiment 17's worlds. If the twins match, the lab
-can finish what the pilots began.
+**Experiment 20** plays the first two in the lab, from iteration 0:
 
 <!-- thesis E20 -->
 > [!quote] The thesis of Experiment 20, written down before any of its runs existed
@@ -3238,7 +3202,7 @@ been resumed from a checkpoint at iteration 1,000, and still matched.
 
 So a pilot of engine rules is the lab's world. The long runs read below
 stand as if the lab had made them. The four candidate worlds with pilot
-rules cannot be checked this way yet.
+rules were never checked this way.
 
 #### Where the candidate worlds went
 
@@ -3453,10 +3417,7 @@ A fourth rule held in one seed too: mixing with an input that tells each
 agent where its brain came from. That input exists so far only in the
 pilots' prototype. It joins this experiment once it is part of the engine.
 
-We expected each rule to hold again. A rule that made one world hold should
-make most of its worlds hold: at least four of its five. And a rule earns
-its place only if it holds more often than mixing alone, which passed in
-three of the same five seeds.
+Experiment 21 tested whether each rule holds again:
 
 <!-- thesis E21 -->
 > [!quote] The thesis of Experiment 21, written down before any of its runs existed
@@ -3633,9 +3594,9 @@ did no better than mixing alone
 [in new seeds](#five-more-seeds-for-the-rules-that-held). Only new seeds
 can tell a configuration from a lucky draw.
 
-Four of these rules exist only in the research prototype, and the lab could
-not play them until now. It now hands a run that asks for them to the
-prototype itself, frozen beside the engine (`gol_pilot.py`).
+Four of these rules existed only in the research prototype; for Experiment
+24 the lab handed the run to the prototype itself, frozen beside the engine
+(`gol_pilot.py`).
 **Experiment 24** plays the search's settings in five new seeds, 1 to 5,
 and in the search's own seed, 2025, each to 2,000 iterations.
 
@@ -3911,13 +3872,9 @@ Room has to come from a rule.
 
 #### What we expected of the room rules
 
-Experiment 31 tries four rules in Experiment 19's world, one at a time. They
-are the estate to the newborns, the estate to the parents, no old age and no
-mending. Each runs in two seeds, for 3,000 iterations. We expected at least
-one rule to unfold the world without costing it the rest. Both its worlds
-would then pass all four wishes at iteration 3,000. Our hope rested on the
-estates. Parents as mates held a mixed world's size, so with them the
-estates might give room without filling the world.
+Experiment 31 tries four rules in Experiment 19's world, one at a time: the
+estate to the newborns, the estate to the parents, no old age and no mending.
+Each runs in two seeds, for 3,000 iterations.
 
 <!-- thesis E31 -->
 > [!quote] The thesis of Experiment 31, written down before any of its runs existed
@@ -4063,13 +4020,9 @@ two.
 
 #### What we expected of the floor
 
-We expected the floor to keep the healthy space the estates make, and to give
-back the diversity they cost. Then both worlds of at least one estate would
-pass all four wishes at iteration 3,000. Experiment 32 plays three
-conditions, two seeds each, for 3,000 iterations. The floor comes with the
-estate to the newborns, with the estate to the parents, or alone. Experiment
-31's estate worlds of the same seeds are the control, and so is Experiment
-19's world, for the floor alone.
+Experiment 32 plays three conditions, two seeds each, for 3,000 iterations:
+the floor with the estate to the newborns, with the estate to the parents, or
+alone.
 
 <!-- thesis E32 -->
 > [!quote] The thesis of Experiment 32, written down before any of its runs existed
@@ -4271,9 +4224,7 @@ Two experiments ask:
 
 If the floor failed because of B2's least child, it should stay idle in plain
 B2 too. Experiment 36 plays plain B2 with the floor, in two seeds, for 3,000
-iterations. We expect the floor to ask more than ten tokens of fewer than one
-in twenty of the agents able to have a child. And we expect children to
-start with 11 to 13 tokens on average, as in Experiment 16's worlds.
+iterations.
 
 <!-- thesis E36 -->
 > [!quote] The thesis of Experiment 36, written down before any of its runs existed
@@ -4291,11 +4242,7 @@ start with 11 to 13 tokens on average, as in Experiment 16's worlds.
 In B1 the floor should bind. If it does, births should become fewer and
 larger, and the world smaller and richer: the pull
 [What holds a world's size](building-b2-and-the-search-for-a-healthy-rich-world.md#what-holds-a-worlds-size) asked for.
-Experiment 37 plays B1 with the floor, in two seeds, for 3,000 iterations. We
-expect both worlds to live to 3,000. We expect their children to start
-richer than in any of B1's 26 long worlds: with more than 5.1 tokens on
-average. And we expect both worlds to hold fewer agents on average than B1's
-median world (1,462).
+Experiment 37 plays B1 with the floor, in two seeds, for 3,000 iterations.
 
 <!-- thesis E37 -->
 > [!quote] The thesis of Experiment 37, written down before any of its runs existed
@@ -4549,8 +4496,8 @@ iteration's frame.
 - [How does a world's size follow its tokens?](b1-the-network-size-and-scaling.md#worlds-of-many-sizes):
   the other side of this topic, in B1: a world of twice the tokens holds twice
   the agents.
-- [A screen of random worlds](a-screen-of-random-worlds.md): the next step.
-  Instead of one rule at a time, rounds of fifty worlds with every setting
+- [A screen of random worlds](a-screen-of-random-worlds.md): what came after:
+  instead of one rule at a time, rounds of fifty worlds with every setting
   drawn at random, each judged for health.
 
 ## How our view changed

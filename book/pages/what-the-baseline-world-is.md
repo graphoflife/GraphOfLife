@@ -366,23 +366,10 @@ what came of it.
 
 ### What we are looking for
 
-**Open-ended evolution** is evolution that does not run out of new things to
-make. Life on Earth has it: four billion years in, it still produces new
-kinds of organisms, new ways of living, new levels of organisation. Almost
-every artificial system stops. It finds a way of doing well, fills the world
-with it, and from then on only reshuffles
-([The ideas this builds on](the-ideas-this-builds-on.md)).
-
 [What this notebook is about](what-this-notebook-is-about.md#a-ladder-of-four-steps)
-sets out a ladder of four claims, each needed before the next:
-
-1. **P1, there is evolution:** [lineages](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor.") last long enough for selection to act
-   on them, and selection changes the outcome.
-2. **P2, adaptation accumulates:** a late population would beat its own
-   ancestors.
-3. **P3, there are organisations:** groups that persist while their members
-   come and go.
-4. **P4, the space of organisations keeps growing**, without a ceiling.
+sets out open-ended evolution as a ladder of four claims, each needed before
+the next: P1, there is evolution; P2, adaptation accumulates; P3, there are
+organisations; P4, the space of organisations keeps growing.
 
 The project's research plan (`research/Research.md`) aims at the top of the
 ladder. It defines open-endedness as unbounded growth in the space of
@@ -430,7 +417,7 @@ actors, the brains, change almost every game.
 
 ### Where the world stands on the ladder
 
-**P1, evolution: partly.** There are lineages, and they matter. Lines take
+**P1, evolution: partly.** There are [lineages](measuring-evolution.md#families "A line of descent: the agents whose genotypes go back to one ancestor."), and they matter. Lines take
 whole worlds over
 ([One slow wander, in everything](#one-slow-wander-in-everything)).
 Families occupy regions that widen as their line ages, about as a random walk
@@ -570,7 +557,7 @@ The six rules:
    split at all ([A world that cannot break](building-b2-and-the-search-for-a-healthy-rich-world.md#building-b2-a-world-that-cannot-break)),
    rather than living on apart, and long-range links were not adopted.
 
-### What we propose to change
+### What was proposed
 
 Each proposal is a rule that can be switched on, run against the baseline
 with thirty seeds, and measured, as [Do the brains matter?](do-the-brains-matter.md)
@@ -707,7 +694,7 @@ its own node, so that no agent can stake itself to death
 game. The share function and the averaging of whole-agent decisions are
 unchanged.
 
-### How we will know
+### How we would know
 
 A rule change is only progress if a measurement says so, against a null. The
 measures, by rung of the ladder:
@@ -773,7 +760,7 @@ date where they did:
   now says which it means where it matters
   ([Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)).
 
-### Questions for the next analyses
+### Questions left for later analyses
 
 Some questions needed no new runs, only new looks at the old ones. Two have
 been answered since, and one in part.
@@ -844,19 +831,11 @@ of them is a rule, and the rules are the same at both sizes. So the proposals
 were planned at 10,000 tokens, where a run is eight times cheaper. The first
 experiments on the way to B2, Experiments 12 to 14, ran smaller still, at
 5,000. Those that bear on space and organisation, P3 and the physics of
-space, are to be checked at 100,000.
+space, were to be checked at 100,000.
 
 ### The road from here
 
-When this section was written, the plan was this. First, experiments with
-single settings: the rate of mutation, coalitions switched off, the size of
-the brain, the size of the world. They are cheap, and each teaches how the
-world works. Then rule changes, in the order above: first heredity, then
-lasting individuals, then cooperation that pays and kin that know each
-other, then an open world. Each was to be measured with the instruments
-above.
-
-The experiments did not keep this order. The notebook built its yardstick
+The experiments did not keep the order proposed above. The notebook built its yardstick
 first ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 Then it gave the brains sight, with change only when copied
 ([Brains that see, and worlds that break](building-b2-and-the-search-for-a-healthy-rich-world.md#brains-that-see-and-worlds-that-break)),
@@ -872,37 +851,13 @@ B2 world ([Strategies written by hand](strategies-written-by-hand.md)). The
 search runs out before the game does. What moved since is told in
 [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) and [Rules in company](what-the-switches-did-in-pilots.md#rules-in-company).
 
-It is a long way. But the measurements have made it shorter in one important
-sense. They turned a vague hope, that interesting things might emerge if we
-watch long enough, into a list of specific rules that stand in the way, each
-of which can be changed and tested on its own.
-
 The notebook's second aim points at the same rules.
 [Physical inspiration](physical-inspiration.md), written after this section,
 sets out that aim: a world that grows a space, and stable things in it. The
 cull and the [share-out](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them."), which this page questions for evolution's sake, also
 break locality, the speed limit physics insists on. And the organisations of
 P3 are what a physicist would call particles.
-[Space and dimension](../README.md#space-and-dimension) follows that aim, and
-the rule changes of both aims will be tested together where they coincide.
-
-## What we learned
-
-- **B1 is a world of places, not individuals.** Its network and its landscape
-  of wealth follow from the rules and are alike in every world. The brains on
-  its nodes change almost every game.
-- **Its brains are nearly blind**, so selection sets only a few constants,
-  the same in every world, within the first fifty to a hundred iterations.
-  After that, B1 does not improve.
-- **Six of six theses failed**, at both sizes. Per agent, a world ten times
-  larger does what a small one does; what changes is its shape, its stars and
-  the pace of its lines.
-- **On the ladder**, B1 has evolution of a weak kind (P1, partly), no
-  accumulation after its first boom (P2), and no organisations (P3).
-- **Seven obstacles stood in its way**: blind brains first, then six rules.
-  Sight alone broke the worlds. B2 gave the brains sight inside a world that
-  cannot break, and changed three of the six rules; there evolution goes on
-  for thousands of iterations before it slows to a plateau.
+[Space and dimension](../README.md#space-and-dimension) follows that aim.
 
 ## Where to go next
 
@@ -975,6 +930,12 @@ the rule changes of both aims will be tested together where they coincide.
   four pages that hold its measurements. The pages it links to were merged into
   those four, and every link leads to its section there. Its words are as they
   were.
+- **12 November 2026.** What we learned, which said again what the In short
+  says, was cut, and so was the ladder of four claims, which is told in [What
+  this notebook is about](what-this-notebook-is-about.md#a-ladder-of-four-steps).
+  Three headings and a few sentences that spoke of the plans as still to come
+  speak of them in the past: What was proposed, How we would know, and
+  Questions left for later analyses.
 
 <!-- turns -->
 ---

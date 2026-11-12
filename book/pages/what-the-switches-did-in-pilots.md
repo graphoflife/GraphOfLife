@@ -12,8 +12,12 @@
 ## In short
 
 Pilot worlds tried the engine's switches in October 2026, alone and in company.
-Read them as indicative, not as effects: they are two seeds a condition, mostly
-1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), on B2. The exceptions are few. Batches U and V played sixteen
+Every world is a pilot ([Pilot worlds](runs-and-records.md#pilot-worlds)), kept
+in `GraphOfLifeRuns/.pilots`; no experiment of the lab stands behind them, so the
+page has no box of runs. Read them as indicative, not as effects
+([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)):
+they are two seeds a condition, mostly 1,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), on B2. The exceptions
+are few. Batches U and V played sixteen
 worlds of one seed each. Batches Q and R played 2,000 iterations. Batch V and a
 few other conditions played B1. What still bears on the question is this. What
 a rule does alone is often not what it does in company. Rules that reshape the
@@ -22,15 +26,15 @@ later brains beat earlier ones in nearly every B2 world, whatever the switches:
 they change only how fast. And no combination made a world that is both healthy
 and rich.
 
-It gathers what were 7 pages of their own, one section each:
+Its sections:
 
-- [Rules in company](#rules-in-company): Most experiments threw one rule at a time into B2.
-- [Eight switches at once, and how sixteen worlds can test them](#eight-switches-at-once-and-how-sixteen-worlds-can-test-them): Most experiments threw one switch at a time into B2, the baseline whose network cannot break.
-- [Revolutions, handover and gifts: the switches the world was built with](#revolutions-handover-and-gifts-the-switches-the-world-was-built-with): The engine of Graph of Life came with three switches of its own.
-- [Brains mixed at birth, with every other rule](#brains-mixed-at-birth-with-every-other-rule): Mixing a newborn's brain from its parent's and a neighbour's makes B2's worlds rich, because agents put off having children.
-- [Who inherits?](#who-inherits): When an agent dies, the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") shares its tokens out among the survivors: until now evenly, every survivor with the same chance at every token.
-- [Links to strangers](#links-to-strangers): Agents of B2 were given a way to look for a stranger and propose a link.
-- [Brains mixed at birth, units that cost, an eye for raids on kin](#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin): Three changes to B2 were tried in pilot worlds, each aimed at a different part of how evolution works.
+- [Rules in company](#rules-in-company)
+- [Eight switches at once, and how sixteen worlds can test them](#eight-switches-at-once-and-how-sixteen-worlds-can-test-them)
+- [Revolutions, handover and gifts: the switches the world was built with](#revolutions-handover-and-gifts-the-switches-the-world-was-built-with)
+- [Brains mixed at birth, with every other rule](#brains-mixed-at-birth-with-every-other-rule)
+- [Who inherits?](#who-inherits)
+- [Links to strangers](#links-to-strangers)
+- [Brains mixed at birth, units that cost, an eye for raids on kin](#brains-mixed-at-birth-units-that-cost-an-eye-for-raids-on-kin)
 
 ## Rules in company
 
@@ -277,9 +281,7 @@ agent and a Gini of 0.39.
   about 2,000 agents. But six in ten of their agents were poor.
 
 ### How this was made (rules in company)
-Every world on this page is a pilot, kept in `GraphOfLifeRuns/.pilots`. No
-experiment of the lab stands behind it, so the page has no box of runs. The
-pages of each batch say how its worlds were made and read.
+The sections of each batch say how its worlds were made and read.
 
 The census of spaces is `python3 research/atlas/census.py`. It reads every
 world measured at iteration 1,000 in the atlas
@@ -843,12 +845,9 @@ Neither moves it beyond the chains either (−0.02 and +0.14).
   as in B1 itself.
 
 ### How this was made (eight switches at once)
-Every world on this page is a pilot, made with `research/oee/pilots/run.py`
-in the engine's own code (`--proto engine=true`) and kept in
-`GraphOfLifeRuns/.pilots` ([Pilot worlds](runs-and-records.md#pilot-worlds)). No experiment
-of the lab stands behind it, so the page has no box of runs. Every figure
-says, folded beneath it, which worlds it reads and how. The numbers it
-quotes are in `book/results/eightswitches.json`.
+Every world here was made with `research/oee/pilots/run.py` in the engine's
+own code (`--proto engine=true`). The numbers this section quotes are in
+`book/results/eightswitches.json`.
 
 #### The pilots of batch U
 
@@ -984,12 +983,10 @@ and a world of rich and poor plays a different game.
 
 #### The worlds of batch S
 
-The worlds are pilots in the engine's own code (`--proto engine=true`; see
-[Pilot worlds](runs-and-records.md#pilot-worlds)), two seeds of each kind. Each holds 10,000
-tokens and runs for 1,000 iterations, and a whole world is kept every 100
-iterations. With two seeds a kind, what they show is indicative, not an
-effect ([How many seeds an experiment needs](statistics.md#how-many-seeds-an-experiment-needs)). The two
-baselines differ in their brains. B1's, of five hidden layers, barely see
+The worlds are pilots in the engine's own code (`--proto engine=true`), two
+seeds of each kind. Each holds 10,000 tokens and runs for 1,000 iterations,
+and a whole world is kept every 100 iterations. The two baselines differ in
+their brains. B1's, of five hidden layers, barely see
 what is around them. B2's, of one hidden layer of 16 units, are brains that
 see ([B1 and B2: the two baselines](b1-and-b2.md)).
 
@@ -1518,12 +1515,9 @@ revolutions.
   replace B2's rule for lapsing links, at least not as gifts stand.
 
 ### How this was made (revolutions)
-Every world on this page is a pilot, made with `research/oee/pilots/run.py`
-in the engine's own code (`--proto engine=true`) and kept in
-`GraphOfLifeRuns/.pilots` ([Pilot worlds](runs-and-records.md#pilot-worlds)). No experiment of
-the lab stands behind it, so the page has no box of runs. Every figure says,
-folded beneath it, which worlds it reads and how. The command lines that made
-the worlds, and what each check found, are in `research/oee/pilots/LOG.md`.
+Every world here was made with `research/oee/pilots/run.py` in the engine's
+own code (`--proto engine=true`). The command lines that made the worlds, and
+what each check found, are in `research/oee/pilots/LOG.md`.
 
 #### The pilots of batch S
 
@@ -1759,15 +1753,12 @@ stay rich.
   [Healthy and rich](building-b2-and-the-search-for-a-healthy-rich-world.md#healthy-and-rich) (`research/oee/candidates.md`).
 
 ### How this was made (brains mixed at birth)
-Every world of batch Y is a pilot, kept in `GraphOfLifeRuns/.pilots`. No
-experiment of the lab stands behind it, so the page has no box of runs. Each
-corner was read at iteration 1,000 with `research/atlas/at.py`. Every figure
-says, folded beneath it, which worlds it reads and how. The setting is
-[`mix_at_birth`](settings.md#mix_at_birth).
+Each corner of batch Y was read at iteration 1,000 with
+`research/atlas/at.py`. The setting is [`mix_at_birth`](settings.md#mix_at_birth).
 
 ## Who inherits?
 
-When an agent dies, the cleanup shares its tokens out among the survivors:
+When an agent dies, the [cleanup](one-iteration.md#cleanup "The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.") shares its tokens out among the survivors:
 until now evenly, every survivor with the same chance at every token. Four
 other rules were played in pilot worlds of B2 and B1. Given to the poorest,
 the estate changes little in B2, and keeps B1's poorest alive. Given to the
@@ -2005,15 +1996,12 @@ other worlds tie or swing.
   agents in the first seeds played.
 
 ### How this was made (who inherits)
-Every world on this page is a pilot of batch R, kept in
-`GraphOfLifeRuns/.pilots`. No experiment of the lab stands behind it, so the
-page has no box of runs. The worlds of the fourth rule are
+The worlds are batch R's. Those of the fourth rule are
 `R/B2-children-s1`, `-s2`, `R/B1-children-s1` and `-s2`. The controls are,
 for B2, the pilot worlds `P/B2-s1` and `-s2`, which replay the lab's
 Experiment 16 worlds game for game. For B1 they are the first 2,000
 iterations of the long runs `L/B1-long-s1` and `-s2`. The table reads every
-world from one file (`research/atlas/at.py --at 2000`). Every figure says,
-folded beneath it, which worlds it reads and how. The setting is
+world from one file (`research/atlas/at.py --at 2000`). The setting is
 [`redistribution`](settings.md#redistribution).
 
 ## Links to strangers
@@ -2184,13 +2172,10 @@ say.
   itself keeps space local. No setting offers one yet.
 
 ### How this was made (links to strangers)
-Every world on this page is a pilot of batch K, kept in
-`GraphOfLifeRuns/.pilots`. No experiment of the lab stands behind it, so the
-page has no box of runs. The control worlds are the pilots `P/B2-s1` and
+The worlds are batch K's. The control worlds are the pilots `P/B2-s1` and
 `-s2`, which replay the lab's Experiment 16 worlds game for game. The
-proposals of the fifty recorded games were
-counted with `research/oee/checks/k_links.py`. Every figure says, folded
-beneath it, which worlds it reads and how.
+proposals of the fifty recorded games were counted with
+`research/oee/checks/k_links.py`.
 
 ## Brains mixed at birth, units that cost, an eye for raids on kin
 
@@ -2355,14 +2340,12 @@ whole and resilient as B2's, whose evolution goes on more strongly. There the br
   only as useful as the rules make acting on it.
 - **A world without death freezes**, even with a network that holds together: turnover is
   what selection works on.
-- Two seeds each are pilots. Mixing and costly units are candidates for an
-  experiment of ten worlds, run longer, beside B2.
+- Mixing was later played in the lab (Experiments 17 and 18); costly units
+  never were.
 
 ### How this was made (brains mixed at birth)
-Every world on this page is a pilot, made with `research/oee/pilots` from the
-job list `jobs_Q.txt` and kept in `GraphOfLifeRuns/.pilots`. No experiment of
-the lab stands behind it, so the page has no box of runs. Every figure says,
-folded beneath it, which worlds it reads and how.
+Every world here was made with `research/oee/pilots` from the job list
+`jobs_Q.txt`.
 
 A first count of the contests of the mixed worlds was wrong, before this page
 was written. Mixed worlds came out the other way: later brains *lost*. The

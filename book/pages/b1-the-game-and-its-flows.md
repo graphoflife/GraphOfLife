@@ -17,12 +17,12 @@ small margin on top. Tokens keep to groups, but in B1 these are the network's
 own regions, not groups the agents make. Two rules decide the rest: whether a
 link must carry tokens to survive, and who inherits the dead.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [Where tokens go](#where-tokens-go): In every game each agent stakes all its tokens, on its own node and on its neighbours'.
-- [How the game is played: what agents stake, and who wins the nodes](#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes): In every game, each agent stakes all its tokens on its own node and its neighbours' nodes.
-- [Where tokens flow](#where-tokens-flow): In every game, each agent stakes all its tokens on itself and its neighbours, and whoever wins a node keeps what was staked on it.
-- [Flow modules: the groups tokens stay in](#flow-modules-the-groups-tokens-stay-in): When an agent stakes tokens on a neighbour's node, the tokens flow along the connection between them.
+- [Where tokens go](#where-tokens-go)
+- [How the game is played: what agents stake, and who wins the nodes](#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)
+- [Where tokens flow](#where-tokens-flow)
+- [Flow modules: the groups tokens stay in](#flow-modules-the-groups-tokens-stay-in)
 
 ## Where tokens go
 
@@ -488,8 +488,9 @@ playing the game in much the same way, whatever its founders started with.
   brains never change.
 
 ### How this was made (how the game is played)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. To make every figure of this page again: `python3 book_figures.py game`.
+`python3 book_figures.py game` draws every figure of this section, from the
+thirty runs of Experiment 10: B1 at 100,000 tokens, seeds 1 to 30, 1,500
+iterations each.
 
 <!-- runs E10 -->
 > [!info]- The runs behind this page
@@ -1270,10 +1271,9 @@ keep tokens going round more than chance would; B2's barely do.
 
 ### How this was made (where tokens flow)
 The first two sections, and [Do tokens go round?](#do-tokens-go-round), read
-the thirty runs of Experiment 10, listed below. They are worlds of the
-baseline B1 at 100,000 tokens, seeds 1 to 30, run for 1,500 iterations each.
-The command `python3 gol_lab.py run E10` makes them. From the runs, two
-commands draw the figures:
+the runs of Experiment 10
+([How this was made](#how-this-was-made-how-the-game-is-played)). From them,
+two commands draw the figures:
 
 - `python3 book_figures.py flow` those of
   [Where the tokens flow](#where-the-tokens-flow) and of
@@ -1286,8 +1286,7 @@ world the notebook has made, from the table `book/results/worlds.json`. The
 commands `python3 research/atlas/across.py lab`, `pilots` and `write` make
 that table ([Every world side by side](measures-atlases-and-assembly.md#every-world-side-by-side)). The
 exact split of fifty games comes from `research/oee/checks/circulation.py`.
-The command `python3 book_figures.py lightning` draws these figures. Each
-figure says, folded beneath it, which runs it reads and how.
+The command `python3 book_figures.py lightning` draws these figures.
 
 The measures are explained in the notes
 [Lightning: tokens that go round](measures-of-the-archived-studies.md#lightning-tokens-that-go-round),
@@ -1563,9 +1562,8 @@ four fifths were.
   with alliances, would show whether their groups outlast the network's.
 
 ### How this was made (flow modules)
-This page reads the runs of many experiments and many pilot worlds, so it has
-no single box of runs. Every figure says, folded beneath it, which worlds it
-reads and how.
+This section reads the runs of many experiments and many pilot worlds, so it
+has no single box of runs.
 
 - **Every world, fifty games.** `research/atlas/flowmodules.py` (`lab`, then
   `pilots`) reads fifty consecutive games of every world. A lab run is read

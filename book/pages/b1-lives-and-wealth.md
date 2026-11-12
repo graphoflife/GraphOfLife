@@ -19,14 +19,14 @@ near 0.47. And it is a world of places more than of individuals. Most agents
 die young, cut off from the network. Wealth follows connections, as in a random
 walk, and who is rich keeps changing.
 
-It gathers what were 6 pages of their own, one section each:
+Its sections:
 
-- [The life of a B1 world](#the-life-of-a-b1-world): The first baseline, B1, is studied through thirty worlds that differ only in their seed, each run for 1,500 iterations.
-- [Births, deaths and ages](#births-deaths-and-ages): From iteration 500 on, a world of 100,000 tokens keeps about 14,400 agents, but replaces about 3.5 in a hundred of them in every iteration.
-- [How births build the network](#how-births-build-the-network): In the first baseline, B1, every new node of a world's network is a newborn agent, and every new connection is made at a birth.
-- [How unequal is a world, and who stays rich](#how-unequal-is-a-world-and-who-stays-rich): The founders of a world start equal, but the first births end that, and from then on a world is moderately unequal.
-- [Gains and losses: who gains, who loses, and the share-out](#gains-and-losses-who-gains-who-loses-and-the-share-out): Every token is staked in every game.
-- [The largest and the smallest](#the-largest-and-the-smallest): In a settled world, the richest agent holds about 2% of all tokens and the best-connected some 640 connections; the median agent has 2.
+- [The life of a B1 world](#the-life-of-a-b1-world)
+- [Births, deaths and ages](#births-deaths-and-ages)
+- [How births build the network](#how-births-build-the-network)
+- [How unequal is a world, and who stays rich](#how-unequal-is-a-world-and-who-stays-rich)
+- [Gains and losses: who gains, who loses, and the share-out](#gains-and-losses-who-gains-who-loses-and-the-share-out)
+- [The largest and the smallest](#the-largest-and-the-smallest)
 
 ## The life of a B1 world
 
@@ -176,13 +176,8 @@ children, and their number grows fast. Then food runs short, and the
 population levels off at what the island can feed. From then on, every
 newcomer eats what someone else no longer has.
 
-A world's tokens are such a store. Their number never changes, and every
-agent needs at least one. A founder holds a hundred tokens and can afford
-many children, so a world should grow fast at first. Then every birth has to
-be paid for with tokens someone else loses. So we expected a world to grow
-quickly to some size and then keep it, with births and deaths in balance: a
-short youth, then a long, steady middle age. Before the thirty worlds of
-10,000 tokens were run, Experiment 2 wrote this down as its thesis:
+A world's tokens are such a store. Before the thirty worlds of 10,000 tokens
+were run, Experiment 2 wrote down its thesis:
 
 <!-- thesis E02 -->
 > [!quote] The thesis of Experiment 2, written down before any of its runs existed
@@ -661,9 +656,10 @@ before it. Whatever the brains of a world learn, they learn in its youth.
   than one phase of life.
 
 ### How this was made (the life of a B1 world)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. To make them again you need a computer with Python 3, numpy and
-networkx, and a copy of this repository. Then `python3 gol_lab.py run E10`
+Every figure of this section reads the thirty runs of Experiment 10: B1 at
+100,000 tokens, seeds 1 to 30, 1,500 iterations each. To make them again you
+need a computer with Python 3, numpy and networkx, and a copy of this
+repository. Then `python3 gol_lab.py run E10`
 makes the runs into the folder `GraphOfLifeRuns/`. A run of 1,500 iterations
 at this size takes about seven hours on one core. The thirty took 211 hours
 of computing in all, done in a little over two days on four processor cores,
@@ -675,8 +671,7 @@ From the runs, `python3 book_figures.py life` draws the figures of
 [The first hundred iterations](#the-first-hundred-iterations), and
 `python3 book_figures.py shape` the first look at a world, together with the
 figures of [What shape does the network take?](b1-the-network-size-and-scaling.md#the-shape-of-the-network).
-`python3 book_figures.py` alone redraws the figures of every page. Each
-figure says, folded beneath it, which of the runs it reads and how.
+`python3 book_figures.py` alone redraws the figures of every page.
 
 A few figures on other pages set worlds of different sizes side by side: in
 [How ages change over a world's life](b1-lives-and-wealth.md#how-ages-change-over-a-worlds-life),
@@ -1326,15 +1321,13 @@ calls it a border going quiet).
   ([How to tell a world that keeps evolving](how-to-tell-a-world-that-keeps-evolving.md)).
 
 ### How this was made (births)
-Every figure of this page reads the thirty runs of Experiment 10, listed below.
-The figure of [Two sizes](#two-sizes) also reads the thirty runs of 10,000
-tokens of Experiment 2, made with `python3 gol_lab.py run E02`. From the runs,
 `python3 book_figures.py births` draws the figures of [Four ways in and
 out](#four-ways-in-and-out), [How long agents live](#how-long-agents-live) and
-[How old the living are](#how-old-the-living-are). And `python3 book_figures.py
-ages` draws those of [How ages change over a world's
-life](#how-ages-change-over-a-worlds-life). Each figure says, folded beneath
-it, which runs it reads and how.
+[How old the living are](#how-old-the-living-are), and `python3 book_figures.py
+ages` those of [How ages change over a world's
+life](#how-ages-change-over-a-worlds-life), from the runs of Experiment 10
+([How this was made](#how-this-was-made-the-life-of-a-b1-world)). The figure of [Two sizes](#two-sizes) reads the thirty runs of 10,000
+tokens of Experiment 2 too (`python3 gol_lab.py run E02`).
 
 ## How births build the network
 
@@ -1745,13 +1738,10 @@ other way. They pass from parent to newborn child, as
   asks what this means.
 
 ### How this was made (how births build the network)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are the baseline B1 at 100,000 tokens, seeds 1 to 30, run for
-1,500 iterations each. The command `python3 book_figures.py children` draws
-the figures of [How agents have children](#how-agents-have-children), and
-`python3 book_figures.py grows` those of
-[How the network grows](#how-the-network-grows). Each figure says, folded
-beneath it, which of the runs it reads and how.
+`python3 book_figures.py children` draws the figures of [How agents have
+children](#how-agents-have-children), and `python3 book_figures.py grows`
+those of [How the network grows](#how-the-network-grows), from the runs of
+Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)).
 
 The 39% of [How a child is joined](#how-a-child-is-joined) is counted in the
 samples behind its figure. The function `book_figures.sample_pass` keeps, for
@@ -2462,10 +2452,8 @@ connectedness is taxed away in this manner, a little at a time.
   that sit on them.
 
 ### How this was made (how unequal is a world)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them. From the runs, three commands draw the figures:
+From the runs of Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)), three commands draw
+the figures:
 
 - `python3 book_figures.py tokens` those of
   [Where do the tokens go?](#where-do-the-tokens-go);
@@ -2474,10 +2462,8 @@ them. From the runs, three commands draw the figures:
 - `python3 book_figures.py rich` those of
   [Do the rich stay rich?](#do-the-rich-stay-rich).
 
-Each figure says, folded beneath it, which runs it reads and how.
-
 The thesis of Experiment 4 was first checked in the thirty worlds of 10,000
-tokens of Experiment 2, listed last. There the command
+tokens of Experiment 2. There the command
 `python3 gol_lab.py analyse E04` checks it. In the worlds of 100,000 tokens,
 `python3 book_figures.py tokens` checks it again.
 
@@ -2916,13 +2902,10 @@ tokens out would do.
   token.
 
 ### How this was made (gains and losses)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them, and `python3 book_figures.py gains` draws every figure of this page.
-Each figure says, folded beneath it, which runs it reads and how. The numbers
-given for the worlds of 10,000 tokens come from the thirty runs of
-Experiment 2, from which this page was first written.
+`python3 book_figures.py gains` draws every figure here from the runs of
+Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)). The numbers given for the worlds of
+10,000 tokens come from the thirty runs of Experiment 2, from which this
+section was first written.
 
 ## The largest and the smallest
 
@@ -3227,14 +3210,11 @@ brain holds its node in B2 has not been measured directly, as
   inheritance.
 
 ### How this was made (the largest and the smallest)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them. The figure of stars also reads the 26 worlds of 10,000 tokens of
-Experiment 2 that lived to the end (`python3 gol_lab.py run E02`). The figure
-by size reads the worlds of Experiment 8 (`python3 gol_lab.py run E08`). The
-command `python3 book_figures.py extremes` draws every figure of this page.
-Each figure says, folded beneath it, which runs it reads and how.
+`python3 book_figures.py extremes` draws every figure here from the runs of
+Experiment 10 ([How this was made](#how-this-was-made-the-life-of-a-b1-world)). The figure of stars reads the 26
+worlds of 10,000 tokens of Experiment 2 that lived to the end too
+(`python3 gol_lab.py run E02`), and the figure by size the worlds of
+Experiment 8 (`python3 gol_lab.py run E08`).
 
 ## Where to go next
 

@@ -232,10 +232,7 @@ lone raiders and controls on the same patches.
 
 ### What we expected of breeding
 
-We expected breeding to open the door. A raider that breeds replaces its
-dead, so its patch need not die with the agents it was planted on. And every
-child can raid at once. The breeding turtle would show whether the raid adds
-anything to the breeding.
+Experiment 34 tested whether breeding opens the door:
 
 <!-- thesis E34 -->
 > [!quote] The thesis of Experiment 34, written down before any of its runs existed
@@ -386,10 +383,7 @@ each of B1's two long worlds. Beside each is a control.
 
 ### What we expected in B1
 
-If B2's rules closed the door, B1 should open it. Without a home share or a
-holder's bonus, a raid is cheap. Without old age, a patch need not breed to
-last. And the agents a patch meets are rich enough to be worth taking. So we
-expected lone raiders to take hold in B1, and crews at least as often.
+Experiment 35 tested whether B1, without B2's rules, opens the door:
 
 <!-- thesis E35 -->
 > [!quote] The thesis of Experiment 35, written down before any of its runs existed
@@ -527,8 +521,7 @@ played on to 10,000 iterations as [pilots](runs-and-records.md#pilot-worlds "A w
 (`GraphOfLifeRuns/.pilots/L/B2-long-s001` … `s005`). Experiment 35 plants
 them in B1's two long worlds, played on to 10,000 iterations as pilots too
 (`GraphOfLifeRuns/.pilots/L/B1-long-s1` and `s2`). Each trial plays from a
-pilot's checkpoint, which holds a whole world, as a run's archive does. Each
-figure says, folded beneath it, how it is drawn from the trials.
+pilot's checkpoint, which holds a whole world, as a run's archive does.
 
 ### The trials of Experiment 33
 

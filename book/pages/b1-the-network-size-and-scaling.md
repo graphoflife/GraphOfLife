@@ -27,15 +27,15 @@ law](measures-of-the-archived-studies.md#fitting-a-power-law-properly), [how man
 needs](statistics.md#what-thirty-seeds-can-see) and [how long a world
 remembers](statistics.md#what-a-b1-world-remembers).
 
-It gathers what were 7 pages of their own, one section each:
+Its sections:
 
-- [The shape of the network](#the-shape-of-the-network): Within a hundred iterations, the founders' ring with its few shortcuts becomes a mesh, the **core**, with small trees hanging off it.
-- [How a world breaks](#how-a-world-breaks): Only the largest connected piece of a world's network survives each phase, so a whole region can die in one game.
-- [Power laws, real and apparent, and how to fit one](#power-laws-real-and-apparent-and-how-to-fit-one): A power law has no typical size, and on logarithmic axes it is a straight line.
-- [How properties scale together](#how-properties-scale-together): On average, agents hold tokens in proportion to their connections plus one: the resting state of the even split.
-- [Like next to like: how alike agents are at a distance](#like-next-to-like-how-alike-agents-are-at-a-distance): How alike are two agents a given number of steps apart, and up to how far?
-- [Worlds of many sizes](#worlds-of-many-sizes): Experiment 8 ran the first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."), B1, at ten sizes, from 800 to 409,600 tokens.
-- [How much does the seed decide?](#how-much-does-the-seed-decide): Thirty baseline worlds that differ only in their seed end up alike: at 100,000 tokens, their sizes vary by about a tenth of the mean.
+- [The shape of the network](#the-shape-of-the-network)
+- [How a world breaks](#how-a-world-breaks)
+- [Power laws, real and apparent, and how to fit one](#power-laws-real-and-apparent-and-how-to-fit-one)
+- [How properties scale together](#how-properties-scale-together)
+- [Like next to like: how alike agents are at a distance](#like-next-to-like-how-alike-agents-are-at-a-distance)
+- [Worlds of many sizes](#worlds-of-many-sizes)
+- [How much does the seed decide?](#how-much-does-the-seed-decide)
 
 ## The shape of the network
 
@@ -60,7 +60,7 @@ connections to it. In every game, a connection that carries no tokens is cut
 when the game ends ([One iteration, step by step](one-iteration.md)). Nothing
 in the rules aims at any shape. So what shape comes out?
 
-Every section of this page reads the thirty worlds of the first baseline, B1,
+Every part of this section reads the thirty worlds of the first [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other."), B1,
 at 100,000 tokens ([Thirty worlds](b1-lives-and-wealth.md#thirty-worlds)). Much of
 it was first written from the thirty worlds of 10,000 tokens; where those
 differ, their numbers are given beside.
@@ -865,10 +865,10 @@ agent is heavy-tailed: most agents are on a few, a handful on hundreds.
   every game ([How the game is played](b1-the-game-and-its-flows.md#how-the-game-is-played-what-agents-stake-and-who-wins-the-nodes)).
 
 ### How this was made (the shape of the network)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them. [How many dimensions the core has](#how-many-dimensions-the-core-has)
+Every figure of this section reads the thirty runs of Experiment 10, listed
+below: B1 at 100,000 tokens, seeds 1 to 30, 1,500 iterations each. The command
+`python3 gol_lab.py run E10` makes them.
+[How many dimensions the core has](#how-many-dimensions-the-core-has)
 also reads the three worlds of 409,600 tokens of Experiment 8. It quotes the
 worlds of 10,000 tokens of Experiment 2 too. From the runs, three commands
 draw the figures:
@@ -879,8 +879,6 @@ draw the figures:
   [The core of a world](#the-core-of-a-world);
 - `python3 book_figures.py geometry` those of
   [The geometry of a world](#the-geometry-of-a-world).
-
-Each figure says, folded beneath it, which runs it reads and how.
 
 The thesis of Experiment 5 was first checked in the thirty worlds of 10,000
 tokens of Experiment 2, listed last. There `python3 gol_lab.py analyse E05`
@@ -1170,21 +1168,17 @@ separated piece live on as a world of its own is planned for the experiment
   cannot split at all.
 
 ### How this was made (how a world breaks)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them. The figure of one world reads the world of seed 26 alone. The numbers at
+Every figure here reads the runs of Experiment 10 ([How this was made](#how-this-was-made-the-shape-of-the-network)); the
+figure of one world reads the world of seed 26 alone. The numbers at
 10,000 tokens come from the thirty worlds of Experiment 2, of which 26 lived
 to the end of their 3,000 iterations (`python3 gol_lab.py run E02`). Those of
 [Worlds that cannot break](#worlds-that-cannot-break), and of a connection's
 price connection by connection, are quoted from the pages linked there.
 
-The command `python3 book_figures.py breaking` draws every figure of this
-page. It also writes the numbers of the big cuts to
-`book/results/breaking.json`. For every game that cut off a thousand agents or
-more, it compares the world before the game with the world after it. Then it
-counts the border. Each figure says, folded beneath it, which runs it reads
-and how.
+The command `python3 book_figures.py breaking` draws every figure here. It
+also writes the numbers of the big cuts to `book/results/breaking.json`. For
+every game that cut off a thousand agents or more, it compares the world
+before the game with the world after it. Then it counts the border.
 
 ## Power laws, real and apparent, and how to fit one
 
@@ -1534,22 +1528,19 @@ scale. The world forgets.
   ([What the measurements say about open-ended evolution](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)).
 
 ### How this was made (power laws)
-Every figure and number of this page, unless it says otherwise, reads the
-thirty runs of Experiment 10, listed below. They are worlds of the baseline
-B1 at 100,000 tokens, seeds 1 to 30, run for 1,500 iterations each, made
-with `python3 gol_lab.py run E10`. The numbers at 10,000 tokens come from the
+Every figure and number here, unless it says otherwise, reads the runs of
+Experiment 10 ([How this was made](#how-this-was-made-the-shape-of-the-network)). The numbers at 10,000 tokens come from the
 thirty worlds of Experiment 2, of which 26 lived to the end of their 3,000
 iterations (`python3 gol_lab.py run E02`). Numbers from other pages are
 quoted with a link to their page. They include B2's pilots, the attachment
 kernels, the tokens per candidate, the fate of the rich and the largest cut.
 
-The command `python3 book_figures.py powerlaws` draws every figure of this
-page, and writes its numbers to `book/results/powerlaws.json`. A run's
+The command `python3 book_figures.py powerlaws` draws every figure here, and
+writes its numbers to `book/results/powerlaws.json`. A run's
 statistics `degreeExponent` and `tokenExponent` come from
 `gol_series._tail_exponent`, and `degreeGamma` and its kin from
 `gol_series._scale_free`. The goodness-of-fit test is `tail_pvalue` in
-`book_chapters/measures.py`. Each figure says, folded beneath it, which runs
-it reads and how.
+`book_chapters/measures.py`.
 
 How far the token tail follows its law is read off the points of the token
 figure, `book/figures/powerlaws/tokens-fit.svg`, against its red line. The
@@ -1809,17 +1800,14 @@ world's history.
   asks where to look instead.
 
 ### How this was made (how properties scale together)
-Every figure of this page reads the thirty runs of Experiment 10, listed
-below. They are worlds of the baseline B1 at 100,000 tokens, seeds 1 to 30,
-run for 1,500 iterations each. The command `python3 gol_lab.py run E10` makes
-them. The pictures of single agents read each world's frame after its last
+Every figure here reads the runs of Experiment 10 ([How this was made](#how-this-was-made-the-shape-of-the-network)).
+The pictures of single agents read each world's frame after its last
 game. The exponents of single worlds are the viewer's, every 25 iterations
 from iteration 500 on. The numbers at 10,000 tokens come from the 26 worlds of
 Experiment 2 that lived to the end (`python3 gol_lab.py run E02`).
 
-The command `python3 book_figures.py scaling` draws every figure of this page,
-and writes its numbers to `book/results/scaling.json`. Each figure says,
-folded beneath it, which runs it reads and how.
+The command `python3 book_figures.py scaling` draws every figure here, and
+writes its numbers to `book/results/scaling.json`.
 
 ## Like next to like: how alike agents are at a distance
 
@@ -2133,8 +2121,8 @@ lines, not of genotypes.
   for rules that would let such regions form.
 
 ### How this was made (like next to like)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. All three are drawn again with `python3 book_figures.py alike`. The
+All three figures are drawn again with `python3 book_figures.py alike`, from
+the runs of Experiment 10 ([How this was made](#how-this-was-made-the-shape-of-the-network)). The
 measurement is the function `likeness` in `book_chapters/space.py`, and its
 numbers are kept in `book/results/alike.json`.
 
@@ -2216,13 +2204,8 @@ at 10,000 tokens, are drawn beside the new runs wherever they can be. They
 are a size the experiment did not run, measured the same way.
 
 #### What was expected (worlds of many sizes)
-We expected a world of twice the tokens to be two worlds of the same kind.
-Everything an agent does is local. It plays the game with its neighbours,
-has its children beside itself, and dies when its own tokens run out. Only
-one rule seemed to reach across a whole world: the tokens of the dead are
-shared out among all survivors. That rule gives every survivor the same
-chance, whatever the size of the world. So at every size we expected about
-as many agents and connections per token as at 10,000 tokens.
+Experiment 8 tested whether a world of twice the tokens is two worlds of the
+same kind:
 
 <!-- thesis E08 -->
 > [!quote] The thesis of Experiment 8, written down before any of its runs existed
@@ -2624,9 +2607,7 @@ iterations 400, 400 and 525, where the median world of 10,000 tokens needed
 
 #### The thesis
 
-We expected a front. A world of 100,000 tokens is only about twice as wide as
-one of 10,000. So one line should take it over in two to five times as
-long: not ten times as long, and not about as fast.
+Experiment 10 expected a front:
 
 <!-- thesis E10 -->
 > [!quote] The thesis of Experiment 10, written down before any of its runs existed
@@ -2892,11 +2873,8 @@ these matters.
   a condition with the rule off, as Experiment 8 did.
 
 ### How this was made (worlds of many sizes)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. To make the runs again you need a computer with Python 3, numpy and
-networkx, and a copy of this repository. Then `python3 gol_lab.py run E08`
-and `python3 gol_lab.py run E10` make the runs of the two experiments into
-the folder `GraphOfLifeRuns/`.
+`python3 gol_lab.py run E08` and `python3 gol_lab.py run E10` make the runs
+of the two experiments into the folder `GraphOfLifeRuns/`.
 
 #### The runs of Experiment 8
 
@@ -2932,8 +2910,7 @@ The four smallest sizes run once more with the stopping rule switched off.
 <!-- /runs -->
 
 #### The runs of Experiment 10 (worlds of many sizes)
-Experiment 10 is 30 runs: B1 at 100,000 tokens, seeds 1 to 30, 1,500
-iterations each.
+Experiment 10's thirty runs ([How this was made](#how-this-was-made-the-shape-of-the-network)):
 
 - **Survived to iteration 1,500:** all 30.
 - **Engine:** snapshot `b840ff37ba4cdad7`, commit `8d99b55`, for all 30
@@ -2989,13 +2966,8 @@ died out, so their values are for the 26 that lived.
 
 ### What we expected
 
-Before the runs of 10,000 tokens, we expected the seed to decide little. A
-world holds thousands of agents and lives for thousands of iterations, so its
-accidents should average out. Then the thirty worlds' numbers of agents and
-connections, and their inequality, would differ by less than a fifth of their
-typical value. And thirty seeds per condition would be enough to see a setting
-change a world by a tenth. That was the thesis of Experiment 3, written down
-before any of its runs existed:
+Before the runs of 10,000 tokens, Experiment 3 wrote down that the seed would
+decide little:
 
 <!-- thesis E03 -->
 > [!quote] The thesis of Experiment 3, written down before any of its runs existed
@@ -3359,7 +3331,7 @@ The thirty worlds of 100,000 tokens are those of Experiment 10
 > These are the runs of [Experiment 2](b1-lives-and-wealth.md#the-runs-of-experiment-2); nothing new was run. To make them again: `python3 gol_lab.py run E02`.
 <!-- /runs -->
 
-Every figure of this page is drawn again by `python3 book_figures.py seed`.
+Every figure here is drawn again by `python3 book_figures.py seed`.
 The check of the thesis at 10,000 tokens is in `book/results/E03.json`,
 written by `python3 gol_lab.py analyse E03`.
 

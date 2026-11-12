@@ -224,8 +224,8 @@ medians over many iterations.
 - [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did)
 - [How runs are made, recorded and costed](runs-and-records.md#what-a-pilot-records)
 
-> [!info]- And in the Archive (5)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#stars) · [B1: lives and wealth](b1-lives-and-wealth.md#where-to-go-next) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#worlds-that-cannot-break) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-kills-a-world) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world)
+> [!info]- And in the Archive (6)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#stars) · [B1: lives and wealth](b1-lives-and-wealth.md#where-to-go-next) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#worlds-that-cannot-break) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md#what-kills-a-world) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md#the-six-criteria) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#what-the-switches-did-to-the-world)
 <!-- /used -->
 
 ## The diversity score

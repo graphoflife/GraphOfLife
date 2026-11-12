@@ -16,11 +16,11 @@ often than chance, puffers in B2 and gliders in B1, but no chain keeps a
 direction. None of it is cooperation, and two new inputs for the brains did not
 change that.
 
-It gathers what were 3 pages of their own, one section each:
+Its sections:
 
-- [Who helps whom](#who-helps-whom): Cooperation means paying a cost so that someone else gains, and in Graph of Life the only act is a stake.
-- [Do agents cooperate? Help, kin and partners](#do-agents-cooperate-help-kin-and-partners): Cooperation means paying a cost so that someone else gains.
-- [Gliders, and who helps whom](#gliders-and-who-helps-whom): When an agent takes a neighbour's node with at least half of its [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), its wealth and a copy of its brain move there together.
+- [Who helps whom](#who-helps-whom)
+- [Do agents cooperate? Help, kin and partners](#do-agents-cooperate-help-kin-and-partners)
+- [Gliders, and who helps whom](#gliders-and-who-helps-whom)
 
 ## Who helps whom
 
@@ -60,7 +60,7 @@ what they found side by side, in plain words, and leads to them.
 
 ### What helping is, here
 
-Picture a node under attack. Its holder, V, keeps 4 tokens at home, and a
+Picture a node under attack. Its holder, V, keeps 4 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") at home, and a
 neighbour, U, stakes 6 on it to take it. Another neighbour, W, adds 3 tokens
 to V's node. V and W mark their stakes revolutionary. Under B1's rules such
 stakes join as a crowd against the largest staker: their 7 beat U's 6, and V
@@ -823,9 +823,10 @@ But an alliance protects by peace, not by rescue
   kin, and to commit to a partner.
 
 ### How this was made (do agents cooperate)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. All five are drawn again with `python3 book_figures.py cooperation`, and
-their numbers are kept in `book/results/cooperation.json`.
+All five figures of this section are drawn again with
+`python3 book_figures.py cooperation`, from the thirty runs of Experiment 10
+(B1 at 100,000 tokens), and their numbers are kept in
+`book/results/cooperation.json`.
 
 The numbers for the worlds of 10,000 tokens come from the same measurement on
 Experiment 2: thirty worlds, `B1-10000-s001` … `-s030`, of 3,000 iterations
@@ -1481,9 +1482,8 @@ Every check is a script in `research/oee/checks/`:
 - `circulation.py`: the split of the flow;
 - `decisive.py`: help.
 
-Every figure says, folded beneath it, which runs it reads and how. All five
-are drawn again with `python3 book_figures.py patterns`, and their numbers are
-kept in `book/results/patterns.json`.
+All five figures are drawn again with `python3 book_figures.py patterns`, and
+their numbers are kept in `book/results/patterns.json`.
 
 ## Where to go next
 

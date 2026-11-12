@@ -224,7 +224,7 @@ Every page with a box *The runs behind this page* reads the lab's runs.
 - [Every simulation: what was run, and what was measured](every-simulation.md#where-to-go-next)
 
 > [!info]- And in the Archive (5)
-> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#how-this-was-made-eight-switches-at-once) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#how-this-was-made) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay)
+> [What B1 is, and what stood in its way](what-the-baseline-world-is.md#where-the-world-stands-on-the-ladder) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md#the-experiment) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md#in-short) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md#how-this-was-made) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md#what-was-tried-to-make-helping-pay)
 <!-- /used -->
 
 ## What a run records

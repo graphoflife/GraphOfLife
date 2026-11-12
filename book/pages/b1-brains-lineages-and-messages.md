@@ -18,17 +18,17 @@ brains two changes nothing they do. B1's agents act nearly alike; B2's differ
 as widely as random brains, but their kinds replace one another instead of
 piling up.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [Genotypes and lineages](#genotypes-and-lineages): A genotype names one exact brain, and in B1 brains change so often that a genotype lasts about two [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.").
-- [What agents say to each other](#what-agents-say-to-each-other): Each agent writes a message of 30 numbers to itself and to each neighbour, and nothing but the brains gives the numbers a meaning.
-- [How alike the agents are](#how-alike-the-agents-are): Evolution can only choose among differences.
-- [How different are the agents?](#how-different-are-the-agents): We put the brains of a world's agents into the same situations, with the same random numbers, and compare what they do.
+- [Genotypes and lineages](#genotypes-and-lineages)
+- [What agents say to each other](#what-agents-say-to-each-other)
+- [How alike the agents are](#how-alike-the-agents-are)
+- [How different are the agents?](#how-different-are-the-agents)
 
 ## Genotypes and lineages
 
 A genotype names one exact brain, and in B1 brains change so often that a
-genotype lasts about two iterations. A world holds about five genotypes for
+genotype lasts about two [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."). A world holds about five genotypes for
 every eight agents, and the most common one usually holds only about 1% of
 it. Yet lines of descent take whole worlds over, about every 350 iterations
 at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") and about once a run at 100,000. So Experiment 6's thesis,
@@ -69,18 +69,9 @@ Experiment 6 asked who wins, and for how long. Its thesis was written down
 before the runs of 10,000 tokens. It needed no runs of its own: it read the
 thirty of Experiment 2.
 
-We expected nobody to win for long. Every brain has one chance in five of
-changing after every game, and again when it is copied to a child. A node
-that is conquered takes on its conqueror's brain. So a genotype should be
-renamed long before it could spread far. Pilots run earlier had found a
-typical genotype lasting a single iteration, and fewer than one in ten
-lasting more than five.
-
-So we expected hundreds of genotypes at any moment, and no genotype holding
-more than a small part of the world. And we expected the living to descend
-from many different ancestors. The test counts those ancestors as
-**families**: the different genotypes of eight iterations earlier that the
-living descend from ([Families](measuring-evolution.md#families)). Here is the thesis, as it was
+The test counts the ancestors of the living as **families**: the different
+genotypes of eight iterations earlier that the living descend from
+([Families](measuring-evolution.md#families)). Here is the thesis, as it was
 written down:
 
 <!-- thesis E06 -->
@@ -415,9 +406,8 @@ widens more and more slowly
   does, not as a front.
 
 ### How this was made (genotypes and lineages)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. The command `python3 book_figures.py lineage` draws them all, and
-writes the numbers it measures to `book/results/lineage.json`.
+The command `python3 book_figures.py lineage` draws every figure of this
+section, and writes the numbers it measures to `book/results/lineage.json`.
 
 The worlds are the thirty B1 worlds of 100,000 tokens of Experiment 10. The
 numbers given for worlds of 10,000 tokens come from the lineage analysis of
@@ -670,11 +660,11 @@ the rules give it something to gain by reading it
   kin.
 
 ### How this was made (what agents say to each other)
-Every figure of this page reads the final checkpoint of each of the thirty
-runs of Experiment 10, listed below. A checkpoint holds the world after its
-last iteration, with every living agent's brain. From it,
-`python3 book_figures.py talk` rebuilds every message and draws every figure.
-Each figure says, folded beneath it, which runs it reads and how.
+Every figure here reads the final checkpoint of each of the thirty runs of
+Experiment 10 ([How this was made](#how-this-was-made-genotypes-and-lineages)).
+A checkpoint holds the world after its last iteration, with every living
+agent's brain. From it, `python3 book_figures.py talk` rebuilds every message
+and draws every figure.
 
 The numbers given for worlds of 10,000 tokens come from the thirty runs of
 Experiment 2, `B1-10000-s001` … `-s030`, made with
@@ -998,10 +988,9 @@ they only differ, it is drift: variety without direction.
   somewhere it does better than the others.
 
 ### How this was made (how alike the agents are)
-The three figures of this page are drawn with
+The three figures of this section are drawn with
 `python3 book_figures.py how_alike`, from the measures of
-`research/oee/checks/diversity.py`. Each says, folded beneath it, which
-worlds it reads and how. The counts use
+`research/oee/checks/diversity.py`. The counts use
 [Effective numbers](statistics.md#effective-numbers-how-many-kinds) and
 [Splitting variation](statistics.md#splitting-variation-between-worlds-and-within-them).
 [Genotypes, families and the common ancestor](measuring-evolution.md#brain-diversity)
@@ -1485,9 +1474,8 @@ does worse there.
 
 ### How this was made (how different are the agents)
 The figures read the measurements of `research/oee/checks/diversity.py`,
-kept in `GraphOfLifeRuns/.pilots/diversity/`. Each figure says, folded
-beneath it, which worlds it reads and how. `python3 book_figures.py diversity`
-draws them all, and writes the numbers they quote to
+kept in `GraphOfLifeRuns/.pilots/diversity/`. `python3 book_figures.py
+diversity` draws them all, and writes the numbers they quote to
 `book/results/diversity.json`.
 
 Nothing in the measure is particular to B1 or B2. It needs only a world at
@@ -1604,6 +1592,6 @@ to every condition of every experiment, and to the pilot worlds.
 
 **Also about:** [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter), [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (24)
-> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
+> [!info]- Pages that link here (23)
+> [What this notebook is about](what-this-notebook-is-about.md) · [The ideas this builds on](the-ideas-this-builds-on.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures of the archived studies](measures-of-the-archived-studies.md)
 <!-- /turns -->

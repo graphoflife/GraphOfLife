@@ -18,12 +18,12 @@ seed decides how many agents the [tokens](the-world.md#agents-and-tokens "The on
 with what, and the viewer's colours, are tools for looking, kept here with
 their figures.
 
-It gathers what were 4 pages of their own, one section each:
+Its sections:
 
-- [What goes with what](#what-goes-with-what): This page is an atlas rather than an experiment.
-- [Every world side by side](#every-world-side-by-side): Each page measures the worlds of one experiment or a few.
-- [One world, many colours: what the viewer can colour by](#one-world-many-colours-what-the-viewer-can-colour-by): Statistics average; a picture shows **where** things are.
-- [Assembly theory: how many steps to make a thing, and how many copies](#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies): Assembly theory measures a thing by the fewest joins that build it from basic parts, reusing whatever was built before (its **assembly index**), and a collection by how many copies it holds of things that take many joins (its **assembly**, A).
+- [What goes with what](#what-goes-with-what)
+- [Every world side by side](#every-world-side-by-side)
+- [One world, many colours: what the viewer can colour by](#one-world-many-colours-what-the-viewer-can-colour-by)
+- [Assembly theory: how many steps to make a thing, and how many copies](#assembly-theory-how-many-steps-to-make-a-thing-and-how-many-copies)
 
 ## What goes with what
 
@@ -329,8 +329,7 @@ agents' tables and correlates them, and `report.py` prints the strongest
 pairs, the revealed ones, the predictors and the reversals. The program
 `world_series.py` does the same for whole worlds, with the groups of
 statistics in `groups.py`. The tables are kept in
-`GraphOfLifeRuns/.pilots/atlas/`. Every figure says, folded beneath it,
-which worlds it reads and how.
+`GraphOfLifeRuns/.pilots/atlas/`.
 
 ## Every world side by side
 
@@ -484,23 +483,8 @@ are decided by chance, early, and then stay.
 
 ### What has been measured where
 
-The notebook's measures were each made for one question, and applied to the
-worlds that question was about. Gathered:
-
-| measure | lab worlds | pilot worlds |
-|---|---|---|
-| the ~95 recorded statistics, lightning among them | every run | the engine's pilots, from recorded games; the prototype's, their series |
-| flow modules ([Flow modules: the groups tokens stay in](b1-the-game-and-its-flows.md#flow-modules-the-groups-tokens-stay-in)) | up to five seeds of every condition | the engine's pilots |
-| loops and the exact circulation, chains, help ([Gliders, and who helps whom](cooperation-help-and-gliders.md#gliders-and-who-helps-whom)) | ten B1 and ten B2 worlds | the alliance pilots, batches P and Q |
-| lifetime contests between eras ([A contest a lifetime long](measuring-evolution.md#a-contest-a-lifetime-long)) | B2, through the long runs that go on from its worlds | every pilot batch |
-| correlations among agents ([What goes with what](measures-atlases-and-assembly.md#what-goes-with-what)) | ten B1 and ten B2 worlds; now any run, in the Research tab | any run made on the server or in the browser |
-| how different the agents are ([How different are the agents?](b1-brains-lineages-and-messages.md#how-different-are-the-agents)) | B1 and B2, over a world's life | the long runs |
-| exploitability ([Exploitability](measuring-evolution.md#exploitability)) | Experiment 16 | — |
-
-Two things are still missing. One is the lifetime contests for the lab's B1
-worlds, whose runs keep no archives of their brains. The other is every
-measure for the worlds of the many experiments that ran at 5,000 tokens or
-fewer, which the notebook no longer makes.
+Which measure was made on which worlds is listed in [What was measured on
+what](every-simulation.md#what-was-measured-on-what), which is kept up to date.
 
 ### What we learned (every world side by side)
 - **There are two kinds of world, not a continuum.** Every lab world is
@@ -752,9 +736,8 @@ Five cautions apply to every picture the viewer draws:
   measure both.
 
 ### How this was made (one world)
-Every figure of this page says, folded beneath it, which runs it reads and
-how. To make every figure of this page again: `python3 book_figures.py
-colours`.
+`python3 book_figures.py colours` draws every figure of this section again,
+from the runs of Experiment 10:
 
 <!-- runs E10 -->
 > [!info]- The runs behind this page
