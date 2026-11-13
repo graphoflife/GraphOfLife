@@ -3273,9 +3273,23 @@ html:has(.home-stage.is-full) { overflow: hidden; }
 
 /* ---- the arrival ---- */
 
+/* Until the page has started (home.js adds .play), the screen is off. The
+   words and the numbers are written whole in the markup, so they would
+   otherwise stand there, undecoded, for as long as the scripts take to
+   arrive, and then jump to their places for the backdrop this browser chose.
+   Only where scripts run: without them nothing would ever start. */
+@media (scripting: enabled) {
+  .home-stage:not(.play) .home-hero,
+  .home-stage:not(.play) .home-readout { visibility: hidden; }
+}
+
 /* Restarted by re-adding the class whenever the tab is opened, so it plays
-   every time rather than only on the first load. */
+   every time rather than only on the first load. The tube comes on as the
+   eyes do (eyes.js fades them in over 1.8 s), and the words come up out of the
+   dark with them, so nothing is suddenly there. */
 @media (prefers-reduced-motion: no-preference) {
+  .home-stage.play .home-tube { animation: home-appear 1800ms ease-out both; }
+  .home-stage.play .home-hero { animation: home-appear 700ms ease-out both; }
   .home-stage.play .home-glyphs { animation: home-appear 2200ms ease-out both; }
   .home-stage.play #homeCanvas { animation: home-world 3400ms cubic-bezier(0.2, 0.7, 0.2, 1) 500ms both; }
   .home-stage.play .home-mark { animation: home-mark-in 1700ms cubic-bezier(0.16, 0.84, 0.24, 1) 600ms both; }

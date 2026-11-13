@@ -1282,11 +1282,15 @@ function test_the_theme_switch_offers_every_theme_the_stylesheet_has() {
   // A theme in the stylesheet that the switch does not offer can never be
   // chosen; one the switch offers that the stylesheet lacks is the default
   // under another name.
+  // The switch's swatches are written in index.html (theme.js only makes them
+  // work), so that is where what it offers is read.
   const css = fs.readFileSync(path.join(root, 'web', 'css', 'style.css'), 'utf8');
-  const Theme = new Function('Ink',
-    `${fs.readFileSync(path.join(root, 'web', 'js', 'theme.js'), 'utf8')}; return Theme;`)({});
+  const html = fs.readFileSync(path.join(root, 'web', 'index.html'), 'utf8');
+  const start = html.indexOf('id="themeSwitch"');
+  assert(start >= 0, 'index.html has no theme switch');
+  const markup = html.slice(start, html.indexOf('</div>', start));
   const styled = new Set(['obsidian', ...[...css.matchAll(/:root\[data-theme="([\w-]+)"\] \{/g)].map(m => m[1])]);
-  const offered = new Set(Theme.THEMES.map(([name]) => name));
+  const offered = new Set([...markup.matchAll(/data-theme="([\w-]+)"/g)].map(m => m[1]));
   assert([...styled].sort().join() === [...offered].sort().join(),
     `the stylesheet has ${[...styled].sort()} and the switch offers ${[...offered].sort()}`);
 }

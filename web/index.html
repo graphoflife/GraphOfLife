@@ -87,26 +87,39 @@
   <span class="run-label" id="activeRunLabel"></span>
   <!-- The front page's own controls, shown only while it is (home.js): which
        backdrop, kept in this browser, and the backdrop alone, full screen,
-       without a word on it. -->
-  <div class="home-controls" id="homeControls" hidden>
+       without a word on it. Shown in the markup, with the eyes chosen, since
+       the page opens on the front page and most often on the eyes: so the bar
+       is whole from the first paint instead of filling in once the scripts
+       have run. -->
+  <div class="home-controls" id="homeControls">
     <div class="home-backdrop seg" id="homeBackdrop" role="group" aria-label="Backdrop">
-      <button type="button" class="seg-btn" data-backdrop="world">World</button>
-      <button type="button" class="seg-btn" data-backdrop="eyes">Eyes</button>
+      <button type="button" class="seg-btn" data-backdrop="world" aria-pressed="false">World</button>
+      <button type="button" class="seg-btn active" data-backdrop="eyes" aria-pressed="true">Eyes</button>
     </div>
     <button type="button" class="home-full" id="homeFull" title="Full screen, without the words"
             aria-label="Show the backdrop full screen, without the words">
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 5.5v-4h4M10.5 1.5h4v4M14.5 10.5v4h-4M5.5 14.5h-4v-4"/></svg>
     </button>
   </div>
-  <!-- The colour themes, one swatch each (theme.js). -->
-  <div class="theme-switch" id="themeSwitch" role="group" aria-label="Colour theme"></div>
+  <!-- The colour themes, one swatch each, named by data-theme (theme.js), and
+       written here for the same reason. -->
+  <div class="theme-switch" id="themeSwitch" role="group" aria-label="Colour theme">
+    <button type="button" class="theme-swatch theme-swatch-obsidian" data-theme="obsidian" title="Obsidian theme" aria-label="Obsidian theme"></button>
+    <button type="button" class="theme-swatch theme-swatch-phosphor" data-theme="phosphor" title="Phosphor theme" aria-label="Phosphor theme"></button>
+    <button type="button" class="theme-swatch theme-swatch-midnight" data-theme="midnight" title="Midnight theme" aria-label="Midnight theme"></button>
+    <button type="button" class="theme-swatch theme-swatch-paper" data-theme="paper" title="Paper theme" aria-label="Paper theme"></button>
+  </div>
   <!-- Who made this, at the right end of the bar. -->
   <span class="byline"><span>By Stefan Beeler,</span> <a href="mailto:beelerst@pm.me">beelerst@pm.me</a></span>
 </header>
 
 <!-- ==================== HOME VIEW ==================== -->
 <main id="view-home" class="view active">
-  <div class="home-stage">
+  <!-- Marked for the eyes, the backdrop a first visit sees, until home.js
+       says which one this browser chose. Nothing on it shows until the page
+       has started (the stylesheet's "screen off"), so it opens as a dark
+       screen that the picture and the words come up on. -->
+  <div class="home-stage backdrop-eyes">
     <!-- One backdrop is a real run, recorded rather than computed here: the
          page has to open at once, and it must not leave a stray simulation
          behind on a machine that has a server. -->
