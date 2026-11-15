@@ -158,7 +158,7 @@ would be about sixty times as large.
 
 The worlds are the three of
 [How far does a difference travel?](how-far-does-a-difference-travel.md):
-seeds 3026 and 3004, whose rules would keep a light cone, and seed 3080, whose
+seeds 3026 and 3004, whose rules would keep a [light cone](a-world-as-a-wolfram-model.md#past-light-cones "Everything that could have had an effect on an agent by now (its past cone), or that it can affect (its future one)."), and seed 3080, whose
 agents jump to strangers. A source's gradient may wash out through such long
 links.
 

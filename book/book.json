@@ -504,6 +504,19 @@
       "summary": "Patterns that keep their identity while what carries them is replaced, looked for in twelve worlds with three detectors, each beside a null and tried on a pattern known to be there: no ring of tokens outlasts the next stretch of games, no agent keeps a rhythm beyond a random walk's, and the groups that outlast their members are the network's own regions, which stay where they began. Only a world that froze keeps its patterns, as a crystal in which nothing is replaced."
     },
     {
+      "id": "a-world-as-a-wolfram-model",
+      "title": "A world as a Wolfram model: rewrites, light cones and curvature",
+      "file": "pages/a-world-as-a-wolfram-model.md",
+      "topics": [
+        "space",
+        "methods"
+      ],
+      "kind": "study",
+      "status": "written",
+      "added": "2026-11-15",
+      "summary": "Round 3's living worlds read with the tools of the Wolfram Physics Project, rebuilt on their recorded frames. A world is a network rewritten in every phase, mostly by local rewrites but for the cull; its links last about an iteration while its space holds at nearly three dimensions; news fills half of an agent's past light cone within a few phases, so a world is only a few light-phases wide; and its riches bend its space only through the links they hold."
+    },
+    {
       "id": "what-the-brains-are-like",
       "title": "What the brains are like",
       "file": "pages/what-the-brains-are-like.md",

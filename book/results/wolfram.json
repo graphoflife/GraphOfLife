@@ -1,0 +1,1070 @@
+{
+ "chapter": "wolfram",
+ "numbers": {
+  "census": {
+   "births": {
+    "median": 0.42520443659492624,
+    "q1": 0.1931126699523975,
+    "q3": 0.5587266220278863,
+    "min": 0.008646900269541779,
+    "max": 0.9043764054661824,
+    "n": 82
+   },
+   "deaths": {
+    "median": 0.4398906523855812,
+    "q1": 0.3006916716050302,
+    "q3": 0.6293101211112655,
+    "min": 0.05238496408140528,
+    "max": 0.9799966144611078,
+    "n": 82
+   },
+   "starved": {
+    "median": 0.182984062358966,
+    "q1": 0.10722497131350872,
+    "q3": 0.3998827959379069,
+    "min": 0.0071380606149592666,
+    "max": 0.9590660360144254,
+    "n": 82
+   },
+   "culled": {
+    "median": 0.19919874559561174,
+    "q1": 0.0839061012952111,
+    "q3": 0.29423910482384463,
+    "min": 0.003436756788457532,
+    "max": 0.5724318016944885,
+    "n": 82
+   },
+   "made": {
+    "median": 1.5098019928033908,
+    "q1": 0.6445744350040535,
+    "q3": 2.2422893479521786,
+    "min": 0.04148787061994609,
+    "max": 18.31221889398811,
+    "n": 82
+   },
+   "made_old": {
+    "median": 0.04617299684146767,
+    "q1": 0.008664757223006487,
+    "q3": 0.1401489368889121,
+    "min": 0.0,
+    "max": 3.9955023038097592,
+    "n": 82
+   },
+   "made_birth": {
+    "median": 1.39872222010825,
+    "q1": 0.49148433016333093,
+    "q3": 2.0819302849899604,
+    "min": 0.03760646900269542,
+    "max": 8.750565647127795,
+    "n": 82
+   },
+   "lapsed": {
+    "median": 0.6017317509466794,
+    "q1": 0.1754021920754359,
+    "q3": 0.8355934704417287,
+    "min": 0.001390424435491427,
+    "max": 3.9318223795312646,
+    "n": 82
+   },
+   "old_local": {
+    "median": 0.8126022913256956,
+    "q1": 0.6538882803943045,
+    "q3": 0.9041506917819636,
+    "min": 0.36679201619901647,
+    "max": 1.0,
+    "n": 73
+   },
+   "old_three": {
+    "median": 0.13398692810457516,
+    "q1": 0.07433290978398983,
+    "q3": 0.2000757145561234,
+    "min": 0.0,
+    "max": 0.32258883248730963,
+    "n": 73
+   },
+   "old_far": {
+    "median": 0.049791044776119404,
+    "q1": 0.011010830324909748,
+    "q3": 0.1434010152284264,
+    "min": 0.0,
+    "max": 0.36621347989586345,
+    "n": 73
+   },
+   "old_beyond": {
+    "median": 0.18739770867430441,
+    "q1": 0.09584930821803633,
+    "q3": 0.34611171960569553,
+    "min": 0.0,
+    "max": 0.6332079838009835,
+    "n": 73
+   },
+   "old_out": {
+    "median": 0.00036656891495601173,
+    "q1": 0.0,
+    "q3": 0.004260582737768004,
+    "min": 0.0,
+    "max": 0.0421455938697318,
+    "n": 73
+   },
+   "birth_far": {
+    "median": 0.011372973651756633,
+    "q1": 0.003049486750225708,
+    "q3": 0.03244294703738776,
+    "min": 0.0,
+    "max": 0.13824112730137744,
+    "n": 82
+   },
+   "cull_share": {
+    "median": 0.47218475957111794,
+    "q1": 0.3099279863206365,
+    "q3": 0.6355828690008862,
+    "min": 0.004323541894022068,
+    "max": 0.9770283306929116,
+    "n": 82
+   },
+   "nonlocal": {
+    "median": 0.10574899934865928,
+    "q1": 0.07816500523988384,
+    "q3": 0.13299439565969468,
+    "min": 0.013130091440027525,
+    "max": 0.5149481673454277,
+    "n": 82
+   },
+   "links_per_agent": {
+    "median": 1.7776291503505948,
+    "q1": 1.5346605951972518,
+    "q3": 2.1530154546792026,
+    "min": 1.0044661797684709,
+    "max": 13.87855609601192,
+    "n": 82
+   },
+   "cut": {
+    "median": 1.3788253621661057,
+    "q1": 0.5578450947051572,
+    "q3": 1.894543092450129,
+    "min": 0.0447435509185517,
+    "max": 17.0849769033506,
+    "n": 82
+   },
+   "link_life": {
+    "median": 1.150255287179248,
+    "q1": 0.9568119839340927,
+    "q3": 2.61367962365409,
+    "min": 0.6601469745968772,
+    "max": 66.98322604972533,
+    "n": 82
+   },
+   "agent_life": {
+    "median": 2.274477660694745,
+    "q1": 1.5890462215087797,
+    "q3": 3.3262503775422365,
+    "min": 1.020411688411691,
+    "max": 19.089447087259966,
+    "n": 82
+   }
+  },
+  "census_by_search": {
+   "off": {
+    "worlds": 23,
+    "old_local": {
+     "median": 0.9611637704054765,
+     "q1": 0.9390662417573943,
+     "q3": 0.9878885159784037,
+     "min": 0.7538740830995936,
+     "max": 1.0,
+     "n": 15
+    },
+    "old_far": {
+     "median": 0.0060658082975679544,
+     "q1": 0.0014453630257293187,
+     "q3": 0.00970637044817738,
+     "min": 0.0,
+     "max": 0.03363721021418419,
+     "n": 15
+    },
+    "old_beyond": {
+     "median": 0.03883622959452343,
+     "q1": 0.012111484021596381,
+     "q3": 0.06093375824260565,
+     "min": 0.0,
+     "max": 0.24612591690040642,
+     "n": 15
+    },
+    "old_out": {
+     "median": 0.0,
+     "q1": 0.0,
+     "q3": 0.0,
+     "min": 0.0,
+     "max": 0.0,
+     "n": 15
+    },
+    "nonlocal": {
+     "median": 0.08985671451661337,
+     "q1": 0.06820665512535778,
+     "q3": 0.10538172975309162,
+     "min": 0.013130091440027525,
+     "max": 0.18685312916210928,
+     "n": 23
+    },
+    "made_old": {
+     "median": 0.032105172115550945,
+     "q1": 0.0,
+     "q3": 0.19192759712041488,
+     "min": 0.0,
+     "max": 2.798329519450801,
+     "n": 23
+    },
+    "birth_far": {
+     "median": 0.009111756612138817,
+     "q1": 0.0,
+     "q3": 0.03272859984969701,
+     "min": 0.0,
+     "max": 0.13824112730137744,
+     "n": 23
+    },
+    "cull_share": {
+     "median": 0.41917754312323735,
+     "q1": 0.2589118258714973,
+     "q3": 0.5843759018313561,
+     "min": 0.021555238680408227,
+     "max": 0.9305406306740283,
+     "n": 23
+    }
+   },
+   "walk": {
+    "worlds": 19,
+    "old_local": {
+     "median": 0.7647058823529411,
+     "q1": 0.6669162340190172,
+     "q3": 0.862447036338262,
+     "min": 0.5741652983032294,
+     "max": 0.9658398374852988,
+     "n": 19
+    },
+    "old_far": {
+     "median": 0.0813844714686623,
+     "q1": 0.034164401745147996,
+     "q3": 0.1519052857712098,
+     "min": 0.002993691863573185,
+     "max": 0.30158730158730157,
+     "n": 19
+    },
+    "old_beyond": {
+     "median": 0.23529411764705882,
+     "q1": 0.13755296366173797,
+     "q3": 0.33308376598098277,
+     "min": 0.034160162514701164,
+     "max": 0.4258347016967707,
+     "n": 19
+    },
+    "old_out": {
+     "median": 0.005256773150020219,
+     "q1": 0.0009310154805803161,
+     "q3": 0.022675396109607955,
+     "min": 0.0,
+     "max": 0.0421455938697318,
+     "n": 19
+    },
+    "nonlocal": {
+     "median": 0.1132530481251397,
+     "q1": 0.08880031430091079,
+     "q3": 0.13473005044592457,
+     "min": 0.05499966618820307,
+     "max": 0.23482053796344826,
+     "n": 19
+    },
+    "made_old": {
+     "median": 0.045842600351569146,
+     "q1": 0.022756816983322322,
+     "q3": 0.13234154935675296,
+     "min": 0.0029962483948669312,
+     "max": 2.453710729170103,
+     "n": 19
+    },
+    "birth_far": {
+     "median": 0.010998517053880375,
+     "q1": 0.007488690014293175,
+     "q3": 0.043631185818744866,
+     "min": 0.0029330798746787764,
+     "max": 0.11605818798107478,
+     "n": 19
+    },
+    "cull_share": {
+     "median": 0.3682914820285574,
+     "q1": 0.28703522793433534,
+     "q3": 0.6775458730533619,
+     "min": 0.07386284324087183,
+     "max": 0.7987696012336974,
+     "n": 19
+    }
+   },
+   "reach": {
+    "worlds": 22,
+    "old_local": {
+     "median": 0.6205280755942053,
+     "q1": 0.5150943594439428,
+     "q3": 0.7745721403131214,
+     "min": 0.36679201619901647,
+     "max": 0.9041506917819636,
+     "n": 22
+    },
+    "old_far": {
+     "median": 0.15028910807756368,
+     "q1": 0.06561310878345175,
+     "q3": 0.22652994366230378,
+     "min": 0.00722874372005157,
+     "max": 0.36621347989586345,
+     "n": 22
+    },
+    "old_beyond": {
+     "median": 0.3794719244057947,
+     "q1": 0.22542785968687862,
+     "q3": 0.48490564055605734,
+     "min": 0.09584930821803633,
+     "max": 0.6332079838009835,
+     "n": 22
+    },
+    "old_out": {
+     "median": 0.0013005579638028422,
+     "q1": 0.00028691770924626445,
+     "q3": 0.006101946617190419,
+     "min": 0.0,
+     "max": 0.017592273197654364,
+     "n": 22
+    },
+    "nonlocal": {
+     "median": 0.11361220364634145,
+     "q1": 0.08627447937380262,
+     "q3": 0.1502267678358602,
+     "min": 0.04743287942964414,
+     "max": 0.5149481673454277,
+     "n": 22
+    },
+    "made_old": {
+     "median": 0.09592641263824667,
+     "q1": 0.056576377621094506,
+     "q3": 0.1744997491538093,
+     "min": 0.008487151395803576,
+     "max": 2.859230519188608,
+     "n": 22
+    },
+    "birth_far": {
+     "median": 0.018365569770978814,
+     "q1": 0.011021959693957856,
+     "q3": 0.034466283603403654,
+     "min": 0.0010926053776339436,
+     "max": 0.05712607944450184,
+     "n": 22
+    },
+    "cull_share": {
+     "median": 0.4951332647086898,
+     "q1": 0.43784896132211953,
+     "q3": 0.6288266546740092,
+     "min": 0.027574210671034226,
+     "max": 0.8651782292065926,
+     "n": 22
+    }
+   },
+   "jump": {
+    "worlds": 18,
+    "old_local": {
+     "median": 0.865546218487395,
+     "q1": 0.8105845409852728,
+     "q3": 0.8994565217391305,
+     "min": 0.5712630359212051,
+     "max": 0.9846625766871165,
+     "n": 17
+    },
+    "old_far": {
+     "median": 0.030527289546716005,
+     "q1": 0.010869565217391304,
+     "q3": 0.05683453237410072,
+     "min": 0.0022808409361364536,
+     "max": 0.17960602549246812,
+     "n": 17
+    },
+    "old_beyond": {
+     "median": 0.13445378151260504,
+     "q1": 0.10054347826086957,
+     "q3": 0.1894154590147272,
+     "min": 0.015337423312883436,
+     "max": 0.4287369640787949,
+     "n": 17
+    },
+    "old_out": {
+     "median": 0.0,
+     "q1": 0.0,
+     "q3": 0.0007194244604316547,
+     "min": 0.0,
+     "max": 0.007667031763417305,
+     "n": 17
+    },
+    "nonlocal": {
+     "median": 0.11425239164508777,
+     "q1": 0.07874858692051878,
+     "q3": 0.1365580796217418,
+     "min": 0.05089578203749123,
+     "max": 0.17157623019273105,
+     "n": 18
+    },
+    "made_old": {
+     "median": 0.013762157404631065,
+     "q1": 0.003755037172365373,
+     "q3": 0.038492213879043106,
+     "min": 0.0,
+     "max": 3.9955023038097592,
+     "n": 18
+    },
+    "birth_far": {
+     "median": 0.0028968623765439653,
+     "q1": 0.0005340044634949428,
+     "q3": 0.016936117067661603,
+     "min": 0.0,
+     "max": 0.12938413522449863,
+     "n": 18
+    },
+    "cull_share": {
+     "median": 0.5430658934828255,
+     "q1": 0.4673387541482394,
+     "q3": 0.7069371369694676,
+     "min": 0.004323541894022068,
+     "max": 0.9770283306929116,
+     "n": 18
+    }
+   }
+  },
+  "cull_by_mending": {
+   "true": {
+    "median": 0.360876717936329,
+    "q1": 0.2171896162076321,
+    "q3": 0.47422137833436084,
+    "min": 0.004323541894022068,
+    "max": 0.8651782292065926,
+    "n": 44
+   },
+   "false": {
+    "median": 0.623999165853631,
+    "q1": 0.5134911239555656,
+    "q3": 0.7305893564489003,
+    "min": 0.18266198607722972,
+    "max": 0.9770283306929116,
+    "n": 38
+   }
+  },
+  "stranger_far": {
+   "median": 0.99682,
+   "q1": 0.99339,
+   "q3": 0.99809525,
+   "min": -2.0000000000575113e-06,
+   "max": 0.999433,
+   "n": 82
+  },
+  "space": {
+   "dimension_start": {
+    "median": 2.80185,
+    "q1": 2.545275,
+    "q3": 3.2401750000000002,
+    "min": 2.1919,
+    "max": 3.4223,
+    "n": 82
+   },
+   "dimension_end": {
+    "median": 2.8438,
+    "q1": 2.3413,
+    "q3": 3.9214,
+    "min": 1.6945,
+    "max": 5.8381,
+    "n": 81
+   },
+   "ricci_start": {
+    "median": -0.6253,
+    "q1": -0.9131,
+    "q3": -0.4897,
+    "min": -1.4876,
+    "max": -0.1795,
+    "n": 81
+   },
+   "ricci_end": {
+    "median": -0.2708,
+    "q1": -0.5989,
+    "q3": -0.03845,
+    "min": -2.9975,
+    "max": 2.2381,
+    "n": 75
+   },
+   "dimension_settled": {
+    "median": 2.8807,
+    "q1": 2.5134499999999997,
+    "q3": 3.4004000000000003,
+    "min": 1.69305,
+    "max": 5.8393,
+    "n": 81
+   },
+   "ricci_settled": {
+    "median": -0.229725,
+    "q1": -0.5995625,
+    "q3": -0.05385,
+    "min": -4.117,
+    "max": 1.7640500000000001,
+    "n": 78
+   },
+   "ricci_positive_settled": 0.15853658536585366
+  },
+  "cones": {
+   "news": {
+    "agent_half": {
+     "median": 4.0,
+     "q1": 2.0,
+     "q3": 6.0,
+     "min": 1.0,
+     "max": 16.0,
+     "n": 82
+    },
+    "agent_half_all": {
+     "median": 4.0,
+     "reached": 82,
+     "worlds": 82
+    },
+    "agent_at": {
+     "2": {
+      "median": 0.12840000000000001,
+      "q1": 0.042975,
+      "q3": 0.5505249999999999,
+      "min": 0.0048,
+      "max": 1.0,
+      "n": 82
+     },
+     "4": {
+      "median": 0.63785,
+      "q1": 0.278025,
+      "q3": 0.99705,
+      "min": 0.0311,
+      "max": 1.0,
+      "n": 82
+     },
+     "8": {
+      "median": 0.98675,
+      "q1": 0.769,
+      "q3": 1.0,
+      "min": 0.1571,
+      "max": 1.0,
+      "n": 82
+     },
+     "16": {
+      "median": 0.9926,
+      "q1": 0.858725,
+      "q3": 1.0,
+      "min": 0.4802,
+      "max": 1.0,
+      "n": 82
+     },
+     "40": {
+      "median": 0.9924,
+      "q1": 0.918475,
+      "q3": 1.0,
+      "min": 0.3299,
+      "max": 1.0,
+      "n": 82
+     }
+    },
+    "whole_at": {
+     "2": {
+      "median": 0.9957,
+      "q1": 0.94745,
+      "q3": 1.0,
+      "min": 0.6093,
+      "max": 1.0,
+      "n": 82
+     },
+     "4": {
+      "median": 0.9955,
+      "q1": 0.920225,
+      "q3": 1.0,
+      "min": 0.4476,
+      "max": 1.0,
+      "n": 82
+     },
+     "8": {
+      "median": 0.99665,
+      "q1": 0.93715,
+      "q3": 1.0,
+      "min": 0.4014,
+      "max": 1.0,
+      "n": 82
+     },
+     "16": {
+      "median": 0.9926,
+      "q1": 0.8699250000000001,
+      "q3": 1.0,
+      "min": 0.4802,
+      "max": 1.0,
+      "n": 82
+     },
+     "40": {
+      "median": 0.9924,
+      "q1": 0.918475,
+      "q3": 1.0,
+      "min": 0.3299,
+      "max": 1.0,
+      "n": 82
+     }
+    },
+    "whole_min": {
+     "median": 0.8382000000000001,
+     "q1": 0.5798,
+     "q3": 0.9922,
+     "min": 0.246,
+     "max": 1.0,
+     "n": 82
+    }
+   },
+   "matter": {
+    "agent_half": {
+     "median": 12.0,
+     "q1": 6.0,
+     "q3": 18.0,
+     "min": 2.0,
+     "max": 40.0,
+     "n": 66
+    },
+    "agent_half_all": {
+     "median": 15.0,
+     "reached": 66,
+     "worlds": 82
+    },
+    "agent_at": {
+     "2": {
+      "median": 0.0032,
+      "q1": 0.001525,
+      "q3": 0.006,
+      "min": 0.0001,
+      "max": 1.0,
+      "n": 82
+     },
+     "4": {
+      "median": 0.0182,
+      "q1": 0.006725,
+      "q3": 0.061,
+      "min": 0.0015,
+      "max": 1.0,
+      "n": 82
+     },
+     "8": {
+      "median": 0.1422,
+      "q1": 0.045,
+      "q3": 0.65875,
+      "min": 0.0072,
+      "max": 1.0,
+      "n": 82
+     },
+     "16": {
+      "median": 0.51465,
+      "q1": 0.26575000000000004,
+      "q3": 0.98095,
+      "min": 0.0333,
+      "max": 1.0,
+      "n": 82
+     },
+     "40": {
+      "median": 0.85585,
+      "q1": 0.551625,
+      "q3": 0.99,
+      "min": 0.1008,
+      "max": 1.0,
+      "n": 82
+     }
+    },
+    "whole_at": {
+     "2": {
+      "median": 0.9614499999999999,
+      "q1": 0.8712,
+      "q3": 0.99135,
+      "min": 0.5108,
+      "max": 1.0,
+      "n": 82
+     },
+     "4": {
+      "median": 0.9394,
+      "q1": 0.746475,
+      "q3": 0.9908,
+      "min": 0.3581,
+      "max": 1.0,
+      "n": 82
+     },
+     "8": {
+      "median": 0.92505,
+      "q1": 0.635775,
+      "q3": 0.99015,
+      "min": 0.2203,
+      "max": 1.0,
+      "n": 82
+     },
+     "16": {
+      "median": 0.8538,
+      "q1": 0.5011249999999999,
+      "q3": 0.989725,
+      "min": 0.1101,
+      "max": 1.0,
+      "n": 82
+     },
+     "40": {
+      "median": 0.8608,
+      "q1": 0.551625,
+      "q3": 0.99,
+      "min": 0.1027,
+      "max": 1.0,
+      "n": 82
+     }
+    },
+    "whole_min": {
+     "median": 0.6132500000000001,
+     "q1": 0.299025,
+     "q3": 0.968075,
+     "min": 0.0802,
+     "max": 1.0,
+     "n": 82
+    }
+   },
+   "flow": {
+    "agent_half": {
+     "median": 19.0,
+     "q1": 15.0,
+     "q3": 25.0,
+     "min": 7.0,
+     "max": 39.0,
+     "n": 35
+    },
+    "agent_half_all": {
+     "median": null,
+     "reached": 35,
+     "worlds": 82
+    },
+    "agent_at": {
+     "2": {
+      "median": 0.0006,
+      "q1": 0.0003,
+      "q3": 0.0011,
+      "min": 0.0,
+      "max": 0.0044,
+      "n": 82
+     },
+     "4": {
+      "median": 0.0017,
+      "q1": 0.0007,
+      "q3": 0.003,
+      "min": 0.0,
+      "max": 0.0195,
+      "n": 82
+     },
+     "8": {
+      "median": 0.0068,
+      "q1": 0.002325,
+      "q3": 0.017675,
+      "min": 0.0,
+      "max": 0.5512,
+      "n": 82
+     },
+     "16": {
+      "median": 0.0505,
+      "q1": 0.013825,
+      "q3": 0.2403,
+      "min": 0.0,
+      "max": 0.9788,
+      "n": 82
+     },
+     "40": {
+      "median": 0.3781,
+      "q1": 0.080675,
+      "q3": 0.8046249999999999,
+      "min": 0.0001,
+      "max": 0.9969,
+      "n": 82
+     }
+    },
+    "whole_at": {
+     "2": {
+      "median": 0.9063000000000001,
+      "q1": 0.804525,
+      "q3": 0.963325,
+      "min": 0.4829,
+      "max": 0.9982,
+      "n": 82
+     },
+     "4": {
+      "median": 0.8358,
+      "q1": 0.62565,
+      "q3": 0.93985,
+      "min": 0.3174,
+      "max": 0.9969,
+      "n": 82
+     },
+     "8": {
+      "median": 0.73695,
+      "q1": 0.4917,
+      "q3": 0.924175,
+      "min": 0.1517,
+      "max": 0.9961,
+      "n": 82
+     },
+     "16": {
+      "median": 0.63815,
+      "q1": 0.27455,
+      "q3": 0.921675,
+      "min": 0.059,
+      "max": 0.9952,
+      "n": 82
+     },
+     "40": {
+      "median": 0.5076,
+      "q1": 0.135025,
+      "q3": 0.9062749999999999,
+      "min": 0.0081,
+      "max": 0.9969,
+      "n": 82
+     }
+    },
+    "whole_min": {
+     "median": 0.4064,
+     "q1": 0.112275,
+     "q3": 0.87815,
+     "min": 0.0069,
+     "max": 0.9936,
+     "n": 82
+    }
+   }
+  },
+  "crossing": {
+   "measured": {
+    "median": 4.0,
+    "q1": 2.0,
+    "q3": 6.0,
+    "min": 1.0,
+    "max": 16.0,
+    "n": 82
+   },
+   "still": {
+    "median": 4.080330973833481,
+    "q1": 2.227906424683446,
+    "q3": 5.692492618293707,
+    "min": 0.6391457139369306,
+    "max": 11.732896317060174,
+    "n": 82
+   },
+   "half_reach": {
+    "median": 14.562236489524828,
+    "q1": 8.2596330159949,
+    "q3": 19.978427839164397,
+    "min": 1.917437141810792,
+    "max": 35.19868895118052,
+    "n": 82
+   },
+   "speed4": 49,
+   "within_one": 0.8536585365853658
+  },
+  "matter": {
+   "rho_tokens": {
+    "median": 0.0459267956262613,
+    "q1": -0.02895246303571394,
+    "q3": 0.12156877983129968,
+    "min": -0.35567410229371976,
+    "max": 0.45168057018091273,
+    "n": 78
+   },
+   "rho_around": {
+    "median": -0.17444884386384393,
+    "q1": -0.316715329823937,
+    "q3": -0.06938292782526675,
+    "min": -0.5196021227885735,
+    "max": 0.07705413260717134,
+    "n": 78
+   },
+   "rho_degree": {
+    "median": 0.11160630370465635,
+    "q1": 0.020136101844750363,
+    "q3": 0.1731430362450714,
+    "min": -0.17208737825003065,
+    "max": 0.638824062902258,
+    "n": 78
+   },
+   "rho_activity": {
+    "median": -0.008119383465198842,
+    "q1": -0.06266886167069347,
+    "q3": 0.046711451242428335,
+    "min": -0.2956792473855145,
+    "max": 0.3804682597837207,
+    "n": 78
+   },
+   "partial_tokens_degree": {
+    "median": 0.006314427185312948,
+    "q1": -0.0516914341024982,
+    "q3": 0.05462829922226193,
+    "min": -0.39771277503026164,
+    "max": 0.2055442846252929,
+    "n": 78
+   },
+   "partial_around_degree": {
+    "median": -0.24929488148550819,
+    "q1": -0.3595023159618862,
+    "q3": -0.10322361605801342,
+    "min": -0.5962640026028886,
+    "max": 0.04588870676118066,
+    "n": 78
+   },
+   "partial_activity_degree": {
+    "median": -0.06254759788929765,
+    "q1": -0.09354639320410425,
+    "q3": -0.035083485548003744,
+    "min": -0.3070332652667787,
+    "max": 0.06642192721189712,
+    "n": 78
+   },
+   "partial_tokens_links": {
+    "median": -0.01099775508031579,
+    "q1": -0.07339786949211799,
+    "q3": 0.03403209491251556,
+    "min": -0.3952680034868025,
+    "max": 0.1869001391151598,
+    "n": 78
+   },
+   "partial_around_links": {
+    "median": -0.04616221848445957,
+    "q1": -0.11777397397432848,
+    "q3": 0.03378170082476933,
+    "min": -0.5293918581164944,
+    "max": 0.22880732752672298,
+    "n": 78
+   },
+   "partial_activity_links": {
+    "median": -0.030342742628796958,
+    "q1": -0.08951801973761382,
+    "q3": 0.012914946771402301,
+    "min": -0.3024265457529796,
+    "max": 0.5635061364898437,
+    "n": 78
+   },
+   "rho_beside": {
+    "median": -0.4043389122955774,
+    "q1": -0.49530471175319307,
+    "q3": -0.3138627986271249,
+    "min": -0.8971580520670283,
+    "max": 0.04522423383608026,
+    "n": 78
+   },
+   "rho_around_beside": {
+    "median": 0.4683604932630091,
+    "q1": 0.28861008678460054,
+    "q3": 0.592060232008598,
+    "min": -0.08624829755676118,
+    "max": 0.9377494219303756,
+    "n": 78
+   },
+   "rho_tokens_degree": {
+    "median": 0.4289321635137167,
+    "q1": 0.24645031467074852,
+    "q3": 0.6218522813826389,
+    "min": 0.007352316530886243,
+    "max": 0.8158812076445554,
+    "n": 78
+   },
+   "rho_activity_degree": {
+    "median": 0.38499795790179403,
+    "q1": 0.1984731633515028,
+    "q3": 0.5669246016199232,
+    "min": -0.2573917928155908,
+    "max": 0.8479240473698612,
+    "n": 78
+   },
+   "rho_activity_tokens": {
+    "median": 0.32633696651423155,
+    "q1": 0.18804684012337544,
+    "q3": 0.454400397773823,
+    "min": -0.6399376949617852,
+    "max": 0.7758754917115914,
+    "n": 78
+   }
+  },
+  "matter_worlds": 78,
+  "across_worlds": {
+   "rho_ricci_rewrites": 0.19829537551056536,
+   "rho_ricci_links": 0.12156198232147597,
+   "rho_rewrites_links": 0.3770638107987506,
+   "rewrites": {
+    "median": 3.3115191113150377,
+    "q1": 1.597285966830919,
+    "q3": 4.249007871881369,
+    "min": 0.12936609153678777,
+    "max": 21.27750855625713,
+    "n": 82
+   }
+  },
+  "deciles": {
+   "richest": [
+    0.0,
+    0.39335,
+    0.44904999999999995,
+    0.45589999999999997,
+    0.39990000000000003,
+    0.30715000000000003
+   ],
+   "poorest": [
+    0.0,
+    -0.30195,
+    -0.32975,
+    -0.2878,
+    -0.23715,
+    -0.2054
+   ],
+   "degree_richest": {
+    "median": 5.62328514905786,
+    "q1": 4.295425308645878,
+    "q3": 8.443119571015693,
+    "min": 2.4937888198757765,
+    "max": 28.698630136986303,
+    "n": 78
+   },
+   "degree_poorest": {
+    "median": 1.970969116080937,
+    "q1": 1.6045301365535156,
+    "q3": 2.642318186588309,
+    "min": 1.0435041716328963,
+    "max": 6.279268292682927,
+    "n": 78
+   },
+   "degree_all": {
+    "median": 3.38860717016762,
+    "q1": 2.9202642389800233,
+    "q3": 4.226804509945721,
+    "min": 2.1644717239735414,
+    "max": 14.935932560590095,
+    "n": 78
+   }
+  }
+ },
+ "figures": {
+  "locality": {
+   "title": "How local a world's rewrites are",
+   "caption": "Each dot is one of the 82 worlds of round 3 that lived, read at every 100th iteration from 100 on, in both phases; the short bar is the median of a column. The columns are how the world's agents look for new links (`link_search`): not at all, a scout that walks, a search that reaches as far as its tokens pay, a search that jumps. Left: of the links made between two agents that were there before the phase, the share whose ends were three steps apart or more just before it. A link between agents two steps apart closes a triangle, the most local link a rewriting rule can make. An agent drawn at random lies three steps away or more in 99.7% of draws, in the median world. Right: the share of all of a phase's rewrites (a birth, a death, a link made, a link that lapses) that no rule acting within two steps could make: a link made across three steps or more, a newborn's link to an agent beyond its parent's neighbours, and a death in the cull.",
+   "recipe": "**Runs.** the 82 worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiments 40, 41 and 42: 30,000 tokens, every setting drawn at random; the worlds of `research/screen/evolution.json`)\n\n**Data.** From each world's readings in `research/atlas/wolfram.json`, made by `python3 research/atlas/wolfram.py` from the world's frames (`GraphOfLifeRuns/<run>/frames/`) and statistics (`stats.jsonl`).\n\n1. At every 100th iteration from 100 to 2,900, read the frames just before the reproduction phase, after it and after the game, and build each one's network from `edges`.\n2. A phase's rewrites: agents in the later frame and not the earlier are born, the other way round dead; the cleanup's `starved`, `orphaned` (culled) and `aged` say how they died. Links in one frame's `edges` and not the other's are made or cut.\n3. For a link made between two agents of the earlier frame, the number of steps between them in the earlier frame's network (8 for eight or more, or in another piece). For a newborn's link, the steps between its other end and the newborn's parent (`parent_ids`).\n4. Sum over the phases read; the shares are of those sums.\n\n**To make it again:** `python3 book_figures.py wolfram`."
+  },
+  "space": {
+   "title": "Space and its curvature through a life, as Wolfram reads them",
+   "caption": "The 82 worlds of round 3 that lived, read after every 25th game and averaged over stretches of 100 iterations. Left: the viewer's `dimension`, from how the shells around about 24 agents grow out to five steps (1 a line, 2 a sheet, 3 a solid). Right: its `ricciCurvature`, the same fit's correction that grows with the square of the radius (positive where balls grow more slowly than flat space allows, negative where they grow faster). The line is the median of the worlds at each iteration, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th).",
+   "recipe": "**Runs.** the 82 worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiments 40, 41 and 42: 30,000 tokens, every setting drawn at random; the worlds of `research/screen/evolution.json`)\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, the rows after the game (`phase` 2) that hold `dimension` and `ricciCurvature` (every 25th iteration), gathered by `research/atlas/wolfram.py` into `research/atlas/wolfram.json`.\n\n1. One line of 120 points per world, one every 25 iterations; the mean of each four, a stretch of 100 iterations.\n2. At each point the median of the worlds, the middle half and nine in ten.\n\n**To make it again:** `python3 book_figures.py wolfram`."
+  },
+  "cones": {
+   "title": "Past light cones",
+   "caption": "The 82 worlds of round 3 that lived. An agent's past cone, k phases back, is every agent of that earlier world that could have had an effect on it by then. Blue: news, as far as the rules let it travel in a phase (four steps, three in worlds without the look that only talks); orange: matter, a step a phase, as a stake, a gift or a child moves; green: the tokens and brains that did move, read from the decisions (stakes, nodes won, gifts, children and a mate's share). The global rules, the cull, the share-out and the one random stream, are left out, though each reaches the whole world at once. Left: the median of 32 agents drawn at random in each world, after the games of iterations 1,000, 2,000 and 2,900 (the median of the three moments). Right: the past cone of everyone alive at that moment together. The line is the median of the worlds at each phase back, and the band holds the middle half of them (from the 25th to the 75th percentile).",
+   "recipe": "**Runs.** the 82 worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiments 40, 41 and 42: 30,000 tokens, every setting drawn at random; the worlds of `research/screen/evolution.json`)\n\n**Data.** From each world's readings in `research/atlas/wolfram.json`, made by `python3 research/atlas/wolfram.py` from the world's frames (`GraphOfLifeRuns/<run>/frames/`) and statistics (`stats.jsonl`).\n\n1. After the game of iteration 1,000, 2,000 and 2,900, draw 32 agents (seeded by the run's seed).\n2. Go back a phase at a time. An agent of the later frame that was in the earlier one marks itself there; a newborn marks its parent. News: every agent within four steps of a marked agent, three without `message_prepass` (three and two of a newborn's parent), in the earlier frame's network, joins the cone. Matter: within one step (none from a newborn's parent). Flow: the senders of the phase's stakes, nodes won, gifts, children and mates' shares to a member join it.\n3. Each cone's size over the earlier frame's agents, for 40 phases (20 iterations); the median over the 32 agents, then over the three moments.\n4. The whole world's cone starts from every agent alive at the moment.\n\n**To make it again:** `python3 book_figures.py wolfram`."
+  },
+  "crossing": {
+   "title": "How many phases wide a world is",
+   "caption": "Each dot is one of the 82 worlds of round 3 that lived. Across: the steps within which a typical agent's ball holds half the world (from 40 agents drawn at random), over the steps news can go in a phase by the rules (four, or three without the look that only talks): how many phases a world would be wide if its network stood still. Up: the phases back until the median agent's past news cone held half the world, as measured through the world's own changing network. Both are the medians of the three moments of the figure above.",
+   "recipe": "**Runs.** the 82 worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiments 40, 41 and 42: 30,000 tokens, every setting drawn at random; the worlds of `research/screen/evolution.json`)\n\n**Data.** From each world's readings in `research/atlas/wolfram.json`, made by `python3 research/atlas/wolfram.py` from the world's frames (`GraphOfLifeRuns/<run>/frames/`) and statistics (`stats.jsonl`).\n\n1. The width: the typical ball (the geometric mean over 40 agents) out of the frame after the game of iteration 1,000, 2,000 and 2,900; the radius at which it first holds half the world, between whole steps by the logarithm of the ball (`research/atlas/space.half_reach`).\n2. Over the speed of news: 4 steps a phase, or 3 without `message_prepass`.\n3. Measured: the first phase back at which the median agent's past news cone held half the world.\n4. The median of the three moments, for each.\n\n**To make it again:** `python3 book_figures.py wolfram`."
+  },
+  "matter": {
+   "title": "Does matter bend a world's space?",
+   "caption": "The 78 worlds of round 3 that lived and whose typical ball needs more than three steps to hold half of them, in their network after the last game (its largest piece). Left: around the tenth of the agents with the most tokens (orange) and the tenth with the fewest (blue), how many agents lie within r steps, against the typical ball of the world (the geometric mean over all its agents), as the natural logarithm of the ratio: 0.1 is about 10% more. The line is the median of the worlds at each radius, the darker band holds the middle half of them (from the 25th to the 75th percentile) and the paler band nine in ten (5th to 95th). Right: each dot is one world; across its agents, the rank correlation of an agent's own curvature (the r\u00b2 term of the growth of its ball out to five steps, its dimension held at the world's) with its links and with its neighbours' links (their mean); and, with both held equal (a partial correlation), with its tokens, with the tokens around it (the mean over it and its neighbours) and with how much was rewritten at it in the last 20 iterations (links made or cut, children, its node taken). Positive: more of it, more positive curvature, a ball that grows more slowly.",
+   "recipe": "**Runs.** the 82 worlds of round 3 of the screen of random worlds that lived to the end of their 3,000 iterations (Experiments 40, 41 and 42: 30,000 tokens, every setting drawn at random; the worlds of `research/screen/evolution.json`)\n\n**Data.** From each world's readings in `research/atlas/wolfram.json`, made by `python3 research/atlas/wolfram.py` from the world's frames (`GraphOfLifeRuns/<run>/frames/`) and statistics (`stats.jsonl`).\n\n1. Read the last frame, after the game of iteration 2,999, and keep the largest piece of its network.\n2. Every agent's ball V(r), r = 0 to 5, by spreading from all agents at once.\n3. The world's dimension d from ln V(r) = a + d ln r \u2212 R r\u00b2 / (6 (d + 2)) fitted to the typical ball (Wolfram 2020); each agent's own R from the same with d held at the world's. Its ranks do not depend on d.\n4. Rewrites at an agent: over the last 40 phases, the links made or cut at it, the children it had and the times its node took another brain, per phase.\n5. Spearman's rho across the agents; a partial rho correlates the residuals of both ranks after a plane in the ranks of the agent's links and of its neighbours' mean links.\n\n**To make it again:** `python3 book_figures.py wolfram`."
+  }
+ }
+}

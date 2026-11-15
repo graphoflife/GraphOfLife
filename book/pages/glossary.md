@@ -32,6 +32,7 @@ there.
 - **[bridge](measuring-networks.md#bridges-cut-risk-loops-and-the-core-how-a-network-can-be-cut)** — A connection that lies on no loop: cut it and the network falls into two pieces.
 - **[candidate](one-iteration.md#phase-1-reproduction)** — An agent itself and each of its neighbours, the ones its brain looks at when it decides.
 - **[candidate world](candidates-for-open-ended-evolution.md#the-worlds-ruled-out)** (also candidates for open-ended evolution) — A world of round 3 that no rule of the funnel rules out: it lived, is no star, its agents' tokens differ, its children act like their parents, and it does not stand still.
+- **[causal graph](a-world-as-a-wolfram-model.md#wolframs-models-in-one-page)** — The events of a history, each linked to the events it depends on: it says what can affect what.
 - **[circulation](measuring-tokens.md#flows-that-go-round)** — The part of a flow that goes round in loops, as against the part that runs from sources to sinks.
 - **[cleanup](one-iteration.md#cleanup)** — The end of every phase: only the largest connected piece of the network lives on, and the tokens of the dead are shared out.
 - **[clustering](measuring-networks.md#clustering)** — How often an agent's neighbours are also each other's neighbours.
@@ -80,6 +81,7 @@ there.
 - **[largest remainder](rules-in-detail.md#splitting-tokens-into-whole-numbers)** — How tokens are split into whole numbers: each gets the whole part of its share, and the tokens left over go to the largest fractions.
 - **[least squares](statistics.md#fitting-a-straight-line)** (also R²) — The straight line that fits a cloud of points best, and how much of their spread it explains.
 - **[lifetime](measuring-lives.md#age-lifetime-and-survival-curves)** — How many iterations an agent lives, from its birth to its death.
+- **[light cone](a-world-as-a-wolfram-model.md#past-light-cones)** (also past light cone, past cone) — Everything that could have had an effect on an agent by now (its past cone), or that it can affect (its future one).
 - **[lightning](measures-of-the-archived-studies.md#lightning-tokens-that-go-round)** — A closed loop of the flow of a game: tokens that go round and come back where they started.
 - **[lineage](measuring-evolution.md#families)** — A line of descent: the agents whose genotypes go back to one ancestor.
 - **[logarithmic axis](statistics.md#logarithmic-axes-and-power-laws)** — An axis on which each step multiplies by the same factor, so that numbers of very different sizes fit on one chart.

@@ -732,6 +732,22 @@
       "page": "did-evolution-happen",
       "anchor": "4--selection-on-behaviour-measured",
       "says": "How much more a brain is copied for doing more of one thing, with its other behaviours and its wealth held fixed."
+    },
+    {
+      "name": "causal graph",
+      "page": "a-world-as-a-wolfram-model",
+      "anchor": "wolframs-models-in-one-page",
+      "says": "The events of a history, each linked to the events it depends on: it says what can affect what."
+    },
+    {
+      "name": "light cone",
+      "also": [
+        "past light cone",
+        "past cone"
+      ],
+      "page": "a-world-as-a-wolfram-model",
+      "anchor": "past-light-cones",
+      "says": "Everything that could have had an effect on an agent by now (its past cone), or that it can affect (its future one)."
     }
   ],
   "skip": {

@@ -69,6 +69,6 @@ has to be built first and what it would cost, is in the notebook's history:
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (3)
-> [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [A source and a sink](a-source-and-a-sink.md)
+> [!info]- Pages that link here (4)
+> [Physical inspiration](physical-inspiration.md) · [Local rules only](local-rules-only.md) · [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md) · [A source and a sink](a-source-and-a-sink.md)
 <!-- /turns -->

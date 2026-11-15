@@ -707,10 +707,10 @@ made again by `python3 book_figures.py particles` and kept in
 <!-- turns -->
 ---
 
-← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension)
+← [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Space and dimension](../README.md#space-and-dimension) · [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md) →
 
 **Also about:** [Groups and cooperation](../README.md#groups-and-cooperation).
 
-> [!info]- Pages that link here (2)
-> [Physical inspiration](physical-inspiration.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (3)
+> [Physical inspiration](physical-inspiration.md) · [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

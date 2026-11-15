@@ -120,7 +120,7 @@ poor, and their evolution stops.
 ## A speed limit
 
 Nothing in physics travels faster than light. Whatever happens at a point can
-only affect what lies inside its **light cone**. That is the region light
+only affect what lies inside its **[light cone](a-world-as-a-wolfram-model.md#past-light-cones "Everything that could have had an effect on an agent by now (its past cone), or that it can affect (its future one).")**. That is the region light
 could reach from it: a sphere that grows at the speed of light. This is
 **locality**, and it is one of the deepest facts we know about the world.
 
@@ -729,6 +729,6 @@ rules the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The progra
 
 **Also about:** [Start here](../README.md#start-here).
 
-> [!info]- Pages that link here (19)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Particles: patterns that outlast what carries them](particles.md) · [A source and a sink](a-source-and-a-sink.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [Space at scale (side study)](space-at-scale.md)
+> [!info]- Pages that link here (20)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [The rules in detail](rules-in-detail.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md) · [Measuring space: dimension and the random twin](measuring-space.md) · [Local rules only](local-rules-only.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [Particles: patterns that outlast what carries them](particles.md) · [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md) · [A source and a sink](a-source-and-a-sink.md) · [What a brain can compute](what-a-brain-can-compute.md) · [One agent in a sea of average agents](one-agent-in-a-sea-of-average-agents.md) · [Measuring health: criteria, the health bar and diversity](measuring-health.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Rounds 1 and 2 of the screen, and the criteria they were judged by](rounds-1-and-2-of-the-screen.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->

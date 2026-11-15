@@ -834,6 +834,7 @@ of the messages' variety.
 - [B1 and B2: the two baselines](b1-and-b2.md#b1-the-rules-as-they-were-built)
 - [Physical inspiration](physical-inspiration.md#a-speed-limit)
 - [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
+- [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md#past-light-cones)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-contest-step-by-step)
 - [Why does evolution level off?](why-does-evolution-level-off.md#the-arms)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)

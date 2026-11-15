@@ -243,6 +243,7 @@ them had 12 to 23.
 - [Local rules only](local-rules-only.md#local-rules-only)
 - [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
 - [Particles: patterns that outlast what carries them](particles.md#for-the-physics-aim)
+- [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md#are-the-rewrites-local)
 - [Brains replaced by their average](brains-replaced-by-their-average.md#what-we-expect)
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-it-is-tested)
 - [A source and a sink](a-source-and-a-sink.md#where-a-source-could-sit)

@@ -213,6 +213,7 @@ Every page with a box *The runs behind this page* reads the lab's runs.
 - [Physical inspiration](physical-inspiration.md#what-this-asks-of-the-notebook)
 - [Is a world a space? Dimension, and what folds it](how-many-dimensions-does-a-world-have.md#every-world-at-iteration-1000)
 - [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
+- [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md#what-does-not-carry-over)
 - [What the brains are like](what-the-brains-are-like.md#how-a-brain-is-examined)
 - [How big should a brain be?](how-big-should-a-brain-be.md#every-brain-of-round-3-responds)
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#would-we-notice-if-it-went-on)

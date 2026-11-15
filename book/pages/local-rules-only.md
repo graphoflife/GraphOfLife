@@ -56,7 +56,7 @@ has to be built first and what it would cost, is in the notebook's history:
 ## Where to go next
 
 - [How far does a difference travel?](how-far-does-a-difference-travel.md):
-  the light cone of a world, measured, once its rules are local.
+  the [light cone](a-world-as-a-wolfram-model.md#past-light-cones "Everything that could have had an effect on an agent by now (its past cone), or that it can affect (its future one).") of a world, measured, once its rules are local.
 - [A source and a sink](a-source-and-a-sink.md): a world with a flow running
   through it, planned on the local world of this page.
 - [Physical inspiration](physical-inspiration.md#where-the-speed-limit-is-broken):
@@ -83,6 +83,6 @@ has to be built first and what it would cost, is in the notebook's history:
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (7)
-> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A source and a sink](a-source-and-a-sink.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Space at scale (side study)](space-at-scale.md)
+> [!info]- Pages that link here (8)
+> [Questioning the mechanics](questioning-the-mechanics.md) · [Physical inspiration](physical-inspiration.md) · [How far does a difference travel?](how-far-does-a-difference-travel.md) · [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md) · [A source and a sink](a-source-and-a-sink.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Space at scale (side study)](space-at-scale.md)
 <!-- /turns -->

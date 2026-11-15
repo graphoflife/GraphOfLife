@@ -322,6 +322,7 @@ at random, a brain may choose at most 8 links
 - [What keeps wealth spread?](what-keeps-wealth-spread.md#without-coalitions)
 - [Measuring tokens: inequality and flow](measuring-tokens.md#a-lazy-random-walk)
 - [Particles: patterns that outlast what carries them](particles.md#in-short)
+- [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md#how-this-was-made)
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#the-network-that-holds-in-numbers)
 - [Rules without numbers](rules-without-numbers.md#why-ask)
 - [Measuring health: criteria, the health bar and diversity](measuring-health.md#from-11-november-2026-health-as-a-filter)

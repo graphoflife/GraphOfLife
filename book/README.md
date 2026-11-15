@@ -119,6 +119,7 @@ view shows how the pages hang together.
 - [Local rules only](pages/local-rules-only.md)
 - [How far does a difference travel?](pages/how-far-does-a-difference-travel.md)
 - [Particles: patterns that outlast what carries them](pages/particles.md)
+- [A world as a Wolfram model: rewrites, light cones and curvature](pages/a-world-as-a-wolfram-model.md)
 
 ### The search for open-ended evolution
 
