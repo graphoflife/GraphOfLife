@@ -81,6 +81,26 @@ whether its brains got better. The contests can.
 > **It fails if:** Any of: (1) in fewer than half of the worlds do the eras 500 to 3,000 score above the band against 250, so most worlds did not get better at all; (2) in half of the worlds or more, the eras 2,000 to 3,000 score above the band against 1,500, so most were still getting better in the middle of their runs; (3) the gain does not rise with the evolution score (rho at 0 or below), or its rho with health's product is larger. Between these, the thesis is undecided. A world whose contests cannot be played decides nothing and is left out of every count.
 <!-- /thesis -->
 
+On 15 November 2026, with the contests of three of the 17 worlds played
+(s4002 s, s4003 w and s4002 w), the band of the thesis turned out unable to
+decide. In these worlds a contest almost always ends with one era holding
+every agent: 219 of the first 235 contests ended with at least 99% of the
+agents on one side, even when an era played itself. So the spread of the
+contests of an era against itself is close to its largest possible value,
+0.5, and the band reaches above 1: to 1.41 in s4002 s, 1.47 in s4003 w and
+1.37 in s4002 w. A score is never above 1. In such a world part (1) of the
+thesis cannot hold and part (2) cannot fail, whatever the brains did.
+
+The thesis keeps its words and is judged as written. A second reading is
+added beside it. An era's score is the mean of six contests, and the noise of
+a mean of six is the spread of one contest divided by √6, about 2.45. The
+second reading takes the band as 0.5 plus and minus twice that smaller
+spread, about ±0.35 to ±0.40 in the three worlds played, and is otherwise the
+thesis word for word. It was written after the contests of those three worlds
+had been played, and the scores of two of them seen, so it is judged on the
+other 14 worlds, with the three reported beside them. Both readings will be
+reported.
+
 ## What it costs
 
 A contest plays 100 iterations of one world. At each world's pace in its last
