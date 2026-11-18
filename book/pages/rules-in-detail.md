@@ -836,7 +836,6 @@ of the messages' variety.
 - [How far does a difference travel?](how-far-does-a-difference-travel.md#in-short)
 - [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md#past-light-cones)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-contest-step-by-step)
-- [Why does evolution level off?](why-does-evolution-level-off.md#the-arms)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#the-invasion-test)
 - [What a brain can compute](what-a-brain-can-compute.md#where-to-go-next)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
@@ -996,7 +995,6 @@ with and without them was the same world in every measure
 - [Measuring tokens: inequality and flow](measuring-tokens.md#the-flow-of-a-game)
 - [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#what-the-probes-say-about-why)
-- [Why does evolution level off?](why-does-evolution-level-off.md#the-world)
 - [Other contests: a lottery, and alliances](another-game.md#the-contest-worlds)
 - [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
 
@@ -1145,7 +1143,6 @@ the rounding.
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-far-one-change-moves-a-brain)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-caution-about-names)
 - [How fast should brains change?](how-fast-should-brains-change.md#where-to-go-next)
-- [Why does evolution level off?](why-does-evolution-level-off.md#the-arms)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
 
@@ -1225,6 +1222,7 @@ fewer.
 - [One iteration, step by step](one-iteration.md#cleanup)
 - [Every setting](settings.md#extinction_threshold)
 - [Brains replaced by their average](brains-replaced-by-their-average.md#what-is-measured)
+- [Why does evolution level off?](why-does-evolution-level-off.md#how-a-world-died)
 - [Rules without numbers](rules-without-numbers.md#what-the-six-worlds-did)
 - [How runs are made, recorded and costed](runs-and-records.md#runs-and-experiments)
 - [Statistics: the tools of the notebook](statistics.md#why-not-the-worlds-that-died)
@@ -1305,6 +1303,6 @@ fewer.
 
 **Also about:** [How the simulation works](../README.md#how-the-simulation-works), [Brains: what they are, and whether they matter](../README.md#brains-what-they-are-and-whether-they-matter).
 
-> [!info]- Pages that link here (35)
-> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (36)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [The world: tokens, agents and a network](the-world.md) · [One iteration, step by step](one-iteration.md) · [The brain](the-brain.md) · [Questioning the mechanics](questioning-the-mechanics.md) · [Is a run reproducible?](is-a-run-reproducible.md) · [Every setting](settings.md) · [Glossary](glossary.md) · [B1 and B2: the two baselines](b1-and-b2.md) · [Measuring lives: births, deaths, ages and estates](measuring-lives.md) · [Measuring tokens: inequality and flow](measuring-tokens.md) · [Measuring a network: connections, hubs, distances and cuts](measuring-networks.md) · [Physical inspiration](physical-inspiration.md) · [What the brains are like](what-the-brains-are-like.md) · [Do the brains matter?](do-the-brains-matter.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [How big should a brain be?](how-big-should-a-brain-be.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md) · [How fast should brains change?](how-fast-should-brains-change.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [What a brain can compute](what-a-brain-can-compute.md) · [Rules without numbers](rules-without-numbers.md) · [How runs are made, recorded and costed](runs-and-records.md) · [Statistics: the tools of the notebook](statistics.md) · [What B1 is, and what stood in its way](what-the-baseline-world-is.md) · [B1: lives and wealth](b1-lives-and-wealth.md) · [B1: the game and its flows](b1-the-game-and-its-flows.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [B1: brains, lineages and messages](b1-brains-lineages-and-messages.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md) · [What the switches did in pilots (indicative)](what-the-switches-did-in-pilots.md) · [Crews, breeders and B1 raiders: Experiments 33 to 35](crews-breeders-and-b1-raiders.md) · [Cooperation, help and gliders (side study)](cooperation-help-and-gliders.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

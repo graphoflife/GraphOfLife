@@ -1,0 +1,488 @@
+{
+ "chapter": "leveloff",
+ "numbers": {
+  "lived": {
+   "control": [
+    {
+     "seed": 4601,
+     "end": 2630,
+     "died": true
+    },
+    {
+     "seed": 4602,
+     "end": 1029,
+     "died": true
+    },
+    {
+     "seed": 4603,
+     "end": 744,
+     "died": true
+    }
+   ],
+   "4 times the tokens": [
+    {
+     "seed": 4601,
+     "end": 4281,
+     "died": true
+    },
+    {
+     "seed": 4602,
+     "end": 20000,
+     "died": false
+    },
+    {
+     "seed": 4603,
+     "end": 19667,
+     "died": true
+    }
+   ],
+   "faithful copies": [
+    {
+     "seed": 4601,
+     "end": 721,
+     "died": true
+    },
+    {
+     "seed": 4602,
+     "end": 1880,
+     "died": true
+    },
+    {
+     "seed": 4603,
+     "end": 144,
+     "died": true
+    }
+   ],
+   "message to oneself: largest": [
+    {
+     "seed": 4601,
+     "end": 522,
+     "died": true
+    },
+    {
+     "seed": 4602,
+     "end": 1424,
+     "died": true
+    },
+    {
+     "seed": 4603,
+     "end": 911,
+     "died": true
+    }
+   ],
+   "revolutionary tokens for the coalition alone": [
+    {
+     "seed": 4601,
+     "end": 8251,
+     "died": true
+    },
+    {
+     "seed": 4602,
+     "end": 9412,
+     "died": true
+    },
+    {
+     "seed": 4603,
+     "end": 11709,
+     "died": true
+    }
+   ],
+   "stakes pooled by family": [
+    {
+     "seed": 4601,
+     "end": 20000,
+     "died": false
+    },
+    {
+     "seed": 4602,
+     "end": 20000,
+     "died": false
+    },
+    {
+     "seed": 4603,
+     "end": 20000,
+     "died": false
+    }
+   ]
+  },
+  "one_arm_chance": {
+   "runs": 15,
+   "arms": 5,
+   "lived": 3,
+   "ways_in_one_arm": 5,
+   "ways": 455
+  },
+  "ends": {
+   "many_until_before_end": 40.0,
+   "many_until_range": [
+    19,
+    87
+   ],
+   "last_game": [
+    [
+     30,
+     15
+    ],
+    [
+     23,
+     20
+    ],
+    [
+     22,
+     15
+    ],
+    [
+     26,
+     20
+    ],
+    [
+     22,
+     14
+    ],
+    [
+     30,
+     19
+    ],
+    [
+     21,
+     20
+    ],
+    [
+     29,
+     18
+    ],
+    [
+     102,
+     17
+    ],
+    [
+     27,
+     19
+    ],
+    [
+     24,
+     19
+    ],
+    [
+     23,
+     19
+    ],
+    [
+     23,
+     19
+    ],
+    [
+     34,
+     19
+    ]
+   ],
+   "richest_at_end": 0.28905000000000003,
+   "richest_at_end_range": [
+    0.1117,
+    0.9207
+   ],
+   "died": 14,
+   "runs": 18
+  },
+  "settled": {
+   "control": {
+    "per_thousand": [
+     42.2,
+     26.5,
+     11.6
+    ],
+    "richest": [
+     5.28,
+     11.22,
+     12.629999999999999
+    ],
+    "gini": [
+     0.5524821327494442,
+     0.6394157009415888,
+     0.6070598856569153
+    ],
+    "cull_share": [
+     34.52413246249191,
+     41.29907901114881,
+     49.891067538126364
+    ],
+    "deaths": [
+     0.25294814993101367,
+     0.22115320192423654,
+     0.1838416204154031
+    ],
+    "cut": [
+     0.23087017968907733,
+     0.2789598108747045,
+     0.24271844660194175
+    ],
+    "degree": [
+     3.9910299968930714,
+     3.797979797979798,
+     3.8270410143614955
+    ],
+    "brains": [
+     0.4867352657508537,
+     0.4632352941176471,
+     0.44093023255813957
+    ]
+   },
+   "4 times the tokens": {
+    "per_thousand": [
+     29.0,
+     42.175,
+     41.9
+    ],
+    "richest": [
+     3.565,
+     4.5825,
+     4.2725
+    ],
+    "gini": [
+     0.5992672862923932,
+     0.5627901622202691,
+     0.5477714902748867
+    ],
+    "cull_share": [
+     42.93830819530313,
+     43.570926182799,
+     43.00365957216018
+    ],
+    "deaths": [
+     0.19206098561422924,
+     0.12634464654996141,
+     0.1081954888658353
+    ],
+    "cut": [
+     0.31469440832249673,
+     0.1763139016657482,
+     0.15036496350364964
+    ],
+    "degree": [
+     4.589743589743589,
+     4.3851585557035415,
+     4.158428390367554
+    ],
+    "brains": [
+     0.48687782805429863,
+     0.4703018124046792,
+     0.47092198581560285
+    ]
+   },
+   "faithful copies": {
+    "per_thousand": [
+     19.6,
+     26.6,
+     null
+    ],
+    "richest": [
+     9.88,
+     7.05,
+     null
+    ],
+    "gini": [
+     0.5616511363800856,
+     0.5639453417917302,
+     null
+    ],
+    "cull_share": [
+     42.7997619756025,
+     45.62180733239908,
+     null
+    ],
+    "deaths": [
+     0.16568076505964704,
+     0.10747218578438517,
+     null
+    ],
+    "cut": [
+     0.1171875,
+     0.11358725847274523,
+     null
+    ],
+    "degree": [
+     3.873015873015873,
+     4.286513409961685,
+     null
+    ],
+    "brains": [
+     0.27310924369747897,
+     0.3436698717948718,
+     null
+    ]
+   },
+   "message to oneself: largest": {
+    "per_thousand": [
+     8.8,
+     31.1,
+     26.5
+    ],
+    "richest": [
+     7.465,
+     6.12,
+     9.43
+    ],
+    "gini": [
+     0.5014863637762341,
+     0.5644318312150695,
+     0.6501508106389312
+    ],
+    "cull_share": [
+     65.27472527472527,
+     39.19806429312133,
+     39.24054121083524
+    ],
+    "deaths": [
+     0.3828355069415229,
+     0.22182994115784035,
+     0.31530701792494636
+    ],
+    "cut": [
+     0.36721256684491976,
+     0.25892665000248305,
+     0.46511627906976744
+    ],
+    "degree": [
+     3.075319459656809,
+     3.759341420785372,
+     3.46875
+    ],
+    "brains": [
+     0.4818204932621408,
+     0.4806201550387597,
+     0.4820717131474104
+    ]
+   },
+   "revolutionary tokens for the coalition alone": {
+    "per_thousand": [
+     50.9,
+     53.3,
+     50.5
+    ],
+    "richest": [
+     3.89,
+     3.1,
+     2.87
+    ],
+    "gini": [
+     0.5604262562404204,
+     0.6043800273577862,
+     0.5318387884793273
+    ],
+    "cull_share": [
+     45.65150642063689,
+     33.51736343955637,
+     31.492589436629554
+    ],
+    "deaths": [
+     0.059612555622948184,
+     0.07028519591817849,
+     0.06307095749232262
+    ],
+    "cut": [
+     0.050393700787401574,
+     0.06780997700903599,
+     0.0696629213483146
+    ],
+    "degree": [
+     7.367013372956909,
+     8.669871977240398,
+     7.499241274658574
+    ],
+    "brains": [
+     0.44481605351170567,
+     0.38148984198645597,
+     0.4582210242587601
+    ]
+   },
+   "stakes pooled by family": {
+    "per_thousand": [
+     154.5,
+     167.6,
+     165.5
+    ],
+    "richest": [
+     0.52,
+     0.37,
+     2.22
+    ],
+    "gini": [
+     0.3317744744952333,
+     0.2391504950309945,
+     0.34433443746510395
+    ],
+    "cull_share": [
+     3.4489111204288796,
+     0.5063957976001998,
+     5.514796330445018
+    ],
+    "deaths": [
+     0.48707915618280995,
+     0.8119085719055004,
+     0.41542062420202663
+    ],
+    "cut": [
+     0.03548159685637353,
+     0.004053271569195136,
+     0.03674020741183596
+    ],
+    "degree": [
+     3.714114974177533,
+     3.16442822870139,
+     3.1699586157370936
+    ],
+    "brains": [
+     0.2066599557210732,
+     0.1913929784824462,
+     0.17000580011547112
+    ]
+   }
+  },
+  "round3": {
+   "agents": 1256.6437931034484,
+   "links": 5.384972268516926,
+   "tokens": 30000,
+   "ended_at": 3000
+  },
+  "size_and_life": {
+   "rho_died": 0.9340659340659341,
+   "died": 13,
+   "agents": {
+    "B1-10000-122402-s4601": 422.0,
+    "B1-10000-122402-s4602": 265.0,
+    "B1-10000-122402-s4603": 116.0,
+    "B1-40000-bbbccd-s4601": 1160.0,
+    "B1-40000-bbbccd-s4602": 1687.0,
+    "B1-40000-bbbccd-s4603": 1676.0,
+    "B1-10000-0ff18b-s4601": 196.0,
+    "B1-10000-0ff18b-s4602": 266.0,
+    "B1-10000-4034e2-s4601": 88.0,
+    "B1-10000-4034e2-s4602": 311.0,
+    "B1-10000-4034e2-s4603": 265.0,
+    "B1-10000-97e9c3-s4601": 509.0,
+    "B1-10000-97e9c3-s4602": 533.0,
+    "B1-10000-97e9c3-s4603": 505.0,
+    "B1-10000-4819e3-s4601": 1545.0,
+    "B1-10000-4819e3-s4602": 1676.0,
+    "B1-10000-4819e3-s4603": 1655.0
+   }
+  }
+ },
+ "figures": {
+  "lives": {
+   "title": "Which runs lived",
+   "caption": "Every run of Experiment 46, one panel for each arm, one line for each of its three seeds: how many agents the world held after each game, on a logarithmic scale (each line marks every 25th iteration, and the last). A world ends when a game leaves it 20 agents or fewer (the dashed line). The arm of four times the tokens plays 40,000 tokens; all the others play 10,000.",
+   "recipe": "**Runs.** The 18 runs of Experiment 46, three seeds (4601 to 4603) in each of its arms, for 20,000 iterations or until the world died out; 10,000 tokens, and 40,000 in the arm of four times the tokens (every setting is listed in [Why does evolution level off?](why-does-evolution-level-off.md)). They are made with `python3 gol_lab.py run E46`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, and its `meta.json` for where it ended.\n\n1. Keep the rows after the game (`phase` 2).\n2. Plot `nodes` against `iteration`, every 25th iteration and the last row.\n\n**To make it again:** `python3 book_figures.py leveloff`."
+  },
+  "ends": {
+   "title": "How the worlds died",
+   "caption": "Left: each line is one of the 14 runs that died, coloured by its arm: its agents after each game in its last 150 iterations, the end at 0, on a logarithmic scale; the dashed line is the 20 agents at which a world ends. The steps down are culls: a game cuts the links nobody staked a token on, and every piece of the network cut off from the largest one dies at once. Right: each dot is one run that lived past iteration 500, in its arm's colour: the median of its agents after each game from then on, and the iteration it ended, both on logarithmic scales. The larger dots on the line at 20,000 lived to the end; the three family-pool runs lie there under the run of four times the tokens that lived, and beside the one that died at 19,667.",
+   "recipe": "**Runs.** The 18 runs of Experiment 46, three seeds (4601 to 4603) in each of its arms, for 20,000 iterations or until the world died out; 10,000 tokens, and 40,000 in the arm of four times the tokens (every setting is listed in [Why does evolution level off?](why-does-evolution-level-off.md)). They are made with `python3 gol_lab.py run E46`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, and its `meta.json` for where it ended.\n\n1. Left: the rows after the game (`phase` 2) of the last 150 iterations of each run that died; `nodes` against the iteration minus the run's last one.\n2. Right: for each run with rows from iteration 500 on, the median of `nodes` over them, against the run's last iteration (`meta.json`, `iteration`).\n3. The rank correlation of the two over the runs that died: Spearman's rho.\n\n**To make it again:** `python3 book_figures.py leveloff`."
+  },
+  "spread": {
+   "title": "What the arm of family pools does differently",
+   "caption": "Each dot is one run of Experiment 46 that lived past iteration 500 (17 of the 18); each bar the median of its arm. All are read over the run's settled life, from iteration 500 to its end. Top left: the median of its agents per 1,000 tokens (logarithmic). Top right: the median share of all the world's tokens held by its richest agent (logarithmic). Bottom left: of all its deaths, the share that were culls, agents in a piece cut off from the largest piece of the network, against starving. Bottom right: the median of the links cut after a game because neither end staked a token on the other, per agent.",
+   "recipe": "**Runs.** The 18 runs of Experiment 46, three seeds (4601 to 4603) in each of its arms, for 20,000 iterations or until the world died out; 10,000 tokens, and 40,000 in the arm of four times the tokens (every setting is listed in [Why does evolution level off?](why-does-evolution-level-off.md)). They are made with `python3 gol_lab.py run E46`.\n\n**Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, and its `meta.json` for where it ended.\n\n1. Keep the rows from iteration 500 on.\n2. Agents per 1,000 tokens: the median over the rows after the game of 1,000 \u00b7 `nodes` / the run's tokens; the richest agent's share: the same of `maxTokens`.\n3. Culls: the sum of `orphaned` over every row (both phases) over the sum of `orphaned` and `starved`.\n4. Links cut: the median over the rows after the game of `prunedEdges` / `nodes`.\n\n**To make it again:** `python3 book_figures.py leveloff`."
+  }
+ }
+}

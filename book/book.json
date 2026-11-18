@@ -647,9 +647,9 @@
         "E46",
         "E47"
       ],
-      "status": "ready",
+      "status": "analysed",
       "added": "2026-11-12",
-      "summary": "Experiment 46, ready to play: the rules of round 3's world s3058 at 10,000 tokens, once as they are and five times with one thing changed (four times the tokens, brains that change half as often, the other message to oneself, revolutionary tokens for the coalition alone, stakes pooled by family), three seeds of 20,000 iterations each. Experiment 47's contests then find where each levelled off. The thesis: the game stops evolution, not the population."
+      "summary": "Experiment 46: the rules of round 3's world s3058 at 10,000 tokens, once as they are and five times with one thing changed, three seeds of 20,000 iterations each. Its thesis, that the game stops evolution and not the population, cannot be judged: all three control runs died out, and 14 of the 18 runs died, in culls that cut their network apart. The larger a world, the longer it lived. All three runs with stakes pooled by family lived, with six times the control's agents per token, even wealth and almost no culls."
     },
     {
       "id": "a-source-and-a-sink",

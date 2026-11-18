@@ -10,22 +10,25 @@
 
 ## In short
 
-This is a plan, ready to play: Experiment 46. The worlds measured so far got
-better for a while and then stopped: the notebook's two longest worlds, of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."),
-climbed for 20,000 to 25,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") and then only wandered
-([Every era against three](every-era-against-three.md)). Experiment 45 asks
-the same of round 3
-([Did the brains get better?](round-3-eras-against-each-other.md)). Four
-causes could stop it, and each points to a different fix. This experiment takes the
-rules of one world of round 3, s3058. It plays them at 10,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") once as
-they are, and five more times with one thing changed. Each arm plays three
-[seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") for 20,000 iterations and keeps its whole world every 500. Experiment 47
-then plays each run's eras against each other, to find where it levelled off.
+The worlds measured so far got better for a while and then stopped: the
+notebook's two longest worlds, of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), climbed for 20,000 to 25,000 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
+and then only wandered ([Every era against three](every-era-against-three.md)).
+Four causes could stop it, and each points to a different fix. Experiment 46
+took the rules of one world of round 3, s3058, and played them at 10,000
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") once as they are and five more times with one thing changed, three
+seeds each, for 20,000 iterations. Its thesis, written before any run: evolution
+stops because of the game, not because of the population.
 
-The thesis, written before any run: evolution stops because of the game, not
-because of the population. Four times the tokens and [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") that change half
-as often level off no later than the control; at least one of the three
-changes to the game levels off later.
+The thesis cannot be judged. All three control runs died out, at 744, 1,029
+and 2,630 iterations, and by the thesis's own words a run that dies decides
+nothing. In all, 14 of the 18 runs died. The three runs whose stakes are pooled
+by family all lived, and so did one of the three with four times the tokens.
+The worlds died in culls: a game cuts the links nobody staked a token on, and
+every piece cut off from the largest one dies at once. The more [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") a world
+held, the longer it lived. The family-pool worlds held six times as many agents
+per token as the control, spread their tokens far more evenly, and almost never
+cut a link. Experiment 47, whose contests were to find where each run levelled
+off, was not played.
 
 ## The world
 
@@ -34,9 +37,9 @@ by the evolution rank
 ([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)),
 and is on health's shortlist. It is the best-ranked world for which every arm
 changes something and whose runs fit in about four days on one worker:
-- It plays with [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake."), so revolutionary tokens can be made to cost
+- It plays with revolutions, so revolutionary tokens can be made to cost
   something. Nine of the rank's first ten do not.
-- Its brains change with a probability of 0.2, so they can change less often.
+- Its [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") change with a probability of 0.2, so they can change less often.
   The 10th and 25th worlds change theirs with 0.1, the least round 3 drew.
 - Two better-ranked worlds would take 142 and 515 worker-hours.
 
@@ -69,11 +72,11 @@ luck.
 | Arm | The change | The cause it tests |
 |---|---|---|
 | Control | none | |
-| 4 times the tokens | 40,000 tokens on 800 [nodes](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions."), against 10,000 on 200 | drift: a population four times larger |
+| 4 times the tokens | 40,000 tokens on 800 nodes, against 10,000 on 200 | drift: a population four times larger |
 | Faithful copies | brains change half as often: `mutation_probability` 0.1, the least round 3 drew, against 0.2 | unfaithful copies |
-| The other [message](rules-in-detail.md#messages "Numbers an agent writes to itself and to each neighbour every phase, which their brains read.") to oneself | `self_message` = largest, against own | a narrow game: what a brain can tell its neighbours |
+| The other message to oneself | `self_message` = largest, against own | a narrow game: what a brain can tell its neighbours |
 | Revolutionary tokens for the coalition alone | `revolt_tokens` = separate | a narrow game: the free flag |
-| Stakes pooled by family | `pool` = family, a new family on one [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") in twenty (`tag_rate` 0.05, as in the [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")) | valleys: kin stake as one |
+| Stakes pooled by family | `pool` = family, a new family on one mutation in twenty (`tag_rate` 0.05, as in the [pilots](runs-and-records.md#pilot-worlds "A world made by hand to see whether an idea is worth an experiment, without a thesis or many seeds.")) | valleys: kin stake as one |
 
 Every change is a setting the [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world.") already has, and none needs a number
 tuned for it ([Every setting](settings.md)). The family-pool arm was to wait
@@ -112,14 +115,144 @@ An arm levels off where the middle one of its three runs does.
 > **It fails if:** Any of these. (1) The control has not levelled off by 10,000: its step from 10,000 to 20,000 is still a step up. (2) The arm with four times the tokens, or the arm whose brains change half as often, levels off later than the control. (3) None of the three arms that change the game levels off later than the control. If the control levels off by 10,000 but not by 5,000, the thesis is undecided. A run that dies out, or whose kept worlds cannot be played, decides nothing; an arm with fewer than two runs left decides nothing.
 <!-- /thesis -->
 
-## What it costs
+## What the eighteen runs did
 
-At s3058's own pace, the 18 runs take about 34 worker-hours, one at a time:
-about a day and a half. The lab keeps them to one worker, so that Experiment
-45's contests go on beside them
-([Did the brains get better?](round-3-eras-against-each-other.md)).
-Experiment 47's 864 contests then take about 8 worker-hours more, as the lab's
-model reckons them.
+<!-- figure leveloff/lives -->
+![Which runs lived](../figures/leveloff/lives.svg)
+
+**Which runs lived.** Every run of Experiment 46, one panel for each arm, one line for each of its three seeds: how many agents the world held after each game, on a logarithmic scale (each line marks every 25th iteration, and the last). A world ends when a game leaves it 20 agents or fewer (the dashed line). The arm of four times the tokens plays 40,000 tokens; all the others play 10,000.
+
+> [!example]- How to make this figure
+> **Runs.** The 18 runs of Experiment 46, three seeds (4601 to 4603) in each of its arms, for 20,000 iterations or until the world died out; 10,000 tokens, and 40,000 in the arm of four times the tokens (every setting is listed in [Why does evolution level off?](why-does-evolution-level-off.md)). They are made with `python3 gol_lab.py run E46`.
+>
+> **Data.** From each run's `GraphOfLifeRuns/<run>/stats.jsonl`, and its `meta.json` for where it ended.
+>
+> 1. Keep the rows after the game (`phase` 2).
+> 2. Plot `nodes` against `iteration`, every 25th iteration and the last row.
+>
+> **To make it again:** `python3 book_figures.py leveloff`.
+<!-- /figure -->
+
+Fourteen of the eighteen runs died out. Every run of four arms died: the
+control, faithful copies, the other message to oneself, and revolutionary
+tokens for the coalition alone (the costly flag in the figures). The control's
+three lived 744, 1,029 and 2,630 iterations. Two runs with four times the
+tokens died too, one at 4,281 and one at 19,667, close to the end. All three
+runs of family pools lived to 20,000, and so did one run with four times the
+tokens.
+
+The same rules had lived through round 3. There, s3058 played 30,000 tokens for
+3,000 iterations and held about 1,260 agents. At 10,000 tokens its control runs
+held a median of 116 to 422 agents, and none reached 3,000 iterations.
+
+### How a world died
+
+<!-- figure leveloff/ends -->
+![How the worlds died](../figures/leveloff/ends.svg)
+
+**How the worlds died.** Left: each line is one of the 14 runs that died, coloured by its arm: its agents after each game in its last 150 iterations, the end at 0, on a logarithmic scale; the dashed line is the 20 agents at which a world ends. The steps down are culls: a game cuts the links nobody staked a token on, and every piece of the network cut off from the largest one dies at once. Right: each dot is one run that lived past iteration 500, in its arm's colour: the median of its agents after each game from then on, and the iteration it ended, both on logarithmic scales. The larger dots on the line at 20,000 lived to the end; the three family-pool runs lie there under the run of four times the tokens that lived, and beside the one that died at 19,667.
+
+> [!example]- How to make this figure
+> **Runs and data.** As for the figure *Which runs lived* above.
+>
+> 1. Left: the rows after the game (`phase` 2) of the last 150 iterations of each run that died; `nodes` against the iteration minus the run's last one.
+> 2. Right: for each run with rows from iteration 500 on, the median of `nodes` over them, against the run's last iteration (`meta.json`, `iteration`).
+> 3. The rank correlation of the two over the runs that died: Spearman's rho.
+>
+> **To make it again:** `python3 book_figures.py leveloff`.
+<!-- /figure -->
+
+A world did not fade away. It held hundreds of agents until shortly before its
+end. Between the last time a world held 200 agents, ten times the 20 at which
+it ends, and its end passed a median of 40 iterations (19 to 87). It fell in
+steps, and each step is a cull. After a game, every link on which neither end
+staked a token is cut. Every piece of the network then cut off from the largest
+one dies at once, and its tokens are shared out among the living
+([When a world ends](rules-in-detail.md#when-a-world-ends)). Over their settled
+lives, culls made 31% to 65% of the deaths in every arm but family pools. The
+last game left 14 to 20 agents, and the richest of them held a median of 29% of
+the world's tokens.
+
+The larger a world, the longer it lived. Over the 13 runs that died after
+iteration 500, the [rank correlation](statistics.md#rank-correlation "How alike two orders are: the correlation of the ranks, 1 when the orders agree and 0 when one says nothing of the other.") between a run's median number of agents
+and the iteration it ended is 0.93 (right panel). Worlds of about 100 agents
+lasted hundreds of iterations, worlds of about 500 several thousand. A world of
+about 1,700 agents lived to 20,000, and another as large died at 19,667. More
+agents bought time, not safety.
+
+### What family pools changed
+
+<!-- figure leveloff/spread -->
+![What the arm of family pools does differently](../figures/leveloff/spread.svg)
+
+**What the arm of family pools does differently.** Each dot is one run of Experiment 46 that lived past iteration 500 (17 of the 18); each bar the median of its arm. All are read over the run's settled life, from iteration 500 to its end. Top left: the median of its agents per 1,000 tokens (logarithmic). Top right: the median share of all the world's tokens held by its richest agent (logarithmic). Bottom left: of all its deaths, the share that were culls, agents in a piece cut off from the largest piece of the network, against starving. Bottom right: the median of the links cut after a game because neither end staked a token on the other, per agent.
+
+> [!example]- How to make this figure
+> **Runs and data.** As for the figure *Which runs lived* above.
+>
+> 1. Keep the rows from iteration 500 on.
+> 2. Agents per 1,000 tokens: the median over the rows after the game of 1,000 · `nodes` / the run's tokens; the richest agent's share: the same of `maxTokens`.
+> 3. Culls: the sum of `orphaned` over every row (both phases) over the sum of `orphaned` and `starved`.
+> 4. Links cut: the median over the rows after the game of `prunedEdges` / `nodes`.
+>
+> **To make it again:** `python3 book_figures.py leveloff`.
+<!-- /figure -->
+
+The family-pool runs differ from the rest in every reading:
+- They held about 166 agents per 1,000 tokens, against 27 in the control and
+  at most 53 in any other arm.
+- Their richest agent held about 0.5% of the tokens, against 11% in the
+  control. The [Gini coefficient](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of their tokens was 0.33, against 0.61.
+- Only 3% of their deaths were culls, against 41% in the control. They cut
+  0.04 links per agent and game, against 0.24.
+- Most of their agents died by starving, and often: 0.49 deaths per agent and
+  iteration, against 0.22 in the control.
+
+They are worlds of many poor agents with short lives, whose network almost
+never breaks. Why pooling does that, these runs can only suggest. Under family
+pools a stake on a relative's node counts for the owner's side, so a stake
+defends kin. A link that carries a stake is not cut, and a network whose links
+are not cut does not break. That reading is not tested here.
+
+The costly flag also changed how long a world lived, if less. Its three runs
+lived 8,251, 9,412 and 11,709 iterations, each more than three times as long as
+the longest of the control's. They held twice the control's agents per token,
+51 per 1,000, gave each agent about 7.5 links against 3.8, and cut 0.07 links
+per agent and game.
+
+## The verdict
+
+**The thesis cannot be judged.** Every part of it compares an arm with the
+control, and all three control runs died out. By its own words, a run that
+dies out decides nothing, and an arm with fewer than two runs left decides
+nothing. Only the arm of family pools has more than one run left.
+
+Experiment 47 was not played. Its contests start from the worlds each run kept
+at 500, 1,000, 2,500, 5,000, 10,000 and 20,000 iterations. Ten of the 18 runs
+never reached 5,000, and 14 never reached 20,000, so most of its contests have
+no world to start from.
+
+## What we learned
+
+- **A plan needs a world that lives at its size and for its length.** s3058
+  was chosen because its rules had lived 3,000 iterations at 30,000 tokens.
+  Whether they live at 10,000 tokens, or for 20,000 iterations, was never
+  checked. They did not, and the experiment lost its control.
+- **A world that lived through the screen may still die.** Round 3 judged its
+  worlds after 3,000 iterations. Here a world's life grew with its number of
+  agents, and even a world of about 1,700 agents died after 19,667 iterations.
+  The longer a run is to last, the more agents it needs, or a rule that keeps
+  its network whole.
+- **Family pools kept every world alive.** The experiment did not set out to
+  test that, so it is a finding after the fact. If the arm had nothing to do
+  with which runs live, the three runs at 10,000 tokens that lived would all
+  fall in one arm about once in 91 times: 5 of the 455 ways to choose three of
+  the 15 runs.
+
+## What it cost
+
+The 18 runs took 33.4 worker-hours on one worker, from 12 November 2026, 17:07,
+to 14 November, 02:33. The plan had reckoned about 34.
 
 ## Where to go next
 
@@ -131,6 +264,8 @@ model reckons them.
   the evolution rank, and the brain trees of round 3.
 - [A source and a sink](a-source-and-a-sink.md): an open economy, the next
   change to the game if no arm here moves the plateau.
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md): a run
+  planned five times as long as these, which has to live that long.
 
 ## How this was made
 
@@ -139,6 +274,11 @@ The plans are `book/experiments/E46.json` and `E47.json`.
 evolution rank, `research/screen/evolution.json`. Nothing was played before
 the plans were written. Experiment 47 can be played only once Experiment 46's
 runs are done: its contests start from their kept worlds.
+
+The figures of what the runs did read nothing but each run's statistics,
+`GraphOfLifeRuns/<run>/stats.jsonl`, and its `meta.json`.
+`python3 book_figures.py leveloff` draws them; the recipe folded under each
+gives every step.
 
 <!-- runs E46 -->
 > [!info]- The runs behind this page
