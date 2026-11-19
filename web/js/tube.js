@@ -17,8 +17,10 @@
  *    every row of the eyes' raster, so that each row of pixel-eyes shines on
  *    a line of its own; a dark line is a thin one, and a bright line spreads
  *    into the dark between;
- *  - the light comes through a grille of red, green and blue phosphor
- *    stripes;
+ *  - the light comes through a grille of deep red, green and blue phosphor
+ *    stripes, three of them about a line wide, so that every line is a row
+ *    of little red, green and blue pixels; the grille is as deep all over
+ *    the glass, as on a real tube;
  *  - the three beams miss each other a little, the red and the blue
  *    outwards, and lose their focus, the more the further from the middle;
  *  - bright light spreads in the thick glass round it (halation);
@@ -26,8 +28,8 @@
  *    darker, a still grain lies on the phosphor, and on a dark screen a sheen
  *    sits high on the left, where a window would catch it.
  *
- * All of it covers the whole screen and grows stronger out to the glass's
- * edge, and at its full strength from there into the window's corners, so
+ * All of it covers the whole screen, and the rest grows stronger out to the
+ * glass's edge, and at its full strength from there into the window's corners, so
  * there is no frame and no empty corner. On Paper the dark between the lines
  * and the stripes is the eyes' blue rather than black.
  *
@@ -47,8 +49,11 @@ const Tube = {
   GAP_DARK: 0.05,
   GAP_BRIGHT: 0.3,
 
-  /** How deep the phosphor stripes shade the light, at full strength; a colour's own stripe is brighter by half as much. */
-  MASK: 0.6,
+  /** How deep the phosphor stripes shade the light: a colour keeps 1 − MASK of itself on the other two colours' stripes. */
+  MASK: 0.75,
+
+  /** How much brighter a colour is on its own stripe. */
+  MASK_LIGHT: 1.45,
 
   /** The light the lines and the stripes take away, given back; what would be brighter than white is eased into it. */
   BOOST: 1.35,
@@ -362,18 +367,21 @@ void main() {
   vec3 gap = pow(mix(vec3(${f(this.GAP_DARK)}), vec3(${f(this.GAP_BRIGHT)}), clamp(c, 0.0, 1.0)), vec3(s));
   vec3 beam = exp2(log2(gap) * 4.0 * d * d);
 
-  // The phosphor's stripes, red, green and blue, a few pixels of the screen
-  // each.
-  float stripe = max(1.0, floor(uScale + 0.5));
+  // The phosphor's stripes, red, green and blue side by side, a whole number
+  // of the screen's pixels each and three of them about a line wide, so that
+  // every line is a row of little red, green and blue pixels. They are as
+  // deep all over the glass, as on a real tube.
+  float stripe = max(1.0, floor(uPitch * uScale / 3.0 + 0.5));
   float k = mod(floor(gl_FragCoord.x / stripe), 3.0);
   vec3 own = vec3(equal(vec3(k), vec3(0.0, 1.0, 2.0)));
-  vec3 grille = mix(vec3(1.0), mix(vec3(1.0 - ${f(this.MASK)}), vec3(1.0 + 0.5 * ${f(this.MASK)}), own), s);
+  vec3 grille = mix(vec3(1.0 - ${f(this.MASK)}), vec3(${f(this.MASK_LIGHT)}), own);
 
   vec3 lit = uShadow + (c - uShadow) * beam * grille * ${f(this.BOOST)};
 
-  // Light spread in the glass round whatever is brighter than the empty
-  // screen.
-  vec3 halo = max(picture(X, 7.0) - uStage, 0.0) * 0.55 + max(picture(X, 22.0) - uStage, 0.0) * 0.45;
+  // Light spread round whatever is brighter than the empty screen: near it,
+  // the beam's own spread, which lights the phosphor's stripes too; further
+  // out, the glow in the thick glass.
+  vec3 halo = max(picture(X, 7.0) - uStage, 0.0) * 0.55 * grille + max(picture(X, 22.0) - uStage, 0.0) * 0.45;
   lit += halo * ${f(this.HALATION)} * s;
 
   // Darker into the corners.
