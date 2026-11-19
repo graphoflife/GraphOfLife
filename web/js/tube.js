@@ -47,7 +47,7 @@ const Tube = {
 
   /** How strongly it shows over the great eye, against everywhere else; and how many of the great eye's radii out it is back to its strength there, smoothly. */
   QUIET: 0.3,
-  QUIET_TO: 5,
+  QUIET_TO: 8,
 
   /** How much light is left halfway between two scan lines, at full strength: where the picture is dark, and where it is bright. */
   GAP_DARK: 0.05,
