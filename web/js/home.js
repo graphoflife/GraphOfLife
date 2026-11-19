@@ -158,9 +158,11 @@ const Home = {
     Tube.repaint();
   },
 
-  /** Say which backdrop is showing, on the switch and to the stylesheet. */
+  /** Say which backdrop is showing, on the switch, to the stylesheet and to the tube that shows it. */
   markBackdrop() {
-    this.stage?.classList.toggle('backdrop-eyes', this.backdrop === 'eyes');
+    const eyes = this.backdrop === 'eyes';
+    this.stage?.classList.toggle('backdrop-eyes', eyes);
+    Tube.show(eyes ? Eyes.canvas : this.canvas, eyes);
     for (const button of this.switch ? this.switch.querySelectorAll('[data-backdrop]') : []) {
       const on = button.dataset.backdrop === this.backdrop;
       button.classList.toggle('active', on);
@@ -415,15 +417,21 @@ const Home = {
     this.renderer.resize();
   },
 
-  /** One animation frame, handed over by App while the front page is shown. */
+  /**
+   * One animation frame, handed over by App while the front page is shown:
+   * the backdrop drawn, and then the tube that shows it, if it has changed.
+   */
   tick(dt) {
     // The entrance first: the title decodes while the recording is still on
     // its way, which is exactly when there is nothing else to look at.
     Entrance.tick(dt);
-    if (this.backdrop === 'eyes') {
-      Eyes.tick(dt);
-      return;
-    }
+    if (this.backdrop === 'eyes') Eyes.tick(dt);
+    else this.play(dt);
+    Tube.tick();
+  },
+
+  /** One frame of the recorded world. */
+  play(dt) {
     if (!this.loaded || !this.layout || !this.renderer) return;
 
     // Move to the next frame first, so the check below sees it.
@@ -484,6 +492,7 @@ const Home = {
     const began = performance.now();
     this.renderer.draw(this.frame, this.metrics, this.layout, this.settings);
     this.measure(performance.now() - began);
+    Tube.mark();
   },
 
   /**

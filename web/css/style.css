@@ -2995,8 +2995,10 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   pointer-events: none;
 }
 
-/* The tube both backdrops are seen through (tube.js): over the pictures and
-   the wall, under the words, and never in the way of a click. */
+/* The tube both backdrops are seen through (tube.js), never in the way of a
+   click. Once it works it shows the backdrop itself, whose own canvas is then
+   kept out of sight, and it lies under the veil, the wall of digits and the
+   words, which are not seen through the glass. */
 .home-tube {
   position: absolute;
   inset: 0;
@@ -3006,6 +3008,9 @@ fieldset > .field-help-text { top: 12px; left: 10px; right: 10px; }
   display: block;
   pointer-events: none;
 }
+.home-stage.tube-on .home-tube { z-index: 0; }
+.home-stage.tube-on #homeCanvas,
+.home-stage.tube-on .home-eyes { visibility: hidden; }
 
 /* The front page's own switches, in the top bar beside the swatches and only
    while the page shows (home.js): which backdrop, and the backdrop alone, full

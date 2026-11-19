@@ -15,16 +15,17 @@
  * random, as a wire does.
  *
  * The screen is an old tube television (tube.js), and its pixels are eyes.
- * Its glass is a rounded square, bulging a little, so the picture bends in
- * towards the corners, and the tube's look grows stronger towards its edge.
- * There the eyes sit still in a raster, tiny and in rows, which runs on past
- * the glass into the window's corners, so the whole screen is pixels to its
- * edge. None of it moves: the edge is a screen standing still. Inwards the
- * raster loosens along a rounded line and the eyes come free, take threads,
- * and grow in a straight line all the way to the clear ring. An eye's size is where it is, so one that travels in grows,
- * and one that travels out shrinks until it sinks back among the pixels. The
- * words lie over the web and do not part it; the title carries its own
- * shadow (style.css).
+ * Its glass is a rounded square that bulges, so the picture bends in towards
+ * the corners, and the tube's look grows stronger towards its edge. There
+ * the eyes sit still in a raster, tiny and in rows — a row along each of the
+ * tube's scan lines — that runs on past the glass into the window's corners,
+ * so the whole screen is pixels to its edge. None of it moves: the edge is a
+ * screen standing still. Inwards the raster loosens along a rounded line and
+ * the eyes come free, take threads, and grow in a straight line all the way
+ * to the clear ring. An eye's size is where it is, so one that travels in
+ * grows, and one that travels out shrinks until it sinks back among the
+ * pixels. The words lie over the web and do not part it; the title carries
+ * its own shadow (style.css).
  *
  * Every free eye travels. Slow currents, shared by neighbours, carry them
  * round the screen, each with a wander of its own on top, fastest halfway in
@@ -34,15 +35,15 @@
  * are always being made and let go: a new one grows out of the eye that
  * reached for it, an old one draws back into it as it frays.
  *
- * Cheap on purpose. The raster at the edge is drawn once into a picture
- * kept aside and laid down every frame, and the tube's glass lies
- * over everything on a canvas of its own. The free eyes, a thousand or so on
- * a large screen, live in typed arrays and in a grid rebuilt every frame;
- * each works out the stream and looks round itself every other frame, and
- * they are drawn with their threads in a few batches, at most thirty times a
- * second, and only from Home.tick — so only while the front page is on
- * screen. For a reader who asks for less motion it is one still picture,
- * drawn again only when the page changes size or colour.
+ * Cheap on purpose. The raster at the edge is drawn once into a picture kept
+ * aside and laid down every frame, and the tube shows the whole picture
+ * through its glass in one pass on the graphics card. The free eyes, a
+ * thousand or so on a large screen, live in typed arrays and in a grid
+ * rebuilt every frame; each works out the stream and looks round itself
+ * every other frame, and they are drawn with their threads in a few batches,
+ * at most thirty times a second, and only from Home.tick — so only while the
+ * front page is on screen. For a reader who asks for less motion it is one
+ * still picture, drawn again only when the page changes size or colour.
  */
 const Eyes = {
   /** Draws a second, at most: a backdrop, like the recorded world. */
@@ -187,7 +188,7 @@ const Eyes = {
     this.gNext = this.rNext * this.ROOM;
 
     // The raster: a pixel-eye every `pitch` pixels — the tube's own pitch, so
-    // its scan lines run through and between the rows — ROWS rows deep. The
+    // that each row lies along one of its scan lines — ROWS rows deep. The
     // free eyes begin just inside it, a little looser and a little bigger than
     // its pixels, and grow in a straight line from there to the ring.
     const pitch = Tube.pitch;
@@ -259,10 +260,12 @@ const Eyes = {
     // ---- the raster: the screen's own pixels ----
     // In rows at the very edge, and on past the glass into the window's
     // corners, so none is left empty; looser further in, where the eyes come
-    // free. The rows start a little beyond the stage, by as much as the bulge
-    // pulls in, so that once bent they still reach every corner of the window.
+    // free. The rows start a little beyond the stage, as far out as the point
+    // of the picture that the bulge pulls into the window's corner, so that
+    // once bent they still reach every corner of the window.
     const raster = [];
-    const overX = Math.ceil(Tube.BULGE * width / 2 / pitch) + 1, overY = Math.ceil(Tube.BULGE * height / 2 / pitch) + 1;
+    Tube.unwarp(0, 0);
+    const overX = Math.ceil(-Tube.atX / pitch) + 1, overY = Math.ceil(-Tube.atY / pitch) + 1;
     for (let j = -overY; (j - overY + 0.5) * pitch < height; j++) {
       for (let i = -overX; (i - overX + 0.5) * pitch < width; i++) {
         const px = (i + 0.5) * pitch, py = (j + 0.5) * pitch;
@@ -704,10 +707,9 @@ const Eyes = {
    * The edge of the screen, which never moves, drawn once into a picture kept
    * aside — draw() lays it down every frame, faded in as the web comes up:
    * the raster's pixel-eyes, each an iris and a pupil, with the threads that
-   * start among the loosest, all bent with the bulge of the tube's glass. The
-   * tube's own scan lines, grain, glow and outline lie over everything
-   * (tube.js). Beside it, at a small size, the edge's colour, which draw()
-   * lays over the free eyes near the edge.
+   * start among the loosest, all bent with the bulge of the tube's glass,
+   * which then shows it all (tube.js). Beside it, at a small size, the edge's
+   * colour, which draw() lays over the free eyes near the edge.
    */
   paintStill() {
     if (!this.ctx || !this.n) return;
@@ -1034,6 +1036,7 @@ const Eyes = {
 
     this.eye(ctx, cx, cy, m, 1, fade, ink, { jx, jy, breathe, spokes: true });
     ctx.globalAlpha = 1;
+    Tube.mark();
   },
 
   /**
