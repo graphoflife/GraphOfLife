@@ -45,6 +45,10 @@ const Tube = {
   /** How strongly the tube shows in the middle of the glass, against its full strength at the edge. */
   MIDDLE: 0.72,
 
+  /** How strongly it shows over the great eye, against everywhere else; and how many of the great eye's radii out it is back to its strength there, smoothly. */
+  QUIET: 0.3,
+  QUIET_TO: 5,
+
   /** How much light is left halfway between two scan lines, at full strength: where the picture is dark, and where it is bright. */
   GAP_DARK: 0.05,
   GAP_BRIGHT: 0.3,
@@ -94,6 +98,11 @@ const Tube = {
   picture: null,
   bent: true,
   marked: false,
+
+  /** Where the great eye shows on the glass and its radius, in pixels of the page; no radius while the eyes are not shown. */
+  quietX: 0,
+  quietY: 0,
+  quietR: 0,
 
   init(canvas, host) {
     this.canvas = canvas;
@@ -181,6 +190,14 @@ const Tube = {
     this.mark();
   },
 
+  /** The great eye stands here, this big (eyes.js): the tube is quieter round it. A radius of 0 for none. */
+  quiet(x, y, r) {
+    this.quietX = x;
+    this.quietY = y;
+    this.quietR = r;
+    this.mark();
+  },
+
   /** The picture under the glass has been drawn again: so is the tube, on the next frame. */
   mark() {
     this.marked = true;
@@ -252,7 +269,7 @@ const Tube = {
     gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
     this.at = {};
     for (const name of ['uSize', 'uRes', 'uScale', 'uSource', 'uBulge', 'uBent', 'uPitch',
-                        'uStage', 'uGlow', 'uShadow', 'uSheen']) {
+                        'uQuiet', 'uStage', 'uGlow', 'uShadow', 'uSheen']) {
       this.at[name] = gl.getUniformLocation(this.program, name);
     }
     this.gl = gl;
@@ -286,6 +303,7 @@ const Tube = {
     gl.uniform1f(at.uBulge, this.BULGE);
     gl.uniform1f(at.uBent, this.bent ? 1 : 0);
     gl.uniform1f(at.uPitch, this.pitch);
+    gl.uniform3f(at.uQuiet, this.quietX, this.quietY, this.quietR);
     gl.uniform3fv(at.uStage, stage);
     gl.uniform3fv(at.uGlow, glow);
     gl.uniform3fv(at.uShadow, shadow);
@@ -310,6 +328,7 @@ uniform vec2 uRes;           // this canvas, in its own pixels
 uniform float uScale;        // its pixels to a pixel of the page
 uniform float uSource;       // the same for the picture
 uniform float uBulge, uBent, uPitch;
+uniform vec3 uQuiet;         // where the great eye shows and its radius, in pixels of the page
 uniform vec3 uStage, uGlow, uShadow, uSheen;
 out vec4 colour;
 
@@ -349,10 +368,17 @@ void main() {
   float s = mix(${f(this.MIDDLE)}, 1.0, edge);
   float far = min(dot(X, X), 2.0);
 
+  // Quieter round the great eye: the lines, the stripes, the beams' miss,
+  // the softness and the grain come up smoothly from QUIET of their strength
+  // over the eye to all of it QUIET_TO radii out.
+  float t = uQuiet.z > 0.0
+    ? mix(${f(this.QUIET)}, 1.0, smoothstep(1.0, ${f(this.QUIET_TO)}, length(p - uQuiet.xy) / uQuiet.z))
+    : 1.0;
+
   // The three beams: the red and the blue land beside the green, outwards,
   // and all of them lose their focus away from the middle.
-  vec2 miss = (vec2(${f(this.SPLIT)}, 0.0) + X * ${f(this.FRINGE)} * far) / (0.5 * uSize);
-  float blur = ${f(this.SOFT)} + ${f(this.BLUR)} * far;
+  vec2 miss = (vec2(${f(this.SPLIT)} * t, 0.0) + X * ${f(this.FRINGE)} * far) / (0.5 * uSize);
+  float blur = ${f(this.SOFT)} * t + ${f(this.BLUR)} * far;
   vec3 c = vec3(picture(X + miss, blur).r, picture(X, blur).g, picture(X - miss, blur).b);
 
   // The lit glass's own faint glow.
@@ -364,7 +390,7 @@ void main() {
   // one spreads into the dark between.
   float y = ((Q.y * 0.5 + 0.5) * uSize.y - 0.5 / uScale) / uPitch;
   float d = fract(y) - 0.5;
-  vec3 gap = pow(mix(vec3(${f(this.GAP_DARK)}), vec3(${f(this.GAP_BRIGHT)}), clamp(c, 0.0, 1.0)), vec3(s));
+  vec3 gap = pow(mix(vec3(${f(this.GAP_DARK)}), vec3(${f(this.GAP_BRIGHT)}), clamp(c, 0.0, 1.0)), vec3(s * t));
   vec3 beam = exp2(log2(gap) * 4.0 * d * d);
 
   // The phosphor's stripes, red, green and blue side by side, a whole number
@@ -374,9 +400,10 @@ void main() {
   float stripe = max(1.0, floor(uPitch * uScale / 3.0 + 0.5));
   float k = mod(floor(gl_FragCoord.x / stripe), 3.0);
   vec3 own = vec3(equal(vec3(k), vec3(0.0, 1.0, 2.0)));
-  vec3 grille = mix(vec3(1.0 - ${f(this.MASK)}), vec3(${f(this.MASK_LIGHT)}), own);
+  vec3 grille = mix(vec3(1.0), mix(vec3(1.0 - ${f(this.MASK)}), vec3(${f(this.MASK_LIGHT)}), own), t);
 
-  vec3 lit = uShadow + (c - uShadow) * beam * grille * ${f(this.BOOST)};
+  // The light they take away given back, as much as they take.
+  vec3 lit = uShadow + (c - uShadow) * beam * grille * mix(1.0, ${f(this.BOOST)}, t);
 
   // Light spread round whatever is brighter than the empty screen: near it,
   // the beam's own spread, which lights the phosphor's stripes too; further
@@ -396,7 +423,7 @@ void main() {
   uint n = q.x * 1973u + q.y * 9277u;
   n = (n ^ (n >> 13u)) * 1103515245u;
   n ^= n >> 16u;
-  lit += (float(n & 1023u) / 1023.0 - 0.5) * ${f(this.GRAIN)} * s;
+  lit += (float(n & 1023u) / 1023.0 - 0.5) * ${f(this.GRAIN)} * s * t;
 
   // Eased into white, not cut off at it, so a bright eye keeps its lines.
   vec3 over = max(lit - 0.75, 0.0);

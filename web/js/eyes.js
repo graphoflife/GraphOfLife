@@ -116,6 +116,7 @@ const Eyes = {
   stop() {
     this.active = false;
     if (this.ctx && this.width) this.ctx.clearRect(0, 0, this.width, this.height);
+    Tube.quiet(0, 0, 0);
   },
 
   /** The screen changed size: a new web for it. */
@@ -179,6 +180,8 @@ const Eyes = {
     this.cx = cx;
     this.cy = cy;
     this.big = big;
+    // The tube is quieter round it, so that the great eye shows clear.
+    Tube.quiet(showX, showY, big);
 
     // The clear ring, and just outside it the biggest of the other eyes, their
     // middles a little further out so that their balls only touch it.
