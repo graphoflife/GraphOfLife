@@ -140,6 +140,8 @@ class RunSpec:
     trial: Optional[Dict[str, Any]] = None
     #: The most seconds the run may take, over all its sessions, before it stops as too slow (screens).
     budget: Optional[float] = None
+    #: A readout's contest is played only once its run has kept the world of this iteration.
+    after: Optional[int] = None
 
     @property
     def until(self) -> int:
@@ -220,7 +222,7 @@ def _experiment_runs(name: str) -> List[RunSpec]:
         raise LabError(f"{name}: a plan says its runs, its trials or its screen, and this one says none")
 
     _check_keys(f"{name} runs", runs,
-                ("baseline", "world", "seeds", "iterations", "conditions", "record", "workers"))
+                ("baseline", "world", "seeds", "iterations", "conditions", "record", "workers", "readout"))
     base_name = runs["baseline"]
     base = baseline(base_name)
     world = dict(runs["world"])
@@ -230,11 +232,16 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     _check_frames_every(name, record)
     iterations = int(runs["iterations"])
     workers_cap(name)                                       # refuses one that is not a count
+    checks = readout_checks(name)
 
     specs: List[RunSpec] = []
     for condition in runs["conditions"]:
         specs.extend(_condition_runs(name, base_name, base, world, record, iterations, condition,
                                      runs.get("seeds")))
+    # A run stops at every check of its readout, so that the lab can play the check's
+    # contests before the run goes on, whatever else is waiting (gol_lab.jobs).
+    for spec in specs:
+        spec.targets = sorted(set(spec.targets) | set(checks))
     return specs
 
 
@@ -426,6 +433,114 @@ def _experiment_trials(name: str) -> List[RunSpec]:
     return specs
 
 
+# ----------------------------------------------------------------------------
+# Readouts
+# ----------------------------------------------------------------------------
+#
+# A plan of runs may ask for a readout: contests its runs play against their
+# own past while they go on, so a long run says whether its brains still get
+# better without waiting for its end and a plan of trials after it. Every
+# `every` iterations the run stops at a check; the world kept there plays the
+# worlds kept `lags` iterations before it, and the fixed `eras`, each with
+# `coins` coins of `T` iterations. Each coin is played twice with the same
+# deal: once with the later era in contest place B, once in place A. A bias of
+# place cancels within the pair (Experiment 45's self-contests leaned to place
+# B, 116 of 204), and so does the luck of which agents a deal hands to which
+# era. Odd coins are played on the later era's world, even ones on the
+# earlier's. The contests are trials like any other (gol_trial.py), named for
+# what they are; each waits until its run has kept the world it plays from.
+
+READOUT = ("every", "lags", "eras", "coins", "T")
+
+
+def _whole(value: Any, least: int) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool) and value >= least
+
+
+def readout_of(name: str) -> Optional[Dict[str, Any]]:
+    """A plan's readout, checked, or None for a plan without one."""
+    return _once(("readout", name), lambda: _readout_of(name))
+
+
+def _readout_of(name: str) -> Optional[Dict[str, Any]]:
+    runs = read_plan(name).get("runs")
+    if not isinstance(runs, dict) or "readout" not in runs:
+        return None
+    readout = dict(runs["readout"])
+    _check_keys(f"{name} readout", readout, READOUT)
+    kept = int(runs.get("record", {}).get("archive_every", 0))
+    if not kept:
+        raise LabError(f"{name} readout: the runs have to keep their worlds to contest them (record.archive_every)")
+    lags, eras = list(readout.get("lags", [])), list(readout.get("eras", []))
+    if not (_whole(readout.get("every"), 1) and _whole(readout.get("coins"), 1) and _whole(readout.get("T"), 1)):
+        raise LabError(f"{name} readout: every, coins and T are whole numbers, at least 1")
+    if not (lags or eras) or not all(_whole(v, 1) for v in lags) or not all(_whole(v, 0) for v in eras):
+        raise LabError(f"{name} readout: it plays lags (iterations back, at least 1) or eras (iterations "
+                       f"of the run), and at least one of them")
+    off = [v for v in [readout["every"], *lags, *eras] if v % kept]
+    if off:
+        raise LabError(f"{name} readout: {', '.join(map(str, off))} is not a world the runs keep: they keep "
+                       f"one every {kept} iterations (record.archive_every)")
+    return {"every": readout["every"], "lags": sorted(set(lags)), "eras": sorted(set(eras)),
+            "coins": readout["coins"], "T": readout["T"]}
+
+
+def readout_checks(name: str) -> List[int]:
+    """The iterations a plan's runs stop at for their readout: none without one."""
+    readout = readout_of(name)
+    if readout is None:
+        return []
+    return list(range(readout["every"], int(read_plan(name)["runs"]["iterations"]) + 1, readout["every"]))
+
+
+def readout_contests(readout: Dict[str, Any], run_id: str, checks: Iterable[int]) -> List[Dict[str, Any]]:
+    """Every contest of a run's readout at these checks, as trials: each coin twice, the later era once as b and once as a."""
+    trials = []
+    for era in checks:
+        against = sorted({era - lag for lag in readout["lags"] if era - lag >= 0}
+                         | {e for e in readout["eras"] if e < era}, reverse=True)
+        for other in against:
+            for coin in range(1, readout["coins"] + 1):
+                home = era if coin % 2 else other
+                for a, b in ((other, era), (era, other)):
+                    trials.append({"kind": "contest", "T": readout["T"], "run": run_id,
+                                   "home": home, "a": a, "b": b, "seed": coin})
+    return trials
+
+
+def readout_trials(name: str) -> List[RunSpec]:
+    """Every contest of a plan's readout, as the lab plays it: each waits for its run to reach its check."""
+    return _once(("readout trials", name), lambda: _readout_trials(name))
+
+
+def _readout_trials(name: str) -> List[RunSpec]:
+    readout = readout_of(name)
+    if readout is None:
+        return []
+    specs: List[RunSpec] = []
+    for run in experiment_runs(name):
+        for trial in readout_contests(readout, run.run_id, readout_checks(name)):
+            era = max(trial["a"], trial["b"])
+            specs.append(RunSpec(
+                run_id=trial_id_for(trial),
+                name=(f"contest · {run.run_id} · era {trial['b']:,} against {trial['a']:,} on the world of "
+                      f"{trial['home']:,}, coin {trial['seed']} · readout at {era:,}"),
+                config={**run.config, "export_decisions": False, "checkpoint_every": 0, "archive_every": 0},
+                lab={"seed": trial["seed"], "trial": "contest"},
+                record={"heavy_every": 0},
+                targets=[trial["T"]],
+                condition=run.condition,
+                experiments=[name],
+                trial=trial,
+                after=era))
+    return specs
+
+
+def experiment_work(name: str) -> List[RunSpec]:
+    """Everything the lab does for an experiment: its runs or trials, and its readout's contests."""
+    return experiment_runs(name) + readout_trials(name)
+
+
 def trial_sets(name: str) -> Dict[str, Dict[str, List[Any]]]:
     """Each set of a plan's trials, by name: every value each of its trials' fields takes, in order."""
     sets: Dict[str, Dict[str, List[Any]]] = {}
@@ -522,13 +637,14 @@ def what_it_is(config: Dict[str, Any]) -> Dict[str, Any]:
 
 def wanted(queue: Iterable[str]) -> Dict[str, RunSpec]:
     """
-    Every run the queued experiments need, each once, taken as far as the
-    furthest of them asks. Two plans that say different things about the same
-    run are refused rather than reconciled.
+    Every run and trial the queued experiments need, readouts' contests
+    included, each once, and each run taken as far as the furthest of them
+    asks. Two plans that say different things about the same run are refused
+    rather than reconciled.
     """
     merged: Dict[str, RunSpec] = {}
     for name in queue:
-        for spec in experiment_runs(name):
+        for spec in experiment_work(name):
             have = merged.get(spec.run_id)
             if have is None:
                 merged[spec.run_id] = spec

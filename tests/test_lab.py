@@ -693,6 +693,136 @@ def test_the_lab_plays_trials_as_it_advances_runs():
 
 
 # ---------------------------------------------------------------------------
+# Readouts
+# ---------------------------------------------------------------------------
+
+READOUT = {"every": 4, "lags": [4], "eras": [0], "coins": 2, "T": 3}
+
+
+def test_a_readout_plays_each_check_against_its_past_with_every_coin_both_ways():
+    """
+    A plan's readout stops each run at every check and plays the world kept
+    there against the worlds kept its lags before and the fixed eras before
+    it: every coin twice, the later era once in each place, on the later
+    era's world for odd coins and the earlier's for even ones. Each contest
+    waits for its run to keep the world of its check. A readout that plays
+    worlds the runs do not keep, or nothing at all, is refused; a plan
+    without one is as it was.
+    """
+    with lab(plan("E91", seeds="1", iterations=8, record=ARCHIVED, readout=READOUT),
+             plan("E92", seeds="1", iterations=8, record=ARCHIVED)) as tmp:
+        run = gol_plan.experiment_runs("E91")[0]
+        assert run.targets == [4, 8] and gol_plan.experiment_runs("E92")[0].targets == [8]
+        assert run.run_id == gol_plan.experiment_runs("E92")[0].run_id, "a readout renamed the run"
+        trials = gol_plan.readout_trials("E91")
+        played = sorted((t.after, t.trial["a"], t.trial["b"], t.trial["home"], t.trial["seed"]) for t in trials)
+        assert played == sorted([(4, 0, 4, 4, 1), (4, 4, 0, 4, 1), (4, 0, 4, 0, 2), (4, 4, 0, 0, 2),
+                                 (8, 4, 8, 8, 1), (8, 8, 4, 8, 1), (8, 4, 8, 4, 2), (8, 8, 4, 4, 2),
+                                 (8, 0, 8, 8, 1), (8, 8, 0, 8, 1), (8, 0, 8, 0, 2), (8, 8, 0, 0, 2)]), played
+        assert all(t.trial["run"] == run.run_id and t.trial["T"] == 3 and t.until == 3 for t in trials)
+        assert gol_plan.readout_trials("E92") == []
+        assert {s.run_id for s in gol_plan.experiment_work("E91")} == {run.run_id} | {t.run_id for t in trials}
+
+        def write(readout, record=ARCHIVED):
+            with open(os.path.join(tmp, "plans", "E93.json"), "w") as f:
+                json.dump(plan("E93", seeds="1", iterations=8, record=record, readout=readout), f)
+
+        for readout, record, words in (
+                (READOUT, {"checkpoint_every": 2, "heavy_every": 2}, ("archive_every",)),
+                ({**READOUT, "every": 3}, ARCHIVED, ("3 is not a world the runs keep",)),
+                ({**READOUT, "lags": [], "eras": []}, ARCHIVED, ("at least one",)),
+                ({**READOUT, "coins": 0}, ARCHIVED, ("whole numbers",)),
+                ({**READOUT, "against": [2]}, ARCHIVED, ("against is not something",))):
+            write(readout, record)
+            refused(lambda: gol_plan.experiment_runs("E93"), *words)
+
+
+def test_a_readout_contest_waits_for_its_run_and_is_skipped_if_the_run_dies_first():
+    """
+    A readout's contest is pending until its run has kept the world of its
+    check, then waits its turn ahead of every run, as it is minutes long and
+    its run waits at the check; one whose run died out before its check is
+    finished unplayed and says so.
+    """
+    with lab(plan("E91", seeds="1", iterations=8, record=ARCHIVED, readout=READOUT)):
+        run = gol_plan.experiment_runs("E91")[0]
+        trials = gol_plan.readout_trials("E91")
+        assert {gol_lab.run_state(t, None)["state"] for t in trials} == {"pending"}
+        assert work(run, 4) == 0
+        states = {t.run_id: gol_lab.run_state(t, None)["state"] for t in trials}
+        assert all(states[t.run_id] == ("waiting" if t.after == 4 else "pending") for t in trials), states
+        queue = gol_lab.jobs(["E91"], gol_lab.snapshot())
+        assert [j.spec.run_id for j in queue][-1] == run.run_id, "the run went before its readout"
+        assert {j.spec.run_id for j in queue[:-1]} == {t.run_id for t in trials if t.after == 4}
+        gol_store.update_meta(run.run_id, status="extinct")
+        later = [gol_lab.run_state(t, None) for t in trials if t.after == 8]
+        assert all(s["state"] == "done" and "ended at iteration 4" in s["skipped"] for s in later), later
+        status = gol_lab.status()["experiments"]["E91"]
+        assert sum(bool(r["skipped"]) for r in status["runs"]) == len(later)
+
+
+def test_the_lab_plays_a_readout_at_every_check_before_the_run_goes_on():
+    """
+    Queued and left alone, a run with a readout stops at each check, the lab
+    plays that check's contests, and only then takes the run on; at the end
+    every contest has its result, and the readout reads them as the later
+    era's score with its band, for each check and earlier era.
+    """
+    import gol_readout
+    with lab(plan("E91", seeds="1", iterations=8, record=ARCHIVED, readout=READOUT)):
+        run = gol_plan.experiment_runs("E91")[0]
+        trials = gol_plan.readout_trials("E91")
+        gol_lab.request(run="E91", workers=1)
+        log = io.StringIO()
+        with contextlib.redirect_stdout(log):
+            assert gol_lab.run_lab() == 0
+        status = gol_lab.status()["experiments"]["E91"]
+        assert status["state"] == "finished", status
+        with open(os.path.join(gol_store.run_dir(run.run_id), "provenance.json")) as f:
+            sessions = [(s["from"], s["exit"]) for s in json.load(f)["sessions"]]
+        assert sessions == [(0, "target"), (4, "target")], sessions
+        started = [line.split("  started ")[1].split(" at ")[0] for line in log.getvalue().splitlines()
+                   if "  started " in line]
+        resumed = started.index(run.run_id, 1)
+        assert set(started[1:resumed]) == {t.run_id for t in trials if t.after == 4}, started
+        assert set(started[resumed + 1:]) == {t.run_id for t in trials if t.after == 8}, started
+        for t in trials:
+            with open(os.path.join(gol_store.run_dir(t.run_id), "result.json")) as f:
+                result = json.load(f)["result"]
+            assert 1 <= len(result["shares"]) <= 3, result
+
+        rows = gol_readout.summary("E91")[run.run_id]
+        assert [(r["era"], r["against"], r["coins"], r["contests"]) for r in rows] == \
+            [(4, 0, 2, 4), (8, 0, 2, 4), (8, 4, 2, 4)], rows
+        assert all(0 <= r["low"] <= r["score"] <= r["high"] <= 1 for r in rows), rows
+        assert status["readout"] == {"plan": gol_plan.readout_of("E91"), "runs": gol_readout.summary("E91")}
+
+
+def test_a_readout_scores_the_later_era_from_either_place():
+    """
+    A contest's result is place B's share; the readout scores the later era,
+    whichever place it had, averages each coin's two contests, and takes one
+    coin's spread from every pairing of the run at once.
+    """
+    import gol_readout
+    assert gol_readout.spread([[0.5], [1.0]]) == 0.5, "no pairing with two coins: the widest spread stands in"
+    assert abs(gol_readout.spread([[0.0, 1.0], [0.5, 0.5, 0.5]]) - (0.5 / 3) ** 0.5) < 1e-12
+    with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED, readout={**READOUT, "lags": [], "eras": [0]})):
+        run = gol_plan.experiment_runs("E91")[0]
+        shares = {(0, 4, 1): 0.9, (4, 0, 1): 0.3, (0, 4, 2): 1.0, (4, 0, 2): 0.0}
+        for t in gol_plan.readout_trials("E91"):
+            os.makedirs(gol_store.run_dir(t.run_id))
+            share = shares[(t.trial["a"], t.trial["b"], t.trial["seed"])]
+            gol_store.write_json(os.path.join(gol_store.run_dir(t.run_id), "result.json"),
+                                 {"trial": t.trial, "result": {"share": share}})
+        [row] = gol_readout.summary("E91")[run.run_id]
+        # Coin 1: 0.9 in place B and 1 - 0.3 in place A, so 0.8; coin 2: 1.0 and 1 - 0.0, so 1.0.
+        # One coin's spread is then 0.1 * sqrt(2), its standard error over two coins 0.1.
+        assert row["coins"] == 2 and row["contests"] == 4 and abs(row["score"] - 0.9) < 1e-12, row
+        assert row["high"] == 1.0 and abs(row["low"] - 0.7) < 1e-4, row
+
+
+# ---------------------------------------------------------------------------
 # Screens
 # ---------------------------------------------------------------------------
 

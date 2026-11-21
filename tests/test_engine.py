@@ -3148,6 +3148,37 @@ def test_a_contest_in_a_world_of_families_deals_each_brain_with_its_family():
     assert tour.contest(cfg.to_dict(), A, A, B, 3, 5)["agents"] > 0
 
 
+def test_a_contest_ends_once_one_side_is_gone_with_the_result_it_would_have_had():
+    """
+    A contest keeps B's share after every iteration, and is decided once one
+    side has no agent left: no brain changes and every copy keeps its side,
+    so that side can never come back. It ends there, and played on to T the
+    same contest ends exactly as it did.
+    """
+    import numpy as np
+    import gol_tournament as tour
+    cfg = small(seed=71, mutate_on_replication=True)
+    world = new_world(cfg)
+    A = world.to_checkpoint()
+    for _ in range(10):
+        world.step(record_decisions=False)
+    B = world.to_checkpoint()
+    T = 20
+    out = tour.contest(cfg.to_dict(), B, A, B, T, 1)
+    assert len(out["shares"]) < T and out["share"] in (0.0, 1.0), "not decided early: the test tests nothing"
+    assert out["shares"][-1] == out["share"] and all(0 < s < 1 for s in out["shares"][:-1]), out["shares"]
+    played = dataclasses.replace(cfg, mutation_probability=0.0, extinction_threshold=0)
+    replay = GraphOfLife.from_checkpoint(tour.mixed(B, A, B, cfg.message_amount, np.random.RandomState(1)), played)
+    replay.rng = np.random.RandomState(2)
+    for _ in range(T):
+        replay.step(record_decisions=False)
+    ids = list(replay.G.nodes())
+    is_b = np.array([replay.brains[u].brain_id >= tour.LABEL_B for u in ids])
+    held = np.array([replay.tokens[u] for u in ids], dtype=float)
+    assert ids and float(is_b.mean()) == out["share"]
+    assert float(held[is_b].sum() / held.sum()) == out["tokens"]
+
+
 def test_a_contest_counts_a_brain_mixed_at_birth_for_its_parents_era():
     """
     Where brains are mixed at birth, a newborn's brain is new even in a contest,

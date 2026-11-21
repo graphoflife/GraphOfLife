@@ -457,6 +457,59 @@ played those of 500. In contests of 20 iterations they held 0.482 of a
 world, a tie. In contests of 100 they held 0.73, and more than half in all
 ten worlds.
 
+### When one side is gone
+
+In a contest no brain changes, and every copy keeps its era. So an era
+with no agent left can never come back. Since 21 November 2026 a contest
+stops there. Its result is the one it would have had after *T* iterations,
+and the iterations that could change nothing are not played. A contest
+also keeps the later era's share after every iteration it played, so how
+fast it was decided can be read afterwards.
+
+How often that happens depends on the world. In
+[Experiment 45](round-3-eras-against-each-other.md), on round 3's worlds,
+752 of 1,326 contests ended with one side holding at least 99% of the
+agents. A single contest there says little more than which side won: its
+score spreads by about 0.4. In the two B2 worlds of
+[Experiment 28](every-era-against-three.md), not one contest ended that
+way, and a score spread by only 0.07 to 0.10. So how many contests a
+question needs depends on the world
+([What we learned](round-3-eras-against-each-other.md#what-we-learned)).
+
+### A readout: contests while a run goes on
+
+A plan of runs can ask for a **readout**, so that a long run says whether
+its brains still get better while it goes on, not only after it ends.
+Every `every` iterations the run stops at a **check**. The lab plays the
+world kept there against worlds kept earlier, and only then lets the run
+go on. The check's era plays:
+
+- the eras `lags` iterations before it (a lag reaching back past
+  iteration 0 is left out);
+- the fixed `eras`, such as 0, the founders;
+- each with `coins` coins, of `T` iterations each.
+
+Each coin is played twice with the same deal: once with the later era in
+place B, once in place A. The agents that held the later brains in the
+first contest hold the earlier ones in the second. Two things cancel in
+the pair. One is the luck of the deal: a deal that hands one era the
+best-placed agents helps it once and hurts it once. The other is any lean
+towards one place: in Experiment 45, an era played against itself, place
+B won 116 of 204 contests. Odd coins are played in the later era's world,
+even ones in the earlier era's.
+
+A coin's **score** is the later era's share of the agents, averaged over
+its two contests. A check's score against one earlier era is the mean of
+its coins. The band around it is two standard errors either side, kept
+between 0 and 1. One coin's spread is pooled over all of the run's
+checks, each coin against the mean of its own check, because one check
+has only a few coins. Were a coin's two contests as unlike as any two, a
+coin's score would spread by about 0.3 in round 3's worlds, and four coins
+could not place a score of 0.7 above 0.5. So a readout is read pooled,
+over many checks or many runs, and not check by check. The Research
+Notebook tab draws each run's readout as it comes in; `gol_readout.py`
+reads it.
+
 ### Plateau, climb or circle
 
 Contests are noisy, so an era is also played against itself. A score within
@@ -820,6 +873,14 @@ Each part closes a way to be fooled:
     living. While a founder's genotype lives, the code also counts its missing
     parent as one.
 - *Eras, contests and invasions: does a world keep getting better?*:
+  - **21 November 2026.** A contest now stops once one era has no agent
+    left, with the result it would have had, and keeps the share after every
+    iteration ([When one side is gone](#when-one-side-is-gone)). Contests
+    played before then, Experiment 45's among them, played all *T*
+    iterations. Their shares are what they would be now; only their count of
+    agents is taken at *T*, where a contest now counts them when it is
+    decided. And a plan of runs may ask for a
+    [readout](#a-readout-contests-while-a-run-goes-on).
   - **24 October 2026.** From 15 October, the note on the invasion test said
     that a strategy written by hand "can do nothing an evolved brain could
     not". The reason it gave was that a strategy reads and writes exactly what

@@ -51,7 +51,11 @@ the runs start. The page quotes it from the plan, so it cannot be reworded
 once the results are in. Some plans ask for **trials** instead:
 [contests](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better) or
 [invasions](measuring-evolution.md#the-invasion-test) played from worlds that
-runs kept.
+runs kept. A plan of runs may also ask for a
+[readout](measuring-evolution.md#a-readout-contests-while-a-run-goes-on):
+contests each run plays against its own past at every check, while it goes
+on. The lab plays a check's contests before anything else, and the run
+waits at the check until they have started.
 
 ### The lab
 
@@ -466,6 +470,10 @@ of thirty seeds at 10,000 tokens is about seven hours. The thirty worlds of
 
 ## How our view changed
 
+- *The lab, the engine and pilots*:
+  - **21 November 2026.** A plan of runs may ask for a readout: contests
+    each run plays against its own past while it goes on
+    ([A readout](measuring-evolution.md#a-readout-contests-while-a-run-goes-on)).
 - *What a run records*:
   - **11 November 2026.** A plan may keep a frame only every `frames_every`-th
     iteration, for long worlds that would not fit on the disk otherwise.

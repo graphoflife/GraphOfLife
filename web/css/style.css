@@ -2039,6 +2039,25 @@ details.control-group[open] > summary h3 { color: var(--text-soft); }
 .book-run-extinct span { background: var(--muted-2); }
 .book-run-slow span { background: var(--muted-2); opacity: 0.6; }
 .book-run-blocked { outline: 1px solid var(--danger); }
+.book-run-skipped { opacity: 0.35; }
+/* A run's readout: the later brains' score at every check, with its band. */
+.book-readout { margin: 0 0 12px; }
+.book-readout-run {
+  display: grid;
+  grid-template-columns: minmax(6em, 10em) 1fr;
+  gap: 8px;
+  align-items: center;
+  margin: 3px 0;
+  color: var(--text-soft);
+  font-size: 12px;
+}
+.book-readout-run svg { display: block; width: 100%; height: 64px; border-radius: 3px; background: var(--panel-3); }
+.book-readout-run line { stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.book-readout-run .book-readout-dot { stroke-width: 6; stroke-linecap: round; }
+.book-readout-mid { stroke: var(--muted-2); stroke-dasharray: 4 4; }
+@media (max-width: 520px) {
+  .book-readout-run { grid-template-columns: 1fr; gap: 2px; }
+}
 
 /* A figure or diagram: an SVG drawn on its own dark card, as wide as the text,
    set into the page like a plate in a book — a hairline round it and a little

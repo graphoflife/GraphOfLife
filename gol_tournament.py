@@ -117,6 +117,15 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
     (`plant`, see halves). `on_step(world, t)` is told after each iteration, and
     a True from it ends the contest there with no result (None), as the lab's
     trials are stopped.
+
+    B's share after every iteration is kept too (`shares`). A contest is
+    decided once one side has no agent left: no brain can change and every copy
+    keeps its side, so that side can never come back, and the contest ends
+    there with the result it would have had at T (unless the whole world would
+    have died out before T, which leaves no result). In round 3's worlds more than
+    half of all contests are decided before T (Experiment 45), and every
+    iteration after that was play that could change nothing. `agents` is then
+    the count when it was decided, and `shares` is shorter than T.
     """
     from gol_config import SimConfig
     from GraphOfLife import GraphOfLife
@@ -140,20 +149,28 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
         return child
 
     world._mixed_brain = mixed_brain
+
+    def b_side(ids: List[int]) -> np.ndarray:
+        return np.array([side.get(b, b >= LABEL_B) for b in (world.brains[u].brain_id for u in ids)], dtype=bool)
+
+    ids = list(world.G.nodes())
+    shares: List[float] = []
     for t in range(1, T + 1):
         world.step(record_decisions=False)
         if on_step is not None and on_step(world, t):
             return None
-        if world.G.number_of_nodes() == 0:
+        ids = list(world.G.nodes())
+        if not ids:
+            return {"share": None, "tokens": None, "agents": 0, "shares": shares}
+        share = float(b_side(ids).mean())
+        shares.append(round(share, 4))
+        if share in (0.0, 1.0):
             break
-    ids = list(world.G.nodes())
-    if not ids:
-        return {"share": None, "tokens": None, "agents": 0}
-    is_b = np.array([side.get(b, b >= LABEL_B) for b in (world.brains[u].brain_id for u in ids)])
+    is_b = b_side(ids)
     held = np.array([world.tokens[u] for u in ids], dtype=float)
     return {"share": float(is_b.mean()),
             "tokens": float(held[is_b].sum() / max(1.0, held.sum())),
-            "agents": len(ids)}
+            "agents": len(ids), "shares": shares}
 
 
 def _play_one(task: Tuple[str, int, int, int, int, int]) -> Dict[str, Any]:

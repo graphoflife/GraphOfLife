@@ -52,6 +52,7 @@ import threading
 import time
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+import gol_readout
 import gol_store as store
 import gol_worker
 # How a worker's session can end: the worker owns these, and the command line
@@ -449,8 +450,9 @@ def _run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
                 "reason": f"{spec.run_id} is on {os.readlink(folder)}, which is not mounted"}
     path = os.path.join(folder, "meta.json")
     if not os.path.exists(path):
-        return {"state": "waiting", "iteration": 0, "engine": engine,
-                "job": Job(spec, spec.targets[0], engine, False, spec.fault_at, 0)}
+        return _waits_for_its_run(spec) or {
+            "state": "waiting", "iteration": 0, "engine": engine,
+            "job": Job(spec, spec.targets[0], engine, False, spec.fault_at, 0)}
     meta = store.load_meta(spec.run_id)
     state = {"iteration": meta.get("iteration", 0), "status": meta.get("status"),
              "checkpoint": meta.get("checkpoint_iteration") or 0}
@@ -477,6 +479,32 @@ def _run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
             "job": Job(spec, next_target, made_by, True, fault, progress)}
 
 
+def _waits_for_its_run(spec: RunSpec) -> Optional[Dict[str, Any]]:
+    """
+    Why a readout's contest cannot be played yet, if it cannot: it is pending
+    while its run has not kept the world of its check, and done unplayed if
+    the run ended before it got there. A run on a disk that is away is read
+    from where the lab remembers it stood.
+    """
+    if spec.after is None:
+        return None
+    source = spec.trial["run"]
+    kept = _elsewhere().get(source) if os.path.islink(store.run_dir(source)) else None
+    if kept is None:
+        try:
+            meta = store.load_meta(source)
+        except (OSError, ValueError):
+            return {"state": "pending", "iteration": 0}
+        kept = {"iteration": meta.get("iteration") or 0, "status": meta.get("status"),
+                "checkpoint": meta.get("checkpoint_iteration") or 0}
+    if kept["checkpoint"] >= spec.after:
+        return None
+    if kept["status"] in ("extinct", "too_slow"):
+        return {"state": "done", "iteration": 0,
+                "skipped": f"not played: its run ended at iteration {kept['iteration']:,}, before this check"}
+    return {"state": "pending", "iteration": 0}
+
+
 _SKIPPED: Dict[str, str] = {}
 
 
@@ -494,7 +522,9 @@ def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
     that the workers finish together. An experiment kept to one worker takes
     its turns in the same places but starts with its quickest runs: on one
     worker the order cannot change how long it takes, and the quick runs
-    answer first.
+    answer first. A readout's contests go before everything: they are minutes
+    long, what they say is wanted while their run goes on, and the run waits
+    at its check until they have started.
     """
     queue = list(queue)
     known = costs()
@@ -518,7 +548,7 @@ def jobs(queue: Iterable[str], engine: Optional[str]) -> List[Job]:
     def seconds(job: Job) -> float:
         return predict(job.spec.config, job.until - job.progress, known, frames=keeps_frames(job.spec))["seconds"]
 
-    ordered = sorted(found, key=lambda j: -seconds(j))
+    ordered = sorted(found, key=lambda j: (j.spec.after is None, -seconds(j)))
     for name, cap in _caps(queue).items():
         if cap == 1:
             places = [i for i, job in enumerate(ordered) if name in job.spec.experiments]
@@ -823,6 +853,8 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
     waiting its turn), running, paused (by you, or by the lab with a reason),
     stopped (asked for, but no lab is running — after a restart, say),
     finished, blocked, invalid or withdrawn (kept on record, never to run).
+    A readout's contests are among its runs, pending until their run gets to
+    them, and what they say so far is its `readout` (gol_readout).
     """
     try:
         withdrawn = read_plan(name).get("withdrawn")
@@ -831,7 +863,7 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
     if withdrawn:
         return {"state": "withdrawn", "reason": str(withdrawn), "runs": []}
     try:
-        specs = experiment_runs(name)
+        specs = gol_plan.experiment_work(name)
         workers = min(control["workers"], workers_cap(name) or control["workers"])
     except LabError as exc:
         return {"state": "invalid", "reason": str(exc), "runs": []}
@@ -871,6 +903,7 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
                      "state": state["state"], "reason": state.get("reason"),
                      "diedAt": state["iteration"] if state.get("status") == "extinct" else None,
                      "slowAt": state["iteration"] if state.get("status") == "too_slow" else None,
+                     "skipped": state.get("skipped"),
                      "secondsPerIteration": rate, "sharedWith": shared.get(spec.run_id, []),
                      "trial": bool(spec.trial)})
 
@@ -903,6 +936,8 @@ def experiment_status(name: str, control: Dict[str, Any], known: Dict[str, Any],
         "estimate": {"seconds": schedule([w["seconds"] for w in whole], workers),
                      "diskBytes": sum(w["diskBytes"] for w in whole),
                      "peakMB": max((w["peakMB"] for w in whole), default=0)},
+        "readout": ({"plan": gol_plan.readout_of(name), "runs": gol_readout.summary(name)}
+                    if gol_plan.readout_of(name) else None),
     }
 
 
@@ -962,6 +997,7 @@ def main() -> int:
             shared = f"  (also {', '.join(r['sharedWith'])})" if r["sharedWith"] else ""
             where = (f"died out at {r['diedAt']}" if r["diedAt"] is not None
                      else f"too slow at {r['slowAt']}" if r.get("slowAt") is not None
+                     else r["skipped"] if r.get("skipped")
                      else f"{r['iteration']:>6} / {r['until']:<6}")
             print(f"  {r['id']:<32} {r['state']:<8} {where}{shared}")
         e = state["estimate"]

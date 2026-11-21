@@ -1576,6 +1576,36 @@ function test_a_run_that_died_out_says_so() {
   assert(html.includes('<span class="book-exp-name">E02</span>'), 'a panel did not say which experiment it is');
 }
 
+function test_a_readout_draws_each_check_and_says_what_waits() {
+  // A run with a readout gets a chart of what its checks said so far: a dot and a band for every
+  // earlier era played, coloured by fixed era or lag. Its contests that wait for the run, or that
+  // were never played because the run died first, say so on their cells.
+  const Book = bookWith();
+  Book.pages = () => [];
+  const contest = (id, extra) => ({ id, name: id, iteration: 0, until: 100, state: 'pending', trial: true,
+    diedAt: null, skipped: null, sharedWith: [], ...extra });
+  const status = { state: 'running', done: 5000, total: 20000, secondsLeft: 60,
+    estimate: { seconds: 60, diskBytes: 1, peakMB: 1 },
+    runs: [{ id: 'B1-10000-ab12cd-s001', name: 'w · seed 1', condition: 's4003', seed: 1, iteration: 5000,
+             until: 10000, state: 'running', diedAt: null, sharedWith: [] },
+           contest('trial-1'),
+           contest('trial-2', { state: 'done', skipped: 'not played: its run ended at iteration 7,000, before this check' })],
+    readout: { plan: { every: 2500, lags: [2500], eras: [0], coins: 2, T: 100 },
+               runs: { 'B1-10000-ab12cd-s001': [
+                 { era: 2500, against: 0, coins: 2, contests: 4, score: 0.9, low: 0.7, high: 1 },
+                 { era: 5000, against: 0, coins: 2, contests: 4, score: 1, low: 0.8, high: 1 },
+                 { era: 5000, against: 2500, coins: 2, contests: 4, score: 0.5, low: 0.2, high: 0.8 }] } } };
+  const lab = { lab: { workers: 2, cores: 8 }, disk: { free: 1 }, costs: { runs: 1 }, experiments: {} };
+  const html = Book.liveHtml('E48', status, lab);
+  assert(html.includes('waits for its run to reach this check'), html);
+  assert(html.includes('book-run-skipped') && html.includes('its run ended at iteration 7,000'), html);
+  assert((html.match(/class="book-readout-dot"/g) || []).length === 3, 'not every pairing was drawn');
+  assert(html.includes('s4003 · seed 1') && html.includes('5000 against 2500: 0.50 (0.20 to 0.80)'), html);
+  assert(html.includes('against 0') && html.includes('against 2500 before'), 'the legend lost a series');
+  assert(!Book.liveHtml('E02', { ...status, readout: null }, lab).includes('book-readout'),
+    'a plan without a readout drew one');
+}
+
 function test_a_page_names_its_experiments_as_the_lab_does() {
   // Under its title in the contents, a run of three or more in a row as one.
   const Book = bookWith();

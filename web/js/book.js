@@ -849,10 +849,12 @@ const Book = {
       const done = r.until ? Math.min(1, r.iteration / r.until) : 0;
       const where = r.diedAt != null ? `died out at iteration ${formatNumber(r.diedAt)}`
         : r.slowAt != null ? `stopped as too slow at iteration ${formatNumber(r.slowAt)}`
+        : r.skipped ? r.skipped
+        : r.state === 'pending' ? 'waits for its run to reach this check'
         : `${formatNumber(r.iteration)} of ${formatNumber(r.until)}`;
       // A trial keeps no frames, so there is nothing to open (gol_trial.py).
       const opens = r.iteration > 0 && !r.trial;
-      const look = r.diedAt != null ? 'extinct' : r.slowAt != null ? 'slow' : r.state;
+      const look = r.diedAt != null ? 'extinct' : r.slowAt != null ? 'slow' : r.skipped ? 'skipped' : r.state;
       return `<span class="book-run book-run-${look}" data-run="${r.id}" data-started="${
         opens ? 'yes' : 'no'}" title="${Markdown.escape(r.name)} — ${where}${
         opens ? ' · click to open' : ''}">`
@@ -863,7 +865,50 @@ const Book = {
       + `${left}${button}<label class="book-workers">Workers <select data-workers>${workers}</select></label></div>`
       + reason + blocked + estimate + engines
       + `<div class="book-runs">${runs}</div>`
+      + this.readoutHtml(status.readout, status.runs)
       + (shared.length ? `<p class="book-note">Its runs are shared with ${shared.join(', ')}.</p>` : '');
+  },
+
+  /**
+   * What each run's readout says so far (gol_readout): at every check, the later era's score
+   * against each earlier era it played, a dot with its band, one colour for each fixed era and
+   * each lag. Above the dashed middle line, 0.5, the later brains spread better.
+   */
+  readoutHtml(readout, runs) {
+    if (!readout) return '';
+    const { plan } = readout;
+    const series = [...plan.eras.map(e => ({ key: `e${e}`, label: `against ${formatNumber(e)}` })),
+      ...plan.lags.map(l => ({ key: `l${l}`, label: `against ${formatNumber(l)} before` }))];
+    const colours = ['var(--accent)', 'var(--warn)', 'var(--ok)', 'var(--danger)', 'var(--muted-2)'];
+    const which = row => Math.max(0, series.findIndex(s => s.key === (plan.eras.includes(row.against)
+      ? `e${row.against}` : `l${row.era - row.against}`)));
+    const W = 600, H = 64, pad = 8;
+    const charts = runs.filter(r => !r.trial && (readout.runs[r.id] || []).length).map(r => {
+      // Each series a little to the side of the check, so that bands at one check stay apart.
+      const x = row => pad + (W - 2 * pad) * row.era / r.until + 4 * (which(row) - (series.length - 1) / 2);
+      const y = v => H - pad - (H - 2 * pad) * v;
+      const marks = readout.runs[r.id].map(row => {
+        const c = colours[which(row) % colours.length];
+        return `<g><title>${formatNumber(row.era)} against ${formatNumber(row.against)}: ${row.score.toFixed(2)} (${
+          row.low.toFixed(2)} to ${row.high.toFixed(2)}), ${row.coins} coin${row.coins === 1 ? '' : 's'}, ${
+          row.contests} contests</title>`
+          + `<line x1="${x(row)}" x2="${x(row)}" y1="${y(row.low)}" y2="${y(row.high)}" stroke="${c}"/>`
+          + `<line class="book-readout-dot" x1="${x(row)}" x2="${x(row)}" y1="${y(row.score)}" y2="${
+            y(row.score)}" stroke="${c}"/></g>`;
+      }).join('');
+      // Stretched to the panel's width at a height of its own, so the marks are strokes that keep
+      // their width: a dot is a stroke of no length with round ends.
+      return `<div class="book-readout-run"><span>${Markdown.escape(`${r.condition} · seed ${r.seed}`)}</span>`
+        + `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="readout of ${
+          Markdown.escape(r.id)}"><line class="book-readout-mid" x1="${pad}" x2="${W - pad}" y1="${y(0.5)}" y2="${
+          y(0.5)}"/>${marks}</svg></div>`;
+    }).join('');
+    const legend = series.map((s, i) => `<span style="color:${colours[i % colours.length]}">● ${s.label}</span>`)
+      .join(' ');
+    return `<div class="book-readout"><p class="book-note">Readout, every ${formatNumber(plan.every)} iterations: `
+      + `the later brains' share of the agents against earlier ones, ${plan.coins} coin${plan.coins === 1 ? '' : 's'} `
+      + `each played both ways, with two standard errors either side; 0.5 is a tie (dashed). ${legend}</p>`
+      + (charts || '<p class="book-note">No check has been played yet.</p>') + '</div>';
   },
 
   /** A duration as a person would say it. */
