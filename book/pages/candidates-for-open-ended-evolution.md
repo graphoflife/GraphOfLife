@@ -642,8 +642,10 @@ Of the five ways to go on put to the author on 8 November 2026, the author
 chose to play the shortlist's settings again with fresh seeds: Experiment 43
 ([Round 3's best worlds, played again](#round-3s-best-worlds-played-again)).
 Playing each world's eras against each other, the first test of whether
-evolution happened at all, is planned as Experiment 45
-([Did the brains get better?](round-3-eras-against-each-other.md)).
+evolution happened at all, was Experiment 45. Taken together, the worlds'
+brains got better by iteration 500 and then stopped; six contests a pair
+could not show it world by world, and the evolution rank did not tell which
+worlds gained ([Did the brains get better?](round-3-eras-against-each-other.md)).
 
 ## Round 3's best worlds, played again
 

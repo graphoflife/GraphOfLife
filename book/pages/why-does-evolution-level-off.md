@@ -312,6 +312,6 @@ gives every step.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (1)
-> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md)
+> [!info]- Pages that link here (2)
+> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

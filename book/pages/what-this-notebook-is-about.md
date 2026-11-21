@@ -59,8 +59,9 @@ better within 50 to 100 iterations
 [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death.")'s go on for thousands of iterations, more and more slowly. The two longest
 worlds, played to 50,000 iterations, climbed for 20,000 to 25,000 and then
 only wandered ([Every era against three](every-era-against-three.md)).
-Experiment 44 plays round 3's eras against each other the same way, and its
-thesis expects the same
+Round 3's worlds level off almost at once. Experiment 45 played their eras
+against each other the same way: taken together, their brains had made their
+gain by iteration 500, and then stopped
 ([Did the brains get better?](round-3-eras-against-each-other.md)).
 
 So the question of the moment is why. Four reasons are candidates:

@@ -217,7 +217,7 @@
       "kind": "method",
       "status": "written",
       "added": "2026-11-09",
-      "summary": "Round 3's worlds pass on what their agents do and keep changing it, but luck can look like selection. Fourteen tests in six questions tell the two apart; eleven need no new runs. Two are run: lines spread faster than luck would spread them, and selection on behaviour is plain, but the behaviours do not follow it."
+      "summary": "Round 3's worlds pass on what their agents do and keep changing it, but luck can look like selection. Fourteen tests in six questions tell the two apart; eleven need no new runs. Three are run: lines spread faster than luck would spread them; selection on behaviour is plain, but the behaviours do not follow it; and, the worlds taken together, later brains beat earlier ones, but only up to iteration 500."
     },
     {
       "id": "round-3-eras-against-each-other",
@@ -232,9 +232,9 @@
         "E45",
         "E44"
       ],
-      "status": "ready",
+      "status": "analysed",
       "added": "2026-11-09",
-      "summary": "Experiment 45, ready to play: in 17 worlds of round 3, the ten the evolution rank puts first and the five healthiest and five least healthy, the brains of iterations 500 to 3,000 play those of 250 and 1,500 in the world itself, three coins on each era's world; 1,326 contests. The thesis: the brains got better early, had stopped by the middle, and gained as the rank says, not as health says. Experiment 44, the same on health's shortlist, was withdrawn unplayed."
+      "summary": "Experiment 45 played round 3's eras against each other in 17 worlds, the ten the evolution rank puts first and the five healthiest and five least healthy: 1,326 contests. The thesis is refuted, as written and in the second reading: in most worlds the later eras did not beat the brains of iteration 250 beyond the noise, for contests end with one era holding every agent, and neither the rank nor health tells which worlds gained. Taken together, the brains got better by iteration 500 and then stopped, and later brains won on the early world too."
     },
     {
       "id": "a-hundred-thousand-iterations",

@@ -240,14 +240,17 @@ def _trial_row(plan, chapters, by_experiment) -> List[str]:
     import gol_plan
     name, trials = plan["id"], plan["trials"]
     found = gol_plan.trials_of(name)
-    played = sum(os.path.exists(os.path.join(RUNS, gol_plan.trial_id_for(f["trial"]), "result.json"))
-                 for f in found)
+    # A trial is named by what it says, so the results on disk of a withdrawn plan's trials are another
+    # plan's, played with the same settings (Experiment 44's, Experiment 45's).
+    played = 0 if plan.get("withdrawn") else sum(
+        os.path.exists(os.path.join(RUNS, gol_plan.trial_id_for(f["trial"]), "result.json")) for f in found)
     sets = gol_plan.trial_sets(name)
     worlds = sorted({w for fields in sets.values() for w in fields.get("run", [])})
     return [name, plan["title"], "trials",
             f"{len(found):,} {trials['kind']}s from {len(worlds)} worlds: "
-            + "; ".join(f"*{label}*" for label in sets), "—", "as their worlds",
-            f"{trials['T']:,} each", f"{played} played",
+            + "; ".join(f"*{label}*" for label in sets)
+            + ("; withdrawn unplayed" if plan.get("withdrawn") else ""), "—", "as their worlds",
+            f"{trials['T']:,} each", f"{played:,} played",
             _cell_chapters([by_experiment[name]] if name in by_experiment else [], chapters)]
 
 

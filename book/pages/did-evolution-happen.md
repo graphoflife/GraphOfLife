@@ -23,8 +23,14 @@ Two have been run, on the brains' own family tree of all 82 worlds that lived
   the behaviours do not move the way it points.
 
 And in 79 of the 82 worlds the line of descent moves less far than lines that
-only mutate. Selection, so far, holds brains in place. The era tournament,
-test 1, comes next.
+only mutate. Selection, so far, holds brains in place.
+
+The era tournament, test 1, was played in 17 worlds as Experiment 45
+(21 November 2026). Taken together, the later brains beat those of [iteration](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.")
+250, on the world of 250 as well as on their own (test 2, for these pairs).
+But they had made their gain by iteration 500 and then stopped, and six
+contests a pair could not show it world by world
+([Did the brains get better?](round-3-eras-against-each-other.md)).
 
 ## Why it is not obvious
 
@@ -50,7 +56,7 @@ alone could not produce.
 
 Most tests need no new runs, because round 3 kept a great deal:
 
-- **Twelve eras a world.** Every 250 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") each world kept its whole
+- **Twelve eras a world.** Every 250 iterations each world kept its whole
   state, brains included, so the brains of iteration 250, 500, …, 3,000 can be
   played again, and so can the founders of iteration 0
   ([Eras](measuring-evolution.md#eras)).
@@ -96,8 +102,13 @@ world plays than earlier ones. These two tests play eras against each other.
   ([Every era against three](every-era-against-three.md)).
 - **From:** the cross-time tournament of Cliff and Miller (1995), and the
   master tournament of Floreano and Nolfi (1997).
-- **Planned:** as Experiment 45
-  ([Did the brains get better?](round-3-eras-against-each-other.md)).
+- **Played:** as Experiment 45, in 17 worlds
+  ([Did the brains get better?](round-3-eras-against-each-other.md)). Taken
+  together, the later eras won 71% of their contests against the brains of
+  250, the era of 500 as often as any later one, and the eras after 1,500 won
+  half of theirs against 1,500. A contest almost always ends with one era
+  holding nearly every agent, so a test of a single world needs more than 25
+  contests a pair, not six.
 
 ### 2 · Old and new in a common garden
 
@@ -114,6 +125,10 @@ world plays than earlier ones. These two tests play eras against each other.
 - **No would look like:** the late brains win in neither garden.
 - **Cost:** like the tournament, a few contests a world.
 - **From:** Lenski, Rose, Simpson and Tadler (1991).
+- **Answered in part:** Experiment 45 played each pair on both eras' worlds.
+  The later brains beat those of 250 on the world of 250 too, in 69% of the
+  contests, and a little more often on their own, in 73%
+  ([Two more things the contests show](round-3-eras-against-each-other.md#two-more-things-the-contests-show)).
 
 ## Was it selection, or luck?
 
@@ -396,7 +411,8 @@ plays some.
 Six of the fourteen, in this order, each for a reason:
 
 1. **The era tournament.** Its tool is built, it uses data we have, and it
-   answers the plainest question: did the brains get better?
+   answers the plainest question: did the brains get better? Played as
+   Experiment 45, 12 to 21 November 2026.
 2. **The shadow world.** Minutes a world. It tells selection from luck, which
    matters most where populations are small. Run on 12 November 2026.
 3. **Selection on behaviour, measured.** It names the behaviours selection
@@ -423,9 +439,11 @@ come to rest by the last era (tests 1, 6 and 7), and something new appeared
 along the way (tests 8 to 11).
 
 Read on 12 November 2026, round 3 meets the second of the three but not the
-third: its behaviours did not move where selection points. Whether its later
-eras beat its earlier ones is Experiment 45's question
-([Did the brains get better?](round-3-eras-against-each-other.md)).
+third: its behaviours did not move where selection points. Experiment 45
+answered the first for the worlds taken together, and not for any one world:
+the later eras beat the earlier ones, but only up to iteration 500
+([Did the brains get better?](round-3-eras-against-each-other.md)). And the
+climb had come to rest long before the last era.
 
 ## Where to go next
 

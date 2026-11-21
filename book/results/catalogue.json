@@ -1053,8 +1053,8 @@
      "135 played",
      [
       {
-       "text": "Can a strategy written by hand beat evolution?",
-       "href": "pages/strategies-written-by-hand.md"
+       "text": "Crews, breeders and B1 raiders: Experiments 33 to 35",
+       "href": "pages/crews-breeders-and-b1-raiders.md"
       }
      ]
     ],
@@ -1069,8 +1069,8 @@
      "180 played",
      [
       {
-       "text": "Can a strategy written by hand beat evolution?",
-       "href": "pages/strategies-written-by-hand.md"
+       "text": "Crews, breeders and B1 raiders: Experiments 33 to 35",
+       "href": "pages/crews-breeders-and-b1-raiders.md"
       }
      ]
     ],
@@ -1085,8 +1085,8 @@
      "90 played",
      [
       {
-       "text": "Can a strategy written by hand beat evolution?",
-       "href": "pages/strategies-written-by-hand.md"
+       "text": "Crews, breeders and B1 raiders: Experiments 33 to 35",
+       "href": "pages/crews-breeders-and-b1-raiders.md"
       }
      ]
     ],
@@ -1133,8 +1133,8 @@
      "52",
      [
       {
-       "text": "A screen of random worlds",
-       "href": "pages/a-screen-of-random-worlds.md"
+       "text": "Rounds 1 and 2 of the screen, and the criteria they were judged by",
+       "href": "pages/rounds-1-and-2-of-the-screen.md"
       }
      ]
     ],
@@ -1149,8 +1149,8 @@
      "0",
      [
       {
-       "text": "A screen of random worlds",
-       "href": "pages/a-screen-of-random-worlds.md"
+       "text": "Rounds 1 and 2 of the screen, and the criteria they were judged by",
+       "href": "pages/rounds-1-and-2-of-the-screen.md"
       }
      ]
     ],
@@ -1222,7 +1222,7 @@
      "E44",
      "Did the brains get better? Round 3's eras against each other",
      "trials",
-     "1,512 contests from 21 worlds: *against 250*; *against 1,500*; *against 3,000*; *each against itself*",
+     "1,512 contests from 21 worlds: *against 250*; *against 1,500*; *against 3,000*; *each against itself*; withdrawn unplayed",
      "\u2014",
      "as their worlds",
      "100 each",
@@ -1231,6 +1231,54 @@
       {
        "text": "Did the brains get better? Round 3's eras against each other",
        "href": "pages/round-3-eras-against-each-other.md"
+      }
+     ]
+    ],
+    [
+     "E45",
+     "Did the brains get better? Round 3's eras, with more coins",
+     "trials",
+     "1,326 contests from 17 worlds: *against 250*; *against 1,500*; *each against itself*",
+     "\u2014",
+     "as their worlds",
+     "100 each",
+     "1326 played",
+     [
+      {
+       "text": "Did the brains get better? Round 3's eras against each other",
+       "href": "pages/round-3-eras-against-each-other.md"
+      }
+     ]
+    ],
+    [
+     "E46",
+     "Why does evolution level off?",
+     "B1",
+     "*control* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on); *4 times the tokens* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on); *faithful copies* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_probability = 0.1); *message to oneself: largest* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, self_message = largest); *revolutionary tokens for the coalition alone* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, revolt_tokens = separate); *stakes pooled by family* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, pool = family, tag_rate = 0.05)",
+     "4601\u20134603",
+     "10,000",
+     "20,000",
+     "18",
+     [
+      {
+       "text": "Why does evolution level off?",
+       "href": "pages/why-does-evolution-level-off.md"
+      }
+     ]
+    ],
+    [
+     "E47",
+     "Why does evolution level off? The contests that read it",
+     "trials",
+     "864 contests from 18 worlds: *each era against the one before*; *the last step, in patches*; *each against itself*",
+     "\u2014",
+     "as their worlds",
+     "100 each",
+     "0 played",
+     [
+      {
+       "text": "Why does evolution level off?",
+       "href": "pages/why-does-evolution-level-off.md"
       }
      ]
     ]
@@ -1553,10 +1601,10 @@
      "M",
      "Steadying a mixed world: each rule of the engine that might hold its size (estates, half kept at home, searches, a slower change of brains), and the estate to a dead agent's own children (H), parents as mates (MP) and a bought life (BL)",
      "11",
-     "28",
+     "26",
      "10,000",
      "5,000",
-     "24 done, 2 queued, 2 stopped early",
+     "24 done, 2 stopped early",
      [
       {
        "text": "Building B2, and the search for a healthy, rich world",
@@ -3807,6 +3855,33 @@
      ""
     ],
     [
+     "E45",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E46",
+     "18",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E47",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
      "A3k",
      "8",
      "0",
@@ -4007,10 +4082,10 @@
    ]
   },
   "totals": {
-   "lab experiments": 39,
-   "lab runs on disk": 795,
+   "lab experiments": 42,
+   "lab runs on disk": 813,
    "pilot batches": 22,
-   "pilot worlds": 486
+   "pilot worlds": 484
   }
  },
  "figures": {}

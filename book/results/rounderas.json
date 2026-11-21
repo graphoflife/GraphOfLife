@@ -1,0 +1,1063 @@
+{
+ "chapter": "rounderas",
+ "numbers": {
+  "verdict": {
+   "as written": {
+    "worlds": 17,
+    "gain_above": 0,
+    "late_within": 17,
+    "late_above": 0,
+    "rho": 0.11274509803921569,
+    "p": 0.33126687331266874,
+    "rho_health": -0.04166666666666667,
+    "parts": [
+     "fails",
+     "holds",
+     "undecided"
+    ],
+    "verdict": "fails",
+    "band_half": {
+     "min": 0.17464050148955731,
+     "max": 1.0285912646533948
+    }
+   },
+   "second reading": {
+    "worlds": 14,
+    "gain_above": 5,
+    "late_within": 10,
+    "late_above": 2,
+    "rho": 0.2351648351648352,
+    "p": 0.2104789521047895,
+    "rho_health": 0.14285714285714285,
+    "parts": [
+     "fails",
+     "holds",
+     "undecided"
+    ],
+    "verdict": "fails",
+    "band_half": {
+     "min": 0.0712966861788635,
+     "max": 0.4199206253808114
+    }
+   },
+   "second reading, all 17 beside": {
+    "worlds": 17,
+    "gain_above": 7,
+    "late_within": 12,
+    "late_above": 3,
+    "rho": 0.11274509803921569,
+    "p": 0.33126687331266874,
+    "rho_health": -0.04166666666666667,
+    "parts": [
+     "fails",
+     "holds",
+     "undecided"
+    ],
+    "verdict": "fails",
+    "band_half": {
+     "min": 0.0712966861788635,
+     "max": 0.4199206253808114
+    }
+   }
+  },
+  "worlds": {
+   "s4003 s": {
+    "run": "B1-30000-fffc7d-s4003",
+    "rank": 1,
+    "score": 0.7791471636559558,
+    "health": 0.4981887080768317,
+    "seen": false,
+    "sd": 0.38924947208076144,
+    "first": {
+     "500": 1.0,
+     "1000": 0.5,
+     "1500": 0.6740284602799215,
+     "2000": 0.8031244861042591,
+     "2500": 0.6666666666666666,
+     "3000": 0.2914911127194603
+    },
+    "middle": {
+     "500": 1.0,
+     "1000": 0.22847440630840055,
+     "2000": 0.12795206885467195,
+     "2500": 0.3786838050799964,
+     "3000": 0.34520327238609877
+    },
+    "gain": 0.670347563473294,
+    "late": 0.34520327238609877,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.6388888888888888,
+    "won_first_there": 0.6111111111111112,
+    "won_first_home": 0.6666666666666666,
+    "won_middle": 0.4166666666666667,
+    "won_late": 0.2777777777777778,
+    "won_itself": 0.8333333333333334,
+    "itself": 0.8333333333333334,
+    "home": 0.5624115560461368,
+    "away": 0.44825671045980403
+   },
+   "s4002 w": {
+    "run": "B1-30000-5379e2-s4002",
+    "rank": 2,
+    "score": 0.7317503349596348,
+    "health": 0.5444951300559061,
+    "seen": true,
+    "sd": 0.4337897942200585,
+    "first": {
+     "500": 0.16666666666666666,
+     "1000": 0.16666666666666666,
+     "1500": 0.0,
+     "2000": 0.0,
+     "2500": 0.30486004108885467,
+     "3000": 0.16666666666666666
+    },
+    "middle": {
+     "500": 0.8333333333333334,
+     "1000": 1.0,
+     "2000": 0.2359315693772548,
+     "2500": 0.8560383438013871,
+     "3000": 1.0
+    },
+    "gain": 0.16666666666666666,
+    "late": 0.8560383438013871,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.1388888888888889,
+    "won_first_there": 0.1111111111111111,
+    "won_first_home": 0.16666666666666666,
+    "won_middle": 0.08333333333333333,
+    "won_late": 0.6666666666666666,
+    "won_itself": 0.5,
+    "itself": 0.5414065399867597,
+    "home": 0.3079766081405284,
+    "away": 0.2490227774838649
+   },
+   "s4008 w": {
+    "run": "B1-30000-1cfaa4-s4008",
+    "rank": 3,
+    "score": 0.7033537160313179,
+    "health": 0.5281076678156333,
+    "seen": false,
+    "sd": 0.4289872777036614,
+    "first": {
+     "500": 0.729873620209101,
+     "1000": 0.9523976770985745,
+     "1500": 0.8693591533786061,
+     "2000": 0.6623863028357411,
+     "2500": 0.7261191037544134,
+     "3000": 0.6939340176572467
+    },
+    "middle": {
+     "500": 0.631810917942927,
+     "1000": 0.8844256504466044,
+     "2000": 0.3411889688185125,
+     "2500": 0.5688252380533747,
+     "3000": 0.3274530016529584
+    },
+    "gain": 0.7279963619817571,
+    "late": 0.3411889688185125,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.7777777777777778,
+    "won_first_there": 0.6666666666666666,
+    "won_first_home": 0.8888888888888888,
+    "won_middle": 0.25,
+    "won_late": 0.3333333333333333,
+    "won_itself": 0.5,
+    "itself": 0.46723114964776796,
+    "home": 0.611646426205235,
+    "away": 0.5438627583527644
+   },
+   "s4007 w": {
+    "run": "B1-30000-04d3eb-s4007",
+    "rank": 4,
+    "score": 0.6735991767183438,
+    "health": 0.16442462771100466,
+    "seen": false,
+    "sd": 0.41960715512893354,
+    "first": {
+     "500": 0.7685418095891455,
+     "1000": 0.900288446341078,
+     "1500": 0.6666666666666666,
+     "2000": 0.9947573642648843,
+     "2500": 0.5634422872035645,
+     "3000": 0.5
+    },
+    "middle": {
+     "500": 0.07039106706637499,
+     "1000": 0.6847451586075799,
+     "2000": 0.31684904613071274,
+     "2500": 0.3488697867785459,
+     "3000": 0.18882983978385373
+    },
+    "gain": 0.7176042381279061,
+    "late": 0.31684904613071274,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.75,
+    "won_first_there": 0.7222222222222222,
+    "won_first_home": 0.7777777777777778,
+    "won_middle": 0.6666666666666666,
+    "won_late": 0.2777777777777778,
+    "won_itself": 0.6666666666666666,
+    "itself": 0.5831314287607939,
+    "home": 0.6647169894203611,
+    "away": 0.5158482871404565
+   },
+   "s4003 w": {
+    "run": "B1-30000-9efb1d-s4003",
+    "rank": 5,
+    "score": 0.6561507509726024,
+    "health": 0.46570690282081145,
+    "seen": true,
+    "sd": 0.48666005616221747,
+    "first": {
+     "500": 1.0,
+     "1000": 0.16666666666666666,
+     "1500": 0.8333333333333334,
+     "2000": 1.0,
+     "2500": 1.0,
+     "3000": 0.8333333333333334
+    },
+    "middle": {
+     "500": 0.0,
+     "1000": 0.0,
+     "2000": 0.6666666666666666,
+     "2500": 0.16666666666666666,
+     "3000": 0.02123400139460602
+    },
+    "gain": 0.9166666666666667,
+    "late": 0.16666666666666666,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.8055555555555556,
+    "won_first_there": 0.8333333333333334,
+    "won_first_home": 0.7777777777777778,
+    "won_middle": 1.0,
+    "won_late": 0.2777777777777778,
+    "won_itself": 0.5833333333333334,
+    "itself": 0.5373523036173896,
+    "home": 0.696969696969697,
+    "away": 0.700830424495989
+   },
+   "s4007 s": {
+    "run": "B1-30000-a8a2d2-s4007",
+    "rank": 6,
+    "score": 0.6540395386097794,
+    "health": 0.19734654498305917,
+    "seen": false,
+    "sd": 0.4292224478928667,
+    "first": {
+     "500": 0.9940554339897885,
+     "1000": 0.9996706843179872,
+     "1500": 0.8448387231394237,
+     "2000": 1.0,
+     "2500": 1.0,
+     "3000": 1.0
+    },
+    "middle": {
+     "500": 0.13218702406262628,
+     "1000": 0.45956160228755416,
+     "2000": 0.4789959235062467,
+     "2500": 0.9742336559144406,
+     "3000": 0.7598023784442249
+    },
+    "gain": 0.9998353421589936,
+    "late": 0.7598023784442249,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.9722222222222222,
+    "won_first_there": 1.0,
+    "won_first_home": 0.9444444444444444,
+    "won_middle": 0.8333333333333334,
+    "won_late": 0.7777777777777778,
+    "won_itself": 0.5833333333333334,
+    "itself": 0.655879716130608,
+    "home": 0.8633974338824092,
+    "away": 0.8565749612015784
+   },
+   "s4002 s": {
+    "run": "B1-30000-192733-s4002",
+    "rank": 7,
+    "score": 0.6388692653442488,
+    "health": 0.4424045752777941,
+    "seen": true,
+    "sd": 0.45455490784078323,
+    "first": {
+     "500": 1.0,
+     "1000": 1.0,
+     "1500": 0.6666666666666666,
+     "2000": 0.8333333333333334,
+     "2500": 1.0,
+     "3000": 1.0
+    },
+    "middle": {
+     "500": 0.6666666666666667,
+     "1000": 1.0,
+     "2000": 0.16666666666666666,
+     "2500": 0.8333333333333334,
+     "3000": 0.8333333333333334
+    },
+    "gain": 1.0,
+    "late": 0.8333333333333334,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.9166666666666666,
+    "won_first_there": 0.8888888888888888,
+    "won_first_home": 0.9444444444444444,
+    "won_middle": 0.16666666666666666,
+    "won_late": 0.6111111111111112,
+    "won_itself": 0.4166666666666667,
+    "itself": 0.38120317330961656,
+    "home": 0.6666666666666666,
+    "away": 0.7272727272727273
+   },
+   "s3093": {
+    "run": "B1-30000-26a341-s3093",
+    "rank": 9,
+    "score": 0.6171096121383627,
+    "health": 0.45661046752247825,
+    "seen": false,
+    "sd": 0.14388832749754554,
+    "first": {
+     "500": 0.6104494077561194,
+     "1000": 0.4804545926633223,
+     "1500": 0.609121953670489,
+     "2000": 0.3695008725338608,
+     "2500": 0.5956553575100323,
+     "3000": 0.599121579866502
+    },
+    "middle": {
+     "500": 0.4531343759895672,
+     "1000": 0.3679053016525715,
+     "2000": 0.44071196296062626,
+     "2500": 0.3427980944884883,
+     "3000": 0.4482861994720792
+    },
+    "gain": 0.5973884686882671,
+    "late": 0.44071196296062626,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.6666666666666666,
+    "won_first_there": 0.7777777777777778,
+    "won_first_home": 0.5555555555555556,
+    "won_middle": 0.75,
+    "won_late": 0.2777777777777778,
+    "won_itself": 0.3333333333333333,
+    "itself": 0.48543794811303614,
+    "home": 0.48743761924292117,
+    "away": 0.5443915340806026
+   },
+   "s4006 s": {
+    "run": "B1-30000-8526cf-s4006",
+    "rank": 10,
+    "score": 0.5959660346388341,
+    "health": 0.5873961572305955,
+    "seen": false,
+    "sd": 0.36204470964203206,
+    "first": {
+     "500": 0.8608113565302596,
+     "1000": 0.5908467952524431,
+     "1500": 0.836469052585365,
+     "2000": 0.9107258350229067,
+     "2500": 0.9798481337183601,
+     "3000": 0.9927398063948373
+    },
+    "middle": {
+     "500": 0.17208369406528623,
+     "1000": 0.32292592322598523,
+     "2000": 0.1700441951555952,
+     "2500": 0.8592258477976792,
+     "3000": 0.9897164646362592
+    },
+    "gain": 0.8857685957765832,
+    "late": 0.8592258477976792,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.8888888888888888,
+    "won_first_there": 0.8888888888888888,
+    "won_first_home": 0.8888888888888888,
+    "won_middle": 0.75,
+    "won_late": 0.6666666666666666,
+    "won_itself": 0.5833333333333334,
+    "itself": 0.554981889132313,
+    "home": 0.7950731558318797,
+    "away": 0.7859119114049263
+   },
+   "s3047": {
+    "run": "B1-30000-10c9f1-s3047",
+    "rank": 11,
+    "score": 0.5866360085799539,
+    "health": 0.48242666204253926,
+    "seen": false,
+    "sd": 0.4029915598749536,
+    "first": {
+     "500": 0.5667100327848508,
+     "1000": 0.8507636473037191,
+     "1500": 1.0,
+     "2000": 0.851815899975905,
+     "2500": 0.7411867275376901,
+     "3000": 0.4471584153091555
+    },
+    "middle": {
+     "500": 0.18645854645479554,
+     "1000": 0.49274010306270943,
+     "2000": 0.786726068083162,
+     "2500": 0.507926995617865,
+     "3000": 0.8333333333333334
+    },
+    "gain": 0.7959751874207046,
+    "late": 0.786726068083162,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.75,
+    "won_first_there": 0.7222222222222222,
+    "won_first_home": 0.7777777777777778,
+    "won_middle": 0.6666666666666666,
+    "won_late": 0.7222222222222222,
+    "won_itself": 0.6666666666666666,
+    "itself": 0.644671014434354,
+    "home": 0.7400425397773007,
+    "away": 0.6974888184823677
+   },
+   "s3076": {
+    "run": "B1-30000-66c764-s3076",
+    "rank": 17,
+    "score": 0.556184805410529,
+    "health": 0.19178975244134827,
+    "seen": false,
+    "sd": 0.5142121108333094,
+    "first": {
+     "500": 0.16666666666666666,
+     "1000": 0.16666666666666666,
+     "1500": 0.666859493508163,
+     "2000": 0.5,
+     "2500": 0.8333333333333334,
+     "3000": 0.5
+    },
+    "middle": {
+     "500": 0.33333333333333337,
+     "1000": 0.16666666666666663,
+     "2000": 0.6666666666666666,
+     "2500": 0.6666666666666666,
+     "3000": 0.3333333333333333
+    },
+    "gain": 0.5,
+    "late": 0.6666666666666666,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.4722222222222222,
+    "won_first_there": 0.4444444444444444,
+    "won_first_home": 0.5,
+    "won_middle": 0.75,
+    "won_late": 0.5555555555555556,
+    "won_itself": 0.5833333333333334,
+    "itself": 0.5825132945678644,
+    "home": 0.6363636363636364,
+    "away": 0.45458051397118115
+   },
+   "s3038": {
+    "run": "B1-30000-1ad8a9-s3038",
+    "rank": 27,
+    "score": 0.47792232316825367,
+    "health": 0.18605962928986,
+    "seen": false,
+    "sd": 0.5142956323266974,
+    "first": {
+     "500": 0.6666666666666666,
+     "1000": 0.33517750115260486,
+     "1500": 0.8336228451111989,
+     "2000": 0.9985449097362187,
+     "2500": 0.5,
+     "3000": 0.8391076115485564
+    },
+    "middle": {
+     "500": 0.5288460758312532,
+     "1000": 0.00035515949890230214,
+     "2000": 0.999019140024389,
+     "2500": 0.4927159316738079,
+     "3000": 0.17081326912787587
+    },
+    "gain": 0.7501447558889327,
+    "late": 0.4927159316738079,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.6944444444444444,
+    "won_first_there": 0.6666666666666666,
+    "won_first_home": 0.7222222222222222,
+    "won_middle": 0.75,
+    "won_late": 0.5555555555555556,
+    "won_itself": 0.5,
+    "itself": 0.49284489682692606,
+    "home": 0.7283189587120645,
+    "away": 0.6001295212354195
+   },
+   "s3089": {
+    "run": "B1-30000-77ad6a-s3089",
+    "rank": 31,
+    "score": 0.4584265790806236,
+    "health": 0.12887074354234573,
+    "seen": false,
+    "sd": 0.31823645461042543,
+    "first": {
+     "500": 0.375859314929383,
+     "1000": 0.8450635510214922,
+     "1500": 0.9966888909970831,
+     "2000": 0.9952644469808843,
+     "2500": 0.9840375559998987,
+     "3000": 0.6229197434234105
+    },
+    "middle": {
+     "500": 0.34298948725585565,
+     "1000": 0.019725860707915488,
+     "2000": 0.9890962639070834,
+     "2500": 0.0007291472635994298,
+     "3000": 0.006336819855250676
+    },
+    "gain": 0.9145505535106955,
+    "late": 0.006336819855250676,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.8611111111111112,
+    "won_first_there": 0.8888888888888888,
+    "won_first_home": 0.8333333333333334,
+    "won_middle": 0.8333333333333334,
+    "won_late": 0.3333333333333333,
+    "won_itself": 0.75,
+    "itself": 0.6195056458858931,
+    "home": 0.6987580239856713,
+    "away": 0.6563838644532949
+   },
+   "s3042": {
+    "run": "B1-30000-b82ad0-s3042",
+    "rank": 59,
+    "score": 0.31740569566327614,
+    "health": 0.6056472296657149,
+    "seen": false,
+    "sd": 0.27153528856097864,
+    "first": {
+     "500": 0.8512331692383716,
+     "1000": 0.8316128249909988,
+     "1500": 0.8964529868409997,
+     "2000": 0.7613521479019522,
+     "2500": 0.7149363209430386,
+     "3000": 0.7440520374815932
+    },
+    "middle": {
+     "500": 0.6211235205276568,
+     "1000": 0.42855265763684824,
+     "2000": 0.5317116602948584,
+     "2500": 0.5741083218729299,
+     "3000": 0.5237096417587505
+    },
+    "gain": 0.7964824864464755,
+    "late": 0.5317116602948584,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.9444444444444444,
+    "won_first_there": 0.9444444444444444,
+    "won_first_home": 0.9444444444444444,
+    "won_middle": 0.4166666666666667,
+    "won_late": 0.6111111111111112,
+    "won_itself": 0.4166666666666667,
+    "itself": 0.5125470868942442,
+    "home": 0.691373700785963,
+    "away": 0.6503522870611257
+   },
+   "s3020": {
+    "run": "B1-30000-511930-s3020",
+    "rank": 62,
+    "score": 0.3033740786079493,
+    "health": 0.10471492365308838,
+    "seen": false,
+    "sd": 0.430390960969606,
+    "first": {
+     "500": 0.9841964343978477,
+     "1000": 0.22959221087334966,
+     "1500": 0.40484158208868815,
+     "2000": 0.10654620388356895,
+     "2500": 0.22937721851403936,
+     "3000": 0.46287973036446184
+    },
+    "middle": {
+     "500": 0.8140385922524727,
+     "1000": 0.4369183414810792,
+     "2000": 0.3333333333333333,
+     "2500": 0.0,
+     "3000": 0.3178794992175274
+    },
+    "gain": 0.3172168964810189,
+    "late": 0.3178794992175274,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.3888888888888889,
+    "won_first_there": 0.2777777777777778,
+    "won_first_home": 0.5,
+    "won_middle": 0.4166666666666667,
+    "won_late": 0.2222222222222222,
+    "won_itself": 0.6666666666666666,
+    "itself": 0.6563979546261173,
+    "home": 0.40378392530145185,
+    "away": 0.29034139814205073
+   },
+   "s3018": {
+    "run": "B1-30000-af1e28-s3018",
+    "rank": 75,
+    "score": 0.20487199317175883,
+    "health": 0.5647468829024658,
+    "seen": false,
+    "sd": 0.11276490633074178,
+    "first": {
+     "500": 0.5636508839006343,
+     "1000": 0.5624254956328778,
+     "1500": 0.6174707856864682,
+     "2000": 0.8266811953054827,
+     "2500": 0.7791270591141998,
+     "3000": 0.8293990038616966
+    },
+    "middle": {
+     "500": 0.3580011300636857,
+     "1000": 0.39139275491423164,
+     "2000": 0.6693836438517063,
+     "2500": 0.6763374810427413,
+     "3000": 0.7376320815321958
+    },
+    "gain": 0.698298922400334,
+    "late": 0.6763374810427413,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.8333333333333334,
+    "won_first_there": 0.7777777777777778,
+    "won_first_home": 0.8888888888888888,
+    "won_middle": 1.0,
+    "won_late": 0.9444444444444444,
+    "won_itself": 0.5833333333333334,
+    "itself": 0.5360956168380501,
+    "home": 0.7000266142572092,
+    "away": 0.665921339370079
+   },
+   "s3080": {
+    "run": "B1-30000-625bc7-s3080",
+    "rank": 81,
+    "score": 0.09398710913456501,
+    "health": 0.5489066275361473,
+    "seen": false,
+    "sd": 0.08732025074477866,
+    "first": {
+     "500": 0.6017890782675208,
+     "1000": 0.4468696844759661,
+     "1500": 0.45668190708728895,
+     "2000": 0.8346546808903311,
+     "2500": 0.4481291116945727,
+     "3000": 0.4288847325988421
+    },
+    "middle": {
+     "500": 0.5142970666667335,
+     "1000": 0.38925198718943144,
+     "2000": 0.3378406311148367,
+     "2500": 0.4519160105106243,
+     "3000": 0.41814834791622046
+    },
+    "gain": 0.4524055093909308,
+    "late": 0.41814834791622046,
+    "contests": 78,
+    "per_pair": [
+     6
+    ],
+    "won_first": 0.5277777777777778,
+    "won_first_there": 0.4444444444444444,
+    "won_first_home": 0.6111111111111112,
+    "won_middle": 0.5833333333333334,
+    "won_late": 0.3888888888888889,
+    "won_itself": 0.5,
+    "itself": 0.5101722556037965,
+    "home": 0.504188604564292,
+    "away": 0.4996959646538967
+   }
+  },
+  "band_as_written_covers_all": 14,
+  "table:worlds": {
+   "head": [
+    "world",
+    "rank",
+    "chosen by",
+    "noise",
+    "band as written",
+    "band, second reading",
+    "gain against 250",
+    "late against 1,500"
+   ],
+   "rows": [
+    [
+     {
+      "text": "s4003 s",
+      "href": "run:B1-30000-fffc7d-s4003"
+     },
+     "1",
+     "the rank",
+     "0.39",
+     "\u22120.28 to 1.28",
+     "0.18 to 0.82",
+     "0.67",
+     "0.35"
+    ],
+    [
+     {
+      "text": "s4002 w (played first)",
+      "href": "run:B1-30000-5379e2-s4002"
+     },
+     "2",
+     "the rank, healthiest",
+     "0.43",
+     "\u22120.37 to 1.37",
+     "0.15 to 0.85",
+     "0.17",
+     "**0.86**"
+    ],
+    [
+     {
+      "text": "s4008 w",
+      "href": "run:B1-30000-1cfaa4-s4008"
+     },
+     "3",
+     "the rank",
+     "0.43",
+     "\u22120.36 to 1.36",
+     "0.15 to 0.85",
+     "0.73",
+     "0.34"
+    ],
+    [
+     {
+      "text": "s4007 w",
+      "href": "run:B1-30000-04d3eb-s4007"
+     },
+     "4",
+     "the rank, least healthy",
+     "0.42",
+     "\u22120.34 to 1.34",
+     "0.16 to 0.84",
+     "0.72",
+     "0.32"
+    ],
+    [
+     {
+      "text": "s4003 w (played first)",
+      "href": "run:B1-30000-9efb1d-s4003"
+     },
+     "5",
+     "the rank",
+     "0.49",
+     "\u22120.47 to 1.47",
+     "0.10 to 0.90",
+     "**0.92**",
+     "0.17"
+    ],
+    [
+     {
+      "text": "s4007 s",
+      "href": "run:B1-30000-a8a2d2-s4007"
+     },
+     "6",
+     "the rank",
+     "0.43",
+     "\u22120.36 to 1.36",
+     "0.15 to 0.85",
+     "**1.00**",
+     "0.76"
+    ],
+    [
+     {
+      "text": "s4002 s (played first)",
+      "href": "run:B1-30000-192733-s4002"
+     },
+     "7",
+     "the rank",
+     "0.45",
+     "\u22120.41 to 1.41",
+     "0.13 to 0.87",
+     "**1.00**",
+     "0.83"
+    ],
+    [
+     {
+      "text": "s3093",
+      "href": "run:B1-30000-26a341-s3093"
+     },
+     "9",
+     "the rank",
+     "0.14",
+     "0.21 to 0.79",
+     "0.38 to 0.62",
+     "0.60",
+     "0.44"
+    ],
+    [
+     {
+      "text": "s4006 s",
+      "href": "run:B1-30000-8526cf-s4006"
+     },
+     "10",
+     "the rank, healthiest",
+     "0.36",
+     "\u22120.22 to 1.22",
+     "0.20 to 0.80",
+     "**0.89**",
+     "**0.86**"
+    ],
+    [
+     {
+      "text": "s3047",
+      "href": "run:B1-30000-10c9f1-s3047"
+     },
+     "11",
+     "the rank",
+     "0.40",
+     "\u22120.31 to 1.31",
+     "0.17 to 0.83",
+     "0.80",
+     "0.79"
+    ],
+    [
+     {
+      "text": "s3076",
+      "href": "run:B1-30000-66c764-s3076"
+     },
+     "17",
+     "least healthy",
+     "0.51",
+     "\u22120.53 to 1.53",
+     "0.08 to 0.92",
+     "0.50",
+     "0.67"
+    ],
+    [
+     {
+      "text": "s3038",
+      "href": "run:B1-30000-1ad8a9-s3038"
+     },
+     "27",
+     "least healthy",
+     "0.51",
+     "\u22120.53 to 1.53",
+     "0.08 to 0.92",
+     "0.75",
+     "0.49"
+    ],
+    [
+     {
+      "text": "s3089",
+      "href": "run:B1-30000-77ad6a-s3089"
+     },
+     "31",
+     "least healthy",
+     "0.32",
+     "\u22120.14 to 1.14",
+     "0.24 to 0.76",
+     "**0.91**",
+     "0.01"
+    ],
+    [
+     {
+      "text": "s3042",
+      "href": "run:B1-30000-b82ad0-s3042"
+     },
+     "59",
+     "healthiest",
+     "0.27",
+     "\u22120.04 to 1.04",
+     "0.28 to 0.72",
+     "**0.80**",
+     "0.53"
+    ],
+    [
+     {
+      "text": "s3020",
+      "href": "run:B1-30000-511930-s3020"
+     },
+     "62",
+     "least healthy",
+     "0.43",
+     "\u22120.36 to 1.36",
+     "0.15 to 0.85",
+     "0.32",
+     "0.32"
+    ],
+    [
+     {
+      "text": "s3018",
+      "href": "run:B1-30000-af1e28-s3018"
+     },
+     "75",
+     "healthiest",
+     "0.11",
+     "0.27 to 0.73",
+     "0.41 to 0.59",
+     "**0.70**",
+     "**0.68**"
+    ],
+    [
+     {
+      "text": "s3080",
+      "href": "run:B1-30000-625bc7-s3080"
+     },
+     "81",
+     "healthiest",
+     "0.09",
+     "0.33 to 0.67",
+     "0.43 to 0.57",
+     "0.45",
+     "0.42"
+    ]
+   ]
+  },
+  "pooled": {
+   "rates": {
+    "first": {
+     "500": 0.7647058823529411,
+     "1000": 0.6078431372549019,
+     "1500": 0.7156862745098039,
+     "2000": 0.7745098039215687,
+     "2500": 0.7352941176470589,
+     "3000": 0.6470588235294118
+    },
+    "middle": {
+     "500": 0.39215686274509803,
+     "1000": 0.39215686274509803,
+     "2000": 0.49019607843137253,
+     "2500": 0.5196078431372549,
+     "3000": 0.49019607843137253
+    }
+   },
+   "won_first": {
+    "contests": 0.7075163398692811,
+    "median_world": 0.75,
+    "worlds_above_half": 14,
+    "p_coin": 0.002716064453125,
+    "beyond_itself": 0.13888888888888887,
+    "p_itself": 0.0459442138671875
+   },
+   "won_first_there": {
+    "contests": 0.6862745098039216,
+    "median_world": 0.7222222222222222,
+    "worlds_above_half": 13,
+    "p_coin": 0.0095977783203125,
+    "beyond_itself": 0.1176470588235294,
+    "p_itself": 0.11151123046875
+   },
+   "won_first_home": {
+    "contests": 0.7287581699346406,
+    "median_world": 0.7777777777777778,
+    "worlds_above_half": 14,
+    "p_coin": 0.00115966796875,
+    "beyond_itself": 0.16013071895424835,
+    "p_itself": 0.01800537109375
+   },
+   "won_middle": {
+    "contests": 0.607843137254902,
+    "median_world": 0.6666666666666666,
+    "worlds_above_half": 11,
+    "p_coin": 0.142425537109375,
+    "beyond_itself": 0.039215686274509796,
+    "p_itself": 0.6138916015625
+   },
+   "won_late": {
+    "contests": 0.5,
+    "median_world": 0.5555555555555556,
+    "worlds_above_half": 9,
+    "p_coin": 1.0,
+    "beyond_itself": -0.06862745098039216,
+    "p_itself": 0.3210906982421875
+   },
+   "itself": {
+    "later_label_won": 116,
+    "contests": 204,
+    "p_coin": 0.058441136475938175,
+    "mean_share": 0.5643944263358155,
+    "p_worlds": 0.0119476318359375
+   },
+   "home": {
+    "home": 0.6328913033031425,
+    "away": 0.5815803411330664,
+    "worlds_more_at_home": 14,
+    "p": 0.00714111328125
+   },
+   "alone": {
+    "against 250": [
+     372,
+     612
+    ],
+    "against 1,500": [
+     282,
+     510
+    ],
+    "each against itself": [
+     98,
+     204
+    ]
+   },
+   "tokens_and_agents": 0.987727102211614
+  },
+  "cost": {
+   "worker_hours": 375.62538888888884,
+   "contests": 1326,
+   "from": "12 November 2026, 17:07",
+   "to": "21 November 2026, 02:48"
+  }
+ },
+ "figures": {
+  "scores": {
+   "title": "Every world's eras against 250 and against 1,500",
+   "caption": "One panel for each of the 17 worlds, in the order of the evolution rank. Each dot is an era's score: the share of the agents its brains held after 100 iterations, the mean of six contests, three on each era's world. Blue: against the brains of iteration 250. Orange: against the brains of 1,500 (none at 1,500 itself). The dashed line is a tie. The wide, faint band is the thesis's band as written, 0.5 plus or minus twice the spread of the world's twelve contests of an era against itself, cut at 0 and 1; in 14 worlds it covers every score there can be. The narrower, brighter band is the second reading's, twice the spread divided by \u221a6, the noise of a mean of six. The three worlds marked first were played, and two of them seen, before the second reading was written.",
+   "recipe": "**Runs.** The 1,326 contests of Experiment 45 (`python3 gol_lab.py run E45`), 78 in each of 17 worlds of round 3: the eras 500 to 3,000 against 250, the eras 500 to 3,000 against 1,500, each pair three times (coins 17 to 19) on each era's world, and the eras 250, 1,500 and 3,000 each against itself four times (coins 17 to 20). Each contest plays 100 iterations, every mutation off.\n\n**Data.** From each trial's `GraphOfLifeRuns/<trial>/result.json`: `share`, the later era's share of the agents at the end.\n\n1. For each world and pair of eras, the mean of `share` over the pair's six contests: the later era's score; the earlier era's score is 1 less that.\n2. The noise: the standard deviation (n \u2212 1) of `share` over the world's twelve contests of an era against itself.\n3. The band as written: 0.5 \u00b1 twice the noise; the second reading: 0.5 \u00b1 twice the noise / \u221a6.\n\n**To make it again:** `python3 book_figures.py rounderas`."
+  },
+  "won": {
+   "title": "How often an era won, over all the worlds",
+   "caption": "Each bar is one era: of its 102 contests against a fixed era, six in each of the 17 worlds, the share it won, ending with more than half of the agents. Left: against the brains of 250. Right: against the brains of 1,500; there the eras 500 and 1,000 are the earlier side. The dashed lines, in both panels, are a coin, 0.5, and the share of the contests of an era against itself won by the side in the later era's place: 116 of 204. Both sides carry the same brains there; if the place itself helps, a later era no better than the fixed one would win about this often. The eras 500 and 1,000 are in the earlier era's place against 1,500, so for them that line would lie as far below a coin.",
+   "recipe": "**Runs.** The 1,326 contests of Experiment 45 (`python3 gol_lab.py run E45`), 78 in each of 17 worlds of round 3: the eras 500 to 3,000 against 250, the eras 500 to 3,000 against 1,500, each pair three times (coins 17 to 19) on each era's world, and the eras 250, 1,500 and 3,000 each against itself four times (coins 17 to 20). Each contest plays 100 iterations, every mutation off.\n\n**Data.** From each trial's `GraphOfLifeRuns/<trial>/result.json`: `share`, the later era's share of the agents at the end.\n\n1. A contest is won by the later era if `share` is above 0.5, by the earlier if below.\n2. For each era, the share of its contests with the fixed era that it won, over every world.\n3. The second line: the share of the 204 contests of an era against itself with `share` above 0.5.\n\n**To make it again:** `python3 book_figures.py rounderas`."
+  },
+  "rank": {
+   "title": "Gain against the evolution rank, and against health",
+   "caption": "Each dot is one of the 17 worlds: its gain, the median score of its eras 500 to 3,000 against the brains of 250, against its evolution score (left) and its health (right). Rho is Spearman's rank correlation over all 17. Violet: the three worlds played first; blue: the 14 the second reading judges.",
+   "recipe": "**Runs.** The 1,326 contests of Experiment 45 (`python3 gol_lab.py run E45`), 78 in each of 17 worlds of round 3: the eras 500 to 3,000 against 250, the eras 500 to 3,000 against 1,500, each pair three times (coins 17 to 19) on each era's world, and the eras 250, 1,500 and 3,000 each against itself four times (coins 17 to 20). Each contest plays 100 iterations, every mutation off.\n\n**Data.** From each trial's `GraphOfLifeRuns/<trial>/result.json`: `share`, the later era's share of the agents at the end; the evolution score `score` of `research/screen/evolution.json` and the product of health of `research/screen/health.json`.\n\n1. Each era's score against 250 as in the first figure; a world's gain is the median of its six eras' scores.\n2. Spearman's rho of the gain with each score, ties given the mean of their ranks.\n\n**To make it again:** `python3 book_figures.py rounderas`."
+  },
+  "ends": {
+   "title": "How the contests ended",
+   "caption": "All 1326 contests, by the share of the agents the later era's brains held after 100 iterations, in steps of 0.05, stacked by the fixed era they played. When an era plays itself, both sides carry the same brains, and the share is that of the side in the later era's place. 752 contests ended with one side holding at least 99% of the agents.",
+   "recipe": "**Runs.** The 1,326 contests of Experiment 45 (`python3 gol_lab.py run E45`), 78 in each of 17 worlds of round 3: the eras 500 to 3,000 against 250, the eras 500 to 3,000 against 1,500, each pair three times (coins 17 to 19) on each era's world, and the eras 250, 1,500 and 3,000 each against itself four times (coins 17 to 20). Each contest plays 100 iterations, every mutation off.\n\n**Data.** From each trial's `GraphOfLifeRuns/<trial>/result.json`: `share`, the later era's share of the agents at the end.\n\n1. Count the contests of each set by `share`, in twenty steps of 0.05 from 0 to 1.\n\n**To make it again:** `python3 book_figures.py rounderas`."
+  }
+ }
+}
