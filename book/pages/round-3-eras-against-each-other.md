@@ -189,8 +189,8 @@ eras 500 to 3,000 against 250; **late**, the median of 2,000 to 3,000 against
 752 of the 1,326 contests ended with one side holding at least 99% of the
 agents: 372 of the 612 against 250, 282 of the 510 against 1,500, and 98 of
 the 204 of an era against itself. Round 3's worlds live through about 90
-generations in 100 iterations, so in a contest one line usually takes the
-world, as it does in the worlds themselves. That is what broke the band as
+generations in 100 iterations, so in a contest one era's brains usually take
+the whole world, as single lines take the worlds themselves. That is what broke the band as
 written. When contests end at 0 or 1, their spread is close to 0.5, the
 largest a share can have, and twice that reaches from below 0 to above 1.
 
@@ -275,10 +275,11 @@ contests of two different eras, the later era held 63% of the agents on its
 own world and 58% on the other's, more at home in 14 of the 17 worlds
 (*p* = 0.007).
 
-**The later place wins a little, even against itself.** When an era plays
-itself, both sides carry the same brains, so each side should win half of
-the time. Yet the side in the later era's place won 116 of the 204 contests
-(57%). A fair coin gives a result this lopsided 6 times in 100, and the
+**The later place wins a little, even against itself.** A contest gives the
+brains of its two eras two labels, and the score counts the agents with the
+later era's label. When an era plays itself, both labels carry the same
+brains, so each should win half of the time. Yet the side in the later era's
+place won 116 of the 204 contests (57%). A fair coin gives a result this lopsided 6 times in 100, and the
 world means, tested as above, give *p* = 0.012. No cause was found in the
 [engine](runs-and-records.md#the-lab-the-engine-and-pilots "The program that runs an experiment's plan as runs, each on a frozen copy of the engine, the code that plays a world."): the brains' labels are only compared for equality, the sides are
 dealt by a fair coin, and ties are broken at random. If the effect is real,
@@ -321,15 +322,15 @@ rank tells which worlds gained.
 ## What we learned
 
 - **Six contests cannot judge one world.** When contests end at 0 or 1, the
-  noise of a mean of six is about 0.2. Take a later era that wins 70% of its
-  contests: its score clears a band of twice that noise, on average, only if a
-  pair plays more than 25 contests. A test of one world must count many
-  contests, or many worlds must be pooled.
-- **Round 3 levels off almost at once.** The notebook's two longest worlds,
+  noise of a mean of *n* of them is about 0.5/√*n*: 0.2 for six. A later era
+  that wins 70% of its contests clears a band of twice that noise, on average,
+  only if a pair plays more than 25 contests. A test of one world must count
+  many contests, or many worlds must be pooled.
+- **Round 3 levels off early.** The notebook's two longest worlds,
   of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), climbed for 20,000 to 25,000 iterations
   ([Every era against three](every-era-against-three.md)). Round 3's worlds,
   taken together, had made their gain by iteration 500, and the 2,500
-  iterations after it brought no better brains.
+  iterations after it brought no clearly better brains.
 - **Neither the rank nor health picked the worlds that gained.** But with this
   much noise in each world, only a strong link could have shown.
 - **Brains are better in general, and fit their own world.** The later brains
