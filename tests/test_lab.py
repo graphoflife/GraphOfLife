@@ -704,10 +704,11 @@ def test_a_readout_plays_each_check_against_its_past_with_every_coin_both_ways()
     A plan's readout stops each run at every check and plays the world kept
     there against the worlds kept its lags before and the fixed eras before
     it: every coin twice, the later era once in each place, on the later
-    era's world for odd coins and the earlier's for even ones. Each contest
-    waits for its run to keep the world of its check. A readout that plays
-    worlds the runs do not keep, or nothing at all, is refused; a plan
-    without one is as it was.
+    era's world for odd coins and the earlier's for even ones. A coin's two
+    contests share one deal, and no other coin of any pairing or run has it.
+    Each contest waits for its run to keep the world of its check. A readout
+    that plays worlds the runs do not keep, or nothing at all, is refused; a
+    plan without one is as it was.
     """
     with lab(plan("E91", seeds="1", iterations=8, record=ARCHIVED, readout=READOUT),
              plan("E92", seeds="1", iterations=8, record=ARCHIVED)) as tmp:
@@ -715,10 +716,17 @@ def test_a_readout_plays_each_check_against_its_past_with_every_coin_both_ways()
         assert run.targets == [4, 8] and gol_plan.experiment_runs("E92")[0].targets == [8]
         assert run.run_id == gol_plan.experiment_runs("E92")[0].run_id, "a readout renamed the run"
         trials = gol_plan.readout_trials("E91")
+        deal = lambda era, other, coin: gol_plan.deal_seed(run.run_id, era, other, coin)
         played = sorted((t.after, t.trial["a"], t.trial["b"], t.trial["home"], t.trial["seed"]) for t in trials)
-        assert played == sorted([(4, 0, 4, 4, 1), (4, 4, 0, 4, 1), (4, 0, 4, 0, 2), (4, 4, 0, 0, 2),
-                                 (8, 4, 8, 8, 1), (8, 8, 4, 8, 1), (8, 4, 8, 4, 2), (8, 8, 4, 4, 2),
-                                 (8, 0, 8, 8, 1), (8, 8, 0, 8, 1), (8, 0, 8, 0, 2), (8, 8, 0, 0, 2)]), played
+        assert played == sorted(
+            [(4, 0, 4, 4, deal(4, 0, 1)), (4, 4, 0, 4, deal(4, 0, 1)), (4, 0, 4, 0, deal(4, 0, 2)), (4, 4, 0, 0, deal(4, 0, 2)),
+             (8, 4, 8, 8, deal(8, 4, 1)), (8, 8, 4, 8, deal(8, 4, 1)), (8, 4, 8, 4, deal(8, 4, 2)), (8, 8, 4, 4, deal(8, 4, 2)),
+             (8, 0, 8, 8, deal(8, 0, 1)), (8, 8, 0, 8, deal(8, 0, 1)), (8, 0, 8, 0, deal(8, 0, 2)), (8, 8, 0, 0, deal(8, 0, 2))]), played
+        # Six coins, six deals; another run's coins have others; a seed and the one after it fit a random stream.
+        seeds = {t.trial["seed"] for t in trials}
+        assert len(seeds) == 6 and all(0 <= s < 2 ** 31 for s in seeds), seeds
+        assert not seeds & {gol_plan.deal_seed("another-run", era, other, coin)
+                            for era, other in ((4, 0), (8, 4), (8, 0)) for coin in (1, 2)}
         assert all(t.trial["run"] == run.run_id and t.trial["T"] == 3 and t.until == 3 for t in trials)
         assert gol_plan.readout_trials("E92") == []
         assert {s.run_id for s in gol_plan.experiment_work("E91")} == {run.run_id} | {t.run_id for t in trials}
@@ -801,25 +809,61 @@ def test_the_lab_plays_a_readout_at_every_check_before_the_run_goes_on():
 def test_a_readout_scores_the_later_era_from_either_place():
     """
     A contest's result is place B's share; the readout scores the later era,
-    whichever place it had, averages each coin's two contests, and takes one
-    coin's spread from every pairing of the run at once.
+    whichever place it had, and averages each coin's two contests. A coin with
+    one contest played, or with one whose world died out, does not count. One
+    coin's spread is taken from all the run's pairings of one kind at once:
+    those one lag back, and those against one fixed era, each on their own.
     """
     import gol_readout
     assert gol_readout.spread([[0.5], [1.0]]) == 0.5, "no pairing with two coins: the widest spread stands in"
     assert abs(gol_readout.spread([[0.0, 1.0], [0.5, 0.5, 0.5]]) - (0.5 / 3) ** 0.5) < 1e-12
     with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED, readout={**READOUT, "lags": [], "eras": [0]})):
         run = gol_plan.experiment_runs("E91")[0]
+        coin = {gol_plan.deal_seed(run.run_id, 4, 0, k): k for k in (1, 2)}
         shares = {(0, 4, 1): 0.9, (4, 0, 1): 0.3, (0, 4, 2): 1.0, (4, 0, 2): 0.0}
-        for t in gol_plan.readout_trials("E91"):
-            os.makedirs(gol_store.run_dir(t.run_id))
-            share = shares[(t.trial["a"], t.trial["b"], t.trial["seed"])]
-            gol_store.write_json(os.path.join(gol_store.run_dir(t.run_id), "result.json"),
-                                 {"trial": t.trial, "result": {"share": share}})
+
+        def write(played):
+            for t in gol_plan.readout_trials("E91"):
+                key = (t.trial["a"], t.trial["b"], coin[t.trial["seed"]])
+                if key in played:
+                    os.makedirs(gol_store.run_dir(t.run_id), exist_ok=True)
+                    gol_store.write_json(os.path.join(gol_store.run_dir(t.run_id), "result.json"),
+                                         {"trial": t.trial, "result": {"share": played[key]}})
+
+        # One contest of each coin: no coin is whole, so the pairing has nothing to say yet.
+        write({k: v for k, v in shares.items() if k[0] == 0})
+        assert gol_readout.summary("E91").get(run.run_id, []) == []
+        # Coin 2's other contest died out: only coin 1 counts, and with one coin the widest spread stands in.
+        write({(4, 0, 1): 0.3, (4, 0, 2): None})
+        [row] = gol_readout.summary("E91")[run.run_id]
+        assert row["coins"] == 1 and row["contests"] == 3 and abs(row["score"] - 0.8) < 1e-12, row
+        assert row["low"] == 0.0 and row["high"] == 1.0, row
+        write(shares)
         [row] = gol_readout.summary("E91")[run.run_id]
         # Coin 1: 0.9 in place B and 1 - 0.3 in place A, so 0.8; coin 2: 1.0 and 1 - 0.0, so 1.0.
         # One coin's spread is then 0.1 * sqrt(2), its standard error over two coins 0.1.
         assert row["coins"] == 2 and row["contests"] == 4 and abs(row["score"] - 0.9) < 1e-12, row
         assert row["high"] == 1.0 and abs(row["low"] - 0.7) < 1e-4, row
+    # Pairings one lag back share a spread, and so do those against one fixed era, each kind apart: the
+    # pairings against era 0, won outright, do not narrow the band of those one lag back.
+    assert gol_readout.kind(READOUT, 8, 4) == ("lag", 4) and gol_readout.kind(READOUT, 8, 0) == ("era", 0)
+    assert gol_readout.kind(READOUT, 4, 0) == ("lag", 4), "a pairing that is both counts with its lag"
+    with lab(plan("E91", seeds="1", iterations=8, record=ARCHIVED, readout=READOUT)):
+        run = gol_plan.experiment_runs("E91")[0]
+        coin = {gol_plan.deal_seed(run.run_id, era, other, k): k
+                for era, other in ((4, 0), (8, 4), (8, 0)) for k in (1, 2)}
+        for t in gol_plan.readout_trials("E91"):
+            a, b, k = t.trial["a"], t.trial["b"], coin[t.trial["seed"]]
+            later_is_b = b > a
+            # Against era 0 from check 8 the later era holds everything; one lag back, coin 1 wins and coin 2 loses.
+            score = 1.0 if (max(a, b), min(a, b)) == (8, 0) else float(k == 1)
+            os.makedirs(gol_store.run_dir(t.run_id))
+            gol_store.write_json(os.path.join(gol_store.run_dir(t.run_id), "result.json"),
+                                 {"trial": t.trial, "result": {"share": score if later_is_b else 1.0 - score}})
+        rows = {(r["era"], r["against"]): r for r in gol_readout.summary("E91")[run.run_id]}
+        assert (rows[(8, 0)]["low"], rows[(8, 0)]["score"], rows[(8, 0)]["high"]) == (1.0, 1.0, 1.0), rows[(8, 0)]
+        for pair in ((4, 0), (8, 4)):
+            assert (rows[pair]["low"], rows[pair]["score"], rows[pair]["high"]) == (0.0, 0.5, 1.0), rows[pair]
 
 
 # ---------------------------------------------------------------------------

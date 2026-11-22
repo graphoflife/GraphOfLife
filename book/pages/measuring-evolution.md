@@ -496,14 +496,20 @@ the pair. One is the luck of the deal: a deal that hands one era the
 best-placed agents helps it once and hurts it once. The other is any lean
 towards one place: in Experiment 45, an era played against itself, place
 B won 116 of 204 contests. Odd coins are played in the later era's world,
-even ones in the earlier era's.
+even ones in the earlier era's. Every coin of every check, earlier era and
+run has a deal of its own. With the coin's number as the seed of the deal,
+the same agents would take the same side at every check of every run, and
+contests counted as independent would not be.
 
 A coin's **score** is the later era's share of the agents, averaged over
-its two contests. A check's score against one earlier era is the mean of
-its coins. The band around it is two standard errors either side, kept
-between 0 and 1. One coin's spread is pooled over all of the run's
-checks, each coin against the mean of its own check, because one check
-has only a few coins. Were a coin's two contests as unlike as any two, a
+its two contests. A coin counts once both its contests are played. A
+contest whose world died out has no score, so its coin never counts. A
+check's score against one earlier era is the mean of its coins. The band
+around it is two standard errors either side, kept between 0 and 1. One
+coin's spread is pooled over the run's checks of one kind, each coin
+against the mean of its own check, because one check has only a few
+coins. A kind is the checks against the era one lag before, or those
+against one fixed era. Were a coin's two contests as unlike as any two, a
 coin's score would spread by about 0.3 in round 3's worlds, and four coins
 could not place a score of 0.7 above 0.5. So a readout is read pooled,
 over many checks or many runs, and not check by check. The Research
@@ -873,6 +879,17 @@ Each part closes a way to be fooled:
     living. While a founder's genotype lives, the code also counts its missing
     parent as one.
 - *Eras, contests and invasions: does a world keep getting better?*:
+  - **22 November 2026.** Three corrections, made before any readout was
+    played. (1) A contest whose world dies out has no result. The engine
+    starts an emptied world again with one new agent, and until now that
+    agent was counted as the earlier place holding everything. (2) Every
+    coin of a readout has a deal of its own; until now the coin's number, 1
+    to 4, seeded the deal, the same at every check of every run. (3) The
+    band's spread is pooled over the checks of one kind, and a coin counts
+    only with both its contests. Pooled over every check of a run, the
+    checks against an early era, won outright, made the band of the others
+    too narrow. What this means for Experiment 45 is on
+    [its page](round-3-eras-against-each-other.md#two-more-things-the-contests-show).
   - **21 November 2026.** A contest now stops once one era has no agent
     left, with the result it would have had, and keeps the share after every
     iteration ([When one side is gone](#when-one-side-is-gone)). Contests

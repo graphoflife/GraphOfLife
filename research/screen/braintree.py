@@ -73,6 +73,10 @@ from gol_config import SimConfig  # noqa: E402
 
 #: The shadow world's replicates, and the seed every random draw of this file starts from.
 SHADOWS, SEED = 100, 11
+#: What the frame an instance was made in is stored as. It was 16 bits until 22 November 2026, which holds
+#: 32,767 frames: 16,383 iterations, enough for round 3's 3,000 and too few for a run of 100,000.
+START = np.int32
+
 #: Parent-child pairs sampled in each kept world for heredity (as research/screen/candidates.py plays them).
 PAIRS = 150
 #: How far back, in iterations, the ancestors of the final population are reported (as candidates.lineage does).
@@ -176,7 +180,7 @@ class Pass:
         self.next = n
         self.files = {name: open(os.path.join(folder, f"{name}.bin"), "wb") for name in ("parent", "start", "alive")}
         self.files["parent"].write(np.full(n, -1, np.int32).tobytes())
-        self.files["start"].write(np.full(n, -1, np.int16).tobytes())
+        self.files["start"].write(np.full(n, -1, START).tobytes())
         self.files["alive"].write(self.inst.astype(np.int32).tobytes())
         self.first = [0, n]          # instances made at phase f are first[f + 1] .. first[f + 2] - 1
         self.alive_off = [0, n]      # the instances alive in frame f are alive[alive_off[f + 1]:alive_off[f + 2]]
@@ -220,7 +224,7 @@ class Pass:
         made = self.next + np.arange(k, dtype=np.int64)
         self.next += k
         self.files["parent"].write(parents.astype(np.int32).tobytes())
-        self.files["start"].write(np.full(k, frame, np.int16).tobytes())
+        self.files["start"].write(np.full(k, frame, START).tobytes())
         return made
 
     def _register(self, genos: np.ndarray, parents: np.ndarray, kind: int, what: str) -> None:
@@ -353,7 +357,7 @@ class Pass:
         made = self.next + np.arange(count, dtype=np.int64)
         self.next += count
         self.files["parent"].write(np.full(count, -1, np.int32).tobytes())
-        self.files["start"].write(np.full(count, f, np.int16).tobytes())
+        self.files["start"].write(np.full(count, f, START).tobytes())
         return made
 
     def _game(self, f: int, frame: Dict[str, Any]) -> None:
@@ -545,7 +549,10 @@ class Built:
     def __init__(self, folder: str) -> None:
         self.folder = folder
         self.parent = np.memmap(os.path.join(folder, "parent.bin"), np.int32, "r")
-        self.start = np.memmap(os.path.join(folder, "start.bin"), np.int16, "r")
+        # Trees built before 22 November 2026 hold the frame in 16 bits; they are read as they were written.
+        start = os.path.join(folder, "start.bin")
+        narrow = os.path.getsize(start) == self.parent.size * np.dtype(np.int16).itemsize
+        self.start = np.memmap(start, np.int16 if narrow else START, "r")
         self.alive = np.memmap(os.path.join(folder, "alive.bin"), np.int32, "r")
         self.first = np.load(os.path.join(folder, "first.npy"))
         self.alive_off = np.load(os.path.join(folder, "alive_off.npy"))

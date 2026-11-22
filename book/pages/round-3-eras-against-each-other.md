@@ -288,6 +288,11 @@ it adds about 7 points to every later era's rate. The later eras still beat
 itself (*p* = 0.046). Against 1,500, the eras after it then did a little
 worse than a tie, 7 points less (*p* = 0.32).
 
+> [!warning] Added on 22 November 2026: what a later reading of the contest code found
+> **The contests of this experiment are less independent than the tests above take them to be.** Every world, pair and era used the same deals: [seeds](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 17, 18 and 19, and 20 for an era against itself. A deal says which agent takes which side by the agent's place in the list, so the same places took the later side in all 17 worlds. The later place's lean follows the deal: it won 24, 28, 32 and 32 of the 51 contests with seeds 17 to 20. So the lean is more likely the luck of four deals than a property of the place, and taking it off the later eras' rates, as above, may add noise and not remove a bias. The tests that take worlds as their units stand. The two that count contests as independent (the 6 in 100, and *p* = 0.012) are too small.
+>
+> **Twenty-two of the 1,326 contests ended with one agent**, 21 of them in s3020. A world that empties is started again by the engine with one new agent, which the contest counted for the earlier place; a world that falls to its last agent is scored by that agent alone. Either way such a contest says little, and s3020's own row should not be read. The pooled tests take worlds as their units, so this touches one of their 17; they have not been made again without it. Contests now give no result when their world dies out ([Measuring evolution](measuring-evolution.md#how-our-view-changed)).
+
 ## The verdict
 
 **The thesis is refuted, as written and in the second reading.** By its own

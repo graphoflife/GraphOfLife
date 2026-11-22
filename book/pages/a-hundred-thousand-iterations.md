@@ -86,7 +86,8 @@ plays ([A readout](measuring-evolution.md#a-readout-contests-while-a-run-goes-on
   the early gain, and since the middle of the run?
 
 Each pairing has four coins, and each coin is played twice with the same
-deal, once with the later brains in each place. Odd coins play on the later
+deal, once with the later brains in each place. Every coin has a deal of its
+own. Odd coins play on the later
 era's world, even ones on the earlier era's. A contest lasts 100 iterations,
 or until one side has no [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") left
 ([When one side is gone](measuring-evolution.md#when-one-side-is-gone)).
@@ -198,6 +199,17 @@ are in `research/Plans.md`.
 
 ## How our view changed
 
+- **22 November 2026, before any run.** A reading of the contest code found
+  three faults, mended before Experiment 48 started
+  ([Measuring evolution](measuring-evolution.md#how-our-view-changed)): a
+  contest whose world died out counted as a win, the coins of every check
+  shared four deals, and the panel's band was too narrow. The brain-copy
+  tree could not hold more than 16,383 iterations and now can. One limit
+  stays: s4002 mixes two brains at every birth, so in its contests a child
+  counts for its parent's era but carries half a [neighbour](the-world.md#the-network "An agent joined to another by a connection.")'s brain, often of
+  the other era. That pulls its scores towards 0.5. Its readout is the
+  weakest of the three, and it is reported beside the other two as well as
+  pooled with them.
 - **22 November 2026.** From 9 November this page proposed three worlds of
   health's shortlist, played on from iteration 3,000. Since the review of
   11 November, worlds are chosen by the evolution rank, and a long run starts

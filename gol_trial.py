@@ -67,17 +67,20 @@ def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optiona
     if background:
         gol_strategies.fill(world, background)
         for t in range(int(trial.get("settle", 0))):
-            world.step(record_decisions=False)
-            if world.G.number_of_nodes() == 0:
+            if gol_tournament.died_out(world.step(record_decisions=False)):
                 return {"series": [], "patch": 0, "died_settling": t + 1}
     patch = gol_strategies.plant(world, trial["strategy"], float(trial["size"]), int(trial["place"]))
     mark = gol_strategies.STRATEGY_IDS[trial["strategy"]]
     series: List[Dict[str, int]] = []
     for t in range(int(trial["T"]) + 1):
         if t:
-            world.step(record_decisions=False)
+            dead = gol_tournament.died_out(world.step(record_decisions=False))
             if stop(world, t):
                 return None
+            if dead:
+                # The world emptied and the engine started it again with one new agent: nobody is left.
+                series.append({"t": t, "agents": 0, "mine": 0, "tokens": 0})
+                break
         ids = list(world.G.nodes())
         mine = [u for u in ids if world.brains[u].brain_id == mark]
         series.append({"t": t, "agents": len(ids), "mine": len(mine),

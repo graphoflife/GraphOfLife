@@ -447,8 +447,13 @@ def _experiment_trials(name: str) -> List[RunSpec]:
 # place cancels within the pair (Experiment 45's self-contests leaned to place
 # B, 116 of 204), and so does the luck of which agents a deal hands to which
 # era. Odd coins are played on the later era's world, even ones on the
-# earlier's. The contests are trials like any other (gol_trial.py), named for
-# what they are; each waits until its run has kept the world it plays from.
+# earlier's. Every coin of every pairing of every run has a deal of its own
+# (`deal_seed`): with the coin's number as the seed, as it was until 22
+# November 2026, agent i of every world took the same side at every check of
+# every run, and a coin against a fixed era dealt that era's brains the same
+# way each time, so contests counted as independent were not. The contests are
+# trials like any other (gol_trial.py), named for what they are; each waits
+# until its run has kept the world it plays from.
 
 READOUT = ("every", "lags", "eras", "coins", "T")
 
@@ -493,8 +498,16 @@ def readout_checks(name: str) -> List[int]:
     return list(range(readout["every"], int(read_plan(name)["runs"]["iterations"]) + 1, readout["every"]))
 
 
+def deal_seed(run_id: str, era: int, other: int, coin: int) -> int:
+    """The seed of one coin's deal: its own for every run, check, earlier era and coin, and the same every time it is asked."""
+    return int(hashlib.sha1(f"{run_id} {era} {other} {coin}".encode()).hexdigest()[:8], 16) // 2
+
+
 def readout_contests(readout: Dict[str, Any], run_id: str, checks: Iterable[int]) -> List[Dict[str, Any]]:
-    """Every contest of a run's readout at these checks, as trials: each coin twice, the later era once as b and once as a."""
+    """
+    Every contest of a run's readout at these checks, as trials: each coin
+    twice with one deal (`deal_seed`), the later era once as b and once as a.
+    """
     trials = []
     for era in checks:
         against = sorted({era - lag for lag in readout["lags"] if era - lag >= 0}
@@ -504,7 +517,7 @@ def readout_contests(readout: Dict[str, Any], run_id: str, checks: Iterable[int]
                 home = era if coin % 2 else other
                 for a, b in ((other, era), (era, other)):
                     trials.append({"kind": "contest", "T": readout["T"], "run": run_id,
-                                   "home": home, "a": a, "b": b, "seed": coin})
+                                   "home": home, "a": a, "b": b, "seed": deal_seed(run_id, era, other, coin)})
     return trials
 
 
@@ -524,7 +537,7 @@ def _readout_trials(name: str) -> List[RunSpec]:
             specs.append(RunSpec(
                 run_id=trial_id_for(trial),
                 name=(f"contest · {run.run_id} · era {trial['b']:,} against {trial['a']:,} on the world of "
-                      f"{trial['home']:,}, coin {trial['seed']} · readout at {era:,}"),
+                      f"{trial['home']:,}, deal {trial['seed']} · readout at {era:,}"),
                 config={**run.config, "export_decisions": False, "checkpoint_every": 0, "archive_every": 0},
                 lab={"seed": trial["seed"], "trial": "contest"},
                 record={"heavy_every": 0},

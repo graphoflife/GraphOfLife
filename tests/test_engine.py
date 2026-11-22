@@ -3179,6 +3179,26 @@ def test_a_contest_ends_once_one_side_is_gone_with_the_result_it_would_have_had(
     assert float(held[is_b].sum() / held.sum()) == out["tokens"]
 
 
+def test_a_contest_whose_world_dies_out_has_no_result():
+    """
+    A world that empties is started again by the engine with one new agent,
+    which is of neither era. Such a contest has no winner and no result; it
+    used to count as place A holding every agent, because the new agent's
+    brain has an id below place B's.
+    """
+    import gol_tournament as tour
+    # Nobody can have a child and everybody dies at the age of two: the world empties in the contest.
+    cfg = small(seed=72, max_age=2, min_child=10 ** 9)
+    world = new_world(cfg)
+    A = world.to_checkpoint()
+    world.step(record_decisions=False)
+    B = world.to_checkpoint()
+    out = tour.contest(cfg.to_dict(), B, A, B, 10, 1)
+    assert out["share"] is None and out["tokens"] is None and out["agents"] == 0, out
+    assert out["shares"] and all(0 < s < 1 for s in out["shares"]), "one side was gone before the world died"
+    assert tour.ratings([0, 1], [{"a": 0, "b": 1, **out}])[0] == [0.0, 0.0], "a contest without a result was rated"
+
+
 def test_a_contest_counts_a_brain_mixed_at_birth_for_its_parents_era():
     """
     Where brains are mixed at birth, a newborn's brain is new even in a contest,

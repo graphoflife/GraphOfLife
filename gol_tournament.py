@@ -108,6 +108,15 @@ def mixed(state: Dict[str, np.ndarray], A: Dict[str, np.ndarray], B: Dict[str, n
     return blob
 
 
+def died_out(frames: Sequence[Dict[str, Any]]) -> bool:
+    """
+    Whether the world emptied in the iteration these frames are of. The engine
+    then starts it again with one new agent holding every token (its cleanup
+    says `resurrected`), so a world that has died out is never seen empty.
+    """
+    return any(frame["cleanup"].get("resurrected") for frame in frames)
+
+
 def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, np.ndarray],
             B: Dict[str, np.ndarray], T: int, seed: int,
             on_step: Optional[Callable[[Any, int], bool]] = None, plant: str = "coin") -> Dict[str, Any]:
@@ -122,7 +131,10 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
     decided once one side has no agent left: no brain can change and every copy
     keeps its side, so that side can never come back, and the contest ends
     there with the result it would have had at T (unless the whole world would
-    have died out before T, which leaves no result). In round 3's worlds more than
+    have died out before T, which leaves no result). A world that dies out
+    has no winner either: the engine starts an emptied world again with one
+    new agent, which is of neither era, and such a contest has no result
+    (`share` None, `agents` 0). In round 3's worlds more than
     half of all contests are decided before T (Experiment 45), and every
     iteration after that was play that could change nothing. `agents` is then
     the count when it was decided, and `shares` is shorter than T.
@@ -156,11 +168,11 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
     ids = list(world.G.nodes())
     shares: List[float] = []
     for t in range(1, T + 1):
-        world.step(record_decisions=False)
+        frames = world.step(record_decisions=False)
         if on_step is not None and on_step(world, t):
             return None
         ids = list(world.G.nodes())
-        if not ids:
+        if not ids or died_out(frames):
             return {"share": None, "tokens": None, "agents": 0, "shares": shares}
         share = float(b_side(ids).mean())
         shares.append(round(share, 4))

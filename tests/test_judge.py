@@ -471,6 +471,16 @@ def test_the_brain_tree_follows_births_and_conquests():
         # Every instance's parent and the phase that made it: founders, then births and conquests in order.
         assert np.asarray(b.parent).tolist() == [-1, -1, -1, 0, 3, 0, 4, 6, 4], np.asarray(b.parent).tolist()
         assert np.asarray(b.start).tolist() == [-1, -1, -1, 0, 1, 1, 2, 3, 3]
+        # The frame an instance was made in is kept in 32 bits (16 hold only 32,767 frames, 16,383 iterations),
+        # and a tree built when it was 16 is read as it was written.
+        assert b.start.dtype == np.int32
+        import shutil
+        narrow = os.path.join(tmp, "narrow")
+        shutil.copytree(tmp, narrow)
+        with open(os.path.join(narrow, "start.bin"), "wb") as f:
+            f.write(np.asarray(b.start).astype(np.int16).tobytes())
+        old = BT.Built(narrow)
+        assert old.start.dtype == np.int16 and np.asarray(old.start).tolist() == np.asarray(b.start).tolist()
         assert b.alive_at(-1).tolist() == [0, 1, 2] and b.alive_at(1).tolist() == [0, 4, 5, 3]
         assert b.alive_at(3).tolist() == [7, 4, 8, 6]
         # The genotype forest: the mutation in place and the child's mutation, each with its parent.
