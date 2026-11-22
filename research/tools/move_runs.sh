@@ -4,10 +4,16 @@
 #
 #     sh research/tools/move_runs.sh DEST RUN...
 #
-# For each run: copy it (rsync -a), check the copy file by file — the same
+# For each run: copy it (rsync -a), with every file written through to the
+# drive (--fsync) and the drive's filesystem flushed (sync -f), so that a write
+# the drive lost shows as a failed copy; check the copy file by file — the same
 # files, the same bytes (rsync --checksum, nothing may differ), the same count
 # and the same total size — then swap the folder for a link to the copy and
 # remove the original. A run whose copy does not check out is left as it was.
+# Before 22 November 2026 the copy was not flushed: the drive dropped out
+# during a move, and the check, which read the copy back from memory, passed a
+# run whose last 13,231 frames never reached the drive (B1-10000-4819e3-s4602,
+# frames 26,769 to 39,999, now empty).
 # First used 2026-10-16, with the author's agreement, to move the largest old
 # runs (Experiments 7, 8 and 10) to /media/stefan/Speicher2/GraphOfLifeRuns;
 # on 2026-10-18 Experiments 17 to 19 and the pilot batches R, T and V followed.
@@ -32,7 +38,8 @@ for run in "$@"; do
     if [ ! -d "$run" ]; then echo "$run: no such run"; continue; fi
     if [ -e "$run/.lock" ] && ! flock -n "$run/.lock" true; then echo "$run: being played, left in place"; continue; fi
     mkdir -p "$DEST/$(dirname "$run")" || { echo "$run: no room made for it there, left in place"; continue; }
-    if ! rsync -a "$run/" "$DEST/$run/"; then echo "$run: copy failed, left in place"; continue; fi
+    if ! rsync -a --fsync "$run/" "$DEST/$run/"; then echo "$run: copy failed, left in place"; continue; fi
+    if ! sync -f "$DEST/$run"; then echo "$run: copy not flushed to the drive, left in place"; continue; fi
     differs=$(rsync -a --checksum --dry-run --itemize-changes "$run/" "$DEST/$run/" | grep -v '^\.d\.\.t')
     files_here=$(find "$run" -type f | wc -l)
     files_there=$(find "$DEST/$run" -type f | wc -l)

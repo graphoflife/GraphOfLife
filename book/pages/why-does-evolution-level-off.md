@@ -280,6 +280,15 @@ The figures of what the runs did read nothing but each run's statistics,
 `python3 book_figures.py leveloff` draws them; the recipe folded under each
 gives every step.
 
+On 22 November 2026 one run lost part of its [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."). The external drive
+dropped out while 17 of these runs were being moved to it. The copy of
+`B1-10000-4819e3-s4602` (stakes pooled by family, seed 4602) had been checked,
+but against what was still in memory, and its original removed. Its frames
+26,769 to 39,999, from iteration 13,384 to the end, never reached the drive
+and are empty. Its statistics, its kept worlds and its last checkpoint are whole, so
+nothing on this page changes, and Experiment 47 could still be played. The
+viewer cannot show that run past iteration 13,384.
+
 <!-- runs E46 -->
 > [!info]- The runs behind this page
 > **18 runs.** Every condition below is run once for every seed (4601 to 4603), for 20,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
@@ -312,6 +321,6 @@ gives every step.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (2)
-> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (3)
+> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

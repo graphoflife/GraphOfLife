@@ -7,9 +7,10 @@ the lab stopped, done for the runs the lab is finished with, while it goes on.
 A run is moved only when nothing will write to it again: the lab's own test
 says its plan has nothing left for it (it died out, was stopped as too slow, or
 reached its last target), and the mover holds the run's own lock, which every
-worker holds while it advances a run. The run is copied, the copy checked file
-by file (the same files, the same bytes), and then the folder and a link to the
-copy trade places in one step (renameat2 with RENAME_EXCHANGE). So the run's
+worker holds while it advances a run. The run is copied, every file written through
+to the drive (fsync) so that a write the drive loses fails the copy, the copy
+checked file by file (the same files, the same bytes), and then the folder and
+a link to the copy trade places in one step (renameat2 with RENAME_EXCHANGE). So the run's
 path is never empty: the lab, which may look at any run at any moment, finds the
 folder or the link, and never takes the run for one still to be made. The folder
 left behind is then removed, and where the run stands is noted in the lab's own
@@ -85,12 +86,33 @@ def tidy(folder: str) -> None:
         shutil.rmtree(aside)
 
 
+def _copy_through(src: str, dst: str) -> None:
+    """Copy one file, and return only once its bytes are on the drive, not merely in memory."""
+    with open(src, "rb") as a, open(dst, "wb") as b:
+        shutil.copyfileobj(a, b, 1 << 20)
+        b.flush()
+        os.fsync(b.fileno())
+    shutil.copystat(src, dst)
+
+
+def _flush_folders(top: str) -> None:
+    """Write every folder of a copy through to its drive, so that the names of its files are there too."""
+    for d, _, _ in os.walk(top):
+        fd = os.open(d, os.O_RDONLY)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+
+
 def move(folder: str, copy: str) -> None:
     """
     Copy a run's folder to `copy`, check the copy, and put a link to it in the folder's place, the folder and the
-    link trading places in one step; the folder, now aside, is removed.
+    link trading places in one step; the folder, now aside, is removed. The copy is on the drive before it is
+    checked: a check that read it back from memory passed a copy the drive had partly lost (22 November 2026).
     """
-    shutil.copytree(folder, copy, symlinks=True, dirs_exist_ok=True)
+    shutil.copytree(folder, copy, symlinks=True, dirs_exist_ok=True, copy_function=_copy_through)
+    _flush_folders(copy)
     if not same(folder, copy):
         raise OSError(f"the copy of {folder} at {copy} differs from it")
     aside = _aside(folder)
