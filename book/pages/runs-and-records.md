@@ -207,6 +207,7 @@ Every page with a box *The runs behind this page* reads the lab's runs.
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#how-our-view-changed)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#how-this-was-made)
 - [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#two-more-things-the-contests-show)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#what-is-kept)
 - [Questioning the mechanics](questioning-the-mechanics.md#two-roads-of-inheritance)
 - [Is a run reproducible?](is-a-run-reproducible.md#where-to-go-next)
 - [Every setting](settings.md#where-to-go-next)

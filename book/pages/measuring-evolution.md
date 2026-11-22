@@ -709,7 +709,7 @@ solved, but not that it is.
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#what-decides-how-a-world-evolves)
 - [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md#where-to-go-next)
 - [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md#why-play-eras-against-each-other)
-- [A hundred thousand iterations](a-hundred-thousand-iterations.md#where-to-go-next)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#the-readout)
 - [Every setting](settings.md#archive_every)
 - [B1 and B2: the two baselines](b1-and-b2.md#where-to-go-next)
 - [What the brains are like](what-the-brains-are-like.md#when-the-brains-were-given-sight)

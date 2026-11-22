@@ -987,6 +987,7 @@ with and without them was the same world in every measure
 <!-- used how-a-coalition-takes-a-node -->
 - [How the drawn settings shape a world](how-the-drawn-settings-shape-a-world.md#fewer-mechanisms-worse-worlds)
 - [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md#what-a-worlds-rules-make-possible)
+- [A hundred thousand iterations](a-hundred-thousand-iterations.md#why-a-long-run-and-why-these-worlds)
 - [One iteration, step by step](one-iteration.md#phase-2-the-game)
 - [Questioning the mechanics](questioning-the-mechanics.md#hubs-are-places)
 - [Every setting](settings.md#allow_revolutions)

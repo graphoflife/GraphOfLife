@@ -1,96 +1,141 @@
 # A hundred thousand iterations
 
 > [!question] Questions of this page
-> - Is time what is missing? What does a world do over a hundred thousand
->   [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), many times longer than the worlds of round 3 have lived?
-> - Does a world settle, or does it keep wandering? Does anything appear late
->   that was not there early?
-> - Does a candidate world keep its health, and do its [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") keep getting
->   better, or do they stop long before the end?
+> - Is time what is missing? What do round 3's best worlds do over a hundred
+>   thousand [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."), about 33 times as long as round 3 played them?
+> - Do their [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") keep getting better, or do they stop long before the
+>   end, as round 3's did?
+> - Does anything appear late that was not there early?
+
+<!-- experiment E48 -->
 
 ## In short
 
-This experiment has not been played: it is a plan, a draft for the author to
-decide. Three of round 3's shortlisted worlds would be played on from iteration
-3,000 to 100,000, keeping a whole world every 2,500 iterations. It asks whether
-time is what is missing. Its draft thesis expects that it is not: each world
-keeps its health, and its brains stop getting better long before the end, as
-the notebook's longest worlds did. It needs nothing new built, and takes about
-115 worker-hours.
+Experiment 48 is planned and ready to run: nothing of it has been played. It
+plays the rules of the three worlds the evolution rank puts first, s4003 of
+Experiment 42 and s4002 and s4008 of Experiment 41, in fresh worlds of 10,000
+[tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") for 100,000 iterations each. While a run goes on, it stops every 5,000
+iterations, and its brains play their own past: the brains of 5,000
+iterations before, and those of iterations 5,000 and 50,000. Its thesis,
+written before any run: the brains still get better in the second half. It
+takes about 650 worker-hours, about 13 and a half days on the lab's two
+workers, and about 50 GB of disk.
 
-## The long run, planned again on round 3's candidates
+## Why a long run, and why these worlds
 
-Since 7 November 2026 only two kinds of world are played: more worlds drawn at
-random, and worlds that follow a promising candidate ([What could be played
-next](candidates-for-open-ended-evolution.md#what-could-be-played-next)). B1 is
-no longer a baseline anything is measured against
-([What a baseline is](b1-and-b2.md#what-a-baseline-is)). So a long run made now would
-be one of round 3's candidates, played on. Three things make it far easier than
-the plan of 9 October, below.
+Round 3's brains got better early and then stopped. Pooled over 17 worlds,
+the later eras beat the brains of iteration 250 in 71% of contests, those of
+iteration 500 already in 76%, and the eras after 1,500 beat those of 1,500 in
+exactly half
+([Did the brains get better?](round-3-eras-against-each-other.md)). The
+notebook's two longest worlds, of [B2](b1-and-b2.md "The second baseline: B1 with the rules that keep its network from breaking and its agents from staking or breeding themselves to death."), climbed for 20,000 to 25,000 iterations
+and then only wandered
+([Every era against three](every-era-against-three.md)). Open-ended
+evolution would keep finding better brains for as long as it runs. Whether
+time is what is missing needs a run long enough to tell.
 
-- **Nothing has to be built.** The lab can play a kept world on from its last
-  state, iteration 3,000, under its own [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world."). It records every
-  iteration as round 3 did, and it keeps whole worlds, brains included, as
-  often as the plan asks ([Eras](measuring-evolution.md#eras)). Frames for
-  every iteration cost a candidate 0.15 to 0.22 MB an iteration, so no
-  windows are needed.
-- **The worlds are small and fast.** Round 3's worlds hold 30,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."). The
-  fastest of the shortlist play an iteration in under a second or two, where
-  B1 at 204,800 tokens took 25.
-- **The tests exist.** Contests between eras, a shadow world of pure luck and
-  the rest ([Did evolution happen?](did-evolution-happen.md)) can read the run
-  when it ends.
+The worlds are the first three of the evolution rank
+([Candidates for open-ended evolution](candidates-for-open-ended-evolution.md)):
+the worlds whose lines spread furthest beyond chance, whose children play
+most like their parents, and whose selection on what the brains do is
+clearest. All three play the lottery and have no [revolutions](rules-in-detail.md#how-a-coalition-takes-a-node "A node taken by stakers who each marked part of their stake revolutionary and together staked more than the largest single stake.").
 
-**The proposal.** Three worlds of the shortlist as it stood on 9 November
-2026 (since health also counts [agents](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") on loops per link, seed 3026 has left
-it, but it still evolves the most), each played on from
-iteration 3,000 to 100,000, keeping a whole world every 2,500 iterations: 39
-more eras each.
-
-| world | why this one | health's ranks (product, sum, worst) | generations in its first 3,000 iterations | seconds an iteration | 97,000 iterations more |
+| world | rank | generations in round 3's 3,000 iterations | copies made by conquest | seconds an iteration at 10,000 tokens | 100,000 iterations |
 |---|---|---|---|---|---|
-| seed 3080 | the healthiest of the fast worlds | 4, 10, 4 | 121 | 0.87 | about a day |
-| seed 3008 | healthy, and its children act most like their parents (heredity index 0.62) | 10, 20, 10 | 947 | 1.32 | a day and a half |
-| seed 3026 | evolves the most: 2,159 generations, and its line never comes back to where it was | 23, 36, 17 | 2,159 | 2.05 | two and a third days |
+| s4003, strongest first (Experiment 42) | 1 | 3,317 | 58% | 6.0 | 167 worker-hours |
+| s4002, weakest first (Experiment 41) | 2 | 4,014 | 67% | 6.4 | 177 worker-hours |
+| s4008, weakest first (Experiment 41) | 3 | 4,014 | 64% | 4.6 | 128 worker-hours |
 
-That is about 115 worker-hours and about 60 GB of disk
-([What a simulation costs](runs-and-records.md#what-a-simulation-costs)). The
-seconds are each world's own, over its iterations 2,000 to 3,000;
-the ranks and generations are from
-[Which worlds are healthy?](which-worlds-are-healthy.md) and
-[Candidates for open-ended evolution](candidates-for-open-ended-evolution.md).
+The seconds are the lab's cost model for each world's own kind of run
+([What a simulation costs](runs-and-records.md#what-a-simulation-costs)).
 
-> [!quote] Draft thesis (to be fixed before any run)
-> **Claim.** Time is not what is missing in round 3 either. A candidate world
-> played on to 100,000 iterations keeps its health, and its brains stop
-> getting better long before the end, as the notebook's longest worlds did.
->
-> **Why.** The two worlds of B2 played to 50,000 iterations climbed for 20,000
-> to 25,000 and then only wandered
-> ([Every era against three](every-era-against-three.md)). Round 3's worlds
-> are smaller still: about fourteen ancestors share each world's future, so
-> drift rules what spreads.
->
-> **Confirm.** For each world: (1) its health by the product over iterations
-> 50,000 to 100,000, scored with round 3's living worlds, lies within 0.1 of
-> its health over iterations 100 to 3,000; (2) in lifetime contests played in
-> both eras' worlds, the brains of iteration 100,000 hold less than 0.55 of a
-> world contested with those of iteration 50,000; (3) the wander levels off,
-> as the first part of Experiment 11's thesis asks.
->
-> **Refute.** Health moves by 0.1 or more; or the brains of 100,000 hold 0.55
-> or more of both worlds against those of 50,000, so evolution still climbs;
-> or the wander keeps growing. A world that dies before iteration 52,000
-> decides nothing.
+- **Fresh worlds, not continued.** A world of round 3 played on would keep
+  round 3's recording, 30,000 tokens and a whole world every 250 iterations:
+  over 100 GB a world. Each run starts anew with [seed](rules-in-detail.md#seeds-and-the-random-stream "The number that fixes every random choice of a run: the same settings and the same seed make the same world.") 4801, at a third of
+  round 3's size and with as many [founders](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") per token as round 3 gave it.
+- **Can they live at 10,000 tokens?** Nobody knows: none of the three has
+  been played at that size. s3058 lived at 30,000 tokens in round 3 and died
+  at 10,000 in all three control runs of Experiment 46
+  ([Why does evolution level off?](why-does-evolution-level-off.md)). So the
+  plan names three reserves, the next worlds by the rank: s4007 weakest first
+  (Experiment 41), s4003 weakest first (Experiment 41) and s4007 strongest
+  first (Experiment 42). A world that dies out before iteration 10,000 is
+  replaced by the next reserve, with the same seed.
 
-**Choices for the author.** Which worlds: these three, others of the
-shortlist, or none until [Experiment 43](candidates-for-open-ended-evolution.md)
-shows which settings stay healthy with new seeds. How long: 100,000 iterations, or 25,000 first. And the
-lines of the thesis: 0.1 of health and 0.55 of a contest are proposals.
+## What is kept
+
+- **Every frame.** The brain-copy tree, which the evolution rank reads for
+  heredity, novelty and selection, is built from all of a run's frames in
+  order. A run that keeps a frame only every few iterations (`frames_every`,
+  [Runs and experiments](runs-and-records.md#runs-and-experiments)) could not
+  be read that way. Every frame costs a world about 13 to 22 GB over 100,000
+  iterations.
+- **A whole world every 2,500 iterations**, brains included: 40 eras a run,
+  for the readout's contests and for any played later.
+- A checkpoint every 100 iterations, and the graph's costly statistics every
+  25.
+
+## The readout
+
+At each check, every 5,000 iterations, the run stops and the world kept there
+plays ([A readout](measuring-evolution.md#a-readout-contests-while-a-run-goes-on)):
+
+- **the brains of 5,000 iterations before:** are they still getting better
+  lately?
+- **the brains of iterations 5,000 and 50,000:** how far have they come since
+  the early gain, and since the middle of the run?
+
+Each pairing has four coins, and each coin is played twice with the same
+deal, once with the later brains in each place. Odd coins play on the later
+era's world, even ones on the earlier era's. A contest lasts 100 iterations,
+or until one side has no [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") left
+([When one side is gone](measuring-evolution.md#when-one-side-is-gone)).
+That is 376 contests a run, 1,128 in all. The lab plays a check's contests
+before anything else, so a run waits at its check until they have started.
+The lab's panel above draws each run's scores as they come in: a dot for each
+check and earlier era, with two standard errors either side, and 0.5 dashed.
+
+A score above 0.5 against the recent past could also come from brains that go
+round in circles, each beating the one before it and losing to older ones.
+The fixed eras tell the two apart: against brains that only circle, the
+scores against iterations 5,000 and 50,000 stay near 0.5.
+
+## How it is read
+
+<!-- thesis E48 -->
+> [!quote] The thesis of Experiment 48, written down before any of its runs existed
+> **The claim.** Round 3's best brains keep getting better for 100,000 iterations. Played fresh at 10,000 tokens under the rules of the three worlds the evolution rank puts first, in the second half of each run the brains of every check beat the brains of 5,000 iterations before.
+>
+> **Why it would be so.** In round 3's 3,000 iterations the brains got better early and then stopped: pooled over 17 worlds, the later eras beat the brains of iteration 250 in 71% of contests, those of iteration 500 already in 76%, and the eras after 1,500 beat those of 1,500 in exactly half (Did the brains get better? Round 3's eras against each other). The notebook's two longest worlds, of B2, climbed for 20,000 to 25,000 iterations and then only wandered (Every era against three). Open-ended evolution would keep finding better brains for as long as it runs, so the direct test is a long run of the worlds with the most evolution by the rank: lines that spread far beyond chance, faithful copies and selection on what the brains do (Candidates for open-ended evolution). These three lived through 3,300 to 4,000 generations of brain copies in round 3's 3,000 iterations; 100,000 iterations give them about 33 times as long.
+>
+> **It holds if:** Pooled over the runs and the ten checks from 55,000 to 100,000, the later brains' mean score against the brains of 5,000 iterations before is above 0.5, and so is the whole of its band, two standard errors either side; each pairing (one check of one run, the mean of its four coins) is one value. A world that dies out before iteration 10,000 is replaced by the next world by the rank, with the same seed, in the order of the reserves; a world that dies out later counts with the checks it reached.
+>
+> **It fails if:** The band includes 0.5 or lies below it: in the second half the brains no longer beat their recent past, and evolution has levelled off, as in round 3. If fewer than two runs reach iteration 100,000, the thesis is undecided. The scores against the brains of iterations 5,000 and 50,000, which tell steady progress from brains that only go round in circles, are reported beside, as are the brain-copy tree's readings over the whole run; they do not decide.
+<!-- /thesis -->
+
+## What it costs
+
+By the lab's cost model, the three runs take about 472 worker-hours, and the
+contests at most about 180 more, fewer where they end early: about 650 in
+all. That is about 13 and a half days on the lab's two workers, or about 9 on
+three. The frames take about 50 GB, and each run's kept worlds up to 2 GB
+more.
+
+## The plan of 9 November 2026
+
+Before Experiment 48, this page proposed three worlds of health's shortlist,
+seeds 3080, 3008 and 3026, played on from iteration 3,000 to 100,000 under
+their own [settings](settings.md "One number or switch of a run's rules, fixed before it starts.") and seeds: about 115 worker-hours and about 60 GB of disk,
+with a draft thesis on health and on contests between iterations 50,000 and
+100,000. It was never written as a plan. After the review of 11 November,
+worlds are chosen by the evolution rank, not by health, and a long run starts
+fresh, since a world played on keeps round 3's recording. The proposal and its
+draft thesis are in the notebook's history (`git show
+85be41c:book/pages/a-hundred-thousand-iterations.md`).
 
 ## Experiment 11, as planned on 9 October 2026
 
-The first plan asked whether B1's agents fail to cooperate only because they
+The first plan asked whether [B1](b1-and-b2.md "The first baseline: the algorithm exactly as a new run is offered it.")'s agents fail to cooperate only because they
 lack the time. One world of B1 at 204,800 tokens, seed 1, would be left for
 100,000 iterations. It would advance in blocks of 500, with a sentinel that
 stops it when something goes wrong and flags it when something stands out, and
@@ -101,12 +146,12 @@ iterations, and B1 is no longer measured against. So the plan is obsolete. Its p
 whole plan of 9 October, with its reasons, method, sentinel and costs, is in
 the notebook's history: `git show
 9ec755d:book/pages/a-hundred-thousand-iterations.md`. Its thesis stays here,
-word for word, because the draft thesis above uses its first part.
+word for word.
 
 > [!quote] The thesis of Experiment 11, written down before any of its runs existed
 > **The claim.** Time is not what is missing. A world of 204,800 tokens left for 100,000 iterations, thirty times longer than any world of this book has lived, goes on wandering, but within bounds it reaches in its first few thousand iterations, and nothing appears late that was not there early. Its agents do not learn to cooperate: they stake on kin as they stake on strangers, the same two brains still rarely face each other twice, and the brains stay nearly blind.
 >
-> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)): a node's brain is replaced almost every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), so nobody meets anybody twice ([Chapter 38](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single [founder](rules-in-detail.md#the-starting-ring "One of the agents a world starts with, each holding the same tokens, on a ring with a few shortcuts.") every few hundred iterations ([Chapter 18](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the baseline worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
+> **Why it would be so.** Part III found what stands in the way of cooperation in the rules, not in a lack of time ([Chapter 40](what-the-baseline-world-is.md#what-the-measurements-say-about-open-ended-evolution)): a node's brain is replaced almost every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."), so nobody meets anybody twice ([Chapter 38](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners)); brains cannot see who is kin; and nothing an agent does creates anything. [Chapter 19](what-the-brains-are-like.md) found the brains nearly blind, with a gain of 0.0015 and their first-layer weights already, by iteration 3,000, at the balance between the jitters of [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") and its resets, so that selection can only set constants, and it has set them alike in every world. A hundred thousand iterations are a great deal of evolution: some 27,000 agents, each brain changed with probability 0.2 after every game, try some 500 million changed brains, and the living come to descend from a single founder every few hundred iterations ([Chapter 18](b1-brains-lineages-and-messages.md#genotypes-and-lineages)), so one line takes the world over again and again, dozens of times at the least. What is one step away will be found; what needs the rules changed will not. Against this: evolution raised the gain 2.5 times in 3,000 iterations ([Chapter 19](what-the-brains-are-like.md)), and the [baseline](b1-and-b2.md "The stated rules an experiment starts from: B1 or B2. Drawn worlds are stored as changes from B1, but judged against each other.") worlds are still moving at the longest scale yet measured: a mean over 500 iterations keeps between a third and two thirds of the spread of single iterations (a Hurst exponent of 0.8 to 0.9, in the 26 worlds of Experiment 2), so no world has yet been seen at rest.
 >
 > **It holds if:** From iteration 2,000 on, over at least 50,000 iterations, all three hold. (1) The wander levels off: for at least seven of the eight statistics (agents; [connections](the-world.md#the-network "A link between two agents of the network: they are neighbours, and can stake on each other's nodes.") per agent; [Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all."); births per agent; the share of stakes placed at home; the share of nodes kept; genotypes per agent; families), the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") difference between the means of 500-iteration blocks 20,000 to 50,000 iterations apart is at most twice the median difference between blocks 2,000 to 5,000 iterations apart. (2) In no three successive windows from iteration 5,000 on does the ratio of stakes on kin to stakes on others leave 0.85 to 1.15 (in the baseline worlds 0.89 to 1.10), or the share of connections whose two brains face each other again one game later rise above 10% (in the baseline worlds 3% to 9%). (3) At every kept checkpoint the median gain of the brains stays below 0.005 (in the baseline worlds 0.0011 to 0.0017).
 >
@@ -116,29 +161,56 @@ word for word, because the draft thesis above uses its first part.
 
 ## Where to go next
 
+- [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md):
+  Experiment 45, where round 3's brains stopped getting better.
+- [Why does evolution level off?](why-does-evolution-level-off.md):
+  Experiment 46, one world's rules at 10,000 tokens with one thing changed at
+  a time, and why its worlds died.
+- [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md):
+  the evolution rank that chose these worlds, and the brain-copy tree.
+- [A readout: contests while a run goes on](measuring-evolution.md#a-readout-contests-while-a-run-goes-on):
+  how the checks are played and scored.
+- [Every era against three](every-era-against-three.md): the longest worlds
+  of the notebook, and where their evolution stopped climbing.
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md):
   the yardstick, and why B1 stops learning within its first hundred
   iterations.
-- [Eras, contests and invasions](measuring-evolution.md#eras-contests-and-invasions-does-a-world-keep-getting-better): how a world's brains
-  are played against their own past.
-- [Every era against three](every-era-against-three.md): the longest worlds
-  of the notebook, and where their evolution stopped climbing.
-- [Do agents cooperate? Help, kin and partners](cooperation-help-and-gliders.md#do-agents-cooperate-help-kin-and-partners): the
-  measures this run would take in every window.
 
 ## How this was made
 
-No run of either plan exists, so this page has no box of runs. The obsolete
+The plan is `book/experiments/E48.json`. `research/screen/evolution_plans.py`
+wrote it on 22 November 2026 from the evolution rank,
+`research/screen/evolution.json`, and its thesis was written into it by hand
+before any run. Nothing was played before the plan was written. The obsolete
 plan of 9 October is `book/experiments/drafts/E11.json`; its working numbers
 are in `research/Plans.md`.
 
+<!-- runs E48 -->
+> [!info]- The runs behind this page
+> **3 runs.** Every condition below is run once for every seed (4801), for 100,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
+>
+> - **s4003 strongest first** — the settings of world 3 of [Experiment 42](a-screen-of-random-worlds.md#the-worlds-of-round-3-a-token-at-a-time) (seed 4003), as drawn but with `n_nodes` = 200; 10,000 tokens. Run `B1-10000-085a32-s4801`.
+> - **s4002 weakest first** — the settings of world 2 of [Experiment 41](a-screen-of-random-worlds.md#the-worlds-of-round-3-a-token-at-a-time) (seed 4002), as drawn but with `n_nodes` = 50; 10,000 tokens. Run `B1-10000-f511a5-s4801`.
+> - **s4008 weakest first** — the settings of world 8 of [Experiment 41](a-screen-of-random-worlds.md#the-worlds-of-round-3-a-token-at-a-time) (seed 4008), as drawn; 10,000 tokens. Run `B1-10000-1cfaa4-s4801`.
+>
+> To make these runs again: `python3 gol_lab.py run E48`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+<!-- /runs -->
+
 ## How our view changed
 
+- **22 November 2026.** From 9 November this page proposed three worlds of
+  health's shortlist, played on from iteration 3,000. Since the review of
+  11 November, worlds are chosen by the evolution rank, and a long run starts
+  fresh rather than continuing a world of round 3. So the page now carries
+  Experiment 48, the long run that plan asked for, with a readout built for
+  it. The proposal of 9 November is cut to a paragraph; with its draft thesis
+  it is in the notebook's history. The plan of 9 October and its thesis are
+  kept as they were written.
 - **9 November 2026.** From 9 October this page planned the run on B1, and
   from 14 October said it would be planned on B2. Since the author's
   decision of 7 November that only random worlds and candidates' worlds are
   played, it proposes a long run of three of round 3's candidates instead
-  ([The long run, planned again](#the-long-run-planned-again-on-round-3s-candidates)).
+  ([The long run, planned again](#the-plan-of-9-november-2026)).
   The plan of 9 October and its thesis are kept as they were written.
 - **14 October 2026.** From 9 October, this page planned the run on B1,
   then the notebook's only baseline. A note added on 14 October said that if

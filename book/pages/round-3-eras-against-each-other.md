@@ -440,6 +440,6 @@ check on two of its worlds, one of them staking a token at a time.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (6)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (7)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did evolution happen? Fourteen ways to find out](did-evolution-happen.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

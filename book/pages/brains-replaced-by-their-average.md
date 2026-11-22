@@ -427,8 +427,8 @@ as `random_decisions` shows: one switch at the place where a brain speaks.
   second half is a replay and tests 12 and 14 share the runs; or at 3,000,
   where the runs ended. Then the world as it was played must be played on
   too, as
-  [A hundred thousand iterations](a-hundred-thousand-iterations.md#the-long-run-planned-again-on-round-3s-candidates)
-  proposes for three worlds.
+  [A hundred thousand iterations](a-hundred-thousand-iterations.md#the-plan-of-9-november-2026)
+  proposed for three worlds on 9 November 2026.
 - **Which ways first.** (a), (e) and (f) need only the run that starts from
   a kept world, and (d) the pool besides; (d) also makes the sea of the next
   page. (b) and (c) need the library.

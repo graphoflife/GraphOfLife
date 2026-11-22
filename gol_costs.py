@@ -210,7 +210,7 @@ def predict(config: Dict[str, Any], iterations: int,
     runs of its own kind where some have been measured, otherwise from all
     runs scaled by the size of its brains, otherwise from the calibration.
     A trial (gol_trial.py) plays as long and holds as much, and keeps no
-    frames (`frames` False).
+    frames (`frames` False) and no checkpoint (its `checkpoint_every` is 0).
     """
     known = known or costs()
     weights, width = weights_of(config)
@@ -220,9 +220,10 @@ def predict(config: Dict[str, Any], iterations: int,
     return {
         "agents": agents,
         "seconds": iterations * agents * per_agent,
-        # The frames, unless it keeps none, and the checkpoint beside them, which holds every brain.
+        # The frames, unless it keeps none, and the checkpoint beside them, which holds every
+        # brain, unless it saves none.
         "diskBytes": (iterations * agents * known["bytesPerAgentIteration"] if frames else 0)
-                     + agents * weights * width,
+                     + (agents * weights * width if config.get("checkpoint_every") != 0 else 0),
         "peakMB": known["baseMB"] + agents * weights * width
                   * known["peakBytesPerWeightByte"] / 2**20,
     }

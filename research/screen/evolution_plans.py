@@ -15,12 +15,18 @@ health of 9 November (research/screen/health.json), which now only filters:
   to oneself, revolutionary tokens that count for the coalition alone, and
   stakes pooled by family.
 
+- Experiment 48, the long run (2026-11-22): the rules of the rank's three
+  best worlds, fresh, at 10,000 tokens for 100,000 iterations, every frame
+  kept, and a readout every 5,000 iterations that plays each check's brains
+  against those of 5,000 iterations before and of iterations 5,000 and 50,000.
+  The next three worlds by the rank are named as reserves.
+
 A plan is written with an empty thesis, to be written into it by hand before
 any run, and a plan already written is never written over. Experiment 47, the
 contests that read Experiment 46, is written with it, so that how it is read
 is fixed before any run.
 
-    python3 research/screen/evolution_plans.py           writes book/experiments/E45.json, E46.json and E47.json
+    python3 research/screen/evolution_plans.py           writes book/experiments/E45.json to E48.json
     python3 research/screen/evolution_plans.py --show    says what it would write, and writes nothing
 """
 from __future__ import annotations
@@ -63,6 +69,12 @@ TAG_RATE = 0.05
 #: against the one before it, and the eras played against themselves for the noise.
 STEPS = [500, 1000, 2500, 5000, 10000, 20000]
 STILL = [1000, 5000, 20000]
+
+#: Experiment 48, the long run: how many of the rank's best worlds it plays and how many
+#: wait as reserves, its size, how long, its seed, how often it keeps a world, and its readout.
+LONG_WORLDS, RESERVES, LONG_TOKENS, LONG_ITERATIONS, LONG_SEED = 3, 3, 10000, 100000, "4801"
+LONG_RECORD = {"heavy_every": 25, "checkpoint_every": 100, "archive_every": 2500}
+LONG_READOUT = {"every": 5000, "lags": [5000], "eras": [5000, 50000], "coins": 4, "T": T}
 
 
 def lived_by_health() -> List[Dict[str, Any]]:
@@ -264,6 +276,25 @@ def e47(runs: List[str]) -> Dict[str, Any]:
              "grid": {"run": runs, "pair": [[e, e] for e in STILL], "home": ["a"], "seed": NOISE_COINS}}]}}
 
 
+def e48() -> Dict[str, Any]:
+    """
+    Experiment 48, the long run: fresh worlds under the rules of the rank's
+    best, not continuations, which would keep round 3's recording. Every frame
+    is kept, because the brain-copy tree is built from all of them in order.
+    A world that dies out early is replaced by hand by the next reserve, as
+    the thesis says.
+    """
+    worlds = ranked()[:LONG_WORLDS + RESERVES]
+    playing = worlds[:LONG_WORLDS]
+    return {
+        "id": "E48", "title": "Does evolution go on? Round 3's best worlds for 100,000 iterations",
+        "thesis": {"claim": "", "why": "", "confirm": "", "refute": ""},
+        "chosen": {"worlds": [w["id"] for w in playing], "ranks": [w["rank"] for w in playing],
+                   "reserves": [w["id"] for w in worlds[LONG_WORLDS:]]},
+        "runs": {"baseline": "B1", "world": {"total_tokens": LONG_TOKENS}, "seeds": LONG_SEED,
+                 "iterations": LONG_ITERATIONS, "record": dict(LONG_RECORD), "readout": dict(LONG_READOUT),
+                 "conditions": [condition(round3_spec(w["id"]), LONG_TOKENS) for w in playing]}}
+
 
 def write(plan: Dict[str, Any], show: bool) -> None:
     """Write a plan, or show it; a plan already written is left as it is."""
@@ -291,6 +322,7 @@ def main() -> None:
     # Experiment 47 plays in Experiment 46's runs, as its plan names them once written.
     if os.path.exists(os.path.join(ROOT, "book", "experiments", "E46.json")):
         write(e47([spec.run_id for spec in gol_plan.experiment_runs("E46")]), a.show)
+    write(e48(), a.show)
 
 
 if __name__ == "__main__":

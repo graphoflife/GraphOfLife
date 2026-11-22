@@ -521,6 +521,6 @@ covariance. Skyrms, B. (2010), *Signals*.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going), [Methods and statistics](../README.md#methods-and-statistics).
 
-> [!info]- Pages that link here (9)
-> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Glossary](glossary.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
+> [!info]- Pages that link here (8)
+> [What this notebook is about](what-this-notebook-is-about.md) · [How this notebook is written](how-this-notebook-is-written.md) · [Candidates for open-ended evolution](candidates-for-open-ended-evolution.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [Glossary](glossary.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Measures, atlases and assembly (side studies)](measures-atlases-and-assembly.md)
 <!-- /turns -->

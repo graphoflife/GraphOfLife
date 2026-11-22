@@ -1,0 +1,132 @@
+{
+ "id": "E48",
+ "title": "Does evolution go on? Round 3's best worlds for 100,000 iterations",
+ "thesis": {
+  "claim": "Round 3's best brains keep getting better for 100,000 iterations. Played fresh at 10,000 tokens under the rules of the three worlds the evolution rank puts first, in the second half of each run the brains of every check beat the brains of 5,000 iterations before.",
+  "why": "In round 3's 3,000 iterations the brains got better early and then stopped: pooled over 17 worlds, the later eras beat the brains of iteration 250 in 71% of contests, those of iteration 500 already in 76%, and the eras after 1,500 beat those of 1,500 in exactly half (Did the brains get better? Round 3's eras against each other). The notebook's two longest worlds, of B2, climbed for 20,000 to 25,000 iterations and then only wandered (Every era against three). Open-ended evolution would keep finding better brains for as long as it runs, so the direct test is a long run of the worlds with the most evolution by the rank: lines that spread far beyond chance, faithful copies and selection on what the brains do (Candidates for open-ended evolution). These three lived through 3,300 to 4,000 generations of brain copies in round 3's 3,000 iterations; 100,000 iterations give them about 33 times as long.",
+  "confirm": "Pooled over the runs and the ten checks from 55,000 to 100,000, the later brains' mean score against the brains of 5,000 iterations before is above 0.5, and so is the whole of its band, two standard errors either side; each pairing (one check of one run, the mean of its four coins) is one value. A world that dies out before iteration 10,000 is replaced by the next world by the rank, with the same seed, in the order of the reserves; a world that dies out later counts with the checks it reached.",
+  "refute": "The band includes 0.5 or lies below it: in the second half the brains no longer beat their recent past, and evolution has levelled off, as in round 3. If fewer than two runs reach iteration 100,000, the thesis is undecided. The scores against the brains of iterations 5,000 and 50,000, which tell steady progress from brains that only go round in circles, are reported beside, as are the brain-copy tree's readings over the whole run; they do not decide."
+ },
+ "chosen": {
+  "worlds": [
+   "B1-30000-fffc7d-s4003",
+   "B1-30000-5379e2-s4002",
+   "B1-30000-1cfaa4-s4008"
+  ],
+  "ranks": [
+   1,
+   2,
+   3
+  ],
+  "reserves": [
+   "B1-30000-04d3eb-s4007",
+   "B1-30000-9efb1d-s4003",
+   "B1-30000-a8a2d2-s4007"
+  ]
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "4801",
+  "iterations": 100000,
+  "record": {
+   "heavy_every": 25,
+   "checkpoint_every": 100,
+   "archive_every": 2500
+  },
+  "readout": {
+   "every": 5000,
+   "lags": [
+    5000
+   ],
+   "eras": [
+    5000,
+    50000
+   ],
+   "coins": 4,
+   "T": 100
+  },
+  "conditions": [
+   {
+    "name": "s4003 strongest first",
+    "set": {
+     "random_input_amount": 2,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32
+     ],
+     "mutation_sparsity": 0.3,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "redistribution": "parents",
+     "valence": 16,
+     "link_upkeep": "paid_or_used",
+     "allocation": "strongest_first"
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   },
+   {
+    "name": "s4002 weakest first",
+    "set": {
+     "message_amount": 16,
+     "random_input_amount": 0,
+     "self_message": "largest",
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50
+     ],
+     "mutation_probability": 0.4,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "mutate_on_replication": true,
+     "mix_at_birth": true,
+     "mix_mates": "parents",
+     "mate_pays": true,
+     "redistribution": "parents",
+     "link_search": "reach",
+     "link_consent": "forced",
+     "allocation": "weakest_first"
+    },
+    "world": {
+     "n_nodes": 50
+    }
+   },
+   {
+    "name": "s4008 weakest first",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 0,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      32,
+      32,
+      32,
+      32,
+      32
+     ],
+     "mutation_noise_std": 0.4,
+     "contest": "lottery",
+     "allow_revolutions": false,
+     "allow_handover": false,
+     "allow_gifting": true,
+     "redistribution": "parents",
+     "allocation": "weakest_first"
+    }
+   }
+  ]
+ }
+}

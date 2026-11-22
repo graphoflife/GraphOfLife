@@ -493,7 +493,8 @@ def runs(md: str, name: str) -> str:
                                               {**(c.get("set") or {}), **(c.get("world") or {})}.items())
                                     or f"nothing: {base['id']} as it is")
         named = ids.get(c["name"], [])
-        where = f" Runs `{named[0]}` … `{named[-1]}`." if named else ""
+        where = (f" Run `{named[0]}`." if len(named) == 1
+                 else f" Runs `{named[0]}` … `{named[-1]}`." if named else "")
         lines.append(f"- **{c['name']}** — {changed}; {', '.join(number(s) for s in sizes(c))} "
                      f"tokens" + (f"; seeds {seeds_of(c)[0]}" if own else "") + f".{where}")
     lines.append("")
