@@ -210,13 +210,26 @@ of the plan fails for the game as it is: nothing in one game rewards a body
 of several agents. Limits: one phase, no children, no link cuts, no
 estates, teams of at most 4, revolutions left out.
 
-### C2. Experiment 49, read while it plays
+### C2. Experiment 49 — refuted by the letter, and the letter read noise
 
-See the page *Are mutants as fit as their parents?* once it is analysed.
-Early note: the count at iteration 30, which the thesis reads, is decided by
-which single line swept the world; the early iterations show the engine's
-mutation costing a line about a third of its copies within 3 iterations and
-mutations of up to 100 numbers costing nothing measurable.
+150 assays, 2 hours 23 minutes. Page: *Are mutants as fit as their parents?*
+
+- **The registered reading (count at iteration 30) decides nothing.** Lines
+  die so fast that by 30 one line holds hundreds to thousands of agents and
+  the ratio is a coin toss: it ranges from 0 to 3,261, as it does with the
+  labels shuffled. By the thesis's own words it is refuted (the ratio for
+  one number changed is under 0.8 in two worlds). Lesson for every later
+  assay: read after 3 to 9 iterations, not 30.
+- **The first iterations show a pattern** (not registered). In s4003 at
+  15,000 and at 5,000, a line changed by the engine's mutation has 0.69
+  times the copies of an unchanged one after three iterations (shuffled
+  range 0.84 to 1.19) and 0.41 and 0.58 times after six. Mutations of 1, 10
+  and 100 numbers stay inside the shuffled range everywhere.
+- **In s4008 no mutation costs anything**, the engine's included, though it
+  changes half of what a brain decides there. What a brain decides hardly
+  matters for a line's next few iterations in that world.
+- **Lines die fast**: a third alive after 3 iterations, about 3% after 9,
+  a few in a thousand after 30.
 
 ## What this changes in the plan
 

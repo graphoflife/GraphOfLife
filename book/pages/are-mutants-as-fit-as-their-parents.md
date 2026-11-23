@@ -20,9 +20,16 @@ differently from its parent in 34% to 67% of them. In one of three worlds
 that is as often as two unrelated brains of the world differ. A brain with
 one number changed decides differently in under 1% of them.
 
-Experiment 49 asks whether that also shows in how well a mutant does. It
-marks mutants and unchanged agents in a kept world and counts their copies
-30 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") later. It has not been played yet.
+Experiment 49 asked whether that also shows in how well a mutant does. It
+marked mutants and unchanged agents in a kept world and counted their copies
+30 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game.") later. That count turned out to say nothing: by iteration 30 a
+single line has taken over, and which one is chance. By the thesis's own
+words it is refuted, but the reading it names could not have decided either
+way. The first few iterations, which the thesis does not read, do show a
+pattern. In s4003 a line whose brain was changed by the engine's mutation
+has 0.69 times the copies of an unchanged line after three iterations and
+0.41 to 0.58 times after six. Mutations of 1, 10 and 100 numbers cost
+nothing that can be measured. In s4008 no mutation costs anything.
 
 ## What one mutation does to a brain's decisions
 
@@ -89,6 +96,81 @@ lines die out by chance, so one mutant that is a little better than its
 parent cannot be told from a lucky one. The assay measures what a kind of
 mutation costs on average.
 
+## What the assays said
+
+All 150 assays were played on 23 and 24 November 2026, in 2 hours 23
+minutes on three workers.
+
+### The reading the thesis names
+
+R is the mean count of the mutant sites at iteration 30 over that of the
+control sites, pooled over a world's ten assays.
+
+| world | engine's mutation | 1 number | 10 | 100 | 1,000 |
+|---|---|---|---|---|---|
+| s4003 at 15,000 | 0.00 | 3,261 | 0.22 | 0.01 | 0.98 |
+| s4003 at 5,000 | 0.78 | 0.23 | 1.03 | no control left | 0.00 |
+| s4008 at 15,000 | 8.83 | 0.66 | 2.29 | 4.38 | 0.01 |
+
+**By its own words the thesis is refuted**: R for one number changed is
+below 0.8 in two of the three worlds. But these numbers say nothing. With the
+labels mutant and control shuffled, R ranges just as widely, and none of the
+fifteen differs from what shuffling gives (the smallest *p* is 0.07, for one
+number changed in s4003 at 15,000, where R is 3,261). The reading could not
+have confirmed the thesis either.
+
+The reason is how fast lines die in these worlds. Of 100 marked lines, a
+third are left after three iterations, about three after nine, and after
+30 a few lines in a thousand, each of which by then holds hundreds or
+thousands of agents: up to 3,247. The mean count at iteration
+30 is the count of that one line, and whether it started as a mutant or a
+control is a coin toss. The plan chose iteration 30 without knowing this.
+That is a fault of the plan, not of the worlds.
+
+### The first iterations (not what the thesis reads)
+
+Each site's count was kept every three iterations. The same ratio R after
+three and after six iterations, with the range it takes in 95% of 2,000
+shufflings of the labels:
+
+| world | mutation | R after 3 | shuffled | R after 6 | shuffled |
+|---|---|---|---|---|---|
+| s4003 at 15,000 | engine's | **0.69** | 0.84 to 1.19 | **0.41** | 0.62 to 1.63 |
+| | 1 number | 1.02 | 0.85 to 1.18 | 0.96 | 0.66 to 1.50 |
+| | 10 | 0.98 | 0.85 to 1.19 | 1.04 | 0.70 to 1.46 |
+| | 100 | 1.08 | 0.86 to 1.18 | 1.05 | 0.62 to 1.60 |
+| | 1,000 | 0.91 | 0.85 to 1.19 | 0.72 | 0.63 to 1.58 |
+| s4003 at 5,000 | engine's | **0.69** | 0.87 to 1.16 | **0.58** | 0.74 to 1.36 |
+| | 1 number | 1.01 | 0.86 to 1.16 | 1.02 | 0.79 to 1.28 |
+| | 10 | 1.03 | 0.88 to 1.15 | 1.23 | 0.77 to 1.32 |
+| | 100 | 0.94 | 0.88 to 1.15 | 1.03 | 0.78 to 1.28 |
+| | 1,000 | 1.02 | 0.87 to 1.15 | 1.09 | 0.77 to 1.28 |
+| s4008 at 15,000 | engine's | 1.08 | 0.80 to 1.26 | 1.08 | 0.66 to 1.50 |
+| | 1 number | 1.18 | 0.81 to 1.23 | 0.94 | 0.67 to 1.51 |
+| | 10 | 1.01 | 0.78 to 1.28 | 1.17 | 0.67 to 1.51 |
+| | 100 | 1.03 | 0.81 to 1.23 | 1.02 | 0.71 to 1.42 |
+| | 1,000 | 1.03 | 0.80 to 1.24 | 1.13 | 0.64 to 1.53 |
+
+In s4003, at both iterations of its history, a line changed by the engine's
+mutation falls behind at once: 0.69 times the copies after three iterations
+(*p* = 0.0005 at both), 0.41 and 0.58 times after six. No smaller mutation
+leaves its range. In s4008 nothing does, the engine's mutation included,
+though it changes half of what a brain there decides.
+
+This was not planned before the assays, so it is a pattern to test, not a
+result. What it suggests:
+
+- In s4003, a copy that mutates is mostly a copy lost. One copy in five
+  mutates, so the world pays for its mutations with roughly a tenth of all
+  its copies.
+- A mutation of up to a hundred numbers keeps what the brain can do. That
+  is the step a search for small gains needs
+  ([Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md)).
+- In s4008 what a brain decides hardly matters for how its line does over a
+  few iterations. That world plays the lottery, in which every way of
+  staking returns the same tokens on average, and its brains mutate where
+  they sit, one in five of them every iteration.
+
 <!-- runs E49 -->
 > [!info]- The trials behind this page
 > **150 trials**, assays: in the world of one era some agents' brains are changed once and marked, as many more only marked, every mutation off, and the agents carrying each mark counted at the end; each plays 30 iterations, from a world another run kept in its archive.
@@ -144,6 +226,8 @@ brains moved among the marked agents, each brain in another's place.
 
 - [Why does evolution level off?](why-does-evolution-level-off.md): four
   causes that could stop evolution, of which unfaithful copies is one.
+- [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md):
+  Experiments 50 and 51, which play a world on with small mutations.
 - [A hundred thousand iterations](a-hundred-thousand-iterations.md):
   Experiment 48, whose kept worlds are played here.
 - [How fast should brains change?](how-fast-should-brains-change.md):
@@ -151,7 +235,9 @@ brains moved among the marked agents, each brain in another's place.
 
 ## How this was made
 
-The table is made by `python3 research/efficient/B1/b1.py`, which reads the
+The assays are read by `python3 research/efficient/C2/c2.py` (its numbers in
+`research/efficient/C2/c2.json`). The table of what a mutation does to a
+brain's decisions is made by `python3 research/efficient/B1/b1.py`, which reads the
 worlds Experiment 48 kept at iterations 5,000 and 15,000
 (`research/efficient/probe.py` asks the brains). The two readings beside it
 are `research/efficient/B2/b2.py` and `research/efficient/A1/a1.py`. The
