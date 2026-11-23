@@ -286,7 +286,8 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
     words = [("run", "worlds"), ("eras", "eras"), ("era", "at iteration"), ("strategy", "strategies"),
              ("size", "patches of"), ("place", "places"), ("background", "in a world of"),
              ("settle", "settled for"), ("operator", "mutations of"), ("mutants", "mutants"),
-             ("controls", "controls"), ("seed", "seeds" if kind == "assay" else "coins")]
+             ("controls", "controls"), ("seed", "seeds" if kind == "assay" else "coins"),
+             ("swap", "brains moved by seeds"), ("world_seed", "played with the luck of seeds")]
     for label, fields in gol_plan.trial_sets(name).items():
         count = sum(1 for f in found if f["set"] == label)
         if "a" in fields:

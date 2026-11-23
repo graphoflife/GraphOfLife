@@ -662,7 +662,8 @@
       ],
       "kind": "experiment",
       "experiments": [
-        "E49"
+        "E49",
+        "E52"
       ],
       "status": "ready",
       "added": "2026-11-23",

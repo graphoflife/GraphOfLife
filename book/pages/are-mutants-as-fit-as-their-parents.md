@@ -4,6 +4,7 @@
 > - How much does one [mutation](rules-in-detail.md#how-a-brain-changes "A random change to a brain, made with a set probability when it is copied, and in B1 also after every game: a changed brain is a new genotype.") change what a [brain](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") decides?
 > - Does a mutant do as well as the [agent](the-world.md#agents-and-tokens "One member of a world: it lives on a node of the network, holds tokens and has a brain that takes all its decisions.") it came from?
 > - Is the size of a mutation what stops evolution?
+> - Is a line's success in its brain, in its place, or luck?
 
 <!-- experiment E49 -->
 
@@ -97,6 +98,46 @@ mutation costs on average.
 > - **s4008 at 15,000** — 50 trials: worlds `B1-10000-1cfaa4-s4801`; at iteration 15,000; mutations of 1, 10, 100, 1,000, engine; mutants 100; controls 100; seeds 1 to 10, every 1.
 >
 > To play these trials again: `python3 gol_lab.py run E49`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+<!-- /runs -->
+
+## Brain, place or luck?
+
+<!-- experiment E52 -->
+
+The first assays of Experiment 49 showed something the plan had not reckoned
+with. Marked lines die out fast: after three iterations a third are left,
+after nine about one in thirty. And a single line among 200 can hold a
+thousand agents or more after 30 iterations. Chance alone does not spread a
+line like that, so lines differ in how well they do.
+
+A line can do well for three reasons: its brain, the place it started in
+(its tokens, links and neighbours), or luck. Only the brain is inherited, so
+only its share can be selected. Experiment 52 takes the three apart. It
+marks 400 agents and plays them again and again from the same kept world:
+six times as they are, with different luck, and six times with the marked
+brains moved among the marked agents, each brain in another's place.
+
+<!-- thesis E52 -->
+> [!quote] The thesis of Experiment 52, written down before any of its runs existed
+> **The claim.** How many copies an agent's line has after six iterations is partly its brain's doing: a brain that did well in one place does better than others in another place too. The place counts for more than the brain, and luck for more than both.
+>
+> **Why it would be so.** In the assays of Experiment 49 one line among 200 marked agents held up to half the world after 30 iterations, far more than chance spreads a line, so lines differ in how well they do. A line could do well because of its brain, or because of where it started: the tokens it held, its links, its neighbours. Only what is in the brain can be selected. If the brain's share is nil, there is no selection on brains at all in these worlds, and no way of varying brains could help.
+>
+> **It holds if:** In each of the two worlds, 400 agents are marked and played 9 iterations: six times as they are, with different luck, and six times with the marked brains moved among the marked agents. A line's score is the logarithm of one plus its copies after six iterations. r_brain is the correlation, over the 400 brains, between a brain's mean score in its own place and its mean score in the places it was moved to; r_place the correlation, over the 400 places, between a place's mean score with its own brain and with other brains. Bands are from 2,000 resamplings of the 400. Both, in both worlds: the band of r_brain lies above 0; and r_place is larger than r_brain.
+>
+> **It fails if:** In both worlds the band of r_brain includes 0 or lies below it: over six iterations a brain's success does not travel with it. Anything else is undecided. Reported beside it: the same with the share of lines alive after three iterations, and r_same, the correlation between two plays of the same brain in the same place.
+<!-- /thesis -->
+
+<!-- runs E52 -->
+> [!info]- The trials behind this page
+> **24 trials**, assays: in the world of one era some agents' brains are changed once and marked, as many more only marked, every mutation off, and the agents carrying each mark counted at the end; each plays 9 iterations, from a world another run kept in its archive.
+>
+> - **s4003 at 15,000: as they are** — 6 trials: worlds `B1-10000-085a32-s4801`; at iteration 15,000; mutations of 1; mutants 0; controls 400; seeds 1; played with the luck of seeds 11 to 16, every 1.
+> - **s4003 at 15,000: brains swapped** — 6 trials: worlds `B1-10000-085a32-s4801`; at iteration 15,000; mutations of 1; mutants 0; controls 400; seeds 1; brains moved by seeds 1, 2, 3; played with the luck of seeds 21, 22.
+> - **s3058 at 20,000: as they are** — 6 trials: worlds `B1-40000-bbbccd-s4602`; at iteration 20,000; mutations of 1; mutants 0; controls 400; seeds 1; played with the luck of seeds 11 to 16, every 1.
+> - **s3058 at 20,000: brains swapped** — 6 trials: worlds `B1-40000-bbbccd-s4602`; at iteration 20,000; mutations of 1; mutants 0; controls 400; seeds 1; brains moved by seeds 1, 2, 3; played with the luck of seeds 21, 22.
+>
+> To play these trials again: `python3 gol_lab.py run E52`.
 <!-- /runs -->
 
 ## Where to go next

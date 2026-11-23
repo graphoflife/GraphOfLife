@@ -1,0 +1,95 @@
+{
+ "id": "E52",
+ "title": "Brain, place or luck? The same agents played again, and with their brains swapped",
+ "thesis": {
+  "claim": "How many copies an agent's line has after six iterations is partly its brain's doing: a brain that did well in one place does better than others in another place too. The place counts for more than the brain, and luck for more than both.",
+  "why": "In the assays of Experiment 49 one line among 200 marked agents held up to half the world after 30 iterations, far more than chance spreads a line, so lines differ in how well they do. A line could do well because of its brain, or because of where it started: the tokens it held, its links, its neighbours. Only what is in the brain can be selected. If the brain's share is nil, there is no selection on brains at all in these worlds, and no way of varying brains could help.",
+  "confirm": "In each of the two worlds, 400 agents are marked and played 9 iterations: six times as they are, with different luck, and six times with the marked brains moved among the marked agents. A line's score is the logarithm of one plus its copies after six iterations. r_brain is the correlation, over the 400 brains, between a brain's mean score in its own place and its mean score in the places it was moved to; r_place the correlation, over the 400 places, between a place's mean score with its own brain and with other brains. Bands are from 2,000 resamplings of the 400. Both, in both worlds: the band of r_brain lies above 0; and r_place is larger than r_brain.",
+  "refute": "In both worlds the band of r_brain includes 0 or lies below it: over six iterations a brain's success does not travel with it. Anything else is undecided. Reported beside it: the same with the share of lines alive after three iterations, and r_same, the correlation between two plays of the same brain in the same place."
+ },
+ "trials": {
+  "kind": "assay",
+  "T": 9,
+  "workers": 3,
+  "sets": [
+   {
+    "name": "s4003 at 15,000: as they are",
+    "grid": {
+     "run": "B1-10000-085a32-s4801",
+     "era": 15000,
+     "operator": 1,
+     "mutants": 0,
+     "controls": 400,
+     "seed": 1,
+     "world_seed": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ]
+    }
+   },
+   {
+    "name": "s4003 at 15,000: brains swapped",
+    "grid": {
+     "run": "B1-10000-085a32-s4801",
+     "era": 15000,
+     "operator": 1,
+     "mutants": 0,
+     "controls": 400,
+     "seed": 1,
+     "swap": [
+      1,
+      2,
+      3
+     ],
+     "world_seed": [
+      21,
+      22
+     ]
+    }
+   },
+   {
+    "name": "s3058 at 20,000: as they are",
+    "grid": {
+     "run": "B1-40000-bbbccd-s4602",
+     "era": 20000,
+     "operator": 1,
+     "mutants": 0,
+     "controls": 400,
+     "seed": 1,
+     "world_seed": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ]
+    }
+   },
+   {
+    "name": "s3058 at 20,000: brains swapped",
+    "grid": {
+     "run": "B1-40000-bbbccd-s4602",
+     "era": 20000,
+     "operator": 1,
+     "mutants": 0,
+     "controls": 400,
+     "seed": 1,
+     "swap": [
+      1,
+      2,
+      3
+     ],
+     "world_seed": [
+      21,
+      22
+     ]
+    }
+   }
+  ]
+ }
+}

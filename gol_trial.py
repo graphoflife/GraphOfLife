@@ -102,7 +102,8 @@ def assay(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[D
     source = trial["run"]
     return gol_tournament.assay(store.source_config(source), store.kept_world(source, int(trial["era"])),
                                 int(trial["T"]), int(trial["seed"]), trial["operator"], int(trial["mutants"]),
-                                int(trial["controls"]), on_step=stop)
+                                int(trial["controls"]), on_step=stop, world_seed=trial.get("world_seed"),
+                                swap=trial.get("swap"))
 
 
 PLAY = {"contest": contest, "invasion": invasion, "assay": assay}

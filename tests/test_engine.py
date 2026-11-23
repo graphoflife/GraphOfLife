@@ -3262,6 +3262,18 @@ def test_an_assay_changes_its_mutants_once_and_refuses_worlds_it_cannot_mark():
             assert "operator" in str(exc), exc
         else:
             raise AssertionError(f"an assay with operator {operator!r} was played")
+    # The same seed marks the same agents; another world_seed plays them with other luck; a swap gives
+    # every site another site's brain and says whose, with the site's own tokens and links.
+    plain = tour.assay(cfg.to_dict(), kept, 4, 5, 1, 0, 8)
+    again = tour.assay(cfg.to_dict(), kept, 4, 5, 1, 0, 8)
+    other = tour.assay(cfg.to_dict(), kept, 4, 5, 1, 0, 8, world_seed=99)
+    moved = tour.assay(cfg.to_dict(), kept, 4, 5, 1, 0, 8, swap=3)
+    place = lambda out: [(s["tokens"], s["links"]) for s in out["sites"]]
+    assert plain == again and place(other) == place(plain) == place(moved)
+    assert [s["series"] for s in other["sites"]] != [s["series"] for s in plain["sites"]], "other luck, the same play"
+    whose = [s["brain_of"] for s in moved["sites"]]
+    assert sorted(whose) == list(range(8)) and all(w != j for j, w in enumerate(whose)), whose
+    assert "brain_of" not in plain["sites"][0]
     # A world that dies out leaves no result.
     dying = small(seed=72, max_age=2, min_child=10 ** 9)
     w = new_world(dying)

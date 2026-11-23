@@ -195,7 +195,8 @@ def nudged(brain: Any, k: int, rng: np.random.RandomState) -> None:
 
 
 def assay(config: Dict[str, Any], state: Dict[str, np.ndarray], T: int, seed: int, operator: Any,
-          mutants: int, controls: int, on_step: Optional[Callable[[Any, int], bool]] = None) -> Dict[str, Any]:
+          mutants: int, controls: int, on_step: Optional[Callable[[Any, int], bool]] = None,
+          world_seed: Optional[int] = None, swap: Optional[int] = None) -> Dict[str, Any]:
     """
     How well do mutants do, beside agents left as they were? `mutants` and
     `controls` agents of a kept world are drawn at random, each a **site**.
@@ -211,6 +212,14 @@ def assay(config: Dict[str, Any], state: Dict[str, np.ndarray], T: int, seed: in
     the same world at the same time, so their counts compare directly. The
     engine never reads a brain's id (with pools off), so a world whose sites
     are all controls plays exactly as the kept world would with mutation off.
+
+    Is a line's success in its brain, in its place, or luck? The sites and
+    the mutants follow from `seed` alone, so assays that share it mark the
+    same agents. `world_seed` then gives the play its own chance (it is seed +
+    1 without one): the same sites played again with other luck. `swap`, a
+    seed of its own, first moves the marked brains among the sites, each site
+    getting another site's brain (`brain_of` says whose) with the site's own
+    tokens and links: the same brains played again in other places.
 
     Not for worlds that mix brains at birth (a child would be half another
     line's) or that pool stakes by genotype or family (a mark would change who
@@ -235,8 +244,15 @@ def assay(config: Dict[str, Any], state: Dict[str, np.ndarray], T: int, seed: in
     once = dataclasses.replace(cfg, mutation_probability=1.0)
     marks: Dict[int, int] = {}
     start = []
+    # Under swap, site j plays the brain of site brain_of[j]: a random order with nobody left in place.
+    brain_of = list(range(len(sites)))
+    if swap is not None and len(sites) > 1:
+        order = np.random.RandomState(swap).permutation(len(sites))
+        for here, there in zip(order, np.roll(order, 1)):
+            brain_of[int(here)] = int(there)
+    own = [world.brains[u] for u in sites]
     for j, u in enumerate(sites):
-        brain = world.brains[u].copy()
+        brain = own[brain_of[j]].copy()
         if j < mutants:
             if operator == "engine":
                 brain.cfg = once
@@ -248,8 +264,9 @@ def assay(config: Dict[str, Any], state: Dict[str, np.ndarray], T: int, seed: in
         brain.parent_brain_id = -1
         world.brains[u] = brain
         marks[LABEL_B + j] = j
-        start.append({"mutant": j < mutants, "tokens": int(world.tokens[u]), "links": int(world.G.degree[u])})
-    world.rng = np.random.RandomState(seed + 1)
+        start.append({"mutant": j < mutants, "tokens": int(world.tokens[u]), "links": int(world.G.degree[u]),
+                      **({"brain_of": brain_of[j]} if swap is not None else {})})
+    world.rng = np.random.RandomState(seed + 1 if world_seed is None else world_seed)
 
     counts = np.zeros((T + 1, len(sites)), dtype=np.int64)
     counts[0] = 1

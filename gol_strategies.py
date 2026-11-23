@@ -466,7 +466,8 @@ def fill(world, strategy: str) -> None:
 TRIAL_NEEDS = {"contest": ("run", "T", "home", "a", "b", "seed"),
                "invasion": ("run", "T", "era", "strategy", "size", "place"),
                "assay": ("run", "T", "era", "seed", "operator", "mutants", "controls")}
-TRIAL_MAY = {"contest": ("plant", "a_run", "b_run"), "invasion": ("background", "settle"), "assay": ()}
+TRIAL_MAY = {"contest": ("plant", "a_run", "b_run"), "invasion": ("background", "settle"),
+             "assay": ("world_seed", "swap")}
 
 
 def check_trial(trial: Dict[str, Any]) -> None:

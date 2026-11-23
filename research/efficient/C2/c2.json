@@ -1,0 +1,60 @@
+{
+ "s4003 at 15,000 | engine": {
+  "assays": 10,
+  "died_out_worlds": 0,
+  "mutants": 1000,
+  "controls": 1000,
+  "R": 0.0,
+  "p_lower": 0.11444277861069466,
+  "p_upper": 1.0,
+  "null_R_2.5_97.5": [
+   0.0,
+   NaN
+  ],
+  "mean_count": [
+   0.0,
+   5.974
+  ],
+  "died_out": [
+   1.0,
+   0.997
+  ],
+  "above_controls_90th": [
+   0.0,
+   0.003
+  ],
+  "largest": [
+   0.0,
+   3247.0
+  ]
+ },
+ "s4003 at 15,000 | 1": {
+  "assays": 8,
+  "died_out_worlds": 0,
+  "mutants": 800,
+  "controls": 800,
+  "R": 1536.0,
+  "p_lower": 0.9370314842578711,
+  "p_upper": 0.12593703148425786,
+  "null_R_2.5_97.5": [
+   0.0,
+   NaN
+  ],
+  "mean_count": [
+   3.84,
+   0.0025
+  ],
+  "died_out": [
+   0.99625,
+   0.99875
+  ],
+  "above_controls_90th": [
+   0.00375,
+   0.00125
+  ],
+  "largest": [
+   1593.0,
+   2.0
+  ]
+ }
+}
