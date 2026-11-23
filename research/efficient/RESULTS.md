@@ -114,6 +114,24 @@ Territories of one genotype exist well beyond a shuffled world in all three
 about 6 and 12). None grows from window to window by the card's rule. Not
 done: lifetimes, family-based territories, the family-pool runs.
 
+### A8. How long do agents live? (added) — one or two iterations, nearly everywhere
+
+From `research/screen/health.json` alone, for round 3's 82 living worlds. An
+agent's lifetime is 1 / (births per agent and iteration).
+
+- **Median lifetime: 1.7 iterations.** 70 of the 82 worlds are under 5; only
+  4 reach 10 (s3004 19, s3043 19, s3065 18, s3019 12).
+- Median holding: 6.9 tokens an agent (1.4 to 31).
+- Lifetime goes with where estates go: to the children of the dead 3.5, to
+  the neighbourhood 4.4; to newborns, parents or the poorest 1.5 to 1.6.
+- The evolution rank does not see it (rank correlation 0.05).
+
+So in nearly every world an agent decides once or twice and is gone. Nothing
+that needs a body lasting many iterations (memory, a shell, a partner met
+twice) can pay there. What lasts is a line of copies moving through nodes.
+The four long-lived worlds are the ones to read for structure; they are on
+the external drive.
+
 ### C1. The tagged-lineage assay — built
 
 A lab trial of kind `assay` (`gol_tournament.assay`), with tests. Its first
