@@ -466,10 +466,6 @@ def test_a_local_estate_splits_evenly_among_the_nearest():
     assert given == 10 and world.tokens[1] == world.tokens[3] == 15
 
 
-if __name__ == "__main__":
-    sys.exit(runner.main(globals()))
-
-
 def test_a_mutation_of_so_many_numbers_changes_no_more_than_that():
     """
     Under mutation_numbers a mutation changes exactly so many of a brain's
@@ -498,3 +494,7 @@ def test_a_mutation_of_so_many_numbers_changes_no_more_than_that():
     assert world.G.number_of_nodes() > 0 and {b.brain_id for b in world.brains.values()} - start
     _refused(dict(mutation_numbers=-1), "mutation_numbers")
     _refused(dict(mutation_numbers=3, brain_kind="binary"), "binary")
+
+
+if __name__ == "__main__":
+    sys.exit(runner.main(globals()))
