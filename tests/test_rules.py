@@ -468,3 +468,33 @@ def test_a_local_estate_splits_evenly_among_the_nearest():
 
 if __name__ == "__main__":
     sys.exit(runner.main(globals()))
+
+
+def test_a_mutation_of_so_many_numbers_changes_no_more_than_that():
+    """
+    Under mutation_numbers a mutation changes exactly so many of a brain's
+    numbers (fewer if one is drawn twice) and redraws nothing, where the
+    engine's own changes a share of all of them at once. At 0 a world plays
+    as it always did. Not for binary brains, and not a negative count.
+    """
+    import dataclasses
+    cfg = small(seed=81, mutation_probability=1.0, mutate_on_replication=True)
+    for k in (1, 5, 40):
+        brain = make_brain(dataclasses.replace(cfg, mutation_numbers=k), 1, np.random.RandomState(k))
+        before = [x.copy() for x in brain.weights + brain.biases]
+        assert brain.mutate(2, np.random.RandomState(k + 1)) and brain.brain_id == 2 and brain.parent_brain_id == 1
+        changed = sum(int((a != b).sum()) for a, b in zip(brain.weights + brain.biases, before))
+        assert 1 <= changed <= k, (k, changed)
+    whole = make_brain(cfg, 1, np.random.RandomState(1))
+    before = [x.copy() for x in whole.weights + whole.biases]
+    whole.mutate(2, np.random.RandomState(2))
+    total = sum(x.size for x in before)
+    assert sum(int((a != b).sum()) for a, b in zip(whole.weights + whole.biases, before)) > total * cfg.mutation_sparsity / 2
+    # A world of small mutations lives and its brains do change.
+    world = new_world(dataclasses.replace(cfg, mutation_numbers=3))
+    start = {b.brain_id for b in world.brains.values()}
+    for _ in range(5):
+        world.step(record_decisions=False)
+    assert world.G.number_of_nodes() > 0 and {b.brain_id for b in world.brains.values()} - start
+    _refused(dict(mutation_numbers=-1), "mutation_numbers")
+    _refused(dict(mutation_numbers=3, brain_kind="binary"), "binary")

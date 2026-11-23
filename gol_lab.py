@@ -452,7 +452,7 @@ def _run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
     if not os.path.exists(path):
         return _waits_for_its_run(spec) or {
             "state": "waiting", "iteration": 0, "engine": engine,
-            "job": Job(spec, spec.targets[0], engine, False, spec.fault_at, 0)}
+            "job": Job(spec, spec.targets[0], engine, False, spec.fault_at, spec.start)}
     meta = store.load_meta(spec.run_id)
     state = {"iteration": meta.get("iteration", 0), "status": meta.get("status"),
              "checkpoint": meta.get("checkpoint_iteration") or 0}

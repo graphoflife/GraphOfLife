@@ -190,19 +190,8 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
 # ----------------------------------------------------------------------------
 
 def nudged(brain: Any, k: int, rng: np.random.RandomState) -> None:
-    """
-    Change exactly k of a brain's numbers in place, each by the engine's own
-    noise for its layer (mutation_noise_std over the root of the layer's
-    inputs), and redraw nothing: a mutation as small as one likes, to set
-    beside the engine's own, which changes a share of all of them at once.
-    """
-    parts = brain.weights + brain.biases
-    sizes = np.array([p.size for p in parts], dtype=float)
-    scale = [brain.cfg.mutation_noise_std / np.sqrt(w.shape[1]) for w in brain.weights] * 2
-    for which in rng.choice(len(parts), size=k, p=sizes / sizes.sum()):
-        p = parts[which]
-        at = tuple(int(rng.randint(n)) for n in p.shape)
-        p[at] = p.dtype.type(float(p[at]) + rng.normal(0.0, scale[which]))
+    """Change exactly k of a brain's numbers in place, as the engine's mutation_numbers does (Brain.nudge)."""
+    brain.nudge(k, rng)
 
 
 def assay(config: Dict[str, Any], state: Dict[str, np.ndarray], T: int, seed: int, operator: Any,

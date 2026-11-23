@@ -613,6 +613,12 @@ class Brain:
         if rng.random() > cfg.mutation_probability:
             return False
 
+        if cfg.mutation_numbers:
+            self.nudge(cfg.mutation_numbers, rng)
+            self.parent_brain_id = self.brain_id
+            self.brain_id = brain_id
+            return True
+
         reset_fraction = float(np.clip(cfg.mutation_sparsity, 0.0, 1.0))
         for i, (W, b) in enumerate(zip(self.weights, self.biases)):
             base_scale = 1.0 / np.sqrt(W.shape[1])
@@ -625,6 +631,22 @@ class Brain:
         self.parent_brain_id = self.brain_id
         self.brain_id = brain_id
         return True
+
+    def nudge(self, k: int, rng: np.random.RandomState) -> None:
+        """
+        Change exactly k of this brain's numbers in place (one may be drawn
+        twice), each by the noise of its layer: mutation_noise_std over the
+        root of the layer's inputs. Nothing is redrawn. A mutation as small as
+        one likes (mutation_numbers), beside the one above, which changes a
+        share of all the numbers at once.
+        """
+        parts = self.weights + self.biases
+        sizes = np.array([p.size for p in parts], dtype=float)
+        scale = [self.cfg.mutation_noise_std / np.sqrt(w.shape[1]) for w in self.weights] * 2
+        for which in rng.choice(len(parts), size=k, p=sizes / sizes.sum()):
+            p = parts[which]
+            at = tuple(int(rng.randint(n)) for n in p.shape)
+            p[at] = p.dtype.type(float(p[at]) + rng.normal(0.0, scale[which]))
 
     @staticmethod
     def _perturb(M: np.ndarray, noise_std: float, reset_std: float,

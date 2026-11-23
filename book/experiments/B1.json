@@ -31,6 +31,7 @@
     "mutation_probability": 0.2,
     "mutation_noise_std": 0.2,
     "mutation_sparsity": 0.1,
+    "mutation_numbers": 0,
     "extinction_threshold": 20,
     "mutate_on_replication": false,
     "incumbency": 1.0,

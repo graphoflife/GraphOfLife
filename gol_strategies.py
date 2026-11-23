@@ -466,7 +466,7 @@ def fill(world, strategy: str) -> None:
 TRIAL_NEEDS = {"contest": ("run", "T", "home", "a", "b", "seed"),
                "invasion": ("run", "T", "era", "strategy", "size", "place"),
                "assay": ("run", "T", "era", "seed", "operator", "mutants", "controls")}
-TRIAL_MAY = {"contest": ("plant",), "invasion": ("background", "settle"), "assay": ()}
+TRIAL_MAY = {"contest": ("plant", "a_run", "b_run"), "invasion": ("background", "settle"), "assay": ()}
 
 
 def check_trial(trial: Dict[str, Any]) -> None:
@@ -483,7 +483,8 @@ def check_trial(trial: Dict[str, Any]) -> None:
     for name in ("strategy", "background"):
         if trial.get(name) is not None and trial[name] not in STRATEGY_IDS:
             raise ValueError(f"no strategy called {trial[name]!r}: there are {', '.join(STRATEGY_IDS)}")
-    if kind == "contest" and trial["home"] not in (trial["a"], trial["b"]):
+    if kind == "contest" and trial["home"] not in (trial["a"], trial["b"]) \
+            and not (trial.get("a_run") or trial.get("b_run")):
         raise ValueError(f"a contest is played on one of its two eras' worlds, not on {trial['home']}")
     if kind == "assay":
         op = trial["operator"]

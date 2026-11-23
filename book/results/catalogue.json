@@ -579,6 +579,15 @@
     ],
     [
      {
+      "text": "`mutation_numbers`",
+      "href": "pages/settings.md#mutation_numbers"
+     },
+     "0",
+     "0",
+     "a change of exactly so many numbers"
+    ],
+    [
+     {
       "text": "`tag_rate`",
       "href": "pages/settings.md#tag_rate"
      },
@@ -1242,7 +1251,7 @@
      "\u2014",
      "as their worlds",
      "100 each",
-     "1326 played",
+     "1,326 played",
      [
       {
        "text": "Did the brains get better? Round 3's eras against each other",
@@ -1279,6 +1288,38 @@
       {
        "text": "Why does evolution level off?",
        "href": "pages/why-does-evolution-level-off.md"
+      }
+     ]
+    ],
+    [
+     "E48",
+     "Does evolution go on? Round 3's best worlds for 100,000 iterations",
+     "B1",
+     "*s4003 strongest first* (random_input_amount = 2, self_message = largest, hidden_activation = tanh, hidden_layers = 32, 32, 32, mutation_sparsity = 0.3, contest = lottery, allow_revolutions = off, allow_gifting = on, mutate_on_replication = on, redistribution = parents, valence = 16, link_upkeep = paid_or_used, allocation = strongest_first); *s4002 weakest first* (message_amount = 16, random_input_amount = 0, self_message = largest, hidden_activation = tanh, hidden_layers = 50, 50, 50, mutation_probability = 0.4, contest = lottery, allow_revolutions = off, allow_handover = off, allow_gifting = on, mutate_on_replication = on, mix_at_birth = on, mix_mates = parents, mate_pays = on, redistribution = parents, link_search = reach, link_consent = forced, allocation = weakest_first); *s4008 weakest first* (message_amount = 4, random_input_amount = 0, message_prepass = off, hidden_activation = tanh, hidden_layers = 32, 32, 32, 32, 32, mutation_noise_std = 0.4, contest = lottery, allow_revolutions = off, allow_handover = off, allow_gifting = on, redistribution = parents, allocation = weakest_first)",
+     "4801",
+     "10,000",
+     "100,000",
+     "3",
+     [
+      {
+       "text": "A hundred thousand iterations",
+       "href": "pages/a-hundred-thousand-iterations.md"
+      }
+     ]
+    ],
+    [
+     "E49",
+     "Are mutants as fit as their parents? Marked mutants beside marked agents left as they were",
+     "trials",
+     "150 assays from 2 worlds: *s4003 at 15,000*; *s4003 at 5,000*; *s4008 at 15,000*",
+     "\u2014",
+     "as their worlds",
+     "30 each",
+     "3 played",
+     [
+      {
+       "text": "Are mutants as fit as their parents?",
+       "href": "pages/are-mutants-as-fit-as-their-parents.md"
       }
      ]
     ]
@@ -3882,6 +3923,24 @@
      ""
     ],
     [
+     "E48",
+     "3",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E49",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
      "A3k",
      "8",
      "0",
@@ -4082,8 +4141,8 @@
    ]
   },
   "totals": {
-   "lab experiments": 42,
-   "lab runs on disk": 813,
+   "lab experiments": 44,
+   "lab runs on disk": 816,
    "pilot batches": 22,
    "pilot worlds": 484
   }

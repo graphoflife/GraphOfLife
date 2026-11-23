@@ -142,6 +142,8 @@ class RunSpec:
     budget: Optional[float] = None
     #: A readout's contest is played only once its run has kept the world of this iteration.
     after: Optional[int] = None
+    #: The iteration a run starts at: 0, or that of the kept world it is played on from (a plan's `from`).
+    start: int = 0
 
     @property
     def until(self) -> int:
@@ -222,7 +224,7 @@ def _experiment_runs(name: str) -> List[RunSpec]:
         raise LabError(f"{name}: a plan says its runs, its trials or its screen, and this one says none")
 
     _check_keys(f"{name} runs", runs,
-                ("baseline", "world", "seeds", "iterations", "conditions", "record", "workers", "readout"))
+                ("baseline", "world", "seeds", "iterations", "conditions", "record", "workers", "readout", "from"))
     base_name = runs["baseline"]
     base = baseline(base_name)
     world = dict(runs["world"])
@@ -242,7 +244,47 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     # contests before the run goes on, whatever else is waiting (gol_lab.jobs).
     for spec in specs:
         spec.targets = sorted(set(spec.targets) | set(checks))
+    if "from" in runs:
+        _played_on(name, runs, specs)
     return specs
+
+
+def _played_on(name: str, runs: Dict[str, Any], specs: List[RunSpec]) -> None:
+    """
+    A plan's `from` — {"run": a run, "at": an iteration it kept a world at — has every run of the plan start
+    not from founders but from that world, under the run's own settings and with its own seed for
+    every draw from then on: the same world played on in several ways. Its iterations go on counting
+    from there, so `iterations` is where it ends, not how long it plays. Such a run is named for where
+    it comes from as well as for what it is, and keeps the world it started from as its first.
+    """
+    import gol_store as store
+    source = runs["from"]
+    if not isinstance(source, dict) or set(source) != {"run", "at"} or not _whole(source["at"], 0):
+        raise LabError(f"{name} from: a run and the iteration of a world it kept, {{\"run\": ..., \"at\": ...}}")
+    if "readout" in runs:
+        raise LabError(f"{name}: a plan played on from a kept world has no readout (its checks would ask for "
+                       f"worlds from before it started); plan the contests as trials")
+    at = int(source["at"])
+    mark = hashlib.sha1(f"{source['run']} {at}".encode()).hexdigest()[:6]
+    for spec in specs:
+        if spec.targets[-1] <= at:
+            raise LabError(f"{name}: it is played on from iteration {at:,}, so it has to end later than that")
+        if not int(spec.config.get("archive_every", 0)) or at % int(spec.config["archive_every"]):
+            raise LabError(f"{name}: a run played on keeps the world it starts from, so iteration {at:,} has to "
+                           f"be one its record.archive_every keeps")
+        spec.run_id += f"-on{mark}"
+        spec.name += f" · played on from {source['run']} at {at:,}"
+        spec.lab = {**spec.lab, "from": {"run": source["run"], "at": at}}
+        spec.targets = [t for t in spec.targets if t > at]
+        spec.start = at
+    if not any(os.path.exists(os.path.join(store.run_dir(s.run_id), "meta.json")) for s in specs):
+        try:
+            store.load_meta(source["run"])
+            kept = store.archived(source["run"])
+        except (OSError, ValueError):
+            raise LabError(f"{name} from: there is no run {source['run']} on this machine to play on from") from None
+        if at not in kept:
+            raise LabError(f"{name} from: {source['run']} kept no world at iteration {at:,}")
 
 
 def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict[str, Any],
@@ -416,7 +458,9 @@ def _experiment_trials(name: str) -> List[RunSpec]:
                     f"there is no run {trial['run']} on this machine to play from"
                 raise LabError(f"{name} trials {label!r}: {reason}") from None
         era = trial.get("home", trial.get("era"))
-        what = (f"era {trial['b']:,} against {trial['a']:,} on the world of {era:,}, coin {trial['seed']}"
+        what = (f"era {trial['b']:,}" + (f" of {trial['b_run']}" if trial.get("b_run") else "")
+                + f" against {trial['a']:,}" + (f" of {trial['a_run']}" if trial.get("a_run") else "")
+                + f" on the world of {era:,}, coin {trial['seed']}"
                 if trial["kind"] == "contest" else
                 f"{trial['mutants']} mutants ({trial['operator']}) beside {trial['controls']} controls at {era:,}, "
                 f"seed {trial['seed']}" if trial["kind"] == "assay" else

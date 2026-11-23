@@ -218,7 +218,7 @@ NEW_RUN_DEFAULTS: Dict[str, Any] = {
 PARAMETERS = (
     "total_tokens", "n_nodes", "k_neighbors", "rewire_p", "hidden_layers",
     "brain_bits", "message_amount", "random_input_amount",
-    "mutation_probability", "mutation_noise_std", "mutation_sparsity", "tag_rate",
+    "mutation_probability", "mutation_noise_std", "mutation_sparsity", "mutation_numbers", "tag_rate",
     "extinction_threshold", "seed",
 )
 
@@ -742,6 +742,14 @@ class SimConfig:
     mutation_probability: float = 0.5
     mutation_noise_std: float = 0.2
     mutation_sparsity: float = 0.1
+    # How many of a brain's numbers one mutation changes, when it is to be
+    # exactly so many: each by mutation_noise_std's noise for its layer, and
+    # nothing redrawn. 0, as in every run before 23 November 2026, leaves the
+    # count to mutation_sparsity, which changes that share of all of them at
+    # once and may redraw part of a layer. Asked for after a mutation of that
+    # kind was found to leave a brain deciding as differently from its parent
+    # as an unrelated brain does (research/efficient, card B1).
+    mutation_numbers: int = 0
 
     # ---- Run control ----
     # There is no iteration ceiling: a run goes until it is stopped or the
@@ -1124,6 +1132,10 @@ class SimConfig:
             raise ValueError("mutation_sparsity must be between 0 and 1")
         if self.mutation_noise_std < 0:
             raise ValueError("mutation_noise_std cannot be negative")
+        if isinstance(self.mutation_numbers, bool) or not isinstance(self.mutation_numbers, int) or self.mutation_numbers < 0:
+            raise ValueError("mutation_numbers is how many of a brain's numbers a mutation changes: a whole number, 0 or more")
+        if self.mutation_numbers and self.brain_kind == "binary":
+            raise ValueError("mutation_numbers adds noise to single numbers: not for brain_kind binary, whose numbers are -1, 0 and 1")
         for setting, allowed in self.MODES.items():
             if getattr(self, setting) not in allowed:
                 raise ValueError(f"{setting} must be {', '.join(allowed[:-1])} or {allowed[-1]}")

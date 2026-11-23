@@ -1,0 +1,10 @@
+
+s3004: {'contest': 'lottery', 'redistribution': 'uniform', 'mend_on_death': True, 'mutate_on_replication': True, 'mix_at_birth': False, 'mutation_probability': 0.1, 'mutation_noise_std': 0.2, 'mutation_sparsity': 0.1, 'keep_home': 0.0, 'allocation': 'full'}
+  B1 at 3000: 1423 agents, 18.7 tokens each; strangers differ on 76%; engine: 26.4% (0.23 of strangers); 1: 0.5% (0.00 of strangers); 10: 2.5% (0.02 of strangers); 100: 8.1% (0.08 of strangers)
+  B2 at 3000: 408 genotypes in 1000 brains, largest clone 2%; same as most common: first 36%, child 91%; home first 25%, has a child 9%
+  A1: floor first 0.067, home 0.026; by lag: 250: 0.21/0.09  500: 0.24/0.10  750: 0.25/0.11  1000: 0.24/0.10  1250: 0.24/0.10  1500: 0.24/0.10  1750: 0.25/0.11  2000: 0.27/0.11  2250: 0.27/0.11  2500: 0.29/0.12  2750: 0.25/0.10; slopes {'child': 0.12, 'first': 0.11, 'home': 0.08}
+
+s3043: {'contest': 'lottery', 'redistribution': 'poorest', 'mend_on_death': False, 'mutate_on_replication': False, 'mix_at_birth': False, 'mutation_probability': 0.2, 'mutation_noise_std': 0.2, 'mutation_sparsity': 0.05, 'keep_home': 0.0, 'allocation': 'full'}
+  B1 at 3000: 2866 agents, 8.6 tokens each; strangers differ on 75%; engine: 13.5% (0.12 of strangers); 1: 0.3% (0.00 of strangers); 10: 1.4% (0.01 of strangers); 100: 5.0% (0.06 of strangers)
+  B2 at 3000: 809 genotypes in 1000 brains, largest clone 1%; same as most common: first 38%, child 90%; home first 29%, has a child 10%
+  A1: floor first 0.060, home 0.030; by lag: 250: 0.17/0.09  500: 0.21/0.11  750: 0.22/0.11  1000: 0.24/0.12  1250: 0.25/0.13  1500: 0.26/0.13  1750: 0.26/0.13  2000: 0.27/0.14  2250: 0.28/0.15  2500: 0.31/0.17  2750: 0.30/0.16; slopes {'child': 0.23, 'first': 0.23, 'home': 0.25}

@@ -707,6 +707,93 @@ def test_the_lab_plays_trials_as_it_advances_runs():
         assert listed == {"B9-400-s001"}, listed
 
 
+def test_a_plan_can_play_a_kept_world_on_under_other_settings():
+    """
+    A plan's `from` starts every one of its runs from a world another run
+    kept: the same agents, brains and links, under the run's own settings and
+    with its own seed from there on. Its iterations go on counting from that
+    world, which it keeps as its first, and it is named for where it comes
+    from. A plan that would end before it starts, start from a world nobody
+    kept, or ask for a readout is refused.
+    """
+    import numpy as np
+    with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED)) as tmp:
+        source = gol_plan.experiment_runs("E91")[0]
+        assert work(source, 4) == 0
+
+        def write(p):
+            with open(os.path.join(tmp, "plans", f"{p['id']}.json"), "w") as f:
+                json.dump(p, f)
+            return p["id"]
+
+        def on(name, **over):
+            p = plan(name, seeds="7..8", iterations=8, record=ARCHIVED,
+                     conditions=[{"name": "as it is"}, {"name": "small", "set": {"mutation_numbers": 2}}])
+            p["runs"]["from"] = {"run": source.run_id, "at": 4}
+            p["runs"].update(over)
+            return write(p)
+
+        specs = gol_plan.experiment_runs(on("E95"))
+        fresh = {s.run_id for s in gol_plan.experiment_runs(write(plan(
+            "E96", seeds="7..8", iterations=8, record=ARCHIVED,
+            conditions=[{"name": "as it is"}, {"name": "small", "set": {"mutation_numbers": 2}}])))}
+        assert len({s.run_id for s in specs}) == 4 and not {s.run_id for s in specs} & fresh
+        assert all(s.start == 4 and s.targets == [8] and s.lab["from"] == {"run": source.run_id, "at": 4} for s in specs)
+
+        gol_lab.request(run="E95", workers=2)
+        log = io.StringIO()
+        with contextlib.redirect_stdout(log):
+            assert gol_lab.run_lab() == 0
+        assert gol_lab.status()["experiments"]["E95"]["state"] == "finished", log.getvalue()
+        assert all(f"started {s.run_id} at 4 → 8" in log.getvalue() for s in specs), log.getvalue()
+        kept = gol_store.load_archive(source.run_id, 4)
+        ends = []
+        for s in specs:
+            assert gol_store.load_meta(s.run_id)["iteration"] == 8
+            assert gol_store.archived(s.run_id) == [4, 6, 8], gol_store.archived(s.run_id)
+            first = gol_store.load_archive(s.run_id, 4)
+            for key in ("ids", "tokens", "edges", "brain_ids", "W0", "b0"):
+                assert np.array_equal(first[key], kept[key]), (s.run_id, key)
+            assert not gol_store.has_frame(s.run_id, 0) and gol_store.has_frame(s.run_id, 8) \
+                and gol_store.has_frame(s.run_id, 15) and not gol_store.has_frame(s.run_id, 16)
+            rows = gol_record.read_stats(s.run_id)
+            assert [r["iteration"] for r in rows if r["phase"] == 2] == [4, 5, 6, 7], [r["iteration"] for r in rows]
+            ends.append(gol_store.load_archive(s.run_id, 8)["tokens"].tolist())
+        assert len({json.dumps(e) for e in ends}) > 1, "four runs with two seeds and two settings ended alike"
+
+        # A contest may take either era's brains from another run: here two runs played on from one world,
+        # each with brains of its own at iteration 8, in the world of the first.
+        import gol_trial
+        import gol_tournament
+        one, other = specs[0].run_id, specs[-1].run_id
+        write(trials_plan("E98", "contest", [{"name": "across", "items": [
+            {"run": one, "b_run": other, "home": 8, "a": 8, "b": 8, "seed": 1},
+            {"run": one, "a_run": other, "home": 8, "a": 8, "b": 8, "seed": 1}]}]))
+        across = gol_plan.experiment_runs("E98")
+        assert len(across) == 2 and other in across[0].name
+        seen = []
+        real, gol_tournament.contest = gol_tournament.contest, lambda config, state, A, B, T, seed, **kw: seen.append((state, A, B))
+        try:
+            for spec in across:
+                gol_trial.contest(spec.trial, lambda world, t: False)
+        finally:
+            gol_tournament.contest = real
+        mine, theirs = gol_store.load_archive(one, 8), gol_store.load_archive(other, 8)
+        assert not np.array_equal(mine["tokens"], theirs["tokens"])
+        for (state, A, B), (a_from, b_from) in zip(seen, ((mine, theirs), (theirs, mine))):
+            assert np.array_equal(state["tokens"], mine["tokens"])
+            assert np.array_equal(A["W0"], a_from["W0"]) and np.array_equal(B["W0"], b_from["W0"])
+        assert work(across[0], 3) == 0
+        with open(os.path.join(gol_store.run_dir(across[0].run_id), "result.json")) as f:
+            share = json.load(f)["result"]["share"]
+        assert share is None or 0.0 <= share <= 1.0
+
+        refused(lambda: gol_plan.experiment_runs(on("E97", iterations=4)), "end later")
+        refused(lambda: gol_plan.experiment_runs(on("E97", **{"from": {"run": source.run_id, "at": 3}})), "archive_every")
+        refused(lambda: gol_plan.experiment_runs(on("E97", **{"from": {"run": "B9-400-s009", "at": 4}})), "no run B9-400-s009")
+        refused(lambda: gol_plan.experiment_runs(on("E97", readout=READOUT)), "no readout")
+
+
 # ---------------------------------------------------------------------------
 # Readouts
 # ---------------------------------------------------------------------------

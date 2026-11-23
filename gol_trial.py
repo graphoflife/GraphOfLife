@@ -11,7 +11,8 @@ in its archive, or a pilot of the engine's own rules in its checkpoint
 
   contest    the world of one era, its agents given brains drawn by coin from
              two eras, with mutation off (gol_tournament.contest); its result
-             is the later era's share of the agents after T iterations
+             is the later era's share of the agents after T iterations. Either
+             era's brains may be those another run kept (`a_run`, `b_run`)
   invasion   the world of one era, a patch of it given a strategy written by
              hand (gol_strategies.plant), after the whole world was given
              another strategy and left to settle if the trial says so; its
@@ -54,9 +55,12 @@ EVERY = 10
 
 
 def contest(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:
+    # The world and its rules are the run's; either era's brains may be another run's (`a_run`, `b_run`),
+    # so that brains two runs made are played against each other in the world of one of them.
     source = trial["run"]
     return gol_tournament.contest(store.source_config(source), store.kept_world(source, trial["home"]),
-                                  store.kept_world(source, trial["a"]), store.kept_world(source, trial["b"]),
+                                  store.kept_world(trial.get("a_run", source), trial["a"]),
+                                  store.kept_world(trial.get("b_run", source), trial["b"]),
                                   int(trial["T"]), int(trial["seed"]), on_step=stop,
                                   plant=trial.get("plant", "coin"))
 

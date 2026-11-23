@@ -87,6 +87,7 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`mutation_probability`](settings.md#mutation_probability) | 0.2 | 0.2 | how often a brain changes |
 | [`mutation_noise_std`](settings.md#mutation_noise_std) | 0.2 | 0.2 | how big a change is |
 | [`mutation_sparsity`](settings.md#mutation_sparsity) | 0.1 | 0.1 | how many weights a change touches |
+| [`mutation_numbers`](settings.md#mutation_numbers) | 0 | 0 | a change of exactly so many numbers |
 | [`tag_rate`](settings.md#tag_rate) | 0 | 0 | how often a change starts a family |
 | [`extinction_threshold`](settings.md#extinction_threshold) | 20 | 20 | when a world counts as dead |
 <!-- /table -->
@@ -772,6 +773,18 @@ redraws a share *s* of a weight matrix from scratch. Each weight matrix and each
 vector is treated separately. With *s* = 0, a "change" changes nothing, but
 the brain still gets a new genotype number:
 [Do the brains matter?](do-the-brains-matter.md) uses exactly this.
+
+### mutation_numbers
+
+How many of a brain's numbers one change touches, when it is to be exactly so
+many. Each is changed by the noise of [`mutation_noise_std`](#mutation_noise_std),
+and nothing is redrawn. At 0, as in both baselines and every run before 23
+November 2026, the count is left to [`mutation_sparsity`](#mutation_sparsity),
+which changes a share of all the numbers at once. A brain so changed decides
+differently from its parent in a third to two thirds of the situations it
+meets; with one number changed, in fewer than one in a hundred
+([Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md)).
+A mutation parameter; not for binary brains.
 
 ### tag_rate
 

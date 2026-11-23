@@ -138,6 +138,27 @@ def _engine() -> Dict[str, Any]:
         return {"hash": None, "commit": None}
 
 
+def play_on(run_id: str, cfg: SimConfig, source: Dict[str, Any]) -> None:
+    """
+    Start a new run from a world another run kept (a plan's `from`): that world, every agent, brain,
+    link and message of it, under this run's own settings, and with this run's seed for every draw
+    from here on, so that two runs played on from one world differ by their settings and their luck
+    and by nothing else. It is saved as the run's checkpoint, which the run then resumes from as any
+    run does, and as the first world it keeps, so that contests can start from it.
+    """
+    import numpy as np
+    blob = dict(store.kept_world(source["run"], int(source["at"])))
+    state = np.random.RandomState(cfg.seed).get_state()
+    blob["rng_keys"] = state[1].astype(np.uint32)
+    blob["rng_scalars"] = np.array([state[2], state[3], state[4]], dtype=np.float64)
+    world = GraphOfLife.GraphOfLife.from_checkpoint(blob, cfg)
+    if world.iteration != int(source["at"]):
+        raise ValueError(f"the world kept at {source['at']} says it is at iteration {world.iteration}")
+    store.save_checkpoint(run_id, world)
+    store.save_archive(run_id, world)
+    store.update_meta(run_id, iteration=world.iteration)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("run_id")
@@ -166,6 +187,8 @@ def main() -> int:
         cfg = SimConfig.from_dict(spec["config"], stored=False)
         store.create_run(spec["name"], cfg, run_id=run_id,
                          record=spec["record"], lab=spec["lab"])
+        if spec["lab"].get("from"):
+            play_on(run_id, cfg, spec["lab"]["from"])
 
     env = environment()
     provenance = read_provenance(run_id)

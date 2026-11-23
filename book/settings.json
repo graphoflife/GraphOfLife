@@ -50,6 +50,7 @@
   "mutation_probability",
   "mutation_noise_std",
   "mutation_sparsity",
+  "mutation_numbers",
   "tag_rate",
   "extinction_threshold"
  ],
@@ -257,6 +258,10 @@
   "tag_rate": {
    "meaning": "Under pool = family, the chance that a brain which mutates starts a family of its own; else it stays in its parent's.",
    "glance": "how often a change starts a family"
+  },
+  "mutation_numbers": {
+   "meaning": "How many of a brain's numbers one change touches, when it is to be exactly so many, each by mutation_noise_std's noise and nothing redrawn; 0 leaves the count to mutation_sparsity.",
+   "glance": "a change of exactly so many numbers"
   }
  }
 }
