@@ -482,8 +482,11 @@ def runs(md: str, name: str) -> str:
     lines.append(f"**{number(worlds)} runs.** Every condition below is run once for "
                  + ("each of its seeds" if own else f"every seed ({seeds})")
                  + (" and every number of tokens it lists" if any(len(sizes(c)) > 1 for c in conditions)
-                                 else "") + f", for {number(spec['iterations'])} iterations — or "
-                 "until its world dies out. " + baseline(md, base) + "\n")
+                                 else "")
+                 + (f", played on from the world `{spec['from']['run']}` kept at iteration "
+                    f"{number(spec['from']['at'])}, to iteration {number(spec['iterations'])} — or "
+                    if "from" in spec else f", for {number(spec['iterations'])} iterations — or ")
+                 + "until its world dies out. " + baseline(md, base) + "\n")
     for c in conditions:
         # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
         drawn = drawn_as(c, base)

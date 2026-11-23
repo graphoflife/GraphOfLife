@@ -1015,5 +1015,2165 @@
     }
    ]
   }
+ },
+ "s3065": {
+  "rules": {
+   "contest": "lottery",
+   "redistribution": "local",
+   "mend_on_death": false,
+   "mutate_on_replication": true,
+   "mix_at_birth": true,
+   "mutation_probability": 0.2,
+   "mutation_noise_std": 0.2,
+   "mutation_sparsity": 0.1,
+   "keep_home": 0.0,
+   "allocation": "full"
+  },
+  "b1": {
+   "world": "s3065",
+   "run": "B1-30000-ba3afe-s3065",
+   "iteration": 3000,
+   "probes": 300,
+   "parents": 200,
+   "distinct_genotypes_among_parents": 180,
+   "agents": 1813,
+   "tokens_per_agent": 14.118587975730833,
+   "strangers_differ": {
+    "child": 0.14735343383584593,
+    "first": 0.7344221105527639,
+    "any": 0.7733333333333332
+   },
+   "operators": {
+    "engine": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.07172166666666667,
+      "first": 0.17308,
+      "any": 0.22644416666666667
+     },
+     "median_any": 0.13333333333333333,
+     "quartiles_any": [
+      0.09,
+      0.3333333333333333
+     ],
+     "relative_to_strangers_median": 0.17241379310344832,
+     "share_identical": 0.0,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0,
+     "share_over_25pct_of_scale": 0.4095,
+     "share_over_50pct_of_scale": 0.19125,
+     "share_as_far_as_a_stranger": 0.01925
+    },
+    "1": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.0011758333333333332,
+      "first": 0.00133,
+      "any": 0.0025008333333333336
+     },
+     "median_any": 0.0,
+     "quartiles_any": [
+      0.0,
+      0.0033333333333333335
+     ],
+     "relative_to_strangers_median": 0.0,
+     "share_identical": 0.70175,
+     "share_nearly_neutral_under_1pct_of_scale": 0.9235,
+     "share_over_25pct_of_scale": 0.00025,
+     "share_over_50pct_of_scale": 0.0,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "10": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.005360833333333334,
+      "first": 0.006873333333333333,
+      "any": 0.012182499999999997
+     },
+     "median_any": 0.006666666666666667,
+     "quartiles_any": [
+      0.0033333333333333335,
+      0.013333333333333334
+     ],
+     "relative_to_strangers_median": 0.008620689655172415,
+     "share_identical": 0.14625,
+     "share_nearly_neutral_under_1pct_of_scale": 0.5535,
+     "share_over_25pct_of_scale": 0.00175,
+     "share_over_50pct_of_scale": 0.0,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "100": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.0153225,
+      "first": 0.024854166666666663,
+      "any": 0.039744166666666664
+     },
+     "median_any": 0.03,
+     "quartiles_any": [
+      0.02,
+      0.04
+     ],
+     "relative_to_strangers_median": 0.03879310344827587,
+     "share_identical": 0.0015,
+     "share_nearly_neutral_under_1pct_of_scale": 0.03025,
+     "share_over_25pct_of_scale": 0.0175,
+     "share_over_50pct_of_scale": 0.00025,
+     "share_as_far_as_a_stranger": 0.0
+    }
+   },
+   "numbers_in_a_brain": 12085
+  },
+  "b2": {
+   "world": "s3065",
+   "run": "B1-30000-ba3afe-s3065",
+   "eras": [
+    {
+     "era": 0,
+     "agents": 300,
+     "tokens_each": 98.0,
+     "brains": 300,
+     "genotypes_among_them": 300,
+     "largest_clone_share": 0.0033333333333333335,
+     "components_for_90pct": 128,
+     "participation_ratio": 9.260632018727982,
+     "agree_with_most_common_first": 0.29048888888888885,
+     "agree_with_most_common_child": 0.3291222222222222,
+     "first_token_home": 0.2513111111111111,
+     "has_child": 0.7283333333333334,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 12,
+       "first_token_home": 0.45055555555555554,
+       "has_child": 0.27361111111111114,
+       "child_tokens_share": 0.27361111111111114
+      },
+      {
+       "tokens": "2",
+       "probes": 15,
+       "first_token_home": 0.4077777777777778,
+       "has_child": 0.6611111111111111,
+       "child_tokens_share": 0.4677777777777778
+      },
+      {
+       "tokens": "3",
+       "probes": 30,
+       "first_token_home": 0.4013333333333333,
+       "has_child": 0.7155555555555555,
+       "child_tokens_share": 0.44585185185185183
+      },
+      {
+       "tokens": "4-9",
+       "probes": 145,
+       "first_token_home": 0.2602758620689655,
+       "has_child": 0.7512183908045977,
+       "child_tokens_share": 0.49555886699507384
+      },
+      {
+       "tokens": "10+",
+       "probes": 98,
+       "first_token_home": 0.14377551020408164,
+       "has_child": 0.7643537414965986,
+       "child_tokens_share": 0.5092407797288668
+      }
+     ]
+    },
+    {
+     "era": 1500,
+     "agents": 2579,
+     "tokens_each": 9.289259402869328,
+     "brains": 1000,
+     "genotypes_among_them": 720,
+     "largest_clone_share": 0.006,
+     "components_for_90pct": 155,
+     "participation_ratio": 35.66601151694912,
+     "agree_with_most_common_first": 0.35708,
+     "agree_with_most_common_child": 0.9425699999999999,
+     "first_token_home": 0.24715333333333334,
+     "has_child": 0.05743,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 12,
+       "first_token_home": 0.43175,
+       "has_child": 0.003,
+       "child_tokens_share": 0.003
+      },
+      {
+       "tokens": "2",
+       "probes": 15,
+       "first_token_home": 0.41326666666666667,
+       "has_child": 0.025333333333333333,
+       "child_tokens_share": 0.013433333333333334
+      },
+      {
+       "tokens": "3",
+       "probes": 30,
+       "first_token_home": 0.3794666666666667,
+       "has_child": 0.03936666666666667,
+       "child_tokens_share": 0.015633333333333332
+      },
+      {
+       "tokens": "4-9",
+       "probes": 145,
+       "first_token_home": 0.25310344827586206,
+       "has_child": 0.054496551724137934,
+       "child_tokens_share": 0.01989944991789819
+      },
+      {
+       "tokens": "10+",
+       "probes": 98,
+       "first_token_home": 0.14981632653061225,
+       "has_child": 0.07887755102040817,
+       "child_tokens_share": 0.02389785871903104
+      }
+     ]
+    },
+    {
+     "era": 3000,
+     "agents": 1813,
+     "tokens_each": 14.118587975730833,
+     "brains": 1000,
+     "genotypes_among_them": 637,
+     "largest_clone_share": 0.013,
+     "components_for_90pct": 140,
+     "participation_ratio": 30.323829454812515,
+     "agree_with_most_common_first": 0.3417733333333333,
+     "agree_with_most_common_child": 0.9174300000000002,
+     "first_token_home": 0.25498333333333334,
+     "has_child": 0.08257,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 12,
+       "first_token_home": 0.4974166666666667,
+       "has_child": 0.010916666666666667,
+       "child_tokens_share": 0.010916666666666667
+      },
+      {
+       "tokens": "2",
+       "probes": 15,
+       "first_token_home": 0.42506666666666665,
+       "has_child": 0.0538,
+       "child_tokens_share": 0.029866666666666666
+      },
+      {
+       "tokens": "3",
+       "probes": 30,
+       "first_token_home": 0.4411,
+       "has_child": 0.069,
+       "child_tokens_share": 0.027344444444444442
+      },
+      {
+       "tokens": "4-9",
+       "probes": 145,
+       "first_token_home": 0.25799310344827586,
+       "has_child": 0.0818,
+       "child_tokens_share": 0.03550694581280788
+      },
+      {
+       "tokens": "10+",
+       "probes": 98,
+       "first_token_home": 0.13783673469387756,
+       "has_child": 0.10104081632653061,
+       "child_tokens_share": 0.04098175327875822
+      }
+     ]
+    }
+   ],
+   "probe_tokens": {
+    "1": 12,
+    "2": 15,
+    "3": 30,
+    "4": 32,
+    "5": 31,
+    "6": 33,
+    "7": 17,
+    "8": 18
+   },
+   "probe_candidates_median": 5.0
+  },
+  "a1": {
+   "world": "s3065",
+   "run": "B1-30000-ba3afe-s3065",
+   "eras": [
+    0,
+    250,
+    500,
+    750,
+    1000,
+    1250,
+    1500,
+    1750,
+    2000,
+    2250,
+    2500,
+    2750,
+    3000
+   ],
+   "floor": {
+    "child": 0.02058119658119658,
+    "first": 0.06526410256410256,
+    "home": 0.026599145299145303
+   },
+   "by_lag": [
+    {
+     "lag": 250,
+     "pairs": 11,
+     "child": 0.043346464646464654,
+     "first": 0.19670303030303032,
+     "home": 0.08553434343434342
+    },
+    {
+     "lag": 500,
+     "pairs": 10,
+     "child": 0.04759555555555556,
+     "first": 0.20840555555555557,
+     "home": 0.09007666666666667
+    },
+    {
+     "lag": 750,
+     "pairs": 9,
+     "child": 0.04264320987654321,
+     "first": 0.22154074074074076,
+     "home": 0.09437530864197533
+    },
+    {
+     "lag": 1000,
+     "pairs": 8,
+     "child": 0.04555138888888889,
+     "first": 0.22576249999999998,
+     "home": 0.09638055555555555
+    },
+    {
+     "lag": 1250,
+     "pairs": 7,
+     "child": 0.03536825396825397,
+     "first": 0.2221047619047619,
+     "home": 0.0965
+    },
+    {
+     "lag": 1500,
+     "pairs": 6,
+     "child": 0.049827777777777776,
+     "first": 0.20797592592592593,
+     "home": 0.08935
+    },
+    {
+     "lag": 1750,
+     "pairs": 5,
+     "child": 0.05293777777777777,
+     "first": 0.20525555555555558,
+     "home": 0.08561999999999999
+    },
+    {
+     "lag": 2000,
+     "pairs": 4,
+     "child": 0.04656111111111111,
+     "first": 0.20124166666666665,
+     "home": 0.08644444444444443
+    },
+    {
+     "lag": 2250,
+     "pairs": 3,
+     "child": 0.058911111111111115,
+     "first": 0.2007037037037037,
+     "home": 0.08616296296296296
+    },
+    {
+     "lag": 2500,
+     "pairs": 2,
+     "child": 0.0635,
+     "first": 0.20806666666666668,
+     "home": 0.08899444444444445
+    },
+    {
+     "lag": 2750,
+     "pairs": 1,
+     "child": 0.028255555555555555,
+     "first": 0.18854444444444443,
+     "home": 0.08064444444444442
+    }
+   ],
+   "slopes": {
+    "child": 0.12078908757074826,
+    "first": 0.0008731507318731452,
+    "home": -0.006306878192910199
+   },
+   "from_founders": [
+    {
+     "era": 250,
+     "child": 0.6852444444444444,
+     "first": 0.15207777777777776,
+     "home": 0.07364444444444444
+    },
+    {
+     "era": 500,
+     "child": 0.640788888888889,
+     "first": 0.1799888888888889,
+     "home": 0.07916666666666666
+    },
+    {
+     "era": 750,
+     "child": 0.7136333333333332,
+     "first": 0.16874444444444445,
+     "home": 0.07165555555555556
+    },
+    {
+     "era": 1000,
+     "child": 0.7343444444444445,
+     "first": 0.1672888888888889,
+     "home": 0.07226666666666666
+    },
+    {
+     "era": 1250,
+     "child": 0.6899888888888889,
+     "first": 0.15013333333333334,
+     "home": 0.06376666666666668
+    },
+    {
+     "era": 1500,
+     "child": 0.6968777777777778,
+     "first": 0.1570666666666667,
+     "home": 0.06303333333333333
+    },
+    {
+     "era": 1750,
+     "child": 0.6682222222222223,
+     "first": 0.16765555555555556,
+     "home": 0.06747777777777778
+    },
+    {
+     "era": 2000,
+     "child": 0.7348555555555555,
+     "first": 0.22572222222222224,
+     "home": 0.09736666666666667
+    },
+    {
+     "era": 2250,
+     "child": 0.7071111111111111,
+     "first": 0.16053333333333333,
+     "home": 0.06442222222222223
+    },
+    {
+     "era": 2500,
+     "child": 0.6754222222222223,
+     "first": 0.14734444444444444,
+     "home": 0.05817777777777778
+    },
+    {
+     "era": 2750,
+     "child": 0.7128111111111111,
+     "first": 0.16475555555555557,
+     "home": 0.0712
+    },
+    {
+     "era": 3000,
+     "child": 0.6780666666666666,
+     "first": 0.1505,
+     "home": 0.05806666666666666
+    }
+   ],
+   "eras_info": [
+    {
+     "era": 0,
+     "agents": 300,
+     "tokens_each": 98.0,
+     "genotypes": 300
+    },
+    {
+     "era": 250,
+     "agents": 2368,
+     "tokens_each": 10.400760135135135,
+     "genotypes": 1223
+    },
+    {
+     "era": 500,
+     "agents": 1802,
+     "tokens_each": 14.416204217536071,
+     "genotypes": 937
+    },
+    {
+     "era": 750,
+     "agents": 2079,
+     "tokens_each": 12.145262145262146,
+     "genotypes": 1082
+    },
+    {
+     "era": 1000,
+     "agents": 1941,
+     "tokens_each": 13.013910355486862,
+     "genotypes": 1026
+    },
+    {
+     "era": 1250,
+     "agents": 2218,
+     "tokens_each": 10.9463480613165,
+     "genotypes": 1188
+    },
+    {
+     "era": 1500,
+     "agents": 2579,
+     "tokens_each": 9.289259402869328,
+     "genotypes": 1365
+    },
+    {
+     "era": 1750,
+     "agents": 2264,
+     "tokens_each": 10.760600706713781,
+     "genotypes": 1153
+    },
+    {
+     "era": 2000,
+     "agents": 1267,
+     "tokens_each": 21.636148382004734,
+     "genotypes": 638
+    },
+    {
+     "era": 2250,
+     "agents": 2247,
+     "tokens_each": 11.434356920338228,
+     "genotypes": 1184
+    },
+    {
+     "era": 2500,
+     "agents": 2101,
+     "tokens_each": 12.110899571632556,
+     "genotypes": 1123
+    },
+    {
+     "era": 2750,
+     "agents": 2064,
+     "tokens_each": 12.503875968992247,
+     "genotypes": 1090
+    },
+    {
+     "era": 3000,
+     "agents": 1813,
+     "tokens_each": 14.118587975730833,
+     "genotypes": 955
+    }
+   ]
+  }
+ },
+ "s3019": {
+  "rules": {
+   "contest": "lottery",
+   "redistribution": "children",
+   "mend_on_death": true,
+   "mutate_on_replication": true,
+   "mix_at_birth": false,
+   "mutation_probability": 0.2,
+   "mutation_noise_std": 0.2,
+   "mutation_sparsity": 0.1,
+   "keep_home": 0.0,
+   "allocation": "full"
+  },
+  "b1": {
+   "world": "s3019",
+   "run": "B1-30000-b1209a-s3019",
+   "iteration": 3000,
+   "probes": 300,
+   "parents": 200,
+   "distinct_genotypes_among_parents": 184,
+   "agents": 3194,
+   "tokens_per_agent": 7.27864746399499,
+   "strangers_differ": {
+    "child": 0.18886666666666665,
+    "first": 0.7376166666666667,
+    "any": 0.7864666666666668
+   },
+   "operators": {
+    "engine": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.10014666666666668,
+      "first": 0.2154075,
+      "any": 0.28594
+     },
+     "median_any": 0.22666666666666666,
+     "quartiles_any": [
+      0.12333333333333334,
+      0.41
+     ],
+     "relative_to_strangers_median": 0.2882088666610155,
+     "share_identical": 0.0,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0,
+     "share_over_25pct_of_scale": 0.544,
+     "share_over_50pct_of_scale": 0.277,
+     "share_as_far_as_a_stranger": 0.02275
+    },
+    "1": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.0008166666666666666,
+      "first": 0.001715,
+      "any": 0.0025266666666666666
+     },
+     "median_any": 0.0,
+     "quartiles_any": [
+      0.0,
+      0.0033333333333333335
+     ],
+     "relative_to_strangers_median": 0.0,
+     "share_identical": 0.651,
+     "share_nearly_neutral_under_1pct_of_scale": 0.90775,
+     "share_over_25pct_of_scale": 0.0,
+     "share_over_50pct_of_scale": 0.0,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "10": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.004823333333333333,
+      "first": 0.009323333333333333,
+      "any": 0.014098333333333333
+     },
+     "median_any": 0.01,
+     "quartiles_any": [
+      0.006666666666666667,
+      0.016666666666666666
+     ],
+     "relative_to_strangers_median": 0.012715097058574213,
+     "share_identical": 0.08325,
+     "share_nearly_neutral_under_1pct_of_scale": 0.39625,
+     "share_over_25pct_of_scale": 0.0,
+     "share_over_50pct_of_scale": 0.0,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "100": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.016525,
+      "first": 0.03217666666666666,
+      "any": 0.04817333333333333
+     },
+     "median_any": 0.04,
+     "quartiles_any": [
+      0.02666666666666667,
+      0.056666666666666664
+     ],
+     "relative_to_strangers_median": 0.05086038823429685,
+     "share_identical": 0.0005,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0095,
+     "share_over_25pct_of_scale": 0.007,
+     "share_over_50pct_of_scale": 0.00025,
+     "share_as_far_as_a_stranger": 0.0
+    }
+   },
+   "numbers_in_a_brain": 10961
+  },
+  "b2": {
+   "world": "s3019",
+   "run": "B1-30000-b1209a-s3019",
+   "eras": [
+    {
+     "era": 0,
+     "agents": 300,
+     "tokens_each": 98.0,
+     "brains": 300,
+     "genotypes_among_them": 300,
+     "largest_clone_share": 0.0033333333333333335,
+     "components_for_90pct": 136,
+     "participation_ratio": 9.952326258131222,
+     "agree_with_most_common_first": 0.30743333333333334,
+     "agree_with_most_common_child": 0.32056666666666667,
+     "first_token_home": 0.26816666666666666,
+     "has_child": 0.6997,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 6,
+       "first_token_home": 0.45055555555555554,
+       "has_child": 0.2588888888888889,
+       "child_tokens_share": 0.2588888888888889
+      },
+      {
+       "tokens": "2",
+       "probes": 21,
+       "first_token_home": 0.3919047619047619,
+       "has_child": 0.6255555555555555,
+       "child_tokens_share": 0.43777777777777777
+      },
+      {
+       "tokens": "3",
+       "probes": 33,
+       "first_token_home": 0.3891919191919192,
+       "has_child": 0.676060606060606,
+       "child_tokens_share": 0.41471380471380465
+      },
+      {
+       "tokens": "4-9",
+       "probes": 146,
+       "first_token_home": 0.27687214611872146,
+       "has_child": 0.7128995433789954,
+       "child_tokens_share": 0.46344486120171047
+      },
+      {
+       "tokens": "10+",
+       "probes": 94,
+       "first_token_home": 0.17287234042553193,
+       "has_child": 0.7321985815602837,
+       "child_tokens_share": 0.4811507241547649
+      }
+     ]
+    },
+    {
+     "era": 1500,
+     "agents": 2957,
+     "tokens_each": 8.217450118363207,
+     "brains": 1000,
+     "genotypes_among_them": 740,
+     "largest_clone_share": 0.012,
+     "components_for_90pct": 185,
+     "participation_ratio": 25.859773718900037,
+     "agree_with_most_common_first": 0.3333566666666667,
+     "agree_with_most_common_child": 0.8714833333333333,
+     "first_token_home": 0.27619333333333335,
+     "has_child": 0.12851666666666667,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 6,
+       "first_token_home": 0.41383333333333333,
+       "has_child": 0.012,
+       "child_tokens_share": 0.012
+      },
+      {
+       "tokens": "2",
+       "probes": 21,
+       "first_token_home": 0.404,
+       "has_child": 0.07895238095238095,
+       "child_tokens_share": 0.0475
+      },
+      {
+       "tokens": "3",
+       "probes": 33,
+       "first_token_home": 0.39090909090909093,
+       "has_child": 0.11581818181818182,
+       "child_tokens_share": 0.05508080808080808
+      },
+      {
+       "tokens": "4-9",
+       "probes": 146,
+       "first_token_home": 0.28426027397260273,
+       "has_child": 0.12917123287671234,
+       "child_tokens_share": 0.05676007284192216
+      },
+      {
+       "tokens": "10+",
+       "probes": 94,
+       "first_token_home": 0.1860531914893617,
+       "has_child": 0.150468085106383,
+       "child_tokens_share": 0.0545377596376855
+      }
+     ]
+    },
+    {
+     "era": 3000,
+     "agents": 3194,
+     "tokens_each": 7.27864746399499,
+     "brains": 1000,
+     "genotypes_among_them": 760,
+     "largest_clone_share": 0.009,
+     "components_for_90pct": 185,
+     "participation_ratio": 25.04763928360006,
+     "agree_with_most_common_first": 0.3303466666666667,
+     "agree_with_most_common_child": 0.8708666666666667,
+     "first_token_home": 0.2677966666666667,
+     "has_child": 0.12913333333333332,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 6,
+       "first_token_home": 0.4495,
+       "has_child": 0.019333333333333334,
+       "child_tokens_share": 0.019333333333333334
+      },
+      {
+       "tokens": "2",
+       "probes": 21,
+       "first_token_home": 0.39004761904761903,
+       "has_child": 0.08876190476190476,
+       "child_tokens_share": 0.053976190476190476
+      },
+      {
+       "tokens": "3",
+       "probes": 33,
+       "first_token_home": 0.37572727272727274,
+       "has_child": 0.12327272727272727,
+       "child_tokens_share": 0.06092929292929292
+      },
+      {
+       "tokens": "4-9",
+       "probes": 146,
+       "first_token_home": 0.28027397260273973,
+       "has_child": 0.13205479452054794,
+       "child_tokens_share": 0.06304632257012395
+      },
+      {
+       "tokens": "10+",
+       "probes": 94,
+       "first_token_home": 0.17161702127659575,
+       "has_child": 0.1426808510638298,
+       "child_tokens_share": 0.060648484733017906
+      }
+     ]
+    }
+   ],
+   "probe_tokens": {
+    "1": 6,
+    "2": 21,
+    "3": 33,
+    "4": 36,
+    "5": 39,
+    "6": 23,
+    "7": 20,
+    "8": 14
+   },
+   "probe_candidates_median": 4.0
+  },
+  "a1": {
+   "world": "s3019",
+   "run": "B1-30000-b1209a-s3019",
+   "eras": [
+    0,
+    250,
+    500,
+    750,
+    1000,
+    1250,
+    1500,
+    1750,
+    2000,
+    2250,
+    2500,
+    2750,
+    3000
+   ],
+   "floor": {
+    "child": 0.023009401709401713,
+    "first": 0.06414529914529915,
+    "home": 0.029018803418803415
+   },
+   "by_lag": [
+    {
+     "lag": 250,
+     "pairs": 11,
+     "child": 0.036431313131313134,
+     "first": 0.1292979797979798,
+     "home": 0.06101414141414141
+    },
+    {
+     "lag": 500,
+     "pairs": 10,
+     "child": 0.04286555555555556,
+     "first": 0.13011444444444445,
+     "home": 0.062082222222222226
+    },
+    {
+     "lag": 750,
+     "pairs": 9,
+     "child": 0.04208024691358025,
+     "first": 0.1338246913580247,
+     "home": 0.06418024691358025
+    },
+    {
+     "lag": 1000,
+     "pairs": 8,
+     "child": 0.04445416666666667,
+     "first": 0.13056666666666666,
+     "home": 0.06065833333333333
+    },
+    {
+     "lag": 1250,
+     "pairs": 7,
+     "child": 0.042296825396825395,
+     "first": 0.1295285714285714,
+     "home": 0.059271428571428565
+    },
+    {
+     "lag": 1500,
+     "pairs": 6,
+     "child": 0.03903518518518518,
+     "first": 0.13487407407407406,
+     "home": 0.06509074074074074
+    },
+    {
+     "lag": 1750,
+     "pairs": 5,
+     "child": 0.04299555555555556,
+     "first": 0.1325111111111111,
+     "home": 0.06360666666666667
+    },
+    {
+     "lag": 2000,
+     "pairs": 4,
+     "child": 0.046922222222222226,
+     "first": 0.13503055555555554,
+     "home": 0.06358611111111111
+    },
+    {
+     "lag": 2250,
+     "pairs": 3,
+     "child": 0.04623333333333333,
+     "first": 0.13170370370370368,
+     "home": 0.0604925925925926
+    },
+    {
+     "lag": 2500,
+     "pairs": 2,
+     "child": 0.05241111111111111,
+     "first": 0.12928333333333336,
+     "home": 0.059972222222222225
+    },
+    {
+     "lag": 2750,
+     "pairs": 1,
+     "child": 0.04162222222222223,
+     "first": 0.11976666666666666,
+     "home": 0.056355555555555555
+    }
+   ],
+   "slopes": {
+    "child": 0.10030632125501475,
+    "first": 0.008161941174691633,
+    "home": 0.0006429350655843627
+   },
+   "from_founders": [
+    {
+     "era": 250,
+     "child": 0.5007444444444444,
+     "first": 0.12064444444444443,
+     "home": 0.0556
+    },
+    {
+     "era": 500,
+     "child": 0.49407777777777784,
+     "first": 0.11967777777777779,
+     "home": 0.05577777777777778
+    },
+    {
+     "era": 750,
+     "child": 0.5540111111111111,
+     "first": 0.11143333333333333,
+     "home": 0.04825555555555556
+    },
+    {
+     "era": 1000,
+     "child": 0.5906444444444444,
+     "first": 0.14484444444444444,
+     "home": 0.06992222222222222
+    },
+    {
+     "era": 1250,
+     "child": 0.5577444444444444,
+     "first": 0.1148111111111111,
+     "home": 0.053988888888888885
+    },
+    {
+     "era": 1500,
+     "child": 0.5835222222222223,
+     "first": 0.10952222222222223,
+     "home": 0.051155555555555544
+    },
+    {
+     "era": 1750,
+     "child": 0.5883,
+     "first": 0.11313333333333332,
+     "home": 0.051211111111111096
+    },
+    {
+     "era": 2000,
+     "child": 0.5258444444444444,
+     "first": 0.11318888888888888,
+     "home": 0.050055555555555555
+    },
+    {
+     "era": 2250,
+     "child": 0.5887888888888888,
+     "first": 0.10933333333333335,
+     "home": 0.04913333333333333
+    },
+    {
+     "era": 2500,
+     "child": 0.5676777777777778,
+     "first": 0.12675555555555554,
+     "home": 0.05991111111111112
+    },
+    {
+     "era": 2750,
+     "child": 0.5767666666666666,
+     "first": 0.1259777777777778,
+     "home": 0.05654444444444444
+    },
+    {
+     "era": 3000,
+     "child": 0.5608444444444445,
+     "first": 0.11215555555555556,
+     "home": 0.0529
+    }
+   ],
+   "eras_info": [
+    {
+     "era": 0,
+     "agents": 300,
+     "tokens_each": 98.0,
+     "genotypes": 300
+    },
+    {
+     "era": 250,
+     "agents": 2988,
+     "tokens_each": 8.112784471218205,
+     "genotypes": 1529
+    },
+    {
+     "era": 500,
+     "agents": 3320,
+     "tokens_each": 7.264759036144579,
+     "genotypes": 1711
+    },
+    {
+     "era": 750,
+     "agents": 2955,
+     "tokens_each": 8.412182741116752,
+     "genotypes": 1527
+    },
+    {
+     "era": 1000,
+     "agents": 2633,
+     "tokens_each": 9.321306494492974,
+     "genotypes": 1354
+    },
+    {
+     "era": 1250,
+     "agents": 2550,
+     "tokens_each": 9.993333333333334,
+     "genotypes": 1370
+    },
+    {
+     "era": 1500,
+     "agents": 2957,
+     "tokens_each": 8.217450118363207,
+     "genotypes": 1580
+    },
+    {
+     "era": 1750,
+     "agents": 2898,
+     "tokens_each": 8.584541062801932,
+     "genotypes": 1517
+    },
+    {
+     "era": 2000,
+     "agents": 3117,
+     "tokens_each": 7.931023419955085,
+     "genotypes": 1640
+    },
+    {
+     "era": 2250,
+     "agents": 3054,
+     "tokens_each": 7.942043222003929,
+     "genotypes": 1638
+    },
+    {
+     "era": 2500,
+     "agents": 2898,
+     "tokens_each": 8.4648033126294,
+     "genotypes": 1563
+    },
+    {
+     "era": 2750,
+     "agents": 3203,
+     "tokens_each": 7.360287230721199,
+     "genotypes": 1702
+    },
+    {
+     "era": 3000,
+     "agents": 3194,
+     "tokens_each": 7.27864746399499,
+     "genotypes": 1692
+    }
+   ]
+  }
+ },
+ "s3080": {
+  "rules": {
+   "contest": "largest",
+   "redistribution": "children",
+   "mend_on_death": true,
+   "mutate_on_replication": false,
+   "mix_at_birth": false,
+   "mutation_probability": 0.4,
+   "mutation_noise_std": 0.4,
+   "mutation_sparsity": 0.1,
+   "keep_home": 0.0,
+   "allocation": "full"
+  },
+  "b1": {
+   "world": "s3080",
+   "run": "B1-30000-625bc7-s3080",
+   "iteration": 3000,
+   "probes": 300,
+   "parents": 200,
+   "distinct_genotypes_among_parents": 189,
+   "agents": 1685,
+   "tokens_per_agent": 15.77032640949555,
+   "strangers_differ": {
+    "child": 0.19515000000000002,
+    "first": 0.7096833333333333,
+    "any": 0.7621166666666666
+   },
+   "operators": {
+    "engine": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.11395583333333333,
+      "first": 0.3380966666666667,
+      "any": 0.4095925
+     },
+     "median_any": 0.3683333333333333,
+     "quartiles_any": [
+      0.25333333333333335,
+      0.5366666666666666
+     ],
+     "relative_to_strangers_median": 0.48330308133050504,
+     "share_identical": 0.0,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0,
+     "share_over_25pct_of_scale": 0.88775,
+     "share_over_50pct_of_scale": 0.47375,
+     "share_as_far_as_a_stranger": 0.069
+    },
+    "1": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.004324166666666667,
+      "first": 0.008281666666666666,
+      "any": 0.012469166666666667
+     },
+     "median_any": 0.0,
+     "quartiles_any": [
+      0.0,
+      0.013333333333333334
+     ],
+     "relative_to_strangers_median": 0.0,
+     "share_identical": 0.50425,
+     "share_nearly_neutral_under_1pct_of_scale": 0.69025,
+     "share_over_25pct_of_scale": 0.004,
+     "share_over_50pct_of_scale": 0.00025,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "10": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.0212025,
+      "first": 0.050130833333333326,
+      "any": 0.069935
+     },
+     "median_any": 0.05,
+     "quartiles_any": [
+      0.03,
+      0.08666666666666667
+     ],
+     "relative_to_strangers_median": 0.06560675312178801,
+     "share_identical": 0.00525,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0395,
+     "share_over_25pct_of_scale": 0.05075,
+     "share_over_50pct_of_scale": 0.007,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "100": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.05945166666666666,
+      "first": 0.17696916666666668,
+      "any": 0.22541083333333334
+     },
+     "median_any": 0.19333333333333333,
+     "quartiles_any": [
+      0.13666666666666666,
+      0.27666666666666667
+     ],
+     "relative_to_strangers_median": 0.253679445404247,
+     "share_identical": 0.0,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0,
+     "share_over_25pct_of_scale": 0.50925,
+     "share_over_50pct_of_scale": 0.111,
+     "share_as_far_as_a_stranger": 0.00575
+    }
+   },
+   "numbers_in_a_brain": 2333
+  },
+  "b2": {
+   "world": "s3080",
+   "run": "B1-30000-625bc7-s3080",
+   "eras": [
+    {
+     "era": 0,
+     "agents": 300,
+     "tokens_each": 98.0,
+     "brains": 300,
+     "genotypes_among_them": 300,
+     "largest_clone_share": 0.0033333333333333335,
+     "components_for_90pct": 107,
+     "participation_ratio": 7.646537923906054,
+     "agree_with_most_common_first": 0.3635333333333333,
+     "agree_with_most_common_child": 0.3260333333333333,
+     "first_token_home": 0.3161555555555556,
+     "has_child": 0.7131777777777778,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 6,
+       "first_token_home": 0.48444444444444446,
+       "has_child": 0.2477777777777778,
+       "child_tokens_share": 0.2477777777777778
+      },
+      {
+       "tokens": "2",
+       "probes": 17,
+       "first_token_home": 0.45529411764705885,
+       "has_child": 0.6358823529411765,
+       "child_tokens_share": 0.4404901960784314
+      },
+      {
+       "tokens": "3",
+       "probes": 29,
+       "first_token_home": 0.41379310344827586,
+       "has_child": 0.6757471264367816,
+       "child_tokens_share": 0.41126436781609194
+      },
+      {
+       "tokens": "4-9",
+       "probes": 137,
+       "first_token_home": 0.35525547445255473,
+       "has_child": 0.7228710462287105,
+       "child_tokens_share": 0.4688003321360985
+      },
+      {
+       "tokens": "10+",
+       "probes": 111,
+       "first_token_home": 0.21198198198198198,
+       "has_child": 0.7479879879879879,
+       "child_tokens_share": 0.48942366345280275
+      }
+     ]
+    },
+    {
+     "era": 1500,
+     "agents": 2154,
+     "tokens_each": 12.14020427112349,
+     "brains": 1000,
+     "genotypes_among_them": 869,
+     "largest_clone_share": 0.005,
+     "components_for_90pct": 191,
+     "participation_ratio": 15.851897681396771,
+     "agree_with_most_common_first": 0.36404333333333333,
+     "agree_with_most_common_child": 0.8613799999999999,
+     "first_token_home": 0.32564333333333334,
+     "has_child": 0.13862,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 6,
+       "first_token_home": 0.46116666666666667,
+       "has_child": 0.019666666666666666,
+       "child_tokens_share": 0.019666666666666666
+      },
+      {
+       "tokens": "2",
+       "probes": 17,
+       "first_token_home": 0.4663529411764706,
+       "has_child": 0.08947058823529412,
+       "child_tokens_share": 0.05202941176470588
+      },
+      {
+       "tokens": "3",
+       "probes": 29,
+       "first_token_home": 0.4264137931034483,
+       "has_child": 0.10768965517241379,
+       "child_tokens_share": 0.04578160919540229
+      },
+      {
+       "tokens": "4-9",
+       "probes": 137,
+       "first_token_home": 0.36825547445255474,
+       "has_child": 0.13593430656934308,
+       "child_tokens_share": 0.05970415652879157
+      },
+      {
+       "tokens": "10+",
+       "probes": 111,
+       "first_token_home": 0.21784684684684685,
+       "has_child": 0.16397297297297297,
+       "child_tokens_share": 0.06373593262829311
+      }
+     ]
+    },
+    {
+     "era": 3000,
+     "agents": 1685,
+     "tokens_each": 15.77032640949555,
+     "brains": 1000,
+     "genotypes_among_them": 850,
+     "largest_clone_share": 0.005,
+     "components_for_90pct": 185,
+     "participation_ratio": 18.664826849357613,
+     "agree_with_most_common_first": 0.3568966666666667,
+     "agree_with_most_common_child": 0.8830733333333334,
+     "first_token_home": 0.30568666666666666,
+     "has_child": 0.11692666666666666,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 6,
+       "first_token_home": 0.419,
+       "has_child": 0.006166666666666667,
+       "child_tokens_share": 0.006166666666666667
+      },
+      {
+       "tokens": "2",
+       "probes": 17,
+       "first_token_home": 0.44223529411764706,
+       "has_child": 0.08988235294117647,
+       "child_tokens_share": 0.04852941176470588
+      },
+      {
+       "tokens": "3",
+       "probes": 29,
+       "first_token_home": 0.4074137931034483,
+       "has_child": 0.09748275862068966,
+       "child_tokens_share": 0.03780459770114941
+      },
+      {
+       "tokens": "4-9",
+       "probes": 137,
+       "first_token_home": 0.34497810218978103,
+       "has_child": 0.11603649635036496,
+       "child_tokens_share": 0.051873351871162085
+      },
+      {
+       "tokens": "10+",
+       "probes": 111,
+       "first_token_home": 0.20357657657657657,
+       "has_child": 0.13323423423423422,
+       "child_tokens_share": 0.05574380890653504
+      }
+     ]
+    }
+   ],
+   "probe_tokens": {
+    "1": 6,
+    "2": 17,
+    "3": 29,
+    "4": 36,
+    "5": 23,
+    "6": 23,
+    "7": 17,
+    "8": 18
+   },
+   "probe_candidates_median": 4.0
+  },
+  "a1": {
+   "world": "s3080",
+   "run": "B1-30000-625bc7-s3080",
+   "eras": [
+    0,
+    250,
+    500,
+    750,
+    1000,
+    1250,
+    1500,
+    1750,
+    2000,
+    2250,
+    2500,
+    2750,
+    3000
+   ],
+   "floor": {
+    "child": 0.025252136752136757,
+    "first": 0.056780341880341874,
+    "home": 0.02833760683760684
+   },
+   "by_lag": [
+    {
+     "lag": 250,
+     "pairs": 11,
+     "child": 0.041990909090909086,
+     "first": 0.08205454545454546,
+     "home": 0.04211212121212121
+    },
+    {
+     "lag": 500,
+     "pairs": 10,
+     "child": 0.053295555555555554,
+     "first": 0.08339888888888888,
+     "home": 0.04161444444444444
+    },
+    {
+     "lag": 750,
+     "pairs": 9,
+     "child": 0.05948271604938271,
+     "first": 0.0861716049382716,
+     "home": 0.04393086419753087
+    },
+    {
+     "lag": 1000,
+     "pairs": 8,
+     "child": 0.056275,
+     "first": 0.08752777777777779,
+     "home": 0.04471111111111111
+    },
+    {
+     "lag": 1250,
+     "pairs": 7,
+     "child": 0.05296190476190476,
+     "first": 0.0854809523809524,
+     "home": 0.042592063492063494
+    },
+    {
+     "lag": 1500,
+     "pairs": 6,
+     "child": 0.04990925925925926,
+     "first": 0.08267592592592593,
+     "home": 0.04250370370370371
+    },
+    {
+     "lag": 1750,
+     "pairs": 5,
+     "child": 0.0346088888888889,
+     "first": 0.08694444444444445,
+     "home": 0.04310222222222222
+    },
+    {
+     "lag": 2000,
+     "pairs": 4,
+     "child": 0.057744444444444445,
+     "first": 0.08748888888888888,
+     "home": 0.04268333333333333
+    },
+    {
+     "lag": 2250,
+     "pairs": 3,
+     "child": 0.053381481481481474,
+     "first": 0.08124074074074074,
+     "home": 0.04122592592592592
+    },
+    {
+     "lag": 2500,
+     "pairs": 2,
+     "child": 0.04204444444444445,
+     "first": 0.08436111111111111,
+     "home": 0.042616666666666664
+    },
+    {
+     "lag": 2750,
+     "pairs": 1,
+     "child": 0.06546666666666666,
+     "first": 0.08307777777777778,
+     "home": 0.0407
+    }
+   ],
+   "slopes": {
+    "child": -0.008293872426783085,
+    "first": 0.008586352157465716,
+    "home": 0.0002497737899206093
+   },
+   "from_founders": [
+    {
+     "era": 250,
+     "child": 0.6080222222222224,
+     "first": 0.07785555555555557,
+     "home": 0.03806666666666667
+    },
+    {
+     "era": 500,
+     "child": 0.5856,
+     "first": 0.08085555555555556,
+     "home": 0.04288888888888889
+    },
+    {
+     "era": 750,
+     "child": 0.5418222222222223,
+     "first": 0.07687777777777778,
+     "home": 0.03667777777777778
+    },
+    {
+     "era": 1000,
+     "child": 0.5346888888888889,
+     "first": 0.0858111111111111,
+     "home": 0.04417777777777778
+    },
+    {
+     "era": 1250,
+     "child": 0.6568999999999999,
+     "first": 0.07705555555555556,
+     "home": 0.04173333333333334
+    },
+    {
+     "era": 1500,
+     "child": 0.5881333333333334,
+     "first": 0.07855555555555556,
+     "home": 0.03723333333333333
+    },
+    {
+     "era": 1750,
+     "child": 0.6111333333333333,
+     "first": 0.07993333333333333,
+     "home": 0.04021111111111111
+    },
+    {
+     "era": 2000,
+     "child": 0.5995666666666667,
+     "first": 0.0772,
+     "home": 0.04123333333333334
+    },
+    {
+     "era": 2250,
+     "child": 0.5749777777777778,
+     "first": 0.07836666666666665,
+     "home": 0.03822222222222222
+    },
+    {
+     "era": 2500,
+     "child": 0.5572555555555556,
+     "first": 0.07533333333333334,
+     "home": 0.04138888888888888
+    },
+    {
+     "era": 2750,
+     "child": 0.5745666666666667,
+     "first": 0.07602222222222221,
+     "home": 0.0385
+    },
+    {
+     "era": 3000,
+     "child": 0.6388444444444444,
+     "first": 0.07634444444444445,
+     "home": 0.04047777777777778
+    }
+   ],
+   "eras_info": [
+    {
+     "era": 0,
+     "agents": 300,
+     "tokens_each": 98.0,
+     "genotypes": 300
+    },
+    {
+     "era": 250,
+     "agents": 2229,
+     "tokens_each": 11.586810228802154,
+     "genotypes": 1778
+    },
+    {
+     "era": 500,
+     "agents": 2079,
+     "tokens_each": 12.774891774891774,
+     "genotypes": 1656
+    },
+    {
+     "era": 750,
+     "agents": 1914,
+     "tokens_each": 14.137408568443051,
+     "genotypes": 1555
+    },
+    {
+     "era": 1000,
+     "agents": 2020,
+     "tokens_each": 12.866336633663366,
+     "genotypes": 1627
+    },
+    {
+     "era": 1250,
+     "agents": 1767,
+     "tokens_each": 15.105829088851161,
+     "genotypes": 1427
+    },
+    {
+     "era": 1500,
+     "agents": 2154,
+     "tokens_each": 12.14020427112349,
+     "genotypes": 1733
+    },
+    {
+     "era": 1750,
+     "agents": 1985,
+     "tokens_each": 13.359697732997482,
+     "genotypes": 1616
+    },
+    {
+     "era": 2000,
+     "agents": 1753,
+     "tokens_each": 15.456930975470621,
+     "genotypes": 1432
+    },
+    {
+     "era": 2250,
+     "agents": 1674,
+     "tokens_each": 16.27180406212664,
+     "genotypes": 1359
+    },
+    {
+     "era": 2500,
+     "agents": 2142,
+     "tokens_each": 12.394957983193278,
+     "genotypes": 1770
+    },
+    {
+     "era": 2750,
+     "agents": 2336,
+     "tokens_each": 11.30222602739726,
+     "genotypes": 1902
+    },
+    {
+     "era": 3000,
+     "agents": 1685,
+     "tokens_each": 15.77032640949555,
+     "genotypes": 1314
+    }
+   ]
+  }
+ },
+ "s3058": {
+  "rules": {
+   "contest": "largest",
+   "redistribution": "children",
+   "mend_on_death": true,
+   "mutate_on_replication": true,
+   "mix_at_birth": false,
+   "mutation_probability": 0.2,
+   "mutation_noise_std": 0.2,
+   "mutation_sparsity": 0.1,
+   "keep_home": 0.0,
+   "allocation": "full"
+  },
+  "b1": {
+   "world": "s3058",
+   "run": "B1-30000-4108dd-s3058",
+   "iteration": 3000,
+   "probes": 300,
+   "parents": 200,
+   "distinct_genotypes_among_parents": 146,
+   "agents": 829,
+   "tokens_per_agent": 33.46562123039807,
+   "strangers_differ": {
+    "child": 0.37723905723905726,
+    "first": 0.621902356902357,
+    "any": 0.7494107744107745
+   },
+   "operators": {
+    "engine": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.18205333333333334,
+      "first": 0.2175958333333333,
+      "any": 0.3488475
+     },
+     "median_any": 0.2633333333333333,
+     "quartiles_any": [
+      0.14,
+      0.51
+     ],
+     "relative_to_strangers_median": 0.3513871728630798,
+     "share_identical": 0.0,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0,
+     "share_over_25pct_of_scale": 0.62375,
+     "share_over_50pct_of_scale": 0.37425,
+     "share_as_far_as_a_stranger": 0.1035
+    },
+    "1": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.004834166666666666,
+      "first": 0.001745,
+      "any": 0.0065625
+     },
+     "median_any": 0.0,
+     "quartiles_any": [
+      0.0,
+      0.006666666666666667
+     ],
+     "relative_to_strangers_median": 0.0,
+     "share_identical": 0.56375,
+     "share_nearly_neutral_under_1pct_of_scale": 0.8175,
+     "share_over_25pct_of_scale": 0.00125,
+     "share_over_50pct_of_scale": 0.0,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "10": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.019875,
+      "first": 0.008471666666666666,
+      "any": 0.02820083333333333
+     },
+     "median_any": 0.013333333333333334,
+     "quartiles_any": [
+      0.006666666666666667,
+      0.03
+     ],
+     "relative_to_strangers_median": 0.01779175558800404,
+     "share_identical": 0.092,
+     "share_nearly_neutral_under_1pct_of_scale": 0.36625,
+     "share_over_25pct_of_scale": 0.017,
+     "share_over_50pct_of_scale": 0.0005,
+     "share_as_far_as_a_stranger": 0.0
+    },
+    "100": {
+     "mutants": 4000,
+     "probes_decided_differently": {
+      "child": 0.04664333333333333,
+      "first": 0.03108,
+      "any": 0.0762775
+     },
+     "median_any": 0.043333333333333335,
+     "quartiles_any": [
+      0.02666666666666667,
+      0.08333333333333333
+     ],
+     "relative_to_strangers_median": 0.057823205661013136,
+     "share_identical": 0.0025,
+     "share_nearly_neutral_under_1pct_of_scale": 0.0275,
+     "share_over_25pct_of_scale": 0.0975,
+     "share_over_50pct_of_scale": 0.02175,
+     "share_as_far_as_a_stranger": 0.0
+    }
+   },
+   "numbers_in_a_brain": 13569
+  },
+  "b2": {
+   "world": "s3058",
+   "run": "B1-30000-4108dd-s3058",
+   "eras": [
+    {
+     "era": 0,
+     "agents": 600,
+     "tokens_each": 47.0,
+     "brains": 600,
+     "genotypes_among_them": 600,
+     "largest_clone_share": 0.0016666666666666668,
+     "components_for_90pct": 143,
+     "participation_ratio": 6.645479486040283,
+     "agree_with_most_common_first": 0.30395555555555553,
+     "agree_with_most_common_child": 0.28999444444444444,
+     "first_token_home": 0.24885555555555555,
+     "has_child": 0.7234277777777778,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 4,
+       "first_token_home": 0.4891666666666667,
+       "has_child": 0.27708333333333335,
+       "child_tokens_share": 0.27708333333333335
+      },
+      {
+       "tokens": "2",
+       "probes": 6,
+       "first_token_home": 0.43472222222222223,
+       "has_child": 0.6222222222222222,
+       "child_tokens_share": 0.4452777777777778
+      },
+      {
+       "tokens": "3",
+       "probes": 7,
+       "first_token_home": 0.4054761904761905,
+       "has_child": 0.669047619047619,
+       "child_tokens_share": 0.42492063492063487
+      },
+      {
+       "tokens": "4-9",
+       "probes": 78,
+       "first_token_home": 0.3426923076923077,
+       "has_child": 0.713440170940171,
+       "child_tokens_share": 0.4750429555012889
+      },
+      {
+       "tokens": "10+",
+       "probes": 205,
+       "first_token_home": 0.19767479674796748,
+       "has_child": 0.7407560975609756,
+       "child_tokens_share": 0.4925365069862804
+      }
+     ]
+    },
+    {
+     "era": 1500,
+     "agents": 1196,
+     "tokens_each": 21.818561872909697,
+     "brains": 1000,
+     "genotypes_among_them": 549,
+     "largest_clone_share": 0.015,
+     "components_for_90pct": 120,
+     "participation_ratio": 15.17168067149433,
+     "agree_with_most_common_first": 0.39887333333333336,
+     "agree_with_most_common_child": 0.8540166666666666,
+     "first_token_home": 0.27109,
+     "has_child": 0.14598333333333333,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 4,
+       "first_token_home": 0.4205,
+       "has_child": 0.0035,
+       "child_tokens_share": 0.0035
+      },
+      {
+       "tokens": "2",
+       "probes": 6,
+       "first_token_home": 0.619,
+       "has_child": 0.09033333333333333,
+       "child_tokens_share": 0.04775
+      },
+      {
+       "tokens": "3",
+       "probes": 7,
+       "first_token_home": 0.5165714285714286,
+       "has_child": 0.07842857142857143,
+       "child_tokens_share": 0.028047619047619043
+      },
+      {
+       "tokens": "4-9",
+       "probes": 78,
+       "first_token_home": 0.40447435897435896,
+       "has_child": 0.1286923076923077,
+       "child_tokens_share": 0.05704680504680505
+      },
+      {
+       "tokens": "10+",
+       "probes": 205,
+       "first_token_home": 0.19885853658536584,
+       "has_child": 0.15927804878048782,
+       "child_tokens_share": 0.06267061239779975
+      }
+     ]
+    },
+    {
+     "era": 3000,
+     "agents": 829,
+     "tokens_each": 33.46562123039807,
+     "brains": 829,
+     "genotypes_among_them": 404,
+     "largest_clone_share": 0.033775633293124246,
+     "components_for_90pct": 78,
+     "participation_ratio": 8.401270758677349,
+     "agree_with_most_common_first": 0.4712464817048653,
+     "agree_with_most_common_child": 0.8104342581423402,
+     "first_token_home": 0.42447527141133895,
+     "has_child": 0.18956574185765984,
+     "policy": [
+      {
+       "tokens": "1",
+       "probes": 4,
+       "first_token_home": 0.637816646562123,
+       "has_child": 0.012364294330518697,
+       "child_tokens_share": 0.012364294330518697
+      },
+      {
+       "tokens": "2",
+       "probes": 6,
+       "first_token_home": 0.6718938480096501,
+       "has_child": 0.16063530357860878,
+       "child_tokens_share": 0.0851427422597507
+      },
+      {
+       "tokens": "3",
+       "probes": 7,
+       "first_token_home": 0.6939514044459762,
+       "has_child": 0.1643977253144925,
+       "child_tokens_share": 0.06450686426560974
+      },
+      {
+       "tokens": "4-9",
+       "probes": 78,
+       "first_token_home": 0.5650459311496706,
+       "has_child": 0.1746156939160558,
+       "child_tokens_share": 0.07866327368739913
+      },
+      {
+       "tokens": "10+",
+       "probes": 205,
+       "first_token_home": 0.35038394774780074,
+       "has_child": 0.2004177822236606,
+       "child_tokens_share": 0.08486943006809508
+      }
+     ]
+    }
+   ],
+   "probe_tokens": {
+    "1": 4,
+    "2": 6,
+    "3": 7,
+    "4": 16,
+    "5": 16,
+    "6": 14,
+    "7": 11,
+    "8": 13
+   },
+   "probe_candidates_median": 5.0
+  },
+  "a1": {
+   "world": "s3058",
+   "run": "B1-30000-4108dd-s3058",
+   "eras": [
+    0,
+    250,
+    500,
+    750,
+    1000,
+    1250,
+    1500,
+    1750,
+    2000,
+    2250,
+    2500,
+    2750,
+    3000
+   ],
+   "floor": {
+    "child": 0.020775213675213674,
+    "first": 0.06615555555555556,
+    "home": 0.025132478632478635
+   },
+   "by_lag": [
+    {
+     "lag": 250,
+     "pairs": 11,
+     "child": 0.08996868686868688,
+     "first": 0.30187979797979797,
+     "home": 0.13976060606060606
+    },
+    {
+     "lag": 500,
+     "pairs": 10,
+     "child": 0.09289222222222224,
+     "first": 0.32195111111111113,
+     "home": 0.14927333333333334
+    },
+    {
+     "lag": 750,
+     "pairs": 9,
+     "child": 0.0812246913580247,
+     "first": 0.32942839506172844,
+     "home": 0.1568
+    },
+    {
+     "lag": 1000,
+     "pairs": 8,
+     "child": 0.09582777777777776,
+     "first": 0.31367083333333334,
+     "home": 0.14778750000000002
+    },
+    {
+     "lag": 1250,
+     "pairs": 7,
+     "child": 0.07605079365079366,
+     "first": 0.33270952380952384,
+     "home": 0.15363968253968255
+    },
+    {
+     "lag": 1500,
+     "pairs": 6,
+     "child": 0.08125370370370369,
+     "first": 0.3369740740740741,
+     "home": 0.15823148148148147
+    },
+    {
+     "lag": 1750,
+     "pairs": 5,
+     "child": 0.11065555555555555,
+     "first": 0.3664888888888888,
+     "home": 0.18033333333333332
+    },
+    {
+     "lag": 2000,
+     "pairs": 4,
+     "child": 0.10364722222222224,
+     "first": 0.3614833333333333,
+     "home": 0.17748888888888892
+    },
+    {
+     "lag": 2250,
+     "pairs": 3,
+     "child": 0.11221481481481481,
+     "first": 0.42928888888888883,
+     "home": 0.2215777777777778
+    },
+    {
+     "lag": 2500,
+     "pairs": 2,
+     "child": 0.06710555555555556,
+     "first": 0.41198888888888885,
+     "home": 0.20889444444444444
+    },
+    {
+     "lag": 2750,
+     "pairs": 1,
+     "child": 0.11145555555555556,
+     "first": 0.4797444444444445,
+     "home": 0.2722
+    }
+   ],
+   "slopes": {
+    "child": 0.010957487216826234,
+    "first": 0.1286959103468183,
+    "home": 0.16914977338511836
+   },
+   "from_founders": [
+    {
+     "era": 250,
+     "child": 0.6326333333333334,
+     "first": 0.31652222222222226,
+     "home": 0.12685555555555553
+    },
+    {
+     "era": 500,
+     "child": 0.5546444444444444,
+     "first": 0.30723333333333336,
+     "home": 0.13265555555555555
+    },
+    {
+     "era": 750,
+     "child": 0.5728666666666667,
+     "first": 0.21983333333333335,
+     "home": 0.08243333333333333
+    },
+    {
+     "era": 1000,
+     "child": 0.4509222222222222,
+     "first": 0.17099999999999999,
+     "home": 0.06592222222222222
+    },
+    {
+     "era": 1250,
+     "child": 0.5696666666666668,
+     "first": 0.22442222222222222,
+     "home": 0.08456666666666666
+    },
+    {
+     "era": 1500,
+     "child": 0.5837888888888888,
+     "first": 0.22031111111111112,
+     "home": 0.09274444444444445
+    },
+    {
+     "era": 1750,
+     "child": 0.4868111111111112,
+     "first": 0.24806666666666669,
+     "home": 0.13081111111111107
+    },
+    {
+     "era": 2000,
+     "child": 0.5329777777777778,
+     "first": 0.28984444444444446,
+     "home": 0.12554444444444446
+    },
+    {
+     "era": 2250,
+     "child": 0.4877888888888888,
+     "first": 0.24525555555555556,
+     "home": 0.10706666666666668
+    },
+    {
+     "era": 2500,
+     "child": 0.4343000000000001,
+     "first": 0.36157777777777783,
+     "home": 0.17202222222222224
+    },
+    {
+     "era": 2750,
+     "child": 0.5749555555555556,
+     "first": 0.3184777777777778,
+     "home": 0.16296666666666668
+    },
+    {
+     "era": 3000,
+     "child": 0.5291444444444444,
+     "first": 0.32466666666666666,
+     "home": 0.2078888888888889
+    }
+   ],
+   "eras_info": [
+    {
+     "era": 0,
+     "agents": 600,
+     "tokens_each": 47.0,
+     "genotypes": 600
+    },
+    {
+     "era": 250,
+     "agents": 1130,
+     "tokens_each": 23.030973451327434,
+     "genotypes": 495
+    },
+    {
+     "era": 500,
+     "agents": 1132,
+     "tokens_each": 23.61572438162544,
+     "genotypes": 538
+    },
+    {
+     "era": 750,
+     "agents": 794,
+     "tokens_each": 35.3639798488665,
+     "genotypes": 444
+    },
+    {
+     "era": 1000,
+     "agents": 2144,
+     "tokens_each": 11.698227611940299,
+     "genotypes": 1129
+    },
+    {
+     "era": 1250,
+     "agents": 917,
+     "tokens_each": 29.796074154852782,
+     "genotypes": 441
+    },
+    {
+     "era": 1500,
+     "agents": 1196,
+     "tokens_each": 21.818561872909697,
+     "genotypes": 613
+    },
+    {
+     "era": 1750,
+     "agents": 1768,
+     "tokens_each": 13.639705882352942,
+     "genotypes": 919
+    },
+    {
+     "era": 2000,
+     "agents": 1212,
+     "tokens_each": 22.25990099009901,
+     "genotypes": 561
+    },
+    {
+     "era": 2250,
+     "agents": 1189,
+     "tokens_each": 22.72497897392767,
+     "genotypes": 605
+    },
+    {
+     "era": 2500,
+     "agents": 864,
+     "tokens_each": 31.96759259259259,
+     "genotypes": 414
+    },
+    {
+     "era": 2750,
+     "agents": 1048,
+     "tokens_each": 25.244274809160306,
+     "genotypes": 543
+    },
+    {
+     "era": 3000,
+     "agents": 829,
+     "tokens_each": 33.46562123039807,
+     "genotypes": 404
+    }
+   ]
+  }
  }
 }

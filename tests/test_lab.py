@@ -713,8 +713,8 @@ def test_a_plan_can_play_a_kept_world_on_under_other_settings():
     kept: the same agents, brains and links, under the run's own settings and
     with its own seed from there on. Its iterations go on counting from that
     world, which it keeps as its first, and it is named for where it comes
-    from. A plan that would end before it starts, start from a world nobody
-    kept, or ask for a readout is refused.
+    from. A plan that would end before it starts, or asks for a readout, is
+    refused; one whose world is not on this machine is blocked.
     """
     import numpy as np
     with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED)) as tmp:
@@ -790,7 +790,13 @@ def test_a_plan_can_play_a_kept_world_on_under_other_settings():
 
         refused(lambda: gol_plan.experiment_runs(on("E97", iterations=4)), "end later")
         refused(lambda: gol_plan.experiment_runs(on("E97", **{"from": {"run": source.run_id, "at": 3}})), "archive_every")
-        refused(lambda: gol_plan.experiment_runs(on("E97", **{"from": {"run": "B9-400-s009", "at": 4}})), "no run B9-400-s009")
+        # A world that is not here blocks the run when the lab comes to make it, not when the plan is read:
+        # the book reads plans on machines that have no runs.
+        for source_at, words in (({"run": "B9-400-s009", "at": 4}, "no run B9-400-s009"),
+                                 ({"run": source.run_id, "at": 6}, "kept no world at iteration 6")):
+            missing = gol_plan.experiment_runs(on("E97", iterations=12, **{"from": source_at}))[0]
+            state = gol_lab._run_state(missing, None)
+            assert state["state"] == "blocked" and words in state["reason"], state
         refused(lambda: gol_plan.experiment_runs(on("E97", readout=READOUT)), "no readout")
 
 

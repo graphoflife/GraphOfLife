@@ -246,6 +246,7 @@ them had 12 to 23.
 - [A world as a Wolfram model: rewrites, light cones and curvature](a-world-as-a-wolfram-model.md#are-the-rewrites-local)
 - [Brains replaced by their average](brains-replaced-by-their-average.md#what-we-expect)
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-it-is-tested)
+- [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md#the-world-that-is-played-on)
 - [A source and a sink](a-source-and-a-sink.md#where-a-source-could-sit)
 - [Rules without numbers](rules-without-numbers.md#links-that-hold-a-token)
 - [Measuring health: criteria, the health bar and diversity](measuring-health.md#examples)

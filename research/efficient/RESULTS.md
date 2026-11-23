@@ -132,6 +132,38 @@ twice) can pay there. What lasts is a line of copies moving through nodes.
 The four long-lived worlds are the ones to read for structure; they are on
 the external drive.
 
+### A9. The same readings on round 3's long-lived worlds (added)
+
+Worlds s3004, s3043, s3065, s3019 (agents live 12 to 19 iterations), s3080
+(8) and s3058 (6), at 30,000 tokens, kept every 250 iterations to 3,000.
+
+| world | engine mutation: decisions changed | as a share of the distance between strangers | behaviour 250 apart | 2,750 apart | slope |
+|---|---|---|---|---|---|
+| s3004 | 26% | 0.23 | 0.21 | 0.25 | 0.11 |
+| s3043 | 14% | 0.12 | 0.17 | 0.30 | 0.23 |
+| s3065 | 23% | 0.17 | 0.20 | 0.19 | 0.00 |
+| s3019 | 29% | 0.29 | 0.13 | 0.12 | 0.01 |
+| s3080 | 41% | 0.48 | 0.08 | 0.08 | 0.01 |
+| s3058 | 35% | 0.35 | 0.30 | 0.48 | 0.13 |
+
+(Behaviour: distance between the populations' first-token decisions; the
+floor between two halves of one population is 0.06 to 0.07.)
+
+- A mutation is smaller here than in Experiment 48's worlds, yet still
+  changes 14% to 41% of decisions. Ten numbers changed: 1% to 7%.
+- In every world two brains drawn at random differ on about three quarters
+  of the probes, as random founders do. Where a brain sends its first token
+  is hardly agreed on anywhere. What is agreed on is having no child in most
+  situations (87% to 92%).
+- Three kinds of world show: populations that stand still near the noise
+  floor (s3080, s3019), populations reshuffled at once and then flat (s3065,
+  and Experiment 48's three), and populations that move away slowly (s3043,
+  s3004, s3058).
+
+So "bounded reshuffling" (A1) is not the only pattern. The worlds that move
+away slowly are the ones with small mutations in place or long lives.
+`python3 research/efficient/A9/a9.py`; numbers in `A9/a9.json`.
+
 ### C1. The tagged-lineage assay — built
 
 A lab trial of kind `assay` (`gol_tournament.assay`), with tests. Its first

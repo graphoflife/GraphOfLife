@@ -450,6 +450,9 @@ def _run_state(spec: RunSpec, engine: Optional[str]) -> Dict[str, Any]:
                 "reason": f"{spec.run_id} is on {os.readlink(folder)}, which is not mounted"}
     path = os.path.join(folder, "meta.json")
     if not os.path.exists(path):
+        missing = gol_plan.nothing_to_play_on_from(spec)
+        if missing:
+            return {"state": "blocked", "iteration": 0, "reason": missing}
         return _waits_for_its_run(spec) or {
             "state": "waiting", "iteration": 0, "engine": engine,
             "job": Job(spec, spec.targets[0], engine, False, spec.fault_at, spec.start)}

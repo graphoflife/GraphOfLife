@@ -321,6 +321,6 @@ viewer cannot show that run past iteration 13,384.
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (4)
-> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (5)
+> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md) · [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

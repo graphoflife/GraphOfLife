@@ -257,7 +257,6 @@ def _played_on(name: str, runs: Dict[str, Any], specs: List[RunSpec]) -> None:
     from there, so `iterations` is where it ends, not how long it plays. Such a run is named for where
     it comes from as well as for what it is, and keeps the world it started from as its first.
     """
-    import gol_store as store
     source = runs["from"]
     if not isinstance(source, dict) or set(source) != {"run", "at"} or not _whole(source["at"], 0):
         raise LabError(f"{name} from: a run and the iteration of a world it kept, {{\"run\": ..., \"at\": ...}}")
@@ -277,14 +276,26 @@ def _played_on(name: str, runs: Dict[str, Any], specs: List[RunSpec]) -> None:
         spec.lab = {**spec.lab, "from": {"run": source["run"], "at": at}}
         spec.targets = [t for t in spec.targets if t > at]
         spec.start = at
-    if not any(os.path.exists(os.path.join(store.run_dir(s.run_id), "meta.json")) for s in specs):
-        try:
-            store.load_meta(source["run"])
-            kept = store.archived(source["run"])
-        except (OSError, ValueError):
-            raise LabError(f"{name} from: there is no run {source['run']} on this machine to play on from") from None
-        if at not in kept:
-            raise LabError(f"{name} from: {source['run']} kept no world at iteration {at:,}")
+
+
+def nothing_to_play_on_from(spec: RunSpec) -> Optional[str]:
+    """
+    Why a run played on from a kept world cannot be made here, if it cannot: the world is read once,
+    when the run is made, from a run that has to be on this machine then. A plan is read without it,
+    as the book reads it on a machine that has no runs.
+    """
+    import gol_store as store
+    source = spec.lab.get("from")
+    if not source:
+        return None
+    try:
+        store.load_meta(source["run"])
+        kept = store.archived(source["run"])
+    except (OSError, ValueError):
+        return f"there is no run {source['run']} on this machine to play on from"
+    if source["at"] not in kept:
+        return f"{source['run']} kept no world at iteration {source['at']:,}"
+    return None
 
 
 def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict[str, Any],

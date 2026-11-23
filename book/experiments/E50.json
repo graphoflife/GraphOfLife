@@ -1,0 +1,110 @@
+{
+ "id": "E50",
+ "title": "Does a smaller step restart evolution? A world played on with small mutations",
+ "thesis": {
+  "claim": "A world that has stopped getting better gets better again when its mutations are made small. Played on for 2,500 iterations from the same kept world, with mutations of 10 or of 100 numbers, its brains beat the brains it started from, and they beat the brains of the same world played on with the engine's own mutation.",
+  "why": "One mutation of the engine leaves a brain deciding differently from its parent in a third to two thirds of the situations it meets, and in one world as differently as an unrelated brain; with ten numbers changed, in one or two in a hundred (card B1 of research/efficient/plan.md). Selection can sort such mutants but cannot improve a brain step by step, which would explain why every world measured gets better early and then stops. A mutation small enough to keep most of what a brain does lets a small gain be found and kept. The world played on is one of round 3's s3058 at 40,000 tokens (Experiment 46), kept at iteration 20,000: the largest stake wins a node, estates go to the children of the dead, and an agent lives about six iterations.",
+  "confirm": "Both, for at least one of the two small arms (10 numbers, 100 numbers). A coin is two contests with one deal, the two sides in swapped places, and scores the mean of the two; a score is the mean of its coins, and its band two standard errors of that mean either side. (1) The arm's brains at iteration 22,500 against the brains of iteration 20,000, on both worlds, pooled over its two runs: the score and its whole band are above 0.5. (2) The arm's brains at 22,500 against the brains at 22,500 of the arm played on as it is, on both arms' worlds, pooled over the two seeds: the score and its whole band are above 0.5.",
+  "refute": "For both small arms the score of (2) is 0.5 or less: brains made with small mutations are no better than brains made with the engine's. Anything else is undecided. Reported beside it: (1) for the arm played on as it is, which says whether the world had stopped; and the world's own earlier brains, iteration 20,000 against 17,500 and against 15,000."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "from": {
+   "run": "B1-40000-bbbccd-s4602",
+   "at": 20000
+  },
+  "seeds": "5001..5002",
+  "iterations": 22500,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 1250
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "as it is",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "10 numbers",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 10
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "100 numbers",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 100
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   }
+  ]
+ }
+}
