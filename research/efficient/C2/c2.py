@@ -1,6 +1,7 @@
 """Card C2, Experiment 49: are mutants as fit as their parents? Reads the assays the lab played; plays nothing."""
-import json, os, sys
+import json, os, sys, warnings
 import numpy as np
+warnings.simplefilter("ignore")
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 os.environ.setdefault("GOL_RUNS_DIR", "/home/stefan/Documents/CodingProjects/GraphOfLife/GraphOfLifeRuns")
 sys.path.insert(0, ROOT)
@@ -50,6 +51,22 @@ def reading(results, rng, at=None):
             "largest": [float(mut.max()), float(con.max())]}
 
 
+def by_horizon(results, rng, horizons=(3, 6, 9)):
+    """The same reading at earlier iterations, from each site's series: not what the thesis reads, reported beside it."""
+    played = [r for r in results if r.get("sites")]
+    if not played:
+        return {}
+    every = played[0]["every"]
+    rows = {}
+    for h in horizons:
+        r = reading(results, rng, at=h // every)
+        mut = np.array([s["series"][h // every] for x in played for s in x["sites"] if s["mutant"]], dtype=float)
+        con = np.array([s["series"][h // every] for x in played for s in x["sites"] if not s["mutant"]], dtype=float)
+        rows[h] = {"R": r["R"], "p_lower": r["p_lower"], "p_upper": r["p_upper"], "null": r["null_R_2.5_97.5"],
+                   "alive": [float((mut > 0).mean()), float((con > 0).mean())]}
+    return rows
+
+
 if __name__ == "__main__":
     rng = np.random.RandomState(1)
     out = {}
@@ -62,4 +79,13 @@ if __name__ == "__main__":
         print(f"{world:<18} {op:>6}: R = {r['R']:.3f} (shuffled 95%: {r['null_R_2.5_97.5'][0]:.2f} to {r['null_R_2.5_97.5'][1]:.2f}; p below {r['p_lower']:.4f}, above {r['p_upper']:.4f}); "
               f"mean count {r['mean_count'][0]:.2f} vs {r['mean_count'][1]:.2f}; died out {r['died_out'][0]:.0%} vs {r['died_out'][1]:.0%}; "
               f"above the controls' 90th percentile {r['above_controls_90th'][0]:.1%} vs {r['above_controls_90th'][1]:.1%}; {r['assays']} assays")
+    print()
+    print("Earlier iterations (not what the thesis reads): R, the 95% range of R with labels shuffled, and lines still alive")
+    for (world, op), results in sorted(sets.items(), key=lambda kv: (kv[0][0], (0, 0) if kv[0][1] == "engine" else (1, int(kv[0][1])))):
+        rows = by_horizon(results, rng)
+        out[f"{world} | {op}"] = {**(out.get(f"{world} | {op}") or {}), "earlier": rows}
+        if rows:
+            print(f"{world:<18} {op:>6}: " + "; ".join(
+                f"after {h}: R {r['R']:.2f} ({r['null'][0]:.2f} to {r['null'][1]:.2f}), alive {r['alive'][0]:.0%} vs {r['alive'][1]:.0%}"
+                for h, r in rows.items()))
     json.dump(out, open(os.path.join(HERE, "c2.json"), "w"), indent=1)

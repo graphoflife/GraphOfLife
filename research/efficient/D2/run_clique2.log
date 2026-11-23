@@ -1,0 +1,12 @@
+clique-n4-all-w3-A largest val/tok=0.4000 gap=0.0108 P=1500625 Q=1820 158.3s
+clique-n4-all-w3-A lottery val/tok=1.0000 gap=0.0000 P=1500625 Q=1820 0.2s
+clique-n4-all-w3-A pool val/tok=1.0000 gap=0.0000 P=1500625 Q=1820 3.8s
+clique-n2-all-w3-B largest val/tok=1.0000 gap=0.0000 P=100 Q=10 0.3s
+clique-n2-all-w3-B lottery val/tok=1.0000 gap=0.0000 P=100 Q=10 0.0s
+clique-n2-all-w3-B pool val/tok=1.1664 gap=0.0053 P=100 Q=10 4.1s
+clique-n3-all-w3-B largest val/tok=1.0000 gap=0.0000 P=8000 Q=20 0.4s
+clique-n3-all-w3-B lottery val/tok=1.0000 gap=0.0000 P=8000 Q=20 0.0s
+clique-n3-all-w3-B pool val/tok=1.1665 gap=0.0055 P=8000 Q=20 4.4s
+clique-n4-all-w3-B largest val/tok=1.0000 gap=0.0000 P=1500625 Q=35 2.3s
+clique-n4-all-w3-B lottery val/tok=1.0000 gap=0.0000 P=1500625 Q=35 0.2s
+clique-n4-all-w3-B pool val/tok=1.1500 gap=0.0038 P=1500625 Q=35 24.4s

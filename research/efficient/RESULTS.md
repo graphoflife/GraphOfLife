@@ -169,6 +169,55 @@ away slowly are the ones with small mutations in place or long lives.
 A lab trial of kind `assay` (`gol_tournament.assay`), with tests. Its first
 use is Experiment 49 (card C2).
 
+## Wave 2 (23 November 2026, evening)
+
+### D2. Exact small games — size does not pay in the game itself
+
+One game phase, solved exactly: a team of 1 to 4 agents with one joint plan
+(a path or a clique, 2 or 3 tokens each) against one outsider, who is linked
+to one team node ("one border") or to all of them ("all border") and is as
+rich as the whole team or as one member. The team's value is the tokens it
+holds afterwards over those it had (1.0: it keeps what it had). Detail and
+plans in `D2/RESULT.md`.
+
+| contest | outsider linked to | outsider as rich as | team's value per token, n = 1, 2, 3, 4 |
+|---|---|---|---|
+| lottery | any | any | 1.00, 1.00, 1.00, 1.00 exactly |
+| largest stake | one node | any | 1.00, 1.00, 1.00, 1.00 |
+| largest stake | all nodes | the team | 1.00, 0.67, 0.50, 0.40 |
+| largest stake | all nodes | one member | 1.00, 1.00, 1.00, 1.00 |
+| stakes pooled | one node, or rich outsider | any | 1.00, 1.00, 1.00, 1.00 |
+| stakes pooled | all nodes | one member | 1.00, 1.17, 1.17, 1.15 |
+
+- **Under the lottery the staking game is a fair bet.** A staker's chance is
+  its share of the stakes on a node and the node holds all of them, so every
+  plan gives the tokens it put in, on average. No plan is better than
+  another in tokens. 50 of round 3's 82 living worlds and all three of
+  Experiment 48's play the lottery. What is left to select there is how
+  many nodes a line holds, its children, its links and its estates. This
+  fits A2 (income comes from estates, not from the game) and B2 (brains do
+  not agree on where the first token goes: it hardly matters).
+- **Under the largest stake, one rich agent beats a team of poor ones.**
+  Against an outsider as rich as the whole team and linked to all of it, the
+  team keeps 67%, 50%, 40% of its tokens as it grows from 2 to 4. Being many
+  is a weakness. With one border node the team can only save itself by
+  emptying that node.
+- **Only pooled stakes let a team gain**, and only against a poorer
+  outsider it surrounds.
+
+By the card's rule, size does not pay under any of the three. Condition 4
+of the plan fails for the game as it is: nothing in one game rewards a body
+of several agents. Limits: one phase, no children, no link cuts, no
+estates, teams of at most 4, revolutions left out.
+
+### C2. Experiment 49, read while it plays
+
+See the page *Are mutants as fit as their parents?* once it is analysed.
+Early note: the count at iteration 30, which the thesis reads, is decided by
+which single line swept the world; the early iterations show the engine's
+mutation costing a line about a third of its copies within 3 iterations and
+mutations of up to 100 numbers costing nothing measurable.
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks
