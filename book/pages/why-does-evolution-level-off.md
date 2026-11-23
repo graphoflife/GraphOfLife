@@ -317,10 +317,10 @@ viewer cannot show that run past iteration 13,384.
 <!-- turns -->
 ---
 
-← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [A source and a sink](a-source-and-a-sink.md) →
+← [Every era against three](every-era-against-three.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going) · [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md) →
 
 **Also about:** [Changing the rules](../README.md#changing-the-rules).
 
-> [!info]- Pages that link here (3)
-> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
+> [!info]- Pages that link here (4)
+> [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [A hundred thousand iterations](a-hundred-thousand-iterations.md) · [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md) · [Every simulation: what was run, and what was measured](every-simulation.md)
 <!-- /turns -->

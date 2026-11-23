@@ -16,6 +16,10 @@ in its archive, or a pilot of the engine's own rules in its checkpoint
              hand (gol_strategies.plant), after the whole world was given
              another strategy and left to settle if the trial says so; its
              result is the strategy's agents and tokens after every iteration
+  assay      the world of one era, some of its agents' brains changed once
+             and marked, as many more only marked, with mutation off
+             (gol_tournament.assay); its result is how many agents carry
+             each mark after T iterations
 
 The command line is the worker's (gol_worker.py), so the lab starts either the
 same way. A trial keeps no frames. Its run folder holds its settings, how far
@@ -90,7 +94,14 @@ def invasion(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optiona
     return {"series": series, "patch": len(patch)}
 
 
-PLAY = {"contest": contest, "invasion": invasion}
+def assay(trial: Dict[str, Any], stop: Callable[[Any, int], bool]) -> Optional[Dict[str, Any]]:
+    source = trial["run"]
+    return gol_tournament.assay(store.source_config(source), store.kept_world(source, int(trial["era"])),
+                                int(trial["T"]), int(trial["seed"]), trial["operator"], int(trial["mutants"]),
+                                int(trial["controls"]), on_step=stop)
+
+
+PLAY = {"contest": contest, "invasion": invasion, "assay": assay}
 
 
 def main() -> int:

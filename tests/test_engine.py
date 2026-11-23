@@ -3199,6 +3199,76 @@ def test_a_contest_whose_world_dies_out_has_no_result():
     assert tour.ratings([0, 1], [{"a": 0, "b": 1, **out}])[0] == [0.0, 0.0], "a contest without a result was rated"
 
 
+def test_an_assay_of_controls_plays_the_world_as_it_was():
+    """
+    An assay marks some agents' brains and counts the agents that carry each
+    mark. A mark changes nothing in the play: a world whose sites are all
+    controls goes exactly as the kept world goes with mutation off.
+    """
+    import numpy as np
+    import gol_tournament as tour
+    cfg = small(seed=73, mutate_on_replication=True)
+    world = new_world(cfg)
+    for _ in range(5):
+        world.step(record_decisions=False)
+    kept = world.to_checkpoint()
+    seen = []
+    out = tour.assay(cfg.to_dict(), kept, 6, 9, "engine", 0, 12,
+                     on_step=lambda w, t: seen.append(sorted(w.tokens.items())) and False)
+    plain = GraphOfLife.from_checkpoint(dict(kept), dataclasses.replace(cfg, mutation_probability=0.0, extinction_threshold=0))
+    plain.rng = np.random.RandomState(10)
+    for t in range(6):
+        plain.step(record_decisions=False)
+        assert sorted(plain.tokens.items()) == seen[t], f"the marked world left the plain one at iteration {t + 1}"
+    assert len(out["sites"]) == 12 and not any(s["mutant"] for s in out["sites"])
+    assert all(len(s["series"]) == 7 and s["series"][0] == 1 and s["series"][-1] == s["count"] for s in out["sites"])
+    assert out["agents"] == plain.G.number_of_nodes()
+    # Every mark's count is the agents that carry it, so together they never exceed the world.
+    assert 0 <= sum(s["count"] for s in out["sites"]) <= out["agents"]
+
+
+def test_an_assay_changes_its_mutants_once_and_refuses_worlds_it_cannot_mark():
+    """
+    A mutant site's brain is changed once, by the engine's own mutation or in
+    exactly so many of its numbers; a control's is not. Worlds that mix brains
+    at birth or pool stakes are refused, and so is an operator that is neither.
+    """
+    import numpy as np
+    import gol_tournament as tour
+    cfg = small(seed=74, mutate_on_replication=True)
+    world = new_world(cfg)
+    kept = world.to_checkpoint()
+    brain = world.brains[sorted(world.G.nodes())[0]]
+    for k in (1, 7):
+        copy = brain.copy()
+        tour.nudged(copy, k, np.random.RandomState(k))
+        changed = sum(int((a != b).sum()) for a, b in zip(copy.weights + copy.biases, brain.weights + brain.biases))
+        assert 1 <= changed <= k, (k, changed)
+    for operator in ("engine", 3):
+        out = tour.assay(cfg.to_dict(), kept, 4, 5, operator, 6, 6)
+        assert [s["mutant"] for s in out["sites"]] == [True] * 6 + [False] * 6
+        assert all(s["tokens"] >= 1 and s["count"] >= 0 for s in out["sites"])
+    for bad, words in (({"mix_at_birth": True}, "mixes brains"), ({"pool": "genotype"}, "pools stakes")):
+        try:
+            tour.assay({**cfg.to_dict(), **bad}, kept, 2, 1, "engine", 1, 1)
+        except ValueError as exc:
+            assert words in str(exc), exc
+        else:
+            raise AssertionError(f"an assay in a world with {bad} was played")
+    for operator in ("gentle", 0, True):
+        try:
+            tour.assay(cfg.to_dict(), kept, 2, 1, operator, 1, 1)
+        except ValueError as exc:
+            assert "operator" in str(exc), exc
+        else:
+            raise AssertionError(f"an assay with operator {operator!r} was played")
+    # A world that dies out leaves no result.
+    dying = small(seed=72, max_age=2, min_child=10 ** 9)
+    w = new_world(dying)
+    w.step(record_decisions=False)
+    assert tour.assay(dying.to_dict(), w.to_checkpoint(), 10, 1, 1, 2, 2) == {"sites": None, "agents": 0}
+
+
 def test_a_contest_counts_a_brain_mixed_at_birth_for_its_parents_era():
     """
     Where brains are mixed at birth, a newborn's brain is new even in a contest,

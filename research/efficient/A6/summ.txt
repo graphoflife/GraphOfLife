@@ -1,0 +1,24 @@
+B1-10000-085a32-s4801 343 samples
+  start(first 10) agents=2773.500 tokens_held=10000.000 tok_per_agent=3.974 H=7.611 H_random=7.732 dist=0.120 flow=0.234 sh1=0.234 sh2=0.229 sh3p=0.537
+  middle agents=3122.900 tokens_held=10000.000 tok_per_agent=3.666 H=7.757 H_random=7.814 dist=0.057 flow=0.148 sh1=0.244 sh2=0.247 sh3p=0.509
+  end(last 10) agents=3706.200 tokens_held=10000.000 tok_per_agent=2.854 H=7.958 H_random=7.985 dist=0.027 flow=0.226 sh1=0.332 sh2=0.278 sh3p=0.390
+  slope dist (it>=1000) per 10k it: 0.0125; sd 0.1184; corr(dist,flow)=0.73
+  slope flow per 10k it: 0.0038; sd 0.1769
+  slope tok_per_agent per 10k it: -0.1086; sd 1.3863
+  slope agents per 10k it: 44.9221; sd 923.7382
+B1-10000-f511a5-s4801 550 samples
+  start(first 10) agents=1433.200 tokens_held=10000.000 tok_per_agent=7.930 H=6.729 H_random=7.139 dist=0.410 flow=0.289 sh1=0.148 sh2=0.161 sh3p=0.690
+  middle agents=1791.000 tokens_held=10000.000 tok_per_agent=6.043 H=7.077 H_random=7.357 dist=0.281 flow=0.228 sh1=0.185 sh2=0.161 sh3p=0.654
+  end(last 10) agents=1900.600 tokens_held=10000.000 tok_per_agent=5.738 H=7.170 H_random=7.404 dist=0.234 flow=0.200 sh1=0.158 sh2=0.173 sh3p=0.669
+  slope dist (it>=1000) per 10k it: -0.0052; sd 0.1323; corr(dist,flow)=0.30
+  slope flow per 10k it: 0.0188; sd 0.1628
+  slope tok_per_agent per 10k it: -0.0667; sd 2.5110
+  slope agents per 10k it: 16.9437; sd 481.2708
+B1-10000-1cfaa4-s4801 366 samples
+  start(first 10) agents=1742.600 tokens_held=10000.000 tok_per_agent=5.931 H=7.032 H_random=7.356 dist=0.324 flow=0.276 sh1=0.200 sh2=0.169 sh3p=0.631
+  middle agents=1766.500 tokens_held=10000.000 tok_per_agent=6.077 H=6.899 H_random=7.352 dist=0.453 flow=0.226 sh1=0.222 sh2=0.167 sh3p=0.611
+  end(last 10) agents=1648.100 tokens_held=10000.000 tok_per_agent=6.512 H=6.848 H_random=7.286 dist=0.438 flow=0.209 sh1=0.202 sh2=0.158 sh3p=0.640
+  slope dist (it>=1000) per 10k it: 0.0274; sd 0.2184; corr(dist,flow)=-0.10
+  slope flow per 10k it: -0.0138; sd 0.1471
+  slope tok_per_agent per 10k it: 0.2269; sd 2.4712
+  slope agents per 10k it: -48.0720; sd 486.8288

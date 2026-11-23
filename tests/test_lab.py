@@ -542,6 +542,8 @@ CONTESTS = [{"name": "both worlds", "grid": {"run": "B9-400-s001", "pair": [[2, 
                                              "seed": [17]}}]
 CONTROLS = [{"name": "control", "grid": {"run": "B9-400-s001", "era": 4, "strategy": "resident",
                                           "size": 0.2, "place": "1..2"}}]
+ASSAYS = [{"name": "one weight", "grid": {"run": "B9-400-s001", "era": 4, "operator": [1, "engine"], "mutants": 3,
+                                          "controls": 3, "seed": "1..2"}}]
 
 
 def test_a_trial_is_named_for_what_it_is_and_checked_when_its_plan_is_read():
@@ -575,8 +577,13 @@ def test_a_trial_is_named_for_what_it_is_and_checked_when_its_plan_is_read():
                 ([{"name": "x", "items": [{"run": "B9-400-s001", "home": 3, "a": 2, "b": 4,
                                            "seed": 1}]}], ("one of its two eras",)),
                 ([{"name": "x", "items": [{"run": "B9-400-s009", "home": 2, "a": 2, "b": 4,
-                                           "seed": 1}]}], ("no run B9-400-s009",))):
-            kind = "invasion" if "strategy" in sets[0]["items"][0] else "contest"
+                                           "seed": 1}]}], ("no run B9-400-s009",)),
+                ([{"name": "x", "items": [{"run": "B9-400-s001", "era": 4, "operator": "gentle", "mutants": 1,
+                                           "controls": 1, "seed": 1}]}], ("operator",)),
+                ([{"name": "x", "items": [{"run": "B9-400-s001", "era": 4, "operator": 1, "mutants": 0,
+                                           "controls": 0, "seed": 1}]}], ("at least one agent",))):
+            kind = ("invasion" if "strategy" in sets[0]["items"][0] else
+                    "assay" if "operator" in sets[0]["items"][0] else "contest")
             write(trials_plan("E94", kind, sets))
             refused(lambda: gol_plan.experiment_runs("E94"), *words)
 
@@ -666,18 +673,26 @@ def test_the_lab_plays_trials_as_it_advances_runs():
     """
     with lab(plan("E91", seeds="1", iterations=4, record=ARCHIVED)) as tmp:
         assert work(gol_plan.experiment_runs("E91")[0], 4) == 0
-        for p in (trials_plan("E92", "contest", CONTESTS), trials_plan("E93", "invasion", CONTROLS)):
+        for p in (trials_plan("E92", "contest", CONTESTS), trials_plan("E93", "invasion", CONTROLS),
+                  trials_plan("E94", "assay", ASSAYS)):
             with open(os.path.join(tmp, "plans", f"{p['id']}.json"), "w") as f:
                 json.dump(p, f)
         gol_lab.request(run="E92", workers=2)
         gol_lab.request(run="E93")
+        gol_lab.request(run="E94")
         with contextlib.redirect_stdout(io.StringIO()):
             assert gol_lab.run_lab() == 0
 
         status = gol_lab.status()["experiments"]
-        for name in ("E92", "E93"):
+        for name in ("E92", "E93", "E94"):
             assert status[name]["state"] == "finished", status[name]
             assert all(r["trial"] for r in status[name]["runs"])
+        assays = gol_plan.experiment_runs("E94")
+        assert len(assays) == 4 and {s.trial["operator"] for s in assays} == {1, "engine"}
+        for spec in assays:
+            with open(os.path.join(gol_store.run_dir(spec.run_id), "result.json")) as f:
+                sites = json.load(f)["result"]["sites"]
+            assert sites is None or [s["mutant"] for s in sites] == [True] * 3 + [False] * 3, sites
         for spec in gol_plan.experiment_runs("E92"):
             with open(os.path.join(gol_store.run_dir(spec.run_id), "result.json")) as f:
                 result = json.load(f)

@@ -1,0 +1,341 @@
+{
+ "laws": {
+  "L1 tokens conserved (sum per frame = 10000)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L1b every token is staked once (sum of stakes = tokens at start of game)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L1c record per agent: agent tokens in record = tokens in phase-1 frame; every agent with tokens has a record": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L0 after a cleanup nobody holds 0 tokens (phase-1 frame)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L2/L4 targets = the agent itself + its neighbours in the graph at the start of the game": {
+   "held": 417267,
+   "of": 417267,
+   "counterexamples": []
+  },
+  "L2/L4 every stake lands on the staker or a neighbour (one link)": {
+   "held": 691351,
+   "of": 691351,
+   "counterexamples": []
+  },
+  "L3 winners exist exactly for the nodes with some stake": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L7a a node with no stake on it starves (and cleanup counts them)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L3 a survivor holds all that was staked on it, plus estate income (>=0)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L1d tokens of the dead = tokens shared out (cleanup.redistributed)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "LOT winner is one of the stakers of the node": {
+   "held": 377820,
+   "of": 377820,
+   "counterexamples": []
+  },
+  "LOT recorded amount = largest single stake": {
+   "held": 377820,
+   "of": 377820,
+   "counterexamples": []
+  },
+  "L3b the winner implants its brain (same id, or a mutant child of it); the owner keeps its own brain when it wins": {
+   "held": 295037,
+   "of": 295037,
+   "counterexamples": []
+  },
+  "L7b a link is cut after the game iff no stake crossed it and it was not paid/new this iteration": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L7b2 cutting happens in the game (phase 1 cuts nothing)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L7c only the largest piece survives the cull": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L7d surviving links = links not cut, between survivors": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  },
+  "L9 estate goes only to parents of children born this iteration that live (rule parents)": {
+   "held": 100,
+   "of": 100,
+   "counterexamples": []
+  }
+ },
+ "stats": {
+  "self_stake_share": [
+   0.40869600000000006,
+   0.2385,
+   0.5549
+  ],
+  "nodes_with_2plus_stakers": [
+   1978.47,
+   1217.0,
+   2331.0
+  ],
+  "strongest_lost": [
+   290.53,
+   147.0,
+   518.0
+  ],
+  "node_taken": [
+   1535.89,
+   659.0,
+   2363.0
+  ],
+  "failed_attacks": [
+   512.87,
+   186.0,
+   888.0
+  ],
+  "failed_tokens": [
+   859.43,
+   306.0,
+   1549.0
+  ],
+  "n_start": [
+   4172.67,
+   1918.0,
+   6379.0
+  ],
+  "n_end": [
+   2950.37,
+   1234.0,
+   4766.0
+  ],
+  "starved": [
+   394.47,
+   27.0,
+   923.0
+  ],
+  "orphaned": [
+   827.83,
+   16.0,
+   3342.0
+  ],
+  "cut_links": [
+   1569.74,
+   271.0,
+   5041.0
+  ],
+  "links_start": [
+   10727.06,
+   4628.0,
+   17017.0
+  ],
+  "links_end": [
+   6433.23,
+   2270.0,
+   10963.0
+  ],
+  "heirs": [
+   960.13,
+   382.0,
+   1768.0
+  ],
+  "pool_p2": [
+   1960.43,
+   44.0,
+   6867.0
+  ],
+  "chi2_over_df": [
+   0.9893369022453739,
+   0.8944190314674348,
+   1.1042659326225774
+  ],
+  "pool_p1": [
+   752.56,
+   63.0,
+   4023.0
+  ],
+  "estate_recipients": [
+   564.35,
+   44.0,
+   1125.0
+  ],
+  "A_tok1": [
+   0.4312568899452872,
+   0.15599639314697927,
+   0.6627998118827403
+  ],
+  "A_tok2": [
+   0.23016806651334304,
+   0.09814323607427056,
+   0.33530775173834665
+  ],
+  "A_tok3": [
+   0.3385750435413698,
+   0.12149239692741809,
+   0.700180342651037
+  ],
+  "A_mean": [
+   2.632865144578696,
+   1.5676438313215237,
+   5.213764337851929
+  ],
+  "B_tok1": [
+   0.2499045523677725,
+   0.0622568093385214,
+   0.42110784725136385
+  ],
+  "B_tok2": [
+   0.23750786286728853,
+   0.10359922178988328,
+   0.3477956613016095
+  ],
+  "B_tok3": [
+   0.5125875847649389,
+   0.25723877465379774,
+   0.8341439688715954
+  ],
+  "B_mean": [
+   3.749686976778626,
+   2.0981955518254303,
+   8.103727714748784
+  ],
+  "core_nodes": [
+   374.36,
+   82.0,
+   876.0
+  ],
+  "core_attacked_by_other_genotype": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "lottery_bins": {
+  "expected": [
+   656.9348621098468,
+   6310.687767271845,
+   24092.961086482715,
+   39359.80418006124,
+   5717.135519674774,
+   89033.26039597207,
+   20460.92405171366,
+   6631.5882363801,
+   4987.658163448354,
+   596.045736904625
+  ],
+  "observed": [
+   652.0,
+   6275.0,
+   24086.0,
+   39377.0,
+   5695.0,
+   89066.0,
+   20455.0,
+   6630.0,
+   5010.0,
+   601.0
+  ],
+  "n": [
+   9094.0,
+   43388.0,
+   102410.0,
+   117915.0,
+   13978.0,
+   177788.0,
+   31228.0,
+   8887.0,
+   6041.0,
+   649.0
+  ]
+ },
+ "kin_bins": {
+  "expected": [
+   298.4278563951949,
+   3067.07564193374,
+   12076.442783425602,
+   21420.729822103443,
+   4695.462332318704,
+   59030.22260903514,
+   24048.76020694532,
+   9047.781546019698,
+   6967.00615456702,
+   57195.091047256385
+  ],
+  "observed": [
+   266.0,
+   3067.0,
+   12035.0,
+   21379.0,
+   4741.0,
+   59034.0,
+   24129.0,
+   9003.0,
+   6975.0,
+   57218.0
+  ],
+  "n": [
+   4137.0,
+   21078.0,
+   51123.0,
+   64120.0,
+   11456.0,
+   117752.0,
+   36659.0,
+   12119.0,
+   8438.0,
+   57267.0
+  ]
+ },
+ "ways": {
+  "1": {
+   "agents": 192330,
+   "mean_k": 4.956787812613737,
+   "median_k": 5.0,
+   "ways_at_mean_k": 6,
+   "mean_ways": 5.956787812613737,
+   "median_ways": 6.0,
+   "sequences_at_mean_k": 6
+  },
+  "2": {
+   "agents": 99296,
+   "mean_k": 5.15545439896874,
+   "median_k": 5.0,
+   "ways_at_mean_k": 21,
+   "mean_ways": 25.715124476313246,
+   "median_ways": 21.0,
+   "sequences_at_mean_k": 36
+  },
+  "3": {
+   "agents": 51176,
+   "mean_k": 5.344223854931999,
+   "median_k": 5.0,
+   "ways_at_mean_k": 56,
+   "mean_ways": 100.05164530248554,
+   "median_ways": 56.0,
+   "sequences_at_mean_k": 216
+  }
+ }
+}

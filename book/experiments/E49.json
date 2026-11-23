@@ -1,0 +1,68 @@
+{
+ "id": "E49",
+ "title": "Are mutants as fit as their parents? Marked mutants beside marked agents left as they were",
+ "thesis": {
+  "claim": "The engine's own mutation makes a brain less fit, and a small change does not. In three kept worlds of Experiment 48, an agent whose brain was changed once by the engine's mutation leaves fewer copies over 30 iterations than an agent left as it was. An agent with 1 or 10 of its brain's numbers changed leaves as many.",
+  "why": "Asked the same 300 real situations, a brain changed once by the engine's mutation decides differently from its parent in 34% to 67% of them, and in one world as often as an unrelated brain of the same world does; with one number changed it decides differently in under 1% of them (card B1 of research/efficient/plan.md, 23 November 2026). Experiment 48's worlds beat their founders by iteration 5,000 and then stopped getting better. If a mutant is nearly a new brain, selection can sort brains but cannot improve one step by step. This experiment asks whether that difference in what a mutant decides is also a difference in how well it does.",
+  "confirm": "For each world, pooled over its ten assays, R is the mean count at iteration 30 of the 1,000 mutant sites over that of the 1,000 control sites. Both: R of the engine's mutation is below 0.8 in all three worlds, each with p below 0.05 when the labels mutant and control are shuffled within each assay (2,000 shuffles); and R is above 0.9 for one number changed and for ten, in all three worlds.",
+  "refute": "Either: R of the engine's mutation is 0.9 or more in two of the three worlds, so a mutant is as fit as its parent and the size of a mutation is not what stops evolution; or R is below 0.8 for one number changed or for ten in two of the three worlds, so even a small change breaks a brain. Anything else is undecided. R for 100 and for 1,000 numbers changed, and the share of sites that died out, are reported beside it."
+ },
+ "trials": {
+  "kind": "assay",
+  "T": 30,
+  "workers": 3,
+  "sets": [
+   {
+    "name": "s4003 at 15,000",
+    "grid": {
+     "run": "B1-10000-085a32-s4801",
+     "era": 15000,
+     "operator": [
+      "engine",
+      1,
+      10,
+      100,
+      1000
+     ],
+     "mutants": 100,
+     "controls": 100,
+     "seed": "1..10"
+    }
+   },
+   {
+    "name": "s4003 at 5,000",
+    "grid": {
+     "run": "B1-10000-085a32-s4801",
+     "era": 5000,
+     "operator": [
+      "engine",
+      1,
+      10,
+      100,
+      1000
+     ],
+     "mutants": 100,
+     "controls": 100,
+     "seed": "1..10"
+    }
+   },
+   {
+    "name": "s4008 at 15,000",
+    "grid": {
+     "run": "B1-10000-1cfaa4-s4801",
+     "era": 15000,
+     "operator": [
+      "engine",
+      1,
+      10,
+      100,
+      1000
+     ],
+     "mutants": 100,
+     "controls": 100,
+     "seed": "1..10"
+    }
+   }
+  ]
+ }
+}

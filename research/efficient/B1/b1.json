@@ -1,0 +1,454 @@
+[
+ {
+  "world": "s4003",
+  "run": "B1-10000-085a32-s4801",
+  "iteration": 15000,
+  "probes": 300,
+  "parents": 200,
+  "distinct_genotypes_among_parents": 129,
+  "agents": 3587,
+  "tokens_per_agent": 2.7878449958182325,
+  "strangers_differ": {
+   "child": 0.5722948073701841,
+   "first": 0.550820770519263,
+   "any": 0.7628643216080402
+  },
+  "operators": {
+   "engine": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.46322583333333334,
+     "first": 0.4416383333333333,
+     "any": 0.6711975
+    },
+    "median_any": 0.7466666666666667,
+    "quartiles_any": [
+     0.5266666666666666,
+     0.8433333333333334
+    ],
+    "relative_to_strangers_median": 0.9787673187976199,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.97425,
+    "share_over_50pct_of_scale": 0.823,
+    "share_as_far_as_a_stranger": 0.46825
+   },
+   "1": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.0022633333333333338,
+     "first": 0.0018533333333333336,
+     "any": 0.0040975000000000004
+    },
+    "median_any": 0.0,
+    "quartiles_any": [
+     0.0,
+     0.006666666666666667
+    ],
+    "relative_to_strangers_median": 0.0,
+    "share_identical": 0.554,
+    "share_nearly_neutral_under_1pct_of_scale": 0.82425,
+    "share_over_25pct_of_scale": 0.0,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "10": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.0111525,
+     "first": 0.008549166666666665,
+     "any": 0.019545000000000003
+    },
+    "median_any": 0.016666666666666666,
+    "quartiles_any": [
+     0.01,
+     0.02666666666666667
+    ],
+    "relative_to_strangers_median": 0.021847484794589728,
+    "share_identical": 0.0415,
+    "share_nearly_neutral_under_1pct_of_scale": 0.24325,
+    "share_over_25pct_of_scale": 0.00025,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "100": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.038109166666666666,
+     "first": 0.02831166666666667,
+     "any": 0.06519166666666668
+    },
+    "median_any": 0.06,
+    "quartiles_any": [
+     0.043333333333333335,
+     0.08
+    ],
+    "relative_to_strangers_median": 0.07865094526052302,
+    "share_identical": 0.00025,
+    "share_nearly_neutral_under_1pct_of_scale": 0.00475,
+    "share_over_25pct_of_scale": 0.00625,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "1000": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.12114333333333334,
+     "first": 0.08733166666666667,
+     "any": 0.19746666666666668
+    },
+    "median_any": 0.18333333333333332,
+    "quartiles_any": [
+     0.14,
+     0.23666666666666666
+    ],
+    "relative_to_strangers_median": 0.240322332740487,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.44575,
+    "share_over_50pct_of_scale": 0.0345,
+    "share_as_far_as_a_stranger": 0.0
+   }
+  },
+  "numbers_in_a_brain": 9459
+ },
+ {
+  "world": "s4003",
+  "run": "B1-10000-085a32-s4801",
+  "iteration": 5000,
+  "probes": 300,
+  "parents": 200,
+  "distinct_genotypes_among_parents": 114,
+  "agents": 2525,
+  "tokens_per_agent": 3.9603960396039604,
+  "strangers_differ": {
+   "child": 0.21195,
+   "first": 0.5632833333333334,
+   "any": 0.6149
+  },
+  "operators": {
+   "engine": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.20986000000000002,
+     "first": 0.45189250000000003,
+     "any": 0.5443291666666666
+    },
+    "median_any": 0.57,
+    "quartiles_any": [
+     0.3433333333333333,
+     0.7533333333333333
+    ],
+    "relative_to_strangers_median": 0.9269799967474385,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.8695,
+    "share_over_50pct_of_scale": 0.7655,
+    "share_as_far_as_a_stranger": 0.43475
+   },
+   "1": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.0004458333333333333,
+     "first": 0.0014266666666666668,
+     "any": 0.0018725
+    },
+    "median_any": 0.0,
+    "quartiles_any": [
+     0.0,
+     0.0033333333333333335
+    ],
+    "relative_to_strangers_median": 0.0,
+    "share_identical": 0.725,
+    "share_nearly_neutral_under_1pct_of_scale": 0.88325,
+    "share_over_25pct_of_scale": 0.00025,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "10": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.0018,
+     "first": 0.007495833333333332,
+     "any": 0.009274999999999999
+    },
+    "median_any": 0.006666666666666667,
+    "quartiles_any": [
+     0.0033333333333333335,
+     0.013333333333333334
+    ],
+    "relative_to_strangers_median": 0.010841871306987588,
+    "share_identical": 0.154,
+    "share_nearly_neutral_under_1pct_of_scale": 0.382,
+    "share_over_25pct_of_scale": 0.00025,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "100": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.0068091666666666665,
+     "first": 0.02649,
+     "any": 0.033098333333333334
+    },
+    "median_any": 0.02666666666666667,
+    "quartiles_any": [
+     0.02,
+     0.04
+    ],
+    "relative_to_strangers_median": 0.04336748522795035,
+    "share_identical": 0.0005,
+    "share_nearly_neutral_under_1pct_of_scale": 0.007,
+    "share_over_25pct_of_scale": 0.00725,
+    "share_over_50pct_of_scale": 0.00025,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "1000": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.020390833333333334,
+     "first": 0.08351166666666665,
+     "any": 0.10205916666666667
+    },
+    "median_any": 0.08666666666666667,
+    "quartiles_any": [
+     0.07,
+     0.11333333333333333
+    ],
+    "relative_to_strangers_median": 0.14094432699083861,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.10375,
+    "share_over_50pct_of_scale": 0.0155,
+    "share_as_far_as_a_stranger": 0.0
+   }
+  },
+  "numbers_in_a_brain": 9459
+ },
+ {
+  "world": "s4008",
+  "run": "B1-10000-1cfaa4-s4801",
+  "iteration": 15000,
+  "probes": 300,
+  "parents": 200,
+  "distinct_genotypes_among_parents": 173,
+  "agents": 1762,
+  "tokens_per_agent": 5.675368898978434,
+  "strangers_differ": {
+   "child": 0.6071356783919597,
+   "first": 0.609145728643216,
+   "any": 0.830536013400335
+  },
+  "operators": {
+   "engine": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.327485,
+     "first": 0.2743458333333333,
+     "any": 0.49189583333333337
+    },
+    "median_any": 0.47,
+    "quartiles_any": [
+     0.35333333333333333,
+     0.6166666666666667
+    ],
+    "relative_to_strangers_median": 0.5658996026864046,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.979,
+    "share_over_50pct_of_scale": 0.613,
+    "share_as_far_as_a_stranger": 0.03525
+   },
+   "1": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.00717,
+     "first": 0.0037458333333333337,
+     "any": 0.010794166666666665
+    },
+    "median_any": 0.0033333333333333335,
+    "quartiles_any": [
+     0.0,
+     0.013333333333333334
+    ],
+    "relative_to_strangers_median": 0.004013472359478047,
+    "share_identical": 0.42725,
+    "share_nearly_neutral_under_1pct_of_scale": 0.64975,
+    "share_over_25pct_of_scale": 0.00075,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "10": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.03660583333333333,
+     "first": 0.02095583333333333,
+     "any": 0.056265
+    },
+    "median_any": 0.04666666666666667,
+    "quartiles_any": [
+     0.03,
+     0.07333333333333333
+    ],
+    "relative_to_strangers_median": 0.05618861303269266,
+    "share_identical": 0.0015,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0225,
+    "share_over_25pct_of_scale": 0.01025,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "100": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.11580249999999999,
+     "first": 0.0747075,
+     "any": 0.17911583333333334
+    },
+    "median_any": 0.16666666666666666,
+    "quartiles_any": [
+     0.12333333333333334,
+     0.22
+    ],
+    "relative_to_strangers_median": 0.20067361797390235,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.29575,
+    "share_over_50pct_of_scale": 0.0095,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "1000": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.27573833333333336,
+     "first": 0.2240225,
+     "any": 0.42781416666666666
+    },
+    "median_any": 0.42,
+    "quartiles_any": [
+     0.3433333333333333,
+     0.5033333333333333
+    ],
+    "relative_to_strangers_median": 0.5056975172942338,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.988,
+    "share_over_50pct_of_scale": 0.50925,
+    "share_as_far_as_a_stranger": 0.0005
+   }
+  },
+  "numbers_in_a_brain": 7123
+ },
+ {
+  "world": "s4002",
+  "run": "B1-10000-f511a5-s4801",
+  "iteration": 15000,
+  "probes": 300,
+  "parents": 200,
+  "distinct_genotypes_among_parents": 195,
+  "agents": 1167,
+  "tokens_per_agent": 8.56898029134533,
+  "strangers_differ": {
+   "child": 0.564057239057239,
+   "first": 0.6610606060606061,
+   "any": 0.8334006734006735
+  },
+  "operators": {
+   "engine": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.23269916666666665,
+     "first": 0.15522500000000003,
+     "any": 0.33877333333333337
+    },
+    "median_any": 0.29333333333333333,
+    "quartiles_any": [
+     0.18333333333333332,
+     0.47
+    ],
+    "relative_to_strangers_median": 0.35197155785391077,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.6875,
+    "share_over_50pct_of_scale": 0.30625,
+    "share_as_far_as_a_stranger": 0.00875
+   },
+   "1": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.003014166666666667,
+     "first": 0.0011016666666666666,
+     "any": 0.004105833333333334
+    },
+    "median_any": 0.0,
+    "quartiles_any": [
+     0.0,
+     0.0033333333333333335
+    ],
+    "relative_to_strangers_median": 0.0,
+    "share_identical": 0.587,
+    "share_nearly_neutral_under_1pct_of_scale": 0.84925,
+    "share_over_25pct_of_scale": 0.0,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "10": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.016634999999999997,
+     "first": 0.006087499999999999,
+     "any": 0.022607500000000003
+    },
+    "median_any": 0.016666666666666666,
+    "quartiles_any": [
+     0.01,
+     0.03
+    ],
+    "relative_to_strangers_median": 0.019998383968972203,
+    "share_identical": 0.047,
+    "share_nearly_neutral_under_1pct_of_scale": 0.2315,
+    "share_over_25pct_of_scale": 0.0005,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "100": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.05645250000000001,
+     "first": 0.021965833333333334,
+     "any": 0.07699083333333334
+    },
+    "median_any": 0.06333333333333334,
+    "quartiles_any": [
+     0.04,
+     0.1
+    ],
+    "relative_to_strangers_median": 0.07599385908209437,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.00425,
+    "share_over_25pct_of_scale": 0.02975,
+    "share_over_50pct_of_scale": 0.0,
+    "share_as_far_as_a_stranger": 0.0
+   },
+   "1000": {
+    "mutants": 4000,
+    "probes_decided_differently": {
+     "child": 0.14931,
+     "first": 0.06996583333333334,
+     "any": 0.2075183333333333
+    },
+    "median_any": 0.19333333333333333,
+    "quartiles_any": [
+     0.13333333333333333,
+     0.26666666666666666
+    ],
+    "relative_to_strangers_median": 0.23198125404007755,
+    "share_identical": 0.0,
+    "share_nearly_neutral_under_1pct_of_scale": 0.0,
+    "share_over_25pct_of_scale": 0.435,
+    "share_over_50pct_of_scale": 0.033,
+    "share_as_far_as_a_stranger": 0.0
+   }
+  },
+  "numbers_in_a_brain": 12835
+ }
+]

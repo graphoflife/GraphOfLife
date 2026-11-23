@@ -262,6 +262,9 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
     what = ("contests: the world of one era, its agents given brains drawn by coin from two eras, "
             "every mutation off, and the later era's share of the agents counted at the end"
             if kind == "contest" else
+            "assays: in the world of one era some agents' brains are changed once and marked, as many "
+            "more only marked, every mutation off, and the agents carrying each mark counted at the end"
+            if kind == "assay" else
             "invasions: a patch of the world of one era given a strategy written by hand, and "
             "its agents counted after every iteration")
     lines = [f"**{number(len(found))} trials**, {what}; each plays {number(T)} iterations, from a "
@@ -282,7 +285,8 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
 
     words = [("run", "worlds"), ("eras", "eras"), ("era", "at iteration"), ("strategy", "strategies"),
              ("size", "patches of"), ("place", "places"), ("background", "in a world of"),
-             ("settle", "settled for"), ("seed", "coins")]
+             ("settle", "settled for"), ("operator", "mutations of"), ("mutants", "mutants"),
+             ("controls", "controls"), ("seed", "seeds" if kind == "assay" else "coins")]
     for label, fields in gol_plan.trial_sets(name).items():
         count = sum(1 for f in found if f["set"] == label)
         if "a" in fields:

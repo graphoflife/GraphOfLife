@@ -1,0 +1,102 @@
+{
+ "lottery_total_expected": 197847.00000001924,
+ "lottery_total_observed": 197847.0,
+ "core_checked": 20597,
+ "core_got_foreign_neighbour_next_iteration": 0.6180026217410303,
+ "core_foreign_how": {
+  "new node (a newborn linked to it)": 17173,
+  "old neighbour whose genotype id changed (a mutant implanted or child)": 4837,
+  "old neighbour, old genotype": 1348
+ },
+ "territories": 37725,
+ "terr_N[2,3)": {
+  "count": 19078,
+  "meanN": 2.0,
+  "meanB": 1.8304329594297095,
+  "BoverN": 0.9152164797148548
+ },
+ "terr_N[3,6)": {
+  "count": 12807,
+  "meanN": 3.5921761536659638,
+  "meanB": 3.1364097759038025,
+  "BoverN": 0.8731224866862297
+ },
+ "terr_N[6,12)": {
+  "count": 3770,
+  "meanN": 7.6477453580901855,
+  "meanB": 6.2612732095490715,
+  "BoverN": 0.8187083795782464
+ },
+ "terr_N[12,30)": {
+  "count": 1522,
+  "meanN": 17.47700394218134,
+  "meanB": 13.892904073587385,
+  "BoverN": 0.7949248120300751
+ },
+ "terr_N[30,100)": {
+  "count": 487,
+  "meanN": 49.441478439425055,
+  "meanB": 39.119096509240244,
+  "BoverN": 0.7912202010133732
+ },
+ "terr_N[100,1000000000)": {
+  "count": 61,
+  "meanN": 169.86885245901638,
+  "meanB": 140.18032786885246,
+  "BoverN": 0.825226790194943
+ },
+ "loglog_slope_B_vs_N(N>=5)": 0.981380647758959,
+ "largest_territory": 459,
+ "territory_diam_mean(N>=5)": 4.879231356579282,
+ "territory_diam_max": 41,
+ "age_quantiles_end_of_game(10,25,50,75,90,99)": [
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  4.0,
+  9.0
+ ],
+ "whole_graph_largest_piece_N_diam(sample)": [
+  [
+   4343,
+   71
+  ],
+  [
+   2976,
+   39
+  ],
+  [
+   3474,
+   67
+  ],
+  [
+   2756,
+   63
+  ],
+  [
+   2440,
+   52
+  ],
+  [
+   3009,
+   79
+  ],
+  [
+   4003,
+   66
+  ],
+  [
+   1557,
+   31
+  ],
+  [
+   2238,
+   58
+  ],
+  [
+   2567,
+   49
+  ]
+ ]
+}

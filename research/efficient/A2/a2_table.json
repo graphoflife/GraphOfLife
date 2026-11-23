@@ -1,0 +1,54 @@
+{
+ "winners": {
+  "n_start": 1327769.0,
+  "tok_before": 2849313.0,
+  "own": 1660321.0,
+  "kin_geno": 418378.0,
+  "kin_lineage": 636651.0,
+  "prey": 134728.0,
+  "lost_prey": 133963.0,
+  "forfeited": 519581.0,
+  "estate": 654690.0,
+  "tok_end": 2985187.0,
+  "repro_net": 37561.0
+ },
+ "losers": {
+  "n_start": 407733.0,
+  "tok_before": 825614.0,
+  "own": 484156.0,
+  "kin_geno": 134662.0,
+  "kin_lineage": 132339.0,
+  "prey": 73845.0,
+  "lost_prey": 74457.0,
+  "forfeited": 207360.0,
+  "estate": 161505.0,
+  "tok_end": 779147.0,
+  "repro_net": 4206.0
+ },
+ "rest": {
+  "n_start": 576763.0,
+  "tok_before": 1325073.0,
+  "own": 776989.0,
+  "kin_geno": 156973.0,
+  "kin_lineage": 141405.0,
+  "prey": 249553.0,
+  "lost_prey": 249706.0,
+  "forfeited": 308407.0,
+  "estate": 219153.0,
+  "tok_end": 1235666.0,
+  "repro_net": -41767.0
+ },
+ "world": {
+  "n_start": 2312265.0,
+  "tok_before": 5000000.0,
+  "own": 2921466.0,
+  "kin_geno": 710013.0,
+  "kin_lineage": 910395.0,
+  "prey": 458126.0,
+  "lost_prey": 458126.0,
+  "forfeited": 1035348.0,
+  "estate": 1035348.0,
+  "tok_end": 5000000.0,
+  "repro_net": 0.0
+ }
+}

@@ -199,6 +199,16 @@ are in `research/Plans.md`.
 
 ## How our view changed
 
+- **23 November 2026: stopped.** The author stopped Experiment 48 at 17,193
+  (s4003), 27,509 (s4002) and 18,301 (s4008) iterations and ruled that no
+  experiment may take longer than a day. Its thesis reads the checks from
+  55,000 on, which no run reached, so it is not judged. What the readout
+  said until then: all three worlds beat their founders by iteration 5,000
+  (scores 1.0, 0.87 and 1.0). The eight later checks against the brains of
+  5,000 iterations before gave 0.50, 0.25, 0.87, 0.51, 0.63, 0.50, 0.38 and
+  0.64, a mean of 0.53, each with a band that includes 0.5. The runs and
+  their kept worlds stay on the disk; shorter studies now play from them
+  ([Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md)).
 - **22 November 2026, before any run.** A reading of the contest code found
   three faults, mended before Experiment 48 started
   ([Measuring evolution](measuring-evolution.md#how-our-view-changed)): a
@@ -283,6 +293,6 @@ are in `research/Plans.md`.
 
 **Also about:** [Does evolution keep going?](../README.md#does-evolution-keep-going).
 
-> [!info]- Pages that link here (8)
-> [What this notebook is about](what-this-notebook-is-about.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
+> [!info]- Pages that link here (9)
+> [What this notebook is about](what-this-notebook-is-about.md) · [Did the brains get better? Round 3's eras against each other](round-3-eras-against-each-other.md) · [Brains replaced by their average](brains-replaced-by-their-average.md) · [Every era against three](every-era-against-three.md) · [Why does evolution level off?](why-does-evolution-level-off.md) · [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md) · [Every simulation: what was run, and what was measured](every-simulation.md) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md) · [Building B2, and the search for a healthy, rich world](building-b2-and-the-search-for-a-healthy-rich-world.md)
 <!-- /turns -->

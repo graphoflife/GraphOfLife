@@ -1,0 +1,38 @@
+
+s4003: probes hold tokens {'1': 99, '2': 71, '3': 45, '4': 24, '5': 28, '6': 17, '7': 8, '8': 1}, median 5 candidates
+  era      0: 200 agents, 50.00 tokens each; 200 genotypes in 200 brains (largest clone 0%); 90% of variance in 107 components (participation 14.5); same as most common: first token 30%, child 47%; home first 25%, child 56%
+  era   2500: 3383 agents, 2.96 tokens each; 587 genotypes in 1000 brains (largest clone 6%); 90% of variance in 157 components (participation 19.8); same as most common: first token 47%, child 82%; home first 40%, child 59%
+  era   5000: 2525 agents, 3.96 tokens each; 424 genotypes in 1000 brains (largest clone 25%); 90% of variance in 123 components (participation 11.2); same as most common: first token 61%, child 80%; home first 41%, child 69%
+  era  10000: 3078 agents, 3.25 tokens each; 657 genotypes in 1000 brains (largest clone 4%); 90% of variance in 187 components (participation 24.4); same as most common: first token 47%, child 57%; home first 36%, child 57%
+  era  15000: 3587 agents, 2.79 tokens each; 514 genotypes in 1000 brains (largest clone 27%); 90% of variance in 153 components (participation 14.6); same as most common: first token 66%, child 66%; home first 33%, child 53%
+     at era 15000, holding    1 tokens (99 probes): first token home 46%, has a child 16%, gives it 16% of its tokens
+     at era 15000, holding    2 tokens (71 probes): first token home 33%, has a child 53%, gives it 33% of its tokens
+     at era 15000, holding    3 tokens (45 probes): first token home 24%, has a child 77%, gives it 38% of its tokens
+     at era 15000, holding  4-9 tokens (80 probes): first token home 21%, has a child 83%, gives it 40% of its tokens
+     at era 15000, holding  10+ tokens (5 probes): first token home 23%, has a child 89%, gives it 50% of its tokens
+
+s4008: probes hold tokens {'1': 40, '2': 42, '3': 38, '4': 29, '5': 25, '6': 24, '7': 10, '8': 18}, median 4 candidates
+  era      0: 100 agents, 100.00 tokens each; 100 genotypes in 100 brains (largest clone 1%); 90% of variance in 46 components (participation 7.2); same as most common: first token 33%, child 37%; home first 29%, child 64%
+  era   2500: 1388 agents, 7.20 tokens each; 595 genotypes in 1000 brains (largest clone 2%); 90% of variance in 115 components (participation 8.8); same as most common: first token 40%, child 68%; home first 20%, child 75%
+  era   5000: 1767 agents, 5.66 tokens each; 546 genotypes in 1000 brains (largest clone 5%); 90% of variance in 124 components (participation 11.7); same as most common: first token 39%, child 76%; home first 28%, child 74%
+  era  10000: 1708 agents, 5.85 tokens each; 619 genotypes in 1000 brains (largest clone 2%); 90% of variance in 143 components (participation 16.5); same as most common: first token 44%, child 50%; home first 19%, child 63%
+  era  15000: 1762 agents, 5.68 tokens each; 623 genotypes in 1000 brains (largest clone 2%); 90% of variance in 124 components (participation 11.9); same as most common: first token 49%, child 38%; home first 13%, child 75%
+  era  17500: 1526 agents, 6.55 tokens each; 555 genotypes in 1000 brains (largest clone 3%); 90% of variance in 112 components (participation 19.5); same as most common: first token 44%, child 92%; home first 26%, child 86%
+     at era 17500, holding    1 tokens (40 probes): first token home 33%, has a child 4%, gives it 4% of its tokens
+     at era 17500, holding    2 tokens (42 probes): first token home 30%, has a child 98%, gives it 52% of its tokens
+     at era 17500, holding    3 tokens (38 probes): first token home 24%, has a child 98%, gives it 36% of its tokens
+     at era 17500, holding  4-9 tokens (117 probes): first token home 24%, has a child 99%, gives it 50% of its tokens
+     at era 17500, holding  10+ tokens (63 probes): first token home 22%, has a child 99%, gives it 52% of its tokens
+
+s4002: probes hold tokens {'1': 63, '2': 58, '3': 40, '4': 24, '5': 10, '6': 4, '7': 2, '8': 3}, median 4 candidates
+  era      0: 50 agents, 200.00 tokens each; 50 genotypes in 50 brains (largest clone 2%); 90% of variance in 31 components (participation 9.1); same as most common: first token 35%, child 44%; home first 30%, child 57%
+  era   2500: 1965 agents, 5.09 tokens each; 882 genotypes in 1000 brains (largest clone 0%); 90% of variance in 197 components (participation 16.0); same as most common: first token 46%, child 72%; home first 29%, child 63%
+  era   5000: 853 agents, 11.72 tokens each; 674 genotypes in 853 brains (largest clone 1%); 90% of variance in 155 components (participation 12.5); same as most common: first token 47%, child 54%; home first 23%, child 46%
+  era  10000: 1906 agents, 5.25 tokens each; 873 genotypes in 1000 brains (largest clone 0%); 90% of variance in 195 components (participation 14.1); same as most common: first token 51%, child 53%; home first 27%, child 47%
+  era  15000: 1167 agents, 8.57 tokens each; 787 genotypes in 1000 brains (largest clone 1%); 90% of variance in 174 components (participation 14.0); same as most common: first token 43%, child 54%; home first 22%, child 46%
+  era  27500: 2163 agents, 4.62 tokens each; 908 genotypes in 1000 brains (largest clone 0%); 90% of variance in 190 components (participation 10.4); same as most common: first token 43%, child 67%; home first 32%, child 51%
+     at era 27500, holding    1 tokens (63 probes): first token home 41%, has a child 4%, gives it 4% of its tokens
+     at era 27500, holding    2 tokens (58 probes): first token home 35%, has a child 63%, gives it 33% of its tokens
+     at era 27500, holding    3 tokens (40 probes): first token home 33%, has a child 63%, gives it 23% of its tokens
+     at era 27500, holding  4-9 tokens (44 probes): first token home 26%, has a child 63%, gives it 31% of its tokens
+     at era 27500, holding  10+ tokens (95 probes): first token home 28%, has a child 65%, gives it 33% of its tokens

@@ -36,6 +36,11 @@ Five ways to check them, cheapest first:
   machines (pencil, exact small games, hand-built organisms).
 - **E. Other ways to simulate**, only if A to D say they are worth it.
 
+**Results are in `RESULTS.md`, with what they changed in this plan.** Wave 1
+found five of the laws below stated wrongly for Experiment 48's worlds (they
+play the lottery, and estates go to the parents of newborns); the
+corrections are in `D1/RESULT.md`.
+
 ### What is known already
 
 - **Evolution levels off early everywhere it was measured.** Round 3

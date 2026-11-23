@@ -1,0 +1,27 @@
+B1-10000-085a32-s4801 171 frames
+ W1 it 100-4200: agents 3359 brains 1244 | terr 416 (null 112) largest mean 101.3 max 351 (null mean 24.2) largest/agents 0.0301 share10 0.203 (null 0.036) p99 size 37 (null 26)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [213.0, 82.1, 58.6, 33.5, 18.3, 7.6, 1.9, 0.8] null [64.7, 18.8, 13.4, 8.4, 4.4, 1.5, 0.2, 0.1]
+ W2 it 4300-8500: agents 2800 brains 1163 | terr 355 (null 66) largest mean 86.7 max 675 (null mean 16.5) largest/agents 0.0295 share10 0.132 (null 0.022) p99 size 24 (null 26)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [191.9, 72.3, 49.5, 25.0, 11.4, 4.0, 0.8, 0.2] null [43.3, 10.4, 6.2, 3.1, 1.6, 0.7, 0.2, 0.1]
+ W3 it 8600-12800: agents 3050 brains 1200 | terr 397 (null 93) largest mean 73.6 max 458 (null mean 11.9) largest/agents 0.0226 share10 0.154 (null 0.011) p99 size 29 (null 13)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [207.8, 79.1, 58.0, 30.3, 14.9, 6.0, 1.0, 0.4] null [59.7, 16.2, 9.9, 4.8, 1.8, 0.2, 0.0, 0.0]
+ W4 it 12900-17100: agents 3118 brains 970 | terr 343 (null 152) largest mean 173.5 max 692 (null mean 87.4) largest/agents 0.0552 share10 0.335 (null 0.107) p99 size 63 (null 44)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [168.6, 64.1, 48.2, 28.6, 18.3, 10.0, 3.3, 1.6] null [80.4, 27.0, 20.6, 12.3, 7.5, 3.1, 0.8, 0.4]
+B1-10000-f511a5-s4801 275 frames
+ W1 it 100-6800: agents 1687 brains 1338 | terr 143 (null 1) largest mean 5.5 max 8 (null mean 1.7) largest/agents 0.0037 share10 0.000 (null 0.000) p99 size 5 (null 2)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [108.3, 25.4, 8.1, 0.7, 0.0, 0.0, 0.0, 0.0] null [1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+ W2 it 6900-13700: agents 1682 brains 1342 | terr 135 (null 1) largest mean 5.4 max 9 (null mean 1.7) largest/agents 0.0037 share10 0.000 (null 0.000) p99 size 5 (null 2)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [103.9, 24.2, 6.6, 0.5, 0.0, 0.0, 0.0, 0.0] null [1.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+ W3 it 13800-20600: agents 1612 brains 1278 | terr 135 (null 1) largest mean 5.4 max 9 (null mean 1.7) largest/agents 0.0036 share10 0.000 (null 0.000) p99 size 5 (null 2)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [103.1, 24.6, 7.2, 0.6, 0.0, 0.0, 0.0, 0.0] null [1.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+ W4 it 20700-27500: agents 1823 brains 1455 | terr 152 (null 1) largest mean 5.8 max 10 (null mean 1.6) largest/agents 0.0035 share10 0.000 (null 0.000) p99 size 5 (null 2)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [115.5, 28.3, 7.8, 0.6, 0.0, 0.0, 0.0, 0.0] null [0.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+B1-10000-1cfaa4-s4801 183 frames
+ W1 it 100-4500: agents 1798 brains 936 | terr 196 (null 7) largest mean 12.7 max 26 (null mean 2.3) largest/agents 0.0074 share10 0.014 (null 0.000) p99 size 10 (null 3)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [117.2, 43.0, 25.2, 8.1, 2.1, 0.1, 0.0, 0.0] null [6.8, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+ W2 it 4600-9100: agents 1686 brains 868 | terr 192 (null 8) largest mean 12.3 max 24 (null mean 2.7) largest/agents 0.0078 share10 0.013 (null 0.000) p99 size 9 (null 5)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [114.5, 42.5, 24.9, 8.5, 1.5, 0.1, 0.0, 0.0] null [7.2, 0.4, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0]
+ W3 it 9200-13700: agents 1636 brains 848 | terr 185 (null 8) largest mean 12.1 max 25 (null mean 2.3) largest/agents 0.0082 share10 0.012 (null 0.000) p99 size 9 (null 3)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [111.4, 39.4, 24.4, 8.5, 1.3, 0.1, 0.0, 0.0] null [7.3, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+ W4 it 13800-18300: agents 1630 brains 850 | terr 179 (null 7) largest mean 11.8 max 26 (null mean 2.3) largest/agents 0.0076 share10 0.009 (null 0.000) p99 size 9 (null 3)
+   per-frame counts by size bin [2, 3, 4, 6, 10, 20, 50, 100] real [107.6, 38.3, 23.8, 8.3, 1.2, 0.1, 0.0, 0.0] null [6.9, 0.3, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0]

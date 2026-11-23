@@ -653,6 +653,22 @@
       "summary": "Experiment 46: the rules of round 3's world s3058 at 10,000 tokens, once as they are and five times with one thing changed, three seeds of 20,000 iterations each. Its thesis, that the game stops evolution and not the population, cannot be judged: all three control runs died out, and 14 of the 18 runs died, in culls that cut their network apart. The larger a world, the longer it lived. All three runs with stakes pooled by family lived, with six times the control's agents per token, even wealth and almost no culls."
     },
     {
+      "id": "are-mutants-as-fit-as-their-parents",
+      "title": "Are mutants as fit as their parents?",
+      "file": "pages/are-mutants-as-fit-as-their-parents.md",
+      "topics": [
+        "evolution",
+        "brains"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E49"
+      ],
+      "status": "ready",
+      "added": "2026-11-23",
+      "summary": "One mutation of the engine changes what a brain decides in 34% to 67% of real situations, in one world as much as an unrelated brain differs; one number changed, under 1%. Experiment 49, not yet played, marks mutants and unchanged agents in three kept worlds and counts their copies 30 iterations later."
+    },
+    {
       "id": "a-source-and-a-sink",
       "title": "A source and a sink",
       "file": "pages/a-source-and-a-sink.md",

@@ -185,6 +185,108 @@ def contest(config: Dict[str, Any], state: Dict[str, np.ndarray], A: Dict[str, n
             "agents": len(ids), "shares": shares}
 
 
+# ----------------------------------------------------------------------------
+# An assay: many marked lines in one short contest
+# ----------------------------------------------------------------------------
+
+def nudged(brain: Any, k: int, rng: np.random.RandomState) -> None:
+    """
+    Change exactly k of a brain's numbers in place, each by the engine's own
+    noise for its layer (mutation_noise_std over the root of the layer's
+    inputs), and redraw nothing: a mutation as small as one likes, to set
+    beside the engine's own, which changes a share of all of them at once.
+    """
+    parts = brain.weights + brain.biases
+    sizes = np.array([p.size for p in parts], dtype=float)
+    scale = [brain.cfg.mutation_noise_std / np.sqrt(w.shape[1]) for w in brain.weights] * 2
+    for which in rng.choice(len(parts), size=k, p=sizes / sizes.sum()):
+        p = parts[which]
+        at = tuple(int(rng.randint(n)) for n in p.shape)
+        p[at] = p.dtype.type(float(p[at]) + rng.normal(0.0, scale[which]))
+
+
+def assay(config: Dict[str, Any], state: Dict[str, np.ndarray], T: int, seed: int, operator: Any,
+          mutants: int, controls: int, on_step: Optional[Callable[[Any, int], bool]] = None) -> Dict[str, Any]:
+    """
+    How well do mutants do, beside agents left as they were? `mutants` and
+    `controls` agents of a kept world are drawn at random, each a **site**.
+    Every site's brain gets a mark of its own (an id above LABEL_B). A mutant
+    site's brain is first changed once: by the engine's own mutation
+    (`operator` "engine"), or in exactly so many of its numbers (`operator` a
+    number, see nudged). A control site's brain is only marked. Then the world
+    plays T iterations with every mutation off, so every copy keeps its mark,
+    and the agents carrying each mark are counted after every iteration.
+
+    A site's result is its count at the end: 1 is a line that held its place,
+    0 one that died out, more one that spread. Mutants and controls play in
+    the same world at the same time, so their counts compare directly. The
+    engine never reads a brain's id (with pools off), so a world whose sites
+    are all controls plays exactly as the kept world would with mutation off.
+
+    Not for worlds that mix brains at birth (a child would be half another
+    line's) or that pool stakes by genotype or family (a mark would change who
+    pools): refused. A world that dies out leaves no result.
+    """
+    import dataclasses
+    from gol_config import SimConfig
+    from GraphOfLife import GraphOfLife
+
+    cfg = SimConfig.from_dict(config)
+    if cfg.mix_at_birth or cfg.pool != "off":
+        raise ValueError("an assay marks single lines: not in a world that mixes brains at birth or pools stakes")
+    if not (operator == "engine" or (isinstance(operator, int) and not isinstance(operator, bool) and operator >= 1)):
+        raise ValueError(f"an assay's operator is \"engine\" or how many numbers to change, not {operator!r}")
+    played = dataclasses.replace(cfg, mutation_probability=0.0, extinction_threshold=0)
+    rng = np.random.RandomState(seed)
+    world = GraphOfLife.from_checkpoint(dict(state), played)
+    alive = sorted(u for u in world.G.nodes() if world.tokens.get(u, 0) >= 1)
+    if len(alive) < mutants + controls:
+        raise ValueError(f"the world has {len(alive)} agents with a token, fewer than the {mutants + controls} sites asked for")
+    sites = [int(u) for u in rng.choice(alive, size=mutants + controls, replace=False)]
+    once = dataclasses.replace(cfg, mutation_probability=1.0)
+    marks: Dict[int, int] = {}
+    start = []
+    for j, u in enumerate(sites):
+        brain = world.brains[u].copy()
+        if j < mutants:
+            if operator == "engine":
+                brain.cfg = once
+                brain.mutate(0, rng)
+            else:
+                nudged(brain, int(operator), rng)
+        brain.cfg = played
+        brain.brain_id = LABEL_B + j
+        brain.parent_brain_id = -1
+        world.brains[u] = brain
+        marks[LABEL_B + j] = j
+        start.append({"mutant": j < mutants, "tokens": int(world.tokens[u]), "links": int(world.G.degree[u])})
+    world.rng = np.random.RandomState(seed + 1)
+
+    counts = np.zeros((T + 1, len(sites)), dtype=np.int64)
+    counts[0] = 1
+    agents = [world.G.number_of_nodes()]
+    for t in range(1, T + 1):
+        frames = world.step(record_decisions=False)
+        if on_step is not None and on_step(world, t):
+            return None
+        if died_out(frames):
+            return {"sites": None, "agents": 0}
+        for u in world.G.nodes():
+            j = marks.get(world.brains[u].brain_id)
+            if j is not None:
+                counts[t, j] += 1
+        agents.append(world.G.number_of_nodes())
+    held = np.zeros(len(sites), dtype=np.int64)
+    for u in world.G.nodes():
+        j = marks.get(world.brains[u].brain_id)
+        if j is not None:
+            held[j] += int(world.tokens[u])
+    every = max(1, T // 10)
+    return {"sites": [{**start[j], "count": int(counts[T, j]), "held": int(held[j]),
+                       "series": [int(c) for c in counts[::every, j]]} for j in range(len(sites))],
+            "every": every, "agents": agents[-1], "agents_at_start": agents[0]}
+
+
 def _play_one(task: Tuple[str, int, int, int, int, int]) -> Dict[str, Any]:
     import gol_store as store
     run_id, home, a, b, T, seed = task

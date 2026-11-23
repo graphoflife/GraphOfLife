@@ -331,7 +331,7 @@ under *A source and a sink*.
 <!-- turns -->
 ---
 
-← [Why does evolution level off?](why-does-evolution-level-off.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
+← [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Changing the rules](../README.md#changing-the-rules).
 

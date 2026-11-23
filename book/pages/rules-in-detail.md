@@ -1144,6 +1144,7 @@ the rounding.
 - [How big should a brain be?](how-big-should-a-brain-be.md#how-far-one-change-moves-a-brain)
 - [Measuring evolution: genotypes, eras and the open-ended test](measuring-evolution.md#a-caution-about-names)
 - [How fast should brains change?](how-fast-should-brains-change.md#where-to-go-next)
+- [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md#are-mutants-as-fit-as-their-parents)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#is-evolutions-play-the-best-there-is)
 - [Other contests: a lottery, and alliances](another-game.md#stakes-counted-by-genotype)
 

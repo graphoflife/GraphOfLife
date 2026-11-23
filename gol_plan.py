@@ -317,7 +317,7 @@ def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict
 # ----------------------------------------------------------------------------
 #
 # A plan may ask for trials instead of runs: short plays from a world another
-# run kept (gol_trial.py). Its `trials` name the kind — contest or invasion —
+# run kept (gol_trial.py). Its `trials` name the kind — contest, invasion or assay —
 # and how long each plays, and list them in sets, each a condition of its own,
 # either one by one (`items`) or as every combination of some lists (`grid`).
 # A contest's `pair` in a grid gives its two eras, and its `home` says on whose
@@ -418,6 +418,8 @@ def _experiment_trials(name: str) -> List[RunSpec]:
         era = trial.get("home", trial.get("era"))
         what = (f"era {trial['b']:,} against {trial['a']:,} on the world of {era:,}, coin {trial['seed']}"
                 if trial["kind"] == "contest" else
+                f"{trial['mutants']} mutants ({trial['operator']}) beside {trial['controls']} controls at {era:,}, "
+                f"seed {trial['seed']}" if trial["kind"] == "assay" else
                 f"{trial['strategy']} in a patch of {trial['size']:g} at {era:,}, place {trial['place']}"
                 + (f", in a world of {trial['background']}" if trial.get("background") else ""))
         specs.append(RunSpec(
