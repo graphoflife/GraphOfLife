@@ -426,6 +426,16 @@ as it is 0.30 (0.10 to 0.49). (2) Against the arm as it is: 10 numbers 0.63
   world swings between kinds of world. A contest between two moments says
   little when the world's kind changed in between.
 
+### Experiment 60: the step between — order forms and breaks at 30 numbers
+
+From the 20,000 world, ten windows of 500 (E = a world of equals): 30
+numbers `.EEE......` and `.EEEEEE...`; 300 numbers none in either run; 1,000
+numbers none, and one run died at 21,863. Thesis undecided (it expected 30
+to keep the order and 300 to have it part of the time). The step at which
+order stops lasting lies between 10 and 30 of a brain's 13,569 numbers.
+Experiment 61 plays both 30-number worlds on for 10,000 iterations: does
+the order form again?
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks

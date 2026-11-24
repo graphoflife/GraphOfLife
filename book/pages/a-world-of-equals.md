@@ -31,9 +31,10 @@ founders with small mutations, at 40,000 tokens and at 10,000, where they
 died out before.
 
 Five experiments of this page are played, and all five theses are
-refuted. Two more are not yet played: Experiment 59 asks whether a world of
-equals can be invaded, and Experiment 60 looks for a step of mutation at
-which order forms and breaks again. What the five found together:
+refuted. Experiment 60 looked for a step of mutation at which order forms
+and breaks, and found it at 30 numbers; its thesis is undecided.
+Experiments 59 (can a world of equals be invaded?) and 61 (does the order
+form again?) are being played. What the five found together:
 
 - **The world of equals forms again and again**, from a long-run world,
   from founders and from young worlds, at 10,000 and at 40,000 tokens. Six
@@ -314,6 +315,38 @@ plays the kept world of Experiment 50 on with mutations of 30, 300 and
 > **It fails if:** With 30 numbers both runs have fewer than five such windows; or with 1,000 numbers both runs have more than five. Anything else is undecided. Reported beside it: for every run, which windows are of a world of equals, and how often it entered and left that state.
 <!-- /thesis -->
 
+### What Experiment 60 found
+
+The six runs were played on 24 November 2026. Each line is one run's ten
+windows of 500 iterations, from iteration 20,000 to 25,000; an `E` is a
+window in which the world is a world of equals.
+
+| mutation | seed 6001 | seed 6002 |
+|---|---|---|
+| 30 numbers | `.EEE......` | `.EEEEEE...` |
+| 300 numbers | `..........` | `..........` |
+| 1,000 numbers | `..........` | `....` and then died out, at iteration 21,863 |
+
+**The thesis is undecided.** It expected 30 numbers to keep the world of
+equals in eight windows of ten; the two runs kept it in three and in six.
+It expected 300 numbers to have it for part of the time; neither run had
+it at all. Only the claim for 1,000 numbers held.
+
+What the runs show is plainer than the thesis:
+
+- **With 30 numbers the order forms and is lost.** Both worlds were worlds
+  of equals within 500 iterations, for 1,500 and for 3,000 iterations.
+  Then births and deaths came back, and they ended with 3,408 and 1,682
+  agents.
+- **With 300 and with 1,000 numbers it never forms.**
+- **The step at which order stops lasting lies between 10 and 30 numbers**,
+  of the 13,569 a brain of this world holds. With 10 it lasted all 4,500
+  iterations played (Experiment 53).
+- One world with 1,000 numbers died out, at 40,000 tokens. Under the
+  engine's mutation, which changes about as many numbers, worlds of this
+  size died too (Experiment 46).
+
+
 <!-- runs E60 -->
 > [!info]- The runs behind this page
 > **6 runs.** Every condition below is run once for every seed (6001 to 6002), played on from the world `B1-40000-bbbccd-s4602` kept at iteration 20,000, to iteration 25,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
@@ -329,13 +362,11 @@ plays the kept world of Experiment 50 on with mutations of 30, 300 and
 
 <!-- experiment E61 -->
 
-The first runs of Experiment 60 were read before it was finished, and they
-answer its question sooner than expected: with mutations of 30 numbers both
-worlds became worlds of equals within 500 iterations, kept that for 1,500
-and 3,000 iterations, and lost it again. With 300 numbers the first world
-never formed one. So 30 numbers is already a step at which order forms and
-breaks. What a world that keeps moving would need is that it forms again.
-Experiment 61 plays the two worlds on for 10,000 iterations to see.
+So 30 numbers is a step at which order forms and breaks. What a world
+that keeps moving would need is that it forms again. Experiment 61 plays
+the two worlds on for 10,000 iterations to see. (It was planned on 24
+November when three of Experiment 60's six runs were done, both runs with
+30 numbers among them.)
 
 <!-- thesis E61 -->
 > [!quote] The thesis of Experiment 61, written down before any of its runs existed
