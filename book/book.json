@@ -699,11 +699,12 @@
       "experiments": [
         "E54",
         "E56",
-        "E57"
+        "E57",
+        "E58"
       ],
       "status": "ready",
       "added": "2026-11-24",
-      "summary": "With small mutations one world became a few hundred agents with the same tokens and links each, never born and never dying, who all stake one token on every neighbour, marked for a coalition. Experiment 56 started the same rules from founders with small mutations: four of five worlds died within 71 to 1,322 iterations, and the fifth became a world of equals within 1,000, at 10,000 tokens; its thesis is refuted. Experiment 54 (its later brains against its earlier ones) is being played, and Experiment 57 (large mutations for 500 iterations, then small ones) is planned."
+      "summary": "With small mutations one world became a few hundred agents with the same tokens and links each, never born and never dying, who all stake one token on every neighbour, marked for a coalition. Experiment 56 started the same rules from founders with small mutations: four of five worlds died within 71 to 1,322 iterations, and the fifth became a world of equals within 1,000, at 10,000 tokens; its thesis is refuted. Experiment 54 (its later brains against its earlier ones) is being played, and Experiments 57 (large mutations for 500 iterations, then small ones) and 58 (a step each brain inherits) are planned."
     },
     {
       "id": "a-source-and-a-sink",

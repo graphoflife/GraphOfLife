@@ -17,7 +17,8 @@
    }
   ],
   "world_of_equals": false,
-  "first_window_of_equals": null
+  "first_window_of_equals": null,
+  "steps": []
  },
  "10 numbers at 10,000 tokens, seed 5602": {
   "run": "B1-10000-01519c-s5602",
@@ -37,7 +38,8 @@
    }
   ],
   "world_of_equals": false,
-  "first_window_of_equals": null
+  "first_window_of_equals": null,
+  "steps": []
  },
  "10 numbers at 10,000 tokens, seed 5603": {
   "run": "B1-10000-01519c-s5603",
@@ -156,7 +158,8 @@
    }
   ],
   "world_of_equals": true,
-  "first_window_of_equals": 1000
+  "first_window_of_equals": 1000,
+  "steps": []
  },
  "10 numbers at 40,000 tokens, seed 5601": {
   "run": "B1-40000-b7eb00-s5601",
@@ -176,7 +179,8 @@
    }
   ],
   "world_of_equals": false,
-  "first_window_of_equals": null
+  "first_window_of_equals": null,
+  "steps": []
  },
  "10 numbers at 40,000 tokens, seed 5602": {
   "run": "B1-40000-b7eb00-s5602",
@@ -218,6 +222,7 @@
    }
   ],
   "world_of_equals": false,
-  "first_window_of_equals": null
+  "first_window_of_equals": null,
+  "steps": []
  }
 }

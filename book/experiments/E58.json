@@ -1,0 +1,84 @@
+{
+ "id": "E58",
+ "title": "Does a world find its own step? The rules of s3058 with a mutation size each brain inherits",
+ "thesis": {
+  "claim": "Where every brain inherits how much a mutation changes it, a world starts with large steps, comes to small ones by itself, and becomes a world of equals. It lives through its start, as worlds with small steps from the first iteration did not.",
+  "why": "Large steps find brains that live: under the engine's mutation worlds of these rules lived hundreds to thousands of iterations from founders, where mutations of 10 numbers from the start killed four of five within 71 to 1,322 (Experiment 56). Small steps keep an order that large ones break: the world of equals lasted 4,500 iterations under mutations of 10 numbers and fell apart within 500 under the engine's (Experiment 53). If the step is inherited and itself doubles or halves at every mutation, lines with large steps should do better while brains are still poor, and lines with small steps should take over once there is something to keep: a mutant that decides like its parent keeps its place in a way of playing that needs everyone to follow it.",
+  "confirm": "Founders start with a step of a tenth of their numbers. A run is a world of equals if, over its last 500 iterations, there are fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition. All three: at least four of the five runs live to iteration 5,000; in every run that lives, the middle step of its brains at iteration 5,000 is below a tenth of the founders' step; and at least three of the five runs are worlds of equals.",
+  "refute": "Fewer than three of the five runs live to iteration 5,000; or in a run that lives the middle step at 5,000 is as large as the founders' or larger. Anything else is undecided. Reported beside it: the middle step of each run in every world it kept, every 500 iterations."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "5801..5803",
+  "iterations": 5000,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "inherited step at 10,000 tokens",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "inherited_step": true
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   },
+   {
+    "name": "inherited step at 40,000 tokens",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "inherited_step": true
+    },
+    "sizes": [
+     40000
+    ],
+    "world": {
+     "n_nodes": 800
+    },
+    "seeds": "5801..5802"
+   }
+  ]
+ }
+}

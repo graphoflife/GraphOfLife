@@ -61,7 +61,7 @@ differ by their mutations and their luck, and by nothing else
 
 | arm | a mutation changes | setting |
 |---|---|---|
-| as it is | about a tenth of the brain's 12,800 numbers, and sometimes redraws part of a layer | none |
+| as it is | about a tenth of the brain's 13,600 numbers, and sometimes redraws part of a layer | none |
 | 10 numbers | exactly 10 numbers, nothing redrawn | [`mutation_numbers`](settings.md#mutation_numbers) = 10 |
 | 100 numbers | exactly 100 numbers, nothing redrawn | `mutation_numbers` = 100 |
 
