@@ -31,8 +31,9 @@ founders with small mutations, at 40,000 tokens and at 10,000, where they
 died out before.
 
 Five experiments of this page are played, and all five theses are
-refuted. A sixth, Experiment 59, not yet played, asks whether a world of
-equals can be invaded. What the five found together:
+refuted. Two more are not yet played: Experiment 59 asks whether a world of
+equals can be invaded, and Experiment 60 looks for a step of mutation at
+which order forms and breaks again. What the five found together:
 
 - **The world of equals forms again and again**, from a long-run world,
   from founders and from young worlds, at 10,000 and at 40,000 tokens. Six
@@ -288,6 +289,40 @@ died as they did with small steps from the first iteration.
 > - **inherited step at 40,000 tokens** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `inherited_step` = on, `n_nodes` = 800; 40,000 tokens; seeds 5801 to 5802. Runs `B1-40000-2d4867-s5801` … `B1-40000-2d4867-s5802`.
 >
 > To make these runs again: `python3 gol_lab.py run E58`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+<!-- /runs -->
+
+## The step between
+
+<!-- experiment E60 -->
+
+With mutations of 10 numbers the world of equals lasted. With the engine's
+mutation it never formed. With 100 numbers it formed once and was lost
+again. So between the step that keeps an order for good and the step that
+never lets it form, there may be one at which orders keep forming and
+breaking: a world that neither stands still nor only churns. Experiment 60
+plays the kept world of Experiment 50 on with mutations of 30, 300 and
+1,000 numbers, two runs each, for 5,000 iterations.
+
+<!-- thesis E60 -->
+> [!quote] The thesis of Experiment 60, written down before any of its runs existed
+> **The claim.** The larger the step of a mutation, the less a world of equals lasts, and between the step that keeps it for good and the step that never lets it form there is one at which it forms and is lost again. Played on from the same kept world for 5,000 iterations: with mutations of 30 numbers the world becomes a world of equals and stays one; with 1,000 numbers it is not one at the end; with 300 numbers it is one for part of the time.
+>
+> **Why it would be so.** From this kept world, mutations of 10 numbers led to a world of equals in both runs, which then lasted; mutations of 100 numbers led to one in one run of two, which was lost again within 2,000 iterations; the engine's mutation, which changes about 1,360 numbers and redraws part of a layer, never led to one (Experiments 50 and 53). A way of playing that needs everyone to follow it is broken by copies that decide otherwise, and how many copies do so grows with the step. A world in which order keeps forming and breaking would be neither the churn of large steps nor the standstill of small ones.
+>
+> **It holds if:** Each run's 5,000 iterations are ten windows of 500. A window is one of a world of equals if it has fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition. All three: with 30 numbers, both runs have at least eight such windows among their last ten; with 1,000 numbers, neither run's last window is one; with 300 numbers, at least one run has between one and seven such windows.
+>
+> **It fails if:** With 30 numbers both runs have fewer than five such windows; or with 1,000 numbers both runs have more than five. Anything else is undecided. Reported beside it: for every run, which windows are of a world of equals, and how often it entered and left that state.
+<!-- /thesis -->
+
+<!-- runs E60 -->
+> [!info]- The runs behind this page
+> **6 runs.** Every condition below is run once for every seed (6001 to 6002), played on from the world `B1-40000-bbbccd-s4602` kept at iteration 20,000, to iteration 25,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **30 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-8020c3-s6001-on45a3d3` … `B1-40000-8020c3-s6002-on45a3d3`.
+> - **300 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 300, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-0c07af-s6001-on45a3d3` … `B1-40000-0c07af-s6002-on45a3d3`.
+> - **1,000 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 1,000, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-c745b3-s6001-on45a3d3` … `B1-40000-c745b3-s6002-on45a3d3`.
+>
+> To make these runs again: `python3 gol_lab.py run E60`.
 <!-- /runs -->
 
 ## Can it be invaded, and can it invade?

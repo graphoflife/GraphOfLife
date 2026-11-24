@@ -1,0 +1,111 @@
+{
+ "id": "E60",
+ "title": "The step between: how long order lasts under mutations of 30, 300 and 1,000 numbers",
+ "thesis": {
+  "claim": "The larger the step of a mutation, the less a world of equals lasts, and between the step that keeps it for good and the step that never lets it form there is one at which it forms and is lost again. Played on from the same kept world for 5,000 iterations: with mutations of 30 numbers the world becomes a world of equals and stays one; with 1,000 numbers it is not one at the end; with 300 numbers it is one for part of the time.",
+  "why": "From this kept world, mutations of 10 numbers led to a world of equals in both runs, which then lasted; mutations of 100 numbers led to one in one run of two, which was lost again within 2,000 iterations; the engine's mutation, which changes about 1,360 numbers and redraws part of a layer, never led to one (Experiments 50 and 53). A way of playing that needs everyone to follow it is broken by copies that decide otherwise, and how many copies do so grows with the step. A world in which order keeps forming and breaking would be neither the churn of large steps nor the standstill of small ones.",
+  "confirm": "Each run's 5,000 iterations are ten windows of 500. A window is one of a world of equals if it has fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition. All three: with 30 numbers, both runs have at least eight such windows among their last ten; with 1,000 numbers, neither run's last window is one; with 300 numbers, at least one run has between one and seven such windows.",
+  "refute": "With 30 numbers both runs have fewer than five such windows; or with 1,000 numbers both runs have more than five. Anything else is undecided. Reported beside it: for every run, which windows are of a world of equals, and how often it entered and left that state."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "from": {
+   "run": "B1-40000-bbbccd-s4602",
+   "at": 20000
+  },
+  "seeds": "6001..6002",
+  "iterations": 25000,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 2500
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "30 numbers",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "300 numbers",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 300
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "1,000 numbers",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 1000
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   }
+  ]
+ }
+}
