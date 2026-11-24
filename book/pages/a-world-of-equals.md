@@ -4,6 +4,8 @@
 > - What is the world of equals that formed when mutations were made small?
 > - Do [brains](the-brain.md "The neural network each agent decides with: inputs about itself and its neighbours, outputs that become its decisions.") still get better inside it?
 > - Does it form from founders too, and does it keep a small world alive?
+> - Do large mutations first and small ones after give a world that lives
+>   and keeps its order?
 
 <!-- experiment E54 -->
 <!-- experiment E56 -->
@@ -22,7 +24,14 @@ This page says what that world is and asks two things of it. Experiment 54
 plays its later brains against its earlier ones: is it an end point, or do
 brains still get better inside it? Experiment 56 starts the same rules from
 founders with small mutations, at 40,000 tokens and at 10,000, where they
-died out before. Neither has been played yet.
+died out before.
+
+Experiment 56 is played, and its thesis is refuted. Four of its five worlds
+died within 71 to 1,322 iterations: small mutations from the start are too
+slow for a world of random brains. The fifth became a world of equals
+within 1,000 iterations, at 10,000 tokens. Experiment 57, not yet played,
+starts with the engine's large mutations and switches to small ones at
+iteration 500. Experiment 54 is being played.
 
 ## What the world of equals is
 
@@ -99,6 +108,57 @@ rules with the engine's mutation died out in all three runs of Experiment
 > **It fails if:** Two or more of the three runs at 10,000 tokens die out before iteration 5,000, or fewer than two of the five runs are a world of equals. Anything else is undecided. Reported beside it: when each run became a world of equals, if it did, and its agents, links and Gini of tokens.
 <!-- /thesis -->
 
+### What Experiment 56 found
+
+The five runs were played on 24 November 2026.
+
+| run | lived to | what it became |
+|---|---|---|
+| 10,000 tokens, seed 5601 | 71 | died out |
+| 10,000 tokens, seed 5602 | 347 | died out |
+| 10,000 tokens, seed 5603 | 5,000 | a world of equals from iteration 1,000 on: 108 agents with about 61 links and 62 tokens each, every node won by a coalition, no births |
+| 40,000 tokens, seed 5601 | 205 | died out |
+| 40,000 tokens, seed 5602 | 1,322 | died out |
+
+**The thesis is refuted**: two of the three runs at 10,000 tokens died out
+before iteration 5,000, and only one run of five became a world of equals.
+
+Small mutations from the first iteration are worse for a world's start
+than the engine's. Four of five worlds died within 71 to 1,322 iterations;
+under the engine's mutation the worlds of this size lived 744 to 2,630. A
+world of founders holds brains drawn at random, and a step of ten numbers
+is too slow to make them fit before the network breaks.
+
+The one world that got through its start became a world of equals within
+1,000 iterations, at 10,000 tokens, from founders. So that state does not
+need the 20,000 iterations of history the first one had, nor 40,000 tokens.
+It is where these rules go when copies are faithful, if the world lives
+long enough to get there.
+
+The two findings point the same way. Large steps find brains that live;
+small steps keep what has been found. A world may need the first and then
+the second.
+
+## Large steps first, small steps after
+
+<!-- experiment E57 -->
+
+Experiment 57 tries exactly that, on the three worlds that died in
+Experiment 46. Each is taken as it stood at iteration 500, after 500
+iterations of the engine's mutation, and played on for 5,000 more: twice
+with mutations of 10 numbers, and twice as it is.
+
+<!-- thesis E57 -->
+> [!quote] The thesis of Experiment 57, written down before any of its runs existed
+> **The claim.** A world that starts with the engine's large mutations and goes on with small ones lives, where the same world left with the large ones dies. Played on from iteration 500 with mutations of 10 numbers, the three worlds of s3058 at 10,000 tokens that died out in Experiment 46 live 5,000 iterations more and become worlds of equals.
+>
+> **Why it would be so.** From founders, mutations of 10 numbers killed four of five worlds within 71 to 1,322 iterations (Experiment 56): founders' brains are drawn at random, and small steps are too slow to make them fit before the world breaks. The engine's mutation finds brains that live, but cannot keep a way of playing that needs everyone to follow it (Experiment 53). The world of equals so far formed twice from a world that had first run with large mutations, and once from founders. So large steps to begin with and small steps after should give both: a world that gets through its start, and then keeps its order. Under the engine's mutation these three worlds died at 744, 1,029 and 2,630 iterations.
+>
+> **It holds if:** A run is a world of equals if, over its last 500 iterations, there are fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition. Both: at least five of the six runs played on with 10 numbers live to iteration 5,500, and at least four of them are worlds of equals; and at most two of the six runs played on as they are live to 5,500.
+>
+> **It fails if:** Fewer than three of the six runs with 10 numbers live to iteration 5,500, or as many runs live as they are as with 10 numbers. Anything else is undecided.
+<!-- /thesis -->
+
 <!-- runs E54 -->
 > [!info]- The trials behind this page
 > **96 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
@@ -113,14 +173,28 @@ rules with the engine's mutation died out in all three runs of Experiment
 > To play these trials again: `python3 gol_lab.py run E54`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
 <!-- /runs -->
 
+<!-- runs E57 -->
+> [!info]- The runs behind this page
+> **12 runs.** Every condition below is run once for every seed (5701 to 5702), played on from a kept world of its own to iteration 5,500 — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
+>
+> - **s4601, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-01519c-s5701-onfbb674` … `B1-10000-01519c-s5702-onfbb674`.
+> - **s4601, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-122402-s5701-onfbb674` … `B1-10000-122402-s5702-onfbb674`.
+> - **s4602, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-01519c-s5701-onfad1ed` … `B1-10000-01519c-s5702-onfad1ed`.
+> - **s4602, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-122402-s5701-onfad1ed` … `B1-10000-122402-s5702-onfad1ed`.
+> - **s4603, then 10 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-01519c-s5701-on6669d4` … `B1-10000-01519c-s5702-on6669d4`.
+> - **s4603, as it is** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `n_nodes` = 200; 10,000 tokens. Runs `B1-10000-122402-s5701-on6669d4` … `B1-10000-122402-s5702-on6669d4`.
+>
+> To make these runs again: `python3 gol_lab.py run E57`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+<!-- /runs -->
+
 <!-- runs E56 -->
 > [!info]- The runs behind this page
-> **5 runs.** Every condition below is run once for each of its seeds, for 5,000 iterations — or until its world dies out. Every setting is that of the baseline **B1** (the algorithm exactly as a new run is offered it) unless the condition changes it ([At a glance](settings.md#at-a-glance)).
+> **5 runs.** Every condition below is run once for each of its seeds, for 5,000 iterations — or until its world dies out. Every setting is B1's unless the condition changes it.
 >
 > - **10 numbers at 10,000 tokens** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 200; 10,000 tokens; seeds 5601 to 5603. Runs `B1-10000-01519c-s5601` … `B1-10000-01519c-s5603`.
 > - **10 numbers at 40,000 tokens** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 10, `n_nodes` = 800; 40,000 tokens; seeds 5601 to 5602. Runs `B1-40000-b7eb00-s5601` … `B1-40000-b7eb00-s5602`.
 >
-> To make these runs again: `python3 gol_lab.py run E56`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
+> To make these runs again: `python3 gol_lab.py run E56`.
 <!-- /runs -->
 
 ## Where to go next
@@ -132,6 +206,7 @@ rules with the engine's mutation died out in all three runs of Experiment
 
 ## How this was made
 
-The plans are `book/experiments/E54.json` and `E56.json`. What the agents
+The plans are `book/experiments/E54.json`, `E56.json` and `E57.json`;
+Experiment 56 is read by `python3 research/efficient/E50/e56.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.

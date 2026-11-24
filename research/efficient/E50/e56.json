@@ -1,0 +1,223 @@
+{
+ "10 numbers at 10,000 tokens, seed 5601": {
+  "run": "B1-10000-01519c-s5601",
+  "iteration": 71,
+  "status": "extinct",
+  "windows": [
+   {
+    "from": 0,
+    "agents": 208.05633802816902,
+    "links": 4.2553176406098165,
+    "most_links": 16.267605633802816,
+    "tokens": 105.1366644643671,
+    "gini": 0.6180527348372179,
+    "births_per_agent": 0.23242200373340233,
+    "coalition": 0.2161521797996209,
+    "deaths": 5901
+   }
+  ],
+  "world_of_equals": false,
+  "first_window_of_equals": null
+ },
+ "10 numbers at 10,000 tokens, seed 5602": {
+  "run": "B1-10000-01519c-s5602",
+  "iteration": 347,
+  "status": "extinct",
+  "windows": [
+   {
+    "from": 0,
+    "agents": 183.2593659942363,
+    "links": 3.550290018477338,
+    "most_links": 22.389048991354468,
+    "tokens": 112.38696937484923,
+    "gini": 0.5114203884936547,
+    "births_per_agent": 0.22328648956930797,
+    "coalition": 0.3788900945102295,
+    "deaths": 14537
+   }
+  ],
+  "world_of_equals": false,
+  "first_window_of_equals": null
+ },
+ "10 numbers at 10,000 tokens, seed 5603": {
+  "run": "B1-10000-01519c-s5603",
+  "iteration": 5000,
+  "status": "stopped",
+  "windows": [
+   {
+    "from": 0,
+    "agents": 256.834,
+    "links": 5.315714019241358,
+    "most_links": 20.998,
+    "tokens": 43.90769041713982,
+    "gini": 0.6779694720259322,
+    "births_per_agent": 0.10890670231390365,
+    "coalition": 0.35721127265081726,
+    "deaths": 15847
+   },
+   {
+    "from": 500,
+    "agents": 249.502,
+    "links": 25.617448681918933,
+    "most_links": 46.14,
+    "tokens": 30.378921262919626,
+    "gini": 0.3416642973075503,
+    "births_per_agent": 0.0437000545048397,
+    "coalition": 0.707176695978389,
+    "deaths": 7320
+   },
+   {
+    "from": 1000,
+    "agents": 175.022,
+    "links": 40.61296365404905,
+    "most_links": 59.13,
+    "tokens": 36.82927660896769,
+    "gini": 0.1310758862852052,
+    "births_per_agent": 0.0,
+    "coalition": 0.9999542914605022,
+    "deaths": 3
+   },
+   {
+    "from": 1500,
+    "agents": 159.8,
+    "links": 44.33503116550803,
+    "most_links": 67.404,
+    "tokens": 41.11278081547836,
+    "gini": 0.15589338308876524,
+    "births_per_agent": 1.2195121951219513e-05,
+    "coalition": 0.9976470588235293,
+    "deaths": 49
+   },
+   {
+    "from": 2000,
+    "agents": 111.048,
+    "links": 60.3660353718427,
+    "most_links": 97.012,
+    "tokens": 60.06960510548395,
+    "gini": 0.2397530201703679,
+    "births_per_agent": 0.0,
+    "coalition": 0.998343058857431,
+    "deaths": 18
+   },
+   {
+    "from": 2500,
+    "agents": 108.0,
+    "links": 61.867370370370374,
+    "most_links": 106.044,
+    "tokens": 61.65890740740741,
+    "gini": 0.26775278486323856,
+    "births_per_agent": 0.0,
+    "coalition": 1.0,
+    "deaths": 0
+   },
+   {
+    "from": 3000,
+    "agents": 108.0,
+    "links": 60.70033333333333,
+    "most_links": 107.0,
+    "tokens": 62.24242592592593,
+    "gini": 0.27512532909168363,
+    "births_per_agent": 0.0,
+    "coalition": 1.0,
+    "deaths": 0
+   },
+   {
+    "from": 3500,
+    "agents": 108.0,
+    "links": 61.13025925925926,
+    "most_links": 107.0,
+    "tokens": 62.027462962962964,
+    "gini": 0.26693092761956516,
+    "births_per_agent": 1.8518518518518518e-05,
+    "coalition": 1.0,
+    "deaths": 1
+   },
+   {
+    "from": 4000,
+    "agents": 107.704,
+    "links": 63.27086007021708,
+    "most_links": 104.28,
+    "tokens": 61.21479001137319,
+    "gini": 0.23088706403905518,
+    "births_per_agent": 0.0,
+    "coalition": 0.9998514447002897,
+    "deaths": 3
+   },
+   {
+    "from": 4500,
+    "agents": 104.012,
+    "links": 66.39339888248055,
+    "most_links": 88.504,
+    "tokens": 62.95901168563019,
+    "gini": 0.10725827337212016,
+    "births_per_agent": 0.0,
+    "coalition": 0.9996346575395147,
+    "deaths": 3
+   }
+  ],
+  "world_of_equals": true,
+  "first_window_of_equals": 1000
+ },
+ "10 numbers at 40,000 tokens, seed 5601": {
+  "run": "B1-40000-b7eb00-s5601",
+  "iteration": 205,
+  "status": "extinct",
+  "windows": [
+   {
+    "from": 0,
+    "agents": 525.219512195122,
+    "links": 7.999559621641639,
+    "most_links": 30.048780487804876,
+    "tokens": 283.4987736461478,
+    "gini": 0.6438904654858685,
+    "births_per_agent": 0.106548555338303,
+    "coalition": 0.4624036407541562,
+    "deaths": 27651
+   }
+  ],
+  "world_of_equals": false,
+  "first_window_of_equals": null
+ },
+ "10 numbers at 40,000 tokens, seed 5602": {
+  "run": "B1-40000-b7eb00-s5602",
+  "iteration": 1322,
+  "status": "extinct",
+  "windows": [
+   {
+    "from": 0,
+    "agents": 1337.448,
+    "links": 5.56090650454778,
+    "most_links": 29.198,
+    "tokens": 29.350817736621128,
+    "gini": 0.437419671476898,
+    "births_per_agent": 0.05412709062321592,
+    "coalition": 0.7636812795712431,
+    "deaths": 42718
+   },
+   {
+    "from": 500,
+    "agents": 295.552,
+    "links": 10.333760800799283,
+    "most_links": 45.624,
+    "tokens": 162.43731741952863,
+    "gini": 0.6408492611673118,
+    "births_per_agent": 0.01136777223116902,
+    "coalition": 0.92564421827631,
+    "deaths": 1738
+   },
+   {
+    "from": 1000,
+    "agents": 239.56521739130434,
+    "links": 10.590631702583812,
+    "most_links": 71.8136645962733,
+    "tokens": 181.76834139699815,
+    "gini": 0.731241095901738,
+    "births_per_agent": 0.02035502729565291,
+    "coalition": 0.9032408607726212,
+    "deaths": 1402
+   }
+  ],
+  "world_of_equals": false,
+  "first_window_of_equals": null
+ }
+}

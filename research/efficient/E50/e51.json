@@ -2,29 +2,106 @@
  "    as it is, seed 5001": null,
  "    as it is, seed 5002": null,
  "  as it is, both runs": null,
- "    10 numbers, seed 5001": null,
- "    10 numbers, seed 5002": null,
- "  10 numbers, both runs": null,
- "    100 numbers, seed 5001": null,
- "    100 numbers, seed 5002": null,
- "  100 numbers, both runs": {
-  "coins": 8,
-  "score": 0.10104737661413712,
-  "low": 0.058767418825310246,
-  "high": 0.143327334402964,
-  "won": 0,
-  "lost": 8
+ "    10 numbers, seed 5001": {
+  "coins": 4,
+  "score": 0.47600496170747153,
+  "low": 0.18540184403453974,
+  "high": 0.7666080793804033,
+  "won": 2,
+  "lost": 2
  },
- "      10 numbers, seed 5001, on its own world": null,
+ "    10 numbers, seed 5002": {
+  "coins": 4,
+  "score": 0.9994924245759328,
+  "low": 0.9991538657654528,
+  "high": 0.9998309833864127,
+  "won": 4,
+  "lost": 0
+ },
+ "  10 numbers, both runs": {
+  "coins": 16,
+  "score": 0.7203872256703449,
+  "low": 0.5974020178163973,
+  "high": 0.8433724335242924,
+  "won": 13,
+  "lost": 3
+ },
+ "    100 numbers, seed 5001": {
+  "coins": 4,
+  "score": 0.833324602521647,
+  "low": 0.6073480732229155,
+  "high": 1.0593011318203784,
+  "won": 3,
+  "lost": 1
+ },
+ "    100 numbers, seed 5002": {
+  "coins": 4,
+  "score": 0.7067409039851589,
+  "low": 0.6230648516757595,
+  "high": 0.7904169562945582,
+  "won": 4,
+  "lost": 0
+ },
+ "  100 numbers, both runs": {
+  "coins": 16,
+  "score": 0.21896875540844,
+  "low": 0.13847275243931678,
+  "high": 0.2994647583775632,
+  "won": 2,
+  "lost": 14
+ },
+ "      10 numbers, seed 5001, on its own world": {
+  "coins": 4,
+  "score": 0.47600496170747153,
+  "low": 0.18540184403453974,
+  "high": 0.7666080793804033,
+  "won": 2,
+  "lost": 2
+ },
  "      10 numbers, seed 5001, on the other's world": null,
- "      10 numbers, seed 5002, on its own world": null,
+ "      10 numbers, seed 5002, on its own world": {
+  "coins": 4,
+  "score": 0.9994924245759328,
+  "low": 0.9991538657654528,
+  "high": 0.9998309833864127,
+  "won": 4,
+  "lost": 0
+ },
  "      10 numbers, seed 5002, on the other's world": null,
- "  10 numbers, both seeds": null,
- "      100 numbers, seed 5001, on its own world": null,
+ "  10 numbers, both seeds": {
+  "coins": 8,
+  "score": 0.7377486931417022,
+  "low": 0.4984895527832668,
+  "high": 0.9770078335001376,
+  "won": 6,
+  "lost": 2
+ },
+ "      100 numbers, seed 5001, on its own world": {
+  "coins": 4,
+  "score": 0.833324602521647,
+  "low": 0.6073480732229155,
+  "high": 1.0593011318203784,
+  "won": 3,
+  "lost": 1
+ },
  "      100 numbers, seed 5001, on the other's world": null,
- "      100 numbers, seed 5002, on its own world": null,
+ "      100 numbers, seed 5002, on its own world": {
+  "coins": 4,
+  "score": 0.7067409039851589,
+  "low": 0.6230648516757595,
+  "high": 0.7904169562945582,
+  "won": 4,
+  "lost": 0
+ },
  "      100 numbers, seed 5002, on the other's world": null,
- "  100 numbers, both seeds": null,
+ "  100 numbers, both seeds": {
+  "coins": 8,
+  "score": 0.7700327532534029,
+  "low": 0.648657277370178,
+  "high": 0.8914082291366279,
+  "won": 7,
+  "lost": 1
+ },
  "  against 17,500": null,
  "  against 15,000": null
 }

@@ -305,6 +305,18 @@ makes "many small stakes" beat "one large stake". It is order, close to the
 most mixed state of the tokens, and may be an end point: whether brains
 still improve inside it is open.
 
+### Experiment 56: small mutations from founders — four of five worlds die; the fifth becomes a world of equals
+
+s3058's rules from founders with mutations of 10 numbers. At 10,000 tokens:
+died at 71 and 347, lived 5,000 (a world of equals from iteration 1,000:
+108 agents, 61 links and 62 tokens each). At 40,000 tokens: died at 205 and
+1,322. **Thesis refuted.** Small steps are too slow for founders' random
+brains; yet the world of equals needs neither the long history nor the
+size. Large steps find brains that live, small steps keep what was found:
+Experiment 57 plays the worlds that died in Experiment 46 on from iteration
+500 with small mutations. The principled form of this is a step size each
+brain inherits and that itself mutates.
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks

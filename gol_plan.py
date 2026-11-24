@@ -244,28 +244,32 @@ def _experiment_runs(name: str) -> List[RunSpec]:
     # contests before the run goes on, whatever else is waiting (gol_lab.jobs).
     for spec in specs:
         spec.targets = sorted(set(spec.targets) | set(checks))
-    if "from" in runs:
+    if "from" in runs or any("from" in c for c in runs["conditions"]):
         _played_on(name, runs, specs)
     return specs
 
 
 def _played_on(name: str, runs: Dict[str, Any], specs: List[RunSpec]) -> None:
     """
-    A plan's `from` — {"run": a run, "at": an iteration it kept a world at — has every run of the plan start
+    A plan's `from` — {"run": a run, "at": an iteration it kept a world at}, or a condition's own — has every such run start
     not from founders but from that world, under the run's own settings and with its own seed for
     every draw from then on: the same world played on in several ways. Its iterations go on counting
     from there, so `iterations` is where it ends, not how long it plays. Such a run is named for where
     it comes from as well as for what it is, and keeps the world it started from as its first.
     """
-    source = runs["from"]
-    if not isinstance(source, dict) or set(source) != {"run", "at"} or not _whole(source["at"], 0):
-        raise LabError(f"{name} from: a run and the iteration of a world it kept, {{\"run\": ..., \"at\": ...}}")
     if "readout" in runs:
         raise LabError(f"{name}: a plan played on from a kept world has no readout (its checks would ask for "
                        f"worlds from before it started); plan the contests as trials")
-    at = int(source["at"])
-    mark = hashlib.sha1(f"{source['run']} {at}".encode()).hexdigest()[:6]
+    # A condition may name a world of its own to play on from, so that one plan can play several kept
+    # worlds on in the same ways; a condition without one takes the plan's, and has to have that.
+    own = {c.get("name"): c["from"] for c in runs["conditions"] if "from" in c}
     for spec in specs:
+        source = own.get(spec.condition, runs.get("from"))
+        if not isinstance(source, dict) or set(source) != {"run", "at"} or not _whole(source["at"], 0):
+            raise LabError(f"{name} from: a run and the iteration of a world it kept, {{\"run\": ..., \"at\": ...}}, "
+                           f"for the plan or for every condition")
+        at = int(source["at"])
+        mark = hashlib.sha1(f"{source['run']} {at}".encode()).hexdigest()[:6]
         if spec.targets[-1] <= at:
             raise LabError(f"{name}: it is played on from iteration {at:,}, so it has to end later than that")
         if not int(spec.config.get("archive_every", 0)) or at % int(spec.config["archive_every"]):
@@ -308,7 +312,7 @@ def _condition_runs(name: str, base_name: str, base: Dict[str, Any], world: Dict
     """
     label = condition.get("name")
     _check_keys(f"{name} condition {label!r}", condition,
-                ("name", "set", "world", "seeds", "sizes", "stops", "fault_at", "threads", "replicate"))
+                ("name", "set", "world", "seeds", "sizes", "stops", "fault_at", "threads", "replicate", "from"))
     own_world = dict(condition.get("world", {}))
     _check_keys(f"{name} condition {label!r} world", own_world, tuple(k for k in WORLD if k != "total_tokens"))
     changed = dict(condition.get("set", {}))

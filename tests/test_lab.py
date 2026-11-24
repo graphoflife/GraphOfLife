@@ -740,6 +740,15 @@ def test_a_plan_can_play_a_kept_world_on_under_other_settings():
         assert len({s.run_id for s in specs}) == 4 and not {s.run_id for s in specs} & fresh
         assert all(s.start == 4 and s.targets == [8] and s.lab["from"] == {"run": source.run_id, "at": 4} for s in specs)
 
+        # A condition may name its own world to play on from, in place of the plan's or without one.
+        own = plan("E99", seeds="7", iterations=8, record=ARCHIVED,
+                   conditions=[{"name": "from four", "from": {"run": source.run_id, "at": 4}},
+                               {"name": "from two", "from": {"run": source.run_id, "at": 2}}])
+        starts = {s.condition: (s.start, s.run_id) for s in gol_plan.experiment_runs(write(own))}
+        assert starts["from four"][0] == 4 and starts["from two"][0] == 2 and starts["from four"][1] != starts["from two"][1]
+        own["runs"]["conditions"].append({"name": "from nowhere"})
+        refused(lambda: gol_plan.experiment_runs(write(own)), "for every condition")
+
         gol_lab.request(run="E95", workers=2)
         log = io.StringIO()
         with contextlib.redirect_stdout(log):

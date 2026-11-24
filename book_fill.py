@@ -486,7 +486,9 @@ def runs(md: str, name: str) -> str:
                                  else "")
                  + (f", played on from the world `{spec['from']['run']}` kept at iteration "
                     f"{number(spec['from']['at'])}, to iteration {number(spec['iterations'])} — or "
-                    if "from" in spec else f", for {number(spec['iterations'])} iterations — or ")
+                    if "from" in spec else
+                    f", played on from a kept world of its own to iteration {number(spec['iterations'])} — or "
+                    if any("from" in c for c in conditions) else f", for {number(spec['iterations'])} iterations — or ")
                  + "until its world dies out. " + baseline(md, base) + "\n")
     for c in conditions:
         # A condition may start its worlds with founders of its own (gol_plan): a world played again at a new size.
