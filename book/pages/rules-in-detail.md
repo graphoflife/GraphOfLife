@@ -996,6 +996,7 @@ with and without them was the same world in every measure
 - [Measuring tokens: inequality and flow](measuring-tokens.md#the-flow-of-a-game)
 - [What the brains are like](what-the-brains-are-like.md#what-evolution-changed)
 - [Does evolution keep going?](how-to-tell-a-world-that-keeps-evolving.md#what-the-probes-say-about-why)
+- [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md#what-experiment-53-found)
 - [Other contests: a lottery, and alliances](another-game.md#the-contest-worlds)
 - [How runs are made, recorded and costed](runs-and-records.md#the-statistics-file)
 

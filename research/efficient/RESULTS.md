@@ -282,6 +282,29 @@ and which one a branch reaches depends on its mutations and its luck. Two
 of two for the dense state under the smallest step is suggestive, not
 proof. Whether the brains that made it are better is Experiment 51.
 
+### Experiment 53: the core played on — a world of equals under small mutations, collapse under the engine's
+
+From the core world (10 numbers, seed 5001, iteration 22,500), 5,000
+iterations more. Thesis (the core lasts under small mutations, falls apart
+under the engine's): **refuted in its first half** by its own definition,
+because the core spread to the whole world.
+
+- **10 numbers, both seeds:** 476 and 472 agents, the same ones from
+  iteration 23,000 (25,000) to 27,500: no births, no deaths. Every agent
+  stakes one token on each of its ~56 neighbours and itself, all marked for
+  a coalition; every node is won by a coalition every game; 98% of nodes get
+  a new brain every game. In one run links even out to 50 to 64 an agent
+  and the Gini of tokens falls 0.43 → 0.11 → 0.03.
+- **The engine's mutation, both seeds:** within 500 iterations 900 to 1,500
+  agents and 55,000 to 150,000 births and deaths per 500 iterations; later
+  1,400 to 5,000 agents, and in one run an agent with over 2,000 links.
+
+Reading: a convention that only works if nearly everyone follows it lasts
+where copies are faithful and nowhere else. The coalition rule is what
+makes "many small stakes" beat "one large stake". It is order, close to the
+most mixed state of the tokens, and may be an end point: whether brains
+still improve inside it is open.
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks

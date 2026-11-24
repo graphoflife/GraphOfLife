@@ -685,7 +685,7 @@
       ],
       "status": "ready",
       "added": "2026-11-23",
-      "summary": "One kept world of 40,000 tokens is played on six times for 2,500 iterations, twice as it is and twice each with mutations of exactly 10 and 100 of a brain's numbers, and the branches' brains are then played against their start and against each other. Its thesis: with small mutations a world that had stopped gets better again. The runs are done and became four kinds of world; with mutations of 10 numbers a core of about 160 rich agents formed whose agents lived on for over 2,000 iterations with almost no births. The contests are being played, and Experiment 53 asks whether the core needs small mutations."
+      "summary": "One kept world of 40,000 tokens is played on six times for 2,500 iterations, twice as it is and twice each with mutations of exactly 10 and 100 of a brain's numbers, and the branches' brains are then played against their start and against each other. Its thesis: with small mutations a world that had stopped gets better again. The runs are done and became four kinds of world; with mutations of 10 numbers a core of about 160 rich agents formed whose agents lived on for over 2,000 iterations with almost no births. Experiment 53 played that world on: with small mutations the core spread into a world of 476 equal agents who all stake one token on every neighbour, marked for a coalition, with no births and no deaths for 4,500 iterations; with the engine's mutation it was thousands of short-lived agents again within 500. The contests of Experiment 51 are being played."
     },
     {
       "id": "a-source-and-a-sink",

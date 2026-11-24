@@ -30,12 +30,19 @@ runs with mutations of 10 numbers left the old world behind within 600 to
 1,700 iterations for one with a few hundred agents, many links and no
 births. In one of them a core of about 160 rich agents formed, nearly all
 linked to one another, whose agents lived on for over 2,000 iterations
-with almost no births ([Does the core last?](#does-the-core-last)). Experiment
-53, not yet played, asks whether that core needs small mutations.
+with almost no births ([Does the core last?](#does-the-core-last)).
+
+Experiment 53 played that world on for 5,000 iterations. With mutations of
+10 numbers the core spread to the whole world: 476 agents with 50 to 64
+links and almost the same [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes.") each, who all stake one token on every
+[neighbour](the-world.md#the-network "An agent joined to another by a connection."), all marked for a coalition. Nobody is born and nobody dies. With
+the engine's mutation given back, the world was thousands of short-lived
+agents again within 500 iterations. The thesis, that the core would last,
+is refuted: it did not last, it turned into something else.
 
 ## The world that is played on
 
-The world is one of round 3's s3058 at 40,000 [tokens](the-world.md#agents-and-tokens "The one thing of value in a world: every agent holds a whole number of them, and their total never changes."), from Experiment 46
+The world is one of round 3's s3058 at 40,000 tokens, from Experiment 46
 ([Why does evolution level off?](why-does-evolution-level-off.md)), as it
 stood at iteration 20,000: about 5,000 agents. The largest stake wins a
 node, the [estate](measuring-lives.md#the-estate-of-the-dead "The tokens a dead agent leaves, and who gets them.") of the dead goes to their children, and an agent lives
@@ -143,6 +150,63 @@ before, and twice with the engine's own mutation given back.
 >
 > To make these runs again: `python3 gol_lab.py run E53`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 <!-- /runs -->
+
+### What Experiment 53 found
+
+The four runs were played on 24 November 2026, in about two and a half
+hours.
+
+**The thesis is refuted.** Neither run with mutations of 10 numbers has a
+core at iteration 27,500, as the thesis defines one: in both, fewer than a
+fifth of the links possible among the well-linked agents are made. The
+second half of the claim held: both runs given back the engine's mutation
+lost the core, within 500 iterations.
+
+But the core did not fall apart under small mutations. It spread to the
+whole world. What stands at iteration 27,500 is a world of equals:
+
+| | 22,500 to 23,000 | 24,000 to 24,500 | 25,500 to 26,000 | 27,000 to 27,500 |
+|---|---|---|---|---|
+| agents | 478 | 476 | 476 | 476 |
+| links an agent, least to most | 2 to 163 | 7 to 161 | 50 to 63 | 50 to 64 |
+| tokens an agent, most | 162 | 158 | 63 | 64 |
+| [Gini](measuring-tokens.md#the-gini-coefficient-and-the-lorenz-curve "How unequally tokens are held: 0 if every agent holds as many, near 1 if one holds nearly all.") of tokens | 0.43 | 0.11 | 0.03 | 0.03 |
+| births, deaths in 500 iterations | 37, 45 | 0, 0 | 2, 2 | 0, 0 |
+| nodes won by a coalition | 100% | 100% | 100% | 100% |
+
+(10 numbers, seed 5301. With seed 5302 the same from iteration 25,000 on:
+472 agents, no births, no deaths, a Gini of 0.11, and no link cut at all.)
+
+Every agent does the same thing. It puts one token on each of its 56
+neighbours and one on itself, and marks every one of them for a
+[coalition](rules-in-detail.md#how-a-coalition-takes-a-node). So on every
+node the coalition of all its neighbours outweighs any single stake, takes
+the node, and one of them, drawn by lot, puts its brain there. Every node
+gets about as many tokens as its agent gave away. Nobody starves, every link
+carries a stake and is kept, and nobody has a child. The same 476 agents
+live on for 4,500 iterations while their brains change places every game:
+only one node in fifty keeps its brain.
+
+Under the engine's mutation the same world, from the same start, is back
+within 500 iterations to what it was before Experiment 50: thousands of
+agents that live a few iterations (100,000 to 180,000 births and as many
+deaths in every 500 iterations), most tokens kept at home, and in one run a
+single agent with over 2,000 links.
+
+What this suggests, to be tested:
+
+- **A way of acting that only works if nearly everyone follows it can last
+  only where copies are faithful.** With one copy in five changed in a
+  third of what it decides, such a way is broken faster than it spreads.
+  With ten numbers changed, it holds for thousands of iterations.
+- **The rule that carries it is the coalition.** Where the largest stake
+  wins, one rich agent beats many poor ones; the coalition turns that
+  round, and many small stakes beat any large one.
+- **It is order, not yet evolution that goes on.** The even world is the
+  most mixed state its tokens can be in, and it changed less and less from
+  iteration 25,500 on. Whether its brains still get better is not known.
+
+The readings are made by `python3 research/efficient/E50/e53.py`.
 
 <!-- runs E50 -->
 > [!info]- The runs behind this page

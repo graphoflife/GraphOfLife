@@ -153,6 +153,7 @@ In a settled B1 world of 100,000 tokens the Gini stays near 0.47, between
 - [Brains replaced by their average](brains-replaced-by-their-average.md#what-the-brains-of-round-3-are-like)
 - [How fast should brains change?](how-fast-should-brains-change.md#what-the-fifty-worlds-did)
 - [Why does evolution level off?](why-does-evolution-level-off.md#what-family-pools-changed)
+- [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md#what-experiment-53-found)
 
 > [!info]- And in the Archive (3)
 > [What B1 is, and what stood in its way](what-the-baseline-world-is.md#the-record) · [B1: lives and wealth](b1-lives-and-wealth.md#where-do-the-tokens-go) · [B1: the network, size and scaling](b1-the-network-size-and-scaling.md#is-a-big-world-the-same-kind-of-world)
