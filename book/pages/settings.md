@@ -63,6 +63,7 @@ Every setting, with its value in each baseline. A name leads to its entry.
 | [`redistribution`](settings.md#redistribution) | uniform | uniform | who gets the tokens of the dead |
 | [`tokens_created_per_phase`](settings.md#tokens_created_per_phase) | 0 | 0 | new tokens per cleanup |
 | [`mutate_on_replication`](settings.md#mutate_on_replication) | off | on | brains change only when copied |
+| [`inherited_step`](settings.md#inherited_step) | off | off | each brain inherits how much it mutates |
 | [`incumbency`](settings.md#incumbency) | 1 | 1.5 | home advantage in the game |
 | [`birth_links`](settings.md#birth_links) | 0 | 2 | links a newborn is born with |
 | [`mend_on_death`](settings.md#mend_on_death) | off | on | no death splits the world |
@@ -438,6 +439,20 @@ Whether a brain changes only when it is copied: into a newborn, or into a
 node its owner has just won. Off, every brain in the world may also change
 after every game, wherever it sits. That wears an adaptation away within a
 few dozen iterations of its making.
+
+### inherited_step
+
+Whether how much a mutation changes is the brain's own. On, every brain
+carries a **step**: the number of its numbers one mutation changes, each by
+the noise of [`mutation_noise_std`](#mutation_noise_std), with nothing
+redrawn. A copy keeps its parent's step. When a brain mutates, its step
+first doubles or halves, by an even chance, never below one number nor
+above all of them, and the brain is then changed by the new step. Founders
+start at the share of their numbers that
+[`mutation_sparsity`](#mutation_sparsity) names. So a world can start with
+large steps and come to small ones by itself
+([A world of equals](a-world-of-equals.md)). Off in both baselines. Not for
+binary brains, and not together with [`mutation_numbers`](#mutation_numbers).
 
 ### incumbency
 

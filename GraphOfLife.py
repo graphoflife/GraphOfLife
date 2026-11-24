@@ -474,7 +474,7 @@ class Brain:
     global, so a resumed run continues its lineage numbering exactly.
     """
 
-    __slots__ = ("weights", "biases", "brain_id", "parent_brain_id", "cfg")
+    __slots__ = ("weights", "biases", "brain_id", "parent_brain_id", "cfg", "step")
 
     #: What weights are stored as. Subclasses narrow it; the arithmetic below
     #: still happens in double precision, so this is about what is kept rather
@@ -488,6 +488,8 @@ class Brain:
         self.parent_brain_id: int = -1
         self.weights: List[np.ndarray] = []
         self.biases: List[np.ndarray] = []
+        #: Under inherited_step, how many of its numbers a mutation of this brain changes; 0 without.
+        self.step: int = self.first_step(cfg) if cfg.inherited_step else 0
 
         # Weights are drawn only when there is something to draw them from. A
         # copy, a restore and a question about shape all fill in or need no
@@ -498,6 +500,17 @@ class Brain:
     def layer_sizes(self) -> List[int]:
         cfg = self.cfg
         return [cfg.n_inputs()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
+
+    @classmethod
+    def numbers(cls, cfg: SimConfig) -> int:
+        """How many numbers a brain of these settings holds: its weights and its biases."""
+        sizes = [cfg.n_inputs()] + list(cfg.hidden_layers) + [cfg.n_outputs()]
+        return sum(a * b + b for a, b in zip(sizes[:-1], sizes[1:]))
+
+    @classmethod
+    def first_step(cls, cfg: SimConfig) -> int:
+        """A founder's step under inherited_step: the share of its numbers the engine's own mutation touches."""
+        return max(1, int(round(cls.numbers(cfg) * cfg.mutation_sparsity)))
 
     def _allocate(self, rng: np.random.RandomState) -> None:
         sizes = self.layer_sizes()
@@ -566,6 +579,7 @@ class Brain:
         clone.weights = [w.copy() for w in self.weights]
         clone.biases = [b.copy() for b in self.biases]
         clone.parent_brain_id = self.parent_brain_id
+        clone.step = self.step
         return clone
 
     def mixed_with(self, other: "Brain", rng: np.random.RandomState) -> "Brain":
@@ -612,6 +626,15 @@ class Brain:
         cfg = self.cfg
         if rng.random() > cfg.mutation_probability:
             return False
+
+        if cfg.inherited_step:
+            # The step itself changes first, doubling or halving by an even chance, and never below one
+            # number nor above all of them; the brain is then changed by its new step.
+            self.step = int(min(self.numbers(cfg), self.step * 2)) if rng.random() < 0.5 else int(max(1, self.step // 2))
+            self.nudge(self.step, rng)
+            self.parent_brain_id = self.brain_id
+            self.brain_id = brain_id
+            return True
 
         if cfg.mutation_numbers:
             self.nudge(cfg.mutation_numbers, rng)
@@ -2974,6 +2997,9 @@ class GraphOfLife:
         for layer in range(n_layers):
             blob[f"W{layer}"] = np.stack([self.brains[u].weights[layer] for u in nodes])
             blob[f"b{layer}"] = np.stack([self.brains[u].biases[layer] for u in nodes])
+        # Under inherited_step every brain's step is part of what it is, like its weights.
+        if self.cfg.inherited_step:
+            blob["brain_steps"] = np.array([self.brains[u].step for u in nodes], dtype=np.int64)
 
         # Messages in flight are world state like any other. Leaving them out
         # meant a resumed run began deaf for one phase while the run it claimed
@@ -3088,6 +3114,9 @@ class GraphOfLife:
             brain.parent_brain_id = int(parent_brain_ids[i])
             brain.weights = [w[i].copy() for w in weights]
             brain.biases = [b[i].copy() for b in biases]
+            # A world kept without steps, played on under inherited_step, starts every brain at a founder's.
+            if cfg.inherited_step and "brain_steps" in blob:
+                brain.step = int(blob["brain_steps"][i])
 
             world._register_agent(u, int(tokens[i]), brain,
                                   int(parent_ids[i]), born=int(born_at[i]))

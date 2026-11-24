@@ -30,6 +30,7 @@
     "mutation_numbers": 0,
     "extinction_threshold": 20,
     "mutate_on_replication": true,
+    "inherited_step": false,
     "incumbency": 1.5,
     "birth_links": 2,
     "mend_on_death": true,

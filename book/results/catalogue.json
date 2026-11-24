@@ -363,6 +363,15 @@
     ],
     [
      {
+      "text": "`inherited_step`",
+      "href": "pages/settings.md#inherited_step"
+     },
+     "off",
+     "off",
+     "each brain inherits how much it mutates"
+    ],
+    [
+     {
       "text": "`incumbency`",
       "href": "pages/settings.md#incumbency"
      },
@@ -1315,11 +1324,123 @@
      "\u2014",
      "as their worlds",
      "30 each",
-     "3 played",
+     "150 played",
      [
       {
        "text": "Are mutants as fit as their parents?",
        "href": "pages/are-mutants-as-fit-as-their-parents.md"
+      }
+     ]
+    ],
+    [
+     "E50",
+     "Does a smaller step restart evolution? A world played on with small mutations",
+     "B1",
+     "*as it is* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on); *10 numbers* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 10); *100 numbers* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 100)",
+     "5001\u20135002",
+     "40,000",
+     "22,500",
+     "6",
+     [
+      {
+       "text": "Does a smaller step restart evolution?",
+       "href": "pages/does-a-smaller-step-restart-evolution.md"
+      }
+     ]
+    ],
+    [
+     "E51",
+     "The contests of Experiment 50: the branches against their start and against each other",
+     "trials",
+     "192 contests from 7 worlds: *as it is, seed 5001: 22,500 against 20,000*; *as it is, seed 5002: 22,500 against 20,000*; *10 numbers, seed 5001: 22,500 against 20,000*; *10 numbers, seed 5002: 22,500 against 20,000*; *100 numbers, seed 5001: 22,500 against 20,000*; *100 numbers, seed 5002: 22,500 against 20,000*; *10 numbers against as it is, seed 5001, at 22,500*; *10 numbers against as it is, seed 5002, at 22,500*; *100 numbers against as it is, seed 5001, at 22,500*; *100 numbers against as it is, seed 5002, at 22,500*; *the world before: 20,000 against 17,500*; *the world before: 20,000 against 15,000*",
+     "\u2014",
+     "as their worlds",
+     "100 each",
+     "96 played",
+     [
+      {
+       "text": "Does a smaller step restart evolution?",
+       "href": "pages/does-a-smaller-step-restart-evolution.md"
+      }
+     ]
+    ],
+    [
+     "E52",
+     "Brain, place or luck? The same agents played again, and with their brains swapped",
+     "trials",
+     "24 assays from 2 worlds: *s4003 at 15,000: as they are*; *s4003 at 15,000: brains swapped*; *s3058 at 20,000: as they are*; *s3058 at 20,000: brains swapped*",
+     "\u2014",
+     "as their worlds",
+     "9 each",
+     "24 played",
+     [
+      {
+       "text": "Are mutants as fit as their parents?",
+       "href": "pages/are-mutants-as-fit-as-their-parents.md"
+      }
+     ]
+    ],
+    [
+     "E53",
+     "Does the core last? The new state played on with small mutations and with the engine's own",
+     "B1",
+     "*10 numbers* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 10); *the engine's mutation* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on)",
+     "5301\u20135302",
+     "40,000",
+     "27,500",
+     "4",
+     [
+      {
+       "text": "Does a smaller step restart evolution?",
+       "href": "pages/does-a-smaller-step-restart-evolution.md"
+      }
+     ]
+    ],
+    [
+     "E54",
+     "Do brains still get better in a world of equals? Its later brains against its earlier ones",
+     "trials",
+     "96 contests from 2 worlds: *seed 5301: 25,000 against 23,000*; *seed 5301: 27,500 against 25,000*; *seed 5301: 27,500 against 23,000*; *seed 5302: 25,000 against 23,000*; *seed 5302: 27,500 against 25,000*; *seed 5302: 27,500 against 23,000*",
+     "\u2014",
+     "as their worlds",
+     "100 each",
+     "74 played",
+     [
+      {
+       "text": "A world of equals",
+       "href": "pages/a-world-of-equals.md"
+      }
+     ]
+    ],
+    [
+     "E56",
+     "Does a world of equals form from founders? The rules of s3058 with small mutations, at two sizes",
+     "B1",
+     "*10 numbers at 10,000 tokens* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 10); *10 numbers at 40,000 tokens* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 10)",
+     "5601\u20135603",
+     "10,000",
+     "5,000",
+     "5",
+     [
+      {
+       "text": "A world of equals",
+       "href": "pages/a-world-of-equals.md"
+      }
+     ]
+    ],
+    [
+     "E57",
+     "Large steps first, small steps after: worlds that died, played on from iteration 500 with small mutations",
+     "B1",
+     "*s4601, then 10 numbers* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 10); *s4601, as it is* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on); *s4602, then 10 numbers* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 10); *s4602, as it is* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on); *s4603, then 10 numbers* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on, mutation_numbers = 10); *s4603, as it is* (message_amount = 4, random_input_amount = 2, message_prepass = off, hidden_activation = tanh, hidden_layers = 50, 50, 50, 50, 50, allow_handover = off, mutate_on_replication = on, mend_on_death = on, redistribution = children, link_search = walk, link_consent = forced, link_token = on)",
+     "5701\u20135702",
+     "10,000",
+     "5,500",
+     "0",
+     [
+      {
+       "text": "A world of equals",
+       "href": "pages/a-world-of-equals.md"
       }
      ]
     ]
@@ -3941,6 +4062,69 @@
      ""
     ],
     [
+     "E50",
+     "6",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E51",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E52",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E53",
+     "4",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E54",
+     "",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "E56",
+     "5",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
+     "E57",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0",
+     "0"
+    ],
+    [
      "A3k",
      "8",
      "0",
@@ -4141,8 +4325,8 @@
    ]
   },
   "totals": {
-   "lab experiments": 44,
-   "lab runs on disk": 816,
+   "lab experiments": 51,
+   "lab runs on disk": 831,
    "pilot batches": 22,
    "pilot worlds": 484
   }

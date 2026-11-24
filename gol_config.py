@@ -70,6 +70,7 @@ MECHANICS: Dict[str, Any] = {
     # fail; research/strains.md says which, and the settings page explains each.
     # All off, so that `gol-1` keeps naming the algorithm it always named.
     "mutate_on_replication": False,
+    "inherited_step": False,
     "incumbency": 1.0,
     "birth_links": 0,
     "mend_on_death": False,
@@ -566,6 +567,20 @@ class SimConfig:
     # The world-wide change wore every adaptation away within a few dozen
     # iterations of its making.
     mutate_on_replication: bool = False
+
+    # How much one mutation changes is the brain's own, inherited and itself
+    # changed. Every brain carries a step: how many of its numbers a mutation
+    # changes (each by mutation_noise_std's noise, nothing redrawn, as under
+    # mutation_numbers). When a brain mutates, its step first doubles or
+    # halves, by an even chance, and the brain is then changed by the new
+    # step; a copy keeps its parent's. Founders start at the share of their
+    # numbers mutation_sparsity names, which is what the engine's own
+    # mutation touches. So a world can begin with large steps and come to
+    # small ones by itself, or the other way: large steps found brains that
+    # live where small ones let four worlds of five die, and small steps kept
+    # an order that large ones broke within 500 iterations (Experiments 53
+    # and 56).
+    inherited_step: bool = False
 
     # An agent's own stake on its node counts this many times over when the game
     # decides who takes the node. 1 is the old rule; above it, defending is
@@ -1134,6 +1149,10 @@ class SimConfig:
             raise ValueError("mutation_noise_std cannot be negative")
         if isinstance(self.mutation_numbers, bool) or not isinstance(self.mutation_numbers, int) or self.mutation_numbers < 0:
             raise ValueError("mutation_numbers is how many of a brain's numbers a mutation changes: a whole number, 0 or more")
+        if self.inherited_step and self.brain_kind == "binary":
+            raise ValueError("inherited_step changes single numbers by noise: not for brain_kind binary")
+        if self.inherited_step and self.mutation_numbers:
+            raise ValueError("inherited_step lets each brain carry its own step: leave mutation_numbers at 0")
         if self.mutation_numbers and self.brain_kind == "binary":
             raise ValueError("mutation_numbers adds noise to single numbers: not for brain_kind binary, whose numbers are -1, 0 and 1")
         for setting, allowed in self.MODES.items():

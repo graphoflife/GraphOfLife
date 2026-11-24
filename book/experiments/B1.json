@@ -34,6 +34,7 @@
     "mutation_numbers": 0,
     "extinction_threshold": 20,
     "mutate_on_replication": false,
+    "inherited_step": false,
     "incumbency": 1.0,
     "birth_links": 0,
     "mend_on_death": false,

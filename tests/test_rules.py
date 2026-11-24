@@ -496,5 +496,49 @@ def test_a_mutation_of_so_many_numbers_changes_no_more_than_that():
     _refused(dict(mutation_numbers=3, brain_kind="binary"), "binary")
 
 
+def test_a_brain_inherits_its_step_and_a_mutation_doubles_or_halves_it():
+    """
+    Under inherited_step every brain carries how many of its numbers a
+    mutation changes. Founders start at the share mutation_sparsity names; a
+    copy keeps its parent's; a mutation first doubles or halves the step,
+    never below one number nor above all of them, and then changes that many.
+    The steps are kept with a world and come back with it; a world kept
+    without them starts every brain at a founder's. Without the rule no brain
+    has a step and nothing is kept. Not for binary brains, nor with
+    mutation_numbers.
+    """
+    import dataclasses
+    from GraphOfLife import Brain
+    cfg = small(seed=82, inherited_step=True, mutation_probability=1.0, mutate_on_replication=True)
+    numbers, first = Brain.numbers(cfg), Brain.first_step(cfg)
+    brain = make_brain(cfg, 1, np.random.RandomState(1))
+    assert numbers == sum(x.size for x in brain.weights + brain.biases)
+    assert brain.step == first == max(1, round(numbers * cfg.mutation_sparsity)) and brain.copy().step == first
+    seen, rng = set(), np.random.RandomState(2)
+    for _ in range(60):
+        before, was = [x.copy() for x in brain.weights + brain.biases], brain.step
+        assert brain.mutate(2, rng)
+        assert brain.step in (min(numbers, was * 2), max(1, was // 2)), (was, brain.step)
+        changed = sum(int((a != b).sum()) for a, b in zip(brain.weights + brain.biases, before))
+        assert changed <= brain.step, (changed, brain.step)
+        seen.add(brain.step)
+    assert 1 <= min(seen) and max(seen) <= numbers and len(seen) > 3, seen
+    world = new_world(cfg)
+    for _ in range(5):
+        world.step(record_decisions=False)
+    steps = {u: b.step for u, b in world.brains.items()}
+    assert len(set(steps.values())) > 1, "no step ever changed"
+    kept = world.to_checkpoint()
+    back = GraphOfLife.from_checkpoint(kept, cfg)
+    assert {u: b.step for u, b in back.brains.items()} == steps
+    plain = dataclasses.replace(cfg, inherited_step=False)
+    old = new_world(plain)
+    assert all(b.step == 0 for b in old.brains.values()) and "brain_steps" not in old.to_checkpoint()
+    on = GraphOfLife.from_checkpoint(old.to_checkpoint(), cfg)
+    assert all(b.step == first for b in on.brains.values())
+    _refused(dict(inherited_step=True, brain_kind="binary"), "binary")
+    _refused(dict(inherited_step=True, mutation_numbers=3), "mutation_numbers")
+
+
 if __name__ == "__main__":
     sys.exit(runner.main(globals()))

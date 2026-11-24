@@ -26,6 +26,7 @@
   "redistribution",
   "tokens_created_per_phase",
   "mutate_on_replication",
+  "inherited_step",
   "incumbency",
   "birth_links",
   "mend_on_death",
@@ -150,6 +151,10 @@
   "mutate_on_replication": {
    "meaning": "Whether a brain changes only when it is copied — into a newborn, or into a node its owner has just won — instead of also after every game, wherever it sits.",
    "glance": "brains change only when copied"
+  },
+  "inherited_step": {
+   "meaning": "Whether every brain carries its own step, the number of its numbers one mutation changes, inherited by its copies and itself doubled or halved at every mutation; founders start at the share mutation_sparsity names.",
+   "glance": "each brain inherits how much it mutates"
   },
   "incumbency": {
    "meaning": "How many times over an agent's stake on its own node counts when the game decides who takes the node. 1 is the old rule.",
