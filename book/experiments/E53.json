@@ -1,0 +1,83 @@
+{
+ "id": "E53",
+ "title": "Does the core last? The new state played on with small mutations and with the engine's own",
+ "thesis": {
+  "claim": "The core of rich agents that formed in Experiment 50 needs small mutations. Played on for 5,000 iterations from the same kept world, it is still there in both runs whose mutations change 10 numbers, and it has fallen apart in both runs given back the engine's own mutation.",
+  "why": "In Experiment 50 both branches with mutations of 10 numbers went from a world of 5,000 poor agents round one hub to a core: about 160 agents nearly all linked to one another, holding nine tenths of the agents' tokens, with almost no births and few deaths for over 2,000 iterations. A branch with mutations of 100 numbers formed such a core and lost it again, and neither branch with the engine's mutation formed one. Where the largest stake wins a node, a team of poor agents loses to one rich agent (card D2 of research/efficient/plan.md), so having no children and keeping every link is what holds a core together; a mutant that decides differently in a third of what it meets does neither. If the core lasts only while copies are faithful, the way brains vary decides which structures a world can keep.",
+  "confirm": "A world has a core if at least 100 agents have more than half as many links as its best-linked agent, at least half of the links possible among them are made, and they hold at least half of the tokens agents hold. All four: both runs with 10 numbers have a core in the world kept at iteration 27,500; neither run with the engine's mutation has one there.",
+  "refute": "A run with 10 numbers has no core at 27,500, or a run with the engine's mutation has one. Reported beside it: each run's core in every world it kept, every 500 iterations, and its births per agent."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "from": {
+   "run": "B1-40000-b7eb00-s5001-on45a3d3",
+   "at": 22500
+  },
+  "seeds": "5301..5302",
+  "iterations": 27500,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "10 numbers",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 10
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   },
+   {
+    "name": "the engine's mutation",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true
+    },
+    "world": {
+     "n_nodes": 800
+    }
+   }
+  ]
+ }
+}

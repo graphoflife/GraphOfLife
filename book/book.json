@@ -680,11 +680,12 @@
       "kind": "experiment",
       "experiments": [
         "E50",
-        "E51"
+        "E51",
+        "E53"
       ],
       "status": "ready",
       "added": "2026-11-23",
-      "summary": "A plan not yet played: one kept world of 40,000 tokens is played on six times for 2,500 iterations, twice as it is and twice each with mutations of exactly 10 and 100 of a brain's numbers, and the branches' brains are then played against their start and against each other. Its thesis: with small mutations a world that had stopped gets better again."
+      "summary": "One kept world of 40,000 tokens is played on six times for 2,500 iterations, twice as it is and twice each with mutations of exactly 10 and 100 of a brain's numbers, and the branches' brains are then played against their start and against each other. Its thesis: with small mutations a world that had stopped gets better again. The runs are done and became four kinds of world; with mutations of 10 numbers a core of about 160 rich agents formed whose agents lived on for over 2,000 iterations with almost no births. The contests are being played, and Experiment 53 asks whether the core needs small mutations."
     },
     {
       "id": "a-source-and-a-sink",
