@@ -534,7 +534,10 @@ advantage. The numbers are made by
 
 One world formed the order twice; that is one world. Experiment 63 plays
 nine: the kept world of Experiment 50 played on for 10,000 iterations with
-mutations of 20, 30 and 50 numbers, three runs each.
+mutations of 20, 30 and 50 numbers, three runs each. The world is taken
+from the copy that Experiment 50's first run kept of it at iteration
+20,000, the same agents, brains and links, because the drive that holds
+the original was not plugged in.
 
 <!-- thesis E63 -->
 > [!quote] The thesis of Experiment 63, written down before any of its runs existed
@@ -549,11 +552,11 @@ mutations of 20, 30 and 50 numbers, three runs each.
 
 <!-- runs E63 -->
 > [!info]- The runs behind this page
-> **9 runs.** Every condition below is run once for every seed (6301 to 6303), played on from the world `B1-40000-bbbccd-s4602` kept at iteration 20,000, to iteration 30,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+> **9 runs.** Every condition below is run once for every seed (6301 to 6303), played on from the world `B1-40000-bbbccd-s5001-on45a3d3` kept at iteration 20,000, to iteration 30,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
 >
-> - **20 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 20, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-c8c9f2-s6301-on45a3d3` … `B1-40000-c8c9f2-s6303-on45a3d3`.
-> - **30 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-8020c3-s6301-on45a3d3` … `B1-40000-8020c3-s6303-on45a3d3`.
-> - **50 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-3f4b02-s6301-on45a3d3` … `B1-40000-3f4b02-s6303-on45a3d3`.
+> - **20 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 20, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-c8c9f2-s6301-on210139` … `B1-40000-c8c9f2-s6303-on210139`.
+> - **30 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-8020c3-s6301-on210139` … `B1-40000-8020c3-s6303-on210139`.
+> - **50 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-3f4b02-s6301-on210139` … `B1-40000-3f4b02-s6303-on210139`.
 >
 > To make these runs again: `python3 gol_lab.py run E63`.
 <!-- /runs -->
