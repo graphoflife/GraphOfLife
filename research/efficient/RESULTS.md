@@ -411,7 +411,7 @@ and left it.
 
 ### Experiments 50 and 51: the verdict — undecided
 
-Contests of the six branches (191 of 192). (1) End against start, agents'
+Contests of the six branches (all 192). (1) End against start, agents'
 share: 10 numbers **0.72 (0.60 to 0.84)**; 100 numbers 0.22 (0.14 to 0.30);
 as it is 0.30 (0.10 to 0.49). (2) Against the arm as it is: 10 numbers 0.63
 (0.42 to 0.83), 100 numbers 0.65 (0.47 to 0.84); by seed 0.28 and 0.97,

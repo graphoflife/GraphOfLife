@@ -98,8 +98,7 @@ places, and every coin has a deal of its own. Three kinds are played:
 
 ## What the contests said
 
-Experiment 51's contests were played on 24 November 2026: 191 of the 192,
-one still to come. A score is the share of the agents a side holds after a
+Experiment 51's 192 contests were played on 24 November 2026. A score is the share of the agents a side holds after a
 contest, the mean of its coins, with two standard errors either side.
 
 **The thesis is undecided.**
@@ -115,7 +114,7 @@ contest, the mean of its coins, with two standard errors either side.
 | 100 numbers, both seeds | 0.65 | 0.47 to 0.84 | 16 |
 | **the world before**: brains of 20,000 | | | |
 | against those of 17,500 | 0.91 | 0.86 to 0.96 | 8 |
-| against those of 15,000 | 0.90 | 0.88 to 0.92 | 7 |
+| against those of 15,000 | 0.90 | 0.88 to 0.92 | 8 |
 
 - **With mutations of 10 numbers the brains got better than their start**:
   0.72, the whole band above a half, in both runs (0.68 and 0.76). That is
