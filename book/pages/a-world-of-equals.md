@@ -8,6 +8,8 @@
 >   and keeps its order?
 > - Does a world find its own step, if each brain inherits how much it
 >   mutates?
+> - Can a world of equals be invaded, and can its way of playing spread
+>   into another world?
 
 <!-- experiment E54 -->
 <!-- experiment E56 -->
@@ -28,8 +30,9 @@ brains still get better inside it? Experiment 56 starts the same rules from
 founders with small mutations, at 40,000 tokens and at 10,000, where they
 died out before.
 
-All five experiments of this page are played, and all five theses are
-refuted. What they found together:
+Five experiments of this page are played, and all five theses are
+refuted. A sixth, Experiment 59, not yet played, asks whether a world of
+equals can be invaded. What the five found together:
 
 - **The world of equals forms again and again**, from a long-run world,
   from founders and from young worlds, at 10,000 and at 40,000 tokens. Six
@@ -287,6 +290,38 @@ died as they did with small steps from the first iteration.
 > To make these runs again: `python3 gol_lab.py run E58`, or ▶ in the Research Notebook tab of a computer running `gol_server.py`. Each run writes its settings, seed and engine version beside its frames, in `GraphOfLifeRuns/<run>/meta.json` and `provenance.json`.
 <!-- /runs -->
 
+## Can it be invaded, and can it invade?
+
+<!-- experiment E59 -->
+
+A world of equals lasts while everyone in it plays the same way. Experiment
+59 asks what happens when half its agents do not: it gives half the agents
+of a world of equals the brains of the world that fell back under the
+engine's mutation, and half the agents of that world the brains of the
+world of equals. It also plays the two worlds of equals against each other.
+
+<!-- thesis E59 -->
+> [!quote] The thesis of Experiment 59, written down before any of its runs existed
+> **The claim.** The way of playing of the world of equals holds its own ground and cannot take another's. In a world of equals, brains of the world that fell back under the engine's mutation lose to its own; in that other world, the brains of the world of equals do not win.
+>
+> **Why it would be so.** In a world of equals every agent stakes one token on every neighbour and marks it for a coalition, so on every node the many small stakes together outweigh any single one. A newcomer that keeps half its tokens at home and has children, as the brains of the engine's world do, is outweighed on every node it stakes on while most of its neighbours follow the common way. In the engine's world most agents keep their tokens at home and few nodes are won by a coalition; there a brain that spreads its tokens one to a neighbour gives them away to stakers who do not give back. If so, the world of equals is a state a world must fall into together, and cannot be spread from a few.
+>
+> **It holds if:** A coin is two contests with one deal, the two sides in swapped places; a score is the mean of its coins and its band two standard errors either side. Pooled over the two seeds, the share of the agents held by the brains of the world of equals after 100 iterations: on the worlds of equals, the whole band is above 0.5; on the engine's worlds, the band is not wholly above 0.5.
+>
+> **It fails if:** On the worlds of equals the whole band is below 0.5: its own brains lose at home. Anything else is undecided. Reported beside it: the shares of the tokens, and the two worlds of equals against each other.
+<!-- /thesis -->
+
+<!-- runs E59 -->
+> [!info]- The trials behind this page
+> **48 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
+>
+> - **two worlds of equals** — 16 trials: worlds `B1-40000-b7eb00-s5301-one41f90`, `B1-40000-b7eb00-s5302-one41f90`; eras 27,500; coins 5,901 to 5,908, every 1.
+> - **equals against the engine's world, seed 5301** — 16 trials: worlds `B1-40000-b7eb00-s5301-one41f90`, `B1-40000-bbbccd-s5301-one41f90`; eras 27,500; coins 5,909 to 5,916, every 1.
+> - **equals against the engine's world, seed 5302** — 16 trials: worlds `B1-40000-b7eb00-s5302-one41f90`, `B1-40000-bbbccd-s5302-one41f90`; eras 27,500; coins 5,917 to 5,924, every 1.
+>
+> To play these trials again: `python3 gol_lab.py run E59`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+<!-- /runs -->
+
 <!-- runs E54 -->
 > [!info]- The trials behind this page
 > **96 trials**, contests: the world of one era, its agents given brains drawn by coin from two eras, every mutation off, and the later era's share of the agents counted at the end; each plays 100 iterations, from a world another run kept in its archive.
@@ -298,7 +333,7 @@ died as they did with small steps from the first iteration.
 > - **seed 5302: 27,500 against 25,000** — 16 trials: worlds `B1-40000-b7eb00-s5302-one41f90`; eras 25,000, 27,500; coins 5,433 to 5,440, every 1.
 > - **seed 5302: 27,500 against 23,000** — 16 trials: worlds `B1-40000-b7eb00-s5302-one41f90`; eras 23,000, 27,500; coins 5,441 to 5,448, every 1.
 >
-> To play these trials again: `python3 gol_lab.py run E54`. Each writes its settings and engine beside its result, in `GraphOfLifeRuns/<trial>/meta.json` and `result.json`.
+> To play these trials again: `python3 gol_lab.py run E54`.
 <!-- /runs -->
 
 <!-- runs E57 -->

@@ -1,0 +1,416 @@
+{
+ "id": "E59",
+ "title": "Can the world of equals be invaded, and can it invade? Its brains against those of the world it fell back to",
+ "thesis": {
+  "claim": "The way of playing of the world of equals holds its own ground and cannot take another's. In a world of equals, brains of the world that fell back under the engine's mutation lose to its own; in that other world, the brains of the world of equals do not win.",
+  "why": "In a world of equals every agent stakes one token on every neighbour and marks it for a coalition, so on every node the many small stakes together outweigh any single one. A newcomer that keeps half its tokens at home and has children, as the brains of the engine's world do, is outweighed on every node it stakes on while most of its neighbours follow the common way. In the engine's world most agents keep their tokens at home and few nodes are won by a coalition; there a brain that spreads its tokens one to a neighbour gives them away to stakers who do not give back. If so, the world of equals is a state a world must fall into together, and cannot be spread from a few.",
+  "confirm": "A coin is two contests with one deal, the two sides in swapped places; a score is the mean of its coins and its band two standard errors either side. Pooled over the two seeds, the share of the agents held by the brains of the world of equals after 100 iterations: on the worlds of equals, the whole band is above 0.5; on the engine's worlds, the band is not wholly above 0.5.",
+  "refute": "On the worlds of equals the whole band is below 0.5: its own brains lose at home. Anything else is undecided. Reported beside it: the shares of the tokens, and the two worlds of equals against each other."
+ },
+ "trials": {
+  "kind": "contest",
+  "T": 100,
+  "workers": 3,
+  "sets": [
+   {
+    "name": "two worlds of equals",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5901,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5901,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5902,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5902,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5903,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5903,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5904,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5904,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5905,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5905,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5906,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5906,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5907,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5907,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5908,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5908,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     }
+    ]
+   },
+   {
+    "name": "equals against the engine's world, seed 5301",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5909,
+      "a_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5909,
+      "b_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5910,
+      "a_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5910,
+      "b_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5911,
+      "a_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5911,
+      "b_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5912,
+      "a_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5912,
+      "b_run": "B1-40000-bbbccd-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5913,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5913,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5914,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5914,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5915,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5915,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5916,
+      "b_run": "B1-40000-b7eb00-s5301-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5916,
+      "a_run": "B1-40000-b7eb00-s5301-one41f90"
+     }
+    ]
+   },
+   {
+    "name": "equals against the engine's world, seed 5302",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5917,
+      "a_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5917,
+      "b_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5918,
+      "a_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5918,
+      "b_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5919,
+      "a_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5919,
+      "b_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5920,
+      "a_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5920,
+      "b_run": "B1-40000-bbbccd-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5921,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5921,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5922,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5922,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5923,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5923,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5924,
+      "b_run": "B1-40000-b7eb00-s5302-one41f90"
+     },
+     {
+      "run": "B1-40000-bbbccd-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 27500,
+      "seed": 5924,
+      "a_run": "B1-40000-b7eb00-s5302-one41f90"
+     }
+    ]
+   }
+  ]
+ }
+}
