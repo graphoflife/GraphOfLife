@@ -667,7 +667,7 @@
       ],
       "status": "analysed",
       "added": "2026-11-23",
-      "summary": "One mutation of the engine changes what a brain decides in 34% to 67% of real situations; one number changed, under 1%. Experiment 49 marked mutants and unchanged agents in three kept worlds. The count its thesis reads, after 30 iterations, is noise: one line has taken over by then, and by its own words the thesis is refuted without deciding anything. After three iterations, lines changed by the engine's mutation have 0.69 times the copies of unchanged ones in s4003, and smaller mutations cost nothing measurable. Experiment 52, not yet played, asks whether a line's success is in its brain, its place or luck."
+      "summary": "One mutation of the engine changes what a brain decides in 34% to 67% of real situations; one number changed, under 1%. Experiment 49 marked mutants and unchanged agents in three kept worlds. The count its thesis reads, after 30 iterations, is noise: one line has taken over by then, and by its own words the thesis is refuted without deciding anything. After three iterations, lines changed by the engine's mutation have 0.69 times the copies of unchanged ones in s4003, and smaller mutations cost nothing measurable. Experiment 52 replayed 400 marked agents with other luck and with their brains swapped: the place a line starts in counts for far more than its brain; a brain's success travels with it where the largest stake wins (0.25) and barely where the lottery decides (0.09)."
     },
     {
       "id": "does-a-smaller-step-restart-evolution",

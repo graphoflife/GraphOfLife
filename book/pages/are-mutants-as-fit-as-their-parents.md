@@ -31,6 +31,13 @@ has 0.69 times the copies of an unchanged line after three iterations and
 0.41 to 0.58 times after six. Mutations of 1, 10 and 100 numbers cost
 nothing that can be measured. In s4008 no mutation costs anything.
 
+Experiment 52 then asked how much of a line's success is its brain's at
+all. It replayed 400 marked agents with other luck and with their brains
+swapped. The place a line starts in counts for far more than its brain. In
+a world where the largest stake wins, a brain that did well in one place
+does better in another too (a [correlation](statistics.md#two-numbers-together-correlation-a-fitted-line-and-logarithmic-axes "Whether two quantities go up and down together, from −1 to 1.") of 0.25). In a world that plays
+the lottery it barely does (0.09).
+
 ## What one mutation does to a brain's decisions
 
 A **probe** is one real situation: what an agent of a kept world saw of
@@ -221,6 +228,40 @@ brains moved among the marked agents, each brain in another's place.
 >
 > To play these trials again: `python3 gol_lab.py run E52`.
 <!-- /runs -->
+
+### What the assays said (Experiment 52)
+
+The 24 assays were played on 24 November 2026. A line's score is the
+logarithm of one plus its copies after six iterations. Each number is a
+correlation over the 400 marked agents, with the range of 95% of 2,000
+resamplings.
+
+| world | the brain, in another place (r_brain) | the place, with another brain (r_place) | the same brain in the same place, played again (r_same) |
+|---|---|---|---|
+| s3058 at 20,000 (40,000 tokens, the largest stake wins) | 0.25 (0.15 to 0.35) | 0.58 (0.47 to 0.68) | 0.52 (0.39 to 0.63) |
+| s4003 at 15,000 (10,000 tokens, the lottery) | 0.09 (−0.02 to 0.19) | 0.40 (0.31 to 0.50) | 0.36 (0.22 to 0.49) |
+
+**The thesis is undecided.** In s3058 the brain's share is above nought and
+smaller than the place's, as claimed. In s4003 its range includes nought, so
+the claim does not hold in both worlds; nor is it refuted, which needed both
+ranges to include nought.
+
+- **In both worlds the place counts for far more than the brain.** A line
+  does well mostly because of where it starts: its tokens, its links, its
+  neighbours. The place's correlation is as large as that of the same brain
+  in the same place played again, so most of what repeats is the place.
+- **In s3058 a brain that does well in one place does better in another
+  too.** A correlation of 0.25 means about 6% of the differences between
+  lines travel with the brain. That is what selection can work on.
+- **In s4003 almost nothing travels with the brain** over six iterations
+  (0.09, about 1% of the differences). Read by which lines are still alive
+  after three iterations it is 0.15 (0.05 to 0.24), just above nought.
+  Selection on brains is weak there. This fits a world that plays the
+  lottery, where every way of staking returns the same tokens on average.
+
+So how much selection has to work with depends on the rules of the world,
+and a way of varying brains can only help where the brain counts. The
+numbers are made by `python3 research/efficient/C6/c6.py`.
 
 ## Where to go next
 

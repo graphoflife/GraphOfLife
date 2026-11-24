@@ -231,6 +231,57 @@ estates, teams of at most 4, revolutions left out.
 - **Lines die fast**: a third alive after 3 iterations, about 3% after 9,
   a few in a thousand after 30.
 
+### C6. Experiment 52: brain, place or luck? — mostly place; the brain where the largest stake wins
+
+400 marked agents of a kept world, replayed six times with other luck and
+six times with their brains swapped (24 assays of 9 iterations, minutes).
+Correlations of a line's log copies after six iterations:
+
+| world | brain in another place | place with another brain | same brain, same place again |
+|---|---|---|---|
+| s3058 at 20,000 (largest stake) | 0.25 (0.15 to 0.35) | 0.58 | 0.52 |
+| s4003 at 15,000 (lottery) | 0.09 (−0.02 to 0.19) | 0.40 | 0.36 |
+
+Thesis undecided (it holds in s3058, not in s4003). The reading: the place
+a line starts in decides most of what repeats; in s3058 about 6% of the
+differences between lines travel with the brain, in s4003 about 1%. **How
+much selection has to work with is a property of the rules**, and it can be
+measured in minutes for any kept world. This is the cheapest test found so
+far of whether a world can evolve at all.
+
+### Experiment 50, the branches (before their contests)
+
+The world played on (s3058 at 40,000 tokens, iteration 20,000) had about
+5,000 agents, 2.4 links an agent, and one agent linked to a third of all
+the others. After 2,500 more iterations:
+
+| branch | agents | links an agent | births per agent | most links one agent has |
+|---|---|---|---|---|
+| as it is, seed 5001 | 910 | 4.6 | 0.16 | 38 |
+| as it is, seed 5002 | 3,850 | 2.9 | 0.20 | 1,578 |
+| 10 numbers, seed 5001 | 484 | 55 | 0.000 | 175 |
+| 10 numbers, seed 5002 | 683 | 40 | 0.002 | 164 |
+| 100 numbers, seed 5001 | 3,162 | 5.2 | 0.08 | 150 |
+| 100 numbers, seed 5002 | 6,580 | 2.0 | 0.06 | 6,579 |
+
+(means of the last 500 iterations)
+
+- Both branches with mutations of 10 numbers ended in the same new state:
+  500 to 700 agents with 40 to 55 links each, holding about 40 to 55
+  tokens, and almost no births, deaths or starving. Brains spread only by
+  winning nodes; in the first of the two, 70% to 88% of nodes change hands
+  in every game. One reached that state by iteration 20,600, the other
+  after 21,500.
+- One branch with 100 numbers passed through that state and left it; the
+  other became a star: one agent linked to every other.
+- One branch as it is thinned to 900 agents and lost its hub; the other
+  stayed as the world was.
+
+Six branches, four different worlds. This world has several stable states,
+and which one a branch reaches depends on its mutations and its luck. Two
+of two for the dense state under the smallest step is suggestive, not
+proof. Whether the brains that made it are better is Experiment 51.
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks
