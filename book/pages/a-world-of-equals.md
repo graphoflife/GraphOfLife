@@ -35,7 +35,15 @@ refuted. Experiment 60 looked for a step of mutation at which order forms
 and breaks, and found it at 30 numbers; its thesis is undecided.
 Experiment 59 asked whether a world of equals can be invaded: with half its
 agents given other brains, those take most of its tokens; its thesis is
-undecided. Experiment 61 (does the order form again?) is being played. What the five found together:
+undecided. Experiment 61 played the two worlds of 30 numbers on: one formed
+the order a second time and lost it again, the other died out; undecided.
+Experiment 62 put a few changed brains into a world of equals: they do as
+well as the rest, so the order is not kept by selection; refuted.
+
+Taken together: the world of equals is a state these rules fall into when
+copies are faithful enough, and then wear away from, faster the larger the
+step of a mutation. At a step of 30 numbers one world went back and forth
+between order and churn. What the five found together:
 
 - **The world of equals forms again and again**, from a long-run world,
   from founders and from young worlds, at 10,000 and at 40,000 tokens. Six
@@ -380,6 +388,35 @@ November when three of Experiment 60's six runs were done, both runs with
 > **It fails if:** Neither run has such a window. Anything else is undecided. Reported beside it: for each run, which windows are of a world of equals, how often it entered and left that state, and its agents in every window.
 <!-- /thesis -->
 
+#### What Experiment 61 found
+
+The two runs were played on 24 November 2026. Twenty windows of 500
+iterations each, from iteration 25,000 to 35,000; an `E` is a window of a
+world of equals.
+
+| world | windows | what happened |
+|---|---|---|
+| from the run of seed 6001 | `.................` | never formed one again; **died out at iteration 33,061** |
+| from the run of seed 6002 | `.............EE.....` | formed one again at iteration 31,500, for 1,000 iterations, and lost it again |
+
+**The thesis is undecided**: one world formed the order a second time, the
+other did not.
+
+- **The order can form again.** The second world went from about 4,000
+  agents to 335, with nine nodes in ten won by a coalition and almost no
+  births, 6,500 iterations after it had lost its first world of equals. A
+  thousand iterations later it was a world of 4,000 again. It is the first
+  world of the notebook that goes back and forth between two kinds of world
+  and settles in neither.
+- **A world of this step can also die.** The first world held about 4,300
+  agents with no births and hardly a node won by a coalition: neither
+  order nor the usual churn, but a world in which nobody has children and
+  nobody shares. It shrank from iteration 31,000 on and died out 2,000
+  iterations later, at 40,000 tokens.
+
+One world and two formations are a hint. Whether worlds of this step keep
+going back and forth, and how many die on the way, needs more of them.
+
 <!-- runs E61 -->
 > [!info]- The runs behind this page
 > **2 runs.** Every condition below is run once for every seed (6101), played on from a kept world of its own to iteration 35,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
@@ -512,6 +549,34 @@ iterations, as Experiment 49 did in other worlds
 >
 > **It fails if:** In both worlds R for 1,000 numbers lies inside its shuffled range or above it: a few who play otherwise do as well as the rest. Anything else is undecided. Reported beside it: R for 100 numbers, R after three and after nine iterations, and the share of lines still alive.
 <!-- /thesis -->
+
+#### What Experiment 62 found
+
+The 48 assays were played on 24 November 2026. R is the mean count of the
+changed lines over that of the unchanged ones after six iterations, with
+the range of 95% of 2,000 shufflings of the labels.
+
+| world of equals | 10 numbers changed | 100 | 1,000 |
+|---|---|---|---|
+| seed 5301 | 1.02 (0.79 to 1.27) | 1.11 (0.79 to 1.27) | 1.07 (0.79 to 1.28) |
+| seed 5302 | 1.13 (0.79 to 1.28) | 1.20 (0.77 to 1.28) | 0.99 (0.78 to 1.28) |
+
+**The thesis is refuted.** In both worlds a line changed in 1,000 numbers
+leaves as many copies as an unchanged one. After three and after nine
+iterations it is the same, and as many of its lines are still alive.
+
+So a world of equals does not push out the few who play otherwise. A node's
+new brain is drawn by lot among its stakers, and a brain changed in 1,000
+numbers still mostly stakes as the others do, so it is drawn as often.
+Nothing selects against it in the short run.
+
+That changes how the order should be understood. It is not kept by
+selection. It is a state the world falls into and then wears away from, as
+changed brains pile up unchecked. How fast it wears is set by the step of a
+mutation: with 10 numbers it lasted all 4,500 iterations played, with 30
+numbers 1,500 and 3,000, with the engine's mutation fewer than 500. And
+with half the agents replaced at once it does not hold at all (Experiment
+59).
 
 <!-- runs E62 -->
 > [!info]- The trials behind this page

@@ -1,8 +1,8 @@
 {
  "30 numbers, from the run of seed 6001, seed 6101": {
   "run": "B1-40000-8020c3-s6101-on697699",
-  "iteration": 30618,
-  "status": "running",
+  "iteration": 33061,
+  "status": "extinct",
   "windows": [
    {
     "from": 25000,
@@ -127,14 +127,69 @@
    },
    {
     "from": 30500,
-    "agents": 4280.638655462185,
-    "links": 2.0712764440648304,
-    "most_links": 2646.705882352941,
-    "tokens": 8.308762033118011,
-    "gini": 0.28717173826408576,
-    "births_per_agent": 9.817470405793207e-06,
-    "coalition": 0.00910293759668313,
-    "deaths": 2
+    "agents": 4282.156,
+    "links": 2.0778176324910937,
+    "most_links": 2647.624,
+    "tokens": 8.30218069052425,
+    "gini": 0.28861304377665875,
+    "births_per_agent": 4.671806264786685e-06,
+    "coalition": 0.00900761205336751,
+    "deaths": 5
+   },
+   {
+    "from": 31000,
+    "agents": 4299.28,
+    "links": 2.110659983085447,
+    "most_links": 2674.97,
+    "tokens": 8.250104318327399,
+    "gini": 0.3031923308348731,
+    "births_per_agent": 0.00045926498087439784,
+    "coalition": 0.00880426490016933,
+    "deaths": 933
+   },
+   {
+    "from": 31500,
+    "agents": 2550.538,
+    "links": 2.3584121196566903,
+    "most_links": 1265.904,
+    "tokens": 17.568880111778995,
+    "gini": 0.3600081408240127,
+    "births_per_agent": 0.001078798057116069,
+    "coalition": 0.015405377218453519,
+    "deaths": 3877
+   },
+   {
+    "from": 32000,
+    "agents": 1523.894,
+    "links": 2.654953963398825,
+    "most_links": 578.202,
+    "tokens": 25.071186348081262,
+    "gini": 0.3951927674410864,
+    "births_per_agent": 0.0026222846896250245,
+    "coalition": 0.024921680904314868,
+    "deaths": 2282
+   },
+   {
+    "from": 32500,
+    "agents": 381.156,
+    "links": 3.787017390961005,
+    "most_links": 86.036,
+    "tokens": 138.8965372367355,
+    "gini": 0.4261320536664069,
+    "births_per_agent": 0.07249253887085945,
+    "coalition": 0.2898130949007755,
+    "deaths": 15553
+   },
+   {
+    "from": 33000,
+    "agents": 82.27868852459017,
+    "links": 2.974312411559929,
+    "most_links": 12.114754098360656,
+    "tokens": 650.3038573049291,
+    "gini": 0.44290401328905826,
+    "births_per_agent": 0.012532312523670026,
+    "coalition": 0.3564455070731221,
+    "deaths": 179
    }
   ],
   "world_of_equals": false,
@@ -143,8 +198,8 @@
  },
  "30 numbers, from the run of seed 6002, seed 6101": {
   "run": "B1-40000-8020c3-s6101-onb1e06c",
-  "iteration": 34568,
-  "status": "running",
+  "iteration": 35000,
+  "status": "stopped",
   "windows": [
    {
     "from": 25000,
@@ -357,14 +412,14 @@
    },
    {
     "from": 34500,
-    "agents": 3934.8115942028985,
-    "links": 2.1115907952414616,
-    "most_links": 3568.913043478261,
-    "tokens": 9.111897835157176,
-    "gini": 0.2929624166263093,
-    "births_per_agent": 0.004511803428809404,
-    "coalition": 0.01337743368372977,
-    "deaths": 1220
+    "agents": 3844.41,
+    "links": 2.148606918980694,
+    "most_links": 3499.33,
+    "tokens": 9.35097090445039,
+    "gini": 0.29841937477748265,
+    "births_per_agent": 0.004053927690216453,
+    "coalition": 0.020151336616021705,
+    "deaths": 8178
    }
   ],
   "world_of_equals": false,

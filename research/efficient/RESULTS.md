@@ -35,6 +35,14 @@ in the worlds we had, and a new kind of world.
 - If brains inherit their step, it shrinks to a handful of numbers within
   500 iterations, everywhere (Experiment 58).
 
+**Added after Experiments 59 to 62.** The order is not defended: a few
+brains that play otherwise do as well as the rest (62), and many of them
+take the world's tokens (59). So the world of equals is fallen into, not
+selected for, and it wears away at a rate set by the step of a mutation
+(60). At 30 numbers one world formed it, lost it, formed it again and lost
+it again; another died (61). That is the first world that keeps changing
+its kind, though it only goes between two.
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -447,6 +455,27 @@ convention does not protect itself against a large share of others. The
 two worlds of equals against each other: 0.42 at home and away, no home
 advantage. Not tested: a few invaders (an assay in the world of equals
 would do it in minutes).
+
+### Experiment 61: does order form again at 30 numbers? — once yes, once the world died
+
+Both 30-number worlds played on from 25,000 to 35,000. From seed 6002's
+run: `.............EE.....`, a second world of equals at 31,500 for 1,000
+iterations (335 agents), then 4,000 agents again. From seed 6001's run:
+none, and it died out at 33,061 after a stretch with about 4,300 agents, no
+births and hardly any node won by a coalition. Thesis undecided. One world
+goes back and forth between order and churn; worlds of this step can also
+die.
+
+### Experiment 62: a few deviants in a world of equals — not selected against
+
+48 assays of 9 iterations in the two worlds of equals. Mean copies of
+changed lines over unchanged after six iterations: 10 numbers 1.02 and
+1.13; 100 numbers 1.11 and 1.20; 1,000 numbers 1.07 and 0.99; every one
+inside its shuffled range (about 0.78 to 1.28). **Thesis refuted.** A brain
+changed in 1,000 numbers does as well as the rest. **The order is not kept
+by selection.** It is a state the world falls into and wears away from as
+changed brains pile up: 10 numbers lasted 4,500 iterations and more, 30
+numbers 1,500 and 3,000, the engine's mutation under 500.
 
 ## What this changes in the plan
 
