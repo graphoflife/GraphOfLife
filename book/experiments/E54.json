@@ -1,0 +1,719 @@
+{
+ "id": "E54",
+ "title": "Do brains still get better in a world of equals? Its later brains against its earlier ones",
+ "thesis": {
+  "claim": "In a world of equals brains no longer get better. The brains of a later iteration hold their own against those of an earlier one, and no more.",
+  "why": "In Experiment 53's two runs with mutations of 10 numbers every agent does the same thing, a node's new brain is drawn by lot among its stakers, and from iteration 25,500 on the worlds hardly change. If every brain follows the same way of staking, none spreads better than another, and a contest between two moments of such a world is a tie. A score above a half would mean that brains still improve inside the order, which would make it more than an end point.",
+  "confirm": "A coin is two contests with one deal, the two sides in swapped places; a score is the mean of its coins and its band two standard errors either side. Pooled over the two runs and both worlds of each pair, the later brains' share of the agents has a band that includes 0.5, for 25,000 against 23,000 and for 27,500 against 25,000.",
+  "refute": "For either pair the whole band lies above 0.5: brains still get better in a world of equals. A band wholly below 0.5 for either pair is reported as undecided, as is anything else. Reported beside it: 27,500 against 23,000, and each run alone."
+ },
+ "trials": {
+  "kind": "contest",
+  "T": 100,
+  "workers": 3,
+  "sets": [
+   {
+    "name": "seed 5301: 25,000 against 23,000",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5401
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5401
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5402
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5402
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5403
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5403
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5404
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5404
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5405
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5405
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5406
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5406
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5407
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5407
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5408
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5408
+     }
+    ]
+   },
+   {
+    "name": "seed 5301: 27,500 against 25,000",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5409
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5409
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5410
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5410
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5411
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5411
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5412
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5412
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5413
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5413
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5414
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5414
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5415
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5415
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5416
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5416
+     }
+    ]
+   },
+   {
+    "name": "seed 5301: 27,500 against 23,000",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5417
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5417
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5418
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5418
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5419
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5419
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5420
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5420
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5421
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5421
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5422
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5422
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5423
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5423
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5424
+     },
+     {
+      "run": "B1-40000-b7eb00-s5301-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5424
+     }
+    ]
+   },
+   {
+    "name": "seed 5302: 25,000 against 23,000",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5425
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5425
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5426
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5426
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5427
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5427
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5428
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5428
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5429
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5429
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5430
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5430
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5431
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5431
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 23000,
+      "b": 25000,
+      "seed": 5432
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 23000,
+      "seed": 5432
+     }
+    ]
+   },
+   {
+    "name": "seed 5302: 27,500 against 25,000",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5433
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5433
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5434
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5434
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5435
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5435
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5436
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 25000,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5436
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5437
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5437
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5438
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5438
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5439
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5439
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 25000,
+      "b": 27500,
+      "seed": 5440
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 25000,
+      "seed": 5440
+     }
+    ]
+   },
+   {
+    "name": "seed 5302: 27,500 against 23,000",
+    "items": [
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5441
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5441
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5442
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5442
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5443
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5443
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5444
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 23000,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5444
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5445
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5445
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5446
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5446
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5447
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5447
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 23000,
+      "b": 27500,
+      "seed": 5448
+     },
+     {
+      "run": "B1-40000-b7eb00-s5302-one41f90",
+      "home": 27500,
+      "a": 27500,
+      "b": 23000,
+      "seed": 5448
+     }
+    ]
+   }
+  ]
+ }
+}

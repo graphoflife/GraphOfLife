@@ -688,6 +688,23 @@
       "summary": "One kept world of 40,000 tokens is played on six times for 2,500 iterations, twice as it is and twice each with mutations of exactly 10 and 100 of a brain's numbers, and the branches' brains are then played against their start and against each other. Its thesis: with small mutations a world that had stopped gets better again. The runs are done and became four kinds of world; with mutations of 10 numbers a core of about 160 rich agents formed whose agents lived on for over 2,000 iterations with almost no births. Experiment 53 played that world on: with small mutations the core spread into a world of 476 equal agents who all stake one token on every neighbour, marked for a coalition, with no births and no deaths for 4,500 iterations; with the engine's mutation it was thousands of short-lived agents again within 500. The contests of Experiment 51 are being played."
     },
     {
+      "id": "a-world-of-equals",
+      "title": "A world of equals",
+      "file": "pages/a-world-of-equals.md",
+      "topics": [
+        "evolution",
+        "groups"
+      ],
+      "kind": "experiment",
+      "experiments": [
+        "E54",
+        "E56"
+      ],
+      "status": "ready",
+      "added": "2026-11-24",
+      "summary": "With small mutations one world became a few hundred agents with the same tokens and links each, never born and never dying, who all stake one token on every neighbour, marked for a coalition. Two plans not yet played: Experiment 54 plays its later brains against its earlier ones, and Experiment 56 starts the same rules from founders with small mutations, at 40,000 tokens and at 10,000, where they died out before."
+    },
+    {
       "id": "a-source-and-a-sink",
       "title": "A source and a sink",
       "file": "pages/a-source-and-a-sink.md",

@@ -133,6 +133,7 @@ view shows how the pages hang together.
 - [Why does evolution level off?](pages/why-does-evolution-level-off.md)
 - [Are mutants as fit as their parents?](pages/are-mutants-as-fit-as-their-parents.md)
 - [Does a smaller step restart evolution?](pages/does-a-smaller-step-restart-evolution.md)
+- [A world of equals](pages/a-world-of-equals.md)
 - [A source and a sink](pages/a-source-and-a-sink.md)
 
 #### Changing the rules

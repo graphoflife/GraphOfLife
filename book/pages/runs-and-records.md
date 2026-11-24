@@ -240,6 +240,7 @@ Every page with a box *The runs behind this page* reads the lab's runs.
 - [Why does evolution level off?](why-does-evolution-level-off.md#the-arms)
 - [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md#the-assay)
 - [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md#the-world-that-is-played-on)
+- [A world of equals](a-world-of-equals.md#in-short)
 - [Can a strategy written by hand beat evolution?](strategies-written-by-hand.md#what-we-expected-of-a-crowd)
 - [What a brain can compute](what-a-brain-can-compute.md#the-check)
 - [Other contests: a lottery, and alliances](another-game.md#in-short)

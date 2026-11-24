@@ -189,7 +189,7 @@ only one node in fifty keeps its brain.
 
 Under the engine's mutation the same world, from the same start, is back
 within 500 iterations to what it was before Experiment 50: thousands of
-agents that live a few iterations (100,000 to 180,000 births and as many
+agents that live a few iterations (50,000 to 180,000 births and as many
 deaths in every 500 iterations), most tokens kept at home, and in one run a
 single agent with over 2,000 links.
 
@@ -241,6 +241,9 @@ The readings are made by `python3 research/efficient/E50/e53.py`.
 
 ## Where to go next
 
+- [A world of equals](a-world-of-equals.md): what the new state is, and
+  Experiments 54 and 56, which ask whether it is an end and whether it
+  forms from founders.
 - [Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md):
   what one mutation does to a brain, and Experiment 49.
 - [Why does evolution level off?](why-does-evolution-level-off.md):

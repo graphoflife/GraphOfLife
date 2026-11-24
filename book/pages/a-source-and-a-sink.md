@@ -331,7 +331,7 @@ under *A source and a sink*.
 <!-- turns -->
 ---
 
-← [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
+← [A world of equals](a-world-of-equals.md) · [Does evolution keep going?](../README.md#does-evolution-keep-going)
 
 **Also about:** [Space and dimension](../README.md#space-and-dimension), [Changing the rules](../README.md#changing-the-rules).
 

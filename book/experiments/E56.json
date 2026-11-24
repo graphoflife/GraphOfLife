@@ -1,0 +1,84 @@
+{
+ "id": "E56",
+ "title": "Does a world of equals form from founders? The rules of s3058 with small mutations, at two sizes",
+ "thesis": {
+  "claim": "With mutations of 10 numbers the rules of s3058 make a world of equals from founders, without the 20,000 iterations of history the first one had, and at 10,000 tokens too, where the same rules with the engine's mutation died out.",
+  "why": "In Experiments 50 and 53 a world of 40,000 tokens that had run 20,000 iterations with the engine's mutation turned, once its mutations changed 10 numbers, into a world of equals within 600 to 5,000 iterations: a few hundred agents who all stake one token on every neighbour, marked for a coalition, with no births and no deaths. It fell apart within 500 iterations when the engine's mutation was given back. If that state is what these rules lead to whenever copies are faithful, it should form from founders as well, and it should keep a small world alive: under the engine's mutation all three runs at 10,000 tokens died out, at 744, 1,029 and 2,630 iterations, in culls that cut their network apart (Experiment 46), and in a world of equals no link is cut.",
+  "confirm": "A run is a world of equals if, over its last 500 iterations, there are fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition. Both: all three runs at 10,000 tokens live to iteration 5,000; and at least four of the five runs are a world of equals.",
+  "refute": "Two or more of the three runs at 10,000 tokens die out before iteration 5,000, or fewer than two of the five runs are a world of equals. Anything else is undecided. Reported beside it: when each run became a world of equals, if it did, and its agents, links and Gini of tokens."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 10000
+  },
+  "seeds": "5601..5603",
+  "iterations": 5000,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 500
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "10 numbers at 10,000 tokens",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 10
+    },
+    "world": {
+     "n_nodes": 200
+    }
+   },
+   {
+    "name": "10 numbers at 40,000 tokens",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 10
+    },
+    "sizes": [
+     40000
+    ],
+    "world": {
+     "n_nodes": 800
+    },
+    "seeds": "5601..5602"
+   }
+  ]
+ }
+}
