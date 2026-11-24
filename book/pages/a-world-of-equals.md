@@ -491,6 +491,38 @@ advantage. The numbers are made by
 > To make these runs again: `python3 gol_lab.py run E56`.
 <!-- /runs -->
 
+### A few who play otherwise
+
+<!-- experiment E62 -->
+
+Half a world playing otherwise is more than a world of equals can bear.
+What it meets in its own life is a few: a copy changed by a mutation now
+and then. Experiment 62 marks 100 changed agents and 100 unchanged ones in
+each of the two worlds of equals and counts their copies over nine
+iterations, as Experiment 49 did in other worlds
+([Are mutants as fit as their parents?](are-mutants-as-fit-as-their-parents.md)).
+
+<!-- thesis E62 -->
+> [!quote] The thesis of Experiment 62, written down before any of its runs existed
+> **The claim.** A world of equals holds against a few who play otherwise. A line whose brain is changed in 1,000 of its numbers leaves fewer copies there than a line left as it is; a line changed in 10 numbers, the step that world mutates by, leaves as many.
+>
+> **Why it would be so.** With half its agents given other brains a world of equals lost most of its tokens to them (Experiment 59), yet it lasted 4,500 iterations while one copy in five was changed in 10 numbers (Experiment 53). So it should resist deviants while they are few: in a world where every node is won by the coalition of all its stakers, a brain that stakes otherwise is outweighed on every node, and one that keeps its tokens at home or has a child gives up its share of its neighbours' nodes. A change of 10 numbers alters about one decision in a hundred and should cost nothing; a change of 1,000 alters a fifth to two fifths.
+>
+> **It holds if:** In each of the two worlds, 100 mutant sites and 100 control sites are marked in each of eight assays of 9 iterations. R is the mean count of the mutant sites after six iterations over that of the control sites, pooled over a world's eight assays, and its range is that of 95% of 2,000 shufflings of the labels within each assay. In both worlds: R for 1,000 numbers lies below its shuffled range, and R for 10 numbers lies inside its own.
+>
+> **It fails if:** In both worlds R for 1,000 numbers lies inside its shuffled range or above it: a few who play otherwise do as well as the rest. Anything else is undecided. Reported beside it: R for 100 numbers, R after three and after nine iterations, and the share of lines still alive.
+<!-- /thesis -->
+
+<!-- runs E62 -->
+> [!info]- The trials behind this page
+> **48 trials**, assays: in the world of one era some agents' brains are changed once and marked, as many more only marked, every mutation off, and the agents carrying each mark counted at the end; each plays 9 iterations, from a world another run kept in its archive.
+>
+> - **the world of equals, seed 5301** — 24 trials: worlds `B1-40000-b7eb00-s5301-one41f90`; at iteration 27,500; mutations of 10, 100, 1,000; mutants 100; controls 100; seeds 1 to 8, every 1.
+> - **the world of equals, seed 5302** — 24 trials: worlds `B1-40000-b7eb00-s5302-one41f90`; at iteration 27,500; mutations of 10, 100, 1,000; mutants 100; controls 100; seeds 1 to 8, every 1.
+>
+> To play these trials again: `python3 gol_lab.py run E62`.
+<!-- /runs -->
+
 ## Where to go next
 
 - [Does a smaller step restart evolution?](does-a-smaller-step-restart-evolution.md):

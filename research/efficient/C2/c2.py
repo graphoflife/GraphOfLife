@@ -70,7 +70,8 @@ def by_horizon(results, rng, horizons=(3, 6, 9)):
 if __name__ == "__main__":
     rng = np.random.RandomState(1)
     out = {}
-    sets = read()
+    name = sys.argv[1] if len(sys.argv) > 1 else "E49"       # E62 is read the same way, at 3, 6 and 9 iterations
+    sets = read(name)
     for (world, op), results in sorted(sets.items(), key=lambda kv: (kv[0][0], (0, 0) if kv[0][1] == "engine" else (1, int(kv[0][1])))):
         r = reading(results, rng)
         out[f"{world} | {op}"] = r
@@ -88,4 +89,4 @@ if __name__ == "__main__":
             print(f"{world:<18} {op:>6}: " + "; ".join(
                 f"after {h}: R {r['R']:.2f} ({r['null'][0]:.2f} to {r['null'][1]:.2f}), alive {r['alive'][0]:.0%} vs {r['alive'][1]:.0%}"
                 for h, r in rows.items()))
-    json.dump(out, open(os.path.join(HERE, "c2.json"), "w"), indent=1)
+    json.dump(out, open(os.path.join(HERE, "c2.json" if name == "E49" else f"{name.lower()}.json"), "w"), indent=1)
