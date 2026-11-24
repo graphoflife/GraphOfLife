@@ -683,9 +683,9 @@
         "E51",
         "E53"
       ],
-      "status": "ready",
+      "status": "analysed",
       "added": "2026-11-23",
-      "summary": "One kept world of 40,000 tokens is played on six times for 2,500 iterations, twice as it is and twice each with mutations of exactly 10 and 100 of a brain's numbers, and the branches' brains are then played against their start and against each other. Its thesis: with small mutations a world that had stopped gets better again. The runs are done and became four kinds of world; with mutations of 10 numbers a core of about 160 rich agents formed whose agents lived on for over 2,000 iterations with almost no births. Experiment 53 played that world on: with small mutations the core spread into a world of 476 equal agents who all stake one token on every neighbour, marked for a coalition, with no births and no deaths for 4,500 iterations; with the engine's mutation it was thousands of short-lived agents again within 500. The contests of Experiment 51 are being played."
+      "summary": "One kept world of 40,000 tokens is played on six times for 2,500 iterations, twice as it is and twice each with mutations of exactly 10 and 100 of a brain's numbers, and the branches' brains are then played against their start and against each other. Its thesis: with small mutations a world that had stopped gets better again. The runs are done and became four kinds of world; with mutations of 10 numbers a core of about 160 rich agents formed whose agents lived on for over 2,000 iterations with almost no births. Experiment 53 played that world on: with small mutations the core spread into a world of 476 equal agents who all stake one token on every neighbour, marked for a coalition, with no births and no deaths for 4,500 iterations; with the engine's mutation it was thousands of short-lived agents again within 500. Experiment 51's contests leave the first thesis undecided: with mutations of 10 numbers the brains beat the ones they started from (0.72), but against the brains of the unchanged runs the two seeds disagree; and the world had not stopped when it was played on."
     },
     {
       "id": "a-world-of-equals",

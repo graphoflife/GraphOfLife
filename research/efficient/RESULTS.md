@@ -3,6 +3,64 @@
 One entry a card. The plan is `plan.md`; each card's folder has the code and
 the detail. Nothing here played a world unless it says so.
 
+## Where this leaves the search (24 November 2026, after Experiments 49 to 58)
+
+Open-ended evolution was not found. What was found is why it is not there
+in the worlds we had, and a new kind of world.
+
+**Why the old worlds stop**
+1. *Variation.* One mutation of the engine makes a brain decide differently
+   in a third to two thirds of what it meets (B1), and costs a line about a
+   third of its copies within three iterations (Experiment 49).
+2. *Selection.* A line's success is mostly its place and luck; its brain
+   counts for 1% to 6% of the differences (Experiment 52). Under the
+   lottery, which most worlds play, every way of staking returns the same
+   tokens on average (D2).
+3. *Lives.* In nearly every world an agent lives one or two iterations
+   (A8).
+4. *The game.* Nothing in one game rewards a body of several agents (D2).
+
+**What small mutations change**
+- A way of playing that needs nearly everyone to follow it becomes stable.
+  Under the coalition rule that is the **world of equals**: a few hundred
+  agents with the same links and tokens, never born, never dying, all
+  staking one token on every neighbour (Experiments 50, 53, 56, 57, 58). It
+  formed in five separate worlds and in no world with the engine's
+  mutation. It is the first lasting structure of many agents that formed by
+  itself.
+- It is safe once reached, and its brains still improve for about 2,000
+  iterations, then stop (Experiment 54).
+- Small steps are dangerous for a young or small world: most died sooner
+  (Experiments 56, 57).
+- If brains inherit their step, it shrinks to a handful of numbers within
+  500 iterations, everywhere (Experiment 58).
+
+**So there are two kinds of world, and neither is open-ended.** With large
+steps: churn, where nothing that is found is kept. With small steps: an
+order that keeps itself and then stands still. And the step itself, left to
+evolve, goes to the standing-still side at once, because a line that
+changes less loses less.
+
+**What would have to be added, in my judgement** (not tested):
+- *A reason to keep changing.* Something outside the agents that moves, so
+  that standing still stops paying: tokens that enter and leave (the plan
+  *A source and a sink*), or
+- *several orders that meet.* A world of equals is one society. Selection
+  could work on societies if there were many, each with its own way, in
+  contact at their edges. Today the rules merge everything into one piece
+  (only the largest piece of the network lives, and anyone may link to
+  anyone). Experiment 59 is a first look: one society's brains against
+  another's.
+- *The step between.* With 100 numbers a world formed an order and lost it
+  again. Between "kept for ever" and "never kept" there may be a step at
+  which orders keep forming and breaking. That can be mapped in a day.
+
+**What is now cheap.** Each of these takes minutes to hours: how much a
+mutation changes (B1), what it costs (the assay, read after 3 to 9
+iterations), how much of success is the brain (Experiment 52's design),
+playing a kept world on under other rules, and contests between runs. No
+question above needs a run of days.
+
 ## Wave 1 (23 November 2026)
 
 **The picture so far.** In Experiment 48's three worlds, selection sorts
@@ -350,6 +408,23 @@ step (five separate worlds: from a 20,000-iteration world twice, from
 founders at 10,000 and at 40,000 tokens, from a 500-iteration world), 0 of
 10 runs with the engine's mutation. With 100 numbers one world reached it
 and left it.
+
+### Experiments 50 and 51: the verdict — undecided
+
+Contests of the six branches (191 of 192). (1) End against start, agents'
+share: 10 numbers **0.72 (0.60 to 0.84)**; 100 numbers 0.22 (0.14 to 0.30);
+as it is 0.30 (0.10 to 0.49). (2) Against the arm as it is: 10 numbers 0.63
+(0.42 to 0.83), 100 numbers 0.65 (0.47 to 0.84); by seed 0.28 and 0.97,
+0.47 and 0.83. The world before: 20,000 against 17,500 0.91, against 15,000
+0.90. By tokens the same, but 10 numbers against the start is 0.55 (0.48 to
+0.62).
+
+- The claim's first part holds for 10 numbers; the second is not settled,
+  because the branches had become different kinds of world.
+- **The source world had not stopped at 20,000**: it beat its past nine
+  times in ten, and then the unchanged branches lost to that moment. This
+  world swings between kinds of world. A contest between two moments says
+  little when the world's kind changed in between.
 
 ## What this changes in the plan
 

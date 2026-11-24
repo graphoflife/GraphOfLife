@@ -23,7 +23,10 @@ If that is what stops evolution, a smaller step should start it again.
 Experiment 50 takes one kept world and plays it on six times for 2,500
 [iterations](one-iteration.md "One step of a world's time: a phase of reproduction, then a phase of the game."): twice as it is, twice with mutations of exactly 10 of a brain's
 numbers, twice with 100. Experiment 51 then plays the brains against each
-other; its contests are being played.
+other. Its thesis is undecided: with mutations of 10 numbers the brains beat
+the ones they started from (0.72 of the agents), but against the brains of
+the unchanged runs the two seeds disagree
+([What the contests said](#what-the-contests-said)).
 
 The six runs are done, and they became four different kinds of world. Both
 runs with mutations of 10 numbers left the old world behind within 600 to
@@ -92,6 +95,58 @@ places, and every coin has a deal of its own. Three kinds are played:
   worlds, for each seed;
 - **the world's own past**: iteration 20,000 against 17,500 and against
   15,000, to see whether it had stopped.
+
+## What the contests said
+
+Experiment 51's contests were played on 24 November 2026: 191 of the 192,
+one still to come. A score is the share of the agents a side holds after a
+contest, the mean of its coins, with two standard errors either side.
+
+**The thesis is undecided.**
+
+| what was played | score | band | coins |
+|---|---|---|---|
+| **(1) the end against the start**: brains of 22,500 against those of 20,000 | | | |
+| 10 numbers, both runs | 0.72 | 0.60 to 0.84 | 16 |
+| 100 numbers, both runs | 0.22 | 0.14 to 0.30 | 16 |
+| as it is, both runs | 0.30 | 0.10 to 0.49 | 16 |
+| **(2) against the arm as it is**, both at 22,500 | | | |
+| 10 numbers, both seeds | 0.63 | 0.42 to 0.83 | 16 |
+| 100 numbers, both seeds | 0.65 | 0.47 to 0.84 | 16 |
+| **the world before**: brains of 20,000 | | | |
+| against those of 17,500 | 0.91 | 0.86 to 0.96 | 8 |
+| against those of 15,000 | 0.90 | 0.88 to 0.92 | 7 |
+
+- **With mutations of 10 numbers the brains got better than their start**:
+  0.72, the whole band above a half, in both runs (0.68 and 0.76). That is
+  the first part of the claim.
+- **Against the arm as it is, nothing is settled.** The small arms hold
+  0.63 and 0.65 of the agents, but the bands include a half, because the
+  two seeds disagree. With seed 5002 the brains of 10 numbers hold 0.97;
+  with seed 5001 they hold 0.28. That second pair is the core world against
+  the thin world the unchanged run had become: brains made for one kind of
+  world against brains made for another.
+- **With 100 numbers the brains got worse than their start** (0.22), and
+  so did the arm as it is (0.30; in one of its runs 0.10).
+- **The world had not stopped.** Its brains of iteration 20,000 beat those
+  of 17,500 and of 15,000 nine times in ten. The page's first sentence does
+  not hold for this world: it was not at rest when it was played on.
+
+Read by the tokens a side holds, the picture is the same but for one line:
+the brains of 10 numbers against their start come to 0.55 (0.48 to 0.62).
+They end with more agents than their start's brains, and about as many
+tokens.
+
+So this world does not climb and stop. It swings: brains that beat their
+past nine times in ten at one moment lose to it 2,500 iterations later.
+With mutations of 10 numbers it went somewhere new and its brains held
+their gain. Whether that is "better" depends on the world the contest is
+played in, and the six runs had become four kinds of world. A contest
+between two moments says less than it seems when the world between them
+has changed its kind.
+
+The readings are made by `python3 research/efficient/E50/e51.py` (with
+`tokens` after it for the share of the tokens).
 
 ## What it can and cannot show
 
