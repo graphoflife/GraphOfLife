@@ -194,7 +194,9 @@
   ],
   "world_of_equals": false,
   "first_window_of_equals": null,
-  "steps": []
+  "steps": [],
+  "marks": ".................",
+  "stretches": []
  },
  "30 numbers, from the run of seed 6002, seed 6101": {
   "run": "B1-40000-8020c3-s6101-onb1e06c",
@@ -424,6 +426,10 @@
   ],
   "world_of_equals": false,
   "first_window_of_equals": 31500,
-  "steps": []
+  "steps": [],
+  "marks": ".............EE.....",
+  "stretches": [
+   2
+  ]
  }
 }

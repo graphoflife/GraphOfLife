@@ -528,6 +528,36 @@ advantage. The numbers are made by
 > To make these runs again: `python3 gol_lab.py run E56`.
 <!-- /runs -->
 
+### Is going back and forth what such worlds do?
+
+<!-- experiment E63 -->
+
+One world formed the order twice; that is one world. Experiment 63 plays
+nine: the kept world of Experiment 50 played on for 10,000 iterations with
+mutations of 20, 30 and 50 numbers, three runs each.
+
+<!-- thesis E63 -->
+> [!quote] The thesis of Experiment 63, written down before any of its runs existed
+> **The claim.** A world whose mutations change 20 to 50 numbers does not settle. It forms a world of equals, loses it, and forms it again, and most such worlds live through that.
+>
+> **Why it would be so.** A world of equals is not kept by selection: a few brains that play otherwise do as well as the rest (Experiment 62), so it wears away as changed brains pile up, faster the larger the step. With 10 numbers it lasted all 4,500 iterations played; with 30 numbers both worlds lost it after 1,500 and 3,000 (Experiment 60). Played on, one of those formed it a second time 6,500 iterations later and lost it again, and the other died out (Experiment 61). If the order is a state these rules fall into whenever copies are faithful enough, a world that has lost it should fall into it again, and a step in this range should give worlds that go on between order and churn.
+>
+> **It holds if:** Each run's 10,000 iterations are twenty windows of 500. A window is one of a world of equals if it has fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition; a stretch is one or more such windows in a row. Both: at least three of the nine runs have two or more separate stretches; and at most three of the nine die out.
+>
+> **It fails if:** No run has two separate stretches, or five or more of the nine die out. Anything else is undecided. Reported beside it: every run's windows, its stretches and their lengths, by the step of its mutations.
+<!-- /thesis -->
+
+<!-- runs E63 -->
+> [!info]- The runs behind this page
+> **9 runs.** Every condition below is run once for every seed (6301 to 6303), played on from the world `B1-40000-bbbccd-s4602` kept at iteration 20,000, to iteration 30,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **20 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 20, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-c8c9f2-s6301-on45a3d3` … `B1-40000-c8c9f2-s6303-on45a3d3`.
+> - **30 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-8020c3-s6301-on45a3d3` … `B1-40000-8020c3-s6303-on45a3d3`.
+> - **50 numbers** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 50, `n_nodes` = 800; 40,000 tokens. Runs `B1-40000-3f4b02-s6301-on45a3d3` … `B1-40000-3f4b02-s6303-on45a3d3`.
+>
+> To make these runs again: `python3 gol_lab.py run E63`.
+<!-- /runs -->
+
 ### A few who play otherwise
 
 <!-- experiment E62 -->

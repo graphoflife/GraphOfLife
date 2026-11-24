@@ -59,6 +59,10 @@ if __name__ == "__main__":
         for w in ws:
             print(f"   {w['from']:>5}: {w['agents']:6.0f} agents, {w['links']:5.1f} links (most {w['most_links']:5.0f}), {w['tokens']:5.1f} tokens, Gini {w['gini']:.2f}, "
                   f"births per agent {w['births_per_agent']:.3f}, won by a coalition {w['coalition']:.0%}, deaths {w['deaths']}")
+        marks = "".join("E" if equals(w) else "." for w in ws)
+        stretches = [len(x) for x in marks.split(".") if x]
+        out[f"{s.condition}, seed {s.lab['seed']}"].update(marks=marks, stretches=stretches)
+        print(f"   windows of 500: {marks}   stretches of a world of equals: {stretches}")
         if kept_steps:
             print("   middle step (quartiles) in the worlds it kept: " + "  ".join(
                 f"{k['era']}: {k['median']:.0f} ({k['quartiles'][0]:.0f}-{k['quartiles'][1]:.0f})" for k in kept_steps))
