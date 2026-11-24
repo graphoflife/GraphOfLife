@@ -33,8 +33,9 @@ died out before.
 Five experiments of this page are played, and all five theses are
 refuted. Experiment 60 looked for a step of mutation at which order forms
 and breaks, and found it at 30 numbers; its thesis is undecided.
-Experiments 59 (can a world of equals be invaded?) and 61 (does the order
-form again?) are being played. What the five found together:
+Experiment 59 asked whether a world of equals can be invaded: with half its
+agents given other brains, those take most of its tokens; its thesis is
+undecided. Experiment 61 (does the order form again?) is being played. What the five found together:
 
 - **The world of equals forms again and again**, from a long-run world,
   from founders and from young worlds, at 10,000 and at 40,000 tokens. Six
@@ -409,6 +410,37 @@ world of equals. It also plays the two worlds of equals against each other.
 >
 > **It fails if:** On the worlds of equals the whole band is below 0.5: its own brains lose at home. Anything else is undecided. Reported beside it: the shares of the tokens, and the two worlds of equals against each other.
 <!-- /thesis -->
+
+### What Experiment 59 found
+
+The 48 contests were played on 24 November 2026. The share held after 100
+iterations by the brains of the world of equals, when half the agents of a
+world were given them and half the brains of the world that fell back
+under the engine's mutation (8 coins each, both seeds pooled):
+
+| played on | share of the agents | share of the tokens |
+|---|---|---|
+| the worlds of equals | 0.59 (0.36 to 0.83) | 0.36 (0.24 to 0.48) |
+| the engine's worlds | 0.29 (0.12 to 0.45) | 0.24 (0.12 to 0.36) |
+
+**The thesis is undecided.** Its second half holds: in the engine's world
+the brains of the world of equals lose. Its first half does not: at home
+they do not clearly hold their ground. They end with somewhat more than
+half of the agents, but the band includes a half, and they end with about
+a third of the tokens, with the whole band below a half.
+
+So a world of equals is not safe against any number of others. With half
+its agents playing another way, the others take most of the tokens within
+100 iterations. The many small stakes outweigh a large one only while
+nearly all neighbours make them. This fits what Experiment 53 saw from the
+other side: one copy in five changed by the engine's mutation was enough to
+end the order within 500 iterations.
+
+The two worlds of equals against each other: the brains of the first hold
+0.42 of the agents, on their own world and on the other's alike. The two
+play nearly the same way, and neither world gives its own brains an
+advantage. The numbers are made by
+`python3 research/efficient/E50/e59.py`.
 
 <!-- runs E59 -->
 > [!info]- The trials behind this page

@@ -436,6 +436,18 @@ order stops lasting lies between 10 and 30 of a brain's 13,569 numbers.
 Experiment 61 plays both 30-number worlds on for 10,000 iterations: does
 the order form again?
 
+### Experiment 59: can the world of equals be invaded? — yes, by many
+
+Half the agents of a world given the brains of the world of equals, half
+those of the world that fell back under the engine's mutation (48 mirrored
+contests). Equals' share on their own worlds: agents 0.59 (0.36 to 0.83),
+tokens **0.36 (0.24 to 0.48)**; on the engine's worlds: agents 0.29 (0.12
+to 0.45), tokens 0.24. Thesis undecided (it holds abroad, not at home). The
+convention does not protect itself against a large share of others. The
+two worlds of equals against each other: 0.42 at home and away, no home
+advantage. Not tested: a few invaders (an assay in the world of equals
+would do it in minutes).
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks

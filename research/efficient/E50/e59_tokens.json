@@ -1,0 +1,66 @@
+{
+ "    seed 5301, on the world of equals": {
+  "coins": 4,
+  "score": 0.39661840327044195,
+  "low": 0.28405297811598645,
+  "high": 0.5091838284248975,
+  "won": 1,
+  "lost": 3
+ },
+ "    seed 5301, on the engine's world": {
+  "coins": 4,
+  "score": 0.14985123973000525,
+  "low": 0.09463432919322495,
+  "high": 0.20506815026678554,
+  "won": 0,
+  "lost": 4
+ },
+ "    seed 5302, on the world of equals": {
+  "coins": 4,
+  "score": 0.31738778537490736,
+  "low": 0.0927553647514181,
+  "high": 0.5420202059983966,
+  "won": 1,
+  "lost": 3
+ },
+ "    seed 5302, on the engine's world": {
+  "coins": 4,
+  "score": 0.33325780220209356,
+  "low": 0.13482627102923672,
+  "high": 0.5316893333749504,
+  "won": 1,
+  "lost": 3
+ },
+ "  both seeds, on the worlds of equals": {
+  "coins": 8,
+  "score": 0.35700309432267463,
+  "low": 0.23689984123531443,
+  "high": 0.4771063474100348,
+  "won": 2,
+  "lost": 6
+ },
+ "  both seeds, on the engine's worlds": {
+  "coins": 8,
+  "score": 0.2415545209660494,
+  "low": 0.12367205115754243,
+  "high": 0.3594369907745564,
+  "won": 1,
+  "lost": 7
+ },
+ "the two worlds of equals: the share of seed 5301's brains, at home": {
+  "coins": 4,
+  "score": 0.41785175108576433,
+  "low": 0.29823471363936305,
+  "high": 0.5374687885321656,
+  "won": 1,
+  "lost": 3
+ },
+ "the two worlds of equals: the share of seed 5301's brains, away": {
+  "coins": 4,
+  "score": 0.4231723274087807,
+  "low": 0.2472942287904897,
+  "high": 0.5990504260270717,
+  "won": 2,
+  "lost": 2
+ }
+}
