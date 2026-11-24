@@ -28,14 +28,33 @@ brains still get better inside it? Experiment 56 starts the same rules from
 founders with small mutations, at 40,000 tokens and at 10,000, where they
 died out before.
 
-Experiment 56 is played, and its thesis is refuted. Four of its five worlds
+All five experiments of this page are played, and all five theses are
+refuted. What they found together:
+
+- **The world of equals forms again and again**, from a long-run world,
+  from founders and from young worlds, at 10,000 and at 40,000 tokens. Six
+  of the 20 runs with mutations of 10 numbers or an inherited step ended as
+  one, in five separate worlds, and none of the 10 runs with the engine's
+  mutation.
+- **It is safe once reached, while steps stay small.** No such world died
+  or left that state in up to 4,500 iterations. With mutations of 100
+  numbers one world reached it and left it again.
+- **Getting there is a bet.** Most small worlds with small steps died
+  sooner than they would have with large ones.
+- **Brains still get better inside it for a while**, about 2,000
+  iterations, and then stop.
+- **A step that brains inherit shrinks at once**, to a handful of numbers.
+
+In more detail: Experiment 56 is played, and its thesis is refuted. Four of its five worlds
 died within 71 to 1,322 iterations: small mutations from the start are too
 slow for a world of random brains. The fifth became a world of equals
-within 1,000 iterations, at 10,000 tokens. Experiment 57, not yet played,
-starts with the engine's large mutations and switches to small ones at
-iteration 500. Experiment 58, not yet played either, lets every brain
-inherit its own step, so that a world can find the switch itself.
-Experiment 54 is being played.
+within 1,000 iterations, at 10,000 tokens. Experiment 57 switched from the
+engine's mutation to small ones at iteration 500: five of six worlds died
+sooner than those left alone, and the sixth became a world of equals.
+Experiment 58 let every brain inherit its step: the step fell to a handful
+of numbers within 500 iterations in every world, and two of five worlds
+lived. Experiment 54 played the world of equals against its own past: its
+brains got better for about 2,000 iterations and then stopped.
 
 ## What the world of equals is
 
@@ -91,6 +110,28 @@ less. That could make it an end: order, but no more evolution.
 >
 > **It fails if:** For either pair the whole band lies above 0.5: brains still get better in a world of equals. A band wholly below 0.5 for either pair is reported as undecided, as is anything else. Reported beside it: 27,500 against 23,000, and each run alone.
 <!-- /thesis -->
+
+### What Experiment 54 found
+
+The 96 contests were played on 24 November 2026. The later brains' share of
+the agents, pooled over the two worlds (16 coins each):
+
+| later against earlier | share | band |
+|---|---|---|
+| 25,000 against 23,000 | 0.62 | 0.54 to 0.71 |
+| 27,500 against 25,000 | 0.52 | 0.46 to 0.59 |
+| 27,500 against 23,000 | 0.66 | 0.58 to 0.73 |
+
+**The thesis is refuted**: for 25,000 against 23,000 the whole band lies
+above a half. In a world of equals brains still got better, for about 2,000
+iterations after it formed. From 25,000 to 27,500 they did not: a tie.
+
+So the world of equals is not an end at once. It does what every world
+measured so far did, one step of order higher: better for a while, then no
+more. The stretch in which its brains improved is the one in which its
+links and tokens evened out
+([What Experiment 53 found](does-a-smaller-step-restart-evolution.md#what-experiment-53-found)).
+The numbers are made by `python3 research/efficient/E50/e54.py`.
 
 ## Does it form from founders?
 
@@ -163,6 +204,27 @@ with mutations of 10 numbers, and twice as it is.
 > **It fails if:** Fewer than three of the six runs with 10 numbers live to iteration 5,500, or as many runs live as they are as with 10 numbers. Anything else is undecided.
 <!-- /thesis -->
 
+### What Experiment 57 found
+
+The twelve runs were played on 24 November 2026. Each started at iteration
+500 of a world that had died under the engine's mutation.
+
+| world of Experiment 46 | then 10 numbers, two seeds | as it is, two seeds |
+|---|---|---|
+| seed 4601 (had died at 2,630) | died at 522 and 529 | died at 1,798 and 534 |
+| seed 4602 (had died at 1,029) | died at 953 and 574 | died at 1,360 and 2,467 |
+| seed 4603 (had died at 744) | **lived to 5,500**, a world of equals from 1,500 on; died at 740 | died at 2,987 and 2,667 |
+
+**The thesis is refuted.** One of the six runs with small mutations lived;
+the thesis asked for five. None of the six runs left as they were lived
+either, but they lasted longer: the middle one died near iteration 2,000,
+against 574 with small mutations.
+
+Switching to small steps does not rescue a world of this size. It makes a
+bet. Five times in six the world died sooner than it would have. Once it
+became a world of equals within 1,000 iterations and was then safe: 272
+agents at the end, no births, no deaths in its last 500 iterations.
+
 ## A step each brain inherits
 
 <!-- experiment E58 -->
@@ -189,6 +251,31 @@ at 10,000 tokens and two at 40,000, for 5,000 iterations.
 >
 > **It fails if:** Fewer than three of the five runs live to iteration 5,000; or in a run that lives the middle step at 5,000 is as large as the founders' or larger. Anything else is undecided. Reported beside it: the middle step of each run in every world it kept, every 500 iterations.
 <!-- /thesis -->
+
+### What Experiment 58 found
+
+The five runs were played on 24 November 2026.
+
+| run | lived to | middle step of its brains (founders: 1,357 numbers) | what it became |
+|---|---|---|---|
+| 10,000 tokens, seed 5801 | 112 | | died out |
+| 10,000 tokens, seed 5802 | 4,549 | 4 at iteration 500, then 2 to 16 | died out |
+| 10,000 tokens, seed 5803 | 1,206 | 212 at 500, 16 at 1,000 | died out |
+| 40,000 tokens, seed 5801 | 5,000 | 40 at 500, then 4 to 32, 8 at the end | a world of equals from iteration 500 on |
+| 40,000 tokens, seed 5802 | 5,000 | 8 at 500, and 8 to 16 after | about 2,000 agents with births and deaths; not a world of equals |
+
+**The thesis is refuted**: two of the five runs lived to iteration 5,000,
+and the thesis asked for four.
+
+One part of the claim held, and strongly. **Given the choice, every world
+chose small steps at once.** Within 500 iterations the middle step fell from
+1,357 numbers to between 4 and 212, and it stayed at a handful. A line whose
+mutations change little loses fewer of its copies, so it spreads. Nothing
+pulls the step up again.
+
+That is also why an inherited step did not help a world through its start:
+the step is small before the brains are good. The worlds at 10,000 tokens
+died as they did with small steps from the first iteration.
 
 <!-- runs E58 -->
 > [!info]- The runs behind this page
@@ -249,6 +336,7 @@ at 10,000 tokens and two at 40,000, for 5,000 iterations.
 
 The plans are `book/experiments/E54.json`, `E56.json`, `E57.json` and
 `E58.json`;
-Experiment 56 is read by `python3 research/efficient/E50/e56.py`. What the agents
+Experiments 56, 57 and 58 are read by
+`python3 research/efficient/E50/e56.py` (with `E57` or `E58` after it). What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.

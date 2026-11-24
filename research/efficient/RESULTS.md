@@ -317,6 +317,40 @@ Experiment 57 plays the worlds that died in Experiment 46 on from iteration
 500 with small mutations. The principled form of this is a step size each
 brain inherits and that itself mutates.
 
+### Experiment 54: is the world of equals an end? — not at once
+
+96 mirrored contests inside Experiment 53's two worlds of equals. Later
+brains' share: 25,000 against 23,000 **0.62 (0.54 to 0.71)**; 27,500
+against 25,000 0.52 (0.46 to 0.59); 27,500 against 23,000 0.66 (0.58 to
+0.73). Thesis (ties) refuted: brains got better for about 2,000 iterations
+after the world of equals formed, then stopped.
+
+### Experiment 57: large steps for 500 iterations, then small — a bet, mostly lost
+
+Experiment 46's three dead worlds (10,000 tokens) played on from iteration
+500. With 10 numbers: died at 522, 529, 953, 574, 740; one lived to 5,500 as
+a world of equals. As they were: all six died, at 534 to 2,987. Thesis
+refuted. Small steps make a small world die sooner, unless it reaches the
+world of equals, which is then safe.
+
+### Experiment 58: a step each brain inherits — it shrinks at once
+
+`inherited_step`, founders at 1,357 numbers. In every world the middle step
+fell to 4 to 212 within 500 iterations and stayed at a handful (8 at
+iteration 5,000 in both survivors). 10,000 tokens: died at 112, 1,206,
+4,549. 40,000 tokens: one a world of equals from iteration 500, one alive
+with births and deaths. Thesis refuted on survival. **Selection on the step
+itself goes only one way, down**: a line that mutates less loses fewer
+copies. Nothing rewards exploring.
+
+### The world of equals, counted
+
+Ended as one: 6 of 20 runs with mutations of 10 numbers or an inherited
+step (five separate worlds: from a 20,000-iteration world twice, from
+founders at 10,000 and at 40,000 tokens, from a 500-iteration world), 0 of
+10 runs with the engine's mutation. With 100 numbers one world reached it
+and left it.
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks
