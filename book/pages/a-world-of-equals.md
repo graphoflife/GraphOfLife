@@ -325,6 +325,39 @@ plays the kept world of Experiment 50 on with mutations of 30, 300 and
 > To make these runs again: `python3 gol_lab.py run E60`.
 <!-- /runs -->
 
+### Does order form again?
+
+<!-- experiment E61 -->
+
+The first runs of Experiment 60 were read before it was finished, and they
+answer its question sooner than expected: with mutations of 30 numbers both
+worlds became worlds of equals within 500 iterations, kept that for 1,500
+and 3,000 iterations, and lost it again. With 300 numbers the first world
+never formed one. So 30 numbers is already a step at which order forms and
+breaks. What a world that keeps moving would need is that it forms again.
+Experiment 61 plays the two worlds on for 10,000 iterations to see.
+
+<!-- thesis E61 -->
+> [!quote] The thesis of Experiment 61, written down before any of its runs existed
+> **The claim.** With mutations of 30 numbers a world keeps forming a world of equals and losing it. Played on for 10,000 iterations more, each of the two worlds that formed one and lost it in Experiment 60 forms one again.
+>
+> **Why it would be so.** In Experiment 60 both worlds with mutations of 30 numbers became worlds of equals within 500 iterations, kept that for 1,500 and 3,000 iterations, and lost it, ending as worlds of 1,700 and 3,400 agents with births and deaths. The world they had started from was such a world too, and it took them 500 iterations to leave it. If nothing in a world that has lost the order stops it from forming again, it should form again, and a world of this step would go on between order and churn without settling in either.
+>
+> **It holds if:** Each run's 10,000 iterations are twenty windows of 500. A window is one of a world of equals if it has fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition. Both runs have at least two such windows.
+>
+> **It fails if:** Neither run has such a window. Anything else is undecided. Reported beside it: for each run, which windows are of a world of equals, how often it entered and left that state, and its agents in every window.
+<!-- /thesis -->
+
+<!-- runs E61 -->
+> [!info]- The runs behind this page
+> **2 runs.** Every condition below is run once for every seed (6101), played on from a kept world of its own to iteration 35,000 — or until its world dies out. Every setting is B1's unless the condition changes it.
+>
+> - **30 numbers, from the run of seed 6001** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Run `B1-40000-8020c3-s6101-on697699`.
+> - **30 numbers, from the run of seed 6002** — the settings of world 58 of [Experiment 40](a-screen-of-random-worlds.md#the-worlds-of-round-3) (seed 3058), as drawn but with `mutation_numbers` = 30, `n_nodes` = 800; 40,000 tokens. Run `B1-40000-8020c3-s6101-onb1e06c`.
+>
+> To make these runs again: `python3 gol_lab.py run E61`.
+<!-- /runs -->
+
 ## Can it be invaded, and can it invade?
 
 <!-- experiment E59 -->

@@ -1,0 +1,88 @@
+{
+ "id": "E61",
+ "title": "Does order form again? The two worlds that lost it, played on for 10,000 iterations",
+ "thesis": {
+  "claim": "With mutations of 30 numbers a world keeps forming a world of equals and losing it. Played on for 10,000 iterations more, each of the two worlds that formed one and lost it in Experiment 60 forms one again.",
+  "why": "In Experiment 60 both worlds with mutations of 30 numbers became worlds of equals within 500 iterations, kept that for 1,500 and 3,000 iterations, and lost it, ending as worlds of 1,700 and 3,400 agents with births and deaths. The world they had started from was such a world too, and it took them 500 iterations to leave it. If nothing in a world that has lost the order stops it from forming again, it should form again, and a world of this step would go on between order and churn without settling in either.",
+  "confirm": "Each run's 10,000 iterations are twenty windows of 500. A window is one of a world of equals if it has fewer than 0.01 births per agent and iteration and at least nine nodes in ten are won by a coalition. Both runs have at least two such windows.",
+  "refute": "Neither run has such a window. Anything else is undecided. Reported beside it: for each run, which windows are of a world of equals, how often it entered and left that state, and its agents in every window."
+ },
+ "runs": {
+  "baseline": "B1",
+  "world": {
+   "total_tokens": 40000
+  },
+  "seeds": "6101",
+  "iterations": 35000,
+  "record": {
+   "heavy_every": 250,
+   "checkpoint_every": 100,
+   "archive_every": 2500
+  },
+  "workers": 3,
+  "conditions": [
+   {
+    "name": "30 numbers, from the run of seed 6001",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-8020c3-s6001-on45a3d3",
+     "at": 25000
+    }
+   },
+   {
+    "name": "30 numbers, from the run of seed 6002",
+    "set": {
+     "message_amount": 4,
+     "random_input_amount": 2,
+     "message_prepass": false,
+     "hidden_activation": "tanh",
+     "hidden_layers": [
+      50,
+      50,
+      50,
+      50,
+      50
+     ],
+     "allow_handover": false,
+     "mutate_on_replication": true,
+     "mend_on_death": true,
+     "redistribution": "children",
+     "link_search": "walk",
+     "link_consent": "forced",
+     "link_token": true,
+     "mutation_numbers": 30
+    },
+    "world": {
+     "n_nodes": 800
+    },
+    "from": {
+     "run": "B1-40000-8020c3-s6002-on45a3d3",
+     "at": 25000
+    }
+   }
+  ]
+ }
+}
