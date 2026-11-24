@@ -1,0 +1,30 @@
+{
+ "    as it is, seed 5001": null,
+ "    as it is, seed 5002": null,
+ "  as it is, both runs": null,
+ "    10 numbers, seed 5001": null,
+ "    10 numbers, seed 5002": null,
+ "  10 numbers, both runs": null,
+ "    100 numbers, seed 5001": null,
+ "    100 numbers, seed 5002": null,
+ "  100 numbers, both runs": {
+  "coins": 8,
+  "score": 0.10332698343400698,
+  "low": 0.05281644588993243,
+  "high": 0.15383752097808154,
+  "won": 0,
+  "lost": 8
+ },
+ "      10 numbers, seed 5001, on its own world": null,
+ "      10 numbers, seed 5001, on the other's world": null,
+ "      10 numbers, seed 5002, on its own world": null,
+ "      10 numbers, seed 5002, on the other's world": null,
+ "  10 numbers, both seeds": null,
+ "      100 numbers, seed 5001, on its own world": null,
+ "      100 numbers, seed 5001, on the other's world": null,
+ "      100 numbers, seed 5002, on its own world": null,
+ "      100 numbers, seed 5002, on the other's world": null,
+ "  100 numbers, both seeds": null,
+ "  against 17,500": null,
+ "  against 15,000": null
+}

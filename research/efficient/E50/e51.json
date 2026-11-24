@@ -7,7 +7,14 @@
  "  10 numbers, both runs": null,
  "    100 numbers, seed 5001": null,
  "    100 numbers, seed 5002": null,
- "  100 numbers, both runs": null,
+ "  100 numbers, both runs": {
+  "coins": 8,
+  "score": 0.10104737661413712,
+  "low": 0.058767418825310246,
+  "high": 0.143327334402964,
+  "won": 0,
+  "lost": 8
+ },
  "      10 numbers, seed 5001, on its own world": null,
  "      10 numbers, seed 5001, on the other's world": null,
  "      10 numbers, seed 5002, on its own world": null,

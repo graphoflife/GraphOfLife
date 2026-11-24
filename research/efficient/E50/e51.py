@@ -17,14 +17,16 @@ def side(trial, place):
     return (trial.get(place + "_run", trial["run"]), trial[place])
 
 
-def coins(name="E51"):
-    """Every whole coin: its set, the world it was played on, and the share of each side over its two contests."""
+def coins(name="E51", what="share"):
+    """Every whole coin: its set, the world it was played on, and the share of each side over its two contests.
+    `what` is "share", the share of the agents, which the thesis reads, or "tokens", the share of the tokens
+    agents hold, reported beside it: a side that keeps few rich agents has few agents and many tokens."""
     played = {}
     for found in gol_plan.trials_of(name):
         trial = found["trial"]
         try:
             with open(os.path.join(gol_store.run_dir(gol_plan.trial_id_for(trial)), "result.json")) as f:
-                share = json.load(f)["result"]["share"]
+                share = json.load(f)["result"][what]
         except (OSError, ValueError):
             continue
         played.setdefault((found["set"], trial["run"], trial["home"], trial["seed"]), []).append((trial, share))
@@ -53,8 +55,10 @@ def score(values):
 if __name__ == "__main__":
     runs = {(s.condition, s.lab["seed"]): s.run_id for s in gol_plan.experiment_runs("E50")}
     arm_of = {run: arm for (arm, seed), run in runs.items()}
-    all_coins = coins()
+    what = sys.argv[1] if len(sys.argv) > 1 else "share"
+    all_coins = coins(what=what)
     out = {}
+    print({"share": "SHARE OF THE AGENTS (what the thesis reads)", "tokens": "SHARE OF THE TOKENS agents hold (beside it)"}[what])
 
     def show(title, values):
         r = score(values); out[title] = r
@@ -85,4 +89,4 @@ if __name__ == "__main__":
     source = "B1-40000-bbbccd-s4602"
     for before in (17500, 15000):
         show(f"  against {before:,}", [c["shares"][(source, AT)] for c in all_coins if c["set"].endswith(f"against {before:,}")])
-    json.dump(out, open(os.path.join(HERE, "e51.json"), "w"), indent=1)
+    json.dump(out, open(os.path.join(HERE, "e51.json" if what == "share" else "e51_tokens.json"), "w"), indent=1)
