@@ -45,6 +45,11 @@ it again; another died (61). Nine more worlds (63) showed that this was
 the exception: worlds keep the order or never find it, and two worlds of
 equals died out of it suddenly. So the order is not safe either.
 
+**Added after Experiment 64.** One hoarder does not explain those deaths:
+an agent that stakes everything on one node grows rich, up to seven tokens
+in ten of the world, but all 30 worlds lived through 1,000 iterations with
+one. What ended the two worlds is open.
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -500,6 +505,30 @@ Thesis undecided (one run of nine with two stretches; three died).
   all its tokens on one neighbour's node outweighs the coalition there by
   one, takes everything staked on it, and repeats with twice as much. The
   order has no defence against it; small steps only make it rare.
+
+### Experiment 64: does one hoarder end a world of equals? — no (refuted)
+
+45 invasions of 1,000 iterations in the three 20-number worlds of
+Experiment 63 at 27,500: one agent given its own brain, frozen, with only
+its stakes written over (new masks `home-hoarder`, `moving-hoarder` in
+`gol_strategies.py`), and the same agent's brain unchanged as control.
+Read by `E50/e64.py`.
+
+- 22 of 30 hoarders pass 4,000 tokens (all 15 moving, 7 of 15 at home); the
+  richest holds 28,118 of 40,000. None loses its first game; at home the
+  first game doubles its tokens (1.9 to 2.0 times).
+- 0 of 30 worlds end. Agents left at 1,000: median 100% (home), 97%
+  (moving), least 73%. Links left: median 88% and 76%, least 36%.
+- 5 of 15 home hoarders are gone between 441 and 635 with 1,029 to 10,705
+  tokens, after gaining 1 to 3 tokens a game: it fits their links lapsing
+  and the cull removing them (not recorded, a reading).
+- Growth differs by world: seed 6301 fast (all ten over 4,000 within 137
+  iterations), seeds 6302 and 6303 slow. Why is not read.
+- Controls last a median of 2 iterations as a line (brains on a node are
+  drawn anew from the coalition each game); one drifted to 47 copies.
+- Still growing at 1,000 (tokens ×1.16 to ×1.21 over the last 250).
+- So the rich agent in Experiment 63's dying worlds was part of a wider
+  breakdown, not its one cause.
 
 ## What this changes in the plan
 

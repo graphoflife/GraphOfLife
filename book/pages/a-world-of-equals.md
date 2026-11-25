@@ -45,6 +45,10 @@ for 10,000 iterations: with 20 numbers all three formed the order and kept
 it; going back and forth happened in none; and two worlds of equals died
 out, suddenly.
 
+Experiment 64 put one hoarder into a world of equals, an agent that stakes
+everything on one node: it grows rich, up to seven tokens in ten of the
+whole world, but no world of 30 ended within 1,000 iterations; refuted.
+
 Taken together: the world of equals is a state these rules fall into when
 copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
 larger steps it wears away, and a world that loses it, or never finds it,
@@ -606,6 +610,11 @@ network round it falls apart. This reading is from two worlds and has not
 been tested. A mutation that turns a brain into such a player is rare when
 steps are small, and that would be why the order lasts longer then.
 
+(Added on 25 November 2026: [Experiment 64](#does-one-hoarder-end-it) tested
+this reading. Such a player does grow rich, as reckoned, but the world
+lived on in all 30 trials. One hoarder alone does not explain these
+deaths.)
+
 So a step of 20 numbers gives order that lasts, and steps of 30 and more
 give worlds that mostly end, in the order or out of it. A step at which a
 world lives on while its order comes and goes was not found.
@@ -646,6 +655,65 @@ that.
 >
 > **It fails if:** Fewer than 10 of the 30 hoarders take off, or fewer than 10 of the 30 worlds end. Anything else is undecided. Reported beside it, by kind and by world: how many hoarders lose their first game, the iteration at which a hoarder passes 4,000 tokens, its tokens, the world's agents and links over time, and how long the line of the control lasts, the same agent with its brain frozen and unchanged.
 <!-- /thesis -->
+
+**The thesis is refuted.** Its first half holds and its second does not.
+22 of the 30 hoarders took off, where the thesis asked for 20. No world of
+the 30 ended, where it asked for 20, and fewer than 10 refutes it.
+
+- **The move works as reckoned.** No hoarder lost its first game. One that
+  stakes everything at home nearly doubled its tokens in the first game, by
+  1.9 to 2.0 times in all 15 trials: it keeps its own tokens and gets what
+  its neighbours stake on it.
+- **It grows very rich.** The richest held 28,118 of the world's 40,000
+  tokens after 1,000 iterations, having started with 109. In the first
+  world all ten hoarders passed 4,000 tokens within 37 to 137 iterations.
+- **The world lives on.** No world died out. In the 24 trials played to
+  iteration 1,000 the [median](statistics.md#many-worlds-at-once-the-median-bands-the-settled-life-and-the-spread "The middle value: half of the numbers lie below it and half above.") world kept all its agents with a hoarder at
+  home and 97 in 100 with a moving one; the least was 73 in 100. It lost
+  links: 12 in 100 with a hoarder at home, 24
+  in 100 with a moving one, as medians, and at most 64 in 100. The hardest
+  hit went from 484 agents to 353 and from 10,894 links to 3,922, with the
+  hoarder holding seven tokens in ten.
+- **A hoarder at home can be cut off.** Five of the 15 lost their line
+  between iterations 441 and 635, holding 1,029 to 10,705 tokens. In their
+  last games each gained one to three tokens a game, as from one or two
+  links left, and then the hoarder and one agent of the count were gone
+  together. That fits the
+  world's own rules: a link that no tokens cross lapses, an agent with no
+  link to the rest is culled, and what it held goes back to the world. The
+  trials do not record who staked on whom, so this is a reading.
+- **The moving hoarder does better than the one at home.** All 15 took
+  off, against 7 of 15 at home, and one line of 15 ended.
+- **The control is gone at once.** The same agent's brain, frozen and
+  unchanged, lasted a median of 2 iterations as a line, because in a world
+  of equals the brain on a node is drawn anew from the coalition in every
+  game. One control line drifted to 47 copies before it ended at iteration 81.
+
+| world of Experiment 63 (20 numbers) | agents | links each | kind | take off | tokens at 100 | at 500 | at 1,000 | links left at 1,000 |
+|---|---|---|---|---|---|---|---|---|
+| seed 6301 | 484 | 45 | at home | 5 of 5 | 7,326 | 12,498 | 15,461 | 74% |
+| | | | moving | 5 of 5 | 5,686 | 13,527 | 19,689 | 61% |
+| seed 6302 | 257 | 103 | at home | 2 of 5 | 1,636 | 3,413 | 5,389 | 88% |
+| | | | moving | 5 of 5 | 1,837 | 5,772 | 9,294 | 77% |
+| seed 6303 | 533 | 49 | at home | 0 of 5 | 522 | 1,278 | 1,826 | 96% |
+| | | | moving | 5 of 5 | 997 | 4,342 | 9,281 | 78% |
+
+Tokens and links are medians of the trials still played at that iteration.
+
+**What this says about the two worlds that died.** One hoarder is not
+enough. In Experiment 63 a world was gone about a hundred iterations after
+its first rich agent, with links cut by the hundred in every game. Here a
+hoarder far richer than that one costs the world a few links a game, and
+after 1,000 iterations most of the network stands. So the rich agent of
+those last iterations was part of a wider breakdown and not its one cause.
+What else failed in those worlds is not known. Three limits of this test:
+the hoarder's line here is one agent, where a mutant's line could spread
+before it turned; the worlds here mutate by 20 numbers, those by 30 and
+50; and at iteration 1,000 the hoarders were still gaining, a sixth to a
+fifth more tokens over the last 250 iterations, so what a world looks like
+after 5,000 iterations with one is not shown.
+
+The numbers are made by `python3 research/efficient/E50/e64.py`.
 
 <!-- runs E64 -->
 > [!info]- The trials behind this page
@@ -732,6 +800,7 @@ The plans are `book/experiments/E54.json`, `E56.json`, `E57.json` and
 Experiments 56, 57 and 58 are read by
 `python3 research/efficient/E50/e56.py` (with `E57`, `E58`, `E60`, `E61` or
 `E63` after it); the last iterations of the worlds that died by
-`python3 research/efficient/E50/autopsy.py`. What the agents
+`python3 research/efficient/E50/autopsy.py`; Experiment 64 by
+`python3 research/efficient/E50/e64.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.
