@@ -493,6 +493,13 @@ Thesis undecided (one run of nine with two stretches; three died).
   within a few hundred iterations, after 2,500 and 9,000 iterations in it.
   Earlier experiments were too short (at most 5,000) to see that.
 - Deaths by step: 0 of 3 at 20 numbers, 2 of 3 at 30, 1 of 3 at 50.
+- **How they died** (`E50/autopsy.py`): one agent grows rich (the richest
+  from 135 tokens to 220, 979, 1,686 within a hundred iterations, where the
+  rest hold about 46), links are cut by the hundred each game, pieces are
+  culled, the world is gone. Likely mechanism, untested: an agent that puts
+  all its tokens on one neighbour's node outweighs the coalition there by
+  one, takes everything staked on it, and repeats with twice as much. The
+  order has no defence against it; small steps only make it rare.
 
 ## What this changes in the plan
 

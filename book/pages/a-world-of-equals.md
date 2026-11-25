@@ -589,6 +589,23 @@ which is as many as it allowed.
   numbers, two of three with 30, one of three with 50; and of the five
   worlds with 30 numbers of Experiments 60, 61 and 63 together, three.
 
+How the two worlds of equals died can be read from their last iterations.
+In the world with 30 numbers, 628 agents held about 46 tokens each, the
+richest 135. A hundred iterations before the end one agent held 220, then
+979, then 1,686. Links were then cut by the hundred in every game, an
+agent's links fell from 37 to 3, pieces of the network were culled, and
+ten agents were left. The world with 50 numbers already had an agent with
+3,556 tokens while it was still in the order.
+
+That fits one way of breaking the order. Where everyone stakes one token on
+every neighbour, an agent that puts all its tokens on one neighbour's node
+outweighs the coalition there by one, takes the node and everything staked
+on it, and can do the same in the next game with twice as much. It grows
+richer in every game, the nodes it leaves are staked on by nobody, and the
+network round it falls apart. This reading is from two worlds and has not
+been tested. A mutation that turns a brain into such a player is rare when
+steps are small, and that would be why the order lasts longer then.
+
 So a step of 20 numbers gives order that lasts, and steps of 30 and more
 give worlds that mostly end, in the order or out of it. A step at which a
 world lives on while its order comes and goes was not found.
@@ -676,6 +693,8 @@ with half the agents replaced at once it does not hold at all (Experiment
 The plans are `book/experiments/E54.json`, `E56.json`, `E57.json` and
 `E58.json`;
 Experiments 56, 57 and 58 are read by
-`python3 research/efficient/E50/e56.py` (with `E57` or `E58` after it). What the agents
+`python3 research/efficient/E50/e56.py` (with `E57`, `E58`, `E60`, `E61` or
+`E63` after it); the last iterations of the worlds that died by
+`python3 research/efficient/E50/autopsy.py`. What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.
