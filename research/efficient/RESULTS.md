@@ -40,8 +40,9 @@ brains that play otherwise do as well as the rest (62), and many of them
 take the world's tokens (59). So the world of equals is fallen into, not
 selected for, and it wears away at a rate set by the step of a mutation
 (60). At 30 numbers one world formed it, lost it, formed it again and lost
-it again; another died (61). That is the first world that keeps changing
-its kind, though it only goes between two.
+it again; another died (61). Nine more worlds (63) showed that this was
+the exception: worlds keep the order or never find it, and two worlds of
+equals died out of it suddenly. So the order is not safe either.
 
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
@@ -476,6 +477,21 @@ changed in 1,000 numbers does as well as the rest. **The order is not kept
 by selection.** It is a state the world falls into and wears away from as
 changed brains pile up: 10 numbers lasted 4,500 iterations and more, 30
 numbers 1,500 and 3,000, the engine's mutation under 500.
+
+### Experiment 63: is going back and forth typical? — no; and a world of equals can die
+
+Nine worlds from the 20,000 world, 10,000 iterations (E = a window of 500
+as a world of equals). 20 numbers: all three `.EEEEEEEEEEEEEEEEEEE`. 30
+numbers: `.EEE.EEEEEEEEEEEEEEE`; 18 windows, then died at 29,351; none, died
+at 26,699. 50 numbers: none; 5 windows, then died at 23,853; 18 windows.
+Thesis undecided (one run of nine with two stretches; three died).
+
+- Worlds form the order early and keep it, or never form it. Going back
+  and forth (Experiment 61) was the exception.
+- **Correction: a world of equals is not safe.** Two died out of the order
+  within a few hundred iterations, after 2,500 and 9,000 iterations in it.
+  Earlier experiments were too short (at most 5,000) to see that.
+- Deaths by step: 0 of 3 at 20 numbers, 2 of 3 at 30, 1 of 3 at 50.
 
 ## What this changes in the plan
 

@@ -40,19 +40,26 @@ the order a second time and lost it again, the other died out; undecided.
 Experiment 62 put a few changed brains into a world of equals: they do as
 well as the rest, so the order is not kept by selection; refuted.
 
+Experiment 63 played nine more worlds at steps of 20, 30 and 50 numbers
+for 10,000 iterations: with 20 numbers all three formed the order and kept
+it; going back and forth happened in none; and two worlds of equals died
+out, suddenly.
+
 Taken together: the world of equals is a state these rules fall into when
-copies are faithful enough, and then wear away from, faster the larger the
-step of a mutation. At a step of 30 numbers one world went back and forth
-between order and churn. What the five found together:
+copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
+larger steps it wears away, and a world that loses it, or never finds it,
+often dies. One world formed it twice; that was the exception. What the five found together:
 
 - **The world of equals forms again and again**, from a long-run world,
   from founders and from young worlds, at 10,000 and at 40,000 tokens. Six
   of the 20 runs with mutations of 10 numbers or an inherited step ended as
   one, in five separate worlds, and none of the 10 runs with the engine's
   mutation.
-- **It is safe once reached, while steps stay small.** No such world died
-  or left that state in up to 4,500 iterations. With mutations of 100
-  numbers one world reached it and left it again.
+- **It lasts while steps stay small**, 4,500 iterations in those
+  experiments. With mutations of 100 numbers one world reached it and left
+  it again. (Corrected on 25 November 2026: this said it is safe once
+  reached. Over 10,000 iterations two worlds of equals died out,
+  Experiment 63.)
 - **Getting there is a bet.** Most small worlds with small steps died
   sooner than they would have with large ones.
 - **Brains still get better inside it for a while**, about 2,000
@@ -549,6 +556,42 @@ the original was not plugged in.
 >
 > **It fails if:** No run has two separate stretches, or five or more of the nine die out. Anything else is undecided. Reported beside it: every run's windows, its stretches and their lengths, by the step of its mutations.
 <!-- /thesis -->
+
+#### What Experiment 63 found
+
+The nine runs were played on 24 and 25 November 2026. Twenty windows of 500
+iterations each, from iteration 20,000 to 30,000; an `E` is a window of a
+world of equals.
+
+| mutation | seed 6301 | seed 6302 | seed 6303 |
+|---|---|---|---|
+| 20 numbers | `.EEEEEEEEEEEEEEEEEEE` | `.EEEEEEEEEEEEEEEEEEE` | `.EEEEEEEEEEEEEEEEEEE` |
+| 30 numbers | `.EEE.EEEEEEEEEEEEEEE` | `.EEEEEEEEEEEEEEEEEE`, then died out at 29,351 | `..............`, then died out at 26,699 |
+| 50 numbers | `....................` | `..EEEEE.`, then died out at 23,853 | `..EEEEEEEEEEEEEEEEEE` |
+
+**The thesis is undecided, and the runs speak against its claim.** One run
+of nine has two separate stretches, and that is one window's gap in an
+order that otherwise held. The thesis asked for three. Three runs died out,
+which is as many as it allowed.
+
+- **Going back and forth is not what these worlds do.** A world forms the
+  order within 500 to 1,000 iterations and keeps it, or it never forms it.
+  The world of Experiment 61 that formed it twice is the exception.
+- **With 20 numbers all three worlds formed the order and kept it** for
+  9,500 iterations.
+- **A world of equals can die, and suddenly.** Two worlds were worlds of
+  equals, for 2,500 and for 9,000 iterations, with 536 and about 590
+  agents, and were gone a few hundred iterations later. Until this
+  experiment no world of equals had died; none had been played longer than
+  5,000 iterations. What the page said before, that the order is safe once
+  reached, does not hold over 10,000 iterations.
+- **The larger the step, the more worlds die**: none of three with 20
+  numbers, two of three with 30, one of three with 50; and of the five
+  worlds with 30 numbers of Experiments 60, 61 and 63 together, three.
+
+So a step of 20 numbers gives order that lasts, and steps of 30 and more
+give worlds that mostly end, in the order or out of it. A step at which a
+world lives on while its order comes and goes was not found.
 
 <!-- runs E63 -->
 > [!info]- The runs behind this page
