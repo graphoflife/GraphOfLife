@@ -706,7 +706,8 @@ its first rich agent, with links cut by the hundred in every game. Here a
 hoarder far richer than that one costs the world a few links a game, and
 after 1,000 iterations most of the network stands. So the rich agent of
 those last iterations was part of a wider breakdown and not its one cause.
-What else failed in those worlds is not known. Three limits of this test:
+What else failed in those worlds was not known when this was written; the
+next section reads it from their [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."). Three limits of this test:
 the hoarder's line here is one agent, where a mutant's line could spread
 before it turned; the worlds here mutate by 20 numbers, those by 30 and
 50; and at iteration 1,000 the hoarders were still gaining, a sixth to a
@@ -724,6 +725,105 @@ The numbers are made by `python3 research/efficient/E50/e64.py`.
 > - **controls** — 15 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies resident; patches of 1 agent; places 1 to 5, every 1.
 >
 > To play these trials again: `python3 gol_lab.py run E64`.
+<!-- /runs -->
+
+### One line took the worlds that died
+
+A frame records every brain's parent, so the family of the rich agents in
+the two worlds that died can be followed back: a line is a brain and every
+brain copied from it, changed or not. This reads what Experiment 63
+recorded and plays nothing.
+
+| world with 30 numbers, iteration | agents | of the line | its share of all tokens | links each: line, others |
+|---|---|---|---|---|
+| 29,270 | 674 | 1 | 1% | 7, 37 |
+| 29,290 | 676 | 22 | 13% | 28, 35 |
+| 29,320 | 767 | 127 | 53% | 15, 22 |
+| 29,340 | 991 | 835 | 96% | 6, 6 |
+| 29,348 | 416 | 407 | 98% | 3, 2 |
+| 29,350 | 10 | | | |
+
+| world with 50 numbers, iteration | agents | of the line | its share of all tokens | links each: line, others |
+|---|---|---|---|---|
+| 23,400 | 531 | 8 | 5% | 5, 42 |
+| 23,500 | 522 | 12 | 39% | 21, 36 |
+| 23,540 | 488 | 95 | 78% | 14, 20 |
+| 23,560 | 329 | 327 | 100% | 5, 2 |
+| 23,620 | 159 | 159 | 100% | 3, – |
+
+- **One line, from one brain.** At the first iteration with five rich
+  agents (more than five median holdings each), all of them come from one
+  brain. It was first seen at iteration 29,262 in the world with 30
+  numbers, 88 iterations before that world's end, and at 23,359 in the
+  other. From then on nearly every rich agent is of that line.
+- **The line takes the whole world**, from one agent to more than nine in
+  ten within 85 iterations in one world and 200 in the other.
+- **It spreads in the game and hardly by births.** 5,007 nodes turned to
+  the line in a game and 542 agents were born into it in one world; 2,363
+  and 45 in the other. Every such node but one in each world was next to an
+  agent of the line just before.
+- **Its agents stake everything on one node.** One game of the takeover has
+  its stakes recorded, iteration 23,500. All twelve agents of the line
+  stake everything on one node, six on their own and six on a neighbour's,
+  and win all twelve. They hold 11 to 2,591 tokens. Of the 510 others two
+  stake on one node.
+- **But that alone cannot make a line grow**: an agent that takes a
+  neighbour's node with everything leaves its own. Eleven games later the
+  nodes of 22 neighbours of one agent of the line turned in a single game.
+  That agent held 1,629 tokens and had 63 links, and the line had 12
+  agents. So it had spread its tokens: about 26 a node, where the others
+  held 33 on average and all the stakers of a node together stake about
+  what its holder has.
+- **The network dies with the line.** Its agents have fewer links than the
+  others from the start, and at the end everyone has three.
+
+So what ended these worlds is a line that hoards and then spreads, and the
+rules allow it. A coalition takes a node only if its tokens outweigh the
+largest stake there. In a world of equals no stake is large. An agent that
+has hoarded more than all its neighbours hold together can outweigh the
+coalition on every one of their nodes in one game. Its copies start richer
+than their neighbours, and the same happens again. When most agents play
+so, few links are staked on, links that no tokens cross lapse, and pieces
+of the network are culled. Experiment 62's changed brains did as well as
+the rest; this one change does far better, and the order has nothing
+against it. Small steps of mutation only make it rare.
+
+That the line spread its stakes is seen in one game. Experiment 65 plays
+such a player by hand.
+
+The lines are traced by `python3 research/efficient/E50/autopsy_lines.py`.
+
+### Does a hoarder that spreads end it?
+
+<!-- experiment E65 -->
+
+Experiment 65 gives one agent of a world of equals the two moves together.
+It is the hoarder of Experiment 64, at home or moving, until it holds more
+than all its neighbours together. Then it stakes every token on its
+neighbours' nodes, in proportion to what each holds, so that on each node
+its stake is at least what the holder has. A copy that takes a node hoards
+again. The worlds, the agents and the length are those of Experiment 64, so
+its hoarders, which only hoard, are the comparison.
+
+<!-- thesis E65 -->
+> [!quote] The thesis of Experiment 65, written down before any of its runs existed
+> **The claim.** A hoarder that spreads once it is rich takes a world of equals and ends it. Its line comes to hold more than half the world's agents, and the world then dies out or loses more than half its agents.
+>
+> **Why it would be so.** One hoarder that only hoards grows rich and the world lives on (Experiment 64). The two worlds of equals that died in Experiment 63 were each taken by one line of brains: it began with one brain, held every rich agent, and went from one agent to nearly all within 80 to 200 iterations, by turning neighbouring nodes in the game and hardly by births (read from their frames, research/efficient/E50/autopsy_lines.py). In the one game of that takeover whose stakes are recorded, all twelve agents of the line staked everything on one node. But an agent that only does that takes one node and leaves one, so its line cannot grow; and eleven games later the nodes of 22 neighbours of one agent of the line turned in a single game, when it held 1,629 tokens. So the line both hoards and spreads. The rule of the game allows it: a coalition takes a node only if its tokens outweigh the largest stake, and an agent that holds more than all its neighbours together can stake on each of their nodes at least what that neighbour holds, which is about what all the others stake there. Each copy then holds twice a neighbour's tokens and hoards again. A world of such players stakes on few links, the links that no tokens cross lapse, and pieces of the network are culled.
+>
+> **It holds if:** A trial takes one agent of a world of equals and gives it its own brain, frozen, with only its stakes written over: it hoards, at home or on its poorest neighbour's node, until it holds more than all its neighbours together, and then stakes every token on the neighbours' nodes in proportion to what each holds. It plays 1,000 iterations, or until its line is gone or the world has died out. A line sweeps if at some iteration it holds more than half the world's agents. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. Of the 30 trials (three worlds, five places, two ways of hoarding) at least 20 lines sweep and at least 20 worlds end.
+>
+> **It fails if:** Fewer than 10 of the 30 lines sweep, or fewer than 10 of the 30 worlds end. Anything else is undecided. Reported beside it, by way of hoarding and by world: the iteration at which a line first holds two agents or more and at which it holds half the world, how many lines are lost and when, the world's agents and links over time, and the same counts for the hoarders of Experiment 64, which only hoard.
+<!-- /thesis -->
+
+<!-- runs E65 -->
+> [!info]- The trials behind this page
+> **30 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 1,000 iterations, from a world another run kept in its archive.
+>
+> - **hoard at home, then spread** — 15 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies home-spreader; patches of 1 agent; places 1 to 5, every 1.
+> - **hoard on the poorest neighbour, then spread** — 15 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies moving-spreader; patches of 1 agent; places 1 to 5, every 1.
+>
+> To play these trials again: `python3 gol_lab.py run E65`.
 <!-- /runs -->
 
 ### A few who play otherwise

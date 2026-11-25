@@ -530,6 +530,26 @@ Read by `E50/e64.py`.
 - So the rich agent in Experiment 63's dying worlds was part of a wider
   breakdown, not its one cause.
 
+### Who took the two worlds that died (frames of Experiment 63, nothing played)
+
+`E50/autopsy_lines.py` follows the brain line of the rich agents (frames
+record each brain's parent).
+
+- In both worlds all rich agents come from one brain, first seen 88 and
+  about 490 iterations before the end (29,262 of 29,350; 23,359 of 23,852).
+- The line goes from 1 agent to over 90% of agents in 85 and 200
+  iterations and holds 96% to 100% of the tokens. Nodes turn to it in the
+  game (5,007 and 2,363), hardly by births (542 and 45); all but one in
+  each world next to a line agent.
+- In the one recorded game (23,500) all 12 line agents stake everything on
+  one node (6 home, 6 a neighbour's) and win; 2 of 510 others do.
+- All-in alone cannot grow a line (take one node, leave one). At 23,511,
+  22 neighbours of one line agent with 1,629 tokens and 63 links turned in
+  one game: it spread its stakes.
+- Reading: a line that hoards and then spreads. The coalition rule guards
+  a node only against stakes smaller than the coalition's sum, so wealth
+  breaks it. Tested by hand in Experiment 65.
+
 ## What this changes in the plan
 
 - **Condition 2 fails as far as behaviour goes** (B1). Experiment 49 asks

@@ -3148,6 +3148,20 @@ def test_a_mask_changes_one_decision_of_a_resident():
         assert Y[heads["BLOTTO_MODE"].start, 0] > Y[heads["BLOTTO_MODE"].start + 1, 0]
         assert brain.brain_id == gol_strategies.STRATEGY_IDS[name] and not brain.mutate(1, world.rng)
     assert np.array_equal(resident.forward(X), own), "the resident's own answer was written over"
+    # A spreader hoards as its hoarder does while its neighbours together hold more (9 against 17) ...
+    X[lay["own_tokens"][0], :] = np.log1p(9)
+    for name, column in (("home-spreader", 0), ("moving-spreader", 2)):
+        scores = gol_strategies.brain_for(cfg, name, resident).forward(X)[heads["BLOTTO"], :].ravel()
+        assert scores[column] > 0 and scores.sum() == scores[column], f"{name} did not hoard"
+    # ... and once it holds more than all of them, stakes on each of their nodes at least what its holder has.
+    X[lay["own_tokens"][0], :] = np.log1p(18)
+    for name in ("home-spreader", "moving-spreader"):
+        Y = gol_strategies.brain_for(cfg, name, resident).forward(X)
+        scores = Y[heads["BLOTTO"], :].ravel()
+        assert scores[0] == 0 and np.allclose(scores[1:], [7, 2, 5, 3]), f"{name} did not spread"
+        assert np.array_equal(Y[~stakes], resident.forward(X)[~stakes]), f"{name} changed more than the stakes"
+        from GraphOfLife import _apportion
+        assert (_apportion(scores, 18)[1:] >= np.array([7, 2, 5, 3])).all()
     alone = X[:, :1]
     assert gol_strategies.brain_for(cfg, "moving-hoarder", resident).forward(alone)[heads["BLOTTO"], 0] > 0
     patch = gol_strategies.plant(world, "home-hoarder", 1, 3)

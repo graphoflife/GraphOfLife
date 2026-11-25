@@ -1,0 +1,45 @@
+{
+ "id": "E65",
+ "title": "Does a hoarder that spreads end a world of equals? Hoard on one node, then stake on every neighbour's node at once",
+ "thesis": {
+  "claim": "A hoarder that spreads once it is rich takes a world of equals and ends it. Its line comes to hold more than half the world's agents, and the world then dies out or loses more than half its agents.",
+  "why": "One hoarder that only hoards grows rich and the world lives on (Experiment 64). The two worlds of equals that died in Experiment 63 were each taken by one line of brains: it began with one brain, held every rich agent, and went from one agent to nearly all within 80 to 200 iterations, by turning neighbouring nodes in the game and hardly by births (read from their frames, research/efficient/E50/autopsy_lines.py). In the one game of that takeover whose stakes are recorded, all twelve agents of the line staked everything on one node. But an agent that only does that takes one node and leaves one, so its line cannot grow; and eleven games later the nodes of 22 neighbours of one agent of the line turned in a single game, when it held 1,629 tokens. So the line both hoards and spreads. The rule of the game allows it: a coalition takes a node only if its tokens outweigh the largest stake, and an agent that holds more than all its neighbours together can stake on each of their nodes at least what that neighbour holds, which is about what all the others stake there. Each copy then holds twice a neighbour's tokens and hoards again. A world of such players stakes on few links, the links that no tokens cross lapse, and pieces of the network are culled.",
+  "confirm": "A trial takes one agent of a world of equals and gives it its own brain, frozen, with only its stakes written over: it hoards, at home or on its poorest neighbour's node, until it holds more than all its neighbours together, and then stakes every token on the neighbours' nodes in proportion to what each holds. It plays 1,000 iterations, or until its line is gone or the world has died out. A line sweeps if at some iteration it holds more than half the world's agents. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. Of the 30 trials (three worlds, five places, two ways of hoarding) at least 20 lines sweep and at least 20 worlds end.",
+  "refute": "Fewer than 10 of the 30 lines sweep, or fewer than 10 of the 30 worlds end. Anything else is undecided. Reported beside it, by way of hoarding and by world: the iteration at which a line first holds two agents or more and at which it holds half the world, how many lines are lost and when, the world's agents and links over time, and the same counts for the hoarders of Experiment 64, which only hoard."
+ },
+ "trials": {
+  "kind": "invasion",
+  "T": 1000,
+  "workers": 3,
+  "sets": [
+   {
+    "name": "hoard at home, then spread",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "home-spreader",
+     "size": 1,
+     "place": "1..5"
+    }
+   },
+   {
+    "name": "hoard on the poorest neighbour, then spread",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "moving-spreader",
+     "size": 1,
+     "place": "1..5"
+    }
+   }
+  ]
+ }
+}

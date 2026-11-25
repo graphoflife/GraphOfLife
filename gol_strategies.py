@@ -23,8 +23,11 @@ There are three kinds:
 
   masks     one evolved brain, frozen, with one of its decisions written over
             by hand: `home-hoarder` stakes everything on its own node and
-            `moving-hoarder` everything on its poorest neighbour's node, and
-            the child, the links, the coalition's share and the messages stay
+            `moving-hoarder` everything on its poorest neighbour's node;
+            `home-spreader` and `moving-spreader` do the same until they hold
+            more than all their neighbours together, and then stake on every
+            neighbour's node at once. The child, the links, the coalition's
+            share and the messages stay
             the brain's own. So a mask plays as the resident it was made from
             would after the one change, and its neighbours hear what they heard
 
@@ -366,36 +369,55 @@ WEIGHTS: Dict[str, Callable] = {"raider-weights": raider_weights}
 # Masks
 # ---------------------------------------------------------------------------
 
-def _all_on(cfg, Y, column: int):
-    """The brain's answer `Y` with every staked token on one candidate."""
+def _stake(cfg, Y, amounts):
+    """The brain's answer `Y` with its stakes written over: the tokens spread in proportion to `amounts`."""
     from GraphOfLife import build_heads
     heads = build_heads(cfg)
-    Y[heads["BLOTTO"], :] = 0.0
-    Y[heads["BLOTTO"], column] = 1.0
+    Y[heads["BLOTTO"], :] = amounts
     mode = heads["BLOTTO_MODE"]
     Y[mode.start, :], Y[mode.start + 1, :] = 1.0, 0.0                # spread, as given
     return Y
 
 
+def _seen(cfg, X):
+    """What the agent holds, what each candidate holds, and which candidates are neighbours."""
+    lay = cfg.input_layout()
+    row = lambda name: X[lay[name][0], :]
+    return float(np.expm1(row("own_tokens")[0])), np.expm1(row("its_tokens")), row("self") <= 0.5
+
+
 def home_hoarder(cfg, X, Y):
     """Everything staked on the agent's own node."""
-    return _all_on(cfg, Y, 0)
+    return _stake(cfg, Y, np.eye(X.shape[1])[0])
 
 
 def moving_hoarder(cfg, X, Y):
     """Everything staked on the node of the poorest neighbour; at home when there is none."""
-    lay = cfg.input_layout()
-    row = lambda name: X[lay[name][0], :]
-    theirs = np.where(row("self") > 0.5, np.inf, row("its_tokens"))
-    return _all_on(cfg, Y, int(np.argmin(theirs)) if np.isfinite(theirs).any() else 0)
+    _, theirs, near = _seen(cfg, X)
+    return _stake(cfg, Y, np.eye(X.shape[1])[int(np.argmin(np.where(near, theirs, np.inf))) if near.any() else 0])
 
 
-MASKS: Dict[str, Callable] = {"home-hoarder": home_hoarder, "moving-hoarder": moving_hoarder}
+def _spreader(hoard: Callable) -> Callable:
+    """
+    `hoard` until the agent holds more than all its neighbours together; then every token
+    on the neighbours' nodes, in proportion to what each holds, so that its stake on each
+    is at least what that neighbour holds. A copy that takes a node hoards again.
+    """
+    def mask(cfg, X, Y):
+        mine, theirs, near = _seen(cfg, X)
+        if near.any() and mine > theirs[near].sum():
+            return _stake(cfg, Y, np.where(near, theirs, 0.0))
+        return hoard(cfg, X, Y)
+    return mask
+
+
+MASKS: Dict[str, Callable] = {"home-hoarder": home_hoarder, "moving-hoarder": moving_hoarder,
+                              "home-spreader": _spreader(home_hoarder), "moving-spreader": _spreader(moving_hoarder)}
 
 #: Every strategy's own brain id; `resident` is the control, a frozen evolved brain. The order only
 #: ever grows at its end, so a strategy keeps its id whatever is added after it.
 STRATEGY_ORDER = ["resident", "turtle", "raider", "lone", "factory", "raider-weights", "crew", "breeding-turtle",
-                  "breeding-raider", "home-hoarder", "moving-hoarder"]
+                  "breeding-raider", "home-hoarder", "moving-hoarder", "home-spreader", "moving-spreader"]
 assert set(STRATEGY_ORDER) == {"resident", *RULES, *WEIGHTS, *MASKS}, "a strategy without an id"
 STRATEGY_IDS: Dict[str, int] = {name: STRATEGY_BASE + k for k, name in enumerate(STRATEGY_ORDER)}
 
