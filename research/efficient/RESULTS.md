@@ -28,8 +28,9 @@ in the worlds we had, and a new kind of world.
   formed in five separate worlds and in no world with the engine's
   mutation. It is the first lasting structure of many agents that formed by
   itself.
-- It is safe once reached, and its brains still improve for about 2,000
-  iterations, then stop (Experiment 54).
+- Its brains still improve for about 2,000 iterations, then stop
+  (Experiment 54). It lasted every run of up to 5,000 iterations, but it
+  is not safe: over 10,000 iterations two died out of it (Experiment 63).
 - Small steps are dangerous for a young or small world: most died sooner
   (Experiments 56, 57).
 - If brains inherit their step, it shrinks to a handful of numbers within
