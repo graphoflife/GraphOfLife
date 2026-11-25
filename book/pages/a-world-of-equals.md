@@ -49,6 +49,13 @@ Experiment 64 put one hoarder into a world of equals, an agent that stakes
 everything on one node: it grows rich, up to seven tokens in ten of the
 whole world, but no world of 30 ended within 1,000 iterations; refuted.
 
+The [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections.") of the two worlds that died show who took them: one line of
+brains that stake everything on one node, grown from one agent to nearly
+all within 85 and 200 iterations. Experiment 65 played such a line by
+hand, a hoarder that stakes on all its [neighbours](the-world.md#the-network "An agent joined to another by a connection.")' nodes at once when it
+is rich enough: its line took half the world in all 30 trials and 25
+worlds ended; confirmed. The world of equals has no defence against it.
+
 Taken together: the world of equals is a state these rules fall into when
 copies are faithful enough. With a step of 10 or 20 numbers it lasts. With
 larger steps it wears away, and a world that loses it, or never finds it,
@@ -91,7 +98,7 @@ refuse; every link holds a token; a link nobody staked across is cut.
 
 In the world of equals every agent does the same in every [game](one-iteration.md#phase-2-the-game "The second phase of an iteration: every agent stakes all its tokens on its own node and its neighbours', and every node goes to someone."):
 
-1. It puts one token on each of its [neighbours](the-world.md#the-network "An agent joined to another by a connection.") and one on itself. With 56
+1. It puts one token on each of its neighbours and one on itself. With 56
    links and 56 tokens that uses them all.
 2. It marks every one of them for a coalition.
 3. It has no child.
@@ -707,7 +714,7 @@ hoarder far richer than that one costs the world a few links a game, and
 after 1,000 iterations most of the network stands. So the rich agent of
 those last iterations was part of a wider breakdown and not its one cause.
 What else failed in those worlds was not known when this was written; the
-next section reads it from their [frames](runs-and-records.md#what-a-run-records "A whole world as a run records it after one phase: every agent, its tokens and connections."). Three limits of this test:
+next section reads it from their frames. Three limits of this test:
 the hoarder's line here is one agent, where a mutant's line could spread
 before it turned; the worlds here mutate by 20 numbers, those by 30 and
 50; and at iteration 1,000 the hoarders were still gaining, a sixth to a
@@ -816,6 +823,60 @@ its hoarders, which only hoard, are the comparison.
 > **It fails if:** Fewer than 10 of the 30 lines sweep, or fewer than 10 of the 30 worlds end. Anything else is undecided. Reported beside it, by way of hoarding and by world: the iteration at which a line first holds two agents or more and at which it holds half the world, how many lines are lost and when, the world's agents and links over time, and the same counts for the hoarders of Experiment 64, which only hoard.
 <!-- /thesis -->
 
+**The thesis is confirmed.** All 30 lines swept, where the thesis asked
+for 20, and 25 of the 30 worlds ended, where it asked for 20. It is the
+first thesis of this page that holds.
+
+- **The line takes half the world within 33 to 134 iterations**, 71 as a
+  median when it hoards at home and 89 when it hoards on the move. The
+  lines that took the two worlds of Experiment 63 needed 85 and 200.
+- **The world then collapses within a few games.** In one trial the line
+  held half the agents at iteration 84 and the world had lost half its
+  agents by iteration 86. In 28 of the 30 trials that took 1 to 16
+  iterations; the other two were in the densest world. 26 of the 30 worlds fell to 20 agents or
+  fewer, the mark at which a run counts as died out, at iteration 107 as a
+  median. A trial plays on below that mark: 22 worlds ended with one to
+  five agents, and in eleven of them one agent held all 40,000 tokens.
+- **No hoarder lost its first game, and none failed to spread.** The same
+  agents with the hoarders of Experiment 64, which only hoard, ended no
+  world of 30.
+- **Five worlds lived on, all in the densest of the three worlds** (257
+  agents with 103 links each). After the sweep they were worlds of 269 to
+  894 agents with about three links each, three to seven in ten of them
+  of the line. The world with 50 numbers of Experiment 63 spent its last 300
+  iterations in such a state.
+- **Two lines were lost after they had swept**, at iterations 117 and 196,
+  and left 20 agents each.
+
+| world of Experiment 63 (20 numbers) | agents | links each | hoards | half the world at iteration | 20 agents or fewer at | agents at the end |
+|---|---|---|---|---|---|---|
+| seed 6301 | 484 | 45 | at home | 71 to 121 | 78 to 128 | 1, 1, 1, 1, 20 |
+| | | | moving | 73 to 113 | 105 to 353 | 3, 4, 5, 20, 74 |
+| seed 6302 | 257 | 103 | at home | 61 to 101 | 96, 106, 186, never, never | 1, 1, 269, 357, 440 |
+| | | | moving | 90 to 134 | 374, 528, 599, never, never | 2, 2, 4, 663, 894 |
+| seed 6303 | 533 | 49 | at home | 33 to 56 | 40 to 67 | 1, 1, 1, 1, 1 |
+| | | | moving | 71 to 89 | 93 to 116 | 2, 2, 2, 2, 2 |
+
+**What this shows.** A world of equals has no defence against a player
+that hoards and then spreads, and one such agent is enough to end it. The
+two moves are needed together: hoarding alone leaves the world standing
+(Experiment 64), and without a hoard a spread stake is the stake of
+everyone else. The coalition guards a node against any stake smaller than
+what the coalition stakes there, and so only while nobody is rich.
+
+So the order lasts as long as mutation does not find this player, and
+that is why small steps keep it longer: none of three worlds with 20
+numbers lost it in 9,500 iterations, and with 30 and 50 numbers two worlds
+of equals in four were taken.
+
+**What it does not show.** The player here is written by hand. That the
+lines of Experiment 63 hoarded is seen in one recorded game and that they
+spread in another; that their brains followed this rule is not shown. And
+a trial holds the line's brains fixed, where an evolved line goes on
+changing.
+
+The numbers are made by `python3 research/efficient/E50/e64.py E65`.
+
 <!-- runs E65 -->
 > [!info]- The trials behind this page
 > **30 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 1,000 iterations, from a world another run kept in its archive.
@@ -900,7 +961,8 @@ The plans are `book/experiments/E54.json`, `E56.json`, `E57.json` and
 Experiments 56, 57 and 58 are read by
 `python3 research/efficient/E50/e56.py` (with `E57`, `E58`, `E60`, `E61` or
 `E63` after it); the last iterations of the worlds that died by
-`python3 research/efficient/E50/autopsy.py`; Experiment 64 by
-`python3 research/efficient/E50/e64.py`. What the agents
+`python3 research/efficient/E50/autopsy.py` and
+`autopsy_lines.py`; Experiments 64 and 65 by
+`python3 research/efficient/E50/e64.py` (with `E65` after it). What the agents
 of the world of equals do is read from the statistics of Experiment 53's
 runs by `python3 research/efficient/E50/e53.py`.

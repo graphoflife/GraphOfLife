@@ -50,6 +50,14 @@ an agent that stakes everything on one node grows rich, up to seven tokens
 in ten of the world, but all 30 worlds lived through 1,000 iterations with
 one. What ended the two worlds is open.
 
+**Added after the line autopsy and Experiment 65.** It is no longer open.
+Each world was taken by one line of hoarders that multiplies, and a
+hand-written hoarder that spreads once it is rich does the same in 30 of
+30 trials (25 worlds end). The coalition rule guards a node only against
+stakes smaller than the coalition's sum, so the order of equals lasts only
+until mutation finds wealth. An order that is to last needs a rule that
+wealth cannot break (not tested; a rule change, the author's call).
+
 **So there are two kinds of world, and neither is open-ended.** With large
 steps: churn, where nothing that is found is kept. With small steps: an
 order that keeps itself and then stands still. And the step itself, left to
@@ -549,6 +557,22 @@ record each brain's parent).
 - Reading: a line that hoards and then spreads. The coalition rule guards
   a node only against stakes smaller than the coalition's sum, so wealth
   breaks it. Tested by hand in Experiment 65.
+
+### Experiment 65: a hoarder that spreads — the world ends (confirmed)
+
+30 invasions as in Experiment 64, with masks `home-spreader` and
+`moving-spreader`: hoard until richer than all neighbours together, then
+stake on every neighbour's node in proportion to its holder's tokens.
+Read by `E50/e64.py E65`.
+
+- 30 of 30 lines hold more than half the agents, at iteration 33 to 134
+  (medians 71 at home, 89 moving). 25 of 30 worlds end (fewer than half
+  their agents at 1,000); 26 fall to 20 agents or fewer (median at 107);
+  22 end with 1 to 5 agents, 11 with one agent holding all 40,000 tokens.
+- The 5 that live are all in the densest world (seed 6302: 257 agents,
+  103 links each): afterwards 269 to 894 agents with about 3 links each.
+- Comparison: the same agents hoarding only (Experiment 64): 0 of 30 end.
+- First confirmed thesis of the series.
 
 ## What this changes in the plan
 
