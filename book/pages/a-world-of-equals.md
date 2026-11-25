@@ -621,6 +621,43 @@ world lives on while its order comes and goes was not found.
 > To make these runs again: `python3 gol_lab.py run E63`.
 <!-- /runs -->
 
+### Does one hoarder end it?
+
+<!-- experiment E64 -->
+
+The reading above, that one agent which stakes everything on one node
+breaks the order, came from the last iterations of two worlds. Experiment
+64 tests it directly. In a world of equals one agent is given its own
+brain with only its stakes changed: everything on its own node, or
+everything on the node of its poorest neighbour. Its child, its links, its
+share for the coalition and its messages stay as its brain decides them,
+so its neighbours hear what they heard before. The worlds are the three
+with mutations of 20 numbers of Experiment 63, taken at iteration 27,500;
+all three kept the order for the 2,500 iterations they were played after
+that.
+
+<!-- thesis E64 -->
+> [!quote] The thesis of Experiment 64, written down before any of its runs existed
+> **The claim.** One agent that stakes everything on one node ends a world of equals. It grows richer in every game until it holds more than a tenth of all the world's tokens, and the world then loses more than half its agents or dies out. It does so whether the node is its own or its poorest neighbour's.
+>
+> **Why it would be so.** Two worlds of equals died suddenly in Experiment 63, each with one agent that grew rich in its last hundred iterations. In a world of equals every agent stakes one or two tokens on each neighbour and on itself, all marked for the coalition, and holds about as many tokens as are staked on its own node (read from the stakes recorded at iteration 29,999 in the first of the three worlds played here: among 455 agents the largest stake on any node is 1 to 3 tokens, and 95 nodes in 100 are won by the coalition). A coalition takes a node only if its marked tokens outweigh the largest single stake there. An agent that puts all its tokens on one node is that largest stake, and all the others together stake about as much as it holds: by those recorded stakes it would keep its own node in 401 cases of 455 and take its poorest neighbour's in 360. The node keeps everything staked on it, so the hoarder's tokens grow by what its neighbours stake, about one token a neighbour in every game, while it pays nothing back. Nothing in the order answers that: its brains were never selected against such a player, and a few who play otherwise do as well as the rest (Experiment 62).
+>
+> **It holds if:** A trial takes one agent of a world of equals and gives it its own brain, frozen, with only its stakes written over; it plays 1,000 iterations, or until the hoarder's line is gone or the world has died out. A hoarder takes off if its line at some iteration holds more than 4,000 tokens, a tenth of the world's 40,000. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. Of the 30 hoarder trials (three worlds, five places, two kinds) at least 20 take off and at least 20 worlds end, and each kind alone has at least 8 of its 15 worlds ending.
+>
+> **It fails if:** Fewer than 10 of the 30 hoarders take off, or fewer than 10 of the 30 worlds end. Anything else is undecided. Reported beside it, by kind and by world: how many hoarders lose their first game, the iteration at which a hoarder passes 4,000 tokens, its tokens, the world's agents and links over time, and how long the line of the control lasts, the same agent with its brain frozen and unchanged.
+<!-- /thesis -->
+
+<!-- runs E64 -->
+> [!info]- The trials behind this page
+> **45 trials**, invasions: a patch of the world of one era given a strategy written by hand, and its agents counted after every iteration; each plays 1,000 iterations, from a world another run kept in its archive.
+>
+> - **everything at home** — 15 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies home-hoarder; patches of 1 agent; places 1 to 5, every 1.
+> - **everything on the poorest neighbour** — 15 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies moving-hoarder; patches of 1 agent; places 1 to 5, every 1.
+> - **controls** — 15 trials: worlds `B1-40000-c8c9f2-s6301-on210139`, `B1-40000-c8c9f2-s6302-on210139`, `B1-40000-c8c9f2-s6303-on210139`; at iteration 27,500; strategies resident; patches of 1 agent; places 1 to 5, every 1.
+>
+> To play these trials again: `python3 gol_lab.py run E64`.
+<!-- /runs -->
+
 ### A few who play otherwise
 
 <!-- experiment E62 -->

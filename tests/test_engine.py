@@ -3117,6 +3117,49 @@ def test_a_patch_contest_plants_each_era_as_one_region():
         raise AssertionError("a contest dealt by neither coin nor patch was accepted")
 
 
+def test_a_mask_changes_one_decision_of_a_resident():
+    """
+    A mask is a resident's own brain with its stakes written over: everything on
+    its own node (home-hoarder) or on its poorest neighbour's (moving-hoarder).
+    Every other number the brain answers is the resident's, the mask carries its
+    strategy's id, and a world plays on with it.
+    """
+    import numpy as np
+    import gol_strategies
+    from GraphOfLife import build_heads
+    cfg = small(seed=71)
+    world = new_world(cfg)
+    for _ in range(3):
+        world.step(record_decisions=False)
+    heads, lay = build_heads(cfg), cfg.input_layout()
+    resident = next(iter(world.brains.values()))
+    X = np.random.RandomState(2).normal(size=(cfg.n_inputs(), 5))
+    X[lay["self"][0], :] = [1, 0, 0, 0, 0]
+    X[lay["its_tokens"][0], :] = np.log1p([9, 7, 2, 5, 3])
+    own = resident.forward(X)
+    stakes = np.zeros(cfg.n_outputs(), dtype=bool)
+    stakes[heads["BLOTTO"]] = stakes[heads["BLOTTO_MODE"]] = True
+    for name, column in (("home-hoarder", 0), ("moving-hoarder", 2)):
+        brain = gol_strategies.brain_for(cfg, name, resident)
+        Y = brain.copy().forward(X)
+        assert np.array_equal(Y[~stakes], own[~stakes]), f"{name} changed more than the stakes"
+        scores = Y[heads["BLOTTO"], :].ravel()
+        assert scores[column] > 0 and scores.sum() == scores[column], f"{name} staked elsewhere"
+        assert Y[heads["BLOTTO_MODE"].start, 0] > Y[heads["BLOTTO_MODE"].start + 1, 0]
+        assert brain.brain_id == gol_strategies.STRATEGY_IDS[name] and not brain.mutate(1, world.rng)
+    assert np.array_equal(resident.forward(X), own), "the resident's own answer was written over"
+    alone = X[:, :1]
+    assert gol_strategies.brain_for(cfg, "moving-hoarder", resident).forward(alone)[heads["BLOTTO"], 0] > 0
+    patch = gol_strategies.plant(world, "home-hoarder", 1, 3)
+    assert [world.brains[u].brain_id for u in patch] == [gol_strategies.STRATEGY_IDS["home-hoarder"]]
+    before = world.tokens[patch[0]]
+    world.step(record_decisions=False)
+    if patch[0] in world.tokens:
+        assert world.tokens[patch[0]] >= before, "an agent that staked everything at home ended with less"
+    gol_strategies.check_trial({"kind": "invasion", "run": "r", "T": 4, "era": 0, "strategy": "moving-hoarder",
+                                "size": 1, "place": 1})
+
+
 def test_a_contest_in_a_world_of_families_deals_each_brain_with_its_family():
     """
     Under pool = family a kept world holds every agent's family tag, and a

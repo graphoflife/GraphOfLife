@@ -10,7 +10,7 @@ messages. So it plugs into a world where a brain does, spreads as a brain does,
 into a child and into a node its owner takes, and can do nothing an evolved
 brain could not.
 
-There are two kinds:
+There are three kinds:
 
   rules     a policy in Python: `turtle`, `raider`, `lone`, `factory`, what
             Chapter 51 planted; `crew`, the raider of a crowd (Chapter 102);
@@ -20,6 +20,13 @@ There are two kinds:
             plays each world by its own rules (Chapter 104)
   weights   a brain of the world's own shape whose weights were set by hand:
             `raider-weights`, Chapter 94's raider, 12 of B2's 16 units
+
+  masks     one evolved brain, frozen, with one of its decisions written over
+            by hand: `home-hoarder` stakes everything on its own node and
+            `moving-hoarder` everything on its poorest neighbour's node, and
+            the child, the links, the coalition's share and the messages stay
+            the brain's own. So a mask plays as the resident it was made from
+            would after the one change, and its neighbours hear what they heard
 
 and `resident`, a frozen copy of one evolved brain, the control.
 
@@ -354,11 +361,42 @@ def raider_weights(cfg, margin: float = MARGIN):
 
 WEIGHTS: Dict[str, Callable] = {"raider-weights": raider_weights}
 
+
+# ---------------------------------------------------------------------------
+# Masks
+# ---------------------------------------------------------------------------
+
+def _all_on(cfg, Y, column: int):
+    """The brain's answer `Y` with every staked token on one candidate."""
+    from GraphOfLife import build_heads
+    heads = build_heads(cfg)
+    Y[heads["BLOTTO"], :] = 0.0
+    Y[heads["BLOTTO"], column] = 1.0
+    mode = heads["BLOTTO_MODE"]
+    Y[mode.start, :], Y[mode.start + 1, :] = 1.0, 0.0                # spread, as given
+    return Y
+
+
+def home_hoarder(cfg, X, Y):
+    """Everything staked on the agent's own node."""
+    return _all_on(cfg, Y, 0)
+
+
+def moving_hoarder(cfg, X, Y):
+    """Everything staked on the node of the poorest neighbour; at home when there is none."""
+    lay = cfg.input_layout()
+    row = lambda name: X[lay[name][0], :]
+    theirs = np.where(row("self") > 0.5, np.inf, row("its_tokens"))
+    return _all_on(cfg, Y, int(np.argmin(theirs)) if np.isfinite(theirs).any() else 0)
+
+
+MASKS: Dict[str, Callable] = {"home-hoarder": home_hoarder, "moving-hoarder": moving_hoarder}
+
 #: Every strategy's own brain id; `resident` is the control, a frozen evolved brain. The order only
 #: ever grows at its end, so a strategy keeps its id whatever is added after it.
 STRATEGY_ORDER = ["resident", "turtle", "raider", "lone", "factory", "raider-weights", "crew", "breeding-turtle",
-                  "breeding-raider"]
-assert set(STRATEGY_ORDER) == {"resident", *RULES, *WEIGHTS}, "a strategy without an id"
+                  "breeding-raider", "home-hoarder", "moving-hoarder"]
+assert set(STRATEGY_ORDER) == {"resident", *RULES, *WEIGHTS, *MASKS}, "a strategy without an id"
 STRATEGY_IDS: Dict[str, int] = {name: STRATEGY_BASE + k for k, name in enumerate(STRATEGY_ORDER)}
 
 
@@ -371,7 +409,11 @@ def is_strategy(brain_id: int) -> bool:
 # ---------------------------------------------------------------------------
 
 class StrategyBrain:
-    """A brain that is a strategy: a rule, or a frozen brain. It never mutates and breeds true."""
+    """
+    A brain that is a strategy: a rule (`policy`), a frozen brain (`frozen`), or a mask, which
+    is both: the frozen brain answers and the policy writes over part of the answer. It never
+    mutates and breeds true.
+    """
 
     __slots__ = ("cfg", "brain_id", "parent_brain_id", "policy", "frozen", "weights", "biases")
 
@@ -382,7 +424,10 @@ class StrategyBrain:
         self.biases = frozen.biases if frozen is not None else []
 
     def forward(self, x):
-        return self.frozen.forward(x) if self.frozen is not None else self.policy(self.cfg, np.asarray(x, float))
+        if self.frozen is None:
+            return self.policy(self.cfg, np.asarray(x, float))
+        answer = self.frozen.forward(x)
+        return answer if self.policy is None else self.policy(self.cfg, np.asarray(x, float), answer)
 
     def copy(self) -> "StrategyBrain":
         b = StrategyBrain(self.cfg, self.brain_id, self.policy, self.frozen)
@@ -400,10 +445,10 @@ class StrategyBrain:
 
 
 def brain_for(cfg, strategy: str, resident: Any = None) -> StrategyBrain:
-    """A brain playing `strategy`; for `resident`, a frozen copy of the brain given."""
+    """A brain playing `strategy`; for `resident` and for a mask, made of a frozen copy of the brain given."""
     sid = STRATEGY_IDS[strategy]
-    if strategy == "resident":
-        return StrategyBrain(cfg, sid, frozen=resident.copy())
+    if strategy == "resident" or strategy in MASKS:
+        return StrategyBrain(cfg, sid, policy=MASKS.get(strategy), frozen=resident.copy())
     if strategy in RULES:
         if cfg.message_amount < SIGN:
             raise ValueError(f"{strategy} signs its messages with {SIGN} numbers, and this world's "
@@ -439,8 +484,9 @@ def plant(world, strategy: str, size: float, place: int) -> List[int]:
     """
     Give a patch of `world` the strategy, as Chapter 51 did: on seed `place`, an agent
     at random and its nearest neighbours. The control, `resident`, gives the patch
-    frozen copies of one patch member's brain, drawn at random; the draw is made for
-    every strategy, so a strategy and its control land on the same patch.
+    frozen copies of one patch member's brain, drawn at random, and a mask is made of
+    that same brain; the draw is made for every strategy, so a strategy and its control
+    land on the same patch, and a mask differs from its control by its one decision.
     """
     rng = np.random.RandomState(1000 + place)
     patch = patch_of(world, size, rng)

@@ -1,0 +1,59 @@
+{
+ "id": "E64",
+ "title": "Does one hoarder end a world of equals? One agent that stakes everything on one node",
+ "thesis": {
+  "claim": "One agent that stakes everything on one node ends a world of equals. It grows richer in every game until it holds more than a tenth of all the world's tokens, and the world then loses more than half its agents or dies out. It does so whether the node is its own or its poorest neighbour's.",
+  "why": "Two worlds of equals died suddenly in Experiment 63, each with one agent that grew rich in its last hundred iterations. In a world of equals every agent stakes one or two tokens on each neighbour and on itself, all marked for the coalition, and holds about as many tokens as are staked on its own node (read from the stakes recorded at iteration 29,999 in the first of the three worlds played here: among 455 agents the largest stake on any node is 1 to 3 tokens, and 95 nodes in 100 are won by the coalition). A coalition takes a node only if its marked tokens outweigh the largest single stake there. An agent that puts all its tokens on one node is that largest stake, and all the others together stake about as much as it holds: by those recorded stakes it would keep its own node in 401 cases of 455 and take its poorest neighbour's in 360. The node keeps everything staked on it, so the hoarder's tokens grow by what its neighbours stake, about one token a neighbour in every game, while it pays nothing back. Nothing in the order answers that: its brains were never selected against such a player, and a few who play otherwise do as well as the rest (Experiment 62).",
+  "confirm": "A trial takes one agent of a world of equals and gives it its own brain, frozen, with only its stakes written over; it plays 1,000 iterations, or until the hoarder's line is gone or the world has died out. A hoarder takes off if its line at some iteration holds more than 4,000 tokens, a tenth of the world's 40,000. A world ends if it dies out or has fewer than half its first agents at the trial's last iteration. Of the 30 hoarder trials (three worlds, five places, two kinds) at least 20 take off and at least 20 worlds end, and each kind alone has at least 8 of its 15 worlds ending.",
+  "refute": "Fewer than 10 of the 30 hoarders take off, or fewer than 10 of the 30 worlds end. Anything else is undecided. Reported beside it, by kind and by world: how many hoarders lose their first game, the iteration at which a hoarder passes 4,000 tokens, its tokens, the world's agents and links over time, and how long the line of the control lasts, the same agent with its brain frozen and unchanged."
+ },
+ "trials": {
+  "kind": "invasion",
+  "T": 1000,
+  "workers": 3,
+  "sets": [
+   {
+    "name": "everything at home",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "home-hoarder",
+     "size": 1,
+     "place": "1..5"
+    }
+   },
+   {
+    "name": "everything on the poorest neighbour",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "moving-hoarder",
+     "size": 1,
+     "place": "1..5"
+    }
+   },
+   {
+    "name": "controls",
+    "grid": {
+     "run": [
+      "B1-40000-c8c9f2-s6301-on210139",
+      "B1-40000-c8c9f2-s6302-on210139",
+      "B1-40000-c8c9f2-s6303-on210139"
+     ],
+     "era": 27500,
+     "strategy": "resident",
+     "size": 1,
+     "place": "1..5"
+    }
+   }
+  ]
+ }
+}

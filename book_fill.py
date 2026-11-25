@@ -273,7 +273,7 @@ def trials(md: str, name: str, plan: Dict[str, Any]) -> str:
         """Patches of so many agents, then patches of a share of the world."""
         agents = [number(int(v)) for v in values if v >= 1]
         shares = [f"{v:.0%}" for v in values if v < 1]
-        return "; ".join(([", ".join(agents) + " agents"] if agents else [])
+        return "; ".join(([", ".join(agents) + (" agent" if agents == ["1"] else " agents")] if agents else [])
                          + ([", ".join(shares) + " of the world"] if shares else []))
 
     def span(values: List[Any]) -> str:
